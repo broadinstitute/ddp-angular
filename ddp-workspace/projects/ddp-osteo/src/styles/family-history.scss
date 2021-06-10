@@ -233,11 +233,11 @@
     }
 }
 
-.activity-block {
-    &__delete-dialog-buttons {
-        .ctrl-btn {
-            font-size: 1rem;
-        }
+.modal-activity-block__delete-dialog {
+    .confirm-dialog-buttons {
+      .ctrl-btn {
+        font-size: 1rem;
+      }
     }
 }
 

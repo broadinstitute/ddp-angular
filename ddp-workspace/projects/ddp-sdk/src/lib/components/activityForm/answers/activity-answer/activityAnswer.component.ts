@@ -43,7 +43,8 @@ import { BlockType } from '../../../../models/activity/blockType';
                                            [block]="block"
                                            [readonly]="readonly"
                                            [validationRequested]="validationRequested"
-                                           (valueChanged)="onChange($event)">
+                                           (valueChanged)="onChange($event)"
+                                           (componentBusy)="componentBusy.next($event)">
             </ddp-activity-composite-answer>
             <ddp-activity-agreement-answer *ngIf="isAgreementQuestion(block)"
                                            [block]="block"
@@ -56,7 +57,8 @@ import { BlockType } from '../../../../models/activity/blockType';
                                       [readonly]="readonly"
                                       [studyGuid]="studyGuid"
                                       [activityGuid]="activityGuid"
-                                      (valueChanged)="onChange($event)">
+                                      (valueChanged)="onChange($event)"
+                                      (componentBusy)="componentBusy.next($event)">
             </ddp-activity-file-answer>
             <span *ngIf="block.additionalInfoFooter"
                   [innerHTML]="block.additionalInfoFooter"
@@ -73,6 +75,7 @@ export class ActivityAnswerComponent {
     @Input() studyGuid: string;
     @Input() activityGuid: string;
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
+    @Output() componentBusy = new EventEmitter<boolean>();
 
     public onChange(value: AnswerValue): void {
         this.valueChanged.emit(value);

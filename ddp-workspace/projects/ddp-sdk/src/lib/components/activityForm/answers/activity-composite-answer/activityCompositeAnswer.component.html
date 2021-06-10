@@ -14,7 +14,8 @@
                 [block]="childBlock"
                 [readonly]="readonly"
                 [validationRequested]="validationRequested"
-                (valueChanged)="updateValue(row, column, $event)">
+                (valueChanged)="updateValue(row, column, $event)"
+                (componentBusy)="componentBusy.next($event)">
             </ddp-activity-answer>
         </ng-container>
     </div>

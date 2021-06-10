@@ -23,6 +23,7 @@ export class ActivityCompositeAnswer implements OnChanges {
     @Input() readonly: boolean;
     @Input() validationRequested: boolean;
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
+    @Output() componentBusy = new EventEmitter<boolean>();
     public childQuestionBlocks: ActivityQuestionBlock<any>[][] = [];
     private convertQuestionToLabels: boolean;
 

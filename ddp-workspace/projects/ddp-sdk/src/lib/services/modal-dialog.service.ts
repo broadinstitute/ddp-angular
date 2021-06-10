@@ -14,26 +14,26 @@ const DIALOG_HEIGHT = 160;
 const VERTICAL_GAP = 15; // margin between dialog and delete button
 
 @Injectable()
-export class ActivityBlockModalService {
+export class ModalDialogService {
 
-    public getDeleteDialogConfig(deleteButtonRef: ElementRef): MatDialogConfig {
+    public getDialogConfig(rootButtonRef: ElementRef, panelClass: string): MatDialogConfig {
         const realDialogWidth = DIALOG_WIDTH + DIALOG_ARROW_WIDTH;
-        const rootBox: DOMRect = deleteButtonRef.nativeElement.getBoundingClientRect();
+        const rootBox: DOMRect = rootButtonRef.nativeElement.getBoundingClientRect();
         const isDialogLocatedAbove = (rootBox.top - DIALOG_HEIGHT - VERTICAL_GAP) > 0;
 
         return {
             ...DEFAULT_DIALOG_SETTINGS,
             panelClass: [
-                'modal-activity-block__delete-dialog',
+                panelClass,
                 isDialogLocatedAbove ? 'on-top' : 'on-bottom'
             ],
             height: `${DIALOG_HEIGHT}px`,
             width: `${realDialogWidth}px`,
-            position: this.calculateDeleteDialogPosition(rootBox, isDialogLocatedAbove)
+            position: this.calculateDialogPosition(rootBox, isDialogLocatedAbove)
         } as MatDialogConfig;
     }
 
-    private calculateDeleteDialogPosition(box: DOMRect, isDialogLocatedAbove: boolean): DialogPosition {
+    private calculateDialogPosition(box: DOMRect, isDialogLocatedAbove: boolean): DialogPosition {
         const xCenter = box.left + box.width / 2;
         const top = isDialogLocatedAbove ? `${box.top - DIALOG_HEIGHT - VERTICAL_GAP}px`
             : `${box.bottom + VERTICAL_GAP}px`;

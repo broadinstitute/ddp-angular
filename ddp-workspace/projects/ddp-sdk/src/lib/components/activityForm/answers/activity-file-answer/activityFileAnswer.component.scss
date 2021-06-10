@@ -1,5 +1,26 @@
+$drop-block-color: whitesmoke;
+$drop-block-active-color: lightyellow;
+
+.file-requirements {
+    margin-bottom: 10px;
+}
+
 .file-upload-content {
     display: flex;
+    flex-wrap: wrap;
+}
+
+.file-upload-content.readonly {
+    opacity: 0.7;
+
+    .drop-block {
+        background-color: $drop-block-color;
+        cursor: not-allowed;
+    }
+
+    .upload-icon {
+        color: grey;
+    }
 }
 
 .file-select {
@@ -9,37 +30,61 @@
 .drop-block {
     width: 200px;
     height: 150px;
+    margin-right: 20px;
     border: 1px dashed grey;
     border-radius: 10px;
-    background-color: whitesmoke;
+    background-color: $drop-block-color;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    cursor: pointer;
+
+    &.file-over {
+        background-color: $drop-block-active-color
+    }
+
+    .upload-icon {
+        font-size: 48px;
+        width: auto;
+        height: auto;
+    }
+
+    &-text {
+        white-space: pre;
+    }
 }
 
-.drop-block.file-over {
-    background-color: lightyellow;
-}
+.uploaded-file {
+    .title {
+        float: left;
+    }
 
-.upload-icon {
-    font-size: 48px;
-    width: auto;
-    height: auto;
-}
+    .cancel-upload-btn {
+        top: -8px;
+        right: -7px;
+        float: right;
+    }
 
-.upload-btn {
-    margin: 20px 0;
-}
+    .loading-bar {
+        display: block;
+        margin: 10px 0;
+        clear: both;
+    }
 
-.file-info {
-    padding: 10px 20px;
+    .uploaded-file-chip {
+        .file-size {
+            margin-left: 5px;
+        }
+
+        .mat-icon-button {
+            height: initial;
+        }
+    }
 }
 
 .file-input {
     display: none;
 }
 
-.submit-btn {
-    margin: 20px 0;
-    float: right;
-}
+
+
