@@ -22,7 +22,7 @@ import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivitySection } from '../../models/activity/activitySection';
 import { AnalyticsEventCategories } from '../../models/analyticsEventCategories';
 import { CompositeDisposable } from '../../compositeDisposable';
-import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { delay, filter, map, take, tap } from 'rxjs/operators';
 import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
@@ -57,7 +57,6 @@ import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/par
             <ng-container *ngIf="isLoaded && model">
                 <ddp-subject-panel *ngIf="selectedUser$ | async as selectedUser" [subject]="selectedUser"></ddp-subject-panel>
                 <ddp-admin-action-panel [activityReadonly]="isReadonly()"
-                                        [selectedUserGuid]="selectedUserGuid"
                                         (requestActivityEdit)="updateIsAdminEditing($event)">
                 </ddp-admin-action-panel>
             </ng-container>
@@ -199,7 +198,6 @@ import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/par
 export class ActivityComponent extends BaseActivityComponent implements OnInit, OnDestroy, AfterViewInit {
     // We can use showSubtitle input parameter if we want to show subtitle even if page was scrolled
     @Input() showSubtitle = false;
-    @Input() selectedUserGuid: string;
     @ViewChild('title', { static: true }) title: ElementRef;
     @ViewChild('subtitle', { static: false }) subtitle: ElementRef;
     @ViewChild('submitButton', { static: false }) submitButton;
@@ -245,12 +243,6 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     }
 
     public ngOnInit(): void {
-        if (this.selectedUserGuid) {
-            this.serviceAgent.updateSelectedUser(this.selectedUserGuid);
-        } else {
-            this.serviceAgent.resetSelectedUser();
-        }
-
         this.getActivity();
         this.initStepperState();
         const submitSub = this.submitAttempted.subscribe(() => this.submitService.announceSubmit(null));
@@ -291,7 +283,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
 
         this.anchors = [resSub, invalidSub, subErrSub, submitSub].map(sub => new CompositeDisposable(sub));
 
-        this.selectedUser$ = this.selectedUserGuid ? this.participantsSearch.getParticipant(this.selectedUserGuid) : of(null);
+        this.selectedUser$ = this.participantsSearch.getParticipant();
     }
 
     public ngAfterViewInit(): void {

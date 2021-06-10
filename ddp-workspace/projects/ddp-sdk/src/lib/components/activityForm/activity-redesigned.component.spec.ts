@@ -7,6 +7,7 @@ import {
     AnalyticsEventsService,
     LoggingService,
     mockComponent,
+    ParticipantsSearchServiceAgent,
     WindowRef,
     WorkflowServiceAgent
 } from 'ddp-sdk';
@@ -36,6 +37,7 @@ describe('ActivityRedesignedComponent', () => {
             inputs: ['section', 'readonly', 'validationRequested', 'studyGuid', 'activityGuid']
         });
         const serviceAgentSpy = jasmine.createSpyObj('serviceAgentSpy', { getActivity: of(null) });
+        const participantsSearchSpy = jasmine.createSpyObj('participantsSearchSpy', { getParticipant: of(null) });
         await TestBed.configureTestingModule({
             imports: [
                 RouterTestingModule,
@@ -48,6 +50,7 @@ describe('ActivityRedesignedComponent', () => {
                 { provide: AnalyticsEventsService, useValue: {} },
                 { provide: ActivityServiceAgent, useValue: serviceAgentSpy },
                 { provide: WorkflowServiceAgent, useValue: {} },
+                { provide: ParticipantsSearchServiceAgent, useValue: participantsSearchSpy },
                 { provide: 'ddp.config', useValue: { usesVerticalStepper: [] } },
             ],
             declarations: [ActivityRedesignedComponent, subjectPanel, adminPanel, activitySection],

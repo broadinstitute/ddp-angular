@@ -23,7 +23,6 @@ import { map, mergeMap, share, takeUntil } from 'rxjs/operators';
         <ng-container *ngIf="(activityInstance$ | async)?.instanceGuid as activityInstanceGuid">
             <ddp-activity [studyGuid]="studyGuid"
                           [activityGuid]="activityInstanceGuid"
-                          [selectedUserGuid]="selectedUserGuid"
                           (submit)="raiseSubmit($event)"
                           (stickySubtitle)="showStickySubtitle($event)">
             </ddp-activity>
@@ -35,7 +34,6 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
     public studyGuid: string;
     public activityInstance$: Observable<ActivityInstanceGuid | null>;
     public stickySubtitle: string;
-    public selectedUserGuid: string;
     private readonly activityGuid: string;
     // used as notifier to trigger completions
     // https://blog.angularindepth.com/rxjs-avoiding-takeuntil-leaks-fb5182d047ef
@@ -96,15 +94,6 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit(): void {
-        this.activatedRoute.queryParamMap.pipe(map(params => params.get('user_guid'))).subscribe((result) => {
-            this.selectedUserGuid = result;
-            if (this.selectedUserGuid) {
-                this.serviceAgent.updateSelectedUser(this.selectedUserGuid);
-            } else {
-                this.serviceAgent.resetSelectedUser();
-            }
-        });
-
         this.activityInstance$.pipe(
             takeUntil(this.ngUnsubscribe))
             .subscribe(activityInstance =>
@@ -117,8 +106,7 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
     }
 
     public raiseSubmit(response: ActivityResponse): void {
-        const params = this.selectedUserGuid ? `user_guid=${this.selectedUserGuid}` : null;
-        this.workflowBuilder.getCommand(response).execute(params);
+        this.workflowBuilder.getCommand(response).execute();
     }
 
     public showStickySubtitle(stickySubtitle: string): void {

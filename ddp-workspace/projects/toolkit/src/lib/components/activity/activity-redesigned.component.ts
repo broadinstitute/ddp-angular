@@ -12,7 +12,6 @@ import { ActivityResponse } from 'ddp-sdk';
         <ddp-activity-redesigned [studyGuid]="studyGuid"
                                  [activityGuid]="instanceGuid"
                                  [agreeConsent]="config.agreeConsent"
-                                 [selectedUserGuid]="selectedUserGuid"
                                  (submit)="navigate($event)"
                                  (stickySubtitle)="showStickySubtitle($event)"
                                  (activityCode)="activityCodeChanged($event)">
@@ -41,7 +40,7 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
     }
 
     public navigate(response: ActivityResponse): void {
-      const currentActivityCode = this.headerConfig && this.headerConfig.currentActivityCode;
-      super.navigate(response, currentActivityCode);
+        const currentActivityCode = this.headerConfig && this.headerConfig.currentActivityCode;
+        super.navigate(response, currentActivityCode);
     }
 }

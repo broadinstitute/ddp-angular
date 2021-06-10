@@ -15,6 +15,11 @@
     }
 }
 
+.subject-panel-container {
+    max-width: 1450px;
+    padding: 1rem 1.5625rem;
+}
+
 .ddp-admin-action-panel {
     background-color: mat-color($app-theme, 300);
 }

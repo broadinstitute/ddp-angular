@@ -126,13 +126,11 @@
                 {{'SDK.Prism.TableColumns.DashboardLink' | translate}}
             </th>
             <td mat-cell *matCellDef="let element" class="dashboard-column">
-                <a mat-stroked-button
-                   class="dashboard-link"
-                   [routerLink]="'/' + dashboardRoute"
-                   [queryParams]="{ user_guid: element.guid }"
-                   [attr.aria-label]="'SDK.Prism.DashboardButtonLabel' | translate : { user: getUserLabel(element) }">
+                <button mat-stroked-button class="dashboard-link"
+                        [attr.aria-label]="'SDK.Prism.DashboardButtonLabel' | translate : { user: getUserLabel(element) }"
+                        (click)="clickOnUser(element)">
                     {{'SDK.Prism.DashboardButton' | translate}}
-                </a>
+                </button>
             </td>
         </ng-container>
 

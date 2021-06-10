@@ -40,7 +40,6 @@ import { SessionMementoService } from '../services/sessionMemento.service';
 })
 export class AdminActionPanelComponent {
     @Input() public activityReadonly: boolean;
-    @Input() selectedUserGuid: string;
     @Output() requestActivityEdit: EventEmitter<boolean> = new EventEmitter(false);
 
     constructor(private session: SessionMementoService) { }
@@ -48,7 +47,7 @@ export class AdminActionPanelComponent {
     // Only display for study admins and if activity is read-only.
     public shouldDisplay(): boolean {
         return this.session.isAuthenticatedAdminSession() &&
-            !!(this.session.session.invitationId || this.selectedUserGuid) &&
+            !!this.session.session.participantGuid &&
             this.activityReadonly;
     }
 

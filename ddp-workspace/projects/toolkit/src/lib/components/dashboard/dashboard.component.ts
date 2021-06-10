@@ -1,9 +1,9 @@
-import { Component, Inject, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { AnnouncementDashboardMessage } from '../../models/announcementDashboardMessage';
 import { AnnouncementsServiceAgent, ParticipantsSearchServiceAgent, SearchParticipant } from 'ddp-sdk';
-import { Observable, of, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
 @Component({
@@ -41,7 +41,6 @@ import { filter, map } from 'rxjs/operators';
                             </ng-container>
                             <section class="PageContent-section">
                                 <ddp-dashboard [studyGuid]="studyGuid"
-                                               [selectedUserGuid]="selectedUserGuid"
                                                (open)="navigate($event)"
                                                (loadedEvent)="load($event)">
                                 </ddp-dashboard>
@@ -53,8 +52,6 @@ import { filter, map } from 'rxjs/operators';
         </div>`
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-    @Input() selectedUserGuid: string;
-
     public selectedUser$: Observable<SearchParticipant|null>;
     public studyGuid: string;
     public announcementMessages: Array<AnnouncementDashboardMessage>;
@@ -71,11 +68,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     public ngOnInit(): void {
         this.studyGuid = this.toolkitConfiguration.studyGuid;
 
-        if (this.selectedUserGuid) {
-            this.announcements.updateSelectedUser(this.selectedUserGuid);
-        } else {
-            this.announcements.resetSelectedUser();
-        }
         const anno = this.announcements.getMessages(this.studyGuid)
             .pipe(
                 filter(messages => !!messages),
@@ -86,7 +78,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             ).subscribe(messages => this.announcementMessages = messages);
         this.anchor.add(anno);
 
-        this.selectedUser$ = this.selectedUserGuid ? this.participantsSearch.getParticipant(this.selectedUserGuid) : of(null);
+        this.selectedUser$ = this.participantsSearch.getParticipant();
     }
 
     public ngOnDestroy(): void {
@@ -98,9 +90,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     public navigate(id: string): void {
-        this.router.navigate([this.toolkitConfiguration.activityUrl, id], {
-            queryParams: this.selectedUserGuid ? { user_guid: this.selectedUserGuid } : null
-        });
+        this.router.navigate([this.toolkitConfiguration.activityUrl, id]);
     }
 
     public load(loaded: boolean): void {
