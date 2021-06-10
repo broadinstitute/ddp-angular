@@ -1,0 +1,66 @@
+@import '../../../styles/variables';
+
+.app-table {
+  &__col {
+    &--form {
+      width: 20%;
+      min-width: 240px;
+    }
+
+    &--summary {
+      width: 40%;
+    }
+
+    &--status {
+      width: 20%;
+      min-width: 160px;
+    }
+
+    &--actions {
+      width: 20%;
+      min-width: 160px;
+    }
+  }
+
+  &__cell {
+    &--status {
+      display: flex;
+      align-items: center;
+
+      .status-icon {
+        margin-right: 4px;
+
+        &--CREATED {
+          color: $color-blue-dark;
+        }
+
+        &--IN_PROGRESS {
+          color: $color-orange;
+        }
+
+        &--COMPLETE {
+          color: $color-green;
+        }
+      }
+    }
+  }
+}
+
+.button {
+  padding: 12px 32px !important;
+
+  box-shadow: none !important;
+
+  &--outline {
+    color: $color-orange;
+
+    background-color: transparent;
+    border: 1px solid $color-orange;
+
+    &:hover {
+      background-color: $color-orange;
+
+      color: #ffffff;
+    }
+  }
+}

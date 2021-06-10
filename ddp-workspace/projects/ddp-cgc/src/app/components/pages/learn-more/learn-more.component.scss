@@ -1,0 +1,46 @@
+@import '../../../../styles/variables';
+
+.learn-more {
+  margin-top: 20px;
+  padding-bottom: 45px;
+}
+
+.step {
+  &__circle {
+    display: inline-block;
+
+    position: relative;
+
+    width: 52px;
+    height: 52px;
+
+    background-image: url('/assets/images/step-circle.svg');
+    background-repeat: no-repeat;
+  }
+
+  &__letter {
+    margin: 13px auto;
+
+    vertical-align: 80%;
+
+    font-size: 1.25rem;
+    text-align: center;
+    color: $color-light-grey;
+  }
+
+  &__title {
+    display: inline-block;
+
+    margin: 0;
+    padding: 10px;
+
+    vertical-align: top;
+
+    font-size: 1.3rem;
+    color: $color-green;
+  }
+
+  &__description {
+    margin: 0;
+  }
+}

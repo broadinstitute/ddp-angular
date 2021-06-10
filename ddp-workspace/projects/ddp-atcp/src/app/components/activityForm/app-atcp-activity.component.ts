@@ -80,7 +80,7 @@ import * as Routes from '../../router-resources';
                             [studyGuid]="studyGuid"
                             [activityGuid]="activityGuid"
                             (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(0, $event)"
-                            (embeddedComponentBusy)="embeddedComponentBusy$[0].next($event)">
+                            (componentBusy)="embeddedComponentBusy$[0].next($event)">
                     </ddp-activity-section>
                 </ng-container>
 
@@ -134,7 +134,7 @@ import * as Routes from '../../router-resources';
                             [studyGuid]="studyGuid"
                             [activityGuid]="activityGuid"
                             (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
-                            (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)">
+                            (componentBusy)="embeddedComponentBusy$[1].next($event)">
                     </ddp-activity-section>
 
                     <!-- closing section -->
@@ -146,7 +146,7 @@ import * as Routes from '../../router-resources';
                                 [studyGuid]="studyGuid"
                                 [activityGuid]="activityGuid"
                                 (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
-                                (embeddedComponentBusy)="embeddedComponentBusy$[2].next($event)">
+                                (componentBusy)="embeddedComponentBusy$[2].next($event)">
                         </ddp-activity-section>
                     </ng-container>
 

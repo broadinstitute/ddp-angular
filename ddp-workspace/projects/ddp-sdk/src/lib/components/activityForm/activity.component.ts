@@ -79,7 +79,7 @@ import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/par
                                     [studyGuid]="studyGuid"
                                     [activityGuid]="activityGuid"
                                     (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(0, $event)"
-                                    (embeddedComponentBusy)="embeddedComponentBusy$[0].next($event)">
+                                    (componentBusy)="embeddedComponentBusy$[0].next($event)">
                                 </ddp-activity-section>
                             </ng-container>
                         </div>
@@ -116,7 +116,7 @@ import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/par
                                     [studyGuid]="studyGuid"
                                     [activityGuid]="activityGuid"
                                     (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
-                                    (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)">
+                                    (componentBusy)="embeddedComponentBusy$[1].next($event)">
                                 </ddp-activity-section>
                             </div>
                         </div>
@@ -131,7 +131,7 @@ import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/par
                                         [studyGuid]="studyGuid"
                                         [activityGuid]="activityGuid"
                                         (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
-                                        (embeddedComponentBusy)="embeddedComponentBusy$[2].next($event)">
+                                        (componentBusy)="embeddedComponentBusy$[2].next($event)">
                                     </ddp-activity-section>
                                 </ng-container>
                                 <ng-container *ngIf="shouldShowReadonlyHint">
@@ -489,7 +489,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         }
     }
 
-    private saveLastVisitedSectionIndex(sectionIndex: number): void {
+    protected saveLastVisitedSectionIndex(sectionIndex: number): void {
         if (this.shouldSaveLastStep && sectionIndex > this.model.sectionIndex) {
             this.serviceAgent.saveLastVisitedActivitySection(this.studyGuid, this.activityGuid, this.currentSectionIndex)
                 .pipe(take(1))

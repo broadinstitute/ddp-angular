@@ -1,3 +1,5 @@
+@import 'variables.scss';
+
 html,
 body {
     margin: 0;
@@ -49,4 +51,12 @@ a {
 
 .SimpleButton {
     cursor: pointer;
+}
+
+.wrapper {
+    height: 100vh;
+    margin-bottom: $footer-height;
+    padding-bottom: $footer-height;
+    padding-top: $header-height;
+    box-sizing: border-box;
 }

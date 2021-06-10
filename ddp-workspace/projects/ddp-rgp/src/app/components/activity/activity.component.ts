@@ -18,4 +18,30 @@ export class ActivityComponent extends ActivityRedesignedComponent {
   get isEnrollmentActivity(): boolean {
     return this.model.activityCode === ActivityCode.Enrollment;
   }
+
+  public incrementStep(scroll: boolean = true): void {
+    const nextIndex = this.nextAvailableSectionIndex();
+    if (nextIndex !== -1) {
+      if (scroll) {
+        this.scrollToTop();
+      }
+
+      let shouldProceed = true;
+      if (!this.model.readonly) {
+        this.validationRequested = true;
+        this.sendSectionAnalytics();
+        this.currentSection.validate();
+        shouldProceed = this.currentSection.valid;
+      }
+
+      if (shouldProceed) {
+        this.resetValidationState();
+        this.currentSectionIndex = nextIndex;
+        this.visitedSectionIndexes[nextIndex] = true;
+        if (!this.model.readonly) {
+          this.saveLastVisitedSectionIndex(nextIndex);
+        }
+      }
+    }
+  }
 }

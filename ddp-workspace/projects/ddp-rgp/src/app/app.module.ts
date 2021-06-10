@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
 import { TranslateService } from '@ngx-translate/core';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -45,7 +46,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { HowItWorksComponent } from './components/how-it-works/how-it-works.component';
 import { LGMDComponent } from './components/lgmd/lgmd.component';
-import { PageBannerComponent } from './components/page-banner/page-banner.component';
 import { PasswordComponent } from './components/password/password.component';
 import { PrivacyAndYourDataComponent } from './components/privacy-and-your-data/privacy-and-your-data.component';
 import { RedirectToAuth0Landing } from './components/redirect-to-auth0-landing/redirect-to-auth0-landing.component';
@@ -56,6 +56,8 @@ import { TellUsYourStoryComponent } from './components/tell-us-your-story/tell-u
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { WorkflowStartActivityComponent } from './components/workflow-start-activity/workflow-start-activity.component';
+import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
+import { StudyMessagesComponent } from './components/study-messages/study-messages.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -148,7 +150,6 @@ export function translateFactory(
     RedirectToAuth0Landing,
     SessionExpiredComponent,
     UserDashboardComponent,
-    PageBannerComponent,
     EmailVerifiedCallbackComponent,
     WorkflowStartActivityComponent,
     ThankYouComponent,
@@ -156,6 +157,8 @@ export function translateFactory(
     EmailVerificationRequiredComponent,
     ActivityComponent,
     SurveyComponent,
+    UserActivitiesComponent,
+    StudyMessagesComponent,
   ],
   entryComponents: [
     AboutUsDialogComponent
@@ -174,7 +177,8 @@ export function translateFactory(
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTableModule,
   ],
   providers: [
     {

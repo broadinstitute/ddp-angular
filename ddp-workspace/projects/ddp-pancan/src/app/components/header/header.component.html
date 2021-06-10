@@ -1,1 +1,53 @@
-<header class="header">header</header>
+<header class="header" [ngClass]="{'panel-opened': isPanelOpened, 'header_shadow': isPageScrolled}">
+    <div class="header-content">
+        <a class="project-logo" routerLink="/">
+            <img class="project-logo__img" src="assets/images/logo.svg" [alt]="'App.Header.Logo.ImageAlt' | translate">
+            <p class="project-logo__text" [innerHTML]="'App.Header.Logo.Title' | translate"></p>
+        </a>
+        <ng-container *ngTemplateOutlet="controls"></ng-container>
+        <button class="hamburger hamburger--slider" [ngClass]="{'is-active': isPanelOpened}"
+                [attr.aria-label]="'Common.Buttons.HeaderMenu.AriaLabel' | translate" (click)="openCloseMenu()">
+            <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+            </span>
+        </button>
+    </div>
+    <div class="panel-controls">
+        <ng-container *ngTemplateOutlet="controls"></ng-container>
+    </div>
+</header>
+
+<ng-template #controls>
+    <nav class="nav">
+        <ul class="navigation">
+            <li class="navigation__item">
+                <a class="header-link" routerLink="about-us" routerLinkActive="header-link_active" translate>
+                    App.Navigation.AboutUs
+                </a>
+            </li>
+            <li class="navigation__item">
+                <a class="header-link" routerLink="participation" routerLinkActive="header-link_active" translate>
+                    App.Navigation.Participation
+                </a>
+            </li>
+            <li class="navigation__item">
+                <a class="header-link" routerLink="scientific-research" routerLinkActive="header-link_active" translate>
+                    App.Navigation.ScientificResearch
+                </a>
+            </li>
+            <li class="navigation__item">
+                <a class="header-link" routerLink="more-details" routerLinkActive="header-link_active" translate>
+                    App.Navigation.FAQ
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="auth">
+        <div class="auth__login">
+            <ddp-sign-in-out></ddp-sign-in-out>
+        </div>
+        <a *ngIf="!isAuthenticated" routerLink="count-me-in">
+            <span translate>App.Navigation.Join</span>
+        </a>
+    </div>
+</ng-template>

@@ -1,0 +1,170 @@
+.overlay {
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  position: absolute;
+  .navbar {
+    background-color: unset!important;
+  }
+}
+
+.navbar {
+  border-radius: 0;
+  padding: 40px 80px;
+  background-color: #1b71b7!important;
+  min-height: 50px;
+  width: 100%;
+  & li a {
+    color: #fff;
+  }
+  &-default, &-toggle {
+    border-color: #ddd;
+    margin-right: 0;
+  }
+  &-default &-toggle:hover, &-default &-toggle:focus {
+    background-color: unset;
+  }
+}
+
+.navbar::before {
+  content: normal;
+}
+
+.navbar::after {
+  content: normal;
+}
+
+.header {
+  &-arrow {
+    float: right;
+    margin: 0;
+    padding: 0;
+  }
+  &-collapse ul {
+    margin: 0;
+    display: flex;
+    align-items: center;
+  }
+  &-background {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 30px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &-hamburger {
+    & .icon-bar,
+    &:hover .icon-bar,
+    &:focus .icon-bar,
+    &:active .icon-bar {
+      background-color: #efefef;
+    }
+  }
+  &-collapse {
+    &.in li.nav-item,
+    &.collapsing li.nav-item  {
+      display: block;
+      width: 100%;
+      float: right;
+      text-align: right;
+      margin-bottom: 15px;
+    }
+  }
+  &-collapse.collapsing, &-collapse.in {
+    background: #26355c;
+  }
+  &-logo img {
+    height: 38px;
+  }
+}
+
+.nav {
+  &-item {
+    padding: 0 0 0 24px;
+    &__link {
+      color: #fff!important;
+      font-size: 19px;
+      line-height: 3.2rem!important;
+      text-shadow: none;
+      padding: 0!important;
+      &_active {
+        display: none;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1030px) {
+  .nav {
+    &-item {
+      padding: 0 0 0 20px;
+      &__link {
+        font-size: 17px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .header-background {
+    padding: 19px;
+  }
+  .nav {
+    &-item {
+      padding-left: 13px;
+    }
+  }
+  .arrow {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .header-logo img {
+    height: 34px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .header {
+    &-collapse ul {
+      display: block;
+      padding-top: 25px;
+    }
+
+    &-background {
+      display: block;
+      padding: 0;
+    }
+
+    &-logo img {
+      margin-top: 7px;
+    }
+  }
+
+  .navbar-header {
+    padding: 25px;
+  }
+
+  .nav-item__button {
+    display: inline-block;
+  }
+}
+
+::ng-deep {
+  app-login ul li {
+    display: inline;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  ::ng-deep {
+    app-login ul li {
+      padding-right: 0;
+    }
+  }
+}

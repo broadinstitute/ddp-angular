@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+
+  padding-top: 3.6rem;
+}
+
+.spinner {
+  margin-bottom: 1.2rem;
+}
+
+.text {
+  font-weight: 500;
+  color: black;
+}
