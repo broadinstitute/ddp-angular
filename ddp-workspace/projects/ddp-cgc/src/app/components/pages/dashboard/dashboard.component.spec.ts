@@ -1,6 +1,17 @@
+import { of } from 'rxjs';
+import { Router } from '@angular/router';
+import { UserActivityServiceAgent } from 'ddp-sdk';
+import { Pipe, PipeTransform } from '@angular/core';
+import { DashboardComponent } from './dashboard.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DashboardComponent } from './dashboard.component';
+
+@Pipe({name: 'translate'})
+class MockTranslatePipe implements PipeTransform {
+  transform(value: number): number {
+    return value;
+  }
+}
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -8,7 +19,12 @@ describe('DashboardComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [ DashboardComponent ]
+      declarations: [ DashboardComponent, MockTranslatePipe ],
+      providers: [
+        { provide: Router, useValue: {} },
+        { provide: 'ddp.config', useValue: {} },
+        { provide: UserActivityServiceAgent, useValue: { getActivities: () => of([]) } },
+      ]
     })
     .compileComponents();
   });

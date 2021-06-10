@@ -1,6 +1,14 @@
+import { Pipe, PipeTransform } from '@angular/core';
+import { AboutUsComponent } from './about-us.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AboutUsComponent } from './about-us.component';
+
+@Pipe({name: 'translate'})
+class MockTranslatePipe implements PipeTransform {
+  transform(value: number): number {
+    return value;
+  }
+}
 
 describe('AboutUsComponent', () => {
   let component: AboutUsComponent;
@@ -8,7 +16,7 @@ describe('AboutUsComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [ AboutUsComponent ]
+      declarations: [ AboutUsComponent, MockTranslatePipe ]
     })
     .compileComponents();
   });

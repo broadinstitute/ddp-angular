@@ -1,6 +1,14 @@
+import { ErrorComponent } from './error.component';
+import { Pipe, PipeTransform } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ErrorComponent } from './error.component';
+
+@Pipe({name: 'translate'})
+class MockTranslatePipe implements PipeTransform {
+  transform(value: number): number {
+    return value;
+  }
+}
 
 describe('ErrorComponent', () => {
   let component: ErrorComponent;
@@ -8,7 +16,7 @@ describe('ErrorComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [ ErrorComponent ]
+      declarations: [ ErrorComponent, MockTranslatePipe ]
     })
     .compileComponents();
   });

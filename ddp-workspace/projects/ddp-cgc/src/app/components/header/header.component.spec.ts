@@ -1,6 +1,14 @@
+import { Pipe, PipeTransform } from '@angular/core';
+import { HeaderComponent } from './header.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HeaderComponent } from './header.component';
+
+@Pipe({name: 'translate'})
+class MockTranslatePipe implements PipeTransform {
+  transform(value: number): number {
+    return value;
+  }
+}
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -8,7 +16,7 @@ describe('HeaderComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [ HeaderComponent ]
+      declarations: [ HeaderComponent, MockTranslatePipe ]
     })
     .compileComponents();
   });

@@ -1,6 +1,14 @@
+import { Pipe, PipeTransform } from '@angular/core';
+import { FooterComponent } from './footer.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FooterComponent } from './footer.component';
+
+@Pipe({name: 'translate'})
+class MockTranslatePipe implements PipeTransform {
+  transform(value: number): number {
+    return value;
+  }
+}
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -8,7 +16,7 @@ describe('FooterComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [ FooterComponent ]
+      declarations: [ FooterComponent, MockTranslatePipe ]
     })
     .compileComponents();
   });
