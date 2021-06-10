@@ -30,3 +30,13 @@
 
   font-size: 3.2rem;
 }
+
+.text-link {
+  text-decoration: none;
+
+  color: $color-blue-2;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

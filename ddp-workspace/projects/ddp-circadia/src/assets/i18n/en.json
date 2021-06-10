@@ -151,6 +151,40 @@
     "Description": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on.",
     "Button": "Login"
   },
+  "MailingListModal": {
+    "Title": "Stay Informed",
+    "Paragraph": "Please, provide your email below and we'll keep you up-to-date on developments. You can unsubscribe at any time.",
+    "Form": {
+      "Fields": {
+        "FirstName": {
+          "Label": "First name *"
+        },
+        "LastName": {
+          "Label": "Last name *"
+        },
+        "Email": {
+          "Label": "Email address *"
+        },
+        "EmailConfirmation": {
+          "Label": "Email confirmation *"
+        }
+      },
+      "Buttons": {
+        "Cancel": "Cancel",
+        "Join": "Join"
+      },
+      "Errors": {
+        "Required": "Field is required",
+        "EmailNotValid": "Provided email is not a valid email address",
+        "FieldsDoNotMatch": "Provided emails do not match"
+      }
+    }
+  },
+  "StayInformed": {
+    "Title": "Stay Informed",
+    "Paragraph": "Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the study, please email <a class=\"text-link\" href=\"mailto:circadiastudy@mgh.harvard.edu\">circadiastudy@mgh.harvard.edu</a>.",
+    "Button": "Back to home"
+  },
   "Toolkit": {
     "Dashboard": {
       "Title": "Dashboard",

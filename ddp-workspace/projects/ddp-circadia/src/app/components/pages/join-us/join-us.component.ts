@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { mergeMap, take, tap } from 'rxjs/operators';
 
 import {
@@ -10,6 +11,8 @@ import {
 } from 'ddp-sdk';
 
 import { WorkflowBuilderService } from 'toolkit';
+
+import { MailingListModalComponent } from '../../mailing-list-modal/mailing-list-modal.component';
 
 @Component({
   selector: 'app-join-us',
@@ -23,6 +26,7 @@ export class JoinUsComponent implements OnInit {
   private readonly REGISTRATION_WORKFLOW = 'REGISTRATION';
 
   constructor(
+    private dialog: MatDialog,
     private sessionService: SessionMementoService,
     private temporaryUserService: TemporaryUserServiceAgent,
     private workflowService: WorkflowServiceAgent,
@@ -36,7 +40,14 @@ export class JoinUsComponent implements OnInit {
 
   onSubmit(response: ActivityResponse): void {
     if (response.next === this.MAILING_LIST_WORKFLOW) {
-      // handle mailing list
+      this.dialog.open(MailingListModalComponent, {
+        width: '100%',
+        maxWidth: '640px',
+        disableClose: true,
+        autoFocus: false,
+      });
+
+      return;
     }
 
     if (!response.allowUnauthenticated) {
@@ -44,8 +55,6 @@ export class JoinUsComponent implements OnInit {
         .getCommand(new ActivityResponse(this.REGISTRATION_WORKFLOW))
         .execute();
     }
-
-    console.log(response);
   }
 
   private checkSession(): void {
