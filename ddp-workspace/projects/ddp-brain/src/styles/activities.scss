@@ -23,7 +23,9 @@
     padding-top: 1rem;
     box-sizing: border-box;
 
-    .content_tight {
+    .content_tight,
+    .subject-panel-container,
+    .ddp-admin-action-panel {
         max-width: 750px;
     }
 }

@@ -7,10 +7,10 @@ import { ActivityInstance } from '../../models/activityInstance';
 import { LanguageService } from '../internationalization/languageService.service';
 import { Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
-import { WithSelectedUserServiceAgent } from './withSelectedUserServiceAgent.service';
+import { UserServiceAgent } from './userServiceAgent.service';
 
 @Injectable()
-export class UserActivityServiceAgent extends WithSelectedUserServiceAgent<Array<ActivityInstance>> {
+export class UserActivityServiceAgent extends UserServiceAgent<Array<ActivityInstance>> {
     constructor(
         session: SessionMementoService,
         @Inject('ddp.config') configuration: ConfigurationService,

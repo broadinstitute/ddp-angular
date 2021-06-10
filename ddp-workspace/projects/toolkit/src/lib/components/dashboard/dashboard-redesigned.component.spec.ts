@@ -1,4 +1,3 @@
-import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardRedesignedComponent, HeaderConfigurationService } from 'toolkit';
@@ -7,19 +6,18 @@ import {
     EnrollmentStatusType,
     AnnouncementsServiceAgent,
     mockComponent,
-    SessionMementoService, UserInvitationServiceAgent
+    SessionMementoService,
+    UserInvitationServiceAgent,
+    Session,
 } from 'ddp-sdk';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
-import { Session } from 'inspector';
 
 describe('DashboardRedesignedComponent', () => {
     let fixture: ComponentFixture<DashboardRedesignedComponent>;
     let component: DashboardRedesignedComponent;
-    let debugElement: DebugElement;
     let participantsSearchSpy: jasmine.SpyObj<ParticipantsSearchServiceAgent>;
-    let announcementsSpy: jasmine.SpyObj<AnnouncementsServiceAgent>;
     let sessionMock: SessionMementoService;
 
     beforeEach(async() => {
@@ -30,12 +28,11 @@ describe('DashboardRedesignedComponent', () => {
                 status: EnrollmentStatusType.REGISTERED,
             })
         });
-        announcementsSpy = jasmine.createSpyObj('participantsSearchSpy', {
-            updateSelectedUser: undefined,
-            resetSelectedUser: undefined,
-            getMessages: of([])
-        });
-        sessionMock = { isAuthenticatedAdminSession: () => true, session: {} as Session } as unknown as SessionMementoService;
+        const announcementsSpy = jasmine.createSpyObj('participantsSearchSpy', { getMessages: of([]) });
+        sessionMock = {
+            isAuthenticatedAdminSession: () => true,
+            session: ({ participantGuid: '1243' } as Session)
+        } as SessionMementoService;
         const headerConfigSpy = jasmine.createSpyObj('participantsSearchSpy', ['setupDefaultHeader']);
         const userInvitationSpy = jasmine.createSpyObj('userInvitationSpy', { getInvitations: of([]) });
 
@@ -62,7 +59,6 @@ describe('DashboardRedesignedComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(DashboardRedesignedComponent);
         component = fixture.debugElement.componentInstance;
-        debugElement = fixture.debugElement;
         fixture.detectChanges();
     });
 
@@ -70,17 +66,7 @@ describe('DashboardRedesignedComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should display subject panel if selected user guid input is empty', () => {
-        component.selectedUserGuid = null;
-        component.ngOnInit();
-        fixture.detectChanges();
-
-        const subjectPanel = fixture.debugElement.query(By.css('ddp-subject-panel'));
-        expect(subjectPanel).toBeTruthy();
-    });
-
     it('should not display subject panel if selected user is not found', () => {
-        component.selectedUserGuid = '123';
         participantsSearchSpy.getParticipant.and.returnValue(of(null));
         component.ngOnInit();
         fixture.detectChanges();
@@ -90,7 +76,6 @@ describe('DashboardRedesignedComponent', () => {
     });
 
     it('should display subject panel if selected user is found', () => {
-        component.selectedUserGuid = '123';
         component.ngOnInit();
         fixture.detectChanges();
 
@@ -98,8 +83,7 @@ describe('DashboardRedesignedComponent', () => {
         expect(subjectPanel).toBeTruthy();
     });
 
-    it('should display dashboard conent if session is empty but selected user is passed', () => {
-        component.selectedUserGuid = '123';
+    it('should display dashboard content if user is admin and session contains participantGuid', () => {
         component.ngOnInit();
         fixture.detectChanges();
 

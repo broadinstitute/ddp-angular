@@ -29,8 +29,8 @@ export class ActivityComponent implements OnInit {
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
 
     public ngOnInit(): void {
-        this.activatedRoute.params.subscribe(params => {
-            this.instanceGuid = params.id;
+        this.activatedRoute.paramMap.subscribe(params => {
+            this.instanceGuid = params.get('id');
         });
         this.studyGuid = this.toolkitConfiguration.studyGuid;
     }

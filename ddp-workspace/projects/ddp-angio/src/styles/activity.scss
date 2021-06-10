@@ -41,6 +41,15 @@ ddp-activity-composite-answer {
     }
 }
 
+ddp-activity {
+    .subject-panel-container,
+    .ddp-admin-action-panel {
+        max-width: 660px;
+        margin: 0 auto;
+        width: 100%;
+    }
+}
+
 @media screen and (max-width: 560px) {
     .ddp-answer-container {
         display: flex !important;

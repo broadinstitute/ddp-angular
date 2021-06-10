@@ -7,26 +7,26 @@ import {
     LoggingService,
     SessionMementoService,
     SearchParticipant,
-    EnrollmentStatusType
+    EnrollmentStatusType,
+    Session
 } from 'ddp-sdk';
-import { of } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { SearchParticipantResponse } from '../../models/searchParticipantResponse';
 
 describe('ParticipantsSearchServiceAgent Test', () => {
     let service: ParticipantsSearchServiceAgent;
     let httpTestingController: HttpTestingController;
-
+    let sessionService: SessionMementoService;
     const backendUrl = 'https://pepper-dev.datadonationplatform.org';
     const studyGuid = 'ANGIO';
+
     beforeEach(() => {
         const config = new ConfigurationService();
         config.studyGuid = studyGuid;
         config.backendUrl = backendUrl;
         const loggingServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logException']);
-        const sessionSpy = new SessionMementoService({} as TranslateService, config);
-        spyOnProperty(sessionSpy, 'sessionObservable').and.returnValue(of({}));
-
+        sessionService = new SessionMementoService({} as TranslateService, config);
+        sessionService.updateSession({} as Session);
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule]
         });
@@ -34,7 +34,7 @@ describe('ParticipantsSearchServiceAgent Test', () => {
         const httpClient = TestBed.inject(HttpClient);
         httpTestingController = TestBed.inject(HttpTestingController);
 
-        service = new ParticipantsSearchServiceAgent(sessionSpy, config, httpClient, loggingServiceSpy);
+        service = new ParticipantsSearchServiceAgent(sessionService, config, httpClient, loggingServiceSpy);
     });
 
     afterEach(() => {
@@ -75,7 +75,8 @@ describe('ParticipantsSearchServiceAgent Test', () => {
         };
 
         const guid = 'ABC123';
-        service.getParticipant(guid).subscribe((result: SearchParticipant) => {
+        sessionService.updateSession({ participantGuid: guid } as Session);
+        service.getParticipant().subscribe((result: SearchParticipant) => {
             expect(result).toEqual(response);
             done();
         });
@@ -83,5 +84,13 @@ describe('ParticipantsSearchServiceAgent Test', () => {
         const req = httpTestingController.expectOne(`${backendUrl}/pepper/v1/admin/studies/${studyGuid}/participants/${guid}`);
         expect(req.request.method).toBe('GET');
         req.flush(response);
+    });
+
+    it('should return null if no participant guid', (done) => {
+        service.getParticipant().subscribe((result: SearchParticipant|null) => {
+            expect(result).toEqual(null);
+            done();
+        });
+        sessionService.updateSession({ participantGuid: null } as Session);
     });
 });

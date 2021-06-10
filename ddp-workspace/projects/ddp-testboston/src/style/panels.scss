@@ -15,39 +15,16 @@
     }
 }
 
-.ddp-admin-action-panel {
-    &__text {
-        display: flex;
-        align-items: center;
-        margin: 0;
-        text-decoration: none !important;
-    }
+.subject-panel-container {
+    max-width: 1450px;
+    padding: 1rem 1.5625rem;
 }
 
 .ddp-admin-action-panel {
     background-color: mat-color($app-theme, 300);
-
-    &__text {
-        margin: 0 10px 0 0;
-    }
 }
 
 .admin-action-panel-container {
     max-width: 1450px;
     padding: 1rem 1.5625rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0 auto;
-}
-
-@media only screen and (max-width: 710px) {
-    .ddp-admin-action-panel__text {
-        margin: 0 0 10px 0;
-    }
-
-    .admin-action-panel-container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
 }

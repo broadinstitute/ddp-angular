@@ -34,7 +34,7 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
     public studyGuid: string;
     public activityInstance$: Observable<ActivityInstanceGuid | null>;
     public stickySubtitle: string;
-    private activityGuid: string;
+    private readonly activityGuid: string;
     // used as notifier to trigger completions
     // https://blog.angularindepth.com/rxjs-avoiding-takeuntil-leaks-fb5182d047ef
     // this could be overkill, but has nice property that actually trigger the onComplete
