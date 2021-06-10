@@ -1,0 +1,17 @@
+export enum WorkflowKey {
+  AcceptanceStatus = 'ACCEPTANCE_STATUS',
+  AcceptanceStatusDate = 'ACCEPTANCE_STATUS_DATE',
+  PortalMessage = 'PORTAL_MESSAGE',
+  PortalMessageDate = 'PORTAL_MESSAGE_DATE',
+  AcuityAppointmentDate = 'ACUITY_APPOINTMENT_DATE',
+  DateOfConsentCall = 'DATE_CONSENTED',
+  InactiveReason = 'INACTIVE_REASON',
+  EnrollmentDate = 'DATE_ENROLLED',
+  MedicalRecordsReceived = 'PHYSICIAN_RECORDS_RECEIVED',
+  MedicalRecordsLastReceived = 'MEDICAL_RECORDS_LAST_RECEIVED',
+  RedCapSurveyTaker = 'REDCAP_SURVEY_TAKER',
+  RedCapSurveyCompletedDate = 'REDCAP_SURVEY_COMPLETED_DATE',
+  KitTypeToRequest = 'KIT_TYPE_TO_REQUEST',
+  DateKitSent = 'DATE_KIT_SENT',
+  DateKitReceived = 'DATE_KIT_RECEIVED',
+}
