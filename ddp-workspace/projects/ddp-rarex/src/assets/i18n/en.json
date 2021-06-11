@@ -382,6 +382,9 @@
       "SignIn": "Log In",
       "SignOut": "Log Out"
     },
+    "Title": {
+      "Alert": "RARE-X"
+    },
     "StartButton": "Start",
     "ContinueButton": "Continue",
     "SubmitButton": "Submit",
