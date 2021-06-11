@@ -254,6 +254,9 @@
       },
       "Expand": {
         "Title": "展开"
+      },
+      "Login": {
+        "Title": "签到"
       }
     },
     "Navigation": {

@@ -249,6 +249,9 @@
       },
       "Expand": {
         "Title": "Развернуть"
+      },
+      "Login": {
+        "Title": "Войти"
       }
     },
     "Navigation": {

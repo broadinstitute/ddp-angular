@@ -249,6 +249,9 @@
       },
       "Expand": {
         "Title": "Expand"
+      },
+      "Login": {
+        "Title": "Sign In"
       }
     },
     "Navigation": {
