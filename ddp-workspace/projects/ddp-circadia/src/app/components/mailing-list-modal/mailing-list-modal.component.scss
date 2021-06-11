@@ -1,0 +1,42 @@
+.mailing-list-modal {
+  position: relative;
+}
+
+.title {
+  font-size: 2.4rem;
+  font-weight: bold;
+}
+
+.paragraph {
+  margin-bottom: 20px;
+}
+
+.close-btn {
+  position: absolute;
+  top: -6px;
+  right: 0px;
+}
+
+.name-container {
+  display: flex;
+  justify-content: space-between;
+
+  .mat-form-field {
+    width: 46%;
+  }
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 0.4rem;
+
+  .button:not(:last-of-type) {
+    margin-right: 1.2rem;
+  }
+}

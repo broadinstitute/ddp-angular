@@ -14,6 +14,7 @@ import { IrbPasswordComponent } from './components/pages/irb-password/irb-passwo
 import { JoinUsComponent } from './components/pages/join-us/join-us.component';
 import { LoginLandingComponent } from './components/pages/login-landing/login-landing.component';
 import { SessionExpiredComponent } from './components/pages/session-expired/session-expired.component';
+import { StayInformedComponent } from './components/pages/stay-informed/stay-informed.component';
 import { Route } from './constants/route';
 
 const routes: Routes = [
@@ -50,6 +51,11 @@ const routes: Routes = [
   {
     path: Route.JoinUs,
     component: JoinUsComponent,
+    canActivate: [IrbGuard],
+  },
+  {
+    path: Route.StayInformed,
+    component: StayInformedComponent,
     canActivate: [IrbGuard],
   },
   {
