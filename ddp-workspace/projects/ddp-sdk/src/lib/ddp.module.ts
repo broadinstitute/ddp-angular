@@ -322,6 +322,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         StatisticsServiceAgent,
         ModalDialogService,
         FileUploadService,
+        InvitationPipe,
         FileAnswerMapperService,
         ParticipantsSearchServiceAgent,
         {
