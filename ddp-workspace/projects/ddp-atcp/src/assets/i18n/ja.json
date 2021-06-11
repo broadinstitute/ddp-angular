@@ -249,6 +249,9 @@
       },
       "Expand": {
         "Title": "展開する"
+      },
+      "Login": {
+        "Title": "サインイン"
       }
     },
     "Navigation": {

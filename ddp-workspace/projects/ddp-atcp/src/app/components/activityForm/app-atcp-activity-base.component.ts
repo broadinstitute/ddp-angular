@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   Inject,
   Injector,
@@ -21,6 +22,7 @@ import {
   ActivityForm,
   LoggingService,
   LanguageService,
+  ParticipantsSearchServiceAgent,
 } from 'ddp-sdk';
 import { DOCUMENT } from '@angular/common';
 import { CurrentActivityService } from '../../sdk/services/currentActivity.service';
@@ -220,11 +222,13 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
     renderer: Renderer2,
     submitService: SubmitAnnouncementService,
     analytics: AnalyticsEventsService,
+    participantsSearchService: ParticipantsSearchServiceAgent,
+    changeRef: ChangeDetectorRef,
     @Inject(DOCUMENT) document: any,
     // using Injector here as we get error using constructor injection
     // in both child and parent classes
     injector: Injector) {
-    super(logger, windowRef, renderer, submitService, analytics, document, injector);
+    super(logger, windowRef, renderer, submitService, analytics, participantsSearchService, changeRef, document, injector);
     this.currentActivityService = injector.get(CurrentActivityService);
     this.multiGovernedUserService = injector.get(MultiGovernedUserService);
     this.languageService = injector.get(LanguageService);
