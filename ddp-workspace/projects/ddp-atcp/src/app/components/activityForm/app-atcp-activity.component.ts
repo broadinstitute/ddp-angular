@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   Inject,
   Injector,
@@ -18,6 +19,7 @@ import {
   SubmitAnnouncementService,
   WindowRef,
   LoggingService,
+  ParticipantsSearchServiceAgent,
 } from 'ddp-sdk';
 
 import { AtcpActivityBaseComponent } from './app-atcp-activity-base.component';
@@ -353,9 +355,11 @@ export class AtcpActivityComponent extends AtcpActivityBaseComponent implements 
       renderer: Renderer2,
       submitService: SubmitAnnouncementService,
       analytics: AnalyticsEventsService,
+      participantsSearchService: ParticipantsSearchServiceAgent,
+      changeRef: ChangeDetectorRef,
       @Inject(DOCUMENT) document: any,
       injector: Injector) {
-    super(logger, windowRef, renderer, submitService, analytics, document, injector);
+    super(logger, windowRef, renderer, submitService, analytics, participantsSearchService, changeRef, document, injector);
 
     this.matDialog = injector.get(MatDialog);
   }
