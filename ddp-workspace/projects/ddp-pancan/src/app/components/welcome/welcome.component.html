@@ -1,1 +1,79 @@
-<main class="main">welcome!</main>
+<main class="main">
+    <section class="section introduction">
+        <h2 class="title" translate>App.HomePage.IntroductionSection.Title</h2>
+        <div class="text" translate>App.HomePage.IntroductionSection.Text</div>
+        <a mat-raised-button
+           [routerLink]="'/' + AppRoutes.CountMeIn"
+           class="btn join-cmi-btn center"
+           [innerText]="'App.HomePage.JoinCountMeInButton' | translate">
+        </a>
+        <div class="logos">
+            <img src="assets/images/logo-broad.svg" [alt]="'App.HomePage.IntroductionSection.BroadAlt' | translate">
+            <img src="../../../assets/images/dana-farber-logo.png"
+                 [alt]="'App.HomePage.IntroductionSection.DanaFarberAlt' | translate">
+        </div>
+    </section>
+
+    <section class="section learn-more">
+        <h2 class="title" translate>App.HomePage.LearnMoreSection.Title</h2>
+        <div class="text" [innerHTML]="'App.HomePage.LearnMoreSection.Text' | translate"></div>
+        <a mat-raised-button
+           [routerLink]="'/' + AppRoutes.AboutUs"
+           class="btn learn-more-btn center"
+           [innerText]="'App.HomePage.LearnMoreSection.LearnMoreAboutUsButton' | translate">
+        </a>
+    </section>
+
+    <section class="section join">
+        <div class="image"></div>
+        <div class="description">
+            <h2 class="title" translate>App.HomePage.JoinSection.Title</h2>
+            <p class="text" [innerHTML]="'App.HomePage.JoinSection.Text1' | translate"></p>
+            <p class="text" [innerHTML]="'App.HomePage.JoinSection.Text2' | translate"></p>
+        </div>
+    </section>
+
+    <section class="section participate">
+        <h2 class="title" translate>App.HomePage.ParticipateSection.Title</h2>
+        <div class="steps container">
+            <figure class="step" *ngFor="let step of participationSteps; let last=last;">
+                <img class="step__image" [src]="'../../../assets/images/' + step.img"
+                     [alt]="'App.HomePage.ParticipateSection.' + step.key + '.Title' | translate">
+
+                <figcaption class="step__title"
+                            [innerText]="'App.HomePage.ParticipateSection.' + step.key + '.Title' | translate">
+                </figcaption>
+                <span class="step__time" *ngIf="!last"
+                      [innerText]="'App.HomePage.ParticipateSection.' + step.key + '.Time' | translate">
+                </span>
+                <div class="step__description"
+                     [innerText]="'App.HomePage.ParticipateSection.' + step.key + '.Description' | translate">
+                </div>
+            </figure>
+        </div>
+        <div class="container">
+            <a mat-raised-button
+               [routerLink]="'/' + AppRoutes.AboutUs"
+               class="btn learn-more-btn center"
+               [innerText]="'App.HomePage.ParticipateSection.LearnMoreAboutParticipationButton' | translate">
+            </a>
+        </div>
+    </section>
+
+    <section class="section faq">
+        <h2 class="title" translate>App.FAQ.Title</h2>
+        <div class="container">
+            <app-faq-section questions="App.FAQ.Questions" questionsCount="5"></app-faq-section>
+        </div>
+
+        <a mat-raised-button
+           [routerLink]="'/' + AppRoutes.FAQ"
+           class="btn more-faq-btn center"
+           [innerText]="'App.FAQ.Button.MoreFAQs' | translate">
+        </a>
+
+    </section>
+
+
+
+</main>
