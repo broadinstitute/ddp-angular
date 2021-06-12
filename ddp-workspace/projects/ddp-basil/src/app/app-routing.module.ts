@@ -18,7 +18,8 @@ import {
     PasswordRedesignedComponent,
     RedirectToAuth0LoginRedesignedComponent,
     RedirectToLoginLandingRedesignedComponent,
-    SessionExpiredRedesignedComponent
+    SessionExpiredRedesignedComponent,
+    WorkflowStartActivityRedesignedComponent
 } from 'toolkit';
 
 import { AppRoutes } from './app-routes';
@@ -90,6 +91,11 @@ const routes: Routes = [
     {
         path: AppRoutes.PasswordResetDone,
         component: RedirectToLoginLandingRedesignedComponent,
+        canActivate: [IrbGuard]
+    },
+    {
+        path: AppRoutes.Prequal,
+        component: WorkflowStartActivityRedesignedComponent,
         canActivate: [IrbGuard]
     },
     {

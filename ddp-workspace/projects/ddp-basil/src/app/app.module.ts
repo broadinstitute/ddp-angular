@@ -102,13 +102,13 @@ export function languageFactory(language: LanguageService): string {
         WelcomeComponent,
     ],
     imports: [
-        BrowserModule,
         AppRoutingModule,
+        BrowserModule,
         CommonModule,
         DdpModule,
-        ToolkitModule,
         RecaptchaModule,
-        RecaptchaFormsModule
+        RecaptchaFormsModule,
+        ToolkitModule
     ],
     providers: [
         {

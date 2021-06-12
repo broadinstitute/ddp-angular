@@ -10,6 +10,7 @@ export const AppRoutes = {
     LoginLanding: 'login-landing',
     LoginLandingMode: 'login-landing/:mode',
     LocalAuth: 'auth',
+    Prequal: 'prequal',
     Prism: 'prism',
     PrismActivityLink: 'prism/activity-link',
     Password: 'password',
