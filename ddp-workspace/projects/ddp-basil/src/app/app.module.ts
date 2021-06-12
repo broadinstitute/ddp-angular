@@ -21,6 +21,7 @@ import {
 import { AppRoutes } from './app-routes';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app/app.component';
+import { HeaderComponent } from './components/header/header.component';
 import { PrismActivityLinkComponent } from './components/prism-activity-link/prism-activity-link.component';
 import { PrismComponent } from './components/prism/prism.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
@@ -95,9 +96,10 @@ export function languageFactory(language: LanguageService): string {
 @NgModule({
     declarations: [
         AppComponent,
-        WelcomeComponent,
+        HeaderComponent,
         PrismActivityLinkComponent,
-        PrismComponent
+        PrismComponent,
+        WelcomeComponent,
     ],
     imports: [
         BrowserModule,
