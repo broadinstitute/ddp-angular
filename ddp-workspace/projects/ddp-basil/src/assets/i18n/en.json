@@ -1,0 +1,52 @@
+{
+    "Common": {
+        "Buttons": {
+            "Login": {
+                "Title": "Log In",
+                "AriaLabel": "Log In"
+            },
+            "Submit": {
+                "Title": "Submit",
+                "AriaLabel": "Submit"
+            },
+            "HeaderMenu": {
+                "AriaLabel": "Header menu button"
+            }
+        }
+    },
+    "App": {
+    },
+    "Toolkit": {
+        "Password": {
+            "Title": "Please enter the site password",
+            "Text": "Please enter the site password *",
+            "InputPlaceholder": "Password",
+            "PasswordWrongError": "Incorrect password. Please try again.",
+            "OtherError": "We're sorry, but an error has occurred. Please try again.",
+            "PasswordRequiredError": "Password is required"
+        },
+        "ErrorPage": {
+            "Title": "We've encountered an error",
+            "Text": "We're sorry, but an error has occurred.",
+            "DefaultText": {
+                "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
+                "TextPt2": "or call us at"
+            }
+        },
+        "ErrorCodes": {
+            "PASSWORD_RESET_LINK_EXPIRED": "Your password reset link has expired."
+        },
+        "SessionExpired": {
+            "Text": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
+        },
+        "LoginLanding": {
+            "Text": "Please wait. You will be redirected to a destination soon..."
+        }
+    },
+    "SDK": {
+        "SignInOut": {
+            "SignIn": "Log In",
+            "SignOut": "Log Out"
+        }
+    }
+}
