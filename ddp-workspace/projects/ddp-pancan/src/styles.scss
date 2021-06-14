@@ -61,3 +61,11 @@ a {
     padding-top: $header-height;
     box-sizing: border-box;
 }
+
+// TODO: borders below for debug reason. Remove when header and footer are ready
+header {
+    border-bottom: 1px solid black;
+}
+footer {
+    border-top: 1px solid black;
+}

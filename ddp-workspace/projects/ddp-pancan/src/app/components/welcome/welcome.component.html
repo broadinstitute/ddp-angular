@@ -1,5 +1,5 @@
 <main class="main">
-    <section class="section introduction">
+    <section class="introduction">
         <h2 class="title" translate>App.HomePage.IntroductionSection.Title</h2>
         <div class="text" translate>App.HomePage.IntroductionSection.Text</div>
         <a mat-raised-button
@@ -14,7 +14,7 @@
         </div>
     </section>
 
-    <section class="section learn-more">
+    <section class="learn-more">
         <h2 class="title" translate>App.HomePage.LearnMoreSection.Title</h2>
         <div class="text" [innerHTML]="'App.HomePage.LearnMoreSection.Text' | translate"></div>
         <a mat-raised-button
@@ -24,7 +24,7 @@
         </a>
     </section>
 
-    <section class="section join">
+    <section class="join">
         <div class="image"></div>
         <div class="description">
             <h2 class="title" translate>App.HomePage.JoinSection.Title</h2>
@@ -33,7 +33,7 @@
         </div>
     </section>
 
-    <section class="section participate">
+    <section class="participate">
         <h2 class="title" translate>App.HomePage.ParticipateSection.Title</h2>
         <div class="steps container">
             <figure class="step" *ngFor="let step of participationSteps; let last=last;">
@@ -60,20 +60,53 @@
         </div>
     </section>
 
-    <section class="section faq">
+    <section class="faq">
         <h2 class="title" translate>App.FAQ.Title</h2>
         <div class="container">
             <app-faq-section questions="App.FAQ.Questions" questionsCount="5"></app-faq-section>
         </div>
-
         <a mat-raised-button
            [routerLink]="'/' + AppRoutes.FAQ"
            class="btn more-faq-btn center"
            [innerText]="'App.FAQ.Button.MoreFAQs' | translate">
         </a>
-
     </section>
 
+    <section class="stay-informed">
+        <div class="container">
+            <h2 class="title" translate>App.HomePage.StayInformedSection.Title</h2>
+            <div class="social-media">
+                <div class="text" translate>App.HomePage.StayInformedSection.Text</div>
+                <div class="social-media__links">
+                    <a class="social-media__link" [href]="twitterUrl" target="_blank">
+                        <img class="social-media__logo" lazy-resource src="assets/images/twitter.svg"
+                             [alt]="'Common.Alts.Twitter' | translate">
+                    </a>
+                    <a class="social-media__link" [href]="facebookUrl" target="_blank">
+                        <img class="social-media__logo" lazy-resource src="assets/images/facebook.svg"
+                             [alt]="'Common.Alts.Facebook' | translate">
+                    </a>
+                    <a class="social-media__link" [href]="instagramUrl" target="_blank">
+                        <img class="social-media__logo" lazy-resource src="assets/images/instagram.svg"
+                             [alt]="'Common.Alts.Instagram' | translate">
+                    </a>
+                </div>
+            </div>
+            <a mat-raised-button
+               class="btn join-btn"
+               [innerText]="'App.HomePage.StayInformedSection.JoinMailingListButton' | translate">
+            </a>
+        </div>
+    </section>
 
-
+    <section class="join-cmi">
+        <img class="join-cmi-logo" lazy-resource src="assets/images/hands.png" [alt]="'Common.Alts.JoinCMI' | translate">
+        <h2 class="title" translate>App.HomePage.CountMeInSection.Title</h2>
+        <div class="text" translate>App.HomePage.CountMeInSection.Text</div>
+        <a mat-raised-button
+           [routerLink]="'/' + AppRoutes.CountMeIn"
+           class="btn join-cmi-btn"
+           [innerText]="'App.HomePage.JoinCountMeInButton' | translate">
+        </a>
+    </section>
 </main>

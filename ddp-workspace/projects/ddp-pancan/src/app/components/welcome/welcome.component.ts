@@ -14,4 +14,7 @@ export class WelcomeComponent {
         {key: 'Step3', img: 'Step4_big.png'},
         {key: 'Step4', img: 'Step5.png'}
     ];
+    twitterUrl: string;
+    facebookUrl: string;
+    instagramUrl: string;
 }
