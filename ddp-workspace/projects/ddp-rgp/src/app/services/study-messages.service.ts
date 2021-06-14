@@ -20,7 +20,15 @@ export class StudyMessagesService {
       map(response =>
         this.convertWorkflowsToStudyMessages(response.workflows)
           .filter(message => !!message)
-          .sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime()),
+          .sort((a, b) => {
+            // We sort by the Date display column, which is the `date` property.
+            // In case of ties, we fallback to the timestamp of the workflow status.
+            if (b.date.getTime() === a.date.getTime()) {
+              return b.timestamp.getTime() - a.timestamp.getTime();
+            } else {
+              return b.date.getTime() - a.date.getTime();
+            }
+          }),
       ),
     );
   }
