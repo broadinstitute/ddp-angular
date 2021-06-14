@@ -1,3 +1,5 @@
+@import '../../../styles/variables.scss';
+
 $container-width: 1200px;
 
 .main > * {
@@ -19,8 +21,8 @@ section {
         text-align: center;
         background-image: url(/assets/images/hero.png);
         background-repeat: no-repeat;
-        background-position: top;
-        background-size: cover;
+        background-position: bottom;
+        background-size: contain;
 
         .title {
             margin-top: 0;
@@ -71,7 +73,7 @@ section {
     }
 
     &.participate {
-        padding: 112px 185px;
+        padding: 112px 20px;
         text-align: left;
 
         .title {
@@ -90,9 +92,13 @@ section {
         }
 
         .step {
-            margin: 0 1rem 0 0;
+            margin: 0 1.5rem 0 0;
             font-family: Untitled-Sans-Regular;
             font-size: 16px;
+
+            &:last-child {
+                margin-right: 0;
+            }
 
             &__image {
                 width: 150px;
@@ -137,8 +143,7 @@ section {
     }
 
     &.stay-informed {
-        padding-top: 86px;
-        padding-bottom: 72px;
+        padding: 86px 20px 72px 20px;
 
         .container {
             box-sizing: border-box;
@@ -259,4 +264,18 @@ section {
 
 .italic { //TODO: check why not working
     font-style: italic !important;
+}
+
+@media screen and (max-width: $desktop-breakpoint) {
+    section {
+        &:nth-child(n) {
+            padding-left: 5rem;
+            padding-right: 5rem;
+            height: auto;
+        }
+
+        &.introduction {
+            background-size: 90%;
+        }
+    }
 }

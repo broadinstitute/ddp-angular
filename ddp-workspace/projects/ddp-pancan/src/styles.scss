@@ -18,13 +18,13 @@ body {
     overflow-y: scroll;
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: $desktop-breakpoint) {
     html {
         font-size: 14px;
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: $tablet-breakpoint) {
     html {
         font-size: 12px;
     }
