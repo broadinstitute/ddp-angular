@@ -63,10 +63,12 @@ section {
             background-position: top;
             background-size: contain;
         }
+
         .description {
             flex: 1 2 auto;
             padding-top: 70px;
         }
+
         .title {
             margin-bottom: 34px;
         }
@@ -116,10 +118,12 @@ section {
                 line-height: 24px;
                 margin-right: 8px;
             }
+
             &__time {
                 letter-spacing: -0.07px;
                 line-height: 24px;
             }
+
             &__description {
                 font-size: 24px;
                 letter-spacing: -0.1px;
@@ -276,6 +280,72 @@ section {
 
         &.introduction {
             background-size: 90%;
+        }
+    }
+}
+
+@media screen and (max-width: $tablet-breakpoint) {
+    section {
+        &:nth-child(n) {
+            padding-left: 3rem;
+            padding-right: 3rem;
+        }
+
+        &.join {
+            flex-direction: column;
+
+            .image {
+                margin-right: 0;
+            }
+        }
+
+        &.participate {
+            .steps {
+                flex-wrap: wrap;
+                gap: 3rem;
+            }
+
+            .step {
+                flex: 1 1 200px;
+                margin-right: 0;
+
+                &__image {
+                    width: 250px;
+                    height: 250px;
+                    left: unset;
+                }
+
+                &__description {
+                    max-width: unset;
+                }
+            }
+        }
+
+        &.faq {
+            .container {
+                padding: 0;
+            }
+        }
+
+        &.stay-informed {
+            .social-media {
+                flex-direction: column;
+                gap: 3rem;
+                align-items: start;
+
+                &__links {
+                    flex-basis: 50px;
+                    gap: 3rem;
+                }
+            }
+        }
+
+        .join-cmi-logo {
+            width: 95%;
+        }
+
+        .btn {
+            font-size: 1.4rem;
         }
     }
 }
