@@ -12,6 +12,13 @@
             "HeaderMenu": {
                 "AriaLabel": "Header menu button"
             }
+        },
+        "Alts": {
+            "CMI": "Count Me In logo",
+            "Twitter": "Twitter logo",
+            "Facebook": "Facebook logo",
+            "Instagram": "Instagram logo",
+            "JoinCMI": "Join Count Me In logo"
         }
     },
     "App": {
