@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class FaqSectionComponent {
     @Input() questions: string;
-    @Input() questionsCount: number;
+    @Input() questionsCount: number; /* don't pass the counter for displaying all questions */
 }
