@@ -245,6 +245,12 @@ section {
     text-align: center;
     border: 2px solid #000000;
     border-radius: 4px;
+    text-decoration: none;
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(21, 156, 228, 0.4);
+    }
 }
 
 .join-cmi-btn {

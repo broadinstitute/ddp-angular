@@ -24,6 +24,16 @@ $question-padding: 1.5rem;
     &:last-child {
         border-bottom: 2px solid $border-color;
     }
+
+    :hover, :focus {
+        background-color: rgba(0,0,0,.04);
+    }
+
+    .mat-icon,
+    .faq-block__question,
+    .faq-block__text {
+        background-color: transparent;
+    }
 }
 
 .mat-expansion-panel-header {
