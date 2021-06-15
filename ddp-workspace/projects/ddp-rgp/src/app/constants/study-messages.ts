@@ -16,6 +16,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     condition: workflow => workflow.status === AcceptanceStatus.PreReview,
     baseKey: 'Application',
     stageKey: 'PreReview',
+    group: 1,
   },
   {
     workflowKey: WorkflowKey.AcceptanceStatus,
@@ -23,6 +24,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.AcceptanceStatusDate,
     baseKey: 'Application',
     stageKey: 'InReview',
+    group: 1,
   },
   {
     workflowKey: WorkflowKey.PortalMessage,
@@ -30,6 +32,8 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.PortalMessageDate,
     baseKey: 'Application',
     stageKey: 'ThankYou',
+    exclusive: true,
+    group: 1,
   },
 
   /**
@@ -41,6 +45,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.AcceptanceStatusDate,
     baseKey: 'ApplicationDecision',
     stageKey: 'Accepted',
+    group: 2,
   },
   {
     workflowKey: WorkflowKey.AcceptanceStatus,
@@ -48,6 +53,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.AcceptanceStatusDate,
     baseKey: 'ApplicationDecision',
     stageKey: 'NotAccepted',
+    group: 2,
   },
   {
     workflowKey: WorkflowKey.AcceptanceStatus,
@@ -55,6 +61,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.AcceptanceStatusDate,
     baseKey: 'ApplicationDecision',
     stageKey: 'MoreInfoNeeded',
+    group: 2,
   },
   {
     workflowKey: WorkflowKey.AcceptanceStatus,
@@ -62,6 +69,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.AcceptanceStatusDate,
     baseKey: 'ApplicationDecision',
     stageKey: 'NMI',
+    group: 2,
   },
 
   /**
@@ -79,6 +87,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.AcceptanceStatusDate,
     baseKey: 'ConsentSession',
     stageKey: 'ScheduleNeeded',
+    group: 3,
   },
   {
     workflowKey: WorkflowKey.AcceptanceStatus,
@@ -92,6 +101,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.AcuityAppointmentDate,
     baseKey: 'ConsentSession',
     stageKey: 'Scheduled',
+    group: 3,
   },
 
   /**
@@ -109,6 +119,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.DateOfConsentCall,
     baseKey: 'ConsentForm',
     stageKey: 'SignedFormRequired',
+    group: 3,
   },
   {
     workflowKey: WorkflowKey.AcceptanceStatus,
@@ -122,6 +133,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.EnrollmentDate,
     baseKey: 'ConsentForm',
     stageKey: 'SignedFormReceived',
+    group: 3,
   },
   {
     workflowKey: WorkflowKey.AcceptanceStatus,
@@ -137,6 +149,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.AcceptanceStatusDate,
     baseKey: 'ConsentForm',
     stageKey: 'Decline',
+    group: 3,
   },
 
   /**
@@ -152,6 +165,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.EnrollmentDate,
     baseKey: 'MedicalRecords',
     stageKey: 'NoRecords',
+    group: 3,
   },
   {
     workflowKey: WorkflowKey.MedicalRecordsReceived,
@@ -163,6 +177,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.MedicalRecordsLastReceived,
     baseKey: 'MedicalRecords',
     stageKey: 'Partial',
+    group: 3,
   },
   {
     workflowKey: WorkflowKey.MedicalRecordsReceived,
@@ -174,6 +189,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.MedicalRecordsLastReceived,
     baseKey: 'MedicalRecords',
     stageKey: 'Received',
+    group: 3,
   },
   {
     workflowKey: WorkflowKey.MedicalRecordsReceived,
@@ -185,6 +201,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.EnrollmentDate,
     baseKey: 'MedicalRecords',
     stageKey: 'NA',
+    group: 3,
   },
 
   /**
@@ -200,6 +217,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.EnrollmentDate,
     baseKey: 'Survey',
     stageKey: 'Enrolled',
+    group: 3,
   },
   {
     workflowKey: WorkflowKey.RedCapSurveyCompletedDate,
@@ -211,6 +229,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.RedCapSurveyCompletedDate,
     baseKey: 'Survey',
     stageKey: 'Complete',
+    group: 3,
   },
 
   /**
@@ -228,6 +247,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.EnrollmentDate,
     baseKey: 'Sample',
     stageKey: 'Enrolled',
+    group: 3,
   },
   {
     workflowKey: WorkflowKey.DateKitSent,
@@ -235,6 +255,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.DateKitSent,
     baseKey: 'Sample',
     stageKey: 'Sent',
+    group: 3,
   },
   {
     workflowKey: WorkflowKey.DateKitReceived,
@@ -242,6 +263,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.DateKitReceived,
     baseKey: 'Sample',
     stageKey: 'Received',
+    group: 3,
   },
 
   /**
@@ -253,6 +275,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.PortalMessageDate,
     baseKey: 'Withdraw',
     stageKey: 'Withdraw',
+    group: 3,
   },
 
   /**
@@ -265,6 +288,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.PortalMessageDate,
     baseKey: 'DataAnalysis',
     stageKey: 'FamilyStepsComplete',
+    group: 3,
   },
   {
     workflowKey: WorkflowKey.PortalMessage,
@@ -273,6 +297,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.PortalMessageDate,
     baseKey: 'DataAnalysis',
     stageKey: 'ProbandStepsComplete',
+    group: 3,
   },
   {
     workflowKey: WorkflowKey.PortalMessage,
@@ -280,5 +305,6 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     dateWorkflowKey: WorkflowKey.PortalMessageDate,
     baseKey: 'DataAnalysis',
     stageKey: 'ProbandNeg',
+    group: 3,
   },
 ];

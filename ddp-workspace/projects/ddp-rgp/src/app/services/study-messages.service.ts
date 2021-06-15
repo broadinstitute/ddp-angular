@@ -17,19 +17,31 @@ export class StudyMessagesService {
 
   getMessages(): any {
     return this.userStatusService.getStatus().pipe(
-      map(response =>
-        this.convertWorkflowsToStudyMessages(response.workflows)
+      map(response => {
+        let messages = this.convertWorkflowsToStudyMessages(response.workflows)
           .filter(message => !!message)
           .sort((a, b) => {
-            // We sort by the Date display column, which is the `date` property.
-            // In case of ties, we fallback to the timestamp of the workflow status.
-            if (b.date.getTime() === a.date.getTime()) {
-              return b.timestamp.getTime() - a.timestamp.getTime();
+            // First sort by group, then sort by the Date display column, which
+            // is the `date` property. In case of ties, we fallback to the
+            // timestamp of the workflow status.
+            if (b.group === a.group) {
+              if (b.date.getTime() === a.date.getTime()) {
+                return b.timestamp.getTime() - a.timestamp.getTime();
+              } else {
+                return b.date.getTime() - a.date.getTime();
+              }
             } else {
-              return b.date.getTime() - a.date.getTime();
+              return b.group - a.group;
             }
-          }),
-      ),
+          });
+
+        const exclusiveMessage = messages.find(msg => !!msg.exclusive);
+        if (exclusiveMessage) {
+          messages = [exclusiveMessage];
+        }
+
+        return messages;
+      }),
     );
   }
 
@@ -75,6 +87,8 @@ export class StudyMessagesService {
           messageConfiguration.stageKey,
           timestamp,
           dateStr,
+          !!messageConfiguration.exclusive,
+          messageConfiguration.group,
         );
       }
     });
@@ -85,6 +99,8 @@ export class StudyMessagesService {
     stageKey: string,
     timestamp: string,
     date: string,
+    exclusive: boolean,
+    group: number,
   ): StudyMessage {
     const messageTranslateKey = `${this.BASE_TRANSLATE_KEY}.${baseKey}.${stageKey}`;
 
@@ -100,6 +116,8 @@ export class StudyMessagesService {
       message: `${messageTranslateKey}.Message`,
       subject: `${messageTranslateKey}.Subject`,
       more: `${messageTranslateKey}.More`,
+      exclusive,
+      group,
     };
   }
 
