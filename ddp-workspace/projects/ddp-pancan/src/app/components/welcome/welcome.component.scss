@@ -272,10 +272,6 @@ section {
     align-items: center;
 }
 
-.italic { //TODO: check why not working
-    font-style: italic !important;
-}
-
 @media screen and (max-width: $desktop-breakpoint) {
     section {
         &:nth-child(n) {

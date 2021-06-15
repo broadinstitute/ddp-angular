@@ -62,6 +62,10 @@ a {
     box-sizing: border-box;
 }
 
+.italic {
+    font-style: italic;
+}
+
 // TODO: borders below for debug reason. Remove when header and footer are ready
 header {
     border-bottom: 1px solid black;
