@@ -29,7 +29,7 @@ describe('ActivityRedesignedComponent', () => {
     let component: ActivityRedesignedComponent;
     let debugElement: DebugElement;
 
-    beforeEach(async() => {
+    beforeEach(async () => {
         const subjectPanel = mockComponent({ selector: 'ddp-subject-panel', inputs: ['invitationId'] });
         const adminPanel = mockComponent({ selector: 'ddp-admin-action-panel', inputs: ['activityReadonly'] });
         const activitySection = mockComponent({

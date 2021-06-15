@@ -14,7 +14,7 @@ describe('ErrorComponent', () => {
   let component: ErrorComponent;
   let fixture: ComponentFixture<ErrorComponent>;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ErrorComponent, MockTranslatePipe ]
     })
