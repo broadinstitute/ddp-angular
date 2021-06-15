@@ -544,6 +544,7 @@
     "Prefix": "登録状況: ",
     "ContactUsTooltip": "+1 954.481.6611 または support@atfamilies.org",
     "Messages": {
+      "NotRegistered": "未登録",
       "Registered": "登録済",
       "Consented": "同意済",
       "ConsentedNeedsAssent": "同意済、アセントが必要",
