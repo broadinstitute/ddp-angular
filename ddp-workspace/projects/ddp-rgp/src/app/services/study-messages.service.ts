@@ -20,7 +20,15 @@ export class StudyMessagesService {
       map(response =>
         this.convertWorkflowsToStudyMessages(response.workflows)
           .filter(message => !!message)
-          .sort((a, b) => b.date.getTime() - a.date.getTime()),
+          .sort((a, b) => {
+            // We sort by the Date display column, which is the `date` property.
+            // In case of ties, we fallback to the timestamp of the workflow status.
+            if (b.date.getTime() === a.date.getTime()) {
+              return b.timestamp.getTime() - a.timestamp.getTime();
+            } else {
+              return b.date.getTime() - a.date.getTime();
+            }
+          }),
       ),
     );
   }
@@ -53,9 +61,19 @@ export class StudyMessagesService {
           dateStr = dateWorkflow?.status ?? dateStr;
         }
 
+        // The original workflow date should be a full datetime with UTC timezone.
+        const timestamp = workflow.date;
+
+        // The `date` is used for table display and should only show month/day/year.
+        // It might be a simple date or a full timestamp, so we transform it here.
+        if (dateStr.indexOf('T') > 0) {
+          dateStr = dateStr.split('T')[0];
+        }
+
         return this.makeMessage(
           messageConfiguration.baseKey,
           messageConfiguration.stageKey,
+          timestamp,
           dateStr,
         );
       }
@@ -65,15 +83,31 @@ export class StudyMessagesService {
   private makeMessage(
     baseKey: string,
     stageKey: string,
+    timestamp: string,
     date: string,
   ): StudyMessage {
     const messageTranslateKey = `${this.BASE_TRANSLATE_KEY}.${baseKey}.${stageKey}`;
 
     return {
-      date: new Date(date),
+      // Using raw Date() constructor will implicitly convert to local timezone,
+      // since the date doesn't have a time portion, and might result in a date
+      // that is "off-by-one". To avoid this, we explicitly split the string
+      // and create a Date from the components.
+      date: this.convertDateString(date),
+      // The timestamp is assumed to be a full datetime with UTC timezone,
+      // therefore using the raw Date() constructor should be safe.
+      timestamp: new Date(timestamp),
       message: `${messageTranslateKey}.Message`,
       subject: `${messageTranslateKey}.Subject`,
       more: `${messageTranslateKey}.More`,
     };
+  }
+
+  private convertDateString(date: string): Date {
+      const fields = date.split('-');
+      const year = parseInt(fields[0], 10);
+      const month = parseInt(fields[1], 10) - 1;
+      const day = parseInt(fields[2], 10);
+      return new Date(year, month, day);
   }
 }
