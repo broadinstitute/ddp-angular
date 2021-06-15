@@ -17,7 +17,7 @@ describe('EnrollmentComponent', () => {
   let component: EnrollmentComponent;
   let debugElement: DebugElement;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,

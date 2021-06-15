@@ -20,7 +20,7 @@ describe('UserMenuComponent', () => {
     const menuTriggerSelector = '.mat-menu-trigger';
     const prismRoute = 'prism-test';
 
-    beforeEach(async() => {
+    beforeEach(async () => {
         const signInOut = mockComponent({ selector: 'ddp-sign-in-out', inputs: ['isScrolled'] });
         sessionSpy = jasmine.createSpyObj('SessionMementoService', {
             isAuthenticatedSession: true,

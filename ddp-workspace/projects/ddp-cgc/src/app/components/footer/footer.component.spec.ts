@@ -14,7 +14,7 @@ describe('FooterComponent', () => {
   let component: FooterComponent;
   let fixture: ComponentFixture<FooterComponent>;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ FooterComponent, MockTranslatePipe ]
     })
