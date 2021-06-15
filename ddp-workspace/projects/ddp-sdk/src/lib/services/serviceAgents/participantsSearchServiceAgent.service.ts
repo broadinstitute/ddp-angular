@@ -5,12 +5,14 @@ import { ConfigurationService } from '../configuration.service';
 import { LoggingService } from '../logging.service';
 import { Observable, of } from 'rxjs';
 import { SessionServiceAgent } from './sessionServiceAgent.service';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { SearchParticipantResponse } from '../../models/searchParticipantResponse';
 import { SearchParticipant } from '../../models/searchParticipant';
 
 @Injectable()
 export class ParticipantsSearchServiceAgent extends SessionServiceAgent<any> {
+    private participantMap = new Map<string, SearchParticipant | null>();
+
     constructor(
         private session: SessionMementoService,
         @Inject('ddp.config') configuration: ConfigurationService,
@@ -25,11 +27,17 @@ export class ParticipantsSearchServiceAgent extends SessionServiceAgent<any> {
     }
 
     public getParticipant(): Observable<SearchParticipant | null> {
-        return this.session.sessionObservable.pipe(
-            filter(session => session !== null),
-            switchMap(session => session.participantGuid
-                ? this.getObservable(`/admin/studies/${this.configuration.studyGuid}/participants/${session.participantGuid}`)
-                : of(null))
-        );
+        const participant = this.participantMap.get(this.session.session.participantGuid);
+        return participant ? of(participant) : this.getParticipantData();
+    }
+
+    private getParticipantData(): Observable<SearchParticipant | null> {
+        const { session } = this.session;
+        if (!session?.participantGuid) return of(null);
+
+        return this.getObservable(`/admin/studies/${this.configuration.studyGuid}/participants/${session.participantGuid}`)
+            .pipe(tap(result => {
+                this.participantMap.set(this.session.session.participantGuid, result);
+            }));
     }
 }
