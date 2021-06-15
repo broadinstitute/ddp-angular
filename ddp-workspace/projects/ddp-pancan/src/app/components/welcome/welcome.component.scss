@@ -349,3 +349,39 @@ section {
         }
     }
 }
+
+@media screen and (max-width: $mobile-breakpoint) {
+    section {
+        &:nth-child(n) {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        &:not(.join) {
+            padding-top: 5rem;
+        }
+
+        &.participate,
+        &.join-cmi {
+            padding-bottom: 5rem;
+        }
+
+        &.join {
+            .image {
+                flex-basis: 300px;
+            }
+        }
+
+        &.introduction {
+            .join-cmi-btn {
+                margin-bottom: 80px;
+            }
+        }
+
+        &.participate {
+            .learn-more-btn {
+                padding: 15px;
+            }
+        }
+    }
+}
