@@ -26,7 +26,7 @@ class TranslateLoaderMock implements TranslateLoader {
     }
 }
 
-fdescribe('ActivityComponent', () => {
+describe('ActivityComponent', () => {
     let fixture: ComponentFixture<ActivityComponent>;
     let component: ActivityComponent;
     let participantsSearchSpy: jasmine.SpyObj<ParticipantsSearchServiceAgent>;
