@@ -39,6 +39,19 @@ var DDP_ENV = {
     DDP_ENV['platformGAToken'] = "UA-108484823-1";
 {{end}}
 
+{{if eq $study_guid "basil"}}
+    {{with secret (printf "secret/pepper/%s/%s/basil/conf" $environment $version)}}
+        DDP_ENV['auth0ClientId'] = "{{.Data.auth0.appClientId}}";
+        DDP_ENV['adminClientId'] = "{{.Data.auth0.adminClientId}}";
+        DDP_ENV['auth0Domain'] = "{{.Data.auth0.loginDomain}}";
+        DDP_ENV['auth0Audience'] = "{{.Data.auth0.loginDomain}}";
+        DDP_ENV['basePepperUrl'] = "{{.Data.serverBaseUrl}}";
+        DDP_ENV['recaptchaSiteClientKey'] = "{{.Data.recaptchaSiteClientKey}}",
+    {{end}}
+    DDP_ENV['adminLoginLandingUrl'] = location.origin + '/admin-login-landing';
+    DDP_ENV['projectGAToken'] = "UA-108484823-1";
+{{end}}
+
 {{if (eq $study_guid "ANGIO" "cmi-brain" "cmi-esc" "cmi-mbc" "cmi-mpc" "CMI-OSTEO" "cmi-pancan")}}
     {{if eq $environment "dev"}}
         DDP_ENV['auth0Domain'] = "login-dev.joincountmein.org";
