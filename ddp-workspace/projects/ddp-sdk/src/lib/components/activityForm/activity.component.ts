@@ -54,8 +54,8 @@ import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/par
             </div>
             <!-- article content -->
             <ddp-loader *ngIf="!isLoaded"></ddp-loader>
-            <ng-container *ngIf="isLoaded && model">
-                <ddp-subject-panel *ngIf="selectedUser$ | async as selectedUser" [subject]="selectedUser"></ddp-subject-panel>
+            <ddp-subject-panel *ngIf="selectedUser$ | async as selectedUser" [subject]="selectedUser"></ddp-subject-panel>
+            <ng-container *ngIf="model">
                 <ddp-admin-action-panel [activityReadonly]="isReadonly()"
                                         (requestActivityEdit)="updateIsAdminEditing($event)">
                 </ddp-admin-action-panel>
@@ -85,7 +85,7 @@ import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/par
                         </div>
                     </div>
                     <!-- steps -->
-                    <div class="row NoMargin" *ngIf="isStepped && showStepper">
+                    <div class="row NoMargin" *ngIf="model && isStepped && showStepper">
                         <div class="container-fluid col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="row WizardStepsContainer">
                                 <ng-container *ngFor="let section of model.sections; let i = index">
