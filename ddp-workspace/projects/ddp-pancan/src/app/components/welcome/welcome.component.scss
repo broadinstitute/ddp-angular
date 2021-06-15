@@ -72,6 +72,13 @@ section {
         .title {
             margin-bottom: 34px;
         }
+        .text {
+            text-align: left;
+
+            &:first-of-type {
+                margin-bottom: 32px;
+            }
+        }
     }
 
     &.participate {

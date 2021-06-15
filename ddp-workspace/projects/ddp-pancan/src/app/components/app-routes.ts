@@ -8,5 +8,7 @@ export const AppRoutes = {
     PasswordResetDone: 'password-reset-done',
     CountMeIn: 'count-me-in',
     AboutUs: 'about-us',
-    FAQ: 'faq'
+    FAQ: 'faq',
+    Participation: 'participation',
+    JoinList: 'join-list'
 };

@@ -1,7 +1,7 @@
 <main class="main">
     <section class="introduction">
         <h2 class="title" translate>App.HomePage.IntroductionSection.Title</h2>
-        <div class="text" translate>App.HomePage.IntroductionSection.Text</div>
+        <p class="text" translate>App.HomePage.IntroductionSection.Text</p>
         <a mat-raised-button
            [routerLink]="'/' + AppRoutes.CountMeIn"
            class="btn join-cmi-btn center"
@@ -16,7 +16,7 @@
 
     <section class="learn-more">
         <h2 class="title" translate>App.HomePage.LearnMoreSection.Title</h2>
-        <div class="text" [innerHTML]="'App.HomePage.LearnMoreSection.Text' | translate"></div>
+        <p class="text" [innerHTML]="'App.HomePage.LearnMoreSection.Text' | translate"></p>
         <a mat-raised-button
            [routerLink]="'/' + AppRoutes.AboutUs"
            class="btn learn-more-btn center"
@@ -102,7 +102,7 @@
     <section class="join-cmi">
         <img class="join-cmi-logo" lazy-resource src="assets/images/hands.png" [alt]="'Common.Alts.JoinCMI' | translate">
         <h2 class="title" translate>App.HomePage.CountMeInSection.Title</h2>
-        <div class="text" translate>App.HomePage.CountMeInSection.Text</div>
+        <p class="text" translate>App.HomePage.CountMeInSection.Text</p>
         <a mat-raised-button
            [routerLink]="'/' + AppRoutes.CountMeIn"
            class="btn join-cmi-btn"
