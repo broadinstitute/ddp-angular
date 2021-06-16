@@ -20,8 +20,8 @@ section {
         padding-bottom: 18px;
         background-image: url(/assets/images/hero.png);
         background-repeat: no-repeat;
-        background-position: bottom;
         background-size: contain;
+        background-position: bottom -2.4rem center;
 
         .title {
             margin-bottom: 16px;
@@ -146,7 +146,6 @@ section {
         padding: 86px 20px 72px 20px;
 
         .container {
-            box-sizing: border-box;
             max-width: $container-width;
             margin: 0 auto;
             text-align: left;
