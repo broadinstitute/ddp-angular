@@ -18,14 +18,12 @@ section {
         max-width: 1440px;
         padding-top: 108px;
         padding-bottom: 18px;
-        text-align: center;
         background-image: url(/assets/images/hero.png);
         background-repeat: no-repeat;
         background-position: bottom;
         background-size: contain;
 
         .title {
-            margin-top: 0;
             margin-bottom: 16px;
         }
 
@@ -87,7 +85,6 @@ section {
         .container {
             max-width: $container-width;
             margin: 0 auto;
-            color: #000000;
 
             &.steps {
                 display: flex;
@@ -97,7 +94,6 @@ section {
 
         .step {
             margin: 0 1.5rem 0 0;
-            font-family: Untitled-Sans-Regular;
             font-size: 16px;
 
             &:last-child {
@@ -218,7 +214,6 @@ section {
 }
 
 .title {
-    color: #000000;
     font-family: Source Serif Pro;
     font-size: 40px;
     font-weight: 600;
@@ -228,8 +223,6 @@ section {
 
 .text {
     opacity: 0.8;
-    color: #000000;
-    font-family: Untitled-Sans-Regular;
     font-size: 24px;
     letter-spacing: -0.1px;
     line-height: 34px;
