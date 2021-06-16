@@ -40,7 +40,9 @@
         <h2 class="title" translate>App.HomePage.ParticipateSection.Title</h2>
         <div class="steps container">
             <figure class="step" *ngFor="let step of participationSteps; let last=last;">
-                <img class="step__image" [src]="'../../../assets/images/' + step.img"
+                <img class="step__image"
+                     [src]="'../../../assets/images/' + step.img"
+                     width="150" height="150"
                      [alt]="'App.HomePage.ParticipateSection.' + step.key + '.Title' | translate">
 
                 <figcaption class="step__title"
