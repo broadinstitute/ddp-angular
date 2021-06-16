@@ -67,6 +67,7 @@
             <div
               *ngIf="!!showMoreMap[message.more]"
               [innerHTML]="message.more | translate"
+              class="show-more-container"
             ></div>
 
             <button class="show-more-btn" (click)="toggleShowMore(message)">
