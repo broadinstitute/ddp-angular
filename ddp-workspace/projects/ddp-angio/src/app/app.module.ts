@@ -6,17 +6,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { TranslateService } from '@ngx-translate/core';
 
 import {
-  DdpModule,
-  ConfigurationService,
-  AnalyticsEventsService,
-  AnalyticsEvent,
-  LoggingService
+    DdpModule,
+    ConfigurationService,
+    AnalyticsEventsService,
+    AnalyticsEvent,
+    LoggingService
 } from 'ddp-sdk';
 
 import {
-  ToolkitModule,
-  ToolkitConfigurationService,
-  AppComponent
+    ToolkitModule,
+    ToolkitConfigurationService,
+    AppComponent
 } from 'toolkit';
 
 import { AboutUsComponent } from './components/about-us/about-us.component';
@@ -24,13 +24,12 @@ import { DataReleaseComponent } from './components/data-release/data-release.com
 import { MoreDetailsComponent } from './components/more-details/more-details.component';
 import { PrismComponent } from './components/prism/prism.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const baseElt = document.getElementsByTagName('base');
 
 let base = '';
 if (baseElt) {
-  base = baseElt[0].getAttribute('href');
+    base = baseElt[0].getAttribute('href');
 }
 
 declare const DDP_ENV: any;
@@ -96,65 +95,64 @@ config.prismRoute = 'prism';
 config.lookupPageUrl = config.prismRoute;
 
 export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService): () => Promise<any> {
-  return () => new Promise<any>((resolve: any) => {
-    const LOG_SOURCE = 'AppModule';
-    const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
-    locationInitialized.then(() => {
-      const locale = 'en';
-      translate.setDefaultLang(locale);
-      translate.use(locale).subscribe(() => {
-        logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
-      }, err => {
-        logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization`, err);
-      }, () => {
-        resolve(null);
-      });
+    return () => new Promise<any>((resolve: any) => {
+        const LOG_SOURCE = 'AppModule';
+        const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
+        locationInitialized.then(() => {
+            const locale = 'en';
+            translate.setDefaultLang(locale);
+            translate.use(locale).subscribe(() => {
+                logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
+            }, err => {
+                logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization`, err);
+            }, () => {
+                resolve(null);
+            });
+        });
     });
-  });
 }
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    DdpModule,
-    ToolkitModule
-  ],
-  declarations: [
-    AboutUsComponent,
-    DataReleaseComponent,
-    MoreDetailsComponent,
-    PrismComponent,
-    WelcomeComponent,
-    DashboardComponent
-  ],
-  providers: [
-    {
-      provide: 'ddp.config',
-      useValue: config
-    },
-    {
-      provide: 'toolkit.toolkitConfig',
-      useValue: tkCfg
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: translateFactory,
-      deps: [
-        TranslateService,
-        Injector,
-        LoggingService
-      ],
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        DdpModule,
+        ToolkitModule
+    ],
+    declarations: [
+        AboutUsComponent,
+        DataReleaseComponent,
+        MoreDetailsComponent,
+        PrismComponent,
+        WelcomeComponent,
+    ],
+    providers: [
+        {
+            provide: 'ddp.config',
+            useValue: config
+        },
+        {
+            provide: 'toolkit.toolkitConfig',
+            useValue: tkCfg
+        },
+        {
+            provide: APP_INITIALIZER,
+            useFactory: translateFactory,
+            deps: [
+                TranslateService,
+                Injector,
+                LoggingService
+            ],
+            multi: true
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private analytics: AnalyticsEventsService) {
-    this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
-      ga('send', event);
-      ga('platform.send', event);
-    });
-  }
+    constructor(private analytics: AnalyticsEventsService) {
+        this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
+            ga('send', event);
+            ga('platform.send', event);
+        });
+    }
 }

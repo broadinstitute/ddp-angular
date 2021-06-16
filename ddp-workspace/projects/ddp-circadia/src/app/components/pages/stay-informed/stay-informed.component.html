@@ -1,0 +1,13 @@
+<div class="container">
+  <h1 class="page-title">
+    {{ 'StayInformed.Title' | translate }}
+  </h1>
+
+  <p [innerHTML]="'StayInformed.Paragraph' | translate"></p>
+
+  <div class="btn-container">
+    <a class="button button--sm button--yellow" [routerLink]="Route.Home">
+      {{ 'StayInformed.Button' | translate }}
+    </a>
+  </div>
+</div>

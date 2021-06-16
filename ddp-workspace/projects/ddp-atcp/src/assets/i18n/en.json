@@ -249,6 +249,9 @@
       },
       "Expand": {
         "Title": "Expand"
+      },
+      "Login": {
+        "Title": "Sign In"
       }
     },
     "Navigation": {
@@ -668,6 +671,7 @@
     "Prefix": "Enrollment Status: ",
     "ContactUsTooltip": "+1 954.481.6611 or support@atfamilies.org",
     "Messages": {
+      "NotRegistered": "Not Registered",
       "Registered": "Registered",
       "Consented": "Consented",
       "ConsentedNeedsAssent": "Consented, Needs Assent",

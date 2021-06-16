@@ -249,6 +249,9 @@
       },
       "Expand": {
         "Title": "Espandi"
+      },
+      "Login": {
+        "Title": "Accedi"
       }
     },
     "Navigation": {
@@ -538,18 +541,19 @@
     }
   },
   "EnrollmentStatus": {
-    "Prefix": "[IT] Enrollment Status: ",
-    "ContactUsTooltip": "[IT] +1 954.481.6611 or support@atfamilies.org",
+    "Prefix": "Stato dell'arruolamento: ",
+    "ContactUsTooltip": "+1 954.481.6611 or support@atfamilies.org",
     "Messages": {
-      "Registered": "[IT] Registered",
-      "Consented": "[IT] Consented",
-      "ConsentedNeedsAssent": "[IT] Consented, Needs Assent",
-      "SubmittedPhysicianInfo": "[IT] Submitted Physician Info",
-      "SubmittedMedicalHistory": "[IT] Submitted Medical History",
-      "SubmittedGenomeStudyShippingInfo": "[IT] Submitted Genome Study Shipping Info",
-      "SubmittedEnrollment": "[IT] Submitted Enrollment / Pending Confirmation",
-      "Enrolled": "[IT] Enrolled",
-      "ContactUs": "[IT] Please Contact Us"
+      "NotRegistered": "Non registrato",
+      "Registered": "Registrato",
+      "Consented": "Consenso fornito",
+      "ConsentedNeedsAssent": "Consenso fornito, necessita dell'assenso",
+      "SubmittedPhysicianInfo": "Informazioni per contattare il medico inviate",
+      "SubmittedMedicalHistory": "Storia clinica inviata",
+      "SubmittedGenomeStudyShippingInfo": "Informazioni di spedizione per lo studio sul genoma inviate",
+      "SubmittedEnrollment": "Arruolamento inviato/In attesa di conferma",
+      "Enrolled": "Arruolato",
+      "ContactUs": "Contattaci"
     }
   }
 }

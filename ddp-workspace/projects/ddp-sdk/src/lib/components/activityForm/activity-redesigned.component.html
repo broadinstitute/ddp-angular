@@ -7,7 +7,7 @@
 >
     <ng-container *ngIf="isLoaded && model">
         <section class="section">
-            <ddp-subject-panel></ddp-subject-panel>
+            <ddp-subject-panel *ngIf="selectedUser$ | async as selectedUser" [subject]="selectedUser"></ddp-subject-panel>
             <ddp-admin-action-panel
                 [activityReadonly]="isReadonly()"
                 (requestActivityEdit)="updateIsAdminEditing($event)">
@@ -46,7 +46,7 @@
                     [studyGuid]="studyGuid"
                     [activityGuid]="activityGuid"
                     (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(0, $event)"
-                    (embeddedComponentBusy)="embeddedComponentBusy$[0].next($event)">
+                    (componentBusy)="embeddedComponentBusy$[0].next($event)">
                 </ddp-activity-section>
             </ng-container>
 
@@ -63,7 +63,7 @@
                     [studyGuid]="studyGuid"
                     [activityGuid]="activityGuid"
                     (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
-                    (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)">
+                    (componentBusy)="embeddedComponentBusy$[1].next($event)">
                 </ddp-activity-section>
 
                 <!-- closing section -->
@@ -75,7 +75,7 @@
                         [studyGuid]="studyGuid"
                         [activityGuid]="activityGuid"
                         (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
-                        (embeddedComponentBusy)="embeddedComponentBusy$[2].next($event)">
+                        (componentBusy)="embeddedComponentBusy$[2].next($event)">
                     </ddp-activity-section>
                 </ng-container>
 

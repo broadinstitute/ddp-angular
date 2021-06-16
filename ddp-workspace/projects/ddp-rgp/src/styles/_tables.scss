@@ -1,0 +1,55 @@
+.app-table {
+  width: 100%;
+
+  &__row {
+    @media (max-width: 860px) {
+      display: flex;
+      flex-flow: column nowrap;
+
+      height: auto !important;
+    }
+
+    &--header {
+      @media (max-width: 860px) {
+        display: none;
+      }
+    }
+  }
+
+  @media (max-width: 860px) {
+    &__row:last-of-type &__cell:last-of-type {
+      border-color: transparent;
+    }
+  }
+
+  &__cell {
+    padding: 12px !important;
+
+    font-size: 1rem;
+    font-weight: normal;
+
+    @media (max-width: 860px) {
+      display: flex;
+      align-items: baseline;
+
+      padding: 16px !important;
+
+      &:last-child {
+        border-color: black;
+      }
+
+      &::before {
+        content: attr(label);
+
+        flex: 0 0 100px;
+
+        font-weight: 500;
+        opacity: 0.8;
+      }
+    }
+
+    &--header {
+      font-weight: 500;
+    }
+  }
+}

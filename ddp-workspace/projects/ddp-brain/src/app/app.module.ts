@@ -8,16 +8,16 @@ import { AppRoutes } from './app-routes';
 import { ActivityGuids } from './aсtivity-guids';
 
 import {
-  DdpModule,
-  ConfigurationService,
-  AnalyticsEventsService,
-  AnalyticsEvent,
-  LoggingService
+    DdpModule,
+    ConfigurationService,
+    AnalyticsEventsService,
+    AnalyticsEvent,
+    LoggingService
 } from 'ddp-sdk';
 
 import {
-  ToolkitModule,
-  ToolkitConfigurationService
+    ToolkitModule,
+    ToolkitConfigurationService
 } from 'toolkit';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -35,13 +35,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ModalImageComponent } from './components/modal-image/modal-image.component';
 import { PrismComponent } from './components/prism/prism.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const baseElt = document.getElementsByTagName('base');
 
 let base = '';
 if (baseElt) {
-  base = baseElt[0].getAttribute('href');
+    base = baseElt[0].getAttribute('href');
 }
 
 declare const DDP_ENV: any;
@@ -96,73 +95,72 @@ sdkConfig.lookupPageUrl = AppRoutes.Prism;
 sdkConfig.prismRoute = AppRoutes.Prism;
 
 export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService): () => Promise<any> {
-  return () => new Promise<any>((resolve: any) => {
-    const LOG_SOURCE = 'AppModule';
-    const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
-    locationInitialized.then(() => {
-      const locale = 'en';
-      translate.setDefaultLang(locale);
-      translate.use(locale).subscribe(() => {
-        logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
-      }, err => {
-        logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization:`, err);
-      }, () => {
-        resolve(null);
-      });
+    return () => new Promise<any>((resolve: any) => {
+        const LOG_SOURCE = 'AppModule';
+        const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
+        locationInitialized.then(() => {
+            const locale = 'en';
+            translate.setDefaultLang(locale);
+            translate.use(locale).subscribe(() => {
+                logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
+            }, err => {
+                logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization:`, err);
+            }, () => {
+                resolve(null);
+            });
+        });
     });
-  });
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    WelcomeComponent,
-    HeaderComponent,
-    FooterComponent,
-    FaqComponent,
-    DataComponent,
-    AboutUsComponent,
-    ModalImageComponent,
-    LearnMoreSectionComponent,
-    PrismComponent,
-    DashboardComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    DdpModule,
-    ToolkitModule,
-    MatIconModule,
-    MatExpansionModule,
-    MatButtonModule
-  ],
-  providers: [
-    {
-      provide: 'ddp.config',
-      useValue: sdkConfig
-    },
-    {
-      provide: 'toolkit.toolkitConfig',
-      useValue: toolkitConfig
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: translateFactory,
-      deps: [
-        TranslateService,
-        Injector,
-        LoggingService
-      ],
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        WelcomeComponent,
+        HeaderComponent,
+        FooterComponent,
+        FaqComponent,
+        DataComponent,
+        AboutUsComponent,
+        ModalImageComponent,
+        LearnMoreSectionComponent,
+        PrismComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        DdpModule,
+        ToolkitModule,
+        MatIconModule,
+        MatExpansionModule,
+        MatButtonModule
+    ],
+    providers: [
+        {
+            provide: 'ddp.config',
+            useValue: sdkConfig
+        },
+        {
+            provide: 'toolkit.toolkitConfig',
+            useValue: toolkitConfig
+        },
+        {
+            provide: APP_INITIALIZER,
+            useFactory: translateFactory,
+            deps: [
+                TranslateService,
+                Injector,
+                LoggingService
+            ],
+            multi: true
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private analytics: AnalyticsEventsService) {
-    this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
-      ga('send', event);
-      ga('platform.send', event);
-    });
-  }
+    constructor(private analytics: AnalyticsEventsService) {
+        this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
+            ga('send', event);
+            ga('platform.send', event);
+        });
+    }
 }

@@ -20,8 +20,8 @@ import { ActivityForm } from '../../../../models/activity/activityForm';
 import { LoggingService } from '../../../../services/logging.service';
 import { ActivitySection } from '../../../../models/activity/activitySection';
 import { SubmitAnnouncementService } from '../../../../services/submitAnnouncement.service';
-import { ActivityBlockModalService } from '../../../../services/activity-block-modal.service';
-import { ActivityDeleteDialogComponent } from '../activityDeleteDialog/activityDeleteDialog.component';
+import { ModalDialogService } from '../../../../services/modal-dialog.service';
+import { ConfirmDialogComponent } from '../../../confirmDialog/confirmDialog.component';
 
 @Component({
     selector: 'ddp-embedded-activity-block',
@@ -47,7 +47,7 @@ export class EmbeddedActivityBlockComponent implements OnInit {
                 private submitAnnouncementService: SubmitAnnouncementService,
                 private logger: LoggingService,
                 private dialog: MatDialog,
-                private modalService: ActivityBlockModalService) {
+                private modalDialogService: ModalDialogService) {
     }
 
     ngOnInit(): void {
@@ -60,9 +60,16 @@ export class EmbeddedActivityBlockComponent implements OnInit {
     }
 
     public openDeleteDialog(): void {
-        const config = this.modalService.getDeleteDialogConfig(this.deleteButtonRef);
+        const panelClass = 'modal-activity-block__delete-dialog';
+        const config = this.modalDialogService.getDialogConfig(this.deleteButtonRef, panelClass);
+        config.data = {
+            title: 'SDK.ConfirmDeletion',
+            confirmBtnText: 'SDK.DeleteButton',
+            cancelBtnText: 'SDK.CancelBtn',
+            confirmBtnColor: 'warn'
+        };
 
-        const dialogRef = this.dialog.open(ActivityDeleteDialogComponent, config);
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, config);
         dialogRef.afterClosed().subscribe((confirmDelete: boolean) => {
             if (confirmDelete) {
                 this.deleteInstance();

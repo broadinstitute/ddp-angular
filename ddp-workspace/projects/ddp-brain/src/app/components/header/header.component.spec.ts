@@ -27,7 +27,7 @@ describe('HeaderComponent', () => {
 
   const dashboardPrismLinkSelector = '.header-link_dashboard-prism';
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     sessionSpy = jasmine.createSpyObj('SessionMementoService', {
       isAuthenticatedSession: true,
       isAuthenticatedAdminSession: true,

@@ -249,6 +249,9 @@
       },
       "Expand": {
         "Title": "展開する"
+      },
+      "Login": {
+        "Title": "サインイン"
       }
     },
     "Navigation": {
@@ -538,18 +541,19 @@
     }
   },
   "EnrollmentStatus": {
-    "Prefix": "[JA] Enrollment Status: ",
-    "ContactUsTooltip": "[JA] +1 954.481.6611 or support@atfamilies.org",
+    "Prefix": "登録状況: ",
+    "ContactUsTooltip": "+1 954.481.6611 または support@atfamilies.org",
     "Messages": {
-      "Registered": "[JA] Registered",
-      "Consented": "[JA] Consented",
-      "ConsentedNeedsAssent": "[JA] Consented, Needs Assent",
-      "SubmittedPhysicianInfo": "[JA] Submitted Physician Info",
-      "SubmittedMedicalHistory": "[JA] Submitted Medical History",
-      "SubmittedGenomeStudyShippingInfo": "[JA] Submitted Genome Study Shipping Info",
-      "SubmittedEnrollment": "[JA] Submitted Enrollment / Pending Confirmation",
-      "Enrolled": "[JA] Enrolled",
-      "ContactUs": "[JA] Please Contact Us"
+      "NotRegistered": "未登録",
+      "Registered": "登録済",
+      "Consented": "同意済",
+      "ConsentedNeedsAssent": "同意済、アセントが必要",
+      "SubmittedPhysicianInfo": "担当医情報を提出",
+      "SubmittedMedicalHistory": "病歴を提出",
+      "SubmittedGenomeStudyShippingInfo": "ゲノム研究用発送情報を提出",
+      "SubmittedEnrollment": "登録/未決定の確認を提出",
+      "Enrolled": "登録済",
+      "ContactUs": "連絡先"
     }
   }
 }

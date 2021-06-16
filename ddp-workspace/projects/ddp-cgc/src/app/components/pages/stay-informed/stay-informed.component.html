@@ -1,0 +1,39 @@
+<div class="row" style="padding-top: 20px">
+  <div
+    class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12"
+  >
+    <h2 class="Title">
+      {{ 'StayInformed.Title' | translate }}
+    </h2>
+
+    <p>
+      {{ 'StayInformed.Paragraph1' | translate }}
+    </p>
+
+    <p>
+      {{ 'StayInformed.Paragraph2' | translate }}
+    </p>
+
+    <form style="margin-top: 30px" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field style="width: 100%">
+        <mat-label>
+          {{ 'StayInformed.Form.Email.Label' | translate }}
+        </mat-label>
+
+        <input type="email" matInput formControlName="email" />
+
+        <mat-error>{{ 'StayInformed.Form.Email.Error' | translate }}</mat-error>
+      </mat-form-field>
+
+      <div class="btn-container">
+        <button
+          type="submit"
+          class="button button--primary"
+          [disabled]="uiBlocked"
+        >
+          {{ 'StayInformed.Form.Submit' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

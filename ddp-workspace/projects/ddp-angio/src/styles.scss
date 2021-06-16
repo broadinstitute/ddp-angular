@@ -2231,3 +2231,8 @@ input.mat-input-element {
 .prism__warning-container {
     color: mat-color($app-theme, 500);
 }
+
+.subject-panel-container,
+.ddp-admin-action-panel {
+    padding: 15px;
+}

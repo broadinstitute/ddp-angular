@@ -1,5 +1,6 @@
 import {
     AfterViewInit,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     HostListener,
@@ -27,6 +28,8 @@ import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
 import { LoggingService } from '../../services/logging.service';
 import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
+import { SearchParticipant } from '../../models/searchParticipant';
+import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/participantsSearchServiceAgent.service';
 
 @Component({
     selector: 'ddp-activity',
@@ -51,6 +54,12 @@ import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
             </div>
             <!-- article content -->
             <ddp-loader *ngIf="!isLoaded"></ddp-loader>
+            <ng-container *ngIf="isLoaded && model">
+                <ddp-subject-panel *ngIf="selectedUser$ | async as selectedUser" [subject]="selectedUser"></ddp-subject-panel>
+                <ddp-admin-action-panel [activityReadonly]="isReadonly()"
+                                        (requestActivityEdit)="updateIsAdminEditing($event)">
+                </ddp-admin-action-panel>
+            </ng-container>
             <article *ngIf="isLoaded" [ngClass]="{'PageContent': isLoaded}">
                 <div class="PageLayout">
                     <div class="row NoMargin">
@@ -64,13 +73,13 @@ import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
                             <!-- Check model not null and not undefined. Open to race condition -->
                             <ng-container *ngIf="model && model.introduction">
                                 <ddp-activity-section
-                                        [section]="model.introduction"
-                                        [readonly]="model.readonly || dataEntryDisabled"
-                                        [validationRequested]="validationRequested"
-                                        [studyGuid]="studyGuid"
-                                        [activityGuid]="activityGuid"
-                                        (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(0, $event)"
-                                        (embeddedComponentBusy)="embeddedComponentBusy$[0].next($event)">
+                                    [section]="model.introduction"
+                                    [readonly]="isReadonly() || dataEntryDisabled"
+                                    [validationRequested]="validationRequested"
+                                    [studyGuid]="studyGuid"
+                                    [activityGuid]="activityGuid"
+                                    (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(0, $event)"
+                                    (componentBusy)="embeddedComponentBusy$[0].next($event)">
                                 </ddp-activity-section>
                             </ng-container>
                         </div>
@@ -82,9 +91,9 @@ import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
                                 <ng-container *ngFor="let section of model.sections; let i = index">
                                     <ng-container *ngIf="section.visible">
                                         <div class="WizardSteps col-lg-4 col-md-4 col-sm-4 col-xs-12"
-                                            (click)="jumpStep(i)"
-                                            [class.active]="isActive(i)"
-                                            [class.completed]="isCompleted(i)">
+                                             (click)="jumpStep(i)"
+                                             [class.active]="isActive(i)"
+                                             [class.completed]="isCompleted(i)">
                                             <div class="WizardSteps-img">
                                                 <img [src]="setIcon(i, section.incompleteIcon, section.completeIcon)">
                                             </div>
@@ -101,13 +110,13 @@ import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
                         <div class="row NoMargin">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <ddp-activity-section
-                                        [section]="currentSection"
-                                        [readonly]="model.readonly || dataEntryDisabled"
-                                        [validationRequested]="validationRequested"
-                                        [studyGuid]="studyGuid"
-                                        [activityGuid]="activityGuid"
-                                        (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
-                                        (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)">
+                                    [section]="currentSection"
+                                    [readonly]="isReadonly() || dataEntryDisabled"
+                                    [validationRequested]="validationRequested"
+                                    [studyGuid]="studyGuid"
+                                    [activityGuid]="activityGuid"
+                                    (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
+                                    (componentBusy)="embeddedComponentBusy$[1].next($event)">
                                 </ddp-activity-section>
                             </div>
                         </div>
@@ -116,13 +125,13 @@ import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
                                 <!-- closing section -->
                                 <ng-container *ngIf="model.closing">
                                     <ddp-activity-section
-                                            [section]="model.closing"
-                                            [readonly]="model.readonly || dataEntryDisabled"
-                                            [validationRequested]="validationRequested"
-                                            [studyGuid]="studyGuid"
-                                            [activityGuid]="activityGuid"
-                                            (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
-                                            (embeddedComponentBusy)="embeddedComponentBusy$[2].next($event)">
+                                        [section]="model.closing"
+                                        [readonly]="isReadonly() || dataEntryDisabled"
+                                        [validationRequested]="validationRequested"
+                                        [studyGuid]="studyGuid"
+                                        [activityGuid]="activityGuid"
+                                        (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
+                                        (componentBusy)="embeddedComponentBusy$[2].next($event)">
                                     </ddp-activity-section>
                                 </ng-container>
                                 <ng-container *ngIf="shouldShowReadonlyHint">
@@ -134,7 +143,7 @@ import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
                                     <span>{{model.lastUpdatedText}} </span>
                                 </div>
                                 <div *ngIf="!isStepped || isLastStep">
-                                    <button *ngIf="!model.readonly && isLoaded" mat-raised-button color="primary" #submitButton id="submitButton"
+                                    <button *ngIf="!isReadonly() && isLoaded" mat-raised-button color="primary" #submitButton id="submitButton"
                                             [disabled]="(isPageBusy | async) || dataEntryDisabled"
                                             class="margin-5 ButtonFilled Button--rect"
                                             (click)="flush()"
@@ -142,7 +151,7 @@ import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
                                             [innerHTML]="(isPageBusy | async)
                                                                 ? ('SDK.SavingButton' | translate) : ('SDK.SubmitButton' | translate)">
                                     </button>
-                                    <button *ngIf="model.readonly && isLoaded" mat-raised-button color="primary" id="closeButton"
+                                    <button *ngIf="isReadonly() && isLoaded" mat-raised-button color="primary" id="closeButton"
                                             class="margin-5 ButtonFilled Button--rect"
                                             (click)="close()"
                                             [innerHTML]="'SDK.CloseButton' | translate">
@@ -192,6 +201,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     @ViewChild('title', { static: true }) title: ElementRef;
     @ViewChild('subtitle', { static: false }) subtitle: ElementRef;
     @ViewChild('submitButton', { static: false }) submitButton;
+
+    public selectedUser$: Observable<SearchParticipant|null>;
     public currentSectionIndex = 0;
     public isScrolled = false;
     public communicationErrorOccurred = false;
@@ -203,6 +214,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     private embeddedComponentsValidationStatus: boolean[] = new Array(3).fill(true);
     private readonly LOG_SOURCE = 'ActivityComponent';
     private shouldSaveLastStep = false;
+    private isAdminEditing = false;
 
     constructor(
         private logger: LoggingService,
@@ -210,6 +222,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         private renderer: Renderer2,
         private submitService: SubmitAnnouncementService,
         private analytics: AnalyticsEventsService,
+        private participantsSearch: ParticipantsSearchServiceAgent,
+        private changeRef: ChangeDetectorRef,
         @Inject(DOCUMENT) private document: any,
         // using Injector here as we get error using constructor injection
         // in both child and parent classes
@@ -268,6 +282,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
             .subscribe(this.isPageBusy);
 
         this.anchors = [resSub, invalidSub, subErrSub, submitSub].map(sub => new CompositeDisposable(sub));
+
+        this.selectedUser$ = this.participantsSearch.getParticipant();
     }
 
     public ngAfterViewInit(): void {
@@ -473,11 +489,11 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         }
     }
 
-    private saveLastVisitedSectionIndex(sectionIndex: number): void {
+    protected saveLastVisitedSectionIndex(sectionIndex: number): void {
         if (this.shouldSaveLastStep && sectionIndex > this.model.sectionIndex) {
             this.serviceAgent.saveLastVisitedActivitySection(this.studyGuid, this.activityGuid, this.currentSectionIndex)
-              .pipe(take(1))
-              .subscribe();
+                .pipe(take(1))
+                .subscribe();
         }
     }
 
@@ -496,5 +512,14 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 })
             )
             .subscribe();
+    }
+
+    public isReadonly(): boolean {
+        return !this.isAdminEditing && this.model.readonly;
+    }
+
+    public updateIsAdminEditing(adminEditing: boolean): void {
+        this.isAdminEditing = adminEditing;
+        this.changeRef.detectChanges();
     }
 }

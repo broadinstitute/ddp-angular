@@ -1,27 +1,60 @@
 <ddp-question-prompt [block]="block"></ddp-question-prompt>
-<div class="file-upload-content">
-    <input type="file" class="file-input"
-           (change)="onFilesSelected($event.target.files)" #fileUpload>
 
-    <div class="file-select">
-        <div class="drop-block" dropFileToUpload (filesDropped)="onFilesSelected($event)">
-            <mat-icon class="upload-icon" color="primary">file_upload</mat-icon>
-            <span class="drop-block-text">Drag files to upload</span>
-        </div>
-        <button mat-raised-button color="primary" class="upload-btn"
-                (click)="fileUpload.click()">Choose file
-            <mat-icon>attach_file</mat-icon>
-        </button>
-
+<div class="file-requirements" *ngIf="block.maxFileSize || block.mimeTypes?.length">
+    <div class="file-max-size" *ngIf="block.maxFileSize">
+        {{'SDK.FileUpload.MaxSize' | translate : { maxSize: block.maxFileSize | fileSize} }}
     </div>
-    <div class="file-info">
-        <span class="file-name">{{file?.name || 'No file uploaded'}}</span>
+    <div class="file-types" *ngIf="block.mimeTypes?.length">
+        {{'SDK.FileUpload.AllowedFileTypes' | translate : { allowedFileTypes: getAllowedTypes(block.mimeTypes)} }}
     </div>
 </div>
 
-<button mat-raised-button color="primary"
-        class="submit-btn"
-        [disabled]="!isFileSelected"
-        (click)="uploadFile()"
->Submit
-</button>
+<div class="file-upload-content" [class.readonly]="readonly">
+    <input type="file" class="file-input"
+           [accept]="(block.mimeTypes || []).join(',')"
+           (click)="fileUpload.value = null;"
+           (change)="onFilesSelected($event.target.files)" #fileUpload>
+
+    <div class="file-select">
+        <div class="drop-block"
+             dropFileToUpload
+             (filesDropped)="!readonly && onFilesSelected($event)"
+             (click)="!readonly && fileUpload.click()">
+            <mat-icon class="upload-icon" color="primary">file_upload</mat-icon>
+            <div class="drop-block-text" translate>SDK.FileUpload.ChooseFile</div>
+        </div>
+    </div>
+
+    <div class="uploaded-file">
+        <ng-container *ngIf="fileNameToUpload">
+            <button mat-icon-button color="primary"
+                    class="cancel-upload-btn"
+                    [attr.aria-label]="'SDK.FileUpload.CancelUpload' | translate"
+                    (click)="cancelUpload()"
+                    #cancelUploadBtn>
+                <mat-icon>cancel</mat-icon>
+            </button>
+            <div class="title">{{'SDK.FileUpload.Uploading' | translate: {filename: fileNameToUpload} }}</div>
+            <ddp-loading [loaded]="!isLoading" class="loading-bar"></ddp-loading>
+        </ng-container>
+
+        <mat-chip-list>
+            <mat-chip *ngIf="uploadedFile"
+                      class="uploaded-file-chip"
+                      color="primary" selected
+                      (removed)="undoUploadedFile()"
+                      #uploaded>
+                {{uploadedFile.fileName}}
+                <span class="file-size">{{'SDK.FileUpload.Size' | translate : { size: uploadedFile.fileSize | fileSize} }}</span>
+                <button matChipRemove *ngIf="!readonly"
+                        mat-icon-button
+                        [attr.aria-label]="'SDK.FileUpload.RemoveUploadedFile' | translate"
+                        #undoUploadBtn>
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip>
+        </mat-chip-list>
+    </div>
+</div>
+
+<ddp-validation-message [message]="errorMessage"></ddp-validation-message>

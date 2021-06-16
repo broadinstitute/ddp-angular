@@ -192,11 +192,13 @@ import { StatisticsServiceAgent } from './services/serviceAgents/statisticsServi
 import { ProgressIndicatorComponent } from './components/progress-indicator/progress-indicator.component';
 import { ActivityBlockComponent } from './components/activityForm/activity-blocks/activityBlock/activityBlock.component';
 import { ModalActivityBlockComponent } from './components/activityForm/activity-blocks/modalActivityBlock/modalActivityBlock.component';
-import { ActivityDeleteDialogComponent } from './components/activityForm/activity-blocks/activityDeleteDialog/activityDeleteDialog.component';
-import { ActivityBlockModalService } from './services/activity-block-modal.service';
+import { ConfirmDialogComponent } from './components/confirmDialog/confirmDialog.component';
+import { ModalDialogService } from './services/modal-dialog.service';
 import { FileUploadService } from './services/fileUpload.service';
 import { DropFileToUploadDirective } from './directives/drop-file-to-upload.directive';
 import { PrismComponent } from './components/prism/prism.component';
+import { FileSizeFormatterPipe } from './pipes/fileSizeFormatter.pipe';
+import { FileAnswerMapperService } from './services/fileAnswerMapper.service';
 import { StickyScrollDirective } from './directives/sticky-scroll.directive';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
@@ -318,9 +320,10 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         DisplayLanguagePopupServiceAgent,
         StudyDetailServiceAgent,
         StatisticsServiceAgent,
-        ActivityBlockModalService,
+        ModalDialogService,
         FileUploadService,
         InvitationPipe,
+        FileAnswerMapperService,
         ParticipantsSearchServiceAgent,
         {
             provide: HTTP_INTERCEPTORS,
@@ -399,12 +402,13 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         InvitationCodeFormatterDirective,
         StickyScrollDirective,
         InvitationPipe,
+        FileSizeFormatterPipe,
         TooltipComponent,
         SubjectPanelComponent,
         AdminActionPanelComponent,
         ProgressIndicatorComponent,
         ActivityBlockComponent,
-        ActivityDeleteDialogComponent,
+        ConfirmDialogComponent,
         DropFileToUploadDirective
     ],
     exports: [
@@ -472,13 +476,14 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         InvitationCodeFormatterDirective,
         StickyScrollDirective,
         InvitationPipe,
+        FileSizeFormatterPipe,
         TooltipComponent,
         SubjectPanelComponent,
         AdminActionPanelComponent,
         ProgressIndicatorComponent,
         ActivityBlockComponent
     ],
-    entryComponents: [ActivityDeleteDialogComponent]
+    entryComponents: [ConfirmDialogComponent]
 })
 export class DdpModule {
 }

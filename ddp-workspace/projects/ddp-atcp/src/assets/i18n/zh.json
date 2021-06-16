@@ -254,6 +254,9 @@
       },
       "Expand": {
         "Title": "展开"
+      },
+      "Login": {
+        "Title": "签到"
       }
     },
     "Navigation": {
@@ -543,18 +546,19 @@
     }
   },
   "EnrollmentStatus": {
-    "Prefix": "[ZH] Enrollment Status: ",
-    "ContactUsTooltip": "[ZH] +1 954.481.6611 or support@atfamilies.org",
+    "Prefix": "注册状态: ",
+    "ContactUsTooltip": "+1 954.481.6611 or support@atfamilies.org",
     "Messages": {
-      "Registered": "[ZH] Registered",
-      "Consented": "[ZH] Consented",
-      "ConsentedNeedsAssent": "[ZH] Consented, Needs Assent",
-      "SubmittedPhysicianInfo": "[ZH] Submitted Physician Info",
-      "SubmittedMedicalHistory": "[ZH] Submitted Medical History",
-      "SubmittedGenomeStudyShippingInfo": "[ZH] Submitted Genome Study Shipping Info",
-      "SubmittedEnrollment": "[ZH] Submitted Enrollment / Pending Confirmation",
-      "Enrolled": "[ZH] Enrolled",
-      "ContactUs": "[ZH] Please Contact Us"
+      "NotRegistered": "未注册",
+      "Registered": "已注册",
+      "Consented": "同意",
+      "ConsentedNeedsAssent": "已知情同意，需要知情同意",
+      "SubmittedPhysicianInfo": "提交联系医生信息",
+      "SubmittedMedicalHistory": "提交病史",
+      "SubmittedGenomeStudyShippingInfo": "提交基因组研究邮寄信息",
+      "SubmittedEnrollment": "提交注册/待定确认",
+      "Enrolled": "注册",
+      "ContactUs": "请联系我们"
     }
   }
 }

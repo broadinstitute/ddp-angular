@@ -259,6 +259,9 @@
       },
       "Expand": {
         "Title": "विस्तृत करें"
+      },
+      "Login": {
+        "Title": "साइन इन करें"
       }
     },
     "Navigation": {
@@ -548,18 +551,19 @@
     }
   },
   "EnrollmentStatus": {
-    "Prefix": "[HI] Enrollment Status: ",
-    "ContactUsTooltip": "[HI] +1 954.481.6611 or support@atfamilies.org",
+    "Prefix": "नामांकन प्रास्थिति: ",
+    "ContactUsTooltip": "+1 954.481.6611 या support@atfamilies.org",
     "Messages": {
-      "Registered": "[HI] Registered",
-      "Consented": "[HI] Consented",
-      "ConsentedNeedsAssent": "[HI] Consented, Needs Assent",
-      "SubmittedPhysicianInfo": "[HI] Submitted Physician Info",
-      "SubmittedMedicalHistory": "[HI] Submitted Medical History",
-      "SubmittedGenomeStudyShippingInfo": "[HI] Submitted Genome Study Shipping Info",
-      "SubmittedEnrollment": "[HI] Submitted Enrollment / Pending Confirmation",
-      "Enrolled": "[HI] Enrolled",
-      "ContactUs": "[HI] Please Contact Us"
+      "NotRegistered": "पंजीकृत नहीं",
+      "Registered": "पंजीकृत",
+      "Consented": "सहमति दी गई",
+      "ConsentedNeedsAssent": "सहमति दी गई, स्वीकृति आवश्यक",
+      "SubmittedPhysicianInfo": "चिकित्सक से संपर्क करने संबंधित जानकारी प्रस्तुत",
+      "SubmittedMedicalHistory": "चिकित्सीय इतिहास प्रस्तुत",
+      "SubmittedGenomeStudyShippingInfo": "जीनोम अध्ययन शिपिंग विवरण प्रस्तुत",
+      "SubmittedEnrollment": "नामांकन/लंबित पुष्टि प्रस्तुत",
+      "Enrolled": "नामांकित",
+      "ContactUs": "कृपया हमसे संपर्क करें"
     }
   }
 }

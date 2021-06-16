@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   Inject,
   Injector,
@@ -18,6 +19,7 @@ import {
   SubmitAnnouncementService,
   WindowRef,
   LoggingService,
+  ParticipantsSearchServiceAgent,
 } from 'ddp-sdk';
 
 import { AtcpActivityBaseComponent } from './app-atcp-activity-base.component';
@@ -80,7 +82,7 @@ import * as Routes from '../../router-resources';
                             [studyGuid]="studyGuid"
                             [activityGuid]="activityGuid"
                             (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(0, $event)"
-                            (embeddedComponentBusy)="embeddedComponentBusy$[0].next($event)">
+                            (componentBusy)="embeddedComponentBusy$[0].next($event)">
                     </ddp-activity-section>
                 </ng-container>
 
@@ -134,7 +136,7 @@ import * as Routes from '../../router-resources';
                             [studyGuid]="studyGuid"
                             [activityGuid]="activityGuid"
                             (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
-                            (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)">
+                            (componentBusy)="embeddedComponentBusy$[1].next($event)">
                     </ddp-activity-section>
 
                     <!-- closing section -->
@@ -146,7 +148,7 @@ import * as Routes from '../../router-resources';
                                 [studyGuid]="studyGuid"
                                 [activityGuid]="activityGuid"
                                 (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
-                                (embeddedComponentBusy)="embeddedComponentBusy$[2].next($event)">
+                                (componentBusy)="embeddedComponentBusy$[2].next($event)">
                         </ddp-activity-section>
                     </ng-container>
 
@@ -353,9 +355,11 @@ export class AtcpActivityComponent extends AtcpActivityBaseComponent implements 
       renderer: Renderer2,
       submitService: SubmitAnnouncementService,
       analytics: AnalyticsEventsService,
+      participantsSearchService: ParticipantsSearchServiceAgent,
+      changeRef: ChangeDetectorRef,
       @Inject(DOCUMENT) document: any,
       injector: Injector) {
-    super(logger, windowRef, renderer, submitService, analytics, document, injector);
+    super(logger, windowRef, renderer, submitService, analytics, participantsSearchService, changeRef, document, injector);
 
     this.matDialog = injector.get(MatDialog);
   }

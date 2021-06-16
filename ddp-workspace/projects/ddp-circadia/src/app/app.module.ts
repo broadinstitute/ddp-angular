@@ -26,6 +26,7 @@ import { ActivityComponent } from './components/activity/activity.component';
 import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { MailingListModalComponent } from './components/mailing-list-modal/mailing-list-modal.component';
 import { ActivityPageComponent } from './components/pages/activity-page/activity-page.component';
 import { Auth0CodeCallbackComponent } from './components/pages/auth0-code-callback/auth0-code-callback.component';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
@@ -35,6 +36,7 @@ import { IrbPasswordComponent } from './components/pages/irb-password/irb-passwo
 import { JoinUsComponent } from './components/pages/join-us/join-us.component';
 import { LoginLandingComponent } from './components/pages/login-landing/login-landing.component';
 import { SessionExpiredComponent } from './components/pages/session-expired/session-expired.component';
+import { StayInformedComponent } from './components/pages/stay-informed/stay-informed.component';
 import { SessionWillExpireComponent } from './components/session-will-expire/session-will-expire.component';
 import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
 import { Route } from './constants/route';
@@ -122,6 +124,7 @@ export function translateFactory(
     AppComponent,
     FooterComponent,
     HeaderComponent,
+    MailingListModalComponent,
     ActivityPageComponent,
     Auth0CodeCallbackComponent,
     DashboardComponent,
@@ -131,6 +134,7 @@ export function translateFactory(
     JoinUsComponent,
     LoginLandingComponent,
     SessionExpiredComponent,
+    StayInformedComponent,
     SessionWillExpireComponent,
     UserActivitiesComponent,
   ],

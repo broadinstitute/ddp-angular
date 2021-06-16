@@ -6,10 +6,10 @@ import { SessionMementoService } from '../sessionMemento.service';
 import { AnnouncementMessage } from '../../models/announcementMessage';
 import { LanguageService } from '../internationalization/languageService.service';
 import { Observable } from 'rxjs';
-import { WithSelectedUserServiceAgent } from './withSelectedUserServiceAgent.service';
+import { UserServiceAgent } from './userServiceAgent.service';
 
 @Injectable()
-export class AnnouncementsServiceAgent extends WithSelectedUserServiceAgent<Array<AnnouncementMessage>> {
+export class AnnouncementsServiceAgent extends UserServiceAgent<Array<AnnouncementMessage>> {
     constructor(
         session: SessionMementoService,
         @Inject('ddp.config') configuration: ConfigurationService,

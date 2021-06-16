@@ -11,7 +11,7 @@
   </div>
 
   <ng-template #userActivities>
-    <div class="registration-status">
+    <div *ngIf="status" class="registration-status">
       <span class="status">
         {{ 'EnrollmentStatus.Prefix' | translate }}
       </span>
@@ -32,6 +32,7 @@
 
     <app-user-activities
       [activities]="activities"
+      [isParticipantIneligible]="isContactUsStatus"
       (startActivity)="goToActivity($event)"
       (continueActivity)="goToActivity($event)"
       (viewActivity)="goToActivity($event)"

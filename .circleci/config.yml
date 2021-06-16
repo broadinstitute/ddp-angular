@@ -12,9 +12,9 @@ references:
       - *npm_cache_key
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-    "osteo brain angio mbc testboston mpc prion atcp rarex rgp esc circadia pancan"
+    "basil osteo brain angio mbc testboston mpc prion atcp rarex rgp esc cgc circadia pancan"
   study_guids: &study_guids
-    "CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc circadia cmi-pancan"
+    "basil CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc circadia cmi-pancan"
 
 # Container for all the builds
 executors:
@@ -466,6 +466,8 @@ jobs:
       - checkout:
           path: *repo_path
       - conditionally-launch-build-and-store:
+          study_key: basil
+      - conditionally-launch-build-and-store:
           study_key: osteo
       - conditionally-launch-build-and-store:
           study_key: brain
@@ -487,6 +489,8 @@ jobs:
           study_key: esc
       - conditionally-launch-build-and-store:
           study_key: prion
+      - conditionally-launch-build-and-store:
+          study_key: cgc
       - conditionally-launch-build-and-store:
           study_key: circadia
       - conditionally-launch-build-and-store:
@@ -565,6 +569,13 @@ workflows:
 
   deploy-all-apps-workflow:
     jobs:
+      - deploy-stored-build-job:
+          filters:
+            branches:
+              only:
+                - test
+                - staging
+          study_key: basil
       - deploy-stored-build-job: &deploy_branch_filters
           filters:
             branches:
@@ -605,6 +616,9 @@ workflows:
           study_key: prion
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
+          study_key: cgc
+      - deploy-stored-build-job:
+          <<: *deploy_branch_filters
           study_key: circadia
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
@@ -619,6 +633,9 @@ workflows:
               only:
                 - develop
     jobs:
+      - build-and-deploy-job:
+          name: basil-nightly
+          study_key: basil
       - build-and-deploy-job:
           name: osteo-nightly
           study_key: osteo
@@ -652,6 +669,9 @@ workflows:
       - build-and-deploy-job:
           name: prion-nightly
           study_key: prion
+      - build-and-deploy-job:
+          name: cgc-nightly
+          study_key: cgc
       - build-and-deploy-job:
           name: circadia-nightly
           study_key: circadia

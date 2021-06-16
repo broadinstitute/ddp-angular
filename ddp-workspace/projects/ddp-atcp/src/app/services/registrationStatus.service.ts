@@ -34,6 +34,8 @@ export class RegistrationStatusService {
     const baseKey = 'EnrollmentStatus.Messages';
 
     switch (workflow.status) {
+      case RegistrationStatus.NotRegistered:
+        return `${baseKey}.NotRegistered`;
       case RegistrationStatus.Registered:
         return `${baseKey}.Registered`;
       case RegistrationStatus.Consented:

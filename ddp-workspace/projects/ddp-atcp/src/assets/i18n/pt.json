@@ -249,6 +249,9 @@
       },
       "Expand": {
         "Title": "Expandir"
+      },
+      "Login": {
+        "Title": "Registre-se"
       }
     },
     "Navigation": {
@@ -538,18 +541,19 @@
     }
   },
   "EnrollmentStatus": {
-    "Prefix": "[PT] Enrollment Status: ",
-    "ContactUsTooltip": "[PT] +1 954.481.6611 or support@atfamilies.org",
+    "Prefix": "Situação da inscrição: ",
+    "ContactUsTooltip": "+1 954.481.6611 or support@atfamilies.org",
     "Messages": {
-      "Registered": "[PT] Registered",
-      "Consented": "[PT] Consented",
-      "ConsentedNeedsAssent": "[PT] Consented, Needs Assent",
-      "SubmittedPhysicianInfo": "[PT] Submitted Physician Info",
-      "SubmittedMedicalHistory": "[PT] Submitted Medical History",
-      "SubmittedGenomeStudyShippingInfo": "[PT] Submitted Genome Study Shipping Info",
-      "SubmittedEnrollment": "[PT] Submitted Enrollment / Pending Confirmation",
-      "Enrolled": "[PT] Enrolled",
-      "ContactUs": "[PT] Please Contact Us"
+      "NotRegistered": "Não registrado",
+      "Registered": "Registrado",
+      "Consented": "Deu consentimento",
+      "ConsentedNeedsAssent": "Deu consentimento, precisa de assentimento",
+      "SubmittedPhysicianInfo": "Informações do médico de contato enviadas",
+      "SubmittedMedicalHistory": "Histórico médico enviado",
+      "SubmittedGenomeStudyShippingInfo": "Informações para remessa do estudo genômico enviadas",
+      "SubmittedEnrollment": "Inscrição enviada/confirmação pendente",
+      "Enrolled": "Inscrito",
+      "ContactUs": "Entre em contato conosco"
     }
   }
 }

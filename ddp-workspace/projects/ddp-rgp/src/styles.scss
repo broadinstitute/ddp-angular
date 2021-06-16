@@ -178,7 +178,7 @@ a:focus {
 
 @media (min-width: 1201px) and (max-width: 1920px) {
     .Wrapper--home {
-        margin-top: 160px !important;
+        margin-top: 100px !important;
     }
     .section:nth-of-type(3) {
         padding-bottom: 240px;
@@ -193,19 +193,19 @@ a:focus {
     }
 
     .Wrapper--home {
-        margin: 160px 50px 0 50px !important;
+        margin: 100px 50px 0 50px !important;
     }
 }
 
 @media (min-width: 920px) and (max-width: 1024px) {
     .Wrapper--home {
-        margin: 160px 50px 0 50px !important;
+        margin: 100px 50px 0 50px !important;
     }
 }
 
 @media (min-width: 768px) and (max-width: 920px) {
     .Wrapper--home {
-        margin: 150px 35px 0 35px !important;
+        margin: 90px 35px 0 35px !important;
         padding-bottom: 50px;
     }
 }
@@ -224,7 +224,7 @@ a:focus {
     }
 
     .Wrapper--home {
-        margin: 80px 35px 0 35px !important;
+        margin: 100px 35px 0 35px !important;
         padding-bottom: 50px;
     }
 }
@@ -257,13 +257,13 @@ a:focus {
     }
 
     .Wrapper--home {
-        margin: 150px 35px 0 35px !important;
+        margin: 90px 35px 0 35px !important;
     }
 }
 
 @media (max-width: 550px) {
     .Wrapper--home {
-        margin: 170px 0 0 0 !important;
+        margin: 90px 0 0 0 !important;
     }
 }
 
@@ -780,7 +780,7 @@ td .mat-input-wrapper {
     font-size: 2.2rem;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
-    margin: 104px 0 25px 0;
+    margin: 43px 0 25px 0;
     color: #ffffff;
 }
 
