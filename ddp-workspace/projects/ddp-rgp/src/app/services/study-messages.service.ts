@@ -21,9 +21,10 @@ export class StudyMessagesService {
         let messages = this.convertWorkflowsToStudyMessages(response.workflows)
           .filter(message => !!message)
           .sort((a, b) => {
-            // First sort by group, then sort by the Date display column, which
-            // is the `date` property. In case of ties, we fallback to the
-            // timestamp of the workflow status.
+            // We do sorting by group to ensure certain messages appear below
+            // others. We sort by `date` and break ties with `timestamp` on the
+            // assumption that study staff will appropriately set the dates for
+            // the various messages.
             if (b.group === a.group) {
               if (b.date.getTime() === a.date.getTime()) {
                 return b.timestamp.getTime() - a.timestamp.getTime();
