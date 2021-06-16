@@ -81,6 +81,7 @@ import { Participant } from './participant-list.component';
         <app-user-activities
           [activities]="participant.activities"
           [opaque]="true"
+          [isParticipantIneligible]="isContactUsStatus"
           (startActivity)="onStartActivity($event)"
           (continueActivity)="onStartActivity($event)"
           (viewActivity)="onStartActivity($event)"
