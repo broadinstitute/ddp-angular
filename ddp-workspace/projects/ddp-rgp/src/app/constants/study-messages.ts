@@ -21,6 +21,9 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
   {
     workflowKey: WorkflowKey.AcceptanceStatus,
     condition: workflow => workflow.status === AcceptanceStatus.InReview,
+    additionalCondition: workflows =>
+      // If we depend on a "date" workflow, then let's ensure we have it.
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.AcceptanceStatusDate && workflow.status),
     dateWorkflowKey: WorkflowKey.AcceptanceStatusDate,
     baseKey: 'Application',
     stageKey: 'InReview',
@@ -29,6 +32,11 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
   {
     workflowKey: WorkflowKey.PortalMessage,
     condition: workflow => workflow.status === PortalMessage.GenericThankYou,
+    additionalCondition: workflows =>
+      // For the "date" workflow objects, study staff might clear out the date
+      // in DSM, which will result in an empty string for the actual date value,
+      // so we should check the `status` property.
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.PortalMessageDate && workflow.status),
     dateWorkflowKey: WorkflowKey.PortalMessageDate,
     baseKey: 'Application',
     stageKey: 'ThankYou',
@@ -42,6 +50,8 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
   {
     workflowKey: WorkflowKey.AcceptanceStatus,
     condition: workflow => workflow.status === AcceptanceStatus.Accepted,
+    additionalCondition: workflows =>
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.AcceptanceStatusDate && workflow.status),
     dateWorkflowKey: WorkflowKey.AcceptanceStatusDate,
     baseKey: 'ApplicationDecision',
     stageKey: 'Accepted',
@@ -50,6 +60,8 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
   {
     workflowKey: WorkflowKey.AcceptanceStatus,
     condition: workflow => workflow.status === AcceptanceStatus.NotAccepted,
+    additionalCondition: workflows =>
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.AcceptanceStatusDate && workflow.status),
     dateWorkflowKey: WorkflowKey.AcceptanceStatusDate,
     baseKey: 'ApplicationDecision',
     stageKey: 'NotAccepted',
@@ -58,6 +70,8 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
   {
     workflowKey: WorkflowKey.AcceptanceStatus,
     condition: workflow => workflow.status === AcceptanceStatus.MoreInfoNeeded,
+    additionalCondition: workflows =>
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.AcceptanceStatusDate && workflow.status),
     dateWorkflowKey: WorkflowKey.AcceptanceStatusDate,
     baseKey: 'ApplicationDecision',
     stageKey: 'MoreInfoNeeded',
@@ -66,6 +80,8 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
   {
     workflowKey: WorkflowKey.AcceptanceStatus,
     condition: workflow => workflow.status === AcceptanceStatus.NmiToAccept,
+    additionalCondition: workflows =>
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.AcceptanceStatusDate && workflow.status),
     dateWorkflowKey: WorkflowKey.AcceptanceStatusDate,
     baseKey: 'ApplicationDecision',
     stageKey: 'NMI',
@@ -81,9 +97,8 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
       workflow.status === AcceptanceStatus.Accepted ||
       workflow.status === AcceptanceStatus.MoreInfoNeeded,
     additionalCondition: workflows =>
-      !workflows.find(
-        workflow => workflow.workflow === WorkflowKey.AcuityAppointmentDate,
-      ),
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.AcceptanceStatusDate && workflow.status) &&
+      !workflows.find(workflow => workflow.workflow === WorkflowKey.AcuityAppointmentDate && workflow.status),
     dateWorkflowKey: WorkflowKey.AcceptanceStatusDate,
     baseKey: 'ConsentSession',
     stageKey: 'ScheduleNeeded',
@@ -95,9 +110,8 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
       workflow.status === AcceptanceStatus.Accepted ||
       workflow.status === AcceptanceStatus.MoreInfoNeeded,
     additionalCondition: workflows =>
-      !!workflows.find(
-        workflow => workflow.workflow === WorkflowKey.AcuityAppointmentDate,
-      ),
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.AcuityAppointmentDate && workflow.status) &&
+      !workflows.find(workflow => workflow.workflow === WorkflowKey.DateOfConsentCall && workflow.status),
     dateWorkflowKey: WorkflowKey.AcuityAppointmentDate,
     baseKey: 'ConsentSession',
     stageKey: 'Scheduled',
@@ -113,9 +127,8 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
       workflow.status === AcceptanceStatus.Accepted ||
       workflow.status === AcceptanceStatus.MoreInfoNeeded,
     additionalCondition: workflows =>
-      !!workflows.find(
-        workflow => workflow.workflow === WorkflowKey.DateOfConsentCall,
-      ),
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.DateOfConsentCall && workflow.status) &&
+      !workflows.find(workflow => workflow.workflow === WorkflowKey.EnrollmentDate && workflow.status),
     dateWorkflowKey: WorkflowKey.DateOfConsentCall,
     baseKey: 'ConsentForm',
     stageKey: 'SignedFormRequired',
@@ -127,9 +140,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
       workflow.status === AcceptanceStatus.Accepted ||
       workflow.status === AcceptanceStatus.MoreInfoNeeded,
     additionalCondition: workflows =>
-      !!workflows.find(
-        workflow => workflow.workflow === WorkflowKey.EnrollmentDate,
-      ),
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.EnrollmentDate && workflow.status),
     dateWorkflowKey: WorkflowKey.EnrollmentDate,
     baseKey: 'ConsentForm',
     stageKey: 'SignedFormReceived',
@@ -141,11 +152,10 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
       workflow.status === AcceptanceStatus.Accepted ||
       workflow.status === AcceptanceStatus.MoreInfoNeeded,
     additionalCondition: workflows =>
-      !!workflows.find(
-        workflow =>
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.EnrollmentDate && workflow.status) &&
+      !!workflows.find(workflow =>
           workflow.workflow === WorkflowKey.InactiveReason &&
-          workflow.status === InactiveReason.Declined,
-      ),
+          workflow.status === InactiveReason.Declined),
     dateWorkflowKey: WorkflowKey.AcceptanceStatusDate,
     baseKey: 'ConsentForm',
     stageKey: 'Decline',
@@ -159,9 +169,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     workflowKey: WorkflowKey.MedicalRecordsReceived,
     condition: workflow => workflow.status === MedicalRecordsReceived.No,
     additionalCondition: workflows =>
-      !!workflows.find(
-        workflow => workflow.workflow === WorkflowKey.EnrollmentDate,
-      ),
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.EnrollmentDate && workflow.status),
     dateWorkflowKey: WorkflowKey.EnrollmentDate,
     baseKey: 'MedicalRecords',
     stageKey: 'NoRecords',
@@ -171,9 +179,8 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     workflowKey: WorkflowKey.MedicalRecordsReceived,
     condition: workflow => workflow.status === MedicalRecordsReceived.Partial,
     additionalCondition: workflows =>
-      !!workflows.find(
-        workflow => workflow.workflow === WorkflowKey.EnrollmentDate,
-      ),
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.EnrollmentDate && workflow.status) &&
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.MedicalRecordsLastReceived && workflow.status),
     dateWorkflowKey: WorkflowKey.MedicalRecordsLastReceived,
     baseKey: 'MedicalRecords',
     stageKey: 'Partial',
@@ -183,9 +190,8 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     workflowKey: WorkflowKey.MedicalRecordsReceived,
     condition: workflow => workflow.status === MedicalRecordsReceived.Yes,
     additionalCondition: workflows =>
-      !!workflows.find(
-        workflow => workflow.workflow === WorkflowKey.EnrollmentDate,
-      ),
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.EnrollmentDate && workflow.status) &&
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.MedicalRecordsLastReceived && workflow.status),
     dateWorkflowKey: WorkflowKey.MedicalRecordsLastReceived,
     baseKey: 'MedicalRecords',
     stageKey: 'Received',
@@ -195,9 +201,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     workflowKey: WorkflowKey.MedicalRecordsReceived,
     condition: workflow => workflow.status === MedicalRecordsReceived.NA,
     additionalCondition: workflows =>
-      !!workflows.find(
-        workflow => workflow.workflow === WorkflowKey.EnrollmentDate,
-      ),
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.EnrollmentDate && workflow.status),
     dateWorkflowKey: WorkflowKey.EnrollmentDate,
     baseKey: 'MedicalRecords',
     stageKey: 'NA',
@@ -211,9 +215,8 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     workflowKey: WorkflowKey.RedCapSurveyTaker,
     condition: workflow => workflow.status === RedCapSurveyTaker.Yes,
     additionalCondition: workflows =>
-      !!workflows.find(
-        workflow => workflow.workflow === WorkflowKey.EnrollmentDate,
-      ),
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.EnrollmentDate && workflow.status) &&
+      !workflows.find(workflow => workflow.workflow === WorkflowKey.RedCapSurveyCompletedDate && workflow.status),
     dateWorkflowKey: WorkflowKey.EnrollmentDate,
     baseKey: 'Survey',
     stageKey: 'Enrolled',
@@ -223,9 +226,8 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     workflowKey: WorkflowKey.RedCapSurveyCompletedDate,
     condition: () => true,
     additionalCondition: workflows =>
-      !!workflows.find(
-        workflow => workflow.workflow === WorkflowKey.EnrollmentDate,
-      ),
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.EnrollmentDate && workflow.status) &&
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.RedCapSurveyCompletedDate && workflow.status),
     dateWorkflowKey: WorkflowKey.RedCapSurveyCompletedDate,
     baseKey: 'Survey',
     stageKey: 'Complete',
@@ -241,9 +243,8 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
       workflow.status === KitTypeToRequest.Blood ||
       workflow.status === KitTypeToRequest.Saliva,
     additionalCondition: workflows =>
-      !!workflows.find(
-        workflow => workflow.workflow === WorkflowKey.EnrollmentDate,
-      ),
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.EnrollmentDate && workflow.status) &&
+      !workflows.find(workflow => workflow.workflow === WorkflowKey.DateKitSent && workflow.status),
     dateWorkflowKey: WorkflowKey.EnrollmentDate,
     baseKey: 'Sample',
     stageKey: 'Enrolled',
@@ -252,6 +253,9 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
   {
     workflowKey: WorkflowKey.DateKitSent,
     condition: () => true,
+    additionalCondition: workflows =>
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.DateKitSent && workflow.status) &&
+      !workflows.find(workflow => workflow.workflow === WorkflowKey.DateKitReceived && workflow.status),
     dateWorkflowKey: WorkflowKey.DateKitSent,
     baseKey: 'Sample',
     stageKey: 'Sent',
@@ -260,6 +264,8 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
   {
     workflowKey: WorkflowKey.DateKitReceived,
     condition: () => true,
+    additionalCondition: workflows =>
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.DateKitReceived && workflow.status),
     dateWorkflowKey: WorkflowKey.DateKitReceived,
     baseKey: 'Sample',
     stageKey: 'Received',
@@ -272,6 +278,8 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
   {
     workflowKey: WorkflowKey.PortalMessage,
     condition: workflow => workflow.status === PortalMessage.Withdraw,
+    additionalCondition: workflows =>
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.PortalMessageDate && workflow.status),
     dateWorkflowKey: WorkflowKey.PortalMessageDate,
     baseKey: 'Withdraw',
     stageKey: 'Withdraw',
@@ -285,6 +293,8 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     workflowKey: WorkflowKey.PortalMessage,
     condition: workflow =>
       workflow.status === PortalMessage.FamilyStepsComplete,
+    additionalCondition: workflows =>
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.PortalMessageDate && workflow.status),
     dateWorkflowKey: WorkflowKey.PortalMessageDate,
     baseKey: 'DataAnalysis',
     stageKey: 'FamilyStepsComplete',
@@ -294,6 +304,8 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     workflowKey: WorkflowKey.PortalMessage,
     condition: workflow =>
       workflow.status === PortalMessage.ProbandStepsComplete,
+    additionalCondition: workflows =>
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.PortalMessageDate && workflow.status),
     dateWorkflowKey: WorkflowKey.PortalMessageDate,
     baseKey: 'DataAnalysis',
     stageKey: 'ProbandStepsComplete',
@@ -302,6 +314,8 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
   {
     workflowKey: WorkflowKey.PortalMessage,
     condition: workflow => workflow.status === PortalMessage.ProbandNeg,
+    additionalCondition: workflows =>
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.PortalMessageDate && workflow.status),
     dateWorkflowKey: WorkflowKey.PortalMessageDate,
     baseKey: 'DataAnalysis',
     stageKey: 'ProbandNeg',
