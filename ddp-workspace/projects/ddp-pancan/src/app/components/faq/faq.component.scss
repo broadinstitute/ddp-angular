@@ -1,0 +1,41 @@
+@import '../../../styles/common.scss';
+
+.faq {
+    padding: 4.56rem 1.5rem 6.12rem 1.5rem;
+    text-align: center;
+
+    .title {
+        @extend .static-page-title;
+        margin-top: 0;
+        margin-bottom: 4.56rem;
+    }
+
+    .text {
+        @extend .static-page-paragraph-text
+    }
+
+    .expand-btn {
+        color: #282828;
+        font-family: Untitled-Sans-Medium;
+        font-size: 1rem;
+        letter-spacing: 0;
+        line-height: 20px;
+        padding: 0.63rem 1rem;
+        margin-bottom: 1.56rem;
+        text-transform: uppercase;
+        border: 1px solid #000000;
+        border-radius: 19.5px;
+        background-color: transparent;
+        display: block;
+
+        ::ng-deep.mat-button-wrapper {
+            position: relative;
+            left: -5px;
+        }
+    }
+
+    .container {
+        max-width: 48.75rem;
+        margin: 0 auto;
+    }
+}

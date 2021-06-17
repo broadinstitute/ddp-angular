@@ -37,10 +37,23 @@ $question-padding: 1.5rem;
         }
     }
 
+    .mat-accordion .mat-expansion-panel {
+        &:first-of-type, &:last-of-type {
+            border-radius: 0;
+        }
+    }
+
     .mat-expansion-panel-header,
     .mat-expansion-panel-content {
         font-size: 1.5rem;
         font-family: Untitled-Sans-Regular;
         letter-spacing: 0;
+        text-align: left;
+    }
+
+    .mat-expansion-panel-header.mat-expanded {
+        .faq-block__question {
+            font-family: Untitled-Sans-Medium;
+        }
     }
 }
