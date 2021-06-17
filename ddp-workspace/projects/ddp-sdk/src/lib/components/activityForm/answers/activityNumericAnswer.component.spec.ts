@@ -11,7 +11,7 @@ import { ActivityNumericQuestionBlock } from '../../../models/activity/activityN
 import { ActivityNumericAnswer } from './activityNumericAnswer.component';
 import { MatInputModule } from '@angular/material/input';
 
-describe('ActivityNumericAnswer', () => {
+fdescribe('ActivityNumericAnswer', () => {
     const questionBlock = {
         answer: null,
         min: 1,
@@ -84,22 +84,6 @@ describe('ActivityNumericAnswer', () => {
         expect(inputElement.value).toBe('');
         expect(inputElement.min).toBe('0');
         expect(inputElement.max).toBe('11');
-    });
-
-    it('should emit null if input contains string', () => {
-        component.block = {
-            answer: null,
-            min: 0,
-            max: 10
-        } as ActivityNumericQuestionBlock;
-        spyOn(component.valueChanged, 'emit');
-        fixture.detectChanges();
-        const inputElement: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
-        component.numericField.patchValue('Invalid answer');
-        inputElement.dispatchEvent(new Event('blur'));
-        fixture.detectChanges();
-        expect(component.block.answer).toBeNull();
-        expect(component.valueChanged.emit).toHaveBeenCalledWith(null);
     });
 
     it('should emit valid answer', () => {
