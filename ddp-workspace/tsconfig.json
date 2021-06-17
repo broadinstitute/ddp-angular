@@ -25,6 +25,12 @@
       "path": "./projects/toolkit-prion/tsconfig.spec.json"
     },
     {
+      "path": "./projects/ddp-basil/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ddp-basil/tsconfig.spec.json"
+    },
+    {
       "path": "./projects/ddp-angio/tsconfig.app.json"
     },
     {

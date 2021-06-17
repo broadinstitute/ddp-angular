@@ -7,4 +7,8 @@ export const AppRoutes = {
     SessionExpired: 'session-expired',
     PasswordResetDone: 'password-reset-done',
     CountMeIn: 'count-me-in',
+    AboutUs: 'about-us',
+    FAQ: 'faq',
+    Participation: 'participation',
+    JoinList: 'join-list'
 };

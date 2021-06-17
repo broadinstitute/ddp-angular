@@ -1,0 +1,26 @@
+<header class="header">
+    <nav class="nav">
+        <ul class="navigation">
+            <li class="navigation__item">
+                <a routerLink="/" routerLinkActive="header-link_active" translate>
+                    App.Navigation.Home
+                </a>
+            </li>
+            <li class="navigation__item" *ngIf="!isAuthenticated">
+                <a routerLink="prequal" routerLinkActive="header-link_active" translate>
+                    App.Navigation.Prequal
+                </a>
+            </li>
+            <li class="navigation__item" *ngIf="isAuthenticated">
+                <a routerLink="dashboard" routerLinkActive="header-link_active" translate>
+                    App.Navigation.Dashboard
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="auth">
+        <div class="auth__login">
+            <ddp-sign-in-out></ddp-sign-in-out>
+        </div>
+    </div>
+</header>

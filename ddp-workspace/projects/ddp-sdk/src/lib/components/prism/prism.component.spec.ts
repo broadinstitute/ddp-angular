@@ -81,7 +81,7 @@ describe('PrismComponent', () => {
     ];
     const configColumns = ['guid', 'userName', 'email', 'enrollmentStatus', 'dashboardLink'];
 
-    beforeEach(async() => {
+    beforeEach(async () => {
         storageServiceSpy = jasmine.createSpyObj('storageServiceSpy', { get: null, set: undefined });
         participantsSearchSpy = jasmine.createSpyObj('participantsSearchSpy', {search: of({results: data, totalCount: data.length})});
         sessionServiceSpy = jasmine.createSpyObj('sessionServiceSpy', ['setParticipant']);
@@ -376,7 +376,7 @@ describe('PrismComponent with storage', () => {
     const pageSize = 25;
     const pageIndex = 2;
 
-    beforeEach(async() => {
+    beforeEach(async () => {
         const sessionServiceSpy = jasmine.createSpyObj('sessionServiceSpy', ['setParticipant']);
         storageServiceSpy = jasmine.createSpyObj('storageServiceSpy', { get: null, set: undefined });
         storageServiceSpy.get.withArgs(`${studyGuid}_prism_search_query`).and.returnValue(searchQuery);

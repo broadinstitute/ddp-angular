@@ -32,6 +32,7 @@
 
     <app-user-activities
       [activities]="activities"
+      [isParticipantIneligible]="isContactUsStatus"
       (startActivity)="goToActivity($event)"
       (continueActivity)="goToActivity($event)"
       (viewActivity)="goToActivity($event)"

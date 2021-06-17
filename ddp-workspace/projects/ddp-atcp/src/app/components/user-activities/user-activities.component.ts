@@ -24,6 +24,7 @@ export class UserActivitiesComponent {
     'actions',
   ];
   @Input() opaque = false;
+  @Input() isParticipantIneligible: boolean;
   @Output() startActivity = new EventEmitter<string>();
   @Output() continueActivity = new EventEmitter<string>();
   @Output() viewActivity = new EventEmitter<string>();

@@ -544,6 +544,7 @@
     "Prefix": "Статус регистрации: ",
     "ContactUsTooltip": "+1 954.481.6611 или по адресу support@atfamilies.org",
     "Messages": {
+      "NotRegistered": "Не зарегистрирован",
       "Registered": "Зарегистрирован",
       "Consented": "Согласие получено",
       "ConsentedNeedsAssent": "Согласие получено, требуется согласие от несовершеннолетнего лица",

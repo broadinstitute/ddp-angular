@@ -15,7 +15,7 @@ Don't forget to [render](../README.md/#rendering-pepperconfigjs-and-ddpconfigjs-
 
 Sample apps:
 ```
-ng serve basil-app
+ng serve ddp-basil
 ng serve sandbox-app
 ```
 
@@ -93,7 +93,7 @@ Useful tricks:
 ## Build DDP-SDK
 
 Run `ng build ddp-sdk` to build the project. The build artifacts will be stored in the `dist/` directory.
-Run `ng build ddp-sdk --watch` to build the project and enable hot reload. 
+Run `ng build ddp-sdk --watch` to build the project and enable hot reload.
 
 ## Packing and publishing DDP-SDK
 
@@ -102,7 +102,7 @@ Go to the dist folder `cd dist/ddp-sdk` and run `npm pack` or `npm publish`.
 ## Build Toolkit
 
 Run `ng build toolkit` to build the project. The build artifacts will be stored in the `dist/` directory.
-Run `ng build toolkit --watch` to build the project and enable hot reload. 
+Run `ng build toolkit --watch` to build the project and enable hot reload.
 
 ## Packing and publishing Toolkit
 
@@ -111,7 +111,7 @@ Go to the dist folder `cd dist/toolkit` and run `npm pack` or `npm publish`.
 ## Code scaffolding
 
 Run `ng generate component component-name --project ddp-sdk` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ddp-sdk`.
-> Note: Don't forget to add `--project ddp-sdk`(or another project) or else it will be added to the default project in your `angular.json` file. 
+> Note: Don't forget to add `--project ddp-sdk`(or another project) or else it will be added to the default project in your `angular.json` file.
 
 ## Running unit tests
 

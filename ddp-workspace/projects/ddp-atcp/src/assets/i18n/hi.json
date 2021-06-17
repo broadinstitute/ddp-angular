@@ -554,6 +554,7 @@
     "Prefix": "नामांकन प्रास्थिति: ",
     "ContactUsTooltip": "+1 954.481.6611 या support@atfamilies.org",
     "Messages": {
+      "NotRegistered": "पंजीकृत नहीं",
       "Registered": "पंजीकृत",
       "Consented": "सहमति दी गई",
       "ConsentedNeedsAssent": "सहमति दी गई, स्वीकृति आवश्यक",

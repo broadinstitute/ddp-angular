@@ -20,7 +20,7 @@ describe('DashboardRedesignedComponent', () => {
     let participantsSearchSpy: jasmine.SpyObj<ParticipantsSearchServiceAgent>;
     let sessionMock: SessionMementoService;
 
-    beforeEach(async() => {
+    beforeEach(async () => {
         participantsSearchSpy = jasmine.createSpyObj('participantsSearchSpy', {
             getParticipant: of({
                 guid: '1234',

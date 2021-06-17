@@ -83,6 +83,134 @@
         }
       }
     },
+    "ddp-basil": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/ddp-basil",
+      "sourceRoot": "projects/ddp-basil/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ddp-basil",
+            "index": "projects/ddp-basil/src/index.html",
+            "main": "projects/ddp-basil/src/main.ts",
+            "polyfills": "projects/ddp-basil/src/polyfills.ts",
+            "tsConfig": "projects/ddp-basil/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/ddp-basil/src/favicon.ico",
+              "projects/ddp-basil/src/assets",
+              {
+                "glob": "pepperConfig.js",
+                "input": "projects/ddp-basil/output-config/",
+                "output": "assets/config"
+              }
+            ],
+            "styles": [
+              "projects/ddp-basil/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ddp-basil/src/environments/environment.ts",
+                  "with": "projects/ddp-basil/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ddp-basil:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ddp-basil:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ddp-basil:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ddp-basil/src/test.ts",
+            "polyfills": "projects/ddp-basil/src/polyfills.ts",
+            "tsConfig": "projects/ddp-basil/tsconfig.spec.json",
+            "karmaConfig": "projects/ddp-basil/karma.conf.js",
+            "assets": [
+              "projects/ddp-basil/src/favicon.ico",
+              "projects/ddp-basil/src/assets"
+            ],
+            "styles": [
+              "projects/ddp-basil/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ddp-basil/tsconfig.app.json",
+              "projects/ddp-basil/tsconfig.spec.json",
+              "projects/ddp-basil/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ddp-basil/e2e/protractor.conf.js",
+            "devServerTarget": "ddp-basil:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ddp-basil:serve:production"
+            }
+          }
+        }
+      }
+    },
     "ddp-angio": {
       "projectType": "application",
       "schematics": {},
@@ -2345,6 +2473,7 @@
               }
             ],
             "styles": [
+              "projects/ddp-pancan/src/theme.scss",
               "projects/ddp-pancan/src/styles.scss"
             ],
             "scripts": [

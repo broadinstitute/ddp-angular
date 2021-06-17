@@ -544,6 +544,7 @@
     "Prefix": "Situação da inscrição: ",
     "ContactUsTooltip": "+1 954.481.6611 or support@atfamilies.org",
     "Messages": {
+      "NotRegistered": "Não registrado",
       "Registered": "Registrado",
       "Consented": "Deu consentimento",
       "ConsentedNeedsAssent": "Deu consentimento, precisa de assentimento",

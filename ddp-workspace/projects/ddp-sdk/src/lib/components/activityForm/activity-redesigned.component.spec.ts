@@ -3,7 +3,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {
     ActivityRedesignedComponent,
     ActivityServiceAgent,
-    AnalyticsEventsService, EnrollmentStatusType,
+    AnalyticsEventsService,
+    EnrollmentStatusType,
     LoggingService,
     mockComponent,
     ParticipantsSearchServiceAgent,
@@ -29,7 +30,7 @@ describe('ActivityRedesignedComponent', () => {
     let component: ActivityRedesignedComponent;
     let participantsSearchSpy: jasmine.SpyObj<ParticipantsSearchServiceAgent>;
 
-    beforeEach(async() => {
+    beforeEach(async () => {
         const subjectPanel = mockComponent({ selector: 'ddp-subject-panel', inputs: ['subject'] });
         const adminPanel = mockComponent({ selector: 'ddp-admin-action-panel', inputs: ['activityReadonly'] });
         const activitySection = mockComponent({

@@ -544,6 +544,7 @@
     "Prefix": "Kayıt Durumu: ",
     "ContactUsTooltip": "+1 954.481.6611 veya support@atfamilies.org",
     "Messages": {
+      "NotRegistered": "Kaydolmadı",
       "Registered": "Kaydoldu",
       "Consented": "Olur Verildi",
       "ConsentedNeedsAssent": "Olur Verildi, Küçükler için Olur Gerekli",

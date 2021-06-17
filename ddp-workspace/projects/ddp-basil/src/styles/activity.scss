@@ -1,0 +1,17 @@
+.activity-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0 0 0;
+}
+
+.ddp-required-question-prompt:after {
+    content: ' *';
+}
+
+.mat-radio-checked .mat-radio-outer-circle {
+    border-color: darkseagreen;
+}
+
+.mat-radio-checked .mat-radio-inner-circle {
+    background-color: darkseagreen;
+}
