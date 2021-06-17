@@ -53,7 +53,11 @@ export class ActivityNumericAnswer implements OnInit, OnChanges {
             this.numericField.setValue('');
             this.emitAnswer(null);
         } else if (this.numericField.invalid) {
-            this.emitAnswer(null);
+            // If it's invalid, it most likely mean it's out-of-range, which
+            // also implies we have an INT_RANGE validation rule. We should
+            // store and emit the answer (rather than null) so we run validation
+            // rule on it.
+            this.emitAnswer(answer);
         } else {
             this.numericField.setValue(answer);
             this.emitAnswer(answer);
