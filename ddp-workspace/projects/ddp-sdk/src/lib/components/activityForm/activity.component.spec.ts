@@ -1,13 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {
-    ActivityRedesignedComponent,
+    ActivityComponent,
     ActivityServiceAgent,
     AnalyticsEventsService,
     EnrollmentStatusType,
     LoggingService,
     mockComponent,
     ParticipantsSearchServiceAgent,
+    SubmitAnnouncementService,
     WindowRef,
     WorkflowServiceAgent
 } from 'ddp-sdk';
@@ -25,10 +26,11 @@ class TranslateLoaderMock implements TranslateLoader {
     }
 }
 
-describe('ActivityRedesignedComponent', () => {
-    let fixture: ComponentFixture<ActivityRedesignedComponent>;
-    let component: ActivityRedesignedComponent;
+describe('ActivityComponent', () => {
+    let fixture: ComponentFixture<ActivityComponent>;
+    let component: ActivityComponent;
     let participantsSearchSpy: jasmine.SpyObj<ParticipantsSearchServiceAgent>;
+    let serviceAgentSpy: jasmine.SpyObj<ActivityServiceAgent>;
 
     beforeEach(async () => {
         const subjectPanel = mockComponent({ selector: 'ddp-subject-panel', inputs: ['subject'] });
@@ -37,12 +39,14 @@ describe('ActivityRedesignedComponent', () => {
             selector: 'ddp-activity-section',
             inputs: ['section', 'readonly', 'validationRequested', 'studyGuid', 'activityGuid']
         });
-        const serviceAgentSpy = jasmine.createSpyObj('serviceAgentSpy', { getActivity: of(null) });
+        serviceAgentSpy = jasmine.createSpyObj('serviceAgentSpy', { getActivity: of(null) });
         participantsSearchSpy = jasmine.createSpyObj('participantsSearchSpy', { getParticipant: of({
-                guid: '1234',
-                hruid: '5678',
-                status: EnrollmentStatusType.REGISTERED,
-            })});
+                getParticipant: of({
+                    guid: '1234',
+                    hruid: '5678',
+                    status: EnrollmentStatusType.REGISTERED,
+                })
+            }) });
         await TestBed.configureTestingModule({
             imports: [
                 RouterTestingModule,
@@ -56,15 +60,16 @@ describe('ActivityRedesignedComponent', () => {
                 { provide: ActivityServiceAgent, useValue: serviceAgentSpy },
                 { provide: WorkflowServiceAgent, useValue: {} },
                 { provide: ParticipantsSearchServiceAgent, useValue: participantsSearchSpy },
+                { provide: SubmitAnnouncementService, useValue: {} },
                 { provide: 'ddp.config', useValue: { usesVerticalStepper: [] } },
             ],
-            declarations: [ActivityRedesignedComponent, subjectPanel, adminPanel, activitySection],
+            declarations: [ActivityComponent, subjectPanel, adminPanel, activitySection],
         })
             .compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ActivityRedesignedComponent);
+        fixture = TestBed.createComponent(ActivityComponent);
         component = fixture.debugElement.componentInstance;
         fixture.detectChanges();
     });
@@ -88,5 +93,47 @@ describe('ActivityRedesignedComponent', () => {
 
         const subjectPanel = fixture.debugElement.query(By.css('ddp-subject-panel'));
         expect(subjectPanel).toBeTruthy();
+    });
+
+    it('should not display admin action panel if model is not defined', () => {
+        component.ngOnInit();
+        component.model = null;
+        fixture.detectChanges();
+
+        const subjectPanel = fixture.debugElement.query(By.css('ddp-admin-action-panel'));
+        expect(subjectPanel).toBeFalsy();
+    });
+
+    it('should display admin action panel if model is defined', () => {
+        component.ngOnInit();
+        fixture.detectChanges();
+
+        const subjectPanel = fixture.debugElement.query(By.css('ddp-admin-action-panel'));
+        expect(subjectPanel).toBeTruthy();
+    });
+
+    it('should return readonly false if model readonly is false', () => {
+        component.ngOnInit();
+        component.model.readonly = false;
+        fixture.detectChanges();
+
+        expect(component.isReadonly()).toBeFalse();
+    });
+
+    it('should return readonly false if model readonly is true but admin allows editing', () => {
+        component.ngOnInit();
+        component.model.readonly = true;
+        component.updateIsAdminEditing(true);
+        fixture.detectChanges();
+
+        expect(component.isReadonly()).toBeFalse();
+    });
+
+    it('should return readonly true if model readonly is true but admin does not allow editing', () => {
+        component.ngOnInit();
+        component.model.readonly = true;
+        fixture.detectChanges();
+
+        expect(component.isReadonly()).toBeTrue();
     });
 });
