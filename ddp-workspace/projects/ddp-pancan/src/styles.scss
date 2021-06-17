@@ -1,4 +1,5 @@
-@import 'variables.scss';
+@import 'styles/variables';
+@import 'styles/fonts';
 
 html,
 body {
@@ -14,16 +15,18 @@ html {
 }
 
 body {
+    font-family: 'Untitled-Sans-Regular', sans-serif;
+    color: #000000;
     overflow-y: scroll;
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: $desktop-breakpoint) {
     html {
         font-size: 14px;
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: $tablet-breakpoint) {
     html {
         font-size: 12px;
     }
@@ -44,7 +47,7 @@ a {
     cursor: pointer;
     text-decoration: none;
 
-    &:focus {
+    &:focus, &:hover {
         text-decoration: underline;
     }
 }
@@ -59,4 +62,20 @@ a {
     padding-bottom: $footer-height;
     padding-top: $header-height;
     box-sizing: border-box;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.Link {
+    color: #7154ff;
+}
+
+// TODO: borders below for debug reason. Remove when header and footer are ready
+header {
+    border-bottom: 1px solid black;
+}
+footer {
+    border-top: 1px solid black;
 }

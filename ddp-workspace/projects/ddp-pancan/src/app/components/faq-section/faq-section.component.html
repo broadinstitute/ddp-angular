@@ -1,0 +1,16 @@
+<mat-accordion hideToggle="true" multi="true" displayMode="flat">
+    <ng-container *ngFor="let item of questions | translate | slice : 0 : questionsCount;">
+        <mat-expansion-panel #panel>
+            <mat-expansion-panel-header collapsedHeight="100%" expandedHeight="100%">
+                <mat-icon *ngIf="!panel.expanded" class="faq-block__icon">add</mat-icon>
+                <mat-icon *ngIf="panel.expanded" class="faq-block__icon">clear</mat-icon>
+                <p class="faq-block__question no-margin">{{item.Question}}</p>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+                <ng-container *ngFor="let paragraph of item.Paragraphs">
+                    <p class="faq-block__text" [innerHTML]="paragraph" routeTransformer></p>
+                </ng-container>
+            </ng-template>
+        </mat-expansion-panel>
+    </ng-container>
+</mat-accordion>
