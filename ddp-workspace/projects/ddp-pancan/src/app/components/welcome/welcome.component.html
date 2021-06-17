@@ -1,1 +1,117 @@
-<main class="main">welcome!</main>
+<main class="main">
+    <section class="introduction">
+        <h2 class="title" translate>App.HomePage.IntroductionSection.Title</h2>
+        <p class="text" translate>App.HomePage.IntroductionSection.Text</p>
+        <a mat-raised-button
+           [routerLink]="'/' + AppRoutes.CountMeIn"
+           class="btn join-cmi-btn center"
+           [innerText]="'App.HomePage.JoinCountMeInButton' | translate">
+        </a>
+        <div class="logos">
+            <img src="assets/images/logo-broad.svg"
+                 [alt]="'App.HomePage.IntroductionSection.BroadAlt' | translate"
+                 width="124" height="32">
+            <img src="../../../assets/images/dana-farber-logo.png"
+                 [alt]="'App.HomePage.IntroductionSection.DanaFarberAlt' | translate"
+                 width="124" height="32">
+        </div>
+    </section>
+
+    <section class="learn-more">
+        <h2 class="title" translate>App.HomePage.LearnMoreSection.Title</h2>
+        <p class="text" [innerHTML]="'App.HomePage.LearnMoreSection.Text' | translate"></p>
+        <a mat-raised-button
+           [routerLink]="'/' + AppRoutes.AboutUs"
+           class="btn learn-more-btn center"
+           [innerText]="'App.HomePage.LearnMoreSection.LearnMoreAboutUsButton' | translate">
+        </a>
+    </section>
+
+    <section class="join">
+        <div class="image"></div>
+        <div class="description">
+            <h2 class="title" translate>App.HomePage.JoinSection.Title</h2>
+            <p class="text" [innerHTML]="'App.HomePage.JoinSection.Text1' | translate"></p>
+            <p class="text" [innerHTML]="'App.HomePage.JoinSection.Text2' | translate"></p>
+        </div>
+    </section>
+
+    <section class="participate">
+        <h2 class="title" translate>App.HomePage.ParticipateSection.Title</h2>
+        <div class="steps container">
+            <figure class="step" *ngFor="let step of participationSteps; let last=last;">
+                <img class="step__image"
+                     [src]="'../../../assets/images/' + step.img"
+                     width="150" height="150"
+                     [alt]="'App.HomePage.ParticipateSection.' + step.key + '.Title' | translate">
+
+                <figcaption class="step__title"
+                            [innerText]="'App.HomePage.ParticipateSection.' + step.key + '.Title' | translate">
+                </figcaption>
+                <span class="step__time" *ngIf="!last"
+                      [innerText]="'App.HomePage.ParticipateSection.' + step.key + '.Time' | translate">
+                </span>
+                <div class="step__description"
+                     [innerText]="'App.HomePage.ParticipateSection.' + step.key + '.Description' | translate">
+                </div>
+            </figure>
+        </div>
+        <div class="container">
+            <a mat-raised-button
+               [routerLink]="'/' + AppRoutes.AboutUs"
+               class="btn learn-more-btn center"
+               [innerText]="'App.HomePage.ParticipateSection.LearnMoreAboutParticipationButton' | translate">
+            </a>
+        </div>
+    </section>
+
+    <section class="faq">
+        <h2 class="title" translate>App.FAQ.Title</h2>
+        <div class="container">
+            <app-faq-section questions="App.FAQ.Questions" questionsCount="5"></app-faq-section>
+        </div>
+        <a mat-raised-button
+           [routerLink]="'/' + AppRoutes.FAQ"
+           class="btn more-faq-btn center"
+           [innerText]="'App.FAQ.Button.MoreFAQs' | translate">
+        </a>
+    </section>
+
+    <section class="stay-informed">
+        <div class="container">
+            <h2 class="title" translate>App.HomePage.StayInformedSection.Title</h2>
+            <div class="social-media">
+                <div class="text" translate>App.HomePage.StayInformedSection.Text</div>
+                <div class="social-media__links">
+                    <a class="social-media__link" [href]="twitterUrl" target="_blank">
+                        <img class="social-media__logo" lazy-resource src="assets/images/twitter.svg"
+                             [alt]="'Common.Alts.Twitter' | translate">
+                    </a>
+                    <a class="social-media__link" [href]="facebookUrl" target="_blank">
+                        <img class="social-media__logo" lazy-resource src="assets/images/facebook.svg"
+                             [alt]="'Common.Alts.Facebook' | translate">
+                    </a>
+                    <a class="social-media__link" [href]="instagramUrl" target="_blank">
+                        <img class="social-media__logo" lazy-resource src="assets/images/instagram.svg"
+                             [alt]="'Common.Alts.Instagram' | translate">
+                    </a>
+                </div>
+            </div>
+            <a mat-raised-button
+               class="btn join-btn"
+               [innerText]="'App.HomePage.StayInformedSection.JoinMailingListButton' | translate">
+            </a>
+        </div>
+    </section>
+
+    <section class="join-cmi">
+        <img class="join-cmi-logo" lazy-resource src="assets/images/hands.png" [alt]="'Common.Alts.JoinCMI' | translate">
+        <h2 class="title" translate>App.HomePage.CountMeInSection.Title</h2>
+        <p class="text" translate>App.HomePage.CountMeInSection.Text</p>
+        <a mat-raised-button
+           [routerLink]="'/' + AppRoutes.CountMeIn"
+           class="btn join-cmi-btn"
+           [innerText]="'App.HomePage.JoinCountMeInButton' | translate">
+        </a>
+    </section>
+</main>

@@ -2473,6 +2473,7 @@
               }
             ],
             "styles": [
+              "projects/ddp-pancan/src/theme.scss",
               "projects/ddp-pancan/src/styles.scss"
             ],
             "scripts": [
