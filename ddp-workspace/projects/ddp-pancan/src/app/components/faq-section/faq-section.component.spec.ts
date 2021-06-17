@@ -46,7 +46,7 @@ describe('FaqItemComponent', () => {
     let component: FaqSectionComponent;
     let fixture: ComponentFixture<FaqSectionComponent>;
 
-    beforeEach(async() => {
+    beforeEach(async () => {
         await TestBed.configureTestingModule({
                 declarations: [
                     FaqSectionComponent,
