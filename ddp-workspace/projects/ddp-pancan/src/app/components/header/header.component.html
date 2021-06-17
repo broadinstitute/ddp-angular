@@ -1,8 +1,12 @@
 <header class="header" [ngClass]="{'panel-opened': isPanelOpened, 'header_shadow': isPageScrolled}">
     <div class="header-content">
         <a class="project-logo" routerLink="/">
-            <img class="project-logo__img" src="assets/images/logo.svg" [alt]="'App.Header.Logo.ImageAlt' | translate">
-            <p class="project-logo__text" [innerHTML]="'App.Header.Logo.Title' | translate"></p>
+            <img class="project-logo__img"
+                 width="60px"
+                 height="60px"
+                 src="assets/images/logo-count-me-in.png"
+                 [alt]="'App.Header.Logo.ImageAlt' | translate">
+            <span class="project-logo__text" [innerHTML]="'App.Header.Logo.Title' | translate"></span>
         </a>
         <ng-container *ngTemplateOutlet="controls"></ng-container>
         <button class="hamburger hamburger--slider" [ngClass]="{'is-active': isPanelOpened}"
