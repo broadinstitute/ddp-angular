@@ -36,9 +36,9 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
     public ngOnInit(): void {
         this.initForm();
         this.subs = this.numericField.valueChanges.subscribe(enteredValue => {
-            const intValue = parseInt(enteredValue, 10);
-            const answer = isNaN(intValue) ? null : intValue;
+            const answer = enteredValue !== null ? parseInt(enteredValue, 10) : null;
             this.block.answer = answer;
+            this.numericField.patchValue(answer === null ? '' : answer, {onlySelf: true, emitEvent: false});
             this.valueChanged.emit(answer);
         });
     }
