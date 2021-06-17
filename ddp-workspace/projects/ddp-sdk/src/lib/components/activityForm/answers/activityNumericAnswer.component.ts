@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges, OnInit } from '@angular/core';
-import { Validators, FormControl } from '@angular/forms';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ActivityNumericQuestionBlock } from '../../../models/activity/activityNumericQuestionBlock';
 import * as _ from 'underscore';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'ddp-activity-numeric-answer',
@@ -15,8 +16,7 @@ import * as _ from 'underscore';
                [min]="block.min"
                [max]="block.max"
                [placeholder]="placeholder || block.placeholder"
-               [attr.data-ddp-test]="'answer:' + block.stableId"
-               (blur)="onBlur($event.target.value)">
+               [attr.data-ddp-test]="'answer:' + block.stableId">
     </mat-form-field>
     `,
     styles: [`
@@ -25,15 +25,26 @@ import * as _ from 'underscore';
         }
     `]
 })
-export class ActivityNumericAnswer implements OnInit, OnChanges {
+export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
     @Input() block: ActivityNumericQuestionBlock;
     @Input() placeholder: string;
     @Input() readonly: boolean;
     @Output() valueChanged: EventEmitter<number> = new EventEmitter();
     public numericField: FormControl;
+    private subs: Subscription;
 
     public ngOnInit(): void {
         this.initForm();
+        this.subs = this.numericField.valueChanges.subscribe(enteredValue => {
+            const intValue = parseInt(enteredValue, 10);
+            const answer = isNaN(intValue) ? null : intValue;
+            this.block.answer = answer;
+            this.valueChanged.emit(answer);
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.subs?.unsubscribe();
     }
 
     public ngOnChanges(changes: SimpleChanges): void {
@@ -47,39 +58,10 @@ export class ActivityNumericAnswer implements OnInit, OnChanges {
         }
     }
 
-    public onBlur(value: string): void {
-        const answer = parseInt(value, 10);
-        if (isNaN(answer)) {
-            this.numericField.setValue('');
-            this.emitAnswer(null);
-        } else if (this.numericField.invalid) {
-            // If it's invalid, it most likely mean it's out-of-range, which
-            // also implies we have an INT_RANGE validation rule. We should
-            // store and emit the answer (rather than null) so we run validation
-            // rule on it.
-            this.emitAnswer(answer);
-        } else {
-            this.numericField.setValue(answer);
-            this.emitAnswer(answer);
-        }
-    }
-
-    private emitAnswer(value: number | null): void {
-        this.block.answer = value;
-        this.valueChanged.emit(value);
-    }
-
     private initForm(): void {
-        const numericValidators = [];
-        if (_.isNumber(this.block.min)) {
-            numericValidators.push(Validators.min(this.block.min));
-        }
-        if (_.isNumber(this.block.max)) {
-            numericValidators.push(Validators.max(this.block.max));
-        }
         this.numericField = new FormControl({
             value: _.isNumber(this.block.answer) ? this.block.answer : '',
             disabled: this.readonly
-        }, numericValidators);
+        }, {updateOn: 'blur'});
     }
 }
