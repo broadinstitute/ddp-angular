@@ -47,7 +47,7 @@ a {
     cursor: pointer;
     text-decoration: none;
 
-    &:focus {
+    &:focus, &:hover {
         text-decoration: underline;
     }
 }
@@ -66,6 +66,10 @@ a {
 
 .italic {
     font-style: italic;
+}
+
+.Link {
+    color: #7154ff;
 }
 
 // TODO: borders below for debug reason. Remove when header and footer are ready

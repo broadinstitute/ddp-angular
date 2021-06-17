@@ -16,15 +16,15 @@ section {
 
     &.introduction {
         max-width: 1440px;
-        padding-top: 108px;
-        padding-bottom: 18px;
+        padding-top: 6.75rem;
+        padding-bottom: 1.125rem;
         background-image: url(/assets/images/hero.png);
         background-repeat: no-repeat;
         background-size: contain;
         background-position: bottom -2.4rem center;
 
         .title {
-            margin-bottom: 16px;
+            margin-bottom: 1rem;
         }
 
         .logos {
@@ -35,22 +35,22 @@ section {
     }
 
     &.learn-more {
-        padding: 80px 0 65px;
+        padding: 5rem 0 4.06rem;
 
         .title {
-            margin-bottom: 32px;
+            margin-bottom: 2rem;
         }
     }
 
     &.join {
         height: 470px;
-        padding: 36px 40px 55px 100px;
+        padding: 2.25rem 2.5rem 3.44rem 6.25rem;
         display: flex;
         box-sizing: border-box;
 
         .image {
             flex: 0 1 400px;
-            margin-right: 100px;
+            margin-right: 6.25rem;
             background-image: url(/assets/images/map.png);
             background-repeat: no-repeat;
             background-position: top;
@@ -59,27 +59,27 @@ section {
 
         .description {
             flex: 1 2 auto;
-            padding-top: 70px;
+            padding-top: 4.38rem;
         }
 
         .title {
-            margin-bottom: 34px;
+            margin-bottom: 2.12rem;
         }
         .text {
             text-align: left;
 
             &:first-of-type {
-                margin-bottom: 32px;
+                margin-bottom: 2rem;
             }
         }
     }
 
     &.participate {
-        padding: 112px 20px;
+        padding: 7rem 1.25rem;
         text-align: left;
 
         .title {
-            margin-bottom: 78px;
+            margin-bottom: 4.88rem;
         }
 
         .container {
@@ -94,7 +94,7 @@ section {
 
         .step {
             margin: 0 1.5rem 0 0;
-            font-size: 16px;
+            font-size: 1rem;
 
             &:last-child {
                 margin-right: 0;
@@ -102,7 +102,7 @@ section {
 
             &__image {
                 display: block;
-                margin: 0 auto 26px;
+                margin: 0 auto 1.63rem;
                 position: relative;
                 left: -10%;
             }
@@ -121,29 +121,29 @@ section {
             }
 
             &__description {
-                font-size: 24px;
+                font-size: 1.5rem;
                 letter-spacing: -0.1px;
                 line-height: 28px;
-                margin-top: 16px;
+                margin-top: 1rem;
                 max-width: 240px;
             }
         }
     }
 
     &.faq {
-        padding: 110px 0 60px 0;
+        padding: 6.88rem 0 3.75rem 0;
 
         .container {
             box-sizing: border-box;
             max-width: 900px;
-            padding: 0 60px;
-            margin: 56px auto;
+            padding: 0 3.75rem;
+            margin: 3.5rem auto;
             text-align: left;
         }
     }
 
     &.stay-informed {
-        padding: 86px 20px 72px 20px;
+        padding: 5.38rem 1.25rem 4.5rem 1.25rem;
 
         .container {
             max-width: $container-width;
@@ -155,11 +155,11 @@ section {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px;
+            margin-bottom: 2.5rem;
 
             .text {
                 text-align: left;
-                margin: 0 40px 0 0;
+                margin: 0 2.5rem 0 0;
                 flex: 2 1 auto;
                 max-width: unset;
             }
@@ -179,25 +179,25 @@ section {
 
         .title {
             margin: 0;
-            padding-bottom: 18px;
+            padding-bottom: 1.13rem;
             text-align: left;
         }
     }
 
     &.join-cmi {
-        padding: 76px 0 99px 0;
+        padding: 4.75rem 0 6.19rem 0;
 
         .join-cmi-logo {
             max-width: 500px;
         }
 
         .title {
-            margin-top: 40px;
-            margin-bottom: 34px;
+            margin-top: 2.5rem;
+            margin-bottom: 2.13rem;
         }
 
         .text {
-            margin-bottom: 25px;
+            margin-bottom: 1.56rem;
         }
 
         .join-cmi-btn {
@@ -214,7 +214,7 @@ section {
 
 .title {
     font-family: Source Serif Pro;
-    font-size: 40px;
+    font-size: 2.5rem;
     font-weight: 600;
     letter-spacing: -0.08px;
     line-height: 50px;
@@ -222,16 +222,16 @@ section {
 
 .text {
     opacity: 0.8;
-    font-size: 24px;
+    font-size: 1.5rem;
     letter-spacing: -0.1px;
     line-height: 34px;
 }
 
 .btn {
     font-family: Untitled-Sans-Medium;
-    font-size: 18px;
+    font-size: 1.13rem;
     letter-spacing: -0.26px;
-    padding: 15px 30px;
+    padding: 1rem 2rem;
     color: #000000;
     line-height: 22px;
     text-align: center;
@@ -248,14 +248,14 @@ section {
 .join-cmi-btn {
     background-color: #7154FF;
     color: #ffffff;
-    font-size: 20px;
+    font-size: 1.25rem;
     letter-spacing: 0;
-    margin: 25px 0 120px;
+    margin: 1.56rem 0 7.5rem;
     border: none;
 }
 
 .learn-more-btn {
-    margin-top: 45px;
+    margin-top: 2.81rem;
 }
 
 .center {
@@ -283,6 +283,19 @@ section {
         &:nth-child(n) {
             padding-left: 3rem;
             padding-right: 3rem;
+        }
+
+        &.introduction {
+            .logos {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+
+                > img:first-child {
+                    margin: 0;
+                }
+            }
         }
 
         &.join {
@@ -337,11 +350,7 @@ section {
         .join-cmi-logo {
             width: 95%;
         }
-
-        .btn {
-            font-size: 1.4rem;
-        }
-    }
+   }
 }
 
 @media screen and (max-width: $mobile-breakpoint) {
@@ -363,18 +372,6 @@ section {
         &.join {
             .image {
                 flex-basis: 300px;
-            }
-        }
-
-        &.introduction {
-            .join-cmi-btn {
-                margin-bottom: 80px;
-            }
-        }
-
-        &.participate {
-            .learn-more-btn {
-                padding: 15px;
             }
         }
     }
