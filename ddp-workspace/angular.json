@@ -2326,6 +2326,7 @@
             "aot": true,
             "assets": [
               "projects/ddp-circadia/src/favicon.ico",
+              "projects/ddp-circadia/src/favicon-alert.ico",
               "projects/ddp-circadia/src/assets",
               {
                 "glob": "pepperConfig.js",
