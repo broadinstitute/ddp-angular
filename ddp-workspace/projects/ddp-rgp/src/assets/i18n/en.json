@@ -176,18 +176,18 @@
                         "image": "brian-mangilog.jpeg"
                     },
                     {
-                        "name": "Grace VanNoy",
-                        "degree": "MS, CGC",
-                        "position": "Clinical Project Manager",
-                        "bio": "Grace is a clinical project manager for the Rare Genomes Project. She is a licensed, board-certified genetic counselor with a background in pediatric rare disease, gene discovery, and genomic sequencing.",
-                        "image": "grace-vannoy.jpg"
-                    },
-                    {
                         "name": "Jillian Serrano",
                         "degree": "",
                         "position": "Clinical Project Coordinator",
                         "bio": "Jillian is a clinical project coordinator for the Rare Genomes Project, focusing on consenting families to the study and facilitating sample and medical record collection. She studied biology as an undergraduate and has experience in patient care and advocacy and an interest in the project's expansion to reach the Spanish speaking population.",
                         "image": "jillian-serrano.jpeg"
+                    },
+                    {
+                        "name": "Grace VanNoy",
+                        "degree": "MS, CGC",
+                        "position": "Clinical Project Manager",
+                        "bio": "Grace is a clinical project manager for the Rare Genomes Project. She is a licensed, board-certified genetic counselor with a background in pediatric rare disease, gene discovery, and genomic sequencing.",
+                        "image": "grace-vannoy.jpg"
                     }
                 ]
             },
@@ -299,6 +299,13 @@
                             "image": "emily-oheir.jpeg"
                         },
                         {
+                            "name": "Ikeoluwa Osei-Owusu",
+                            "degree": "PhD",
+                            "position": "Genomic Analyst",
+                            "bio": "Ikeoluwa is a genomic analyst assessing the disease consequence of genomic variation in families with rare disease through analysis of their exomes and/or genomes. Studying autistic children with self-injurious behavior, she received her doctoral degree in human genetics from Johns Hopkins University School of Medicine.",
+                            "image": "ikeoluwa.jpg"
+                        },
+                        {
                             "name": "Lynn Pais",
                             "degree": "MS",
                             "position": "Genomic Analyst",
@@ -318,13 +325,6 @@
                             "position": "Clinical Genomic Analyst",
                             "bio": "Monica is a clinical genomic analyst and a board-certified faculty neonatologist and geneticist at Boston Children’s Hospital. She is interested in gene discovery and improving genetic diagnosis, especially in neonatal and pediatric populations. She has a medical degree from Harvard Medical School.",
                             "image": "monica-wojcik.jpg"
-                        },
-                        {
-                            "name": "Ikeoluwa Osei-Owusu",
-                            "degree": "PhD",
-                            "position": "Genomic Analyst",
-                            "bio": "Ikeoluwa is a genomic analyst assessing the disease consequence of genomic variation in families with rare disease through analysis of their exomes and/or genomes. Studying autistic children with self-injurious behavior, she received her doctoral degree in human genetics from Johns Hopkins University School of Medicine.",
-                            "image": "ikeoluwa.jpg"
                         }
                     ]
                 }
