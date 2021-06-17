@@ -111,6 +111,8 @@ describe('ActivityNumericAnswer', () => {
         fixture.detectChanges();
         expect(component.block.answer).toBe(500);
         expect(component.valueChanged.emit).toHaveBeenCalledWith(500);
+        // fixme: somehow value is not getting reset, so we reset it here.
+        component.numericField.patchValue('');
     });
 
     it('should emit valid answer', () => {
