@@ -102,15 +102,15 @@ describe('ActivityNumericAnswer', () => {
         expect(component.valueChanged.emit).toHaveBeenCalledWith(null);
     });
 
-    it('should emit null if input is out of range', () => {
+    it('should emit value even if input is out of range so we can run validations on it', () => {
         spyOn(component.valueChanged, 'emit');
         fixture.detectChanges();
         const inputElement: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
         component.numericField.patchValue(500);
         inputElement.dispatchEvent(new Event('blur'));
         fixture.detectChanges();
-        expect(component.block.answer).toBeNull();
-        expect(component.valueChanged.emit).toHaveBeenCalledWith(null);
+        expect(component.block.answer).toBe(500);
+        expect(component.valueChanged.emit).toHaveBeenCalledWith(500);
     });
 
     it('should emit valid answer', () => {
