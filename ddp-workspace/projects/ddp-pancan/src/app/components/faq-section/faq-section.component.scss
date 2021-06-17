@@ -1,0 +1,46 @@
+$border-color: #EBEBEB;
+$icon-width: 24px;
+$icon-margin-right: 2rem;
+$question-padding: 1.5rem;
+
+.faq-block__icon {
+    font-size: 1.88rem;
+    margin-right: $icon-margin-right;
+}
+
+.faq-block__question {
+    margin: 0;
+    line-height: 30px;
+}
+
+.faq-block__text {
+    white-space: pre-wrap;
+    line-height: 34px;
+}
+
+.mat-expansion-panel-header {
+    padding: 1.5rem;
+    transition: 0.3s;
+}
+
+:host ::ng-deep {
+    .mat-expansion-panel-body {
+        padding: 0 1rem 1rem calc(#{$question-padding} + #{$icon-width} + #{$icon-margin-right});
+    }
+
+    .mat-expansion-panel {
+        border-top: 2px solid $border-color;
+        box-shadow: none;
+
+        &:last-child {
+            border-bottom: 2px solid $border-color;
+        }
+    }
+
+    .mat-expansion-panel-header,
+    .mat-expansion-panel-content {
+        font-size: 1.5rem;
+        font-family: Untitled-Sans-Regular;
+        letter-spacing: 0;
+    }
+}

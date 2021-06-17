@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -21,10 +24,7 @@ import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
-
-import { MatButtonModule } from '@angular/material/button';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatIconModule } from '@angular/material/icon';
+import { FaqSectionComponent } from './components/faq-section/faq-section.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -85,6 +85,7 @@ export function translateFactory(translate: TranslateService,
         FooterComponent,
         HeaderComponent,
         WelcomeComponent,
+        FaqSectionComponent,
     ],
     imports: [
         BrowserModule,

@@ -224,7 +224,7 @@
                 {
                     "Question": "How can I participate?",
                     "Paragraphs": [
-                        "If you or your child have ever been diagnosed with cancer, and reside in the United States, United States territories- including Puerto Rico, or Canada, you can sign up by clicking “Count Me In”. <a class='Link' href='/participation'>Click here</a> to learn more about participation.",
+                        "If you or your child have ever been diagnosed with cancer, and reside in the United States, United States territories- including Puerto Rico, or Canada, you can sign up by clicking “Count Me In”. <a class='Link' [routerLink]='[AppRoutes.Participation]'>Click here</a> to learn more about participation.",
                         "If you’re a cancer researcher, you can access the data generated through Count Me In projects through existing publicly available databases, such as the cBioPortal for Cancer Genomics and the National Cancer Institute’s Genomic Data Commons. You can also join our mailing list for updates about new data releases and publications."
                     ]
                 },
@@ -251,7 +251,7 @@
                 {
                     "Question": "How can I receive updates on Count Me In?",
                     "Paragraphs": [
-                        "Please <a class='Link' href='/join-list'>sign up for our mailing list</a> to receive updates"
+                        "Please <a class='Link' [routerLink]='[AppRoutes.JoinList]'>sign up for our mailing list</a> to receive updates"
                     ]
                 },
                 {
