@@ -11,7 +11,7 @@ import { ActivityNumericQuestionBlock } from '../../../models/activity/activityN
 import { ActivityNumericAnswer } from './activityNumericAnswer.component';
 import { MatInputModule } from '@angular/material/input';
 
-fdescribe('ActivityNumericAnswer', () => {
+describe('ActivityNumericAnswer', () => {
     const questionBlock = {
         answer: null,
         min: 1,
