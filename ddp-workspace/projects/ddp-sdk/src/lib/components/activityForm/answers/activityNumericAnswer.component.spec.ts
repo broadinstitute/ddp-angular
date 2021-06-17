@@ -11,7 +11,7 @@ import { ActivityNumericQuestionBlock } from '../../../models/activity/activityN
 import { ActivityNumericAnswer } from './activityNumericAnswer.component';
 import { MatInputModule } from '@angular/material/input';
 
-describe('ActivityNumericAnswer', () => {
+fdescribe('ActivityNumericAnswer', () => {
     const questionBlock = {
         answer: null,
         min: 1,
@@ -86,35 +86,6 @@ describe('ActivityNumericAnswer', () => {
         expect(inputElement.max).toBe('11');
     });
 
-    it('should emit null if input contains string', () => {
-        component.block = {
-            answer: null,
-            min: 0,
-            max: 10
-        } as ActivityNumericQuestionBlock;
-        spyOn(component.valueChanged, 'emit');
-        fixture.detectChanges();
-        const inputElement: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
-        component.numericField.patchValue('Invalid answer');
-        inputElement.dispatchEvent(new Event('blur'));
-        fixture.detectChanges();
-        expect(component.block.answer).toBeNull();
-        expect(component.valueChanged.emit).toHaveBeenCalledWith(null);
-    });
-
-    it('should emit value even if input is out of range so we can run validations on it', () => {
-        spyOn(component.valueChanged, 'emit');
-        fixture.detectChanges();
-        const inputElement: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
-        component.numericField.patchValue(500);
-        inputElement.dispatchEvent(new Event('blur'));
-        fixture.detectChanges();
-        expect(component.block.answer).toBe(500);
-        expect(component.valueChanged.emit).toHaveBeenCalledWith(500);
-        // fixme: somehow value is not getting reset, so we reset it here.
-        component.numericField.patchValue('');
-    });
-
     it('should emit valid answer', () => {
         component.block = {
             answer: null,
@@ -125,7 +96,6 @@ describe('ActivityNumericAnswer', () => {
         fixture.detectChanges();
         const inputElement: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
         component.numericField.patchValue(5);
-        component.onBlur('5');
         inputElement.dispatchEvent(new Event('blur'));
         fixture.detectChanges();
         expect(component.block.answer).toBe(5);
