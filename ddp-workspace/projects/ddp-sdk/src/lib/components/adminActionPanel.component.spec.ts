@@ -20,7 +20,7 @@ describe('AdminActionPanelComponent', () => {
     let component: AdminActionPanelComponent;
     let sessionMock: SessionMementoService;
 
-    beforeEach(async() => {
+    beforeEach(async () => {
         sessionMock = {
             isAuthenticatedAdminSession: () => true,
             session: ({ participantGuid: '1243' } as Session)

@@ -32,7 +32,7 @@ describe('ActivityComponent', () => {
     let participantsSearchSpy: jasmine.SpyObj<ParticipantsSearchServiceAgent>;
     let serviceAgentSpy: jasmine.SpyObj<ActivityServiceAgent>;
 
-    beforeEach(async() => {
+    beforeEach(async () => {
         const subjectPanel = mockComponent({ selector: 'ddp-subject-panel', inputs: ['subject'] });
         const adminPanel = mockComponent({ selector: 'ddp-admin-action-panel', inputs: ['activityReadonly'] });
         const activitySection = mockComponent({
