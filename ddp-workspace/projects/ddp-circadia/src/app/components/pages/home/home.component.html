@@ -22,22 +22,9 @@
       {{ 'HomePage.About.Title' | translate }}
     </h2>
 
-    <p class="paragraph mb-5">
+    <p class="paragraph">
       {{ 'HomePage.About.Paragraph' | translate }}
     </p>
-
-    <h3>
-      {{ 'HomePage.About.Subtitle' | translate }}
-    </h3>
-
-    <ul class="bullet-list">
-      <li
-        class="bullet-list__item"
-        *ngFor="let Question of 'HomePage.About.Questions' | translate"
-      >
-        {{ Question }}
-      </li>
-    </ul>
   </div>
 </section>
 
@@ -106,10 +93,6 @@
       {{ 'HomePage.Team.Title' | translate }}
     </h2>
 
-    <p class="paragraph mb-5">
-      {{ 'HomePage.Team.Description' | translate }}
-    </p>
-
     <ng-container *ngFor="let Member of 'HomePage.Team.Members' | translate">
       <div class="member">
         <div class="member__img-container">
@@ -121,14 +104,6 @@
         </div>
 
         <div class="member__info">
-          <h4 class="member__name">
-            {{ Member.Name }}
-          </h4>
-
-          <h5 class="member__title">
-            {{ Member.Title }}
-          </h5>
-
           <p class="member__bio">
             {{ Member.Bio }}
           </p>

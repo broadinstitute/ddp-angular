@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
+import { MatAccordion } from '@angular/material/expansion';
 
 @Component({
     selector: 'app-faq-section',
@@ -8,4 +9,5 @@ import { Component, Input } from '@angular/core';
 export class FaqSectionComponent {
     @Input() questions: string;
     @Input() questionsCount: number; /* don't pass the counter for displaying all questions */
+    @ViewChild(MatAccordion) accordion: MatAccordion; /* Please, do not remove. It is used outside of the component */
 }

@@ -15,7 +15,7 @@ html {
 }
 
 body {
-    font-family: 'Untitled-Sans-Regular', sans-serif;
+    font-family: $primary-font, sans-serif;
     color: $text-color;
     overflow-y: scroll;
 }

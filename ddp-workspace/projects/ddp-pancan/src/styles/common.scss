@@ -1,0 +1,17 @@
+@import '../styles/variables.scss';
+
+.static-page-title {
+    font-family: $second-font;
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: -0.08px;
+    line-height: 50px;
+}
+
+.static-page-paragraph-text {
+    opacity: 0.8;
+    font-size: 1.5rem;
+    letter-spacing: -0.1px;
+    line-height: 34px;
+}
+
