@@ -1,3 +1,5 @@
+@import '../../../styles/variables.scss';
+
 $border-color: #EBEBEB;
 $icon-width: 24px;
 $icon-margin-right: 2rem;
@@ -46,14 +48,14 @@ $question-padding: 1.5rem;
     .mat-expansion-panel-header,
     .mat-expansion-panel-content {
         font-size: 1.5rem;
-        font-family: Untitled-Sans-Regular;
+        font-family: $primary-font;
         letter-spacing: 0;
         text-align: left;
     }
 
     .mat-expansion-panel-header.mat-expanded {
         .faq-block__question {
-            font-family: Untitled-Sans-Medium;
+            font-family: $primary-font-medium;
         }
     }
 }

@@ -110,7 +110,7 @@ section {
 
             &__title {
                 display: inline;
-                font-family: Untitled-Sans-Medium;
+                font-family: $primary-font-medium;
                 letter-spacing: -0.07px;
                 line-height: 24px;
                 margin-right: 8px;
@@ -222,7 +222,7 @@ section {
 }
 
 .btn {
-    font-family: Untitled-Sans-Medium;
+    font-family: $primary-font-medium;
     font-size: 1.13rem;
     letter-spacing: -0.26px;
     padding: 1rem 2rem;

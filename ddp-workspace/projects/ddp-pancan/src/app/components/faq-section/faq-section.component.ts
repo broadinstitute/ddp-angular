@@ -9,5 +9,5 @@ import { MatAccordion } from '@angular/material/expansion';
 export class FaqSectionComponent {
     @Input() questions: string;
     @Input() questionsCount: number; /* don't pass the counter for displaying all questions */
-    @ViewChild(MatAccordion) accordion: MatAccordion;
+    @ViewChild(MatAccordion) accordion: MatAccordion; /* Please, do not remove. It is used outside of the component */
 }
