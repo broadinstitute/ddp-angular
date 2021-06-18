@@ -16,7 +16,7 @@ html {
 
 body {
     font-family: 'Untitled-Sans-Regular', sans-serif;
-    color: #000000;
+    color: $text-color;
     overflow-y: scroll;
 }
 
@@ -46,6 +46,7 @@ button {
 a {
     cursor: pointer;
     text-decoration: none;
+    color: #7154FF;
 
     &:focus, &:hover {
         text-decoration: underline;

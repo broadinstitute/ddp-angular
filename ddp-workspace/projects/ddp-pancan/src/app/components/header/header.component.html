@@ -2,13 +2,22 @@
     <div class="header-content">
         <a class="project-logo" routerLink="/">
             <img class="project-logo__img"
-                 width="60px"
-                 height="60px"
-                 src="assets/images/logo-count-me-in.png"
+                 width="55px"
+                 height="55px"
+                 src="assets/images/logo.svg"
                  [alt]="'App.Header.Logo.ImageAlt' | translate">
             <span class="project-logo__text" [innerHTML]="'App.Header.Logo.Title' | translate"></span>
         </a>
         <ng-container *ngTemplateOutlet="controls"></ng-container>
+        <div class="auth">
+            <ddp-language-selector></ddp-language-selector>
+            <div class="auth__login">
+                <ddp-sign-in-out></ddp-sign-in-out>
+            </div>
+            <a *ngIf="!isAuthenticated" routerLink="count-me-in">
+                <span translate>App.Navigation.Join</span>
+            </a>
+        </div>
         <button class="hamburger hamburger--slider" [ngClass]="{'is-active': isPanelOpened}"
                 [attr.aria-label]="'Common.Buttons.HeaderMenu.AriaLabel' | translate" (click)="openCloseMenu()">
             <span class="hamburger-box">
@@ -46,12 +55,4 @@
             </li>
         </ul>
     </nav>
-    <div class="auth">
-        <div class="auth__login">
-            <ddp-sign-in-out></ddp-sign-in-out>
-        </div>
-        <a *ngIf="!isAuthenticated" routerLink="count-me-in">
-            <span translate>App.Navigation.Join</span>
-        </a>
-    </div>
 </ng-template>
