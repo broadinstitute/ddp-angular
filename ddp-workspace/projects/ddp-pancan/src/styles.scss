@@ -46,7 +46,7 @@ button {
 a {
     cursor: pointer;
     text-decoration: none;
-    color: #7154FF;
+    color: $primary-color;
 
     &:focus, &:hover {
         text-decoration: underline;
@@ -70,7 +70,7 @@ a {
 }
 
 .Link {
-    color: #7154ff;
+    color: $primary-color;
 }
 
 // TODO: borders below for debug reason. Remove when header and footer are ready

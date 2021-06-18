@@ -224,34 +224,28 @@ section {
 .btn {
     font-family: $primary-font-medium;
     font-size: 1.13rem;
-    letter-spacing: -0.26px;
     padding: 1rem 2rem;
-    color: $text-color;
     line-height: 22px;
-    text-align: center;
-    border: 2px solid;
-    border-radius: 4px;
-    background-color: transparent;
+    border-width: 2px;
+    border-color: $text-color;
     text-decoration: none;
-    box-shadow: none;
 
-    &:focus {
-        outline: none;
-        box-shadow: 0 0 0 4px rgba(21, 156, 228, 0.4);
+    &.mat-stroked-button {
+        color: $text-color;
     }
 }
 
 .join-cmi-btn {
-    background-color: #7154FF;
-    color: #ffffff;
     font-size: 1.25rem;
-    letter-spacing: 0;
     margin: 1.56rem 0 7.5rem;
-    border: none;
 }
 
 .learn-more-btn {
     margin-top: 2.81rem;
+}
+
+.small-letter-spacing {
+    letter-spacing: -0.26px;
 }
 
 .center {
