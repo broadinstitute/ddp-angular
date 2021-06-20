@@ -132,11 +132,6 @@ var DDP_ENV = {
             DDP_ENV['auth0Audience'] = "{{.Data.auth0.loginDomain}}";
             DDP_ENV['basePepperUrl'] = "{{.Data.serverBaseUrl}}";
         {{end}}
-        {{if eq $environment "prod"}}
-            DDP_ENV['projectGAToken'] = "UA-FIX-ME";
-        {{else}}
-            DDP_ENV['projectGAToken'] = "UA-108484823-1";
-        {{end}}
     {{end}}
 {{end}}
 
