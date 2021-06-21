@@ -6,10 +6,10 @@
     top: 0;
     left: 0;
     width: 100%;
+    z-index: 1;
     height: $header-height;
     transition: all 200ms linear;
     background-color: white;
-    z-index: 1;
 }
 
 .header-content {
