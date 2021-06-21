@@ -148,6 +148,10 @@ commands:
             CONFIG_FILE_SRC_PATH="${ANGULAR_PROJECT_DIR_PATH}/output-config/pepperConfig.js"
             cp  $CONFIG_FILE_SRC_PATH $CONFIG_DIR
             echo "$CONFIG_FILE_SRC_PATH has been copied to $CONFIG_DIR"
+
+            if [[ "<<parameters.study_key>>" == "atcp" ]]; then
+              cp "${ANGULAR_PROJECT_DIR_PATH}/output-config/app.yaml" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
+            fi
           environment: #Setting this ENV variable prevents launching a new Docker within build-study-sh script
             USE_DOCKER: false
           working_directory: *repo_path

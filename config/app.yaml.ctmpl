@@ -1,4 +1,9 @@
-service: atcp
+{{$environment := env "ENVIRONMENT"}}
+{{$version := env "VERSION"}}
+{{$study := env "STUDY_KEY"}}
+{{$study_guid := env "STUDY_GUID"}}
+
+service: {{$study}}
 runtime: python37
 
 # This setting will not matter except to prevent default automatic-scaling which prevents disabling
@@ -11,8 +16,12 @@ handlers:
     static_files: dist/\1
     upload: dist/(.*\.(css|eot|gz|html|ico|js|map|png|svg|ttf|woff|woff2|jpg|jpeg|gif|png|json|pdf))
     secure: always
+{{if eq $study_guid "atcp"}}
+  {{with secret (printf "secret/pepper/%s/%s/atcp/conf" $environment $version)}}
     http_headers:
-      Access-Control-Allow-Origin: https://at-dev.auth0.com
+      Access-Control-Allow-Origin: https://{{.Data.auth0.loginDomain}}
+  {{end}}
+{{end}}
 
   - url: /(.*)
     static_files: dist/index.html
