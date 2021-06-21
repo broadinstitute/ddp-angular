@@ -6,8 +6,10 @@
     top: 0;
     left: 0;
     width: 100%;
+    height: $header-height;
     transition: all 200ms linear;
     background-color: white;
+    z-index: 1;
 }
 
 .header-content {
@@ -19,6 +21,11 @@
     height: $header-height;
 }
 
+.header_shadow {
+    box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.2);
+    transition: all ease 0.5s;
+}
+
 .navigation {
     list-style: none;
     display: flex;
@@ -27,7 +34,7 @@
 .auth {
     display: flex;
     align-items: center;
-    min-width: 200px;
+    min-width: 160px;
 }
 
 .navigation__item {
@@ -154,6 +161,7 @@
 .project-logo {
     width: 160px;
     display: flex;
+    margin-right: 15px;
 
     &__text {
         color: $text-color;
@@ -199,5 +207,9 @@
     .header-link {
         font-size: 1rem;
         line-height: normal;
+    }
+
+    .auth {
+        min-width: 200px;
     }
 }
