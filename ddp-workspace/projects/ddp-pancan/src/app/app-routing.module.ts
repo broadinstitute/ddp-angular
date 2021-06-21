@@ -20,7 +20,7 @@ const routes: Routes = [
         path: '',
         component: WelcomeComponent,
         pathMatch: 'full',
-        // canActivate: [IrbGuard]
+        canActivate: [IrbGuard]
     },
     {
         path: AppRoutes.FAQ,
@@ -47,7 +47,7 @@ const routes: Routes = [
         path: AppRoutes.CountMeIn,
         component: WorkflowStartActivityRedesignedComponent,
         canActivate: [
-            // IrbGuard,
+            IrbGuard,
             BrowserGuard
         ]
     },
