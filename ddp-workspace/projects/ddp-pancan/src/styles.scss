@@ -1,5 +1,6 @@
 @import 'styles/variables';
 @import 'styles/fonts';
+@import 'styles/common';
 
 html,
 body {
@@ -79,4 +80,10 @@ header {
 }
 footer {
     border-top: 1px solid black;
+}
+
+.SimpleButton {
+    @extend .btn-common;
+    @extend .btn-outline;
+    @extend .btn-header;
 }

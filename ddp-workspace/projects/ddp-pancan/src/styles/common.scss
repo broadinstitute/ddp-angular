@@ -15,3 +15,20 @@
     line-height: 34px;
 }
 
+.btn-common {
+    font-family: $primary-font-medium;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.btn-outline {
+    border-width: 2px;
+    border-color: $text-color;
+    background-color: transparent;
+}
+
+.btn-header {
+    font-size: 1rem;
+    padding: 0.65rem 1.5rem;
+    line-height: 20px;
+}

@@ -14,7 +14,11 @@
             <div class="auth__login">
                 <ddp-sign-in-out></ddp-sign-in-out>
             </div>
-            <a *ngIf="!isAuthenticated" routerLink="count-me-in">
+            <a *ngIf="!isAuthenticated"
+               mat-flat-button
+               class="join-button"
+               routerLink="count-me-in"
+               color="primary">
                 <span translate>App.Navigation.Join</span>
             </a>
         </div>

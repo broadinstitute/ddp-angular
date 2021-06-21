@@ -1,4 +1,5 @@
-@import '../../../styles/variables.scss';
+@import '../../../styles/variables';
+@import '../../../styles/common';
 
 .header {
     position: fixed;
@@ -26,10 +27,11 @@
 .auth {
     display: flex;
     align-items: center;
+    min-width: 200px;
 }
 
 .navigation__item {
-    margin-right: 2.8125rem;
+    margin-right: 2rem;
     display: flex;
 }
 
@@ -165,9 +167,17 @@
     color: $text-color;
     font-family: $primary-font-medium;
     letter-spacing: -0.015rem;
+    font-size: 1.5rem;
+    line-height: 3rem;
 }
 
-@media screen and (min-width: $tablet-breakpoint) {
+.join-button {
+    @extend .btn-common;
+    @extend .btn-header;
+    margin-left: 15px;
+}
+
+@media screen and (min-width: $desktop-breakpoint) {
     .hamburger {
         display: none;
     }
@@ -184,5 +194,10 @@
     .header {
         z-index: 1;
         height: $header-height;
+    }
+
+    .header-link {
+        font-size: 1rem;
+        line-height: normal;
     }
 }

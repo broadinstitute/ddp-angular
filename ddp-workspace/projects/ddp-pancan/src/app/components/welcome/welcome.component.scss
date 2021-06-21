@@ -222,16 +222,14 @@ section {
 }
 
 .btn {
-    font-family: $primary-font-medium;
+    @extend .btn-common;
+
     font-size: 1.13rem;
     padding: 1rem 2rem;
     line-height: 22px;
-    border-width: 2px;
-    border-color: $text-color;
-    text-decoration: none;
 
     &.mat-stroked-button {
-        color: $text-color;
+        @extend .btn-outline;
     }
 }
 
@@ -245,7 +243,7 @@ section {
 }
 
 .small-letter-spacing {
-    letter-spacing: -0.26px;
+    letter-spacing: -0.016rem;
 }
 
 .center {
