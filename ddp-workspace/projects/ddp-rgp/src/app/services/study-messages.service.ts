@@ -21,18 +21,18 @@ export class StudyMessagesService {
         let messages = this.convertWorkflowsToStudyMessages(response.workflows)
           .filter(message => !!message)
           .sort((a, b) => {
-            // We do sorting by group to ensure certain messages appear below
-            // others. We sort by `date` and break ties with `timestamp` on the
-            // assumption that study staff will appropriately set the dates for
-            // the various messages.
-            if (b.group === a.group) {
-              if (b.date.getTime() === a.date.getTime()) {
+            // We first sort by `date` column (getTime()) for simplicity.
+            // Some messages might have the same date, so we sort by `group`
+            // so that we follow more-or-less the spreadsheet order. Lastly,
+            // if they're in the same group, we use the timestamp.
+            if (b.date.getTime() === a.date.getTime()) {
+              if (b.group === a.group) {
                 return b.timestamp.getTime() - a.timestamp.getTime();
               } else {
-                return b.date.getTime() - a.date.getTime();
+                return b.group - a.group;
               }
             } else {
-              return b.group - a.group;
+              return b.date.getTime() - a.date.getTime();
             }
           });
 
@@ -123,10 +123,10 @@ export class StudyMessagesService {
   }
 
   private convertDateString(date: string): Date {
-      const fields = date.split('-');
-      const year = parseInt(fields[0], 10);
-      const month = parseInt(fields[1], 10) - 1;
-      const day = parseInt(fields[2], 10);
-      return new Date(year, month, day);
+    const fields = date.split('-');
+    const year = parseInt(fields[0], 10);
+    const month = parseInt(fields[1], 10) - 1;
+    const day = parseInt(fields[2], 10);
+    return new Date(year, month, day);
   }
 }
