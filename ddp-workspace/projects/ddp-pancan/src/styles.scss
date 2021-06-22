@@ -1,5 +1,6 @@
 @import 'styles/variables';
 @import 'styles/fonts';
+@import 'styles/common';
 
 html,
 body {
@@ -8,6 +9,7 @@ body {
     height: 100vh;
     font-size: 16px;
     font-weight: 400;
+    min-width: 370px;
 }
 
 html {
@@ -16,18 +18,18 @@ html {
 
 body {
     font-family: $primary-font, sans-serif;
-    color: #000000;
+    color: $text-color;
     overflow-y: scroll;
 }
 
 @media only screen and (max-width: $desktop-breakpoint) {
-    html {
+    html, body {
         font-size: 14px;
     }
 }
 
 @media only screen and (max-width: $tablet-breakpoint) {
-    html {
+    html, body {
         font-size: 12px;
     }
 }
@@ -46,6 +48,7 @@ button {
 a {
     cursor: pointer;
     text-decoration: none;
+    color: $primary-color;
 
     &:focus, &:hover {
         text-decoration: underline;
@@ -53,7 +56,9 @@ a {
 }
 
 .SimpleButton {
-    cursor: pointer;
+    @extend .btn-common;
+    @extend .btn-outline;
+    @extend .btn-header;
 }
 
 .wrapper {
@@ -69,13 +74,10 @@ a {
 }
 
 .Link {
-    color: #7154ff;
+    color: $primary-color;
 }
 
 // TODO: borders below for debug reason. Remove when header and footer are ready
-header {
-    border-bottom: 1px solid black;
-}
 footer {
     border-top: 1px solid black;
 }
