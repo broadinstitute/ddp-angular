@@ -1129,6 +1129,10 @@
     },
     "StudyMessages": {
       "Application": {
+        "PreReview": {
+          "Subject": "Application",
+          "Message": "Thank you for your interest in the Rare Genomes Project! Please see below to complete your application."
+        },
         "InReview": {
           "Subject": "Application",
           "Message": "Your application is being reviewed.",
