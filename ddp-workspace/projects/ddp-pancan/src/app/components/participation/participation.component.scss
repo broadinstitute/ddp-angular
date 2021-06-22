@@ -15,6 +15,7 @@
         display: flex;
         flex-direction: row-reverse;
         justify-content: space-around;
+        gap: 8rem;
 
         &:nth-of-type(odd) {
             background-color: $section-grey-background-color;
@@ -54,6 +55,29 @@
             font-size: 1.13rem;
             padding: 1rem 2rem;
             line-height: 22px;
+        }
+
+        &__image {
+            display: flex;
+            align-items: center;
+
+            .image {
+                width: 21.25rem;
+                height: 18.75rem;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $tablet-breakpoint) {
+    .participation {
+        .step {
+            align-items: center;
+            gap: 3rem;
+
+            &:nth-of-type(n) {
+                flex-direction: column-reverse;
+            }
         }
     }
 }
