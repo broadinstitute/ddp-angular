@@ -7,7 +7,7 @@ export enum RegistrationStatus {
   SubmittedMedicalHistory = 'SubmittedMedicalHistory',
   SubmittedGenomeStudyShippingInfo = 'SubmittedGenomeStudyShippingInfo',
   SubmittedEnrollment = 'SubmittedEnrollment',
-  Enrolled = '8',
-  NotEligible = '9',
-  Duplicate = '10',
+  Enrolled = 'Enrolled',
+  NotEligible = 'NotEligible',
+  Duplicate = 'Duplicate',
 }
