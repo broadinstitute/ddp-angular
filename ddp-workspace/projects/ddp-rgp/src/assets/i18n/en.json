@@ -1165,7 +1165,7 @@
       "ConsentSession": {
         "ScheduleNeeded": {
           "Subject": "Consent session",
-          "Message": "Please schedule an appointment for a Consent Session.<br /><a href=\"https://rgpscheduling.as.me/schedule.php\" target=\"_blank\">Schedule an appointment</a>"
+          "Message": "Please <a href=\"https://rgpscheduling.as.me/schedule.php\" target=\"_blank\">schedule an appointment</a> for a Consent Session."
         },
         "Scheduled": {
           "Subject": "Consent session",
