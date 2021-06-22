@@ -50,12 +50,8 @@ section {
         box-sizing: border-box;
 
         .image {
-            flex: 0 1 400px;
+            width: 400px;
             margin-right: 6.25rem;
-            background-image: url(/assets/images/map.png);
-            background-repeat: no-repeat;
-            background-position: top;
-            background-size: contain;
         }
 
         .description {

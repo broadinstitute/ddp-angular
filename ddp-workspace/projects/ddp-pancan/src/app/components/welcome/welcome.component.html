@@ -29,7 +29,9 @@
     </section>
 
     <section class="join">
-        <div class="image"></div>
+        <img class="image"
+             src="../../../assets/images/map.png"
+             [alt]="'App.HomePage.JoinSection.ImageAlt' | translate"/>
         <div class="description">
             <h2 class="title" translate>App.HomePage.JoinSection.Title</h2>
             <p class="text" [innerHTML]="'App.HomePage.JoinSection.Text1' | translate"></p>
@@ -44,7 +46,7 @@
                 <img class="step__image"
                      [src]="'../../../assets/images/' + step.img"
                      width="150" height="150"
-                     [alt]="'App.HomePage.ParticipateSection.' + step.key + '.Title' | translate">
+                     [alt]="'App.HomePage.ParticipateSection.' + step.key + '.ImageAlt' | translate">
 
                 <figcaption class="step__title"
                             [innerText]="'App.HomePage.ParticipateSection.' + step.key + '.Title' | translate">
@@ -105,7 +107,7 @@
     </section>
 
     <section class="join-cmi">
-        <img class="join-cmi-logo" lazy-resource src="assets/images/hands.png" [alt]="'Common.Alts.JoinCMI' | translate">
+        <img class="join-cmi-logo" lazy-resource src="assets/images/hands.png" [alt]="'App.HomePage.ImageAlt' | translate">
         <h2 class="title" translate>App.HomePage.CountMeInSection.Title</h2>
         <p class="text" translate>App.HomePage.CountMeInSection.Text</p>
         <a mat-raised-button

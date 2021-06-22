@@ -14,7 +14,6 @@
             }
         },
         "Alts": {
-            "CMI": "Count Me In logo",
             "Twitter": "Twitter logo",
             "Facebook": "Facebook logo",
             "Instagram": "Instagram logo",
@@ -36,28 +35,33 @@
             "JoinSection": {
                 "Title": "Who can join?",
                 "Text1": "Anyone who has ever been diagnosed with cancer may participate if they live in the USA or Canada.",
-                "Text2": "We welcome people of all ages, genders, races, ethnicities, and abilities."
+                "Text2": "We welcome people of all ages, genders, races, ethnicities, and abilities.",
+                "ImageAlt": "Map dotted with participants across the U.S. and Canada."
             },
             "ParticipateSection": {
                 "Title": "Here’s how to participate",
                 "Step1": {
                     "Title": "STEP 1",
                     "Time": "10-15 minutes",
-                    "Description": "Provide consent and tell us where you’ve been treated"
+                    "Description": "Provide consent and tell us where you’ve been treated",
+                    "ImageAlt": "Computer screen displaying online consent form"
                 },
                 "Step2": {
                     "Title": "STEP 2",
                     "Time": "5 minutes",
-                    "Description": "Answer questions about your cancer"
+                    "Description": "Answer questions about your cancer",
+                    "ImageAlt": "Computer screen displaying online survey"
                 },
                 "Step3": {
                     "Title": "STEP 3",
                     "Time": "10 minutes",
-                    "Description": "Provide samples (we’ll send a kit)"
+                    "Description": "Provide samples (we’ll send a kit)",
+                    "ImageAlt": "Sample collection kit"
                 },
                 "Step4": {
                     "Title": "STEP 4",
-                    "Description": "Learn with us along the way"
+                    "Description": "Learn with us along the way",
+                    "ImageAlt": "Speech bubbles sharing hearts and data visualizations"
                 },
                 "LearnMoreAboutParticipationButton": "Learn more about participation"
             },
@@ -68,7 +72,8 @@
             },
             "CountMeInSection": {
                 "Title": "Join the movement and say Count Me In",
-                "Text": "With your help, patients can be the driving force behind transformative cancer research."
+                "Text": "With your help, patients can be the driving force behind transformative cancer research.",
+                "ImageAlt": "Hands raised to volunteer"
             }
         },
         "ParticipationPage": {
@@ -78,33 +83,38 @@
                 "Time": "10-15 minutes",
                 "Title": "Provide consent for the study",
                 "Text": "This section consists of several pages, but feel free to take your time. Your progress will be automatically saved so you can come back to it later. If you are signing up for / with your child, depending on their age, we may also ask them to “assent” or agree that they would also like to participate in the study.",
-                "ViewConsentDocumentButton": "View Consent Document"
+                "ViewConsentDocumentButton": "View Consent Document",
+                "ImageAlt": "Computer screen displaying online consent form"
             },
             "Step2": {
                 "Step": "STEP 2",
                 "Time": "5 minutes",
                 "Title": "Tell us where you’ve been treated",
                 "Text": "Tell us where you’ve been treated for your cancer. We ask where patients have been treated, so that we can request medical records, and if applicable, archived tumor tissue.",
-                "ViewMedicalReleaseButton": "View Medical Release"
+                "ViewMedicalReleaseButton": "View Medical Release",
+                "ImageAlt": "Computer screen displaying medical center"
             },
             "Step3": {
                 "Step": "STEP 3",
                 "Time": "5 minutes",
                 "Title": "Respond to surveys about you and your experience with cancer",
                 "Text": "In these surveys, we ask questions about your experience with cancer, like what type of cancer you were diagnosed with, when you were diagnosed, and the types of treatments you’ve had.",
-                "ViewSurveysButton": "“View Surveys"
+                "ViewSurveysButton": "“View Surveys",
+                "ImageAlt": "Computer screen displaying online survey"
             },
             "Step4": {
                 "Step": "STEP 4",
                 "Time": "10 minutes",
                 "Title": "Provide a saliva and/or blood sample",
                 "Text": "We will send you a kit to collect a sample of your saliva and/or blood. We will study these samples to help improve our understanding of cancer.",
-                "ViewKitInstructionsButton": "View Kit Instructions"
+                "ViewKitInstructionsButton": "View Kit Instructions",
+                "ImageAlt": "Sample collection kit"
             },
             "Step5": {
                 "Step": "STEP 5",
                 "Title": "Stay involved",
-                "Text": "Over time, we will provide you with regular updates about the status of the research and share any discoveries that you have enabled us to make. We also may ask you additional questions about your experience to help with future studies — we want to hear what’s important to you."
+                "Text": "Over time, we will provide you with regular updates about the status of the research and share any discoveries that you have enabled us to make. We also may ask you additional questions about your experience to help with future studies — we want to hear what’s important to you.",
+                "ImageAlt": "Speech bubbles sharing hearts and data visualizations"
             }
         },
         "ScientificResearchPage": {
