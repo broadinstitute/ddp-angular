@@ -93,9 +93,12 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
    */
   {
     workflowKey: WorkflowKey.AcceptanceStatus,
-    condition: workflow =>
-      workflow.status === AcceptanceStatus.Accepted ||
-      workflow.status === AcceptanceStatus.MoreInfoNeeded,
+    condition: workflow => [
+        AcceptanceStatus.Accepted,
+        AcceptanceStatus.MoreInfoNeeded,
+        AcceptanceStatus.NmiToAccept,
+        AcceptanceStatus.NotAccepted,
+      ].includes(workflow.status as AcceptanceStatus),
     additionalCondition: workflows =>
       !!workflows.find(workflow => workflow.workflow === WorkflowKey.AcceptanceStatusDate && workflow.status) &&
       !workflows.find(workflow => workflow.workflow === WorkflowKey.AcuityAppointmentDate && workflow.status),
@@ -106,9 +109,12 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
   },
   {
     workflowKey: WorkflowKey.AcceptanceStatus,
-    condition: workflow =>
-      workflow.status === AcceptanceStatus.Accepted ||
-      workflow.status === AcceptanceStatus.MoreInfoNeeded,
+    condition: workflow => [
+        AcceptanceStatus.Accepted,
+        AcceptanceStatus.MoreInfoNeeded,
+        AcceptanceStatus.NmiToAccept,
+        AcceptanceStatus.NotAccepted,
+      ].includes(workflow.status as AcceptanceStatus),
     additionalCondition: workflows =>
       !!workflows.find(workflow => workflow.workflow === WorkflowKey.AcuityAppointmentDate && workflow.status) &&
       !workflows.find(workflow => workflow.workflow === WorkflowKey.DateOfConsentCall && workflow.status),
@@ -123,9 +129,12 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
    */
   {
     workflowKey: WorkflowKey.AcceptanceStatus,
-    condition: workflow =>
-      workflow.status === AcceptanceStatus.Accepted ||
-      workflow.status === AcceptanceStatus.MoreInfoNeeded,
+    condition: workflow => [
+        AcceptanceStatus.Accepted,
+        AcceptanceStatus.MoreInfoNeeded,
+        AcceptanceStatus.NmiToAccept,
+        AcceptanceStatus.NotAccepted,
+      ].includes(workflow.status as AcceptanceStatus),
     additionalCondition: workflows =>
       !!workflows.find(workflow => workflow.workflow === WorkflowKey.DateOfConsentCall && workflow.status) &&
       !workflows.find(workflow => workflow.workflow === WorkflowKey.EnrollmentDate && workflow.status),
@@ -136,9 +145,12 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
   },
   {
     workflowKey: WorkflowKey.AcceptanceStatus,
-    condition: workflow =>
-      workflow.status === AcceptanceStatus.Accepted ||
-      workflow.status === AcceptanceStatus.MoreInfoNeeded,
+    condition: workflow => [
+        AcceptanceStatus.Accepted,
+        AcceptanceStatus.MoreInfoNeeded,
+        AcceptanceStatus.NmiToAccept,
+        AcceptanceStatus.NotAccepted,
+      ].includes(workflow.status as AcceptanceStatus),
     additionalCondition: workflows =>
       !!workflows.find(workflow => workflow.workflow === WorkflowKey.EnrollmentDate && workflow.status),
     dateWorkflowKey: WorkflowKey.EnrollmentDate,
