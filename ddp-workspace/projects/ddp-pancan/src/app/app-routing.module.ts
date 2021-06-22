@@ -14,6 +14,7 @@ import {
 import { AppRoutes } from './components/app-routes';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { FaqComponent } from './components/faq/faq.component';
+import { ParticipationComponent } from './components/participation/participation.component';
 
 const routes: Routes = [
     {
@@ -25,7 +26,11 @@ const routes: Routes = [
     {
         path: AppRoutes.FAQ,
         component: FaqComponent,
-        pathMatch: 'full',
+        canActivate: [IrbGuard]
+    },
+    {
+        path: AppRoutes.Participation,
+        component: ParticipationComponent,
         canActivate: [IrbGuard]
     },
     {

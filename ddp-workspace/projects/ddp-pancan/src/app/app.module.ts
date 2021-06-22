@@ -26,6 +26,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { FaqSectionComponent } from './components/faq-section/faq-section.component';
 import { FaqComponent } from './components/faq/faq.component';
+import { ParticipationComponent } from './components/participation/participation.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -88,6 +89,7 @@ export function translateFactory(translate: TranslateService,
         WelcomeComponent,
         FaqSectionComponent,
         FaqComponent,
+        ParticipationComponent,
     ],
     imports: [
         BrowserModule,
