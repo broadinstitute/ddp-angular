@@ -1129,13 +1129,9 @@
     },
     "StudyMessages": {
       "Application": {
-        "PreReview": {
-          "Subject": "Application",
-          "Message": "Thank you for your interest in the Rare Genomes Project! Please see below to complete your application."
-        },
         "InReview": {
           "Subject": "Application",
-          "Message": "Thank you for applying! Your application is being reviewed.",
+          "Message": "Your application is being reviewed.",
           "More": "<p>We will contact you as soon as a decision about your application has been made. If you do not hear from our office within 6 weeks, please contact us.</p>"
         },
         "ThankYou": {

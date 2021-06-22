@@ -13,14 +13,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
    */
   {
     workflowKey: WorkflowKey.AcceptanceStatus,
-    condition: workflow => workflow.status === AcceptanceStatus.PreReview,
-    baseKey: 'Application',
-    stageKey: 'PreReview',
-    group: 1,
-  },
-  {
-    workflowKey: WorkflowKey.AcceptanceStatus,
-    condition: workflow => workflow.status === AcceptanceStatus.InReview,
+    condition: workflow => workflow.status === AcceptanceStatus.PreReview || workflow.status === AcceptanceStatus.InReview,
     additionalCondition: workflows =>
       // If we depend on a "date" workflow, then let's ensure we have it.
       !!workflows.find(workflow => workflow.workflow === WorkflowKey.AcceptanceStatusDate && workflow.status),
