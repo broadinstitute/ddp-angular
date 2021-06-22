@@ -22,7 +22,7 @@
 }
 
 .btn-outline {
-    border-width: 2px;
+    border-width: 1px;
     border-color: $text-color;
     background-color: transparent;
 }
@@ -31,4 +31,10 @@
     font-size: 1rem;
     padding: 0.65rem 1.5rem;
     line-height: 20px;
+}
+
+@media screen and (min-width: $desktop-breakpoint) {
+    .btn-outline {
+        border-width: 2px;
+    }
 }

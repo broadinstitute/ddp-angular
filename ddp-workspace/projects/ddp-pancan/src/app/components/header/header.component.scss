@@ -164,9 +164,13 @@
 
     &__text {
         color: $text-color;
-        line-height: 18px;
+        line-height: 1.125rem;
         padding-left: 7px;
         letter-spacing: -0.5px;
+    }
+
+    &__img {
+        width: 3.44rem;
     }
 }
 
@@ -185,12 +189,9 @@
 }
 
 @media screen and (min-width: $desktop-breakpoint) {
-    .hamburger {
-        display: none;
-    }
-
     .panel-controls,
-    .panel-opened .panel-controls {
+    .panel-opened .panel-controls,
+    .hamburger {
         display: none;
     }
 
@@ -199,7 +200,6 @@
     }
 
     .header {
-        z-index: 1;
         height: $header-height;
     }
 

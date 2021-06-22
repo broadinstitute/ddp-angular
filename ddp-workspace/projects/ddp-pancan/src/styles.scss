@@ -23,13 +23,13 @@ body {
 }
 
 @media only screen and (max-width: $desktop-breakpoint) {
-    html {
+    html, body {
         font-size: 14px;
     }
 }
 
 @media only screen and (max-width: $tablet-breakpoint) {
-    html {
+    html, body {
         font-size: 12px;
     }
 }
@@ -56,7 +56,9 @@ a {
 }
 
 .SimpleButton {
-    cursor: pointer;
+    @extend .btn-common;
+    @extend .btn-outline;
+    @extend .btn-header;
 }
 
 .wrapper {
@@ -78,10 +80,4 @@ a {
 // TODO: borders below for debug reason. Remove when header and footer are ready
 footer {
     border-top: 1px solid black;
-}
-
-.SimpleButton {
-    @extend .btn-common;
-    @extend .btn-outline;
-    @extend .btn-header;
 }
