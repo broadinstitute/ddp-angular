@@ -266,6 +266,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     workflowKey: WorkflowKey.DateKitSent,
     condition: () => true,
     additionalCondition: workflows =>
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.EnrollmentDate && workflow.status) &&
       !!workflows.find(workflow => workflow.workflow === WorkflowKey.DateKitSent && workflow.status) &&
       !workflows.find(workflow => workflow.workflow === WorkflowKey.DateKitReceived && workflow.status),
     dateWorkflowKey: WorkflowKey.DateKitSent,
@@ -277,6 +278,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
     workflowKey: WorkflowKey.DateKitReceived,
     condition: () => true,
     additionalCondition: workflows =>
+      !!workflows.find(workflow => workflow.workflow === WorkflowKey.EnrollmentDate && workflow.status) &&
       !!workflows.find(workflow => workflow.workflow === WorkflowKey.DateKitReceived && workflow.status),
     dateWorkflowKey: WorkflowKey.DateKitReceived,
     baseKey: 'Sample',
