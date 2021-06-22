@@ -102,7 +102,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
         .pipe(take(1)),
     }).subscribe(response => {
       this.status = this.registrationStatusService.findStatus(response.status);
-      this.activities = response.activities;
+
+      this.activities = response.activities.reduce((acc, activity) => {
+        if (activity.activityCode === ActivityCodes.BLOOD_TYPE) {
+          if (this.registrationStatusService.isEnrolled(this.status)) {
+            acc.push(activity);
+          }
+        } else {
+          acc.push(activity);
+        }
+
+        return acc;
+      }, []);
+
       this.isLoading = false;
     });
   }

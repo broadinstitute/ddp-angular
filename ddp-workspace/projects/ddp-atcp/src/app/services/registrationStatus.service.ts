@@ -30,6 +30,10 @@ export class RegistrationStatusService {
     );
   }
 
+  isEnrolled(workflow: WorkflowModel): boolean {
+    return workflow.status === RegistrationStatus.Enrolled;
+  }
+
   getEnrollmentMessageKey(workflow: WorkflowModel): string {
     const baseKey = 'EnrollmentStatus.Messages';
 
