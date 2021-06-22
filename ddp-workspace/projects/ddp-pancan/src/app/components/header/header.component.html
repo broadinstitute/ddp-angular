@@ -15,7 +15,7 @@
             <a *ngIf="!isAuthenticated"
                mat-flat-button
                class="join-button"
-               routerLink="count-me-in"
+               [routerLink]="AppRoutes.CountMeIn"
                color="primary">
                 <span translate>App.Navigation.Join</span>
             </a>
@@ -36,22 +36,22 @@
     <nav class="nav">
         <ul class="navigation">
             <li class="navigation__item">
-                <a class="header-link" routerLink="about-us" routerLinkActive="header-link_active" translate>
+                <a class="header-link" [routerLink]="AppRoutes.AboutUs" routerLinkActive="header-link_active" translate>
                     App.Navigation.AboutUs
                 </a>
             </li>
             <li class="navigation__item">
-                <a class="header-link" routerLink="participation" routerLinkActive="header-link_active" translate>
+                <a class="header-link" [routerLink]="AppRoutes.Participation" routerLinkActive="header-link_active" translate>
                     App.Navigation.Participation
                 </a>
             </li>
             <li class="navigation__item">
-                <a class="header-link" routerLink="scientific-research" routerLinkActive="header-link_active" translate>
+                <a class="header-link" [routerLink]="AppRoutes.ScientificResearch" routerLinkActive="header-link_active" translate>
                     App.Navigation.ScientificResearch
                 </a>
             </li>
             <li class="navigation__item">
-                <a class="header-link" routerLink="more-details" routerLinkActive="header-link_active" translate>
+                <a class="header-link" [routerLink]="AppRoutes.FAQ" routerLinkActive="header-link_active" translate>
                     App.Navigation.FAQ
                 </a>
             </li>

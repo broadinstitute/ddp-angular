@@ -2,6 +2,7 @@ import { Component, Inject, HostListener, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { WindowRef, SessionMementoService } from 'ddp-sdk';
+import { AppRoutes } from '../app-routes';
 
 @Component({
     selector: 'app-header',
@@ -11,6 +12,7 @@ import { WindowRef, SessionMementoService } from 'ddp-sdk';
 export class HeaderComponent implements OnInit {
     public isPanelOpened = false;
     public isPageScrolled = false;
+    readonly AppRoutes = AppRoutes;
 
     constructor(
         private session: SessionMementoService,
