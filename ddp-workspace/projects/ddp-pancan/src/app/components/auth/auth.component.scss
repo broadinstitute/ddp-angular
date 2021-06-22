@@ -1,0 +1,11 @@
+@import '../../../styles/common';
+
+.join-button {
+    @extend .btn-auth;
+    margin-left: 15px;
+}
+
+:host {
+    display: flex;
+    align-items: center;
+}
