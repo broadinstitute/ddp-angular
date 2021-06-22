@@ -50,7 +50,9 @@ section {
         box-sizing: border-box;
 
         .image {
-            width: 400px;
+            width: 25rem;
+            max-height: 380px;
+            align-self: center;
             margin-right: 6.25rem;
         }
 
@@ -351,12 +353,6 @@ section {
         &.participate,
         &.join-cmi {
             padding-bottom: 5rem;
-        }
-
-        &.join {
-            .image {
-                flex-basis: 300px;
-            }
         }
     }
 }
