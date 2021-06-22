@@ -30,6 +30,7 @@
 
     <section class="join">
         <img class="image"
+             lazy-resource
              src="../../../assets/images/map.png"
              [alt]="'App.HomePage.JoinSection.ImageAlt' | translate"/>
         <div class="description">
@@ -107,7 +108,10 @@
     </section>
 
     <section class="join-cmi">
-        <img class="join-cmi-logo" lazy-resource src="assets/images/hands.png" [alt]="'App.HomePage.ImageAlt' | translate">
+        <img class="join-cmi-logo"
+             lazy-resource
+             src="assets/images/hands.png"
+             [alt]="'App.HomePage.CountMeInSection.ImageAlt' | translate">
         <h2 class="title" translate>App.HomePage.CountMeInSection.Title</h2>
         <p class="text" translate>App.HomePage.CountMeInSection.Text</p>
         <a mat-raised-button
