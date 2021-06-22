@@ -394,6 +394,13 @@
                 "SignOut": "Sign Out",
                 "Continue": "Continue",
                 "RenewalFailed": "Session renewal failed. Please log out and log back in again."
+            },
+            "StudyRedirect": {
+                "Title": "Your participation",
+                "Text1": "Count Me In has an open project specific to your cancer type.",
+                "Text2": "Use the button below to join the {{study}} and learn more about this existing work.",
+                "GoToProject": "Go to project",
+                "Cancel": "Cancel"
             }
         },
         "Warning": {
