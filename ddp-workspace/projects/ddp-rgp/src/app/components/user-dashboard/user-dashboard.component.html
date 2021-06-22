@@ -20,9 +20,16 @@
 </div>
 
 <ng-template #content>
-  <div class="infobox infobox--common">
+  <div class="infobox">
     <p [innerHTML]="'DashboardPage.Info.Paragraph1' | translate"></p>
-    <p [innerHTML]="'DashboardPage.Info.Paragraph2' | translate"></p>
+    
+    <p>
+      <span [innerHTML]="'DashboardPage.Info.Paragraph2.Intro' | translate"></span>
+
+      <a [routerLink]="'/' + Routes.Faq">{{ 'DashboardPage.Info.Paragraph2.Link' | translate }}</a>
+
+      <span [innerHTML]="'DashboardPage.Info.Paragraph2.Closing' | translate"></span>
+    </p>
   </div>
 
   <app-study-messages [messages]="messages"></app-study-messages>
