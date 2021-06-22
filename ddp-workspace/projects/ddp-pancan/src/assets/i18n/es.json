@@ -14,7 +14,6 @@
             }
         },
         "Alts": {
-            "CMI": "Count Me In logo",
             "Twitter": "Twitter logo",
             "Facebook": "Facebook logo",
             "Instagram": "Instagram logo",
@@ -36,28 +35,33 @@
             "JoinSection": {
                 "Title": "[ES]Who can join?",
                 "Text1": "[ES]Anyone who has ever been diagnosed with cancer may participate if they live in the USA or Canada.",
-                "Text2": "[ES]We welcome people of all ages, genders, races, ethnicities, and abilities."
+                "Text2": "[ES]We welcome people of all ages, genders, races, ethnicities, and abilities.",
+                "ImageAlt": "[ES]Map dotted with participants across the U.S. and Canada."
             },
             "ParticipateSection": {
                 "Title": "[ES]Here’s how to participate",
                 "Step1": {
                     "Title": "PASO 1",
                     "Time": "[ES]10-15 minutes",
-                    "Description": "[ES]Provide consent and tell us where you’ve been treated"
+                    "Description": "[ES]Provide consent and tell us where you’ve been treated",
+                    "ImageAlt": "[ES]Computer screen displaying online consent form"
                 },
                 "Step2": {
                     "Title": "PASO 2",
                     "Time": "[ES]5 minutes",
-                    "Description": "[ES]Answer questions about your cancer"
+                    "Description": "[ES]Answer questions about your cancer",
+                    "ImageAlt": "[ES]Computer screen displaying online survey"
                 },
                 "Step3": {
                     "Title": "PASO 3",
                     "Time": "[ES]10 minutes",
-                    "Description": "[ES]Provide samples (we’ll send a kit)"
+                    "Description": "[ES]Provide samples (we’ll send a kit)",
+                    "ImageAlt": "[ES]Sample collection kit"
                 },
                 "Step4": {
                     "Title": "PASO 4",
-                    "Description": "Aprenda junto con nosotros"
+                    "Description": "Aprenda junto con nosotros",
+                    "ImageAlt": "[ES]Speech bubbles sharing hearts and data visualizations"
                 },
                 "LearnMoreAboutParticipationButton": "[ES]Learn more about participation"
             },
@@ -68,7 +72,8 @@
             },
             "CountMeInSection": {
                 "Title": "[ES]Join the movement and say Count Me In",
-                "Text": "[ES]With your help, patients can be the driving force behind transformative cancer research."
+                "Text": "[ES]With your help, patients can be the driving force behind transformative cancer research.",
+                "ImageAlt": "[ES]Hands raised to volunteer"
             }
         },
         "ParticipationPage": {
@@ -78,33 +83,38 @@
                 "Time": "[ES]10-15 minutes",
                 "Title": "[ES]Provide consent for the study",
                 "Text": "[ES]This section consists of several pages, but feel free to take your time. Your progress will be automatically saved so you can come back to it later. If you are signing up for / with your child, depending on their age, we may also ask them to “assent” or agree that they would also like to participate in the study.",
-                "ViewConsentDocumentButton": "[ES]View Consent Document"
+                "ViewConsentDocumentButton": "[ES]View Consent Document",
+                "ImageAlt": "[ES]Computer screen displaying online consent form"
             },
             "Step2": {
                 "Step": "PASO 2",
                 "Time": "[ES]5 minutes",
                 "Title": "[ES]Tell us where you’ve been treated",
                 "Text": "[ES]Tell us where you’ve been treated for your cancer. We ask where patients have been treated, so that we can request medical records, and if applicable, archived tumor tissue.",
-                "ViewMedicalReleaseButton": "[ES]View Medical Release"
+                "ViewMedicalReleaseButton": "[ES]View Medical Release",
+                "ImageAlt": "[ES]Computer screen displaying medical center"
             },
             "Step3": {
                 "Step": "PASO 3",
                 "Time": "[ES]5 minutes",
                 "Title": "[ES]Respond to surveys about you and your experience with cancer",
                 "Text": "[ES]In these surveys, we ask questions about your experience with cancer, like what type of cancer you were diagnosed with, when you were diagnosed, and the types of treatments you’ve had.",
-                "ViewSurveysButton": "[ES]View Surveys"
+                "ViewSurveysButton": "[ES]View Surveys",
+                "ImageAlt": "[ES]Computer screen displaying online survey"
             },
             "Step4": {
                 "Step": "PASO 4",
                 "Time": "[ES]10 minutes",
                 "Title": "[ES]Provide a saliva and/or blood sample",
                 "Text": "[ES]We will send you a kit to collect a sample of your saliva and/or blood. We will study these samples to help improve our understanding of cancer.",
-                "ViewKitInstructionsButton": "[ES]View Kit Instructions"
+                "ViewKitInstructionsButton": "[ES]View Kit Instructions",
+                "ImageAlt": "[ES]Sample collection kit"
             },
             "Step5": {
                 "Step": "PASO 5",
                 "Title": "[ES]Stay involved",
-                "Text": "[ES]Over time, we will provide you with regular updates about the status of the research and share any discoveries that you have enabled us to make. We also may ask you additional questions about your experience to help with future studies — we want to hear what’s important to you."
+                "Text": "[ES]Over time, we will provide you with regular updates about the status of the research and share any discoveries that you have enabled us to make. We also may ask you additional questions about your experience to help with future studies — we want to hear what’s important to you.",
+                "ImageAlt": "[ES]Speech bubbles sharing hearts and data visualizations"
             }
         },
         "ScientificResearchPage": {

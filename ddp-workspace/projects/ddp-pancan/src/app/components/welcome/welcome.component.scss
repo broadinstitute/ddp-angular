@@ -50,12 +50,10 @@ section {
         box-sizing: border-box;
 
         .image {
-            flex: 0 1 400px;
+            width: 25rem;
+            max-height: 380px;
+            align-self: center;
             margin-right: 6.25rem;
-            background-image: url(/assets/images/map.png);
-            background-repeat: no-repeat;
-            background-position: top;
-            background-size: contain;
         }
 
         .description {
@@ -290,7 +288,7 @@ section {
             flex-direction: column;
 
             .image {
-                margin-right: 0;
+                margin: 0 auto;
             }
         }
 
@@ -355,12 +353,6 @@ section {
         &.participate,
         &.join-cmi {
             padding-bottom: 5rem;
-        }
-
-        &.join {
-            .image {
-                flex-basis: 300px;
-            }
         }
     }
 }
