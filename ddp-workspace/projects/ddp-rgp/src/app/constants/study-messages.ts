@@ -164,7 +164,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
       workflow.status === AcceptanceStatus.Accepted ||
       workflow.status === AcceptanceStatus.MoreInfoNeeded,
     additionalCondition: workflows =>
-      !!workflows.find(workflow => workflow.workflow === WorkflowKey.EnrollmentDate && workflow.status) &&
+      !workflows.find(workflow => workflow.workflow === WorkflowKey.EnrollmentDate && workflow.status) &&
       !!workflows.find(workflow =>
           workflow.workflow === WorkflowKey.InactiveReason &&
           workflow.status === InactiveReason.Declined),
