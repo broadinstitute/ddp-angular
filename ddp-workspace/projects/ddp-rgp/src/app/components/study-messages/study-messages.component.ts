@@ -30,9 +30,9 @@ export class StudyMessagesComponent {
       .pipe(map(translation => translation !== key));
   }
 
-  hasAtLeastOneMessage(): boolean {
+  numTablesToDisplay(): number {
     return this.persons
-      .map(person => person.messages.length)
-      .reduce((a, b) => a + b, 0) > 0;
+      .filter(person => person.messages.length > 0)
+      .length;
   }
 }

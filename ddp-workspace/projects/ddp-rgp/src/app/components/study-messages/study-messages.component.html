@@ -1,11 +1,11 @@
-<div class="study-messages" *ngIf="hasAtLeastOneMessage()">
+<div class="study-messages" *ngIf="numTablesToDisplay() > 0">
   <h2 class="study-messages__title">
     {{ 'DashboardPage.StudyMessages.Title' | translate }}
   </h2>
 
   <ng-container *ngFor="let person of persons">
-    <div *ngIf="person.messages.length > 1">
-      <h4 class="app-table__name" *ngIf="persons.length > 1">
+    <div *ngIf="person.messages.length > 0">
+      <h4 class="app-table__name" *ngIf="numTablesToDisplay() > 1">
         {{ person.firstName }}
       </h4>
 
