@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { StudyPerson } from '../../models/StudyPerson';
 import { StudyMessage } from '../../models/StudyMessage';
 
 @Component({
@@ -11,7 +12,7 @@ import { StudyMessage } from '../../models/StudyMessage';
   styleUrls: ['./study-messages.component.scss'],
 })
 export class StudyMessagesComponent {
-  @Input() messages: StudyMessage[] = [];
+  @Input() persons: StudyPerson[] = [];
   displayedColumns = ['date', 'title', 'description'];
   showMoreMap: Record<string, boolean> = {};
 
