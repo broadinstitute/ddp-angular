@@ -1,6 +1,6 @@
 @import '../styles/variables.scss';
 
-.static-page-title {
+@mixin static-page-title {
     font-family: $secondary-font;
     font-size: 2.5rem;
     font-weight: 600;
@@ -8,14 +8,14 @@
     line-height: 50px;
 }
 
-.static-page-paragraph-text {
+@mixin static-page-paragraph-text {
     opacity: 0.8;
     font-size: 1.5rem;
     letter-spacing: -0.1px;
     line-height: 34px;
 }
 
-.participate-step-label {
+@mixin participate-step-label {
     font-size: 1rem;
     font-family: $primary-font-medium;
     letter-spacing: -0.07px;
@@ -23,37 +23,35 @@
     margin-right: 0.5rem;
 }
 
-.participate-step-time {
+@mixin participate-step-time {
     font-size: 1rem;
     letter-spacing: -0.07px;
     line-height: 24px;
 }
 
-.btn-common {
+@mixin btn-common {
     font-family: $primary-font-medium;
     text-decoration: none;
     border-radius: 4px;
 }
 
-.btn-outline {
+@mixin btn-outline {
     border-width: 1px;
     border-color: $text-color;
     background-color: transparent;
+
+    @media screen and (min-width: $desktop-breakpoint) {
+        border-width: 2px;
+    }
 }
 
-.btn-header {
+@mixin btn-header {
     font-size: 1rem;
     padding: 0.65rem 1.5rem;
     line-height: 20px;
 }
 
 // for buttons
-.small-letter-spacing {
+@mixin small-letter-spacing {
     letter-spacing: -0.016rem;
-}
-
-@media screen and (min-width: $desktop-breakpoint) {
-    .btn-outline {
-        border-width: 2px;
-    }
 }

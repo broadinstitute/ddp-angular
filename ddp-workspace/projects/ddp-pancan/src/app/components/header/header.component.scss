@@ -183,8 +183,8 @@
 }
 
 .join-button {
-    @extend .btn-common;
-    @extend .btn-header;
+    @include btn-common;
+    @include btn-header;
     margin-left: 15px;
 }
 

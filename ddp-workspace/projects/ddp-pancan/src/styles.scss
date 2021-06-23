@@ -56,9 +56,9 @@ a {
 }
 
 .SimpleButton {
-    @extend .btn-common;
-    @extend .btn-outline;
-    @extend .btn-header;
+    @include btn-common;
+    @include btn-outline;
+    @include btn-header;
 }
 
 .wrapper {

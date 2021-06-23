@@ -6,13 +6,13 @@
     text-align: center;
 
     .title {
-        @extend .static-page-title;
+        @include static-page-title;
         margin-top: 0;
         margin-bottom: 4.56rem;
     }
 
     .text {
-        @extend .static-page-paragraph-text
+        @include static-page-paragraph-text;
     }
 
     .expand-btn {
