@@ -18,5 +18,4 @@ export class ParticipationComponent {
         { img: 'step4_big.png', link: 'kit-instructions.pdf' },
         { img: 'step5_big.png' }
     ];
-    readonly translationStepData = (stepNumber: string, data: string) =>  ['App.ParticipationPage.Step', stepNumber, data].join('');
 }

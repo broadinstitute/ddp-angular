@@ -1,27 +1,23 @@
 <main class="participation">
     <h2 class="title" translate>App.ParticipationPage.Title</h2>
-    <section *ngFor="let stepNumber of '12345'.split(''); let last=last;" class="step">
+    <section *ngFor="let step of 'App.ParticipationPage.Steps' | translate; let i = index;" class="step">
         <div class="step__data">
-            <span class="step__label"
-                  [innerText]="translationStepData(stepNumber, '.Step') | translate">
-            </span>
-            <span class="step__time" *ngIf="!last"
-                  [innerText]="translationStepData(stepNumber, '.Time') | translate">
-            </span>
-            <h2 class="step__title" [innerText]="translationStepData(stepNumber, '.Title') | translate"></h2>
-            <p class="step__text" [innerText]="translationStepData(stepNumber, '.Text') | translate"></p>
+            <span class="step__label">{{step.Step}}</span>
+            <span class="step__time" *ngIf="step.Time">{{step.Time}}</span>
+            <h2 class="step__title" >{{step.Title}}</h2>
+            <p class="step__text">{{step.Text}}</p>
 
-            <a mat-stroked-button *ngIf="!last"
+            <a mat-stroked-button *ngIf="step.Button"
                target="_blank"
-               [href]="stepsData[stepNumber - 1].link"
+               [href]="stepsData[i].link"
                class="step__btn">
-                {{translationStepData(stepNumber, '.Button') | translate}}
+                {{step.Button}}
             </a>
         </div>
         <div class="step__image">
             <img class="image"
-                 [src]="'../../../assets/images/step' + stepNumber + '_big.png'"
-                 [alt]="translationStepData(stepNumber, '.ImageAlt') | translate">
+                 [src]="'../../../assets/images/step' + (i+1) + '_big.png'"
+                 [alt]="step.ImageAlt">
         </div>
     </section>
 </main>

@@ -43,21 +43,15 @@
     <section class="participate">
         <h2 class="title" translate>App.HomePage.ParticipateSection.Title</h2>
         <div class="steps container">
-            <figure class="step" *ngFor="let step of participationSteps; let last=last;">
+            <figure class="step" *ngFor="let step of 'App.HomePage.ParticipateSection.Steps' | translate; let i = index;">
                 <img class="step__image"
-                     [src]="'../../../assets/images/' + step.img"
+                     [src]="'../../../assets/images/' + participationStepsImages[i]"
                      width="150" height="150"
-                     [alt]="'App.HomePage.ParticipateSection.' + step.key + '.ImageAlt' | translate">
+                     [alt]="step.ImageAlt">
 
-                <figcaption class="step__title"
-                            [innerText]="'App.HomePage.ParticipateSection.' + step.key + '.Title' | translate">
-                </figcaption>
-                <span class="step__time" *ngIf="!last"
-                      [innerText]="'App.HomePage.ParticipateSection.' + step.key + '.Time' | translate">
-                </span>
-                <div class="step__description"
-                     [innerText]="'App.HomePage.ParticipateSection.' + step.key + '.Description' | translate">
-                </div>
+                <figcaption class="step__title">{{step.Title}}</figcaption>
+                <span class="step__time" *ngIf="step.Time">{{step.Time}}</span>
+                <div class="step__description">{{step.Description}}</div>
             </figure>
         </div>
         <div class="container">
