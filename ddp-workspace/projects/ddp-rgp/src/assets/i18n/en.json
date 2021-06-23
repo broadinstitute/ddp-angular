@@ -427,7 +427,7 @@
                 {
                     "question": "What is the goal of The Rare Genomes Project?",
                     "answers": [
-                        "The goal of the Rare Genomes Project is to discover the genes underlying undiagnosed rare, genetic conditions by providing families affected by rare disease access to whole genomic sequencing."
+                        "The goal of the Rare Genomes Project is to discover the genes underlying undiagnosed rare, genetic conditions by providing access to genomic sequencing to families affected by rare disease."
                     ]
                 },
                 {
@@ -440,7 +440,7 @@
                 {
                     "question": "Who is conducting the research?",
                     "answers": [
-                        "The Rare Genomes Project was launched at the Broad Institute of MIT and Harvard by researchers Daniel MacArthur, PhD and Heidi Rehm, PhD. We are also working in collaboration with Monkol Lek, PhD from Yale University, Eric Liao, MD from Massachusetts General Hospital, Carsten Bonnemann, MD from NIH, and the Lab for Molecular Medicine at Partners HealthCare Center for Personalized Medicine.",
+                        "The Rare Genomes Project was launched by researchers Daniel MacArthur, PhD and Heidi Rehm, PhD at the Broad Institute of MIT and Harvard. We are also working in collaboration with Monkol Lek, PhD from Yale University, Eric Liao, MD from Massachusetts General Hospital, and the Lab for Molecular Medicine at Partners HealthCare Center for Personalized Medicine.",
                         "Our team is made up of researchers, physicians, software developers, genetic counselors, and study coordinators. Learn more about us <a href=\"/about-us\" class=\"Link\">here</a>."
                     ]
                 }
@@ -480,15 +480,15 @@
                     ]
                 },
                 {
-                    "question": "What type of genetic testing is performed by the Rare Genomes Project offering?",
+                    "question": "What type of genetic testing is performed by the Rare Genomes Project?",
                     "answers": [
-                        "The Rare Genomes Project offers Whole Genome Sequencing (WGS). WGS is a different test than Whole Exome Sequencing (WES), which is a more focused test that is more commonly covered by insurance companies. Sometimes, we may perform additional tests including Structural Variant Analysis and RNAseq. To learn more about WGS and other types of genetic testing, we recommend reading through Genetics Home Reference's <a href=\"https://ghr.nlm.nih.gov/primer#testing\" target=\"_blank\" class=\"Link\">website</a>."
+                        "The Rare Genomes Project performs whole genome sequencing (WGS). WGS is a different test than whole exome sequencing (WES), which is a more focused test that is more commonly covered by insurance companies. Sometimes, we may perform additional tests including RNA sequencing. To learn more about WGS and other types of genetic testing, we recommend reading through the U.S. National Library of Medicine's MedlinePlus <a href=\"https://ghr.nlm.nih.gov/primer#testing\" target=\"_blank\" class=\"Link\">website</a>."
                     ]
                 },
                 {
                     "question": "I have already had whole genome sequencing. Will the Rare Genomes Project accept my external data for reanalysis?",
                     "answers": [
-                        "On a case-by-case basis. If you have had prior genomic sequencing, fill out an application to our study and indicate that you have prior sequencing data available. If your application is accepted, we will reach out to you and discuss the next steps. Due to the resources involved in obtaining and manipulating data from other sources, it is sometimes more time and cost effective for us to sequence your genome again."
+                        "On a case-by-case basis. If you have had prior genomic sequencing, fill out an application to our study and indicate that you have prior sequencing data available. If your application is accepted, we will reach out to you and discuss the next steps. Due to the resources involved in obtaining and incorporating data from other sources, it is sometimes more time and cost effective for us to sequence your genome again."
                     ]
                 }
             ]
@@ -505,19 +505,19 @@
                 {
                     "question": "Can I apply if I live outside the United States?",
                     "answers": [
-                        "We currently are only able to enroll individuals that live in the United States. However, we hope to eventually expand the project. If you live outside the United States and are interested in participating, we encourage you to indicate on our <a href=\"/count-me-in\" class=\"Link\">application page</a> that you do not live in the United States and then join our mailing list on the following page when prompted. We will contact you if we change our participation requirements in the future."
+                        "We currently are only able to enroll individuals that live in the United States."
                     ]
                 },
                 {
                     "question": "Who in my family should participate?",
                     "answers": [
-                        "The nature of this project requires that the person in your family with an undiagnosed genetic condition participate. Although not a requirement, having additional family members participate, especially both of the patient's biological parents and additional affected family members, improves our chances of finding the genetic cause of the rare, undiagnosed condition. For example, a study of whole exome sequencing showed that analysis of parents along with affected children increased the likelihood of diagnosis from 22% to 31% (<a href=\"https://jamanetwork.com/journals/jama/fullarticle/1918775\" target=\"_blank\" class=\"Link\">Lee et al. 2014</a>)."
+                        "The nature of this project requires that the person in your family with the undiagnosed genetic condition participate. Participation by additional family members, especially both biological parents and any additional affected family members, improves our chances of finding the genetic cause of the rare, undiagnosed condition, but participation by others is not a requirement. Studies have shown that analysis of parents along with affected children increases the likelihood of diagnosis from 22% to 31% (<a href=\"https://jamanetwork.com/journals/jama/fullarticle/1918775\" target=\"_blank\" class=\"Link\">Lee et al. 2014</a>)."
                     ]
                 },
                 {
-                    "question": "Can I still apply to the Rare Genomes Project if the affected family member is adopted, or one biological parent is unavailable?",
+                    "question": "Can I still apply to the Rare Genomes Project in cases of adoption or if one biological parent is unavailable?",
                     "answers": [
-                        "Yes. In cases where one biological parent is unavailable, we may ask about the availability of their other relatives."
+                        "Yes. We accept individuals regardless of the availability of other family members to participate. In cases where one biological parent is unavailable, we may ask about the availability of their other relatives."
                     ]
                 },
                 {
@@ -540,31 +540,38 @@
                 {
                     "question": "How and where do I get my blood drawn?",
                     "answers": [
-                        "We will mail you a pre-paid specimen collection kit for you to have your blood drawn at a location of your choosing. We have partnered with Quest Diagnostics, a company with <a href=\"https://appointment.questdiagnostics.com/patient/confirmation\" target=\"_blank\" class=\"Link\">thousands of blood draw locations</a> across the United States and Puerto Rico, who will draw blood for the study and bill us directly. Alternatively, you can have your blood drawn by a local provider. If you are billed for this, send us a receipt for reimbursement."
+                        "We will mail you a pre-paid specimen collection kit for you to have your blood drawn at a location of your choosing. We have partnered with Quest Diagnostics, a company with <a href=\"https://appointment.questdiagnostics.com/patient/confirmation\" target=\"_blank\" class=\"Link\">thousands of blood draw locations</a> across the United States and Puerto Rico, who will draw blood for the study and bill us directly. Alternatively, you can have your blood drawn by a local provider. If you are billed for this, send us a receipt for reimbursement.",
+                        "Regardless of where you have blood drawn, <span class=\"AccentUnderline\">please confirm with the technician that they have labeled both the blood tube and the paperwork with your legal name and date of birth</span>."
                     ]
                 },
                 {
                     "question": "What happens after I return my blood kit?",
                     "answers": [
-                        "After your kit returns to our facilities, we will extract DNA from your blood sample and prepare it for DNA sequencing or targeted testing."
+                        "After your kit is sent back to us, we will extract DNA from the blood sample and prepare it for DNA sequencing or targeted testing."
                     ]
                 },
                 {
                     "question": "Who in my family will get their genome sequenced?",
                     "answers": [
-                        "It depends. Typically, we perform genome sequencing on the affected individual(s) in the family and their biological parents (when available). We typically only perform targeted testing for specific variants of interest in unaffected family members."
+                        "It depends. Typically, we perform genome sequencing on the affected individual(s) in the family and their biological parents, when possible. We typically only perform targeted testing for specific variants of interest in unaffected family members."
+                    ]
+                },
+                {
+                    "question": "What medical records are needed?",
+                    "answers": [
+                        "We require medical records from the affected family member(s). For more information about the types of records that are needed, please see our <a href=\"/sharing-guide.pdf\" target=\"_blank\" class=\"Link\">Guide to Sharing Health Information</a>."
                     ]
                 },
                 {
                     "question": "What else might I be asked to share if I participate in this project?",
                     "answers": [
-                        "We require medical records from the affected family member(s). We may also inquire about the availability of excess tissue from clinical procedures for additional testing. Because this study does not include a physical examination by study staff, we will also ask participants to share a photograph; this is optional."
+                        "We may inquire about the availability of excess tissue from clinical procedures for additional testing. Because this study does not include a physical examination by study staff, we may also ask participants to share a photograph; this is optional."
                     ]
                 },
                 {
                     "question": "Why am I being asked for photographs?",
                     "answers": [
-                        "We routinely ask for photographs of the member of the family with the undiagnosed condition. Some genetic syndromes are known to cause characteristic or subtle facial features that we consider when determining if a participant’s condition is related to a genetic variant. Photographs are considered part of the patient’s medical record and will not be shared externally without permission."
+                        "We may ask for photographs of the member of the family with the undiagnosed condition. Some genetic syndromes are known to cause characteristic or subtle facial features that we consider when determining if a participant’s condition is related to a genetic variant. Photographs are considered part of the patient’s medical record and will not be shared externally without permission."
                     ]
                 },
                 {
@@ -587,19 +594,19 @@
                 {
                     "question": "Will I receive results?",
                     "answers": [
-                        "Our goal is to find the genetic explanation for the undiagnosed condition in each family who enrolls, but we cannot guarantee a result for each family. If we are able to find a genetic cause of your condition, we will work with the medical provider of your choice to return results that are known or suspected to be related to the rare disease in the family."
+                        "Our goal is to find the genetic explanation for the undiagnosed condition in each family who enrolls, but we cannot guarantee that we will have a result for each family. If we find a genetic variant(s) that may explain the genetic condition in the family member with the condition, we work with them to clinically confirm and return the results. We do not return results to unaffected family members."
                     ]
                 },
                 {
                     "question": "Will I receive results unrelated to the rare condition for which I applied?",
                     "answers": [
-                        "We do not actively search for genetic results unrelated to the rare condition in the family. However, if we find a variant that causes a condition with treatment implications, we will provide the option of clinically confirming the result to have it returned."
+                        "We do not actively search for genetic results unrelated to the rare condition in the family. However, if we find a genetic variant that causes a condition with treatment implications, we will contact you to discuss the option of clinically confirming the result to have it returned."
                     ]
                 },
                 {
                     "question": "How will I receive my results?",
                     "answers": [
-                        "You can only receive results that have been confirmed in a Clinical Laboratory Improvement Amendments (CLIA)-certified laboratory. If we find results that we believe may explain the underlying cause of the rare condition present in your family, we will contact you and ask if you would like to have the findings clinically confirmed in a CLIA-certified laboratory. A genetic counselor on our staff will work with a doctor of your choice to order testing through the CLIA lab."
+                        "You can only receive results that have been confirmed in a Clinical Laboratory Improvement Amendments (CLIA)-certified laboratory. If we find results that we believe may explain the underlying cause of the rare condition present in your family, we will contact you and ask if you would like to have the findings clinically confirmed in a CLIA-certified laboratory. A genetic counselor on our staff will work with a doctor of your choice to order testing through the CLIA lab. The doctor who orders the clinical test will be the one who shares the results with you."
                     ]
                 }
             ]
@@ -610,13 +617,13 @@
                 {
                     "question": "How will my genetic data be shared?",
                     "answers": [
-                        "One of the goals of this project is to improve rare disease diagnosis for participants and the rare disease community as a whole. Data sharing supports this goal by allowing researchers and clinicians around the world to access the de-identified genetic data generated in our project. Learn more about how we share de-identified data <a href=\"/privacy-and-your-data\" class=\"Link\">here</a>."
+                        "One of the goals of this project is to improve rare disease diagnosis for participants and the rare disease community as a whole. Data sharing supports this goal by allowing researchers and clinicians around the world to access and perform research on the de-identified genetic data generated in this project. Learn more about how we share de-identified data <a href=\"/privacy-and-your-data\" class=\"Link\">here</a>."
                     ]
                 },
                 {
                     "question": "Can I have access to my genetic sequencing data?",
                     "answers": [
-                        "Unfortunately, no. Because the genomic sequencing in this study will be performed in a research laboratory (non-CLIA laboratory), federal regulations prohibit us from directly releasing your individual raw sequencing data to you."
+                        "Unfortunately, no. Because the genomic sequencing in this study will be performed in a research laboratory (non-CLIA laboratory), federal regulations prohibit us from directly releasing your sequencing data to you. However, we are permitted to release data to other research studies at your request."
                     ]
                 },
                 {
@@ -628,13 +635,7 @@
                 {
                     "question": "Can outside researchers request samples from this study for use in their own research?",
                     "answers": [
-                        "In some cases, we may share de-identified samples with external collaborators. Please contact us to learn more"
-                    ]
-                },
-                {
-                    "question": "Can outside researchers submit a cohort of samples be sequenced through this project?",
-                    "answers": [
-                        "While the Rare Genomes Project works directly with patients, the Broad Center for Mendelian Genomics (CMG) may be interested in collaborating with external researchers. To learn more, visit the CMG's <a href=\"https://cmg.broadinstitute.org\" target=\"_blank\" class=\"Link\">website</a>."
+                        "In some cases, we may share de-identified samples with external collaborators. Please contact us to learn more."
                     ]
                 }
             ]
@@ -645,7 +646,7 @@
                 {
                     "question": "How can I refer families with rare and undiagnosed genetic conditions to this project?",
                     "answers": [
-                        "If you are a family involved in the Rare Genomes Project and know other families who might benefit from participation, please direct them to our website or have them contact us at <a href=\"mailto:raregenomes@broadinstitute.org\" class=\"Link\">raregenomes@broadinstitute.org</a>. If you would like to share your participation with others, feel free to post the link to our website on your social media pages so that more patients can learn about the project.",
+                        "If you know families who might benefit from participation in the Rare Genomes Project, please direct them to our website or have them contact us at <a href=\"mailto:raregenomes@broadinstitute.org\" class=\"Link\">raregenomes@broadinstitute.org</a>. If you would like to share your participation with others, feel free to post the link to our website on your social media pages so that more families can learn about the project.",
                         "If you are a clinician who cares for a patient you believe could benefit from the Rare Genomes Project, encourage the family to fill out an online application on this website and have them indicate your name when asked about a referring provider."
                     ]
                 },
