@@ -832,7 +832,7 @@
         },
         "GenomicInformation": {
             "Title": "How We Share Full Genomic Information",
-            "Text1": "We share full genomic sequencing data and summarized medical information through two platforms to help increase the pace of scientific discovery. Data is stored at the Broad Institute and accessible through its Data Use Oversight System",
+            "Text1": "We share full genomic sequencing data and summarized medical information through two platforms to help increase the pace of scientific discovery. For example, data is stored at the Broad Institute and accessible after approval by its Data Use Oversight System",
             "Text2": "DUOS",
             "Text3": "We also share data through a similar, federally-funded genomic database called",
             "Text4": "AnVIL",
@@ -844,7 +844,7 @@
         },
         "Stored": {
             "Question": "How is my data stored?",
-            "Answer": "We store genetic and electronic data (such as electronic medical records) on secure, encrypted systems belonging to the Broad Institute and Partners HealthCare, the hospital organization responsible for this project. Your data is labeled with a randomized, numerical study ID, and access to personal identifiers is restricted to select study staff. Physical data (such as paper medical records) are stored in a secure, locked cabinet in the study staff office."
+            "Answer": "We store genetic and electronic data (such as electronic medical records) on secure, encrypted systems belonging to the Broad Institute and Partners HealthCare, the hospital organization responsible for this project. Your data is labeled with a randomized, numerical study ID available only to study staff. Physical data (such as paper medical records) are stored in a secure, locked cabinet in the study staff office."
         },
         "Shared": {
             "Question": "Will my name or personal information be shared with other researchers and clinicians?",
@@ -852,7 +852,7 @@
         },
         "Profit": {
             "Question": "Will the Rare Genomes Project profit off of my data?",
-            "Answer": "No. The Rare Genomes Project is a non-profit research study and will not sell your genomic data."
+            "Answer": "Never. The Rare Genomes Project is a non-profit research study and will not sell your genomic data."
         },
         "Ending": {
             "Text1": "We discuss data sharing during the consent call if you are accepted into the project and will make sure you understand how your data will be used. If you have questions or concerns about privacy that are not answered above, please contact us by email at",
