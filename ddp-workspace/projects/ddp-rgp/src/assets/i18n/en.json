@@ -861,16 +861,16 @@
     },
     "ForYourPhysicianPage": {
         "Title": "For your Physician",
-        "Intro": "The Rare Genomes Project is a research study housed at The Broad Institute of MIT and Harvard, a non-profit academic research institution focused on using genomic data to better understand human health and disease. Our team, led by investigators Daniel MacArthur and Heidi Rehm, has a specific focus on understanding the genetic basis of very rare and undiagnosed conditions. Our mission in the Rare Genomes Project is to partner directly with patients, families, advocates, and clinicians like you, to speed the rate of rare disease diagnosis and increase patients’ access to genomic research.",
+        "Intro": "The Rare Genomes Project is a research study at The Broad Institute of MIT and Harvard, a non-profit academic research institution focused on using genomic data to better understand human health and disease. Our team, led by investigator Heidi Rehm, has a specific focus on understanding the genetic basis of very rare and undiagnosed conditions. Our mission is to partner directly with patients, families, advocates, and clinicians and to increase patients’ access to genomic research.",
         "DownloadPDF": "Download PDF",
         "HowItWorks": {
             "Title": "How it works",
             "Paragraphs": [
                 "The Rare Genomes Project provides undiagnosed families with the opportunity to participate in a genomic research study, regardless of where in the United States they live. To ensure that participation is made broadly available to any eligible family, all study procedures can be completed from, or nearby, the patient’s home.",
-                "Interested participants and families can visit <a href=\"http://raregenomes.org\" target=\"_blank\" class=\"Link\">www.raregenomes.org</a> to learn more about the project. By clicking “Apply,” visitors to the site will be directed to complete a survey so that our team can begin to understand the condition affecting the family. Our clinical team will review each submission and re-contact eligible families for participation. A videoconference will be scheduled to discuss the project in more detail; families interested in participating will electronically sign the informed consent. As part of the consent process, families will sign a medical records authorization so that our team can access a copy of the participant’s medical records.",
-                "We will send a collection kit to enrolled families who can choose to have their blood drawn at a Quest Diagnostics Patient Service Center (<a href=\"http://questdiagnostics.com/appointment\" target=\"_blank\" class=\"Link\">www.questdiagnostics.com/appointment</a>) or by a phlebotomist of their choice (including at their local physician’s or hospital’s lab). Saliva kits are also available for participants who are unable to have a blood draw. The sample collection kits will be mailed back to the Broad Institute Genomics Platform, where DNA extraction and DNA sequencing will be performed.",
-                "Our team will analyze genomic data alongside each family’s clinical and personal story with the goal of identifying the genetic basis of the condition present in the family. If we are able to identify the cause of disease, we will re-contact the family and request a second sample for clinical validation, which will be performed at the Partners Laboratory for Molecular Medicine. A clinical report describing our findings will be provided directly to the family and the family’s doctor.",
-                "This project is dedicated to rapid and open data sharing. Genetic and clinical data generated in this project will be shared broadly with the wider rare and undiagnosed community, as well as other clinicians and researchers, through controlled-access genomic databases, as well as the Matchmaker Exchange, and Clinvar."
+                "Interested participants and families can visit <a href=\"http://raregenomes.org\" target=\"_blank\" class=\"Link\">www.raregenomes.org</a> to learn more about the project. By clicking “Start an Application,” they can apply to participate. Our clinical team will review each application and eligible families will be invited to enroll.",
+                "We will send a collection kit to enrolled families who can choose to have blood drawn at a Quest Diagnostics Patient Service Center (<a href=\"http://questdiagnostics.com/appointment\" target=\"_blank\" class=\"Link\">www.questdiagnostics.com/appointment</a>) or at another phlebotomy location of their choice. In some cases, we may be able to request DNA from prior genetic testing. The sample collection kits will be mailed back to our lab, where DNA extraction and genomic sequencing will be performed.",
+                "Our team will analyze genomic data alongside each family’s clinical information with the goal of identifying the genetic basis of the condition present in the family. If we are able to identify the cause of disease, we will re-contact the family and pursue clinical confirmation in partnership with a local provider of their choosing. The clinical confirmation report will be issued to the local ordering provider.",
+                "This project is dedicated to rapid and open data sharing. De-identified genetic and clinical data generated in this project will be shared broadly with the wider rare and undiagnosed community, as well as other clinicians and researchers, through controlled-access genomic databases, as well as the Matchmaker Exchange, and Clinvar."
             ]
         },
         "EligibilityCriteria": {
@@ -879,7 +879,7 @@
                 {
                     "Title": "Patients and families with <span class=\"Accent\">a rare and genetically undiagnosed condition</span> who:",
                     "Items": [
-                        "Understand English",
+                        "Are English- or Spanish-speaking",
                         "Live in the United States",
                         "Are currently under the care of a doctor that is helping to understand the cause of the patient’s condition"
                     ]
@@ -888,24 +888,24 @@
                     "Title": "At this time, we are unable to include patients and families that:",
                     "Items": [
                         "Have a suspected or known environmentally caused condition",
-                        "Have any condition known not to involve a genetic link",
+                        "Have any condition not likely to be monogenic",
                         "Have a genetic diagnosis that fully explains the patient’s condition."
                     ]
                 }
             ]
         },
         "Help": {
-            "Title": "How you can help",
+            "Title": "How to refer a family",
             "Text": "If you currently provide care for families that you think would be a good fit for participation in this project, please refer them to our website <a href=\"http://raregenomes.org\" target=\"_blank\" class=\"Link\">www.raregenomes.org</a>. We also partner directly with clinicians, hospitals, and institutions to increase awareness about the project. If you would like us to provide brochures and informational materials for patients that visit your clinic, please contact us."
         },
         "Role": {
             "Title": "Your role in the project",
-            "Text1": "We are interested in partnering with enrolled families’ clinicians to facilitate the return of genomic, clinically-confirmed, research results discovered in this project.",
-            "Text2": "Other optional ways that you could be involved:",
-            "Item1": "Aggregating and summarizing the family’s medical records and clinical information.",
-            "Item2": "Addressing follow-up questions that arise during the family’s involvement in the project.",
-            "ThankYou": "Thank you for your support. We look forward to learning with you!"
+            "Text1": "We are interested in partnering with clinical providers of participants to facilitate the return of medically-relevant, clinically-confirmed results discovered in this project.",
+            "Text2": "Other ways that you could be involved:",
+            "Item1": "Aggregating and summarizing the family’s medical records and clinical information",
+            "Item2": "Addressing follow-up questions that arise during the family’s involvement in the project"
         },
+        "ThankYou": "Thank you for your support. We look forward to learning with you!",
         "Contact": "Contact Us"
     },
     "DataAccessPage": {
@@ -1198,12 +1198,12 @@
         "NoRecords": {
           "Subject": "Medical records",
           "Message": "Copies of medical records are needed.",
-          "More": "<p>Typically, the most important records for us to receive are:</p><ul><li>specialist clinic notes (e.g. neurologist, cardiologist, nephrologist), especially genetics</li><li>genetic test reports, if any</li><li>pathology reports, if any</li><li>MRI or CT scan reports, if any</li></ul><p>Please see our “<a href=\"/assets/pdf/RGP_Guide_Share_Family_Health_Info_100518_clean.pdf\" target=\"_blank\">Guide for Sharing Your Family’s Health Information</a>” for more information.</p><p>Records can be sent to us by:</p><ul><li>Fax: 617-800-1909</li><li>Mail: Rare Genomes Project, Broad Institute, Attn: Dr. Heidi Rehm, 415 Main Street, Cambridge MA 02142</li><li>Email: Please let us know if you would like to email records, and we can set up a secure email connection to ensure additional protection of your medical information.</li></ul><p>If you encounter any costs associated with sending the medical records, please send us a receipt so that we can reimburse you.</p>"
+          "More": "<p>Typically, the most important records for us to receive are:</p><ul><li>specialist clinic notes (e.g. neurologist, cardiologist, nephrologist), especially genetics</li><li>genetic test reports, if any</li><li>pathology reports, if any</li><li>MRI or CT scan reports, if any</li></ul><p>Please see our “<a href=\"/sharing-guide.pdf\" target=\"_blank\">Guide for Sharing Your Family’s Health Information</a>” for more information.</p><p>Records can be sent to us by:</p><ul><li>Fax: 617-800-1909</li><li>Mail: Rare Genomes Project, Broad Institute, Attn: Dr. Heidi Rehm, 415 Main Street, Cambridge MA 02142</li><li>Email: Please let us know if you would like to email records, and we can set up a secure email connection to ensure additional protection of your medical information.</li></ul><p>If you encounter any costs associated with sending the medical records, please send us a receipt so that we can reimburse you.</p>"
         },
         "Partial": {
           "Subject": "Medical records",
           "Message": "We have received some of the medical records needed.",
-          "More": "<p>We are awaiting additional records. Typically, the most important records for us to receive are:</p><ul><li>specialist clinic notes (e.g. neurologist, cardiologist, nephrologist), especially genetics</li><li>genetic test reports, if any</li><li>pathology reports, if any</li><li>MRI or CT scan reports, if any</li></ul><p>Please see our “<a href=\"/assets/pdf/RGP_Guide_Share_Family_Health_Info_100518_clean.pdf\" target=\"_blank\">Guide for Sharing Your Family’s Health Information</a>” for more information.</p><p>Records can be sent to us by:</p><ul><li>Fax: 617-800-1909</li><li>Mail: Rare Genomes Project, Broad Institute, Attn: Dr. Heidi Rehm, 415 Main Street, Cambridge MA 02142</li><li>Email: Please let us know if you would like to email records, and we can set up a secure email connection to ensure additional protection of your medical information.</li></ul><p>If you encounter any costs associated with sending the medical records, please send us a receipt so that we can reimburse you.</p>"
+          "More": "<p>We are awaiting additional records. Typically, the most important records for us to receive are:</p><ul><li>specialist clinic notes (e.g. neurologist, cardiologist, nephrologist), especially genetics</li><li>genetic test reports, if any</li><li>pathology reports, if any</li><li>MRI or CT scan reports, if any</li></ul><p>Please see our “<a href=\"/sharing-guide.pdf\" target=\"_blank\">Guide for Sharing Your Family’s Health Information</a>” for more information.</p><p>Records can be sent to us by:</p><ul><li>Fax: 617-800-1909</li><li>Mail: Rare Genomes Project, Broad Institute, Attn: Dr. Heidi Rehm, 415 Main Street, Cambridge MA 02142</li><li>Email: Please let us know if you would like to email records, and we can set up a secure email connection to ensure additional protection of your medical information.</li></ul><p>If you encounter any costs associated with sending the medical records, please send us a receipt so that we can reimburse you.</p>"
         },
         "Received": {
           "Subject": "Medical records",
