@@ -1,102 +1,104 @@
-<div class="study-messages" *ngIf="persons.length > 0">
+<div class="study-messages" *ngIf="hasAtLeastOneMessage()">
   <h2 class="study-messages__title">
     {{ 'DashboardPage.StudyMessages.Title' | translate }}
   </h2>
 
-  <div *ngFor="let person of persons">
-    <h4 class="app-table__name" *ngIf="persons.length > 1">
-      {{ person.firstName }}
-    </h4>
+  <ng-container *ngFor="let person of persons">
+    <div *ngIf="person.messages.length > 1">
+      <h4 class="app-table__name" *ngIf="persons.length > 1">
+        {{ person.firstName }}
+      </h4>
 
-    <table class="app-table" mat-table [dataSource]="person.messages">
-      <ng-container matColumnDef="date">
-        <th
-          class="app-table__cell app-table__cell--header app-table__col--date"
-          mat-header-cell
-          *matHeaderCellDef
-        >
-          {{ 'DashboardPage.StudyMessages.Header.Date' | translate }}
-        </th>
+      <table class="app-table" mat-table [dataSource]="person.messages">
+        <ng-container matColumnDef="date">
+          <th
+            class="app-table__cell app-table__cell--header app-table__col--date"
+            mat-header-cell
+            *matHeaderCellDef
+          >
+            {{ 'DashboardPage.StudyMessages.Header.Date' | translate }}
+          </th>
 
-        <td
-          class="app-table__cell"
-          mat-cell
-          *matCellDef="let message"
-          [attr.label]="'DashboardPage.StudyMessages.Header.Date' | translate"
-        >
-          {{ message.date | date: 'M/d/yyyy' }}
-        </td>
-      </ng-container>
+          <td
+            class="app-table__cell"
+            mat-cell
+            *matCellDef="let message"
+            [attr.label]="'DashboardPage.StudyMessages.Header.Date' | translate"
+          >
+            {{ message.date | date: 'M/d/yyyy' }}
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="title">
-        <th
-          class="app-table__cell app-table__cell--header app-table__col--title"
-          mat-header-cell
-          *matHeaderCellDef
-        >
-          {{ 'DashboardPage.StudyMessages.Header.Title' | translate }}
-        </th>
+        <ng-container matColumnDef="title">
+          <th
+            class="app-table__cell app-table__cell--header app-table__col--title"
+            mat-header-cell
+            *matHeaderCellDef
+          >
+            {{ 'DashboardPage.StudyMessages.Header.Title' | translate }}
+          </th>
 
-        <td
-          class="app-table__cell"
-          mat-cell
-          *matCellDef="let message"
-          [attr.label]="'DashboardPage.StudyMessages.Header.Title' | translate"
-          [innerHTML]="message.subject | translate"
-        ></td>
-      </ng-container>
+          <td
+            class="app-table__cell"
+            mat-cell
+            *matCellDef="let message"
+            [attr.label]="'DashboardPage.StudyMessages.Header.Title' | translate"
+            [innerHTML]="message.subject | translate"
+          ></td>
+        </ng-container>
 
-      <ng-container matColumnDef="description">
-        <th
-          class="
-            app-table__cell app-table__cell--header app-table__col--description
-          "
-          mat-header-cell
-          *matHeaderCellDef
-        >
-          {{ 'DashboardPage.StudyMessages.Header.Description' | translate }}
-        </th>
+        <ng-container matColumnDef="description">
+          <th
+            class="
+              app-table__cell app-table__cell--header app-table__col--description
+            "
+            mat-header-cell
+            *matHeaderCellDef
+          >
+            {{ 'DashboardPage.StudyMessages.Header.Description' | translate }}
+          </th>
 
-        <td
-          class="app-table__cell"
-          mat-cell
-          *matCellDef="let message"
-          [attr.label]="
-            'DashboardPage.StudyMessages.Header.Description' | translate
-          "
-        >
-          <div class="app-table__cell--description">
-            <p [innerHTML]="message.message | translate" style="margin: 0"></p>
+          <td
+            class="app-table__cell"
+            mat-cell
+            *matCellDef="let message"
+            [attr.label]="
+              'DashboardPage.StudyMessages.Header.Description' | translate
+            "
+          >
+            <div class="app-table__cell--description">
+              <p [innerHTML]="message.message | translate" style="margin: 0"></p>
 
-            <div *ngIf="hasMoreText(message.more) | async">
-              <div
-                *ngIf="!!showMoreMap[message.more]"
-                [innerHTML]="message.more | translate"
-                class="show-more-container"
-              ></div>
+              <div *ngIf="hasMoreText(message.more) | async">
+                <div
+                  *ngIf="!!showMoreMap[message.more]"
+                  [innerHTML]="message.more | translate"
+                  class="show-more-container"
+                ></div>
 
-              <button class="show-more-btn" (click)="toggleShowMore(message)">
-                {{
-                  'DashboardPage.StudyMessages.Actions.' +
-                    (!!showMoreMap[message.more] ? 'ShowLess' : 'ShowMore')
-                    | translate
-                }}
-              </button>
+                <button class="show-more-btn" (click)="toggleShowMore(message)">
+                  {{
+                    'DashboardPage.StudyMessages.Actions.' +
+                      (!!showMoreMap[message.more] ? 'ShowLess' : 'ShowMore')
+                      | translate
+                  }}
+                </button>
+              </div>
             </div>
-          </div>
-        </td>
-      </ng-container>
+          </td>
+        </ng-container>
 
-      <tr
-        class="app-table__row app-table__row--header"
-        mat-header-row
-        *matHeaderRowDef="displayedColumns"
-      ></tr>
-      <tr
-        class="app-table__row"
-        mat-row
-        *matRowDef="let row; columns: displayedColumns"
-      ></tr>
-    </table>
-  </div>
+        <tr
+          class="app-table__row app-table__row--header"
+          mat-header-row
+          *matHeaderRowDef="displayedColumns"
+        ></tr>
+        <tr
+          class="app-table__row"
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+        ></tr>
+      </table>
+    </div>
+  </ng-container>
 </div>

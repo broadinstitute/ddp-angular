@@ -29,4 +29,10 @@ export class StudyMessagesComponent {
       .get(key)
       .pipe(map(translation => translation !== key));
   }
+
+  hasAtLeastOneMessage(): boolean {
+    return this.persons
+      .map(person => person.messages.length)
+      .reduce((a, b) => a + b, 0) > 0;
+  }
 }
