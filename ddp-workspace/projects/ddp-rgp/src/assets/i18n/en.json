@@ -131,7 +131,7 @@
         "OurStory": {
             "Title": "Our Story",
             "Paragraph1": "The Rare Genomes Project was developed to provide access to genomic research to patients across the United States who are living with undiagnosed, suspected genetic conditions, and to engage with them as partners in the research process.",
-            "Paragraph2": "Improving the understanding of rare genetic conditions requires combining genomic research with the experiences of patients and families and sharing this data with the research community. We hope to turn genomic data into clinically meaningful answers for families participating in the project as we advance scientific understanding of rare genetic disorders."
+            "Paragraph2": "Improving the understanding of rare genetic conditions requires combining genomic research with the experiences of patients and families, and sharing this data with the research community. We hope to turn genomic data into clinically meaningful answers for families participating in the project as we advance scientific understanding of rare genetic disorders."
         },
         "BroadInstitute": {
             "Title": "Broad Institute",
@@ -174,6 +174,13 @@
                         "position": "Clinical Project Coordinator",
                         "bio": "Brian is a clinical project coordinator for the Rare Genomes Project, focusing on consenting families to the study and outreach efforts. He studied neurobiology as an undergraduate and has experience in patient advocacy and community outreach.",
                         "image": "brian-mangilog.jpeg"
+                    },
+                    {
+                        "name": "Jillian Serrano",
+                        "degree": "",
+                        "position": "",
+                        "bio": "",
+                        "image": ""
                     },
                     {
                         "name": "Grace VanNoy",
