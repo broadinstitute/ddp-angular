@@ -684,9 +684,9 @@
             "List": {
                 "Item1": "Have a rare and genetically undiagnosed condition",
                 "Item2": "Live in the United States",
-                "Item3": "Understand English",
+                "Item3": "Are English- or Spanish-speaking",
                 "Item4": "Be currently under the care of a medical provider that is helping to understand the cause of the condition",
-                "Item5": "Have access to a mobile or landline telephone and a computer"
+                "Item5": "Have access to a telephone and/or a computer"
             },
             "Ending": {
                 "Text1": {
@@ -697,7 +697,7 @@
                 "Text2": {
                     "Part1": "If one or more of these criteria do not apply to you, we encourage you to",
                     "Part2": "join our mailing list",
-                    "Part3": "We will contact you if participation requirements have changed, making you eligible to apply to the study."
+                    "Part3": "We will contact you if requirements change and make you eligible to apply to the study."
                 }
             }
         },
@@ -706,7 +706,7 @@
                 "Text": {
                     "Part1": "In general, the families",
                     "Part2": "more likely",
-                    "Part3": "to benefit from our study approach are suspected to have a single gene cause of disease and may have some of the following features:"
+                    "Part3": "to benefit from our study approach are those that are suspected to have a single gene cause of disease and may have some of the following features:"
                 },
                 "List": {
                     "Item1": "An earlier-than-typical onset or severe presentation of symptoms",
