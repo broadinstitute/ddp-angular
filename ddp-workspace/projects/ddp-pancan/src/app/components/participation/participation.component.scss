@@ -4,7 +4,7 @@
     text-align: left;
 
     .title {
-        @include static-page-title;
+        @extend .static-page-title;
         margin: 4.56rem auto 4.81rem auto;
         max-width: 1440px;
         text-align: center;
@@ -28,30 +28,30 @@
         }
 
         &__label {
-            @include participate-step-label;
+            @extend .participate-step-label;
             font-size: 1.13rem;
             margin-right: 1rem;
         }
 
         &__time {
-            @include participate-step-time;
+            @extend .participate-step-time;
             font-size: 1.13rem;
         }
 
         &__title {
-            @include static-page-title;
+            @extend .static-page-title;
             margin: 1.38rem 0 1.13rem 0;
         }
 
         &__text {
-            @include static-page-paragraph-text;
+            @extend .static-page-paragraph-text;
             margin-bottom: 2.13rem;
         }
 
         &__btn {
-            @include btn-common;
-            @include small-letter-spacing;
-            @include btn-outline;
+            @extend .btn-common;
+            @extend .small-letter-spacing;
+            @extend .btn-outline;
             font-size: 1.13rem;
             padding: 1rem 2rem;
             line-height: 22px;

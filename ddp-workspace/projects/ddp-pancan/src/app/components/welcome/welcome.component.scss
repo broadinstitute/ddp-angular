@@ -108,11 +108,11 @@ section {
 
             &__title {
                 display: inline;
-                @include participate-step-label;
+                @extend .participate-step-label;
             }
 
             &__time {
-                @include participate-step-time;
+                @extend .participate-step-time;
             }
 
             &__description {
@@ -134,10 +134,6 @@ section {
             padding: 0 3.75rem;
             margin: 3.5rem auto;
             text-align: left;
-        }
-
-        .more-faq-btn {
-            @include small-letter-spacing;
         }
     }
 
@@ -181,10 +177,6 @@ section {
             padding-bottom: 1.13rem;
             text-align: left;
         }
-
-        .join-btn {
-            @include small-letter-spacing;
-        }
     }
 
     &.join-cmi {
@@ -216,22 +208,22 @@ section {
 }
 
 .title {
-    @include static-page-title;
+    @extend .static-page-title;
 }
 
 .text {
-    @include static-page-paragraph-text;
+    @extend .static-page-paragraph-text
 }
 
 .btn {
-    @include btn-common;
+    @extend .btn-common;
 
     font-size: 1.13rem;
     padding: 1rem 2rem;
     line-height: 22px;
 
     &.mat-stroked-button {
-        @include btn-outline;
+        @extend .btn-outline;
     }
 }
 
@@ -242,7 +234,6 @@ section {
 
 .learn-more-btn {
     margin-top: 2.81rem;
-    @include small-letter-spacing;
 }
 
 .center {
