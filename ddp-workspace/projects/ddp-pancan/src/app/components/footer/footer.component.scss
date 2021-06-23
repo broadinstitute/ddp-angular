@@ -11,7 +11,7 @@ $footer-divider-color: #444444;
 
 .actions {
     border-bottom: 1px solid $footer-divider-color;
-    font-size: 14px;
+    font-size: 1.17rem;
     padding: 1.15rem 2rem 1.15rem 3.375rem;
 
     &__wrapper {
@@ -41,7 +41,7 @@ $footer-divider-color: #444444;
 }
 
 .back-to-top {
-    font-size: 14px;
+    font-size: 1.17rem;
     text-align: left;
     padding: 0;
 }
@@ -51,10 +51,16 @@ $footer-divider-color: #444444;
     margin-left: 1.5rem;
 }
 
+@media screen and (min-width: $tablet-breakpoint) {
+    .actions,
+    .back-to-top {
+        font-size: 1rem;
+    }
+}
+
 @media screen and (min-width: $desktop-breakpoint) {
     .actions {
         height: 8.625rem;
-        font-size: 1rem;
 
         &__wrapper {
             flex-direction: row;
@@ -74,9 +80,5 @@ $footer-divider-color: #444444;
 
     .info {
         flex-direction: row;
-    }
-
-    .back-to-top {
-        font-size: 1rem;
     }
 }

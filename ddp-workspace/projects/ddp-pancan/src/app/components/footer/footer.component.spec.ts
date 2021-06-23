@@ -25,7 +25,7 @@ describe('FooterComponent', () => {
     beforeEach(async () => {
         const auth = mockComponent({ selector: 'app-auth' });
         const navigation = mockComponent({ selector: 'app-navigation' });
-        nativeWindowSpy = jasmine.createSpyObj('sessionSpy', ['scrollTo']);
+        nativeWindowSpy = jasmine.createSpyObj('nativeWindowSpy', ['scrollTo']);
         await TestBed.configureTestingModule({
             imports: [
                 RouterTestingModule,
