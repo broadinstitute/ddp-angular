@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SessionMementoService } from 'ddp-sdk';
+import { AppRoutes } from '../app-routes';
 
 @Component({
     selector: 'app-auth',
@@ -11,13 +12,14 @@ import { SessionMementoService } from 'ddp-sdk';
         <a *ngIf="!isAuthenticated"
            mat-flat-button
            class="join-button btn-common"
-           routerLink="count-me-in"
+           [routerLink]="AppRoutes.CountMeIn"
            color="primary">
             <span translate>App.Navigation.Join</span>
         </a>`,
     styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent {
+    readonly AppRoutes = AppRoutes;
     constructor(private session: SessionMementoService) { }
 
     public get isAuthenticated(): boolean {
