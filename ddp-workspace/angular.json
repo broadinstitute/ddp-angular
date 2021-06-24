@@ -1898,7 +1898,7 @@
               "projects/ddp-rgp/src/assets",
               {
                 "glob": "*.pdf",
-                "input": "projects/ddp-rgp/src/pdf/",
+                "input": "projects/ddp-rgp/src/assets/pdf/",
                 "output": "/"
               },
               {
@@ -1987,7 +1987,7 @@
               "projects/ddp-rgp/src/assets",
               {
                 "glob": "*.pdf",
-                "input": "projects/ddp-rgp/src/pdf/",
+                "input": "projects/ddp-rgp/src/assets/pdf/",
                 "output": "/"
               }
             ],

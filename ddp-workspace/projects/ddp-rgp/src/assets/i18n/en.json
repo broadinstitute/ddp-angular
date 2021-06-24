@@ -131,7 +131,7 @@
         "OurStory": {
             "Title": "Our Story",
             "Paragraph1": "The Rare Genomes Project was developed to provide access to genomic research to patients across the United States who are living with undiagnosed, suspected genetic conditions, and to engage with them as partners in the research process.",
-            "Paragraph2": "Improving the understanding of rare genetic conditions requires combining genomic research with the experiences of patients and families and sharing this data with the research community. We hope to turn genomic data into clinically meaningful answers for families participating in the project as we advance scientific understanding of rare genetic disorders."
+            "Paragraph2": "Improving the understanding of rare genetic conditions requires combining genomic research with the experiences of patients and families, and sharing this data with the research community. We hope to turn genomic data into clinically meaningful answers for families participating in the project as we advance scientific understanding of rare genetic disorders."
         },
         "BroadInstitute": {
             "Title": "Broad Institute",
@@ -420,7 +420,7 @@
                 {
                     "question": "What is the goal of The Rare Genomes Project?",
                     "answers": [
-                        "The goal of the Rare Genomes Project is to discover the genes underlying undiagnosed rare, genetic conditions by providing families affected by rare disease access to whole genomic sequencing."
+                        "The goal of the Rare Genomes Project is to discover the genes underlying undiagnosed rare, genetic conditions by providing access to genomic sequencing to families affected by rare disease."
                     ]
                 },
                 {
@@ -433,7 +433,7 @@
                 {
                     "question": "Who is conducting the research?",
                     "answers": [
-                        "The Rare Genomes Project was launched at the Broad Institute of MIT and Harvard by researchers Daniel MacArthur, PhD and Heidi Rehm, PhD. We are also working in collaboration with Monkol Lek, PhD from Yale University, Eric Liao, MD from Massachusetts General Hospital, Carsten Bonnemann, MD from NIH, and the Lab for Molecular Medicine at Partners HealthCare Center for Personalized Medicine.",
+                        "The Rare Genomes Project was launched by researchers Daniel MacArthur, PhD and Heidi Rehm, PhD at the Broad Institute of MIT and Harvard. We are also working in collaboration with Monkol Lek, PhD from Yale University, Eric Liao, MD from Massachusetts General Hospital, and the Lab for Molecular Medicine at Partners HealthCare Center for Personalized Medicine.",
                         "Our team is made up of researchers, physicians, software developers, genetic counselors, and study coordinators. Learn more about us <a href=\"/about-us\" class=\"Link\">here</a>."
                     ]
                 }
@@ -473,15 +473,15 @@
                     ]
                 },
                 {
-                    "question": "What type of genetic testing is performed by the Rare Genomes Project offering?",
+                    "question": "What type of genetic testing is performed by the Rare Genomes Project?",
                     "answers": [
-                        "The Rare Genomes Project offers Whole Genome Sequencing (WGS). WGS is a different test than Whole Exome Sequencing (WES), which is a more focused test that is more commonly covered by insurance companies. Sometimes, we may perform additional tests including Structural Variant Analysis and RNAseq. To learn more about WGS and other types of genetic testing, we recommend reading through Genetics Home Reference's <a href=\"https://ghr.nlm.nih.gov/primer#testing\" target=\"_blank\" class=\"Link\">website</a>."
+                        "The Rare Genomes Project performs whole genome sequencing (WGS). WGS is a different test than whole exome sequencing (WES), which is a more focused test that is more commonly covered by insurance companies. Sometimes, we may perform additional tests including RNA sequencing. To learn more about WGS and other types of genetic testing, we recommend reading through the U.S. National Library of Medicine's MedlinePlus <a href=\"https://ghr.nlm.nih.gov/primer#testing\" target=\"_blank\" class=\"Link\">website</a>."
                     ]
                 },
                 {
                     "question": "I have already had whole genome sequencing. Will the Rare Genomes Project accept my external data for reanalysis?",
                     "answers": [
-                        "On a case-by-case basis. If you have had prior genomic sequencing, fill out an application to our study and indicate that you have prior sequencing data available. If your application is accepted, we will reach out to you and discuss the next steps. Due to the resources involved in obtaining and manipulating data from other sources, it is sometimes more time and cost effective for us to sequence your genome again."
+                        "On a case-by-case basis. If you have had prior genomic sequencing, fill out an application to our study and indicate that you have prior sequencing data available. If your application is accepted, we will reach out to you and discuss the next steps. Due to the resources involved in obtaining and incorporating data from other sources, it is sometimes more time and cost effective for us to sequence your genome again."
                     ]
                 }
             ]
@@ -498,19 +498,19 @@
                 {
                     "question": "Can I apply if I live outside the United States?",
                     "answers": [
-                        "We currently are only able to enroll individuals that live in the United States. However, we hope to eventually expand the project. If you live outside the United States and are interested in participating, we encourage you to indicate on our <a href=\"/count-me-in\" class=\"Link\">application page</a> that you do not live in the United States and then join our mailing list on the following page when prompted. We will contact you if we change our participation requirements in the future."
+                        "We currently are only able to enroll individuals that live in the United States."
                     ]
                 },
                 {
                     "question": "Who in my family should participate?",
                     "answers": [
-                        "The nature of this project requires that the person in your family with an undiagnosed genetic condition participate. Although not a requirement, having additional family members participate, especially both of the patient's biological parents and additional affected family members, improves our chances of finding the genetic cause of the rare, undiagnosed condition. For example, a study of whole exome sequencing showed that analysis of parents along with affected children increased the likelihood of diagnosis from 22% to 31% (<a href=\"https://jamanetwork.com/journals/jama/fullarticle/1918775\" target=\"_blank\" class=\"Link\">Lee et al. 2014</a>)."
+                        "The nature of this project requires that the person in your family with the undiagnosed genetic condition participate. Participation by additional family members, especially both biological parents and any additional affected family members, improves our chances of finding the genetic cause of the rare, undiagnosed condition, but participation by others is not a requirement. Studies have shown that analysis of parents along with affected children increases the likelihood of diagnosis from 22% to 31% (<a href=\"https://jamanetwork.com/journals/jama/fullarticle/1918775\" target=\"_blank\" class=\"Link\">Lee et al. 2014</a>)."
                     ]
                 },
                 {
-                    "question": "Can I still apply to the Rare Genomes Project if the affected family member is adopted, or one biological parent is unavailable?",
+                    "question": "Can I still apply to the Rare Genomes Project in cases of adoption or if one biological parent is unavailable?",
                     "answers": [
-                        "Yes. In cases where one biological parent is unavailable, we may ask about the availability of their other relatives."
+                        "Yes. We accept individuals regardless of the availability of other family members to participate. In cases where one biological parent is unavailable, we may ask about the availability of their other relatives."
                     ]
                 },
                 {
@@ -533,31 +533,38 @@
                 {
                     "question": "How and where do I get my blood drawn?",
                     "answers": [
-                        "We will mail you a pre-paid specimen collection kit for you to have your blood drawn at a location of your choosing. We have partnered with Quest Diagnostics, a company with <a href=\"https://appointment.questdiagnostics.com/patient/confirmation\" target=\"_blank\" class=\"Link\">thousands of blood draw locations</a> across the United States and Puerto Rico, who will draw blood for the study and bill us directly. Alternatively, you can have your blood drawn by a local provider. If you are billed for this, send us a receipt for reimbursement."
+                        "We will mail you a pre-paid specimen collection kit for you to have your blood drawn at a location of your choosing. We have partnered with Quest Diagnostics, a company with <a href=\"https://appointment.questdiagnostics.com/patient/confirmation\" target=\"_blank\" class=\"Link\">thousands of blood draw locations</a> across the United States and Puerto Rico, who will draw blood for the study and bill us directly. Alternatively, you can have your blood drawn by a local provider. If you are billed for this, send us a receipt for reimbursement.",
+                        "Regardless of where you have blood drawn, <span class=\"AccentUnderline\">please confirm with the technician that they have labeled both the blood tube and the paperwork with your legal name and date of birth</span>."
                     ]
                 },
                 {
                     "question": "What happens after I return my blood kit?",
                     "answers": [
-                        "After your kit returns to our facilities, we will extract DNA from your blood sample and prepare it for DNA sequencing or targeted testing."
+                        "After your kit is sent back to us, we will extract DNA from the blood sample and prepare it for DNA sequencing or targeted testing."
                     ]
                 },
                 {
                     "question": "Who in my family will get their genome sequenced?",
                     "answers": [
-                        "It depends. Typically, we perform genome sequencing on the affected individual(s) in the family and their biological parents (when available). We typically only perform targeted testing for specific variants of interest in unaffected family members."
+                        "It depends. Typically, we perform genome sequencing on the affected individual(s) in the family and their biological parents, when possible. We typically only perform targeted testing for specific variants of interest in unaffected family members."
+                    ]
+                },
+                {
+                    "question": "What medical records are needed?",
+                    "answers": [
+                        "We require medical records from the affected family member(s). For more information about the types of records that are needed, please see our <a href=\"/sharing-guide.pdf\" target=\"_blank\" class=\"Link\">Guide to Sharing Health Information</a>."
                     ]
                 },
                 {
                     "question": "What else might I be asked to share if I participate in this project?",
                     "answers": [
-                        "We require medical records from the affected family member(s). We may also inquire about the availability of excess tissue from clinical procedures for additional testing. Because this study does not include a physical examination by study staff, we will also ask participants to share a photograph; this is optional."
+                        "We may inquire about the availability of excess tissue from clinical procedures for additional testing. Because this study does not include a physical examination by study staff, we may also ask participants to share a photograph; this is optional."
                     ]
                 },
                 {
                     "question": "Why am I being asked for photographs?",
                     "answers": [
-                        "We routinely ask for photographs of the member of the family with the undiagnosed condition. Some genetic syndromes are known to cause characteristic or subtle facial features that we consider when determining if a participant’s condition is related to a genetic variant. Photographs are considered part of the patient’s medical record and will not be shared externally without permission."
+                        "We may ask for photographs of the member of the family with the undiagnosed condition. Some genetic syndromes are known to cause characteristic or subtle facial features that we consider when determining if a participant’s condition is related to a genetic variant. Photographs are considered part of the patient’s medical record and will not be shared externally without permission."
                     ]
                 },
                 {
@@ -580,19 +587,19 @@
                 {
                     "question": "Will I receive results?",
                     "answers": [
-                        "Our goal is to find the genetic explanation for the undiagnosed condition in each family who enrolls, but we cannot guarantee a result for each family. If we are able to find a genetic cause of your condition, we will work with the medical provider of your choice to return results that are known or suspected to be related to the rare disease in the family."
+                        "Our goal is to find the genetic explanation for the undiagnosed condition in each family who enrolls, but we cannot guarantee that we will have a result for each family. If we find a genetic variant(s) that may explain the genetic condition in the family member with the condition, we work with them to clinically confirm and return the results. We do not return results to unaffected family members."
                     ]
                 },
                 {
                     "question": "Will I receive results unrelated to the rare condition for which I applied?",
                     "answers": [
-                        "We do not actively search for genetic results unrelated to the rare condition in the family. However, if we find a variant that causes a condition with treatment implications, we will provide the option of clinically confirming the result to have it returned."
+                        "We do not actively search for genetic results unrelated to the rare condition in the family. However, if we find a genetic variant that causes a condition with treatment implications, we will contact you to discuss the option of clinically confirming the result to have it returned."
                     ]
                 },
                 {
                     "question": "How will I receive my results?",
                     "answers": [
-                        "You can only receive results that have been confirmed in a Clinical Laboratory Improvement Amendments (CLIA)-certified laboratory. If we find results that we believe may explain the underlying cause of the rare condition present in your family, we will contact you and ask if you would like to have the findings clinically confirmed in a CLIA-certified laboratory. A genetic counselor on our staff will work with a doctor of your choice to order testing through the CLIA lab."
+                        "You can only receive results that have been confirmed in a Clinical Laboratory Improvement Amendments (CLIA)-certified laboratory. If we find results that we believe may explain the underlying cause of the rare condition present in your family, we will contact you and ask if you would like to have the findings clinically confirmed in a CLIA-certified laboratory. A genetic counselor on our staff will work with a doctor of your choice to order testing through the CLIA lab. The doctor who orders the clinical test will be the one who shares the results with you."
                     ]
                 }
             ]
@@ -603,13 +610,13 @@
                 {
                     "question": "How will my genetic data be shared?",
                     "answers": [
-                        "One of the goals of this project is to improve rare disease diagnosis for participants and the rare disease community as a whole. Data sharing supports this goal by allowing researchers and clinicians around the world to access the de-identified genetic data generated in our project. Learn more about how we share de-identified data <a href=\"/privacy-and-your-data\" class=\"Link\">here</a>."
+                        "One of the goals of this project is to improve rare disease diagnosis for participants and the rare disease community as a whole. Data sharing supports this goal by allowing researchers and clinicians around the world to access and perform research on the de-identified genetic data generated in this project. Learn more about how we share de-identified data <a href=\"/privacy-and-your-data\" class=\"Link\">here</a>."
                     ]
                 },
                 {
                     "question": "Can I have access to my genetic sequencing data?",
                     "answers": [
-                        "Unfortunately, no. Because the genomic sequencing in this study will be performed in a research laboratory (non-CLIA laboratory), federal regulations prohibit us from directly releasing your individual raw sequencing data to you."
+                        "Unfortunately, no. Because the genomic sequencing in this study will be performed in a research laboratory (non-CLIA laboratory), federal regulations prohibit us from directly releasing your sequencing data to you. However, we are permitted to release data to other research studies at your request."
                     ]
                 },
                 {
@@ -621,13 +628,7 @@
                 {
                     "question": "Can outside researchers request samples from this study for use in their own research?",
                     "answers": [
-                        "In some cases, we may share de-identified samples with external collaborators. Please contact us to learn more"
-                    ]
-                },
-                {
-                    "question": "Can outside researchers submit a cohort of samples be sequenced through this project?",
-                    "answers": [
-                        "While the Rare Genomes Project works directly with patients, the Broad Center for Mendelian Genomics (CMG) may be interested in collaborating with external researchers. To learn more, visit the CMG's <a href=\"https://cmg.broadinstitute.org\" target=\"_blank\" class=\"Link\">website</a>."
+                        "In some cases, we may share de-identified samples with external collaborators. Please contact us to learn more."
                     ]
                 }
             ]
@@ -638,7 +639,7 @@
                 {
                     "question": "How can I refer families with rare and undiagnosed genetic conditions to this project?",
                     "answers": [
-                        "If you are a family involved in the Rare Genomes Project and know other families who might benefit from participation, please direct them to our website or have them contact us at <a href=\"mailto:raregenomes@broadinstitute.org\" class=\"Link\">raregenomes@broadinstitute.org</a>. If you would like to share your participation with others, feel free to post the link to our website on your social media pages so that more patients can learn about the project.",
+                        "If you know families who might benefit from participation in the Rare Genomes Project, please direct them to our website or have them contact us at <a href=\"mailto:raregenomes@broadinstitute.org\" class=\"Link\">raregenomes@broadinstitute.org</a>. If you would like to share your participation with others, feel free to post the link to our website on your social media pages so that more families can learn about the project.",
                         "If you are a clinician who cares for a patient you believe could benefit from the Rare Genomes Project, encourage the family to fill out an online application on this website and have them indicate your name when asked about a referring provider."
                     ]
                 },
@@ -684,9 +685,9 @@
             "List": {
                 "Item1": "Have a rare and genetically undiagnosed condition",
                 "Item2": "Live in the United States",
-                "Item3": "Understand English",
+                "Item3": "Are English- or Spanish-speaking",
                 "Item4": "Be currently under the care of a medical provider that is helping to understand the cause of the condition",
-                "Item5": "Have access to a mobile or landline telephone and a computer"
+                "Item5": "Have access to a telephone and/or a computer"
             },
             "Ending": {
                 "Text1": {
@@ -697,7 +698,7 @@
                 "Text2": {
                     "Part1": "If one or more of these criteria do not apply to you, we encourage you to",
                     "Part2": "join our mailing list",
-                    "Part3": "We will contact you if participation requirements have changed, making you eligible to apply to the study."
+                    "Part3": "We will contact you if requirements change and make you eligible to apply to the study."
                 }
             }
         },
@@ -706,7 +707,7 @@
                 "Text": {
                     "Part1": "In general, the families",
                     "Part2": "more likely",
-                    "Part3": "to benefit from our study approach are suspected to have a single gene cause of disease and may have some of the following features:"
+                    "Part3": "to benefit from our study approach are those that are suspected to have a single gene cause of disease and may have some of the following features:"
                 },
                 "List": {
                     "Item1": "An earlier-than-typical onset or severe presentation of symptoms",
@@ -832,7 +833,7 @@
         },
         "GenomicInformation": {
             "Title": "How We Share Full Genomic Information",
-            "Text1": "We share full genomic sequencing data and summarized medical information through two platforms to help increase the pace of scientific discovery. Data is stored at the Broad Institute and accessible through its Data Use Oversight System",
+            "Text1": "We share full genomic sequencing data and summarized medical information through two platforms to help increase the pace of scientific discovery. For example, data is stored at the Broad Institute and accessible after approval by its Data Use Oversight System",
             "Text2": "DUOS",
             "Text3": "We also share data through a similar, federally-funded genomic database called",
             "Text4": "AnVIL",
@@ -844,7 +845,7 @@
         },
         "Stored": {
             "Question": "How is my data stored?",
-            "Answer": "We store genetic and electronic data (such as electronic medical records) on secure, encrypted systems belonging to the Broad Institute and Partners HealthCare, the hospital organization responsible for this project. Your data is labeled with a randomized, numerical study ID, and access to personal identifiers is restricted to select study staff. Physical data (such as paper medical records) are stored in a secure, locked cabinet in the study staff office."
+            "Answer": "We store genetic and electronic data (such as electronic medical records) on secure, encrypted systems belonging to the Broad Institute and Partners HealthCare, the hospital organization responsible for this project. Your data is labeled with a randomized, numerical study ID available only to study staff. Physical data (such as paper medical records) are stored in a secure, locked cabinet in the study staff office."
         },
         "Shared": {
             "Question": "Will my name or personal information be shared with other researchers and clinicians?",
@@ -852,7 +853,7 @@
         },
         "Profit": {
             "Question": "Will the Rare Genomes Project profit off of my data?",
-            "Answer": "No. The Rare Genomes Project is a non-profit research study and will not sell your genomic data."
+            "Answer": "Never. The Rare Genomes Project is a non-profit research study and will not sell your genomic data."
         },
         "Ending": {
             "Text1": "We discuss data sharing during the consent call if you are accepted into the project and will make sure you understand how your data will be used. If you have questions or concerns about privacy that are not answered above, please contact us by email at",
@@ -861,16 +862,16 @@
     },
     "ForYourPhysicianPage": {
         "Title": "For your Physician",
-        "Intro": "The Rare Genomes Project is a research study housed at The Broad Institute of MIT and Harvard, a non-profit academic research institution focused on using genomic data to better understand human health and disease. Our team, led by investigators Daniel MacArthur and Heidi Rehm, has a specific focus on understanding the genetic basis of very rare and undiagnosed conditions. Our mission in the Rare Genomes Project is to partner directly with patients, families, advocates, and clinicians like you, to speed the rate of rare disease diagnosis and increase patients’ access to genomic research.",
+        "Intro": "The Rare Genomes Project is a research study at The Broad Institute of MIT and Harvard, a non-profit academic research institution focused on using genomic data to better understand human health and disease. Our team, led by investigator Heidi Rehm, has a specific focus on understanding the genetic basis of very rare and undiagnosed conditions. Our mission is to partner directly with patients, families, advocates, and clinicians and to increase patients’ access to genomic research.",
         "DownloadPDF": "Download PDF",
         "HowItWorks": {
             "Title": "How it works",
             "Paragraphs": [
                 "The Rare Genomes Project provides undiagnosed families with the opportunity to participate in a genomic research study, regardless of where in the United States they live. To ensure that participation is made broadly available to any eligible family, all study procedures can be completed from, or nearby, the patient’s home.",
-                "Interested participants and families can visit <a href=\"http://raregenomes.org\" target=\"_blank\" class=\"Link\">www.raregenomes.org</a> to learn more about the project. By clicking “Apply,” visitors to the site will be directed to complete a survey so that our team can begin to understand the condition affecting the family. Our clinical team will review each submission and re-contact eligible families for participation. A videoconference will be scheduled to discuss the project in more detail; families interested in participating will electronically sign the informed consent. As part of the consent process, families will sign a medical records authorization so that our team can access a copy of the participant’s medical records.",
-                "We will send a collection kit to enrolled families who can choose to have their blood drawn at a Quest Diagnostics Patient Service Center (<a href=\"http://questdiagnostics.com/appointment\" target=\"_blank\" class=\"Link\">www.questdiagnostics.com/appointment</a>) or by a phlebotomist of their choice (including at their local physician’s or hospital’s lab). Saliva kits are also available for participants who are unable to have a blood draw. The sample collection kits will be mailed back to the Broad Institute Genomics Platform, where DNA extraction and DNA sequencing will be performed.",
-                "Our team will analyze genomic data alongside each family’s clinical and personal story with the goal of identifying the genetic basis of the condition present in the family. If we are able to identify the cause of disease, we will re-contact the family and request a second sample for clinical validation, which will be performed at the Partners Laboratory for Molecular Medicine. A clinical report describing our findings will be provided directly to the family and the family’s doctor.",
-                "This project is dedicated to rapid and open data sharing. Genetic and clinical data generated in this project will be shared broadly with the wider rare and undiagnosed community, as well as other clinicians and researchers, through controlled-access genomic databases, as well as the Matchmaker Exchange, and Clinvar."
+                "Interested participants and families can visit <a href=\"http://raregenomes.org\" target=\"_blank\" class=\"Link\">www.raregenomes.org</a> to learn more about the project. By clicking “Start an Application,” they can apply to participate. Our clinical team will review each application and eligible families will be invited to enroll.",
+                "We will send a collection kit to enrolled families who can choose to have blood drawn at a Quest Diagnostics Patient Service Center (<a href=\"http://questdiagnostics.com/appointment\" target=\"_blank\" class=\"Link\">www.questdiagnostics.com/appointment</a>) or at another phlebotomy location of their choice. In some cases, we may be able to request DNA from prior genetic testing. The sample collection kits will be mailed back to our lab, where DNA extraction and genomic sequencing will be performed.",
+                "Our team will analyze genomic data alongside each family’s clinical information with the goal of identifying the genetic basis of the condition present in the family. If we are able to identify the cause of disease, we will re-contact the family and pursue clinical confirmation in partnership with a local provider of their choosing. The clinical confirmation report will be issued to the local ordering provider.",
+                "This project is dedicated to rapid and open data sharing. De-identified genetic and clinical data generated in this project will be shared broadly with the wider rare and undiagnosed community, as well as other clinicians and researchers, through controlled-access genomic databases, as well as the Matchmaker Exchange, and Clinvar."
             ]
         },
         "EligibilityCriteria": {
@@ -879,7 +880,7 @@
                 {
                     "Title": "Patients and families with <span class=\"Accent\">a rare and genetically undiagnosed condition</span> who:",
                     "Items": [
-                        "Understand English",
+                        "Are English- or Spanish-speaking",
                         "Live in the United States",
                         "Are currently under the care of a doctor that is helping to understand the cause of the patient’s condition"
                     ]
@@ -888,30 +889,30 @@
                     "Title": "At this time, we are unable to include patients and families that:",
                     "Items": [
                         "Have a suspected or known environmentally caused condition",
-                        "Have any condition known not to involve a genetic link",
+                        "Have any condition not likely to be monogenic",
                         "Have a genetic diagnosis that fully explains the patient’s condition."
                     ]
                 }
             ]
         },
         "Help": {
-            "Title": "How you can help",
+            "Title": "How to refer a family",
             "Text": "If you currently provide care for families that you think would be a good fit for participation in this project, please refer them to our website <a href=\"http://raregenomes.org\" target=\"_blank\" class=\"Link\">www.raregenomes.org</a>. We also partner directly with clinicians, hospitals, and institutions to increase awareness about the project. If you would like us to provide brochures and informational materials for patients that visit your clinic, please contact us."
         },
         "Role": {
             "Title": "Your role in the project",
-            "Text1": "We are interested in partnering with enrolled families’ clinicians to facilitate the return of genomic, clinically-confirmed, research results discovered in this project.",
-            "Text2": "Other optional ways that you could be involved:",
-            "Item1": "Aggregating and summarizing the family’s medical records and clinical information.",
-            "Item2": "Addressing follow-up questions that arise during the family’s involvement in the project.",
-            "ThankYou": "Thank you for your support. We look forward to learning with you!"
+            "Text1": "We are interested in partnering with clinical providers of participants to facilitate the return of medically-relevant, clinically-confirmed results discovered in this project.",
+            "Text2": "Other ways that you could be involved:",
+            "Item1": "Aggregating and summarizing the family’s medical records and clinical information",
+            "Item2": "Addressing follow-up questions that arise during the family’s involvement in the project"
         },
+        "ThankYou": "Thank you for your support. We look forward to learning with you!",
         "Contact": "Contact Us"
     },
     "DataAccessPage": {
-        "Title": "Data Access",
+        "Title": "Data Sharing",
         "ImageAlt": "Data Sharing image",
-        "Text": "The Rare Genomes Project is based at the Broad Institute of MIT and Harvard, a non-profit research institution in Cambridge, Massachusetts. The aim of the project is to use genomic sequencing of affected individuals and their family members to identify the genetic causes of rare disease. Our team, led by investigators Drs. Daniel MacArthur and Heidi Rehm, is committed to open science and rapid data sharing, with the hope of improving the rate of rare disease diagnosis through collaborations with other researchers worldwide. De-identified data generated by the project will be shared on the following platforms:",
+        "Text": "The Rare Genomes Project is based at the Broad Institute of MIT and Harvard, a non-profit research institution in Cambridge, Massachusetts. The aim of the project is to use genomic sequencing of affected individuals and their family members to identify the genetic causes of rare disease. Our team, led by principal investigator Heidi Rehm, is committed to open science and rapid data sharing, with the hope of improving the rate of rare disease diagnosis through collaborations with other researchers worldwide. De-identified data generated by the project will be shared on platforms including:",
         "MatchmakerExchange": {
             "Title": "Matchmaker Exchange",
             "Text": "<a href=\"http://www.matchmakerexchange.org/\" class=\"Link\" target=\"_blank\">Matchmaker Exchange</a> (MME) allows researchers, laboratories, and clinicians to submit anonymized genotype and phenotype information to a federated platform of international stakeholders in the hopes of “matching” with others who submitted a case with overlapping clinical symptoms or genetic variants. The Rare Genomes Project enters variants of interest into MME on an ongoing basis. To access MME’s resources, individuals must submit their own cases or datasets to begin matching. To learn more about how to get started with MME’s services, visit their <a href=\"http://www.matchmakerexchange.org/i_am_a_clinician_laboratory.html\" class=\"Link\" target=\"_blank\">website</a>."
@@ -922,12 +923,12 @@
         },
         "DUOS": {
             "Title": "DUOS",
-            "Text": "The Broad Institute developed the Data Use Oversight System (<a href=\"https://duos.broadinstitute.org/#/home\" class=\"Link\" target=\"_blank\">DUOS</a>) to streamline the sharing of de-identified clinical and genomic sequencing data with the research community. To access data generated by the Rare Genomes Project, researchers may visit the DUOS website, apply for access, and describe how they will use the data for their research study. This request will then be reviewed by the DUOS data access committee, who must review and approve the request before access to the data is granted. Approved researchers will gain access to genomic sequencing data and clinical information from RGP families, but with all personally identifiable information removed. The Rare Genomes Project submits data to DUOS on an ongoing basis under dataset name ‘RGP_MacArthur_RareDisease_WGS’ and ID number DUOS_000008. <span class=\"Accent\">The Rare Genomes Project does not process applications to DUOS. For more information about DUOS or to address questions about your application, please visit DUOS’s <a href=\"https://duos.broadinstitute.org/#/home_help\" class=\"Link Accent\" target=\"_blank\">support page</a>.</span>"
+            "Text": "The Broad Institute developed the Data Use Oversight System (<a href=\"https://duos.broadinstitute.org/#/home\" class=\"Link\" target=\"_blank\">DUOS</a>) to streamline the sharing of de-identified clinical and genomic sequencing data with the research community. To access data generated by the Rare Genomes Project, researchers may visit the DUOS website, apply for access, and describe how they will use the data for their research study. This request will then be reviewed by the DUOS data access committee, who must review and approve the request before access to the data is granted. Approved researchers will gain access to genomic sequencing data and clinical information from RGP families, but with all personally identifiable information removed. The Rare Genomes Project submits data to DUOS on an ongoing basis under dataset name ‘RGP_Rehm_RareDisease_WGS’ and ID number DUOS_000008. <span class=\"Accent\">The Rare Genomes Project does not process applications to DUOS. For more information about DUOS or to address questions about your application, please visit DUOS’s <a href=\"https://duos.broadinstitute.org/#/home_help\" class=\"Link Accent\" target=\"_blank\">support page</a>.</span>"
         },
         "AnVIL": {
             "Title": "AnVIL",
             "Text1": "The NHGRI Genomic Data Science Analysis, Visualization, and Informatics Lab-Space (<a href=\"https://www.genome.gov/27569268/genomic-analysis-visualization-and-informatics-labspace-anvil/\" class=\"Link\" target=\"_blank\">AnVIL</a>) is a federally-funded resource for the genomic scientific community that leverages a cloud-based infrastructure for genomic data access, sharing, and computing. AnVIL provides a collaborative environment with user interfaces for datasets and analysis workflows.",
-            "Text2": " To access data generated by the Rare Genomes Project, researchers apply for access. Approved researchers will gain access to genomic sequencing data and clinical information from RGP families, but with all personally identifiable information removed. The Rare Genomes Project submits data to AnVIL on an ongoing basis under Broad Institute Center for Mendelian Genomics in the subset workspace AnVIL_CMG_Broad_Rare_RGP_WGS, with ID number phs001272.v2.p1.<span class=\"Accent\">The Rare Genomes Project does not process applications to AnVIL. For more information about AnVIL or to address questions about your application, please visit <a href=\"https://anvilproject.org/\" class=\"Link\" target=\"_blank\"> https://anvilproject.org/</a>.</span>"
+            "Text2": " To access data generated by the Rare Genomes Project, researchers apply for access. Approved researchers will gain access to genomic sequencing data and clinical information from RGP families, but with all personally identifiable information removed. The Rare Genomes Project submits data to AnVIL on an ongoing basis under Broad Institute Center for Mendelian Genomics in the subset workspace AnVIL_CMG_Broad_Rare_RGP_WGS, with ID number phs001272.v2.p1. <span class=\"Accent\">The Rare Genomes Project does not process applications to AnVIL. For more information about AnVIL or to address questions about your application, please visit <a href=\"https://anvilproject.org/\" class=\"Link\" target=\"_blank\"> https://anvilproject.org/</a>.</span>"
         },
         "Questions": {
             "Text1": "If you have further questions, please contact us by email at",
@@ -1198,12 +1199,12 @@
         "NoRecords": {
           "Subject": "Medical records",
           "Message": "Copies of medical records are needed.",
-          "More": "<p>Typically, the most important records for us to receive are:</p><ul><li>specialist clinic notes (e.g. neurologist, cardiologist, nephrologist), especially genetics</li><li>genetic test reports, if any</li><li>pathology reports, if any</li><li>MRI or CT scan reports, if any</li></ul><p>Please see our “<a href=\"/assets/pdf/RGP_Guide_Share_Family_Health_Info_100518_clean.pdf\" target=\"_blank\">Guide for Sharing Your Family’s Health Information</a>” for more information.</p><p>Records can be sent to us by:</p><ul><li>Fax: 617-800-1909</li><li>Mail: Rare Genomes Project, Broad Institute, Attn: Dr. Heidi Rehm, 415 Main Street, Cambridge MA 02142</li><li>Email: Please let us know if you would like to email records, and we can set up a secure email connection to ensure additional protection of your medical information.</li></ul><p>If you encounter any costs associated with sending the medical records, please send us a receipt so that we can reimburse you.</p>"
+          "More": "<p>Typically, the most important records for us to receive are:</p><ul><li>specialist clinic notes (e.g. neurologist, cardiologist, nephrologist), especially genetics</li><li>genetic test reports, if any</li><li>pathology reports, if any</li><li>MRI or CT scan reports, if any</li></ul><p>Please see our “<a href=\"/sharing-guide.pdf\" target=\"_blank\">Guide for Sharing Your Family’s Health Information</a>” for more information.</p><p>Records can be sent to us by:</p><ul><li>Fax: 617-800-1909</li><li>Mail: Rare Genomes Project, Broad Institute, Attn: Dr. Heidi Rehm, 415 Main Street, Cambridge MA 02142</li><li>Email: Please let us know if you would like to email records, and we can set up a secure email connection to ensure additional protection of your medical information.</li></ul><p>If you encounter any costs associated with sending the medical records, please send us a receipt so that we can reimburse you.</p>"
         },
         "Partial": {
           "Subject": "Medical records",
           "Message": "We have received some of the medical records needed.",
-          "More": "<p>We are awaiting additional records. Typically, the most important records for us to receive are:</p><ul><li>specialist clinic notes (e.g. neurologist, cardiologist, nephrologist), especially genetics</li><li>genetic test reports, if any</li><li>pathology reports, if any</li><li>MRI or CT scan reports, if any</li></ul><p>Please see our “<a href=\"/assets/pdf/RGP_Guide_Share_Family_Health_Info_100518_clean.pdf\" target=\"_blank\">Guide for Sharing Your Family’s Health Information</a>” for more information.</p><p>Records can be sent to us by:</p><ul><li>Fax: 617-800-1909</li><li>Mail: Rare Genomes Project, Broad Institute, Attn: Dr. Heidi Rehm, 415 Main Street, Cambridge MA 02142</li><li>Email: Please let us know if you would like to email records, and we can set up a secure email connection to ensure additional protection of your medical information.</li></ul><p>If you encounter any costs associated with sending the medical records, please send us a receipt so that we can reimburse you.</p>"
+          "More": "<p>We are awaiting additional records. Typically, the most important records for us to receive are:</p><ul><li>specialist clinic notes (e.g. neurologist, cardiologist, nephrologist), especially genetics</li><li>genetic test reports, if any</li><li>pathology reports, if any</li><li>MRI or CT scan reports, if any</li></ul><p>Please see our “<a href=\"/sharing-guide.pdf\" target=\"_blank\">Guide for Sharing Your Family’s Health Information</a>” for more information.</p><p>Records can be sent to us by:</p><ul><li>Fax: 617-800-1909</li><li>Mail: Rare Genomes Project, Broad Institute, Attn: Dr. Heidi Rehm, 415 Main Street, Cambridge MA 02142</li><li>Email: Please let us know if you would like to email records, and we can set up a secure email connection to ensure additional protection of your medical information.</li></ul><p>If you encounter any costs associated with sending the medical records, please send us a receipt so that we can reimburse you.</p>"
         },
         "Received": {
           "Subject": "Medical records",
