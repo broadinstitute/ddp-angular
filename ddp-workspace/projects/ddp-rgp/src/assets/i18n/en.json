@@ -64,13 +64,13 @@
             "Involved": {
                 "Title": "Get Involved",
                 "Subtitle": "Join the research community.",
-                "Text": "The Rare Genomes Project is supported by The Broad Institute of MIT and Harvard in partnership with patients and advocates like you. We believe that families should be at the center of research involving their diseases, and encourage the involvement of families and the advocacy groups that support them throughout the study.",
+                "Text": "The Rare Genomes Project is supported by The Broad Institute of MIT and Harvard in partnership with patients and rare disease advocates. We believe that families should be at the center of research involving their diseases, and encourage the involvement of families and the advocacy groups that support them throughout the study.",
                 "Alt": "Get Involved"
             },
             "Data": {
                 "Title": "Share Data",
                 "Subtitle": "Data sharing is crucial for improving diagnosis rates of rare disease worldwide.",
-                "Text1": "The genetic information generated in this project will be shared with other scientists to ensure it has the widest possible impact. Your genetic data can help families like yours and improve scientists’ understanding of rare disease. Learn more about our data sharing policies",
+                "Text1": "The genetic information generated in this project will be shared with other scientists to ensure it has the widest possible impact. Your genetic data can help other families and improve scientists’ understanding of rare disease. Learn more about our data sharing policies",
                 "Text2": "here",
                 "Alt": "Share Data"
             }
@@ -81,7 +81,7 @@
                 "Title": "Tell us your story",
                 "Text1": "Click",
                 "Text2": "apply",
-                "Text3": "to see a broad overview of the study and learn how you can start an application where you can tell us about the history of rare disease in your family. The information will be reviewed by our study team, and eligible families will be invited to participate. We will contact you to arrange a detailed discussion about the study and send you a consent form.",
+                "Text3": "to see a broad overview of the study and learn how you can start an application. The information will be reviewed by our study team, and eligible families will be invited to participate. We will arrange a time to have a detailed discussion about the study and send a consent form.",
                 "Alt": "Tell us your story"
             },
             "Two": {
