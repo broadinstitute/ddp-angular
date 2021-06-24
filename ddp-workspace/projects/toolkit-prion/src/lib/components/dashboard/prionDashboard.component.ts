@@ -1,8 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { AnnouncementsServiceAgent, ParticipantsSearchServiceAgent } from 'ddp-sdk';
-import { DashboardComponent, ToolkitConfigurationService } from 'toolkit';
+import { AnnouncementsServiceAgent, ParticipantsSearchServiceAgent, SearchParticipant } from 'ddp-sdk';
+import { ToolkitConfigurationService } from 'toolkit';
+import { Observable, Subscription } from 'rxjs';
+import { AnnouncementDashboardMessage } from '../../../../../toolkit/src/lib/models/announcementDashboardMessage';
+import { filter, map } from 'rxjs/operators';
 
 export interface StaticActivity {
   name: string;
@@ -46,11 +49,21 @@ const STATIC_ACTIVITIES: StaticActivity[] = [
                   </ng-container>
                 </ng-container>
                 <section class="PageContent-section">
-                  <ddp-dashboard [studyGuid]="studyGuid"
+                  <h2 class="PageContent-subtitle PageContent-subtitle-dashboard" translate>
+                    SDK.Dashboard.Title
+                  </h2>
+                  <p class="PageContent-text PageContent-text-dashboard" translate>
+                    SDK.Dashboard.Text
+                  </p>
+                  <prion-user-activities [studyGuid]="studyGuid"
+                                        (open)="navigate($event)"
+                                        (loadedEvent)="load($event)">
+                  </prion-user-activities>
+                  <!--<ddp-dashboard [studyGuid]="studyGuid"
                                  (open)="navigate($event)"
                                  (loadedEvent)="loadStaticActivities($event)">
-                  </ddp-dashboard>
-                  <mat-table *ngIf="this.displayStaticActivities" [dataSource]="dataSource" data-ddp-test="staticActivitiesTable"
+                  </ddp-dashboard>-->
+                  <mat-table [dataSource]="dataSource" data-ddp-test="staticActivitiesTable"
                              class="ddp-dashboard ddp-dashboard-static dataTable">
                     <!-- Activity Column -->
                     <ng-container matColumnDef="name">
@@ -128,26 +141,58 @@ const STATIC_ACTIVITIES: StaticActivity[] = [
         </article>
       </div>`
 })
-export class PrionDashboardComponent extends DashboardComponent implements OnInit {
+export class PrionDashboardComponent implements OnInit, OnDestroy {
   public dataSource = STATIC_ACTIVITIES;
   public displayedColumns = ['name', 'summary', 'created', 'status', 'actions'];
   public displayStaticActivities = false;
+  public selectedUser$: Observable<SearchParticipant|null>;
+  public studyGuid: string;
+  public announcementMessages: Array<AnnouncementDashboardMessage>;
+  @Output() loadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
+  private anchor: Subscription = new Subscription();
 
   constructor(
-        private _router: Router,
-        private _announcements: AnnouncementsServiceAgent,
-        _participantsSearch: ParticipantsSearchServiceAgent,
-        @Inject('toolkit.toolkitConfig') private _toolkitConfiguration: ToolkitConfigurationService,
+        private router: Router,
+        private announcements: AnnouncementsServiceAgent,
+        private participantsSearch: ParticipantsSearchServiceAgent,
+        @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService,
         public translator: TranslateService) {
-        super(_router, _announcements, _participantsSearch, _toolkitConfiguration);
   }
 
   public ngOnInit(): void {
-    super.ngOnInit();
+    this.studyGuid = this.toolkitConfiguration.studyGuid;
+
+    const anno = this.announcements.getMessages(this.studyGuid)
+        .pipe(
+            filter(messages => !!messages),
+            map(messages => messages.map(message => ({
+              ...message,
+              shown: true
+            })))
+        ).subscribe(messages => this.announcementMessages = messages);
+    this.anchor.add(anno);
+
+    this.selectedUser$ = this.participantsSearch.getParticipant();
+  }
+
+  public ngOnDestroy(): void {
+    this.anchor.unsubscribe();
+  }
+
+  public closeMessage(index: number): void {
+    this.announcementMessages[index].shown = false;
+  }
+
+  public navigate(id: string): void {
+    this.router.navigate([this.toolkitConfiguration.activityUrl, id]);
   }
 
   public navigateToUrl(url: string): void {
-    this._router.navigateByUrl(url);
+    this.router.navigateByUrl(url);
+  }
+
+  public load(loaded: boolean): void {
+    this.loadedEvent.emit(loaded);
   }
 
   public loadStaticActivities(shouldLoad: boolean): void {

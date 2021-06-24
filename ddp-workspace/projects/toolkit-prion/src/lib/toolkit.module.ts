@@ -47,6 +47,7 @@ import { PrionLoginLandingComponent } from './components/login-landing/prionLogi
 import { PrionCommonLandingComponent } from './components/common-landing/prionCommonLanding.component';
 import { PrionRedirectToLoginLandingComponent } from './components/redirect-to-login-landing/prionRedirectToLoginLanding.component';
 import { PrionRedirectToAuth0LoginComponent } from './components/redirect-to-auth0-login/prionRedirectToAuth0Login.component';
+import { PrionUserActivitiesComponent } from './components/user-activities/prionUserActivities.component';
 
 @NgModule({
   imports: [
@@ -90,6 +91,7 @@ import { PrionRedirectToAuth0LoginComponent } from './components/redirect-to-aut
     PrionRedirectToAuth0LoginComponent,
     PrionRedirectToLoginLandingComponent,
     PrionSessionExpiredComponent,
+    PrionUserActivitiesComponent,
     PrionWorkflowStartActivityComponent
   ],
   exports: [

@@ -605,7 +605,7 @@
     "NextButton": "הבא <span class=\"Icon fa fa-chevron-right\"></span> ",
     "PreviousButton": " <span class=\"Icon fa fa-chevron-left\"></span> הקודם",
     "SavingButton": "שמירה",
-    "EditButton": "המשך",
+    "EditButton": "הצג",
     "StartButton": "התחל",
     "ReviewButton": "הצג",
     "ValidateError": "השלימו את כל השדות הנדרשים.",

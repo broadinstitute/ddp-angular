@@ -605,7 +605,7 @@
     "NextButton": "下一步 <span class=\"Icon fa fa-chevron-right\"></span> ",
     "PreviousButton": " <span class=\"Icon fa fa-chevron-left\"></span> 上一步",
     "SavingButton": "保存",
-    "EditButton": "继续",
+    "EditButton": "查看",
     "StartButton": "开始",
     "ReviewButton": "查看",
     "ValidateError": "请填写所有必填字段。",
