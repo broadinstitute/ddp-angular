@@ -248,7 +248,8 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
       workflow.status === KitTypeToRequest.Saliva,
     additionalCondition: workflows =>
       !!workflows.find(workflow => workflow.workflow === WorkflowKey.EnrollmentDate && workflow.status) &&
-      !workflows.find(workflow => workflow.workflow === WorkflowKey.DateKitSent && workflow.status),
+      !workflows.find(workflow => workflow.workflow === WorkflowKey.DateKitSent && workflow.status) &&
+      !workflows.find(workflow => workflow.workflow === WorkflowKey.DateKitReceived && workflow.status),
     dateWorkflowKey: WorkflowKey.EnrollmentDate,
     baseKey: 'Sample',
     stageKey: 'Enrolled',
