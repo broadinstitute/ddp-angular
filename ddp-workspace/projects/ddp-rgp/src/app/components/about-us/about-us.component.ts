@@ -20,8 +20,4 @@ export class AboutUsComponent {
       maxHeight: '640px',
     });
   }
-
-  public isMemberWithDialog(member: any): boolean {
-    return member.name && member.position && member.bio && member.image;
-  }
 }

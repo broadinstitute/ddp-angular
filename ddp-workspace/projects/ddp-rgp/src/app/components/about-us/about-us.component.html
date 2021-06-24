@@ -96,9 +96,13 @@
           let first = first
         "
       >
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <div
+          class="col-lg-3 col-md-3 col-sm-6 col-xs-12"
+          [class.col-lg-offset-3]="first"
+          [class.col-md-offset-3]="first"
+        >
           <ng-container
-            *ngTemplateOutlet="isMemberWithDialog(member) ? memberTemplate : memberNameOnly; context: { member: member }"
+            *ngTemplateOutlet="memberTemplate; context: { member: member }"
           ></ng-container>
         </div>
       </ng-container>
@@ -190,14 +194,6 @@
       role="button"
       (click)="openDialog(member)"
     >
-      {{ member.name }}
-    </h4>
-  </div>
-</ng-template>
-
-<ng-template #memberNameOnly let-member="member">
-  <div class="TeamMember">
-    <h4 class="Subtitle TeamMember-name-only">
       {{ member.name }}
     </h4>
   </div>
