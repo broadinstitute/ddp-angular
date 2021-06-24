@@ -1155,8 +1155,8 @@
         },
         "ThankYou": {
           "Subject": "Application",
-          "Message": "Thank you for applying!",
-          "More": "<p>At any time during your involvement with the study, contact us with any questions or concerns.</p><p>Please be aware that we may contact you by phone or email. The emails we send you that contain personal identifiers or health information will be sent using an encryption tool called Send Secure unless you have specifically chosen otherwise. These emails can be identified by the words \"Send Secure\" in the subject field, will come from an email address ending in @partners.org, and will ask you to click on an attachment to create an account. If you are unsure if the email you received is from us, please contact us.</p>"
+          "Message": "At any time during your involvement with the study, contact us with any questions or concerns.",
+          "More": "<p>Please be aware that we may contact you by phone or email. The emails we send you that contain personal identifiers or health information will be sent using an encryption tool called Send Secure unless you have specifically chosen otherwise. These emails can be identified by the words \"Send Secure\" in the subject field, will come from an email address ending in @partners.org, and will ask you to click on an attachment to create an account. If you are unsure if the email you received is from us, please contact us.</p>"
         }
       },
       "ApplicationDecision": {
