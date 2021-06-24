@@ -15,6 +15,20 @@
     line-height: 34px;
 }
 
+.participate-step-label {
+    font-size: 1rem;
+    font-family: $primary-font-medium;
+    letter-spacing: -0.07px;
+    line-height: 24px;
+    margin-right: 0.5rem;
+}
+
+.participate-step-time {
+    font-size: 1rem;
+    letter-spacing: -0.07px;
+    line-height: 24px;
+}
+
 .btn-common {
     font-family: $primary-font-medium;
     text-decoration: none;
@@ -31,6 +45,11 @@
 .btn-auth {
     padding: 0.65rem 1.5rem;
     line-height: 20px;
+}
+
+// for buttons
+.small-letter-spacing {
+    letter-spacing: -0.016rem;
 }
 
 @media screen and (min-width: $desktop-breakpoint) {

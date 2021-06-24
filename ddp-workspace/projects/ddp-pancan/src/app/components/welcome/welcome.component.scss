@@ -12,7 +12,7 @@ section {
     text-align: center;
 
     &:nth-of-type(even) {
-        background-color: #F6F7FA;
+        background-color: $section-grey-background-color;
     }
 
     &.introduction {
@@ -108,15 +108,6 @@ section {
 
             &__title {
                 display: inline;
-                font-family: $primary-font-medium;
-                letter-spacing: -0.07px;
-                line-height: 24px;
-                margin-right: 8px;
-            }
-
-            &__time {
-                letter-spacing: -0.07px;
-                line-height: 24px;
             }
 
             &__description {
@@ -211,14 +202,6 @@ section {
     text-align: center;
 }
 
-.title {
-    @extend .static-page-title;
-}
-
-.text {
-    @extend .static-page-paragraph-text
-}
-
 .btn {
     font-size: 1.13rem;
     padding: 1rem 2rem;
@@ -232,10 +215,6 @@ section {
 
 .learn-more-btn {
     margin-top: 2.81rem;
-}
-
-.small-letter-spacing {
-    letter-spacing: -0.016rem;
 }
 
 .center {

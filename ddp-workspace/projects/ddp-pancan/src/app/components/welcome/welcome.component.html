@@ -1,7 +1,7 @@
 <main class="main">
     <section class="introduction">
-        <h2 class="title" translate>App.HomePage.IntroductionSection.Title</h2>
-        <p class="text" translate>App.HomePage.IntroductionSection.Text</p>
+        <h2 class="title static-page-title" translate>App.HomePage.IntroductionSection.Title</h2>
+        <p class="text static-page-paragraph-text" translate>App.HomePage.IntroductionSection.Text</p>
         <a mat-flat-button
            [routerLink]="'/' + AppRoutes.CountMeIn"
            class="btn join-cmi-btn center btn-common"
@@ -19,8 +19,8 @@
     </section>
 
     <section class="learn-more">
-        <h2 class="title" translate>App.HomePage.LearnMoreSection.Title</h2>
-        <p class="text" [innerHTML]="'App.HomePage.LearnMoreSection.Text' | translate"></p>
+        <h2 class="title static-page-title" translate>App.HomePage.LearnMoreSection.Title</h2>
+        <p class="text static-page-paragraph-text" [innerHTML]="'App.HomePage.LearnMoreSection.Text' | translate"></p>
         <a mat-stroked-button
            [routerLink]="'/' + AppRoutes.AboutUs"
            class="btn learn-more-btn center small-letter-spacing btn-common btn-outline">
@@ -34,35 +34,29 @@
              src="../../../assets/images/map.png"
              [alt]="'App.HomePage.JoinSection.ImageAlt' | translate"/>
         <div class="description">
-            <h2 class="title" translate>App.HomePage.JoinSection.Title</h2>
-            <p class="text" [innerHTML]="'App.HomePage.JoinSection.Text1' | translate"></p>
-            <p class="text" [innerHTML]="'App.HomePage.JoinSection.Text2' | translate"></p>
+            <h2 class="title static-page-title" translate>App.HomePage.JoinSection.Title</h2>
+            <p class="text static-page-paragraph-text" [innerHTML]="'App.HomePage.JoinSection.Text1' | translate"></p>
+            <p class="text static-page-paragraph-text" [innerHTML]="'App.HomePage.JoinSection.Text2' | translate"></p>
         </div>
     </section>
 
     <section class="participate">
-        <h2 class="title" translate>App.HomePage.ParticipateSection.Title</h2>
+        <h2 class="title static-page-title" translate>App.HomePage.ParticipateSection.Title</h2>
         <div class="steps container">
-            <figure class="step" *ngFor="let step of participationSteps; let last=last;">
+            <figure class="step" *ngFor="let step of 'App.HomePage.ParticipateSection.Steps' | translate; let i = index;">
                 <img class="step__image"
-                     [src]="'../../../assets/images/' + step.img"
+                     [src]="'../../../assets/images/' + participationStepsImages[i]"
                      width="150" height="150"
-                     [alt]="'App.HomePage.ParticipateSection.' + step.key + '.ImageAlt' | translate">
+                     [alt]="step.ImageAlt">
 
-                <figcaption class="step__title"
-                            [innerText]="'App.HomePage.ParticipateSection.' + step.key + '.Title' | translate">
-                </figcaption>
-                <span class="step__time" *ngIf="!last"
-                      [innerText]="'App.HomePage.ParticipateSection.' + step.key + '.Time' | translate">
-                </span>
-                <div class="step__description"
-                     [innerText]="'App.HomePage.ParticipateSection.' + step.key + '.Description' | translate">
-                </div>
+                <figcaption class="step__title participate-step-label">{{step.Title}}</figcaption>
+                <span class="step__time participate-step-time" *ngIf="step.Time">{{step.Time}}</span>
+                <div class="step__description">{{step.Description}}</div>
             </figure>
         </div>
         <div class="container">
             <a mat-stroked-button
-               [routerLink]="'/' + AppRoutes.AboutUs"
+               [routerLink]="'/' + AppRoutes.Participation"
                class="btn learn-more-btn center small-letter-spacing btn-common btn-outline">
                 {{'App.HomePage.ParticipateSection.LearnMoreAboutParticipationButton' | translate}}
             </a>
@@ -70,7 +64,7 @@
     </section>
 
     <section class="faq">
-        <h2 class="title" translate>App.FAQ.Title</h2>
+        <h2 class="title static-page-title" translate>App.FAQ.Title</h2>
         <div class="container">
             <app-faq-section questions="App.FAQ.Questions" questionsCount="5"></app-faq-section>
         </div>
@@ -83,9 +77,9 @@
 
     <section class="stay-informed">
         <div class="container">
-            <h2 class="title" translate>App.HomePage.StayInformedSection.Title</h2>
+            <h2 class="title static-page-title" translate>App.HomePage.StayInformedSection.Title</h2>
             <div class="social-media">
-                <div class="text" translate>App.HomePage.StayInformedSection.Text</div>
+                <div class="text static-page-paragraph-text" translate>App.HomePage.StayInformedSection.Text</div>
                 <div class="social-media__links">
                     <a class="social-media__link" [href]="twitterUrl" target="_blank">
                         <img class="social-media__logo" lazy-resource src="assets/images/twitter.svg"
@@ -112,8 +106,8 @@
              lazy-resource
              src="assets/images/hands.png"
              [alt]="'App.HomePage.CountMeInSection.ImageAlt' | translate">
-        <h2 class="title" translate>App.HomePage.CountMeInSection.Title</h2>
-        <p class="text" translate>App.HomePage.CountMeInSection.Text</p>
+        <h2 class="title static-page-title" translate>App.HomePage.CountMeInSection.Title</h2>
+        <p class="text static-page-paragraph-text" translate>App.HomePage.CountMeInSection.Text</p>
         <a mat-raised-button
            [routerLink]="'/' + AppRoutes.CountMeIn"
            class="btn join-cmi-btn btn-common"

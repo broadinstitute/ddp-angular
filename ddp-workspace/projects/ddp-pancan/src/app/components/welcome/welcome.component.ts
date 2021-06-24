@@ -8,11 +8,14 @@ import { AppRoutes } from '../app-routes';
 })
 export class WelcomeComponent {
     readonly AppRoutes = AppRoutes;
-    readonly participationSteps = [
-        {key: 'Step1', img: 'step1.png'},
-        {key: 'Step2', img: 'step3.png'},
-        {key: 'Step3', img: 'step4.png'},
-        {key: 'Step4', img: 'step5.png'}
+
+    /* the numeration of images is not in order because 2d step is skipped here
+       in comparison with full (5) steps on Participation page */
+    readonly participationStepsImages = [
+        'step1.png',
+        'step3.png',
+        'step4.png',
+        'step5.png'
     ];
     twitterUrl: string;
     facebookUrl: string;
