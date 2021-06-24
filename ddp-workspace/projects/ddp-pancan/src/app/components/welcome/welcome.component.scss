@@ -108,11 +108,6 @@ section {
 
             &__title {
                 display: inline;
-                @extend .participate-step-label;
-            }
-
-            &__time {
-                @extend .participate-step-time;
             }
 
             &__description {
@@ -205,14 +200,6 @@ section {
     max-width: 45.5rem;
     margin: 0 auto;
     text-align: center;
-}
-
-.title {
-    @extend .static-page-title;
-}
-
-.text {
-    @extend .static-page-paragraph-text
 }
 
 .btn {
