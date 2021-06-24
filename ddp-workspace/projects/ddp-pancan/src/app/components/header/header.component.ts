@@ -1,7 +1,7 @@
 import { Component, Inject, HostListener, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
-import { WindowRef, SessionMementoService } from 'ddp-sdk';
+import { WindowRef } from 'ddp-sdk';
 
 @Component({
     selector: 'app-header',
@@ -13,7 +13,6 @@ export class HeaderComponent implements OnInit {
     public isPageScrolled = false;
 
     constructor(
-        private session: SessionMementoService,
         private window: WindowRef,
         private router: Router,
         @Inject(DOCUMENT) private document: any) { }
@@ -28,10 +27,6 @@ export class HeaderComponent implements OnInit {
 
     public openCloseMenu(): void {
         this.isPanelOpened = !this.isPanelOpened;
-    }
-
-    public get isAuthenticated(): boolean {
-        return this.session.isAuthenticatedSession();
     }
 
     @HostListener('window: scroll') public onWindowScroll(): void {

@@ -9,7 +9,7 @@ body {
     height: 100vh;
     font-size: 16px;
     font-weight: 400;
-    min-width: 370px;
+    min-width: 390px;
 }
 
 html {
@@ -58,7 +58,12 @@ a {
 .SimpleButton {
     @extend .btn-common;
     @extend .btn-outline;
-    @extend .btn-header;
+    @extend .btn-auth;
+
+    .footer & {
+        color: white;
+        border-color: white;
+    }
 }
 
 .wrapper {
@@ -75,9 +80,4 @@ a {
 
 .Link {
     color: $primary-color;
-}
-
-// TODO: borders below for debug reason. Remove when header and footer are ready
-footer {
-    border-top: 1px solid black;
 }

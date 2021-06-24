@@ -1,1 +1,22 @@
-<footer class="footer">footer</footer>
+<footer class="footer">
+    <div class="actions">
+        <div class="actions__wrapper">
+            <button mat-button
+                    class="back-to-top btn-common"
+                    (click)="goToTop()">
+                <mat-icon>arrow_drop_up</mat-icon>
+                {{'App.Footer.BackToTopButton' | translate}}
+            </button>
+            <app-navigation></app-navigation>
+        </div>
+        <app-auth class="auth"></app-auth>
+    </div>
+    <div class="info">
+        <span translate>App.Footer.Copyright</span>
+        <div class="contacts">
+            <span translate class="contacts__label">App.Footer.Contacts</span>
+            <span class="contacts__item">{{phone}}</span>
+            <span class="contacts__item">{{email}}</span>
+        </div>
+    </div>
+</footer>

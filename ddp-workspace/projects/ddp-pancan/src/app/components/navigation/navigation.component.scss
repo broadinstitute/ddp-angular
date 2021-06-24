@@ -1,0 +1,17 @@
+@import '../../../styles/variables.scss';
+
+.navigation {
+    list-style: none;
+    display: flex;
+}
+
+.navigation__item {
+    margin-right: 2rem;
+    display: flex;
+}
+
+.navigation__link {
+    font-family: $primary-font-medium;
+    letter-spacing: -0.015rem;
+    color: inherit;
+}
