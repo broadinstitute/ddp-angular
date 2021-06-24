@@ -19,19 +19,19 @@ export class RegistrationStatusService {
   constructor(private loggingService: LoggingService) {}
 
   findStatus(response: UserStatusResponse): WorkflowModel {
-    return response.workflows.find(
+    return response?.workflows.find(
       w => w.workflow === Workflow.RegistrationStatus,
     );
   }
 
   isContactUsStatus(workflow: WorkflowModel): boolean {
     return this.contactUsStatuses.includes(
-      workflow.status as RegistrationStatus,
+      workflow?.status as RegistrationStatus,
     );
   }
 
   isEnrolled(workflow: WorkflowModel): boolean {
-    return workflow.status === RegistrationStatus.Enrolled;
+    return workflow?.status === RegistrationStatus.Enrolled;
   }
 
   getEnrollmentMessageKey(workflow: WorkflowModel): string {
