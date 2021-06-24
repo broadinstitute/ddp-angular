@@ -756,12 +756,12 @@
         "Items": [
             {
                 "title": "Get to know our project",
-                "text": "The Rare Genomes Project is a research study focused on patients and families with <span class=\"Accent\">rare and genetically undiagnosed conditions</span>. We use genomic sequencing to search for the cause of rare disease in these families and hope to accelerate the rate of rare disease diagnosis in the process. For more information, please watch our informational video (click <a href=\"https://youtu.be/ux4_MwSALrc\" target=\"_blank\" class=\"Link\">here</a> to watch), review our <a href=\"/eligibility-criteria\" class=\"Link\">eligibility criteria</a>, and read through the steps below.",
+                "text": "The Rare Genomes Project is a research study focused on patients and families with <span class=\"Accent\">rare and genetically undiagnosed conditions</span>. We use genomic sequencing to search for the cause of rare disease in these families and hope to accelerate the rate of rare disease diagnosis in the process. For more information, review our <a href=\"/eligibility-criteria\" class=\"Link\">eligibility criteria</a> and read through the steps below.",
                 "image": "/assets/images/step-1.jpg "
             },
             {
                 "title": "Tell us about your family",
-                "text": "During the application process, we will ask about the rare, suspected genetic disease in your family, limited demographic information, family history information, and the results of previous genetic and other tests. After you complete your application, our study team will review the information you submit to determine if you are a good fit for the study. If so, we will set up a consent session with your family to explain the study and make sure that all of your questions are answered before sending you a consent document to sign.",
+                "text": "During the application process, we will ask about the rare, suspected genetic disease in your family, limited demographic information, family history information, and the results of previous genetic and other tests. After you complete your application, our study team will review the information you submit to determine if you are a good fit for the study. If so, we will set up a video meeting or phone conference with you and your family to explain the study and make sure that all of your questions are answered. Each person in the family will receive a consent document to sign to participate.",
                 "image": "/assets/images/step-2.jpg "
             },
             {
@@ -791,7 +791,7 @@
             },
             {
                 "title": "Receive clinically significant results",
-                "text": "If we find results that we believe may explain the cause of the rare condition present in your family, we will contact you and ask if you would like to have the findings confirmed in a clinical laboratory. If you do, we will work with you and your doctor to return the results to you.",
+                "text": "If we find results that we believe may explain the cause of your rare condition, we will contact you and ask if you would like to have the findings confirmed with our clinical laboratory partner, the Laboratory for Molecular Medicine (LMM) in Cambridge, MA. If you do, we will work with you and your doctor to return the results to you.",
                 "image": "/assets/images/step-8.jpg "
             }
         ],
