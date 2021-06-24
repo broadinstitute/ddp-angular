@@ -1,5 +1,84 @@
 @import '../../../styles/variables.scss';
 
+$footer-background: #131314;
+$footer-divider-color: #444444;
+
 .footer {
     min-height: $footer-height;
+    background: $footer-background;
+    color: white;
+}
+
+.actions {
+    border-bottom: 1px solid $footer-divider-color;
+    font-size: 1.17rem;
+    padding: 1.15rem 2rem 1.15rem 3.375rem;
+
+    &__wrapper {
+        flex-direction: column;
+        display: flex;
+    }
+
+    ::ng-deep.navigation {
+        flex-direction: column;
+        line-height: 35px;
+        padding-left: 0;
+    }
+}
+
+.info {
+    height: 6.25rem;
+    flex-direction: column;
+    padding: 1.15rem 2rem 2.5rem 3.375rem;
+}
+
+.info,
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.back-to-top {
+    font-size: 1.17rem;
+    text-align: left;
+    padding: 0;
+}
+
+.contacts__item {
+    font-family: $primary-font-medium;
+    margin-left: 1.5rem;
+}
+
+@media screen and (min-width: $tablet-breakpoint) {
+    .actions,
+    .back-to-top {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (min-width: $desktop-breakpoint) {
+    .actions {
+        height: 8.625rem;
+
+        &__wrapper {
+            flex-direction: row;
+        }
+
+        ::ng-deep.navigation {
+            flex-direction: row;
+            line-height: normal;
+            padding-left: 40px;
+        }
+    }
+
+    .info,
+    .actions {
+        padding: 0 2rem 0 3.375rem;
+    }
+
+    .info {
+        flex-direction: row;
+    }
 }

@@ -27,6 +27,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { FaqSectionComponent } from './components/faq-section/faq-section.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { ParticipationComponent } from './components/participation/participation.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { AuthComponent } from './components/auth/auth.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -90,6 +92,8 @@ export function translateFactory(translate: TranslateService,
         FaqSectionComponent,
         FaqComponent,
         ParticipationComponent,
+        NavigationComponent,
+        AuthComponent,
     ],
     imports: [
         BrowserModule,

@@ -216,15 +216,9 @@ section {
 }
 
 .btn {
-    @extend .btn-common;
-
     font-size: 1.13rem;
     padding: 1rem 2rem;
     line-height: 22px;
-
-    &.mat-stroked-button {
-        @extend .btn-outline;
-    }
 }
 
 .join-cmi-btn {

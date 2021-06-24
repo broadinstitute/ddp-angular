@@ -1048,8 +1048,12 @@
     "DashboardPage": {
         "Title": "Dashboard",
         "Info": {
-          "Paragraph1": "Thank you for your interest in the Rare Genomes Project. This page will provide you information about the steps regarding your involvement with the study.",
-          "Paragraph2": "If you have questions, browse our Frequently Asked Questions page or contact the study staff at <a href=\"tel:617-714-7395\">617-714-7395</a> or <a href=\"mailto:raregenomes@broadinstitute.org\">raregenomes@broadinstitute.org</a>."
+            "Paragraph1": "Thank you for your interest in the Rare Genomes Project. This page will provide you information about the steps regarding your involvement with the study.",
+            "Paragraph2": {
+                "Intro": "If you have questions, browse our ",
+                "Link": "Frequently Asked Questions",
+                "Closing": " page or contact the study staff at <a href=\"tel:617-714-7395\">617-714-7395</a> or <a href=\"mailto:raregenomes@broadinstitute.org\">raregenomes@broadinstitute.org</a>."
+            }
         },
         "StudyMessages": {
           "Title": "Study Messages",
@@ -1129,13 +1133,9 @@
     },
     "StudyMessages": {
       "Application": {
-        "PreReview": {
-          "Subject": "Application",
-          "Message": "Thank you for your interest in the Rare Genomes Project! Please see below to complete your application."
-        },
         "InReview": {
           "Subject": "Application",
-          "Message": "Thank you for applying! Your application is being reviewed.",
+          "Message": "Your application is being reviewed.",
           "More": "<p>We will contact you as soon as a decision about your application has been made. If you do not hear from our office within 6 weeks, please contact us.</p>"
         },
         "ThankYou": {
@@ -1169,7 +1169,7 @@
       "ConsentSession": {
         "ScheduleNeeded": {
           "Subject": "Consent session",
-          "Message": "Please schedule an appointment for a Consent Session.<br /><a href=\"https://rgpscheduling.as.me/schedule.php\" target=\"_blank\">Schedule an appointment</a>"
+          "Message": "Please <a href=\"https://rgpscheduling.as.me/schedule.php\" target=\"_blank\">schedule an appointment</a> for a Consent Session."
         },
         "Scheduled": {
           "Subject": "Consent session",

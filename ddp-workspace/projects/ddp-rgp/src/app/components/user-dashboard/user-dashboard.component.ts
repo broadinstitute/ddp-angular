@@ -12,6 +12,7 @@ import {
 import { StudyMessage } from '../../models/StudyMessage';
 import { StudyMessagesService } from '../../services/study-messages.service';
 import { filter, take } from 'rxjs/operators';
+import { Routes } from '../../routes';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -22,6 +23,7 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
   loading = false;
   messages: StudyMessage[] = [];
   activities: ActivityInstance[] = [];
+  Routes = Routes;
   private subs = new CompositeDisposable();
 
   constructor(

@@ -6,20 +6,8 @@
                  [alt]="'App.Header.Logo.ImageAlt' | translate">
             <span class="project-logo__text" [innerHTML]="'App.Header.Logo.Title' | translate"></span>
         </a>
-        <ng-container *ngTemplateOutlet="controls"></ng-container>
-        <div class="auth">
-            <ddp-language-selector></ddp-language-selector>
-            <div class="auth__login">
-                <ddp-sign-in-out></ddp-sign-in-out>
-            </div>
-            <a *ngIf="!isAuthenticated"
-               mat-flat-button
-               class="join-button"
-               [routerLink]="AppRoutes.CountMeIn"
-               color="primary">
-                <span translate>App.Navigation.Join</span>
-            </a>
-        </div>
+        <app-navigation class="nav"></app-navigation>
+        <app-auth class="auth"></app-auth>
         <button class="hamburger hamburger--slider" [ngClass]="{'is-active': isPanelOpened}"
                 [attr.aria-label]="'Common.Buttons.HeaderMenu.AriaLabel' | translate" (click)="openCloseMenu()">
             <span class="hamburger-box">
@@ -28,33 +16,6 @@
         </button>
     </div>
     <div class="panel-controls">
-        <ng-container *ngTemplateOutlet="controls"></ng-container>
+        <app-navigation class="nav"></app-navigation>
     </div>
 </header>
-
-<ng-template #controls>
-    <nav class="nav">
-        <ul class="navigation">
-            <li class="navigation__item">
-                <a class="header-link" [routerLink]="AppRoutes.AboutUs" routerLinkActive="header-link_active" translate>
-                    App.Navigation.AboutUs
-                </a>
-            </li>
-            <li class="navigation__item">
-                <a class="header-link" [routerLink]="AppRoutes.Participation" routerLinkActive="header-link_active" translate>
-                    App.Navigation.Participation
-                </a>
-            </li>
-            <li class="navigation__item">
-                <a class="header-link" [routerLink]="AppRoutes.ScientificResearch" routerLinkActive="header-link_active" translate>
-                    App.Navigation.ScientificResearch
-                </a>
-            </li>
-            <li class="navigation__item">
-                <a class="header-link" [routerLink]="AppRoutes.FAQ" routerLinkActive="header-link_active" translate>
-                    App.Navigation.FAQ
-                </a>
-            </li>
-        </ul>
-    </nav>
-</ng-template>
