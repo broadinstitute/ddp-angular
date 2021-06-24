@@ -1018,7 +1018,7 @@
                 "Item2": "Do <span class=\"Accent\">NOT</span> have a condition with a low suspicion of a single gene cause, such as <a href=\"https://cleftline.org/family-resources/introduction-to-cleft-craniofacial-conditions/\" target=\"_blank\" class=\"Link Link--blue\"> isolated cleft lip and/or palate</a>, isolated <a href=\"http://www.childrenshospital.org/conditions-and-treatments/conditions/m/microtia\" target=\"_blank\" class=\"Link Link--blue\">microtia</a>, or <a href=\"https://rarediseases.info.nih.gov/diseases/6582/hemifacial-microsomia\" target=\"_blank\" class=\"Link Link--blue\">hemifacial microsomia</a>",
                 "Item3": "Are currently under the care of a medical geneticist or relevant subspecialist",
                 "Item4": "Live in the United States",
-                "Item5": "Are English-speaking"
+                "Item5": "Are English- or Spanish-speaking"
             }
         },
         "Steps": {
@@ -1026,8 +1026,8 @@
             "One": {
                 "Title": "Tell us your story",
                 "Text1": "Click",
-                "Text2": "apply",
-                "Text3": "to tell us about the history of the craniofacial condition in your family. The information will be reviewed by our study team, and eligible families will be invited to participate. We will contact you to arrange a detailed discussion about the study and send you a consent form.",
+                "Text2": "Apply",
+                "Text3": "to see a broad overview of the study and learn how you can start an application. The information will be reviewed by our study team, and eligible families will be invited to participate. We will arrange a time to have a detailed discussion about the study and send a consent form.",
                 "Alt": "Tell us your story"
             },
             "Two": {
@@ -1043,7 +1043,7 @@
         },
         "Info": {
             "Title": "Information and Resources",
-            "Text": "Additional information and resources for individuals with isolated and syndromic craniofacial conditions can be found here: <a href=\"https://www.shrinershospitalsforchildren.org/boston/cleftlippalate\" target=\"_blank\" class=\"Link Accent\">Shriners Hospitals for Children</a>, the <a href=\"https://acpa-cpf.org\" target=\"_blank\" class=\"Link Accent\">American Cleft Palate and Craniofacial Association</a>, <a href=\"https://www.ncbi.nlm.nih.gov/books/NBK1116/\" target=\"_blank\" class=\"Link Accent\">GeneReviews</a>, and the <a href=\"https://ghr.nlm.nih.gov/\" target=\"_blank\" class=\"Link Accent\">Genetics Home Reference</a>."
+            "Text": "Additional information and resources for individuals with isolated and syndromic craniofacial conditions can be found here: <a href=\"https://www.shrinershospitalsforchildren.org/boston/cleftlippalate\" target=\"_blank\" class=\"Link Accent\">Shriners Hospitals for Children</a>, the <a href=\"https://acpa-cpf.org\" target=\"_blank\" class=\"Link Accent\">American Cleft Palate and Craniofacial Association</a>, <a href=\"https://www.ncbi.nlm.nih.gov/books/NBK1116/\" target=\"_blank\" class=\"Link Accent\">GeneReviews</a>, and the <a href=\"https://medlineplus.gov/genetics/condition/limb-girdle-muscular-dystrophy/#definition\" target=\"_blank\" class=\"Link Accent\">U.S. National Library of Medicine Medline Plus</a>."
         }
     },
     "DashboardPage": {
