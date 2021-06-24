@@ -954,7 +954,7 @@
                 "Have had prior genetic testing that was negative or did not provide a full genetic explanation*",
                 "Are currently under the care of a neurologist, medical geneticist, or relevant subspecialist",
                 "Live in the United States",
-                "Are English-speaking"
+                "Are English- or Spanish-speaking"
             ],
             "Ending": {
                 "Text1": "*If you are unsure whether you have a clinical diagnosis of LGMD or you have not had prior genetic testing for your LGMD, you may still be eligible to participate and are encouraged to apply by",
@@ -966,8 +966,8 @@
             "One": {
                 "Title": "Tell us your story",
                 "Text1": "Click",
-                "Text2": "apply",
-                "Text3": "to tell us about the history of LGMD in your family. The information will be reviewed by our study team, and eligible families will be invited to participate. We will contact you to arrange a detailed discussion about the study and send you a consent form.",
+                "Text2": "Apply",
+                "Text3": "to see a broad overview of the study and learn how you can start an application. The information will be reviewed by our study team, and eligible families will be invited to participate. We will arrange a time to have a detailed discussion about the study and send a consent form.",
                 "Alt": "Tell us your story"
             },
             "Two": {
