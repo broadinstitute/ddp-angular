@@ -552,7 +552,7 @@
                 {
                     "question": "What medical records are needed?",
                     "answers": [
-                        "We require medical records from the affected family member(s). For more information about the types of records that are needed, please see our <a href=\"/sharing-guide.pdf\" target=\"_blank\" class=\"Link\">Guide to Sharing Health Information</a>."
+                        "We require medical records from the affected family member(s). For more information about the types of records that are needed, please see our <a href=\"sharing-guide.pdf\" target=\"_blank\" class=\"Link\">Guide to Sharing Health Information</a>."
                     ]
                 },
                 {
@@ -983,7 +983,7 @@
         },
         "Info": {
             "Title": "Information and Resources",
-            "Text": "Additional information and resources for individuals with LGMD are can be found here: <a href=\"https://www.mda.org/\" target=\"_blank\" class=\"Link Accent\">Muscular Dystrophy Association</a>, <a href=\"https://www.ncbi.nlm.nih.gov/books/NBK1408/\" target=\"_blank\" class=\"Link Accent\">GeneReviews</a>, and the <a href=\"https://ghr.nlm.nih.gov/condition/limb-girdle-muscular-dystrophy#definition\" target=\"_blank\" class=\"Link Accent\"> Genetics Home Reference</a>."
+            "Text": "Additional information and resources for individuals with LGMD are can be found here: <a href=\"https://www.mda.org/\" target=\"_blank\" class=\"Link Accent\">Muscular Dystrophy Association</a>, <a href=\"https://www.ncbi.nlm.nih.gov/books/NBK1408/\" target=\"_blank\" class=\"Link Accent\">GeneReviews</a>, and the <a href=\"https://ghr.nlm.nih.gov/condition/limb-girdle-muscular-dystrophy#definition\" target=\"_blank\" class=\"Link Accent\">U.S. National Library of Medicine Medline Plus</a>."
         },
         "Partner": {
             "Text": "We thank the Muscular Dystrophy Association for their financial support of this project.",
@@ -1043,7 +1043,7 @@
         },
         "Info": {
             "Title": "Information and Resources",
-            "Text": "Additional information and resources for individuals with isolated and syndromic craniofacial conditions can be found here: <a href=\"https://www.shrinershospitalsforchildren.org/boston/cleftlippalate\" target=\"_blank\" class=\"Link Accent\">Shriners Hospitals for Children</a>, the <a href=\"https://acpa-cpf.org\" target=\"_blank\" class=\"Link Accent\">American Cleft Palate and Craniofacial Association</a>, <a href=\"https://www.ncbi.nlm.nih.gov/books/NBK1116/\" target=\"_blank\" class=\"Link Accent\">GeneReviews</a>, and the <a href=\"https://medlineplus.gov/genetics/condition/limb-girdle-muscular-dystrophy/#definition\" target=\"_blank\" class=\"Link Accent\">U.S. National Library of Medicine Medline Plus</a>."
+            "Text": "Additional information and resources for individuals with isolated and syndromic craniofacial conditions can be found here: <a href=\"https://www.shrinershospitalsforchildren.org/boston/cleftlippalate\" target=\"_blank\" class=\"Link Accent\">Shriners Hospitals for Children</a>, the <a href=\"https://acpa-cpf.org\" target=\"_blank\" class=\"Link Accent\">American Cleft Palate and Craniofacial Association</a>, <a href=\"https://www.ncbi.nlm.nih.gov/books/NBK1116/\" target=\"_blank\" class=\"Link Accent\">GeneReviews</a>, and the <a href=\"https://ghr.nlm.nih.gov/\" target=\"_blank\" class=\"Link Accent\">U.S. National Library of Medicine Medline Plus</a>."
         }
     },
     "DashboardPage": {
