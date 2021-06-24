@@ -18,6 +18,7 @@ export class AboutUsComponent {
       data,
       scrollStrategy: new NoopScrollStrategy(),
       maxHeight: '640px',
+      autoFocus: false,
     });
   }
 }

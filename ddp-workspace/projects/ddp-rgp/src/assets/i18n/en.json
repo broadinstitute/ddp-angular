@@ -172,8 +172,15 @@
                         "name": "Brian Mangilog",
                         "degree": "",
                         "position": "Clinical Project Coordinator",
-                        "bio": "Brian is a clinical project coordinator for the Rare Genomes Project, focusing on consenting families to the study and outreach efforts. He studied neurobiology as an undergraduate and has experience in patient advocacy and community outreach.",
+                        "bio": "Brian is a clinical project coordinator for the Rare Genomes Project, focusing on family engagement with the study and outreach to the rare disease community. He has a background in neurobiology and patient advocacy.",
                         "image": "brian-mangilog.jpeg"
+                    },
+                    {
+                        "name": "Jillian Serrano",
+                        "degree": "",
+                        "position": "Clinical Project Coordinator",
+                        "bio": "Jillian is a clinical project coordinator for the Rare Genomes Project, focusing on consenting families to the study and facilitating sample and medical record collection. She studied biology as an undergraduate and has experience in patient care and advocacy and an interest in the project's expansion to reach the Spanish speaking population.",
+                        "image": "jillian-serrano.jpeg"
                     },
                     {
                         "name": "Grace VanNoy",
@@ -292,10 +299,17 @@
                             "image": "emily-oheir.jpeg"
                         },
                         {
+                            "name": "Ikeoluwa Osei-Owusu",
+                            "degree": "PhD",
+                            "position": "Genomic Analyst",
+                            "bio": "Ikeoluwa is a genomic analyst assessing the disease consequence of genomic variation in families with rare disease through analysis of their exomes and/or genomes. Studying autistic children with self-injurious behavior, she received her doctoral degree in human genetics from Johns Hopkins University School of Medicine.",
+                            "image": "ikeoluwa.jpg"
+                        },
+                        {
                             "name": "Lynn Pais",
                             "degree": "MS",
-                            "position": "Genomic Analyst",
-                            "bio": "Lynn is a genomic variant analyst who performs exome and genome analyses for families with rare disease. She has a master’s degree in human genetics and previously worked as a project manager for a genetic research study at Brigham and Women’s Hospital.",
+                            "position": "Clinical Genomic Analyst",
+                            "bio": "Lynn is a senior clinical genomic analyst working to improve genetic diagnoses for families with rare genetic conditions. She is trained in genetic counseling and has over eight years of experience in clinical genetics and research settings.",
                             "image": "lynn-pais.jpg"
                         },
                         {
