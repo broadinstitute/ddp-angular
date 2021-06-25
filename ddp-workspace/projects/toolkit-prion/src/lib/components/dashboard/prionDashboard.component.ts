@@ -4,8 +4,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { AnnouncementsServiceAgent, ParticipantsSearchServiceAgent, SearchParticipant } from 'ddp-sdk';
 import { ToolkitConfigurationService } from 'toolkit';
 import { Observable, Subscription } from 'rxjs';
-import { AnnouncementDashboardMessage } from '../../../../../toolkit/src/lib/models/announcementDashboardMessage';
 import { filter, map } from 'rxjs/operators';
+import { DashboardAnnouncement } from '../../models/dashboardAnnouncement';
 
 export interface StaticActivity {
   name: string;
@@ -59,10 +59,6 @@ const STATIC_ACTIVITIES: StaticActivity[] = [
                                         (open)="navigate($event)"
                                         (loadedEvent)="load($event)">
                   </prion-user-activities>
-                  <!--<ddp-dashboard [studyGuid]="studyGuid"
-                                 (open)="navigate($event)"
-                                 (loadedEvent)="loadStaticActivities($event)">
-                  </ddp-dashboard>-->
                   <mat-table [dataSource]="dataSource" data-ddp-test="staticActivitiesTable"
                              class="ddp-dashboard ddp-dashboard-static dataTable">
                     <!-- Activity Column -->
@@ -144,10 +140,9 @@ const STATIC_ACTIVITIES: StaticActivity[] = [
 export class PrionDashboardComponent implements OnInit, OnDestroy {
   public dataSource = STATIC_ACTIVITIES;
   public displayedColumns = ['name', 'summary', 'created', 'status', 'actions'];
-  public displayStaticActivities = false;
   public selectedUser$: Observable<SearchParticipant|null>;
   public studyGuid: string;
-  public announcementMessages: Array<AnnouncementDashboardMessage>;
+  public announcementMessages: Array<DashboardAnnouncement>;
   @Output() loadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
   private anchor: Subscription = new Subscription();
 
@@ -193,9 +188,5 @@ export class PrionDashboardComponent implements OnInit, OnDestroy {
 
   public load(loaded: boolean): void {
     this.loadedEvent.emit(loaded);
-  }
-
-  public loadStaticActivities(shouldLoad: boolean): void {
-    this.displayStaticActivities = shouldLoad;
   }
 }

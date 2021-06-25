@@ -118,7 +118,6 @@ import { ActivityInstanceState } from '../../../../../ddp-sdk/src/lib/models/act
                         <ng-container
                             *ngIf="'COMPLETE' === element.statusCode">
                             <ng-container *ngIf="element.activityCode === longitudinalActivityCode; else viewAction">
-                                <!--<ng-container *ngTemplateOutlet="viewAction"></ng-container>-->
                                 <button class="ButtonFilled Button--cell button button_small button_primary"
                                 (click)="editActivity(element.instanceGuid, element.activityCode)"
                                 [innerHTML]="getButtonTranslate(element) | translate">
@@ -143,13 +142,13 @@ import { ActivityInstanceState } from '../../../../../ddp-sdk/src/lib/models/act
 export class PrionUserActivitiesComponent implements OnInit, OnDestroy, OnChanges, AfterContentInit {
     // @Output() open: EventEmitter<string>;
     // Ideally, this feature would be supported via a study builder option
-    private longitudinalActivityCode = 'PRIONMEDICAL';
     @Input() studyGuid: string;
     @Input() displayedColumns: Array<DashboardColumns> = ['name', 'summary', 'date', 'status', 'actions'];
     @Output() open: EventEmitter<string> = new EventEmitter();
     @Output() loadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
     public dataSource: UserActivitiesDataSource;
     public loaded = false;
+    public longitudinalActivityCode = 'PRIONMEDICAL';
     private states: Array<ActivityInstanceState> | null = null;
     private studyGuidObservable = new BehaviorSubject<string | null>(null);
     private loadingAnchor: Subscription;
