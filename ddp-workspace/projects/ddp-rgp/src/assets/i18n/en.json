@@ -314,7 +314,7 @@
                         },
                         {
                             "name": "Ellie Seaby",
-                            "degree": "MD, PhD",
+                            "degree": "",
                             "position": "Clinical Genomic Analyst",
                             "bio": "Ellie is a clinical research fellow undertaking a PhD in genomic medicine at the University of Southampton in collaboration with the Broad Institute and Imperial College London. Her research focuses on the discovery of novel disease genes and improving clinical outcomes.",
                             "image": "ellie-seaby.jpeg"
@@ -434,7 +434,7 @@
                 {
                     "question": "What is the goal of The Rare Genomes Project?",
                     "answers": [
-                        "The goal of the Rare Genomes Project is to discover the genes underlying undiagnosed rare, genetic conditions by providing access to genomic sequencing to families affected by rare disease."
+                        "The goal of the Rare Genomes Project is to discover the genes underlying previously undiagnosed rare, genetic conditions by providing access to genomic sequencing to families affected by rare disease."
                     ]
                 },
                 {
@@ -1005,8 +1005,8 @@
         }
     },
     "CraniofacialPage": {
-        "Title": "The craniofacial branch of the Rare Genomes Project is a partnership with the <a href=\"https://www.massgeneral.org/children/services/treatmentprograms.aspx?id=1631&display=overview\" target=\"_blank\" class=\"Link\">Cleft and Craniofacial Center at Massachusetts General Hospital</a> and <a href=\"https://www.shrinershospitalsforchildren.org/boston/cleftlippalate\" target=\"_blank\" class=\"Link\">Shriners Hospitals for Children</a> dedicated to genetic diagnosis and gene discovery for congenital craniofacial conditions.",
-        "Text": "This project enables patients with undiagnosed, suspected single gene forms of craniofacial conditions to participate in a study using genome sequencing to search for the genetic cause of the craniofacial condition in their family.",
+        "Title": "The craniofacial branch of the Rare Genomes Project is a partnership with the <a href=\"https://www.massgeneral.org/children/cleft-lip-and-palate\" target=\"_blank\" class=\"Link\">Cleft and Craniofacial Center at Massachusetts General Hospital</a> and <a href=\"https://www.shrinershospitalsforchildren.org/boston/cleftlippalate\" target=\"_blank\" class=\"Link\">Shriners Hospitals for Children</a> dedicated to genetic diagnosis and gene discovery for congenital craniofacial conditions.",
+        "Text": "This project enables patients with undiagnosed, suspected single gene forms of craniofacial conditions to participate in a study using whole genome sequencing to search for the genetic cause of the craniofacial condition in their family.",
         "ImageAlt": "If you or a loved one has a rare and genetically undiagnosed condition, join a patient-driven research study to discover the genes underlying your family's rare disease.",
         "Background": {
             "Title": "Background",
