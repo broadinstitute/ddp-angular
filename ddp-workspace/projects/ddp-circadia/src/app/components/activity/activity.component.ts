@@ -14,10 +14,7 @@ import {
   styleUrls: ['./activity.component.scss'],
   providers: [SubmitAnnouncementService, SubmissionManager],
 })
-export class ActivityComponent
-  extends ActivityRedesignedComponent
-  implements OnInit
-{
+export class ActivityComponent extends ActivityRedesignedComponent implements OnInit {
   ngOnInit(): void {
     super.ngOnInit();
 
