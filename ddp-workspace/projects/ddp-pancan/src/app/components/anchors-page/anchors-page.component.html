@@ -4,7 +4,7 @@
     <nav class="anchors">
         <ul>
             <li *ngFor="let section of (source + '.Sections') | translate; let i = index;" class="anchor">
-                <a routerLink="routerLink"  [fragment]="'section' + i"
+                <a [routerLink]="[routerLink]"  [fragment]="'section' + i"
                    (click)="scrollToAnchor('section' + i)">{{section.Title}}
                 </a>
             </li>
@@ -12,8 +12,10 @@
     </nav>
 
     <section  *ngFor="let section of (source + '.Sections') | translate; let i = index;" class="section">
-        <div class="section__content" [class.column-direction]="section.PeopleList?.length">
-            <h2  class="section__title static-page-title">{{section.Title}}</h2>
+        <div [id]="anchorLabel + i"
+             class="section__content"
+             [class.column-direction]="section.PeopleList?.length">
+            <h2 class="section__title static-page-title">{{section.Title}}</h2>
 
             <div class="section__description" *ngIf="section.Paragraphs?.length">
                 <ng-container *ngFor="let paragraph of section.Paragraphs">

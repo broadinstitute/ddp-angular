@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
-import { DOCUMENT, Location } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
+import { WindowRef } from 'ddp-sdk';
+import { AppRoutes } from '../app-routes';
 
 @Component({
     selector: 'app-anchors-page',
@@ -10,9 +12,11 @@ import { DOCUMENT, Location } from '@angular/common';
 export class AnchorsPageComponent {
     @Input() source: string;
     @Input() routerLink: string;
+    anchorLabel = 'section';
+    readonly AppRoutes = AppRoutes;
 
     constructor(
-        private location: Location,
+        private window: WindowRef,
         @Inject(DOCUMENT) private document: Document
     ) {}
 
@@ -20,8 +24,7 @@ export class AnchorsPageComponent {
         const element = this.document.getElementById(anchor);
         if (element) {
             const y = element.getBoundingClientRect().top;
-            window.scrollTo({top: y, behavior: 'smooth'});
-            window.scrollTo(0, -10);
+            this.window.nativeWindow.scrollTo({top: y, behavior: 'smooth'});
         }
     }
 }
