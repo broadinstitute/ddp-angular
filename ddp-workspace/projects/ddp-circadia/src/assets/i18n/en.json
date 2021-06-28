@@ -37,7 +37,8 @@
     "Cta": {
       "Title": "Circadia is an online research study to understand circadian rhythm disorders",
       "Description": "We're looking for people living with circadian rhythm disorders to join our completely remote, at-home study.",
-      "JoinBtn": "Join the Circadia Study"
+      "JoinBtn": "Join the Circadia Study",
+      "DashboardBtn": "Go to Dashboard"
     },
     "About": {
       "Title": "About the Study",
