@@ -9,36 +9,54 @@
     </td>
   </ng-container>
 
+  <ng-container matColumnDef="summary">
+    <th mat-header-cell *matHeaderCellDef>
+      {{ 'UserActivities.Header.Summary' | translate }}
+    </th>
+
+    <td mat-cell *matCellDef="let activity">
+      {{ activity.activitySummary || 'TBD' }}
+    </td>
+  </ng-container>
+
   <ng-container matColumnDef="status">
     <th mat-header-cell *matHeaderCellDef>
       {{ 'UserActivities.Header.Status' | translate }}
     </th>
 
     <td mat-cell *matCellDef="let activity">
-      <div class="activity-status">
-        <ng-container
-          *ngIf="activity.statusCode === ActivityStatusCode.CREATED"
-        >
-          <mat-icon class="status-icon status-icon--created">info</mat-icon
-          >{{ 'UserActivities.Statuses.Created' | translate }}
-        </ng-container>
+      <ng-container
+        *ngIf="isDLMOSchedulingActivity(activity); else activityStatusTmpl"
+      >
+        &mdash;
+      </ng-container>
 
-        <ng-container
-          *ngIf="activity.statusCode === ActivityStatusCode.IN_PROGRESS"
-        >
-          <mat-icon class="status-icon status-icon--in-progress"
-            >pending</mat-icon
-          >{{ 'UserActivities.Statuses.InProgress' | translate }}
-        </ng-container>
+      <ng-template #activityStatusTmpl>
+        <div class="activity-status">
+          <ng-container
+            *ngIf="activity.statusCode === ActivityStatusCode.CREATED"
+          >
+            <mat-icon class="status-icon status-icon--created">info</mat-icon
+            >{{ 'UserActivities.Statuses.Created' | translate }}
+          </ng-container>
 
-        <ng-container
-          *ngIf="activity.statusCode === ActivityStatusCode.COMPLETE"
-        >
-          <mat-icon class="status-icon status-icon--complete"
-            >check_circle</mat-icon
-          >{{ 'UserActivities.Statuses.Complete' | translate }}
-        </ng-container>
-      </div>
+          <ng-container
+            *ngIf="activity.statusCode === ActivityStatusCode.IN_PROGRESS"
+          >
+            <mat-icon class="status-icon status-icon--in-progress"
+              >pending</mat-icon
+            >{{ 'UserActivities.Statuses.InProgress' | translate }}
+          </ng-container>
+
+          <ng-container
+            *ngIf="activity.statusCode === ActivityStatusCode.COMPLETE"
+          >
+            <mat-icon class="status-icon status-icon--complete"
+              >check_circle</mat-icon
+            >{{ 'UserActivities.Statuses.Complete' | translate }}
+          </ng-container>
+        </div>
+      </ng-template>
     </td>
   </ng-container>
 
@@ -48,29 +66,42 @@
     </th>
 
     <td mat-cell *matCellDef="let activity">
-      <button
-        *ngIf="activity.statusCode === ActivityStatusCode.CREATED"
-        class="button button--sm button--yellow"
-        (click)="onStartClick(activity)"
+      <ng-container
+        *ngIf="isDLMOSchedulingActivity(activity); else activityActionsTmpl"
       >
-        {{ 'UserActivities.Actions.Start' | translate }}
-      </button>
+        <a
+          class="button button--sm button--yellow-outline"
+          target="_blank"
+          [href]="DLMO_SCHEDULING_URL"
+          >{{ 'UserActivities.Actions.Schedule' | translate }}</a
+        >
+      </ng-container>
 
-      <button
-        *ngIf="activity.statusCode === ActivityStatusCode.IN_PROGRESS"
-        class="button button--sm button--yellow"
-        (click)="onContinueClick(activity)"
-      >
-        {{ 'UserActivities.Actions.Continue' | translate }}
-      </button>
+      <ng-template #activityActionsTmpl>
+        <button
+          *ngIf="activity.statusCode === ActivityStatusCode.CREATED"
+          class="button button--sm button--yellow-outline"
+          (click)="onStartClick(activity)"
+        >
+          {{ 'UserActivities.Actions.Start' | translate }}
+        </button>
 
-      <button
-        *ngIf="activity.statusCode === ActivityStatusCode.COMPLETE"
-        class="button button--sm button--blue"
-        (click)="onViewClick(activity)"
-      >
-        {{ 'UserActivities.Actions.View' | translate }}
-      </button>
+        <button
+          *ngIf="activity.statusCode === ActivityStatusCode.IN_PROGRESS"
+          class="button button--sm button--yellow-outline"
+          (click)="onContinueClick(activity)"
+        >
+          {{ 'UserActivities.Actions.Continue' | translate }}
+        </button>
+
+        <button
+          *ngIf="activity.statusCode === ActivityStatusCode.COMPLETE"
+          class="button button--sm button--blue"
+          (click)="onViewClick(activity)"
+        >
+          {{ 'UserActivities.Actions.View' | translate }}
+        </button>
+      </ng-template>
     </td>
   </ng-container>
 

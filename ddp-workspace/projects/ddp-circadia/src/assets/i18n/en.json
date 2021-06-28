@@ -113,6 +113,7 @@
   "UserActivities": {
     "Header": {
       "Name": "Name",
+      "Summary": "Summary",
       "Status": "Status",
       "Actions": "Actions"
     },
@@ -124,7 +125,8 @@
     "Actions": {
       "Start": "Start",
       "Continue": "Continue",
-      "View": "View"
+      "View": "View",
+      "Schedule": "Schedule"
     }
   },
   "SessionWillExpire": {
