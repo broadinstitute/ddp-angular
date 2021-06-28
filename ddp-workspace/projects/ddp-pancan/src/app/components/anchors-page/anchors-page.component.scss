@@ -1,28 +1,37 @@
 @import '../../../styles/variables.scss';
 
-.title1 {
-    margin: 4.56rem auto 4.81rem auto;
+.title {
+    margin: 4.56rem auto 2.25rem auto;
     text-align: center;
 }
 
-.anchors > ul {
-    display: flex;
-    justify-content: space-around;
-    max-width: 500px;
-    margin: 0 auto 2.56rem;
-    list-style-type: none;
+.anchors {
+    padding: 2.56rem 0;
+    position: sticky;
+    top: calc(#{$header-height} - 1rem);
+    background-color: white;
+    border-bottom: 1px solid $section-grey-background-color;
+    z-index: 1;
 
-    .anchor {
-        font-family: $primary-font-medium;
-        font-size: 1.125rem;
-        letter-spacing: -0.07px;
-        line-height: 2.125rem;
-        margin-right: 2rem;
-        padding: 0;
+    ul {
+        display: flex;
+        justify-content: space-around;
+        max-width: 500px;
+        margin: 0 auto;
+        list-style-type: none;
 
-        & > a {
-            color: $text-color;
-            text-decoration: none;
+        .anchor {
+            font-family: $primary-font-medium;
+            font-size: 1.125rem;
+            letter-spacing: -0.07px;
+            line-height: 2.125rem;
+            margin-right: 2rem;
+            padding: 0;
+
+            & > a {
+                color: $text-color;
+                text-decoration: none;
+            }
         }
     }
 }
@@ -80,7 +89,6 @@
                 width: 11.25rem;
                 height: 11.25rem;
             }
-
         }
     }
 }
