@@ -15,6 +15,7 @@ import { AppRoutes } from './components/app-routes';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { ParticipationComponent } from './components/participation/participation.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 const routes: Routes = [
     {
@@ -24,13 +25,18 @@ const routes: Routes = [
         canActivate: [IrbGuard]
     },
     {
-        path: AppRoutes.FAQ,
-        component: FaqComponent,
+        path: AppRoutes.AboutUs,
+        component: AboutUsComponent,
         canActivate: [IrbGuard]
     },
     {
         path: AppRoutes.Participation,
         component: ParticipationComponent,
+        canActivate: [IrbGuard]
+    },
+    {
+        path: AppRoutes.FAQ,
+        component: FaqComponent,
         canActivate: [IrbGuard]
     },
     {

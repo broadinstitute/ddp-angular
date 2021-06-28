@@ -29,6 +29,8 @@ import { FaqComponent } from './components/faq/faq.component';
 import { ParticipationComponent } from './components/participation/participation.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { AuthComponent } from './components/auth/auth.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { AnchorsPageComponent } from './components/anchors-page/anchors-page.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -94,6 +96,8 @@ export function translateFactory(translate: TranslateService,
         ParticipationComponent,
         NavigationComponent,
         AuthComponent,
+        AboutUsComponent,
+        AnchorsPageComponent,
     ],
     imports: [
         BrowserModule,

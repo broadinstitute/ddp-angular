@@ -1,0 +1,41 @@
+<main class="page">
+    <h2 class="title1 static-page-title">{{source + '.Title' | translate}}</h2>
+
+    <nav class="anchors">
+        <ul>
+            <li *ngFor="let section of (source + '.Sections') | translate; let i = index;" class="anchor">
+                <a routerLink="routerLink"  [fragment]="'section' + i"
+                   (click)="scrollToAnchor('section' + i)">{{section.Title}}
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <section  *ngFor="let section of (source + '.Sections') | translate; let i = index;" class="section">
+        <div class="section__content" [class.column-direction]="section.PeopleList?.length">
+            <h2  class="section__title static-page-title">{{section.Title}}</h2>
+
+            <div class="section__description" *ngIf="section.Paragraphs?.length">
+                <ng-container *ngFor="let paragraph of section.Paragraphs">
+                    <p class="section__text static-page-paragraph-text" [innerHTML]="paragraph" routeTransformer></p>
+                </ng-container>
+
+                <!--hard-coded image as an exception-->
+                <img *ngIf="section.ImageAlt" class="section__img-milestones" lazy-resource src="assets/images/timeline.png"
+                     [alt]="section.ImageAlt">
+            </div>
+
+            <div class="section__people-list" *ngIf="section.PeopleList?.length">
+                <ng-container *ngFor="let person of section.PeopleList">
+                    <figure class="person">
+                        <img class="person__image"
+                             src="assets/images/person.png"
+                             lazy-resource
+                             [alt]="section.ImageAlt">
+                        <figcaption class="person__label" [innerHTML]="person"></figcaption>
+                    </figure>
+                </ng-container>
+            </div>
+        </div>
+    </section>
+</main>
