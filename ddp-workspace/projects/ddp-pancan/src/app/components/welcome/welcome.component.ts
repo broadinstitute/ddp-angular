@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AppRoutes } from '../app-routes';
+import { CommunicationService } from 'toolkit';
 
 @Component({
     selector: 'app-welcome',
@@ -20,4 +21,10 @@ export class WelcomeComponent {
     twitterUrl: string;
     facebookUrl: string;
     instagramUrl: string;
+
+    constructor(private communicationService: CommunicationService) {}
+
+    public openJoinMailingList(): void {
+        this.communicationService.openJoinDialog();
+    }
 }
