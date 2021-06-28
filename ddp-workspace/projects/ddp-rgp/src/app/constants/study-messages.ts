@@ -129,7 +129,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
       // #4 should be replaced by #4b if it's present.
       const statusWF = workflows.find(workflow => workflow.workflow === WorkflowKey.AcceptanceStatus);
       const isDeclinedMsgPresent = statusWF &&
-        (statusWF.status == AcceptanceStatus.Accepted || statusWF.status == AcceptanceStatus.MoreInfoNeeded) &&
+        (statusWF.status === AcceptanceStatus.Accepted || statusWF.status === AcceptanceStatus.MoreInfoNeeded) &&
         !!workflows.find(workflow => workflow.workflow === WorkflowKey.AcceptanceStatusDate && workflow.status) &&
         !!workflows.find(workflow => workflow.workflow === WorkflowKey.InactiveReason && workflow.status === InactiveReason.Declined);
       return !isDeclinedMsgPresent &&
@@ -153,7 +153,7 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
       // #4a should be replaced by #4b if it's present.
       const statusWF = workflows.find(workflow => workflow.workflow === WorkflowKey.AcceptanceStatus);
       const isDeclinedMsgPresent = statusWF &&
-        (statusWF.status == AcceptanceStatus.Accepted || statusWF.status == AcceptanceStatus.MoreInfoNeeded) &&
+        (statusWF.status === AcceptanceStatus.Accepted || statusWF.status === AcceptanceStatus.MoreInfoNeeded) &&
         !!workflows.find(workflow => workflow.workflow === WorkflowKey.AcceptanceStatusDate && workflow.status) &&
         !!workflows.find(workflow => workflow.workflow === WorkflowKey.InactiveReason && workflow.status === InactiveReason.Declined);
       return !isDeclinedMsgPresent &&
