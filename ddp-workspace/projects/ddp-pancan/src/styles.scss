@@ -140,7 +140,7 @@ a {
     margin-bottom: 5px;
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: $tablet-breakpoint) {
     .JoinDialogGroupFields {
         flex-direction: column;
     }
@@ -163,12 +163,12 @@ a {
     border: none;
     color: #fff !important;
     transition: all .3s ease-out;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12) !important;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
     background-color: $primary-color;
-}
 
-.ButtonFilled:hover {
-    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15) !important;
+    &:hover, &:focus {
+        box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    }
 }
 
 .ButtonFilled--neutral {
@@ -181,4 +181,13 @@ a {
 
 .NoMargin {
     margin: 0!important;
+}
+
+.ErrorMessage {
+    border-top: 2px solid $warn-color;
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: $warn-color;
+    font-weight: 300;
+    padding: 15px 0;
 }
