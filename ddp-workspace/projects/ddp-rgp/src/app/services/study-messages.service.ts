@@ -29,8 +29,8 @@ export class StudyMessagesService {
           if (personWorkflows.has(subjectId)) {
             personWorkflows.get(subjectId).push(workflow);
           } else {
-            const firstName = workflow.data?.firstName ?? '';
-            const lastName = workflow.data?.lastName ?? '';
+            const firstName = workflow.data?.firstname ?? '';
+            const lastName = workflow.data?.lastname ?? '';
             const person = { subjectId, firstName, lastName, messages: [] };
             persons.set(subjectId, person);
             personWorkflows.set(subjectId, [workflow]);
