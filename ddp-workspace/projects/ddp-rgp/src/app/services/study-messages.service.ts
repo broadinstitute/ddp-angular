@@ -3,6 +3,7 @@ import { map } from 'rxjs/operators';
 
 import { UserStatusServiceAgent } from 'ddp-sdk';
 
+import { StudyPerson } from '../models/StudyPerson';
 import { StudyMessage } from '../models/StudyMessage';
 import { Workflow } from '../models/Workflow';
 import { studyMessagesConfiguration } from '../constants/study-messages';
@@ -15,33 +16,54 @@ export class StudyMessagesService {
 
   constructor(private userStatusService: UserStatusServiceAgent) {}
 
-  getMessages(): any {
+  getPersonMessages(): any {
     return this.userStatusService.getStatus().pipe(
       map(response => {
-        let messages = this.convertWorkflowsToStudyMessages(response.workflows)
-          .filter(message => !!message)
-          .sort((a, b) => {
-            // We first sort by `date` column (getTime()) for simplicity.
-            // Some messages might have the same date, so we sort by `group`
-            // so that we follow more-or-less the spreadsheet order. Lastly,
-            // if they're in the same group, we use the timestamp.
-            if (b.date.getTime() === a.date.getTime()) {
-              if (b.group === a.group) {
-                return b.timestamp.getTime() - a.timestamp.getTime();
-              } else {
-                return b.group - a.group;
-              }
-            } else {
-              return b.date.getTime() - a.date.getTime();
-            }
-          });
+        const allWorkflows: Workflow[] = response.workflows ?? [];
 
-        const exclusiveMessage = messages.find(msg => !!msg.exclusive);
-        if (exclusiveMessage) {
-          messages = [exclusiveMessage];
+        const persons = new Map<string, StudyPerson>();
+        const personWorkflows = new Map<string, Workflow[]>();
+
+        for (const workflow of allWorkflows) {
+          const subjectId = workflow.data?.subjectId ?? '';
+          if (personWorkflows.has(subjectId)) {
+            personWorkflows.get(subjectId).push(workflow);
+          } else {
+            const firstName = workflow.data?.firstname ?? '';
+            const lastName = workflow.data?.lastname ?? '';
+            const person = { subjectId, firstName, lastName, messages: [] };
+            persons.set(subjectId, person);
+            personWorkflows.set(subjectId, [workflow]);
+          }
         }
 
-        return messages;
+        for (const [subjectId, workflows] of personWorkflows) {
+          let messages = this.convertWorkflowsToStudyMessages(workflows)
+            .filter(message => !!message)
+            .sort((a, b) => {
+              // We first sort by `date` column (getTime()) for simplicity.
+              // Some messages might have the same date, so we sort by `group`
+              // so that we follow more-or-less the spreadsheet order. Lastly,
+              // if they're in the same group, we use the timestamp.
+              if (b.date.getTime() === a.date.getTime()) {
+                if (b.group === a.group) {
+                  return b.timestamp.getTime() - a.timestamp.getTime();
+                } else {
+                  return b.group - a.group;
+                }
+              } else {
+                return b.date.getTime() - a.date.getTime();
+              }
+            });
+          const exclusiveMessage = messages.find(msg => !!msg.exclusive);
+          if (exclusiveMessage) {
+            messages = [exclusiveMessage];
+          }
+          persons.get(subjectId).messages = messages;
+        }
+
+        return Array.from(persons.values())
+          .sort((p1, p2) => p1.firstName.localeCompare(p2.firstName));
       }),
     );
   }

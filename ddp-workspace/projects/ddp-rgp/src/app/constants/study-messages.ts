@@ -127,9 +127,17 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
         AcceptanceStatus.NmiToAccept,
         AcceptanceStatus.NotAccepted,
       ].includes(workflow.status as AcceptanceStatus),
-    additionalCondition: workflows =>
-      !!workflows.find(workflow => workflow.workflow === WorkflowKey.DateOfConsentCall && workflow.status) &&
-      !workflows.find(workflow => workflow.workflow === WorkflowKey.EnrollmentDate && workflow.status),
+    additionalCondition: workflows => {
+      // #4 should be replaced by #4b if it's present.
+      const statusWF = workflows.find(workflow => workflow.workflow === WorkflowKey.AcceptanceStatus);
+      const isDeclinedMsgPresent = statusWF &&
+        (statusWF.status === AcceptanceStatus.Accepted || statusWF.status === AcceptanceStatus.MoreInfoNeeded) &&
+        !!workflows.find(workflow => workflow.workflow === WorkflowKey.AcceptanceStatusDate && workflow.status) &&
+        !!workflows.find(workflow => workflow.workflow === WorkflowKey.InactiveReason && workflow.status === InactiveReason.Declined);
+      return !isDeclinedMsgPresent &&
+        !!workflows.find(workflow => workflow.workflow === WorkflowKey.DateOfConsentCall && workflow.status) &&
+        !workflows.find(workflow => workflow.workflow === WorkflowKey.EnrollmentDate && workflow.status);
+    },
     dateWorkflowKey: WorkflowKey.DateOfConsentCall,
     baseKey: 'ConsentForm',
     stageKey: 'SignedFormRequired',
@@ -143,8 +151,16 @@ export const studyMessagesConfiguration: StudyMessageConfiguration[] = [
         AcceptanceStatus.NmiToAccept,
         AcceptanceStatus.NotAccepted,
       ].includes(workflow.status as AcceptanceStatus),
-    additionalCondition: workflows =>
-      !!workflows.find(workflow => workflow.workflow === WorkflowKey.EnrollmentDate && workflow.status),
+    additionalCondition: workflows => {
+      // #4a should be replaced by #4b if it's present.
+      const statusWF = workflows.find(workflow => workflow.workflow === WorkflowKey.AcceptanceStatus);
+      const isDeclinedMsgPresent = statusWF &&
+        (statusWF.status === AcceptanceStatus.Accepted || statusWF.status === AcceptanceStatus.MoreInfoNeeded) &&
+        !!workflows.find(workflow => workflow.workflow === WorkflowKey.AcceptanceStatusDate && workflow.status) &&
+        !!workflows.find(workflow => workflow.workflow === WorkflowKey.InactiveReason && workflow.status === InactiveReason.Declined);
+      return !isDeclinedMsgPresent &&
+        !!workflows.find(workflow => workflow.workflow === WorkflowKey.EnrollmentDate && workflow.status);
+    },
     dateWorkflowKey: WorkflowKey.EnrollmentDate,
     baseKey: 'ConsentForm',
     stageKey: 'SignedFormReceived',

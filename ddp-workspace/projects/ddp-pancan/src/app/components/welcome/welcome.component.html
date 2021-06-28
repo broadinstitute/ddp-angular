@@ -95,9 +95,11 @@
                     </a>
                 </div>
             </div>
-            <a mat-stroked-button class="btn join-btn small-letter-spacing btn-common btn-outline">
+            <button mat-stroked-button
+                    class="btn join-btn small-letter-spacing btn-common btn-outline"
+                    (click)="openJoinMailingList()">
                 {{'App.HomePage.StayInformedSection.JoinMailingListButton' | translate}}
-            </a>
+            </button>
         </div>
     </section>
 

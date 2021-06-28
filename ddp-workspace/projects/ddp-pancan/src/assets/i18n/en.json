@@ -29,7 +29,7 @@
             },
             "LearnMoreSection": {
                 "Title": "Every patient's experience with cancer should be counted.",
-                "Text": "Patients’ medical records, tumor samples, and personal experiences hold clues—about which cancers will respond or become resistant to which therapies—that often can’t be found in research labs or clinical trials. <span class=\"italic\">Count Me In</span> enables cancer patients anywhere to share their information with researchers everywhere, to help reveal patterns in the data.",
+                "Text": "Patients’ medical records, tumor samples, and personal experiences hold clues—about which cancers will respond or become resistant to which therapies—that often can’t be found in research labs or clinical trials. <span class=\"Italic\">Count Me In</span> enables cancer patients anywhere to share their information with researchers everywhere, to help reveal patterns in the data.",
                 "LearnMoreAboutUsButton": "Learn more about us"
             },
             "JoinSection": {
@@ -240,7 +240,7 @@
                 {
                     "Question": "Why is this needed?",
                     "Paragraphs": [
-                        "Patients have the power to advance cancer research in a way that no one else can. Patients’ medical records, tumor samples, and personal experiences hold clues—about which cancers will respond or become resistant to which therapies — that often can’t be found in research labs or clinical trials. \nThe majority of patients have never had the opportunity to participate in research—because most cancer patients are cared for in community settings where this type of research is not done; most patients have never been asked if they’d like to contribute their tissue samples and medical information for research. \nAnswering many important questions about cancer will require engaging and empowering many more patients as partners, and offering the opportunity to participate in groundbreaking research to all people living with cancer, whether they live near a research hospital or not. Count Me In aims to help make that possible."
+                        "Patients have the power to advance cancer research in a way that no one else can. Patients’ medical records, tumor samples, and personal experiences hold clues—about which cancers will respond or become resistant to which therapies — that often can’t be found in research labs or clinical trials. <br/>The majority of patients have never had the opportunity to participate in research—because most cancer patients are cared for in community settings where this type of research is not done; most patients have never been asked if they’d like to contribute their tissue samples and medical information for research. <br/>Answering many important questions about cancer will require engaging and empowering many more patients as partners, and offering the opportunity to participate in groundbreaking research to all people living with cancer, whether they live near a research hospital or not. Count Me In aims to help make that possible."
                     ]
                 },
                 {
@@ -254,7 +254,7 @@
                     "Question": "What does Count Me In do with the data?",
                     "Paragraphs": [
                         "After removing all personal information that would readily identify individuals, data is shared freely in an effort to accelerate discoveries, enabling researchers to identify patterns in data. Batches of data are released publicly on a regular basis, and are available to all researchers—so that everyone may use the data to make discoveries and advance progress against cancer, including new medicines and diagnostics.",
-                        "Quick links to released data: \n<a class='Link' href='https://www.mbcproject.org/data-release'>https://www.mbcproject.org/data-release</a>\n<a class='Link' href='https://ascproject.org/data-release'>https://ascproject.org/data-release</a>"
+                        "Quick links to released data: <br/><a class='Link' href='https://www.mbcproject.org/data-release'>https://www.mbcproject.org/data-release</a><br/><a class='Link' href='https://ascproject.org/data-release'>https://ascproject.org/data-release</a>"
                     ]
                 },
                 {
@@ -272,9 +272,9 @@
                 },
                 {
                     "Question": "How can I receive updates on Count Me In?",
-                    "Paragraphs": [
-                        "Please <a class='Link' href='/join-list'>sign up for our mailing list</a> to receive updates"
-                    ]
+                    "Text1": "Please",
+                    "Button": "sign up for our mailing list",
+                    "Text2": "to receive updates"
                 },
                 {
                     "Question": "Will I be paid to take part in this research study?",
