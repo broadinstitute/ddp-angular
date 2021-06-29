@@ -59,6 +59,7 @@
 
     &__title {
         margin: 0;
+        flex: 0 0;
     }
 
     &__description {
@@ -71,7 +72,7 @@
 
     &__img-milestones {
         margin-left: -20px;
-        width: 100%;
+        width: 105%;
     }
 
     &__people-list {
@@ -91,6 +92,33 @@
                 height: 11.25rem;
             }
         }
+    }
+
+    &__links {
+        display: flex;
+        flex-direction: column;
+        width: 48.75rem;
+
+        > a {
+            opacity: 1;
+            line-height: 2.75rem;
+        }
+    }
+
+    &__examples {
+        opacity: 1;
+
+        li {
+            margin-bottom: 2rem;
+        }
+
+        .source {
+            display: inline;
+        }
+    }
+
+    &__final-text {
+        margin-top: 3rem;
     }
 }
 

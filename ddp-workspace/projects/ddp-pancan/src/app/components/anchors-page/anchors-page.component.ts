@@ -9,5 +9,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 export class AnchorsPageComponent {
     @Input() source: string;
     @Input() route: string;
+    @Input() linksMap?: { [key: string]: string };
     anchorLabel = 'section';
+    readonly examplesUrl = ['url1', 'url2', 'url3'];
 }
