@@ -48,6 +48,7 @@ import { PrionCommonLandingComponent } from './components/common-landing/prionCo
 import { PrionRedirectToLoginLandingComponent } from './components/redirect-to-login-landing/prionRedirectToLoginLanding.component';
 import { PrionRedirectToAuth0LoginComponent } from './components/redirect-to-auth0-login/prionRedirectToAuth0Login.component';
 import { PrionUserActivitiesComponent } from './components/user-activities/prionUserActivities.component';
+import { PrionActivityInstanceStatusService } from './services/prionActivityInstanceStatusService.service';
 
 @NgModule({
   imports: [
@@ -70,6 +71,7 @@ import { PrionUserActivitiesComponent } from './components/user-activities/prion
   ],
   providers: [
     CommunicationService,
+    PrionActivityInstanceStatusService,
     PrionToolkitConfigurationService,
     WorkflowBuilderService,
     WorkflowMapperService,

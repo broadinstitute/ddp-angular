@@ -179,6 +179,11 @@
         "ActivityCreated": "-",
         "ActivitySummary": "可供您查看和志愿参与",
         "ActivityActions": "查看"
+      },
+      "States": {
+        "Created": "新",
+        "InProgress": "进行中",
+        "Completed": "完成"
       }
     },
     "LoginLanding": {

@@ -179,6 +179,11 @@
         "ActivityCreated": "-",
         "ActivitySummary": "Disponible para que lo examine y se ofrezca para participar",
         "ActivityActions": "Examinar"
+      },
+      "States": {
+        "Created": "Nuevo",
+        "InProgress": "En curso",
+        "Completed": "Completo"
       }
     },
     "LoginLanding": {

@@ -10,19 +10,19 @@ import {
     Output,
     SimpleChanges
 } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
+import { map, mergeMap, take, tap } from 'rxjs/operators';
 import {
     ActivityInstance,
     ActivityServiceAgent, AnalyticsEventCategories,
-    AnalyticsEventsService, ConfigurationService, DashboardColumns,
+    AnalyticsEventsService, ConfigurationService, DashboardColumns, LanguageService,
     LoggingService,
     UserActivitiesDataSource,
     UserActivityServiceAgent
 } from 'ddp-sdk';
-import { BehaviorSubject, of, Subscription } from 'rxjs';
-import { mergeMap, take, tap } from 'rxjs/operators';
-import { ActivityInstanceStatusServiceAgent } from '../../../../../ddp-sdk/src/lib/services/serviceAgents/activityInstanceStatusServiceAgent.service';
-import { DomSanitizer } from '@angular/platform-browser';
-import { ActivityInstanceState } from '../../../../../ddp-sdk/src/lib/models/activity/activityInstanceState';
+import { PrionActivityInstanceState } from '../../models/prionActivityInstanceState';
+import { PrionActivityInstanceStatusService } from '../../services/prionActivityInstanceStatusService.service';
 
 @Component({
     selector: 'prion-user-activities',
@@ -56,7 +56,7 @@ import { ActivityInstanceState } from '../../../../../ddp-sdk/src/lib/models/act
                               class="padding-5"
                               [attr.data-ddp-test]="'activitySummary::' + element.instanceGuid" >
                         <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.Summary' | translate"></span>
-                        {{ element.activitySummary }}
+                        {{ getSummary(element) | async }}
                     </mat-cell>
                 </ng-container>
 
@@ -68,7 +68,7 @@ import { ActivityInstanceState } from '../../../../../ddp-sdk/src/lib/models/act
                               class="padding-5"
                               [attr.data-ddp-test]="'activityDate::' + element.createdAt">
                         <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.ActivityDate' | translate"></span>
-                        {{ element.createdAt | date: 'MM/dd/yyyy' }}
+                        {{ getCreatedAt(element) | async | date: 'MM/dd/yyyy' }}
                     </mat-cell>
                 </ng-container>
 
@@ -93,7 +93,7 @@ import { ActivityInstanceState } from '../../../../../ddp-sdk/src/lib/models/act
                                 {{ element.activitySummary }}
                             </ng-container>
                             <ng-container *ngIf="!showQuestionCount(element) && !showSummary(element)">
-                                {{ getState(element.statusCode) }}
+                                {{ getState(element.statusCode, element) }}
                             </ng-container>
                         </div>
                     </mat-cell>
@@ -116,11 +116,11 @@ import { ActivityInstanceState } from '../../../../../ddp-sdk/src/lib/models/act
                                 [innerHTML]="getButtonTranslate(element) | translate">
                         </button>
                         <ng-container
-                            *ngIf="'COMPLETE' === element.statusCode">
+                                *ngIf="'COMPLETE' === element.statusCode">
                             <ng-container *ngIf="element.activityCode === longitudinalActivityCode; else viewAction">
                                 <button class="ButtonFilled Button--cell button button_small button_primary"
-                                (click)="editActivity(element.instanceGuid, element.activityCode)"
-                                [innerHTML]="getButtonTranslate(element) | translate">
+                                        (click)="editActivity(element.instanceGuid, element.activityCode)"
+                                        [innerHTML]="getButtonTranslate(element) | translate">
                                 </button>
                             </ng-container>
                             <ng-template #viewAction>
@@ -140,7 +140,6 @@ import { ActivityInstanceState } from '../../../../../ddp-sdk/src/lib/models/act
     `
 })
 export class PrionUserActivitiesComponent implements OnInit, OnDestroy, OnChanges, AfterContentInit {
-    // @Output() open: EventEmitter<string>;
     // Ideally, this feature would be supported via a study builder option
     @Input() studyGuid: string;
     @Input() displayedColumns: Array<DashboardColumns> = ['name', 'summary', 'date', 'status', 'actions'];
@@ -149,17 +148,18 @@ export class PrionUserActivitiesComponent implements OnInit, OnDestroy, OnChange
     public dataSource: UserActivitiesDataSource;
     public loaded = false;
     public longitudinalActivityCode = 'PRIONMEDICAL';
-    private states: Array<ActivityInstanceState> | null = null;
+    private states: Array<PrionActivityInstanceState> | null = null;
     private studyGuidObservable = new BehaviorSubject<string | null>(null);
     private loadingAnchor: Subscription;
+    private cachedParentActivities: Array<ActivityInstance> = [];
     private readonly LOG_SOURCE = 'PrionUserActivitiesComponent';
 
     constructor(
         private serviceAgent: UserActivityServiceAgent,
-        private statusesServiceAgent: ActivityInstanceStatusServiceAgent,
         private logger: LoggingService,
         private activityServiceAgent: ActivityServiceAgent,
         private analytics: AnalyticsEventsService,
+        private statusService: PrionActivityInstanceStatusService,
         @Inject('ddp.config') private config: ConfigurationService,
         public domSanitizationService: DomSanitizer) {}
 
@@ -169,9 +169,8 @@ export class PrionUserActivitiesComponent implements OnInit, OnDestroy, OnChange
             this.logger,
             this.studyGuidObservable);
         this.loadingAnchor =
-            this.statusesServiceAgent
-            // lets get Observable for status list
-                .getStatuses().pipe(
+            // get Observable for status list
+            this.statusService.getStatuses().pipe(
                 tap(x => this.states = x),
                 // than we will intersect this observable with 'isNull'
                 // observable stream from main data source, so we will get
@@ -214,19 +213,61 @@ export class PrionUserActivitiesComponent implements OnInit, OnDestroy, OnChange
     }
 
     public editActivity(guid: string, code: string): void {
-     this.activityServiceAgent.createInstance(this.config.studyGuid, code)
-         .pipe(take(1))
-         .subscribe(activity => {
-             this.openActivity(activity.instanceGuid, code);
-         });
+        this.activityServiceAgent.createInstance(this.config.studyGuid, code)
+            .pipe(take(1))
+            .subscribe(activity => {
+                this.openActivity(activity.instanceGuid, code);
+            });
     }
 
-    public getState(code: string): string {
+    private getParentInstance(instance: ActivityInstance): Observable<ActivityInstance> {
+        if (this.cachedParentActivities !== null && this.cachedParentActivities !== undefined && this.cachedParentActivities.length > 0) {
+            const cachedParentInstance: ActivityInstance = this.cachedParentActivities
+                .find(act => act.instanceGuid === instance.previousInstanceGuid);
+            if (cachedParentInstance !== null && cachedParentInstance !== undefined) {
+                return of(cachedParentInstance);
+            }
+        }
+
+        const activities = this.serviceAgent.getActivities(of(this.studyGuid));
+        return activities.pipe(
+            map(x => x.find(y => y.instanceGuid = instance.previousInstanceGuid)),
+            tap(x => this.cachedParentActivities.push(x)));
+    }
+
+    public getState(code: string, instance: ActivityInstance): string {
+        // TODO: This is never getting translated on status change
         if (this.states === null) {
             return code;
         }
+        if (null !== instance.previousInstanceGuid) {
+            code = 'COMPLETE';
+        }
         const caption = this.states.find(x => x.code === code);
         return caption != null ? caption.name : '';
+    }
+
+    public getSummary(instance: ActivityInstance): Observable<string> {
+        if (null === instance.previousInstanceGuid || undefined === instance.previousInstanceGuid) {
+            // TODO:  This is the one that isn't getting translated on language change
+             return of(instance.activitySummary);
+        } else {
+            const parentInstance: Observable<ActivityInstance> = this.getParentInstance(instance);
+            return parentInstance.pipe(
+                map(x => x.activitySummary)
+            );
+        }
+    }
+
+    public getCreatedAt(instance: ActivityInstance): Observable<number> {
+        if (null === instance.previousInstanceGuid || undefined === instance.previousInstanceGuid) {
+            return of(instance.createdAt);
+        } else {
+            const parentInstance: Observable<ActivityInstance> = this.getParentInstance(instance);
+            return parentInstance.pipe(
+                map(x => x.createdAt)
+            );
+        }
     }
 
     public showQuestionCount(activityInstance: ActivityInstance): boolean {
@@ -257,7 +298,9 @@ export class PrionUserActivitiesComponent implements OnInit, OnDestroy, OnChange
     }
 
     public getButtonTranslate(activityInstance: ActivityInstance): string {
-        if (this.isActivityCompleted(activityInstance.statusCode)) {
+        if (activityInstance.previousInstanceGuid !== null && activityInstance.previousInstanceGuid !== undefined) {
+            return 'SDK.EditButton';
+        } else if (this.isActivityCompleted(activityInstance.statusCode)) {
             return 'SDK.CompleteButton';
         } else if (this.isReportActivity(activityInstance.activityCode)) {
             return 'SDK.OpenButton';

@@ -179,6 +179,11 @@
         "ActivityCreated": "-",
         "ActivitySummary": "Available for you to review and volunteer",
         "ActivityActions": "Review"
+      },
+      "States": {
+        "Created": "New",
+        "InProgress": "In Progress",
+        "Completed": "Complete"
       }
     },
     "LoginLanding": {

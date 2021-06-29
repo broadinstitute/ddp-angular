@@ -179,6 +179,11 @@
         "ActivityCreated": "-",
         "ActivitySummary": "זמין עבורכם לסקירה ולהתנדבות",
         "ActivityActions": "סקירה"
+      },
+      "States": {
+        "Created": "נוצר",
+        "InProgress": "בביצוע",
+        "Completed": "הושלם"
       }
     },
     "LoginLanding": {
