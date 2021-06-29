@@ -71,6 +71,7 @@
 
     &__img-milestones {
         margin-left: -20px;
+        width: 100%;
     }
 
     &__people-list {
@@ -89,6 +90,52 @@
                 width: 11.25rem;
                 height: 11.25rem;
             }
+        }
+    }
+}
+
+@media screen and (max-width: $desktop-breakpoint) {
+    .section {
+        &__content {
+            gap: 3rem;
+        }
+
+        &__title {
+            width: 20%;
+        }
+
+        &__description {
+            width: 73%;
+        }
+    }
+}
+
+@media screen and (max-width: $tablet-breakpoint) {
+    .anchors {
+        top: 63px;
+    }
+
+    .section {
+        &__content {
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        &__title, &__description {
+            width: 100%;
+        }
+
+        &__people-list {
+            margin-left: 1rem;
+        }
+    }
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+    .section {
+        &__img-milestones {
+            display: none;
         }
     }
 }
