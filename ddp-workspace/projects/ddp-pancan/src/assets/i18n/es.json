@@ -40,29 +40,31 @@
             },
             "ParticipateSection": {
                 "Title": "[ES]Here’s how to participate",
-                "Step1": {
-                    "Title": "PASO 1",
-                    "Time": "[ES]10-15 minutes",
-                    "Description": "[ES]Provide consent and tell us where you’ve been treated",
-                    "ImageAlt": "[ES]Computer screen displaying online consent form"
-                },
-                "Step2": {
-                    "Title": "PASO 2",
-                    "Time": "[ES]5 minutes",
-                    "Description": "[ES]Answer questions about your cancer",
-                    "ImageAlt": "[ES]Computer screen displaying online survey"
-                },
-                "Step3": {
-                    "Title": "PASO 3",
-                    "Time": "[ES]10 minutes",
-                    "Description": "[ES]Provide samples (we’ll send a kit)",
-                    "ImageAlt": "[ES]Sample collection kit"
-                },
-                "Step4": {
-                    "Title": "PASO 4",
-                    "Description": "Aprenda junto con nosotros",
-                    "ImageAlt": "[ES]Speech bubbles sharing hearts and data visualizations"
-                },
+                "Steps": [
+                    {
+                        "Title": "PASO 1",
+                        "Time": "[ES]10-15 minutes",
+                        "Description": "[ES]Provide consent and tell us where you’ve been treated",
+                        "ImageAlt": "[ES]Computer screen displaying online consent form"
+                    },
+                    {
+                        "Title": "PASO 2",
+                        "Time": "[ES]5 minutes",
+                        "Description": "[ES]Answer questions about your cancer",
+                        "ImageAlt": "[ES]Computer screen displaying online survey"
+                    },
+                    {
+                        "Title": "PASO 3",
+                        "Time": "[ES]10 minutes",
+                        "Description": "[ES]Provide samples (we’ll send a kit)",
+                        "ImageAlt": "[ES]Sample collection kit"
+                    },
+                    {
+                        "Title": "PASO 4",
+                        "Description": "Aprenda junto con nosotros",
+                        "ImageAlt": "[ES]Speech bubbles sharing hearts and data visualizations"
+                    }
+                ],
                 "LearnMoreAboutParticipationButton": "[ES]Learn more about participation"
             },
             "StayInformedSection": {
@@ -78,44 +80,46 @@
         },
         "ParticipationPage": {
             "Title": "[ES]Here’s how to participate",
-            "Step1": {
-                "Step": "PASO 1",
-                "Time": "[ES]10-15 minutes",
-                "Title": "[ES]Provide consent for the study",
-                "Text": "[ES]This section consists of several pages, but feel free to take your time. Your progress will be automatically saved so you can come back to it later. If you are signing up for / with your child, depending on their age, we may also ask them to “assent” or agree that they would also like to participate in the study.",
-                "ViewConsentDocumentButton": "[ES]View Consent Document",
-                "ImageAlt": "[ES]Computer screen displaying online consent form"
-            },
-            "Step2": {
-                "Step": "PASO 2",
-                "Time": "[ES]5 minutes",
-                "Title": "[ES]Tell us where you’ve been treated",
-                "Text": "[ES]Tell us where you’ve been treated for your cancer. We ask where patients have been treated, so that we can request medical records, and if applicable, archived tumor tissue.",
-                "ViewMedicalReleaseButton": "[ES]View Medical Release",
-                "ImageAlt": "[ES]Computer screen displaying medical center"
-            },
-            "Step3": {
-                "Step": "PASO 3",
-                "Time": "[ES]5 minutes",
-                "Title": "[ES]Respond to surveys about you and your experience with cancer",
-                "Text": "[ES]In these surveys, we ask questions about your experience with cancer, like what type of cancer you were diagnosed with, when you were diagnosed, and the types of treatments you’ve had.",
-                "ViewSurveysButton": "[ES]View Surveys",
-                "ImageAlt": "[ES]Computer screen displaying online survey"
-            },
-            "Step4": {
-                "Step": "PASO 4",
-                "Time": "[ES]10 minutes",
-                "Title": "[ES]Provide a saliva and/or blood sample",
-                "Text": "[ES]We will send you a kit to collect a sample of your saliva and/or blood. We will study these samples to help improve our understanding of cancer.",
-                "ViewKitInstructionsButton": "[ES]View Kit Instructions",
-                "ImageAlt": "[ES]Sample collection kit"
-            },
-            "Step5": {
-                "Step": "PASO 5",
-                "Title": "[ES]Stay involved",
-                "Text": "[ES]Over time, we will provide you with regular updates about the status of the research and share any discoveries that you have enabled us to make. We also may ask you additional questions about your experience to help with future studies — we want to hear what’s important to you.",
-                "ImageAlt": "[ES]Speech bubbles sharing hearts and data visualizations"
-            }
+            "Steps": [
+                {
+                    "Step": "PASO 1",
+                    "Time": "[ES]10-15 minutes",
+                    "Title": "[ES]Provide consent for the study",
+                    "Text": "[ES]This section consists of several pages, but feel free to take your time. Your progress will be automatically saved so you can come back to it later. If you are signing up for / with your child, depending on their age, we may also ask them to “assent” or agree that they would also like to participate in the study.",
+                    "Button": "[ES]View Consent Document",
+                    "ImageAlt": "[ES]Computer screen displaying online consent form"
+                },
+                {
+                    "Step": "PASO 2",
+                    "Time": "[ES]5 minutes",
+                    "Title": "[ES]Tell us where you’ve been treated",
+                    "Text": "[ES]Tell us where you’ve been treated for your cancer. We ask where patients have been treated, so that we can request medical records, and if applicable, archived tumor tissue.",
+                    "Button": "[ES]View Medical Release",
+                    "ImageAlt": "[ES]Computer screen displaying medical center"
+                },
+                {
+                    "Step": "PASO 3",
+                    "Time": "[ES]5 minutes",
+                    "Title": "[ES]Respond to surveys about you and your experience with cancer",
+                    "Text": "[ES]In these surveys, we ask questions about your experience with cancer, like what type of cancer you were diagnosed with, when you were diagnosed, and the types of treatments you’ve had.",
+                    "Button": "[ES]View Surveys",
+                    "ImageAlt": "[ES]Computer screen displaying online survey"
+                },
+                {
+                    "Step": "PASO 4",
+                    "Time": "[ES]10 minutes",
+                    "Title": "[ES]Provide a saliva and/or blood sample",
+                    "Text": "[ES]We will send you a kit to collect a sample of your saliva and/or blood. We will study these samples to help improve our understanding of cancer.",
+                    "Button": "[ES]View Kit Instructions",
+                    "ImageAlt": "[ES]Sample collection kit"
+                },
+                {
+                    "Step": "PASO 5",
+                    "Title": "[ES]Stay involved",
+                    "Text": "[ES]Over time, we will provide you with regular updates about the status of the research and share any discoveries that you have enabled us to make. We also may ask you additional questions about your experience to help with future studies — we want to hear what’s important to you.",
+                    "ImageAlt": "[ES]Speech bubbles sharing hearts and data visualizations"
+                }
+            ]
         },
         "ScientificResearchPage": {
             "Title": "[ES]Scientific Research",
@@ -164,52 +168,60 @@
         },
         "AboutUs": {
             "Title": "Sobre Nosotros",
-            "Section1": {
-                "Title": "Misión",
-                "Text1": "[ES]Count Me In is a nonprofit organization catalyzing research initiatives that take a unique approach to cancer research. Count Me In is deeply committed to making every patient's experience count in the effort to more deeply understand cancer. We do this by working directly with patients as partners to accelerate discoveries. We seek to empower individuals living with cancer, including those from marginalized communities who have historically been excluded from research, no matter where they live, to contribute to breakthroughs and increase the pace of biomedical research.",
-                "Text2": "[ES]Participating patients help shape and propel research, including by contributing information about their cancer and experience through patient surveys, and also by directly sharing and providing access to medical records and biological samples for study and analysis. From participant contributions, the Count Me In team works with software engineers and computational scientists, to collect, analyze, and share de-identified data. Data generated by Count Me In is shared regularly via scientific platforms so that it can be harnessed by researchers everywhere to make impactful discoveries."
-            },
-            "Section2": {
-                "Title": "[ES]History and Milestones",
-                "Text1": "[ES]Count Me In (CMI) began with discussions between Emerson Collective and the Broad Institute of MIT and Harvard in 2013. Since the launch of the first project in metastatic breast cancer in late 2015, thousands of individuals living with cancer from around the United States and Canada have said “Count Me In” to partnering with researchers and sharing their experiences. The Metastatic Breast Cancer (MBC) project was the first iteration of this new vision, followed by the Angiosarcoma (ASC) Project in 2017, and the Metastatic Prostate Cancer (MPC) Project in 2018. Since then, CMI has also launched the Esophageal and Stomach Cancer Project, the Osteosarcoma (OS) Project, and the Brain Tumor (BT) Project. In Fall 2021, enrollment in Count Me In became available to any patient in the United States or Canada who has ever been diagnosed with cancer.",
-                "Text2": "[ES]Count Me In is stewarded by the <a href=\"#\">Emerson Collective</a>, a California-based social change organization; the <a href=\"#\">Broad Institute</a>, a leading nonprofit biomedical research institution; and the <a href=\"#\">Dana Farber Cancer Institute</a>, a leading cancer hospital."
-            },
-            "Section3": {
-                "Title": "[ES]People",
-                "PeopleList": [
-                    "[ES]<b>Elana Anastasio<b><br/>Leadership",
-                    "[ES]<b>Roeshana Moore-Evans<b><br/>Leadership",
-                    "[ES]<b>Corrie Painter<b><br/>Leadership",
-                    "[ES]<b>Nikhil Wagle<b><br/>Leadership",
-                    "[ES]<b>Kim Hurley<b><br/>Finances and Grants",
-                    "[ES]<b>Ashley Matthews<b><br/>Finances and Grants",
-                    "[ES]<b>Brett Tomson<b><br/>Scientific Alliances and Outreach",
-                    "[ES]<b>Colleen Nguyen<b><br/>Community Engagement",
-                    "[ES]<b>Christina Arecy<b><br/>Community Engagement",
-                    "[ES]<b>Tania Hernandez<b><br/>Community Engagement",
-                    "[ES]<b>Oyin Alao<b><br/>Project Management and Coordination",
-                    "[ES]<b>Imani Boykin<b><br/>Project Management and Coordination",
-                    "[ES]<b>Maria Cerio<b><br/>Project Management and Coordination",
-                    "[ES]<b>Parker Chastain<b><br/>Project Management and Coordination",
-                    "[ES]<b>Taylor Cusher<b><br/>Project Management and Coordination",
-                    "[ES]<b>Jordan Doucette<b><br/>Project Management and Coordination",
-                    "[ES]<b>Ayanah Dowdye<b><br/>Project Management and Coordination",
-                    "[ES]<b>Mary McGillicuddy<b><br/>Project Management and Coordination",
-                    "[ES]<b>Rafael Ramos<b><br/>Project Management and Coordination",
-                    "[ES]<b>Sarah Winnicki<b><br/>Project Management and Coordination",
-                    "[ES]<b>Ben Zola<b><br/>Project Management and Coordination",
-                    "[ES]<b>Shahrayz Shah<b><br/>Clinical Abstraction",
-                    "[ES]<b>Ilan Small<b><br/>Clinical Abstraction",
-                    "[ES]<b>Delia Sosa<b><br/>Clinical Abstraction",
-                    "[ES]<b>Lauren Sterlin<b><br/>Clinical Abstraction",
-                    "[ES]<b>Beena Thomas<b><br/>Clinical Abstraction",
-                    "[ES]<b>Daniel Abravanel<b><br/>Medical Oncology",
-                    "[ES]<b>Sara Balch<b><br/>Computational Team",
-                    "[ES]<b>Jorge Gomez Tejeda Zanudo<b><br/>Computational Team",
-                    "[ES]<b>Esha Jain<b><br/>Computational Team",
-                    "[ES]<b>Dewey Kim<b><br/>Computational Team"
-                ]
-            }
+            "Sections": [
+                {
+                    "Title": "Misión",
+                    "Paragraphs": [
+                        "[ES]Count Me In is a nonprofit organization catalyzing research initiatives that take a unique approach to cancer research. Count Me In is deeply committed to making every patient's experience count in the effort to more deeply understand cancer. We do this by working directly with patients as partners to accelerate discoveries. We seek to empower individuals living with cancer, including those from marginalized communities who have historically been excluded from research, no matter where they live, to contribute to breakthroughs and increase the pace of biomedical research.",
+                        "[ES]Participating patients help shape and propel research, including by contributing information about their cancer and experience through patient surveys, and also by directly sharing and providing access to medical records and biological samples for study and analysis. From participant contributions, the Count Me In team works with software engineers and computational scientists, to collect, analyze, and share de-identified data. Data generated by Count Me In is shared regularly via scientific platforms so that it can be harnessed by researchers everywhere to make impactful discoveries."
+                    ]
+                },
+                {
+                    "Title": "[ES]History and Milestones",
+                    "Paragraphs": [
+                        "[ES]Count Me In (CMI) began with discussions between Emerson Collective and the Broad Institute of MIT and Harvard in 2013. Since the launch of the first project in metastatic breast cancer in late 2015, thousands of individuals living with cancer from around the United States and Canada have said “Count Me In” to partnering with researchers and sharing their experiences. The Metastatic Breast Cancer (MBC) project was the first iteration of this new vision, followed by the Angiosarcoma (ASC) Project in 2017, and the Metastatic Prostate Cancer (MPC) Project in 2018. Since then, CMI has also launched the Esophageal and Stomach Cancer Project, the Osteosarcoma (OS) Project, and the Brain Tumor (BT) Project. In Fall 2021, enrollment in Count Me In became available to any patient in the United States or Canada who has ever been diagnosed with cancer.",
+                        "[ES]Count Me In is stewarded by the <a href=\"#\">Emerson Collective</a>, a California-based social change organization; the <a href=\"#\">Broad Institute</a>, a leading nonprofit biomedical research institution; and the <a href=\"#\">Dana Farber Cancer Institute</a>, a leading cancer hospital."
+                    ],
+                    "ImageAlt": "[ES]Projects milestones"
+                },
+                {
+                    "Title": "[ES]People",
+                    "PeopleList": [
+                        "[ES]<b>Elana Anastasio</b><br/>Leadership",
+                        "[ES]<b>Roeshana Moore-Evans</b><br/>Leadership",
+                        "[ES]<b>Corrie Painter</b><br/>Leadership",
+                        "[ES]<b>Nikhil Wagle</b><br/>Leadership",
+                        "[ES]<b>Kim Hurley</b><br/>Finances and Grants",
+                        "[ES]<b>Ashley Matthews</b><br/>Finances and Grants",
+                        "[ES]<b>Brett Tomson</b><br/>Scientific Alliances and Outreach",
+                        "[ES]<b>Colleen Nguyen</b><br/>Community Engagement",
+                        "[ES]<b>Christina Arecy</b><br/>Community Engagement",
+                        "[ES]<b>Tania Hernandez</b><br/>Community Engagement",
+                        "[ES]<b>Oyin Alao</b><br/>Project Management and Coordination",
+                        "[ES]<b>Imani Boykin</b><br/>Project Management and Coordination",
+                        "[ES]<b>Maria Cerio</b><br/>Project Management and Coordination",
+                        "[ES]<b>Parker Chastain</b><br/>Project Management and Coordination",
+                        "[ES]<b>Taylor Cusher</b><br/>Project Management and Coordination",
+                        "[ES]<b>Jordan Doucette</b><br/>Project Management and Coordination",
+                        "[ES]<b>Ayanah Dowdye</b><br/>Project Management and Coordination",
+                        "[ES]<b>Mary McGillicuddy</b><br/>Project Management and Coordination",
+                        "[ES]<b>Rafael Ramos</b><br/>Project Management and Coordination",
+                        "[ES]<b>Sarah Winnicki</b><br/>Project Management and Coordination",
+                        "[ES]<b>Ben Zola</b><br/>Project Management and Coordination",
+                        "[ES]<b>Shahrayz Shah</b><br/>Clinical Abstraction",
+                        "[ES]<b>Ilan Small</b><br/>Clinical Abstraction",
+                        "[ES]<b>Delia Sosa</b><br/>Clinical Abstraction",
+                        "[ES]<b>Lauren Sterlin</b><br/>Clinical Abstraction",
+                        "[ES]<b>Beena Thomas</b><br/>Clinical Abstraction",
+                        "[ES]<b>Daniel Abravanel</b><br/>Medical Oncology",
+                        "[ES]<b>Sara Balch</b><br/>Computational Team",
+                        "[ES]<b>Jorge Gomez Tejeda Zanudo</b><br/>Computational Team",
+                        "[ES]<b>Esha Jain</b><br/>Computational Team",
+                        "[ES]<b>Dewey Kim</b><br/>Computational Team"
+                    ],
+                    "ImageAlt": "Una persona"
+                }
+            ]
         },
         "FAQ": {
             "Title": "Preguntas Frecuentes",
