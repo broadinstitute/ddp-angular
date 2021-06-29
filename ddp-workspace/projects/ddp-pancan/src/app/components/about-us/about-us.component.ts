@@ -6,5 +6,5 @@ import { AppRoutes } from '../app-routes';
     templateUrl: './about-us.component.html'
 })
 export class AboutUsComponent {
-    routerLink = AppRoutes.AboutUs;
+    route = AppRoutes.AboutUs;
 }

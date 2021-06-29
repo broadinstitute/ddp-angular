@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { Auth0CodeCallbackComponent, BrowserGuard, IrbGuard } from 'ddp-sdk';
 import {
     ErrorRedesignedComponent,
@@ -89,8 +89,14 @@ const routes: Routes = [
     }
 ];
 
+const routerOptions: ExtraOptions = {
+    scrollPositionRestoration: 'top',
+    anchorScrolling: 'enabled',
+    scrollOffset: [0, 150] /* 150px to top when scrolling as to see full content  */
+};
+
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes, routerOptions)],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }
