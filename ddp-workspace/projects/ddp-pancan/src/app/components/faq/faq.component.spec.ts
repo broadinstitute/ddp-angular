@@ -12,6 +12,7 @@ import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-transla
 
 import { FaqSectionComponent } from '../faq-section/faq-section.component';
 import { FaqComponent } from './faq.component';
+import { CommunicationService } from 'toolkit';
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
@@ -54,20 +55,23 @@ describe('FaqComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                declarations: [
-                    FaqComponent,
-                    FaqSectionComponent,
-                    SlicePipe
-                ],
-                imports: [
-                    MatIconModule,
-                    MatExpansionModule,
-                    NoopAnimationsModule,
-                    TranslateModule.forRoot({
-                        loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
-                    }),
-                ]
-            })
+            declarations: [
+                FaqComponent,
+                FaqSectionComponent,
+                SlicePipe
+            ],
+            imports: [
+                MatIconModule,
+                MatExpansionModule,
+                NoopAnimationsModule,
+                TranslateModule.forRoot({
+                    loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
+                }),
+            ],
+            providers: [
+                { provide: CommunicationService, useValue: {} },
+            ],
+        })
             .compileComponents();
 
         const translate = TestBed.inject(TranslateService);

@@ -13,7 +13,13 @@ import { RouterTestingModule } from '@angular/router/testing';
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
         const TRANSLATIONS = {
-            en: {}
+            en: {
+                App: {
+                    HomePage: {
+                        ParticipateSection: { Steps: [] }
+                    }
+                }
+            }
         };
         return of(TRANSLATIONS[code]);
     }
