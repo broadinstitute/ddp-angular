@@ -78,6 +78,7 @@ import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/par
                                     [validationRequested]="validationRequested"
                                     [studyGuid]="studyGuid"
                                     [activityGuid]="activityGuid"
+                                    (visibilityChanged)="updateVisibility($event)"
                                     (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(0, $event)"
                                     (componentBusy)="embeddedComponentBusy$[0].next($event)">
                                 </ddp-activity-section>
@@ -115,6 +116,7 @@ import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/par
                                     [validationRequested]="validationRequested"
                                     [studyGuid]="studyGuid"
                                     [activityGuid]="activityGuid"
+                                    (visibilityChanged)="updateVisibility($event)"
                                     (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
                                     (componentBusy)="embeddedComponentBusy$[1].next($event)">
                                 </ddp-activity-section>
@@ -130,6 +132,7 @@ import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/par
                                         [validationRequested]="validationRequested"
                                         [studyGuid]="studyGuid"
                                         [activityGuid]="activityGuid"
+                                        (visibilityChanged)="updateVisibility($event)"
                                         (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
                                         (componentBusy)="embeddedComponentBusy$[2].next($event)">
                                     </ddp-activity-section>
@@ -250,7 +253,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         // all PATCH responses routed to here
         const resSub = this.submissionManager.answerSubmissionResponse$.subscribe(
             (response) => {
-                this.updateVisibility((response as PatchAnswerResponse).blockVisibility);
+                this.updateVisibility();
                 this.updateServerValidationMessages(response);
                 this.communicationErrorOccurred = false;
             },

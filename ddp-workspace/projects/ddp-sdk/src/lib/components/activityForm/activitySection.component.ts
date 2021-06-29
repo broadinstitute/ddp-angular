@@ -114,6 +114,7 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
     @Input() public activityGuid: string;
     @Output() embeddedComponentsValidationStatus: EventEmitter<boolean> = new EventEmitter();
     @Output() componentBusy: EventEmitter<boolean> = new EventEmitter(true);
+    @Output() visibilityChanged: EventEmitter<boolean> = new EventEmitter();
     private subscription: Subscription;
     private embeddedValidationStatus: boolean[] = new Array(3).fill(true);
 
@@ -140,11 +141,17 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
                     if (block.shown !== element.shown) {
                         block.shown = element.shown;
                         blockVisibilityChanged = true;
+                        if (block.blockType === BlockType.Activity && !block.shown) {
+                            this.updateEmbeddedComponentValidationStatus(2, true);
+                        }
                     }
                 }
             });
         });
-        blockVisibilityChanged && this.cdr.detectChanges();
+        if (blockVisibilityChanged) {
+            this.visibilityChanged.next(true);
+            this.cdr.detectChanges();
+        }
     }
 
     public updateEmbeddedComponentValidationStatus(componentIndex: number, isValid: boolean): void {

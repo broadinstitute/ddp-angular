@@ -79,6 +79,7 @@ import { combineLatest, merge } from 'rxjs';
                     [validationRequested]="validationRequested"
                     [studyGuid]="studyGuid"
                     [activityGuid]="activityGuid"
+                    (visibilityChanged)="updateVisibility($event)"
                     (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(0, $event)"
                     (componentBusy)="embeddedComponentBusy$[0].next($event)">
                   </ddp-activity-section>
@@ -116,6 +117,7 @@ import { combineLatest, merge } from 'rxjs';
                     [validationRequested]="validationRequested"
                     [studyGuid]="studyGuid"
                     [activityGuid]="activityGuid"
+                    (visibilityChanged)="updateVisibility($event)"
                     (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
                     (componentBusy)="embeddedComponentBusy$[1].next($event)">
                   </ddp-activity-section>
@@ -131,6 +133,7 @@ import { combineLatest, merge } from 'rxjs';
                       [validationRequested]="validationRequested"
                       [studyGuid]="studyGuid"
                       [activityGuid]="activityGuid"
+                      (visibilityChanged)="updateVisibility($event)"
                       (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
                       (componentBusy)="embeddedComponentBusy$[2].next($event)">
                     </ddp-activity-section>

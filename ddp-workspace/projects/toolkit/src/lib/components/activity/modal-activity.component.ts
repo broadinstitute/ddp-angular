@@ -38,6 +38,7 @@ import { ModalActivityData } from '../../models/modalActivityData';
             [validationRequested]="validationRequested"
             [studyGuid]="studyGuid"
             [activityGuid]="activityGuid"
+            (visibilityChanged)="updateVisibility($event)"
             (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
             (componentBusy)="embeddedComponentBusy$[1].next($event)">
           </ddp-activity-section>
