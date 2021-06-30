@@ -132,7 +132,8 @@
             width: 20%;
         }
 
-        &__description {
+        &__description,
+        &__links {
             width: 73%;
         }
     }
@@ -150,7 +151,9 @@
             gap: 1rem;
         }
 
-        &__title, &__description {
+        &__title,
+        &__description,
+        &__links {
             width: 100%;
         }
 
