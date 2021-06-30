@@ -16,7 +16,7 @@ import { map, mergeMap, take, tap } from 'rxjs/operators';
 import {
     ActivityInstance,
     ActivityServiceAgent, AnalyticsEventCategories,
-    AnalyticsEventsService, ConfigurationService, DashboardColumns, LanguageService,
+    AnalyticsEventsService, ConfigurationService, DashboardColumns,
     LoggingService,
     UserActivitiesDataSource,
     UserActivityServiceAgent
@@ -237,11 +237,11 @@ export class PrionUserActivitiesComponent implements OnInit, OnDestroy, OnChange
 
     public getState(code: string, instance: ActivityInstance): string {
         // TODO: This is never getting translated on status change
-        if (this.states === null) {
-            return code;
-        }
         if (null !== instance.previousInstanceGuid) {
             code = 'COMPLETE';
+        }
+        if (this.states === null) {
+            return code;
         }
         const caption = this.states.find(x => x.code === code);
         return caption != null ? caption.name : '';
