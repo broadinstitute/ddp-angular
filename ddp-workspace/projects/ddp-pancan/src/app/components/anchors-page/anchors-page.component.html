@@ -4,7 +4,9 @@
     <nav class="anchors">
         <ul>
             <li *ngFor="let section of (source + '.Sections') | translate; let i = index;" class="anchor">
-                <a [routerLink]="['/', route]" [fragment]="anchorLabel + i">{{section.Title}}</a>
+                <a [routerLink]="['/', route]" [fragment]="anchorLabel + i"
+                   (click)="scrollToAnchor(anchorLabel + i)">{{section.Title}}
+                </a>
             </li>
         </ul>
     </nav>

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
     selector: 'app-anchors-page',
@@ -10,6 +11,13 @@ export class AnchorsPageComponent {
     @Input() source: string;
     @Input() route: string;
     @Input() linksMap?: { [key: string]: string };
+
     anchorLabel = 'section';
     readonly examplesUrl = ['url1', 'url2', 'url3'];
+
+    constructor(private viewportScroller: ViewportScroller) {}
+
+    scrollToAnchor(anchor: string): void {
+        this.viewportScroller.scrollToAnchor(anchor);
+    }
 }
