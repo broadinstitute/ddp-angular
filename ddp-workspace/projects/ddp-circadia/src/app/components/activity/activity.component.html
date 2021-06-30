@@ -108,50 +108,62 @@
     </section>
 
     <section class="section section--buttons">
-      <ng-container *ngIf="isStepped">
-        <button
-          *ngIf="!isFirstStep"
-          class="button button--yellow pull-left"
-          [disabled]="(isPageBusy | async) || dataEntryDisabled"
-          [innerHTML]="'SDK.PreviousButton' | translate"
-          (click)="decrementStep()"
-        ></button>
+      <ng-container [ngSwitch]="model.activityCode">
+        <ng-container *ngSwitchCase="ActivityCode.DLMOInstructions">
+          <button class="button button--yellow pull-right" (click)="close()">
+            {{ 'SDK.CloseButton' | translate }}
+          </button>
+        </ng-container>
 
-        <button
-          *ngIf="!isLastStep"
-          class="button button--yellow pull-right"
-          [disabled]="(isPageBusy | async) || dataEntryDisabled"
-          [innerHTML]="
-            (isPageBusy | async)
-              ? ('SDK.SavingButton' | translate)
-              : ('SDK.NextButton' | translate)
-          "
-          (click)="incrementStep()"
-        ></button>
-      </ng-container>
+        <ng-container *ngSwitchDefault>
+          <ng-container *ngIf="isStepped">
+            <button
+              *ngIf="!isFirstStep"
+              class="button button--yellow pull-left"
+              [disabled]="(isPageBusy | async) || dataEntryDisabled"
+              [innerHTML]="'SDK.PreviousButton' | translate"
+              (click)="decrementStep()"
+            ></button>
 
-      <ng-container *ngIf="!isStepped || isLastStep">
-        <button
-          #submitButton
-          *ngIf="!isReadonly() && !isAgree()"
-          class="button button--yellow pull-right"
-          [disabled]="(isPageBusy | async) || dataEntryDisabled"
-          [innerHTML]="
-            (isPageBusy | async)
-              ? ('SDK.SavingButton' | translate)
-              : ((isVerticalProgress ? 'SDK.FinishButton' : 'SDK.SubmitButton')
-                | translate)
-          "
-          (click)="flush()"
-          (mouseenter)="mouseEnterOnSubmit()"
-        ></button>
+            <button
+              *ngIf="!isLastStep"
+              class="button button--yellow pull-right"
+              [disabled]="(isPageBusy | async) || dataEntryDisabled"
+              [innerHTML]="
+                (isPageBusy | async)
+                  ? ('SDK.SavingButton' | translate)
+                  : ('SDK.NextButton' | translate)
+              "
+              (click)="incrementStep()"
+            ></button>
+          </ng-container>
 
-        <button
-          *ngIf="isReadonly()"
-          class="button button--yellow pull-right"
-          [innerHTML]="'SDK.CloseButton' | translate"
-          (click)="close()"
-        ></button>
+          <ng-container *ngIf="!isStepped || isLastStep">
+            <button
+              #submitButton
+              *ngIf="!isReadonly() && !isAgree()"
+              class="button button--yellow pull-right"
+              [disabled]="(isPageBusy | async) || dataEntryDisabled"
+              [innerHTML]="
+                (isPageBusy | async)
+                  ? ('SDK.SavingButton' | translate)
+                  : ((isVerticalProgress
+                      ? 'SDK.FinishButton'
+                      : 'SDK.SubmitButton'
+                    ) | translate)
+              "
+              (click)="flush()"
+              (mouseenter)="mouseEnterOnSubmit()"
+            ></button>
+
+            <button
+              *ngIf="isReadonly()"
+              class="button button--yellow pull-right"
+              [innerHTML]="'SDK.CloseButton' | translate"
+              (click)="close()"
+            ></button>
+          </ng-container>
+        </ng-container>
       </ng-container>
     </section>
 

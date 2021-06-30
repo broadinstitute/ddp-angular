@@ -17,6 +17,7 @@ export class UserActivitiesComponent {
 
   displayedColumns = ['name', 'summary', 'status', 'actions'];
   ActivityStatusCode = ActivityStatusCodes;
+  ActivityCode = ActivityCode;
   readonly DLMO_SCHEDULING_URL =
     'https://outlook.office365.com/owa/calendar/CircadiaStudy1@partnershealthcare.onmicrosoft.com/bookings/';
 
@@ -30,9 +31,5 @@ export class UserActivitiesComponent {
 
   onViewClick(activity: ActivityInstance): void {
     this.viewActivity.emit(activity);
-  }
-
-  isDLMOSchedulingActivity(activity: ActivityInstance): boolean {
-    return activity.activityCode === ActivityCode.DLMOSchedulingInstructions;
   }
 }
