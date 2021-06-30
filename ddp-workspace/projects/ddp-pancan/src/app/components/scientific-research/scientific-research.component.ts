@@ -8,14 +8,14 @@ import { AppRoutes } from '../app-routes';
 export class ScientificResearchComponent {
     readonly route = AppRoutes.ScientificResearch;
     readonly linksMap = {
-        Angio: 'Angiosarcoma Project',
-        Brain: 'Brain Tumor Project',
-        CRC: 'Colorectal Cancer Project',
-        ESC: 'Esophageal and Stomach Cancer Project',
-        LMS: 'Leiomyosarcoma Project',
-        MBC: 'Metastatic Breast Cancer Project',
-        MBCSpanish: 'Metastatic Breast Cancer Project in Spanish',
-        MPC: 'Metastatic Prostate Cancer Project',
-        Osteo: 'Osteosarcoma Project'
+        Angio: 'https://ascproject.org/',
+        Brain: 'https://braintumorproject.org/',
+        // CRC: 'Colorectal Cancer Project', // TODO: set correct URL
+        ESC: 'https://escproject.org/',
+        // LMS: 'Leiomyosarcoma Project', // TODO: set correct URL
+        MBC: 'https://www.mbcproject.org/',
+        MBCSpanish: 'http://mbcprojectenespanol.org/',
+        MPC: 'https://mpcproject.org/',
+        Osteo: 'https://osproject.org/'
     };
 }

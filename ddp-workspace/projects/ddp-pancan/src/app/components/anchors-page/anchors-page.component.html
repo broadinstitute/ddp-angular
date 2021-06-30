@@ -33,7 +33,7 @@
                     <b id="examples-label">{{section.Examples.Title}}</b>
                     <ul aria-labelledby="examples-label">
                         <li *ngFor="let link of section.Examples.Links; let i = index">
-                            <a class="Link" [href]="examplesUrl[i]">{{link.Title}}</a>
+                            <a class="Link" [href]="examplesUrl[i]" target="_blank">{{link.Title}}</a>
                             <div class="source" [innerHTML]="link.Source"></div>
                         </li>
                     </ul>
