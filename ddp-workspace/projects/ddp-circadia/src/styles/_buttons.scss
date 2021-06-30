@@ -81,10 +81,12 @@
       &:hover,
       &:focus {
         background: darken($color-yellow-1, 5%);
+        border-color: darken($color-yellow-1, 5%);
       }
 
       &:active {
         background: darken($color-yellow-1, 10%);
+        border-color: darken($color-yellow-1, 10%);
       }
     }
   }
@@ -99,10 +101,12 @@
       &:hover,
       &:focus {
         background: lighten($color-blue-2, 5%);
+        border-color: lighten($color-blue-2, 5%);
       }
 
       &:active {
         background: lighten($color-blue-2, 10%);
+        border-color: lighten($color-blue-2, 10%);
       }
     }
   }
@@ -117,11 +121,13 @@
       &:hover,
       &:focus {
         background: darken(#efefef, 5%);
+        border-color: darken(#efefef, 5%);
         box-shadow: none;
       }
 
       &:active {
         background: darken(#efefef, 10%);
+        border-color: darken(#efefef, 10%);
         box-shadow: none;
       }
     }
