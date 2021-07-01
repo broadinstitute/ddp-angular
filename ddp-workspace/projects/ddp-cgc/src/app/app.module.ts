@@ -23,6 +23,7 @@ import { ActivityPageComponent } from './components/pages/activity/activity-page
 import { PreScreeningComponent } from './components/pages/pre-screening/pre-screening.component';
 import { StayInformedComponent } from './components/pages/stay-informed/stay-informed.component';
 import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
+import { SessionExpiredComponent } from './components/session-expired/session-expired.component';
 import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
 
 
@@ -83,6 +84,7 @@ tkCfg.activityUrl = Route.Activity;
     PreScreeningComponent,
     StayInformedComponent,
     UserActivitiesComponent,
+    SessionExpiredComponent,
     RedirectToLoginComponent,
   ],
   imports: [
