@@ -113,6 +113,7 @@
               }
             ],
             "styles": [
+              "projects/ddp-basil/src/theme.scss",
               "projects/ddp-basil/src/styles.scss"
             ],
             "scripts": [
