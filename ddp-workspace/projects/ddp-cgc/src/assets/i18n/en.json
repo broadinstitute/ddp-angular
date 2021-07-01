@@ -410,5 +410,23 @@
     "Navigation": {
       "Dashboard": "Dashboard"
     }
+  },
+  "Toolkit": {
+    "Dialogs": {
+      "SessionWillExpire": {
+        "Title": "Your session will time-out soon",
+        "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+        "SignOut": "Sign Out",
+        "Continue": "Continue"
+      }
+    },
+    "SessionExpired": {
+      "Text": {
+        "H1": "Session expired",
+        "Pt1": "You were away for a while so the system logged you out. To continue, please log in again.",
+        "Pt2": "Thank you."
+      },
+      "LogInButton": "Sign in"
+    }
   }
 }
