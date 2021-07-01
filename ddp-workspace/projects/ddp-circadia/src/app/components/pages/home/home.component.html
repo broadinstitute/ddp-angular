@@ -9,8 +9,20 @@
     </p>
 
     <div class="cta__btn-container">
-      <a class="button button--yellow" [routerLink]="Route.JoinUs">
+      <a
+        *ngIf="!isAuthenticated"
+        class="button button--yellow"
+        [routerLink]="Route.JoinUs"
+      >
         {{ 'HomePage.Cta.JoinBtn' | translate }}
+      </a>
+
+      <a
+        *ngIf="isAuthenticated"
+        class="button button--yellow"
+        [routerLink]="Route.Dashboard"
+      >
+        {{ 'HomePage.Cta.DashboardBtn' | translate }}
       </a>
     </div>
   </div>

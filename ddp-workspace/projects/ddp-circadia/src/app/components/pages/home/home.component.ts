@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReplaySubject } from 'rxjs';
 
-import { CompositeDisposable } from 'ddp-sdk';
+import { CompositeDisposable, SessionMementoService } from 'ddp-sdk';
 
 import { Route } from '../../../constants/route';
 
@@ -17,7 +17,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private headerHeight = 100;
   private subs = new CompositeDisposable();
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private sessionService: SessionMementoService,
+  ) {}
 
   ngOnInit(): void {
     const routeFragmentSub = this.route.fragment.subscribe(fragment =>
@@ -45,6 +48,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subs.removeAll();
+  }
+
+  get isAuthenticated(): boolean {
+    return this.sessionService.isAuthenticatedSession();
   }
 
   private scrollToTop(): void {
