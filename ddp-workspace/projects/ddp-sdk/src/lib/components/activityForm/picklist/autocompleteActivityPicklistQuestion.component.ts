@@ -31,6 +31,9 @@ export interface Suggestion {
                 <span [innerHtml]="suggestion.label | searchHighlight: autocompleteInput.value"></span>
             </mat-option>
         </mat-autocomplete>
+        <mat-error *ngIf="inputFormControl.hasError('strictMatch')" translate>
+            {{'SDK.Validators.Autocomplete' | translate : { text: block.question} }}
+        </mat-error>
     </mat-form-field>`,
     styles: [`
         .width {
@@ -63,6 +66,11 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
 
     public ngOnInit(): void {
         this.allSuggestions = this.generateSuggestions();
+        const [answer] = this.block.answer;
+        if (answer) {
+            this.inputFormControl.setValue(answer.detail || this.allSuggestions.find(option => option.value === answer.stableId));
+        }
+
         const customVersionId = this.block.picklistOptions.find(option => option.allowDetails)?.stableId;
 
         this.inputFormControl.valueChanges.pipe(
@@ -77,13 +85,16 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
             if (typeof value === 'string') {
                 const minimalLengthForOption = 2;
                 if (value.length >= minimalLengthForOption) {
-                    const matchInSuggestions = this.filteredSuggestions
+                    const strictMatchInSuggestions = this.filteredSuggestions
                         .find(suggestion => suggestion.label.toLowerCase() === value.toLowerCase());
-                    if (matchInSuggestions) {
-                        this.valueChanged.emit([{ stableId: matchInSuggestions.value, detail: null }]);
+                    if (strictMatchInSuggestions) {
+                        this.valueChanged.emit([{ stableId: strictMatchInSuggestions.value, detail: null }]);
                     } else if (customVersionId) {
                         this.valueChanged.emit([{ stableId: customVersionId, detail: value }]);
                     }
+
+                    const validationError = strictMatchInSuggestions || customVersionId ? null : true;
+                    this.inputFormControl.setErrors({ strictMatch: validationError });
                 }
             } else {
                 this.valueChanged.emit([{ stableId: value.value, detail: null }]);
@@ -142,7 +153,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
         return result;
     }
 
-    displayAutoComplete(option: Suggestion): string {
-        return option?.label || '';
+    displayAutoComplete(option: Suggestion | string): string {
+        return typeof option === 'string' ? option : (option?.label || '');
     }
 }

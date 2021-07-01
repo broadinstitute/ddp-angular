@@ -613,7 +613,8 @@
         },
         "TooltipAlt": "Information",
         "Validators": {
-            "DateNavyValidationRule": "Entered date is invalid"
+            "DateNavyValidationRule": "Entered date is invalid",
+            "Autocomplete": "No {{text}} is found"
         },
         "SubjectPanel": {
             "Link": "Return to subject look-up",
