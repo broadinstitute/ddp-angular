@@ -19,21 +19,21 @@
             <h3 class="section__title static-page-title">{{section.Title}}</h3>
 
             <div class="section__description" *ngIf="section.Paragraphs?.length || section.Examples">
-                <div *ngIf="section.Paragraphs?.length">
+                <ng-container *ngIf="section.Paragraphs?.length">
                     <ng-container *ngFor="let paragraph of section.Paragraphs">
                         <p class="section__text static-page-paragraph-text" [innerHTML]="paragraph" routeTransformer></p>
                     </ng-container>
-                </div>
+                </ng-container>
 
                 <!--hard-coded image as an exception-->
                 <img *ngIf="section.ImageAlt" class="section__img-milestones" lazy-resource src="assets/images/timeline.png"
                      [alt]="section.ImageAlt">
 
                 <div class="section__examples static-page-paragraph-text" *ngIf="section.Examples">
-                    <b id="examples-label">{{section.Examples.Title}}</b>
-                    <ul aria-labelledby="examples-label">
+                    <b>{{section.Examples.Title}}</b>
+                    <ul>
                         <li *ngFor="let link of section.Examples.Links; let i = index">
-                            <a class="Link" [href]="examplesUrl[i]" target="_blank">{{link.Title}}</a>
+                            <a class="Link" [href]="link.Link" target="_blank">{{link.Title}}</a>
                             <div class="source" [innerHTML]="link.Source"></div>
                         </li>
                     </ul>
