@@ -501,7 +501,6 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         this.getIsLoaded$()
             .pipe(
                 filter(Boolean),
-                take(1),
                 tap(() => {
                     if (this.model.statusCode !== ActivityStatusCodes.COMPLETE) {
                         this.shouldSaveLastStep = this.config.usesVerticalStepper.includes(this.model.activityCode);
