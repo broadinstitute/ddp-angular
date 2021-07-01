@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
     const currentFontSize = +getComputedStyle(
       document.documentElement,
-    ).fontSize.slice(0, 1);
+    ).fontSize.replace('px', '');
 
     const yOffset = el.offsetTop - this.headerHeight * currentFontSize;
 
