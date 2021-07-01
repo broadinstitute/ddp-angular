@@ -66,7 +66,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
 
     public ngOnInit(): void {
         this.allSuggestions = this.generateSuggestions();
-        const [answer] = this.block.answer;
+        const answer = this.block.answer && this.block.answer[0];
         if (answer) {
             this.inputFormControl.setValue(answer.detail || this.allSuggestions.find(option => option.value === answer.stableId));
         }
