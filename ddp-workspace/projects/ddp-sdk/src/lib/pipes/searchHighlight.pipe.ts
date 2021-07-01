@@ -5,6 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SearchHighlightPipe implements PipeTransform {
     transform(text: string, search: string): string {
+        // copied from
+        // https://stackoverflow.com/questions/49653410/mat-autocomplete-filter-to-hightlight-partial-string-matches#answer-49670236
         const pattern = search
             .replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
             .split(' ')

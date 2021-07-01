@@ -105,7 +105,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
                 value: currentValue.stableId,
             };
             acc.push(suggestion);
-            if (currentValue.nestedOptions) {
+            if (currentValue.nestedOptions?.length) {
                 suggestion.isParent = true;
 
                 for (const nestedOption of currentValue.nestedOptions) {
