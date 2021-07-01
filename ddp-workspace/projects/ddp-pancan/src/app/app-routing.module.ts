@@ -16,6 +16,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { ParticipationComponent } from './components/participation/participation.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { ScientificResearchComponent } from './components/scientific-research/scientific-research.component';
 
 const routes: Routes = [
     {
@@ -32,6 +33,11 @@ const routes: Routes = [
     {
         path: AppRoutes.Participation,
         component: ParticipationComponent,
+        canActivate: [IrbGuard]
+    },
+    {
+        path: AppRoutes.ScientificResearch,
+        component: ScientificResearchComponent,
         canActivate: [IrbGuard]
     },
     {
@@ -92,7 +98,7 @@ const routes: Routes = [
 const routerOptions: ExtraOptions = {
     scrollPositionRestoration: 'top',
     anchorScrolling: 'enabled',
-    scrollOffset: [0, 150] /* 150px to top when scrolling as to see full content  */
+    scrollOffset: [0, 150] /* 150px to top when scrolling as to see full content */
 };
 
 @NgModule({
