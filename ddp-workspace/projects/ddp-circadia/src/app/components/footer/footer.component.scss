@@ -13,10 +13,20 @@
 
     margin: 0 auto;
     padding: 4.2rem 2.4rem 5rem;
+
+    @media (max-width: 480px) {
+      flex-flow: column nowrap;
+    }
   }
 
   &__links-container {
     flex: 0 0 30%;
+
+    @media (max-width: 480px) {
+      &:not(:last-of-type) {
+        margin-bottom: 3.2rem;
+      }
+    }
   }
 }
 
@@ -26,6 +36,10 @@
 
     font-weight: 600;
     color: #9da0b3;
+
+    @media (max-width: 480px) {
+      margin-bottom: 1rem;
+    }
   }
 
   &__list {
