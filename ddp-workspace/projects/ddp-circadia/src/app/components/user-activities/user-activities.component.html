@@ -5,6 +5,10 @@
     </th>
 
     <td mat-cell *matCellDef="let activity">
+      <div class="mobile-column-name">
+        {{ 'UserActivities.Header.Name' | translate }}
+      </div>
+
       {{ activity.activityName }}
     </td>
   </ng-container>
@@ -15,6 +19,10 @@
     </th>
 
     <td mat-cell *matCellDef="let activity">
+      <div class="mobile-column-name">
+        {{ 'UserActivities.Header.Summary' | translate }}
+      </div>
+
       {{ activity.activitySummary || 'TBD' }}
     </td>
   </ng-container>
@@ -25,6 +33,10 @@
     </th>
 
     <td mat-cell *matCellDef="let activity">
+      <div class="mobile-column-name">
+        {{ 'UserActivities.Header.Status' | translate }}
+      </div>
+
       <ng-container [ngSwitch]="activity.activityCode">
         <ng-container *ngSwitchCase="ActivityCode.DLMOSchedulingInstructions">
           &mdash;
@@ -70,6 +82,10 @@
     </th>
 
     <td mat-cell *matCellDef="let activity">
+      <div class="mobile-column-name">
+        {{ 'UserActivities.Header.Actions' | translate }}
+      </div>
+
       <ng-container [ngSwitch]="activity.activityCode">
         <ng-container *ngSwitchCase="ActivityCode.DLMOSchedulingInstructions">
           <a
