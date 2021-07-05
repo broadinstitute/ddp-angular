@@ -1,6 +1,16 @@
+import { Pipe, PipeTransform } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ActivatedRoute } from '@angular/router';
+import { Auth0AdapterService } from 'ddp-sdk';
 import { SessionExpiredComponent } from './session-expired.component';
+
+
+@Pipe({name: 'translate'})
+class MockTranslatePipe implements PipeTransform {
+  transform(value: number): number {
+    return value;
+  }
+}
 
 describe('SessionExpiredComponent', () => {
   let component: SessionExpiredComponent;
@@ -8,7 +18,29 @@ describe('SessionExpiredComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SessionExpiredComponent ]
+      declarations: [
+        MockTranslatePipe,
+        SessionExpiredComponent
+      ],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              data: {
+                isAdmin: false
+              }
+            }
+          }
+        },
+        {
+          provide: Auth0AdapterService,
+          useValue: {
+            login: () => {},
+            adminLogin: () => {},
+          }
+        },
+      ]
     })
     .compileComponents();
   });

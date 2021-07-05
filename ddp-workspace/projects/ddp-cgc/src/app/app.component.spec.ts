@@ -1,7 +1,17 @@
 import { AppComponent } from './app.component';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MatDialog } from '@angular/material/dialog';
+import { RenewSessionNotifier } from 'ddp-sdk';
+import { Pipe, PipeTransform } from '@angular/core';
 
+
+@Pipe({name: 'translate'})
+class MockTranslatePipe implements PipeTransform {
+  transform(value: number): number {
+    return value;
+  }
+}
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -10,8 +20,26 @@ describe('AppComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        MockTranslatePipe
       ],
+      providers: [
+        {
+          provide: MatDialog,
+          useValue: {
+            closeAll: () => {},
+            open: (component, options) => {}
+          }
+        },
+        {
+          provide: RenewSessionNotifier,
+          useValue: {
+            openDialogEvents: {
+              subscribe: () => {}
+            }
+          }
+        }
+      ]
     }).compileComponents();
   });
 
