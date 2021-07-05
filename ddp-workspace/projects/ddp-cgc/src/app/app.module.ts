@@ -57,6 +57,7 @@ ddpCfg.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 ddpCfg.errorPageUrl = Route.Error;
 ddpCfg.passwordPageUrl = Route.Password;
 ddpCfg.dashboardPageUrl = Route.Dashboard;
+ddpCfg.sessionExpiredUrl = Route.SessionExpired;
 
 /**
  * Toolkit config
