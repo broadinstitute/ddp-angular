@@ -1,0 +1,21 @@
+<div class="container">
+  <article class="PageContent">
+    <div class="PageLayout">
+      <div class="row NoMargin">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <section class="PageContent-section">
+            <h1 translate>Toolkit.SessionExpired.Text.H1</h1>
+            <p class="PageContent-text" translate>Toolkit.SessionExpired.Text.Pt1</p>
+            <p class="PageContent-text" translate>Toolkit.SessionExpired.Text.Pt2</p>
+            <button mat-raised-button
+                    color="primary"
+                    class="button button--primary"
+                    (click)="signin()"
+                    [innerHTML]="'Toolkit.SessionExpired.LogInButton' | translate">
+            </button>
+          </section>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
