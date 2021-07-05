@@ -39,6 +39,19 @@ var DDP_ENV = {
     DDP_ENV['platformGAToken'] = "UA-108484823-1";
 {{end}}
 
+{{if eq $study_guid "basil"}}
+    {{with secret (printf "secret/pepper/%s/%s/basil/conf" $environment $version)}}
+        DDP_ENV['auth0ClientId'] = "{{.Data.auth0.appClientId}}";
+        DDP_ENV['adminClientId'] = "{{.Data.auth0.adminClientId}}";
+        DDP_ENV['auth0Domain'] = "{{.Data.auth0.loginDomain}}";
+        DDP_ENV['auth0Audience'] = "{{.Data.auth0.loginDomain}}";
+        DDP_ENV['basePepperUrl'] = "{{.Data.serverBaseUrl}}";
+        DDP_ENV['recaptchaSiteClientKey'] = "{{.Data.recaptchaSiteClientKey}}",
+    {{end}}
+    DDP_ENV['adminLoginLandingUrl'] = location.origin + '/admin-login-landing';
+    DDP_ENV['projectGAToken'] = "UA-108484823-1";
+{{end}}
+
 {{if (eq $study_guid "ANGIO" "cmi-brain" "cmi-esc" "cmi-mbc" "cmi-mpc" "CMI-OSTEO" "cmi-pancan")}}
     {{if eq $environment "dev"}}
         DDP_ENV['auth0Domain'] = "login-dev.joincountmein.org";
@@ -105,20 +118,20 @@ var DDP_ENV = {
 {{end}}
 
 {{if eq $study_guid "atcp"}}
-   {{with secret (printf "secret/pepper/%s/%s/%s/conf" $environment $version $study) }}
-        DDP_ENV['recaptchaSiteClientKey'] = "{{.Data.recaptchaSiteClientKey}}",
-        DDP_ENV['auth0Domain'] = "{{.Data.auth0.domain}}",
-        DDP_ENV['darUrl'] = "{{.Data.cloudFunctions.darUrl}}"
-   {{end}}
-
-   {{if eq $environment "local"}}
+    {{if eq $environment "local"}}
         DDP_ENV['auth0ClientId'] = "edW0M3DUc9D2IwimW0NVfnPZwlRNdH9v";
+        DDP_ENV['auth0Domain'] = "at-dev.auth0.com";
         DDP_ENV['auth0Audience'] = "at-dev.auth0.com";
         DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
-    {{else if eq $environment "dev"}}
-        DDP_ENV['auth0ClientId'] = "7HzrckGgnPAO7UqDbcuUb9QoTc3V2eHa";
-        DDP_ENV['auth0Audience'] = "at-dev.auth0.com";
-        DDP_ENV['basePepperUrl'] = "https://pepper-dev.datadonationplatform.org";
+    {{else}}
+        {{with secret (printf "secret/pepper/%s/%s/atcp/conf" $environment $version)}}
+            DDP_ENV['recaptchaSiteClientKey'] = "{{.Data.recaptchaSiteClientKey}}",
+            DDP_ENV['darUrl'] = "{{.Data.cloudFunctions.darUrl}}"
+            DDP_ENV['auth0ClientId'] = "{{.Data.auth0.clientId}}";
+            DDP_ENV['auth0Domain'] = "{{.Data.auth0.loginDomain}}";
+            DDP_ENV['auth0Audience'] = "{{.Data.auth0.loginDomain}}";
+            DDP_ENV['basePepperUrl'] = "{{.Data.serverBaseUrl}}";
+        {{end}}
     {{end}}
 {{end}}
 

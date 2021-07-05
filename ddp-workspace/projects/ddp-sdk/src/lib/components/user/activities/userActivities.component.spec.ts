@@ -22,7 +22,7 @@ describe('UserActivitiesComponent', () => {
     let debugElement: DebugElement;
     let serviceAgentSpy: jasmine.SpyObj<UserActivityServiceAgent>;
 
-    beforeEach(async() => {
+    beforeEach(async () => {
         serviceAgentSpy = jasmine.createSpyObj('serviceAgentSpy', {
             updateSelectedUser: undefined,
             resetSelectedUser: undefined,

@@ -1,4 +1,6 @@
-@import 'variables.scss';
+@import 'styles/variables';
+@import 'styles/fonts';
+@import 'styles/common';
 
 html,
 body {
@@ -7,6 +9,7 @@ body {
     height: 100vh;
     font-size: 16px;
     font-weight: 400;
+    min-width: 390px;
 }
 
 html {
@@ -14,16 +17,18 @@ html {
 }
 
 body {
+    font-family: $primary-font, sans-serif;
+    color: $text-color;
     overflow-y: scroll;
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: $desktop-breakpoint) {
     html {
         font-size: 14px;
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: $tablet-breakpoint) {
     html {
         font-size: 12px;
     }
@@ -43,14 +48,22 @@ button {
 a {
     cursor: pointer;
     text-decoration: none;
+    color: $primary-color;
 
-    &:focus {
+    &:focus, &:hover {
         text-decoration: underline;
     }
 }
 
 .SimpleButton {
-    cursor: pointer;
+    @extend .btn-common;
+    @extend .btn-outline;
+    @extend .btn-auth;
+
+    .footer & {
+        color: white;
+        border-color: white;
+    }
 }
 
 .wrapper {
@@ -59,4 +72,122 @@ a {
     padding-bottom: $footer-height;
     padding-top: $header-height;
     box-sizing: border-box;
+}
+
+.Italic {
+    font-style: italic;
+}
+
+.Link {
+    color: $primary-color;
+}
+
+.button-link {
+    border: none;
+    background: none;
+    font-size: inherit;
+    font-family: inherit;
+    color: $primary-color;
+
+    &:hover, &:focus {
+        text-decoration: underline;
+    }
+}
+
+.Modal-title {
+    @extend .static-page-title;
+
+    margin: 10px 0 12px 0;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+
+    .mat-icon-button {
+        top: -20px;
+        right: -15px;
+    }
+}
+
+.Modal-text {
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    margin-bottom: 15px;
+    margin-top: 0;
+}
+
+.Modal-progress {
+    margin: 5px 0;
+}
+
+.JoinDialogFiled {
+    width: 100%;
+}
+
+.JoinDialogNameField {
+    width: 50%;
+    margin: 0 30px 0 0;
+}
+
+.JoinDialogLastnameField {
+    width: 50%;
+}
+
+.JoinDialogGroupFields {
+    display: flex;
+}
+
+.JoinField--margin {
+    margin-bottom: 5px;
+}
+
+@media only screen and (max-width: $tablet-breakpoint) {
+    .JoinDialogGroupFields {
+        flex-direction: column;
+    }
+
+    .JoinDialogNameField {
+        width: 100%;
+        margin: 0;
+    }
+
+    .JoinDialogLastnameField {
+        width: 100%;
+    }
+}
+
+.ButtonFilled {
+    @extend .btn-common;
+
+    outline: none;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    color: #fff !important;
+    transition: all .3s ease-out;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
+    background-color: $primary-color;
+
+    &:hover, &:focus {
+        box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    }
+}
+
+.ButtonFilled--neutral {
+    background-color: $grey-button-color !important;
+}
+
+.ButtonFilled--neutral--margin {
+    margin-right: 20px;
+}
+
+.NoMargin {
+    margin: 0!important;
+}
+
+.ErrorMessage {
+    border-top: 2px solid $warn-color;
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: $warn-color;
+    font-weight: 300;
+    padding: 15px 0;
 }

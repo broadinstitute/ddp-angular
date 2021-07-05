@@ -384,6 +384,11 @@ p.Paragraph {
     font-weight: 500 !important;
 }
 
+.AccentUnderline {
+    font-weight: 500 !important;
+    text-decoration: underline;
+}
+
 @media only screen and (min-width: 2500px) {
     .Title-small {
         font-size: 1.5rem;
@@ -2104,11 +2109,11 @@ mat-icon.ddp-dropdown-arrow {
         @media only screen and (max-width: 1240px) {
             font-size: 1rem;
         }
-    
+
         @media only screen and (max-width: 1024px) {
             font-size: 0.9rem;
         }
-    
+
         @media only screen and (max-width: 920px) {
             font-size: 1rem;
             color: $color-blue-dark;
@@ -2116,7 +2121,7 @@ mat-icon.ddp-dropdown-arrow {
 
         &:hover {
             color: $color-teal;
-        
+
             @media only screen and (max-width: 920px) {
               color: $color-blue-dark;
             }
@@ -2131,7 +2136,7 @@ mat-icon.ddp-dropdown-arrow {
                 fill: transparent;
                 transition: stroke 0.3s ease-in-out;
             }
-    
+
             .ddp-current-language {
                 margin: 0 4px;
             }

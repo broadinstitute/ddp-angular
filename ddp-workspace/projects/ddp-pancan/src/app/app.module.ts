@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -21,10 +24,14 @@ import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
-
-import { MatButtonModule } from '@angular/material/button';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatIconModule } from '@angular/material/icon';
+import { FaqSectionComponent } from './components/faq-section/faq-section.component';
+import { FaqComponent } from './components/faq/faq.component';
+import { ParticipationComponent } from './components/participation/participation.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { AuthComponent } from './components/auth/auth.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { AnchorsPageComponent } from './components/anchors-page/anchors-page.component';
+import { ScientificResearchComponent } from './components/scientific-research/scientific-research.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -85,6 +92,14 @@ export function translateFactory(translate: TranslateService,
         FooterComponent,
         HeaderComponent,
         WelcomeComponent,
+        FaqSectionComponent,
+        FaqComponent,
+        ParticipationComponent,
+        NavigationComponent,
+        AuthComponent,
+        AboutUsComponent,
+        AnchorsPageComponent,
+        ScientificResearchComponent,
     ],
     imports: [
         BrowserModule,

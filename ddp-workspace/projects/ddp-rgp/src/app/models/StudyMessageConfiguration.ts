@@ -8,4 +8,6 @@ export interface StudyMessageConfiguration {
   dateWorkflowKey?: WorkflowKey;
   baseKey: string;
   stageKey: string;
+  exclusive?: boolean;
+  group: number;
 }

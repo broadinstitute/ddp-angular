@@ -1,9 +1,32 @@
 @import 'variables';
 
+@mixin outlined($primary-color, $text-color, $filled-text-color) {
+  &-outline {
+    background: transparent;
+    border: 2px solid $primary-color;
+
+    color: $text-color;
+
+    &:not(:disabled) {
+      &:hover,
+      &:focus {
+        background: $primary-color;
+
+        color: $filled-text-color;
+      }
+
+      &:active {
+        background: darken($primary-color, 10%);
+        border-color: darken($primary-color, 10%);
+      }
+    }
+  }
+}
+
 .button {
   display: inline-block;
 
-  padding: 1.65rem 2.8rem;
+  padding: 1.45rem 2.6rem;
 
   border-radius: 12px;
   border: none;
@@ -11,11 +34,13 @@
 
   font-family: inherit;
   font-size: 1.8rem;
+  font-weight: 600;
   line-height: 1;
   white-space: nowrap;
   text-decoration: none;
 
-  transition: background 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  transition: background 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease,
+    border-color 0.2s ease, color 0.2s ease;
   cursor: pointer;
 
   &:disabled {
@@ -37,7 +62,7 @@
   }
 
   &--sm {
-    padding: 1.4rem 2.6rem;
+    padding: 1.2rem 2.4rem;
 
     border-radius: 10px;
 
@@ -46,23 +71,29 @@
 
   &--yellow {
     background: $color-yellow-1;
+    border: 2px solid $color-yellow-1;
 
     color: #000000;
+
+    @include outlined($color-yellow-1, darken($color-yellow-1, 20%), #000000);
 
     &:not(:disabled) {
       &:hover,
       &:focus {
         background: darken($color-yellow-1, 5%);
+        border-color: darken($color-yellow-1, 5%);
       }
 
       &:active {
         background: darken($color-yellow-1, 10%);
+        border-color: darken($color-yellow-1, 10%);
       }
     }
   }
 
   &--blue {
     background: $color-blue-2;
+    border: 2px solid $color-blue-2;
 
     color: #ffffff;
 
@@ -70,16 +101,19 @@
       &:hover,
       &:focus {
         background: lighten($color-blue-2, 5%);
+        border-color: lighten($color-blue-2, 5%);
       }
 
       &:active {
         background: lighten($color-blue-2, 10%);
+        border-color: lighten($color-blue-2, 10%);
       }
     }
   }
 
   &--opaque {
     background: #efefef;
+    border: 2px solid #efefef;
 
     color: #000000;
 
@@ -87,11 +121,13 @@
       &:hover,
       &:focus {
         background: darken(#efefef, 5%);
+        border-color: darken(#efefef, 5%);
         box-shadow: none;
       }
 
       &:active {
         background: darken(#efefef, 10%);
+        border-color: darken(#efefef, 10%);
         box-shadow: none;
       }
     }

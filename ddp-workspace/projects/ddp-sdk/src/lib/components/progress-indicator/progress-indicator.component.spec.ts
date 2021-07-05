@@ -59,7 +59,7 @@ describe('ProgressIndicatorComponent', () => {
         return debugElement.queryAll(By.css('.button.finish'))[0].nativeElement;
     };
 
-    beforeEach(async() => {
+    beforeEach(async () => {
         await TestBed.configureTestingModule({
                 imports: [
                     MatStepperModule,

@@ -13,7 +13,7 @@ describe('EmbeddedActivityBlockComponent', () => {
   let loggingServiceSpy: jasmine.SpyObj<LoggingService>;
   const submitAnnounceService = new SubmitAnnouncementService();
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     activityServiceAgentSpy = jasmine.createSpyObj('ActivityServiceAgent', ['getActivity']);
     activityServiceAgentSpy.getActivity.and.returnValue(of(new ActivityForm()));
     loggingServiceSpy = jasmine.createSpyObj('LoggingService', ['logError']);

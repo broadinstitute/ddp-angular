@@ -9,7 +9,7 @@ describe('ActivityComponent', () => {
   let component: ActivityPageComponent;
   let fixture: ComponentFixture<ActivityPageComponent>;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ActivityPageComponent ],
       providers: [

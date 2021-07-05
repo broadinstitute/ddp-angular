@@ -44,7 +44,7 @@ describe('ActivityFileAnswer', () => {
     let matDialogSpy: jasmine.SpyObj<MatDialog>;
     let modalDialogServiceSpy: jasmine.SpyObj<ModalDialogService>;
 
-    beforeEach(async() => {
+    beforeEach(async () => {
         fileUploadServiceSpy = jasmine.createSpyObj('FileUploadService', ['getUploadUrl', 'uploadFile']);
         loggingServiceSpy = jasmine.createSpyObj('LoggingService', ['logDebug']);
         matDialogSpy = jasmine.createSpyObj('MatDialog', ['open']);

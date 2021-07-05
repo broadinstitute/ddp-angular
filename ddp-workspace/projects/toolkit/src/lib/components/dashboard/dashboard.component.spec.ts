@@ -11,7 +11,7 @@ describe('DashboardComponent', () => {
     let component: DashboardComponent;
     let participantsSearchSpy: jasmine.SpyObj<ParticipantsSearchServiceAgent>;
 
-    beforeEach(async() => {
+    beforeEach(async () => {
         participantsSearchSpy = jasmine.createSpyObj('participantsSearchSpy', {
             getParticipant: of({
                 guid: '1234',

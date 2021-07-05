@@ -1,0 +1,23 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    background-color: darkseagreen;
+}
+
+.navigation {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+}
+
+.navigation__item {
+    display: flex;
+    margin-right: 1rem;
+}
+
+.auth {
+    display: flex;
+    align-items: center;
+}

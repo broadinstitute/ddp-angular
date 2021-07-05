@@ -115,6 +115,24 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
         switchMap(participants =>
           this.checkAndDeleteAccidentalParticipant(participants),
         ),
+        map(participants =>
+          participants.map(participant => ({
+            ...participant,
+            activities: participant.activities.reduce((acc, activity) => {
+              if (activity.activityCode === ActivityCodes.BLOOD_TYPE) {
+                if (
+                  this.registrationStatusService.isEnrolled(participant.status)
+                ) {
+                  acc.push(activity);
+                }
+              } else {
+                acc.push(activity);
+              }
+
+              return acc;
+            }, []),
+          })),
+        ),
       )
       .subscribe({
         next: participants => {

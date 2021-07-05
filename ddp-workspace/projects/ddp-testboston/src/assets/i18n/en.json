@@ -67,7 +67,7 @@
       "Title": "We want to help our communities and learn more about COVID-19 infection patterns in the Boston area.",
       "Text": "TestBoston is a COVID-19 study supported by Brigham and Women's Hospital and the Broad Institute of MIT and Harvard.",
       "Code": "I have an invitation code",
-      "NoCode": "I don’t have an invitation code and want to join the study"
+      "Full": "We are currently fully enrolled.  Please check back in for future updates!"
     },
     "AboutSection": {
       "Title": "About the Study",
@@ -206,7 +206,9 @@
             "Sampath Settipalli, Senior Software Engineer",
             "Scott Sassone, Manager, Video Production",
             "Simone Maiwald, Software Engineering Manager",
-            "Yufeng Wang, Senior Software Engineer"
+            "Yufeng Wang, Senior Software Engineer",
+            "Andrew Tang, Senior Interaction Designer, Pattern",
+            "Surya Narayanan-Pandit, Surveillance Associate"
           ]
         },
         {
@@ -220,7 +222,23 @@
             "Himaja Nagireddy, HSPH MS Candidate, Intern",
             "Sarah Naz-McLean, MSc, Program Manager",
             "Tina Wang, Translator",
-            "Yilu Ma, Translator"
+            "Yilu Ma, Translator",
+            "Saee Ratnaparkhi, MPH, Research Assistant",
+            "Margaret McCarthy, MSc, Research Assistant",
+            "Jessica Hung, Intern",
+            "Maura Benson, BS, Research Assistant"
+          ]
+        },
+        {
+          "Title": "MOC Team, Broad Institute",
+          "Members": [
+            "Kara Rzasa",
+            "Thomas Cleland",
+            "Ross Ackerman",
+            "Tony Gaca",
+            "Johnathan Livny",
+            "Peijun Ma",
+            "Giana Frongillo"
           ]
         },
         {

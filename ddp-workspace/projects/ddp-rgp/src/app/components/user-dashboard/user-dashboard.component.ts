@@ -9,9 +9,11 @@ import {
   UserActivityServiceAgent,
 } from 'ddp-sdk';
 
+import { StudyPerson } from '../../models/StudyPerson';
 import { StudyMessage } from '../../models/StudyMessage';
 import { StudyMessagesService } from '../../services/study-messages.service';
 import { filter, take } from 'rxjs/operators';
+import { Routes } from '../../routes';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -20,8 +22,9 @@ import { filter, take } from 'rxjs/operators';
 })
 export class UserDashboardComponent implements OnInit, OnDestroy {
   loading = false;
-  messages: StudyMessage[] = [];
+  persons: StudyPerson[] = [];
   activities: ActivityInstance[] = [];
+  Routes = Routes;
   private subs = new CompositeDisposable();
 
   constructor(
@@ -43,9 +46,9 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
   private loadData(): void {
     this.loading = true;
 
-    forkJoin([this.loadMessages(), this.loadActivities()]).subscribe(
-      ([messages, activities]) => {
-        this.messages = messages;
+    forkJoin([this.loadPersonMessages(), this.loadActivities()]).subscribe(
+      ([persons, activities]) => {
+        this.persons = persons;
         this.activities = activities;
 
         this.loading = false;
@@ -59,8 +62,8 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
       .pipe(take(1));
   }
 
-  private loadMessages(): Observable<StudyMessage[]> {
-    return this.studyMessagesService.getMessages();
+  private loadPersonMessages(): Observable<StudyPerson[]> {
+    return this.studyMessagesService.getPersonMessages();
   }
 
   private setupLanguageListener(): void {

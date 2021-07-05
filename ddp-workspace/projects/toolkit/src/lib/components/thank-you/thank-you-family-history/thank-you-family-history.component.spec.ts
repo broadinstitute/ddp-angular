@@ -18,7 +18,7 @@ describe('ThankYouFamilyHistoryComponent', () => {
   let component: ThankYouFamilyHistoryComponent;
   let fixture: ComponentFixture<ThankYouFamilyHistoryComponent>;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,

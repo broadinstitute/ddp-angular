@@ -68,7 +68,6 @@
     &.in li.nav-item,
     &.collapsing li.nav-item  {
       display: block;
-      width: 100%;
       float: right;
       text-align: right;
       margin-bottom: 15px;
@@ -84,15 +83,16 @@
 
 .nav {
   &-item {
-    padding: 0 0 0 24px;
+    padding: 0;
+    margin-left: 24px;
     &__link {
       color: #fff!important;
       font-size: 19px;
-      line-height: 3.2rem!important;
+      line-height: 1.7em!important;
       text-shadow: none;
       padding: 0!important;
       &_active {
-        display: none;
+        border-bottom: #fff solid 2px;
       }
     }
   }
@@ -101,7 +101,7 @@
 @media only screen and (max-width: 1030px) {
   .nav {
     &-item {
-      padding: 0 0 0 20px;
+      margin-left: 20px;
       &__link {
         font-size: 17px;
       }
@@ -115,7 +115,7 @@
   }
   .nav {
     &-item {
-      padding-left: 13px;
+      margin-left: 13px;
     }
   }
   .arrow {
@@ -132,8 +132,9 @@
 @media only screen and (max-width: 768px) {
   .header {
     &-collapse ul {
-      display: block;
       padding-top: 25px;
+      flex-direction: column;
+      align-items: flex-end;
     }
 
     &-background {

@@ -23,7 +23,7 @@ describe('SubjectPanelComponent', () => {
     let component: SubjectPanelComponent;
     let sessionMock: SessionMementoService;
 
-    beforeEach(async() => {
+    beforeEach(async () => {
         sessionMock = { isAuthenticatedAdminSession: () => true, session: {} as Session } as SessionMementoService;
         const invitationPipeSpy = jasmine.createSpyObj('invitationPipeSpy', { transform: 'transformedInvitation' });
         await TestBed.configureTestingModule({

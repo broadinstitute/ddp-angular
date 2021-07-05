@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReplaySubject } from 'rxjs';
 
-import { CompositeDisposable } from 'ddp-sdk';
+import { CompositeDisposable, SessionMementoService } from 'ddp-sdk';
 
 import { Route } from '../../../constants/route';
 
@@ -14,10 +14,13 @@ import { Route } from '../../../constants/route';
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   Route = Route;
   private fragment$ = new ReplaySubject<string | null | undefined>(1);
-  private headerHeight = 100;
+  private headerHeight = 10;
   private subs = new CompositeDisposable();
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private sessionService: SessionMementoService,
+  ) {}
 
   ngOnInit(): void {
     const routeFragmentSub = this.route.fragment.subscribe(fragment =>
@@ -47,6 +50,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subs.removeAll();
   }
 
+  get isAuthenticated(): boolean {
+    return this.sessionService.isAuthenticatedSession();
+  }
+
   private scrollToTop(): void {
     window.scrollTo({top: 0, behavior: 'smooth'});
   }
@@ -58,7 +65,11 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    const yOffset = el.offsetTop - this.headerHeight;
+    const currentFontSize = +getComputedStyle(
+      document.documentElement,
+    ).fontSize.replace('px', '');
+
+    const yOffset = el.offsetTop - this.headerHeight * currentFontSize;
 
     window.scrollTo(0, yOffset);
   }

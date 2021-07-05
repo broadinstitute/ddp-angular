@@ -1,4 +1,5 @@
-@import '../../../variables.scss';
+@import '../../../styles/variables';
+@import '../../../styles/common';
 
 .header {
     position: fixed;
@@ -9,6 +10,11 @@
     height: $header-height;
     transition: all 200ms linear;
     background-color: white;
+
+    ::ng-deep.navigation__link {
+        font-size: 1.5rem;
+        line-height: 3rem;
+    }
 }
 
 .header-content {
@@ -17,21 +23,16 @@
     align-items: center;
     margin: auto;
     padding: 0 1.5625rem;
+    height: $header-height;
 }
 
-.navigation {
-    list-style: none;
-    display: flex;
+.header_shadow {
+    box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.2);
+    transition: all ease 0.5s;
 }
 
 .auth {
-    display: flex;
-    align-items: center;
-}
-
-.navigation__item {
-    margin-right: 2.8125rem;
-    display: flex;
+    min-width: 160px;
 }
 
 .hamburger {
@@ -42,6 +43,11 @@
     transition-timing-function: linear;
     background-color: transparent;
     border: 0;
+    display: flex;
+}
+
+.header-content .nav {
+    width: 100%;
     display: none;
 }
 
@@ -58,17 +64,11 @@
         visibility: visible;
         height: 100%;
 
-        .nav,
-        .auth {
+        .nav {
             display: flex;
         }
 
-        .auth {
-            flex-direction: column;
-            align-items: start;
-        }
-
-        .navigation {
+        ::ng-deep.navigation {
             flex-direction: column;
             padding: 0;
         }
@@ -145,13 +145,43 @@
     }
 }
 
-@media screen and (max-width: 945px) {
+.project-logo {
+    display: flex;
+    margin-right: 15px;
+
+    &__text {
+        color: $text-color;
+        line-height: 1.125rem;
+        padding-left: 7px;
+        letter-spacing: -0.5px;
+    }
+
+    &__img {
+        width: 3.44rem;
+    }
+}
+
+@media screen and (min-width: $desktop-breakpoint) {
+    .panel-controls,
+    .panel-opened .panel-controls,
     .hamburger {
+        display: none;
+    }
+
+    .header-content .nav {
         display: flex;
     }
 
-    .nav,
+    .header {
+        height: $header-height;
+
+        ::ng-deep.navigation__link {
+            font-size: 1rem;
+            line-height: normal;
+        }
+    }
+
     .auth {
-        display: none;
+        min-width: 200px;
     }
 }
