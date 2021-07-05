@@ -4,13 +4,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
 import { Subject } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
-
-export interface Suggestion {
-    label: string;
-    isParent?: boolean;
-    parent?: string;
-    value: string;
-}
+import { ActivityPicklistSuggestion } from '../../../models/activity/activityPicklistSuggestion';
 
 @Component({
     selector: 'ddp-activity-autocomplete-picklist-question',
@@ -31,9 +25,9 @@ export interface Suggestion {
                 <span [innerHtml]="suggestion.label | searchHighlight: autocompleteInput.value"></span>
             </mat-option>
         </mat-autocomplete>
-        <mat-error *ngIf="inputFormControl.hasError('strictMatch')" translate>
-            {{'SDK.Validators.Autocomplete' | translate : { text: block.question} }}
-        </mat-error>
+<!--        <mat-error *ngIf="inputFormControl.hasError('strictMatch')" translate>-->
+<!--            {{'SDK.Validators.Autocomplete' | translate : { text: block.question} }}-->
+<!--        </mat-error>-->
     </mat-form-field>`,
     styles: [`
         .width {
@@ -54,10 +48,9 @@ export interface Suggestion {
     `]
 })
 export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQuestion implements OnInit, OnDestroy {
-    private allSuggestions: Suggestion[] = [];
     private readonly ngUnsubscribe = new Subject();
 
-    filteredSuggestions: Suggestion[];
+    filteredSuggestions: ActivityPicklistSuggestion[];
     inputFormControl = new FormControl();
 
     constructor(translate: NGXTranslateService) {
@@ -65,10 +58,10 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     }
 
     public ngOnInit(): void {
-        this.allSuggestions = this.generateSuggestions();
         const answer = this.block.answer && this.block.answer[0];
         if (answer) {
-            this.inputFormControl.setValue(answer.detail || this.allSuggestions.find(option => option.value === answer.stableId));
+            this.inputFormControl
+                .setValue(answer.detail || this.block.picklistSuggestions.find(option => option.value === answer.stableId));
         }
 
         const customVersionId = this.block.picklistOptions.find(option => option.allowDetails)?.stableId;
@@ -78,26 +71,28 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
             distinctUntilChanged(),
             debounceTime(200),
             takeUntil(this.ngUnsubscribe)
-        ).subscribe((value: string | Suggestion) => {
+        ).subscribe((value: string | ActivityPicklistSuggestion) => {
             const query = typeof value === 'string' ? value : value.label;
-            this.filteredSuggestions = query ? this.filterOptions(query) : this.allSuggestions.slice();
-
+            this.filteredSuggestions = query ? this.filterOptions(query) : this.block.picklistSuggestions.slice();
             if (typeof value === 'string') {
                 const minimalLengthForOption = 2;
                 if (value.length >= minimalLengthForOption) {
                     const strictMatchInSuggestions = this.filteredSuggestions
                         .find(suggestion => suggestion.label.toLowerCase() === value.toLowerCase());
                     if (strictMatchInSuggestions) {
-                        this.valueChanged.emit([{ stableId: strictMatchInSuggestions.value, detail: null }]);
+                        this.block.answer = [{ stableId: strictMatchInSuggestions.value, detail: null }];
+                        this.valueChanged.emit(this.block.answer);
                     } else if (customVersionId) {
-                        this.valueChanged.emit([{ stableId: customVersionId, detail: value }]);
+                        this.block.answer = [{ stableId: customVersionId, detail: value }];
+                        this.valueChanged.emit(this.block.answer);
                     }
 
-                    const validationError = strictMatchInSuggestions || customVersionId ? null : true;
-                    this.inputFormControl.setErrors({ strictMatch: validationError });
+                    // const validationError = strictMatchInSuggestions || customVersionId ? null : true;
+                    // this.inputFormControl.setErrors({ strictMatch: validationError });
                 }
             } else {
-                this.valueChanged.emit([{ stableId: value.value, detail: null }]);
+                this.block.answer = [{ stableId: value.value, detail: null }];
+                this.valueChanged.emit(this.block.answer);
             }
         });
     }
@@ -108,35 +103,12 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
         this.ngUnsubscribe.complete();
     }
 
-    private generateSuggestions(): Suggestion[] {
-        return this.block.picklistOptions.reduce((acc, currentValue) => {
-            if (currentValue.allowDetails) return acc;
-            const suggestion: Suggestion = {
-                label: currentValue.optionLabel,
-                value: currentValue.stableId,
-            };
-            acc.push(suggestion);
-            if (currentValue.nestedOptions?.length) {
-                suggestion.isParent = true;
-
-                for (const nestedOption of currentValue.nestedOptions) {
-                    acc.push({
-                        label: nestedOption.optionLabel,
-                        value: nestedOption.stableId,
-                        parent: currentValue.optionLabel
-                    });
-                }
-            }
-            return acc;
-        }, [] as Suggestion[]);
-    }
-
-    private filterOptions(name: string): Suggestion[] {
+    private filterOptions(name: string): ActivityPicklistSuggestion[] {
         const filterValue = name.toLowerCase();
         const result = [];
         let currentParent = null;
 
-        for (const option of this.allSuggestions) {
+        for (const option of this.block.picklistSuggestions) {
             if (option.label.toLowerCase().includes(filterValue) ||
                 option.parent?.toLowerCase().includes(filterValue)) {
                 // we want to display group title even if the group title doesn't match the search
@@ -153,7 +125,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
         return result;
     }
 
-    displayAutoComplete(option: Suggestion | string): string {
+    displayAutoComplete(option: ActivityPicklistSuggestion | string): string {
         return typeof option === 'string' ? option : (option?.label || '');
     }
 }
