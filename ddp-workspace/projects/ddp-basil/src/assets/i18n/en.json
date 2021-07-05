@@ -276,7 +276,7 @@
         },
         "Validators": {
             "DateNavyValidationRule": "Entered date is invalid",
-            "Autocomplete": "No {{text}} is found"
+            "Autocomplete": "No {{control}} is found"
         },
         "FileUpload": {
             "ConfirmReuploadTitle": "Are you sure you want \nto reupload the file?",

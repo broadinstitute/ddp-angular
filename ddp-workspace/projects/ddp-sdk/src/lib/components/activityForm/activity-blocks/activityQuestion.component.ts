@@ -7,6 +7,7 @@ import { WindowRef } from '../../../services/windowRef';
 import { AnswerValue } from '../../../models/activity/answerValue';
 import { SubmissionManager } from '../../../services/serviceAgents/submissionManager.service';
 import { ConfigurationService } from '../../../services/configuration.service';
+import { ActivityValidationResult } from '../../../models/activity/activityValidationResult';
 
 @Component({
     selector: 'ddp-activity-question',
@@ -23,7 +24,7 @@ import { ConfigurationService } from '../../../services/configuration.service';
             </ddp-activity-answer>
             <ng-container *ngIf="block.shown">
                 <div class="ddp-activity-validation" *ngIf="errorMessage$ | async as errorMsg">
-                    <ddp-validation-message [message]="errorMsg">
+                    <ddp-validation-message [message]="errorMsg" [translationParams]="errorMessageTranslationParams$ | async">
                     </ddp-validation-message>
                 </div>
             </ng-container>
@@ -44,8 +45,13 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
     @Output() componentBusy = new EventEmitter<boolean>();
     public errorMessage$: Observable<string | string[] | null>;
+    public errorMessageTranslationParams$: Observable<{[key: string]: string} | null>;
     @ViewChild('scrollAnchor', {static: true}) scrollAnchor: ElementRef;
     private ngUnsubscribe = new Subject<void>();
+
+    static isActivityValidationResult(result: ActivityValidationResult | string | null): result is ActivityValidationResult {
+        return !!(result && (result as ActivityValidationResult).message);
+    }
 
     constructor(
         @Inject('ddp.config') public config: ConfigurationService,
@@ -65,19 +71,30 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
 
 
     private setupErrorMessage(): void {
+        const firstFailedValidator$ =  combineLatest([
+            this.enteredValue$.pipe(startWith(this.block.answer as AnswerValue)),
+            this.validationRequested$
+        ]).pipe(
+            // not displaying any local validations until a validation is requested
+            filter(([_, validationRequested]) => !!validationRequested),
+            map(() => {
+                const firstFailedValidator = this.block.validators.find(validator => !validator.recalculate());
+                return firstFailedValidator ? firstFailedValidator.result : null;
+            })
+        );
         const localValidatorMsg$: Observable<string | null> =
-            combineLatest([
-                this.enteredValue$.pipe(startWith(this.block.answer as AnswerValue)),
-                this.validationRequested$
-            ]).pipe(
-                // not displaying any local validations until a validation is requested
-                filter(([_, validationRequested]) => !!validationRequested),
-                map(() => {
-                    const firstFailedValidator = this.block.validators.find(validator => !validator.recalculate());
-                    return firstFailedValidator ? firstFailedValidator.result : null;
+            firstFailedValidator$.pipe(
+                map((result) => {
+                    return ActivityQuestionComponent.isActivityValidationResult(result) ? result.message : result;
                 }),
                 startWith(null as string | null)
             );
+
+        this.errorMessageTranslationParams$ = firstFailedValidator$.pipe(
+            map((result) => {
+                return ActivityQuestionComponent.isActivityValidationResult(result) ? result.params : null;
+            })
+        );
 
         // merge these together and initialize with messages coming from the question definition
         this.errorMessage$ = combineLatest([

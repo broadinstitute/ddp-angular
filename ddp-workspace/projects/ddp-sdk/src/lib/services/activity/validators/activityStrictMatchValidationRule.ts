@@ -7,13 +7,13 @@ export class ActivityStrictMatchValidationRule extends ActivityAbstractValidatio
     }
 
     public recalculate(): boolean {
-        const allowCustomValue = !!this.block.picklistOptions.find(option => option.allowDetails);
-        const strictMatch = !!(allowCustomValue || !this.block.answer
-            || this.block.picklistSuggestions
-                .find(suggestion => suggestion.value.toLowerCase() === this.block.answer[0].stableId.toLowerCase()));
+        const allowCustomValue = this.block.picklistOptions.find(option => option.allowDetails);
+        const noNeedCheckAnswer = allowCustomValue || !this.block.answer;
+        const validationResult = !!(noNeedCheckAnswer || (this.block.answer[0].stableId && this.block.picklistSuggestions
+                .find(suggestion => suggestion.value.toLowerCase() === this.block.answer[0].stableId.toLowerCase())));
 
-        this.result = strictMatch ? null : 'SDK.Validators.Autocomplete';
+        this.result = validationResult ? null : { message: 'SDK.Validators.Autocomplete', params: { control: this.block.question } };
 
-        return strictMatch;
+        return validationResult;
     }
 }

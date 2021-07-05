@@ -25,9 +25,6 @@ import { ActivityPicklistSuggestion } from '../../../models/activity/activityPic
                 <span [innerHtml]="suggestion.label | searchHighlight: autocompleteInput.value"></span>
             </mat-option>
         </mat-autocomplete>
-<!--        <mat-error *ngIf="inputFormControl.hasError('strictMatch')" translate>-->
-<!--            {{'SDK.Validators.Autocomplete' | translate : { text: block.question} }}-->
-<!--        </mat-error>-->
     </mat-form-field>`,
     styles: [`
         .width {
@@ -82,13 +79,12 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
                     if (strictMatchInSuggestions) {
                         this.block.answer = [{ stableId: strictMatchInSuggestions.value, detail: null }];
                         this.valueChanged.emit(this.block.answer);
-                    } else if (customVersionId) {
+                    } else {
                         this.block.answer = [{ stableId: customVersionId, detail: value }];
-                        this.valueChanged.emit(this.block.answer);
+                        if (customVersionId) {
+                            this.valueChanged.emit(this.block.answer);
+                        }
                     }
-
-                    // const validationError = strictMatchInSuggestions || customVersionId ? null : true;
-                    // this.inputFormControl.setErrors({ strictMatch: validationError });
                 }
             } else {
                 this.block.answer = [{ stableId: value.value, detail: null }];
