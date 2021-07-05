@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private scrollToTop(): void {
-    window.scrollTo(0, 0);
+    window.scrollTo({top: 0, behavior: 'smooth'});
   }
 
   private scrollToAnchor(anchor: string): void {
