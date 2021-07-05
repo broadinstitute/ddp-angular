@@ -18,9 +18,9 @@ describe('SessionExpiredComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ 
+      declarations: [
         MockTranslatePipe,
-        SessionExpiredComponent 
+        SessionExpiredComponent
       ],
       providers: [
         {
