@@ -7,23 +7,30 @@
 .mat-cell,
 .mat-header-cell {
   font-size: 1.6rem;
-}
 
-.mat-cell {
-  padding-top: 1.6rem;
-  padding-bottom: 1.6rem;
+  padding-top: 1.6rem !important;
+  padding-bottom: 1.6rem !important;
+  padding-left: 2.4rem !important;
+
+  &:last-of-type {
+    padding-right: 2.4rem !important;
+  }
 }
 
 .mat-column-name {
-  width: 50%;
+  width: 20%;
+}
+
+.mat-column-summary {
+  width: 40%;
 }
 
 .mat-column-status {
-  width: 25%;
+  width: 20%;
 }
 
 .mat-column-actions {
-  width: 25%;
+  width: 20%;
 }
 
 .activity-status {

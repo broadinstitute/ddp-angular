@@ -31,6 +31,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { AuthComponent } from './components/auth/auth.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { AnchorsPageComponent } from './components/anchors-page/anchors-page.component';
+import { ScientificResearchComponent } from './components/scientific-research/scientific-research.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -98,6 +99,7 @@ export function translateFactory(translate: TranslateService,
         AuthComponent,
         AboutUsComponent,
         AnchorsPageComponent,
+        ScientificResearchComponent,
     ],
     imports: [
         BrowserModule,
