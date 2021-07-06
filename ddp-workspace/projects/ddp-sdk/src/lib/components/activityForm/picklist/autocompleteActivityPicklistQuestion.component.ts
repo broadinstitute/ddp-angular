@@ -61,8 +61,6 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
                 .setValue(answer.detail || this.block.picklistSuggestions.find(option => option.value === answer.stableId));
         }
 
-        const customVersionId = this.block.picklistOptions.find(option => option.allowDetails)?.stableId;
-
         this.inputFormControl.valueChanges.pipe(
             map(value => typeof value === 'string' ? value.trim() : value),
             distinctUntilChanged(),
@@ -80,8 +78,8 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
                         this.block.answer = [{ stableId: strictMatchInSuggestions.value, detail: null }];
                         this.valueChanged.emit(this.block.answer);
                     } else {
-                        this.block.answer = [{ stableId: customVersionId, detail: value }];
-                        if (customVersionId) {
+                        this.block.answer = [{ stableId: this.block.customValue, detail: value }];
+                        if (this.block.customValue) {
                             this.valueChanged.emit(this.block.answer);
                         }
                     }

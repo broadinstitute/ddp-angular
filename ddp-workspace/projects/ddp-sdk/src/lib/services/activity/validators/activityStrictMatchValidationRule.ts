@@ -7,8 +7,7 @@ export class ActivityStrictMatchValidationRule extends ActivityAbstractValidatio
     }
 
     public recalculate(): boolean {
-        const allowCustomValue = this.block.picklistOptions.find(option => option.allowDetails);
-        const noNeedCheckAnswer = allowCustomValue || !this.block.answer;
+        const noNeedCheckAnswer = this.block.customValue || !this.block.answer;
         const validationResult = !!(noNeedCheckAnswer || (this.block.answer[0].stableId && this.block.picklistSuggestions
                 .find(suggestion => suggestion.value.toLowerCase() === this.block.answer[0].stableId.toLowerCase())));
 

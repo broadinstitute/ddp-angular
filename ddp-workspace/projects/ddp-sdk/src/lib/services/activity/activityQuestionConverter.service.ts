@@ -213,6 +213,7 @@ export class ActivityQuestionConverter {
         picklistBlock.detailMaxLength = DETAIL_MAXLENGTH;
         picklistBlock.picklistGroups = this.convertPicklistGroups(questionJson.picklistOptions, questionJson.groups);
         picklistBlock.picklistSuggestions = this.generatePicklistSuggestions(questionJson.picklistOptions);
+        picklistBlock.customValue = questionJson.picklistOptions.find(option => option.allowDetails)?.stableId || null;
         return picklistBlock;
     }
 

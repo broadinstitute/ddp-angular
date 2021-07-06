@@ -13,6 +13,7 @@ export class ActivityPicklistQuestionBlock extends ActivityQuestionBlock<Array<A
     public detailMaxLength: number;
     public picklistGroups: Array<ActivityPicklistNormalizedGroup>;
     public picklistSuggestions: Array<ActivityPicklistSuggestion>;
+    public customValue: string | null;
 
     constructor() {
         super();
