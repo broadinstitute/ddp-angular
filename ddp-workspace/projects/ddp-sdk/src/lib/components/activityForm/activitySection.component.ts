@@ -39,6 +39,14 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
     private subscription: Subscription;
     private embeddedValidationStatus = new Map();
 
+    // Block guids and instance guids are generated separately,
+    // there is a small possibility that they can have the same ids.
+    // Prepended an unique `idPrefix` as to prevent a case with the same blockId & instanceId.
+    readonly idPrefix = {
+        block: 'b-',
+        instance: 'i-'
+    };
+
     constructor(@Inject('ddp.config') public config: ConfigurationService,
                 private submissionManager: SubmissionManager,
                 private readonly cdr: ChangeDetectorRef) {
@@ -112,7 +120,7 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
 
     private updateValidationForHiddenEmbeddedActivity(block: ActivityActivityBlock): void {
         block.instances.forEach((instance: ActivityInstance) => {
-            this.updateValidationStatusInSection(instance.instanceGuid, true);
+            this.updateValidationStatusInSection(this.idPrefix.instance + instance.instanceGuid, true);
         });
     }
 }

@@ -39,7 +39,7 @@
                                    [studyGuid]="studyGuid"
                                    [readonly]="readonly"
                                    [validationRequested]="validationRequested"
-                                   (validStatusChanged)="updateValidationStatusInSection(block.id, $event)"
+                                   (validStatusChanged)="updateValidationStatusInSection(idPrefix.block + block.id, $event)"
                                    (componentBusy)="componentBusy.emit($event)">
             </ddp-institutions-form>
         </div>
@@ -48,7 +48,7 @@
                                   [country]="config.supportedCountry"
                                   [readonly]="readonly"
                                   [activityGuid]="activityGuid"
-                                  (validStatusChanged)="updateValidationStatusInSection(block.id, $event)"
+                                  (validStatusChanged)="updateValidationStatusInSection(idPrefix.block + block.id, $event)"
                                   [validationRequested]="validationRequested"
                                   (componentBusy)="componentBusy.emit($event)">
             </ddp-address-embedded>
@@ -72,7 +72,7 @@
                             [validationRequested]="validationRequested"
                             [studyGuid]="studyGuid"
                             [parentActivityInstanceGuid]="activityGuid"
-                            (validStatusChanged)="updateValidationStatusInSection($event.id, $event.value)"
+                            (validStatusChanged)="updateValidationStatusInSection(idPrefix.instance + $event.id, $event.value)"
                             (embeddedComponentBusy)="componentBusy.emit($event)">
         </ddp-activity-block>
     </div>
