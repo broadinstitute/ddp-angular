@@ -27,7 +27,6 @@ import { WorkflowServiceAgent } from '../../services/serviceAgents/workflowServi
 import { ActivityServiceAgent } from '../../services/serviceAgents/activityServiceAgent.service';
 import { ActivityResponse } from '../../models/activity/activityResponse';
 import { ActivityForm } from '../../models/activity/activityForm';
-import { BlockVisibility } from '../../models/activity/blockVisibility';
 import { CompositeDisposable } from '../../compositeDisposable';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
 import { ConfigurationService } from '../../services/configuration.service';
@@ -153,10 +152,6 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
 
     public refresh(): void {
         this.activityGuidObservable.next(this.activityGuidObservable.value);
-    }
-
-    public updateVisibility(visibility: BlockVisibility[]): void {
-        this.sectionsVisibilityChanged.emit(this.model.visibleSectionsCount());
     }
 
     public flush(): void {

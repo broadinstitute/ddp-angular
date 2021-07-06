@@ -96,6 +96,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         // all PATCH responses routed to here
         const resSub = this.submissionManager.answerSubmissionResponse$.subscribe(
             (response) => {
+                    this.sectionsVisibilityChanged.emit(this.model.visibleSectionsCount());
                     this.updateServerValidationMessages(response);
                     this.communicationErrorOccurred = false;
                 },
