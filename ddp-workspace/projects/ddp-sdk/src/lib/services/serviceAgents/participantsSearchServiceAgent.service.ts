@@ -27,7 +27,7 @@ export class ParticipantsSearchServiceAgent extends SessionServiceAgent<any> {
     }
 
     public getParticipant(): Observable<SearchParticipant | null> {
-        const participant = this.participantMap.get(this.session.session.participantGuid);
+        const participant = this.participantMap.get(this.session.session?.participantGuid);
         return participant ? of(participant) : this.getParticipantData();
     }
 
