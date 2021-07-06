@@ -156,16 +156,6 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     }
 
     public updateVisibility(visibility: BlockVisibility[]): void {
-        visibility.forEach(element => {
-            this.model.sections.forEach(section => {
-                section.blocks.forEach(block => {
-                    if (block.id === element.blockGuid) {
-                        block.shown = element.shown;
-                    }
-                });
-            });
-        });
-        this.model.recalculateSectionsVisibility();
         this.sectionsVisibilityChanged.emit(this.model.visibleSectionsCount());
     }
 
