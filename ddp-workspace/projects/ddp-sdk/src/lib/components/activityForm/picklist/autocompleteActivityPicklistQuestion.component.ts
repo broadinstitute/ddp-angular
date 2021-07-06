@@ -9,7 +9,7 @@ import { ActivityPicklistSuggestion } from '../../../models/activity/activityPic
 @Component({
     selector: 'ddp-activity-autocomplete-picklist-question',
     template: `
-    <mat-form-field class="width ddp-autocomplete-field">
+    <mat-form-field class="full-width ddp-autocomplete-field">
         <input matInput
                #autocompleteInput
                [formControl]="inputFormControl"
@@ -27,7 +27,7 @@ import { ActivityPicklistSuggestion } from '../../../models/activity/activityPic
         </mat-autocomplete>
     </mat-form-field>`,
     styles: [`
-        .width {
+        .full-width {
             width: 100%;
         }
 
