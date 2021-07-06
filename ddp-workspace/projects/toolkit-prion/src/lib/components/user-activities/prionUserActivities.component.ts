@@ -93,7 +93,8 @@ import { PrionActivityInstanceStatusService } from '../../services/prionActivity
                                 {{ element.activitySummary }}
                             </ng-container>
                             <ng-container *ngIf="!showQuestionCount(element) && !showSummary(element)">
-                                {{ getState(element.statusCode, element) }}
+                                <div *ngIf="null !== element.previousInstanceGuid && undefined !== element.previousInstanceGuid" translate >{{getState('COMPLETE', element)}}</div>
+                                <div *ngIf="null === element.previousInstanceGuid || undefined === element.previousInstanceGuid" translate>{{getState(element.statusCode, element)}}</div>
                             </ng-container>
                         </div>
                     </mat-cell>
@@ -168,21 +169,11 @@ export class PrionUserActivitiesComponent implements OnInit, OnDestroy, OnChange
             this.serviceAgent,
             this.logger,
             this.studyGuidObservable);
-        this.loadingAnchor =
-            // get Observable for status list
-            this.statusService.getStatuses().pipe(
-                tap(x => this.states = x),
-                // than we will intersect this observable with 'isNull'
-                // observable stream from main data source, so we will get
-                // single final result when both statuses and activity
-                // instances will be loaded
-                mergeMap(() => this.dataSource.isNull)
-                // here is the final subscription, on which we will update
-                // 'loaded' flag
-            ).subscribe(x => {
-                this.loaded = !x;
-                this.loadedEvent.emit(this.loaded);
-            });
+        this.states = PrionActivityInstanceStatusService.getStatuses();
+        this.loadingAnchor = this.dataSource.isNull.subscribe(x => {
+            this.loaded = !x;
+            this.loadedEvent.emit(this.loaded);
+        });
     }
 
     public ngOnChanges(changes: SimpleChanges): void {
@@ -244,7 +235,7 @@ export class PrionUserActivitiesComponent implements OnInit, OnDestroy, OnChange
             return code;
         }
         const caption = this.states.find(x => x.code === code);
-        return caption != null ? caption.name : '';
+        return caption != null ? caption.translationKey : '';
     }
 
     public getSummary(instance: ActivityInstance): Observable<string> {

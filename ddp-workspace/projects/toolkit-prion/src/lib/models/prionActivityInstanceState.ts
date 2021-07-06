@@ -1,9 +1,9 @@
 export class PrionActivityInstanceState {
     code: string;
-    name: string;
+    translationKey: string;
 
-    public constructor (code: string, name: string) {
+    public constructor (code: string, translationKey: string) {
         this.code = code;
-        this.name = name;
+        this.translationKey = translationKey;
     }
 }
