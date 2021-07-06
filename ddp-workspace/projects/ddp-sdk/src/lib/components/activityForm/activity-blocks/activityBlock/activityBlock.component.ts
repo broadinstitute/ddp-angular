@@ -85,7 +85,9 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     }
 
     private openCreatedInstanceDialog(instanceGuid: string): void {
-        this.modalActivities.find(activity => activity.instance.instanceGuid === instanceGuid)
-            .openEditDialog();
+        const modalActivity = this.modalActivities.find(activity => activity.instance.instanceGuid === instanceGuid);
+        if (modalActivity) {
+            modalActivity.openEditDialog();
+        }
     }
 }
