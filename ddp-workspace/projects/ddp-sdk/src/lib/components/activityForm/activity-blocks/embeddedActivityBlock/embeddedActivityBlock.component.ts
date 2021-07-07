@@ -35,7 +35,7 @@ export class EmbeddedActivityBlockComponent implements OnInit {
     @Input() validationRequested: boolean;
     @Input() studyGuid: string;
     @Output() componentBusy = new EventEmitter<boolean>();
-    @Output() validStatusChanged = new EventEmitter<boolean>();
+    @Output() validStatusChanged = new EventEmitter<{id: string; value: boolean}>();
     @Output() deletedActivity = new EventEmitter<string>();
     @ViewChild('delete_button', {read: ElementRef}) private deleteButtonRef: ElementRef;
 
@@ -112,7 +112,7 @@ export class EmbeddedActivityBlockComponent implements OnInit {
             tap(() => this.componentBusy.emit(true)),
             tap(() => {
                 activityValidStatus = this.activity.validate();
-                this.validStatusChanged.emit(activityValidStatus);
+                this.validStatusChanged.emit({id: this.instance.instanceGuid, value: activityValidStatus});
                 if (!activityValidStatus) {
                     this.componentBusy.emit(false);
                 }
