@@ -5,7 +5,6 @@ import { AppRoutes } from '../app-routes';
 @Component({
     selector: 'app-auth',
     template: `
-        <ddp-language-selector></ddp-language-selector>
         <div class="auth__login">
             <ddp-sign-in-out></ddp-sign-in-out>
         </div>
