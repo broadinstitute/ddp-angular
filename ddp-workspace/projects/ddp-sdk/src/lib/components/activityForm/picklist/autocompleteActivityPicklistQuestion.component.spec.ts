@@ -7,6 +7,7 @@ import { of } from 'rxjs';
 import { AutocompleteActivityPicklistQuestion } from './autocompleteActivityPicklistQuestion.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PicklistRenderMode } from '../../../models/activity/picklistRenderMode';
 
 describe('AutocompleteActivityPicklistQuestion', () => {
     const questionBlock = {
@@ -17,7 +18,7 @@ describe('AutocompleteActivityPicklistQuestion', () => {
             { label: 'Endocrine cancer', isParent: true, value: 'ENDOCRINE_CANCER' },
             { label: 'Pheochromocytoma', parent: 'Endocrine cancer', value: 'PHEOCHROMOCYTOMA' },
         ],
-        renderMode: 'AUTOCOMPLETE',
+        renderMode: PicklistRenderMode.AUTOCOMPLETE,
     } as ActivityPicklistQuestionBlock;
 
     let component: AutocompleteActivityPicklistQuestion;

@@ -67,11 +67,11 @@ export class ActivityValidatorBuilder {
                     `Received unknown type of validation rule named: ${validationJson.rule}`);
             }
         }
-        const additionalLocalRules = this.buildQuestionLocalValidatorRules(questionJson, questionBlock);
+        const additionalLocalRules = this.buildQuestionLocalValidatorRules(questionBlock);
         return rules.concat(additionalLocalRules);
     }
 
-    private buildQuestionLocalValidatorRules(questionJson: any, questionBlock: ActivityQuestionBlock<any>)
+    private buildQuestionLocalValidatorRules(questionBlock: ActivityQuestionBlock<any>)
         : Array<ActivityAbstractValidationRule> {
         const localRules = [];
 

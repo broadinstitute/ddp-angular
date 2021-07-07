@@ -23,6 +23,7 @@ import { of } from 'rxjs';
 import { AutocompleteActivityPicklistQuestion } from './autocompleteActivityPicklistQuestion.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PicklistRenderMode } from '../../../models/activity/picklistRenderMode';
 
 describe('ActivityPicklistAnswer', () => {
     const questionBlock = {
@@ -177,7 +178,7 @@ describe('ActivityPicklistAnswer', () => {
     it('should render AutocompleteActivityPicklistQuestion', () => {
         component.block = {
             ...questionBlock,
-            renderMode: 'AUTOCOMPLETE'
+            renderMode: PicklistRenderMode.AUTOCOMPLETE
         } as ActivityPicklistQuestionBlock;
         fixture.detectChanges();
         const question = debugElement.queryAll(By.css('ddp-activity-autocomplete-picklist-question'));
