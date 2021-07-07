@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private scrollToTop(): void {
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   private scrollToAnchor(anchor: string): void {
@@ -71,6 +71,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
     const yOffset = el.offsetTop - this.headerHeight * currentFontSize;
 
-    window.scrollTo(0, yOffset);
+    window.scrollTo({
+      top: yOffset,
+      behavior: 'smooth',
+    });
   }
 }
