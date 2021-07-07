@@ -54,7 +54,7 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.subscription = this.submissionManager.answerSubmissionResponse$.subscribe(response =>
-            this.updateVisibility(response.blockVisibility)
+            this.updateVisibilityAndValidation(response.blockVisibility)
         );
     }
 
@@ -62,7 +62,7 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
         this.subscription.unsubscribe();
     }
 
-    public updateVisibility(visibility: BlockVisibility[]): void {
+    public updateVisibilityAndValidation(visibility: BlockVisibility[]): void {
         let blockVisibilityChanged = false;
         visibility.forEach(element => {
             this.section.allChildBlocks().forEach(block => {
