@@ -12,5 +12,6 @@ export enum Route {
   PreScreening = 'pre-screening',
   LoginLanding = 'login-landing',
   LoginRedirect = 'login-redirect',
+  SessionExpired = 'session-expired',
   LoginLandingMode = 'login-landing/:mode',
 }

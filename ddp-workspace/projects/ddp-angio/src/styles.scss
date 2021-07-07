@@ -834,6 +834,10 @@ mat-icon.ddp-dropdown-arrow {
         font-size: 1rem;
         line-height: 1.3rem;
     }
+
+    .Header-navItem {
+        padding-left: 10px !important;
+    }
 }
 
 // Page
@@ -1742,7 +1746,7 @@ select:-webkit-autofill {
     }
 
     .user-menu-header {
-        display: none;
+        display: none !important;
         padding: 0;
     }
 }

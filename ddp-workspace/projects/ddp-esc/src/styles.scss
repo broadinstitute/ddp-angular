@@ -705,7 +705,6 @@ a {
 }
 
 @media only screen and (max-width: 450px) {
-
     .PageContent-ol li,
     .PageContent-ul li {
         padding: 0 0 0 15px;
@@ -773,6 +772,14 @@ a {
     .PageHeader-subTitle {
         font-size: 1rem;
         line-height: 1.3rem;
+    }
+
+    .Header-navItem {
+       padding-left: 10px !important;
+    }
+
+    .CountButton {
+        padding: 5px 12px !important;
     }
 }
 
