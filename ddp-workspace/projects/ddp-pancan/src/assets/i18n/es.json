@@ -626,7 +626,8 @@
         },
         "TooltipAlt": "Información",
         "Validators": {
-            "DateNavyValidationRule": "La fecha es inválida"
+            "DateNavyValidationRule": "La fecha es inválida",
+            "Autocomplete": "[ES]No {{control}} is found"
         },
         "SubjectPanel": {
             "Link": "Regresar a la búsqueda de participantes voluntarios",

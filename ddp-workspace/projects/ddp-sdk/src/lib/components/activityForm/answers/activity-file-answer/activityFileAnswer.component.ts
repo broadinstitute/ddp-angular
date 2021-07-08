@@ -80,7 +80,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     submitFileUpload(file: File, uploadGuid: string, uploadUrl: string): void {
         const failedLocalValidator = this.getFailedLocalValidator(file);
         if (failedLocalValidator) {
-            this.errorMessage = failedLocalValidator.result;
+            this.errorMessage = failedLocalValidator.result as string;
             this.componentBusy.emit(false);
             return;
         }

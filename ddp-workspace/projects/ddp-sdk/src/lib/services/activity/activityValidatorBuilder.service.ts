@@ -23,6 +23,9 @@ import { InputType } from '../../models/activity/inputType';
 import * as _ from 'underscore';
 import { ActivityFileValidationRule } from './validators/activityFileValidationRule';
 import { ActivityFileQuestionBlock } from '../../models/activity/activityFileQuestionBlock';
+import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
+import { ActivityPicklistQuestionBlock } from 'ddp-sdk';
+import { ActivityStrictMatchValidationRule } from './validators/activityStrictMatchValidationRule';
 
 @Injectable()
 export class ActivityValidatorBuilder {
@@ -64,11 +67,11 @@ export class ActivityValidatorBuilder {
                     `Received unknown type of validation rule named: ${validationJson.rule}`);
             }
         }
-        const additionalLocalRules = this.buildQuestionLocalValidatorRules(questionJson, questionBlock);
+        const additionalLocalRules = this.buildQuestionLocalValidatorRules(questionBlock);
         return rules.concat(additionalLocalRules);
     }
 
-    private buildQuestionLocalValidatorRules(questionJson: any, questionBlock: ActivityQuestionBlock<any>)
+    private buildQuestionLocalValidatorRules(questionBlock: ActivityQuestionBlock<any>)
         : Array<ActivityAbstractValidationRule> {
         const localRules = [];
 
@@ -84,6 +87,11 @@ export class ActivityValidatorBuilder {
 
         if (questionBlock.questionType === QuestionType.File) {
             localRules.push(new ActivityFileValidationRule(questionBlock as ActivityFileQuestionBlock));
+        }
+
+        if (questionBlock.questionType === QuestionType.Picklist
+            && (questionBlock as ActivityPicklistQuestionBlock).renderMode === PicklistRenderMode.AUTOCOMPLETE) {
+            localRules.push(new ActivityStrictMatchValidationRule(questionBlock as ActivityPicklistQuestionBlock));
         }
 
         return localRules;

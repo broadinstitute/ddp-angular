@@ -200,6 +200,8 @@ import { PrismComponent } from './components/prism/prism.component';
 import { FileSizeFormatterPipe } from './pipes/fileSizeFormatter.pipe';
 import { FileAnswerMapperService } from './services/fileAnswerMapper.service';
 import { StickyScrollDirective } from './directives/sticky-scroll.directive';
+import { AutocompleteActivityPicklistQuestion } from './components/activityForm/picklist/autocompleteActivityPicklistQuestion.component';
+import { SearchHighlightPipe } from './pipes/searchHighlight.pipe';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter = () => sessionService.token;
@@ -377,6 +379,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         DropdownActivityPicklistQuestion,
         CheckboxesActivityPicklistQuestion,
         RadioButtonsActivityPicklistQuestion,
+        AutocompleteActivityPicklistQuestion,
         InstitutionComponent,
         InstitutionsFormComponent,
         LoadingComponent,
@@ -403,6 +406,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         StickyScrollDirective,
         InvitationPipe,
         FileSizeFormatterPipe,
+        SearchHighlightPipe,
         TooltipComponent,
         SubjectPanelComponent,
         AdminActionPanelComponent,
@@ -449,6 +453,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         DropdownActivityPicklistQuestion,
         CheckboxesActivityPicklistQuestion,
         RadioButtonsActivityPicklistQuestion,
+        AutocompleteActivityPicklistQuestion,
         InstitutionComponent,
         InstitutionsFormComponent,
 
@@ -477,6 +482,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         StickyScrollDirective,
         InvitationPipe,
         FileSizeFormatterPipe,
+        SearchHighlightPipe,
         TooltipComponent,
         SubjectPanelComponent,
         AdminActionPanelComponent,

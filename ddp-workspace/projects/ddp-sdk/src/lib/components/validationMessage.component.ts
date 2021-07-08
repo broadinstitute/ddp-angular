@@ -7,11 +7,11 @@ import * as _ from 'underscore';
     <div *ngIf="message && message.length" class="ErrorMessage">
         <ul *ngIf="isArrayOfMessages() && message.length > 1; else singleMessage" class="ErrorMessageList">
             <li *ngFor="let item of message" class="ErrorMessageItem">
-                <span [innerHTML]="item | translate" routeTransformer></span>
+                <span [innerHTML]="item | translate: translationParams" routeTransformer></span>
             </li>
         </ul>
         <ng-template #singleMessage>
-            <span [innerHTML]="getSingleMessage() | translate" routeTransformer></span>
+            <span [innerHTML]="getSingleMessage() | translate: translationParams" routeTransformer></span>
         </ng-template>
     </div>`,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -23,6 +23,7 @@ import * as _ from 'underscore';
  */
 export class ValidationMessage {
   @Input() public message: string[] | string | null;
+  @Input() public translationParams: {[key: string]: string} = {};
 
   public isArrayOfMessages(): boolean {
     return _.isArray(this.message);
