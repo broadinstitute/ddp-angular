@@ -17,6 +17,7 @@ describe('AutocompleteActivityPicklistQuestion', () => {
             { label: 'Chondrosarcoma', parent: 'Sarcoma', value: 'CHONDROSARCOMA' },
             { label: 'Endocrine cancer', isParent: true, value: 'ENDOCRINE_CANCER' },
             { label: 'Pheochromocytoma', parent: 'Endocrine cancer', value: 'PHEOCHROMOCYTOMA' },
+            { label: 'Endocrine cancer test', parent: 'Endocrine cancer', value: 'PHEOCHROMOCYTOMA' },
         ],
         renderMode: PicklistRenderMode.AUTOCOMPLETE,
     } as ActivityPicklistQuestionBlock;
@@ -76,6 +77,7 @@ describe('AutocompleteActivityPicklistQuestion', () => {
         const suggestions = [
             { label: 'Endocrine cancer', isParent: true, value: 'ENDOCRINE_CANCER' },
             { label: 'Pheochromocytoma', parent: 'Endocrine cancer', value: 'PHEOCHROMOCYTOMA' },
+            { label: 'Endocrine cancer test', parent: 'Endocrine cancer', value: 'PHEOCHROMOCYTOMA' },
         ];
         expect(component.filteredSuggestions).toEqual(suggestions);
     }));
@@ -88,6 +90,7 @@ describe('AutocompleteActivityPicklistQuestion', () => {
         const suggestions = [
             { label: 'Endocrine cancer', isParent: true, value: 'ENDOCRINE_CANCER' },
             { label: 'Pheochromocytoma', parent: 'Endocrine cancer', value: 'PHEOCHROMOCYTOMA' },
+            { label: 'Endocrine cancer test', parent: 'Endocrine cancer', value: 'PHEOCHROMOCYTOMA' },
         ];
         expect(component.filteredSuggestions).toEqual(suggestions);
     }));

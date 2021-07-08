@@ -108,9 +108,9 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
                 // we want to display group title even if the group title doesn't match the search
                 if (option.label.toLowerCase().includes(filterValue) && option.parent && currentParent) {
                     result.push(currentParent);
-                    currentParent = null;
                 }
                 result.push(option);
+                currentParent = null;
             } else if (option.isParent) {
                 currentParent = option;
             }
