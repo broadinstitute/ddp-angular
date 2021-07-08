@@ -1,4 +1,7 @@
 export const AppRoutes = {
+    Activity: 'activity',
+    ActivityId: 'activity/:id',
+    Dashboard: 'dashboard',
     Error: 'error',
     LoginLanding: 'login-landing',
     LoginLandingMode: 'login-landing/:mode',
