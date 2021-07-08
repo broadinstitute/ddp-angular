@@ -153,10 +153,6 @@ a:focus {
     font-weight: 300;
 }
 
-.Header--scrolled {
-    color: mat-color($app-theme, 400);
-}
-
 .HeaderLink {
     color: mat-color($app-theme, 100);
 }
@@ -175,6 +171,7 @@ a:focus {
 }
 
 .Header--scrolled {
+    color: mat-color($app-theme, 400);
     background-color: mat-color($app-theme, 200);
     box-shadow: 0 1px 8px mat-color($app-theme, 300);
 }
@@ -883,6 +880,11 @@ mat-icon.ddp-dropdown-arrow {
         padding: 0 15px !important;
     }
 
+    .Header.Header--scrolled {
+        padding-bottom: 35px !important;
+        height: auto;
+    }
+
     .PageHeader-subTitle {
         font-size: 0.8rem;
         line-height: 1.2rem;
@@ -890,7 +892,7 @@ mat-icon.ddp-dropdown-arrow {
 
     .language-selector {
         position: absolute;
-        top: 65px;
+        top: 62px;
         right: 12px;
     }
 }
