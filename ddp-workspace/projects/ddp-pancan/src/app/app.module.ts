@@ -20,6 +20,7 @@ import {
     ToolkitConfigurationService
 } from 'toolkit';
 
+import { AppRoutes } from './components/app-routes';
 import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -41,6 +42,9 @@ declare const ga: (...args: any[]) => void;
 
 export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
+toolkitConfig.activityUrl = AppRoutes.Activity;
+toolkitConfig.dashboardUrl = AppRoutes.Dashboard;
+toolkitConfig.errorUrl = AppRoutes.Error;
 toolkitConfig.phone = '651-287-1608';
 toolkitConfig.infoEmail = 'info@joincountmein.org';
 

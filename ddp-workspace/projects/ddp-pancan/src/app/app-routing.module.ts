@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, ExtraOptions } from '@angular/router';
-import { Auth0CodeCallbackComponent, BrowserGuard, IrbGuard } from 'ddp-sdk';
+import { Auth0CodeCallbackComponent, AuthGuard, BrowserGuard, IrbGuard } from 'ddp-sdk';
 import {
+    ActivityRedesignedComponent,
     ErrorRedesignedComponent,
     LoginLandingRedesignedComponent,
     PasswordRedesignedComponent,
@@ -66,6 +67,15 @@ const routes: Routes = [
         canActivate: [
             IrbGuard,
             BrowserGuard
+        ]
+    },
+    {
+        path: AppRoutes.ActivityId,
+        component: ActivityRedesignedComponent,
+        canActivate: [
+            IrbGuard,
+            BrowserGuard,
+            AuthGuard
         ]
     },
     {
