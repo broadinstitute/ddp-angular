@@ -31,8 +31,10 @@
     transition: all ease 0.5s;
 }
 
-.auth {
-    min-width: 160px;
+.controls {
+    display: flex;
+    align-items: center;
+    min-width: fit-content;
 }
 
 .hamburger {
@@ -161,6 +163,27 @@
     }
 }
 
+@media screen and (max-width: $desktop-breakpoint) {
+    .controls {
+        app-auth {
+            display: none;
+        }
+    }
+
+    .panel-controls ::ng-deep {
+        .join-button,
+        .SimpleButton {
+            font-size: 1.2rem;
+        }
+    }
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+    ddp-language-selector ::ng-deep .SimpleButton {
+        padding: 0;
+    }
+}
+
 @media screen and (min-width: $desktop-breakpoint) {
     .panel-controls,
     .panel-opened .panel-controls,
@@ -179,9 +202,5 @@
             font-size: 1rem;
             line-height: normal;
         }
-    }
-
-    .auth {
-        min-width: 200px;
     }
 }

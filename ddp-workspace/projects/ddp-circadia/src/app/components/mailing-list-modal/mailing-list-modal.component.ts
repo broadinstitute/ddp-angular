@@ -1,8 +1,8 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { take } from 'rxjs/operators';
+import { first, take } from 'rxjs/operators';
 
 import { ConfigurationService, MailingListServiceAgent } from 'ddp-sdk';
 
@@ -13,7 +13,7 @@ import { Route } from '../../constants/route';
   templateUrl: './mailing-list-modal.component.html',
   styleUrls: ['./mailing-list-modal.component.scss'],
 })
-export class MailingListModalComponent {
+export class MailingListModalComponent implements OnInit {
   loading = false;
   form = new FormGroup(
     {
@@ -49,6 +49,23 @@ export class MailingListModalComponent {
     private mailingListService: MailingListServiceAgent,
     @Inject('ddp.config') private config: ConfigurationService,
   ) {}
+
+  ngOnInit(): void {
+    this.scrollToTopAfterClosed();
+  }
+
+  scrollToTopAfterClosed(): void {
+    this.dialogRef
+      .afterClosed()
+      .pipe(
+        first()
+      )
+      .subscribe(
+        () => setTimeout(
+          () => window.scrollTo(0, 0)
+        )
+      );
+  }
 
   onSubmit(): void {
     if (!this.form.valid || this.loading) {

@@ -1434,6 +1434,9 @@
         },
         "Validators": {
             "DateNavyValidationRule": "Entered date is invalid"
-        }
+        },
+        "ConfirmDeletion": "Are you sure you want to delete \nthis information?",
+        "DeleteButton": "Delete",
+        "CancelBtn": "Cancel"
     }
 }

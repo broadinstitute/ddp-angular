@@ -15,20 +15,16 @@ $footer-divider-color: #444444;
     padding: 1.15rem 2rem 1.15rem 3.375rem;
 
     &__wrapper {
-        flex-direction: column;
         display: flex;
     }
 
     ::ng-deep.navigation {
-        flex-direction: column;
-        line-height: 35px;
         padding-left: 0;
     }
 }
 
 .info {
     height: 6.25rem;
-    flex-direction: column;
     padding: 1.15rem 2rem 2.5rem 3.375rem;
     font-size: 1rem;
 }
@@ -52,6 +48,12 @@ $footer-divider-color: #444444;
     margin-left: 1.5rem;
 }
 
+.auth {
+    display: flex;
+    align-items: center;
+    min-width: fit-content;
+}
+
 @media screen and (min-width: $tablet-breakpoint) {
     .actions,
     .back-to-top {
@@ -63,13 +65,7 @@ $footer-divider-color: #444444;
     .actions {
         height: 8.625rem;
 
-        &__wrapper {
-            flex-direction: row;
-        }
-
         ::ng-deep.navigation {
-            flex-direction: row;
-            line-height: normal;
             padding-left: 40px;
         }
     }
@@ -78,8 +74,26 @@ $footer-divider-color: #444444;
     .actions {
         padding: 0 2rem 0 3.375rem;
     }
+}
 
+@media screen and (max-width: $desktop-breakpoint) {
+    .auth,
     .info {
-        flex-direction: row;
+        flex-direction: column;
+    }
+
+    ddp-language-selector {
+        margin-bottom: 15px;
+    }
+
+    .actions {
+        &__wrapper {
+            flex-direction: column;
+        }
+
+        ::ng-deep.navigation {
+            flex-direction: column;
+            line-height: 35px;
+        }
     }
 }
