@@ -23,15 +23,15 @@ describe('DashboardComponent', () => {
       providers: [
         { provide: Router, useValue: {} },
         { provide: 'ddp.config', useValue: {} },
-        { 
-          provide: ActivityServiceAgent, 
-          useValue: { 
+        {
+          provide: ActivityServiceAgent,
+          useValue: {
             createInstance: (studyGuid: string, activityCode: string, parentInstanceGuid?: string) => of(null)
-          } 
+          }
         },
         {
           provide: UserActivityServiceAgent,
-          useValue: { 
+          useValue: {
             getActivities: () => of([])
           }
         }
