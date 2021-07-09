@@ -30,6 +30,7 @@ import { ActivityForm } from '../../models/activity/activityForm';
 import { CompositeDisposable } from '../../compositeDisposable';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
 import { ConfigurationService } from '../../services/configuration.service';
+import { BlockVisibility } from '../../models/activity/blockVisibility';
 
 @Component({
     template: ``
@@ -152,6 +153,20 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
 
     public refresh(): void {
         this.activityGuidObservable.next(this.activityGuidObservable.value);
+    }
+
+    public updateVisibility(visibility: BlockVisibility[]): void {
+        visibility.forEach(element => {
+            this.model.sections.forEach(section => {
+                section.blocks.forEach(block => {
+                    if (block.id === element.blockGuid) {
+                        block.shown = element.shown;
+                    }
+                });
+            });
+        });
+        this.model.recalculateSectionsVisibility();
+        this.sectionsVisibilityChanged.emit(this.model.visibleSectionsCount());
     }
 
     public flush(): void {
