@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UserActivitiesComponent } from './user-activities.component';
+import { ReleaseRequestsComponent } from './release-requests.component';
 
 
 @Pipe({name: 'translate'})
@@ -10,19 +10,19 @@ class MockTranslatePipe implements PipeTransform {
   }
 }
 
-describe('UserActivitiesComponent', () => {
-  let component: UserActivitiesComponent;
-  let fixture: ComponentFixture<UserActivitiesComponent>;
+describe('ReleaseRequestsComponent', () => {
+  let component: ReleaseRequestsComponent;
+  let fixture: ComponentFixture<ReleaseRequestsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UserActivitiesComponent, MockTranslatePipe ]
+      declarations: [ ReleaseRequestsComponent, MockTranslatePipe ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserActivitiesComponent);
+    fixture = TestBed.createComponent(ReleaseRequestsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,6 +1,6 @@
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
-import { UserActivityServiceAgent } from 'ddp-sdk';
+import { ActivityServiceAgent, UserActivityServiceAgent } from 'ddp-sdk';
 import { Pipe, PipeTransform } from '@angular/core';
 import { DashboardComponent } from './dashboard.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
@@ -23,7 +23,18 @@ describe('DashboardComponent', () => {
       providers: [
         { provide: Router, useValue: {} },
         { provide: 'ddp.config', useValue: {} },
-        { provide: UserActivityServiceAgent, useValue: { getActivities: () => of([]) } },
+        {
+          provide: ActivityServiceAgent,
+          useValue: {
+            createInstance: (studyGuid: string, activityCode: string, parentInstanceGuid?: string) => of(null)
+          }
+        },
+        {
+          provide: UserActivityServiceAgent,
+          useValue: {
+            getActivities: () => of([])
+          }
+        }
       ]
     })
     .compileComponents();

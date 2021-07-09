@@ -172,6 +172,7 @@
     "Title": "Dashboard"
   },
   "UserActivities": {
+    "Title": "Activities",
     "Header": {
       "Form": "Form",
       "Status": "Status",
@@ -428,5 +429,12 @@
       },
       "LogInButton": "Sign in"
     }
+  },
+  "ReleaseRequests": {
+    "Title": "Your Letters  of Request for Release of Your Clinical and Genetic Information",
+    "ActivityName": "Provider/Clinic",
+    "DateCreated": "Date Create",
+    "GenerateReleaseRequestGenetic": "Generate Clinical Request",
+    "ReleaseRequestClinical": "Generate Genetic Request"
   }
 }
