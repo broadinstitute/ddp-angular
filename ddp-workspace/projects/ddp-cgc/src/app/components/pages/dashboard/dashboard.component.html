@@ -15,6 +15,14 @@
     (startActivity)="onStartActivity($event)"
     (continueActivity)="onContinueActivity($event)"
   ></app-user-activities>
+
+  <app-release-requests
+    [activities]="releaseRequests"
+    (viewActivity)="onViewActivity($event)"
+    (startActivity)="onStartActivity($event)"
+    (continueActivity)="onContinueActivity($event)"
+    (startNewActivity)="onStartNewReleaseRequest($event)"
+  ></app-release-requests>
 </ng-template>
 
 <ng-template #loadingSpinner>

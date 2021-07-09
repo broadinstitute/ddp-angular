@@ -1,0 +1,108 @@
+.mat-table {
+  width: 100%;
+
+  @media (max-width: 720px) {
+    display: block;
+  }
+}
+
+.mat-header-row {
+  @media (max-width: 720px) {
+    display: none;
+  }
+}
+
+.mat-row {
+  @media (max-width: 720px) {
+    display: flex;
+    flex-flow: column nowrap;
+
+    height: auto;
+
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+    border-radius: 6px;
+
+    &:not(:last-of-type) {
+      margin-bottom: 2.4rem;
+    }
+  }
+}
+
+.mat-cell,
+.mat-header-cell {
+  font-size: 1rem;
+  padding-top: 1.6rem !important;
+  padding-bottom: 1.6rem !important;
+
+  @media (max-width: 720px) {
+    padding: 2.4rem !important;
+  }
+
+  &:last-of-type {
+    padding-right: 2.4rem !important;
+
+    @media (max-width: 720px) {
+      border: none;
+    }
+  }
+}
+
+.mobile-column-name {
+  display: none;
+
+  @media (max-width: 720px) {
+    display: block;
+
+    margin-bottom: 0.8rem;
+
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.54);
+  }
+}
+
+.mat-column-name {
+  width: 40%;
+
+  @media (max-width: 720px) {
+    width: 100%;
+  }
+}
+
+.mat-column-dateCreate {
+  width: 20%;
+
+  @media (max-width: 720px) {
+    width: 100%;
+  }
+}
+
+.mat-column-actions {
+  width: 20%;
+
+  @media (max-width: 720px) {
+    width: 100%;
+  }
+}
+
+.activity-status {
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 720px) {
+    align-items: flex-start;
+  }
+}
+
+.status-icon {
+  margin-top: -0.1em;
+  margin-right: 0.3em;
+}
+
+.actions {
+  display: flex;
+  margin-top: 40px;
+  flex-direction: row-reverse;
+  button {
+    margin-left: 20px;
+  }
+}

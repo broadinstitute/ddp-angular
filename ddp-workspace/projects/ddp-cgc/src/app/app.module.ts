@@ -25,6 +25,7 @@ import { StayInformedComponent } from './components/pages/stay-informed/stay-inf
 import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
 import { SessionExpiredComponent } from './components/session-expired/session-expired.component';
 import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
+import { ReleaseRequestsComponent } from './components/release-requests/release-requests.component';
 
 
 declare const DDP_ENV: any;
@@ -87,6 +88,7 @@ tkCfg.activityUrl = Route.Activity;
     UserActivitiesComponent,
     SessionExpiredComponent,
     RedirectToLoginComponent,
+    ReleaseRequestsComponent,
   ],
   imports: [
     DdpModule,
