@@ -869,9 +869,7 @@
               "projects/sandbox-app/src/theme.scss",
               "projects/sandbox-app/src/styles.scss"
             ],
-              "scripts": [
-                  "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-              ]
+              "scripts": []
           },
           "configurations": {
             "production": {
