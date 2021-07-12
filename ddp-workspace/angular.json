@@ -869,7 +869,7 @@
               "projects/sandbox-app/src/theme.scss",
               "projects/sandbox-app/src/styles.scss"
             ],
-              "scripts": []
+            "scripts": []
           },
           "configurations": {
             "production": {
