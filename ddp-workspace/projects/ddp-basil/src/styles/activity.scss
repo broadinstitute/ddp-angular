@@ -2,6 +2,26 @@
     display: flex;
     justify-content: space-between;
     margin: 2rem 0 0 0;
+
+    > button {
+        background-color: #ed933a;
+        color: #fff;
+        border-color: #ffffff;
+        border-style: none;
+        box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+        0 6px 10px 0 rgba(0, 0, 0, 0.14),
+        0 1px 18px 0 rgba(0, 0, 0, 0.12);
+        border-radius: 18px;
+        width: 156px;
+        height: 44px;
+        font-size: 18px;
+        margin: 0 0 30px 100px;
+        outline: none;
+    }
+}
+
+.button_primary:disabled {
+    background-color: #BBBBBE;
 }
 
 .ddp-required-question-prompt:after {
