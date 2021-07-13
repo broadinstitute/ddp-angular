@@ -524,14 +524,14 @@
         },
         "Institutions": {
             "Fields": {
-                "Name": "Nombre del doctor",
+                "Name": "[ES]Nombre del doctor",
                 "Institution": "Institución",
-                "InstitutionAny": "Institución (si aplica)",
+                "InstitutionAny": "[ES]Institución (si aplica)",
                 "City": "Ciudad",
                 "State": "Estado"
             },
             "Form" : {
-                "OtherPhysician": "Otro doctor",
+                "OtherPhysician": "[ES]Otro doctor",
                 "OtherInstitution": "Otra institución"
             },
             "PhysicianValidation": "Complete todos los campos obligatorios."

@@ -524,14 +524,14 @@
         },
         "Institutions": {
             "Fields": {
-                "Name": "Physician Name",
+                "Name": "Physician Name (if applicable)",
                 "Institution": "Institution",
-                "InstitutionAny": "Institution (if any)",
+                "InstitutionAny": "Hospital/Institution (if any)",
                 "City": "City",
                 "State": "State"
             },
             "Form" : {
-                "OtherPhysician": "Other physician",
+                "OtherPhysician": "Other hospital/institution",
                 "OtherInstitution": "Other institution"
             },
             "PhysicianValidation": "Please fill out all required fields"
