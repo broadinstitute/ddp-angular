@@ -8,6 +8,7 @@ import { AutocompleteActivityPicklistQuestion } from './autocompleteActivityPick
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PicklistRenderMode } from '../../../models/activity/picklistRenderMode';
+import { SearchHighlightPipe } from '../../../pipes/searchHighlight.pipe';
 
 describe('AutocompleteActivityPicklistQuestion', () => {
     const questionBlock = {
@@ -43,7 +44,7 @@ describe('AutocompleteActivityPicklistQuestion', () => {
             providers: [
                 { provide: NGXTranslateService, useValue: ngxTranslateServiceSpy }
             ],
-            declarations: [AutocompleteActivityPicklistQuestion]
+            declarations: [AutocompleteActivityPicklistQuestion, SearchHighlightPipe]
         }).compileComponents();
 
         fixture = TestBed.createComponent(AutocompleteActivityPicklistQuestion);
@@ -56,6 +57,11 @@ describe('AutocompleteActivityPicklistQuestion', () => {
         fixture.detectChanges();
         expect(component).toBeTruthy();
     });
+
+    it('should generate the list of suggestions on init', fakeAsync(() => {
+        tick(200);
+        expect(component.filteredSuggestions).toEqual(questionBlock.picklistSuggestions);
+    }));
 
     it('should filter the list of suggestions by child label', fakeAsync(() => {
         component.inputFormControl.setValue('hondrosarc', { emitEvent: true });
@@ -159,6 +165,16 @@ describe('AutocompleteActivityPicklistQuestion', () => {
 
         expect(component.block.answer).toBeFalsy();
         expect(valueChangedSpy).not.toHaveBeenCalled();
+    }));
+
+    it('should emit valueChanged with empty array if user resets the input', fakeAsync(() => {
+        const valueChangedSpy = spyOn(component.valueChanged, 'emit');
+        component.inputFormControl.setValue('');
+        fixture.detectChanges();
+        tick(200);
+
+        expect(component.block.answer).toEqual([]);
+        expect(valueChangedSpy).toHaveBeenCalledWith([]);
     }));
 
     it('should display suggested option correctly', () => {

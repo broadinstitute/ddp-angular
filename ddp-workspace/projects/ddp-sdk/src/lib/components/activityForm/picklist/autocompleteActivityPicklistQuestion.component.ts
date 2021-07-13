@@ -3,7 +3,7 @@ import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.com
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { Subject } from 'rxjs';
 import { FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, startWith, takeUntil } from 'rxjs/operators';
 import { ActivityPicklistSuggestion } from '../../../models/activity/activityPicklistSuggestion';
 
 @Component({
@@ -61,32 +61,27 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
                 .setValue(answer.detail || this.block.picklistSuggestions.find(option => option.value === answer.stableId));
         }
 
-        this.inputFormControl.valueChanges.pipe(
+        const userQueryStream = this.inputFormControl.valueChanges.pipe(
             map(value => typeof value === 'string' ? value.trim() : value),
             distinctUntilChanged(),
             debounceTime(200),
             takeUntil(this.ngUnsubscribe)
-        ).subscribe((value: string | ActivityPicklistSuggestion) => {
+        );
+
+        userQueryStream.pipe(startWith('')).subscribe((value: string | ActivityPicklistSuggestion) => {
             const query = typeof value === 'string' ? value : value.label;
             this.filteredSuggestions = query ? this.filterOptions(query) : this.block.picklistSuggestions.slice();
+        });
+
+        userQueryStream.subscribe((value: string | ActivityPicklistSuggestion) => {
             if (typeof value === 'string') {
-                const minimalLengthForOption = 2;
-                if (value.length >= minimalLengthForOption) {
-                    const strictMatchInSuggestions = this.filteredSuggestions
-                        .find(suggestion => suggestion.label.toLowerCase() === value.toLowerCase());
-                    if (strictMatchInSuggestions) {
-                        this.block.answer = [{ stableId: strictMatchInSuggestions.value, detail: null }];
-                        this.valueChanged.emit(this.block.answer);
-                    } else {
-                        this.block.answer = [{ stableId: this.block.customValue, detail: value }];
-                        if (this.block.customValue) {
-                            this.valueChanged.emit(this.block.answer);
-                        }
-                    }
+                if (value.length) {
+                    this.handleStringValue(value);
+                } else {
+                    this.updateAnswer();
                 }
             } else {
-                this.block.answer = [{ stableId: value.value, detail: null }];
-                this.valueChanged.emit(this.block.answer);
+                this.updateAnswer(value.value);
             }
         });
     }
@@ -95,6 +90,27 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
         super.ngOnDestroy();
         this.ngUnsubscribe.next();
         this.ngUnsubscribe.complete();
+    }
+
+    private handleStringValue(value: string): void {
+        const minimalLengthForOption = 2;
+        if (value.length >= minimalLengthForOption) {
+            const strictMatchInSuggestions = this.filteredSuggestions
+                .find(suggestion => suggestion.label.toLowerCase() === value.toLowerCase());
+            if (strictMatchInSuggestions) {
+                this.updateAnswer(strictMatchInSuggestions.value);
+            } else {
+                this.block.answer = [{ stableId: this.block.customValue, detail: value }];
+                if (this.block.customValue) {
+                    this.valueChanged.emit(this.block.answer);
+                }
+            }
+        }
+    }
+
+    private updateAnswer(value?: string, detail: string | null = null): void {
+        this.block.answer = value ? [{ stableId: value, detail }] : [];
+        this.valueChanged.emit(this.block.answer);
     }
 
     private filterOptions(name: string): ActivityPicklistSuggestion[] {

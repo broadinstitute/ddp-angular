@@ -15,6 +15,13 @@ describe('ActivityStrictMatchValidationRule', () => {
         expect(validator.result).toBeNull();
     });
 
+    it('should return true if answer is empty list', () => {
+        const block = { answer: [] } as ActivityPicklistQuestionBlock;
+        const validator = new ActivityStrictMatchValidationRule(block);
+        expect(validator.recalculate()).toBeTrue();
+        expect(validator.result).toBeNull();
+    });
+
     it('should return true if answer has stableId', () => {
         const block = { answer: [{ stableId: 'OTHER' }] } as ActivityPicklistQuestionBlock;
         const validator = new ActivityStrictMatchValidationRule(block);

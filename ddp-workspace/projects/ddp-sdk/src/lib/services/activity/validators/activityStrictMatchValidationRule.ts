@@ -7,7 +7,7 @@ export class ActivityStrictMatchValidationRule extends ActivityAbstractValidatio
     }
 
     public recalculate(): boolean {
-        const validationResult = !this.block.answer || !!this.block.answer[0].stableId;
+        const validationResult = !this.block.answer?.length || !!this.block.answer[0].stableId;
         this.result = validationResult ? null : { message: 'SDK.Validators.Autocomplete', params: { control: this.block.question } };
 
         return validationResult;
