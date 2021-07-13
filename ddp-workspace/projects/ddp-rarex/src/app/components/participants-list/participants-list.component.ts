@@ -86,28 +86,37 @@ export class ParticipantsListComponent implements OnInit {
     });
 
     dialogRef
-        .afterClosed()
-        .pipe(
-            filter((shallDelete: boolean) => shallDelete),
-            tap(() => {
-              this.loading = true;
-              this.errorMessage = null;
-            }),
-            mergeMap(() => this.deleteParticipant(userGuid)),
-            tap(() => {
-              this.participants = this.participants.filter(
-                  participant => participant.userGuid !== userGuid,
-              );
-            }),
-            catchError(() => {
-              this.errorMessage = this.translateService.instant('ParticipantsList.DeleteError');
-              return of(null);
-            })
-        )
-        .subscribe(() => {
-          this.loading = false;
-          this.expandedMap[userGuid] = null;
-        });
+      .afterClosed()
+      .pipe(
+        filter((shallDelete: boolean) => shallDelete),
+        tap(() => {
+          this.loading = true;
+          this.errorMessage = null;
+        }),
+        mergeMap(() => this.deleteParticipant(userGuid)),
+        tap(() => {
+          this.participants = this.participants.filter(
+            participant => participant.userGuid !== userGuid,
+          );
+        }),
+        catchError(() => {
+          this.errorMessage = this.translateService.instant(
+            'ParticipantsList.DeleteError',
+          );
+
+          return of(null);
+        }),
+      )
+      .subscribe(() => {
+        this.loading = false;
+        this.expandedMap[userGuid] = null;
+
+        if (this.participants.length === 1) {
+          const [{ userGuid: leftUserGuid }] = this.participants;
+
+          this.expandedMap[leftUserGuid] = true;
+        }
+      });
   }
 
   onStartActivity(participantGuid: string, activity: ActivityInstance): void {
@@ -232,6 +241,12 @@ export class ParticipantsListComponent implements OnInit {
       .subscribe({
         next: participants => {
           this.participants = participants;
+
+          if (this.participants.length === 1) {
+            const [{ userGuid }] = this.participants;
+
+            this.expandedMap[userGuid] = true;
+          }
         },
         complete: () => {
           this.clearParticipant();

@@ -34,6 +34,10 @@
 </ng-template>
 
 <ng-template #participantsList>
+  <p *ngIf="participants.length > 1" class="help-tip">
+    {{ 'ParticipantsList.HelpTip' | translate }}
+  </p>
+
   <ul *ngIf="participants.length" class="participants-list">
     <li
       *ngFor="let participant of participants"
