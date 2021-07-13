@@ -20,6 +20,7 @@ import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 
 import { CurrentActivityService } from '../../services/current-activity.service';
 import { GovernedUserService } from '../../services/governed-user.service';
+import { ParticipantService } from '../../services/participant.service';
 import { ActivityCodes } from '../../constants/activity-codes';
 
 @Component({
@@ -45,6 +46,7 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
     private readonly _workflowBuilder: WorkflowBuilderService,
     private readonly _session: SessionMementoService,
     private governedUserService: GovernedUserService,
+    private participantService: ParticipantService,
     @Inject('toolkit.toolkitConfig')
     private _toolkitConfiguration: ToolkitConfigurationService,
   ) {}
@@ -65,6 +67,7 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.participantService.savePrevParticipantGuid();
     this._currentActivity.activity$.next(null);
     this._session.setParticipant(null);
     this._anchor.removeAll();

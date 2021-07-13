@@ -12,6 +12,9 @@
       "PoweredBy": "Powered by RARE-X"
     }
   },
+  "TopBar": {
+    "SelectedParticipant": "Selected Participant: {{ participantName }}"
+  },
   "Footer": {
     "Links": {
       "Home": "RARE-X.org",

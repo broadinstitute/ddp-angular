@@ -3,6 +3,16 @@
     {{ profile.firstName }} {{ profile.lastName }}
   </span>
 
+  <span
+    *ngIf="isParticipantNameShown && participantName | async"
+    class="username username--participant"
+  >
+    {{
+      'TopBar.SelectedParticipant'
+        | translate: { participantName: participantName | async }
+    }}
+  </span>
+
   <nav class="top-bar__nav">
     <ul class="nav-list">
       <li *ngIf="isAuthenticated" class="nav-list__item">

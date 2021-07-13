@@ -22,6 +22,7 @@ import {
 import { RoutePaths } from '../../router-resources';
 import { CurrentActivityService } from '../../services/current-activity.service';
 import { GovernedUserService } from '../../services/governed-user.service';
+import { ParticipantService } from '../../services/participant.service';
 import { ParticipantDeletionDialogComponent } from '../participant-deletion-dialog/participant-deletion-dialog.component';
 
 interface GovernedParticipant extends Participant {
@@ -53,7 +54,9 @@ export class ParticipantsListComponent implements OnInit {
     private userManagementService: UserManagementServiceAgent,
     private governedUserService: GovernedUserService,
     private currentActivityService: CurrentActivityService,
-    @Inject('ddp.config') private config: ConfigurationService,
+    @Inject('ddp.config')
+    private config: ConfigurationService,
+    private participantService: ParticipantService,
   ) {}
 
   ngOnInit(): void {
@@ -242,11 +245,7 @@ export class ParticipantsListComponent implements OnInit {
         next: participants => {
           this.participants = participants;
 
-          if (this.participants.length === 1) {
-            const [{ userGuid }] = this.participants;
-
-            this.expandedMap[userGuid] = true;
-          }
+          this.checkDefaultOpenActivities(participants);
         },
         complete: () => {
           this.clearParticipant();
@@ -286,5 +285,30 @@ export class ParticipantsListComponent implements OnInit {
 
   private deleteParticipant(participantGuid: string): Observable<void> {
     return this.userManagementService.deleteUser(participantGuid).pipe(take(1));
+  }
+
+  private checkDefaultOpenActivities(
+    participants: GovernedParticipant[],
+  ): void {
+    if (!participants.length) {
+      return;
+    }
+
+    if (participants.length === 1) {
+      const [{ userGuid }] = participants;
+
+      this.expandedMap[userGuid] = true;
+    }
+
+    const prevParticipantGuid = this.participantService.prevParticipantGuid;
+
+    if (
+      prevParticipantGuid &&
+      participants.some(
+        participant => participant.userGuid === prevParticipantGuid,
+      )
+    ) {
+      this.expandedMap[prevParticipantGuid] = true;
+    }
   }
 }

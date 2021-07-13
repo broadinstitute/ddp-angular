@@ -15,6 +15,10 @@
 
   &__nav {
     margin-left: auto;
+
+    @media (max-width: 480px) {
+      margin-left: 0;
+    }
   }
 }
 
@@ -47,6 +51,22 @@
 
   font-size: 1.0625rem;
   color: white;
+
+  @media (max-width: 480px) {
+    &:last-of-type {
+      margin-bottom: 12px;
+    }
+  }
+
+  &--participant {
+    padding-left: 12px;
+
+    opacity: 85%;
+
+    @media (max-width: 480px) {
+      padding-left: 5px;
+    }
+  }
 }
 
 .SimpleButton {
