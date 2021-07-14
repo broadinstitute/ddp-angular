@@ -3,6 +3,7 @@ import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { Auth0CodeCallbackComponent, AuthGuard, BrowserGuard, IrbGuard } from 'ddp-sdk';
 import {
     ActivityRedesignedComponent,
+    DashboardRedesignedComponent,
     ErrorRedesignedComponent,
     LoginLandingRedesignedComponent,
     PasswordRedesignedComponent,
@@ -25,6 +26,14 @@ const routes: Routes = [
         component: WelcomeComponent,
         pathMatch: 'full',
         canActivate: [IrbGuard]
+    },
+    {
+        path: AppRoutes.Dashboard,
+        component: DashboardRedesignedComponent,
+        canActivate: [
+            IrbGuard,
+            AuthGuard
+        ]
     },
     {
         path: AppRoutes.AboutUs,

@@ -163,15 +163,15 @@
     }
 }
 
-@media screen and (max-width: $desktop-breakpoint) {
-    .controls {
-        app-auth {
-            display: none;
-        }
+@media screen and (max-width: $tablet-breakpoint) {
+    .controls app-auth{
+        display: none;
     }
+}
 
+@media screen and (max-width: $desktop-breakpoint) {
     .panel-controls ::ng-deep {
-        .join-button,
+        .action-button,
         .SimpleButton {
             font-size: 1.2rem;
         }

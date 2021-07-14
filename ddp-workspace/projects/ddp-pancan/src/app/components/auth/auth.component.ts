@@ -8,12 +8,16 @@ import { AppRoutes } from '../app-routes';
         <div class="auth__login">
             <ddp-sign-in-out></ddp-sign-in-out>
         </div>
-        <a *ngIf="!isAuthenticated"
-           mat-flat-button
-           class="join-button btn-common"
-           [routerLink]="AppRoutes.CountMeIn"
+        <a mat-flat-button
+           class="action-button btn-common"
+           [class.dashboard-button]="isAuthenticated"
+           [routerLink]="isAuthenticated ? AppRoutes.Dashboard : AppRoutes.CountMeIn"
            color="primary">
-            <span translate>App.Navigation.Join</span>
+            <ng-container *ngIf="isAuthenticated; else join">
+                <mat-icon>perm_identity</mat-icon>
+                <span translate>App.Navigation.Dashboard</span>
+            </ng-container>
+            <ng-template #join><span translate>App.Navigation.Join</span></ng-template>
         </a>`,
     styleUrls: ['./auth.component.scss']
 })

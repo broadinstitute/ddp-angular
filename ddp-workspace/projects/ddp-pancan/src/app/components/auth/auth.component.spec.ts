@@ -3,14 +3,22 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { mockComponent, SessionMementoService } from 'ddp-sdk';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of, Observable } from 'rxjs';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { By } from '@angular/platform-browser';
 import { AuthComponent } from './auth.component';
+import { MatIconModule } from '@angular/material/icon';
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
         const TRANSLATIONS = {
-            en: {}
+            en: {
+                App: {
+                    Navigation: {
+                        Dashboard: 'Dashboard test',
+                        Join: 'Join test',
+                    }
+                }
+            }
         };
         return of(TRANSLATIONS[code]);
     }
@@ -28,6 +36,7 @@ describe('AuthComponent', () => {
         await TestBed.configureTestingModule({
             imports: [
                 RouterTestingModule,
+                MatIconModule,
                 TranslateModule.forRoot({ loader: { provide: TranslateLoader, useClass: TranslateLoaderMock }, }),
                 NoopAnimationsModule
             ],
@@ -37,6 +46,9 @@ describe('AuthComponent', () => {
             declarations: [AuthComponent, signInOut, languageSelector],
         })
             .compileComponents();
+
+        const translate = TestBed.inject(TranslateService);
+        translate.use('en');
     });
 
     beforeEach(() => {
@@ -53,15 +65,17 @@ describe('AuthComponent', () => {
         sessionSpy.isAuthenticatedSession.and.returnValue(false);
         fixture.detectChanges();
 
-        const joinButton = fixture.debugElement.query(By.css('.join-button'));
-        expect(joinButton).toBeTruthy();
+        const actionButton = fixture.debugElement.query(By.css('.action-button')).nativeElement;
+        expect(actionButton.textContent.trim()).toBe('Join test');
+        expect(actionButton.href).toContain('count-me-in');
     });
 
-    it('should hide join button if user is authenticated', () => {
+    it('should display dashboard button if user is authenticated', () => {
         sessionSpy.isAuthenticatedSession.and.returnValue(true);
         fixture.detectChanges();
 
-        const joinButton = fixture.debugElement.query(By.css('.join-button'));
-        expect(joinButton).toBeFalsy();
+        const actionButton = fixture.debugElement.query(By.css('.action-button')).nativeElement;
+        expect(actionButton.textContent.trim()).toContain('Dashboard test');
+        expect(actionButton.href).toContain('dashboard');
     });
 });

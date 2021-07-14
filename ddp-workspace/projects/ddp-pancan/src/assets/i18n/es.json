@@ -353,7 +353,8 @@
             "Participation": "Participación",
             "ScientificResearch": "[ES]Scientific Research",
             "FAQ": "Preguntas Más Frecuentes",
-            "Join": "[ES]Join"
+            "Join": "[ES]Join",
+            "Dashboard": "Tablero de Progreso"
         },
         "Footer": {
             "BackToTopButton": "Volver Arriba",
