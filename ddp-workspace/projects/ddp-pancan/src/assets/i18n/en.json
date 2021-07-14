@@ -353,7 +353,8 @@
             "Participation": "Participation",
             "ScientificResearch": "Scientific Research",
             "FAQ": "FAQ",
-            "Join": "Join"
+            "Join": "Join",
+            "Dashboard": "Dashboard"
         },
         "Footer": {
             "BackToTopButton": "Back to top",

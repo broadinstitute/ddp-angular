@@ -45,6 +45,10 @@
 .btn-auth {
     padding: 0.65rem 1.5rem;
     line-height: 20px;
+
+    &.dashboard-button {
+        padding: 0.65rem;
+    }
 }
 
 // for buttons
