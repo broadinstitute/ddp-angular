@@ -1,0 +1,112 @@
+@import "../theme.scss";
+@import "common";
+@import "variables";
+
+.button {
+    min-width: 8.5rem;
+    padding: 0.625rem 1.25rem;
+    font-family: $primary-font-medium;
+    border-radius: 4px;
+    border: none;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+//
+//.button,
+//.button:active,
+//.button:hover,
+//.button:focus {
+//    text-decoration: none;
+//}
+//
+.button_small {
+    font-size: 1rem;
+    line-height: 1.25rem;
+}
+
+.button_medium {
+    font-size: 1.125rem;
+    line-height: 2rem;
+}
+
+.button_big {
+    padding: 1rem 2rem;
+    font-size: 1.4375rem;
+    line-height: 1.8125rem;
+}
+
+.button_primary {
+    background-color: mat-color($app-primary, 500);
+    border: 2px solid mat-color($app-primary, 500);
+    color: white;
+    @extend .btn-common;
+
+    &:hover:not([disabled]),
+    :hover:enabled {
+        background-color: darken(mat-color($app-primary, 500), 35%);
+        border-color: darken(mat-color($app-primary, 500), 35%);
+    }
+}
+
+.button_secondary {
+    background-color: white;
+    color: $text-color;
+    border: 2px solid $text-color;
+}
+
+.button_primary, .button_secondary {
+    &:disabled {
+        opacity: 0.3;
+    }
+}
+//
+//.button_secondary:hover:not([disabled]),
+//.button_secondary:hover:enabled {
+//    background-color: mat-color($app-primary, 200);
+//    color: mat-color($app-primary, 100);
+//}
+
+.button_new-item {
+    font-size: 1.25rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+//.simple-button,
+//.SimpleButton {
+//    background: none;
+//    border: none;
+//    padding: 0;
+//    cursor: pointer;
+//    color: mat-color($app-primary, 200);
+//    text-decoration: none;
+//    font-size: 16px;
+//    line-height: 20px;
+//    font-family: inherit;
+//    white-space: nowrap;
+//    transition: 0.3s;
+//}
+//
+//.simple-button:hover,
+//.SimpleButton:hover {
+//    text-decoration: underline;
+//}
+//
+//.simple-button:focus,
+//.SimpleButton:focus {
+//    text-decoration: underline;
+//}
+//
+//.menu {
+//
+//    .button,
+//    .simple-button,
+//    .SimpleButton {
+//        font-size: 1.875rem;
+//        line-height: 2.25rem;
+//    }
+//}
