@@ -35,6 +35,12 @@
     display: flex;
     align-items: center;
     min-width: fit-content;
+
+    &::ng-deep .auth__login .SimpleButton {
+        &:hover, &:focus {
+            background-color: rgba(0,0,0,0.04);
+        }
+    }
 }
 
 .hamburger {
@@ -150,6 +156,8 @@
 .project-logo {
     display: flex;
     margin-right: 15px;
+    padding: 4px;
+    text-decoration: none;
 
     &__text {
         color: $text-color;
