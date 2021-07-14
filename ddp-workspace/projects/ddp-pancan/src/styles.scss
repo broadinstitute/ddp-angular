@@ -168,21 +168,21 @@ a {
     }
 }
 
-.ButtonFilled {
-    @extend .btn-common;
-
-    outline: none;
-    padding: 0.7rem 1.5rem;
-    border: none;
-    color: #fff !important;
-    transition: all .3s ease-out;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
-    background-color: $primary-color;
-
-    &:hover, &:focus {
-        box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
-    }
-}
+//.ButtonFilled {
+//    @extend .btn-common;
+//
+//    outline: none;
+//    padding: 0.7rem 1.5rem;
+//    border: none;
+//    color: #fff !important;
+//    transition: all .3s ease-out;
+//    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
+//    background-color: $primary-color;
+//
+//    &:hover, &:focus {
+//        box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+//    }
+//}
 
 .ButtonFilled--neutral {
     background-color: $grey-button-color !important;
