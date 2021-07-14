@@ -56,6 +56,13 @@
     background-color: white;
     color: $text-color;
     border: 2px solid $text-color;
+
+    &:hover:not([disabled]),
+    &:hover:enabled,
+    &:focus:not([disabled]),
+    &:focus:enabled,{
+        background-color: rgba(0,0,0,0.04);
+    }
 }
 
 .button_primary, .button_secondary {
@@ -63,12 +70,6 @@
         opacity: 0.3;
     }
 }
-//
-//.button_secondary:hover:not([disabled]),
-//.button_secondary:hover:enabled {
-//    background-color: mat-color($app-primary, 200);
-//    color: mat-color($app-primary, 100);
-//}
 
 .button_new-item {
     font-size: 1.25rem;

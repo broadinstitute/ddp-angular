@@ -204,3 +204,19 @@ a {
     font-weight: 300;
     padding: 15px 0;
 }
+
+.normal {
+    font-family: $primary-font;
+    font-weight: 400;
+    font-size: 1.125rem;
+    line-height: 2rem;
+}
+
+.bold, .medium {
+    font-family: $primary-font-medium;
+}
+
+ol li, p, ul li {
+    font-size: 1.125rem;
+    line-height: 2rem;
+}

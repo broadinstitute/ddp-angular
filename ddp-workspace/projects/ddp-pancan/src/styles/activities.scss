@@ -35,11 +35,20 @@
     padding-top: 5rem;
 }
 
+.section {
+    width: 100%;
+}
+
+.content {
+    margin: 0 auto;
+    padding: 0 1.5625rem;
+}
+
 .sticky-section {
     z-index: 2;
     position: fixed;
-    top: 6.25rem; // header's height
-    background-color: mat-color($app-primary, 300);
+    top: $header-height;
+    background-color: $primary-color;
     transition: all 200ms linear;
 }
 
@@ -53,12 +62,11 @@
     .sticky__text {
         font-size: 1.0625rem;
         line-height: 1.375rem;
-        color: mat-color($app-primary, 100);
-        font-weight: 200;
+        color: white;
     }
 
     .Link {
-        color: mat-color($app-primary, 100);
+        color: white;
     }
 }
 
@@ -86,19 +94,17 @@
     line-height: 2.25rem;
     font-weight: 600;
     cursor: initial;
-    color: mat-color($app-primary, 650);
-    color: #bbbbbe;
+    color: $activity-step-pristine;
     font-family: 'Source Serif Pro', serif !important;
-}
 
-.activity-step.completed {
-    cursor: pointer;
-    color: mat-color($app-primary, 700);
-    color: #59585f;
-}
+    &.completed {
+        cursor: pointer;
+        color: $activity-step-completed;
 
-.activity-step.active.completed {
-    color: mat-color($app-primary, 200);
+        &.active {
+            color: $activity-step-active;
+        }
+    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -131,7 +137,7 @@
     font-size: 1.125rem;
     line-height: 2rem;
     color: $text-color;
-    //margin: 1rem 0 1rem -1.5625rem;
+    margin: 1rem 0 1rem -1.5625rem;
 }
 
 .ddp-simple-list {
@@ -179,10 +185,10 @@
 
 .ol-flat-list {
     font-weight: 600;
-    color: mat-color($app-primary, 200);
+    color: $text-color;
 
     p {
-        color: mat-color($app-primary, 700);
+        color: $text-color;
     }
 }
 
@@ -235,13 +241,13 @@
 
 // consent agree question
 .consent-agree {
-    margin: 0rem 0 -1.2rem 0;
+    margin: 0 0 -1.2rem 0;
 }
 
 // agreement question
 .ddp-agreement-text {
     white-space: normal;
-    color: mat-color($app-primary, 700);
+    margin: 0;
 }
 
 .ddp-agreement {
@@ -256,10 +262,6 @@
     line-height: 2.875rem;
 }
 
-.ddp-agreement-text {
-    margin: 0;
-}
-
 // picklist
 ddp-activity-picklist-answer {
     font-weight: 400;
@@ -269,7 +271,6 @@ ddp-activity-picklist-answer {
 .mat-radio-label-content {
     font-size: 1.2rem;
     line-height: 1.2rem !important;
-    color: mat-color($app-primary, 1300);
 }
 
 .mat-checkbox-layout {
@@ -315,18 +316,18 @@ ddp-activity-picklist-answer {
     margin: 0;
     font-size: 1.125rem;
     line-height: 1.4375rem;
-    color: mat-color($app-primary, 1300);
+    color: $grey-text-color;
     font-family: 'Untitled-Sans-Regular', sans-serif;
 }
 
 .ddp-counter-color {
-    color: mat-color($app-primary, 250);
+    color: $primary-color;
 }
 
 // native dropdown
 select {
     font-size: 1.2rem;
-    color: mat-color($app-primary, 1300);
+    color: $grey-text-color;
     background-color: rgba(255, 255, 255, 0.9);
     width: 100%;
     padding: 0;
@@ -336,7 +337,6 @@ select {
     border-radius: 0;
     height: 2.65rem;
     transition: all .3s;
-    //font-family: inherit;
     cursor: pointer;
     font-family: Untitled-Sans-Regular;
 }
@@ -348,10 +348,6 @@ select:disabled {
 }
 
 // material dropdown
-.mat-select-value {
-    color: mat-color($app-primary, 700) !important;
-}
-
 .mat-form-field-label {
     font-size: 1.0rem !important;
 }
@@ -359,6 +355,17 @@ select:disabled {
 // input
 .mat-form-field-infix {
     font-size: 1.2rem;
+
+    ddp-date & {
+        .date-text {
+            text-align: center !important;
+        }
+
+        .mat-form-field-label-wrapper {
+            top: -9px;
+            text-align: center!important;
+        }
+    }
 }
 
 // error message
@@ -366,8 +373,8 @@ select:disabled {
     font-size: 1.2rem;
     line-height: 1.875rem;
     margin: 1rem 0;
-    color: mat-color($app-primary, 1200);
-    border-top: 1px solid mat-color($app-primary, 1200);
+    color: $warn-color;
+    border-top: 1px solid $warn-color;
 }
 
 .ErrorMessage a {
@@ -381,7 +388,7 @@ select:disabled {
 
     .ErrorMessageItem {
         font-size: 1.2rem;
-        color: mat-color($app-primary, 1200);
+        color: $warn-color;
         margin: .3rem 0;
         padding: 0 0 0 0;
     }
@@ -390,12 +397,12 @@ select:disabled {
 // material error message
 .mat-error {
     font-size: 0.9rem;
-    color: mat-color($app-primary, 1200);
+    color: $warn-color;
 }
 
 // info box
 .infobox {
-    border: 2px solid mat-color($app-primary, 250);
+    border: 2px solid $primary-color;
     border-radius: 8px;
     background-color: rgba(113, 84, 255, 0.06);
     padding: 1rem;
@@ -419,7 +426,7 @@ select:disabled {
     font-size: 1rem;
     line-height: 1.5rem;
     margin: 0 0 0.5rem 0;
-    color: mat-color($app-primary, 1300);
+    color: $grey-text-color;
 }
 
 .boolean-answer-CONSENT_BLOOD,
