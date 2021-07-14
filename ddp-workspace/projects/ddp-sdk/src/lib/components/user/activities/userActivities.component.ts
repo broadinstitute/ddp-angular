@@ -24,6 +24,7 @@ import { ActivityInstance } from '../../../models/activityInstance';
 import { ConfigurationService } from '../../../services/configuration.service';
 import { BehaviorSubject, Subscription, of } from 'rxjs';
 import { tap, mergeMap, take } from 'rxjs/operators';
+import { SessionMementoService } from '../../../services/sessionMemento.service';
 
 @Component({
     selector: 'ddp-user-activities',
@@ -201,6 +202,7 @@ import { tap, mergeMap, take } from 'rxjs/operators';
 })
 export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, AfterContentInit {
     @Input() studyGuid: string;
+    @Input() participantGuid: string;
     @Input() displayedColumns: Array<DashboardColumns> = ['name', 'summary', 'date', 'status', 'actions'];
     @Output() open: EventEmitter<string> = new EventEmitter();
     @Output() loadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -217,10 +219,14 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
         private logger: LoggingService,
         private activityServiceAgent: ActivityServiceAgent,
         private analytics: AnalyticsEventsService,
+        private session: SessionMementoService,
         @Inject('ddp.config') private config: ConfigurationService,
         public domSanitizationService: DomSanitizer) {}
 
     public ngOnInit(): void {
+        if (this.participantGuid) {
+            this.session.setParticipant(this.participantGuid);
+        }
         this.dataSource = new UserActivitiesDataSource(
             this.serviceAgent,
             this.logger,

@@ -47,6 +47,7 @@ toolkitConfig.dashboardUrl = AppRoutes.Dashboard;
 toolkitConfig.errorUrl = AppRoutes.Error;
 toolkitConfig.phone = '651-287-1608';
 toolkitConfig.infoEmail = 'info@joincountmein.org';
+toolkitConfig.useParticipantDashboard = true;
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;

@@ -82,4 +82,5 @@ export class ToolkitConfigurationService {
 
     cookies: Cookies | null;
     usePrionPrivacyPolicyTemplate: boolean;
+    useParticipantDashboard: boolean;
 }

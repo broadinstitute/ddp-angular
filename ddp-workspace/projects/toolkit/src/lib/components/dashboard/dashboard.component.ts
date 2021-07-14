@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, OnDestroy, Output, EventEmitter } from '@ang
 import { Router } from '@angular/router';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { AnnouncementDashboardMessage } from '../../models/announcementDashboardMessage';
-import { AnnouncementsServiceAgent, ParticipantsSearchServiceAgent, SearchParticipant } from 'ddp-sdk';
+import { AnnouncementsServiceAgent, ParticipantsSearchServiceAgent, SearchParticipant, SessionMementoService } from 'ddp-sdk';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
@@ -62,10 +62,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
         private router: Router,
         private announcements: AnnouncementsServiceAgent,
         private participantsSearch: ParticipantsSearchServiceAgent,
+        protected session: SessionMementoService,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) {
     }
 
     public ngOnInit(): void {
+        if (this.useParticipantDashboard) {
+            this.session.setParticipant(null);
+        }
         this.studyGuid = this.toolkitConfiguration.studyGuid;
 
         const anno = this.announcements.getMessages(this.studyGuid)
@@ -89,11 +93,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.announcementMessages[index].shown = false;
     }
 
-    public navigate(id: string): void {
+    public navigate(id: string, participantGuid?: string): void {
+        if (this.useParticipantDashboard) {
+            this.session.setParticipant(participantGuid);
+        }
         this.router.navigate([this.toolkitConfiguration.activityUrl, id]);
     }
 
     public load(loaded: boolean): void {
         this.loadedEvent.emit(loaded);
+    }
+
+    public get useParticipantDashboard(): boolean {
+        return this.toolkitConfiguration.useParticipantDashboard;
     }
 }
