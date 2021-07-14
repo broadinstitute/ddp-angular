@@ -51,7 +51,9 @@
       *matCellDef="let activity"
       [attr.data-label]="'SDK.UserActivities.ActivityStatus' | translate"
     >
-      {{ 'Activities.StatusCodes.' + activity.statusCode | translate }}
+      {{
+        'Activities.StatusCodes.' + getActivityStatusCode(activity) | translate
+      }}
     </td>
   </ng-container>
 
@@ -66,7 +68,10 @@
       [attr.data-label]="'SDK.UserActivities.ActivityActions' | translate"
     >
       <button
-        *ngIf="activity.statusCode === ActivityStatusCodes.CREATED"
+        *ngIf="
+          activity.statusCode === ActivityStatusCodes.CREATED &&
+          !hasPreviousInstance(activity)
+        "
         class="button button_primary button_small"
         (click)="onStartClick(activity)"
       >
@@ -74,7 +79,13 @@
       </button>
 
       <button
-        *ngIf="activity.statusCode === ActivityStatusCodes.IN_PROGRESS"
+        *ngIf="
+          ((activity.statusCode === ActivityStatusCodes.CREATED ||
+            activity.statusCode === ActivityStatusCodes.IN_PROGRESS) &&
+            hasPreviousInstance(activity)) ||
+          (activity.statusCode === ActivityStatusCodes.IN_PROGRESS &&
+            !hasPreviousInstance(activity))
+        "
         class="button button_primary button_small"
         (click)="onContinueClick(activity)"
       >
