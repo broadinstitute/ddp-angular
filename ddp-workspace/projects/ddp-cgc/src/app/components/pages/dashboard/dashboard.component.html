@@ -17,6 +17,7 @@
   ></app-user-activities>
 
   <app-release-requests
+    *ngIf="showReleaseRequests"
     [activities]="releaseRequests"
     (viewActivity)="onViewActivity($event)"
     (startActivity)="onStartActivity($event)"
