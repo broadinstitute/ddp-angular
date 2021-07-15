@@ -369,7 +369,11 @@
             "ReturnButton": "REGRESAR A PÁGINA PRINCIPAL"
         },
         "Dashboard": {
-            "Title": "Tablero de Progreso"
+            "Title": "Tablero de Progreso",
+            "ParticipantsTitle": "[ES]Participant Dashboard",
+            "AddParticipant": "[ES]Add Participant",
+            "ShowPanel": "Show",
+            "HidePanel": "Hide"
         },
         "Password": {
             "Title": "Ingrese la contraseña.",

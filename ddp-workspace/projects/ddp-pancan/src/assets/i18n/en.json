@@ -369,7 +369,11 @@
             "ReturnButton": "RETURN HOME"
         },
         "Dashboard": {
-            "Title": "Dashboard"
+            "Title": "Dashboard",
+            "ParticipantsTitle": "Participant Dashboard",
+            "AddParticipant": "Add Participant",
+            "ShowPanel": "Show",
+            "HidePanel": "Hide"
         },
         "Password": {
             "Title": "Please enter the password",

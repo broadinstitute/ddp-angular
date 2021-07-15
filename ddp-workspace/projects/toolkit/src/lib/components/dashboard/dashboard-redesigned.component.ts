@@ -11,10 +11,18 @@ import {
     ParticipantsSearchServiceAgent,
     ConfigurationService,
     GovernedParticipantsServiceAgent,
-    Participant, UserActivityServiceAgent, ActivityInstance
+    UserActivityServiceAgent,
+    ActivityInstance,
+    UserProfileServiceAgent
 } from 'ddp-sdk';
-import { map, take, filter } from 'rxjs/operators';
-import { forkJoin, Observable, of } from 'rxjs';
+import { map, take, filter, switchMap } from 'rxjs/operators';
+import { combineLatest, Observable, of } from 'rxjs';
+
+interface DashboardParticipant {
+    userGuid: string;
+    firstName: string;
+    lastName: string;
+}
 
 @Component({
     selector: 'toolkit-dashboard-redesigned',
@@ -26,11 +34,15 @@ import { forkJoin, Observable, of } from 'rxjs';
             <section class="section dashboard-title-section">
                 <div class="content content_medium content_wide content_dashboard">
                     <div fxLayout="row">
-                        <h1 class="dashboard-title-section__title" translate>
-                            {{useParticipantDashboard ? 'Toolkit.Dashboard.ParticipantsTitle' : 'Toolkit.Dashboard.Title'}}
+                        <h1 class="dashboard-title-section__title">
+                            <ng-container *ngIf="useParticipantDashboard; else regularDashboard">
+                                <mat-icon>perm_identity</mat-icon>
+                                <span translate>Toolkit.Dashboard.ParticipantsTitle</span>
+                            </ng-container>
+                            <ng-template #regularDashboard><span translate>Toolkit.Dashboard.Title</span></ng-template>
                         </h1>
-                        <div *ngIf="useParticipantDashboard">
-                            <button mat-stroked-button class="add-participant-button">
+                        <div *ngIf="toolkitConfig.addParticipantUrl">
+                            <button mat-stroked-button class="add-participant-button" (click)="addParticipant()">
                                 {{'Toolkit.Dashboard.AddParticipant' | translate}}
                             </button>
                         </div>
@@ -71,13 +83,13 @@ import { forkJoin, Observable, of } from 'rxjs';
                 <section class="section dashboard-section" [class.full-width]="useParticipantDashboard">
                     <div class="content content_medium">
                         <mat-accordion *ngIf="useParticipantDashboard; else activitiesTable" hideToggle>
-                            <mat-expansion-panel *ngFor="let participant of governedParticipants$ | async; first as isFirst"
+                            <mat-expansion-panel *ngFor="let participant of dashboardParticipants$ | async; first as isFirst"
                                                  [expanded]="isFirst"
                                                  (opened)="openParticipantPanel(participant.userGuid);"
                                                  (closed)="closeParticipantPanel(participant.userGuid);">
                                 <mat-expansion-panel-header>
                                     <mat-panel-title>
-                                        {{participant.userProfile.firstName}} {{participant.userProfile.lastName}}
+                                        {{participant.firstName}} {{participant.lastName}}
                                     </mat-panel-title>
                                     <mat-panel-description fxLayoutAlign="end center">
                                         <ng-container *ngIf="panelsState.get(participant.userGuid); else show">
@@ -116,21 +128,22 @@ import { forkJoin, Observable, of } from 'rxjs';
 })
 export class DashboardRedesignedComponent extends DashboardComponent implements OnInit {
     public invitationId: string | null = null;
-    public governedParticipants$: Observable<Participant[]>;
+    public dashboardParticipants$: Observable<DashboardParticipant[]>;
     public panelsState = new Map<string, boolean>();
 
     constructor(
         private headerConfig: HeaderConfigurationService,
         protected session: SessionMementoService,
-        private _router: Router,
+        protected router: Router,
         private _announcements: AnnouncementsServiceAgent,
         private userInvitation: UserInvitationServiceAgent,
         _participantsSearch: ParticipantsSearchServiceAgent,
         private governedParticipantsAgent: GovernedParticipantsServiceAgent,
         private userActivityServiceAgent: UserActivityServiceAgent,
+        private userProfile: UserProfileServiceAgent,
         @Inject('ddp.config') private config: ConfigurationService,
         @Inject('toolkit.toolkitConfig') public toolkitConfig: ToolkitConfigurationService) {
-        super(_router, _announcements, _participantsSearch, session, toolkitConfig);
+        super(router, _announcements, _participantsSearch, session, toolkitConfig);
     }
 
     public ngOnInit(): void {
@@ -138,18 +151,34 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
         this.headerConfig.setupDefaultHeader();
         !this.isAdmin && this.getInvitationId();
 
-        this.governedParticipants$ = forkJoin({
-            userActivities: this.getOperatorActivities(),
-            participants: this.governedParticipantsAgent.getGovernedStudyParticipants(this.config.studyGuid)
-        }).pipe(map(({ userActivities, participants }) => {
-            return [...(userActivities ? [] : []), ...participants];
-        }));
+        this.dashboardParticipants$ = this.getDashboardParticipants();
     }
 
     private getOperatorActivities(): Observable<Array<ActivityInstance> | null> {
         this.session.setParticipant(this.session.session.userGuid);
         return this.userActivityServiceAgent.getActivities(of(this.config.studyGuid));
-        // return of(null);
+    }
+
+    private getDashboardParticipants(): Observable<DashboardParticipant[]> {
+        return combineLatest([
+            this.getOperatorActivities()
+                .pipe(switchMap((userActivities) => userActivities ? this.userProfile.profile : of(null))),
+            this.governedParticipantsAgent.getGovernedStudyParticipants(this.config.studyGuid)
+        ]).pipe(map(([operatorParticipant, participants]) => {
+            const result: DashboardParticipant[] = participants.map(participant => ({
+                userGuid: participant.userGuid,
+                firstName: participant.userProfile.firstName,
+                lastName: participant.userProfile.lastName,
+            }));
+            if (operatorParticipant) {
+                result.unshift({
+                    userGuid: this.session.session.userGuid,
+                    firstName: operatorParticipant.profile.firstName,
+                    lastName: operatorParticipant.profile.lastName,
+                });
+            }
+            return result;
+        }));
     }
 
     public get isAdmin(): boolean {
@@ -177,5 +206,9 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
             })),
             filter(invitation => !!invitation)
         ).subscribe(invitation => this.invitationId = invitation.invitationId);
+    }
+
+    public addParticipant(): void {
+        this.router.navigate([this.toolkitConfig.addParticipantUrl]);
     }
 }

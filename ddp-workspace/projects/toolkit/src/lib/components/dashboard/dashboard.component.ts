@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private anchor: Subscription = new Subscription();
 
     constructor(
-        private router: Router,
+        protected router: Router,
         private announcements: AnnouncementsServiceAgent,
         private participantsSearch: ParticipantsSearchServiceAgent,
         protected session: SessionMementoService,
