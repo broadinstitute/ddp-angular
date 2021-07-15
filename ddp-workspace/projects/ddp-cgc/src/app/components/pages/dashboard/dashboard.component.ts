@@ -4,8 +4,8 @@ import { Route } from '../../../constants/route';
 import { filter, first, tap } from 'rxjs/operators';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivityCode } from '../../../constants/activity-code';
-import { ActivityStatusCode } from './../../../../../../ddp-rgp/src/app/constants/activity-status-code';
-import { ActivityInstance, UserActivityServiceAgent, ConfigurationService, ActivityServiceAgent, ActivityInstanceGuid } from 'ddp-sdk';
+import { ActivityInstance, UserActivityServiceAgent, ConfigurationService, ActivityServiceAgent,
+ActivityInstanceGuid, ActivityStatusCodes } from 'ddp-sdk';
 
 
 @Component({
@@ -60,7 +60,7 @@ export class DashboardComponent implements OnInit {
       .subscribe(activities => {
         this.showReleaseRequests = !!activities.find(
           ({ activityCode, statusCode }: ActivityInstance) => activityCode === ActivityCode.Consent
-                                                           && statusCode === ActivityStatusCode.Complete
+                                                           && statusCode === ActivityStatusCodes.COMPLETE
         );
 
         this.activities = activities.filter(
