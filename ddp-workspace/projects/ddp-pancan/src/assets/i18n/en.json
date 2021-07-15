@@ -373,7 +373,9 @@
             "ParticipantsTitle": "Participant Dashboard",
             "AddParticipant": "Add Participant",
             "ShowPanel": "Show",
-            "HidePanel": "Hide"
+            "HidePanel": "Hide",
+            "UserLabel": "You",
+            "ChildLabel": "Your child"
         },
         "Password": {
             "Title": "Please enter the password",

@@ -17,11 +17,11 @@ import {
 } from 'ddp-sdk';
 import { map, take, filter, switchMap } from 'rxjs/operators';
 import { combineLatest, Observable, of } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 interface DashboardParticipant {
     userGuid: string;
-    firstName: string;
-    lastName: string;
+    label: string;
 }
 
 @Component({
@@ -89,7 +89,7 @@ interface DashboardParticipant {
                                                  (closed)="closeParticipantPanel(participant.userGuid);">
                                 <mat-expansion-panel-header>
                                     <mat-panel-title>
-                                        {{participant.firstName}} {{participant.lastName}}
+                                        {{participant.label}}
                                     </mat-panel-title>
                                     <mat-panel-description fxLayoutAlign="end center">
                                         <ng-container *ngIf="panelsState.get(participant.userGuid); else show">
@@ -141,6 +141,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
         private governedParticipantsAgent: GovernedParticipantsServiceAgent,
         private userActivityServiceAgent: UserActivityServiceAgent,
         private userProfile: UserProfileServiceAgent,
+        private translate: TranslateService,
         @Inject('ddp.config') private config: ConfigurationService,
         @Inject('toolkit.toolkitConfig') public toolkitConfig: ToolkitConfigurationService) {
         super(router, _announcements, _participantsSearch, session, toolkitConfig);
@@ -162,19 +163,21 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
     private getDashboardParticipants(): Observable<DashboardParticipant[]> {
         return combineLatest([
             this.getOperatorActivities()
-                .pipe(switchMap((userActivities) => userActivities ? this.userProfile.profile : of(null))),
+                .pipe(switchMap((userActivities) => userActivities?.length ? this.userProfile.profile : of(null))),
             this.governedParticipantsAgent.getGovernedStudyParticipants(this.config.studyGuid)
         ]).pipe(map(([operatorParticipant, participants]) => {
-            const result: DashboardParticipant[] = participants.map(participant => ({
+            const result: DashboardParticipant[] = participants.map((participant, i) => ({
                 userGuid: participant.userGuid,
-                firstName: participant.userProfile.firstName,
-                lastName: participant.userProfile.lastName,
+                label: (participant.userProfile.firstName || participant.userProfile.lastName)
+                    ? `${participant.userProfile.firstName} ${participant.userProfile.lastName}`
+                    : `${this.translate.instant('Toolkit.Dashboard.ChildLabel')} ${i > 0 ? '#' + (i + 1) : ''}`,
             }));
             if (operatorParticipant) {
                 result.unshift({
                     userGuid: this.session.session.userGuid,
-                    firstName: operatorParticipant.profile.firstName,
-                    lastName: operatorParticipant.profile.lastName,
+                    label: (operatorParticipant.profile.firstName || operatorParticipant.profile.lastName)
+                        ? `${operatorParticipant.profile.firstName} ${operatorParticipant.profile.lastName}`
+                        : this.translate.instant('Toolkit.Dashboard.UserLabel'),
                 });
             }
             return result;

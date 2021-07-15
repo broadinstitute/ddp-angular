@@ -372,8 +372,10 @@
             "Title": "Tablero de Progreso",
             "ParticipantsTitle": "[ES]Participant Dashboard",
             "AddParticipant": "[ES]Add Participant",
-            "ShowPanel": "Show",
-            "HidePanel": "Hide"
+            "ShowPanel": "[ES]Show",
+            "HidePanel": "[ES]Hide",
+            "UserLabel": "Usted",
+            "ChildLabel": "[ES]Your child"
         },
         "Password": {
             "Title": "Ingrese la contraseña.",
