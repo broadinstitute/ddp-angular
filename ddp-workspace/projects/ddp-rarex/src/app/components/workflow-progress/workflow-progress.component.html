@@ -28,7 +28,7 @@
           "
         >
           <span class="workflow-progress-step__step-count" translate>
-            {{ 'Activities.StatusCodes.' + activity.statusCode }}
+            {{ 'Activities.StatusCodes.' + getActivityStatusCode(activity) }}
           </span>
           <p class="workflow-progress-step__step-name">
             {{ activity.activityName }}
