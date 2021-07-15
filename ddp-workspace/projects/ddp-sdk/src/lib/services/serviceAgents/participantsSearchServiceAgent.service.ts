@@ -33,11 +33,15 @@ export class ParticipantsSearchServiceAgent extends SessionServiceAgent<any> {
 
     private getParticipantData(): Observable<SearchParticipant | null> {
         const { session } = this.session;
-        if (!session?.participantGuid) return of(null);
+        if (!session?.participantGuid || !this.isAdmin()) return of(null);
 
         return this.getObservable(`/admin/studies/${this.configuration.studyGuid}/participants/${session.participantGuid}`)
             .pipe(tap(result => {
                 this.participantMap.set(this.session.session.participantGuid, result);
             }));
+    }
+
+    private isAdmin(): boolean {
+        return this.session.isAuthenticatedAdminSession();
     }
 }
