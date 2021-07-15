@@ -434,7 +434,7 @@
     "Title": "Your Letters  of Request for Release of Your Clinical and Genetic Information",
     "ActivityName": "Provider/Clinic",
     "DateCreated": "Date Create",
-    "GenerateReleaseRequestGenetic": "Generate Clinical Request",
-    "ReleaseRequestClinical": "Generate Genetic Request"
+    "GenerateReleaseRequestGenetic": "Generate Genetic Request",
+    "ReleaseRequestClinical": "Generate Clinical Request"
   }
 }
