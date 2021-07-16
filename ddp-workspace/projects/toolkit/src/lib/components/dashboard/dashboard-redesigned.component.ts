@@ -158,8 +158,11 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
     }
 
     private getOperatorActivities(): Observable<Array<ActivityInstance> | null> {
-        this.session.setParticipant(this.session.session.userGuid);
-        return this.userActivityServiceAgent.getActivities(of(this.config.studyGuid));
+        return of(this.session.session.userGuid).pipe(
+            tap((userGuid) => {
+                this.session.setParticipant(userGuid);
+            }),
+            switchMap(() => this.userActivityServiceAgent.getActivities(of(this.config.studyGuid))));
     }
 
     private getDashboardParticipants(): Observable<DashboardParticipant[]> {
