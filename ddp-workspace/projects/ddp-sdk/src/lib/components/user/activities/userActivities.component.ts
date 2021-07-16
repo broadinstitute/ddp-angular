@@ -23,13 +23,13 @@ import { DashboardColumns } from '../../../models/dashboardColumns';
 import { ActivityInstance } from '../../../models/activityInstance';
 import { ConfigurationService } from '../../../services/configuration.service';
 import { BehaviorSubject, Subscription, of } from 'rxjs';
-import { tap, mergeMap, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { SessionMementoService } from '../../../services/sessionMemento.service';
 
 @Component({
     selector: 'ddp-user-activities',
     template: `
-        <div [hidden]="!loaded">
+        <div [hidden]="!statusesLoaded">
             <mat-table [dataSource]="dataSource" data-ddp-test="activitiesTable" class="ddp-dashboard">
                 <!-- Name Column -->
                 <ng-container matColumnDef="name">
@@ -208,10 +208,10 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
     @Output() open: EventEmitter<string> = new EventEmitter();
     @Output() loadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
     public dataSource: UserActivitiesDataSource;
-    public loaded = false;
+    public statusesLoaded = false;
     private states: Array<ActivityInstanceState> | null = null;
     private studyGuidObservable = new BehaviorSubject<string | null>(null);
-    private loadingAnchor: Subscription;
+    private statusesLoadingAnchor: Subscription;
     private readonly LOG_SOURCE = 'UserActivitiesComponent';
 
     constructor(
@@ -232,21 +232,11 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
             this.serviceAgent,
             this.logger,
             this.studyGuidObservable);
-        this.loadingAnchor =
-            this.statusesServiceAgent
-                // lets get Observable for status list
-                .getStatuses().pipe(
-                tap(x => this.states = x),
-                // than we will intersect this observable with 'isNull'
-                // observable stream from main data source, so we will get
-                // single final result when both statuses and activity
-                // instances will be loaded
-                mergeMap(() => this.dataSource.isNull)
-                // here is the final subscription, on which we will update
-                // 'loaded' flag
-            ).subscribe(x => {
-                this.loaded = !x;
-                this.loadedEvent.emit(this.loaded);
+        this.statusesLoadingAnchor = this.statusesServiceAgent.getStatuses()
+            .subscribe((x) => {
+                this.states = x;
+                this.statusesLoaded = true;
+                this.loadedEvent.emit(true);
             });
     }
 
@@ -262,7 +252,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
     }
 
     public ngOnDestroy(): void {
-        this.loadingAnchor.unsubscribe();
+        this.statusesLoadingAnchor.unsubscribe();
         this.loadedEvent.emit(false);
     }
 

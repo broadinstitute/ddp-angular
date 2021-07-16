@@ -19,6 +19,7 @@ describe('ParticipantsSearchServiceAgent Test', () => {
     let sessionService: SessionMementoService;
     const backendUrl = 'https://pepper-dev.datadonationplatform.org';
     const studyGuid = 'ANGIO';
+    const adminSession = { isAdmin: true, idToken: '123', userGuid: 'userGuid' } as Session;
 
     beforeEach(() => {
         const config = new ConfigurationService();
@@ -26,7 +27,7 @@ describe('ParticipantsSearchServiceAgent Test', () => {
         config.backendUrl = backendUrl;
         const loggingServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logException']);
         sessionService = new SessionMementoService({} as TranslateService, config);
-        sessionService.updateSession({} as Session);
+        sessionService.updateSession(adminSession);
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule]
         });
@@ -75,7 +76,7 @@ describe('ParticipantsSearchServiceAgent Test', () => {
         };
 
         const guid = 'ABC123';
-        sessionService.updateSession({ participantGuid: guid } as Session);
+        sessionService.updateSession({...adminSession, participantGuid: guid } as Session);
         service.getParticipant().subscribe((result: SearchParticipant) => {
             expect(result).toEqual(response);
             done();
@@ -91,6 +92,14 @@ describe('ParticipantsSearchServiceAgent Test', () => {
             expect(result).toEqual(null);
             done();
         });
-        sessionService.updateSession({ participantGuid: null } as Session);
+        sessionService.updateSession({...adminSession, participantGuid: null } as Session);
+    });
+
+    it('should return null if user is not an admin', (done) => {
+        sessionService.updateSession({participantGuid: 'ABC123', idToken: '123', isAdmin: false } as Session);
+        service.getParticipant().subscribe((result: SearchParticipant|null) => {
+            expect(result).toEqual(null);
+            done();
+        });
     });
 });

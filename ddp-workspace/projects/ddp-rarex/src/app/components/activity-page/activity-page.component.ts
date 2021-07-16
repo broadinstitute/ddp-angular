@@ -31,6 +31,7 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
   studyGuid: string;
   instanceGuid: string;
   isReadonly: boolean;
+  hasPreviousInstance: boolean;
   activities: ActivityInstance[];
   isWorkflowProgressShown: boolean;
   isActivityShown = true;
@@ -62,6 +63,7 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
     this.getActivities().pipe(take(1)).subscribe();
     this.instanceGuid = activity.instance.instanceGuid;
     this.isReadonly = activity.isReadonly;
+    this.hasPreviousInstance = !!activity.instance.previousInstanceGuid;
   }
 
   ngOnDestroy(): void {
@@ -87,6 +89,7 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
 
   onChangeActivity(activity: ActivityInstance): void {
     this.instanceGuid = activity.instanceGuid;
+    this.hasPreviousInstance = !!activity.previousInstanceGuid;
     this.resetActivityComponent();
   }
 

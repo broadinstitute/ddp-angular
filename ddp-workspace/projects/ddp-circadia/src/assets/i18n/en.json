@@ -57,24 +57,44 @@
       "Description": "If your question is not answered below, you can call or email our study staff at <a class=\"link\" href=\"tel:16177267733\">1 (617) 726-7733</a> or <a class=\"link\" href=\"mailto:circadiastudy@mgh.harvard.edu\">circadiastudy@mgh.harvard.edu</a>.",
       "Questions": [
         {
-          "Title": "Can anybody join this study?",
-          "Answer": "TBD"
+          "Title": "How long does the study take?",
+          "Answer": "<p class=\"faq-paragraph\">The study takes approximately 6 weeks to complete. It’s home based and self-directed, meaning you can fit it to your schedule and complete from the comfort of your home, without needing to visit our research office.</p>"
         },
         {
-          "Title": "What will I be asked to do?",
-          "Answer": "TBD"
+          "Title": "What will I need to do?",
+          "Answer": "<p class=\"faq-paragraph\">For the Circadia study we will ask you to fill out questionnaires, provide a saliva DNA sample, wear a wrist activity monitor (similar to a Fitbit), keep daily sleep and food logs, and collect saliva samples in dim light. There is also an optional blood draw that can be scheduled if you are local to the New England region and are interested in providing the blood draw.</p>"
         },
         {
-          "Title": "Is it free to participate?",
-          "Answer": "TBD"
+          "Title": "How will I be compensated?",
+          "Answer": "<p class=\"faq-paragraph\">Upon completion of the study, you will be compensated up to $200, should you choose to complete the optional blood draw, or $185 without the optional blood draw. We will reimburse participants that choose to provide the optional blood draw for local travel or public transportation, and parking.</p>"
         },
         {
-          "Title": "How long will the study last?",
-          "Answer": "TBD"
+          "Title": "Do I have to be medically diagnosed with an atypical circadian rhythm?",
+          "Answer": "<p class=\"faq-paragraph\">Yes, at this time you do need to be diagnosed with an atypical circadian rhythm or circadian rhythm disorder in order to participate in this study.</p>"
         },
         {
-          "Title": "Who is running this study?",
-          "Answer": "TBD"
+          "Title": "I’m a part-time student, am I eligible to join?",
+          "Answer": "<p class=\"faq-paragraph\">Unfortunately, part-time students are not eligible to join.</p>"
+        },
+        {
+          "Title": "What are the possible risks and benefits to me?",
+          "Answer": "<p class=\"faq-paragraph\">There are no direct benefits to you as an individual. However, we will return your dim light melatonin onset results and your food logging in the form of a report. These will provide you with insight into your natural bedtime, sleep habits, morning/evening preference, and diet. You will also receive updates on the study via a newsletter. You will help contribute to research within an understudied population. We hope this study will help us better understand atypical circadian rhythms. Specifically, whether there are changes in genes. These changes in genes may be linked or lead to atypical circadian rhythms. This knowledge may help us find therapies and better diagnostics for atypical circadian rhythms.</p><p class=\"faq-paragraph\">The risks associated with this study are minimal and can include: sleep loss, gum sensitivity, skin irritation from wearable technology, side effects due to refraining from certain substances (alcohol, nicotine, caffeine, recreational drugs, certain foods, and/or melatonin), loss of confidentiality, and risks from the optional blood draw.</p>"
+        },
+        {
+          "Title": "Do I need access to my own laptop, phone, wifi, etc?",
+          "Answer": "<p class=\"faq-paragraph\">One of our study goals is to make this study as accessible as possible. We will provide a smartphone on which you will access our online portal and complete your sleep and food logs. The smartphone will be the main source of study communication during the at-home portion of the study. Prior to receiving the at-home kit, which includes the study smartphone, you will need to complete the screening questionnaires, consent and enrollment, and some study tasks from your own electronic device. This will require you having access to either data or Wi-fi sources, and access to a web browser, to access the study website, materials, and tasks. You will NOT need to download any applications onto your own personal device. Once you have received the at-home study kit, we will ask you to use the study smartphone to complete study tasks. You will need access to local wi-fi networks to use the study smartphone.</p><p class=\"faq-paragraph\">We recognize that not everyone has access to a reliable wi-fi source, or personal electronic device. If you believe this may be an issue for you, please still sign up! We will work to provide you with necessary accommodations to ensure your full participation. Please contact us if you require additional accommodations.</p>"
+        },
+        {
+          "Title": "How will my data be used?",
+          "Answer": "<p class=\"faq-paragraph\">We will use your DNA sample to look for genes that may be linked to atypical circadian rhythms. The questionnaires and dim light saliva collection provide us with background information about your lifestyle and give context to your DNA sample.</p><p class=\"faq-paragraph\">You will be assigned a study number and your data will be coded with this number. Your personal information and any study related information will be kept confidential and secured in a HIPPA compliant database. All information will be deidentified.</p>"
+        },
+        {
+          "Title": "I don’t want to or can’t participate in the study; can I just sign up for the newsletter?",
+          "Answer": "<p class=\"faq-paragraph\">Of course! Please sign up for the newsletter through the study website: circadiastudy.org</p>"
+        },
+        {
+          "Title": "I still have questions/concerns that are unanswered.",
+          "Answer": "<p class=\"faq-paragraph\">We’d be happy to answer any further questions or concerns that you may have about this study. Feel free to email us at <a class=\"link\" href=\"mailto:circadiastudy@mgh.harvard.edu\">circadiastudy@mgh.harvard.edu</a> or call us at <a class=\"link\" href=\"tel:6177267733\">(617) 726-7733</a>.</p><p class=\"faq-paragraph\">Dr. Jacqueline Lane, PhD, is the person in charge of this research study. You can call her at <a class=\"link\" href=\"tel:7166433067\">617-643-3067</a> (Monday through Friday, 9AM-5PM) or email her at <a class=\"link\" href=\"mailto:lane@chgr.mgh.harvard.edu\">lane@chgr.mgh.harvard.edu</a>.</p><p class=\"faq-paragraph\">The Circadia research study uses unencrypted email messages. Unencrypted email messages are not secure and could result in the unauthorized use or disclosure of your information. If you want to receive communications by unencrypted email despite these risks, Partners HealthCare will not be held responsible. Your preference to receive unencrypted email will apply to emails sent from this research group/study only.</p>"
         }
       ]
     },

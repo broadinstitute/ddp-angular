@@ -26,4 +26,19 @@ export class WorkflowProgressComponent {
       this.changeActivity.emit(activity);
     }
   }
+
+  getActivityStatusCode(activity: ActivityInstance): ActivityStatusCodes {
+    if (!!activity.previousInstanceGuid) {
+      if (
+        activity.statusCode === ActivityStatusCodes.CREATED ||
+        activity.statusCode === ActivityStatusCodes.IN_PROGRESS
+      ) {
+        return ActivityStatusCodes.IN_PROGRESS;
+      }
+
+      return ActivityStatusCodes.COMPLETE;
+    }
+
+    return activity.statusCode as ActivityStatusCodes;
+  }
 }

@@ -2,10 +2,22 @@
 
 .action-button {
     @extend .btn-auth;
-    margin-left: 15px;
+    margin-left: 0.9rem;
 }
 
 :host {
     display: flex;
     align-items: center;
 }
+
+@media screen and (max-width: $mobile-breakpoint) {
+    :host {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .join-button {
+        margin-left: 0;
+    }
+}
+

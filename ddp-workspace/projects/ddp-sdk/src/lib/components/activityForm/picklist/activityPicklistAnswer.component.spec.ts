@@ -24,6 +24,7 @@ import { AutocompleteActivityPicklistQuestion } from './autocompleteActivityPick
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PicklistRenderMode } from '../../../models/activity/picklistRenderMode';
+import { SearchHighlightPipe } from '../../../pipes/searchHighlight.pipe';
 
 describe('ActivityPicklistAnswer', () => {
     const questionBlock = {
@@ -91,7 +92,8 @@ describe('ActivityPicklistAnswer', () => {
                 DropdownActivityPicklistQuestion,
                 RadioButtonsActivityPicklistQuestion,
                 AutocompleteActivityPicklistQuestion,
-                TooltipComponent
+                TooltipComponent,
+                SearchHighlightPipe
             ]
         }).compileComponents();
 
@@ -178,6 +180,11 @@ describe('ActivityPicklistAnswer', () => {
     it('should render AutocompleteActivityPicklistQuestion', () => {
         component.block = {
             ...questionBlock,
+            picklistSuggestions: [
+                { label: 'Sarcoma', isParent: true, value: 'SARCOMA' },
+                { label: 'Angiosarcoma', parent: 'Sarcoma', value: 'ANGIOSARCOMA' },
+                { label: 'Chondrosarcoma', parent: 'Sarcoma', value: 'CHONDROSARCOMA' },
+            ],
             renderMode: PicklistRenderMode.AUTOCOMPLETE
         } as ActivityPicklistQuestionBlock;
         fixture.detectChanges();

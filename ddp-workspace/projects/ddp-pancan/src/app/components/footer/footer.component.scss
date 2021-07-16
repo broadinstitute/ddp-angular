@@ -16,6 +16,7 @@ $footer-divider-color: #444444;
 
     &__wrapper {
         display: flex;
+        align-items: baseline;
     }
 
     ::ng-deep.navigation {
@@ -40,25 +41,28 @@ $footer-divider-color: #444444;
 .back-to-top {
     font-size: 1.17rem;
     text-align: left;
-    padding: 0;
+    padding: 0 5px 0 0;
+    border: 1px solid transparent;
+    flex-shrink: 0;
+
+    &:focus {
+        border-color: white;
+    }
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 .contacts__item {
     font-family: $primary-font-medium;
     margin-left: 1.5rem;
+    color: white;
 }
 
 .auth {
     display: flex;
     align-items: center;
     min-width: fit-content;
-}
-
-@media screen and (min-width: $tablet-breakpoint) {
-    .actions,
-    .back-to-top {
-        font-size: 1rem;
-    }
 }
 
 @media screen and (min-width: $desktop-breakpoint) {
@@ -95,5 +99,29 @@ $footer-divider-color: #444444;
             flex-direction: column;
             line-height: 35px;
         }
+    }
+}
+
+@media screen and (min-width: $tablet-breakpoint) {
+    .actions,
+    .back-to-top {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+    .contacts {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &__item {
+            margin-left: 0;
+        }
+    }
+
+    .back-to-top {
+        width: fit-content;
     }
 }

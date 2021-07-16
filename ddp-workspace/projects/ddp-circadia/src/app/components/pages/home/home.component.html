@@ -92,7 +92,7 @@
             >{{ Question.Title }}
           </mat-expansion-panel-header>
 
-          {{ Question.Answer }}
+          <div [innerHTML]="Question.Answer"></div>
         </mat-expansion-panel>
       </ng-container>
     </mat-accordion>

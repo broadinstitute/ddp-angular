@@ -60,4 +60,23 @@ export class ActivitiesListComponent {
   onViewClick(activity: ActivityInstance): void {
     this.viewActivity.emit(activity);
   }
+
+  hasPreviousInstance(activity: ActivityInstance): boolean {
+    return !!activity.previousInstanceGuid;
+  }
+
+  getActivityStatusCode(activity: ActivityInstance): ActivityStatusCodes {
+    if (this.hasPreviousInstance(activity)) {
+      if (
+        activity.statusCode === ActivityStatusCodes.CREATED ||
+        activity.statusCode === ActivityStatusCodes.IN_PROGRESS
+      ) {
+        return ActivityStatusCodes.IN_PROGRESS;
+      }
+
+      return ActivityStatusCodes.COMPLETE;
+    }
+
+    return activity.statusCode as ActivityStatusCodes;
+  }
 }
