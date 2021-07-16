@@ -29,7 +29,7 @@
             },
             "LearnMoreSection": {
                 "Title": "La experiencia de cada paciente con cáncer debe tenerse en cuenta.",
-                "Text": "Las historias clínicas, las muestras de tumores y las experiencias personales de los pacientes contienen pistas (sobre qué tipos de cáncer responderán o serán resistentes a qué tratamientos) que no suelen encontrarse en los laboratorios de investigación o ensayos clínicos. <span class=\"italic\">Count Me In</span> permite que los pacientes con cáncer de cualquier ubicación compartan su información con investigadores de todas partes, para ayudar a descubrir patrones en los datos.",
+                "Text": "Las historias clínicas, las muestras de tumores y las experiencias personales de los pacientes contienen pistas (sobre qué tipos de cáncer responderán o serán resistentes a qué tratamientos) que no suelen encontrarse en los laboratorios de investigación o ensayos clínicos. <span class=\"Italic\">Count Me In</span> permite que los pacientes con cáncer de cualquier ubicación compartan su información con investigadores de todas partes, para ayudar a descubrir patrones en los datos.",
                 "LearnMoreAboutUsButton": "Más información sobre nosotros"
             },
             "JoinSection": {
@@ -150,25 +150,28 @@
                 {
                     "Title": "Impacto",
                     "Paragraphs": [
-                        "Hasta la fecha, se han registrado más de 8,500 pacientes de Estados Unidos y Canadá para participar en proyectos de investigación de Count Me In, que comprenden varios tipos de cáncer diferentes. El equipo de Count Me In desea agradecer a cada uno de los pacientes que ha participado.",
+                        "Hasta la fecha, se han registrado más de 8,500 pacientes de Estados Unidos y Canadá para participar en proyectos de investigación de Count Me In, que comprenden varios tipos de cáncer diferentes. El equipo de Count Me In desea agradecer a cada uno de los pacientes que ha participado.",
                         "Gracias a esta asociación profunda se han generado grandes volúmenes de datos que han derivado en más de diez publicaciones de datos en almacenes de información científica de todos los proyectos actuales de Count Me In.",
-                        "Científicos de todas partes del mundo han usado datos de Count Me In para realizar descubrimientos en muchos sectores diversos y para desarrollar nuevos ensayos clínicos, como en el caso del angiosarcoma. Hemos recibido comunicaciones directas de más de 60 científicos que trabajan en entornos académicos e industriales en más de 10 países y están utilizando datos de Count Me In para propulsar su investigación.",
-                        "Los resultados de los estudios en que se utilizan datos de Count Me In se están difundiendo ampliamente en publicaciones científicas y existen más de 50 citas de los conjuntos de datos de Count Me In hasta el momento."
+                        "Científicos de todas partes del mundo han usado datos de Count Me In para realizar descubrimientos en muchos sectores diversos y para desarrollar nuevos ensayos clínicos, como en el caso del angiosarcoma. Hemos recibido comunicaciones directas de más de 60 científicos que trabajan en entornos académicos e industriales en más de 10 países y están utilizando datos de Count Me In para propulsar su investigación.",
+                        "Los resultados de los estudios en que se utilizan datos de Count Me In se están difundiendo ampliamente en publicaciones científicas y existen más de 50 citas de los conjuntos de datos de Count Me In hasta el momento."
                     ],
                     "Examples": {
                         "Title": "Los siguientes son algunos ejemplos de publicaciones que usan datos de proyectos de Count Me In:",
                         "Links": [
                             {
                                 "Title": "Proline rich 11 (PRR11) overexpression amplifies PI3K signaling and promotes antiestrogen resistance in breast cancer (La sobreexpresión de la proteína 11 rica en prolina [PRR11] amplifica la señalización de la PI3K y promueve la resistencia antiestrógenos en el cáncer de mama).",
-                                "Source": "<i>Nature Communications.</i> 30 de octubre de 2020;11(1):5488."
+                                "Source": "<i>Nature Communications.</i> 30 de octubre de 2020;11(1):5488.",
+                                "Link": "https://www.nature.com/articles/s41467-020-19291-x"
                             },
                             {
                                 "Title": "Prevalence and mutational determinants of high tumor mutation burden in breast cancer (La prevalencia y los determinantes mutacionales de la carga mutacional tumoral elevada en el cáncer de mama).",
-                                "Source": "<i>Annals of Oncology</i>. Marzo de 2020;31(3):387-394.<br/>BioRxiv 745265 [preimpresión; agosto de 2019]."
+                                "Source": "<i>Annals of Oncology</i>. Marzo de 2020;31(3):387-394.<br/>BioRxiv 745265 [preimpresión; agosto de 2019].",
+                                "Link": "https://www.annalsofoncology.org/article/S0923-7534(19)40698-4/fulltext"
                             },
                             {
                                 "Title": "The Angiosarcoma Project: enabling genomic and clinical discoveries in a rare cancer through patient-partnered research (El proyecto sobre angiosarcoma: propiciar descubrimientos genómicos y clínicos en un tipo de cáncer poco frecuente mediante investigaciones en asociación con pacientes).",
-                                "Source": "<i>Nature Medicine</i>. Febrero de 2020;26(2):181-187.<br/>BioRxiv 741744 [preimpresión; agosto de 2019]."
+                                "Source": "<i>Nature Medicine</i>. Febrero de 2020;26(2):181-187.<br/>BioRxiv 741744 [preimpresión; agosto de 2019].",
+                                "Link": "https://www.nature.com/articles/s41591-019-0749-z.epdf?author_access_token=cBBx7BAXQ6Z3D-FtgKtMatRgN0jAjWel9jnR3ZoTv0OuyqpOiBwU8Z8ASb5NY9IbXk1V1KF_R5v6TTbcRFo-JeMJ0-VLX-DiOKjqfH1Idg9OXZftog_CeSSuTvzZX78hU5-xKsQ6XRMok9B76DOedQ%3D%3D"
                             }
                         ]
                     },
@@ -197,37 +200,37 @@
                 {
                     "Title": "Personal",
                     "PeopleList": [
-                        "<b>Elana Anastasio<b><br/>Directores",
-                        "<b>Roeshana Moore-Evans<b><br/>Directores",
-                        "<b>Corrie Painter<b><br/>Directores",
-                        "<b>Nikhil Wagle<b><br/>Directores",
-                        "<b>Kim Hurley<b><br/>Finanzas y subsidios",
-                        "<b>Ashley Matthews<b><br/>Finanzas y subsidios",
-                        "<b>Brett Tomson<b><br/>Alianzas científicas y comunicaciones",
-                        "<b>Colleen Nguyen<b><br/>Participación comunitaria",
-                        "<b>Christina Arecy<b><br/>Participación comunitaria",
-                        "<b>Tania Hernandez<b><br/>Participación comunitaria",
-                        "<b>Oyin Alao<b><br/>Gestión y coordinación de proyectos",
-                        "<b>Imani Boykin<b><br/>Gestión y coordinación de proyectos",
-                        "<b>Maria Cerio<b><br/>Gestión y coordinación de proyectos",
-                        "<b>Parker Chastain<b><br/>Gestión y coordinación de proyectos",
-                        "<b>Taylor Cusher<b><br/>Gestión y coordinación de proyectos",
-                        "<b>Jordan Doucette<b><br/>Gestión y coordinación de proyectos",
-                        "<b>Ayanah Dowdye<b><br/>Gestión y coordinación de proyectos",
-                        "<b>Mary McGillicuddy<b><br/>Gestión y coordinación de proyectos",
-                        "<b>Rafael Ramos<b><br/>Gestión y coordinación de proyectos",
-                        "<b>Sarah Winnicki<b><br/>Gestión y coordinación de proyectos",
-                        "<b>Ben Zola<b><br/>Gestión y coordinación de proyectos",
-                        "<b>Shahrayz Shah<b><br/>Resúmenes clínicos",
-                        "<b>Ilan Small<b><br/>Resúmenes clínicos",
-                        "<b>Delia Sosa<b><br/>Resúmenes clínicos",
-                        "<b>Lauren Sterlin<b><br/>Abstracción clínica",
-                        "<b>Beena Thomas<b><br/>Resúmenes clínicos",
-                        "<b>Daniel Abravanel<b><br/>Oncología médica",
-                        "<b>Sara Balch<b><br/>Equipo informático",
-                        "<b>Jorge Gomez Tejeda Zanudo<b><br/>Equipo informático",
-                        "<b>Esha Jain<b><br/>Equipo informático",
-                        "<b>Dewey Kim<b><br/>Equipo informático"
+                        "<b>Elana Anastasio</b><br/>Directores",
+                        "<b>Roeshana Moore-Evans</b><br/>Directores",
+                        "<b>Corrie Painter</b><br/>Directores",
+                        "<b>Nikhil Wagle</b><br/>Directores",
+                        "<b>Kim Hurley</b><br/>Finanzas y subsidios",
+                        "<b>Ashley Matthews</b><br/>Finanzas y subsidios",
+                        "<b>Brett Tomson</b><br/>Alianzas científicas y comunicaciones",
+                        "<b>Colleen Nguyen</b><br/>Participación comunitaria",
+                        "<b>Christina Arecy</b><br/>Participación comunitaria",
+                        "<b>Tania Hernandez</b><br/>Participación comunitaria",
+                        "<b>Oyin Alao</b><br/>Gestión y coordinación de proyectos",
+                        "<b>Imani Boykin</b><br/>Gestión y coordinación de proyectos",
+                        "<b>Maria Cerio</b><br/>Gestión y coordinación de proyectos",
+                        "<b>Parker Chastain</b><br/>Gestión y coordinación de proyectos",
+                        "<b>Taylor Cusher</b><br/>Gestión y coordinación de proyectos",
+                        "<b>Jordan Doucette</b><br/>Gestión y coordinación de proyectos",
+                        "<b>Ayanah Dowdye</b><br/>Gestión y coordinación de proyectos",
+                        "<b>Mary McGillicuddy</b><br/>Gestión y coordinación de proyectos",
+                        "<b>Rafael Ramos</b><br/>Gestión y coordinación de proyectos",
+                        "<b>Sarah Winnicki</b><br/>Gestión y coordinación de proyectos",
+                        "<b>Ben Zola</b><br/>Gestión y coordinación de proyectos",
+                        "<b>Shahrayz Shah</b><br/>Resúmenes clínicos",
+                        "<b>Ilan Small</b><br/>Resúmenes clínicos",
+                        "<b>Delia Sosa</b><br/>Resúmenes clínicos",
+                        "<b>Lauren Sterlin</b><br/>Abstracción clínica",
+                        "<b>Beena Thomas</b><br/>Resúmenes clínicos",
+                        "<b>Daniel Abravanel</b><br/>Oncología médica",
+                        "<b>Sara Balch</b><br/>Equipo informático",
+                        "<b>Jorge Gomez Tejeda Zanudo</b><br/>Equipo informático",
+                        "<b>Esha Jain</b><br/>Equipo informático",
+                        "<b>Dewey Kim</b><br/>Equipo informático"
                     ],
                     "ImageAlt": "Una persona"
                 }
@@ -333,7 +336,7 @@
                 {
                     "Question": "Si me he inscrito en nombre de mi hijo, ¿qué sucede cuando se convierte en adulto?",
                     "Paragraphs": [
-                        "Cuando su hijo alcance la edad en la que puede dar su propio consentimiento, debe hacerlo para continuar participando. En el caso de Estados Unidos y Canadá, esta edad varía según el estado y territorio, y oscila entre los 18 y 21 años. Count Me In se comunicará con usted antes de esta edad para obtener la información de contacto de su hijo.",
+                        "Cuando su hijo alcance la edad en la que puede dar su propio consentimiento, debe hacerlo para continuar participando. En el caso de Estados Unidos y Canadá, esta edad varía según el estado y territorio, y oscila entre los 18 y 21 años. Count Me In se comunicará con usted antes de esta edad para obtener la información de contacto de su hijo.",
                         "Si su hijo decide permanecer en el estudio, el equipo del proyecto continuará solicitando las historias clínicas y muestras de tejidos en cualquier momento durante el tratamiento de cáncer de su hijo."
                     ]
                 }
@@ -522,14 +525,14 @@
         },
         "Institutions": {
             "Fields": {
-                "Name": "Nombre del doctor",
+                "Name": "Nombre del doctor (si aplica)",
                 "Institution": "Institución",
-                "InstitutionAny": "Institución (si aplica)",
+                "InstitutionAny": "Hospital/Institución (si aplica)",
                 "City": "Ciudad",
                 "State": "Estado"
             },
             "Form": {
-                "OtherPhysician": "Otro doctor",
+                "OtherPhysician": "Otro(a) hospital/institución",
                 "OtherInstitution": "Otra institución"
             },
             "PhysicianValidation": "Complete todos los campos obligatorios."
@@ -590,7 +593,7 @@
                 "ADDRESS.VERIFY.FAILURE": "No se pudo verificar la dirección.",
                 "ADDRESS.VERIFY.CARRIER_INVALID": "No se puede verificar la dirección con el proveedor indicado.",
                 "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "No se puede verificar la dirección porque un servicio en la secuencia no responde. Vuelva a intentarlo.",
-                "ADDRESS.VERIFY.ONLY_US": "USPS solo permite validar direcciones de EE. UU.",
+                "ADDRESS.VERIFY.ONLY_US": "USPS solo permite validar direcciones de EE. UU.",
                 "ADDRESS.VERIFY.INTL_NOT_ENABLED": "En esta cuenta no se permite la verificación internacional. Envíe un mensaje a support@easypost.com.",
                 "ADDRESS.VERIFY.MISSING_STREET": "No se indicaron suficientes datos para la dirección. Se debe indicar una calle.",
                 "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "No se indicaron suficientes datos para la dirección. Se deben indicar una ciudad y un estado o un código postal.",
@@ -624,7 +627,8 @@
         },
         "TooltipAlt": "Información",
         "Validators": {
-            "DateNavyValidationRule": "La fecha es inválida"
+            "DateNavyValidationRule": "La fecha es inválida",
+            "Autocomplete": "No se encuentra {{control}}"
         },
         "SubjectPanel": {
             "Link": "Regresar a la búsqueda de participantes voluntarios",
