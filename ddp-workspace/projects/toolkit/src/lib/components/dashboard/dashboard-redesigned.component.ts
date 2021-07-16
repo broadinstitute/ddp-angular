@@ -112,7 +112,7 @@ interface DashboardParticipant {
                                 <ddp-user-activities [studyGuid]="studyGuid"
                                                      [displayedColumns]="toolkitConfig.dashboardDisplayedColumns"
                                                      [participantGuid]="participantGuid"
-                                                     [userActivities]="isParticipantOperator(participantGuid) ? operatorActivities : null"
+                                                     [activities]="isParticipantOperator(participantGuid) ? operatorActivities : null"
                                                      (open)="navigate($event, participantGuid)">
                                 </ddp-user-activities>
                             </div>

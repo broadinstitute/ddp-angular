@@ -203,11 +203,11 @@ import { SessionMementoService } from '../../../services/sessionMemento.service'
 export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, AfterContentInit {
     @Input() studyGuid: string;
     @Input() participantGuid: string;
-    @Input() userActivities: Array<ActivityInstance>;
+    @Input() activities: Array<ActivityInstance>;
     @Input() displayedColumns: Array<DashboardColumns> = ['name', 'summary', 'date', 'status', 'actions'];
     @Output() open: EventEmitter<string> = new EventEmitter();
     @Output() loadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
-    public dataSource: UserActivitiesDataSource;
+    public dataSource: UserActivitiesDataSource | Array<ActivityInstance>;
     public statusesLoaded = false;
     private states: Array<ActivityInstanceState> | null = null;
     private studyGuidObservable = new BehaviorSubject<string | null>(null);
@@ -228,7 +228,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
         if (this.participantGuid) {
             this.session.setParticipant(this.participantGuid);
         }
-        this.dataSource = new UserActivitiesDataSource(
+        this.dataSource = this.activities || new UserActivitiesDataSource(
             this.serviceAgent,
             this.logger,
             this.studyGuidObservable);
