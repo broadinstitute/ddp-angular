@@ -1,7 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from 'toolkit';
-import { ParticipantsSearchServiceAgent, EnrollmentStatusType, AnnouncementsServiceAgent, mockComponent } from 'ddp-sdk';
+import {
+    ParticipantsSearchServiceAgent,
+    EnrollmentStatusType,
+    AnnouncementsServiceAgent,
+    mockComponent,
+    SessionMementoService
+} from 'ddp-sdk';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
@@ -31,6 +37,7 @@ describe('DashboardComponent', () => {
             providers: [
                 { provide: ParticipantsSearchServiceAgent, useValue: participantsSearchSpy },
                 { provide: AnnouncementsServiceAgent, useValue: announcementsSpy },
+                { provide: SessionMementoService, useValue: {} },
                 { provide: 'toolkit.toolkitConfig', useValue: {} },
             ],
             declarations: [DashboardComponent, toolkitHeader, dashboard, subjectPanel],

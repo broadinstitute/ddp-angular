@@ -9,10 +9,14 @@ import {
     SessionMementoService,
     UserInvitationServiceAgent,
     Session,
+    GovernedParticipantsServiceAgent,
+    UserActivityServiceAgent,
+    UserProfileServiceAgent
 } from 'ddp-sdk';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 describe('DashboardRedesignedComponent', () => {
     let fixture: ComponentFixture<DashboardRedesignedComponent>;
@@ -29,8 +33,11 @@ describe('DashboardRedesignedComponent', () => {
             })
         });
         const announcementsSpy = jasmine.createSpyObj('participantsSearchSpy', { getMessages: of([]) });
+        const governedParticipantsSpy = jasmine.createSpyObj('governedParticipantsSpy', { getGovernedStudyParticipants: of([]) });
+        const userActivityServiceAgentSpy = jasmine.createSpyObj('userActivityServiceAgentSpy', { getActivities: of([]) });
         sessionMock = {
             isAuthenticatedAdminSession: () => true,
+            setParticipant: () => {},
             session: ({ participantGuid: '1243' } as Session)
         } as SessionMementoService;
         const headerConfigSpy = jasmine.createSpyObj('participantsSearchSpy', ['setupDefaultHeader']);
@@ -47,9 +54,14 @@ describe('DashboardRedesignedComponent', () => {
                 { provide: ParticipantsSearchServiceAgent, useValue: participantsSearchSpy },
                 { provide: AnnouncementsServiceAgent, useValue: announcementsSpy },
                 { provide: 'toolkit.toolkitConfig', useValue: {} },
+                { provide: 'ddp.config', useValue: {} },
                 { provide: HeaderConfigurationService, useValue: headerConfigSpy },
                 { provide: SessionMementoService, useValue: sessionMock },
                 { provide: UserInvitationServiceAgent, useValue: userInvitationSpy },
+                { provide: GovernedParticipantsServiceAgent, useValue: governedParticipantsSpy },
+                { provide: UserActivityServiceAgent, useValue: userActivityServiceAgentSpy },
+                { provide: UserProfileServiceAgent, useValue: {} },
+                { provide: TranslateService, useValue: {} },
             ],
             declarations: [DashboardRedesignedComponent, dashboard, subjectPanel],
         })

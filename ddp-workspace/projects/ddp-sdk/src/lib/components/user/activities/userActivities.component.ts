@@ -203,6 +203,7 @@ import { SessionMementoService } from '../../../services/sessionMemento.service'
 export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, AfterContentInit {
     @Input() studyGuid: string;
     @Input() participantGuid: string;
+    @Input() userActivities: Array<ActivityInstance>;
     @Input() displayedColumns: Array<DashboardColumns> = ['name', 'summary', 'date', 'status', 'actions'];
     @Output() open: EventEmitter<string> = new EventEmitter();
     @Output() loadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();

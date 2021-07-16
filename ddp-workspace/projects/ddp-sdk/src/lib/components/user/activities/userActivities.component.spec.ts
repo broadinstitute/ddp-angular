@@ -1,7 +1,14 @@
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { UserActivitiesComponent, UserActivityServiceAgent, LoggingService, ActivityServiceAgent, AnalyticsEventsService } from 'ddp-sdk';
+import {
+    UserActivitiesComponent,
+    UserActivityServiceAgent,
+    LoggingService,
+    ActivityServiceAgent,
+    AnalyticsEventsService,
+    SessionMementoService
+} from 'ddp-sdk';
 import { Observable, of } from 'rxjs';
 import { ActivityInstanceStatusServiceAgent } from '../../../services/serviceAgents/activityInstanceStatusServiceAgent.service';
 import { MatTableModule } from '@angular/material/table';
@@ -44,6 +51,7 @@ describe('UserActivitiesComponent', () => {
                 { provide: LoggingService, useValue: {} },
                 { provide: ActivityServiceAgent, useValue: {} },
                 { provide: AnalyticsEventsService, useValue: analyticsSpy },
+                { provide: SessionMementoService, useValue: {} },
                 { provide: 'ddp.config', useValue: {} },
             ],
             declarations: [UserActivitiesComponent],

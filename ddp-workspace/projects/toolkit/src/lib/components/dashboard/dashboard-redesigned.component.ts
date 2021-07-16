@@ -15,7 +15,7 @@ import {
     ActivityInstance,
     UserProfileServiceAgent
 } from 'ddp-sdk';
-import { map, take, filter, switchMap } from 'rxjs/operators';
+import { map, take, filter, switchMap, tap } from 'rxjs/operators';
 import { combineLatest, Observable, of } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -112,6 +112,7 @@ interface DashboardParticipant {
                                 <ddp-user-activities [studyGuid]="studyGuid"
                                                      [displayedColumns]="toolkitConfig.dashboardDisplayedColumns"
                                                      [participantGuid]="participantGuid"
+                                                     [userActivities]="isParticipantOperator(participantGuid) ? operatorActivities : null"
                                                      (open)="navigate($event, participantGuid)">
                                 </ddp-user-activities>
                             </div>
@@ -130,6 +131,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
     public invitationId: string | null = null;
     public dashboardParticipants$: Observable<DashboardParticipant[]>;
     public panelsState = new Map<string, boolean>();
+    public operatorActivities: Array<ActivityInstance>;
 
     constructor(
         private headerConfig: HeaderConfigurationService,
@@ -163,7 +165,11 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
     private getDashboardParticipants(): Observable<DashboardParticipant[]> {
         return combineLatest([
             this.getOperatorActivities()
-                .pipe(switchMap((userActivities) => userActivities?.length ? this.userProfile.profile : of(null))),
+                .pipe(
+                    tap((userActivities) => {
+                        this.operatorActivities = userActivities;
+                    }),
+                    switchMap((userActivities) => userActivities?.length ? this.userProfile.profile : of(null))),
             this.governedParticipantsAgent.getGovernedStudyParticipants(this.config.studyGuid)
         ]).pipe(map(([operatorParticipant, participants]) => {
             const result: DashboardParticipant[] = participants.map((participant, i) => ({
@@ -213,5 +219,9 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
 
     public addParticipant(): void {
         this.router.navigate([this.toolkitConfig.addParticipantUrl]);
+    }
+
+    public isParticipantOperator(participantGuid): boolean {
+        return participantGuid === this.session.session?.userGuid;
     }
 }
