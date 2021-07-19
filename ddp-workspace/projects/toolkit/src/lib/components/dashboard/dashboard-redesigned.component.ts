@@ -179,7 +179,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
                 userGuid: participant.userGuid,
                 label: (participant.userProfile.firstName || participant.userProfile.lastName)
                     ? `${participant.userProfile.firstName} ${participant.userProfile.lastName}`
-                    : `${this.translate.instant('Toolkit.Dashboard.ChildLabel')} ${i > 0 ? '#' + (i + 1) : ''}`,
+                    : `${this.translate.instant('Toolkit.Dashboard.ChildLabel')}${i > 0 ? ' #' + (i + 1) : ''}`,
             }));
             if (operatorParticipant) {
                 result.unshift({

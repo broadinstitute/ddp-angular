@@ -202,6 +202,7 @@ import { SessionMementoService } from '../../../services/sessionMemento.service'
 })
 export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, AfterContentInit {
     @Input() studyGuid: string;
+    // in case we use multiple ddp-user-activities component instances on the page we can't use session participantGuid
     @Input() participantGuid: string;
     @Input() activities: Array<ActivityInstance>;
     @Input() displayedColumns: Array<DashboardColumns> = ['name', 'summary', 'date', 'status', 'actions'];

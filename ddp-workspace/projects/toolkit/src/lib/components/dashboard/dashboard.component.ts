@@ -68,6 +68,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     public ngOnInit(): void {
         if (this.useParticipantDashboard) {
+            // in order to prevent participant data call
             this.session.setParticipant(null);
         }
         this.studyGuid = this.toolkitConfiguration.studyGuid;
