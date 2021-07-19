@@ -28,10 +28,7 @@ export class StudyRedirectCommand implements WorkflowCommand {
             maxWidth: '500px',
             data: {
                 title: 'Toolkit.Dialogs.StudyRedirect.Title',
-                content: [
-                    'Toolkit.Dialogs.StudyRedirect.Text1',
-                    'Toolkit.Dialogs.StudyRedirect.Text2'
-                ],
+                content: 'Toolkit.Dialogs.StudyRedirect.Content',
                 contentSubstitutions: {
                     study: this.action.data.studyName
                 },

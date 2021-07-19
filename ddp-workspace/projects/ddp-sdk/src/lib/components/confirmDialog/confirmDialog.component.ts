@@ -9,7 +9,7 @@ import { ThemePalette } from '@angular/material/core';
 })
 export class ConfirmDialogComponent {
     title: string;
-    content?: string[];
+    content?: string;
     contentSubstitutions?: object;
     confirmBtnText: string;
     cancelBtnText: string;
@@ -17,7 +17,7 @@ export class ConfirmDialogComponent {
 
     constructor(@Inject(MAT_DIALOG_DATA) data) {
         this.title = data.title;
-        this.content = data.content || [];
+        this.content = data.content || '';
         this.contentSubstitutions = {...data.contentSubstitutions};
         this.confirmBtnText = data.confirmBtnText;
         this.cancelBtnText = data.cancelBtnText;
