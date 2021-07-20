@@ -24,12 +24,12 @@
         "HomePage": {
             "JoinCountMeInButton": "Únase a Count Me In",
             "IntroductionSection": {
-                "Title": "Contribuya directamente al futuro de la investigación del cáncer.",
+                "Title": "Actuemos juntos para dejar huella en el futuro de la investigación del cáncer.",
                 "Text": "Count Me In es una iniciativa de investigación sin fines de lucro que involucra a los pacientes y les permite hacer avances en la investigación del cáncer al compartir sus muestras, su información clínica y sus puntos de vista."
             },
             "LearnMoreSection": {
                 "Title": "La experiencia de cada paciente con cáncer debe tenerse en cuenta.",
-                "Text": "Las historias clínicas, las muestras de tumores y las experiencias personales de los pacientes contienen pistas (sobre qué tipos de cáncer responderán o serán resistentes a qué tratamientos) que no suelen encontrarse en los laboratorios de investigación o ensayos clínicos. <span class=\"Italic\">Count Me In</span> permite que los pacientes con cáncer de cualquier ubicación compartan su información con investigadores de todas partes, para ayudar a descubrir patrones en los datos.",
+                "Text": "Las historias clínicas, las muestras de tumores y las experiencias personales de los pacientes contienen pistas (sobre qué tipos de cáncer responderán o serán resistentes a qué tratamientos) que no suelen encontrarse en los laboratorios de investigación o ensayos clínicos. <span class=\"Italic\">Count Me In</span> permite que los pacientes con cáncer, sin importar donde vivan, compartan su información con investigadores de todas partes, para ayudar a descubrir patrones en los datos.",
                 "LearnMoreAboutUsButton": "Más información sobre nosotros"
             },
             "JoinSection": {
@@ -85,7 +85,7 @@
                     "Step": "PASO 1",
                     "Time": "(de 10 a 15 minutos)",
                     "Title": "Dé su consentimiento para el estudio",
-                    "Text": "Esta sección consta de varias páginas, así que tómese el tiempo que desee. Su progreso se guardará de manera automática para que pueda regresar más tarde. Si se inscribe por su hijo o con este, dependiendo de la edad del niño también podríamos pedirle que dé su “asentimiento” o que acepte que también desea participar en el estudio.",
+                    "Text": "Esta sección consiste de varias páginas, así que tómese el tiempo que desee. Su progreso se guardará automáticamente para que pueda regresar más tarde. Si se inscribe por su hijo(a) o junto con su hijo(a), dependiendo de la edad del niño(a) también podríamos pedirle que dé su “asentimiento” o que acepte que también desea participar en el estudio.",
                     "Button": "Ver el documento de consentimiento",
                     "ImageAlt": "Pantalla de computadora que muestra un formulario de consentimiento en línea"
                 },
@@ -93,7 +93,7 @@
                     "Step": "PASO 2",
                     "Time": "(5 minutos)",
                     "Title": "Indique dónde ha recibido tratamiento",
-                    "Text": "Indique dónde ha recibido tratamiento para el cáncer. Les preguntamos a los pacientes dónde han recibido tratamiento para poder solicitar sus historias clínicas y, según corresponda, el tejido almacenado de su tumor.",
+                    "Text": "Indique dónde ha recibido tratamiento para su cáncer. Les preguntamos a los pacientes dónde han recibido tratamiento para poder solicitar sus registros medicos y, si corresponde, el tejido almacenado de su tumor.",
                     "Button": "Ver el formulario de divulgación de información médica",
                     "ImageAlt": "Pantalla de computadora que muestra un centro médico"
                 },
@@ -127,10 +127,10 @@
                 {
                     "Title": "Objetivos",
                     "Paragraphs": [
-                        "Count Me In es un estudio de investigación del cáncer en asociación con los pacientes que está disponible para todas las personas de Estados Unidos o Canadá que alguna vez hayan recibido un diagnóstico de cáncer. El objetivo de Count Me In es transformar la atención del cáncer al permitir que todos los pacientes con esta enfermedad agilicen la investigación biomédica al compartir sus muestras de cáncer, información clínica y experiencias. Esta asociación da lugar a conjuntos de datos sobre el cáncer que contienen información clínica, genómica, molecular y provista por los pacientes sin incluir datos personales. Con el fin de agilizar los descubrimientos, los datos de Count Me In se comparten periódicamente con la comunidad de investigación biomédica por medio de almacenes de información científica tales como el cBioPortal for Cancer Genomics y el Genomic Data Commons del Instituto Nacional del Cáncer.",
-                        "Todas las personas que se inscriban en Count Me In podrán brindar muestras de saliva, además de datos informados por los pacientes, a través de una serie de encuestas sobre temas tales como su historia clínica, sus experiencias con el cáncer y sus antecedentes familiares de cáncer. Estudiar a este amplio grupo transversal de pacientes que representa muchos tipos de cáncer diferentes, centros de tratamiento y edades u otros datos demográficos comporta un valor científico increíble. Cuanto más representen los participantes de la investigación la verdadera diversidad total de los pacientes de cáncer y sus experiencias, mayor será el impacto que los descubrimientos científicos puedan tener para todos.",
-                        "Se obtendrán muestras biológicas adicionales, como muestras de tumores, muestras de sangre y muestras de heces, de determinadas cohortes de pacientes y se utilizarán para generar datos genómicos y moleculares para su posterior análisis. Estos datos resultantes se vincularán con la información genómica de las muestras de sangre, la información clínica de las historias clínicas y la información provista por los pacientes en las encuestas, y se compartirán con la comunidad de investigación biomédica. Al integrar todos estos aspectos diferentes e importantes del cáncer, los conjuntos de datos obtenidos mediante Count Me In agilizarán los descubrimientos de la investigación en muchos sectores distintos.",
-                        "Este abordaje de Count Me In permite crear y estudiar en profundidad cohortes de pacientes no solo dentro de un mismo tipo de cáncer, sino que también abarquen datos cruzados de distintos tipos de cáncer, como todos los pacientes que reciben un tratamiento determinado, como inmunoterapia, o los pacientes dentro de un grupo etario dado, como adolescentes y adultos jóvenes. Count Me In ha desarrollado y continuará desarrollando iniciativas de investigación en torno a diferentes poblaciones y cohortes de pacientes. A medida que se unan más personas, habrá más oportunidades de dar comienzo a estudios más profundos dentro de más cohortes de pacientes."
+                        "Count Me In es un estudio de investigación del cáncer en colaboración con los pacientes que está disponible para todas las personas de Estados Unidos o Canadá que alguna vez hayan recibido un diagnóstico de cáncer. El objetivo de Count Me In es transformar la atención del cáncer al permitir que todos los pacientes con esta enfermedad agilicen la investigación biomédica al compartir sus muestras de cáncer, información clínica y experiencias. Esta colaboración da lugar a conjuntos de datos sobre el cáncer que contienen información clínica, genómica, molecular e información reportada por el paciente sin incluir datos personales. Con el fin de acelerar los descubrimientos, los datos de Count Me In se comparten periódicamente con la comunidad de investigación biomédica a través de repositorios científicos como cBioPortal for Cancer Genomics y el Genomic Data Commons del Instituto Nacional del Cáncer.",
+                        "Todas las personas que se inscriban en Count Me In podrán brindar muestras de saliva, además de información reportada por el paciente, a través de una serie de encuestas sobre temas tales como su historia clínica, sus experiencias con el cáncer y sus antecedentes familiares de cáncer. Existe un enorme valor científico en estudiar este gran grupo de pacientes que representan muchos diferentes tipos de cáncer, instituciones de tratamiento y edades u otros datos demográficos. Cuanto más representen los participantes de la investigación la verdadera diversidad total de los pacientes de cáncer y sus experiencias, mayor será el impacto que los descubrimientos científicos pueden tener para todos.",
+                        "Se obtendrán muestras biológicas adicionales, como muestras de tumores, muestras de sangre y muestras de heces, de determinadas cohortes de pacientes y se utilizarán para generar datos genómicos y moleculares para sus análisis. Estos datos resultantes se vincularán con la información genómica de las muestras de sangre, la información clínica de las historias clínicas y la información provista por los pacientes en las encuestas, y se compartirán con la comunidad de investigación biomédica. Al integrar todos estos aspectos diferentes e importantes del cáncer, los conjuntos de datos obtenidos mediante Count Me In acelerarán los descubrimientos de la investigación en muchos sectores distintos.",
+                        "Esta estrategia propuesta por Count Me In permite crear y estudiar a profundidad cohortes de pacientes no solo dentro de un mismo tipo de cáncer, sino que también abarquen datos de distintos tipos de cáncer, como todos los pacientes que reciben un tratamiento determinado, como inmunoterapia, o los pacientes dentro de un grupo de edad específicos, como adolescentes y adultos jóvenes. Count Me In ha desarrollado y continuará desarrollando iniciativas de investigación en torno a diferentes poblaciones y cohortes de pacientes. A medida que se unan más personas, habrá más oportunidades de dar comienzo a estudios más profundos dentro de más cohortes de pacientes."
                     ]
                 },
                 {
@@ -142,7 +142,7 @@
                         { "key": "ESC", "label": "Esophageal and Stomach Cancer Project" },
                         { "key": "LMS", "label": "Leiomyosarcoma Project" },
                         { "key": "MBC", "label": "Metastatic Breast Cancer Project" },
-                        { "key": "MBCSpanish", "label": "Proyecto sobre cáncer de mama metastásico en español" },
+                        { "key": "MBCSpanish", "label": "Proyecto de cáncer de mama metastásico en español" },
                         { "key": "MPC", "label": "Metastatic Prostate Cancer Project" },
                         { "key": "Osteo", "label": "Osteosarcoma Project" }
                     ]
@@ -151,7 +151,7 @@
                     "Title": "Impacto",
                     "Paragraphs": [
                         "Hasta la fecha, se han registrado más de 8,500 pacientes de Estados Unidos y Canadá para participar en proyectos de investigación de Count Me In, que comprenden varios tipos de cáncer diferentes. El equipo de Count Me In desea agradecer a cada uno de los pacientes que ha participado.",
-                        "Gracias a esta asociación profunda se han generado grandes volúmenes de datos que han derivado en más de diez publicaciones de datos en almacenes de información científica de todos los proyectos actuales de Count Me In.",
+                        "Gracias a esta colaboración profunda se han generado grandes volúmenes de datos que han derivado en más de diez publicaciones de datos en repositorios científicos de todos los proyectos actuales de Count Me In.",
                         "Científicos de todas partes del mundo han usado datos de Count Me In para realizar descubrimientos en muchos sectores diversos y para desarrollar nuevos ensayos clínicos, como en el caso del angiosarcoma. Hemos recibido comunicaciones directas de más de 60 científicos que trabajan en entornos académicos e industriales en más de 10 países y están utilizando datos de Count Me In para propulsar su investigación.",
                         "Los resultados de los estudios en que se utilizan datos de Count Me In se están difundiendo ampliamente en publicaciones científicas y existen más de 50 citas de los conjuntos de datos de Count Me In hasta el momento."
                     ],
@@ -175,7 +175,7 @@
                             }
                         ]
                     },
-                    "FinalText": "El impacto colectivo de Count Me In y los pacientes participantes seguirá ampliándose a medida que continúe el trabajo de Count Me In. Todos los días, hay más pacientes asociados que se registran para participar, proyectos adicionales que se lanzarán, conjuntos de datos ampliados que se generarán y compartirán, y más descubrimientos que se harán para mejorar la vida de los pacientes con cáncer."
+                    "FinalText": "El impacto colectivo de Count Me In y los pacientes participantes seguirá creciendo a medida que continúe el trabajo de Count Me In. Todos los días, hay más pacientes que se unen y que se registran para participar, proyectos adicionales que se lanzarán, conjuntos de datos ampliados que se generarán y compartirán, y más descubrimientos que se harán para mejorar la vida de los pacientes con cáncer."
                 }
             ]
         },
@@ -185,14 +185,14 @@
                 {
                     "Title": "Misión",
                     "Paragraphs": [
-                        "Count Me In es una organización sin fines de lucro que propulsa iniciativas de investigación que adoptan un abordaje único para la investigación del cáncer. Count Me In tiene un fuerte compromiso con hacer valer las experiencias de todos los pacientes con el objetivo de comprender el cáncer en mayor profundidad. Para ello, trabajamos directamente con los pacientes como nuestros socios para agilizar los descubrimientos. Nuestra meta es empoderar a las personas que tienen cáncer, incluidas las provenientes de comunidades marginadas que históricamente se han excluido de las investigaciones, sin importar dónde vivan, a que ayuden a desarrollar avances y agilizar la investigación biomédica.",
-                        "Los pacientes que participan ayudan a dar forma e impulso a la investigación al aportar información sobre el cáncer y su experiencia a través de encuestas para pacientes, y al dar acceso directo a sus historias clínicas y muestras biológicas para poder estudiarlas y analizarlas, entre otras cosas. El equipo de Count Me In trabaja con ingenieros de software y científicos informáticos para recopilar, analizar y compartir datos anonimizados a partir de los aportes de los participantes. Los datos generados por Count Me In se comparten periódicamente en plataformas científicas para que los investigadores de todas partes puedan usarlos con el fin de realizar descubrimientos significativos."
+                        "Count Me In es una organización sin fines de lucro que impulsa iniciativas de investigación que adoptan una estrategia única para la investigación del cáncer. Count Me In tiene un fuerte compromiso con hacer valer las experiencias de todos los pacientes con el objetivo de entender con mayor profundidad el cáncer. Para ello, trabajamos directamente con los pacientes como nuestros aliados para agilizar los descubrimientos. Nuestra meta es empoderar a las personas que tienen cáncer, incluyendo a aquellas que pertenecen a comunidades marginadas que históricamente han sido excluidas de la investigaciones, sin importar dónde vivan, a que ayuden a desarrollar avances y agilizar la investigación biomédica.",
+                        "Los pacientes que participan ayudan a dar forma e impulsan a la investigación al aportar información sobre el cáncer y su experiencia a través de encuestas para pacientes, y al dar acceso directo a sus registros médicos y muestras biológicas para poder estudiarlas y analizarlas, entre otras cosas. El equipo de Count Me In trabaja con ingenieros de software y científicos informáticos para recopilar, analizar y compartir datos anonimizados a partir de los aportes de los participantes. Los datos generados por Count Me In se comparten periódicamente en plataformas científicas para que los investigadores de todas partes puedan usarlos con el fin de realizar descubrimientos significativos."
                     ]
                 },
                 {
                     "Title": "Historia e hitos",
                     "Paragraphs": [
-                        "Count Me In (CMI) se originó de los diálogos entre Emerson Collective y Broad Institute of MIT y Harvard en 2013. Desde el lanzamiento del primer proyecto sobre cáncer de mama metastásico a fines de 2015, miles de personas con cáncer de todo Estados Unidos y Canadá se han inscrito en “Count Me In” para asociarse con los investigadores y compartir sus experiencias. El proyecto sobre cáncer de mama metastásico (Metastatic Breast Cancer, MBC) fue la primera iteración de esta nueva visión, seguido por el proyecto sobre angiosarcoma (Angiosarcoma, ASC) en 2017 y el proyecto sobre cáncer de próstata metastásico (Metastatic Prostate Cancer, MPC) en 2018. Desde entonces, CMI también ha lanzado el proyecto sobre cáncer de esófago y estómago (Esophageal and Stomach Cancer Project), el proyecto sobre osteosacroma (Osteosarcoma, OS) y el proyecto sobre tumores cerebrales (Brain Tumor, BT). En otoño de 2021, se abrió la inscripción en Count Me In a todos los pacientes de Estados Unidos o Canadá a los que alguna vez se les ha diagnosticado cáncer.",
+                        "Count Me In (CMI) se originó de conversaciones entre Emerson Collective y Broad Institute of MIT y Harvard en 2013. Desde el lanzamiento del primer proyecto de cáncer de mama metastásico a fines de 2015, miles de personas con cáncer de todo Estados Unidos y Canadá se han inscrito en “Count Me In” para asociarse con los investigadores y compartir sus experiencias. El proyecto de cáncer de mama metastásico (Metastatic Breast Cancer, MBC) fue la primera iteración de esta nueva visión, seguido por el proyecto sobre angiosarcoma (Angiosarcoma, ASC) en 2017 y el proyecto de cáncer de próstata metastásico (Metastatic Prostate Cancer, MPC) en 2018. Desde entonces, CMI también ha lanzado el proyecto sobre cáncer de esófago y estómago (Esophageal and Stomach Cancer Project), el proyecto de osteosacroma (Osteosarcoma, OS) y el proyecto de tumor cerebral (Brain Tumor, BT). En otoño de 2021, se abrió la inscripción en Count Me In a todos los pacientes de Estados Unidos o Canadá que alguna vez hayan sido diagnosticados con cáncer.",
                         "Count Me In cuenta con el patrocinio de <a href=\"#\">Emerson Collective</a>, una organización orientada al cambio social con sede en California; <a href=\"#\">Broad Institute</a>, una institución de investigación biomédica líder sin fines de lucro; y <a href=\"#\">Dana Farber Cancer Institute</a>, un hospital oncológico líder."
                     ],
                     "ImageAlt": "Hitos de proyectos"
@@ -221,11 +221,11 @@
                         "<b>Rafael Ramos</b><br/>Gestión y coordinación de proyectos",
                         "<b>Sarah Winnicki</b><br/>Gestión y coordinación de proyectos",
                         "<b>Ben Zola</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Shahrayz Shah</b><br/>Resúmenes clínicos",
-                        "<b>Ilan Small</b><br/>Resúmenes clínicos",
-                        "<b>Delia Sosa</b><br/>Resúmenes clínicos",
+                        "<b>Shahrayz Shah</b><br/>Abstracción clínica",
+                        "<b>Ilan Small</b><br/>Abstracción clínica",
+                        "<b>Delia Sosa</b><br/>Abstracción clínica",
                         "<b>Lauren Sterlin</b><br/>Abstracción clínica",
-                        "<b>Beena Thomas</b><br/>Resúmenes clínicos",
+                        "<b>Beena Thomas</b><br/>Abstracción clínica",
                         "<b>Daniel Abravanel</b><br/>Oncología médica",
                         "<b>Sara Balch</b><br/>Equipo informático",
                         "<b>Jorge Gomez Tejeda Zanudo</b><br/>Equipo informático",
@@ -247,40 +247,40 @@
                 {
                     "Question": "¿Qué es Count Me In?",
                     "Paragraphs": [
-                        "Count Me In es una iniciativa de investigación sin fines de lucro que permite a los pacientes hacer avances en la investigación del cáncer al compartir sus muestras, su información clínica y sus puntos de vista. Con el consentimiento de los pacientes, todos los datos recabados por Count Me In y generados por medio del proyecto se comparten periódicamente con la comunidad de investigación (después de extraer la información de identificación personal) a través de bases de datos de información científica disponibles sin cargo, de modo que los investigadores de cualquier parte puedan ayudar a agilizar los descubrimientos, ampliar nuestros conocimientos sobre el cáncer y desarrollar nuevas estrategias de tratamiento y, así, derribar las divisiones que existen en la investigación del cáncer."
+                        "Count Me In es una iniciativa de investigación sin fines de lucro que permite a los pacientes hacer avances en la investigación del cáncer al compartir sus muestras, su información clínica y sus puntos de vista. Con el consentimiento de los pacientes, todos los datos recabados por Count Me In y generados por medio del proyecto se comparten periódicamente con la comunidad de investigación (después de remover la información de identificación personal) a través de bases de datos de información científica disponibles gratuitamente, de modo que los investigadores de cualquier parte puedan ayudar a agilizar los descubrimientos, ampliar nuestros conocimientos sobre el cáncer y desarrollar nuevas estrategias de tratamiento y, así, derribar las divisiones que existen en la investigación del cáncer."
                     ]
                 },
                 {
                     "Question": "¿Por qué es necesario?",
                     "Paragraphs": [
-                        "Los pacientes tienen un poder singular para hacer avanzar la investigación del cáncer. Las historias clínicas, las muestras de tumores y las experiencias personales de los pacientes contienen pistas (sobre qué tipos de cáncer responderán o serán resistentes a qué tratamientos) que no suelen encontrarse en los laboratorios de investigación o ensayos clínicos.<br/>La mayoría de los pacientes nunca han tenido la oportunidad de participar en una investigación, porque casi todos los pacientes de cáncer reciben atención en entornos comunitarios donde no se llevan a cabo estos tipos de investigaciones. A la mayoría de los pacientes nunca les han preguntado si les gustaría aportar sus muestras de tejidos e información médica con fines de investigación.<br/>Para responder muchas preguntas importantes sobre el cáncer se necesitarán la participación y el empoderamiento de muchos más pacientes como socios, además de ofrecer a todas las personas que tienen cáncer la oportunidad de participar en investigaciones revolucionarias, independientemente de que vivan cerca de un hospital de investigación o no. La meta de Count Me In es hacer que esto sea posible."
+                        "Los pacientes tienen el poder de avanzar la investigación del cáncer una forma única. Los registros médicos, las muestras de tumores y las experiencias personales de los pacientes contienen pistas (sobre qué tipos de cáncer responderán o serán resistentes a qué tratamientos) que no suelen encontrarse en los laboratorios de investigación o ensayos clínicos.<br/>La mayoría de los pacientes nunca han tenido la oportunidad de participar en estudios de investigación, porque casi todos los pacientes de cáncer reciben atención en clínicas comunitarias donde no se llevan a cabo estos estudios de investigación. A la mayoría de los pacientes nunca les han preguntado si les gustaría compartir sus muestras de tejidos e información médica con fines de investigación.<br/>Para responder muchas preguntas importantes sobre el cáncer se necesitarán la participación y el empoderamiento de muchos más pacientes como aliados, además de ofrecer a todas las personas que tienen cáncer la oportunidad de participar en investigaciones revolucionarias, independientemente de que vivan cerca de un hospital de investigación o no. La meta de Count Me In es hacer que esto sea posible."
                     ]
                 },
                 {
                     "Question": "¿Cómo puedo participar?",
                     "Paragraphs": [
-                        "Si a usted o a su hijo alguna vez le han diagnosticado cáncer, y vive en Estados Unidos o en territorios estadounidenses, incluido Puerto Rico, o si vive en Canadá, puede inscribirse haciendo clic en “Count Me In”. <a class='Link' href='/participation'>Haga clic aquí</a> para obtener más información sobre la participación.",
-                        "Si usted es un investigador del cáncer, puede tener acceso a los datos generados a través de los proyectos de Count Me In por medio de bases de datos actuales disponibles al público, como el cBioPortal for Cancer Genomics y el Genomic Data Commons del Instituto Nacional del Cáncer. Asimismo, puede inscribirse en nuestra lista de correo para recibir actualizaciones sobre nuevas publicaciones y divulgaciones de datos."
+                        "Si a usted o a su hijo(a) alguna vez le han diagnosticado cáncer, y vive en Estados Unidos o en territorios estadounidenses, incluido Puerto Rico, o si vive en Canadá, puede inscribirse haciendo clic en “Count Me In”. <a class='Link' href='/participation'>Haga clic aquí</a> para obtener más información sobre la participación.",
+                        "Si usted es un investigador del cáncer, puede tener acceso a los datos generados a través de los proyectos de Count Me In por medio de bases de datos actuales disponibles al público, como el cBioPortal for Cancer Genomics y el Genomic Data Commons del Instituto Nacional del Cáncer. Asimismo, puede inscribirse en nuestra lista de correo para recibir actualizaciones sobre nuevas publicaciones y lanzamientos de datos."
                     ]
                 },
                 {
                     "Question": "¿Qué hace Count Me In con los datos?",
                     "Paragraphs": [
-                        "Después de eliminar toda la información personal que identificaría con facilidad a las personas, los datos se comparten libremente con el objetivo de agilizar los descubrimientos, al permitir que los investigadores identifiquen patrones en los datos. Los lotes de datos se divulgan al público de forma periódica y están disponibles para todos los investigadores, de manera que todos pueden utilizarlos para hacer descubrimientos y avances contra el cáncer, que incluyen nuevos medicamentos y métodos de diagnóstico.",
+                        "Después de remover toda la información personal que pueda identificar con facilidad a las personas, los datos se comparten libremente con el objetivo de agilizar los descubrimientos, al permitir que los investigadores identifiquen patrones en los datos. Los lotes de datos se harán disponibles al público de forma periódica y están disponibles para todos los investigadores, de manera que todos pueden utilizarlos para hacer descubrimientos y avances contra el cáncer, que incluyen nuevos medicamentos y métodos de diagnóstico.",
                         "Enlaces rápidos a datos publicados: <br/><a class='Link' href='https://www.mbcproject.org/data-release'>https://www.mbcproject.org/data-release</a><br/><a class='Link' href='https://ascproject.org/data-release'>https://ascproject.org/data-release</a>"
                     ]
                 },
                 {
-                    "Question": "¿Cómo ha sido la participación de los pacientes en Count Me In?",
+                    "Question": "¿Cómo han participado los pacientes en Count Me In?",
                     "Paragraphs": [
-                        "Count Me In ha trabajado estrechamente con pacientes, padres, seres queridos y defensores de pacientes en diversas comunidades relacionadas con el cáncer desde los inicios del primer proyecto, el Proyecto sobre cáncer de mama metastásico, que se lanzó en 2015. Los pacientes participaron en todos los aspectos del diseño, incluidos el concepto, los objetivos, las comunicaciones, los formularios y el sitio web."
+                        "Count Me In ha trabajado estrechamente con pacientes, padres, seres queridos y grupos aliados de pacientes en diversas comunidades relacionadas con el cáncer desde los inicios del primer proyecto, el Proyecto de cáncer de mama metastásico (Metastatic Breast Cancer Project), que se lanzó en 2015. Los pacientes participaron en todos los aspectos del diseño, incluidos el concepto, los objetivos, las comunicaciones, los formularios y el sitio web."
                     ]
                 },
                 {
                     "Question": "¿Cómo aborda Count Me In la inclusividad en la participación?",
                     "Paragraphs": [
-                        "Count Me In entiende que existen muchas barreras (estructurales e históricas) que impiden la participación directa de comunidades infrarrepresentadas y marginadas en la investigación. Count Me In tiene un compromiso con el principio fundamental de que la experiencia de todos los pacientes con cáncer es importante, independientemente de dónde vivan, qué idioma hablen o cuál sea su patrimonio cultural, y la incorporación de su experiencia es imprescindible para ampliar nuestros conocimientos sobre el cáncer.",
-                        "La investigación tradicional del cáncer no se presta a ser tan inclusiva como debería. Las desigualdades en torno al cáncer son prueba de todo el trabajo que todavía queda por hacer en este ámbito, y reconocemos que nunca llegaremos a la culminación de esa labor, pero continuamos esforzándonos por lograrlo, a la par de los pacientes. Creemos que los pacientes deben ser socios directos en la investigación del cáncer y sabemos que solo podemos propulsar nuestros conocimientos sobre el cáncer y agilizar los descubrimientos si lo hacemos juntos."
+                        "Count Me In entiende que existen muchas barreras (estructurales e históricas) que impiden la participación directa de comunidades subrepresentadas y marginadas en la investigación. Count Me In tiene un compromiso con el principio fundamental de que la experiencia de todos los pacientes con cáncer es importante, independientemente de dónde vivan, qué idioma hablen o cuál sea su patrimonio cultural, y la incorporación de su experiencia es imperativa para ampliar nuestros conocimientos sobre el cáncer.",
+                        "La investigación tradicional del cáncer no se presta a ser tan inclusiva como debería. Las desigualdades en torno al cáncer son prueba de todo el trabajo que todavía queda por hacer en este espacio, y reconocemos que nunca llegaremos a la culminación de esa labor, pero continuamos esforzándonos por lograrlo, junto con pacientes. Creemos que los pacientes deben ser aliados directos en la investigación del cáncer y sabemos que solo podemos avanzar nuestros conocimientos sobre el cáncer y acelerar los descubrimientos si lo hacemos juntos."
                     ]
                 },
                 {
@@ -296,9 +296,9 @@
                     ]
                 },
                 {
-                    "Question": "¿Tiene algún costo participar en este estudio de investigación?",
+                    "Question": "¿Hay algún costo por participar en este estudio de investigación?",
                     "Paragraphs": [
-                        "Participar en este estudio no generará ningún gasto."
+                        "No hay costo por participar en este estudio."
                     ]
                 },
                 {
@@ -311,33 +311,33 @@
                     "Question": "¿Puedo dejar de participar en Count Me In?",
                     "Paragraphs": [
                         "Puede dejar de participar en Count Me In en cualquier momento. Sin embargo, no podrá retirar la información que ya se haya usado en la investigación. Para revocar su permiso, envíe un correo electrónico al equipo del estudio a info@joincountmein.org.",
-                        "Si se retira, las muestras de tejidos remanentes se devolverán a los centros de donde se obtuvieron y las muestras de saliva y/o sangre remanentes se destruirán. No se realizará ninguna otra prueba con las muestras. Tampoco solicitaremos otras historias clínicas y destruiremos las copias que tengamos en nuestro poder. No obstante, conservaremos los resultados de las pruebas que hayamos realizado y la información que hayamos obtenido a partir de sus historias clínicas durante su participación."
+                        "Si se retira, las muestras de tejidos que no se usaron se devolverán a los centros de donde se obtuvieron y las muestras de saliva y/o sangre restantes se destruirán. No se realizará ninguna otra prueba con las muestras. Tampoco solicitaremos registros médicos adicionales y destruiremos las copias que tengamos en nuestro poder. Sin embargo, conservaremos los resultados de las pruebas que hayamos realizado y la información que hayamos obtenido de sus registros médicos durante su participación."
                     ]
                 },
                 {
                     "Question": "Si decido compartir muestras de tejidos, ¿se usarán en su totalidad?",
                     "Paragraphs": [
-                        "Count Me In tomará todas las medidas para garantizar que no se utilice la totalidad de las muestras como resultado de estos estudios. Se solicitará que los patólogos que tengan acceso a las muestras de tumores almacenadas solo compartan una pequeña porción. Si no parece haber suficiente material para realizar futuras pruebas clínicas, Count Me In no solicitará muestras. Los tejidos excedentes se devolverán."
+                        "Count Me In tomará todas las medidas para garantizar que no se utilice la totalidad de las muestras como resultado de estos estudios. Se solicitará a los patólogos que tengan acceso a las muestras de tumores almacenadas que solo compartan una pequeña porción. Si no parece haber suficiente material para realizar futuras pruebas clínicas, Count Me In no solicitará muestras. Los tejidos que no fueron usados se devolverán."
                     ]
                 },
                 {
-                    "Question": "¿Qué hace Count Me In con las copias de las historias clínicas?",
+                    "Question": "¿Qué hace Count Me In con las copias de registros médicos?",
                     "Paragraphs": [
-                        "Las historias clínicas proporcionan información valiosa sobre las experiencias con el cáncer. De las historias clínicas, los investigadores pueden aprender detalles importantes como los tipos de tratamientos que recibió y durante cuánto tiempo los recibió, los detalles sobre la anatomía patológica de sus tumores, información acerca de su cáncer al momento del diagnóstico, entre otros.",
+                        "Los registros médicos proporcionan información valiosa sobre las experiencias con el cáncer. A través de los registros médicos, los investigadores pueden aprender detalles importantes como los tipos de tratamientos que recibió y durante cuánto tiempo los recibió, detalles sobre la anatomía patológica de sus tumores, información acerca de su cáncer al momento del diagnóstico, entre otros.",
                         "Para los investigadores que estudian el cáncer, es valioso poder analizar la información de su historia clínica junto con la información de sus muestras con el fin de realizar descubrimientos."
                     ]
                 },
                 {
-                    "Question": "¿Por qué Count Me In está estudiando determinadas cohortes?",
+                    "Question": "¿Por qué Count Me In está estudiando cohortes específicas?",
                     "Paragraphs": [
                         "Una cohorte consiste en un grupo de personas que comparten un conjunto de características similares. Estas podrían incluir diversos aspectos demográficos, tipos de cáncer, tipos de mutaciones, respuestas al tratamiento y mucho más. Al estudiar determinadas cohortes en profundidad, los investigadores pueden hallar patrones y detectar tendencias que podrían ayudarnos a comprender más a fondo diversos aspectos del cáncer."
                     ]
                 },
                 {
-                    "Question": "Si me he inscrito en nombre de mi hijo, ¿qué sucede cuando se convierte en adulto?",
+                    "Question": "Si me he inscrito en nombre de mi hijo(a), ¿qué sucede cuando se convierte en adulto?",
                     "Paragraphs": [
-                        "Cuando su hijo alcance la edad en la que puede dar su propio consentimiento, debe hacerlo para continuar participando. En el caso de Estados Unidos y Canadá, esta edad varía según el estado y territorio, y oscila entre los 18 y 21 años. Count Me In se comunicará con usted antes de esta edad para obtener la información de contacto de su hijo.",
-                        "Si su hijo decide permanecer en el estudio, el equipo del proyecto continuará solicitando las historias clínicas y muestras de tejidos en cualquier momento durante el tratamiento de cáncer de su hijo."
+                        "Cuando su hijo(a) alcance la edad en la que puede dar su propio consentimiento, debe hacerlo para continuar participando. En el caso de Estados Unidos y Canadá, esta edad varía según el estado y territorio, y es entre las edades de 18 y 21 años. Count Me In se comunicará con usted antes de esta edad para obtener la información de contacto de su hijo(a).",
+                        "Si su hijo(a) decide permanecer en el estudio, el equipo del proyecto continuará solicitando registros médicos y muestras de tejidos en cualquier momento durante el tratamiento de cáncer de su hijo(a)."
                     ]
                 }
             ]
