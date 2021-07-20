@@ -1,0 +1,64 @@
+<footer class="footer">
+  <div class="footer__container">
+    <ul class="link-list">
+      <li class="link-list__item">
+        <button class="link link-icon" (click)="onBackToTopClick()">
+          <mat-icon> arrow_upward</mat-icon>
+          {{ 'App.Footer.Links.Back' | translate }}
+        </button>
+      </li>
+
+      <li class="link-list__item">
+        <a class="link" [routerLink]="Route.About">
+          {{ 'App.Footer.Links.About' | translate }}
+        </a>
+      </li>
+
+      <li class="link-list__item">
+        <a class="link" [routerLink]="Route.Team">
+          {{ 'App.Footer.Links.Team' | translate }}
+        </a>
+      </li>
+
+      <li class="link-list__item">
+        <a class="link" [routerLink]="Route.FAQ">
+          {{ 'App.Footer.Links.FAQ' | translate }}
+        </a>
+      </li>
+    </ul>
+
+    <div class="contact-us">
+      <h4 class="contact-us__label">
+        {{ 'App.Footer.Contact.Label' | translate }}
+      </h4>
+
+      <div>
+        <p
+          class="info text-bold"
+          [innerHTML]="'App.Footer.Contact.Email' | translate"
+        ></p>
+
+        <p
+          class="info text-bold"
+          [innerHTML]="'App.Footer.Contact.Phone' | translate"
+        ></p>
+
+        <p class="info" style="margin-top: 1.2rem">
+          {{ 'App.Footer.Contact.Address1' | translate }}
+        </p>
+
+        <p class="info">
+          {{ 'App.Footer.Contact.Address2' | translate }}
+        </p>
+
+        <p class="info">
+          {{ 'App.Footer.Contact.Address3' | translate }}
+        </p>
+
+        <p class="info">
+          {{ 'App.Footer.Contact.Address4' | translate }}
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

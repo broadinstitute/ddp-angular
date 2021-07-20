@@ -1,0 +1,75 @@
+@import '../../../styles/colors';
+@import '../../../styles/breakpoints';
+
+.footer {
+  padding: 4.2rem 0;
+
+  background: map-get($colors, 'scarlet');
+
+  color: map-get($colors, 'font-light');
+
+  @include media-sm {
+    padding: 2.4rem 0;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+
+    max-width: 80rem;
+
+    margin: 0 auto;
+    padding: 0 2.4rem;
+
+    @include media-sm {
+      flex-flow: column nowrap;
+    }
+  }
+}
+
+.link-list {
+  list-style: none;
+
+  &__item {
+    & + & {
+      margin-top: 0.8rem;
+    }
+  }
+}
+
+.link:not(.link-icon) {
+  padding-left: 2.8rem;
+}
+
+.link-icon {
+  display: flex;
+
+  .mat-icon {
+    margin-right: 0.3rem;
+
+    font-size: 2rem;
+  }
+}
+
+.contact-us {
+  display: flex;
+
+  @include media-sm {
+    flex-flow: column nowrap;
+
+    margin-top: 2.4rem;
+    padding-left: 2.8rem;
+  }
+
+  &__label {
+    margin-right: 3.2rem;
+
+    font-weight: normal;
+
+    opacity: 0.8;
+
+    @include media-sm {
+      margin-right: 0;
+    }
+  }
+}

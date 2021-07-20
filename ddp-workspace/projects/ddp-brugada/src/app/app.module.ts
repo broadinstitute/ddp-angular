@@ -1,6 +1,7 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 import { TranslateService } from '@ngx-translate/core';
 
 import {
@@ -13,6 +14,7 @@ import {
 import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
 
 import { AppComponent } from './components/app/app.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AboutComponent } from './pages/about/about.component';
 import { FaqComponent } from './pages/faq/faq.component';
@@ -90,13 +92,20 @@ export function translateFactory(
 @NgModule({
   declarations: [
     AppComponent,
+    FooterComponent,
     HeaderComponent,
     AboutComponent,
     FaqComponent,
     HomeComponent,
     TeamComponent,
   ],
-  imports: [BrowserModule, DdpModule, ToolkitModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    MatIconModule,
+    DdpModule,
+    ToolkitModule,
+    AppRoutingModule,
+  ],
   providers: [
     {
       provide: 'ddp.config',

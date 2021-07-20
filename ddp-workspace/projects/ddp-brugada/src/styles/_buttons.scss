@@ -56,14 +56,15 @@
   text-decoration: none;
 
   cursor: pointer;
+  transition: opacity 0.3s ease;
 
   &:disabled {
-    opacity: 0.8;
+    opacity: 75%;
 
     cursor: not-allowed;
   }
 
   &:hover {
-    text-decoration: underline;
+    opacity: 75%;
   }
 }

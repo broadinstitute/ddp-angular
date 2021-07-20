@@ -2,11 +2,12 @@ $__scarlet: #b44142;
 
 $colors: (
   'font-dark': #261d1c,
+  'font-light': #ffffff,
   'scarlet': $__scarlet,
   'scarlet:hover': darken($__scarlet, 4%),
   'scarlet:active': darken($__scarlet, 7%),
   'beige': #e1ddcf,
-  'beige:dark:1': #BFBAAF,
-  'beige:dark:2': #5A5656,
+  'beige:dark:1': #bfbaaf,
+  'beige:dark:2': #5a5656,
   'white': #ffffff,
 );
