@@ -18,6 +18,7 @@
     "About": "About the Study",
     "Q&A": "Q&A",
     "WhoWeAre": "Who We Are",
+    "ResultsDashboard": "Results Dashboard",
     "StayInformed": "Stay Informed",
     "Help": "Help",
     "Dashboard": "My Dashboard",
@@ -70,17 +71,23 @@
       "Full": "We are currently fully enrolled.  Please check back in for future updates!"
     },
     "AboutSection": {
-      "Title": "About the Study",
-      "Text": "Our goal is to watch the infection rate of COVID-19 in Massachusetts over time. Some communities have higher infection rates than others. Some people catch COVID-19 and don’t have symptoms. We hope our study will help us understand COVID-19 better, and benefit patients with and without COVID in the future.",
-      "Questions": {
-        "Title": "Questions we are trying to answer:",
-        "List": [
-          "How common is COVID-19 in our communities?",
-          "How common it is to have COVID-19 without symptoms?",
-          "Do people become immune to COVID-19 after they have it?",
-          "How can researchers test many people while they are at home?"
-        ]
-      }
+        "Title": "About the Study",
+        "Text": "Our goal is to watch the infection rate of COVID-19 in Massachusetts over time. Some communities have higher infection rates than others. Some people catch COVID-19 and don’t have symptoms. We hope our study will help us understand COVID-19 better, and benefit patients with and without COVID in the future.",
+        "Questions": {
+            "Title": "Questions we are trying to answer:",
+            "List": [
+                "How common is COVID-19 in our communities?",
+                "How common it is to have COVID-19 without symptoms?",
+                "Do people become immune to COVID-19 after they have it?",
+                "How can researchers test many people while they are at home?"
+            ]
+        }
+    },
+    "ResultsSection": {
+        "Title": "Results Dashboard",
+        "Text": "The interactive TestBoston Dashboard displays test results and study data across different time periods and demographics. Data is updated weekly.",
+        "Button":  "View Dashboard"
+
     },
     "FaqSection": {
       "Title": "Answers to Common Questions about TestBoston",

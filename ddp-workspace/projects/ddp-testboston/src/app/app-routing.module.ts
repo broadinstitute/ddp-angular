@@ -10,6 +10,7 @@ import { PrismComponent } from './components/prism/prism.component';
 import { PrismActivityLinkComponent } from './components/prism-activity-link/prism-activity-link.component';
 import { EnrollmentComponent } from './components/enrollment/enrollment.component';
 import { HelpComponent } from './components/help/help.component';
+import { ResultsDashboardComponent } from './components/results-dashboard/results-dashboard.component';
 
 import {
   Auth0CodeCallbackComponent,
@@ -107,7 +108,11 @@ const routes: Routes = [
       IrbGuard,
       AuthGuard
     ]
-  },
+    },
+    {
+        path: AppRoutes.ResultsDashboard,
+        component: ResultsDashboardComponent
+    },
   {
     path: AppRoutes.LanguageRedirect,
     component: ChangeLanguageRedirectComponent,
