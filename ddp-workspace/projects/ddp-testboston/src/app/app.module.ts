@@ -38,6 +38,7 @@ import { PrismComponent } from './components/prism/prism.component';
 import { PrismActivityLinkComponent } from './components/prism-activity-link/prism-activity-link.component';
 import { EnrollmentComponent } from './components/enrollment/enrollment.component';
 import { HelpComponent } from './components/help/help.component';
+import { ResultsDashboardComponent } from './components/results-dashboard/results-dashboard.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -149,6 +150,7 @@ export function languageFactory(language: LanguageService): string {
         MailingListComponent,
         UserRegistrationPrequalComponent,
         PrismComponent,
+        ResultsDashboardComponent,
         PrismActivityLinkComponent,
         EnrollmentComponent,
         HelpComponent
