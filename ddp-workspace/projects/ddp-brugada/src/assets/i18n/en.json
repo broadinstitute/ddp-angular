@@ -1,4 +1,17 @@
 {
+  "App": {
+    "Header": {
+      "Links": {
+        "About": "About",
+        "Team": "Our Team",
+        "FAQ": "FAQ",
+        "Physicians": "For Physicians",
+        "MailingList": "Mailing List",
+        "Join": "Join the Brugada Project"
+      },
+      "LogoAlt": "Brugada Project"
+    }
+  },
   "Toolkit": {
     "StayInformed": {
       "Title": "Stay Informed!",

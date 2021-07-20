@@ -13,7 +13,11 @@ import {
 import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
 
 import { AppComponent } from './components/app/app.component';
+import { HeaderComponent } from './components/header/header.component';
+import { AboutComponent } from './pages/about/about.component';
+import { FaqComponent } from './pages/faq/faq.component';
 import { HomeComponent } from './pages/home/home.component';
+import { TeamComponent } from './pages/team/team.component';
 import { AppRoutingModule } from './app-routing.module';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
@@ -84,7 +88,14 @@ export function translateFactory(
 }
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    AboutComponent,
+    FaqComponent,
+    HomeComponent,
+    TeamComponent,
+  ],
   imports: [BrowserModule, DdpModule, ToolkitModule, AppRoutingModule],
   providers: [
     {
