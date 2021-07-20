@@ -4,6 +4,11 @@ import { LoggingService, ConfigurationService, SessionMementoService, ActivityIn
 import { Observable, of } from 'rxjs';
 import { mergeMap, map } from 'rxjs/operators';
 
+/**
+ * This service allows to modify the activity data for testboston only (remove the icon for certain type of activity with certain status).
+ * It was decided to change it on front-end side since backend redesign will take a lot of effort
+ * and testboston project is going to end soon
+ */
 @Injectable({
     providedIn: 'root'
 })
