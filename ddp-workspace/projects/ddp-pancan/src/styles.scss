@@ -57,6 +57,17 @@ a {
     }
 }
 
+ol li, p, ul li {
+    font-size: 1.125rem;
+    line-height: 2rem;
+}
+
+h1 {
+    font-family: $primary-font-medium;
+    font-size: 1.5rem;
+    font-weight: normal;
+}
+
 .SimpleButton {
     @extend .btn-common;
     @extend .btn-auth;
@@ -216,7 +227,6 @@ a {
     font-family: $primary-font-medium;
 }
 
-ol li, p, ul li {
-    font-size: 1.125rem;
-    line-height: 2rem;
+toolkit-dashboard-redesigned .main {
+    background-color: $section-grey-background-color;
 }
