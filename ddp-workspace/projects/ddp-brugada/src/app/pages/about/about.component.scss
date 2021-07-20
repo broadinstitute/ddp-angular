@@ -1,0 +1,12 @@
+@import '../../../styles/colors';
+
+.description {
+  background: map-get($colors, 'beige');
+}
+
+.container {
+  max-width: 80rem;
+
+  margin: 0 auto;
+  padding: 4.2rem 0;
+}
