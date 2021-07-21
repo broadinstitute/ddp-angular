@@ -124,7 +124,9 @@
     }
 
     .mat-list-item {
-      height: 4rem;
+      height: auto !important;
+
+      margin: 1.25rem 0;
     }
 
     .mat-list-item-content {
@@ -132,8 +134,15 @@
     }
 
     .mat-checkbox-inner-container {
+      position: absolute;
+      top: 2px;
+
       width: 2rem !important;
       height: 2rem !important;
+    }
+
+    .mat-checkbox-label {
+      margin-left: 2.8rem;
     }
   }
 }
