@@ -1,12 +1,64 @@
 @import '../../../styles/colors';
 
+.heading {
+  padding: 4.2rem 0;
+
+  text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+  .heading {
+    max-width: 45rem;
+
+    margin: 0 auto;
+  }
+}
+
+.heading__title {
+  margin-bottom: 2rem;
+  font-size: 40px;
+}
+
+.heading__link {
+  text-decoration: underline;
+  color: #0C457D;
+  cursor: pointer;
+}
+
+.heading__link:hover {
+  opacity: .8;
+  transition: opacity 3s linear;
+}
+
 .description {
   background: map-get($colors, 'beige');
 }
 
-.container {
-  max-width: 80rem;
+.description__container {
+  max-width: 60rem;
 
   margin: 0 auto;
-  padding: 4.2rem 0;
+  padding: 7rem 0;
+}
+
+@media screen and (max-width: 600px) {
+  .description__container {
+    max-width: 45rem;
+  }
+}
+
+.description__title {
+  margin: 3rem 0 2rem;
+}
+
+.description__title:first-child {
+  margin-top: 0rem;
+}
+
+.description__paragraph {
+  margin-bottom: 2rem;
+}
+
+.description__paragraph:last-child {
+  margin-bottom: 0;
 }
