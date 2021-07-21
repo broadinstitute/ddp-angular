@@ -470,8 +470,10 @@ describe('AddressEmbeddedComponent', () => {
     fixture.detectChanges();
     expect(spyOnSubmitAnnounced).toHaveBeenCalled();
     expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledTimes(1);
-    expect(addressServiceSpy.saveAddress).toHaveBeenCalledWith(partialAddressFromInputComponent, false);
-    expect(addressServiceSpy.deleteTempAddress).toHaveBeenCalledWith('123');
+
+    // those methods are not called as we have formErrors check in saveRealAddressAction$ (line 531)
+    expect(addressServiceSpy.saveAddress).not.toHaveBeenCalledWith(partialAddressFromInputComponent, false);
+    expect(addressServiceSpy.deleteTempAddress).not.toHaveBeenCalledWith('123');
   }));
 
   it('ensure we save the correct temporary address', fakeAsync(() => {
