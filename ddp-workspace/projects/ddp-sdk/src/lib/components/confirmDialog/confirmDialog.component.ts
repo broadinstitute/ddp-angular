@@ -10,7 +10,7 @@ import { ThemePalette } from '@angular/material/core';
 export class ConfirmDialogComponent {
     title: string;
     content?: string;
-    contentSubstitutions?: object;
+    contentSubstitutions?: {[key: string]: string};
     confirmBtnText: string;
     cancelBtnText: string;
     confirmBtnColor: ThemePalette;
