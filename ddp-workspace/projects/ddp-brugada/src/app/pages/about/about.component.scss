@@ -1,17 +1,9 @@
 @import '../../../styles/colors';
 
 .heading {
-  padding: 4.2rem 0;
+  padding: 4.2rem 2.4rem;
 
   text-align: center;
-}
-
-@media screen and (max-width: 600px) {
-  .heading {
-    max-width: 45rem;
-
-    margin: 0 auto;
-  }
 }
 
 .heading__title {
@@ -32,6 +24,8 @@
 
 .description {
   background: map-get($colors, 'beige');
+
+  padding: 0 2.4rem;
 }
 
 .description__container {
@@ -41,14 +35,8 @@
   padding: 7rem 0;
 }
 
-@media screen and (max-width: 600px) {
-  .description__container {
-    max-width: 45rem;
-  }
-}
-
 .description__title {
-  margin: 3rem 0 2rem;
+  margin: 3rem 0 2.4rem;
 }
 
 .description__title:first-child {
