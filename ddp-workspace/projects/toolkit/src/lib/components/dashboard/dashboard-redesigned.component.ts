@@ -167,13 +167,14 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
     }
 
     private getDashboardParticipants(): Observable<DashboardParticipant[]> {
+        const operatorParticipant$ = this.getOperatorActivities().pipe(
+            tap((userActivities) => {
+                this.operatorActivities = userActivities;
+            }),
+            switchMap((userActivities) => userActivities?.length ? this.userProfile.profile : of(null)));
+
         return combineLatest([
-            this.getOperatorActivities()
-                .pipe(
-                    tap((userActivities) => {
-                        this.operatorActivities = userActivities;
-                    }),
-                    switchMap((userActivities) => userActivities?.length ? this.userProfile.profile : of(null))),
+            operatorParticipant$,
             this.governedParticipantsAgent.getGovernedStudyParticipants(this.config.studyGuid)
         ]).pipe(map(([operatorParticipant, participants]) => {
             const result: DashboardParticipant[] = participants.map((participant, i) => ({
