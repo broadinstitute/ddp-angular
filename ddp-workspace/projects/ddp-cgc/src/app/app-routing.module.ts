@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Route } from './constants/route';
 import { Routes, RouterModule } from '@angular/router';
+import { ActivitiesResolver } from './resolvers/activities.resolver';
 import { HomeComponent } from './components/pages/home/home.component';
 import { Auth0CodeCallbackComponent, AuthGuard, IrbGuard } from 'ddp-sdk';
 import { ErrorComponent } from './components/pages/error/error.component';
@@ -78,6 +79,9 @@ const routes: Routes = [
   {
     path: Route.Dashboard,
     component: DashboardComponent,
+    resolve: {
+      activities: ActivitiesResolver
+    },
     canActivate: [IrbGuard, AuthGuard],
   },
   {
