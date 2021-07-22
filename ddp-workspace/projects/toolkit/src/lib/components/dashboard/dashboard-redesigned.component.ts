@@ -34,7 +34,7 @@ interface DashboardParticipant {
             <section class="section dashboard-title-section">
                 <div class="content content_medium content_wide content_dashboard">
                     <div fxLayout="row">
-                        <h1 class="dashboard-title-section__title">
+                        <h1 class="dashboard-title-section__title" fxLayoutAlign="center center">
                             <ng-container *ngIf="useParticipantDashboard; else regularDashboard">
                                 <mat-icon>perm_identity</mat-icon>
                                 <span translate>Toolkit.Dashboard.ParticipantsTitle</span>
@@ -82,16 +82,17 @@ interface DashboardParticipant {
                 </ng-container>
                 <section class="section dashboard-section" [class.full-width]="useParticipantDashboard">
                     <div class="content content_medium">
-                        <mat-accordion *ngIf="useParticipantDashboard; else activitiesTable" hideToggle>
+                        <mat-accordion *ngIf="useParticipantDashboard; else activitiesTable" hideToggle multi>
                             <mat-expansion-panel *ngFor="let participant of dashboardParticipants$ | async; first as isFirst"
+                                                 class="dashboard-panel"
                                                  [expanded]="isFirst"
                                                  (opened)="openParticipantPanel(participant.userGuid);"
                                                  (closed)="closeParticipantPanel(participant.userGuid);">
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title>
+                                <mat-expansion-panel-header class="dashboard-panel-header">
+                                    <mat-panel-title class="dashboard-panel-title">
                                         {{participant.label}}
                                     </mat-panel-title>
-                                    <mat-panel-description fxLayoutAlign="end center">
+                                    <mat-panel-description fxLayoutAlign="end center" class="dashboard-panel-description">
                                         <ng-container *ngIf="panelsState.get(participant.userGuid); else show">
                                             {{'Toolkit.Dashboard.HidePanel' | translate}}
                                             <mat-icon>expand_less</mat-icon>
