@@ -375,7 +375,7 @@
             "ShowPanel": "[ES]Show",
             "HidePanel": "[ES]Hide",
             "UserLabel": "Usted",
-            "ChildLabel": "[ES]Your child"
+            "ChildLabel": "Su hijo(a)"
         },
         "Password": {
             "Title": "Ingrese la contraseña.",
