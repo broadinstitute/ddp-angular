@@ -7,6 +7,7 @@ export class MailAddressBlock extends ActivityBlock {
     public subtitleText: string | null;
     public requireVerified: boolean;
     public requirePhone: boolean;
+    public hasValidAddress: boolean;
 
     constructor(displayNumber: number) {
         super();
@@ -21,7 +22,11 @@ export class MailAddressBlock extends ActivityBlock {
         return [this];
     }
 
-    public validate(): boolean {
+    protected validateInternally(): boolean {
+        if (this.requireVerified) {
+            return this.hasValidAddress;
+        }
+
         return true;
     }
 

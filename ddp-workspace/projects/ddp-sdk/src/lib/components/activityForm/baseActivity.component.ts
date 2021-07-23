@@ -51,7 +51,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     public model: ActivityForm;
     public validationRequested = false;
     public isLoaded$ = new BehaviorSubject<boolean>(false);
-    public isPageBusy: Subject<boolean> = new BehaviorSubject(false);
+    public isPageBusy = new BehaviorSubject(false);
     public isAllFormContentValid: BehaviorSubject<boolean> = new BehaviorSubject(false);
     public displayGlobalError$: Observable<boolean>;
     // flag to indicate to form to not allow data entry
