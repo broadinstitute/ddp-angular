@@ -433,8 +433,7 @@
             },
             "StudyRedirect": {
                 "Title": "Su participación",
-                "Text1": "Count Me In tiene un proyecto abierto específico para su tipo de cáncer.",
-                "Text2": "Use el botón a continuación para unirse al {{study}} y obtener más información sobre este trabajo en curso.",
+                "Content": "<p>Count Me In tiene un proyecto abierto específico para su tipo de cáncer.</p><p>Use el botón a continuación para unirse al {{study}} y obtener más información sobre este trabajo en curso.</p>",
                 "GoToProject": "Ir al proyecto",
                 "Cancel": "Cancelar"
             }

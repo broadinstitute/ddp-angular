@@ -157,6 +157,7 @@ export * from './lib/components/newRequestMock.component';
 export * from './lib/components/networkSniffer.component';
 export * from './lib/components/user/participantProfile.component';
 export * from './lib/components/progress-indicator/progress-indicator.component';
+export * from './lib/components/confirmDialog/confirmDialog.component';
 
 export * from './lib/directives/upperCaseInputDirective.directive';
 export * from './lib/directives/routeTransformer.directive';
