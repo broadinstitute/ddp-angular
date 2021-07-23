@@ -20,7 +20,8 @@ import {
     AnalyticsEvent,
     QuestionType,
     LoggingService,
-    LanguageService
+    LanguageService,
+    UserActivityServiceAgent
 } from 'ddp-sdk';
 
 import {
@@ -48,6 +49,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { AppUserActivityServiceAgent } from './services/userActivityServiceAgent.service';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -200,6 +202,10 @@ export function languageFactory(language: LanguageService): string {
             deps: [
                 LanguageService
             ]
+        },
+        {
+            provide: UserActivityServiceAgent,
+            useClass: AppUserActivityServiceAgent
         }
     ],
     bootstrap: [AppComponent]

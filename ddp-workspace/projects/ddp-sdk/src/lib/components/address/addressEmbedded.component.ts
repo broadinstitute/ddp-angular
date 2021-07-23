@@ -526,10 +526,12 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
         // "Real" as opposed to "Temp"
         const saveRealAddressAction$ = this.saveTrigger$.pipe(
-            withLatestFrom(currentAddress$),
-            filter(([_, addressToSave]) => canSaveRealAddress(addressToSave)),
+            withLatestFrom(this.formErrorMessages$, currentAddress$),
+            filter(([_, formErrors, addressToSave]) => {
+                return !formErrors?.length && canSaveRealAddress(addressToSave);
+            }),
             tap(() => busyCounter$.next(1)),
-            concatMap(([_, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
+            concatMap(([_, formErrors, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
             removeTempAddressOperator(),
             tap(() => busyCounter$.next(-1)),
             share()
@@ -566,8 +568,12 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             map(currentAddress => this.meetsActivityRequirements(currentAddress))
         );
 
-        const emitValidStatusAction$ = combineLatest([this.formValidStatusChanged$, this.formErrorMessages$, this.verifyFieldErrors$,
-            activitityRequirementsMet$]).pipe(
+        const emitValidStatusAction$ = combineLatest([
+            this.formValidStatusChanged$,
+            this.formErrorMessages$,
+            this.verifyFieldErrors$,
+            activitityRequirementsMet$
+        ]).pipe(
             map(([formValidStatusChanged, formErrors, addressErrors, reqsMet]) =>
                 (!this.configuration.addressEnforceRequiredFields || formValidStatusChanged)
                 && !formErrors.length && !addressErrors.length && reqsMet),
