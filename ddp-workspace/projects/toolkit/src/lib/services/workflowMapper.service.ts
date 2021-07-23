@@ -6,6 +6,8 @@ import { MailingListWorkflowAction } from '../models/actions/mailingListWorkflow
 import { RegistrationWorkflowAction } from '../models/actions/registrationWorkflowAction';
 import { WorkflowState } from '../models/workflowState';
 import { ActivityResponse, LoggingService } from 'ddp-sdk';
+import { StudyRedirectWorkflowAction } from '../models/actions/studyRedirectWorkflowAction';
+import { StudyRedirectResponse } from '../models/studyRedirectResponse';
 
 @Injectable()
 export class WorkflowMapperService {
@@ -40,6 +42,8 @@ export class WorkflowMapperService {
             return new MailingListWorkflowAction();
         } else if (activityResponse.next === WorkflowState.REGISTRATION) {
             return new RegistrationWorkflowAction();
+        }  else if (activityResponse.next === WorkflowState.STUDY_REDIRECT) {
+            return new StudyRedirectWorkflowAction(activityResponse as StudyRedirectResponse);
         } else {
             this.logger.logWarning(this.LOG_SOURCE, `Unknown server routing: ${JSON.stringify(activityResponse)}`);
         }

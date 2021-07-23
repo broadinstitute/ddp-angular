@@ -487,7 +487,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         SubjectPanelComponent,
         AdminActionPanelComponent,
         ProgressIndicatorComponent,
-        ActivityBlockComponent
+        ActivityBlockComponent,
+        ConfirmDialogComponent
     ],
     entryComponents: [ConfirmDialogComponent]
 })
