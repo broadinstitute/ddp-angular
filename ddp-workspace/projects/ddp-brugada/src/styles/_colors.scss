@@ -1,7 +1,8 @@
-$__scarlet: #b44142;
+$__scarlet: #c4353d;
+$__white: #ffffff;
 
 $colors: (
-  'font-dark': #261d1c,
+  'font-dark': #281d1c,
   'font-light': #ffffff,
   'scarlet': $__scarlet,
   'scarlet:hover': darken($__scarlet, 4%),
@@ -9,5 +10,8 @@ $colors: (
   'beige': #e1ddcf,
   'beige:dark:1': #bfbaaf,
   'beige:dark:2': #5a5656,
-  'white': #ffffff,
+  'dark-grey': #49505a,
+  'white': $__white,
+  'white:hover': darken($__white, 8%),
+  'white:active': darken($__white, 13%),
 );

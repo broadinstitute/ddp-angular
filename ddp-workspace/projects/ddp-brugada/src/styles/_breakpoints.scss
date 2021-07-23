@@ -3,8 +3,8 @@
 }
 
 $breakpoints: (
-  'lg': createBreakpoint(1024),
-  'md': createBreakpoint(924),
+  'lg': createBreakpoint(1080),
+  'md': createBreakpoint(980),
   'sm': createBreakpoint(600),
   'xs': createBreakpoint(450),
 );

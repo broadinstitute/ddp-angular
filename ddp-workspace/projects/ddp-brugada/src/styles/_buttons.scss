@@ -11,7 +11,7 @@
   font-family: 'PT Sans', 'sans-serif';
   font-weight: bold;
   font-style: normal;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   line-height: 1;
   text-decoration: none;
 
@@ -38,6 +38,23 @@
 
       &:active {
         background: map-get($colors, 'scarlet:active');
+      }
+    }
+  }
+
+  &--white {
+    background: map-get($colors, 'white');
+
+    color: map-get($colors, 'font-dark');
+
+    &:not(:disabled) {
+      &:focus,
+      &:hover {
+        background: map-get($colors, 'white:hover');
+      }
+
+      &:active {
+        background: map-get($colors, 'white:active');
       }
     }
   }

@@ -20,12 +20,67 @@
       },
       "Contact": {
         "Label": "Contact Us",
-        "Email": "<a class=\"link\" href=\"mailto:info@linkmyheart.org\">info@linkmyheart.org</a>",
-        "Phone": "<a class=\"link\" href=\"tel:6177147560\">(617) 714-7560</a>",
+        "Email": "<a class=\"link\" href=\"mailto:info@linkmyheart.org\" tabindex=\"-1\">info@linkmyheart.org</a>",
+        "Phone": "<a class=\"link\" href=\"tel:6177147560\" tabindex=\"-1\">(617) 714-7560</a>",
         "Address1": "The Broad Institute of MIT and Harvard",
         "Address2": "415 Main Street",
         "Address3": "Cambridge, MA 02142",
         "Address4": "United States"
+      }
+    },
+    "Home": {
+      "Cta": {
+        "Title": "Let’s advance research on Brugada syndrome together",
+        "Subtitle": "By donating genetic and medical data, people living with Brugada syndrome can help scientists more easily study this disease.",
+        "Join": "Join Today"
+      },
+      "Mission": {
+        "ImgAlt": "ECG image",
+        "Paragraph1": "Link My Heart is committed to connecting <span class=\"text-bold\">patients with researchers</span> to work towards improving research, discovery, and treatment for individuals with inherited heart conditions that may lead to sudden cardiac death.",
+        "Paragraph2": "The Brugada Project is a sub-initiative of Link My Heart, and directly partners with patients with Brugada syndrome to collect health information and samples, with the goal of advancing genetic research. This condition is individually rare, and by directly connecting patients and researchers, we hope to rapidly expand our understanding of the genetic basis of Brugada syndrome, and ultimately other inherited heart conditions, to improve the health of patients and their family members.",
+        "LearnMore": "Learn More About The Project"
+      },
+      "Participation": {
+        "Title": "How to participate",
+        "Steps": [
+          {
+            "Name": "Step 1",
+            "Duration": "1 minute",
+            "Description": "See if you qualify to participate and create an account."
+          },
+          {
+            "Name": "Step 2",
+            "Duration": "2 minutes",
+            "Description": "Read the consent form and decide if you’d like to join the Brugada Project."
+          },
+          {
+            "Name": "Step 3",
+            "Duration": "3 minutes",
+            "Description": "Choose to share your home address, medical records, the names of your doctors, and where you receive medical care."
+          },
+          {
+            "Name": "Step 4",
+            "Duration": "3 minutes",
+            "Description": "Answer two health surveys related to your experience with Brugada syndrome."
+          }
+        ],
+        "Start": "Get Started"
+      },
+      "Institutions": {
+        "Title": "Collaborating Institutions",
+        "ImageAlts": {
+          "Broad": "Broad Institute",
+          "MGH": "Massachusetts General Hospital",
+          "VUMC": "Vanderbilt University Medical Center",
+          "UWM": "University of Wisconsin | Department of Medicine",
+          "SADS": "SADS Foundation"
+        },
+        "Stanford": "Stanford Center for Inherited Cardiovascular Diseases"
+      },
+      "JoinProject": {
+        "Title": "You can help make an impact on the future of research into Brugada syndrome",
+        "Subtitle": "By participating, you can make a critical impact on our understanding of Brugada syndrome.",
+        "Btn": "Join the Brugada Project"
       }
     }
   },
