@@ -2,6 +2,7 @@ import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { TranslateService } from '@ngx-translate/core';
 
 import {
@@ -102,6 +103,7 @@ export function translateFactory(
   imports: [
     BrowserModule,
     MatIconModule,
+    MatExpansionModule,
     DdpModule,
     ToolkitModule,
     AppRoutingModule,
