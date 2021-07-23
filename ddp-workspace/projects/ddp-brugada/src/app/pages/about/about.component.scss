@@ -1,50 +1,49 @@
 @import '../../../styles/colors';
+@import '../../../styles/breakpoints';
 
 .heading {
-  padding: 4.2rem 2.4rem;
+  padding: 8rem 2.4rem 6.4rem;
 
   text-align: center;
+
+  @include media-sm {
+    padding-top: 6.4rem;
+  }
 }
 
 .heading__title {
   margin-bottom: 2rem;
-  font-size: 40px;
-}
+  font-size: 4rem;
 
-.heading__link {
-  text-decoration: underline;
-  color: #0C457D;
-  cursor: pointer;
+  @include media-sm {
+    font-size: 3.2rem;
+  }
 }
 
 .heading__link:hover {
-  opacity: .8;
+  opacity: 0.8;
   transition: opacity 3s linear;
 }
 
 .description {
   background: map-get($colors, 'beige');
-
-  padding: 0 2.4rem;
 }
 
 .description__container {
-  max-width: 60rem;
+  max-width: 64rem;
 
   margin: 0 auto;
-  padding: 7rem 0;
+  padding: 0 2.4rem 8rem;
 }
 
 .description__title {
-  margin: 3rem 0 2.4rem;
-}
-
-.description__title:first-child {
-  margin-top: 0rem;
+  padding: 7.2rem 0 2.8rem;
 }
 
 .description__paragraph {
-  margin-bottom: 2rem;
+  & + & {
+    margin-top: 2.4rem;
+  }
 }
 
 .description__paragraph:last-child {

@@ -1,41 +1,28 @@
 <main class="content">
   <section class="heading">
-    <h1 class="heading__title">About the Brugada Project</h1>
-    <p>For more detailed information, visit our <a class="heading__link" [routerLink]="['/', Route.FAQ]">frequently asked questions</a></p>
+    <h1 class="heading__title">
+      {{ 'App.About.Title' | translate }}
+    </h1>
+
+    <p [innerHTML]="'App.About.Subtitle' | translate"></p>
   </section>
+
   <section class="description">
     <div class="description__container">
-      <h2 class="description__title">Our vision</h2>
-      <p class="description__paragraph">Link My Heart is an initiative that connects patients with researchers focused on improving
-        research, discovery, and treatment for individuals with inherited heart conditions that may lead
-        to sudden cardiac death. Link My Heart is the parent initiative to the Brugada Project.</p>
-      <p class="description__paragraph">The Brugada Project directly partners with patients with Brugada syndrome to collect health
-        information and samples, with the goal of advancing genetic research. This condition is
-        individually rare, and by directly connecting patients and researchers, we hope to rapidly
-        expand our understanding of the genetic basis of Brugada syndrome, and ultimately other
-        inherited heart conditions, to improve the health of patients and their family members.
-      </p>
-      <h2 class="description__title">About Brugada syndrome</h2>
-      <p class="description__paragraph">Brugada syndrome is a condition characterized by abnormalities in the electrical activity of the
-        heart. Individuals are usually diagnosed with Brugada syndrome due to a specific pattern seen
-        on the electrocardiogram (ECG or EKG), a test that records electrical activity of the heart.</p>
-      <p class="description__paragraph">While some people with Brugada syndrome will not show any signs or symptoms, individuals
-        with Brugada syndrome are at risk for having irregular heartbeats that, if left untreated, can
-        cause fainting episodes, cardiac arrest, or sudden death. Therefore, it is important to recognize
-        who is at-risk for Brugada syndrome to help prevent sudden death.</p>
-      <p class="description__paragraph">Brugada syndrome can be inherited. Brugada syndrome can be caused by changes (called
-        “variants” or “mutations”) in genes that can be passed down in families from generation to
-        generation. However, the genetic variants that cause Brugada syndrome cannot be found in
-        most individuals, because we do not know which genes to look for or how to interpret all of the
-        variation in the human genome.</p>
-      <p class="description__paragraph">We expect that researching the DNA of individuals with Brugada syndrome will help us learn
-        which genetic variants cause Brugada syndrome. This may allow us to better identify individuals
-        at risk for Brugada syndrome, and develop treatments specific for the condition.</p>
-      <p class="description__paragraph">Inherited heart conditions like Brugada syndrome are an important cause of sudden death.
-        These conditions are individually rare, making them difficult to study. We would therefore like to
-        enable individuals with Brugada syndrome to contribute to research to help us move the science
-        forward. Ultimately, we hope to advance our understanding of the genetic basis of Brugada
-        syndrome, and other inherited heart conditions, by connecting the data of patients together. </p>
+      <ng-container
+        *ngFor="let Paragraph of 'App.About.Paragraphs' | translate"
+      >
+        <h2 class="description__title">
+          {{ Paragraph.Title }}
+        </h2>
+
+        <p
+          *ngFor="let Description of Paragraph.Descriptions"
+          class="description__paragraph"
+        >
+          {{ Description }}
+        </p>
+      </ng-container>
     </div>
   </section>
 </main>

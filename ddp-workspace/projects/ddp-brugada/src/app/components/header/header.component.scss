@@ -1,15 +1,21 @@
 @import '../../../styles/breakpoints';
 @import '../../../styles/colors';
 
+$headerHeight: (
+  'default': 10rem,
+  'sm': 9.2rem,
+  'xs': 8.4rem,
+);
+
 .header {
-  height: 9.6rem;
+  height: map-get($headerHeight, 'default');
 
   @include media-sm {
-    height: 9.2rem;
+    height: map-get($headerHeight, 'sm');
   }
 
   @include media-xs {
-    height: 8.4rem;
+    height: map-get($headerHeight, 'xs');
   }
 
   &__container {
@@ -62,7 +68,7 @@
       top: 100%;
       left: 0;
 
-      height: calc(100vh - 9.6rem);
+      height: calc(100vh - #{map-get($headerHeight, 'default')});
 
       padding: 2.4rem;
 
@@ -75,11 +81,11 @@
       z-index: 10;
 
       @include media-sm {
-        height: calc(100vh - 9.2rem);
+        height: calc(100vh - #{map-get($headerHeight, 'sm')});
       }
 
       @include media-xs {
-        height: calc(100vh - 8.4rem);
+        height: calc(100vh - #{map-get($headerHeight, 'xs')});
       }
 
       &--shown {
