@@ -37,10 +37,11 @@ export class StudyRedirectCommand implements WorkflowCommand {
 
         const dialogRef = this.dialog.open(ConfirmDialogComponent, config);
         dialogRef.afterClosed().subscribe((confirmRedirect: boolean) => {
-            if (!confirmRedirect) {
+            if (confirmRedirect) {
+                this.action.data && this.redirect(this.action.data.redirectUrl);
+            } else {
                 window.location.reload();
             }
-            this.action.data && this.redirect(this.action.data.redirectUrl);
         });
     }
 
