@@ -537,7 +537,11 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         const saveRealAddressAction$ = this.saveTrigger$.pipe(
             withLatestFrom(this.formErrorMessages$, currentAddress$),
             filter(([_, formErrors, addressToSave]) => {
-                return !formErrors?.length && canSaveRealAddress(addressToSave);
+                const canSave = canSaveRealAddress(addressToSave);
+                if (!canSave) {
+                    this.block.hasValidAddress = false;
+                }
+                return !formErrors?.length && canSave;
             }),
             tap(() => busyCounter$.next(1)),
             concatMap(([_, formErrors, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
@@ -626,7 +630,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
 
     private meetsActivityRequirements(currentAddress: Address | null): boolean {
-        if (this.block.requireVerified && !currentAddress) {
+        if (this.block.requireVerified && !this.enoughDataToVerify(currentAddress)) {
             return false;
         }
         if (this.block.requirePhone && currentAddress && !(currentAddress.phone)) {
