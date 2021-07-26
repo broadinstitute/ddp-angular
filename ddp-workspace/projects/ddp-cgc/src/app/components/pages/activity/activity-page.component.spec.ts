@@ -30,9 +30,9 @@ describe('ActivityComponent', () => {
           }
         },
         {
-          provide: MatDialog, 
+          provide: MatDialog,
           useValue: {
-            open: (component: ComponentType<unknown>, config?: MatDialogConfig<unknown>) => {}
+            open: (cmp: ComponentType<unknown>, config?: MatDialogConfig<unknown>) => {}
           }
         },
         {
