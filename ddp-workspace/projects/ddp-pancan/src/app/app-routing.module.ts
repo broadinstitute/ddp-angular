@@ -88,6 +88,15 @@ const routes: Routes = [
         ]
     },
     {
+        path: AppRoutes.ActivityLinkId,
+        component: ActivityRedesignedComponent,
+        canActivate: [
+            IrbGuard,
+            BrowserGuard,
+            AuthGuard
+        ]
+    },
+    {
         path: AppRoutes.Error,
         component: ErrorRedesignedComponent
     },
