@@ -31,6 +31,9 @@ Desktop.ini
 .factorypath
 .project
 
+# Visual Studio
+.vs/
+
 # Vim
 .sw[a-p]
 .*.sw[a-p]

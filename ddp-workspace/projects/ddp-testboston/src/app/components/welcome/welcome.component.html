@@ -6,6 +6,22 @@
             <p translate>HomePage.IntroSection.Full</p>
         </div>
     </section>
+    <section class="section results-section">
+        <div id="results-dashboard" class="anchor"></div>
+        <div class="content results-block">
+            <div class="columns">
+                <div class="columns-child-left">
+                    <h2 class="semi-bold" translate>HomePage.ResultsSection.Title</h2>
+
+                </div>
+                <div class="columns-child-right">
+                    <a class="button button_basic" [routerLink]="'/' + appRoutes.ResultsDashboard" translate>HomePage.ResultsSection.Button</a>
+                </div>
+                
+            </div>
+            <p class="results-block__text" translate>HomePage.ResultsSection.Text</p>
+        </div>
+    </section>
     <section class="section about-section">
         <div id="about-the-study" class="anchor"></div>
         <div class="content about-block">
@@ -20,6 +36,8 @@
             </ul>
         </div>
     </section>
+
+
     <section class="section question-section">
         <div id="q&a" class="anchor"></div>
         <div class="content question-block">
@@ -63,11 +81,11 @@
             <ul class="team-list" *ngFor="let group of 'HomePage.TeamSection.Others' | translate">
                 <div class="others">
                     <h5 class="others__title">{{group.Title}}</h5>
-                    <li class="others__item" *ngFor="let member of group.Members">
-                        <p class="others__name">{{member}}</p>
-                    </li>
-                </div>
-            </ul>
+                <li class="others__item" *ngFor="let member of group.Members">
+                    <p class="others__name">{{member}}</p>
+                </li>
+        </div>
+        </ul>
         </div>
     </section>
 </main>
