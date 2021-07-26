@@ -56,6 +56,12 @@
     letter-spacing: -0.016rem;
 }
 
+.center {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media screen and (min-width: $desktop-breakpoint) {
     .btn-outline {
         border-width: 2px;

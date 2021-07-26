@@ -33,6 +33,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { AnchorsPageComponent } from './components/anchors-page/anchors-page.component';
 import { ScientificResearchComponent } from './components/scientific-research/scientific-research.component';
+import { ParticipationSectionComponent } from './components/welcome/participation-section/participation-section.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -104,6 +105,7 @@ export function translateFactory(translate: TranslateService,
         AboutUsComponent,
         AnchorsPageComponent,
         ScientificResearchComponent,
+        ParticipationSectionComponent,
     ],
     imports: [
         BrowserModule,
