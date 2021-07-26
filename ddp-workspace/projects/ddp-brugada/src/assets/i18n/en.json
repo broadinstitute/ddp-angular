@@ -105,6 +105,86 @@
           ]
         }
       ]
+    },
+    "Team": {
+      "Title": "Our Team",
+      "WhoWeAre": {
+        "Title": "Who we are",
+        "Description": "The Brugada Project, and its parent initiative, Link My Heart, is stewarded by the Broad Institute of MIT and Harvard, and Massachusetts General Hospital. The Brugada Project was designed and implemented by physicians, researchers, genetic counselors, computational scientists, software engineers, and patient advocates with the aim to empower patients to directly connect with researchers.  The Brugada Project is an effort led by investigators at several collaborating academic institutions who are focused on rapidly advancing genetic research related to heart disease."
+      },
+      "Sections": [
+        {
+          "Title": "Leadership",
+          "Members": [
+            {
+              "Name": "Steven A. Lubitz",
+              "Degree": "MD, MPH",
+              "Institution": "Massachusetts General Hospital and Broad Institute",
+              "Bio": "Dr. Lubitz is an Associate Professor of Medicine at Harvard Medical School (HMS), Associate Physician in the Massachusetts General Hospital (MGH) Cardiac Arrhythmia Service, and Associate Member in Medical and Population Genetics at the Broad Institute. His research expertise includes human genetics, risk assessment, and clinical implementation science. Dr. Lubitz is responsible for leading and coordinating all aspects of this project.",
+              "Image": "steven-lubitz.jpeg"
+            },
+            {
+              "Name": "Patrick Ellinor",
+              "Degree": "",
+              "Institution": "Massachusetts General Hospital and Broad Institute",
+              "Bio": "Dr. Ellinor is an Institute Member at the Broad Institute, and directs the Cardiovascular Disease Initiative. He is also a Professor of Medicine at Harvard Medical School and Director of the Cardiac Arrhythmia Service at MGH. He serves on the Scientific Advisory Council of this project and collaborates with Dr. Lubitz to oversee the development of patient surveys, recruitment, and project execution.",
+              "Image": "patrick-ellinor.png"
+            },
+            {
+              "Name": "Anthony Philippakis",
+              "Degree": "",
+              "Institution": "Broad Institute",
+              "Bio": "Dr. Philippakis is the Chief Data Officer at the Broad Institute and directs the Data Sciences Platform. Dr. Philippakis serves on the Scientific Advisory Council of this project and collaborates with Dr. Lubitz to oversee project development and execution.",
+              "Image": "anthony-philippakis.jpeg"
+            }
+          ]
+        },
+        {
+          "Title": "Scientific Advisory Council",
+          "Members": [
+            {
+              "Name": "Lee L. Eckhardt",
+              "Degree": "MD, MS",
+              "Institution": "University of Wisconsin-Madison",
+              "Bio": "Dr. Eckhardt is an Associate Professor of Medicine at the University of Wisconsin-Madison and is the co-director of the Inherited Arrhythmia Clinic. She is a physician scientist with a focus on functional genomics centered around inherited arrhythmia syndromes and unexplained sudden cardiac death. Dr. Eckhardt serves on the Scientific Advisory Council for this project and collaborates with Dr. Lubitz on the research direction, project development, and recruitment initiatives.",
+              "Image": "lee-eckhardt.jpg"
+            },
+            {
+              "Name": "Marco V. Perez",
+              "Degree": "MD",
+              "Institution": "Stanford University",
+              "Bio": "Dr. Perez is an Associate Professor of medicine at the Stanford University Medical School. He is a clinical cardiac electrophysiologist and directs the Stanford Inherited Arrhythmia Clinic. His research interests are in understanding the genetics and epidemiology of cardiac arrhythmias. He is working on the Scientific Advisory Council to help build an innovative approach to studying rare inherited cardiovascular disease.",
+              "Image": "marco-perez.jpg"
+            },
+            {
+              "Name": "M. Ben Shoemaker",
+              "Degree": "MD, MSCI",
+              "Institution": "Vanderbilt University",
+              "Bio": "Dr. Shoemaker is an Assistant Professor of Medicine at Vanderbilt University Medical Center and Staff Physician at the Nashville VA Medical Center. He is a physician scientist and clinical cardiac electrophysiologist with a research program focused on improving the care of patients with inherited arrhythmia and cardiomyopathy syndromes. He serves on the Scientific Advisory Council for this project and collaborates with Dr. Lubitz on the research direction, project development, and recruitment initiatives.",
+              "Image": "ben-shoemaker.jpg"
+            }
+          ]
+        }
+      ],
+      "Council": {
+        "Title": "Project Advisory Council",
+        "Members": [
+          "Kathleen Lewis",
+          "Ana T. Lipsanopoulos",
+          "Stephanie Harris",
+          "Eugene Wong",
+          "Victor Nauffal"
+        ]
+      },
+      "Collaboration": {
+        "Title": "Collaborating Partners",
+        "Partners": [
+          {
+            "Name": "SADS Foundation",
+            "Description": "The SADS Foundation - Sudden Arrhythmia Death Syndromes Foundation (SAD) was established in 1991 and is a global non-profit organization. Its mission is to save the lives and support the families of children and adults who are genetically predisposed to sudden death due to heart rhythm conditions."
+          }
+        ]
+      }
     }
   },
   "Toolkit": {
