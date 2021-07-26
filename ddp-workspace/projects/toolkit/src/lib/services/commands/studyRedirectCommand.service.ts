@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { Observable } from 'rxjs';
 
-import { ConfirmDialogComponent } from 'ddp-sdk';
+import { ConfirmDialogComponent, DEFAULT_DIALOG_SETTINGS } from 'ddp-sdk';
 import { WorkflowCommand } from '../../models/workflowCommand';
 import { StudyRedirectWorkflowAction } from '../../models/actions/studyRedirectWorkflowAction';
 
@@ -21,9 +20,7 @@ export class StudyRedirectCommand implements WorkflowCommand {
 
     private openDialog(): void {
         const config = {
-            hasBackdrop: true,
-            autoFocus: false,
-            scrollStrategy: new NoopScrollStrategy(),
+            ...DEFAULT_DIALOG_SETTINGS,
             panelClass: 'study-redirect-dialog',
             maxWidth: '500px',
             data: {
@@ -40,10 +37,11 @@ export class StudyRedirectCommand implements WorkflowCommand {
 
         const dialogRef = this.dialog.open(ConfirmDialogComponent, config);
         dialogRef.afterClosed().subscribe((confirmRedirect: boolean) => {
-            if (!confirmRedirect) {
+            if (confirmRedirect) {
+                this.action.data && this.redirect(this.action.data.redirectUrl);
+            } else {
                 window.location.reload();
             }
-            this.action.data && this.redirect(this.action.data.redirectUrl);
         });
     }
 
