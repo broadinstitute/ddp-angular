@@ -13,6 +13,8 @@ import { WorkflowCommand } from '../models/workflowCommand';
 import { WorkflowMapperService } from './workflowMapper.service';
 import { ToolkitConfigurationService } from './toolkitConfiguration.service';
 import { ActivityResponse, UserProfileServiceAgent, Auth0AdapterService } from 'ddp-sdk';
+import { StudyRedirectWorkflowAction } from '../models/actions/studyRedirectWorkflowAction';
+import { StudyRedirectCommand } from './commands/studyRedirectCommand.service';
 
 @Injectable()
 export class WorkflowBuilderService {
@@ -37,6 +39,10 @@ export class WorkflowBuilderService {
             {
                 type: WorkflowActionType.REGISTRATION,
                 func: (action: RegistrationWorkflowAction) => new RegistrationCommand(this.auth0)
+            },
+            {
+                type: WorkflowActionType.STUDY_REDIRECT,
+                func: (action: StudyRedirectWorkflowAction) => new StudyRedirectCommand(this.dialog, action)
             }
         ];
     }

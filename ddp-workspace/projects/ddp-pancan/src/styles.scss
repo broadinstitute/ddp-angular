@@ -3,6 +3,7 @@
 @import 'styles/common';
 @import 'styles/activities';
 @import 'styles/buttons';
+@import 'styles/redirect';
 @import 'styles/dashboard';
 
 html,
@@ -87,6 +88,22 @@ h1 {
     .footer & {
         color: white;
         border-color: white;
+    }
+}
+
+// language selector
+ddp-language-selector {
+    .ddp-globe {
+        stroke: $text-color;
+        fill: transparent;
+        vertical-align: middle;
+        margin-right: 0.2rem;
+    }
+}
+
+.footer {
+    .ddp-globe {
+        stroke: white;
     }
 }
 
