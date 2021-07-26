@@ -13,6 +13,7 @@ export const AppRoutes = {
     CovidSurvey: 'covid-survey',
     SymptomSurvey: 'symptom-survey',
     Dashboard: 'dashboard',
+    ResultsDashboard: 'results-dashboard',
     Prism: 'prism',
     PrismActivityLink: 'prism/activity-link',
     Password: 'password',
