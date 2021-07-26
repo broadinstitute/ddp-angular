@@ -1,0 +1,72 @@
+.mailing-list-modal {
+  position: relative;
+}
+
+.paragraph {
+  margin-bottom: 20px;
+}
+
+.paragraph:first-child {
+  margin-top: 50px;
+}
+
+.close-btn {
+  position: absolute;
+  top: -6px;
+  right: 0px;
+}
+
+.close-btn:hover {
+  opacity: .7;
+  transition: opacity .3s linear;
+}
+
+.form__fieldset {
+  display: flex;
+  flex-direction: column;
+  border: none;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 0.4rem;
+
+  .button:not(:last-of-type) {
+    margin-right: 1.2rem;
+  }
+}
+
+.btn-container .btn:not(:last-of-type) {
+  margin-right: 1.2rem;
+}
+
+.btn_opaque {
+  background: #efefef;
+  border: 2px solid #efefef;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.btn_opaque:not(:disabled):hover, .button_opaque:not(:disabled):focus {
+  background: #e2e2e2;
+  border-color: #e2e2e2;
+  box-shadow: none;
+}
+
+.btn_sm {
+  padding: 1.2rem 2.4rem;
+  border-radius: 10px;
+  font-size: 1.6rem;
+}
+
+.btn_yellow {
+  background: #eec45c;
+  border: 2px solid #eec45c;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.btn_yellow:not(:disabled):hover, .btn_yellow:not(:disabled):focus {
+  background: #ecbc45;
+  border-color: #ecbc45;
+}

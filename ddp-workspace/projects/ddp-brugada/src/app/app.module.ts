@@ -21,6 +21,12 @@ import { FaqComponent } from './pages/faq/faq.component';
 import { HomeComponent } from './pages/home/home.component';
 import { TeamComponent } from './pages/team/team.component';
 import { AppRoutingModule } from './app-routing.module';
+import { MailingListModalComponent } from './components/mailing-list-modal/mailing-list-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -98,6 +104,7 @@ export function translateFactory(
     FaqComponent,
     HomeComponent,
     TeamComponent,
+    MailingListModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,6 +112,11 @@ export function translateFactory(
     DdpModule,
     ToolkitModule,
     AppRoutingModule,
+    MatDialogModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [
     {

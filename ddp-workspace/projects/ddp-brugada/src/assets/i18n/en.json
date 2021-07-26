@@ -308,5 +308,28 @@
       "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
       "EditButton": "Edit"
     }
+  },
+  "MailingListModal": {
+    "Paragraph": "Hello! Thank you for joining the Link My Heart mailing list. We will send general updates about the progress of the research project and keep you informed when future projects become available. You can unsubscribe at any time.",
+    "Thanking": "Thank you!",
+    "Form": {
+      "Fields": {
+        "Email": {
+          "Label": "Email Address *"
+        },
+        "EmailConfirmation": {
+          "Label": "Email Confirmation *"
+        }
+      },
+      "Buttons": {
+        "Cancel": "Cancel",
+        "Join": "Join"
+      },
+      "Errors": {
+        "Required": "Field is required",
+        "EmailNotValid": "Provided email is not a valid email address",
+        "FieldsDoNotMatch": "Provided emails do not match"
+      }
+    }
   }
 }
