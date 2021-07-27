@@ -26,6 +26,7 @@ export class DashboardComponent {
     this.setObservables();
   }
 
+
   onStartActivity({ instanceGuid }: ActivityInstance): void {
     this.facade.startActivity(instanceGuid);
   }

@@ -108,7 +108,7 @@
       {
         "Letter": "A",
         "Title": "Tell us about yourself.",
-        "Description": "<p>Click <b>“Get Started!”</b>. Confirm that you have and/or have had cancer and select the cancer genetic test that you have had done if you kwno it (it's ok if not!).</p>"
+        "Description": "<p>Click <b>“Get Started!”</b>. Confirm that you have and/or have had cancer and select the cancer genetic test that you have had done if you know it (it's ok if not!).</p>"
       },
       {
         "Letter": "B",
@@ -146,6 +146,11 @@
   "ErrorPage": {
     "Title": "Something went wrong",
     "Text": "We’re sorry, it looks like something unexpected happened. Please try refreshing your page or logging in again."
+  },
+  "Notifications": {
+    "Dialog": {
+      "Title": "Announcements"
+    }
   },
   "StayInformed": {
     "Title": "Thank you for your interest!",
