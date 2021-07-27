@@ -102,6 +102,15 @@ section {
             justify-content: space-between;
         }
     }
+
+    &.stay-informed {
+        padding-top: 5.375rem;
+        padding-bottom: 4.5rem;
+
+        ::ng-deep .container {
+            max-width: 1062px;
+        }
+    }
 }
 
 .btn {

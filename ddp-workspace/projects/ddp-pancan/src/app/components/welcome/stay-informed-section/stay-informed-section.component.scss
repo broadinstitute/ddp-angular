@@ -2,7 +2,7 @@
 @import '../../../../styles/common.scss';
 
 .container {
-    max-width: $landing-page-container-width;
+    max-width: 900px;
     margin: 0 auto;
     text-align: left;
 }
@@ -22,9 +22,9 @@
 
     &__links {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         align-items: center;
-        flex: 0 1 260px;
+        flex: 0 1 150px;
     }
 
     &__link {
@@ -39,6 +39,11 @@
     text-align: left;
 }
 
+.btn {
+    font-size: 1.13rem;
+    padding: 1rem 2rem;
+    line-height: 22px;
+}
 
 @media screen and (max-width: $tablet-breakpoint) {
     .social-media {
