@@ -78,6 +78,30 @@ section {
             max-width: 1007px;
         }
     }
+
+    &.partners {
+        max-width: 1081px;
+        margin: 0 auto;
+        padding-top: 4.875rem;
+        padding-bottom: 5.5rem;
+        text-align: left;
+
+        .title {
+            margin-top: 0;
+        }
+
+        .text {
+            opacity: 1;
+            margin-bottom: 0;
+        }
+
+        .logos {
+            display: flex;
+            gap: 5rem;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+    }
 }
 
 .btn {
