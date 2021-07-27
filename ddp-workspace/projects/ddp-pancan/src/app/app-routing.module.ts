@@ -19,6 +19,7 @@ import { FaqComponent } from './components/faq/faq.component';
 import { ParticipationComponent } from './components/participation/participation.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ScientificResearchComponent } from './components/scientific-research/scientific-research.component';
+import { ColorectalPageComponent } from './components/splash-pages/colorectal-page/colorectal-page.component';
 
 const routes: Routes = [
     {
@@ -53,6 +54,11 @@ const routes: Routes = [
     {
         path: AppRoutes.FAQ,
         component: FaqComponent,
+        canActivate: [IrbGuard]
+    },
+    {
+        path: AppRoutes.ColorectalPage,
+        component: ColorectalPageComponent,
         canActivate: [IrbGuard]
     },
     {

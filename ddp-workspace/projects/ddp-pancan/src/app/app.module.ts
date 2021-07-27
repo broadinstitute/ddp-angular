@@ -36,6 +36,7 @@ import { ScientificResearchComponent } from './components/scientific-research/sc
 import { ParticipationSectionComponent } from './components/welcome/participation-section/participation-section.component';
 import { StayInformedSectionComponent } from './components/welcome/stay-informed-section/stay-informed-section.component';
 import { JoinCmiSectionComponent } from './components/welcome/join-cmi-section/join-cmi-section.component';
+import { ColorectalPageComponent } from './components/splash-pages/colorectal-page/colorectal-page.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -113,6 +114,7 @@ export function translateFactory(translate: TranslateService,
         ParticipationSectionComponent,
         StayInformedSectionComponent,
         JoinCmiSectionComponent,
+        ColorectalPageComponent,
     ],
     imports: [
         BrowserModule,

@@ -1,0 +1,89 @@
+<main class="main">
+    <section class="introduction">
+        <div class="flex">
+            <div class="description">
+                <h2 class="title static-page-title" translate>App.ColorectalPage.IntroductionSection.Title</h2>
+                <p class="text static-page-paragraph-text" translate>App.ColorectalPage.IntroductionSection.Text</p>
+                <a mat-flat-button
+                   [routerLink]="'/' + AppRoutes.CountMeIn"
+                   class="btn join-cmi-btn center btn-common"
+                   color="primary">
+                    {{'App.HomePage.JoinCountMeInButton' | translate}}
+                </a>
+            </div>
+            <div class="image">
+                <!-- TODO: replace with a real image -->
+                <img src="assets/images/real-image.svg"
+                     style="background-color: lightgrey; width: 100%; height: 100%; display: block;"
+                     [alt]="'App.ColorectalPage.IntroductionSection.ImageAlt' | translate"
+                     width="524" height="492">
+            </div>
+        </div>
+        <div class="logos">
+            <img src="assets/images/logo-broad.svg"
+                 [alt]="'App.HomePage.IntroductionSection.BroadAlt' | translate"
+                 width="124" height="32">
+            <img src="assets/images/dana-farber-logo.png"
+                 [alt]="'App.HomePage.IntroductionSection.DanaFarberAlt' | translate"
+                 width="124" height="32">
+        </div>
+    </section>
+
+    <section class="learn-more">
+        <h2 class="title static-page-title" translate>App.ColorectalPage.LearnMoreSection.Title</h2>
+        <div class="text static-page-paragraph-text"
+             [innerHTML]="'App.ColorectalPage.LearnMoreSection.Text' | translate"></div>
+        <a mat-stroked-button
+           [routerLink]="'/' + AppRoutes.AboutUs"
+           class="btn learn-more-btn center small-letter-spacing btn-common btn-outline">
+            {{'App.HomePage.LearnMoreSection.LearnMoreAboutUsButton' | translate}}
+        </a>
+    </section>
+
+    <section class="participate">
+        <app-participation-section></app-participation-section>
+    </section>
+
+    <section class="faq">
+        <h2 class="title static-page-title" translate>App.FAQ.Title</h2>
+        <div class="container">
+            <app-faq-section questions="App.ColorectalPage.FAQ.Questions"></app-faq-section>
+        </div>
+        <a mat-stroked-button
+           [routerLink]="'/' + AppRoutes.FAQ"
+           class="btn more-faq-btn center small-letter-spacing btn-common btn-outline">
+            {{'App.FAQ.Button.MoreFAQs' | translate}}
+        </a>
+    </section>
+
+    <section class="partners">
+        <h2 class="title static-page-title" translate>App.ColorectalPage.Partners.Title</h2>
+        <div class="logos">
+            <!-- TODO replace with real logos! -->
+            <img src="assets/images/logo-broad.svg"
+                 [alt]="'App.ColorectalPage.Partners.CCResource' | translate"
+                 width="124" height="32">
+            <img src="assets/images/logo-broad.svg"
+                 [alt]="'App.ColorectalPage.Partners.GICAlliance' | translate"
+                 width="124" height="32">
+            <img src="assets/images/logo-broad.svg"
+                 [alt]="'App.ColorectalPage.Partners.FightCC' | translate"
+                 width="124" height="32">
+            <img src="assets/images/logo-broad.svg"
+                 [alt]="'App.ColorectalPage.Partners.Raymond' | translate"
+                 width="124" height="32">
+            <img src="assets/images/logo-broad.svg"
+                 [alt]="'App.ColorectalPage.Partners.CCCanada' | translate"
+                 width="124" height="32">
+        </div>
+        <p class="text static-page-paragraph-text" [innerHTML]="'App.ColorectalPage.Partners.Text' | translate"></p>
+    </section>
+
+    <section class="stay-informed">
+        <app-stay-informed-section></app-stay-informed-section>
+    </section>
+
+    <section class="join-cmi">
+        <app-join-cmi-section></app-join-cmi-section>
+    </section>
+</main>
