@@ -31,8 +31,10 @@
 
     <section class="learn-more">
         <h2 class="title static-page-title" translate>App.ColorectalPage.LearnMoreSection.Title</h2>
-        <div class="text static-page-paragraph-text"
-             [innerHTML]="'App.ColorectalPage.LearnMoreSection.Text' | translate"></div>
+        <ng-container *ngFor="let item of 'App.ColorectalPage.LearnMoreSection.Paragraphs' | translate">
+            <p class="text static-page-paragraph-text" [innerHTML]="item"></p>
+        </ng-container>
+
         <a mat-stroked-button
            [routerLink]="'/' + AppRoutes.AboutUs"
            class="btn learn-more-btn center small-letter-spacing btn-common btn-outline">

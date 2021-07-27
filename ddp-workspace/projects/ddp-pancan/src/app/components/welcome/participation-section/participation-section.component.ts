@@ -8,8 +8,6 @@ import { AppRoutes } from '../../app-routes';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ParticipationSectionComponent {
-    @Input() withBackground: boolean;
-
     readonly AppRoutes = AppRoutes;
     /* the numeration of images is not in order because 2d step is skipped here
         in comparison with full (5) steps on Participation page */

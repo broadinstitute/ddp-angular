@@ -43,6 +43,35 @@ section {
             }
         }
     }
+
+    &.learn-more {
+        padding-top: 4.56rem;
+        padding-bottom: 3.875rem;
+
+        .title, .text {
+            max-width: 962px;
+            margin: 0 auto;
+        }
+        .text {
+            text-align: left;
+            margin-top: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+    }
+
+    &.participate {
+        padding-top: 5.18rem;
+        padding-bottom: 3.75rem;
+        text-align: left;
+
+        ::ng-deep .container:last-child {
+            text-align: center;
+        }
+    }
+    .faq {
+        padding-top: 5.18rem;
+        padding-bottom: 3.75rem;
+    }
 }
 
 .btn {

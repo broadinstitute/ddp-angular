@@ -61,6 +61,7 @@
                     },
                     {
                         "Title": "STEP 4",
+                        "Time": "Ongoing",
                         "Description": "Learn with us along the way",
                         "ImageAlt": "Speech bubbles sharing hearts and data visualizations"
                     }
@@ -350,7 +351,10 @@
             },
             "LearnMoreSection": {
                 "Title": "What is this project about?",
-                "Text": "<p>The Colorectal Cancer Project is part of <a class='Link' href='https://joincountmein.org'>Count Me In</a>, a research initiative that enables cancer patients to directly transform cancer research and discovery. Any individual in the United States or Canada who has ever been diagnosed with colorectal cancer can share information about their experience through completing surveys, sharing biological sample(s), and copies of their medical records with researchers in order to speed the pace of discovery.</p><p>The goal of <a class='Link' href='https://joincountmein.org'>Count Me In</a> is to generate a large dataset of linked patient-reported, genomic, clinical, and molecular information that can be shared with the biomedical community. Every patient’s story holds a piece of the puzzle that can help us better understand cancer. By discovering the genes and the variants that drive cancer and sharing this data, we hope insights can be gained to develop more effective therapies.</p>"
+                "Paragraphs": [
+                    "The Colorectal Cancer Project is part of <a class='Link' href='https://joincountmein.org'>Count Me In</a>, a research initiative that enables cancer patients to directly transform cancer research and discovery. Any individual in the United States or Canada who has ever been diagnosed with colorectal cancer can share information about their experience through completing surveys, sharing biological sample(s), and copies of their medical records with researchers in order to speed the pace of discovery.",
+                    "The goal of <a class='Link' href='https://joincountmein.org'>Count Me In</a> is to generate a large dataset of linked patient-reported, genomic, clinical, and molecular information that can be shared with the biomedical community. Every patient’s story holds a piece of the puzzle that can help us better understand cancer. By discovering the genes and the variants that drive cancer and sharing this data, we hope insights can be gained to develop more effective therapies."
+                ]
             },
             "FAQ": {
                 "Questions": [

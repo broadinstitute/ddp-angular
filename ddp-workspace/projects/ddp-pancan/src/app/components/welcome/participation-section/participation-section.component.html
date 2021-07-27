@@ -2,13 +2,15 @@
 <div class="steps container">
     <figure class="step" *ngFor="let step of 'App.HomePage.ParticipateSection.Steps' | translate; let i = index;">
         <img class="step__image"
-             [src]="'../../../assets/images/' + participationStepsImages[i]"
+             [src]="'assets/images/' + participationStepsImages[i]"
              width="150" height="150"
              [alt]="step.ImageAlt">
 
         <figcaption class="step__title participate-step-label">{{step.Title}}</figcaption>
-        <span class="step__time participate-step-time" *ngIf="step.Time">{{step.Time}}</span>
-        <div class="step__description">{{step.Description}}</div>
+        <div class="step__time participate-step-time" *ngIf="step.Time">
+            <mat-icon>access_time</mat-icon>{{step.Time}}
+        </div>
+        <div class="step__description static-page-paragraph-text">{{step.Description}}</div>
     </figure>
 </div>
 <div class="container">

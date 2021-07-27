@@ -35,11 +35,14 @@
             display: inline;
         }
 
+        &__time {
+            mat-icon {
+                vertical-align: top;
+                margin-right: 8px;
+            }
+        }
+
         &__description {
-            font-size: 1.5rem;
-            letter-spacing: -0.1px;
-            line-height: 28px;
-            margin-top: 1rem;
             max-width: 240px;
         }
     }
