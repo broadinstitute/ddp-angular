@@ -34,6 +34,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { AnchorsPageComponent } from './components/anchors-page/anchors-page.component';
 import { ScientificResearchComponent } from './components/scientific-research/scientific-research.component';
 import { ParticipationSectionComponent } from './components/welcome/participation-section/participation-section.component';
+import { StayInformedSectionComponent } from './components/welcome/stay-informed-section/stay-informed-section.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -48,6 +49,9 @@ toolkitConfig.dashboardUrl = AppRoutes.Dashboard;
 toolkitConfig.errorUrl = AppRoutes.Error;
 toolkitConfig.phone = '651-287-1608';
 toolkitConfig.infoEmail = 'info@joincountmein.org';
+toolkitConfig.twitterAccountId = 'count_me_in';
+toolkitConfig.facebookGroupId = 'joincountmein';
+toolkitConfig.countMeInUrl = 'https://joincountmein.org';
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
@@ -106,6 +110,7 @@ export function translateFactory(translate: TranslateService,
         AnchorsPageComponent,
         ScientificResearchComponent,
         ParticipationSectionComponent,
+        StayInformedSectionComponent,
     ],
     imports: [
         BrowserModule,

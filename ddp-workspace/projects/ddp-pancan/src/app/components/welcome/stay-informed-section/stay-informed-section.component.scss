@@ -1,0 +1,54 @@
+@import '../../../../styles/variables.scss';
+@import '../../../../styles/common.scss';
+
+.container {
+    max-width: $landing-page-container-width;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.social-media {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+
+    .text {
+        text-align: left;
+        margin: 0 2.5rem 0 0;
+        flex: 2 1 auto;
+        max-width: unset;
+    }
+
+    &__links {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex: 0 1 260px;
+    }
+
+    &__link {
+        flex: 0 1 50px;
+        text-align: center;
+    }
+}
+
+.title {
+    margin: 0;
+    padding-bottom: 1.13rem;
+    text-align: left;
+}
+
+
+@media screen and (max-width: $tablet-breakpoint) {
+    .social-media {
+        flex-direction: column;
+        gap: 3rem;
+        align-items: start;
+
+        &__links {
+            flex-basis: 50px;
+            gap: 3rem;
+        }
+    }
+}
