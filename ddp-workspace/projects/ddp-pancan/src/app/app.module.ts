@@ -44,6 +44,7 @@ export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
 toolkitConfig.activityUrl = AppRoutes.Activity;
 toolkitConfig.dashboardUrl = AppRoutes.Dashboard;
+toolkitConfig.doneUrl = AppRoutes.AgeUpThankYouProxy;
 toolkitConfig.errorUrl = AppRoutes.Error;
 toolkitConfig.phone = '651-287-1608';
 toolkitConfig.infoEmail = 'info@joincountmein.org';

@@ -363,6 +363,16 @@
         }
     },
     "Toolkit": {
+        "AgeUpThankYou": {
+            "Title": "[es]Thank you!",
+            "EmailVerified": "[es]Your email address has been verified. We will be sending an email with more information on re-consent shortly after your birthday.",
+            "EmailCollected": {
+                "TextPt1": "[es]An email will be sent to your child to confirm their address and tell them about the upcoming re-consent process. If you need to change the email you provided for your child, please contact the project team at",
+                "TextPt2": "[es]or",
+                "Button": "[es]Go to Dashboard"
+            },
+            "ImageAlt": "[es]Email sent"
+        },
         "StayInformed": {
             "Title": "¡Manténgase Informada/o!",
             "Text": "Gracias por unirse a la lista de correo. Le enviaremos noticias para que este informada/o. Puede darse de baja en cualquier momento. Si tiene alguna pregunta sobre su estado en el proyecto, envíe un correo electrónico a ",
