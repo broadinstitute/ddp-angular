@@ -32,6 +32,7 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
     @Input() public section: ActivitySection;
     @Input() public readonly: boolean;
     @Input() public validationRequested = false;
+    @Input() public showContentBlockTitle = true;
     @Input() public studyGuid: string;
     @Input() public activityGuid: string;
     @Output() embeddedComponentsValidationStatus: EventEmitter<boolean> = new EventEmitter();

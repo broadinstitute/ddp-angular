@@ -46,15 +46,14 @@
 
     <section class="section section--current">
       <ddp-activity-section
-        [section]="currentSection"
-        [readonly]="isReadonly() || dataEntryDisabled"
-        [validationRequested]="validationRequested"
         [studyGuid]="studyGuid"
+        [section]="currentSection"
         [activityGuid]="activityGuid"
-        (embeddedComponentsValidationStatus)="
-          updateEmbeddedComponentValidationStatus(1, $event)
-        "
+        [showContentBlockTitle]="!isPrequal"
+        [validationRequested]="validationRequested"
+        [readonly]="isReadonly() || dataEntryDisabled"
         (componentBusy)="embeddedComponentBusy$[1].next($event)"
+        (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
       >
       </ddp-activity-section>
     </section>

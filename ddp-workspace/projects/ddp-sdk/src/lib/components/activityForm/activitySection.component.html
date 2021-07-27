@@ -56,7 +56,7 @@
     </ng-template>
 
     <div *ngIf="isContent(block)">
-        <ddp-activity-content [block]="block"></ddp-activity-content>
+        <ddp-activity-content [block]="block" [showBlockTitle]="showContentBlockTitle"></ddp-activity-content>
     </div>
     <div *ngIf="isGroup(block)">
         <ddp-group-block [block]="block"
