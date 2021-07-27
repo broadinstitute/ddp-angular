@@ -1,6 +1,11 @@
 @import '../../../../styles/variables.scss';
 @import '../../../../styles/common.scss';
 
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
 .join-cmi-logo {
     max-width: 500px;
 }
@@ -11,7 +16,8 @@
 }
 
 .text {
-    margin-bottom: 1.56rem;
+    margin: 0 auto 1.56rem auto;
+    max-width: 670px;
 }
 
 .join-cmi-btn {
