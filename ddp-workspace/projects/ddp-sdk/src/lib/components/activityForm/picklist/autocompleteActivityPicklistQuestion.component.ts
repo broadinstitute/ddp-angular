@@ -18,7 +18,8 @@ import { ActivityPicklistOption } from '../../../models/activity/activityPicklis
                [matAutocomplete]="autoCompleteFromSource" />
 
         <mat-autocomplete #autoCompleteFromSource="matAutocomplete" class="autoCompletePanel" [displayWith]="displayAutoComplete">
-            <mat-optgroup *ngFor="let group of filteredGroups" [label]="group.name">
+            <mat-optgroup *ngFor="let group of filteredGroups">
+                <strong [innerHtml]="group.name | searchHighlight: autocompleteInput.value"></strong>
                 <mat-option *ngFor="let suggestion of group.options" class="autoCompleteOption" [value]="suggestion">
                     <span [innerHtml]="suggestion.optionLabel | searchHighlight: autocompleteInput.value"></span>
                 </mat-option>
@@ -35,7 +36,6 @@ import { ActivityPicklistOption } from '../../../models/activity/activityPicklis
         }
 
         .mat-optgroup ::ng-deep .mat-optgroup-label {
-            font-weight: bold;
             color: inherit;
         }
     `]
