@@ -68,9 +68,15 @@ section {
             text-align: center;
         }
     }
-    .faq {
-        padding-top: 5.18rem;
-        padding-bottom: 3.75rem;
+
+    &.faq {
+        padding-top: 6.875rem;
+        padding-bottom: 2.875rem;
+
+        .container {
+            margin: 4rem auto 3.125rem;
+            max-width: 1007px;
+        }
     }
 }
 
