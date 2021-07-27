@@ -35,6 +35,7 @@ import { AnchorsPageComponent } from './components/anchors-page/anchors-page.com
 import { ScientificResearchComponent } from './components/scientific-research/scientific-research.component';
 import { ParticipationSectionComponent } from './components/welcome/participation-section/participation-section.component';
 import { StayInformedSectionComponent } from './components/welcome/stay-informed-section/stay-informed-section.component';
+import { JoinCmiSectionComponent } from './components/welcome/join-cmi-section/join-cmi-section.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -111,6 +112,7 @@ export function translateFactory(translate: TranslateService,
         ScientificResearchComponent,
         ParticipationSectionComponent,
         StayInformedSectionComponent,
+        JoinCmiSectionComponent,
     ],
     imports: [
         BrowserModule,
