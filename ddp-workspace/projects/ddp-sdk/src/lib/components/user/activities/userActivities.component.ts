@@ -12,10 +12,8 @@ import {
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivityServiceAgent } from '../../../services/serviceAgents/activityServiceAgent.service';
-import { UserActivitiesDataSource } from './userActivitiesDataSource';
 import { ActivityInstanceState } from '../../../models/activity/activityInstanceState';
 import { LoggingService } from '../../../services/logging.service';
-import { UserActivityServiceAgent } from '../../../services/serviceAgents/userActivityServiceAgent.service';
 import { ActivityInstanceStatusServiceAgent } from '../../../services/serviceAgents/activityInstanceStatusServiceAgent.service';
 import { AnalyticsEventsService } from '../../../services/analyticsEvents.service';
 import { AnalyticsEventCategories } from '../../../models/analyticsEventCategories';
@@ -24,7 +22,6 @@ import { ActivityInstance } from '../../../models/activityInstance';
 import { ConfigurationService } from '../../../services/configuration.service';
 import { BehaviorSubject, Subscription, of } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { SessionMementoService } from '../../../services/sessionMemento.service';
 
 @Component({
     selector: 'ddp-user-activities',
@@ -202,13 +199,10 @@ import { SessionMementoService } from '../../../services/sessionMemento.service'
 })
 export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, AfterContentInit {
     @Input() studyGuid: string;
-    // in case we use multiple ddp-user-activities component instances on the page we can't use session participantGuid
-    @Input() participantGuid: string;
-    @Input() activities: Array<ActivityInstance>;
+    @Input() dataSource: Array<ActivityInstance>;
     @Input() displayedColumns: Array<DashboardColumns> = ['name', 'summary', 'date', 'status', 'actions'];
     @Output() open: EventEmitter<string> = new EventEmitter();
     @Output() loadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
-    public dataSource: UserActivitiesDataSource | Array<ActivityInstance>;
     public statusesLoaded = false;
     private states: Array<ActivityInstanceState> | null = null;
     private studyGuidObservable = new BehaviorSubject<string | null>(null);
@@ -216,23 +210,14 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
     private readonly LOG_SOURCE = 'UserActivitiesComponent';
 
     constructor(
-        private serviceAgent: UserActivityServiceAgent,
         private statusesServiceAgent: ActivityInstanceStatusServiceAgent,
         private logger: LoggingService,
         private activityServiceAgent: ActivityServiceAgent,
         private analytics: AnalyticsEventsService,
-        private session: SessionMementoService,
         @Inject('ddp.config') private config: ConfigurationService,
         public domSanitizationService: DomSanitizer) {}
 
     public ngOnInit(): void {
-        if (this.participantGuid) {
-            this.session.setParticipant(this.participantGuid);
-        }
-        this.dataSource = this.activities || new UserActivitiesDataSource(
-            this.serviceAgent,
-            this.logger,
-            this.studyGuidObservable);
         this.statusesLoadingAnchor = this.statusesServiceAgent.getStatuses()
             .subscribe((x) => {
                 this.states = x;

@@ -71,41 +71,4 @@ describe('UserActivitiesComponent', () => {
     it('should create component', () => {
         expect(component).toBeTruthy();
     });
-
-    it('should set participant from the input', () => {
-        const participantGuid = '123';
-        component.participantGuid = participantGuid;
-        component.ngOnInit();
-        expect(sessionSpy.setParticipant).toHaveBeenCalledWith(participantGuid);
-    });
-
-    it('should not set participant from the input', () => {
-        component.participantGuid = null;
-        component.ngOnInit();
-        expect(sessionSpy.setParticipant).not.toHaveBeenCalled();
-    });
-
-    it('should use input activities', () => {
-        const userActivities = [{
-            activityCode: 'code',
-            activityDescription: 'Description',
-            activityName: 'test activity',
-            activitySubtitle: null,
-            activitySubtype: '',
-            activitySummary: 'Summary',
-            activityTitle: 'test activity title',
-            activityType: 'activity type',
-            canDelete: false,
-            instanceGuid: '789',
-            isFollowup: false,
-            isHidden: false,
-            numQuestions: 0,
-            numQuestionsAnswered: 0,
-            readonly: false,
-            statusCode: 'TEST_CODE'
-        }];
-        component.activities = userActivities;
-        component.ngOnInit();
-        expect(component.dataSource).toBe(userActivities);
-    });
 });

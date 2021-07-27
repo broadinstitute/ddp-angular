@@ -1,5 +1,5 @@
 import { DashboardComponent } from './dashboard.component';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { HeaderConfigurationService } from '../../services/headerConfiguration.service';
@@ -9,14 +9,13 @@ import {
     UserInvitationServiceAgent,
     InvitationType,
     ParticipantsSearchServiceAgent,
-    ConfigurationService,
     GovernedParticipantsServiceAgent,
     UserActivityServiceAgent,
     ActivityInstance,
     UserProfileServiceAgent
 } from 'ddp-sdk';
-import { map, take, filter, switchMap, tap } from 'rxjs/operators';
-import { combineLatest, Observable, of } from 'rxjs';
+import { map, take, filter, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { combineLatest, Observable, of, Subject } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 
 interface DashboardParticipant {
@@ -83,7 +82,7 @@ interface DashboardParticipant {
                 <section class="section dashboard-section" [class.full-width]="useParticipantDashboard">
                     <div class="content content_medium">
                         <mat-accordion *ngIf="useParticipantDashboard; else activitiesTable" hideToggle multi>
-                            <mat-expansion-panel *ngFor="let participant of dashboardParticipants$ | async; first as isFirst"
+                            <mat-expansion-panel *ngFor="let participant of dashboardParticipants; first as isFirst"
                                                  class="dashboard-panel"
                                                  [expanded]="isFirst"
                                                  (opened)="openParticipantPanel(participant.userGuid);"
@@ -93,7 +92,7 @@ interface DashboardParticipant {
                                         {{participant.label}}
                                     </mat-panel-title>
                                     <mat-panel-description fxLayoutAlign="end center" class="dashboard-panel-description">
-                                        <ng-container *ngIf="panelsState.get(participant.userGuid); else show">
+                                        <ng-container *ngIf="participantUserGuidToPanelIsOpen.get(participant.userGuid); else show">
                                             {{'Toolkit.Dashboard.HidePanel' | translate}}
                                             <mat-icon>expand_less</mat-icon>
                                         </ng-container>
@@ -112,8 +111,7 @@ interface DashboardParticipant {
                             <div class="dashboard-content dashboard-content_table">
                                 <ddp-user-activities [studyGuid]="studyGuid"
                                                      [displayedColumns]="toolkitConfig.dashboardDisplayedColumns"
-                                                     [participantGuid]="participantGuid"
-                                                     [activities]="isParticipantOperator(participantGuid) ? operatorActivities : null"
+                                                     [dataSource]="(participantToActivitiesStream.get(participantGuid) || userActivities$) | async"
                                                      (open)="navigate($event, participantGuid)">
                                 </ddp-user-activities>
                             </div>
@@ -128,11 +126,12 @@ interface DashboardParticipant {
         }
     `]
 })
-export class DashboardRedesignedComponent extends DashboardComponent implements OnInit {
+export class DashboardRedesignedComponent extends DashboardComponent implements OnInit, OnDestroy {
     public invitationId: string | null = null;
-    public dashboardParticipants$: Observable<DashboardParticipant[]>;
-    public panelsState = new Map<string, boolean>();
-    public operatorActivities: Array<ActivityInstance>;
+    public dashboardParticipants: DashboardParticipant[];
+    public participantUserGuidToPanelIsOpen = new Map<string, boolean>();
+    public participantToActivitiesStream = new Map<string, Observable<Array<ActivityInstance>>>();
+    private ngUnsubscribe = new Subject();
 
     constructor(
         private headerConfig: HeaderConfigurationService,
@@ -142,12 +141,11 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
         private userInvitation: UserInvitationServiceAgent,
         _participantsSearch: ParticipantsSearchServiceAgent,
         private governedParticipantsAgent: GovernedParticipantsServiceAgent,
-        private userActivityServiceAgent: UserActivityServiceAgent,
-        private userProfile: UserProfileServiceAgent,
+        protected userActivityServiceAgent: UserActivityServiceAgent,
+        private userProfileService: UserProfileServiceAgent,
         private translate: TranslateService,
-        @Inject('ddp.config') private config: ConfigurationService,
         @Inject('toolkit.toolkitConfig') public toolkitConfig: ToolkitConfigurationService) {
-        super(router, _announcements, _participantsSearch, session, toolkitConfig);
+        super(router, _announcements, _participantsSearch, session, userActivityServiceAgent, toolkitConfig);
     }
 
     public ngOnInit(): void {
@@ -155,27 +153,22 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
         this.headerConfig.setupDefaultHeader();
         !this.isAdmin && this.getInvitationId();
 
-        this.dashboardParticipants$ = this.getDashboardParticipants();
-    }
-
-    private getOperatorActivities(): Observable<Array<ActivityInstance> | null> {
-        return of(this.session.session.userGuid).pipe(
-            tap((userGuid) => {
-                this.session.setParticipant(userGuid);
-            }),
-            switchMap(() => this.userActivityServiceAgent.getActivities(of(this.config.studyGuid))));
+        const dashboardParticipants$ = this.useParticipantDashboard ? this.getDashboardParticipants() : of([]);
+        dashboardParticipants$.pipe(takeUntil(this.ngUnsubscribe)).subscribe((participants) => {
+            this.dashboardParticipants = participants;
+            for (const {userGuid} of participants) {
+                this.participantToActivitiesStream.set(userGuid, this.getUserActivitiesForParticipant(userGuid));
+            }
+        });
     }
 
     private getDashboardParticipants(): Observable<DashboardParticipant[]> {
-        const operatorParticipant$ = this.getOperatorActivities().pipe(
-            tap((userActivities) => {
-                this.operatorActivities = userActivities;
-            }),
-            switchMap((userActivities) => userActivities?.length ? this.userProfile.profile : of(null)));
+        const operatorParticipant$ = this.userActivities$
+            .pipe(switchMap((userActivities) => userActivities.length ? this.userProfileService.profile : of(null)));
 
         return combineLatest([
             operatorParticipant$,
-            this.governedParticipantsAgent.getGovernedStudyParticipants(this.config.studyGuid)
+            this.governedParticipantsAgent.getGovernedStudyParticipants(this.studyGuid)
         ]).pipe(map(([operatorParticipant, participants]) => {
             const result: DashboardParticipant[] = participants.map((participant, i) => ({
                 userGuid: participant.userGuid,
@@ -204,11 +197,11 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
     }
 
     public openParticipantPanel(userGuid: string): void {
-        this.panelsState.set(userGuid, true);
+        this.participantUserGuidToPanelIsOpen.set(userGuid, true);
     }
 
     public closeParticipantPanel(userGuid: string): void {
-        this.panelsState.set(userGuid, false);
+        this.participantUserGuidToPanelIsOpen.set(userGuid, false);
     }
 
     private getInvitationId(): void {
@@ -226,7 +219,24 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
         this.router.navigate([this.toolkitConfig.addParticipantUrl]);
     }
 
-    public isParticipantOperator(participantGuid): boolean {
+    private isParticipantOperator(participantGuid: string): boolean {
         return participantGuid === this.session.session?.userGuid;
+    }
+
+    public getUserActivitiesForParticipant(participantGuid: string): Observable<Array<ActivityInstance>> {
+        if (this.isParticipantOperator(participantGuid)) return this.userActivities$;
+
+        return of(participantGuid).pipe(
+            // should be set exactly before the activities request.That's why it's a side effect
+            tap((guid) => {
+                this.session.setParticipant(guid);
+            }),
+            switchMap(() => this.userActivityServiceAgent.getActivities(of(this.studyGuid))),
+            map((activities) => activities || []));
+    }
+
+    public ngOnDestroy(): void {
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
     }
 }

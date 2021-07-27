@@ -91,3 +91,14 @@ toolkit-dashboard-redesigned .main {
         }
     }
 }
+
+.infobox_dashboard {
+    padding: 1.5rem 2rem;
+    position: relative;
+
+    .close-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+}

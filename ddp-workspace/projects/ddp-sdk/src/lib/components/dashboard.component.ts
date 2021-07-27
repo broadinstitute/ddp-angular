@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ActivityInstance } from '../models/activityInstance';
 
 @Component({
     selector: 'ddp-dashboard',
@@ -10,12 +11,14 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
             SDK.Dashboard.Text
         </p>
         <ddp-user-activities [studyGuid]="studyGuid"
+                             [dataSource]="activities"
                              (open)="open($event)"
                              (loadedEvent)="load($event)">
         </ddp-user-activities>`
 })
 export class DashboardComponent {
     @Input() studyGuid: string;
+    @Input() activities: Array<ActivityInstance>;
     @Output('open') public openEvent: EventEmitter<string> = new EventEmitter<string>();
     @Output() public loadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 

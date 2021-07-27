@@ -6,11 +6,30 @@ import {
     EnrollmentStatusType,
     AnnouncementsServiceAgent,
     mockComponent,
-    SessionMementoService
+    SessionMementoService, UserActivityServiceAgent, ActivityInstance
 } from 'ddp-sdk';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
+
+const activityMock: ActivityInstance = {
+    activityCode: 'code',
+    activityDescription: 'Description',
+    activityName: 'test activity',
+    activitySubtitle: null,
+    activitySubtype: '',
+    activitySummary: 'Summary',
+    activityTitle: 'test activity title',
+    activityType: 'activity type',
+    canDelete: false,
+    instanceGuid: '123',
+    isFollowup: false,
+    isHidden: false,
+    numQuestions: 0,
+    numQuestionsAnswered: 0,
+    readonly: false,
+    statusCode: 'TEST_CODE'
+};
 
 describe('DashboardComponent', () => {
     let fixture: ComponentFixture<DashboardComponent>;
@@ -18,6 +37,7 @@ describe('DashboardComponent', () => {
     let participantsSearchSpy: jasmine.SpyObj<ParticipantsSearchServiceAgent>;
     let sessionSpy: jasmine.SpyObj<SessionMementoService>;
     let toolkitConfigMock: ToolkitConfigurationService;
+    let userActivityServiceAgentSpy: jasmine.SpyObj<UserActivityServiceAgent>;
 
     beforeEach(async () => {
         participantsSearchSpy = jasmine.createSpyObj('participantsSearchSpy', {
@@ -30,9 +50,11 @@ describe('DashboardComponent', () => {
         toolkitConfigMock = new ToolkitConfigurationService();
         toolkitConfigMock.activityUrl = 'testActivityUrl';
         sessionSpy = jasmine.createSpyObj('sessionSpy', ['setParticipant']);
+        userActivityServiceAgentSpy = jasmine.createSpyObj('userActivityServiceAgentSpy', { getActivities: of([]) });
+
         const announcementsSpy = jasmine.createSpyObj('participantsSearchSpy', { getMessages: of([]) });
         const toolkitHeader = mockComponent({ selector: 'toolkit-header', inputs: ['showButtons'] });
-        const dashboard = mockComponent({ selector: 'ddp-dashboard', inputs: ['studyGuid', 'selectedUserGuid'] });
+        const dashboard = mockComponent({ selector: 'ddp-dashboard', inputs: ['studyGuid', 'selectedUserGuid', 'activities'] });
         const subjectPanel = mockComponent({ selector: 'ddp-subject-panel', inputs: ['subject'] });
         await TestBed.configureTestingModule({
             imports: [
@@ -43,6 +65,7 @@ describe('DashboardComponent', () => {
                 { provide: ParticipantsSearchServiceAgent, useValue: participantsSearchSpy },
                 { provide: AnnouncementsServiceAgent, useValue: announcementsSpy },
                 { provide: SessionMementoService, useValue: sessionSpy },
+                { provide: UserActivityServiceAgent, useValue: userActivityServiceAgentSpy },
                 { provide: 'toolkit.toolkitConfig', useValue: toolkitConfigMock },
             ],
             declarations: [DashboardComponent, toolkitHeader, dashboard, subjectPanel],
@@ -112,5 +135,27 @@ describe('DashboardComponent', () => {
         component.navigate('1', 'userGuid567');
 
         expect(sessionSpy.setParticipant).not.toHaveBeenCalled();
+    });
+
+    it('retrieves user activities', (done) => {
+        userActivityServiceAgentSpy.getActivities.and.returnValue(of([activityMock]));
+        component.ngOnInit();
+        fixture.detectChanges();
+
+        component.userActivities$.subscribe((activities) => {
+            expect(activities).toEqual([activityMock]);
+            done();
+        });
+    });
+
+    it('sets user activities as empty array', (done) => {
+        userActivityServiceAgentSpy.getActivities.and.returnValue(of(null));
+        component.ngOnInit();
+        fixture.detectChanges();
+
+        component.userActivities$.subscribe((activities) => {
+            expect(activities).toEqual([]);
+            done();
+        });
     });
 });
