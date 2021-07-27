@@ -62,6 +62,8 @@ export class ToolkitConfigurationService {
     phone: string;
     infoEmail: string;
     dataEmail: string;
+    colorectalPagePhone: string;
+    colorectalPageEmail: string;
     twitterAccountId: string;
     facebookGroupId: string;
     instagramId: string;

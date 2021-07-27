@@ -37,6 +37,7 @@ import { ParticipationSectionComponent } from './components/welcome/participatio
 import { StayInformedSectionComponent } from './components/welcome/stay-informed-section/stay-informed-section.component';
 import { JoinCmiSectionComponent } from './components/welcome/join-cmi-section/join-cmi-section.component';
 import { ColorectalPageComponent } from './components/splash-pages/colorectal-page/colorectal-page.component';
+import { SplashPageFooterComponent } from './components/splash-pages/splash-page-footer/splash-page-footer.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -54,6 +55,8 @@ toolkitConfig.infoEmail = 'info@joincountmein.org';
 toolkitConfig.twitterAccountId = 'count_me_in';
 toolkitConfig.facebookGroupId = 'joincountmein';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org';
+toolkitConfig.colorectalPagePhone = '651-287-1608';
+toolkitConfig.colorectalPageEmail = 'info@colorectalcancerproject.org';
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
@@ -115,6 +118,7 @@ export function translateFactory(translate: TranslateService,
         StayInformedSectionComponent,
         JoinCmiSectionComponent,
         ColorectalPageComponent,
+        SplashPageFooterComponent,
     ],
     imports: [
         BrowserModule,

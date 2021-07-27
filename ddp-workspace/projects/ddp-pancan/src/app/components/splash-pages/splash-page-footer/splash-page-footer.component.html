@@ -1,0 +1,19 @@
+<footer class="footer">
+    <div class="main">
+        <button mat-button
+                class="back-to-top btn-common"
+                (click)="goToTop()">
+            <mat-icon>arrow_drop_up</mat-icon>
+            {{'App.Footer.BackToTopButton' | translate}}
+        </button>
+        <p class="text" [innerHTML]="'App.ColorectalPage.Footer.Text' | translate"></p>
+    </div>
+
+    <div class="contacts">
+        <div translate class="contacts__label">App.Footer.Contacts</div>
+        <div translate class="contacts__item-label">App.Footer.Email</div>
+        <a target="_blank" class="contacts__item" href="tel:{{phone}}">{{phone}}</a>
+        <div translate class="contacts__item-label">App.Footer.Phone</div>
+        <a target="_blank" class="contacts__item" href="mailto:{{email}}">{{email}}</a>
+    </div>
+</footer>
