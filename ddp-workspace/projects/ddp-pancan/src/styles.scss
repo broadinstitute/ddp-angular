@@ -247,3 +247,16 @@ ddp-language-selector {
 .content_medium {
     max-width: 1100px;
 }
+
+$tooltip-icon-size: 24px;
+.tooltip {
+    display: inline-block;
+    vertical-align: middle;
+    height: $tooltip-icon-size;
+    margin-left: 3px;
+
+    &__icon {
+        height: $tooltip-icon-size;
+        width: $tooltip-icon-size;
+    }
+}
