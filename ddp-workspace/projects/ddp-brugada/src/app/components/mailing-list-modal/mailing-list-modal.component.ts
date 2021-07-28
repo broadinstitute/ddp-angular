@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ConfigurationService, MailingListServiceAgent } from 'ddp-sdk';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-mailing-list-modal',
@@ -39,6 +41,8 @@ export class MailingListModalComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<MailingListModalComponent>,
+    private mailingListService: MailingListServiceAgent,
+    @Inject('ddp.config') private config: ConfigurationService,
   ) {
   }
 
@@ -50,6 +54,25 @@ export class MailingListModalComponent implements OnInit {
   }
 
   onSubmit(): void {
+    if (!this.form.valid || this.loading) {
+      return;
+    }
 
+    this.form.disable();
+    this.loading = true;
+
+    const { email } = this.form.value;
+
+    this.mailingListService
+      .join({
+        firstName: '',
+        lastName: '',
+        emailAddress: email,
+        studyGuid: this.config.studyGuid,
+      })
+      .pipe(take(1))
+      .subscribe(() => {
+        this.dialogRef.close();
+      });
   }
 }

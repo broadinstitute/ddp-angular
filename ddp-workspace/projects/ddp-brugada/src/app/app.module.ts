@@ -1,8 +1,13 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
+import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import {
   DdpModule,
@@ -22,11 +27,6 @@ import { HomeComponent } from './pages/home/home.component';
 import { TeamComponent } from './pages/team/team.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MailingListModalComponent } from './components/mailing-list-modal/mailing-list-modal.component';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
