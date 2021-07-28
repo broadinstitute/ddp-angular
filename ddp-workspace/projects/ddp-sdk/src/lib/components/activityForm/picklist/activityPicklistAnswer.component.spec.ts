@@ -180,11 +180,6 @@ describe('ActivityPicklistAnswer', () => {
     it('should render AutocompleteActivityPicklistQuestion', () => {
         component.block = {
             ...questionBlock,
-            picklistSuggestions: [
-                { label: 'Sarcoma', isParent: true, value: 'SARCOMA' },
-                { label: 'Angiosarcoma', parent: 'Sarcoma', value: 'ANGIOSARCOMA' },
-                { label: 'Chondrosarcoma', parent: 'Sarcoma', value: 'CHONDROSARCOMA' },
-            ],
             renderMode: PicklistRenderMode.AUTOCOMPLETE
         } as ActivityPicklistQuestionBlock;
         fixture.detectChanges();

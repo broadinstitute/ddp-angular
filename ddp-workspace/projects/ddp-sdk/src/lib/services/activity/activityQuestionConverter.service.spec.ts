@@ -17,33 +17,13 @@ const question = {
             stableId: 'SARCOMA',
             optionLabel: 'Sarcoma',
             allowDetails: false,
-            nestedOptions: [
-                {
-                    allowDetails: false,
-                    nestedOptions: null,
-                    optionLabel: 'Angiosarcoma',
-                    stableId: 'ANGIOSARCOMA',
-                },
-                {
-                    allowDetails: false,
-                    nestedOptions: null,
-                    optionLabel: 'Chondrosarcoma',
-                    stableId: 'CHONDROSARCOMA',
-                }
-            ]
+            nestedOptions: []
         },
         {
             stableId: 'ENDOCRINE_CANCER',
             optionLabel: 'Endocrine cancer',
             allowDetails: false,
-            nestedOptions: [
-                {
-                    allowDetails: false,
-                    nestedOptions: null,
-                    optionLabel: 'Pheochromocytoma',
-                    stableId: 'PHEOCHROMOCYTOMA',
-                },
-            ]
+            nestedOptions: []
         },
     ],
     questionType: QuestionType.Picklist,
@@ -67,17 +47,6 @@ describe('ActivityQuestionConverter Test', () => {
 
     it('should initialize service', () => {
         expect(service).toBeDefined();
-    });
-
-    it('should build picklist suggestions correctly', () => {
-        const suggestions = [
-            { label: 'Sarcoma', isParent: true, value: 'SARCOMA' },
-            { label: 'Angiosarcoma', parent: 'Sarcoma', value: 'ANGIOSARCOMA' },
-            { label: 'Chondrosarcoma', parent: 'Sarcoma', value: 'CHONDROSARCOMA' },
-            { label: 'Endocrine cancer', isParent: true, value: 'ENDOCRINE_CANCER' },
-            { label: 'Pheochromocytoma', parent: 'Endocrine cancer', value: 'PHEOCHROMOCYTOMA' },
-        ];
-        expect((service.buildQuestionBlock(question, 1) as ActivityPicklistQuestionBlock).picklistSuggestions).toEqual(suggestions);
     });
 
     it('should set customValue as null', () => {
