@@ -405,6 +405,10 @@
                 },
                 "Text": "For more information on how to become a partner for the Colorectal Cancer Project, contact the team at <a class='Link' href='mailto:info@colorectalcancerproject.org'>info@colorectalcancerproject.org</a>."
             },
+            "StayInformed": {
+                "Title": "Stay informed",
+                "Button": "Join Mailing List"
+            },
             "Footer": {
                 "Text": "The Colorectal Cancer Project is part of <span class='bold'>Count Me In</span>, a research initiative that brings together patients and scientists as partners to speed up discoveries in cancer research."
             }

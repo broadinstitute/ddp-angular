@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, Input, OnInit } from '@angular/core';
 import { AppRoutes } from '../../app-routes';
 import { CommunicationService, ToolkitConfigurationService } from 'toolkit';
 
@@ -9,6 +9,8 @@ import { CommunicationService, ToolkitConfigurationService } from 'toolkit';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StayInformedSectionComponent implements OnInit {
+    @Input() title: string;
+    @Input() btnText: string;
     readonly AppRoutes = AppRoutes;
     twitterUrl: string;
     facebookUrl: string;
