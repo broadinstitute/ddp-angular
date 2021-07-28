@@ -379,7 +379,13 @@
             "ReturnButton": "RETURN HOME"
         },
         "Dashboard": {
-            "Title": "Dashboard"
+            "Title": "Dashboard",
+            "ParticipantsTitle": "Participant Dashboard",
+            "AddParticipant": "Add Participant",
+            "ShowPanel": "Show",
+            "HidePanel": "Hide",
+            "UserLabel": "You",
+            "ChildLabel": "Your child"
         },
         "Password": {
             "Title": "Please enter the password",
@@ -467,10 +473,10 @@
         "CloseButton": "CLOSE",
         "AddButton": "ADD",
         "CancelButton": "CANCEL",
-        "NextButton": "NEXT",
+        "NextButton": "Next",
         "PreviousButton": "PREV",
         "SavingButton": "SAVING",
-        "EditButton": "EDIT",
+        "EditButton": "Edit",
         "CompleteButton": "Edit",
         "ReviewButton": "VIEW",
         "OpenButton": "Open",

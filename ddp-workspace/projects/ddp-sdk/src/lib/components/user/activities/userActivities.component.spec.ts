@@ -1,7 +1,14 @@
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { UserActivitiesComponent, UserActivityServiceAgent, LoggingService, ActivityServiceAgent, AnalyticsEventsService } from 'ddp-sdk';
+import {
+    UserActivitiesComponent,
+    UserActivityServiceAgent,
+    LoggingService,
+    ActivityServiceAgent,
+    AnalyticsEventsService,
+    SessionMementoService
+} from 'ddp-sdk';
 import { Observable, of } from 'rxjs';
 import { ActivityInstanceStatusServiceAgent } from '../../../services/serviceAgents/activityInstanceStatusServiceAgent.service';
 import { MatTableModule } from '@angular/material/table';
@@ -21,6 +28,7 @@ describe('UserActivitiesComponent', () => {
     let component: UserActivitiesComponent;
     let debugElement: DebugElement;
     let serviceAgentSpy: jasmine.SpyObj<UserActivityServiceAgent>;
+    let sessionSpy: jasmine.SpyObj<SessionMementoService>;
 
     beforeEach(async () => {
         serviceAgentSpy = jasmine.createSpyObj('serviceAgentSpy', {
@@ -28,6 +36,7 @@ describe('UserActivitiesComponent', () => {
             resetSelectedUser: undefined,
             getActivities: of([])
         });
+        sessionSpy = jasmine.createSpyObj('sessionSpy', ['setParticipant']);
         const statusesServiceAgentSpy = jasmine.createSpyObj('statusesServiceAgentSpy', { getStatuses: of([]) });
         const analyticsSpy = jasmine.createSpyObj('analyticsSpy', ['emitCustomEvent']);
         await TestBed.configureTestingModule({
@@ -44,6 +53,7 @@ describe('UserActivitiesComponent', () => {
                 { provide: LoggingService, useValue: {} },
                 { provide: ActivityServiceAgent, useValue: {} },
                 { provide: AnalyticsEventsService, useValue: analyticsSpy },
+                { provide: SessionMementoService, useValue: sessionSpy },
                 { provide: 'ddp.config', useValue: {} },
             ],
             declarations: [UserActivitiesComponent],

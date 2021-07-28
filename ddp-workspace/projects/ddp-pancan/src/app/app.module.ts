@@ -48,6 +48,8 @@ toolkitConfig.doneUrl = AppRoutes.AgeUpThankYouProxy;
 toolkitConfig.errorUrl = AppRoutes.Error;
 toolkitConfig.phone = '651-287-1608';
 toolkitConfig.infoEmail = 'info@joincountmein.org';
+toolkitConfig.useParticipantDashboard = true;
+toolkitConfig.dashboardDisplayedColumns = ['name', 'summary', 'status', 'actions'];
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
