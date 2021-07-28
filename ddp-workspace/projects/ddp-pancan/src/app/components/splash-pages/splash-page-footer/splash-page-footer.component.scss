@@ -5,8 +5,7 @@
     @include footer($splash-page-footer-height);
     display: flex;
     box-sizing: border-box;
-    padding-top: 3.38rem;
-    padding-bottom: 2.19rem;
+    padding: 3.38rem 3rem 2.19rem;
     gap: 16rem;
     justify-content: center;
     text-align: left;

@@ -8,6 +8,8 @@
 section {
     box-sizing: border-box;
     text-align: center;
+    padding-left: 3rem;
+    padding-right: 3rem;
 
     &:nth-of-type(even) {
         background-color: $section-grey-background-color;
@@ -77,6 +79,10 @@ section {
         padding-top: 6.875rem;
         padding-bottom: 2.875rem;
 
+        .title {
+            margin-top: 0;
+        }
+
         .container {
             margin: 4rem auto 3.125rem;
             max-width: 1007px;
@@ -131,4 +137,22 @@ section {
 .join-cmi-btn {
     font-size: 1.25rem;
     margin: 1.56rem 0 7.5rem;
+}
+
+@media screen and (max-width: $desktop-breakpoint) {
+    section {
+        &.introduction {
+            padding-left: 3rem;
+            padding-right: 3rem;
+
+            .description {
+                min-width: 365px;
+            }
+
+            .image {
+                width: 320px;
+                height: 315px;
+            }
+        }
+    }
 }
