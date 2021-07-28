@@ -1,6 +1,10 @@
 @import '../../../styles/colors';
 @import '../../../styles/breakpoints';
 
+:host {
+  margin-top: auto;
+}
+
 .footer {
   padding: 4.2rem 0;
 

@@ -4,4 +4,5 @@ export enum Route {
   Team = 'team',
   FAQ = 'faq',
   Join = 'join',
+  Error = 'error',
 }
