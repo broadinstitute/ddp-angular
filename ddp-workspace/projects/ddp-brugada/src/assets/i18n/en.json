@@ -109,7 +109,7 @@
     "Error": {
       "Title": "We've encountered an error",
       "Paragraph1": "We're sorry, but an error has occurred.",
-      "Paragraph2": "Please wait a moment and retry. If the trouble persists, please email us at <a class=\"underlined-link\" href=\"info@linkmyheart.org\">info@linkmyheart.org</a> or call us at <a class=\"underlined-link\" href=\"tel:6177147560\">(617) 714-7560</a>."
+      "Paragraph2": "Please wait a moment and retry. If the trouble persists, please email us at <a class=\"underlined-link\" href=\"mailto:info@linkmyheart.org\">info@linkmyheart.org</a> or call us at <a class=\"underlined-link\" href=\"tel:6177147560\">(617) 714-7560</a>."
     }
   },
   "Toolkit": {
