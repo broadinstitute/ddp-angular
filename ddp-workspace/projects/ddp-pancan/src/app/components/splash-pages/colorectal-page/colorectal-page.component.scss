@@ -1,5 +1,5 @@
-@import '../../../../styles/variables.scss';
-@import '../../../../styles/common.scss';
+@import '../../../../styles/variables';
+@import '../../../../styles/common';
 
 .main > * {
     width: 100%;
@@ -15,16 +15,20 @@ section {
 
     &.introduction {
         max-width: 1440px;
-        padding: 5.125rem 7rem 1.5rem;
+        padding: 5.125rem 5rem 1.5rem;
 
         .flex{
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
-            gap: 9rem;
+            justify-content: space-between;
         }
 
         .description {
-            flex: 0 1 41rem;
+            flex: 0 1 auto;
             text-align: left;
+            max-width: 651px;
+            padding-right: 2rem;
 
             .title, .join-cmi-btn  {
                 margin: 0;
@@ -32,7 +36,7 @@ section {
         }
 
         .image {
-            flex: 1 1 32rem;
+            flex: 0 1 auto;
         }
 
         .logos {
