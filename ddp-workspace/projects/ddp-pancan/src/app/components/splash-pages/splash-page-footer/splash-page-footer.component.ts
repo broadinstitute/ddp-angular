@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { WindowRef } from 'ddp-sdk';
+import { BaseFooterComponent } from '../../footer/base-footer/base-footer.component';
 
 @Component({
     selector: 'app-splash-page-footer',
@@ -7,16 +8,11 @@ import { WindowRef } from 'ddp-sdk';
     styleUrls: ['./splash-page-footer.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SplashPageFooterComponent {
+export class SplashPageFooterComponent extends BaseFooterComponent {
     @Input() phone: string;
     @Input() email: string;
 
-    constructor(private windowRef: WindowRef) {}
-
-    public goToTop(): void {
-        this.windowRef.nativeWindow.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+    constructor(private _windowRef: WindowRef) {
+        super(_windowRef);
     }
 }
