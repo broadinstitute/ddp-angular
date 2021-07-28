@@ -67,3 +67,10 @@
         margin-top: 1rem;
     }
 }
+
+@media screen and (max-width: $desktop-breakpoint) {
+    .footer {
+        justify-content: space-between;
+        gap: 3rem;
+    }
+}
