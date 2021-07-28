@@ -74,3 +74,24 @@
         gap: 3rem;
     }
 }
+
+@media screen and (max-width: $tablet-breakpoint) {
+    .footer {
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1rem;
+
+        .main {
+            flex: 0 1 auto;
+        }
+
+        .contacts {
+            flex: 0 1 auto;
+
+            &__item-label {
+                display: inline;
+                margin-right: 10px;
+            }
+        }
+    }
+}
