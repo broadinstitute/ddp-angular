@@ -364,11 +364,11 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             tap(() => addressSuggestion$.next(null)),
             tap(() => busyCounter$.next(1)),
             tap(() => ++initiatedVerifyAddressCalls),
+            tap(_ => {
+                this.block.hasValidAddress = false;
+            }),
             switchMap(inputAddress =>
                 this.addressService.verifyAddress(inputAddress).pipe(
-                    tap(_ => {
-                        this.block.hasValidAddress = false;
-                    }),
                     map(verifyResponse => ({
                         entered: inputAddress,
                         suggested: new Address(verifyResponse),

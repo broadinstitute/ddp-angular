@@ -62,6 +62,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     protected anchor: CompositeDisposable;
     protected visitedSectionIndexes: Array<boolean> = [true];
     protected submitAttempted = new Subject<boolean>();
+    protected readonly timeToDebounce = 250;
 
     protected constructor(injector: Injector) {
         this.serviceAgent = injector.get(ActivityServiceAgent);
@@ -194,7 +195,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
                 // Wait for activity in page to cease
                 // if not busy for debounce time then we good to go
                 concatMap(() => this.isPageBusy.pipe(
-                    debounceTime(250),
+                    debounceTime(this.timeToDebounce),
                     filter(isPageBusy => !isPageBusy),
                     take(1))
                 ),

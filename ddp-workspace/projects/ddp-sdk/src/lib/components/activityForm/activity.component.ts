@@ -203,7 +203,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
 
                 this.isPageBusy.pipe(
                     tap(_ => this.isLoaded$.next(false)),
-                    debounceTime(250),
+                    debounceTime(this.timeToDebounce),
                     filter(busy => !busy),
                     take(1)
                 ).subscribe(_ => {
@@ -228,7 +228,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
 
             this.isPageBusy.pipe(
                 tap(_ => this.isLoaded$.next(false)),
-                debounceTime(250),
+                debounceTime(this.timeToDebounce),
                 filter(busy => !busy),
                 take(1)
             ).subscribe(_ => {
