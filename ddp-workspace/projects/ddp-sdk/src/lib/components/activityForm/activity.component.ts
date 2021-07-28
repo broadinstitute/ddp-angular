@@ -23,7 +23,7 @@ import { ActivitySection } from '../../models/activity/activitySection';
 import { AnalyticsEventCategories } from '../../models/analyticsEventCategories';
 import { CompositeDisposable } from '../../compositeDisposable';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { delay, filter, map, take, tap } from 'rxjs/operators';
+import { debounceTime, delay, filter, map, take, tap } from 'rxjs/operators';
 import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
 import { LoggingService } from '../../services/logging.service';
@@ -91,7 +91,9 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     public ngOnInit(): void {
         this.getActivity();
         this.initStepperState();
-        const submitSub = this.submitAttempted.subscribe(() => this.submitService.announceSubmit(null));
+        const submitSub = this.submitAttempted.subscribe((isSubmit: boolean) => {
+            this.submitService.announceSubmit(isSubmit);
+        });
 
         // all PATCH responses routed to here
         const resSub = this.submissionManager.answerSubmissionResponse$.subscribe(
@@ -187,18 +189,29 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     public incrementStep(scroll: boolean = true): void {
         const nextIndex = this.nextAvailableSectionIndex();
         if (nextIndex !== -1) {
-            if (scroll) {
-                this.scrollToTop();
-            }
             // enable any validation errors to be visible
             this.validationRequested = true;
             this.sendSectionAnalytics();
             this.currentSection.validate();
+
+            if (scroll) {
+                this.scrollToTop();
+            }
+
             if (this.currentSection.valid) {
                 this.resetValidationState();
-                this.currentSectionIndex = nextIndex;
-                this.visitedSectionIndexes[nextIndex] = true;
-                this.saveLastVisitedSectionIndex(nextIndex);
+
+                this.isPageBusy.pipe(
+                    tap(_ => this.isLoaded$.next(false)),
+                    debounceTime(this.timeToDebounce),
+                    filter(busy => !busy),
+                    take(1)
+                ).subscribe(_ => {
+                    this.isLoaded$.next(true);
+                    this.currentSectionIndex = nextIndex;
+                    this.visitedSectionIndexes[nextIndex] = true;
+                    this.saveLastVisitedSectionIndex(nextIndex);
+                });
             }
         }
     }
@@ -208,10 +221,20 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         if (previousIndex !== -1) {
             // if we move forwards or backwards, let's reset our validation display
             this.resetValidationState();
-            this.currentSectionIndex = previousIndex;
+
             if (scroll) {
                 this.scrollToTop();
             }
+
+            this.isPageBusy.pipe(
+                tap(_ => this.isLoaded$.next(false)),
+                debounceTime(this.timeToDebounce),
+                filter(busy => !busy),
+                take(1)
+            ).subscribe(_ => {
+                this.isLoaded$.next(true);
+                this.currentSectionIndex = previousIndex;
+            });
         }
     }
 
