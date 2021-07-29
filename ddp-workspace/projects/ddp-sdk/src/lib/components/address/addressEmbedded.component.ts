@@ -520,9 +520,12 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
         const removeTempAddressOperator = () => (val$: Observable<any>) => val$.pipe(
             withLatestFrom(this.state$),
-            filter(([_, state]) => !!state.activityInstanceGuid),
+            filter(([savedAddress, state]) => !!state.activityInstanceGuid),
             tap(() => busyCounter$.next(1)),
-            concatMap(([_, state]) => this.addressService.deleteTempAddress(state.activityInstanceGuid)),
+            concatMap(([savedAddress, state]) => {
+                this.addressService.deleteTempAddress(state.activityInstanceGuid);
+                return of(savedAddress);
+            }),
             catchError(() => {
                 this.logger.logDebug(this.LOG_SOURCE, 'Temp delete failed. This is OK.');
                 return of(null);
