@@ -27,7 +27,6 @@ describe('AboutUsComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(AboutUsComponent);
         component = fixture.componentInstance;
-        component.route = 'about-us';
         fixture.detectChanges();
     });
 
