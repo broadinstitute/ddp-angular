@@ -8,7 +8,7 @@ import { mockComponent } from 'ddp-sdk';
 describe('ScientificResearchComponent', () => {
     let component: ScientificResearchComponent;
     let fixture: ComponentFixture<ScientificResearchComponent>;
-    const anchorsPage = mockComponent({selector: 'app-anchors-page', inputs: ['source', 'route']});
+    const anchorsPage = mockComponent({selector: 'app-anchors-page', inputs: ['source', 'route', 'linksMap']});
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
