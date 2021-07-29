@@ -82,34 +82,70 @@
 
 // steps
 .activity-steps {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
-    grid-gap: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin: 3rem 0;
+
+    &__divider {
+        flex: 1;
+        border-top: 2px solid $activity-step-default;
+        margin: 0.75rem 1rem 0;
+    }
 }
 
 .activity-step {
-    font-size: 1.5rem;
-    line-height: 2.25rem;
-    font-weight: 600;
+    display: flex;
+    font-size: 1.125rem;
     cursor: initial;
-    color: $activity-step-pristine;
-    font-family: 'Source Serif Pro', serif !important;
+
+    &__number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.625rem;
+        height: 1.625rem;
+        background-color: $activity-step-default;
+        border-radius: 50%;
+        color: white;
+    }
+
+    &__text {
+        white-space: nowrap;
+        color: $grey-text-color;
+        padding-left: 8px;
+    }
 
     &.completed {
         cursor: pointer;
-        color: $activity-step-completed;
 
+        .activity-step {
+            &__number {
+                background-color: #5a42d0;
+                color: white;
+            }
+
+            &__text {
+                color: $text-color;
+            }
+        }
         &.active {
-            color: $activity-step-active;
+            .activity-step__number {
+                background-color: $primary-color;
+            }
         }
     }
 }
 
 @media only screen and (max-width: 600px) {
     .activity-steps {
-        grid-auto-flow: row;
+        padding: 1rem 0;
+    }
+
+    .activity-step {
+        &__text {
+            display: none;
+        }
     }
 }
 
