@@ -49,6 +49,7 @@ export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
 toolkitConfig.activityUrl = AppRoutes.Activity;
 toolkitConfig.dashboardUrl = AppRoutes.Dashboard;
+toolkitConfig.doneUrl = AppRoutes.AgeUpThankYouProxy;
 toolkitConfig.errorUrl = AppRoutes.Error;
 toolkitConfig.phone = '651-287-1608';
 toolkitConfig.infoEmail = 'info@joincountmein.org';
@@ -57,6 +58,8 @@ toolkitConfig.facebookGroupId = 'joincountmein';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org';
 toolkitConfig.colorectalPagePhone = '651-287-1608';
 toolkitConfig.colorectalPageEmail = 'info@colorectalcancerproject.org';
+toolkitConfig.useParticipantDashboard = true;
+toolkitConfig.dashboardDisplayedColumns = ['name', 'summary', 'status', 'actions'];
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
@@ -78,6 +81,7 @@ sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
 sdkConfig.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
 sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
+sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 
 export function translateFactory(translate: TranslateService,
     injector: Injector,

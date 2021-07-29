@@ -102,7 +102,6 @@ export * from './lib/components/address/addressEmbedded.component';
 export * from './lib/components/activityForm/activity.component';
 export * from './lib/components/internationalization/changeLanguageRedirect.component';
 export * from './lib/components/popupWithCheckbox.component';
-export * from './lib/components/user/activities/userActivitiesDataSource';
 export * from './lib/components/subjectPanel/subjectPanel.component';
 export * from './lib/components/adminActionPanel.component';
 export * from './lib/components/tooltip.component';

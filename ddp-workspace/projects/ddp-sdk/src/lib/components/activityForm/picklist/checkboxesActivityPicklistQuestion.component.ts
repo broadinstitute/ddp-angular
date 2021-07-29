@@ -36,7 +36,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
                           [disableRipple]="true"
                           (change)="optionChanged($event.checked, option);
                                     option.allowDetails ? updateCharactersLeftIndicator(option.stableId) : null">
-              <span [innerHTML]="option.optionLabel"></span>
+                <span [innerHTML]="option.optionLabel"></span>
                 <ddp-tooltip *ngIf="option.tooltip" class="tooltip" [text]="option.tooltip"></ddp-tooltip>
             </mat-checkbox>
 
@@ -85,6 +85,10 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
     :host ::ng-deep
     .mat-checkbox-label {
         padding: 0 5px 0 0;
+    }
+
+    .mat-checkbox {
+        width: fit-content;
     }
 
     .ddp-picklist-group-container {

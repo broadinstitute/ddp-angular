@@ -1,8 +1,10 @@
-import { pluck } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { WorkflowBuilderService } from 'toolkit';
+import { MatDialog } from '@angular/material/dialog';
+import { filter, first, pluck, tap } from 'rxjs/operators';
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { ActivityResponse, CompositeDisposable, ConfigurationService } from 'ddp-sdk';
+import { NotificationsDialogComponent } from './../../notifications-dialog/notifications-dialog.component';
+import { ActivityResponse, AnnouncementMessage, AnnouncementsServiceAgent, CompositeDisposable, ConfigurationService } from 'ddp-sdk';
 
 
 @Component({
@@ -18,12 +20,16 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
   private subs = new CompositeDisposable();
 
   constructor(
-    private route: ActivatedRoute,
-    private workflowBuilderService: WorkflowBuilderService,
-    @Inject('ddp.config') private config: ConfigurationService,
+    private readonly dialog: MatDialog,
+    private readonly route: ActivatedRoute,
+    private readonly workflowBuilderService: WorkflowBuilderService,
+    @Inject('ddp.config') private readonly config: ConfigurationService,
+    private readonly announcementsServiceAgent: AnnouncementsServiceAgent,
   ) {}
 
   onSubmit(response: ActivityResponse): void {
+    this.checkAnnouncement();
+
     this.workflowBuilderService.getCommand(response).execute();
   }
 
@@ -39,5 +45,20 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subs.removeAll();
+  }
+
+  private checkAnnouncement(): void {
+    this.announcementsServiceAgent.getMessages(this.config.studyGuid).pipe(
+      first(),
+      filter((messages: AnnouncementMessage[]) => !!messages.length),
+      tap((messages: AnnouncementMessage[]) => this.dialog.open(
+        NotificationsDialogComponent,
+        {
+          data: {
+            messages: messages.map(({ message }: AnnouncementMessage) => message)
+          }
+        }
+      ))
+    ).subscribe();
   }
 }

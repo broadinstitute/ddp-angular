@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { MatInputModule } from '@angular/material/input';
-import { ActivityPicklistQuestionBlock, NGXTranslateService } from 'ddp-sdk';
+import { ActivityPicklistNormalizedGroup, ActivityPicklistOption, ActivityPicklistQuestionBlock, NGXTranslateService } from 'ddp-sdk';
 import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
 import { of } from 'rxjs';
 import { AutocompleteActivityPicklistQuestion } from './autocompleteActivityPicklistQuestion.component';
@@ -12,13 +12,21 @@ import { SearchHighlightPipe } from '../../../pipes/searchHighlight.pipe';
 
 describe('AutocompleteActivityPicklistQuestion', () => {
     const questionBlock = {
-        picklistSuggestions: [
-            { label: 'Sarcoma', isParent: true, value: 'SARCOMA' },
-            { label: 'Angiosarcoma', parent: 'Sarcoma', value: 'ANGIOSARCOMA' },
-            { label: 'Chondrosarcoma', parent: 'Sarcoma', value: 'CHONDROSARCOMA' },
-            { label: 'Endocrine cancer', isParent: true, value: 'ENDOCRINE_CANCER' },
-            { label: 'Pheochromocytoma', parent: 'Endocrine cancer', value: 'PHEOCHROMOCYTOMA' },
-            { label: 'Endocrine cancer test', parent: 'Endocrine cancer', value: 'PHEOCHROMOCYTOMA' },
+        picklistGroups: [
+            {
+                name: 'Sarcoma',
+                options: [
+                    {  optionLabel: 'Angiosarcoma', stableId: 'ANGIOSARCOMA' },
+                    { optionLabel: 'Chondrosarcoma', stableId: 'CHONDROSARCOMA' }
+                ]
+            },
+            {
+                name: 'Endocrine cancer',
+                options: [
+                    { optionLabel: 'Pheochromocytoma', stableId: 'PHEOCHROMOCYTOMA' },
+                    { optionLabel: 'Endocrine cancer test', stableId: 'ENDOCRINE_CANCER_TEST' },
+                ]
+            },
         ],
         renderMode: PicklistRenderMode.AUTOCOMPLETE,
     } as ActivityPicklistQuestionBlock;
@@ -60,7 +68,7 @@ describe('AutocompleteActivityPicklistQuestion', () => {
 
     it('should generate the list of suggestions on init', fakeAsync(() => {
         tick(200);
-        expect(component.filteredSuggestions).toEqual(questionBlock.picklistSuggestions);
+        expect(component.filteredGroups).toEqual(questionBlock.picklistGroups);
     }));
 
     it('should filter the list of suggestions by child label', fakeAsync(() => {
@@ -68,11 +76,13 @@ describe('AutocompleteActivityPicklistQuestion', () => {
         fixture.detectChanges();
         tick(200);
 
-        const suggestions = [
-            { label: 'Sarcoma', isParent: true, value: 'SARCOMA' },
-            { label: 'Chondrosarcoma', parent: 'Sarcoma', value: 'CHONDROSARCOMA' },
+        const suggestions: ActivityPicklistNormalizedGroup[] = [
+            {
+                name: 'Sarcoma',
+                options: [{ optionLabel: 'Chondrosarcoma', stableId: 'CHONDROSARCOMA', } as ActivityPicklistOption]
+            }
         ];
-        expect(component.filteredSuggestions).toEqual(suggestions);
+        expect(component.filteredGroups).toEqual(suggestions);
     }));
 
     it('should filter the list of suggestions by parent label', fakeAsync(() => {
@@ -81,11 +91,15 @@ describe('AutocompleteActivityPicklistQuestion', () => {
         tick(200);
 
         const suggestions = [
-            { label: 'Endocrine cancer', isParent: true, value: 'ENDOCRINE_CANCER' },
-            { label: 'Pheochromocytoma', parent: 'Endocrine cancer', value: 'PHEOCHROMOCYTOMA' },
-            { label: 'Endocrine cancer test', parent: 'Endocrine cancer', value: 'PHEOCHROMOCYTOMA' },
+            {
+                name: 'Endocrine cancer',
+                options: [
+                    { optionLabel: 'Pheochromocytoma', stableId: 'PHEOCHROMOCYTOMA' } as ActivityPicklistOption,
+                    { optionLabel: 'Endocrine cancer test', stableId: 'ENDOCRINE_CANCER_TEST' } as ActivityPicklistOption,
+                ]
+            }
         ];
-        expect(component.filteredSuggestions).toEqual(suggestions);
+        expect(component.filteredGroups).toEqual(suggestions);
     }));
 
     it('should trim search query', fakeAsync(() => {
@@ -94,11 +108,15 @@ describe('AutocompleteActivityPicklistQuestion', () => {
         tick(200);
 
         const suggestions = [
-            { label: 'Endocrine cancer', isParent: true, value: 'ENDOCRINE_CANCER' },
-            { label: 'Pheochromocytoma', parent: 'Endocrine cancer', value: 'PHEOCHROMOCYTOMA' },
-            { label: 'Endocrine cancer test', parent: 'Endocrine cancer', value: 'PHEOCHROMOCYTOMA' },
+            {
+                name: 'Endocrine cancer',
+                options: [
+                    { optionLabel: 'Pheochromocytoma', stableId: 'PHEOCHROMOCYTOMA' } as ActivityPicklistOption,
+                    { optionLabel: 'Endocrine cancer test', stableId: 'ENDOCRINE_CANCER_TEST' } as ActivityPicklistOption,
+                ]
+            }
         ];
-        expect(component.filteredSuggestions).toEqual(suggestions);
+        expect(component.filteredGroups).toEqual(suggestions);
     }));
 
     it('should not set any initial value', () => {
@@ -115,12 +133,12 @@ describe('AutocompleteActivityPicklistQuestion', () => {
     it('should set initial value from the list', () => {
         component.block = {...questionBlock, answer: [{ detail: null, stableId: 'CHONDROSARCOMA' }]} as ActivityPicklistQuestionBlock;
         component.ngOnInit();
-        expect(component.inputFormControl.value).toEqual({ label: 'Chondrosarcoma', parent: 'Sarcoma', value: 'CHONDROSARCOMA' });
+        expect(component.inputFormControl.value).toEqual({ optionLabel: 'Chondrosarcoma', stableId: 'CHONDROSARCOMA' });
     });
 
     it('should emit valueChanged with selected option', fakeAsync(() => {
         const valueChangedSpy = spyOn(component.valueChanged, 'emit');
-        component.inputFormControl.setValue({ label: 'Chondrosarcoma', parent: 'Sarcoma', value: 'CHONDROSARCOMA' });
+        component.inputFormControl.setValue({ optionLabel: 'Chondrosarcoma', stableId: 'CHONDROSARCOMA' });
         fixture.detectChanges();
         tick(200);
 
@@ -178,7 +196,7 @@ describe('AutocompleteActivityPicklistQuestion', () => {
     }));
 
     it('should display suggested option correctly', () => {
-        expect(component.displayAutoComplete({ label: 'Chondrosarcoma', parent: 'Sarcoma', value: 'CHONDROSARCOMA' }))
+        expect(component.displayAutoComplete({ optionLabel: 'Chondrosarcoma' } as ActivityPicklistOption))
             .toBe('Chondrosarcoma');
     });
 
