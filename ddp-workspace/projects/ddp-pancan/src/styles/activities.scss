@@ -216,7 +216,7 @@
 .activity-buttons {
     display: flex;
     justify-content: space-between;
-    margin: 4rem 0 0 0;
+    margin: 2rem 0 0 0;
 }
 
 .button_right {
@@ -225,10 +225,13 @@
 
 // question text
 .ddp-question-prompt {
-    font-family: 'Source Serif Pro', serif !important;
     font-size: 1.5rem;
     line-height: 2.875rem;
     margin: 1.5rem 0 0.5rem 0;
+
+    small {
+        line-height: normal;
+    }
 }
 
 // questions
@@ -273,8 +276,8 @@ ddp-activity-picklist-answer {
 
 .mat-checkbox-label,
 .mat-radio-label-content {
-    font-size: 1.2rem;
-    line-height: 1.2rem !important;
+    font-size: 1.125rem;
+    line-height: 1.6rem !important;
 }
 
 .mat-checkbox-layout {
@@ -282,18 +285,15 @@ ddp-activity-picklist-answer {
 }
 
 .mat-checkbox-inner-container {
-    height: 1.2rem !important;
-    width: 1.2rem !important;
+    height: 1.6875rem !important;
+    width: 1.6875rem !important;
     margin-top: 0 !important;
+    margin-right: 0.875rem !important;
 }
 
 .mat-radio-label {
     margin: 0.5rem 0;
     align-items: unset !important;
-}
-
-.mat-radio-label-content {
-    font-family: 'Untitled-Sans-Regular', sans-serif;
 }
 
 .picklist {
@@ -308,7 +308,7 @@ ddp-activity-picklist-answer {
 
 .ddp-picklist-option-list-item {
     height: auto !important;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .mat-list .mat-list-item .mat-list-item-content {
@@ -321,7 +321,6 @@ ddp-activity-picklist-answer {
     font-size: 1.125rem;
     line-height: 1.4375rem;
     color: $grey-text-color;
-    font-family: 'Untitled-Sans-Regular', sans-serif;
 }
 
 .ddp-counter-color {
@@ -342,7 +341,6 @@ select {
     height: 2.65rem;
     transition: all .3s;
     cursor: pointer;
-    font-family: Untitled-Sans-Regular;
 }
 
 select:disabled {
@@ -442,7 +440,6 @@ select:disabled {
     .ddp-question-prompt {
         font-size: 18px;
         line-height: 32px;
-        font-family: 'Untitled-Sans-Regular', sans-serif !important;
     }
 }
 
@@ -476,7 +473,11 @@ select:disabled {
 
     .mat-checkbox-label,
     .mat-radio-label-content {
-        font-size: 1.2rem;
+        font-size: 1.125rem;
         line-height: 1.9rem !important;
     }
+}
+
+.mat-checkbox-frame {
+    border-color: $checkbox-color !important;
 }
