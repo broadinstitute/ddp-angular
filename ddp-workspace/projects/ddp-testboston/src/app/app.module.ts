@@ -117,6 +117,7 @@ sdkConfig.scrollToErrorOffset = 130;
 sdkConfig.defaultLanguageCode = 'en';
 sdkConfig.rtlLanguages = ['ar'];
 sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
+sdkConfig.useStepsWithCircle = true;
 
 export function translateFactory(translate: TranslateService,
     injector: Injector,

@@ -72,6 +72,7 @@ sdkConfig.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
 sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
+sdkConfig.useStepsWithCircle = true;
 
 export function translateFactory(translate: TranslateService,
     injector: Injector,
