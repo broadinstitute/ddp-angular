@@ -333,7 +333,7 @@ var DDP_ENV = {
 
 {{if eq $study_guid "brugada"}}
     {{if eq $environment "local"}}
-        DDP_ENV['auth0ClientId'] = "TBD";
+        DDP_ENV['auth0ClientId'] = "pyZRLJuSTtBzu4xwllQ7tzz2GAyuauSs";
         DDP_ENV['auth0Domain'] = "brugada-dev.us.auth0.com";
         DDP_ENV['auth0Audience'] = "brugada-dev.us.auth0.com";
         DDP_ENV['basePepperUrl'] = "http://localhost:5556";
