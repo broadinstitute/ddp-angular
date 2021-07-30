@@ -1,12 +1,7 @@
 @import '../../../../styles/variables';
 @import '../../../../styles/common';
 
-.main > * {
-    width: 100%;
-}
-
 section {
-    box-sizing: border-box;
     text-align: center;
     padding-left: 3rem;
     padding-right: 3rem;
@@ -16,7 +11,6 @@ section {
     }
 
     &.introduction {
-        max-width: 1440px;
         padding: 5.125rem 5rem 1.5rem;
 
         .flex {
@@ -43,10 +37,6 @@ section {
 
         .logos {
             padding: 2rem 0 1rem;
-
-            img:first-child {
-                margin-right: 5rem;
-            }
         }
     }
 
@@ -114,29 +104,10 @@ section {
     }
 
     &.stay-informed {
-        padding-top: 5.375rem;
-        padding-bottom: 4.5rem;
-
         ::ng-deep .container {
             max-width: 1062px;
         }
     }
-
-    &.join-cmi {
-        padding-top: 4.75rem;
-        padding-bottom: 6.19rem;
-    }
-}
-
-.btn {
-    font-size: 1.13rem;
-    padding: 1rem 2rem;
-    line-height: 22px;
-}
-
-.join-cmi-btn {
-    font-size: 1.25rem;
-    margin: 1.56rem 0 7.5rem;
 }
 
 @media screen and (max-width: $desktop-breakpoint) {
