@@ -1,0 +1,142 @@
+@import '../../../styles/breakpoints';
+@import '../../../styles/colors';
+
+.intro {
+  padding: 8rem 0 6.4rem;
+
+  @include media-sm {
+    padding-top: 6.4rem;
+  }
+
+  &__container {
+    max-width: 64rem;
+
+    margin: 0 auto;
+
+    padding: 0 2.4rem;
+
+    text-align: center;
+  }
+
+  &__title {
+    font-size: 4rem;
+
+    font-weight: bold;
+
+    @include media-sm {
+      font-size: 3.2rem;
+    }
+  }
+
+  &__description {
+    margin-top: 1.6rem;
+  }
+}
+
+.team {
+  background: map-get($colors, 'beige');
+
+  &__container {
+    max-width: 72rem;
+
+    margin: 0 auto;
+    padding: 4.2rem 2.4rem;
+  }
+}
+
+.section {
+  &:first-of-type {
+    margin-top: -4.2rem;
+  }
+
+  &__title {
+    margin: 5.6rem 0 2.4rem;
+
+    font-size: 2.4rem;
+  }
+
+  &__subtitle {
+    margin: 2.4rem 0 1.6rem;
+
+    font-size: 2rem;
+  }
+
+  &__description {
+  }
+}
+
+.members-list {
+  list-style: none;
+
+  &__item {
+    & + & {
+      margin-top: 1.6rem;
+    }
+  }
+}
+
+.member {
+  display: flex;
+
+  padding: 2.4rem;
+
+  background: map-get($colors, 'white');
+
+  @include media-xs {
+    flex-flow: column nowrap;
+  }
+
+  &__pic {
+    margin-right: 2.4rem;
+
+    img {
+      width: 20rem;
+      height: 20rem;
+
+      object-fit: cover;
+      object-position: top center;
+
+      @include media-sm {
+        width: 12rem;
+        height: 12rem;
+      }
+
+      @include media-xs {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &__info {
+    color: map-get($colors, 'beige:dark:2');
+  }
+
+  &__name {
+    margin-top: 0.5em;
+
+    font-size: 2rem;
+  }
+
+  &__institution {
+    color: map-get($colors, 'teal');
+    font-size: 1.5rem;
+  }
+
+  &__bio {
+    margin-top: 0.5em;
+
+    font-size: 1.6rem;
+  }
+}
+
+.council-list {
+  list-style: none;
+
+  &__item {
+    color: map-get($colors, 'beige:dark:2');
+
+    & + & {
+      margin-top: 0.25em;
+    }
+  }
+}
