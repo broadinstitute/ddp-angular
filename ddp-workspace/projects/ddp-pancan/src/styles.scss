@@ -248,6 +248,10 @@ ddp-language-selector {
     max-width: 1100px;
 }
 
+.content_tight {
+    max-width: 800px;
+}
+
 $tooltip-icon-size: 24px;
 .tooltip {
     display: inline-block;
@@ -259,4 +263,18 @@ $tooltip-icon-size: 24px;
         height: $tooltip-icon-size;
         width: $tooltip-icon-size;
     }
+}
+
+// password page
+.password-section__question {
+    margin: 1.5rem 0 0.5rem 0;
+}
+
+.password-section__button {
+    margin: 3rem 0 0 0;
+}
+
+// static pages
+.static-page-content-section {
+    margin: 0 0 4rem 0;
 }
