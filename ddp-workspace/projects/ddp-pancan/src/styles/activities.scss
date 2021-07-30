@@ -121,7 +121,7 @@
 
         .activity-step {
             &__number {
-                background-color: #5a42d0;
+                background-color: $activity-step-inactive;
                 color: white;
             }
 
