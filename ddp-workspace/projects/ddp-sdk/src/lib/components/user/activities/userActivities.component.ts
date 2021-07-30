@@ -12,10 +12,8 @@ import {
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivityServiceAgent } from '../../../services/serviceAgents/activityServiceAgent.service';
-import { UserActivitiesDataSource } from './userActivitiesDataSource';
 import { ActivityInstanceState } from '../../../models/activity/activityInstanceState';
 import { LoggingService } from '../../../services/logging.service';
-import { UserActivityServiceAgent } from '../../../services/serviceAgents/userActivityServiceAgent.service';
 import { ActivityInstanceStatusServiceAgent } from '../../../services/serviceAgents/activityInstanceStatusServiceAgent.service';
 import { AnalyticsEventsService } from '../../../services/analyticsEvents.service';
 import { AnalyticsEventCategories } from '../../../models/analyticsEventCategories';
@@ -201,10 +199,10 @@ import { take } from 'rxjs/operators';
 })
 export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, AfterContentInit {
     @Input() studyGuid: string;
+    @Input() dataSource: Array<ActivityInstance>;
     @Input() displayedColumns: Array<DashboardColumns> = ['name', 'summary', 'date', 'status', 'actions'];
     @Output() open: EventEmitter<string> = new EventEmitter();
     @Output() loadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
-    public dataSource: UserActivitiesDataSource;
     public statusesLoaded = false;
     private states: Array<ActivityInstanceState> | null = null;
     private studyGuidObservable = new BehaviorSubject<string | null>(null);
@@ -212,7 +210,6 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
     private readonly LOG_SOURCE = 'UserActivitiesComponent';
 
     constructor(
-        private serviceAgent: UserActivityServiceAgent,
         private statusesServiceAgent: ActivityInstanceStatusServiceAgent,
         private logger: LoggingService,
         private activityServiceAgent: ActivityServiceAgent,
@@ -221,10 +218,6 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
         public domSanitizationService: DomSanitizer) {}
 
     public ngOnInit(): void {
-        this.dataSource = new UserActivitiesDataSource(
-            this.serviceAgent,
-            this.logger,
-            this.studyGuidObservable);
         this.statusesLoadingAnchor = this.statusesServiceAgent.getStatuses()
             .subscribe((x) => {
                 this.states = x;

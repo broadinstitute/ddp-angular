@@ -20,7 +20,8 @@ import {
     AnalyticsEvent,
     QuestionType,
     LoggingService,
-    LanguageService
+    LanguageService,
+    UserActivityServiceAgent
 } from 'ddp-sdk';
 
 import {
@@ -38,6 +39,7 @@ import { PrismComponent } from './components/prism/prism.component';
 import { PrismActivityLinkComponent } from './components/prism-activity-link/prism-activity-link.component';
 import { EnrollmentComponent } from './components/enrollment/enrollment.component';
 import { HelpComponent } from './components/help/help.component';
+import { ResultsDashboardComponent } from './components/results-dashboard/results-dashboard.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -47,6 +49,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { AppUserActivityServiceAgent } from './services/userActivityServiceAgent.service';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -149,6 +152,7 @@ export function languageFactory(language: LanguageService): string {
         MailingListComponent,
         UserRegistrationPrequalComponent,
         PrismComponent,
+        ResultsDashboardComponent,
         PrismActivityLinkComponent,
         EnrollmentComponent,
         HelpComponent
@@ -198,6 +202,10 @@ export function languageFactory(language: LanguageService): string {
             deps: [
                 LanguageService
             ]
+        },
+        {
+            provide: UserActivityServiceAgent,
+            useClass: AppUserActivityServiceAgent
         }
     ],
     bootstrap: [AppComponent]

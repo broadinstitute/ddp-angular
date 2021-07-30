@@ -26,6 +26,7 @@ import { UserActivitiesComponent } from './components/user-activities/user-activ
 import { SessionExpiredComponent } from './components/session-expired/session-expired.component';
 import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
 import { ReleaseRequestsComponent } from './components/release-requests/release-requests.component';
+import { NotificationsDialogComponent } from './components/notifications-dialog/notifications-dialog.component';
 
 
 declare const DDP_ENV: any;
@@ -89,6 +90,7 @@ tkCfg.activityUrl = Route.Activity;
     SessionExpiredComponent,
     RedirectToLoginComponent,
     ReleaseRequestsComponent,
+    NotificationsDialogComponent,
   ],
   imports: [
     DdpModule,

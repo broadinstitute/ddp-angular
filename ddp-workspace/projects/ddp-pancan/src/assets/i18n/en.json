@@ -363,13 +363,29 @@
         }
     },
     "Toolkit": {
+        "AgeUpThankYou": {
+            "Title": "Thank you!",
+            "EmailVerified": "Your email address has been verified. We will be sending an email with more information on re-consent shortly after your birthday.",
+            "EmailCollected": {
+                "TextPt1": "An email will be sent to your child to confirm their address and tell them about the upcoming re-consent process. If you need to change the email you provided for your child, please contact the project team at",
+                "TextPt2": "or",
+                "Button": "Go to Dashboard"
+            },
+            "ImageAlt": "Email sent"
+        },
         "StayInformed": {
             "Title": "Stay Informed!",
             "Text": "Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email ",
             "ReturnButton": "RETURN HOME"
         },
         "Dashboard": {
-            "Title": "Dashboard"
+            "Title": "Dashboard",
+            "ParticipantsTitle": "Participant Dashboard",
+            "AddParticipant": "Add Participant",
+            "ShowPanel": "Show",
+            "HidePanel": "Hide",
+            "UserLabel": "You",
+            "ChildLabel": "Your child"
         },
         "Password": {
             "Title": "Please enter the password",
@@ -433,8 +449,7 @@
             },
             "StudyRedirect": {
                 "Title": "Your participation",
-                "Text1": "Count Me In has an open project specific to your cancer type.",
-                "Text2": "Use the button below to join the {{study}} and learn more about this existing work.",
+                "Content": "<p>Count Me In has an open project specific to your cancer type.</p><p>Use the button below to join the {{study}} and learn more about this existing work.</p>",
                 "GoToProject": "Go to project",
                 "Cancel": "Cancel"
             }
@@ -458,10 +473,10 @@
         "CloseButton": "CLOSE",
         "AddButton": "ADD",
         "CancelButton": "CANCEL",
-        "NextButton": "NEXT",
+        "NextButton": "Next",
         "PreviousButton": "PREV",
         "SavingButton": "SAVING",
-        "EditButton": "EDIT",
+        "EditButton": "Edit",
         "CompleteButton": "Edit",
         "ReviewButton": "VIEW",
         "OpenButton": "Open",

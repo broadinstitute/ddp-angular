@@ -20,7 +20,6 @@ import { ActivityRequiredValidationRule } from './validators/activityRequiredVal
 import { QuestionType } from '../../models/activity/questionType';
 import { ActivityFileQuestionBlock } from '../../models/activity/activityFileQuestionBlock';
 import * as _ from 'underscore';
-import { ActivityPicklistSuggestion } from '../../models/activity/activityPicklistSuggestion';
 
 const DETAIL_MAXLENGTH = 500;
 
@@ -212,34 +211,9 @@ export class ActivityQuestionConverter {
         picklistBlock.renderMode = questionJson.renderMode;
         picklistBlock.detailMaxLength = DETAIL_MAXLENGTH;
         picklistBlock.picklistGroups = this.convertPicklistGroups(questionJson.picklistOptions, questionJson.groups);
-        picklistBlock.picklistSuggestions = this.generatePicklistSuggestions(questionJson.picklistOptions);
         picklistBlock.customValue = questionJson.picklistOptions.find(option => option.allowDetails)?.stableId || null;
         return picklistBlock;
     }
-
-    private generatePicklistSuggestions(options: Array<ActivityPicklistOption>): ActivityPicklistSuggestion[] {
-        return options.reduce((acc, currentValue) => {
-            if (currentValue.allowDetails) return acc;
-            const suggestion: ActivityPicklistSuggestion = {
-                label: currentValue.optionLabel,
-                value: currentValue.stableId,
-            };
-            acc.push(suggestion);
-            if (currentValue.nestedOptions?.length) {
-                suggestion.isParent = true;
-
-                for (const nestedOption of currentValue.nestedOptions) {
-                    acc.push({
-                        label: nestedOption.optionLabel,
-                        value: nestedOption.stableId,
-                        parent: currentValue.optionLabel
-                    });
-                }
-            }
-            return acc;
-        }, [] as ActivityPicklistSuggestion[]);
-    }
-
 
     private getDateBlock(questionJson: any): ActivityDateQuestionBlock {
         const dateBlock = new ActivityDateQuestionBlock();
