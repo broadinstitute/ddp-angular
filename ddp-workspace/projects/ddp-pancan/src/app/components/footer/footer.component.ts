@@ -1,6 +1,5 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { WindowRef } from 'ddp-sdk';
-import { ToolkitConfigurationService } from 'toolkit';
 import { BaseFooterComponent } from './base-footer/base-footer.component';
 
 @Component({
@@ -9,15 +8,10 @@ import { BaseFooterComponent } from './base-footer/base-footer.component';
     styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent extends BaseFooterComponent {
-    readonly phone: string;
-    readonly email: string;
+    @Input() phone: string;
+    @Input() email: string;
 
-    constructor(
-        private _windowRef: WindowRef,
-        @Inject('toolkit.toolkitConfig') config: ToolkitConfigurationService
-    ) {
+    constructor(private _windowRef: WindowRef) {
         super(_windowRef);
-        this.phone = config.phone;
-        this.email = config.infoEmail;
     }
 }

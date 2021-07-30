@@ -13,8 +13,10 @@ import { RenewSessionNotifier } from 'ddp-sdk';
   templateUrl: './app.component.html',
 })
 export class AppComponent extends AppRedesignedBaseComponent {
-    private readonly splashPageUrls = ['colorectal'];
+    phone: string;
+    email: string;
     isSplashPage: boolean;
+    private readonly splashPageUrls = ['colorectal'];
 
     constructor(
         _communicationService: CommunicationService,
@@ -24,10 +26,12 @@ export class AppComponent extends AppRedesignedBaseComponent {
         @Inject('toolkit.toolkitConfig') _config: ToolkitConfigurationService
     ) {
         super(_communicationService, _dialog, _renewNotifier, _router, _config);
-        this.init();
+        this.phone = _config.phone;
+        this.email = _config.infoEmail;
+        this.initRouterEvents();
     }
 
-    private init(): void {
+    private initRouterEvents(): void {
         this.router.events.subscribe(event => {
             if (!(event instanceof NavigationEnd)) {
                 return;
