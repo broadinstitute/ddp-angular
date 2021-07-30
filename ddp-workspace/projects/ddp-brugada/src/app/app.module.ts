@@ -17,7 +17,9 @@ import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
 import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { Route } from './constants/Route';
 import { AboutComponent } from './pages/about/about.component';
+import { ErrorComponent } from './pages/error/error.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { HomeComponent } from './pages/home/home.component';
 import { TeamComponent } from './pages/team/team.component';
@@ -29,6 +31,7 @@ declare const DDP_ENV: any;
 
 export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
+toolkitConfig.errorUrl = Route.Error;
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.studyGuid = DDP_ENV.studyGuid;
@@ -48,6 +51,7 @@ sdkConfig.baseUrl = location.origin + base;
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
 sdkConfig.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
 sdkConfig.localRegistrationUrl = sdkConfig.backendUrl + '/pepper/v1/register';
+sdkConfig.errorPageUrl = Route.Error;
 
 export function translateFactory(
   translate: TranslateService,
@@ -96,6 +100,7 @@ export function translateFactory(
     FooterComponent,
     HeaderComponent,
     AboutComponent,
+    ErrorComponent,
     FaqComponent,
     HomeComponent,
     TeamComponent,

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { Route } from './constants/Route';
 import { AboutComponent } from './pages/about/about.component';
+import { ErrorComponent } from './pages/error/error.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { HomeComponent } from './pages/home/home.component';
 import { TeamComponent } from './pages/team/team.component';
@@ -27,6 +28,11 @@ const routes: Routes = [
   {
     path: Route.FAQ,
     component: FaqComponent,
+    canActivate: [],
+  },
+  {
+    path: Route.Error,
+    component: ErrorComponent,
     canActivate: [],
   },
   {
