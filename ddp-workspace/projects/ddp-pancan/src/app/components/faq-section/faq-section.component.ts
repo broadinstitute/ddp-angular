@@ -10,7 +10,7 @@ import { CommunicationService } from 'toolkit';
 export class FaqSectionComponent {
     @Input() questions: string;
     @Input() questionsCount: number; /* don't pass the counter for displaying all questions */
-    @Input() darkTheme: boolean;
+    @Input() darkerBackground: boolean;
     @ViewChild(MatAccordion) accordion: MatAccordion; /* Please, do not remove. It is used outside of the component */
 
     constructor(private communicationService: CommunicationService) {}
