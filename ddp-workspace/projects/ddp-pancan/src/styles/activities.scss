@@ -2,23 +2,6 @@
 @import '../theme.scss';
 
 // common activity styles
-.section-spinner {
-    display: flex;
-    align-items: center;
-    flex: 1;
-    justify-content: center;
-}
-
-.static-spinner {
-    padding-bottom: 8rem;
-}
-
-.consent-subtitle {
-    font-size: 1.875rem;
-    line-height: 3.5rem;
-    text-decoration: underline;
-}
-
 .main_activity {
     padding-bottom: 6.25rem;
     padding-top: 1rem;
@@ -33,15 +16,6 @@
 
 .main_sticky {
     padding-top: 5rem;
-}
-
-.section {
-    width: 100%;
-}
-
-.content {
-    margin: 0 auto;
-    padding: 0 1.5625rem;
 }
 
 .sticky-section {
@@ -114,10 +88,6 @@
 }
 
 // activity lists
-.release-list-item {
-    margin-left: 2rem;
-}
-
 .ddp-list {
     padding: 0 0 0 1.5rem;
     font-size: 1.5rem;
@@ -138,22 +108,6 @@
     line-height: 2rem;
     color: $text-color;
     margin: 1rem 0 1rem -1.5625rem;
-
-    > .PageContent-text {
-        margin-left: 1.5625rem;
-    }
-}
-
-.ddp-simple-list {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-
-    .ddp-question-prompt {
-        font-size: 1.375rem;
-        line-height: 2.25rem;
-        font-family: inherit;
-    }
 }
 
 .ddp-simple-list {
@@ -196,15 +150,8 @@
     }
 }
 
-.simple-list {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-}
-
 .ddp-content {
     font-size: 1.2rem;
-
 }
 
 // required question
@@ -264,24 +211,14 @@
 }
 
 .ddp-content__agreement {
-    font-family: 'Source Serif Pro', serif;
     font-size: 1.5rem;
-    line-height: 2.875rem;
-}
-
-// picklist
-ddp-activity-picklist-answer {
-    font-weight: 400;
+    line-height: 2.5rem;
 }
 
 .mat-checkbox-label,
 .mat-radio-label-content {
     font-size: 1.125rem;
     line-height: 1.6rem !important;
-}
-
-.mat-checkbox-layout {
-    align-items: flex-start !important;
 }
 
 .mat-checkbox-inner-container {
@@ -370,19 +307,7 @@ select:disabled {
     }
 }
 
-// error message
-.ErrorMessage {
-    font-size: 1.2rem;
-    line-height: 1.875rem;
-    margin: 1rem 0;
-    color: $warn-color;
-    border-top: 1px solid $warn-color;
-}
-
-.ErrorMessage a {
-    text-decoration: underline !important;
-}
-
+// error message list
 .ddp-activity-validation {
     .ErrorMessageList {
         list-style-type: square;
@@ -390,23 +315,15 @@ select:disabled {
 
     .ErrorMessageItem {
         font-size: 1.2rem;
-        color: $warn-color;
         margin: .3rem 0;
-        padding: 0 0 0 0;
     }
-}
-
-// material error message
-.mat-error {
-    font-size: 0.9rem;
-    color: $warn-color;
 }
 
 // info box
 .infobox {
     border: 2px solid $primary-color;
     border-radius: 8px;
-    background-color: rgba(113, 84, 255, 0.06);
+    background-color: $section-grey-background-color;
     padding: 1rem;
 }
 
@@ -417,7 +334,6 @@ select:disabled {
 
 .ddp-address-embedded__title,
 .ddp-institutions-form__title {
-    font-family: 'Source Serif Pro', serif;
     font-size: 1.5rem;
     line-height: 2.875rem;
     margin: 0;
@@ -432,20 +348,10 @@ select:disabled {
 }
 
 .boolean-answer-CONSENT_BLOOD,
-.boolean-answer-CONSENT_TISSUE,
-.boolean-answer-PARENTAL_CONSENT_BLOOD,
-.boolean-answer-PARENTAL_CONSENT_TISSUE,
-.boolean-answer-CONSENT_ASSENT_BLOOD,
-.boolean-answer-CONSENT_ASSENT_TISSUE {
+.boolean-answer-CONSENT_TISSUE {
     .ddp-question-prompt {
         font-size: 18px;
         line-height: 32px;
-    }
-}
-
-.picklist-answer-DIAGNOSED_PRIMARY_CANCER {
-    .ddp-question-prompt {
-        margin-top: 0;
     }
 }
 
@@ -459,22 +365,8 @@ select:disabled {
 
     &__title {
         margin: 1rem 0 0.5rem 0;
-        font-family: 'Source Serif Pro', serif;
         font-size: 1.2rem;
         line-height: 2rem;
-    }
-}
-
-.picklist-answer-WHO_FILLING {
-
-    .mat-radio-container {
-        margin-top: 0.3rem;
-    }
-
-    .mat-checkbox-label,
-    .mat-radio-label-content {
-        font-size: 1.125rem;
-        line-height: 1.9rem !important;
     }
 }
 
