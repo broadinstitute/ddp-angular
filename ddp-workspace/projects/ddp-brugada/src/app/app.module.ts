@@ -3,7 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import {
   DdpModule,
@@ -17,6 +22,7 @@ import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
 import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { MailingListModalComponent } from './components/mailing-list-modal/mailing-list-modal.component';
 import { Route } from './constants/Route';
 import { AboutComponent } from './pages/about/about.component';
 import { ErrorComponent } from './pages/error/error.component';
@@ -99,6 +105,7 @@ export function translateFactory(
     AppComponent,
     FooterComponent,
     HeaderComponent,
+    MailingListModalComponent,
     AboutComponent,
     ErrorComponent,
     FaqComponent,
@@ -107,8 +114,13 @@ export function translateFactory(
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     MatIconModule,
     MatExpansionModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
     DdpModule,
     ToolkitModule,
     AppRoutingModule,

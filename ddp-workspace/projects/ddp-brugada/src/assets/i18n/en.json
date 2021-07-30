@@ -295,6 +295,31 @@
       "Title": "We've encountered an error",
       "Paragraph1": "We're sorry, but an error has occurred.",
       "Paragraph2": "Please wait a moment and retry. If the trouble persists, please email us at <a class=\"underlined-link\" href=\"mailto:info@linkmyheart.org\">info@linkmyheart.org</a> or call us at <a class=\"underlined-link\" href=\"tel:6177147560\">(617) 714-7560</a>."
+    },
+    "MailingList": {
+      "Title": "Mailing List",
+      "Greeting": "Hello!",
+      "Paragraph": "Thank you for joining the Link My Heart mailing list. We will send general updates about the progress of the research project and keep you informed when future projects become available. You can unsubscribe at any time.",
+      "Thanking": "Thank you!",
+      "Form": {
+        "Fields": {
+          "Email": {
+            "Label": "Email Address *"
+          },
+          "EmailConfirmation": {
+            "Label": "Email Confirmation *"
+          }
+        },
+        "Buttons": {
+          "Cancel": "Cancel",
+          "Join": "Join"
+        },
+        "Errors": {
+          "Required": "Field is required",
+          "EmailNotValid": "Provided email is not a valid email address",
+          "FieldsDoNotMatch": "Provided emails do not match"
+        }
+      }
     }
   },
   "Toolkit": {
@@ -332,33 +357,6 @@
       "Text": "Please wait. You will be redirected to a destination soon..."
     },
     "Dialogs": {
-      "JoinMailingList": {
-        "Title": "Stay informed!",
-        "Text": "Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
-        "Fields": {
-          "FirstName": {
-            "Placeholder": "First Name *",
-            "Error": "First Name is required"
-          },
-          "LastName": {
-            "Placeholder": "Last Name *",
-            "Error": "Last Name is required"
-          },
-          "Email": {
-            "Placeholder": "Email Address *",
-            "Error": "Please enter a valid Email Address"
-          },
-          "ConfirmEmail": {
-            "Placeholder": "Email Confirmation (Reenter Email) *",
-            "Error": "Please enter a valid Email Address"
-          }
-        },
-        "CancelButton": "CANCEL",
-        "SubmitButton": "JOIN",
-        "Required": "* Required field",
-        "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
-        "LoadingError": "We're sorry, but an error has occurred."
-      },
       "SessionWillExpire": {
         "Title": "Your session will time-out soon",
         "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
