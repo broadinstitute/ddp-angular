@@ -126,7 +126,6 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 // fix Angular changed-after-check problem
                 delay(0))
             .subscribe(this.isPageBusy);
-        this.isPageBusy.subscribe((pageBusy) => console.log('the page is busy?:' + pageBusy));
 
         this.anchors = [resSub, invalidSub, subErrSub, submitSub].map(sub => new CompositeDisposable(sub));
 
