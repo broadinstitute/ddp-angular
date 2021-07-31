@@ -12,14 +12,15 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { BehaviorSubject, combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, interval, merge, Observable, of, Subject, Subscription } from 'rxjs';
 import {
     catchError,
-    concatMap, debounceTime,
+    concatMap,
+    debounce,
     distinctUntilChanged,
     filter,
     finalize,
-    map, mapTo,
+    map,
     mergeMap,
     scan,
     share,
@@ -200,7 +201,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     public inputComponentAddress$: Subject<Address | null> = new BehaviorSubject(null);
     public formValidStatusChanged$: Subject<boolean> = new BehaviorSubject(true);
     public generateTaggedAddress = generateTaggedAddress;
-
 
     private ngUnsubscribe = new Subject();
     private saveTrigger$ = new Subject<void>();
@@ -449,8 +449,8 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         let processSubmitAnnouncement$;
         if (this.submitService) {
             processSubmitAnnouncement$ = this.submitService.submitAnnounced$.pipe(
-                tap(() => this.saveTrigger$.next()
-                ));
+                tap(() => this.saveTrigger$.next())
+            );
         }
 
 
@@ -564,10 +564,13 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             share());
 
         const emitComponentBusyAction$ = addressComponentBusy$.pipe(
+            // let's smooth out our busyness signals
+            debounce(busy => interval(busy ? 0 : 250)),
+            distinctUntilChanged(),
             tap(isBusy => this.componentBusy.emit(isBusy))
         );
 
-        const activitityRequirementsMet$: Observable<boolean> = currentAddress$.pipe(
+        const activityRequirementsMet$: Observable<boolean> = currentAddress$.pipe(
             map(currentAddress => this.meetsActivityRequirements(currentAddress))
         );
 
@@ -575,7 +578,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             this.formValidStatusChanged$,
             this.formErrorMessages$,
             this.verifyFieldErrors$,
-            activitityRequirementsMet$
+            activityRequirementsMet$
         ]).pipe(
             map(([formValidStatusChanged, formErrors, addressErrors, reqsMet]) =>
                 (!this.configuration.addressEnforceRequiredFields || formValidStatusChanged)
@@ -587,7 +590,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         // We need to trigger an unsubscribe, but don't want to do it prematurely. Wait til we are not busy!
         combineLatest([this.destroyComponentSignal$, addressComponentBusy$]).pipe(
             filter(([_, busy]) => !busy),
-            debounceTime(50),
             take(1))
             .subscribe(() => {
                 this.ngUnsubscribe.next();
@@ -597,6 +599,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         processSubmitAnnouncement$ && processSubmitAnnouncement$.pipe(
             takeUntil(this.ngUnsubscribe))
             .subscribe();
+
         merge(
             saveTempCurrentAddressAction$,
             verifyInputComponentAddressAction$,
