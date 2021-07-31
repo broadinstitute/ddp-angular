@@ -22,8 +22,8 @@ import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivitySection } from '../../models/activity/activitySection';
 import { AnalyticsEventCategories } from '../../models/analyticsEventCategories';
 import { CompositeDisposable } from '../../compositeDisposable';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { delay, filter, map, take, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, concat, Observable, of } from 'rxjs';
+import { debounce, debounceTime, delay, filter, map, startWith, take, tap, withLatestFrom } from 'rxjs/operators';
 import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
 import { LoggingService } from '../../services/logging.service';
@@ -66,7 +66,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         private logger: LoggingService,
         private windowRef: WindowRef,
         private renderer: Renderer2,
-        private submitService: SubmitAnnouncementService,
+        private submitAnnouncementService: SubmitAnnouncementService,
         private analytics: AnalyticsEventsService,
         private participantsSearch: ParticipantsSearchServiceAgent,
         private changeRef: ChangeDetectorRef,
@@ -91,7 +91,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     public ngOnInit(): void {
         this.getActivity();
         this.initStepperState();
-        const submitSub = this.submitAttempted.subscribe(() => this.submitService.announceSubmit(null));
+        const submitSub = this.submitAttempted.subscribe(() => this.submitAnnouncementService.announceSubmit(null));
 
         // all PATCH responses routed to here
         const resSub = this.submissionManager.answerSubmissionResponse$.subscribe(
@@ -126,6 +126,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 // fix Angular changed-after-check problem
                 delay(0))
             .subscribe(this.isPageBusy);
+        this.isPageBusy.subscribe((pageBusy) => console.log('the page is busy?:' + pageBusy));
 
         this.anchors = [resSub, invalidSub, subErrSub, submitSub].map(sub => new CompositeDisposable(sub));
 
@@ -190,28 +191,45 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
             if (scroll) {
                 this.scrollToTop();
             }
-            // enable any validation errors to be visible
-            this.validationRequested = true;
-            this.sendSectionAnalytics();
-            this.currentSection.validate();
-            if (this.currentSection.valid) {
-                this.resetValidationState();
-                this.currentSectionIndex = nextIndex;
-                this.visitedSectionIndexes[nextIndex] = true;
-                this.saveLastVisitedSectionIndex(nextIndex);
-            }
+            this.submitAnnouncementService.announceSubmit(null);
+            this.isPageBusy.pipe(startWith(true)).pipe(
+                delay(1),
+                filter(pageIsBusy => !pageIsBusy),
+                debounceTime(250),
+                tap(() => {
+                    this.validationRequested = true;
+                    this.sendSectionAnalytics();
+                    this.currentSection.validate();
+                    if (this.currentSection.valid) {
+                        this.resetValidationState();
+                        this.currentSectionIndex = nextIndex;
+                        this.visitedSectionIndexes[nextIndex] = true;
+                        this.saveLastVisitedSectionIndex(nextIndex);
+                    }
+                }),
+                take(1)
+            ).subscribe();
         }
     }
 
     public decrementStep(scroll: boolean = true): void {
         const previousIndex = this.previousAvailableSectionIndex();
         if (previousIndex !== -1) {
-            // if we move forwards or backwards, let's reset our validation display
-            this.resetValidationState();
-            this.currentSectionIndex = previousIndex;
             if (scroll) {
                 this.scrollToTop();
             }
+          //  this.submitAnnouncementService.announceSubmit(null);
+            this.isPageBusy.pipe(startWith(true)).pipe(
+                delay(1),
+                filter(pageIsBusy => !pageIsBusy),
+                debounceTime(250),
+                tap(() => {
+                    // if we move forwards or backwards, let's reset our validation display
+                    this.resetValidationState();
+                    this.currentSectionIndex = previousIndex;
+                }),
+                take(1)
+            ).subscribe();
         }
     }
 
