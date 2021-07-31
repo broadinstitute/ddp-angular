@@ -22,8 +22,8 @@ import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivitySection } from '../../models/activity/activitySection';
 import { AnalyticsEventCategories } from '../../models/analyticsEventCategories';
 import { CompositeDisposable } from '../../compositeDisposable';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { debounceTime, delay, filter, map, startWith, take, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, timer } from 'rxjs';
+import { debounceTime, delay, filter, map, mergeMap, startWith, take, tap } from 'rxjs/operators';
 import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
 import { LoggingService } from '../../services/logging.service';
@@ -192,21 +192,25 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 this.scrollToTop();
             }
             this.submitAnnouncementService.announceSubmit(null);
-            this.isPageBusy.pipe(startWith(true)).pipe(
-                delay(1),
-                filter(pageIsBusy => !pageIsBusy),
-                debounceTime(250),
-                tap(() => {
-                    this.validationRequested = true;
-                    this.sendSectionAnalytics();
-                    this.currentSection.validate();
-                    if (this.currentSection.valid) {
-                        this.resetValidationState();
-                        this.currentSectionIndex = nextIndex;
-                        this.visitedSectionIndexes[nextIndex] = true;
-                        this.saveLastVisitedSectionIndex(nextIndex);
-                    }
-                }),
+            // The announcement could make listener components busy, but not instantly
+            // introduce a wait before we check whether we busy or not
+            timer(100).pipe(
+                mergeMap(() =>
+                    this.isPageBusy.pipe(
+                        filter(pageIsBusy => !pageIsBusy),
+                        tap(() => {
+                            this.validationRequested = true;
+                            this.sendSectionAnalytics();
+                            this.currentSection.validate();
+                            if (this.currentSection.valid) {
+                                this.resetValidationState();
+                                this.visitedSectionIndexes[nextIndex] = true;
+                                this.saveLastVisitedSectionIndex(nextIndex);
+                                this.currentSectionIndex = nextIndex;
+                            }
+                        })
+                    )
+                ),
                 take(1)
             ).subscribe();
         }
@@ -218,7 +222,6 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
             if (scroll) {
                 this.scrollToTop();
             }
-          //  this.submitAnnouncementService.announceSubmit(null);
             this.isPageBusy.pipe(startWith(true)).pipe(
                 delay(1),
                 filter(pageIsBusy => !pageIsBusy),
