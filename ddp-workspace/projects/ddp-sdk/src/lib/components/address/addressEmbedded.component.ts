@@ -15,11 +15,11 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { BehaviorSubject, combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
 import {
     catchError,
-    concatMap,
+    concatMap, debounceTime,
     distinctUntilChanged,
     filter,
     finalize,
-    map,
+    map, mapTo,
     mergeMap,
     scan,
     share,
@@ -208,6 +208,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     private stateUpdates$ = new Subject<Partial<ComponentState>>();
     private stateSubscription: Subscription;
     private validationRequested$: Subject<boolean> = new Subject<boolean>();
+    private destroyComponentSignal$ = new Subject<void>();
     private readonly LOG_SOURCE = 'AddressEmbeddedComponent';
 
     constructor(
@@ -509,7 +510,22 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             tap((errorMessage) => this.stateUpdates$.next({formErrorMessages: [errorMessage]}))
         );
 
-        const removeTempAddressOperator = () => (val$: Observable<any>) => val$.pipe(
+        const canSaveRealAddress = (address: Address | null) =>
+            this.enoughDataToSave(address) && this.meetsActivityRequirements(address);
+
+        // "Real" as opposed to "Temp". Important we return the saved address as properties are added on server
+        const saveRealAddressAction$ = this.saveTrigger$.pipe(
+            withLatestFrom(this.formErrorMessages$, currentAddress$),
+            filter(([_, formErrors, addressToSave]) => {
+                return !formErrors?.length && canSaveRealAddress(addressToSave);
+            }),
+            tap(() => busyCounter$.next(1)),
+            concatMap(([_, formErrors, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
+            tap(() => busyCounter$.next(-1)),
+            share()
+        );
+
+        const deleteTempAddressAction$ = saveRealAddressAction$.pipe(
             withLatestFrom(this.state$),
             filter(([_, state]) => !!state.activityInstanceGuid),
             tap(() => busyCounter$.next(1)),
@@ -519,22 +535,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
                 return of(null);
             }),
             tap(() => busyCounter$.next(-1))
-        );
-
-        const canSaveRealAddress = (address: Address | null) =>
-            this.enoughDataToSave(address) && this.meetsActivityRequirements(address);
-
-        // "Real" as opposed to "Temp"
-        const saveRealAddressAction$ = this.saveTrigger$.pipe(
-            withLatestFrom(this.formErrorMessages$, currentAddress$),
-            filter(([_, formErrors, addressToSave]) => {
-                return !formErrors?.length && canSaveRealAddress(addressToSave);
-            }),
-            tap(() => busyCounter$.next(1)),
-            concatMap(([_, formErrors, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
-            removeTempAddressOperator(),
-            tap(() => busyCounter$.next(-1)),
-            share()
         );
 
         /* If we get to show validations, we touch controls so we will show validations errors
@@ -558,9 +558,12 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             tap(address => this.inputAddress$.next(address))
         );
 
-        const emitComponentBusyAction$ = combineLatest([this.isInputComponentBusy$, isThisComponentBusy$]).pipe(
+        const addressComponentBusy$ = combineLatest([this.isInputComponentBusy$, isThisComponentBusy$]).pipe(
             map(busyFlags => busyFlags.some(val => val)),
             distinctUntilChanged(),
+            share());
+
+        const emitComponentBusyAction$ = addressComponentBusy$.pipe(
             tap(isBusy => this.componentBusy.emit(isBusy))
         );
 
@@ -581,6 +584,16 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             tap(status => this.validStatusChanged.emit(status))
         );
 
+        // We need to trigger an unsubscribe, but don't want to do it prematurely. Wait til we are not busy!
+        combineLatest([this.destroyComponentSignal$, addressComponentBusy$]).pipe(
+            filter(([_, busy]) => !busy),
+            debounceTime(50),
+            take(1))
+            .subscribe(() => {
+                this.ngUnsubscribe.next();
+                this.ngUnsubscribe.complete();
+            });
+
         processSubmitAnnouncement$ && processSubmitAnnouncement$.pipe(
             takeUntil(this.ngUnsubscribe))
             .subscribe();
@@ -590,6 +603,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             verifyInputComponentSparseAddress$,
             handleAddressSuggestionAction$,
             saveRealAddressAction$,
+            deleteTempAddressAction$,
             touchFormOnSubmitWithBadAddressAction$,
             emitValueChangedAction$,
             updateInputComponentWithSavedAddressAction$,
@@ -660,16 +674,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     }
 
     ngOnDestroy(): void {
-        // finding that some slow http operations
-        // killed if we destroy too early
-        this.componentBusy.pipe(
-            filter(busy => !busy),
-            tap(() => {
-                this.ngUnsubscribe.next();
-                this.ngUnsubscribe.complete();
-                this.logger.logDebug(this.LOG_SOURCE, 'Unsubscribe completed.');
-            }),
-            take(1)
-        ).subscribe();
+        this.destroyComponentSignal$.next();
     }
 }
