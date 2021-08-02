@@ -91,7 +91,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     public ngOnInit(): void {
         this.getActivity();
         this.initStepperState();
-        const submitSub = this.submitAttempted.subscribe(() => this.submitAnnouncementService.announceSubmit(null));
+        const submitSub = this.submitAttempted.subscribe(() => this.submitAnnouncementService.announceSubmit());
 
         // all PATCH responses routed to here
         const resSub = this.submissionManager.answerSubmissionResponse$.subscribe(
@@ -190,7 +190,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
             if (scroll) {
                 this.scrollToTop();
             }
-            this.submitAnnouncementService.announceSubmit(null);
+            this.submitAnnouncementService.announceSubmit();
             // The announcement could make listener components busy, but not instantly
             // introduce a wait before we check whether we busy or not
             timer(100).pipe(
