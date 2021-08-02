@@ -15,4 +15,8 @@ $colors: (
   'white': $__white,
   'white:hover': darken($__white, 8%),
   'white:active': darken($__white, 13%),
+  'input-border': #bbbdbe,
+  'input-border-focus': #343434,
+  'form-control-error': $__scarlet,
+  'link': $__scarlet,
 );
