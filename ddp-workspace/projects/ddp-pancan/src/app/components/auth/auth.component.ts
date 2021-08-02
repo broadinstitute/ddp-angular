@@ -9,7 +9,7 @@ import { AppRoutes } from '../app-routes';
             <ddp-sign-in-out></ddp-sign-in-out>
         </div>
         <a mat-flat-button
-           class="action-button btn-common"
+           class="action-button btn-auth button button_small"
            [class.dashboard-button]="isAuthenticated"
            [routerLink]="isAuthenticated ? AppRoutes.Dashboard : AppRoutes.CountMeIn"
            color="primary">
