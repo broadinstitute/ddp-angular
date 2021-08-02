@@ -521,6 +521,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             }),
             tap(() => busyCounter$.next(1)),
             concatMap(([_, formErrors, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
+            removeTempAddressOperator(),
             tap(() => busyCounter$.next(-1)),
             share()
         );

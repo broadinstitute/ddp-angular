@@ -82,34 +82,70 @@
 
 // steps
 .activity-steps {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
-    grid-gap: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin: 3rem 0;
+
+    &__divider {
+        flex: 1;
+        border-top: 2px solid $activity-step-default;
+        margin: 0.75rem 1rem 0;
+    }
 }
 
 .activity-step {
-    font-size: 1.5rem;
-    line-height: 2.25rem;
-    font-weight: 600;
+    display: flex;
+    font-size: 1.125rem;
     cursor: initial;
-    color: $activity-step-pristine;
-    font-family: 'Source Serif Pro', serif !important;
+
+    &__number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.625rem;
+        height: 1.625rem;
+        background-color: $activity-step-default;
+        border-radius: 50%;
+        color: white;
+    }
+
+    &__text {
+        white-space: nowrap;
+        color: $grey-text-color;
+        padding-left: 8px;
+    }
 
     &.completed {
         cursor: pointer;
-        color: $activity-step-completed;
 
+        .activity-step {
+            &__number {
+                background-color: $activity-step-inactive;
+                color: white;
+            }
+
+            &__text {
+                color: $text-color;
+            }
+        }
         &.active {
-            color: $activity-step-active;
+            .activity-step__number {
+                background-color: $primary-color;
+            }
         }
     }
 }
 
 @media only screen and (max-width: 600px) {
     .activity-steps {
-        grid-auto-flow: row;
+        padding: 1rem 0;
+    }
+
+    .activity-step {
+        &__text {
+            display: none;
+        }
     }
 }
 
@@ -216,7 +252,7 @@
 .activity-buttons {
     display: flex;
     justify-content: space-between;
-    margin: 4rem 0 0 0;
+    margin: 2rem 0 0 0;
 }
 
 .button_right {
@@ -225,10 +261,13 @@
 
 // question text
 .ddp-question-prompt {
-    font-family: 'Source Serif Pro', serif !important;
     font-size: 1.5rem;
     line-height: 2.875rem;
     margin: 1.5rem 0 0.5rem 0;
+
+    small {
+        line-height: normal;
+    }
 }
 
 // questions
@@ -273,8 +312,8 @@ ddp-activity-picklist-answer {
 
 .mat-checkbox-label,
 .mat-radio-label-content {
-    font-size: 1.2rem;
-    line-height: 1.2rem !important;
+    font-size: 1.125rem;
+    line-height: 1.6rem !important;
 }
 
 .mat-checkbox-layout {
@@ -282,18 +321,15 @@ ddp-activity-picklist-answer {
 }
 
 .mat-checkbox-inner-container {
-    height: 1.2rem !important;
-    width: 1.2rem !important;
+    height: 1.6875rem !important;
+    width: 1.6875rem !important;
     margin-top: 0 !important;
+    margin-right: 0.875rem !important;
 }
 
 .mat-radio-label {
     margin: 0.5rem 0;
     align-items: unset !important;
-}
-
-.mat-radio-label-content {
-    font-family: 'Untitled-Sans-Regular', sans-serif;
 }
 
 .picklist {
@@ -308,7 +344,7 @@ ddp-activity-picklist-answer {
 
 .ddp-picklist-option-list-item {
     height: auto !important;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .mat-list .mat-list-item .mat-list-item-content {
@@ -321,7 +357,6 @@ ddp-activity-picklist-answer {
     font-size: 1.125rem;
     line-height: 1.4375rem;
     color: $grey-text-color;
-    font-family: 'Untitled-Sans-Regular', sans-serif;
 }
 
 .ddp-counter-color {
@@ -342,7 +377,6 @@ select {
     height: 2.65rem;
     transition: all .3s;
     cursor: pointer;
-    font-family: Untitled-Sans-Regular;
 }
 
 select:disabled {
@@ -442,7 +476,6 @@ select:disabled {
     .ddp-question-prompt {
         font-size: 18px;
         line-height: 32px;
-        font-family: 'Untitled-Sans-Regular', sans-serif !important;
     }
 }
 
@@ -476,7 +509,11 @@ select:disabled {
 
     .mat-checkbox-label,
     .mat-radio-label-content {
-        font-size: 1.2rem;
+        font-size: 1.125rem;
         line-height: 1.9rem !important;
     }
+}
+
+.mat-checkbox-frame {
+    border-color: $checkbox-color !important;
 }

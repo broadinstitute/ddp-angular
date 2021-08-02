@@ -46,7 +46,7 @@ toolkitConfig.activityUrl = AppRoutes.Activity;
 toolkitConfig.dashboardUrl = AppRoutes.Dashboard;
 toolkitConfig.doneUrl = AppRoutes.AgeUpThankYouProxy;
 toolkitConfig.errorUrl = AppRoutes.Error;
-toolkitConfig.phone = '651-287-1608';
+toolkitConfig.phone = '651-403-5315';
 toolkitConfig.infoEmail = 'info@joincountmein.org';
 toolkitConfig.useParticipantDashboard = true;
 toolkitConfig.dashboardDisplayedColumns = ['name', 'summary', 'status', 'actions'];
@@ -71,6 +71,8 @@ sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
 sdkConfig.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
 sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
+sdkConfig.tooltipIconUrl = 'assets/images/info.png';
+sdkConfig.useStepsWithCircle = true;
 
 export function translateFactory(translate: TranslateService,
     injector: Injector,
