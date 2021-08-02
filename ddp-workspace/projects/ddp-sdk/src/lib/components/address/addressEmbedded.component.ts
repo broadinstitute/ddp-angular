@@ -168,7 +168,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
      * type {EventEmitter<Address>}
      */
     @Output()
-    public valueChanged = new EventEmitter<Address>();
+    public valueChanged = new EventEmitter<Address | null>();
     /**
      * Will emit update to indicate if the mail address is considered to be valid
      * If we are about to check the address because something changed
@@ -521,7 +521,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             }),
             tap(() => busyCounter$.next(1)),
             concatMap(([_, formErrors, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
-            removeTempAddressOperator(),
             tap(() => busyCounter$.next(-1)),
             share()
         );
@@ -544,10 +543,10 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         const touchFormOnSubmitWithBadAddressAction$ = this.validationRequested$.pipe(
             withLatestFrom(currentAddress$),
             filter(([_, addressToSave]) => !canSaveRealAddress(addressToSave)),
-            tap(() => this.addressInputComponent.touchAllControls())
+            tap(() => this.addressInputComponent.markAddressTouched())
         );
 
-        const savedAddress$ = saveRealAddressAction$.pipe(
+        const savedAddress$: Observable<Address | null> = saveRealAddressAction$.pipe(
             filter(savedAddressVal => !!savedAddressVal),
             share()
         );
