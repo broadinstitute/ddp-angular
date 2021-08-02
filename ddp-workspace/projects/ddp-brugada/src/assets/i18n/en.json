@@ -320,6 +320,27 @@
           "FieldsDoNotMatch": "Provided emails do not match"
         }
       }
+    },
+    "Password": {
+      "Title": "Please enter the password",
+      "InputPlaceholder": "Password",
+      "Errors": {
+        "Wrong": "Incorrect password. Please try again.",
+        "Communication": "We're sorry, but an error has occurred. Please try again.",
+        "Invalid": "Password is required"
+      }
+    }
+  },
+  "Common": {
+    "Buttons": {
+      "Submit": {
+        "Title": "Submit",
+        "AriaLabel": "Submit button"
+      },
+      "Login": {
+        "Title": "Log In",
+        "AriaLabel": "Log In button"
+      }
     }
   },
   "Toolkit": {
@@ -330,14 +351,6 @@
     },
     "Dashboard": {
       "Title": "Dashboard"
-    },
-    "Password": {
-      "Title": "Please enter the password",
-      "Text": "Please enter your password *",
-      "InputPlaceholder": "Password",
-      "PasswordWrongError": "Incorrect password. Please try again.",
-      "OtherError": "We're sorry, but an error has occurred. Please try again.",
-      "PasswordRequiredError": "Password is required"
     },
     "ErrorPage": {
       "Title": "We've encountered an error",

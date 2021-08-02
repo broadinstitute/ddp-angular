@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { IrbGuard, BrowserGuard } from 'ddp-sdk';
+
 import { Route } from './constants/Route';
 import { AboutComponent } from './pages/about/about.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { HomeComponent } from './pages/home/home.component';
+import { PasswordComponent } from './pages/password/password.component';
 import { TeamComponent } from './pages/team/team.component';
 
 const routes: Routes = [
@@ -13,27 +16,31 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     pathMatch: 'full',
-    canActivate: [],
+    canActivate: [BrowserGuard, IrbGuard],
   },
   {
     path: Route.About,
     component: AboutComponent,
-    canActivate: [],
+    canActivate: [BrowserGuard, IrbGuard],
   },
   {
     path: Route.Team,
     component: TeamComponent,
-    canActivate: [],
+    canActivate: [BrowserGuard, IrbGuard],
   },
   {
     path: Route.FAQ,
     component: FaqComponent,
-    canActivate: [],
+    canActivate: [BrowserGuard, IrbGuard],
   },
   {
     path: Route.Error,
     component: ErrorComponent,
-    canActivate: [],
+    canActivate: [BrowserGuard, IrbGuard],
+  },
+  {
+    path: Route.Password,
+    component: PasswordComponent,
   },
   {
     path: '**',

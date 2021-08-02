@@ -5,4 +5,5 @@ export enum Route {
   FAQ = 'faq',
   Join = 'join',
   Error = 'error',
+  Password = 'password',
 }

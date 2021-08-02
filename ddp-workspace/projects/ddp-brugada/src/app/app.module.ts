@@ -28,6 +28,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { HomeComponent } from './pages/home/home.component';
+import { PasswordComponent } from './pages/password/password.component';
 import { TeamComponent } from './pages/team/team.component';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -58,6 +59,7 @@ sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
 sdkConfig.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
 sdkConfig.localRegistrationUrl = sdkConfig.backendUrl + '/pepper/v1/register';
 sdkConfig.errorPageUrl = Route.Error;
+sdkConfig.passwordPageUrl = Route.Password;
 
 export function translateFactory(
   translate: TranslateService,
@@ -110,6 +112,7 @@ export function translateFactory(
     ErrorComponent,
     FaqComponent,
     HomeComponent,
+    PasswordComponent,
     TeamComponent,
   ],
   imports: [
