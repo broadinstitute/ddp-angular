@@ -224,7 +224,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
             this.isPageBusy.pipe(startWith(true)).pipe(
                 delay(1),
                 filter(pageIsBusy => !pageIsBusy),
-                debounceTime(250),
+                debounceTime(this.timeToDebounce),
                 tap(() => {
                     // if we move forwards or backwards, let's reset our validation display
                     this.resetValidationState();
