@@ -231,6 +231,15 @@ ddp-language-selector {
     color: $warn-color;
     font-weight: 300;
     padding: 15px 0;
+
+    a {
+        text-decoration: underline !important;
+    }
+}
+
+.mat-error {
+    font-size: 0.9rem;
+    color: $warn-color;
 }
 
 .normal {
@@ -244,12 +253,21 @@ ddp-language-selector {
     font-family: $primary-font-medium;
 }
 
+.content {
+    margin: 0 auto;
+    padding: 0 1.5625rem;
+}
+
 .content_medium {
     max-width: 1100px;
 }
 
 .content_tight {
     max-width: 800px;
+}
+
+.section {
+    width: 100%;
 }
 
 $tooltip-icon-size: 24px;
@@ -263,6 +281,17 @@ $tooltip-icon-size: 24px;
         height: $tooltip-icon-size;
         width: $tooltip-icon-size;
     }
+}
+
+.section-spinner {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+}
+
+.static-spinner {
+    padding-bottom: 8rem;
 }
 
 // password page
