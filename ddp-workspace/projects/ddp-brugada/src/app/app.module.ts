@@ -9,6 +9,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import {
   DdpModule,
@@ -19,6 +20,7 @@ import {
 
 import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
 
+import { ActivityComponent } from './components/activity/activity.component';
 import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -28,6 +30,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { HomeComponent } from './pages/home/home.component';
+import { JoinComponent } from './pages/join/join.component';
 import { PasswordComponent } from './pages/password/password.component';
 import { TeamComponent } from './pages/team/team.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -104,6 +107,7 @@ export function translateFactory(
 
 @NgModule({
   declarations: [
+    ActivityComponent,
     AppComponent,
     FooterComponent,
     HeaderComponent,
@@ -112,6 +116,7 @@ export function translateFactory(
     ErrorComponent,
     FaqComponent,
     HomeComponent,
+    JoinComponent,
     PasswordComponent,
     TeamComponent,
   ],
@@ -124,6 +129,7 @@ export function translateFactory(
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     DdpModule,
     ToolkitModule,
     AppRoutingModule,
