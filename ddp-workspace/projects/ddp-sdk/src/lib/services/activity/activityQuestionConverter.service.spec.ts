@@ -3,7 +3,8 @@ import { TestBed } from '@angular/core/testing';
 import { ActivityQuestionConverter } from './activityQuestionConverter.service';
 import { ActivityValidatorBuilder } from './activityValidatorBuilder.service';
 import { ActivitySuggestionBuilder } from './activitySuggestionBuilder.service';
-import { ActivityPicklistQuestionBlock, QuestionType, LoggingService } from 'ddp-sdk';
+import { ActivityPicklistQuestionBlock, QuestionType, LoggingService, ActivityPicklistOption } from 'ddp-sdk';
+import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
 
 let service: ActivityQuestionConverter;
 const loggerServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logError']);
@@ -27,7 +28,8 @@ const question = {
         },
     ],
     questionType: QuestionType.Picklist,
-    groups: []
+    groups: [],
+    renderMode: PicklistRenderMode.AUTOCOMPLETE
 };
 
 describe('ActivityQuestionConverter Test', () => {
@@ -54,13 +56,54 @@ describe('ActivityQuestionConverter Test', () => {
     });
 
     it('should set not empty customValue', () => {
-        const questionWithAllowDetails = {...question, picklistOptions: [... question.picklistOptions,
+        const questionWithAllowDetails = {
+            ...question,
+            picklistOptions: [
+                ... question.picklistOptions,
                 {
                     allowDetails: true,
                     nestedOptions: null,
                     optionLabel: '',
                     stableId: 'OTHER',
-                }]};
+                },
+            ]};
         expect((service.buildQuestionBlock(questionWithAllowDetails, 1) as ActivityPicklistQuestionBlock).customValue).toBe('OTHER');
+    });
+
+    it('should filter out allowDetails option for AUTOCOMPLETE', () => {
+        const questionWithAllowDetails = {
+            ...question,
+            picklistOptions: [
+                ... question.picklistOptions,
+                {
+                    allowDetails: true,
+                    nestedOptions: null,
+                    optionLabel: '',
+                    stableId: 'OTHER',
+                },
+            ],
+            renderMode: PicklistRenderMode.AUTOCOMPLETE
+        };
+        expect((service.buildQuestionBlock(questionWithAllowDetails, 1) as ActivityPicklistQuestionBlock).picklistOptions)
+            .toEqual(question.picklistOptions as ActivityPicklistOption[]);
+    });
+
+    it('should not filter out allowDetails option for not AUTOCOMPLETE', () => {
+        const options = [
+            ... question.picklistOptions,
+            {
+                allowDetails: true,
+                nestedOptions: null,
+                optionLabel: '',
+                stableId: 'OTHER',
+            },
+        ] as ActivityPicklistOption[];
+        const questionWithAllowDetails = {
+            ...question,
+            picklistOptions: options,
+            renderMode: PicklistRenderMode.LIST
+        };
+        expect((service.buildQuestionBlock(questionWithAllowDetails, 1) as ActivityPicklistQuestionBlock).picklistOptions)
+            .toEqual(options);
     });
 });
