@@ -1,11 +1,13 @@
+import { IrbGuard } from 'ddp-sdk';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
 import { Route } from './constants/Route';
-import { AboutComponent } from './pages/about/about.component';
+import { Routes, RouterModule } from '@angular/router';
 import { FaqComponent } from './pages/faq/faq.component';
 import { HomeComponent } from './pages/home/home.component';
 import { TeamComponent } from './pages/team/team.component';
+import { AboutComponent } from './pages/about/about.component';
+import { RegistrationComponent } from './pages/registration/registration.component';
+
 
 const routes: Routes = [
   {
@@ -28,6 +30,10 @@ const routes: Routes = [
     path: Route.FAQ,
     component: FaqComponent,
     canActivate: [],
+  },
+  {
+    path: Route.Join,
+    component: RegistrationComponent
   },
   {
     path: '**',
