@@ -187,9 +187,6 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     public incrementStep(scroll: boolean = true): void {
         const nextIndex = this.nextAvailableSectionIndex();
         if (nextIndex !== -1) {
-            if (scroll) {
-                this.scrollToTop();
-            }
             this.submitAnnouncementService.announceSubmit();
             // The announcement could make listener components busy, but not instantly
             // introduce a wait before we check whether we busy or not
@@ -198,14 +195,25 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                     this.isPageBusy.pipe(
                         filter(pageIsBusy => !pageIsBusy),
                         tap(() => {
-                            this.validationRequested = true;
-                            this.sendSectionAnalytics();
+                            // run validations and compute flags for blocks to enable scrolling to errors
                             this.currentSection.validate();
+                            this.model && this.model.shouldScrollToFirstInvalidQuestion();
+                            // triggers scrolling
+                            this.validationRequested = true;
+                        }),
+                        // delay needed for validationRequested to be processed
+                        delay(10),
+                        tap(() => {
+                            this.sendSectionAnalytics();
+                            // reset scrolling signal
+                            this.validationRequested = false;
                             if (this.currentSection.valid) {
-                                this.resetValidationState();
                                 this.visitedSectionIndexes[nextIndex] = true;
                                 this.saveLastVisitedSectionIndex(nextIndex);
                                 this.currentSectionIndex = nextIndex;
+                                if (scroll) {
+                                    this.scrollToTop();
+                                }
                             }
                         })
                     )
