@@ -332,6 +332,10 @@ var DDP_ENV = {
 {{end}}
 
 {{if eq $study_guid "brugada"}}
+    {{with secret (printf "secret/pepper/%s/%s/%s/conf" $environment $version $study) }}
+        DDP_ENV['recaptchaSiteClientKey'] = "{{.Data.recaptchaSiteClientKey}}",
+    {{end}}
+
     {{if eq $environment "local"}}
         DDP_ENV['auth0ClientId'] = "pyZRLJuSTtBzu4xwllQ7tzz2GAyuauSs";
         DDP_ENV['auth0Domain'] = "brugada-dev.us.auth0.com";
