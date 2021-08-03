@@ -49,7 +49,7 @@ class TranslateLoaderMock implements TranslateLoader {
     }
 }
 
-fdescribe('FaqComponent', () => {
+describe('FaqComponent', () => {
     let component: FaqComponent;
     let fixture: ComponentFixture<FaqComponent>;
     let loader: HarnessLoader;
