@@ -1,6 +1,6 @@
 @import 'styles/variables';
 @import 'styles/fonts';
-@import 'styles/common';
+@import 'styles/static-page';
 @import 'styles/activities';
 @import 'styles/buttons';
 @import 'styles/redirect';
@@ -245,7 +245,18 @@ $tooltip-icon-size: 24px;
     margin: 3rem 0 0 0;
 }
 
-// static pages
-.static-page-content-section {
-    margin: 0 0 4rem 0;
+// participation section
+.participate-step-label {
+    font-size: 1rem;
+    font-family: $primary-font-medium;
+    letter-spacing: -0.07px;
+    line-height: 24px;
+    margin-right: 0.5rem;
 }
+
+.participate-step-time {
+    font-size: 1rem;
+    letter-spacing: -0.07px;
+    line-height: 24px;
+}
+
