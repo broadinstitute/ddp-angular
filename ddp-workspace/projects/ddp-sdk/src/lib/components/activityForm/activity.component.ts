@@ -194,6 +194,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 mergeMap(() =>
                     this.isPageBusy.pipe(
                         filter(pageIsBusy => !pageIsBusy),
+                        tap(_ => this.isLoaded$.next(false)),
                         tap(() => {
                             // run validations and compute flags for blocks to enable scrolling to errors
                             this.currentSection.validate();
@@ -205,6 +206,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                         delay(10),
                         tap(() => {
                             this.sendSectionAnalytics();
+                            tap(_ => this.isLoaded$.next(true)),
                             // reset scrolling signal
                             this.validationRequested = false;
                             if (this.currentSection.valid) {
@@ -232,10 +234,12 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
             this.isPageBusy.pipe(startWith(true)).pipe(
                 delay(1),
                 filter(pageIsBusy => !pageIsBusy),
+                tap(_ => this.isLoaded$.next(false)),
                 debounceTime(this.timeToDebounce),
                 tap(() => {
                     // if we move forwards or backwards, let's reset our validation display
                     this.resetValidationState();
+                    tap(_ => this.isLoaded$.next(true)),
                     this.currentSectionIndex = previousIndex;
                 }),
                 take(1)
