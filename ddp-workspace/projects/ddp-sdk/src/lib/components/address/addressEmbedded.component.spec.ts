@@ -61,7 +61,7 @@ class FakeAddressInputComponent {
   }
 }
 
-describe('AddressEmbeddedComponent', () => {
+fdescribe('AddressEmbeddedComponent', () => {
   let component: AddressEmbeddedComponent;
   let fixture: ComponentFixture<AddressEmbeddedComponent>;
   let childComponentFixture: DebugElement; // : ComponentFixture<FakeAddressInputComponent>;
