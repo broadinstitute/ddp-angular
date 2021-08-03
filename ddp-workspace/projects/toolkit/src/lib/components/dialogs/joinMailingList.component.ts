@@ -172,7 +172,8 @@ export class JoinMailingListComponent implements OnInit, OnDestroy {
             firstName: this.joinForm.value.firstName,
             lastName: this.joinForm.value.lastName,
             emailAddress: this.joinForm.value.email,
-            studyGuid: this.studyGuid
+            studyGuid: this.studyGuid,
+            info: this.data.info || null
         };
     }
 

@@ -45,7 +45,7 @@
     <section class="faq">
         <h2 class="title static-page-title" translate>App.FAQ.Title</h2>
         <div class="container">
-            <app-faq-section questions="App.ColorectalPage.FAQ.Questions" darkerBackground="true">
+            <app-faq-section questions="App.ColorectalPage.FAQ.Questions" darkerBackground="true" [isColorectal]="true">
             </app-faq-section>
         </div>
 
@@ -86,7 +86,8 @@
     <section class="stay-informed">
         <app-stay-informed-section
             title="App.ColorectalPage.StayInformed.Title"
-            btnText="App.ColorectalPage.StayInformed.Button">
+            btnText="App.ColorectalPage.StayInformed.Button"
+            [isColorectal]="true">
         </app-stay-informed-section>
     </section>
 

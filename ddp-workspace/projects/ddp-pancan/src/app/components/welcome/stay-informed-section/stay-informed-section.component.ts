@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
 import { AppRoutes } from '../../app-routes';
-import { CommunicationService, ToolkitConfigurationService } from 'toolkit';
+import { JoinMailingListComponent, ToolkitConfigurationService } from 'toolkit';
+import { MatDialog } from '@angular/material/dialog';
+import { JOIN_MAILING_LIST_DIALOG_SETTINGS } from '../../../utils/join-mailing-list-dialog-confg';
 
 @Component({
     selector: 'app-stay-informed-section',
@@ -12,12 +14,14 @@ export class StayInformedSectionComponent {
     @Input() title: string;
     @Input() text: string;
     @Input() btnText: string;
+    @Input() isColorectal: boolean;
+
     readonly AppRoutes = AppRoutes;
     readonly twitterUrl: string;
     readonly facebookUrl: string;
 
     constructor(
-        private communicationService: CommunicationService,
+        private dialog: MatDialog,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService
     ) {
         this.twitterUrl = `https://twitter.com/${this.toolkitConfiguration.twitterAccountId}`;
@@ -25,6 +29,9 @@ export class StayInformedSectionComponent {
     }
 
     public openJoinMailingList(): void {
-        this.communicationService.openJoinDialog();
+        this.dialog.open(JoinMailingListComponent, {
+            ...JOIN_MAILING_LIST_DIALOG_SETTINGS,
+            data: { info: this.isColorectal ? ['Colorectal'] : null },
+        });
     }
 }
