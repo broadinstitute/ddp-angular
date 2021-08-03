@@ -132,7 +132,7 @@
           <button
             #submitButton
             *ngIf="!isReadonly() && !isAgree()"
-            class="button button--yellow pull-right"
+            class="btn btn--scarlet"
             [disabled]="(isPageBusy | async) || dataEntryDisabled"
             [innerHTML]="
               (isPageBusy | async)
@@ -148,7 +148,7 @@
 
           <button
             *ngIf="isReadonly()"
-            class="button button--yellow pull-right"
+            class="btn btn--white"
             [innerHTML]="'SDK.CloseButton' | translate"
             (click)="close()"
           ></button>

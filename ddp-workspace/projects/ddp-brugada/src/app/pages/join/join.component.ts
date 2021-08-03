@@ -39,6 +39,10 @@ export class JoinComponent implements OnInit {
     }
   }
 
+  onSubmit(response: ActivityResponse): void {
+    console.log('response', response);
+  }
+
   private getNext(): void {
     this.workflowService
       .getNext()
