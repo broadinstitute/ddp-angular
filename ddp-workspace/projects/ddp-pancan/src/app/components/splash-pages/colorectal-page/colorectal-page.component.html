@@ -6,7 +6,7 @@
                 <p class="text static-page-paragraph-text" translate>App.ColorectalPage.IntroductionSection.Text</p>
                 <a mat-flat-button
                    [routerLink]="'/' + AppRoutes.CountMeIn"
-                   class="btn join-cmi-btn center btn-common"
+                   class="btn join-cmi-btn center button button_small"
                    color="primary">
                     {{'App.HomePage.JoinCountMeInButton' | translate}}
                 </a>
@@ -33,7 +33,7 @@
 
         <a mat-stroked-button
            [routerLink]="'/' + AppRoutes.AboutUs"
-           class="btn learn-more-btn center small-letter-spacing btn-common btn-outline">
+           class="btn learn-more-btn center small-letter-spacing button button_small button_secondary">
             {{'App.HomePage.LearnMoreSection.LearnMoreAboutUsButton' | translate}}
         </a>
     </section>
@@ -48,9 +48,10 @@
             <app-faq-section questions="App.ColorectalPage.FAQ.Questions" darkerBackground="true">
             </app-faq-section>
         </div>
+
         <a mat-stroked-button
            [routerLink]="'/' + AppRoutes.FAQ"
-           class="btn more-faq-btn center small-letter-spacing btn-common btn-outline">
+           class="btn more-faq-btn center small-letter-spacing button button_small button_secondary">
             {{'App.FAQ.Button.MoreFAQs' | translate}}
         </a>
     </section>
