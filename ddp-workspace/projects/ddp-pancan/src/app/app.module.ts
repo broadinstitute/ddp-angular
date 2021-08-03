@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -38,6 +41,7 @@ import { StayInformedSectionComponent } from './components/welcome/stay-informed
 import { JoinCmiSectionComponent } from './components/welcome/join-cmi-section/join-cmi-section.component';
 import { ColorectalPageComponent } from './components/splash-pages/colorectal-page/colorectal-page.component';
 import { SplashPageFooterComponent } from './components/splash-pages/splash-page-footer/splash-page-footer.component';
+import { LmsPageComponent } from './components/splash-pages/lms-page/lms-page.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -58,6 +62,8 @@ toolkitConfig.facebookGroupId = 'joincountmein';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org';
 toolkitConfig.colorectalPagePhone = '651-403-5315';
 toolkitConfig.colorectalPageEmail = 'info@colorectalcancerproject.org';
+toolkitConfig.lmsPagePhone = 'XXX-XXX-XXXX';
+toolkitConfig.lmsPageEmail = 'info@lmsproject.org';
 toolkitConfig.useParticipantDashboard = true;
 toolkitConfig.dashboardDisplayedColumns = ['name', 'summary', 'status', 'actions'];
 
@@ -124,6 +130,7 @@ export function translateFactory(translate: TranslateService,
         JoinCmiSectionComponent,
         ColorectalPageComponent,
         SplashPageFooterComponent,
+        LmsPageComponent,
     ],
     imports: [
         BrowserModule,
@@ -134,6 +141,9 @@ export function translateFactory(translate: TranslateService,
         MatButtonModule,
         MatIconModule,
         MatExpansionModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule
     ],
     providers: [
         {

@@ -16,7 +16,7 @@ export class AppComponent extends AppRedesignedBaseComponent {
     phone: string;
     email: string;
     isSplashPage: boolean;
-    private readonly splashPageUrls = ['colorectal'];
+    private readonly splashPageUrls = ['colorectal', 'lms'];
 
     constructor(
         _communicationService: CommunicationService,
