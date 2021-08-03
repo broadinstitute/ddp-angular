@@ -382,7 +382,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                         this.visitedSectionIndexes = this.visitedSectionIndexes
                             .map((value, index) => index <= this.currentSectionIndex);
                     }
-                })
+                }),
+                take(1)
             )
             .subscribe();
     }
