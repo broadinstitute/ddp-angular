@@ -100,6 +100,7 @@ section {
             gap: 5rem;
             flex-wrap: wrap;
             justify-content: space-between;
+            align-items: center;
         }
     }
 
@@ -155,6 +156,12 @@ section {
         &.partners {
             .logos {
                 flex-direction: column;
+                max-width: 100%;
+
+                img {
+                    max-width: 100%;
+                    height: auto;
+                }
             }
         }
     }
