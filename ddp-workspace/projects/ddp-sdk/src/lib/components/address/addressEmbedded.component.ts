@@ -587,8 +587,15 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             tap(status => this.validStatusChanged.emit(status))
         );
 
+        // At least for now, we'll report the status of mailing address through block too
+        // (needed to limit status checks to blocks that are visible within a section
+        const updateBlockValidStatusAction$ = this.validStatusChanged.pipe(
+            tap(validStatus => this.block.hasValidAddress  = validStatus)
+        );
+
+
         // We need to trigger an unsubscribe, but don't want to do it prematurely. Wait til we are not busy!
-        combineLatest([this.destroyComponentSignal$, addressComponentBusy$]).pipe(
+        combineLatest([this.destroyComponentSignal$, this.componentBusy]).pipe(
             filter(([_, busy]) => !busy),
             take(1))
             .subscribe(() => {
@@ -606,6 +613,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             verifyInputComponentSparseAddress$,
             handleAddressSuggestionAction$,
             saveRealAddressAction$,
+            updateBlockValidStatusAction$,
             deleteTempAddressAction$,
             touchFormOnSubmitWithBadAddressAction$,
             emitValueChangedAction$,
