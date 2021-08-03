@@ -235,7 +235,6 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 tap(() => {
                     // if we move forwards or backwards, let's reset our validation display
                     this.resetValidationState();
-                    this.isLoaded$.next(true);
                     this.currentSectionIndex = previousIndex;
                 }),
                 take(1)
