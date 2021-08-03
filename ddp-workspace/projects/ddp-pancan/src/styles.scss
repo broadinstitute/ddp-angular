@@ -44,10 +44,6 @@ body {
     min-height: 100%;
 }
 
-button {
-    cursor: pointer;
-}
-
 a {
     cursor: pointer;
     text-decoration: none;
@@ -67,28 +63,6 @@ h1 {
     font-family: $primary-font-medium;
     font-size: 1.5rem;
     font-weight: normal;
-}
-
-.SimpleButton {
-    @extend .btn-common;
-    @extend .btn-auth;
-
-    background-color: transparent;
-    border-width: 0;
-
-    ddp-sign-in-out & {
-        @extend .btn-outline;
-    }
-
-    ddp-language-selector & {
-        display: flex;
-        align-items: center;
-    }
-
-    .footer & {
-        color: white;
-        border-color: white;
-    }
 }
 
 // language selector
@@ -121,18 +95,6 @@ ddp-language-selector {
 
 .Link {
     color: $primary-color;
-}
-
-.button-link {
-    border: none;
-    background: none;
-    font-size: inherit;
-    font-family: inherit;
-    color: $primary-color;
-
-    &:hover, &:focus {
-        text-decoration: underline;
-    }
 }
 
 .Modal-title {

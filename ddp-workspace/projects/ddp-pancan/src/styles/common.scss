@@ -28,36 +28,3 @@
     letter-spacing: -0.07px;
     line-height: 24px;
 }
-
-.btn-common {
-    font-family: $primary-font-medium;
-    text-decoration: none;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-.btn-outline {
-    border-width: 1px;
-    border-color: $text-color;
-    background-color: transparent;
-}
-
-.btn-auth {
-    padding: 0.65rem 1.5rem;
-    line-height: 20px;
-
-    &.dashboard-button {
-        padding: 0.65rem;
-    }
-}
-
-// for buttons
-.small-letter-spacing {
-    letter-spacing: -0.016rem;
-}
-
-@media screen and (min-width: $desktop-breakpoint) {
-    .btn-outline {
-        border-width: 2px;
-    }
-}
