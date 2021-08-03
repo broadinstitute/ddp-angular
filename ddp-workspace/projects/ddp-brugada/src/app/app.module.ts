@@ -1,15 +1,16 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { ReactiveFormsModule } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TranslateService } from '@ngx-translate/core';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 import {
   DdpModule,
@@ -42,6 +43,7 @@ declare const DDP_ENV: any;
 export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
 toolkitConfig.errorUrl = Route.Error;
+toolkitConfig.recaptchaSiteClientKey = DDP_ENV.recaptchaSiteClientKey;
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.studyGuid = DDP_ENV.studyGuid;
@@ -130,6 +132,7 @@ export function translateFactory(
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    RecaptchaModule,
     DdpModule,
     ToolkitModule,
     AppRoutingModule,

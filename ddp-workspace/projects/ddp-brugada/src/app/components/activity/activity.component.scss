@@ -20,7 +20,13 @@
   margin-top: 2.4rem;
 }
 
+.section--captcha {
+  margin: 2em 0;
+}
+
 .section--buttons {
+  display: flex;
+
   margin: 1em 0;
 }
 
@@ -30,4 +36,12 @@
 
 .btn {
   padding: 1.2rem 4.2rem;
+}
+
+.pull-left {
+  margin-right: auto;
+}
+
+.pull-right {
+  margin-left: auto;
 }
