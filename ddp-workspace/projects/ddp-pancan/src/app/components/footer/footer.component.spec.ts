@@ -1,12 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { mockComponent, WindowRef } from 'ddp-sdk';
 import { RouterTestingModule } from '@angular/router/testing';
-import { of, Observable } from 'rxjs';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { By } from '@angular/platform-browser';
-import { FooterComponent } from './footer.component';
 import { MatIconModule } from '@angular/material/icon';
+import { By } from '@angular/platform-browser';
+import { of, Observable } from 'rxjs';
+
+import { mockComponent, WindowRef } from 'ddp-sdk';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { FooterComponent } from './footer.component';
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
@@ -25,6 +26,7 @@ describe('FooterComponent', () => {
     beforeEach(async () => {
         const auth = mockComponent({ selector: 'app-auth' });
         const navigation = mockComponent({ selector: 'app-navigation' });
+        const languageSelector = mockComponent({ selector: 'ddp-language-selector' });
         nativeWindowSpy = jasmine.createSpyObj('nativeWindowSpy', ['scrollTo']);
         await TestBed.configureTestingModule({
             imports: [
@@ -37,7 +39,7 @@ describe('FooterComponent', () => {
                 { provide: WindowRef, useValue: { nativeWindow: nativeWindowSpy }},
                 { provide: 'toolkit.toolkitConfig', useValue: {} },
             ],
-            declarations: [FooterComponent, auth, navigation],
+            declarations: [FooterComponent, auth, navigation, languageSelector],
         })
             .compileComponents();
     });

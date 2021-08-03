@@ -19,5 +19,6 @@ export const AppRoutes = {
     Participation: 'participation',
     ScientificResearch: 'scientific-research',
     FAQ: 'faq',
-    JoinList: 'join-list'
+    JoinList: 'join-list',
+    ColorectalPage: 'colorectal'
 };

@@ -1,27 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { By } from '@angular/platform-browser';
 import { Observable, of } from 'rxjs';
 
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
-import { AnchorsPageComponent } from './anchors-page.component';
+import { StayInformedSectionComponent } from './stay-informed-section.component';
+import { CommunicationService } from 'toolkit';
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
         const TRANSLATIONS = {
             en: {
                 App: {
-                    AboutUs: {
-                        Title: 'About Us',
-                        Sections: [
-                            {
-                                Title: 'Mission',
-                                Paragraphs: [
-                                    'Count Me In is a nonprofit organization.',
-                                    'Participating patients help shape and propel research.'
-                                ]
-                            }
-                        ]
+                    HomePage: {
+                        StayInformedSection: {}
                     }
                 }
             }
@@ -30,20 +23,26 @@ class TranslateLoaderMock implements TranslateLoader {
     }
 }
 
-describe('AnchorsPageComponent', () => {
-    let component: AnchorsPageComponent;
-    let fixture: ComponentFixture<AnchorsPageComponent>;
+describe('StayInformedSectionComponent', () => {
+    let component: StayInformedSectionComponent;
+    let fixture: ComponentFixture<StayInformedSectionComponent>;
+    let communicationServiceSpy: jasmine.SpyObj<CommunicationService>;
 
     beforeEach(async () => {
+        communicationServiceSpy = jasmine.createSpyObj('communicationServiceSpy', ['openJoinDialog']);
         await TestBed.configureTestingModule({
-                declarations: [AnchorsPageComponent],
                 imports: [
                     RouterTestingModule,
                     NoopAnimationsModule,
                     TranslateModule.forRoot({
                         loader: { provide: TranslateLoader, useClass: TranslateLoaderMock },
-                    })
-                ]
+                    }),
+                ],
+                declarations: [StayInformedSectionComponent],
+                providers: [
+                    { provide: CommunicationService, useValue: communicationServiceSpy },
+                    { provide: 'toolkit.toolkitConfig', useValue: {} }
+                ],
             })
             .compileComponents();
 
@@ -52,14 +51,18 @@ describe('AnchorsPageComponent', () => {
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(AnchorsPageComponent);
+        fixture = TestBed.createComponent(StayInformedSectionComponent);
         component = fixture.componentInstance;
-        component.source = 'App.AboutUs';
-        component.route = 'about-us';
         fixture.detectChanges();
     });
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should call openJoinDialog', async () => {
+        const joinButton = fixture.debugElement.query(By.css('.join-btn')).nativeElement;
+        joinButton.click();
+        expect(communicationServiceSpy.openJoinDialog).toHaveBeenCalled();
     });
 });

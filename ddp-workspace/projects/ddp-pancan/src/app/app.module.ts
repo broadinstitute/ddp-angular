@@ -33,6 +33,11 @@ import { AuthComponent } from './components/auth/auth.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { AnchorsPageComponent } from './components/anchors-page/anchors-page.component';
 import { ScientificResearchComponent } from './components/scientific-research/scientific-research.component';
+import { ParticipationSectionComponent } from './components/welcome/participation-section/participation-section.component';
+import { StayInformedSectionComponent } from './components/welcome/stay-informed-section/stay-informed-section.component';
+import { JoinCmiSectionComponent } from './components/welcome/join-cmi-section/join-cmi-section.component';
+import { ColorectalPageComponent } from './components/splash-pages/colorectal-page/colorectal-page.component';
+import { SplashPageFooterComponent } from './components/splash-pages/splash-page-footer/splash-page-footer.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -48,6 +53,11 @@ toolkitConfig.doneUrl = AppRoutes.AgeUpThankYouProxy;
 toolkitConfig.errorUrl = AppRoutes.Error;
 toolkitConfig.phone = '651-403-5315';
 toolkitConfig.infoEmail = 'info@joincountmein.org';
+toolkitConfig.twitterAccountId = 'count_me_in';
+toolkitConfig.facebookGroupId = 'joincountmein';
+toolkitConfig.countMeInUrl = 'https://joincountmein.org';
+toolkitConfig.colorectalPagePhone = '651-403-5315';
+toolkitConfig.colorectalPageEmail = 'info@colorectalcancerproject.org';
 toolkitConfig.useParticipantDashboard = true;
 toolkitConfig.dashboardDisplayedColumns = ['name', 'summary', 'status', 'actions'];
 
@@ -109,6 +119,11 @@ export function translateFactory(translate: TranslateService,
         AboutUsComponent,
         AnchorsPageComponent,
         ScientificResearchComponent,
+        ParticipationSectionComponent,
+        StayInformedSectionComponent,
+        JoinCmiSectionComponent,
+        ColorectalPageComponent,
+        SplashPageFooterComponent,
     ],
     imports: [
         BrowserModule,
