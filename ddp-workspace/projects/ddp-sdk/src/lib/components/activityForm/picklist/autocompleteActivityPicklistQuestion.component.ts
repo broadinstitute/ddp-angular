@@ -20,10 +20,14 @@ import { ActivityPicklistOption } from '../../../models/activity/activityPicklis
         <mat-autocomplete #autoCompleteFromSource="matAutocomplete" class="autoCompletePanel" [displayWith]="displayAutoComplete">
             <mat-optgroup *ngFor="let group of filteredGroups">
                 <strong [innerHtml]="group.name | searchHighlight: autocompleteInput.value"></strong>
-                <mat-option *ngFor="let suggestion of group.options" class="autoCompleteOption" [value]="suggestion">
+                <ng-container *ngTemplateOutlet="generalOptionsList; context: {list: group.options}"></ng-container>
+            </mat-optgroup>
+            <ng-container *ngTemplateOutlet="generalOptionsList; context: {list: filteredOptions}"></ng-container>
+            <ng-template #generalOptionsList let-list="list">
+                <mat-option *ngFor="let suggestion of list" class="autoCompleteOption" [value]="suggestion">
                     <span [innerHtml]="suggestion.optionLabel | searchHighlight: autocompleteInput.value"></span>
                 </mat-option>
-            </mat-optgroup>
+            </ng-template>
         </mat-autocomplete>
     </mat-form-field>`,
     styles: [`
@@ -43,7 +47,9 @@ import { ActivityPicklistOption } from '../../../models/activity/activityPicklis
 export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQuestion implements OnInit, OnDestroy {
     private readonly ngUnsubscribe = new Subject();
 
-    filteredGroups: ActivityPicklistNormalizedGroup[];
+    filteredGroups: ActivityPicklistNormalizedGroup[] = [];
+    // options w/o a group
+    filteredOptions: ActivityPicklistOption[] = [];
     inputFormControl = new FormControl();
 
     constructor(translate: NGXTranslateService) {
@@ -53,8 +59,11 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     public ngOnInit(): void {
         const answer = this.block.answer && this.block.answer[0];
         if (answer) {
-            this.inputFormControl.setValue(answer.detail || this.block.picklistGroups.flatMap(group => group.options)
-                .find(option => option.stableId === answer.stableId));
+            const value = answer.detail || [
+                ...this.block.picklistGroups.flatMap(group => group.options),
+                ...this.block.picklistOptions
+            ].find(option => option.stableId === answer.stableId);
+            this.inputFormControl.setValue(value);
         }
 
         const userQueryStream = this.inputFormControl.valueChanges.pipe(
@@ -67,6 +76,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
         userQueryStream.pipe(startWith('')).subscribe((value: string | ActivityPicklistOption) => {
             const query = typeof value === 'string' ? value : value.optionLabel;
             this.filteredGroups = this.filterOutEmptyGroups(query ? this.filterGroups(query) : this.block.picklistGroups.slice());
+            this.filteredOptions = query ? this.filterOptions(query, this.block.picklistOptions) : this.block.picklistOptions.slice();
         });
 
         userQueryStream.subscribe((value: string | ActivityPicklistOption) => {
@@ -91,8 +101,8 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     private handleStringValue(value: string): void {
         const minimalLengthForOption = 2;
         if (value.length >= minimalLengthForOption) {
-            const strictMatchInSuggestions = this.filteredGroups.flatMap(group => group.options)
-                .find(suggestion => suggestion.optionLabel.toLowerCase() === value.toLowerCase());
+            const options = [...this.filteredGroups.flatMap(group => group.options), ...this.filteredOptions];
+            const strictMatchInSuggestions = options.find(suggestion => suggestion.optionLabel.toLowerCase() === value.toLowerCase());
             if (strictMatchInSuggestions) {
                 this.updateAnswer(strictMatchInSuggestions.stableId);
             } else {
@@ -116,7 +126,12 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
                 name: group.name,
                 options: group.name.toLowerCase().includes(filterValue)
                     ? group.options
-                    : group.options.filter(option => option.optionLabel.toLowerCase().includes(filterValue))}));
+                    : this.filterOptions(filterValue, group.options)}));
+    }
+
+    private filterOptions(name: string, options: ActivityPicklistOption[]): ActivityPicklistOption[] {
+        const filterValue = name.toLowerCase();
+        return options.filter(option => option.optionLabel.toLowerCase().includes(filterValue));
     }
 
     filterOutEmptyGroups(groups: ActivityPicklistNormalizedGroup[]): ActivityPicklistNormalizedGroup[] {
