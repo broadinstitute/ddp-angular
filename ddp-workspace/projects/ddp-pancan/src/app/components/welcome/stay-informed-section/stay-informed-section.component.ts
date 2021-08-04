@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+
 import { AppRoutes } from '../../app-routes';
 import { JoinMailingListComponent, ToolkitConfigurationService } from 'toolkit';
-import { MatDialog } from '@angular/material/dialog';
 import { JOIN_MAILING_LIST_DIALOG_SETTINGS } from '../../../utils/join-mailing-list-dialog-confg';
 
 @Component({
@@ -11,11 +12,7 @@ import { JOIN_MAILING_LIST_DIALOG_SETTINGS } from '../../../utils/join-mailing-l
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StayInformedSectionComponent {
-    @Input() title: string;
-    @Input() text: string;
-    @Input() btnText: string;
     @Input() isColorectal: boolean;
-
     readonly AppRoutes = AppRoutes;
     readonly twitterUrl: string;
     readonly facebookUrl: string;

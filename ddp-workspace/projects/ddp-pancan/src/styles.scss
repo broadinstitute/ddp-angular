@@ -1,12 +1,11 @@
 @import 'styles/variables';
 @import 'styles/fonts';
-@import 'styles/common';
+@import 'styles/static-page';
 @import 'styles/activities';
 @import 'styles/buttons';
 @import 'styles/redirect';
 @import 'styles/dashboard';
 @import 'styles/mixins';
-@import 'styles/static-page';
 
 html,
 body {
@@ -247,7 +246,54 @@ $tooltip-icon-size: 24px;
     margin: 3rem 0 0 0;
 }
 
-// static pages
-.static-page-content-section {
-    margin: 0 0 4rem 0;
+// participation section
+.participate-step-label {
+    font-size: 1rem;
+    font-family: $primary-font-medium;
+    letter-spacing: -0.07px;
+    line-height: 24px;
+    margin-right: 0.5rem;
+}
+
+.participate-step-time {
+    font-size: 1rem;
+    letter-spacing: -0.07px;
+    line-height: 24px;
+}
+
+// for Welcome page / Colorectal page mostly
+section {
+    width: 100%;
+    box-sizing: border-box;
+
+    &.introduction {
+        max-width: 1440px;
+
+        .logos {
+            img:first-child {
+                margin-right: 5rem;
+            }
+        }
+    }
+
+    &.stay-informed {
+        padding-top: 5.375rem;
+        padding-bottom: 4.5rem;
+    }
+
+    &.join-cmi {
+        padding-top: 4.75rem;
+        padding-bottom: 6.19rem;
+    }
+
+    .btn {
+        font-size: 1.13rem;
+        padding: 1rem 2rem;
+        line-height: 22px;
+    }
+
+    .join-cmi-btn {
+        font-size: 1.25rem;
+        margin: 1.56rem 0 7.5rem;
+    }
 }

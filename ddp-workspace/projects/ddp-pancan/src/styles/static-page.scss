@@ -1,36 +1,20 @@
-// for Welcome page / Colorectal page mostly
-section {
-    width: 100%;
-    box-sizing: border-box;
+@import '../styles/variables';
 
-    &.introduction {
-        max-width: 1440px;
+.static-page-title {
+    font-family: $secondary-font;
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: -0.08px;
+    line-height: 50px;
+}
 
-        .logos {
-            img:first-child {
-                margin-right: 5rem;
-            }
-        }
-    }
+.static-page-paragraph-text {
+    opacity: 0.8;
+    font-size: 1.5rem;
+    letter-spacing: -0.1px;
+    line-height: 34px;
+}
 
-    &.stay-informed {
-        padding-top: 5.375rem;
-        padding-bottom: 4.5rem;
-    }
-
-    &.join-cmi {
-        padding-top: 4.75rem;
-        padding-bottom: 6.19rem;
-    }
-
-    .btn {
-        font-size: 1.13rem;
-        padding: 1rem 2rem;
-        line-height: 22px;
-    }
-
-    .join-cmi-btn {
-        font-size: 1.25rem;
-        margin: 1.56rem 0 7.5rem;
-    }
+.static-page-content-section {
+    margin: 0 0 4rem 0;
 }
