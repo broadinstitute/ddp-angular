@@ -67,7 +67,14 @@ export class ConfigurationService {
     doGcpErrorReporting: boolean;
     // activities which should use a vertical progress indicator
     usesVerticalStepper: string[] = [];
+    // if steps with circle should be used
+    useStepsWithCircle: boolean;
     prismColumns: string[] = [];
     prismDashboardRoute: string;
     prismRoute: string;
+
+    /**
+     * The name of the database configured to your client.
+     */
+    dbName: string;
 }

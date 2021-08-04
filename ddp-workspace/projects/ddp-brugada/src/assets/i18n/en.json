@@ -399,6 +399,25 @@
       "SubmitButton": "OK"
     }
   },
+  "Join": {
+    "Title": "Create your account",
+    "Description": "You will use this information to later sign in to your Brugada Project account.  The Brugada Project will use the email address provided to communicate with you.",
+    "FirstNameLabel": "First Name",
+    "LastNameLabel": "Last Name",
+    "EmailLabel": "Email address",
+    "PasswordLabel": "Password",
+    "PasswordPlaceholder": "your password",
+    "EmailPlaceholder": "yours@example.com",
+    "FirstNamePlaceholder": "Your first name",
+    "LastNamePlaceholder": "Your last name",
+    "RequiredError": "is required",
+    "ValidError": "Enter a valid",
+    "LengthMoreError": "length must be more than",
+    "PasswordPatternError": "Password should contains: <br>- at least one number <br> - at least one lower case letter <br>- at least one upper case letter",
+    "AlreadyRegistered": "Already registered?",
+    "SignInLink": "Sign in with existing account",
+    "Submit": "Submit"
+  },
   "SDK": {
     "SubmitButton": "Submit",
     "CloseButton": "Close",

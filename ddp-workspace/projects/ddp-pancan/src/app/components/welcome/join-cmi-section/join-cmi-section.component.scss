@@ -1,0 +1,37 @@
+@import '../../../../styles/variables.scss';
+@import '../../../../styles/common.scss';
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.join-cmi-logo {
+    max-width: 500px;
+}
+
+.title {
+    margin-top: 2.5rem;
+    margin-bottom: 2.13rem;
+}
+
+.text {
+    margin: 0 auto 1.56rem auto;
+    max-width: 670px;
+}
+
+.join-cmi-btn {
+    margin: 0;
+}
+
+.btn {
+    font-size: 1.13rem;
+    padding: 1rem 2rem;
+    line-height: 22px;
+}
+
+@media screen and (max-width: $tablet-breakpoint) {
+    .join-cmi-logo {
+        width: 95%;
+    }
+}

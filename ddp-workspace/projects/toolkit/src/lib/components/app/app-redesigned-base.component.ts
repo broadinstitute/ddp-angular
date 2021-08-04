@@ -25,7 +25,7 @@ export class AppRedesignedBaseComponent implements OnInit, OnDestroy {
         private communicationService: CommunicationService,
         private dialog: MatDialog,
         private renewNotifier: RenewSessionNotifier,
-        private router: Router,
+        protected router: Router,
         @Inject('toolkit.toolkitConfig') private config: ToolkitConfigurationService) { }
 
     public ngOnInit(): void {

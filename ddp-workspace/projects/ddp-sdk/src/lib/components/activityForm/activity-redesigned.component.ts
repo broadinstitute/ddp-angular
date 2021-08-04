@@ -53,6 +53,10 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
         return this.model.formType === 'CONSENT' && this.agreeConsent;
     }
 
+    public get useStepsWithCircle(): boolean {
+        return this.config.useStepsWithCircle;
+    }
+
     public ngOnDestroy(): void {
         this.subscription.unsubscribe();
         super.ngOnDestroy();

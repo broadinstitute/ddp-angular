@@ -16,7 +16,7 @@ describe('AutocompleteActivityPicklistQuestion', () => {
             {
                 name: 'Sarcoma',
                 options: [
-                    {  optionLabel: 'Angiosarcoma', stableId: 'ANGIOSARCOMA' },
+                    { optionLabel: 'Angiosarcoma', stableId: 'ANGIOSARCOMA' },
                     { optionLabel: 'Chondrosarcoma', stableId: 'CHONDROSARCOMA' }
                 ]
             },
@@ -27,6 +27,10 @@ describe('AutocompleteActivityPicklistQuestion', () => {
                     { optionLabel: 'Endocrine cancer test', stableId: 'ENDOCRINE_CANCER_TEST' },
                 ]
             },
+        ],
+        picklistOptions: [
+            { optionLabel: 'Some cancer', stableId: 'SOME_CANCER' },
+            { optionLabel: 'Another cancer', stableId: 'ANOTHER_CANCER' }
         ],
         renderMode: PicklistRenderMode.AUTOCOMPLETE,
     } as ActivityPicklistQuestionBlock;
@@ -66,9 +70,14 @@ describe('AutocompleteActivityPicklistQuestion', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should generate the list of suggestions on init', fakeAsync(() => {
+    it('should generate the list of groups suggestions on init', fakeAsync(() => {
         tick(200);
         expect(component.filteredGroups).toEqual(questionBlock.picklistGroups);
+    }));
+
+    it('should generate the list of not grouped suggestions on init', fakeAsync(() => {
+        tick(200);
+        expect(component.filteredOptions).toEqual(questionBlock.picklistOptions);
     }));
 
     it('should filter the list of suggestions by child label', fakeAsync(() => {
@@ -102,6 +111,15 @@ describe('AutocompleteActivityPicklistQuestion', () => {
         expect(component.filteredGroups).toEqual(suggestions);
     }));
 
+    it('should filter the list of not grouped suggestions', fakeAsync(() => {
+        component.inputFormControl.setValue('Some');
+        fixture.detectChanges();
+        tick(200);
+
+        const suggestions = [{ optionLabel: 'Some cancer', stableId: 'SOME_CANCER' } as ActivityPicklistOption];
+        expect(component.filteredOptions).toEqual(suggestions);
+    }));
+
     it('should trim search query', fakeAsync(() => {
         component.inputFormControl.setValue(' Endocrine   ');
         fixture.detectChanges();
@@ -130,10 +148,16 @@ describe('AutocompleteActivityPicklistQuestion', () => {
         expect(component.inputFormControl.value).toBe(customSavedValue);
     });
 
-    it('should set initial value from the list', () => {
+    it('should set initial value from groups', () => {
         component.block = {...questionBlock, answer: [{ detail: null, stableId: 'CHONDROSARCOMA' }]} as ActivityPicklistQuestionBlock;
         component.ngOnInit();
         expect(component.inputFormControl.value).toEqual({ optionLabel: 'Chondrosarcoma', stableId: 'CHONDROSARCOMA' });
+    });
+
+    it('should set initial value from not from  groups', () => {
+        component.block = {...questionBlock, answer: [{ detail: null, stableId: 'SOME_CANCER' }]} as ActivityPicklistQuestionBlock;
+        component.ngOnInit();
+        expect(component.inputFormControl.value).toEqual({ optionLabel: 'Some cancer', stableId: 'SOME_CANCER' });
     });
 
     it('should emit valueChanged with selected option', fakeAsync(() => {
@@ -154,6 +178,17 @@ describe('AutocompleteActivityPicklistQuestion', () => {
         tick(200);
 
         const answer = [{ stableId: 'CHONDROSARCOMA', detail: null }];
+        expect(component.block.answer).toEqual(answer);
+        expect(valueChangedSpy).toHaveBeenCalledWith(answer);
+    }));
+
+    it('should emit valueChanged with selected option if user typed the option from the list of not-grouped options', fakeAsync(() => {
+        const valueChangedSpy = spyOn(component.valueChanged, 'emit');
+        component.inputFormControl.setValue('Some cancer', { emitEvent: true });
+        fixture.detectChanges();
+        tick(200);
+
+        const answer = [{ stableId: 'SOME_CANCER', detail: null }];
         expect(component.block.answer).toEqual(answer);
         expect(valueChangedSpy).toHaveBeenCalledWith(answer);
     }));

@@ -1,0 +1,98 @@
+<main class="main">
+    <section class="introduction">
+        <div class="flex">
+            <div class="description">
+                <h2 class="title static-page-title" translate>App.ColorectalPage.IntroductionSection.Title</h2>
+                <p class="text static-page-paragraph-text" translate>App.ColorectalPage.IntroductionSection.Text</p>
+                <a mat-flat-button
+                   [routerLink]="'/' + AppRoutes.CountMeIn"
+                   class="btn join-cmi-btn center button button_small"
+                   color="primary">
+                    {{'App.HomePage.JoinCountMeInButton' | translate}}
+                </a>
+            </div>
+            <img src="assets/images/colorectal_main.png" class="image"
+                 [alt]="'App.ColorectalPage.IntroductionSection.ImageAlt' | translate"
+                 width="390" height="385">
+        </div>
+        <div class="logos">
+            <img src="assets/images/logo-broad.svg"
+                 [alt]="'App.HomePage.IntroductionSection.BroadAlt' | translate"
+                 width="124" height="32">
+            <img src="assets/images/dana-farber-logo.png"
+                 [alt]="'App.HomePage.IntroductionSection.DanaFarberAlt' | translate"
+                 width="124" height="32">
+        </div>
+    </section>
+
+    <section class="learn-more">
+        <h2 class="title static-page-title" translate>App.ColorectalPage.LearnMoreSection.Title</h2>
+        <ng-container *ngFor="let item of 'App.ColorectalPage.LearnMoreSection.Paragraphs' | translate">
+            <p class="text static-page-paragraph-text" [innerHTML]="item"></p>
+        </ng-container>
+
+        <a mat-stroked-button
+           [routerLink]="'/' + AppRoutes.AboutUs"
+           class="btn learn-more-btn center small-letter-spacing button button_small button_secondary">
+            {{'App.HomePage.LearnMoreSection.LearnMoreAboutUsButton' | translate}}
+        </a>
+    </section>
+
+    <section class="participate">
+        <app-participation-section></app-participation-section>
+    </section>
+
+    <section class="faq">
+        <h2 class="title static-page-title" translate>App.FAQ.Title</h2>
+        <div class="container">
+            <app-faq-section questions="App.ColorectalPage.FAQ.Questions" darkerBackground="true" [isColorectal]="true">
+            </app-faq-section>
+        </div>
+
+        <a mat-stroked-button
+           [routerLink]="'/' + AppRoutes.FAQ"
+           class="btn more-faq-btn center small-letter-spacing button button_small button_secondary">
+            {{'App.FAQ.Button.MoreFAQs' | translate}}
+        </a>
+    </section>
+
+    <section class="partners">
+        <h2 class="title static-page-title" translate>App.ColorectalPage.Partners.Title</h2>
+        <div class="logos">
+            <a href="https://" target="_blank">
+                <img lazy-resource src="assets/images/CCC_logo.png"
+                     [alt]="'App.ColorectalPage.Partners.Alts.CCCanada' | translate"
+                     width="503" height="95">
+            </a>
+            <a href="https://" target="_blank">
+                <img lazy-resource src="assets/images/CCRAN_logo.png"
+                     [alt]="'App.ColorectalPage.Partners.Alts.CCResource' | translate"
+                     width="309" height="188">
+            </a>
+            <a href="https://" target="_blank">
+                <img lazy-resource src="assets/images/GICA_logo.png"
+                     [alt]="'App.ColorectalPage.Partners.Alts.GICAlliance' | translate"
+                     width="320" height="214">
+            </a>
+            <a href="https://" target="_blank">
+                <img lazy-resource src="assets/images/Raymond_logo.png"
+                     [alt]="'App.ColorectalPage.Partners.Alts.Raymond' | translate"
+                     width="460" height="104">
+            </a>
+        </div>
+        <p class="text static-page-paragraph-text" [innerHTML]="'App.ColorectalPage.Partners.Text' | translate"></p>
+    </section>
+
+    <section class="stay-informed">
+        <app-stay-informed-section
+            title="App.ColorectalPage.StayInformed.Title"
+            btnText="App.ColorectalPage.StayInformed.Button"
+            [isColorectal]="true">
+        </app-stay-informed-section>
+    </section>
+
+    <section class="join-cmi">
+        <app-join-cmi-section></app-join-cmi-section>
+    </section>
+</main>
+<app-splash-page-footer [phone]="phone" [email]="email"></app-splash-page-footer>
