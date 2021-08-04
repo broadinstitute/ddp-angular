@@ -105,7 +105,18 @@
     }
 }
 
+@media screen and (max-width: $tablet-breakpoint) {
+    .auth {
+        min-width: auto;
+    }
+}
+
 @media screen and (max-width: $mobile-breakpoint) {
+    .actions {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
     .contacts {
         width: 100%;
         display: flex;

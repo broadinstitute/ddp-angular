@@ -122,3 +122,13 @@
         text-decoration: underline;
     }
 }
+
+@media screen and (max-width: $mobile-breakpoint) {
+    .button,
+    .SimpleButton {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        font-size: 1.2rem;
+        white-space: normal;
+    }
+}
