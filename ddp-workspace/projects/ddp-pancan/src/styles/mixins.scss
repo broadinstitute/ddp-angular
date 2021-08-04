@@ -1,0 +1,7 @@
+@import "./variables";
+
+@mixin footer($min-height) {
+    min-height: $min-height;
+    background: $footer-background;
+    color: white;
+}

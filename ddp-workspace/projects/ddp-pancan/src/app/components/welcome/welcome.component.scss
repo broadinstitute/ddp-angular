@@ -1,13 +1,6 @@
 @import '../../../styles/variables.scss';
 
-$container-width: 1200px;
-
-.main > * {
-    width: 100%;
-}
-
 section {
-    box-sizing: border-box;
     text-align: center;
 
     &:nth-of-type(even) {
@@ -15,7 +8,6 @@ section {
     }
 
     &.introduction {
-        max-width: 1440px;
         padding-top: 6.75rem;
         padding-bottom: 1.125rem;
         background-image: url(/assets/images/hero.png);
@@ -25,12 +17,6 @@ section {
 
         .title {
             margin-bottom: 1rem;
-        }
-
-        .logos {
-            img:first-child {
-                margin-right: 5rem;
-            }
         }
     }
 
@@ -73,54 +59,12 @@ section {
     }
 
     &.participate {
-        padding: 7rem 1.25rem;
+        padding: 7rem 1.25rem 4.25rem;
         text-align: left;
-
-        .title {
-            margin-bottom: 4.88rem;
-        }
-
-        .container {
-            max-width: $container-width;
-            margin: 0 auto;
-
-            &.steps {
-                display: flex;
-                justify-content: space-between;
-            }
-        }
-
-        .step {
-            margin: 0 1.5rem 0 0;
-            font-size: 1rem;
-
-            &:last-child {
-                margin-right: 0;
-            }
-
-            &__image {
-                display: block;
-                margin: 0 auto 1.63rem;
-                position: relative;
-                left: -10%;
-            }
-
-            &__title {
-                display: inline;
-            }
-
-            &__description {
-                font-size: 1.5rem;
-                letter-spacing: -0.1px;
-                line-height: 28px;
-                margin-top: 1rem;
-                max-width: 240px;
-            }
-        }
     }
 
     &.faq {
-        padding: 6.88rem 0 3.75rem 0;
+        padding: 6.88rem 0 5.75rem 0;
 
         .container {
             box-sizing: border-box;
@@ -132,66 +76,13 @@ section {
     }
 
     &.stay-informed {
-        padding: 5.38rem 1.25rem 4.5rem 1.25rem;
-
-        .container {
-            max-width: $container-width;
-            margin: 0 auto;
-            text-align: left;
-        }
-
-        .social-media {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2.5rem;
-
-            .text {
-                text-align: left;
-                margin: 0 2.5rem 0 0;
-                flex: 2 1 auto;
-                max-width: unset;
-            }
-
-            &__links {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                flex: 0 1 260px;
-            }
-
-            &__link {
-                flex: 0 1 50px;
-                text-align: center;
-            }
-        }
-
-        .title {
-            margin: 0;
-            padding-bottom: 1.13rem;
-            text-align: left;
-        }
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
     }
 
     &.join-cmi {
-        padding: 4.75rem 0 6.19rem 0;
-
-        .join-cmi-logo {
-            max-width: 500px;
-        }
-
-        .title {
-            margin-top: 2.5rem;
-            margin-bottom: 2.13rem;
-        }
-
-        .text {
-            margin-bottom: 1.56rem;
-        }
-
-        .join-cmi-btn {
-            margin: 0;
-        }
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 
@@ -201,25 +92,8 @@ section {
     text-align: center;
 }
 
-.btn {
-    font-size: 1.13rem;
-    padding: 1rem 2rem;
-    line-height: 22px;
-}
-
-.join-cmi-btn {
-    font-size: 1.25rem;
-    margin: 1.56rem 0 7.5rem;
-}
-
 .learn-more-btn {
     margin-top: 2.81rem;
-}
-
-.center {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
 }
 
 @media screen and (max-width: $desktop-breakpoint) {
@@ -264,49 +138,10 @@ section {
             }
         }
 
-        &.participate {
-            .steps {
-                flex-wrap: wrap;
-                gap: 3rem;
-            }
-
-            .step {
-                flex: 1 1 200px;
-                margin-right: 0;
-
-                &__image {
-                    width: 250px;
-                    height: 250px;
-                    left: unset;
-                }
-
-                &__description {
-                    max-width: unset;
-                }
-            }
-        }
-
         &.faq {
             .container {
                 padding: 0;
             }
-        }
-
-        &.stay-informed {
-            .social-media {
-                flex-direction: column;
-                gap: 3rem;
-                align-items: start;
-
-                &__links {
-                    flex-basis: 50px;
-                    gap: 3rem;
-                }
-            }
-        }
-
-        .join-cmi-logo {
-            width: 95%;
         }
    }
 }
@@ -322,7 +157,6 @@ section {
             padding-top: 5rem;
         }
 
-        &.participate,
         &.join-cmi {
             padding-bottom: 5rem;
         }

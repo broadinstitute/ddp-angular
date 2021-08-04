@@ -12,7 +12,7 @@
             <img src="assets/images/logo-broad.svg"
                  [alt]="'App.HomePage.IntroductionSection.BroadAlt' | translate"
                  width="124" height="32">
-            <img src="../../../assets/images/dana-farber-logo.png"
+            <img src="assets/images/dana-farber-logo.png"
                  [alt]="'App.HomePage.IntroductionSection.DanaFarberAlt' | translate"
                  width="124" height="32">
         </div>
@@ -31,7 +31,7 @@
     <section class="join">
         <img class="image"
              lazy-resource
-             src="../../../assets/images/map.png"
+             src="assets/images/map.png"
              [alt]="'App.HomePage.JoinSection.ImageAlt' | translate"/>
         <div class="description">
             <h2 class="title static-page-title" translate>App.HomePage.JoinSection.Title</h2>
@@ -41,26 +41,7 @@
     </section>
 
     <section class="participate">
-        <h2 class="title static-page-title" translate>App.HomePage.ParticipateSection.Title</h2>
-        <div class="steps container">
-            <figure class="step" *ngFor="let step of 'App.HomePage.ParticipateSection.Steps' | translate; let i = index;">
-                <img class="step__image"
-                     [src]="'../../../assets/images/' + participationStepsImages[i]"
-                     width="150" height="150"
-                     [alt]="step.ImageAlt">
-
-                <figcaption class="step__title participate-step-label">{{step.Title}}</figcaption>
-                <span class="step__time participate-step-time" *ngIf="step.Time">{{step.Time}}</span>
-                <div class="step__description">{{step.Description}}</div>
-            </figure>
-        </div>
-        <div class="container">
-            <a mat-stroked-button
-               [routerLink]="'/' + AppRoutes.Participation"
-               class="btn learn-more-btn center small-letter-spacing button button_small button_secondary">
-                {{'App.HomePage.ParticipateSection.LearnMoreAboutParticipationButton' | translate}}
-            </a>
-        </div>
+        <app-participation-section></app-participation-section>
     </section>
 
     <section class="faq">
@@ -76,45 +57,10 @@
     </section>
 
     <section class="stay-informed">
-        <div class="container">
-            <h2 class="title static-page-title" translate>App.HomePage.StayInformedSection.Title</h2>
-            <div class="social-media">
-                <div class="text static-page-paragraph-text" translate>App.HomePage.StayInformedSection.Text</div>
-                <div class="social-media__links">
-                    <a class="social-media__link" [href]="twitterUrl" target="_blank">
-                        <img class="social-media__logo" lazy-resource src="assets/images/twitter.svg"
-                             [alt]="'Common.Alts.Twitter' | translate">
-                    </a>
-                    <a class="social-media__link" [href]="facebookUrl" target="_blank">
-                        <img class="social-media__logo" lazy-resource src="assets/images/facebook.svg"
-                             [alt]="'Common.Alts.Facebook' | translate">
-                    </a>
-                    <a class="social-media__link" [href]="instagramUrl" target="_blank">
-                        <img class="social-media__logo" lazy-resource src="assets/images/instagram.svg"
-                             [alt]="'Common.Alts.Instagram' | translate">
-                    </a>
-                </div>
-            </div>
-            <button mat-stroked-button
-                    class="btn join-btn small-letter-spacing button button_small button_secondary"
-                    (click)="openJoinMailingList()">
-                {{'App.HomePage.StayInformedSection.JoinMailingListButton' | translate}}
-            </button>
-        </div>
+        <app-stay-informed-section></app-stay-informed-section>
     </section>
 
     <section class="join-cmi">
-        <img class="join-cmi-logo"
-             lazy-resource
-             src="assets/images/hands.png"
-             [alt]="'App.HomePage.CountMeInSection.ImageAlt' | translate">
-        <h2 class="title static-page-title" translate>App.HomePage.CountMeInSection.Title</h2>
-        <p class="text static-page-paragraph-text" translate>App.HomePage.CountMeInSection.Text</p>
-        <a mat-raised-button
-           [routerLink]="'/' + AppRoutes.CountMeIn"
-           class="btn join-cmi-btn button button_small"
-           color="primary">
-            {{'App.HomePage.JoinCountMeInButton' | translate}}
-        </a>
+        <app-join-cmi-section></app-join-cmi-section>
     </section>
 </main>

@@ -1,0 +1,23 @@
+<h2 class="title static-page-title" translate>App.HomePage.ParticipateSection.Title</h2>
+<div class="steps container">
+    <figure class="step" *ngFor="let step of 'App.HomePage.ParticipateSection.Steps' | translate; let i = index;">
+        <img class="step__image"
+             [src]="'assets/images/' + participationStepsImages[i]"
+             width="150" height="150"
+             [alt]="step.ImageAlt">
+
+        <figcaption class="step__title participate-step-label">{{step.Title}}</figcaption>
+        <div class="step__time participate-step-time" *ngIf="step.Time">
+            <mat-icon>access_time</mat-icon>{{step.Time}}
+        </div>
+        <div class="step__description static-page-paragraph-text">{{step.Description}}</div>
+    </figure>
+</div>
+<div class="container">
+    <a mat-stroked-button
+       [routerLink]="'/' + AppRoutes.Participation"
+       class="btn learn-more-btn center small-letter-spacing button button_small button_secondary">
+        {{'App.HomePage.ParticipateSection.LearnMoreAboutParticipationButton' | translate}}
+    </a>
+</div>
+

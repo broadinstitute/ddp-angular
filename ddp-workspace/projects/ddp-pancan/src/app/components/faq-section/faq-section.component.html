@@ -1,6 +1,7 @@
-<mat-accordion hideToggle="true" multi="true" displayMode="flat">
+<mat-accordion hideToggle="true" multi="true" displayMode="flat" >
     <ng-container *ngFor="let item of questions | translate | slice : 0 : questionsCount;">
-        <mat-expansion-panel #panel>
+        <!-- TODO: check if we can use same border for light/dark accordion (ask Erin) -->
+        <mat-expansion-panel #panel [class.darkerBackground]="darkerBackground">
             <mat-expansion-panel-header collapsedHeight="100%" expandedHeight="100%">
                 <mat-icon *ngIf="!panel.expanded" class="faq-block__icon">add</mat-icon>
                 <mat-icon *ngIf="panel.expanded" class="faq-block__icon">clear</mat-icon>
