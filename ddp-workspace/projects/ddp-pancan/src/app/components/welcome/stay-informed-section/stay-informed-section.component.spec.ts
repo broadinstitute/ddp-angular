@@ -62,7 +62,7 @@ describe('StayInformedSectionComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should open join mailing list dialog', async () => {
+    it('should open join mailing list dialog', () => {
         const joinButton = fixture.debugElement.query(By.css('.join-btn')).nativeElement;
         joinButton.click();
         expect(dialogSpy.open).toHaveBeenCalledWith(JoinMailingListComponent, {
@@ -71,7 +71,7 @@ describe('StayInformedSectionComponent', () => {
         });
     });
 
-    it('should open join mailing list dialog for Colorectal page', async () => {
+    it('should open join mailing list dialog for Colorectal page', () => {
         component.isColorectal = true;
         const joinButton = fixture.debugElement.query(By.css('.join-btn')).nativeElement;
         joinButton.click();

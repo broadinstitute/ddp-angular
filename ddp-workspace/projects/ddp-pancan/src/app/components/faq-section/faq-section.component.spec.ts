@@ -98,7 +98,7 @@ describe('FaqItemComponent', () => {
         expect(questionPanels.length).toBe(1);
     });
 
-    it('should open join mailing list dialog', async () => {
+    it('should open join mailing list dialog', () => {
         component.accordion.openAll();
         fixture.detectChanges();
 
@@ -110,7 +110,7 @@ describe('FaqItemComponent', () => {
         });
     });
 
-    it('should open join mailing list dialog for Colorectal page', async () => {
+    it('should open join mailing list dialog for Colorectal page', () => {
         component.isColorectal = true;
         component.accordion.openAll();
         fixture.detectChanges();
