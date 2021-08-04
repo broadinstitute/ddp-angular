@@ -7,8 +7,9 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Observable, of } from 'rxjs';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FaqSectionComponent } from './faq-section.component';
-import { CommunicationService } from 'toolkit';
-import { MatDialogModule } from '@angular/material/dialog';
+import { JoinMailingListComponent } from 'toolkit';
+import { MatDialog } from '@angular/material/dialog';
+import { JOIN_MAILING_LIST_DIALOG_SETTINGS } from '../../utils/join-mailing-list-dialog-confg';
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
@@ -47,11 +48,10 @@ class TranslateLoaderMock implements TranslateLoader {
 describe('FaqItemComponent', () => {
     let component: FaqSectionComponent;
     let fixture: ComponentFixture<FaqSectionComponent>;
-    let communicationServiceSpy: jasmine.SpyObj<CommunicationService>;
+    let dialogSpy: jasmine.SpyObj<MatDialog>;
 
     beforeEach(async () => {
-        communicationServiceSpy = jasmine.createSpyObj('communicationServiceSpy', ['openJoinDialog']);
-
+        dialogSpy = jasmine.createSpyObj('dialogSpy', ['open']);
         await TestBed.configureTestingModule({
             declarations: [
                 FaqSectionComponent,
@@ -60,14 +60,13 @@ describe('FaqItemComponent', () => {
             imports: [
                 MatIconModule,
                 MatExpansionModule,
-                MatDialogModule,
                 NoopAnimationsModule,
                 TranslateModule.forRoot({
                     loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
                 }),
             ],
             providers: [
-                { provide: CommunicationService, useValue: communicationServiceSpy},
+                { provide: MatDialog, useValue: dialogSpy},
             ],
         })
             .compileComponents();
@@ -99,13 +98,28 @@ describe('FaqItemComponent', () => {
         expect(questionPanels.length).toBe(1);
     });
 
-    it('should call openJoinDialog', async () => {
-        // todo: fix this test
-        // component.accordion.openAll();
-        // fixture.detectChanges();
-        //
-        // const joinButton = fixture.debugElement.query(By.css('.join-btn')).nativeElement;
-        // joinButton.click();
-        // expect(communicationServiceSpy.openJoinDialog).toHaveBeenCalled();
+    it('should open join mailing list dialog', () => {
+        component.accordion.openAll();
+        fixture.detectChanges();
+
+        const joinButton = fixture.debugElement.query(By.css('.join-btn')).nativeElement;
+        joinButton.click();
+        expect(dialogSpy.open).toHaveBeenCalledWith(JoinMailingListComponent, {
+            ...JOIN_MAILING_LIST_DIALOG_SETTINGS,
+            data: { info: null },
+        });
+    });
+
+    it('should open join mailing list dialog for Colorectal page', () => {
+        component.isColorectal = true;
+        component.accordion.openAll();
+        fixture.detectChanges();
+
+        const joinButton = fixture.debugElement.query(By.css('.join-btn')).nativeElement;
+        joinButton.click();
+        expect(dialogSpy.open).toHaveBeenCalledWith(JoinMailingListComponent, {
+            ...JOIN_MAILING_LIST_DIALOG_SETTINGS,
+            data: { info: ['Colorectal'] },
+        });
     });
 });
