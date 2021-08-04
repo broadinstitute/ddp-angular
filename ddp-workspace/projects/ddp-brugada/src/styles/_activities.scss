@@ -1,0 +1,23 @@
+@import 'colors';
+@import 'breakpoints';
+
+.activity-question-title {
+  margin: 1.65em 0 0.25em;
+
+  font-size: 2.4rem;
+
+  @include media-sm {
+    font-size: 2rem;
+  }
+}
+
+.ErrorMessage,
+.error-message {
+  color: map-get($colors, 'scarlet');
+}
+
+.ddp-required-question-prompt {
+  .activity-question-title::after {
+    content: ' *';
+  }
+}

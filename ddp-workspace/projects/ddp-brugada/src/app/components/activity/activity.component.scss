@@ -1,0 +1,47 @@
+@import '../../../styles/breakpoints';
+
+.activity {
+  &__title {
+    margin-bottom: 0.75em;
+
+    font-size: 4rem;
+    text-align: center;
+
+    @include media-sm {
+      font-size: 3.2rem;
+    }
+  }
+}
+
+.section--spinner {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 2.4rem;
+}
+
+.section--captcha {
+  margin: 2em 0;
+}
+
+.section--buttons {
+  display: flex;
+
+  margin: 1em 0;
+}
+
+.section--error {
+  margin: 1em 0;
+}
+
+.btn {
+  padding: 1.2rem 4.2rem;
+}
+
+.pull-left {
+  margin-right: auto;
+}
+
+.pull-right {
+  margin-left: auto;
+}

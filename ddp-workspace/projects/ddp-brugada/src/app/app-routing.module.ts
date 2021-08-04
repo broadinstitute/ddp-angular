@@ -5,6 +5,7 @@ import { IrbGuard, BrowserGuard } from 'ddp-sdk';
 import { ErrorComponent } from './pages/error/error.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { HomeComponent } from './pages/home/home.component';
+import { JoinComponent } from './pages/join/join.component';
 import { PasswordComponent } from './pages/password/password.component';
 import { TeamComponent } from './pages/team/team.component';
 import { AboutComponent } from './pages/about/about.component';
@@ -31,6 +32,11 @@ const routes: Routes = [
   {
     path: Route.FAQ,
     component: FaqComponent,
+    canActivate: [BrowserGuard, IrbGuard],
+  },
+  {
+    path: Route.Join,
+    component: JoinComponent,
     canActivate: [BrowserGuard, IrbGuard],
   },
   {
