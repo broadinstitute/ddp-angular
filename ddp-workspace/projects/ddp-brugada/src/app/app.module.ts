@@ -4,7 +4,12 @@ import { NgModule, Injector, APP_INITIALIZER, InjectionToken } from '@angular/co
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { TranslateService } from '@ngx-translate/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import {
   DdpModule,
@@ -18,9 +23,13 @@ import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
 import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { MailingListModalComponent } from './components/mailing-list-modal/mailing-list-modal.component';
+import { Route } from './constants/Route';
 import { AboutComponent } from './pages/about/about.component';
+import { ErrorComponent } from './pages/error/error.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { HomeComponent } from './pages/home/home.component';
+import { PasswordComponent } from './pages/password/password.component';
 import { TeamComponent } from './pages/team/team.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RegistrationComponent } from './pages/registration/registration.component';
@@ -35,6 +44,7 @@ declare const DDP_ENV: any;
 
 export const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
+toolkitConfig.errorUrl = Route.Error;
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.studyGuid = DDP_ENV.studyGuid;
@@ -55,6 +65,8 @@ sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
 sdkConfig.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
 sdkConfig.localRegistrationUrl = sdkConfig.backendUrl + '/pepper/v1/register';
 sdkConfig.dbName = DDP_ENV.dbName;
+sdkConfig.errorPageUrl = Route.Error;
+sdkConfig.passwordPageUrl = Route.Password;
 
 export function translateFactory(
   translate: TranslateService,
@@ -102,16 +114,25 @@ export function translateFactory(
     AppComponent,
     FooterComponent,
     HeaderComponent,
+    MailingListModalComponent,
     AboutComponent,
+    ErrorComponent,
     FaqComponent,
     HomeComponent,
+    PasswordComponent,
     TeamComponent,
     RegistrationComponent,
     SignUpComponent,
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     MatIconModule,
+    MatExpansionModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
     DdpModule,
     ToolkitModule,
     AppRoutingModule,

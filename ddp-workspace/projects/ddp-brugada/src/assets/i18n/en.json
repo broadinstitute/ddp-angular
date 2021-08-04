@@ -105,6 +105,242 @@
           ]
         }
       ]
+    },
+    "FAQ": {
+      "Participants": {
+        "Title": "Frequently Asked Questions<br />for Participants",
+        "Description": "Below are some common questions that we receive from participants, relatives, and community members that are interested. If we have not answered a question of yours, we are happy to connect with you directly. Please contact a study staff member at <a class=\"underlined-link\" href=\"tel:6177147560\">617-714-7560</a>, or email at <a class=\"underlined-link\" href=\"mailto:info@linkmyheart.org\">info@linkmyheart.org</a>.",
+        "Questions": [
+          {
+            "Name": "What is the rationale for this project?",
+            "Answers": [
+              "Brugada syndrome can cause abnormal heart rhythms that can be dangerous and life threatening. The causes of the condition and the best methods for treating it are not well understood; as such, there is a critical need to understand the underlying causes for this condition.",
+              "Brugada syndrome is also rare, making it difficult to study. Our motivation for this project is to empower patients throughout North America to help advance our understanding of the condition. We will do so by creating an easy and convenient opportunity for patients to participate in research relevant to Brugada syndrome.",
+              "The ultimate goal is to improve our understanding of the medical and genetic aspects of patients with Brugada syndrome. We hope to achieve this by connecting the data of many patients with this condition throughout the United States and Canada."
+            ]
+          },
+          {
+            "Name": "What will I be asked to do for this project?",
+            "Answers": [
+              "We will first ask you to complete a brief online survey to help us learn more about you, and your diagnosis. You will then be asked to complete an online consent form that provides us with permission to request copies of your medical records from your healthcare providers. We will need you to provide the names of the hospitals or clinics, as well as the name of your cardiologist(s) that you’ve seen, so we know where to request your information.",
+              "We will also send you a saliva collection kit. From your sample, we will extract your DNA and study it through genotyping or whole genome or exome sequencing, which involves reading through all the letters of your DNA to look for changes that may be causing disease. Studying your DNA may allow us to discover new genes that cause Brugada syndrome, or to better understand the genetic changes that are present in patients with this condition.",
+              "You also have the opportunity to participate in optional surveys to help us answer important research questions relevant for your inherited heart rhythm condition."
+            ]
+          },
+          {
+            "Name": "Can I receive my genetic data as a result of participating in this project?",
+            "Answers": [
+              "The type of genetic testing we are performing is research based. Research based testing is different from the genetic testing ordered by your provider, and is not useful in informing clinical care. As a result, we will not be returning your genetic data to you."
+            ]
+          },
+          {
+            "Name": "Who will have access to the data that I provide?",
+            "Answers": [
+              "Your genetic data, as well as any medical records we receive will be deidentified before we share with other researchers. This means information that could easily identify you such as name and date of birth will be removed before sharing.  The deidentified medical and genetic data may be requested and shared with other clinical or biomedical researchers who are interested in studying the clinical and genetic aspects of Brugada syndrome.",
+              "Your genetic and medical data will be centrally stored on secure servers at the Broad Institute and Massachusetts General Hospital. Only clinical and biomedical researchers that have been approved will have access to this identifiable data. When sharing data with other researchers, only deidentified medical and genetic information will be shared."
+            ]
+          },
+          {
+            "Name": "What benefits are there to participating in this project?",
+            "Answers": [
+              "By participating, you will be contributing to discoveries on the clinical and genetic aspects of Brugada syndrome that may benefit individuals with this condition as a whole. However, there are no direct benefits to you for participating in this project. If interested, you may receive notice about publications based off of data collected for this project.",
+              "We may also share research progress and discoveries, in aggregate, which you can access by signing up for our mailing list or checking our website. You will not receive your genetic data as a result from the study."
+            ]
+          },
+          {
+            "Name": "What resources are out there?",
+            "Answers": [
+              "The Sudden Arrhythmia Death Syndromes Foundation (SADS) is a patient advocacy non-profit whose mission is “to save the lives and support the families of children and adults who are genetically predisposed to sudden death due to heart rhythm abnormalities”. SADS offers patient and family support services, physician and health professional education, raises public awareness about the risks of cardiac arrhythmias, engages in advocacy, and encourages research into conditions that lead to sudden cardiac death. You can learn more about their work and sign up for their mailing list at <a class=\"underlined-link\" target=\"_blank\" href=\"https://www.sads.org\">www.StopSADS.org</a>."
+            ]
+          },
+          {
+            "Name": "Are there any costs for me to participate in this project?",
+            "Answers": [
+              "No. All costs associated (request of records, mailing, sample collection and others) will be covered by the study."
+            ]
+          },
+          {
+            "Name": "Can I withdraw my participation from this project at anytime?",
+            "Answers": [
+              "Yes. You may withdraw from this study if you decide to change your mind in the future. Your genetic and medical data will not be included in any additional research studies moving  forward, and your information, including records and genetic data, will be destroyed."
+            ]
+          },
+          {
+            "Name": "Is there information that I can bring to my doctor so that I can discuss this study with them?",
+            "Answers": [
+              "Yes, you can print out or use your mobile device to share the documents <a class=\"underlined-link\" target=\"_blank\" href=\"/assets/pdf/for-physicians-07-20.pdf\">here</a>."
+            ]
+          },
+          {
+            "Name": "How do I mail back my saliva kit if I live in the USA?",
+            "Answers": [
+              "The saliva kit will have a prepaid return shipping label already on the outside of the box. The saliva kit can be mailed at your nearest USPS location. <span class=\"text-bold\">All costs associated with the project, including shipping, are paid in advance by the study -- there will be no cost to you.</span>"
+            ]
+          },
+          {
+            "Name": "How do I mail back my saliva kit if I live in Canada?",
+            "Answers": [
+              "1. Before returning your saliva kit, please place the included commercial invoice label on the front of the box (it is okay to cover up the logo).",
+              "2. Drop your kit off at a FedEx location or FedEx dropbox if preferred. The saliva kit already has a prepaid return shipping label on the back of the box. <span class=\"text-bold\">All costs associated with the project, including shipping, are paid in advance by the study--there will be no cost to you.</span>"
+            ]
+          }
+        ]
+      },
+      "Community": {
+        "Title": "Frequently Asked Questions<br />for Relatives and the Community",
+        "Questions": [
+          {
+            "Name": "My family members also have Brugada syndrome. Can they participate in this project?",
+            "Answers": [
+              "Yes. We would be enthusiastic to include your relatives that have been diagnosed with Brugada syndrome as part of our study. Please ask them to fill out the initial survey, and they will also be asked to fill out a consent form to allow us to request their records, as well as mail a saliva kit to them."
+            ]
+          },
+          {
+            "Name": "My family member with Brugada syndrome has passed away, and there is postmortem tissue available. Can I participate on behalf of this family member?",
+            "Answers": [
+              "We cannot currently obtain medical records or tissue samples for individuals who have passed away. We may have future plans for next-of-kin process, but this will take time to develop. If you later become diagnosed with Brugada syndrome, we would be interested in having you participate in our project."
+            ]
+          },
+          {
+            "Name": "I don’t have Brugada syndrome, but I was diagnosed with another inherited heart rhythm condition. Can I still participate?",
+            "Answers": [
+              "We are happy to hear your interest! But for the first phase of our project, we are only recruiting patients who have been diagnosed with Brugada syndrome. However, we expect to recruit patients with other inherited heart rhythm conditions in the future.",
+              "If you are interested in participating in a future project that is specifically related to your inherited heart condition, please consider checking our website periodically or signing up for our mailing list as we will update these when future projects become available."
+            ]
+          }
+        ]
+      }
+    },
+    "Team": {
+      "Title": "Our Team",
+      "WhoWeAre": {
+        "Title": "Who we are",
+        "Description": "The Brugada Project, and its parent initiative, Link My Heart, is stewarded by the Broad Institute of MIT and Harvard, and Massachusetts General Hospital. The Brugada Project was designed and implemented by physicians, researchers, genetic counselors, computational scientists, software engineers, and patient advocates with the aim to empower patients to directly connect with researchers.  The Brugada Project is an effort led by investigators at several collaborating academic institutions who are focused on rapidly advancing genetic research related to heart disease."
+      },
+      "Sections": [
+        {
+          "Title": "Leadership",
+          "Members": [
+            {
+              "Name": "Steven A. Lubitz",
+              "Degree": "MD, MPH",
+              "Institution": "Massachusetts General Hospital and Broad Institute",
+              "Bio": "Dr. Lubitz is an Associate Professor of Medicine at Harvard Medical School (HMS), Associate Physician in the Massachusetts General Hospital (MGH) Cardiac Arrhythmia Service, and Associate Member in Medical and Population Genetics at the Broad Institute. His research expertise includes human genetics, risk assessment, and clinical implementation science. Dr. Lubitz is responsible for leading and coordinating all aspects of this project.",
+              "Image": "steven-lubitz.jpeg"
+            },
+            {
+              "Name": "Patrick Ellinor",
+              "Degree": "",
+              "Institution": "Massachusetts General Hospital and Broad Institute",
+              "Bio": "Dr. Ellinor is an Institute Member at the Broad Institute, and directs the Cardiovascular Disease Initiative. He is also a Professor of Medicine at Harvard Medical School and Director of the Cardiac Arrhythmia Service at MGH. He serves on the Scientific Advisory Council of this project and collaborates with Dr. Lubitz to oversee the development of patient surveys, recruitment, and project execution.",
+              "Image": "patrick-ellinor.png"
+            },
+            {
+              "Name": "Anthony Philippakis",
+              "Degree": "",
+              "Institution": "Broad Institute",
+              "Bio": "Dr. Philippakis is the Chief Data Officer at the Broad Institute and directs the Data Sciences Platform. Dr. Philippakis serves on the Scientific Advisory Council of this project and collaborates with Dr. Lubitz to oversee project development and execution.",
+              "Image": "anthony-philippakis.jpeg"
+            }
+          ]
+        },
+        {
+          "Title": "Scientific Advisory Council",
+          "Members": [
+            {
+              "Name": "Lee L. Eckhardt",
+              "Degree": "MD, MS",
+              "Institution": "University of Wisconsin-Madison",
+              "Bio": "Dr. Eckhardt is an Associate Professor of Medicine at the University of Wisconsin-Madison and is the co-director of the Inherited Arrhythmia Clinic. She is a physician scientist with a focus on functional genomics centered around inherited arrhythmia syndromes and unexplained sudden cardiac death. Dr. Eckhardt serves on the Scientific Advisory Council for this project and collaborates with Dr. Lubitz on the research direction, project development, and recruitment initiatives.",
+              "Image": "lee-eckhardt.jpg"
+            },
+            {
+              "Name": "Marco V. Perez",
+              "Degree": "MD",
+              "Institution": "Stanford University",
+              "Bio": "Dr. Perez is an Associate Professor of medicine at the Stanford University Medical School. He is a clinical cardiac electrophysiologist and directs the Stanford Inherited Arrhythmia Clinic. His research interests are in understanding the genetics and epidemiology of cardiac arrhythmias. He is working on the Scientific Advisory Council to help build an innovative approach to studying rare inherited cardiovascular disease.",
+              "Image": "marco-perez.jpg"
+            },
+            {
+              "Name": "M. Ben Shoemaker",
+              "Degree": "MD, MSCI",
+              "Institution": "Vanderbilt University",
+              "Bio": "Dr. Shoemaker is an Assistant Professor of Medicine at Vanderbilt University Medical Center and Staff Physician at the Nashville VA Medical Center. He is a physician scientist and clinical cardiac electrophysiologist with a research program focused on improving the care of patients with inherited arrhythmia and cardiomyopathy syndromes. He serves on the Scientific Advisory Council for this project and collaborates with Dr. Lubitz on the research direction, project development, and recruitment initiatives.",
+              "Image": "ben-shoemaker.jpg"
+            }
+          ]
+        }
+      ],
+      "Council": {
+        "Title": "Project Advisory Council",
+        "Members": [
+          "Kathleen Lewis",
+          "Ana T. Lipsanopoulos",
+          "Stephanie Harris",
+          "Eugene Wong",
+          "Victor Nauffal"
+        ]
+      },
+      "Collaboration": {
+        "Title": "Collaborating Partners",
+        "Partners": [
+          {
+            "Name": "SADS Foundation",
+            "Description": "The SADS Foundation - Sudden Arrhythmia Death Syndromes Foundation (SAD) was established in 1991 and is a global non-profit organization. Its mission is to save the lives and support the families of children and adults who are genetically predisposed to sudden death due to heart rhythm conditions."
+          }
+        ]
+      }
+    },
+    "Error": {
+      "Title": "We've encountered an error",
+      "Paragraph1": "We're sorry, but an error has occurred.",
+      "Paragraph2": "Please wait a moment and retry. If the trouble persists, please email us at <a class=\"underlined-link\" href=\"mailto:info@linkmyheart.org\">info@linkmyheart.org</a> or call us at <a class=\"underlined-link\" href=\"tel:6177147560\">(617) 714-7560</a>."
+    },
+    "MailingList": {
+      "Title": "Mailing List",
+      "Greeting": "Hello!",
+      "Paragraph": "Thank you for joining the Link My Heart mailing list. We will send general updates about the progress of the research project and keep you informed when future projects become available. You can unsubscribe at any time.",
+      "Thanking": "Thank you!",
+      "Form": {
+        "Fields": {
+          "Email": {
+            "Label": "Email Address *"
+          },
+          "EmailConfirmation": {
+            "Label": "Email Confirmation *"
+          }
+        },
+        "Buttons": {
+          "Cancel": "Cancel",
+          "Join": "Join"
+        },
+        "Errors": {
+          "Required": "Field is required",
+          "EmailNotValid": "Provided email is not a valid email address",
+          "FieldsDoNotMatch": "Provided emails do not match"
+        }
+      }
+    },
+    "Password": {
+      "Title": "Please enter the password",
+      "InputPlaceholder": "Password",
+      "Errors": {
+        "Wrong": "Incorrect password. Please try again.",
+        "Communication": "We're sorry, but an error has occurred. Please try again.",
+        "Invalid": "Password is required"
+      }
+    }
+  },
+  "Common": {
+    "Buttons": {
+      "Submit": {
+        "Title": "Submit",
+        "AriaLabel": "Submit button"
+      },
+      "Login": {
+        "Title": "Log In",
+        "AriaLabel": "Log In button"
+      }
     }
   },
   "Toolkit": {
@@ -115,14 +351,6 @@
     },
     "Dashboard": {
       "Title": "Dashboard"
-    },
-    "Password": {
-      "Title": "Please enter the password",
-      "Text": "Please enter your password *",
-      "InputPlaceholder": "Password",
-      "PasswordWrongError": "Incorrect password. Please try again.",
-      "OtherError": "We're sorry, but an error has occurred. Please try again.",
-      "PasswordRequiredError": "Password is required"
     },
     "ErrorPage": {
       "Title": "We've encountered an error",
@@ -142,33 +370,6 @@
       "Text": "Please wait. You will be redirected to a destination soon..."
     },
     "Dialogs": {
-      "JoinMailingList": {
-        "Title": "Stay informed!",
-        "Text": "Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
-        "Fields": {
-          "FirstName": {
-            "Placeholder": "First Name *",
-            "Error": "First Name is required"
-          },
-          "LastName": {
-            "Placeholder": "Last Name *",
-            "Error": "Last Name is required"
-          },
-          "Email": {
-            "Placeholder": "Email Address *",
-            "Error": "Please enter a valid Email Address"
-          },
-          "ConfirmEmail": {
-            "Placeholder": "Email Confirmation (Reenter Email) *",
-            "Error": "Please enter a valid Email Address"
-          }
-        },
-        "CancelButton": "CANCEL",
-        "SubmitButton": "JOIN",
-        "Required": "* Required field",
-        "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
-        "LoadingError": "We're sorry, but an error has occurred."
-      },
       "SessionWillExpire": {
         "Title": "Your session will time-out soon",
         "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",

@@ -76,12 +76,12 @@
   transition: opacity 0.3s ease;
 
   &:disabled {
-    opacity: 75%;
+    opacity: 0.75;
 
     cursor: not-allowed;
   }
 
   &:hover {
-    opacity: 75%;
+    opacity: 0.75;
   }
 }

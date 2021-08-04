@@ -6,5 +6,7 @@ export enum Route {
   FAQ = 'faq',
   Join = 'join',
   Login = 'login',
-  LoginLanding = 'login-landing'
+  LoginLanding = 'login-landing',
+  Error = 'error',
+  Password = 'password',
 }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 import { Route } from '../../constants/Route';
+import { MailingListModalComponent } from '../mailing-list-modal/mailing-list-modal.component';
 
 @Component({
   selector: 'app-header',
@@ -10,6 +12,8 @@ import { Route } from '../../constants/Route';
 export class HeaderComponent {
   Route = Route;
   private _isNavigationShown = false;
+
+  constructor(private dialog: MatDialog) {}
 
   get isNavigationShown(): boolean {
     return this._isNavigationShown;
@@ -37,5 +41,14 @@ export class HeaderComponent {
     if (['a', 'button'].includes(tagName)) {
       this.isNavigationShown = false;
     }
+  }
+
+  openMailingListModal(): void {
+    this.dialog.open(MailingListModalComponent, {
+      width: '100%',
+      maxWidth: '80rem',
+      disableClose: true,
+      autoFocus: false,
+    });
   }
 }
