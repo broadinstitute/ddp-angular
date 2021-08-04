@@ -64,6 +64,7 @@ toolkitConfig.colorectalPagePhone = '651-403-5315';
 toolkitConfig.colorectalPageEmail = 'info@colorectalcancerproject.org';
 toolkitConfig.lmsPagePhone = 'XXX-XXX-XXXX';
 toolkitConfig.lmsPageEmail = 'info@lmsproject.org';
+toolkitConfig.lmsStudyGuid = 'cmi-lms';
 toolkitConfig.useParticipantDashboard = true;
 toolkitConfig.dashboardDisplayedColumns = ['name', 'summary', 'status', 'actions'];
 
