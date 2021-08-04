@@ -1,0 +1,107 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/common.scss';
+
+:host {
+    .title {
+        margin-bottom: 4.88rem;
+    }
+
+    .container {
+        max-width: $landing-page-container-width;
+        margin: 0 auto;
+
+        &.steps {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    .step {
+        margin: 0 1.5rem 0 0;
+        font-size: 1rem;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &__image {
+            display: block;
+            margin: 0 auto 1.63rem;
+            position: relative;
+            left: -10%;
+        }
+
+        &__title {
+            display: inline;
+        }
+
+        &__time {
+            mat-icon {
+                vertical-align: top;
+                margin-right: 8px;
+            }
+        }
+
+        &__description {
+            max-width: 240px;
+        }
+    }
+}
+
+.title, .text {
+    max-width: 45.5rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.btn {
+    font-size: 1.13rem;
+    padding: 1rem 2rem;
+    line-height: 22px;
+}
+
+.learn-more-btn {
+    margin-top: 2.81rem;
+}
+
+@media screen and (max-width: $tablet-breakpoint) {
+    .container {
+        text-align: center;
+
+        &.steps {
+            flex-wrap: wrap;
+            gap: 3rem;
+            justify-content: center !important;
+
+            .step {
+                flex: unset;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 0;
+                min-width: 375px;
+
+                &__image {
+                    width: 250px;
+                    height: 250px;
+                    left: 0;
+                }
+
+                &__description {
+                    max-width: 350px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+    .container {
+        &.steps {
+            .step__description {
+                max-width: 240px;
+            }
+        }
+    }
+}
+

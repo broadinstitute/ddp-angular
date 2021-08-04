@@ -1,14 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterTestingModule } from '@angular/router/testing';
 import { Observable, of } from 'rxjs';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { WelcomeComponent } from './welcome.component';
 import { mockComponent } from 'ddp-sdk';
 import { CommunicationService } from 'toolkit';
-import { MatButtonModule } from '@angular/material/button';
-import { RouterTestingModule } from '@angular/router/testing';
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
@@ -29,12 +28,21 @@ describe('WelcomeComponent', () => {
     let component: WelcomeComponent;
     let fixture: ComponentFixture<WelcomeComponent>;
     let communicationServiceSpy: jasmine.SpyObj<CommunicationService>;
+    const participationSection = mockComponent({ selector: 'app-participation-section'});
+    const faqSection = mockComponent({ selector: 'app-faq-section'});
+    const stayInformedSection = mockComponent({ selector: 'app-stay-informed-section'});
+    const joinCmiSection = mockComponent({ selector: 'app-join-cmi-section'});
 
     beforeEach(async () => {
         communicationServiceSpy = jasmine.createSpyObj('communicationServiceSpy', ['openJoinDialog']);
-        const faq = mockComponent({ selector: 'app-faq-section'});
         await TestBed.configureTestingModule({
-            declarations: [WelcomeComponent, faq],
+            declarations: [
+                WelcomeComponent,
+                participationSection,
+                faqSection,
+                stayInformedSection,
+                joinCmiSection
+            ],
             imports: [
                 MatButtonModule,
                 RouterTestingModule,
@@ -61,11 +69,5 @@ describe('WelcomeComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
-    });
-
-    it('should call openJoinDialog', async () => {
-        const joinButton = fixture.debugElement.query(By.css('.join-btn')).nativeElement;
-        joinButton.click();
-        expect(communicationServiceSpy.openJoinDialog).toHaveBeenCalled();
     });
 });

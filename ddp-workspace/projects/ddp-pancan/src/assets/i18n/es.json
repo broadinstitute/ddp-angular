@@ -61,6 +61,7 @@
                     },
                     {
                         "Title": "PASO 4",
+                        "Time": "[ES]Ongoing",
                         "Description": "Aprenda junto con nosotros",
                         "ImageAlt": "Burbujas de diálogo que comparten corazones y visualizaciones de datos"
                     }
@@ -342,6 +343,73 @@
                 }
             ]
         },
+        "ColorectalPage": {
+            "IntroductionSection": {
+                "Title": "Contribuya directamente al futuro del cáncer colorrectal.",
+                "Text": "Si alguna vez ha recibido un diagnóstico de cáncer colorrectal, únase a una iniciativa con participación de pacientes a nivel nacional y aporte sus muestras, historias clínicas y experiencia a la investigación sobre cáncer colorrectal. Juntos, podemos acelerar el desarrollo de futuros tratamientos.",
+                "ImageAlt": "Su impacto"
+            },
+            "LearnMoreSection": {
+                "Title": "¿De qué se trata este proyecto?",
+                "Paragraphs": [
+                    "El Proyecto de cáncer colorrectal forma parte de <a class='Link' href='https://joincountmein.org'>Count Me In</a>, una iniciativa de investigación que permite que los pacientes con cáncer transformen de forma directa la investigación y los descubrimientos en el cáncer. Toda persona en Estados Unidos o Canadá que alguna vez haya recibido un diagnóstico de cáncer colorrectal puede compartir información sobre su experiencia respondiendo encuestas y compartiendo muestras biológicas y copias de sus registros medicos con los investigadores para acelerar el paso de los descubrimientos.",
+                    "El objetivo de <a class='Link' href='https://joincountmein.org'>Count Me In</a> es generar un gran conjunto de datos de información genómica, clínica y molecular aportada por los pacientes que pueda compartirse con la comunidad biomédica. La historia de cada paciente es una pieza del rompecabezas que puede ayudarnos a comprender mejor el cáncer. Al descubrir los genes y las variaciones que dan lugar al cáncer y compartir estos datos, esperamos poder obtener información valiosa para desarrollar más tratamientos eficaces."
+                ]
+            },
+            "FAQ": {
+                "Questions": [
+                    {
+                        "Question": "¿Cuál es el objetivo del Proyecto de cáncer colorrectal?",
+                        "Paragraphs": [
+                            "Nuestro objetivo es que los datos generados a partir de este proyecto puedan ayudarnos a comprender mejor el panorama del cáncer colorrectal y su tratamiento. Gracias a que podemos trabajar con todos los pacientes, sin importar dónde vivan (en los Estados Unidos o Canadá), esperamos llegar a poblaciones que no han sido lo suficientemente estudiadas, lo que incluye personas que han recibido un diagnóstico de cáncer colorrectal a una edad temprana, personas de comunidades marginadas que históricamente se han excluido de las investigaciones y pacientes con cáncer colorrectal metastásico."
+                        ]
+                    },
+                    {
+                        "Question": "¿Quiénes pueden participar?",
+                        "Paragraphs": [
+                            "Todas las personas que hayan recibido un diagnóstico de cáncer de colon y recto en algún momento de su vida pueden participar si viven en Estados Unidos o Canadá."
+                        ]
+                    },
+                    {
+                        "Question": "¿Qué hace Count Me In con los datos del Proyecto de cáncer colorrectal?",
+                        "Paragraphs": [
+                            "Después de eliminar toda la información personal que identificaría con facilidad a las personas, los datos se comparten libremente con el objetivo de agilizar los descubrimientos, al permitir que los investigadores identifiquen patrones en los datos. Los lotes de datos se haran disponibles al público de forma periódica y están disponibles para todos los investigadores, de manera que todos pueden utilizarlos para hacer descubrimientos y avances contra el cáncer, que incluyen nuevos medicamentos y métodos de diagnóstico.",
+                            "Enlaces rápidos a datos publicados: <br/><a class='Link' href='https://www.mbcproject.org/data-release'>https://www.mbcproject.org/data-release</a><br/><a class='Link' href='https://ascproject.org/data-release'>https://ascproject.org/data-release</a>"
+                        ]
+                    },
+                    {
+                        "Question": "¿Cómo aborda Count Me In la inclusividad en la participación?",
+                        "Paragraphs": [
+                            "Count Me In entiende que existen muchas barreras (estructurales e históricas) que impiden la participación directa de comunidades que no han estado representadas y marginadas en la investigación. Count Me In tiene un compromiso con el principio fundamental de que la experiencia de todos los pacientes con cáncer es importante, independientemente de dónde vivan, qué idioma hablen o cuál sea su patrimonio cultural, y la incorporación de su experiencia es imperativa para ampliar nuestros conocimientos sobre el cáncer.",
+                            "La investigación tradicional del cáncer no se presta a ser tan inclusiva como debería. Las desigualdades en torno al cáncer son prueba de todo el trabajo que todavía queda por hacer en este espacio, y reconocemos que nunca llegaremos a la culminación, pero continuamos esforzándonos por lograrlo, junto con pacientes. Creemos que los pacientes deben ser aliados directos en la investigación del cáncer y sabemos que solo podemos avanzar nuestros conocimientos sobre el cáncer y acelerar los descubrimientos si lo hacemos juntos."
+                        ]
+                    },
+                    {
+                        "Question": "¿Cómo ha sido la participación de los pacientes en el diseño de este proyecto?",
+                        "Paragraphs": [
+                            "Count Me In ha trabajado estrechamente con pacientes, seres queridos y defensores de pacientes en la comunidad del cáncer colorrectal para desarrollar este proyecto. Los pacientes participaron en todos los aspectos del diseño, incluidos el concepto, los objetivos, las comunicaciones, los formularios y el sitio web."
+                        ]
+                    }
+                ]
+            },
+            "Partners": {
+                "Title": "Aliados",
+                "Alts": {
+                    "CCCanada": "Colorectal Cancer Canada",
+                    "CCResource": "Colorectal Cancer Resource & Action Network",
+                    "GICAlliance": "GI Cancers Alliance",
+                    "Raymond": "Raymond Foundation"
+                },
+                "Text": "Para obtener más información sobre cómo participar en el Proyecto de cáncer colorrectal, comuníquese con el equipo en <a class='Link' href='mailto:info@colorectalcancerproject.org'>info@colorectalcancerproject.org</a>."
+            },
+            "StayInformed": {
+                "Title": "Noticias y novedades",
+                "Button": "Suscríbase a la lista de correo"
+            },
+            "Footer": {
+                "Text": "El Proyecto de cáncer colorrectal forma parte de <span class='bold'>Count Me In</span>, una iniciativa de investigación que une a pacientes y científicos para juntos acelerar los descubrimientos en la investigación del cáncer."
+            }
+        },
         "Header": {
             "Logo": {
                 "Title": "Count<br>Me<br>In",
@@ -359,7 +427,9 @@
         "Footer": {
             "BackToTopButton": "Volver Arriba",
             "Contacts": "Contáctenos",
-            "Copyright": "Copyright © 2021 Count Me In. Todos los derechos reservados."
+            "Copyright": "Copyright © 2021 Count Me In. Todos los derechos reservados.",
+            "Email": "Correo electrónico",
+            "Phone": "Teléfono"
         }
     },
     "Toolkit": {

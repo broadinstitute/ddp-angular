@@ -239,7 +239,6 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
 
     protected resetValidationState(): void {
         this.setFlags(false);
-        this.submitAttempted.next(false);
     }
 
     protected nextWorkflowActivity(): void {

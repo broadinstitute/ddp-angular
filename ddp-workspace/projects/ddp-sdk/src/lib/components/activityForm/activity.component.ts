@@ -22,8 +22,8 @@ import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivitySection } from '../../models/activity/activitySection';
 import { AnalyticsEventCategories } from '../../models/analyticsEventCategories';
 import { CompositeDisposable } from '../../compositeDisposable';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { debounceTime, delay, filter, map, take, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, timer } from 'rxjs';
+import { debounceTime, delay, filter, map, mergeMap, startWith, take, tap } from 'rxjs/operators';
 import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
 import { LoggingService } from '../../services/logging.service';
@@ -66,7 +66,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         private logger: LoggingService,
         private windowRef: WindowRef,
         private renderer: Renderer2,
-        private submitService: SubmitAnnouncementService,
+        private submitAnnouncementService: SubmitAnnouncementService,
         private analytics: AnalyticsEventsService,
         private participantsSearch: ParticipantsSearchServiceAgent,
         private changeRef: ChangeDetectorRef,
@@ -91,9 +91,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     public ngOnInit(): void {
         this.getActivity();
         this.initStepperState();
-        const submitSub = this.submitAttempted.subscribe((isSubmit: boolean) => {
-            this.submitService.announceSubmit(isSubmit);
-        });
+        const submitSub = this.submitAttempted.subscribe(() => this.submitAnnouncementService.announceSubmit());
 
         // all PATCH responses routed to here
         const resSub = this.submissionManager.answerSubmissionResponse$.subscribe(
@@ -189,52 +187,58 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     public incrementStep(scroll: boolean = true): void {
         const nextIndex = this.nextAvailableSectionIndex();
         if (nextIndex !== -1) {
-            // enable any validation errors to be visible
-            this.validationRequested = true;
-            this.sendSectionAnalytics();
-            this.currentSection.validate();
-
-            if (scroll) {
-                this.scrollToTop();
-            }
-
-            if (this.currentSection.valid) {
-                this.resetValidationState();
-
-                this.isPageBusy.pipe(
-                    tap(_ => this.isLoaded$.next(false)),
-                    debounceTime(this.timeToDebounce),
-                    filter(busy => !busy),
-                    take(1)
-                ).subscribe(_ => {
-                    this.isLoaded$.next(true);
-                    this.currentSectionIndex = nextIndex;
-                    this.visitedSectionIndexes[nextIndex] = true;
-                    this.saveLastVisitedSectionIndex(nextIndex);
-                });
-            }
+            this.submitAnnouncementService.announceSubmit();
+            // The announcement could make listener components busy, but not instantly
+            // introduce a wait before we check whether we busy or not
+            timer(100).pipe(
+                mergeMap(() =>
+                    this.isPageBusy.pipe(
+                        filter(pageIsBusy => !pageIsBusy),
+                        tap(() => {
+                            // run validations and compute flags for blocks to enable scrolling to errors
+                            this.currentSection.validate();
+                            this.model && this.model.shouldScrollToFirstInvalidQuestion();
+                            // triggers scrolling
+                            this.validationRequested = true;
+                        }),
+                        // delay needed for validationRequested to be processed
+                        delay(0),
+                        tap(() => {
+                            this.sendSectionAnalytics();
+                            // reset scrolling signal
+                            this.validationRequested = false;
+                            if (this.currentSection.valid) {
+                                this.visitedSectionIndexes[nextIndex] = true;
+                                this.saveLastVisitedSectionIndex(nextIndex);
+                                this.currentSectionIndex = nextIndex;
+                                if (scroll) {
+                                    this.scrollToTop();
+                                }
+                            }
+                        })
+                    )
+                ),
+                take(1)
+            ).subscribe();
         }
     }
 
     public decrementStep(scroll: boolean = true): void {
         const previousIndex = this.previousAvailableSectionIndex();
         if (previousIndex !== -1) {
-            // if we move forwards or backwards, let's reset our validation display
-            this.resetValidationState();
-
             if (scroll) {
                 this.scrollToTop();
             }
-
-            this.isPageBusy.pipe(
-                tap(_ => this.isLoaded$.next(false)),
+            this.isPageBusy.pipe(startWith(true)).pipe(
+                filter(pageIsBusy => !pageIsBusy),
                 debounceTime(this.timeToDebounce),
-                filter(busy => !busy),
+                tap(() => {
+                    // if we move forwards or backwards, let's reset our validation display
+                    this.resetValidationState();
+                    this.currentSectionIndex = previousIndex;
+                }),
                 take(1)
-            ).subscribe(_ => {
-                this.isLoaded$.next(true);
-                this.currentSectionIndex = previousIndex;
-            });
+            ).subscribe();
         }
     }
 
@@ -377,7 +381,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                         this.visitedSectionIndexes = this.visitedSectionIndexes
                             .map((value, index) => index <= this.currentSectionIndex);
                     }
-                })
+                }),
+                take(1)
             )
             .subscribe();
     }

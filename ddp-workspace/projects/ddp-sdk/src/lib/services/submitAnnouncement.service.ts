@@ -13,13 +13,13 @@ import { Observable, Subject } from 'rxjs';
  */
 @Injectable()
 export class SubmitAnnouncementService {
-    private submitAnnouncedSource = new Subject<boolean>();
+    private submitAnnouncedSource = new Subject<void>();
 
-    get submitAnnounced$(): Observable<boolean> {
+    get submitAnnounced$(): Observable<void> {
       return this.submitAnnouncedSource.asObservable();
     }
 
-    public announceSubmit(submitOccurred: boolean): void {
-        this.submitAnnouncedSource.next(submitOccurred);
+    public announceSubmit(): void {
+        this.submitAnnouncedSource.next();
     }
 }

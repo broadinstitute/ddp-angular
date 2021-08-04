@@ -203,5 +203,5 @@
 </ng-template>
 
 <ng-template #horizontalProgressIndicator>
-    <ng-container *ngIf="isAgree(); then stepsWithCircle else simpleSteps"></ng-container>
+    <ng-container *ngIf="useStepsWithCircle; then stepsWithCircle else simpleSteps"></ng-container>
 </ng-template>

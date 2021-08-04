@@ -12,10 +12,11 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { BehaviorSubject, combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, interval, merge, Observable, of, Subject, Subscription } from 'rxjs';
 import {
     catchError,
     concatMap,
+    debounce,
     distinctUntilChanged,
     filter,
     finalize,
@@ -167,7 +168,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
      * type {EventEmitter<Address>}
      */
     @Output()
-    public valueChanged = new EventEmitter<Address>();
+    public valueChanged = new EventEmitter<Address | null>();
     /**
      * Will emit update to indicate if the mail address is considered to be valid
      * If we are about to check the address because something changed
@@ -201,13 +202,13 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     public formValidStatusChanged$: Subject<boolean> = new BehaviorSubject(true);
     public generateTaggedAddress = generateTaggedAddress;
 
-
     private ngUnsubscribe = new Subject();
     private saveTrigger$ = new Subject<void>();
     private state$: Observable<ComponentState>;
     private stateUpdates$ = new Subject<Partial<ComponentState>>();
     private stateSubscription: Subscription;
     private validationRequested$: Subject<boolean> = new Subject<boolean>();
+    private destroyComponentSignal$ = new Subject<void>();
     private readonly LOG_SOURCE = 'AddressEmbeddedComponent';
 
     constructor(
@@ -273,12 +274,8 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
                 }),
                 map(defaultAddress => [state, defaultAddress]),
             )),
-            tap(([_, defaultAddress]: [ComponentState, Address | null]) => {
-                if (defaultAddress) {
-                    this.inputAddress$.next(defaultAddress);
-                    this.block.hasValidAddress = true;
-                }
-            }),
+            tap(([_, defaultAddress]: [ComponentState, Address | null]) =>
+                defaultAddress && this.inputAddress$.next(defaultAddress)),
             take(1),
             // filter for case where we need to go on to look for a temp address?
             filter(([state, defaultAddress]) => !defaultAddress && !!(state as ComponentState).activityInstanceGuid),
@@ -364,9 +361,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             tap(() => addressSuggestion$.next(null)),
             tap(() => busyCounter$.next(1)),
             tap(() => ++initiatedVerifyAddressCalls),
-            tap(_ => {
-                this.block.hasValidAddress = false;
-            }),
             switchMap(inputAddress =>
                 this.addressService.verifyAddress(inputAddress).pipe(
                     map(verifyResponse => ({
@@ -374,10 +368,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
                         suggested: new Address(verifyResponse),
                         warnings: verifyResponse.warnings
                     }) as AddressSuggestion),
-                    tap((addressSuggestion) => {
-                        addressSuggestion$.next(addressSuggestion);
-                        this.block.hasValidAddress = true;
-                    }),
+                    tap((addressSuggestion) => addressSuggestion$.next(addressSuggestion)),
                     catchError((error) => {
                         verificationError$.next(error);
                         return of(null);
@@ -462,6 +453,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             );
         }
 
+
         const isVerificationStatusError = (error: any) => error && error.errors && error.errors.length > 0 && error.code;
 
         const clearSuggestionDisplay = () => this.stateUpdates$.next({showSuggestion: false, suggestedAddress: null});
@@ -518,7 +510,22 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             tap((errorMessage) => this.stateUpdates$.next({formErrorMessages: [errorMessage]}))
         );
 
-        const removeTempAddressOperator = () => (val$: Observable<any>) => val$.pipe(
+        const canSaveRealAddress = (address: Address | null) =>
+            this.enoughDataToSave(address) && this.meetsActivityRequirements(address);
+
+        // "Real" as opposed to "Temp". Important we return the saved address as properties are added on server
+        const saveRealAddressAction$ = this.saveTrigger$.pipe(
+            withLatestFrom(this.formErrorMessages$, currentAddress$),
+            filter(([_, formErrors, addressToSave]) => {
+                return !formErrors?.length && canSaveRealAddress(addressToSave);
+            }),
+            tap(() => busyCounter$.next(1)),
+            concatMap(([_, formErrors, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
+            tap(() => busyCounter$.next(-1)),
+            share()
+        );
+
+        const deleteTempAddressAction$ = saveRealAddressAction$.pipe(
             withLatestFrom(this.state$),
             filter(([_, state]) => !!state.activityInstanceGuid),
             tap(() => busyCounter$.next(1)),
@@ -530,39 +537,16 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             tap(() => busyCounter$.next(-1))
         );
 
-        const canSaveRealAddress = (address: Address | null) =>
-            this.enoughDataToSave(address) && this.meetsActivityRequirements(address);
-
-        // "Real" as opposed to "Temp"
-        const saveRealAddressAction$ = this.saveTrigger$.pipe(
-            withLatestFrom(this.formErrorMessages$, currentAddress$),
-            filter(([_, formErrors, addressToSave]) => {
-                const canSave = canSaveRealAddress(addressToSave);
-                if (!canSave) {
-                    this.block.hasValidAddress = false;
-                }
-                return !formErrors?.length && canSave;
-            }),
-            tap(() => busyCounter$.next(1)),
-            concatMap(([_, formErrors, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
-            tap(() => busyCounter$.next(-1)),
-            removeTempAddressOperator(),
-            share()
-        );
-
         /* If we get to show validations, we touch controls so we will show validations errors
             associate with controls
          */
         const touchFormOnSubmitWithBadAddressAction$ = this.validationRequested$.pipe(
             withLatestFrom(currentAddress$),
-            filter(([_, addressToSave]) => {
-                return !canSaveRealAddress(addressToSave)
-                    || (this.block.requireVerified && !this.block.hasValidAddress);
-            }),
+            filter(([_, addressToSave]) => !canSaveRealAddress(addressToSave)),
             tap(() => this.addressInputComponent.markAddressTouched())
         );
 
-        const savedAddress$ = saveRealAddressAction$.pipe(
+        const savedAddress$: Observable<Address | null> = saveRealAddressAction$.pipe(
             filter(savedAddressVal => !!savedAddressVal),
             share()
         );
@@ -574,16 +558,19 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             tap(address => this.inputAddress$.next(address))
         );
 
-        const emitComponentBusyAction$ = combineLatest([
-            this.isInputComponentBusy$,
-            isThisComponentBusy$
-        ]).pipe(
+        const addressComponentBusy$ = combineLatest([this.isInputComponentBusy$, isThisComponentBusy$]).pipe(
             map(busyFlags => busyFlags.some(val => val)),
+            distinctUntilChanged(),
+            share());
+
+        const emitComponentBusyAction$ = addressComponentBusy$.pipe(
+            // let's smooth out our busyness signals
+            debounce(busy => interval(busy ? 0 : 250)),
             distinctUntilChanged(),
             tap(isBusy => this.componentBusy.emit(isBusy))
         );
 
-        const activitityRequirementsMet$: Observable<boolean> = currentAddress$.pipe(
+        const activityRequirementsMet$: Observable<boolean> = currentAddress$.pipe(
             map(currentAddress => this.meetsActivityRequirements(currentAddress))
         );
 
@@ -591,27 +578,43 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             this.formValidStatusChanged$,
             this.formErrorMessages$,
             this.verifyFieldErrors$,
-            activitityRequirementsMet$
+            activityRequirementsMet$
         ]).pipe(
             map(([formValidStatusChanged, formErrors, addressErrors, reqsMet]) =>
                 (!this.configuration.addressEnforceRequiredFields || formValidStatusChanged)
                 && !formErrors.length && !addressErrors.length && reqsMet),
             distinctUntilChanged(),
-            tap(status => {
-                this.block.hasValidAddress = status;
-                this.validStatusChanged.emit(status);
-            })
+            tap(status => this.validStatusChanged.emit(status))
         );
+
+        // At least for now, we'll report the status of mailing address through block too
+        // (needed to limit status checks to blocks that are visible within a section
+        const updateBlockValidStatusAction$ = this.validStatusChanged.pipe(
+            tap(validStatus => this.block.hasValidAddress  = validStatus)
+        );
+
+
+        // We need to trigger an unsubscribe, but don't want to do it prematurely. Wait til we are not busy!
+        combineLatest([this.destroyComponentSignal$, this.componentBusy]).pipe(
+            filter(([_, busy]) => !busy),
+            take(1))
+            .subscribe(() => {
+                this.ngUnsubscribe.next();
+                this.ngUnsubscribe.complete();
+            });
 
         processSubmitAnnouncement$ && processSubmitAnnouncement$.pipe(
             takeUntil(this.ngUnsubscribe))
             .subscribe();
+
         merge(
             saveTempCurrentAddressAction$,
             verifyInputComponentAddressAction$,
             verifyInputComponentSparseAddress$,
             handleAddressSuggestionAction$,
             saveRealAddressAction$,
+            updateBlockValidStatusAction$,
+            deleteTempAddressAction$,
             touchFormOnSubmitWithBadAddressAction$,
             emitValueChangedAction$,
             updateInputComponentWithSavedAddressAction$,
@@ -630,7 +633,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
 
     private meetsActivityRequirements(currentAddress: Address | null): boolean {
-        if (this.block.requireVerified && !this.enoughDataToVerify(currentAddress)) {
+        if (this.block.requireVerified && !currentAddress) {
             return false;
         }
         if (this.block.requirePhone && currentAddress && !(currentAddress.phone)) {
@@ -682,16 +685,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     }
 
     ngOnDestroy(): void {
-        // finding that some slow http operations
-        // killed if we destroy too early
-        this.componentBusy.pipe(
-            filter(busy => !busy),
-            tap(() => {
-                this.ngUnsubscribe.next();
-                this.ngUnsubscribe.complete();
-                this.logger.logDebug(this.LOG_SOURCE, 'Unsubscribe completed.');
-            }),
-            take(1)
-        ).subscribe();
+        this.destroyComponentSignal$.next();
     }
 }

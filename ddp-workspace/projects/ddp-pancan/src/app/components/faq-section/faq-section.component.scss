@@ -1,6 +1,7 @@
 @import '../../../styles/variables.scss';
 
 $border-color: #EBEBEB;
+$dark-grey-border-color: #979797;
 $icon-width: 24px;
 $icon-margin-right: 2rem;
 $question-padding: 1.5rem;
@@ -13,10 +14,12 @@ $question-padding: 1.5rem;
 .faq-block__question {
     margin: 0;
     line-height: 30px;
+    font-size: 1.5rem;
 }
 
 .faq-block__text {
     line-height: 34px;
+    font-size: 1.5rem;
 }
 
 .mat-expansion-panel-header {
@@ -36,6 +39,12 @@ $question-padding: 1.5rem;
         &:last-child {
             border-bottom: 2px solid $border-color;
         }
+
+        &.darkerBackground {
+            background-color: $section-grey-background-color;
+            border-color: $dark-grey-border-color;
+            border-width: 1px;
+        }
     }
 
     .mat-accordion .mat-expansion-panel {
@@ -46,7 +55,6 @@ $question-padding: 1.5rem;
 
     .mat-expansion-panel-header,
     .mat-expansion-panel-content {
-        font-size: 1.5rem;
         font-family: $primary-font;
         letter-spacing: 0;
         text-align: left;
