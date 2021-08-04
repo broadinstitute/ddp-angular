@@ -9,6 +9,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PicklistRenderMode } from '../../../models/activity/picklistRenderMode';
 import { SearchHighlightPipe } from '../../../pipes/searchHighlight.pipe';
+import { SimpleChange } from '@angular/core';
 
 describe('AutocompleteActivityPicklistQuestion', () => {
     const questionBlock = {
@@ -241,5 +242,11 @@ describe('AutocompleteActivityPicklistQuestion', () => {
 
     it('should display custom empty string if nothing is entered', () => {
         expect(component.displayAutoComplete(null)).toBe('');
+    });
+
+    it('should disable autocomplete input when readonly is true', () => {
+        component.readonly = true;
+        component.ngOnChanges({ readonly: { currentValue: true } as SimpleChange});
+        expect(component.inputFormControl.disabled).toBeTrue();
     });
 });
