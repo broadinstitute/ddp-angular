@@ -13,6 +13,7 @@ import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-transla
 import { FaqSectionComponent } from '../faq-section/faq-section.component';
 import { FaqComponent } from './faq.component';
 import { CommunicationService } from 'toolkit';
+import { MatDialogModule } from '@angular/material/dialog';
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
@@ -64,6 +65,7 @@ describe('FaqComponent', () => {
                 MatIconModule,
                 MatExpansionModule,
                 NoopAnimationsModule,
+                MatDialogModule,
                 TranslateModule.forRoot({
                     loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
                 }),

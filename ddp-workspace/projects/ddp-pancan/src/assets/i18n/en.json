@@ -396,10 +396,11 @@
             "Partners": {
                 "Title": "Partners",
                 "Alts": {
-                    "CCCanada": "Colorectal Cancer Canada",
                     "CCResource": "Colorectal Cancer Resource & Action Network",
+                    "Raymond": "Raymond Foundation",
                     "GICAlliance": "GI Cancers Alliance",
-                    "Raymond": "Raymond Foundation"
+                    "CCCanada": "Colorectal Cancer Canada",
+                    "FightCC": "Fight Colorectal Cancer"
                 },
                 "Text": "For more information on how to become a partner for the Colorectal Cancer Project, contact the team at <a class='Link' href='mailto:info@colorectalcancerproject.org'>info@colorectalcancerproject.org</a>."
             },

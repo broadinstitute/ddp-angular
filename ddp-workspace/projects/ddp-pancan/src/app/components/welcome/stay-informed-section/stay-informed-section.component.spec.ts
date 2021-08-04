@@ -6,7 +6,9 @@ import { Observable, of } from 'rxjs';
 
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { StayInformedSectionComponent } from './stay-informed-section.component';
-import { CommunicationService } from 'toolkit';
+import { JoinMailingListComponent } from 'toolkit';
+import { MatDialog } from '@angular/material/dialog';
+import { JOIN_MAILING_LIST_DIALOG_SETTINGS } from '../../../utils/join-mailing-list-dialog-confg';
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
@@ -26,10 +28,10 @@ class TranslateLoaderMock implements TranslateLoader {
 describe('StayInformedSectionComponent', () => {
     let component: StayInformedSectionComponent;
     let fixture: ComponentFixture<StayInformedSectionComponent>;
-    let communicationServiceSpy: jasmine.SpyObj<CommunicationService>;
+    let dialogSpy: jasmine.SpyObj<MatDialog>;
 
     beforeEach(async () => {
-        communicationServiceSpy = jasmine.createSpyObj('communicationServiceSpy', ['openJoinDialog']);
+        dialogSpy = jasmine.createSpyObj('dialogSpy', ['open']);
         await TestBed.configureTestingModule({
                 imports: [
                     RouterTestingModule,
@@ -40,7 +42,7 @@ describe('StayInformedSectionComponent', () => {
                 ],
                 declarations: [StayInformedSectionComponent],
                 providers: [
-                    { provide: CommunicationService, useValue: communicationServiceSpy },
+                    { provide: MatDialog, useValue: dialogSpy},
                     { provide: 'toolkit.toolkitConfig', useValue: {} }
                 ],
             })
@@ -60,9 +62,22 @@ describe('StayInformedSectionComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should call openJoinDialog', async () => {
+    it('should open join mailing list dialog', () => {
         const joinButton = fixture.debugElement.query(By.css('.join-btn')).nativeElement;
         joinButton.click();
-        expect(communicationServiceSpy.openJoinDialog).toHaveBeenCalled();
+        expect(dialogSpy.open).toHaveBeenCalledWith(JoinMailingListComponent, {
+            ...JOIN_MAILING_LIST_DIALOG_SETTINGS,
+            data: { info: null },
+        });
+    });
+
+    it('should open join mailing list dialog for Colorectal page', () => {
+        component.isColorectal = true;
+        const joinButton = fixture.debugElement.query(By.css('.join-btn')).nativeElement;
+        joinButton.click();
+        expect(dialogSpy.open).toHaveBeenCalledWith(JoinMailingListComponent, {
+            ...JOIN_MAILING_LIST_DIALOG_SETTINGS,
+            data: { info: ['Colorectal'] },
+        });
     });
 });
