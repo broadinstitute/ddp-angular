@@ -403,6 +403,9 @@
                 },
                 "Text": "Para obtener más información sobre cómo participar en el Proyecto de cáncer colorrectal, comuníquese con el equipo en <a class='Link' href='mailto:info@colorectalcancerproject.org'>info@colorectalcancerproject.org</a>."
             },
+            "CountMeInSection": {
+                "Title": "Únase al movimiento Count Me In y comparta su experiencia"
+            },
             "Footer": {
                 "Text": "El Proyecto de cáncer colorrectal forma parte de <span class='bold'>Count Me In</span>, una iniciativa de investigación que une a pacientes y científicos para juntos acelerar los descubrimientos en la investigación del cáncer."
             }
