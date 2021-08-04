@@ -20,7 +20,7 @@ import { ActivityRequiredValidationRule } from './validators/activityRequiredVal
 import { QuestionType } from '../../models/activity/questionType';
 import { ActivityFileQuestionBlock } from '../../models/activity/activityFileQuestionBlock';
 import * as _ from 'underscore';
-import { ActivityPicklistSuggestion } from '../../models/activity/activityPicklistSuggestion';
+import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
 
 const DETAIL_MAXLENGTH = 500;
 
@@ -104,8 +104,10 @@ export class ActivityQuestionConverter {
         return questionValidators.some(validator => validator instanceof ActivityRequiredValidationRule);
     }
 
-    private filterPicklistOptions(options: Array<ActivityPicklistOption>): Array<ActivityPicklistOption> {
-        return options.filter(option => !option.groupId);
+    private filterPicklistOptions(options: Array<ActivityPicklistOption>, renderMode): Array<ActivityPicklistOption> {
+        return options.filter(option => !option.groupId
+            && (renderMode !== PicklistRenderMode.AUTOCOMPLETE
+                || (renderMode === PicklistRenderMode.AUTOCOMPLETE && !option.allowDetails)));
     }
 
     private convertPicklistGroups(options: Array<ActivityPicklistOption>,
@@ -206,40 +208,15 @@ export class ActivityQuestionConverter {
 
     private getPicklistBlock(questionJson: any): ActivityPicklistQuestionBlock {
         const picklistBlock = new ActivityPicklistQuestionBlock();
-        picklistBlock.picklistOptions = this.filterPicklistOptions(questionJson.picklistOptions);
+        picklistBlock.customValue = questionJson.picklistOptions.find(option => option.allowDetails)?.stableId || null;
+        picklistBlock.picklistOptions = this.filterPicklistOptions(questionJson.picklistOptions, questionJson.renderMode);
         picklistBlock.picklistLabel = questionJson.picklistLabel;
         picklistBlock.selectMode = questionJson.selectMode;
         picklistBlock.renderMode = questionJson.renderMode;
         picklistBlock.detailMaxLength = DETAIL_MAXLENGTH;
         picklistBlock.picklistGroups = this.convertPicklistGroups(questionJson.picklistOptions, questionJson.groups);
-        picklistBlock.picklistSuggestions = this.generatePicklistSuggestions(questionJson.picklistOptions);
-        picklistBlock.customValue = questionJson.picklistOptions.find(option => option.allowDetails)?.stableId || null;
         return picklistBlock;
     }
-
-    private generatePicklistSuggestions(options: Array<ActivityPicklistOption>): ActivityPicklistSuggestion[] {
-        return options.reduce((acc, currentValue) => {
-            if (currentValue.allowDetails) return acc;
-            const suggestion: ActivityPicklistSuggestion = {
-                label: currentValue.optionLabel,
-                value: currentValue.stableId,
-            };
-            acc.push(suggestion);
-            if (currentValue.nestedOptions?.length) {
-                suggestion.isParent = true;
-
-                for (const nestedOption of currentValue.nestedOptions) {
-                    acc.push({
-                        label: nestedOption.optionLabel,
-                        value: nestedOption.stableId,
-                        parent: currentValue.optionLabel
-                    });
-                }
-            }
-            return acc;
-        }, [] as ActivityPicklistSuggestion[]);
-    }
-
 
     private getDateBlock(questionJson: any): ActivityDateQuestionBlock {
         const dateBlock = new ActivityDateQuestionBlock();

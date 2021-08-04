@@ -1,6 +1,8 @@
 @import '~@angular/material/theming';
 @import 'styles/variables';
-@include mat-core();
+
+$custom-typography: mat-typography-config($font-family: $primary-font);
+@include mat-core($custom-typography);
 
 // generated via http://mcg.mbitson.com
 $md-primary: (

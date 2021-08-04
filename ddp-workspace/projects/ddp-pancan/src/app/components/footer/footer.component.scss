@@ -1,12 +1,8 @@
-@import '../../../styles/variables.scss';
-
-$footer-background: #131314;
-$footer-divider-color: #444444;
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
 
 .footer {
-    min-height: $footer-height;
-    background: $footer-background;
-    color: white;
+    @include footer($footer-height);
 }
 
 .actions {

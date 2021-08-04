@@ -3,7 +3,8 @@ import { TestBed } from '@angular/core/testing';
 import { ActivityQuestionConverter } from './activityQuestionConverter.service';
 import { ActivityValidatorBuilder } from './activityValidatorBuilder.service';
 import { ActivitySuggestionBuilder } from './activitySuggestionBuilder.service';
-import { ActivityPicklistQuestionBlock, QuestionType, LoggingService } from 'ddp-sdk';
+import { ActivityPicklistQuestionBlock, QuestionType, LoggingService, ActivityPicklistOption } from 'ddp-sdk';
+import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
 
 let service: ActivityQuestionConverter;
 const loggerServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logError']);
@@ -17,37 +18,18 @@ const question = {
             stableId: 'SARCOMA',
             optionLabel: 'Sarcoma',
             allowDetails: false,
-            nestedOptions: [
-                {
-                    allowDetails: false,
-                    nestedOptions: null,
-                    optionLabel: 'Angiosarcoma',
-                    stableId: 'ANGIOSARCOMA',
-                },
-                {
-                    allowDetails: false,
-                    nestedOptions: null,
-                    optionLabel: 'Chondrosarcoma',
-                    stableId: 'CHONDROSARCOMA',
-                }
-            ]
+            nestedOptions: []
         },
         {
             stableId: 'ENDOCRINE_CANCER',
             optionLabel: 'Endocrine cancer',
             allowDetails: false,
-            nestedOptions: [
-                {
-                    allowDetails: false,
-                    nestedOptions: null,
-                    optionLabel: 'Pheochromocytoma',
-                    stableId: 'PHEOCHROMOCYTOMA',
-                },
-            ]
+            nestedOptions: []
         },
     ],
     questionType: QuestionType.Picklist,
-    groups: []
+    groups: [],
+    renderMode: PicklistRenderMode.AUTOCOMPLETE
 };
 
 describe('ActivityQuestionConverter Test', () => {
@@ -69,29 +51,59 @@ describe('ActivityQuestionConverter Test', () => {
         expect(service).toBeDefined();
     });
 
-    it('should build picklist suggestions correctly', () => {
-        const suggestions = [
-            { label: 'Sarcoma', isParent: true, value: 'SARCOMA' },
-            { label: 'Angiosarcoma', parent: 'Sarcoma', value: 'ANGIOSARCOMA' },
-            { label: 'Chondrosarcoma', parent: 'Sarcoma', value: 'CHONDROSARCOMA' },
-            { label: 'Endocrine cancer', isParent: true, value: 'ENDOCRINE_CANCER' },
-            { label: 'Pheochromocytoma', parent: 'Endocrine cancer', value: 'PHEOCHROMOCYTOMA' },
-        ];
-        expect((service.buildQuestionBlock(question, 1) as ActivityPicklistQuestionBlock).picklistSuggestions).toEqual(suggestions);
-    });
-
     it('should set customValue as null', () => {
         expect((service.buildQuestionBlock(question, 1) as ActivityPicklistQuestionBlock).customValue).toBeNull();
     });
 
     it('should set not empty customValue', () => {
-        const questionWithAllowDetails = {...question, picklistOptions: [... question.picklistOptions,
+        const questionWithAllowDetails = {
+            ...question,
+            picklistOptions: [
+                ... question.picklistOptions,
                 {
                     allowDetails: true,
                     nestedOptions: null,
                     optionLabel: '',
                     stableId: 'OTHER',
-                }]};
+                },
+            ]};
         expect((service.buildQuestionBlock(questionWithAllowDetails, 1) as ActivityPicklistQuestionBlock).customValue).toBe('OTHER');
+    });
+
+    it('should filter out allowDetails option for AUTOCOMPLETE', () => {
+        const questionWithAllowDetails = {
+            ...question,
+            picklistOptions: [
+                ... question.picklistOptions,
+                {
+                    allowDetails: true,
+                    nestedOptions: null,
+                    optionLabel: '',
+                    stableId: 'OTHER',
+                },
+            ],
+            renderMode: PicklistRenderMode.AUTOCOMPLETE
+        };
+        expect((service.buildQuestionBlock(questionWithAllowDetails, 1) as ActivityPicklistQuestionBlock).picklistOptions)
+            .toEqual(question.picklistOptions as ActivityPicklistOption[]);
+    });
+
+    it('should not filter out allowDetails option for not AUTOCOMPLETE', () => {
+        const options = [
+            ... question.picklistOptions,
+            {
+                allowDetails: true,
+                nestedOptions: null,
+                optionLabel: '',
+                stableId: 'OTHER',
+            },
+        ] as ActivityPicklistOption[];
+        const questionWithAllowDetails = {
+            ...question,
+            picklistOptions: options,
+            renderMode: PicklistRenderMode.LIST
+        };
+        expect((service.buildQuestionBlock(questionWithAllowDetails, 1) as ActivityPicklistQuestionBlock).picklistOptions)
+            .toEqual(options);
     });
 });

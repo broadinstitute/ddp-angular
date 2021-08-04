@@ -2,9 +2,16 @@ import { Component, Inject, OnInit, OnDestroy, Output, EventEmitter } from '@ang
 import { Router } from '@angular/router';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import { AnnouncementDashboardMessage } from '../../models/announcementDashboardMessage';
-import { AnnouncementsServiceAgent, ParticipantsSearchServiceAgent, SearchParticipant } from 'ddp-sdk';
-import { Observable, Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import {
+    ActivityInstance,
+    AnnouncementsServiceAgent,
+    ParticipantsSearchServiceAgent,
+    SearchParticipant,
+    SessionMementoService,
+    UserActivityServiceAgent
+} from 'ddp-sdk';
+import { Observable, of, Subscription } from 'rxjs';
+import { filter, map, shareReplay } from 'rxjs/operators';
 
 @Component({
     selector: 'toolkit-dashboard',
@@ -41,6 +48,7 @@ import { filter, map } from 'rxjs/operators';
                             </ng-container>
                             <section class="PageContent-section">
                                 <ddp-dashboard [studyGuid]="studyGuid"
+                                               [activities]="userActivities$ | async"
                                                (open)="navigate($event)"
                                                (loadedEvent)="load($event)">
                                 </ddp-dashboard>
@@ -55,17 +63,24 @@ export class DashboardComponent implements OnInit, OnDestroy {
     public selectedUser$: Observable<SearchParticipant|null>;
     public studyGuid: string;
     public announcementMessages: Array<AnnouncementDashboardMessage>;
+    public userActivities$: Observable<Array<ActivityInstance>>;
     @Output() loadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
     private anchor: Subscription = new Subscription();
 
     constructor(
-        private router: Router,
+        protected router: Router,
         private announcements: AnnouncementsServiceAgent,
         private participantsSearch: ParticipantsSearchServiceAgent,
+        protected session: SessionMementoService,
+        protected userActivityServiceAgent: UserActivityServiceAgent,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) {
     }
 
     public ngOnInit(): void {
+        if (this.useParticipantDashboard) {
+            // in order to prevent participant data call
+            this.session.setParticipant(null);
+        }
         this.studyGuid = this.toolkitConfiguration.studyGuid;
 
         const anno = this.announcements.getMessages(this.studyGuid)
@@ -79,6 +94,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.anchor.add(anno);
 
         this.selectedUser$ = this.participantsSearch.getParticipant();
+        this.userActivities$ = this.getUserActivities();
     }
 
     public ngOnDestroy(): void {
@@ -89,11 +105,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.announcementMessages[index].shown = false;
     }
 
-    public navigate(id: string): void {
-        this.router.navigate([this.toolkitConfiguration.activityUrl, id]);
+    public navigate(activityInstanceGuid: string, participantGuid?: string): void {
+        if (this.useParticipantDashboard) {
+            this.session.setParticipant(participantGuid);
+        }
+        this.router.navigate([this.toolkitConfiguration.activityUrl, activityInstanceGuid]);
     }
 
     public load(loaded: boolean): void {
         this.loadedEvent.emit(loaded);
+    }
+
+    public get useParticipantDashboard(): boolean {
+        return this.toolkitConfiguration.useParticipantDashboard;
+    }
+
+    private getUserActivities(): Observable<Array<ActivityInstance>> {
+        // shareReplay treats multiple subscription w/o making multiple requests
+        return this.userActivityServiceAgent.getActivities(of(this.studyGuid)).pipe(map((activities) => activities || []), shareReplay());
     }
 }

@@ -2,6 +2,10 @@
     <span class="confirm-dialog-title"
           [innerHTML]="title | translate">
     </span>
+    <div *ngIf="content"
+         [innerHTML]="content | translate : contentSubstitutions"
+         class="confirm-dialog-content">
+    </div>
     <div class="confirm-dialog-buttons">
         <button mat-flat-button class="ctrl-btn confirm-btn"
                 [color]="confirmBtnColor"

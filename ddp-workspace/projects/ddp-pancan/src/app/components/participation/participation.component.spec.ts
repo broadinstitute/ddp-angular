@@ -1,7 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatIconModule } from '@angular/material/icon';
 import { Observable, of } from 'rxjs';
+
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ParticipationComponent } from './participation.component';
+
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
@@ -39,7 +42,10 @@ describe('ParticipationComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
                 imports: [
-                    TranslateModule.forRoot({loader: {provide: TranslateLoader, useClass: TranslateLoaderMock}})
+                    MatIconModule,
+                    TranslateModule.forRoot(
+                        {loader: { provide: TranslateLoader, useClass: TranslateLoaderMock }
+                    })
                 ],
 
                 declarations: [ParticipationComponent]

@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>{{ 'Notifications.Dialog.Title' | translate }}</h1>
+<div mat-dialog-content>
+  <ng-container *ngFor="let message of data.messages">
+    <div [innerHtml]="message"></div>
+  </ng-container>
+</div>
+<div mat-dialog-actions>
+  <button class="button button--blue" mat-dialog-close>Ok</button>
+</div>

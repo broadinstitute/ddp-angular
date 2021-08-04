@@ -2,23 +2,6 @@
 @import '../theme.scss';
 
 // common activity styles
-.section-spinner {
-    display: flex;
-    align-items: center;
-    flex: 1;
-    justify-content: center;
-}
-
-.static-spinner {
-    padding-bottom: 8rem;
-}
-
-.consent-subtitle {
-    font-size: 1.875rem;
-    line-height: 3.5rem;
-    text-decoration: underline;
-}
-
 .main_activity {
     padding-bottom: 6.25rem;
     padding-top: 1rem;
@@ -33,15 +16,6 @@
 
 .main_sticky {
     padding-top: 5rem;
-}
-
-.section {
-    width: 100%;
-}
-
-.content {
-    margin: 0 auto;
-    padding: 0 1.5625rem;
 }
 
 .sticky-section {
@@ -82,42 +56,74 @@
 
 // steps
 .activity-steps {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
-    grid-gap: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin: 3rem 0;
+
+    &__divider {
+        flex: 1;
+        border-top: 2px solid $activity-step-default;
+        margin: 0.75rem 1rem 0;
+    }
 }
 
 .activity-step {
-    font-size: 1.5rem;
-    line-height: 2.25rem;
-    font-weight: 600;
+    display: flex;
+    font-size: 1.125rem;
     cursor: initial;
-    color: $activity-step-pristine;
-    font-family: 'Source Serif Pro', serif !important;
+
+    &__number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.625rem;
+        height: 1.625rem;
+        background-color: $activity-step-default;
+        border-radius: 50%;
+        color: white;
+    }
+
+    &__text {
+        white-space: nowrap;
+        color: $grey-text-color;
+        padding-left: 8px;
+    }
 
     &.completed {
         cursor: pointer;
-        color: $activity-step-completed;
 
+        .activity-step {
+            &__number {
+                background-color: $activity-step-inactive;
+                color: white;
+            }
+
+            &__text {
+                color: $text-color;
+            }
+        }
         &.active {
-            color: $activity-step-active;
+            .activity-step__number {
+                background-color: $primary-color;
+            }
         }
     }
 }
 
 @media only screen and (max-width: 600px) {
     .activity-steps {
-        grid-auto-flow: row;
+        padding: 1rem 0;
+    }
+
+    .activity-step {
+        &__text {
+            display: none;
+        }
     }
 }
 
 // activity lists
-.release-list-item {
-    margin-left: 2rem;
-}
-
 .ddp-list {
     padding: 0 0 0 1.5rem;
     font-size: 1.5rem;
@@ -138,22 +144,6 @@
     line-height: 2rem;
     color: $text-color;
     margin: 1rem 0 1rem -1.5625rem;
-
-    > .PageContent-text {
-        margin-left: 1.5625rem;
-    }
-}
-
-.ddp-simple-list {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-
-    .ddp-question-prompt {
-        font-size: 1.375rem;
-        line-height: 2.25rem;
-        font-family: inherit;
-    }
 }
 
 .ddp-simple-list {
@@ -196,15 +186,8 @@
     }
 }
 
-.simple-list {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-}
-
 .ddp-content {
     font-size: 1.2rem;
-
 }
 
 // required question
@@ -216,7 +199,7 @@
 .activity-buttons {
     display: flex;
     justify-content: space-between;
-    margin: 4rem 0 0 0;
+    margin: 2rem 0 0 0;
 }
 
 .button_right {
@@ -225,10 +208,13 @@
 
 // question text
 .ddp-question-prompt {
-    font-family: 'Source Serif Pro', serif !important;
     font-size: 1.5rem;
     line-height: 2.875rem;
     margin: 1.5rem 0 0.5rem 0;
+
+    small {
+        line-height: normal;
+    }
 }
 
 // questions
@@ -261,39 +247,26 @@
 }
 
 .ddp-content__agreement {
-    font-family: 'Source Serif Pro', serif;
     font-size: 1.5rem;
-    line-height: 2.875rem;
-}
-
-// picklist
-ddp-activity-picklist-answer {
-    font-weight: 400;
+    line-height: 2.5rem;
 }
 
 .mat-checkbox-label,
 .mat-radio-label-content {
-    font-size: 1.2rem;
-    line-height: 1.2rem !important;
-}
-
-.mat-checkbox-layout {
-    align-items: flex-start !important;
+    font-size: 1.125rem;
+    line-height: 1.6rem !important;
 }
 
 .mat-checkbox-inner-container {
-    height: 1.2rem !important;
-    width: 1.2rem !important;
+    height: 1.6875rem !important;
+    width: 1.6875rem !important;
     margin-top: 0 !important;
+    margin-right: 0.875rem !important;
 }
 
 .mat-radio-label {
     margin: 0.5rem 0;
     align-items: unset !important;
-}
-
-.mat-radio-label-content {
-    font-family: 'Untitled-Sans-Regular', sans-serif;
 }
 
 .picklist {
@@ -308,7 +281,7 @@ ddp-activity-picklist-answer {
 
 .ddp-picklist-option-list-item {
     height: auto !important;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .mat-list .mat-list-item .mat-list-item-content {
@@ -321,7 +294,6 @@ ddp-activity-picklist-answer {
     font-size: 1.125rem;
     line-height: 1.4375rem;
     color: $grey-text-color;
-    font-family: 'Untitled-Sans-Regular', sans-serif;
 }
 
 .ddp-counter-color {
@@ -342,7 +314,6 @@ select {
     height: 2.65rem;
     transition: all .3s;
     cursor: pointer;
-    font-family: Untitled-Sans-Regular;
 }
 
 select:disabled {
@@ -372,19 +343,7 @@ select:disabled {
     }
 }
 
-// error message
-.ErrorMessage {
-    font-size: 1.2rem;
-    line-height: 1.875rem;
-    margin: 1rem 0;
-    color: $warn-color;
-    border-top: 1px solid $warn-color;
-}
-
-.ErrorMessage a {
-    text-decoration: underline !important;
-}
-
+// error message list
 .ddp-activity-validation {
     .ErrorMessageList {
         list-style-type: square;
@@ -392,23 +351,15 @@ select:disabled {
 
     .ErrorMessageItem {
         font-size: 1.2rem;
-        color: $warn-color;
         margin: .3rem 0;
-        padding: 0 0 0 0;
     }
-}
-
-// material error message
-.mat-error {
-    font-size: 0.9rem;
-    color: $warn-color;
 }
 
 // info box
 .infobox {
     border: 2px solid $primary-color;
     border-radius: 8px;
-    background-color: rgba(113, 84, 255, 0.06);
+    background-color: $section-grey-background-color;
     padding: 1rem;
 }
 
@@ -419,7 +370,6 @@ select:disabled {
 
 .ddp-address-embedded__title,
 .ddp-institutions-form__title {
-    font-family: 'Source Serif Pro', serif;
     font-size: 1.5rem;
     line-height: 2.875rem;
     margin: 0;
@@ -434,21 +384,10 @@ select:disabled {
 }
 
 .boolean-answer-CONSENT_BLOOD,
-.boolean-answer-CONSENT_TISSUE,
-.boolean-answer-PARENTAL_CONSENT_BLOOD,
-.boolean-answer-PARENTAL_CONSENT_TISSUE,
-.boolean-answer-CONSENT_ASSENT_BLOOD,
-.boolean-answer-CONSENT_ASSENT_TISSUE {
+.boolean-answer-CONSENT_TISSUE {
     .ddp-question-prompt {
         font-size: 18px;
         line-height: 32px;
-        font-family: 'Untitled-Sans-Regular', sans-serif !important;
-    }
-}
-
-.picklist-answer-DIAGNOSED_PRIMARY_CANCER {
-    .ddp-question-prompt {
-        margin-top: 0;
     }
 }
 
@@ -462,21 +401,11 @@ select:disabled {
 
     &__title {
         margin: 1rem 0 0.5rem 0;
-        font-family: 'Source Serif Pro', serif;
         font-size: 1.2rem;
         line-height: 2rem;
     }
 }
 
-.picklist-answer-WHO_FILLING {
-
-    .mat-radio-container {
-        margin-top: 0.3rem;
-    }
-
-    .mat-checkbox-label,
-    .mat-radio-label-content {
-        font-size: 1.2rem;
-        line-height: 1.9rem !important;
-    }
+.mat-checkbox-frame {
+    border-color: $checkbox-color !important;
 }

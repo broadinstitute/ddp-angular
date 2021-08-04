@@ -12,10 +12,11 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { BehaviorSubject, combineLatest, merge, Observable, of, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, interval, merge, Observable, of, Subject, Subscription } from 'rxjs';
 import {
     catchError,
     concatMap,
+    debounce,
     distinctUntilChanged,
     filter,
     finalize,
@@ -167,7 +168,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
      * type {EventEmitter<Address>}
      */
     @Output()
-    public valueChanged = new EventEmitter<Address>();
+    public valueChanged = new EventEmitter<Address | null>();
     /**
      * Will emit update to indicate if the mail address is considered to be valid
      * If we are about to check the address because something changed
@@ -201,13 +202,13 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     public formValidStatusChanged$: Subject<boolean> = new BehaviorSubject(true);
     public generateTaggedAddress = generateTaggedAddress;
 
-
     private ngUnsubscribe = new Subject();
     private saveTrigger$ = new Subject<void>();
     private state$: Observable<ComponentState>;
     private stateUpdates$ = new Subject<Partial<ComponentState>>();
     private stateSubscription: Subscription;
     private validationRequested$: Subject<boolean> = new Subject<boolean>();
+    private destroyComponentSignal$ = new Subject<void>();
     private readonly LOG_SOURCE = 'AddressEmbeddedComponent';
 
     constructor(
@@ -448,8 +449,8 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         let processSubmitAnnouncement$;
         if (this.submitService) {
             processSubmitAnnouncement$ = this.submitService.submitAnnounced$.pipe(
-                tap(() => this.saveTrigger$.next()
-                ));
+                tap(() => this.saveTrigger$.next())
+            );
         }
 
 
@@ -509,7 +510,22 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             tap((errorMessage) => this.stateUpdates$.next({formErrorMessages: [errorMessage]}))
         );
 
-        const removeTempAddressOperator = () => (val$: Observable<any>) => val$.pipe(
+        const canSaveRealAddress = (address: Address | null) =>
+            this.enoughDataToSave(address) && this.meetsActivityRequirements(address);
+
+        // "Real" as opposed to "Temp". Important we return the saved address as properties are added on server
+        const saveRealAddressAction$ = this.saveTrigger$.pipe(
+            withLatestFrom(this.formErrorMessages$, currentAddress$),
+            filter(([_, formErrors, addressToSave]) => {
+                return !formErrors?.length && canSaveRealAddress(addressToSave);
+            }),
+            tap(() => busyCounter$.next(1)),
+            concatMap(([_, formErrors, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
+            tap(() => busyCounter$.next(-1)),
+            share()
+        );
+
+        const deleteTempAddressAction$ = saveRealAddressAction$.pipe(
             withLatestFrom(this.state$),
             filter(([_, state]) => !!state.activityInstanceGuid),
             tap(() => busyCounter$.next(1)),
@@ -521,30 +537,16 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             tap(() => busyCounter$.next(-1))
         );
 
-        const canSaveRealAddress = (address: Address | null) =>
-            this.enoughDataToSave(address) && this.meetsActivityRequirements(address);
-
-        // "Real" as opposed to "Temp"
-        const saveRealAddressAction$ = this.saveTrigger$.pipe(
-            withLatestFrom(currentAddress$),
-            filter(([_, addressToSave]) => canSaveRealAddress(addressToSave)),
-            tap(() => busyCounter$.next(1)),
-            concatMap(([_, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
-            removeTempAddressOperator(),
-            tap(() => busyCounter$.next(-1)),
-            share()
-        );
-
         /* If we get to show validations, we touch controls so we will show validations errors
             associate with controls
          */
         const touchFormOnSubmitWithBadAddressAction$ = this.validationRequested$.pipe(
             withLatestFrom(currentAddress$),
             filter(([_, addressToSave]) => !canSaveRealAddress(addressToSave)),
-            tap(() => this.addressInputComponent.touchAllControls())
+            tap(() => this.addressInputComponent.markAddressTouched())
         );
 
-        const savedAddress$ = saveRealAddressAction$.pipe(
+        const savedAddress$: Observable<Address | null> = saveRealAddressAction$.pipe(
             filter(savedAddressVal => !!savedAddressVal),
             share()
         );
@@ -556,18 +558,28 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             tap(address => this.inputAddress$.next(address))
         );
 
-        const emitComponentBusyAction$ = combineLatest([this.isInputComponentBusy$, isThisComponentBusy$]).pipe(
+        const addressComponentBusy$ = combineLatest([this.isInputComponentBusy$, isThisComponentBusy$]).pipe(
             map(busyFlags => busyFlags.some(val => val)),
+            distinctUntilChanged(),
+            share());
+
+        const emitComponentBusyAction$ = addressComponentBusy$.pipe(
+            // let's smooth out our busyness signals
+            debounce(busy => interval(busy ? 0 : 250)),
             distinctUntilChanged(),
             tap(isBusy => this.componentBusy.emit(isBusy))
         );
 
-        const activitityRequirementsMet$: Observable<boolean> = currentAddress$.pipe(
+        const activityRequirementsMet$: Observable<boolean> = currentAddress$.pipe(
             map(currentAddress => this.meetsActivityRequirements(currentAddress))
         );
 
-        const emitValidStatusAction$ = combineLatest([this.formValidStatusChanged$, this.formErrorMessages$, this.verifyFieldErrors$,
-            activitityRequirementsMet$]).pipe(
+        const emitValidStatusAction$ = combineLatest([
+            this.formValidStatusChanged$,
+            this.formErrorMessages$,
+            this.verifyFieldErrors$,
+            activityRequirementsMet$
+        ]).pipe(
             map(([formValidStatusChanged, formErrors, addressErrors, reqsMet]) =>
                 (!this.configuration.addressEnforceRequiredFields || formValidStatusChanged)
                 && !formErrors.length && !addressErrors.length && reqsMet),
@@ -575,15 +587,34 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             tap(status => this.validStatusChanged.emit(status))
         );
 
+        // At least for now, we'll report the status of mailing address through block too
+        // (needed to limit status checks to blocks that are visible within a section
+        const updateBlockValidStatusAction$ = this.validStatusChanged.pipe(
+            tap(validStatus => this.block.hasValidAddress  = validStatus)
+        );
+
+
+        // We need to trigger an unsubscribe, but don't want to do it prematurely. Wait til we are not busy!
+        combineLatest([this.destroyComponentSignal$, this.componentBusy]).pipe(
+            filter(([_, busy]) => !busy),
+            take(1))
+            .subscribe(() => {
+                this.ngUnsubscribe.next();
+                this.ngUnsubscribe.complete();
+            });
+
         processSubmitAnnouncement$ && processSubmitAnnouncement$.pipe(
             takeUntil(this.ngUnsubscribe))
             .subscribe();
+
         merge(
             saveTempCurrentAddressAction$,
             verifyInputComponentAddressAction$,
             verifyInputComponentSparseAddress$,
             handleAddressSuggestionAction$,
             saveRealAddressAction$,
+            updateBlockValidStatusAction$,
+            deleteTempAddressAction$,
             touchFormOnSubmitWithBadAddressAction$,
             emitValueChangedAction$,
             updateInputComponentWithSavedAddressAction$,
@@ -654,16 +685,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     }
 
     ngOnDestroy(): void {
-        // finding that some slow http operations
-        // killed if we destroy too early
-        this.componentBusy.pipe(
-            filter(busy => !busy),
-            tap(() => {
-                this.ngUnsubscribe.next();
-                this.ngUnsubscribe.complete();
-                this.logger.logDebug(this.LOG_SOURCE, 'Unsubscribe completed.');
-            }),
-            take(1)
-        ).subscribe();
+        this.destroyComponentSignal$.next();
     }
 }

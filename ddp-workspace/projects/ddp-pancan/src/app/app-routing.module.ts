@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { Auth0CodeCallbackComponent, AuthGuard, BrowserGuard, IrbGuard } from 'ddp-sdk';
 import {
+    AcceptAgeUpPageComponent,
     ActivityRedesignedComponent,
+    AgeUpThankYou,
     DashboardRedesignedComponent,
     ErrorRedesignedComponent,
     LoginLandingRedesignedComponent,
@@ -10,6 +12,7 @@ import {
     RedirectToAuth0LoginRedesignedComponent,
     RedirectToLoginLandingRedesignedComponent,
     SessionExpiredRedesignedComponent,
+    VerifyAgeUpPageComponent,
     WorkflowStartActivityRedesignedComponent
 } from 'toolkit';
 
@@ -19,6 +22,7 @@ import { FaqComponent } from './components/faq/faq.component';
 import { ParticipationComponent } from './components/participation/participation.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ScientificResearchComponent } from './components/scientific-research/scientific-research.component';
+import { ColorectalPageComponent } from './components/splash-pages/colorectal-page/colorectal-page.component';
 
 const routes: Routes = [
     {
@@ -56,6 +60,11 @@ const routes: Routes = [
         canActivate: [IrbGuard]
     },
     {
+        path: AppRoutes.ColorectalPage,
+        component: ColorectalPageComponent,
+        canActivate: [IrbGuard]
+    },
+    {
         path: AppRoutes.LocalAuth,
         component: Auth0CodeCallbackComponent,
         canActivate: [IrbGuard]
@@ -86,6 +95,37 @@ const routes: Routes = [
             BrowserGuard,
             AuthGuard
         ]
+    },
+    {
+        path: AppRoutes.ActivityLinkId,
+        component: ActivityRedesignedComponent,
+        canActivate: [
+            IrbGuard,
+            BrowserGuard,
+            AuthGuard
+        ]
+    },
+    {
+        path: AppRoutes.AgeUpThankYouProxy,
+        component: AgeUpThankYou,
+        canActivate: [IrbGuard],
+        data: { collect: true }
+    },
+    {
+        path: AppRoutes.AgeUpThankYouVerify,
+        component: AgeUpThankYou,
+        canActivate: [IrbGuard],
+        data: { verify: true }
+    },
+    {
+        path: AppRoutes.AgeUpVerify,
+        component: VerifyAgeUpPageComponent,
+        canActivate: [IrbGuard]
+    },
+    {
+        path: AppRoutes.AgeUpAccept,
+        component: AcceptAgeUpPageComponent,
+        canActivate: [IrbGuard]
     },
     {
         path: AppRoutes.Error,

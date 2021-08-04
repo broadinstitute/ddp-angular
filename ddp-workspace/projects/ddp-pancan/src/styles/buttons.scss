@@ -1,10 +1,10 @@
-@import "../theme.scss";
-@import "common";
-@import "variables";
+@import '../theme.scss';
+@import 'common';
+@import 'variables';
 
-.button {
-    min-width: 8.5rem;
-    padding: 0.625rem 1.25rem;
+.button,
+.SimpleButton {
+    padding: 0.625rem 2rem;
     font-family: $primary-font-medium;
     border-radius: 4px;
     border: none;
@@ -15,21 +15,22 @@
     transition: 0.3s;
     white-space: nowrap;
 }
-//
-//.button,
-//.button:active,
-//.button:hover,
-//.button:focus {
-//    text-decoration: none;
-//}
-//
-.button_small {
+
+.button,
+.button:active,
+.button:hover,
+.button:focus {
+    text-decoration: none;
+}
+
+.button_small,
+.SimpleButton {
     font-size: 1rem;
     line-height: 1.25rem;
 }
 
 .button_medium {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     line-height: 2rem;
 }
 
@@ -43,7 +44,6 @@
     background-color: mat-color($app-primary, 500);
     border: 2px solid mat-color($app-primary, 500);
     color: white;
-    @extend .btn-common;
 
     &:hover:not([disabled]),
     :hover:enabled {
@@ -53,9 +53,9 @@
 }
 
 .button_secondary {
-    background-color: white;
+    background-color: transparent;
     color: $text-color;
-    border: 2px solid $text-color;
+    border: 2px solid $text-color !important;
 
     &:hover:not([disabled]),
     &:hover:enabled,
@@ -77,37 +77,49 @@
     margin-bottom: 2rem;
 }
 
-//.simple-button,
-//.SimpleButton {
-//    background: none;
-//    border: none;
-//    padding: 0;
-//    cursor: pointer;
-//    color: mat-color($app-primary, 200);
-//    text-decoration: none;
-//    font-size: 16px;
-//    line-height: 20px;
-//    font-family: inherit;
-//    white-space: nowrap;
-//    transition: 0.3s;
-//}
-//
-//.simple-button:hover,
-//.SimpleButton:hover {
-//    text-decoration: underline;
-//}
-//
-//.simple-button:focus,
-//.SimpleButton:focus {
-//    text-decoration: underline;
-//}
-//
-//.menu {
-//
-//    .button,
-//    .simple-button,
-//    .SimpleButton {
-//        font-size: 1.875rem;
-//        line-height: 2.25rem;
-//    }
-//}
+.SimpleButton {
+    @extend .btn-auth;
+
+    background-color: transparent;
+    border-width: 0;
+
+    ddp-sign-in-out & {
+        border: 2px solid $text-color;
+        background-color: transparent;
+    }
+
+    ddp-language-selector & {
+        display: flex;
+        align-items: center;
+    }
+
+    .footer & {
+        color: white;
+        border-color: white;
+    }
+}
+
+.btn-auth {
+    padding: 0.65rem 1.5rem !important;
+    line-height: 20px !important;
+
+    &.dashboard-button {
+        padding: 0.65rem !important;
+    }
+}
+
+.small-letter-spacing {
+    letter-spacing: -0.016rem;
+}
+
+.button-link {
+    border: none;
+    background: none;
+    font-size: inherit;
+    font-family: inherit;
+    color: $primary-color;
+
+    &:hover, &:focus {
+        text-decoration: underline;
+    }
+}

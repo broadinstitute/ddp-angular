@@ -102,7 +102,6 @@ export * from './lib/components/address/addressEmbedded.component';
 export * from './lib/components/activityForm/activity.component';
 export * from './lib/components/internationalization/changeLanguageRedirect.component';
 export * from './lib/components/popupWithCheckbox.component';
-export * from './lib/components/user/activities/userActivitiesDataSource';
 export * from './lib/components/subjectPanel/subjectPanel.component';
 export * from './lib/components/adminActionPanel.component';
 export * from './lib/components/tooltip.component';
@@ -157,6 +156,7 @@ export * from './lib/components/newRequestMock.component';
 export * from './lib/components/networkSniffer.component';
 export * from './lib/components/user/participantProfile.component';
 export * from './lib/components/progress-indicator/progress-indicator.component';
+export * from './lib/components/confirmDialog/confirmDialog.component';
 
 export * from './lib/directives/upperCaseInputDirective.directive';
 export * from './lib/directives/routeTransformer.directive';
