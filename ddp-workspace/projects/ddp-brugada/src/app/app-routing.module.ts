@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
-import { IrbGuard, BrowserGuard } from 'ddp-sdk';
-
 import { Route } from './constants/Route';
-import { AboutComponent } from './pages/about/about.component';
+import { Routes, RouterModule } from '@angular/router';
+import { IrbGuard, BrowserGuard } from 'ddp-sdk';
 import { ErrorComponent } from './pages/error/error.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { HomeComponent } from './pages/home/home.component';
 import { PasswordComponent } from './pages/password/password.component';
 import { TeamComponent } from './pages/team/team.component';
+import { AboutComponent } from './pages/about/about.component';
+import { RegistrationComponent } from './pages/registration/registration.component';
+
 
 const routes: Routes = [
   {
@@ -41,6 +41,10 @@ const routes: Routes = [
   {
     path: Route.Password,
     component: PasswordComponent,
+  },
+  {
+    path: Route.Join,
+    component: RegistrationComponent
   },
   {
     path: '**',

@@ -1,9 +1,10 @@
-import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgModule, Injector, APP_INITIALIZER, InjectionToken } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,6 +32,11 @@ import { HomeComponent } from './pages/home/home.component';
 import { PasswordComponent } from './pages/password/password.component';
 import { TeamComponent } from './pages/team/team.component';
 import { AppRoutingModule } from './app-routing.module';
+import { RegistrationComponent } from './pages/registration/registration.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+
+
+export const CONFIG: InjectionToken<ConfigurationService> = new InjectionToken<ConfigurationService>('Config');
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -58,6 +64,7 @@ sdkConfig.baseUrl = location.origin + base;
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
 sdkConfig.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
 sdkConfig.localRegistrationUrl = sdkConfig.backendUrl + '/pepper/v1/register';
+sdkConfig.dbName = DDP_ENV.dbName;
 sdkConfig.errorPageUrl = Route.Error;
 sdkConfig.passwordPageUrl = Route.Password;
 
@@ -114,6 +121,8 @@ export function translateFactory(
     HomeComponent,
     PasswordComponent,
     TeamComponent,
+    RegistrationComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -127,12 +136,19 @@ export function translateFactory(
     DdpModule,
     ToolkitModule,
     AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     {
       provide: 'ddp.config',
       useValue: sdkConfig,
     },
+    // TODO: Use InjectionToken instead of string token
+    // {
+    //   provide: CONFIG,
+    //   useValue: sdkConfig,
+    // },
     {
       provide: 'toolkit.toolkitConfig',
       useValue: toolkitConfig,
