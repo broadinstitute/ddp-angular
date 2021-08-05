@@ -9,11 +9,6 @@
     height: $header-height;
     transition: all 200ms linear;
     background-color: white;
-
-    ::ng-deep.navigation__link {
-        font-size: 1.5rem;
-        line-height: 3rem;
-    }
 }
 
 .header-content {
@@ -177,11 +172,9 @@
 }
 
 @media screen and (max-width: $desktop-breakpoint) {
-    .panel-controls ::ng-deep {
-        .action-button,
-        .SimpleButton {
-            font-size: 1.2rem;
-        }
+    .header ::ng-deep.navigation__link{
+        font-size: 1.5rem;
+        line-height: 3rem;
     }
 }
 
@@ -200,14 +193,5 @@
 
     .header-content .nav {
         display: flex;
-    }
-
-    .header {
-        height: $header-height;
-
-        ::ng-deep.navigation__link {
-            font-size: 1rem;
-            line-height: normal;
-        }
     }
 }
