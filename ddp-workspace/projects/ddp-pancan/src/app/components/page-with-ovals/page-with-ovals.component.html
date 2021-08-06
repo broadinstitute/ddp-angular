@@ -1,21 +1,8 @@
 <main class="page">
-    <h2 class="title static-page-title">{{source + '.Title' | translate}}</h2>
+    <section *ngFor="let section of (source + '.Sections') | translate; let i = index;" [class]="'section section-' + i">
+        <img class="section__side-image" lazy-resource [src]="'assets/images/' + sectionImages[i]">
 
-    <nav class="anchors">
-        <ul>
-            <li *ngFor="let section of (source + '.Sections') | translate; let i = index;" class="anchor">
-                <a [routerLink]="['/', route]" [fragment]="anchorLabel + i"
-                   (click)="scrollToAnchor(anchorLabel + i)">{{section.Title}}
-                </a>
-            </li>
-        </ul>
-    </nav>
-
-    <section [id]="anchorLabel + i"
-             *ngFor="let section of (source + '.Sections') | translate; let i = index;"
-             class="section">
-        <div class="section__content"
-             [class.column-direction]="section.PeopleList?.length">
+        <div class="section__content">
             <h3 class="section__title static-page-title">{{section.Title}}</h3>
 
             <div class="section__description" *ngIf="section.Paragraphs?.length || section.Examples">
@@ -24,10 +11,6 @@
                         <p class="section__text static-page-paragraph-text" [innerHTML]="paragraph" routeTransformer></p>
                     </ng-container>
                 </ng-container>
-
-                <!--hard-coded image as an exception-->
-                <img *ngIf="section.ImageAlt" class="section__img-milestones" lazy-resource src="assets/images/timeline.png"
-                     [alt]="section.ImageAlt">
 
                 <div class="section__examples static-page-paragraph-text" *ngIf="section.Examples">
                     <b>{{section.Examples.Title}}</b>
@@ -45,14 +28,14 @@
             </div>
 
             <div class="section__people-list" *ngIf="section.PeopleList?.length">
-                <ng-container *ngFor="let person of section.PeopleList">
-                    <figure class="person">
-                        <img class="person__image"
-                             src="assets/images/person.png"
-                             lazy-resource
-                             [alt]="section.ImageAlt">
-                        <figcaption class="person__label" [innerHTML]="person"></figcaption>
-                    </figure>
+                <ng-container *ngFor="let block of section.PeopleList">
+                    <h4 class="section__people-list__title">{{block.Title}}</h4>
+                    <div class="section__people-list__block">
+                        <p *ngFor="let person of block.List"
+                           class="people-text"
+                           [innerHTML]="person">
+                        </p>
+                    </div>
                 </ng-container>
             </div>
 
@@ -67,4 +50,5 @@
             </div>
         </div>
     </section>
+    <div class="bottom-image"></div>
 </main>

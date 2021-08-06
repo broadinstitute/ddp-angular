@@ -4,7 +4,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Observable, of } from 'rxjs';
 
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
-import { AnchorsPageComponent } from './anchors-page.component';
+import { PageWithOvalsComponent } from './page-with-ovals.component';
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
@@ -31,12 +31,12 @@ class TranslateLoaderMock implements TranslateLoader {
 }
 
 describe('AnchorsPageComponent', () => {
-    let component: AnchorsPageComponent;
-    let fixture: ComponentFixture<AnchorsPageComponent>;
+    let component: PageWithOvalsComponent;
+    let fixture: ComponentFixture<PageWithOvalsComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                declarations: [AnchorsPageComponent],
+                declarations: [PageWithOvalsComponent],
                 imports: [
                     RouterTestingModule,
                     NoopAnimationsModule,
@@ -52,10 +52,9 @@ describe('AnchorsPageComponent', () => {
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(AnchorsPageComponent);
+        fixture = TestBed.createComponent(PageWithOvalsComponent);
         component = fixture.componentInstance;
         component.source = 'App.AboutUs';
-        component.route = 'about-us';
         fixture.detectChanges();
     });
 
