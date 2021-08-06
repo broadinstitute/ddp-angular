@@ -9,11 +9,6 @@
     height: $header-height;
     transition: all 200ms linear;
     background-color: white;
-
-    ::ng-deep.navigation__link {
-        font-size: 1.5rem;
-        line-height: 3rem;
-    }
 }
 
 .header-content {
@@ -50,12 +45,12 @@
     transition-timing-function: linear;
     background-color: transparent;
     border: 0;
-    display: flex;
+    display: none;
 }
 
 .header-content .nav {
     width: 100%;
-    display: none;
+    display: flex;
 }
 
 .panel-opened {
@@ -63,7 +58,7 @@
     z-index: 3;
 
     .panel-controls {
-        display: flex;
+        display: none;
         flex-direction: column;
         margin: 1.5625rem 2.5rem;
         transition: opacity 100ms 200ms ease;
@@ -177,37 +172,24 @@
 }
 
 @media screen and (max-width: $desktop-breakpoint) {
-    .panel-controls ::ng-deep {
-        .action-button,
-        .SimpleButton {
-            font-size: 1.2rem;
-        }
+    .header ::ng-deep.navigation__link{
+        font-size: 1.5rem;
+        line-height: 3rem;
+    }
+
+    .header-content .nav {
+        display: none;
+    }
+
+    .panel-controls,
+    .panel-opened .panel-controls,
+    .hamburger {
+        display: flex;
     }
 }
 
 @media screen and (max-width: $mobile-breakpoint) {
     ddp-language-selector ::ng-deep .SimpleButton {
         padding: 0;
-    }
-}
-
-@media screen and (min-width: $desktop-breakpoint) {
-    .panel-controls,
-    .panel-opened .panel-controls,
-    .hamburger {
-        display: none;
-    }
-
-    .header-content .nav {
-        display: flex;
-    }
-
-    .header {
-        height: $header-height;
-
-        ::ng-deep.navigation__link {
-            font-size: 1rem;
-            line-height: normal;
-        }
     }
 }
