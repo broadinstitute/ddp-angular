@@ -27,11 +27,15 @@ export class FaqSectionComponent {
 
     public openJoinMailingList(): void {
         const info = this.isColorectal ? ['Colorectal'] : null;
-        const studyGuid = (this.isLmsPage && this.toolkitConfiguration.lmsStudyGuid) || undefined;
+        const studyGuid = this.isLmsPage && this.toolkitConfiguration.lmsStudyGuid;
+        let data: any = { info };
+        if (studyGuid) {
+            data = {...data, studyGuid };
+        }
 
         this.dialog.open(JoinMailingListComponent, {
             ...JOIN_MAILING_LIST_DIALOG_SETTINGS,
-            data: { info, studyGuid },
+            data,
         });
     }
 
