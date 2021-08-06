@@ -109,10 +109,13 @@
         display: flex;
         flex-direction: column;
         width: 48.75rem;
+        margin-top: 3rem;
 
         > a {
             opacity: 1;
             line-height: 2.75rem;
+            font-size: 1.5rem;
+            letter-spacing: -0.1px;
         }
     }
 
@@ -121,7 +124,7 @@
 
         li {
             margin-bottom: 2rem;
-            font-size: 1.5rem !important;
+            font-size: 1.25rem !important;
         }
 
         .source {
@@ -136,11 +139,15 @@
 
 .bottom-image {
     height: 300px;
-    background-image: url(/assets/images/oval_purple_right.png);
     background-repeat: no-repeat;
     background-position: right top;
     background-size: contain;
     margin-top: -50px;
+    background-image: url(/assets/images/oval_pink_right.png);
+
+    &.about-us {
+        background-image: url(/assets/images/oval_purple_right.png);
+    }
 }
 
 @media screen and (max-width: $desktop-breakpoint) {

@@ -1,7 +1,15 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
-
-const ABOUT_US_PAGE_IMAGES = ['oval_green_left.png', 'oval_carrot_right.png', 'oval_sand_left.png'];
+const ABOUT_US_PAGE_IMAGES = [
+    'oval_green_left.png',
+    'oval_carrot_right.png',
+    'oval_sand_left.png'
+];
+const SCIENTIFIC_RESEARCH_PAGE_IMAGES = [
+    'oval_purple_left.png',
+    'oval_green_right.png',
+    'oval_sand_left.png'
+];
 
 @Component({
     selector: 'app-page-with-ovals',
@@ -15,10 +23,10 @@ export class PageWithOvalsComponent implements OnInit {
     sectionImages: string[];
 
     ngOnInit(): void {
-        this.sectionImages = this.isAboutUsPage ? ABOUT_US_PAGE_IMAGES : [];
+        this.sectionImages = this.isAboutUsPage ? ABOUT_US_PAGE_IMAGES : SCIENTIFIC_RESEARCH_PAGE_IMAGES;
     }
 
-    private get isAboutUsPage(): boolean {
+    get isAboutUsPage(): boolean {
         return this.source === 'App.AboutUs';
     }
 }
