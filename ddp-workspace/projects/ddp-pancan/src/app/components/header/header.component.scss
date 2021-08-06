@@ -45,7 +45,7 @@
     transition-timing-function: linear;
     background-color: transparent;
     border: 0;
-    display: flex;
+    display: none;
 }
 
 .header-content .nav {
@@ -58,7 +58,7 @@
     z-index: 3;
 
     .panel-controls {
-        display: flex;
+        display: none;
         flex-direction: column;
         margin: 1.5625rem 2.5rem;
         transition: opacity 100ms 200ms ease;
@@ -180,18 +180,16 @@
     .header-content .nav {
         display: none;
     }
+
+    .panel-controls,
+    .panel-opened .panel-controls,
+    .hamburger {
+        display: flex;
+    }
 }
 
 @media screen and (max-width: $mobile-breakpoint) {
     ddp-language-selector ::ng-deep .SimpleButton {
         padding: 0;
-    }
-}
-
-@media screen and (min-width: $desktop-breakpoint) {
-    .panel-controls,
-    .panel-opened .panel-controls,
-    .hamburger {
-        display: none;
     }
 }
