@@ -12,7 +12,7 @@
                 </a>
             </div>
             <img src="assets/images/colorectal_main.png" class="image"
-                 [alt]="'App.ColorectalPage.IntroductionSection.ImageAlt' | translate"
+                 [alt]="'App.ImageAlts.SplashPageImg' | translate"
                  width="390" height="385">
         </div>
         <div class="logos">
@@ -96,4 +96,8 @@
         <app-join-cmi-section title="App.ColorectalPage.CountMeInSection.Title"></app-join-cmi-section>
     </section>
 </main>
-<app-splash-page-footer [phone]="phone" [email]="email"></app-splash-page-footer>
+<app-splash-page-footer
+    text='App.ColorectalPage.Footer.Text'
+    [phone]="phone"
+    [email]="email">
+</app-splash-page-footer>

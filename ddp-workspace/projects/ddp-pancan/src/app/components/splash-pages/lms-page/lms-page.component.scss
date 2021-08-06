@@ -1,0 +1,74 @@
+@import '../../../../styles/variables';
+
+section {
+    text-align: center;
+    padding-left: 3rem;
+    padding-right: 3rem;
+
+    &:nth-of-type(even) {
+        background-color: $section-grey-background-color;
+    }
+
+    &.introduction {
+        padding: 5.125rem 5rem 1.5rem;
+
+        .flex {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .description {
+            flex: 0 1 auto;
+            text-align: left;
+            max-width: 651px;
+            padding-right: 2rem;
+
+            .title, .join-cmi-btn {
+                margin: 0;
+            }
+        }
+
+        .image {
+            flex: 0 1 auto;
+        }
+
+        .logos {
+            padding: 2rem 0 1rem;
+        }
+    }
+
+    &.learn-more {
+        padding-top: 4.56rem;
+        padding-bottom: 3.875rem;
+
+        .learn-more-btn {
+            margin-left: 30px;
+        }
+    }
+
+    &.participate {
+        padding-top: 5.18rem;
+        padding-bottom: 3.75rem;
+        text-align: left;
+
+        ::ng-deep .container:last-child {
+            text-align: center;
+        }
+    }
+
+    &.faq {
+        padding-top: 6.875rem;
+        padding-bottom: 2.875rem;
+
+        .title {
+            margin-top: 0;
+        }
+
+        .container {
+            margin: 4rem auto 3.125rem;
+            max-width: 1007px;
+        }
+    }
+}

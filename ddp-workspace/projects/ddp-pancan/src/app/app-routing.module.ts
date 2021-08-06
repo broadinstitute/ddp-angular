@@ -23,6 +23,7 @@ import { ParticipationComponent } from './components/participation/participation
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ScientificResearchComponent } from './components/scientific-research/scientific-research.component';
 import { ColorectalPageComponent } from './components/splash-pages/colorectal-page/colorectal-page.component';
+import { LmsPageComponent } from './components/splash-pages/lms-page/lms-page.component';
 
 const routes: Routes = [
     {
@@ -62,6 +63,11 @@ const routes: Routes = [
     {
         path: AppRoutes.ColorectalPage,
         component: ColorectalPageComponent,
+        canActivate: [IrbGuard]
+    },
+    {
+        path: AppRoutes.LMS,
+        component: LmsPageComponent,
         canActivate: [IrbGuard]
     },
     {
