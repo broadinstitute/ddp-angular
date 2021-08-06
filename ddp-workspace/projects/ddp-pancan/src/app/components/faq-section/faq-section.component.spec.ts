@@ -10,6 +10,7 @@ import { FaqSectionComponent } from './faq-section.component';
 import { JoinMailingListComponent } from 'toolkit';
 import { MatDialog } from '@angular/material/dialog';
 import { JOIN_MAILING_LIST_DIALOG_SETTINGS } from '../../utils/join-mailing-list-dialog-confg';
+import { ActivatedRoute } from '@angular/router';
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
@@ -45,13 +46,15 @@ class TranslateLoaderMock implements TranslateLoader {
     }
 }
 
-describe('FaqItemComponent', () => {
+describe('FaqSectionComponent', () => {
     let component: FaqSectionComponent;
     let fixture: ComponentFixture<FaqSectionComponent>;
     let dialogSpy: jasmine.SpyObj<MatDialog>;
+    let activatedRouteSpy: jasmine.SpyObj<ActivatedRoute>;
 
     beforeEach(async () => {
         dialogSpy = jasmine.createSpyObj('dialogSpy', ['open']);
+        activatedRouteSpy = jasmine.createSpyObj('activatedRouteSpy', ['snapshot']);
         await TestBed.configureTestingModule({
             declarations: [
                 FaqSectionComponent,
@@ -67,6 +70,8 @@ describe('FaqItemComponent', () => {
             ],
             providers: [
                 { provide: MatDialog, useValue: dialogSpy},
+                { provide: 'toolkit.toolkitConfig', useValue: {} },
+                { provide: ActivatedRoute, useValue: activatedRouteSpy},
             ],
         })
             .compileComponents();
