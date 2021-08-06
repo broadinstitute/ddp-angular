@@ -50,7 +50,7 @@
 
 .header-content .nav {
     width: 100%;
-    display: none;
+    display: flex;
 }
 
 .panel-opened {
@@ -176,6 +176,10 @@
         font-size: 1.5rem;
         line-height: 3rem;
     }
+
+    .header-content .nav {
+        display: none;
+    }
 }
 
 @media screen and (max-width: $mobile-breakpoint) {
@@ -189,9 +193,5 @@
     .panel-opened .panel-controls,
     .hamburger {
         display: none;
-    }
-
-    .header-content .nav {
-        display: flex;
     }
 }
