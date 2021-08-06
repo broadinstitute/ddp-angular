@@ -10,11 +10,13 @@
 }
 
 .section {
-    padding: 4.69rem 0 4rem;
+    padding: 4.69rem 0 4rem 2rem;
     display: flex;
 
     &:nth-of-type(odd) {
         padding-top: 3.75rem;
+        padding-right: 2rem;
+        padding-left: 0;
 
         .section__description {
             max-width: 785px;
@@ -142,50 +144,97 @@
 }
 
 @media screen and (max-width: $desktop-breakpoint) {
-    .section {
-        &__content {
-            gap: 3rem;
+    .section__side-image {
+        .section-0 & {
+            height: 480px;
+            margin-right: 5rem;
         }
 
-        &__title {
-            width: 20%;
+        .section-1 & {
+            height: 465px;
         }
 
-        &__description,
-        &__links {
-            width: 73%;
+        .section-2 & {
+            height: 355px;
+            margin-right: 7rem;
         }
     }
 }
 
 @media screen and (max-width: $tablet-breakpoint) {
-    .anchors {
-        top: 63px;
+    .section__side-image {
+        height: 50vw !important;
+
+        .section-0 & {
+            margin-right: 3rem;
+        }
+
+        .section-2 & {
+            margin-right: 5rem;
+        }
     }
 
-    .section {
-        &__content {
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        &__title,
-        &__description,
-        &__links {
-            width: 100%;
-        }
-
-        &__people-list {
-            margin-left: 1rem;
-        }
+    .bottom-image {
+        height: 35vw;
+        margin-top: -25px;
     }
 }
 
 @media screen and (max-width: $mobile-breakpoint) {
     .section {
-        &__img-milestones {
-            display: none;
+        display: block;
+        padding-bottom: 2.5rem;
+
+        &__title {
+            margin-top: 2.5rem;
+
+            .section-2 & {
+                margin-top: 4.5rem;
+            }
+        }
+
+        &__side-image {
+            height: 172px !important;
+            margin-top: 0 !important;
+            margin-bottom: 2rem !important;
+
+            .section-0 & {
+                float: left;
+            }
+
+            .section-1 & {
+                float: right;
+            }
+
+            .section-2 & {
+                float: left;
+            }
+        }
+
+        &__description {
+            clear: both;
+        }
+
+        &:nth-of-type(odd) {
+            .section__description {
+                padding-left: 1.5625rem !important;
+            }
+        }
+
+        &:nth-of-type(even) {
+            .section__description {
+                padding-right: 1.5625rem !important;
+            }
+        }
+
+        &__people-list {
+            padding-left: 2.5rem!important;
+            padding-right: 1rem;
+            clear: both;
+
+            &__block {
+                grid-template-columns: 1fr;
+            }
         }
     }
 }
