@@ -181,6 +181,15 @@
         }
     }
 
+    .section-1 .section__content {
+        max-width: 480px;
+    }
+
+    .section__links {
+        width: inherit;
+        padding-right: 1.5625rem !important;
+    }
+
     .bottom-image {
         height: 35vw;
         margin-top: -25px;
@@ -211,6 +220,7 @@
 
             .section-1 & {
                 float: right;
+                margin-left: 1.5rem;
             }
 
             .section-2 & {
