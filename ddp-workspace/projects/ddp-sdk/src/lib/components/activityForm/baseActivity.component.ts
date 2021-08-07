@@ -69,9 +69,6 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
         this.workflow = injector.get(WorkflowServiceAgent);
         this.submissionManager = injector.get(SubmissionManager);
         this.router = injector.get(Router);
-        // next line ensures that when we navigate from one activity to the next
-        // activity component is reloaded/ngOnInit executes. Otherwise component is not initialized
-        // after routing
         this.config = injector.get<ConfigurationService>('ddp.config' as any);
         this.studyGuidObservable = new BehaviorSubject<string | null>(null);
         this.activityGuidObservable = new BehaviorSubject<string | null>(null);
