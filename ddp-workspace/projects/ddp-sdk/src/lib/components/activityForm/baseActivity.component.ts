@@ -69,6 +69,9 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
         this.workflow = injector.get(WorkflowServiceAgent);
         this.submissionManager = injector.get(SubmissionManager);
         this.router = injector.get(Router);
+        // next line ensures that when we navigate from one activity to the next
+        // activity component is reloaded/ngOnInit executes. Otherwise component is not initialized
+        // after routing
         this.config = injector.get<ConfigurationService>('ddp.config' as any);
         this.studyGuidObservable = new BehaviorSubject<string | null>(null);
         this.activityGuidObservable = new BehaviorSubject<string | null>(null);
@@ -116,6 +119,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
                     this.activityCode.emit(this.model.activityCode);
                     this.initSteps();
                 }
+                this.submitAttempted.next(false);
                 this.isLoaded$.next(true);
 
                 // combine the latest status updates from the form model
@@ -126,7 +130,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
                         this.submissionManager.answerSubmissionResponse$,
                         // We don't automatically get model updates if local validation fails
                         // so trigger one when submit
-                        this.submitAttempted
+                        this.submitAttempted.pipe(filter(attempted => attempted))
                     ).pipe(
                         map(() => this.model.validate()),
                         // let's start with whatever it is the initial state of the form
