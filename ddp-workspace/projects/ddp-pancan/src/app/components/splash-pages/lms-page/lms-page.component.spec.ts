@@ -6,6 +6,10 @@ import { Observable, of } from 'rxjs';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { mockComponent } from 'ddp-sdk';
 import { LmsPageComponent } from './lms-page.component';
+import { MatDialog } from '@angular/material/dialog';
+import { By } from '@angular/platform-browser';
+import { JoinMailingListComponent } from 'toolkit';
+import { JOIN_MAILING_LIST_DIALOG_SETTINGS } from '../../../utils/join-mailing-list-dialog-confg';
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
@@ -30,9 +34,10 @@ describe('LmsPageComponent', () => {
     const stayInformedSection = mockComponent({selector: 'app-stay-informed-section'});
     const joinCmiSection = mockComponent({selector: 'app-join-cmi-section'});
     const splashPageFooter = mockComponent({selector: 'app-splash-page-footer', inputs: ['phone', 'email']});
-
+    let dialogSpy: jasmine.SpyObj<MatDialog>;
 
     beforeEach(async () => {
+        dialogSpy = jasmine.createSpyObj('dialogSpy', ['open']);
         await TestBed.configureTestingModule({
                 imports: [
                     RouterTestingModule,
@@ -50,7 +55,8 @@ describe('LmsPageComponent', () => {
                     splashPageFooter
                 ],
                 providers: [
-                    { provide: 'toolkit.toolkitConfig', useValue: {} }
+                    { provide: MatDialog, useValue: dialogSpy},
+                    { provide: 'toolkit.toolkitConfig', useValue: {lmsStudyGuid: 'guid123'} }
                 ]
             })
             .compileComponents();
@@ -67,5 +73,14 @@ describe('LmsPageComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should open join mailing list dialog', () => {
+        const joinButton = fixture.debugElement.query(By.css('.notify-btn ')).nativeElement;
+        joinButton.click();
+        expect(dialogSpy.open).toHaveBeenCalledWith(JoinMailingListComponent, {
+            ...JOIN_MAILING_LIST_DIALOG_SETTINGS,
+            data: { studyGuid: 'guid123' },
+        });
     });
 });
