@@ -44,25 +44,25 @@
                 "Steps": [
                     {
                         "Title": "PASO 1",
-                        "Time": "(de 10 a 15 minutos)",
+                        "Time": "de 10 a 15 minutos",
                         "Description": "Dé su consentimiento e indique dónde ha recibido tratamiento",
                         "ImageAlt": "Pantalla de computadora que muestra un formulario de consentimiento en línea"
                     },
                     {
                         "Title": "PASO 2",
-                        "Time": "(5 minutos)",
+                        "Time": "5 minutos",
                         "Description": "Responda preguntas sobre su cáncer",
                         "ImageAlt": "Pantalla de computadora que muestra una encuesta en línea"
                     },
                     {
                         "Title": "PASO 3",
-                        "Time": "(10 minutos)",
+                        "Time": "10 minutos",
                         "Description": "Proporcione muestras (le enviaremos un kit)",
                         "ImageAlt": "Kit de obtención de muestras"
                     },
                     {
                         "Title": "PASO 4",
-                        "Time": "[ES]Ongoing",
+                        "Time": "Estudio en curso",
                         "Description": "Aprenda junto con nosotros",
                         "ImageAlt": "Burbujas de diálogo que comparten corazones y visualizaciones de datos"
                     }
