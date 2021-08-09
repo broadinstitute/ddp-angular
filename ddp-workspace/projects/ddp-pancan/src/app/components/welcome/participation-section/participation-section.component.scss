@@ -125,13 +125,3 @@
     }
 }
 
-@media screen and (max-width: $mobile-breakpoint) {
-    .container {
-        &.steps {
-            .step__description {
-                max-width: 240px;
-            }
-        }
-    }
-}
-
