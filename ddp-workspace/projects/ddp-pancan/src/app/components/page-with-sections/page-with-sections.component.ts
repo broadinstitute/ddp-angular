@@ -12,12 +12,12 @@ const SCIENTIFIC_RESEARCH_PAGE_IMAGES = [
 ];
 
 @Component({
-    selector: 'app-page-with-ovals',
-    templateUrl: './page-with-ovals.component.html',
-    styleUrls: ['./page-with-ovals.component.scss'],
+    selector: 'app-page-with-sections',
+    templateUrl: './page-with-sections.component.html',
+    styleUrls: ['./page-with-sections.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PageWithOvalsComponent implements OnInit {
+export class PageWithSectionsComponent implements OnInit {
     @Input() source: string;
     @Input() linksMap?: { [key: string]: string };
     sectionImages: string[];
