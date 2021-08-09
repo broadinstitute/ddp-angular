@@ -3,25 +3,34 @@
 section {
     text-align: center;
 
-    &:nth-of-type(even) {
-        background-color: $section-grey-background-color;
-    }
-
     &.introduction {
-        padding-top: 6.75rem;
-        padding-bottom: 1.125rem;
-        background-image: url(/assets/images/hero.png);
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: bottom -2.4rem center;
+        padding: 6.75rem 2rem 1.125rem 2rem;
 
         .title {
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .text {
+            font-size: 1.25rem;
+            line-height: 30px;
+        }
+
+        .image {
+            max-width: 50%;
+            padding-left: 20px;
+            object-fit: contain;
+        }
+
+        .info,
+        .title,
+        .text {
+            text-align: left;
         }
     }
 
     &.learn-more {
         padding: 5rem 0 4.06rem;
+        background-color: $accent-color-green;
 
         .title {
             margin-bottom: 2rem;
@@ -29,28 +38,26 @@ section {
     }
 
     &.join {
-        height: 470px;
-        padding: 2.25rem 2.5rem 3.44rem 6.25rem;
+        padding: 3.1rem 1.625rem 4rem;
         display: flex;
         box-sizing: border-box;
+        align-items: center;
 
         .image {
-            width: 25rem;
-            max-height: 380px;
-            align-self: center;
-            margin-right: 6.25rem;
+            width: 18rem;
+            object-fit: contain;
         }
 
         .description {
             flex: 1 2 auto;
-            padding-top: 4.38rem;
         }
 
         .title {
             margin-bottom: 2.12rem;
         }
+
         .text {
-            text-align: left;
+            max-width: 37.5rem;
 
             &:first-of-type {
                 margin-bottom: 2rem;
@@ -59,6 +66,7 @@ section {
     }
 
     &.participate {
+        background-color: $accent-color-orange;
         padding: 7rem 1.25rem 4.25rem;
         text-align: left;
     }
@@ -76,6 +84,8 @@ section {
     }
 
     &.stay-informed {
+        background-color: $primary-color;
+        color: white;
         padding-left: 1.25rem;
         padding-right: 1.25rem;
     }
@@ -96,16 +106,50 @@ section {
     margin-top: 2.81rem;
 }
 
+.join-cmi-btn {
+    margin: 2.5rem 0 2rem;
+}
+
+.introduction_container {
+    display: flex;
+    justify-content: space-between;
+}
+
 @media screen and (max-width: $desktop-breakpoint) {
     section {
         &:nth-child(n) {
             padding-left: 5rem;
             padding-right: 5rem;
-            height: auto;
         }
 
         &.introduction {
-            background-size: 90%;
+            padding-top: 1.8rem;
+
+            .info,
+            .title,
+            .text {
+                text-align: center;
+            }
+
+            .image {
+                max-width: 100%;
+                margin: 3rem 0;
+            }
+        }
+
+        .introduction_container {
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        &.join {
+            padding-top: 4rem;
+            padding-bottom: 5rem;
+
+            .image {
+                width: 13rem;
+            }
         }
     }
 }
@@ -161,4 +205,8 @@ section {
             padding-bottom: 5rem;
         }
     }
+}
+
+:host ::ng-deep .static-page-paragraph-text {
+    font-size: 1.5rem;
 }

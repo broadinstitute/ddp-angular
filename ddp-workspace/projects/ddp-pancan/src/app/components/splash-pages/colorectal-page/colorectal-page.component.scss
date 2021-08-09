@@ -25,7 +25,7 @@ section {
             max-width: 651px;
             padding-right: 2rem;
 
-            .title, .join-cmi-btn  {
+            .title  {
                 margin: 0;
             }
         }
@@ -104,6 +104,9 @@ section {
     }
 
     &.stay-informed {
+        background-color: $primary-colorectal-color;
+        color: white;
+
         ::ng-deep .container {
             max-width: 1062px;
         }

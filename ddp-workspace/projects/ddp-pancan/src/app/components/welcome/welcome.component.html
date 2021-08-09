@@ -1,19 +1,27 @@
 <main class="main">
     <section class="introduction">
-        <h2 class="title static-page-title" translate>App.HomePage.IntroductionSection.Title</h2>
-        <p class="text static-page-paragraph-text" translate>App.HomePage.IntroductionSection.Text</p>
-        <a mat-flat-button
-           [routerLink]="'/' + AppRoutes.CountMeIn"
-           class="btn join-cmi-btn center button button_small"
-           color="primary">
-            {{'App.HomePage.JoinCountMeInButton' | translate}}
-        </a>
+        <div class="introduction_container">
+            <div class="info">
+                <h2 class="title static-page-title" translate>App.HomePage.IntroductionSection.Title</h2>
+                <p class="text static-page-paragraph-text"
+                   [innerHTML]="'App.HomePage.IntroductionSection.Text' | translate"></p>
+                <a mat-flat-button
+                   [routerLink]="'/' + AppRoutes.CountMeIn"
+                   class="btn join-cmi-btn center button button_small"
+                   color="primary">
+                    {{'App.HomePage.JoinCountMeInButton' | translate}}
+                </a>
+            </div>
+            <img src="assets/images/patients.png"
+                 class="image"
+                 [alt]="'App.HomePage.IntroductionSection.ImageAlt' | translate">
+        </div>
         <div class="logos">
             <img src="assets/images/logo-broad.svg"
-                 [alt]="'App.HomePage.IntroductionSection.BroadAlt' | translate"
+                 alt="Broad Institute logo"
                  width="124" height="32">
             <img src="assets/images/dana-farber-logo.png"
-                 [alt]="'App.HomePage.IntroductionSection.DanaFarberAlt' | translate"
+                 alt="Dana-Farber Cancer Institute logo"
                  width="124" height="32">
         </div>
     </section>
@@ -25,19 +33,24 @@
            [routerLink]="'/' + AppRoutes.AboutUs"
            class="btn learn-more-btn center small-letter-spacing button button_small button_secondary">
             {{'App.HomePage.LearnMoreSection.LearnMoreAboutUsButton' | translate}}
+            <mat-icon>chevron_right</mat-icon>
         </a>
     </section>
 
     <section class="join">
         <img class="image"
              lazy-resource
-             src="assets/images/map.png"
+             src="assets/images/patient1.png"
              [alt]="'App.HomePage.JoinSection.ImageAlt' | translate"/>
         <div class="description">
             <h2 class="title static-page-title" translate>App.HomePage.JoinSection.Title</h2>
             <p class="text static-page-paragraph-text" [innerHTML]="'App.HomePage.JoinSection.Text1' | translate"></p>
             <p class="text static-page-paragraph-text" [innerHTML]="'App.HomePage.JoinSection.Text2' | translate"></p>
         </div>
+        <img class="image"
+             lazy-resource
+             src="assets/images/patient2.png"
+             [alt]="'App.HomePage.JoinSection.ImageAlt' | translate"/>
     </section>
 
     <section class="participate">
@@ -53,6 +66,7 @@
            [routerLink]="'/' + AppRoutes.FAQ"
            class="btn more-faq-btn center small-letter-spacing button button_small button_secondary">
             {{'App.FAQ.Button.MoreFAQs' | translate}}
+            <mat-icon>chevron_right</mat-icon>
         </a>
     </section>
 
