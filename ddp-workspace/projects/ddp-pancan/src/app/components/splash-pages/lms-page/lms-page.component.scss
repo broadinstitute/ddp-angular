@@ -90,3 +90,17 @@ section {
     background-color: $primary-lms-color;
     color: #FFFFFF;
 }
+
+@media screen and (max-width: $mobile-breakpoint) {
+    .main-title {
+        width: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    section,
+    .main-title {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+    }
+}

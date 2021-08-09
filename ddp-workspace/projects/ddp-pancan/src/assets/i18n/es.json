@@ -403,7 +403,7 @@
             }
         },
         "LmsPage": {
-            "Title": "[ES]Enrolling Soon: The Leiomyosarcoma (LMS) Project",
+            "Title": "[ES]<span>Enrolling Soon:</span> <span>The Leiomyosarcoma (LMS) Project</span>",
             "IntroductionSection": {
                 "Title": "[ES]Have a direct impact on the future of leiomyosarcoma.",
                 "Text": "[ES]If you have ever been diagnosed with leiomyosarcoma, join a movement of patients to contribute your samples, medical records, and experiences to LMS research. Together, we can speed the development of future therapies.",
