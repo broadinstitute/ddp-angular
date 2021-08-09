@@ -1,6 +1,4 @@
 import { ConfigurationService as SDKConfigurationService } from 'ddp-sdk';
-// import { DdpModule, ConfigurationService, LoggingService, LanguageService } from 'ddp-sdk';
-
 
 
 export class ConfigurationService extends SDKConfigurationService {
