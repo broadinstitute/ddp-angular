@@ -7,6 +7,7 @@ import {
     ToolkitConfigurationService
 } from 'toolkit';
 import { RenewSessionNotifier } from 'ddp-sdk';
+import { AppRoutes } from '../app-routes';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ export class AppComponent extends AppRedesignedBaseComponent {
     phone: string;
     email: string;
     isSplashPage: boolean;
-    private readonly splashPageUrls = ['colorectal', 'lms'];
+    isLmsPage: boolean;
+    private readonly splashPageUrls = [AppRoutes.ColorectalPage, AppRoutes.LMS];
 
     constructor(
         _communicationService: CommunicationService,
@@ -37,6 +39,7 @@ export class AppComponent extends AppRedesignedBaseComponent {
                 return;
             }
             this.isSplashPage = this.splashPageUrls.some(url => event.url.includes(url));
+            this.isLmsPage = event.url.includes(AppRoutes.LMS);
         });
     }
 }

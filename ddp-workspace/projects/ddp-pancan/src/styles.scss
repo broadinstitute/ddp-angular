@@ -88,6 +88,10 @@ ddp-language-selector {
     padding-bottom: $footer-height;
     padding-top: $header-height;
     box-sizing: border-box;
+
+    &.lms-page {
+        padding-top: 0;
+    }
 }
 
 .Italic {
