@@ -405,13 +405,11 @@
             }
         },
         "LmsPage": {
+            "Title": "Enrolling Soon: The Leiomyosarcoma (LMS) Project",
             "IntroductionSection": {
                 "Title": "Have a direct impact on the future of leiomyosarcoma.",
-                "Text": "If you have ever been diagnosed with leiomyosarcoma, join a movement of patients to contribute your samples, medical records, and experiences to LMS research. Together, we can speed the development of future therapies."
-            },
-            "LearnMoreSection": {
-                "Title": "Enrollment begins in early 2022. Get notified when we launch.",
-                "EmailPlaceholder": "Your email",
+                "Text": "If you have ever been diagnosed with leiomyosarcoma, join a movement of patients to contribute your samples, medical records, and experiences to LMS research. Together, we can speed the development of future therapies.",
+                "Notify": "Enrollment begins in early 2022. Get notified when we launch.",
                 "Button": "Notify Me"
             },
             "FAQ": {
@@ -451,16 +449,12 @@
                     }
                 ]
             },
-            "StayInformed": {
-                "Title": "Stay informed",
-                "Button": "Join Mailing List"
-            },
             "Footer": {
                 "Text": "The Leiomyosarcoma Project (LMSproject) is part of <span class='bold'>Count Me In</span>, a research initiative that brings together patients and scientists as partners to speed up discoveries in cancer research."
             }
         },
         "ImageAlts": {
-            "SplashPageImg": "Your impact"
+            "SplashPageLogo": "Logo"
         },
         "Header": {
             "Logo": {
