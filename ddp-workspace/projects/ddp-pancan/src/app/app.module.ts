@@ -34,7 +34,7 @@ import { ParticipationComponent } from './components/participation/participation
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
-import { AnchorsPageComponent } from './components/anchors-page/anchors-page.component';
+import { PageWithSectionsComponent } from './components/page-with-sections/page-with-sections.component';
 import { ScientificResearchComponent } from './components/scientific-research/scientific-research.component';
 import { ParticipationSectionComponent } from './components/welcome/participation-section/participation-section.component';
 import { StayInformedSectionComponent } from './components/welcome/stay-informed-section/stay-informed-section.component';
@@ -124,7 +124,7 @@ export function translateFactory(translate: TranslateService,
         NavigationComponent,
         AuthComponent,
         AboutUsComponent,
-        AnchorsPageComponent,
+        PageWithSectionsComponent,
         ScientificResearchComponent,
         ParticipationSectionComponent,
         StayInformedSectionComponent,

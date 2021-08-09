@@ -131,12 +131,14 @@
                     "Paragraphs": [
                         "Count Me In es un estudio de investigación del cáncer en colaboración con los pacientes que está disponible para todas las personas de Estados Unidos o Canadá que alguna vez hayan recibido un diagnóstico de cáncer. El objetivo de Count Me In es transformar la atención del cáncer al permitir que todos los pacientes con esta enfermedad agilicen la investigación biomédica al compartir sus muestras de cáncer, información clínica y experiencias. Esta colaboración da lugar a conjuntos de datos sobre el cáncer que contienen información clínica, genómica, molecular e información reportada por el paciente sin incluir datos personales. Con el fin de acelerar los descubrimientos, los datos de Count Me In se comparten periódicamente con la comunidad de investigación biomédica a través de repositorios científicos como cBioPortal for Cancer Genomics y el Genomic Data Commons del Instituto Nacional del Cáncer.",
                         "Todas las personas que se inscriban en Count Me In podrán brindar muestras de saliva, además de información reportada por el paciente, a través de una serie de encuestas sobre temas tales como su historia clínica, sus experiencias con el cáncer y sus antecedentes familiares de cáncer. Existe un enorme valor científico en estudiar este gran grupo de pacientes que representan muchos diferentes tipos de cáncer, instituciones de tratamiento y edades u otros datos demográficos. Cuanto más representen los participantes de la investigación la verdadera diversidad total de los pacientes de cáncer y sus experiencias, mayor será el impacto que los descubrimientos científicos pueden tener para todos.",
-                        "Se obtendrán muestras biológicas adicionales, como muestras de tumores, muestras de sangre y muestras de heces, de determinadas cohortes de pacientes y se utilizarán para generar datos genómicos y moleculares para sus análisis. Estos datos resultantes se vincularán con la información genómica de las muestras de sangre, la información clínica de las historias clínicas y la información provista por los pacientes en las encuestas, y se compartirán con la comunidad de investigación biomédica. Al integrar todos estos aspectos diferentes e importantes del cáncer, los conjuntos de datos obtenidos mediante Count Me In acelerarán los descubrimientos de la investigación en muchos sectores distintos.",
-                        "Esta estrategia propuesta por Count Me In permite crear y estudiar a profundidad cohortes de pacientes no solo dentro de un mismo tipo de cáncer, sino que también abarquen datos de distintos tipos de cáncer, como todos los pacientes que reciben un tratamiento determinado, como inmunoterapia, o los pacientes dentro de un grupo de edad específicos, como adolescentes y adultos jóvenes. Count Me In ha desarrollado y continuará desarrollando iniciativas de investigación en torno a diferentes poblaciones y cohortes de pacientes. A medida que se unan más personas, habrá más oportunidades de dar comienzo a estudios más profundos dentro de más cohortes de pacientes."
+                        "Se obtendrán muestras biológicas adicionales, como muestras de tumores, muestras de sangre y muestras de heces, de determinadas cohortes de pacientes y se utilizarán para generar datos genómicos y moleculares para sus análisis. Estos datos resultantes se vincularán con la información genómica de las muestras de sangre, la información clínica de las historias clínicas y la información provista por los pacientes en las encuestas, y se compartirán con la comunidad de investigación biomédica. Al integrar todos estos aspectos diferentes e importantes del cáncer, los conjuntos de datos obtenidos mediante Count Me In acelerarán los descubrimientos de la investigación en muchos sectores distintos."
                     ]
                 },
                 {
                     "Title": "Proyectos actuales",
+                    "Paragraphs": [
+                        "Esta estrategia propuesta por Count Me In permite crear y estudiar a profundidad cohortes de pacientes no solo dentro de un mismo tipo de cáncer, sino que también abarquen datos de distintos tipos de cáncer, como todos los pacientes que reciben un tratamiento determinado, como inmunoterapia, o los pacientes dentro de un grupo de edad específicos, como adolescentes y adultos jóvenes. Count Me In ha desarrollado y continuará desarrollando iniciativas de investigación en torno a diferentes poblaciones y cohortes de pacientes. A medida que se unan más personas, habrá más oportunidades de dar comienzo a estudios más profundos dentro de más cohortes de pacientes."
+                    ],
                     "Links": [
                         { "key": "Angio", "label": "Angiosarcoma Project" },
                         { "key": "Brain", "label": "Brain Tumor Project" },
@@ -195,46 +197,36 @@
                     "Title": "Historia e hitos",
                     "Paragraphs": [
                         "Count Me In (CMI) se originó de conversaciones entre Emerson Collective y Broad Institute of MIT y Harvard en 2013. Desde el lanzamiento del primer proyecto de cáncer de mama metastásico a fines de 2015, miles de personas con cáncer de todo Estados Unidos y Canadá se han inscrito en “Count Me In” para asociarse con los investigadores y compartir sus experiencias. El proyecto de cáncer de mama metastásico (Metastatic Breast Cancer, MBC) fue la primera iteración de esta nueva visión, seguido por el proyecto sobre angiosarcoma (Angiosarcoma, ASC) en 2017 y el proyecto de cáncer de próstata metastásico (Metastatic Prostate Cancer, MPC) en 2018. Desde entonces, CMI también ha lanzado el proyecto sobre cáncer de esófago y estómago (Esophageal and Stomach Cancer Project), el proyecto de osteosacroma (Osteosarcoma, OS) y el proyecto de tumor cerebral (Brain Tumor, BT). En otoño de 2021, se abrió la inscripción en Count Me In a todos los pacientes de Estados Unidos o Canadá que alguna vez hayan sido diagnosticados con cáncer.",
-                        "Count Me In cuenta con el patrocinio de <a href=\"#\">Emerson Collective</a>, una organización orientada al cambio social con sede en California; <a href=\"#\">Broad Institute</a>, una institución de investigación biomédica líder sin fines de lucro; y <a href=\"#\">Dana Farber Cancer Institute</a>, un hospital oncológico líder."
-                    ],
-                    "ImageAlt": "Hitos de proyectos"
+                        "Count Me In cuenta con el patrocinio de <a target='_blank' href='https://www.emersoncollective.com/'>Emerson Collective</a>, una organización orientada al cambio social con sede en California; <a target='_blank' href='https://www.broadinstitute.org/'>Broad Institute</a>, una institución de investigación biomédica líder sin fines de lucro; y <a target='_blank' href='https://www.dana-farber.org/'>Dana Farber Cancer Institute</a>, un hospital oncológico líder."
+                    ]
                 },
                 {
                     "Title": "Personal",
                     "PeopleList": [
-                        "<b>Elana Anastasio</b><br/>Directores",
-                        "<b>Roeshana Moore-Evans</b><br/>Directores",
-                        "<b>Corrie Painter</b><br/>Directores",
-                        "<b>Nikhil Wagle</b><br/>Directores",
-                        "<b>Kim Hurley</b><br/>Finanzas y subsidios",
-                        "<b>Ashley Matthews</b><br/>Finanzas y subsidios",
-                        "<b>Brett Tomson</b><br/>Alianzas científicas y comunicaciones",
-                        "<b>Colleen Nguyen</b><br/>Participación comunitaria",
-                        "<b>Christina Arecy</b><br/>Participación comunitaria",
-                        "<b>Tania Hernandez</b><br/>Participación comunitaria",
-                        "<b>Oyin Alao</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Imani Boykin</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Maria Cerio</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Parker Chastain</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Taylor Cusher</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Jordan Doucette</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Ayanah Dowdye</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Mary McGillicuddy</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Rafael Ramos</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Sarah Winnicki</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Ben Zola</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Shahrayz Shah</b><br/>Abstracción clínica",
-                        "<b>Ilan Small</b><br/>Abstracción clínica",
-                        "<b>Delia Sosa</b><br/>Abstracción clínica",
-                        "<b>Lauren Sterlin</b><br/>Abstracción clínica",
-                        "<b>Beena Thomas</b><br/>Abstracción clínica",
-                        "<b>Daniel Abravanel</b><br/>Oncología médica",
-                        "<b>Sara Balch</b><br/>Equipo informático",
-                        "<b>Jorge Gomez Tejeda Zanudo</b><br/>Equipo informático",
-                        "<b>Esha Jain</b><br/>Equipo informático",
-                        "<b>Dewey Kim</b><br/>Equipo informático"
-                    ],
-                    "ImageAlt": "Una persona"
+                        {
+                            "Title": "[ES]Leadership",
+                            "List": [
+                                "<b>Elana Anastasio</b><br/>[ES]Associate Director",
+                                "<b>Roeshana Moore-Evans</b><br/>[ES]Senior Advisor",
+                                "<b>Corrie Painter</b><br/>[ES]Deputy Director",
+                                "<b>Nikhil Wagle</b><br/>[ES]Director"
+                            ]
+                        },
+                        {
+                            "Title": "Board of Directors",
+                            "List": [
+                                "<b>Todd Golub</b>, [ES]Co-chair<br/>Director, Broad Institute<br>Professor of Pediatrics, Harvard Medical School Charles A. Dana Investigator, Dana-Farber Cancer Institute",
+                                "<b>Reed Jobs</b>, [ES]Co-chair<br/>Managing Director, Health, Emerson Collective",
+                                "<b>Andrew Forrest</b><br/>[ES]Founder and Chairman - Fortescue Metals Group, Fortescue Future Industries, Tattarang Group, and Minderoo Foundation",
+                                "<b>Cindy Citrone</b><br/>[ES]Founder and CEO, Citrone 33",
+                                "<b>Greg Simon</b><br/>[ES]President, Simonovation, LLCFormer Executive Director White House Cancer Moonshot Task Force",
+                                "<b>Jesse Souweine</b><br/>[ES]Chief Operating Officer, Executive Vice President, Broad Institute"                                ,
+                                "<b>Laurie Glimcher</b><br/>[ES]President and CEO, Dana-Farber Cancer Institute Director, Dana-Farber/Harvard Cancer Center Richard and Susan Smith Professor of Medicine, Harvard Medical School",
+                                "<b>Matt Bettonville</b><br/>[ES]Director, Venture Investing, Health, Emerson Collective",
+                                "<b>Nikhil Wagle</b><br/>[ES]Director, Count Me In<br>Assistant Professor of Medicine, Harvard Medical School / Dana-Farber Cancer Institute<br>Institute Member, Broad Institute"
+                            ]
+                        }
+                    ]
                 }
             ]
         },
