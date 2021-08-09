@@ -8,7 +8,7 @@
     <a mat-raised-button
        [routerLink]="'/' + AppRoutes.CountMeIn"
        class="btn join-cmi-btn  button button_small"
-       color="primary">
+       [color]="isColorectalTheme ? 'colorectal' : 'primary'">
         {{btnText | translate}}
     </a>
 </div>
