@@ -21,10 +21,6 @@
         font-size: 1rem;
         width: 295px;
 
-        &:last-child {
-            margin-right: 0;
-        }
-
         &__image-container {
             height: 240px;
             background-color: white;
@@ -105,21 +101,24 @@
             justify-content: center !important;
 
             .step {
-                flex: unset;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
                 margin: 0;
                 min-width: 375px;
 
                 &__image {
                     width: 250px;
                     height: 250px;
-                    left: 0;
+                }
+
+                &__image-container {
+                    height: 320px;
                 }
 
                 &__description {
                     max-width: 350px;
+                }
+
+                &__info {
+                    height: auto;
                 }
             }
         }
