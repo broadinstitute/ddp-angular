@@ -7,7 +7,8 @@
         "FAQ": "FAQ",
         "Physicians": "For Physicians",
         "MailingList": "Mailing List",
-        "Join": "Join the Brugada Project"
+        "Join": "Join the Brugada Project",
+        "Login": "Log in"
       },
       "LogoAlt": "Brugada Project"
     },
@@ -417,6 +418,14 @@
     "AlreadyRegistered": "Already registered?",
     "SignInLink": "Sign in with existing account",
     "Submit": "Submit"
+  },
+  "Login": {
+    "Title": "Log in your account",
+    "Description": "You will use this information to later sign in to your Brugada Project account.  The Brugada Project will use the email address provided to communicate with you.",
+    "ForgotPassword": "Don't remember your password?",
+    "RestorePassword": "Restore password",
+    "Register": "If you haven't registered yet, please",
+    "RegisterLink": "do so here."
   },
   "SDK": {
     "SubmitButton": "Submit",

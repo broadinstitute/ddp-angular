@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { of, BehaviorSubject } from 'rxjs';
 import { Route } from '../../constants/Route';
 import { catchError, first, tap } from 'rxjs/operators';
