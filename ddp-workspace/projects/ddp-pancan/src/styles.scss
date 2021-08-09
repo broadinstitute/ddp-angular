@@ -256,9 +256,10 @@ $tooltip-icon-size: 24px;
 }
 
 .participate-step-time {
-    font-size: 1rem;
+    font-size: 1.5rem;
     letter-spacing: -0.07px;
     line-height: 24px;
+    margin-top: 1rem;
 }
 
 // for Welcome page / Colorectal page mostly
@@ -290,9 +291,6 @@ section {
         font-size: 1.5rem;
         padding: 1.5rem 2.3rem;
         line-height: 22px;
-    }
-
-    .join-cmi-btn {
-        margin: 1.56rem 0 7.5rem;
+        white-space: normal;
     }
 }

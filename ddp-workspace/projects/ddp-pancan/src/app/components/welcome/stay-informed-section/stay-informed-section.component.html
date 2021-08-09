@@ -1,20 +1,18 @@
 <div class="container">
-    <h2 class="title static-page-title" translate>App.HomePage.StayInformedSection.Title</h2>
-    <div class="social-media">
-        <div class="text static-page-paragraph-text" translate>App.HomePage.StayInformedSection.Text</div>
-        <div class="social-media__links">
-            <a class="social-media__link" [href]="twitterUrl" target="_blank">
-                <img class="social-media__logo" lazy-resource src="assets/images/twitter.svg"
-                     [alt]="'Common.Alts.Twitter' | translate">
-            </a>
-            <a class="social-media__link" [href]="facebookUrl" target="_blank">
-                <img class="social-media__logo" lazy-resource src="assets/images/facebook.svg"
-                     [alt]="'Common.Alts.Facebook' | translate">
-            </a>
-        </div>
+    <div class="social-media__links">
+        <a class="social-media__link" [href]="twitterUrl" target="_blank">
+            <img class="social-media__logo" lazy-resource src="assets/images/twitter.svg"
+                 [alt]="'Common.Alts.Twitter' | translate">
+        </a>
+        <a class="social-media__link" [href]="facebookUrl" target="_blank">
+            <img class="social-media__logo" lazy-resource src="assets/images/facebook.svg"
+                 [alt]="'Common.Alts.Facebook' | translate">
+        </a>
     </div>
-    <button mat-stroked-button
-            class="btn join-btn small-letter-spacing button button_small button_secondary"
+    <h2 class="title static-page-title" translate>App.HomePage.StayInformedSection.Title</h2>
+    <div class="text static-page-paragraph-text" translate>App.HomePage.StayInformedSection.Text</div>
+    <button mat-flat-button
+            class="btn join-btn small-letter-spacing button button_small"
             (click)="openJoinMailingList()">
         {{'App.HomePage.StayInformedSection.JoinMailingListButton' | translate}}
     </button>

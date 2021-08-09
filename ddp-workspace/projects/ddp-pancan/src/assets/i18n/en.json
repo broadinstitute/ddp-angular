@@ -23,20 +23,21 @@
     "App": {
         "HomePage": {
             "JoinCountMeInButton": "Join Count Me In",
-            "IntroductionSection": {
-                "Title": "Have a direct impact on the future of cancer research.",
-                "Text": "Count Me In is a nonprofit research initiative that engages patients and enables them to accelerate cancer research by sharing their samples, their clinical information, and their voices."
-            },
             "LearnMoreSection": {
-                "Title": "Every patient's experience with cancer should be counted.",
-                "Text": "Patients’ medical records, tumor samples, and personal experiences hold clues—about which cancers will respond or become resistant to which therapies—that often can’t be found in research labs or clinical trials. <span class=\"Italic\">Count Me In</span> enables cancer patients anywhere to share their information with researchers everywhere, to help reveal patterns in the data.",
+                "Title": "Have a direct impact on the future of cancer research.",
+                "Text": "Count Me In is a nonprofit research initiative that engages patients and enables them to accelerate cancer research by sharing their samples, their clinical information, and their voices.",
                 "LearnMoreAboutUsButton": "Learn more about us"
+            },
+            "IntroductionSection": {
+                "Title": "Every patient's experience with cancer should be counted.",
+                "Text": "Patients’ medical records, tumor samples, and personal experiences hold clues—about which cancers will respond or become resistant to which therapies—that often can’t be found in research labs or clinical trials. <br/><span class=\"Italic\">Count Me In</span> enables cancer patients anywhere to share their information with researchers everywhere, to help reveal patterns in the data.",
+                "ImageAlt": "Pan Can project Patients"
             },
             "JoinSection": {
                 "Title": "Who can join?",
                 "Text1": "Anyone who has ever been diagnosed with cancer may participate if they live in the USA or Canada.",
                 "Text2": "We welcome people of all ages, genders, races, ethnicities, and abilities.",
-                "ImageAlt": "Map dotted with participants across the U.S. and Canada."
+                "ImageAlt": "Participant"
             },
             "ParticipateSection": {
                 "Title": "Here’s how to participate",
