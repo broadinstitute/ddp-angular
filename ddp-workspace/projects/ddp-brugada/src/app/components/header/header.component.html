@@ -59,17 +59,9 @@
         </li>
       </ul>
 
-      <ul class="link-list pull-right">
-        <li class="link-list__item">
-          <a class="btn btn--scarlet" [routerLink]="Route.Join">
-            {{ 'App.Header.Links.Join' | translate }}
-          </a>
-        </li>
-
-        <li class="link-list__item">
-          <ddp-sign-in-out></ddp-sign-in-out>
-        </li>
-      </ul>
+      <div class="pull-right">
+        <app-sign-in-out></app-sign-in-out>
+      </div>
     </nav>
   </div>
 </header>

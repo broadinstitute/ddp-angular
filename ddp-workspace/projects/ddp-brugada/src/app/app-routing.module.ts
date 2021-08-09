@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Route } from './constants/Route';
 import { Routes, RouterModule } from '@angular/router';
-import { IrbGuard, BrowserGuard } from 'ddp-sdk';
-import { ErrorComponent } from './pages/error/error.component';
 import { FaqComponent } from './pages/faq/faq.component';
+import { LoginLandingRedesignedComponent } from 'toolkit';
 import { HomeComponent } from './pages/home/home.component';
 import { JoinComponent } from './pages/join/join.component';
-import { PasswordComponent } from './pages/password/password.component';
 import { TeamComponent } from './pages/team/team.component';
+import { ErrorComponent } from './pages/error/error.component';
 import { AboutComponent } from './pages/about/about.component';
+import { LoginComponent } from './pages/login/login.component';
+import { PasswordComponent } from './pages/password/password.component';
+import { IrbGuard, BrowserGuard, Auth0CodeCallbackComponent } from 'ddp-sdk';
 import { RegistrationComponent } from './pages/registration/registration.component';
 
 
@@ -49,8 +51,22 @@ const routes: Routes = [
     component: PasswordComponent,
   },
   {
-    path: Route.Join,
+    path: Route.Registration,
     component: RegistrationComponent
+  },
+  {
+    path: Route.Login,
+    component: LoginComponent
+  },
+  {
+    path: Route.LoginLanding,
+    component: LoginLandingRedesignedComponent,
+    canActivate: [IrbGuard],
+  },
+  {
+    path: Route.Auth,
+    component: Auth0CodeCallbackComponent,
+    canActivate: [IrbGuard],
   },
   {
     path: '**',

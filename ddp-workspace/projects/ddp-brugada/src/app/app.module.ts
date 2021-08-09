@@ -3,7 +3,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule, Injector, APP_INITIALIZER, InjectionToken } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -13,16 +12,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslateService } from '@ngx-translate/core';
 import { RecaptchaModule } from 'ng-recaptcha';
-
-import {
-  DdpModule,
-  ConfigurationService,
-  LoggingService,
-  LanguageService,
-} from 'ddp-sdk';
-
+import { DdpModule, ConfigurationService, LoggingService, LanguageService } from 'ddp-sdk';
 import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
-
 import { ActivityComponent } from './components/activity/activity.component';
 import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -39,6 +30,9 @@ import { TeamComponent } from './pages/team/team.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { LoginComponent } from './pages/login/login.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { SignInOutComponent } from './components/sign-in-out/sign-in-out.component';
 
 
 export const CONFIG: InjectionToken<ConfigurationService> = new InjectionToken<ConfigurationService>('Config');
@@ -73,6 +67,8 @@ sdkConfig.localRegistrationUrl = sdkConfig.backendUrl + '/pepper/v1/register';
 sdkConfig.dbName = DDP_ENV.dbName;
 sdkConfig.errorPageUrl = Route.Error;
 sdkConfig.passwordPageUrl = Route.Password;
+sdkConfig.auth0ResponseType = DDP_ENV.auth0ResponseType;
+sdkConfig.auth0Scope = DDP_ENV.auth0Scope;
 
 export function translateFactory(
   translate: TranslateService,
@@ -131,6 +127,9 @@ export function translateFactory(
     TeamComponent,
     RegistrationComponent,
     SignUpComponent,
+    LoginComponent,
+    SignInComponent,
+    SignInOutComponent,
   ],
   imports: [
     BrowserModule,
@@ -147,7 +146,7 @@ export function translateFactory(
     ToolkitModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     {
