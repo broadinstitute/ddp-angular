@@ -2,9 +2,9 @@ import { Observable } from 'rxjs';
 import * as auth0 from 'auth0-js';
 import { tap } from 'rxjs/operators';
 import { User } from '../interfaces/user';
-import { ConfigurationService } from 'ddp-sdk';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { ConfigurationService } from '../config/configuration.service';
 import { Auth0LoginErrorResponse, SignUpResponse } from '../interfaces/auth0';
 
 

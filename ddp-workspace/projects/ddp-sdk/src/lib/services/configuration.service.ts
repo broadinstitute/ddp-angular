@@ -72,11 +72,4 @@ export class ConfigurationService {
     prismColumns: string[] = [];
     prismDashboardRoute: string;
     prismRoute: string;
-    auth0ResponseType: string;
-    auth0Scope: string;
-
-    /**
-     * The name of the database configured to your client.
-     */
-    dbName: string;
 }

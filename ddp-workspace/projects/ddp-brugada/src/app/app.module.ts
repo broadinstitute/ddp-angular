@@ -1,74 +1,40 @@
-import { HttpClientModule } from '@angular/common/http';
+import { ToolkitModule } from 'toolkit';
+import { RecaptchaModule } from 'ng-recaptcha';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgModule, Injector, APP_INITIALIZER, InjectionToken } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { MatExpansionModule } from '@angular/material/expansion';
+import { TranslateService } from '@ngx-translate/core';
+import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
+import { MatInputModule } from '@angular/material/input';
+import { FaqComponent } from './pages/faq/faq.component';
+import { SKDConfigProvider } from './config/sdk.provider';
+import { BrowserModule } from '@angular/platform-browser';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { TranslateService } from '@ngx-translate/core';
-import { RecaptchaModule } from 'ng-recaptcha';
-import { DdpModule, ConfigurationService, LoggingService, LanguageService } from 'ddp-sdk';
-import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
-import { ActivityComponent } from './components/activity/activity.component';
-import { AppComponent } from './components/app/app.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { HeaderComponent } from './components/header/header.component';
-import { MailingListModalComponent } from './components/mailing-list-modal/mailing-list-modal.component';
-import { Route } from './constants/Route';
-import { AboutComponent } from './pages/about/about.component';
-import { ErrorComponent } from './pages/error/error.component';
-import { FaqComponent } from './pages/faq/faq.component';
 import { HomeComponent } from './pages/home/home.component';
 import { JoinComponent } from './pages/join/join.component';
-import { PasswordComponent } from './pages/password/password.component';
 import { TeamComponent } from './pages/team/team.component';
-import { AppRoutingModule } from './app-routing.module';
-import { RegistrationComponent } from './pages/registration/registration.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { AppComponent } from './components/app/app.component';
+import { AboutComponent } from './pages/about/about.component';
+import { ErrorComponent } from './pages/error/error.component';
 import { LoginComponent } from './pages/login/login.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { toolkitConfigProvider } from './config/toolkit.provider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
+import { DdpModule, LoggingService, LanguageService } from 'ddp-sdk';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
+import { PasswordComponent } from './pages/password/password.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
+import { ActivityComponent } from './components/activity/activity.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { RegistrationComponent } from './pages/registration/registration.component';
 import { SignInOutComponent } from './components/sign-in-out/sign-in-out.component';
+import { MailingListModalComponent } from './components/mailing-list-modal/mailing-list-modal.component';
 
-
-export const CONFIG: InjectionToken<ConfigurationService> = new InjectionToken<ConfigurationService>('Config');
-
-const base = document.querySelector('base')?.getAttribute('href') || '';
-
-declare const DDP_ENV: any;
-
-export const toolkitConfig = new ToolkitConfigurationService();
-toolkitConfig.studyGuid = DDP_ENV.studyGuid;
-toolkitConfig.errorUrl = Route.Error;
-toolkitConfig.recaptchaSiteClientKey = DDP_ENV.recaptchaSiteClientKey;
-
-export const sdkConfig = new ConfigurationService();
-sdkConfig.studyGuid = DDP_ENV.studyGuid;
-sdkConfig.auth0Domain = DDP_ENV.auth0Domain;
-sdkConfig.auth0Audience = DDP_ENV.auth0Audience;
-sdkConfig.auth0ClientId = DDP_ENV.auth0ClientId;
-sdkConfig.logLevel = DDP_ENV.logLevel;
-sdkConfig.auth0CodeRedirect = location.origin + base + 'auth';
-sdkConfig.doLocalRegistration = DDP_ENV.doLocalRegistration;
-sdkConfig.mapsApiKey = DDP_ENV.mapsApiKey;
-sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
-sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
-sdkConfig.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
-sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
-sdkConfig.defaultLanguageCode = 'en';
-sdkConfig.baseUrl = location.origin + base;
-sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
-sdkConfig.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
-sdkConfig.localRegistrationUrl = sdkConfig.backendUrl + '/pepper/v1/register';
-sdkConfig.dbName = DDP_ENV.dbName;
-sdkConfig.errorPageUrl = Route.Error;
-sdkConfig.passwordPageUrl = Route.Password;
-sdkConfig.auth0ResponseType = DDP_ENV.auth0ResponseType;
-sdkConfig.auth0Scope = DDP_ENV.auth0Scope;
 
 export function translateFactory(
   translate: TranslateService,
@@ -149,19 +115,8 @@ export function translateFactory(
     HttpClientModule,
   ],
   providers: [
-    {
-      provide: 'ddp.config',
-      useValue: sdkConfig,
-    },
-    // TODO: Use InjectionToken instead of string token
-    // {
-    //   provide: CONFIG,
-    //   useValue: sdkConfig,
-    // },
-    {
-      provide: 'toolkit.toolkitConfig',
-      useValue: toolkitConfig,
-    },
+    SKDConfigProvider,
+    toolkitConfigProvider,
     {
       provide: APP_INITIALIZER,
       useFactory: translateFactory,
