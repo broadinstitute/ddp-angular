@@ -1,12 +1,12 @@
-import { ActivityPicklistNormalizedGroup, ActivityPicklistOption } from 'ddp-sdk';
-import { SortOrder } from './sortOrder';
 import { Injectable } from '@angular/core';
+import { ActivityPicklistNormalizedGroup } from '../models/activity/activityPicklistNormalizedGroup';
+import { SortOrder } from './sortOrder';
+import { ActivityPicklistOption } from '../models/activity/activityPicklistOption';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Injectable()
 export class PicklistSortingPolicy {
     constructor(readonly mainSortOrder: SortOrder = SortOrder.NONE, readonly lastStableId?: string) {}
+
 
     public sortPicklistGroups(groups: ActivityPicklistNormalizedGroup[]): ActivityPicklistNormalizedGroup[] {
         const groupsCopy = groups.slice();
