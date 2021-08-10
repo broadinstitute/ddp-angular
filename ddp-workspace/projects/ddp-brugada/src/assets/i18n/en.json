@@ -439,7 +439,8 @@
     "ForgotPassword": "Don't remember your password?",
     "RestorePassword": "Restore password",
     "Register": "If you haven't registered yet, please",
-    "RegisterLink": "do so here."
+    "RegisterLink": "do so here.",
+    "CheckEmail": "If you have previously registered, please check your email to reset your password"
   },
   "SDK": {
     "SubmitButton": "Submit",

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, } from '@angular/router';
-
+import { ActivatedRoute, Params,} from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,8 @@ import { ActivatedRoute, Params, } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  showResetBar = false;
+
+  showResetBar$: Observable<boolean>;
 
   constructor(
     private route: ActivatedRoute,
@@ -16,8 +18,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params: Params) => {
-      this.showResetBar = !!params.reset_password;
-    });
+    this.showResetBar$ = this.route.queryParams.pipe(
+      map((params: Params) => params.reset_password)
+  );
   }
 }

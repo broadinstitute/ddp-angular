@@ -1,5 +1,5 @@
-<div *ngIf="showResetBar" class="reset-password">
-  If you have previously registered, please check your email to reset your password
+<div *ngIf="showResetBar$ | async" class="reset-password">
+  {{ 'Login.CheckEmail' | translate }}
 </div>
 
 <div class="wrapper">
