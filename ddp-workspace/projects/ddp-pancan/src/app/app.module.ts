@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
-import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
+import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
+import { CommonModule, LOCATION_INITIALIZED } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -11,17 +11,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { TranslateService } from '@ngx-translate/core';
 
-import {
-    DdpModule,
-    ConfigurationService,
-    LoggingService,
-    LanguageService
-} from 'ddp-sdk';
+import { ConfigurationService, DdpModule, LanguageService, LoggingService,  SortOrder, PicklistSortingPolicy } from 'ddp-sdk';
 
-import {
-    ToolkitModule,
-    ToolkitConfigurationService
-} from 'toolkit';
+import { ToolkitConfigurationService, ToolkitModule } from 'toolkit';
 
 import { AppRoutes } from './components/app-routes';
 import { AppComponent } from './components/app/app.component';
@@ -166,6 +158,11 @@ export function translateFactory(translate: TranslateService,
             ],
             multi: true
         },
+        // Ensure that sorting of autocomplete picklist options is as specified
+        {
+            provide: PicklistSortingPolicy,
+            useValue: new PicklistSortingPolicy(SortOrder.ALPHABETICAL, 'UNSURE')
+        }
     ],
     bootstrap: [AppComponent]
 })

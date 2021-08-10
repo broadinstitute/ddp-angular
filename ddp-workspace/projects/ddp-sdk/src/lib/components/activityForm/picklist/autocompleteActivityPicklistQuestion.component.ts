@@ -6,6 +6,7 @@ import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map, startWith, takeUntil } from 'rxjs/operators';
 import { ActivityPicklistNormalizedGroup } from '../../../models/activity/activityPicklistNormalizedGroup';
 import { ActivityPicklistOption } from '../../../models/activity/activityPicklistOption';
+import { PicklistSortingPolicy } from '../../../services/picklistSortingPolicy.service';
 
 @Component({
     selector: 'ddp-activity-autocomplete-picklist-question',
@@ -52,7 +53,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     filteredOptions: ActivityPicklistOption[] = [];
     inputFormControl = new FormControl();
 
-    constructor(translate: NGXTranslateService) {
+    constructor(translate: NGXTranslateService, private sortPolicy: PicklistSortingPolicy) {
         super(translate);
     }
 
@@ -73,10 +74,15 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
             takeUntil(this.ngUnsubscribe)
         );
 
+        const sortedPicklistGroups = this.sortPolicy.sortPicklistGroups(this.block.picklistGroups);
+        const sortedPicklistOptions = this.sortPolicy.sortPicklistOptions(this.block.picklistOptions);
+
+
         userQueryStream.pipe(startWith('')).subscribe((value: string | ActivityPicklistOption) => {
             const query = typeof value === 'string' ? value : value.optionLabel;
-            this.filteredGroups = this.filterOutEmptyGroups(query ? this.filterGroups(query) : this.block.picklistGroups.slice());
-            this.filteredOptions = query ? this.filterOptions(query, this.block.picklistOptions) : this.block.picklistOptions.slice();
+            this.filteredGroups = this.filterOutEmptyGroups(query ? this.filterGroups(query, sortedPicklistGroups)
+                : sortedPicklistGroups.slice());
+            this.filteredOptions = query ? this.filterOptions(query, sortedPicklistOptions) : sortedPicklistOptions.slice();
         });
 
         userQueryStream.subscribe((value: string | ActivityPicklistOption) => {
@@ -129,9 +135,9 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
         this.valueChanged.emit(this.block.answer);
     }
 
-    private filterGroups(name: string): ActivityPicklistNormalizedGroup[] {
+    private filterGroups(name: string, groups: ActivityPicklistNormalizedGroup[]): ActivityPicklistNormalizedGroup[] {
         const filterValue = name.toLowerCase();
-        return this.block.picklistGroups
+        return groups
             .map(group => ({
                 name: group.name,
                 options: group.name.toLowerCase().includes(filterValue)

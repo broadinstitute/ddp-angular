@@ -96,6 +96,8 @@ export * from './lib/services/serviceAgents/statisticsServiceAgent.service';
 export * from './lib/services/serviceAgents/participantsSearchServiceAgent.service';
 export * from './lib/services/stackdriverErrorReporter.service';
 export * from './lib/services/modal-dialog.service';
+export * from './lib/services/picklistSortingPolicy.service';
+export * from './lib/services/sortOrder';
 
 export * from './lib/components/login/auth0-code-callback.component';
 export * from './lib/components/address/addressEmbedded.component';
