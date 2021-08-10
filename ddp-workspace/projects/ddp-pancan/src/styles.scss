@@ -224,6 +224,10 @@ $tooltip-icon-size: 24px;
         height: $tooltip-icon-size;
         width: $tooltip-icon-size;
     }
+
+    &__box {
+        font-size: 1rem;
+    }
 }
 
 .section-spinner {
@@ -256,9 +260,10 @@ $tooltip-icon-size: 24px;
 }
 
 .participate-step-time {
-    font-size: 1rem;
+    font-size: 1.5rem;
     letter-spacing: -0.07px;
     line-height: 24px;
+    margin-top: 1rem;
 }
 
 // for Welcome page / Colorectal page mostly
@@ -287,13 +292,14 @@ section {
     }
 
     .btn {
-        font-size: 1.13rem;
-        padding: 1rem 2rem;
+        font-size: 1.5rem;
+        padding: 1.5rem 2.3rem;
         line-height: 22px;
+        white-space: normal;
     }
+}
 
-    .join-cmi-btn {
-        font-size: 1.25rem;
-        margin: 1.56rem 0 7.5rem;
-    }
+.mat-colorectal {
+    background-color: $primary-colorectal-color !important;
+    color: #fff !important;
 }

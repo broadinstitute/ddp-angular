@@ -23,45 +23,46 @@
     "App": {
         "HomePage": {
             "JoinCountMeInButton": "Únase a Count Me In",
-            "IntroductionSection": {
-                "Title": "Actuemos juntos para dejar huella en el futuro de la investigación del cáncer.",
-                "Text": "Count Me In es una iniciativa de investigación sin fines de lucro que involucra a los pacientes y les permite hacer avances en la investigación del cáncer al compartir sus muestras, su información clínica y sus puntos de vista."
-            },
             "LearnMoreSection": {
-                "Title": "La experiencia de cada paciente con cáncer debe tenerse en cuenta.",
-                "Text": "Las historias clínicas, las muestras de tumores y las experiencias personales de los pacientes contienen pistas (sobre qué tipos de cáncer responderán o serán resistentes a qué tratamientos) que no suelen encontrarse en los laboratorios de investigación o ensayos clínicos. <span class=\"Italic\">Count Me In</span> permite que los pacientes con cáncer, sin importar donde vivan, compartan su información con investigadores de todas partes, para ayudar a descubrir patrones en los datos.",
+                "Title": "Actuemos juntos para dejar huella en el futuro de la investigación del cáncer.",
+                "Text": "Count Me In es una iniciativa de investigación sin fines de lucro que involucra a los pacientes y les permite hacer avances en la investigación del cáncer al compartir sus muestras, su información clínica y sus puntos de vista.",
                 "LearnMoreAboutUsButton": "Más información sobre nosotros"
+            },
+            "IntroductionSection": {
+                "Title": "La experiencia de cada paciente con cáncer debe tenerse en cuenta.",
+                "Text": "Las historias clínicas, las muestras de tumores y las experiencias personales de los pacientes contienen pistas (sobre qué tipos de cáncer responderán o serán resistentes a qué tratamientos) que no suelen encontrarse en los laboratorios de investigación o ensayos clínicos. <br/><span class=\"Italic\">Count Me In</span> permite que los pacientes con cáncer, sin importar donde vivan, compartan su información con investigadores de todas partes, para ayudar a descubrir patrones en los datos.",
+                "ImageAlt": "Pan Can project Patients"
             },
             "JoinSection": {
                 "Title": "¿Quiénes pueden unirse?",
                 "Text1": "Todas las personas que alguna vez hayan recibido un diagnóstico de cáncer pueden participar si viven en Estados Unidos o Canadá.",
                 "Text2": "Las personas de cualquier edad, sexo, raza, origen étnico y capacidad son bienvenidas.",
-                "ImageAlt": "Mapa con puntos con los participantes de Estados Unidos y Canadá."
+                "ImageAlt": "[ES]Participant"
             },
             "ParticipateSection": {
                 "Title": "Cómo participar",
                 "Steps": [
                     {
                         "Title": "PASO 1",
-                        "Time": "(de 10 a 15 minutos)",
+                        "Time": "de 10 a 15 minutos",
                         "Description": "Dé su consentimiento e indique dónde ha recibido tratamiento",
                         "ImageAlt": "Pantalla de computadora que muestra un formulario de consentimiento en línea"
                     },
                     {
                         "Title": "PASO 2",
-                        "Time": "(5 minutos)",
+                        "Time": "5 minutos",
                         "Description": "Responda preguntas sobre su cáncer",
                         "ImageAlt": "Pantalla de computadora que muestra una encuesta en línea"
                     },
                     {
                         "Title": "PASO 3",
-                        "Time": "(10 minutos)",
+                        "Time": "10 minutos",
                         "Description": "Proporcione muestras (le enviaremos un kit)",
                         "ImageAlt": "Kit de obtención de muestras"
                     },
                     {
                         "Title": "PASO 4",
-                        "Time": "[ES]Ongoing",
+                        "Time": "Estudio en curso",
                         "Description": "Aprenda junto con nosotros",
                         "ImageAlt": "Burbujas de diálogo que comparten corazones y visualizaciones de datos"
                     }
@@ -130,12 +131,14 @@
                     "Paragraphs": [
                         "Count Me In es un estudio de investigación del cáncer en colaboración con los pacientes que está disponible para todas las personas de Estados Unidos o Canadá que alguna vez hayan recibido un diagnóstico de cáncer. El objetivo de Count Me In es transformar la atención del cáncer al permitir que todos los pacientes con esta enfermedad agilicen la investigación biomédica al compartir sus muestras de cáncer, información clínica y experiencias. Esta colaboración da lugar a conjuntos de datos sobre el cáncer que contienen información clínica, genómica, molecular e información reportada por el paciente sin incluir datos personales. Con el fin de acelerar los descubrimientos, los datos de Count Me In se comparten periódicamente con la comunidad de investigación biomédica a través de repositorios científicos como cBioPortal for Cancer Genomics y el Genomic Data Commons del Instituto Nacional del Cáncer.",
                         "Todas las personas que se inscriban en Count Me In podrán brindar muestras de saliva, además de información reportada por el paciente, a través de una serie de encuestas sobre temas tales como su historia clínica, sus experiencias con el cáncer y sus antecedentes familiares de cáncer. Existe un enorme valor científico en estudiar este gran grupo de pacientes que representan muchos diferentes tipos de cáncer, instituciones de tratamiento y edades u otros datos demográficos. Cuanto más representen los participantes de la investigación la verdadera diversidad total de los pacientes de cáncer y sus experiencias, mayor será el impacto que los descubrimientos científicos pueden tener para todos.",
-                        "Se obtendrán muestras biológicas adicionales, como muestras de tumores, muestras de sangre y muestras de heces, de determinadas cohortes de pacientes y se utilizarán para generar datos genómicos y moleculares para sus análisis. Estos datos resultantes se vincularán con la información genómica de las muestras de sangre, la información clínica de las historias clínicas y la información provista por los pacientes en las encuestas, y se compartirán con la comunidad de investigación biomédica. Al integrar todos estos aspectos diferentes e importantes del cáncer, los conjuntos de datos obtenidos mediante Count Me In acelerarán los descubrimientos de la investigación en muchos sectores distintos.",
-                        "Esta estrategia propuesta por Count Me In permite crear y estudiar a profundidad cohortes de pacientes no solo dentro de un mismo tipo de cáncer, sino que también abarquen datos de distintos tipos de cáncer, como todos los pacientes que reciben un tratamiento determinado, como inmunoterapia, o los pacientes dentro de un grupo de edad específicos, como adolescentes y adultos jóvenes. Count Me In ha desarrollado y continuará desarrollando iniciativas de investigación en torno a diferentes poblaciones y cohortes de pacientes. A medida que se unan más personas, habrá más oportunidades de dar comienzo a estudios más profundos dentro de más cohortes de pacientes."
+                        "Se obtendrán muestras biológicas adicionales, como muestras de tumores, muestras de sangre y muestras de heces, de determinadas cohortes de pacientes y se utilizarán para generar datos genómicos y moleculares para sus análisis. Estos datos resultantes se vincularán con la información genómica de las muestras de sangre, la información clínica de las historias clínicas y la información provista por los pacientes en las encuestas, y se compartirán con la comunidad de investigación biomédica. Al integrar todos estos aspectos diferentes e importantes del cáncer, los conjuntos de datos obtenidos mediante Count Me In acelerarán los descubrimientos de la investigación en muchos sectores distintos."
                     ]
                 },
                 {
                     "Title": "Proyectos actuales",
+                    "Paragraphs": [
+                        "Esta estrategia propuesta por Count Me In permite crear y estudiar a profundidad cohortes de pacientes no solo dentro de un mismo tipo de cáncer, sino que también abarquen datos de distintos tipos de cáncer, como todos los pacientes que reciben un tratamiento determinado, como inmunoterapia, o los pacientes dentro de un grupo de edad específicos, como adolescentes y adultos jóvenes. Count Me In ha desarrollado y continuará desarrollando iniciativas de investigación en torno a diferentes poblaciones y cohortes de pacientes. A medida que se unan más personas, habrá más oportunidades de dar comienzo a estudios más profundos dentro de más cohortes de pacientes."
+                    ],
                     "Links": [
                         { "key": "Angio", "label": "Angiosarcoma Project" },
                         { "key": "Brain", "label": "Brain Tumor Project" },
@@ -194,46 +197,36 @@
                     "Title": "Historia e hitos",
                     "Paragraphs": [
                         "Count Me In (CMI) se originó de conversaciones entre Emerson Collective y Broad Institute of MIT y Harvard en 2013. Desde el lanzamiento del primer proyecto de cáncer de mama metastásico a fines de 2015, miles de personas con cáncer de todo Estados Unidos y Canadá se han inscrito en “Count Me In” para asociarse con los investigadores y compartir sus experiencias. El proyecto de cáncer de mama metastásico (Metastatic Breast Cancer, MBC) fue la primera iteración de esta nueva visión, seguido por el proyecto sobre angiosarcoma (Angiosarcoma, ASC) en 2017 y el proyecto de cáncer de próstata metastásico (Metastatic Prostate Cancer, MPC) en 2018. Desde entonces, CMI también ha lanzado el proyecto sobre cáncer de esófago y estómago (Esophageal and Stomach Cancer Project), el proyecto de osteosacroma (Osteosarcoma, OS) y el proyecto de tumor cerebral (Brain Tumor, BT). En otoño de 2021, se abrió la inscripción en Count Me In a todos los pacientes de Estados Unidos o Canadá que alguna vez hayan sido diagnosticados con cáncer.",
-                        "Count Me In cuenta con el patrocinio de <a href=\"#\">Emerson Collective</a>, una organización orientada al cambio social con sede en California; <a href=\"#\">Broad Institute</a>, una institución de investigación biomédica líder sin fines de lucro; y <a href=\"#\">Dana Farber Cancer Institute</a>, un hospital oncológico líder."
-                    ],
-                    "ImageAlt": "Hitos de proyectos"
+                        "Count Me In cuenta con el patrocinio de <a target='_blank' href='https://www.emersoncollective.com/'>Emerson Collective</a>, una organización orientada al cambio social con sede en California; <a target='_blank' href='https://www.broadinstitute.org/'>Broad Institute</a>, una institución de investigación biomédica líder sin fines de lucro; y <a target='_blank' href='https://www.dana-farber.org/'>Dana Farber Cancer Institute</a>, un hospital oncológico líder."
+                    ]
                 },
                 {
                     "Title": "Personal",
                     "PeopleList": [
-                        "<b>Elana Anastasio</b><br/>Directores",
-                        "<b>Roeshana Moore-Evans</b><br/>Directores",
-                        "<b>Corrie Painter</b><br/>Directores",
-                        "<b>Nikhil Wagle</b><br/>Directores",
-                        "<b>Kim Hurley</b><br/>Finanzas y subsidios",
-                        "<b>Ashley Matthews</b><br/>Finanzas y subsidios",
-                        "<b>Brett Tomson</b><br/>Alianzas científicas y comunicaciones",
-                        "<b>Colleen Nguyen</b><br/>Participación comunitaria",
-                        "<b>Christina Arecy</b><br/>Participación comunitaria",
-                        "<b>Tania Hernandez</b><br/>Participación comunitaria",
-                        "<b>Oyin Alao</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Imani Boykin</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Maria Cerio</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Parker Chastain</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Taylor Cusher</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Jordan Doucette</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Ayanah Dowdye</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Mary McGillicuddy</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Rafael Ramos</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Sarah Winnicki</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Ben Zola</b><br/>Gestión y coordinación de proyectos",
-                        "<b>Shahrayz Shah</b><br/>Abstracción clínica",
-                        "<b>Ilan Small</b><br/>Abstracción clínica",
-                        "<b>Delia Sosa</b><br/>Abstracción clínica",
-                        "<b>Lauren Sterlin</b><br/>Abstracción clínica",
-                        "<b>Beena Thomas</b><br/>Abstracción clínica",
-                        "<b>Daniel Abravanel</b><br/>Oncología médica",
-                        "<b>Sara Balch</b><br/>Equipo informático",
-                        "<b>Jorge Gomez Tejeda Zanudo</b><br/>Equipo informático",
-                        "<b>Esha Jain</b><br/>Equipo informático",
-                        "<b>Dewey Kim</b><br/>Equipo informático"
-                    ],
-                    "ImageAlt": "Una persona"
+                        {
+                            "Title": "[ES]Leadership",
+                            "List": [
+                                "<b>Elana Anastasio</b><br/>[ES]Associate Director",
+                                "<b>Roeshana Moore-Evans</b><br/>[ES]Senior Advisor",
+                                "<b>Corrie Painter</b><br/>[ES]Deputy Director",
+                                "<b>Nikhil Wagle</b><br/>[ES]Director"
+                            ]
+                        },
+                        {
+                            "Title": "Board of Directors",
+                            "List": [
+                                "<b>Todd Golub</b>, [ES]Co-chair<br/>Director, Broad Institute<br>Professor of Pediatrics, Harvard Medical School Charles A. Dana Investigator, Dana-Farber Cancer Institute",
+                                "<b>Reed Jobs</b>, [ES]Co-chair<br/>Managing Director, Health, Emerson Collective",
+                                "<b>Andrew Forrest</b><br/>[ES]Founder and Chairman - Fortescue Metals Group, Fortescue Future Industries, Tattarang Group, and Minderoo Foundation",
+                                "<b>Cindy Citrone</b><br/>[ES]Founder and CEO, Citrone 33",
+                                "<b>Greg Simon</b><br/>[ES]President, Simonovation, LLCFormer Executive Director White House Cancer Moonshot Task Force",
+                                "<b>Jesse Souweine</b><br/>[ES]Chief Operating Officer, Executive Vice President, Broad Institute"                                ,
+                                "<b>Laurie Glimcher</b><br/>[ES]President and CEO, Dana-Farber Cancer Institute Director, Dana-Farber/Harvard Cancer Center Richard and Susan Smith Professor of Medicine, Harvard Medical School",
+                                "<b>Matt Bettonville</b><br/>[ES]Director, Venture Investing, Health, Emerson Collective",
+                                "<b>Nikhil Wagle</b><br/>[ES]Director, Count Me In<br>Assistant Professor of Medicine, Harvard Medical School / Dana-Farber Cancer Institute<br>Institute Member, Broad Institute"
+                            ]
+                        }
+                    ]
                 }
             ]
         },
@@ -346,8 +339,7 @@
         "ColorectalPage": {
             "IntroductionSection": {
                 "Title": "Contribuya directamente al futuro del cáncer colorrectal.",
-                "Text": "Si alguna vez ha recibido un diagnóstico de cáncer colorrectal, únase a una iniciativa con participación de pacientes a nivel nacional y aporte sus muestras, historias clínicas y experiencia a la investigación sobre cáncer colorrectal. Juntos, podemos acelerar el desarrollo de futuros tratamientos.",
-                "ImageAlt": "Su impacto"
+                "Text": "Si alguna vez ha recibido un diagnóstico de cáncer colorrectal, únase a una iniciativa con participación de pacientes a nivel nacional y aporte sus muestras, historias clínicas y experiencia a la investigación sobre cáncer colorrectal. Juntos, podemos acelerar el desarrollo de futuros tratamientos."
             },
             "LearnMoreSection": {
                 "Title": "¿De qué se trata este proyecto?",
@@ -409,6 +401,64 @@
             "Footer": {
                 "Text": "El Proyecto de cáncer colorrectal forma parte de <span class='bold'>Count Me In</span>, una iniciativa de investigación que une a pacientes y científicos para juntos acelerar los descubrimientos en la investigación del cáncer."
             }
+        },
+        "LmsPage": {
+            "IntroductionSection": {
+                "Title": "[ES]Have a direct impact on the future of leiomyosarcoma.",
+                "Text": "[ES]If you have ever been diagnosed with leiomyosarcoma, join a movement of patients to contribute your samples, medical records, and experiences to LMS research. Together, we can speed the development of future therapies."
+            },
+            "LearnMoreSection": {
+                "Title": "[ES]Enrollment begins in early 2022. Get notified when we launch.",
+                "EmailPlaceholder": "Su correo electrónico",
+                "Button": "[ES]Notify Me"
+            },
+            "FAQ": {
+                "Questions": [
+                    {
+                        "Question": "[ES]What is the goal of this project?",
+                        "Paragraphs": [
+                            "[ES]Our goal is to partner with patients with leiomyosarcoma around the United States and Canada in order to study their cancer using cutting-edge genomic and molecular research studies performed at the Broad Institute, and to leverage technology to allow patients to participate in these studies regardless of where they are treated.",
+                            "[ES]We will generate a large dataset that includes genomic, clinical, molecular, and patient-reported information that can be shared with the biomedical community in order to accelerate discoveries and better therapies for this disease. Cancer is not a single disease, and each medical record, tumor, and patient's story holds part of the puzzle. Our goal is to help the research community better understand the landscape of leiomyosarcoma and accelerate discoveries by making data more readily available.",
+                            "[ES]In addition, our team will study our approaches to engaging with the LMS community and work directly with patients to improve our methods. We will focus on hearing from groups that have been historically left out of research, like rural and underrepresented participants. What we learn together will help improve future patient-partnered studies and increase the diversity of patients we partner with in an evidence-based way, to ensure that new insights are relevant to and benefit as many patients as possible."
+                        ]
+                    },
+                    {
+                        "Question": "[ES]What does participation look like?",
+                        "Paragraphs": [
+                            "[ES]Once the project is launched, people can join through the project website to share their information and experiences with us.",
+                            "[ES]<ul><li>Provide consent: The consent form will allow people to elect to share samples of saliva, blood, and/or tissue, as well as copies of their medical records. This document is several pages, but take your time.</li><li>Respond to simple surveys: In these surveys we ask questions about your experience with LMS, like when you were diagnosed and the types of treatments you’ve had. Participants may also be contacted by the team to participate in focus groups or additional surveys about their experiences participating in the project.</li><li>Provide a saliva and/or blood sample: We will send you a kit to collect a sample of your saliva and/or blood. We will compare the normal DNA in your saliva or blood to your tumor DNA.</li><li>Learn with us: If a participant elects to share archive tissue samples with the project and provides a saliva sample, we may be able to share learnings from the genomic sequencing of the tumor sample back with the participant. These shared learnings are intended to highlight how participant sample(s) are contributing to research and may not have implications for their treatment or prognosis.</li></ul>"
+                        ]
+                    },
+                    {
+                        "Question": "[ES]Who is eligible to participate?",
+                        "Paragraphs": [
+                            "[ES]Anyone who has been diagnosed with leiomyosarcoma at any point may participate if they live in the USA or Canada."
+                        ]
+                    },
+                    {
+                        "Question": "[ES]Who is conducting this research?",
+                        "Paragraphs": [
+                            "[ES]This project is being conducted by the Broad Institute of MIT and Harvard, Dana-Farber Cancer Institute, and Count Me In, a non-profit research initiative that conducts patient-partnered studies of cancer. This project and Count Me In's Osteosarcoma Project is supported by a grant from the National Cancer Institute's Cancer Moonshot program and is part of the Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers. Count Me In is stewarded by three leading organizations: Emerson Collective, a California-based social change organization; the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; and the Dana-Farber Cancer Institute, a leading cancer hospital."
+                        ]
+                    },
+                    {
+                        "Question": "[ES]Is this research being conducted for profit?",
+                        "Paragraphs": [
+                            "[ES]No. This project is a not-for-profit research endeavor. Our mission is to generate, aggregate, and freely share data with the research community in order to accelerate discoveries. All data will have readily identifiable information removed."
+                        ]
+                    }
+                ]
+            },
+            "StayInformed": {
+                "Title": "[ES]Stay informed",
+                "Button": "[ES]Join Mailing List"
+            },
+            "Footer": {
+                "Text": "[ES]The Leiomyosarcoma Project (LMSproject) is part of <span class='bold'>Count Me In</span>, a research initiative that brings together patients and scientists as partners to speed up discoveries in cancer research."
+            }
+        },
+        "ImageAlts": {
+            "SplashPageImg": "Su impacto"
         },
         "Header": {
             "Logo": {

@@ -4,25 +4,17 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Observable, of } from 'rxjs';
 
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
-import { AnchorsPageComponent } from './anchors-page.component';
+import { mockComponent } from 'ddp-sdk';
+import { LmsPageComponent } from './lms-page.component';
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
         const TRANSLATIONS = {
             en: {
                 App: {
-                    AboutUs: {
-                        Title: 'About Us',
-                        Sections: [
-                            {
-                                Title: 'Mission',
-                                Paragraphs: [
-                                    'Count Me In is a nonprofit organization.',
-                                    'Participating patients help shape and propel research.'
-                                ]
-                            }
-                        ]
-                    }
+                    HomePage: {},
+                    FAQ: {},
+                    LmsPage: {}
                 }
             }
         };
@@ -30,19 +22,35 @@ class TranslateLoaderMock implements TranslateLoader {
     }
 }
 
-describe('AnchorsPageComponent', () => {
-    let component: AnchorsPageComponent;
-    let fixture: ComponentFixture<AnchorsPageComponent>;
+describe('LmsPageComponent', () => {
+    let component: LmsPageComponent;
+    let fixture: ComponentFixture<LmsPageComponent>;
+    const participationSection = mockComponent({selector: 'app-participation-section'});
+    const faqSection = mockComponent({selector: 'app-faq-section'});
+    const stayInformedSection = mockComponent({selector: 'app-stay-informed-section'});
+    const joinCmiSection = mockComponent({selector: 'app-join-cmi-section'});
+    const splashPageFooter = mockComponent({selector: 'app-splash-page-footer', inputs: ['phone', 'email']});
+
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-                declarations: [AnchorsPageComponent],
                 imports: [
                     RouterTestingModule,
                     NoopAnimationsModule,
                     TranslateModule.forRoot({
                         loader: { provide: TranslateLoader, useClass: TranslateLoaderMock },
-                    })
+                    }),
+                ],
+                declarations: [
+                    LmsPageComponent,
+                    participationSection,
+                    faqSection,
+                    stayInformedSection,
+                    joinCmiSection,
+                    splashPageFooter
+                ],
+                providers: [
+                    { provide: 'toolkit.toolkitConfig', useValue: {} }
                 ]
             })
             .compileComponents();
@@ -52,10 +60,8 @@ describe('AnchorsPageComponent', () => {
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(AnchorsPageComponent);
+        fixture = TestBed.createComponent(LmsPageComponent);
         component = fixture.componentInstance;
-        component.source = 'App.AboutUs';
-        component.route = 'about-us';
         fixture.detectChanges();
     });
 

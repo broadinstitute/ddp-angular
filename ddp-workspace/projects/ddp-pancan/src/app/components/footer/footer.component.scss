@@ -35,7 +35,7 @@
 }
 
 .back-to-top {
-    font-size: 1.17rem;
+    font-size: 1.25rem;
     text-align: left;
     padding: 0 5px 0 0;
     border: 1px solid transparent;
@@ -72,7 +72,7 @@
 
     .info,
     .actions {
-        padding: 0 2rem 0 3.375rem;
+        padding: 0 2rem 0 1.5rem;
     }
 }
 
@@ -98,14 +98,18 @@
     }
 }
 
-@media screen and (min-width: $tablet-breakpoint) {
-    .actions,
-    .back-to-top {
-        font-size: 1rem;
+@media screen and (max-width: $tablet-breakpoint) {
+    .auth {
+        min-width: auto;
     }
 }
 
 @media screen and (max-width: $mobile-breakpoint) {
+    .actions {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
     .contacts {
         width: 100%;
         display: flex;

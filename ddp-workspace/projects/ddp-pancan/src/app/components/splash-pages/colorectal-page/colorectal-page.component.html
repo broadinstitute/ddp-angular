@@ -7,12 +7,12 @@
                 <a mat-flat-button
                    [routerLink]="'/' + AppRoutes.CountMeIn"
                    class="btn join-cmi-btn center button button_small"
-                   color="primary">
+                   color="colorectal">
                     {{'App.HomePage.JoinCountMeInButton' | translate}}
                 </a>
             </div>
             <img src="assets/images/colorectal_main.png" class="image"
-                 [alt]="'App.ColorectalPage.IntroductionSection.ImageAlt' | translate"
+                 [alt]="'App.ImageAlts.SplashPageImg' | translate"
                  width="390" height="385">
         </div>
         <div class="logos">
@@ -39,14 +39,13 @@
     </section>
 
     <section class="participate">
-        <app-participation-section></app-participation-section>
+        <app-participation-section [isColorectalTheme]="true"></app-participation-section>
     </section>
 
     <section class="faq">
         <h2 class="title static-page-title" translate>App.FAQ.Title</h2>
         <div class="container">
-            <app-faq-section questions="App.ColorectalPage.FAQ.Questions" darkerBackground="true" [isColorectal]="true">
-            </app-faq-section>
+            <app-faq-section questions="App.ColorectalPage.FAQ.Questions" [isColorectal]="true"></app-faq-section>
         </div>
 
         <a mat-stroked-button
@@ -93,7 +92,14 @@
     </section>
 
     <section class="join-cmi">
-        <app-join-cmi-section title="App.ColorectalPage.CountMeInSection.Title"></app-join-cmi-section>
+        <app-join-cmi-section
+            title="App.ColorectalPage.CountMeInSection.Title"
+            [isColorectalTheme]="true">
+        </app-join-cmi-section>
     </section>
 </main>
-<app-splash-page-footer [phone]="phone" [email]="email"></app-splash-page-footer>
+<app-splash-page-footer
+    text='App.ColorectalPage.Footer.Text'
+    [phone]="phone"
+    [email]="email">
+</app-splash-page-footer>

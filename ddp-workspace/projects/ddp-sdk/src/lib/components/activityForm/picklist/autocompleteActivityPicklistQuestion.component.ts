@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { Subject } from 'rxjs';
@@ -45,7 +45,7 @@ import { PicklistSortingPolicy } from '../../../services/picklistSortingPolicy.s
         }
     `]
 })
-export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQuestion implements OnInit, OnDestroy {
+export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQuestion implements OnInit, OnDestroy, OnChanges {
     private readonly ngUnsubscribe = new Subject();
 
     filteredGroups: ActivityPicklistNormalizedGroup[] = [];
@@ -96,6 +96,16 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
                 this.updateAnswer(value.stableId);
             }
         });
+    }
+
+    public ngOnChanges(changes: SimpleChanges): void {
+        super.ngOnChanges(changes);
+
+        if (changes['readonly'].currentValue) {
+            this.inputFormControl.disable({emitEvent: false});
+        } else {
+            this.inputFormControl.enable({emitEvent: false});
+        }
     }
 
     public ngOnDestroy(): void {

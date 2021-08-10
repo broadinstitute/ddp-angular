@@ -11,6 +11,7 @@ import { BaseFooterComponent } from '../../footer/base-footer/base-footer.compon
 export class SplashPageFooterComponent extends BaseFooterComponent {
     @Input() phone: string;
     @Input() email: string;
+    @Input() text: string;
 
     constructor(private _windowRef: WindowRef) {
         super(_windowRef);

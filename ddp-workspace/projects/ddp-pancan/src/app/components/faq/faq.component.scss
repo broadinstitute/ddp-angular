@@ -1,12 +1,14 @@
 @import '../../../styles/variables.scss';
 
 .faq {
-    padding: 4.56rem 1.5rem 6.12rem 1.5rem;
+    padding-bottom: 6.12rem;
     text-align: center;
 
     .title {
         margin-top: 0;
-        margin-bottom: 4.56rem;
+        margin-bottom: 4rem;
+        padding: 3.2rem 0;
+        background-color: $accent-color-green;
     }
 
     .expand-btn {
@@ -31,5 +33,6 @@
     .container {
         max-width: 48.75rem;
         margin: 0 auto;
+        padding: 0 1.5rem;
     }
 }

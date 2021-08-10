@@ -8,13 +8,13 @@ import { AppRoutes } from '../../app-routes';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ParticipationSectionComponent {
+    @Input() isColorectalTheme: boolean;
+
     readonly AppRoutes = AppRoutes;
-    /* the numeration of images is not in order because 2d step is skipped here
-        in comparison with full (5) steps on Participation page */
     readonly participationStepsImages = [
         'step1.png',
+        'step2.png',
         'step3.png',
-        'step4.png',
-        'step5.png'
+        'step4.png'
     ];
 }
