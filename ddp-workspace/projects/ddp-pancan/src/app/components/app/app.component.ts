@@ -17,8 +17,8 @@ export class AppComponent extends AppRedesignedBaseComponent {
     phone: string;
     email: string;
     isSplashPage: boolean;
+    isColorectalPage: boolean;
     isLmsPage: boolean;
-    private readonly splashPageUrls = [AppRoutes.ColorectalPage, AppRoutes.LMS];
 
     constructor(
         _communicationService: CommunicationService,
@@ -38,8 +38,9 @@ export class AppComponent extends AppRedesignedBaseComponent {
             if (!(event instanceof NavigationEnd)) {
                 return;
             }
-            this.isSplashPage = this.splashPageUrls.some(url => event.url.includes(url));
+            this.isColorectalPage = event.url.includes(AppRoutes.ColorectalPage);
             this.isLmsPage = event.url.includes(AppRoutes.LMS);
+            this.isSplashPage = this.isColorectalPage || this.isLmsPage;
         });
     }
 }

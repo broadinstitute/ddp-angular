@@ -12,7 +12,6 @@ import { JOIN_MAILING_LIST_DIALOG_SETTINGS } from '../../utils/join-mailing-list
 export class FaqSectionComponent {
     @Input() questions: string;
     @Input() questionsCount: number; /* don't pass the counter for displaying all questions */
-    @Input() darkerBackground: boolean;
     @Input() isColorectal: boolean;
     @ViewChild(MatAccordion) accordion: MatAccordion; /* Please, do not remove. It is used outside of the component */
 

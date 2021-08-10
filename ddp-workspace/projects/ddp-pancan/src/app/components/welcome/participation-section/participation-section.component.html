@@ -20,11 +20,20 @@
     </div>
 </div>
 <div class="container container__button">
-    <a mat-stroked-button
+    <a *ngIf="isColorectalTheme; else strokedButton"
+       mat-flat-button
        [routerLink]="'/' + AppRoutes.Participation"
-       class="btn learn-more-btn center small-letter-spacing button button_small button_secondary">
+       class="btn learn-more-btn center small-letter-spacing button button_small">
         {{'App.HomePage.ParticipateSection.LearnMoreAboutParticipationButton' | translate}}
         <mat-icon>chevron_right</mat-icon>
     </a>
+    <ng-template #strokedButton>
+        <a mat-stroked-button
+           [routerLink]="'/' + AppRoutes.Participation"
+           class="btn learn-more-btn center small-letter-spacing button button_small button_secondary">
+            {{'App.HomePage.ParticipateSection.LearnMoreAboutParticipationButton' | translate}}
+            <mat-icon>chevron_right</mat-icon>
+        </a>
+    </ng-template>
 </div>
 

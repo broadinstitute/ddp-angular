@@ -1,4 +1,4 @@
-import { Component, Inject, HostListener, OnInit } from '@angular/core';
+import { Component, Inject, HostListener, OnInit, Input } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { WindowRef } from 'ddp-sdk';
@@ -9,6 +9,8 @@ import { WindowRef } from 'ddp-sdk';
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+    @Input() isColorectalTheme: boolean;
+
     public isPanelOpened = false;
     public isPageScrolled = false;
 
