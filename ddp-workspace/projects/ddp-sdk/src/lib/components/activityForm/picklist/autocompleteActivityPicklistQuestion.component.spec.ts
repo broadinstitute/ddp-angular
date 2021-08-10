@@ -1,7 +1,13 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { MatInputModule } from '@angular/material/input';
-import { ActivityPicklistNormalizedGroup, ActivityPicklistOption, ActivityPicklistQuestionBlock, NGXTranslateService } from 'ddp-sdk';
+import {
+    ActivityPicklistNormalizedGroup,
+    ActivityPicklistOption,
+    ActivityPicklistQuestionBlock,
+    NGXTranslateService,
+    PicklistSortingPolicy
+} from 'ddp-sdk';
 import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
 import { of } from 'rxjs';
 import { AutocompleteActivityPicklistQuestion } from './autocompleteActivityPicklistQuestion.component';
@@ -11,7 +17,7 @@ import { PicklistRenderMode } from '../../../models/activity/picklistRenderMode'
 import { SearchHighlightPipe } from '../../../pipes/searchHighlight.pipe';
 import { SimpleChange } from '@angular/core';
 
-describe('AutocompleteActivityPicklistQuestion', () => {
+fdescribe('AutocompleteActivityPicklistQuestion', () => {
     const questionBlock = {
         picklistGroups: [
             {
@@ -55,7 +61,8 @@ describe('AutocompleteActivityPicklistQuestion', () => {
                 ReactiveFormsModule,
             ],
             providers: [
-                { provide: NGXTranslateService, useValue: ngxTranslateServiceSpy }
+                { provide: NGXTranslateService, useValue: ngxTranslateServiceSpy },
+                { provide: PicklistSortingPolicy, useValue: new PicklistSortingPolicy()}
             ],
             declarations: [AutocompleteActivityPicklistQuestion, SearchHighlightPipe]
         }).compileComponents();
