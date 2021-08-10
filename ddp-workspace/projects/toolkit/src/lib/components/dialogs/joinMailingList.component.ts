@@ -2,6 +2,8 @@ import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { catchError, take } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 import { CommunicationService } from '../../services/communication.service';
 import { ToolkitConfigurationService } from '../../services/toolkitConfiguration.service';
 import {
@@ -10,9 +12,9 @@ import {
     CompositeDisposable,
     Person,
     AnalyticsEventCategories,
-    AnalyticsEventActions
+    AnalyticsEventActions, LoggingService
 } from 'ddp-sdk';
-import { take } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'toolkit-join-mailing-list',
@@ -99,10 +101,15 @@ export class JoinMailingListComponent implements OnInit, OnDestroy {
         private mailingService: MailingListServiceAgent,
         private analytics: AnalyticsEventsService,
         @Inject(MAT_DIALOG_DATA) private data: any,
-        @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+        @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService,
+        private translateService: TranslateService,
+        private log: LoggingService) { }
 
     public ngOnInit(): void {
         this.initJoinForm();
+        if (this.data.useLanguage) {
+            this.useSpecificLanguage(this.data.useLanguage);
+        }
         this.studyGuid = this.toolkitConfiguration.studyGuid;
         this.stayInformedUrl = this.toolkitConfiguration.stayInformedUrl;
         this.anchor = new CompositeDisposable();
@@ -180,5 +187,17 @@ export class JoinMailingListComponent implements OnInit, OnDestroy {
                 this.router.navigateByUrl('/');
             }
         });
+    }
+
+    private useSpecificLanguage(languageCode: any): void {
+        this.translateService.getTranslation(languageCode)
+            .pipe(
+                catchError(err => {
+                    this.log.logError(`JoinMailingListComponent: There is no translations for language: ${languageCode}`, err);
+                    return EMPTY;
+                }),
+                take(1)
+            )
+            .subscribe();
     }
 }

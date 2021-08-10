@@ -33,7 +33,8 @@ export class LmsPageComponent implements OnInit {
         this.dialog.open(JoinMailingListComponent, {
             ...JOIN_MAILING_LIST_DIALOG_SETTINGS,
             data: {
-                studyGuid: this.config.lmsStudyGuid
+                studyGuid: this.config.lmsStudyGuid,
+                useLanguage: 'en'
             },
         });
     }
