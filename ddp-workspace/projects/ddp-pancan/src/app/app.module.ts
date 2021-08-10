@@ -161,7 +161,7 @@ export function translateFactory(translate: TranslateService,
         // Ensure that sorting of autocomplete picklist options is as specified
         {
             provide: PicklistSortingPolicy,
-            useValue: new PicklistSortingPolicy(SortOrder.ALPHABETICAL, 'UNKNOWN')
+            useValue: new PicklistSortingPolicy(SortOrder.ALPHABETICAL, 'UNSURE')
         }
     ],
     bootstrap: [AppComponent]
