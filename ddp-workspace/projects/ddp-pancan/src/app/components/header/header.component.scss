@@ -155,13 +155,14 @@
 
     &__text {
         color: $text-color;
-        line-height: 1.125rem;
+        line-height: 1.6rem;
         padding-left: 7px;
         letter-spacing: -0.5px;
+        font-size: 1.35rem;
     }
 
     &__img {
-        width: 3.44rem;
+        width: 5rem;
     }
 }
 

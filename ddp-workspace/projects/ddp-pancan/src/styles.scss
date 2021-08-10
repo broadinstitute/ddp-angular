@@ -228,6 +228,10 @@ $tooltip-icon-size: 24px;
         height: $tooltip-icon-size;
         width: $tooltip-icon-size;
     }
+
+    &__box {
+        font-size: 1rem;
+    }
 }
 
 .section-spinner {
