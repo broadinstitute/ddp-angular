@@ -4,7 +4,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Observable, of } from 'rxjs';
 
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
-import { mockComponent } from 'ddp-sdk';
+import { LoggingService, mockComponent } from 'ddp-sdk';
 import { LmsPageComponent } from './lms-page.component';
 import { MatDialog } from '@angular/material/dialog';
 import { By } from '@angular/platform-browser';
@@ -35,9 +35,11 @@ describe('LmsPageComponent', () => {
     const joinCmiSection = mockComponent({selector: 'app-join-cmi-section'});
     const splashPageFooter = mockComponent({selector: 'app-splash-page-footer', inputs: ['phone', 'email']});
     let dialogSpy: jasmine.SpyObj<MatDialog>;
+    let logServiceSpy: jasmine.SpyObj<LoggingService>;
 
     beforeEach(async () => {
         dialogSpy = jasmine.createSpyObj('dialogSpy', ['open']);
+        logServiceSpy = jasmine.createSpyObj('logServiceSpy', ['logError']);
         await TestBed.configureTestingModule({
                 imports: [
                     RouterTestingModule,
@@ -56,7 +58,8 @@ describe('LmsPageComponent', () => {
                 ],
                 providers: [
                     { provide: MatDialog, useValue: dialogSpy},
-                    { provide: 'toolkit.toolkitConfig', useValue: {lmsStudyGuid: 'guid123'} }
+                    { provide: 'toolkit.toolkitConfig', useValue: {lmsStudyGuid: 'guid123'} },
+                    { provide: LoggingService, useValue: logServiceSpy }
                 ]
             })
             .compileComponents();
@@ -80,7 +83,7 @@ describe('LmsPageComponent', () => {
         joinButton.click();
         expect(dialogSpy.open).toHaveBeenCalledWith(JoinMailingListComponent, {
             ...JOIN_MAILING_LIST_DIALOG_SETTINGS,
-            data: { studyGuid: 'guid123' },
+            data: { studyGuid: 'guid123',  useLanguage: 'en' },
         });
     });
 });
