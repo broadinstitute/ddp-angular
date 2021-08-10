@@ -1,12 +1,11 @@
-import { Observable } from 'rxjs';
+import { Observable, } from 'rxjs';
+import { User } from '../interfaces/user';
+import { HttpClient, } from '@angular/common/http';
 import * as auth0 from 'auth0-js';
 import { tap } from 'rxjs/operators';
-import { User } from '../interfaces/user';
-import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { ConfigurationService } from '../config/configuration.service';
 import { Auth0LoginErrorResponse, SignUpResponse } from '../interfaces/auth0';
-
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +52,20 @@ export class Auth0ManualService {
         realm: this.config.dbName
       },
       errorHandler
+    );
+  }
+
+  resetPassword(email: string): Observable<string> {
+    return this.httpClient.post(
+      `https://${this.config.auth0Domain}/dbconnections/change_password`,
+      {
+        email,
+        connection: this.config.dbName,
+        client_id: this.config.auth0ClientId,
+      },
+      {
+        responseType: 'text'
+      }
     );
   }
 }

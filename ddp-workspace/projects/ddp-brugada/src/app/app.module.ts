@@ -33,6 +33,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { SignInOutComponent } from './components/sign-in-out/sign-in-out.component';
 import { MailingListModalComponent } from './components/mailing-list-modal/mailing-list-modal.component';
+import {ForgotPasswordComponent} from "./pages/forgot-password/forgot-password.component";
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { MailingListModalComponent } from './components/mailing-list-modal/maili
     LoginComponent,
     SignInComponent,
     SignInOutComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
