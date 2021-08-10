@@ -5,9 +5,8 @@
 
     .title {
         margin: 0 auto 5.625rem;
-        max-width: 1440px;
         text-align: center;
-        line-height: $static-page-header-height;
+        padding: 3.2rem 0;
         background-color: $accent-color-orange;
     }
 
@@ -57,6 +56,8 @@
             font-size: 1.13rem;
             padding: 1rem 2rem;
             line-height: 22px;
+            font-family: $primary-font-medium;
+            white-space: normal;
         }
 
         &__image {
