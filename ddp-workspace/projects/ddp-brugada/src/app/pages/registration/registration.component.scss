@@ -1,5 +1,7 @@
+@import '../../../styles/colors';
+
 .wrapper {
-  background: #f6f6f6;
+  background: map-get($colors, 'content-background');
   padding-top: 40px;
   padding-bottom: 75px;
   h1 {
@@ -7,7 +9,7 @@
     margin-bottom: 15px;
   }
   p {
-    color: #201413;
+    color: map-get($colors, 'content-text');
     margin-bottom: 60px;
   }
   .container {
