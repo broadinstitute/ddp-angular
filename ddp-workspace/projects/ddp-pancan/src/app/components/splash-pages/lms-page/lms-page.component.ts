@@ -29,7 +29,7 @@ export class LmsPageComponent implements OnInit {
         this.email = config.lmsPageEmail;
     }
 
-    notify(): void {
+    openJoinMailingList(): void {
         this.dialog.open(JoinMailingListComponent, {
             ...JOIN_MAILING_LIST_DIALOG_SETTINGS,
             data: {
