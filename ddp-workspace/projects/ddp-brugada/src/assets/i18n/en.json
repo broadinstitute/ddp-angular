@@ -615,5 +615,12 @@
       "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
       "EditButton": "Edit"
     }
+  },
+  "ProgressBar": {
+    "ConsentForm": "Consent Form",
+    "MedRelease": "Medical Release",
+    "BackgroundSurvey": "Background Survey",
+    "GenFamHistorySurvey": "Genetic & Family History Survey",
+    "AddSurveys": "Additional Surveys"
   }
 }
