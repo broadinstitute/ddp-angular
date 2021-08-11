@@ -77,4 +77,18 @@ export class Auth0ManualService {
       errorHandler,
     );
   }
+
+  resetPassword(email: string): Observable<string> {
+    return this.httpClient.post(
+      `https://${this.config.auth0Domain}/dbconnections/change_password`,
+      {
+        email,
+        connection: this.config.dbName,
+        client_id: this.config.auth0ClientId,
+      },
+      {
+        responseType: 'text',
+      },
+    );
+  }
 }

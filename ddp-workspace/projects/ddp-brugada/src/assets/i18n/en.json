@@ -298,6 +298,20 @@
       "Paragraph1": "We're sorry, but an error has occurred.",
       "Paragraph2": "Please wait a moment and retry. If the trouble persists, please email us at <a class=\"underlined-link\" href=\"mailto:info@linkmyheart.org\">info@linkmyheart.org</a> or call us at <a class=\"underlined-link\" href=\"tel:6177147560\">(617) 714-7560</a>."
     },
+    "ForgotPassword": {
+      "Title": "Reset your password",
+      "Subtitle": "Please enter your email address. We will send you an email to reset your password.",
+      "Paragraph": "If you haven't registered yet, <a class=\"underlined-link\" href=\"/join\">please do so here</a>.",
+      "EmailLabel": "Email Address",
+      "EmailPlaceholder": "yours@example.com",
+      "Errors": {
+        "Required": "Field is required",
+        "NotValid": "Provided email is not a valid"
+      },
+      "Buttons": {
+        "Submit": "Send Email"
+      }
+    },
     "MailingList": {
       "Title": "Mailing List",
       "Greeting": "Hello!",
@@ -448,7 +462,8 @@
     "ForgotPassword": "Don't remember your password?",
     "RestorePassword": "Restore password",
     "Register": "If you haven't registered yet, please",
-    "RegisterLink": "do so here."
+    "RegisterLink": "do so here.",
+    "CheckEmail": "If you have previously registered, please check your email to reset your password"
   },
   "SDK": {
     "SubmitButton": "Submit",

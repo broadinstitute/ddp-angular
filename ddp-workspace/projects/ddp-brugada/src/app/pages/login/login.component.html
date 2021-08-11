@@ -1,3 +1,7 @@
+<div *ngIf="showResetBar$ | async" class="reset-password">
+  {{ 'Login.CheckEmail' | translate }}
+</div>
+
 <div class="wrapper">
   <div class="container">
     <h1>{{ 'Login.Title' | translate }}</h1>

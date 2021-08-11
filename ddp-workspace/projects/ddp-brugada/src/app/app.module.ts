@@ -39,6 +39,7 @@ import { PasswordComponent } from './pages/password/password.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ActivityPageComponent } from './pages/activity-page/activity-page.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
@@ -63,6 +64,7 @@ import { AppRoutingModule } from './app-routing.module';
     DashboardComponent,
     UserActivitiesComponent,
     ActivityPageComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
