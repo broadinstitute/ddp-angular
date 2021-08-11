@@ -10,16 +10,12 @@ import { ErrorComponent } from './pages/error/error.component';
 import { AboutComponent } from './pages/about/about.component';
 import { LoginComponent } from './pages/login/login.component';
 import { PasswordComponent } from './pages/password/password.component';
-import {
-  IrbGuard,
-  BrowserGuard,
-  Auth0CodeCallbackComponent,
-  AuthGuard,
-} from 'ddp-sdk';
+import { IrbGuard, BrowserGuard, Auth0CodeCallbackComponent } from 'ddp-sdk';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ActivityPageComponent } from './pages/activity-page/activity-page.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
