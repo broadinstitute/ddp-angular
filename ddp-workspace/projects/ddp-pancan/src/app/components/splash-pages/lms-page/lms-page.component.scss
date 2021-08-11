@@ -1,74 +1,107 @@
 @import '../../../../styles/variables';
 
+.main-title {
+    font-family: $primary-font-medium;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: -0.2px;
+    line-height: 28px;
+    padding: 3.5rem 0;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    background-color: $accent-lms-color;
+}
+
 section {
     text-align: center;
     padding-left: 3rem;
     padding-right: 3rem;
 
-    &:nth-of-type(even) {
-        background-color: $section-grey-background-color;
-    }
-
     &.introduction {
-        padding: 5.125rem 5rem 1.5rem;
-
-        .flex {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-        }
+        padding-top: 4.375rem;
+        padding-bottom: 4.375rem;
+        background-color: #F8F8F8;
+        max-width: unset;
 
         .description {
-            flex: 0 1 auto;
-            text-align: left;
-            max-width: 651px;
-            padding-right: 2rem;
+            max-width: 560px;
+            margin: 0 auto;
+            color: #1D1B25;
 
-            .title, .join-cmi-btn {
-                margin: 0;
+            .title {
+                margin: 1.375rem 0 2rem;
             }
-        }
 
-        .image {
-            flex: 0 1 auto;
-        }
+            .text {
+                font-size: 1.125rem;
+                line-height: 28px;
+            }
 
-        .logos {
-            padding: 2rem 0 1rem;
-        }
-    }
+            .notify-text {
+                font-family: $primary-font-medium;
+                font-weight: 500;
+                font-size: 1rem;
+                letter-spacing: 0;
+                line-height: 28px;
+                margin: 2.5rem 0 1rem;
+            }
 
-    &.learn-more {
-        padding-top: 4.56rem;
-        padding-bottom: 3.875rem;
-
-        .learn-more-btn {
-            margin-left: 30px;
-        }
-    }
-
-    &.participate {
-        padding-top: 5.18rem;
-        padding-bottom: 3.75rem;
-        text-align: left;
-
-        ::ng-deep .container:last-child {
-            text-align: center;
+            .notify-btn {
+                font-family: $primary-font-medium;
+                font-weight: 500;
+                font-size: 1.125rem;
+                letter-spacing: 0;
+                line-height: 34px;
+                padding: 0.85rem 2.85rem;
+                border-radius: 4px;
+            }
         }
     }
 
     &.faq {
-        padding-top: 6.875rem;
-        padding-bottom: 2.875rem;
+        padding-top: 3.875rem;
+        padding-bottom: 5.44rem;
 
         .title {
-            margin-top: 0;
+            margin: 0 0 3.31rem;
         }
 
         .container {
-            margin: 4rem auto 3.125rem;
-            max-width: 1007px;
+            margin: 0 auto;
+            max-width: 800px;
         }
+
+        ::ng-deep .faq-block__question,
+        ::ng-deep .faq-block__text {
+            color: #1D1B25;
+            font-size: 1.375rem;
+            letter-spacing: 0;
+            line-height: 2rem;
+        }
+    }
+}
+
+.title {
+    font-size: 2.25rem;
+    line-height: 46px;
+}
+
+.mat-lms {
+    background-color: $primary-lms-color;
+    color: #FFFFFF;
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+    .main-title {
+        width: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    section,
+    .main-title {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
     }
 }

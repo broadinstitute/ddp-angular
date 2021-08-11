@@ -11,11 +11,11 @@
 
     <div class="contacts">
         <div translate class="contacts__label">App.Footer.Contacts</div>
-        <div>
+        <div *ngIf="email">
             <div translate class="contacts__item-label">App.Footer.Email</div>
             <a target="_blank" class="contacts__item" href="tel:{{email}}">{{email}}</a>
         </div>
-        <div>
+        <div *ngIf="phone">
             <div translate class="contacts__item-label">App.Footer.Phone</div>
             <a target="_blank" class="contacts__item" href="mailto:{{phone}}">{{phone}}</a>
         </div>

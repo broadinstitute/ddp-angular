@@ -403,62 +403,56 @@
             }
         },
         "LmsPage": {
+            "Title": "<span>Enrolling Soon:</span> <span>The Leiomyosarcoma (LMS) Project</span>",
             "IntroductionSection": {
-                "Title": "[ES]Have a direct impact on the future of leiomyosarcoma.",
-                "Text": "[ES]If you have ever been diagnosed with leiomyosarcoma, join a movement of patients to contribute your samples, medical records, and experiences to LMS research. Together, we can speed the development of future therapies."
-            },
-            "LearnMoreSection": {
-                "Title": "[ES]Enrollment begins in early 2022. Get notified when we launch.",
-                "EmailPlaceholder": "Su correo electrónico",
-                "Button": "[ES]Notify Me"
+                "Title": "Have a direct impact on the future of leiomyosarcoma.",
+                "Text": "If you have ever been diagnosed with leiomyosarcoma, join a movement of patients to contribute your samples, medical records, and experiences to LMS research. Together, we can speed the development of future therapies.",
+                "Notify": "Enrollment begins in early 2022. Get notified when we launch.",
+                "Button": "Notify Me"
             },
             "FAQ": {
                 "Questions": [
                     {
-                        "Question": "[ES]What is the goal of this project?",
+                        "Question": "What is the goal of this project?",
                         "Paragraphs": [
-                            "[ES]Our goal is to partner with patients with leiomyosarcoma around the United States and Canada in order to study their cancer using cutting-edge genomic and molecular research studies performed at the Broad Institute, and to leverage technology to allow patients to participate in these studies regardless of where they are treated.",
-                            "[ES]We will generate a large dataset that includes genomic, clinical, molecular, and patient-reported information that can be shared with the biomedical community in order to accelerate discoveries and better therapies for this disease. Cancer is not a single disease, and each medical record, tumor, and patient's story holds part of the puzzle. Our goal is to help the research community better understand the landscape of leiomyosarcoma and accelerate discoveries by making data more readily available.",
-                            "[ES]In addition, our team will study our approaches to engaging with the LMS community and work directly with patients to improve our methods. We will focus on hearing from groups that have been historically left out of research, like rural and underrepresented participants. What we learn together will help improve future patient-partnered studies and increase the diversity of patients we partner with in an evidence-based way, to ensure that new insights are relevant to and benefit as many patients as possible."
+                            "Our goal is to partner with patients with leiomyosarcoma around the United States and Canada in order to study their cancer using cutting-edge genomic and molecular research studies performed at the Broad Institute, and to leverage technology to allow patients to participate in these studies regardless of where they are treated.",
+                            "We will generate a large dataset that includes genomic, clinical, molecular, and patient-reported information that can be shared with the biomedical community in order to accelerate discoveries and better therapies for this disease. Cancer is not a single disease, and each medical record, tumor, and patient's story holds part of the puzzle. Our goal is to help the research community better understand the landscape of leiomyosarcoma and accelerate discoveries by making data more readily available.",
+                            "In addition, our team will study our approaches to engaging with the LMS community and work directly with patients to improve our methods. We will focus on hearing from groups that have been historically left out of research, like rural and underrepresented participants. What we learn together will help improve future patient-partnered studies and increase the diversity of patients we partner with in an evidence-based way, to ensure that new insights are relevant to and benefit as many patients as possible."
                         ]
                     },
                     {
-                        "Question": "[ES]What does participation look like?",
+                        "Question": "What does participation look like?",
                         "Paragraphs": [
-                            "[ES]Once the project is launched, people can join through the project website to share their information and experiences with us.",
-                            "[ES]<ul><li>Provide consent: The consent form will allow people to elect to share samples of saliva, blood, and/or tissue, as well as copies of their medical records. This document is several pages, but take your time.</li><li>Respond to simple surveys: In these surveys we ask questions about your experience with LMS, like when you were diagnosed and the types of treatments you’ve had. Participants may also be contacted by the team to participate in focus groups or additional surveys about their experiences participating in the project.</li><li>Provide a saliva and/or blood sample: We will send you a kit to collect a sample of your saliva and/or blood. We will compare the normal DNA in your saliva or blood to your tumor DNA.</li><li>Learn with us: If a participant elects to share archive tissue samples with the project and provides a saliva sample, we may be able to share learnings from the genomic sequencing of the tumor sample back with the participant. These shared learnings are intended to highlight how participant sample(s) are contributing to research and may not have implications for their treatment or prognosis.</li></ul>"
+                            "Once the project is launched, people can join through the project website to share their information and experiences with us.",
+                            "<ul><li>Provide consent: The consent form will allow people to elect to share samples of saliva, blood, and/or tissue, as well as copies of their medical records. This document is several pages, but take your time.</li><li>Respond to simple surveys: In these surveys we ask questions about your experience with LMS, like when you were diagnosed and the types of treatments you’ve had. Participants may also be contacted by the team to participate in focus groups or additional surveys about their experiences participating in the project.</li><li>Provide a saliva and/or blood sample: We will send you a kit to collect a sample of your saliva and/or blood. We will compare the normal DNA in your saliva or blood to your tumor DNA.</li><li>Learn with us: If a participant elects to share archive tissue samples with the project and provides a saliva sample, we may be able to share learnings from the genomic sequencing of the tumor sample back with the participant. These shared learnings are intended to highlight how participant sample(s) are contributing to research and may not have implications for their treatment or prognosis.</li></ul>"
                         ]
                     },
                     {
-                        "Question": "[ES]Who is eligible to participate?",
+                        "Question": "Who is eligible to participate?",
                         "Paragraphs": [
-                            "[ES]Anyone who has been diagnosed with leiomyosarcoma at any point may participate if they live in the USA or Canada."
+                            "Anyone who has been diagnosed with leiomyosarcoma at any point may participate if they live in the USA or Canada."
                         ]
                     },
                     {
-                        "Question": "[ES]Who is conducting this research?",
+                        "Question": "Who is conducting this research?",
                         "Paragraphs": [
-                            "[ES]This project is being conducted by the Broad Institute of MIT and Harvard, Dana-Farber Cancer Institute, and Count Me In, a non-profit research initiative that conducts patient-partnered studies of cancer. This project and Count Me In's Osteosarcoma Project is supported by a grant from the National Cancer Institute's Cancer Moonshot program and is part of the Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers. Count Me In is stewarded by three leading organizations: Emerson Collective, a California-based social change organization; the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; and the Dana-Farber Cancer Institute, a leading cancer hospital."
+                            "This project is being conducted by the Broad Institute of MIT and Harvard, Dana-Farber Cancer Institute, and Count Me In, a non-profit research initiative that conducts patient-partnered studies of cancer. This project and Count Me In's Osteosarcoma Project is supported by a grant from the National Cancer Institute's Cancer Moonshot program and is part of the Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers. Count Me In is stewarded by three leading organizations: Emerson Collective, a California-based social change organization; the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; and the Dana-Farber Cancer Institute, a leading cancer hospital."
                         ]
                     },
                     {
-                        "Question": "[ES]Is this research being conducted for profit?",
+                        "Question": "Is this research being conducted for profit?",
                         "Paragraphs": [
-                            "[ES]No. This project is a not-for-profit research endeavor. Our mission is to generate, aggregate, and freely share data with the research community in order to accelerate discoveries. All data will have readily identifiable information removed."
+                            "No. This project is a not-for-profit research endeavor. Our mission is to generate, aggregate, and freely share data with the research community in order to accelerate discoveries. All data will have readily identifiable information removed."
                         ]
                     }
                 ]
             },
-            "StayInformed": {
-                "Title": "[ES]Stay informed",
-                "Button": "[ES]Join Mailing List"
-            },
             "Footer": {
-                "Text": "[ES]The Leiomyosarcoma Project (LMSproject) is part of <span class='bold'>Count Me In</span>, a research initiative that brings together patients and scientists as partners to speed up discoveries in cancer research."
+                "Text": "The Leiomyosarcoma Project (LMSproject) is part of <span class='bold'>Count Me In</span>, a research initiative that brings together patients and scientists as partners to speed up discoveries in cancer research."
             }
         },
         "ImageAlts": {
-            "SplashPageImg": "Su impacto"
+            "SplashPageLogo": "Logo"
         },
         "Header": {
             "Logo": {
