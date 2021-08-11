@@ -12,10 +12,12 @@ import {
     GovernedParticipantsServiceAgent,
     UserActivityServiceAgent,
     ActivityInstance,
-    UserProfileServiceAgent
+    UserProfileServiceAgent,
+    WorkflowServiceAgent,
+    UserManagementServiceAgent
 } from 'ddp-sdk';
-import { map, take, filter, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { combineLatest, Observable, of, Subject } from 'rxjs';
+import { map, take, filter, switchMap, takeUntil, tap, mergeMap, finalize, catchError } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 
 interface DashboardParticipant {
@@ -32,7 +34,7 @@ interface DashboardParticipant {
             </section>
             <section class="section dashboard-title-section">
                 <div class="content content_medium content_wide content_dashboard">
-                    <div fxLayout="row">
+                    <div fxLayout="row" fxLayoutAlign="space-between center">
                         <h1 class="dashboard-title-section__title" fxLayoutAlign="center center">
                             <ng-container *ngIf="useParticipantDashboard; else regularDashboard">
                                 <mat-icon>perm_identity</mat-icon>
@@ -40,8 +42,12 @@ interface DashboardParticipant {
                             </ng-container>
                             <ng-template #regularDashboard><span translate>Toolkit.Dashboard.Title</span></ng-template>
                         </h1>
-                        <div *ngIf="toolkitConfig.addParticipantUrl">
-                            <button mat-stroked-button class="add-participant-button" (click)="addParticipant()">
+                        <div *ngIf="toolkitConfig.useParticipantDashboard">
+                            <button mat-stroked-button
+                                    class="add-participant-button button_small"
+                                    [disabled]="addParticipantButtonDisabled"
+                                    (click)="addParticipant()">
+                                <mat-icon>add</mat-icon>
                                 {{'Toolkit.Dashboard.AddParticipant' | translate}}
                             </button>
                         </div>
@@ -82,7 +88,7 @@ interface DashboardParticipant {
                 <section class="section dashboard-section" [class.full-width]="useParticipantDashboard">
                     <div class="content content_medium">
                         <mat-accordion *ngIf="useParticipantDashboard; else activitiesTable" hideToggle multi>
-                            <mat-expansion-panel *ngFor="let participant of dashboardParticipants; first as isFirst"
+                            <mat-expansion-panel *ngFor="let participant of dashboardParticipants; first as isFirst; trackBy: trackById"
                                                  class="dashboard-panel"
                                                  [expanded]="isFirst"
                                                  (opened)="openParticipantPanel(participant.userGuid);"
@@ -100,6 +106,15 @@ interface DashboardParticipant {
                                             {{'Toolkit.Dashboard.ShowPanel' | translate}}
                                             <mat-icon>expand_more</mat-icon>
                                         </ng-template>
+                                        <div class="remove-icon">
+                                            <button *ngIf="!isParticipantOperator(participant.userGuid)"
+                                                    mat-icon-button
+                                                    aria-label="'Toolkit.Dashboard.RemoveParticipant' | translate: {participant: participant.label}"
+                                                    [disabled]="participantToRemoveButtonDisabled.get(participant.userGuid)"
+                                                    (click)="removeParticipant(participant.userGuid); $event.stopPropagation();">
+                                                <mat-icon>delete</mat-icon>
+                                            </button>
+                                        </div>
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
                                 <ng-template matExpansionPanelContent>
@@ -124,14 +139,20 @@ interface DashboardParticipant {
         .full-width {
             width: 100%;
         }
+        .remove-icon {
+            width: 40px;
+        }
     `]
 })
 export class DashboardRedesignedComponent extends DashboardComponent implements OnInit, OnDestroy {
     public invitationId: string | null = null;
     public dashboardParticipants: DashboardParticipant[];
     public participantUserGuidToPanelIsOpen = new Map<string, boolean>();
+    public participantToRemoveButtonDisabled = new Map<string, boolean>();
     public participantToActivitiesStream = new Map<string, Observable<Array<ActivityInstance>>>();
+    public addParticipantButtonDisabled = false;
     private ngUnsubscribe = new Subject();
+    private removedParticipants$ = new BehaviorSubject<Array<string>>([]);
 
     constructor(
         private headerConfig: HeaderConfigurationService,
@@ -144,6 +165,8 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
         protected userActivityServiceAgent: UserActivityServiceAgent,
         private userProfileService: UserProfileServiceAgent,
         private translate: TranslateService,
+        private workflowService: WorkflowServiceAgent,
+        private userManagementService: UserManagementServiceAgent,
         @Inject('toolkit.toolkitConfig') public toolkitConfig: ToolkitConfigurationService) {
         super(router, _announcements, _participantsSearch, session, userActivityServiceAgent, toolkitConfig);
     }
@@ -168,14 +191,17 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
 
         return combineLatest([
             operatorParticipant$,
-            this.governedParticipantsAgent.getGovernedStudyParticipants(this.studyGuid)
-        ]).pipe(map(([operatorParticipant, participants]) => {
-            const result: DashboardParticipant[] = participants.map((participant, i) => ({
-                userGuid: participant.userGuid,
-                label: (participant.userProfile.firstName || participant.userProfile.lastName)
-                    ? `${participant.userProfile.firstName} ${participant.userProfile.lastName}`
-                    : `${this.translate.instant('Toolkit.Dashboard.ChildLabel')}${i > 0 ? ' #' + (i + 1) : ''}`,
-            }));
+            this.governedParticipantsAgent.getGovernedStudyParticipants(this.studyGuid),
+            this.removedParticipants$
+        ]).pipe(map(([operatorParticipant, participants, removedParticipants]) => {
+            const result: DashboardParticipant[] = participants
+                .filter(({userGuid}) => !removedParticipants.includes(userGuid))
+                .map((participant, i) => ({
+                    userGuid: participant.userGuid,
+                    label: (participant.userProfile.firstName || participant.userProfile.lastName)
+                        ? `${participant.userProfile.firstName} ${participant.userProfile.lastName}`
+                        : `${this.translate.instant('Toolkit.Dashboard.ChildLabel')}${i > 0 ? ' #' + (i + 1) : ''}`,
+                }));
             if (operatorParticipant) {
                 result.unshift({
                     userGuid: this.session.session.userGuid,
@@ -216,10 +242,32 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
     }
 
     public addParticipant(): void {
-        this.router.navigate([this.toolkitConfig.addParticipantUrl]);
+        this.addParticipantButtonDisabled = true;
+        this.governedParticipantsAgent.addParticipant(this.studyGuid)
+            .pipe(
+                take(1),
+                tap(userGuid => this.session.setParticipant(userGuid)),
+                mergeMap((userGuid) => this.workflowService.fromParticipantList()
+                    .pipe(catchError(() => this.userManagementService.deleteUser(userGuid)))),
+                finalize(() => this.addParticipantButtonDisabled = false)
+            )
+            .subscribe((response) => {
+                if (response) {
+                    this.navigate(response.instanceGuid);
+                }
+            });
     }
 
-    private isParticipantOperator(participantGuid: string): boolean {
+    public removeParticipant(userGuid): void {
+        this.participantToRemoveButtonDisabled.set(userGuid, true);
+        this.userManagementService.deleteUser(userGuid)
+            .pipe(finalize(() => this.participantToRemoveButtonDisabled.set(userGuid, false)))
+            .subscribe(() => {
+                this.removedParticipants$.next([...this.removedParticipants$.value, userGuid]);
+            });
+    }
+
+    public isParticipantOperator(participantGuid: string): boolean {
         return participantGuid === this.session.session?.userGuid;
     }
 
@@ -233,6 +281,10 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
             }),
             switchMap(() => this.userActivityServiceAgent.getActivities(of(this.studyGuid))),
             map((activities) => activities || []));
+    }
+
+    public trackById(_, participant: DashboardParticipant): string {
+        return participant.userGuid;
     }
 
     public ngOnDestroy(): void {

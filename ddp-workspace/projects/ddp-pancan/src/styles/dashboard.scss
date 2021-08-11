@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 $border-color: #E2E2E2;
 
@@ -95,6 +95,14 @@ toolkit-dashboard-redesigned .main {
         width: 7rem;
         padding: 0.625rem 1rem;
     }
+
+    .add-participant-button {
+        color: $primary-color;
+        border-color: $primary-color;
+        border-radius: 18px;
+        font-family: $primary-font-medium;
+    }
+
 }
 
 .infobox_dashboard {
