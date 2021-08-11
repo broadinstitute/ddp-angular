@@ -68,7 +68,8 @@
       "Title": "We want to help our communities and learn more about COVID-19 infection patterns in the Boston area.",
       "Text": "TestBoston is a COVID-19 study supported by Brigham and Women's Hospital and the Broad Institute of MIT and Harvard.",
       "Code": "I have an invitation code",
-      "Full": "We are currently fully enrolled.  Please check back in for future updates!"
+            "Full": "Given the increase in infections due to the delta variant in the greater Boston area, please let us know if you would like another COVID-19 ",
+            "Link": "at-home test kit."
     },
     "AboutSection": {
         "Title": "About the Study",
@@ -90,10 +91,23 @@
 
     },
     "FaqSection": {
-      "Title": "Answers to Common Questions about TestBoston",
+            "Title": "Frequently Asked Questions",
       "Text": "You can also call or email our study staff if you have questions about TestBoston:",
       "Items": [
         {
+                    "Question": "What is the TestBoston Study?",
+                    "Paragraphs": [
+                        "Our goal is to watch the infection rate of COVID-19 in Massachusetts over time. Some communities have higher infection rates than others. Some people catch COVID-19 and don’t have symptoms. We hope our study will help us understand COVID-19 better, and benefit patients with and without COVID in the future."
+                    ]
+                },
+                {
+                    "Question": "Can I still participate and get COVID-19 testing through this study?",
+                    "Paragraphs": [
+                        "If you are enrolled already in the study, you may request a test kit if you are symptomatic, have had a known COVID-19 exposure, or would just like to have asymptomatic testing. In order to request a test kit, please sign-in to your TestBoston.org participant account and complete a “Feeling Sick Survey” or email us at info@testboston.org .",
+                        "If you are not yet enrolled in the study, please fill in a brief screening survey <a class=\"Link Link_semi-bold\" href=\"https://rally.partners.org/study/testboston\" target=\"_blank\">here</a>. We are currently fully enrolled but we will let you know if we are able to increase enrollment in the near future."
+                    ]
+                },
+                {
           "Question": "Can anybody join this study?",
           "Paragraphs": [
             "Yes. TestBoston is open to all adults in the greater Boston area. To volunteer, please fill in a brief screening survey <a class=\"Link Link_semi-bold\" href=\"https://rally.partners.org/study/testboston\" target=\"_blank\">here</a>. If you volunteer and are selected to participate, you will be emailed an invitation code to register."
@@ -158,12 +172,6 @@
           "Paragraphs": [
             "TestBoston is a COVID-19 study supported by Brigham and Women's Hospital and the Broad Institute of MIT and Harvard. The people leading the study are infectious disease doctors at Brigham and Women’s Hospital.",
             "The Broad Institute is a leading, academic research institute located in Cambridge. The Broad Institute performs thousands of daily COVID-19 tests for the Departments of Health throughout Massachusetts, as well as for various COVID-19 studies in Massachusetts."
-          ]
-        },
-        {
-          "Question": "How long will the study last?",
-          "Paragraphs": [
-            "The study can last up to 6 months. Participants can decide to stop being in the study at any time."
           ]
         }
       ]
@@ -233,7 +241,8 @@
             "Saee Ratnaparkhi, MPH, Research Assistant",
             "Margaret McCarthy, MSc, Research Assistant",
             "Jessica Hung, Intern",
-            "Maura Benson, BS, Research Assistant"
+            "Maura Benson, BS, Research Assistant",
+            "James Kerr, Research Assistant"
           ]
         },
         {
