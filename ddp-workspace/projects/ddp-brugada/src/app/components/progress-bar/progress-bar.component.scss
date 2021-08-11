@@ -1,34 +1,42 @@
+@import '../../../styles/colors';
+
 .wrapper {
   position: relative;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 7.2rem;
+  margin-bottom: 5rem;
 }
 .bottom-line {
-  border-bottom: 3px solid grey;
+  border-bottom: 3px solid map-get($colors, 'grey');
   position: absolute;
   top: 25px;
-  left: 0;
-  width: 100%;
+  left: 25px;
+  width: 90%;
+}
+
+.step-container {
+  display: flex;
+  flex-direction: column;
 }
 
 .step-container_active {
-  color: red;
+  color: map-get($colors, 'scarlet');
 }
 
 .circular {
-  border: 3px solid grey;
+  border: 3px solid map-get($colors, 'grey');
   border-radius: 100%;
   display: inline-block;
   height: 50px;
   width: 50px;
   position: relative;
-  background: lightgrey;
+  background: map-get($colors, 'light-grey');
+  align-self: center;
 }
 
 .circular_active {
-  background: white;
-  border: 3px solid red;
+  background: map-get($colors, 'white');
+  border: 3px solid map-get($colors, 'scarlet');
 }
 
 .number {
@@ -41,4 +49,5 @@
 
 .step-paragraph {
   text-align: center;
+  max-width: 100px;
 }
