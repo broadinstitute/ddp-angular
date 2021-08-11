@@ -1,0 +1,44 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 7.2rem;
+}
+.bottom-line {
+  border-bottom: 3px solid grey;
+  position: absolute;
+  top: 25px;
+  left: 0;
+  width: 100%;
+}
+
+.step-container_active {
+  color: red;
+}
+
+.circular {
+  border: 3px solid grey;
+  border-radius: 100%;
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  position: relative;
+  background: lightgrey;
+}
+
+.circular_active {
+  background: white;
+  border: 3px solid red;
+}
+
+.number {
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+}
+
+.step-paragraph {
+  text-align: center;
+}
