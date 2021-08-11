@@ -12,7 +12,7 @@ import { ConfigurationService, MailingListServiceAgent } from 'ddp-sdk';
 })
 export class MailingListModalComponent implements OnInit {
   loading = false;
-  form = new FormGroup(
+  form: FormGroup = new FormGroup(
     {
       email: new FormControl('', [Validators.required, Validators.email]),
       emailConfirmation: new FormControl('', [

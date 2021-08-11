@@ -11,5 +11,5 @@ export enum Route {
   Error = 'error',
   Password = 'password',
   Auth = 'auth',
-  PasswordReset = 'reset-password'
+  PasswordReset = 'reset-password',
 }

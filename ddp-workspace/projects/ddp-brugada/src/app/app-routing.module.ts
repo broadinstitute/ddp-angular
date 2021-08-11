@@ -12,6 +12,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { PasswordComponent } from './pages/password/password.component';
 import { IrbGuard, BrowserGuard, Auth0CodeCallbackComponent } from 'ddp-sdk';
 import { RegistrationComponent } from './pages/registration/registration.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 
 const routes: Routes = [
@@ -67,6 +68,10 @@ const routes: Routes = [
     path: Route.Auth,
     component: Auth0CodeCallbackComponent,
     canActivate: [IrbGuard],
+  },
+  {
+    path: Route.PasswordReset,
+    component: ForgotPasswordComponent,
   },
   {
     path: '**',
