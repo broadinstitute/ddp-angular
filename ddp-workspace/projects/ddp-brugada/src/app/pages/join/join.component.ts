@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { switchMap, take, tap } from 'rxjs/operators';
 
 import {
@@ -12,6 +13,8 @@ import {
 
 import { WorkflowBuilderService } from 'toolkit';
 
+import { Route } from '../../constants/Route';
+
 @Component({
   selector: 'app-join',
   templateUrl: './join.component.html',
@@ -23,6 +26,7 @@ export class JoinComponent implements OnInit {
   readonly LOG_SOURCE = 'JoinComponent';
 
   constructor(
+    private router: Router,
     private sessionService: SessionMementoService,
     private temporaryUserService: TemporaryUserServiceAgent,
     private workflowService: WorkflowServiceAgent,
@@ -40,7 +44,13 @@ export class JoinComponent implements OnInit {
   }
 
   onSubmit(response: ActivityResponse): void {
-    console.log('response', response);
+    if (!response.allowUnauthenticated) {
+      this.router.navigateByUrl(Route.Registration);
+
+      return;
+    }
+
+    this.workflowBuilderService.getCommand(response).execute();
   }
 
   private getNext(): void {

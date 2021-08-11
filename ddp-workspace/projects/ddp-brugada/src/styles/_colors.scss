@@ -1,4 +1,5 @@
 $__scarlet: #c4353d;
+$__teal: #589297;
 $__white: #ffffff;
 
 $colors: (
@@ -10,7 +11,9 @@ $colors: (
   'beige': #f8f5ec,
   'beige:dark:1': #bfbaaf,
   'beige:dark:2': #5a5656,
-  'teal': #589297,
+  'teal': $__teal,
+  'teal:hover': darken($__teal, 3%),
+  'teal:active': darken($__teal, 7%),
   'dark-grey': #49505a,
   'light-grey': #e3e3e3,
   'white': $__white,
@@ -20,4 +23,5 @@ $colors: (
   'input-border-focus': #343434,
   'form-control-error': $__scarlet,
   'link': $__scarlet,
+  'success': #4a934a,
 );
