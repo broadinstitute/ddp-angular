@@ -17,7 +17,7 @@ import { PicklistRenderMode } from '../../../models/activity/picklistRenderMode'
 import { SearchHighlightPipe } from '../../../pipes/searchHighlight.pipe';
 import { SimpleChange } from '@angular/core';
 
-fdescribe('AutocompleteActivityPicklistQuestion', () => {
+describe('AutocompleteActivityPicklistQuestion', () => {
     const questionBlock = {
         picklistGroups: [
             {
