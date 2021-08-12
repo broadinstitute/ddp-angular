@@ -13,6 +13,7 @@ import { PasswordComponent } from './pages/password/password.component';
 import { IrbGuard, BrowserGuard, Auth0CodeCallbackComponent } from 'ddp-sdk';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { SessionExpiredComponent } from './pages/session-expired/session-expired.component';
 
 
 const routes: Routes = [
@@ -72,6 +73,10 @@ const routes: Routes = [
   {
     path: Route.PasswordReset,
     component: ForgotPasswordComponent,
+  },
+  {
+    path: Route.SessionExpired,
+    component: SessionExpiredComponent,
   },
   {
     path: '**',

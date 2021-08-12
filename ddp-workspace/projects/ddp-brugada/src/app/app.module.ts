@@ -1,3 +1,4 @@
+import { SessionExpiredComponent } from './pages/session-expired/session-expired.component';
 import { DdpModule } from 'ddp-sdk';
 import { ToolkitModule } from 'toolkit';
 import { NgModule } from '@angular/core';
@@ -34,6 +35,7 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { SignInOutComponent } from './components/sign-in-out/sign-in-out.component';
 import { MailingListModalComponent } from './components/mailing-list-modal/mailing-list-modal.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { SessionExpiredDialogComponent } from './components/session-expired-dialog/session-expired-dialog.component';
 
 
 @NgModule({
@@ -56,6 +58,8 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
     SignInComponent,
     SignInOutComponent,
     ForgotPasswordComponent,
+    SessionExpiredComponent,
+    SessionExpiredDialogComponent,
   ],
   imports: [
     BrowserModule,
