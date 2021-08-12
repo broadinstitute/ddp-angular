@@ -18,7 +18,9 @@ import {
     UserActivitiesComponent,
     LoggingService,
     ActivityServiceAgent,
-    AnalyticsEventsService
+    AnalyticsEventsService,
+    WorkflowServiceAgent,
+    UserManagementServiceAgent
 } from 'ddp-sdk';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable, of } from 'rxjs';
@@ -77,6 +79,8 @@ describe('DashboardRedesignedComponent', () => {
     let participantsSearchSpy: jasmine.SpyObj<ParticipantsSearchServiceAgent>;
     let userActivityServiceAgentSpy: jasmine.SpyObj<UserActivityServiceAgent>;
     let governedParticipantsSpy: jasmine.SpyObj<GovernedParticipantsServiceAgent>;
+    let workflowServiceSpy: jasmine.SpyObj<WorkflowServiceAgent>;
+    let userManagementServiceSpy: jasmine.SpyObj<UserManagementServiceAgent>;
     let sessionMock: SessionMementoService;
     let toolkitConfigMock: ToolkitConfigurationService;
     let profileMock: UserProfile;
@@ -99,6 +103,8 @@ describe('DashboardRedesignedComponent', () => {
         const announcementsSpy = jasmine.createSpyObj('participantsSearchSpy', { getMessages: of([]) });
         governedParticipantsSpy = jasmine.createSpyObj('governedParticipantsSpy', { getGovernedStudyParticipants: of([]) });
         userActivityServiceAgentSpy = jasmine.createSpyObj('userActivityServiceAgentSpy', { getActivities: of([]) });
+        workflowServiceSpy = jasmine.createSpyObj('workflowServiceSpy', { fromParticipantList: of([]) });
+        userManagementServiceSpy = jasmine.createSpyObj('userManagementServiceSpy', { deleteUser: of([]) });
         sessionMock = {
             isAuthenticatedAdminSession: () => true,
             setParticipant: () => {},
@@ -144,6 +150,8 @@ describe('DashboardRedesignedComponent', () => {
                 { provide: GovernedParticipantsServiceAgent, useValue: governedParticipantsSpy },
                 { provide: UserActivityServiceAgent, useValue: userActivityServiceAgentSpy },
                 { provide: UserProfileServiceAgent, useValue: userProfileServiceAgentMock },
+                { provide: WorkflowServiceAgent, useValue: workflowServiceSpy },
+                { provide: UserManagementServiceAgent, useValue: userManagementServiceSpy },
                 // UserActivitiesComponent dependencies
                 { provide: ActivityInstanceStatusServiceAgent, useValue: statusesServiceAgentSpy },
                 { provide: ActivityServiceAgent, useValue: {} },
@@ -212,7 +220,7 @@ describe('DashboardRedesignedComponent', () => {
     });
 
     it('should display add participant button', () => {
-        toolkitConfigMock.addParticipantUrl = 'test';
+        toolkitConfigMock.useParticipantDashboard = true;
         component.ngOnInit();
         fixture.detectChanges();
 
