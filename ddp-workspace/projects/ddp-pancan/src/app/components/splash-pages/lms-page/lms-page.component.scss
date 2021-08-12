@@ -1,0 +1,107 @@
+@import '../../../../styles/variables';
+
+.main-title {
+    font-family: $primary-font-medium;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: -0.2px;
+    line-height: 28px;
+    padding: 3.5rem 0;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    background-color: $accent-lms-color;
+}
+
+section {
+    text-align: center;
+    padding-left: 3rem;
+    padding-right: 3rem;
+
+    &.introduction {
+        padding-top: 4.375rem;
+        padding-bottom: 4.375rem;
+        background-color: #F8F8F8;
+        max-width: unset;
+
+        .description {
+            max-width: 560px;
+            margin: 0 auto;
+            color: #1D1B25;
+
+            .title {
+                margin: 1.375rem 0 2rem;
+            }
+
+            .text {
+                font-size: 1.125rem;
+                line-height: 28px;
+            }
+
+            .notify-text {
+                font-family: $primary-font-medium;
+                font-weight: 500;
+                font-size: 1rem;
+                letter-spacing: 0;
+                line-height: 28px;
+                margin: 2.5rem 0 1rem;
+            }
+
+            .notify-btn {
+                font-family: $primary-font-medium;
+                font-weight: 500;
+                font-size: 1.125rem;
+                letter-spacing: 0;
+                line-height: 34px;
+                padding: 0.85rem 2.85rem;
+                border-radius: 4px;
+            }
+        }
+    }
+
+    &.faq {
+        padding-top: 3.875rem;
+        padding-bottom: 5.44rem;
+
+        .title {
+            margin: 0 0 3.31rem;
+        }
+
+        .container {
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        ::ng-deep .faq-block__question,
+        ::ng-deep .faq-block__text {
+            color: #1D1B25;
+            font-size: 1.375rem;
+            letter-spacing: 0;
+            line-height: 2rem;
+        }
+    }
+}
+
+.title {
+    font-size: 2.25rem;
+    line-height: 46px;
+}
+
+.mat-lms {
+    background-color: $primary-lms-color;
+    color: #FFFFFF;
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+    .main-title {
+        width: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    section,
+    .main-title {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+    }
+}

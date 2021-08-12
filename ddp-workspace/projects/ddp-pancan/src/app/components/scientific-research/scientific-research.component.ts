@@ -10,9 +10,9 @@ export class ScientificResearchComponent {
     readonly linksMap = {
         Angio: 'https://ascproject.org/',
         Brain: 'https://braintumorproject.org/',
-        // CRC: 'Colorectal Cancer Project', // TODO: set correct URL
+        CRC: '/colorectal',
         ESC: 'https://escproject.org/',
-        // LMS: 'Leiomyosarcoma Project', // TODO: set correct URL
+        LMS: '/lms',
         MBC: 'https://www.mbcproject.org/',
         MBCSpanish: 'http://mbcprojectenespanol.org/',
         MPC: 'https://mpcproject.org/',

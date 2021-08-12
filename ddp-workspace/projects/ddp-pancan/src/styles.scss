@@ -1,12 +1,11 @@
 @import 'styles/variables';
 @import 'styles/fonts';
-@import 'styles/common';
+@import 'styles/static-page';
 @import 'styles/activities';
 @import 'styles/buttons';
 @import 'styles/redirect';
 @import 'styles/dashboard';
 @import 'styles/mixins';
-@import 'styles/static-page';
 
 html,
 body {
@@ -89,6 +88,10 @@ ddp-language-selector {
     padding-bottom: $footer-height;
     padding-top: $header-height;
     box-sizing: border-box;
+
+    &.lms-page {
+        padding-top: 0;
+    }
 }
 
 .Italic {
@@ -225,6 +228,10 @@ $tooltip-icon-size: 24px;
         height: $tooltip-icon-size;
         width: $tooltip-icon-size;
     }
+
+    &__box {
+        font-size: 1rem;
+    }
 }
 
 .section-spinner {
@@ -247,7 +254,56 @@ $tooltip-icon-size: 24px;
     margin: 3rem 0 0 0;
 }
 
-// static pages
-.static-page-content-section {
-    margin: 0 0 4rem 0;
+// participation section
+.participate-step-label {
+    font-size: 1rem;
+    font-family: $primary-font-medium;
+    letter-spacing: -0.07px;
+    line-height: 24px;
+    margin-right: 0.5rem;
+}
+
+.participate-step-time {
+    font-size: 1.5rem;
+    letter-spacing: -0.07px;
+    line-height: 24px;
+    margin-top: 1rem;
+}
+
+// for Welcome page / Colorectal page mostly
+section {
+    width: 100%;
+    box-sizing: border-box;
+
+    &.introduction {
+        max-width: 1440px;
+
+        .logos {
+            img:first-child {
+                margin-right: 5rem;
+            }
+        }
+    }
+
+    &.stay-informed {
+        padding-top: 5.375rem;
+        padding-bottom: 4.5rem;
+    }
+
+    &.join-cmi {
+        padding-top: 4.75rem;
+        padding-bottom: 6.19rem;
+    }
+
+    .btn {
+        font-size: 1.5rem;
+        padding: 1.5rem 2.3rem;
+        line-height: 22px;
+        white-space: normal;
+    }
+}
+
+.mat-colorectal {
+    background-color: $primary-colorectal-color !important;
+    color: #fff !important;
 }

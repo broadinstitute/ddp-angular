@@ -1,7 +1,13 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { MatInputModule } from '@angular/material/input';
-import { ActivityPicklistNormalizedGroup, ActivityPicklistOption, ActivityPicklistQuestionBlock, NGXTranslateService } from 'ddp-sdk';
+import {
+    ActivityPicklistNormalizedGroup,
+    ActivityPicklistOption,
+    ActivityPicklistQuestionBlock,
+    NGXTranslateService,
+    PicklistSortingPolicy
+} from 'ddp-sdk';
 import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
 import { of } from 'rxjs';
 import { AutocompleteActivityPicklistQuestion } from './autocompleteActivityPicklistQuestion.component';
@@ -9,6 +15,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PicklistRenderMode } from '../../../models/activity/picklistRenderMode';
 import { SearchHighlightPipe } from '../../../pipes/searchHighlight.pipe';
+import { SimpleChange } from '@angular/core';
 
 describe('AutocompleteActivityPicklistQuestion', () => {
     const questionBlock = {
@@ -54,7 +61,8 @@ describe('AutocompleteActivityPicklistQuestion', () => {
                 ReactiveFormsModule,
             ],
             providers: [
-                { provide: NGXTranslateService, useValue: ngxTranslateServiceSpy }
+                { provide: NGXTranslateService, useValue: ngxTranslateServiceSpy },
+                { provide: PicklistSortingPolicy, useValue: new PicklistSortingPolicy()}
             ],
             declarations: [AutocompleteActivityPicklistQuestion, SearchHighlightPipe]
         }).compileComponents();
@@ -241,5 +249,11 @@ describe('AutocompleteActivityPicklistQuestion', () => {
 
     it('should display custom empty string if nothing is entered', () => {
         expect(component.displayAutoComplete(null)).toBe('');
+    });
+
+    it('should disable autocomplete input when readonly is true', () => {
+        component.readonly = true;
+        component.ngOnChanges({ readonly: { currentValue: true } as SimpleChange});
+        expect(component.inputFormControl.disabled).toBeTrue();
     });
 });

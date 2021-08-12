@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
-import { AppRoutes } from '../../app-routes';
-import { JoinMailingListComponent, ToolkitConfigurationService } from 'toolkit';
 import { MatDialog } from '@angular/material/dialog';
+import { JoinMailingListComponent, ToolkitConfigurationService } from 'toolkit';
+import { AppRoutes } from '../../app-routes';
 import { JOIN_MAILING_LIST_DIALOG_SETTINGS } from '../../../utils/join-mailing-list-dialog-confg';
 
 @Component({
@@ -11,11 +11,7 @@ import { JOIN_MAILING_LIST_DIALOG_SETTINGS } from '../../../utils/join-mailing-l
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StayInformedSectionComponent {
-    @Input() title: string;
-    @Input() text: string;
-    @Input() btnText: string;
     @Input() isColorectal: boolean;
-
     readonly AppRoutes = AppRoutes;
     readonly twitterUrl: string;
     readonly facebookUrl: string;
@@ -29,9 +25,10 @@ export class StayInformedSectionComponent {
     }
 
     public openJoinMailingList(): void {
+        const info = this.isColorectal ? ['Colorectal'] : null;
         this.dialog.open(JoinMailingListComponent, {
             ...JOIN_MAILING_LIST_DIALOG_SETTINGS,
-            data: { info: this.isColorectal ? ['Colorectal'] : null },
+            data: { info },
         });
     }
 }

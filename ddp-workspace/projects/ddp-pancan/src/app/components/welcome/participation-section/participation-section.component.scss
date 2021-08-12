@@ -1,5 +1,4 @@
 @import '../../../../styles/variables';
-@import '../../../../styles/common.scss';
 
 :host {
     .title {
@@ -7,28 +6,33 @@
     }
 
     .container {
-        max-width: $landing-page-container-width;
+        max-width: 1300px;
         margin: 0 auto;
 
         &.steps {
             display: flex;
             justify-content: space-between;
+            flex-wrap: wrap;
         }
     }
 
     .step {
-        margin: 0 1.5rem 0 0;
+        margin: 0 1.5rem 1.5rem 0;
         font-size: 1rem;
+        width: 295px;
 
-        &:last-child {
-            margin-right: 0;
+        &__image-container {
+            height: 240px;
+            background-color: white;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            align-items: center;
         }
 
         &__image {
             display: block;
-            margin: 0 auto 1.63rem;
+            margin: 0 auto;
             position: relative;
-            left: -10%;
         }
 
         &__title {
@@ -44,6 +48,31 @@
 
         &__description {
             max-width: 240px;
+            margin-top: 1rem;
+            line-height: 1.75rem;
+        }
+
+        &__info {
+            padding: 19px 19px 36px 26px;
+            position: relative;
+            height: 219px;
+            box-sizing: border-box;
+        }
+
+        &__info-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: white;
+            opacity: 0.8;
+            border-radius: 0 0 10px 10px;
+        }
+
+        &__info-text {
+            position: relative;
+            z-index: 1;
         }
     }
 }
@@ -54,14 +83,12 @@
     text-align: center;
 }
 
-.btn {
-    font-size: 1.13rem;
-    padding: 1rem 2rem;
-    line-height: 22px;
-}
-
 .learn-more-btn {
     margin-top: 2.81rem;
+}
+
+.container__button {
+    text-align: center;
 }
 
 @media screen and (max-width: $tablet-breakpoint) {
@@ -74,32 +101,25 @@
             justify-content: center !important;
 
             .step {
-                flex: unset;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
                 margin: 0;
                 min-width: 375px;
 
                 &__image {
                     width: 250px;
                     height: 250px;
-                    left: 0;
+                }
+
+                &__image-container {
+                    height: 320px;
                 }
 
                 &__description {
                     max-width: 350px;
                 }
-            }
-        }
-    }
-}
 
-@media screen and (max-width: $mobile-breakpoint) {
-    .container {
-        &.steps {
-            .step__description {
-                max-width: 240px;
+                &__info {
+                    height: auto;
+                }
             }
         }
     }

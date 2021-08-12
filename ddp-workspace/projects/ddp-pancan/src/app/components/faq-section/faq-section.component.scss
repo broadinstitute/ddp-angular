@@ -39,12 +39,6 @@ $question-padding: 1.5rem;
         &:last-child {
             border-bottom: 2px solid $border-color;
         }
-
-        &.darkerBackground {
-            background-color: $section-grey-background-color;
-            border-color: $dark-grey-border-color;
-            border-width: 1px;
-        }
     }
 
     .mat-accordion .mat-expansion-panel {
