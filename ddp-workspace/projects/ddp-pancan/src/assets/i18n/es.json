@@ -85,7 +85,7 @@
             "Steps": [
                 {
                     "Step": "PASO 1",
-                    "Time": "(de 10 a 15 minutos)",
+                    "Time": "de 10 a 15 minutos",
                     "Title": "Dé su consentimiento para el estudio",
                     "Text": "Esta sección consiste de varias páginas, así que tómese el tiempo que desee. Su progreso se guardará automáticamente para que pueda regresar más tarde. Si se inscribe por su hijo(a) o junto con su hijo(a), dependiendo de la edad del niño(a) también podríamos pedirle que dé su “asentimiento” o que acepte que también desea participar en el estudio.",
                     "Button": "Ver el documento de consentimiento",
@@ -93,7 +93,7 @@
                 },
                 {
                     "Step": "PASO 2",
-                    "Time": "(5 minutos)",
+                    "Time": "5 minutos",
                     "Title": "Indique dónde ha recibido tratamiento",
                     "Text": "Indique dónde ha recibido tratamiento para su cáncer. Les preguntamos a los pacientes dónde han recibido tratamiento para poder solicitar sus registros medicos y, si corresponde, el tejido almacenado de su tumor.",
                     "Button": "Ver el formulario de divulgación de información médica",
@@ -101,7 +101,7 @@
                 },
                 {
                     "Step": "PASO 3",
-                    "Time": "(5 minutos)",
+                    "Time": "5 minutos",
                     "Title": "Responda encuestas acerca de usted y su experiencia con el cáncer",
                     "Text": "En estas encuestas hacemos preguntas sobre su experiencia con el cáncer, como el tipo de cáncer que le diagnosticaron, cuándo se lo diagnosticaron y los tipos de tratamientos que recibió.",
                     "Button": "Ver encuestas",
@@ -109,7 +109,7 @@
                 },
                 {
                     "Step": "PASO 4",
-                    "Time": "(10 minutos)",
+                    "Time": "10 minutos",
                     "Title": "Proporcione una muestra de saliva y/o de sangre",
                     "Text": "Le enviaremos un kit para obtener una muestra de su saliva y/o su sangre. Estudiaremos estas muestras para ayudar a mejorar nuestros conocimientos sobre el cáncer.",
                     "Button": "Ver las instrucciones para el kit",
@@ -478,14 +478,14 @@
     },
     "Toolkit": {
         "AgeUpThankYou": {
-            "Title": "[es]Thank you!",
-            "EmailVerified": "[es]Your email address has been verified. We will be sending an email with more information on re-consent shortly after your birthday.",
+            "Title": "[ES]Thank you!",
+            "EmailVerified": "[ES]Your email address has been verified. We will be sending an email with more information on re-consent shortly after your birthday.",
             "EmailCollected": {
-                "TextPt1": "[es]An email will be sent to your child to confirm their address and tell them about the upcoming re-consent process. If you need to change the email you provided for your child, please contact the project team at",
-                "TextPt2": "[es]or",
-                "Button": "[es]Go to Dashboard"
+                "TextPt1": "[ES]An email will be sent to your child to confirm their address and tell them about the upcoming re-consent process. If you need to change the email you provided for your child, please contact the project team at",
+                "TextPt2": "[ES]or",
+                "Button": "[ES]Go to Dashboard"
             },
-            "ImageAlt": "[es]Email sent"
+            "ImageAlt": "[ES]Email sent"
         },
         "StayInformed": {
             "Title": "¡Manténgase Informada/o!",

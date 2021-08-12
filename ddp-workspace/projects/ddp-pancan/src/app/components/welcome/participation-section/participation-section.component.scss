@@ -125,3 +125,10 @@
     }
 }
 
+@media screen and (max-width: $mobile-breakpoint) {
+    .container.steps {
+        .step {
+            min-width: unset;
+        }
+    }
+}
