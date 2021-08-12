@@ -21,7 +21,8 @@ $dialog-arrow-half-width: $dialog-arrow-width / 2;
 
         & > button {
             height: var(--modal-activity-block-delete-dialog-button-height, 40px);
-            width: var(--modal-activity-block-delete-dialog-button-width, 9rem);
+            width: var(--modal-activity-block-delete-dialog-button-width, auto);
+            min-width: 9rem;
         }
     }
 }
