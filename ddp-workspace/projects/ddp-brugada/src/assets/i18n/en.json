@@ -379,7 +379,12 @@
       "PASSWORD_RESET_LINK_EXPIRED": "Your password reset link has expired."
     },
     "SessionExpired": {
-      "Text": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
+      "Text": {
+        "H1": "Session expired",
+        "Pt1": "You were away for a while so the system logged you out. To continue, please log in again.",
+        "Pt2": "Thank you."
+      },
+      "LogInButton": "Sign in"
     },
     "LoginLanding": {
       "Text": "Please wait. You will be redirected to a destination soon..."
