@@ -22,8 +22,9 @@
   }
 }
 
-.bullet-list {
-  padding-left: 1.25em;
+.bullet-list,
+.numbered-list {
+  padding-left: 1em;
 
   li {
     margin: 0.5em 0;
@@ -38,5 +39,30 @@
 .ddp-required-question-prompt {
   .activity-question-title::after {
     content: ' *';
+  }
+}
+
+[class^='composite-answer'] {
+  .Title-text {
+    align-items: flex-end !important;
+
+    span {
+      margin: 1.65em 0 0.25em;
+
+      font-size: 2.4rem;
+      font-weight: bold;
+
+      @include media-sm {
+        font-size: 2rem;
+      }
+    }
+
+    .mat-icon-button {
+      margin-top: 2.4rem;
+
+      .mat-icon {
+        font-size: 24px;
+      }
+    }
   }
 }
