@@ -12,8 +12,10 @@ import { LoginComponent } from './pages/login/login.component';
 import { PasswordComponent } from './pages/password/password.component';
 import { IrbGuard, BrowserGuard, Auth0CodeCallbackComponent } from 'ddp-sdk';
 import { RegistrationComponent } from './pages/registration/registration.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ActivityPageComponent } from './pages/activity-page/activity-page.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
-
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -43,6 +45,16 @@ const routes: Routes = [
     canActivate: [BrowserGuard, IrbGuard],
   },
   {
+    path: Route.Dashboard,
+    component: DashboardComponent,
+    canActivate: [BrowserGuard, IrbGuard, AuthGuard],
+  },
+  {
+    path: Route.ActivityId,
+    component: ActivityPageComponent,
+    canActivate: [BrowserGuard, IrbGuard, AuthGuard],
+  },
+  {
     path: Route.Error,
     component: ErrorComponent,
     canActivate: [BrowserGuard, IrbGuard],
@@ -53,11 +65,11 @@ const routes: Routes = [
   },
   {
     path: Route.Registration,
-    component: RegistrationComponent
+    component: RegistrationComponent,
   },
   {
     path: Route.Login,
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: Route.LoginLanding,
@@ -80,7 +92,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'top',
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

@@ -6,8 +6,8 @@
             <div class="step__time participate-step-time" *ngIf="step.Time">
                 <mat-icon>access_time</mat-icon>{{step.Time}}
             </div>
-            <h2 class="step__title static-page-title">{{step.Title}}</h2>
-            <p class="step__text static-page-paragraph-text">{{step.Text}}</p>
+            <h2 class="step__title">{{step.Title}}</h2>
+            <p class="step__text">{{step.Text}}</p>
 
             <a mat-stroked-button *ngIf="step.Button && stepsHref[i]"
                target="_blank"

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { AppRoutes } from '../../app-routes';
 
 @Component({
@@ -8,5 +8,9 @@ import { AppRoutes } from '../../app-routes';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class JoinCmiSectionComponent {
+    @Input() isColorectalTheme: boolean;
+    @Input() title = 'App.HomePage.CountMeInSection.Title';
+    @Input() text = 'App.HomePage.CountMeInSection.Text';
+    @Input() btnText = 'App.HomePage.JoinCountMeInButton';
     readonly AppRoutes = AppRoutes;
 }

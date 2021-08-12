@@ -43,6 +43,23 @@
     }
   }
 
+  &--teal {
+    background: map-get($colors, 'teal');
+
+    color: map-get($colors, 'white');
+
+    &:not(:disabled) {
+      &:focus,
+      &:hover {
+        background: map-get($colors, 'teal:hover');
+      }
+
+      &:active {
+        background: map-get($colors, 'teal:active');
+      }
+    }
+  }
+
   &--white {
     background: map-get($colors, 'white');
 

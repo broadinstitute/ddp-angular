@@ -7,17 +7,20 @@ $mobile-breakpoint: 375px;
 $primary-font: Untitled-Sans-Regular;
 $primary-font-light: Untitled-Sans-Light;
 $primary-font-medium: Untitled-Sans-Medium;
-$secondary-font: Source Serif Pro;
 
 // Other
-$header-height: 6rem;
+$header-height: 7.625rem;
 $footer-height: 14.94rem;
 $splash-page-footer-height: 18.19rem;
-$landing-page-container-width: 1200px;
+$landing-page-container-width: 1260px;
 
 // Colors
 $text-color: #000000;
 $primary-color: #7154FF;
+$primary-colorectal-color: #0174CA;
+$accent-colorectal-color: #ACE1FF;
+$primary-lms-color: #9953CE;
+$accent-lms-color: #C59CE4;
 $grey-text-color: #59585F;
 $grey-button-color: #a8a8a8;
 $section-grey-background-color: #F6F7FA;
@@ -27,3 +30,6 @@ $activity-step-inactive: #5a42d0;
 $footer-background: #131314;
 $footer-divider-color: #444444;
 $checkbox-color: #ACABB0;
+
+$accent-color-green: #B1F3E2;
+$accent-color-orange: #FFCE7C;

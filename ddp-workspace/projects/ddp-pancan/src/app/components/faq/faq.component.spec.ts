@@ -13,7 +13,8 @@ import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-transla
 import { FaqSectionComponent } from '../faq-section/faq-section.component';
 import { FaqComponent } from './faq.component';
 import { CommunicationService } from 'toolkit';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
@@ -53,8 +54,12 @@ describe('FaqComponent', () => {
     let component: FaqComponent;
     let fixture: ComponentFixture<FaqComponent>;
     let loader: HarnessLoader;
+    let dialogSpy: jasmine.SpyObj<MatDialog>;
+    let activatedRouteSpy: jasmine.SpyObj<ActivatedRoute>;
 
     beforeEach(async () => {
+        dialogSpy = jasmine.createSpyObj('dialogSpy', ['open']);
+        activatedRouteSpy = jasmine.createSpyObj('activatedRouteSpy', ['snapshot']);
         await TestBed.configureTestingModule({
             declarations: [
                 FaqComponent,
@@ -72,6 +77,9 @@ describe('FaqComponent', () => {
             ],
             providers: [
                 { provide: CommunicationService, useValue: {} },
+                { provide: MatDialog, useValue: dialogSpy},
+                { provide: 'toolkit.toolkitConfig', useValue: {} },
+                { provide: ActivatedRoute, useValue: activatedRouteSpy}
             ],
         })
             .compileComponents();
