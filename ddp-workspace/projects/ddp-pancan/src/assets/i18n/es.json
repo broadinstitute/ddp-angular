@@ -494,10 +494,10 @@
         },
         "Dashboard": {
             "Title": "Tablero de Progreso",
-            "ParticipantsTitle": "[ES]Participant Dashboard",
+            "ParticipantsTitle": "Su Tablero de Progreso",
             "AddParticipant": "[ES]Add Participant",
-            "ShowPanel": "[ES]Show",
-            "HidePanel": "[ES]Hide",
+            "ShowPanel": "Mostrar",
+            "HidePanel": "Esconder",
             "UserLabel": "Usted",
             "ChildLabel": "Su hijo(a)"
         },
