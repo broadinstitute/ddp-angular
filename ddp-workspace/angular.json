@@ -2472,6 +2472,11 @@
                 "glob": "pepperConfig.js",
                 "input": "projects/ddp-pancan/output-config/",
                 "output": "assets/config"
+              },
+              {
+                "glob": "*.pdf",
+                "input": "projects/ddp-pancan/src/pdf/",
+                "output": "/"
               }
             ],
             "styles": [
