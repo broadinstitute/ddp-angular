@@ -1,8 +1,8 @@
+import { APP_INITIALIZER, Injector, Provider } from '@angular/core';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
-import { LoggingService, LanguageService } from 'ddp-sdk';
-import { APP_INITIALIZER, Injector, Provider } from '@angular/core';
 
+import { LoggingService, LanguageService } from 'ddp-sdk';
 
 export function translateFactory(
   translate: TranslateService,

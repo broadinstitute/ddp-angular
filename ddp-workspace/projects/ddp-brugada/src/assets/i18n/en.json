@@ -8,7 +8,8 @@
         "Physicians": "For Physicians",
         "MailingList": "Mailing List",
         "Join": "Join the Brugada Project",
-        "Login": "Log in"
+        "Login": "Log in",
+        "Dashboard": "Dashboard"
       },
       "LogoAlt": "Brugada Project"
     },
@@ -344,6 +345,28 @@
         "Communication": "We're sorry, but an error has occurred. Please try again.",
         "Invalid": "Password is required"
       }
+    },
+    "Dashboard": {
+      "Title": "Dashboard"
+    },
+    "UserActivities": {
+      "Columns": {
+        "Name": "Name",
+        "Summary": "Summary",
+        "Status": "Status",
+        "Actions": "Actions"
+      },
+      "Status": {
+        "CREATED": "New",
+        "IN_PROGRESS": "In Progress",
+        "COMPLETE": "Complete"
+      },
+      "Button": {
+        "Start": "Start",
+        "Continue": "Continue",
+        "View": "View",
+        "Update": "Update"
+      }
     }
   },
   "Common": {
@@ -462,7 +485,7 @@
     "StartButton": "Start",
     "AgreeButton": "I agree",
     "ReportButton": "Report",
-    "NotAgreeButton": "I'm not ready to agree",
+    "NotAgreeButton": "I am not ready to agree",
     "ValidateError": "Please complete all required fields.",
     "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting.",
     "SignInOut": {

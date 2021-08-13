@@ -20,5 +20,6 @@ export const AppRoutes = {
     ScientificResearch: 'scientific-research',
     FAQ: 'faq',
     JoinList: 'join-list',
-    ColorectalPage: 'colorectal'
+    ColorectalPage: 'colorectal',
+    LMS: 'lms'
 };

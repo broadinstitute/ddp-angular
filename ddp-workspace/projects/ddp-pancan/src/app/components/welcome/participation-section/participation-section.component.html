@@ -1,23 +1,39 @@
 <h2 class="title static-page-title" translate>App.HomePage.ParticipateSection.Title</h2>
 <div class="steps container">
-    <figure class="step" *ngFor="let step of 'App.HomePage.ParticipateSection.Steps' | translate; let i = index;">
-        <img class="step__image"
-             [src]="'assets/images/' + participationStepsImages[i]"
-             width="150" height="150"
-             [alt]="step.ImageAlt">
-
-        <figcaption class="step__title participate-step-label">{{step.Title}}</figcaption>
-        <div class="step__time participate-step-time" *ngIf="step.Time">
-            <mat-icon>access_time</mat-icon>{{step.Time}}
+    <div class="step" *ngFor="let step of 'App.HomePage.ParticipateSection.Steps' | translate; let i = index;">
+        <div class="step__image-container">
+            <img class="step__image"
+                 [src]="'assets/images/' + participationStepsImages[i]"
+                 width="150" height="150"
+                 [alt]="step.ImageAlt">
         </div>
-        <div class="step__description static-page-paragraph-text">{{step.Description}}</div>
-    </figure>
+        <div class="step__info">
+            <div class="step__info-background"></div>
+            <div class="step__info-text">
+                <div class="step__title participate-step-label">{{step.Title}}</div>
+                <div class="step__time participate-step-time" *ngIf="step.Time">
+                    <mat-icon>access_time</mat-icon>{{step.Time}}
+                </div>
+                <div class="step__description static-page-paragraph-text">{{step.Description}}</div>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="container">
-    <a mat-stroked-button
+<div class="container container__button">
+    <a *ngIf="isColorectalTheme; else strokedButton"
+       mat-flat-button
        [routerLink]="'/' + AppRoutes.Participation"
-       class="btn learn-more-btn center small-letter-spacing button button_small button_secondary">
+       class="btn learn-more-btn center small-letter-spacing button button_small">
         {{'App.HomePage.ParticipateSection.LearnMoreAboutParticipationButton' | translate}}
+        <mat-icon>chevron_right</mat-icon>
     </a>
+    <ng-template #strokedButton>
+        <a mat-stroked-button
+           [routerLink]="'/' + AppRoutes.Participation"
+           class="btn learn-more-btn center small-letter-spacing button button_small button_secondary">
+            {{'App.HomePage.ParticipateSection.LearnMoreAboutParticipationButton' | translate}}
+            <mat-icon>chevron_right</mat-icon>
+        </a>
+    </ng-template>
 </div>
 

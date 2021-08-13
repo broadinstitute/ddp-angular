@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SessionMementoService } from 'ddp-sdk';
 import { AppRoutes } from '../app-routes';
 
@@ -9,10 +9,10 @@ import { AppRoutes } from '../app-routes';
             <ddp-sign-in-out></ddp-sign-in-out>
         </div>
         <a mat-flat-button
-           class="action-button btn-auth button button_small"
+           class="action-button btn-auth button button_medium"
            [class.dashboard-button]="isAuthenticated"
            [routerLink]="isAuthenticated ? AppRoutes.Dashboard : AppRoutes.CountMeIn"
-           color="primary">
+           [color]="isColorectalTheme ? 'colorectal' : 'primary'">
             <ng-container *ngIf="isAuthenticated; else join">
                 <mat-icon>perm_identity</mat-icon>
                 <span translate>App.Navigation.Dashboard</span>
@@ -22,6 +22,7 @@ import { AppRoutes } from '../app-routes';
     styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent {
+    @Input() isColorectalTheme: boolean;
     readonly AppRoutes = AppRoutes;
     constructor(private session: SessionMementoService) { }
 

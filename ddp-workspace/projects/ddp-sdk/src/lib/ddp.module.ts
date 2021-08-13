@@ -2,22 +2,18 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Title } from '@angular/platform-browser';
 import { A11yModule } from '@angular/cdk/a11y';
-
 // ngx-translate
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NGXTranslateService } from './services/internationalization/ngxTranslate.service';
-
 // CookieService
 import { CookieModule } from 'ngx-cookie';
-
 // Angular JWT
-import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
-
+import { JWT_OPTIONS, JwtModule } from '@auth0/angular-jwt';
 // Shared components & services
 import { ConfigurationService } from './services/configuration.service';
 import { SessionMementoService } from './services/sessionMemento.service';
@@ -25,7 +21,6 @@ import { AnalyticsEventsService } from './services/analyticsEvents.service';
 import { IrbPasswordService } from './services/irbPassword.service';
 import { BrowserContentService } from './services/browserContent.service';
 import { LanguageService } from './services/internationalization/languageService.service';
-
 // Authentication components
 import { Auth0AdapterService } from './services/authentication/auth0Adapter.service';
 import { Auth0RenewService } from './services/authentication/auth0Renew.service';
@@ -202,6 +197,7 @@ import { FileAnswerMapperService } from './services/fileAnswerMapper.service';
 import { StickyScrollDirective } from './directives/sticky-scroll.directive';
 import { AutocompleteActivityPicklistQuestion } from './components/activityForm/picklist/autocompleteActivityPicklistQuestion.component';
 import { SearchHighlightPipe } from './pipes/searchHighlight.pipe';
+import { PicklistSortingPolicy } from './services/picklistSortingPolicy.service';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter = () => sessionService.token;
@@ -327,6 +323,12 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         InvitationPipe,
         FileAnswerMapperService,
         ParticipantsSearchServiceAgent,
+        // Angular Injection does not like that we have optional arguments in constructor
+        // Need to create our default instance ourselves
+        {
+            provide: PicklistSortingPolicy,
+            useValue: new PicklistSortingPolicy()
+        },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,

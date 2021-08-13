@@ -1,0 +1,108 @@
+<table *ngIf="activities" mat-table [dataSource]="activities">
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>
+      {{ 'App.UserActivities.Columns.Name' | translate }}
+    </th>
+
+    <td mat-cell *matCellDef="let activity">
+      <span class="mobile-column-name">
+        {{ 'App.UserActivities.Columns.Name' | translate }}
+      </span>
+
+      {{ activity.activityName }}
+    </td>
+  </ng-container>
+
+  <!-- Summary Column -->
+  <ng-container matColumnDef="summary">
+    <th mat-header-cell *matHeaderCellDef>
+      {{ 'App.UserActivities.Columns.Summary' | translate }}
+    </th>
+
+    <td mat-cell *matCellDef="let activity">
+      <span class="mobile-column-name">
+        {{ 'App.UserActivities.Columns.Summary' | translate }}
+      </span>
+
+      {{ activity.activitySummary || 'TBD' }}
+    </td>
+  </ng-container>
+
+  <!-- Status Column -->
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef>
+      {{ 'App.UserActivities.Columns.Status' | translate }}
+    </th>
+
+    <td mat-cell *matCellDef="let activity">
+      <span class="mobile-column-name">
+        {{ 'App.UserActivities.Columns.Status' | translate }}
+      </span>
+
+      <div class="status">
+        <mat-icon [ngClass]="activity.statusCode">
+          {{ icons[activity.statusCode] }}
+        </mat-icon>
+
+        {{ 'App.UserActivities.Status.' + activity.statusCode | translate }}
+      </div>
+    </td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>
+      {{ 'App.UserActivities.Columns.Actions' | translate }}
+    </th>
+
+    <td mat-cell *matCellDef="let activity">
+      <ng-container [ngSwitch]="activity.statusCode">
+        <ng-container *ngSwitchCase="ActivityStatusCodes.CREATED">
+          <button
+            type="button"
+            class="btn btn--scarlet"
+            (click)="onStartActivity(activity)"
+          >
+            {{ 'App.UserActivities.Button.Start' | translate }}
+          </button>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="ActivityStatusCodes.IN_PROGRESS">
+          <button
+            type="button"
+            class="btn btn--teal"
+            (click)="onContinueActivity(activity)"
+          >
+            {{ 'App.UserActivities.Button.Continue' | translate }}
+          </button>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="ActivityStatusCodes.COMPLETE">
+          <ng-container *ngIf="activity.readonly">
+            <button
+              type="button"
+              class="btn btn--scarlet"
+              (click)="onViewActivity(activity)"
+            >
+              {{ 'App.UserActivities.Button.View' | translate }}
+            </button>
+          </ng-container>
+
+          <ng-container *ngIf="!activity.readonly">
+            <button
+              type="button"
+              class="btn btn--scarlet"
+              (click)="onUpdateActivity(activity)"
+            >
+              {{ 'App.UserActivities.Button.Update' | translate }}
+            </button>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
