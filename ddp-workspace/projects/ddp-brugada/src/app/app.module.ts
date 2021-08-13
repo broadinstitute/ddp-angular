@@ -34,7 +34,7 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { SignInOutComponent } from './components/sign-in-out/sign-in-out.component';
 import { MailingListModalComponent } from './components/mailing-list-modal/mailing-list-modal.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
-
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +56,7 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
     SignInComponent,
     SignInOutComponent,
     ProgressBarComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,4 +82,4 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
