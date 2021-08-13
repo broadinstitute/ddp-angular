@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Activity } from '../../interfaces/activity';
 
 @Component({
   selector: 'app-progress-bar',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./progress-bar.component.scss']
 })
 export class ProgressBarComponent implements OnInit {
+  activeActivityNumber: number;
 
-  constructor() { }
+  @Input() activities: Activity[];
+  @Input() activeActivityId: number;
+
+  constructor() {}
 
   ngOnInit(): void {
+    const activeActivity = this.activities.find(activity => activity.id === this.activeActivityId);
+    this.activeActivityNumber = this.activities.indexOf(activeActivity);
   }
-
 }
