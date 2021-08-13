@@ -108,6 +108,9 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
         .getActivity(this.studyGuidObservable, this.activityGuidObservable)
         .subscribe(
             x => {
+                // to prevent using `visitedSectionIndexes` from previous activity
+                this.resetVisitedSectionIndexes();
+
                 if (!x) {
                     this.model = new ActivityForm();
                 } else {
@@ -236,6 +239,10 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
             map(([valid, submit]) => this.model && submit && !valid),
             shareReplay()
         );
+    }
+
+    private resetVisitedSectionIndexes(): void {
+        this.visitedSectionIndexes = [true]; // start value
     }
 
     protected resetValidationState(): void {
