@@ -1,21 +1,33 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Activity } from '../../interfaces/activity';
+import { Component, Input } from '@angular/core';
+import { ActivityInstance } from 'ddp-sdk';
 
 @Component({
   selector: 'app-progress-bar',
   templateUrl: './progress-bar.component.html',
   styleUrls: ['./progress-bar.component.scss']
 })
-export class ProgressBarComponent implements OnInit {
-  activeActivityNumber: number;
+export class ProgressBarComponent {
+  private _activities: ActivityInstance[];
+  private _activeActivityId;
 
-  @Input() activities: Activity[];
-  @Input() activeActivityId: number;
+  @Input() set activities(activities: ActivityInstance[]) {
+    this._activities = activities;
+  }
 
-  constructor() {}
+  get activities(): ActivityInstance[] {
+    return this._activities;
+  }
 
-  ngOnInit(): void {
-    const activeActivity = this.activities.find(activity => activity.id === this.activeActivityId);
-    this.activeActivityNumber = this.activities.indexOf(activeActivity);
+  @Input() set activeActivityId(id: string) {
+    this._activeActivityId = id;
+  }
+
+  get activeActivityId(): string {
+    return this._activeActivityId;
+  }
+
+  get activeActivityNumber(): number {
+    const activeActivity = this.activities.find(activity => activity.instanceGuid === this.activeActivityId);
+    return this.activities.indexOf(activeActivity);
   }
 }

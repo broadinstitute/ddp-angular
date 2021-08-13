@@ -48,7 +48,7 @@ const routes: Routes = [
   {
     path: Route.Dashboard,
     component: DashboardComponent,
-    canActivate: [BrowserGuard, IrbGuard],
+    canActivate: [BrowserGuard, IrbGuard, AuthGuard],
   },
   {
     path: Route.ActivityId,

@@ -1,17 +1,21 @@
 @import '../../../styles/colors';
+@import '../../../styles/breakpoints';
 
 .wrapper {
   position: relative;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5rem;
+  margin: 5rem 0;
 }
 .bottom-line {
   border-bottom: 3px solid map-get($colors, 'grey');
   position: absolute;
   top: 25px;
   left: 25px;
-  width: 90%;
+  width: 92%;
+  @include media-md {
+    width: 89%;
+  }
 }
 
 .step-container {
