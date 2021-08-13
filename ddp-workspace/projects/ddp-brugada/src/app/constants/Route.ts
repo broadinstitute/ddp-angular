@@ -1,4 +1,3 @@
-import { Dashboard } from './../../../../ddp-atcp/src/app/router-resources';
 export enum Route {
   Home = '',
   About = 'about',
@@ -12,4 +11,8 @@ export enum Route {
   Password = 'password',
   Auth = 'auth',
   PasswordReset = 'reset-password',
+  SessionExpired = 'session-expired',
+  Dashboard = 'dashboard',
+  Activity = 'activity',
+  ActivityId = 'activity/:id',
 }

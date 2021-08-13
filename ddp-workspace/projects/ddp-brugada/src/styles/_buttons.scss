@@ -1,6 +1,6 @@
 @import 'colors';
 
-.btn {
+.btn, .ButtonFilled {
   display: inline-block;
 
   padding: 1.2rem 2.4rem;
@@ -39,6 +39,23 @@
 
       &:active {
         background: map-get($colors, 'scarlet:active');
+      }
+    }
+  }
+
+  &--teal {
+    background: map-get($colors, 'teal');
+
+    color: map-get($colors, 'white');
+
+    &:not(:disabled) {
+      &:focus,
+      &:hover {
+        background: map-get($colors, 'teal:hover');
+      }
+
+      &:active {
+        background: map-get($colors, 'teal:active');
       }
     }
   }

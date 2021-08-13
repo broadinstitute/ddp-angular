@@ -1,0 +1,31 @@
+<main>
+    <h2 class="main-title" [innerHTML]="'App.LmsPage.Title' | translate"></h2>
+    <section class="introduction">
+        <img src="assets/images/circles.svg" class="logo"
+             [alt]="'App.ImageAlts.SplashPageLogo' | translate"
+             width="124" height="110">
+        <div class="description">
+            <h2 class="title static-page-title" translate>App.LmsPage.IntroductionSection.Title</h2>
+            <p class="text static-page-paragraph-text" translate>App.LmsPage.IntroductionSection.Text</p>
+            <p class="notify-text" translate>App.LmsPage.IntroductionSection.Notify</p>
+            <button mat-flat-button
+                    (click)="openJoinMailingList()"
+                    color="lms"
+                    class="notify-btn center">
+                {{'App.LmsPage.IntroductionSection.Button' | translate}}
+            </button>
+        </div>
+    </section>
+
+    <section class="faq">
+        <h2 class="title static-page-title" translate>App.FAQ.Title</h2>
+        <div class="container">
+            <app-faq-section questions="App.LmsPage.FAQ.Questions"></app-faq-section>
+        </div>
+    </section>
+</main>
+<app-splash-page-footer
+    text='App.LmsPage.Footer.Text'
+    [phone]="phone"
+    [email]="email">
+</app-splash-page-footer>

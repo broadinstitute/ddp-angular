@@ -91,7 +91,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     public ngOnInit(): void {
         this.getActivity();
         this.initStepperState();
-        const submitSub = this.submitAttempted.subscribe(() => this.submitAnnouncementService.announceSubmit());
+        const submitSub = this.submitAttempted.pipe(filter(attempted => attempted))
+            .subscribe(() => this.submitAnnouncementService.announceSubmit());
 
         // all PATCH responses routed to here
         const resSub = this.submissionManager.answerSubmissionResponse$.subscribe(

@@ -107,3 +107,9 @@ toolkit-dashboard-redesigned .main {
         right: 0;
     }
 }
+
+@media only screen and(max-width: 650px) {
+    .mat-cell:first-of-type {
+        padding-left: initial !important;
+    }
+}

@@ -9,7 +9,7 @@ import {
     ActivityPicklistAnswer,
     QuestionPromptComponent,
     DropdownActivityPicklistQuestion,
-    RadioButtonsActivityPicklistQuestion
+    RadioButtonsActivityPicklistQuestion, PicklistSortingPolicy
 } from 'ddp-sdk';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -82,7 +82,8 @@ describe('ActivityPicklistAnswer', () => {
                 ReactiveFormsModule,
             ],
             providers: [
-                { provide: NGXTranslateService, useValue: ngxTranslateServiceSpy }
+                { provide: NGXTranslateService, useValue: ngxTranslateServiceSpy },
+                { provide: PicklistSortingPolicy, useValue: new PicklistSortingPolicy()}
             ],
             declarations: [
                 TestHostComponent,

@@ -1,6 +1,11 @@
 // copied from ddp-brain study
 @import '../theme.scss';
 
+@keyframes open {
+    0% { opacity: 0; max-height: 1px}
+    100% { opacity: 1; max-height: 100vh}
+}
+
 // common activity styles
 .main_activity {
     padding-bottom: 6.25rem;
@@ -188,6 +193,51 @@
 
 .ddp-content {
     font-size: 1.2rem;
+}
+
+// citation block
+details {
+    margin-top: 2rem;
+    padding: 4px 0 18px 30px;
+    border-width: 1px 0;
+    border-style: solid;
+    border-color: #E2E2E2;
+
+    > summary {
+        list-style-type: none;
+        outline: none;
+        cursor: pointer;
+        margin-left: -16px;
+    }
+
+    > summary::-webkit-details-marker {
+        display: none;
+    }
+
+    > summary::before {
+        content: '+';
+        font-size: 30px;
+        position: relative;
+        top: 4px;
+        left: -10px;
+    }
+
+    &[open] > summary {
+        &::before {
+            display: inline-block;
+            transform: rotate(45deg);
+        }
+
+        ~ p, ~ ul > li {
+            animation: open 0.5s ease-in-out;
+        }
+
+        @media (max-width:$mobile-breakpoint) {
+            ~ ul {
+                padding-left: 20px;
+            }
+        }
+    }
 }
 
 // required question
