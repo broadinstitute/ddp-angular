@@ -1,3 +1,6 @@
+import { SessionExpiredComponent } from './pages/session-expired/session-expired.component';
+import { DdpModule } from 'ddp-sdk';
+import { ToolkitModule } from 'toolkit';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -11,11 +14,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { RecaptchaModule } from 'ng-recaptcha';
-
-import { DdpModule } from 'ddp-sdk';
-
-import { ToolkitModule } from 'toolkit';
-
 import { AppComponent } from './components/app/app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -40,6 +38,7 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ActivityPageComponent } from './pages/activity-page/activity-page.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { SessionExpiredDialogComponent } from './components/session-expired-dialog/session-expired-dialog.component';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
@@ -65,6 +64,8 @@ import { AppRoutingModule } from './app-routing.module';
     UserActivitiesComponent,
     ActivityPageComponent,
     ForgotPasswordComponent,
+    SessionExpiredComponent,
+    SessionExpiredDialogComponent,
   ],
   imports: [
     BrowserModule,

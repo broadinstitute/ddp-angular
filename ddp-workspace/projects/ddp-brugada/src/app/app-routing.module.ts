@@ -15,6 +15,7 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ActivityPageComponent } from './pages/activity-page/activity-page.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { SessionExpiredComponent } from './pages/session-expired/session-expired.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -84,6 +85,10 @@ const routes: Routes = [
   {
     path: Route.PasswordReset,
     component: ForgotPasswordComponent,
+  },
+  {
+    path: Route.SessionExpired,
+    component: SessionExpiredComponent,
   },
   {
     path: '**',

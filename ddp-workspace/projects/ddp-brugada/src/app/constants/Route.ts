@@ -11,6 +11,7 @@ export enum Route {
   Password = 'password',
   Auth = 'auth',
   PasswordReset = 'reset-password',
+  SessionExpired = 'session-expired',
   Dashboard = 'dashboard',
   Activity = 'activity',
   ActivityId = 'activity/:id',
