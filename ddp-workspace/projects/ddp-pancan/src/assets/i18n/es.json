@@ -30,7 +30,7 @@
             },
             "IntroductionSection": {
                 "Title": "La experiencia de cada paciente con cáncer debe tenerse en cuenta.",
-                "Text": "Las historias clínicas, las muestras de tumores y las experiencias personales de los pacientes contienen pistas (sobre qué tipos de cáncer responderán o serán resistentes a qué tratamientos) que no suelen encontrarse en los laboratorios de investigación o ensayos clínicos. <br/><span class=\"Italic\">Count Me In</span> permite que los pacientes con cáncer, sin importar donde vivan, compartan su información con investigadores de todas partes, para ayudar a descubrir patrones en los datos.",
+                "Text": "Las historias clínicas, las muestras de tumores y las experiencias personales de los pacientes contienen pistas (sobre qué tipos de cáncer responderán o serán resistentes a qué tratamientos) que no suelen encontrarse en los laboratorios de investigación o ensayos clínicos. <span class=\"Italic\">Count Me In</span> permite que los pacientes con cáncer, sin importar donde vivan, compartan su información con investigadores de todas partes, para ayudar a descubrir patrones en los datos.",
                 "ImageAlt": "Pan Can project Patients"
             },
             "JoinSection": {
