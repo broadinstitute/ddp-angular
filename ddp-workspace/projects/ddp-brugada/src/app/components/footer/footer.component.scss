@@ -20,7 +20,7 @@
     display: flex;
     justify-content: space-between;
 
-    max-width: 80rem;
+    max-width: 120rem;
 
     margin: 0 auto;
     padding: 0 2.4rem;
@@ -29,24 +29,51 @@
       flex-flow: column nowrap;
     }
   }
-}
 
-.link-list {
-  list-style: none;
+  &__left-side {
+    @include media-md {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: flex-start;
+    }
+  }
 
-  &__item {
-    & + & {
-      margin-top: 0.8rem;
+  &__logo {
+    height: 3.6rem;
+
+    margin-top: 2.4rem;
+
+    @include media-md {
+      margin-top: 0;
+      margin-bottom: 2.4rem;
     }
   }
 }
 
-.link:not(.link-icon) {
-  padding-left: 2.8rem;
+.link-list {
+  display: flex;
+
+  list-style: none;
+
+  @include media-md {
+    flex-direction: column;
+  }
+
+  &__item {
+    & + & {
+      margin-left: 2.4rem;
+
+      @include media-md {
+        margin-top: 0.8rem;
+        margin-left: 2.8rem;
+      }
+    }
+  }
 }
 
 .link-icon {
   display: flex;
+  align-items: center;
 
   .mat-icon {
     margin-right: 0.3rem;

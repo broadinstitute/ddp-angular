@@ -18,17 +18,21 @@
         "Back": "Back to top",
         "About": "About",
         "Team": "Our Team",
-        "FAQ": "FAQ"
+        "FAQ": "FAQ",
+        "Physicians": "For Physicians",
+        "MailingList": "Join Mailing List"
       },
       "Contact": {
         "Label": "Contact Us",
         "Email": "<a class=\"link\" href=\"mailto:info@linkmyheart.org\" tabindex=\"-1\">info@linkmyheart.org</a>",
         "Phone": "<a class=\"link\" href=\"tel:6177147560\" tabindex=\"-1\">(617) 714-7560</a>",
+        "Project": "Link My Heart",
         "Address1": "The Broad Institute of MIT and Harvard",
         "Address2": "415 Main Street",
         "Address3": "Cambridge, MA 02142",
         "Address4": "United States"
-      }
+      },
+      "LogoAlt": "Brugada Project"
     },
     "Home": {
       "Cta": {
