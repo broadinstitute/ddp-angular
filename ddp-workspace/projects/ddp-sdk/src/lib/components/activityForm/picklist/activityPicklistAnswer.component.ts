@@ -31,6 +31,7 @@ import { PicklistRenderMode } from './../../../models/activity/picklistRenderMod
             *ngIf="block.renderMode === RENDER_MODE.AUTOCOMPLETE"
             [block]="block"
             [readonly]="readonly"
+            [studyGuid]="studyGuid"
             (valueChanged)="valueChanged.emit($event)">
         </ddp-activity-autocomplete-picklist-question>
     </div>`
@@ -38,6 +39,7 @@ import { PicklistRenderMode } from './../../../models/activity/picklistRenderMod
 export class ActivityPicklistAnswer {
     @Input() block: ActivityPicklistQuestionBlock;
     @Input() readonly: boolean;
+    @Input() studyGuid: string;
     @Output() valueChanged: EventEmitter<Array<ActivityPicklistAnswerDto>> = new EventEmitter();
 
     public readonly SELECT_MODE = PicklistSelectMode;
