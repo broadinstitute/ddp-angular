@@ -8,6 +8,7 @@
                 <a mat-flat-button
                    [routerLink]="'/' + AppRoutes.CountMeIn"
                    queryParamsHandling="merge"
+                   (click)="sendCountMeInAnalytics()"
                    class="btn join-cmi-btn center button button_small"
                    color="primary">
                     {{'App.HomePage.JoinCountMeInButton' | translate}}
