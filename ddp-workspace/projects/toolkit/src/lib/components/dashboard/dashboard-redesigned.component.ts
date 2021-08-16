@@ -252,7 +252,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
                 finalize(() => this.addParticipantButtonDisabled = false)
             )
             .subscribe((response) => {
-                if (response) {
+                if (response && response.instanceGuid) {
                     this.navigate(response.instanceGuid);
                 }
             });
