@@ -61,7 +61,7 @@
     min-width: fit-content;
 }
 
-@media screen and (min-width: $desktop-breakpoint) {
+@media screen and (min-width: $desktop-breakpoint + 1) {
     .actions {
         height: 8.625rem;
 
