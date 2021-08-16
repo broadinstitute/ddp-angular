@@ -13,7 +13,7 @@ import { DisplayLanguagePopupServiceAgent } from '../../services/serviceAgents/d
 import { LanguageServiceAgent } from '../../services/serviceAgents/languageServiceAgent.service';
 import { UserProfileServiceAgent } from '../../services/serviceAgents/userProfileServiceAgent.service';
 import { LoggingService } from '../../services/logging.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'ddp-language-selector',
@@ -32,7 +32,7 @@ import { ActivatedRoute } from '@angular/router';
 
             <mat-menu #menu="matMenu" class="language-menu">
                 <button mat-menu-item *ngFor="let lang of getUnselectedLanguages()"
-                        (click)="changeLanguage(lang)">{{lang.displayName}}
+                        (click)="changeLanguage(lang); clearURLParam()">{{lang.displayName}}
                 </button>
             </mat-menu>
             <ddp-popup-with-checkbox text="Toolkit.Dialogs.LanguagePreferences.Text"
@@ -54,6 +54,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
     private anchor: CompositeDisposable;
     private readonly defaultIconUrl: string = 'assets/images/globe.svg#Language-Selector-3';
     private readonly LOG_SOURCE = 'LanguageSelectorComponent';
+    private readonly LANGUAGE_QUERY_PARAM = 'lang';
     @ViewChild(PopupWithCheckboxComponent, { static: false }) private popup: PopupWithCheckboxComponent;
 
     constructor(
@@ -62,6 +63,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         private logger: LoggingService,
         private profileServiceAgent: UserProfileServiceAgent,
         private route: ActivatedRoute,
+        private router: Router,
         @Inject('ddp.config') private config: ConfigurationService,
         private session: SessionMementoService,
         @Inject(DOCUMENT) private document: Document,
@@ -116,7 +118,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
                 const langObs: Observable<any> = this.language.changeLanguageObservable(lang.languageCode);
                 let sub;
                 // not update user profile language if language was taken from URL
-                if (this.hasUserProfile() && !this.route.snapshot.queryParamMap.get('lang')) {
+                if (this.hasUserProfile() && !this.route.snapshot.queryParamMap.get(this.LANGUAGE_QUERY_PARAM)) {
                     sub = this.launchPopup();
                     const sub2 = this.updateProfileLanguage().pipe(concatMap(() => langObs)).subscribe();
                     this.anchor.addNew(sub2);
@@ -134,7 +136,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
     // Find the current language and return true if successful or false otherwise
     public findCurrentLanguage(): Observable<boolean> {
         const langFromURLObservable = this.route.queryParamMap.pipe(
-            map(params => params.get('lang')),
+            map(params => params.get(this.LANGUAGE_QUERY_PARAM)),
             map(langCode => this.studyLanguages.find(studyLang => studyLang.languageCode === langCode)));
         // Check for a language in the profile
         const profileLangObservable: Observable<StudyLanguage> = this.getProfileLangObservable();
@@ -169,6 +171,15 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
                 return false;
             }
         }));
+    }
+
+    public clearURLParam(): void {
+        this.router.navigate([], {
+            queryParams: {
+                [this.LANGUAGE_QUERY_PARAM]: null,
+            },
+            queryParamsHandling: 'merge'
+        });
     }
 
     private launchPopup(): Subscription {
