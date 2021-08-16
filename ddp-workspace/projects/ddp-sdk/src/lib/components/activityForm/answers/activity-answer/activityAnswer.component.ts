@@ -29,7 +29,6 @@ import { BlockType } from '../../../../models/activity/blockType';
                                           [class]="'picklist-answer-' + block.stableId"
                                           [block]="block"
                                           [readonly]="readonly"
-                                          [studyGuid]="studyGuid"
                                           (valueChanged)="onChange($event)">
             </ddp-activity-picklist-answer>
             <ddp-activity-date-answer *ngIf="isDateQuestion(block)"

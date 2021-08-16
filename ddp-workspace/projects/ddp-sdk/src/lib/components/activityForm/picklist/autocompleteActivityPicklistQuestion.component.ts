@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { Subject } from 'rxjs';
@@ -47,9 +47,7 @@ import { PicklistSortingPolicy } from '../../../services/picklistSortingPolicy.s
 })
 export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQuestion implements OnInit, OnDestroy, OnChanges {
     private readonly ngUnsubscribe = new Subject();
-    private readonly DO_NOT_SORT_LIST_STABLE_IDS = ['PRIMARY_CANCER_SELF', 'PRIMARY_CANCER_CHILD'];
 
-    @Input() studyGuid: string;
     filteredGroups: ActivityPicklistNormalizedGroup[] = [];
     // options w/o a group
     filteredOptions: ActivityPicklistOption[] = [];
@@ -76,15 +74,9 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
             takeUntil(this.ngUnsubscribe)
         );
 
-        let sortedPicklistGroups;
-        let sortedPicklistOptions;
-        if (this.shouldBeSorted) {
-            sortedPicklistGroups = this.sortPolicy.sortPicklistGroups(this.block.picklistGroups);
-            sortedPicklistOptions = this.sortPolicy.sortPicklistOptions(this.block.picklistOptions);
-        } else {
-            sortedPicklistGroups = this.block.picklistGroups;
-            sortedPicklistOptions = this.block.picklistOptions;
-        }
+        const sortedPicklistGroups = this.sortPolicy.sortPicklistGroups(this.block.picklistGroups);
+        const sortedPicklistOptions = this.sortPolicy.sortPicklistOptions(this.block.picklistOptions);
+
 
         userQueryStream.pipe(startWith('')).subscribe((value: string | ActivityPicklistOption) => {
             const query = typeof value === 'string' ? value : value.optionLabel;
@@ -156,11 +148,6 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     private filterOptions(name: string, options: ActivityPicklistOption[]): ActivityPicklistOption[] {
         const filterValue = name.toLowerCase();
         return options.filter(option => option.optionLabel.toLowerCase().includes(filterValue));
-    }
-
-    private get shouldBeSorted(): boolean {
-        const doNotSort = this.studyGuid === 'cmi-pancan' && this.DO_NOT_SORT_LIST_STABLE_IDS.includes(this.block.stableId);
-        return !doNotSort;
     }
 
     filterOutEmptyGroups(groups: ActivityPicklistNormalizedGroup[]): ActivityPicklistNormalizedGroup[] {
