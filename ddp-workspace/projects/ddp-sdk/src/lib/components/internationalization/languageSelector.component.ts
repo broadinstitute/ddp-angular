@@ -13,6 +13,7 @@ import { DisplayLanguagePopupServiceAgent } from '../../services/serviceAgents/d
 import { LanguageServiceAgent } from '../../services/serviceAgents/languageServiceAgent.service';
 import { UserProfileServiceAgent } from '../../services/serviceAgents/userProfileServiceAgent.service';
 import { LoggingService } from '../../services/logging.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'ddp-language-selector',
@@ -60,6 +61,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         private language: LanguageService,
         private logger: LoggingService,
         private profileServiceAgent: UserProfileServiceAgent,
+        private route: ActivatedRoute,
         @Inject('ddp.config') private config: ConfigurationService,
         private session: SessionMementoService,
         @Inject(DOCUMENT) private document: Document,
@@ -113,7 +115,8 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
                 this.beforeLanguageChange.emit(lang);
                 const langObs: Observable<any> = this.language.changeLanguageObservable(lang.languageCode);
                 let sub;
-                if (this.hasUserProfile()) {
+                // not update user profile language if language was taken from URL
+                if (this.hasUserProfile() && !this.route.snapshot.queryParamMap.get('lang')) {
                     sub = this.launchPopup();
                     const sub2 = this.updateProfileLanguage().pipe(concatMap(() => langObs)).subscribe();
                     this.anchor.addNew(sub2);
@@ -130,6 +133,9 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
 
     // Find the current language and return true if successful or false otherwise
     public findCurrentLanguage(): Observable<boolean> {
+        const langFromURLObservable = this.route.queryParamMap.pipe(
+            map(params => params.get('lang')),
+            map(langCode => this.studyLanguages.find(studyLang => studyLang.languageCode === langCode)));
         // Check for a language in the profile
         const profileLangObservable: Observable<StudyLanguage> = this.getProfileLangObservable();
 
@@ -140,7 +146,10 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         const defaultLangObservable: Observable<StudyLanguage> = this.getDefaultLangObservable();
 
         // Create an observable that will check each applicable option and return the first valid language found, if any
-        const langObservable: Observable<StudyLanguage> = profileLangObservable.pipe(
+        const langObservable: Observable<StudyLanguage> = langFromURLObservable.pipe(
+            mergeMap(langFromURL => {
+                return this.getNextObservable(langFromURL, profileLangObservable);
+            }),
             mergeMap(profileLang => {
                 return this.getNextObservable(profileLang, currentStoredLangObservable);
             }),
