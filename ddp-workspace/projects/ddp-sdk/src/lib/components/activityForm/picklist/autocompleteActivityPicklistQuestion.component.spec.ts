@@ -6,7 +6,8 @@ import {
     ActivityPicklistOption,
     ActivityPicklistQuestionBlock,
     NGXTranslateService,
-    PicklistSortingPolicy
+    PicklistSortingPolicy,
+    SortOrder
 } from 'ddp-sdk';
 import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
 import { of } from 'rxjs';
@@ -17,31 +18,31 @@ import { PicklistRenderMode } from '../../../models/activity/picklistRenderMode'
 import { SearchHighlightPipe } from '../../../pipes/searchHighlight.pipe';
 import { SimpleChange } from '@angular/core';
 
-describe('AutocompleteActivityPicklistQuestion', () => {
-    const questionBlock = {
-        picklistGroups: [
-            {
-                name: 'Sarcoma',
-                options: [
-                    { optionLabel: 'Angiosarcoma', stableId: 'ANGIOSARCOMA' },
-                    { optionLabel: 'Chondrosarcoma', stableId: 'CHONDROSARCOMA' }
-                ]
-            },
-            {
-                name: 'Endocrine cancer',
-                options: [
-                    { optionLabel: 'Pheochromocytoma', stableId: 'PHEOCHROMOCYTOMA' },
-                    { optionLabel: 'Endocrine cancer test', stableId: 'ENDOCRINE_CANCER_TEST' },
-                ]
-            },
-        ],
-        picklistOptions: [
-            { optionLabel: 'Some cancer', stableId: 'SOME_CANCER' },
-            { optionLabel: 'Another cancer', stableId: 'ANOTHER_CANCER' }
-        ],
-        renderMode: PicklistRenderMode.AUTOCOMPLETE,
-    } as ActivityPicklistQuestionBlock;
+const questionBlock = {
+    picklistGroups: [
+        {
+            name: 'Sarcoma',
+            options: [
+                { optionLabel: 'Angiosarcoma', stableId: 'ANGIOSARCOMA' },
+                { optionLabel: 'Chondrosarcoma', stableId: 'CHONDROSARCOMA' }
+            ]
+        },
+        {
+            name: 'Endocrine cancer',
+            options: [
+                { optionLabel: 'Pheochromocytoma', stableId: 'PHEOCHROMOCYTOMA' },
+                { optionLabel: 'Endocrine cancer test', stableId: 'ENDOCRINE_CANCER_TEST' },
+            ]
+        },
+    ],
+    picklistOptions: [
+        { optionLabel: 'Some cancer', stableId: 'SOME_CANCER' },
+        { optionLabel: 'Another cancer', stableId: 'ANOTHER_CANCER' }
+    ],
+    renderMode: PicklistRenderMode.AUTOCOMPLETE,
+} as ActivityPicklistQuestionBlock;
 
+describe('AutocompleteActivityPicklistQuestion', () => {
     let component: AutocompleteActivityPicklistQuestion;
     let fixture: ComponentFixture<AutocompleteActivityPicklistQuestion>;
     const ngxTranslateServiceSpy = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
@@ -62,7 +63,8 @@ describe('AutocompleteActivityPicklistQuestion', () => {
             ],
             providers: [
                 { provide: NGXTranslateService, useValue: ngxTranslateServiceSpy },
-                { provide: PicklistSortingPolicy, useValue: new PicklistSortingPolicy()}
+                { provide: PicklistSortingPolicy, useValue:  new PicklistSortingPolicy() },
+                { provide: 'ddp.config', useValue: { picklistsWithNoSorting: [] } }
             ],
             declarations: [AutocompleteActivityPicklistQuestion, SearchHighlightPipe]
         }).compileComponents();
@@ -256,4 +258,52 @@ describe('AutocompleteActivityPicklistQuestion', () => {
         component.ngOnChanges({ readonly: { currentValue: true } as SimpleChange});
         expect(component.inputFormControl.disabled).toBeTrue();
     });
+});
+
+describe('AutocompleteActivityPicklistQuestion sorting (with default ALPHABETICAL policy)', () => {
+    let component: AutocompleteActivityPicklistQuestion;
+    let fixture: ComponentFixture<AutocompleteActivityPicklistQuestion>;
+    const configServiceSpy = jasmine.createSpyObj('ddp.config', null, {picklistsWithNoSorting: []});
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                MatInputModule,
+                MatAutocompleteModule,
+                BrowserAnimationsModule,
+                TranslateTestingModule,
+                ReactiveFormsModule,
+            ],
+            providers: [
+                {provide: NGXTranslateService, useValue: {}},
+                {provide: PicklistSortingPolicy, useValue: new PicklistSortingPolicy(SortOrder.ALPHABETICAL, 'UNSURE')},
+                {provide: 'ddp.config', useValue: configServiceSpy}
+            ],
+            declarations: [AutocompleteActivityPicklistQuestion, SearchHighlightPipe]
+        }).compileComponents();
+
+        fixture = TestBed.createComponent(AutocompleteActivityPicklistQuestion);
+        component = fixture.componentInstance;
+        component.block = {...questionBlock} as ActivityPicklistQuestionBlock;
+        component.ngOnInit();
+    });
+
+    it('should sort options alphabetically (by default)', () => {
+        expect(component.filteredGroups[0].name).toEqual('Endocrine cancer');
+        expect(component.filteredGroups[0].options[0].optionLabel).toEqual('Endocrine cancer test');
+        expect(component.filteredOptions[0].optionLabel).toEqual('Another cancer');
+    });
+
+    it('should keep  options as is (do not sort alphabetically)', () => {
+        Object.defineProperty(configServiceSpy , 'picklistsWithNoSorting', {
+            value: ['stableId123']
+        });
+        component.block.stableId = 'stableId123';
+        fixture.detectChanges();
+
+        expect(component.filteredGroups[0].name).toEqual('Sarcoma');
+        expect(component.filteredGroups[0].options[0].optionLabel).toEqual('Angiosarcoma');
+        expect(component.filteredOptions[0].optionLabel).toEqual('Some cancer');
+    });
+
 });
