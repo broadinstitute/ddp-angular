@@ -6,7 +6,7 @@
         "Team": "Our Team",
         "FAQ": "FAQ",
         "Physicians": "For Physicians",
-        "MailingList": "Mailing List",
+        "MailingList": "Join Mailing List",
         "Join": "Join the Brugada Project",
         "Login": "Log in",
         "Dashboard": "Dashboard"
@@ -307,9 +307,8 @@
       }
     },
     "MailingList": {
-      "Title": "Mailing List",
-      "Greeting": "Hello!",
-      "Paragraph": "Thank you for joining the Link My Heart mailing list. We will send general updates about the progress of the research project and keep you informed when future projects become available. You can unsubscribe at any time.",
+      "Title": "Join Mailing List",
+      "Paragraph": "Hello! Thanks for your interest in joining the Link My Heart mailing list. Provide your email below and we will send general updates about the progress of the research project and keep you informed when future projects become available. You can unsubscribe at any time.",
       "Thanking": "Thank you!",
       "Form": {
         "Fields": {
