@@ -72,10 +72,6 @@
 
 <section class="institutions">
   <div class="institutions__container">
-    <h3 class="institutions__title">
-      {{ 'App.Home.Institutions.Title' | translate }}
-    </h3>
-
     <ul class="institutions-list">
       <li class="institutions-list__item">
         <a class="img-link" target="_blank" [href]="BROAD_URL">
@@ -88,7 +84,13 @@
           <img src="/assets/images/home/mgh-logo.png" [alt]="'App.Home.Institutions.ImageAlts.MGH' | translate" />
         </a>
       </li>
+    </ul>
 
+    <h3 class="institutions__title">
+      {{ 'App.Home.Institutions.Title' | translate }}
+    </h3>
+
+    <ul class="institutions-list">
       <li class="institutions-list__item">
         <a class="img-link" target="_blank" [href]="SADS_URL">
           <img src="/assets/images/home/sads-logo.png" [alt]="'App.Home.Institutions.ImageAlts.SADS' | translate" />
