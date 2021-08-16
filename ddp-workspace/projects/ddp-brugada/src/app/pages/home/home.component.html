@@ -49,17 +49,19 @@
             <img [src]="'/assets/images/home/step-' + (i + 1) + '.png'" [alt]="Step.Name" />
           </div>
 
-          <h4 class="step__name">
-            {{ Step.Name }}
-          </h4>
+          <div class="step__text-wrapper">
+            <h4 class="step__name">
+              {{ Step.Name }}
+            </h4>
 
-          <p class="step__duration">
-            {{ Step.Duration }}
-          </p>
+            <p class="step__duration">
+              {{ Step.Duration }}
+            </p>
 
-          <p class="step__description">
-            {{ Step.Description }}
-          </p>
+            <p class="step__description">
+              {{ Step.Description }}
+            </p>
+          </div>
         </div>
       </li>
     </ul>

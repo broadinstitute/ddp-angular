@@ -121,6 +121,10 @@
 
     margin: 0 auto;
     padding: 0 2.4rem;
+
+    @include media-sm {
+      text-align: center;
+    }
   }
 
   &__title {
@@ -178,6 +182,13 @@
     border-radius: 100px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 
+    @include media-sm {
+      width: 14rem;
+      height: 14rem;
+
+      margin: 0 auto 2.4rem;
+    }
+
     img {
       display: block;
 
@@ -185,6 +196,16 @@
       height: 100%;
 
       object-fit: cover;
+    }
+  }
+
+  &__text-wrapper {
+    @include media-sm {
+      max-width: 24rem;
+
+      margin: 0 auto;
+
+      text-align: center;
     }
   }
 
