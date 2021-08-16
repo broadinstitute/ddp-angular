@@ -13,10 +13,7 @@ export function translateFactory(
   return () =>
     new Promise<any>((resolve: any) => {
       const LOG_SOURCE = 'AppModule';
-      const locationInitialized = injector.get(
-        LOCATION_INITIALIZED,
-        Promise.resolve(null),
-      );
+      const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
 
       locationInitialized.then(() => {
         const locale = language.getAppLanguageCode();
@@ -25,17 +22,10 @@ export function translateFactory(
 
         translate.use(locale).subscribe(
           () => {
-            logger.logEvent(
-              LOG_SOURCE,
-              `Successfully initialized '${locale}' language as default.`,
-            );
+            logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
           },
           err => {
-            logger.logError(
-              LOG_SOURCE,
-              `Problem with '${locale}' language initialization:`,
-              err,
-            );
+            logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization:`, err);
           },
           () => {
             resolve(null);

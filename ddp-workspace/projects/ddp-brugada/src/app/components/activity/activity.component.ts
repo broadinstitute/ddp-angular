@@ -1,10 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import {
-  ActivityRedesignedComponent,
-  SubmissionManager,
-  SubmitAnnouncementService,
-} from 'ddp-sdk';
+import { ActivityRedesignedComponent, SubmissionManager, SubmitAnnouncementService } from 'ddp-sdk';
 
 import { ActivityCode } from '../../constants/activity-code';
 
@@ -25,7 +21,7 @@ export class ActivityComponent extends ActivityRedesignedComponent {
     return DDP_ENV.recaptchaSiteClientKey;
   }
 
-  onCaptchaResolve(response: string): void {
+  onCaptchaResolve(): void {
     this.isCaptchaResolved = true;
   }
 }

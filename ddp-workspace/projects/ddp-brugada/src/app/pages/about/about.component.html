@@ -9,17 +9,12 @@
 
   <section class="description">
     <div class="description__container">
-      <ng-container
-        *ngFor="let Paragraph of 'App.About.Paragraphs' | translate"
-      >
+      <ng-container *ngFor="let Paragraph of 'App.About.Paragraphs' | translate">
         <h2 class="description__title">
           {{ Paragraph.Title }}
         </h2>
 
-        <p
-          *ngFor="let Description of Paragraph.Descriptions"
-          class="description__paragraph"
-        >
+        <p *ngFor="let Description of Paragraph.Descriptions" class="description__paragraph">
           {{ Description }}
         </p>
       </ng-container>

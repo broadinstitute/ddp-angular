@@ -3,10 +3,7 @@
     <section class="section section--admin">
       <ddp-subject-panel></ddp-subject-panel>
 
-      <ddp-admin-action-panel
-        [activityReadonly]="isReadonly()"
-        (requestActivityEdit)="updateIsAdminEditing($event)"
-      >
+      <ddp-admin-action-panel [activityReadonly]="isReadonly()" (requestActivityEdit)="updateIsAdminEditing($event)">
       </ddp-admin-action-panel>
     </section>
 
@@ -37,18 +34,12 @@
               </ng-container>
             </button>
           </li>
-          <li
-            *ngIf="i !== model.sections.length - 1"
-            class="stepper-list__divider"
-          ></li>
+          <li *ngIf="i !== model.sections.length - 1" class="stepper-list__divider"></li>
         </ng-container>
       </ol>
     </section>
 
-    <section
-      *ngIf="shouldShowReadonlyHint"
-      class="section section--readonly-hint"
-    >
+    <section *ngIf="shouldShowReadonlyHint" class="section section--readonly-hint">
       <div class="infobox" [innerHTML]="model.readonlyHint"></div>
     </section>
 
@@ -59,9 +50,7 @@
         [validationRequested]="validationRequested"
         [studyGuid]="studyGuid"
         [activityGuid]="activityGuid"
-        (embeddedComponentsValidationStatus)="
-          updateEmbeddedComponentValidationStatus(0, $event)
-        "
+        (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(0, $event)"
         (componentBusy)="embeddedComponentBusy$[0].next($event)"
       >
       </ddp-activity-section>
@@ -74,9 +63,7 @@
         [validationRequested]="validationRequested"
         [studyGuid]="studyGuid"
         [activityGuid]="activityGuid"
-        (embeddedComponentsValidationStatus)="
-          updateEmbeddedComponentValidationStatus(1, $event)
-        "
+        (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
         (componentBusy)="embeddedComponentBusy$[1].next($event)"
       >
       </ddp-activity-section>
@@ -89,26 +76,18 @@
         [validationRequested]="validationRequested"
         [studyGuid]="studyGuid"
         [activityGuid]="activityGuid"
-        (embeddedComponentsValidationStatus)="
-          updateEmbeddedComponentValidationStatus(2, $event)
-        "
+        (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
         (componentBusy)="embeddedComponentBusy$[2].next($event)"
       >
       </ddp-activity-section>
     </section>
 
-    <section
-      *ngIf="model.lastUpdatedText"
-      class="section section--last-updated"
-    >
+    <section *ngIf="model.lastUpdatedText" class="section section--last-updated">
       <span class="last-updated">{{ model.lastUpdatedText }}</span>
     </section>
 
     <section *ngIf="isPrequal" class="section section--captcha">
-      <re-captcha
-        [siteKey]="captchaSiteKey"
-        (resolved)="onCaptchaResolve($event)"
-      ></re-captcha>
+      <re-captcha [siteKey]="captchaSiteKey" (resolved)="onCaptchaResolve()"></re-captcha>
     </section>
 
     <section class="section section--buttons">
@@ -118,14 +97,8 @@
             #submitButton
             type="button"
             class="btn btn--scarlet"
-            [disabled]="
-              (isPageBusy | async) || dataEntryDisabled || !isCaptchaResolved
-            "
-            [innerHTML]="
-              (isPageBusy | async)
-                ? ('SDK.SavingButton' | translate)
-                : ('SDK.SubmitButton' | translate)
-            "
+            [disabled]="(isPageBusy | async) || dataEntryDisabled || !isCaptchaResolved"
+            [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.SubmitButton' | translate)"
             (click)="flush()"
             (mouseenter)="mouseEnterOnSubmit()"
           ></button>
@@ -144,11 +117,7 @@
             *ngIf="!isLastStep"
             class="btn btn--scarlet pull-right"
             [disabled]="(isPageBusy | async) || dataEntryDisabled"
-            [innerHTML]="
-              (isPageBusy | async)
-                ? ('SDK.SavingButton' | translate)
-                : ('SDK.NextButton' | translate)
-            "
+            [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.NextButton' | translate)"
             (click)="incrementStep()"
           ></button>
 
@@ -199,11 +168,7 @@
               *ngIf="!isLastStep"
               class="btn btn--scarlet pull-right"
               [disabled]="(isPageBusy | async) || dataEntryDisabled"
-              [innerHTML]="
-                (isPageBusy | async)
-                  ? ('SDK.SavingButton' | translate)
-                  : ('SDK.NextButton' | translate)
-              "
+              [innerHTML]="(isPageBusy | async) ? ('SDK.SavingButton' | translate) : ('SDK.NextButton' | translate)"
               (click)="incrementStep()"
             ></button>
           </ng-container>
@@ -217,10 +182,7 @@
               [innerHTML]="
                 (isPageBusy | async)
                   ? ('SDK.SavingButton' | translate)
-                  : ((isVerticalProgress
-                      ? 'SDK.FinishButton'
-                      : 'SDK.SubmitButton'
-                    ) | translate)
+                  : ((isVerticalProgress ? 'SDK.FinishButton' : 'SDK.SubmitButton') | translate)
               "
               (click)="flush()"
               (mouseenter)="mouseEnterOnSubmit()"
@@ -237,19 +199,13 @@
       </ng-container>
     </section>
 
-    <section
-      *ngIf="displayGlobalError$ | async"
-      class="section section--error section--error-global"
-    >
+    <section *ngIf="displayGlobalError$ | async" class="section section--error section--error-global">
       <div class="error-message">
         {{ 'SDK.ValidateError' | translate }}
       </div>
     </section>
 
-    <section
-      *ngIf="communicationErrorOccurred"
-      class="section section--error section--error-communication"
-    >
+    <section *ngIf="communicationErrorOccurred" class="section section--error section--error-communication">
       <div class="error-message">
         {{ 'SDK.CommunicationError' | translate }}
       </div>

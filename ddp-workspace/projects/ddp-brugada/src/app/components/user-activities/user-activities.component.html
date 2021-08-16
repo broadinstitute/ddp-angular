@@ -59,42 +59,26 @@
     <td mat-cell *matCellDef="let activity">
       <ng-container [ngSwitch]="activity.statusCode">
         <ng-container *ngSwitchCase="ActivityStatusCodes.CREATED">
-          <button
-            type="button"
-            class="btn btn--scarlet"
-            (click)="onStartActivity(activity)"
-          >
+          <button type="button" class="btn btn--scarlet" (click)="onStartActivity(activity)">
             {{ 'App.UserActivities.Button.Start' | translate }}
           </button>
         </ng-container>
 
         <ng-container *ngSwitchCase="ActivityStatusCodes.IN_PROGRESS">
-          <button
-            type="button"
-            class="btn btn--teal"
-            (click)="onContinueActivity(activity)"
-          >
+          <button type="button" class="btn btn--teal" (click)="onContinueActivity(activity)">
             {{ 'App.UserActivities.Button.Continue' | translate }}
           </button>
         </ng-container>
 
         <ng-container *ngSwitchCase="ActivityStatusCodes.COMPLETE">
           <ng-container *ngIf="activity.readonly">
-            <button
-              type="button"
-              class="btn btn--scarlet"
-              (click)="onViewActivity(activity)"
-            >
+            <button type="button" class="btn btn--scarlet" (click)="onViewActivity(activity)">
               {{ 'App.UserActivities.Button.View' | translate }}
             </button>
           </ng-container>
 
           <ng-container *ngIf="!activity.readonly">
-            <button
-              type="button"
-              class="btn btn--scarlet"
-              (click)="onUpdateActivity(activity)"
-            >
+            <button type="button" class="btn btn--scarlet" (click)="onUpdateActivity(activity)">
               {{ 'App.UserActivities.Button.Update' | translate }}
             </button>
           </ng-container>

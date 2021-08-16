@@ -21,10 +21,7 @@ export class ForgotPasswordComponent {
 
   error$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
-  constructor(
-    private readonly auth0: Auth0ManualService,
-    private router: Router,
-  ) {}
+  constructor(private readonly auth0: Auth0ManualService, private router: Router) {}
 
   submit(): void {
     if (this.form.invalid) {
@@ -36,7 +33,7 @@ export class ForgotPasswordComponent {
       .resetPassword(this.form.value.email)
       .pipe(
         first(),
-        tap((res: string) => {
+        tap(() => {
           this.error$.next(null);
           this.router.navigate(['login'], {
             queryParams: {

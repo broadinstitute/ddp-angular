@@ -2,11 +2,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { pluck } from 'rxjs/operators';
 
-import {
-  ActivityResponse,
-  CompositeDisposable,
-  ConfigurationService,
-} from 'ddp-sdk';
+import { ActivityResponse, CompositeDisposable, ConfigurationService } from 'ddp-sdk';
 import { WorkflowBuilderService } from 'toolkit';
 
 @Component({

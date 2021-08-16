@@ -11,10 +11,7 @@ import { Route } from '../constants/Route';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(
-    private router: Router,
-    private sessionService: SessionMementoService,
-  ) {}
+  constructor(private router: Router, private sessionService: SessionMementoService) {}
 
   canActivate(): Observable<boolean> {
     return this.sessionService.sessionObservable.pipe(

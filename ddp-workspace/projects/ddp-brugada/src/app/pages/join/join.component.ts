@@ -72,10 +72,7 @@ export class JoinComponent implements OnInit {
       )
       .subscribe(response => {
         if (!response) {
-          this.loggingService.logError(
-            this.LOG_SOURCE,
-            `Tried to get "START" workflow but response was: ${response}`,
-          );
+          this.loggingService.logError(this.LOG_SOURCE, `Tried to get "START" workflow but response was: ${response}`);
 
           return;
         }
