@@ -11,7 +11,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { TranslateService } from '@ngx-translate/core';
 
-import { ConfigurationService, DdpModule, LanguageService, LoggingService,  SortOrder, PicklistSortingPolicy } from 'ddp-sdk';
+import {
+    ConfigurationService,
+    DdpModule,
+    LanguageService,
+    LoggingService,
+    SortOrder,
+    PicklistSortingPolicy,
+    AnalyticsEventsService,
+    AnalyticsEvent
+} from 'ddp-sdk';
 
 import { ToolkitConfigurationService, ToolkitModule } from 'toolkit';
 
@@ -166,4 +175,11 @@ export function translateFactory(translate: TranslateService,
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+    constructor(private analytics: AnalyticsEventsService) {
+        this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
+            ga('send', event);
+            ga('platform.send', event);
+        });
+    }
+}

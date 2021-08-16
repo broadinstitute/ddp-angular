@@ -1,10 +1,16 @@
 <div class="container">
     <div class="social-media__links">
-        <a class="social-media__link" [href]="twitterUrl" target="_blank">
+        <a class="social-media__link"
+           [href]="twitterUrl"
+           target="_blank"
+           (click)="sendSocialMediaAnalytics('twitter')">
             <img class="social-media__logo" lazy-resource src="assets/images/twitter.svg"
                  [alt]="'Common.Alts.Twitter' | translate">
         </a>
-        <a class="social-media__link" [href]="facebookUrl" target="_blank">
+        <a class="social-media__link"
+           [href]="facebookUrl"
+           target="_blank"
+           (click)="sendSocialMediaAnalytics('facebook')">
             <img class="social-media__logo" lazy-resource src="assets/images/facebook.svg"
                  [alt]="'Common.Alts.Facebook' | translate">
         </a>
