@@ -6,6 +6,7 @@
                 <p class="text static-page-paragraph-text" translate>App.ColorectalPage.IntroductionSection.Text</p>
                 <a mat-flat-button
                    [routerLink]="'/' + AppRoutes.CountMeIn"
+                   queryParamsHandling="merge"
                    class="btn join-cmi-btn center button button_small"
                    color="colorectal">
                     {{'App.HomePage.JoinCountMeInButton' | translate}}
@@ -33,6 +34,7 @@
 
         <a mat-stroked-button
            [routerLink]="'/' + AppRoutes.AboutUs"
+           queryParamsHandling="merge"
            class="btn learn-more-btn center small-letter-spacing button button_small button_secondary">
             {{'App.HomePage.LearnMoreSection.LearnMoreAboutUsButton' | translate}}
         </a>
@@ -50,6 +52,7 @@
 
         <a mat-stroked-button
            [routerLink]="'/' + AppRoutes.FAQ"
+           queryParamsHandling="merge"
            class="btn more-faq-btn center small-letter-spacing button button_small button_secondary">
             {{'App.FAQ.Button.MoreFAQs' | translate}}
         </a>
