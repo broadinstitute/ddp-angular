@@ -7,6 +7,7 @@
                    [innerHTML]="'App.HomePage.IntroductionSection.Text' | translate"></p>
                 <a mat-flat-button
                    [routerLink]="'/' + AppRoutes.CountMeIn"
+                   (click)="sendCountMeInAnalytics()"
                    class="btn join-cmi-btn center button button_small"
                    color="primary">
                     {{'App.HomePage.JoinCountMeInButton' | translate}}
