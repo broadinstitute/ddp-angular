@@ -8,7 +8,7 @@
 .actions {
     border-bottom: 1px solid $footer-divider-color;
     font-size: 1.17rem;
-    padding: 1.15rem 2rem 1.15rem 3.375rem;
+    height: 8.625rem;
 
     &__wrapper {
         display: flex;
@@ -16,13 +16,12 @@
     }
 
     ::ng-deep.navigation {
-        padding-left: 0;
+        padding-left: 40px;
     }
 }
 
 .info {
     height: 6.25rem;
-    padding: 1.15rem 2rem 2.5rem 3.375rem;
     font-size: 1rem;
 }
 
@@ -31,7 +30,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
+    padding: 0 2rem 0 1.5rem;
 }
 
 .back-to-top {
@@ -61,21 +60,6 @@
     min-width: fit-content;
 }
 
-@media screen and (min-width: $desktop-breakpoint) {
-    .actions {
-        height: 8.625rem;
-
-        ::ng-deep.navigation {
-            padding-left: 40px;
-        }
-    }
-
-    .info,
-    .actions {
-        padding: 0 2rem 0 1.5rem;
-    }
-}
-
 @media screen and (max-width: $desktop-breakpoint) {
     .auth,
     .info {
@@ -86,7 +70,14 @@
         margin-bottom: 15px;
     }
 
+    .info {
+        padding: 1.15rem 2rem 2.5rem 3.375rem;
+    }
+
     .actions {
+        height: auto;
+        padding: 1.15rem 2rem 1.15rem 3.375rem;
+
         &__wrapper {
             flex-direction: column;
         }
@@ -94,6 +85,7 @@
         ::ng-deep.navigation {
             flex-direction: column;
             line-height: 35px;
+            padding-left: 0;
         }
     }
 }
