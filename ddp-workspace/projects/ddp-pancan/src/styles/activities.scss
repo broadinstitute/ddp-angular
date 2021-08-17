@@ -460,7 +460,7 @@ select:disabled {
     border-color: $checkbox-color !important;
 }
 
-@media screen and (max-width: $mobile-breakpoint) {
+@media screen and (max-width: $tablet-breakpoint) {
     // autocomplete-picklist-question
     .autoCompletePanel {
         .mat-option {
