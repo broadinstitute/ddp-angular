@@ -30,14 +30,14 @@
             },
             "IntroductionSection": {
                 "Title": "La experiencia de cada paciente con cáncer debe tenerse en cuenta.",
-                "Text": "Las historias clínicas, las muestras de tumores y las experiencias personales de los pacientes contienen pistas (sobre qué tipos de cáncer responderán o serán resistentes a qué tratamientos) que no suelen encontrarse en los laboratorios de investigación o ensayos clínicos. <span class=\"Italic\">Count Me In</span> permite que los pacientes con cáncer, sin importar donde vivan, compartan su información con investigadores de todas partes, para ayudar a descubrir patrones en los datos.",
+                "Text": "Las historias clínicas, las muestras de tumores y las experiencias personales de los pacientes contienen pistas (sobre qué tipos de cáncer responderán o serán resistentes a qué tratamientos) que no suelen encontrarse en los laboratorios de investigación o ensayos clínicos. <br/><span class=\"Italic\">Count Me In</span> permite que los pacientes con cáncer, sin importar donde vivan, compartan su información con investigadores de todas partes, para ayudar a descubrir patrones en los datos.",
                 "ImageAlt": "Pan Can project Patients"
             },
             "JoinSection": {
                 "Title": "¿Quiénes pueden unirse?",
                 "Text1": "Todas las personas que alguna vez hayan recibido un diagnóstico de cáncer pueden participar si viven en Estados Unidos o Canadá.",
                 "Text2": "Las personas de cualquier edad, sexo, raza, origen étnico y capacidad son bienvenidas.",
-                "ImageAlt": "[ES]Participant"
+                "ImageAlt": "Participante"
             },
             "ParticipateSection": {
                 "Title": "Cómo participar",
@@ -95,7 +95,7 @@
                     "Step": "PASO 2",
                     "Time": "5 minutos",
                     "Title": "Indique dónde ha recibido tratamiento",
-                    "Text": "Indique dónde ha recibido tratamiento para su cáncer. Les preguntamos a los pacientes dónde han recibido tratamiento para poder solicitar sus registros medicos y, si corresponde, el tejido almacenado de su tumor.",
+                    "Text": "Indique dónde ha recibido tratamiento para su cáncer. Les preguntamos a los pacientes dónde han recibido tratamiento para poder solicitar sus registros médicos y, si corresponde, el tejido almacenado de su tumor.",
                     "Button": "Ver el formulario de divulgación de información médica",
                     "ImageAlt": "Pantalla de computadora que muestra un centro médico"
                 },
@@ -118,7 +118,7 @@
                 {
                     "Step": "PASO 5",
                     "Title": "Manténgase involucrado",
-                    "Text": "Con el tiempo, le brindaremos actualizaciones periódicas sobre el estado de la investigación y compartiremos los descubrimientos que nos haya permitido realizar. Asimismo, podríamos hacerle preguntas adicionales sobre su experiencia para ayudarnos con futuros estudios: queremos saber qué es importante para usted.",
+                    "Text": "Con el tiempo, le brindaremos actualizaciones periódicas sobre el estado de la investigación y compartiremos los descubrimientos que nos haya permitido realizar. Asimismo, podríamos hacerle preguntas adicionales sobre su experiencia para ayudarnos con futuros estudios- queremos saber qué es importante para usted.",
                     "ImageAlt": "Burbujas de diálogo que comparten corazones y visualizaciones de datos"
                 }
             ]
@@ -146,7 +146,7 @@
                         { "key": "ESC", "label": "Esophageal and Stomach Cancer Project" },
                         { "key": "LMS", "label": "Leiomyosarcoma Project" },
                         { "key": "MBC", "label": "Metastatic Breast Cancer Project" },
-                        { "key": "MBCSpanish", "label": "Proyecto de cáncer de mama metastásico en español" },
+                        { "key": "MBCSpanish", "label": "Proyecto de Cáncer de Mama Metastásico en Español" },
                         { "key": "MPC", "label": "Metastatic Prostate Cancer Project" },
                         { "key": "Osteo", "label": "Osteosarcoma Project" }
                     ]
@@ -154,8 +154,8 @@
                 {
                     "Title": "Impacto",
                     "Paragraphs": [
-                        "Hasta la fecha, se han registrado más de 8,500 pacientes de Estados Unidos y Canadá para participar en proyectos de investigación de Count Me In, que comprenden varios tipos de cáncer diferentes. El equipo de Count Me In desea agradecer a cada uno de los pacientes que ha participado.",
-                        "Gracias a esta colaboración profunda se han generado grandes volúmenes de datos que han derivado en más de diez publicaciones de datos en repositorios científicos de todos los proyectos actuales de Count Me In.",
+                        "Hasta la fecha, se han registrado más de 8,500 pacientes de Estados Unidos y Canadá para participar en proyectos de investigación de Count Me In, que abarcan varios tipos de cáncer. El equipo de Count Me In desea agradecer a cada uno de los pacientes que ha participado.",
+                        "Gracias a esta colaboración profunda se han generado grandes volúmenes de datos que han dado como resultado a más de diez publicaciones de datos en repositorios científicos de todos los proyectos actuales de Count Me In.",
                         "Científicos de todas partes del mundo han usado datos de Count Me In para realizar descubrimientos en muchos sectores diversos y para desarrollar nuevos ensayos clínicos, como en el caso del angiosarcoma. Hemos recibido comunicaciones directas de más de 60 científicos que trabajan en entornos académicos e industriales en más de 10 países y están utilizando datos de Count Me In para propulsar su investigación.",
                         "Los resultados de los estudios en que se utilizan datos de Count Me In se están difundiendo ampliamente en publicaciones científicas y existen más de 50 citas de los conjuntos de datos de Count Me In hasta el momento."
                     ],
@@ -204,26 +204,26 @@
                     "Title": "Personal",
                     "PeopleList": [
                         {
-                            "Title": "[ES]Leadership",
+                            "Title": "Liderazgo",
                             "List": [
-                                "<b>Elana Anastasio</b><br/>[ES]Associate Director",
-                                "<b>Roeshana Moore-Evans</b><br/>[ES]Senior Advisor",
-                                "<b>Corrie Painter</b><br/>[ES]Deputy Director",
-                                "<b>Nikhil Wagle</b><br/>[ES]Director"
+                                "<b>Elana Anastasio</b><br/> Directora Asociada",
+                                "<b>Roeshana Moore-Evans</b><br/> Asesora Superior",
+                                "<b>Corrie Painter</b><br/> Directora Adjunta",
+                                "<b>Nikhil Wagle</b><br/> Director"
                             ]
                         },
                         {
-                            "Title": "Board of Directors",
+                            "Title": "Junta Directiva",
                             "List": [
-                                "<b>Todd Golub</b>, [ES]Co-chair<br/>Director, Broad Institute<br>Professor of Pediatrics, Harvard Medical School Charles A. Dana Investigator, Dana-Farber Cancer Institute",
-                                "<b>Reed Jobs</b>, [ES]Co-chair<br/>Managing Director, Health, Emerson Collective",
-                                "<b>Andrew Forrest</b><br/>[ES]Founder and Chairman - Fortescue Metals Group, Fortescue Future Industries, Tattarang Group, and Minderoo Foundation",
-                                "<b>Cindy Citrone</b><br/>[ES]Founder and CEO, Citrone 33",
-                                "<b>Greg Simon</b><br/>[ES]President, Simonovation, LLCFormer Executive Director White House Cancer Moonshot Task Force",
-                                "<b>Jesse Souweine</b><br/>[ES]Chief Operating Officer, Executive Vice President, Broad Institute"                                ,
-                                "<b>Laurie Glimcher</b><br/>[ES]President and CEO, Dana-Farber Cancer Institute Director, Dana-Farber/Harvard Cancer Center Richard and Susan Smith Professor of Medicine, Harvard Medical School",
-                                "<b>Matt Bettonville</b><br/>[ES]Director, Venture Investing, Health, Emerson Collective",
-                                "<b>Nikhil Wagle</b><br/>[ES]Director, Count Me In<br>Assistant Professor of Medicine, Harvard Medical School / Dana-Farber Cancer Institute<br>Institute Member, Broad Institute"
+                                "<b>Todd Golub</b>, Copresidente<br/>Director, Broad Institute <br>Profesor de Pediatría, Escuela de Medicina Harvard Investigador de Charles A. Dana, Dana-Farber Cancer Institute ",
+                                "<b>Reed Jobs</b>, Copresidente<br/>Director General, Salud, Emerson Collective",
+                                "<b>Andrew Forrest</b><br/>Fundador y Presidente - Fortescue Metals Group, Fortescue Future Industries, Tattarang Group, y Minderoo Foundation",
+                                "<b>Cindy Citrone</b><br/> Fundadora y Directora Ejecutiva, Citrone 33",
+                                "<b>Greg Simon</b><br/>Presidente, Simonovation, LLC Previo Director Ejecutivo del Grupo Operativo del Cancer Moonshot de la Casa Blanca",
+                                "<b>Jesse Souweine</b><br/>Directora de Operaciones, Vicepresidenta Ejecutiva, Broad Institute"                                ,
+                                "<b>Laurie Glimcher</b><br/>Presidenta y Directora Ejecutiva, Directora de Dana-Farber Cancer Institute, Profesora de Medicina Dana-Farber/Harvard Cancer Center Richard y Susan Smith, Escuela de Medicina Harvard",
+                                "<b>Matt Bettonville</b><br/>Director, Venture Investing, Salud, Emerson Collective",
+                                "<b>Nikhil Wagle</b><br/>Director, Count Me In<br>Profesor Asistente de Medicina, Escuela de Medicina Harvard / Dana-Farber Cancer Institute<br>Miembro del Instituto, Broad Institute"
                             ]
                         }
                     ]
@@ -241,13 +241,13 @@
                 {
                     "Question": "¿Qué es Count Me In?",
                     "Paragraphs": [
-                        "Count Me In es una iniciativa de investigación sin fines de lucro que permite a los pacientes hacer avances en la investigación del cáncer al compartir sus muestras, su información clínica y sus puntos de vista. Con el consentimiento de los pacientes, todos los datos recabados por Count Me In y generados por medio del proyecto se comparten periódicamente con la comunidad de investigación (después de remover la información de identificación personal) a través de bases de datos de información científica disponibles gratuitamente, de modo que los investigadores de cualquier parte puedan ayudar a agilizar los descubrimientos, ampliar nuestros conocimientos sobre el cáncer y desarrollar nuevas estrategias de tratamiento y, así, derribar las divisiones que existen en la investigación del cáncer."
+                        "Count Me In es una iniciativa de investigación sin fines de lucro que permite a los pacientes hacer avances en la investigación del cáncer al compartir sus muestras, su información clínica y sus voces. Con el consentimiento de los pacientes, todos los datos recabados por Count Me In y generados por medio del proyecto se comparten periódicamente con la comunidad de investigación (después de remover la información de identificación personal) a través de bases de datos de información científica disponibles gratuitamente, de modo que los investigadores de cualquier parte puedan ayudar a agilizar los descubrimientos, ampliar nuestros conocimientos sobre el cáncer y desarrollar nuevas estrategias de tratamiento y, así, derribar las divisiones que existen en la investigación del cáncer."
                     ]
                 },
                 {
                     "Question": "¿Por qué es necesario?",
                     "Paragraphs": [
-                        "Los pacientes tienen el poder de avanzar la investigación del cáncer una forma única. Los registros médicos, las muestras de tumores y las experiencias personales de los pacientes contienen pistas (sobre qué tipos de cáncer responderán o serán resistentes a qué tratamientos) que no suelen encontrarse en los laboratorios de investigación o ensayos clínicos.<br/>La mayoría de los pacientes nunca han tenido la oportunidad de participar en estudios de investigación, porque casi todos los pacientes de cáncer reciben atención en clínicas comunitarias donde no se llevan a cabo estos estudios de investigación. A la mayoría de los pacientes nunca les han preguntado si les gustaría compartir sus muestras de tejidos e información médica con fines de investigación.<br/>Para responder muchas preguntas importantes sobre el cáncer se necesitarán la participación y el empoderamiento de muchos más pacientes como aliados, además de ofrecer a todas las personas que tienen cáncer la oportunidad de participar en investigaciones revolucionarias, independientemente de que vivan cerca de un hospital de investigación o no. La meta de Count Me In es hacer que esto sea posible."
+                        "Los pacientes tienen el poder de avanzar la investigación del cáncer de una forma única. Los registros médicos, las muestras de tumores y las experiencias personales de los pacientes contienen pistas (sobre qué tipos de cáncer responderán o serán resistentes a qué tratamientos) que no suelen encontrarse en los laboratorios de investigación o ensayos clínicos.<br/>La mayoría de los pacientes nunca han tenido la oportunidad de participar en estudios de investigación, porque casi todos los pacientes de cáncer reciben atención en clínicas comunitarias donde no se llevan a cabo estos estudios de investigación. A la mayoría de los pacientes nunca les han preguntado si les gustaría compartir sus muestras de tejidos e información médica con fines de investigación.<br/>Para responder muchas preguntas importantes sobre el cáncer se necesitarán la participación y el empoderamiento de muchos más pacientes como aliados, además de ofrecer a todas las personas que tienen cáncer la oportunidad de participar en investigaciones revolucionarias, independientemente de que vivan cerca de un hospital de investigación o no. La meta de Count Me In es hacer que esto sea posible."
                     ]
                 },
                 {
@@ -330,7 +330,7 @@
                 {
                     "Question": "Si me he inscrito en nombre de mi hijo(a), ¿qué sucede cuando se convierte en adulto?",
                     "Paragraphs": [
-                        "Cuando su hijo(a) alcance la edad en la que puede dar su propio consentimiento, debe hacerlo para continuar participando. En el caso de Estados Unidos y Canadá, esta edad varía según el estado y territorio, y es entre las edades de 18 y 21 años. Count Me In se comunicará con usted antes de esta edad para obtener la información de contacto de su hijo(a).",
+                        "Cuando su hijo(a) alcance la edad en la que puede dar su propio consentimiento, debe hacerlo para seguir participando. En el caso de Estados Unidos y Canadá, esta edad varía según el estado y territorio, y es entre las edades de 18 y 21 años. Count Me In se comunicará con usted antes de esta edad para obtener la información de contacto de su hijo(a).",
                         "Si su hijo(a) decide permanecer en el estudio, el equipo del proyecto continuará solicitando registros médicos y muestras de tejidos en cualquier momento durante el tratamiento de cáncer de su hijo(a)."
                     ]
                 }
@@ -372,8 +372,8 @@
                     {
                         "Question": "¿Cómo aborda Count Me In la inclusividad en la participación?",
                         "Paragraphs": [
-                            "Count Me In entiende que existen muchas barreras (estructurales e históricas) que impiden la participación directa de comunidades que no han estado representadas y marginadas en la investigación. Count Me In tiene un compromiso con el principio fundamental de que la experiencia de todos los pacientes con cáncer es importante, independientemente de dónde vivan, qué idioma hablen o cuál sea su patrimonio cultural, y la incorporación de su experiencia es imperativa para ampliar nuestros conocimientos sobre el cáncer.",
-                            "La investigación tradicional del cáncer no se presta a ser tan inclusiva como debería. Las desigualdades en torno al cáncer son prueba de todo el trabajo que todavía queda por hacer en este espacio, y reconocemos que nunca llegaremos a la culminación, pero continuamos esforzándonos por lograrlo, junto con pacientes. Creemos que los pacientes deben ser aliados directos en la investigación del cáncer y sabemos que solo podemos avanzar nuestros conocimientos sobre el cáncer y acelerar los descubrimientos si lo hacemos juntos."
+                            "Count Me In entiende que existen muchas barreras (estructurales e históricas) que impiden la participación directa de comunidades subrepresentadas y marginadas en la investigación. Count Me In tiene un compromiso con el principio fundamental de que la experiencia de todos los pacientes con cáncer es importante, independientemente de dónde vivan, qué idioma hablen o cuál sea su patrimonio cultural, y la incorporación de su experiencia es imperativa para ampliar nuestros conocimientos sobre el cáncer.",
+                            "La investigación tradicional del cáncer no se presta a ser tan inclusiva como debería. Las desigualdades en torno al cáncer son prueba de todo el trabajo que todavía queda por hacer en este espacio, y reconocemos que nunca llegaremos a la culminación de esa labor, pero continuamos esforzándonos por lograrlo, junto con pacientes. Creemos que los pacientes deben ser aliados directos en la investigación del cáncer y sabemos que solo podemos avanzar nuestros conocimientos sobre el cáncer y acelerar los descubrimientos si lo hacemos juntos."
                         ]
                     },
                     {
@@ -392,8 +392,8 @@
                     "GICAlliance": "GI Cancers Alliance",
                     "CCCanada": "Colorectal Cancer Canada",
                     "FightCC": "Fight Colorectal Cancer",
-                    "ColonCancerStars": "Colon Cancer Stars logo",
-                    "GCCA": "Global Colon Cancer association logo"
+                    "ColonCancerStars": "Colon Cancer Stars",
+                    "GCCA": "Global Colon Cancer Association"
                 },
                 "Text": "Para obtener más información sobre cómo participar en el Proyecto de cáncer colorrectal, comuníquese con el equipo en <a class='Link' href='mailto:info@colorectalcancerproject.org'>info@colorectalcancerproject.org</a>."
             },
@@ -438,7 +438,7 @@
                     {
                         "Question": "Who is conducting this research?",
                         "Paragraphs": [
-                            "This project is being conducted by the Broad Institute of MIT and Harvard, Dana-Farber Cancer Institute, and Count Me In, a non-profit research initiative that conducts patient-partnered studies of cancer. This project and Count Me In's Osteosarcoma Project is supported by a grant from the National Cancer Institute's Cancer Moonshot program and is part of the <a class='Link' target='_blank' href='https://www.cancer.gov/research/key-initiatives/moonshot-cancer-initiative/implementation/patient-engagement'>Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network</a> of research centers. Count Me In is stewarded by three leading organizations: Emerson Collective, a California-based social change organization; the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; and the Dana-Farber Cancer Institute, a leading cancer hospital."
+                            "This project is being conducted by the Broad Institute of MIT and Harvard, Dana-Farber Cancer Institute, and Count Me In, a non-profit research initiative that conducts patient-partnered studies of cancer. This project and Count Me In's Osteosarcoma Project is supported by a grant from the National Cancer Institute's Cancer Moonshot program and is part of the Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers. Count Me In is stewarded by three leading organizations: Emerson Collective, a California-based social change organization; the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; and the Dana-Farber Cancer Institute, a leading cancer hospital."
                         ]
                     },
                     {
@@ -480,29 +480,29 @@
     },
     "Toolkit": {
         "AgeUpThankYou": {
-            "Title": "[ES]Thank you!",
-            "EmailVerified": "[ES]Your email address has been verified. We will be sending an email with more information on re-consent shortly after your birthday.",
+            "Title": "¡Gracias!",
+            "EmailVerified": "Su correo electrónico ha sido verificado. Le enviaremos un correo electrónico con más información sobre cómo volver a dar su consentimiento después de su cumpleaños.",
             "EmailCollected": {
-                "TextPt1": "[ES]An email will be sent to your child to confirm their address and tell them about the upcoming re-consent process. If you need to change the email you provided for your child, please contact the project team at",
-                "TextPt2": "[ES]or",
-                "Button": "[ES]Go to Dashboard"
+                "TextPt1": "Se le enviará un correo electrónico a su hijo(a) para confirmar su dirección postal e informarle sobre el proceso para volver a dar su consentimiento. Si necesita cambiar el correo electrónico de su hijo(a), por favor comuníquese con nosotros a",
+                "TextPt2": "o",
+                "Button": "Ir a su tablero"
             },
-            "ImageAlt": "[ES]Email sent"
+            "ImageAlt": "Correo electrónico enviado"
         },
         "StayInformed": {
-            "Title": "¡Manténgase Informada/o!",
-            "Text": "Gracias por unirse a la lista de correo. Le enviaremos noticias para que este informada/o. Puede darse de baja en cualquier momento. Si tiene alguna pregunta sobre su estado en el proyecto, envíe un correo electrónico a ",
+            "Title": "¡Manténgase Informado!",
+            "Text": "Gracias por unirse a la lista de correo. Le enviaremos noticias para que este informado. Puede darse de baja en cualquier momento. Si tiene alguna pregunta sobre su estado en el proyecto, envíe un correo electrónico a ",
             "ReturnButton": "REGRESAR A PÁGINA PRINCIPAL"
         },
         "Dashboard": {
             "Title": "Tablero de Progreso",
             "ParticipantsTitle": "Su Tablero de Progreso",
-            "AddParticipant": "[ES]Add Participant",
+            "AddParticipant": "Añadir Participante",
             "ShowPanel": "Mostrar",
             "HidePanel": "Esconder",
             "UserLabel": "Usted",
             "ChildLabel": "Su hijo(a)",
-            "RemoveParticipant": "[ES]Remove participant {{participant}}"
+            "RemoveParticipant": "Remover Participante {{participant}}"
         },
         "Password": {
             "Title": "Ingrese la contraseña.",
