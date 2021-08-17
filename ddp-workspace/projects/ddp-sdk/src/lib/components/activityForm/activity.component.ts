@@ -140,6 +140,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     }
 
     public ngOnDestroy(): void {
+        super.ngOnDestroy();
         this.anchors.forEach(anchor => anchor.removeAll());
     }
 
