@@ -1,16 +1,18 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TooltipComponent } from '../../tooltip.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { ActivityPicklistQuestionBlock } from '../../../models/activity/activityPicklistQuestionBlock';
 import { By } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { of } from 'rxjs';
+
+import { TooltipComponent } from '../../tooltip.component';
+import { ActivityPicklistQuestionBlock } from '../../../models/activity/activityPicklistQuestionBlock';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { DropdownActivityPicklistQuestion } from './dropdownActivityPicklistQuestion.component';
 import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
-import { of } from 'rxjs';
 
 describe('DropdownActivityPicklistQuestion', () => {
     const questionBlock = {
@@ -85,7 +87,8 @@ describe('DropdownActivityPicklistQuestion', () => {
                 MatSelectModule,
                 BrowserAnimationsModule,
                 TranslateTestingModule,
-                MatTooltipModule
+                MatTooltipModule,
+                FormsModule
             ],
             providers: [
                 { provide: NGXTranslateService, useValue: ngxTranslateServiceSpy }
@@ -105,7 +108,6 @@ describe('DropdownActivityPicklistQuestion', () => {
     });
 
     it('should create component', () => {
-        fixture.detectChanges();
         expect(component).toBeTruthy();
     });
 
