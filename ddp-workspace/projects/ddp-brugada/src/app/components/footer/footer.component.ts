@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 
 import { Route } from '../../constants/Route';
-import { MailingListModalComponent } from '../mailing-list-modal/mailing-list-modal.component';
+import { MailingListService } from '../../services/mailing-list.service';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
+  providers: [MailingListService],
 })
 export class FooterComponent {
   Route = Route;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private mailingListService: MailingListService) {}
 
   onBackToTopClick(): void {
     window.scrollTo({
@@ -26,11 +26,6 @@ export class FooterComponent {
   }
 
   private openMailingListDialog(): void {
-    this.dialog.open(MailingListModalComponent, {
-      width: '100%',
-      maxWidth: '80rem',
-      disableClose: true,
-      autoFocus: false,
-    });
+    this.mailingListService.openDialog();
   }
 }
