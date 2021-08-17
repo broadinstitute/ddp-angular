@@ -28,8 +28,7 @@ configurationService.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 configurationService.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
 configurationService.auth0CodeRedirect = location.origin + base + 'auth';
 configurationService.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
-configurationService.localRegistrationUrl =
-  configurationService.backendUrl + '/pepper/v1/register';
+configurationService.localRegistrationUrl = configurationService.backendUrl + '/pepper/v1/register';
 configurationService.dashboardPageUrl = Route.Dashboard;
 configurationService.loginLandingUrl = DDP_ENV.loginLandingUrl;
 

@@ -3,10 +3,12 @@
 .form {
   &-control {
     margin-bottom: 6px;
+
     label {
       font-weight: bold;
       font-size: 22px;
     }
+
     input {
       margin-top: 10px;
       margin-bottom: 10px;
@@ -16,16 +18,20 @@
       font-family: inherit;
       font-size: 20px;
       border: 2px solid map-get($colors, 'input-border');
-      &:focus, &:focus-visible {
+
+      &:focus,
+      &:focus-visible {
         outline: 0;
         border: 2px solid map-get($colors, 'input-border-focus');
       }
     }
+
     &-error {
       color: map-get($colors, 'form-control-error');
       margin-bottom: 20px;
     }
   }
+
   button {
     padding: 16px 60px;
   }
@@ -36,7 +42,8 @@ a {
   padding-bottom: 2px;
   text-decoration: none;
   border-bottom: 1px solid map-get($colors, 'link');
-  opacity: .9;
+  opacity: 0.9;
+
   &:hover {
     opacity: 1;
   }

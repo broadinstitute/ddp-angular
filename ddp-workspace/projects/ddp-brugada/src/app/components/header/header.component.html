@@ -8,21 +8,13 @@
       />
     </a>
 
-    <button
-      class="toggle"
-      [class.toggle--shown]="isNavigationShown"
-      (click)="onToggleClick()"
-    >
+    <button class="toggle" [class.toggle--shown]="isNavigationShown" (click)="onToggleClick()">
       <span class="toggle__bar"></span>
       <span class="toggle__bar"></span>
       <span class="toggle__bar"></span>
     </button>
 
-    <nav
-      class="header__nav"
-      [class.header__nav--shown]="isNavigationShown"
-      (click)="onNavClick($event)"
-    >
+    <nav class="header__nav" [class.header__nav--shown]="isNavigationShown" (click)="onNavClick($event)">
       <ul class="link-list">
         <li class="link-list__item">
           <a class="link" [routerLink]="Route.About">
@@ -43,11 +35,7 @@
         </li>
 
         <li class="link-list__item">
-          <a
-            class="link"
-            href="/assets/pdf/for-physicians-07-20.pdf"
-            target="_blank"
-          >
+          <a class="link" href="/assets/pdf/for-physicians-07-20.pdf" target="_blank">
             {{ 'App.Header.Links.Physicians' | translate }}
           </a>
         </li>

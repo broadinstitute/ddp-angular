@@ -64,14 +64,10 @@ export class DashboardComponent implements OnInit {
   }
 
   private getActivities(): Observable<ActivityInstance[]> {
-    return this.userActivityService
-      .getActivities(of(this.config.studyGuid))
-      .pipe(take(1));
+    return this.userActivityService.getActivities(of(this.config.studyGuid)).pipe(take(1));
   }
 
   private getAnnouncements(): Observable<AnnouncementMessage[]> {
-    return this.announcementsService
-      .getMessages(this.config.studyGuid)
-      .pipe(take(1));
+    return this.announcementsService.getMessages(this.config.studyGuid).pipe(take(1));
   }
 }

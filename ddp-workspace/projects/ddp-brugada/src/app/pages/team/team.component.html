@@ -28,10 +28,7 @@
           <li *ngFor="let Member of Section.Members" class="members-list__item">
             <article class="member">
               <picture class="member__pic">
-                <img
-                  [src]="'/assets/images/team/' + Member.Image"
-                  [alt]="Member.Name"
-                />
+                <img [src]="'/assets/images/team/' + Member.Image" [alt]="Member.Name" />
               </picture>
 
               <div class="member__info">
@@ -59,10 +56,7 @@
       </h3>
 
       <ul class="council-list">
-        <li
-          *ngFor="let Member of 'App.Team.Council.Members' | translate"
-          class="council-list__item"
-        >
+        <li *ngFor="let Member of 'App.Team.Council.Members' | translate" class="council-list__item">
           {{ Member }}
         </li>
       </ul>
@@ -73,9 +67,7 @@
         {{ 'App.Team.Collaboration.Title' | translate }}
       </h3>
 
-      <ng-container
-        *ngFor="let Partner of 'App.Team.Collaboration.Partners' | translate"
-      >
+      <ng-container *ngFor="let Partner of 'App.Team.Collaboration.Partners' | translate">
         <h4 class="section__subtitle">
           {{ Partner.Name }}
         </h4>

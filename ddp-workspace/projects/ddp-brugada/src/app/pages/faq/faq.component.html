@@ -1,14 +1,8 @@
 <section class="intro">
   <div class="intro__container">
-    <h2
-      class="intro__title"
-      [innerHTML]="'App.FAQ.Participants.Title' | translate"
-    ></h2>
+    <h2 class="intro__title" [innerHTML]="'App.FAQ.Participants.Title' | translate"></h2>
 
-    <p
-      class="intro__description"
-      [innerHTML]="'App.FAQ.Participants.Description' | translate"
-    ></p>
+    <p class="intro__description" [innerHTML]="'App.FAQ.Participants.Description' | translate"></p>
   </div>
 </section>
 
@@ -25,10 +19,7 @@
 
 <section class="intro">
   <div class="intro__container">
-    <h2
-      class="intro__title"
-      [innerHTML]="'App.FAQ.Community.Title' | translate"
-    ></h2>
+    <h2 class="intro__title" [innerHTML]="'App.FAQ.Community.Title' | translate"></h2>
   </div>
 </section>
 
@@ -65,11 +56,7 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
 
-      <p
-        *ngFor="let Answer of Question.Answers"
-        class="question__answer"
-        [innerHTML]="Answer"
-      ></p>
+      <p *ngFor="let Answer of Question.Answers" class="question__answer" [innerHTML]="Answer"></p>
     </mat-expansion-panel>
   </mat-accordion>
 </ng-template>

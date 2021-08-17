@@ -20,9 +20,7 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <fieldset class="form__fieldset">
       <mat-form-field>
-        <mat-label>{{
-          'App.MailingList.Form.Fields.Email.Label' | translate
-        }}</mat-label>
+        <mat-label>{{ 'App.MailingList.Form.Fields.Email.Label' | translate }}</mat-label>
 
         <input matInput type="email" formControlName="email" />
 
@@ -36,9 +34,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>{{
-          'App.MailingList.Form.Fields.EmailConfirmation.Label' | translate
-        }}</mat-label>
+        <mat-label>{{ 'App.MailingList.Form.Fields.EmailConfirmation.Label' | translate }}</mat-label>
 
         <input matInput type="email" formControlName="emailConfirmation" />
 
@@ -50,9 +46,7 @@
           {{ 'App.MailingList.Form.Errors.EmailNotValid' | translate }}
         </mat-error>
 
-        <mat-error
-          *ngIf="form.get('emailConfirmation').hasError('emailsDoNotMatch')"
-        >
+        <mat-error *ngIf="form.get('emailConfirmation').hasError('emailsDoNotMatch')">
           {{ 'App.MailingList.Form.Errors.FieldsDoNotMatch' | translate }}
         </mat-error>
       </mat-form-field>
@@ -61,12 +55,7 @@
     <p class="paragraph">{{ 'App.MailingList.Thanking' | translate }}</p>
 
     <div class="btn-container">
-      <button
-        type="button"
-        class="btn btn--white"
-        [disabled]="loading"
-        (click)="onClose()"
-      >
+      <button type="button" class="btn btn--white" [disabled]="loading" (click)="onClose()">
         {{ 'App.MailingList.Form.Buttons.Cancel' | translate }}
       </button>
 

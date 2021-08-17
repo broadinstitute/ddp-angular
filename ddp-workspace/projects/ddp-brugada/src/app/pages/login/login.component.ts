@@ -14,8 +14,6 @@ export class LoginComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.showResetBar$ = this.route.queryParams.pipe(
-      map((params: Params) => params.reset_password),
-    );
+    this.showResetBar$ = this.route.queryParams.pipe(map((params: Params) => params.reset_password));
   }
 }
