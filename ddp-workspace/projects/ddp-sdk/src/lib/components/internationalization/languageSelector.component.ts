@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnDestroy, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { iif, Observable, of, Subscription, merge } from 'rxjs';
+import { iif, Observable, of, Subscription, merge, BehaviorSubject } from 'rxjs';
 import { map, mergeMap, filter, concatMap, tap } from 'rxjs/operators';
 import { PopupWithCheckboxComponent } from '../popupWithCheckbox.component';
 import { CompositeDisposable } from '../../compositeDisposable';
@@ -135,9 +135,12 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
 
     // Find the current language and return true if successful or false otherwise
     public findCurrentLanguage(): Observable<boolean> {
-        const langFromURLObservable = this.route.queryParamMap.pipe(
+        const langFromURLSubject = new BehaviorSubject<StudyLanguage|null>(null);
+        this.route.queryParamMap.pipe(
             map(params => params.get(this.LANGUAGE_QUERY_PARAM)),
-            map(langCode => this.studyLanguages.find(studyLang => studyLang.languageCode === langCode)));
+            filter(langCode => !!langCode),
+            map(langCode => this.studyLanguages.find(studyLang => studyLang.languageCode === langCode)))
+            .subscribe(langFromURLSubject);
         // Check for a language in the profile
         const profileLangObservable: Observable<StudyLanguage> = this.getProfileLangObservable();
 
@@ -148,7 +151,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         const defaultLangObservable: Observable<StudyLanguage> = this.getDefaultLangObservable();
 
         // Create an observable that will check each applicable option and return the first valid language found, if any
-        const langObservable: Observable<StudyLanguage> = langFromURLObservable.pipe(
+        const langObservable: Observable<StudyLanguage> = langFromURLSubject.pipe(
             mergeMap(langFromURL => {
                 return this.getNextObservable(langFromURL, profileLangObservable);
             }),
