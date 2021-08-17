@@ -8,32 +8,22 @@
 
     <base href="/" />
 
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
     <link id="app-favicon" rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-95RZ7RFCYH"
-    ></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-95RZ7RFCYH"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
+
       function gtag() {
         dataLayer.push(arguments);
       }
+
       gtag('js', new Date());
 
       gtag('config', 'G-95RZ7RFCYH');
@@ -48,10 +38,7 @@
   <script type="text/javascript">
     function loadTcell() {
       var tcellScript = document.createElement('script');
-      tcellScript.setAttribute(
-        'src',
-        'https://us.jsagent.tcell.insight.rapid7.com/tcellagent.min.js',
-      );
+      tcellScript.setAttribute('src', 'https://us.jsagent.tcell.insight.rapid7.com/tcellagent.min.js');
       tcellScript.setAttribute('tcellbaseurl', DDP_ENV.tcellbaseurl);
       tcellScript.setAttribute('tcellappid', DDP_ENV.tcellappid);
       tcellScript.setAttribute('tcellapikey', DDP_ENV.tcellapikey);

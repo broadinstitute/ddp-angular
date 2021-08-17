@@ -15,10 +15,7 @@ export class MailingListModalComponent implements OnInit {
   form: FormGroup = new FormGroup(
     {
       email: new FormControl('', [Validators.required, Validators.email]),
-      emailConfirmation: new FormControl('', [
-        Validators.required,
-        Validators.email,
-      ]),
+      emailConfirmation: new FormControl('', [Validators.required, Validators.email]),
     },
     (formGroup: FormGroup) => {
       if (Object.values(formGroup.controls).some(control => control.invalid)) {
@@ -29,9 +26,7 @@ export class MailingListModalComponent implements OnInit {
       const same = email === emailConfirmation;
 
       if (!same) {
-        formGroup
-          .get('emailConfirmation')
-          .setErrors({ emailsDoNotMatch: true });
+        formGroup.get('emailConfirmation').setErrors({ emailsDoNotMatch: true });
       } else {
         formGroup.get('emailConfirmation').setErrors(null);
       }

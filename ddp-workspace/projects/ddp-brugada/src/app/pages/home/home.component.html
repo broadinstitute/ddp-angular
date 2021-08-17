@@ -21,16 +21,10 @@
 <section class="mission">
   <div class="mission__container">
     <div class="mission__img-wrapper">
-      <img
-        src="/assets/images/home/ecg-icon.png"
-        [alt]="'App.Home.Mission.ImgAlt' | translate"
-      />
+      <img src="/assets/images/home/ecg-icon.png" [alt]="'App.Home.Mission.ImgAlt' | translate" />
     </div>
 
-    <p
-      class="mission__paragraph"
-      [innerHTML]="'App.Home.Mission.Paragraph1' | translate"
-    ></p>
+    <p class="mission__paragraph" [innerHTML]="'App.Home.Mission.Paragraph1' | translate"></p>
 
     <p class="mission__paragraph">
       {{ 'App.Home.Mission.Paragraph2' | translate }}
@@ -49,19 +43,10 @@
     </h3>
 
     <ul class="step-list participation__step-list">
-      <li
-        *ngFor="
-          let Step of 'App.Home.Participation.Steps' | translate;
-          let i = index
-        "
-        class="step-list__item"
-      >
+      <li *ngFor="let Step of 'App.Home.Participation.Steps' | translate; let i = index" class="step-list__item">
         <div class="step">
           <div class="step__img-wrapper">
-            <img
-              [src]="'/assets/images/home/step-' + (i + 1) + '.png'"
-              [alt]="Step.Name"
-            />
+            <img [src]="'/assets/images/home/step-' + (i + 1) + '.png'" [alt]="Step.Name" />
           </div>
 
           <h4 class="step__name">
@@ -94,46 +79,31 @@
     <ul class="institutions-list">
       <li class="institutions-list__item">
         <a class="img-link" target="_blank" [href]="BROAD_URL">
-          <img
-            src="/assets/images/home/broad-logo.png"
-            [alt]="'App.Home.Institutions.ImageAlts.Broad' | translate"
-          />
+          <img src="/assets/images/home/broad-logo.png" [alt]="'App.Home.Institutions.ImageAlts.Broad' | translate" />
         </a>
       </li>
 
       <li class="institutions-list__item">
         <a class="img-link" target="_blank" [href]="MGH_URL">
-          <img
-            src="/assets/images/home/mgh-logo.png"
-            [alt]="'App.Home.Institutions.ImageAlts.MGH' | translate"
-          />
+          <img src="/assets/images/home/mgh-logo.png" [alt]="'App.Home.Institutions.ImageAlts.MGH' | translate" />
         </a>
       </li>
 
       <li class="institutions-list__item">
         <a class="img-link" target="_blank" [href]="SADS_URL">
-          <img
-            src="/assets/images/home/sads-logo.png"
-            [alt]="'App.Home.Institutions.ImageAlts.SADS' | translate"
-          />
+          <img src="/assets/images/home/sads-logo.png" [alt]="'App.Home.Institutions.ImageAlts.SADS' | translate" />
         </a>
       </li>
 
       <li class="institutions-list__item">
         <a class="img-link" target="_blank" [href]="VUMC_URL">
-          <img
-            src="/assets/images/home/vumc-logo.png"
-            [alt]="'App.Home.Institutions.ImageAlts.VUMC' | translate"
-          />
+          <img src="/assets/images/home/vumc-logo.png" [alt]="'App.Home.Institutions.ImageAlts.VUMC' | translate" />
         </a>
       </li>
 
       <li class="institutions-list__item">
         <a class="img-link" target="_blank" [href]="UWM_URL">
-          <img
-            src="/assets/images/home/uwm-logo.png"
-            [alt]="'App.Home.Institutions.ImageAlts.UWM' | translate"
-          />
+          <img src="/assets/images/home/uwm-logo.png" [alt]="'App.Home.Institutions.ImageAlts.UWM' | translate" />
         </a>
       </li>
 

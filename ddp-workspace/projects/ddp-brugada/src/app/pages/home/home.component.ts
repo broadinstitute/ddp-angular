@@ -14,6 +14,5 @@ export class HomeComponent {
   readonly SADS_URL = 'https://www.sads.org';
   readonly VUMC_URL = 'https://medicine.vumc.org';
   readonly UWM_URL = 'https://www.medicine.wisc.edu';
-  readonly STANFORD_URL =
-    'https://stanfordhealthcare.org/medical-clinics/center-inherited-cardiovascular-disease.html';
+  readonly STANFORD_URL = 'https://stanfordhealthcare.org/medical-clinics/center-inherited-cardiovascular-disease.html';
 }

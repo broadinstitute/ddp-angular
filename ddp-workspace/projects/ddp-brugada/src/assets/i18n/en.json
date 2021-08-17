@@ -275,13 +275,7 @@
       ],
       "Council": {
         "Title": "Project Advisory Council",
-        "Members": [
-          "Kathleen Lewis",
-          "Ana T. Lipsanopoulos",
-          "Stephanie Harris",
-          "Eugene Wong",
-          "Victor Nauffal"
-        ]
+        "Members": ["Kathleen Lewis", "Ana T. Lipsanopoulos", "Stephanie Harris", "Eugene Wong", "Victor Nauffal"]
       },
       "Collaboration": {
         "Title": "Collaborating Partners",
