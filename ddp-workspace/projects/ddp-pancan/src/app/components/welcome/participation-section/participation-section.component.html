@@ -23,6 +23,7 @@
     <a *ngIf="isColorectalTheme; else strokedButton"
        mat-flat-button
        [routerLink]="'/' + AppRoutes.Participation"
+       queryParamsHandling="merge"
        class="btn learn-more-btn center small-letter-spacing button button_small">
         {{'App.HomePage.ParticipateSection.LearnMoreAboutParticipationButton' | translate}}
         <mat-icon>chevron_right</mat-icon>
@@ -30,6 +31,7 @@
     <ng-template #strokedButton>
         <a mat-stroked-button
            [routerLink]="'/' + AppRoutes.Participation"
+           queryParamsHandling="merge"
            class="btn learn-more-btn center small-letter-spacing button button_small button_secondary">
             {{'App.HomePage.ParticipateSection.LearnMoreAboutParticipationButton' | translate}}
             <mat-icon>chevron_right</mat-icon>

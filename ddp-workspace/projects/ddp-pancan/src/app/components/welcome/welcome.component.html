@@ -7,6 +7,7 @@
                    [innerHTML]="'App.HomePage.IntroductionSection.Text' | translate"></p>
                 <a mat-flat-button
                    [routerLink]="'/' + AppRoutes.CountMeIn"
+                   queryParamsHandling="merge"
                    (click)="sendCountMeInAnalytics()"
                    class="btn join-cmi-btn center button button_small"
                    color="primary">
@@ -32,6 +33,7 @@
         <p class="text static-page-paragraph-text" [innerHTML]="'App.HomePage.LearnMoreSection.Text' | translate"></p>
         <a mat-stroked-button
            [routerLink]="'/' + AppRoutes.AboutUs"
+           queryParamsHandling="merge"
            class="btn learn-more-btn center small-letter-spacing button button_small button_secondary">
             {{'App.HomePage.LearnMoreSection.LearnMoreAboutUsButton' | translate}}
             <mat-icon>chevron_right</mat-icon>
@@ -65,6 +67,7 @@
         </div>
         <a mat-stroked-button
            [routerLink]="'/' + AppRoutes.FAQ"
+           queryParamsHandling="merge"
            class="btn more-faq-btn center small-letter-spacing button button_small button_secondary">
             {{'App.FAQ.Button.MoreFAQs' | translate}}
             <mat-icon>chevron_right</mat-icon>
