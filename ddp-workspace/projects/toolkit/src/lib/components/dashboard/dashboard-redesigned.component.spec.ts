@@ -109,7 +109,7 @@ describe('DashboardRedesignedComponent', () => {
             getGovernedStudyParticipants: of([]),
             addParticipant: of('')
         });
-        userActivityServiceAgentSpy = jasmine.createSpyObj('userActivityServiceAgentSpy', { getActivities: of([]) });
+        userActivityServiceAgentSpy = jasmine.createSpyObj('userActivityServiceAgentSpy', { getActivities: of([activityMock]) });
         workflowServiceSpy = jasmine.createSpyObj('workflowServiceSpy', { fromParticipantList: of([]) });
         userManagementServiceSpy = jasmine.createSpyObj('userManagementServiceSpy', { deleteUser: of([]) });
         sessionMock = {
@@ -236,6 +236,14 @@ describe('DashboardRedesignedComponent', () => {
         expect(addParticipantButton).toBeTruthy();
     });
 
+    it('should not display add participant button', () => {
+        component.ngOnInit();
+        fixture.detectChanges();
+
+        const addParticipantButton = fixture.debugElement.query(By.css('.add-participant-button'));
+        expect(addParticipantButton).toBeFalsy();
+    });
+
     it('should create a new participant on backend when click add participant button', () => {
         toolkitConfigMock.useParticipantDashboard = true;
         component.ngOnInit();
@@ -293,12 +301,13 @@ describe('DashboardRedesignedComponent', () => {
     });
 
     it('should return participant id', () => {
-        expect(component.trackById('never mind', { userGuid: '1', label: 'label'})).toBe('1');
+        expect(component.trackById('never mind', { userGuid: '1', label: 'label', activities: []})).toBe('1');
     });
 
-    it('should not display remove icon for operator and display for participants', () => {
+    it('should delete participants w/o activities', () => {
         toolkitConfigMock.useParticipantDashboard = true;
-        userActivityServiceAgentSpy.getActivities.and.returnValue(of([activityMock]));
+        userActivityServiceAgentSpy.getActivities.withArgs(jasmine.anything(), '1').and.returnValue(of([]));
+        userActivityServiceAgentSpy.getActivities.withArgs(jasmine.anything(), '2').and.returnValue(of([activityMock]));
         governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([
             { userGuid: '1', userProfile: { firstName: null, lastName: null } } as Participant,
             { userGuid: '2', userProfile: { firstName: null, lastName: null } } as Participant,
@@ -306,37 +315,11 @@ describe('DashboardRedesignedComponent', () => {
         component.ngOnInit();
         fixture.detectChanges();
 
-        const removeButtons = fixture.debugElement.queryAll(By.css('.remove-icon'));
-        expect(removeButtons[0].query(By.css('button'))).toBeFalsy();
-        expect(removeButtons[1].query(By.css('button'))).toBeTruthy();
-        expect(removeButtons[2].query(By.css('button'))).toBeTruthy();
-    });
-
-    it('should remove participant by clicking remove icon', () => {
-        toolkitConfigMock.useParticipantDashboard = true;
-        userActivityServiceAgentSpy.getActivities.and.returnValue(of([]));
-        governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([
-            { userGuid: '1', userProfile: { firstName: null, lastName: null } } as Participant,
-        ]));
-        component.ngOnInit();
-        fixture.detectChanges();
-
-        const removeButton = fixture.debugElement.query(By.css('.remove-icon button')).nativeElement;
-        removeButton.click();
         expect(userManagementServiceSpy.deleteUser).toHaveBeenCalledWith('1');
     });
 
-    it('should not display add participant button', () => {
-        component.ngOnInit();
-        fixture.detectChanges();
-
-        const addParticipantButton = fixture.debugElement.query(By.css('.add-participant-button'));
-        expect(addParticipantButton).toBeFalsy();
-    });
-
-    it('builds the participants list without first and last names', () => {
+    it('builds the participants list without first and last names', (done) => {
         toolkitConfigMock.useParticipantDashboard = true;
-        userActivityServiceAgentSpy.getActivities.and.returnValue(of([activityMock]));
         governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([
             { userGuid: '1', userProfile: { firstName: null, lastName: null } } as Participant,
             { userGuid: '2', userProfile: { firstName: null, lastName: null } } as Participant,
@@ -344,16 +327,18 @@ describe('DashboardRedesignedComponent', () => {
         component.ngOnInit();
         fixture.detectChanges();
 
-        expect(component.dashboardParticipants).toEqual([
-            { userGuid, label: 'You test' },
-            { userGuid: '1', label: 'Your child test' },
-            { userGuid: '2', label: 'Your child test #2' },
-        ]);
+        component.dashboardParticipants$.subscribe((participants) => {
+            expect(participants).toEqual([
+                { userGuid, label: 'You test', activities: [activityMock]},
+                { userGuid: '1', label: 'Your child test', activities: [activityMock]},
+                { userGuid: '2', label: 'Your child test #2', activities: [activityMock]},
+            ]);
+            done();
+        });
     });
 
-    it('builds the participants list with first and last names', () => {
+    it('builds the participants list with first and last names', (done) => {
         toolkitConfigMock.useParticipantDashboard = true;
-        userActivityServiceAgentSpy.getActivities.and.returnValue(of([activityMock]));
         profileMock.firstName = 'Dexter';
         profileMock.lastName = 'Morgan';
         governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([
@@ -363,46 +348,57 @@ describe('DashboardRedesignedComponent', () => {
         component.ngOnInit();
         fixture.detectChanges();
 
-        expect(component.dashboardParticipants).toEqual([
-            { userGuid, label: 'Dexter Morgan' },
-            { userGuid: '3', label: 'My child' },
-            { userGuid: '4', label: 'One more kid' },
-        ]);
+        component.dashboardParticipants$.subscribe((participants) => {
+            expect(participants).toEqual([
+                { userGuid, label: 'Dexter Morgan', activities: [activityMock]},
+                { userGuid: '3', label: 'My child', activities: [activityMock]},
+                { userGuid: '4', label: 'One more kid', activities: [activityMock]},
+            ]);
+            done();
+        });
     });
 
-    it('does not include the operator user into participants list', () => {
+    it('does not include the operator user into participants list', (done) => {
         toolkitConfigMock.useParticipantDashboard = true;
         userActivityServiceAgentSpy.getActivities.and.returnValue(of([]));
+        userActivityServiceAgentSpy.getActivities.withArgs(jasmine.anything(), '1').and.returnValue(of([activityMock]));
         governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([
             { userGuid: '1', userProfile: { firstName: 'My', lastName: 'child' } } as Participant,
         ]));
         component.ngOnInit();
         fixture.detectChanges();
 
-        expect(component.dashboardParticipants[0]).toEqual({userGuid: '1', label: 'My child'});
+        component.dashboardParticipants$.subscribe((participants) => {
+            expect(participants[0]).toEqual({userGuid: '1', label: 'My child', activities: [activityMock]});
+            done();
+        });
     });
 
-    it('includes only the operator user into participants list', () => {
+    it('includes only the operator user into participants list', (done) => {
         toolkitConfigMock.useParticipantDashboard = true;
-        userActivityServiceAgentSpy.getActivities.and.returnValue(of([activityMock]));
         governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([]));
         component.ngOnInit();
         fixture.detectChanges();
 
-        expect(component.dashboardParticipants[0]).toEqual({userGuid, label: 'You test'});
+        component.dashboardParticipants$.subscribe((participants) => {
+            expect(participants[0]).toEqual({userGuid, label: 'You test', activities: [activityMock]});
+            done();
+        });
     });
 
-    it('sets participants list as empty list', () => {
+    it('sets participants list as empty list', (done) => {
         toolkitConfigMock.useParticipantDashboard = false;
         component.ngOnInit();
         fixture.detectChanges();
 
-        expect(component.dashboardParticipants).toEqual([]);
+        component.dashboardParticipants$.subscribe((participants) => {
+            expect(participants).toEqual([]);
+            done();
+        });
     });
 
-    it('displays expansion panel for every participant', () => {
+    it('displays expansion panel for every participant and operator', () => {
         toolkitConfigMock.useParticipantDashboard = true;
-        userActivityServiceAgentSpy.getActivities.and.returnValue(of([]));
         governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([
             { userGuid: '1', userProfile: { firstName: 'My', lastName: 'child' } } as Participant,
             { userGuid: '4', userProfile: { firstName: 'One more', lastName: 'kid' } } as Participant,
@@ -411,7 +407,7 @@ describe('DashboardRedesignedComponent', () => {
         fixture.detectChanges();
 
         const expansionPanel = fixture.debugElement.queryAll(By.css('.mat-expansion-panel'));
-        expect(expansionPanel.length).toBe(2);
+        expect(expansionPanel.length).toBe(3);
     });
 
     it('does not display expansion panels for regular dashboard', () => {
@@ -427,7 +423,7 @@ describe('DashboardRedesignedComponent', () => {
         toolkitConfigMock.useParticipantDashboard = true;
         governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([
             { userGuid: '1', userProfile: { firstName: 'My', lastName: 'child' } } as Participant,
-            { userGuid: '1', userProfile: { firstName: 'My', lastName: 'child' } } as Participant,
+            { userGuid: '2', userProfile: { firstName: 'My', lastName: 'child' } } as Participant,
         ]));
         component.ngOnInit();
         fixture.detectChanges();
@@ -462,10 +458,8 @@ describe('DashboardRedesignedComponent', () => {
         expect(await expansionPanels[1].getDescription()).toContain('Show test');
     });
 
-    it('calls setParticipant with correct param in user activities', async () => {
-        const setParticipantSpy = spyOn(sessionMock, 'setParticipant');
+    it('calls getActivities with correct param', async () => {
         toolkitConfigMock.useParticipantDashboard = true;
-        userActivityServiceAgentSpy.getActivities.and.returnValue(of([activityMock]));
         governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([
             { userGuid: '1', userProfile: { firstName: null, lastName: null } } as Participant,
             { userGuid: '2', userProfile: { firstName: null, lastName: null } } as Participant,
@@ -473,33 +467,20 @@ describe('DashboardRedesignedComponent', () => {
         component.ngOnInit();
         fixture.detectChanges();
 
-        const expansionPanels = await loader.getAllHarnesses(MatExpansionPanelHarness);
-        await expansionPanels[1].expand();
-        await expansionPanels[2].expand();
-
-        expect(setParticipantSpy.calls.allArgs()).toEqual([
-            // clear participant id in DashboardComponent ngOnInit
-            [null],
-            // get activities for each user-activities component
-            ['1'], ['2']]);
+        expect(userActivityServiceAgentSpy.getActivities.calls.allArgs()).toEqual([
+            [jasmine.anything()],
+            // we have shareReplay in the code, so in fact it will be only one http call for operator activities
+            [jasmine.anything()],
+            [jasmine.anything(), '1'],
+            [jasmine.anything(), '2']]);
     });
 
-    it('sets activities for participant correctly', async (done) => {
+    it('clear participant id in DashboardComponent ngOnInit', async () => {
+        const setParticipantSpy = spyOn(sessionMock, 'setParticipant');
         toolkitConfigMock.useParticipantDashboard = true;
-        const activitiesResult = [activityMock];
-        userActivityServiceAgentSpy.getActivities.and.returnValue(of(activitiesResult));
-        governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([
-            { userGuid: '1', userProfile: { firstName: null, lastName: null } } as Participant,
-        ]));
         component.ngOnInit();
         fixture.detectChanges();
 
-        const expansionPanels = await loader.getAllHarnesses(MatExpansionPanelHarness);
-        await expansionPanels[1].expand();
-
-        component.participantToActivitiesStream.get('1').subscribe((activities) => {
-            expect(activities).toEqual(activitiesResult);
-            done();
-        });
+        expect(setParticipantSpy.calls.allArgs()).toEqual([[null]]);
     });
 });

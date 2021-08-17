@@ -503,8 +503,7 @@
             "ShowPanel": "Show",
             "HidePanel": "Hide",
             "UserLabel": "You",
-            "ChildLabel": "Your child",
-            "RemoveParticipant": "Remove participant {{participant}}"
+            "ChildLabel": "Your child"
         },
         "Password": {
             "Title": "Please enter the password",

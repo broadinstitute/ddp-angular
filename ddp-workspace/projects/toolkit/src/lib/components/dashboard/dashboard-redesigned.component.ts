@@ -16,13 +16,14 @@ import {
     WorkflowServiceAgent,
     UserManagementServiceAgent
 } from 'ddp-sdk';
-import { map, take, filter, switchMap, takeUntil, tap, mergeMap, finalize, catchError } from 'rxjs/operators';
-import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
+import { map, take, filter, switchMap, tap, mergeMap, finalize, catchError } from 'rxjs/operators';
+import { combineLatest, forkJoin, Observable, of, Subject } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 
 interface DashboardParticipant {
     userGuid: string;
     label: string;
+    activities: ActivityInstance[];
 }
 
 @Component({
@@ -88,7 +89,7 @@ interface DashboardParticipant {
                 <section class="section dashboard-section" [class.full-width]="useParticipantDashboard">
                     <div class="content content_medium">
                         <mat-accordion *ngIf="useParticipantDashboard; else activitiesTable" hideToggle multi>
-                            <mat-expansion-panel *ngFor="let participant of dashboardParticipants; first as isFirst; trackBy: trackById"
+                            <mat-expansion-panel *ngFor="let participant of dashboardParticipants$ | async; first as isFirst; trackBy: trackById"
                                                  class="dashboard-panel"
                                                  [expanded]="isFirst"
                                                  (opened)="openParticipantPanel(participant.userGuid);"
@@ -106,27 +107,19 @@ interface DashboardParticipant {
                                             {{'Toolkit.Dashboard.ShowPanel' | translate}}
                                             <mat-icon>expand_more</mat-icon>
                                         </ng-template>
-                                        <div class="remove-icon">
-                                            <button *ngIf="!isParticipantOperator(participant.userGuid)"
-                                                    mat-icon-button
-                                                    aria-label="'Toolkit.Dashboard.RemoveParticipant' | translate: {participant: participant.label}"
-                                                    [disabled]="participantToRemoveButtonDisabled.get(participant.userGuid)"
-                                                    (click)="removeParticipant(participant.userGuid); $event.stopPropagation();">
-                                                <mat-icon>delete</mat-icon>
-                                            </button>
-                                        </div>
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
-                                <ng-template matExpansionPanelContent>
-                                    <ng-container *ngTemplateOutlet="activitiesTable; context: {$implicit: participant.userGuid }"></ng-container>
-                                </ng-template>
+                                <ng-container *ngTemplateOutlet="activitiesTable; context: {
+                                    participantGuid: participant.userGuid,
+                                    activities: participant.activities }">
+                                </ng-container>
                             </mat-expansion-panel>
                         </mat-accordion>
-                        <ng-template #activitiesTable let-participantGuid>
+                        <ng-template #activitiesTable let-participantGuid="participantGuid" let-activities="activities">
                             <div class="dashboard-content dashboard-content_table">
                                 <ddp-user-activities [studyGuid]="studyGuid"
                                                      [displayedColumns]="toolkitConfig.dashboardDisplayedColumns"
-                                                     [dataSource]="(participantToActivitiesStream.get(participantGuid) || userActivities$) | async"
+                                                     [dataSource]="activities || (userActivities$ | async)"
                                                      (open)="navigate($event, participantGuid)">
                                 </ddp-user-activities>
                             </div>
@@ -146,13 +139,10 @@ interface DashboardParticipant {
 })
 export class DashboardRedesignedComponent extends DashboardComponent implements OnInit, OnDestroy {
     public invitationId: string | null = null;
-    public dashboardParticipants: DashboardParticipant[];
+    public dashboardParticipants$: Observable<DashboardParticipant[]>;
     public participantUserGuidToPanelIsOpen = new Map<string, boolean>();
-    public participantToRemoveButtonDisabled = new Map<string, boolean>();
-    public participantToActivitiesStream = new Map<string, Observable<Array<ActivityInstance>>>();
     public addParticipantButtonDisabled = false;
     private ngUnsubscribe = new Subject();
-    private removedParticipants$ = new BehaviorSubject<Array<string>>([]);
 
     constructor(
         private headerConfig: HeaderConfigurationService,
@@ -176,13 +166,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
         this.headerConfig.setupDefaultHeader();
         !this.isAdmin && this.getInvitationId();
 
-        const dashboardParticipants$ = this.useParticipantDashboard ? this.getDashboardParticipants() : of([]);
-        dashboardParticipants$.pipe(takeUntil(this.ngUnsubscribe)).subscribe((participants) => {
-            this.dashboardParticipants = participants;
-            for (const {userGuid} of participants) {
-                this.participantToActivitiesStream.set(userGuid, this.getUserActivitiesForParticipant(userGuid));
-            }
-        });
+        this.dashboardParticipants$ = this.useParticipantDashboard ? this.getDashboardParticipants() : of([]);
     }
 
     private getDashboardParticipants(): Observable<DashboardParticipant[]> {
@@ -192,26 +176,30 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
         return combineLatest([
             operatorParticipant$,
             this.governedParticipantsAgent.getGovernedStudyParticipants(this.studyGuid),
-            this.removedParticipants$
-        ]).pipe(map(([operatorParticipant, participants, removedParticipants]) => {
-            const result: DashboardParticipant[] = participants
-                .filter(({userGuid}) => !removedParticipants.includes(userGuid))
-                .map((participant, i) => ({
-                    userGuid: participant.userGuid,
-                    label: (participant.userProfile.firstName || participant.userProfile.lastName)
-                        ? `${participant.userProfile.firstName} ${participant.userProfile.lastName}`
-                        : `${this.translate.instant('Toolkit.Dashboard.ChildLabel')}${i > 0 ? ' #' + (i + 1) : ''}`,
-                }));
-            if (operatorParticipant) {
-                result.unshift({
-                    userGuid: this.session.session.userGuid,
-                    label: (operatorParticipant.profile.firstName || operatorParticipant.profile.lastName)
-                        ? `${operatorParticipant.profile.firstName} ${operatorParticipant.profile.lastName}`
-                        : this.translate.instant('Toolkit.Dashboard.UserLabel'),
-                });
-            }
-            return result;
-        }));
+        ]).pipe(
+            map(([operatorParticipant, participants]) => {
+                const result = participants.map((participant, i) => this.getUserActivitiesForParticipant(participant.userGuid)
+                    .pipe(take(1), map((activities) => ({
+                        userGuid: participant.userGuid,
+                        label: (participant.userProfile.firstName || participant.userProfile.lastName)
+                            ? `${participant.userProfile.firstName} ${participant.userProfile.lastName}`
+                            : `${this.translate.instant('Toolkit.Dashboard.ChildLabel')}${i > 0 ? ' #' + (i + 1) : ''}`,
+                        activities,
+                }))));
+                if (operatorParticipant) {
+                    result.unshift(this.userActivities$.pipe(take(1), map((activities) => ({
+                        userGuid: this.session.session.userGuid,
+                        label: (operatorParticipant.profile.firstName || operatorParticipant.profile.lastName)
+                            ? `${operatorParticipant.profile.firstName} ${operatorParticipant.profile.lastName}`
+                            : this.translate.instant('Toolkit.Dashboard.UserLabel'),
+                        activities
+                    }))));
+                }
+                return result;
+            }),
+            switchMap(participants$ => forkJoin(...participants$)),
+            switchMap(participants => this.checkAndDeleteAccidentalParticipant(participants)),
+        );
     }
 
     public get isAdmin(): boolean {
@@ -258,28 +246,20 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
             });
     }
 
-    public removeParticipant(userGuid): void {
-        this.participantToRemoveButtonDisabled.set(userGuid, true);
-        this.userManagementService.deleteUser(userGuid)
-            .pipe(finalize(() => this.participantToRemoveButtonDisabled.set(userGuid, false)))
-            .subscribe(() => {
-                this.removedParticipants$.next([...this.removedParticipants$.value, userGuid]);
-            });
-    }
+    private checkAndDeleteAccidentalParticipant(participants: DashboardParticipant[]): Observable<DashboardParticipant[]> {
+        const accidentalParticipant = participants.filter(({activities}) => !activities.length);
 
-    public isParticipantOperator(participantGuid: string): boolean {
-        return participantGuid === this.session.session?.userGuid;
+        if (!accidentalParticipant.length) {
+            return of(participants);
+        }
+
+        return forkJoin(...accidentalParticipant.map((participant) => this.userManagementService.deleteUser(participant.userGuid)))
+            .pipe(map(() => participants.filter(({activities}) => activities.length)));
     }
 
     public getUserActivitiesForParticipant(participantGuid: string): Observable<Array<ActivityInstance>> {
-        if (this.isParticipantOperator(participantGuid)) return this.userActivities$;
-
         return of(participantGuid).pipe(
-            // should be set exactly before the activities request.That's why it's a side effect
-            tap((guid) => {
-                this.session.setParticipant(guid);
-            }),
-            switchMap(() => this.userActivityServiceAgent.getActivities(of(this.studyGuid))),
+            switchMap(() => this.userActivityServiceAgent.getActivities(of(this.studyGuid), participantGuid)),
             map((activities) => activities || []));
     }
 

@@ -501,8 +501,7 @@
             "ShowPanel": "Mostrar",
             "HidePanel": "Esconder",
             "UserLabel": "Usted",
-            "ChildLabel": "Su hijo(a)",
-            "RemoveParticipant": "[ES]Remove participant {{participant}}"
+            "ChildLabel": "Su hijo(a)"
         },
         "Password": {
             "Title": "Ingrese la contraseña.",
