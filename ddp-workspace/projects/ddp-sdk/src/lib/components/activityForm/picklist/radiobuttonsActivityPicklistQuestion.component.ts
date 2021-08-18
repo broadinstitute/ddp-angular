@@ -64,8 +64,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
             flex-direction: column;
         }
 
-        :host ::ng-deep,
-        .mat-radio-label {
+        :host ::ng-deep .mat-radio-label {
             align-items: normal !important;
             white-space: normal !important;
         }`

@@ -70,20 +70,17 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
     </ng-template>
     `,
     styles: [`
-    :host ::ng-deep,
-    .mat-list .mat-list-item .mat-list-text,
-    .mat-list .mat-list-item .mat-line {
+    :host ::ng-deep .mat-list .mat-list-item .mat-list-text,
+    :host ::ng-deep .mat-list .mat-list-item .mat-line {
         overflow: visible;
     }
 
-    :host ::ng-deep,
-    .mat-checkbox-layout .mat-checkbox-label {
+    :host ::ng-deep .mat-checkbox-layout .mat-checkbox-label {
         align-items: normal !important;
         white-space: normal !important;
     }
 
-    :host ::ng-deep,
-    .mat-checkbox-label {
+    :host ::ng-deep .mat-checkbox-label {
         padding: 0 5px 0 0;
     }
 
