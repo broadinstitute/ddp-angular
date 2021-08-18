@@ -460,18 +460,17 @@ select:disabled {
     border-color: $checkbox-color !important;
 }
 
-@media screen and (max-width: $tablet-breakpoint) {
-    // autocomplete-picklist-question
-    .autoCompletePanel {
-        .mat-option {
-            white-space: normal;
-            height: auto;
-            border-top: 1px solid #d2d2d2;
+// autocomplete-picklist-question
+.autoCompletePanel {
+    .mat-option {
+        white-space: normal;
+        height: auto;
+        border-top: 1px solid #d2d2d2;
 
-            &:last-of-type {
-                border-bottom: 1px solid #d2d2d2;
-            }
+        &:last-of-type {
+            border-bottom: 1px solid #d2d2d2;
         }
     }
 }
+
 
