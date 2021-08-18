@@ -38,15 +38,23 @@
     line-height: 1.8125rem;
 }
 
-.button_primary {
+.button_primary,
+.mat-flat-button.mat-primary {
     background-color: mat-color($app-primary, 500);
     border: 2px solid mat-color($app-primary, 500);
     color: white;
 
     &:hover:not([disabled]),
-    :hover:enabled {
+    &:hover:enabled {
         background-color: darken(mat-color($app-primary, 500), 35%);
         border-color: darken(mat-color($app-primary, 500), 35%);
+    }
+}
+
+.mat-flat-button {
+    &:hover:not([disabled]),
+    &:hover:enabled {
+        background-color: #e1e1e1;
     }
 }
 
@@ -94,6 +102,11 @@
     .footer & {
         color: white;
         border-color: white;
+
+        &:hover:not([disabled]),
+        &:hover:enabled {
+            background-color: $footer-divider-color;
+        }
     }
 }
 
