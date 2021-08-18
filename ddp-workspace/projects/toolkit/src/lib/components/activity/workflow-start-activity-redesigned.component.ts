@@ -8,7 +8,8 @@ import {
     SessionMementoService,
     TemporaryUserServiceAgent,
     WorkflowServiceAgent,
-    WindowRef, SessionStorageService
+    WindowRef,
+    SessionStorageService
 } from 'ddp-sdk';
 
 @Component({
