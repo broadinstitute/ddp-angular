@@ -21,6 +21,76 @@
   margin-top: 2.4rem;
 }
 
+.section--stepper {
+  margin: 3.2rem 0;
+}
+
+.stepper-list {
+  display: flex;
+  align-items: center;
+
+  list-style: none;
+
+  &__divider {
+    flex: 1;
+    height: 0.1rem;
+
+    margin: 0 1.6rem;
+
+    background: map-get($colors, 'light-grey');
+  }
+}
+
+.step-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 4.8rem;
+  height: 4.8rem;
+
+  background: map-get($colors, 'input-border');
+  border: 2px solid map-get($colors, 'beige:dark:2');
+  border-radius: 100px;
+
+  font: inherit;
+  font-size: 1.8rem;
+  line-height: 1;
+  font-weight: bold;
+  color: map-get($colors, 'beige:dark:2');
+
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+
+  &:disabled {
+    opacity: 0.9;
+
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
+    opacity: 0.8;
+  }
+
+  &--complete {
+    background: map-get($colors, 'scarlet');
+    border-color: map-get($colors, 'scarlet');
+
+    color: map-get($colors, 'white');
+  }
+
+  &--active {
+    background: map-get($colors, 'white');
+    border-color: map-get($colors, 'scarlet');
+
+    color: map-get($colors, 'scarlet');
+  }
+
+  .mat-icon {
+    font-size: 24px;
+  }
+}
+
 .section--captcha {
   margin: 2em 0;
 }
