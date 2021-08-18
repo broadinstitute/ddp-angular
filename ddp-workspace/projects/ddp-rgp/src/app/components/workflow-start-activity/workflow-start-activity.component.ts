@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import {
   ActivityResponse,
   ConfigurationService,
-  SessionMementoService,
+  SessionMementoService, SessionStorageService,
   TemporaryUserServiceAgent,
   WindowRef,
   WorkflowServiceAgent,
@@ -36,6 +36,7 @@ export class WorkflowStartActivityComponent extends WorkflowStartActivityRedesig
     private sessionService: SessionMementoService,
     private workflowService: WorkflowServiceAgent,
     private wr: WindowRef,
+    private _sessionStorageService: SessionStorageService,
     @Inject('ddp.config') private config: ConfigurationService,
     @Inject('toolkit.toolkitConfig')
     private toolkitConfig: ToolkitConfigurationService,
@@ -48,6 +49,7 @@ export class WorkflowStartActivityComponent extends WorkflowStartActivityRedesig
       workflowService,
       wr,
       changeDetectorRef,
+      _sessionStorageService,
       config,
       toolkitConfig,
     );
