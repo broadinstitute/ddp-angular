@@ -70,19 +70,19 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
     </ng-template>
     `,
     styles: [`
-    :host ::ng-deep
+    :host ::ng-deep,
     .mat-list .mat-list-item .mat-list-text,
     .mat-list .mat-list-item .mat-line {
         overflow: visible;
     }
 
-    :host ::ng-deep
+    :host ::ng-deep,
     .mat-checkbox-layout .mat-checkbox-label {
         align-items: normal !important;
         white-space: normal !important;
     }
 
-    :host ::ng-deep
+    :host ::ng-deep,
     .mat-checkbox-label {
         padding: 0 5px 0 0;
     }
@@ -135,7 +135,7 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
                     this.cachedDetailTextForQuestionAndOption[this.getQuestionOptionDetailKey(id)] = value;
                 }
             });
-            this.valueChanged.emit(this.block.answer);
+            this.valueChanged.emit([...this.block.answer]);
         }
     }
 
@@ -165,7 +165,7 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
         } else {
             this.nestedOptionSelected(value, option);
         }
-        this.valueChanged.emit(this.block.answer);
+        this.valueChanged.emit([...this.block.answer]);
     }
 
     private createAnswer(): Array<ActivityPicklistAnswerDto> {
@@ -237,11 +237,10 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
     }
 
     private hasSelectedExclusiveNestedOption(options: Array<ActivityPicklistOption>): boolean {
-        const hasExclusive = this.block.answer.some(answer => {
+        return this.block.answer.some(answer => {
             const option = options.find(opt => opt.stableId === answer.stableId);
             return option && option.exclusive;
         });
-        return hasExclusive;
     }
 
     private groupParentOptionSelected(option: ActivityPicklistOption): boolean {

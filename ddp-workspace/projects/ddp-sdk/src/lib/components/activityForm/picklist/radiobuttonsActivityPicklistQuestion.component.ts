@@ -64,7 +64,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
             flex-direction: column;
         }
 
-        :host ::ng-deep
+        :host ::ng-deep,
         .mat-radio-label {
             align-items: normal !important;
             white-space: normal !important;
@@ -83,7 +83,7 @@ export class RadioButtonsActivityPicklistQuestion extends BaseActivityPicklistQu
                     this.block.answer[i].detail = value;
                 }
             });
-            this.valueChanged.emit(this.block.answer);
+            this.valueChanged.emit([...this.block.answer]);
         }
     }
 
@@ -105,6 +105,6 @@ export class RadioButtonsActivityPicklistQuestion extends BaseActivityPicklistQu
         answer.stableId = stableId;
         answer.detail = this.getAnswerDetailText(stableId);
         this.block.answer = [answer];
-        this.valueChanged.emit(this.block.answer);
+        this.valueChanged.emit([...this.block.answer]);
     }
 }

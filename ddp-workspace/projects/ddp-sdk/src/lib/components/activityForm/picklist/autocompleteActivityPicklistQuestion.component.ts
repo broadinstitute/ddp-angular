@@ -136,7 +136,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
             } else {
                 this.block.answer = [{ stableId: this.block.customValue, detail: value }];
                 if (this.block.customValue) {
-                    this.valueChanged.emit(this.block.answer);
+                    this.valueChanged.emit([...this.block.answer]);
                 }
             }
         }
@@ -144,7 +144,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
 
     private updateAnswer(value?: string, detail: string | null = null): void {
         this.block.answer = value ? [{ stableId: value, detail }] : [];
-        this.valueChanged.emit(this.block.answer);
+        this.valueChanged.emit([...this.block.answer]);
     }
 
     private filterGroups(name: string, groups: ActivityPicklistNormalizedGroup[]): ActivityPicklistNormalizedGroup[] {
