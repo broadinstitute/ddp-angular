@@ -12,6 +12,7 @@ import { AppRoutes } from '../app-routes';
            class="action-button btn-auth button button_medium"
            [class.dashboard-button]="isAuthenticated"
            [routerLink]="isAuthenticated ? AppRoutes.Dashboard : AppRoutes.CountMeIn"
+           queryParamsHandling="merge"
            [color]="isColorectalTheme ? 'colorectal' : 'primary'">
             <ng-container *ngIf="isAuthenticated; else join">
                 <mat-icon>perm_identity</mat-icon>

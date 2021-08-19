@@ -1,21 +1,24 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SimpleChange } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ReactiveFormsModule } from '@angular/forms';
+import { of } from 'rxjs';
+
 import {
     ActivityPicklistNormalizedGroup,
     ActivityPicklistOption,
     ActivityPicklistQuestionBlock,
     NGXTranslateService,
-    PicklistSortingPolicy
+    PicklistSortingPolicy,
+    SortOrder
 } from 'ddp-sdk';
 import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
-import { of } from 'rxjs';
 import { AutocompleteActivityPicklistQuestion } from './autocompleteActivityPicklistQuestion.component';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { ReactiveFormsModule } from '@angular/forms';
 import { PicklistRenderMode } from '../../../models/activity/picklistRenderMode';
 import { SearchHighlightPipe } from '../../../pipes/searchHighlight.pipe';
-import { SimpleChange } from '@angular/core';
+
 
 describe('AutocompleteActivityPicklistQuestion', () => {
     const questionBlock = {
@@ -62,7 +65,8 @@ describe('AutocompleteActivityPicklistQuestion', () => {
             ],
             providers: [
                 { provide: NGXTranslateService, useValue: ngxTranslateServiceSpy },
-                { provide: PicklistSortingPolicy, useValue: new PicklistSortingPolicy()}
+                { provide: PicklistSortingPolicy, useValue:  new PicklistSortingPolicy() },
+                { provide: 'ddp.config', useValue: { picklistsWithNoSorting: [] } }
             ],
             declarations: [AutocompleteActivityPicklistQuestion, SearchHighlightPipe]
         }).compileComponents();
@@ -255,5 +259,76 @@ describe('AutocompleteActivityPicklistQuestion', () => {
         component.readonly = true;
         component.ngOnChanges({ readonly: { currentValue: true } as SimpleChange});
         expect(component.inputFormControl.disabled).toBeTrue();
+    });
+});
+
+describe('AutocompleteActivityPicklistQuestion sorting (with default ALPHABETICAL policy)', () => {
+    const questionBlock = {
+        picklistGroups: [
+            {
+                name: 'Melanomas',
+                options: [
+                    { optionLabel: 'Cutaneous melanoma', stableId: 'CUTANEOUS_MELANOMA' },
+                    { optionLabel: 'Ocular melanoma (OM)', stableId: 'OCULAR_MELANOMA' }
+                ]
+            },
+            {
+                name: 'Breast cancers',
+                options: [
+                    { optionLabel: 'Invasive Ductal Carcinoma', stableId: 'INVASIVE_DUCTAL' },
+                    { optionLabel: 'Breast carcinoma', stableId: 'BREAST_CARCINOMA' },
+                ]
+            },
+        ],
+        picklistOptions: [
+            { optionLabel: 'Other cancer', stableId: 'OTHER_CANCER' },
+            { optionLabel: 'Another test cancer', stableId: 'ANOTHER_TEST_CANCER' }
+        ],
+        renderMode: PicklistRenderMode.AUTOCOMPLETE,
+    } as ActivityPicklistQuestionBlock;
+
+    let component: AutocompleteActivityPicklistQuestion;
+    let fixture: ComponentFixture<AutocompleteActivityPicklistQuestion>;
+    const configServiceSpy = jasmine.createSpyObj('ddp.config', null, {picklistsWithNoSorting: []});
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                MatInputModule,
+                MatAutocompleteModule,
+                BrowserAnimationsModule,
+                TranslateTestingModule,
+                ReactiveFormsModule,
+            ],
+            providers: [
+                {provide: NGXTranslateService, useValue: {}},
+                {provide: PicklistSortingPolicy, useValue: new PicklistSortingPolicy(SortOrder.ALPHABETICAL, 'UNSURE')},
+                {provide: 'ddp.config', useValue: configServiceSpy}
+            ],
+            declarations: [AutocompleteActivityPicklistQuestion, SearchHighlightPipe]
+        }).compileComponents();
+
+        fixture = TestBed.createComponent(AutocompleteActivityPicklistQuestion);
+        component = fixture.componentInstance;
+        component.block = {...questionBlock} as ActivityPicklistQuestionBlock;
+        component.ngOnInit();
+    });
+
+    it('should sort options alphabetically (by default)', () => {
+        expect(component.filteredGroups[0].name).toEqual('Breast cancers');
+        expect(component.filteredGroups[0].options[0].optionLabel).toEqual('Breast carcinoma');
+        expect(component.filteredOptions[0].optionLabel).toEqual('Another test cancer');
+    });
+
+    it('should keep  options as is (do not sort alphabetically)', () => {
+        Object.defineProperty(configServiceSpy , 'picklistsWithNoSorting', {
+            value: ['stableId123']
+        });
+        component.block.stableId = 'stableId123';
+        fixture.detectChanges();
+
+        expect(component.filteredGroups[0].name).toEqual('Melanomas');
+        expect(component.filteredGroups[0].options[0].optionLabel).toEqual('Cutaneous melanoma');
+        expect(component.filteredOptions[0].optionLabel).toEqual('Other cancer');
     });
 });

@@ -6,7 +6,7 @@ import { Observable, of } from 'rxjs';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { WelcomeComponent } from './welcome.component';
-import { mockComponent } from 'ddp-sdk';
+import { AnalyticsEventsService, mockComponent } from 'ddp-sdk';
 import { CommunicationService } from 'toolkit';
 
 class TranslateLoaderMock implements TranslateLoader {
@@ -53,6 +53,7 @@ describe('WelcomeComponent', () => {
             ],
             providers: [
                 { provide: CommunicationService, useValue: communicationServiceSpy},
+                { provide: AnalyticsEventsService, useValue: {} }
             ],
         })
             .compileComponents();

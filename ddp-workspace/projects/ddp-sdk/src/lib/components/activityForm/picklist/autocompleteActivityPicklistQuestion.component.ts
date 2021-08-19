@@ -1,12 +1,14 @@
-import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
-import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
-import { Subject } from 'rxjs';
+import { Component, Inject, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith, takeUntil } from 'rxjs/operators';
+
+import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
 import { ActivityPicklistNormalizedGroup } from '../../../models/activity/activityPicklistNormalizedGroup';
 import { ActivityPicklistOption } from '../../../models/activity/activityPicklistOption';
+import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { PicklistSortingPolicy } from '../../../services/picklistSortingPolicy.service';
+import { ConfigurationService } from '../../../services/configuration.service';
 
 @Component({
     selector: 'ddp-activity-autocomplete-picklist-question',
@@ -53,7 +55,11 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     filteredOptions: ActivityPicklistOption[] = [];
     inputFormControl = new FormControl();
 
-    constructor(translate: NGXTranslateService, private sortPolicy: PicklistSortingPolicy) {
+    constructor(
+        translate: NGXTranslateService,
+        private sortPolicy: PicklistSortingPolicy,
+        @Inject('ddp.config') public config: ConfigurationService
+    ) {
         super(translate);
     }
 
@@ -74,9 +80,15 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
             takeUntil(this.ngUnsubscribe)
         );
 
-        const sortedPicklistGroups = this.sortPolicy.sortPicklistGroups(this.block.picklistGroups);
-        const sortedPicklistOptions = this.sortPolicy.sortPicklistOptions(this.block.picklistOptions);
-
+        let sortedPicklistGroups;
+        let sortedPicklistOptions;
+        if (this.shouldBeSorted) {
+            sortedPicklistGroups = this.sortPolicy.sortPicklistGroups(this.block.picklistGroups);
+            sortedPicklistOptions = this.sortPolicy.sortPicklistOptions(this.block.picklistOptions);
+        } else {
+            sortedPicklistGroups = this.block.picklistGroups;
+            sortedPicklistOptions = this.block.picklistOptions;
+        }
 
         userQueryStream.pipe(startWith('')).subscribe((value: string | ActivityPicklistOption) => {
             const query = typeof value === 'string' ? value : value.optionLabel;
@@ -124,7 +136,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
             } else {
                 this.block.answer = [{ stableId: this.block.customValue, detail: value }];
                 if (this.block.customValue) {
-                    this.valueChanged.emit(this.block.answer);
+                    this.valueChanged.emit([...this.block.answer]);
                 }
             }
         }
@@ -132,7 +144,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
 
     private updateAnswer(value?: string, detail: string | null = null): void {
         this.block.answer = value ? [{ stableId: value, detail }] : [];
-        this.valueChanged.emit(this.block.answer);
+        this.valueChanged.emit([...this.block.answer]);
     }
 
     private filterGroups(name: string, groups: ActivityPicklistNormalizedGroup[]): ActivityPicklistNormalizedGroup[] {
@@ -148,6 +160,10 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     private filterOptions(name: string, options: ActivityPicklistOption[]): ActivityPicklistOption[] {
         const filterValue = name.toLowerCase();
         return options.filter(option => option.optionLabel.toLowerCase().includes(filterValue));
+    }
+
+    private get shouldBeSorted(): boolean {
+        return !this.config.picklistsWithNoSorting.includes(this.block.stableId);
     }
 
     filterOutEmptyGroups(groups: ActivityPicklistNormalizedGroup[]): ActivityPicklistNormalizedGroup[] {

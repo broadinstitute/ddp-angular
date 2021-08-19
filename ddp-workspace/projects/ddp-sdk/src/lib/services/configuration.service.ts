@@ -72,4 +72,5 @@ export class ConfigurationService {
     prismColumns: string[] = [];
     prismDashboardRoute: string;
     prismRoute: string;
+    picklistsWithNoSorting: string[] = [];
 }

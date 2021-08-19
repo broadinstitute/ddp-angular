@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { JoinMailingListComponent, ToolkitConfigurationService } from 'toolkit';
 import { AppRoutes } from '../../app-routes';
 import { JOIN_MAILING_LIST_DIALOG_SETTINGS } from '../../../utils/join-mailing-list-dialog-confg';
+import { AnalyticsEventCategories, AnalyticsEventsService } from 'ddp-sdk';
 
 @Component({
     selector: 'app-stay-informed-section',
@@ -18,6 +19,7 @@ export class StayInformedSectionComponent {
 
     constructor(
         private dialog: MatDialog,
+        private analytics: AnalyticsEventsService,
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService
     ) {
         this.twitterUrl = `https://twitter.com/${this.toolkitConfiguration.twitterAccountId}`;
@@ -30,5 +32,9 @@ export class StayInformedSectionComponent {
             ...JOIN_MAILING_LIST_DIALOG_SETTINGS,
             data: { info },
         });
+    }
+
+    public sendSocialMediaAnalytics(event: string): void {
+        this.analytics.emitCustomEvent(AnalyticsEventCategories.Social, event);
     }
 }

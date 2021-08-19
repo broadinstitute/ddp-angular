@@ -7,6 +7,7 @@
     <p class="text static-page-paragraph-text">{{text | translate}}</p>
     <a mat-raised-button
        [routerLink]="'/' + AppRoutes.CountMeIn"
+       queryParamsHandling="merge"
        class="btn join-cmi-btn  button button_small"
        [color]="isColorectalTheme ? 'colorectal' : 'primary'">
         {{btnText | translate}}

@@ -70,7 +70,7 @@ describe('LoggingService', () => {
       config.logLevel = LogLevel.Error;
       service = new LoggingService(config, stackdriverErrorReporterServiceSpy);
 
-      service.logError('an error');
-      expect(stackdriverErrorReporterServiceSpy.handleError).toHaveBeenCalledWith('an error');
+      service.logError('a deliberate error during Logging service test');
+      expect(stackdriverErrorReporterServiceSpy.handleError).toHaveBeenCalledWith('a deliberate error during Logging service test');
     });
 });

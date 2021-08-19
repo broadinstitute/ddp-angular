@@ -112,6 +112,8 @@ var DDP_ENV = {
         {{else if eq $study_guid "CMI-OSTEO"}}
             DDP_ENV['projectGAToken'] = "UA-64885513-8";
         {{end}}
+     {{ else if and (eq $environment "dev") (eq $study_guid "cmi-pancan")}}
+        DDP_ENV['projectGAToken'] = "G-09BTP7C11P";
     {{else}}
         DDP_ENV['projectGAToken'] = "UA-108484823-1";
     {{end}}

@@ -83,7 +83,8 @@ describe('ActivityPicklistAnswer', () => {
             ],
             providers: [
                 { provide: NGXTranslateService, useValue: ngxTranslateServiceSpy },
-                { provide: PicklistSortingPolicy, useValue: new PicklistSortingPolicy()}
+                { provide: PicklistSortingPolicy, useValue: new PicklistSortingPolicy() },
+                { provide: 'ddp.config', useValue: { picklistsWithNoSorting: [] } }
             ],
             declarations: [
                 TestHostComponent,

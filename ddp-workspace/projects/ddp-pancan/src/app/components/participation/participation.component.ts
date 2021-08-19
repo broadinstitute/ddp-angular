@@ -10,6 +10,6 @@ export class ParticipationComponent {
         'consent.pdf',
         'medical_release.pdf',
         'surveys.pdf',
-        'kit-instructions.pdf'
+        'assets/images/kit_instructions.jpg'
     ];
 }
