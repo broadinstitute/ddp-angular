@@ -1,6 +1,6 @@
 import { Component, Inject, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith, takeUntil } from 'rxjs/operators';
 
 import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
@@ -9,6 +9,9 @@ import { ActivityPicklistOption } from '../../../models/activity/activityPicklis
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { PicklistSortingPolicy } from '../../../services/picklistSortingPolicy.service';
 import { ConfigurationService } from '../../../services/configuration.service';
+import { RegExpHelper } from '../../../utility/RegExpHelper';
+
+const SUBSTITUTABLE_SYMBOLS = ['-', '/'];
 
 @Component({
     selector: 'ddp-activity-autocomplete-picklist-question',
@@ -22,13 +25,13 @@ import { ConfigurationService } from '../../../services/configuration.service';
 
         <mat-autocomplete #autoCompleteFromSource="matAutocomplete" class="autoCompletePanel" [displayWith]="displayAutoComplete">
             <mat-optgroup *ngFor="let group of filteredGroups">
-                <strong [innerHtml]="group.name | searchHighlight: autocompleteInput.value"></strong>
+                <strong [innerHtml]="group.name | searchHighlight: userQueryRegExp$.getValue()"></strong>
                 <ng-container *ngTemplateOutlet="generalOptionsList; context: {list: group.options}"></ng-container>
             </mat-optgroup>
             <ng-container *ngTemplateOutlet="generalOptionsList; context: {list: filteredOptions}"></ng-container>
             <ng-template #generalOptionsList let-list="list">
                 <mat-option *ngFor="let suggestion of list" class="autoCompleteOption" [value]="suggestion">
-                    <span [innerHtml]="suggestion.optionLabel | searchHighlight: autocompleteInput.value"></span>
+                    <span [innerHtml]="suggestion.optionLabel | searchHighlight: userQueryRegExp$.getValue()"></span>
                 </mat-option>
             </ng-template>
         </mat-autocomplete>
@@ -54,6 +57,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     // options w/o a group
     filteredOptions: ActivityPicklistOption[] = [];
     inputFormControl = new FormControl();
+    userQueryRegExp$ = new BehaviorSubject<RegExp>(null);
 
     constructor(
         translate: NGXTranslateService,
@@ -64,16 +68,9 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     }
 
     public ngOnInit(): void {
-        const answer = this.block.answer && this.block.answer[0];
-        if (answer) {
-            const value = answer.detail || [
-                ...this.block.picklistGroups.flatMap(group => group.options),
-                ...this.block.picklistOptions
-            ].find(option => option.stableId === answer.stableId);
-            this.inputFormControl.setValue(value);
-        }
+        this.initInputValue();
 
-        const userQueryStream = this.inputFormControl.valueChanges.pipe(
+        const userQueryStream$ = this.inputFormControl.valueChanges.pipe(
             map(value => typeof value === 'string' ? value.trim() : value),
             distinctUntilChanged(),
             debounceTime(200),
@@ -90,14 +87,22 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
             sortedPicklistOptions = this.block.picklistOptions;
         }
 
-        userQueryStream.pipe(startWith('')).subscribe((value: string | ActivityPicklistOption) => {
-            const query = typeof value === 'string' ? value : value.optionLabel;
-            this.filteredGroups = this.filterOutEmptyGroups(query ? this.filterGroups(query, sortedPicklistGroups)
-                : sortedPicklistGroups.slice());
-            this.filteredOptions = query ? this.filterOptions(query, sortedPicklistOptions) : sortedPicklistOptions.slice();
-        });
+        userQueryStream$.pipe(startWith(''))
+            .subscribe((value: string | ActivityPicklistOption) => {
+                const query = typeof value === 'string' ? value : value.optionLabel;
+                if (query) {
+                    this.userQueryRegExp$.next(
+                        RegExpHelper.createSubstitutableSymbolsRegExp(query, SUBSTITUTABLE_SYMBOLS)
+                    );
+                    this.filteredGroups = this.filterOutEmptyGroups(this.filterGroups(sortedPicklistGroups));
+                    this.filteredOptions = this.filterOptions(sortedPicklistOptions);
+                } else {
+                    this.filteredGroups = this.filterOutEmptyGroups(sortedPicklistGroups.slice());
+                    this.filteredOptions = sortedPicklistOptions.slice();
+                }
+            });
 
-        userQueryStream.subscribe((value: string | ActivityPicklistOption) => {
+        userQueryStream$.subscribe((value: string | ActivityPicklistOption) => {
             if (typeof value === 'string') {
                 if (value.length) {
                     this.handleStringValue(value);
@@ -126,6 +131,17 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
         this.ngUnsubscribe.complete();
     }
 
+    private initInputValue(): void {
+        const answer = this.block.answer && this.block.answer[0];
+        if (answer) {
+            const value = answer.detail || [
+                ...this.block.picklistGroups.flatMap(group => group.options),
+                ...this.block.picklistOptions
+            ].find(option => option.stableId === answer.stableId);
+            this.inputFormControl.setValue(value);
+        }
+    }
+
     private handleStringValue(value: string): void {
         const minimalLengthForOption = 2;
         if (value.length >= minimalLengthForOption) {
@@ -147,19 +163,17 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
         this.valueChanged.emit([...this.block.answer]);
     }
 
-    private filterGroups(name: string, groups: ActivityPicklistNormalizedGroup[]): ActivityPicklistNormalizedGroup[] {
-        const filterValue = name.toLowerCase();
+    private filterGroups(groups: ActivityPicklistNormalizedGroup[]): ActivityPicklistNormalizedGroup[] {
         return groups
             .map(group => ({
                 name: group.name,
-                options: group.name.toLowerCase().includes(filterValue)
-                    ? group.options
-                    : this.filterOptions(filterValue, group.options)}));
+                options: this.userQueryRegExp$.getValue().test(group.name) ?
+                    group.options : this.filterOptions(group.options)
+            }));
     }
 
-    private filterOptions(name: string, options: ActivityPicklistOption[]): ActivityPicklistOption[] {
-        const filterValue = name.toLowerCase();
-        return options.filter(option => option.optionLabel.toLowerCase().includes(filterValue));
+    private filterOptions(options: ActivityPicklistOption[]): ActivityPicklistOption[] {
+        return options.filter(option => this.userQueryRegExp$.getValue().test(option.optionLabel));
     }
 
     private get shouldBeSorted(): boolean {
