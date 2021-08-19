@@ -14,14 +14,23 @@ export class RegExpHelper {
         if (substitutableSymbols.includes(text) || !substitutableSymbols.some(s => text.includes(s))) {
             // return same text but space/case insensitive
             return new RegExp(
-                RegExpHelper.replaceEmptySpaces(text, anyAmountOfSpacesRegExp),
+                RegExpHelper.replaceEmptySpaces(
+                    RegExpHelper.escapeRegExp(text),
+                    anyAmountOfSpacesRegExp
+                ),
                 'gi'
             );
         }
 
         const escapedSubstitutableSymbols = substitutableSymbols.map(symbol => RegExpHelper.escapeRegExp(symbol));
         const substitutableSymbolsRegExp = new RegExp(escapedSubstitutableSymbols.join('|'), 'g');
-        const pattern = RegExpHelper.replaceEmptySpaces(text, '')
+
+        const pattern = RegExpHelper.escapeRegExp(
+                RegExpHelper.replaceEmptySpaces(text, ''),
+                // have issues with incorrect handling it in text, escaping substitutableSymbols twice due to the regex creating.
+                // Let's avoid escaping them here.
+                substitutableSymbols
+            )
             .replace(
                 substitutableSymbolsRegExp,
                 [anyAmountOfSpacesRegExp, '[', ...escapedSubstitutableSymbols, replaceValue, ']', anyAmountOfSpacesRegExp].join('')
@@ -33,7 +42,9 @@ export class RegExpHelper {
         return text.replace(/ +/g, replaceValue);
     }
 
-    static escapeRegExp(text): string {
-        return text.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+    static escapeRegExp(text: string, exceptionSymbols?: string[]): string {
+        return text.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, (match: string) => {
+            return (exceptionSymbols && exceptionSymbols.includes(match)) ? match : `\\${match}`;
+        });
     }
 }
