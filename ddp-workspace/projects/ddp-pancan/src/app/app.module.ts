@@ -92,6 +92,8 @@ sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.useStepsWithCircle = true;
 sdkConfig.picklistsWithNoSorting = ['PRIMARY_CANCER_SELF', 'PRIMARY_CANCER_CHILD'];
+sdkConfig.picklistsWithSubstitutionSymbols = ['PRIMARY_CANCER_SELF', 'PRIMARY_CANCER_CHILD'];
+sdkConfig.picklistsSubstitutionSymbols = ['-', '/'];
 
 export function translateFactory(translate: TranslateService,
     injector: Injector,

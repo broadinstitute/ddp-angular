@@ -73,4 +73,6 @@ export class ConfigurationService {
     prismDashboardRoute: string;
     prismRoute: string;
     picklistsWithNoSorting: string[] = [];
+    picklistsWithSubstitutionSymbols: string[] = [];
+    picklistsSubstitutionSymbols: string[] = [];
 }

@@ -11,8 +11,6 @@ import { PicklistSortingPolicy } from '../../../services/picklistSortingPolicy.s
 import { ConfigurationService } from '../../../services/configuration.service';
 import { RegExpHelper } from '../../../utility/RegExpHelper';
 
-const SUBSTITUTABLE_SYMBOLS = ['-', '/'];
-
 @Component({
     selector: 'ddp-activity-autocomplete-picklist-question',
     template: `
@@ -58,6 +56,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     filteredOptions: ActivityPicklistOption[] = [];
     inputFormControl = new FormControl();
     userQueryRegExp$ = new BehaviorSubject<RegExp>(null);
+    private substitutableSymbols: string[] = [];
 
     constructor(
         translate: NGXTranslateService,
@@ -69,6 +68,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
 
     public ngOnInit(): void {
         this.initInputValue();
+        this.initSubstitutableSymbols();
 
         const userQueryStream$ = this.inputFormControl.valueChanges.pipe(
             map(value => typeof value === 'string' ? value.trim() : value),
@@ -92,7 +92,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
                 const query = typeof value === 'string' ? value : value.optionLabel;
                 if (query) {
                     this.userQueryRegExp$.next(
-                        RegExpHelper.createSubstitutableSymbolsRegExp(query, SUBSTITUTABLE_SYMBOLS)
+                        RegExpHelper.createSubstitutableSymbolsRegExp(query, this.substitutableSymbols)
                     );
                     this.filteredGroups = this.filterOutEmptyGroups(this.filterGroups(sortedPicklistGroups));
                     this.filteredOptions = this.filterOptions(sortedPicklistOptions);
@@ -139,6 +139,12 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
                 ...this.block.picklistOptions
             ].find(option => option.stableId === answer.stableId);
             this.inputFormControl.setValue(value);
+        }
+    }
+
+    private initSubstitutableSymbols(): void {
+        if (this.config.picklistsWithSubstitutionSymbols.includes(this.block.stableId)) {
+            this.substitutableSymbols = this.config.picklistsSubstitutionSymbols;
         }
     }
 
