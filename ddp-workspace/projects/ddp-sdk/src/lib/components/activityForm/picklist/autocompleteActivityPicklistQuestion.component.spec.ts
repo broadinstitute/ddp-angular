@@ -66,7 +66,12 @@ describe('AutocompleteActivityPicklistQuestion', () => {
             providers: [
                 { provide: NGXTranslateService, useValue: ngxTranslateServiceSpy },
                 { provide: PicklistSortingPolicy, useValue:  new PicklistSortingPolicy() },
-                { provide: 'ddp.config', useValue: { picklistsWithNoSorting: [] } }
+                { provide: 'ddp.config',
+                    useValue: {
+                        picklistsWithNoSorting: [],
+                        picklistsWithSubstitutionSymbols: []
+                    }
+                }
             ],
             declarations: [AutocompleteActivityPicklistQuestion, SearchHighlightPipe]
         }).compileComponents();
@@ -289,7 +294,11 @@ describe('AutocompleteActivityPicklistQuestion sorting (with default ALPHABETICA
 
     let component: AutocompleteActivityPicklistQuestion;
     let fixture: ComponentFixture<AutocompleteActivityPicklistQuestion>;
-    const configServiceSpy = jasmine.createSpyObj('ddp.config', null, {picklistsWithNoSorting: []});
+    const configServiceSpy = jasmine.createSpyObj('ddp.config', null,
+        {
+            picklistsWithNoSorting: [],
+            picklistsWithSubstitutionSymbols: []
+        });
 
     beforeEach(() => {
         TestBed.configureTestingModule({
