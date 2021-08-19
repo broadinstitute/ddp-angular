@@ -241,7 +241,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
                     return null;
                 }
             }));
-        return iif(() => this.hasUserProfile(), profileLangObservable, of(null));
+        return iif(() => this.session.isAuthenticatedSession(), profileLangObservable, of(null));
     }
 
     private hasUserProfile(): boolean {
