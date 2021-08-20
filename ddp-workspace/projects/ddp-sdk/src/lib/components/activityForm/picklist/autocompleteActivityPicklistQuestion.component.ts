@@ -23,13 +23,13 @@ import { RegExpHelper } from '../../../utility/RegExpHelper';
 
         <mat-autocomplete #autoCompleteFromSource="matAutocomplete" class="autoCompletePanel" [displayWith]="displayAutoComplete">
             <mat-optgroup *ngFor="let group of filteredGroups">
-                <strong [innerHtml]="group.name | searchHighlight: userQueryRegExp$.getValue()"></strong>
+                <strong [innerHtml]="group.name | searchHighlight: userQueryRegExp"></strong>
                 <ng-container *ngTemplateOutlet="generalOptionsList; context: {list: group.options}"></ng-container>
             </mat-optgroup>
             <ng-container *ngTemplateOutlet="generalOptionsList; context: {list: filteredOptions}"></ng-container>
             <ng-template #generalOptionsList let-list="list">
                 <mat-option *ngFor="let suggestion of list" class="autoCompleteOption" [value]="suggestion">
-                    <span [innerHtml]="suggestion.optionLabel | searchHighlight: userQueryRegExp$.getValue()"></span>
+                    <span [innerHtml]="suggestion.optionLabel | searchHighlight: userQueryRegExp"></span>
                 </mat-option>
             </ng-template>
         </mat-autocomplete>
@@ -55,7 +55,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     // options w/o a group
     filteredOptions: ActivityPicklistOption[] = [];
     inputFormControl = new FormControl();
-    userQueryRegExp$ = new BehaviorSubject<RegExp>(null);
+    userQueryRegExp: RegExp;
     private substitutableSymbols: string[] = [];
 
     constructor(
@@ -91,9 +91,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
             .subscribe((value: string | ActivityPicklistOption) => {
                 const query = typeof value === 'string' ? value : value.optionLabel;
                 if (query) {
-                    this.userQueryRegExp$.next(
-                        RegExpHelper.createSubstitutableSymbolsRegExp(query, this.substitutableSymbols)
-                    );
+                    this.userQueryRegExp = RegExpHelper.createSubstitutableSymbolsRegExp(query, this.substitutableSymbols);
                     this.filteredGroups = this.filterOutEmptyGroups(this.filterGroups(sortedPicklistGroups));
                     this.filteredOptions = this.filterOptions(sortedPicklistOptions);
                 } else {
@@ -173,13 +171,14 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
         return groups
             .map(group => ({
                 name: group.name,
-                options: this.userQueryRegExp$.getValue().test(group.name) ?
-                    group.options : this.filterOptions(group.options)
+                options: this.userQueryRegExp.test(group.name)
+                    ? group.options
+                    : this.filterOptions(group.options)
             }));
     }
 
     private filterOptions(options: ActivityPicklistOption[]): ActivityPicklistOption[] {
-        return options.filter(option => this.userQueryRegExp$.getValue().test(option.optionLabel));
+        return options.filter(option => this.userQueryRegExp.test(option.optionLabel));
     }
 
     private get shouldBeSorted(): boolean {

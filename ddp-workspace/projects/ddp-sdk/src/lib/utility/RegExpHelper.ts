@@ -14,15 +14,12 @@ export class RegExpHelper {
         if (substitutableSymbols.includes(text) || !substitutableSymbols.some(s => text.includes(s))) {
             // return same text but space/case insensitive
             return new RegExp(
-                RegExpHelper.replaceEmptySpaces(
-                    RegExpHelper.escapeRegExp(text),
-                    anyAmountOfSpacesRegExp
-                ),
+                RegExpHelper.replaceEmptySpaces(RegExpHelper.escapeRegExp(text)),
                 'gi'
             );
         }
 
-        const escapedSubstitutableSymbols = substitutableSymbols.map(symbol => RegExpHelper.escapeRegExp(symbol));
+        const escapedSubstitutableSymbols = substitutableSymbols.map(symbol => `\\${symbol}`);
         const substitutableSymbolsRegExp = new RegExp(escapedSubstitutableSymbols.join('|'), 'g');
 
         const pattern = RegExpHelper.escapeRegExp(
@@ -33,6 +30,10 @@ export class RegExpHelper {
             )
             .replace(
                 substitutableSymbolsRegExp,
+                // replacing any of substitutableSymbols in origin text with a range of all substitutableSymbols and a replaceValue,
+                // surrounded with any amount of spaces
+                // e.g. substitutableSymbols = ['-', '/'], text = 'asd -   123'
+                // the regex will be /asd\s*[-/ ]\s*123/
                 [anyAmountOfSpacesRegExp, '[', ...escapedSubstitutableSymbols, replaceValue, ']', anyAmountOfSpacesRegExp].join('')
             );
         return new RegExp(pattern, 'gi'); // case-insensitive
