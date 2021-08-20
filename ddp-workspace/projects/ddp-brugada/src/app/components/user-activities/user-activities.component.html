@@ -41,11 +41,26 @@
       </span>
 
       <div class="status">
-        <mat-icon [ngClass]="activity.statusCode">
-          {{ icons[activity.statusCode] }}
-        </mat-icon>
+        <ng-container
+          [ngTemplateOutlet]="hasPreviousInstance(activity) ? completeStatusTmpl : commonStatusTmpl"
+          [ngTemplateOutletContext]="{ activity: activity }"
+        ></ng-container>
 
-        {{ 'App.UserActivities.Status.' + activity.statusCode | translate }}
+        <ng-template #completeStatusTmpl>
+          <mat-icon [ngClass]="ActivityStatusCodes.COMPLETE">
+            {{ icons[ActivityStatusCodes.COMPLETE] }}
+          </mat-icon>
+
+          {{ 'App.UserActivities.Status.' + ActivityStatusCodes.COMPLETE | translate }}
+        </ng-template>
+
+        <ng-template #commonStatusTmpl let-activity="activity">
+          <mat-icon [ngClass]="activity.statusCode">
+            {{ icons[activity.statusCode] }}
+          </mat-icon>
+
+          {{ 'App.UserActivities.Status.' + activity.statusCode | translate }}
+        </ng-template>
       </div>
     </td>
   </ng-container>
@@ -57,36 +72,48 @@
     </th>
 
     <td mat-cell *matCellDef="let activity">
-      <ng-container [ngSwitch]="activity.statusCode">
+      <ng-container *ngIf="hasPreviousInstance(activity); else commonActivityButtonsTmpl">
+        <ng-container
+          [ngTemplateOutlet]="updateActivityBtnTmpl"
+          [ngTemplateOutletContext]="{ activity: activity }"
+        ></ng-container>
+      </ng-container>
+
+      <ng-template #commonActivityButtonsTmpl [ngSwitch]="activity.statusCode">
         <ng-container *ngSwitchCase="ActivityStatusCodes.CREATED">
-          <button type="button" class="btn btn--scarlet" (click)="onStartActivity(activity)">
+          <button type="button" class="btn btn--scarlet" [disabled]="isUIDisabled" (click)="onStartActivity(activity)">
             {{ 'App.UserActivities.Button.Start' | translate }}
           </button>
         </ng-container>
 
         <ng-container *ngSwitchCase="ActivityStatusCodes.IN_PROGRESS">
-          <button type="button" class="btn btn--teal" (click)="onContinueActivity(activity)">
+          <button type="button" class="btn btn--teal" [disabled]="isUIDisabled" (click)="onContinueActivity(activity)">
             {{ 'App.UserActivities.Button.Continue' | translate }}
           </button>
         </ng-container>
 
         <ng-container *ngSwitchCase="ActivityStatusCodes.COMPLETE">
-          <ng-container *ngIf="activity.readonly">
-            <button type="button" class="btn btn--scarlet" (click)="onViewActivity(activity)">
-              {{ 'App.UserActivities.Button.View' | translate }}
-            </button>
-          </ng-container>
-
-          <ng-container *ngIf="!activity.readonly">
-            <button type="button" class="btn btn--scarlet" (click)="onUpdateActivity(activity)">
-              {{ 'App.UserActivities.Button.Update' | translate }}
-            </button>
-          </ng-container>
+          <ng-container
+            [ngTemplateOutlet]="isConsent(activity) ? viewActivityBtnTmpl : updateActivityBtnTmpl"
+            [ngTemplateOutletContext]="{ activity: activity }"
+          ></ng-container>
         </ng-container>
-      </ng-container>
+      </ng-template>
     </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
+
+<ng-template #viewActivityBtnTmpl let-activity="activity">
+  <button type="button" class="btn btn--scarlet" [disabled]="isUIDisabled" (click)="onViewActivity(activity)">
+    {{ 'App.UserActivities.Button.View' | translate }}
+  </button>
+</ng-template>
+
+<ng-template #updateActivityBtnTmpl let-activity="activity">
+  <button type="button" class="btn btn--scarlet" [disabled]="isUIDisabled" (click)="onUpdateActivity(activity)">
+    {{ 'App.UserActivities.Button.Update' | translate }}
+  </button>
+</ng-template>

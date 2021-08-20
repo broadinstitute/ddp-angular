@@ -57,6 +57,10 @@
 
   &:last-of-type {
     padding-right: 2.4rem;
+
+    @include media-sm {
+      border-bottom: none;
+    }
   }
 }
 

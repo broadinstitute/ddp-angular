@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { ActivityInstance, ActivityStatusCodes } from 'ddp-sdk';
 
+import { ActivityCode } from '../../constants/activity-code';
+
 @Component({
   selector: 'app-user-activities',
   templateUrl: './user-activities.component.html',
@@ -9,6 +11,7 @@ import { ActivityInstance, ActivityStatusCodes } from 'ddp-sdk';
 })
 export class UserActivitiesComponent {
   @Input() activities: ActivityInstance[] = [];
+  @Input() isUIDisabled: boolean = false;
   @Output() startActivity = new EventEmitter<ActivityInstance>();
   @Output() continueActivity = new EventEmitter<ActivityInstance>();
   @Output() viewActivity = new EventEmitter<ActivityInstance>();
@@ -36,5 +39,13 @@ export class UserActivitiesComponent {
 
   onUpdateActivity(activity: ActivityInstance): void {
     this.updateActivity.emit(activity);
+  }
+
+  isConsent({ activityCode }: ActivityInstance): boolean {
+    return activityCode === ActivityCode.Consent;
+  }
+
+  hasPreviousInstance({ previousInstanceGuid }: ActivityInstance): boolean {
+    return !!previousInstanceGuid;
   }
 }
