@@ -203,8 +203,6 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
                     filter(isPageBusy => !isPageBusy),
                     take(1))
                 ),
-                // extra buffer to allow for asynchronous saves like mailing address to complete
-                delay(2000),
                 // if we can't save we are not going past filter, so do necessary cleanup here
                 tap(() => !this.isAllFormContentValid.value && (this.dataEntryDisabled = false)),
                 filter(() => this.isAllFormContentValid.value),
