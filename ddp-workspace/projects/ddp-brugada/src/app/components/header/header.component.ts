@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 
 import { Route } from '../../constants/Route';
-import { MailingListModalComponent } from '../mailing-list-modal/mailing-list-modal.component';
+import { MailingListService } from '../../services/mailing-list.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  providers: [MailingListService],
 })
 export class HeaderComponent {
   Route = Route;
   private _isNavigationShown = false;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private mailingListService: MailingListService) {}
 
   get isNavigationShown(): boolean {
     return this._isNavigationShown;
@@ -44,11 +44,6 @@ export class HeaderComponent {
   }
 
   openMailingListModal(): void {
-    this.dialog.open(MailingListModalComponent, {
-      width: '100%',
-      maxWidth: '80rem',
-      disableClose: true,
-      autoFocus: false,
-    });
+    this.mailingListService.openDialog();
   }
 }
