@@ -41,10 +41,6 @@ import { ConfigurationService } from '../../../services/configuration.service';
         .ddp-autocomplete-field ::ng-deep .mat-form-field-infix {
           width: auto;
         }
-
-        .mat-optgroup ::ng-deep .mat-optgroup-label {
-            color: inherit;
-        }
     `]
 })
 export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQuestion implements OnInit, OnDestroy, OnChanges {
