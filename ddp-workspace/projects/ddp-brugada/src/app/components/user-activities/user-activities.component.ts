@@ -11,7 +11,7 @@ import { ActivityCode } from '../../constants/activity-code';
 })
 export class UserActivitiesComponent {
   @Input() activities: ActivityInstance[] = [];
-  @Input() isUIDisabled: boolean = false;
+  @Input() isUIDisabled = false;
   @Output() startActivity = new EventEmitter<ActivityInstance>();
   @Output() continueActivity = new EventEmitter<ActivityInstance>();
   @Output() viewActivity = new EventEmitter<ActivityInstance>();
