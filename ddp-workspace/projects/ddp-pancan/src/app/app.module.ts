@@ -11,7 +11,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { TranslateService } from '@ngx-translate/core';
 
-import { ConfigurationService, DdpModule, LanguageService, LoggingService,  SortOrder, PicklistSortingPolicy } from 'ddp-sdk';
+import {
+    ConfigurationService,
+    DdpModule,
+    LanguageService,
+    LoggingService,
+    SortOrder,
+    PicklistSortingPolicy,
+    AnalyticsEventsService,
+    AnalyticsEvent
+} from 'ddp-sdk';
 
 import { ToolkitConfigurationService, ToolkitModule } from 'toolkit';
 
@@ -82,6 +91,7 @@ sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
 sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.useStepsWithCircle = true;
+sdkConfig.picklistsWithNoSorting = ['PRIMARY_CANCER_SELF', 'PRIMARY_CANCER_CHILD'];
 
 export function translateFactory(translate: TranslateService,
     injector: Injector,
@@ -166,4 +176,11 @@ export function translateFactory(translate: TranslateService,
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+    constructor(private analytics: AnalyticsEventsService) {
+        this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
+            ga('send', event);
+            ga('platform.send', event);
+        });
+    }
+}

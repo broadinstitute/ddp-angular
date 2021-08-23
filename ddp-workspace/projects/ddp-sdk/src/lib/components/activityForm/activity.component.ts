@@ -22,7 +22,7 @@ import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivitySection } from '../../models/activity/activitySection';
 import { AnalyticsEventCategories } from '../../models/analyticsEventCategories';
 import { CompositeDisposable } from '../../compositeDisposable';
-import { BehaviorSubject, combineLatest, Observable, timer } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, Subscription, timer } from 'rxjs';
 import { debounceTime, delay, filter, map, mergeMap, startWith, take, tap } from 'rxjs/operators';
 import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
@@ -90,7 +90,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
 
     public ngOnInit(): void {
         this.getActivity();
-        this.initStepperState();
+        const initStepperSub = this.initStepperState();
         const submitSub = this.submitAttempted.pipe(filter(attempted => attempted))
             .subscribe(() => this.submitAnnouncementService.announceSubmit());
 
@@ -128,7 +128,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 delay(0))
             .subscribe(this.isPageBusy);
 
-        this.anchors = [resSub, invalidSub, subErrSub, submitSub].map(sub => new CompositeDisposable(sub));
+        this.anchors = [initStepperSub, resSub, invalidSub, subErrSub, submitSub].map(sub => new CompositeDisposable(sub));
 
         this.selectedUser$ = this.participantsSearch.getParticipant();
     }
@@ -140,6 +140,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     }
 
     public ngOnDestroy(): void {
+        super.ngOnDestroy();
         this.anchors.forEach(anchor => anchor.removeAll());
     }
 
@@ -371,8 +372,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         }
     }
 
-    private initStepperState(): void {
-        this.getIsLoaded$()
+    private initStepperState(): Subscription {
+        return this.getIsLoaded$()
             .pipe(
                 filter(Boolean),
                 tap(() => {
@@ -382,8 +383,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                         this.visitedSectionIndexes = this.visitedSectionIndexes
                             .map((value, index) => index <= this.currentSectionIndex);
                     }
-                }),
-                take(1)
+                })
             )
             .subscribe();
     }

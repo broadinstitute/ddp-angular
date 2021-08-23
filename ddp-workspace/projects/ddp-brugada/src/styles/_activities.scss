@@ -66,3 +66,42 @@
     }
   }
 }
+
+ddp-date {
+  .ddp-answer-container.picklist {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 0.5em;
+
+    @include media-sm {
+      flex-flow: column nowrap;
+    }
+
+    .ddp-answer-field {
+      width: 30%;
+      flex-grow: 0;
+
+      @include media-sm {
+        width: 100%;
+
+        &:not(:last-of-type) {
+          margin-bottom: 1.2rem;
+        }
+      }
+
+      select {
+        width: 100%;
+
+        padding: 0.8rem 0;
+
+        border: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+
+        font: inherit;
+        color: inherit;
+      }
+    }
+  }
+}

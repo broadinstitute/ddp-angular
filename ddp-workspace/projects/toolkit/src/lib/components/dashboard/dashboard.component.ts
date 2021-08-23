@@ -106,7 +106,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     public navigate(activityInstanceGuid: string, participantGuid?: string): void {
-        if (this.useParticipantDashboard) {
+        if (this.useParticipantDashboard && participantGuid) {
             this.session.setParticipant(participantGuid);
         }
         this.router.navigate([this.toolkitConfiguration.activityUrl, activityInstanceGuid]);

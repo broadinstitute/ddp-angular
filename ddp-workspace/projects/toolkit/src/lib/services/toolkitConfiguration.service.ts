@@ -89,6 +89,4 @@ export class ToolkitConfigurationService {
     usePrionPrivacyPolicyTemplate: boolean;
     // flag for using dashboard in multiple participants mode
     useParticipantDashboard: boolean;
-    // url for "Add participant" redirect from Dashboard
-    addParticipantUrl: string;
 }

@@ -22,6 +22,7 @@
             <button
               class="step-button"
               [class.step-button--active]="isActive(i)"
+              [class.step-button--complete]="isCompleted(i)"
               [disabled]="!isCompleted(i)"
               (click)="jumpStep(i)"
             >

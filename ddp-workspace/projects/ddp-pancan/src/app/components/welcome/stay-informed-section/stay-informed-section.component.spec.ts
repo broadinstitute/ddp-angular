@@ -9,6 +9,7 @@ import { StayInformedSectionComponent } from './stay-informed-section.component'
 import { JoinMailingListComponent } from 'toolkit';
 import { MatDialog } from '@angular/material/dialog';
 import { JOIN_MAILING_LIST_DIALOG_SETTINGS } from '../../../utils/join-mailing-list-dialog-confg';
+import { AnalyticsEventsService } from 'ddp-sdk';
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
@@ -43,7 +44,8 @@ describe('StayInformedSectionComponent', () => {
                 declarations: [StayInformedSectionComponent],
                 providers: [
                     { provide: MatDialog, useValue: dialogSpy},
-                    { provide: 'toolkit.toolkitConfig', useValue: {} }
+                    { provide: 'toolkit.toolkitConfig', useValue: {} },
+                    { provide: AnalyticsEventsService, useValue: {} }
                 ],
             })
             .compileComponents();

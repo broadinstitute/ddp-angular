@@ -6,7 +6,7 @@
         "Team": "Our Team",
         "FAQ": "FAQ",
         "Physicians": "For Physicians",
-        "MailingList": "Mailing List",
+        "MailingList": "Join Mailing List",
         "Join": "Join the Brugada Project",
         "Login": "Log in",
         "Dashboard": "Dashboard"
@@ -18,17 +18,21 @@
         "Back": "Back to top",
         "About": "About",
         "Team": "Our Team",
-        "FAQ": "FAQ"
+        "FAQ": "FAQ",
+        "Physicians": "For Physicians",
+        "MailingList": "Join Mailing List"
       },
       "Contact": {
         "Label": "Contact Us",
         "Email": "<a class=\"link\" href=\"mailto:info@linkmyheart.org\" tabindex=\"-1\">info@linkmyheart.org</a>",
         "Phone": "<a class=\"link\" href=\"tel:6177147560\" tabindex=\"-1\">(617) 714-7560</a>",
+        "Project": "Link My Heart",
         "Address1": "The Broad Institute of MIT and Harvard",
         "Address2": "415 Main Street",
         "Address3": "Cambridge, MA 02142",
         "Address4": "United States"
-      }
+      },
+      "LogoAlt": "Brugada Project"
     },
     "Home": {
       "Cta": {
@@ -146,7 +150,7 @@
             "Name": "What benefits are there to participating in this project?",
             "Answers": [
               "By participating, you will be contributing to discoveries on the clinical and genetic aspects of Brugada syndrome that may benefit individuals with this condition as a whole. However, there are no direct benefits to you for participating in this project. If interested, you may receive notice about publications based off of data collected for this project.",
-              "We may also share research progress and discoveries, in aggregate, which you can access by signing up for our mailing list or checking our website. You will not receive your genetic data as a result from the study."
+              "We may also share research progress and discoveries, in aggregate, which you can access by signing up for our <a class=\"underlined-link mailing-list-toggle\">mailing list</a> or checking our website. You will not receive your genetic data as a result from the study."
             ]
           },
           {
@@ -162,7 +166,7 @@
             ]
           },
           {
-            "Name": "Can I withdraw my participation from this project at anytime?",
+            "Name": "Can I withdraw my participation from this project at any time?",
             "Answers": [
               "Yes. You may withdraw from this study if you decide to change your mind in the future. Your genetic and medical data will not be included in any additional research studies moving  forward, and your information, including records and genetic data, will be destroyed."
             ]
@@ -207,7 +211,7 @@
             "Name": "I don’t have Brugada syndrome, but I was diagnosed with another inherited heart rhythm condition. Can I still participate?",
             "Answers": [
               "We are happy to hear your interest! But for the first phase of our project, we are only recruiting patients who have been diagnosed with Brugada syndrome. However, we expect to recruit patients with other inherited heart rhythm conditions in the future.",
-              "If you are interested in participating in a future project that is specifically related to your inherited heart condition, please consider checking our website periodically or signing up for our mailing list as we will update these when future projects become available."
+              "If you are interested in participating in a future project that is specifically related to your inherited heart condition, please consider checking our website periodically or signing up for our <a class=\"underlined-link mailing-list-toggle\">mailing list</a> as we will update these when future projects become available."
             ]
           }
         ]
@@ -307,9 +311,8 @@
       }
     },
     "MailingList": {
-      "Title": "Mailing List",
-      "Greeting": "Hello!",
-      "Paragraph": "Thank you for joining the Link My Heart mailing list. We will send general updates about the progress of the research project and keep you informed when future projects become available. You can unsubscribe at any time.",
+      "Title": "Join Mailing List",
+      "Paragraph": "Hello! Thanks for your interest in joining the Link My Heart mailing list. Provide your email below and we will send general updates about the progress of the research project and keep you informed when future projects become available. You can unsubscribe at any time.",
       "Thanking": "Thank you!",
       "Form": {
         "Fields": {

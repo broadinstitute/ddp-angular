@@ -4,7 +4,7 @@ section {
     text-align: center;
 
     &.introduction {
-        padding: 6.75rem 2rem 1.125rem 2rem;
+        padding: 1.8rem 2rem 1.125rem 2rem;
 
         .title {
             margin-bottom: 1.25rem;
@@ -16,8 +16,9 @@ section {
         }
 
         .image {
-            max-width: 50%;
-            padding-left: 20px;
+            width: 50%;
+            max-width: 630px;
+            padding-left: 40px;
             object-fit: contain;
         }
 
@@ -113,6 +114,7 @@ section {
 .introduction_container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 @media screen and (max-width: $desktop-breakpoint) {
@@ -123,8 +125,6 @@ section {
         }
 
         &.introduction {
-            padding-top: 1.8rem;
-
             .info,
             .title,
             .text {
@@ -134,12 +134,12 @@ section {
             .image {
                 max-width: 100%;
                 margin: 3rem 0;
+                padding: 0;
             }
         }
 
         .introduction_container {
             flex-direction: column;
-            align-items: center;
             gap: 2rem;
         }
 

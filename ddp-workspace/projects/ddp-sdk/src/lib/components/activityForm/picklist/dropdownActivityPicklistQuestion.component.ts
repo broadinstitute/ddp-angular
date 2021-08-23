@@ -132,7 +132,7 @@ export class DropdownActivityPicklistQuestion extends BaseActivityPicklistQuesti
             this.block.answer.splice(index, 1);
             this.details.show = false;
         }
-        this.valueChanged.emit(this.block.answer);
+        this.valueChanged.emit([...this.block.answer]);
     }
 
     public handleNativeSelect(value: string): void {
@@ -150,7 +150,7 @@ export class DropdownActivityPicklistQuestion extends BaseActivityPicklistQuesti
             this.block.answer = [];
             this.block.answer.push(answer);
         }
-        this.valueChanged.emit(this.block.answer);
+        this.valueChanged.emit([...this.block.answer]);
     }
 
     public detailTextChanged(value: string): void {
@@ -161,7 +161,7 @@ export class DropdownActivityPicklistQuestion extends BaseActivityPicklistQuesti
                     this.block.answer[i].detail = value;
                 }
             });
-            this.valueChanged.emit(this.block.answer);
+            this.valueChanged.emit([...this.block.answer]);
         }
     }
 

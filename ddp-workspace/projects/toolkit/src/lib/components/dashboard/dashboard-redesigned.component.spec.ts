@@ -18,10 +18,13 @@ import {
     UserActivitiesComponent,
     LoggingService,
     ActivityServiceAgent,
-    AnalyticsEventsService
+    AnalyticsEventsService,
+    WorkflowServiceAgent,
+    UserManagementServiceAgent,
+    ActivityResponse
 } from 'ddp-sdk';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -31,6 +34,7 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { MatExpansionPanelHarness } from '@angular/material/expansion/testing';
 import { ActivityInstanceStatusServiceAgent } from '../../../../../ddp-sdk/src/lib/services/serviceAgents/activityInstanceStatusServiceAgent.service';
 import { MatTableModule } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
@@ -77,10 +81,13 @@ describe('DashboardRedesignedComponent', () => {
     let participantsSearchSpy: jasmine.SpyObj<ParticipantsSearchServiceAgent>;
     let userActivityServiceAgentSpy: jasmine.SpyObj<UserActivityServiceAgent>;
     let governedParticipantsSpy: jasmine.SpyObj<GovernedParticipantsServiceAgent>;
+    let workflowServiceSpy: jasmine.SpyObj<WorkflowServiceAgent>;
+    let userManagementServiceSpy: jasmine.SpyObj<UserManagementServiceAgent>;
     let sessionMock: SessionMementoService;
     let toolkitConfigMock: ToolkitConfigurationService;
     let profileMock: UserProfile;
     let loader: HarnessLoader;
+    let router: Router;
     const userGuid = 'userGuid567';
     const studyGuid = 'PANCAN';
 
@@ -93,12 +100,18 @@ describe('DashboardRedesignedComponent', () => {
             })
         });
         toolkitConfigMock = new ToolkitConfigurationService();
+        toolkitConfigMock.studyGuid = studyGuid;
         profileMock = {firstName: '', lastName: ''} as UserProfile;
         const userProfileServiceAgentMock = { profile: of({ profile: profileMock }) } as UserProfileServiceAgent;
 
         const announcementsSpy = jasmine.createSpyObj('participantsSearchSpy', { getMessages: of([]) });
-        governedParticipantsSpy = jasmine.createSpyObj('governedParticipantsSpy', { getGovernedStudyParticipants: of([]) });
+        governedParticipantsSpy = jasmine.createSpyObj('governedParticipantsSpy', {
+            getGovernedStudyParticipants: of([]),
+            addParticipant: of('')
+        });
         userActivityServiceAgentSpy = jasmine.createSpyObj('userActivityServiceAgentSpy', { getActivities: of([]) });
+        workflowServiceSpy = jasmine.createSpyObj('workflowServiceSpy', { fromParticipantList: of([]) });
+        userManagementServiceSpy = jasmine.createSpyObj('userManagementServiceSpy', { deleteUser: of([]) });
         sessionMock = {
             isAuthenticatedAdminSession: () => true,
             setParticipant: () => {},
@@ -113,7 +126,7 @@ describe('DashboardRedesignedComponent', () => {
         const subjectPanel = mockComponent({ selector: 'ddp-subject-panel', inputs: ['subject'] });
         await TestBed.configureTestingModule({
             imports: [
-                RouterTestingModule,
+                RouterTestingModule.withRoutes([]),
                 MatExpansionModule,
                 MatIconModule,
                 TranslateModule.forRoot({
@@ -144,6 +157,8 @@ describe('DashboardRedesignedComponent', () => {
                 { provide: GovernedParticipantsServiceAgent, useValue: governedParticipantsSpy },
                 { provide: UserActivityServiceAgent, useValue: userActivityServiceAgentSpy },
                 { provide: UserProfileServiceAgent, useValue: userProfileServiceAgentMock },
+                { provide: WorkflowServiceAgent, useValue: workflowServiceSpy },
+                { provide: UserManagementServiceAgent, useValue: userManagementServiceSpy },
                 // UserActivitiesComponent dependencies
                 { provide: ActivityInstanceStatusServiceAgent, useValue: statusesServiceAgentSpy },
                 { provide: ActivityServiceAgent, useValue: {} },
@@ -163,6 +178,7 @@ describe('DashboardRedesignedComponent', () => {
         component = fixture.debugElement.componentInstance;
         fixture.detectChanges();
         loader = TestbedHarnessEnvironment.loader(fixture);
+        router = TestBed.inject(Router);
     });
 
     it('should create component', () => {
@@ -212,12 +228,102 @@ describe('DashboardRedesignedComponent', () => {
     });
 
     it('should display add participant button', () => {
-        toolkitConfigMock.addParticipantUrl = 'test';
+        toolkitConfigMock.useParticipantDashboard = true;
         component.ngOnInit();
         fixture.detectChanges();
 
         const addParticipantButton = fixture.debugElement.query(By.css('.add-participant-button'));
         expect(addParticipantButton).toBeTruthy();
+    });
+
+    it('should create a new participant on backend when click add participant button', () => {
+        toolkitConfigMock.useParticipantDashboard = true;
+        component.ngOnInit();
+        fixture.detectChanges();
+
+        const addParticipantButton = fixture.debugElement.query(By.css('.add-participant-button')).nativeElement;
+        addParticipantButton.click();
+        expect(governedParticipantsSpy.addParticipant).toHaveBeenCalledWith(studyGuid);
+    });
+
+    it('should set the created participant into session', () => {
+        const setParticipantSpy = spyOn(sessionMock, 'setParticipant');
+        const newParticipantGuid = '6549';
+        governedParticipantsSpy.addParticipant.and.returnValue(of(newParticipantGuid));
+        toolkitConfigMock.useParticipantDashboard = true;
+        component.ngOnInit();
+        fixture.detectChanges();
+
+        const addParticipantButton = fixture.debugElement.query(By.css('.add-participant-button')).nativeElement;
+        addParticipantButton.click();
+        expect(setParticipantSpy).toHaveBeenCalledWith(newParticipantGuid);
+    });
+
+    it('should redirect to the correct activity', () => {
+        const instanceGuid = 'DKJKF';
+        const activityUrl = 'activity-test';
+
+        workflowServiceSpy.fromParticipantList.and.returnValue(of({instanceGuid} as ActivityResponse));
+        toolkitConfigMock.useParticipantDashboard = true;
+        toolkitConfigMock.activityUrl = activityUrl;
+        const navigateSpy = spyOn(router, 'navigate');
+
+        component.ngOnInit();
+        fixture.detectChanges();
+
+        const addParticipantButton = fixture.debugElement.query(By.css('.add-participant-button')).nativeElement;
+        addParticipantButton.click();
+        expect(navigateSpy).toHaveBeenCalledWith([activityUrl, instanceGuid]);
+    });
+
+    it('should delete created user if workflow request was failed', () => {
+        const newParticipantGuid = '6549';
+        governedParticipantsSpy.addParticipant.and.returnValue(of(newParticipantGuid));
+        workflowServiceSpy.fromParticipantList.and.returnValue(throwError('error'));
+        toolkitConfigMock.useParticipantDashboard = true;
+        const navigateSpy = spyOn(router, 'navigate');
+
+        component.ngOnInit();
+        fixture.detectChanges();
+
+        const addParticipantButton = fixture.debugElement.query(By.css('.add-participant-button')).nativeElement;
+        addParticipantButton.click();
+        expect(userManagementServiceSpy.deleteUser).toHaveBeenCalledWith(newParticipantGuid);
+        expect(navigateSpy).not.toHaveBeenCalled();
+    });
+
+    it('should return participant id', () => {
+        expect(component.trackById('never mind', { userGuid: '1', label: 'label'})).toBe('1');
+    });
+
+    it('should not display remove icon for operator and display for participants', () => {
+        toolkitConfigMock.useParticipantDashboard = true;
+        userActivityServiceAgentSpy.getActivities.and.returnValue(of([activityMock]));
+        governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([
+            { userGuid: '1', userProfile: { firstName: null, lastName: null } } as Participant,
+            { userGuid: '2', userProfile: { firstName: null, lastName: null } } as Participant,
+        ]));
+        component.ngOnInit();
+        fixture.detectChanges();
+
+        const removeButtons = fixture.debugElement.queryAll(By.css('.remove-icon'));
+        expect(removeButtons[0].query(By.css('button'))).toBeFalsy();
+        expect(removeButtons[1].query(By.css('button'))).toBeTruthy();
+        expect(removeButtons[2].query(By.css('button'))).toBeTruthy();
+    });
+
+    it('should remove participant by clicking remove icon', () => {
+        toolkitConfigMock.useParticipantDashboard = true;
+        userActivityServiceAgentSpy.getActivities.and.returnValue(of([]));
+        governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([
+            { userGuid: '1', userProfile: { firstName: null, lastName: null } } as Participant,
+        ]));
+        component.ngOnInit();
+        fixture.detectChanges();
+
+        const removeButton = fixture.debugElement.query(By.css('.remove-icon button')).nativeElement;
+        removeButton.click();
+        expect(userManagementServiceSpy.deleteUser).toHaveBeenCalledWith('1');
     });
 
     it('should not display add participant button', () => {

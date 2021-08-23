@@ -5,6 +5,7 @@ import { take } from 'rxjs/operators';
 
 import {
   ActivityInstance,
+  ActivityServiceAgent,
   AnnouncementMessage,
   AnnouncementsServiceAgent,
   ConfigurationService,
@@ -20,11 +21,13 @@ import { Route } from '../../constants/Route';
 })
 export class DashboardComponent implements OnInit {
   isLoading = false;
-  activities: ActivityInstance[] = [];
+  isUIDisabled = false;
+  activities: ActivityInstance[] | null = null;
   announcements: AnnouncementMessage[] | null = null;
 
   constructor(
     private router: Router,
+    private activityService: ActivityServiceAgent,
     private userActivityService: UserActivityServiceAgent,
     private announcementsService: AnnouncementsServiceAgent,
     @Inject('ddp.config') private config: ConfigurationService,
@@ -46,8 +49,20 @@ export class DashboardComponent implements OnInit {
     this.router.navigate([Route.Activity, instanceGuid]);
   }
 
-  onUpdateActivity({ instanceGuid }: ActivityInstance): void {
-    this.router.navigate([Route.Activity, instanceGuid]);
+  onUpdateActivity({ activityCode }: ActivityInstance): void {
+    if (this.isUIDisabled) {
+      return;
+    }
+
+    this.isUIDisabled = true;
+
+    this.activityService
+      .createInstance(this.config.studyGuid, activityCode)
+      .pipe(take(1))
+      .subscribe(({ instanceGuid }) => {
+        this.isUIDisabled = false;
+        this.router.navigate([Route.Activity, instanceGuid]);
+      });
   }
 
   private loadData(): void {
