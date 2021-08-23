@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { Route } from './constants/Route';
 import { Routes, RouterModule } from '@angular/router';
 import { FaqComponent } from './pages/faq/faq.component';
-import { LoginLandingRedesignedComponent } from 'toolkit';
 import { HomeComponent } from './pages/home/home.component';
 import { JoinComponent } from './pages/join/join.component';
 import { TeamComponent } from './pages/team/team.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { AboutComponent } from './pages/about/about.component';
 import { LoginComponent } from './pages/login/login.component';
+import { LoginLandingComponent } from './pages/login-landing/login-landing.component';
 import { PasswordComponent } from './pages/password/password.component';
 import { IrbGuard, BrowserGuard, Auth0CodeCallbackComponent } from 'ddp-sdk';
 import { RegistrationComponent } from './pages/registration/registration.component';
@@ -74,7 +74,7 @@ const routes: Routes = [
   },
   {
     path: Route.LoginLanding,
-    component: LoginLandingRedesignedComponent,
+    component: LoginLandingComponent,
     canActivate: [IrbGuard],
   },
   {

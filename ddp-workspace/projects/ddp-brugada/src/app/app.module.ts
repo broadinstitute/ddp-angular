@@ -33,6 +33,7 @@ import { TeamComponent } from './pages/team/team.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { LoginComponent } from './pages/login/login.component';
+import { LoginLandingComponent } from './pages/login-landing/login-landing.component';
 import { PasswordComponent } from './pages/password/password.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -58,6 +59,7 @@ import { AppRoutingModule } from './app-routing.module';
     RegistrationComponent,
     SignUpComponent,
     LoginComponent,
+    LoginLandingComponent,
     SignInComponent,
     SignInOutComponent,
     DashboardComponent,
