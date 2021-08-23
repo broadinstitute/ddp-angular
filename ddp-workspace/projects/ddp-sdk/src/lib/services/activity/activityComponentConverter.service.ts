@@ -30,6 +30,7 @@ export class ActivityComponentConverter {
         block.subtitleText = params.subtitleText;
         block.requireVerified = !!params.requireVerified;
         block.requirePhone = !!params.requirePhone;
+        block.addressGuid = inputBlock.component.addressGuid;
         return block;
     }
 
