@@ -1,4 +1,3 @@
-import { TestBed } from '@angular/core/testing';
 import { LoggingService, MailAddressBlock } from 'ddp-sdk';
 import { ActivityComponentConverter } from './activityComponentConverter.service';
 import { ComponentType } from '../../models/activity/componentType';
@@ -21,8 +20,6 @@ const block = {
 
 describe('ActivityComponentConverter Test', () => {
     beforeEach(() => {
-        TestBed.configureTestingModule({ providers: [LoggingService] });
-
         service = new ActivityComponentConverter(loggerServiceSpy);
     });
 
