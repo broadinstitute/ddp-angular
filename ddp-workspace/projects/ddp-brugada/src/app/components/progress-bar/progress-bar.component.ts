@@ -1,33 +1,24 @@
-import { Component, Input } from '@angular/core';
-import { ActivityInstance } from 'ddp-sdk';
+import { Observable } from 'rxjs';
+import { ChangeDetectionStrategy, Component, Inject  } from '@angular/core';
+import { activitiesList, ActivityListItem } from '../../constants/activities';
+import { activeActivityNumberProvider, ACTIVE_ACTIVITY_NUMBER } from './providers';
+
 
 @Component({
   selector: 'app-progress-bar',
   templateUrl: './progress-bar.component.html',
-  styleUrls: ['./progress-bar.component.scss']
+  styleUrls: ['./progress-bar.component.scss'],
+  providers: [activeActivityNumberProvider],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProgressBarComponent {
-  private _activities: ActivityInstance[];
-  private _activeActivityId;
+  private static activitiesList: ActivityListItem[] = activitiesList;
 
-  @Input() set activities(activities: ActivityInstance[]) {
-    this._activities = activities;
+  get activities(): ActivityListItem[] {
+    return ProgressBarComponent.activitiesList;
   }
 
-  get activities(): ActivityInstance[] {
-    return this._activities;
-  }
-
-  @Input() set activeActivityId(id: string) {
-    this._activeActivityId = id;
-  }
-
-  get activeActivityId(): string {
-    return this._activeActivityId;
-  }
-
-  get activeActivityNumber(): number {
-    const activeActivity = this.activities.find(activity => activity.instanceGuid === this.activeActivityId);
-    return this.activities.indexOf(activeActivity);
-  }
+  constructor(
+    @Inject(ACTIVE_ACTIVITY_NUMBER) readonly activeActivityNumber$: Observable<number>
+  ) {}
 }

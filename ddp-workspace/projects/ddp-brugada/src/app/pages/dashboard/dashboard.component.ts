@@ -20,7 +20,7 @@ import { Route } from '../../constants/Route';
 })
 export class DashboardComponent implements OnInit {
   isLoading = false;
-  activities: ActivityInstance[] | null = null;
+  activities: ActivityInstance[] = [];
   announcements: AnnouncementMessage[] | null = null;
 
   constructor(

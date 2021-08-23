@@ -30,7 +30,7 @@ export class Auth0ManualService {
     if (this.sessionService.isTemporarySession()) {
       userMetadata = {
         ...userMetadata,
-        temp_user_guid: this.sessionService.session.userGuid,
+        temp_user_guid: this.sessionService.session?.userGuid,
       };
     }
 

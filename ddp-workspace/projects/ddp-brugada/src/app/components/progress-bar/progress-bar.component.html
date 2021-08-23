@@ -1,18 +1,21 @@
-<div class="wrapper">
-  <div class="bottom-line"></div>
-  <div
-    [class.step-container_active]="i <= activeActivityNumber"
-    *ngFor="let activity of activities; index as i"
-    class="step-container"
-  >
+<div class="wrapper" *ngIf="{ activeActivityNumber: activeActivityNumber$ | async } as State">
+  <ng-container *ngIf="State.activeActivityNumber !== null">
     <div
-      [class.circular_active]="i <= activeActivityNumber"
-      class="circular"
+      class="step-container"
+      *ngFor="let activity of activities; index as i"
+      [class.step-container_active]="i <= State.activeActivityNumber"
     >
-      <p class="number">{{ i + 1 }}</p>
+      <div class="circular">
+        <p class="number">{{ i + 1 }}</p>
+      </div>
+      <div
+        class="line"
+        *ngIf="i !== activities.length - 1"
+        [class.line_active]="i <= State.activeActivityNumber - 1"
+      ></div>
+      <p class="step-paragraph">
+        {{ activity.activityName }}
+      </p>
     </div>
-    <p class="step-paragraph">{{ activity.activityName }}</p>
-  </div>
+  </ng-container>
 </div>
-
-
