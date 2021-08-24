@@ -35,7 +35,11 @@
               </ng-container>
             </button>
           </li>
-          <li *ngIf="i !== model.sections.length - 1" class="stepper-list__divider"></li>
+          <li
+            *ngIf="i !== model.sections.length - 1"
+            class="stepper-list__divider"
+            [class.stepper-list__divider--complete]="isCompleted(i) && isCompleted(i + 1)"
+          ></li>
         </ng-container>
       </ol>
     </section>
