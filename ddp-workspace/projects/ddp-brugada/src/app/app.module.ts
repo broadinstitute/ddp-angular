@@ -22,6 +22,8 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { ActivityComponent } from './components/activity/activity.component';
 import { SignInOutComponent } from './components/sign-in-out/sign-in-out.component';
 import { MailingListModalComponent } from './components/mailing-list-modal/mailing-list-modal.component';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
 import { SKDConfigProvider } from './config/sdk.provider';
 import { translateProvider } from './config/translate.provider';
@@ -38,7 +40,6 @@ import { PasswordComponent } from './pages/password/password.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ActivityPageComponent } from './pages/activity-page/activity-page.component';
-import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { SessionExpiredDialogComponent } from './components/session-expired-dialog/session-expired-dialog.component';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -62,6 +63,7 @@ import { AppRoutingModule } from './app-routing.module';
     LoginLandingComponent,
     SignInComponent,
     SignInOutComponent,
+    ProgressBarComponent,
     DashboardComponent,
     UserActivitiesComponent,
     ActivityPageComponent,
@@ -90,4 +92,4 @@ import { AppRoutingModule } from './app-routing.module';
   providers: [SKDConfigProvider, translateProvider, toolkitConfigProvider],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
