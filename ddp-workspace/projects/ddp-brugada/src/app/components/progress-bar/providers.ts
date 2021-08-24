@@ -20,10 +20,8 @@ export const activeActivityNumberProvider: Provider = {
     filter((activeActivityId: string) => !!activeActivityId),
     switchMap((activeActivityId: string) => userActivityService.getActivities(of(config.studyGuid)).pipe(
       first(),
-      map((activities: ActivityInstance[]) => activities.indexOf(
-        activities.find(
-          (activity: ActivityInstance) => activity.instanceGuid === activeActivityId
-        )
+      map((activities: ActivityInstance[]) => activities.findIndex(
+        (activity: ActivityInstance) => activity.instanceGuid === activeActivityId
       ))
     ))
   ),

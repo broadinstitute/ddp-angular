@@ -3,13 +3,13 @@ import { ActivityCode } from './activity-code';
 
 export interface ActivityListItem {
   activityCode: string;
-  activityName: string;
+  activityNameI18nKey: string;
 }
 
 export const activitiesList: ActivityListItem[] = [
-  { activityCode: ActivityCode.Consent, activityName: 'Consent form' },
-  { activityCode: ActivityCode.MedicalRecordRelease, activityName: 'Medical Record Release Form' },
-  { activityCode: ActivityCode.BackgroundInformation, activityName: 'Background Information Survey' },
-  { activityCode: ActivityCode.GeneticTesting, activityName: 'Genetic Testing & Family History Survey' },
-  { activityCode: null, activityName: 'Additional surveys' },
+  { activityCode: ActivityCode.Consent, activityNameI18nKey: 'App.ProgressBar.Titles.Consent' },
+  { activityCode: ActivityCode.MedicalRecordRelease, activityNameI18nKey: 'App.ProgressBar.Titles.MedicalRecordRelease' },
+  { activityCode: ActivityCode.BackgroundInformation, activityNameI18nKey: 'App.ProgressBar.Titles.BackgroundInformation' },
+  { activityCode: ActivityCode.GeneticTesting, activityNameI18nKey: 'App.ProgressBar.Titles.GeneticTesting' },
+  { activityCode: null, activityNameI18nKey: 'App.ProgressBar.Titles.Other' },
 ];

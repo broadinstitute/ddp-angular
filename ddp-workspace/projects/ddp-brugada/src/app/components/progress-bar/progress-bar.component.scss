@@ -15,15 +15,28 @@
     color: map-get($colors, 'progress_bar-active');
 
     & .circular { 
-      background: map-get($colors, 'white');
-      border: 3px solid map-get($colors, 'progress_bar-active');
+      background: map-get($colors, 'progress_bar-active');
+      border: 3px solid map-get($colors, 'progress_bar-active-border');
       & .number {
-        color: map-get($colors, 'progress_bar-active');
+        color: map-get($colors, 'white');
       }
     }
 
     & .step-paragraph {
-      color: map-get($colors, 'progress_bar-active');
+      color: map-get($colors, 'progress_bar-active-passed-color');
+    }
+
+    &_white {
+      & .circular { 
+        background: map-get($colors, 'white');
+        border: 3px solid map-get($colors, 'progress_bar-active-border');
+        & .number {
+          color: map-get($colors, 'progress_bar-active');
+        }
+      }
+      & .step-paragraph {
+        color: map-get($colors, 'progress_bar-active');
+      }
     }
   }
 }
@@ -34,9 +47,6 @@
   right: -65px;
   position: relative;
   border-bottom: 3px solid map-get($colors, 'progress_bar-inactive-border');
-  &_active {
-    border-bottom: 3px solid map-get($colors, 'progress_bar-active');
-  }
   @include media-md {
     right: -50px;
   }

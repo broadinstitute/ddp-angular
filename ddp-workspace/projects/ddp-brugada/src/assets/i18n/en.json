@@ -346,6 +346,15 @@
     "Dashboard": {
       "Title": "Dashboard"
     },
+    "ProgressBar": {
+      "Titles": {
+        "Consent": "Consent form",
+        "MedicalRecordRelease": "Medical Record Release Form",
+        "BackgroundInformation": "Background Information Survey",
+        "GeneticTesting": "Genetic Testing & Family History Survey",
+        "Other": "Additional surveys"
+      }
+    },
     "UserActivities": {
       "Columns": {
         "Name": "Name",
