@@ -1,5 +1,6 @@
 <div class="wrapper" *ngIf="{ activeActivityNumber: activeActivityNumber$ | async } as State">
   <ng-container *ngIf="State.activeActivityNumber !== null">
+    <div class="line"></div>
     <div
       class="step-container"
       *ngFor="let activity of activities; index as i"
@@ -9,14 +10,7 @@
       <div class="circular">
         <p class="number">{{ i + 1 }}</p>
       </div>
-      <div
-        class="line"
-        *ngIf="i !== activities.length - 1"
-        [class.line_active]="i <= State.activeActivityNumber - 1"
-      ></div>
-      <p class="step-paragraph">
-        {{ activity.activityNameI18nKey | translate }}
-      </p>
+      <p class="step-paragraph" [innerHtml]="activity.activityNameI18nKey | translate"></p>
     </div>
   </ng-container>
 </div>

@@ -42,14 +42,12 @@
 }
 
 .line {
-  top: -27px;
+  top: 24px;
+  right: 5%;
+  width: 90%;
   z-index: -1;
-  right: -65px;
-  position: relative;
-  border-bottom: 3px solid map-get($colors, 'progress_bar-inactive-border');
-  @include media-md {
-    right: -50px;
-  }
+  position: absolute;
+  border-bottom: 3px solid #999ba0;
 }
 
 .circular {
