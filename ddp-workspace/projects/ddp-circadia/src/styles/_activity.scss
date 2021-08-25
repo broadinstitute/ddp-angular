@@ -127,6 +127,12 @@
     }
   }
 
+  .ddp-required-question-prompt {
+    span > *::after {
+      content: ' *';
+    }
+  }
+
   .mat-radio-group {
     .margin-5 {
       margin: 0 !important;
@@ -149,7 +155,14 @@
     }
 
     .mat-list-item-content {
+      display: block !important;
       padding: 0 !important;
+
+      .mat-form-field {
+        margin-top: 1em;
+
+        font-size: 1em;
+      }
     }
 
     .mat-checkbox-inner-container {
