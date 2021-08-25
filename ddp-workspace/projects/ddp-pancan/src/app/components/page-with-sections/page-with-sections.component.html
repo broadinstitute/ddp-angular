@@ -1,7 +1,5 @@
-<main class="page">
+<main class="page" [ngClass]="isAboutUsPage ? 'about-us': 'scientific-research'">
     <section *ngFor="let section of (source + '.Sections') | translate; let i = index;" [class]="'section section-' + i">
-        <img class="section__side-image" lazy-resource [src]="'assets/images/' + sectionImages[i]">
-
         <div class="section__content">
             <h3 class="section__title static-page-title">{{section.Title}}</h3>
 
