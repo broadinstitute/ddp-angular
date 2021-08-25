@@ -166,12 +166,6 @@
     }
 }
 
-@media screen and (max-width: $tablet-breakpoint) {
-    .controls app-auth{
-        display: none;
-    }
-}
-
 @media screen and (max-width: $desktop-breakpoint) {
     .header ::ng-deep.navigation__link{
         font-size: 1.5rem;
@@ -189,8 +183,22 @@
     }
 }
 
+@media screen and (max-width: $tablet-breakpoint) {
+    .controls app-auth{
+        display: none;
+    }
+}
+
 @media screen and (max-width: $mobile-breakpoint) {
+    .project-logo {
+        margin-right: 7px;
+    }
+
     ddp-language-selector ::ng-deep .SimpleButton {
-        padding: 0;
+        padding: 10px !important;
+    }
+
+    .hamburger {
+        padding: 10px;
     }
 }
