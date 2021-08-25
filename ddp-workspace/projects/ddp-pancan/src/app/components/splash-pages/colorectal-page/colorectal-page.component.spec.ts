@@ -30,12 +30,11 @@ class TranslateLoaderMock implements TranslateLoader {
 describe('ColorectalPageComponent', () => {
     let component: ColorectalPageComponent;
     let fixture: ComponentFixture<ColorectalPageComponent>;
-    const participationSection = mockComponent({ selector: 'app-participation-section'});
-    const faqSection = mockComponent({ selector: 'app-faq-section'});
-    const stayInformedSection = mockComponent({ selector: 'app-stay-informed-section'});
-    const joinCmiSection = mockComponent({ selector: 'app-join-cmi-section'});
+    const participationSection = mockComponent({ selector: 'app-participation-section', inputs: ['isColorectalTheme'] });
+    const faqSection = mockComponent({ selector: 'app-faq-section', inputs: ['isColorectal'] });
+    const stayInformedSection = mockComponent({ selector: 'app-stay-informed-section', inputs: ['isColorectal'] });
+    const joinCmiSection = mockComponent({ selector: 'app-join-cmi-section', inputs: ['isColorectalTheme'] });
     const splashPageFooter = mockComponent({ selector: 'app-splash-page-footer', inputs: ['phone', 'email']});
-
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({

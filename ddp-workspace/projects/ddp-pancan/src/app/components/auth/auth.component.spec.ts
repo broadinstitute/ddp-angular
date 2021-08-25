@@ -1,12 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { mockComponent, SessionMementoService } from 'ddp-sdk';
 import { RouterTestingModule } from '@angular/router/testing';
-import { of, Observable } from 'rxjs';
-import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
-import { By } from '@angular/platform-browser';
-import { AuthComponent } from './auth.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { By } from '@angular/platform-browser';
+import { of, Observable } from 'rxjs';
+
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
+import { mockComponent, SessionMementoService } from 'ddp-sdk';
+import { AuthComponent } from './auth.component';
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
@@ -37,6 +39,7 @@ describe('AuthComponent', () => {
             imports: [
                 RouterTestingModule,
                 MatIconModule,
+                MatButtonModule,
                 TranslateModule.forRoot({ loader: { provide: TranslateLoader, useClass: TranslateLoaderMock }, }),
                 NoopAnimationsModule
             ],
