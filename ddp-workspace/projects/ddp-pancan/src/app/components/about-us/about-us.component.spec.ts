@@ -8,7 +8,7 @@ import { mockComponent } from 'ddp-sdk';
 describe('AboutUsComponent', () => {
     let component: AboutUsComponent;
     let fixture: ComponentFixture<AboutUsComponent>;
-    const anchorsPage = mockComponent({selector: 'app-anchors-page', inputs: ['source', 'route']});
+    const pageWithSections = mockComponent({selector: 'app-page-with-sections', inputs: ['source']});
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
@@ -18,7 +18,7 @@ describe('AboutUsComponent', () => {
                 ],
                 declarations: [
                     AboutUsComponent,
-                    anchorsPage
+                    pageWithSections
                 ]
             })
             .compileComponents();
