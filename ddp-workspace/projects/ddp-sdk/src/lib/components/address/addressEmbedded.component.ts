@@ -382,6 +382,8 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
 
         const handleAddressSuggestionAction$ = addressSuggestion$.pipe(
+            // to filter out null values when any field is updated
+            distinctUntilChanged(),
             tap(() => this.stateUpdates$.next({fieldErrors: []})),
             filter(suggestion => !!suggestion),
             tap((addressSuggestion) => {
