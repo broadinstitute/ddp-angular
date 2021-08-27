@@ -6,6 +6,7 @@ import { filter, first, map, pluck, switchMap } from 'rxjs/operators';
 import { ActivityListItem } from './../../interfaces/activity-list-item';
 import { ConfigurationService, UserActivityServiceAgent, ActivityInstance, ActivityStatusCodes } from 'ddp-sdk';
 
+
 const anotherKey = 'another';
 
 export type ActivitiesListDictionary = {
@@ -92,12 +93,12 @@ const getUpdatedActivityMap = (activities: ActivityInstance[], activeActivityId:
   return activitiesDictionary;
 };
 
-export const ACTIVE_ACTIVITY_NUMBER: InjectionToken<Observable<ActivityInstance[]>> = new InjectionToken<Observable<ActivityInstance[]>>(
-  'A stream with a number of active activity'
+export const ACTIVITEIS: InjectionToken<Observable<ActivityInstance[]>> = new InjectionToken<Observable<ActivityInstance[]>>(
+  'A stream with activities for progress bar'
 );
 
 export const activeActivityNumberProvider: Provider = {
-  provide: ACTIVE_ACTIVITY_NUMBER,
+  provide: ACTIVITEIS,
   useFactory: (
     route: ActivatedRoute,
     config: ConfigurationService,
