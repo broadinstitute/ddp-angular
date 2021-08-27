@@ -42,7 +42,7 @@ import { AddressError } from '../../models/addressError';
 import { AddressVerificationStatus } from '../../models/addressVerificationStatus';
 import { AddressInputComponent } from './addressInput.component';
 import { MailAddressBlock } from '../../models/activity/MailAddressBlock';
-import { generateTaggedAddress, isStreetRequiredError } from './addressUtils';
+import { generateTaggedAddress } from './addressUtils';
 import { SubmitAnnouncementService } from '../../services/submitAnnouncement.service';
 import { AddressVerificationWarnings } from '../../models/addressVerificationWarnings';
 import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
@@ -488,10 +488,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
                     if (currError.field === 'address') {
                         // These are the "global" errors reported by EasyPost
                         errorUpdate.formErrorMessages.push(currError.message);
-                    } else if (isStreetRequiredError(currError)) {
-                        // Seems like EasyPost needs a street address before it verifies other fields.
-                        // Since street1 might not be filled yet, transform message into a "global" error message.
-                        errorUpdate.formErrorMessages.push('Street address is missing, could not verify address.');
                     } else {
                         errorUpdate.fieldErrors.push(currError);
                     }
