@@ -93,12 +93,12 @@ const getUpdatedActivityMap = (activities: ActivityInstance[], activeActivityId:
   return activitiesDictionary;
 };
 
-export const ACTIVITEIS: InjectionToken<Observable<ActivityInstance[]>> = new InjectionToken<Observable<ActivityInstance[]>>(
+export const ACTIVITIES: InjectionToken<Observable<ActivityInstance[]>> = new InjectionToken<Observable<ActivityInstance[]>>(
   'A stream with activities for progress bar'
 );
 
 export const activeActivityNumberProvider: Provider = {
-  provide: ACTIVITEIS,
+  provide: ACTIVITIES,
   useFactory: (
     route: ActivatedRoute,
     config: ConfigurationService,
