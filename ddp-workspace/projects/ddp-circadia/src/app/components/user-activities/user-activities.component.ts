@@ -19,7 +19,7 @@ export class UserActivitiesComponent {
   ActivityStatusCode = ActivityStatusCodes;
   ActivityCode = ActivityCode;
   readonly DLMO_SCHEDULING_URL =
-    'https://outlook.office365.com/owa/calendar/CircadiaStudy1@partnershealthcare.onmicrosoft.com/bookings/';
+    'https://outlook.office365.com/owa/calendar/MGHCircadiaStudy@partnershealthcare.onmicrosoft.com/bookings/';
 
   onStartClick(activity: ActivityInstance): void {
     this.startActivity.emit(activity);
