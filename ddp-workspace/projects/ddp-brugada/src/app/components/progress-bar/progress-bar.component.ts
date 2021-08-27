@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
+import { ActivityStatusCodes } from 'ddp-sdk';
+import { ActivityListItem } from './../../interfaces/activity-list-item';
 import { ChangeDetectionStrategy, Component, Inject  } from '@angular/core';
-import { activitiesList, ActivityListItem } from '../../constants/activities';
 import { activeActivityNumberProvider, ACTIVE_ACTIVITY_NUMBER } from './providers';
 
 
@@ -12,13 +13,9 @@ import { activeActivityNumberProvider, ACTIVE_ACTIVITY_NUMBER } from './provider
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProgressBarComponent {
-  private static activitiesList: ActivityListItem[] = activitiesList;
-
-  get activities(): ActivityListItem[] {
-    return ProgressBarComponent.activitiesList;
-  }
+  ActivityStatusCodes = ActivityStatusCodes;
 
   constructor(
-    @Inject(ACTIVE_ACTIVITY_NUMBER) readonly activeActivityNumber$: Observable<number>
+    @Inject(ACTIVE_ACTIVITY_NUMBER) readonly activities$: Observable<ActivityListItem[]>
   ) {}
 }

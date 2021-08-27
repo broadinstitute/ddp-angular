@@ -1,11 +1,13 @@
-<div class="wrapper" *ngIf="{ activeActivityNumber: activeActivityNumber$ | async } as State">
-  <ng-container *ngIf="State.activeActivityNumber !== null">
+<div class="wrapper" *ngIf="{ activities: activities$ | async } as State">
+  <ng-container *ngIf="State.activities">
     <div class="line"></div>
     <div
       class="step-container"
-      *ngFor="let activity of activities; index as i"
-      [class.step-container_active]="i <= State.activeActivityNumber"
-      [class.step-container_active_white]="i === State.activeActivityNumber"
+      *ngFor="let activity of State.activities; index as i"
+      [ngClass]="{
+        'step-container_active': activity.status === ActivityStatusCodes.COMPLETE,
+        'step-container_active_white': activity.status === ActivityStatusCodes.IN_PROGRESS
+      }"
     >
       <div class="circular">
         <p class="number">{{ i + 1 }}</p>
