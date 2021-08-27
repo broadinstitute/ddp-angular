@@ -105,6 +105,23 @@
           </button>
         </ng-container>
 
+        <ng-container *ngSwitchCase="ActivityCode.MiniSleepLog">
+          <mat-spinner
+            *ngIf="!sleepLogUrl"
+            diameter="32"
+            style="margin: 6px 0 6px 1.5em;"
+          ></mat-spinner>
+
+          <a
+            *ngIf="sleepLogUrl"
+            class="button button--sm button--yellow-outline"
+            target="_blank"
+            [href]="sleepLogUrl"
+          >
+            {{ 'UserActivities.Actions.Start' | translate }}
+          </a>
+        </ng-container>
+
         <ng-container *ngSwitchDefault>
           <button
             *ngIf="activity.statusCode === ActivityStatusCode.CREATED"

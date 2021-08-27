@@ -11,6 +11,7 @@
 <ng-template #userActivities>
   <app-user-activities
     [activities]="activities"
+    [sleepLogUrl]="diaryUrl"
     (startActivity)="onStartActivity($event)"
     (continueActivity)="onContinueActivity($event)"
     (viewActivity)="onViewActivity($event)"

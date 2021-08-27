@@ -276,6 +276,10 @@ var DDP_ENV = {
 {{end}}
 
 {{if eq $study_guid "circadia"}}
+    {{with secret (printf "secret/pepper/%s/%s/%s/conf" $environment $version $study) }}
+        DDP_ENV['sleepLogConnectorUrl'] = "{{.Data.sleepLogConnectorUrl}}",
+    {{end}}
+
     {{if eq $environment "local"}}
         DDP_ENV['auth0ClientId'] = "GMMFtLjB1c38Fmr3UVEm8WqBsvCIeJ9d";
         DDP_ENV['auth0Domain'] = "circadia-dev.us.auth0.com";
