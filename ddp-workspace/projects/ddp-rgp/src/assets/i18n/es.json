@@ -665,78 +665,78 @@
         "Placeholder": "[es]Please enter a password to access the site "
     },
     "EligibilityPage": {
-        "Title": "[es]Eligibility Criteria",
+        "Title": "Criterios de idoneidad",
         "Intro": {
-            "Text1": "[es]The Rare Genomes Project offers research-based genomic sequencing to patients and families with an undiagnosed, suspected genetic disease. Each application that we receive is carefully reviewed by our team to determine if our study is likely to find the genetic cause of the condition in your family.",
+            "Text1": "El Proyecto Genomas Raros ofrece secuenciación genómica de investigación a pacientes y familias en quienes se sospecha una enfermedad genética que no se ha diagnosticado. Nuestro equipo revisa atentamente cada solicitud que recibimos para determinar si existe la probabilidad de que en el estudio que realizamos se descubra la causa genética de la enfermedad que se presenta en su familia.",
             "Text2": {
-                "Part1": "[es]We welcome applications from families with all types of rare disease. Additionally, we have specialized branches of our project focusing on",
-                "Part2": "[es]limb-girdle muscular dystrophy",
-                "Part3": "[es]and",
-                "Part4": "[es]craniofacial conditions",
-                "Part5": "[es]which are described in more detail on their disease-specific pages."
+                "Part1": "Aceptamos solicitudes de familias con todo tipo de enfermedades raras. Además, en el Proyecto hay divisiones especializadas que se centran en la",
+                "Part2": "distrofia muscular de cinturas",
+                "Part3": "y en las",
+                "Part4": "enfermedades craneofaciales",
+                "Part5": "que se explican en más detalle en las páginas respectivas."
             }
         },
         "Eligible": {
             "Intro": {
-                "Text1": "[es]To be eligible, participants",
-                "Text2": "[es]must:"
+                "Text1": "Para participar, el solicitante",
+                "Text2": "debe:"
             },
             "List": {
-                "Item1": "[es]Have a rare and genetically undiagnosed condition",
-                "Item2": "[es]Live in the United States",
-                "Item3": "[es]Understand English",
-                "Item4": "[es]Be currently under the care of a medical provider that is helping to understand the cause of the condition",
-                "Item5": "[es]Have access to a mobile or landline telephone and a computer"
+                "Item1": "Tener una enfermedad genética rara que no se haya diagnosticado",
+                "Item2": "Vivir en los Estados Unidos",
+                "Item3": "Hablar inglés o español",
+                "Item4": "Recibir actualmente los cuidados de un profesional médico que le esté ayudando a determinar la causa de la enfermedad",
+                "Item5": "Tener acceso a un teléfono o a una computadora"
             },
             "Ending": {
                 "Text1": {
-                    "Part1": "[es]Applicants do",
-                    "Part2": "[es]NOT",
-                    "Part3": "[es]need to pay any fees associated with our study or travel to our office in Cambridge, Massachusetts. Participation is entirely remote and free-of-cost."
+                    "Part1": "Los solicitantes",
+                    "Part2": "no tienen",
+                    "Part3": "que pagar ninguna cuota relacionada con el estudio ni viajar a nuestra oficina de Cambridge (Massachusetts). La participación se realiza completamente a distancia y es gratuita."
                 },
                 "Text2": {
-                    "Part1": "[es]If one or more of these criteria do not apply to you, we encourage you to",
-                    "Part2": "[es]join our mailing list",
-                    "Part3": "[es]We will contact you if participation requirements have changed, making you eligible to apply to the study."
+                    "Part1": "Si no cumple uno o más de estos criterios, le recomendamos que se",
+                    "Part2": "inscriba en nuestra lista de correo",
+                    "Part3": "Nos comunicaremos con usted si los requisitos cambian y le permiten solicitar el ingreso al estudio."
                 }
             }
         },
         "General": {
             "MoreLikely": {
                 "Text": {
-                    "Part1": "[es]In general, the families",
-                    "Part2": "[es]more likely",
-                    "Part3": "[es]to benefit from our study approach are suspected to have a single gene cause of disease and may have some of the following features:"
+                    "Part1": "En general, las familias que tienen",
+                    "Part2": "más probabilidades",
+                    "Part3": "de beneficiarse de la estrategia de este estudio son aquellas en quienes se sospecha que la causa de la enfermedad es un gen único y que tienen algunas de las siguientes características:"
                 },
                 "List": {
-                    "Item1": "[es]An earlier-than-typical onset or severe presentation of symptoms",
-                    "Item2": "[es]Multiple family members with the same (or similar) medical condition",
-                    "Item3": "[es]Available, unaffected biological parents of the affected individual(s)",
-                    "Item4": "[es]Some prior genetic testing that did not identify a diagnosis"
+                    "Item1": "Un inicio más precoz que el típico o una presentación grave de los síntomas",
+                    "Item2": "Varias personas de la familia afectadas por la misma enfermedad (o por una enfermedad parecida).",
+                    "Item3": "Disponibilidad de los padres biológicos de las personas afectadas y que estos padres no tengan la enfermedad",
+                    "Item4": "Resultados de algunas pruebas genéticas anteriores que no llevaron a un diagnóstico"
                 }
             },
             "LessLikely": {
                 "Text": {
-                    "Part1": "[es]In general, the families",
-                    "Part2": "[es]less likely",
-                    "Part3": "[es]to benefit from our study approach include those with a condition that:"
+                    "Part1": "En general, las familias que tienen",
+                    "Part2": "menos probabilidades",
+                    "Part3": "de beneficiarse de la estrategia de este estudio son aquellas cuya enfermedad:"
                 },
                 "List": {
-                    "Item1": "[es]Is not likely to be caused by a change in a single gene (for example, Ehlers-Danlos syndrome, isolated heart defects, VACTERL, and autoimmune disorders)",
-                    "Item2": "[es]Has a suspected or known environmental cause",
-                    "Item3": "[es]Has already been diagnosed genetically",
-                    "Item4": "[es]Has not been diagnosed by prior whole genome sequencing"
+                    "Item1": "Tal vez no se deba a una alteración en un gen único (por ejemplo, el síndrome de Ehlers-Danlos, los defectos cardíacos aislados, la asociación VACTERL y los trastornos autoinmunitarios).",
+                    "Item2": "Tenga una causa ambiental presunta o conocida.",
+                    "Item3": "Tenga una causa genética ya diagnosticada.",
+                    "Item4": "No se haya diagnosticado mediante secuenciación previa del genoma completo."
                 }
             },
             "Ending": {
                 "Text1": {
-                    "Part1": "[es]If you think your family is eligible, we encourage you to",
-                    "Part2": "[es]learn more about how to apply"
+                    "Part1": "Si cree que su familia cumple los criterios, le recomendamos que",
+                    "Part2": "se entere de cómo presentar su solicitud"
                 },
                 "Text2": {
-                    "Part1": "[es]Please reach out to us by email at",
-                    "Part2": "[es]or by phone at",
-                    "Part3": "[es]if you have any questions or would like us to consider a special-case application."
+                    "Part1": "Escríbanos por correo electrónico a",
+                    "Part2": "o llámenos por teléfono al",
+                    "Part3": "si tiene preguntas o desea que tengamos en cuenta la solicitud de un caso especial."
                 }
             }
         }
