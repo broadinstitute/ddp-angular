@@ -1,5 +1,4 @@
 import { Address } from '../../models/address';
-import { AddressError } from '../../models/addressError';
 
 type AddressPropName = keyof Address;
 
@@ -75,16 +74,4 @@ export const tagDifferences = (str1: string, str2: string, tag: string): string 
     }
 
     return result;
-};
-
-/**
- * Check to see if error is about EasyPost requiring street address.
- *
- * param {AddressError} error the address verification error object
- * returns {boolean}
- */
-export const isStreetRequiredError = (error: AddressError): boolean => {
-    return error.field === 'street1' &&
-        error.code === 'E.INPUT.INVALID' &&
-        error.message.toLowerCase().indexOf('required') !== -1;
 };
