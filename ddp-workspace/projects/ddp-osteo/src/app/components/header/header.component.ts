@@ -52,4 +52,8 @@ export class HeaderComponent implements OnInit {
       || this.document.body.scrollTop || 0;
     this.isPageScrolled = !!scrolledPixels;
   }
+
+  @HostListener('window: resize') public onWindowResize(): void {
+    this.isPanelOpened = false;
+  }
 }
