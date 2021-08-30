@@ -9,25 +9,25 @@
     },
     "Header": {
         "Families": {
-            "Text": "[es]For Families ",
-            "Item1": "[es]Eligibility Criteria",
-            "Item2": "[es]Getting Started",
-            "Item3": "[es]Privacy & Data Use",
-            "Item4": "[es]For Your Physician"
+            "Text": "Para las familias",
+            "Item1": "Criterios de idoneidad",
+            "Item2": "Para comenzar",
+            "Item3": "Privacidad y empleo de los datos",
+            "Item4": "Para el médico"
         },
         "Researchers": {
-            "Text": "[es]For Researchers ",
-            "Item1": "[es]Data Access"
+            "Text": "Para los investigadores",
+            "Item1": "Acceso a los datos"
         },
         "Projects": {
-            "Text": "[es]Specialty Projects ",
-            "Item1": "[es]LGMD",
-            "Item2": "[es]Craniofacial"
+            "Text": "Proyectos especializados",
+            "Item1": "Distrofia muscular de cinturas",
+            "Item2": "Craneofacial"
         },
-        "AboutUs": "[es]About Us",
-        "FAQs": "[es]FAQs",
+        "AboutUs": "Quiénes somos",
+        "FAQs": "Preguntas y respuestas",
         "Dashboard": "[es]Dashboard",
-        "GetStarted": "[es]Get Started"
+        "GetStarted": "Cómo comenzar"
     },
     "Footer": {
         "Navigation": {
