@@ -742,69 +742,69 @@
         }
     },
     "HowItWorksPage": {
-        "Title": "[es]Getting Started",
+        "Title": "Para comenzar",
         "Intro": {
-            "Question": "[es]Thinking about joining us?",
+            "Question": "¿Piensa inscribirse?",
             "Answer": {
-                "Text1": "[es]We’re excited you’re interested in our project! Read through these steps to learn more about what participation in the Rare Genomes Project entails. If you think the Rare Genomes Project might be right for you, click",
-                "Text2": "[es]Start an Application",
-                "Text3": "[es]at the bottom of this page."
+                "Text1": "Nos encanta que se interese en nuestro proyecto. Lea estos pasos para saber en qué consiste el Proyecto Genomas Raros. Si cree que el Proyecto Genomas Raros podría ser adecuado para usted, haga clic en",
+                "Text2": "Iniciar una solicitud de ingreso",
+                "Text3": "en la parte inferior de esta página."
             }
         },
-        "CommonAlt": "[es]How it works family picture",
+        "CommonAlt": "Para comenzar fotografía",
         "Items": [
             {
-                "title": "[es]Get to know our project",
-                "text": "[es]The Rare Genomes Project is a research study focused on patients and families with <span class=\"Accent\">rare and genetically undiagnosed conditions</span>. We use genomic sequencing to search for the cause of rare disease in these families and hope to accelerate the rate of rare disease diagnosis in the process. For more information, please watch our informational video (click <a href=\"https://youtu.be/ux4_MwSALrc\" target=\"_blank\" class=\"Link\">here</a> to watch), review our <a href=\"/eligibility-criteria\" class=\"Link\">eligibility criteria</a>, and read through the steps below.",
-                "image": "/assets/images/step-1.jpg "
+                "title": "Conozca el proyecto",
+                "text": "El Proyecto Genomas Raros es un estudio clínico que se centra en pacientes y en familias que tienen <span class=\"Accent\">enfermedades raras y de causa genética desconocida</span>. Empleamos la secuenciación del genoma para buscar la causa de la enfermedad rara en estas familias y al mismo tiempo esperamos acelerar la tasa de diagnóstico de estas enfermedades. Si desea más información, revise los <a href=\"/eligibility-criteria\" class=\"Link\">criterios de idoneidad</a> y lea los siguientes pasos.",
+                "image": "/assets/images/step-1.jpg"
             },
             {
-                "title": "[es]Tell us about your family",
-                "text": "[es]During the application process, we will ask about the rare, suspected genetic disease in your family, limited demographic information, family history information, and the results of previous genetic and other tests. After you complete your application, our study team will review the information you submit to determine if you are a good fit for the study. If so, we will set up a consent session with your family to explain the study and make sure that all of your questions are answered before sending you a consent document to sign.",
-                "image": "/assets/images/step-2.jpg "
+                "title": "Cuéntenos acerca de su familia",
+                "text": "Durante el proceso de solicitud de ingreso le haremos preguntas sobre la enfermedad rara y de presunta causa genética de su familia, le pediremos unos datos demográficos limitados, cierta información sobre los antecedentes médicos familiares y los resultados de las pruebas genéticas y de otro tipo que se hayan realizado. Después de que termine la solicitud, el equipo investigador revisará la información que usted envíe para determinar si sería un participante idóneo para el estudio. Si es así, programaremos una reunión por video o una teleconferencia con usted y su familia para explicarles el estudio y garantizar que se responda a todas sus preguntas. Cada persona de la familia recibirá un documento de consentimiento que debe firmar para participar.",
+                "image": "/assets/images/step-2.jpg"
             },
             {
-                "title": "[es]Share your medical history",
-                "text": "[es]After signing consent documents, we will ask for copies of medical records, including genetic test results, from affected family members. You can send this information by mail or secure fax using the information provided after your consent session.",
-                "image": "/assets/images/step-3.jpg "
+                "title": "Envíenos su historia clínica",
+                "text": "Después de firmar los documentos de consentimiento le pediremos copias de las historias clínicas de las personas de la familia afectadas por la enfermedad, en las que deben incluirse los resultados de las pruebas genéticas. Puede enviarnos esta información por correo electrónico o por fax confidencial con los datos que se le entreguen después de la sesión de consentimiento.",
+                "image": "/assets/images/step-3.jpg"
             },
             {
-                "title": "[es]Send us your sample",
-                "text": "[es]Once enrolled, we will mail pre-paid sample collection kits directly to you and your family. You can take these kits to your local Quest Diagnostics facility, or to a local doctor’s office or hospital. We cover all fees associated with sample collection.",
-                "image": "/assets/images/step-4.jpg "
+                "title": "Envíenos su muestra",
+                "text": "Cuando se inscriba, le enviaremos por correo postal estuches de recolección de muestras directamente a usted y a su familia. Puede llevar estos estuches a la sede local de Quest Diagnostics, a un consultorio médico o a un hospital. Nosotros pagamos todas las cuotas relacionadas con la obtención de muestras.",
+                "image": "/assets/images/step-4.jpg"
             },
             {
-                "title": "[es]Have your DNA sequenced",
-                "text": "[es]When your sample arrives at our lab, we will extract DNA from the sample and perform genomic sequencing. To learn more about genomic sequencing, you can visit the U.S. National Library of Medicine's <a href=\"https://ghr.nlm.nih.gov/primer/testing/sequencing\" target=\"_blank\" class=\"Link\">Help Me Understand Genetics</a> page.",
-                "image": "/assets/images/step-5.jpg "
+                "title": "La secuenciación del ADN",
+                "text": "Cuando su muestra llegue al laboratorio del proyecto, le extraeremos el ADN y realizaremos la secuenciación del genoma. Si desea más información sobre la secuenciación, visite la página correspondiente de <a href=\"https://ghr.nlm.nih.gov/primer/testing/sequencing\" target=\"_blank\" class=\"Link\">Ayúdeme a entender la genética</a> de la Biblioteca Nacional de Medicina (National Library of Medicine).",
+                "image": "/assets/images/step-5.jpg"
             },
             {
-                "title": "[es]Have your genomic data analyzed",
-                "text": "[es]To search for the genetic cause of your condition, we will compare your genome to hundreds of thousands of other individuals without your condition as well as your family members. This allows us to identify which DNA variants in your genome are potentially related to your condition.",
-                "image": "/assets/images/step-6.jpg "
+                "title": "El análisis de los datos genómicos",
+                "text": "Para buscar la causa genética de su enfermedad compararemos su genoma con el de cientos de miles de personas que no tienen esa enfermedad y con el de sus familiares. Esto nos permite identificar las variantes de ADN de su genoma que puedan tener relación con la enfermedad.",
+                "image": "/assets/images/step-6.jpg"
             },
             {
-                "title": "[es]Share your data",
-                "text": "[es]Sharing your symptoms and genomic data with other researchers and clinicians makes finding others with similar symptoms and changes in the same genes more likely. You can learn more about the ways we share data and our privacy policy <a href=\"/privacy-and-your-data\" class=\"Link\"> here</a>.",
-                "image": "/assets/images/step-7.jpg "
+                "title": "Compartir sus datos",
+                "text": "Compartir sus síntomas y sus datos genómicos con otros investigadores y médicos hace que sea más probable encontrar a otras personas que tengan síntomas parecidos y alteraciones en los mismos genes. Puede ver más información sobre las formas en que compartimos sus datos y sobre nuestra política de protección de la privacidad <a href=\"/privacy-and-your-data\" class=\"Link\">aquí</a>.",
+                "image": "/assets/images/step-7.jpg"
             },
             {
-                "title": "[es]Receive clinically significant results",
-                "text": "[es]If we find results that we believe may explain the cause of the rare condition present in your family, we will contact you and ask if you would like to have the findings confirmed in a clinical laboratory. If you do, we will work with you and your doctor to return the results to you.",
-                "image": "/assets/images/step-8.jpg "
+                "title": "Recibir los resultados que tengan importancia clínica",
+                "text": "Si obtenemos resultados que puedan, en nuestra opinión, explicar la causa de su enfermedad rara, nos comunicaremos con usted y le preguntaremos si desea confirmarlos en el laboratorio clínico con el que colaboramos, el Laboratorio de Medicina Molecular de Cambridge (Massachusetts). Si desea hacerlo, nos coordinaremos con usted y con su médico para entregarle los resultados.",
+                "image": "/assets/images/step-8.jpg"
             }
         ],
         "Ending": {
             "Start": {
-                "Text": "[es]If this project sounds like it could benefit you or a loved one, we encourage you to fill out an online application here:",
-                "Button": "[es]Start an Application"
+                "Text": "Si le parece que el proyecto podría beneficiarle o beneficiar a uno de sus seres queridos, le recomendamos llenar una solicitud de ingreso por Internet aquí:",
+                "Button": "Iniciar una solicitud de ingreso"
             },
             "AnyQuestions": {
-                "Question": "[es]Still have questions?",
-                "Text1": "[es]If you do not see your question",
-                "Text2": "[es]here",
-                "Text3": "[es]please email us at",
-                "Text4": "[es]or call us at"
+                "Question": "¿Aún tiene preguntas?",
+                "Text1": "Si no ve su pregunta",
+                "Text2": "aquí",
+                "Text3": "escríbanos por correo electrónico a",
+                "Text4": "o llámenos al"
             }
         }
     },
