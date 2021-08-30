@@ -352,7 +352,7 @@
         "MedicalRecordRelease": "Medical Record Release Form",
         "BackgroundInformation": "Background Information Survey",
         "GeneticTesting": "Genetic Testing & Family History Survey",
-        "Other": "Additional surveys"
+        "Other": "Additional<br/>surveys"
       }
     },
     "UserActivities": {

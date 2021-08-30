@@ -2,15 +2,31 @@
 @import '../../../styles/breakpoints';
 
 .wrapper {
+  height: 92px;
   display: flex;
   margin: 5rem 0;
   position: relative;
   justify-content: space-between;
+  &:after {
+    top: 24px;
+    right: 10%;
+    width: 80%;
+    content: '';
+    z-index: -1;
+    height: 2px;
+    position: absolute;
+    background: map-get($colors, 'progress_bar-inactive-border');
+  }
 }
 
 .step-container {
+  width: 130px;
   display: flex;
+  margin: 0 2px;
   flex-direction: column;
+  &:first-child, &:last-child {
+    width: 80px;
+  }
   &_active {
     color: map-get($colors, 'progress_bar-active');
 
@@ -38,17 +54,6 @@
         color: map-get($colors, 'progress_bar-active');
       }
     }
-  }
-}
-
-.line {
-  top: -27px;
-  z-index: -1;
-  right: -65px;
-  position: relative;
-  border-bottom: 3px solid map-get($colors, 'progress_bar-inactive-border');
-  @include media-md {
-    right: -50px;
   }
 }
 
