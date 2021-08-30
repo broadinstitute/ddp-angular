@@ -62,14 +62,8 @@
         </a>
         <div class="Panel-content" [collapse]="isShareGenoCollapsed">
             <p class="Paragraph TopMargin25">
-                <span translate>PrivacyAndYourDataPage.GenomicInformation.Text1</span>
-                (<a class="Link" href="https://duos.broadinstitute.org/#/home" target="_blank"
-                    translate>PrivacyAndYourDataPage.GenomicInformation.Text2</a>).
-                <span translate>PrivacyAndYourDataPage.GenomicInformation.Text3</span>
-                <a class="Link"
-                    href="https://www.genome.gov/27569268/genomic-analysis-visualization-and-informatics-labspace-anvil/"
-                    target="_blank" translate>PrivacyAndYourDataPage.GenomicInformation.Text4</a>.
-                <span translate>PrivacyAndYourDataPage.GenomicInformation.Text5</span>
+                <span [innerHTML]="'PrivacyAndYourDataPage.GenomicInformation.Text1' | translate"></span>
+                <span [innerHTML]="'PrivacyAndYourDataPage.GenomicInformation.Text2' | translate"></span>
             </p>
         </div>
 

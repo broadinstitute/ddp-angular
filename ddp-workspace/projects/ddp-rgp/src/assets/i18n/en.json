@@ -847,11 +847,8 @@
         },
         "GenomicInformation": {
             "Title": "How We Share Full Genomic Information",
-            "Text1": "We share full genomic sequencing data and summarized medical information through two platforms to help increase the pace of scientific discovery. For example, data is stored at the Broad Institute and accessible after approval by its Data Use Oversight System",
-            "Text2": "DUOS",
-            "Text3": "We also share data through a similar, federally-funded genomic database called",
-            "Text4": "AnVIL",
-            "Text5": "Interested researchers must apply and be granted access to the data in these platforms."
+            "Text1": "We share full genomic sequencing data and summarized medical information through two platforms to help increase the pace of scientific discovery. For example, data is stored at the Broad Institute and accessible after approval by its Data Use Oversight System (<a class=\"Link\" href=\"https://duos.broadinstitute.org/#/home\" target=\"_blank\">DUOS</a>).",
+            "Text2": "We also share data through a similar, federally-funded genomic database called <a class=\"Link\" href=\"https://www.genome.gov/27569268/genomic-analysis-visualization-and-informatics-labspace-anvil/\" target=\"_blank\">AnVIL</a>. Interested researchers must apply and be granted access to the data in these platforms."
         },
         "Privacy": {
             "Title": "Privacy",

@@ -809,54 +809,51 @@
         }
     },
     "PrivacyAndYourDataPage": {
-        "Title": "[es]Privacy and Your Data",
-        "ImageAlt": "[es]Data Sharing image",
-        "Intro": "[es]<b>Genomic sequencing is just the first step in understanding rare diseases-</b> sharing your symptoms and genomic data with other researchers and clinicians makes finding others with similar symptoms and changes in the same genes more likely.",
+        "Title": "Su privacidad y sus datos",
+        "ImageAlt": "Imagen de intercambio de datos",
+        "Intro": "<b>La secuenciación genómica es apenas el primer paso para entender las enfermedades raras</b> &mdash; comunicar sus síntomas y sus datos genómicos a otros investigadores y médicos hace que sea más probable encontrar a otras personas que tengan síntomas parecidos y alteraciones en los mismos genes.",
         "DataSharing": {
-            "Title": "[es]What is Data Sharing?",
-            "Text1": "[es]Data sharing means that sequencing and limited clinical data from this project will be shared with others outside our project. Those who would like to access the data we produce in the Rare Genomes Project are often other scientists who are interested in learning more about the genetics of a specific disease or condition. Because any given rare disease affects so few people, data sharing enables scientists worldwide to connect with one another and accelerate the speed of new discoveries in genetic disease.",
-            "Text2": "[es]We will utilize multiple platforms to share your sequencing data and key symptoms of the rare genetic disease in your family. <b>The information that we share is de-identified, meaning that your name, date of birth, contact information, or other personal identifiers are never shared.</b>"
+            "Title": "¿Qué es compartir los datos?",
+            "Text1": "Compartir los datos es intercambiar los datos de secuenciación y ciertos datos clínicos limitados del proyecto con otras personas ajenas a él. Con frecuencia, las personas que desean tener acceso a los datos que producimos en el Proyecto Genomas Raros son otros científicos que se interesan en saber más sobre los aspectos genéticos de una enfermedad o afección específica. Puesto que las enfermedades raras afectan a tan pocas personas, compartir los datos les permite a los científicos de todo el mundo establecer conexiones mutuas y acelerar la velocidad con que se hacen descubrimientos en las enfermedades genéticas.",
+            "Text2": "Utilizaremos varias plataformas para compartir sus datos de secuenciación y los síntomas clave de la enfermedad genética rara que hay en su familia. <b>La información que compartimos se desidentifica. Esto significa que su nombre, su fecha de nacimiento, sus datos de contacto y otros datos que revelan su identidad no se comparten nunca.</b>"
         },
         "VariantInformation": {
-            "Title": "[es]How We Share Variant Information",
+            "Title": "Cómo compartimos la información sobre variantes",
             "Paragraph1": {
-                "Text1": "[es]We share variant information when we are suspicious that a specific variant may cause a rare disease. For this type of variant, we share information through an online tool called",
-                "Text2": "[es]Matchmaker Exchange",
-                "Text3": "[es]which helps researchers and clinicians connect with one another. These connections can lead to collaborations that help establish evidence that variants and genes are related to rare diseases."
+                "Text1": "Compartimos información sobre variantes cuando sospechamos que una variante específica podría ser la causa de una enfermedad rara. La información sobre este tipo de variantes se comunica mediante un recurso en línea llamado",
+                "Text2": "Matchmaker Exchange",
+                "Text3": "que les permite los investigadores y a los médicos establecer conexiones mutuas. Estas conexiones pueden llevar a colaboraciones que permitan establecer las pruebas de que las variantes y los genes tienen relación con enfermedades raras."
             },
             "Paragraph2": {
-                "Text1": "[es]We also share variant information when we have confirmed that a variant causes a rare disease. For these variants, we share information through an online, public database called",
-                "Text2": "[es]ClinVar",
-                "Text3": "[es]ClinVar serves as a reference that clinicians and scientists can use to know which genetic changes have been found in patients and associated with genetic diseases."
+                "Text1": "También compartimos información de variantes cuando hemos confirmado que una variante causa una enfermedad rara. En este caso, la información sobre este tipo de variantes se realiza a través de una base de datos pública llamada",
+                "Text2": "ClinVar",
+                "Text3": "ClinVar es una fuente de referencia que los médicos y los científicos pueden usar para saber qué alteraciones genéticas se han encontrado en pacientes y se han asociado con enfermedades genéticas."
             }
         },
         "GenomicInformation": {
-            "Title": "[es]How We Share Full Genomic Information",
-            "Text1": "[es]We share full genomic sequencing data and summarized medical information through two platforms to help increase the pace of scientific discovery. Data is stored at the Broad Institute and accessible through its Data Use Oversight System",
-            "Text2": "[es]DUOS",
-            "Text3": "[es]We also share data through a similar, federally-funded genomic database called",
-            "Text4": "[es]AnVIL",
-            "Text5": "[es]Interested researchers must apply and be granted access to the data in these platforms."
+            "Title": "¿Cómo compartimos la información genómica completa?",
+            "Text1": "Compartimos los datos completos de la secuenciación del genoma y la información médica resumida en dos plataformas para contribuir a acelerar la velocidad de los descubrimientos científicos. Por ejemplo, los datos se conservan en el Broad Institute y se puede tener acceso a ellos con la aprobación del Sistema de Supervisión del Uso de Datos (Data Use Oversight System, <a class=\"Link\" href=\"https://duos.broadinstitute.org/#/home\" target=\"_blank\">DUOS</a>) de este instituto.",
+            "Text2": "Además, compartimos la información en una base de datos parecida y financiada por el gobierno federal, que se llama <a class=\"Link\" href=\"https://www.genome.gov/27569268/genomic-analysis-visualization-and-informatics-labspace-anvil/\" target=\"_blank\">AnVIL</a>. Los investigadores interesados deben solicitar y lograr el acceso a los datos en estas plataformas."
         },
         "Privacy": {
-            "Title": "[es]Privacy",
-            "Text": "[es]Data sharing is important to advancing the understanding of rare genetic disease, and we have many safeguards in place to ensure that the data we collect as part of our project is securely stored and shared responsibly. Below are some frequently asked questions about privacy and data usage in the Rare Genomes Project."
+            "Title": "Su privacidad",
+            "Text": "Compartir datos es importante para mejorar los conocimientos que se tienen acerca de las enfermedades raras, y tenemos muchos mecanismos de seguridad para asegurar que los datos que obtenemos en el proyecto se conserven de manera segura y se intercambien de un modo responsable. A continuación tenemos unas preguntas frecuentes sobre la privacidad y el empleo de los datos en el Proyecto Genomas Raros."
         },
         "Stored": {
-            "Question": "[es]How is my data stored?",
-            "Answer": "[es]We store genetic and electronic data (such as electronic medical records) on secure, encrypted systems belonging to the Broad Institute and Partners HealthCare, the hospital organization responsible for this project. Your data is labeled with a randomized, numerical study ID, and access to personal identifiers is restricted to select study staff. Physical data (such as paper medical records) are stored in a secure, locked cabinet in the study staff office."
+            "Question": "¿Cómo se conservan mis datos?",
+            "Answer": "Los datos genéticos y electrónicos (por ejemplo, las historias clínicas electrónicas) se conservan en sistemas seguros y cifrados que pertenecen al Broad Institute y a Partners HealthCare, la organización hospitalaria responsable del proyecto. Sus datos se rotulan con un número de identificación aleatorizado del estudio, al que solo el personal del estudio tiene acceso. Los datos físicos (por ejemplo, las historias clínicas impresas) se conservan bajo llave en un gabinete seguro de la oficina del equipo investigador."
         },
         "Shared": {
-            "Question": "[es]Will my name or personal information be shared with other researchers and clinicians?",
-            "Answer": "[es]Never. The genetic data that we generate in the project is <b>de-identified</b>, meaning that it does not contain personally identifiable information such as your name or date of birth."
+            "Question": "¿Mi nombre o mis datos personales se entregarán a otros investigadores y médicos?",
+            "Answer": "Nunca. Los datos genéticos que se generan en el proyecto se <b>desidentifican</b>, no contienen información que pueda revelar su identidad, como nombre o fecha de nacimiento."
         },
         "Profit": {
-            "Question": "[es]Will the Rare Genomes Project profit off of my data?",
-            "Answer": "[es]No. The Rare Genomes Project is a non-profit research study and will not sell your genomic data."
+            "Question": "¿El Proyecto Genomas Raros se beneficiará económicamente de mis datos?",
+            "Answer": "Nunca. El Proyecto Genomas Raros es un estudio clínico sin fines de lucro y no venderá sus datos genómicos."
         },
         "Ending": {
-            "Text1": "[es]We discuss data sharing during the consent call if you are accepted into the project and will make sure you understand how your data will be used. If you have questions or concerns about privacy that are not answered above, please contact us by email at",
-            "Text2": "[es]or by phone at"
+            "Text1": "Durante la llamada de consentimiento hablaremos de la comunicación de datos si se le acepta en el proyecto y nos cercioraremos de que usted entienda cómo se emplearán sus datos. Si tiene preguntas o dudas sobre su privacidad que no se respondieron en esta página, escríbanos por correo electrónico a",
+            "Text2": "o llámenos por teléfono al"
         }
     },
     "ForYourPhysicianPage": {
