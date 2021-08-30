@@ -857,53 +857,54 @@
         }
     },
     "ForYourPhysicianPage": {
-        "Title": "[es]For your Physician",
-        "Intro": "[es]The Rare Genomes Project is a research study housed at The Broad Institute of MIT and Harvard, a non-profit academic research institution focused on using genomic data to better understand human health and disease. Our team, led by investigators Daniel MacArthur and Heidi Rehm, has a specific focus on understanding the genetic basis of very rare and undiagnosed conditions. Our mission in the Rare Genomes Project is to partner directly with patients, families, advocates, and clinicians like you, to speed the rate of rare disease diagnosis and increase patients’ access to genomic research.",
-        "DownloadPDF": "[es]Download PDF",
+        "Title": "Para el médico",
+        "Intro": "El Proyecto Genomas Raros es un estudio clínico del Broad Institute de MIT y Harvard, una institución de investigación académica sin fines de lucro que se centra en utilizar los datos genómicos para entender mejor la salud y las enfermedades de los seres humanos. Nuestro equipo, dirigido por la investigadora Heidi Rehm, tiene un interés específico en conocer las bases genéticas de enfermedades muy raras y que no se han diagnosticado aún. Nuestra misión es colaborar directamente con los pacientes, las familias, los defensores de los pacientes y los médicos para fomentar el acceso de los pacientes a la investigación genómica.",
+        "DownloadPDF": "Descargar el PDF",
         "HowItWorks": {
-            "Title": "[es]How it works",
+            "Title": "Cómo funciona",
             "Paragraphs": [
-                "The Rare Genomes Project provides undiagnosed families with the opportunity to participate in a genomic research study, regardless of where in the United States they live. To ensure that participation is made broadly available to any eligible family, all study procedures can be completed from, or nearby, the patient’s home.",
-                "Interested participants and families can visit <a href=\"http://raregenomes.org\" target=\"_blank\" class=\"Link\">www.raregenomes.org</a> to learn more about the project. By clicking “Apply,” visitors to the site will be directed to complete a survey so that our team can begin to understand the condition affecting the family. Our clinical team will review each submission and re-contact eligible families for participation. A videoconference will be scheduled to discuss the project in more detail; families interested in participating will electronically sign the informed consent. As part of the consent process, families will sign a medical records authorization so that our team can access a copy of the participant’s medical records.",
-                "We will send a collection kit to enrolled families who can choose to have their blood drawn at a Quest Diagnostics Patient Service Center (<a href=\"http://questdiagnostics.com/appointment\" target=\"_blank\" class=\"Link\">www.questdiagnostics.com/appointment</a>) or by a phlebotomist of their choice (including at their local physician’s or hospital’s lab). Saliva kits are also available for participants who are unable to have a blood draw. The sample collection kits will be mailed back to the Broad Institute Genomics Platform, where DNA extraction and DNA sequencing will be performed.",
-                "Our team will analyze genomic data alongside each family’s clinical and personal story with the goal of identifying the genetic basis of the condition present in the family. If we are able to identify the cause of disease, we will re-contact the family and request a second sample for clinical validation, which will be performed at the Partners Laboratory for Molecular Medicine. A clinical report describing our findings will be provided directly to the family and the family’s doctor.",
-                "This project is dedicated to rapid and open data sharing. Genetic and clinical data generated in this project will be shared broadly with the wider rare and undiagnosed community, as well as other clinicians and researchers, through controlled-access genomic databases, as well as the Matchmaker Exchange, and Clinvar."
+                "El Proyecto Genomas Raros les da a las familias que no han recibido un diagnóstico la oportunidad de participar en un estudio de investigación genómica, independientemente de dónde vivan en los Estados Unidos. Para garantizar que toda familia que cumpla los requisitos pueda participar, todas las técnicas del estudio se pueden realizar desde la casa del paciente o cerca de ella.",
+                "Las personas y las familias interesadas pueden visitar <a href=\"http://raregenomes.org\" target=\"_blank\" class=\"Link\">www.raregenomes.org</a> para ver más información sobre el proyecto. Al hacer clic en «Iniciar una solicitud de ingreso» pueden expresar su interés en participar. El equipo clínico revisará cada solicitud e invitará a participar a las familias que cumplan los requisitos para hacerlo.",
+                "A las familias que se inscriban les enviaremos un estuche de recolección de muestras para ir a un centro de atención al paciente de Quest Diagnostics (<a href=\"http://questdiagnostics.com/appointment\" target=\"_blank\" class=\"Link\">www.questdiagnostics.com/appointment</a>) o a otro centro de extracción de sangre que elijan. En algunos casos podríamos solicitar ADN de pruebas genéticas anteriores. Los estuches de recolección de muestras se enviarán por correo a nuestro laboratorio, donde se realizarán la extracción del ADN y la secuenciación del genoma.",
+                "Nuestro equipo analizará los datos genómicos junto con la información clínica de cada familia con el fin de identificar las bases genéticas de la enfermedad que esta tiene. Si podemos determinar la causa de la enfermedad, nos comunicaremos de nuevo con la familia y trataremos de lograr la confirmación clínica del resultado con la colaboración del médico que esta escoja. El informe de confirmación clínica se enviará al médico local que haya ordenado la prueba.",
+                "Este proyecto se compromete al intercambio rápido y abierto de los datos. Los datos genéticos y clínicos desidentificados que se generen en este proyecto se compartirán ampliamente con la comunidad entera de personas afectadas por enfermedades raras y sin diagnosticar, así como con otros médicos e investigadores, a través de bases de datos genómicos de acceso controlado, del Matchmaker Exchange y de Clinvar."
             ]
         },
         "EligibilityCriteria": {
-            "Title": "[es]Eligibility Criteria for Families",
+            "Title": "Criterios de idoneidad para las familias",
             "Lists": [
                 {
-                    "Title": "[es]Patients and families with <span class=\"Accent\">a rare and genetically undiagnosed condition</span> who:",
+                    "Title": "Pacientes y familias que tengan una enfermedad <span class=\"Accent\">rara cuya causa genética no se haya diagnosticado</span>, y que además:",
                     "Items": [
-                        "Understand English",
-                        "Live in the United States",
-                        "Are currently under the care of a doctor that is helping to understand the cause of the patient’s condition"
+                        "Hablen inglés o español",
+                        "Vivan en los Estados Unidos",
+                        "Reciban los cuidados de un médico que les esté ayudando a determinar la causa de la enfermedad"
                     ]
                 },
                 {
-                    "Title": "[es]At this time, we are unable to include patients and families that:",
+                    "Title": "En este momento no podemos incluir a pacientes ni a familias que:",
                     "Items": [
-                        "Have a suspected or known environmentally caused condition",
-                        "Have any condition known not to involve a genetic link",
-                        "Have a genetic diagnosis that fully explains the patient’s condition."
+                        "Tengan una enfermedad cuya causa presunta o conocida sea un factor ambiental",
+                        "Tengan una enfermedad que probablemente no sea monogénica",
+                        "Tengan un diagnóstico clínico que explique por completo la enfermedad del paciente"
                     ]
                 }
             ]
         },
         "Help": {
-            "Title": "[es]How you can help",
-            "Text": "[es]If you currently provide care for families that you think would be a good fit for participation in this project, please refer them to our website <a href=\"http://raregenomes.org\" target=\"_blank\" class=\"Link\">www.raregenomes.org</a>. We also partner directly with clinicians, hospitals, and institutions to increase awareness about the project. If you would like us to provide brochures and informational materials for patients that visit your clinic, please contact us."
+            "Title": "Cómo remitir a una familia",
+            "Text": "Si usted atiende actualmente a familias que considere idóneas para participar en este proyecto, dígales que visiten nuestro sitio web, <a href=\"http://raregenomes.org\" target=\"_blank\" class=\"Link\">www.raregenomes.org</a>. También cooperamos directamente con médicos, hospitales e instituciones para aumentar la concientización acerca del proyecto. Si desea que le proporcionemos folletos y materiales informativos para los pacientes que van a su consultorio, comuníquese con nosotros."
         },
         "Role": {
-            "Title": "[es]Your role in the project",
-            "Text1": "[es]We are interested in partnering with enrolled families’ clinicians to facilitate the return of genomic, clinically-confirmed, research results discovered in this project.",
-            "Text2": "[es]Other optional ways that you could be involved:",
-            "Item1": "[es]Aggregating and summarizing the family’s medical records and clinical information.",
-            "Item2": "[es]Addressing follow-up questions that arise during the family’s involvement in the project.",
+            "Title": "El papel que usted desempeña en el proyecto",
+            "Text1": "Nos interesa colaborar con los médicos de los participantes para facilitar la entrega de los resultados confirmados de importancia clínica que se descubran en el proyecto.",
+            "Text2": "Otras formas en las que usted podría participar:",
+            "Item1": "Agregar y resumir las historias clínicas y la información clínica de la familia",
+            "Item2": "Responder a las preguntas de seguimiento que surjan durante la participación de la familia en el proyecto",
             "ThankYou": "[es]Thank you for your support. We look forward to learning with you!"
         },
-        "Contact": "[es]Contact Us"
+        "ThankYou": "Le agradecemos su apoyo. Esperamos aprender muy pronto con usted.",
+        "Contact": "Comuníquese con nosotros"
     },
     "DataAccessPage": {
         "Title": "[es]Data Access",
