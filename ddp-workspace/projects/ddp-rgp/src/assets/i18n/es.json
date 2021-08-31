@@ -565,7 +565,7 @@
                 {
                     "question": "¿Qué historias clínicas se necesitan?",
                     "answers": [
-                        "Se necesitan las historias clínicas de las personas de la familia afectadas por la enfermedad. Si desea más información sobre los documentos que se requieren, consulte la «Guía para compartir datos médicos»."
+                        "Se necesitan las historias clínicas de las personas de la familia afectadas por la enfermedad. Si desea más información sobre los documentos que se requieren, consulte la <a href=\"sharing-guide-es.pdf\" target=\"_blank\" class=\"Link\">Guía para compartir datos médicos</a>."
                     ]
                 },
                 {
