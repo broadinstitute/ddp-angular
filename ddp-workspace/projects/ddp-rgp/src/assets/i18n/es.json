@@ -1107,9 +1107,9 @@
         "Text2": "[es]or call us at"
     },
     "CountMeInPage": {
-        "Title": "[es]Tell us your story",
-        "SectionTitle": "[es]Thank you for your interest in joining the Rare Genomes Project!",
-        "Text": "[es]To get started, please let us know if you or a loved one meets the <span class=\"Accent\">participation requirements</span> listed below by attesting that all of the statements listed next to the checkboxes below are true. You will then be asked to create a <span class=\"NotALink\"> raregenomes.org</span> account and complete a questionnaire to tell us about the rare condition in your family. The information will be reviewed by our study team, and eligible families will be invited to participate."
+        "Title": "Cuéntenos su historia",
+        "SectionTitle": "Gracias por su interés en participar en el Proyecto Genomas Raros.",
+        "Text": "Para comenzar, díganos si usted o uno de sus seres queridos cumple los <span class=\"Accent\">requisitos para participar</span> que se mencionan a continuación. Solo debe dar constancia de que todas las declaraciones acompañadas por casillas son verdaderas. Luego se le pedirá que abra una cuenta en <span class=\"NotALink\">raregenomes.org</span> y que llene una solicitud en la que nos contará más sobre la enfermedad rara que hay en su familia. El equipo investigador revisará la información e invitará a participar a las familias que cumplan los requisitos."
     },
     "SessionExpiredPage": {
         "Text1": "[es]You were away for a while, so we logged you out as a security precaution.",
@@ -1187,7 +1187,7 @@
         }
     },
     "SDK": {
-        "SubmitButton": "[es]Submit",
+        "SubmitButton": "Enviar",
         "CloseButton": "[es]Close",
         "AddButton": "[es]ADD",
         "CancelButton": "[es]CANCEL",
