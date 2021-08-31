@@ -1,7 +1,7 @@
 {
     "Common": {
         "LogoAlt": "[es]Rare Genome Project logo",
-        "ApplyButton": "[es]Apply"
+        "ApplyButton": "Solicitud"
     },
     "Banner": {
         "Text": "[es]For updates on how COVID-19 is impacting our study, please click",
@@ -933,58 +933,58 @@
         }
     },
     "LGMDPage": {
-        "Title": "[es]The limb-girdle muscular dystrophy (LGMD) branch of the Rare Genomes Project is a partnership with the <a href=\"https://www.mda.org/\" target=\"_blank\" class=\"Link\">Muscular Dystrophy Association</a> and the <a href=\"https://www.jain-foundation.org/\" target=\"_blank\" class=\"Link\">Jain Foundation</a> dedicated to diagnosis and gene discovery through whole genome sequencing for individuals and families with LGMD.",
+        "Title": "La división sobre distrofia muscular de cinturas del Proyecto Genomas Raros es una colaboración con la <a href=\"https://www.mda.org/\" target=\"_blank\" class=\"Link\">Muscular Dystrophy Association</a> y la <a href=\"https://www.jain-foundation.org/\" target=\"_blank\" class=\"Link\">Jain Foundation</a>. Se dedica al diagnóstico y el descubrimiento de genes a través de la secuenciación del genoma completo en personas y familias que sufren distrofia muscular de cinturas.",
         "ImageAlt": "[es]If you or a loved one has a rare and genetically undiagnosed condition, join a patient-driven research study to discover the genes underlying your family's rare disease.",
         "Background": {
-            "Title": "[es]Background",
-            "Text": "[es]The limb-girdle muscular dystrophies are a group of muscle diseases characterized by weakness and wasting of the muscles in the hips, legs, shoulders, and/or other proximal muscles. There are currently over 30 known forms of LGMD, with a diverse range of clinical signs and symptoms, that collectively are estimated to affect as many as 1 in 15,000 individuals."
+            "Title": "Información general",
+            "Text": "Las distrofias musculares de cinturas son un grupo de enfermedades musculares que se caracterizan por debilidad y deterioro progresivo de los músculos de las caderas, las piernas, los hombros u otros músculos proximales. En la actualidad se conocen más de 30 formas de distrofia muscular de cinturas, que tienen una gama diversa de signos y síntomas clínicos. Se calcula que, en conjunto, afectan a cerca de una de cada 15 000 personas."
         },
         "Genetics": {
-            "Title": "[es]Genetics and LGMD",
-            "Text": "[es]Multiple studies estimate that roughly half of those undergoing genetic testing do not have a causative DNA variant in any of the known LGMD-causing genes. This project enables individuals who have had negative or incomplete results from prior genetic testing to participate in a study using whole-genome sequencing (WGS) to search for additional causes of LGMD."
+            "Title": "La genética y la distrofia muscular de cinturas",
+            "Text": "En muchos estudios se calcula que cerca de la mitad de las personas que se hacen pruebas genéticas no tienen una variante causal del ADN en ninguno de los genes que se relacionan con la distrofia muscular de cinturas. A través de este proyecto, las personas que han tenido resultados negativos o incompletos en pruebas genéticas anteriores pueden participar en un estudio en el que se usa la secuenciación del genoma completo para buscar causas adicionales de la distrofia muscular de cinturas."
         },
         "Right": {
-            "Title": "[es]Is This Study Right For Me?",
-            "Text": "[es]Our efforts will focus on individuals and families who:",
+            "Title": "¿Este estudio es adecuado para mí?",
+            "Text": "Nuestro trabajo se centrará en personas y en familias que:",
             "Items": [
-                "Have a clinical diagnosis of LGMD*",
-                "Have had prior genetic testing that was negative or did not provide a full genetic explanation*",
-                "Are currently under the care of a neurologist, medical geneticist, or relevant subspecialist",
-                "Live in the United States",
-                "Are English-speaking"
+                "Tengan un diagnóstico clínico de distrofia muscular de cinturas*",
+                "Hayan tenido resultados negativos en pruebas genéticas anteriores o estas pruebas no hayan proporcionado una explicación genética completa*",
+                "Estén recibiendo atención médica actualmente de un neurólogo, un genetista médico o un subespecialista pertinente",
+                "Vivan en los Estados Unidos",
+                "Hablen inglés o español"
             ],
             "Ending": {
-                "Text1": "[es]*If you are unsure whether you have a clinical diagnosis of LGMD or you have not had prior genetic testing for your LGMD, you may still be eligible to participate and are encouraged to apply by",
-                "Text2": "[es]clicking here"
+                "Text1": "*Si usted no sabe si tiene un diagnóstico clínico de distrofia muscular de cinturas o no se ha hecho pruebas genéticas para esta enfermedad, quizá aún cumpla los requisitos para participar.",
+                "Text2": "Haga clic aquí"
             }
         },
         "Steps": {
-            "Title": "[es]How You Can Participate",
+            "Title": "Cómo puede participar",
             "One": {
-                "Title": "[es]Tell us your story",
-                "Text1": "[es]Click",
-                "Text2": "[es]apply",
-                "Text3": "[es]to tell us about the history of LGMD in your family. The information will be reviewed by our study team, and eligible families will be invited to participate. We will contact you to arrange a detailed discussion about the study and send you a consent form.",
-                "Alt": "[es]Tell us your story"
+                "Title": "Cuéntenos su historia",
+                "Text1": "Haga clic en",
+                "Text2": "«Solicitud»",
+                "Text3": "para ver un resumen general del estudio y enterarse de cómo iniciar una solicitud de ingreso. El equipo investigador revisará la información e invitará a participar a las familias que cumplan los requisitos. Programaremos una cita para tener una conversación detallada sobre el estudio y enviarle un documento de consentimiento.",
+                "Alt": "Cuéntenos su historia"
             },
             "Two": {
-                "Title": "[es]Submit a sample",
-                "Text": "[es]Once enrolled, we’ll mail a pre-paid sample collection kit directly to you and your family. We’ll also ask you more about medical history and ask for copies of medical records, including genetic test results.",
-                "Alt": "[es]Share your data"
+                "Title": "Envíe una muestra",
+                "Text": "Cuando se inscriba, les enviaremos por correo postal un estuche franqueado de recolección de muestras directamente a usted y a su familia. También le haremos más preguntas sobre sus antecedentes médicos y le pediremos copias de su historia clínica y de los resultados de pruebas genéticas.",
+                "Alt": "Envíe una muestra"
             },
             "Three": {
-                "Title": "[es]Discover",
-                "Text": "[es]Through DNA sequencing, we may discover the genetic cause of the LGMD in your family and will work with you and your doctors to return important results to you. We will also share de-identified data broadly with the scientific community to empower discoveries in rare and undiagnosed disease, including LGMD.",
-                "Alt": "[es]Discover"
+                "Title": "Ayúdenos a descubrir",
+                "Text": "Es posible que, mediante la secuenciación del ADN, podamos descubrir la causa genética de la distrofia muscular de cinturas de su familia, y que colaboremos con los médicos que le atienden para entregarle resultados importantes para usted. Además, compartiremos de manera amplia sus datos desidentificados con la comunidad científica para promover descubrimientos en la investigación de las enfermedades raras que no se han diagnosticado, entre ellas, la distrofia muscular de cinturas.",
+                "Alt": "Ayúdenos a descubrir"
             }
         },
         "Info": {
-            "Title": "[es]Information and Resources",
-            "Text": "[es]Additional information and resources for individuals with LGMD are can be found here: <a href=\"https://www.mda.org/\" target=\"_blank\" class=\"Link Accent\">Muscular Dystrophy Association</a>, <a href=\"https://www.ncbi.nlm.nih.gov/books/NBK1408/\" target=\"_blank\" class=\"Link Accent\">GeneReviews</a>, and the <a href=\"https://ghr.nlm.nih.gov/condition/limb-girdle-muscular-dystrophy#definition\" target=\"_blank\" class=\"Link Accent\"> Genetics Home Reference</a>."
+            "Title": "Información y recursos",
+            "Text": "Más información y recursos para personas con distrofia muscular de cinturas en: <a href=\"https://www.mda.org/\" target=\"_blank\" class=\"Link Accent\">Muscular Dystrophy Association</a>, <a href=\"https://www.ncbi.nlm.nih.gov/books/NBK1408/\" target=\"_blank\" class=\"Link Accent\">GeneReviews</a> y Medline Plus de la Biblioteca Nacional de Medicina de los Estados Unidos (National Library of Medicine)."
         },
         "Partner": {
-            "Text": "[es]We thank the Muscular Dystrophy Association for their financial support of this project.",
-            "Alt": "[es]Muscular Dystrophy Association Logo"
+            "Text": "Agradecemos a la Muscular Dystrophy Association por el apoyo económico que ha suministrado a este proyecto.",
+            "Alt": "Muscular Dystrophy Association"
         }
     },
     "CraniofacialPage": {
