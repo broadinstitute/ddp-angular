@@ -980,7 +980,7 @@
         },
         "Info": {
             "Title": "Información y recursos",
-            "Text": "Más información y recursos para personas con distrofia muscular de cinturas en: <a href=\"https://www.mda.org/\" target=\"_blank\" class=\"Link Accent\">Muscular Dystrophy Association</a>, <a href=\"https://www.ncbi.nlm.nih.gov/books/NBK1408/\" target=\"_blank\" class=\"Link Accent\">GeneReviews</a> y Medline Plus de la Biblioteca Nacional de Medicina de los Estados Unidos (National Library of Medicine)."
+            "Text": "Más información y recursos para personas con distrofia muscular de cinturas en: <a href=\"https://www.mda.org/\" target=\"_blank\" class=\"Link Accent\">Muscular Dystrophy Association</a>, <a href=\"https://www.ncbi.nlm.nih.gov/books/NBK1408/\" target=\"_blank\" class=\"Link Accent\">GeneReviews</a> y <a href=\"https://medlineplus.gov/genetics/\" target=\"_blank\" class=\"Link Accent\">Medline Plus</a>, de la Biblioteca Nacional de Medicina de los Estados Unidos (National Library of Medicine)."
         },
         "Partner": {
             "Text": "Agradecemos a la Muscular Dystrophy Association por el apoyo económico que ha suministrado a este proyecto.",
@@ -988,59 +988,59 @@
         }
     },
     "CraniofacialPage": {
-        "Title": "[es]The craniofacial branch of the Rare Genomes Project is a partnership with the <a href=\"https://www.massgeneral.org/children/services/treatmentprograms.aspx?id=1631&display=overview\" target=\"_blank\" class=\"Link\">Cleft and Craniofacial Center at Massachusetts General Hospital</a> and <a href=\"https://www.shrinershospitalsforchildren.org/boston/cleftlippalate\" target=\"_blank\" class=\"Link\">Shriners Hospitals for Children</a> dedicated to genetic diagnosis and gene discovery for congenital craniofacial conditions.",
-        "Text": "[es]This project enables patients with undiagnosed, suspected single gene forms of craniofacial conditions to participate in a study using genome sequencing to search for the genetic cause of the craniofacial condition in their family.",
+        "Title": "La división de enfermedades craneofaciales del Proyecto Genomas Raros es una colaboración con el <a href=\"https://www.massgeneral.org/children/services/treatmentprograms.aspx?id=1631&display=overview\" target=\"_blank\" class=\"Link\">Centro de Labio Leporino y Paladar Hendido (Cleft and Craniofacial Center) del hospital Mass General</a> y con los <a href=\"https://www.shrinershospitalsforchildren.org/boston/cleftlippalate\" target=\"_blank\" class=\"Link\">Shriners Hospitals for Children</a>. Se dedica al diagnóstico genético y al descubrimiento de genes que se relacionan con las enfermedades craneofaciales congénitas.",
+        "Text": "A través de este proyecto, los pacientes que tienen enfermedades craneofaciales sin diagnosticar en las que se sospeche que el agente causal es un gen único pueden participar en un estudio en el que se usa la secuenciación del genoma completo para buscar la causa genética de la enfermedad que afecta a su familia.",
         "ImageAlt": "[es]If you or a loved one has a rare and genetically undiagnosed condition, join a patient-driven research study to discover the genes underlying your family's rare disease.",
         "Background": {
-            "Title": "[es]Background",
-            "Text": "[es]Craniofacial conditions affect the development of bones and tissues of the head and face. They can occur in isolation, with additional craniofacial conditions, or as one feature of an underlying syndrome affecting other parts of the body. For example, <a href=\"https://www.nidcr.nih.gov/health-info/cleft-lip-palate/more-info\" target=\"_blank\" class=\"Link\">facial clefts</a> can be an isolated condition, can co-occur with <a href=\"https://rarediseases.info.nih.gov/diseases/6209/craniosynostosis\" target=\"_blank\" class=\"Link\">craniosynostosis</a>, or can be part of a genetic syndrome such as <a href=\"https://rarediseases.info.nih.gov/diseases/9124/treacher-collins-syndrome\" target=\"_blank\" class=\"Link\">Treacher Collins syndrome</a>. Collectively, the many types of craniofacial conditions are estimated to affect approximately 1 in 700-1,000 newborns."
+            "Title": "Información general",
+            "Text": "Las enfermedades craneofaciales afectan el desarrollo de los huesos y de los tejidos de la cabeza y la cara. Pueden presentarse de manera aislada, acompañadas de otras afecciones craneofaciales o como característica de un síndrome subyacente que afecte a otras partes del cuerpo. Por ejemplo, las <a href=\"https://www.nidcr.nih.gov/health-info/cleft-lip-palate/more-info\" target=\"_blank\" class=\"Link\">hendiduras faciales</a> pueden ser enfermedades aisladas, suceder al tiempo con la <a href=\"https://rarediseases.info.nih.gov/diseases/6209/craniosynostosis\" target=\"_blank\" class=\"Link\">craneosinostosis</a> o formar parte de un síndrome genético, como el <a href=\"https://rarediseases.info.nih.gov/diseases/9124/treacher-collins-syndrome\" target=\"_blank\" class=\"Link\">síndrome de Treacher Collins</a>. En conjunto, se calcula que los muchos tipos de enfermedades craneofaciales afectan aproximadamente a uno de entre cada 700 y cada 1000 recién nacidos."
         },
         "Genetics": {
-            "Title": "[es]Genetics and Craniofacial Conditions",
-            "Text": "[es]Craniofacial conditions may be caused by genetic changes, environmental factors, or a combination of the two. The likelihood of a strictly genetic cause is increased if the condition is atypically severe or rare, there are delays in development or health issues affecting additional body systems, or there are multiple affected family members. Although many single gene causes have been identified, our goal is to identify additional genes that cause craniofacial conditions."
+            "Title": "La genética y las enfermedades craneofaciales",
+            "Text": "Las enfermedades craneofaciales se pueden deber a alteraciones genéticas, a factores ambientales o a una combinación de ambos. La probabilidad de que tengan una causa estrictamente genética aumenta si la enfermedad es atípicamente grave o rara, si hay retrasos del desarrollo o problemas de salud que afecten diferentes aparatos o sistemas del cuerpo, o si hay varias personas afectadas en la familia. Aunque se han identificado muchos genes individuales como causa de estas enfermedades, nuestro objetivo es identificar otros más."
         },
         "Right": {
-            "Title": "[es]Is This Study Right For Me?",
-            "Text": "[es]Our initial efforts will focus on individuals and families who:",
+            "Title": "¿Este estudio es adecuado para mí?",
+            "Text": "Nuestro trabajo inicial se centrará en personas y en familias que:",
             "ListItems": {
                 "Item1": {
-                    "Text": "[es]Have a craniofacial condition that is suspected to be due to a single gene. <br>Features suggesting a single gene cause include:",
+                    "Text": "Tengan una enfermedad craneofacial en que se sospeche un gen individual como agente causal. <br />Las características que indican que la causa es un gen individual son:",
                     "Subitems": {
-                        "Item1": "[es]An atypically severe presentation or a rare condition",
-                        "Item2": "[es]Involvement of both sides of the face or head (e.g. ears), or the middle structures (e.g. nose), depending on the condition",
-                        "Item3": "[es]Additional early-onset medical conditions affecting different parts of the body or delays in development",
-                        "Item4": "[es]Presence in siblings or multiple generations of family members"
+                        "Item1": "Una presentación atípicamente grave o una enfermedad rara",
+                        "Item2": "Afectación de ambos lados de la cara o la cabeza (por ejemplo, de ambas orejas) o de las estructuras de la línea media (por ejemplo, la nariz), según la enfermedad.",
+                        "Item3": "Otras afecciones adicionales de inicio precoz que afecten diferentes partes del cuerpo o causen retrasos del desarrollo",
+                        "Item4": "Presencia de la enfermedad en los hermanos o en varias generaciones de parientes"
                     }
                 },
-                "Item2": "[es]Do <span class=\"Accent\">NOT</span> have a condition with a low suspicion of a single gene cause, such as <a href=\"https://cleftline.org/family-resources/introduction-to-cleft-craniofacial-conditions/\" target=\"_blank\" class=\"Link Link--blue\"> isolated cleft lip and/or palate</a>, isolated <a href=\"http://www.childrenshospital.org/conditions-and-treatments/conditions/m/microtia\" target=\"_blank\" class=\"Link Link--blue\">microtia</a>, or <a href=\"https://rarediseases.info.nih.gov/diseases/6582/hemifacial-microsomia\" target=\"_blank\" class=\"Link Link--blue\">hemifacial microsomia</a>",
-                "Item3": "[es]Are currently under the care of a medical geneticist or relevant subspecialist",
-                "Item4": "[es]Live in the United States",
-                "Item5": "[es]Are English-speaking"
+                "Item2": "Ausencia de una enfermedad en que la sospecha de un gen único sea baja, como los <a href=\"https://cleftline.org/family-resources/introduction-to-cleft-craniofacial-conditions/\" target=\"_blank\" class=\"Link Link--blue\">casos aislados de labio leporino o paladar hendido</a>, los casos aislados de <a href=\"http://www.childrenshospital.org/conditions-and-treatments/conditions/m/microtia\" target=\"_blank\" class=\"Link Link--blue\">microtia</a> o la <a href=\"https://rarediseases.info.nih.gov/diseases/6582/hemifacial-microsomia\" target=\"_blank\" class=\"Link Link--blue\">microsomía hemifacial</a>",
+                "Item3": "Estar recibiendo atención médica actualmente de un genetista médico o un subespecialista pertinente",
+                "Item4": "Vivir en los Estados Unidos",
+                "Item5": "Hablar inglés o español"
             }
         },
         "Steps": {
-            "Title": "[es]How You Can Participate",
+            "Title": "Cómo puede participar",
             "One": {
-                "Title": "[es]Tell us your story",
-                "Text1": "[es]Click",
-                "Text2": "[es]apply",
-                "Text3": "[es]to tell us about the history of the craniofacial condition in your family. The information will be reviewed by our study team, and eligible families will be invited to participate. We will contact you to arrange a detailed discussion about the study and send you a consent form.",
-                "Alt": "[es]Tell us your story"
+                "Title": "Cuéntenos su historia",
+                "Text1": "Haga clic en",
+                "Text2": "Solicitud",
+                "Text3": "para ver un resumen general del estudio y enterarse de cómo iniciar una solicitud de ingreso. El equipo investigador revisará la información e invitará a participar a las familias que cumplan los requisitos. Programaremos una cita para tener una conversación detallada sobre el estudio y enviarle un documento de consentimiento.",
+                "Alt": "Cuéntenos su historia"
             },
             "Two": {
-                "Title": "[es]Submit a sample",
-                "Text": "[es]Once enrolled, we’ll mail a pre-paid sample collection kit directly to you and your family. We’ll also ask you more about medical history and ask for copies of medical records, including genetic test results.",
-                "Alt": "[es]Share your data"
+                "Title": "Envíe una muestra",
+                "Text": "Cuando se inscriba, les enviaremos por correo postal un estuche franqueado de recolección de muestras directamente a usted y a su familia. También le haremos más preguntas sobre sus antecedentes médicos y le pediremos copias de su historia clínica y de los resultados de pruebas genéticas.",
+                "Alt": "Envíe una muestra"
             },
             "Three": {
-                "Title": "[es]Discover",
-                "Text": "[es]Through DNA sequencing, we may discover the genetic cause of the craniofacial condition in your family and will work with you and your doctors to return important results to you. We will also share de-identified data broadly with the scientific community to empower discoveries in rare and undiagnosed disease, including craniofacial conditions.",
-                "Alt": "[es]Discover"
+                "Title": "Ayúdenos a descubrir",
+                "Text": "Es posible que, mediante la secuenciación del ADN podamos descubrir la causa genética de la enfermedad craneofacial de su familia, y que colaboremos con los médicos que le atienden para entregarle resultados importantes para usted. Además, compartiremos de manera amplia sus datos desidentificados con la comunidad científica para promover descubrimientos en la investigación de las enfermedades raras que no se han diagnosticado, entre ellas, las enfermedades craneofaciales.",
+                "Alt": "Ayúdenos a descubrir"
             }
         },
         "Info": {
-            "Title": "[es]Information and Resources",
-            "Text": "[es]Additional information and resources for individuals with isolated and syndromic craniofacial conditions can be found here: <a href=\"https://www.shrinershospitalsforchildren.org/boston/cleftlippalate\" target=\"_blank\" class=\"Link Accent\">Shriners Hospitals for Children</a>, the <a href=\"https://acpa-cpf.org\" target=\"_blank\" class=\"Link Accent\">American Cleft Palate and Craniofacial Association</a>, <a href=\"https://www.ncbi.nlm.nih.gov/books/NBK1116/\" target=\"_blank\" class=\"Link Accent\">GeneReviews</a>, and the <a href=\"https://ghr.nlm.nih.gov/\" target=\"_blank\" class=\"Link Accent\">Genetics Home Reference</a>."
+            "Title": "Información y recursos",
+            "Text": "Más información y recursos para personas con enfermedades craneofaciales aisladas y sindrómicas en: <a href=\"https://www.shrinershospitalsforchildren.org/boston/cleftlippalate\" target=\"_blank\" class=\"Link Accent\">Shriner’s Hospitals for Children</a>, la <a href=\"https://acpa-cpf.org\" target=\"_blank\" class=\"Link Accent\">American Cleft Palate and Craniofacial Association</a>, <a href=\"https://www.ncbi.nlm.nih.gov/books/NBK1116/\" target=\"_blank\" class=\"Link Accent\">GeneReviews</a> y <a href=\"https://medlineplus.gov/genetics/\" target=\"_blank\" class=\"Link Accent\">Medline Plus</a>, de la Biblioteca Nacional de Medicina de los Estados Unidos (National Library of Medicine)."
         }
     },
     "StayInformedPage": {
