@@ -42,7 +42,7 @@ import { AddressError } from '../../models/addressError';
 import { AddressVerificationStatus } from '../../models/addressVerificationStatus';
 import { AddressInputComponent } from './addressInput.component';
 import { MailAddressBlock } from '../../models/activity/MailAddressBlock';
-import { generateTaggedAddress, isStreetRequiredError } from './addressUtils';
+import { generateTaggedAddress } from './addressUtils';
 import { SubmitAnnouncementService } from '../../services/submitAnnouncement.service';
 import { AddressVerificationWarnings } from '../../models/addressVerificationWarnings';
 import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
@@ -267,7 +267,9 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             tap(() => busyCounter$.next(1)),
             // let's disable form while we try to load initial address
             tap(() => this.stateUpdates$.next({isTemporarilyDisabled: true})),
-            mergeMap((state) => this.addressService.findDefaultAddress().pipe(
+            mergeMap((state) => (this.block.addressGuid
+                ? this.addressService.getAddress(this.block.addressGuid)
+                : this.addressService.findDefaultAddress()).pipe(
                 catchError(error => {
                     this.logger.logDebug(this.LOG_SOURCE, `An error occurred during findDefaultAddress: ${error.code}, ${error.message}`);
                     return of(null);
@@ -380,6 +382,8 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
 
         const handleAddressSuggestionAction$ = addressSuggestion$.pipe(
+            // to filter out null values when any field is updated
+            distinctUntilChanged(),
             tap(() => this.stateUpdates$.next({fieldErrors: []})),
             filter(suggestion => !!suggestion),
             tap((addressSuggestion) => {
@@ -436,9 +440,9 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         const saveTempCurrentAddressAction$ = currentAddress$.pipe(
             distinctUntilChanged((x, y) => util.isEqual(x, y)),
             withLatestFrom(this.state$),
-            filter(([addrss, state]) => !!addrss && (!addrss.guid || !addrss.guid.trim()) && !!state.activityInstanceGuid),
+            filter(([address, state]) => !!address && (!address.guid || !address.guid.trim()) && !!state.activityInstanceGuid),
             tap(() => busyCounter$.next(1)),
-            concatMap(([addrss, state]) => this.addressService.saveTempAddress(addrss, state.activityInstanceGuid)),
+            concatMap(([address, state]) => this.addressService.saveTempAddress(address, state.activityInstanceGuid)),
             catchError((error) => {
                 this.logger.logWarning(this.LOG_SOURCE, `There was a problems saving temp address: ${error}`);
                 return of(null);
@@ -484,10 +488,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
                     if (currError.field === 'address') {
                         // These are the "global" errors reported by EasyPost
                         errorUpdate.formErrorMessages.push(currError.message);
-                    } else if (isStreetRequiredError(currError)) {
-                        // Seems like EasyPost needs a street address before it verifies other fields.
-                        // Since street1 might not be filled yet, transform message into a "global" error message.
-                        errorUpdate.formErrorMessages.push('Street address is missing, could not verify address.');
                     } else {
                         errorUpdate.fieldErrors.push(currError);
                     }
@@ -520,7 +520,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
                 return !formErrors?.length && canSaveRealAddress(addressToSave);
             }),
             tap(() => busyCounter$.next(1)),
-            concatMap(([_, formErrors, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
+            concatMap(([_, __, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
             tap(() => busyCounter$.next(-1)),
             share()
         );
@@ -636,10 +636,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         if (this.block.requireVerified && !currentAddress) {
             return false;
         }
-        if (this.block.requirePhone && currentAddress && !(currentAddress.phone)) {
-            return false;
-        }
-        return true;
+        return !(this.block.requirePhone && currentAddress && !(currentAddress.phone));
     }
 
     private computeValidityForSparseAddress(address: Address | null): boolean {

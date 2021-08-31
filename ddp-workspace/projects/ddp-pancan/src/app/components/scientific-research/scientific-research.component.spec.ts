@@ -8,7 +8,7 @@ import { mockComponent } from 'ddp-sdk';
 describe('ScientificResearchComponent', () => {
     let component: ScientificResearchComponent;
     let fixture: ComponentFixture<ScientificResearchComponent>;
-    const anchorsPage = mockComponent({selector: 'app-anchors-page', inputs: ['source', 'route', 'linksMap']});
+    const pageWithSections = mockComponent({selector: 'app-page-with-sections', inputs: ['source', 'linksMap']});
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
@@ -16,7 +16,10 @@ describe('ScientificResearchComponent', () => {
                     RouterTestingModule,
                     NoopAnimationsModule
                 ],
-                declarations: [ScientificResearchComponent, anchorsPage]
+                declarations: [
+                    ScientificResearchComponent,
+                    pageWithSections
+                ]
             })
             .compileComponents();
     });

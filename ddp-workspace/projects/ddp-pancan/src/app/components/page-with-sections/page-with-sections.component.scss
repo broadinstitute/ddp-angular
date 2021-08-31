@@ -2,6 +2,30 @@
 
 .page {
     position: relative;
+
+    &.about-us {
+        .section-0 {
+            background-image: url(/assets/images/oval_green_left.png);
+        }
+        .section-1 {
+            background-image: url(/assets/images/oval_carrot_right.png);
+        }
+        .section-2 {
+            background-image: url(/assets/images/oval_sand_left.png);
+        }
+    }
+
+    &.scientific-research {
+        .section-0 {
+            background-image: url(/assets/images/oval_purple_left.png);
+        }
+        .section-1 {
+            background-image: url(/assets/images/oval_green_right.png);
+        }
+        .section-2 {
+            background-image: url(/assets/images/oval_sand_left.png);
+        }
+    }
 }
 
 .title {
@@ -12,6 +36,9 @@
 .section {
     padding: 4.69rem 0 4rem 2rem;
     display: flex;
+    background-repeat: no-repeat;
+    background-position-y: top;
+    background-origin: content-box;
 
     &:nth-of-type(odd) {
         padding-top: 3.75rem;
@@ -27,30 +54,36 @@
         padding-bottom: 0;
     }
 
-    &-1 {
-       flex-direction: row-reverse;
+    &-0 {
+        background-position-x: left;
+        background-size: auto 642px;
     }
 
-    &__side-image {
-        .section-0 & {
-            height: 642px;
-            margin-right: 7rem;
-        }
+    &-1 {
+        flex-direction: row-reverse;
+        min-height: 621px;
+        box-sizing: content-box;
+        background-position: 100% 2.2rem;
+        background-size: auto 621px;
+    }
 
-        .section-1 & {
-            height: 621px;
-            margin: 2.2rem 0 0 5.5rem;
-        }
-
-        .section-2 & {
-            height: 474px;
-            margin: 3rem 9.375rem 0 0;
-        }
+    &-2 {
+        background-position: 0 3rem;
+        background-size: auto 474px;
     }
 
     &__content {
         .section-0 & {
             padding-top: 2.2rem;
+            margin-left: 27.31rem;
+        }
+
+        .section-1 & {
+            margin-right: 25.625rem;
+        }
+
+        .section-2 & {
+            margin-left: 23.625rem;
         }
     }
 
@@ -151,33 +184,55 @@
 }
 
 @media screen and (max-width: $desktop-breakpoint) {
-    .section__side-image {
-        .section-0 & {
-            height: 480px;
-            margin-right: 5rem;
+    .section {
+        &-0 {
+            background-size: auto 480px;
         }
 
-        .section-1 & {
-            height: 465px;
+        &-1 {
+            background-size: auto 465px;
         }
 
-        .section-2 & {
-            height: 355px;
-            margin-right: 7rem;
+        &-2 {
+            background-size: auto 355px;
+        }
+
+        &__content {
+            .section-0 & {
+                margin-left: 22.35rem;
+            }
+
+            .section-1 & {
+                margin-right: 22.7rem;
+            }
+
+            .section-2 & {
+                margin-left: 19.15rem;
+            }
         }
     }
 }
 
 @media screen and (max-width: $tablet-breakpoint) {
-    .section__side-image {
-        height: 50vw !important;
+    $background-image-height: 50vw;
 
-        .section-0 & {
-            margin-right: 3rem;
+    .section {
+        &-0, &-1, &-2 {
+            background-size: auto $background-image-height;
         }
 
-        .section-2 & {
-            margin-right: 5rem;
+        &__content {
+            .section-0 & {
+                margin-left: calc(#{$background-image-height} / 2 + 3rem);
+            }
+
+            .section-1 & {
+                margin-right: calc(#{$background-image-height} / 2 + 5.5rem);
+            }
+
+            .section-2 & {
+                margin-left: calc(#{$background-image-height} / 2 + 5rem);
+            }
         }
     }
 
@@ -201,35 +256,42 @@
         display: block;
         padding-bottom: 2.5rem;
 
-        &__title {
-            margin-top: 2.5rem;
-
-            .section-2 & {
-                margin-top: 4.5rem;
-            }
+        &-0, &-1, &-2 {
+            background-size: auto 172px;
+            background-position-y: top;
         }
 
-        &__side-image {
-            height: 172px !important;
-            margin-top: 0 !important;
-            margin-bottom: 2rem !important;
+        &-1 {
+            box-sizing: border-box;
+        }
+
+        &__content {
+            margin: 0 !important;
+        }
+
+        &__title {
+            margin-top: 2.5rem;
+            text-align: center;
 
             .section-0 & {
-                float: left;
+                margin-bottom: 6.5rem;
+                margin-left: 50px;
             }
 
             .section-1 & {
-                float: right;
-                margin-left: 1.5rem;
+                text-align: left;
+                margin-bottom: 4rem;
+                margin-right: 100px;
+                min-height: 115px;
+                display: flex;
+                align-items: center;
             }
 
             .section-2 & {
-                float: left;
+                margin-top: 4.5rem;
+                margin-bottom: 7rem;
+                margin-left: 50px;
             }
-        }
-
-        &__description {
-            clear: both;
         }
 
         &:nth-of-type(odd) {
@@ -247,7 +309,6 @@
         &__people-list {
             padding-left: 2.5rem!important;
             padding-right: 1rem;
-            clear: both;
 
             &__block {
                 grid-template-columns: 1fr;

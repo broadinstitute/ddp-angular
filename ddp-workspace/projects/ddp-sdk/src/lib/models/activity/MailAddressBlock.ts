@@ -8,6 +8,7 @@ export class MailAddressBlock extends ActivityBlock {
     public requireVerified: boolean;
     public requirePhone: boolean;
     public hasValidAddress: boolean;
+    public addressGuid: string;
 
     constructor(displayNumber: number) {
         super();
