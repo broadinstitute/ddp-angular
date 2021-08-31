@@ -180,10 +180,4 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     displayAutoComplete(option: ActivityPicklistOption | string): string {
         return typeof option === 'string' ? option : (option?.optionLabel || '');
     }
-
-    @HostListener('window: scroll') public onWindowScroll(): void {
-        if (this.autoComplete?.panelOpen) {
-            this.autoComplete.closePanel();
-        }
-    }
 }
