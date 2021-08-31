@@ -13,4 +13,8 @@ export class ActivityFileQuestionBlock extends ActivityQuestionBlock<ActivityFil
     public get questionType(): QuestionType {
         return QuestionType.File;
     }
+
+    public isUniqueValues(files: ActivityFileAnswerDto[]): boolean {
+        return true;
+    }
 }

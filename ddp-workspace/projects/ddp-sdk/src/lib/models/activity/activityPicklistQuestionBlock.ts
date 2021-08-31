@@ -20,4 +20,10 @@ export class ActivityPicklistQuestionBlock extends ActivityQuestionBlock<Array<A
     public get questionType(): QuestionType {
         return QuestionType.Picklist;
     }
+
+    public isUniqueValues(values: ActivityPicklistAnswerDto[][]): boolean {
+        const stringValues = values.map(valueArray => valueArray.map(answer => answer.detail || answer.stableId).sort().join());
+
+        return (new Set(stringValues)).size === stringValues.length;
+    }
 }

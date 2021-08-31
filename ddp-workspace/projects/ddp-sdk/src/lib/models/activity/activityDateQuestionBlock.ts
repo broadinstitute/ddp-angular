@@ -58,4 +58,9 @@ export class ActivityDateQuestionBlock extends ActivityQuestionBlock<DatePickerV
         // There are field rules and date has value for those rules, so return true.
         return hasFieldRule;
     }
+
+    public isUniqueValues(values: DatePickerValue[]): boolean {
+        const stringValues = values.map(({day, month, year}) => `${day}${month}${year}`);
+        return (new Set(stringValues)).size === stringValues.length;
+    }
 }
