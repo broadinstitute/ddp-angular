@@ -143,24 +143,24 @@
                 "Title": "Directiva",
                 "Members": [
                     {
-                        "name": "Heidi Rehm",
-                        "degree": "[es]PhD, FACMG",
-                        "position": "[es]Principal Investigator",
-                        "bio": "[es]Heidi is principal investigator of the Rare Genomes Project and the co-director for the Broad Institute Center for Mendelian Genomics. She is also the chief genomics officer of the Department of Medicine at Massachusetts General Hospital and a professor at Harvard Medical School. She built the Laboratory for Molecular Medicine at Partners HealthCare Personalized Medicine and directed it until 2018. She is a strong advocate and pioneer of open science and data sharing through leadership roles in the Clinical Genome (ClinGen) Resource and the Global Alliance for Genomics and Health.",
+                        "name": "Dra. Heidi Rehm",
+                        "degree": "PhD, FACMG",
+                        "position": "Investigadora principal",
+                        "bio": "Heidi es investigadora principal del Proyecto Genomas Raros y codirectora del Centro de Genómica Mendeliana del Broad Institute. También es directora de genómica del Departamento de Medicina del hospital Mass General y catedrática de Harvard Medical School. Fundó el Laboratorio de Medicina Molecular del Servicio de Medicina Personalizada de Partners HealthCare y lo dirigió hasta 2018. Es defensora y pionera de la ciencia abierta y del intercambio de datos desde sus funciones de liderazgo en Recursos de Genómica Cínica (Clinical Genome Resource, ClinGen) y en la Alianza Mundial para la Genómica y la Salud (Global Alliance for Genomics and Health).",
                         "image": "heidi-rehm.jpg"
                     },
                     {
-                        "name": "Anne O’Donnell-Luria",
-                        "degree": "[es]MD, PhD",
-                        "position": "[es]Medical Director",
-                        "bio": "[es]Anne is the medical director of the Rare Genomes Project and the co-director for the Broad Institute Center for Mendelian Genomics. She obtained her MD/PhD from Columbia University and is a board-certified clinical genetics and metabolism physician and pediatrician who sees patients at Boston Children's Hospital. She is an  assistant professor at Harvard Medical School.",
+                        "name": "Dra. Anne O'Donnell-Luria",
+                        "degree": "MD, PhD",
+                        "position": "Directora médica",
+                        "bio": "Anne es directora médica del Proyecto Genomas Raros y codirectora del Centro de Genómica Mendeliana del Broad Institute. Obtuvo su grado en medicina y su doctorado en Columbia University, y ha sido certificada por las autoridades pertinentes como pediatra y como especialista en genética clínica y metabolismo. Atiende pacientes en el Boston Children's Hospital. Es catedrática adjunta de Harvard Medical School.",
                         "image": "anne-odonnel.jpg"
                     },
                     {
                         "name": "Melanie O’Leary",
-                        "degree": "[es]MS, CGC",
-                        "position": "[es]Operations Lead",
-                        "bio": "[es]Melanie is the operations lead for the Rare Genomes Project and a principal clinical genomics specialist at the Broad Institute. She oversees the operational aspects of the project. She is a licensed, board-certified genetic counselor who has worked in a variety of clinical, research, and clinical laboratory settings.",
+                        "degree": "MS, CGC",
+                        "position": "Jefa de operaciones",
+                        "bio": "Melanie es jefa de operaciones del Proyecto Genomas Raros y especialista principal en genómica clínica del Broad Institute. Supervisa los aspectos operativos del proyecto. Es asesora genética autorizada y certificada por las autoridades pertinentes, y ha trabajado en diversos entornos de atención clínica, de investigación y de laboratorio clínico.",
                         "image": "melanie-oleary.jpg"
                     }
                 ]
@@ -171,15 +171,22 @@
                     {
                         "name": "Brian Mangilog",
                         "degree": "",
-                        "position": "[es]Clinical Project Coordinator",
-                        "bio": "[es]Brian is a clinical project coordinator for the Rare Genomes Project, focusing on consenting families to the study and outreach efforts. He studied neurobiology as an undergraduate and has experience in patient advocacy and community outreach.",
+                        "position": "Coordinador clínico del proyecto",
+                        "bio": "Brian es coordinador clínico del Proyecto Genomas Raros. Se dedica especialmente a la participación de las familias en el estudio y a la labor de extensión hacia la comunidad que sufre enfermedades raras. Tiene formación en neurobiología y experiencia profesional en la defensa del paciente.",
                         "image": "brian-mangilog.jpeg"
                     },
                     {
+                        "name": "Jillian Serrano",
+                        "degree": "",
+                        "position": "Coordinadora clínica del proyecto",
+                        "bio": "Jillian es coordinadora clínica del Proyecto Genomas Raros. Su función es obtener el consentimiento de las familias que participan en el estudio y facilitar la obtención de muestras y de historias clínicas. Realizó estudios de pregrado en biología y cuenta con experiencia en la atención y la defensa del paciente. Se interesa en la ampliación del proyecto para que llegue a la población de habla hispana.",
+                        "image": "jillian-serrano.jpeg"
+                    },
+                    {
                         "name": "Grace VanNoy",
-                        "degree": "[es]MS, CGC",
-                        "position": "[es]Clinical Project Manager",
-                        "bio": "[es]Grace is a clinical project manager for the Rare Genomes Project. She is a licensed, board-certified genetic counselor with a background in pediatric rare disease, gene discovery, and genomic sequencing.",
+                        "degree": "MS, CGC",
+                        "position": "Gestora clínica del proyecto",
+                        "bio": "Grace es gestora clínica del Proyecto Genomas Raros. Es asesora genética autorizada y certificada por las autoridades pertinentes. Tiene experiencia en enfermedades pediátricas raras, descubrimiento de genes y secuenciación genómica.",
                         "image": "grace-vannoy.jpg"
                     }
                 ]
@@ -189,31 +196,31 @@
                     "Title": "Colaboradores",
                     "Members": [
                         {
-                            "name": "Carsten Bönnemann",
-                            "degree": "[es]MD",
-                            "position": "[es]Collaborator",
-                            "bio": "[es]Carsten is a neuromuscular physician and senior investigator and chief of the neuromuscular and neurogenetic disorders of childhood section of the National Institute of Neurological Disorders and Stroke (NINDS). His work aims to identify the genetic and cellular mechanisms of early onset muscle diseases, such as the congenital muscular dystrophies, congenital myopathies, and reducing body myopathy.",
+                            "name": "Dr. Carsten Bönnemann",
+                            "degree": "MD",
+                            "position": "Colaborador",
+                            "bio": "Carsten es médico neuromuscular y jefe e investigador sénior de la división de trastornos neuromusculares y neurogénicos de la infancia del Instituto Nacional de Enfermedades Neurológicas y Accidentes Cerebrovasculares (National Institute of Neurological Disorders and Stroke, NINDS). En su trabajo se dedica a identificar los mecanismos genéticos y celulares de las enfermedades musculares de inicio en la infancia, como las distrofias musculares congénitas, las miopatías congénitas y la miopatía con cuerpos reductores.",
                             "image": "carsten-bonnemann.jpeg"
                         },
                         {
-                            "name": "Monkol Lek",
-                            "degree": "[es]PhD",
-                            "position": "[es]Collaborator",
-                            "bio": "[es]Monkol is a co-investigator of the limb-girdle muscular dystrophy branch of the Rare Genomes Project and an assistant professor of genetics at Yale School of Medicine with affiliation at the Broad Institute. His group focuses on the development of computational methods for the analysis of genomic data from families with rare disease, particularly those with limb-girdle muscular dystrophy.",
+                            "name": "Dr. Monkol Lek",
+                            "degree": "PhD",
+                            "position": "Colaborador",
+                            "bio": "Monkol es coinvestigador de la división sobre la distrofia muscular de cinturas del Proyecto Genomas Raros, y catedrático adjunto de genética de Yale School of Medicine, afiliada al Broad Institute. Su grupo se dedica al desarrollo de métodos computacionales para el análisis de datos genómicos de familias que presentan enfermedades raras, en particular las que tienen distrofia muscular de cinturas.",
                             "image": "monkol-lek.jpeg"
                         },
                         {
-                            "name": "Eric Liao",
-                            "degree": "[es]MD, PhD",
-                            "position": "[es]Collaborator",
-                            "bio": "[es]Eric is a plastic and reconstructive surgeon at Massachusetts General Hospital and co-investigator of the craniofacial branch of the Rare Genomes Project. He is an assistant professor of surgery at Harvard Medical School, the director of the Cleft and Craniofacial Center at Massachusetts General Hospital, and the principal investigator at the Center for Regenerative Medicine at the Harvard Stem Cell Institute.",
+                            "name": "Dr. Eric Liao",
+                            "degree": "MD, PhD",
+                            "position": "Colaborador",
+                            "bio": "Eric es médico especialista en cirugía plástica y reconstructiva del hospital Mass General, así como coinvestigador de la división craneofacial del Proyecto Genomas Raros. Es catedrático adjunto de cirugía de Harvard Medical School, director del Centro para Cirugía Craneofacial y del Paladar Hendido del hospital Mass General, e investigador principal del Centro de Medicina Regenerativa del Harvard Stem Cell Institute.",
                             "image": "eric-liao.jpg"
                         },
                         {
-                            "name": "Daniel MacArthur",
-                            "degree": "[es]PhD",
-                            "position": "[es]Investigator",
-                            "bio": "[es]Daniel was the founding principal investigator of the Rare Genomes Project and also served as the co-director for the Broad Institute Center for Mendelian Genomics from 2016-2019. In 2020, he relocated to Sydney, Australia, where he now serves as the Director of the Centre for Population Genomics, jointly based at the Garvan Institute of Medical Research and the Murdoch Children's Research Institute. He is a strong advocate for and pioneer of open science and data sharing. He led the creation and release of the Exome Aggregation Consortium (ExAC) and Genome Aggregation Database (gnomAD).",
+                            "name": "Dr. Daniel MacArthur",
+                            "degree": "PhD",
+                            "position": "Investigador",
+                            "bio": "Daniel fue el investigador principal inicial del Proyecto Genomas Raros y se desempeñó además como codirector del Centro de Genómica Mendeliana del Broad Institute de 2016 a 2019. En 2020 se mudó a Sydney (Australia), donde ocupa el cargo de director del Centro de Genómica Poblacional (Centre for Population Genomics), con sedes gemelas en el Garvan Institute of Medical Research y el Murdoch Children's Research Institute. Es pionero y partidario firme de la ciencia abierta y del intercambio de datos. Dirigió la creación y difusión del Consorcio de Agregación de Datos del Exoma (Exome Aggregation Consortium, ExAC) y del Proyecto de Agregación de Datos del Genoma (Genome Aggregation Database, gnomAD).",
                             "image": "daniel-mac-arthur.jpg"
                         }
                     ]
@@ -224,29 +231,29 @@
                         {
                             "name": "Larry Babb",
                             "degree": "",
-                            "position": "[es]Senior Software Engineer",
-                            "bio": "[es]Larry is a software engineer interested in advancing the use of genetics in both research and clinical care by developing infrastructure for capturing and sharing genetic knowledge using FAIR principles. He manages two software development teams at the Broad Institute, ClinGen and Seqr, and participates in the data sharing standards organizations of GA4GH and HL7. He has worked on both academic and commercial systems for delivering clinical genetics results and knowledge for over 16 years.",
+                            "position": "Ingeniero sénior de software",
+                            "bio": "Larry es ingeniero de software y su interés es promover el uso de la genética en la investigación y en la atención clínica mediante la creación de infraestructura destinada a captar e intercambiar conocimientos genéticos con base en los principios FAIR de gestión de datos científicos (que se puedan descubrir y que sean accesibles, interoperables y reutilizables). Dirige dos equipos de desarrollo de software en el Broad Institute, ClinGen y seqr, y participa en dos organizaciones de establecimiento de normas sobre el intercambio de datos: GA4GH y HL7. Ha trabajado en sistemas tanto académicos como comerciales para la entrega de resultados genéticos clínicos y de información genética durante más de 16 años.",
                             "image": "larry-babb.jpeg"
                         },
                         {
                             "name": "Steve Jahl",
                             "degree": "",
-                            "position": "[es]Software Engineer",
-                            "bio": "[es]Steve is a Site Reliability Engineer working on the stability and performance of our web-based research platforms. Before joining the Broad Institute, he worked as a software engineer and systems administrator in research computing groups at MIT CSAIL and Harvard Medical School.",
+                            "position": "Ingeniero de software",
+                            "bio": "Steve es ingeniero de fiabilidad en la institución. Su trabajo se centra en la estabilidad y el desempeño de nuestras plataformas virtuales de investigación. Antes de venir al Broad Institute trabajó de ingeniero de software y administrador de sistemas en grupos de computación en la investigación del Laboratorio de Inteligencia Artificial y Ciencias de la Computación (CSAIL, por sus siglas en inglés) de MIT y de Harvard Medical School.",
                             "image": "steve-jahl.jpg"
                         },
                         {
                             "name": "Hana Snow",
                             "degree": "",
-                            "position": "[es]Software Engineer",
-                            "bio": "[es]Hana is a software engineer working on building tools to facilitate rare disease research. She is the lead developer for our rare disease analysis platform, seqr.",
+                            "position": "Ingeniera de software",
+                            "bio": "Hana es ingeniera de software. Su trabajo consiste en diseñar recursos para facilitar la investigación de las enfermedades raras. Es la principal creadora de seqr, nuestra plataforma de análisis de enfermedades raras.",
                             "image": "hana-snow.jpg"
                         },
                         {
                             "name": "Shifa Zhang",
-                            "degree": "[es]MS",
-                            "position": "[es]Software Engineer",
-                            "bio": "[es]Shifa is a computational scientist and software engineer working on tools for managing and interpreting DNA sequencing data. Prior to joining the Broad Institute, Shifa developed a secure biomedical data analytics and sharing platform at Secure AI Labs.",
+                            "degree": "MS",
+                            "position": "Ingeniero de software",
+                            "bio": "Shifa es científico computacional e ingeniero de software. Trabaja en recursos encaminados a la gestión e interpretación de los datos de secuenciación del ADN. Antes de trabajar en el Broad Institute, Shifa creó una plataforma segura para el análisis y el intercambio de datos biomédicos en Secure AI Labs.",
                             "image": "shifa-zhang.jpeg"
                         }
                     ]
@@ -257,59 +264,66 @@
                     "Title": "Análisis",
                     "Members": [
                         {
-                            "name": "Christina Austin-Tse",
-                            "degree": "[es]PhD",
-                            "position": "[es]Analysis Lead",
-                            "bio": "[es]Chrissy is the analysis lead for the Rare Genomes Project, an assistant laboratory director at the Mass General Brigham Laboratory for Molecular Medicine, a Molecular Geneticist at the Massachusetts General Hospital Center for Genomic Medicine, and an Instructor in Pathology at Harvard Medical School. She is a board-certified clinical molecular geneticist who specializes in the interpretation of genomic sequencing data.",
+                            "name": "Dra. Christina Austin-Tse",
+                            "degree": "PhD",
+                            "position": "Jefa de análisis",
+                            "bio": "Chrissy es la jefa de análisis del Proyecto Genomas Raros, directora adjunta del Laboratorio de Medicina Molecular de Mass General Brigham, genetista molecular del Centro de Medicina Genómica del hospital Mass General e instructora de Anatomía Patológica de Harvard Medical School. Es genetista molecular clínica, certificada por las autoridades pertinentes y se especializa en la interpretación de datos de secuenciación genómica.",
                             "image": "christina-austin-tse.jpg"
                         },
                         {
-                            "name": "Stephanie DiTroia",
-                            "degree": "[es]PhD",
-                            "position": "[es]Genomic Analyst",
-                            "bio": "[es]Stephanie is a genomic variant analyst working to identify causal candidate genes and variants in rare disease exomes and genomes. Prior to joining the Broad Institute, she studied epigenetics in fetal development at the University of California, San Francisco and worked in genomic research at the HudsonAlpha Institute for Biotechnology.",
+                            "name": "Dra. Stephanie DiTroia",
+                            "degree": "PhD",
+                            "position": "Analista genómica",
+                            "bio": "Stephanie es analista de variantes genómicas. Su trabajo se centra en identificar los posibles genes causales y las variantes en exomas y genomas de personas con enfermedades raras. Antes de venir al Broad Institute estudió la epigenética en el desarrollo fetal en la University of California, San Francisco, y trabajó en investigación genómica en el HudsonAlpha Institute for Biotechnology.",
                             "image": "stephanie-di-troia.jpeg"
                         },
                         {
-                            "name": "Vijay Ganesh",
-                            "degree": "[es]MD, PhD",
-                            "position": "[es]Clinical Genomic Analyst",
-                            "bio": "[es]Vijay is a clinical genomic analyst and postdoctoral fellow interested in understanding the genetic architecture of adult-onset Mendelian muscle diseases, and incorporating tools such as RNA sequencing to improve the rate of diagnostic in these conditions. He is a board-certified neurologist at Brigham and Women's Hospital where he sees patients with neuromuscular disorders.",
+                            "name": "Dr. Vijay Ganesh",
+                            "degree": "MD, PhD",
+                            "position": "Analista genómico clínico",
+                            "bio": "Vijay es analista genómico clínico y becario posdoctoral. Le interesa dilucidar la arquitectura genética de las enfermedades musculares mendelianas de inicio en la edad adulta, e incorporar recursos como la secuenciación del ARN para mejorar la tasa de diagnóstico de estas enfermedades. Es neurólogo certificado por las autoridades pertinentes y trabaja en el hospital Brigham and Women’s, donde atiende a pacientes con trastornos neuromusculares.",
                             "image": "vijay-ganesh.jpeg"
                         },
                         {
-                            "name": "Gabrielle Lemire",
-                            "degree": "[es]MD, FRCPC",
-                            "position": "[es]Clinical Genomic Analyst",
-                            "bio": "[es]Gabrielle is a Clinical Genomic Variant Analyst who performs exome and genome analyses for families with rare disease. She is a board-certified Canadian medical geneticist who previously worked with the Care4Rare research program and is now pursuing a postdoctoral fellowship at the Broad Institute.",
+                            "name": "Dra. Gabrielle Lemire",
+                            "degree": "MD, FRCPC",
+                            "position": "Analista genómica clínica",
+                            "bio": "Gabrielle es analista clínica de variantes genómicas; realiza análisis del exoma y el genoma en familias que tienen enfermedades raras. Es genetista médica certificada por las autoridades pertinentes de Canadá. Trabajó en el programa de investigación Care4Rare, y actualmente es becaria posdoctoral del Broad Institute.",
                             "image": "gabrielle-lemire.jpeg"
                         },
                         {
                             "name": "Emily O’Heir",
                             "degree": "",
-                            "position": "[es]Genomic Analyst",
-                            "bio": "[es]Emily is a genomic variant analyst conducting exome and genome analyses for families with rare diseases. She has a degree in diagnostic genetic sciences and previously worked in clinical cytogenetics and genomics laboratories.",
+                            "position": "Analista genómica",
+                            "bio": "Emily es analista de variantes genómicas; realiza análisis del exoma y el genoma en familias que tienen enfermedades raras. Obtuvo un grado en ciencias genéticas diagnósticas y trabajó antes en laboratorios de citogenética y genómica clínica.",
                             "image": "emily-oheir.jpeg"
                         },
                         {
+                            "name": "Dra. Ikeoluwa Osei-Owusu",
+                            "degree": "PhD",
+                            "position": "Analista genómica",
+                            "bio": "Ikeoluwa es analista genómica. Evalúa mediante análisis del exoma o el genoma las consecuencias en cuanto a enfermedad de la variación genómica en las familias en las que hay una enfermedad rara. Obtuvo un doctorado en genética humana de Johns Hopkins University School of Medicine durante el cual estudió a niños autistas que exhibían conductas autolesivas.",
+                            "image": "ikeoluwa.jpg"
+                        },
+                        {
                             "name": "Lynn Pais",
-                            "degree": "[es]MS",
-                            "position": "[es]Genomic Analyst",
-                            "bio": "[es]Lynn is a genomic variant analyst who performs exome and genome analyses for families with rare disease. She has a master’s degree in human genetics and previously worked as a project manager for a genetic research study at Brigham and Women’s Hospital.",
+                            "degree": "MS",
+                            "position": "Analista genómica clínica",
+                            "bio": "Lynn es analista genómica clínica sénior. Su trabajo se centra en mejorar los diagnósticos genéticos en las familias que tienen enfermedades raras. Se capacitó en asesoramiento genético y tiene más de ocho años de experiencia en entornos de genética clínica e investigación.",
                             "image": "lynn-pais.jpg"
                         },
                         {
                             "name": "Ellie Seaby",
-                            "degree": "[es]MD, PhD",
-                            "position": "[es]Clinical Genomic Analyst",
-                            "bio": "[es]Ellie is a clinical research fellow undertaking a PhD in genomic medicine at the University of Southampton in collaboration with the Broad Institute and Imperial College London. Her research focuses on the discovery of novel disease genes and improving clinical outcomes.",
+                            "degree": "MD, PhD",
+                            "position": "Analista genómica clínica",
+                            "bio": "Ellie es becaria de investigación clínica. Realiza estudios para obtener un doctorado en medicina genómica en la University of Southampton en un programa que se realiza con la colaboración del Broad Institute y el Imperial College London. Sus investigaciones se centran en el descubrimiento de nuevos genes causantes de enfermedades y en el mejoramiento de los desenlaces clínicos.",
                             "image": "ellie-seaby.jpeg"
                         },
                         {
-                            "name": "Monica Wojcik",
-                            "degree": "[es]MD",
-                            "position": "[es]Clinical Genomic Analyst",
-                            "bio": "[es]Monica is a clinical genomic analyst and a board-certified faculty neonatologist and geneticist at Boston Children’s Hospital. She is interested in gene discovery and improving genetic diagnosis, especially in neonatal and pediatric populations. She has a medical degree from Harvard Medical School.",
+                            "name": "Dra. Monica Wojcik",
+                            "degree": "MD",
+                            "position": "Analista genómica clínica",
+                            "bio": "Monica es analista genómica clínica, así como neonatóloga y genetista certificada del cuerpo docente del Boston Children’s Hospital. Se interesa en el descubrimiento de genes y en el mejoramiento del diagnóstico genético, especialmente en las poblaciones neonatal y pediátrica. Obtuvo el grado de doctora en medicina de Harvard Medical School.",
                             "image": "monica-wojcik.jpg"
                         }
                     ]
@@ -321,37 +335,37 @@
                     "Members": [
                         {
                             "name": "Samantha Baxter",
-                            "degree": "[es]MS, CGC",
-                            "position": "[es]Associate Director, Genetic and Genomic Data Sharing",
-                            "bio": "[es]Sam is a licensed, board-certified genetic counselor and associate director of genetic and genomic data sharing in the Translational Genomics Group at the Broad Institute. This role includes managing the operations for <a href=\"https://gnomad.broadinstitute.org/\" class=\"Link\" target=\"_blank\">gnomAD</a>, overseeing all of the data sharing activities for the <a href=\"https://cmg.broadinstitute.org/\" class=\"Link\" target=\"_blank\">Broad’s Center for Mendelian Genomics</a>, and leading a team of variant curators.  As part of her ongoing research, she uses various curation processes to estimate the prevalence of rare disease in the global population.",
+                            "degree": "MS, CGC",
+                            "position": "Directora adjunta de intercambio de datos genéticos y genómicos",
+                            "bio": "Sam es asesora genética autorizada y certificada por las autoridades pertinentes, y se desempeña como directora adjunta de intercambio de datos genéticos y genómicos del Grupo de Genómica Traslacional del Broad Institute. Sus funciones consisten en gestionar las operaciones de <a href=\"https://gnomad.broadinstitute.org/\" class=\"Link\" target=\"_blank\">gnomAD</a>, supervisar todas las actividades de intercambio de datos del <a href=\"https://cmg.broadinstitute.org/\" class=\"Link\" target=\"_blank\">Centro de Genómica Mendeliana del Broad Institute</a> y dirigir un equipo de curadores de variantes. Dentro de sus investigaciones en curso utiliza diversos procesos de curación para calcular la prevalencia de las enfermedades raras en la población mundial.",
                             "image": "samantha-baxter.jpg"
                         },
                         {
                             "name": "Kayla Delano",
                             "degree": "",
-                            "position": "[es]Project Coordinator",
-                            "bio": "[es]Kayla is a Project Coordinator for the Center for Mendelian Genomics and Rare Genomes Project. This is her second role at the Broad Institute; prior to this she was working as a research associate in the Infectious Disease and Microbiome program.",
+                            "position": "Coordinadora de proyecto",
+                            "bio": "Kayla es coordinadora de proyecto del Centro de Genómica Mendeliana y del Proyecto Genomas Raros. Este es su segundo cargo en el Broad Institute. Antes trabajaba como adjunta de investigación en el programa Enfermedades Infecciosas y Microbioma.",
                             "image": "kayla-delano.png"
                         },
                         {
                             "name": "Stacey Hall",
-                            "degree": "[es]MPH",
-                            "position": "[es]Project Coordinator",
-                            "bio": "[es]Stacey is a project coordinator for the Center for Mendelian Genomics and the Rare Genomes Project. She has a masters in public health and prior to working at the Broad she worked in clinical trials research.",
+                            "degree": "MPH",
+                            "position": "Coordinadora de proyecto",
+                            "bio": "Stacey es coordinadora de proyecto del Centro de Genómica Mendeliana y del Proyecto Genomas Raros. Obtuvo una maestría en salud pública y antes de venir al Broad Institute trabajó en investigación, en el campo de los ensayos clínicos.",
                             "image": "stacey-hall.jpeg"
                         },
                         {
                             "name": "Stacy-Ann Mano",
-                            "degree": "[es]MS",
-                            "position": "[es]Senior Project Coordinator",
-                            "bio": "[es]Stacy is a senior project manager for the Center for Mendelian Genomics and the Rare Genomes Project. Prior to the Broad Institute, Stacy worked in project coordination and management at both research and clinical institutions.",
+                            "degree": "MS",
+                            "position": "Coordinadora sénior de proyecto",
+                            "bio": "Stacy es gestora sénior de proyecto del Centro de Genómica Mendeliana y del Proyecto Genomas Raros. Antes de venir al Broad Institute trabajó en la coordinación y gestión de proyectos en instituciones tanto clínicas como de investigación.",
                             "image": "stacy-ann-mano.jpeg"
                         },
                         {
                             "name": "Moriel Singer-Berk",
-                            "degree": "[es]MS",
-                            "position": "[es]Genomic Variant Curator",
-                            "bio": "[es]Moriel is a genomic variant curator working to assess the pathogenicity of variants for both clinical and research purposes. Prior to joining the Broad Institute, she received her Master's degree in Animal Biology with a focus in equine genetics at the University of California - Davis.",
+                            "degree": "MS",
+                            "position": "Curador de variantes genómicas",
+                            "bio": "Moriel es curador de variantes genómicas y su trabajo consiste en evaluar la patogenia de las variantes con fines clínicos y de investigación. Antes de trabajar en el Broad Institute obtuvo una maestría en biología animal con énfasis en genética equina en la University of California, Davis.",
                             "image": "moriel-singer-berk.png"
                         }
                     ]
@@ -362,43 +376,43 @@
                         {
                             "name": "Katherine Chao",
                             "degree": "",
-                            "position": "[es]Associate Computational Scientist",
-                            "bio": "[es]Katherine is an associate computational biologist working on developing computational methods to aid rare disease diagnosis. She also performs exome copy number variant (CNV) calling and conducts exome and genome analyses for the Broad Center for Mendelian Genomics. Before joining the Broad Institute, she worked in the Undiagnosed Diseases program at the National Institutes of Health.",
+                            "position": "Científica computacional adjunta",
+                            "bio": "Katherine es bióloga computacional adjunta. Diseña métodos computacionales para facilitar el diagnóstico de las enfermedades raras. Realiza también determinación de las variaciones en el número de copias (CNV) del exoma, y análisis del exoma y el genoma en el Centro de Genómica Mendeliana del Broad Institute. Antes de llegar al Broad Institute trabajó en el Programa de Enfermedades No Diagnosticadas de los Institutos Nacionales de la Salud.",
                             "image": "katherine-chao.jpg"
                         },
                         {
-                            "name": "Julia Goodrich",
-                            "degree": "[es]PhD",
-                            "position": "[es]Computational Scientist",
-                            "bio": "[es]Julia is a computational biologist developing methods for the analysis of large-scale genomic datasets including the Genome Aggregation Database (gnomAD) and UK Biobank. She was previously a postdoctoral fellow in the MacArthur lab researching incomplete penetrance in monogenic metabolic conditions.",
+                            "name": "Dra. Julia Goodrich",
+                            "degree": "PhD",
+                            "position": "Científica computacional",
+                            "bio": "Julia es bióloga computacional. Concibe métodos para el análisis de conjuntos de datos genómicos a gran escala, incluidos el Proyecto de Agregación de Datos del Genoma (Genome Aggregation Database, gnomAD) y el Biobanco del Reino Unido (UK Biobank). Fue becaria posdoctoral en el laboratorio MacArthur, donde investigó la penetrancia incompleta en enfermedades metabólicas monogénicas.",
                             "image": "julia-goodrich.jpg"
                         },
                         {
                             "name": "Kristen Larrichia",
-                            "degree": "[es]MS",
-                            "position": "[es]Senior Associate Computational Scientist",
-                            "bio": "[es]Kristen is an associate computational biologist who works on methods to identify variants in the mitochondrial genome with the goal of improving rare disease diagnosis.",
+                            "degree": "MS",
+                            "position": "Científica computacional adjunta sénior",
+                            "bio": "Kristen es bióloga computacional adjunta. Trabaja en métodos para identificar variantes del genoma mitocóndrico con el fin de mejorar el diagnóstico de las enfermedades raras.",
                             "image": "kristen-larrichia.jpg"
                         },
                         {
                             "name": "William Phu",
                             "degree": "",
-                            "position": "[es]Associate Computational Scientist",
-                            "bio": "[es]William is an associate computational biologist investigating unannotated genes and their role in rare diseases. He also contributes to the Genome Aggregation Database (gnomAD) project.",
+                            "position": "Científico computacional adjunto",
+                            "bio": "William es biólogo computacional adjunto. Investiga genes cuya posición en el genoma no se ha determinado y la función que desempeñan en las enfermedades raras. También contribuye al Proyecto de Agregación de Datos del Genoma (Genome Aggregation Database, gnomAD).",
                             "image": "william-phu.jpg"
                         },
                         {
                             "name": "Ben Weisburd",
                             "degree": "",
-                            "position": "[es]Computational Scientist",
-                            "bio": "[es]Ben is a computational scientist working on methods and tools for interpreting DNA sequencing data in the context of severe Mendelian diseases with a focus on short tandem repeats and RNA-seq.",
+                            "position": "Científico computacional",
+                            "bio": "Ben es científico computacional. Trabaja en métodos y recursos para interpretar los datos de secuenciación del ADN en el contexto de enfermedades mendelianas graves, con especial interés en las repeticiones de secuencia sencilla y en la secuenciación del ARN.",
                             "image": "ben-weisburd.jpg"
                         },
                         {
                             "name": "Michael Wilson",
                             "degree": "",
-                            "position": "[es]Associate Computational Scientist",
-                            "bio": "[es]Mike is an associate computational biologist working on the preliminary analyses of exomes and genomes to identify causal candidate genes and variants. He processes and quality checks the data that is generated for analysis.",
+                            "position": "Científico computacional adjunto",
+                            "bio": "Mike es biólogo computacional adjunto. Realiza los análisis preliminares de exomas y genomas para determinar los posibles genes y variantes causales. Procesa los datos que se generan para el análisis y les hace control de calidad.",
                             "image": "michael-wilson.jpg"
                         }
                     ]
