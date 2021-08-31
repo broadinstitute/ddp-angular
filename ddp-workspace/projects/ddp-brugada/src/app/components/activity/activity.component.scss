@@ -23,6 +23,8 @@
 
 .section--stepper {
   margin: 3.2rem 0;
+
+  padding: 0 1.6rem;
 }
 
 .stepper-list {
@@ -33,11 +35,15 @@
 
   &__divider {
     flex: 1;
-    height: 0.1rem;
+    height: 3px;
 
-    margin: 0 1.6rem;
+    background: map-get($colors, 'progress_bar-inactive-border');
 
-    background: map-get($colors, 'light-grey');
+    transition: background-color 0.3s ease;
+
+    &--complete {
+      background: map-get($colors, 'scarlet');
+    }
   }
 }
 
@@ -46,18 +52,18 @@
   justify-content: center;
   align-items: center;
 
-  width: 4.8rem;
-  height: 4.8rem;
+  width: 50px;
+  height: 50px;
 
-  background: map-get($colors, 'input-border');
-  border: 2px solid map-get($colors, 'beige:dark:2');
+  background: map-get($colors, 'progress_bar-inactive-bg');
+  border: 3px solid map-get($colors, 'progress_bar-inactive-border');
   border-radius: 100px;
 
   font: inherit;
   font-size: 1.8rem;
   line-height: 1;
   font-weight: bold;
-  color: map-get($colors, 'beige:dark:2');
+  color: map-get($colors, 'progress_bar-inactive-color');
 
   cursor: pointer;
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
