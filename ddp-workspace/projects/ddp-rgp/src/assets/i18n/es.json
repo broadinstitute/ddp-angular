@@ -1128,21 +1128,21 @@
         "Text": "[es]Please verify your email using the link that was sent to your email address."
     },
     "ThankYouPage": {
-        "Title": "[es]Thank you for your interest in joining the Rare Genomes Project",
-        "Paragraph1": "[es]Unfortunately, your responses to our pre-screening questionnaire do not match the <a href=\"eligibility-criteria\" class=\"Link\">current requirements for participation</a> in the study. The Rare Genomes Project can only accept applications from families who meet all of these conditions:",
+        "Title": "Gracias por su interés en participar en el Proyecto Genomas Raros",
+        "Paragraph1": "Desafortunadamente, sus respuestas al cuestionario de preselección no coinciden con los <a href=\"eligibility-criteria\" class=\"Link\">requisitos actuales para participar</a> en el estudio. El Proyecto Genomas Raros solo puede aceptar solicitudes de familias que cumplan todas estas condiciones:",
         "List": [
-            "[es]Understand English or Spanish",
-            "[es]Live in the United States",
-            "[es]Have a rare and undiagnosed genetic condition",
-            "[es]Are currently under the care of a doctor helping to figure out the cause of the patient's condition"
+            "Entender inglés o español",
+            "Vivir en los Estados Unidos",
+            "Tener una enfermedad genética rara que no se haya diagnosticado",
+            "Recibir actualmente los cuidados de un profesional médico que le esté ayudando a determinar la causa de la enfermedad"
         ],
-        "Paragraph2": "[es]Over time, we may be able to expand the project. We hope you will join our mailing list. If you do, we will contact you if participation requirements change, making you eligible to apply to the study.",
+        "Paragraph2": "Es posible que con el tiempo podamos ampliar el proyecto. Si se inscribe en nuestra lista de correo, podemos comunicarnos con usted si estos requisitos para participar cambian.",
         "Form": {
-            "Label": "[es]Email Address *",
+            "Label": "Dirección de correo electrónico *",
             "Error": "[es]Please enter a valid Email Address",
-            "Submit": "[es]Join Mailing List"
+            "Submit": "Inscribirse en la lista de correo"
         },
-        "Paragraph3": "[es]If you would like your information to be deleted from our database at any time, please email us at <a href=\"mailto:raregenomes@broadinstitute.org\" class=\"Link\">raregenomes@broadinstitute.org</a>."
+        "Paragraph3": "Si en algún momento desea que su información se borre de nuestra base de datos, escríbanos por correo electrónico a <a href=\"mailto:raregenomes@broadinstitute.org\" class=\"Link\">raregenomes@broadinstitute.org</a>."
     },
     "Toolkit": {
         "Dialogs": {
