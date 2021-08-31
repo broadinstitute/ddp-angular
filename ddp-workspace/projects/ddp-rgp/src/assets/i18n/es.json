@@ -44,64 +44,63 @@
         "FacebookAlt": "[es]Facebook"
     },
     "HomePage": {
-        "Title": "[es]If you or your family member has a rare and genetically undiagnosed condition, you may be eligible to join a patient-driven research study aimed at discovering the genes underlying your family’s rare disease.",
-        "Text": "[es]The Rare Genomes Project (RGP) at the Broad Institute of MIT and Harvard is a patient-driven research study led by genomics experts and clinicians who believe that the latest advances in genomic sequencing are changing medicine and should be accessible to families with rare and undiagnosed conditions.",
+        "Title": "Si usted o una persona de su familia tiene una enfermedad rara cuya causa genética no se ha diagnosticado, quizá cumpla los requisitos para participar en un estudio dirigido por los pacientes cuya finalidad es descubrir los genes implicados en la enfermedad rara de su familia.",
+        "Text": "El Proyecto Genomas Raros del Broad Institute de MIT y Harvard es un estudio dirigido por los pacientes y realizado por expertos en genómica y médicos que creen que los últimos avances en la secuenciación del genoma están cambiando el mundo de la medicina y deberían estar al alcance de las familias que tienen enfermedades raras y sin diagnosticar.",
         "IllustrationAlt": "[es]Rare people illustration",
         "DNAAlt": "[es]DNA Strand Illustration",
         "MainPoints": {
             "Discovery": {
-                "Title": "[es]Aid Discovery",
-                "Subtitle": "[es]More than half of the genes underlying rare diseases remain undiscovered.",
-                "Text": "[es]By participating in the Rare Genomes Project, you can help researchers identify the genes that cause rare disease. If you are eligible for the study, we will use genomic sequencing to look for the cause of the rare, undiagnosed disease in your family.",
-                "Alt": "[es]Aid Discovery"
+                "Title": "Impulsar descubrimientos",
+                "Subtitle": "Más de la mitad de los genes causantes de enfermedades raras no se han descubierto aún.",
+                "Text": "Al participar en el Proyecto Genomas Raros, usted puede ayudar a los investigadores a identificar los genes que causan una enfermedad rara. Si cumple los requisitos para participar en el estudio, usaremos la secuenciación del genoma para buscar la causa de la enfermedad rara y sin diagnosticar que afecta a su familia.",
+                "Alt": "Impulsar descubrimientos"
             },
             "Answers": {
-                "Title": "[es]Find Answers",
-                "Subtitle": "[es]Your family’s diagnosis belongs to you.",
-                "Text": "[es]If we find a genetic change that may be the cause of the rare disease in your family, we will confirm it in a clinical lab and work with your local doctor to return the result to you.",
-                "Alt": "[es]Find Answers"
+                "Title": "Busque respuestas",
+                "Subtitle": "El diagnóstico de su familia le pertenece a usted.",
+                "Text": "Si encontramos una alteración genética que pueda ser la causa de la enfermedad rara de su familia, la confirmaremos en un laboratorio clínico y colaboraremos con un médico de su localidad para entregarle los resultados.",
+                "Alt": "Busque respuestas"
             },
             "Involved": {
-                "Title": "[es]Get Involved",
-                "Subtitle": "[es]Join the research community.",
-                "Text": "[es]The Rare Genomes Project is supported by The Broad Institute of MIT and Harvard in partnership with patients and advocates like you. We believe that families should be at the center of research involving their diseases, and encourage the involvement of families and the advocacy groups that support them throughout the study.",
-                "Alt": "[es]Get Involved"
+                "Title": "Participe",
+                "Subtitle": "Intégrese a la comunidad de investigación.",
+                "Text": "El Proyecto Genomas Raros cuenta con el apoyo del Broad Institute de MIT y Harvard, y con la colaboración de pacientes y de defensores de la comunidad que sufre enfermedades raras. Creemos que las familias deben ser el centro de la investigación relacionada con sus enfermedades, y recomendamos la participación de ellas y de los grupos de defensa que las apoyan a lo largo del estudio.",
+                "Alt": "Participe"
             },
             "Data": {
-                "Title": "[es]Share Data",
-                "Subtitle": "[es]Data sharing is crucial for improving diagnosis rates of rare disease worldwide.",
-                "Text1": "[es]The genetic information generated in this project will be shared with other scientists to ensure it has the widest possible impact. Your genetic data can help families like yours and improve scientists’ understanding of rare disease. Learn more about our data sharing policies",
-                "Text2": "[es]here",
-                "Alt": "[es]Share Data"
+                "Title": "Comparta sus datos",
+                "Subtitle": "Compartir datos es esencial para mejorar las tasas de diagnóstico de las enfermedades raras en todo el mundo.",
+                "Text1": "La información genética que se genere en este proyecto se compartirá con otros científicos para garantizar que tenga el más amplio efecto posible. Sus datos genéticos pueden ayudar a otras familias y mejorar los conocimientos que los científicos tienen acerca de las enfermedades raras. Encontrará más información sobre nuestras políticas en cuanto a la comunicación de datos",
+                "Text2": "aquí",
+                "Alt": "Comparta sus datos"
             }
         },
         "Steps": {
-            "Title": "[es]How you can participate",
+            "Title": "Cómo puede participar usted",
             "One": {
-                "Title": "[es]Tell us your story",
-                "Text1": "[es]Click",
-                "Text2": "[es]apply",
-                "Text3": "[es]to see a broad overview of the study and learn how you can start an application where you can tell us about the history of rare disease in your family. The information will be reviewed by our study team, and eligible families will be invited to participate. We will contact you to arrange a detailed discussion about the study and send you a consent form.",
-                "Alt": "[es]Tell us your story"
+                "Title": "Cuéntenos su historia",
+                "Text1": "Haga clic en",
+                "Text2": "Solicitud",
+                "Text3": "para ver un resumen general del estudio y enterarse de cómo iniciar una solicitud de ingreso. El equipo investigador revisará la información e invitará a participar a las familias que cumplan los requisitos. Programaremos una cita para tener una conversación detallada sobre el estudio y enviarle un documento de consentimiento.",
+                "Alt": "Cuéntenos su historia"
             },
             "Two": {
-                "Title": "[es]Submit a sample",
-                "Text": "[es]Once enrolled, we will mail a pre-paid sample collection kit directly to you and your family. We will also ask you more about medical history and ask for copies of medical records, including any prior genetic test results.",
-                "Alt": "[es]Share your data"
+                "Title": "Envíe una muestra",
+                "Text": "Cuando se haya inscrito, les enviaremos por correo postal a usted y a su familia un estuche franqueado de recolección de muestras. También le haremos más preguntas sobre sus antecedentes médicos y le pediremos copias de su historia clínica y de los resultados de pruebas genéticas, si se ha hecho alguna.",
+                "Alt": "Envíe una muestra"
             },
             "Three": {
-                "Title": "[es]Discover",
-                "Text": "[es]Through DNA sequencing, we may discover the genetic cause of the rare disease in your family and will work with you and your doctor to return important results to you. We will also share de-identified data broadly with the scientific community to empower discoveries in rare disease research.",
-                "Alt": "[es]Discover"
+                "Title": "Ayúdenos a descubrir",
+                "Text": "Es posible que, mediante la secuenciación del ADN, podamos descubrir la causa genética de la enfermedad rara de su familia, y que colaboremos con el médico que le atiende para entregarle resultados importantes para usted. Además, compartiremos de manera amplia sus datos desidentificados con la comunidad científica para promover descubrimientos en la investigación de las enfermedades raras.",
+                "Alt": "Ayúdenos a descubrir"
             }
         },
         "Quote": {
-            "Text1": "[es]\"This research project really understands the importance of bringing patients in as partners and engaging patients in a novel way. It's critical to do that because",
-            "Text2": "[es]patients are often the ones that start driving the research",
-            "Author": "[es]-Matt Might, Caregiver and Director, Hugh Kaul Precision Medicine Institute"
+            "Text": "«En este proyecto de investigación se entiende realmente la importancia de vincular a los pacientes como colaboradores y en pedirles que participen de una manera novedosa. Es esencial hacerlo, porque <span class=\"Accent\">a menudo los pacientes son quienes comienzan a dirigir el rumbo de la investigación</span>»",
+            "Author": "Matt Might, cuidador y director del Hugh Kaul Precision Medicine Institute"
         },
         "Partners": {
-            "Title": "[es]Our advocacy partners",
+            "Title": "Organizaciones de defensa del paciente que colaboran con nosotros",
             "NOFRDD": "[es]National Organization for Rare Disorders",
             "SWAN": "[es]Syndromes without a Name",
             "Rare": "[es]Rare science accelerating cures for rare kids",
@@ -118,8 +117,8 @@
             "TGPP": "[es]The Giving Picture Project"
         },
         "LastSection": {
-            "Title": "[es]You can be the driving force behind rare disease research.",
-            "Text": "[es]Many thanks to the National Institutes of Health (NIH), the Muscular Dystrophy Association (MDA), Illumina, Inc., Broad Institute, the Silicon Valley Community Foundation, and Shriners Hospitals for Children for their financial support of our project."
+            "Title": "Usted puede ser la fuerza que impulse la investigación de las enfermedades raras.",
+            "Text": "Agradecemos mucho a los Institutos Nacionales de la Salud (NIH); la Muscular Dystrophy Association (MDA); Illumina, Inc.; el Broad Institute; la Silicon Valley Community Foundation; y los Shriners Hospitals for Children por el apoyo económico que le dan a este proyecto."
         }
     },
     "AboutUsPage": {

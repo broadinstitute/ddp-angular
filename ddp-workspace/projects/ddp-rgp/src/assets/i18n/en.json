@@ -96,8 +96,7 @@
             }
         },
         "Quote": {
-            "Text1": "\"This research project really understands the importance of bringing patients in as partners and engaging patients in a novel way. It's critical to do that because",
-            "Text2": "patients are often the ones that start driving the research",
+            "Text": "\"This research project really understands the importance of bringing patients in as partners and engaging patients in a novel way. It's critical to do that because <span class=\"Accent\">patients are often the ones that start driving the research</span>.\"",
             "Author": "-Matt Might, Caregiver and Director, Hugh Kaul Precision Medicine Institute"
         },
         "Partners": {
