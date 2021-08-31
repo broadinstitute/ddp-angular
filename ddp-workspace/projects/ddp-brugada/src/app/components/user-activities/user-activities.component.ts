@@ -10,13 +10,13 @@ import { ActivityCode } from '../../constants/activity-code';
   styleUrls: ['./user-activities.component.scss'],
 })
 export class UserActivitiesComponent {
-  @Input() activities: ActivityInstance[] = [];
   @Input() isUIDisabled = false;
   @Output() startActivity = new EventEmitter<ActivityInstance>();
   @Output() continueActivity = new EventEmitter<ActivityInstance>();
   @Output() viewActivity = new EventEmitter<ActivityInstance>();
   @Output() updateActivity = new EventEmitter<ActivityInstance>();
 
+  dataSource: ActivityInstance[] = [];
   displayedColumns = ['name', 'summary', 'status', 'actions'];
   icons = {
     [ActivityStatusCodes.CREATED]: 'info',
@@ -24,6 +24,16 @@ export class UserActivitiesComponent {
     [ActivityStatusCodes.COMPLETE]: 'task_alt',
   };
   ActivityStatusCodes = ActivityStatusCodes;
+
+  @Input() set activities(activities: ActivityInstance[]) {
+    this.dataSource = activities.map(activity => {
+      if (this.hasPreviousInstance(activity) && activity.statusCode === ActivityStatusCodes.CREATED) {
+        activity.statusCode = ActivityStatusCodes.IN_PROGRESS;
+      }
+
+      return activity;
+    });
+  }
 
   onStartActivity(activity: ActivityInstance): void {
     this.startActivity.emit(activity);
