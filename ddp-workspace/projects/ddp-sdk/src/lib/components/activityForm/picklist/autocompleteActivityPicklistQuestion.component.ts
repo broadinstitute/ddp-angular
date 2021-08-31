@@ -1,15 +1,5 @@
-import {
-    Component,
-    HostListener,
-    Inject,
-    OnChanges,
-    OnDestroy,
-    OnInit,
-    SimpleChanges,
-    ViewChild
-} from '@angular/core';
+import { Component, Inject, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith, takeUntil } from 'rxjs/operators';
 
@@ -54,8 +44,6 @@ import { ConfigurationService } from '../../../services/configuration.service';
     `]
 })
 export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQuestion implements OnInit, OnDestroy, OnChanges {
-    @ViewChild(MatAutocompleteTrigger, {read: MatAutocompleteTrigger}) autoComplete: MatAutocompleteTrigger;
-
     filteredGroups: ActivityPicklistNormalizedGroup[] = [];
     // options w/o a group
     filteredOptions: ActivityPicklistOption[] = [];
