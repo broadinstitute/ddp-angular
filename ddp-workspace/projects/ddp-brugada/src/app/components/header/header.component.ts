@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.handleParamsForMailingList()
+    this.handleParamsForMailingList();
   }
 
   get isNavigationShown(): boolean {
