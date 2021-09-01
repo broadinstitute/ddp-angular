@@ -9,6 +9,9 @@ import { ActivityPicklistOption } from '../../../models/activity/activityPicklis
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { PicklistSortingPolicy } from '../../../services/picklistSortingPolicy.service';
 import { ConfigurationService } from '../../../services/configuration.service';
+import { StringsHelper } from '../../../utility/stringsHelper';
+
+const SEARCH_IGNORED_SYMBOLS = ['-', '/', '(', ')'];
 
 @Component({
     selector: 'ddp-activity-autocomplete-picklist-question',
@@ -142,30 +145,34 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
         this.valueChanged.emit([...this.block.answer]);
     }
 
-    private filterGroups(name: string, groups: ActivityPicklistNormalizedGroup[]): ActivityPicklistNormalizedGroup[] {
-        const filterValue = name.toLowerCase();
+    private filterGroups(query: string, groups: ActivityPicklistNormalizedGroup[]): ActivityPicklistNormalizedGroup[] {
         return groups
             .map(group => ({
                 name: group.name,
-                options: group.name.toLowerCase().includes(filterValue)
+                options: this.isMatched(group.name, query)
                     ? group.options
-                    : this.filterOptions(filterValue, group.options)}));
+                    : this.filterOptions(query, group.options)}));
     }
 
-    private filterOptions(name: string, options: ActivityPicklistOption[]): ActivityPicklistOption[] {
-        const filterValue = name.toLowerCase();
-        return options.filter(option => option.optionLabel.toLowerCase().includes(filterValue));
+    private filterOptions(query: string, options: ActivityPicklistOption[]): ActivityPicklistOption[] {
+        return options.filter(option => this.isMatched(option.optionLabel, query));
     }
 
     private get shouldBeSorted(): boolean {
         return !this.config.picklistsWithNoSorting.includes(this.block.stableId);
     }
 
-    filterOutEmptyGroups(groups: ActivityPicklistNormalizedGroup[]): ActivityPicklistNormalizedGroup[] {
+    private filterOutEmptyGroups(groups: ActivityPicklistNormalizedGroup[]): ActivityPicklistNormalizedGroup[] {
         return groups.filter(group => group.options.length > 0);
     }
 
     displayAutoComplete(option: ActivityPicklistOption | string): string {
         return typeof option === 'string' ? option : (option?.optionLabel || '');
+    }
+
+    private isMatched(text: string, query: string): boolean {
+        const normalizedText = StringsHelper.normalizeString(text, SEARCH_IGNORED_SYMBOLS);
+        const normalizedQuery = StringsHelper.normalizeString(query, SEARCH_IGNORED_SYMBOLS);
+        return StringsHelper.isIncluded(normalizedText, normalizedQuery);
     }
 }
