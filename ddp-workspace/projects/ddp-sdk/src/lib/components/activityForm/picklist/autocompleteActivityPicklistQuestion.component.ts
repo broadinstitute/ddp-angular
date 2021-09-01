@@ -44,12 +44,11 @@ import { ConfigurationService } from '../../../services/configuration.service';
     `]
 })
 export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQuestion implements OnInit, OnDestroy, OnChanges {
-    private readonly ngUnsubscribe = new Subject();
-
     filteredGroups: ActivityPicklistNormalizedGroup[] = [];
     // options w/o a group
     filteredOptions: ActivityPicklistOption[] = [];
     inputFormControl = new FormControl();
+    private readonly ngUnsubscribe = new Subject();
 
     constructor(
         translate: NGXTranslateService,
