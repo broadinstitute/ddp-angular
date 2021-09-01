@@ -72,5 +72,6 @@ export class ConfigurationService {
     prismColumns: string[] = [];
     prismDashboardRoute: string;
     prismRoute: string;
-    picklistsWithNoSorting: string[] = [];
+    // autocompletePicklists which don't need to be sorted
+    notSortedPicklistAutocompleteStableIds: string[] = [];
 }

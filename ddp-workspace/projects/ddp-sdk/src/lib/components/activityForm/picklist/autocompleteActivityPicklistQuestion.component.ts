@@ -159,7 +159,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     }
 
     private get shouldBeSorted(): boolean {
-        return !this.config.picklistsWithNoSorting.includes(this.block.stableId);
+        return !this.config.notSortedPicklistAutocompleteStableIds.includes(this.block.stableId);
     }
 
     private filterOutEmptyGroups(groups: ActivityPicklistNormalizedGroup[]): ActivityPicklistNormalizedGroup[] {
