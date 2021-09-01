@@ -62,14 +62,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     }
 
     public ngOnInit(): void {
-        const answer = this.block.answer && this.block.answer[0];
-        if (answer) {
-            const value = answer.detail || [
-                ...this.block.picklistGroups.flatMap(group => group.options),
-                ...this.block.picklistOptions
-            ].find(option => option.stableId === answer.stableId);
-            this.inputFormControl.setValue(value);
-        }
+        this.initInputValue();
 
         const userQueryStream$ = this.inputFormControl.valueChanges.pipe(
             map(value => typeof value === 'string' ? value.trim() : value),
@@ -88,12 +81,13 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
             sortedPicklistOptions = this.block.picklistOptions;
         }
 
-        userQueryStream$.pipe(startWith('')).subscribe((value: string | ActivityPicklistOption) => {
-            const query = typeof value === 'string' ? value : value.optionLabel;
-            this.filteredGroups = this.filterOutEmptyGroups(query ? this.filterGroups(query, sortedPicklistGroups)
-                : sortedPicklistGroups.slice());
-            this.filteredOptions = query ? this.filterOptions(query, sortedPicklistOptions) : sortedPicklistOptions.slice();
-        });
+        userQueryStream$.pipe(startWith(''))
+            .subscribe((value: string | ActivityPicklistOption) => {
+                const query = typeof value === 'string' ? value : value.optionLabel;
+                this.filteredGroups = this.filterOutEmptyGroups(query ? this.filterGroups(query, sortedPicklistGroups)
+                    : sortedPicklistGroups.slice());
+                this.filteredOptions = query ? this.filterOptions(query, sortedPicklistOptions) : sortedPicklistOptions.slice();
+            });
 
         userQueryStream$.subscribe((value: string | ActivityPicklistOption) => {
             if (typeof value === 'string') {
@@ -122,6 +116,17 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
         super.ngOnDestroy();
         this.ngUnsubscribe.next();
         this.ngUnsubscribe.complete();
+    }
+
+    private initInputValue(): void {
+        const answer = this.block.answer && this.block.answer[0];
+        if (answer) {
+            const value = answer.detail || [
+                ...this.block.picklistGroups.flatMap(group => group.options),
+                ...this.block.picklistOptions
+            ].find(option => option.stableId === answer.stableId);
+            this.inputFormControl.setValue(value);
+        }
     }
 
     private handleStringValue(value: string): void {
