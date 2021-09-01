@@ -116,7 +116,7 @@ interface AddressSuggestion {
                 </mat-card-content>
             </mat-card>
         </form>
-         <mat-checkbox *ngIf="isEasyPostInvalid$ | async" [formControl]="ignoreEasyPostErrorsCheckbox">
+         <mat-checkbox *ngIf="isEasyPostInvalid$ | async" [formControl]="ignoreEasyPostErrorsCheckbox" class="ignore-easy-post-errors">
              Please use the address as entered
          </mat-checkbox>`,
     styles: [
@@ -534,7 +534,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
                     return this.ngxTranslate.getTranslation('SDK.MailAddress.Error.UnknownVerifyError');
                 }
             }),
-            tap((errorMessage) => this.stateUpdates$.next({formErrorMessages: [errorMessage]}))
+            tap((errorMessage) => this.stateUpdates$.next({formErrorMessages: [{ message: errorMessage, isEasyPostError: false }]}))
         );
 
         const canSaveRealAddress = (address: Address | null) =>
