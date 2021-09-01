@@ -21,7 +21,6 @@ import { of, Subject, throwError } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { AddressVerificationStatus } from '../../models/addressVerificationStatus';
 import { cold, getTestScheduler, hot } from 'jasmine-marbles';
-import { AddressError } from '../../models/addressError';
 import { AddressVerificationResponse } from '../../models/addressVerificationResponse';
 import { TranslateTestingModule } from '../../testsupport/translateTestingModule';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -183,6 +182,8 @@ describe('AddressEmbeddedComponent', () => {
         expect(errorComponent).toBeNull();
         // check that we are not feeding address back to input component
         expect(childComponent.address).toBeFalsy();
+        const checkbox = fixture.debugElement.query(By.css('.ignore-easy-post-errors'));
+        expect(checkbox).toBeFalsy();
     });
 
     it('ensure enforce required fields generates error', fakeAsync(() => {
@@ -316,7 +317,7 @@ describe('AddressEmbeddedComponent', () => {
         const addressToEnter = buildPerfectAddress();
         addressToEnter.street2 = 'NO PLACE THAT IS GOOD';
         // field 'address' is the global error.
-        const overallAddressErrors: AddressError[] = [{ code: '123', field: 'address', message: 'Bad address' }];
+        const overallAddressErrors: FieldError[] = [{ code: '123', field: 'address', message: 'Bad address', isEasyPostError: true }];
         const verificationStatus: AddressVerificationStatus = {
             address: new Address(),
             isDeliverable: false,
@@ -334,6 +335,14 @@ describe('AddressEmbeddedComponent', () => {
         expect(childComponent.addressErrors).toEqual([]);
         // we save temp address even if it has errors
         expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledWith(addressToEnter, '123');
+        const checkbox = fixture.debugElement.query(By.css('.ignore-easy-post-errors'));
+        expect(checkbox).toBeTruthy();
+
+        component.ignoreEasyPostErrorsCheckbox.setValue(true);
+        fixture.detectChanges();
+
+        const validationMessageAfterIgnoring = findValidationMessageDebug(fixture);
+        expect(validationMessageAfterIgnoring).toBeNull();
     });
 
     it('test field level error from EasyPost', () => {
@@ -361,6 +370,19 @@ describe('AddressEmbeddedComponent', () => {
         expect(childComponent.addressErrors).toEqual(overallAddressErrors);
         // we save temp address even if it has errors
         expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledWith(addressToEnter, '123');
+        const checkbox = fixture.debugElement.query(By.css('.ignore-easy-post-errors'));
+        expect(checkbox).toBeTruthy();
+    });
+
+    it('do not show ignore-easy-post-errors checkbox if there are no easy post errors', () => {
+        component.activityGuid = '123';
+        const tempAddress = new Address({name: 'test'});
+        addressServiceSpy.getTempAddress.and.returnValue(of(tempAddress));
+        fixture.detectChanges();
+        const validationMessageAfter = findValidationMessageDebug(fixture);
+        expect(validationMessageAfter).not.toBeNull();
+        const checkbox = fixture.debugElement.query(By.css('.ignore-easy-post-errors'));
+        expect(checkbox).toBeFalsy();
     });
 
     it('test show verify warnings', fakeAsync(() => {
