@@ -11,8 +11,6 @@ import { PicklistSortingPolicy } from '../../../services/picklistSortingPolicy.s
 import { ConfigurationService } from '../../../services/configuration.service';
 import { StringsHelper } from '../../../utility/stringsHelper';
 
-const SEARCH_IGNORED_SYMBOLS = ['-', '/', '(', ')'];
-
 @Component({
     selector: 'ddp-activity-autocomplete-picklist-question',
     template: `
@@ -51,6 +49,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     // options w/o a group
     filteredOptions: ActivityPicklistOption[] = [];
     inputFormControl = new FormControl();
+    private readonly ignoredSymbolsInQuery;
     private readonly ngUnsubscribe = new Subject();
 
     constructor(
@@ -59,6 +58,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
         @Inject('ddp.config') public config: ConfigurationService
     ) {
         super(translate);
+        this.ignoredSymbolsInQuery = this.config.picklistAutocompleteIgnoredSymbols;
     }
 
     public ngOnInit(): void {
@@ -171,8 +171,8 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     }
 
     private isMatched(text: string, query: string): boolean {
-        const normalizedText = StringsHelper.normalizeString(text, SEARCH_IGNORED_SYMBOLS);
-        const normalizedQuery = StringsHelper.normalizeString(query, SEARCH_IGNORED_SYMBOLS);
+        const normalizedText = StringsHelper.normalizeString(text, this.ignoredSymbolsInQuery);
+        const normalizedQuery = StringsHelper.normalizeString(query, this.ignoredSymbolsInQuery);
         return StringsHelper.isIncluded(normalizedText, normalizedQuery);
     }
 }
