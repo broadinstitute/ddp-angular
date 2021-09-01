@@ -1065,11 +1065,15 @@
     "DashboardPage": {
         "Title": "[es]My Dashboard",
         "Info": {
-          "Paragraph1": "[es]Thank you for your interest in the Rare Genomes Project. This page will provide you information about the steps regarding your involvement with the study.",
-          "Paragraph2": "[es]If you have questions, browse our Frequently Asked Questions page or contact the study staff at <a href=\"tel:617-714-7395\">617-714-7395</a> or <a href=\"mailto:raregenomes@broadinstitute.org\">raregenomes@broadinstitute.org</a>."
+            "Paragraph1": "Gracias por su interés en el Proyecto Genomas Raros. En esta página encontrará información sobre los pasos que se requieren para vincularse al estudio.",
+            "Paragraph2": {
+                "Intro": "Si tiene preguntas, consulte la página de",
+                "Link": "Preguntas frecuentes",
+                "Closing": "o comuníquese con el personal del estudio llamando al <a href=\"tel:617-714-7395\">617-714-7395</a> o escribiendo a <a href=\"mailto:raregenomes@broadinstitute.org\">raregenomes@broadinstitute.org</a>."
+            }
         },
         "StudyMessages": {
-          "Title": "[es]Study Messages",
+          "Title": "Mensajes del estudio",
           "Header": {
             "Date": "[es]Date",
             "Title": "[es]Title",
@@ -1081,7 +1085,7 @@
           }
         },
         "UserActivities": {
-          "Title": "[es]Study Forms",
+          "Title": "Documentos del estudio",
           "Header": {
             "Form": "[es]Form",
             "Summary": "[es]Summary",
@@ -1143,6 +1147,141 @@
             "Submit": "Inscribirse en la lista de correo"
         },
         "Paragraph3": "Si en algún momento desea que su información se borre de nuestra base de datos, escríbanos por correo electrónico a <a href=\"mailto:raregenomes@broadinstitute.org\" class=\"Link\">raregenomes@broadinstitute.org</a>."
+    },
+    "StudyMessages": {
+        "Application": {
+            "InReview": {
+                "Subject": "Application",
+                "Message": "Your application is being reviewed. We will contact you as soon as a decision about your application has been made. If you do not hear from our office within 6 weeks, please contact us.",
+                "More": "<p>Please be aware that we may contact you by phone or email. The emails we send you that contain personal identifiers or health information will be sent using an encryption tool called Send Secure unless you have specifically chosen otherwise. These emails can be identified by the words \"Send Secure\" in the subject field, will come from an email address ending in @partners.org, and will ask you to click on an attachment to create an account. If you are unsure if the email you received is from us, please contact us.</p>"
+            },
+            "ThankYou": {
+                "Subject": "Application",
+                "Message": "At any time during your involvement with the study, contact us with any questions or concerns.",
+                "More": "<p>Please be aware that we may contact you by phone or email. The emails we send you that contain personal identifiers or health information will be sent using an encryption tool called Send Secure unless you have specifically chosen otherwise. These emails can be identified by the words \"Send Secure\" in the subject field, will come from an email address ending in @partners.org, and will ask you to click on an attachment to create an account. If you are unsure if the email you received is from us, please contact us.</p>"
+            }
+        },
+        "ApplicationDecision": {
+            "Accepted": {
+                "Subject": "Decisión sobre la solicitud",
+                "Message": "Su solicitud de ingreso ha sido revisada y usted cumple los requisitos para participar.",
+                "More": "<p>El siguiente paso es programar una cita para una sesión de consentimiento. Véase arriba.</p>"
+            },
+            "NotAccepted": {
+                "Subject": "Decisión sobre la solicitud",
+                "Message": "Su solicitud de ingreso ha sido revisada y usted no cumple los requisitos para participar.",
+                "More": "<p>El Proyecto Genomas Raros es un estudio clínico cuyo objetivo es determinar las causas genéticas de enfermedades raras que afectan a algunas familias y que no se han diagnosticado. En este estudio se usan métodos genómicos para hallar alteraciones en un gen único que puedan causar una enfermedad. Hay varias situaciones en las que esta estrategia probablemente no sea exitosa. Por esta razón no podemos inscribir a todas las familias que han solicitado el ingreso. No podemos incluir a familias que:</p><ul><li>Tengan integrantes con enfermedades muy diferentes</li><li>Sufran una enfermedad que probablemente no se deba a una alteración en un gen individual</li><li>Sufran una enfermedad en la que la secuenciación del genoma no sea la mejor prueba diagnóstica</li><li>Ya hayan recibido un diagnóstico genético</li></ul><p>La siguiente lista de recursos podría proporcionar información o apoyo a su familia:</p><ul><li><a href=\"https://rarediseases.org/\" target=\"_blank\">National Organization for Rare Disorders (NORD)</a>: Organización de defensa que se dedica a mejorar la vida de pacientes y familias que sufren enfermedades raras. Proporciona información sobre enfermedades, pruebas genéticas, programas de ayuda económica, estudios clínicos y mucho más.</li><li><a href=\"https://globalgenes.org/\" target=\"_blank\">Global Genes</a>: Organización de defensa de los pacientes con enfermedades raras. Fomenta la atención de las necesidades variadas de la comunidad de personas afectadas por estas enfermedades. Su misión es crear conciencia, informar a la comunidad mundial y proporcionar conexiones y recursos esenciales que habiliten a los defensores a convertirse en activistas en relación con su enfermedad.</li><li><a href=\"https://www.clinicalgenome.org/genomeconnect/for-patients-genomeconnect/\" target=\"_blank\">GenomeConnect</a>: Es un registro en línea de pacientes en que se pueden compartir de forma segura los datos genéticos y médicos con investigadores, establecer vínculos con otras personas que tienen resultados o diagnósticos similares, enterarse de otras oportunidades de investigación y recibir noticias actualizadas sobre los resultados de las pruebas genéticas.</li><li><a href=\"https://mygene2.org/MyGene2/\" target=\"_blank\">MyGene2</a>: Registro en el que las familias pueden crear su propia inscripción y establecer conexiones con otras familias o con médicos e investigadores que se interesen en resultados genéticos similares.</li><li><a href=\"https://medlineplus.gov/genetics/\" target=\"_blank\">Medline Plus, Genética</a>: Fuente de información financiada por el gobierno federal acerca de la genética y del papel que los genes desempeñan en las enfermedades humanas.</li><li><a href=\"https://clinicaltrials.gov/\" target=\"_blank\">Clinicaltrials.gov</a>: Base de datos de estudios clínicos con financiación privada y pública en todo el mundo. Los visitantes pueden hacer búsquedas por el nombre de la enfermedad, los síntomas o los genes de interés.</li></ul>"
+            },
+            "MoreInfoNeeded": {
+                "Subject": "Decisión sobre la solicitud",
+                "Message": "Su solicitud de ingreso ha sido revisada y necesitamos más información para tomar una decisión sobre su idoneidad para participar.",
+                "More": "<p>Nos gustaría revisar la historia clínica de la persona de la familia que tiene la enfermedad rara. Para que revisemos la historia clínica, esa persona debe estar inscrita en el estudio.</p><p>Con el fin de continuar, la persona de la familia que tiene la enfermedad rara debe programar una sesión de consentimiento (véase arriba). Solo la persona afectada por la enfermedad rara (de 7 años o más) tiene que asistir, acompañada de su tutor legal, si corresponde. Después de revisar la historia clínica, nuestro equipo determinará si su familia puede seguir adelante con el estudio.</p>"
+            },
+            "NMI": {
+                "Subject": "Decisión sobre la solicitud",
+                "Message": "Su historia clínica sido revisada y usted cumple los requisitos para participar.",
+                "More": "<p>Estos son los pasos siguientes para usted y su familia:</p><ul><li>Obtención de muestras: Le enviaremos un estuche de recolección de muestras (véase arriba).</li><li>Inscribir a integrantes de su familia: Comuníquese con nosotros para que hablemos de qué integrantes de su familia nos gustaría invitar a participar. Siempre que sea posible, tratamos de inscribir a ambos padres biológicos, a otros familiares afectados y hasta a dos hermanos(as) sanos(as). Al igual que la persona que ya se inscribió, estos familiares adicionales deberán tener una sesión de consentimiento con uno de los integrantes del equipo investigador para recibir más información sobre el estudio antes de tomar una decisión acerca de la participación.</li></ul>"
+            }
+        },
+        "ConsentSession": {
+            "ScheduleNeeded": {
+                "Subject": "Sesión de consentimiento",
+                "Message": "<a href=\"https://rgpscheduling.as.me/schedule.php\" target=\"_blank\">Pida una cita para una sesión de consentimiento</a>."
+            },
+            "Scheduled": {
+                "Subject": "Sesión de consentimiento",
+                "Message": "Su sesión de consentimiento se ha programado.",
+                "More": "<p>Si necesita reprogramar su cita, use el enlace del mensaje de confirmación que recibió por correo electrónico. Si necesita ayuda, llame a nuestra oficina, al <a href=\"tel:6177147395\">(617) 714-7395</a>.</p><p>Si otros integrantes de su familia tienen que programar una sesión de consentimiento, pueden pedir la cita <a href=\"https://rgpscheduling.as.me/schedule.php\" target=\"_blank\">aquí</a>.</p>"
+            }
+        },
+        "ConsentForm": {
+            "SignedFormRequired": {
+                "Subject": "Documento de consentimiento",
+                "Message": "Gracias por asistir a la sesión de consentimiento. Se requiere un documento firmado de consentimiento para seguir adelante con el estudio.",
+                "More": "<p>Recibirá un mensaje de correo electrónico proveniente de AdobeSign con una copia electrónica del documento de consentimiento (y de asentimiento, si corresponde). Si desea participar, ponga su firma electrónica en el documento (o los documentos), que volverá(n) automáticamente a nosotros. Si tiene preguntas o decide no participar, comuníquese con nosotros.</p><p>Si otros integrantes de su familia tienen que programar una sesión de consentimiento, pueden pedir la cita <a href=\"https://rgpscheduling.as.me/schedule.php\" target=\"_blank\">aquí</a>.</p>"
+            },
+            "SignedFormReceived": {
+                "Subject": "Documento de consentimiento",
+                "Message": "Hemos recibido el documento de consentimiento firmado.",
+                "More": "<p>Vea los puntos anteriores para saber cuáles son los pasos siguientes.</p><p>Si otros integrantes de su familia tienen que programar una sesión de consentimiento, pueden pedir la cita <a href=\"https://rgpscheduling.as.me/schedule.php\" target=\"_blank\">aquí</a>.</p>"
+            },
+            "Decline": {
+                "Subject": "Documento de consentimiento",
+                "Message": "Usted ha decidido no participar en este estudio.",
+                "More": "<p>Si cambia de parecer más adelante, llámenos.</p>"
+            }
+        },
+        "MedicalRecords": {
+            "NoRecords": {
+                "Subject": "Historia clínica",
+                "Message": "Necesitamos copias de su historia clínica.",
+                "More": "<p>Por lo general, los documentos más importantes que tenemos que recibir son:</p><ul><li>apuntes clínicos del especialista (por ejemplo, cardiólogo, nefrólogo), especialmente sobre genética</li><li>informes de pruebas genéticas, si los hay</li><li>informes de anatomía patológica, si los hay</li><li>informes de resonancia magnética o tomografía computarizada, si los hay</li></ul><p>Busque más información en la «<a href=\"/sharing-guide.pdf\" target=\"_blank\">Guía para compartir datos médicos de su familia</a>».</p><p>Puede enviarnos estos documentos a:</p><ul><li>Fax: (617) 800-1909</li><li>Dirección postal: Rare Genomes Project, Broad Institute , Attn: Dra. Heidi Rehm, 415 Main Street, Cambridge MA 02142</li><li>Dirección de correo electrónico: Avísenos si desea enviar documentos por correo electrónico. En ese caso, podemos establecer una conexión segura para brindar protección adicional de sus datos médicos.</li></ul><p>Si el envío de su historia clínica le cuesta dinero, envíenos una copia del recibo para que podamos reembolsarle.</p>"
+            },
+            "Partial": {
+                "Subject": "Historia clínica",
+                "Message": "Hemos recibido algunos de los documentos de la historia clínica que necesitábamos.",
+                "More": "<p>Estamos esperando documentos adicionales. Por lo general, los documentos más importantes que tenemos que recibir son:</p><ul><li>apuntes clínicos del especialista (por ejemplo, cardiólogo, nefrólogo), especialmente sobre genética</li><li>informes de pruebas genéticas, si los hay</li><li>informes de anatomía patológica, si los hay</li><li>informes de resonancia magnética o tomografía computarizada, si los hay</li></ul><p>Busque más información en la «<a href=\"/sharing-guide.pdf\" target=\"_blank\">Guía para compartir datos médicos de su familia</a>».</p><p>Puede enviarnos estos documentos a:</p><ul><li>Fax: (617) 800-1909</li><li>Dirección postal: Rare Genomes Project, Broad Institute , Attn: Dra. Heidi Rehm, 415 Main Street, Cambridge MA 02142</li><li>Dirección de correo electrónico: Avísenos si desea enviar documentos por correo electrónico. En ese caso, podemos establecer una conexión segura para brindar protección adicional de sus datos médicos.</li></ul><p>Si el envío de su historia clínica le cuesta dinero, envíenos una copia del recibo para que podamos reembolsarle.</p>"
+            },
+            "Received": {
+                "Subject": "Historia clínica",
+                "Message": "Hemos recibido su historia clínica. ¡Gracias!"
+            },
+            "NA": {
+                "Subject": "Historia clínica",
+                "Message": "No necesitamos su historia clínica en este momento."
+            }
+        },
+        "Survey": {
+            "Enrolled": {
+                "Subject": "Cuestionario",
+                "Message": "Siete días después de la fecha en que firmó el consentimiento le enviaremos un mensaje de correo electrónico con un enlace a un cuestionario opcional.",
+                "More": "<p>Contiene preguntas sobre sus experiencias con la enfermedad rara que usted o su hijo(a) tiene. Con estas preguntas investigamos las repercusiones de tener una enfermedad rara y las razones por participar en la investigación genómica.</p><p>Si no recibe un mensaje por correo electrónico con un enlace al cuestionario, comuníquese con nuestra oficina por teléfono o correo electrónico.</p>"
+            },
+            "Complete": {
+                "Subject": "Cuestionario",
+                "Message": "Hemos recibido sus respuestas al cuestionario. ¡Gracias!"
+            }
+        },
+        "Sample": {
+            "Enrolled": {
+                "Subject": "Muestra",
+                "Message": "Le enviaremos un estuche de recolección de muestras en un plazo aproximado de 2 semanas.",
+                "More": "<p>Le informaremos cuando lo hayamos enviado.</p>"
+            },
+            "Sent": {
+                "Subject": "Muestra",
+                "Message": "Le hemos enviado un estuche de recolección de muestras.",
+                "More": "<p>Puede extraerse la sangre en el lugar que prefiera. Independientemente de dónde le extraigan la sangre, <span class=\"AccentUnderline\">confirme con la persona que la extraiga que tanto el tubo como los documentos que lo acompañen estén rotulados con su nombre civil y con su fecha de nacimiento</span>:</p><p>Si va a Quest Diagnostics, le recomendamos que <a href=\"http://www.questdiagnostics.com/appointment\" target=\"_blank\">pida una cita por Internet</a> para garantizar que le atiendan sin demora. Allí se exige que la sangre se extraiga de lunes a viernes antes de las 2 p. m. para que puedan enviarnos la muestra el mismo día. La documentación que se exige en Quest se encuentra dentro del estuche de recolección de muestras. Quest se encargará de enviarnos la muestra de sangre y nos facturará directamente por el servicio.</p><p>Si va al consultorio de su médico o al laboratorio de un hospital, le recomendamos que llame de antemano para asegurarse de que estén dispuestos a extraer la muestra. Use los materiales de envío por FedEx que hay el estuche de recolección para enviarnos la muestra. Si le cobran la extracción de sangre, envíenos una copia de la factura para que podamos reembolsarle el dinero. Llame a nuestra oficina si podemos ayudarle en algo.</p>"
+            },
+            "Received": {
+                "Subject": "Muestra",
+                "Message": "Hemos recibido su muestra. ¡Gracias!"
+            }
+        },
+        "Withdraw": {
+            "Withdraw": {
+                "Subject": "Retiro",
+                "Message": "Usted ha decidido retirarse del estudio.",
+                "More": "<p>Su muestra, su historia clínica y sus datos serán destruidos. No podemos destruir las muestras y los datos que ya se hayan entregado a otros investigadores.</p>"
+            }
+        },
+        "DataAnalysis": {
+            "FamilyStepsComplete": {
+                "Subject": "[es]Sequencing and Analysis",
+                "Message": "[es]Your study activities are now complete.",
+                "More": "<p>[es]Your participation will help us in our search for a genetic explanation for the undiagnosed condition in your family member. Thank you for taking part in this study!</p>"
+            },
+            "ProbandStepsComplete": {
+                "Subject": "[es]Sequencing and Analysis",
+                "Message": "[es]We have received your sample and are processing it for sequencing.",
+                "More": "<p>[es]It typically takes 4-6 months before we have data to analyze. Then, our team of analysts will begin look for connections between genetic changes present and your symptoms. If we identify a genetic change that we believe may be related to your medical condition, we will contact you to discuss confirmation testing in a clinical laboratory.</p><p>Our goal is to find the genetic explanation for the undiagnosed condition in each family who enrolls, but we cannot guarantee that there will be a result for each family. If we do not initially find a result, we will keep your family enrolled and re-analyze the data again at a later date since the scientific understanding of human disease as well as our tools for analyzing genetic data are constantly improving.</p><p>Because medical conditions can change over time, please contact our office if new symptoms appear or if you receive a diagnosis through an alternate means.</p><p>As always, please contact us if you have questions about your family’s progress in the study. Thank you for participating in the Rare Genomes Project!</p>"
+            },
+            "ProbandNeg": {
+                "Subject": "[es]Sequencing and Analysis",
+                "Message": "[es]We have not identified a result to date.",
+                "More": "<p>[es]Analysis of your DNA and health information has not revealed a genetic variant that we think explains your condition.</p><p>Our goal is to find the genetic explanation for the undiagnosed condition in each family who enrolls, but we cannot guarantee that there will be a result for each family. We will keep your family enrolled and re-analyze the data again at a later date since the scientific understanding of human disease as well as our tools for analyzing genetic data are constantly improving.</p><p>Because medical conditions can change over time, please contact our office if new symptoms appear or if you receive a diagnosis through an alternate means.</p><p>As always, please contact us if you have questions about your family’s progress in the study.</p>"
+            }
+        }
     },
     "Toolkit": {
         "Dialogs": {
