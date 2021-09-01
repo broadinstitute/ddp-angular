@@ -23,13 +23,13 @@ import { StringsHelper } from '../../../utility/stringsHelper';
 
         <mat-autocomplete #autoCompleteFromSource="matAutocomplete" class="autoCompletePanel" [displayWith]="displayAutoComplete">
             <mat-optgroup *ngFor="let group of filteredGroups">
-                <strong [innerHtml]="group.name | searchHighlight: autocompleteInput.value"></strong>
+                <strong [innerHtml]="group.name | searchHighlight: autocompleteInput.value : ignoredSymbolsInQuery"></strong>
                 <ng-container *ngTemplateOutlet="generalOptionsList; context: {list: group.options}"></ng-container>
             </mat-optgroup>
             <ng-container *ngTemplateOutlet="generalOptionsList; context: {list: filteredOptions}"></ng-container>
             <ng-template #generalOptionsList let-list="list">
                 <mat-option *ngFor="let suggestion of list" class="autoCompleteOption" [value]="suggestion">
-                    <span [innerHtml]="suggestion.optionLabel | searchHighlight: autocompleteInput.value"></span>
+                    <span [innerHtml]="suggestion.optionLabel | searchHighlight: autocompleteInput.value : ignoredSymbolsInQuery"></span>
                 </mat-option>
             </ng-template>
         </mat-autocomplete>
@@ -49,7 +49,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     // options w/o a group
     filteredOptions: ActivityPicklistOption[] = [];
     inputFormControl = new FormControl();
-    private readonly ignoredSymbolsInQuery;
+    readonly ignoredSymbolsInQuery: string[];
     private readonly ngUnsubscribe = new Subject();
 
     constructor(
