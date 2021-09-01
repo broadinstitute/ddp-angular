@@ -62,6 +62,8 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     }
 
     public ngOnInit(): void {
+        // reset the sort policy for picklists which don't need to have sorted options
+        this.sortPolicy = this.shouldBeSorted ? this.sortPolicy : new PicklistSortingPolicy();
         this.initInputValue();
 
         const userQueryStream$ = this.inputFormControl.valueChanges.pipe(
@@ -71,15 +73,8 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
             takeUntil(this.ngUnsubscribe)
         );
 
-        let sortedPicklistGroups;
-        let sortedPicklistOptions;
-        if (this.shouldBeSorted) {
-            sortedPicklistGroups = this.sortPolicy.sortPicklistGroups(this.block.picklistGroups);
-            sortedPicklistOptions = this.sortPolicy.sortPicklistOptions(this.block.picklistOptions);
-        } else {
-            sortedPicklistGroups = this.block.picklistGroups;
-            sortedPicklistOptions = this.block.picklistOptions;
-        }
+        const sortedPicklistGroups = this.sortPolicy.sortPicklistGroups(this.block.picklistGroups);
+        const sortedPicklistOptions = this.sortPolicy.sortPicklistOptions(this.block.picklistOptions);
 
         userQueryStream$.pipe(startWith(''))
             .subscribe((value: string | ActivityPicklistOption) => {
