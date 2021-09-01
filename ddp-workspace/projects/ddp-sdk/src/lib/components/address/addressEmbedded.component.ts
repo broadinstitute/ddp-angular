@@ -54,7 +54,7 @@ interface FormError {
     isEasyPostError: boolean;
 }
 
-interface FieldError extends AddressError {
+export interface FieldError extends AddressError {
     isEasyPostError: boolean;
 }
 

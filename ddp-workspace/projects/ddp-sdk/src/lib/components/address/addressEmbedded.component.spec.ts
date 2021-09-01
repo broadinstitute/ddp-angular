@@ -10,7 +10,8 @@ import {
     MailAddressBlock,
     NGXTranslateService,
     LoggingService,
-    ConfigurationService
+    ConfigurationService,
+    FieldError
 } from 'ddp-sdk';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioGroup, MatRadioModule } from '@angular/material/radio';
@@ -23,6 +24,7 @@ import { cold, getTestScheduler, hot } from 'jasmine-marbles';
 import { AddressError } from '../../models/addressError';
 import { AddressVerificationResponse } from '../../models/addressVerificationResponse';
 import { TranslateTestingModule } from '../../testsupport/translateTestingModule';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
     selector: 'ddp-address-input',
@@ -106,7 +108,7 @@ describe('AddressEmbeddedComponent', () => {
                 {provide: LoggingService, useValue: loggingServiceSpy},
                 {provide: 'ddp.config', useValue: configService}
             ],
-            imports: [MatCardModule, MatRadioModule, ReactiveFormsModule, TranslateTestingModule]
+            imports: [MatCardModule, MatRadioModule, ReactiveFormsModule, TranslateTestingModule, MatCheckboxModule]
         })
             .compileComponents();
         fixture = TestBed.createComponent(AddressEmbeddedComponent);
@@ -341,7 +343,7 @@ describe('AddressEmbeddedComponent', () => {
         const addressToEnter = buildPerfectAddress();
         addressToEnter.street2 = 'NO PLACE THAT IS GOOD';
         // field 'address' is the global error.
-        const overallAddressErrors: AddressError[] = [{ code: '123', field: 'street1', message: 'Bad street1!!' }];
+        const overallAddressErrors: FieldError[] = [{ code: '123', field: 'street1', message: 'Bad street1!!', isEasyPostError: true }];
         const verificationStatus: AddressVerificationStatus = {
             address: new Address(),
             isDeliverable: false,
