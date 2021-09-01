@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 import { Route } from '../../constants/Route';
 import { MailingListService } from '../../services/mailing-list.service';
+import { filter, first, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -9,11 +11,18 @@ import { MailingListService } from '../../services/mailing-list.service';
   styleUrls: ['./header.component.scss'],
   providers: [MailingListService],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   Route = Route;
   private _isNavigationShown = false;
 
-  constructor(private mailingListService: MailingListService) {}
+  constructor(
+    private readonly router: ActivatedRoute,
+    private readonly mailingListService: MailingListService
+  ) {}
+
+  ngOnInit(): void {
+    this.handleParamsForMailingList()
+  }
 
   get isNavigationShown(): boolean {
     return this._isNavigationShown;
@@ -45,5 +54,14 @@ export class HeaderComponent {
 
   openMailingListModal(): void {
     this.mailingListService.openDialog();
+  }
+
+  private handleParamsForMailingList(): void {
+    this.router.queryParams.pipe(
+      filter((params: Params) => !!Object.keys(params).length),
+      first(),
+      filter(({ joinMailingList }: Params) => !!joinMailingList),
+      tap(() => this.openMailingListModal())
+    ).subscribe();
   }
 }
