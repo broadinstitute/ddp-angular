@@ -71,7 +71,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
             this.inputFormControl.setValue(value);
         }
 
-        const userQueryStream = this.inputFormControl.valueChanges.pipe(
+        const userQueryStream$ = this.inputFormControl.valueChanges.pipe(
             map(value => typeof value === 'string' ? value.trim() : value),
             distinctUntilChanged(),
             debounceTime(200),
@@ -88,14 +88,14 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
             sortedPicklistOptions = this.block.picklistOptions;
         }
 
-        userQueryStream.pipe(startWith('')).subscribe((value: string | ActivityPicklistOption) => {
+        userQueryStream$.pipe(startWith('')).subscribe((value: string | ActivityPicklistOption) => {
             const query = typeof value === 'string' ? value : value.optionLabel;
             this.filteredGroups = this.filterOutEmptyGroups(query ? this.filterGroups(query, sortedPicklistGroups)
                 : sortedPicklistGroups.slice());
             this.filteredOptions = query ? this.filterOptions(query, sortedPicklistOptions) : sortedPicklistOptions.slice();
         });
 
-        userQueryStream.subscribe((value: string | ActivityPicklistOption) => {
+        userQueryStream$.subscribe((value: string | ActivityPicklistOption) => {
             if (typeof value === 'string') {
                 if (value.length) {
                     this.handleStringValue(value);
