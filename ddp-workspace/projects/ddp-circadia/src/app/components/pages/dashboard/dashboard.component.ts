@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { forkJoin, Observable, of } from 'rxjs';
 import { concatMap, map, take, tap } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import {
   ActivityInstance,
   AnnouncementMessage,
   AnnouncementsServiceAgent,
+  CompositeDisposable,
   ConfigurationService,
   UserActivityServiceAgent,
 } from 'ddp-sdk';
@@ -20,9 +21,10 @@ import { SleepLogService } from '../../../services/sleep-log.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   loading = true;
   activities: ActivityInstance[] = [];
+  private subs = new CompositeDisposable();
 
   constructor(
     private router: Router,
@@ -33,7 +35,7 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.fetchData()
+    const sub = this.fetchData()
       .pipe(
         map(({ activities, announcements }) => ({
           activities,
@@ -50,6 +52,12 @@ export class DashboardComponent implements OnInit {
         ),
       )
       .subscribe();
+
+    this.subs.addNew(sub);
+  }
+
+  ngOnDestroy(): void {
+    this.subs.removeAll();
   }
 
   onStartActivity(activity: ActivityInstance): void {

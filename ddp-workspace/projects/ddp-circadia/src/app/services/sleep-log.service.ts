@@ -50,6 +50,7 @@ export class SleepLogService {
     this.sessionService.sessionObservable
       .pipe(
         filter(session => !!session && !!session.accessToken),
+        take(1),
         tap(({ accessToken }) =>
           this.auth0Service.webAuth.client.userInfo(
             accessToken,
@@ -69,7 +70,6 @@ export class SleepLogService {
             },
           ),
         ),
-        take(1),
       )
       .subscribe();
   }
