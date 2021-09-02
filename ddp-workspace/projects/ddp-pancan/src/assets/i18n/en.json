@@ -503,7 +503,7 @@
             "ShowPanel": "Show",
             "HidePanel": "Hide",
             "UserLabel": "You",
-            "ChildLabel": "Your child"
+            "ChildLabel": "Your child{{suffix}}"
         },
         "Password": {
             "Title": "Please enter the password",

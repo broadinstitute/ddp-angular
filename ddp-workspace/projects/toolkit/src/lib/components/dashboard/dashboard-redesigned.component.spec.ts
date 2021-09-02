@@ -45,7 +45,7 @@ class TranslateLoaderMock implements TranslateLoader {
                         ParticipantsTitle: 'Participant Dashboard test',
                         Title: 'Dashboard test',
                         UserLabel: 'You test',
-                        ChildLabel: 'Your child test',
+                        ChildLabel: 'Your child test{{suffix}}',
                         HidePanel: 'Hide test',
                         ShowPanel: 'Show test',
                     },
@@ -219,7 +219,7 @@ describe('DashboardRedesignedComponent', () => {
     });
 
     it('should display participant dashboard title', () => {
-        toolkitConfigMock.useParticipantDashboard = true;
+        toolkitConfigMock.useMultiParticipantDashboard = true;
         component.ngOnInit();
         fixture.detectChanges();
 
@@ -228,7 +228,7 @@ describe('DashboardRedesignedComponent', () => {
     });
 
     it('should display add participant button', () => {
-        toolkitConfigMock.useParticipantDashboard = true;
+        toolkitConfigMock.useMultiParticipantDashboard = true;
         component.ngOnInit();
         fixture.detectChanges();
 
@@ -245,7 +245,7 @@ describe('DashboardRedesignedComponent', () => {
     });
 
     it('should create a new participant on backend when click add participant button', () => {
-        toolkitConfigMock.useParticipantDashboard = true;
+        toolkitConfigMock.useMultiParticipantDashboard = true;
         component.ngOnInit();
         fixture.detectChanges();
 
@@ -258,7 +258,7 @@ describe('DashboardRedesignedComponent', () => {
         const setParticipantSpy = spyOn(sessionMock, 'setParticipant');
         const newParticipantGuid = '6549';
         governedParticipantsSpy.addParticipant.and.returnValue(of(newParticipantGuid));
-        toolkitConfigMock.useParticipantDashboard = true;
+        toolkitConfigMock.useMultiParticipantDashboard = true;
         component.ngOnInit();
         fixture.detectChanges();
 
@@ -272,7 +272,7 @@ describe('DashboardRedesignedComponent', () => {
         const activityUrl = 'activity-test';
 
         workflowServiceSpy.fromParticipantList.and.returnValue(of({instanceGuid} as ActivityResponse));
-        toolkitConfigMock.useParticipantDashboard = true;
+        toolkitConfigMock.useMultiParticipantDashboard = true;
         toolkitConfigMock.activityUrl = activityUrl;
         const navigateSpy = spyOn(router, 'navigate');
 
@@ -288,7 +288,7 @@ describe('DashboardRedesignedComponent', () => {
         const newParticipantGuid = '6549';
         governedParticipantsSpy.addParticipant.and.returnValue(of(newParticipantGuid));
         workflowServiceSpy.fromParticipantList.and.returnValue(throwError('error'));
-        toolkitConfigMock.useParticipantDashboard = true;
+        toolkitConfigMock.useMultiParticipantDashboard = true;
         const navigateSpy = spyOn(router, 'navigate');
 
         component.ngOnInit();
@@ -305,7 +305,7 @@ describe('DashboardRedesignedComponent', () => {
     });
 
     it('should delete participants w/o activities', () => {
-        toolkitConfigMock.useParticipantDashboard = true;
+        toolkitConfigMock.useMultiParticipantDashboard = true;
         userActivityServiceAgentSpy.getActivities.withArgs(jasmine.anything(), '1').and.returnValue(of([]));
         userActivityServiceAgentSpy.getActivities.withArgs(jasmine.anything(), '2').and.returnValue(of([activityMock]));
         governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([
@@ -319,7 +319,7 @@ describe('DashboardRedesignedComponent', () => {
     });
 
     it('builds the participants list without first and last names', (done) => {
-        toolkitConfigMock.useParticipantDashboard = true;
+        toolkitConfigMock.useMultiParticipantDashboard = true;
         governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([
             { userGuid: '1', userProfile: { firstName: null, lastName: null } } as Participant,
             { userGuid: '2', userProfile: { firstName: null, lastName: null } } as Participant,
@@ -338,7 +338,7 @@ describe('DashboardRedesignedComponent', () => {
     });
 
     it('builds the participants list with first and last names', (done) => {
-        toolkitConfigMock.useParticipantDashboard = true;
+        toolkitConfigMock.useMultiParticipantDashboard = true;
         profileMock.firstName = 'Dexter';
         profileMock.lastName = 'Morgan';
         governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([
@@ -359,7 +359,7 @@ describe('DashboardRedesignedComponent', () => {
     });
 
     it('does not include the operator user into participants list', (done) => {
-        toolkitConfigMock.useParticipantDashboard = true;
+        toolkitConfigMock.useMultiParticipantDashboard = true;
         userActivityServiceAgentSpy.getActivities.and.returnValue(of([]));
         userActivityServiceAgentSpy.getActivities.withArgs(jasmine.anything(), '1').and.returnValue(of([activityMock]));
         governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([
@@ -375,7 +375,7 @@ describe('DashboardRedesignedComponent', () => {
     });
 
     it('includes only the operator user into participants list', (done) => {
-        toolkitConfigMock.useParticipantDashboard = true;
+        toolkitConfigMock.useMultiParticipantDashboard = true;
         governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([]));
         component.ngOnInit();
         fixture.detectChanges();
@@ -387,7 +387,7 @@ describe('DashboardRedesignedComponent', () => {
     });
 
     it('sets participants list as empty list', (done) => {
-        toolkitConfigMock.useParticipantDashboard = false;
+        toolkitConfigMock.useMultiParticipantDashboard = false;
         component.ngOnInit();
         fixture.detectChanges();
 
@@ -398,7 +398,7 @@ describe('DashboardRedesignedComponent', () => {
     });
 
     it('displays expansion panel for every participant and operator', () => {
-        toolkitConfigMock.useParticipantDashboard = true;
+        toolkitConfigMock.useMultiParticipantDashboard = true;
         governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([
             { userGuid: '1', userProfile: { firstName: 'My', lastName: 'child' } } as Participant,
             { userGuid: '4', userProfile: { firstName: 'One more', lastName: 'kid' } } as Participant,
@@ -411,7 +411,7 @@ describe('DashboardRedesignedComponent', () => {
     });
 
     it('does not display expansion panels for regular dashboard', () => {
-        toolkitConfigMock.useParticipantDashboard = false;
+        toolkitConfigMock.useMultiParticipantDashboard = false;
         component.ngOnInit();
         fixture.detectChanges();
 
@@ -420,7 +420,7 @@ describe('DashboardRedesignedComponent', () => {
     });
 
     it('expands the first panel', async () => {
-        toolkitConfigMock.useParticipantDashboard = true;
+        toolkitConfigMock.useMultiParticipantDashboard = true;
         governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([
             { userGuid: '1', userProfile: { firstName: 'My', lastName: 'child' } } as Participant,
             { userGuid: '2', userProfile: { firstName: 'My', lastName: 'child' } } as Participant,
@@ -433,7 +433,7 @@ describe('DashboardRedesignedComponent', () => {
     });
 
     it('displays hide panel message if panel is open', async () => {
-        toolkitConfigMock.useParticipantDashboard = true;
+        toolkitConfigMock.useMultiParticipantDashboard = true;
         governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([
             { userGuid: '1', userProfile: { firstName: 'My', lastName: 'child' } } as Participant,
             { userGuid: '1', userProfile: { firstName: 'My', lastName: 'child' } } as Participant,
@@ -446,7 +446,7 @@ describe('DashboardRedesignedComponent', () => {
     });
 
     it('displays show panel message if panel is collapsed', async () => {
-        toolkitConfigMock.useParticipantDashboard = true;
+        toolkitConfigMock.useMultiParticipantDashboard = true;
         governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([
             { userGuid: '1', userProfile: { firstName: 'My', lastName: 'child' } } as Participant,
             { userGuid: '2', userProfile: { firstName: 'My', lastName: 'child' } } as Participant,
@@ -459,7 +459,7 @@ describe('DashboardRedesignedComponent', () => {
     });
 
     it('calls getActivities with correct param', async () => {
-        toolkitConfigMock.useParticipantDashboard = true;
+        toolkitConfigMock.useMultiParticipantDashboard = true;
         governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([
             { userGuid: '1', userProfile: { firstName: null, lastName: null } } as Participant,
             { userGuid: '2', userProfile: { firstName: null, lastName: null } } as Participant,
@@ -477,7 +477,7 @@ describe('DashboardRedesignedComponent', () => {
 
     it('clear participant id in DashboardComponent ngOnInit', async () => {
         const setParticipantSpy = spyOn(sessionMock, 'setParticipant');
-        toolkitConfigMock.useParticipantDashboard = true;
+        toolkitConfigMock.useMultiParticipantDashboard = true;
         component.ngOnInit();
         fixture.detectChanges();
 

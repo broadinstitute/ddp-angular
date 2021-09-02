@@ -37,13 +37,13 @@ interface DashboardParticipant {
                 <div class="content content_medium content_wide content_dashboard">
                     <div fxLayout="row" fxLayoutAlign="space-between center">
                         <h1 class="dashboard-title-section__title" fxLayoutAlign="center center">
-                            <ng-container *ngIf="useParticipantDashboard; else regularDashboard">
+                            <ng-container *ngIf="useMultiParticipantDashboard; else regularDashboard">
                                 <mat-icon>perm_identity</mat-icon>
                                 <span translate>Toolkit.Dashboard.ParticipantsTitle</span>
                             </ng-container>
                             <ng-template #regularDashboard><span translate>Toolkit.Dashboard.Title</span></ng-template>
                         </h1>
-                        <div *ngIf="toolkitConfig.useParticipantDashboard">
+                        <div *ngIf="toolkitConfig.useMultiParticipantDashboard">
                             <button mat-stroked-button
                                     class="add-participant-button button_small"
                                     [disabled]="addParticipantButtonDisabled"
@@ -86,9 +86,9 @@ interface DashboardParticipant {
                         </section>
                     </ng-container>
                 </ng-container>
-                <section class="section dashboard-section" [class.full-width]="useParticipantDashboard">
+                <section class="section dashboard-section" [class.full-width]="useMultiParticipantDashboard">
                     <div class="content content_medium">
-                        <mat-accordion *ngIf="useParticipantDashboard; else activitiesTable" hideToggle multi>
+                        <mat-accordion *ngIf="useMultiParticipantDashboard; else activitiesTable" hideToggle multi>
                             <mat-expansion-panel *ngFor="let participant of dashboardParticipants$ | async; first as isFirst; trackBy: trackById"
                                                  class="dashboard-panel"
                                                  [expanded]="isFirst"
@@ -132,9 +132,6 @@ interface DashboardParticipant {
         .full-width {
             width: 100%;
         }
-        .remove-icon {
-            width: 40px;
-        }
     `]
 })
 export class DashboardRedesignedComponent extends DashboardComponent implements OnInit, OnDestroy {
@@ -166,7 +163,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
         this.headerConfig.setupDefaultHeader();
         !this.isAdmin && this.getInvitationId();
 
-        this.dashboardParticipants$ = this.useParticipantDashboard ? this.getDashboardParticipants() : of([]);
+        this.dashboardParticipants$ = this.useMultiParticipantDashboard ? this.getDashboardParticipants() : of([]);
     }
 
     private getDashboardParticipants(): Observable<DashboardParticipant[]> {
@@ -178,12 +175,13 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
             this.governedParticipantsAgent.getGovernedStudyParticipants(this.studyGuid),
         ]).pipe(
             map(([operatorParticipant, participants]) => {
-                const result = participants.map((participant, i) => this.getUserActivitiesForParticipant(participant.userGuid)
+                const result: Observable<DashboardParticipant>[] =
+                    participants.map((participant, i) => this.getUserActivitiesForParticipant(participant.userGuid)
                     .pipe(take(1), map((activities) => ({
                         userGuid: participant.userGuid,
                         label: (participant.userProfile.firstName || participant.userProfile.lastName)
                             ? `${participant.userProfile.firstName} ${participant.userProfile.lastName}`
-                            : `${this.translate.instant('Toolkit.Dashboard.ChildLabel')}${i > 0 ? ' #' + (i + 1) : ''}`,
+                            : this.translate.instant('Toolkit.Dashboard.ChildLabel', { suffix: i > 0 ? ' #' + (i + 1) : '' }),
                         activities,
                 }))));
                 if (operatorParticipant) {
@@ -253,7 +251,10 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
             return of(participants);
         }
 
-        return forkJoin(...accidentalParticipant.map((participant) => this.userManagementService.deleteUser(participant.userGuid)))
+        const deleteUserObservableList: Observable<void>[] = accidentalParticipant
+            .map((participant) => this.userManagementService.deleteUser(participant.userGuid));
+        return forkJoin(...deleteUserObservableList)
+            // return filtered participants once all deleting requests were done
             .pipe(map(() => participants.filter(({activities}) => activities.length)));
     }
 
