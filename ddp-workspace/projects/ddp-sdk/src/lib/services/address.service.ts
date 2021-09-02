@@ -105,6 +105,21 @@ export class AddressService extends UserServiceAgent<Address> {
         }
     }
 
+    public getAddress(addressGuid: string): Observable<Address | null> {
+        return this.getObservable(`${this.BASE_URL}/${addressGuid}`, {}, [404]).pipe(
+            map((data: any) => {
+                if (data) {
+                    return new Address(data);
+                } else {
+                    return null;
+                }
+            }),
+            catchError((error) => {
+                return throwError(error.error);
+            })
+        );
+    }
+
     public findDefaultAddress(): Observable<Address | null> {
         return this.getObservable(`${this.BASE_URL}/default`, {}, [404]).pipe(
             map((data: any) => {

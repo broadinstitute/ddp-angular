@@ -41,19 +41,14 @@ import { ConfigurationService } from '../../../services/configuration.service';
         .ddp-autocomplete-field ::ng-deep .mat-form-field-infix {
           width: auto;
         }
-
-        .mat-optgroup ::ng-deep .mat-optgroup-label {
-            color: inherit;
-        }
     `]
 })
 export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQuestion implements OnInit, OnDestroy, OnChanges {
-    private readonly ngUnsubscribe = new Subject();
-
     filteredGroups: ActivityPicklistNormalizedGroup[] = [];
     // options w/o a group
     filteredOptions: ActivityPicklistOption[] = [];
     inputFormControl = new FormControl();
+    private readonly ngUnsubscribe = new Subject();
 
     constructor(
         translate: NGXTranslateService,
@@ -136,7 +131,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
             } else {
                 this.block.answer = [{ stableId: this.block.customValue, detail: value }];
                 if (this.block.customValue) {
-                    this.valueChanged.emit(this.block.answer);
+                    this.valueChanged.emit([...this.block.answer]);
                 }
             }
         }
@@ -144,7 +139,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
 
     private updateAnswer(value?: string, detail: string | null = null): void {
         this.block.answer = value ? [{ stableId: value, detail }] : [];
-        this.valueChanged.emit(this.block.answer);
+        this.valueChanged.emit([...this.block.answer]);
     }
 
     private filterGroups(name: string, groups: ActivityPicklistNormalizedGroup[]): ActivityPicklistNormalizedGroup[] {

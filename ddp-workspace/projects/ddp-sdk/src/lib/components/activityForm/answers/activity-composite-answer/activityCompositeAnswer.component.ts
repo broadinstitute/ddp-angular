@@ -151,7 +151,9 @@ export class ActivityCompositeAnswer implements OnChanges {
 
     public removeRow(index: number): void {
         this.childQuestionBlocks.splice(index, 1);
-        this.valueChanged.emit(this.buildComponentAnswers());
+        const childAnswers = this.buildComponentAnswers();
+        this.block.setAnswer(childAnswers, false);
+        this.valueChanged.emit(childAnswers);
     }
 
     // We need this method because we want to include the prototype in the clone.
