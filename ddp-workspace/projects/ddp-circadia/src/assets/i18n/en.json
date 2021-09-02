@@ -102,11 +102,20 @@
       "Title": "Meet the Team",
       "Members": [
         {
-          "Bio": "Dr. Lane has a long-standing commitment to utilize genetics to understand the mechanisms and causal links of common traits and disease. Her goal is to identify new causal genetic factors for circadian rhythm disorders and elucidate biological pathways underlying circadian regulation.",
+          "Bio": "Dr. Lane has a long-standing commitment to utilize genetics to understand the mechanisms and causal links of common traits and disease. Her goal is to identify new causal genetic factors for circadian rhythm disorders and elucidate biological pathways underlying circadian regulation. Dr. Lane is committed to making research accessible to all lowering barriers whenever possible.",
           "ImageUrl": "/assets/img/team/dr-lane.jpeg"
         },
         {
-          "Bio": "Irma is a research coordinator for the Circadia research study and has spent several years working in genetics research related to circadian rhythms and sleep. She is excited to study circadian rhythm disorders through the Circadia research study.",
+          "Bio": "Gregory is a research coordinator for the Circadia Study. He is passionate about equitable, inclusive genetics and circadian research that can help improve health outcomes for all people. He is excited to work closely with the participants of the Circadia Study to learn more about circadian rhythms.",
+          "ImageUrl": "/assets/img/team/gregory.png"
+        }
+      ]
+    },
+    "FormerTeam": {
+      "Title": "Former Team Members",
+      "Members": [
+        {
+          "Bio": "Irma is a former research coordinator for the Circadia Study. She spent several years working in genetics research related to circadian rhythms and sleep, and she is now pursuing a PhD in the Molecular and Cellular Biology Program at Dartmouth College as part of the Dartmouth Guarini School of Graduate and Advanced Studies. Irma helped develop the Circadia Study from its very beginning, and she did incredible work to create the study you see today. We cannot thank her enough for her efforts.",
           "ImageUrl": "/assets/img/team/irma.jpg"
         }
       ]
