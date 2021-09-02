@@ -514,8 +514,13 @@ describe('AddressEmbeddedComponent', () => {
         expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledTimes(1);
 
         // those methods are not called as we have formErrors check in saveRealAddressAction$ (line 531)
-        expect(addressServiceSpy.saveAddress).not.toHaveBeenCalledWith(partialAddressFromInputComponent, false);
+        expect(addressServiceSpy.saveAddress).not.toHaveBeenCalled();
         expect(addressServiceSpy.deleteTempAddress).not.toHaveBeenCalledWith('123');
+
+        component.ignoreEasyPostErrorsCheckbox.setValue(true);
+        component.saveAddress();
+
+        expect(addressServiceSpy.saveAddress).toHaveBeenCalledWith(partialAddressFromInputComponent, false);
         discardPeriodicTasks();
     }));
 
