@@ -149,7 +149,12 @@ export class AddressGoogleAutocompleteDirective implements OnInit, OnDestroy, On
 
     private getPotentiallyFixedStreetAddress(route: string): string {
         const selectedAddress = this.autocompleteInput.nativeElement.value;
-        const selectedAddressHouseNumber = selectedAddress.replace(/[^\d]/g, '');
+        let selectedAddressHouseNumber = selectedAddress.split(' ')[0];
+
+        // Check if first element is a number
+        if (isNaN(+selectedAddressHouseNumber)) {
+            selectedAddressHouseNumber = '';
+        }
 
         if (selectedAddressHouseNumber) {
             return `${selectedAddressHouseNumber} ${route}`;
