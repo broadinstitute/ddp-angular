@@ -96,8 +96,7 @@
             }
         },
         "Quote": {
-            "Text1": "\"This research project really understands the importance of bringing patients in as partners and engaging patients in a novel way. It's critical to do that because",
-            "Text2": "patients are often the ones that start driving the research",
+            "Text": "\"This research project really understands the importance of bringing patients in as partners and engaging patients in a novel way. It's critical to do that because <span class=\"Accent\">patients are often the ones that start driving the research</span>.\"",
             "Author": "-Matt Might, Caregiver and Director, Hugh Kaul Precision Medicine Institute"
         },
         "Partners": {
@@ -314,7 +313,7 @@
                         },
                         {
                             "name": "Ellie Seaby",
-                            "degree": "",
+                            "degree": "MD",
                             "position": "Clinical Genomic Analyst",
                             "bio": "Ellie is a clinical research fellow undertaking a PhD in genomic medicine at the University of Southampton in collaboration with the Broad Institute and Imperial College London. Her research focuses on the discovery of novel disease genes and improving clinical outcomes.",
                             "image": "ellie-seaby.jpeg"
@@ -566,7 +565,7 @@
                 {
                     "question": "What medical records are needed?",
                     "answers": [
-                        "We require medical records from the affected family member(s). For more information about the types of records that are needed, please see our <a href=\"sharing-guide.pdf\" target=\"_blank\" class=\"Link\">Guide to Sharing Health Information</a>."
+                        "We require medical records from the affected family member(s). For more information about the types of records that are needed, please see our <a href=\"sharing-guide-en.pdf\" target=\"_blank\" class=\"Link\">Guide to Sharing Health Information</a>."
                     ]
                 },
                 {
@@ -847,11 +846,8 @@
         },
         "GenomicInformation": {
             "Title": "How We Share Full Genomic Information",
-            "Text1": "We share full genomic sequencing data and summarized medical information through two platforms to help increase the pace of scientific discovery. For example, data is stored at the Broad Institute and accessible after approval by its Data Use Oversight System",
-            "Text2": "DUOS",
-            "Text3": "We also share data through a similar, federally-funded genomic database called",
-            "Text4": "AnVIL",
-            "Text5": "Interested researchers must apply and be granted access to the data in these platforms."
+            "Text1": "We share full genomic sequencing data and summarized medical information through two platforms to help increase the pace of scientific discovery. For example, data is stored at the Broad Institute and accessible after approval by its Data Use Oversight System (<a class=\"Link\" href=\"https://duos.broadinstitute.org/#/home\" target=\"_blank\">DUOS</a>).",
+            "Text2": "We also share data through a similar, federally-funded genomic database called <a class=\"Link\" href=\"https://www.genome.gov/27569268/genomic-analysis-visualization-and-informatics-labspace-anvil/\" target=\"_blank\">AnVIL</a>. Interested researchers must apply and be granted access to the data in these platforms."
         },
         "Privacy": {
             "Title": "Privacy",
@@ -1213,12 +1209,12 @@
         "NoRecords": {
           "Subject": "Medical records",
           "Message": "Copies of medical records are needed.",
-          "More": "<p>Typically, the most important records for us to receive are:</p><ul><li>specialist clinic notes (e.g. neurologist, cardiologist, nephrologist), especially genetics</li><li>genetic test reports, if any</li><li>pathology reports, if any</li><li>MRI or CT scan reports, if any</li></ul><p>Please see our “<a href=\"/sharing-guide.pdf\" target=\"_blank\">Guide for Sharing Your Family’s Health Information</a>” for more information.</p><p>Records can be sent to us by:</p><ul><li>Fax: 617-800-1909</li><li>Mail: Rare Genomes Project, Broad Institute, Attn: Dr. Heidi Rehm, 415 Main Street, Cambridge MA 02142</li><li>Email: Please let us know if you would like to email records, and we can set up a secure email connection to ensure additional protection of your medical information.</li></ul><p>If you encounter any costs associated with sending the medical records, please send us a receipt so that we can reimburse you.</p>"
+          "More": "<p>Typically, the most important records for us to receive are:</p><ul><li>specialist clinic notes (e.g. neurologist, cardiologist, nephrologist), especially genetics</li><li>genetic test reports, if any</li><li>pathology reports, if any</li><li>MRI or CT scan reports, if any</li></ul><p>Please see our “<a href=\"/sharing-guide-en.pdf\" target=\"_blank\">Guide for Sharing Your Family’s Health Information</a>” for more information.</p><p>Records can be sent to us by:</p><ul><li>Fax: 617-800-1909</li><li>Mail: Rare Genomes Project, Broad Institute, Attn: Dr. Heidi Rehm, 415 Main Street, Cambridge MA 02142</li><li>Email: Please let us know if you would like to email records, and we can set up a secure email connection to ensure additional protection of your medical information.</li></ul><p>If you encounter any costs associated with sending the medical records, please send us a receipt so that we can reimburse you.</p>"
         },
         "Partial": {
           "Subject": "Medical records",
           "Message": "We have received some of the medical records needed.",
-          "More": "<p>We are awaiting additional records. Typically, the most important records for us to receive are:</p><ul><li>specialist clinic notes (e.g. neurologist, cardiologist, nephrologist), especially genetics</li><li>genetic test reports, if any</li><li>pathology reports, if any</li><li>MRI or CT scan reports, if any</li></ul><p>Please see our “<a href=\"/sharing-guide.pdf\" target=\"_blank\">Guide for Sharing Your Family’s Health Information</a>” for more information.</p><p>Records can be sent to us by:</p><ul><li>Fax: 617-800-1909</li><li>Mail: Rare Genomes Project, Broad Institute, Attn: Dr. Heidi Rehm, 415 Main Street, Cambridge MA 02142</li><li>Email: Please let us know if you would like to email records, and we can set up a secure email connection to ensure additional protection of your medical information.</li></ul><p>If you encounter any costs associated with sending the medical records, please send us a receipt so that we can reimburse you.</p>"
+          "More": "<p>We are awaiting additional records. Typically, the most important records for us to receive are:</p><ul><li>specialist clinic notes (e.g. neurologist, cardiologist, nephrologist), especially genetics</li><li>genetic test reports, if any</li><li>pathology reports, if any</li><li>MRI or CT scan reports, if any</li></ul><p>Please see our “<a href=\"/sharing-guide-en.pdf\" target=\"_blank\">Guide for Sharing Your Family’s Health Information</a>” for more information.</p><p>Records can be sent to us by:</p><ul><li>Fax: 617-800-1909</li><li>Mail: Rare Genomes Project, Broad Institute, Attn: Dr. Heidi Rehm, 415 Main Street, Cambridge MA 02142</li><li>Email: Please let us know if you would like to email records, and we can set up a secure email connection to ensure additional protection of your medical information.</li></ul><p>If you encounter any costs associated with sending the medical records, please send us a receipt so that we can reimburse you.</p>"
         },
         "Received": {
           "Subject": "Medical records",

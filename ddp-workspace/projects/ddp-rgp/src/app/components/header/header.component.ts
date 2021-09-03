@@ -88,10 +88,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.isMobileNavShown = !this.isMobileNavShown;
   }
 
-  public onLanguageSelectorVisibilityChange(isVisible: boolean): void {
-    this.isLanguageSelectorVisible = isVisible;
-  }
-
   private setupRoutesListener(): void {
     this.anchor.addNew(
       this.router.events.subscribe(e => {
