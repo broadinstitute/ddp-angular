@@ -197,7 +197,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
 
     onAutocompleteClose(): void {
         // reset z-index for the autocomplete overlay to default value (1000)
-        // in order to other components, which used the common overlay container (i.g. language-selector),
+        // in order to other components, which used the common overlay container (e.g. language-selector),
         // would have the default behavior
         this.setStyleToElement(this.overlayContainer, 'zIndex', '1000');
     }
