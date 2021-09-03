@@ -1,5 +1,16 @@
-import { Component, Inject, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import {
+    Component,
+    HostListener,
+    Inject,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    SimpleChanges,
+    ViewChild
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import { DOCUMENT } from '@angular/common';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith, takeUntil } from 'rxjs/operators';
 
@@ -20,7 +31,10 @@ import { ConfigurationService } from '../../../services/configuration.service';
                [placeholder]="block.picklistLabel"
                [matAutocomplete]="autoCompleteFromSource" />
 
-        <mat-autocomplete #autoCompleteFromSource="matAutocomplete" class="autoCompletePanel" [displayWith]="displayAutoComplete">
+        <mat-autocomplete #autoCompleteFromSource="matAutocomplete"
+                          class="autoCompletePanel"
+                          [displayWith]="displayAutoComplete"
+                          (closed)="onAutocompleteClose()">
             <mat-optgroup *ngFor="let group of filteredGroups">
                 <strong [innerHtml]="group.name | searchHighlight: autocompleteInput.value"></strong>
                 <ng-container *ngTemplateOutlet="generalOptionsList; context: {list: group.options}"></ng-container>
@@ -44,6 +58,7 @@ import { ConfigurationService } from '../../../services/configuration.service';
     `]
 })
 export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQuestion implements OnInit, OnDestroy, OnChanges {
+    @ViewChild(MatAutocompleteTrigger, {read: MatAutocompleteTrigger}) autoComplete: MatAutocompleteTrigger;
     filteredGroups: ActivityPicklistNormalizedGroup[] = [];
     // options w/o a group
     filteredOptions: ActivityPicklistOption[] = [];
@@ -53,7 +68,8 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     constructor(
         translate: NGXTranslateService,
         private sortPolicy: PicklistSortingPolicy,
-        @Inject('ddp.config') public config: ConfigurationService
+        @Inject('ddp.config') public config: ConfigurationService,
+        @Inject(DOCUMENT) private document: Document
     ) {
         super(translate);
     }
@@ -167,5 +183,32 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
 
     displayAutoComplete(option: ActivityPicklistOption | string): string {
         return typeof option === 'string' ? option : (option?.optionLabel || '');
+    }
+
+    @HostListener('window: scroll') public onWindowScroll(): void {
+        if (this.autoComplete?.panelOpen) {
+            // set z-index for the autocomplete overlay less then for our header (header z-index = 1000)
+            // in order to scroll the opened autocomplete picklist under the header.
+            // It's tough to tweak by css
+            // (known Angular issue - https://github.com/angular/components/issues/1432)
+            this.setStyleToElement(this.overlayContainer, 'zIndex', '900');
+        }
+    }
+
+    onAutocompleteClose(): void {
+        // reset z-index for the autocomplete overlay to default value (1000)
+        // in order to other components, which used the common overlay container (i.g. language-selector),
+        // would have the default behavior
+        this.setStyleToElement(this.overlayContainer, 'zIndex', '1000');
+    }
+
+    private get overlayContainer(): HTMLElement {
+        return this.document.querySelector('.cdk-overlay-container');
+    }
+
+    private setStyleToElement(element: HTMLElement, styleProperty: string, value: string): void {
+        if (element && styleProperty) {
+            element.style[styleProperty] = value;
+        }
     }
 }
