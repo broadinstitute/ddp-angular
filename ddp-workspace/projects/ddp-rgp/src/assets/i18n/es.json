@@ -1,11 +1,11 @@
 {
     "Common": {
-        "LogoAlt": "[es]Rare Genome Project logo",
+        "LogoAlt": "Proyecto de Genomas Raros logo",
         "ApplyButton": "Solicitud"
     },
     "Banner": {
-        "Text": "[es]For updates on how COVID-19 is impacting our study, please click",
-        "LinkText": "[es]here."
+        "Text": "Para obtener actualizaciones sobre cómo COVID-19 está afectando nuestro estudio, haga clic",
+        "LinkText": "aquí"
     },
     "Header": {
         "Families": {
@@ -26,7 +26,7 @@
         },
         "AboutUs": "Quiénes somos",
         "FAQs": "Preguntas y respuestas",
-        "Dashboard": "[es]Dashboard",
+        "Dashboard": "Panel de Control",
         "GetStarted": "Cómo comenzar"
     },
     "Footer": {
@@ -41,13 +41,13 @@
             "Line1": "Broad Institute of MIT and Harvard",
             "Line2": "415 Main Street, Cambridge, MA 02142 United States"
         },
-        "FacebookAlt": "[es]Facebook"
+        "FacebookAlt": "Facebook"
     },
     "HomePage": {
         "Title": "Si usted o una persona de su familia tiene una enfermedad rara cuya causa genética no se ha diagnosticado, quizá cumpla los requisitos para participar en un estudio dirigido por los pacientes cuya finalidad es descubrir los genes implicados en la enfermedad rara de su familia.",
         "Text": "El Proyecto Genomas Raros del Broad Institute de MIT y Harvard es un estudio dirigido por los pacientes y realizado por expertos en genómica y médicos que creen que los últimos avances en la secuenciación del genoma están cambiando el mundo de la medicina y deberían estar al alcance de las familias que tienen enfermedades raras y sin diagnosticar.",
-        "IllustrationAlt": "[es]Rare people illustration",
-        "DNAAlt": "[es]DNA Strand Illustration",
+        "IllustrationAlt": "Rare people illustration",
+        "DNAAlt": "DNA Strand Illustration",
         "MainPoints": {
             "Discovery": {
                 "Title": "Impulsar descubrimientos",
@@ -101,20 +101,21 @@
         },
         "Partners": {
             "Title": "Organizaciones de defensa del paciente que colaboran con nosotros",
-            "NOFRDD": "[es]National Organization for Rare Disorders",
-            "SWAN": "[es]Syndromes without a Name",
-            "Rare": "[es]Rare science accelerating cures for rare kids",
-            "RUNMyDNA": "[es]Run my DNA",
-            "SBD": "[es]Same but Different",
-            "UROurHope": "[es]UR Our Hope",
-            "AOA": "[es]Aware of Angels",
-            "SNS": "[es]Sweet Nectar Society",
-            "RUN": "[es]Rare Undiagnosed Network",
-            "MDA": "[es]Muscular Dystrophy Association",
-            "GlobalGenes": "[es]Global Genes",
-            "MyGene2": "[es]My Gene 2",
-            "PatientWorthy": "[es]Patient Worthy",
-            "TGPP": "[es]The Giving Picture Project"
+            "NOFRDD": "National Organization for Rare Disorders",
+            "SWAN": "Syndromes without a Name",
+            "Rare": "Rare science accelerating cures for rare kids",
+            "RUNMyDNA": "Run my DNA",
+            "SBD": "Same but Different",
+            "UROurHope": "UR Our Hope",
+            "AOA": "Aware of Angels",
+            "SNS": "Sweet Nectar Society",
+            "RUN": "Rare Undiagnosed Network",
+            "MDA": "Muscular Dystrophy Association",
+            "GlobalGenes": "Global Genes",
+            "MyGene2": "My Gene 2",
+            "PatientWorthy": "Patient Worthy",
+            "TGPP": "The Giving Picture Project",
+            "CureHHT": "Cure HHT"
         },
         "LastSection": {
             "Title": "Usted puede ser la fuerza que impulse la investigación de las enfermedades raras.",
@@ -672,11 +673,11 @@
         }
     },
     "PasswordPage": {
-        "PasswordWrongError": "[es]Incorrect password. Please try again.",
-        "OtherError": "[es]We're sorry, but an error has occurred.",
-        "PasswordRequiredError": "[es]Password is required",
-        "SubmitButton": "[es]Submit",
-        "Placeholder": "[es]Please enter a password to access the site "
+        "PasswordWrongError": "Contraseña incorrecta. Inténtalo de nuevo.",
+        "OtherError": "Lo sentimos, pero se ha producido un error.",
+        "PasswordRequiredError": "Se requiere contraseña",
+        "SubmitButton": "Enviar",
+        "Placeholder": "Ingrese una contraseña para acceder al sitio"
     },
     "EligibilityPage": {
         "Title": "Criterios de idoneidad",
@@ -915,7 +916,7 @@
             "Text2": "Otras formas en las que usted podría participar:",
             "Item1": "Agregar y resumir las historias clínicas y la información clínica de la familia",
             "Item2": "Responder a las preguntas de seguimiento que surjan durante la participación de la familia en el proyecto",
-            "ThankYou": "[es]Thank you for your support. We look forward to learning with you!"
+            "ThankYou": "Gracias por tu apoyo. ¡Esperamos aprender contigo!"
         },
         "ThankYou": "Le agradecemos su apoyo. Esperamos aprender muy pronto con usted.",
         "Contact": "Comuníquese con nosotros"
@@ -948,7 +949,7 @@
     },
     "LGMDPage": {
         "Title": "La división sobre distrofia muscular de cinturas del Proyecto Genomas Raros es una colaboración con la <a href=\"https://www.mda.org/\" target=\"_blank\" class=\"Link\">Muscular Dystrophy Association</a> y la <a href=\"https://www.jain-foundation.org/\" target=\"_blank\" class=\"Link\">Jain Foundation</a>. Se dedica al diagnóstico y el descubrimiento de genes a través de la secuenciación del genoma completo en personas y familias que sufren distrofia muscular de cinturas.",
-        "ImageAlt": "[es]If you or a loved one has a rare and genetically undiagnosed condition, join a patient-driven research study to discover the genes underlying your family's rare disease.",
+        "ImageAlt": "Si usted o un ser querido tiene una enfermedad rara y no diagnosticada genéticamente, únase a un estudio de investigación dirigido por pacientes para descubrir los genes que subyacen a la enfermedad rara de su familia.",
         "Background": {
             "Title": "Información general",
             "Text": "Las distrofias musculares de cinturas son un grupo de enfermedades musculares que se caracterizan por debilidad y deterioro progresivo de los músculos de las caderas, las piernas, los hombros u otros músculos proximales. En la actualidad se conocen más de 30 formas de distrofia muscular de cinturas, que tienen una gama diversa de signos y síntomas clínicos. Se calcula que, en conjunto, afectan a cerca de una de cada 15 000 personas."
@@ -1004,7 +1005,7 @@
     "CraniofacialPage": {
         "Title": "La división de enfermedades craneofaciales del Proyecto Genomas Raros es una colaboración con el <a href=\"https://www.massgeneral.org/children/services/treatmentprograms.aspx?id=1631&display=overview\" target=\"_blank\" class=\"Link\">Centro de Labio Leporino y Paladar Hendido (Cleft and Craniofacial Center) del hospital Mass General</a> y con los <a href=\"https://www.shrinershospitalsforchildren.org/boston/cleftlippalate\" target=\"_blank\" class=\"Link\">Shriners Hospitals for Children</a>. Se dedica al diagnóstico genético y al descubrimiento de genes que se relacionan con las enfermedades craneofaciales congénitas.",
         "Text": "A través de este proyecto, los pacientes que tienen enfermedades craneofaciales sin diagnosticar en las que se sospeche que el agente causal es un gen único pueden participar en un estudio en el que se usa la secuenciación del genoma completo para buscar la causa genética de la enfermedad que afecta a su familia.",
-        "ImageAlt": "[es]If you or a loved one has a rare and genetically undiagnosed condition, join a patient-driven research study to discover the genes underlying your family's rare disease.",
+        "ImageAlt": "Si usted o un ser querido tiene una enfermedad rara y no diagnosticada genéticamente, únase a un estudio de investigación dirigido por pacientes para descubrir los genes que subyacen a la enfermedad rara de su familia.",
         "Background": {
             "Title": "Información general",
             "Text": "Las enfermedades craneofaciales afectan el desarrollo de los huesos y de los tejidos de la cabeza y la cara. Pueden presentarse de manera aislada, acompañadas de otras afecciones craneofaciales o como característica de un síndrome subyacente que afecte a otras partes del cuerpo. Por ejemplo, las <a href=\"https://www.nidcr.nih.gov/health-info/cleft-lip-palate/more-info\" target=\"_blank\" class=\"Link\">hendiduras faciales</a> pueden ser enfermedades aisladas, suceder al tiempo con la <a href=\"https://rarediseases.info.nih.gov/diseases/6209/craniosynostosis\" target=\"_blank\" class=\"Link\">craneosinostosis</a> o formar parte de un síndrome genético, como el <a href=\"https://rarediseases.info.nih.gov/diseases/9124/treacher-collins-syndrome\" target=\"_blank\" class=\"Link\">síndrome de Treacher Collins</a>. En conjunto, se calcula que los muchos tipos de enfermedades craneofaciales afectan aproximadamente a uno de entre cada 700 y cada 1000 recién nacidos."
@@ -1058,12 +1059,12 @@
         }
     },
     "StayInformedPage": {
-        "Title": "[es]Stay Informed!",
-        "Text": "[es]Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email",
-        "Button": "[es]Return home"
+        "Title": "¡Manténgase informado(a)!",
+        "Text": "Gracias por unirse a la lista de correo electrónico. Le enviaremos actualizaciones y lo mantendremos informado. Puede darse de baja en cualquier momento. Si tiene alguna pregunta sobre su estado en el proyecto, envíe un correo electrónico",
+        "Button": "Regresar a la pagina principal"
     },
     "DashboardPage": {
-        "Title": "[es]My Dashboard",
+        "Title": "Mi Panel de Control",
         "Info": {
             "Paragraph1": "Gracias por su interés en el Proyecto Genomas Raros. En esta página encontrará información sobre los pasos que se requieren para vincularse al estudio.",
             "Paragraph2": {
@@ -1075,40 +1076,40 @@
         "StudyMessages": {
           "Title": "Mensajes del estudio",
           "Header": {
-            "Date": "[es]Date",
-            "Title": "[es]Title",
-            "Description": "[es]Description"
+            "Date": "Fecha",
+            "Title": "Título",
+            "Description": "Descripción"
           },
           "Actions": {
-            "ShowMore": "[es]Show more",
-            "ShowLess": "[es]Show less"
+            "ShowMore": "Mostrar más",
+            "ShowLess": "Muestra menos"
           }
         },
         "UserActivities": {
           "Title": "Documentos del estudio",
           "Header": {
-            "Form": "[es]Form",
-            "Summary": "[es]Summary",
-            "Status": "[es]Status",
-            "Actions": "[es]Actions"
+            "Form": "Documento",
+            "Summary": "Resumen",
+            "Status": "Estado",
+            "Actions": "Acciones"
           },
           "StatusCode": {
-            "CREATED": "[es]Created",
-            "IN_PROGRESS": "[es]In Progress",
-            "COMPLETE": "[es]Complete"
+            "CREATED": "Creado(a)",
+            "IN_PROGRESS": "En curso",
+            "COMPLETE": "Completo(a)"
           },
           "Actions": {
-            "Start": "[es]Start",
-            "Continue": "[es]Continue",
-            "View": "[es]View"
+            "Start": "Comienzo",
+            "Continue": "Continuar",
+            "View": "Mira"
           },
-          "NotAvailable": "[es]N/A"
+          "NotAvailable": "No disponible"
         }
     },
     "ErrorPage": {
-        "Title": "[es]We've encountered an error",
-        "Text1": "[es]Please wait a moment and retry. If the trouble persists, please email us at",
-        "Text2": "[es]or call us at"
+        "Title": "Hemos encontrado un error",
+        "Text1": "Espere un momento y vuelva a intentarlo. Si el problema persiste, envíenos un correo electrónico a",
+        "Text2": "o llámanos al"
     },
     "CountMeInPage": {
         "Title": "Cuéntenos su historia",
@@ -1116,20 +1117,20 @@
         "Text": "Para comenzar, díganos si usted o uno de sus seres queridos cumple los <span class=\"Accent\">requisitos para participar</span> que se mencionan a continuación. Solo debe dar constancia de que todas las declaraciones acompañadas por casillas son verdaderas. Luego se le pedirá que abra una cuenta en <span class=\"NotALink\">raregenomes.org</span> y que llene una solicitud en la que nos contará más sobre la enfermedad rara que hay en su familia. El equipo investigador revisará la información e invitará a participar a las familias que cumplan los requisitos."
     },
     "SessionExpiredPage": {
-        "Text1": "[es]You were away for a while, so we logged you out as a security precaution.",
-        "Text2": "[es]Please log in again to return to the last page you were on.",
-        "Button": "[es]Log In"
+        "Text1": "Estuvo fuera por un tiempo, así que lo desconectamos como medida de seguridad.",
+        "Text2": "Vuelva a iniciar sesión para volver a la última página en la que estaba.",
+        "Button": "Iniciar sesión"
     },
     "Auth0LandingPage": {
-        "Text": "[es]Please wait. You will be redirected to a destination soon..."
+        "Text": "Espere por favor. Pronto será redirigido a un destino..."
     },
     "EmailVerifiedCallbackPage": {
-        "Header": "[es] Email verified",
-        "Text": "[es] Please wait. You will be redirected to a login page soon..."
+        "Header": "Correo electrónico verificado",
+        "Text": "Espere por favor. Pronto será redirigido a un destino..."
     },
     "EmailVerificationRequiredPage": {
-        "Header": "[es]Email verification required",
-        "Text": "[es]Please verify your email using the link that was sent to your email address."
+        "Header": "Se requiere verificación de correo electrónico",
+        "Text": "Verifique su correo electrónico utilizando el enlace que se envió a su dirección de correo electrónico."
     },
     "ThankYouPage": {
         "Title": "Gracias por su interés en participar en el Proyecto Genomas Raros",
@@ -1143,7 +1144,7 @@
         "Paragraph2": "Es posible que con el tiempo podamos ampliar el proyecto. Si se inscribe en nuestra lista de correo, podemos comunicarnos con usted si estos requisitos para participar cambian.",
         "Form": {
             "Label": "Dirección de correo electrónico *",
-            "Error": "[es]Please enter a valid Email Address",
+            "Error": "Por favor, introduce una dirección de correo electrónico válida",
             "Submit": "Inscribirse en la lista de correo"
         },
         "Paragraph3": "Si en algún momento desea que su información se borre de nuestra base de datos, escríbanos por correo electrónico a <a href=\"mailto:raregenomes@broadinstitute.org\" class=\"Link\">raregenomes@broadinstitute.org</a>."
@@ -1151,14 +1152,14 @@
     "StudyMessages": {
         "Application": {
             "InReview": {
-                "Subject": "Application",
-                "Message": "Your application is being reviewed. We will contact you as soon as a decision about your application has been made. If you do not hear from our office within 6 weeks, please contact us.",
-                "More": "<p>Please be aware that we may contact you by phone or email. The emails we send you that contain personal identifiers or health information will be sent using an encryption tool called Send Secure unless you have specifically chosen otherwise. These emails can be identified by the words \"Send Secure\" in the subject field, will come from an email address ending in @partners.org, and will ask you to click on an attachment to create an account. If you are unsure if the email you received is from us, please contact us.</p>"
+                "Subject": "Solicitud",
+                "Message": "Su solicitud está siendo revisada. Nos comunicaremos con usted tan pronto como se haya tomado una decisión sobre su solicitud. Si no recibe noticias de nuestra oficina dentro de las 6 semanas, comuníquese con nosotros.",
+                "More": "<p>Tenga en cuenta que podemos comunicarnos con usted por teléfono o correo electrónico. Los correos electrónicos que le enviamos que contienen identificadores personales o información médica se enviarán mediante una herramienta de cifrado llamada Send Secure, a menos que haya elegido específicamente lo contrario. Estos correos electrónicos pueden identificarse con las palabras \"Enviar seguro\" en el campo del asunto, provendrán de una dirección de correo electrónico que termina en @partners.org y le pedirán que haga clic en un archivo adjunto para crear una cuenta. Si no está seguro de si el correo electrónico que recibió es de nosotros, comuníquese con nosotros.</p>"
             },
             "ThankYou": {
-                "Subject": "Application",
-                "Message": "At any time during your involvement with the study, contact us with any questions or concerns.",
-                "More": "<p>Please be aware that we may contact you by phone or email. The emails we send you that contain personal identifiers or health information will be sent using an encryption tool called Send Secure unless you have specifically chosen otherwise. These emails can be identified by the words \"Send Secure\" in the subject field, will come from an email address ending in @partners.org, and will ask you to click on an attachment to create an account. If you are unsure if the email you received is from us, please contact us.</p>"
+                "Subject": "Solicitud",
+                "Message": "En cualquier momento durante su participación en el estudio, comuníquese con nosotros si tiene alguna pregunta o inquietud.",
+                "More": "<p>Tenga en cuenta que podemos comunicarnos con usted por teléfono o correo electrónico. Los correos electrónicos que le enviamos que contienen identificadores personales o información médica se enviarán mediante una herramienta de cifrado llamada Send Secure, a menos que haya elegido específicamente lo contrario. Estos correos electrónicos pueden identificarse con las palabras \"Enviar seguro\" en el campo del asunto, provendrán de una dirección de correo electrónico que termina en @partners.org y le pedirán que haga clic en un archivo adjunto para crear una cuenta. Si no está seguro de si el correo electrónico que recibió es de nosotros, comuníquese con nosotros.</p>"
             }
         },
         "ApplicationDecision": {
@@ -1267,19 +1268,19 @@
         },
         "DataAnalysis": {
             "FamilyStepsComplete": {
-                "Subject": "[es]Sequencing and Analysis",
-                "Message": "[es]Your study activities are now complete.",
-                "More": "<p>[es]Your participation will help us in our search for a genetic explanation for the undiagnosed condition in your family member. Thank you for taking part in this study!</p>"
+                "Subject": "Secuenciación y análisis genómico",
+                "Message": "Sus actividades de estudio ahora están completas.",
+                "More": "<p>Su participación nos ayudará en nuestra búsqueda de una explicación genética para la condición no diagnosticada en su familiar. ¡Gracias por participar en este estudio!</p>"
             },
             "ProbandStepsComplete": {
-                "Subject": "[es]Sequencing and Analysis",
-                "Message": "[es]We have received your sample and are processing it for sequencing.",
-                "More": "<p>[es]It typically takes 4-6 months before we have data to analyze. Then, our team of analysts will begin look for connections between genetic changes present and your symptoms. If we identify a genetic change that we believe may be related to your medical condition, we will contact you to discuss confirmation testing in a clinical laboratory.</p><p>Our goal is to find the genetic explanation for the undiagnosed condition in each family who enrolls, but we cannot guarantee that there will be a result for each family. If we do not initially find a result, we will keep your family enrolled and re-analyze the data again at a later date since the scientific understanding of human disease as well as our tools for analyzing genetic data are constantly improving.</p><p>Because medical conditions can change over time, please contact our office if new symptoms appear or if you receive a diagnosis through an alternate means.</p><p>As always, please contact us if you have questions about your family’s progress in the study. Thank you for participating in the Rare Genomes Project!</p>"
+                "Subject": "Secuenciación y análisis genómico",
+                "Message": "Hemos recibido su muestra y la estamos procesando para secuenciar genómico.",
+                "More": "<p>Por lo general, toma de 4 a 6 meses antes de que tengamos datos para analizar. Luego, nuestro equipo de analistas comenzará a buscar conexiones entre los cambios genéticos presentes y sus síntomas. Si identificamos un cambio genético que creemos que puede estar relacionado con su afección médica , nos comunicaremos con usted para discutir las pruebas de confirmación en un laboratorio clínico.</p><p>Nuestro objetivo es encontrar la explicación genética de la condición no diagnosticada en cada familia que se inscribe, pero no podemos garantizar que habrá un resultado para cada familia. Si inicialmente no encontramos un resultado, mantendremos a su familia inscrita y volveremos a analizar los datos en una fecha posterior, ya que la comprensión científica de las enfermedades humanas, así como nuestras herramientas para analizar datos genéticos, mejoran constantemente.</p><p>Debido a que las condiciones médicas pueden cambiar con el tiempo, comuníquese con nuestra oficina si aparecen nuevos síntomas o si recibe un diagnóstico a través de un medio alternativo.</p><p>Como siempre, comuníquese con nosotros si tiene preguntas sobre el progreso de su familia en el estudio. ¡Gracias por participar en el Proyecto de Genomas Raros!</p>"
             },
             "ProbandNeg": {
-                "Subject": "[es]Sequencing and Analysis",
-                "Message": "[es]We have not identified a result to date.",
-                "More": "<p>[es]Analysis of your DNA and health information has not revealed a genetic variant that we think explains your condition.</p><p>Our goal is to find the genetic explanation for the undiagnosed condition in each family who enrolls, but we cannot guarantee that there will be a result for each family. We will keep your family enrolled and re-analyze the data again at a later date since the scientific understanding of human disease as well as our tools for analyzing genetic data are constantly improving.</p><p>Because medical conditions can change over time, please contact our office if new symptoms appear or if you receive a diagnosis through an alternate means.</p><p>As always, please contact us if you have questions about your family’s progress in the study.</p>"
+                "Subject": "Secuenciación y análisis genómico",
+                "Message": "No hemos identificado ningún resultado hasta la fecha.",
+                "More": "<p>El análisis de su ADN y su información de salud no ha revelado una variante genética que creemos que explique su condición.</p><p>Nuestro objetivo es encontrar la explicación genética de la condición no diagnosticada en cada familia que se inscribe, pero no podemos garantizar que habrá un resultado para cada familia. Mantendremos a su familia inscrita y volveremos a analizar los datos nuevamente en una fecha posterior, ya que la comprensión científica de las enfermedades humanas, así como nuestras herramientas para analizar datos genéticos, mejoran constantemente.</p><p>Debido a que las condiciones médicas pueden cambiar con el tiempo, comuníquese con nuestra oficina si aparecen nuevos síntomas o si recibe un diagnóstico a través de un medio alternativo.</p><p>Como siempre, comuníquese con nosotros si tiene preguntas sobre el progreso de su familia en el estudio.</p>"
             }
         }
     },
@@ -1313,10 +1314,10 @@
                 "LoadingError": "[es]We're sorry, but an error has occurred."
             },
             "SessionWillExpire": {
-                "Title": "[es]Your session will time-out soon",
-                "Text": "[es]To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
-                "SignOut": "[es]Sign Out",
-                "Continue": "[es]Continue"
+                "Title": "Su sesión terminará pronto",
+                "Text": "Para proteger su privacidad, el sistema cerrará su sesión porque ha estado fuera por un tiempo. Haga clic en \"Continuar\" para permanecer conectado. Haga clic en \"Cerrar sesión\" si ha terminado por ahora.",
+                "SignOut": "Desconectar",
+                "Continue": "Continuar"
             },
             "LanguagePreferences": {
                 "Text": "Changing the language preference will also change the language used for e-mail communications.",
@@ -1327,78 +1328,78 @@
     },
     "SDK": {
         "SubmitButton": "Enviar",
-        "CloseButton": "[es]Close",
-        "AddButton": "[es]ADD",
-        "CancelButton": "[es]CANCEL",
+        "CloseButton": "Cerrar",
+        "AddButton": "AGREGAR",
+        "CancelButton": "CANCELAR",
         "NextButton": "<span class=\"fa fa-angle-right Icon--arrow material-icons mat-icon\"></span>",
         "PreviousButton": "<span class=\"fa fa-angle-left Icon--arrow material-icons mat-icon\"></span>",
-        "SavingButton": "[es]Saving",
-        "EditButton": "[es]View/Edit",
-        "ReviewButton": "[es]View",
-        "ValidateError": "[es]Please answer all the required questions above to continue",
-        "CommunicationError": "[es]There was a problem saving your data. Please check the form and your answers before submitting",
-        "SaveError": "[es]We're sorry but an error occurred",
+        "SavingButton": "Ahorro",
+        "EditButton": "Ver/Editar",
+        "ReviewButton": "Mira",
+        "ValidateError": "Responda todas las preguntas obligatorias anteriores para continuar",
+        "CommunicationError": "Hubo un problema al guardar tus datos. Por favor revise el formulario y sus respuestas antes de enviar",
+        "SaveError": "Lo/la sentimos pero ocurrió un error",
         "ExportStudy": {
-            "Export": "[es]EXPORT"
+            "Export": "EXPORTAR"
         },
         "ListStudies": {
-            "StudyName": "[es]Study Name",
-            "ParticipantCount": "[es]Participant Count"
+            "StudyName": "Nombre del Estudio",
+            "ParticipantCount": "Recuento de Participantes"
         },
         "ListWorkspaces": {
-            "WorkspaceName": "[es]Workspace Name",
-            "WorkspaceNamespace": "[es]Workspace Namespace"
+            "WorkspaceName": "Nombre del Espacio de Trabajo",
+            "WorkspaceNamespace": "Espacio de Nombres del Espacio de Trabajo"
         },
         "Login": {
-            "Login": "[es]LOG IN",
-            "Logout": "[es]LOG OUT"
+            "Login": "INICIAR SESIÓN",
+            "Logout": "CERRAR SESIÓN"
         },
         "SignInOut": {
             "SignIn": "Ingresar",
-            "SignOut": "[es]Sign Out"
+            "SignOut": "Cerrar Sesión"
         },
         "UserActivities": {
-            "ActivityName": "[es]Form",
-            "Summary": "[es]Summary",
-            "ActivityStatus": "[es]Status",
-            "ActivityDate": "[es]Created",
-            "ActivityActions": "[es]Actions"
+            "ActivityName": "Documento",
+            "Summary": "Resumen",
+            "ActivityStatus": "Estado",
+            "ActivityDate": "Creado(a)",
+            "ActivityActions": "Acciones"
         },
         "ManageParticipants": {
-            "GovernedParticipants": "[es]Governed participants",
-            "ParticipantPlaceholder": "[es]Participant",
-            "ParticipantsList": "[es]Participants"
+            "GovernedParticipants": "Participantes gobernados(as)",
+            "ParticipantPlaceholder": "Participante",
+            "ParticipantsList": "Participantes"
         },
         "ParticipantProfile": {
-            "OpenProfile": "[es]Profile",
-            "ViewAs": "[es]View As",
-            "ManageParticipants": "[es]Manage participants"
+            "OpenProfile": "Perfil",
+            "ViewAs": "Ver Como",
+            "ManageParticipants": "Gestionar participantes"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "[es]User preferences",
-            "UserPreferencesGender": "[es]Sex",
-            "UserPreferencesLocale": "[es]Preferred language"
+            "UserPreferencesTitle": "Preferencias del usuario",
+            "UserPreferencesGender": "Género",
+            "UserPreferencesLocale": "Idioma preferido"
         },
         "Dashboard": {
-            "Title": "[es]My Dashboard",
-            "Text": "[es]The dashboard below describes each Rare Genomes Project form and its status."
+            "Title": "Panel de Control",
+            "Text": "El siguiente Panel de Control describe cada formulario de Proyecto de Genomas Raros y su estado."
         },
         "DatePicker": {
-            "Day": "[es]Choose day...",
-            "Month": "[es]Choose month...",
-            "Year": "[es]Choose year...",
-            "January": "[es]January",
-            "February": "[es]February",
-            "March": "[es]March",
-            "April": "[es]April",
-            "May": "[es]May",
-            "June": "[es]June",
-            "July": "[es]July",
-            "August": "[es]August",
-            "September": "[es]September",
-            "October": "[es]October",
-            "November": "[es]November",
-            "December": "[es]December"
+            "Day": "Elige el día...",
+            "Month": "Elige el mes...",
+            "Year": "Elige año...",
+            "January": "enero",
+            "February": "febrero",
+            "March": "marzo",
+            "April": "abril",
+            "May": "mayo",
+            "June": "junio",
+            "July": "julio",
+            "August": "agosto",
+            "September": "septiembre",
+            "October": "octubre",
+            "November": "noviembre",
+            "December": "diciembre"
         },
         "DateLabel": {
             "YYYY": "AAAA",
@@ -1406,39 +1407,39 @@
             "DD": "DD"
         },
         "UserMenu": {
-            "DashboardButton": "[es]Dashboard",
-            "SignOutButton": "[es]Sign Out"
+            "DashboardButton": "Panel de Control",
+            "SignOutButton": "Cerrar Sesión"
         },
         "DetailsPlaceholder": {
-            "PluralForm": "[es]characters remaining",
-            "SingularForm": "[es]character remaining"
+            "PluralForm": "letras de imprenta restantes",
+            "SingularForm": "letra de imprenta restante"
         },
         "Title": {
-            "Default": "[es]Rare Genomes Project",
-            "Alert": "[es]Your session will time-out soon"
+            "Default": "Proyecto de Genomas Raros",
+            "Alert": "Su sesión terminará pronto"
         },
         "EmailEntry": {
-            "InvalidEmail": "[es]Please enter a valid email"
+            "InvalidEmail": "Por favor, introduce una dirección de correo electrónico válida"
         },
         "Institutions": {
             "Fields": {
-                "Name": "[es]Physician Name",
-                "Institution": "[es]Institution",
-                "InstitutionAny": "[es]Institution (if any)",
-                "City": "[es]City",
-                "State": "[es]State"
+                "Name": "Nombre del médico",
+                "Institution": "Institución",
+                "InstitutionAny": "Institución (si la hubiera)",
+                "City": "Ciudad",
+                "State": "Estado"
             },
             "Form" : {
                 "OtherPhysician": "Otro doctor",
                 "OtherInstitution": "Otra institución"
             },
-            "PhysicianValidation": "[es]Please fill out all required fields"
+            "PhysicianValidation": "Por favor rellene todos los campos requeridos"
         },
         "Validators": {
-            "DateNavyValidationRule": "[es]Entered date is invalid"
+            "DateNavyValidationRule": "La fecha ingresada no es válida"
         },
-        "ConfirmDeletion": "[es]Are you sure you want to delete \nthis information?",
-        "DeleteButton": "[es]Delete",
-        "CancelBtn": "[es]Cancel"
+        "ConfirmDeletion": "¿Está seguro de que desea eliminar esta información?",
+        "DeleteButton": "Eliminar",
+        "CancelBtn": "Cancelar"
     }
 }
