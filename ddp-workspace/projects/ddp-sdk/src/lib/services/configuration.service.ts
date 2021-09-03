@@ -73,4 +73,11 @@ export class ConfigurationService {
     prismDashboardRoute: string;
     prismRoute: string;
     picklistsWithNoSorting: string[] = [];
+    /*
+     * This flag indicates whether we enable fix for missing house numbers.
+     * When user selects an address in suggestion list from Google autocomplete
+     * and this address doesn't exist street field won't include a house number (if user selected an address with one)
+     * Enabling this flag potentially fixes this problem although it's not yet tested properly and may cause strange behavior
+     */
+    fixMissingHouseNumberInAddressForm = false;
 }

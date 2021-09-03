@@ -83,6 +83,7 @@ config.usesVerticalStepper = [
   ActivityCodes.PatientQualityOfLife,
   ActivityCodes.QualityOfLife
 ];
+config.fixMissingHouseNumberInAddressForm = true;
 
 export const translateFactory = (
   injector: Injector,
