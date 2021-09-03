@@ -1,13 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { StringsHelper } from '../utility/stringsHelper';
 
 @Pipe({
     name: 'searchHighlight'
 })
 export class SearchHighlightPipe implements PipeTransform {
-    transform(text: string, search: string): string {
+    transform(text: string, search: string, ignoredSymbols?: string[]): string {
+        const normalizedSearch = StringsHelper.normalizeString(search, ignoredSymbols || []);
+
         // copied from
         // https://stackoverflow.com/questions/49653410/mat-autocomplete-filter-to-hightlight-partial-string-matches#answer-49670236
-        const pattern = search
+        const pattern = normalizedSearch
             .replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
             .split(' ')
             .filter(t => t.length > 0)

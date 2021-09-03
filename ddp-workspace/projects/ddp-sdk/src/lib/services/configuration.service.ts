@@ -72,5 +72,8 @@ export class ConfigurationService {
     prismColumns: string[] = [];
     prismDashboardRoute: string;
     prismRoute: string;
-    picklistsWithNoSorting: string[] = [];
+    // autocompletePicklists which don't need to be sorted
+    notSortedPicklistAutocompleteStableIds: string[] = [];
+    // symbols which should be ignored in autocompletePicklist query (treat as a space)
+    picklistAutocompleteIgnoredSymbols: string[] = ['-', '/', '(', ')'];
 }
