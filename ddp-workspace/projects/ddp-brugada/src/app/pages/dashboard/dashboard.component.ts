@@ -1,8 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { forkJoin, Observable, of } from 'rxjs';
 import { take } from 'rxjs/operators';
-
+import { Router } from '@angular/router';
+import { ActivitiesUtil } from '../../utils';
+import { Route } from '../../constants/Route';
+import { forkJoin, Observable, of } from 'rxjs';
+import { Component, Inject, OnInit } from '@angular/core';
 import {
   ActivityInstance,
   ActivityServiceAgent,
@@ -12,7 +13,6 @@ import {
   UserActivityServiceAgent,
 } from 'ddp-sdk';
 
-import { Route } from '../../constants/Route';
 
 @Component({
   selector: 'app-dashboard',
@@ -72,7 +72,7 @@ export class DashboardComponent implements OnInit {
       activities: this.getActivities(),
       announcements: this.getAnnouncements(),
     }).subscribe(({ activities, announcements }) => {
-      this.activities = activities;
+      this.activities = ActivitiesUtil.sortActivitiesByStatus(activities);
       this.announcements = announcements;
       this.isLoading = false;
     });

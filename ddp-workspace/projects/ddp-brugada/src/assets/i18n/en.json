@@ -462,13 +462,13 @@
     "RequiredError": "is required",
     "ValidError": "Enter a valid",
     "LengthMoreError": "length must be more than",
-    "PasswordPatternError": "Password should contains: <br>- at least one number <br> - at least one lower case letter <br>- at least one upper case letter",
+    "PasswordPatternError": "Password should contain: <br>- at least one number <br> - at least one lower case letter <br>- at least one upper case letter",
     "AlreadyRegistered": "Already registered?",
     "SignInLink": "Sign in with existing account",
     "Submit": "Submit"
   },
   "Login": {
-    "Title": "Log in your account",
+    "Title": "Log in to your account",
     "Description": "You will use this information to later sign in to your Brugada Project account.  The Brugada Project will use the email address provided to communicate with you.",
     "ForgotPassword": "Don't remember your password?",
     "RestorePassword": "Restore password",
