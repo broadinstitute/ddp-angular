@@ -3,6 +3,10 @@ import { ActivityInstance } from './../../../../ddp-sdk/src/lib/models/activityI
 
 
 export const sortActivitiesByStatus = (activities: ActivityInstance[]): ActivityInstance[] => {
+  const inprogressActivities: ActivityInstance[] = activities.filter(
+    (activity: ActivityInstance) => activity.statusCode === ActivityStatusCodes.IN_PROGRESS
+  );
+
   const completedActivities: ActivityInstance[] = activities.filter(
     (activity: ActivityInstance) => activity.statusCode === ActivityStatusCodes.COMPLETE
   );
@@ -11,5 +15,5 @@ export const sortActivitiesByStatus = (activities: ActivityInstance[]): Activity
     (activity: ActivityInstance) => activity.statusCode !== ActivityStatusCodes.COMPLETE
   );
 
-  return [...incompletedActivities, ...completedActivities];
+  return [...inprogressActivities, ...incompletedActivities, ...completedActivities];
 };
