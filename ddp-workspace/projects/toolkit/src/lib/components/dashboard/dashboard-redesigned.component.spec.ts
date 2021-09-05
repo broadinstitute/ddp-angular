@@ -304,7 +304,7 @@ describe('DashboardRedesignedComponent', () => {
         expect(component.trackById('never mind', { userGuid: '1', label: 'label', activities: []})).toBe('1');
     });
 
-    it('should delete participants w/o activities', () => {
+    it('should delete participants w/o activities', (done) => {
         toolkitConfigMock.useMultiParticipantDashboard = true;
         userActivityServiceAgentSpy.getActivities.withArgs(jasmine.anything(), '1').and.returnValue(of([]));
         userActivityServiceAgentSpy.getActivities.withArgs(jasmine.anything(), '2').and.returnValue(of([activityMock]));
@@ -316,6 +316,14 @@ describe('DashboardRedesignedComponent', () => {
         fixture.detectChanges();
 
         expect(userManagementServiceSpy.deleteUser).toHaveBeenCalledWith('1');
+
+        component.dashboardParticipants$.subscribe((participants) => {
+            expect(participants).toEqual([
+                { userGuid, label: 'You test', activities: [activityMock]},
+                { userGuid: '2', label: 'Your child test', activities: [activityMock]},
+            ]);
+            done();
+        });
     });
 
     it('builds the participants list without first and last names', (done) => {

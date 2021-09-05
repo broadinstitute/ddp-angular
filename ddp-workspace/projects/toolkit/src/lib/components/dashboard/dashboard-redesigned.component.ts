@@ -14,9 +14,10 @@ import {
     ActivityInstance,
     UserProfileServiceAgent,
     WorkflowServiceAgent,
-    UserManagementServiceAgent
+    UserManagementServiceAgent,
+    LoggingService
 } from 'ddp-sdk';
-import { map, take, filter, switchMap, tap, mergeMap, finalize, catchError } from 'rxjs/operators';
+import { map, take, filter, switchMap, tap, mergeMap, finalize, catchError, mapTo } from 'rxjs/operators';
 import { combineLatest, forkJoin, Observable, of, Subject } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -154,6 +155,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
         private translate: TranslateService,
         private workflowService: WorkflowServiceAgent,
         private userManagementService: UserManagementServiceAgent,
+        private logger: LoggingService,
         @Inject('toolkit.toolkitConfig') public toolkitConfig: ToolkitConfigurationService) {
         super(router, _announcements, _participantsSearch, session, userActivityServiceAgent, toolkitConfig);
     }
@@ -167,37 +169,53 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
     }
 
     private getDashboardParticipants(): Observable<DashboardParticipant[]> {
-        const operatorParticipant$ = this.userActivities$
-            .pipe(switchMap((userActivities) => userActivities.length ? this.userProfileService.profile : of(null)));
-
         return combineLatest([
-            operatorParticipant$,
-            this.governedParticipantsAgent.getGovernedStudyParticipants(this.studyGuid),
+            this.getOperatorParticipant(),
+            this.getGovernedParticipants()
         ]).pipe(
             map(([operatorParticipant, participants]) => {
-                const result: Observable<DashboardParticipant>[] =
-                    participants.map((participant, i) => this.getUserActivitiesForParticipant(participant.userGuid)
-                    .pipe(take(1), map((activities) => ({
-                        userGuid: participant.userGuid,
-                        label: (participant.userProfile.firstName || participant.userProfile.lastName)
-                            ? `${participant.userProfile.firstName} ${participant.userProfile.lastName}`
-                            : this.translate.instant('Toolkit.Dashboard.ChildLabel', { suffix: i > 0 ? ' #' + (i + 1) : '' }),
-                        activities,
-                }))));
-                if (operatorParticipant) {
-                    result.unshift(this.userActivities$.pipe(take(1), map((activities) => ({
+                return [...(operatorParticipant ? [operatorParticipant] : []), ...participants];
+            })
+        );
+    }
+
+    private getGovernedParticipants(): Observable<DashboardParticipant[]> {
+        return this.governedParticipantsAgent.getGovernedStudyParticipants(this.studyGuid)
+            .pipe(
+                map((participants) => participants.map(participant =>
+                    this.getUserActivitiesForParticipant(participant.userGuid)
+                        .pipe(take(1), map((activities) => ({
+                            userGuid: participant.userGuid,
+                            label: (participant.userProfile.firstName || participant.userProfile.lastName)
+                                ? `${participant.userProfile.firstName} ${participant.userProfile.lastName}`
+                                : '',
+                            activities,
+                        }))))
+                ),
+                switchMap(participants$ => participants$.length ? forkJoin(...participants$) : of([])),
+                switchMap(participants => this.checkAndDeleteAccidentalParticipant(participants)),
+                // assign custom label after filtering out empty users in order to use the correct index
+                map(participants => participants.map((participant, i) => ({
+                    ...participant,
+                    label: participant.label
+                        ? participant.label
+                        : this.translate.instant('Toolkit.Dashboard.ChildLabel', { suffix: i > 0 ? ' #' + (i + 1) : '' }),
+                }))),
+            );
+    }
+
+    private getOperatorParticipant(): Observable<DashboardParticipant|null> {
+        return this.userActivities$
+            .pipe(
+                switchMap(userActivities => userActivities.length ? this.userProfileService.profile : of(null)),
+                switchMap(operatorParticipant => operatorParticipant ? this.userActivities$.pipe(take(1), map((activities) => ({
                         userGuid: this.session.session.userGuid,
                         label: (operatorParticipant.profile.firstName || operatorParticipant.profile.lastName)
                             ? `${operatorParticipant.profile.firstName} ${operatorParticipant.profile.lastName}`
                             : this.translate.instant('Toolkit.Dashboard.UserLabel'),
                         activities
-                    }))));
-                }
-                return result;
-            }),
-            switchMap(participants$ => forkJoin(...participants$)),
-            switchMap(participants => this.checkAndDeleteAccidentalParticipant(participants)),
-        );
+                    }))) : of(null)
+                ));
     }
 
     public get isAdmin(): boolean {
@@ -234,7 +252,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
                 take(1),
                 tap(userGuid => this.session.setParticipant(userGuid)),
                 mergeMap((userGuid) => this.workflowService.fromParticipantList()
-                    .pipe(catchError(() => this.userManagementService.deleteUser(userGuid)))),
+                    .pipe(catchError(() => this.deleteUser(userGuid)))),
                 finalize(() => this.addParticipantButtonDisabled = false)
             )
             .subscribe((response) => {
@@ -252,10 +270,18 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
         }
 
         const deleteUserObservableList: Observable<void>[] = accidentalParticipant
-            .map((participant) => this.userManagementService.deleteUser(participant.userGuid));
+            .map((participant) => this.deleteUser(participant.userGuid));
         return forkJoin(...deleteUserObservableList)
             // return filtered participants once all deleting requests were done
-            .pipe(map(() => participants.filter(({activities}) => activities.length)));
+            .pipe(mapTo(participants.filter(({activities}) => activities.length)));
+    }
+
+    private deleteUser(userGuid: string): Observable<void> {
+        return this.userManagementService.deleteUser(userGuid).pipe(
+            catchError(() => {
+            this.logger.logDebug(this.LOG_SOURCE, 'Temp delete failed. This is OK.');
+            return of(null);
+        }));
     }
 
     public getUserActivitiesForParticipant(participantGuid: string): Observable<Array<ActivityInstance>> {

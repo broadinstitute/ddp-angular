@@ -66,6 +66,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     public userActivities$: Observable<Array<ActivityInstance>>;
     @Output() loadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
     private anchor: Subscription = new Subscription();
+    protected readonly LOG_SOURCE = 'DashboardComponent';
 
     constructor(
         protected router: Router,
