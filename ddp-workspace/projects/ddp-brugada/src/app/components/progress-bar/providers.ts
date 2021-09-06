@@ -3,15 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { InjectionToken, Provider } from '@angular/core';
 import { ActivityCode } from '../../constants/activity-code';
 import { filter, first, map, pluck, switchMap } from 'rxjs/operators';
-import { ActivityListItem } from './../../interfaces/activity-list-item';
+import { ActivityListItem } from '../../interfaces/activity-list-item';
 import { ConfigurationService, UserActivityServiceAgent, ActivityInstance, ActivityStatusCodes } from 'ddp-sdk';
 
 
 const anotherKey = 'another';
-
-export type ActivitiesListDictionary = {
-  [key in ActivityCode & 'another']: ActivityListItem;
-};
+const ADDITIONAL_SURVEYS_COUNT = 1;
 
 const getUpdatedActivityMap = (activities: ActivityInstance[], activeActivityId: string): Map<string, ActivityListItem> => {
   const activitiesDictionary: Map<string, ActivityListItem> = new Map(
@@ -38,7 +35,7 @@ const getUpdatedActivityMap = (activities: ActivityInstance[], activeActivityId:
                                       && (activity.statusCode === ActivityStatusCodes.COMPLETE
                                       || activity.statusCode === ActivityStatusCodes.CREATED && activity.previousInstanceGuid)
       )
-      .length === 2;
+      .length === ADDITIONAL_SURVEYS_COUNT;
 
   if (isAdditionalActivitiesComplete) {
     activitiesDictionary.set(
