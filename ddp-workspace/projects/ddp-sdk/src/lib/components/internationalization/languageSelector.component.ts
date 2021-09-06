@@ -63,11 +63,12 @@ import { ActivatedRoute, Router } from '@angular/router';
                             (click)="changeLanguage(lang); clearURLParam()">{{lang.displayName}}
                     </button>
                 </mat-menu>
-                <ddp-popup-with-checkbox text="Toolkit.Dialogs.LanguagePreferences.Text"
-                                         checkboxText="Toolkit.Dialogs.LanguagePreferences.CheckboxText"
-                                         buttonText="Toolkit.Dialogs.LanguagePreferences.ButtonText">
-                </ddp-popup-with-checkbox>
             </ng-template>
+
+            <ddp-popup-with-checkbox text="Toolkit.Dialogs.LanguagePreferences.Text"
+                                     checkboxText="Toolkit.Dialogs.LanguagePreferences.CheckboxText"
+                                     buttonText="Toolkit.Dialogs.LanguagePreferences.ButtonText">
+            </ddp-popup-with-checkbox>
         </div>
     `
 })
