@@ -76,4 +76,16 @@ export class ConfigurationService {
     notSortedPicklistAutocompleteStableIds: string[] = [];
     // symbols which should be ignored in autocompletePicklist query (treat as a space)
     picklistAutocompleteIgnoredSymbols: string[] = ['-', '/', '(', ')'];
+    /**
+     * If there are only 2 supported languages enabling this flag won't show a dropdown but only a toggle button.
+     */
+    useBinaryLanguageSelector = false;
+    /**
+     * Used in combination with `useBinaryLanguageSelector`.
+     * Reverses 2 supported languages.
+     * Example: a study supports English and Spanish.
+     * Default behavior: English is selected => shows English in language selector.
+     * Behavior with this flag enabled: English is selected => shows Spanish in language selector.
+     */
+    reverseBinaryLanguageSelector = false;
 }
