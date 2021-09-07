@@ -5,8 +5,8 @@
 
     &.about-us {
         .section-0 {
-            min-height: 705px;
             background-image: url(/assets/images/oval_green_left.png);
+            background-size: contain;
         }
         .section-1 {
             background-image: url(/assets/images/oval_carrot_right.png);
@@ -185,12 +185,6 @@
 }
 
 @media screen and (max-width: $desktop-breakpoint) {
-    .page.about-us {
-        .section-0 {
-            min-height: unset;
-        }
-    }
-
     .section {
         &-0 {
             background-size: auto 480px;
