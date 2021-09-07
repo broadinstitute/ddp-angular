@@ -59,8 +59,7 @@ export class ActivityDateQuestionBlock extends ActivityQuestionBlock<DatePickerV
         return hasFieldRule;
     }
 
-    public isUniqueValues(values: DatePickerValue[]): boolean {
-        const stringValues = values.map(({day, month, year}) => `${day}${month}${year}`);
-        return (new Set(stringValues)).size === stringValues.length;
+    public convertToString(value: DatePickerValue): string {
+        return `day:${value.day || ''};month:${value.month || ''};year:${value.year || ''}`;
     }
 }

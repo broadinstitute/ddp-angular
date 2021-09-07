@@ -19,7 +19,7 @@ export abstract class ActivityQuestionBlock<T> extends AbstractActivityQuestionB
         doValidation && this.validate();
     }
 
-    public isUniqueValues(values: T[]): boolean {
-        return (new Set(values)).size === values.length;
+    public convertToString(value: T): string {
+        return String(value);
     }
 }

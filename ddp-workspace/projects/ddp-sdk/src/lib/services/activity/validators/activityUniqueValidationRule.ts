@@ -15,8 +15,26 @@ export class ActivityUniqueValidationRule extends ActivityAbstractValidationRule
             return true;
         }
 
-        const [firstChild] = (this.question as ActivityCompositeQuestionBlock).children;
+        const {children} = (this.question as ActivityCompositeQuestionBlock);
+
+        const compositeAnswersStrings: string[] = answers.map(values => {
+            let result = '';
+            for (const [i, value] of values.entries()) {
+                const block = children[i];
+                // can't calculate a file's uniqueness
+                if (block.questionType !== QuestionType.File) {
+                    result += value.value ? `${value.stableId}:${children[i].convertToString(value.value)};` : '';
+                }
+            }
+            return result;
+        });
+
+        // all composite answers are empty
+        if (compositeAnswersStrings.every(str => !str)) {
+            return true;
+        }
+
         this.result = this.message;
-        return firstChild.isUniqueValues(answers.map(value => value[0].value));
+        return (new Set(compositeAnswersStrings)).size === compositeAnswersStrings.length;
     }
 }

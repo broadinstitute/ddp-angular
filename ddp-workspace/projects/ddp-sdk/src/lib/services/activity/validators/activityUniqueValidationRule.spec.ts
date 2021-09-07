@@ -37,33 +37,68 @@ describe('ActivityUniqueValidationRule', () => {
     });
 
     it('should return true if question is composite and answers are unique', () => {
-        const isUniqueValuesSpy = jasmine.createSpy('isUniqueValuesSpy').and.returnValue(true);
+        const convertToStringSpy = jasmine.createSpy('convertToStringSpy');
+        convertToStringSpy.withArgs([{ stableId: 'value1' }]).and.returnValue('value1');
+        convertToStringSpy.withArgs([{ stableId: 'value2' }]).and.returnValue('value2');
+        convertToStringSpy.withArgs('description').and.returnValue('description');
         const question = {
             children: [
-                { questionType: QuestionType.Picklist, selectMode: PicklistSelectMode.SINGLE, isUniqueValues: isUniqueValuesSpy },
-                { questionType: QuestionType.Picklist, selectMode: PicklistSelectMode.SINGLE, isUniqueValues: isUniqueValuesSpy }
+                { questionType: QuestionType.Picklist, selectMode: PicklistSelectMode.SINGLE, convertToString: convertToStringSpy },
+                { questionType: QuestionType.Text, convertToString: convertToStringSpy },
+                { questionType: QuestionType.File, convertToString: convertToStringSpy },
             ] as unknown as ActivityPicklistQuestionBlock[],
             questionType: QuestionType.Composite,
             answer: [
-                [{ stableId: 'test', value: [{ stableId: 'value1' }] }],
-                [{ stableId: 'test', value: [{ stableId: 'value2' }] }]],
+                [
+                    { stableId: 'testPicklist', value: [{ stableId: 'value1' }] },
+                    { stableId: 'testInput', value: 'description' },
+                    { stableId: 'testFile', value: 'does not matter' }],
+                [
+                    { stableId: 'testPicklist', value: null },
+                    { stableId: 'testInput', value: null },
+                    { stableId: 'testFile', value: null }],
+                [
+                    { stableId: 'testPicklist', value: [{ stableId: 'value2' }] },
+                    { stableId: 'testInput', value: 'description' },
+                    { stableId: 'testFile', value: 'does not matter' }]],
         } as unknown as ActivityCompositeQuestionBlock;
         validator = new ActivityUniqueValidationRule(question);
         expect(validator.recalculate()).toBeTrue();
-        expect(isUniqueValuesSpy).toHaveBeenCalledWith([[{ stableId: 'value1' }], [{ stableId: 'value2' }]]);
+        expect(convertToStringSpy.calls.allArgs()).toEqual([
+            [[{ stableId: 'value1' }]],
+            ['description'],
+            [[{ stableId: 'value2' }]],
+            ['description']]);
+        expect(convertToStringSpy.calls.count()).toBe(4);
+    });
+
+    it('should return true if question is composite and answers are empty', () => {
+        const convertToStringSpy = jasmine.createSpy('convertToStringSpy');
+        const question = {
+            children: [
+                { questionType: QuestionType.Picklist, selectMode: PicklistSelectMode.SINGLE, convertToString: convertToStringSpy },
+            ] as unknown as ActivityPicklistQuestionBlock[],
+            questionType: QuestionType.Composite,
+            answer: [[{ stableId: 'testPicklist', value: null }], [{ stableId: 'testPicklist', value: null }]]
+        } as unknown as ActivityCompositeQuestionBlock;
+        validator = new ActivityUniqueValidationRule(question);
+        expect(validator.recalculate()).toBeTrue();
+        expect(convertToStringSpy).not.toHaveBeenCalled();
     });
 
     it('should return false if question is composite and answers are not unique', () => {
-        const isUniqueValuesSpy = jasmine.createSpy('isUniqueValuesSpy').and.returnValue(false);
+        const convertToStringSpy = jasmine.createSpy('convertToStringSpy').and.returnValue(false);
+        convertToStringSpy.withArgs([{ stableId: 'value1' }]).and.returnValue('value1');
+        convertToStringSpy.withArgs('description').and.returnValue('description');
         const question = {
             children: [
-                { questionType: QuestionType.Picklist, selectMode: PicklistSelectMode.SINGLE, isUniqueValues: isUniqueValuesSpy },
-                { questionType: QuestionType.Picklist, selectMode: PicklistSelectMode.SINGLE, isUniqueValues: isUniqueValuesSpy }
+                { questionType: QuestionType.Picklist, selectMode: PicklistSelectMode.SINGLE, convertToString: convertToStringSpy },
+                { questionType: QuestionType.Text, convertToString: convertToStringSpy }
             ] as unknown as ActivityPicklistQuestionBlock[],
             questionType: QuestionType.Composite,
             answer: [
-                [{ stableId: 'test', value: [{ stableId: 'value1' }] }],
-                [{ stableId: 'test', value: [{ stableId: 'value1' }] }]],
+                [{ stableId: 'test', value: [{ stableId: 'value1' }] }, { stableId: 'testInput', value: 'description' }],
+                [{ stableId: 'test', value: [{ stableId: 'value1' }] }, { stableId: 'testInput', value: 'description' }]],
         } as unknown as ActivityCompositeQuestionBlock;
         validator = new ActivityUniqueValidationRule(question);
         validator.message = MESSAGE;

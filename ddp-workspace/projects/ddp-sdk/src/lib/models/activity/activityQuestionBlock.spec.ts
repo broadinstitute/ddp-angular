@@ -11,15 +11,10 @@ class TestNumberActivityQuestionBlock extends ActivityQuestionBlock<number> {
 }
 
 describe('ActivityQuestionBlock', () => {
-    describe('isUniqueValues', () => {
-        it('returns true if values are unique for activty question of primitive type', () => {
+    describe('convertToString', () => {
+        it('returns primitive type converted to string', () => {
             const block = new TestNumberActivityQuestionBlock();
-            expect(block.isUniqueValues([1, 2, 4])).toBeTrue();
-        });
-
-        it('returns false if values are unique for activty question of primitive type', () => {
-            const block = new TestNumberActivityQuestionBlock();
-            expect(block.isUniqueValues([1, 2, 2, 4])).toBeFalse();
+            expect(block.convertToString(1)).toBe('1');
         });
     });
 });

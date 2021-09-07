@@ -1,37 +1,30 @@
 import { ActivityDateQuestionBlock } from 'ddp-sdk';
 
 describe('ActivityDateQuestionBlock', () => {
-    describe('isUniqueValues', () => {
-        it('returns true if days are unique', () => {
+    describe('convertToString', () => {
+        it('returns correct string for date w/o day', () => {
             const block = new ActivityDateQuestionBlock();
-            expect(block.isUniqueValues([
-                { day: 1, month: 2, year: 1991 },
-                { day: 5, month: 2, year: 1991 },
-                { day: 10, month: 2, year: 1991 }])).toBeTrue();
+            expect(block.convertToString({ day: null, month: 2, year: 1991 })).toBe(`day:;month:2;year:1991`);
         });
 
-        it('returns true if months are unique', () => {
+        it('returns correct string for date w/o day and month', () => {
             const block = new ActivityDateQuestionBlock();
-            expect(block.isUniqueValues([
-                { day: 1, month: 2, year: 1991 },
-                { day: 1, month: 4, year: 1991 },
-                { day: 1, month: 5, year: 1991 }])).toBeTrue();
+            expect(block.convertToString({ day: null, month: null, year: 1991 })).toBe(`day:;month:;year:1991`);
         });
 
-        it('returns true if years are unique', () => {
+        it('returns correct string for date w/o year', () => {
             const block = new ActivityDateQuestionBlock();
-            expect(block.isUniqueValues([
-                { day: 1, month: 1, year: 1991 },
-                { day: 1, month: 1, year: 1992 },
-                { day: 1, month: 1, year: 1993 }])).toBeTrue();
+            expect(block.convertToString({ day: 1, month: 1, year: null })).toBe(`day:1;month:1;year:`);
         });
 
-        it('returns false if days are not unique', () => {
+        it('returns correct string for date w/o year and month', () => {
             const block = new ActivityDateQuestionBlock();
-            expect(block.isUniqueValues([
-                { day: 1, month: 2, year: 1991 },
-                { day: 5, month: 2, year: 1991 },
-                { day: 1, month: 2, year: 1991 }])).toBeFalse();
+            expect(block.convertToString({ day: 1, month: null, year: null })).toBe(`day:1;month:;year:`);
+        });
+
+        it('returns correct string for date', () => {
+            const block = new ActivityDateQuestionBlock();
+            expect(block.convertToString({ day: 1, month: 2, year: 1991 })).toBe(`day:1;month:2;year:1991`);
         });
     });
 });
