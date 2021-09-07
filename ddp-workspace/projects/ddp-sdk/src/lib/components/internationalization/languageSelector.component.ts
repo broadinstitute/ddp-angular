@@ -19,57 +19,69 @@ import { ActivatedRoute, Router } from '@angular/router';
     selector: 'ddp-language-selector',
     template: `
         <div [hidden]="!loaded">
-            <ng-container *ngIf="useBinaryLanguageSelector; else regularLanguageSelectorTmpl">
-                <button
-                    class="SimpleButton"
-                    [ngClass]="{'SimpleButton--Scrolled': isScrolled}"
-                    (click)="onBinaryLanguageToggleClick()"
-                >
-                    <svg
-                        class="ddp-globe"
-                        height="24px"
-                        width="24px"
-                    >
-                        <title
-                            id="title"
-                            [lang]="currentLanguage.languageCode"
-                            translate
-                        >
-                            SDK.LanguageSelector.LanguageSelection
-                        </title>
-                        <use [attr.href]="iconURL"></use>
-                    </svg>
-
-                    <span class="ddp-current-language">
-                        {{ binaryDisplayedLanguage }}
-                    </span>
-                </button>
-            </ng-container>
-
-            <ng-template #regularLanguageSelectorTmpl>
-                <button class="SimpleButton" [ngClass]="{'SimpleButton--Scrolled': isScrolled}"
-                        *ngIf="currentLanguage !== null && currentLanguage !== undefined"
-                        [matMenuTriggerFor]="menu">
-                    <svg class="ddp-globe" height="24px" width="24px">
-                        <title id="title" [lang]="currentLanguage.languageCode" translate>SDK.LanguageSelector.LanguageSelection</title>
-                        <use [attr.href]="iconURL"></use>
-                    </svg>
-                    <span class="ddp-current-language">{{currentLanguage.displayName}}</span>
-                    <mat-icon class="ddp-dropdown-arrow">arrow_drop_down</mat-icon>
-                </button>
-
-                <mat-menu #menu="matMenu" class="language-menu">
-                    <button mat-menu-item *ngFor="let lang of getUnselectedLanguages()"
-                            (click)="changeLanguage(lang); clearURLParam()">{{lang.displayName}}
-                    </button>
-                </mat-menu>
-            </ng-template>
+            <ng-container *ngTemplateOutlet="
+                useBinaryLanguageSelector ? binaryLanguageSelectorTmpl : regularLanguageSelectorTmpl
+            "></ng-container>
 
             <ddp-popup-with-checkbox text="Toolkit.Dialogs.LanguagePreferences.Text"
                                      checkboxText="Toolkit.Dialogs.LanguagePreferences.CheckboxText"
                                      buttonText="Toolkit.Dialogs.LanguagePreferences.ButtonText">
             </ddp-popup-with-checkbox>
         </div>
+
+        <ng-template #binaryLanguageSelectorTmpl>
+            <button
+                class="SimpleButton"
+                [ngClass]="{'SimpleButton--Scrolled': isScrolled}"
+                (click)="onBinaryLanguageToggleClick()"
+            >
+                <ng-container *ngTemplateOutlet="globeIconTmpl"></ng-container>
+
+                <span class="ddp-current-language">
+                    {{ binaryDisplayedLanguage }}
+                </span>
+            </button>
+        </ng-template>
+
+        <ng-template #regularLanguageSelectorTmpl>
+            <button
+                class="SimpleButton"
+                [ngClass]="{'SimpleButton--Scrolled': isScrolled}"
+                *ngIf="currentLanguage !== null && currentLanguage !== undefined"
+                [matMenuTriggerFor]="menu"
+            >
+                <ng-container *ngTemplateOutlet="globeIconTmpl"></ng-container>
+                <span class="ddp-current-language">{{currentLanguage.displayName}}</span>
+                <mat-icon class="ddp-dropdown-arrow">arrow_drop_down</mat-icon>
+            </button>
+
+            <mat-menu #menu="matMenu" class="language-menu">
+                <button
+                    mat-menu-item
+                    *ngFor="let lang of getUnselectedLanguages()"
+                    (click)="changeLanguage(lang); clearURLParam()"
+                >
+                    {{lang.displayName}}
+                </button>
+            </mat-menu>
+        </ng-template>
+
+        <ng-template #globeIconTmpl>
+            <svg
+                class="ddp-globe"
+                height="24px"
+                width="24px"
+            >
+                <title
+                    id="title"
+                    [lang]="currentLanguage.languageCode"
+                    translate
+                >
+                    SDK.LanguageSelector.LanguageSelection
+                </title>
+                <use [attr.href]="iconURL"></use>
+            </svg>
+        </ng-template>
     `
 })
 export class LanguageSelectorComponent implements OnInit, OnDestroy {
@@ -135,7 +147,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         return this.config.useBinaryLanguageSelector && this.studyLanguages.length === 2;
     }
 
-    public get reverseBinaryLanguageSelector(): boolean {
+    private get reverseBinaryLanguageSelector(): boolean {
         return this.config.reverseBinaryLanguageSelector;
     }
 
@@ -146,7 +158,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
             lang = this.studyLanguages.find(studyLang => studyLang.languageCode !== this.currentLanguage.languageCode);
         }
 
-        return lang.displayName ?? '';
+        return lang.displayName;
     }
 
     public onBinaryLanguageToggleClick(): void {
