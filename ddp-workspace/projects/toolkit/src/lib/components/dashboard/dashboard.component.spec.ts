@@ -101,7 +101,7 @@ describe('DashboardComponent', () => {
     });
 
     it('should reset participant in session on init for participant dashboard', () => {
-        toolkitConfigMock.useParticipantDashboard = true;
+        toolkitConfigMock.useMultiParticipantDashboard = true;
         component.ngOnInit();
         fixture.detectChanges();
 
@@ -109,7 +109,7 @@ describe('DashboardComponent', () => {
     });
 
     it('should not reset participant in session on init for regular dashboard', () => {
-        toolkitConfigMock.useParticipantDashboard = false;
+        toolkitConfigMock.useMultiParticipantDashboard = false;
         component.ngOnInit();
         fixture.detectChanges();
 
@@ -117,7 +117,7 @@ describe('DashboardComponent', () => {
     });
 
     it('should set participant in session before action navigation for participant dashboard', () => {
-        toolkitConfigMock.useParticipantDashboard = true;
+        toolkitConfigMock.useMultiParticipantDashboard = true;
         component.ngOnInit();
         fixture.detectChanges();
 
@@ -128,7 +128,7 @@ describe('DashboardComponent', () => {
     });
 
     it('should not set participant in session before action navigation for regular dashboard', () => {
-        toolkitConfigMock.useParticipantDashboard = false;
+        toolkitConfigMock.useMultiParticipantDashboard = false;
         component.ngOnInit();
         fixture.detectChanges();
 

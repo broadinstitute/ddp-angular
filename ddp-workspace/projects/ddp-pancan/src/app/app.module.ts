@@ -66,7 +66,7 @@ toolkitConfig.colorectalPageEmail = 'info@colorectalcancerproject.org';
 toolkitConfig.lmsPagePhone = '';  // TODO: add real phone
 toolkitConfig.lmsPageEmail = 'info@lmsproject.org';
 toolkitConfig.lmsStudyGuid = 'cmi-lms';
-toolkitConfig.useParticipantDashboard = true;
+toolkitConfig.useMultiParticipantDashboard = true;
 toolkitConfig.dashboardDisplayedColumns = ['name', 'summary', 'status', 'actions'];
 
 export const sdkConfig = new ConfigurationService();
