@@ -45,12 +45,10 @@ export class JoinComponent implements OnInit {
 
   onSubmit(response: ActivityResponse): void {
     if (!response.allowUnauthenticated) {
-      this.router.navigateByUrl(Route.Registration);
-
-      return;
+      this.workflowBuilderService
+        .getCommand(new ActivityResponse('REGISTRATION'))
+        .execute();
     }
-
-    this.workflowBuilderService.getCommand(response).execute();
   }
 
   private getNext(): void {

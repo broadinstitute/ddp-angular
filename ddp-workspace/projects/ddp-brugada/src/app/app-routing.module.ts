@@ -65,14 +65,6 @@ const routes: Routes = [
     component: PasswordComponent,
   },
   {
-    path: Route.Registration,
-    component: RegistrationComponent,
-  },
-  {
-    path: Route.Login,
-    component: LoginComponent,
-  },
-  {
     path: Route.LoginLanding,
     component: LoginLandingComponent,
     canActivate: [IrbGuard],
