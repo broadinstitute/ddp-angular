@@ -4,9 +4,9 @@
 .ButtonFilled {
   display: inline-block;
 
-  padding: 1.2rem 2.4rem;
+  padding: 1rem 2.2rem;
 
-  border: none;
+  border: 2px solid transparent;
   border-radius: 100px;
 
   font-family: 'PT Sans', 'sans-serif';
@@ -18,7 +18,7 @@
 
   cursor: pointer;
 
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
   outline: none;
 
   &:disabled {
@@ -29,6 +29,7 @@
 
   &--scarlet {
     background: map-get($colors, 'scarlet');
+    border-color: map-get($colors, 'scarlet');
 
     color: map-get($colors, 'white');
 
@@ -36,16 +37,43 @@
       &:focus,
       &:hover {
         background: map-get($colors, 'scarlet:hover');
+        border-color: map-get($colors, 'scarlet:hover');
       }
 
       &:active {
         background: map-get($colors, 'scarlet:active');
+        border-color: map-get($colors, 'scarlet:active');
+      }
+    }
+
+    &-outline {
+      background: map-get($colors, 'white');
+      border-color: map-get($colors, 'scarlet');
+
+      color: map-get($colors, 'scarlet');
+
+      &:not(:disabled) {
+        &:focus,
+        &:hover {
+          background: map-get($colors, 'scarlet:hover');
+          border-color: map-get($colors, 'scarlet:hover');
+
+          color: map-get($colors, 'white');
+        }
+
+        &:active {
+          background: map-get($colors, 'scarlet:active');
+          border-color: map-get($colors, 'scarlet:active');
+
+          color: map-get($colors, 'white');
+        }
       }
     }
   }
 
   &--teal {
     background: map-get($colors, 'teal');
+    border-color: map-get($colors, 'teal');
 
     color: map-get($colors, 'white');
 
@@ -53,16 +81,19 @@
       &:focus,
       &:hover {
         background: map-get($colors, 'teal:hover');
+        border-color: map-get($colors, 'teal:hover');
       }
 
       &:active {
         background: map-get($colors, 'teal:active');
+        border-color: map-get($colors, 'teal:active');
       }
     }
   }
 
   &--white {
     background: map-get($colors, 'white');
+    border-color: map-get($colors, 'white');
 
     color: map-get($colors, 'font-dark');
 
@@ -70,10 +101,12 @@
       &:focus,
       &:hover {
         background: map-get($colors, 'white:hover');
+        border-color: map-get($colors, 'white:hover');
       }
 
       &:active {
         background: map-get($colors, 'white:active');
+        border-color: map-get($colors, 'white:active');
       }
     }
   }
