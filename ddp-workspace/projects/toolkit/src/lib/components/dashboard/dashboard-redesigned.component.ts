@@ -31,6 +31,7 @@ interface DashboardParticipant {
     selector: 'toolkit-dashboard-redesigned',
     template: `
         <main class="main">
+            <ddp-participant-profile></ddp-participant-profile>
             <section class="section">
                 <ddp-subject-panel *ngIf="selectedUser$ | async as selectedUser" [subject]="selectedUser"></ddp-subject-panel>
             </section>
@@ -123,6 +124,7 @@ interface DashboardParticipant {
                                                      [dataSource]="activities || (userActivities$ | async)"
                                                      (open)="navigate($event, participantGuid)">
                                 </ddp-user-activities>
+
                             </div>
                         </ng-template>
                     </div>

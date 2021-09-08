@@ -1,635 +1,634 @@
 {
-  "Common": {
-    "Buttons": {
-      "Submit": {
-        "Title": "Envoyer",
-        "AriaLabel": "Bouton Envoyer"
-      },
-      "Login": {
-        "Title": "Connexion",
-        "AriaLabel": "Bouton Connexion"
-      }
-    }
-  },
-  "Navigation": {
-    "LogoAlt": "Logo TestBoston",
-    "CRCLogoSubtitle": "Interface d’assistance des patients",
-    "Home": "Accueil",
-    "About": "À propos de l’étude",
-    "Q&A": "Questions/réponses",
-    "WhoWeAre": "Qui sommes-nous",
-    "StayInformed": "Actualités",
-    "Help": "Aide",
-    "Dashboard": "Mon tableau de bord",
-    "Menu": "Menu",
-    "Invitation": "Code d’invitation",
-    "Titles": {
-      "TestBoston": "TestBoston",
-      "ContactUs": "Contact",
-      "Participation": "Participation",
-      "Language": "Langue"
-    }
-  },
-  "MailingList": {
-    "Title": "Formulaire de liste de diffusion",
-    "Questions": {
-      "Adult": "1. Avez-vous 18 ans ou plus ?",
-      "Patient": "2. Êtes-vous un(e) patient(e) de l’hôpital Brigham & Women ?",
-      "Email": "3. À quelle adresse e-mail préférez-vous être contacté(e) ?"
-    },
-    "Answers": {
-      "Yes": "Oui",
-      "No": "Non",
-      "NoAnswer": "Je préfère ne pas répondre"
-    },
-    "Validations": {
-      "RequiredOption": "Veuillez sélectionner une réponse",
-      "RequiredEmail": "Veuillez indiquer votre adresse e-mail",
-      "InvalidEmail": "Veuillez indiquer une adresse e-mail valide"
-    },
-    "EmailLabel": "Indiquez votre adresse e-mail",
-    "EmailPlaceholder": "exemple@exemple.com",
-    "ThankYouBlock": {
-      "Title": "Tout est en ordre !",
-      "Text": "Nous vous remercions de votre inscription à la liste de diffusion TestBoston."
-    },
-    "SorryBlock": {
-      "Title": "Nous sommes désolés, il semble que vous ne soyez pas en mesure de participer.",
-      "Text": {
-        "Part1": "Vous devez avoir au moins 18 ans pour vous inscrire à la liste de diffusion TestBoston. Veuillez consulter notre",
-        "Part2": "FAQ",
-        "Part3": "pour plus d’informations."
-      }
-    }
-  },
-  "HomePage": {
-    "IntroSection": {
-      "Title": "Nous souhaitons aider nos communautés et en savoir plus sur les tendances d’infection à COVID-19 dans la région de Boston.",
-      "Text": "TestBoston est une étude portant sur la COVID-19 et financée par le Brigham and Women’s Hospital et le Broad Institute du MIT et d’Harvard.",
-      "Code": "Saisir mon code d’invitation",
-      "NoCode": "Je ne dispose pas de code d’invitation"
-    },
-    "AboutSection": {
-      "Title": "À propos de l’étude",
-      "Text": "Notre objectif est de surveiller le taux d’infection à COVID-19 dans le Massachusetts au fil du temps. Certaines communautés présentent un taux d’infection plus élevé que les autres. Certaines personnes contractent la COVID-19 sans présenter de symptômes. Nous espérons que notre étude nous permettra de mieux comprendre la COVID-19 et qu’elle sera utile aux patients à l’avenir, qu’ils soient atteints de COVID-19 ou non.",
-      "Questions": {
-        "Title": "Les questions auxquelles nous essayons de répondre sont les suivantes :",
-        "List": [
-          "Quelle est la fréquence de survenue de la COVID-19 au sein de nos communautés ?",
-          "À quelle fréquence contracte-t-on la COVID-19 sans présenter de symptômes ?",
-          "Les patients sont-ils immunisés contre la COVID-19 après l’avoir contractée ?",
-          "Comment les chercheurs peuvent-ils tester un grand nombre de personnes qui restent chez elles ?"
-        ]
-      }
-    },
-    "FaqSection": {
-      "Title": "Réponses aux questions fréquemment posées au sujet de l’étude TestBoston",
-      "Text": "Si vous avez des questions au sujet de TestBoston, vous pouvez également appeler le personnel de l’étude ou leur envoyer un e-mail :",
-      "Items": [
-        {
-          "Question": "Qui peut participer à cette étude ?",
-          "Paragraphs": [
-            "L’étude TestBoston est accessible à un groupe de résidents adultes sélectionnés au hasard dans la région de Boston, ayant été soignés au Brigham and Women’s Hospital au moins une fois au cours de l’année passée. Chaque patient sélectionné au hasard recevra une invitation à participer à l’étude par courrier ou par e-mail."
-          ]
-        },
-        {
-          "Question": "Vais-je recevoir un test COVID-19 si je participe à l’étude ?",
-          "Paragraphs": [
-            "Oui. Si vous avez reçu une invitation à participer à l’étude et que vous décidez d’y participer, vous vous soumettrez à un test COVID-19. Toutefois, le nombre de participants est limité et les participants seront acceptés par ordre d’inscription (premier arrivé, premier servi). Si vous participez à l’étude, vous recevrez un kit de test à domicile contenant deux tests environ une semaine après la confirmation de votre participation. Le kit de test à domicile contiendra un kit de test virologique (écouvillon nasal) et un kit de test de détection des anticorps (prélèvement capillaire), accompagné d’instructions expliquant comment prélever vos échantillons et les renvoyer à notre laboratoire pour analyse. L’écouvillon nasal permet de savoir si vous avez une infection active à COVID-19. Les tests par prélèvement capillaire détectent la présence d’anticorps anti-COVID-19 (c’est-à-dire qu’ils permettent de savoir si vous avez été infecté(e) par le virus précédemment). Si vous acceptez également de participer à l’étude longitudinale, nous vous enverrons des kits afin de répéter ces tests chaque mois pendant 5 mois supplémentaires."
-          ]
-        },
-        {
-          "Question": "Vais-je recevoir mes résultats ?",
-          "Paragraphs": [
-            "Vous recevrez les résultats de recherche de vos tests viraux. Vous ne recevrez pas les résultats de votre test  anticorps. Les résultats éclaireront la prise de décisions liées à la santé publique. Lorsque les résultats feront l’objet de rapports, ils seront communiqués sous forme de résumé de données faisant état de données démographiques. Votre identité restera confidentielle."
-          ]
-        },
-        {
-          "Question": "L’étude TestBoston est-elle réservée aux personnes présentant des symptômes de COVID-19 ?",
-          "Paragraphs": [
-            "Non. Toute personne ayant reçu une invitation à participer à l’étude TestBoston peut y accéder, qu’elle présente (ou ait déjà présenté) des symptômes ou non."
-          ]
-        },
-        {
-          "Question": "Dois-je me rendre quelque part pour participer à l’étude ?",
-          "Paragraphs": [
-            "Non. L’étude TestBoston se déroule à domicile. Les participants de TestBoston n’ont pas à se rendre dans une clinique, un hôpital ou chez un médecin. Les participants répondront à une enquête rapide en ligne et recevront des kits de prélèvement d’échantillons COVID-19 chez eux. Ces kits devront être renvoyés à notre laboratoire. "
-          ]
-        },
-        {
-          "Question": "Un médecin, un(e) infirmier/ère ou un membre du personnel de l’étude viendra-t-il/elle me tester chez moi ?",
-          "Paragraphs": [
-            "Non. Vous recevrez un kit de prélèvement d’échantillon par courrier et effectuerez l’intégralité du prélèvement par écouvillon nasal et du prélèvement capillaire vous-même et sans aide. Si vous avez des questions, vous pouvez contacter l’équipe de l’étude à tout moment par téléphone ou par e-mail."
-          ]
-        },
-        {
-          "Question": "La participation à l’étude TestBoston est-elle gratuite ?",
-          "Paragraphs": [
-            "Oui. Il n’y a aucun frais lié à la participation à l’étude TestBoston."
-          ]
-        },
-        {
-          "Question": "Que devrai-je faire si je participe à l’étude ?",
-          "Paragraphs": [
-            "Les participants à l’étude TestBoston sont invités à répondre à une enquête rapide sur la COVID-19 et à effectuer deux prélèvements d’échantillons visant à détecter la COVID-19 eux-mêmes et chez eux. Les participants doivent nous renvoyer les kits dans les colis pré-affranchis afin que nous puissions les analyser. Les participants peuvent décider volontairement de répéter ce processus chaque mois pendant 5 mois supplémentaires. Les prélèvements destinés à l’analyse sont un écouvillon nasal et un prélèvement capillaire."
-          ]
-        },
-        {
-          "Question": "Ma famille peut-elle participer à l’étude TestBoston ?",
-          "Paragraphs": [
-            "À l’heure actuelle, seuls les patients de Brigham and Women’s ayant été sélectionnés au hasard peuvent participer à l’étude TestBoston. Si plus d’une personne de votre foyer a reçu une lettre d’invitation, vous pouvez tous les deux participer à l’étude si vous le souhaitez. Si vous n’avez pas reçu d’invitation, mais que vous souhaiteriez rester informé(e) de l’avancement de l’étude, vous pouvez tout à fait <a class=\"Link Link_semi-bold Link_no-wrap\" href=\"#stay-informed\">vous inscrire à la liste de diffusion de l’étude TestBoston</a>."
-          ]
-        },
-        {
-          "Question": "Puis-je transmettre mon code d’invitation à quelqu’un d’autre ?",
-          "Paragraphs": [
-            "Non. Le code d’invitation doit uniquement être utilisé par la personne à laquelle la lettre est destinée."
-          ]
-        },
-        {
-          "Question": "Qui réalise cette étude ?",
-          "Paragraphs": [
-            "TestBoston est une étude portant sur la COVID-19 et financée par le Brigham and Women’s Hospital et le Broad Institute du MIT et d’Harvard. Les personnes qui mènent l’étude sont des médecins spécialistes des maladies infectieuses du Brigham and Women’s Hospital.",
-            "Le Broad Institute est un institut de recherche universitaire reconnu situé à Cambridge. Le Broad Institute effectue chaque jour des milliers de tests COVID-19 pour le Ministère de la Santé dans tout le Massachusetts, ainsi que différentes études sur la COVID-19 au Massachusetts."
-          ]
-        },
-        {
-          "Question": "Combien de temps durera l’étude ?",
-          "Paragraphs": [
-            "L’étude pourra durer jusqu’à 6 mois. Les participants peuvent décider de quitter l’étude à tout moment."
-          ]
+    "Common": {
+        "Buttons": {
+            "Submit": {
+                "Title": "Envoyer",
+                "AriaLabel": "Bouton Envoyer"
+            },
+            "Login": {
+                "Title": "Connexion",
+                "AriaLabel": "Bouton Connexion"
+            }
         }
-      ]
     },
-    "TeamSection": {
-      "Title": "Notre équipe",
-      "Text": "Nous sommes une équipe de médecins et de chercheurs spécialistes des maladies infectieuses qui souhaitent mieux comprendre de quelle manière la COVID-19 affecte les personnes et les communautés afin de mieux prendre en charge tous les patients. ",
-      "PIs": [
-        {
-          "Name": "Dr Ann E. Woolley, MPH",
-          "Affiliations": "Médecin associée, maladies infectieuses, Brigham and Women’s Hospital ; formatrice en médecine, Harvard Medical School",
-          "Info": "Dr Ann Woolley est la Directrice clinique associée du service de greffe d’organes solides et des maladies infectieuses du Brigham and Women’s Hospital et un investigateur clinique dont les recherches se concentrent sur le développement de traitements et de tests diagnostiques."
-        },
-        {
-          "Name": "Dr Lisa A. Cosimi",
-          "Affiliations": "Médecin associé, Brigham and Women’s Hospital ; professeure assistante, Harvard Medical School",
-          "Info": "Le Dr Cosimi est médecin associée au Brigham and Women’s Hospital. Son travail dans le domaine de l’équité en matière de santé et des maladies infectieuses est axé sur le renforcement des systèmes de santé et de la qualité des soins dans des contextes aux ressources limitées."
-        },
-        {
-          "Name": "Dr Deborah T. Hung, PhD",
-          "Affiliations": "Professeur, Harvard Medical School ; membre principal du corps enseignant et codirectrice, programme sur les maladies infectieuses et le microbiome, Broad Institute",
-          "Info": "Le Dr Deborah Hung est médecin-chercheur au Broad Institute, à la Harvard Medical School et au Massachusetts General Hospital. Elle étudie les maladies infectieuses et est médecin traitant dans le domaine des maladies infectieuses, de la médecine pulmonaire et des soins intensifs au Women’s Hospital."
+    "Navigation": {
+        "LogoAlt": "Logo TestBoston",
+        "CRCLogoSubtitle": "Interface d’assistance des patients",
+        "Home": "Accueil",
+        "About": "À propos de l’étude",
+        "Q&A": "Questions/réponses",
+        "WhoWeAre": "Qui sommes-nous",
+        "StayInformed": "Actualités",
+        "Help": "Aide",
+        "Dashboard": "Mon tableau de bord",
+        "Menu": "Menu",
+        "Invitation": "Code d’invitation",
+        "Titles": {
+            "TestBoston": "TestBoston",
+            "ContactUs": "Contact",
+            "Participation": "Participation",
+            "Language": "Langue"
         }
-      ],
-      "Others": [
-        {
-          "Title": "Équipe administrative, Broad Institute",
-          "Members": [
-            "Andrea Saltzman, Directeur, Bureau de protection des patients participant à des études de recherche",
-            "Marissa Jenko, MS, Directrice administrative",
-            "Paul Tyman, Assistant administratif",
-            "Sarah Winnicki, Cheffe de projet II",
-            "Sharon Wong, PhD, Directrice associée - Programme sur les maladies infectieuses et le microbiome"
-          ]
+    },
+    "MailingList": {
+        "Title": "Formulaire de liste de diffusion",
+        "Questions": {
+            "Adult": "1. Avez-vous 18 ans ou plus ?",
+            "Patient": "2. Êtes-vous un(e) patient(e) de l’hôpital Brigham & Women ?",
+            "Email": "3. À quelle adresse e-mail préférez-vous être contacté(e) ?"
         },
-        {
-          "Title": "Équipe d’ingénierie, Broad Institute",
-          "Members": [
-            "Andrew Zimmer, Directeur, Plateforme de don de données",
-            "Anna Hupalowska, Conceptrice illustration et visualisation de données",
-            "Erin Gwozdz, Conceptrice UX/UI",
-            "Jen Lapan, Cheffe de produit logiciel principal",
-            "Kiara Westbrooks, Ingénieure logiciel",
-            "Marco Ocana, Ingénieur logiciel principal",
-            "Pavel Sidorenko, Ingénieur logiciel",
-            "Pegah Taheri, Ingénieure logiciel senior",
-            "Sampath Settipalli, Ingénieur logiciel senior",
-            "Scott Sassone, Responsable, Production vidéo",
-            "Simone Maiwald, Responsable ingénierie logicielle",
-            "Yufeng Wang, Ingénieur logiciel senior"
-          ]
+        "Answers": {
+            "Yes": "Oui",
+            "No": "Non",
+            "NoAnswer": "Je préfère ne pas répondre"
         },
-        {
-          "Title": "Équipe clinique, Brigham and Women’s Hospital",
-          "Members": [
-            "Andy Kim, BS, Coordinateur de recherche",
-            "Christina Kelly, Assistante de recherche",
-            "Hannah Laibinis, stagiaire",
-            "Henry Manigat, Traducteur",
-            "Henry Rutherford, BA, Coordinateur de recherche",
-            "Himaja Nagireddy, candidate HSPH MS, Stagiaire",
-            "Sarah Naz-McLean, MSc, Gestionnaire de programme",
-            "Tina Wang, Traductrice",
-            "Yilu Ma, Traducteur"
-          ]
+        "Validations": {
+            "RequiredOption": "Veuillez sélectionner une réponse",
+            "RequiredEmail": "Veuillez indiquer votre adresse e-mail",
+            "InvalidEmail": "Veuillez indiquer une adresse e-mail valide"
         },
-        {
-          "Title": "Autres partenaires",
-          "Members": [
-            "Clinical Research Sequencing Platform (CRSP), Broad Institute",
-            "GBF",
-            "Joel Ceide, Traducteur",
-            "Language Scientific",
-            "Mascon Medical",
-            "Microbial Omics Core (MOC), Broad Institute",
-            "Nadya Lopez Zalba, Traductrice",
-            "UPS"
-          ]
+        "EmailLabel": "Indiquez votre adresse e-mail",
+        "EmailPlaceholder": "exemple@exemple.com",
+        "ThankYouBlock": {
+            "Title": "Tout est en ordre !",
+            "Text": "Nous vous remercions de votre inscription à la liste de diffusion TestBoston."
+        },
+        "SorryBlock": {
+            "Title": "Nous sommes désolés, il semble que vous ne soyez pas en mesure de participer.",
+            "Text": {
+                "Part1": "Vous devez avoir au moins 18 ans pour vous inscrire à la liste de diffusion TestBoston. Veuillez consulter notre",
+                "Part2": "FAQ",
+                "Part3": "pour plus d’informations."
+            }
         }
-      ]
     },
-    "MailingSection": {
-      "Title": "TestBoston recrute actuellement des patients du Brigham and Women’s Hospital. ",
-      "Text": "Si vous n’avez pas reçu d’invitation à participer à l’étude, mais que vous souhaiteriez recevoir des informations générales actualisées au sujet de TestBoston, vous pouvez vous inscrire à notre lettre d'information :"
-    }
-  },
-  "PrequalPage": {
-    "Title": "Tout d’abord, confirmez votre éligibilité",
-    "InvitationCode": {
-      "Question": "Saisissez votre code d’invitation",
-      "TooltipAlt": "Icône d’information",
-      "Tooltip": "Si vous avez reçu une invitation par courrier ou e-mail de la part de votre médecin, celle-ci inclut un code d’invitation à 12 chiffres dans la partie supérieure.",
-      "Placeholder": "Saisissez le code d’invitation",
-      "Error": {
-        "Part1": "Le code que vous avez saisi nʼest pas actif. Veuillez vérifier votre code et réessayer. Vous pouvez toujours contacter le personnel de lʼétude TestBoston pour obtenir de lʼaide :",
-        "Part2": "ou",
-        "Part3": "",
-        "Part4": ""
-      }
-    },
-    "Zip": {
-      "Question": "Quel est votre code postal actuel ?",
-      "Placeholder": "Saisissez votre code postal",
-      "Error": "Nous sommes désolés. Ce code postal se trouve en dehors de la zone dʼétude de TestBoston. Veuillez vérifier le code postal que vous avez saisi et réessayer."
-    },
-    "Adult": {
-      "Question": "Avez-vous 18 ans ou plus ?",
-      "Yes": "Oui",
-      "No": "Non",
-      "Error": {
-        "Part1": "Désolé, il semble que vous ne soyez pas en mesure de participer. Vous devez avoir au moins 18 ans pour participer à l’étude TestBoston. Veuillez consulter notre",
-        "Part2": "FAQ",
-        "Part3": "pour plus d’informations."
-      }
-    },
-    "Error": "Nous sommes désolés, mais une erreur est survenue. Veuillez patienter quelques instants et réessayer."
-  },
-  "Prism": {
-    "ClearSearch": "Supprimer",
-    "Email": "ADRESSE E-MAIL DU PATIENT",
-    "NoneListed": {
-      "Title": "Aucune renseignée",
-      "Text": "Si le patient souhaite pouvoir se connecter au site TestBoston, veuillez activer son compte TestBoston",
-      "Link": "ici"
-    },
-    "Buttons": {
-      "Enrollment": "Débuter l’inscription",
-      "Dashboard": "Voir le tableau de bord"
-    },
-    "Notes": "COMMENTAIRES DU PATIENT",
-    "NotesPlaceholder": "Commencer à saisir du texte...",
-    "NotesError": "Nous sommes désolés, mais vos commentaires n’ont pas été enregistrés. Veuillez patienter quelques instants et réessayer.",
-    "Steps": {
-      "Step1": {
-        "Title": "Saisissez le code d’invitation du patient à 12 chiffres",
-        "Subtitle": "Si vous ne connaissez pas le code, accédez au fichier de lien Brigham et utilisez le nom du patient pour retrouver le code.",
-        "Placeholder": "Saisissez le code d’invitation",
-        "Error": "Code non trouvé"
-      },
-      "Step2": {
-        "Title": "Vérifiez le code postal",
-        "Placeholder": "Saisissez le code postal",
-        "Error": "Code postal invalide",
-        "Success": "Code postal valide"
-      },
-      "Step3": {
-        "Title": "Confirmez oralement que le sujet a au moins 18 ans avant de débuter le recrutement."
-      }
-    }
-  },
-  "Enrollment": {
-    "Title": "Configuration du compte",
-    "FirstName": {
-      "Text": "Prénom du patient",
-      "Placeholder": "Saisissez le prénom",
-      "Error": "Veuillez saisir le prénom du patient"
-    },
-    "LastName": {
-      "Text": "Nom du patient",
-      "Placeholder": "Saisissez le nom",
-      "Error": "Veuillez saisir le nom du patient"
-    },
-    "Email": {
-      "Text": "Adresse e-mail du patient (facultatif)",
-      "Placeholder": "exemple@exemple.com",
-      "Error": "Veuillez indiquer une adresse e-mail valide"
-    },
-    "Button": "Suivant"
-  },
-  "Help": {
-    "Title": "Centre d’aide",
-    "Collect": {
-      "Title": "Comment prélever vos échantillons",
-      "Text": "Il est important d’effectuer votre test et de le renvoyer le même jour, du lundi au jeudi. Ce sont les jours auxquels le Broad Institute analyse les échantillons TestBoston.",
-      "Link": "Instructions relatives au prélèvement d’échantillons",
-      "IconAlt": "Icône de fichier PDF",
-      "IframeTitle": "Instructions relatives au kit d’écouvillon nasal",
-      "Video": "https://player.vimeo.com/video/440526812"
-    },
-    "Return": {
-      "Title": "Comment renvoyer vos échantillons",
-      "Text": "Vos échantillons de test doivent être renvoyés par UPS le jour où vous effectuez le test. Déposez votre kit de test dans un magasin UPS officiel ou dans une boîte de dépôt UPS. Vous pouvez également demander un enlèvement à domicile par UPS si vous pouvez laisser votre colis à un emplacement sécurisé à l’extérieur accessible au livreur UPS.",
-      "Step1": {
-        "Title": "Étape 1 :",
-        "Text": {
-          "Part1": "Cliquez",
-          "Part2": "Saisissez votre code postal et cliquez sur « <span class=\"bold\">Voir toutes les options</span> »."
+    "HomePage": {
+        "IntroSection": {
+            "Title": "Nous souhaitons aider nos communautés et en savoir plus sur les tendances d’infection à COVID-19 dans la région de Boston.",
+            "Text": "TestBoston est une étude portant sur la COVID-19 et financée par le Brigham and Women’s Hospital et le Broad Institute du MIT et d’Harvard.",
+            "Code": "Saisir mon code d’invitation",
+            "NoCode": "Je ne dispose pas de code d’invitation"
         },
-        "ImageAlt": "Instructions relatives aux emplacements UPS, votre emplacement"
-      },
-      "Step2": {
-        "Title": "Étape 2 :",
-        "Text": "Dans « <span class=\"bold\">Type d’emplacement</span> », cochez les cases « <span class=\"bold\">The UPS Store®</span> » et « <span class=\"bold\">Boîte de dépôt UPS</span> ». Puis cliquez sur l’icône de recherche",
-        "ImageAlt": "Instruction relative aux emplacements UPS, boîtes UPS"
-      }
-    },
-    "Pickup": {
-      "Title": "Enlèvement à domicile UPS",
-      "Text": {
-        "Part1": "Vous êtes peut-être éligible à l’enlèvement à domicile UPS si vous pouvez laisser votre colis à un emplacement accessible aux livreurs UPS. Appelez pour planifier un enlèvement",
-        "Part2": "Si vous rencontrez des difficultés pour renvoyer votre kit via UPS, contactez l’équipe de l’étude"
-      }
-    },
-    "Questions": {
-      "Title": "Vous avez d’autres questions ?",
-      "Text": {
-        "Part1": "Si vous avez d’autres questions, contactez l’équipe de l’étude par e-mail",
-        "Part2": "ou"
-      }
-    },
-    "ArrowAlt": "Flèche",
-    "SearchAlt": "Icône de recherche"
-  },
-  "Toolkit": {
-    "Dashboard": {
-      "Title": "Tableau de bord",
-      "Invitation": {
-        "InvitationCode": "Code d’invitation :",
-        "Message": "Utilisez l’outil de recherche pour gérer un participant.",
-        "Button": "Afficher"
-      }
-    },
-    "Password": {
-      "Title": "Saisissez le mot de passe",
-      "Text": "Saisissez votre mot de passe *",
-      "InputPlaceholder": "Mot de passe",
-      "PasswordWrongError": "Mot de passe incorrect. Veuillez réessayer.",
-      "OtherError": "[FR] We're sorry, but an error has occurred. Please try again.",
-      "PasswordRequiredError": "Le mot de passe est requis."
-    },
-    "ErrorPage": {
-      "Title": "Une erreur est survenue.",
-      "Text": "Nous sommes désolés, mais une erreur est survenue.",
-      "DefaultText": {
-        "TextPt1": "Veuillez patienter quelques instants et réessayer. Si le problème persiste, envoyez-nous un e-mail à",
-        "TextPt2": "ou appelez-nous au"
-      }
-    },
-    "SessionExpired": {
-      "Text": "Si vous n’avez pas eu d’activité pendant un certain temps, vous avez été déconnecté(e) par sécurité. Veuillez vous connecter à nouveau afin d’accéder à la dernière page que vous avez consultée."
-    },
-    "Dialogs": {
-      "SessionWillExpire": {
-        "Title": "Votre session va bientôt expirer",
-        "Text": "Afin de protéger vos données personnelles, le système va vous déconnecter, car vous avez été inactif(ve) pendant un certain temps. Cliquez sur « Poursuivre » pour rester connecté(e). Cliquez sur « Déconnexion » si vous avez terminé pour le moment.",
-        "SignOut": "Déconnexion",
-        "Continue": "Poursuivre",
-        "RenewalFailed": "Échec de renouvellement de la session Veuillez vous déconnecter et vous reconnecter."
-      }
-    }
-  },
-  "SDK": {
-    "SubmitButton": "Envoyer",
-    "CloseButton": "Fermer",
-    "AddButton": "AJOUTER",
-    "CancelButton": "ANNULER",
-    "NextButton": "Suivant",
-    "PreviousButton": "Retour",
-    "SavingButton": "Enregistrement en cours",
-    "EditButton": "Poursuivre",
-    "CompleteButton": "Modifier",
-    "ReviewButton": "Afficher",
-    "OpenButton": "Ouvrir",
-    "StartButton": "Démarrer",
-    "AgreeButton": "J’accepte",
-    "ReportButton": "Signaler",
-    "NotAgreeButton": "Je ne suis pas prêt(e) à accepter",
-    "ValidateError": "Veuillez renseigner tous les champs requis.",
-    "CommunicationError": "Un problème est survenu lors de l’enregistrement de vos données. Veuillez vérifier le formulaire et vos réponses avant d’envoyer vos données.",
-    "SaveError": "Nous sommes désolés, mais une erreur est survenue.",
-    "ExportStudy": {
-      "Export": "EXPORTER"
-    },
-    "ListStudies": {
-      "StudyName": "Nom de l’étude",
-      "ParticipantCount": "Nombre de participants"
-    },
-    "ListWorkspaces": {
-      "WorkspaceName": "Nom de l’espace de travail",
-      "WorkspaceNamespace": "Espace de noms de l’espace de travail"
-    },
-    "Login": {
-      "Login": "CONNEXION",
-      "Logout": "DÉCONNEXION"
-    },
-    "SignInOut": {
-      "SignIn": "Connexion",
-      "SignOut": "Déconnexion"
-    },
-    "LanguageSelector": {
-      "LanguageSelection": "Sélection de la langue"
-    },
-    "UserActivities": {
-      "ActivityName": "Formulaire",
-      "Summary": "Résumé",
-      "ActivityStatus": "État",
-      "ActivityDate": "Créé",
-      "ActivityActions": "Actions ",
-      "ActivityQuestionCount": "{{questionsAnswered}} sur {{questionTotal}} ayant obtenu une réponse",
-      "HiddenTooltip": "This activity is hidden."
-    },
-    "ManageParticipants": {
-      "GovernedParticipants": "Participants régis",
-      "ParticipantPlaceholder": "Participant",
-      "ParticipantsList": "Participants"
-    },
-    "ParticipantProfile": {
-      "OpenProfile": "Profil",
-      "ViewAs": "Afficher en tant que",
-      "ManageParticipants": "Gérer les participants"
-    },
-    "UserPreferences": {
-      "UserPreferencesTitle": "Préférences utilisateur",
-      "UserPreferencesGender": "Sexe",
-      "UserPreferencesLocale": "Langue par défaut"
-    },
-    "Dashboard": {
-      "Title": "Mon tableau de bord",
-      "Text": "La tableau de bord ci-dessous décrit chaque formulaire TestBoston et son état."
-    },
-    "DatePicker": {
-      "Day": "Sélectionner le jour...",
-      "Month": "Sélectionner le mois...",
-      "Year": "Sélectionner l’année...",
-      "January": "Janvier",
-      "February": "Février",
-      "March": "Mars",
-      "April": "Avril",
-      "May": "Mai",
-      "June": "Juin",
-      "July": "Juillet",
-      "August": "Août",
-      "September": "Septembre",
-      "October": "Octobre",
-      "November": "Novembre",
-      "December": "Décembre"
-    },
-    "DateLabel": {
-      "YYYY": "YYYY",
-      "MM": "MM",
-      "DD": "DD"
-    },
-    "UserMenu": {
-      "DashboardButton": "Tableau de bord",
-      "SignOutButton": "Déconnexion"
-    },
-    "DetailsPlaceholder": {
-      "PluralForm": "caractères restants",
-      "SingularForm": "caractère restant"
-    },
-    "Title": {
-      "Default": "TestBoston",
-      "Alert": "Votre session va bientôt expirer"
-    },
-    "EmailEntry": {
-      "InvalidEmail": "Veuillez indiquer une adresse e-mail valide"
-    },
-    "Institutions": {
-      "Fields": {
-        "Name": "Nom du médecin",
-        "Institution": "Organisme",
-        "InstitutionAny": "Organisme (le cas échéant)",
-        "City": "Ville ",
-        "State": "État"
-      },
-      "Form" : {
-        "OtherPhysician": "Autre médecin",
-        "OtherInstitution": "Autre institution"
-      },
-      "PhysicianValidation": "Veuillez renseigner tous les champs requis"
-    },
-    "MailAddress": {
-      "Fields": {
-        "Name": "Nom complet",
-        "Country": "Pays/Territoire",
-        "Street1": "Rue",
-        "Street2": "N° d’appartement/étage",
-        "State": {
-          "State": "État",
-          "Province": "Province",
-          "State/Province/Region": "État/Province/Région"
+        "AboutSection": {
+            "Title": "À propos de l’étude",
+            "Text": "Notre objectif est de surveiller le taux d’infection à COVID-19 dans le Massachusetts au fil du temps. Certaines communautés présentent un taux d’infection plus élevé que les autres. Certaines personnes contractent la COVID-19 sans présenter de symptômes. Nous espérons que notre étude nous permettra de mieux comprendre la COVID-19 et qu’elle sera utile aux patients à l’avenir, qu’ils soient atteints de COVID-19 ou non.",
+            "Questions": {
+                "Title": "Les questions auxquelles nous essayons de répondre sont les suivantes :",
+                "List": [
+                    "Quelle est la fréquence de survenue de la COVID-19 au sein de nos communautés ?",
+                    "À quelle fréquence contracte-t-on la COVID-19 sans présenter de symptômes ?",
+                    "Les patients sont-ils immunisés contre la COVID-19 après l’avoir contractée ?",
+                    "Comment les chercheurs peuvent-ils tester un grand nombre de personnes qui restent chez elles ?"
+                ]
+            }
         },
-        "City": "Ville",
-        "Phone": "N° de téléphone",
+        "FaqSection": {
+            "Title": "Réponses aux questions fréquemment posées au sujet de l’étude TestBoston",
+            "Text": "Si vous avez des questions au sujet de TestBoston, vous pouvez également appeler le personnel de l’étude ou leur envoyer un e-mail :",
+            "Items": [
+                {
+                    "Question": "Qui peut participer à cette étude ?",
+                    "Paragraphs": [
+                        "L’étude TestBoston est accessible à un groupe de résidents adultes sélectionnés au hasard dans la région de Boston, ayant été soignés au Brigham and Women’s Hospital au moins une fois au cours de l’année passée. Chaque patient sélectionné au hasard recevra une invitation à participer à l’étude par courrier ou par e-mail."
+                    ]
+                },
+                {
+                    "Question": "Vais-je recevoir un test COVID-19 si je participe à l’étude ?",
+                    "Paragraphs": [
+                        "Oui. Si vous avez reçu une invitation à participer à l’étude et que vous décidez d’y participer, vous vous soumettrez à un test COVID-19. Toutefois, le nombre de participants est limité et les participants seront acceptés par ordre d’inscription (premier arrivé, premier servi). Si vous participez à l’étude, vous recevrez un kit de test à domicile contenant deux tests environ une semaine après la confirmation de votre participation. Le kit de test à domicile contiendra un kit de test virologique (écouvillon nasal) et un kit de test de détection des anticorps (prélèvement capillaire), accompagné d’instructions expliquant comment prélever vos échantillons et les renvoyer à notre laboratoire pour analyse. L’écouvillon nasal permet de savoir si vous avez une infection active à COVID-19. Les tests par prélèvement capillaire détectent la présence d’anticorps anti-COVID-19 (c’est-à-dire qu’ils permettent de savoir si vous avez été infecté(e) par le virus précédemment). Si vous acceptez également de participer à l’étude longitudinale, nous vous enverrons des kits afin de répéter ces tests chaque mois pendant 5 mois supplémentaires."
+                    ]
+                },
+                {
+                    "Question": "Vais-je recevoir mes résultats ?",
+                    "Paragraphs": [
+                        "Vous recevrez les résultats de recherche de vos tests viraux. Vous ne recevrez pas les résultats de votre test  anticorps. Les résultats éclaireront la prise de décisions liées à la santé publique. Lorsque les résultats feront l’objet de rapports, ils seront communiqués sous forme de résumé de données faisant état de données démographiques. Votre identité restera confidentielle."
+                    ]
+                },
+                {
+                    "Question": "L’étude TestBoston est-elle réservée aux personnes présentant des symptômes de COVID-19 ?",
+                    "Paragraphs": [
+                        "Non. Toute personne ayant reçu une invitation à participer à l’étude TestBoston peut y accéder, qu’elle présente (ou ait déjà présenté) des symptômes ou non."
+                    ]
+                },
+                {
+                    "Question": "Dois-je me rendre quelque part pour participer à l’étude ?",
+                    "Paragraphs": [
+                        "Non. L’étude TestBoston se déroule à domicile. Les participants de TestBoston n’ont pas à se rendre dans une clinique, un hôpital ou chez un médecin. Les participants répondront à une enquête rapide en ligne et recevront des kits de prélèvement d’échantillons COVID-19 chez eux. Ces kits devront être renvoyés à notre laboratoire. "
+                    ]
+                },
+                {
+                    "Question": "Un médecin, un(e) infirmier/ère ou un membre du personnel de l’étude viendra-t-il/elle me tester chez moi ?",
+                    "Paragraphs": [
+                        "Non. Vous recevrez un kit de prélèvement d’échantillon par courrier et effectuerez l’intégralité du prélèvement par écouvillon nasal et du prélèvement capillaire vous-même et sans aide. Si vous avez des questions, vous pouvez contacter l’équipe de l’étude à tout moment par téléphone ou par e-mail."
+                    ]
+                },
+                {
+                    "Question": "La participation à l’étude TestBoston est-elle gratuite ?",
+                    "Paragraphs": [
+                        "Oui. Il n’y a aucun frais lié à la participation à l’étude TestBoston."
+                    ]
+                },
+                {
+                    "Question": "Que devrai-je faire si je participe à l’étude ?",
+                    "Paragraphs": [
+                        "Les participants à l’étude TestBoston sont invités à répondre à une enquête rapide sur la COVID-19 et à effectuer deux prélèvements d’échantillons visant à détecter la COVID-19 eux-mêmes et chez eux. Les participants doivent nous renvoyer les kits dans les colis pré-affranchis afin que nous puissions les analyser. Les participants peuvent décider volontairement de répéter ce processus chaque mois pendant 5 mois supplémentaires. Les prélèvements destinés à l’analyse sont un écouvillon nasal et un prélèvement capillaire."
+                    ]
+                },
+                {
+                    "Question": "Ma famille peut-elle participer à l’étude TestBoston ?",
+                    "Paragraphs": [
+                        "À l’heure actuelle, seuls les patients de Brigham and Women’s ayant été sélectionnés au hasard peuvent participer à l’étude TestBoston. Si plus d’une personne de votre foyer a reçu une lettre d’invitation, vous pouvez tous les deux participer à l’étude si vous le souhaitez. Si vous n’avez pas reçu d’invitation, mais que vous souhaiteriez rester informé(e) de l’avancement de l’étude, vous pouvez tout à fait <a class=\"Link Link_semi-bold Link_no-wrap\" href=\"#stay-informed\">vous inscrire à la liste de diffusion de l’étude TestBoston</a>."
+                    ]
+                },
+                {
+                    "Question": "Puis-je transmettre mon code d’invitation à quelqu’un d’autre ?",
+                    "Paragraphs": [
+                        "Non. Le code d’invitation doit uniquement être utilisé par la personne à laquelle la lettre est destinée."
+                    ]
+                },
+                {
+                    "Question": "Qui réalise cette étude ?",
+                    "Paragraphs": [
+                        "TestBoston est une étude portant sur la COVID-19 et financée par le Brigham and Women’s Hospital et le Broad Institute du MIT et d’Harvard. Les personnes qui mènent l’étude sont des médecins spécialistes des maladies infectieuses du Brigham and Women’s Hospital.",
+                        "Le Broad Institute est un institut de recherche universitaire reconnu situé à Cambridge. Le Broad Institute effectue chaque jour des milliers de tests COVID-19 pour le Ministère de la Santé dans tout le Massachusetts, ainsi que différentes études sur la COVID-19 au Massachusetts."
+                    ]
+                },
+                {
+                    "Question": "Combien de temps durera l’étude ?",
+                    "Paragraphs": [
+                        "L’étude pourra durer jusqu’à 6 mois. Les participants peuvent décider de quitter l’étude à tout moment."
+                    ]
+                }
+            ]
+        },
+        "TeamSection": {
+            "Title": "Notre équipe",
+            "Text": "Nous sommes une équipe de médecins et de chercheurs spécialistes des maladies infectieuses qui souhaitent mieux comprendre de quelle manière la COVID-19 affecte les personnes et les communautés afin de mieux prendre en charge tous les patients. ",
+            "PIs": [
+                {
+                    "Name": "Dr Ann E. Woolley, MPH",
+                    "Affiliations": "Médecin associée, maladies infectieuses, Brigham and Women’s Hospital ; formatrice en médecine, Harvard Medical School",
+                    "Info": "Dr Ann Woolley est la Directrice clinique associée du service de greffe d’organes solides et des maladies infectieuses du Brigham and Women’s Hospital et un investigateur clinique dont les recherches se concentrent sur le développement de traitements et de tests diagnostiques."
+                },
+                {
+                    "Name": "Dr Lisa A. Cosimi",
+                    "Affiliations": "Médecin associé, Brigham and Women’s Hospital ; professeure assistante, Harvard Medical School",
+                    "Info": "Le Dr Cosimi est médecin associée au Brigham and Women’s Hospital. Son travail dans le domaine de l’équité en matière de santé et des maladies infectieuses est axé sur le renforcement des systèmes de santé et de la qualité des soins dans des contextes aux ressources limitées."
+                },
+                {
+                    "Name": "Dr Deborah T. Hung, PhD",
+                    "Affiliations": "Professeur, Harvard Medical School ; membre principal du corps enseignant et codirectrice, programme sur les maladies infectieuses et le microbiome, Broad Institute",
+                    "Info": "Le Dr Deborah Hung est médecin-chercheur au Broad Institute, à la Harvard Medical School et au Massachusetts General Hospital. Elle étudie les maladies infectieuses et est médecin traitant dans le domaine des maladies infectieuses, de la médecine pulmonaire et des soins intensifs au Women’s Hospital."
+                }
+            ],
+            "Others": [
+                {
+                    "Title": "Équipe administrative, Broad Institute",
+                    "Members": [
+                        "Andrea Saltzman, Directeur, Bureau de protection des patients participant à des études de recherche",
+                        "Marissa Jenko, MS, Directrice administrative",
+                        "Paul Tyman, Assistant administratif",
+                        "Sarah Winnicki, Cheffe de projet II",
+                        "Sharon Wong, PhD, Directrice associée - Programme sur les maladies infectieuses et le microbiome"
+                    ]
+                },
+                {
+                    "Title": "Équipe d’ingénierie, Broad Institute",
+                    "Members": [
+                        "Andrew Zimmer, Directeur, Plateforme de don de données",
+                        "Anna Hupalowska, Conceptrice illustration et visualisation de données",
+                        "Erin Gwozdz, Conceptrice UX/UI",
+                        "Jen Lapan, Cheffe de produit logiciel principal",
+                        "Kiara Westbrooks, Ingénieure logiciel",
+                        "Marco Ocana, Ingénieur logiciel principal",
+                        "Pavel Sidorenko, Ingénieur logiciel",
+                        "Pegah Taheri, Ingénieure logiciel senior",
+                        "Sampath Settipalli, Ingénieur logiciel senior",
+                        "Scott Sassone, Responsable, Production vidéo",
+                        "Simone Maiwald, Responsable ingénierie logicielle",
+                        "Yufeng Wang, Ingénieur logiciel senior"
+                    ]
+                },
+                {
+                    "Title": "Équipe clinique, Brigham and Women’s Hospital",
+                    "Members": [
+                        "Andy Kim, BS, Coordinateur de recherche",
+                        "Christina Kelly, Assistante de recherche",
+                        "Hannah Laibinis, stagiaire",
+                        "Henry Manigat, Traducteur",
+                        "Henry Rutherford, BA, Coordinateur de recherche",
+                        "Himaja Nagireddy, candidate HSPH MS, Stagiaire",
+                        "Sarah Naz-McLean, MSc, Gestionnaire de programme",
+                        "Tina Wang, Traductrice",
+                        "Yilu Ma, Traducteur"
+                    ]
+                },
+                {
+                    "Title": "Autres partenaires",
+                    "Members": [
+                        "Clinical Research Sequencing Platform (CRSP), Broad Institute",
+                        "GBF",
+                        "Joel Ceide, Traducteur",
+                        "Language Scientific",
+                        "Mascon Medical",
+                        "Microbial Omics Core (MOC), Broad Institute",
+                        "Nadya Lopez Zalba, Traductrice",
+                        "UPS"
+                    ]
+                }
+            ]
+        },
+        "MailingSection": {
+            "Title": "TestBoston recrute actuellement des patients du Brigham and Women’s Hospital. ",
+            "Text": "Si vous n’avez pas reçu d’invitation à participer à l’étude, mais que vous souhaiteriez recevoir des informations générales actualisées au sujet de TestBoston, vous pouvez vous inscrire à notre lettre d'information :"
+        }
+    },
+    "PrequalPage": {
+        "Title": "Tout d’abord, confirmez votre éligibilité",
+        "InvitationCode": {
+            "Question": "Saisissez votre code d’invitation",
+            "TooltipAlt": "Icône d’information",
+            "Tooltip": "Si vous avez reçu une invitation par courrier ou e-mail de la part de votre médecin, celle-ci inclut un code d’invitation à 12 chiffres dans la partie supérieure.",
+            "Placeholder": "Saisissez le code d’invitation",
+            "Error": {
+                "Part1": "Le code que vous avez saisi nʼest pas actif. Veuillez vérifier votre code et réessayer. Vous pouvez toujours contacter le personnel de lʼétude TestBoston pour obtenir de lʼaide :",
+                "Part2": "ou",
+                "Part3": "",
+                "Part4": ""
+            }
+        },
         "Zip": {
-          "Zip Code": "Code postal",
-          "Postal Code": "Code postal",
-          "Zip/Postal Code": "Code postal"
+            "Question": "Quel est votre code postal actuel ?",
+            "Placeholder": "Saisissez votre code postal",
+            "Error": "Nous sommes désolés. Ce code postal se trouve en dehors de la zone dʼétude de TestBoston. Veuillez vérifier le code postal que vous avez saisi et réessayer."
         },
-        "Choose": "Sélectionner {{field}} ..."
-      },
-      "Suggestion": {
-        "Title": "Nous avons vérifié l’adresse que vous avez saisie et suggéré des modifications qui pourraient garantir la livraison.",
-        "Subtitle": "Cliquez sur « Suggestion » pour mettre à jour le formulaire. Vous pourrez cliquer sur « Conserver ma saisie » pour restaurer les données que vous aviez saisies.",
-        "Suggested": "Suggestion :",
-        "AsEntered": "Conserver ma saisie :"
-      },
-      "Error": {
-        "InvalidAddress": "Adresse invalide.",
-        "CannotVerify": "Impossible de confirmer votre adresse, veuillez la vérifier.",
-        "UnknownVerifyError": "Une erreur inconnue est survenue lors de la vérification de votre adresse.",
-        "FieldIsRequired": "Le champ {{field}} est requis.",
-        "FieldIsInvalid": "Le champ {{field}} comporte une valeur invalide.",
-        "InvalidHouseNumber": "Le numéro de la rue n’a pas été trouvé.",
-        "INTERNAL_SERVER_ERROR": "Nous sommes désolés, une erreur est survenue. Si le problème persiste, contactez-nous à l’adresse support@easypost.com.",
-        "NOT_ACCEPTABLE": "La ressource identifiée par la requête peut uniquement générer des entités de réponse dont les caractéristiques de contenu ne sont pas acceptables d’après les en-têtes d’acceptation envoyés dans la requête.",
-        "NOT_FOUND": "La ressource demandée n’a pas été trouvée.",
-        "FORBIDDEN": "Impossible d’accéder à la ressource demandée.",
-        "PAYMENT_REQUIRED": "Fonds insuffisants. Veuillez vérifier vos paramètres de facturation à l’adresse http://www.easypost.com/account/billing.",
-        "UNAUTHORIZED": "Impossible d’accéder à la ressource demandée, échec de l’autorisation.",
-        "BAD_REQUEST": "Requête mal formulée. Veuillez vérifier le contenu et réessayer.",
-        "PAYMENT_GATEWAY.ERROR": "Le processeur de paiement n’a pas pu traiter la requête. Veuillez réessayer ou contacter support@easypost.com si le problème persiste.",
-        "MODE.UNAUTHORIZED": "Cette ressource nécessite une clé API de production pour pouvoir y accéder.",
-        "MODE.CONFLICT": "Le mode clé API est en conflit avec le mode paramètres.",
-        "DATE.PARSE.FAILURE": "Le format d’au moins une date est incorrect et celle-ci n’a pas pu être analysée.",
-        "PARAMETER.FORBIDDEN": "La requête n’a pas pu aboutir en raison des propriétés interdites présentes dans les paramètres.",
-        "PARAMETER.REQUIRED": "Paramètre requis manquant.",
-        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "Les paramètres transmis contenaient un caractère invalide.",
-        "ADDRESS.PARAMETERS.INVALID": "Les paramètres transmis pour créer une adresse étaient manquants ou invalides.",
-        "ADDRESS.COUNTRY.INVALID": "« Pays » invalide, veuillez fournir au moins 2 caractères du code pays ISO.",
-        "ADDRESS.VERIFICATION.NOT_FOUND": "Adresse non trouvée.",
-        "ADDRESS.VERIFICATION.FAILURE": "Impossible de vérifier l’adresse.",
-        "ADDRESS.VERIFY.UNAVAILABLE": "La vérification de l’adresse n’est pas disponible. Veuillez réessayer.",
-        "ADDRESS.VERIFICATION.INVALID": "L’une des vérifications sélectionnées est invalide.",
-        "ADDRESS.VERIFY.FAILURE": "Impossible de vérifier l’adresse.",
-        "ADDRESS.VERIFY.CARRIER_INVALID": "Impossible de vérifier l’adresse à l’aide de l’opérateur renseigné.",
-        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "La vérification de l’adresse n’est pas disponible, car un service en amont ne répond pas. Veuillez réessayer.",
-        "ADDRESS.VERIFY.ONLY_US": "USPS peut uniquement valider les adresses aux États-Unis.",
-        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "La vérification internationale n’est pas activée pour ce compte. Veuillez contacter support@easypost.com.",
-        "ADDRESS.VERIFY.MISSING_STREET": "Les données fournies concernant l’adresse sont insuffisantes. Une rue doit être renseignée.",
-        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Les données fournies concernant l’adresse sont insuffisantes. Une ville et un État ou un code postal doivent être renseignés.",
-        "E.COUNTRY.UNSUPPORTED": "Ce pays n’est pas pris en charge par ce mode. Essayez en mode production.",
-        "E.ENGINE.UNAVAILABLE": "Aucun moteur de vérification n’est disponible pour prendre en charge ce pays. Veuillez réessayer plus tard.",
-        "E.QUERY.UNANSWERABLE": "Nous ne pouvons pas fournir suffisamment de données dans ce pays afin de répondre à cette requête. Veuillez réessayer plus tard.",
-        "E.ADDRESS.NOT_FOUND": "Nous n’avons pas pu trouver l’adresse saisie.",
-        "E.SECONDARY_INFORMATION.INVALID": "Informations secondaires invalides (n° d’appartement). Veuillez noter qu’une erreur peut apparaître pour une requête réussie.",
-        "E.SECONDARY_INFORMATION.MISSING": "Informations secondaires manquantes (n° d’appartement). Veuillez noter qu’une erreur peut apparaître pour une requête réussie.",
-        "E.HOUSE_NUMBER.MISSING": "Numéro de rue manquant.",
-        "E.HOUSE_NUMBER.INVALID": "Nous n’avons pas pu trouver le numéro de rue fourni.",
-        "E.STREET.MISSING": "Rue manquante.",
-        "E.STREET.INVALID": "Rue invalide.",
-        "E.BOX_NUMBER.MISSING": "Numéro de boîte postale manquant.",
-        "E.BOX_NUMBER.INVALID": "Numéro de boîte postale invalide.",
-        "E.ADDRESS.INVALID": "Ville/État/code postal invalide.",
-        "E.ZIP.NOT_FOUND": "Code postal non trouvé.",
-        "E.ZIP.INVALID": "Code postal invalide.",
-        "E.ZIP.PLUS4.NOT_FOUND": "Code postal à plus de 4 chiffres non trouvé.",
-        "E.ADDRESS.MULTIPLE": "Différentes adresses ont été trouvées pour le même code postal.",
-        "E.ADDRESS.INSUFFICIENT": "Données d’adresse insuffisantes/incorrectes",
-        "E.ADDRESS.DUAL": "Adresse doublon.",
-        "E.STREET.MAGNET": "Rue ambiguë.",
-        "E.CITY_STATE.INVALID": "Ville/État non vérifiable.",
-        "E.STATE.INVALID": "État invalide.",
-        "E.ADDRESS.DELIVERY.INVALID": "Adresse de livraison invalide.",
-        "E.TIMED_OUT": "Délai d’attente maximal dépassé.",
-        "E.TIME_ZONE.UNAVAILABLE": "Le service de fuseau horaire n’est pas disponible actuellement.",
-        "E.PO_BOX.INTERNATIONAL": "Impossible de vérifier la boîte postale internationale. Veuillez noter qu’une erreur peut apparaître pour une requête réussie."
-      }
+        "Adult": {
+            "Question": "Avez-vous 18 ans ou plus ?",
+            "Yes": "Oui",
+            "No": "Non",
+            "Error": {
+                "Part1": "Désolé, il semble que vous ne soyez pas en mesure de participer. Vous devez avoir au moins 18 ans pour participer à l’étude TestBoston. Veuillez consulter notre",
+                "Part2": "FAQ",
+                "Part3": "pour plus d’informations."
+            }
+        },
+        "Error": "Nous sommes désolés, mais une erreur est survenue. Veuillez patienter quelques instants et réessayer."
     },
-    "TooltipAlt": "Informations",
-    "SubjectPanel": {
-      "Link": "Revenir à la recherche de patient",
-      "InvitationCode": "Code d’invitation du patient :",
-      "Email": "[FR] Email:",
-      "Name": "[FR] Name:",
-      "ShortId": "[FR] Subject Short ID/HRUID:"
+    "Prism": {
+        "ClearSearch": "Supprimer",
+        "Email": "ADRESSE E-MAIL DU PATIENT",
+        "NoneListed": {
+            "Title": "Aucune renseignée",
+            "Text": "Si le patient souhaite pouvoir se connecter au site TestBoston, veuillez activer son compte TestBoston",
+            "Link": "ici"
+        },
+        "Buttons": {
+            "Enrollment": "Débuter l’inscription",
+            "Dashboard": "Voir le tableau de bord"
+        },
+        "Notes": "COMMENTAIRES DU PATIENT",
+        "NotesPlaceholder": "Commencer à saisir du texte...",
+        "NotesError": "Nous sommes désolés, mais vos commentaires n’ont pas été enregistrés. Veuillez patienter quelques instants et réessayer.",
+        "Steps": {
+            "Step1": {
+                "Title": "Saisissez le code d’invitation du patient à 12 chiffres",
+                "Subtitle": "Si vous ne connaissez pas le code, accédez au fichier de lien Brigham et utilisez le nom du patient pour retrouver le code.",
+                "Placeholder": "Saisissez le code d’invitation",
+                "Error": "Code non trouvé"
+            },
+            "Step2": {
+                "Title": "Vérifiez le code postal",
+                "Placeholder": "Saisissez le code postal",
+                "Error": "Code postal invalide",
+                "Success": "Code postal valide"
+            },
+            "Step3": {
+                "Title": "Confirmez oralement que le sujet a au moins 18 ans avant de débuter le recrutement."
+            }
+        }
     },
-    "AdminActionPanel": {
-      "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
-      "EditButton": "Edit"
+    "Enrollment": {
+        "Title": "Configuration du compte",
+        "FirstName": {
+            "Text": "Prénom du patient",
+            "Placeholder": "Saisissez le prénom",
+            "Error": "Veuillez saisir le prénom du patient"
+        },
+        "LastName": {
+            "Text": "Nom du patient",
+            "Placeholder": "Saisissez le nom",
+            "Error": "Veuillez saisir le nom du patient"
+        },
+        "Email": {
+            "Text": "Adresse e-mail du patient (facultatif)",
+            "Placeholder": "exemple@exemple.com",
+            "Error": "Veuillez indiquer une adresse e-mail valide"
+        },
+        "Button": "Suivant"
     },
-    "Validators": {
-      "DateNavyValidationRule": "[FR] Entered date is invalid"
+    "Help": {
+        "Title": "Centre d’aide",
+        "Collect": {
+            "Title": "Comment prélever vos échantillons",
+            "Text": "Il est important d’effectuer votre test et de le renvoyer le même jour, du lundi au jeudi. Ce sont les jours auxquels le Broad Institute analyse les échantillons TestBoston.",
+            "Link": "Instructions relatives au prélèvement d’échantillons",
+            "IconAlt": "Icône de fichier PDF",
+            "IframeTitle": "Instructions relatives au kit d’écouvillon nasal",
+            "Video": "https://player.vimeo.com/video/440526812"
+        },
+        "Return": {
+            "Title": "Comment renvoyer vos échantillons",
+            "Text": "Vos échantillons de test doivent être renvoyés par UPS le jour où vous effectuez le test. Déposez votre kit de test dans un magasin UPS officiel ou dans une boîte de dépôt UPS. Vous pouvez également demander un enlèvement à domicile par UPS si vous pouvez laisser votre colis à un emplacement sécurisé à l’extérieur accessible au livreur UPS.",
+            "Step1": {
+                "Title": "Étape 1 :",
+                "Text": {
+                    "Part1": "Cliquez",
+                    "Part2": "Saisissez votre code postal et cliquez sur « <span class=\"bold\">Voir toutes les options</span> »."
+                },
+                "ImageAlt": "Instructions relatives aux emplacements UPS, votre emplacement"
+            },
+            "Step2": {
+                "Title": "Étape 2 :",
+                "Text": "Dans « <span class=\"bold\">Type d’emplacement</span> », cochez les cases « <span class=\"bold\">The UPS Store®</span> » et « <span class=\"bold\">Boîte de dépôt UPS</span> ». Puis cliquez sur l’icône de recherche",
+                "ImageAlt": "Instruction relative aux emplacements UPS, boîtes UPS"
+            }
+        },
+        "Pickup": {
+            "Title": "Enlèvement à domicile UPS",
+            "Text": {
+                "Part1": "Vous êtes peut-être éligible à l’enlèvement à domicile UPS si vous pouvez laisser votre colis à un emplacement accessible aux livreurs UPS. Appelez pour planifier un enlèvement",
+                "Part2": "Si vous rencontrez des difficultés pour renvoyer votre kit via UPS, contactez l’équipe de l’étude"
+            }
+        },
+        "Questions": {
+            "Title": "Vous avez d’autres questions ?",
+            "Text": {
+                "Part1": "Si vous avez d’autres questions, contactez l’équipe de l’étude par e-mail",
+                "Part2": "ou"
+            }
+        },
+        "ArrowAlt": "Flèche",
+        "SearchAlt": "Icône de recherche"
+    },
+    "Toolkit": {
+        "Dashboard": {
+            "Title": "Tableau de bord",
+            "Invitation": {
+                "InvitationCode": "Code d’invitation :",
+                "Message": "Utilisez l’outil de recherche pour gérer un participant.",
+                "Button": "Afficher"
+            }
+        },
+        "Password": {
+            "Title": "Saisissez le mot de passe",
+            "Text": "Saisissez votre mot de passe *",
+            "InputPlaceholder": "Mot de passe",
+            "PasswordWrongError": "Mot de passe incorrect. Veuillez réessayer.",
+            "OtherError": "[FR] We're sorry, but an error has occurred. Please try again.",
+            "PasswordRequiredError": "Le mot de passe est requis."
+        },
+        "ErrorPage": {
+            "Title": "Une erreur est survenue.",
+            "Text": "Nous sommes désolés, mais une erreur est survenue.",
+            "DefaultText": {
+                "TextPt1": "Veuillez patienter quelques instants et réessayer. Si le problème persiste, envoyez-nous un e-mail à",
+                "TextPt2": "ou appelez-nous au"
+            }
+        },
+        "SessionExpired": {
+            "Text": "Si vous n’avez pas eu d’activité pendant un certain temps, vous avez été déconnecté(e) par sécurité. Veuillez vous connecter à nouveau afin d’accéder à la dernière page que vous avez consultée."
+        },
+        "Dialogs": {
+            "SessionWillExpire": {
+                "Title": "Votre session va bientôt expirer",
+                "Text": "Afin de protéger vos données personnelles, le système va vous déconnecter, car vous avez été inactif(ve) pendant un certain temps. Cliquez sur « Poursuivre » pour rester connecté(e). Cliquez sur « Déconnexion » si vous avez terminé pour le moment.",
+                "SignOut": "Déconnexion",
+                "Continue": "Poursuivre",
+                "RenewalFailed": "Échec de renouvellement de la session Veuillez vous déconnecter et vous reconnecter."
+            }
+        }
+    },
+    "SDK": {
+        "SubmitButton": "Envoyer",
+        "CloseButton": "Fermer",
+        "AddButton": "AJOUTER",
+        "CancelButton": "ANNULER",
+        "NextButton": "Suivant",
+        "PreviousButton": "Retour",
+        "SavingButton": "Enregistrement en cours",
+        "EditButton": "Poursuivre",
+        "CompleteButton": "Modifier",
+        "ReviewButton": "Afficher",
+        "OpenButton": "Ouvrir",
+        "StartButton": "Démarrer",
+        "AgreeButton": "J’accepte",
+        "ReportButton": "Signaler",
+        "NotAgreeButton": "Je ne suis pas prêt(e) à accepter",
+        "ValidateError": "Veuillez renseigner tous les champs requis.",
+        "CommunicationError": "Un problème est survenu lors de l’enregistrement de vos données. Veuillez vérifier le formulaire et vos réponses avant d’envoyer vos données.",
+        "SaveError": "Nous sommes désolés, mais une erreur est survenue.",
+        "ExportStudy": {
+            "Export": "EXPORTER"
+        },
+        "ListStudies": {
+            "StudyName": "Nom de l’étude",
+            "ParticipantCount": "Nombre de participants"
+        },
+        "ListWorkspaces": {
+            "WorkspaceName": "Nom de l’espace de travail",
+            "WorkspaceNamespace": "Espace de noms de l’espace de travail"
+        },
+        "Login": {
+            "Login": "CONNEXION",
+            "Logout": "DÉCONNEXION"
+        },
+        "SignInOut": {
+            "SignIn": "Connexion",
+            "SignOut": "Déconnexion"
+        },
+        "LanguageSelector": {
+            "LanguageSelection": "Sélection de la langue"
+        },
+        "UserActivities": {
+            "ActivityName": "Formulaire",
+            "Summary": "Résumé",
+            "ActivityStatus": "État",
+            "ActivityDate": "Créé",
+            "ActivityActions": "Actions ",
+            "ActivityQuestionCount": "{{questionsAnswered}} sur {{questionTotal}} ayant obtenu une réponse",
+            "HiddenTooltip": "This activity is hidden."
+        },
+        "ManageParticipants": {
+            "GovernedParticipants": "Participants régis",
+            "ParticipantPlaceholder": "Participant",
+            "ParticipantsList": "Participants"
+        },
+        "ParticipantProfile": {
+            "OpenProfile": "Profil",
+            "ViewAs": "Afficher en tant que",
+            "ManageParticipants": "Gérer les participants"
+        },
+        "UserPreferences": {
+            "UserPreferencesTitle": "Préférences utilisateur",
+            "UserPreferencesGender": "Sexe"
+        },
+        "Dashboard": {
+            "Title": "Mon tableau de bord",
+            "Text": "La tableau de bord ci-dessous décrit chaque formulaire TestBoston et son état."
+        },
+        "DatePicker": {
+            "Day": "Sélectionner le jour...",
+            "Month": "Sélectionner le mois...",
+            "Year": "Sélectionner l’année...",
+            "January": "Janvier",
+            "February": "Février",
+            "March": "Mars",
+            "April": "Avril",
+            "May": "Mai",
+            "June": "Juin",
+            "July": "Juillet",
+            "August": "Août",
+            "September": "Septembre",
+            "October": "Octobre",
+            "November": "Novembre",
+            "December": "Décembre"
+        },
+        "DateLabel": {
+            "YYYY": "YYYY",
+            "MM": "MM",
+            "DD": "DD"
+        },
+        "UserMenu": {
+            "DashboardButton": "Tableau de bord",
+            "SignOutButton": "Déconnexion"
+        },
+        "DetailsPlaceholder": {
+            "PluralForm": "caractères restants",
+            "SingularForm": "caractère restant"
+        },
+        "Title": {
+            "Default": "TestBoston",
+            "Alert": "Votre session va bientôt expirer"
+        },
+        "EmailEntry": {
+            "InvalidEmail": "Veuillez indiquer une adresse e-mail valide"
+        },
+        "Institutions": {
+            "Fields": {
+                "Name": "Nom du médecin",
+                "Institution": "Organisme",
+                "InstitutionAny": "Organisme (le cas échéant)",
+                "City": "Ville ",
+                "State": "État"
+            },
+            "Form" : {
+                "OtherPhysician": "Autre médecin",
+                "OtherInstitution": "Autre institution"
+            },
+            "PhysicianValidation": "Veuillez renseigner tous les champs requis"
+        },
+        "MailAddress": {
+            "Fields": {
+                "Name": "Nom complet",
+                "Country": "Pays/Territoire",
+                "Street1": "Rue",
+                "Street2": "N° d’appartement/étage",
+                "State": {
+                    "State": "État",
+                    "Province": "Province",
+                    "State/Province/Region": "État/Province/Région"
+                },
+                "City": "Ville",
+                "Phone": "N° de téléphone",
+                "Zip": {
+                    "Zip Code": "Code postal",
+                    "Postal Code": "Code postal",
+                    "Zip/Postal Code": "Code postal"
+                },
+                "Choose": "Sélectionner {{field}} ..."
+            },
+            "Suggestion": {
+                "Title": "Nous avons vérifié l’adresse que vous avez saisie et suggéré des modifications qui pourraient garantir la livraison.",
+                "Subtitle": "Cliquez sur « Suggestion » pour mettre à jour le formulaire. Vous pourrez cliquer sur « Conserver ma saisie » pour restaurer les données que vous aviez saisies.",
+                "Suggested": "Suggestion :",
+                "AsEntered": "Conserver ma saisie :"
+            },
+            "Error": {
+                "InvalidAddress": "Adresse invalide.",
+                "CannotVerify": "Impossible de confirmer votre adresse, veuillez la vérifier.",
+                "UnknownVerifyError": "Une erreur inconnue est survenue lors de la vérification de votre adresse.",
+                "FieldIsRequired": "Le champ {{field}} est requis.",
+                "FieldIsInvalid": "Le champ {{field}} comporte une valeur invalide.",
+                "InvalidHouseNumber": "Le numéro de la rue n’a pas été trouvé.",
+                "INTERNAL_SERVER_ERROR": "Nous sommes désolés, une erreur est survenue. Si le problème persiste, contactez-nous à l’adresse support@easypost.com.",
+                "NOT_ACCEPTABLE": "La ressource identifiée par la requête peut uniquement générer des entités de réponse dont les caractéristiques de contenu ne sont pas acceptables d’après les en-têtes d’acceptation envoyés dans la requête.",
+                "NOT_FOUND": "La ressource demandée n’a pas été trouvée.",
+                "FORBIDDEN": "Impossible d’accéder à la ressource demandée.",
+                "PAYMENT_REQUIRED": "Fonds insuffisants. Veuillez vérifier vos paramètres de facturation à l’adresse http://www.easypost.com/account/billing.",
+                "UNAUTHORIZED": "Impossible d’accéder à la ressource demandée, échec de l’autorisation.",
+                "BAD_REQUEST": "Requête mal formulée. Veuillez vérifier le contenu et réessayer.",
+                "PAYMENT_GATEWAY.ERROR": "Le processeur de paiement n’a pas pu traiter la requête. Veuillez réessayer ou contacter support@easypost.com si le problème persiste.",
+                "MODE.UNAUTHORIZED": "Cette ressource nécessite une clé API de production pour pouvoir y accéder.",
+                "MODE.CONFLICT": "Le mode clé API est en conflit avec le mode paramètres.",
+                "DATE.PARSE.FAILURE": "Le format d’au moins une date est incorrect et celle-ci n’a pas pu être analysée.",
+                "PARAMETER.FORBIDDEN": "La requête n’a pas pu aboutir en raison des propriétés interdites présentes dans les paramètres.",
+                "PARAMETER.REQUIRED": "Paramètre requis manquant.",
+                "ADDRESS.PARAMETERS.INVALID_CHARACTER": "Les paramètres transmis contenaient un caractère invalide.",
+                "ADDRESS.PARAMETERS.INVALID": "Les paramètres transmis pour créer une adresse étaient manquants ou invalides.",
+                "ADDRESS.COUNTRY.INVALID": "« Pays » invalide, veuillez fournir au moins 2 caractères du code pays ISO.",
+                "ADDRESS.VERIFICATION.NOT_FOUND": "Adresse non trouvée.",
+                "ADDRESS.VERIFICATION.FAILURE": "Impossible de vérifier l’adresse.",
+                "ADDRESS.VERIFY.UNAVAILABLE": "La vérification de l’adresse n’est pas disponible. Veuillez réessayer.",
+                "ADDRESS.VERIFICATION.INVALID": "L’une des vérifications sélectionnées est invalide.",
+                "ADDRESS.VERIFY.FAILURE": "Impossible de vérifier l’adresse.",
+                "ADDRESS.VERIFY.CARRIER_INVALID": "Impossible de vérifier l’adresse à l’aide de l’opérateur renseigné.",
+                "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "La vérification de l’adresse n’est pas disponible, car un service en amont ne répond pas. Veuillez réessayer.",
+                "ADDRESS.VERIFY.ONLY_US": "USPS peut uniquement valider les adresses aux États-Unis.",
+                "ADDRESS.VERIFY.INTL_NOT_ENABLED": "La vérification internationale n’est pas activée pour ce compte. Veuillez contacter support@easypost.com.",
+                "ADDRESS.VERIFY.MISSING_STREET": "Les données fournies concernant l’adresse sont insuffisantes. Une rue doit être renseignée.",
+                "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Les données fournies concernant l’adresse sont insuffisantes. Une ville et un État ou un code postal doivent être renseignés.",
+                "E.COUNTRY.UNSUPPORTED": "Ce pays n’est pas pris en charge par ce mode. Essayez en mode production.",
+                "E.ENGINE.UNAVAILABLE": "Aucun moteur de vérification n’est disponible pour prendre en charge ce pays. Veuillez réessayer plus tard.",
+                "E.QUERY.UNANSWERABLE": "Nous ne pouvons pas fournir suffisamment de données dans ce pays afin de répondre à cette requête. Veuillez réessayer plus tard.",
+                "E.ADDRESS.NOT_FOUND": "Nous n’avons pas pu trouver l’adresse saisie.",
+                "E.SECONDARY_INFORMATION.INVALID": "Informations secondaires invalides (n° d’appartement). Veuillez noter qu’une erreur peut apparaître pour une requête réussie.",
+                "E.SECONDARY_INFORMATION.MISSING": "Informations secondaires manquantes (n° d’appartement). Veuillez noter qu’une erreur peut apparaître pour une requête réussie.",
+                "E.HOUSE_NUMBER.MISSING": "Numéro de rue manquant.",
+                "E.HOUSE_NUMBER.INVALID": "Nous n’avons pas pu trouver le numéro de rue fourni.",
+                "E.STREET.MISSING": "Rue manquante.",
+                "E.STREET.INVALID": "Rue invalide.",
+                "E.BOX_NUMBER.MISSING": "Numéro de boîte postale manquant.",
+                "E.BOX_NUMBER.INVALID": "Numéro de boîte postale invalide.",
+                "E.ADDRESS.INVALID": "Ville/État/code postal invalide.",
+                "E.ZIP.NOT_FOUND": "Code postal non trouvé.",
+                "E.ZIP.INVALID": "Code postal invalide.",
+                "E.ZIP.PLUS4.NOT_FOUND": "Code postal à plus de 4 chiffres non trouvé.",
+                "E.ADDRESS.MULTIPLE": "Différentes adresses ont été trouvées pour le même code postal.",
+                "E.ADDRESS.INSUFFICIENT": "Données d’adresse insuffisantes/incorrectes",
+                "E.ADDRESS.DUAL": "Adresse doublon.",
+                "E.STREET.MAGNET": "Rue ambiguë.",
+                "E.CITY_STATE.INVALID": "Ville/État non vérifiable.",
+                "E.STATE.INVALID": "État invalide.",
+                "E.ADDRESS.DELIVERY.INVALID": "Adresse de livraison invalide.",
+                "E.TIMED_OUT": "Délai d’attente maximal dépassé.",
+                "E.TIME_ZONE.UNAVAILABLE": "Le service de fuseau horaire n’est pas disponible actuellement.",
+                "E.PO_BOX.INTERNATIONAL": "Impossible de vérifier la boîte postale internationale. Veuillez noter qu’une erreur peut apparaître pour une requête réussie."
+            }
+        },
+        "TooltipAlt": "Informations",
+        "SubjectPanel": {
+            "Link": "Revenir à la recherche de patient",
+            "InvitationCode": "Code d’invitation du patient :",
+            "Email": "[FR] Email:",
+            "Name": "[FR] Name:",
+            "ShortId": "[FR] Subject Short ID/HRUID:"
+        },
+        "AdminActionPanel": {
+            "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+            "EditButton": "Edit"
+        },
+        "Validators": {
+            "DateNavyValidationRule": "[FR] Entered date is invalid"
+        }
     }
-  }
 }

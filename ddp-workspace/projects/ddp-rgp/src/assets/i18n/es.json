@@ -1074,36 +1074,36 @@
             }
         },
         "StudyMessages": {
-          "Title": "Mensajes del estudio",
-          "Header": {
-            "Date": "Fecha",
-            "Title": "Título",
-            "Description": "Descripción"
-          },
-          "Actions": {
-            "ShowMore": "Mostrar más",
-            "ShowLess": "Muestra menos"
-          }
+            "Title": "Mensajes del estudio",
+            "Header": {
+                "Date": "Fecha",
+                "Title": "Título",
+                "Description": "Descripción"
+            },
+            "Actions": {
+                "ShowMore": "Mostrar más",
+                "ShowLess": "Muestra menos"
+            }
         },
         "UserActivities": {
-          "Title": "Documentos del estudio",
-          "Header": {
-            "Form": "Documento",
-            "Summary": "Resumen",
-            "Status": "Estado",
-            "Actions": "Acciones"
-          },
-          "StatusCode": {
-            "CREATED": "Creado(a)",
-            "IN_PROGRESS": "En curso",
-            "COMPLETE": "Completo(a)"
-          },
-          "Actions": {
-            "Start": "Comienzo",
-            "Continue": "Continuar",
-            "View": "Mira"
-          },
-          "NotAvailable": "No disponible"
+            "Title": "Documentos del estudio",
+            "Header": {
+                "Form": "Documento",
+                "Summary": "Resumen",
+                "Status": "Estado",
+                "Actions": "Acciones"
+            },
+            "StatusCode": {
+                "CREATED": "Creado(a)",
+                "IN_PROGRESS": "En curso",
+                "COMPLETE": "Completo(a)"
+            },
+            "Actions": {
+                "Start": "Comienzo",
+                "Continue": "Continuar",
+                "View": "Mira"
+            },
+            "NotAvailable": "No disponible"
         }
     },
     "ErrorPage": {
@@ -1377,8 +1377,7 @@
         },
         "UserPreferences": {
             "UserPreferencesTitle": "Preferencias del usuario",
-            "UserPreferencesGender": "Género",
-            "UserPreferencesLocale": "Idioma preferido"
+            "UserPreferencesGender": "Género"
         },
         "Dashboard": {
             "Title": "Panel de Control",
