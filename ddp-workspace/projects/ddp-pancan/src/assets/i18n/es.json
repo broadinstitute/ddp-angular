@@ -206,10 +206,10 @@
                         {
                             "Title": "Liderazgo",
                             "List": [
-                                "<b>Elana Anastasio</b><br/> Directora Asociada",
-                                "<b>Roeshana Moore-Evans</b><br/> Asesora Superior",
+                                "<b>Nikhil Wagle</b><br/> Director",
                                 "<b>Corrie Painter</b><br/> Directora Adjunta",
-                                "<b>Nikhil Wagle</b><br/> Director"
+                                "<b>Elana Anastasio</b><br/> Directora Asociada",
+                                "<b>Roeshana Moore-Evans</b><br/> Asesora Superior"
                             ]
                         },
                         {
@@ -501,8 +501,7 @@
             "ShowPanel": "Mostrar",
             "HidePanel": "Esconder",
             "UserLabel": "Usted",
-            "ChildLabel": "Su hijo(a)",
-            "RemoveParticipant": "Remover Participante {{participant}}"
+            "ChildLabel": "Su hijo(a){{suffix}}"
         },
         "Password": {
             "Title": "Ingrese la contraseña.",

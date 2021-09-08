@@ -9,6 +9,7 @@ import { ActivityPicklistOption } from '../../../models/activity/activityPicklis
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { PicklistSortingPolicy } from '../../../services/picklistSortingPolicy.service';
 import { ConfigurationService } from '../../../services/configuration.service';
+import { StringsHelper } from '../../../utility/stringsHelper';
 
 @Component({
     selector: 'ddp-activity-autocomplete-picklist-question',
@@ -22,13 +23,13 @@ import { ConfigurationService } from '../../../services/configuration.service';
 
         <mat-autocomplete #autoCompleteFromSource="matAutocomplete" class="autoCompletePanel" [displayWith]="displayAutoComplete">
             <mat-optgroup *ngFor="let group of filteredGroups">
-                <strong [innerHtml]="group.name | searchHighlight: autocompleteInput.value"></strong>
+                <strong [innerHtml]="group.name | searchHighlight: autocompleteInput.value : ignoredSymbolsInQuery"></strong>
                 <ng-container *ngTemplateOutlet="generalOptionsList; context: {list: group.options}"></ng-container>
             </mat-optgroup>
             <ng-container *ngTemplateOutlet="generalOptionsList; context: {list: filteredOptions}"></ng-container>
             <ng-template #generalOptionsList let-list="list">
                 <mat-option *ngFor="let suggestion of list" class="autoCompleteOption" [value]="suggestion">
-                    <span [innerHtml]="suggestion.optionLabel | searchHighlight: autocompleteInput.value"></span>
+                    <span [innerHtml]="suggestion.optionLabel | searchHighlight: autocompleteInput.value : ignoredSymbolsInQuery"></span>
                 </mat-option>
             </ng-template>
         </mat-autocomplete>
@@ -48,6 +49,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     // options w/o a group
     filteredOptions: ActivityPicklistOption[] = [];
     inputFormControl = new FormControl();
+    readonly ignoredSymbolsInQuery: string[];
     private readonly ngUnsubscribe = new Subject();
 
     constructor(
@@ -56,43 +58,33 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
         @Inject('ddp.config') public config: ConfigurationService
     ) {
         super(translate);
+        this.ignoredSymbolsInQuery = this.config.picklistAutocompleteIgnoredSymbols;
     }
 
     public ngOnInit(): void {
-        const answer = this.block.answer && this.block.answer[0];
-        if (answer) {
-            const value = answer.detail || [
-                ...this.block.picklistGroups.flatMap(group => group.options),
-                ...this.block.picklistOptions
-            ].find(option => option.stableId === answer.stableId);
-            this.inputFormControl.setValue(value);
-        }
+        // reset the sort policy for picklists which don't need to have sorted options
+        this.sortPolicy = this.shouldBeSorted ? this.sortPolicy : new PicklistSortingPolicy();
+        this.initInputValue();
 
-        const userQueryStream = this.inputFormControl.valueChanges.pipe(
+        const userQueryStream$ = this.inputFormControl.valueChanges.pipe(
             map(value => typeof value === 'string' ? value.trim() : value),
             distinctUntilChanged(),
             debounceTime(200),
             takeUntil(this.ngUnsubscribe)
         );
 
-        let sortedPicklistGroups;
-        let sortedPicklistOptions;
-        if (this.shouldBeSorted) {
-            sortedPicklistGroups = this.sortPolicy.sortPicklistGroups(this.block.picklistGroups);
-            sortedPicklistOptions = this.sortPolicy.sortPicklistOptions(this.block.picklistOptions);
-        } else {
-            sortedPicklistGroups = this.block.picklistGroups;
-            sortedPicklistOptions = this.block.picklistOptions;
-        }
+        const sortedPicklistGroups = this.sortPolicy.sortPicklistGroups(this.block.picklistGroups);
+        const sortedPicklistOptions = this.sortPolicy.sortPicklistOptions(this.block.picklistOptions);
 
-        userQueryStream.pipe(startWith('')).subscribe((value: string | ActivityPicklistOption) => {
-            const query = typeof value === 'string' ? value : value.optionLabel;
-            this.filteredGroups = this.filterOutEmptyGroups(query ? this.filterGroups(query, sortedPicklistGroups)
-                : sortedPicklistGroups.slice());
-            this.filteredOptions = query ? this.filterOptions(query, sortedPicklistOptions) : sortedPicklistOptions.slice();
-        });
+        userQueryStream$.pipe(startWith(''))
+            .subscribe((value: string | ActivityPicklistOption) => {
+                const query = typeof value === 'string' ? value : value.optionLabel;
+                this.filteredGroups = this.filterOutEmptyGroups(query ? this.filterGroups(query, sortedPicklistGroups)
+                    : sortedPicklistGroups.slice());
+                this.filteredOptions = query ? this.filterOptions(query, sortedPicklistOptions) : sortedPicklistOptions.slice();
+            });
 
-        userQueryStream.subscribe((value: string | ActivityPicklistOption) => {
+        userQueryStream$.subscribe((value: string | ActivityPicklistOption) => {
             if (typeof value === 'string') {
                 if (value.length) {
                     this.handleStringValue(value);
@@ -121,6 +113,17 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
         this.ngUnsubscribe.complete();
     }
 
+    private initInputValue(): void {
+        const answer = this.block.answer && this.block.answer[0];
+        if (answer) {
+            const value = answer.detail || [
+                ...this.block.picklistGroups.flatMap(group => group.options),
+                ...this.block.picklistOptions
+            ].find(option => option.stableId === answer.stableId);
+            this.inputFormControl.setValue(value);
+        }
+    }
+
     private handleStringValue(value: string): void {
         const minimalLengthForOption = 2;
         if (value.length >= minimalLengthForOption) {
@@ -142,30 +145,34 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
         this.valueChanged.emit([...this.block.answer]);
     }
 
-    private filterGroups(name: string, groups: ActivityPicklistNormalizedGroup[]): ActivityPicklistNormalizedGroup[] {
-        const filterValue = name.toLowerCase();
+    private filterGroups(query: string, groups: ActivityPicklistNormalizedGroup[]): ActivityPicklistNormalizedGroup[] {
         return groups
             .map(group => ({
                 name: group.name,
-                options: group.name.toLowerCase().includes(filterValue)
+                options: this.isMatched(group.name, query)
                     ? group.options
-                    : this.filterOptions(filterValue, group.options)}));
+                    : this.filterOptions(query, group.options)}));
     }
 
-    private filterOptions(name: string, options: ActivityPicklistOption[]): ActivityPicklistOption[] {
-        const filterValue = name.toLowerCase();
-        return options.filter(option => option.optionLabel.toLowerCase().includes(filterValue));
+    private filterOptions(query: string, options: ActivityPicklistOption[]): ActivityPicklistOption[] {
+        return options.filter(option => this.isMatched(option.optionLabel, query));
     }
 
     private get shouldBeSorted(): boolean {
-        return !this.config.picklistsWithNoSorting.includes(this.block.stableId);
+        return !this.config.notSortedPicklistAutocompleteStableIds.includes(this.block.stableId);
     }
 
-    filterOutEmptyGroups(groups: ActivityPicklistNormalizedGroup[]): ActivityPicklistNormalizedGroup[] {
+    private filterOutEmptyGroups(groups: ActivityPicklistNormalizedGroup[]): ActivityPicklistNormalizedGroup[] {
         return groups.filter(group => group.options.length > 0);
     }
 
     displayAutoComplete(option: ActivityPicklistOption | string): string {
         return typeof option === 'string' ? option : (option?.optionLabel || '');
+    }
+
+    private isMatched(text: string, query: string): boolean {
+        const normalizedText = StringsHelper.normalizeString(text, this.ignoredSymbolsInQuery);
+        const normalizedQuery = StringsHelper.normalizeString(query, this.ignoredSymbolsInQuery);
+        return StringsHelper.isIncluded(normalizedText, normalizedQuery);
     }
 }

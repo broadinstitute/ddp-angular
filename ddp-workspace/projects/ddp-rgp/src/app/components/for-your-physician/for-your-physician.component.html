@@ -3,7 +3,7 @@
     <div class="row PageLayout">
       <div class="col-lg-9 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
         <h1 class="PageHeader-title" translate>ForYourPhysicianPage.Title
-          <a href="/RGP-for-your-physician.pdf" mat-raised-button id='downloadPDF' name='downloadPDF'
+          <a [href]="'/RGP-for-your-physician-' + currentLang + '.pdf'" mat-raised-button id='downloadPDF' name='downloadPDF'
             class="Button Button--downloadPDF" download><span translate>ForYourPhysicianPage.DownloadPDF</span><i
               class="fa fa-download" aria-hidden="true"></i></a>
         </h1>

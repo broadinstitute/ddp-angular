@@ -103,6 +103,8 @@ config.projectGAToken = DDP_ENV.projectGAToken;
 config.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 config.projectGcpId = DDP_ENV.projectGcpId;
 config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
+config.useBinaryLanguageSelector = true;
+config.reverseBinaryLanguageSelector = true;
 
 export function translateFactory(
   translate: TranslateService,

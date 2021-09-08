@@ -12,7 +12,7 @@ import { UserServiceAgent } from './userServiceAgent.service';
 @Injectable()
 export class UserActivityServiceAgent extends UserServiceAgent<Array<ActivityInstance>> {
     constructor(
-        session: SessionMementoService,
+        private session: SessionMementoService,
         @Inject('ddp.config') configuration: ConfigurationService,
         http: HttpClient,
         logger: LoggingService,
@@ -20,7 +20,10 @@ export class UserActivityServiceAgent extends UserServiceAgent<Array<ActivityIns
         super(session, configuration, http, logger, _language);
     }
 
-    public getActivities(studyGuid: Observable<string | null>): Observable<Array<ActivityInstance> | null> {
+    public getActivities(studyGuid: Observable<string | null>, participantGuid?: string): Observable<Array<ActivityInstance> | null> {
+        if (participantGuid) {
+            this.session.setParticipant(participantGuid);
+        }
         return studyGuid.pipe(
             mergeMap(x => x ? this.getObservable(`/studies/${x}/activities`)
                 : of(null)));

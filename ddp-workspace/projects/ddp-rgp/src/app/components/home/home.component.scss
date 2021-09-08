@@ -708,6 +708,12 @@ h2.Home-title {
     margin-top: 40px;
 }
 
+.Home-partnerCureHHT {
+    background: url(/assets/images/curehht-logo.png) no-repeat center;
+    background-size: contain !important;
+    width: 100%;
+}
+
 @media only screen and (max-width: 1350px) {
     .Home-partners {
         height: 125px;

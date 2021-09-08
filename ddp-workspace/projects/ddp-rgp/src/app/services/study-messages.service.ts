@@ -19,7 +19,7 @@ export class StudyMessagesService {
   getPersonMessages(): any {
     return this.userStatusService.getStatus().pipe(
       map(response => {
-        const allWorkflows: Workflow[] = response.workflows ?? [];
+        const allWorkflows: Workflow[] = response?.workflows ?? [];
 
         const persons = new Map<string, StudyPerson>();
         const personWorkflows = new Map<string, Workflow[]>();
