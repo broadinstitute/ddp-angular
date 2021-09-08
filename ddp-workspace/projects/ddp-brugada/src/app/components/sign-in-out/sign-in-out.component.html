@@ -5,26 +5,14 @@
     </a>
   </li>
 
-  <li class="link-list__item" *ngIf="!isAuthenticated">
-    <a [routerLink]="Route.Login">
-      {{ 'App.Header.Links.Login' | translate }}
-    </a>
-  </li>
-
   <li class="link-list__item" *ngIf="isAuthenticated">
     <a [routerLink]="Route.Dashboard">
       {{ 'App.Header.Links.Dashboard' | translate }}
     </a>
   </li>
-
-  <li class="link-list__item" *ngIf="isAuthenticated">
-    <button
-      class="SimpleButton"
-      [ngClass]="{ 'SimpleButton--Scrolled': isScrolled }"
-      data-ddp-test="signOutButton"
-      (click)="doSignOut()"
-    >
-      {{ signOutCaption ? signOutCaption : signOutText }}
-    </button>
+  <li class="link-list__item">
+    <ddp-sign-in-out
+      [signOutReturnToUrl]="Route.Home"
+    ></ddp-sign-in-out>
   </li>
 </ul>
