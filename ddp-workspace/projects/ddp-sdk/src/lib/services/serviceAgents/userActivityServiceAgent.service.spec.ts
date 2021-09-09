@@ -20,6 +20,7 @@ describe('UserActivityServiceAgent', () => {
         const loggingServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logException']);
         sessionSpy = new SessionMementoService({} as TranslateService, config);
         spyOnProperty(sessionSpy, 'sessionObservable').and.returnValue(of({ participantGuid: sessionUserGuid }));
+        spyOnProperty(sessionSpy, 'session').and.returnValue({ participantGuid: sessionUserGuid });
 
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule]
@@ -45,7 +46,7 @@ describe('UserActivityServiceAgent', () => {
         service.getActivities(of(studyGuid), participantGuid).subscribe(() => {
             expect(setParticipantSpy).toHaveBeenCalledTimes(2);
             expect(setParticipantSpy).toHaveBeenCalledWith(participantGuid);
-            expect(setParticipantSpy).toHaveBeenCalledWith(null);
+            expect(setParticipantSpy).toHaveBeenCalledWith(sessionUserGuid);
             done();
         });
 
