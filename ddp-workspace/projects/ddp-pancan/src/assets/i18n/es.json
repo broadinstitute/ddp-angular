@@ -387,13 +387,15 @@
             "Partners": {
                 "Title": "Aliados",
                 "Alts": {
-                    "CCResource": "Colorectal Cancer Resource & Action Network",
-                    "Raymond": "Raymond Foundation",
-                    "GICAlliance": "GI Cancers Alliance",
-                    "CCCanada": "Colorectal Cancer Canada",
-                    "FightCC": "Fight Colorectal Cancer",
-                    "ColonCancerStars": "Colon Cancer Stars",
-                    "GCCA": "Global Colon Cancer Association"
+                    "CCResource": "Colorectal Cancer Resource & Action Network logo",
+                    "Raymond": "Raymond Foundation logo",
+                    "GICAlliance": "GI Cancers Alliance logo",
+                    "CCCanada": "Colorectal Cancer Canada logo",
+                    "FightCC": "Fight Colorectal Cancer logo",
+                    "ColonCancerStars": "Colon Cancer Stars logo",
+                    "GCCA": "Global Colon Cancer Association logo",
+                    "CCAlliance": "Colorectal Cancer Alliance logo",
+                    "ColonCancerCoalition": "Colon Cancer Coalition logo"
                 },
                 "Text": "Para obtener más información sobre cómo participar en el Proyecto de cáncer colorrectal, comuníquese con el equipo en <a class='Link' href='mailto:info@colorectalcancerproject.org'>info@colorectalcancerproject.org</a>."
             },
