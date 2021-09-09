@@ -5,8 +5,9 @@ import { InstitutionServiceAgent } from '../serviceAgents/institutionServiceAgen
 import { ActivityValidatorBuilder } from './activityValidatorBuilder.service';
 import { DateService } from '../dateService.service';
 import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
-import { LoggingService, ActivityPicklistQuestionBlock, QuestionType } from 'ddp-sdk';
+import { LoggingService, ActivityPicklistQuestionBlock, QuestionType, ActivityCompositeQuestionBlock } from 'ddp-sdk';
 import { ActivityStrictMatchValidationRule } from './validators/activityStrictMatchValidationRule';
+import { ActivityUniqueValidationRule } from './validators/activityUniqueValidationRule';
 
 let service: ActivityValidatorBuilder;
 const loggerServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logError']);
@@ -38,5 +39,16 @@ describe('ActivityValidatorBuilder Test', () => {
         const rules = service.buildQuestionValidatorRule({validations: []}, block);
         const strictMatchRule = new ActivityStrictMatchValidationRule(block);
         expect(rules).toContain(strictMatchRule);
+    });
+
+    it('should add ActivityUniqueValidationRule', () => {
+        const message = 'values are not unique';
+        const block = {
+            questionType: QuestionType.Composite,
+        } as ActivityCompositeQuestionBlock;
+        const rules = service.buildQuestionValidatorRule({validations: [{rule: 'UNIQUE', message}]}, block);
+        const uniqueRule = new ActivityUniqueValidationRule(block);
+        uniqueRule.message = message;
+        expect(rules).toContain(uniqueRule);
     });
 });
