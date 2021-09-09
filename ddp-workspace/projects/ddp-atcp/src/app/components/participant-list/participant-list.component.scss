@@ -12,8 +12,16 @@
     padding: 2rem 0;
   }
 
-  .ButtonFilled--green {
-    margin-left: 0;
+  .ButtonFilled {
+    &:disabled {
+      opacity: .8;
+      cursor: not-allowed;
+      background-color: $green!important;
+      border-color: $green!important;
+    }
+    &--green {
+      margin-left: 0;
+    }
   }
 }
 
