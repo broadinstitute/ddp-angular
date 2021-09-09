@@ -21,11 +21,18 @@ export class UserActivityServiceAgent extends UserServiceAgent<Array<ActivityIns
     }
 
     public getActivities(studyGuid: Observable<string | null>, participantGuid?: string): Observable<Array<ActivityInstance> | null> {
-        if (participantGuid) {
-            this.session.setParticipant(participantGuid);
-        }
-        return studyGuid.pipe(
-            mergeMap(x => x ? this.getObservable(`/studies/${x}/activities`)
-                : of(null)));
+        return studyGuid.pipe(mergeMap(x => {
+            if (x) {
+                if (participantGuid) {
+                    this.session.setParticipant(participantGuid);
+                }
+                const activitiesObservable = this.getObservable(`/studies/${x}/activities`);
+                if (participantGuid) {
+                    this.session.setParticipant(null);
+                }
+                return activitiesObservable;
+            }
+            return of(null);
+        }));
     }
 }
