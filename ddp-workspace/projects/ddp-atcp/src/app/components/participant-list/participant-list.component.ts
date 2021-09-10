@@ -38,6 +38,7 @@ export interface Participant {
 export class ParticipantListComponent implements OnInit, OnDestroy {
   participants: Participant[] = [];
   isLoaded = false;
+  disableAddParticipantsButton = false;
   private anchor = new CompositeDisposable();
   private COMPLETE_STATUS_CODE = 'COMPLETE';
 
@@ -76,6 +77,8 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
   }
 
   onAddParticipantClick(): void {
+    this.disableAddParticipantsButton = true;
+
     this.governedParticipantsAgent
       .addParticipant(this.config.studyGuid)
       .pipe(
@@ -83,10 +86,16 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
         tap(participantGuid => this.session.setParticipant(participantGuid)),
         switchMap(() => this.workflowAgent.fromParticipantList()),
       )
-      .subscribe(() => {
-        this.activityService.setCurrentActivity(null);
-        this.router.navigateByUrl(RouterResources.Survey);
-      });
+      .subscribe(
+        () => {
+          this.disableAddParticipantsButton = false;
+          this.activityService.setCurrentActivity(null);
+          this.router.navigateByUrl(RouterResources.Survey);
+        },
+        () => {
+          this.disableAddParticipantsButton = false;
+        }
+      );
   }
 
   private getParticipants(): void {
