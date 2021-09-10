@@ -459,8 +459,7 @@
         },
         "UserPreferences": {
             "UserPreferencesTitle": "User preferences",
-            "UserPreferencesGender": "Sex",
-            "UserPreferencesLocale": "Preferred language"
+            "UserPreferencesGender": "Sex"
         },
         "Dashboard": {
             "Title": "My Dashboard",
@@ -505,11 +504,11 @@
         },
         "Institutions": {
             "Fields": {
-              "Name": "Physician Name",
-              "Institution": "Institution",
-              "InstitutionAny": "Institution (if any)",
-              "City": "City",
-              "State": "State"
+                "Name": "Physician Name",
+                "Institution": "Institution",
+                "InstitutionAny": "Institution (if any)",
+                "City": "City",
+                "State": "State"
             },
             "Form" : {
                 "OtherPhysician": "Other physician",
@@ -604,6 +603,6 @@
                 "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
                 "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
             }
-      }
+        }
     }
 }

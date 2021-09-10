@@ -470,8 +470,7 @@
         },
         "UserPreferences": {
             "UserPreferencesTitle": "Preferencias del usuario",
-            "UserPreferencesGender": "Sexo",
-            "UserPreferencesLocale": "Idioma preferido"
+            "UserPreferencesGender": "Sexo"
         },
         "Dashboard": {
             "Title": "Mi panel",
