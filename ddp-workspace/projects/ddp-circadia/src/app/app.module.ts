@@ -1,7 +1,8 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { LOCATION_INITIALIZED } from '@angular/common';
+import { DatePipe, LOCATION_INITIALIZED } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -142,6 +143,7 @@ export function translateFactory(
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     MatExpansionModule,
     MatProgressSpinnerModule,
     MatFormFieldModule,
@@ -156,6 +158,7 @@ export function translateFactory(
     AppRoutingModule,
   ],
   providers: [
+    DatePipe,
     {
       provide: 'ddp.config',
       useValue: sdkConfig,
