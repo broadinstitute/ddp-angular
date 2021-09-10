@@ -46,6 +46,45 @@
           &mdash;
         </ng-container>
 
+        <ng-container *ngSwitchCase="ActivityCode.MiniSleepLog">
+          <div class="activity-status">
+            <ng-container *ngIf="sleepLogStatusError">
+              &mdash;
+            </ng-container>
+
+            <mat-spinner
+              *ngIf="!sleepLogStatus && sleepLogStatusError === null"
+              diameter="32"
+              style="margin: 6px 0 6px 1.5em;"
+            ></mat-spinner>
+
+            <ng-container *ngIf="sleepLogStatus">
+              <ng-container
+                *ngIf="sleepLogStatus === ActivityStatusCode.CREATED"
+              >
+                <mat-icon class="status-icon status-icon--created">info</mat-icon
+                >{{ 'UserActivities.Statuses.Created' | translate }}
+              </ng-container>
+
+              <ng-container
+                *ngIf="sleepLogStatus === ActivityStatusCode.IN_PROGRESS"
+              >
+                <mat-icon class="status-icon status-icon--in-progress"
+                  >pending</mat-icon
+                >{{ 'UserActivities.Statuses.InProgress' | translate }}
+              </ng-container>
+
+              <ng-container
+                *ngIf="sleepLogStatus === ActivityStatusCode.COMPLETE"
+              >
+                <mat-icon class="status-icon status-icon--complete"
+                  >check_circle</mat-icon
+                >{{ 'UserActivities.Statuses.Complete' | translate }}
+              </ng-container>
+            </ng-container>
+          </div>
+        </ng-container>
+
         <ng-container *ngSwitchDefault>
           <div class="activity-status">
             <ng-container
@@ -106,20 +145,42 @@
         </ng-container>
 
         <ng-container *ngSwitchCase="ActivityCode.MiniSleepLog">
+          <ng-container *ngIf="sleepLogUrlError">
+            &mdash;
+          </ng-container>
+
           <mat-spinner
-            *ngIf="!sleepLogUrl"
+            *ngIf="!sleepLogUrl && sleepLogUrlError === null"
             diameter="32"
             style="margin: 6px 0 6px 1.5em;"
           ></mat-spinner>
 
-          <a
-            *ngIf="sleepLogUrl"
-            class="button button--sm button--yellow-outline"
-            target="_blank"
-            [href]="sleepLogUrl"
-          >
-            {{ 'UserActivities.Actions.Start' | translate }}
-          </a>
+          <ng-container *ngIf="sleepLogUrl">
+            <a
+              target="_blank"
+              [href]="sleepLogUrl"
+              class="button button--sm button--yellow-outline"
+              *ngIf="sleepLogStatus === ActivityStatusCode.CREATED"
+            >
+              {{ 'UserActivities.Actions.Start' | translate }}
+            </a>
+            <a
+              target="_blank"
+              [href]="sleepLogUrl"
+              class="button button--sm button--yellow-outline"
+              *ngIf="sleepLogStatus === ActivityStatusCode.IN_PROGRESS"
+            >
+              {{ 'UserActivities.Actions.Continue' | translate }}
+            </a>
+            <a
+              target="_blank"
+              [href]="sleepLogUrl"
+              class="button button--sm button--blue"
+              *ngIf="sleepLogStatus === ActivityStatusCode.COMPLETE"
+            >
+              {{ 'UserActivities.Actions.View' | translate }}
+            </a>
+          </ng-container>
         </ng-container>
 
         <ng-container *ngSwitchDefault>

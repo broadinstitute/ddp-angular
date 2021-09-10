@@ -76,6 +76,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
     return this.sleepLogService.diaryUrl$.getValue();
   }
 
+  get diaryStatus(): string | null {
+    return this.sleepLogService.diaryStatus$.getValue();
+  }
+
+  get diaryStatusError(): boolean | null {
+    return this.sleepLogService.diaryStatusError$.getValue();
+  }
+
+  get diaryUrlError(): boolean | null {
+    return this.sleepLogService.diaryUrlError$.getValue();
+  }
+
   private fetchData(): Observable<{
     activities: ActivityInstance[];
     announcements: AnnouncementMessage[];

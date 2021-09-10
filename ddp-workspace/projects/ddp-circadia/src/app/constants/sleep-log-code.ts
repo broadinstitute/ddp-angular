@@ -4,4 +4,5 @@ export enum SleepLogCode {
 
 export enum UtilitySleepLogCode {
   GetInfo = 'SLEEP_LOG__GET_INFO',
+  GetDiary = 'SLEEP_LOG__GET_DIARY',
 }

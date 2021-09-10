@@ -12,6 +12,9 @@
   <app-user-activities
     [activities]="activities"
     [sleepLogUrl]="diaryUrl"
+    [sleepLogStatus]="diaryStatus"
+    [sleepLogUrlError]="diaryUrlError"
+    [sleepLogStatusError]="diaryStatusError"
     (startActivity)="onStartActivity($event)"
     (continueActivity)="onContinueActivity($event)"
     (viewActivity)="onViewActivity($event)"

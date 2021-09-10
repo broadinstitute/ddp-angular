@@ -12,6 +12,9 @@ import { ActivityCode } from '../../constants/activity-code';
 export class UserActivitiesComponent {
   @Input() activities: ActivityInstance[];
   @Input() sleepLogUrl: string | null = null;
+  @Input() sleepLogStatus: string | null = null;
+  @Input() sleepLogUrlError: boolean | null = null;
+  @Input() sleepLogStatusError: boolean | null = null;
   @Output() startActivity = new EventEmitter<ActivityInstance>();
   @Output() continueActivity = new EventEmitter<ActivityInstance>();
   @Output() viewActivity = new EventEmitter<ActivityInstance>();

@@ -1,3 +1,4 @@
+import { DiaryResponse } from './../interfaces/DiaryResponse';
 import { Inject, Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -5,6 +6,7 @@ import { BehaviorSubject, from, Observable, of } from 'rxjs';
 import { catchError, concatMap, filter, take, tap } from 'rxjs/operators';
 
 import {
+  ActivityStatusCodes,
   AnnouncementMessage,
   AnnouncementsServiceAgent,
   Auth0AdapterService,
@@ -28,13 +30,15 @@ declare const DDP_ENV: Record<string, any>;
 })
 export class SleepLogService {
   private static readonly CONNECTOR_URL: string = DDP_ENV.sleepLogConnectorUrl;
-  private static readonly SLEEP_LOG_CODES: string[] =
-    Object.values(SleepLogCode);
+  private static readonly SLEEP_LOG_CODES: string[] = Object.values(SleepLogCode);
   private static readonly LOG_SOURCE = 'SleepLogService';
   private static readonly WEEK_MS = 6.048e8;
   private static readonly SLEEP_LOG_DURATION_MULTIPLIER = 6;
   private static readonly DATE_FORMAT = 'yyyy-MM-dd';
   diaryUrl$ = new BehaviorSubject<string | null>(null);
+  diaryStatus$ = new BehaviorSubject<string | null>(null);
+  diaryUrlError$ = new BehaviorSubject<boolean | null>(null);
+  diaryStatusError$ = new BehaviorSubject<boolean | null>(null);
   private userEmail: string | null = null;
   private initialized$ = new BehaviorSubject<boolean>(false);
 
@@ -74,6 +78,18 @@ export class SleepLogService {
       .subscribe();
   }
 
+  private static getDiaryStatus({ completed, active }: Pick<DiaryResponse, 'completed' | 'active'>): ActivityStatusCodes {
+    if (active) {
+      return ActivityStatusCodes.IN_PROGRESS;
+    }
+
+    if (completed) {
+      return ActivityStatusCodes.COMPLETE;
+    }
+
+    return ActivityStatusCodes.CREATED;
+  }
+
   extractSleepLogAnnouncements(
     announcements: AnnouncementMessage[],
   ): SleepLogCode[] {
@@ -96,10 +112,10 @@ export class SleepLogService {
 
     if (!codes.length) {
       if (hasSleepLogActivity) {
-        actions = [UtilitySleepLogCode.GetInfo];
+        actions = [UtilitySleepLogCode.GetInfo, UtilitySleepLogCode.GetDiary];
       }
     } else if (!codes.includes(SleepLogCode.CreateUser)) {
-      actions = [...actions, UtilitySleepLogCode.GetInfo];
+      actions = [...actions, UtilitySleepLogCode.GetInfo, UtilitySleepLogCode.GetDiary];
     } else {
       actions = codes;
     }
@@ -120,6 +136,8 @@ export class SleepLogService {
         return this.createUser();
       case UtilitySleepLogCode.GetInfo:
         return this.getUserInfo();
+      case UtilitySleepLogCode.GetDiary:
+        return this.getDiary();
       default:
         return of(null);
     }
@@ -128,13 +146,6 @@ export class SleepLogService {
   private createUser(): Observable<CreateUserResponse | null> {
     const payload: CreateUserPayload = {
       ...this.getCommonProxyPayload(HttpMethod.Post),
-      start: this.datePipe.transform(Date.now(), SleepLogService.DATE_FORMAT),
-      end: this.datePipe.transform(
-        Date.now() +
-          SleepLogService.SLEEP_LOG_DURATION_MULTIPLIER *
-            SleepLogService.WEEK_MS,
-        SleepLogService.DATE_FORMAT,
-      ),
       email: this.userEmail,
     };
 
@@ -175,7 +186,29 @@ export class SleepLogService {
         tap(data => {
           this.diaryUrl$.next(data.diary_url);
         }),
-        catchError(() => of(null)),
+        catchError(() => {
+          this.diaryStatusError$.next(true);
+          return of(null);
+        }),
+      );
+  }
+
+  private getDiary(): Observable<DiaryResponse | null> {
+    const payload: GetUserInfoPayload = {
+      email: this.userEmail,
+      ...this.getCommonProxyPayload(HttpMethod.Get, 'api/diary/'),
+    };
+
+    return this.http
+      .post<DiaryResponse>(SleepLogService.CONNECTOR_URL, payload)
+      .pipe(
+        tap(({ completed, active }: DiaryResponse) => this.diaryStatus$.next(
+          SleepLogService.getDiaryStatus({ completed, active })
+        )),
+        catchError(() => {
+          this.diaryUrlError$.next(true);
+          return of(null);
+        }),
       );
   }
 
