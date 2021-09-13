@@ -585,8 +585,9 @@ workflows:
             branches:
               only:
                 - test
-                - staging
-                - production
+# Temporarily commenting out to make sure only Circadia is updated in production push
+#                - staging
+#                - production
           study_key: osteo
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
@@ -621,8 +622,14 @@ workflows:
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: cgc
+# Temporarily updating Circadia to be only Angular app that gets deployed to all environments
       - deploy-stored-build-job:
-          <<: *deploy_branch_filters
+          filters:
+            branches:
+              only:
+                - test
+                - staging
+                - production
           study_key: circadia
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
