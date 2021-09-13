@@ -1,27 +1,18 @@
-import { DiaryResponse } from './../interfaces/DiaryResponse';
 import { Inject, Injectable } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { BehaviorSubject, from, Observable, of } from 'rxjs';
-import { catchError, concatMap, tap } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import {
-  ActivityStatusCodes,
-  AnnouncementMessage,
-  AnnouncementsServiceAgent,
-  Auth0AdapterService,
-  ConfigurationService,
-  LoggingService,
-  SessionMementoService,
-} from 'ddp-sdk';
-
 import { HttpMethod } from '../constants/http-method';
-import { SleepLogCode, UtilitySleepLogCode } from '../constants/sleep-log-code';
-import { GetUserInfoPayload } from '../interfaces/GetUserInfoPayload';
+import { catchError, concatMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, from, Observable, of } from 'rxjs';
+import { DiaryResponse } from './../interfaces/DiaryResponse';
 import { UserInfoResponse } from '../interfaces/UserInfoResponse';
 import { CreateUserPayload } from '../interfaces/CreateUserPayload';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { GetUserInfoPayload } from '../interfaces/GetUserInfoPayload';
 import { CreateUserResponse } from '../interfaces/CreateUserResponse';
+import { SleepLogCode, UtilitySleepLogCode } from '../constants/sleep-log-code';
 import { CommonSleepLogProxyPayload } from '../interfaces/CommonSleepLogProxyPayload';
+import { ActivityStatusCodes, AnnouncementMessage, ConfigurationService, LoggingService } from 'ddp-sdk';
+
 
 declare const DDP_ENV: Record<string, any>;
 
@@ -43,11 +34,7 @@ export class SleepLogService {
 
   constructor(
     private http: HttpClient,
-    private datePipe: DatePipe,
-    private sessionService: SessionMementoService,
-    private auth0Service: Auth0AdapterService,
     private loggingService: LoggingService,
-    private announcementsService: AnnouncementsServiceAgent,
     @Inject('ddp.config') private config: ConfigurationService,
   ) {
     this.userEmail = SleepLogService.getUserEmail();
