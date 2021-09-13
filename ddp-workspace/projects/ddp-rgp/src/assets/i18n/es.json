@@ -25,7 +25,7 @@
             "Item2": "Craneofacial"
         },
         "AboutUs": "Quiénes somos",
-        "FAQs": "Preguntas y respuestas",
+        "FAQs": "Preguntas frecuentes",
         "Dashboard": "Panel de Control",
         "GetStarted": "Cómo comenzar"
     },
@@ -126,7 +126,7 @@
         "Title": "Quiénes somos",
         "ImageAlt": "Quiénes somos imagen",
         "Intro": {
-            "Paragraph": "El Proyecto Genomas Raros (Rare Genomes Project) del Broad Institute de MIT y Harvard cuenta con un equipo de investigadores, médicos, programadores de software, asesores genéticos y coordinadores de investigación que creen que los últimos avances en secuenciación genómica están cambiando el mundo de la medicina y deberían estar más al alcance de las familias que tienen enfermedades raras y sin diagnosticar."
+            "Paragraph": "El Proyecto Genomas Raros (Rare Genomes Project) del Broad Institute de MIT y Harvard cuenta con un equipo de investigadores, médicos, programadores de <i>software</i>, asesores genéticos y coordinadores de investigación que creen que los últimos avances en secuenciación genómica están cambiando el mundo de la medicina y deberían estar más al alcance de las familias que tienen enfermedades raras y sin diagnosticar."
         },
         "OurStory": {
             "Title": "Nuestra historia",
@@ -487,9 +487,9 @@
                     ]
                 },
                 {
-                    "question": "¿Qué tipo de pruebas genéticas se realiza en el Proyecto Genomas Raros?",
+                    "question": "¿Qué tipo de pruebas genéticas se realizan en el Proyecto Genomas Raros?",
                     "answers": [
-                        "En el Proyecto Genomas Raros se realiza la secuenciación del genoma completo. Esta prueba es diferente de la secuenciación del exoma completo, que es una prueba más específica que las compañías de seguro cubren con más frecuencia. A veces podemos realizar pruebas adicionales, entre ellas, secuenciación del ARN. Si desea más información sobre la secuenciación del genoma completo y sobre otros tipos de pruebas genéticas, le aconsejamos visitar el <a href=\"https://ghr.nlm.nih.gov/primer#testing\" target=\"_blank\" class=\"Link\">sitio web</a> de MedlinePlus, de la Biblioteca Nacional de Medicina de los Estados Unidos (National Library of Medicine)."
+                        "En el Proyecto Genomas Raros se realiza la secuenciación del genoma completo. Esta prueba es diferente de la secuenciación del exoma completo, que es una prueba más específica que las compañías de seguro cubren con más frecuencia. A veces podemos realizar pruebas adicionales, entre ellas, secuenciación del ARN. Si desea más información sobre la secuenciación del genoma completo y sobre otros tipos de pruebas genéticas, le aconsejamos visitar el <a href=\"https://medlineplus.gov/spanish/genetica/entender\" target=\"_blank\" class=\"Link\">sitio web</a> de MedlinePlus, de la Biblioteca Nacional de Medicina de los Estados Unidos (National Library of Medicine)."
                     ]
                 },
                 {
@@ -725,7 +725,7 @@
                 },
                 "List": {
                     "Item1": "Un inicio más precoz que el típico o una presentación grave de los síntomas",
-                    "Item2": "Varias personas de la familia afectadas por la misma enfermedad (o por una enfermedad parecida).",
+                    "Item2": "Varias personas de la familia afectadas por la misma enfermedad (o por una enfermedad parecida)",
                     "Item3": "Disponibilidad de los padres biológicos de las personas afectadas y que estos padres no tengan la enfermedad",
                     "Item4": "Resultados de algunas pruebas genéticas anteriores que no llevaron a un diagnóstico"
                 }
@@ -790,7 +790,7 @@
             },
             {
                 "title": "La secuenciación del ADN",
-                "text": "Cuando su muestra llegue al laboratorio del proyecto, le extraeremos el ADN y realizaremos la secuenciación del genoma. Si desea más información sobre la secuenciación, visite la página correspondiente de <a href=\"https://ghr.nlm.nih.gov/primer/testing/sequencing\" target=\"_blank\" class=\"Link\">Ayúdeme a entender la genética</a> de la Biblioteca Nacional de Medicina (National Library of Medicine).",
+                "text": "Cuando su muestra llegue al laboratorio del proyecto, le extraeremos el ADN y realizaremos la secuenciación del genoma. Si desea más información sobre la secuenciación, visite la página correspondiente de <a href=\"https://medlineplus.gov/spanish/genetica/entender\" target=\"_blank\" class=\"Link\">Cómo entender la genética</a> de la Biblioteca Nacional de Medicina (National Library of Medicine).",
                 "image": "/assets/images/step-5.jpg"
             },
             {
@@ -826,7 +826,7 @@
     "PrivacyAndYourDataPage": {
         "Title": "Su privacidad y sus datos",
         "ImageAlt": "Imagen de intercambio de datos",
-        "Intro": "<b>La secuenciación genómica es apenas el primer paso para entender las enfermedades raras</b> &mdash; comunicar sus síntomas y sus datos genómicos a otros investigadores y médicos hace que sea más probable encontrar a otras personas que tengan síntomas parecidos y alteraciones en los mismos genes.",
+        "Intro": "<b>La secuenciación genómica es apenas el primer paso para entender las enfermedades raras.</b> Comunicar sus síntomas y sus datos genómicos a otros investigadores y médicos hace que sea más probable encontrar a otras personas que tengan síntomas parecidos y alteraciones en los mismos genes.",
         "DataSharing": {
             "Title": "¿Qué es compartir los datos?",
             "Text1": "Compartir los datos es intercambiar los datos de secuenciación y ciertos datos clínicos limitados del proyecto con otras personas ajenas a él. Con frecuencia, las personas que desean tener acceso a los datos que producimos en el Proyecto Genomas Raros son otros científicos que se interesan en saber más sobre los aspectos genéticos de una enfermedad o afección específica. Puesto que las enfermedades raras afectan a tan pocas personas, compartir los datos les permite a los científicos de todo el mundo establecer conexiones mutuas y acelerar la velocidad con que se hacen descubrimientos en las enfermedades genéticas.",
@@ -860,7 +860,7 @@
         },
         "Shared": {
             "Question": "¿Mi nombre o mis datos personales se entregarán a otros investigadores y médicos?",
-            "Answer": "Nunca. Los datos genéticos que se generan en el proyecto se <b>desidentifican</b>, no contienen información que pueda revelar su identidad, como nombre o fecha de nacimiento."
+            "Answer": "Nunca. Los datos genéticos que se generan en el proyecto se <b>desidentifican</b>, es decir, no contienen información que pueda revelar su identidad, como nombre o fecha de nacimiento."
         },
         "Profit": {
             "Question": "¿El Proyecto Genomas Raros se beneficiará económicamente de mis datos?",
@@ -1144,7 +1144,7 @@
         "Paragraph2": "Es posible que con el tiempo podamos ampliar el proyecto. Si se inscribe en nuestra lista de correo, podemos comunicarnos con usted si estos requisitos para participar cambian.",
         "Form": {
             "Label": "Dirección de correo electrónico *",
-            "Error": "Por favor, introduce una dirección de correo electrónico válida",
+            "Error": "Ingrese una dirección de correo electrónico válida.",
             "Submit": "Inscribirse en la lista de correo"
         },
         "Paragraph3": "Si en algún momento desea que su información se borre de nuestra base de datos, escríbanos por correo electrónico a <a href=\"mailto:raregenomes@broadinstitute.org\" class=\"Link\">raregenomes@broadinstitute.org</a>."
