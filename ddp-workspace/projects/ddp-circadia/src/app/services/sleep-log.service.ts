@@ -1,27 +1,18 @@
-import { DiaryResponse } from './../interfaces/DiaryResponse';
 import { Inject, Injectable } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { BehaviorSubject, from, Observable, of } from 'rxjs';
-import { catchError, concatMap, filter, take, tap } from 'rxjs/operators';
-
-import {
-  ActivityStatusCodes,
-  AnnouncementMessage,
-  AnnouncementsServiceAgent,
-  Auth0AdapterService,
-  ConfigurationService,
-  LoggingService,
-  SessionMementoService,
-} from 'ddp-sdk';
-
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpMethod } from '../constants/http-method';
-import { SleepLogCode, UtilitySleepLogCode } from '../constants/sleep-log-code';
-import { GetUserInfoPayload } from '../interfaces/GetUserInfoPayload';
+import { catchError, concatMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, from, Observable, of } from 'rxjs';
+import { DiaryResponse } from './../interfaces/DiaryResponse';
 import { UserInfoResponse } from '../interfaces/UserInfoResponse';
 import { CreateUserPayload } from '../interfaces/CreateUserPayload';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { GetUserInfoPayload } from '../interfaces/GetUserInfoPayload';
 import { CreateUserResponse } from '../interfaces/CreateUserResponse';
+import { SleepLogCode, UtilitySleepLogCode } from '../constants/sleep-log-code';
 import { CommonSleepLogProxyPayload } from '../interfaces/CommonSleepLogProxyPayload';
+import { ActivityStatusCodes, AnnouncementMessage, ConfigurationService, LoggingService } from 'ddp-sdk';
+
 
 declare const DDP_ENV: Record<string, any>;
 
@@ -40,42 +31,26 @@ export class SleepLogService {
   diaryUrlError$ = new BehaviorSubject<boolean | null>(null);
   diaryStatusError$ = new BehaviorSubject<boolean | null>(null);
   private userEmail: string | null = null;
-  private initialized$ = new BehaviorSubject<boolean>(false);
 
   constructor(
     private http: HttpClient,
-    private datePipe: DatePipe,
-    private sessionService: SessionMementoService,
-    private auth0Service: Auth0AdapterService,
     private loggingService: LoggingService,
-    private announcementsService: AnnouncementsServiceAgent,
     @Inject('ddp.config') private config: ConfigurationService,
   ) {
-    this.sessionService.sessionObservable
-      .pipe(
-        filter(session => !!session && !!session.accessToken),
-        take(1),
-        tap(({ accessToken }) =>
-          this.auth0Service.webAuth.client.userInfo(
-            accessToken,
-            (err, user) => {
-              if (err) {
-                this.loggingService.logError(
-                  SleepLogService.LOG_SOURCE,
-                  'Error occured when tried to fetch user info',
-                  err,
-                );
+    this.userEmail = SleepLogService.getUserEmail();
+  }
 
-                return;
-              }
+  private static getUserEmail(): string {
+    const token: string = localStorage.getItem('token');
 
-              this.userEmail = user.name;
-              this.initialized$.next(true);
-            },
-          ),
-        ),
-      )
-      .subscribe();
+    if (!token) {
+      return null;
+    }
+
+    const helper: JwtHelperService = new JwtHelperService();
+    const decodedToken = helper.decodeToken(token);
+
+    return decodedToken?.name || null;
   }
 
   private static getDiaryStatus({ completed, active }: Pick<DiaryResponse, 'completed' | 'active'>): ActivityStatusCodes {
@@ -120,10 +95,7 @@ export class SleepLogService {
       actions = [...codes, UtilitySleepLogCode.GetDiary];
     }
 
-    return this.initialized$.pipe(
-      filter(Boolean),
-      take(1),
-      concatMap(() => from(actions)),
+    return from(actions).pipe(
       concatMap(action => this.createSleepLogAction(action)),
     );
   }
