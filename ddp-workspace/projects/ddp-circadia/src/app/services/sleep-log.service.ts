@@ -3,8 +3,8 @@ import { Inject, Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, from, Observable, of } from 'rxjs';
-import { catchError, concatMap, filter, take, tap } from 'rxjs/operators';
-
+import { catchError, concatMap, tap } from 'rxjs/operators';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import {
   ActivityStatusCodes,
   AnnouncementMessage,
@@ -40,7 +40,6 @@ export class SleepLogService {
   diaryUrlError$ = new BehaviorSubject<boolean | null>(null);
   diaryStatusError$ = new BehaviorSubject<boolean | null>(null);
   private userEmail: string | null = null;
-  private initialized$ = new BehaviorSubject<boolean>(false);
 
   constructor(
     private http: HttpClient,
@@ -51,31 +50,20 @@ export class SleepLogService {
     private announcementsService: AnnouncementsServiceAgent,
     @Inject('ddp.config') private config: ConfigurationService,
   ) {
-    this.sessionService.sessionObservable
-      .pipe(
-        filter(session => !!session && !!session.accessToken),
-        take(1),
-        tap(({ accessToken }) =>
-          this.auth0Service.webAuth.client.userInfo(
-            accessToken,
-            (err, user) => {
-              if (err) {
-                this.loggingService.logError(
-                  SleepLogService.LOG_SOURCE,
-                  'Error occured when tried to fetch user info',
-                  err,
-                );
+    this.userEmail = SleepLogService.getUserEmail();
+  }
 
-                return;
-              }
+  private static getUserEmail(): string {
+    const token: string = localStorage.getItem('token');
 
-              this.userEmail = user.name;
-              this.initialized$.next(true);
-            },
-          ),
-        ),
-      )
-      .subscribe();
+    if (!token) {
+      return null;
+    }
+
+    const helper: JwtHelperService = new JwtHelperService();
+    const decodedToken = helper.decodeToken(token);
+
+    return decodedToken?.name || null;
   }
 
   private static getDiaryStatus({ completed, active }: Pick<DiaryResponse, 'completed' | 'active'>): ActivityStatusCodes {
@@ -120,10 +108,7 @@ export class SleepLogService {
       actions = [...codes, UtilitySleepLogCode.GetDiary];
     }
 
-    return this.initialized$.pipe(
-      filter(Boolean),
-      take(1),
-      concatMap(() => from(actions)),
+    return from(actions).pipe(
       concatMap(action => this.createSleepLogAction(action)),
     );
   }
