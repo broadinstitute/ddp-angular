@@ -117,7 +117,7 @@ export class SleepLogService {
     } else if (!codes.includes(SleepLogCode.CreateUser)) {
       actions = [...actions, UtilitySleepLogCode.GetInfo, UtilitySleepLogCode.GetDiary];
     } else {
-      actions = codes;
+      actions = [...codes, UtilitySleepLogCode.GetDiary];
     }
 
     return this.initialized$.pipe(
@@ -168,6 +168,8 @@ export class SleepLogService {
               err,
             );
           }
+
+          this.diaryUrlError$.next(true);
 
           return of(null);
         }),
