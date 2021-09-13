@@ -79,12 +79,12 @@ export class SleepLogService {
   }
 
   private static getDiaryStatus({ completed, active }: Pick<DiaryResponse, 'completed' | 'active'>): ActivityStatusCodes {
-    if (active) {
-      return ActivityStatusCodes.IN_PROGRESS;
-    }
-
     if (completed) {
       return ActivityStatusCodes.COMPLETE;
+    }
+
+    if (active) {
+      return ActivityStatusCodes.IN_PROGRESS;
     }
 
     return ActivityStatusCodes.CREATED;
