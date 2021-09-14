@@ -226,34 +226,34 @@
                     ]
                 },
                 {
-                    "Title": "Software",
+                    "Title": "<i>Software</i>",
                     "Members": [
                         {
                             "name": "Larry Babb",
                             "degree": "",
-                            "position": "Ingeniero sénior de software",
-                            "bio": "Larry es ingeniero de software y su interés es promover el uso de la genética en la investigación y en la atención clínica mediante la creación de infraestructura destinada a captar e intercambiar conocimientos genéticos con base en los principios FAIR de gestión de datos científicos (que se puedan descubrir y que sean accesibles, interoperables y reutilizables). Dirige dos equipos de desarrollo de software en el Broad Institute, ClinGen y seqr, y participa en dos organizaciones de establecimiento de normas sobre el intercambio de datos: GA4GH y HL7. Ha trabajado en sistemas tanto académicos como comerciales para la entrega de resultados genéticos clínicos y de información genética durante más de 16 años.",
+                            "position": "Ingeniero sénior de <i>software</i>",
+                            "bio": "Larry es ingeniero de <i>software</i> y su interés es promover el uso de la genética en la investigación y en la atención clínica mediante la creación de infraestructura destinada a captar e intercambiar conocimientos genéticos con base en los principios FAIR de gestión de datos científicos (que se puedan descubrir y que sean accesibles, interoperables y reutilizables). Dirige dos equipos de desarrollo de <i>software</i> en el Broad Institute, ClinGen y seqr, y participa en dos organizaciones de establecimiento de normas sobre el intercambio de datos: GA4GH y HL7. Ha trabajado en sistemas tanto académicos como comerciales para la entrega de resultados genéticos clínicos y de información genética durante más de 16 años.",
                             "image": "larry-babb.jpeg"
                         },
                         {
                             "name": "Steve Jahl",
                             "degree": "",
-                            "position": "Ingeniero de software",
-                            "bio": "Steve es ingeniero de fiabilidad en la institución. Su trabajo se centra en la estabilidad y el desempeño de nuestras plataformas virtuales de investigación. Antes de venir al Broad Institute trabajó de ingeniero de software y administrador de sistemas en grupos de computación en la investigación del Laboratorio de Inteligencia Artificial y Ciencias de la Computación (CSAIL, por sus siglas en inglés) de MIT y de Harvard Medical School.",
+                            "position": "Ingeniero de <i>software</i>",
+                            "bio": "Steve es ingeniero de fiabilidad en la institución. Su trabajo se centra en la estabilidad y el desempeño de nuestras plataformas virtuales de investigación. Antes de venir al Broad Institute trabajó de ingeniero de <i>software</i> y administrador de sistemas en grupos de computación en la investigación del Laboratorio de Inteligencia Artificial y Ciencias de la Computación (CSAIL, por sus siglas en inglés) de MIT y de Harvard Medical School.",
                             "image": "steve-jahl.jpg"
                         },
                         {
                             "name": "Hana Snow",
                             "degree": "",
-                            "position": "Ingeniera de software",
-                            "bio": "Hana es ingeniera de software. Su trabajo consiste en diseñar recursos para facilitar la investigación de las enfermedades raras. Es la principal creadora de seqr, nuestra plataforma de análisis de enfermedades raras.",
+                            "position": "Ingeniera de <i>software</i>",
+                            "bio": "Hana es ingeniera de <i>software</i>. Su trabajo consiste en diseñar recursos para facilitar la investigación de las enfermedades raras. Es la principal creadora de seqr, nuestra plataforma de análisis de enfermedades raras.",
                             "image": "hana-snow.jpg"
                         },
                         {
                             "name": "Shifa Zhang",
                             "degree": "MS",
-                            "position": "Ingeniero de software",
-                            "bio": "Shifa es científico computacional e ingeniero de software. Trabaja en recursos encaminados a la gestión e interpretación de los datos de secuenciación del ADN. Antes de trabajar en el Broad Institute, Shifa creó una plataforma segura para el análisis y el intercambio de datos biomédicos en Secure AI Labs.",
+                            "position": "Ingeniero de <i>software</i>",
+                            "bio": "Shifa es científico computacional e ingeniero de <i>software</i>. Trabaja en recursos encaminados a la gestión e interpretación de los datos de secuenciación del ADN. Antes de trabajar en el Broad Institute, Shifa creó una plataforma segura para el análisis y el intercambio de datos biomédicos en Secure AI Labs.",
                             "image": "shifa-zhang.jpeg"
                         }
                     ]
@@ -313,7 +313,7 @@
                             "image": "lynn-pais.jpg"
                         },
                         {
-                            "name": "Ellie Seaby",
+                            "name": "Dra. Ellie Seaby",
                             "degree": "MD",
                             "position": "Analista genómica clínica",
                             "bio": "Ellie es becaria de investigación clínica. Realiza estudios para obtener un doctorado en medicina genómica en la University of Southampton en un programa que se realiza con la colaboración del Broad Institute y el Imperial College London. Sus investigaciones se centran en el descubrimiento de nuevos genes causantes de enfermedades y en el mejoramiento de los desenlaces clínicos.",
@@ -364,8 +364,8 @@
                         {
                             "name": "Moriel Singer-Berk",
                             "degree": "MS",
-                            "position": "Curador de variantes genómicas",
-                            "bio": "Moriel es curador de variantes genómicas y su trabajo consiste en evaluar la patogenia de las variantes con fines clínicos y de investigación. Antes de trabajar en el Broad Institute obtuvo una maestría en biología animal con énfasis en genética equina en la University of California, Davis.",
+                            "position": "Curadora de variantes genómicas",
+                            "bio": "Moriel es curadora de variantes genómicas y su trabajo consiste en evaluar la patogenia de las variantes con fines clínicos y de investigación. Antes de trabajar en el Broad Institute obtuvo una maestría en biología animal con énfasis en genética equina en la University of California, Davis.",
                             "image": "moriel-singer-berk.png"
                         }
                     ]
@@ -1003,7 +1003,7 @@
         }
     },
     "CraniofacialPage": {
-        "Title": "La división de enfermedades craneofaciales del Proyecto Genomas Raros es una colaboración con el <a href=\"https://www.massgeneral.org/children/services/treatmentprograms.aspx?id=1631&display=overview\" target=\"_blank\" class=\"Link\">Centro de Labio Leporino y Paladar Hendido (Cleft and Craniofacial Center) del hospital Mass General</a> y con los <a href=\"https://www.shrinershospitalsforchildren.org/boston/cleftlippalate\" target=\"_blank\" class=\"Link\">Shriners Hospitals for Children</a>. Se dedica al diagnóstico genético y al descubrimiento de genes que se relacionan con las enfermedades craneofaciales congénitas.",
+        "Title": "La división de enfermedades craneofaciales del Proyecto Genomas Raros es una colaboración con el <a href=\"https://www.massgeneral.org/children/cleft-lip-and-palate\" target=\"_blank\" class=\"Link\">Centro de Labio Leporino y Paladar Hendido (Cleft and Craniofacial Center) del hospital Mass General</a> y con los <a href=\"https://www.shrinershospitalsforchildren.org/boston/cleftlippalate\" target=\"_blank\" class=\"Link\">Shriners Hospitals for Children</a>. Se dedica al diagnóstico genético y al descubrimiento de genes que se relacionan con las enfermedades craneofaciales congénitas.",
         "Text": "A través de este proyecto, los pacientes que tienen enfermedades craneofaciales sin diagnosticar en las que se sospeche que el agente causal es un gen único pueden participar en un estudio en el que se usa la secuenciación del genoma completo para buscar la causa genética de la enfermedad que afecta a su familia.",
         "ImageAlt": "Si usted o un ser querido tiene una enfermedad rara y no diagnosticada genéticamente, únase a un estudio de investigación dirigido por pacientes para descubrir los genes que subyacen a la enfermedad rara de su familia.",
         "Background": {
@@ -1064,7 +1064,7 @@
         "Button": "Regresar a la pagina principal"
     },
     "DashboardPage": {
-        "Title": "Mi Panel de Control",
+        "Title": "Mi tablero de control",
         "Info": {
             "Paragraph1": "Gracias por su interés en el Proyecto Genomas Raros. En esta página encontrará información sobre los pasos que se requieren para vincularse al estudio.",
             "Paragraph2": {
@@ -1101,7 +1101,7 @@
             "Actions": {
                 "Start": "Comienzo",
                 "Continue": "Continuar",
-                "View": "Mira"
+                "View": "Ver"
             },
             "NotAvailable": "No disponible"
         }
