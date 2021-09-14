@@ -1,10 +1,10 @@
-import { Component, Inject, OnDestroy } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnDestroy } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { CompositeDisposable } from '../../compositeDisposable';
 import { UserProfileServiceAgent } from '../../services/serviceAgents/userProfileServiceAgent.service';
 import { DateService } from '../../services/dateService.service';
 import { UserProfileDecorator } from '../../models/userProfileDecorator';
-import { tap } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 
 @Component({
     selector: 'ddp-user-preferences',
@@ -39,7 +39,7 @@ import { tap } from 'rxjs/operators';
                                 [disabled]="!loaded">
                         <mat-option value="MALE" data-ddp-test="sex::Male">Male</mat-option>
                         <mat-option value="FEMALE" data-ddp-test="sex::Female">Female</mat-option>
-                        <mat-option value="INTERSEX" data-ddp-test="sex::Other">Intersex</mat-option>
+                        <mat-option value="INTERSEX" data-ddp-test="sex::Intersex">Intersex</mat-option>
                         <mat-option value="PREFER_NOT_TO_ANSWER" data-ddp-test="sex::Other">Prefer not to answer</mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -80,7 +80,6 @@ import { tap } from 'rxjs/operators';
     `]
 })
 export class UserPreferencesComponent implements OnDestroy {
-    public locales: Array<string>;
     public sex: string | null;
     public dayOfBirth: number | null;
     public monthOfBirth: number | null;
@@ -96,7 +95,7 @@ export class UserPreferencesComponent implements OnDestroy {
     ];
     public years: Array<number> = [];
     public loaded = false;
-    public showError = false;
+    private showError = false;
     private anchor: CompositeDisposable;
     private model: UserProfileDecorator | null;
 
@@ -104,15 +103,15 @@ export class UserPreferencesComponent implements OnDestroy {
         private serviceAgent: UserProfileServiceAgent,
         public dialogRef: MatDialogRef<UserPreferencesComponent>,
         private dateService: DateService,
-        @Inject(MAT_DIALOG_DATA) public data: any) {
-        this.locales = ['en', 'ru', 'fr'];
+        ) {
         this.anchor = new CompositeDisposable();
 
         for (let i = 0; i < 50; i++) {
+            // todo: fix year selection
             this.years.push(2005 - i);
         }
         const profile = serviceAgent.profile.pipe(
-            tap(() => this.loaded = true)
+            finalize(() => this.loaded = true)
         ).subscribe(x => {
             this.model = x;
             if (x && x.profile) {
@@ -159,10 +158,12 @@ export class UserPreferencesComponent implements OnDestroy {
         }
 
         if (this.model) {
+            this.loaded = false;
             const profile = this.serviceAgent
                 .saveProfile(this.model.newProfile, this.model.profile)
+                .pipe(finalize(() => this.loaded = true))
                 .subscribe(() => {
-                    location.reload();
+                    this.dialogRef.close();
                 });
             this.anchor.addNew(profile);
         }

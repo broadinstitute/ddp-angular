@@ -598,6 +598,7 @@
         "PreviousButton": "Atrás",
         "SavingButton": "Guardando...",
         "EditButton": "Continuar",
+        "SaveButton": "Guardar",
         "CompleteButton": "Editar",
         "ReviewButton": "Ver",
         "OpenButton": "Abrir",
@@ -620,6 +621,9 @@
             "ActivityStatus": "Estado",
             "ActivityDate": "Creado",
             "ActivityActions": "Acciones"
+        },
+        "UserPreferences": {
+            "UserPreferencesTitle": "Preferencias del Usuario"
         },
         "DatePicker": {
             "Day": "Escoja el día...",
