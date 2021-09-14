@@ -25,7 +25,7 @@
             "Item2": "Craneofacial"
         },
         "AboutUs": "Quiénes somos",
-        "FAQs": "Preguntas y respuestas",
+        "FAQs": "Preguntas frecuentes",
         "Dashboard": "Panel de Control",
         "GetStarted": "Cómo comenzar"
     },
@@ -96,7 +96,7 @@
             }
         },
         "Quote": {
-            "Text": "«En este proyecto de investigación se entiende realmente la importancia de vincular a los pacientes como colaboradores y en pedirles que participen de una manera novedosa. Es esencial hacerlo, porque <span class=\"Accent\">a menudo los pacientes son quienes comienzan a dirigir el rumbo de la investigación</span>»",
+            "Text": "«En este proyecto de investigación se entiende realmente la importancia de vincular a los pacientes como colaboradores y en pedirles que participen de una manera novedosa. Es esencial hacerlo, porque <span class=\"Accent\">a menudo los pacientes son quienes comienzan a dirigir el rumbo de la investigación</span>».",
             "Author": "Matt Might, cuidador y director del Hugh Kaul Precision Medicine Institute"
         },
         "Partners": {
@@ -126,7 +126,7 @@
         "Title": "Quiénes somos",
         "ImageAlt": "Quiénes somos imagen",
         "Intro": {
-            "Paragraph": "El Proyecto Genomas Raros (Rare Genomes Project) del Broad Institute de MIT y Harvard cuenta con un equipo de investigadores, médicos, programadores de software, asesores genéticos y coordinadores de investigación que creen que los últimos avances en secuenciación genómica están cambiando el mundo de la medicina y deberían estar más al alcance de las familias que tienen enfermedades raras y sin diagnosticar."
+            "Paragraph": "El Proyecto Genomas Raros (Rare Genomes Project) del Broad Institute de MIT y Harvard cuenta con un equipo de investigadores, médicos, programadores de <i>software</i>, asesores genéticos y coordinadores de investigación que creen que los últimos avances en secuenciación genómica están cambiando el mundo de la medicina y deberían estar más al alcance de las familias que tienen enfermedades raras y sin diagnosticar."
         },
         "OurStory": {
             "Title": "Nuestra historia",
@@ -226,34 +226,34 @@
                     ]
                 },
                 {
-                    "Title": "Software",
+                    "Title": "<i>Software</i>",
                     "Members": [
                         {
                             "name": "Larry Babb",
                             "degree": "",
-                            "position": "Ingeniero sénior de software",
-                            "bio": "Larry es ingeniero de software y su interés es promover el uso de la genética en la investigación y en la atención clínica mediante la creación de infraestructura destinada a captar e intercambiar conocimientos genéticos con base en los principios FAIR de gestión de datos científicos (que se puedan descubrir y que sean accesibles, interoperables y reutilizables). Dirige dos equipos de desarrollo de software en el Broad Institute, ClinGen y seqr, y participa en dos organizaciones de establecimiento de normas sobre el intercambio de datos: GA4GH y HL7. Ha trabajado en sistemas tanto académicos como comerciales para la entrega de resultados genéticos clínicos y de información genética durante más de 16 años.",
+                            "position": "Ingeniero sénior de <i>software</i>",
+                            "bio": "Larry es ingeniero de <i>software</i> y su interés es promover el uso de la genética en la investigación y en la atención clínica mediante la creación de infraestructura destinada a captar e intercambiar conocimientos genéticos con base en los principios FAIR de gestión de datos científicos (que se puedan descubrir y que sean accesibles, interoperables y reutilizables). Dirige dos equipos de desarrollo de <i>software</i> en el Broad Institute, ClinGen y seqr, y participa en dos organizaciones de establecimiento de normas sobre el intercambio de datos: GA4GH y HL7. Ha trabajado en sistemas tanto académicos como comerciales para la entrega de resultados genéticos clínicos y de información genética durante más de 16 años.",
                             "image": "larry-babb.jpeg"
                         },
                         {
                             "name": "Steve Jahl",
                             "degree": "",
-                            "position": "Ingeniero de software",
-                            "bio": "Steve es ingeniero de fiabilidad en la institución. Su trabajo se centra en la estabilidad y el desempeño de nuestras plataformas virtuales de investigación. Antes de venir al Broad Institute trabajó de ingeniero de software y administrador de sistemas en grupos de computación en la investigación del Laboratorio de Inteligencia Artificial y Ciencias de la Computación (CSAIL, por sus siglas en inglés) de MIT y de Harvard Medical School.",
+                            "position": "Ingeniero de <i>software</i>",
+                            "bio": "Steve es ingeniero de fiabilidad en la institución. Su trabajo se centra en la estabilidad y el desempeño de nuestras plataformas virtuales de investigación. Antes de venir al Broad Institute trabajó de ingeniero de <i>software</i> y administrador de sistemas en grupos de computación en la investigación del Laboratorio de Inteligencia Artificial y Ciencias de la Computación (CSAIL, por sus siglas en inglés) de MIT y de Harvard Medical School.",
                             "image": "steve-jahl.jpg"
                         },
                         {
                             "name": "Hana Snow",
                             "degree": "",
-                            "position": "Ingeniera de software",
-                            "bio": "Hana es ingeniera de software. Su trabajo consiste en diseñar recursos para facilitar la investigación de las enfermedades raras. Es la principal creadora de seqr, nuestra plataforma de análisis de enfermedades raras.",
+                            "position": "Ingeniera de <i>software</i>",
+                            "bio": "Hana es ingeniera de <i>software</i>. Su trabajo consiste en diseñar recursos para facilitar la investigación de las enfermedades raras. Es la principal creadora de seqr, nuestra plataforma de análisis de enfermedades raras.",
                             "image": "hana-snow.jpg"
                         },
                         {
                             "name": "Shifa Zhang",
                             "degree": "MS",
-                            "position": "Ingeniero de software",
-                            "bio": "Shifa es científico computacional e ingeniero de software. Trabaja en recursos encaminados a la gestión e interpretación de los datos de secuenciación del ADN. Antes de trabajar en el Broad Institute, Shifa creó una plataforma segura para el análisis y el intercambio de datos biomédicos en Secure AI Labs.",
+                            "position": "Ingeniero de <i>software</i>",
+                            "bio": "Shifa es científico computacional e ingeniero de <i>software</i>. Trabaja en recursos encaminados a la gestión e interpretación de los datos de secuenciación del ADN. Antes de trabajar en el Broad Institute, Shifa creó una plataforma segura para el análisis y el intercambio de datos biomédicos en Secure AI Labs.",
                             "image": "shifa-zhang.jpeg"
                         }
                     ]
@@ -313,7 +313,7 @@
                             "image": "lynn-pais.jpg"
                         },
                         {
-                            "name": "Ellie Seaby",
+                            "name": "Dra. Ellie Seaby",
                             "degree": "MD",
                             "position": "Analista genómica clínica",
                             "bio": "Ellie es becaria de investigación clínica. Realiza estudios para obtener un doctorado en medicina genómica en la University of Southampton en un programa que se realiza con la colaboración del Broad Institute y el Imperial College London. Sus investigaciones se centran en el descubrimiento de nuevos genes causantes de enfermedades y en el mejoramiento de los desenlaces clínicos.",
@@ -364,8 +364,8 @@
                         {
                             "name": "Moriel Singer-Berk",
                             "degree": "MS",
-                            "position": "Curador de variantes genómicas",
-                            "bio": "Moriel es curador de variantes genómicas y su trabajo consiste en evaluar la patogenia de las variantes con fines clínicos y de investigación. Antes de trabajar en el Broad Institute obtuvo una maestría en biología animal con énfasis en genética equina en la University of California, Davis.",
+                            "position": "Curadora de variantes genómicas",
+                            "bio": "Moriel es curadora de variantes genómicas y su trabajo consiste en evaluar la patogenia de las variantes con fines clínicos y de investigación. Antes de trabajar en el Broad Institute obtuvo una maestría en biología animal con énfasis en genética equina en la University of California, Davis.",
                             "image": "moriel-singer-berk.png"
                         }
                     ]
@@ -487,9 +487,9 @@
                     ]
                 },
                 {
-                    "question": "¿Qué tipo de pruebas genéticas se realiza en el Proyecto Genomas Raros?",
+                    "question": "¿Qué tipo de pruebas genéticas se realizan en el Proyecto Genomas Raros?",
                     "answers": [
-                        "En el Proyecto Genomas Raros se realiza la secuenciación del genoma completo. Esta prueba es diferente de la secuenciación del exoma completo, que es una prueba más específica que las compañías de seguro cubren con más frecuencia. A veces podemos realizar pruebas adicionales, entre ellas, secuenciación del ARN. Si desea más información sobre la secuenciación del genoma completo y sobre otros tipos de pruebas genéticas, le aconsejamos visitar el <a href=\"https://ghr.nlm.nih.gov/primer#testing\" target=\"_blank\" class=\"Link\">sitio web</a> de MedlinePlus, de la Biblioteca Nacional de Medicina de los Estados Unidos (National Library of Medicine)."
+                        "En el Proyecto Genomas Raros se realiza la secuenciación del genoma completo. Esta prueba es diferente de la secuenciación del exoma completo, que es una prueba más específica que las compañías de seguro cubren con más frecuencia. A veces podemos realizar pruebas adicionales, entre ellas, secuenciación del ARN. Si desea más información sobre la secuenciación del genoma completo y sobre otros tipos de pruebas genéticas, le aconsejamos visitar el <a href=\"https://medlineplus.gov/spanish/genetica/entender\" target=\"_blank\" class=\"Link\">sitio web</a> de MedlinePlus, de la Biblioteca Nacional de Medicina de los Estados Unidos (National Library of Medicine)."
                     ]
                 },
                 {
@@ -725,7 +725,7 @@
                 },
                 "List": {
                     "Item1": "Un inicio más precoz que el típico o una presentación grave de los síntomas",
-                    "Item2": "Varias personas de la familia afectadas por la misma enfermedad (o por una enfermedad parecida).",
+                    "Item2": "Varias personas de la familia afectadas por la misma enfermedad (o por una enfermedad parecida)",
                     "Item3": "Disponibilidad de los padres biológicos de las personas afectadas y que estos padres no tengan la enfermedad",
                     "Item4": "Resultados de algunas pruebas genéticas anteriores que no llevaron a un diagnóstico"
                 }
@@ -790,7 +790,7 @@
             },
             {
                 "title": "La secuenciación del ADN",
-                "text": "Cuando su muestra llegue al laboratorio del proyecto, le extraeremos el ADN y realizaremos la secuenciación del genoma. Si desea más información sobre la secuenciación, visite la página correspondiente de <a href=\"https://ghr.nlm.nih.gov/primer/testing/sequencing\" target=\"_blank\" class=\"Link\">Ayúdeme a entender la genética</a> de la Biblioteca Nacional de Medicina (National Library of Medicine).",
+                "text": "Cuando su muestra llegue al laboratorio del proyecto, le extraeremos el ADN y realizaremos la secuenciación del genoma. Si desea más información sobre la secuenciación, visite la página correspondiente de <a href=\"https://medlineplus.gov/spanish/genetica/entender\" target=\"_blank\" class=\"Link\">Cómo entender la genética</a> de la Biblioteca Nacional de Medicina (National Library of Medicine).",
                 "image": "/assets/images/step-5.jpg"
             },
             {
@@ -826,7 +826,7 @@
     "PrivacyAndYourDataPage": {
         "Title": "Su privacidad y sus datos",
         "ImageAlt": "Imagen de intercambio de datos",
-        "Intro": "<b>La secuenciación genómica es apenas el primer paso para entender las enfermedades raras</b> &mdash; comunicar sus síntomas y sus datos genómicos a otros investigadores y médicos hace que sea más probable encontrar a otras personas que tengan síntomas parecidos y alteraciones en los mismos genes.",
+        "Intro": "<b>La secuenciación genómica es apenas el primer paso para entender las enfermedades raras.</b> Comunicar sus síntomas y sus datos genómicos a otros investigadores y médicos hace que sea más probable encontrar a otras personas que tengan síntomas parecidos y alteraciones en los mismos genes.",
         "DataSharing": {
             "Title": "¿Qué es compartir los datos?",
             "Text1": "Compartir los datos es intercambiar los datos de secuenciación y ciertos datos clínicos limitados del proyecto con otras personas ajenas a él. Con frecuencia, las personas que desean tener acceso a los datos que producimos en el Proyecto Genomas Raros son otros científicos que se interesan en saber más sobre los aspectos genéticos de una enfermedad o afección específica. Puesto que las enfermedades raras afectan a tan pocas personas, compartir los datos les permite a los científicos de todo el mundo establecer conexiones mutuas y acelerar la velocidad con que se hacen descubrimientos en las enfermedades genéticas.",
@@ -860,7 +860,7 @@
         },
         "Shared": {
             "Question": "¿Mi nombre o mis datos personales se entregarán a otros investigadores y médicos?",
-            "Answer": "Nunca. Los datos genéticos que se generan en el proyecto se <b>desidentifican</b>, no contienen información que pueda revelar su identidad, como nombre o fecha de nacimiento."
+            "Answer": "Nunca. Los datos genéticos que se generan en el proyecto se <b>desidentifican</b>, es decir, no contienen información que pueda revelar su identidad, como nombre o fecha de nacimiento."
         },
         "Profit": {
             "Question": "¿El Proyecto Genomas Raros se beneficiará económicamente de mis datos?",
@@ -1003,7 +1003,7 @@
         }
     },
     "CraniofacialPage": {
-        "Title": "La división de enfermedades craneofaciales del Proyecto Genomas Raros es una colaboración con el <a href=\"https://www.massgeneral.org/children/services/treatmentprograms.aspx?id=1631&display=overview\" target=\"_blank\" class=\"Link\">Centro de Labio Leporino y Paladar Hendido (Cleft and Craniofacial Center) del hospital Mass General</a> y con los <a href=\"https://www.shrinershospitalsforchildren.org/boston/cleftlippalate\" target=\"_blank\" class=\"Link\">Shriners Hospitals for Children</a>. Se dedica al diagnóstico genético y al descubrimiento de genes que se relacionan con las enfermedades craneofaciales congénitas.",
+        "Title": "La división de enfermedades craneofaciales del Proyecto Genomas Raros es una colaboración con el <a href=\"https://www.massgeneral.org/children/cleft-lip-and-palate\" target=\"_blank\" class=\"Link\">Centro de Labio Leporino y Paladar Hendido (Cleft and Craniofacial Center) del hospital Mass General</a> y con los <a href=\"https://www.shrinershospitalsforchildren.org/boston/cleftlippalate\" target=\"_blank\" class=\"Link\">Shriners Hospitals for Children</a>. Se dedica al diagnóstico genético y al descubrimiento de genes que se relacionan con las enfermedades craneofaciales congénitas.",
         "Text": "A través de este proyecto, los pacientes que tienen enfermedades craneofaciales sin diagnosticar en las que se sospeche que el agente causal es un gen único pueden participar en un estudio en el que se usa la secuenciación del genoma completo para buscar la causa genética de la enfermedad que afecta a su familia.",
         "ImageAlt": "Si usted o un ser querido tiene una enfermedad rara y no diagnosticada genéticamente, únase a un estudio de investigación dirigido por pacientes para descubrir los genes que subyacen a la enfermedad rara de su familia.",
         "Background": {
@@ -1064,7 +1064,7 @@
         "Button": "Regresar a la pagina principal"
     },
     "DashboardPage": {
-        "Title": "Mi Panel de Control",
+        "Title": "Mi tablero de control",
         "Info": {
             "Paragraph1": "Gracias por su interés en el Proyecto Genomas Raros. En esta página encontrará información sobre los pasos que se requieren para vincularse al estudio.",
             "Paragraph2": {
@@ -1101,7 +1101,7 @@
             "Actions": {
                 "Start": "Comienzo",
                 "Continue": "Continuar",
-                "View": "Mira"
+                "View": "Ver"
             },
             "NotAvailable": "No disponible"
         }
@@ -1144,7 +1144,7 @@
         "Paragraph2": "Es posible que con el tiempo podamos ampliar el proyecto. Si se inscribe en nuestra lista de correo, podemos comunicarnos con usted si estos requisitos para participar cambian.",
         "Form": {
             "Label": "Dirección de correo electrónico *",
-            "Error": "Por favor, introduce una dirección de correo electrónico válida",
+            "Error": "Ingrese una dirección de correo electrónico válida.",
             "Submit": "Inscribirse en la lista de correo"
         },
         "Paragraph3": "Si en algún momento desea que su información se borre de nuestra base de datos, escríbanos por correo electrónico a <a href=\"mailto:raregenomes@broadinstitute.org\" class=\"Link\">raregenomes@broadinstitute.org</a>."

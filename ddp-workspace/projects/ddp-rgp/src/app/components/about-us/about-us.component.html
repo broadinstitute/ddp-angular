@@ -23,8 +23,7 @@
     class="col-lg-9 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 Container"
   >
     <!-- Intro -->
-    <p class="Paragraph TopMargin75">
-      {{ 'AboutUsPage.Intro.Paragraph' | translate }}
+    <p class="Paragraph TopMargin75" [innerHtml]="'AboutUsPage.Intro.Paragraph' | translate">
     </p>
 
     <hr class="HorizontalLine" />
@@ -115,10 +114,7 @@
             let first = first
           "
         >
-          <h3 class="Subtitle Aligned--center" [class.mt-40]="!first">
-            {{ category.Title }}
-          </h3>
-
+          <h3 class="Subtitle Aligned--center" [class.mt-40]="!first" [innerHtml]="category.Title | translate"></h3>
           <ng-container *ngFor="let member of category.Members">
             <ng-container
               *ngTemplateOutlet="memberTemplate; context: { member: member }"
