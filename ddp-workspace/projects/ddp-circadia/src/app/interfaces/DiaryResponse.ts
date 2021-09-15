@@ -4,4 +4,8 @@ export interface DiaryResponse {
   active: boolean;
   end_date: string;
   completed: boolean;
+  entries: {
+    morning: number;
+    evening: number;
+  };
 }

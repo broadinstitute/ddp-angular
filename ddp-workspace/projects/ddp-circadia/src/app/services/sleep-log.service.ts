@@ -53,16 +53,16 @@ export class SleepLogService {
     return decodedToken?.name || null;
   }
 
-  private static getDiaryStatus({ completed, active }: Pick<DiaryResponse, 'completed' | 'active'>): ActivityStatusCodes {
+  private static getDiaryStatus({ completed, entries }: Pick<DiaryResponse, 'completed' | 'entries'>): ActivityStatusCodes {
     if (completed) {
       return ActivityStatusCodes.COMPLETE;
     }
 
-    if (active) {
-      return ActivityStatusCodes.IN_PROGRESS;
+    if (entries?.evening === 0 && entries?.morning === 0) {
+      return ActivityStatusCodes.CREATED;
     }
 
-    return ActivityStatusCodes.CREATED;
+    return ActivityStatusCodes.IN_PROGRESS;
   }
 
   extractSleepLogAnnouncements(
@@ -176,8 +176,8 @@ export class SleepLogService {
     return this.http
       .post<DiaryResponse>(SleepLogService.CONNECTOR_URL, payload)
       .pipe(
-        tap(({ completed, active }: DiaryResponse) => this.diaryStatus$.next(
-          SleepLogService.getDiaryStatus({ completed, active })
+        tap(({ completed, entries }: DiaryResponse) => this.diaryStatus$.next(
+          SleepLogService.getDiaryStatus({ completed, entries })
         )),
         catchError(() => {
           this.diaryUrlError$.next(true);
