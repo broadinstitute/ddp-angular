@@ -1082,7 +1082,7 @@
             },
             "Actions": {
                 "ShowMore": "Mostrar más",
-                "ShowLess": "Muestra menos"
+                "ShowLess": "Mostrar menos"
             }
         },
         "UserActivities": {
@@ -1315,7 +1315,7 @@
             },
             "SessionWillExpire": {
                 "Title": "Su sesión terminará pronto",
-                "Text": "Para proteger su privacidad, el sistema cerrará su sesión porque ha estado fuera por un tiempo. Haga clic en \"Continuar\" para permanecer conectado. Haga clic en \"Cerrar sesión\" si ha terminado por ahora.",
+                "Text": "Para proteger su privacidad, el sistema cerrará su sesión porque ha estado fuera por un tiempo. Haga clic en \"Continuar\" para permanecer conectado. Haga clic en \"Cerrar sessión\" si ha terminado por ahora.",
                 "SignOut": "Desconectar",
                 "Continue": "Continuar"
             },
@@ -1351,12 +1351,12 @@
             "WorkspaceNamespace": "Espacio de Nombres del Espacio de Trabajo"
         },
         "Login": {
-            "Login": "INICIAR SESIÓN",
-            "Logout": "CERRAR SESIÓN"
+            "Login": "INICIAR SESSIÓN",
+            "Logout": "CERRAR SESSIÓN"
         },
         "SignInOut": {
             "SignIn": "Ingresar",
-            "SignOut": "Cerrar Sesión"
+            "SignOut": "Cerrar Sessión"
         },
         "UserActivities": {
             "ActivityName": "Documento",
@@ -1406,8 +1406,8 @@
             "DD": "DD"
         },
         "UserMenu": {
-            "DashboardButton": "Panel de Control",
-            "SignOutButton": "Cerrar Sesión"
+            "DashboardButton": "Mi tablero de control",
+            "SignOutButton": "Cerrar Sessión"
         },
         "DetailsPlaceholder": {
             "PluralForm": "letras de imprenta restantes",
