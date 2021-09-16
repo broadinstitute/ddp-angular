@@ -161,6 +161,10 @@
         "MiniSleepLogStatuses": {
             "Created": "New",
             "Complete": "Complete"
+        },
+        "MiniSleepLogSummary": {
+            "Created": "Please complete your daily sleep logging.",
+            "Complete": "Thank you for completing today's sleep log."
         }
     },
     "SessionWillExpire": {
