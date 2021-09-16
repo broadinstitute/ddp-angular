@@ -63,15 +63,7 @@
                 *ngIf="sleepLogStatus === ActivityStatusCode.CREATED"
               >
                 <mat-icon class="status-icon status-icon--created">info</mat-icon
-                >{{ 'UserActivities.Statuses.Created' | translate }}
-              </ng-container>
-
-              <ng-container
-                *ngIf="sleepLogStatus === ActivityStatusCode.IN_PROGRESS"
-              >
-                <mat-icon class="status-icon status-icon--in-progress"
-                  >pending</mat-icon
-                >{{ 'UserActivities.Statuses.InProgress' | translate }}
+                >{{ 'UserActivities.MiniSleepLogStatuses.Created' | translate }}
               </ng-container>
 
               <ng-container
@@ -79,7 +71,7 @@
               >
                 <mat-icon class="status-icon status-icon--complete"
                   >check_circle</mat-icon
-                >{{ 'UserActivities.Statuses.Complete' | translate }}
+                >{{ 'UserActivities.MiniSleepLogStatuses.Complete' | translate }}
               </ng-container>
             </ng-container>
           </div>

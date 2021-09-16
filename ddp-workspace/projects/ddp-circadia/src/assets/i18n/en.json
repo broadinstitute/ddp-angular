@@ -157,6 +157,10 @@
             "Continue": "Continue",
             "View": "View",
             "Schedule": "Schedule"
+        },
+        "MiniSleepLogStatuses": {
+            "Created": "New",
+            "Complete": "Complete"
         }
     },
     "SessionWillExpire": {
