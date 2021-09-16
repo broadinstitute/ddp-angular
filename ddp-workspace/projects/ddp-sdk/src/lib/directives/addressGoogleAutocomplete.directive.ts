@@ -110,8 +110,22 @@ export class AddressGoogleAutocompleteDirective implements OnInit, OnDestroy, On
             return comp ? comp[useLongName ? 'long_name' : 'short_name'] : '';
         };
         const googleAddress = new Address();
+        const streetNumber = fieldVal('street_number');
+        const route = fieldVal('route', false);
+        let street1: string;
+
+        if (!this.configService.fixMissingHouseNumberInAddressForm) {
+            if (streetNumber) {
+                street1 = `${streetNumber} ${route}`;
+            } else {
+                street1 = route;
+            }
+        } else {
+            street1 = this.getPotentiallyFixedStreetAddress(fieldVal('route', false));
+        }
+
         // these mappings have been tested for US, CA and PR
-        googleAddress.street1 = fieldVal('street_number') + ' ' + fieldVal('route', false);
+        googleAddress.street1 = street1;
         googleAddress.city = fieldVal('locality');
         // sometimes we need to use neighborhood
         if (googleAddress.city === '') {
@@ -131,5 +145,21 @@ export class AddressGoogleAutocompleteDirective implements OnInit, OnDestroy, On
     private isFallbackResult(place: PlaceResult): boolean {
         const keys = _.keys(place);
         return keys.length === 1 && keys[0] === 'name';
+    }
+
+    private getPotentiallyFixedStreetAddress(route: string): string {
+        const selectedAddress = this.autocompleteInput.nativeElement.value;
+        let selectedAddressHouseNumber = selectedAddress.split(' ')[0];
+
+        // Check if first element is a number
+        if (isNaN(+selectedAddressHouseNumber)) {
+            selectedAddressHouseNumber = '';
+        }
+
+        if (selectedAddressHouseNumber) {
+            return `${selectedAddressHouseNumber} ${route}`;
+        }
+
+        return route;
     }
 }

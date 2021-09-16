@@ -26,7 +26,7 @@
         },
         "AboutUs": "Quiénes somos",
         "FAQs": "Preguntas frecuentes",
-        "Dashboard": "Panel de Control",
+        "Dashboard": "Mi tablero de control",
         "GetStarted": "Cómo comenzar"
     },
     "Footer": {
@@ -1180,7 +1180,7 @@
             },
             "NMI": {
                 "Subject": "Decisión sobre la solicitud",
-                "Message": "Su historia clínica sido revisada y usted cumple los requisitos para participar.",
+                "Message": "Su historia clínica ha sido revisada y usted cumple los requisitos para participar.",
                 "More": "<p>Estos son los pasos siguientes para usted y su familia:</p><ul><li>Obtención de muestras: Le enviaremos un estuche de recolección de muestras (véase arriba).</li><li>Inscribir a integrantes de su familia: Comuníquese con nosotros para que hablemos de qué integrantes de su familia nos gustaría invitar a participar. Siempre que sea posible, tratamos de inscribir a ambos padres biológicos, a otros familiares afectados y hasta a dos hermanos(as) sanos(as). Al igual que la persona que ya se inscribió, estos familiares adicionales deberán tener una sesión de consentimiento con uno de los integrantes del equipo investigador para recibir más información sobre el estudio antes de tomar una decisión acerca de la participación.</li></ul>"
             }
         },
