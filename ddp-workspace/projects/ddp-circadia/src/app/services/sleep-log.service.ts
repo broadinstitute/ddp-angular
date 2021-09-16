@@ -54,15 +54,11 @@ export class SleepLogService {
   }
 
   private static getDiaryStatus({ completed, active }: Pick<DiaryResponse, 'completed' | 'active'>): ActivityStatusCodes {
-    if (completed) {
-      return ActivityStatusCodes.COMPLETE;
+    if (!completed && active) {
+      return ActivityStatusCodes.CREATED;
     }
 
-    if (active) {
-      return ActivityStatusCodes.IN_PROGRESS;
-    }
-
-    return ActivityStatusCodes.CREATED;
+    return ActivityStatusCodes.COMPLETE;
   }
 
   extractSleepLogAnnouncements(
