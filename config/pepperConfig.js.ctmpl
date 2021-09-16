@@ -113,6 +113,8 @@ var DDP_ENV = {
             DDP_ENV['projectGAToken'] = "UA-64885513-8";
         {{ else if eq $study_guid "cmi-pancan"}}
             DDP_ENV['projectGAToken'] = "UA-64885513-10";
+        {{ else if eq $study_guid "circadia"}}
+            DDP_ENV['projectGAToken'] = "UA-207512065-1";
         {{end}}
     {{else}}
         DDP_ENV['projectGAToken'] = "UA-108484823-1";
