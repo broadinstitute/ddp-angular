@@ -2,19 +2,19 @@ version: 2.1
 
 references:
   repo_path: &repo_path
-      /home/circleci/repo
+               /home/circleci/repo
   ng_workspace_path: &ng_workspace_path
-      /home/circleci/repo/ddp-workspace
+                       /home/circleci/repo/ddp-workspace
   npm_cache_key: &npm_cache_key
-    v1-dependency-npm2-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+                   v1-dependency-npm2-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
   npm_cache_restore_key: &npm_cache_restore_key
     keys:
       - *npm_cache_key
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-    "basil osteo brain angio mbc testboston mpc prion atcp rarex rgp esc cgc circadia pancan"
+                "basil osteo brain angio mbc testboston mpc prion atcp rarex rgp esc cgc circadia pancan"
   study_guids: &study_guids
-    "basil CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc circadia cmi-pancan"
+                 "basil CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc circadia cmi-pancan"
 
 # Container for all the builds
 executors:
@@ -585,9 +585,8 @@ workflows:
             branches:
               only:
                 - test
-# Temporarily commenting out to make sure only Circadia is updated in production push
-#                - staging
-#                - production
+                - staging
+                - production
           study_key: osteo
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
@@ -610,9 +609,9 @@ workflows:
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: rarex
-      - deploy-stored-build-job:
-          <<: *deploy_branch_filters
-          study_key: rgp
+#      - deploy-stored-build-job:
+#          <<: *deploy_branch_filters
+#          study_key: rgp
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: esc
@@ -622,14 +621,8 @@ workflows:
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: cgc
-# Temporarily updating Circadia to be only Angular app that gets deployed to all environments
       - deploy-stored-build-job:
-          filters:
-            branches:
-              only:
-                - test
-                - staging
-                - production
+          <<: *deploy_branch_filters
           study_key: circadia
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
