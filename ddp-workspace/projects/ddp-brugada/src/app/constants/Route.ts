@@ -15,4 +15,5 @@ export enum Route {
   Dashboard = 'dashboard',
   Activity = 'activity',
   ActivityId = 'activity/:id',
+  LoginLandingMode = 'login-landing/:mode',
 }

@@ -14,6 +14,7 @@ import { IrbGuard, BrowserGuard, Auth0CodeCallbackComponent } from 'ddp-sdk';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ActivityPageComponent } from './pages/activity-page/activity-page.component';
+import { AuthRedirectComponent } from './pages/auth-redirect/auth-redirect.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { SessionExpiredComponent } from './pages/session-expired/session-expired.component';
 import { AuthGuard } from './guards/auth.guard';
@@ -67,6 +68,11 @@ const routes: Routes = [
   {
     path: Route.LoginLanding,
     component: LoginLandingComponent,
+    canActivate: [IrbGuard],
+  },
+  {
+    path: Route.LoginLandingMode,
+    component: AuthRedirectComponent,
     canActivate: [IrbGuard],
   },
   {

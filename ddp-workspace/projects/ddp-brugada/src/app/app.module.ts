@@ -40,6 +40,7 @@ import { PasswordComponent } from './pages/password/password.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ActivityPageComponent } from './pages/activity-page/activity-page.component';
+import { AuthRedirectComponent } from './pages/auth-redirect/auth-redirect.component';
 import { SessionExpiredDialogComponent } from './components/session-expired-dialog/session-expired-dialog.component';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -70,6 +71,7 @@ import { AppRoutingModule } from './app-routing.module';
     ForgotPasswordComponent,
     SessionExpiredComponent,
     SessionExpiredDialogComponent,
+    AuthRedirectComponent,
   ],
   imports: [
     BrowserModule,
