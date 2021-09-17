@@ -1096,7 +1096,7 @@
             "StatusCode": {
                 "CREATED": "Creado(a)",
                 "IN_PROGRESS": "En curso",
-                "COMPLETE": "Completo(a)"
+                "COMPLETE": "Completa"
             },
             "Actions": {
                 "Start": "Comienzo",
@@ -1153,13 +1153,13 @@
         "Application": {
             "InReview": {
                 "Subject": "Solicitud",
-                "Message": "Su solicitud está siendo revisada. Nos comunicaremos con usted tan pronto como se haya tomado una decisión sobre su solicitud. Si no recibe noticias de nuestra oficina dentro de las 6 semanas, comuníquese con nosotros.",
-                "More": "<p>Tenga en cuenta que podemos comunicarnos con usted por teléfono o correo electrónico. Los correos electrónicos que le enviamos que contienen identificadores personales o información médica se enviarán mediante una herramienta de cifrado llamada Send Secure, a menos que haya elegido específicamente lo contrario. Estos correos electrónicos pueden identificarse con las palabras \"Enviar seguro\" en el campo del asunto, provendrán de una dirección de correo electrónico que termina en @partners.org y le pedirán que haga clic en un archivo adjunto para crear una cuenta. Si no está seguro de si el correo electrónico que recibió es de nosotros, comuníquese con nosotros.</p>"
+                "Message": "Estamos revisando su solicitud. Nos comunicaremos en cuanto hayamos tomado una decisión al respecto. Si no recibe noticias de nuestra oficina en las siguientes 6 semanas, comuníquese con nosotros.",
+                "More": "<p>Tenga en cuenta que podemos comunicarnos con usted por teléfono o correo electrónico. Los mensajes que le enviemos por correo electrónico y que contengan datos médicos o personales que revelen su identidad se enviarán a través de un sistema de cifrado llamado Send Secure, a menos que haya elegido específicamente lo contrario Estos mensajes pueden identificarse con las palabras Send Secure en el campo del asunto, provendrán de una dirección de correo electrónico que termina en @<a href=\"http://partners.org/\" target=\"_blank\">partners.org</a> y le pedirán que haga clic en un archivo adjunto para crear una cuenta. Si no está seguro de si el mensaje que recibió por correo electrónico es nuestro, comuníquese con nosotros.</p>"
             },
             "ThankYou": {
                 "Subject": "Solicitud",
-                "Message": "En cualquier momento durante su participación en el estudio, comuníquese con nosotros si tiene alguna pregunta o inquietud.",
-                "More": "<p>Tenga en cuenta que podemos comunicarnos con usted por teléfono o correo electrónico. Los correos electrónicos que le enviamos que contienen identificadores personales o información médica se enviarán mediante una herramienta de cifrado llamada Send Secure, a menos que haya elegido específicamente lo contrario. Estos correos electrónicos pueden identificarse con las palabras \"Enviar seguro\" en el campo del asunto, provendrán de una dirección de correo electrónico que termina en @partners.org y le pedirán que haga clic en un archivo adjunto para crear una cuenta. Si no está seguro de si el correo electrónico que recibió es de nosotros, comuníquese con nosotros.</p>"
+                "Message": "Comuníquese con nosotros en cualquier momento de su participación en el estudio si tiene preguntas o dudas.",
+                "More": "<p>Tenga en cuenta que podemos comunicarnos con usted por teléfono o correo electrónico. Los mensajes que le enviemos por correo electrónico y que contengan datos médicos o personales que revelen su identidad se enviarán a través de un sistema de cifrado llamado Send Secure, a menos que haya elegido específicamente lo contrario Estos mensajes pueden identificarse con las palabras Send Secure en el campo del asunto, provendrán de una dirección de correo electrónico que termina en @<a href=\"http://partners.org/\" target=\"_blank\">partners.org</a> y le pedirán que haga clic en un archivo adjunto para crear una cuenta. Si no está seguro de si el mensaje que recibió por correo electrónico es nuestro, comuníquese con nosotros.</p>"
             }
         },
         "ApplicationDecision": {
@@ -1187,7 +1187,7 @@
         "ConsentSession": {
             "ScheduleNeeded": {
                 "Subject": "Sesión de consentimiento",
-                "Message": "<a href=\"https://rgpscheduling.as.me/schedule.php\" target=\"_blank\">Pida una cita para una sesión de consentimiento</a>."
+                "Message": "<a href=\"https://rgpscheduling.as.me/schedule.php\" target=\"_blank\">Pida una cita</a> para una sesión de consentimiento."
             },
             "Scheduled": {
                 "Subject": "Sesión de consentimiento",
@@ -1356,7 +1356,7 @@
         },
         "SignInOut": {
             "SignIn": "Ingresar",
-            "SignOut": "Cerrar Sessión"
+            "SignOut": "Cerrar sessión"
         },
         "UserActivities": {
             "ActivityName": "Documento",
@@ -1407,7 +1407,7 @@
         },
         "UserMenu": {
             "DashboardButton": "Mi tablero de control",
-            "SignOutButton": "Cerrar Sessión"
+            "SignOutButton": "Cerrar sessión"
         },
         "DetailsPlaceholder": {
             "PluralForm": "letras de imprenta restantes",
