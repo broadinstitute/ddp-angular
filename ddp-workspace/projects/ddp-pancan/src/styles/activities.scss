@@ -473,7 +473,7 @@ select:disabled {
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: $tablet-breakpoint) {
     [class*="composite-answer"][class*="GRID"] {
         .ddp-answer-container {
             margin-bottom: 2.5rem;
@@ -489,13 +489,11 @@ select:disabled {
                     ddp-question-prompt {
                         width: 10rem;
 
-                        > div {
-                            .ddp-question-prompt {
-                                margin: 0;
+                        .ddp-question-prompt {
+                            margin: 0;
 
-                                font-size: 1rem;
-                                line-height: 1.35;
-                            }
+                            font-size: 1rem;
+                            line-height: 1.35;
                         }
                     }
 
