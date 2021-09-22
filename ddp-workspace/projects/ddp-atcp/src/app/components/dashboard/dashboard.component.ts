@@ -29,6 +29,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   activities: ActivityInstance[];
   status: WorkflowModel;
   isLoading = true;
+  isUiBlocked = false;
   private anchor = new CompositeDisposable();
 
   constructor(
@@ -120,6 +121,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   private handleEditConsent(): void {
+    this.isUiBlocked = true;
+
     this.activityServiceAgent
       .createInstance(this.config.studyGuid, ActivityCodes.CONSENT_EDIT)
       .pipe(take(1))
@@ -129,6 +132,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   private handleEditActivity(activityInstance: ActivityInstance): void {
+    this.isUiBlocked = true;
+
     this.activityServiceAgent
       .createInstance(this.config.studyGuid, activityInstance.activityCode)
       .pipe(take(1))
@@ -139,6 +144,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     activity: ActivityInstanceGuid,
     isConsentEditActivity: boolean = false,
   ): void => {
+    this.isUiBlocked = false;
     this.activityService.setCurrentActivity(
       activity.instanceGuid,
       isConsentEditActivity,

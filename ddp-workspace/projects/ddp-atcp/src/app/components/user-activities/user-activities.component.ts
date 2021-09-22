@@ -25,6 +25,7 @@ export class UserActivitiesComponent {
   ];
   @Input() opaque = false;
   @Input() isParticipantIneligible: boolean;
+  @Input() isUiBlocked = false;
   @Output() startActivity = new EventEmitter<string>();
   @Output() continueActivity = new EventEmitter<string>();
   @Output() viewActivity = new EventEmitter<string>();
