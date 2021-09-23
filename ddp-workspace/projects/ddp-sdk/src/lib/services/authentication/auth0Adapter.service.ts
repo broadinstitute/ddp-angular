@@ -143,7 +143,7 @@ export class Auth0AdapterService implements OnDestroy {
     public signup(additionalParams?: Record<string, string>): void {
         const temporarySession = this.session.isTemporarySession() ? this.session.session : null;
         if (!temporarySession || !temporarySession.userGuid) {
-            this.log.logError(`${this.LOG_SOURCE}.signup.No temporal user guide`);
+            this.log.logError(`${this.LOG_SOURCE}.signup.No temporal user guid`);
         }
         const params = {
             ...(temporarySession && {
