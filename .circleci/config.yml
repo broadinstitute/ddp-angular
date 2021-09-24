@@ -70,6 +70,7 @@ commands:
       - run:
           name: Determine environment for branch << pipeline.git.branch >>
           command: |
+
             case "<< pipeline.git.branch >>" in
               develop)
                 DEPLOY_ENV=dev
@@ -570,6 +571,22 @@ workflows:
     jobs:
       - app-build-and-store-job:
           <<: *build-and-store-filters
+
+  build-app-on-demand-workflow:
+    when:
+      and:
+        - << pipeline.parameters.do-builds >>
+        - << pipeline.parameters.study_key >>
+        - not:
+            equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
+    jobs:
+      - app-build-and-store-job:
+          filters:
+            branches:
+              ignore:
+                - /^rc.*/
+                - /^hotfix.*/
+#            study_key: << pipeline.parameters.study_key >>
 
   deploy-all-apps-workflow:
     jobs:
