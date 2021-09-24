@@ -64,7 +64,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 3rem 0;
+    margin: 1.5rem 0;
+    padding: 1.5rem 0;
+    overflow: auto;
 
     &__divider {
         flex: 1;
@@ -117,10 +119,6 @@
 }
 
 @media only screen and (max-width: 600px) {
-    .activity-steps {
-        padding: 1rem 0;
-    }
-
     .activity-step {
         &__text {
             display: none;
