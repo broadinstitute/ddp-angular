@@ -583,7 +583,11 @@ workflows:
                 - develop
 
   build-and-deploy-workflow:
-    when: << pipeline.parameters.do-builds >>
+    when:
+      and:
+        - << pipeline.parameters.do-builds >>
+        not:
+          - << pipeline.parameters.target_env >>
     jobs:
       - build-and-deploy-job:
           filters:
