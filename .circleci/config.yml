@@ -537,6 +537,10 @@ parameters:
   study_guid:
     type: string
     default: "UNKNOWN"
+  api_call:
+    type: enum
+    enum: ["build-and-store","deploy","UNKNOWN"]
+    default: "UNKNOWN"
   target_env:
     type: string
     default: ""
@@ -547,31 +551,37 @@ parameters:
 workflows:
   version: 2
 
-  build-app-on-demand-workflow:
+  api-build-and-store-workflow:
     when:
       and:
-        - << pipeline.parameters.do-builds >>
+        - equal: ["build-and-store", << pipeline.parameters.api_call >>]
         - << pipeline.parameters.study_key >>
         - not:
             equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
     jobs:
-      - app-build-and-store-job:
-          filters:
-            branches:
-              ignore:
-                - /^rc.*/
-                - /^hotfix.*/
+      - app-build-and-store-job
+#          filters:
+#            branches:
+#              ignore:
+#                - /^rc.*/
+#                - /^hotfix.*/
 
-  deploy-app-on-demand-workflow:
+  api-deploy-workflow:
     when:
       and:
-        - << pipeline.parameters.study_key >>
+        - equal: ["deploy", << pipeline.parameters.api_call >>]
         - << pipeline.parameters.target_env >>
+        - << pipeline.parameters.study_key >>
         - not:
             equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
     jobs:
       - deploy-stored-build-job:
           study_key: << pipeline.parameters.study_key >>
+#          filters:
+#            branches:
+#              ignore:
+#                - /^rc.*/
+#                - /^hotfix.*/
 
   build-and-deploy-all-apps-workflow:
     unless: << pipeline.parameters.do-builds >>
@@ -590,12 +600,13 @@ workflows:
             << pipeline.parameters.target_env >>
     jobs:
       - build-and-deploy-job:
+          study_key: << pipeline.parameters.study_key >>
           filters:
             branches:
               ignore:
                 - /^rc.*/
                 - /^hotfix.*/
-          study_key: << pipeline.parameters.study_key >>
+
 
   launch-all-app-builds-workflow:
     # using do-builds param to select which of the two workflows using the build-on-tag-filters
