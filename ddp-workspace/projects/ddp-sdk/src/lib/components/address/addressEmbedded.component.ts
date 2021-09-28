@@ -49,14 +49,15 @@ import { NGXTranslateService } from '../../services/internationalization/ngxTran
 import { LoggingService } from '../../services/logging.service';
 import { ConfigurationService } from '../../services/configuration.service';
 
-interface FormError {
-    message: string;
+interface IsEasyPostError {
     isEasyPostError: boolean;
 }
 
-export interface FieldError extends AddressError {
-    isEasyPostError: boolean;
+interface FormError extends IsEasyPostError {
+    message: string;
 }
+
+export interface FieldError extends AddressError, IsEasyPostError { }
 
 interface ComponentState {
     isReadOnly: boolean;
@@ -117,7 +118,7 @@ interface AddressSuggestion {
             </mat-card>
         </form>
          <mat-checkbox *ngIf="isEasyPostInvalid$ | async" [formControl]="ignoreEasyPostErrorsCheckbox" class="ignore-easy-post-errors">
-             Please use the address as entered
+             {{'SDK.MailAddress.UseAsEntered' | translate}}
          </mat-checkbox>`,
     styles: [
         `.suggestion-radio-group {

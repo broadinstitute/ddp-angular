@@ -755,7 +755,8 @@
                 "E.TIMED_OUT": "Se superó el tiempo máximo de espera.",
                 "E.TIME_ZONE.UNAVAILABLE": "El servicio de zona horaria no está disponible en este momento.",
                 "E.PO_BOX.INTERNATIONAL": "No se puede verificar la casilla postal internacional. Tenga en cuenta que eso puede causar errores en solicitudes correctas."
-            }
+            },
+            "UseAsEntered":  "[ES]Please use the address as entered"
         },
         "TooltipAlt": "Información",
         "Validators": {
