@@ -507,7 +507,8 @@
             "ShowPanel": "Mostrar",
             "HidePanel": "Esconder",
             "UserLabel": "Usted",
-            "ChildLabel": "Su hijo(a){{suffix}}"
+            "ChildLabel": "Su hijo(a){{suffix}}",
+            "EditUser": "Editar"
         },
         "Password": {
             "Title": "Ingrese la contraseña.",

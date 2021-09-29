@@ -521,13 +521,19 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             }),
             tap(() => busyCounter$.next(1)),
             concatMap(([_, __, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
+            catchError((error) => {
+                this.logger.logError(this.LOG_SOURCE, 'Saving address was failed', error.message);
+                const formErrorMessages = [error.message];
+                this.stateUpdates$.next({formErrorMessages});
+                return of(null);
+            }),
             tap(() => busyCounter$.next(-1)),
             share()
         );
 
         const deleteTempAddressAction$ = saveRealAddressAction$.pipe(
             withLatestFrom(this.state$),
-            filter(([_, state]) => !!state.activityInstanceGuid),
+            filter(([address, state]) => !!address && !!state.activityInstanceGuid),
             tap(() => busyCounter$.next(1)),
             concatMap(([_, state]) => this.addressService.deleteTempAddress(state.activityInstanceGuid)),
             catchError(() => {
@@ -546,10 +552,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             tap(() => this.addressInputComponent.markAddressTouched())
         );
 
-        const savedAddress$: Observable<Address | null> = saveRealAddressAction$.pipe(
-            filter(savedAddressVal => !!savedAddressVal),
-            share()
-        );
+        const savedAddress$: Observable<Address | null> = saveRealAddressAction$.pipe(share());
 
         const emitValueChangedAction$ = savedAddress$.pipe(
             tap((address => this.valueChanged.emit(address))));

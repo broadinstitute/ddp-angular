@@ -1,56 +1,71 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CompositeDisposable } from '../../compositeDisposable';
 import { UserProfileServiceAgent } from '../../services/serviceAgents/userProfileServiceAgent.service';
 import { DateService } from '../../services/dateService.service';
 import { UserProfileDecorator } from '../../models/userProfileDecorator';
-import { finalize } from 'rxjs/operators';
+import { finalize, takeUntil } from 'rxjs/operators';
+import { ConfigurationService } from '../../services/configuration.service';
+import { MailAddressBlock } from '../../models/activity/MailAddressBlock';
+import { Address } from '../../models/address';
+import { SubmitAnnouncementService } from '../../services/submitAnnouncement.service';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Component({
     selector: 'ddp-user-preferences',
     template: `
         <h2 mat-dialog-title translate>SDK.UserPreferences.UserPreferencesTitle</h2>
+        <ddp-loading [loaded]="loaded"></ddp-loading>
         <mat-dialog-content>
-            <mat-form-field class="field-row" data-ddp-test="birthday::month">
-                <mat-select placeholder="Month" [(value)]="monthOfBirth">
-                    <mat-option *ngFor="let month of months" [value]="month">
-                        {{ month }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field class="field-row" data-ddp-test="birthday::day">
-                <mat-select placeholder="Date" [(value)]="dayOfBirth">
-                    <mat-option *ngFor="let day of days" [value]="day">
-                        {{ day }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field class="field-row" data-ddp-test="birthday::year">
-                <mat-select placeholder="Year" [(value)]="yearOfBirth" >
-                    <mat-option *ngFor="let year of years" [value]="year">
-                        {{ year }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <div class="row">
-                <mat-form-field data-ddp-test="gender">
-                    <mat-select placeholder="{{'SDK.UserPreferences.UserPreferencesGender' | translate}}"
-                                [(value)]="sex"
-                                [disabled]="!loaded">
-                        <mat-option value="MALE" data-ddp-test="sex::Male">Male</mat-option>
-                        <mat-option value="FEMALE" data-ddp-test="sex::Female">Female</mat-option>
-                        <mat-option value="INTERSEX" data-ddp-test="sex::Intersex">Intersex</mat-option>
-                        <mat-option value="PREFER_NOT_TO_ANSWER" data-ddp-test="sex::Other">Prefer not to answer</mat-option>
+            <ng-container *ngIf="showProfileFields">
+                <mat-form-field class="field-row" data-ddp-test="birthday::month">
+                    <mat-select placeholder="Month" [(value)]="monthOfBirth">
+                        <mat-option *ngFor="let month of months" [value]="month">
+                            {{ month }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
-            </div>
+                <mat-form-field class="field-row" data-ddp-test="birthday::day">
+                    <mat-select placeholder="Date" [(value)]="dayOfBirth">
+                        <mat-option *ngFor="let day of days" [value]="day">
+                            {{ day }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="field-row" data-ddp-test="birthday::year">
+                    <mat-select placeholder="Year" [(value)]="yearOfBirth" >
+                        <mat-option *ngFor="let year of years" [value]="year">
+                            {{ year }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="row">
+                    <mat-form-field data-ddp-test="gender">
+                        <mat-select placeholder="{{'SDK.UserPreferences.UserPreferencesGender' | translate}}"
+                                    [(value)]="sex"
+                                    [disabled]="!loaded">
+                            <mat-option value="MALE" data-ddp-test="sex::Male">Male</mat-option>
+                            <mat-option value="FEMALE" data-ddp-test="sex::Female">Female</mat-option>
+                            <mat-option value="INTERSEX" data-ddp-test="sex::Intersex">Intersex</mat-option>
+                            <mat-option value="PREFER_NOT_TO_ANSWER" data-ddp-test="sex::Other">Prefer not to answer</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </ng-container>
+            <h3 class="form-subgroup-title">Your Mailing Address</h3>
+            <ddp-address-embedded [block]="addressFormBlock"
+                                  [country]="config.supportedCountry"
+                                  [readonly]="addressReadonly"
+                                  (validStatusChanged)="isAddressValid = $event"
+                                  (valueChanged)="addressWasSubmit.next($event)"
+                                  (componentBusy)="isAddressComponentBusy$.next($event)">
+            </ddp-address-embedded>
         </mat-dialog-content>
         <ddp-validation-message *ngIf="!isDateValid" message="invalid date">
         </ddp-validation-message>
-        <ddp-loading [loaded]="loaded"></ddp-loading>
         <mat-dialog-actions>
             <button mat-button
-                    [disabled]="!loaded"
+                    [disabled]="!loaded || !isAddressValid"
                     (click)="save()"
                     data-ddp-test="okButton"
                     [innerHTML]="'SDK.SaveButton' | translate">
@@ -77,7 +92,8 @@ import { finalize } from 'rxjs/operators';
         .mat-dialog-actions {
             justify-content: flex-end;
         }
-    `]
+    `],
+    providers: [SubmitAnnouncementService]
 })
 export class UserPreferencesComponent implements OnDestroy {
     public sex: string | null;
@@ -98,11 +114,21 @@ export class UserPreferencesComponent implements OnDestroy {
     private showError = false;
     private anchor: CompositeDisposable;
     private model: UserProfileDecorator | null;
+    private ngUnsubscribe = new Subject();
+    public readonly addressFormBlock: MailAddressBlock = new MailAddressBlock(null);
+    public isAddressValid = true;
+    public isAddressComponentBusy$ = new BehaviorSubject(false);
+    public addressWasSubmit = new Subject<Address | null>();
+    public addressReadonly = false;
+    // todo display fields after address editing will be delivered
+    public showProfileFields = false;
 
     constructor(
         private serviceAgent: UserProfileServiceAgent,
         public dialogRef: MatDialogRef<UserPreferencesComponent>,
         private dateService: DateService,
+        private submitAnnouncementService: SubmitAnnouncementService,
+        @Inject('ddp.config') public config: ConfigurationService,
         ) {
         this.anchor = new CompositeDisposable();
 
@@ -110,22 +136,39 @@ export class UserPreferencesComponent implements OnDestroy {
             // todo: fix year selection
             this.years.push(2005 - i);
         }
-        const profile = serviceAgent.profile.pipe(
-            finalize(() => this.loaded = true)
-        ).subscribe(x => {
-            this.model = x;
-            if (x && x.profile) {
-                this.sex = x.profile.sex;
-                this.yearOfBirth = x.profile.birthYear;
-                this.monthOfBirth = x.profile.birthMonth;
-                this.dayOfBirth = x.profile.birthDayInMonth;
-            }
-        });
-        this.anchor.addNew(profile);
+        if (this.showProfileFields) {
+            serviceAgent.profile.pipe(
+                finalize(() => this.loaded = true),
+                takeUntil(this.ngUnsubscribe)
+            ).subscribe(x => {
+                this.model = x;
+                if (x && x.profile) {
+                    this.sex = x.profile.sex;
+                    this.yearOfBirth = x.profile.birthYear;
+                    this.monthOfBirth = x.profile.birthMonth;
+                    this.dayOfBirth = x.profile.birthDayInMonth;
+                }
+            });
+        }
+
+        this.isAddressComponentBusy$
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe((isBusy) => {
+                this.loaded = !isBusy;
+            });
+        this.addressWasSubmit
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe((result) => {
+                this.addressReadonly = false;
+                if (result) {
+                    this.dialogRef.close();
+                }
+            });
     }
 
     public ngOnDestroy(): void {
-        this.anchor.removeAll();
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
     }
 
     public isDateReadyForSave(isFirstInput: boolean): boolean {
@@ -155,9 +198,7 @@ export class UserPreferencesComponent implements OnDestroy {
                 this.model.profile.birthDayInMonth = this.dayOfBirth;
             }
             this.model.profile.sex = this.sex;
-        }
 
-        if (this.model) {
             this.loaded = false;
             const profile = this.serviceAgent
                 .saveProfile(this.model.newProfile, this.model.profile)
@@ -167,5 +208,9 @@ export class UserPreferencesComponent implements OnDestroy {
                 });
             this.anchor.addNew(profile);
         }
+
+        // emit address update submit
+        this.submitAnnouncementService.announceSubmit();
+        this.addressReadonly = true;
     }
 }

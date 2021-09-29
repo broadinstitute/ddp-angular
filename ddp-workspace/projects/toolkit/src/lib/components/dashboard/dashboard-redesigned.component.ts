@@ -20,6 +20,8 @@ import {
 import { map, take, filter, switchMap, tap, mergeMap, finalize, catchError, mapTo } from 'rxjs/operators';
 import { combineLatest, forkJoin, Observable, of, Subject } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { UserPreferencesComponent } from '../../../../../ddp-sdk/src/lib/components/user/userPreferences.component';
+import { MatDialog } from '@angular/material/dialog';
 
 interface DashboardParticipant {
     userGuid: string;
@@ -100,6 +102,11 @@ interface DashboardParticipant {
                                         {{participant.label}}
                                     </mat-panel-title>
                                     <mat-panel-description fxLayoutAlign="end center" class="dashboard-panel-description">
+                                        <button mat-button
+                                                class="edit-user-button"
+                                                (click)="$event.stopPropagation(); openUserEditDialog(participant.userGuid)">
+                                            {{'Toolkit.Dashboard.EditUser' | translate}}
+                                        </button>
                                         <ng-container *ngIf="participantUserGuidToPanelIsOpen.get(participant.userGuid); else show">
                                             {{'Toolkit.Dashboard.HidePanel' | translate}}
                                             <mat-icon>expand_less</mat-icon>
@@ -156,6 +163,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
         private workflowService: WorkflowServiceAgent,
         private userManagementService: UserManagementServiceAgent,
         private logger: LoggingService,
+        public dialog: MatDialog,
         @Inject('toolkit.toolkitConfig') public toolkitConfig: ToolkitConfigurationService) {
         super(router, _announcements, _participantsSearch, session, userActivityServiceAgent, toolkitConfig);
     }
@@ -292,6 +300,17 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
 
     public trackById(_, participant: DashboardParticipant): string {
         return participant.userGuid;
+    }
+
+    public openUserEditDialog(participantGuid: string): void {
+        this.session.setParticipant(participantGuid);
+        const dialogRef = this.dialog.open(UserPreferencesComponent, {
+            width: '550px',
+            autoFocus: false,
+        });
+        dialogRef.afterClosed().subscribe(() => {
+            this.session.setParticipant(null);
+        });
     }
 
     public ngOnDestroy(): void {
