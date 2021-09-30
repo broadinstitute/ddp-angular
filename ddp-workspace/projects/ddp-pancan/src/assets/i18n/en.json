@@ -758,7 +758,7 @@
                 "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
                 "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
             },
-            "UseAsEntered":  "Please use the address as entered"
+            "UseAsEntered":  "We are unable to confirm that this address is valid. Check this box to use this address entered."
         },
         "TooltipAlt": "Information",
         "Validators": {

@@ -209,7 +209,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     public isInputComponentBusy$ = new BehaviorSubject<boolean>(false);
     // variables for template
     public suggestionInfo$: Observable<AddressSuggestion | null>;
-    public inputAddress$ = new BehaviorSubject<Address | null>(null);
+    public inputAddress$: Subject<Address | null> = new BehaviorSubject<Address | null>(null);
     public verifyFieldErrors$: Observable<FieldError[]>;
     public isReadOnly$: Observable<boolean>;
     public inputComponentAddress$ = new BehaviorSubject<Address | null>(null);
