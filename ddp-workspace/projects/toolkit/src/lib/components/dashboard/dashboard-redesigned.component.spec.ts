@@ -35,6 +35,7 @@ import { MatExpansionPanelHarness } from '@angular/material/expansion/testing';
 import { ActivityInstanceStatusServiceAgent } from '../../../../../ddp-sdk/src/lib/services/serviceAgents/activityInstanceStatusServiceAgent.service';
 import { MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
@@ -164,6 +165,7 @@ describe('DashboardRedesignedComponent', () => {
                 { provide: ActivityServiceAgent, useValue: {} },
                 { provide: LoggingService, useValue: loggerSpy },
                 { provide: AnalyticsEventsService, useValue: analyticsSpy },
+                { provide: MatDialog, useValue: { } },
             ],
             declarations: [DashboardRedesignedComponent, subjectPanel, UserActivitiesComponent],
         })
