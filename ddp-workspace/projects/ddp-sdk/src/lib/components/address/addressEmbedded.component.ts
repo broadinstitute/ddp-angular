@@ -49,15 +49,25 @@ import { NGXTranslateService } from '../../services/internationalization/ngxTran
 import { LoggingService } from '../../services/logging.service';
 import { ConfigurationService } from '../../services/configuration.service';
 
+interface IsEasyPostError {
+    isEasyPostError: boolean;
+}
+
+interface FormError extends IsEasyPostError {
+    message: string;
+}
+
+export interface FieldError extends AddressError, IsEasyPostError { }
+
 interface ComponentState {
     isReadOnly: boolean;
     activityInstanceGuid: string | null;
     showSuggestion: boolean;
     enteredAddress: Address | null;
     suggestedAddress: Address | null;
-    formErrorMessages: string[];
+    formErrorMessages: FormError[];
     formWarningMessages: string[];
-    fieldErrors: AddressError[];
+    fieldErrors: FieldError[];
     isTemporarilyDisabled: boolean;
     warnings?: AddressVerificationWarnings;
 }
@@ -106,7 +116,10 @@ interface AddressSuggestion {
                     </mat-radio-group>
                 </mat-card-content>
             </mat-card>
-        </form>`,
+        </form>
+         <mat-checkbox *ngIf="isEasyPostInvalid$ | async" [formControl]="ignoreEasyPostErrorsCheckbox" class="ignore-easy-post-errors">
+             {{'SDK.MailAddress.UseAsEntered' | translate}}
+         </mat-checkbox>`,
     styles: [
         `.suggestion-radio-group {
             display: inline-flex;
@@ -194,17 +207,19 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     errorOrSuggestionWasShown = new EventEmitter();
 
     @ViewChild(AddressInputComponent, {static: true}) addressInputComponent: AddressInputComponent;
-    public formErrorMessages$: Observable<string[]>;
+    public formErrorMessages$: Observable<FormError[]>;
     public errorMessagesToDisplay$: Observable<string[]>;
     public suggestionForm: FormGroup;
+    public ignoreEasyPostErrorsCheckbox = new FormControl();
     public isInputComponentBusy$ = new BehaviorSubject<boolean>(false);
     // variables for template
     public suggestionInfo$: Observable<AddressSuggestion | null>;
-    public inputAddress$: Subject<Address | null> = new BehaviorSubject(null);
-    public verifyFieldErrors$: Observable<AddressError[]>;
+    public inputAddress$: Subject<Address | null> = new BehaviorSubject<Address | null>(null);
+    public verifyFieldErrors$: Observable<FieldError[]>;
     public isReadOnly$: Observable<boolean>;
-    public inputComponentAddress$: Subject<Address | null> = new BehaviorSubject(null);
-    public formValidStatusChanged$: Subject<boolean> = new BehaviorSubject(true);
+    public inputComponentAddress$ = new BehaviorSubject<Address | null>(null);
+    public formValidStatusChanged$ = new BehaviorSubject(true);
+    public isEasyPostInvalid$ = new BehaviorSubject(false);
     public generateTaggedAddress = generateTaggedAddress;
 
     private ngUnsubscribe = new Subject();
@@ -303,6 +318,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
                 busyCounter$.next(-1);
             }),
         );
+        const ignoreEasyPostErrorsObservable = this.ignoreEasyPostErrorsCheckbox.valueChanges.pipe(startWith(false));
 
         // derived observables
 
@@ -327,8 +343,11 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
                 } : null, {onlyDistinct: false})
         );
 
-        this.errorMessagesToDisplay$ = this.state$.pipe(
-            extract(state => state.formErrorMessages.concat(state.formWarningMessages)));
+        this.errorMessagesToDisplay$ = combineLatest([this.state$, ignoreEasyPostErrorsObservable]).pipe(
+            extract(([state, ignoreEasyPost]) => state.formErrorMessages
+                .filter(error => !(ignoreEasyPost && error.isEasyPostError))
+                .map(error => error.message)
+                .concat(state.formWarningMessages)));
 
         const setupSuggestedAddressFormControl$ = this.suggestionInfo$.pipe(
             filter(info => !!info),
@@ -355,7 +374,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
                 }
             }),
             tap((error: string | null) => {
-                this.stateUpdates$.next({formErrorMessages: error ? [error] : []});
+                this.stateUpdates$.next({formErrorMessages: error ? [{ message: error, isEasyPostError: false }] : []});
             })
         );
 
@@ -400,15 +419,24 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
                 // showing suggestion only if it differs from entered address
                 // we might have warning messages for the entered address
                 const enteredWarningMessages = addressSuggestion.warnings.entered.map(each => each.message);
+                const commonStateFields: Partial<ComponentState> = {
+                    formErrorMessages: [],
+                    formWarningMessages: enteredWarningMessages,
+                    warnings: addressSuggestion.warnings,
+                };
                 if (!suggested.hasSameDataValues(entered)) {
                     this.stateUpdates$.next({
-                        formErrorMessages: [], formWarningMessages: enteredWarningMessages,
-                        warnings: addressSuggestion.warnings, suggestedAddress: suggested, enteredAddress: entered, showSuggestion: true
+                        ...commonStateFields,
+                        suggestedAddress: suggested,
+                        enteredAddress: entered,
+                        showSuggestion: true
                     });
                 } else {
                     this.stateUpdates$.next({
-                        formErrorMessages: [], formWarningMessages: enteredWarningMessages,
-                        warnings: addressSuggestion.warnings, suggestedAddress: null, enteredAddress: null, showSuggestion: false
+                        ...commonStateFields,
+                        suggestedAddress: null,
+                        enteredAddress: null,
+                        showSuggestion: false
                     });
                 }
             })
@@ -492,9 +520,9 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
                 verError.errors.forEach(currError => {
                     if (currError.field === 'address') {
                         // These are the "global" errors reported by EasyPost
-                        errorUpdate.formErrorMessages.push(currError.message);
+                        errorUpdate.formErrorMessages.push({ message: currError.message, isEasyPostError: true });
                     } else {
-                        errorUpdate.fieldErrors.push(currError);
+                        errorUpdate.fieldErrors.push({ ...currError, isEasyPostError: true });
                     }
                 });
                 this.stateUpdates$.next(errorUpdate);
@@ -512,7 +540,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
                     return this.ngxTranslate.getTranslation('SDK.MailAddress.Error.UnknownVerifyError');
                 }
             }),
-            tap((errorMessage) => this.stateUpdates$.next({formErrorMessages: [errorMessage]}))
+            tap((errorMessage) => this.stateUpdates$.next({formErrorMessages: [{ message: errorMessage, isEasyPostError: false }]}))
         );
 
         const canSaveRealAddress = (address: Address | null) =>
@@ -520,15 +548,17 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
         // "Real" as opposed to "Temp". Important we return the saved address as properties are added on server
         const saveRealAddressAction$ = this.saveTrigger$.pipe(
-            withLatestFrom(this.formErrorMessages$, currentAddress$),
-            filter(([_, formErrors, addressToSave]) => {
-                return !formErrors?.length && canSaveRealAddress(addressToSave);
+            withLatestFrom(currentAddress$, this.formErrorMessages$, this.verifyFieldErrors$, ignoreEasyPostErrorsObservable),
+            filter(([_, addressToSave, formErrors, fieldErrors, ignoreEasyPost]) => {
+                return !formErrors?.filter(error => !(ignoreEasyPost && error.isEasyPostError)).length
+                    && !fieldErrors?.filter(error => !(ignoreEasyPost && error.isEasyPostError)).length
+                    && canSaveRealAddress(addressToSave);
             }),
             tap(() => busyCounter$.next(1)),
-            concatMap(([_, __, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
+            concatMap(([_, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
             catchError((error) => {
                 this.logger.logError(this.LOG_SOURCE, 'Saving address was failed', error.message);
-                const formErrorMessages = [error.message];
+                const formErrorMessages = [{ message: error.message, isEasyPostError: false }];
                 this.stateUpdates$.next({formErrorMessages});
                 return of(null);
             }),
@@ -591,14 +621,27 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             this.formValidStatusChanged$,
             this.formErrorMessages$,
             this.verifyFieldErrors$,
-            activityRequirementsMet$
+            activityRequirementsMet$,
+            ignoreEasyPostErrorsObservable
         ]).pipe(
-            map(([formValidStatusChanged, formErrors, addressErrors, reqsMet]) =>
+            map(([formValidStatusChanged, formErrors, addressErrors, reqsMet, ignoreEasyPost]) =>
                 (!this.configuration.addressEnforceRequiredFields || formValidStatusChanged)
-                && !formErrors.length && !addressErrors.length && reqsMet),
+                && !formErrors.filter(error => !(ignoreEasyPost && error.isEasyPostError)).length
+                && !addressErrors.filter(error => !(ignoreEasyPost && error.isEasyPostError)).length
+                && reqsMet),
             distinctUntilChanged(),
             tap(status => this.validStatusChanged.emit(status))
         );
+
+        combineLatest([
+            this.formErrorMessages$,
+            this.verifyFieldErrors$,
+        ]).pipe(
+            map(([formErrors, fieldErrors]) =>
+                (formErrors.length || fieldErrors.length)
+                && formErrors.every(error => error.isEasyPostError)
+                && fieldErrors.every(error => error.isEasyPostError)),
+        ).subscribe(this.isEasyPostInvalid$);
 
         // At least for now, we'll report the status of mailing address through block too
         // (needed to limit status checks to blocks that are visible within a section
