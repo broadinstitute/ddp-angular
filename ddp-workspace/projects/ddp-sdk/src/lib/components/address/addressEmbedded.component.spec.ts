@@ -88,7 +88,8 @@ describe('AddressEmbeddedComponent', () => {
                 return of(null);
             }
         });
-        const loggingServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logDebug', 'logWarning']);
+        const loggingServiceSpy: jasmine.SpyObj<LoggingService> =
+            jasmine.createSpyObj('LoggingService', ['logDebug', 'logWarning', 'logError']);
         const translateServiceSpy: jasmine.SpyObj<NGXTranslateService> = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
         // @ts-ignore
         translateServiceSpy.getTranslation.and.callFake((word: string | Array<string>) => {
@@ -531,6 +532,49 @@ describe('AddressEmbeddedComponent', () => {
         expect(addressServiceSpy.deleteTempAddress).not.toHaveBeenCalled();
         discardPeriodicTasks();
     }));
+
+    it('emits valueChanged with null if saveAddress failed', fakeAsync(() => {
+        addressServiceSpy.saveAddress.and.returnValue(throwError('error'));
+        const defaultAddress = buildPerfectAddress();
+        defaultAddress.guid = '789';
+
+        // we are going to try call save in a tick or two
+        const spyOnSubmitAnnounced = spyOnProperty(submitAnnounceService, 'submitAnnounced$', 'get');
+        spyOnSubmitAnnounced.and.returnValue(hot('--a', { a: (new ActivityResponse('blah')) }));
+        addressServiceSpy.findDefaultAddress.and.returnValue(of(defaultAddress));
+        let componentIsBusy = false;
+        component.componentBusy.subscribe(isBusy => componentIsBusy = isBusy);
+        fixture.detectChanges();
+        const valueChangedSpy = spyOn(component.valueChanged, 'emit');
+        getTestScheduler().flush();
+
+        expect(componentIsBusy).toBe(false);
+        expect(valueChangedSpy).toHaveBeenCalledWith(null);
+        expect(addressServiceSpy.deleteTempAddress).not.toHaveBeenCalled();
+        discardPeriodicTasks();
+    }));
+
+    it('emit errorOrSuggestionWasShown on suggestion', () => {
+        const errorOrSuggestionWasShownSpy = spyOn(component.errorOrSuggestionWasShown, 'emit');
+        emitAddressThatTriggersSuggestion();
+        expect(errorOrSuggestionWasShownSpy).toHaveBeenCalled();
+    });
+
+    it('emit errorOrSuggestionWasShown on error', () => {
+        const errorOrSuggestionWasShownSpy = spyOn(component.errorOrSuggestionWasShown, 'emit');
+        const addressToEnter = buildPerfectAddress();
+        addressToEnter.street2 = 'NO PLACE THAT IS GOOD';
+        // field 'address' is the global error.
+        const verificationResponseWithWarningForEntered = new AddressVerificationResponse(addressToEnter);
+        verificationResponseWithWarningForEntered.warnings.entered = [{ code: 'WARNING', message: 'You have been warned!' }];
+        addressServiceSpy.verifyAddress.and.returnValue(of(verificationResponseWithWarningForEntered));
+        fixture.detectChanges();
+
+        childComponent.valueChanged.emit(addressToEnter);
+        fixture.detectChanges();
+
+        expect(errorOrSuggestionWasShownSpy).toHaveBeenCalled();
+    });
 
     it('hide country field when property is set', fakeAsync(() => {
         fixture.detectChanges();

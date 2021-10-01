@@ -57,7 +57,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
                                   [country]="config.supportedCountry"
                                   [readonly]="addressReadonly"
                                   (validStatusChanged)="isAddressValid = $event"
-                                  (valueChanged)="addressWasSubmit.next($event)"
+                                  (valueChanged)="addressWasSubmit$.next($event)"
                                   (componentBusy)="isAddressComponentBusy$.next($event)"
                                   (errorOrSuggestionWasShown)="scrollToTheBottom()">
             </ddp-address-embedded>
@@ -67,17 +67,17 @@ import { BehaviorSubject, Subject } from 'rxjs';
         <mat-dialog-actions>
             <button mat-flat-button
                     color="primary"
-                    class="button button_medium"
+                    class="button button_medium save-button"
                     [disabled]="!loaded || !isAddressValid"
                     (click)="save()"
-                    data-ddp-test="okButton"
-                    [innerHTML]="'SDK.SaveButton' | translate">
+                    data-ddp-test="okButton">
+                {{'SDK.SaveButton' | translate}}
             </button>
             <button mat-button
                     class="button button_medium button_secondary"
                     mat-dialog-close
-                    data-ddp-test="cancelButton"
-                    [innerHTML]="'SDK.CancelButton' | translate">
+                    data-ddp-test="cancelButton">
+                {{'SDK.CancelButton' | translate}}
             </button>
         </mat-dialog-actions>
     `,
@@ -127,7 +127,7 @@ export class UserPreferencesComponent implements OnDestroy {
     public readonly addressFormBlock: MailAddressBlock = new MailAddressBlock(null);
     public isAddressValid = true;
     public isAddressComponentBusy$ = new BehaviorSubject(false);
-    public addressWasSubmit = new Subject<Address | null>();
+    public addressWasSubmit$ = new Subject<Address | null>();
     public addressReadonly = false;
     // todo display fields after address editing will be delivered
     public showProfileFields = false;
@@ -167,7 +167,7 @@ export class UserPreferencesComponent implements OnDestroy {
             .subscribe((isBusy) => {
                 this.loaded = !isBusy;
             });
-        this.addressWasSubmit
+        this.addressWasSubmit$
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe((result) => {
                 this.addressReadonly = false;
