@@ -1,10 +1,10 @@
-import { Component, Inject, OnDestroy } from '@angular/core';
+import { Component, ElementRef, Inject, NgZone, OnDestroy } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CompositeDisposable } from '../../compositeDisposable';
 import { UserProfileServiceAgent } from '../../services/serviceAgents/userProfileServiceAgent.service';
 import { DateService } from '../../services/dateService.service';
 import { UserProfileDecorator } from '../../models/userProfileDecorator';
-import { finalize, takeUntil } from 'rxjs/operators';
+import { finalize, take, takeUntil } from 'rxjs/operators';
 import { ConfigurationService } from '../../services/configuration.service';
 import { MailAddressBlock } from '../../models/activity/MailAddressBlock';
 import { Address } from '../../models/address';
@@ -58,19 +58,23 @@ import { BehaviorSubject, Subject } from 'rxjs';
                                   [readonly]="addressReadonly"
                                   (validStatusChanged)="isAddressValid = $event"
                                   (valueChanged)="addressWasSubmit.next($event)"
-                                  (componentBusy)="isAddressComponentBusy$.next($event)">
+                                  (componentBusy)="isAddressComponentBusy$.next($event)"
+                                  (errorOrSuggestionWasShown)="scrollToTheBottom()">
             </ddp-address-embedded>
         </mat-dialog-content>
         <ddp-validation-message *ngIf="!isDateValid" message="invalid date">
         </ddp-validation-message>
         <mat-dialog-actions>
-            <button mat-button
+            <button mat-flat-button
+                    color="primary"
+                    class="button button_medium"
                     [disabled]="!loaded || !isAddressValid"
                     (click)="save()"
                     data-ddp-test="okButton"
                     [innerHTML]="'SDK.SaveButton' | translate">
             </button>
             <button mat-button
+                    class="button button_medium button_secondary"
                     mat-dialog-close
                     data-ddp-test="cancelButton"
                     [innerHTML]="'SDK.CancelButton' | translate">
@@ -91,6 +95,11 @@ import { BehaviorSubject, Subject } from 'rxjs';
         }
         .mat-dialog-actions {
             justify-content: flex-end;
+        }
+        /* some space for mat-card box-shadow */
+        ddp-address-embedded {
+            padding-bottom: 5px;
+            display: block;
         }
     `],
     providers: [SubmitAnnouncementService]
@@ -128,6 +137,8 @@ export class UserPreferencesComponent implements OnDestroy {
         public dialogRef: MatDialogRef<UserPreferencesComponent>,
         private dateService: DateService,
         private submitAnnouncementService: SubmitAnnouncementService,
+        private element: ElementRef,
+        private ngZone: NgZone,
         @Inject('ddp.config') public config: ConfigurationService,
         ) {
         this.anchor = new CompositeDisposable();
@@ -212,5 +223,12 @@ export class UserPreferencesComponent implements OnDestroy {
         // emit address update submit
         this.submitAnnouncementService.announceSubmit();
         this.addressReadonly = true;
+    }
+
+    public scrollToTheBottom(): void {
+        this.ngZone.onStable.pipe(take(1)).subscribe(() => {
+            const contentElement = this.element.nativeElement.querySelector('mat-dialog-content');
+            contentElement.scrollTop = contentElement.scrollHeight;
+        });
     }
 }

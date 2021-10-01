@@ -187,6 +187,11 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
      */
     @Output()
     componentBusy = new EventEmitter<boolean>(true);
+    /**
+     * Will emit if form error or suggestion will be shown at the bottom of the component in order to allow the parent scroll to it
+     */
+    @Output()
+    errorOrSuggestionWasShown = new EventEmitter();
 
     @ViewChild(AddressInputComponent, {static: true}) addressInputComponent: AddressInputComponent;
     public formErrorMessages$: Observable<string[]>;
@@ -561,6 +566,11 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             tap(address => this.inputAddress$.next(address))
         );
 
+        const errorOrSuggestionIsShown$ = combineLatest([this.errorMessagesToDisplay$, this.suggestionInfo$]).pipe(
+            filter(([errorMessages, suggestionInfo]) => !!(errorMessages.length || suggestionInfo)),
+            tap(() => this.errorOrSuggestionWasShown.emit())
+        );
+
         const addressComponentBusy$ = combineLatest([this.isInputComponentBusy$, isThisComponentBusy$]).pipe(
             map(busyFlags => busyFlags.some(val => val)),
             distinctUntilChanged(),
@@ -628,7 +638,8 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             processOtherVerificationErrorsAction$,
             emitValidStatusAction$,
             updateInputComponentWithSelectedAddress$,
-            initializeStateAction$
+            initializeStateAction$,
+            errorOrSuggestionIsShown$
         ).pipe(
             takeUntil(this.ngUnsubscribe)
         ).subscribe();

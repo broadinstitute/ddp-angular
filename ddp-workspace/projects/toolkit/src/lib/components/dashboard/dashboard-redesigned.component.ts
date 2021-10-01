@@ -15,12 +15,12 @@ import {
     UserProfileServiceAgent,
     WorkflowServiceAgent,
     UserManagementServiceAgent,
-    LoggingService
+    LoggingService,
+    UserPreferencesComponent
 } from 'ddp-sdk';
 import { map, take, filter, switchMap, tap, mergeMap, finalize, catchError, mapTo } from 'rxjs/operators';
 import { combineLatest, forkJoin, Observable, of, Subject } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-import { UserPreferencesComponent } from '../../../../../ddp-sdk/src/lib/components/user/userPreferences.component';
 import { MatDialog } from '@angular/material/dialog';
 
 interface DashboardParticipant {
@@ -139,6 +139,9 @@ interface DashboardParticipant {
     styles: [`
         .full-width {
             width: 100%;
+        }
+        .mat-expansion-panel-header-title {
+            align-items: center;
         }
     `]
 })
@@ -305,7 +308,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
     public openUserEditDialog(participantGuid: string): void {
         this.session.setParticipant(participantGuid);
         const dialogRef = this.dialog.open(UserPreferencesComponent, {
-            width: '550px',
+            width: '650px',
             autoFocus: false,
         });
         dialogRef.afterClosed().subscribe(() => {
