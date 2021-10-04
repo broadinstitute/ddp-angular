@@ -57,7 +57,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
                                   [country]="config.supportedCountry"
                                   [readonly]="addressReadonly"
                                   (validStatusChanged)="isAddressValid = $event"
-                                  (valueChanged)="addressWasSubmit$.next($event)"
+                                  (valueChanged)="addressSubmitFinalized$.next($event)"
                                   (componentBusy)="isAddressComponentBusy$.next($event)"
                                   (errorOrSuggestionWasShown)="scrollToTheBottom()">
             </ddp-address-embedded>
@@ -127,7 +127,7 @@ export class UserPreferencesComponent implements OnDestroy {
     public readonly addressFormBlock: MailAddressBlock = new MailAddressBlock(null);
     public isAddressValid = true;
     public isAddressComponentBusy$ = new BehaviorSubject(false);
-    public addressWasSubmit$ = new Subject<Address | null>();
+    public addressSubmitFinalized$ = new Subject<Address | null>();
     public addressReadonly = false;
     // todo display fields after address editing will be delivered
     public showProfileFields = false;
@@ -167,7 +167,7 @@ export class UserPreferencesComponent implements OnDestroy {
             .subscribe((isBusy) => {
                 this.loaded = !isBusy;
             });
-        this.addressWasSubmit$
+        this.addressSubmitFinalized$
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe((result) => {
                 this.addressReadonly = false;

@@ -64,10 +64,12 @@ describe('UserPreferencesComponent', () => {
                 { provide: DateService , useValue: { } },
                 { provide: 'ddp.config', useValue: { } },
                 { provide: MatDialogRef, useValue: matDialogRefSpy },
-                { provide: SubmitAnnouncementService, useValue: submitAnnouncementServiceSpy },
             ],
             declarations: [UserPreferencesComponent, FakeAddressComponent, loadingMock],
         })
+            .overrideComponent(
+                UserPreferencesComponent,
+                { set: { providers: [{ provide: SubmitAnnouncementService, useValue: submitAnnouncementServiceSpy }] } })
             .compileComponents();
         const translate = TestBed.inject(TranslateService);
         translate.use('en');
@@ -121,7 +123,7 @@ describe('UserPreferencesComponent', () => {
         expect(saveButtonElement.disabled).toBeFalse();
     });
 
-    xit('calls announceSubmit when user clicks save', () => {
+    it('calls announceSubmit when user clicks save', () => {
         const addressComponent = fixture.debugElement.query(By.directive(FakeAddressComponent));
         addressComponent.componentInstance.componentBusy.emit(false);
         fixture.detectChanges();
@@ -140,5 +142,29 @@ describe('UserPreferencesComponent', () => {
         fixture.detectChanges();
 
         expect(addressComponent.componentInstance.readonly).toBe(true);
+    });
+
+    it('enables address component and does not close dialog when address submit call is failed', () => {
+        const addressComponent = fixture.debugElement.query(By.directive(FakeAddressComponent));
+        addressComponent.componentInstance.componentBusy.emit(false);
+        fixture.detectChanges();
+        fixture.debugElement.query(By.css('.save-button')).nativeElement.click();
+        fixture.detectChanges();
+        addressComponent.componentInstance.valueChanged.emit(false);
+
+        expect(addressComponent.componentInstance.readonly).toBe(true);
+        expect(matDialogRefSpy.close).not.toHaveBeenCalled();
+    });
+
+    it('enables address component and closes dialog when address submit call is succeed', () => {
+        const addressComponent = fixture.debugElement.query(By.directive(FakeAddressComponent));
+        addressComponent.componentInstance.componentBusy.emit(false);
+        fixture.detectChanges();
+        fixture.debugElement.query(By.css('.save-button')).nativeElement.click();
+        fixture.detectChanges();
+        addressComponent.componentInstance.valueChanged.emit(true);
+
+        expect(addressComponent.componentInstance.readonly).toBe(true);
+        expect(matDialogRefSpy.close).toHaveBeenCalled();
     });
 });
