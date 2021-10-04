@@ -1,0 +1,23 @@
+@import 'breakpoints';
+
+.link-list {
+  display: flex;
+  align-items: center;
+
+  list-style: none;
+
+  @include media-md {
+    flex-flow: column nowrap;
+  }
+
+  &__item {
+    & + & {
+      margin-left: 2.8rem;
+
+      @include media-md {
+        margin-top: 1.6rem;
+        margin-left: 0;
+      }
+    }
+  }
+}
