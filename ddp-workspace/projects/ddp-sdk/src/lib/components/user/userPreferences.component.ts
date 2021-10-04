@@ -1,99 +1,85 @@
-import { Component, Inject, OnDestroy } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnDestroy } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { CompositeDisposable } from '../../compositeDisposable';
-import { SessionMementoService } from '../../services/sessionMemento.service';
 import { UserProfileServiceAgent } from '../../services/serviceAgents/userProfileServiceAgent.service';
 import { DateService } from '../../services/dateService.service';
 import { UserProfileDecorator } from '../../models/userProfileDecorator';
-import { tap } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 
 @Component({
     selector: 'ddp-user-preferences',
     template: `
-  <h2 mat-dialog-title translate>SDK.UserPreferences.UserPreferencesTitle</h2>
-  <mat-dialog-content>
-        <mat-form-field class="field-row" data-ddp-test="birthday::month">
-            <mat-select placeholder="Month" [(value)]="monthOfBirth">
-                <mat-option *ngFor="let month of months" [value]="month">
-                    {{ month }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field class="field-row" data-ddp-test="birthday::day">
-            <mat-select placeholder="Date" [(value)]="dayOfBirth">
-                <mat-option *ngFor="let day of days" [value]="day">
-                    {{ day }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field class="field-row" data-ddp-test="birthday::year">
-            <mat-select placeholder="Year" [(value)]="yearOfBirth" >
-                <mat-option *ngFor="let year of years" [value]="year">
-                    {{ year }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <div class="row">
-            <mat-form-field data-ddp-test="gender">
-                <mat-select placeholder="{{'SDK.UserPreferences.UserPreferencesGender' | translate}}"
-                            [(value)]="sex"
-                            [disabled]="!loaded">
-                    <mat-option value="MALE" data-ddp-test="sex::Male">Male</mat-option>
-                    <mat-option value="FEMALE" data-ddp-test="sex::Female">Female</mat-option>
-                    <mat-option value="INTERSEX" data-ddp-test="sex::Other">Intersex</mat-option>
-                    <mat-option value="PREFER_NOT_TO_ANSWER" data-ddp-test="sex::Other">Prefer not to answer</mat-option>
+        <h2 mat-dialog-title translate>SDK.UserPreferences.UserPreferencesTitle</h2>
+        <mat-dialog-content>
+            <mat-form-field class="field-row" data-ddp-test="birthday::month">
+                <mat-select placeholder="Month" [(value)]="monthOfBirth">
+                    <mat-option *ngFor="let month of months" [value]="month">
+                        {{ month }}
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
-        </div>
-        <div class="row">
-            <mat-form-field data-ddp-test="locale">
-                <mat-select placeholder="{{'SDK.UserPreferences.UserPreferencesLocale' | translate}}"
-                            [(value)]="currentLocale"
-                            [disabled]="!loaded">
-                    <mat-option value="en" data-ddp-test="locale::en">English</mat-option>
-                    <mat-option value="ru" data-ddp-test="locale::ru">Russian</mat-option>
-                    <mat-option value="fr" data-ddp-test="locale::fr">French</mat-option>
+            <mat-form-field class="field-row" data-ddp-test="birthday::day">
+                <mat-select placeholder="Date" [(value)]="dayOfBirth">
+                    <mat-option *ngFor="let day of days" [value]="day">
+                        {{ day }}
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
-        </div>
-  </mat-dialog-content>
-  <ddp-validation-message *ngIf="!isDateValid" message="invalid date">
-  </ddp-validation-message>
-  <ddp-loading [loaded]="loaded"></ddp-loading>
-  <mat-dialog-actions align="end">
-    <button mat-button
-            [disabled]="!loaded"
-            (click)="save()"
-            data-ddp-test="okButton"
-            [innerHTML]="'SDK.SaveButton' | translate">
-    </button>
-    <button mat-button
-            mat-dialog-close
-            data-ddp-test="cancelButton"
-            [innerHTML]="'SDK.CancelButton' | translate">
-    </button>
-  </mat-dialog-actions>
-  `,
-    styles: [
-        `.field-row {
-        float: left;
-        width: 30%;
-        padding-right: 5px;
-    }`,
-        `.row {
-        width: 100%;
-    }`,
-        `.margin10 {
-        margin: 10px;
-    }`,
-        `::ng-deep .mat-option {
-      height: 30px !important;
-    }`
-    ]
+            <mat-form-field class="field-row" data-ddp-test="birthday::year">
+                <mat-select placeholder="Year" [(value)]="yearOfBirth" >
+                    <mat-option *ngFor="let year of years" [value]="year">
+                        {{ year }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div class="row">
+                <mat-form-field data-ddp-test="gender">
+                    <mat-select placeholder="{{'SDK.UserPreferences.UserPreferencesGender' | translate}}"
+                                [(value)]="sex"
+                                [disabled]="!loaded">
+                        <mat-option value="MALE" data-ddp-test="sex::Male">Male</mat-option>
+                        <mat-option value="FEMALE" data-ddp-test="sex::Female">Female</mat-option>
+                        <mat-option value="INTERSEX" data-ddp-test="sex::Intersex">Intersex</mat-option>
+                        <mat-option value="PREFER_NOT_TO_ANSWER" data-ddp-test="sex::Other">Prefer not to answer</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </mat-dialog-content>
+        <ddp-validation-message *ngIf="!isDateValid" message="invalid date">
+        </ddp-validation-message>
+        <ddp-loading [loaded]="loaded"></ddp-loading>
+        <mat-dialog-actions>
+            <button mat-button
+                    [disabled]="!loaded"
+                    (click)="save()"
+                    data-ddp-test="okButton"
+                    [innerHTML]="'SDK.SaveButton' | translate">
+            </button>
+            <button mat-button
+                    mat-dialog-close
+                    data-ddp-test="cancelButton"
+                    [innerHTML]="'SDK.CancelButton' | translate">
+            </button>
+        </mat-dialog-actions>
+    `,
+    styles: [`
+        .field-row {
+            float: left;
+            width: 30%;
+            padding-right: 5px;
+        }
+        .row {
+            width: 100%;
+        }
+        ::ng-deep .mat-option {
+            height: 30px !important;
+        }
+        .mat-dialog-actions {
+            justify-content: flex-end;
+        }
+    `]
 })
 export class UserPreferencesComponent implements OnDestroy {
-    public locales: Array<string>;
-    public currentLocale = 'en';
     public sex: string | null;
     public dayOfBirth: number | null;
     public monthOfBirth: number | null;
@@ -109,29 +95,27 @@ export class UserPreferencesComponent implements OnDestroy {
     ];
     public years: Array<number> = [];
     public loaded = false;
-    public showError = false;
+    private showError = false;
     private anchor: CompositeDisposable;
     private model: UserProfileDecorator | null;
 
     constructor(
         private serviceAgent: UserProfileServiceAgent,
-        private session: SessionMementoService,
         public dialogRef: MatDialogRef<UserPreferencesComponent>,
         private dateService: DateService,
-        @Inject(MAT_DIALOG_DATA) public data: any) {
-        this.locales = ['en', 'ru', 'fr'];
+        ) {
         this.anchor = new CompositeDisposable();
 
         for (let i = 0; i < 50; i++) {
+            // todo: fix year selection
             this.years.push(2005 - i);
         }
         const profile = serviceAgent.profile.pipe(
-            tap(() => this.loaded = true)
+            finalize(() => this.loaded = true)
         ).subscribe(x => {
             this.model = x;
             if (x && x.profile) {
                 this.sex = x.profile.sex;
-                this.currentLocale = x.profile.preferredLanguage != null ? x.profile.preferredLanguage : 'en';
                 this.yearOfBirth = x.profile.birthYear;
                 this.monthOfBirth = x.profile.birthMonth;
                 this.dayOfBirth = x.profile.birthDayInMonth;
@@ -171,20 +155,15 @@ export class UserPreferencesComponent implements OnDestroy {
                 this.model.profile.birthDayInMonth = this.dayOfBirth;
             }
             this.model.profile.sex = this.sex;
-            this.model.profile.preferredLanguage = this.currentLocale;
         }
-        // Temporary solution, just for test
-        if (this.session.session == null) {
-            return;
-        }
-        const sessionDto = this.session.session;
-        sessionDto.locale = this.currentLocale;
+
         if (this.model) {
+            this.loaded = false;
             const profile = this.serviceAgent
                 .saveProfile(this.model.newProfile, this.model.profile)
-                .subscribe(x => {
-                    this.session.updateSession(sessionDto);
-                    location.reload();
+                .pipe(finalize(() => this.loaded = true))
+                .subscribe(() => {
+                    this.dialogRef.close();
                 });
             this.anchor.addNew(profile);
         }

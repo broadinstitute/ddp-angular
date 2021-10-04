@@ -7,7 +7,6 @@ import { ActivityPicklistOption } from '../models/activity/activityPicklistOptio
 export class PicklistSortingPolicy {
     constructor(readonly mainSortOrder: SortOrder = SortOrder.NONE, readonly lastStableId?: string) {}
 
-
     public sortPicklistGroups(groups: ActivityPicklistNormalizedGroup[]): ActivityPicklistNormalizedGroup[] {
         const groupsCopy = groups.slice();
         if (this.mainSortOrder === SortOrder.ALPHABETICAL) {

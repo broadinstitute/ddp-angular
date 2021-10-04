@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { LanguageService } from 'ddp-sdk';
 import { DialogData } from '../../../models/dialogData.model';
 
 @Component({
@@ -11,6 +12,7 @@ export class AboutUsDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<AboutUsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private readonly languageService: LanguageService,
   ) {}
 
   public get imageUrl(): string {
@@ -18,6 +20,10 @@ export class AboutUsDialogComponent {
   }
 
   public get name(): string {
+    if (this.languageService.getCurrentLanguage() === 'es') {
+      return this.data.name;
+    }
+
     if (this.data.degree) {
       return `${this.data.name}, ${this.data.degree}`;
     }

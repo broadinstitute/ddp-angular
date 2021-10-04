@@ -11,6 +11,10 @@ import { ActivityCode } from '../../constants/activity-code';
 })
 export class UserActivitiesComponent {
   @Input() activities: ActivityInstance[];
+  @Input() sleepLogUrl: string | null = null;
+  @Input() sleepLogStatus: string | null = null;
+  @Input() sleepLogUrlError: boolean | null = null;
+  @Input() sleepLogStatusError: boolean | null = null;
   @Output() startActivity = new EventEmitter<ActivityInstance>();
   @Output() continueActivity = new EventEmitter<ActivityInstance>();
   @Output() viewActivity = new EventEmitter<ActivityInstance>();
@@ -19,7 +23,7 @@ export class UserActivitiesComponent {
   ActivityStatusCode = ActivityStatusCodes;
   ActivityCode = ActivityCode;
   readonly DLMO_SCHEDULING_URL =
-    'https://outlook.office365.com/owa/calendar/CircadiaStudy1@partnershealthcare.onmicrosoft.com/bookings/';
+    'https://outlook.office365.com/owa/calendar/MGHCircadiaStudy@partnershealthcare.onmicrosoft.com/bookings/';
 
   onStartClick(activity: ActivityInstance): void {
     this.startActivity.emit(activity);

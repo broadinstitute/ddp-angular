@@ -13,9 +13,8 @@
   <div class="col-lg-9 col-md-9 col-sm-8 col-xs-8 Dialog-container">
     <div mat-dialog-title class="Dialog-header">
       <h2 mat-dialog-title class="Title Color--blue">{{ name }}</h2>
-      <p class="Dialog-headerRole">{{ data.position }}</p>
+      <p class="Dialog-headerRole" [innerHTML]="data.position | translate"></p>
     </div>
-
     <mat-dialog-content>
       <p class="Paragraph" [innerHTML]="data.bio"></p>
     </mat-dialog-content>

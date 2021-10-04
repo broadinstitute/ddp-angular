@@ -50,8 +50,7 @@
         },
         "UserPreferences": {
             "UserPreferencesTitle": "Пользовательские настройки",
-            "UserPreferencesGender": "Пол",
-            "UserPreferencesLocale": "Язык"
+            "UserPreferencesGender": "Пол"
         },
         "Dashboard": {
             "Title": "My Study Information"

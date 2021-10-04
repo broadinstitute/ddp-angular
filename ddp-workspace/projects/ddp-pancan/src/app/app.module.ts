@@ -66,7 +66,7 @@ toolkitConfig.colorectalPageEmail = 'info@colorectalcancerproject.org';
 toolkitConfig.lmsPagePhone = '';  // TODO: add real phone
 toolkitConfig.lmsPageEmail = 'info@lmsproject.org';
 toolkitConfig.lmsStudyGuid = 'cmi-lms';
-toolkitConfig.useParticipantDashboard = true;
+toolkitConfig.useMultiParticipantDashboard = true;
 toolkitConfig.dashboardDisplayedColumns = ['name', 'summary', 'status', 'actions'];
 
 export const sdkConfig = new ConfigurationService();
@@ -91,7 +91,7 @@ sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
 sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.useStepsWithCircle = true;
-sdkConfig.picklistsWithNoSorting = ['PRIMARY_CANCER_SELF', 'PRIMARY_CANCER_CHILD'];
+sdkConfig.notSortedPicklistAutocompleteStableIds = ['PRIMARY_CANCER_SELF', 'PRIMARY_CANCER_CHILD'];
 
 export function translateFactory(translate: TranslateService,
     injector: Injector,

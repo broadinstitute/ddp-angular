@@ -1,459 +1,475 @@
 {
-  "Common": {
-    "Buttons": {
-      "Submit": "Submit"
-    }
-  },
-  "Header": {
-    "Links": {
-      "Home": "Home",
-      "About": "About the Study",
-      "Participation": "Participation",
-      "FAQ": "FAQ",
-      "Team": "Meet the Team",
-      "SignUp": "Sign Up",
-      "Dashboard": "Dashboard"
-    }
-  },
-  "Footer": {
-    "Circadia": {
-      "Title": "Circadia",
-      "Home": "Home",
-      "About": "About the Study",
-      "FAQ": "FAQ",
-      "Team": "Meet the Team",
-      "StayInformed": "Stay Informed",
-      "PrivacyPolicy": "Privacy Policy"
-    },
-    "ContactUs": {
-      "Title": "Contact Us"
-    },
-    "Participation": {
-      "Title": "Participation",
-      "SignUp": "Sign Up"
-    }
-  },
-  "HomePage": {
-    "Cta": {
-      "Title": "Circadia is an online research study to understand circadian rhythm disorders",
-      "Description": "We're looking for people living with circadian rhythm disorders to join our completely remote, at-home study.",
-      "JoinBtn": "Join the Circadia Study",
-      "DashboardBtn": "Go to Dashboard"
-    },
-    "About": {
-      "Title": "About the Study",
-      "Paragraph": "The Circadia research study is focused on better understanding the genetics of circadian rhythm disorders. Circadian rhythms are an integral part of our functioning, regulating and syncing our human behavior and physiology with the external environment and the 24-hour day. While research has been able to identify core components of our molecular circadian clock, much is still unknown about the genetics and physiological mechanisms driving our circadian rhythms."
-    },
-    "Participation": {
-      "Title": "Participation",
-      "Description": "To participate in this study you will first need to complete our online screening questionnaire. The online screening questionnaire will allow us to check that you are eligible to participate in the Circadia research study. To complete the questionnaire, please use the Sign-Up button located at the top right of the screen.",
-      "Subtitle": "Quick facts",
-      "Duration": "<span class=\"semibold\">Study duration:</span> Approximately 6 weeks",
-      "Provided": "<span class=\"semibold\">We provide:</span> Monetary compensation, up to $200; all study material is provided",
-      "Activities": "<span class=\"semibold\">Activities:</span> Completing sample DNA kits; journaling about sleep, meals, and mood; wearing a biosensor to track sleep patterns and daily activity"
-    },
-    "FAQ": {
-      "Title": "Frequently Asked Questions",
-      "Description": "If your question is not answered below, you can call or email our study staff at <a class=\"link\" href=\"tel:16177267733\">1 (617) 726-7733</a> or <a class=\"link\" href=\"mailto:circadiastudy@mgh.harvard.edu\">circadiastudy@mgh.harvard.edu</a>.",
-      "Questions": [
-        {
-          "Title": "How long does the study take?",
-          "Answer": "<p class=\"faq-paragraph\">The study takes approximately 6 weeks to complete. It’s home based and self-directed, meaning you can fit it to your schedule and complete from the comfort of your home, without needing to visit our research office.</p>"
-        },
-        {
-          "Title": "What will I need to do?",
-          "Answer": "<p class=\"faq-paragraph\">For the Circadia study we will ask you to fill out questionnaires, provide a saliva DNA sample, wear a wrist activity monitor (similar to a Fitbit), keep daily sleep and food logs, and collect saliva samples in dim light. There is also an optional blood draw that can be scheduled if you are local to the New England region and are interested in providing the blood draw.</p>"
-        },
-        {
-          "Title": "How will I be compensated?",
-          "Answer": "<p class=\"faq-paragraph\">Upon completion of the study, you will be compensated up to $270.</p>"
-        },
-        {
-          "Title": "Do I have to be medically diagnosed with an atypical circadian rhythm?",
-          "Answer": "<p class=\"faq-paragraph\">Yes, at this time you do need to be diagnosed with an atypical circadian rhythm or circadian rhythm disorder in order to participate in this study.</p>"
-        },
-        {
-          "Title": "I’m a part-time student, am I eligible to join?",
-          "Answer": "<p class=\"faq-paragraph\">Unfortunately, part-time students are not eligible to join.</p>"
-        },
-        {
-          "Title": "What are the possible risks and benefits to me?",
-          "Answer": "<p class=\"faq-paragraph\">There are no direct benefits to you as an individual. However, we will return your dim light melatonin onset results and your food logging in the form of a report. These will provide you with insight into your natural bedtime, sleep habits, morning/evening preference, and diet. You will also receive updates on the study via a newsletter. You will help contribute to research within an understudied population. We hope this study will help us better understand atypical circadian rhythms. Specifically, whether there are changes in genes. These changes in genes may be linked or lead to atypical circadian rhythms. This knowledge may help us find therapies and better diagnostics for atypical circadian rhythms.</p><p class=\"faq-paragraph\">The risks associated with this study are minimal and can include: sleep loss, gum sensitivity, skin irritation from wearable technology, side effects due to refraining from certain substances (alcohol, nicotine, caffeine, recreational drugs, certain foods, and/or melatonin), loss of confidentiality, and risks from the optional blood draw.</p>"
-        },
-        {
-          "Title": "Do I need access to my own laptop, phone, wifi, etc?",
-          "Answer": "<p class=\"faq-paragraph\">One of our study goals is to make this study as accessible as possible. We will provide a smartphone on which you will access our online portal and complete your sleep and food logs. The smartphone will be the main source of study communication during the at-home portion of the study. Prior to receiving the at-home kit, which includes the study smartphone, you will need to complete the screening questionnaires, consent and enrollment, and some study tasks from your own electronic device. This will require you having access to either data or Wi-fi sources, and access to a web browser, to access the study website, materials, and tasks. You will NOT need to download any applications onto your own personal device. Once you have received the at-home study kit, we will ask you to use the study smartphone to complete study tasks. You will need access to local wi-fi networks to use the study smartphone.</p><p class=\"faq-paragraph\">We recognize that not everyone has access to a reliable wi-fi source, or personal electronic device. If you believe this may be an issue for you, please still sign up! We will work to provide you with necessary accommodations to ensure your full participation. Please contact us if you require additional accommodations.</p>"
-        },
-        {
-          "Title": "How will my data be used?",
-          "Answer": "<p class=\"faq-paragraph\">We will use your DNA sample to look for genes that may be linked to atypical circadian rhythms. The questionnaires and dim light saliva collection provide us with background information about your lifestyle and give context to your DNA sample.</p><p class=\"faq-paragraph\">You will be assigned a study number and your data will be coded with this number. Your personal information and any study related information will be kept confidential and secured in a HIPPA compliant database. All information will be deidentified.</p>"
-        },
-        {
-          "Title": "I don’t want to or can’t participate in the study; can I just sign up for the newsletter?",
-          "Answer": "<p class=\"faq-paragraph\">Of course! Please sign up for the newsletter through the study website: circadiastudy.org</p>"
-        },
-        {
-          "Title": "I still have questions/concerns that are unanswered.",
-          "Answer": "<p class=\"faq-paragraph\">We’d be happy to answer any further questions or concerns that you may have about this study. Feel free to email us at <a class=\"link\" href=\"mailto:circadiastudy@mgh.harvard.edu\">circadiastudy@mgh.harvard.edu</a> or call us at <a class=\"link\" href=\"tel:6177267733\">(617) 726-7733</a>.</p><p class=\"faq-paragraph\">Dr. Jacqueline Lane, PhD, is the person in charge of this research study. You can call her at <a class=\"link\" href=\"tel:7166433067\">617-643-3067</a> (Monday through Friday, 9AM-5PM) or email her at <a class=\"link\" href=\"mailto:lane@chgr.mgh.harvard.edu\">lane@chgr.mgh.harvard.edu</a>.</p><p class=\"faq-paragraph\">The Circadia research study uses unencrypted email messages. Unencrypted email messages are not secure and could result in the unauthorized use or disclosure of your information. If you want to receive communications by unencrypted email despite these risks, Partners HealthCare will not be held responsible. Your preference to receive unencrypted email will apply to emails sent from this research group/study only.</p>"
+    "Common": {
+        "Buttons": {
+            "Submit": "Submit"
         }
-      ]
     },
-    "Team": {
-      "Title": "Meet the Team",
-      "Members": [
-        {
-          "Bio": "Dr. Lane has a long-standing commitment to utilize genetics to understand the mechanisms and causal links of common traits and disease. Her goal is to identify new causal genetic factors for circadian rhythm disorders and elucidate biological pathways underlying circadian regulation.",
-          "ImageUrl": "/assets/img/team/dr-lane.jpeg"
-        },
-        {
-          "Bio": "Irma is a research coordinator for the Circadia research study and has spent several years working in genetics research related to circadian rhythms and sleep. She is excited to study circadian rhythm disorders through the Circadia research study.",
-          "ImageUrl": "/assets/img/team/irma.jpg"
-        }
-      ]
-    }
-  },
-  "LoginLandingPage": {
-    "Message": "Please wait until you are redirected..."
-  },
-  "ErrorPage": {
-    "Title": "Error",
-    "Description": "Something went wrong on our side, please try again"
-  },
-  "PasswordPage": {
-    "Title": "Please enter the password",
-    "Placeholder": "Password",
-    "Errors": {
-      "Invalid": "Password is required",
-      "Wrong": "Password you provided is incorrect",
-      "Communication": "We're sorry, but an error has occured. Please try again."
-    }
-  },
-  "DashboardPage": {
-    "Title": "Dashboard"
-  },
-  "UserActivities": {
     "Header": {
-      "Name": "Name",
-      "Summary": "Summary",
-      "Status": "Status",
-      "Actions": "Actions"
-    },
-    "Statuses": {
-      "Created": "Not started",
-      "InProgress": "In progress",
-      "Complete": "Complete"
-    },
-    "Actions": {
-      "Start": "Start",
-      "Continue": "Continue",
-      "View": "View",
-      "Schedule": "Schedule"
-    }
-  },
-  "SessionWillExpire": {
-    "Title": "Your session will time-out soon",
-    "TimeLeft": "Time left: {{ timeLeft }}",
-    "RenewalFailed": "Session renewal failed. Please log out and log back in again.",
-    "Paragraph": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
-    "SignOut": "Sign Out",
-    "Continue": "Continue"
-  },
-  "SessionExpired": {
-    "Title": "Session has expired",
-    "Description": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on.",
-    "Button": "Login"
-  },
-  "MailingListModal": {
-    "Title": "Stay Informed",
-    "Paragraph": "Please, provide your email below and we'll keep you up-to-date on developments. You can unsubscribe at any time.",
-    "Form": {
-      "Fields": {
-        "FirstName": {
-          "Label": "First name *"
-        },
-        "LastName": {
-          "Label": "Last name *"
-        },
-        "Email": {
-          "Label": "Email address *"
-        },
-        "EmailConfirmation": {
-          "Label": "Email confirmation *"
+        "Links": {
+            "Home": "Home",
+            "About": "About the Study",
+            "Participation": "Participation",
+            "FAQ": "FAQ",
+            "Team": "Meet the Team",
+            "SignUp": "Sign Up",
+            "Dashboard": "Dashboard"
         }
-      },
-      "Buttons": {
-        "Cancel": "Cancel",
-        "Join": "Join"
-      },
-      "Errors": {
-        "Required": "Field is required",
-        "EmailNotValid": "Provided email is not a valid email address",
-        "FieldsDoNotMatch": "Provided emails do not match"
-      }
-    }
-  },
-  "StayInformed": {
-    "Title": "Stay Informed",
-    "Paragraph": "Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the study, please email <a class=\"text-link\" href=\"mailto:circadiastudy@mgh.harvard.edu\">circadiastudy@mgh.harvard.edu</a>.",
-    "Button": "Back to home"
-  },
-  "Toolkit": {
-    "Dashboard": {
-      "Title": "Dashboard",
-      "Invitation": {
-        "InvitationCode": "Invitation Code:",
-        "Message": "Please use the look-up tool to manage a participant.",
-        "Button": "Go"
-      }
     },
-    "Password": {
-      "Title": "Please enter the password",
-      "Text": "Please enter your password *",
-      "InputPlaceholder": "Password",
-      "PasswordWrongError": "Incorrect password. Please try again.",
-      "OtherError": "We're sorry, but an error has occurred. Please try again.",
-      "PasswordRequiredError": "Password is required"
+    "Footer": {
+        "Circadia": {
+            "Title": "Circadia",
+            "Home": "Home",
+            "About": "About the Study",
+            "FAQ": "FAQ",
+            "Team": "Meet the Team",
+            "StayInformed": "Stay Informed",
+            "PrivacyPolicy": "Privacy Policy"
+        },
+        "ContactUs": {
+            "Title": "Contact Us"
+        },
+        "Participation": {
+            "Title": "Participation",
+            "SignUp": "Sign Up"
+        }
+    },
+    "HomePage": {
+        "Cta": {
+            "Title": "Circadia is an online research study to understand circadian rhythm disorders",
+            "Description": "We're looking for people living with circadian rhythm disorders to join our completely remote, at-home study.",
+            "JoinBtn": "Join the Circadia Study",
+            "DashboardBtn": "Go to Dashboard"
+        },
+        "About": {
+            "Title": "About the Study",
+            "Paragraph": "The Circadia research study is focused on better understanding the genetics of circadian rhythm disorders. Circadian rhythms are an integral part of our functioning, regulating and syncing our human behavior and physiology with the external environment and the 24-hour day. While research has been able to identify core components of our molecular circadian clock, much is still unknown about the genetics and physiological mechanisms driving our circadian rhythms."
+        },
+        "Participation": {
+            "Title": "Participation",
+            "Description": "To participate in this study you will first need to complete our online screening questionnaire. The online screening questionnaire will allow us to check that you are eligible to participate in the Circadia research study. To complete the questionnaire, please use the Sign-Up button located at the top right of the screen.",
+            "Subtitle": "Quick facts",
+            "Duration": "<span class=\"semibold\">Study duration:</span> Approximately 6 weeks",
+            "Provided": "<span class=\"semibold\">We provide:</span> Monetary compensation, up to $200; all study material is provided",
+            "Activities": "<span class=\"semibold\">Activities:</span> Completing sample DNA kits; journaling about sleep, meals, and mood; wearing a biosensor to track sleep patterns and daily activity"
+        },
+        "FAQ": {
+            "Title": "Frequently Asked Questions",
+            "Description": "If your question is not answered below, you can call or email our study staff at <a class=\"link\" href=\"tel:18572656742\">1 (857) 265-6742</a> or <a class=\"link\" href=\"mailto:circadiastudy@mgh.harvard.edu\">circadiastudy@mgh.harvard.edu</a>.",
+            "Questions": [
+                {
+                    "Title": "How long does the study take?",
+                    "Answer": "<p class=\"faq-paragraph\">The study takes approximately 6 weeks to complete. It’s home based and self-directed, meaning you can fit it to your schedule and complete from the comfort of your home, without needing to visit our research office.</p>"
+                },
+                {
+                    "Title": "What will I need to do?",
+                    "Answer": "<p class=\"faq-paragraph\">For the Circadia study we will ask you to fill out questionnaires, provide a saliva DNA sample, wear a wrist activity monitor (similar to a Fitbit), keep daily sleep and food logs, and collect saliva samples in dim light. There is also an optional blood draw that can be scheduled if you are local to the New England region and are interested in providing the blood draw.</p>"
+                },
+                {
+                    "Title": "How will I be compensated?",
+                    "Answer": "<p class=\"faq-paragraph\">Upon completion of the study, you will be compensated up to $270.</p>"
+                },
+                {
+                    "Title": "Do I have to be medically diagnosed with an atypical circadian rhythm?",
+                    "Answer": "<p class=\"faq-paragraph\">Yes, at this time you do need to be diagnosed with an atypical circadian rhythm or circadian rhythm disorder in order to participate in this study.</p>"
+                },
+                {
+                    "Title": "I’m a part-time student, am I eligible to join?",
+                    "Answer": "<p class=\"faq-paragraph\">Unfortunately, part-time students are not eligible to join.</p>"
+                },
+                {
+                    "Title": "What are the possible risks and benefits to me?",
+                    "Answer": "<p class=\"faq-paragraph\">There are no direct benefits to you as an individual. However, we will return your dim light melatonin onset results and your food logging in the form of a report. These will provide you with insight into your natural bedtime, sleep habits, morning/evening preference, and diet. You will also receive updates on the study via a newsletter. You will help contribute to research within an understudied population. We hope this study will help us better understand atypical circadian rhythms. Specifically, whether there are changes in genes. These changes in genes may be linked or lead to atypical circadian rhythms. This knowledge may help us find therapies and better diagnostics for atypical circadian rhythms.</p><p class=\"faq-paragraph\">The risks associated with this study are minimal and can include: sleep loss, gum sensitivity, skin irritation from wearable technology, side effects due to refraining from certain substances (alcohol, nicotine, caffeine, recreational drugs, certain foods, and/or melatonin), loss of confidentiality, and risks from the optional blood draw.</p>"
+                },
+                {
+                    "Title": "Do I need access to my own laptop, phone, wifi, etc?",
+                    "Answer": "<p class=\"faq-paragraph\">One of our study goals is to make this study as accessible as possible. We will provide a smartphone on which you will access our online portal and complete your sleep and food logs. The smartphone will be the main source of study communication during the at-home portion of the study. Prior to receiving the at-home kit, which includes the study smartphone, you will need to complete the screening questionnaires, consent and enrollment, and some study tasks from your own electronic device. This will require you having access to either data or Wi-fi sources, and access to a web browser, to access the study website, materials, and tasks. You will NOT need to download any applications onto your own personal device. Once you have received the at-home study kit, we will ask you to use the study smartphone to complete study tasks. You will need access to local wi-fi networks to use the study smartphone.</p><p class=\"faq-paragraph\">We recognize that not everyone has access to a reliable wi-fi source, or personal electronic device. If you believe this may be an issue for you, please still sign up! We will work to provide you with necessary accommodations to ensure your full participation. Please contact us if you require additional accommodations.</p>"
+                },
+                {
+                    "Title": "How will my data be used?",
+                    "Answer": "<p class=\"faq-paragraph\">We will use your DNA sample to look for genes that may be linked to atypical circadian rhythms. The questionnaires and dim light saliva collection provide us with background information about your lifestyle and give context to your DNA sample.</p><p class=\"faq-paragraph\">You will be assigned a study number and your data will be coded with this number. Your personal information and any study related information will be kept confidential and secured in a HIPPA compliant database. All information will be deidentified.</p>"
+                },
+                {
+                    "Title": "I don’t want to or can’t participate in the study; can I just sign up for the newsletter?",
+                    "Answer": "<p class=\"faq-paragraph\">Of course! Please sign up for the newsletter through the study website: circadiastudy.org</p>"
+                },
+                {
+                    "Title": "I still have questions/concerns that are unanswered.",
+                    "Answer": "<p class=\"faq-paragraph\">We’d be happy to answer any further questions or concerns that you may have about this study. Feel free to email us at <a class=\"link\" href=\"mailto:circadiastudy@mgh.harvard.edu\">circadiastudy@mgh.harvard.edu</a> or call us at <a class=\"link\" href=\"tel:18572656742\">+1 (857) 265-6742</a>.</p><p class=\"faq-paragraph\">Dr. Jacqueline Lane, PhD, is the person in charge of this research study. You can call her at <a class=\"link\" href=\"tel:7166433067\">617-643-3067</a> (Monday through Friday, 9AM-5PM) or email her at <a class=\"link\" href=\"mailto:lane@chgr.mgh.harvard.edu\">lane@chgr.mgh.harvard.edu</a>.</p><p class=\"faq-paragraph\">The Circadia research study uses unencrypted email messages. Unencrypted email messages are not secure and could result in the unauthorized use or disclosure of your information. If you want to receive communications by unencrypted email despite these risks, Partners HealthCare will not be held responsible. Your preference to receive unencrypted email will apply to emails sent from this research group/study only.</p>"
+                }
+            ]
+        },
+        "Team": {
+            "Title": "Meet the Team",
+            "Members": [
+                {
+                    "Bio": "Dr. Lane has a long-standing commitment to utilize genetics to understand the mechanisms and causal links of common traits and disease. Her goal is to identify new causal genetic factors for circadian rhythm disorders and elucidate biological pathways underlying circadian regulation. Dr. Lane is committed to making research accessible to all lowering barriers whenever possible.",
+                    "ImageUrl": "/assets/img/team/dr-lane.jpeg"
+                },
+                {
+                    "Bio": "Gregory is a research coordinator for the Circadia Study. He is passionate about equitable, inclusive genetics and circadian research that can help improve health outcomes for all people. He is excited to work closely with the participants of the Circadia Study to learn more about circadian rhythms.",
+                    "ImageUrl": "/assets/img/team/gregory.png"
+                }
+            ]
+        },
+        "FormerTeam": {
+            "Title": "Former Team Members",
+            "Members": [
+                {
+                    "Bio": "Irma is a former research coordinator for the Circadia Study. She spent several years working in genetics research related to circadian rhythms and sleep, and she is now pursuing a PhD in the Molecular and Cellular Biology Program at Dartmouth College as part of the Dartmouth Guarini School of Graduate and Advanced Studies. Irma helped develop the Circadia Study from its very beginning, and she did incredible work to create the study you see today. We cannot thank her enough for her efforts.",
+                    "ImageUrl": "/assets/img/team/irma.jpg"
+                }
+            ]
+        }
+    },
+    "LoginLandingPage": {
+        "Message": "Please wait until you are redirected..."
     },
     "ErrorPage": {
-      "Title": "We've encountered an error",
-      "Text": "We're sorry, but an error has occurred.",
-      "DefaultText": {
-        "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
-        "TextPt2": "or call us at"
-      }
+        "Title": "Error",
+        "Description": "Something went wrong on our side, please try again"
     },
-    "SessionExpired": {
-      "Text": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
+    "PasswordPage": {
+        "Title": "Please enter the password",
+        "Placeholder": "Password",
+        "Errors": {
+            "Invalid": "Password is required",
+            "Wrong": "Password you provided is incorrect",
+            "Communication": "We're sorry, but an error has occured. Please try again."
+        }
     },
-    "Dialogs": {
-      "SessionWillExpire": {
-        "Title": "Your session will time-out soon",
-        "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
-        "SignOut": "Sign Out",
-        "Continue": "Continue",
-        "RenewalFailed": "Session renewal failed. Please log out and log back in again."
-      }
-    }
-  },
-  "SDK": {
-    "SubmitButton": "Submit",
-    "CloseButton": "Close",
-    "AddButton": "ADD",
-    "CancelButton": "CANCEL",
-    "NextButton": "Next",
-    "PreviousButton": "Back",
-    "SavingButton": "Saving",
-    "EditButton": "Continue",
-    "CompleteButton": "Edit",
-    "ReviewButton": "View",
-    "OpenButton": "Open",
-    "StartButton": "Start",
-    "AgreeButton": "I agree",
-    "ReportButton": "Report",
-    "NotAgreeButton": "I'm not ready to agree",
-    "ValidateError": "Please complete all required fields.",
-    "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
-    "SaveError": "We're sorry but an error occurred",
-    "ExportStudy": {
-      "Export": "EXPORT"
-    },
-    "ListStudies": {
-      "StudyName": "Study Name",
-      "ParticipantCount": "Participant Count"
-    },
-    "ListWorkspaces": {
-      "WorkspaceName": "Workspace Name",
-      "WorkspaceNamespace": "Workspace Namespace"
-    },
-    "Login": {
-      "Login": "LOG IN",
-      "Logout": "LOG OUT"
-    },
-    "SignInOut": {
-      "SignIn": "Sign In",
-      "SignOut": "Sign Out"
-    },
-    "LanguageSelector": {
-      "LanguageSelection": "language selection"
+    "DashboardPage": {
+        "Title": "Dashboard"
     },
     "UserActivities": {
-      "ActivityName": "Form",
-      "Summary": "Summary",
-      "ActivityStatus": "Status",
-      "ActivityDate": "Created",
-      "ActivityActions": "Actions",
-      "ActivityQuestionCount": "{{questionsAnswered}} of {{questionTotal}} Answered",
-      "HiddenTooltip": "This activity is hidden."
-    },
-    "ManageParticipants": {
-      "GovernedParticipants": "Governed participants",
-      "ParticipantPlaceholder": "Participant",
-      "ParticipantsList": "Participants"
-    },
-    "ParticipantProfile": {
-      "OpenProfile": "Profile",
-      "ViewAs": "View As",
-      "ManageParticipants": "Manage participants"
-    },
-    "UserPreferences": {
-      "UserPreferencesTitle": "User preferences",
-      "UserPreferencesGender": "Sex",
-      "UserPreferencesLocale": "Preferred language"
-    },
-    "Dashboard": {
-      "Title": "My Dashboard",
-      "Text": "The dashboard below describes each Circadia form and its status."
-    },
-    "DatePicker": {
-      "Day": "Choose day...",
-      "Month": "Choose month...",
-      "Year": "Choose year...",
-      "January": "January",
-      "February": "February",
-      "March": "March",
-      "April": "April",
-      "May": "May",
-      "June": "June",
-      "July": "July",
-      "August": "August",
-      "September": "September",
-      "October": "October",
-      "November": "November",
-      "December": "December"
-    },
-    "DateLabel": {
-      "YYYY": "YYYY",
-      "MM": "MM",
-      "DD": "DD"
-    },
-    "UserMenu": {
-      "DashboardButton": "Dashboard",
-      "SignOutButton": "Sign Out"
-    },
-    "DetailsPlaceholder": {
-      "PluralForm": "characters remaining",
-      "SingularForm": "character remaining"
-    },
-    "Title": {
-      "Default": "Circadia",
-      "Alert": "Your session will time-out soon"
-    },
-    "EmailEntry": {
-      "InvalidEmail": "Please enter a valid email"
-    },
-    "Institutions": {
-      "Fields": {
-        "Name": "Physician Name",
-        "Institution": "Institution",
-        "InstitutionAny": "Institution (if any)",
-        "City": "City",
-        "State": "State"
-      },
-      "Form": {
-        "OtherPhysician": "Other physician",
-        "OtherInstitution": "Other institution"
-      },
-      "PhysicianValidation": "Please fill out all required fields"
-    },
-    "MailAddress": {
-      "Fields": {
-        "Name": "Full Name",
-        "Country": "Country/Territory",
-        "Street1": "Street Address",
-        "Street2": "Apt/Floor #",
-        "State": {
-          "State": "State",
-          "Province": "Province",
-          "State/Province/Region": "State/Province/Region"
+        "Header": {
+            "Name": "Name",
+            "Summary": "Summary",
+            "Status": "Status",
+            "Actions": "Actions"
         },
-        "City": "City",
-        "Phone": "Phone",
-        "Zip": {
-          "Zip Code": "Zip Code",
-          "Postal Code": "Postal Code",
-          "Zip/Postal Code": "Zip/Postal Code"
+        "Statuses": {
+            "Created": "Not started",
+            "InProgress": "In progress",
+            "Complete": "Complete"
         },
-        "Choose": "Choose {{field}} ..."
-      },
-      "Suggestion": {
-        "Title": "We have checked your address entry and have suggested changes that could help ensure delivery.",
-        "Subtitle": "Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
-        "Suggested": "Suggested:",
-        "AsEntered": "As Entered:"
-      },
-      "Error": {
-        "InvalidAddress": "Invalid address.",
-        "CannotVerify": "Could not verify address, please double-check your address.",
-        "UnknownVerifyError": "An unknown error occurred while verifying address.",
-        "FieldIsRequired": "{{field}} is required",
-        "FieldIsInvalid": "{{field}} has an invalid value",
-        "InvalidHouseNumber": "Street number could not be found",
-        "INTERNAL_SERVER_ERROR": "We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
-        "NOT_ACCEPTABLE": "The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
-        "NOT_FOUND": "The requested resource could not be found.",
-        "FORBIDDEN": "Unable to access the requested resource.",
-        "PAYMENT_REQUIRED": "Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
-        "UNAUTHORIZED": "Unable to access the requested resource, authorization failed.",
-        "BAD_REQUEST": "Malformed request. Please check the contents and retry.",
-        "PAYMENT_GATEWAY.ERROR": "The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
-        "MODE.UNAUTHORIZED": "This resource requires a production API Key to access.",
-        "MODE.CONFLICT": "API Key mode conflicted with parameter mode.",
-        "DATE.PARSE.FAILURE": "At least one date was formatted incorrectly and could not be parsed.",
-        "PARAMETER.FORBIDDEN": "The request could not be completed due to forbidden properties present in the parameters.",
-        "PARAMETER.REQUIRED": "Missing required parameter.",
-        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "The parameters passed contained an invalid character.",
-        "ADDRESS.PARAMETERS.INVALID": "The parameters passed to create an Address were missing or invalid.",
-        "ADDRESS.COUNTRY.INVALID": "Invalid 'country', please provide a 2 character ISO country code.",
-        "ADDRESS.VERIFICATION.NOT_FOUND": "Address Not Found.",
-        "ADDRESS.VERIFICATION.FAILURE": "The address was unable to be verified.",
-        "ADDRESS.VERIFY.UNAVAILABLE": "Address verification is not available. Please try again.",
-        "ADDRESS.VERIFICATION.INVALID": "One of the verifications selected is invalid.",
-        "ADDRESS.VERIFY.FAILURE": "Unable to verify address.",
-        "ADDRESS.VERIFY.CARRIER_INVALID": "Unable to verify address using provided carrier.",
-        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "Address verification is not available due to an upstream service not responding. Please try again.",
-        "ADDRESS.VERIFY.ONLY_US": "USPS can only validate US addresses.",
-        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "International Verification not enabled on this account. Please contact support@easypost.com.",
-        "ADDRESS.VERIFY.MISSING_STREET": "Insufficient address data provided. A street must be provided.",
-        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Insufficient address data provided. A city and state or a zip must be provided.",
-        "E.COUNTRY.UNSUPPORTED": "This country is not supported in this mode. Try in production mode.",
-        "E.ENGINE.UNAVAILABLE": "No verification engine is available to service this country. Please try again later.",
-        "E.QUERY.UNANSWERABLE": "We can not provide enough data in this country to satisfy this request. Please try again later.",
-        "E.ADDRESS.NOT_FOUND": "We could not find the entered address.",
-        "E.SECONDARY_INFORMATION.INVALID": "Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
-        "E.SECONDARY_INFORMATION.MISSING": "Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
-        "E.HOUSE_NUMBER.MISSING": "House number is missing.",
-        "E.HOUSE_NUMBER.INVALID": "We could not find the street number provided.",
-        "E.STREET.MISSING": "Street is missing.",
-        "E.STREET.INVALID": "Street is invalid.",
-        "E.BOX_NUMBER.MISSING": "Box number is missing.",
-        "E.BOX_NUMBER.INVALID": "Box number is invalid.",
-        "E.ADDRESS.INVALID": "Invalid city/state/ZIP.",
-        "E.ZIP.NOT_FOUND": "Zip not found.",
-        "E.ZIP.INVALID": "Zip invalid.",
-        "E.ZIP.PLUS4.NOT_FOUND": "Zip + 4 not found.",
-        "E.ADDRESS.MULTIPLE": "Multiple addresses were returned with the same zip.",
-        "E.ADDRESS.INSUFFICIENT": "Insufficient/incorrect address data.",
-        "E.ADDRESS.DUAL": "Dual address.",
-        "E.STREET.MAGNET": "Street address is ambiguous.",
-        "E.CITY_STATE.INVALID": "Unverifiable city / state.",
-        "E.STATE.INVALID": "Invalid State.",
-        "E.ADDRESS.DELIVERY.INVALID": "Invalid delivery address.",
-        "E.TIMED_OUT": "Exceeded max timeout.",
-        "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
-        "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
-      }
+        "Actions": {
+            "Start": "Start",
+            "Continue": "Continue",
+            "View": "View",
+            "Schedule": "Schedule"
+        },
+        "MiniSleepLogStatuses": {
+            "Created": "New",
+            "Complete": "Complete"
+        },
+        "MiniSleepLogSummary": {
+            "Created": "Please complete your daily sleep logging.",
+            "Complete": "Thank you for completing today's sleep log."
+        }
     },
-    "TooltipAlt": "Information",
-    "SubjectPanel": {
-      "Link": "Return to subject look-up",
-      "Text": "Subject Invitation Code: "
+    "SessionWillExpire": {
+        "Title": "Your session will time-out soon",
+        "TimeLeft": "Time left: {{ timeLeft }}",
+        "RenewalFailed": "Session renewal failed. Please log out and log back in again.",
+        "Paragraph": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+        "SignOut": "Sign Out",
+        "Continue": "Continue"
     },
-    "AdminActionPanel": {
-      "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
-      "EditButton": "Edit"
+    "SessionExpired": {
+        "Title": "Session has expired",
+        "Description": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on.",
+        "Button": "Login"
     },
-    "Validators": {
-      "DateNavyValidationRule": "Entered date is invalid"
+    "MailingListModal": {
+        "Title": "Stay Informed",
+        "Paragraph": "Please, provide your email below and we'll keep you up-to-date on developments. You can unsubscribe at any time.",
+        "Form": {
+            "Fields": {
+                "FirstName": {
+                    "Label": "First name *"
+                },
+                "LastName": {
+                    "Label": "Last name *"
+                },
+                "Email": {
+                    "Label": "Email address *"
+                },
+                "EmailConfirmation": {
+                    "Label": "Email confirmation *"
+                }
+            },
+            "Buttons": {
+                "Cancel": "Cancel",
+                "Join": "Join"
+            },
+            "Errors": {
+                "Required": "Field is required",
+                "EmailNotValid": "Provided email is not a valid email address",
+                "FieldsDoNotMatch": "Provided emails do not match"
+            }
+        }
+    },
+    "StayInformed": {
+        "Title": "Stay Informed",
+        "Paragraph": "Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the study, please email <a class=\"text-link\" href=\"mailto:circadiastudy@mgh.harvard.edu\">circadiastudy@mgh.harvard.edu</a>.",
+        "Button": "Back to home"
+    },
+    "Toolkit": {
+        "Dashboard": {
+            "Title": "Dashboard",
+            "Invitation": {
+                "InvitationCode": "Invitation Code:",
+                "Message": "Please use the look-up tool to manage a participant.",
+                "Button": "Go"
+            }
+        },
+        "Password": {
+            "Title": "Please enter the password",
+            "Text": "Please enter your password *",
+            "InputPlaceholder": "Password",
+            "PasswordWrongError": "Incorrect password. Please try again.",
+            "OtherError": "We're sorry, but an error has occurred. Please try again.",
+            "PasswordRequiredError": "Password is required"
+        },
+        "ErrorPage": {
+            "Title": "We've encountered an error",
+            "Text": "We're sorry, but an error has occurred.",
+            "DefaultText": {
+                "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
+                "TextPt2": "or call us at"
+            }
+        },
+        "SessionExpired": {
+            "Text": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
+        },
+        "Dialogs": {
+            "SessionWillExpire": {
+                "Title": "Your session will time-out soon",
+                "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+                "SignOut": "Sign Out",
+                "Continue": "Continue",
+                "RenewalFailed": "Session renewal failed. Please log out and log back in again."
+            }
+        }
+    },
+    "SDK": {
+        "SubmitButton": "Submit",
+        "CloseButton": "Close",
+        "AddButton": "ADD",
+        "CancelButton": "CANCEL",
+        "NextButton": "Next",
+        "PreviousButton": "Back",
+        "SavingButton": "Saving",
+        "EditButton": "Continue",
+        "CompleteButton": "Edit",
+        "ReviewButton": "View",
+        "OpenButton": "Open",
+        "StartButton": "Start",
+        "AgreeButton": "I agree",
+        "ReportButton": "Report",
+        "NotAgreeButton": "I'm not ready to agree",
+        "ValidateError": "Please complete all required fields.",
+        "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
+        "SaveError": "We're sorry but an error occurred",
+        "ExportStudy": {
+            "Export": "EXPORT"
+        },
+        "ListStudies": {
+            "StudyName": "Study Name",
+            "ParticipantCount": "Participant Count"
+        },
+        "ListWorkspaces": {
+            "WorkspaceName": "Workspace Name",
+            "WorkspaceNamespace": "Workspace Namespace"
+        },
+        "Login": {
+            "Login": "LOG IN",
+            "Logout": "LOG OUT"
+        },
+        "SignInOut": {
+            "SignIn": "Sign In",
+            "SignOut": "Sign Out"
+        },
+        "LanguageSelector": {
+            "LanguageSelection": "language selection"
+        },
+        "UserActivities": {
+            "ActivityName": "Form",
+            "Summary": "Summary",
+            "ActivityStatus": "Status",
+            "ActivityDate": "Created",
+            "ActivityActions": "Actions",
+            "ActivityQuestionCount": "{{questionsAnswered}} of {{questionTotal}} Answered",
+            "HiddenTooltip": "This activity is hidden."
+        },
+        "ManageParticipants": {
+            "GovernedParticipants": "Governed participants",
+            "ParticipantPlaceholder": "Participant",
+            "ParticipantsList": "Participants"
+        },
+        "ParticipantProfile": {
+            "OpenProfile": "Profile",
+            "ViewAs": "View As",
+            "ManageParticipants": "Manage participants"
+        },
+        "UserPreferences": {
+            "UserPreferencesTitle": "User preferences",
+            "UserPreferencesGender": "Sex"
+        },
+        "Dashboard": {
+            "Title": "My Dashboard",
+            "Text": "The dashboard below describes each Circadia form and its status."
+        },
+        "DatePicker": {
+            "Day": "Choose day...",
+            "Month": "Choose month...",
+            "Year": "Choose year...",
+            "January": "January",
+            "February": "February",
+            "March": "March",
+            "April": "April",
+            "May": "May",
+            "June": "June",
+            "July": "July",
+            "August": "August",
+            "September": "September",
+            "October": "October",
+            "November": "November",
+            "December": "December"
+        },
+        "DateLabel": {
+            "YYYY": "YYYY",
+            "MM": "MM",
+            "DD": "DD"
+        },
+        "UserMenu": {
+            "DashboardButton": "Dashboard",
+            "SignOutButton": "Sign Out"
+        },
+        "DetailsPlaceholder": {
+            "PluralForm": "characters remaining",
+            "SingularForm": "character remaining"
+        },
+        "Title": {
+            "Default": "Circadia",
+            "Alert": "Your session will time-out soon"
+        },
+        "EmailEntry": {
+            "InvalidEmail": "Please enter a valid email"
+        },
+        "Institutions": {
+            "Fields": {
+                "Name": "Physician Name",
+                "Institution": "Institution",
+                "InstitutionAny": "Institution (if any)",
+                "City": "City",
+                "State": "State"
+            },
+            "Form": {
+                "OtherPhysician": "Other physician",
+                "OtherInstitution": "Other institution"
+            },
+            "PhysicianValidation": "Please fill out all required fields"
+        },
+        "MailAddress": {
+            "Fields": {
+                "Name": "Full Name",
+                "Country": "Country/Territory",
+                "Street1": "Street Address",
+                "Street2": "Apt/Floor #",
+                "State": {
+                    "State": "State",
+                    "Province": "Province",
+                    "State/Province/Region": "State/Province/Region"
+                },
+                "City": "City",
+                "Phone": "Phone",
+                "Zip": {
+                    "Zip Code": "Zip Code",
+                    "Postal Code": "Postal Code",
+                    "Zip/Postal Code": "Zip/Postal Code"
+                },
+                "Choose": "Choose {{field}} ..."
+            },
+            "Suggestion": {
+                "Title": "We have checked your address entry and have suggested changes that could help ensure delivery.",
+                "Subtitle": "Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
+                "Suggested": "Suggested:",
+                "AsEntered": "As Entered:"
+            },
+            "Error": {
+                "InvalidAddress": "Invalid address.",
+                "CannotVerify": "Could not verify address, please double-check your address.",
+                "UnknownVerifyError": "An unknown error occurred while verifying address.",
+                "FieldIsRequired": "{{field}} is required",
+                "FieldIsInvalid": "{{field}} has an invalid value",
+                "InvalidHouseNumber": "Street number could not be found",
+                "INTERNAL_SERVER_ERROR": "We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
+                "NOT_ACCEPTABLE": "The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
+                "NOT_FOUND": "The requested resource could not be found.",
+                "FORBIDDEN": "Unable to access the requested resource.",
+                "PAYMENT_REQUIRED": "Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
+                "UNAUTHORIZED": "Unable to access the requested resource, authorization failed.",
+                "BAD_REQUEST": "Malformed request. Please check the contents and retry.",
+                "PAYMENT_GATEWAY.ERROR": "The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
+                "MODE.UNAUTHORIZED": "This resource requires a production API Key to access.",
+                "MODE.CONFLICT": "API Key mode conflicted with parameter mode.",
+                "DATE.PARSE.FAILURE": "At least one date was formatted incorrectly and could not be parsed.",
+                "PARAMETER.FORBIDDEN": "The request could not be completed due to forbidden properties present in the parameters.",
+                "PARAMETER.REQUIRED": "Missing required parameter.",
+                "ADDRESS.PARAMETERS.INVALID_CHARACTER": "The parameters passed contained an invalid character.",
+                "ADDRESS.PARAMETERS.INVALID": "The parameters passed to create an Address were missing or invalid.",
+                "ADDRESS.COUNTRY.INVALID": "Invalid 'country', please provide a 2 character ISO country code.",
+                "ADDRESS.VERIFICATION.NOT_FOUND": "Address Not Found.",
+                "ADDRESS.VERIFICATION.FAILURE": "The address was unable to be verified.",
+                "ADDRESS.VERIFY.UNAVAILABLE": "Address verification is not available. Please try again.",
+                "ADDRESS.VERIFICATION.INVALID": "One of the verifications selected is invalid.",
+                "ADDRESS.VERIFY.FAILURE": "Unable to verify address.",
+                "ADDRESS.VERIFY.CARRIER_INVALID": "Unable to verify address using provided carrier.",
+                "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "Address verification is not available due to an upstream service not responding. Please try again.",
+                "ADDRESS.VERIFY.ONLY_US": "USPS can only validate US addresses.",
+                "ADDRESS.VERIFY.INTL_NOT_ENABLED": "International Verification not enabled on this account. Please contact support@easypost.com.",
+                "ADDRESS.VERIFY.MISSING_STREET": "Insufficient address data provided. A street must be provided.",
+                "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Insufficient address data provided. A city and state or a zip must be provided.",
+                "E.COUNTRY.UNSUPPORTED": "This country is not supported in this mode. Try in production mode.",
+                "E.ENGINE.UNAVAILABLE": "No verification engine is available to service this country. Please try again later.",
+                "E.QUERY.UNANSWERABLE": "We can not provide enough data in this country to satisfy this request. Please try again later.",
+                "E.ADDRESS.NOT_FOUND": "We could not find the entered address.",
+                "E.SECONDARY_INFORMATION.INVALID": "Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+                "E.SECONDARY_INFORMATION.MISSING": "Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+                "E.HOUSE_NUMBER.MISSING": "House number is missing.",
+                "E.HOUSE_NUMBER.INVALID": "We could not find the street number provided.",
+                "E.STREET.MISSING": "Street is missing.",
+                "E.STREET.INVALID": "Street is invalid.",
+                "E.BOX_NUMBER.MISSING": "Box number is missing.",
+                "E.BOX_NUMBER.INVALID": "Box number is invalid.",
+                "E.ADDRESS.INVALID": "Invalid city/state/ZIP.",
+                "E.ZIP.NOT_FOUND": "Zip not found.",
+                "E.ZIP.INVALID": "Zip invalid.",
+                "E.ZIP.PLUS4.NOT_FOUND": "Zip + 4 not found.",
+                "E.ADDRESS.MULTIPLE": "Multiple addresses were returned with the same zip.",
+                "E.ADDRESS.INSUFFICIENT": "Insufficient/incorrect address data.",
+                "E.ADDRESS.DUAL": "Dual address.",
+                "E.STREET.MAGNET": "Street address is ambiguous.",
+                "E.CITY_STATE.INVALID": "Unverifiable city / state.",
+                "E.STATE.INVALID": "Invalid State.",
+                "E.ADDRESS.DELIVERY.INVALID": "Invalid delivery address.",
+                "E.TIMED_OUT": "Exceeded max timeout.",
+                "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
+                "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+            }
+        },
+        "TooltipAlt": "Information",
+        "SubjectPanel": {
+            "Link": "Return to subject look-up",
+            "Text": "Subject Invitation Code: "
+        },
+        "AdminActionPanel": {
+            "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+            "EditButton": "Edit"
+        },
+        "Validators": {
+            "DateNavyValidationRule": "Entered date is invalid"
+        }
     }
-  }
 }

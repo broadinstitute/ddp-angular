@@ -122,5 +122,27 @@
         </div>
       </div>
     </ng-container>
+
+    <h2>
+      {{ 'HomePage.FormerTeam.Title' | translate }}
+    </h2>
+
+    <ng-container *ngFor="let Member of 'HomePage.FormerTeam.Members' | translate">
+      <div class="member">
+        <div class="member__img-container">
+          <img
+            class="member__img"
+            [src]="Member.ImageUrl"
+            [alt]="Member.Name + ' image'"
+          />
+        </div>
+
+        <div class="member__info">
+          <p class="member__bio">
+            {{ Member.Bio }}
+          </p>
+        </div>
+      </div>
+    </ng-container>
   </div>
 </section>

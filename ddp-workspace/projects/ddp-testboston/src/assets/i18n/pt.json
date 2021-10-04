@@ -1,635 +1,634 @@
 {
-  "Common": {
-    "Buttons": {
-      "Submit": {
-        "Title": "Submeter",
-        "AriaLabel": "Botão submeter"
-      },
-      "Login": {
-        "Title": "Iniciar sessão",
-        "AriaLabel": "Botão iniciar sessão"
-      }
-    }
-  },
-  "Navigation": {
-    "LogoAlt": "Logótipo TestBoston",
-    "CRCLogoSubtitle": "Interface de apoio ao participante",
-    "Home": "Página inicial",
-    "About": "Acerca do estudo",
-    "Q&A": "Perguntas e respostas",
-    "WhoWeAre": "Quem somos",
-    "StayInformed": "Mantenha-se informado",
-    "Help": "Ajuda",
-    "Dashboard": "O meu painel",
-    "Menu": "Menu",
-    "Invitation": "Código de convite",
-    "Titles": {
-      "TestBoston": "TestBoston",
-      "ContactUs": "Contacte-nos",
-      "Participation": "Participação",
-      "Language": "Idioma"
-    }
-  },
-  "MailingList": {
-    "Title": "Formulário de lista de correio",
-    "Questions": {
-      "Adult": "1. Tem 18 anos ou mais?",
-      "Patient": "2. É doente do Brigham and Women's Hospital?",
-      "Email": "3. Que endereço de e-mail lhe convém mais?"
-    },
-    "Answers": {
-      "Yes": "Sim",
-      "No": "Não",
-      "NoAnswer": "Prefiro não responder"
-    },
-    "Validations": {
-      "RequiredOption": "Selecione uma opção",
-      "RequiredEmail": "Introduza o seu endereço de e-mail",
-      "InvalidEmail": "Introduza um endereço de e-mail válido"
-    },
-    "EmailLabel": "Introduzir endereço de e-mail",
-    "EmailPlaceholder": "exemplo@exemplo.com",
-    "ThankYouBlock": {
-      "Title": "Está tudo pronto!",
-      "Text": "Obrigado por se registar na lista de correio do TestBoston."
-    },
-    "SorryBlock": {
-      "Title": "Lamentamos, mas parece que não é elegível para entrar.",
-      "Text": {
-        "Part1": "Tem de ter 18 anos ou mais para entrar na lista de correio do TestBoston. Leia a nossa secção de",
-        "Part2": "Perguntas Frequentes",
-        "Part3": "para mais informações."
-      }
-    }
-  },
-  "HomePage": {
-    "IntroSection": {
-      "Title": "Queremos ajudar as nossas comunidades e ficar a saber mais sobre os padrões de infeção por COVID-19 na área de Boston.",
-      "Text": "TestBoston é um estudo sobre COVID-19 apoiado pelo Brigham and Women's Hospital e pelo Broad Institute of MIT and Harvard.",
-      "Code": "Introduzir o meu código de convite",
-      "NoCode": "Não tenho um código de convite"
-    },
-    "AboutSection": {
-      "Title": "Acerca do estudo",
-      "Text": "O nosso objetivo é observar a taxa de infeção por COVID-19 em Massachusetts ao longo do tempo. Algumas comunidades têm taxas de infeção mais elevadas do que outras. Algumas pessoas apanham COVID-19 e não apresentam sintomas. Esperamos que o nosso estudo nos ajude a compreender melhor a COVID-19 e possa beneficiar doentes com e sem COVID no futuro.",
-      "Questions": {
-        "Title": "Perguntas a que estamos a tentar responder:",
-        "List": [
-          "Quão comum é a COVID-19 nas nossas comunidades?",
-          "Quão comum é ter COVID-19 sem sintomas?",
-          "As pessoas ficam imunes à COVID-19 depois de a terem tido?",
-          "Como podem os investigadores testar muitas pessoas enquanto estas permanecem em casa?"
-        ]
-      }
-    },
-    "FaqSection": {
-      "Title": "Respostas a perguntas frequentes sobre o TestBoston",
-      "Text": "Também pode telefonar ou enviar um e-mail ao nosso pessoal do estudo se tiver perguntas sobre o TestBoston:",
-      "Items": [
-        {
-          "Question": "Qualquer pessoa pode entrar neste estudo?",
-          "Paragraphs": [
-            "O TestBoston está aberto a um grupo de adultos residentes na grande Boston e que tenham sido atendidos no Hospital Brigham and Women pelo menos uma vez no último ano, selecionados aleatoriamente. Cada doente selecionado aleatoriamente irá receber um convite para participar no estudo, por correio ou por e-mail."
-          ]
-        },
-        {
-          "Question": "Fazem-me um teste à COVID-19 se eu entrar no estudo?",
-          "Paragraphs": [
-            "Sim. Se receber um convite para participar no estudo, e decidir participar, vai fazer um teste à COVID-19. No entanto, as vagas para participar são limitadas e serão preenchidas por ordem de entrada. Se participar, receberá um kit de teste doméstico com dois testes aproximadamente uma semana depois de entrar para o estudo. O kit de teste doméstico contém um kit de teste de virologia (zaragatoa nasal) e um kit de teste de anticorpos (picada no dedo), com instruções sobre como colher e enviar as suas amostras para o nosso laboratório para análise. A zaragatoa nasal deteta se tem COVID-19 ativa. A picada no dedo testa se tem anticorpos para COVID-19 (o que significaria que já teve o vírus). Se também concordar em participar no estudo longitudinal, iremos enviar-lhe kits para repetir estes testes todos os meses durante mais 5 meses."
-          ]
-        },
-        {
-          "Question": "Vou receber os meus resultados?",
-          "Paragraphs": [
-            "Receberá os resultados da pesquisa do seu teste viral. Não vai receber os resultados do seu teste de anticorpos. Os resultados irão servir de base à tomada de decisões de saúde pública. Quando os resultados forem divulgados, serão disseminados sob a forma de resumo de dados com informações demográficas básicas. A sua identidade permanecerá em sigilo."
-          ]
-        },
-        {
-          "Question": "O TestBoston é apenas para pessoas com sintomas de COVID-19?",
-          "Paragraphs": [
-            "Não - qualquer pessoa que tenha recebido um convite para participar no TestBoston pode participar no estudo, independentemente de estar ou não a sentir sintomas (ou de já ter sentido sintomas no passado)."
-          ]
-        },
-        {
-          "Question": "Tenho de ir a algum lado para participar no estudo?",
-          "Paragraphs": [
-            "Não. O TestBoston é um estudo feito em casa. Os participantes no TestBoston não têm de se deslocar a uma clínica, hospital ou consultório médico. Os participantes irão responder a um curto inquérito online e receber kits de colheita de amostras para COVID-19 em casa, as quais serão enviadas de volta para o nosso laboratório por correio. "
-          ]
-        },
-        {
-          "Question": "Vai algum médico, enfermeiro, ou membro do pessoal do estudo a minha casa para me fazer o teste?",
-          "Paragraphs": [
-            "Não. Irá receber um kit de colheita de amostras pelo correio e fazer você mesmo/a uma zaragatoa nasal e um teste ao sangue por picada no dedo. Se tiver alguma pergunta, pode contactar a equipa do estudo a qualquer momento, por telefone ou e-mail."
-          ]
-        },
-        {
-          "Question": "A participação no TestBoston é gratuita?",
-          "Paragraphs": [
-            "Sim. Não lhe é cobrado nada para participar no TestBoston."
-          ]
-        },
-        {
-          "Question": "O que terei de fazer se entrar no estudo?",
-          "Paragraphs": [
-            "Os participantes no TestBoston têm de preencher um curto inquérito sobre a COVID-19 e realizar duas simples colheitas de amostras neles próprios, em casa. Os participantes têm de nos enviar os kits de volta, numa caixa pré-paga, para serem processados. Os participantes também podem voluntariar-se para repetir este processo todos os meses, durante mais 5 meses. O material para análise é colhido com uma zaragatoa nasal e uma cartão de manchas de sangue por picada no dedo."
-          ]
-        },
-        {
-          "Question": "A minha família pode participar no TestBoston?",
-          "Paragraphs": [
-            "Neste momento, apenas os doentes do Brigham and Women que recebam convites gerados aleatoriamente podem participar no TestBoston. Se mais do que uma pessoa do seu agregado familiar tiver recebido um convite, então podem participar ambos no estudo, se quiserem. Se não tiver recebido um convite mas estiver interessado em manter-se a par do progresso do estudo, pode <a class=\"Link Link_semi-bold Link_no-wrap\" href=\"#stay-informed\">entrar para a lista de destinatários do TestBoston</a>."
-          ]
-        },
-        {
-          "Question": "Posso ceder o meu código de convite a outra pessoa?",
-          "Paragraphs": [
-            "Não. O código de convite só deve ser utilizado pelo destinatário da carta."
-          ]
-        },
-        {
-          "Question": "Quem está a conduzir o estudo?",
-          "Paragraphs": [
-            "TestBoston é um estudo sobre COVID-19 apoiado pelo Hospital Brigham and Women e pelo Broad Institute of MIT and Harvard. As pessoas que estão a liderar o estudo são médicos de doenças infeciosas no Brigham and Women's Hospital.",
-            "O Broad Institute é um instituto de investigação académica de topo, situado em Cambridge. O Broad Institute realiza milhares de análises à COVID-19 diariamente para os departamentos de saúde de toda a Massachusetts, bem como para vários estudos sobre COVID-19 em Massachusetts."
-          ]
-        },
-        {
-          "Question": "Quanto tempo vai durar o estudo?",
-          "Paragraphs": [
-            "O estudo pode durar até 6 meses. Os participantes podem decidir deixar de participar no estudo a qualquer momento."
-          ]
+    "Common": {
+        "Buttons": {
+            "Submit": {
+                "Title": "Submeter",
+                "AriaLabel": "Botão submeter"
+            },
+            "Login": {
+                "Title": "Iniciar sessão",
+                "AriaLabel": "Botão iniciar sessão"
+            }
         }
-      ]
     },
-    "TeamSection": {
-      "Title": "A nossa equipa",
-      "Text": "Somos uma equipa de médicos e investigadores de doenças infeciosas que querem compreender melhor como a COVID-19 está a afetar indivíduos e comunidades, para podermos servir melhor todos os doentes. ",
-      "PIs": [
-        {
-          "Name": "Ann E. Woolley, MD, MPH",
-          "Affiliations": "Médica Associada, Doenças Infeciosas, Brigham and Women's Hospital; Docente de Medicina, Harvard Medical School",
-          "Info": "A Dra. Ann Woolley é diretora clínica adjunta de doenças infeciosas no transplante de órgãos sólidos no Brigham and Women's Hospital e investigadora clínica, cuja investigação se centra no alargamento de tratamentos e diagnósticos."
-        },
-        {
-          "Name": "Lisa A. Cosimi, MD",
-          "Affiliations": "Médica Associada, Brigham and Women's Hospital; Professora Assistente, Harvard Medical School",
-          "Info": "A Dra. Cosimi é médica associada no Brigham and Women's Hospital, e o seu trabalho nas divisões de equidade na saúde global e de doenças infeciosas centra-se no reforço dos sistemas de saúde e da qualidade dos serviços de saúde em contextos com poucos recursos."
-        },
-        {
-          "Name": "Deborah T. Hung, MD, PhD",
-          "Affiliations": "Professora, Harvard Medical School; Membro do Corpo Docente Principal e Co-diretora do Programa de Doenças Infeciosas e Microbiota no Broad Institute",
-          "Info": "A Dra. Deborah Hung é médica cientista no Broad Institute, na Harvard Medical School e no Massachusetts General Hospital, estuda doenças infeciosas e é médica assistente de doenças infeciosas e cuidados pulmonares e intensivos no Brigham and Women's Hospital."
+    "Navigation": {
+        "LogoAlt": "Logótipo TestBoston",
+        "CRCLogoSubtitle": "Interface de apoio ao participante",
+        "Home": "Página inicial",
+        "About": "Acerca do estudo",
+        "Q&A": "Perguntas e respostas",
+        "WhoWeAre": "Quem somos",
+        "StayInformed": "Mantenha-se informado",
+        "Help": "Ajuda",
+        "Dashboard": "O meu painel",
+        "Menu": "Menu",
+        "Invitation": "Código de convite",
+        "Titles": {
+            "TestBoston": "TestBoston",
+            "ContactUs": "Contacte-nos",
+            "Participation": "Participação",
+            "Language": "Idioma"
         }
-      ],
-      "Others": [
-        {
-          "Title": "Equipa administrativa, Broad Institute",
-          "Members": [
-            "Andrea Saltzman, Diretora, Gabinete de Proteção dos Participantes na Investigação",
-            "Marissa Jenko, MS, Responsável Administrativa",
-            "Paul Tyman, Assistente Administrativo",
-            "Sarah Winnicki, Gestora do Projeto II",
-            "Sharon Wong, PhD, Diretora-Adjunta - Programa de Doenças Infeciosas e Microbiota"
-          ]
+    },
+    "MailingList": {
+        "Title": "Formulário de lista de correio",
+        "Questions": {
+            "Adult": "1. Tem 18 anos ou mais?",
+            "Patient": "2. É doente do Brigham and Women's Hospital?",
+            "Email": "3. Que endereço de e-mail lhe convém mais?"
         },
-        {
-          "Title": "Equipa de engenharia, Broad Institute",
-          "Members": [
-            "Andrew Zimmer, Diretor, Plataforma de Doação de Dados",
-            "Anna Hupalowska, Designer de Ilustração e Visualização de Dados",
-            "Erin Gwozdz, Designer UX/UI",
-            "Jen Lapan, Gestor Principal de Produto de Software",
-            "Kiara Westbrooks, Engenheira de Software",
-            "Marco Ocana, Engenheiro de Software Principal",
-            "Pavel Sidorenko, Engenheiro de Software",
-            "Pegah Taheri, Engenheira de Software",
-            "Sampath Settipalli, Engenheiro de Software Sénior",
-            "Scott Sassone, Gestor, Produção de vídeo",
-            "Simone Maiwald, Gestora de Engenharia de Software",
-            "Yufeng Wang, Engenheiro de Software Sénior"
-          ]
+        "Answers": {
+            "Yes": "Sim",
+            "No": "Não",
+            "NoAnswer": "Prefiro não responder"
         },
-        {
-          "Title": "Equipa Clínica, Hospital Brigham and Women",
-          "Members": [
-            "Andy Kim, BS, Coordenador da Investigação",
-            "Christina Kelly, Assistente da Investigação",
-            "Hannah Laibinis, Interna",
-            "Henry Manigat, Tradutor",
-            "Henry Rutherford, BA, Coordenador da Investigação",
-            "Himaja Nagireddy, Candidata HSPH MS, Interna",
-            "Sarah Naz-McLean, MSc, Gestora de Programa",
-            "Tina Wang, Tradutora",
-            "Yilu Ma, Tradutor"
-          ]
+        "Validations": {
+            "RequiredOption": "Selecione uma opção",
+            "RequiredEmail": "Introduza o seu endereço de e-mail",
+            "InvalidEmail": "Introduza um endereço de e-mail válido"
         },
-        {
-          "Title": "Parceiros adicionais",
-          "Members": [
-            "Clinical Research Sequencing Platform (CRSP), Broad Institute",
-            "GBF",
-            "Joel Ceide, Tradutor",
-            "Language Scientific",
-            "Mascon Medical",
-            "Microbial Omics Core (MOC), Broad Institute",
-            "Nadya Lopez Zalba, Tradutora",
-            "UPS"
-          ]
+        "EmailLabel": "Introduzir endereço de e-mail",
+        "EmailPlaceholder": "exemplo@exemplo.com",
+        "ThankYouBlock": {
+            "Title": "Está tudo pronto!",
+            "Text": "Obrigado por se registar na lista de correio do TestBoston."
+        },
+        "SorryBlock": {
+            "Title": "Lamentamos, mas parece que não é elegível para entrar.",
+            "Text": {
+                "Part1": "Tem de ter 18 anos ou mais para entrar na lista de correio do TestBoston. Leia a nossa secção de",
+                "Part2": "Perguntas Frequentes",
+                "Part3": "para mais informações."
+            }
         }
-      ]
     },
-    "MailingSection": {
-      "Title": "TestBoston está atualmente a aceitar doentes convidados do Brigham and Women's Hospital. ",
-      "Text": "Se não tiver recebido um convite para participar no estudo mas estiver interessado em manter-se a par de informações gerais relativas ao TestBoston, subscreva a nossa newsletter:"
-    }
-  },
-  "PrequalPage": {
-    "Title": "Primeiro, confirme a sua elegibilidade",
-    "InvitationCode": {
-      "Question": "Introduza o seu código de convite",
-      "TooltipAlt": "Ícone de informações",
-      "Tooltip": "Se tiver recebido um convite do seu médico, em papel ou por e-mail, este inclui no topo um código de convite de 12 dígitos.",
-      "Placeholder": "Introduza o código de convite",
-      "Error": {
-        "Part1": "O código que inseriu não está ativo. Verifique o seu código e tente novamente. Pode sempre contactar o pessoal do estudo TestBoston para obter ajuda:",
-        "Part2": "ou",
-        "Part3": "",
-        "Part4": ""
-      }
-    },
-    "Zip": {
-      "Question": "Qual é o seu código postal atual?",
-      "Placeholder": "Introduzir código postal",
-      "Error": "Lamentamos. Esse código postal está fora da zona de estudo do TestBoston. Verifique o código postal que inseriu e tente novamente."
-    },
-    "Adult": {
-      "Question": "Tem 18 anos ou mais?",
-      "Yes": "Sim",
-      "No": "Não",
-      "Error": {
-        "Part1": "Lamentamos, mas parece que não é elegível para participar. Tem de ter 18 anos ou mais para entrar no estudo TestBoston. Leia a nossa secção de",
-        "Part2": "Perguntas Frequentes",
-        "Part3": "para mais informações."
-      }
-    },
-    "Error": "Lamentamos, mas ocorreu um erro. Aguarde um momento e volte a tentar."
-  },
-  "Prism": {
-    "ClearSearch": "Limpar",
-    "Email": "ENDEREÇO DE E-MAIL DO PARTICIPANTE",
-    "NoneListed": {
-      "Title": "Nenhum listado",
-      "Text": "Se o participante quiser iniciar sessão no site do TestBoston, por favor ative a respetiva conta TestBoston",
-      "Link": "aqui"
-    },
-    "Buttons": {
-      "Enrollment": "Iniciar inscrição",
-      "Dashboard": "Ver painel"
-    },
-    "Notes": "NOTAS SOBRE O PARTICIPANTE",
-    "NotesPlaceholder": "Comece a escrever...",
-    "NotesError": "Lamentamos, mas as suas notas não foram gravadas. Aguarde um momento e volte a tentar.",
-    "Steps": {
-      "Step1": {
-        "Title": "Introduza o código de convite de 12 dígitos do participante ",
-        "Subtitle": "Se não souber o código, aceda ao ficheiro de hiperligação de Brigham e utilize o nome do participante para recuperar o código.",
-        "Placeholder": "Introduza o código de convite",
-        "Error": "Código não encontrado"
-      },
-      "Step2": {
-        "Title": "Verificar código postal",
-        "Placeholder": "Introduzir código postal",
-        "Error": "Código postal inválido",
-        "Success": "Código postal válido"
-      },
-      "Step3": {
-        "Title": "Confirme verbalmente que o participante tem 18 anos ou mais antes do iniciar o registo."
-      }
-    }
-  },
-  "Enrollment": {
-    "Title": "Configuração da conta",
-    "FirstName": {
-      "Text": "Nome próprio do participante",
-      "Placeholder": "Introduza nome próprio",
-      "Error": "Introduza o nome próprio do participante "
-    },
-    "LastName": {
-      "Text": "Apelido do participante",
-      "Placeholder": "Introduza apelido",
-      "Error": "Introduza o apelido do participante"
-    },
-    "Email": {
-      "Text": "Endereço de e-mail do participante (Opcional)",
-      "Placeholder": "exemplo@exemplo.com",
-      "Error": "Introduza um endereço de e-mail válido"
-    },
-    "Button": "Seguinte"
-  },
-  "Help": {
-    "Title": "Centro de Ajuda",
-    "Collect": {
-      "Title": "Como colher as suas amostras",
-      "Text": "É importante que faça o seu teste e o envie de volta para nós no mesmo dia, de segunda a quinta-feira. Estes são os dias em que o Broad Institute processará as amostras do TestBoston.",
-      "Link": "Instruções de colheita de amostras",
-      "IconAlt": "Ícone de ficheiro PDF",
-      "IframeTitle": "Instruções de utilização do kit de zaragatoa nasal",
-      "Video": "https://player.vimeo.com/video/440526812"
-    },
-    "Return": {
-      "Title": "Como enviar as suas amostras",
-      "Text": "As suas amostras para análise devem ser enviadas de volta pela UPS, no mesmo dia em que fizer o teste. Deposite o seu kit de teste em qualquer UPS Store oficial ou num local de depósito UPS. Também pode programar uma recolha da UPS em sua casa, se tiver um local seguro onde deixar a embalagem para o motorista da UPS.",
-      "Step1": {
-        "Title": "Passo 1:",
-        "Text": {
-          "Part1": "Clique",
-          "Part2": "Insira o seu código postal e clique em “<span class=\"bold\">Ver todas as opções</span>”."
+    "HomePage": {
+        "IntroSection": {
+            "Title": "Queremos ajudar as nossas comunidades e ficar a saber mais sobre os padrões de infeção por COVID-19 na área de Boston.",
+            "Text": "TestBoston é um estudo sobre COVID-19 apoiado pelo Brigham and Women's Hospital e pelo Broad Institute of MIT and Harvard.",
+            "Code": "Introduzir o meu código de convite",
+            "NoCode": "Não tenho um código de convite"
         },
-        "ImageAlt": "Instrução de locais da UPS, a sua localização"
-      },
-      "Step2": {
-        "Title": "Passo 2:",
-        "Text": "Em “<span class=\"bold\">Tipo de local</span>”, marque as caixas “<span class=\"bold\">UPS Store®</span>” e “<span class=\"bold\">Local de Depósito UPS</span>”. Depois, clique no ícone de pesquisa",
-        "ImageAlt": "Instrução de locais UPS, caixas da UPS"
-      }
-    },
-    "Pickup": {
-      "Title": "Recolha a pedido UPS",
-      "Text": {
-        "Part1": "Pode ser elegível para uma recolha a pedido da UPS, se puder deixar a sua embalagem em segurança num local a que os motoristas da UPS possam aceder. Programe uma recolha, ligando para",
-        "Part2": "Se tiver qualquer dificuldade em devolver o seu kit pela UPS, por favor entre em contacto com a equipa do estudo"
-      }
-    },
-    "Questions": {
-      "Title": "Ainda tem dúvidas?",
-      "Text": {
-        "Part1": "Se tiver mais perguntas, contacte o pessoal do estudo, enviando um e-mail para",
-        "Part2": "ou"
-      }
-    },
-    "ArrowAlt": "Seta",
-    "SearchAlt": "Ícone de pesquisa"
-  },
-  "Toolkit": {
-    "Dashboard": {
-      "Title": "Painel",
-      "Invitation": {
-        "InvitationCode": "Código de convite:",
-        "Message": "Utilize a ferramenta procurar para gerir um participante.",
-        "Button": "Ir"
-      }
-    },
-    "Password": {
-      "Title": "Introduza a palavra-passe",
-      "Text": "Introduza a sua palavra-passe *",
-      "InputPlaceholder": "Palavra-passe",
-      "PasswordWrongError": "Palavra-passe incorreta. Tente de novo.",
-      "OtherError": "[PT] We're sorry, but an error has occurred. Please try again.",
-      "PasswordRequiredError": "É necessária palavra-passe"
-    },
-    "ErrorPage": {
-      "Title": "Encontrámos um erro",
-      "Text": "Lamentamos, mas ocorreu um erro.",
-      "DefaultText": {
-        "TextPt1": "Aguarde um momento e volte a tentar. Se o problema persistir, envie-nos um e-mail para",
-        "TextPt2": "ou telefone para"
-      }
-    },
-    "SessionExpired": {
-      "Text": "Esteve algum tempo ausente, portanto encerrámos a sua sessão por precaução. Por favor, inicie a sessão novamente para voltar para a última página onde esteve."
-    },
-    "Dialogs": {
-      "SessionWillExpire": {
-        "Title": "A sua sessão vai expirar em breve",
-        "Text": "Para proteger a sua privacidade, o sistema vai encerrar a sua sessão porque esteve ausente durante algum tempo. Clique \"Continuar\" para permanecer ligado. Clique “Encerrar sessão” se já tiver terminado, por agora.",
-        "SignOut": "Encerrar sessão",
-        "Continue": "Continuar",
-        "RenewalFailed": "A renovação da sessão falhou. Encerre a sessão e volte a iniciar."
-      }
-    }
-  },
-  "SDK": {
-    "SubmitButton": "Submeter",
-    "CloseButton": "Fechar",
-    "AddButton": "ADICIONAR",
-    "CancelButton": "CANCELAR",
-    "NextButton": "Seguinte",
-    "PreviousButton": "Voltar",
-    "SavingButton": "A guardar",
-    "EditButton": "Continuar",
-    "CompleteButton": "Editar",
-    "ReviewButton": "Ver",
-    "OpenButton": "Abrir",
-    "StartButton": "Iniciar",
-    "AgreeButton": "Concordo",
-    "ReportButton": "Reportar",
-    "NotAgreeButton": "Não estou pronto para concordar",
-    "ValidateError": "Preencha todos os campos obrigatórios.",
-    "CommunicationError": "Houve um problema a guardar os seus dados. Verifique o formulário e as suas respostas antes de submeter",
-    "SaveError": "Lamentamos, mas ocorreu um erro.",
-    "ExportStudy": {
-      "Export": "EXPORTAR"
-    },
-    "ListStudies": {
-      "StudyName": "Nome do estudo",
-      "ParticipantCount": "Contagem de participantes"
-    },
-    "ListWorkspaces": {
-      "WorkspaceName": "Nome de espaço de trabalho",
-      "WorkspaceNamespace": "Espaço de nomes de espaço de trabalho"
-    },
-    "Login": {
-      "Login": "INICIAR SESSÃO",
-      "Logout": "ENCERRAR SESSÃO"
-    },
-    "SignInOut": {
-      "SignIn": "Iniciar sessão",
-      "SignOut": "Encerrar sessão"
-    },
-    "LanguageSelector": {
-      "LanguageSelection": "seleção de idioma"
-    },
-    "UserActivities": {
-      "ActivityName": "Formulário",
-      "Summary": "Resumo",
-      "ActivityStatus": "Estado",
-      "ActivityDate": "Criado",
-      "ActivityActions": "Ações",
-      "ActivityQuestionCount": "{{questionsAnswered}} de {{questionTotal}} respondidas",
-      "HiddenTooltip": "This activity is hidden."
-    },
-    "ManageParticipants": {
-      "GovernedParticipants": "Participantes regidos ",
-      "ParticipantPlaceholder": "Participante",
-      "ParticipantsList": "Participantes"
-    },
-    "ParticipantProfile": {
-      "OpenProfile": "Perfil",
-      "ViewAs": "Ver como",
-      "ManageParticipants": "Gerir participantes"
-    },
-    "UserPreferences": {
-      "UserPreferencesTitle": "Preferências de utilizador ",
-      "UserPreferencesGender": "Sexo",
-      "UserPreferencesLocale": "Idioma preferido"
-    },
-    "Dashboard": {
-      "Title": "O meu painel",
-      "Text": "O painel abaixo descreve cada formulário do TestBoston e respetivo estado."
-    },
-    "DatePicker": {
-      "Day": "Escolher dia...",
-      "Month": "Escolher mês...",
-      "Year": "Escolher ano...",
-      "January": "Janeiro",
-      "February": "Fevereiro",
-      "March": "Março",
-      "April": "Abril",
-      "May": "Maio",
-      "June": "Junho",
-      "July": "Julho",
-      "August": "Agosto",
-      "September": "Setembro",
-      "October": "Outubro",
-      "November": "Novembro",
-      "December": "Dezembro"
-    },
-    "DateLabel": {
-      "YYYY": "YYYY",
-      "MM": "MM",
-      "DD": "DD"
-    },
-    "UserMenu": {
-      "DashboardButton": "Painel",
-      "SignOutButton": "Encerrar sessão"
-    },
-    "DetailsPlaceholder": {
-      "PluralForm": "caracteres restantes",
-      "SingularForm": "caractere restante"
-    },
-    "Title": {
-      "Default": "Logótipo TestBoston",
-      "Alert": "A sua sessão vai expirar em breve"
-    },
-    "EmailEntry": {
-      "InvalidEmail": "Introduza um endereço de e-mail válido"
-    },
-    "Institutions": {
-      "Fields": {
-        "Name": "Nome do médico",
-        "Institution": "Instituição",
-        "InstitutionAny": "Instituição (se aplicável)",
-        "City": "Cidade",
-        "State": "Estado"
-      },
-      "Form" : {
-        "OtherPhysician": "Outro médico",
-        "OtherInstitution": "Outra instituição"
-      },
-      "PhysicianValidation": "Preencha todos os campos obrigatórios"
-    },
-    "MailAddress": {
-      "Fields": {
-        "Name": "Nome completo",
-        "Country": "País/Território",
-        "Street1": "Nome da Rua",
-        "Street2": "Nº Apart/Andar",
-        "State": {
-          "State": "Estado",
-          "Province": "Província",
-          "State/Province/Region": "Estado/Província/Região"
+        "AboutSection": {
+            "Title": "Acerca do estudo",
+            "Text": "O nosso objetivo é observar a taxa de infeção por COVID-19 em Massachusetts ao longo do tempo. Algumas comunidades têm taxas de infeção mais elevadas do que outras. Algumas pessoas apanham COVID-19 e não apresentam sintomas. Esperamos que o nosso estudo nos ajude a compreender melhor a COVID-19 e possa beneficiar doentes com e sem COVID no futuro.",
+            "Questions": {
+                "Title": "Perguntas a que estamos a tentar responder:",
+                "List": [
+                    "Quão comum é a COVID-19 nas nossas comunidades?",
+                    "Quão comum é ter COVID-19 sem sintomas?",
+                    "As pessoas ficam imunes à COVID-19 depois de a terem tido?",
+                    "Como podem os investigadores testar muitas pessoas enquanto estas permanecem em casa?"
+                ]
+            }
         },
-        "City": "Cidade",
-        "Phone": "Telefone",
+        "FaqSection": {
+            "Title": "Respostas a perguntas frequentes sobre o TestBoston",
+            "Text": "Também pode telefonar ou enviar um e-mail ao nosso pessoal do estudo se tiver perguntas sobre o TestBoston:",
+            "Items": [
+                {
+                    "Question": "Qualquer pessoa pode entrar neste estudo?",
+                    "Paragraphs": [
+                        "O TestBoston está aberto a um grupo de adultos residentes na grande Boston e que tenham sido atendidos no Hospital Brigham and Women pelo menos uma vez no último ano, selecionados aleatoriamente. Cada doente selecionado aleatoriamente irá receber um convite para participar no estudo, por correio ou por e-mail."
+                    ]
+                },
+                {
+                    "Question": "Fazem-me um teste à COVID-19 se eu entrar no estudo?",
+                    "Paragraphs": [
+                        "Sim. Se receber um convite para participar no estudo, e decidir participar, vai fazer um teste à COVID-19. No entanto, as vagas para participar são limitadas e serão preenchidas por ordem de entrada. Se participar, receberá um kit de teste doméstico com dois testes aproximadamente uma semana depois de entrar para o estudo. O kit de teste doméstico contém um kit de teste de virologia (zaragatoa nasal) e um kit de teste de anticorpos (picada no dedo), com instruções sobre como colher e enviar as suas amostras para o nosso laboratório para análise. A zaragatoa nasal deteta se tem COVID-19 ativa. A picada no dedo testa se tem anticorpos para COVID-19 (o que significaria que já teve o vírus). Se também concordar em participar no estudo longitudinal, iremos enviar-lhe kits para repetir estes testes todos os meses durante mais 5 meses."
+                    ]
+                },
+                {
+                    "Question": "Vou receber os meus resultados?",
+                    "Paragraphs": [
+                        "Receberá os resultados da pesquisa do seu teste viral. Não vai receber os resultados do seu teste de anticorpos. Os resultados irão servir de base à tomada de decisões de saúde pública. Quando os resultados forem divulgados, serão disseminados sob a forma de resumo de dados com informações demográficas básicas. A sua identidade permanecerá em sigilo."
+                    ]
+                },
+                {
+                    "Question": "O TestBoston é apenas para pessoas com sintomas de COVID-19?",
+                    "Paragraphs": [
+                        "Não - qualquer pessoa que tenha recebido um convite para participar no TestBoston pode participar no estudo, independentemente de estar ou não a sentir sintomas (ou de já ter sentido sintomas no passado)."
+                    ]
+                },
+                {
+                    "Question": "Tenho de ir a algum lado para participar no estudo?",
+                    "Paragraphs": [
+                        "Não. O TestBoston é um estudo feito em casa. Os participantes no TestBoston não têm de se deslocar a uma clínica, hospital ou consultório médico. Os participantes irão responder a um curto inquérito online e receber kits de colheita de amostras para COVID-19 em casa, as quais serão enviadas de volta para o nosso laboratório por correio. "
+                    ]
+                },
+                {
+                    "Question": "Vai algum médico, enfermeiro, ou membro do pessoal do estudo a minha casa para me fazer o teste?",
+                    "Paragraphs": [
+                        "Não. Irá receber um kit de colheita de amostras pelo correio e fazer você mesmo/a uma zaragatoa nasal e um teste ao sangue por picada no dedo. Se tiver alguma pergunta, pode contactar a equipa do estudo a qualquer momento, por telefone ou e-mail."
+                    ]
+                },
+                {
+                    "Question": "A participação no TestBoston é gratuita?",
+                    "Paragraphs": [
+                        "Sim. Não lhe é cobrado nada para participar no TestBoston."
+                    ]
+                },
+                {
+                    "Question": "O que terei de fazer se entrar no estudo?",
+                    "Paragraphs": [
+                        "Os participantes no TestBoston têm de preencher um curto inquérito sobre a COVID-19 e realizar duas simples colheitas de amostras neles próprios, em casa. Os participantes têm de nos enviar os kits de volta, numa caixa pré-paga, para serem processados. Os participantes também podem voluntariar-se para repetir este processo todos os meses, durante mais 5 meses. O material para análise é colhido com uma zaragatoa nasal e uma cartão de manchas de sangue por picada no dedo."
+                    ]
+                },
+                {
+                    "Question": "A minha família pode participar no TestBoston?",
+                    "Paragraphs": [
+                        "Neste momento, apenas os doentes do Brigham and Women que recebam convites gerados aleatoriamente podem participar no TestBoston. Se mais do que uma pessoa do seu agregado familiar tiver recebido um convite, então podem participar ambos no estudo, se quiserem. Se não tiver recebido um convite mas estiver interessado em manter-se a par do progresso do estudo, pode <a class=\"Link Link_semi-bold Link_no-wrap\" href=\"#stay-informed\">entrar para a lista de destinatários do TestBoston</a>."
+                    ]
+                },
+                {
+                    "Question": "Posso ceder o meu código de convite a outra pessoa?",
+                    "Paragraphs": [
+                        "Não. O código de convite só deve ser utilizado pelo destinatário da carta."
+                    ]
+                },
+                {
+                    "Question": "Quem está a conduzir o estudo?",
+                    "Paragraphs": [
+                        "TestBoston é um estudo sobre COVID-19 apoiado pelo Hospital Brigham and Women e pelo Broad Institute of MIT and Harvard. As pessoas que estão a liderar o estudo são médicos de doenças infeciosas no Brigham and Women's Hospital.",
+                        "O Broad Institute é um instituto de investigação académica de topo, situado em Cambridge. O Broad Institute realiza milhares de análises à COVID-19 diariamente para os departamentos de saúde de toda a Massachusetts, bem como para vários estudos sobre COVID-19 em Massachusetts."
+                    ]
+                },
+                {
+                    "Question": "Quanto tempo vai durar o estudo?",
+                    "Paragraphs": [
+                        "O estudo pode durar até 6 meses. Os participantes podem decidir deixar de participar no estudo a qualquer momento."
+                    ]
+                }
+            ]
+        },
+        "TeamSection": {
+            "Title": "A nossa equipa",
+            "Text": "Somos uma equipa de médicos e investigadores de doenças infeciosas que querem compreender melhor como a COVID-19 está a afetar indivíduos e comunidades, para podermos servir melhor todos os doentes. ",
+            "PIs": [
+                {
+                    "Name": "Ann E. Woolley, MD, MPH",
+                    "Affiliations": "Médica Associada, Doenças Infeciosas, Brigham and Women's Hospital; Docente de Medicina, Harvard Medical School",
+                    "Info": "A Dra. Ann Woolley é diretora clínica adjunta de doenças infeciosas no transplante de órgãos sólidos no Brigham and Women's Hospital e investigadora clínica, cuja investigação se centra no alargamento de tratamentos e diagnósticos."
+                },
+                {
+                    "Name": "Lisa A. Cosimi, MD",
+                    "Affiliations": "Médica Associada, Brigham and Women's Hospital; Professora Assistente, Harvard Medical School",
+                    "Info": "A Dra. Cosimi é médica associada no Brigham and Women's Hospital, e o seu trabalho nas divisões de equidade na saúde global e de doenças infeciosas centra-se no reforço dos sistemas de saúde e da qualidade dos serviços de saúde em contextos com poucos recursos."
+                },
+                {
+                    "Name": "Deborah T. Hung, MD, PhD",
+                    "Affiliations": "Professora, Harvard Medical School; Membro do Corpo Docente Principal e Co-diretora do Programa de Doenças Infeciosas e Microbiota no Broad Institute",
+                    "Info": "A Dra. Deborah Hung é médica cientista no Broad Institute, na Harvard Medical School e no Massachusetts General Hospital, estuda doenças infeciosas e é médica assistente de doenças infeciosas e cuidados pulmonares e intensivos no Brigham and Women's Hospital."
+                }
+            ],
+            "Others": [
+                {
+                    "Title": "Equipa administrativa, Broad Institute",
+                    "Members": [
+                        "Andrea Saltzman, Diretora, Gabinete de Proteção dos Participantes na Investigação",
+                        "Marissa Jenko, MS, Responsável Administrativa",
+                        "Paul Tyman, Assistente Administrativo",
+                        "Sarah Winnicki, Gestora do Projeto II",
+                        "Sharon Wong, PhD, Diretora-Adjunta - Programa de Doenças Infeciosas e Microbiota"
+                    ]
+                },
+                {
+                    "Title": "Equipa de engenharia, Broad Institute",
+                    "Members": [
+                        "Andrew Zimmer, Diretor, Plataforma de Doação de Dados",
+                        "Anna Hupalowska, Designer de Ilustração e Visualização de Dados",
+                        "Erin Gwozdz, Designer UX/UI",
+                        "Jen Lapan, Gestor Principal de Produto de Software",
+                        "Kiara Westbrooks, Engenheira de Software",
+                        "Marco Ocana, Engenheiro de Software Principal",
+                        "Pavel Sidorenko, Engenheiro de Software",
+                        "Pegah Taheri, Engenheira de Software",
+                        "Sampath Settipalli, Engenheiro de Software Sénior",
+                        "Scott Sassone, Gestor, Produção de vídeo",
+                        "Simone Maiwald, Gestora de Engenharia de Software",
+                        "Yufeng Wang, Engenheiro de Software Sénior"
+                    ]
+                },
+                {
+                    "Title": "Equipa Clínica, Hospital Brigham and Women",
+                    "Members": [
+                        "Andy Kim, BS, Coordenador da Investigação",
+                        "Christina Kelly, Assistente da Investigação",
+                        "Hannah Laibinis, Interna",
+                        "Henry Manigat, Tradutor",
+                        "Henry Rutherford, BA, Coordenador da Investigação",
+                        "Himaja Nagireddy, Candidata HSPH MS, Interna",
+                        "Sarah Naz-McLean, MSc, Gestora de Programa",
+                        "Tina Wang, Tradutora",
+                        "Yilu Ma, Tradutor"
+                    ]
+                },
+                {
+                    "Title": "Parceiros adicionais",
+                    "Members": [
+                        "Clinical Research Sequencing Platform (CRSP), Broad Institute",
+                        "GBF",
+                        "Joel Ceide, Tradutor",
+                        "Language Scientific",
+                        "Mascon Medical",
+                        "Microbial Omics Core (MOC), Broad Institute",
+                        "Nadya Lopez Zalba, Tradutora",
+                        "UPS"
+                    ]
+                }
+            ]
+        },
+        "MailingSection": {
+            "Title": "TestBoston está atualmente a aceitar doentes convidados do Brigham and Women's Hospital. ",
+            "Text": "Se não tiver recebido um convite para participar no estudo mas estiver interessado em manter-se a par de informações gerais relativas ao TestBoston, subscreva a nossa newsletter:"
+        }
+    },
+    "PrequalPage": {
+        "Title": "Primeiro, confirme a sua elegibilidade",
+        "InvitationCode": {
+            "Question": "Introduza o seu código de convite",
+            "TooltipAlt": "Ícone de informações",
+            "Tooltip": "Se tiver recebido um convite do seu médico, em papel ou por e-mail, este inclui no topo um código de convite de 12 dígitos.",
+            "Placeholder": "Introduza o código de convite",
+            "Error": {
+                "Part1": "O código que inseriu não está ativo. Verifique o seu código e tente novamente. Pode sempre contactar o pessoal do estudo TestBoston para obter ajuda:",
+                "Part2": "ou",
+                "Part3": "",
+                "Part4": ""
+            }
+        },
         "Zip": {
-          "Zip Code": "Código Postal",
-          "Postal Code": "Código Postal",
-          "Zip/Postal Code": "Código Postal"
+            "Question": "Qual é o seu código postal atual?",
+            "Placeholder": "Introduzir código postal",
+            "Error": "Lamentamos. Esse código postal está fora da zona de estudo do TestBoston. Verifique o código postal que inseriu e tente novamente."
         },
-        "Choose": "Escolher {{field}} ..."
-      },
-      "Suggestion": {
-        "Title": "Verificámos a sua morada e sugerimos alterações que podem ajudar garantir a entrega. ",
-        "Subtitle": "Clique \"Sugerido\" para atualizar o formulário. Poderá clicar \"Conforme introduzido\" para restaurar o que escreveu originalmente.",
-        "Suggested": "Sugerido:",
-        "AsEntered": "Conforme introduzido:"
-      },
-      "Error": {
-        "InvalidAddress": "Morada inválida.",
-        "CannotVerify": "Impossível verificar morada, por favor certifique-se da morada.",
-        "UnknownVerifyError": "Ocorreu um erro desconhecido ao verificar a morada.",
-        "FieldIsRequired": "{{field}} é obrigatório",
-        "FieldIsInvalid": "{{field}} tem um valor inválido",
-        "InvalidHouseNumber": "Impossível encontrar número de porta ",
-        "INTERNAL_SERVER_ERROR": "Lamentamos, mas ocorreu um problema. Se o problema persistir, contacte-nos em support@easypost.com.",
-        "NOT_ACCEPTABLE": "O recurso identificado pelo pedido só é capaz de gerar entidades de resposta que têm características de conteúdo não aceitáveis de acordo com os cabeçalhos de aceitação enviados no pedido.",
-        "NOT_FOUND": "Impossível localizar o recurso pedido.",
-        "FORBIDDEN": "Impossível aceder ao recurso pedido.",
-        "PAYMENT_REQUIRED": "Fundos insuficientes. Verifique as suas configurações de faturamento em http://www.easypost.com/account/billing.",
-        "UNAUTHORIZED": "Impossível aceder ao recurso pedido, a autorização falhou.",
-        "BAD_REQUEST": "Pedido mal formado. Verifique o conteúdo e volte a tentar.",
-        "PAYMENT_GATEWAY.ERROR": "O processador do pagamento não pôde lidar com o pedido.  Tente novamente ou contacte support@easypost.com se o problema persistir.",
-        "MODE.UNAUTHORIZED": "Este recurso exige um API Key de produção para aceder.",
-        "MODE.CONFLICT": "Modo de API Key entrou em conflito com modo de parâmetro.",
-        "DATE.PARSE.FAILURE": "Pelo menos uma data foi formatada incorretamente e não pôde ser analisada.",
-        "PARAMETER.FORBIDDEN": "O pedido não pôde ser concluído devido a propriedades proibidas presentes nos parâmetros.",
-        "PARAMETER.REQUIRED": "Parâmetro obrigatório em falta.",
-        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "Os parâmetros passados continham um caracter inválido.",
-        "ADDRESS.PARAMETERS.INVALID": "Os parâmetros passados para criar uma Morada estavam em falta ou eram inválidos.",
-        "ADDRESS.COUNTRY.INVALID": "'País' inválido; forneça um código de país ISO de 2 caracteres.",
-        "ADDRESS.VERIFICATION.NOT_FOUND": "Morada não encontrada.",
-        "ADDRESS.VERIFICATION.FAILURE": "Não foi possível verificar a morada.",
-        "ADDRESS.VERIFY.UNAVAILABLE": "Verificação de morada não está disponível. Por favor, tente de novo.",
-        "ADDRESS.VERIFICATION.INVALID": "Uma das verificações selecionadas é inválida.",
-        "ADDRESS.VERIFY.FAILURE": "Impossível verificar morada.",
-        "ADDRESS.VERIFY.CARRIER_INVALID": "Impossível verificar morada usando a transportadora fornecida.",
-        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "A verificação da morada não está disponível, devido a um serviço a montante não responder. Por favor, tente de novo.",
-        "ADDRESS.VERIFY.ONLY_US": "A UPS só consegue validar moradas dos EUA.",
-        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "Verificação internacional não ativada nesta conta. Contacte support@easypost.com.",
-        "ADDRESS.VERIFY.MISSING_STREET": "Fornecidos dados de morada insuficientes. Tem de ser fornecida uma rua.",
-        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Fornecidos dados de morada insuficientes. Têm de ser fornecidos uma cidade e um estado ou um código postal.",
-        "E.COUNTRY.UNSUPPORTED": "O país não é suportado neste modo. Experimente em modo de produção.",
-        "E.ENGINE.UNAVAILABLE": "Não está disponível nenhum motor de verificação para este país. Tente de novo mais tarde.",
-        "E.QUERY.UNANSWERABLE": "Não podemos fornecer dados suficientes neste país para satisfazer este pedido. Por favor, tente de novo mais tarde.",
-        "E.ADDRESS.NOT_FOUND": "Não conseguimos localizar a morada inserida.",
-        "E.SECONDARY_INFORMATION.INVALID": "Informação secundária inválida (Nº Apt/Suite). Tenha em atenção que isto pode aparecer como erro num pedido posterior.",
-        "E.SECONDARY_INFORMATION.MISSING": "Informação secundária em falta (Nº Apt/Suite). Tenha em atenção que isto pode aparecer como erro num pedido posterior.",
-        "E.HOUSE_NUMBER.MISSING": "Número da habitação em falta.",
-        "E.HOUSE_NUMBER.INVALID": "Não conseguimos encontrar o número de porta fornecido. ",
-        "E.STREET.MISSING": "Rua em falta.",
-        "E.STREET.INVALID": "Rua inválida.",
-        "E.BOX_NUMBER.MISSING": "Número da caixa em falta.",
-        "E.BOX_NUMBER.INVALID": "Número da caixa inválido.",
-        "E.ADDRESS.INVALID": "Cidade/estado/Código Postal inválidos",
-        "E.ZIP.NOT_FOUND": "Código postal não encontrado.",
-        "E.ZIP.INVALID": "Código postal inválido.",
-        "E.ZIP.PLUS4.NOT_FOUND": "Código postal + 4 não encontrado.",
-        "E.ADDRESS.MULTIPLE": "Foram encontradas várias moradas com o mesmo código postal.",
-        "E.ADDRESS.INSUFFICIENT": "Dados de morada insuficientes/incorretos.",
-        "E.ADDRESS.DUAL": "Morada dupla.",
-        "E.STREET.MAGNET": "O nome da rua é ambíguo.",
-        "E.CITY_STATE.INVALID": "Cidade / estado não-verificável.",
-        "E.STATE.INVALID": "Estado inválido.",
-        "E.ADDRESS.DELIVERY.INVALID": "Morada de entrega inválida.",
-        "E.TIMED_OUT": "Excedeu tempo limite máximo.",
-        "E.TIME_ZONE.UNAVAILABLE": "O serviço para esse fuso horário está atualmente indisponível.",
-        "E.PO_BOX.INTERNATIONAL": "Não foi possível verificar o Nº Apartado internacional. Tenha em atenção que isto pode aparecer como erro num pedido posterior."
-      }
+        "Adult": {
+            "Question": "Tem 18 anos ou mais?",
+            "Yes": "Sim",
+            "No": "Não",
+            "Error": {
+                "Part1": "Lamentamos, mas parece que não é elegível para participar. Tem de ter 18 anos ou mais para entrar no estudo TestBoston. Leia a nossa secção de",
+                "Part2": "Perguntas Frequentes",
+                "Part3": "para mais informações."
+            }
+        },
+        "Error": "Lamentamos, mas ocorreu um erro. Aguarde um momento e volte a tentar."
     },
-    "TooltipAlt": "Informação",
-    "SubjectPanel": {
-      "Link": "Voltar a procurar participante",
-      "InvitationCode": "Código de convite do participante:",
-      "Email": "[PT] Email:",
-      "Name": "[PT] Name:",
-      "ShortId": "[PT] Subject Short ID/HRUID:"
+    "Prism": {
+        "ClearSearch": "Limpar",
+        "Email": "ENDEREÇO DE E-MAIL DO PARTICIPANTE",
+        "NoneListed": {
+            "Title": "Nenhum listado",
+            "Text": "Se o participante quiser iniciar sessão no site do TestBoston, por favor ative a respetiva conta TestBoston",
+            "Link": "aqui"
+        },
+        "Buttons": {
+            "Enrollment": "Iniciar inscrição",
+            "Dashboard": "Ver painel"
+        },
+        "Notes": "NOTAS SOBRE O PARTICIPANTE",
+        "NotesPlaceholder": "Comece a escrever...",
+        "NotesError": "Lamentamos, mas as suas notas não foram gravadas. Aguarde um momento e volte a tentar.",
+        "Steps": {
+            "Step1": {
+                "Title": "Introduza o código de convite de 12 dígitos do participante ",
+                "Subtitle": "Se não souber o código, aceda ao ficheiro de hiperligação de Brigham e utilize o nome do participante para recuperar o código.",
+                "Placeholder": "Introduza o código de convite",
+                "Error": "Código não encontrado"
+            },
+            "Step2": {
+                "Title": "Verificar código postal",
+                "Placeholder": "Introduzir código postal",
+                "Error": "Código postal inválido",
+                "Success": "Código postal válido"
+            },
+            "Step3": {
+                "Title": "Confirme verbalmente que o participante tem 18 anos ou mais antes do iniciar o registo."
+            }
+        }
     },
-    "AdminActionPanel": {
-      "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
-      "EditButton": "Edit"
+    "Enrollment": {
+        "Title": "Configuração da conta",
+        "FirstName": {
+            "Text": "Nome próprio do participante",
+            "Placeholder": "Introduza nome próprio",
+            "Error": "Introduza o nome próprio do participante "
+        },
+        "LastName": {
+            "Text": "Apelido do participante",
+            "Placeholder": "Introduza apelido",
+            "Error": "Introduza o apelido do participante"
+        },
+        "Email": {
+            "Text": "Endereço de e-mail do participante (Opcional)",
+            "Placeholder": "exemplo@exemplo.com",
+            "Error": "Introduza um endereço de e-mail válido"
+        },
+        "Button": "Seguinte"
     },
-    "Validators": {
-      "DateNavyValidationRule": "[PT] Entered date is invalid"
+    "Help": {
+        "Title": "Centro de Ajuda",
+        "Collect": {
+            "Title": "Como colher as suas amostras",
+            "Text": "É importante que faça o seu teste e o envie de volta para nós no mesmo dia, de segunda a quinta-feira. Estes são os dias em que o Broad Institute processará as amostras do TestBoston.",
+            "Link": "Instruções de colheita de amostras",
+            "IconAlt": "Ícone de ficheiro PDF",
+            "IframeTitle": "Instruções de utilização do kit de zaragatoa nasal",
+            "Video": "https://player.vimeo.com/video/440526812"
+        },
+        "Return": {
+            "Title": "Como enviar as suas amostras",
+            "Text": "As suas amostras para análise devem ser enviadas de volta pela UPS, no mesmo dia em que fizer o teste. Deposite o seu kit de teste em qualquer UPS Store oficial ou num local de depósito UPS. Também pode programar uma recolha da UPS em sua casa, se tiver um local seguro onde deixar a embalagem para o motorista da UPS.",
+            "Step1": {
+                "Title": "Passo 1:",
+                "Text": {
+                    "Part1": "Clique",
+                    "Part2": "Insira o seu código postal e clique em “<span class=\"bold\">Ver todas as opções</span>”."
+                },
+                "ImageAlt": "Instrução de locais da UPS, a sua localização"
+            },
+            "Step2": {
+                "Title": "Passo 2:",
+                "Text": "Em “<span class=\"bold\">Tipo de local</span>”, marque as caixas “<span class=\"bold\">UPS Store®</span>” e “<span class=\"bold\">Local de Depósito UPS</span>”. Depois, clique no ícone de pesquisa",
+                "ImageAlt": "Instrução de locais UPS, caixas da UPS"
+            }
+        },
+        "Pickup": {
+            "Title": "Recolha a pedido UPS",
+            "Text": {
+                "Part1": "Pode ser elegível para uma recolha a pedido da UPS, se puder deixar a sua embalagem em segurança num local a que os motoristas da UPS possam aceder. Programe uma recolha, ligando para",
+                "Part2": "Se tiver qualquer dificuldade em devolver o seu kit pela UPS, por favor entre em contacto com a equipa do estudo"
+            }
+        },
+        "Questions": {
+            "Title": "Ainda tem dúvidas?",
+            "Text": {
+                "Part1": "Se tiver mais perguntas, contacte o pessoal do estudo, enviando um e-mail para",
+                "Part2": "ou"
+            }
+        },
+        "ArrowAlt": "Seta",
+        "SearchAlt": "Ícone de pesquisa"
+    },
+    "Toolkit": {
+        "Dashboard": {
+            "Title": "Painel",
+            "Invitation": {
+                "InvitationCode": "Código de convite:",
+                "Message": "Utilize a ferramenta procurar para gerir um participante.",
+                "Button": "Ir"
+            }
+        },
+        "Password": {
+            "Title": "Introduza a palavra-passe",
+            "Text": "Introduza a sua palavra-passe *",
+            "InputPlaceholder": "Palavra-passe",
+            "PasswordWrongError": "Palavra-passe incorreta. Tente de novo.",
+            "OtherError": "[PT] We're sorry, but an error has occurred. Please try again.",
+            "PasswordRequiredError": "É necessária palavra-passe"
+        },
+        "ErrorPage": {
+            "Title": "Encontrámos um erro",
+            "Text": "Lamentamos, mas ocorreu um erro.",
+            "DefaultText": {
+                "TextPt1": "Aguarde um momento e volte a tentar. Se o problema persistir, envie-nos um e-mail para",
+                "TextPt2": "ou telefone para"
+            }
+        },
+        "SessionExpired": {
+            "Text": "Esteve algum tempo ausente, portanto encerrámos a sua sessão por precaução. Por favor, inicie a sessão novamente para voltar para a última página onde esteve."
+        },
+        "Dialogs": {
+            "SessionWillExpire": {
+                "Title": "A sua sessão vai expirar em breve",
+                "Text": "Para proteger a sua privacidade, o sistema vai encerrar a sua sessão porque esteve ausente durante algum tempo. Clique \"Continuar\" para permanecer ligado. Clique “Encerrar sessão” se já tiver terminado, por agora.",
+                "SignOut": "Encerrar sessão",
+                "Continue": "Continuar",
+                "RenewalFailed": "A renovação da sessão falhou. Encerre a sessão e volte a iniciar."
+            }
+        }
+    },
+    "SDK": {
+        "SubmitButton": "Submeter",
+        "CloseButton": "Fechar",
+        "AddButton": "ADICIONAR",
+        "CancelButton": "CANCELAR",
+        "NextButton": "Seguinte",
+        "PreviousButton": "Voltar",
+        "SavingButton": "A guardar",
+        "EditButton": "Continuar",
+        "CompleteButton": "Editar",
+        "ReviewButton": "Ver",
+        "OpenButton": "Abrir",
+        "StartButton": "Iniciar",
+        "AgreeButton": "Concordo",
+        "ReportButton": "Reportar",
+        "NotAgreeButton": "Não estou pronto para concordar",
+        "ValidateError": "Preencha todos os campos obrigatórios.",
+        "CommunicationError": "Houve um problema a guardar os seus dados. Verifique o formulário e as suas respostas antes de submeter",
+        "SaveError": "Lamentamos, mas ocorreu um erro.",
+        "ExportStudy": {
+            "Export": "EXPORTAR"
+        },
+        "ListStudies": {
+            "StudyName": "Nome do estudo",
+            "ParticipantCount": "Contagem de participantes"
+        },
+        "ListWorkspaces": {
+            "WorkspaceName": "Nome de espaço de trabalho",
+            "WorkspaceNamespace": "Espaço de nomes de espaço de trabalho"
+        },
+        "Login": {
+            "Login": "INICIAR SESSÃO",
+            "Logout": "ENCERRAR SESSÃO"
+        },
+        "SignInOut": {
+            "SignIn": "Iniciar sessão",
+            "SignOut": "Encerrar sessão"
+        },
+        "LanguageSelector": {
+            "LanguageSelection": "seleção de idioma"
+        },
+        "UserActivities": {
+            "ActivityName": "Formulário",
+            "Summary": "Resumo",
+            "ActivityStatus": "Estado",
+            "ActivityDate": "Criado",
+            "ActivityActions": "Ações",
+            "ActivityQuestionCount": "{{questionsAnswered}} de {{questionTotal}} respondidas",
+            "HiddenTooltip": "This activity is hidden."
+        },
+        "ManageParticipants": {
+            "GovernedParticipants": "Participantes regidos ",
+            "ParticipantPlaceholder": "Participante",
+            "ParticipantsList": "Participantes"
+        },
+        "ParticipantProfile": {
+            "OpenProfile": "Perfil",
+            "ViewAs": "Ver como",
+            "ManageParticipants": "Gerir participantes"
+        },
+        "UserPreferences": {
+            "UserPreferencesTitle": "Preferências de utilizador ",
+            "UserPreferencesGender": "Sexo"
+        },
+        "Dashboard": {
+            "Title": "O meu painel",
+            "Text": "O painel abaixo descreve cada formulário do TestBoston e respetivo estado."
+        },
+        "DatePicker": {
+            "Day": "Escolher dia...",
+            "Month": "Escolher mês...",
+            "Year": "Escolher ano...",
+            "January": "Janeiro",
+            "February": "Fevereiro",
+            "March": "Março",
+            "April": "Abril",
+            "May": "Maio",
+            "June": "Junho",
+            "July": "Julho",
+            "August": "Agosto",
+            "September": "Setembro",
+            "October": "Outubro",
+            "November": "Novembro",
+            "December": "Dezembro"
+        },
+        "DateLabel": {
+            "YYYY": "YYYY",
+            "MM": "MM",
+            "DD": "DD"
+        },
+        "UserMenu": {
+            "DashboardButton": "Painel",
+            "SignOutButton": "Encerrar sessão"
+        },
+        "DetailsPlaceholder": {
+            "PluralForm": "caracteres restantes",
+            "SingularForm": "caractere restante"
+        },
+        "Title": {
+            "Default": "Logótipo TestBoston",
+            "Alert": "A sua sessão vai expirar em breve"
+        },
+        "EmailEntry": {
+            "InvalidEmail": "Introduza um endereço de e-mail válido"
+        },
+        "Institutions": {
+            "Fields": {
+                "Name": "Nome do médico",
+                "Institution": "Instituição",
+                "InstitutionAny": "Instituição (se aplicável)",
+                "City": "Cidade",
+                "State": "Estado"
+            },
+            "Form" : {
+                "OtherPhysician": "Outro médico",
+                "OtherInstitution": "Outra instituição"
+            },
+            "PhysicianValidation": "Preencha todos os campos obrigatórios"
+        },
+        "MailAddress": {
+            "Fields": {
+                "Name": "Nome completo",
+                "Country": "País/Território",
+                "Street1": "Nome da Rua",
+                "Street2": "Nº Apart/Andar",
+                "State": {
+                    "State": "Estado",
+                    "Province": "Província",
+                    "State/Province/Region": "Estado/Província/Região"
+                },
+                "City": "Cidade",
+                "Phone": "Telefone",
+                "Zip": {
+                    "Zip Code": "Código Postal",
+                    "Postal Code": "Código Postal",
+                    "Zip/Postal Code": "Código Postal"
+                },
+                "Choose": "Escolher {{field}} ..."
+            },
+            "Suggestion": {
+                "Title": "Verificámos a sua morada e sugerimos alterações que podem ajudar garantir a entrega. ",
+                "Subtitle": "Clique \"Sugerido\" para atualizar o formulário. Poderá clicar \"Conforme introduzido\" para restaurar o que escreveu originalmente.",
+                "Suggested": "Sugerido:",
+                "AsEntered": "Conforme introduzido:"
+            },
+            "Error": {
+                "InvalidAddress": "Morada inválida.",
+                "CannotVerify": "Impossível verificar morada, por favor certifique-se da morada.",
+                "UnknownVerifyError": "Ocorreu um erro desconhecido ao verificar a morada.",
+                "FieldIsRequired": "{{field}} é obrigatório",
+                "FieldIsInvalid": "{{field}} tem um valor inválido",
+                "InvalidHouseNumber": "Impossível encontrar número de porta ",
+                "INTERNAL_SERVER_ERROR": "Lamentamos, mas ocorreu um problema. Se o problema persistir, contacte-nos em support@easypost.com.",
+                "NOT_ACCEPTABLE": "O recurso identificado pelo pedido só é capaz de gerar entidades de resposta que têm características de conteúdo não aceitáveis de acordo com os cabeçalhos de aceitação enviados no pedido.",
+                "NOT_FOUND": "Impossível localizar o recurso pedido.",
+                "FORBIDDEN": "Impossível aceder ao recurso pedido.",
+                "PAYMENT_REQUIRED": "Fundos insuficientes. Verifique as suas configurações de faturamento em http://www.easypost.com/account/billing.",
+                "UNAUTHORIZED": "Impossível aceder ao recurso pedido, a autorização falhou.",
+                "BAD_REQUEST": "Pedido mal formado. Verifique o conteúdo e volte a tentar.",
+                "PAYMENT_GATEWAY.ERROR": "O processador do pagamento não pôde lidar com o pedido.  Tente novamente ou contacte support@easypost.com se o problema persistir.",
+                "MODE.UNAUTHORIZED": "Este recurso exige um API Key de produção para aceder.",
+                "MODE.CONFLICT": "Modo de API Key entrou em conflito com modo de parâmetro.",
+                "DATE.PARSE.FAILURE": "Pelo menos uma data foi formatada incorretamente e não pôde ser analisada.",
+                "PARAMETER.FORBIDDEN": "O pedido não pôde ser concluído devido a propriedades proibidas presentes nos parâmetros.",
+                "PARAMETER.REQUIRED": "Parâmetro obrigatório em falta.",
+                "ADDRESS.PARAMETERS.INVALID_CHARACTER": "Os parâmetros passados continham um caracter inválido.",
+                "ADDRESS.PARAMETERS.INVALID": "Os parâmetros passados para criar uma Morada estavam em falta ou eram inválidos.",
+                "ADDRESS.COUNTRY.INVALID": "'País' inválido; forneça um código de país ISO de 2 caracteres.",
+                "ADDRESS.VERIFICATION.NOT_FOUND": "Morada não encontrada.",
+                "ADDRESS.VERIFICATION.FAILURE": "Não foi possível verificar a morada.",
+                "ADDRESS.VERIFY.UNAVAILABLE": "Verificação de morada não está disponível. Por favor, tente de novo.",
+                "ADDRESS.VERIFICATION.INVALID": "Uma das verificações selecionadas é inválida.",
+                "ADDRESS.VERIFY.FAILURE": "Impossível verificar morada.",
+                "ADDRESS.VERIFY.CARRIER_INVALID": "Impossível verificar morada usando a transportadora fornecida.",
+                "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "A verificação da morada não está disponível, devido a um serviço a montante não responder. Por favor, tente de novo.",
+                "ADDRESS.VERIFY.ONLY_US": "A UPS só consegue validar moradas dos EUA.",
+                "ADDRESS.VERIFY.INTL_NOT_ENABLED": "Verificação internacional não ativada nesta conta. Contacte support@easypost.com.",
+                "ADDRESS.VERIFY.MISSING_STREET": "Fornecidos dados de morada insuficientes. Tem de ser fornecida uma rua.",
+                "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Fornecidos dados de morada insuficientes. Têm de ser fornecidos uma cidade e um estado ou um código postal.",
+                "E.COUNTRY.UNSUPPORTED": "O país não é suportado neste modo. Experimente em modo de produção.",
+                "E.ENGINE.UNAVAILABLE": "Não está disponível nenhum motor de verificação para este país. Tente de novo mais tarde.",
+                "E.QUERY.UNANSWERABLE": "Não podemos fornecer dados suficientes neste país para satisfazer este pedido. Por favor, tente de novo mais tarde.",
+                "E.ADDRESS.NOT_FOUND": "Não conseguimos localizar a morada inserida.",
+                "E.SECONDARY_INFORMATION.INVALID": "Informação secundária inválida (Nº Apt/Suite). Tenha em atenção que isto pode aparecer como erro num pedido posterior.",
+                "E.SECONDARY_INFORMATION.MISSING": "Informação secundária em falta (Nº Apt/Suite). Tenha em atenção que isto pode aparecer como erro num pedido posterior.",
+                "E.HOUSE_NUMBER.MISSING": "Número da habitação em falta.",
+                "E.HOUSE_NUMBER.INVALID": "Não conseguimos encontrar o número de porta fornecido. ",
+                "E.STREET.MISSING": "Rua em falta.",
+                "E.STREET.INVALID": "Rua inválida.",
+                "E.BOX_NUMBER.MISSING": "Número da caixa em falta.",
+                "E.BOX_NUMBER.INVALID": "Número da caixa inválido.",
+                "E.ADDRESS.INVALID": "Cidade/estado/Código Postal inválidos",
+                "E.ZIP.NOT_FOUND": "Código postal não encontrado.",
+                "E.ZIP.INVALID": "Código postal inválido.",
+                "E.ZIP.PLUS4.NOT_FOUND": "Código postal + 4 não encontrado.",
+                "E.ADDRESS.MULTIPLE": "Foram encontradas várias moradas com o mesmo código postal.",
+                "E.ADDRESS.INSUFFICIENT": "Dados de morada insuficientes/incorretos.",
+                "E.ADDRESS.DUAL": "Morada dupla.",
+                "E.STREET.MAGNET": "O nome da rua é ambíguo.",
+                "E.CITY_STATE.INVALID": "Cidade / estado não-verificável.",
+                "E.STATE.INVALID": "Estado inválido.",
+                "E.ADDRESS.DELIVERY.INVALID": "Morada de entrega inválida.",
+                "E.TIMED_OUT": "Excedeu tempo limite máximo.",
+                "E.TIME_ZONE.UNAVAILABLE": "O serviço para esse fuso horário está atualmente indisponível.",
+                "E.PO_BOX.INTERNATIONAL": "Não foi possível verificar o Nº Apartado internacional. Tenha em atenção que isto pode aparecer como erro num pedido posterior."
+            }
+        },
+        "TooltipAlt": "Informação",
+        "SubjectPanel": {
+            "Link": "Voltar a procurar participante",
+            "InvitationCode": "Código de convite do participante:",
+            "Email": "[PT] Email:",
+            "Name": "[PT] Name:",
+            "ShortId": "[PT] Subject Short ID/HRUID:"
+        },
+        "AdminActionPanel": {
+            "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+            "EditButton": "Edit"
+        },
+        "Validators": {
+            "DateNavyValidationRule": "[PT] Entered date is invalid"
+        }
     }
-  }
 }

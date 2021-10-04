@@ -66,6 +66,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     public userActivities$: Observable<Array<ActivityInstance>>;
     @Output() loadedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
     private anchor: Subscription = new Subscription();
+    protected readonly LOG_SOURCE = 'DashboardComponent';
 
     constructor(
         protected router: Router,
@@ -77,7 +78,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit(): void {
-        if (this.useParticipantDashboard) {
+        if (this.useMultiParticipantDashboard) {
             // in order to prevent participant data call
             this.session.setParticipant(null);
         }
@@ -106,7 +107,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     public navigate(activityInstanceGuid: string, participantGuid?: string): void {
-        if (this.useParticipantDashboard && participantGuid) {
+        if (this.useMultiParticipantDashboard && participantGuid) {
             this.session.setParticipant(participantGuid);
         }
         this.router.navigate([this.toolkitConfiguration.activityUrl, activityInstanceGuid]);
@@ -116,8 +117,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.loadedEvent.emit(loaded);
     }
 
-    public get useParticipantDashboard(): boolean {
-        return this.toolkitConfiguration.useParticipantDashboard;
+    public get useMultiParticipantDashboard(): boolean {
+        return this.toolkitConfiguration.useMultiParticipantDashboard;
     }
 
     private getUserActivities(): Observable<Array<ActivityInstance>> {

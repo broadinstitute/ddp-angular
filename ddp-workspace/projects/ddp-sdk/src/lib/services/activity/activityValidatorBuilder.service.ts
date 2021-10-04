@@ -26,6 +26,7 @@ import { ActivityFileQuestionBlock } from '../../models/activity/activityFileQue
 import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
 import { ActivityPicklistQuestionBlock } from 'ddp-sdk';
 import { ActivityStrictMatchValidationRule } from './validators/activityStrictMatchValidationRule';
+import { ActivityUniqueValidationRule } from './validators/activityUniqueValidationRule';
 
 @Injectable()
 export class ActivityValidatorBuilder {
@@ -48,7 +49,8 @@ export class ActivityValidatorBuilder {
             { type: 'DAY_REQUIRED', factory: (x, y) => new ActivityDayRequiredDateValidationRule(y) },
             { type: 'DATE_RANGE', factory: (x, y) => this.buildDateRangeValidator(x, y) },
             { type: 'AGE_RANGE', factory: (x, y) => this.buildAgeRangeValidator(x, y) },
-            { type: 'INT_RANGE', factory: (x, y) => this.buildNumericRangeValidator(x, y) }
+            { type: 'INT_RANGE', factory: (x, y) => this.buildNumericRangeValidator(x, y) },
+            { type: 'UNIQUE', factory: (x, y) => new ActivityUniqueValidationRule(y) },
         ];
     }
 

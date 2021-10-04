@@ -189,15 +189,18 @@
                 {
                     "Title": "Misión",
                     "Paragraphs": [
-                        "Count Me In es una organización sin fines de lucro que impulsa iniciativas de investigación que adoptan una estrategia única para la investigación del cáncer. Count Me In tiene un fuerte compromiso con hacer valer las experiencias de todos los pacientes con el objetivo de entender con mayor profundidad el cáncer. Para ello, trabajamos directamente con los pacientes como nuestros aliados para agilizar los descubrimientos. Nuestra meta es empoderar a las personas que tienen cáncer, incluyendo a aquellas que pertenecen a comunidades marginadas que históricamente han sido excluidas de la investigaciones, sin importar dónde vivan, a que ayuden a desarrollar avances y agilizar la investigación biomédica.",
-                        "Los pacientes que participan ayudan a dar forma e impulsan a la investigación al aportar información sobre el cáncer y su experiencia a través de encuestas para pacientes, y al dar acceso directo a sus registros médicos y muestras biológicas para poder estudiarlas y analizarlas, entre otras cosas. El equipo de Count Me In trabaja con ingenieros de software y científicos informáticos para recopilar, analizar y compartir datos anonimizados a partir de los aportes de los participantes. Los datos generados por Count Me In se comparten periódicamente en plataformas científicas para que los investigadores de todas partes puedan usarlos con el fin de realizar descubrimientos significativos."
+                        "Count Me In tiene un fuerte compromiso con valorar las experiencias de todos los pacientes para comprender más profundamente el cáncer.",
+                        "Los pacientes ayudan a dar forma e impulsan a la investigación al aportar información sobre el cáncer y sus experiencias a través de encuestas y al dar acceso directo a sus registros médicos y muestras biológicas para poder estudiarlas y analizarlas. El equipo de Count Me In comparte datos anonimizados libremente para impulsar descubrimientos sobre el cáncer a partir de los aportes de los participantes. Los datos generados por Count Me In se comparten periódicamente en plataformas científicas para que los investigadores de todas partes puedan usarlos con el fin de realizar descubrimientos significativos.",
+                        "Todas las personas viviendo con cáncer, incluyendo a aquellos de comunidades marginalizadas que han sido históricamente excluidas de la investigación, independientemente de donde vivan, pueden contribuir a los avances y aumentar el paso de la investigación biomédica."
                     ]
                 },
                 {
                     "Title": "Historia e hitos",
                     "Paragraphs": [
-                        "Count Me In (CMI) se originó de conversaciones entre Emerson Collective y Broad Institute of MIT y Harvard en 2013. Desde el lanzamiento del primer proyecto de cáncer de mama metastásico a fines de 2015, miles de personas con cáncer de todo Estados Unidos y Canadá se han inscrito en “Count Me In” para asociarse con los investigadores y compartir sus experiencias. El proyecto de cáncer de mama metastásico (Metastatic Breast Cancer, MBC) fue la primera iteración de esta nueva visión, seguido por el proyecto sobre angiosarcoma (Angiosarcoma, ASC) en 2017 y el proyecto de cáncer de próstata metastásico (Metastatic Prostate Cancer, MPC) en 2018. Desde entonces, CMI también ha lanzado el proyecto sobre cáncer de esófago y estómago (Esophageal and Stomach Cancer Project), el proyecto de osteosacroma (Osteosarcoma, OS) y el proyecto de tumor cerebral (Brain Tumor, BT). En otoño de 2021, se abrió la inscripción en Count Me In a todos los pacientes de Estados Unidos o Canadá que alguna vez hayan sido diagnosticados con cáncer.",
-                        "Count Me In cuenta con el patrocinio de <a target='_blank' href='https://www.emersoncollective.com/'>Emerson Collective</a>, una organización orientada al cambio social con sede en California; <a target='_blank' href='https://www.broadinstitute.org/'>Broad Institute</a>, una institución de investigación biomédica líder sin fines de lucro; y <a target='_blank' href='https://www.dana-farber.org/'>Dana Farber Cancer Institute</a>, un hospital oncológico líder."
+                        "Count Me In (CMI) se originó de conversaciones entre Emerson Collective y Broad Institute of MIT y Harvard en 2013. Desde el lanzamiento del primer proyecto de cáncer de mama metastásico a fines de 2015, miles de personas con cáncer de todo Estados Unidos y Canadá se han inscrito en “Count Me In” para asociarse con los investigadores y compartir sus experiencias.",
+                        "El proyecto de cáncer de mama metastásico (Metastatic Breast Cancer, MBC) fue la primera iteración de esta visión, seguido por el proyecto sobre angiosarcoma (Angiosarcoma, ASC) en 2017 y el proyecto de cáncer de próstata metastásico (Metastatic Prostate Cancer, MPC) en 2018. Desde entonces, CMI también ha lanzado el proyecto sobre cáncer de esófago y estómago (Esophageal and Stomach Cancer Project), el proyecto de tumor cerebral (Brain Tumor, BT), y el proyecto de osteosarcoma (Osteosarcoma, OS). En otoño de 2021, se abrió la inscripción en Count Me In a todos los pacientes de Estados Unidos o Canadá que alguna vez hayan sido diagnosticados con cáncer.",
+                        "En 2018, Count Me In fue establecida como una organización sin fines de lucros, comprometida a avanzar la colaboración entre pacientes y la investigación. Count Me In cuenta con el patrocinio de <a target='_blank' href='https://www.emersoncollective.com/'>Emerson Collective</a>, una organización orientada al cambio social basada en California; <a target='_blank' href='https://www.broadinstitute.org/'>Broad Institute</a>, una institución de investigación biomédica líder sin fines de lucro; y <a target='_blank' href='https://www.dana-farber.org/'>Dana Farber Cancer Institute</a>, un hospital oncológico líder.",
+                        "En agosto del 2021 abrimos nuestras puertas a todos en los Estados Unidos y Canadá quienes han sido diagnosticados con cáncer y continuaremos aprendiendo de cada paciente que se ha unido."
                     ]
                 },
                 {
@@ -206,10 +209,10 @@
                         {
                             "Title": "Liderazgo",
                             "List": [
-                                "<b>Elana Anastasio</b><br/> Directora Asociada",
-                                "<b>Roeshana Moore-Evans</b><br/> Asesora Superior",
+                                "<b>Nikhil Wagle</b><br/> Director",
                                 "<b>Corrie Painter</b><br/> Directora Adjunta",
-                                "<b>Nikhil Wagle</b><br/> Director"
+                                "<b>Elana Anastasio</b><br/> Directora Asociada",
+                                "<b>Roeshana Moore-Evans</b><br/> Asesora Superior"
                             ]
                         },
                         {
@@ -379,7 +382,8 @@
                     {
                         "Question": "¿Cómo ha sido la participación de los pacientes en el diseño de este proyecto?",
                         "Paragraphs": [
-                            "Count Me In ha trabajado estrechamente con pacientes, seres queridos y defensores de pacientes en la comunidad del cáncer colorrectal para desarrollar este proyecto. Los pacientes participaron en todos los aspectos del diseño, incluidos el concepto, los objetivos, las comunicaciones, los formularios y el sitio web."
+                            "Count Me In ha trabajado estrechamente con pacientes, seres queridos y defensores de pacientes en la comunidad del cáncer colorrectal para desarrollar este proyecto. Los pacientes participaron en todos los aspectos del diseño, incluidos el concepto, los objetivos, las comunicaciones, los formularios y el sitio web.",
+                            "Estamos orgullosos de tener como aliados a Colorectal Cancer Resource & Action Network, Raymond Foundation, GI Cancers Alliance, Colorectal Cancer Canada, Fight Colorectal Cancer, Colon Cancer Stars, Global Colon Cancer Association, Colorectal Cancer Alliance y Colon Cancer Coalition por colaborar y apoyar este proyecto."
                         ]
                     }
                 ]
@@ -387,13 +391,15 @@
             "Partners": {
                 "Title": "Aliados",
                 "Alts": {
-                    "CCResource": "Colorectal Cancer Resource & Action Network",
-                    "Raymond": "Raymond Foundation",
-                    "GICAlliance": "GI Cancers Alliance",
-                    "CCCanada": "Colorectal Cancer Canada",
-                    "FightCC": "Fight Colorectal Cancer",
-                    "ColonCancerStars": "Colon Cancer Stars",
-                    "GCCA": "Global Colon Cancer Association"
+                    "CCResource": "Colorectal Cancer Resource & Action Network logo",
+                    "Raymond": "Raymond Foundation logo",
+                    "GICAlliance": "GI Cancers Alliance logo",
+                    "CCCanada": "Colorectal Cancer Canada logo",
+                    "FightCC": "Fight Colorectal Cancer logo",
+                    "ColonCancerStars": "Colon Cancer Stars logo",
+                    "GCCA": "Global Colon Cancer Association logo",
+                    "CCAlliance": "Colorectal Cancer Alliance logo",
+                    "ColonCancerCoalition": "Colon Cancer Coalition logo"
                 },
                 "Text": "Para obtener más información sobre cómo participar en el Proyecto de cáncer colorrectal, comuníquese con el equipo en <a class='Link' href='mailto:info@colorectalcancerproject.org'>info@colorectalcancerproject.org</a>."
             },
@@ -501,8 +507,7 @@
             "ShowPanel": "Mostrar",
             "HidePanel": "Esconder",
             "UserLabel": "Usted",
-            "ChildLabel": "Su hijo(a)",
-            "RemoveParticipant": "Remover Participante {{participant}}"
+            "ChildLabel": "Su hijo(a){{suffix}}"
         },
         "Password": {
             "Title": "Ingrese la contraseña.",
@@ -594,6 +599,7 @@
         "PreviousButton": "Atrás",
         "SavingButton": "Guardando...",
         "EditButton": "Continuar",
+        "SaveButton": "Guardar",
         "CompleteButton": "Editar",
         "ReviewButton": "Ver",
         "OpenButton": "Abrir",
@@ -616,6 +622,9 @@
             "ActivityStatus": "Estado",
             "ActivityDate": "Creado",
             "ActivityActions": "Acciones"
+        },
+        "UserPreferences": {
+            "UserPreferencesTitle": "Preferencias del Usuario"
         },
         "DatePicker": {
             "Day": "Escoja el día...",
@@ -755,7 +764,8 @@
                 "E.TIMED_OUT": "Se superó el tiempo máximo de espera.",
                 "E.TIME_ZONE.UNAVAILABLE": "El servicio de zona horaria no está disponible en este momento.",
                 "E.PO_BOX.INTERNATIONAL": "No se puede verificar la casilla postal internacional. Tenga en cuenta que eso puede causar errores en solicitudes correctas."
-            }
+            },
+            "UseAsEntered":  "No podemos confirmar que esta dirección es válida. Marque esta casilla para confirmar el uso de esta dirección como ha sido ingresada."
         },
         "TooltipAlt": "Información",
         "Validators": {

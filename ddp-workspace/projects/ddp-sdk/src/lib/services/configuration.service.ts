@@ -73,4 +73,27 @@ export class ConfigurationService {
     prismDashboardRoute: string;
     prismRoute: string;
     picklistsWithNoSorting: string[] = [];
+    /*
+     * This flag indicates whether we enable fix for missing house numbers.
+     * When user selects an address in suggestion list from Google autocomplete
+     * and this address doesn't exist street field won't include a house number (if user selected an address with one)
+     * Enabling this flag potentially fixes this problem although it's not yet tested properly and may cause strange behavior
+     */
+    fixMissingHouseNumberInAddressForm = false;
+    // autocompletePicklists which don't need to be sorted
+    notSortedPicklistAutocompleteStableIds: string[] = [];
+    // symbols which should be ignored in autocompletePicklist query (treat as a space)
+    picklistAutocompleteIgnoredSymbols: string[] = ['-', '/', '(', ')'];
+    /**
+     * If there are only 2 supported languages enabling this flag won't show a dropdown but only a toggle button.
+     */
+    useBinaryLanguageSelector = false;
+    /**
+     * Used in combination with `useBinaryLanguageSelector`.
+     * Reverses 2 supported languages.
+     * Example: a study supports English and Spanish.
+     * Default behavior: English is selected => shows English in language selector.
+     * Behavior with this flag enabled: English is selected => shows Spanish in language selector.
+     */
+    reverseBinaryLanguageSelector = false;
 }
