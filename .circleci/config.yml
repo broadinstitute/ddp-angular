@@ -70,7 +70,7 @@ commands:
       - run:
           name: Determine environment for branch << pipeline.git.branch >>
           command: |
-            if [ "<< pipeline.parameters.deploy_env >>" -ne "UNKNOWN" ]
+            if [ "<< pipeline.parameters.deploy_env >>" != "UNKNOWN" ]
             then
               DEPLOY_TARGET_ENV="<< pipeline.parameters.deploy_env >>"
             else
