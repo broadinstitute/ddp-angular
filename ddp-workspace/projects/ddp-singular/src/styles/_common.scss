@@ -1,0 +1,61 @@
+@import 'variables';
+
+*,
+*::before,
+*::after {
+  font-family: 'Spartan-Regular', sans-serif;
+}
+
+html {
+  font-size: 20px;
+
+  @media (max-width: 1280px) {
+    font-size: 18px;
+  }
+
+  @media (max-width: 1026px) {
+    font-size: 16px;
+  }
+}
+
+body {
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: $color-text;
+}
+
+.row {
+  margin: 0 !important;
+}
+
+.box {
+  margin: 20px 0;
+  padding: 15px;
+
+  border-radius: 2px;
+
+  text-align: center;
+
+  &--light-blue {
+    background: $color-light-blue;
+  }
+}
+
+ul li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  margin: 0 auto;
+  width: 960px;
+}

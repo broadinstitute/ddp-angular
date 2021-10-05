@@ -1,0 +1,96 @@
+@import 'variables';
+
+.SimpleButton {
+  color: #fff;
+  font-size: 19px;
+  line-height: 3.2rem;
+  text-shadow: none;
+  padding: 0;
+  background: 0;
+  border: 0;
+}
+
+.SimpleButton:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+.SimpleButton:focus {
+  text-decoration: none;
+  color: #fff;
+}
+
+@media only screen and (max-width: 1030px) {
+  .SimpleButton {
+    font-size: 17px;
+  }
+}
+
+.button {
+  display: inline-block;
+  padding: 7px 50px;
+  font-size: 1rem;
+  line-height: 1.4rem;
+  text-align: center;
+  text-decoration: none !important;
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  font-weight: 400;
+  transition: all 0.5s ease;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+  }
+
+  &--primary {
+    background: $color-green !important;
+    border: 1px solid $color-green !important;
+
+    color: #ffffff !important;
+
+    &-outline {
+      background: transparent !important;
+      border: 2px solid $color-green !important;
+
+      color: $color-green !important;
+    }
+  }
+
+  &--lg {
+    padding: 15px 15px !important;
+  }
+
+  &--sm {
+    padding: 1.4rem 2.6rem;
+    border-radius: 10px;
+    font-size: 1.6rem;
+  }
+
+  &--blue {
+    background: $button-background;
+
+    color: $button-color;
+
+    &:not(:disabled) {
+      &:hover,
+      &:focus {
+        background: lighten($button-background, 5%);
+      }
+
+      &:active {
+        background: lighten($button-background, 10%);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 780px) {
+  .button {
+    &--lg {
+      padding: 14px 9px !important;
+    }
+  }
+}

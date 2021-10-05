@@ -1,0 +1,19 @@
+$__white: #ffffff;
+$__dark-blue: #011c48;
+$__light-blue: #34cec3;
+$__font: $__dark-blue;
+$__light-font: $__white;
+
+$colors: (
+  'header-bg': $__dark-blue,
+  'header-bar-bg': $__white,
+  'header-color': $__light-font,
+  'header-color-dark': $__font,
+  'footer-bg': $__dark-blue,
+  'footer-color': $__light-font,
+  'footer-social-border': $__white,
+  'font-dark': $__font,
+  'font-light': $__white,
+  'list-item-hightlight-bg': $__light-blue,
+  'list-item-hightlight-color': $__font,
+);

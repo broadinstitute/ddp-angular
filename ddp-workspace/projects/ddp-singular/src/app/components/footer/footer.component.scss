@@ -1,0 +1,98 @@
+@import '../../../styles/breakpoints';
+//@import '../../../styles/link-list';
+@import '../../../styles/colors';
+
+:host {
+  margin-top: auto;
+}
+
+.footer {
+  margin-top: 50px;
+  background: map-get($colors, 'footer-bg');
+  color: map-get($colors, 'footer-color');
+
+  & .container {
+    padding-top: 50px;
+    padding-bottom: 70px;
+    display: flex;
+    width: 1250px;
+    justify-content: space-between;
+
+    @include media-md {
+      display: block;
+      width: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+  & a {
+    color: map-get($colors, 'footer-color');
+  }
+
+  &-logo img {
+    width: 150px;
+  }
+
+  &-menu {
+    & a {
+      font-family: Spartan-Bold, sans-serif;
+    }
+    & .link-list {
+      margin-top: 0;
+    }
+  }
+
+  &-social {
+    margin: 40px 0;
+    display: flex;
+    &-item {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+      position: relative;
+      border-radius: 100px;
+      border: 2px solid map-get($colors, 'footer-social-border');
+      & img {
+        filter: invert(1);
+        position: absolute;
+        top: 13px;
+        left: 13px;
+      }
+    }
+  }
+
+  &-copyright {
+    font-size: 16px;
+    @include media-md {
+      margin-bottom: 30px;
+    }
+  }
+
+  .link-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+
+    @include media-md {
+      flex-direction: column;
+      align-items: unset;
+      padding-left: 0;
+    }
+
+    &__item {
+      margin-right: 25px;
+      @include media-md {
+        margin-bottom: 10px;
+      }
+      &_highlight {
+        padding: 5px 15px;
+        border-radius: 5px;
+        background: map-get($colors, 'list-item-hightlight-bg');
+        & a.link {
+          color: map-get($colors, 'list-item-hightlight-color');
+        }
+      }
+    }
+  }
+}
