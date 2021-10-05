@@ -77,7 +77,7 @@ commands:
               DEPLOY_TARGET_ENV="<< pipeline.git.branch >>"
             fi
 
-            case DEPLOY_TARGET_ENV in
+            case $DEPLOY_TARGET_ENV in
               dev*)
                 DEPLOY_ENV=dev
                 BUILD_PARAMS=--sourceMap
