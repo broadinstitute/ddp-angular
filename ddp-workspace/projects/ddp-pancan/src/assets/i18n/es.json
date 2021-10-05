@@ -591,6 +591,7 @@
         }
     },
     "SDK": {
+        "FinishButton": "Terminar",
         "SubmitButton": "Enviar",
         "CloseButton": "Cerrar",
         "AddButton": "AGREGAR",
@@ -677,6 +678,9 @@
                 "OtherInstitution": "Otra institución"
             },
             "PhysicianValidation": "Complete todos los campos obligatorios."
+        },
+        "ModalActivityBlock": {
+            "SaveButton": "Guardar"
         },
         "MailAddress": {
             "Fields": {

@@ -92,6 +92,7 @@ sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.useStepsWithCircle = true;
 sdkConfig.notSortedPicklistAutocompleteStableIds = ['PRIMARY_CANCER_SELF', 'PRIMARY_CANCER_CHILD'];
+sdkConfig.usesVerticalStepper = ['FAMILY_HISTORY', 'DIET_LIFESTYLE'];
 
 export function translateFactory(translate: TranslateService,
     injector: Injector,
