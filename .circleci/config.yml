@@ -66,17 +66,13 @@ commands:
 
   set-deployment-environment:
     description: "Determine working environment"
-    parameters:
-      deploy_env:
-        type: string
-        default: "UNKNOWN"
     steps:
       - run:
           name: Determine environment for branch << pipeline.git.branch >>
           command: |
-            if [ "<< parameters.deploy_env >>" -ne "UNKNOWN" ]
+            if [ "<< pipeline.parameters.deploy_env >>" -ne "UNKNOWN" ]
             then
-              DEPLOY_TARGET_ENV="<< parameters.deploy_env >>"
+              DEPLOY_TARGET_ENV="<< pipeline.parameters.deploy_env >>"
             else
               DEPLOY_TARGET_ENV="<< pipeline.git.branch >>"
             fi
