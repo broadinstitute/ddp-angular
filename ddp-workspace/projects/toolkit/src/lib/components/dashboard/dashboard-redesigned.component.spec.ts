@@ -515,6 +515,7 @@ describe('DashboardRedesignedComponent', () => {
         expect(matDialogSpy.open).toHaveBeenCalledWith(UserPreferencesComponent, {
             width: '650px',
             autoFocus: false,
+            data: { userName: 'My child'}
         });
     });
 });

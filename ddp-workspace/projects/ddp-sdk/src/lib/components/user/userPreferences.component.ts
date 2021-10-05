@@ -1,5 +1,5 @@
 import { Component, ElementRef, Inject, NgZone, OnDestroy } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CompositeDisposable } from '../../compositeDisposable';
 import { UserProfileServiceAgent } from '../../services/serviceAgents/userProfileServiceAgent.service';
 import { DateService } from '../../services/dateService.service';
@@ -14,7 +14,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 @Component({
     selector: 'ddp-user-preferences',
     template: `
-        <h2 mat-dialog-title translate>SDK.UserPreferences.UserPreferencesTitle</h2>
+        <h2 mat-dialog-title translate>{{'SDK.UserPreferences.UserPreferencesTitle' | translate}}: {{data.userName}}</h2>
         <ddp-loading [loaded]="loaded"></ddp-loading>
         <mat-dialog-content>
             <ng-container *ngIf="showProfileFields">
@@ -52,7 +52,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
                     </mat-form-field>
                 </div>
             </ng-container>
-            <h3 class="form-subgroup-title">Your Mailing Address</h3>
+            <h3 class="form-subgroup-title">User Mailing Address</h3>
             <ddp-address-embedded [block]="addressFormBlock"
                                   [country]="config.supportedCountry"
                                   [readonly]="addressReadonly"
@@ -131,6 +131,7 @@ export class UserPreferencesComponent implements OnDestroy {
     public addressReadonly = false;
     // todo display fields after address editing will be delivered
     public showProfileFields = false;
+    public readonly userName: string;
 
     constructor(
         private serviceAgent: UserProfileServiceAgent,
@@ -140,7 +141,9 @@ export class UserPreferencesComponent implements OnDestroy {
         private element: ElementRef,
         private ngZone: NgZone,
         @Inject('ddp.config') public config: ConfigurationService,
+        @Inject(MAT_DIALOG_DATA) public data: { userName: string }
         ) {
+        this.userName = data.userName;
         this.anchor = new CompositeDisposable();
 
         for (let i = 0; i < 50; i++) {

@@ -10,7 +10,7 @@ import {
     UserProfileServiceAgent
 } from 'ddp-sdk';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { DateService } from '../../services/dateService.service';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
@@ -64,6 +64,7 @@ describe('UserPreferencesComponent', () => {
                 { provide: DateService , useValue: { } },
                 { provide: 'ddp.config', useValue: { } },
                 { provide: MatDialogRef, useValue: matDialogRefSpy },
+                {provide: MAT_DIALOG_DATA, useValue: {}}
             ],
             declarations: [UserPreferencesComponent, FakeAddressComponent, loadingMock],
         })
