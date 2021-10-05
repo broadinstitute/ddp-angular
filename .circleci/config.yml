@@ -285,23 +285,20 @@ commands:
     description: "Run all tests"
     steps:
       - run:
-          command: "echo skipping tests"
-      # remove this when done developing
-#      - run:
-#          name: ng test
-#          command: |
-#            mkdir -p /tmp/junit
-#            ng test ddp-sdk --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
-#            ng test toolkit --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
-#            ng test $ANGULAR_PROJECT_NAME --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
-#          environment:
-#            JUNIT_REPORT_PATH: /tmp/junit/
-#            JUNIT_REPORT_NAME: test-results.xml
-#          when: always
-#      - store_test_results:
-#          path: /tmp/junit
-#      - store_artifacts:
-#          path: /tmp/junit
+          name: ng test
+          command: |
+            mkdir -p /tmp/junit
+            ng test ddp-sdk --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
+            ng test toolkit --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
+            ng test $ANGULAR_PROJECT_NAME --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
+          environment:
+            JUNIT_REPORT_PATH: /tmp/junit/
+            JUNIT_REPORT_NAME: test-results.xml
+          when: always
+      - store_test_results:
+          path: /tmp/junit
+      - store_artifacts:
+          path: /tmp/junit
 
   build-atcp-assets:
     description: build atcp auth0 scripts & styles
@@ -555,16 +552,10 @@ workflows:
     when:
       and:
         - equal: ["build-and-store", << pipeline.parameters.api_call >>]
-        - << pipeline.parameters.study_key >>
         - not:
             equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
     jobs:
       - app-build-and-store-job
-#          filters:
-#            branches:
-#              ignore:
-#                - /^rc.*/
-#                - /^hotfix.*/
 
   api-deploy-workflow:
     when:
@@ -578,11 +569,6 @@ workflows:
     jobs:
       - deploy-stored-build-job:
           study_key: << pipeline.parameters.study_key >>
-#          filters:
-#            branches:
-#              ignore:
-#                - /^rc.*/
-#                - /^hotfix.*/
 
   build-and-deploy-all-apps-workflow:
     unless: << pipeline.parameters.do-builds >>
