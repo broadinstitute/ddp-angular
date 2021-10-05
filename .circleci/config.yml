@@ -67,22 +67,22 @@ commands:
   set-deployment-environment:
     description: "Determine working environment"
     parameters:
-      target_env:
+      deploy_env:
         type: string
-        default: ""
+        default: "UNKNOWN"
     steps:
       - run:
           name: Determine environment for branch << pipeline.git.branch >>
           command: |
-            if [ -n "<< parameters.target_env >>" ]
+            if [ "<< parameters.deploy_env >>" -ne "UNKNOWN" ]
             then
-              DEPLOY_TARGET_ENV="<< parameters.target_env >>"
+              DEPLOY_TARGET_ENV="<< parameters.deploy_env >>"
             else
               DEPLOY_TARGET_ENV="<< pipeline.git.branch >>"
             fi
 
             case DEPLOY_TARGET_ENV in
-              develop)
+              dev*)
                 DEPLOY_ENV=dev
                 BUILD_PARAMS=--sourceMap
               ;;
@@ -93,7 +93,7 @@ commands:
               staging)
                 DEPLOY_ENV=staging
               ;;
-              production)
+              prod*)
                 DEPLOY_ENV=prod
               ;;
               *)
@@ -541,9 +541,10 @@ parameters:
     type: enum
     enum: ["build-and-store","deploy","UNKNOWN"]
     default: "UNKNOWN"
-  target_env:
-    type: string
-    default: ""
+  deploy_env:
+    type: enum
+    enum: ["dev", "test", "staging", "prod", "UNKNOWN"]
+    default: "UNKNOWN"
   do-builds:
     type: boolean
     default: false
@@ -570,7 +571,8 @@ workflows:
     when:
       and:
         - equal: ["deploy", << pipeline.parameters.api_call >>]
-        - << pipeline.parameters.target_env >>
+        - not:
+            equal: ["UNKNOWN", << pipeline.parameters.deploy_env >>]
         - << pipeline.parameters.study_key >>
         - not:
             equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
@@ -596,8 +598,7 @@ workflows:
     when:
       and:
         - << pipeline.parameters.do-builds >>
-        - not:
-            << pipeline.parameters.target_env >>
+        - equal: ["UNKNOWN", << pipeline.parameters.deploy_env >>]
     jobs:
       - build-and-deploy-job:
           study_key: << pipeline.parameters.study_key >>
