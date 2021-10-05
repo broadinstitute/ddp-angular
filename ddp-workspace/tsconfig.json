@@ -125,6 +125,9 @@
     },
     {
       "path": "./projects/ddp-pancan/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ddp-singular/tsconfig.spec.json"
     }
   ]
 }
