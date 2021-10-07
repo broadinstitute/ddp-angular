@@ -510,7 +510,7 @@
             "HidePanel": "Hide",
             "UserLabel": "You",
             "ChildLabel": "Your child{{suffix}}",
-            "EditUser": "Edit"
+            "EditUser": "Edit profile"
         },
         "Password": {
             "Title": "Please enter the password",
