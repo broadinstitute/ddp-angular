@@ -186,7 +186,7 @@
 
 @media screen and (max-width: $desktop-breakpoint) {
     .section {
-        &-0,  {
+        &-0 {
             background-size: auto 480px !important;
         }
 
