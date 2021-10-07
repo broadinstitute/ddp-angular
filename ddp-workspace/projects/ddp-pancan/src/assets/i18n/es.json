@@ -680,7 +680,12 @@
             "PhysicianValidation": "Complete todos los campos obligatorios."
         },
         "ModalActivityBlock": {
-            "SaveButton": "Guardar"
+            "SaveButton": "Guardar",
+            "NumQuestionsAnswered": "{{number}} preguntas respondidas",
+            "Complete": "Completar",
+            "EditButton": "Editar",
+            "DeleteButton": "Eliminar",
+            "CancelButton": "Cancelar"
         },
         "MailAddress": {
             "Fields": {
