@@ -33,7 +33,7 @@ describe('AddressService', () => {
         httpTestingController.verify();
     });
 
-    it('should be initialized', (done) => {
+    it('should handle getAddress request properly', (done) => {
         const addressGuid = 'ABCD678';
         const addressJson = {
             guid: '123',
@@ -56,5 +56,30 @@ describe('AddressService', () => {
             .expectOne(`${config.backendUrl}/pepper/v1/user/${sessionUserGuid}/profile/address/${addressGuid}`);
         expect(req.request.method).toBe('GET');
         req.flush(addressJson);
+    });
+
+    it('should return address if address update was successful', (done) => {
+        const addressGuid = 'ABCD678';
+        const addressJson = new Address({
+            guid: addressGuid,
+            name: 'test',
+            street1: 'road',
+            street2: 'road2',
+            city: 'Moscow',
+            state: 'Moscow',
+            zip: '666777',
+            country: 'Russia',
+            phone: '9678465',
+        });
+
+        service.saveAddress(addressJson).subscribe((address: Address) => {
+            expect(address).toEqual(jasmine.objectContaining(addressJson));
+            done();
+        });
+
+        const req = httpTestingController
+            .expectOne(`${config.backendUrl}/pepper/v1/user/${sessionUserGuid}/profile/address/${addressGuid}`);
+        expect(req.request.method).toBe('PUT');
+        req.flush(null);
     });
 });

@@ -200,6 +200,11 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
      */
     @Output()
     componentBusy = new EventEmitter<boolean>(true);
+    /**
+     * Will emit if form error or suggestion will be shown at the bottom of the component in order to allow the parent scroll to it
+     */
+    @Output()
+    errorOrSuggestionWasShown = new EventEmitter();
 
     @ViewChild(AddressInputComponent, {static: true}) addressInputComponent: AddressInputComponent;
     public formErrorMessages$: Observable<FormError[]>;
@@ -552,7 +557,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             tap(() => busyCounter$.next(1)),
             concatMap(([_, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
             catchError((error) => {
-                this.logger.logDebug(this.LOG_SOURCE, 'Saving address was failed');
+                this.logger.logError(this.LOG_SOURCE, 'Saving address was failed', error.message);
                 const formErrorMessages = [{ message: error.message, isEasyPostError: false }];
                 this.stateUpdates$.next({formErrorMessages});
                 return of(null);
@@ -582,16 +587,18 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             tap(() => this.addressInputComponent.markAddressTouched())
         );
 
-        const savedAddress$: Observable<Address | null> = saveRealAddressAction$.pipe(
-            filter(savedAddressVal => !!savedAddressVal),
-            share()
-        );
+        const savedAddress$: Observable<Address | null> = saveRealAddressAction$.pipe(share());
 
         const emitValueChangedAction$ = savedAddress$.pipe(
             tap((address => this.valueChanged.emit(address))));
 
         const updateInputComponentWithSavedAddressAction$ = savedAddress$.pipe(
             tap(address => this.inputAddress$.next(address))
+        );
+
+        const errorOrSuggestionIsShown$ = combineLatest([this.errorMessagesToDisplay$, this.suggestionInfo$]).pipe(
+            filter(([errorMessages, suggestionInfo]) => !!(errorMessages.length || suggestionInfo)),
+            tap(() => this.errorOrSuggestionWasShown.emit())
         );
 
         const addressComponentBusy$ = combineLatest([this.isInputComponentBusy$, isThisComponentBusy$]).pipe(
@@ -674,7 +681,8 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             processOtherVerificationErrorsAction$,
             emitValidStatusAction$,
             updateInputComponentWithSelectedAddress$,
-            initializeStateAction$
+            initializeStateAction$,
+            errorOrSuggestionIsShown$
         ).pipe(
             takeUntil(this.ngUnsubscribe)
         ).subscribe();

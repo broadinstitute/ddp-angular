@@ -21,7 +21,8 @@ import {
     AnalyticsEventsService,
     WorkflowServiceAgent,
     UserManagementServiceAgent,
-    ActivityResponse
+    ActivityResponse,
+    UserPreferencesComponent
 } from 'ddp-sdk';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable, of, throwError } from 'rxjs';
@@ -35,6 +36,7 @@ import { MatExpansionPanelHarness } from '@angular/material/expansion/testing';
 import { ActivityInstanceStatusServiceAgent } from '../../../../../ddp-sdk/src/lib/services/serviceAgents/activityInstanceStatusServiceAgent.service';
 import { MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
@@ -83,6 +85,7 @@ describe('DashboardRedesignedComponent', () => {
     let governedParticipantsSpy: jasmine.SpyObj<GovernedParticipantsServiceAgent>;
     let workflowServiceSpy: jasmine.SpyObj<WorkflowServiceAgent>;
     let userManagementServiceSpy: jasmine.SpyObj<UserManagementServiceAgent>;
+    let matDialogSpy: jasmine.SpyObj<MatDialog>;
     let sessionMock: SessionMementoService;
     let toolkitConfigMock: ToolkitConfigurationService;
     let profileMock: UserProfile;
@@ -117,6 +120,7 @@ describe('DashboardRedesignedComponent', () => {
             setParticipant: () => {},
             session: ({ participantGuid: '1243', userGuid } as Session)
         } as SessionMementoService;
+        matDialogSpy = jasmine.createSpyObj('MatDialog', { open: { afterClosed: () => of(true) } });
         const headerConfigSpy = jasmine.createSpyObj('participantsSearchSpy', ['setupDefaultHeader']);
         const userInvitationSpy = jasmine.createSpyObj('userInvitationSpy', { getInvitations: of([]) });
         const statusesServiceAgentSpy = jasmine.createSpyObj('statusesServiceAgentSpy', { getStatuses: of([]) });
@@ -164,6 +168,7 @@ describe('DashboardRedesignedComponent', () => {
                 { provide: ActivityServiceAgent, useValue: {} },
                 { provide: LoggingService, useValue: loggerSpy },
                 { provide: AnalyticsEventsService, useValue: analyticsSpy },
+                { provide: MatDialog, useValue: matDialogSpy },
             ],
             declarations: [DashboardRedesignedComponent, subjectPanel, UserActivitiesComponent],
         })
@@ -490,5 +495,27 @@ describe('DashboardRedesignedComponent', () => {
         fixture.detectChanges();
 
         expect(setParticipantSpy.calls.allArgs()).toEqual([[null]]);
+    });
+
+    it('set participant when user clicks on participant edit button', async () => {
+        const participantGuid = 'gdh123';
+        toolkitConfigMock.useMultiParticipantDashboard = true;
+        userActivityServiceAgentSpy.getActivities.and.returnValue(of([]));
+        userActivityServiceAgentSpy.getActivities.withArgs(jasmine.anything(), participantGuid).and.returnValue(of([activityMock]));
+        governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([
+            { userGuid: participantGuid, userProfile: { firstName: 'My', lastName: 'child' } } as Participant,
+        ]));
+        component.ngOnInit();
+        fixture.detectChanges();
+        const setParticipantSpy = spyOn(sessionMock, 'setParticipant');
+        const editUserButton = fixture.debugElement.query(By.css('.edit-user-button')).nativeElement;
+        editUserButton.click();
+
+        expect(setParticipantSpy.calls.allArgs()).toEqual([[participantGuid], [null]]);
+        expect(matDialogSpy.open).toHaveBeenCalledWith(UserPreferencesComponent, {
+            width: '650px',
+            autoFocus: false,
+            data: { userName: 'My child'}
+        });
     });
 });

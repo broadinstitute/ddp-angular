@@ -507,7 +507,8 @@
             "ShowPanel": "Mostrar",
             "HidePanel": "Esconder",
             "UserLabel": "Usted",
-            "ChildLabel": "Su hijo(a){{suffix}}"
+            "ChildLabel": "Su hijo(a){{suffix}}",
+            "EditUser": "Editar"
         },
         "Password": {
             "Title": "Ingrese la contraseña.",
@@ -594,7 +595,7 @@
         "SubmitButton": "Enviar",
         "CloseButton": "Cerrar",
         "AddButton": "AGREGAR",
-        "CancelButton": "CANCELAR",
+        "CancelButton": "Cancelar",
         "NextButton": "Siguiente",
         "PreviousButton": "Atrás",
         "SavingButton": "Guardando...",
