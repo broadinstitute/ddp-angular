@@ -13,6 +13,7 @@ import {
 import { ActivityCodes } from '../../sdk/constants/activityCodes';
 import { COMPLETE } from '../workflow-progress/workflow-progress';
 import { ActivityService } from '../../services/activity.service';
+import { RegistrationStatusService } from '../../services/registrationStatus.service';
 import * as RouterResources from '../../router-resources';
 import { Participant } from './participant-list.component';
 
@@ -21,13 +22,35 @@ import { Participant } from './participant-list.component';
   template: `
     <div class="participant-expandable">
       <div class="participant-expandable__header">
-        <span class="participant-expandable__name">
-          {{ participant.profile.firstName }} {{ participant.profile.lastName }}
-        </span>
+        <div style="display: flex; align-items: center; margin-right: auto;">
+          <span class="participant-expandable__name">
+            {{ participant.profile.firstName }}
+            {{ participant.profile.lastName }}
+          </span>
+
+          <div *ngIf="participant.status">
+            <span class="status">
+              {{ 'EnrollmentStatus.Prefix' | translate }}
+            </span>
+
+            <ng-container *ngIf="isContactUsStatus; else simpleStatus">
+              <app-tooltip-button
+                style="margin-left: 4px; font-style: italic;"
+                [message]="'EnrollmentStatus.ContactUsTooltip' | translate"
+              >
+                {{ enrollmentMessageKey | translate }}
+              </app-tooltip-button>
+            </ng-container>
+
+            <ng-template #simpleStatus>
+              <span class="status">{{ enrollmentMessageKey | translate }}</span>
+            </ng-template>
+          </div>
+        </div>
 
         <span
           *ngIf="surveysToCompleteCount"
-          class="participant-expandable__status"
+          class="participant-expandable__counter"
         >
           <ng-container
             *ngIf="surveysToCompleteCount === 1; else pluralSurveyCount"
@@ -58,6 +81,8 @@ import { Participant } from './participant-list.component';
         <app-user-activities
           [activities]="participant.activities"
           [opaque]="true"
+          [isParticipantIneligible]="isContactUsStatus"
+          [isUiBlocked]="isUiBlocked"
           (startActivity)="onStartActivity($event)"
           (continueActivity)="onStartActivity($event)"
           (viewActivity)="onStartActivity($event)"
@@ -72,12 +97,14 @@ export class ParticipantListItem {
   @Input() participant: Participant;
 
   expanded = false;
+  isUiBlocked = false;
 
   constructor(
     private router: Router,
     private session: SessionMementoService,
     private activityServiceAgent: ActivityServiceAgent,
     private activityService: ActivityService,
+    private registrationStatusService: RegistrationStatusService,
     @Inject('ddp.config') private config: ConfigurationService,
   ) {}
 
@@ -85,6 +112,18 @@ export class ParticipantListItem {
     return this.participant.activities.filter(
       activity => activity.statusCode !== COMPLETE,
     ).length;
+  }
+
+  get enrollmentMessageKey(): string {
+    return this.registrationStatusService.getEnrollmentMessageKey(
+      this.participant.status,
+    );
+  }
+
+  get isContactUsStatus(): boolean {
+    return this.registrationStatusService.isContactUsStatus(
+      this.participant.status,
+    );
   }
 
   onStartActivity(instanceGuid: string): void {
@@ -113,6 +152,7 @@ export class ParticipantListItem {
   }
 
   private handleEditConsent(): void {
+    this.isUiBlocked = true;
     this.session.setParticipant(this.participant.guid);
 
     this.activityServiceAgent
@@ -124,6 +164,7 @@ export class ParticipantListItem {
   }
 
   private handleEditActivity(activityInstance: ActivityInstance): void {
+    this.isUiBlocked = true;
     this.session.setParticipant(this.participant.guid);
 
     this.activityServiceAgent
@@ -136,6 +177,7 @@ export class ParticipantListItem {
     activity: ActivityInstanceGuid,
     isConsentEditActivity: boolean = false,
   ): void => {
+    this.isUiBlocked = false;
     this.activityService.setCurrentActivity(
       activity.instanceGuid,
       isConsentEditActivity,

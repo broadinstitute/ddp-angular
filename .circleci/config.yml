@@ -12,11 +12,9 @@ references:
       - *npm_cache_key
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-    "osteo brain angio mbc testboston mpc prion atcp rarex rgp esc"
+    "basil osteo brain angio mbc testboston mpc prion atcp rarex rgp esc cgc circadia pancan"
   study_guids: &study_guids
-    "CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc"
-  dispatch_secret_id: &dispatch_secret_id
-      app-engine-dispatch
+    "basil CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc circadia cmi-pancan"
 
 # Container for all the builds
 executors:
@@ -116,6 +114,7 @@ commands:
             # we are getting our builds from the one bucket
             readvault.sh secret/pepper/prod/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
+            echo "Looking for archive matching ${TAR_FILE_URL_PATTERN}"
             TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | sort -r | head -1`
 
             if [ -z $TAR_FILE_URL ]
@@ -124,6 +123,7 @@ commands:
               exit 1
             fi
             TAR_FILE_PATH="/tmp/$(basename -- $TAR_FILE_URL)"
+            echo "Downloading ${TAR_FILE_URL} to ${TAR_FILE_PATH}"
             gsutil cp  $TAR_FILE_URL $TAR_FILE_PATH
             mkdir -p $OUTPUT_DIR && tar -xvf $TAR_FILE_PATH -C $OUTPUT_DIR
             echo "Contents of extracted archive at $OUTPUT_DIR"
@@ -136,9 +136,6 @@ commands:
     parameters:
       study_key:
         type: string
-      dispatch_secret_id:
-        type: string
-        default: *dispatch_secret_id
     steps:
       - run:
           name: <<parameters.study_key>> generate config files and copy pepperConfig.js
@@ -151,6 +148,10 @@ commands:
             CONFIG_FILE_SRC_PATH="${ANGULAR_PROJECT_DIR_PATH}/output-config/pepperConfig.js"
             cp  $CONFIG_FILE_SRC_PATH $CONFIG_DIR
             echo "$CONFIG_FILE_SRC_PATH has been copied to $CONFIG_DIR"
+
+            if [[ "<<parameters.study_key>>" == "atcp" ]]; then
+              cp "${ANGULAR_PROJECT_DIR_PATH}/output-config/app.yaml" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
+            fi
           environment: #Setting this ENV variable prevents launching a new Docker within build-study-sh script
             USE_DOCKER: false
           working_directory: *repo_path
@@ -165,15 +166,6 @@ commands:
           command: |
             set -u
             gcloud app deploy --version="${SHORT_GIT_SHA}" --stop-previous-version --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
-      - run:
-          name: Update GAE dispatch config
-          command: |
-            set -u
-            echo "Reading dispatch file from Secret Manager secret id '<<parameters.dispatch_secret_id>>'"
-            gcloud secrets versions access latest --secret '<<parameters.dispatch_secret_id>>' --project "broad-ddp-${ENVIRONMENT}" > dispatch.yaml
-            cat dispatch.yaml
-            gcloud app deploy --quiet --project "broad-ddp-${ENVIRONMENT}" dispatch.yaml
-          working_directory: *repo_path
       - run:
           name: Update deployments sheet
           command: |
@@ -279,8 +271,9 @@ commands:
       - run:
           name: Linter check
           command: |
-            ng lint
-
+            ng lint ddp-sdk
+            ng lint toolkit
+            ng lint $ANGULAR_PROJECT_NAME
   run-tests:
     description: "Run all tests"
     steps:
@@ -289,6 +282,8 @@ commands:
           command: |
             mkdir -p /tmp/junit
             ng test ddp-sdk --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
+            ng test toolkit --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
+            ng test $ANGULAR_PROJECT_NAME --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
           environment:
             JUNIT_REPORT_PATH: /tmp/junit/
             JUNIT_REPORT_NAME: test-results.xml
@@ -475,6 +470,8 @@ jobs:
       - checkout:
           path: *repo_path
       - conditionally-launch-build-and-store:
+          study_key: basil
+      - conditionally-launch-build-and-store:
           study_key: osteo
       - conditionally-launch-build-and-store:
           study_key: brain
@@ -496,6 +493,12 @@ jobs:
           study_key: esc
       - conditionally-launch-build-and-store:
           study_key: prion
+      - conditionally-launch-build-and-store:
+          study_key: cgc
+      - conditionally-launch-build-and-store:
+          study_key: circadia
+      - conditionally-launch-build-and-store:
+          study_key: pancan
 
   app-build-and-store-job:
     working_directory: *ng_workspace_path
@@ -570,6 +573,13 @@ workflows:
 
   deploy-all-apps-workflow:
     jobs:
+      - deploy-stored-build-job:
+          filters:
+            branches:
+              only:
+                - test
+                - staging
+          study_key: basil
       - deploy-stored-build-job: &deploy_branch_filters
           filters:
             branches:
@@ -599,15 +609,24 @@ workflows:
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: rarex
-      - deploy-stored-build-job:
-          <<: *deploy_branch_filters
-          study_key: rgp
+#      - deploy-stored-build-job:
+#          <<: *deploy_branch_filters
+#          study_key: rgp
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: esc
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: prion
+      - deploy-stored-build-job:
+          <<: *deploy_branch_filters
+          study_key: cgc
+      - deploy-stored-build-job:
+          <<: *deploy_branch_filters
+          study_key: circadia
+      - deploy-stored-build-job:
+          <<: *deploy_branch_filters
+          study_key: pancan
 
   nightly:
     triggers:
@@ -618,6 +637,9 @@ workflows:
               only:
                 - develop
     jobs:
+      - build-and-deploy-job:
+          name: basil-nightly
+          study_key: basil
       - build-and-deploy-job:
           name: osteo-nightly
           study_key: osteo
@@ -651,3 +673,12 @@ workflows:
       - build-and-deploy-job:
           name: prion-nightly
           study_key: prion
+      - build-and-deploy-job:
+          name: cgc-nightly
+          study_key: cgc
+      - build-and-deploy-job:
+          name: circadia-nightly
+          study_key: circadia
+      - build-and-deploy-job:
+          name: pancan-nightly
+          study_key: pancan

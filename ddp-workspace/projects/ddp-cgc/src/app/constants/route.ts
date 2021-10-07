@@ -1,0 +1,17 @@
+export enum Route {
+  Home = '',
+  Auth = 'auth',
+  Error = 'error',
+  AboutUs = 'about-us',
+  Password = 'password',
+  Activity = 'activity',
+  Dashboard = 'dashboard',
+  LearnMore = 'learn-more',
+  ActivityId = 'activity/:id',
+  StayInformed = 'stay-informed',
+  PreScreening = 'pre-screening',
+  LoginLanding = 'login-landing',
+  LoginRedirect = 'login-redirect',
+  SessionExpired = 'session-expired',
+  LoginLandingMode = 'login-landing/:mode',
+}

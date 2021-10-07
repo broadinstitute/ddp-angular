@@ -1,0 +1,319 @@
+@import '../../../styles/variables.scss';
+
+.page {
+    position: relative;
+
+    &.about-us {
+        .section-0 {
+            background-image: url(/assets/images/oval_green_left.png);
+            background-size: contain;
+        }
+        .section-1 {
+            background-image: url(/assets/images/oval_carrot_right.png);
+        }
+        .section-2 {
+            background-image: url(/assets/images/oval_sand_left.png);
+        }
+    }
+
+    &.scientific-research {
+        .section-0 {
+            background-image: url(/assets/images/oval_purple_left.png);
+        }
+        .section-1 {
+            background-image: url(/assets/images/oval_green_right.png);
+        }
+        .section-2 {
+            background-image: url(/assets/images/oval_sand_left.png);
+        }
+    }
+}
+
+.title {
+    margin: 4.56rem auto 2.25rem auto;
+    text-align: center;
+}
+
+.section {
+    padding: 4.69rem 0 4rem 2rem;
+    display: flex;
+    background-repeat: no-repeat;
+    background-position-y: top;
+    background-origin: content-box;
+
+    &:nth-of-type(odd) {
+        padding-top: 3.75rem;
+        padding-right: 2rem;
+        padding-left: 0;
+
+        .section__description {
+            max-width: 785px;
+        }
+    }
+
+    &:last-of-type {
+        padding-bottom: 0;
+    }
+
+    &-0 {
+        background-position-x: left;
+        background-size: auto 642px;
+    }
+
+    &-1 {
+        flex-direction: row-reverse;
+        min-height: 621px;
+        box-sizing: content-box;
+        background-position: 100% 2.2rem;
+        background-size: auto 621px;
+    }
+
+    &-2 {
+        background-position: 0 3rem;
+        background-size: auto 474px;
+    }
+
+    &__content {
+        .section-0 & {
+            padding-top: 2.2rem;
+            margin-left: 27.31rem;
+        }
+
+        .section-1 & {
+            margin-right: 25.625rem;
+        }
+
+        .section-2 & {
+            margin-left: 23.625rem;
+        }
+    }
+
+    &__title {
+        margin: 0 0 2.5rem 0;
+
+        .section-2 & {
+            margin-bottom: 5.19rem;
+        }
+    }
+
+    &__description {
+        max-width: 840px;
+    }
+
+    &__text:first-child {
+        margin-top: 0;
+    }
+
+    &__timeline-title {
+        font-family: $primary-font;
+        font-weight: 400;
+        font-size: 1.75rem;
+        letter-spacing: 0;
+        line-height: 34px;
+        margin-top: 4.3rem;
+        margin-bottom: 3.1rem;
+    }
+
+    &__people-list {
+        max-width: 785px;
+
+        &__title {
+            font-family: $primary-font;
+            font-weight: 400;
+            font-size: 1.75rem;
+            letter-spacing: 0;
+            line-height: 34px;
+            padding-bottom: 23px;
+            margin: 3.25rem 0;
+            border-bottom: 1px solid #AAAAAA;
+        }
+
+        &__block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .people-text {
+            margin: 0;
+        }
+    }
+
+    &__links {
+        display: flex;
+        flex-direction: column;
+        max-width: 48.75rem;
+        margin-top: 3rem;
+
+        > a {
+            opacity: 1;
+            line-height: 2.75rem;
+            font-size: 1.5rem;
+            letter-spacing: -0.1px;
+        }
+    }
+
+    &__examples {
+        opacity: 1;
+
+        li {
+            margin-bottom: 2rem;
+            font-size: 1.25rem !important;
+        }
+
+        .source {
+            display: inline;
+        }
+    }
+
+    &__final-text {
+        margin-top: 3rem;
+    }
+}
+
+.bottom-image {
+    height: 300px;
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-size: contain;
+    margin-top: -50px;
+    background-image: url(/assets/images/oval_pink_right.png);
+
+    &.about-us {
+        background-image: url(/assets/images/oval_purple_right.png);
+    }
+}
+
+@media screen and (max-width: $desktop-breakpoint) {
+    .section {
+        &-0 {
+            background-size: auto 480px;
+        }
+
+        &-1 {
+            background-size: auto 465px;
+        }
+
+        &-2 {
+            background-size: auto 355px;
+        }
+
+        &__content {
+            .section-0 & {
+                margin-left: 22.35rem;
+            }
+
+            .section-1 & {
+                margin-right: 22.7rem;
+            }
+
+            .section-2 & {
+                margin-left: 19.15rem;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $tablet-breakpoint) {
+    $background-image-height: 50vw;
+
+    .section {
+        &-0, &-1, &-2 {
+            background-size: auto $background-image-height;
+        }
+
+        &__content {
+            .section-0 & {
+                margin-left: calc(#{$background-image-height} / 2 + 3rem);
+            }
+
+            .section-1 & {
+                margin-right: calc(#{$background-image-height} / 2 + 5.5rem);
+            }
+
+            .section-2 & {
+                margin-left: calc(#{$background-image-height} / 2 + 5rem);
+            }
+        }
+    }
+
+    .section-1 .section__content {
+        max-width: 480px;
+    }
+
+    .section__links {
+        width: inherit;
+        padding-right: 1.5625rem !important;
+    }
+
+    .bottom-image {
+        height: 35vw;
+        margin-top: -25px;
+    }
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+    .section {
+        display: block;
+        padding-bottom: 2.5rem;
+
+        &-0, &-1, &-2 {
+            background-size: auto 172px;
+            background-position-y: top;
+        }
+
+        &-1 {
+            box-sizing: border-box;
+        }
+
+        &__content {
+            margin: 0 !important;
+        }
+
+        &__title {
+            margin-top: 2.5rem;
+            text-align: center;
+
+            .section-0 & {
+                margin-bottom: 6.5rem;
+                margin-left: 50px;
+            }
+
+            .section-1 & {
+                text-align: left;
+                margin-bottom: 4rem;
+                margin-right: 100px;
+                min-height: 115px;
+                display: flex;
+                align-items: center;
+            }
+
+            .section-2 & {
+                margin-top: 4.5rem;
+                margin-bottom: 7rem;
+                margin-left: 50px;
+            }
+        }
+
+        &:nth-of-type(odd) {
+            .section__description {
+                padding-left: 1.5625rem !important;
+            }
+        }
+
+        &:nth-of-type(even) {
+            .section__description {
+                padding-right: 1.5625rem !important;
+            }
+        }
+
+        &__people-list {
+            padding-left: 2.5rem!important;
+            padding-right: 1rem;
+
+            &__block {
+                grid-template-columns: 1fr;
+            }
+        }
+    }
+}

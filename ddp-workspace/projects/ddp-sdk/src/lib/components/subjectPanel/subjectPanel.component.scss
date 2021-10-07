@@ -1,0 +1,24 @@
+.ddp-subject-panel__text {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  text-decoration: none !important;
+}
+
+.subject-panel-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.ddp-subject-panel__text-label {
+  padding-right: 4px;
+}
+
+@media only screen and (max-width: 710px) {
+  .subject-panel-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

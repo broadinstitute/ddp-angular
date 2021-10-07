@@ -124,9 +124,11 @@
         <button
           *ngIf="
             activity.activityCode !== activityCodes.REVIEW_AND_SUBMISSION &&
-            activity.activityCode !== activityCodes.ASSENT
+            activity.activityCode !== activityCodes.ASSENT &&
+            !isParticipantIneligible
           "
           class="BtnFilled BtnFilled--blue"
+          [disabled]="isUiBlocked"
           (click)="editActivity.emit(activity)"
         >
           {{ 'Toolkit.ActivityActions.Edit' | translate }}

@@ -495,7 +495,8 @@
             "Summary": "Summary",
             "ActivityStatus": "Status",
             "ActivityDate": "Created",
-            "ActivityActions": "Actions"
+            "ActivityActions": "Actions",
+            "HiddenTooltip": "This activity is hidden."
         },
         "ManageParticipants": {
             "GovernedParticipants": "Governed participants",
@@ -509,8 +510,7 @@
         },
         "UserPreferences": {
             "UserPreferencesTitle": "User preferences",
-            "UserPreferencesGender": "Sex",
-            "UserPreferencesLocale": "Preferred language"
+            "UserPreferencesGender": "Sex"
         },
         "Dashboard": {
             "Title": "My Dashboard",
@@ -540,6 +540,7 @@
         },
         "UserMenu": {
             "DashboardButton": "Dashboard",
+            "PrismButton": "Prism",
             "SignOutButton": "Sign Out"
         },
         "DetailsPlaceholder": {
@@ -692,6 +693,35 @@
             "MinQueryLengthHint":  "Enter at least {{length}} characters",
             "DashboardButtonLabel":  "Navigates to dashboard for the user {{user}}",
             "WarningSize": "You can see only {{count}} participant from {{totalCount}}. Specify your search request."
+        },
+        "SubjectPanel": {
+            "Link": "Return to subject look-up",
+            "InvitationCode": "Subject Invitation Code:",
+            "Email": "Email:",
+            "Name": "Name:",
+            "ShortId": "Subject Short ID/HRUID:"
+        },
+        "FileUpload": {
+            "ConfirmReuploadTitle": "Are you sure you want \nto reupload the file?",
+            "ConfirmUndoUploadTitle": "Are you sure you want \nto remove uploaded file from server?",
+            "ConfirmCancelUploadTitle": "Are you sure you want \nto cancel upload?",
+            "ReuploadBtnText": "Reupload",
+            "UploadBtnText": "Upload",
+            "OkBtnText": "OK",
+            "CancelBtnText": "Cancel",
+            "MaxSize": "Max size: {{maxSize}}",
+            "AllowedFileTypes": "Allowed files: {{allowedFileTypes}}",
+            "ChooseFile": "Click and select \nor drag file to upload",
+            "Uploading": "Uploading {{filename}}",
+            "Size": "(size: {{size}})",
+            "MaxSizeErrorMessage": "Maximum file size exceeded",
+            "InvalidTypeErrorMessage": "Type of file selected is not valid",
+            "CancelUpload": "Cancel upload",
+            "RemoveUploadedFile": "Remove uploaded file"
+        },
+        "AdminActionPanel": {
+            "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+            "EditButton": "Edit"
         }
     }
 }

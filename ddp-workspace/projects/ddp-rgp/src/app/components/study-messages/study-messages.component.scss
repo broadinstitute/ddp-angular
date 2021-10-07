@@ -1,0 +1,47 @@
+@import '../../../styles/variables';
+
+.study-messages {
+  &__title {
+    margin-top: 0;
+  }
+}
+
+.app-table {
+  &__name {
+    margin-top: 40px;
+    padding-left: 12px;
+    text-decoration: underline;
+  }
+
+  &__col {
+    &--date {
+      width: 20%;
+      min-width: 240px;
+    }
+
+    &--title {
+      width: 30%;
+    }
+
+    &--description {
+      width: 50%;
+    }
+  }
+}
+
+.show-more-container {
+  margin-top: 10px;
+}
+
+.show-more-btn {
+  display: block;
+
+  padding: 0;
+
+  background: none;
+  box-shadow: none;
+  border: none;
+
+  color: $color-orange;
+  text-decoration: underline !important;
+}

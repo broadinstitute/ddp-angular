@@ -58,4 +58,8 @@ export class ActivityDateQuestionBlock extends ActivityQuestionBlock<DatePickerV
         // There are field rules and date has value for those rules, so return true.
         return hasFieldRule;
     }
+
+    public convertToString(value: DatePickerValue): string {
+        return `day:${value.day || ''};month:${value.month || ''};year:${value.year || ''}`;
+    }
 }

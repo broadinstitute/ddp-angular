@@ -83,6 +83,135 @@
         }
       }
     },
+    "ddp-basil": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/ddp-basil",
+      "sourceRoot": "projects/ddp-basil/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ddp-basil",
+            "index": "projects/ddp-basil/src/index.html",
+            "main": "projects/ddp-basil/src/main.ts",
+            "polyfills": "projects/ddp-basil/src/polyfills.ts",
+            "tsConfig": "projects/ddp-basil/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/ddp-basil/src/favicon.ico",
+              "projects/ddp-basil/src/assets",
+              {
+                "glob": "pepperConfig.js",
+                "input": "projects/ddp-basil/output-config/",
+                "output": "assets/config"
+              }
+            ],
+            "styles": [
+              "projects/ddp-basil/src/theme.scss",
+              "projects/ddp-basil/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ddp-basil/src/environments/environment.ts",
+                  "with": "projects/ddp-basil/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ddp-basil:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ddp-basil:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ddp-basil:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ddp-basil/src/test.ts",
+            "polyfills": "projects/ddp-basil/src/polyfills.ts",
+            "tsConfig": "projects/ddp-basil/tsconfig.spec.json",
+            "karmaConfig": "projects/ddp-basil/karma.conf.js",
+            "assets": [
+              "projects/ddp-basil/src/favicon.ico",
+              "projects/ddp-basil/src/assets"
+            ],
+            "styles": [
+              "projects/ddp-basil/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ddp-basil/tsconfig.app.json",
+              "projects/ddp-basil/tsconfig.spec.json",
+              "projects/ddp-basil/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ddp-basil/e2e/protractor.conf.js",
+            "devServerTarget": "ddp-basil:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ddp-basil:serve:production"
+            }
+          }
+        }
+      }
+    },
     "ddp-angio": {
       "projectType": "application",
       "schematics": {},
@@ -376,7 +505,7 @@
               }
             ],
             "styles": [
-              "projects/ddp-atcp/src/styles.scss"
+              "projects/ddp-atcp/src/app/styles/main.scss"
             ],
             "scripts": []
           }
@@ -1770,7 +1899,7 @@
               "projects/ddp-rgp/src/assets",
               {
                 "glob": "*.pdf",
-                "input": "projects/ddp-rgp/src/pdf/",
+                "input": "projects/ddp-rgp/src/assets/pdf/",
                 "output": "/"
               },
               {
@@ -1859,7 +1988,7 @@
               "projects/ddp-rgp/src/assets",
               {
                 "glob": "*.pdf",
-                "input": "projects/ddp-rgp/src/pdf/",
+                "input": "projects/ddp-rgp/src/assets/pdf/",
                 "output": "/"
               }
             ],
@@ -2043,6 +2172,419 @@
           "configurations": {
             "production": {
               "devServerTarget": "ddp-esc:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "ddp-cgc": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/ddp-cgc",
+      "sourceRoot": "projects/ddp-cgc/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ddp-cgc",
+            "index": "projects/ddp-cgc/src/index.html",
+            "main": "projects/ddp-cgc/src/main.ts",
+            "polyfills": "projects/ddp-cgc/src/polyfills.ts",
+            "tsConfig": "projects/ddp-cgc/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/ddp-cgc/src/favicon.ico",
+              "projects/ddp-cgc/src/assets",
+              {
+                "glob": "pepperConfig.js",
+                "input": "projects/ddp-cgc/output-config/",
+                "output": "assets/config"
+              }
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "projects/ddp-cgc/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ddp-cgc/src/environments/environment.ts",
+                  "with": "projects/ddp-cgc/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ddp-cgc:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ddp-cgc:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ddp-cgc:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ddp-cgc/src/test.ts",
+            "polyfills": "projects/ddp-cgc/src/polyfills.ts",
+            "tsConfig": "projects/ddp-cgc/tsconfig.spec.json",
+            "karmaConfig": "projects/ddp-cgc/karma.conf.js",
+            "assets": [
+              "projects/ddp-cgc/src/favicon.ico",
+              "projects/ddp-cgc/src/assets"
+            ],
+            "styles": [
+              "projects/ddp-cgc/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ddp-cgc/tsconfig.app.json",
+              "projects/ddp-cgc/tsconfig.spec.json",
+              "projects/ddp-cgc/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ddp-cgc/e2e/protractor.conf.js",
+            "devServerTarget": "ddp-cgc:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ddp-cgc:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "ddp-circadia": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/ddp-circadia",
+      "sourceRoot": "projects/ddp-circadia/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ddp-circadia",
+            "index": "projects/ddp-circadia/src/index.html",
+            "main": "projects/ddp-circadia/src/main.ts",
+            "polyfills": "projects/ddp-circadia/src/polyfills.ts",
+            "tsConfig": "projects/ddp-circadia/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/ddp-circadia/src/favicon.ico",
+              "projects/ddp-circadia/src/favicon-alert.ico",
+              "projects/ddp-circadia/src/assets",
+              {
+                "glob": "pepperConfig.js",
+                "input": "projects/ddp-circadia/output-config/",
+                "output": "assets/config"
+              }
+            ],
+            "styles": [
+              "projects/ddp-circadia/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ddp-circadia/src/environments/environment.ts",
+                  "with": "projects/ddp-circadia/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "25kb"
+                }
+              ]
+            },
+            "es5": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "25kb"
+                }
+              ],
+              "tsConfig": "projects/ddp-circadia/tsconfig.es5.json"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ddp-circadia:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ddp-circadia:build:production"
+            },
+            "es5": {
+              "browserTarget": "ddp-circadia:build:es5"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ddp-circadia:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ddp-circadia/src/test.ts",
+            "polyfills": "projects/ddp-circadia/src/polyfills.ts",
+            "tsConfig": "projects/ddp-circadia/tsconfig.spec.json",
+            "karmaConfig": "projects/ddp-circadia/karma.conf.js",
+            "assets": [
+              "projects/ddp-circadia/src/favicon.ico",
+              "projects/ddp-circadia/src/assets"
+            ],
+            "styles": [
+              "projects/ddp-circadia/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ddp-circadia/tsconfig.app.json",
+              "projects/ddp-circadia/tsconfig.spec.json",
+              "projects/ddp-circadia/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ddp-circadia/e2e/protractor.conf.js",
+            "devServerTarget": "ddp-circadia:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ddp-circadia:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "ddp-pancan": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/ddp-pancan",
+      "sourceRoot": "projects/ddp-pancan/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ddp-pancan",
+            "index": "projects/ddp-pancan/src/index.html",
+            "main": "projects/ddp-pancan/src/main.ts",
+            "polyfills": "projects/ddp-pancan/src/polyfills.ts",
+            "tsConfig": "projects/ddp-pancan/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/ddp-pancan/src/favicon.ico",
+              "projects/ddp-pancan/src/assets",
+              {
+                "glob": "pepperConfig.js",
+                "input": "projects/ddp-pancan/output-config/",
+                "output": "assets/config"
+              },
+              {
+                "glob": "*.pdf",
+                "input": "projects/ddp-pancan/src/pdf/",
+                "output": "/"
+              }
+            ],
+            "styles": [
+              "projects/ddp-pancan/src/theme.scss",
+              "projects/ddp-pancan/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ddp-pancan/src/environments/environment.ts",
+                  "with": "projects/ddp-pancan/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "25kb"
+                }
+              ]
+            },
+            "es5": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "25kb"
+                }
+              ],
+              "tsConfig": "projects/ddp-pancan/tsconfig.es5.json"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ddp-pancan:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ddp-pancan:build:production"
+            },
+            "es5": {
+              "browserTarget": "ddp-pancan:build:es5"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ddp-pancan:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ddp-pancan/src/test.ts",
+            "polyfills": "projects/ddp-pancan/src/polyfills.ts",
+            "tsConfig": "projects/ddp-pancan/tsconfig.spec.json",
+            "karmaConfig": "projects/ddp-pancan/karma.conf.js",
+            "assets": [
+              "projects/ddp-pancan/src/favicon.ico",
+              "projects/ddp-pancan/src/assets"
+            ],
+            "styles": [
+              "projects/ddp-pancan/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ddp-pancan/tsconfig.app.json",
+              "projects/ddp-pancan/tsconfig.spec.json",
+              "projects/ddp-pancan/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ddp-pancan/e2e/protractor.conf.js",
+            "devServerTarget": "ddp-pancan:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ddp-pancan:serve:production"
             }
           }
         }
@@ -2299,5 +2841,8 @@
     "@schematics/angular:component": {
       "style": "scss"
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

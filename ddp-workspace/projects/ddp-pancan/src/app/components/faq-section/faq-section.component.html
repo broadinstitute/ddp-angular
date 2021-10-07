@@ -1,0 +1,24 @@
+<mat-accordion hideToggle="true" multi="true" displayMode="flat" >
+    <ng-container *ngFor="let item of questions | translate | slice : 0 : questionsCount;">
+        <mat-expansion-panel #panel>
+            <mat-expansion-panel-header collapsedHeight="100%" expandedHeight="100%">
+                <mat-icon *ngIf="!panel.expanded" class="faq-block__icon">add</mat-icon>
+                <mat-icon *ngIf="panel.expanded" class="faq-block__icon">clear</mat-icon>
+                <p class="faq-block__question no-margin">{{item.Question}}</p>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+                <p *ngFor="let paragraph of item.Paragraphs"
+                   class="faq-block__text"
+                   [innerHTML]="paragraph"
+                   routeTransformer>
+                </p>
+                <!-- special case for sign up for our mailing list question -->
+                <ng-container *ngIf="!item.Paragraphs">
+                    <p class="faq-block__text">
+                        {{item.Text1}} <button class="join-btn button-link" (click)="openJoinMailingList()">{{item.Button}}</button> {{item.Text2}}
+                    </p>
+                </ng-container>
+            </ng-template>
+        </mat-expansion-panel>
+    </ng-container>
+</mat-accordion>

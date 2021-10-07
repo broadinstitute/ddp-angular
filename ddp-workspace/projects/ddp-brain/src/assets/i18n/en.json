@@ -42,6 +42,7 @@
         "AboutUs": "About Us",
         "Data": "Data",
         "Dashboard": "Dashboard",
+        "Prism": "Prism",
         "Menu": "Menu"
     },
     "LearnMoreSection": {
@@ -723,7 +724,8 @@
             "Summary": "Summary",
             "ActivityStatus": "Status",
             "ActivityDate": "Created",
-            "ActivityActions": "Actions"
+            "ActivityActions": "Actions",
+            "HiddenTooltip": "This activity is hidden."
         },
         "ManageParticipants": {
             "GovernedParticipants": "Governed participants",
@@ -737,8 +739,7 @@
         },
         "UserPreferences": {
             "UserPreferencesTitle": "User preferences",
-            "UserPreferencesGender": "Sex",
-            "UserPreferencesLocale": "Preferred language"
+            "UserPreferencesGender": "Sex"
         },
         "Dashboard": {
             "Title": "My Dashboard",
@@ -768,6 +769,7 @@
         },
         "UserMenu": {
             "DashboardButton": "Dashboard",
+            "PrismButton": "Prism",
             "SignOutButton": "Sign Out"
         },
         "DetailsPlaceholder": {
@@ -886,6 +888,51 @@
         "TooltipAlt": "Information",
         "Validators": {
             "DateNavyValidationRule": "Entered date is invalid"
+        },
+        "Prism": {
+            "EnrollmentStatusType": {
+                "Registered": "Registered",
+                "Enrolled": "Enrolled",
+                "ExitedBeforeEnrollment": "Exited before enrollment",
+                "ExitedAfterEnrollment": "Exited after enrollment",
+                "ConsentSuspended": "Consent suspended",
+                "Completed": "Completed"
+            },
+            "ClearSearch": "Clear",
+            "ClearSearchLabel": "Clear user search",
+            "Title": "Enter the subject’s 12-digit invitation code, name, email, short id, or participant guid",
+            "Subtitle": "If the Short ID is unknown, consult the DSM Data Browser.",
+            "Placeholder": "Enter User Data",
+            "TableColumns": {
+                "Name": "Participant Name",
+                "Email": "Email",
+                "ShortId": "Short ID",
+                "InvitationId": "Invitation ID",
+                "Status": "Enrollment Status",
+                "ProxyName": "Proxy Name",
+                "ProxyShortId": "Proxy Short ID",
+                "ProxyGUID": "Proxy GUID",
+                "DashboardLink": "Dashboard Link",
+                "LegacyShortId": "Legacy Short ID",
+                "LegacyAltPid": "Legacy AltPID"
+            },
+            "NoUsers": "No participants are found",
+            "NoData": "No participants data is entered",
+            "DashboardButton": "Dashboard",
+            "MinQueryLengthHint":  "Enter at least {{length}} characters",
+            "DashboardButtonLabel":  "Navigates to dashboard for the user {{user}}",
+            "WarningSize": "You can see only {{count}} participant from {{totalCount}}. Specify your search request."
+        },
+        "SubjectPanel": {
+            "Link": "Return to subject look-up",
+            "InvitationCode": "Subject Invitation Code:",
+            "Email": "Email:",
+            "Name": "Name:",
+            "ShortId": "Subject Short ID/HRUID:"
+        },
+        "AdminActionPanel": {
+            "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+            "EditButton": "Edit"
         }
     }
 }

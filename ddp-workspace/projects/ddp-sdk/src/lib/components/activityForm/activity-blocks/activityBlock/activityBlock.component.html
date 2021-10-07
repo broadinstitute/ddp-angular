@@ -19,6 +19,7 @@
                                              [validationRequested]="validationRequested"
                                              [studyGuid]="studyGuid"
                                              (componentBusy)="embeddedComponentBusy.emit($event)"
+                                             (validStatusChanged)="validStatusChanged.emit($event)"
                                              (deletedActivity)="onDeleteChildInstance($event)">
                 </ddp-embedded-activity-block>
             </ng-template>
@@ -29,7 +30,7 @@
             [disabled]="readonly"
             class="add-btn button button_primary"
             (click)="createChildInstance()">
-        <img src="assets/shared/add-person.svg" class="icon" [alt]="block.addButtonText">
+        <img lazy-resource src="assets/shared/add-person.svg" class="icon" [alt]="block.addButtonText">
         <span class="text">{{block.addButtonText}}</span>
     </button>
 </div>

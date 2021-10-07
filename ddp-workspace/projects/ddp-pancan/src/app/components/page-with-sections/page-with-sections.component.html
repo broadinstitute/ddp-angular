@@ -1,0 +1,52 @@
+<main class="page" [ngClass]="isAboutUsPage ? 'about-us': 'scientific-research'">
+    <section *ngFor="let section of (source + '.Sections') | translate; let i = index;" [class]="'section section-' + i">
+        <div class="section__content">
+            <h3 class="section__title static-page-title">{{section.Title}}</h3>
+
+            <div class="section__description" *ngIf="section.Paragraphs?.length || section.Examples">
+                <ng-container *ngIf="section.Paragraphs?.length">
+                    <ng-container *ngFor="let paragraph of section.Paragraphs">
+                        <p class="section__text static-page-paragraph-text" [innerHTML]="paragraph" routeTransformer></p>
+                    </ng-container>
+                </ng-container>
+
+                <div class="section__examples static-page-paragraph-text" *ngIf="section.Examples">
+                    <b>{{section.Examples.Title}}</b>
+                    <ul>
+                        <li *ngFor="let link of section.Examples.Links; let i = index">
+                            <a class="Link" [href]="link.Link" target="_blank">{{link.Title}}</a>
+                            <div class="source" [innerHTML]="link.Source"></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div *ngIf="section.FinalText" class="section__final-text">
+                    <p class="section__text static-page-paragraph-text" [innerHTML]="section.FinalText" routeTransformer></p>
+                </div>
+            </div>
+
+            <div class="section__people-list" *ngIf="section.PeopleList?.length">
+                <ng-container *ngFor="let block of section.PeopleList">
+                    <h4 class="section__people-list__title">{{block.Title}}</h4>
+                    <div class="section__people-list__block">
+                        <p *ngFor="let person of block.List"
+                           class="people-text"
+                           [innerHTML]="person">
+                        </p>
+                    </div>
+                </ng-container>
+            </div>
+
+            <div class="section__links" *ngIf="section.Links?.length && linksMap">
+                <ng-container *ngFor="let link of section.Links">
+                    <a *ngIf="link.label && linksMap[link.key]"
+                       class="Link static-page-paragraph-text"
+                       [href]="linksMap[link.key]"
+                       target="_blank">{{link.label}}
+                    </a>
+                </ng-container>
+            </div>
+        </div>
+    </section>
+    <div class="bottom-image" [class.about-us]="isAboutUsPage"></div>
+</main>

@@ -1,0 +1,119 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.footer {
+    @include footer($footer-height);
+}
+
+.actions {
+    border-bottom: 1px solid $footer-divider-color;
+    font-size: 1.17rem;
+    height: 8.625rem;
+
+    &__wrapper {
+        display: flex;
+        align-items: baseline;
+    }
+
+    ::ng-deep.navigation {
+        padding-left: 40px;
+    }
+}
+
+.info {
+    height: 6.25rem;
+    font-size: 1rem;
+}
+
+.info,
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem 0 1.5rem;
+}
+
+.back-to-top {
+    font-size: 1.25rem;
+    text-align: left;
+    padding: 0 5px 0 0;
+    border: 1px solid transparent;
+    flex-shrink: 0;
+
+    &:focus {
+        border-color: white;
+    }
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.contacts__item {
+    font-family: $primary-font-medium;
+    margin-left: 1.5rem;
+    color: white;
+}
+
+.auth {
+    display: flex;
+    align-items: center;
+    min-width: fit-content;
+}
+
+@media screen and (max-width: $desktop-breakpoint) {
+    .auth,
+    .info {
+        flex-direction: column;
+    }
+
+    ddp-language-selector {
+        margin-bottom: 15px;
+    }
+
+    .info {
+        padding: 1.15rem 2rem 2.5rem 3.375rem;
+    }
+
+    .actions {
+        height: auto;
+        padding: 1.15rem 2rem 1.15rem 3.375rem;
+
+        &__wrapper {
+            flex-direction: column;
+        }
+
+        ::ng-deep.navigation {
+            flex-direction: column;
+            line-height: 35px;
+            padding-left: 0;
+        }
+    }
+}
+
+@media screen and (max-width: $tablet-breakpoint) {
+    .auth {
+        min-width: auto;
+    }
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+    .actions {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .contacts {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &__item {
+            margin-left: 0;
+        }
+    }
+
+    .back-to-top {
+        width: fit-content;
+    }
+}

@@ -4,6 +4,7 @@ import { ActivityPicklistAnswerDto } from '../../../models/activity/activityPick
 import { ActivityQuestionBlock } from '../../../models/activity/activityQuestionBlock';
 import { DatePickerValue } from '../../../models/datePickerValue';
 import { QuestionType } from '../../../models/activity/questionType';
+import { ActivityFileAnswerDto } from '../../../models/activity/activityFileAnswerDto';
 
 export class ActivityRequiredValidationRule extends ActivityAbstractValidationRule {
     public isRequired: boolean;
@@ -36,8 +37,8 @@ export class ActivityRequiredValidationRule extends ActivityAbstractValidationRu
             const value = this.question.answer as string;
             valid = value.trim().length > 0;
         } else if (this.question.questionType === QuestionType.File) {
-            const value = this.question.answer as string; // file uploadGuid
-            valid = value && value.length > 0;
+            const value = this.question.answer as ActivityFileAnswerDto;
+            valid = value && !!value.fileName && (value.fileSize != null);
         }
 
         this.result = (valid ? null : this.message);

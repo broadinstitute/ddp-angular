@@ -1,7 +1,11 @@
 import { ActivityQuestionBlock } from './activityQuestionBlock';
 import { QuestionType } from './questionType';
+import { ActivityFileAnswerDto } from './activityFileAnswerDto';
 
-export class ActivityFileQuestionBlock extends ActivityQuestionBlock<string> {
+export class ActivityFileQuestionBlock extends ActivityQuestionBlock<ActivityFileAnswerDto> {
+    public maxFileSize: number;
+    public mimeTypes: string[];
+
     constructor() {
         super();
     }

@@ -39,17 +39,6 @@ export class ActivitiesListComponent {
     ActivityCodes.LarConsentAssent,
   ];
 
-  shouldShowQuestionCount(activity: ActivityInstance): boolean {
-    const questionCount = activity.numQuestions;
-    const answeredQuestionCount = activity.numQuestionsAnswered;
-
-    if (this.isConsentOrAssent(activity)) {
-      return false;
-    }
-
-    return questionCount !== answeredQuestionCount;
-  }
-
   canCopyActivity(activity: ActivityInstance): boolean {
     return this.allowedToEditActivities.includes(
       activity.activityCode as ActivityCodes,
@@ -72,9 +61,22 @@ export class ActivitiesListComponent {
     this.viewActivity.emit(activity);
   }
 
-  private isConsentOrAssent(activity: ActivityInstance): boolean {
-    return this.consentActivities.includes(
-      activity.activityCode as ActivityCodes,
-    );
+  hasPreviousInstance(activity: ActivityInstance): boolean {
+    return !!activity.previousInstanceGuid;
+  }
+
+  getActivityStatusCode(activity: ActivityInstance): ActivityStatusCodes {
+    if (this.hasPreviousInstance(activity)) {
+      if (
+        activity.statusCode === ActivityStatusCodes.CREATED ||
+        activity.statusCode === ActivityStatusCodes.IN_PROGRESS
+      ) {
+        return ActivityStatusCodes.IN_PROGRESS;
+      }
+
+      return ActivityStatusCodes.COMPLETE;
+    }
+
+    return activity.statusCode as ActivityStatusCodes;
   }
 }

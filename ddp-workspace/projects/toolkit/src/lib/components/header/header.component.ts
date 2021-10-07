@@ -61,7 +61,27 @@ import { AnalyticsEventsService, BrowserContentService, WindowRef, AnalyticsEven
             </li>
         </ul>
     </nav>
-    </mat-toolbar>`
+    </mat-toolbar>`,
+    styles: [`
+        .Header {
+            justify-content: space-between;
+        }
+
+        .Header-navList {
+            display: flex;
+            margin: 0;
+        }
+
+        .Header-navItem {
+            display: inline-flex;
+            align-items: center;
+            padding: 0 0 0 20px;
+        }
+
+        .CountButton {
+            cursor: pointer;
+        }
+    `]
 })
 export class HeaderComponent implements OnInit {
     @Input() showButtons: boolean;

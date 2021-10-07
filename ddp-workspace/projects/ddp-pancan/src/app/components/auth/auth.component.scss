@@ -1,0 +1,29 @@
+@import '../../../styles/buttons';
+
+.action-button {
+    margin-left: 0.9rem;
+}
+
+:host {
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width: $tablet-breakpoint) {
+    :host {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+    :host {
+        flex-direction: column;
+    }
+
+    .join-button {
+        margin-left: 0;
+    }
+}
+

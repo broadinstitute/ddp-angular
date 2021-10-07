@@ -12,7 +12,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 
 import { EMPTY, of } from 'rxjs';
-import { catchError, concatMap, finalize, take, tap } from 'rxjs/operators';
+import { catchError, concatMap, filter, finalize, take, tap } from 'rxjs/operators';
 
 import { ActivityInstance } from '../../../../models/activityInstance';
 import { ActivityServiceAgent } from '../../../../services/serviceAgents/activityServiceAgent.service';
@@ -20,8 +20,8 @@ import { ActivityForm } from '../../../../models/activity/activityForm';
 import { LoggingService } from '../../../../services/logging.service';
 import { ActivitySection } from '../../../../models/activity/activitySection';
 import { SubmitAnnouncementService } from '../../../../services/submitAnnouncement.service';
-import { ActivityBlockModalService } from '../../../../services/activity-block-modal.service';
-import { ActivityDeleteDialogComponent } from '../activityDeleteDialog/activityDeleteDialog.component';
+import { ModalDialogService } from '../../../../services/modal-dialog.service';
+import { ConfirmDialogComponent } from '../../../confirmDialog/confirmDialog.component';
 
 @Component({
     selector: 'ddp-embedded-activity-block',
@@ -34,7 +34,8 @@ export class EmbeddedActivityBlockComponent implements OnInit {
     @Input() readonly: boolean;
     @Input() validationRequested: boolean;
     @Input() studyGuid: string;
-    @Output() componentBusy = new EventEmitter<boolean>(true);
+    @Output() componentBusy = new EventEmitter<boolean>();
+    @Output() validStatusChanged = new EventEmitter<{id: string; value: boolean}>();
     @Output() deletedActivity = new EventEmitter<string>();
     @ViewChild('delete_button', {read: ElementRef}) private deleteButtonRef: ElementRef;
 
@@ -46,7 +47,7 @@ export class EmbeddedActivityBlockComponent implements OnInit {
                 private submitAnnouncementService: SubmitAnnouncementService,
                 private logger: LoggingService,
                 private dialog: MatDialog,
-                private modalService: ActivityBlockModalService) {
+                private modalDialogService: ModalDialogService) {
     }
 
     ngOnInit(): void {
@@ -59,9 +60,16 @@ export class EmbeddedActivityBlockComponent implements OnInit {
     }
 
     public openDeleteDialog(): void {
-        const config = this.modalService.getDeleteDialogConfig(this.deleteButtonRef);
+        const panelClass = 'modal-activity-block__delete-dialog';
+        const config = this.modalDialogService.getDialogConfig(this.deleteButtonRef, panelClass);
+        config.data = {
+            title: 'SDK.ConfirmDeletion',
+            confirmBtnText: 'SDK.DeleteButton',
+            cancelBtnText: 'SDK.CancelBtn',
+            confirmBtnColor: 'warn'
+        };
 
-        const dialogRef = this.dialog.open(ActivityDeleteDialogComponent, config);
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, config);
         dialogRef.afterClosed().subscribe((confirmDelete: boolean) => {
             if (confirmDelete) {
                 this.deleteInstance();
@@ -98,8 +106,18 @@ export class EmbeddedActivityBlockComponent implements OnInit {
     }
 
     private flushFormOnSubmit(): void {
+        let activityValidStatus: boolean;
+
         this.submitAnnouncementService.submitAnnounced$.pipe(
             tap(() => this.componentBusy.emit(true)),
+            tap(() => {
+                activityValidStatus = this.activity.validate();
+                this.validStatusChanged.emit({id: this.instance.instanceGuid, value: activityValidStatus});
+                if (!activityValidStatus) {
+                    this.componentBusy.emit(false);
+                }
+            }),
+            filter(_ => activityValidStatus),
             concatMap(() => this.activityServiceAgent.flushForm(this.studyGuid, this.instance.instanceGuid)),
             catchError(err => {
                 this.logger.logError(this.LOG_SOURCE, 'An error during completing an activity', err);

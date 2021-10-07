@@ -34,8 +34,9 @@
   </ng-template>
 
   <button
-    class="button ButtonFilled ButtonFilled--green"
     (click)="onAddParticipantClick()"
+    [disabled]="disableAddParticipantsButton"
+    class="button ButtonFilled ButtonFilled--green"
   >
     <mat-icon>add</mat-icon>
     <span translate>SDK.ManageParticipants.AddParticipant</span>

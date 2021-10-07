@@ -1,632 +1,634 @@
 {
-  "Common": {
-    "Buttons": {
-      "Submit": {
-        "Title": "Gửi",
-        "AriaLabel": "Nút gửi"
-      },
-      "Login": {
-        "Title": "Đăng nhập",
-        "AriaLabel": "Nút đăng nhập"
-      }
-    }
-  },
-  "Navigation": {
-    "LogoAlt": "Logo TestBoston",
-    "CRCLogoSubtitle": "Subject Support Interface",
-    "Home": "Trang chủ",
-    "About": "Tổng quát về nghiên cứu",
-    "Q&A": "Hỏi đáp",
-    "WhoWeAre": "Chúng tôi là ai",
-    "StayInformed": "Luôn tìm hiểu thông tin",
-    "Help": "Trợ giúp",
-    "Dashboard": "Bảng điều khiển của tôi",
-    "Menu": "Bảng chọn",
-    "Invitation": "Mã mời",
-    "Titles": {
-      "TestBoston": "TestBoston",
-      "ContactUs": "Liên lạc với chúng tôi",
-      "Participation": "Tham gia",
-      "Language": "Ngôn ngữ"
-    }
-  },
-  "MailingList": {
-    "Title": "Mẫu danh mục gửi thư",
-    "Questions": {
-      "Adult": "1. Quý vị từ 18 tuổi trở lên?",
-      "Patient": "2. Quý vị có phải là bệnh nhân của Brigham & Women’s không?",
-      "Email": "3. Địa chỉ email nào là tốt nhất đối với quý vị?"
-    },
-    "Answers": {
-      "Yes": "Đúng",
-      "No": "Không",
-      "NoAnswer": "Không muốn trả lời"
-    },
-    "Validations": {
-      "RequiredOption": "Vui lòng chọn một phương án trả lời",
-      "RequiredEmail": "Vui lòng điền địa chỉ email của quý vị",
-      "InvalidEmail": "Vui lòng điền một địa chỉ email hợp lệ"
-    },
-    "EmailLabel": "Vui lòng điền địa chỉ email",
-    "EmailPlaceholder": "example@example.com",
-    "ThankYouBlock": {
-      "Title": "Quý vị đã xong!",
-      "Text": "Cảm ơn quý vị đã ghi danh danh mục gửi thư TestBoston."
-    },
-    "SorryBlock": {
-      "Title": "Rất tiếc, có vẻ như quý vị không đủ điều kiện tham gia.",
-      "Text": {
-        "Part1": "Quý vị phải từ 18 tuổi trở lên mới được tham gia vào danh mục gửi thư TestBoston. Vui lòng đọc",
-        "Part2": "Câu hỏi thường gặp",
-        "Part3": "để biết thêm thông tin."
-      }
-    }
-  },
-  "HomePage": {
-    "IntroSection": {
-      "Title": "Chúng tôi muốn giúp đỡ cộng đồng và tìm hiểu thêm về các mô hình lây nhiễm COVID-19 ở khu vực Boston.",
-      "Text": "TestBoston là một nghiên cứu về COVID-19 được Bệnh viện Brigham & Women’s, Viện Broad MIT và Harvard hỗ trợ.",
-      "Code": "Vui lòng nhập mã mời",
-      "NoCode": "Tôi không có mã mời"
-    },
-    "AboutSection": {
-      "Title": "Tổng quát về nghiên cứu",
-      "Text": "Mục tiêu của chúng tôi là theo dõi tỷ lệ lây nhiễm COVID-19 ở Massachusetts theo thời gian. Một số cộng đồng có tỷ lệ lây nhiễm cao hơn những cộng đồng khác. Một số người mắc phải COVID-19 và không có triệu chứng. Chúng tôi hy vọng nghiên cứu này sẽ giúp chúng tôi hiểu rõ hơn về COVID-19 và mang lại lợi ích cho những bệnh nhân bị nhiễm hoặc không bị nhiễm COVID trong tương lai.",
-      "Questions": {
-        "Title": "Những câu hỏi mà chúng tôi đang cố gắng tìm lời giải đáp:",
-        "List": [
-          "COVID-19 phổ biến như thế nào trong cộng đồng của chúng ta?",
-          "Việc bị nhiễm COVID-19 mà không có triệu chứng phổ biến như thế nào?",
-          "Con người có trở nên miễn dịch với COVID-19 sau khi bị nhiễm bệnh đó hay không?",
-          "Các nhà nghiên cứu làm cách nào để có thể xét nghiệm cho nhiều người khi họ đang ở nhà?"
-        ]
-      }
-    },
-    "FaqSection": {
-      "Title": "Giải đáp các câu hỏi thông thường về TestBoston",
-      "Text": "Quý vị cũng có thể gọi điện thoại thoại hoặc gửi email cho nhân viên nghiên cứu của chúng tôi nếu quý vị có điều gì thắc mắc về TestBoston:",
-      "Items": [
-        {
-          "Question": "Ai có thể tham gia nghiên cứu này?",
-          "Paragraphs": [
-            "TestBoston dành cho một nhóm cư dân trưởng thành được lựa chọn ngẫu nhiên từ khu vực Greater Boston, những người đã được chăm sóc tại Brigham & Women’s ít nhất một lần trong năm qua. Mỗi bệnh nhân được chọn ngẫu nhiên sẽ nhận được thư mời tham gia nghiên cứu qua bưu điện hoặc email."
-          ]
-        },
-        {
-          "Question": "Tôi có được xét nghiệm COVID-19 nếu tôi tham gia vào nghiên cứu này không?",
-          "Paragraphs": [
-            "Có. Nếu quý vị nhận được thư mời tham gia nghiên cứu và khi quý vị quyết định ghi danh, quý vị sẽ được xét nghiệm COVID-19. Tuy nhiên, số lượng ghi danh có hạn và ai ghi danh trước sẽ được nhận trước. Nếu quý vị ghi danh, quý vị sẽ nhận được một bộ vật liệu xét nghiệm tại nhà gồm có hai bộ vật liệu xét nghiệm trong khoảng một tuần sau khi tham gia nghiên cứu. Bộ vật liệu xét nghiệm tại nhà sẽ gồm có một bộ vật liệu xét nghiệm virus học (dịch phết mũi) và một bộ vật liệu xét nghiệm kháng thể (lấy máu đầu ngón tay), kèm theo hướng dẫn về cách thu thập và gửi mẫu của quý vị đến phòng thí nghiệm của chúng tôi để xét nghiệm. Dịch phết mũi sẽ phát hiện xem quý vị có đang bị COVID-19 hay không. Lấy máu đầu ngón tay sẽ xét nghiệm xem quý vị có kháng thể với COVID-19 hay không (có nghĩa là quý vị đã từng nhiễm vi rút). Nếu quý vị đồng ý tham gia thêm nghiên cứu theo thời gian, chúng tôi sẽ gửi cho quý vị các bộ vật liệu xét nghiệm để làm lại những xét nghiệm này hàng tháng thêm 5 tháng nữa."
-          ]
-        },
-        {
-          "Question": "Tôi có sẽ nhận được kết quả của tôi không?",
-          "Paragraphs": [
-            "Quý vị sẽ nhận được kết quả nghiên cứu xét nghiệm virus. Quý vị sẽ không nhận được kết quả xét nghiệm kháng thể. Kết quả sẽ thông báo cho việc ra quyết định về sức khỏe cộng đồng. Khi kết quả được báo cáo, những kết quả này sẽ được công bố dưới dạng tóm tắt dữ liệu ghi nhận thông tin nhân khẩu căn bản. Danh tính của quý vị sẽ vẫn được giữ kín."
-          ]
-        },
-        {
-          "Question": "Có phải TestBoston chỉ dành cho những người có các triệu chứng COVID-19 không?",
-          "Paragraphs": [
-            "Không - bất cứ ai đã nhận được thư mời tham gia TestBoston đều được hoan nghênh ghi danh tham gia nghiên cứu, bất kể là quý vị đang có các triệu chứng (hoặc đã từng bị những triệu chứng này trước đây) hay không."
-          ]
-        },
-        {
-          "Question": "Tôi có phải đi đâu để tham gia nghiên cứu không?",
-          "Paragraphs": [
-            "Không. TestBoston là một nghiên cứu tại nhà. Những người tham gia TestBoston không phải đến y viện, bệnh viện hoặc văn phòng bác sĩ. Những người tham gia sẽ trả lời một khảo sát ngắn trực tuyến và nhận bộ dụng cụ lấy mẫu COVID-19 tại nhà, sau đó gửi đến phòng thí nghiệm của chúng tôi. "
-          ]
-        },
-        {
-          "Question": "Sẽ có một bác sĩ, y tá hoặc nhân viên nghiên cứu đến nhà tôi để làm xét nghiệm cho tôi có phải không?",
-          "Paragraphs": [
-            "Không. Quý vị sẽ nhận được một bộ dụng cụ lấy mẫu qua bưu điện và tự mình lấy dịch phết mũi và lấy máu đầu ngón tay. Nếu có điều gì thắc mắc, quý vị có thể liên lạc với ban nghiên cứu bất cứ lúc nào qua điện thoại hoặc email."
-          ]
-        },
-        {
-          "Question": "Tham gia TestBoston miễn phí phải không?",
-          "Paragraphs": [
-            "Đúng. Không phải tốn tiền khi tham gia TestBoston."
-          ]
-        },
-        {
-          "Question": "Tôi sẽ phải làm gì nếu tôi tham gia nghiên cứu?",
-          "Paragraphs": [
-            "Những người tham gia TestBoston được yêu cầu điền một cuộc khảo sát ngắn về COVID-19 và tự lấy hai loại mẫu xét nghiệm COVID-19 đơn giản tại nhà. Những người tham gia được yêu cầu gửi trả lại bộ vật liệu xét nghiệm đó cho chúng tôi trong một bưu kiện đã được trả lệ phí trước để thử nghiệm. Những người tham gia cũng có thể tình nguyện lặp lại quy trình này mỗi tháng thêm 5 tháng nữa. Mẫu xét nghiệm phải lấy là dịch phết mũi và lấy máu đầu ngón tay."
-          ]
-        },
-        {
-          "Question": "Gia đình tôi có thể tham gia TestBoston không?",
-          "Paragraphs": [
-            "Hiện tại, chỉ những bệnh nhân của Brigham & Women’s nhận được thư mời ngẫu nhiên mới có thể tham gia TestBoston. Nếu nhiều người trong gia đình quý vị nhận được thư mời, thì những người nhận được thư mời đều có thể tham gia nghiên cứu nếu muốn. Nếu quý vị không nhận được thư mời, nhưng quý vị muốn biết thông tin về tiến triển của nghiên cứu, quý vị có thể <a class=\"Link Link_semi-bold Link_no-wrap\" href=\"#stay-informed\">tham gia danh mục gửi thư của TestBoston</a>."
-          ]
-        },
-        {
-          "Question": "Tôi có thể đưa mã mời của mình cho người khác không?",
-          "Paragraphs": [
-            "Không. Mã mời chỉ dành cho chính người được gửi thư mời sử dụng."
-          ]
-        },
-        {
-          "Question": "Ai đang điều hành nghiên cứu này?",
-          "Paragraphs": [
-            "TestBoston là một nghiên cứu về COVID-19 được Bệnh viện Brigham & Women’s, Viện Broad MIT và Harvard hỗ trợ. Những người điều hành nghiên cứu này là các bác sĩ chuyên về bệnh truyền nhiễm tại Bệnh viện Brigham & Women’s.",
-            "Viện Broad Institute là một viện nghiên cứu hàn lâm hàng đầu có trụ sở tại Cambridge. Viện Broad Institute thực hiện hàng nghìn xét nghiệm COVID-19 mỗi ngày cho Bộ Y tế trên khắp Massachusetts, cũng như cho các nghiên cứu COVID-19 khác ở Massachusetts."
-          ]
-        },
-        {
-          "Question": "Nghiên cứu sẽ kéo dài bao lâu?",
-          "Paragraphs": [
-            "Nghiên cứu có thể kéo dài đến 6 tháng. Những người tham gia có thể quyết định ngừng tham gia nghiên cứu bất cứ lúc nào."
-          ]
+    "Common": {
+        "Buttons": {
+            "Submit": {
+                "Title": "Gửi",
+                "AriaLabel": "Nút gửi"
+            },
+            "Login": {
+                "Title": "Đăng nhập",
+                "AriaLabel": "Nút đăng nhập"
+            }
         }
-      ]
     },
-    "TeamSection": {
-      "Title": "Ban nghiên cứu của chúng tôi",
-      "Text": "Chúng tôi gồm ban các bác sĩ và nhà nghiên cứu về các bệnh truyền nhiễm muốn tìm hiểu rõ hơn về mức độ ảnh hưởng của COVID-19 đến cá nhân và cộng đồng để từ đó chúng tôi có thể phục vụ mọi bệnh nhân tốt hơn. ",
-      "PIs": [
-        {
-          "Name": "Bác sĩ Ann E. Woolley, MD, MPH",
-          "Affiliations": "Bác sĩ phó, Chuyên khoa Bệnh truyền nhiễm, Bệnh viện Brigham & Women’s Hospital; Giảng viên y khoa, Đại học Y khoa Harvard",
-          "Info": "Bác sĩ Ann Woolley là Phó Giám đốc Lâm sàng về Bệnh truyền nhiễm cấy ghép nội tạng rắn tại Bệnh viện Brigham & Women’s Hospital và Nhà nghiên cứu lâm sàng nghiên cứu về việc mở rộng điều trị và chẩn đoán."
-        },
-        {
-          "Name": "Bác sĩ Lisa A. Cosimi, MD",
-          "Affiliations": "Bác sĩ phó, Bệnh viện Brigham & Women’s Hospital; Phó Giáo sư, Đại học Y khoa Harvard",
-          "Info": "Bác sĩ Cosimi là bác sĩ chuyên khoa phụ tá tại Bệnh viện Brigham & Women’s Hospital, làm việc trong các bộ phận Bình đẳng Y tế Toàn cầu và Bệnh truyền nhiễm, chú trọng củng cố các hệ thống y tế và chất lượng của chăm sóc sức khỏe ở các môi trường có nguồn lực hạn chế."
-        },
-        {
-          "Name": "Bác sĩ, Tiến sĩ Deborah T. Hung, MD, PhD",
-          "Affiliations": "Giáo sư, Đại học Y khoa Harvard; Giáo sư cốt cán và Đồng Giám đốc, Chương trình Bệnh truyền nhiễm và quần xã vi sinh, Viện Broad Institute",
-          "Info": "Bác sĩ Deborah Hung là nhà khoa học y khoa ở Viện Broad Institute, Đại học Y khoa Harvard và Bệnh viện Đa khoa Massachusetts nghiên cứu về các bệnh truyền nhiễm và là bác sĩ thường trực về các bệnh truyền nhiễm và khoa chăm sóc phổi & nguy kịch ở Bệnh viện Brigham & Women’s Hospital."
+    "Navigation": {
+        "LogoAlt": "Logo TestBoston",
+        "CRCLogoSubtitle": "Subject Support Interface",
+        "Home": "Trang chủ",
+        "About": "Tổng quát về nghiên cứu",
+        "Q&A": "Hỏi đáp",
+        "WhoWeAre": "Chúng tôi là ai",
+        "StayInformed": "Luôn tìm hiểu thông tin",
+        "Help": "Trợ giúp",
+        "Dashboard": "Bảng điều khiển của tôi",
+        "Menu": "Bảng chọn",
+        "Invitation": "Mã mời",
+        "Titles": {
+            "TestBoston": "TestBoston",
+            "ContactUs": "Liên lạc với chúng tôi",
+            "Participation": "Tham gia",
+            "Language": "Ngôn ngữ"
         }
-      ],
-      "Others": [
-        {
-          "Title": "Ban Hành chính, Viện Broad Institute",
-          "Members": [
-            "Andrea Saltzman, Giám đốc, Văn phòng Bảo vệ Đối tượng Nghiên cứu",
-            "Marissa Jenko, MS, Trưởng ban Hành chính",
-            "Paul Tyman, Phụ tá Hành chính",
-            "Sarah Winnicki, Quản lý dự án II",
-            "Tiến sĩ Sharon Wong, PhD, Phụ tá Giám đốc - Chương trình Bệnh truyền nhiễm và quần xã vi sinh"
-          ]
+    },
+    "MailingList": {
+        "Title": "Mẫu danh mục gửi thư",
+        "Questions": {
+            "Adult": "1. Quý vị từ 18 tuổi trở lên?",
+            "Patient": "2. Quý vị có phải là bệnh nhân của Brigham & Women’s không?",
+            "Email": "3. Địa chỉ email nào là tốt nhất đối với quý vị?"
         },
-        {
-          "Title": "Ban Kỹ thuật, Viện Broad Institute",
-          "Members": [
-            "Andrew Zimmer, Giám đốc, Nền tảng quyên góp dữ liệu",
-            "Anna Hupalowska, Nhà thiết kế đồ họa & trực quan hóa dữ liệu",
-            "Erin Gwozdz, Nhà thiết kế UX/UI",
-            "Jen Lapan, Giám đốc chính phụ trách sản phẩm phần mềm",
-            "Kiara Westbrooks, Kỹ sư phần mềm",
-            "Marco Ocana, Kỹ sư phần mềm trưởng",
-            "Pavel Sidorenko, Kỹ sư phần mềm",
-            "Pegah Taheri, Kỹ sư phần mềm",
-            "Sampath Settipalli, Kỹ sư phần mềm cao cấp",
-            "Scott Sassone, Giám đốc, Sản xuất video",
-            "Simone Maiwald, Giám đốc kỹ thuật phần mềm",
-            "Yufeng Wang, Kỹ sư phần mềm cao cấp"
-          ]
+        "Answers": {
+            "Yes": "Đúng",
+            "No": "Không",
+            "NoAnswer": "Không muốn trả lời"
         },
-        {
-          "Title": "Ban Lâm sàng, Bệnh viện Brigham và Women’s Hospital",
-          "Members": [
-            "Andy Kim, BS, Phối hợp viên nghiên cứu",
-            "Christina Kelly, Phụ tá nghiên cứu",
-            "Hannah Laibinis, Sinh viên thực tập",
-            "Henry Manigat, Biên dịch viên",
-            "Henry Rutherford, BA, Phối hợp viên nghiên cứu",
-            "Himaja Nagireddy, HSPH MS Candidate, Sinh viên thực tập",
-            "Sarah Naz-McLean, MSc, Giám đốc chương trình",
-            "Tina Wang, Biên dịch viên",
-            "Yilu Ma, Biên dịch viên"
-          ]
+        "Validations": {
+            "RequiredOption": "Vui lòng chọn một phương án trả lời",
+            "RequiredEmail": "Vui lòng điền địa chỉ email của quý vị",
+            "InvalidEmail": "Vui lòng điền một địa chỉ email hợp lệ"
         },
-        {
-          "Title": "Các đối tác khác",
-          "Members": [
-            "Giải trình tự nghiên cứu lâm sàng (Clinical Research Sequencing Platform, CRSP), Viện Broad Institute",
-            "GBF",
-            "Joel Ceide, Biên dịch viên",
-            "Language Scientific",
-            "Mascon Medical",
-            "Microbial Omics Core (MOC), Viện Broad Institute",
-            "Nadya Lopez Zalba, Biên dịch viên",
-            "UPS"
-          ]
+        "EmailLabel": "Vui lòng điền địa chỉ email",
+        "EmailPlaceholder": "example@example.com",
+        "ThankYouBlock": {
+            "Title": "Quý vị đã xong!",
+            "Text": "Cảm ơn quý vị đã ghi danh danh mục gửi thư TestBoston."
+        },
+        "SorryBlock": {
+            "Title": "Rất tiếc, có vẻ như quý vị không đủ điều kiện tham gia.",
+            "Text": {
+                "Part1": "Quý vị phải từ 18 tuổi trở lên mới được tham gia vào danh mục gửi thư TestBoston. Vui lòng đọc",
+                "Part2": "Câu hỏi thường gặp",
+                "Part3": "để biết thêm thông tin."
+            }
         }
-      ]
     },
-    "MailingSection": {
-      "Title": "TestBoston hiện đang ghi danh các bệnh nhân của Bệnh viện Brigham and Women’s Hospital được mời. ",
-      "Text": "Nếu quý vị không nhận được thư mời tham gia nghiên cứu nhưng muốn cập nhật thông tin tổng quát về TestBoson, vui lòng tham gia vào danh sách bản tin:"
-    }
-  },
-  "PrequalPage": {
-    "Title": "Đầu tiên, xác nhận quý vị đủ điều kiện",
-    "InvitationCode": {
-      "Question": "Vui lòng nhập mã mời",
-      "TooltipAlt": "Biểu tượng thông tin",
-      "Tooltip": "Nếu quý vị nhận được thư mời qua bưu điện hay email từ bác sĩ của quý vị, thư đó có 12 chữ số ở trên đầu.",
-      "Placeholder": "Vui lòng nhập mã mời",
-      "Error": {
-        "Part1": "Mã quý vị nhập không hoạt động. Vui lòng kiểm tra mã của quý vị và thử lại lần nữa. Quý vị luôn có thể liên lạc với ban nhân viên nghiên cứu TestBoston để được trợ giúp:",
-        "Part2": "hoặc",
-        "Part3": "",
-        "Part4": ""
-      }
-    },
-    "Zip": {
-      "Question": "Mã zip hiện tại để gửi thư của quý vị là gì?",
-      "Placeholder": "Vui lòng nhập mã zip để gửi thư",
-      "Error": "Chúng tôi rất tiếc. Mã zip đó nằm ngoài vùng nghiên cứu TestBoston. Vui lòng kiểm tra mã zip của quý vị và thử lại lần nữa."
-    },
-    "Adult": {
-      "Question": "1. Quý vị có từ 18 tuổi trở lên không?",
-      "Yes": "Có",
-      "No": "Không",
-      "Error": {
-        "Part1": "Rất tiếc, có vẻ như quý vị không đủ điều kiện tham gia. Quý vị phải từ 18 tuổi trở lên mới được tham gia nghiên cứu của TestBoston. Vui lòng đọc",
-        "Part2": "Câu hỏi thường gặp",
-        "Part3": "để biết thêm thông tin."
-      }
-    },
-    "Error": "Chúng tôi rất tiếc, đã có lỗi. Vui lòng đợi một chút rồi thử lại."
-  },
-  "Prism": {
-    "ClearSearch": "Xóa",
-    "Email": "ĐỊA CHỈ EMAIL CỦA ĐỐI TƯỢNG",
-    "NoneListed": {
-      "Title": "Không có nêu",
-      "Text": "Nếu người tham gia muốn đăng nhập vào được trang TestBoston, vui lòng bật tài khoản TestBoston mình lên",
-      "Link": "ở đây"
-    },
-    "Buttons": {
-      "Enrollment": "Bắt đầu ghi danh",
-      "Dashboard": "Xem Bảng điều khiển"
-    },
-    "Notes": "GHI CHÚ CỦA ĐỐI TƯỢNG",
-    "NotesPlaceholder": "Bắt đầu gõ...",
-    "NotesError": "Chúng tôi rất tiếc, nhưng những ghi chú không được lưu lại. Vui lòng đợi một chút rồi thử lại.",
-    "Steps": {
-      "Step1": {
-        "Title": "Vui lòng nhập mã mời 12 chữ số của đối tượng",
-        "Subtitle": "Nếu không biết mã, vào đường kết nối tập tin Brigham rồi sử dụng tên của đối tượng để xem mã.",
-        "Placeholder": "Vui lòng nhập mã mời",
-        "Error": "Không tìm thấy mã"
-      },
-      "Step2": {
-        "Title": "Kiểm tra mã zip gửi thư",
-        "Placeholder": "Vui lòng nhập mã zip gửi thư",
-        "Error": "Mã zip không hợp lệ",
-        "Success": "Mã zip hợp lệ"
-      },
-      "Step3": {
-        "Title": "Vui lòng xác định bằng miệng quý vị 18 tuổi trở lên trước khi bắt đầu ghi danh."
-      }
-    }
-  },
-  "Enrollment": {
-    "Title": "Cài đặt tài khoản",
-    "FirstName": {
-      "Text": "Tên của đối tượng",
-      "Placeholder": "Nhập tên",
-      "Error": "Nhập tên của đối tượng"
-    },
-    "LastName": {
-      "Text": "Họ của đối tượng",
-      "Placeholder": "Nhập họ",
-      "Error": "Nhập họ của đối tượng"
-    },
-    "Email": {
-      "Text": "Địa chỉ email của đối tượng (Không bắt buộc)",
-      "Placeholder": "example@example.com",
-      "Error": "Vui lòng điền một địa chỉ email hợp lệ"
-    },
-    "Button": "Tiếp tục"
-  },
-  "Help": {
-    "Title": "Trung tâm trợ giúp",
-    "Collect": {
-      "Title": "Cách thức thu thập mẫu",
-      "Text": "Điều quan trọng là xét nghiệm và gửi lại cùng ngày, từ thứ hai đến thứ năm. Đây là những ngày mà Viện Broad Institute sẽ thử nghiệm các mẫu TestBoston.",
-      "Link": "Hướng dẫn cách thu thập mẫu",
-      "IconAlt": "Biểu tượng tập tin PDF",
-      "IframeTitle": "Hướng dẫn sử dụng bộ vật liệu xét nghiệm lấy dịch phết mũi",
-      "Video": "https://player.vimeo.com/video/440526812"
-    },
-    "Return": {
-      "Title": "Cách thức gửi mẫu trở lại",
-      "Text": "Các mẫu xét nghiệm phải được gửi trở lại qua UPS cùng ngày quý vị lấy mẫu xét nghiệm. Mang trao bộ vật liệu xét nghiệm tại cửa hàng UPS Store chính thức hoặc ở Hộp gửi hàng UPS. Quý vị cũng có thể yêu cầu nhân viên UPS đến thu mẫu ở nhà nếu quý vị có thể để gói bưu kiện một nơi an toàn bên ngoài nhà của quý vị cho nhân viên lái xe UPS đến lấy.",
-      "Step1": {
-        "Title": "Bước 1:",
-        "Text": {
-          "Part1": "Nhấp",
-          "Part2": "Vui lòng nhập mã zip và nhấp vào “<span class=\"bold\">Xem tất cả các lựa chọn</span>”."
+    "HomePage": {
+        "IntroSection": {
+            "Title": "Chúng tôi muốn giúp đỡ cộng đồng và tìm hiểu thêm về các mô hình lây nhiễm COVID-19 ở khu vực Boston.",
+            "Text": "TestBoston là một nghiên cứu về COVID-19 được Bệnh viện Brigham & Women’s, Viện Broad MIT và Harvard hỗ trợ.",
+            "Code": "Vui lòng nhập mã mời",
+            "NoCode": "Tôi không có mã mời"
         },
-        "ImageAlt": "Hướng dẫn các địa điểm UPS, địa điểm của quý vị"
-      },
-      "Step2": {
-        "Title": "Bước 2:",
-        "Text": "Bên dưới “<span class=\"bold\">Dạng địa điểm</span>”, đánh dấu các ô “<span class=\"bold\">Cửa hàng UPS®</span>” và “<span class=\"bold\"> Hộp gửi hàng UPS </span>”. Sau đó đánh vào biểu tượng tìm kiểm",
-        "ImageAlt": "Hướng dẫn về các địa điểm UPS, các hộp gửi hàng UPS"
-      }
-    },
-    "Pickup": {
-      "Title": "UPS thu ở nhà",
-      "Text": {
-        "Part1": "Quý vị có thể đủ điều kiện để UPS đến thu mẫu ở nhà nếu quý vị có thể để gói bưu kiện một nơi an toàn bên ngoài nhà của quý vị nơi nhân viên lái xe UPS có thể đến lấy. Quý vị gọi điện thoại hẹn họ đến thu mẫu",
-        "Part2": "Nếu quý vị gặp khó khăn khi gửi trở lại bộ vật liệu xét nghiệm qua UPS, vui lòng liên lạc ban nghiên cứu."
-      }
-    },
-    "Questions": {
-      "Title": "Quý vị vẫn còn thắc mắc?",
-      "Text": {
-        "Part1": "Nếu quý vị có điều gì thắc mắc, vui lòng liên lạc ban nghiên cứu qua email",
-        "Part2": "hoặc"
-      }
-    },
-    "ArrowAlt": "Mũi tên",
-    "SearchAlt": "Biểu tượng tìm kiếm"
-  },
-  "Toolkit": {
-    "Dashboard": {
-      "Title": "Bảng điều khiển",
-      "Invitation": {
-        "InvitationCode": "Mã mời",
-        "Message": "Vui lòng sử dụng công cụ tìm kiếm để quản lý một người tham gia.",
-        "Button": "Đi"
-      }
-    },
-    "Password": {
-      "Title": "Vui lòng nhập mật khẩu của quý vị",
-      "Text": "Vui lòng nhập mật khẩu của quý vị *",
-      "InputPlaceholder": "Mật khẩu",
-      "PasswordWrongError": "Mật khẩu không chính xác. Vui lòng thử lại lần nữa.",
-      "OtherError": "[VI] We're sorry, but an error has occurred. Please try again.",
-      "PasswordRequiredError": "Cần mật khẩu"
-    },
-    "ErrorPage": {
-      "Title": "Chúng tôi gặp lỗi",
-      "Text": "Chúng tôi rất tiếc, đã có lỗi.",
-      "DefaultText": {
-        "TextPt1": "Vui lòng đợi một chút rồi thử lại. Nếu vẫn còn gặp trở ngại, vui lòng email cho chúng tôi ở",
-        "TextPt2": "hoặc gọi chúng tôi ở"
-      }
-    },
-    "SessionExpired": {
-      "Text": "Quý vị đã dừng một lúc nên chúng tôi cho quý vị thoát ra vì lý do bảo mật. Vui lòng đăng nhập lại để trở lại trang sau cùng lúc quý vị vào trước đây."
-    },
-    "Dialogs": {
-      "SessionWillExpire": {
-        "Title": "Phiên của quý vị sắp hết thời gian.",
-        "Text": "Để bảo mật, hệ thống sẽ cho quý vị thoát ra bởi vì quý vị đã dừng một lúc. Vui lòng nhấp “Tiếp tục” để đăng nhập lại. Nhấp “Thoát ra” nếu quý vị đã xong ngay lúc này.",
-        "SignOut": "Thoát ra",
-        "Continue": "Tiếp tục",
-        "RenewalFailed": "Vào lại phiên không thành công. Vui lòng thoát ra rồi đăng nhập lại."
-      }
-    }
-  },
-  "SDK": {
-    "SubmitButton": "Gửi",
-    "CloseButton": "Đóng",
-    "AddButton": "THÊM",
-    "CancelButton": "HỦY",
-    "NextButton": "Tiếp tục",
-    "PreviousButton": "Lùi lại",
-    "SavingButton": "Đang lưu",
-    "EditButton": "Tiếp tục",
-    "CompleteButton": "Hiệu chỉnh",
-    "ReviewButton": "Xem",
-    "OpenButton": "Mở",
-    "StartButton": "Bắt đầu",
-    "AgreeButton": "Tôi đồng ý",
-    "ReportButton": "Báo cáo",
-    "NotAgreeButton": "Tôi chưa sẵn sàng đồng ý",
-    "ValidateError": "Vui lòng điền vào tất cả các trường cần thiết.",
-    "CommunicationError": "Có vấn đề khi lưu dữ liệu của quý vị lại. Vui lòng kiểm tra mẫu và các câu trả lời của quý vị trước khi nộp",
-    "SaveError": "Chúng tôi rất tiếc, đã có lỗi.",
-    "ExportStudy": {
-      "Export": "XUẤT"
-    },
-    "ListStudies": {
-      "StudyName": "Tên nghiên cứu",
-      "ParticipantCount": "Đếm người tham gia"
-    },
-    "ListWorkspaces": {
-      "WorkspaceName": "Tên thư mục",
-      "WorkspaceNamespace": "Không gian tên thư mục"
-    },
-    "Login": {
-      "Login": "ĐĂNG NHẬP",
-      "Logout": "ĐĂNG XUẤT"
-    },
-    "SignInOut": {
-      "SignIn": "Đăng nhập vào",
-      "SignOut": "Thoát ra"
-    },
-    "LanguageSelector": {
-      "LanguageSelection": "chọn ngôn ngữ"
-    },
-    "UserActivities": {
-      "ActivityName": "Mẫu",
-      "Summary": "Tóm tắt",
-      "ActivityStatus": "Tình trạng",
-      "ActivityDate": "Được tạo ra",
-      "ActivityActions": "Hành động",
-      "ActivityQuestionCount": "{{questionsAnswered}} của {{questionTotal}} được trả lời",
-      "HiddenTooltip": "This activity is hidden."
-    },
-    "ManageParticipants": {
-      "GovernedParticipants": "Người tham gia được kiểm soát",
-      "ParticipantPlaceholder": "Người tham gia",
-      "ParticipantsList": "Người tham gia"
-    },
-    "ParticipantProfile": {
-      "OpenProfile": "Hồ sơ",
-      "ViewAs": "Xem như là",
-      "ManageParticipants": "Quản lý người tham gia"
-    },
-    "UserPreferences": {
-      "UserPreferencesTitle": "Chế độ người dùng ưa thích",
-      "UserPreferencesGender": "Giới tính",
-      "UserPreferencesLocale": "Ngôn ngữ ưa thích"
-    },
-    "Dashboard": {
-      "Title": "Bảng điều khiển của tôi",
-      "Text": "Bảng điều khiển dưới đây mô tả từng mẫu TestBoston và tình trạng của mẫu."
-    },
-    "DatePicker": {
-      "Day": "Chọn ngày...",
-      "Month": "Chọn tháng...",
-      "Year": "Chọn năm...",
-      "January": "Tháng Một",
-      "February": "Tháng Hai",
-      "March": "Tháng Ba",
-      "April": "Tháng Tư",
-      "May": "Tháng Năm",
-      "June": "Tháng Sáu",
-      "July": "Tháng Bảy",
-      "August": "Tháng Tám",
-      "September": "Tháng Chín",
-      "October": "Tháng Mười",
-      "November": "Tháng Mười Một",
-      "December": "Tháng Mười Hai"
-    },
-    "DateLabel": {
-      "YYYY": "YYYY",
-      "MM": "MM",
-      "DD": "DD"
-    },
-    "UserMenu": {
-      "DashboardButton": "Bảng điều khiển",
-      "SignOutButton": "Thoát ra"
-    },
-    "DetailsPlaceholder": {
-      "PluralForm": "ký tự còn lại",
-      "SingularForm": "ký tự còn lại"
-    },
-    "Title": {
-      "Default": "TestBoston",
-      "Alert": "Phiên của quý vị sắp hết thời gian."
-    },
-    "EmailEntry": {
-      "InvalidEmail": "Vui lòng điền một địa chỉ email hợp lệ"
-    },
-    "Institutions": {
-      "Fields": {
-        "Name": "Tên bác sĩ",
-        "Institution": "Viện",
-        "InstitutionAny": "Viện (nếu có)",
-        "City": "Thành phố",
-        "State": "Tiểu bang"
-      },
-      "Form" : {
-        "OtherPhysician": "Other physician",
-        "OtherInstitution": "Other institution"
-      },
-      "PhysicianValidation": "Vui lòng điền vào tất cả các trường cần thiết"
-    },
-    "MailAddress": {
-      "Fields": {
-        "Name": "Họ và tên",
-        "Country": "Quốc gia/Lãnh thổ",
-        "Street1": "Địa chỉ nhà",
-        "Street2": "Số căn chung cư/lầu",
-        "State": {
-          "State": "Tiểu bang",
-          "Province": "Tỉnh",
-          "State/Province/Region": "Tiểu bang/Tỉnh/Vùng"
+        "AboutSection": {
+            "Title": "Tổng quát về nghiên cứu",
+            "Text": "Mục tiêu của chúng tôi là theo dõi tỷ lệ lây nhiễm COVID-19 ở Massachusetts theo thời gian. Một số cộng đồng có tỷ lệ lây nhiễm cao hơn những cộng đồng khác. Một số người mắc phải COVID-19 và không có triệu chứng. Chúng tôi hy vọng nghiên cứu này sẽ giúp chúng tôi hiểu rõ hơn về COVID-19 và mang lại lợi ích cho những bệnh nhân bị nhiễm hoặc không bị nhiễm COVID trong tương lai.",
+            "Questions": {
+                "Title": "Những câu hỏi mà chúng tôi đang cố gắng tìm lời giải đáp:",
+                "List": [
+                    "COVID-19 phổ biến như thế nào trong cộng đồng của chúng ta?",
+                    "Việc bị nhiễm COVID-19 mà không có triệu chứng phổ biến như thế nào?",
+                    "Con người có trở nên miễn dịch với COVID-19 sau khi bị nhiễm bệnh đó hay không?",
+                    "Các nhà nghiên cứu làm cách nào để có thể xét nghiệm cho nhiều người khi họ đang ở nhà?"
+                ]
+            }
         },
-        "City": "Thành phố",
-        "Phone": "Điện thoại",
+        "FaqSection": {
+            "Title": "Giải đáp các câu hỏi thông thường về TestBoston",
+            "Text": "Quý vị cũng có thể gọi điện thoại thoại hoặc gửi email cho nhân viên nghiên cứu của chúng tôi nếu quý vị có điều gì thắc mắc về TestBoston:",
+            "Items": [
+                {
+                    "Question": "Ai có thể tham gia nghiên cứu này?",
+                    "Paragraphs": [
+                        "TestBoston dành cho một nhóm cư dân trưởng thành được lựa chọn ngẫu nhiên từ khu vực Greater Boston, những người đã được chăm sóc tại Brigham & Women’s ít nhất một lần trong năm qua. Mỗi bệnh nhân được chọn ngẫu nhiên sẽ nhận được thư mời tham gia nghiên cứu qua bưu điện hoặc email."
+                    ]
+                },
+                {
+                    "Question": "Tôi có được xét nghiệm COVID-19 nếu tôi tham gia vào nghiên cứu này không?",
+                    "Paragraphs": [
+                        "Có. Nếu quý vị nhận được thư mời tham gia nghiên cứu và khi quý vị quyết định ghi danh, quý vị sẽ được xét nghiệm COVID-19. Tuy nhiên, số lượng ghi danh có hạn và ai ghi danh trước sẽ được nhận trước. Nếu quý vị ghi danh, quý vị sẽ nhận được một bộ vật liệu xét nghiệm tại nhà gồm có hai bộ vật liệu xét nghiệm trong khoảng một tuần sau khi tham gia nghiên cứu. Bộ vật liệu xét nghiệm tại nhà sẽ gồm có một bộ vật liệu xét nghiệm virus học (dịch phết mũi) và một bộ vật liệu xét nghiệm kháng thể (lấy máu đầu ngón tay), kèm theo hướng dẫn về cách thu thập và gửi mẫu của quý vị đến phòng thí nghiệm của chúng tôi để xét nghiệm. Dịch phết mũi sẽ phát hiện xem quý vị có đang bị COVID-19 hay không. Lấy máu đầu ngón tay sẽ xét nghiệm xem quý vị có kháng thể với COVID-19 hay không (có nghĩa là quý vị đã từng nhiễm vi rút). Nếu quý vị đồng ý tham gia thêm nghiên cứu theo thời gian, chúng tôi sẽ gửi cho quý vị các bộ vật liệu xét nghiệm để làm lại những xét nghiệm này hàng tháng thêm 5 tháng nữa."
+                    ]
+                },
+                {
+                    "Question": "Tôi có sẽ nhận được kết quả của tôi không?",
+                    "Paragraphs": [
+                        "Quý vị sẽ nhận được kết quả nghiên cứu xét nghiệm virus. Quý vị sẽ không nhận được kết quả xét nghiệm kháng thể. Kết quả sẽ thông báo cho việc ra quyết định về sức khỏe cộng đồng. Khi kết quả được báo cáo, những kết quả này sẽ được công bố dưới dạng tóm tắt dữ liệu ghi nhận thông tin nhân khẩu căn bản. Danh tính của quý vị sẽ vẫn được giữ kín."
+                    ]
+                },
+                {
+                    "Question": "Có phải TestBoston chỉ dành cho những người có các triệu chứng COVID-19 không?",
+                    "Paragraphs": [
+                        "Không - bất cứ ai đã nhận được thư mời tham gia TestBoston đều được hoan nghênh ghi danh tham gia nghiên cứu, bất kể là quý vị đang có các triệu chứng (hoặc đã từng bị những triệu chứng này trước đây) hay không."
+                    ]
+                },
+                {
+                    "Question": "Tôi có phải đi đâu để tham gia nghiên cứu không?",
+                    "Paragraphs": [
+                        "Không. TestBoston là một nghiên cứu tại nhà. Những người tham gia TestBoston không phải đến y viện, bệnh viện hoặc văn phòng bác sĩ. Những người tham gia sẽ trả lời một khảo sát ngắn trực tuyến và nhận bộ dụng cụ lấy mẫu COVID-19 tại nhà, sau đó gửi đến phòng thí nghiệm của chúng tôi. "
+                    ]
+                },
+                {
+                    "Question": "Sẽ có một bác sĩ, y tá hoặc nhân viên nghiên cứu đến nhà tôi để làm xét nghiệm cho tôi có phải không?",
+                    "Paragraphs": [
+                        "Không. Quý vị sẽ nhận được một bộ dụng cụ lấy mẫu qua bưu điện và tự mình lấy dịch phết mũi và lấy máu đầu ngón tay. Nếu có điều gì thắc mắc, quý vị có thể liên lạc với ban nghiên cứu bất cứ lúc nào qua điện thoại hoặc email."
+                    ]
+                },
+                {
+                    "Question": "Tham gia TestBoston miễn phí phải không?",
+                    "Paragraphs": [
+                        "Đúng. Không phải tốn tiền khi tham gia TestBoston."
+                    ]
+                },
+                {
+                    "Question": "Tôi sẽ phải làm gì nếu tôi tham gia nghiên cứu?",
+                    "Paragraphs": [
+                        "Những người tham gia TestBoston được yêu cầu điền một cuộc khảo sát ngắn về COVID-19 và tự lấy hai loại mẫu xét nghiệm COVID-19 đơn giản tại nhà. Những người tham gia được yêu cầu gửi trả lại bộ vật liệu xét nghiệm đó cho chúng tôi trong một bưu kiện đã được trả lệ phí trước để thử nghiệm. Những người tham gia cũng có thể tình nguyện lặp lại quy trình này mỗi tháng thêm 5 tháng nữa. Mẫu xét nghiệm phải lấy là dịch phết mũi và lấy máu đầu ngón tay."
+                    ]
+                },
+                {
+                    "Question": "Gia đình tôi có thể tham gia TestBoston không?",
+                    "Paragraphs": [
+                        "Hiện tại, chỉ những bệnh nhân của Brigham & Women’s nhận được thư mời ngẫu nhiên mới có thể tham gia TestBoston. Nếu nhiều người trong gia đình quý vị nhận được thư mời, thì những người nhận được thư mời đều có thể tham gia nghiên cứu nếu muốn. Nếu quý vị không nhận được thư mời, nhưng quý vị muốn biết thông tin về tiến triển của nghiên cứu, quý vị có thể <a class=\"Link Link_semi-bold Link_no-wrap\" href=\"#stay-informed\">tham gia danh mục gửi thư của TestBoston</a>."
+                    ]
+                },
+                {
+                    "Question": "Tôi có thể đưa mã mời của mình cho người khác không?",
+                    "Paragraphs": [
+                        "Không. Mã mời chỉ dành cho chính người được gửi thư mời sử dụng."
+                    ]
+                },
+                {
+                    "Question": "Ai đang điều hành nghiên cứu này?",
+                    "Paragraphs": [
+                        "TestBoston là một nghiên cứu về COVID-19 được Bệnh viện Brigham & Women’s, Viện Broad MIT và Harvard hỗ trợ. Những người điều hành nghiên cứu này là các bác sĩ chuyên về bệnh truyền nhiễm tại Bệnh viện Brigham & Women’s.",
+                        "Viện Broad Institute là một viện nghiên cứu hàn lâm hàng đầu có trụ sở tại Cambridge. Viện Broad Institute thực hiện hàng nghìn xét nghiệm COVID-19 mỗi ngày cho Bộ Y tế trên khắp Massachusetts, cũng như cho các nghiên cứu COVID-19 khác ở Massachusetts."
+                    ]
+                },
+                {
+                    "Question": "Nghiên cứu sẽ kéo dài bao lâu?",
+                    "Paragraphs": [
+                        "Nghiên cứu có thể kéo dài đến 6 tháng. Những người tham gia có thể quyết định ngừng tham gia nghiên cứu bất cứ lúc nào."
+                    ]
+                }
+            ]
+        },
+        "TeamSection": {
+            "Title": "Ban nghiên cứu của chúng tôi",
+            "Text": "Chúng tôi gồm ban các bác sĩ và nhà nghiên cứu về các bệnh truyền nhiễm muốn tìm hiểu rõ hơn về mức độ ảnh hưởng của COVID-19 đến cá nhân và cộng đồng để từ đó chúng tôi có thể phục vụ mọi bệnh nhân tốt hơn. ",
+            "PIs": [
+                {
+                    "Name": "Bác sĩ Ann E. Woolley, MD, MPH",
+                    "Affiliations": "Bác sĩ phó, Chuyên khoa Bệnh truyền nhiễm, Bệnh viện Brigham & Women’s Hospital; Giảng viên y khoa, Đại học Y khoa Harvard",
+                    "Info": "Bác sĩ Ann Woolley là Phó Giám đốc Lâm sàng về Bệnh truyền nhiễm cấy ghép nội tạng rắn tại Bệnh viện Brigham & Women’s Hospital và Nhà nghiên cứu lâm sàng nghiên cứu về việc mở rộng điều trị và chẩn đoán."
+                },
+                {
+                    "Name": "Bác sĩ Lisa A. Cosimi, MD",
+                    "Affiliations": "Bác sĩ phó, Bệnh viện Brigham & Women’s Hospital; Phó Giáo sư, Đại học Y khoa Harvard",
+                    "Info": "Bác sĩ Cosimi là bác sĩ chuyên khoa phụ tá tại Bệnh viện Brigham & Women’s Hospital, làm việc trong các bộ phận Bình đẳng Y tế Toàn cầu và Bệnh truyền nhiễm, chú trọng củng cố các hệ thống y tế và chất lượng của chăm sóc sức khỏe ở các môi trường có nguồn lực hạn chế."
+                },
+                {
+                    "Name": "Bác sĩ, Tiến sĩ Deborah T. Hung, MD, PhD",
+                    "Affiliations": "Giáo sư, Đại học Y khoa Harvard; Giáo sư cốt cán và Đồng Giám đốc, Chương trình Bệnh truyền nhiễm và quần xã vi sinh, Viện Broad Institute",
+                    "Info": "Bác sĩ Deborah Hung là nhà khoa học y khoa ở Viện Broad Institute, Đại học Y khoa Harvard và Bệnh viện Đa khoa Massachusetts nghiên cứu về các bệnh truyền nhiễm và là bác sĩ thường trực về các bệnh truyền nhiễm và khoa chăm sóc phổi & nguy kịch ở Bệnh viện Brigham & Women’s Hospital."
+                }
+            ],
+            "Others": [
+                {
+                    "Title": "Ban Hành chính, Viện Broad Institute",
+                    "Members": [
+                        "Andrea Saltzman, Giám đốc, Văn phòng Bảo vệ Đối tượng Nghiên cứu",
+                        "Marissa Jenko, MS, Trưởng ban Hành chính",
+                        "Paul Tyman, Phụ tá Hành chính",
+                        "Sarah Winnicki, Quản lý dự án II",
+                        "Tiến sĩ Sharon Wong, PhD, Phụ tá Giám đốc - Chương trình Bệnh truyền nhiễm và quần xã vi sinh"
+                    ]
+                },
+                {
+                    "Title": "Ban Kỹ thuật, Viện Broad Institute",
+                    "Members": [
+                        "Andrew Zimmer, Giám đốc, Nền tảng quyên góp dữ liệu",
+                        "Anna Hupalowska, Nhà thiết kế đồ họa & trực quan hóa dữ liệu",
+                        "Erin Gwozdz, Nhà thiết kế UX/UI",
+                        "Jen Lapan, Giám đốc chính phụ trách sản phẩm phần mềm",
+                        "Kiara Westbrooks, Kỹ sư phần mềm",
+                        "Marco Ocana, Kỹ sư phần mềm trưởng",
+                        "Pavel Sidorenko, Kỹ sư phần mềm",
+                        "Pegah Taheri, Kỹ sư phần mềm",
+                        "Sampath Settipalli, Kỹ sư phần mềm cao cấp",
+                        "Scott Sassone, Giám đốc, Sản xuất video",
+                        "Simone Maiwald, Giám đốc kỹ thuật phần mềm",
+                        "Yufeng Wang, Kỹ sư phần mềm cao cấp"
+                    ]
+                },
+                {
+                    "Title": "Ban Lâm sàng, Bệnh viện Brigham và Women’s Hospital",
+                    "Members": [
+                        "Andy Kim, BS, Phối hợp viên nghiên cứu",
+                        "Christina Kelly, Phụ tá nghiên cứu",
+                        "Hannah Laibinis, Sinh viên thực tập",
+                        "Henry Manigat, Biên dịch viên",
+                        "Henry Rutherford, BA, Phối hợp viên nghiên cứu",
+                        "Himaja Nagireddy, HSPH MS Candidate, Sinh viên thực tập",
+                        "Sarah Naz-McLean, MSc, Giám đốc chương trình",
+                        "Tina Wang, Biên dịch viên",
+                        "Yilu Ma, Biên dịch viên"
+                    ]
+                },
+                {
+                    "Title": "Các đối tác khác",
+                    "Members": [
+                        "Giải trình tự nghiên cứu lâm sàng (Clinical Research Sequencing Platform, CRSP), Viện Broad Institute",
+                        "GBF",
+                        "Joel Ceide, Biên dịch viên",
+                        "Language Scientific",
+                        "Mascon Medical",
+                        "Microbial Omics Core (MOC), Viện Broad Institute",
+                        "Nadya Lopez Zalba, Biên dịch viên",
+                        "UPS"
+                    ]
+                }
+            ]
+        },
+        "MailingSection": {
+            "Title": "TestBoston hiện đang ghi danh các bệnh nhân của Bệnh viện Brigham and Women’s Hospital được mời. ",
+            "Text": "Nếu quý vị không nhận được thư mời tham gia nghiên cứu nhưng muốn cập nhật thông tin tổng quát về TestBoson, vui lòng tham gia vào danh sách bản tin:"
+        }
+    },
+    "PrequalPage": {
+        "Title": "Đầu tiên, xác nhận quý vị đủ điều kiện",
+        "InvitationCode": {
+            "Question": "Vui lòng nhập mã mời",
+            "TooltipAlt": "Biểu tượng thông tin",
+            "Tooltip": "Nếu quý vị nhận được thư mời qua bưu điện hay email từ bác sĩ của quý vị, thư đó có 12 chữ số ở trên đầu.",
+            "Placeholder": "Vui lòng nhập mã mời",
+            "Error": {
+                "Part1": "Mã quý vị nhập không hoạt động. Vui lòng kiểm tra mã của quý vị và thử lại lần nữa. Quý vị luôn có thể liên lạc với ban nhân viên nghiên cứu TestBoston để được trợ giúp:",
+                "Part2": "hoặc",
+                "Part3": "",
+                "Part4": ""
+            }
+        },
         "Zip": {
-          "Zip Code": "Mã Zip  ",
-          "Postal Code": "Mã Bưu cục",
-          "Zip/Postal Code": "Zip/Mã bưu cục"
+            "Question": "Mã zip hiện tại để gửi thư của quý vị là gì?",
+            "Placeholder": "Vui lòng nhập mã zip để gửi thư",
+            "Error": "Chúng tôi rất tiếc. Mã zip đó nằm ngoài vùng nghiên cứu TestBoston. Vui lòng kiểm tra mã zip của quý vị và thử lại lần nữa."
         },
-        "Choose": "Chọn {{field}} ..."
-      },
-      "Suggestion": {
-        "Title": "Chúng tôi đã kiểm tra thông tin địa chỉ quý vị đã nhập và đề nghị một số thay đổi để bảo đảm chuyển giao được.",
-        "Subtitle": "Nhấp vào \"Đề nghị\" để cập nhật mẫu. Quý vị có thể nhấp vào \"Như đã nhập\" để lấy lại các lần nhập vào trước đây.",
-        "Suggested": "Được đề nghị:",
-        "AsEntered": "Như đã nhập:"
-      },
-      "Error": {
-        "InvalidAddress": "Địa chỉ không hợp lệ.",
-        "CannotVerify": "Không thể xác thực địa chỉ, vui lòng kiểm tra địa chỉ của quý vị lần nữa.",
-        "UnknownVerifyError": "Đã có lỗi không nhận ra địa chỉ trong lúc xác thực địa chỉ.",
-        "FieldIsRequired": "{{field}} bắt buộc",
-        "FieldIsInvalid": "{{field}} có giá trị không hợp lệ",
-        "InvalidHouseNumber": "Không tìm thấy địa chỉ nhà",
-        "INTERNAL_SERVER_ERROR": "Rất tiếc, đã xảy ra lỗi Nếu vẫn còn vấn đề, vui lòng liên lạc với chúng tôi ở support@easypost.com.",
-        "NOT_ACCEPTABLE": "Nguồn tài nguyên yêu cầu xác định chỉ có thể tạo ra các hồi đáp có các đặc điểm về nội dung không được chấp nhận theo các đề mục gởi trong yêu cầu.",
-        "NOT_FOUND": "Không tìm thấy tài nguyên được yêu cầu.",
-        "FORBIDDEN": "Không thể truy cập tài nguyên được yêu cầu.",
-        "PAYMENT_REQUIRED": "Không đủ tiền. Vui lòng kiểm tra cài đặt hóa đơn ở http://www.easypost.com/account/billing.",
-        "UNAUTHORIZED": "Không thể vào nguồn tài nguyên được yêu cầu, không được cho phép.",
-        "BAD_REQUEST": "Yêu cầu sai. Vui lòng kiểm nội dung và thử lại.",
-        "PAYMENT_GATEWAY.ERROR": "Bộ phận giải quyết thanh toán không thực hiện được yêu cầu. Vui lòng thử lại lần nữa hoặc liên lạc với chúng tôi ở support@easypost.com.",
-        "MODE.UNAUTHORIZED": "Tài nguyên này cần có khóa truy cập API.",
-        "MODE.CONFLICT": "Kiểu khóa API không khớp với chế độ tham số.",
-        "DATE.PARSE.FAILURE": "Có ít nhất một ngày định dạng không đúng và không thể phân giải được.",
-        "PARAMETER.FORBIDDEN": "Yêu cầu không thể hoàn thành do các tính chất ẩn có trong các tham số.",
-        "PARAMETER.REQUIRED": "Thiếu tham số cần thiết.",
-        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "Tham số cần thiết thông qua chứa ký tự không hợp lệ.",
-        "ADDRESS.PARAMETERS.INVALID": "Thiếu tham số thông qua để tạo một Địa chỉ.",
-        "ADDRESS.COUNTRY.INVALID": "Mã 'quốc gia' không hợp lệ, vui lòng đưa ra 2 ký tự mã ISO quốc gia.",
-        "ADDRESS.VERIFICATION.NOT_FOUND": "Không tìm thấy địa chỉ.",
-        "ADDRESS.VERIFICATION.FAILURE": "Địa chỉ không xác thực được.",
-        "ADDRESS.VERIFY.UNAVAILABLE": "Việc xác thực địa chỉ không có. Vui lòng thử lại lần nữa.",
-        "ADDRESS.VERIFICATION.INVALID": "Một trong những xác thực được chọn không hợp lệ.",
-        "ADDRESS.VERIFY.FAILURE": "Không thể xác thực địa chỉ.",
-        "ADDRESS.VERIFY.CARRIER_INVALID": "Không thể xác thực địa chỉ dùng carrier được cung cấp.",
-        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "Việc xác thực địa chỉ không có vì dịch vụ ban đầu không được hồi đáp. Vui lòng thử lại lần nữa.",
-        "ADDRESS.VERIFY.ONLY_US": "USPS chỉ có thể xác thực các địa chỉ ở Hoa Kỳ.",
-        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "Xác thực quốc tế không được kích hoạt ở tài khoản này. Vui lòng liên lạc support@easypost.com.",
-        "ADDRESS.VERIFY.MISSING_STREET": "Dữ liệu địa chỉ cung cấp không đủ. Phải cung cấp đường phố.",
-        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Dữ liệu địa chỉ cung cấp không đủ. Phải cung cấp thành phố và tiểu bang hay mã zip.",
-        "E.COUNTRY.UNSUPPORTED": "Quốc gia này không được hỗ trợ trong chế độ này. Vui lòng thử chế độ sản xuất.",
-        "E.ENGINE.UNAVAILABLE": "Không có thiết bị xác thực để tiến hành trong quốc gia này. Vui lòng thử lại sau.",
-        "E.QUERY.UNANSWERABLE": "Chúng tôi không có đủ dữ liệu ở quốc gia này để thực hiện yêu cầu. Vui lòng thử lại sau.",
-        "E.ADDRESS.NOT_FOUND": "Không tìm thấy địa chỉ đã nhập.",
-        "E.SECONDARY_INFORMATION.INVALID": "Thiếu thông tin thứ cấp (Số căn chung cư/số phòng). Xin lưu ý, thông báo này có thể xuất hiện do lỗi dù yêu cầu của quý vị đã được ghi nhận.",
-        "E.SECONDARY_INFORMATION.MISSING": "Thiếu thông tin thứ cấp (Số căn chung cư/số phòng). Xin lưu ý, thông báo này có thể xuất hiện do lỗi dù yêu cầu của quý vị đã được ghi nhận.",
-        "E.HOUSE_NUMBER.MISSING": "Thiếu số nhà.",
-        "E.HOUSE_NUMBER.INVALID": "Không tìm thấy số địa chỉ đường đã cung cấp.",
-        "E.STREET.MISSING": "Thiếu tên đường phố.",
-        "E.STREET.INVALID": "Tên đường phố không hợp lệ.",
-        "E.BOX_NUMBER.MISSING": "Thiếu số hộp thư.",
-        "E.BOX_NUMBER.INVALID": "Số hộp thư không hợp lệ.",
-        "E.ADDRESS.INVALID": "Thành phố/tiểu bang/Zip không hợp lệ.",
-        "E.ZIP.NOT_FOUND": "Không tìm thấy Zip.",
-        "E.ZIP.INVALID": "Zip không hợp lệ.",
-        "E.ZIP.PLUS4.NOT_FOUND": "Không tìm thấy Zip + 4.",
-        "E.ADDRESS.MULTIPLE": "Nhiều địa chỉ truy về cùng một mã Zip.",
-        "E.ADDRESS.INSUFFICIENT": "Địa chỉ không đầy đủ/không hợp lệ.",
-        "E.ADDRESS.DUAL": "Địa chỉ đôi.",
-        "E.STREET.MAGNET": "Địa chỉ đường không rõ ràng.",
-        "E.CITY_STATE.INVALID": "Thành phố/tiểu bang không xác thực được.",
-        "E.STATE.INVALID": "Tiểu bang không hợp lệ.",
-        "E.ADDRESS.DELIVERY.INVALID": "Địa chỉ giao không hợp lệ.",
-        "E.TIMED_OUT": "Vượt quá thời gian chờ tối đa.",
-        "E.TIME_ZONE.UNAVAILABLE": "Hiện tại chưa có chức năng hiệu chỉnh múi giờ.",
-        "E.PO_BOX.INTERNATIONAL": "Không thể kiểm tra địa chỉ hộp thư quốc tế. Xin lưu ý, thông báo này có thể xuất hiện do lỗi dù yêu cầu của quý vị đã được ghi nhận."
-      }
+        "Adult": {
+            "Question": "1. Quý vị có từ 18 tuổi trở lên không?",
+            "Yes": "Có",
+            "No": "Không",
+            "Error": {
+                "Part1": "Rất tiếc, có vẻ như quý vị không đủ điều kiện tham gia. Quý vị phải từ 18 tuổi trở lên mới được tham gia nghiên cứu của TestBoston. Vui lòng đọc",
+                "Part2": "Câu hỏi thường gặp",
+                "Part3": "để biết thêm thông tin."
+            }
+        },
+        "Error": "Chúng tôi rất tiếc, đã có lỗi. Vui lòng đợi một chút rồi thử lại."
     },
-    "TooltipAlt": "Thông tin",
-    "SubjectPanel": {
-      "Link": "Quay về Trang tìm kiếm",
-      "Text": "Mã mời:"
+    "Prism": {
+        "ClearSearch": "Xóa",
+        "Email": "ĐỊA CHỈ EMAIL CỦA ĐỐI TƯỢNG",
+        "NoneListed": {
+            "Title": "Không có nêu",
+            "Text": "Nếu người tham gia muốn đăng nhập vào được trang TestBoston, vui lòng bật tài khoản TestBoston mình lên",
+            "Link": "ở đây"
+        },
+        "Buttons": {
+            "Enrollment": "Bắt đầu ghi danh",
+            "Dashboard": "Xem Bảng điều khiển"
+        },
+        "Notes": "GHI CHÚ CỦA ĐỐI TƯỢNG",
+        "NotesPlaceholder": "Bắt đầu gõ...",
+        "NotesError": "Chúng tôi rất tiếc, nhưng những ghi chú không được lưu lại. Vui lòng đợi một chút rồi thử lại.",
+        "Steps": {
+            "Step1": {
+                "Title": "Vui lòng nhập mã mời 12 chữ số của đối tượng",
+                "Subtitle": "Nếu không biết mã, vào đường kết nối tập tin Brigham rồi sử dụng tên của đối tượng để xem mã.",
+                "Placeholder": "Vui lòng nhập mã mời",
+                "Error": "Không tìm thấy mã"
+            },
+            "Step2": {
+                "Title": "Kiểm tra mã zip gửi thư",
+                "Placeholder": "Vui lòng nhập mã zip gửi thư",
+                "Error": "Mã zip không hợp lệ",
+                "Success": "Mã zip hợp lệ"
+            },
+            "Step3": {
+                "Title": "Vui lòng xác định bằng miệng quý vị 18 tuổi trở lên trước khi bắt đầu ghi danh."
+            }
+        }
     },
-    "AdminActionPanel": {
-      "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
-      "EditButton": "Edit"
+    "Enrollment": {
+        "Title": "Cài đặt tài khoản",
+        "FirstName": {
+            "Text": "Tên của đối tượng",
+            "Placeholder": "Nhập tên",
+            "Error": "Nhập tên của đối tượng"
+        },
+        "LastName": {
+            "Text": "Họ của đối tượng",
+            "Placeholder": "Nhập họ",
+            "Error": "Nhập họ của đối tượng"
+        },
+        "Email": {
+            "Text": "Địa chỉ email của đối tượng (Không bắt buộc)",
+            "Placeholder": "example@example.com",
+            "Error": "Vui lòng điền một địa chỉ email hợp lệ"
+        },
+        "Button": "Tiếp tục"
     },
-    "Validators": {
-      "DateNavyValidationRule": "[VI] Entered date is invalid"
+    "Help": {
+        "Title": "Trung tâm trợ giúp",
+        "Collect": {
+            "Title": "Cách thức thu thập mẫu",
+            "Text": "Điều quan trọng là xét nghiệm và gửi lại cùng ngày, từ thứ hai đến thứ năm. Đây là những ngày mà Viện Broad Institute sẽ thử nghiệm các mẫu TestBoston.",
+            "Link": "Hướng dẫn cách thu thập mẫu",
+            "IconAlt": "Biểu tượng tập tin PDF",
+            "IframeTitle": "Hướng dẫn sử dụng bộ vật liệu xét nghiệm lấy dịch phết mũi",
+            "Video": "https://player.vimeo.com/video/440526812"
+        },
+        "Return": {
+            "Title": "Cách thức gửi mẫu trở lại",
+            "Text": "Các mẫu xét nghiệm phải được gửi trở lại qua UPS cùng ngày quý vị lấy mẫu xét nghiệm. Mang trao bộ vật liệu xét nghiệm tại cửa hàng UPS Store chính thức hoặc ở Hộp gửi hàng UPS. Quý vị cũng có thể yêu cầu nhân viên UPS đến thu mẫu ở nhà nếu quý vị có thể để gói bưu kiện một nơi an toàn bên ngoài nhà của quý vị cho nhân viên lái xe UPS đến lấy.",
+            "Step1": {
+                "Title": "Bước 1:",
+                "Text": {
+                    "Part1": "Nhấp",
+                    "Part2": "Vui lòng nhập mã zip và nhấp vào “<span class=\"bold\">Xem tất cả các lựa chọn</span>”."
+                },
+                "ImageAlt": "Hướng dẫn các địa điểm UPS, địa điểm của quý vị"
+            },
+            "Step2": {
+                "Title": "Bước 2:",
+                "Text": "Bên dưới “<span class=\"bold\">Dạng địa điểm</span>”, đánh dấu các ô “<span class=\"bold\">Cửa hàng UPS®</span>” và “<span class=\"bold\"> Hộp gửi hàng UPS </span>”. Sau đó đánh vào biểu tượng tìm kiểm",
+                "ImageAlt": "Hướng dẫn về các địa điểm UPS, các hộp gửi hàng UPS"
+            }
+        },
+        "Pickup": {
+            "Title": "UPS thu ở nhà",
+            "Text": {
+                "Part1": "Quý vị có thể đủ điều kiện để UPS đến thu mẫu ở nhà nếu quý vị có thể để gói bưu kiện một nơi an toàn bên ngoài nhà của quý vị nơi nhân viên lái xe UPS có thể đến lấy. Quý vị gọi điện thoại hẹn họ đến thu mẫu",
+                "Part2": "Nếu quý vị gặp khó khăn khi gửi trở lại bộ vật liệu xét nghiệm qua UPS, vui lòng liên lạc ban nghiên cứu."
+            }
+        },
+        "Questions": {
+            "Title": "Quý vị vẫn còn thắc mắc?",
+            "Text": {
+                "Part1": "Nếu quý vị có điều gì thắc mắc, vui lòng liên lạc ban nghiên cứu qua email",
+                "Part2": "hoặc"
+            }
+        },
+        "ArrowAlt": "Mũi tên",
+        "SearchAlt": "Biểu tượng tìm kiếm"
+    },
+    "Toolkit": {
+        "Dashboard": {
+            "Title": "Bảng điều khiển",
+            "Invitation": {
+                "InvitationCode": "Mã mời",
+                "Message": "Vui lòng sử dụng công cụ tìm kiếm để quản lý một người tham gia.",
+                "Button": "Đi"
+            }
+        },
+        "Password": {
+            "Title": "Vui lòng nhập mật khẩu của quý vị",
+            "Text": "Vui lòng nhập mật khẩu của quý vị *",
+            "InputPlaceholder": "Mật khẩu",
+            "PasswordWrongError": "Mật khẩu không chính xác. Vui lòng thử lại lần nữa.",
+            "OtherError": "[VI] We're sorry, but an error has occurred. Please try again.",
+            "PasswordRequiredError": "Cần mật khẩu"
+        },
+        "ErrorPage": {
+            "Title": "Chúng tôi gặp lỗi",
+            "Text": "Chúng tôi rất tiếc, đã có lỗi.",
+            "DefaultText": {
+                "TextPt1": "Vui lòng đợi một chút rồi thử lại. Nếu vẫn còn gặp trở ngại, vui lòng email cho chúng tôi ở",
+                "TextPt2": "hoặc gọi chúng tôi ở"
+            }
+        },
+        "SessionExpired": {
+            "Text": "Quý vị đã dừng một lúc nên chúng tôi cho quý vị thoát ra vì lý do bảo mật. Vui lòng đăng nhập lại để trở lại trang sau cùng lúc quý vị vào trước đây."
+        },
+        "Dialogs": {
+            "SessionWillExpire": {
+                "Title": "Phiên của quý vị sắp hết thời gian.",
+                "Text": "Để bảo mật, hệ thống sẽ cho quý vị thoát ra bởi vì quý vị đã dừng một lúc. Vui lòng nhấp “Tiếp tục” để đăng nhập lại. Nhấp “Thoát ra” nếu quý vị đã xong ngay lúc này.",
+                "SignOut": "Thoát ra",
+                "Continue": "Tiếp tục",
+                "RenewalFailed": "Vào lại phiên không thành công. Vui lòng thoát ra rồi đăng nhập lại."
+            }
+        }
+    },
+    "SDK": {
+        "SubmitButton": "Gửi",
+        "CloseButton": "Đóng",
+        "AddButton": "THÊM",
+        "CancelButton": "HỦY",
+        "NextButton": "Tiếp tục",
+        "PreviousButton": "Lùi lại",
+        "SavingButton": "Đang lưu",
+        "EditButton": "Tiếp tục",
+        "CompleteButton": "Hiệu chỉnh",
+        "ReviewButton": "Xem",
+        "OpenButton": "Mở",
+        "StartButton": "Bắt đầu",
+        "AgreeButton": "Tôi đồng ý",
+        "ReportButton": "Báo cáo",
+        "NotAgreeButton": "Tôi chưa sẵn sàng đồng ý",
+        "ValidateError": "Vui lòng điền vào tất cả các trường cần thiết.",
+        "CommunicationError": "Có vấn đề khi lưu dữ liệu của quý vị lại. Vui lòng kiểm tra mẫu và các câu trả lời của quý vị trước khi nộp",
+        "SaveError": "Chúng tôi rất tiếc, đã có lỗi.",
+        "ExportStudy": {
+            "Export": "XUẤT"
+        },
+        "ListStudies": {
+            "StudyName": "Tên nghiên cứu",
+            "ParticipantCount": "Đếm người tham gia"
+        },
+        "ListWorkspaces": {
+            "WorkspaceName": "Tên thư mục",
+            "WorkspaceNamespace": "Không gian tên thư mục"
+        },
+        "Login": {
+            "Login": "ĐĂNG NHẬP",
+            "Logout": "ĐĂNG XUẤT"
+        },
+        "SignInOut": {
+            "SignIn": "Đăng nhập vào",
+            "SignOut": "Thoát ra"
+        },
+        "LanguageSelector": {
+            "LanguageSelection": "chọn ngôn ngữ"
+        },
+        "UserActivities": {
+            "ActivityName": "Mẫu",
+            "Summary": "Tóm tắt",
+            "ActivityStatus": "Tình trạng",
+            "ActivityDate": "Được tạo ra",
+            "ActivityActions": "Hành động",
+            "ActivityQuestionCount": "{{questionsAnswered}} của {{questionTotal}} được trả lời",
+            "HiddenTooltip": "This activity is hidden."
+        },
+        "ManageParticipants": {
+            "GovernedParticipants": "Người tham gia được kiểm soát",
+            "ParticipantPlaceholder": "Người tham gia",
+            "ParticipantsList": "Người tham gia"
+        },
+        "ParticipantProfile": {
+            "OpenProfile": "Hồ sơ",
+            "ViewAs": "Xem như là",
+            "ManageParticipants": "Quản lý người tham gia"
+        },
+        "UserPreferences": {
+            "UserPreferencesTitle": "Chế độ người dùng ưa thích",
+            "UserPreferencesGender": "Giới tính"
+        },
+        "Dashboard": {
+            "Title": "Bảng điều khiển của tôi",
+            "Text": "Bảng điều khiển dưới đây mô tả từng mẫu TestBoston và tình trạng của mẫu."
+        },
+        "DatePicker": {
+            "Day": "Chọn ngày...",
+            "Month": "Chọn tháng...",
+            "Year": "Chọn năm...",
+            "January": "Tháng Một",
+            "February": "Tháng Hai",
+            "March": "Tháng Ba",
+            "April": "Tháng Tư",
+            "May": "Tháng Năm",
+            "June": "Tháng Sáu",
+            "July": "Tháng Bảy",
+            "August": "Tháng Tám",
+            "September": "Tháng Chín",
+            "October": "Tháng Mười",
+            "November": "Tháng Mười Một",
+            "December": "Tháng Mười Hai"
+        },
+        "DateLabel": {
+            "YYYY": "YYYY",
+            "MM": "MM",
+            "DD": "DD"
+        },
+        "UserMenu": {
+            "DashboardButton": "Bảng điều khiển",
+            "SignOutButton": "Thoát ra"
+        },
+        "DetailsPlaceholder": {
+            "PluralForm": "ký tự còn lại",
+            "SingularForm": "ký tự còn lại"
+        },
+        "Title": {
+            "Default": "TestBoston",
+            "Alert": "Phiên của quý vị sắp hết thời gian."
+        },
+        "EmailEntry": {
+            "InvalidEmail": "Vui lòng điền một địa chỉ email hợp lệ"
+        },
+        "Institutions": {
+            "Fields": {
+                "Name": "Tên bác sĩ",
+                "Institution": "Viện",
+                "InstitutionAny": "Viện (nếu có)",
+                "City": "Thành phố",
+                "State": "Tiểu bang"
+            },
+            "Form" : {
+                "OtherPhysician": "Other physician",
+                "OtherInstitution": "Other institution"
+            },
+            "PhysicianValidation": "Vui lòng điền vào tất cả các trường cần thiết"
+        },
+        "MailAddress": {
+            "Fields": {
+                "Name": "Họ và tên",
+                "Country": "Quốc gia/Lãnh thổ",
+                "Street1": "Địa chỉ nhà",
+                "Street2": "Số căn chung cư/lầu",
+                "State": {
+                    "State": "Tiểu bang",
+                    "Province": "Tỉnh",
+                    "State/Province/Region": "Tiểu bang/Tỉnh/Vùng"
+                },
+                "City": "Thành phố",
+                "Phone": "Điện thoại",
+                "Zip": {
+                    "Zip Code": "Mã Zip  ",
+                    "Postal Code": "Mã Bưu cục",
+                    "Zip/Postal Code": "Zip/Mã bưu cục"
+                },
+                "Choose": "Chọn {{field}} ..."
+            },
+            "Suggestion": {
+                "Title": "Chúng tôi đã kiểm tra thông tin địa chỉ quý vị đã nhập và đề nghị một số thay đổi để bảo đảm chuyển giao được.",
+                "Subtitle": "Nhấp vào \"Đề nghị\" để cập nhật mẫu. Quý vị có thể nhấp vào \"Như đã nhập\" để lấy lại các lần nhập vào trước đây.",
+                "Suggested": "Được đề nghị:",
+                "AsEntered": "Như đã nhập:"
+            },
+            "Error": {
+                "InvalidAddress": "Địa chỉ không hợp lệ.",
+                "CannotVerify": "Không thể xác thực địa chỉ, vui lòng kiểm tra địa chỉ của quý vị lần nữa.",
+                "UnknownVerifyError": "Đã có lỗi không nhận ra địa chỉ trong lúc xác thực địa chỉ.",
+                "FieldIsRequired": "{{field}} bắt buộc",
+                "FieldIsInvalid": "{{field}} có giá trị không hợp lệ",
+                "InvalidHouseNumber": "Không tìm thấy địa chỉ nhà",
+                "INTERNAL_SERVER_ERROR": "Rất tiếc, đã xảy ra lỗi Nếu vẫn còn vấn đề, vui lòng liên lạc với chúng tôi ở support@easypost.com.",
+                "NOT_ACCEPTABLE": "Nguồn tài nguyên yêu cầu xác định chỉ có thể tạo ra các hồi đáp có các đặc điểm về nội dung không được chấp nhận theo các đề mục gởi trong yêu cầu.",
+                "NOT_FOUND": "Không tìm thấy tài nguyên được yêu cầu.",
+                "FORBIDDEN": "Không thể truy cập tài nguyên được yêu cầu.",
+                "PAYMENT_REQUIRED": "Không đủ tiền. Vui lòng kiểm tra cài đặt hóa đơn ở http://www.easypost.com/account/billing.",
+                "UNAUTHORIZED": "Không thể vào nguồn tài nguyên được yêu cầu, không được cho phép.",
+                "BAD_REQUEST": "Yêu cầu sai. Vui lòng kiểm nội dung và thử lại.",
+                "PAYMENT_GATEWAY.ERROR": "Bộ phận giải quyết thanh toán không thực hiện được yêu cầu. Vui lòng thử lại lần nữa hoặc liên lạc với chúng tôi ở support@easypost.com.",
+                "MODE.UNAUTHORIZED": "Tài nguyên này cần có khóa truy cập API.",
+                "MODE.CONFLICT": "Kiểu khóa API không khớp với chế độ tham số.",
+                "DATE.PARSE.FAILURE": "Có ít nhất một ngày định dạng không đúng và không thể phân giải được.",
+                "PARAMETER.FORBIDDEN": "Yêu cầu không thể hoàn thành do các tính chất ẩn có trong các tham số.",
+                "PARAMETER.REQUIRED": "Thiếu tham số cần thiết.",
+                "ADDRESS.PARAMETERS.INVALID_CHARACTER": "Tham số cần thiết thông qua chứa ký tự không hợp lệ.",
+                "ADDRESS.PARAMETERS.INVALID": "Thiếu tham số thông qua để tạo một Địa chỉ.",
+                "ADDRESS.COUNTRY.INVALID": "Mã 'quốc gia' không hợp lệ, vui lòng đưa ra 2 ký tự mã ISO quốc gia.",
+                "ADDRESS.VERIFICATION.NOT_FOUND": "Không tìm thấy địa chỉ.",
+                "ADDRESS.VERIFICATION.FAILURE": "Địa chỉ không xác thực được.",
+                "ADDRESS.VERIFY.UNAVAILABLE": "Việc xác thực địa chỉ không có. Vui lòng thử lại lần nữa.",
+                "ADDRESS.VERIFICATION.INVALID": "Một trong những xác thực được chọn không hợp lệ.",
+                "ADDRESS.VERIFY.FAILURE": "Không thể xác thực địa chỉ.",
+                "ADDRESS.VERIFY.CARRIER_INVALID": "Không thể xác thực địa chỉ dùng carrier được cung cấp.",
+                "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "Việc xác thực địa chỉ không có vì dịch vụ ban đầu không được hồi đáp. Vui lòng thử lại lần nữa.",
+                "ADDRESS.VERIFY.ONLY_US": "USPS chỉ có thể xác thực các địa chỉ ở Hoa Kỳ.",
+                "ADDRESS.VERIFY.INTL_NOT_ENABLED": "Xác thực quốc tế không được kích hoạt ở tài khoản này. Vui lòng liên lạc support@easypost.com.",
+                "ADDRESS.VERIFY.MISSING_STREET": "Dữ liệu địa chỉ cung cấp không đủ. Phải cung cấp đường phố.",
+                "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Dữ liệu địa chỉ cung cấp không đủ. Phải cung cấp thành phố và tiểu bang hay mã zip.",
+                "E.COUNTRY.UNSUPPORTED": "Quốc gia này không được hỗ trợ trong chế độ này. Vui lòng thử chế độ sản xuất.",
+                "E.ENGINE.UNAVAILABLE": "Không có thiết bị xác thực để tiến hành trong quốc gia này. Vui lòng thử lại sau.",
+                "E.QUERY.UNANSWERABLE": "Chúng tôi không có đủ dữ liệu ở quốc gia này để thực hiện yêu cầu. Vui lòng thử lại sau.",
+                "E.ADDRESS.NOT_FOUND": "Không tìm thấy địa chỉ đã nhập.",
+                "E.SECONDARY_INFORMATION.INVALID": "Thiếu thông tin thứ cấp (Số căn chung cư/số phòng). Xin lưu ý, thông báo này có thể xuất hiện do lỗi dù yêu cầu của quý vị đã được ghi nhận.",
+                "E.SECONDARY_INFORMATION.MISSING": "Thiếu thông tin thứ cấp (Số căn chung cư/số phòng). Xin lưu ý, thông báo này có thể xuất hiện do lỗi dù yêu cầu của quý vị đã được ghi nhận.",
+                "E.HOUSE_NUMBER.MISSING": "Thiếu số nhà.",
+                "E.HOUSE_NUMBER.INVALID": "Không tìm thấy số địa chỉ đường đã cung cấp.",
+                "E.STREET.MISSING": "Thiếu tên đường phố.",
+                "E.STREET.INVALID": "Tên đường phố không hợp lệ.",
+                "E.BOX_NUMBER.MISSING": "Thiếu số hộp thư.",
+                "E.BOX_NUMBER.INVALID": "Số hộp thư không hợp lệ.",
+                "E.ADDRESS.INVALID": "Thành phố/tiểu bang/Zip không hợp lệ.",
+                "E.ZIP.NOT_FOUND": "Không tìm thấy Zip.",
+                "E.ZIP.INVALID": "Zip không hợp lệ.",
+                "E.ZIP.PLUS4.NOT_FOUND": "Không tìm thấy Zip + 4.",
+                "E.ADDRESS.MULTIPLE": "Nhiều địa chỉ truy về cùng một mã Zip.",
+                "E.ADDRESS.INSUFFICIENT": "Địa chỉ không đầy đủ/không hợp lệ.",
+                "E.ADDRESS.DUAL": "Địa chỉ đôi.",
+                "E.STREET.MAGNET": "Địa chỉ đường không rõ ràng.",
+                "E.CITY_STATE.INVALID": "Thành phố/tiểu bang không xác thực được.",
+                "E.STATE.INVALID": "Tiểu bang không hợp lệ.",
+                "E.ADDRESS.DELIVERY.INVALID": "Địa chỉ giao không hợp lệ.",
+                "E.TIMED_OUT": "Vượt quá thời gian chờ tối đa.",
+                "E.TIME_ZONE.UNAVAILABLE": "Hiện tại chưa có chức năng hiệu chỉnh múi giờ.",
+                "E.PO_BOX.INTERNATIONAL": "Không thể kiểm tra địa chỉ hộp thư quốc tế. Xin lưu ý, thông báo này có thể xuất hiện do lỗi dù yêu cầu của quý vị đã được ghi nhận."
+            }
+        },
+        "TooltipAlt": "Thông tin",
+        "SubjectPanel": {
+            "Link": "Quay về Trang tìm kiếm",
+            "InvitationCode": "Mã mời:",
+            "Email": "[VI] Email:",
+            "Name": "[VI] Name:",
+            "ShortId": "[VI] Subject Short ID/HRUID:"
+        },
+        "AdminActionPanel": {
+            "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+            "EditButton": "Edit"
+        },
+        "Validators": {
+            "DateNavyValidationRule": "[VI] Entered date is invalid"
+        }
     }
-  }
 }

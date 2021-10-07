@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SessionMementoService, Auth0AdapterService, RenewSessionNotifier } from 'ddp-sdk';
 import { interval, Subscription } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
+import { SessionWillExpireData } from './interfaces/session-will-expire-dialog-data';
 
 @Component({
     selector: 'toolkit-session-will-expire',
@@ -17,7 +18,7 @@ import { finalize, take } from 'rxjs/operators';
                 <span translate>Toolkit.Dialogs.SessionWillExpire.RenewalFailed</span>
             </ng-template>
         </h1>
-        <button mat-icon-button (click)="closeDialog()" [disabled]="blockUI">
+        <button mat-icon-button (click)="closeDialog()" [disabled]="blockUI" *ngIf="showClearButton()">
             <mat-icon class="ddp-close-button">clear</mat-icon>
         </button>
     </div>
@@ -51,7 +52,8 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
         private session: SessionMementoService,
         private auth0: Auth0AdapterService,
         private renewNotifier: RenewSessionNotifier,
-        private dialogRef: MatDialogRef<SessionWillExpireComponent>) { }
+        private dialogRef: MatDialogRef<SessionWillExpireComponent>,
+        @Inject(MAT_DIALOG_DATA) private data: SessionWillExpireData) { }
 
     public ngOnInit(): void {
         const EXTRA_TIME = 60000;
@@ -94,6 +96,14 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
 
     public closeDialog(): void {
         this.dialogRef.close();
+    }
+
+    public showClearButton(): boolean {
+        if (this.data.showClearButton !== undefined) {
+            return this.data.showClearButton;
+        }
+
+        return true;
     }
 
     private calculateTimeLeft(remainingTime: number): string {

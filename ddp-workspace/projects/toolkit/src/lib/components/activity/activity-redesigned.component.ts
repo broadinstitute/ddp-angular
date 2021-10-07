@@ -40,7 +40,7 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
     }
 
     public navigate(response: ActivityResponse): void {
-      const currentActivityCode = this.headerConfig && this.headerConfig.currentActivityCode;
-      super.navigate(response, currentActivityCode);
+        const currentActivityCode = this.headerConfig && this.headerConfig.currentActivityCode;
+        super.navigate(response, currentActivityCode);
     }
 }

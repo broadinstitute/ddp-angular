@@ -153,10 +153,6 @@ a:focus {
     font-weight: 300;
 }
 
-.Header--scrolled {
-    color: mat-color($app-theme, 400);
-}
-
 .HeaderLink {
     color: mat-color($app-theme, 100);
 }
@@ -175,6 +171,7 @@ a:focus {
 }
 
 .Header--scrolled {
+    color: mat-color($app-theme, 400);
     background-color: mat-color($app-theme, 200);
     box-shadow: 0 1px 8px mat-color($app-theme, 300);
 }
@@ -382,7 +379,6 @@ mat-icon.ddp-dropdown-arrow {
 }
 
 @media only screen and (max-width: 1380px) {
-
     .Header-logoText,
     .Footer-logoText {
         margin: 10px 0 0 10px;
@@ -407,7 +403,6 @@ mat-icon.ddp-dropdown-arrow {
 }
 
 @media only screen and (max-width: 1024px) {
-
     .Header-logoImg,
     .Footer-logoImg {
         height: 60px;
@@ -419,18 +414,22 @@ mat-icon.ddp-dropdown-arrow {
     }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
     .Header {
         min-height: 75px;
     }
 
     .Header,
     .Footer {
-        padding: 0 20px 5px 20px;
+        padding: 0 20px 5px 20px !important;
+    }
+
+    .CountButton {
+        padding: 5px 12px;
     }
 
     .Header-navItem {
-        padding: 0 0 0 10px;
+        padding: 0 0 0 10px !important;
     }
 }
 
@@ -785,7 +784,6 @@ mat-icon.ddp-dropdown-arrow {
 }
 
 @media only screen and (max-width: 450px) {
-
     .PageContent-ol li,
     .PageContent-ul li {
         padding: 0 0 0 15px;
@@ -882,9 +880,20 @@ mat-icon.ddp-dropdown-arrow {
         padding: 0 15px !important;
     }
 
+    .Header.Header--scrolled {
+        padding-bottom: 35px !important;
+        height: auto;
+    }
+
     .PageHeader-subTitle {
         font-size: 0.8rem;
         line-height: 1.2rem;
+    }
+
+    .language-selector {
+        position: absolute;
+        top: 62px;
+        right: 12px;
     }
 }
 
@@ -1468,7 +1477,7 @@ ul {
     }
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 520px) {
     .user-menu-panel {
         display: block;
 
@@ -1478,7 +1487,7 @@ ul {
     }
 
     .user-menu-header {
-        display: none;
+        display: none !important;
         padding: 0;
     }
 }

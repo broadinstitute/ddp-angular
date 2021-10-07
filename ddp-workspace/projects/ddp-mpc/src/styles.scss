@@ -789,6 +789,10 @@ a:focus {
         font-size: 0.9rem;
         line-height: 1.2rem;
     }
+
+   .Header-navItem {
+     padding-left: 10px !important;
+   }
 }
 
 @media only screen and (max-width: 350px) {
@@ -1631,7 +1635,7 @@ select:-webkit-autofill {
     }
 
     .user-menu-header {
-        display: none;
+        display: none !important;
         padding: 0;
     }
 }

@@ -25,6 +25,7 @@ export class ToolkitConfigurationService {
     covidSurveyGuid: string;
     symptomSurveyGuid: string;
     addressGuid: string;
+    lmsStudyGuid: string; // used for joinMailingList on LMS page (Pancan study)
 
     // URLs
     aboutUsUrl: string;
@@ -62,6 +63,10 @@ export class ToolkitConfigurationService {
     phone: string;
     infoEmail: string;
     dataEmail: string;
+    colorectalPagePhone: string;
+    colorectalPageEmail: string;
+    lmsPagePhone: string;
+    lmsPageEmail: string;
     twitterAccountId: string;
     facebookGroupId: string;
     instagramId: string;
@@ -82,4 +87,6 @@ export class ToolkitConfigurationService {
 
     cookies: Cookies | null;
     usePrionPrivacyPolicyTemplate: boolean;
+    // flag for using dashboard in multiple participants mode
+    useMultiParticipantDashboard: boolean;
 }

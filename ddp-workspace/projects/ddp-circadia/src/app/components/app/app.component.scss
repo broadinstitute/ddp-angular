@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  flex-flow: column nowrap;
+
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1;
+
+  margin-top: 10rem;
+
+  @media (max-width: 860px) {
+    min-height: calc(100vh - 10rem);
+  }
+}

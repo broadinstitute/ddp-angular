@@ -1,0 +1,43 @@
+@import '../../../../styles/variables.scss';
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.social-media {
+    &__links {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 150px;
+        margin: 0 auto 0.8rem;
+    }
+
+    &__link {
+        flex: 0 1 50px;
+        text-align: center;
+    }
+}
+
+.title {
+    margin: 0;
+    padding-bottom: 1.13rem;
+}
+
+.join-btn {
+    margin-top: 2.5rem;
+}
+
+@media screen and (max-width: $tablet-breakpoint) {
+    .social-media {
+        flex-direction: column;
+        gap: 3rem;
+        align-items: start;
+
+        &__links {
+            flex-basis: 50px;
+            gap: 3rem;
+        }
+    }
+}

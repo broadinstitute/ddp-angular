@@ -77,6 +77,13 @@ config.dashboardShowQuestionCount = true;
 config.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 config.projectGcpId = DDP_ENV.projectGcpId;
 config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
+config.usesVerticalStepper = [
+  ActivityCodes.HealthAndDevelopment,
+  ActivityCodes.ChildQualityOfLife,
+  ActivityCodes.PatientQualityOfLife,
+  ActivityCodes.QualityOfLife
+];
+config.fixMissingHouseNumberInAddressForm = true;
 
 export const translateFactory = (
   injector: Injector,

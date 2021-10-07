@@ -1,29 +1,33 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { ConfigurationService } from '../configuration.service';
-import { ParticipantsSearchServiceAgent } from './participantsSearchServiceAgent.service';
-import { LoggingService } from '../logging.service';
-import { SessionMementoService } from '../sessionMemento.service';
-import { of } from 'rxjs';
+import {
+    ConfigurationService,
+    ParticipantsSearchServiceAgent,
+    LoggingService,
+    SessionMementoService,
+    SearchParticipant,
+    EnrollmentStatusType,
+    Session
+} from 'ddp-sdk';
 import { TranslateService } from '@ngx-translate/core';
 import { SearchParticipantResponse } from '../../models/searchParticipantResponse';
-import { EnrollmentStatusType } from '../../models/enrollmentStatusType';
 
 describe('ParticipantsSearchServiceAgent Test', () => {
     let service: ParticipantsSearchServiceAgent;
     let httpTestingController: HttpTestingController;
-
+    let sessionService: SessionMementoService;
     const backendUrl = 'https://pepper-dev.datadonationplatform.org';
     const studyGuid = 'ANGIO';
+    const adminSession = { isAdmin: true, idToken: '123', userGuid: 'userGuid' } as Session;
+
     beforeEach(() => {
         const config = new ConfigurationService();
         config.studyGuid = studyGuid;
         config.backendUrl = backendUrl;
         const loggingServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logException']);
-        const sessionSpy = new SessionMementoService({} as TranslateService, config);
-        spyOnProperty(sessionSpy, 'sessionObservable').and.returnValue(of({}));
-
+        sessionService = new SessionMementoService({} as TranslateService, config);
+        sessionService.updateSession(adminSession);
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule]
         });
@@ -31,7 +35,7 @@ describe('ParticipantsSearchServiceAgent Test', () => {
         const httpClient = TestBed.inject(HttpClient);
         httpTestingController = TestBed.inject(HttpTestingController);
 
-        service = new ParticipantsSearchServiceAgent(sessionSpy, config, httpClient, loggingServiceSpy);
+        service = new ParticipantsSearchServiceAgent(sessionService, config, httpClient, loggingServiceSpy);
     });
 
     afterEach(() => {
@@ -62,5 +66,40 @@ describe('ParticipantsSearchServiceAgent Test', () => {
         expect(req.request.method).toBe('POST');
         expect(req.request.body).toEqual({query});
         req.flush(response);
+    });
+
+    it('should return participant data', (done) => {
+        const response: SearchParticipant = {
+            guid: '1234',
+            hruid: '5678',
+            status: EnrollmentStatusType.COMPLETED,
+        };
+
+        const guid = 'ABC123';
+        sessionService.updateSession({...adminSession, participantGuid: guid } as Session);
+        service.getParticipant().subscribe((result: SearchParticipant) => {
+            expect(result).toEqual(response);
+            done();
+        });
+
+        const req = httpTestingController.expectOne(`${backendUrl}/pepper/v1/admin/studies/${studyGuid}/participants/${guid}`);
+        expect(req.request.method).toBe('GET');
+        req.flush(response);
+    });
+
+    it('should return null if no participant guid', (done) => {
+        service.getParticipant().subscribe((result: SearchParticipant|null) => {
+            expect(result).toEqual(null);
+            done();
+        });
+        sessionService.updateSession({...adminSession, participantGuid: null } as Session);
+    });
+
+    it('should return null if user is not an admin', (done) => {
+        sessionService.updateSession({participantGuid: 'ABC123', idToken: '123', isAdmin: false } as Session);
+        service.getParticipant().subscribe((result: SearchParticipant|null) => {
+            expect(result).toEqual(null);
+            done();
+        });
     });
 });

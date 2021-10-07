@@ -11,6 +11,7 @@ export class ActivityPicklistQuestionBlock extends ActivityQuestionBlock<Array<A
     public renderMode: string;
     public detailMaxLength: number;
     public picklistGroups: Array<ActivityPicklistNormalizedGroup>;
+    public customValue: string | null;
 
     constructor() {
         super();
@@ -18,5 +19,12 @@ export class ActivityPicklistQuestionBlock extends ActivityQuestionBlock<Array<A
 
     public get questionType(): QuestionType {
         return QuestionType.Picklist;
+    }
+
+    public convertToString(value: ActivityPicklistAnswerDto[]): string {
+        return value
+            // to make sure generated strings will be the same for the same answers with selected values in the different order
+            .sort((a, b) => (a.stableId > b.stableId) ? 1 : -1)
+            .map(answer => `${answer.stableId}${answer.detail ? ':' + answer.detail : ''}`).join(';');
     }
 }

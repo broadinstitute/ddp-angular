@@ -2,11 +2,11 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LoggingService } from '../logging.service';
 import { ConfigurationService } from '../configuration.service';
-import { UserServiceAgent } from './userServiceAgent.service';
 import { SessionMementoService } from '../sessionMemento.service';
 import { AnnouncementMessage } from '../../models/announcementMessage';
 import { LanguageService } from '../internationalization/languageService.service';
 import { Observable } from 'rxjs';
+import { UserServiceAgent } from './userServiceAgent.service';
 
 @Injectable()
 export class AnnouncementsServiceAgent extends UserServiceAgent<Array<AnnouncementMessage>> {

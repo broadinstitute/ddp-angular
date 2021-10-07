@@ -2,22 +2,18 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Title } from '@angular/platform-browser';
 import { A11yModule } from '@angular/cdk/a11y';
-
 // ngx-translate
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NGXTranslateService } from './services/internationalization/ngxTranslate.service';
-
 // CookieService
 import { CookieModule } from 'ngx-cookie';
-
 // Angular JWT
-import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
-
+import { JWT_OPTIONS, JwtModule } from '@auth0/angular-jwt';
 // Shared components & services
 import { ConfigurationService } from './services/configuration.service';
 import { SessionMementoService } from './services/sessionMemento.service';
@@ -25,7 +21,6 @@ import { AnalyticsEventsService } from './services/analyticsEvents.service';
 import { IrbPasswordService } from './services/irbPassword.service';
 import { BrowserContentService } from './services/browserContent.service';
 import { LanguageService } from './services/internationalization/languageService.service';
-
 // Authentication components
 import { Auth0AdapterService } from './services/authentication/auth0Adapter.service';
 import { Auth0RenewService } from './services/authentication/auth0Renew.service';
@@ -77,6 +72,7 @@ import { SubjectInvitationServiceAgent } from './services/serviceAgents/subjectI
 import { UserManagementServiceAgent } from './services/serviceAgents/userManagementServiceAgent.service';
 import { UserInvitationServiceAgent } from './services/serviceAgents/userInvitationServiceAgent.service';
 import { AnnouncementsServiceAgent } from './services/serviceAgents/announcementsServiceAgent.service';
+import { UserStatusServiceAgent } from './services/serviceAgents/userStatusServiceAgent.service';
 
 import { WindowRef } from './services/windowRef';
 
@@ -169,7 +165,7 @@ import { ConditionalBlockComponent } from './components/activityForm/activity-bl
 import { QuestionPromptComponent } from './components/activityForm/answers/question-prompt/questionPrompt.component';
 import { RedirectToAuth0LoginComponent } from './components/login/redirectToAuth0Login.component';
 import { TooltipComponent } from './components/tooltip.component';
-import { SubjectPanelComponent } from './components/subjectPanel.component';
+import { SubjectPanelComponent } from './components/subjectPanel/subjectPanel.component';
 import { AdminActionPanelComponent } from './components/adminActionPanel.component';
 import { SuggestionServiceAgent } from './services/serviceAgents/suggestionServiceAgent.service';
 import { TemporaryUserServiceAgent } from './services/serviceAgents/temporaryUserServiceAgent.service';
@@ -191,11 +187,17 @@ import { StatisticsServiceAgent } from './services/serviceAgents/statisticsServi
 import { ProgressIndicatorComponent } from './components/progress-indicator/progress-indicator.component';
 import { ActivityBlockComponent } from './components/activityForm/activity-blocks/activityBlock/activityBlock.component';
 import { ModalActivityBlockComponent } from './components/activityForm/activity-blocks/modalActivityBlock/modalActivityBlock.component';
-import { ActivityDeleteDialogComponent } from './components/activityForm/activity-blocks/activityDeleteDialog/activityDeleteDialog.component';
-import { ActivityBlockModalService } from './services/activity-block-modal.service';
+import { ConfirmDialogComponent } from './components/confirmDialog/confirmDialog.component';
+import { ModalDialogService } from './services/modal-dialog.service';
 import { FileUploadService } from './services/fileUpload.service';
 import { DropFileToUploadDirective } from './directives/drop-file-to-upload.directive';
 import { PrismComponent } from './components/prism/prism.component';
+import { FileSizeFormatterPipe } from './pipes/fileSizeFormatter.pipe';
+import { FileAnswerMapperService } from './services/fileAnswerMapper.service';
+import { StickyScrollDirective } from './directives/sticky-scroll.directive';
+import { AutocompleteActivityPicklistQuestion } from './components/activityForm/picklist/autocompleteActivityPicklistQuestion.component';
+import { SearchHighlightPipe } from './pipes/searchHighlight.pipe';
+import { PicklistSortingPolicy } from './services/picklistSortingPolicy.service';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter = () => sessionService.token;
@@ -304,6 +306,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         IrbPasswordService,
         ResendEmailServiceAgent,
         AnnouncementsServiceAgent,
+        UserStatusServiceAgent,
         UserManagementServiceAgent,
         UserInvitationServiceAgent,
         BrowserContentService,
@@ -315,9 +318,17 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         DisplayLanguagePopupServiceAgent,
         StudyDetailServiceAgent,
         StatisticsServiceAgent,
-        ActivityBlockModalService,
+        ModalDialogService,
         FileUploadService,
+        InvitationPipe,
+        FileAnswerMapperService,
         ParticipantsSearchServiceAgent,
+        // Angular Injection does not like that we have optional arguments in constructor
+        // Need to create our default instance ourselves
+        {
+            provide: PicklistSortingPolicy,
+            useValue: new PicklistSortingPolicy()
+        },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
@@ -370,6 +381,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         DropdownActivityPicklistQuestion,
         CheckboxesActivityPicklistQuestion,
         RadioButtonsActivityPicklistQuestion,
+        AutocompleteActivityPicklistQuestion,
         InstitutionComponent,
         InstitutionsFormComponent,
         LoadingComponent,
@@ -393,13 +405,16 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         AddressGoogleAutocompleteDirective,
         RouteTransformerDirective,
         InvitationCodeFormatterDirective,
+        StickyScrollDirective,
         InvitationPipe,
+        FileSizeFormatterPipe,
+        SearchHighlightPipe,
         TooltipComponent,
         SubjectPanelComponent,
         AdminActionPanelComponent,
         ProgressIndicatorComponent,
         ActivityBlockComponent,
-        ActivityDeleteDialogComponent,
+        ConfirmDialogComponent,
         DropFileToUploadDirective
     ],
     exports: [
@@ -440,6 +455,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         DropdownActivityPicklistQuestion,
         CheckboxesActivityPicklistQuestion,
         RadioButtonsActivityPicklistQuestion,
+        AutocompleteActivityPicklistQuestion,
         InstitutionComponent,
         InstitutionsFormComponent,
 
@@ -465,14 +481,18 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         RouteTransformerDirective,
         UpperCaseInputDirective,
         InvitationCodeFormatterDirective,
+        StickyScrollDirective,
         InvitationPipe,
+        FileSizeFormatterPipe,
+        SearchHighlightPipe,
         TooltipComponent,
         SubjectPanelComponent,
         AdminActionPanelComponent,
         ProgressIndicatorComponent,
-        ActivityBlockComponent
+        ActivityBlockComponent,
+        ConfirmDialogComponent
     ],
-    entryComponents: [ActivityDeleteDialogComponent]
+    entryComponents: [ConfirmDialogComponent]
 })
 export class DdpModule {
 }

@@ -1,7 +1,16 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TooltipComponent } from '../../tooltip.component';
+import {
+    TooltipComponent,
+    CheckboxesActivityPicklistQuestion,
+    ActivityPicklistQuestionBlock,
+    NGXTranslateService,
+    ActivityPicklistAnswer,
+    QuestionPromptComponent,
+    DropdownActivityPicklistQuestion,
+    RadioButtonsActivityPicklistQuestion, PicklistSortingPolicy
+} from 'ddp-sdk';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
@@ -9,15 +18,13 @@ import { MatListModule } from '@angular/material/list';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { By } from '@angular/platform-browser';
-import { CheckboxesActivityPicklistQuestion } from './checkboxesActivityPicklistQuestion.component';
-import { ActivityPicklistQuestionBlock } from '../../../models/activity/activityPicklistQuestionBlock';
-import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
-import { ActivityPicklistAnswer } from './activityPicklistAnswer.component';
-import { QuestionPromptComponent } from '../answers/question-prompt/questionPrompt.component';
-import { DropdownActivityPicklistQuestion } from './dropdownActivityPicklistQuestion.component';
-import { RadioButtonsActivityPicklistQuestion } from './radiobuttonsActivityPicklistQuestion.component';
 import { of } from 'rxjs';
+import { AutocompleteActivityPicklistQuestion } from './autocompleteActivityPicklistQuestion.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PicklistRenderMode } from '../../../models/activity/picklistRenderMode';
+import { SearchHighlightPipe } from '../../../pipes/searchHighlight.pipe';
 
 describe('ActivityPicklistAnswer', () => {
     const questionBlock = {
@@ -40,12 +47,12 @@ describe('ActivityPicklistAnswer', () => {
         template: `
             <ddp-activity-picklist-answer [block]="block"
                                           [readonly]="false"
-                                          (valueChanged)="onChange($event)">
+                                          (valueChanged)="onChange()">
             </ddp-activity-picklist-answer>`
     })
     class TestHostComponent {
         block = questionBlock;
-        onChange(value: any): void { }
+        onChange(): void { }
     }
 
     let component: ActivityPicklistAnswer;
@@ -69,10 +76,15 @@ describe('ActivityPicklistAnswer', () => {
                 BrowserAnimationsModule,
                 TranslateTestingModule,
                 MatSelectModule,
-                MatRadioModule
+                MatRadioModule,
+                MatAutocompleteModule,
+                FormsModule,
+                ReactiveFormsModule,
             ],
             providers: [
-                { provide: NGXTranslateService, useValue: ngxTranslateServiceSpy }
+                { provide: NGXTranslateService, useValue: ngxTranslateServiceSpy },
+                { provide: PicklistSortingPolicy, useValue: new PicklistSortingPolicy() },
+                { provide: 'ddp.config', useValue: { notSortedPicklistAutocompleteStableIds: [] } }
             ],
             declarations: [
                 TestHostComponent,
@@ -81,7 +93,9 @@ describe('ActivityPicklistAnswer', () => {
                 CheckboxesActivityPicklistQuestion,
                 DropdownActivityPicklistQuestion,
                 RadioButtonsActivityPicklistQuestion,
-                TooltipComponent
+                AutocompleteActivityPicklistQuestion,
+                TooltipComponent,
+                SearchHighlightPipe
             ]
         }).compileComponents();
 
@@ -162,6 +176,16 @@ describe('ActivityPicklistAnswer', () => {
         } as ActivityPicklistQuestionBlock;
         fixture.detectChanges();
         const question = debugElement.queryAll(By.css('ddp-activity-dropdown-picklist-question'));
+        expect(question.length).toBe(1);
+    });
+
+    it('should render AutocompleteActivityPicklistQuestion', () => {
+        component.block = {
+            ...questionBlock,
+            renderMode: PicklistRenderMode.AUTOCOMPLETE
+        } as ActivityPicklistQuestionBlock;
+        fixture.detectChanges();
+        const question = debugElement.queryAll(By.css('ddp-activity-autocomplete-picklist-question'));
         expect(question.length).toBe(1);
     });
 });

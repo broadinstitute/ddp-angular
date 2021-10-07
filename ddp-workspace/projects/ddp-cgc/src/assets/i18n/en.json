@@ -1,0 +1,444 @@
+{
+    "Header": {
+        "Links": {
+            "Home": "Home",
+            "AboutUs": "About Us",
+            "LearnMore": "Learn More",
+            "CountMeIn": "Get Started!"
+        },
+        "Titles": {
+            "ToggleNavigation": "Toggle navigation"
+        }
+    },
+    "Footer": {
+        "Links": {
+            "Home": "Home",
+            "AboutUs": "About Us",
+            "LearnMore": "Learn More",
+            "BackToTop": "Back to top"
+        },
+        "Titles": {
+            "ContactUs": "Contact Us"
+        }
+    },
+    "HomePage": {
+        "Landing": {
+            "Title": "Patients hold the key to driving progress against cancer.",
+            "Paragraph": "Join a nationwide movement of patients, doctors, and scientists by sharing your existing genetic and medical information, and your voice. Together, our data has the power to accelerate cancer research in a way nothing else can."
+        },
+        "Mission": {
+            "Paragraph1": "Our Mission: To accelerate progress against cancer by partnering with patients to liberate and share their data for research.",
+            "Paragraph2": "If you have and/or had cancer and have had a genetic test related to your cancer, please consider partnering with us to create an invaluable resource for cancer researchers, providers, and advocates all over the world.",
+            "Paragraph3": "By saying, <b>“Get Started!”</b>, you will partner with leading patient advocacy groups, research institutes and hospitals by sharing your existing genetic and medical records.",
+            "Button": "Get Started!"
+        },
+        "HowProjectWorks": {
+            "Title": "Here’s how the project works:",
+            "Steps": [
+                {
+                    "Icon": "step-1.svg",
+                    "Title": "Tell us about yourself",
+                    "Description": "Click <b>“Get Started!”</b>. We will ask you to confirm a few questions about your elegibility."
+                },
+                {
+                    "Icon": "step-2.svg",
+                    "Title": "Consent to the project",
+                    "Description": "We will ask you to fill out an online consent form to obtain your permission to obtain copies of your medical records and previously generated cancer genetic data. We also ask that you fill out a short survey about your cancer."
+                },
+                {
+                    "Icon": "step-3.svg",
+                    "Title": "Let's learn together!",
+                    "Description": "Throughout the project, we will provide you will regular updates about the status of the project. We will share results from research studies with you. We will also provide a place you can propose your own research project."
+                }
+            ],
+            "StepAlt": "How it works - Step {{ count }}",
+            "Button": "Learn More"
+        },
+        "ContactUs": {
+            "Title": "Contact Us!",
+            "Paragraph": "Please reach out to us with any questions, concerns, or project ideas at <span class=\"semibold\">hello@cancercollective.org</span> or <span class=\"semibold\">651-229-5806</span>",
+            "Links": [
+                {
+                    "Href": "https://www.facebook.com/cancergenomecollective",
+                    "Icon": "icon-facebook.svg"
+                },
+                {
+                    "Href": "https://twitter.com/CGeneCollective",
+                    "Icon": "icon-twitter.svg"
+                },
+                {
+                    "Href": "tel:651-229-5806",
+                    "Icon": "icon-phone.svg"
+                },
+                {
+                    "Href": "mailto:info@cancercollective.org",
+                    "Icon": "icon-mail.svg"
+                }
+            ]
+        },
+        "Partners": {
+            "Title": "Partner Institutions",
+            "Alt": "Broad Institute logo"
+        }
+    },
+    "AboutUsPage": {
+        "Title": "About Us",
+        "Paragraph1": "The <b>Cancer Genome Collective</b> is a research study being launched at Dana-Farber Cancer Institute. With this project, we are exploring a new approach to cancer genetic research, in which we partner directly with patients to speed up important discoveries.",
+        "Paragraph2": "Over the past decade, we have uncovered many details about what drives cancer on a genetic and molecular level. These discoveries have led to the development of new therapies that have already revolutionized cancer care. Despite this progress, there is a long way to go.",
+        "Paragraph3": "There is a lot of knowledge currently hidden in existing clinical and genetic data that could propel the next cancer discoveries. We believe that the best way to discover this knowledge is by working with patients to liberate their own data for research use.",
+        "Paragraph4": "The overarching goal of this study is to develop a platform that empowers patients to drive research by connecting their genetic and medical record data with researcher from around the world.",
+        "List": {
+            "Paragraph1": "Some of the research questions we aim to answer include:",
+            "Item1": "What genes can lead to metastatic cancer?",
+            "Item2": "Why do some tumor have extraordinary response to particular treatments?",
+            "Item3": "Why do some tumors never respond to particular treatments?",
+            "Item4": "What genes lead to developing cancer at a young age?"
+        },
+        "Paragraph5": "To get there, the detailed genetic characterization of many thousands of clinically annotated cancer samples will be required. As many patients are treated in the community setting, where research maybe rare, we are reaching out to patients directly. We are seeking to empower patients to share their previous genetic testing results, from a commercial or academic test, along with their clinical data.",
+        "Paragraph6": "Patients will also have the option of consenting to an optional consent, which will entail the patient being contacted if there are clinical trials they may be eligible for. If your patient meets these criteria, and have consented to the optional consent, they will be contacted with further information about how to become part of the clinical trial. In this case, we will make every effort to contact and explain the clinical trial to all treating physicians as well.",
+        "Paragraph7": "On our website (cancercollective.org) patients, who are over 18 and have had a genetic test, will be offered an electronic consent form that explains the risks and benefits of the study and asks for permission to obtain the results of their genetic test and copies of their medical records. For patients who consent, our clinical research team will contact their physicians to request copies of their medical records, which will be reviewed by our study team to confirm eligibility. We will work with patients to obtain their genomic data and to donate it to the Cancer Collective.",
+        "Paragraph8": "Genetic data will be linked to de-identified clinical information, and the resulting data are used to identify drivers of tumorigenesis, mechanisms of response and resistance to therapies, and diagnostic, prognostic, and therapeutic biomarkers. The database of clinically annotated genomic information will be shared with the cancer research community. Study updates and discoveries are shared at regular intervals with all patients along with the public.",
+        "Paragraph9": "This direct-to-patient approach should be particularly enabling for the identification of patients with rare phenotypes or clinical behavior. This project seeks to establish a patient-researcher partnership to accelerate genomic discoveries and improve outcomes in cancer, and may ultimately serve as a means to build a new clinical and translational research model for all patients with cancer.",
+        "Paragraph10": "Please feel free to visit our website: cancergenomecollective.org.",
+        "Box": "If you have any questions or concerns about this study, please reach out to us at <b>hello@cancercollective.org</b> or <b>651-229-5806</b>."
+    },
+    "LearnMore": {
+        "Title": "Here’s how the project works:",
+        "Steps": [
+            {
+                "Letter": "A",
+                "Title": "Tell us about yourself.",
+                "Description": "<p>Click <b>“Get Started!”</b>. Confirm that you have and/or have had cancer and select the cancer genetic test that you have had done if you know it (it's ok if not!).</p>"
+            },
+            {
+                "Letter": "B",
+                "Title": "Give us permission to collect your data.",
+                "Description": "<p>We will ask you to fill out an online consent form that requests your permission to obtain copies of your medical records and previously generated cancer genetic data. You’ll also consent to be contacted by the study team.</p><p>We will also ask you to fill out a short survey about you and your cancer, including your type of cancer and where you received your medical care so we can contact your doctors and hospitals.</p>"
+            },
+            {
+                "Letter": "C",
+                "Title": "We will work with you to obtain your genetic test results.",
+                "Description": "<p>Our study team will work with you via email to obtain your genetic test results from the appropriate company/lab.</p>"
+            },
+            {
+                "Letter": "D",
+                "Title": "We will gather your medical record data.",
+                "Description": "<p>We will request your medical records from your physicians and hospitals. We will extract the relevant information aggregate these results. You also have access to these records. If you want a copy of the records we have requested, email hello@cancercollective.org and we will send your medical records to you.</p>"
+            },
+            {
+                "Letter": "E",
+                "Title": "We will aggregate the genetic and medical record data.",
+                "Description": "<p>We will then take the important information from your medical record, along with your genetic information and combine it to look for patterns. As we discover new connections, we will share this with you and the rest of world via presentations, publications, and blog posts.</p>"
+            },
+            {
+                "Letter": "F",
+                "Title": "We will share the data with other researchers.",
+                "Description": "<p>In the future, we will share this data with the greater research community.</p>"
+            },
+            {
+                "Letter": "G",
+                "Title": "Become an active researcher!",
+                "Description": "<p>We are excited to learn with you! Throughout the project, we will provide all patients with regular updates about the status of the project and information about new studies that we are conducting. We will also share any discoveries from these research projects with you.</p><p>We also encourage you to submit your own research ideas by sending an email to hello@cancercollective.org. We will do our best to conquer any research ideas put forward by our patients!</p>"
+            }
+        ],
+        "Info": "Please contact us at <b>hello@cancercollective.org</b> or <b>651-229-5806</b> with any questions, comments, or suggestions."
+    },
+    "ErrorPage": {
+        "Title": "Something went wrong",
+        "Text": "We’re sorry, it looks like something unexpected happened. Please try refreshing your page or logging in again."
+    },
+    "Notifications": {
+        "Dialog": {
+            "Title": "Announcements"
+        }
+    },
+    "StayInformed": {
+        "Title": "Thank you for your interest!",
+        "Paragraph1": "Unfortunately, at this time, all of the statements on the previous page must be true to participate.",
+        "Paragraph2": "Please join our mailing list to be informed about the project and any updates on future participation.",
+        "Form": {
+            "Email": {
+                "Label": "Email Account*",
+                "Error": "Please enter a valid Email Account"
+            },
+            "Submit": "I want to stay informed"
+        }
+    },
+    "PasswordPage": {
+        "Form": {
+            "Password": {
+                "Label": "Please enter the site password",
+                "Required": "Please enter the site password",
+                "Invalid": "Incorrect password. Please try again."
+            }
+        }
+    },
+    "DashboardPage": {
+        "Title": "Dashboard"
+    },
+    "UserActivities": {
+        "Title": "Activities",
+        "Header": {
+            "Form": "Form",
+            "Status": "Status",
+            "Actions": "Actions"
+        },
+        "Statuses": {
+            "CREATED": "Not started",
+            "IN_PROGRESS": "In progress",
+            "COMPLETE": "Complete"
+        },
+        "Actions": {
+            "Start": "Start",
+            "Continue": "Continue",
+            "View": "View"
+        }
+    },
+    "SDK": {
+        "CountMeIn": "Count Me In",
+        "SubmitButton": "Submit",
+        "CloseButton": "Close",
+        "AddButton": "ADD",
+        "CancelButton": "CANCEL",
+        "NextButton": "Next",
+        "PreviousButton": "Back",
+        "SavingButton": "Saving",
+        "EditButton": "Continue",
+        "CompleteButton": "Edit",
+        "ReviewButton": "View",
+        "OpenButton": "Open",
+        "StartButton": "Start",
+        "AgreeButton": "I agree",
+        "ReportButton": "Report",
+        "NotAgreeButton": "I'm not ready to agree",
+        "ValidateError": "Please complete all required fields.",
+        "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
+        "SaveError": "We're sorry but an error occurred",
+        "ExportStudy": {
+            "Export": "EXPORT"
+        },
+        "ListStudies": {
+            "StudyName": "Study Name",
+            "ParticipantCount": "Participant Count"
+        },
+        "ListWorkspaces": {
+            "WorkspaceName": "Workspace Name",
+            "WorkspaceNamespace": "Workspace Namespace"
+        },
+        "Login": {
+            "Login": "LOG IN",
+            "Logout": "LOG OUT"
+        },
+        "SignInOut": {
+            "SignIn": "Sign In",
+            "SignOut": "Sign Out"
+        },
+        "LanguageSelector": {
+            "LanguageSelection": "language selection"
+        },
+        "UserActivities": {
+            "ActivityName": "Form",
+            "Summary": "Summary",
+            "ActivityStatus": "Status",
+            "ActivityDate": "Created",
+            "ActivityActions": "Actions",
+            "ActivityQuestionCount": "{{questionsAnswered}} of {{questionTotal}} Answered",
+            "HiddenTooltip": "This activity is hidden."
+        },
+        "ManageParticipants": {
+            "GovernedParticipants": "Governed participants",
+            "ParticipantPlaceholder": "Participant",
+            "ParticipantsList": "Participants"
+        },
+        "ParticipantProfile": {
+            "OpenProfile": "Profile",
+            "ViewAs": "View As",
+            "ManageParticipants": "Manage participants"
+        },
+        "UserPreferences": {
+            "UserPreferencesTitle": "User preferences",
+            "UserPreferencesGender": "Sex"
+        },
+        "Dashboard": {
+            "Title": "My Dashboard",
+            "Text": "The dashboard below describes each TestBoston form and its status."
+        },
+        "DatePicker": {
+            "Day": "Choose day...",
+            "Month": "Choose month...",
+            "Year": "Choose year...",
+            "January": "January",
+            "February": "February",
+            "March": "March",
+            "April": "April",
+            "May": "May",
+            "June": "June",
+            "July": "July",
+            "August": "August",
+            "September": "September",
+            "October": "October",
+            "November": "November",
+            "December": "December"
+        },
+        "DateLabel": {
+            "YYYY": "YYYY",
+            "MM": "MM",
+            "DD": "DD"
+        },
+        "UserMenu": {
+            "DashboardButton": "Dashboard",
+            "SignOutButton": "Sign Out"
+        },
+        "DetailsPlaceholder": {
+            "PluralForm": "characters remaining",
+            "SingularForm": "character remaining"
+        },
+        "EmailEntry": {
+            "InvalidEmail": "Please enter a valid email"
+        },
+        "Institutions": {
+            "Fields": {
+                "Name": "Physician Name",
+                "Institution": "Institution",
+                "InstitutionAny": "Institution (if any)",
+                "City": "City",
+                "State": "State"
+            },
+            "Form": {
+                "OtherPhysician": "Other physician",
+                "OtherInstitution": "Other institution"
+            },
+            "PhysicianValidation": "Please fill out all required fields"
+        },
+        "MailAddress": {
+            "Fields": {
+                "Name": "Full Name",
+                "Country": "Country/Territory",
+                "Street1": "Street Address",
+                "Street2": "Apt/Floor #",
+                "State": {
+                    "State": "State",
+                    "Province": "Province",
+                    "State/Province/Region": "State/Province/Region"
+                },
+                "City": "City",
+                "Phone": "Phone",
+                "Zip": {
+                    "Zip Code": "Zip Code",
+                    "Postal Code": "Postal Code",
+                    "Zip/Postal Code": "Zip/Postal Code"
+                },
+                "Choose": "Choose {{field}} ..."
+            },
+            "Suggestion": {
+                "Title": "We have checked your address entry and have suggested changes that could help ensure delivery.",
+                "Subtitle": "Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
+                "Suggested": "Suggested:",
+                "AsEntered": "As Entered:"
+            },
+            "Error": {
+                "InvalidAddress": "Invalid address.",
+                "CannotVerify": "Could not verify address, please double-check your address.",
+                "UnknownVerifyError": "An unknown error occurred while verifying address.",
+                "FieldIsRequired": "{{field}} is required",
+                "FieldIsInvalid": "{{field}} has an invalid value",
+                "InvalidHouseNumber": "Street number could not be found",
+                "INTERNAL_SERVER_ERROR": "We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
+                "NOT_ACCEPTABLE": "The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
+                "NOT_FOUND": "The requested resource could not be found.",
+                "FORBIDDEN": "Unable to access the requested resource.",
+                "PAYMENT_REQUIRED": "Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
+                "UNAUTHORIZED": "Unable to access the requested resource, authorization failed.",
+                "BAD_REQUEST": "Malformed request. Please check the contents and retry.",
+                "PAYMENT_GATEWAY.ERROR": "The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
+                "MODE.UNAUTHORIZED": "This resource requires a production API Key to access.",
+                "MODE.CONFLICT": "API Key mode conflicted with parameter mode.",
+                "DATE.PARSE.FAILURE": "At least one date was formatted incorrectly and could not be parsed.",
+                "PARAMETER.FORBIDDEN": "The request could not be completed due to forbidden properties present in the parameters.",
+                "PARAMETER.REQUIRED": "Missing required parameter.",
+                "ADDRESS.PARAMETERS.INVALID_CHARACTER": "The parameters passed contained an invalid character.",
+                "ADDRESS.PARAMETERS.INVALID": "The parameters passed to create an Address were missing or invalid.",
+                "ADDRESS.COUNTRY.INVALID": "Invalid 'country', please provide a 2 character ISO country code.",
+                "ADDRESS.VERIFICATION.NOT_FOUND": "Address Not Found.",
+                "ADDRESS.VERIFICATION.FAILURE": "The address was unable to be verified.",
+                "ADDRESS.VERIFY.UNAVAILABLE": "Address verification is not available. Please try again.",
+                "ADDRESS.VERIFICATION.INVALID": "One of the verifications selected is invalid.",
+                "ADDRESS.VERIFY.FAILURE": "Unable to verify address.",
+                "ADDRESS.VERIFY.CARRIER_INVALID": "Unable to verify address using provided carrier.",
+                "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "Address verification is not available due to an upstream service not responding. Please try again.",
+                "ADDRESS.VERIFY.ONLY_US": "USPS can only validate US addresses.",
+                "ADDRESS.VERIFY.INTL_NOT_ENABLED": "International Verification not enabled on this account. Please contact support@easypost.com.",
+                "ADDRESS.VERIFY.MISSING_STREET": "Insufficient address data provided. A street must be provided.",
+                "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Insufficient address data provided. A city and state or a zip must be provided.",
+                "E.COUNTRY.UNSUPPORTED": "This country is not supported in this mode. Try in production mode.",
+                "E.ENGINE.UNAVAILABLE": "No verification engine is available to service this country. Please try again later.",
+                "E.QUERY.UNANSWERABLE": "We can not provide enough data in this country to satisfy this request. Please try again later.",
+                "E.ADDRESS.NOT_FOUND": "We could not find the entered address.",
+                "E.SECONDARY_INFORMATION.INVALID": "Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+                "E.SECONDARY_INFORMATION.MISSING": "Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+                "E.HOUSE_NUMBER.MISSING": "House number is missing.",
+                "E.HOUSE_NUMBER.INVALID": "We could not find the street number provided.",
+                "E.STREET.MISSING": "Street is missing.",
+                "E.STREET.INVALID": "Street is invalid.",
+                "E.BOX_NUMBER.MISSING": "Box number is missing.",
+                "E.BOX_NUMBER.INVALID": "Box number is invalid.",
+                "E.ADDRESS.INVALID": "Invalid city/state/ZIP.",
+                "E.ZIP.NOT_FOUND": "Zip not found.",
+                "E.ZIP.INVALID": "Zip invalid.",
+                "E.ZIP.PLUS4.NOT_FOUND": "Zip + 4 not found.",
+                "E.ADDRESS.MULTIPLE": "Multiple addresses were returned with the same zip.",
+                "E.ADDRESS.INSUFFICIENT": "Insufficient/incorrect address data.",
+                "E.ADDRESS.DUAL": "Dual address.",
+                "E.STREET.MAGNET": "Street address is ambiguous.",
+                "E.CITY_STATE.INVALID": "Unverifiable city / state.",
+                "E.STATE.INVALID": "Invalid State.",
+                "E.ADDRESS.DELIVERY.INVALID": "Invalid delivery address.",
+                "E.TIMED_OUT": "Exceeded max timeout.",
+                "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
+                "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+            }
+        },
+        "TooltipAlt": "Information",
+        "SubjectPanel": {
+            "Link": "Return to subject look-up",
+            "Text": "Subject Invitation Code: "
+        },
+        "AdminActionPanel": {
+            "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+            "EditButton": "Edit"
+        },
+        "Validators": {
+            "DateNavyValidationRule": "Entered date is invalid"
+        }
+    },
+    "Common": {
+        "Navigation": {
+            "Dashboard": "Dashboard"
+        }
+    },
+    "Toolkit": {
+        "Dialogs": {
+            "SessionWillExpire": {
+                "Title": "Your session will time-out soon",
+                "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+                "SignOut": "Sign Out",
+                "Continue": "Continue"
+            }
+        },
+        "SessionExpired": {
+            "Text": {
+                "H1": "Session expired",
+                "Pt1": "You were away for a while so the system logged you out. To continue, please log in again.",
+                "Pt2": "Thank you."
+            },
+            "LogInButton": "Sign in"
+        }
+    },
+    "ReleaseRequests": {
+        "Title": "Your Letters  of Request for Release of Your Clinical and Genetic Information",
+        "ActivityName": "Provider/Clinic",
+        "DateCreated": "Date Create",
+        "GenerateReleaseRequestGenetic": "Generate Genetic Request",
+        "ReleaseRequestClinical": "Generate Clinical Request"
+    }
+}

@@ -1,18 +1,20 @@
 import {
-  Component,
-  Inject,
-  Injector, Input,
-  Renderer2
+    ChangeDetectorRef,
+    Component,
+    Inject,
+    Injector, Input,
+    Renderer2
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import {
-  ActivityComponent,
-  WindowRef,
-  SubmitAnnouncementService,
-  AnalyticsEventsService,
-  SubmissionManager,
-  LoggingService
+    ActivityComponent,
+    WindowRef,
+    SubmitAnnouncementService,
+    AnalyticsEventsService,
+    SubmissionManager,
+    LoggingService,
+    ParticipantsSearchServiceAgent,
 } from 'ddp-sdk';
 import { ModalActivityData } from '../../models/modalActivityData';
 
@@ -37,7 +39,7 @@ import { ModalActivityData } from '../../models/modalActivityData';
             [studyGuid]="studyGuid"
             [activityGuid]="activityGuid"
             (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
-            (embeddedComponentBusy)="embeddedComponentBusy$[1].next($event)">
+            (componentBusy)="embeddedComponentBusy$[1].next($event)">
           </ddp-activity-section>
         </ng-container>
       </div>
@@ -80,9 +82,11 @@ export class ModalActivityComponent extends ActivityComponent {
               renderer: Renderer2,
               submitService: SubmitAnnouncementService,
               analytics: AnalyticsEventsService,
+              participantsSearch: ParticipantsSearchServiceAgent,
+              changeRef: ChangeDetectorRef,
               @Inject(DOCUMENT) document: any,
               injector: Injector) {
-    super(logger, windowRef, renderer, submitService, analytics, document, injector);
+    super(logger, windowRef, renderer, submitService, analytics, participantsSearch, changeRef, document, injector);
   }
 
   public get isStepBeforeLast(): boolean {

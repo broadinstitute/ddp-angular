@@ -21,6 +21,12 @@ import { ValidationRuleFactoryMapping } from '../../models/activity/validationRu
 import { QuestionType } from '../../models/activity/questionType';
 import { InputType } from '../../models/activity/inputType';
 import * as _ from 'underscore';
+import { ActivityFileValidationRule } from './validators/activityFileValidationRule';
+import { ActivityFileQuestionBlock } from '../../models/activity/activityFileQuestionBlock';
+import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
+import { ActivityPicklistQuestionBlock } from 'ddp-sdk';
+import { ActivityStrictMatchValidationRule } from './validators/activityStrictMatchValidationRule';
+import { ActivityUniqueValidationRule } from './validators/activityUniqueValidationRule';
 
 @Injectable()
 export class ActivityValidatorBuilder {
@@ -43,7 +49,8 @@ export class ActivityValidatorBuilder {
             { type: 'DAY_REQUIRED', factory: (x, y) => new ActivityDayRequiredDateValidationRule(y) },
             { type: 'DATE_RANGE', factory: (x, y) => this.buildDateRangeValidator(x, y) },
             { type: 'AGE_RANGE', factory: (x, y) => this.buildAgeRangeValidator(x, y) },
-            { type: 'INT_RANGE', factory: (x, y) => this.buildNumericRangeValidator(x, y) }
+            { type: 'INT_RANGE', factory: (x, y) => this.buildNumericRangeValidator(x, y) },
+            { type: 'UNIQUE', factory: (x, y) => new ActivityUniqueValidationRule(y) },
         ];
     }
 
@@ -62,17 +69,34 @@ export class ActivityValidatorBuilder {
                     `Received unknown type of validation rule named: ${validationJson.rule}`);
             }
         }
+        const additionalLocalRules = this.buildQuestionLocalValidatorRules(questionBlock);
+        return rules.concat(additionalLocalRules);
+    }
+
+    private buildQuestionLocalValidatorRules(questionBlock: ActivityQuestionBlock<any>)
+        : Array<ActivityAbstractValidationRule> {
+        const localRules = [];
+
         if (questionBlock.questionType === QuestionType.Date) {
-            rules.push(new ActivityDateNavyValidationRule(questionBlock, this.dateService));
+            localRules.push(new ActivityDateNavyValidationRule(questionBlock, this.dateService));
         }
-        if (
-          questionBlock instanceof ActivityTextQuestionBlock &&
-          questionBlock.inputType === InputType.Text &&
-          questionBlock.confirmEntry
-        ) {
-            rules.push(new ActivityMatchValidationRule(questionBlock));
+
+        if (questionBlock instanceof ActivityTextQuestionBlock &&
+            questionBlock.inputType === InputType.Text &&
+            questionBlock.confirmEntry) {
+            localRules.push(new ActivityMatchValidationRule(questionBlock));
         }
-        return rules;
+
+        if (questionBlock.questionType === QuestionType.File) {
+            localRules.push(new ActivityFileValidationRule(questionBlock as ActivityFileQuestionBlock));
+        }
+
+        if (questionBlock.questionType === QuestionType.Picklist
+            && (questionBlock as ActivityPicklistQuestionBlock).renderMode === PicklistRenderMode.AUTOCOMPLETE) {
+            localRules.push(new ActivityStrictMatchValidationRule(questionBlock as ActivityPicklistQuestionBlock));
+        }
+
+        return localRules;
     }
 
     private buildLengthValidator(validationJson: any, questionBlock: ActivityQuestionBlock<any>):

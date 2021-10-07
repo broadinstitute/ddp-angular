@@ -557,8 +557,7 @@
         },
         "UserPreferences": {
             "UserPreferencesTitle": "Preferencias del usuario",
-            "UserPreferencesGender": "Sexo",
-            "UserPreferencesLocale": "Idioma preferido"
+            "UserPreferencesGender": "Sexo"
         },
         "Dashboard": {
             "Title": "Mi Tablero",
@@ -582,9 +581,9 @@
             "December": "diciembre"
         },
         "DateLabel": {
-          "YYYY": "AAAA",
-          "MM": "MM",
-          "DD": "DD"
+            "YYYY": "AAAA",
+            "MM": "MM",
+            "DD": "DD"
         },
         "UserMenu": {
             "DashboardButton": "Tablero de Progreso",

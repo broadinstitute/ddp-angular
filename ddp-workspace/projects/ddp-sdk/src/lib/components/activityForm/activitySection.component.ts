@@ -1,4 +1,15 @@
-import { ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    Inject,
+    Input,
+    OnDestroy,
+    OnInit,
+    Output
+} from '@angular/core';
+import { Subscription } from 'rxjs';
+
 import { ActivitySection } from '../../models/activity/activitySection';
 import { ActivityBlock } from '../../models/activity/activityBlock';
 import { BlockType } from '../../models/activity/blockType';
@@ -11,88 +22,11 @@ import { ConditionalBlock } from '../../models/activity/conditionalBlock';
 import { ConfigurationService } from '../../services/configuration.service';
 import { ActivityActivityBlock } from '../../models/activity/activityActivityBlock';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
-import { Subscription } from 'rxjs';
+import { ActivityInstance } from '../../models/activityInstance';
 
 @Component({
     selector: 'ddp-activity-section',
-    template: `
-        <div class="margin-bottom" *ngFor="let block of section.blocks">
-            <ng-container *ngIf="block.displayNumber; then numbered else notNumbered">
-            </ng-container>
-
-            <ng-template #numbered>
-                <ol class="ddp-list">
-                    <li class="ddp-li" [value]="block.displayNumber">
-                        <ng-container *ngTemplateOutlet="content"></ng-container>
-                    </li>
-                </ol>
-            </ng-template>
-
-            <ng-template #notNumbered>
-                <div class="ddp-single-question">
-                    <ng-container *ngTemplateOutlet="content"></ng-container>
-                </div>
-            </ng-template>
-
-            <ng-template #content>
-                <div *ngIf="isConditional(block)">
-                    <ddp-conditional-block [block]="block"
-                                           [readonly]="readonly"
-                                           [validationRequested]="validationRequested"
-                                           [studyGuid]="studyGuid"
-                                           [activityGuid]="activityGuid">
-                    </ddp-conditional-block>
-                </div>
-                <div *ngIf="isQuestion(block)">
-                    <ddp-activity-question [block]="block"
-                                           [readonly]="readonly"
-                                           [validationRequested]="validationRequested"
-                                           [studyGuid]="studyGuid"
-                                           [activityGuid]="activityGuid">
-                    </ddp-activity-question>
-                </div>
-                <div *ngIf="isInstitution(block)">
-                    <ddp-institutions-form [block]="block"
-                                           [studyGuid]="studyGuid"
-                                           [readonly]="readonly"
-                                           [validationRequested]="validationRequested"
-                                           (validStatusChanged)="updateEmbeddedComponentValidationStatus(0, $event)"
-                                           (componentBusy)="embeddedComponentBusy.emit($event)">
-                    </ddp-institutions-form>
-                </div>
-                <div *ngIf="isMailAddress(block)">
-                    <ddp-address-embedded [block]="block"
-                                          [country]="config.supportedCountry"
-                                          [readonly]="readonly"
-                                          [activityGuid]="activityGuid"
-                                          (validStatusChanged)="updateEmbeddedComponentValidationStatus(1, $event)"
-                                          [validationRequested]="validationRequested"
-                                          (componentBusy)="embeddedComponentBusy.emit($event)">
-                    </ddp-address-embedded>
-                </div>
-            </ng-template>
-
-            <div *ngIf="isContent(block)">
-                <ddp-activity-content [block]="block"></ddp-activity-content>
-            </div>
-            <div *ngIf="isGroup(block)">
-                <ddp-group-block [block]="block"
-                                 [readonly]="readonly"
-                                 [validationRequested]="validationRequested"
-                                 [studyGuid]="studyGuid"
-                                 [activityGuid]="activityGuid">
-                </ddp-group-block>
-            </div>
-            <div *ngIf="isActivityBlock(block)">
-                <ddp-activity-block [block]="block"
-                                    [readonly]="readonly"
-                                    [validationRequested]="validationRequested"
-                                    [studyGuid]="studyGuid"
-                                    [parentActivityInstanceGuid]="activityGuid"
-                                    (embeddedComponentBusy)="embeddedComponentBusy.emit($event)">
-                </ddp-activity-block>
-            </div>
-        </div>`
+    templateUrl: './activitySection.component.html'
 })
 export class ActivitySectionComponent implements OnInit, OnDestroy {
     @Input() public section: ActivitySection;
@@ -101,17 +35,26 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
     @Input() public studyGuid: string;
     @Input() public activityGuid: string;
     @Output() embeddedComponentsValidationStatus: EventEmitter<boolean> = new EventEmitter();
-    @Output() embeddedComponentBusy: EventEmitter<boolean> = new EventEmitter(true);
+    @Output() componentBusy: EventEmitter<boolean> = new EventEmitter(true);
     private subscription: Subscription;
-    private embeddedValidationStatus: boolean[] = new Array(2).fill(true);
+    private embeddedValidationStatus = new Map();
 
-    constructor(@Inject('ddp.config') public config: ConfigurationService, private submissionManager: SubmissionManager,
+    // Block guids and instance guids are generated separately,
+    // there is a small possibility that they can have the same ids.
+    // Prepended an unique `idPrefix` as to prevent a case with the same blockId & instanceId.
+    readonly idPrefix = {
+        block: 'b-',
+        instance: 'i-'
+    };
+
+    constructor(@Inject('ddp.config') public config: ConfigurationService,
+                private submissionManager: SubmissionManager,
                 private readonly cdr: ChangeDetectorRef) {
     }
 
     ngOnInit(): void {
         this.subscription = this.submissionManager.answerSubmissionResponse$.subscribe(response =>
-            this.updateVisibility(response.blockVisibility)
+            this.updateVisibilityAndValidation(response.blockVisibility)
         );
     }
 
@@ -119,7 +62,7 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
         this.subscription.unsubscribe();
     }
 
-    public updateVisibility(visibility: BlockVisibility[]): void {
+    public updateVisibilityAndValidation(visibility: BlockVisibility[]): void {
         let blockVisibilityChanged = false;
         visibility.forEach(element => {
             this.section.allChildBlocks().forEach(block => {
@@ -128,15 +71,20 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
                         block.shown = element.shown;
                         blockVisibilityChanged = true;
                     }
+                    if (block.blockType === BlockType.Activity && !block.shown) {
+                        this.updateValidationForHiddenEmbeddedActivity(block as ActivityActivityBlock);
+                    }
                 }
             });
         });
-        blockVisibilityChanged && this.cdr.detectChanges();
+        if (blockVisibilityChanged) {
+            this.cdr.detectChanges();
+        }
     }
 
-    public updateEmbeddedComponentValidationStatus(componentIndex: number, isValid: boolean): void {
-        this.embeddedValidationStatus[componentIndex] = isValid;
-        const reducedValidationStatus = this.embeddedValidationStatus.reduce((accumulator, value) => accumulator && value, true);
+    public updateValidationStatusInSection(id: string, isValid: boolean): void {
+        this.embeddedValidationStatus.set(id, isValid);
+        const reducedValidationStatus = Array.from(this.embeddedValidationStatus.values()).every(value => value);
         this.embeddedComponentsValidationStatus.next(reducedValidationStatus);
     }
 
@@ -169,4 +117,9 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
         return block.blockType === BlockType.Activity && block.shown;
     }
 
+    private updateValidationForHiddenEmbeddedActivity(block: ActivityActivityBlock): void {
+        block.instances.forEach((instance: ActivityInstance) => {
+            this.updateValidationStatusInSection(this.idPrefix.instance + instance.instanceGuid, true);
+        });
+    }
 }

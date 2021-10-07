@@ -1,0 +1,89 @@
+<footer class="footer">
+  <div class="footer__container">
+    <div class="footer__links-container">
+      <div class="links">
+        <p class="links__title">
+          {{ 'Footer.Circadia.Title' | translate }}
+        </p>
+
+        <ul class="links__list">
+          <li class="links__list-item">
+            <a class="links__link" [routerLink]="Route.Home">
+              {{ 'Footer.Circadia.Home' | translate }}
+            </a>
+          </li>
+
+          <li class="links__list-item">
+            <a class="links__link" [routerLink]="Route.Home" fragment="about">
+              {{ 'Footer.Circadia.About' | translate }}
+            </a>
+          </li>
+
+          <li class="links__list-item">
+            <a class="links__link" [routerLink]="Route.Home" fragment="faq">
+              {{ 'Footer.Circadia.FAQ' | translate }}
+            </a>
+          </li>
+
+          <li class="links__list-item">
+            <a class="links__link" [routerLink]="Route.Home" fragment="team">
+              {{ 'Footer.Circadia.Team' | translate }}
+            </a>
+          </li>
+
+          <li class="links__list-item">
+            <a class="links__link" [routerLink]="Route.StayInformed">
+              {{ 'Footer.Circadia.StayInformed' | translate }}
+            </a>
+          </li>
+
+          <li class="links__list-item">
+            <a class="links__link" [routerLink]="Route.PrivacyPolicy">
+              {{ 'Footer.Circadia.PrivacyPolicy' | translate }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__links-container">
+      <div class="links">
+        <p class="links__title">
+          {{ 'Footer.ContactUs.Title' | translate }}
+        </p>
+
+        <ul class="links__list">
+          <li class="links__list-item">
+            <a class="links__link" href="tel:18572656742">+1 (857) 265-6742</a>
+          </li>
+
+          <li class="links__list-item">
+            <a class="links__link" href="mailto:circadiastudy@mgh.harvard.edu">
+              circadiastudy@mgh.harvard.edu
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__links-container">
+      <div class="links">
+        <p class="links__title">
+          {{ 'Footer.Participation.Title' | translate }}
+        </p>
+
+        <ul class="links__list">
+          <li *ngIf="!isAuthenticated" class="links__list-item">
+            <a class="links__link" [routerLink]="Route.JoinUs">{{
+              'Footer.Participation.SignUp' | translate
+            }}</a>
+          </li>
+
+          <li class="links__list-item">
+            <ddp-sign-in-out class="links__link"></ddp-sign-in-out>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

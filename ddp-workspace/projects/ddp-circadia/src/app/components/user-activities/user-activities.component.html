@@ -1,0 +1,229 @@
+<table mat-table [dataSource]="activities">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>
+      {{ 'UserActivities.Header.Name' | translate }}
+    </th>
+
+    <td mat-cell *matCellDef="let activity">
+      <div class="mobile-column-name">
+        {{ 'UserActivities.Header.Name' | translate }}
+      </div>
+
+      {{ activity.activityName }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="summary">
+    <th mat-header-cell *matHeaderCellDef>
+      {{ 'UserActivities.Header.Summary' | translate }}
+    </th>
+
+    <td mat-cell *matCellDef="let activity">
+      <ng-container [ngSwitch]="activity.activityCode">
+        <ng-container *ngSwitchCase="ActivityCode.MiniSleepLog">
+          <ng-container *ngIf="sleepLogStatus === ActivityStatusCode.CREATED">
+            <div class="mobile-column-name">
+              {{ 'UserActivities.Header.Summary' | translate }}
+            </div>
+      
+            {{ 'UserActivities.MiniSleepLogSummary.Created' | translate }}
+          </ng-container>
+          <ng-container *ngIf="sleepLogStatus === ActivityStatusCode.COMPLETE">
+            <div class="mobile-column-name">
+              {{ 'UserActivities.Header.Summary' | translate }}
+            </div>
+      
+            {{ 'UserActivities.MiniSleepLogSummary.Complete' | translate }}
+          </ng-container>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+            <div class="mobile-column-name">
+              {{ 'UserActivities.Header.Summary' | translate }}
+            </div>
+
+            {{ activity.activitySummary || 'TBD' }}
+        </ng-container>
+      </ng-container>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef>
+      {{ 'UserActivities.Header.Status' | translate }}
+    </th>
+
+    <td mat-cell *matCellDef="let activity">
+      <div class="mobile-column-name">
+        {{ 'UserActivities.Header.Status' | translate }}
+      </div>
+
+      <ng-container [ngSwitch]="activity.activityCode">
+        <ng-container *ngSwitchCase="ActivityCode.DLMOSchedulingInstructions">
+          &mdash;
+        </ng-container>
+
+        <ng-container *ngSwitchCase="ActivityCode.DLMOInstructions">
+          &mdash;
+        </ng-container>
+
+        <ng-container *ngSwitchCase="ActivityCode.MiniSleepLog">
+          <div class="activity-status">
+            <ng-container *ngIf="sleepLogStatusError">
+              &mdash;
+            </ng-container>
+
+            <mat-spinner
+              *ngIf="!sleepLogStatus && sleepLogStatusError === null"
+              diameter="32"
+              style="margin: 6px 0 6px 1.5em;"
+            ></mat-spinner>
+
+            <ng-container *ngIf="sleepLogStatus">
+              <ng-container
+                *ngIf="sleepLogStatus === ActivityStatusCode.CREATED"
+              >
+                <mat-icon class="status-icon status-icon--created">info</mat-icon
+                >{{ 'UserActivities.MiniSleepLogStatuses.Created' | translate }}
+              </ng-container>
+
+              <ng-container
+                *ngIf="sleepLogStatus === ActivityStatusCode.COMPLETE"
+              >
+                <mat-icon class="status-icon status-icon--complete"
+                  >check_circle</mat-icon
+                >{{ 'UserActivities.MiniSleepLogStatuses.Complete' | translate }}
+              </ng-container>
+            </ng-container>
+          </div>
+        </ng-container>
+
+        <ng-container *ngSwitchDefault>
+          <div class="activity-status">
+            <ng-container
+              *ngIf="activity.statusCode === ActivityStatusCode.CREATED"
+            >
+              <mat-icon class="status-icon status-icon--created">info</mat-icon
+              >{{ 'UserActivities.Statuses.Created' | translate }}
+            </ng-container>
+
+            <ng-container
+              *ngIf="activity.statusCode === ActivityStatusCode.IN_PROGRESS"
+            >
+              <mat-icon class="status-icon status-icon--in-progress"
+                >pending</mat-icon
+              >{{ 'UserActivities.Statuses.InProgress' | translate }}
+            </ng-container>
+
+            <ng-container
+              *ngIf="activity.statusCode === ActivityStatusCode.COMPLETE"
+            >
+              <mat-icon class="status-icon status-icon--complete"
+                >check_circle</mat-icon
+              >{{ 'UserActivities.Statuses.Complete' | translate }}
+            </ng-container>
+          </div>
+        </ng-container>
+      </ng-container>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>
+      {{ 'UserActivities.Header.Actions' | translate }}
+    </th>
+
+    <td mat-cell *matCellDef="let activity">
+      <div class="mobile-column-name">
+        {{ 'UserActivities.Header.Actions' | translate }}
+      </div>
+
+      <ng-container [ngSwitch]="activity.activityCode">
+        <ng-container *ngSwitchCase="ActivityCode.DLMOSchedulingInstructions">
+          <a
+            class="button button--sm button--yellow-outline"
+            target="_blank"
+            [href]="DLMO_SCHEDULING_URL"
+            >{{ 'UserActivities.Actions.Schedule' | translate }}</a
+          >
+        </ng-container>
+
+        <ng-container *ngSwitchCase="ActivityCode.DLMOInstructions">
+          <button
+            class="button button--sm button--blue"
+            (click)="onViewClick(activity)"
+          >
+            {{ 'UserActivities.Actions.View' | translate }}
+          </button>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="ActivityCode.MiniSleepLog">
+          <ng-container *ngIf="sleepLogUrlError">
+            &mdash;
+          </ng-container>
+
+          <mat-spinner
+            *ngIf="!sleepLogUrl && sleepLogUrlError === null"
+            diameter="32"
+            style="margin: 6px 0 6px 1.5em;"
+          ></mat-spinner>
+
+          <ng-container *ngIf="sleepLogUrl">
+            <a
+              target="_blank"
+              [href]="sleepLogUrl"
+              class="button button--sm button--yellow-outline"
+              *ngIf="sleepLogStatus === ActivityStatusCode.CREATED"
+            >
+              {{ 'UserActivities.Actions.Start' | translate }}
+            </a>
+            <a
+              target="_blank"
+              [href]="sleepLogUrl"
+              class="button button--sm button--yellow-outline"
+              *ngIf="sleepLogStatus === ActivityStatusCode.IN_PROGRESS"
+            >
+              {{ 'UserActivities.Actions.Continue' | translate }}
+            </a>
+            <a
+              target="_blank"
+              [href]="sleepLogUrl"
+              class="button button--sm button--blue"
+              *ngIf="sleepLogStatus === ActivityStatusCode.COMPLETE"
+            >
+              {{ 'UserActivities.Actions.View' | translate }}
+            </a>
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchDefault>
+          <button
+            *ngIf="activity.statusCode === ActivityStatusCode.CREATED"
+            class="button button--sm button--yellow-outline"
+            (click)="onStartClick(activity)"
+          >
+            {{ 'UserActivities.Actions.Start' | translate }}
+          </button>
+
+          <button
+            *ngIf="activity.statusCode === ActivityStatusCode.IN_PROGRESS"
+            class="button button--sm button--yellow-outline"
+            (click)="onContinueClick(activity)"
+          >
+            {{ 'UserActivities.Actions.Continue' | translate }}
+          </button>
+
+          <button
+            *ngIf="activity.statusCode === ActivityStatusCode.COMPLETE"
+            class="button button--sm button--blue"
+            (click)="onViewClick(activity)"
+          >
+            {{ 'UserActivities.Actions.View' | translate }}
+          </button>
+        </ng-container>
+      </ng-container>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

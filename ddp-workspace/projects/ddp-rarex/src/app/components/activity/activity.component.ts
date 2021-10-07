@@ -15,7 +15,8 @@ import { ActivityCodes } from '../../constants/activity-codes';
   providers: [SubmitAnnouncementService, SubmissionManager],
 })
 export class ActivityComponent extends SDKActivityComponent {
-  @Input() isReadonly = false;
+  @Input() isInitiallyReadonly = false;
+  @Input() hasPreviousInstance = false;
   @Output() sectionChanged = new EventEmitter();
   private consentCodes: string[] = [
     ActivityCodes.SelfConsent,
@@ -29,9 +30,27 @@ export class ActivityComponent extends SDKActivityComponent {
     return this.consentCodes.includes(this.model.activityCode);
   }
 
+  isReadonly(): boolean {
+    return this.model.readonly || this.isInitiallyReadonly;
+  }
+
   scrollToTop(): void {
     super.scrollToTop();
 
     this.sectionChanged.emit();
+  }
+
+  jumpStep(step: number): void {
+    if (this.hasPreviousInstance) {
+      this.currentSectionIndex = step;
+
+      return;
+    }
+
+    super.jumpStep(step);
+  }
+
+  isCompleted(step: number): boolean {
+    return this.visitedSectionIndexes[step] || this.hasPreviousInstance;
   }
 }

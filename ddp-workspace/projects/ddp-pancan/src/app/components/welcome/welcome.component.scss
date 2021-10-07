@@ -1,0 +1,213 @@
+@import '../../../styles/variables.scss';
+
+section {
+    text-align: center;
+
+    &.introduction {
+        padding: 1.8rem 2rem 1.125rem 2rem;
+
+        .title {
+            margin-bottom: 1.25rem;
+        }
+
+        .text {
+            font-size: 1.25rem;
+            line-height: 30px;
+        }
+
+        .image {
+            width: 50%;
+            max-width: 630px;
+            padding-left: 40px;
+            object-fit: contain;
+        }
+
+        .info,
+        .title,
+        .text {
+            text-align: left;
+        }
+    }
+
+    &.learn-more {
+        padding: 5rem 0 4.06rem;
+        background-color: $accent-color-green;
+
+        .title {
+            margin-bottom: 2rem;
+        }
+    }
+
+    &.join {
+        padding: 3.1rem 1.625rem 4rem;
+        display: flex;
+        box-sizing: border-box;
+        align-items: center;
+
+        .image {
+            width: 18rem;
+            object-fit: contain;
+        }
+
+        .description {
+            flex: 1 2 auto;
+        }
+
+        .title {
+            margin-bottom: 2.12rem;
+        }
+
+        .text {
+            max-width: 37.5rem;
+
+            &:first-of-type {
+                margin-bottom: 2rem;
+            }
+        }
+    }
+
+    &.participate {
+        background-color: $accent-color-orange;
+        padding: 7rem 1.25rem 4.25rem;
+        text-align: left;
+    }
+
+    &.faq {
+        padding: 6.88rem 0 5.75rem 0;
+
+        .container {
+            box-sizing: border-box;
+            max-width: 900px;
+            padding: 0 3.75rem;
+            margin: 3.5rem auto;
+            text-align: left;
+        }
+    }
+
+    &.stay-informed {
+        background-color: $primary-color;
+        color: white;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    &.join-cmi {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.title, .text {
+    max-width: 45.5rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.learn-more-btn {
+    margin-top: 2.81rem;
+}
+
+.join-cmi-btn {
+    margin: 2.5rem 0 2rem;
+}
+
+.introduction_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media screen and (max-width: $desktop-breakpoint) {
+    section {
+        &:nth-child(n) {
+            padding-left: 5rem;
+            padding-right: 5rem;
+        }
+
+        &.introduction {
+            .info,
+            .title,
+            .text {
+                text-align: center;
+            }
+
+            .image {
+                max-width: 100%;
+                margin: 3rem 0;
+                padding: 0;
+            }
+        }
+
+        .introduction_container {
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        &.join {
+            padding-top: 4rem;
+            padding-bottom: 5rem;
+
+            .image {
+                width: 13rem;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $tablet-breakpoint) {
+    section {
+        &:nth-child(n) {
+            padding-left: 3rem;
+            padding-right: 3rem;
+        }
+
+        &.introduction {
+            .logos {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+
+                > img:first-child {
+                    margin: 0;
+                }
+            }
+        }
+
+        &.join {
+            flex-direction: column;
+
+            .image {
+                margin: 0 auto;
+            }
+        }
+
+        &.faq {
+            .container {
+                padding: 0;
+            }
+        }
+   }
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+    section {
+        &:nth-child(n) {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        &:not(.join) {
+            padding-top: 5rem;
+        }
+
+        &.join-cmi {
+            padding-bottom: 5rem;
+        }
+    }
+}
+
+:host ::ng-deep .static-page-paragraph-text {
+    font-size: 1.5rem;
+    line-height: 36px;
+}

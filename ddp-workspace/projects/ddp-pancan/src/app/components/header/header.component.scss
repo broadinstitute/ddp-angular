@@ -1,0 +1,204 @@
+@import '../../../styles/variables';
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    height: $header-height;
+    transition: all 200ms linear;
+    background-color: white;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    padding: 0 1.5625rem;
+    height: $header-height;
+}
+
+.header_shadow {
+    box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.2);
+    transition: all ease 0.5s;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    min-width: fit-content;
+
+    &::ng-deep .auth__login .SimpleButton {
+        &:hover, &:focus {
+            background-color: rgba(0,0,0,0.04);
+        }
+    }
+}
+
+.hamburger {
+    padding: 2rem;
+    cursor: pointer;
+    transition-property: opacity, filter;
+    transition-duration: 0.15s;
+    transition-timing-function: linear;
+    background-color: transparent;
+    border: 0;
+    display: none;
+}
+
+.header-content .nav {
+    width: 100%;
+    display: flex;
+}
+
+.panel-opened {
+    height: 100vh;
+    z-index: 3;
+
+    .panel-controls {
+        display: none;
+        flex-direction: column;
+        margin: 1.5625rem 2.5rem;
+        transition: opacity 100ms 200ms ease;
+        opacity: 1;
+        visibility: visible;
+        height: 100%;
+
+        .nav {
+            display: flex;
+        }
+
+        ::ng-deep.navigation {
+            flex-direction: column;
+            padding: 0;
+        }
+    }
+}
+
+.panel-controls {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+}
+
+.hamburger-box {
+    width: 1.875rem;
+    height: 1.25rem;
+    display: inline-block;
+    position: relative;
+}
+
+.hamburger-inner {
+    display: block;
+    top: 50%;
+}
+
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+    width: 1.875rem;
+    height: 2px;
+    background-color: black;
+    border-radius: 2px;
+    position: absolute;
+    transition-property: transform;
+    transition-duration: 0.15s;
+    transition-timing-function: ease;
+}
+
+.hamburger-inner::before,
+.hamburger-inner::after {
+    content: "";
+    display: block;
+}
+
+.hamburger--slider {
+    .hamburger-inner {
+        top: 2px;
+    }
+
+    .hamburger-inner::before {
+        top: 8px;
+        transition-property: transform, opacity;
+        transition-timing-function: ease;
+        transition-duration: 0.15s;
+    }
+
+    .hamburger-inner::after {
+        top: 16px;
+    }
+
+    &.is-active {
+        .hamburger-inner {
+            transform: translate3d(0, 8px, 0) rotate(45deg);
+        }
+
+        .hamburger-inner::before {
+            transform: rotate(-45deg) translate3d(0, -6px, 0);
+            opacity: 0;
+        }
+
+        .hamburger-inner::after {
+            transform: translate3d(0, -16px, 0) rotate(-90deg);
+        }
+
+    }
+}
+
+.project-logo {
+    display: flex;
+    margin-right: 15px;
+    padding: 4px;
+    text-decoration: none;
+
+    &__text {
+        color: $text-color;
+        line-height: 1.6rem;
+        padding-left: 7px;
+        letter-spacing: -0.5px;
+        font-size: 1.35rem;
+    }
+
+    &__img {
+        width: 5rem;
+    }
+}
+
+@media screen and (max-width: $desktop-breakpoint) {
+    .header ::ng-deep.navigation__link{
+        font-size: 1.5rem;
+        line-height: 3rem;
+    }
+
+    .header-content .nav {
+        display: none;
+    }
+
+    .panel-controls,
+    .panel-opened .panel-controls,
+    .hamburger {
+        display: flex;
+    }
+}
+
+@media screen and (max-width: $tablet-breakpoint) {
+    .controls app-auth{
+        display: none;
+    }
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+    .project-logo {
+        margin-right: 7px;
+    }
+
+    ddp-language-selector ::ng-deep .SimpleButton {
+        padding: 10px !important;
+    }
+
+    .hamburger {
+        padding: 10px;
+    }
+}

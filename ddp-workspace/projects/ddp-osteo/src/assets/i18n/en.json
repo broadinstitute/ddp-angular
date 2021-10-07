@@ -165,7 +165,8 @@
                 "ZSOF": "The Zach Sobiech Osteosarcoma Fund logo",
                 "BoD": "Because Of Daniel logo",
                 "OsCollaborative": "The Osteosarcoma Collaborative logo",
-                "TCF": "Target Cancer Foundation logo"
+                "TCF": "Target Cancer Foundation logo",
+                "MCAMF": "Mason Chandler Allen Memorial Foundation logo"
             }
         },
         "SocialMediaSection": {
@@ -597,8 +598,7 @@
         },
         "UserPreferences": {
             "UserPreferencesTitle": "User preferences",
-            "UserPreferencesGender": "Sex",
-            "UserPreferencesLocale": "Preferred language"
+            "UserPreferencesGender": "Sex"
         },
         "Dashboard": {
             "Title": "My Dashboard",

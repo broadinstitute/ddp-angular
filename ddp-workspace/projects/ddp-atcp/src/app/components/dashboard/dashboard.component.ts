@@ -1,6 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { of } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
 import { skipWhile, take } from 'rxjs/operators';
 
 import {
@@ -11,11 +11,14 @@ import {
   LanguageService,
   CompositeDisposable,
   ActivityServiceAgent,
+  UserStatusServiceAgent,
 } from 'ddp-sdk';
 
 import { ActivityCodes } from '../../sdk/constants/activityCodes';
 import { ActivityService } from '../../services/activity.service';
+import { RegistrationStatusService } from '../../services/registrationStatus.service';
 import * as RouterResources from '../../router-resources';
+import { WorkflowModel } from '../../models/workflow.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,7 +27,9 @@ import * as RouterResources from '../../router-resources';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   activities: ActivityInstance[];
+  status: WorkflowModel;
   isLoading = true;
+  isUiBlocked = false;
   private anchor = new CompositeDisposable();
 
   constructor(
@@ -33,21 +38,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private languageService: LanguageService,
     private userActivityAgent: UserActivityServiceAgent,
     private activityService: ActivityService,
+    private userStatusService: UserStatusServiceAgent,
+    private registrationStatusService: RegistrationStatusService,
     @Inject('ddp.config') private config: ConfigurationService,
   ) {}
 
   ngOnInit(): void {
     this.activityService.setCurrentActivity(null);
 
-    this.getActivities();
+    this.getParticipantInformation();
 
     this.anchor.addNew(
       this.languageService
         .getProfileLanguageUpdateNotifier()
         .pipe(skipWhile(value => value === null))
         .subscribe(() => {
-          this.isLoading = true;
-          this.getActivities();
+          this.getParticipantInformation();
         }),
     );
   }
@@ -56,14 +62,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.anchor.removeAll();
   }
 
-  getActivities(): void {
-    this.userActivityAgent
-      .getActivities(of(this.config.studyGuid))
-      .pipe(take(1))
-      .subscribe(activities => {
-        this.activities = activities;
-        this.isLoading = false;
-      });
+  get isContactUsStatus(): boolean {
+    return this.registrationStatusService.isContactUsStatus(this.status);
+  }
+
+  get enrollmentMessageKey(): string {
+    return this.registrationStatusService.getEnrollmentMessageKey(this.status);
   }
 
   goToActivity(instanceGuid: string): void {
@@ -89,7 +93,36 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 
+  private getParticipantInformation(): void {
+    this.isLoading = true;
+
+    forkJoin({
+      status: this.userStatusService.getStatus(),
+      activities: this.userActivityAgent
+        .getActivities(of(this.config.studyGuid))
+        .pipe(take(1)),
+    }).subscribe(response => {
+      this.status = this.registrationStatusService.findStatus(response.status);
+
+      this.activities = response.activities.reduce((acc, activity) => {
+        if (activity.activityCode === ActivityCodes.BLOOD_TYPE) {
+          if (this.registrationStatusService.isEnrolled(this.status)) {
+            acc.push(activity);
+          }
+        } else {
+          acc.push(activity);
+        }
+
+        return acc;
+      }, []);
+
+      this.isLoading = false;
+    });
+  }
+
   private handleEditConsent(): void {
+    this.isUiBlocked = true;
+
     this.activityServiceAgent
       .createInstance(this.config.studyGuid, ActivityCodes.CONSENT_EDIT)
       .pipe(take(1))
@@ -99,6 +132,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   private handleEditActivity(activityInstance: ActivityInstance): void {
+    this.isUiBlocked = true;
+
     this.activityServiceAgent
       .createInstance(this.config.studyGuid, activityInstance.activityCode)
       .pipe(take(1))
@@ -109,6 +144,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     activity: ActivityInstanceGuid,
     isConsentEditActivity: boolean = false,
   ): void => {
+    this.isUiBlocked = false;
     this.activityService.setCurrentActivity(
       activity.instanceGuid,
       isConsentEditActivity,

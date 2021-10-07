@@ -1,0 +1,40 @@
+<div class="container container--wide">
+  <h1 class="page-title">
+    {{ 'DashboardPage.Title' | translate }}
+  </h1>
+
+  <ng-container
+    *ngIf="{ 
+      loading: loading$ | async,
+      activities: activities$ | async,
+      releaseRequests: releaseRequests$ | async, 
+      showReleaseRequests: showReleaseRequests$ | async 
+    } as state"
+  >
+    <ng-container
+      *ngIf="state.loading else loadingSpinner"
+    >
+      <app-user-activities
+        [activities]="state.activities"
+        (viewActivity)="onViewActivity($event)"
+        (startActivity)="onStartActivity($event)"
+        (continueActivity)="onContinueActivity($event)"
+      ></app-user-activities>
+
+      <app-release-requests
+        *ngIf="state.showReleaseRequests"
+        [activities]="state.releaseRequests"
+        (viewActivity)="onViewActivity($event)"
+        (startActivity)="onStartActivity($event)"
+        (continueActivity)="onContinueActivity($event)"
+        (startNewActivity)="onStartNewReleaseRequest($event)"
+      ></app-release-requests>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #loadingSpinner>
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template> 

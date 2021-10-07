@@ -11,8 +11,29 @@
   </div>
 
   <ng-template #userActivities>
+    <div *ngIf="status" class="registration-status">
+      <span class="status">
+        {{ 'EnrollmentStatus.Prefix' | translate }}
+      </span>
+
+      <ng-container *ngIf="isContactUsStatus; else simpleStatus">
+        <app-tooltip-button
+          style="margin-left: 4px; font-style: italic"
+          [message]="'EnrollmentStatus.ContactUsTooltip' | translate"
+        >
+          {{ enrollmentMessageKey | translate }}
+        </app-tooltip-button>
+      </ng-container>
+
+      <ng-template #simpleStatus>
+        <span class="status">{{ enrollmentMessageKey | translate }}</span>
+      </ng-template>
+    </div>
+
     <app-user-activities
       [activities]="activities"
+      [isParticipantIneligible]="isContactUsStatus"
+      [isUiBlocked]="isUiBlocked"
       (startActivity)="goToActivity($event)"
       (continueActivity)="goToActivity($event)"
       (viewActivity)="goToActivity($event)"

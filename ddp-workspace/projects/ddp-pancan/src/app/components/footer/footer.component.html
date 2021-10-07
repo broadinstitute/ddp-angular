@@ -1,0 +1,25 @@
+<footer class="footer">
+    <div class="actions">
+        <div class="actions__wrapper">
+            <button mat-button
+                    class="back-to-top button button_small"
+                    (click)="goToTop()">
+                <mat-icon>arrow_drop_up</mat-icon>
+                {{'App.Footer.BackToTopButton' | translate}}
+            </button>
+            <app-navigation></app-navigation>
+        </div>
+        <div class="auth">
+            <ddp-language-selector></ddp-language-selector>
+            <app-auth></app-auth>
+        </div>
+    </div>
+    <div class="info">
+        <span translate>App.Footer.Copyright</span>
+        <div class="contacts">
+            <span translate class="contacts__label">App.Footer.Contacts</span>
+            <a target="_blank" class="contacts__item" href="tel:{{phone}}}">{{phone}}</a>
+            <a target="_blank" class="contacts__item" href="mailto:{{email}}">{{email}}</a>
+        </div>
+    </div>
+</footer>

@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
                 <div class="PageHeader-background"></div>
             </div>
             <div class="PageContent">
-                <div class="PageLayout PageLayout-prism">
+                <div class="PageLayout-prism">
                     <ddp-prism></ddp-prism>
                 </div>
             </div>
@@ -17,8 +17,7 @@ import { Component } from '@angular/core';
     `,
     styles: [`
         .PageLayout-prism {
-            max-width: 1200px !important;
-            padding: 0 30px;
+            padding: 0 35px;
         }
     `]
 })

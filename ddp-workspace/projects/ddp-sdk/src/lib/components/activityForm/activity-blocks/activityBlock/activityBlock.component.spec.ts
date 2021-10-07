@@ -12,7 +12,7 @@ describe('ActivityBlockComponent', () => {
     let activityServiceAgentSpy: jasmine.SpyObj<ActivityServiceAgent>;
     let loggingServiceSpy: jasmine.SpyObj<LoggingService>;
 
-    beforeEach(async() => {
+    beforeEach(async () => {
         activityServiceAgentSpy = jasmine.createSpyObj('ActivityServiceAgent', ['createInstance', 'getActivitySummary']);
         loggingServiceSpy = jasmine.createSpyObj('LoggingService', ['logError']);
 

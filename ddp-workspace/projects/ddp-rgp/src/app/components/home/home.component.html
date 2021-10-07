@@ -147,8 +147,7 @@
   <div class="row Home-articleLast Background--lightBlue TopMargin75">
     <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 Home-articleText">
       <h2 class="Home-quoteText">
-        <span translate>HomePage.Quote.Text1</span>
-        <span class="Accent" translate>HomePage.Quote.Text2</span>."
+          <span [innerHTML]="'HomePage.Quote.Text' | translate"></span>
       </h2>
       <p class="Home-quoteSignature" translate>HomePage.Quote.Author</p>
     </div>
@@ -251,6 +250,13 @@
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 Aligned--center">
           <a href="https://www.thegivingpictureproject.com/" target="_blank">
             <div class="Home-partners Home-partnerTGPP" role="img" [attr.alt]="'HomePage.Partners.TGPP' | translate">
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 Aligned--center">
+          <a href="https://curehht.org/" target="_blank">
+            <div class="Home-partners Home-partnerCureHHT" role="img" [attr.alt]="'HomePage.Partners.CureHHT' | translate">
             </div>
           </a>
         </div>

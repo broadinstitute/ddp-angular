@@ -1,0 +1,11 @@
+<main class="faq">
+    <h2 class="title static-page-title" translate>App.FAQ.Title</h2>
+    <div class="container">
+        <button mat-flat-button class="expand-btn" (click)="toggle()">
+            <mat-icon class="icon">{{isAllOpened ? 'clear' : 'add'}}</mat-icon>
+            <span *ngIf="isAllOpened" translate>App.FAQ.Button.Collapse</span>
+            <span *ngIf="!isAllOpened" translate>App.FAQ.Button.Expand</span>
+        </button>
+        <app-faq-section questions="App.FAQ.Questions"></app-faq-section>
+    </div>
+</main>

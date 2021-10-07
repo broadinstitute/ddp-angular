@@ -1,540 +1,557 @@
 {
-  "AboutInitiative": {
-    "FirstParagraph": {
-      "Text": "ist eine vererbte neurodegenerative Erkrankung. Bei einem Kind mit AT beginnt im Alter von zwei Jahren ein fortschreitenden Verlust der Muskelkontrolle. Im Alter von neun oder zehn Jahren sind Kinder mit AT gewöhnlich auf einen Rollstuhl angewiesen und haben eine undeutliche Aussprache. Lesen und Schlucken sind ebenfalls schwierig. Etwa 30 Prozent der Kinder mit AT bekommen Krebs, und die meisten haben Probleme mit dem Immunsystem. Obwohl Fortschritte bei der Verlängerung des Lebens von Menschen mit AT durch das Management der Symptome erzielt werden konnten, ist die Krankheit derzeit weiterhin nicht heilbar.",
-      "Title": "Ataxia teleangiectatica (AT)"
+    "AboutInitiative": {
+        "FirstParagraph": {
+            "Text": "ist eine vererbte neurodegenerative Erkrankung. Bei einem Kind mit AT beginnt im Alter von zwei Jahren ein fortschreitenden Verlust der Muskelkontrolle. Im Alter von neun oder zehn Jahren sind Kinder mit AT gewöhnlich auf einen Rollstuhl angewiesen und haben eine undeutliche Aussprache. Lesen und Schlucken sind ebenfalls schwierig. Etwa 30 Prozent der Kinder mit AT bekommen Krebs, und die meisten haben Probleme mit dem Immunsystem. Obwohl Fortschritte bei der Verlängerung des Lebens von Menschen mit AT durch das Management der Symptome erzielt werden konnten, ist die Krankheit derzeit weiterhin nicht heilbar.",
+            "Title": "Ataxia teleangiectatica (AT)"
+        },
+        "SecondParagraph": {
+            "TextOne": "Geschwister mit AT haben offenbar mehr ähnliche klinische Eigenschaften als Kinder mit AT, die die gleichen Mutationen haben, jedoch aus verschiedenen Familien stammen. Wissenschaftler gehen daher davon aus, dass die Gene einer Familie ? anders als die Gene, die AT verursachen – ändern können, wie sich AT auf Patienten auswirkt. Zudem ist es möglich, dass sich das Leben in verschiedenen Umgebungen, unterschiedliche Lebensstile sowie eine unterschiedliche Ernährungsweise auf die Gesundheit von Menschen mit AT auswirken können.",
+            "TextSecond": "Wir haben kürzlich mehrere Personen identifiziert, die in ihren AT-Genen typische, krankheitsverursachende Mutationen aufwiesen und kein AT-Protein erzeugten (so wie andere Personen mit AT), und dennoch erstaunlich milde AT-Symptome aufwiesen. Wir sind nun optimistisch, dass wir Veränderungen in anderen Genen finden können, welche die AT-Mutationen bei Patienten mit extrem milden Symptomen korrigieren oder kompensieren können. Wenn das gelänge, könnten Forscher neue Wirkstoffe zur Behandlung aller Menschen mit AT entwickeln. Zunächst müssen jedoch die klinischen und genetischen Daten von möglichst vielen AT-Patienten gesammelt werden.",
+            "TextThird": "In ähnlicher Weise können Forscher durch Vergleichen der Krankengeschichten und Lebensstile verschiedener AT-Patienten mehr darüber erfahren, welche Symptom-Management-Strategien die besseren Ergebnisse für die Gesundheit ermöglichen. Zuerst müssen jedoch Daten von AT-Patienten an einem zentralen Ort erfasst und miteinander kombiniert werden.",
+            "Title": "AT wirkt sich individuell auf die Betroffenen aus"
+        },
+        "ThirdParagraph": {
+            "Steps": [
+                {
+                    "Name": "Anmelden auf der Datenplattform",
+                    "Text": "Klicken Sie auf \"Mitglied werden\" und erstellen Sie ein Konto mit Ihrem Namen und Ihrer E-Mail-Adresse. Sobald Sie Ihr Konto erstellt haben, können Sie sich selbst (wenn Sie AT haben) oder Ihr(e) Kind(er) mit AT als Teilnehmer auf unserer Datenplattform registrieren, indem Sie ein kurzes Formular ausfüllen."
+                },
+                {
+                    "Name": "Erteilen des Einverständnisses",
+                    "Steps": [
+                        "Weitergabe einer Speichelprobe, die uns von allen AT-Patienten zur Genomsequenzierung zugesendet werden kann",
+                        "Anforderung der Behandlungsunterlagen des AT-Patienten von dessen Ärzten und ihre Weitergabe an Forscher",
+                        "Weitergabe der von Ihnen hochgeladenen Behandlungsunterlagen an Forscher",
+                        "Zukünftige Kontaktaufnahme hinsichtlich Folgeforschungsstudien"
+                    ],
+                    "Text": "Während des Registrierungsprozesses werden Sie gebeten, eine Einverständniserklärung auszufüllen,\ndamit wir die von Ihnen bereitgestellten Daten in anonymisierter Form an Forscher weitergeben dürfen.\nSie können darüber hinaus ebenfalls Folgendem zustimmen:"
+                },
+                {
+                    "Name": "Angaben über Sie oder Ihr Kind",
+                    "Text": "Um an dieser Initiative teilzunehmen, müssen Sie einige Fragen zum Gesundheitszustand der Person mit AT, zu deren behandelnden Ärzten und zur Krankengeschichte und Familienanamnese beantworten. Wir werden Sie regelmäßig dazu einladen, zusätzliche (optionale) Fragebögen zum Gesundheitszustand der Person mit AT auszufüllen (von den Forschern, die Ihre Daten untersuchen, erstelle Umfragen, um ein besseres Verständnis von AT zu erlangen)."
+                },
+                {
+                    "Name": "Einsenden des Speichelentnahme-Kits",
+                    "Text": "Wenn Sie sich für eine Teilnahme an der Studie zur Genomsequenzierung entscheiden, senden Sie uns in einem von uns bereitgestellten vorfrankierten Paket eine Speichelprobe zu."
+                },
+                {
+                    "Name": "Wir analysieren die DNA und Gesundheitsinformationen",
+                    "Text": "Wir werden die DNA in den aus der Speichelprobe gewonnenen Zellen analysieren. Darüber hinaus sind keine weiteren Verfahren erforderlich. Wir werden die Ergebnisse der Genanalyse mit Ihrem Speichel mit den medizinischen Informationen verknüpfen, die Sie in unseren Online-Fragebögen angeben."
+                },
+                {
+                    "Name": "Wir geben die Daten an Forscher weiter",
+                    "Text": "Sobald personenbezogene Informationen entfernt worden sind, steht die Datenbank der Gesundheitsinformationen und Gendaten Forschern auf der ganzen Welt über ein sicheres Datenarchiv mit Zugriffskontrolle zur Verfügung. Auf Ihre Daten haben nur qualifizierte Prüfärzte Zugriff, die von einer Datenzugriffskommission, bestehend aus AT-Betroffenen sowie wissenschaftlichen und medizinischen Beratern, eine Zugriffsberechtigung erhalten haben.  Wir protokollieren jede Studie, für die Ihre Informationen verwendet wurden."
+                },
+                {
+                    "Name": "Ihr kontinuierliches Feedback kann die Forschung beschleunigen",
+                    "Text": "Wir laden Sie regelmäßig dazu ein, Fragebögen zu beantworten, die von den Forschern erstellt wurden, die Ihre Daten untersuchen, um ein besseres Verständnis von AT zu erlangen. Diese Plattform gibt uns die einmalige Gelegenheit, Antworten auf nachträgliche Forschungsfragen schnell und direkt von Familien zu erhalten. Die Möglichkeit, uns erneut an die Teilnehmer zu wenden, kann große Auswirkungen auf die Forschung haben und den Weg zu neuen Entdeckungen verkürzen."
+                },
+                {
+                    "Name": "Gemeinsam gelangen wir ans Ziel",
+                    "Text": "Diese spezielle Kombination aus Gesundheits- und Gendaten ist möglicherweise der Schlüssel zur Entwicklung neuer Therapien, und dies wäre ohne Ihre Hilfe nicht möglich. Sie werden über den Stand unserer Bemühungen sowie über alle neuen Informationen und Entdeckungen, die wir dank Ihrer Teilnahme machen können, informiert."
+                }
+            ],
+            "SubTitle": "So funktioniert die Plattform:",
+            "Text": "Die Plattform für globale Daten von AT-Familien ist eine von Patienten unterstützte und von AT-Familien sowie von Experten betreute weltweite Initiative, die Forschern Gesundheits-, Gen- und andere Arten von Daten über Menschen mit AT zur Verfügung stellt. Mit dieser Plattform haben Forscher einen schnellen, sicheren und effektiven Zugriff auf wichtige Patientendaten aus der ganzen Welt, was hoffentlich zu neuen Entdeckungen führen wird.",
+            "Title": "Die Plattform für globale Daten von AT-Familien"
+        },
+        "Title": "Über diese Initiative"
     },
-    "SecondParagraph": {
-      "TextOne": "Geschwister mit AT haben offenbar mehr ähnliche klinische Eigenschaften als Kinder mit AT, die die gleichen Mutationen haben, jedoch aus verschiedenen Familien stammen. Wissenschaftler gehen daher davon aus, dass die Gene einer Familie ? anders als die Gene, die AT verursachen – ändern können, wie sich AT auf Patienten auswirkt. Zudem ist es möglich, dass sich das Leben in verschiedenen Umgebungen, unterschiedliche Lebensstile sowie eine unterschiedliche Ernährungsweise auf die Gesundheit von Menschen mit AT auswirken können.",
-      "TextSecond": "Wir haben kürzlich mehrere Personen identifiziert, die in ihren AT-Genen typische, krankheitsverursachende Mutationen aufwiesen und kein AT-Protein erzeugten (so wie andere Personen mit AT), und dennoch erstaunlich milde AT-Symptome aufwiesen. Wir sind nun optimistisch, dass wir Veränderungen in anderen Genen finden können, welche die AT-Mutationen bei Patienten mit extrem milden Symptomen korrigieren oder kompensieren können. Wenn das gelänge, könnten Forscher neue Wirkstoffe zur Behandlung aller Menschen mit AT entwickeln. Zunächst müssen jedoch die klinischen und genetischen Daten von möglichst vielen AT-Patienten gesammelt werden.",
-      "TextThird": "In ähnlicher Weise können Forscher durch Vergleichen der Krankengeschichten und Lebensstile verschiedener AT-Patienten mehr darüber erfahren, welche Symptom-Management-Strategien die besseren Ergebnisse für die Gesundheit ermöglichen. Zuerst müssen jedoch Daten von AT-Patienten an einem zentralen Ort erfasst und miteinander kombiniert werden.",
-      "Title": "AT wirkt sich individuell auf die Betroffenen aus"
-    },
-    "ThirdParagraph": {
-      "Steps": [
-        {
-          "Name": "Anmelden auf der Datenplattform",
-          "Text": "Klicken Sie auf \"Mitglied werden\" und erstellen Sie ein Konto mit Ihrem Namen und Ihrer E-Mail-Adresse. Sobald Sie Ihr Konto erstellt haben, können Sie sich selbst (wenn Sie AT haben) oder Ihr(e) Kind(er) mit AT als Teilnehmer auf unserer Datenplattform registrieren, indem Sie ein kurzes Formular ausfüllen."
+    "AboutPage": {
+        "DataAccess": {
+            "Header": "Datenzugriffskommission (Data Access Committee)",
+            "Text": "Zugriff auf die Informationen auf der Plattform für globale Daten von AT-Familien ist nur qualifizierten Prüfärzten gestattet, die von der Datenzugriffskommission (Data Access Committee) eine Zugriffsberechtigung erhalten haben. Diese Kommission besteht aus Vertretern von AT-Betroffenen, die für unser Aufsichtsgremium für Familienmitglieder (Family Oversight Board) rekrutiert worden sind, welche wiederum Experten für unser wissenschaftliches und medizinisches Beratungsgremium (Scientific and Medical Advisory Board) rekrutieren. Damit wird sichergestellt, dass die einzelnen Projekte der Forscher mit den Zielen dieser Initiative übereinstimmen.  Das Aufsichtsgremium für Familienmitglieder (Family Oversight Board) kontrolliert das wissenschaftliche und medizinische Beratungsgremium (Scientific and Medical Advisory Board)"
         },
-        {
-          "Name": "Erteilen des Einverständnisses",
-          "Steps": [
-            "Weitergabe einer Speichelprobe, die uns von allen AT-Patienten zur Genomsequenzierung zugesendet werden kann",
-            "Anforderung der Behandlungsunterlagen des AT-Patienten von dessen Ärzten und ihre Weitergabe an Forscher",
-            "Weitergabe der von Ihnen hochgeladenen Behandlungsunterlagen an Forscher",
-            "Zukünftige Kontaktaufnahme hinsichtlich Folgeforschungsstudien"
-          ],
-          "Text": "Während des Registrierungsprozesses werden Sie gebeten, eine Einverständniserklärung auszufüllen,\ndamit wir die von Ihnen bereitgestellten Daten in anonymisierter Form an Forscher weitergeben dürfen.\nSie können darüber hinaus ebenfalls Folgendem zustimmen:"
+        "Doctors": [
+            {
+                "Hospital": "Emeritierter Professor für medizinische Genetik – University of Cambridge, Cambridge, Großbritannien und Honorary Faculty, Wellcome Trust Sanger Institute, Hinxton, Großbritannien",
+                "Name": "Martin Bobrow",
+                "Rank": "Dr. med."
+            },
+            {
+                "Hospital": "Professor für medizinische Genetik, Sapienza Universität, Rom, Italien",
+                "Name": "Luciana Chessa",
+                "Rank": "Dr. med., PhD"
+            },
+            {
+                "Hospital": "izinischer Direktor der Pädiatrie, Wesley Hospital, Queensland, Australien",
+                "Name": "David Coman",
+                "Rank": "Dr. med."
+            },
+            {
+                "Hospital": "Außerordentlicher Professor für Pädiatrie und Neurologie, Johns Hopkins Children’s Center, Baltimore, MD, USA",
+                "Name": "Thomas Crawford",
+                "Rank": "Dr. med."
+            },
+            {
+                "Hospital": "Direktor, Google Genomics, Mountain View, CA, USA",
+                "Name": "David Glazer",
+                "Rank": ""
+            },
+            {
+                "Hospital": "Pädiatrie und Entwicklungsbiologie, Tokyo Medical and Dental University, Japan",
+                "Name": "Setsuko Hasegawa",
+                "Rank": "Dr. med."
+            },
+            {
+                "Hospital": "Außerordentlicher Professor, The University of Queensland, Queensland, Australien",
+                "Name": "Lutz Krause",
+                "Rank": "PhD"
+            },
+            {
+                "Hospital": "Foundation Professor of Molecular Oncology, University of Queensland, Brisbane, Australien",
+                "Name": "Martin Lavin",
+                "Rank": "PhD"
+            },
+            {
+                "Hospital": "Professor für Pädiatrie, Johns Hopkins Children’s Center, Baltimore, MD, USA",
+                "Name": "Howard Lederman",
+                "Rank": "Dr. med., PhD"
+            },
+            {
+                "Hospital": "Pädiatrische Immuno-Hämatologie, Co-Koordinator des French Reference Center for Primary Immunodeficiencies, Necker Hospital, Paris, Frankreich",
+                "Name": "Nizar Mahlaoui",
+                "Rank": "Dr. med., MSc, MPH"
+            },
+            {
+                "Hospital": "Pädiatrische Neurologin, Sheba Medical Center, Ramat Gan, Israel",
+                "Name": "Andreea Nissenkorn",
+                "Rank": "Dr. med."
+            },
+            {
+                "Hospital": "Chief Data Officer, Broad Institute, Cambridge, MA, USA",
+                "Name": "Anthony Philippakis",
+                "Rank": "Dr. med., PhD"
+            },
+            {
+                "Hospital": "Nationales Zentrum für seltene Krankheiten, Rom, Italien",
+                "Name": "Agata Polizzi",
+                "Rank": "Dr. med., PhD"
+            },
+            {
+                "Hospital": "Professor für Humangenetik, Tel Aviv University, Ramat Aviv, Israel",
+                "Name": "Yosef Shiloh",
+                "Rank": "PhD"
+            },
+            {
+                "Hospital": "Professor für Krebsgenetik, University of Birmingham Medical School, Birmingham, Großbritannien",
+                "Name": "Grant Stewart",
+                "Rank": "PhD"
+            },
+            {
+                "Hospital": "Professor für Genetik, Paris Descartes University, und Leiter der Abteilung Genetik, Institut Curie, Paris, Frankreich",
+                "Name": "Dominique Stoppa-Lyonnet",
+                "Rank": "Dr. med., PhD"
+            },
+            {
+                "Hospital": "Außerordentlicher Professor, Tokyo Medical and Dental University, Tokio, Japan",
+                "Name": "Masatoshi Takagi",
+                "Rank": "Dr. med., PhD"
+            },
+            {
+                "Hospital": "Verantwortliche Direktorin, Public Population Project in Genomics and Society, Montreal, Kanada",
+                "Name": "Anne-Marie Tassé",
+                "Rank": "PhD"
+            },
+            {
+                "Hospital": "Professor für Krebsgenetik, University of Birmingham Medical School, Birmingham, Großbritannien",
+                "Name": "A. Malcolm Taylor",
+                "Rank": "PhD"
+            },
+            {
+                "Hospital": "Klinischer außerordentlicher Professor, University of Nottingham, Nottingham, Großbritannien",
+                "Name": "William Whitehouse",
+                "Rank": "Dr. med."
+            },
+            {
+                "Hospital": "Klinik für Kinder- und Jugendmedizin der Johann Wolfgang Goethe Universität, Frankfurt, Deutschland",
+                "Name": "Stefan Zielen",
+                "Rank": "Dr. med., PhD"
+            }
+        ],
+        "FamilyOversight": {
+            "Header": "Aufsichtsgremium für Familienmitglieder (Family Oversight Board)",
+            "Text": "Das Ziel unserer Plattform ist es, Forschern einen schnellen, sicheren und effektiven Zugriff auf wichtige Patientendaten aus der ganzen Welt zu gewähren, was hoffentlich zu neuen Entdeckungen führen wird. Damit unsere Vision und unsere Aktivitäten immer auf die Interessen der Personen mit AT weltweit ausgerichtet bleiben, haben wir ein internationales Aufsichtsgremium für Familienmitglieder (Family Oversight Board) eingerichtet.  Derzeit haben folgende Familienmitglieder von AT-Patienten (aufgeführt in alphabetischer Reihenfolge) freundlicherweise einer Mitgliedschaft in diesem Gremium zugestimmt:"
         },
-        {
-          "Name": "Angaben über Sie oder Ihr Kind",
-          "Text": "Um an dieser Initiative teilzunehmen, müssen Sie einige Fragen zum Gesundheitszustand der Person mit AT, zu deren behandelnden Ärzten und zur Krankengeschichte und Familienanamnese beantworten. Wir werden Sie regelmäßig dazu einladen, zusätzliche (optionale) Fragebögen zum Gesundheitszustand der Person mit AT auszufüllen (von den Forschern, die Ihre Daten untersuchen, erstelle Umfragen, um ein besseres Verständnis von AT zu erlangen)."
+        "FinancialSupport": {
+            "Header": "Finanzielle Förderung der Plattform für globale Daten von AT-Familien",
+            "Text": {
+                "First": "Die Entwicklung und der Betrieb der Plattform für globale Daten von AT-Familien wird derzeit nur von Ataxia-Telangiectasia Children’s Project, Inc., auch bekannt als A-­T Children’s Project, finanziell unterstützt. Dies ist eine gemeinnützige Organisation aus Coconut Creek, Florida, USA, deren Arbeit darin besteht, biomedizinische Forschungsprojekte, wissenschaftliche Konferenzen und Prüfzentren zu unterstützen und zu koordinieren ? mit dem Ziel, lebensverbessernde Therapien für AT zu entwickeln.",
+                "Second": "Das A-T Children’s Project hat dieses Projekt ins Leben gerufen und hofft, dass AT-Organisationen, Kliniken und Familien auf der ganzen Welt dieses Vorhaben unterstützen, indem sie Familien zur Teilnahme einladen, den Zugriff auf die Seite überwachen und, sofern möglich, finanzielle Unterstützung bieten."
+            }
         },
-        {
-          "Name": "Einsenden des Speichelentnahme-Kits",
-          "Text": "Wenn Sie sich für eine Teilnahme an der Studie zur Genomsequenzierung entscheiden, senden Sie uns in einem von uns bereitgestellten vorfrankierten Paket eine Speichelprobe zu."
+        "Hospitals": [
+            {
+                "Country": "Frankreich",
+                "Name": "Cedric Anchisi "
+            },
+            {
+                "Country": "Israel",
+                "Name": "Orly Dror-Azuriel "
+            },
+            {
+                "Country": "Australien",
+                "Name": "Natalie Elkheir "
+            },
+            {
+                "Country": "Niederlande",
+                "Name": "Rianne Kranendonk "
+            },
+            {
+                "Country": "Brasilien",
+                "Name": "Maria Angelica Lodovici "
+            },
+            {
+                "Country": "USA",
+                "Name": "Brad Margus "
+            },
+            {
+                "Country": "England",
+                "Name": "Emily Read "
+            },
+            {
+                "Country": "Indien",
+                "Name": "Manoj Kumar Srivastwa "
+            },
+            {
+                "Country": "Kanada",
+                "Name": "Conrad Van Hierden "
+            },
+            {
+                "Country": "Spanien",
+                "Name": "Paxti Villen "
+            },
+            {
+                "Country": "England",
+                "Name": "Lian Yarlett "
+            }
+        ],
+        "PageTitle": "Über uns",
+        "PlatformName": "Die Plattform für globale Daten von AT-Familien",
+        "ScientificBoard": {
+            "Header": "Wissenschaftliches und medizinisches Beratungsgremium (Scientific and Medical Advisory Board)",
+            "Text": "Zusätzlich zu der Gewährleistung, dass die Aktivitäten der Plattform die gemeinsame Nutzung der Daten fördern und ermöglichen und gleichzeitig Menschen mit AT geschützt werden, hat das Familienberatungsgremium (Family Advisory Board) namhafte Wissenschaftler und Ärzte eingeladen, die sich in einem wissenschaftlichen und medizinischen Beratungsgremium (Scientific and Medical Advisory Board) engagieren, das dem Familienberatungsgremium (Family Advisory Board) beratend zur Seite steht.  Es besteht die Hoffnung, dass die Mitglieder des Beratungsgremiums nicht nur Experten für die klinische Präsentation und die zugrundeliegende Biologie von Ataxia teleangiectatica, sondern auch Fachleute für die Analyse großer Datensätze, wie zum Beispiel Genomsequenzierungsdaten, Fachleute für Biostatistiken, APIs, Datensicherheit, regulatorische Fragen, medizinische Ethik, rechtliche Belange und Umfragemethoden umfasst.  Derzeit haben folgende Experten (aufgeführt in alphabetischer Reihenfolge) freundlicherweise ihre Zustimmung gegeben, in diesem Beratungsgremium zu wirken:"
         },
-        {
-          "Name": "Wir analysieren die DNA und Gesundheitsinformationen",
-          "Text": "Wir werden die DNA in den aus der Speichelprobe gewonnenen Zellen analysieren. Darüber hinaus sind keine weiteren Verfahren erforderlich. Wir werden die Ergebnisse der Genanalyse mit Ihrem Speichel mit den medizinischen Informationen verknüpfen, die Sie in unseren Online-Fragebögen angeben."
-        },
-        {
-          "Name": "Wir geben die Daten an Forscher weiter",
-          "Text": "Sobald personenbezogene Informationen entfernt worden sind, steht die Datenbank der Gesundheitsinformationen und Gendaten Forschern auf der ganzen Welt über ein sicheres Datenarchiv mit Zugriffskontrolle zur Verfügung. Auf Ihre Daten haben nur qualifizierte Prüfärzte Zugriff, die von einer Datenzugriffskommission, bestehend aus AT-Betroffenen sowie wissenschaftlichen und medizinischen Beratern, eine Zugriffsberechtigung erhalten haben.  Wir protokollieren jede Studie, für die Ihre Informationen verwendet wurden."
-        },
-        {
-          "Name": "Ihr kontinuierliches Feedback kann die Forschung beschleunigen",
-          "Text": "Wir laden Sie regelmäßig dazu ein, Fragebögen zu beantworten, die von den Forschern erstellt wurden, die Ihre Daten untersuchen, um ein besseres Verständnis von AT zu erlangen. Diese Plattform gibt uns die einmalige Gelegenheit, Antworten auf nachträgliche Forschungsfragen schnell und direkt von Familien zu erhalten. Die Möglichkeit, uns erneut an die Teilnehmer zu wenden, kann große Auswirkungen auf die Forschung haben und den Weg zu neuen Entdeckungen verkürzen."
-        },
-        {
-          "Name": "Gemeinsam gelangen wir ans Ziel",
-          "Text": "Diese spezielle Kombination aus Gesundheits- und Gendaten ist möglicherweise der Schlüssel zur Entwicklung neuer Therapien, und dies wäre ohne Ihre Hilfe nicht möglich. Sie werden über den Stand unserer Bemühungen sowie über alle neuen Informationen und Entdeckungen, die wir dank Ihrer Teilnahme machen können, informiert."
+        "Text": {
+            "First": " ist eine von Patienten unterstützte und von AT-Familien sowie von Experten betreute weltweite Initiative, durch die Forschern Gesundheits-, Gen- und andere Daten über Menschen mit AT zur Verfügung gestellt werden.",
+            "Second": "Wir suchen gezielt nach strategischen Partnern für spezifische Aspekte dieser Initiative. Einer davon ist das Broad Institute of MIT und Harvard in Boston, USA, die ihre Kapazitäten zur Genomsequenzierung bereitstellen. Wir arbeiten auch mit den Mitarbeitern des A-T Children’s Project zusammen, die in der Beantwortung von Fragen zu dieser Plattform geschult worden sind und DNA-Testkits an Familien senden, die diese angefordert haben.",
+            "Third": "Wir gehen davon aus, dass die Plattform für globale Daten von AT-Familien zukünftig mit weiteren Organisationen zusammenarbeitet, um weitere biologische und Lebensstildaten zu erfassen, unter anderem über tragbare Technologien, durch die erfasst werden kann, wie sich ein AT-Patient bewegt."
         }
-      ],
-      "SubTitle": "So funktioniert die Plattform:",
-      "Text": "Die Plattform für globale Daten von AT-Familien ist eine von Patienten unterstützte und von AT-Familien sowie von Experten betreute weltweite Initiative, die Forschern Gesundheits-, Gen- und andere Arten von Daten über Menschen mit AT zur Verfügung stellt. Mit dieser Plattform haben Forscher einen schnellen, sicheren und effektiven Zugriff auf wichtige Patientendaten aus der ganzen Welt, was hoffentlich zu neuen Entdeckungen führen wird.",
-      "Title": "Die Plattform für globale Daten von AT-Familien"
     },
-    "Title": "Über diese Initiative"
-  },
-  "AboutPage": {
-    "DataAccess": {
-      "Header": "Datenzugriffskommission (Data Access Committee)",
-      "Text": "Zugriff auf die Informationen auf der Plattform für globale Daten von AT-Familien ist nur qualifizierten Prüfärzten gestattet, die von der Datenzugriffskommission (Data Access Committee) eine Zugriffsberechtigung erhalten haben. Diese Kommission besteht aus Vertretern von AT-Betroffenen, die für unser Aufsichtsgremium für Familienmitglieder (Family Oversight Board) rekrutiert worden sind, welche wiederum Experten für unser wissenschaftliches und medizinisches Beratungsgremium (Scientific and Medical Advisory Board) rekrutieren. Damit wird sichergestellt, dass die einzelnen Projekte der Forscher mit den Zielen dieser Initiative übereinstimmen.  Das Aufsichtsgremium für Familienmitglieder (Family Oversight Board) kontrolliert das wissenschaftliche und medizinische Beratungsgremium (Scientific and Medical Advisory Board)"
+    "AccountActivation": {
+        "AccountActivationRequired": "Bevor Sie fortfahren können, müssen Sie Ihre E-Mail-Adresse bestätigen.",
+        "EmailConfirmed": "Ihre E-Mail-Adresse wurde erfolgreich bestätigt."
     },
-    "Doctors": [
-      {
-        "Hospital": "Emeritierter Professor für medizinische Genetik – University of Cambridge, Cambridge, Großbritannien und Honorary Faculty, Wellcome Trust Sanger Institute, Hinxton, Großbritannien",
-        "Name": "Martin Bobrow",
-        "Rank": "Dr. med."
-      },
-      {
-        "Hospital": "Professor für medizinische Genetik, Sapienza Universität, Rom, Italien",
-        "Name": "Luciana Chessa",
-        "Rank": "Dr. med., PhD"
-      },
-      {
-        "Hospital": "izinischer Direktor der Pädiatrie, Wesley Hospital, Queensland, Australien",
-        "Name": "David Coman",
-        "Rank": "Dr. med."
-      },
-      {
-        "Hospital": "Außerordentlicher Professor für Pädiatrie und Neurologie, Johns Hopkins Children’s Center, Baltimore, MD, USA",
-        "Name": "Thomas Crawford",
-        "Rank": "Dr. med."
-      },
-      {
-        "Hospital": "Direktor, Google Genomics, Mountain View, CA, USA",
-        "Name": "David Glazer",
-        "Rank": ""
-      },
-      {
-        "Hospital": "Pädiatrie und Entwicklungsbiologie, Tokyo Medical and Dental University, Japan",
-        "Name": "Setsuko Hasegawa",
-        "Rank": "Dr. med."
-      },
-      {
-        "Hospital": "Außerordentlicher Professor, The University of Queensland, Queensland, Australien",
-        "Name": "Lutz Krause",
-        "Rank": "PhD"
-      },
-      {
-        "Hospital": "Foundation Professor of Molecular Oncology, University of Queensland, Brisbane, Australien",
-        "Name": "Martin Lavin",
-        "Rank": "PhD"
-      },
-      {
-        "Hospital": "Professor für Pädiatrie, Johns Hopkins Children’s Center, Baltimore, MD, USA",
-        "Name": "Howard Lederman",
-        "Rank": "Dr. med., PhD"
-      },
-      {
-        "Hospital": "Pädiatrische Immuno-Hämatologie, Co-Koordinator des French Reference Center for Primary Immunodeficiencies, Necker Hospital, Paris, Frankreich",
-        "Name": "Nizar Mahlaoui",
-        "Rank": "Dr. med., MSc, MPH"
-      },
-      {
-        "Hospital": "Pädiatrische Neurologin, Sheba Medical Center, Ramat Gan, Israel",
-        "Name": "Andreea Nissenkorn",
-        "Rank": "Dr. med."
-      },
-      {
-        "Hospital": "Chief Data Officer, Broad Institute, Cambridge, MA, USA",
-        "Name": "Anthony Philippakis",
-        "Rank": "Dr. med., PhD"
-      },
-      {
-        "Hospital": "Nationales Zentrum für seltene Krankheiten, Rom, Italien",
-        "Name": "Agata Polizzi",
-        "Rank": "Dr. med., PhD"
-      },
-      {
-        "Hospital": "Professor für Humangenetik, Tel Aviv University, Ramat Aviv, Israel",
-        "Name": "Yosef Shiloh",
-        "Rank": "PhD"
-      },
-      {
-        "Hospital": "Professor für Krebsgenetik, University of Birmingham Medical School, Birmingham, Großbritannien",
-        "Name": "Grant Stewart",
-        "Rank": "PhD"
-      },
-      {
-        "Hospital": "Professor für Genetik, Paris Descartes University, und Leiter der Abteilung Genetik, Institut Curie, Paris, Frankreich",
-        "Name": "Dominique Stoppa-Lyonnet",
-        "Rank": "Dr. med., PhD"
-      },
-      {
-        "Hospital": "Außerordentlicher Professor, Tokyo Medical and Dental University, Tokio, Japan",
-        "Name": "Masatoshi Takagi",
-        "Rank": "Dr. med., PhD"
-      },
-      {
-        "Hospital": "Verantwortliche Direktorin, Public Population Project in Genomics and Society, Montreal, Kanada",
-        "Name": "Anne-Marie Tassé",
-        "Rank": "PhD"
-      },
-      {
-        "Hospital": "Professor für Krebsgenetik, University of Birmingham Medical School, Birmingham, Großbritannien",
-        "Name": "A. Malcolm Taylor",
-        "Rank": "PhD"
-      },
-      {
-        "Hospital": "Klinischer außerordentlicher Professor, University of Nottingham, Nottingham, Großbritannien",
-        "Name": "William Whitehouse",
-        "Rank": "Dr. med."
-      },
-      {
-        "Hospital": "Klinik für Kinder- und Jugendmedizin der Johann Wolfgang Goethe Universität, Frankfurt, Deutschland",
-        "Name": "Stefan Zielen",
-        "Rank": "Dr. med., PhD"
-      }
-    ],
-    "FamilyOversight": {
-      "Header": "Aufsichtsgremium für Familienmitglieder (Family Oversight Board)",
-      "Text": "Das Ziel unserer Plattform ist es, Forschern einen schnellen, sicheren und effektiven Zugriff auf wichtige Patientendaten aus der ganzen Welt zu gewähren, was hoffentlich zu neuen Entdeckungen führen wird. Damit unsere Vision und unsere Aktivitäten immer auf die Interessen der Personen mit AT weltweit ausgerichtet bleiben, haben wir ein internationales Aufsichtsgremium für Familienmitglieder (Family Oversight Board) eingerichtet.  Derzeit haben folgende Familienmitglieder von AT-Patienten (aufgeführt in alphabetischer Reihenfolge) freundlicherweise einer Mitgliedschaft in diesem Gremium zugestimmt:"
-    },
-    "FinancialSupport": {
-      "Header": "Finanzielle Förderung der Plattform für globale Daten von AT-Familien",
-      "Text": {
-        "First": "Die Entwicklung und der Betrieb der Plattform für globale Daten von AT-Familien wird derzeit nur von Ataxia-Telangiectasia Children’s Project, Inc., auch bekannt als A-­T Children’s Project, finanziell unterstützt. Dies ist eine gemeinnützige Organisation aus Coconut Creek, Florida, USA, deren Arbeit darin besteht, biomedizinische Forschungsprojekte, wissenschaftliche Konferenzen und Prüfzentren zu unterstützen und zu koordinieren ? mit dem Ziel, lebensverbessernde Therapien für AT zu entwickeln.",
-        "Second": "Das A-T Children’s Project hat dieses Projekt ins Leben gerufen und hofft, dass AT-Organisationen, Kliniken und Familien auf der ganzen Welt dieses Vorhaben unterstützen, indem sie Familien zur Teilnahme einladen, den Zugriff auf die Seite überwachen und, sofern möglich, finanzielle Unterstützung bieten."
-      }
-    },
-    "Hospitals": [
-      {
-        "Country": "Frankreich",
-        "Name": "Cedric Anchisi "
-      },
-      {
-        "Country": "Israel",
-        "Name": "Orly Dror-Azuriel "
-      },
-      {
-        "Country": "Australien",
-        "Name": "Natalie Elkheir "
-      },
-      {
-        "Country": "Niederlande",
-        "Name": "Rianne Kranendonk "
-      },
-      {
-        "Country": "Brasilien",
-        "Name": "Maria Angelica Lodovici "
-      },
-      {
-        "Country": "USA",
-        "Name": "Brad Margus "
-      },
-      {
-        "Country": "England",
-        "Name": "Emily Read "
-      },
-      {
-        "Country": "Indien",
-        "Name": "Manoj Kumar Srivastwa "
-      },
-      {
-        "Country": "Kanada",
-        "Name": "Conrad Van Hierden "
-      },
-      {
-        "Country": "Spanien",
-        "Name": "Paxti Villen "
-      },
-      {
-        "Country": "England",
-        "Name": "Lian Yarlett "
-      }
-    ],
-    "PageTitle": "Über uns",
-    "PlatformName": "Die Plattform für globale Daten von AT-Familien",
-    "ScientificBoard": {
-      "Header": "Wissenschaftliches und medizinisches Beratungsgremium (Scientific and Medical Advisory Board)",
-      "Text": "Zusätzlich zu der Gewährleistung, dass die Aktivitäten der Plattform die gemeinsame Nutzung der Daten fördern und ermöglichen und gleichzeitig Menschen mit AT geschützt werden, hat das Familienberatungsgremium (Family Advisory Board) namhafte Wissenschaftler und Ärzte eingeladen, die sich in einem wissenschaftlichen und medizinischen Beratungsgremium (Scientific and Medical Advisory Board) engagieren, das dem Familienberatungsgremium (Family Advisory Board) beratend zur Seite steht.  Es besteht die Hoffnung, dass die Mitglieder des Beratungsgremiums nicht nur Experten für die klinische Präsentation und die zugrundeliegende Biologie von Ataxia teleangiectatica, sondern auch Fachleute für die Analyse großer Datensätze, wie zum Beispiel Genomsequenzierungsdaten, Fachleute für Biostatistiken, APIs, Datensicherheit, regulatorische Fragen, medizinische Ethik, rechtliche Belange und Umfragemethoden umfasst.  Derzeit haben folgende Experten (aufgeführt in alphabetischer Reihenfolge) freundlicherweise ihre Zustimmung gegeben, in diesem Beratungsgremium zu wirken:"
-    },
-    "Text": {
-      "First": " ist eine von Patienten unterstützte und von AT-Familien sowie von Experten betreute weltweite Initiative, durch die Forschern Gesundheits-, Gen- und andere Daten über Menschen mit AT zur Verfügung gestellt werden.",
-      "Second": "Wir suchen gezielt nach strategischen Partnern für spezifische Aspekte dieser Initiative. Einer davon ist das Broad Institute of MIT und Harvard in Boston, USA, die ihre Kapazitäten zur Genomsequenzierung bereitstellen. Wir arbeiten auch mit den Mitarbeitern des A-T Children’s Project zusammen, die in der Beantwortung von Fragen zu dieser Plattform geschult worden sind und DNA-Testkits an Familien senden, die diese angefordert haben.",
-      "Third": "Wir gehen davon aus, dass die Plattform für globale Daten von AT-Familien zukünftig mit weiteren Organisationen zusammenarbeitet, um weitere biologische und Lebensstildaten zu erfassen, unter anderem über tragbare Technologien, durch die erfasst werden kann, wie sich ein AT-Patient bewegt."
-    }
-  },
-  "AccountActivation": {
-    "AccountActivationRequired": "Bevor Sie fortfahren können, müssen Sie Ihre E-Mail-Adresse bestätigen.",
-    "EmailConfirmed": "Ihre E-Mail-Adresse wurde erfolgreich bestätigt."
-  },
-  "Common": {
-    "Buttons": {
-      "Submit": {
-        "Title": "Einreichen"
-      },
-      "Expand": {
-        "Title": "Aufklappen"
-      }
-    },
-    "Navigation": {
-      "AboutThisInitiative": "Über diese Initiative",
-      "AboutUs": "Über uns",
-      "DataAccessRequest": "Daten Zugriffsanforderung",
-      "ForResearchers": "Für Forscher",
-      "JoinUs": "Mitglied werden",
-      "Language": "Sprache",
-      "LearnMore": "Mehr erfahren",
-      "MedicalHistoryQuestionnaire": "Krankengeschichte",
-      "FeedingSurvey": "Ernährungsumfrage",
-      "MyAccount": "Mein Konto",
-      "MyDashboard": "Mein Dashboard",
-      "Next": "Weiter",
-      "Previous": "Zurück",
-      "SignIn": "Anmelden",
-      "Statistics": "Plattform-Statistik",
-      "Submit": "Einreichen",
-      "YourParticipants": "Ihre Teilnehmer"
-    }
-  },
-  "Footer": {
-    "Contacts": {
-      "Email": "support@atfamilies.org",
-      "Phone": "+1 954-481-6611"
-    }
-  },
-  "HomePage": {
-    "IntroductionSection": {
-      "Text": {
-        "First": "Wenn Sie oder Ihr Kind an AT erkrankt sind/ist, können Sie Forscher dabei unterstützen, neue Wirkstoffe zu entdecken und die Entwicklung wirksamer Therapien voranzutreiben.",
-        "Second": " Die genetischen Informationen und der medizinische Zustand sind bei jedem Patient einzigartig und können für die Entwicklung neuer Therapien von großer Bedeutung sein. Geben Sie diese Informationen weiter, senden Sie uns eine Speichelprobe zur Genomsequenzierung und helfen Sie uns dadurch dabei, mehr über AT herauszufinden."
-      },
-      "Title": "Unterstützen Sie uns dabei, ein neues Verständnis von Ataxia teleangiectatica (AT) zu erlangen."
-    },
-    "Participate": {
-      "Steps": {
-        "Fourth": {
-          "H3": "4. Gemeinsam lernen",
-          "Text": {
-            "First": "Sie werden über alle neuen Informationen und Entdeckungen, die wir dank Ihrer Teilnahme machen können, informiert.",
-            "Second": " Mit Ihrem Einverständnis werden wir Sie in der Zukunft kontaktieren und Ihnen weitere Fragen zu den Erfahrungen Ihres Kindes stellen und Sie einladen, an zusätzlichen zukünftigen Studien teilzunehmen."
-          }
+    "Common": {
+        "Buttons": {
+            "Submit": {
+                "Title": "Einreichen"
+            },
+            "Expand": {
+                "Title": "Aufklappen"
+            },
+            "Login": {
+                "Title": "Anmelden"
+            }
         },
-        "One": {
-          "H2": "So nehmen Sie teil:",
-          "H3": "1. Ein Konto erstellen",
-          "Text": "Klicken Sie auf \"Mitglied werden\" und füllen Sie ein kurzes Formular aus, um sich oder Ihr Kind mit AT auf unserer Plattform zu registrieren."
-        },
-        "Second": {
-          "H3": "2. Einverständnis erteilen",
-          "Text": "Während des Registrierungsprozesses werden Sie gebeten, eine Einverständniserklärung auszufüllen,\ndamit wir die von Ihnen bereitgestellten Daten in anonymisierter Form an Forscher weitergeben dürfen.\nSie können darüber hinaus ebenfalls Folgendem zustimmen:",
-          "Ul": [
-            "Weitergabe einer Speichelprobe, die uns von allen AT-Patienten zur Genomsequenzierung zugesendet werden kann",
-            "Anforderung der Behandlungsunterlagen des AT-Patienten von dessen Ärzten und ihre Weitergabe an Forscher",
-            "Weitergabe der von Ihnen hochgeladenen Behandlungsunterlagen an Forscher",
-            "Zukünftige Kontaktaufnahme hinsichtlich Folgeforschungsstudien"
-          ]
-        },
-        "Third": {
-          "H3": "3. Mitteilung Ihrer Erfahrungen und Bereitstellen einer Speichelprobe",
-          "Text": "Füllen Sie einen Online-Fragebogen zu den Auswirkungen von AT auf Sie oder Ihr Kind aus. Wir werden Ihnen auch ein Kit zur Speichelentnahme für die Genomsequenzierung zusenden. Darüber hinaus können Sie die Datensätze Ihrer Behandlungsunterlagen oder Krankengeschichte und Ihre auf der Plattform aufgeführten Erfahrungen regelmäßig aktualisieren."
+        "Navigation": {
+            "AboutThisInitiative": "Über diese Initiative",
+            "AboutUs": "Über uns",
+            "DataAccessRequest": "Daten Zugriffsanforderung",
+            "ForResearchers": "Für Forscher",
+            "JoinUs": "Mitglied werden",
+            "Language": "Sprache",
+            "LearnMore": "Mehr erfahren",
+            "MedicalHistoryQuestionnaire": "Krankengeschichte",
+            "FeedingSurvey": "Ernährungsumfrage",
+            "MyAccount": "Mein Konto",
+            "MyDashboard": "Mein Dashboard",
+            "Next": "Weiter",
+            "Previous": "Zurück",
+            "SignIn": "Anmelden",
+            "Statistics": "Plattform-Statistik",
+            "Submit": "Einreichen",
+            "YourParticipants": "Ihre Teilnehmer"
         }
-      },
-      "Together": {
-        "H3": {
-          "First": "Gemeinsam können wir die Gesundheit von Kindern und Jugendlichen mit AT verbessern.",
-          "Second": "Beginnen wir!"
+    },
+    "Footer": {
+        "Contacts": {
+            "Email": "support@atfamilies.org",
+            "Phone": "+1 954-481-6611"
         }
-      }
     },
-    "SecondSection": {
-      "Title": "Bleiben Sie informiert über die neuesten Entdeckungen und Entwicklungen im Bereich AT."
-    }
-  },
-  "JoinUs": {
-    "SignInButton": "Bereits registriert? Hier anmelden"
-  },
-  "SDK": {
-    "DownloadButton": "Überprüfung herunterladen",
-    "CancelButton": "Abbrechen",
-    "CloseButton": "Schließen",
-    "CommunicationError": "Beim Speichern Ihrer Daten ist ein Fehler aufgetreten. Bitte prüfen Sie das Formular und Ihre Antworten vor dem Einreichen",
-    "Dashboard": {
-      "Text": "",
-      "Title": "Mein Gerät"
+    "HomePage": {
+        "IntroductionSection": {
+            "Text": {
+                "First": "Wenn Sie oder Ihr Kind an AT erkrankt sind/ist, können Sie Forscher dabei unterstützen, neue Wirkstoffe zu entdecken und die Entwicklung wirksamer Therapien voranzutreiben.",
+                "Second": " Die genetischen Informationen und der medizinische Zustand sind bei jedem Patient einzigartig und können für die Entwicklung neuer Therapien von großer Bedeutung sein. Geben Sie diese Informationen weiter, senden Sie uns eine Speichelprobe zur Genomsequenzierung und helfen Sie uns dadurch dabei, mehr über AT herauszufinden."
+            },
+            "Title": "Unterstützen Sie uns dabei, ein neues Verständnis von Ataxia teleangiectatica (AT) zu erlangen."
+        },
+        "Participate": {
+            "Steps": {
+                "Fourth": {
+                    "H3": "4. Gemeinsam lernen",
+                    "Text": {
+                        "First": "Sie werden über alle neuen Informationen und Entdeckungen, die wir dank Ihrer Teilnahme machen können, informiert.",
+                        "Second": " Mit Ihrem Einverständnis werden wir Sie in der Zukunft kontaktieren und Ihnen weitere Fragen zu den Erfahrungen Ihres Kindes stellen und Sie einladen, an zusätzlichen zukünftigen Studien teilzunehmen."
+                    }
+                },
+                "One": {
+                    "H2": "So nehmen Sie teil:",
+                    "H3": "1. Ein Konto erstellen",
+                    "Text": "Klicken Sie auf \"Mitglied werden\" und füllen Sie ein kurzes Formular aus, um sich oder Ihr Kind mit AT auf unserer Plattform zu registrieren."
+                },
+                "Second": {
+                    "H3": "2. Einverständnis erteilen",
+                    "Text": "Während des Registrierungsprozesses werden Sie gebeten, eine Einverständniserklärung auszufüllen,\ndamit wir die von Ihnen bereitgestellten Daten in anonymisierter Form an Forscher weitergeben dürfen.\nSie können darüber hinaus ebenfalls Folgendem zustimmen:",
+                    "Ul": [
+                        "Weitergabe einer Speichelprobe, die uns von allen AT-Patienten zur Genomsequenzierung zugesendet werden kann",
+                        "Anforderung der Behandlungsunterlagen des AT-Patienten von dessen Ärzten und ihre Weitergabe an Forscher",
+                        "Weitergabe der von Ihnen hochgeladenen Behandlungsunterlagen an Forscher",
+                        "Zukünftige Kontaktaufnahme hinsichtlich Folgeforschungsstudien"
+                    ]
+                },
+                "Third": {
+                    "H3": "3. Mitteilung Ihrer Erfahrungen und Bereitstellen einer Speichelprobe",
+                    "Text": "Füllen Sie einen Online-Fragebogen zu den Auswirkungen von AT auf Sie oder Ihr Kind aus. Wir werden Ihnen auch ein Kit zur Speichelentnahme für die Genomsequenzierung zusenden. Darüber hinaus können Sie die Datensätze Ihrer Behandlungsunterlagen oder Krankengeschichte und Ihre auf der Plattform aufgeführten Erfahrungen regelmäßig aktualisieren."
+                }
+            },
+            "Together": {
+                "H3": {
+                    "First": "Gemeinsam können wir die Gesundheit von Kindern und Jugendlichen mit AT verbessern.",
+                    "Second": "Beginnen wir!"
+                }
+            }
+        },
+        "SecondSection": {
+            "Title": "Bleiben Sie informiert über die neuesten Entdeckungen und Entwicklungen im Bereich AT."
+        }
     },
-    "DatePicker": {
-      "April": "April",
-      "August": "August",
-      "Day": "Tag wählen ...",
-      "December": "Dezember",
-      "February": "Februar",
-      "January": "Januar",
-      "July": "Juli",
-      "June": "Juni",
-      "March": "März",
-      "May": "Mai",
-      "Month": "Monat wählen ...",
-      "November": "November",
-      "October": "Oktober",
-      "September": "September",
-      "Year": "Jahr wählen ..."
+    "JoinUs": {
+        "SignInButton": "Bereits registriert? Hier anmelden"
     },
-    "DateLabel": {
-      "YYYY": "YYYY",
-      "MM": "MM",
-      "DD": "DD"
-    },
-    "DetailsPlaceholder": {
-      "PluralForm": "Zeichen verbleibend",
-      "SingularForm": "Zeichen verbleibend"
-    },
-    "DoNotAssent": "Stimme nicht zu",
-    "DoNotConsent": "Ich gebe mein Einverständnis nicht",
-    "DownloadPdf": {
-      "Assent": {
-        "Download": "Vollständige Zustimmungserklärung herunterladen"
-      },
-      "Consent": {
-        "Download": "Vollständige Einverständniserklärung herunterladen"
-      }
-    },
-    "JoinUsButton": "Mitglied werden",
-    "ManageParticipants": {
-      "AddParticipant": "Teilnehmer hinzufügen",
-      "ParticipantPlaceholder": "Teilnehmer",
-      "ParticipantsList": "Familienmitglieder mit AT"
-    },
-    "NextButton": "Weiter",
-    "PreviousButton": "Zurück",
-    "RegisterButton": "Registrieren",
-    "SaveAndSubmit": "Speichern und einreichen",
-    "SaveAndSubmitEnrollment": "Speichern und Registrierung einreichen",
-    "SavingButton": "Wird gespeichert",
-    "SignAndAssent": "Unterzeichnen und Zustimmung",
-    "SignAndConsent": "Unterzeichnen und Einverständnis",
-    "StartOrResume": "Starten/Fortsetzen",
-    "SubmitButton": "Einreichen",
-    "SuccessSignIn": "Anmeldung erfolgreich!",
-    "SignInOut": {
-      "SignOut": "Abmelden"
-    },
-    "Title": {
-      "Alert": "Ihre Sitzung läuft in Kürze ab",
-      "Default": "Die Plattform für globale Daten von Familien mit AT-Diagnose"
-    },
-    "TooltipAlt": "Wessen Namen gebe ich ein?",
-    "UserActivities": {
-      "ActivityActions": "Aktionen",
-      "ActivityDate": "Erstellt",
-      "ActivityName": "Formular",
-      "ActivityStatus": "Status",
-      "ActivityStatuses": {
-        "COMPLETE": "Ausgefüllt",
-        "CREATED": "Nicht begonnen",
-        "IN_PROGRESS": "In Arbeit"
-      },
-      "QuestionCount": "{{ answered }} / {{ total }} Beantwortet",
-      "Summary": "Zusammenfassung",
-      "SurveysToComplete": {
-        "Plural": "{{ count }} Umfragen, an denen teilgenommen werden kann",
-        "Singular": "{{ count }} Umfrage, an der teilgenommen werden kann"
-      }
-    },
-    "UserMenu": {
-      "SignOutButton": "Abmelden"
-    },
-    "UserPreferences": {
-      "UserPreferencesGender": "Geschlecht",
-      "UserPreferencesLocale": "Bevorzugte Sprache",
-      "UserPreferencesTitle": "Nutzereinstellungen"
-    },
-    "ValidateError": "Einreichen nicht möglich. Für Einzelheiten prüfen Sie bitte die im Formular angezeigten Meldungen.",
-    "Validators": {
-      "DateNavyValidationRule": "Das eingegebene Datum ist ungültig"
-    }
-  },
-  "Statistics": {
-    "Title": "Die Plattform für Daten von Familien mit AT-Diagnose in Zahlen",
-    "CountList": {
-      "totalParticipantsCount": "Gesamtzahl der Teilnehmer",
-      "countriesCount": "Vertretene Länder",
-      "genomeStudyParticipantsCount": "Personen, die der Teilnahme an einer Genomsequenzierung zustimmen",
-      "governedParticipantsCount": "Von ihren Eltern registrierte Kinder",
-      "selfEnrolledParticipantsCount": "Teilnehmer, die sich selbst registriert haben"
-    },
-    "Subtitle": "Vertretene Länder"
-  },
-  "Survey": {
-    "Self": "{{ firstName }}-Registrierungsprozess",
-    "NewParticipant": "New Participant-Registrierungsprozess",
-    "ThankYouPopup": {
-      "Text": "Vielen Dank für das Einreichen der Umfrage!"
-    }
-  },
-  "Toolkit": {
-    "ActivityActions": {
-      "Continue": "Weiter",
-      "Start": "Starten",
-      "View": "Anzeigen",
-      "Edit": "Bearbeiten"
-    },
-    "Dashboard": {
-      "Actions": "Aktionen",
-      "AddSelf": "Eigene Person hinzufügen",
-      "EnrollmentStatus": "Registrierungsstatus",
-      "NoData": "---",
-      "NoParticipants": "Noch keine Teilnehmer",
-      "Participant": "Teilnehmer",
-      "Text": "Alle Personen, bei denen AT diagnostiziert wurde, können an unserer Forschungsinitiative teilnehmen. Registrieren Sie sich hier und stellen Sie uns Ihre medizinischen und möglicherweise genetischen Informationen zur Verfügung, damit Forscher ein besseres Verständnis von AT erlangen.",
-      "Title": "Vielen Dank für Ihre Teilnahme an der Plattform für globale Daten von AT-Familien!"
-    },
-    "Dialogs": {
-      "JoinMailingList": {
+    "SDK": {
+        "DownloadButton": "Überprüfung herunterladen",
         "CancelButton": "Abbrechen",
-        "Fields": {
-          "ConfirmEmail": {
-            "Error": "Geben Sie bitte eine gültige E-Mail-Adresse ein",
-            "Placeholder": "E-Mail-Bestätigung *"
-          },
-          "Email": {
-            "Error": "Geben Sie bitte eine gültige E-Mail-Adresse ein",
-            "Placeholder": "E-Mail-Adresse"
-          },
-          "FirstName": {
-            "Error": "„Vorname“ ist ein Pflichtfeld",
-            "Placeholder": "Vorname"
-          },
-          "LastName": {
-            "Error": "„Nachname“ ist ein Pflichtfeld",
-            "Placeholder": "Nachname"
-          }
+        "CloseButton": "Schließen",
+        "CommunicationError": "Beim Speichern Ihrer Daten ist ein Fehler aufgetreten. Bitte prüfen Sie das Formular und Ihre Antworten vor dem Einreichen",
+        "Dashboard": {
+            "Text": "",
+            "Title": "Mein Gerät"
         },
-        "LoadingError": "Es tut uns leid, aber es ist ein Fehler aufgetreten.",
-        "MatchEmailsError": "Stellen Sie sicher, dass beide E-Mail-Felder ausgefüllt sind und die Adressen übereinstimmen.",
-        "Required": "",
-        "SubmitButton": "In Liste eintragen",
-        "Text": "Geben Sie bitte unten Ihre E-Mail-Adresse an, damit wir Sie über neue Entwicklungen auf dem Laufenden halten können.\nSie können sich jederzeit wieder abmelden.",
-        "Title": "Bleiben Sie informiert"
-      },
-      "SessionWillExpire": {
-        "Continue": "Weiter",
-        "SignOut": "Abmelden",
-        "Text": "Zum Schutz Ihrer Privatsphäre meldet das System Sie ab, da Sie eine geraume Zeit nicht aktiv gewesen sind. Klicken Sie auf „Fortsetzen“, um weiter angemeldet zu bleiben. Klicken Sie auf „Abmelden“, wenn Sie fertig sind.",
-        "Title": "Ihre Sitzung läuft in Kürze ab"
-      }
+        "DatePicker": {
+            "April": "April",
+            "August": "August",
+            "Day": "Tag wählen ...",
+            "December": "Dezember",
+            "February": "Februar",
+            "January": "Januar",
+            "July": "Juli",
+            "June": "Juni",
+            "March": "März",
+            "May": "Mai",
+            "Month": "Monat wählen ...",
+            "November": "November",
+            "October": "Oktober",
+            "September": "September",
+            "Year": "Jahr wählen ..."
+        },
+        "DateLabel": {
+            "YYYY": "YYYY",
+            "MM": "MM",
+            "DD": "DD"
+        },
+        "DetailsPlaceholder": {
+            "PluralForm": "Zeichen verbleibend",
+            "SingularForm": "Zeichen verbleibend"
+        },
+        "DoNotAssent": "Stimme nicht zu",
+        "DoNotConsent": "Ich gebe mein Einverständnis nicht",
+        "DownloadPdf": {
+            "Assent": {
+                "Download": "Vollständige Zustimmungserklärung herunterladen"
+            },
+            "Consent": {
+                "Download": "Vollständige Einverständniserklärung herunterladen"
+            }
+        },
+        "JoinUsButton": "Mitglied werden",
+        "ManageParticipants": {
+            "AddParticipant": "Teilnehmer hinzufügen",
+            "ParticipantPlaceholder": "Teilnehmer",
+            "ParticipantsList": "Familienmitglieder mit AT"
+        },
+        "NextButton": "Weiter",
+        "PreviousButton": "Zurück",
+        "RegisterButton": "Registrieren",
+        "SaveAndSubmit": "Speichern und einreichen",
+        "SaveAndSubmitEnrollment": "Speichern und Registrierung einreichen",
+        "SavingButton": "Wird gespeichert",
+        "SignAndAssent": "Unterzeichnen und Zustimmung",
+        "SignAndConsent": "Unterzeichnen und Einverständnis",
+        "StartOrResume": "Starten/Fortsetzen",
+        "SubmitButton": "Einreichen",
+        "SuccessSignIn": "Anmeldung erfolgreich!",
+        "SignInOut": {
+            "SignOut": "Abmelden"
+        },
+        "Title": {
+            "Alert": "Ihre Sitzung läuft in Kürze ab",
+            "Default": "Die Plattform für globale Daten von Familien mit AT-Diagnose"
+        },
+        "TooltipAlt": "Wessen Namen gebe ich ein?",
+        "UserActivities": {
+            "ActivityActions": "Aktionen",
+            "ActivityDate": "Erstellt",
+            "ActivityName": "Formular",
+            "ActivityStatus": "Status",
+            "ActivityStatuses": {
+                "COMPLETE": "Ausgefüllt",
+                "CREATED": "Nicht begonnen",
+                "IN_PROGRESS": "In Arbeit"
+            },
+            "QuestionCount": "{{ answered }} / {{ total }} Beantwortet",
+            "Summary": "Zusammenfassung",
+            "SurveysToComplete": {
+                "Plural": "{{ count }} Umfragen, an denen teilgenommen werden kann",
+                "Singular": "{{ count }} Umfrage, an der teilgenommen werden kann"
+            }
+        },
+        "UserMenu": {
+            "SignOutButton": "Abmelden"
+        },
+        "UserPreferences": {
+            "UserPreferencesGender": "Geschlecht",
+            "UserPreferencesTitle": "Nutzereinstellungen"
+        },
+        "ValidateError": "Einreichen nicht möglich. Für Einzelheiten prüfen Sie bitte die im Formular angezeigten Meldungen.",
+        "Validators": {
+            "DateNavyValidationRule": "Das eingegebene Datum ist ungültig"
+        }
     },
-    "ErrorCodes": {
-      "PASSWORD_RESET_LINK_EXPIRED": "Ihr Link zum Zurücksetzen des Kennworts ist abgelaufen."
+    "Statistics": {
+        "Title": "Die Plattform für Daten von Familien mit AT-Diagnose in Zahlen",
+        "CountList": {
+            "totalParticipantsCount": "Gesamtzahl der Teilnehmer",
+            "countriesCount": "Vertretene Länder",
+            "genomeStudyParticipantsCount": "Personen, die der Teilnahme an einer Genomsequenzierung zustimmen",
+            "governedParticipantsCount": "Von ihren Eltern registrierte Kinder",
+            "selfEnrolledParticipantsCount": "Teilnehmer, die sich selbst registriert haben"
+        },
+        "Subtitle": "Vertretene Länder"
     },
-    "ErrorPage": {
-      "DefaultText": {
-        "TextPt1": "Wenden Sie sich an den ",
-        "TextPt2": ", wenn weiterhin Probleme auftreten."
-      },
-      "Text": "",
-      "Title": "Es ist ein Fehler aufgetreten. Versuchen Sie es später erneut."
+    "Survey": {
+        "Self": "{{ firstName }}-Registrierungsprozess",
+        "NewParticipant": "New Participant-Registrierungsprozess",
+        "ThankYouPopup": {
+            "Text": "Vielen Dank für das Einreichen der Umfrage!"
+        }
     },
-    "Password": {
-      "InputPlaceholder": "Kennwort",
-      "PasswordRequiredError": "„Kennwort“ ist ein Pflichtfeld",
-      "PasswordWrongError": "Falsches Kennwort. Versuchen Sie es erneut.",
-      "Text": "Geben Sie bitte Ihr Kennwort ein *",
-      "Title": "Geben Sie bitte das Kennwort ein"
+    "Toolkit": {
+        "ActivityActions": {
+            "Continue": "Weiter",
+            "Start": "Starten",
+            "View": "Anzeigen",
+            "Edit": "Bearbeiten"
+        },
+        "Dashboard": {
+            "Actions": "Aktionen",
+            "AddSelf": "Eigene Person hinzufügen",
+            "EnrollmentStatus": "Registrierungsstatus",
+            "NoData": "---",
+            "NoParticipants": "Noch keine Teilnehmer",
+            "Participant": "Teilnehmer",
+            "Text": "Alle Personen, bei denen AT diagnostiziert wurde, können an unserer Forschungsinitiative teilnehmen. Registrieren Sie sich hier und stellen Sie uns Ihre medizinischen und möglicherweise genetischen Informationen zur Verfügung, damit Forscher ein besseres Verständnis von AT erlangen.",
+            "Title": "Vielen Dank für Ihre Teilnahme an der Plattform für globale Daten von AT-Familien!"
+        },
+        "Dialogs": {
+            "JoinMailingList": {
+                "CancelButton": "Abbrechen",
+                "Fields": {
+                    "ConfirmEmail": {
+                        "Error": "Geben Sie bitte eine gültige E-Mail-Adresse ein",
+                        "Placeholder": "E-Mail-Bestätigung *"
+                    },
+                    "Email": {
+                        "Error": "Geben Sie bitte eine gültige E-Mail-Adresse ein",
+                        "Placeholder": "E-Mail-Adresse"
+                    },
+                    "FirstName": {
+                        "Error": "„Vorname“ ist ein Pflichtfeld",
+                        "Placeholder": "Vorname"
+                    },
+                    "LastName": {
+                        "Error": "„Nachname“ ist ein Pflichtfeld",
+                        "Placeholder": "Nachname"
+                    }
+                },
+                "LoadingError": "Es tut uns leid, aber es ist ein Fehler aufgetreten.",
+                "MatchEmailsError": "Stellen Sie sicher, dass beide E-Mail-Felder ausgefüllt sind und die Adressen übereinstimmen.",
+                "Required": "",
+                "SubmitButton": "In Liste eintragen",
+                "Text": "Geben Sie bitte unten Ihre E-Mail-Adresse an, damit wir Sie über neue Entwicklungen auf dem Laufenden halten können.\nSie können sich jederzeit wieder abmelden.",
+                "Title": "Bleiben Sie informiert"
+            },
+            "SessionWillExpire": {
+                "Continue": "Weiter",
+                "SignOut": "Abmelden",
+                "Text": "Zum Schutz Ihrer Privatsphäre meldet das System Sie ab, da Sie eine geraume Zeit nicht aktiv gewesen sind. Klicken Sie auf „Fortsetzen“, um weiter angemeldet zu bleiben. Klicken Sie auf „Abmelden“, wenn Sie fertig sind.",
+                "Title": "Ihre Sitzung läuft in Kürze ab"
+            }
+        },
+        "ErrorCodes": {
+            "PASSWORD_RESET_LINK_EXPIRED": "Ihr Link zum Zurücksetzen des Kennworts ist abgelaufen."
+        },
+        "ErrorPage": {
+            "DefaultText": {
+                "TextPt1": "Wenden Sie sich an den ",
+                "TextPt2": ", wenn weiterhin Probleme auftreten."
+            },
+            "Text": "",
+            "Title": "Es ist ein Fehler aufgetreten. Versuchen Sie es später erneut."
+        },
+        "Password": {
+            "InputPlaceholder": "Kennwort",
+            "PasswordRequiredError": "„Kennwort“ ist ein Pflichtfeld",
+            "PasswordWrongError": "Falsches Kennwort. Versuchen Sie es erneut.",
+            "Text": "Geben Sie bitte Ihr Kennwort ein *",
+            "Title": "Geben Sie bitte das Kennwort ein"
+        },
+        "SessionExpired": {
+            "Text": "Sie waren eine geraume Zeit nicht aktiv, weshalb wir Sie aus Sicherheitsgründen abgemeldet haben. Melden Sie sich bitte wieder an, um die Seite zu öffnen, an der Sie zuletzt gearbeitet haben."
+        },
+        "StayInformed": {
+            "Text": "Vielen Dank, dass Sie sich in die E-Mail-Liste eingetragen haben. Wir werden Ihnen Neuigkeiten zuschicken und Sie auf dem Laufenden halten. Sie können sich jederzeit wieder abmelden. Bei Fragen zu Ihrem Status im Projekt schreiben Sie bitte eine E-Mail an",
+            "Title": "Bleiben Sie informiert"
+        }
     },
-    "SessionExpired": {
-      "Text": "Sie waren eine geraume Zeit nicht aktiv, weshalb wir Sie aus Sicherheitsgründen abgemeldet haben. Melden Sie sich bitte wieder an, um die Seite zu öffnen, an der Sie zuletzt gearbeitet haben."
+    "WorkflowProgress": {
+        "Consent": "Einverständniserklärung",
+        "ContactingPhysician": "Kontaktaufnahme mit Arzt",
+        "GenomeStudy": "Genomstudie",
+        "MedicalHistory": "Krankengeschichte",
+        "Registration": "Registrierung",
+        "ReviewSubmission": "Überprüfung und Einreichung",
+        "Statuses": {
+            "COMPLETE": "Ausgefüllt",
+            "CREATED": "Nicht begonnen",
+            "IN_PROGRESS": "In Arbeit"
+        }
     },
-    "StayInformed": {
-      "Text": "Vielen Dank, dass Sie sich in die E-Mail-Liste eingetragen haben. Wir werden Ihnen Neuigkeiten zuschicken und Sie auf dem Laufenden halten. Sie können sich jederzeit wieder abmelden. Bei Fragen zu Ihrem Status im Projekt schreiben Sie bitte eine E-Mail an",
-      "Title": "Bleiben Sie informiert"
+    "EnrollmentStatus": {
+        "Prefix": "Registrierungsstatus: ",
+        "ContactUsTooltip": "+1 954.481.6611 or support@atfamilies.org",
+        "Messages": {
+            "Registered": "Registriert",
+            "Consented": "Einverständniserklärung liegt vor",
+            "ConsentedNeedsAssent": "Einverständniserklärung liegt vor, Zustimmung erforderlich",
+            "SubmittedPhysicianInfo": "Informationen für Kontaktaufnahme mit Arzt eingereicht",
+            "SubmittedMedicalHistory": "Behandlungsunterlagen eingereicht",
+            "SubmittedGenomeStudyShippingInfo": "Versandinformationen zur Genomstudie eingereicht",
+            "SubmittedEnrollment": "Registrierung eingereicht/Bestätigung ausstehend",
+            "Enrolled": "Registrierung erfolgt",
+            "ContactUs": "Bitte nehmen Sie mit uns Kontakt auf"
+        }
     }
-  },
-  "WorkflowProgress": {
-    "Consent": "Einverständniserklärung",
-    "ContactingPhysician": "Kontaktaufnahme mit Arzt",
-    "GenomeStudy": "Genomstudie",
-    "MedicalHistory": "Krankengeschichte",
-    "Registration": "Registrierung",
-    "ReviewSubmission": "Überprüfung und Einreichung",
-    "Statuses": {
-      "COMPLETE": "Ausgefüllt",
-      "CREATED": "Nicht begonnen",
-      "IN_PROGRESS": "In Arbeit"
-    }
-  }
 }

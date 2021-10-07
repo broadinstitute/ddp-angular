@@ -1,0 +1,25 @@
+<header class="header" [ngClass]="{'panel-opened': isPanelOpened, 'header_shadow': isPageScrolled}">
+    <div class="header-content">
+        <a class="project-logo" routerLink="/" queryParamsHandling="merge">
+            <img class="project-logo__img"
+                 src="assets/images/logo.svg"
+                 [alt]="'App.Header.Logo.ImageAlt' | translate">
+            <span class="project-logo__text" [innerHTML]="'App.Header.Logo.Title' | translate"></span>
+        </a>
+        <app-navigation class="nav"></app-navigation>
+        <div class="controls">
+            <ddp-language-selector></ddp-language-selector>
+            <app-auth [isColorectalTheme]="isColorectalTheme"></app-auth>
+            <button class="hamburger hamburger--slider" [ngClass]="{'is-active': isPanelOpened}"
+                    [attr.aria-label]="'Common.Buttons.HeaderMenu.AriaLabel' | translate" (click)="openCloseMenu()">
+            <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+            </span>
+            </button>
+        </div>
+    </div>
+    <div class="panel-controls">
+        <app-navigation class="nav"></app-navigation>
+        <app-auth></app-auth>
+    </div>
+</header>

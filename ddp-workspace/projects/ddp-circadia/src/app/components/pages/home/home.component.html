@@ -1,0 +1,148 @@
+<section class="section section--cta">
+  <div class="cta">
+    <h1 class="cta__title">
+      {{ 'HomePage.Cta.Title' | translate }}
+    </h1>
+
+    <p class="cta__description">
+      {{ 'HomePage.Cta.Description' | translate }}
+    </p>
+
+    <div class="cta__btn-container">
+      <a
+        *ngIf="!isAuthenticated"
+        class="button button--yellow"
+        [routerLink]="Route.JoinUs"
+      >
+        {{ 'HomePage.Cta.JoinBtn' | translate }}
+      </a>
+
+      <a
+        *ngIf="isAuthenticated"
+        class="button button--yellow"
+        [routerLink]="Route.Dashboard"
+      >
+        {{ 'HomePage.Cta.DashboardBtn' | translate }}
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="content-container">
+    <h2>
+      {{ 'HomePage.About.Title' | translate }}
+    </h2>
+
+    <p class="paragraph">
+      {{ 'HomePage.About.Paragraph' | translate }}
+    </p>
+  </div>
+</section>
+
+<section class="section section--grey" id="participation">
+  <div class="content-container">
+    <h2>
+      {{ 'HomePage.Participation.Title' | translate }}
+    </h2>
+
+    <p class="paragraph mb-5">
+      {{ 'HomePage.Participation.Description' | translate }}
+    </p>
+
+    <h3>
+      {{ 'HomePage.Participation.Subtitle' | translate }}
+    </h3>
+
+    <p
+      class="paragraph"
+      [innerHTML]="'HomePage.Participation.Duration' | translate"
+    ></p>
+
+    <p
+      class="paragraph"
+      [innerHTML]="'HomePage.Participation.Provided' | translate"
+    ></p>
+
+    <p
+      class="paragraph"
+      [innerHTML]="'HomePage.Participation.Activities' | translate"
+    ></p>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="content-container">
+    <h2 class="text-center mb-2">
+      {{ 'HomePage.FAQ.Title' | translate }}
+    </h2>
+
+    <p
+      class="paragraph mb-3"
+      [innerHTML]="'HomePage.FAQ.Description' | translate"
+    ></p>
+
+    <mat-accordion displayMode="flat" [hideToggle]="true" [multi]="true">
+      <ng-container
+        *ngFor="let Question of 'HomePage.FAQ.Questions' | translate"
+      >
+        <mat-expansion-panel #panel class="mat-elevation-z0">
+          <mat-expansion-panel-header>
+            <mat-icon [class.mat-icon--rotate]="panel.expanded">add</mat-icon
+            >{{ Question.Title }}
+          </mat-expansion-panel-header>
+
+          <div [innerHTML]="Question.Answer"></div>
+        </mat-expansion-panel>
+      </ng-container>
+    </mat-accordion>
+  </div>
+</section>
+
+<section class="section section--grey" id="team">
+  <div class="content-container">
+    <h2>
+      {{ 'HomePage.Team.Title' | translate }}
+    </h2>
+
+    <ng-container *ngFor="let Member of 'HomePage.Team.Members' | translate">
+      <div class="member">
+        <div class="member__img-container">
+          <img
+            class="member__img"
+            [src]="Member.ImageUrl"
+            [alt]="Member.Name + ' image'"
+          />
+        </div>
+
+        <div class="member__info">
+          <p class="member__bio">
+            {{ Member.Bio }}
+          </p>
+        </div>
+      </div>
+    </ng-container>
+
+    <h2>
+      {{ 'HomePage.FormerTeam.Title' | translate }}
+    </h2>
+
+    <ng-container *ngFor="let Member of 'HomePage.FormerTeam.Members' | translate">
+      <div class="member">
+        <div class="member__img-container">
+          <img
+            class="member__img"
+            [src]="Member.ImageUrl"
+            [alt]="Member.Name + ' image'"
+          />
+        </div>
+
+        <div class="member__info">
+          <p class="member__bio">
+            {{ Member.Bio }}
+          </p>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</section>

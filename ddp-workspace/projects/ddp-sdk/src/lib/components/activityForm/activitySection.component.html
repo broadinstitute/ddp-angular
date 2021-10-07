@@ -1,0 +1,79 @@
+<div class="margin-bottom" *ngFor="let block of section.blocks">
+    <ng-container *ngIf="block.displayNumber; then numbered else notNumbered">
+    </ng-container>
+
+    <ng-template #numbered>
+        <ol class="ddp-list">
+            <li class="ddp-li" [value]="block.displayNumber">
+                <ng-container *ngTemplateOutlet="content"></ng-container>
+            </li>
+        </ol>
+    </ng-template>
+
+    <ng-template #notNumbered>
+        <div class="ddp-single-question">
+            <ng-container *ngTemplateOutlet="content"></ng-container>
+        </div>
+    </ng-template>
+
+    <ng-template #content>
+        <div *ngIf="isConditional(block)">
+            <ddp-conditional-block [block]="block"
+                                   [readonly]="readonly"
+                                   [validationRequested]="validationRequested"
+                                   [studyGuid]="studyGuid"
+                                   [activityGuid]="activityGuid">
+            </ddp-conditional-block>
+        </div>
+        <div *ngIf="isQuestion(block)">
+            <ddp-activity-question [block]="block"
+                                   [readonly]="readonly"
+                                   [validationRequested]="validationRequested"
+                                   [studyGuid]="studyGuid"
+                                   [activityGuid]="activityGuid"
+                                   (componentBusy)="componentBusy.emit($event)">
+            </ddp-activity-question>
+        </div>
+        <div *ngIf="isInstitution(block)">
+            <ddp-institutions-form [block]="block"
+                                   [studyGuid]="studyGuid"
+                                   [readonly]="readonly"
+                                   [validationRequested]="validationRequested"
+                                   (validStatusChanged)="updateValidationStatusInSection(idPrefix.block + block.id, $event)"
+                                   (componentBusy)="componentBusy.emit($event)">
+            </ddp-institutions-form>
+        </div>
+        <div *ngIf="isMailAddress(block)">
+            <ddp-address-embedded [block]="block"
+                                  [country]="config.supportedCountry"
+                                  [readonly]="readonly"
+                                  [activityGuid]="activityGuid"
+                                  (validStatusChanged)="updateValidationStatusInSection(idPrefix.block + block.id, $event)"
+                                  [validationRequested]="validationRequested"
+                                  (componentBusy)="componentBusy.emit($event)">
+            </ddp-address-embedded>
+        </div>
+    </ng-template>
+
+    <div *ngIf="isContent(block)">
+        <ddp-activity-content [block]="block"></ddp-activity-content>
+    </div>
+    <div *ngIf="isGroup(block)">
+        <ddp-group-block [block]="block"
+                         [readonly]="readonly"
+                         [validationRequested]="validationRequested"
+                         [studyGuid]="studyGuid"
+                         [activityGuid]="activityGuid">
+        </ddp-group-block>
+    </div>
+    <div *ngIf="isActivityBlock(block)">
+        <ddp-activity-block [block]="block"
+                            [readonly]="readonly"
+                            [validationRequested]="validationRequested"
+                            [studyGuid]="studyGuid"
+                            [parentActivityInstanceGuid]="activityGuid"
+                            (validStatusChanged)="updateValidationStatusInSection(idPrefix.instance + $event.id, $event.value)"
+                            (embeddedComponentBusy)="componentBusy.emit($event)">
+        </ddp-activity-block>
+    </div>
+</div>

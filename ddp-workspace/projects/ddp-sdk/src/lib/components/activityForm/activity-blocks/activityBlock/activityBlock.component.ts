@@ -33,7 +33,8 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     @Input() validationRequested: boolean;
     @Input() studyGuid: string;
     @Input() parentActivityInstanceGuid: string;
-    @Output() embeddedComponentBusy: EventEmitter<boolean> = new EventEmitter<boolean>(true);
+    @Output() validStatusChanged = new EventEmitter<{id: string; value: boolean}>();
+    @Output() embeddedComponentBusy = new EventEmitter<boolean>();
     @ViewChildren(ModalActivityBlockComponent) private modalActivities: QueryList<ModalActivityBlockComponent>;
     isModal: boolean;
     childInstances: ActivityInstance[];
@@ -84,7 +85,9 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     }
 
     private openCreatedInstanceDialog(instanceGuid: string): void {
-        this.modalActivities.find(activity => activity.instance.instanceGuid === instanceGuid)
-            .openEditDialog();
+        const modalActivity = this.modalActivities.find(activity => activity.instance.instanceGuid === instanceGuid);
+        if (modalActivity) {
+            modalActivity.openEditDialog();
+        }
     }
 }

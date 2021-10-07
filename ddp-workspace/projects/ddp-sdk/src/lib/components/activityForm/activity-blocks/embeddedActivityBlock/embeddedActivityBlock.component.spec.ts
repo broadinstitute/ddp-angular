@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 
 import { EmbeddedActivityBlockComponent } from './embeddedActivityBlock.component';
 import { ActivityForm, ActivityServiceAgent, LoggingService, SubmitAnnouncementService } from 'ddp-sdk';
-import { ActivityBlockModalService } from '../../../../services/activity-block-modal.service';
+import { ModalDialogService } from '../../../../services/modal-dialog.service';
 
 describe('EmbeddedActivityBlockComponent', () => {
   let component: EmbeddedActivityBlockComponent;
@@ -13,7 +13,7 @@ describe('EmbeddedActivityBlockComponent', () => {
   let loggingServiceSpy: jasmine.SpyObj<LoggingService>;
   const submitAnnounceService = new SubmitAnnouncementService();
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     activityServiceAgentSpy = jasmine.createSpyObj('ActivityServiceAgent', ['getActivity']);
     activityServiceAgentSpy.getActivity.and.returnValue(of(new ActivityForm()));
     loggingServiceSpy = jasmine.createSpyObj('LoggingService', ['logError']);
@@ -24,7 +24,7 @@ describe('EmbeddedActivityBlockComponent', () => {
         {provide: LoggingService, useValue: loggingServiceSpy},
         {provide: SubmitAnnouncementService, useValue: submitAnnounceService},
         {provide: MatDialog, useValue: {}},
-        ActivityBlockModalService
+        ModalDialogService
       ]
     })
     .compileComponents();

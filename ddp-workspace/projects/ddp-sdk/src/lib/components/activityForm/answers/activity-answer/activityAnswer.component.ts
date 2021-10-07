@@ -3,7 +3,6 @@ import { AbstractActivityQuestionBlock } from '../../../../models/activity/abstr
 import { AnswerValue } from '../../../../models/activity/answerValue';
 import { QuestionType } from '../../../../models/activity/questionType';
 import { BlockType } from '../../../../models/activity/blockType';
-import { BlockVisibility } from '../../../../models/activity/blockVisibility';
 
 @Component({
     selector: 'ddp-activity-answer',
@@ -44,7 +43,8 @@ import { BlockVisibility } from '../../../../models/activity/blockVisibility';
                                            [block]="block"
                                            [readonly]="readonly"
                                            [validationRequested]="validationRequested"
-                                           (valueChanged)="onChange($event)">
+                                           (valueChanged)="onChange($event)"
+                                           (componentBusy)="componentBusy.next($event)">
             </ddp-activity-composite-answer>
             <ddp-activity-agreement-answer *ngIf="isAgreementQuestion(block)"
                                            [block]="block"
@@ -57,7 +57,8 @@ import { BlockVisibility } from '../../../../models/activity/blockVisibility';
                                       [readonly]="readonly"
                                       [studyGuid]="studyGuid"
                                       [activityGuid]="activityGuid"
-                                      (valueChanged)="onChange($event)">
+                                      (valueChanged)="onChange($event)"
+                                      (componentBusy)="componentBusy.next($event)">
             </ddp-activity-file-answer>
             <span *ngIf="block.additionalInfoFooter"
                   [innerHTML]="block.additionalInfoFooter"
@@ -74,7 +75,7 @@ export class ActivityAnswerComponent {
     @Input() studyGuid: string;
     @Input() activityGuid: string;
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
-    @Output() visibilityChanged: EventEmitter<BlockVisibility[]> = new EventEmitter();
+    @Output() componentBusy = new EventEmitter<boolean>();
 
     public onChange(value: AnswerValue): void {
         this.valueChanged.emit(value);

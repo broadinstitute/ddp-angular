@@ -7,23 +7,25 @@
         <nav class="nav">
             <ul *ngIf="headerConfig.showMainButtons" class="navigation">
                 <li class="navigation__item">
-                    <a class="header-link Link_no-wrap" routerLink="/" fragment="about-the-study"
-                        (click)="scrollToAnchor('about-the-study')" translate>
-                        Navigation.About
+                    <a class="header-link Link_no-wrap" routerLink="/" fragment="results-dashboard"
+                       (click)="scrollToAnchor('results-dashboard')" translate>
+                        Navigation.ResultsDashboard
                     </a>
                 </li>
+
                 <li class="navigation__item">
                     <a class="header-link Link_no-wrap" routerLink="/" fragment="q&a" (click)="scrollToAnchor('q&a')"
-                        translate>
+                       translate>
                         Navigation.Q&A
                     </a>
                 </li>
                 <li class="navigation__item">
                     <a class="header-link Link_no-wrap" routerLink="/" fragment="who-we-are"
-                        (click)="scrollToAnchor('who-we-are')" translate>
+                       (click)="scrollToAnchor('who-we-are')" translate>
                         Navigation.WhoWeAre
                     </a>
                 </li>
+
             </ul>
         </nav>
         <div class="static-menu">

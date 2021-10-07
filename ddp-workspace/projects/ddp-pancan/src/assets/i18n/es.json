@@ -1,0 +1,786 @@
+{
+    "Common": {
+        "Buttons": {
+            "Login": {
+                "Title": "Iniciar Sesión",
+                "AriaLabel": "Botón Iniciar sesión"
+            },
+            "Submit": {
+                "Title": "Enviar",
+                "AriaLabel": "Botón Enviar"
+            },
+            "HeaderMenu": {
+                "AriaLabel": "Abrir menú del encabezado"
+            }
+        },
+        "Alts": {
+            "Twitter": "Twitter logo",
+            "Facebook": "Facebook logo",
+            "Instagram": "Instagram logo",
+            "JoinCMI": "Join Count Me In logo"
+        }
+    },
+    "App": {
+        "HomePage": {
+            "JoinCountMeInButton": "Únase a Count Me In",
+            "LearnMoreSection": {
+                "Title": "Actuemos juntos para dejar huella en el futuro de la investigación del cáncer.",
+                "Text": "Count Me In es una iniciativa de investigación sin fines de lucro que involucra a los pacientes y les permite hacer avances en la investigación del cáncer al compartir sus muestras, su información clínica y sus puntos de vista.",
+                "LearnMoreAboutUsButton": "Más información sobre nosotros"
+            },
+            "IntroductionSection": {
+                "Title": "La experiencia de cada paciente con cáncer debe tenerse en cuenta.",
+                "Text": "Las historias clínicas, las muestras de tumores y las experiencias personales de los pacientes contienen pistas (sobre qué tipos de cáncer responderán o serán resistentes a qué tratamientos) que no suelen encontrarse en los laboratorios de investigación o ensayos clínicos. <br/><span class=\"Italic\">Count Me In</span> permite que los pacientes con cáncer, sin importar donde vivan, compartan su información con investigadores de todas partes, para ayudar a descubrir patrones en los datos.",
+                "ImageAlt": "Pan Can project Patients"
+            },
+            "JoinSection": {
+                "Title": "¿Quiénes pueden unirse?",
+                "Text1": "Todas las personas que alguna vez hayan recibido un diagnóstico de cáncer pueden participar si viven en Estados Unidos o Canadá.",
+                "Text2": "Las personas de cualquier edad, sexo, raza, origen étnico y capacidad son bienvenidas.",
+                "ImageAlt": "Participante"
+            },
+            "ParticipateSection": {
+                "Title": "Cómo participar",
+                "Steps": [
+                    {
+                        "Title": "PASO 1",
+                        "Time": "de 10 a 15 minutos",
+                        "Description": "Dé su consentimiento e indique dónde ha recibido tratamiento",
+                        "ImageAlt": "Pantalla de computadora que muestra un formulario de consentimiento en línea"
+                    },
+                    {
+                        "Title": "PASO 2",
+                        "Time": "5 minutos",
+                        "Description": "Responda preguntas sobre su cáncer",
+                        "ImageAlt": "Pantalla de computadora que muestra una encuesta en línea"
+                    },
+                    {
+                        "Title": "PASO 3",
+                        "Time": "10 minutos",
+                        "Description": "Proporcione muestras (le enviaremos un kit)",
+                        "ImageAlt": "Kit de obtención de muestras"
+                    },
+                    {
+                        "Title": "PASO 4",
+                        "Time": "Estudio en curso",
+                        "Description": "Aprenda junto con nosotros",
+                        "ImageAlt": "Burbujas de diálogo que comparten corazones y visualizaciones de datos"
+                    }
+                ],
+                "LearnMoreAboutParticipationButton": "Más información sobre la participación"
+            },
+            "StayInformedSection": {
+                "Title": "Manténgase informado",
+                "Text": "Suscríbase a nuestra lista de correo o síganos en las redes sociales",
+                "JoinMailingListButton": "Lista de Correo"
+            },
+            "CountMeInSection": {
+                "Title": "Únase al movimiento Count Me In y comparta su experiencia",
+                "Text": "Con su ayuda, los pacientes pueden ser la fuerza impulsora detrás de una investigación del cáncer transformadora.",
+                "ImageAlt": "Manos levantadas para ser voluntarios"
+            }
+        },
+        "ParticipationPage": {
+            "Title": "Cómo participar",
+            "Steps": [
+                {
+                    "Step": "PASO 1",
+                    "Time": "de 10 a 15 minutos",
+                    "Title": "Dé su consentimiento para el estudio",
+                    "Text": "Esta sección consiste de varias páginas, así que tómese el tiempo que desee. Su progreso se guardará automáticamente para que pueda regresar más tarde. Si se inscribe por su hijo(a) o junto con su hijo(a), dependiendo de la edad del niño(a) también podríamos pedirle que dé su “asentimiento” o que acepte que también desea participar en el estudio.",
+                    "Button": "Ver el documento de consentimiento",
+                    "ImageAlt": "Pantalla de computadora que muestra un formulario de consentimiento en línea"
+                },
+                {
+                    "Step": "PASO 2",
+                    "Time": "5 minutos",
+                    "Title": "Indique dónde ha recibido tratamiento",
+                    "Text": "Indique dónde ha recibido tratamiento para su cáncer. Les preguntamos a los pacientes dónde han recibido tratamiento para poder solicitar sus registros médicos y, si corresponde, el tejido almacenado de su tumor.",
+                    "Button": "Ver el formulario de divulgación de información médica",
+                    "ImageAlt": "Pantalla de computadora que muestra un centro médico"
+                },
+                {
+                    "Step": "PASO 3",
+                    "Time": "5 minutos",
+                    "Title": "Responda encuestas acerca de usted y su experiencia con el cáncer",
+                    "Text": "En estas encuestas hacemos preguntas sobre su experiencia con el cáncer, como el tipo de cáncer que le diagnosticaron, cuándo se lo diagnosticaron y los tipos de tratamientos que recibió.",
+                    "Button": "Ver encuestas",
+                    "ImageAlt": "Pantalla de computadora que muestra una encuesta en línea"
+                },
+                {
+                    "Step": "PASO 4",
+                    "Time": "10 minutos",
+                    "Title": "Proporcione una muestra de saliva y/o de sangre",
+                    "Text": "Le enviaremos un kit para obtener una muestra de su saliva y/o su sangre. Estudiaremos estas muestras para ayudar a mejorar nuestros conocimientos sobre el cáncer.",
+                    "Button": "Ver las instrucciones para el kit",
+                    "ImageAlt": "Kit de obtención de muestras"
+                },
+                {
+                    "Step": "PASO 5",
+                    "Title": "Manténgase involucrado",
+                    "Text": "Con el tiempo, le brindaremos actualizaciones periódicas sobre el estado de la investigación y compartiremos los descubrimientos que nos haya permitido realizar. Asimismo, podríamos hacerle preguntas adicionales sobre su experiencia para ayudarnos con futuros estudios- queremos saber qué es importante para usted.",
+                    "ImageAlt": "Burbujas de diálogo que comparten corazones y visualizaciones de datos"
+                }
+            ]
+        },
+        "ScientificResearchPage": {
+            "Title": "Investigación científica",
+            "Sections": [
+                {
+                    "Title": "Objetivos",
+                    "Paragraphs": [
+                        "Count Me In es un estudio de investigación del cáncer en colaboración con los pacientes que está disponible para todas las personas de Estados Unidos o Canadá que alguna vez hayan recibido un diagnóstico de cáncer. El objetivo de Count Me In es transformar la atención del cáncer al permitir que todos los pacientes con esta enfermedad agilicen la investigación biomédica al compartir sus muestras de cáncer, información clínica y experiencias. Esta colaboración da lugar a conjuntos de datos sobre el cáncer que contienen información clínica, genómica, molecular e información reportada por el paciente sin incluir datos personales. Con el fin de acelerar los descubrimientos, los datos de Count Me In se comparten periódicamente con la comunidad de investigación biomédica a través de repositorios científicos como cBioPortal for Cancer Genomics y el Genomic Data Commons del Instituto Nacional del Cáncer.",
+                        "Todas las personas que se inscriban en Count Me In podrán brindar muestras de saliva, además de información reportada por el paciente, a través de una serie de encuestas sobre temas tales como su historia clínica, sus experiencias con el cáncer y sus antecedentes familiares de cáncer. Existe un enorme valor científico en estudiar este gran grupo de pacientes que representan muchos diferentes tipos de cáncer, instituciones de tratamiento y edades u otros datos demográficos. Cuanto más representen los participantes de la investigación la verdadera diversidad total de los pacientes de cáncer y sus experiencias, mayor será el impacto que los descubrimientos científicos pueden tener para todos.",
+                        "Se obtendrán muestras biológicas adicionales, como muestras de tumores, muestras de sangre y muestras de heces, de determinadas cohortes de pacientes y se utilizarán para generar datos genómicos y moleculares para sus análisis. Estos datos resultantes se vincularán con la información genómica de las muestras de sangre, la información clínica de las historias clínicas y la información provista por los pacientes en las encuestas, y se compartirán con la comunidad de investigación biomédica. Al integrar todos estos aspectos diferentes e importantes del cáncer, los conjuntos de datos obtenidos mediante Count Me In acelerarán los descubrimientos de la investigación en muchos sectores distintos."
+                    ]
+                },
+                {
+                    "Title": "Proyectos actuales",
+                    "Paragraphs": [
+                        "Esta estrategia propuesta por Count Me In permite crear y estudiar a profundidad cohortes de pacientes no solo dentro de un mismo tipo de cáncer, sino que también abarquen datos de distintos tipos de cáncer, como todos los pacientes que reciben un tratamiento determinado, como inmunoterapia, o los pacientes dentro de un grupo de edad específicos, como adolescentes y adultos jóvenes. Count Me In ha desarrollado y continuará desarrollando iniciativas de investigación en torno a diferentes poblaciones y cohortes de pacientes. A medida que se unan más personas, habrá más oportunidades de dar comienzo a estudios más profundos dentro de más cohortes de pacientes."
+                    ],
+                    "Links": [
+                        { "key": "Angio", "label": "Angiosarcoma Project" },
+                        { "key": "Brain", "label": "Brain Tumor Project" },
+                        { "key": "CRC", "label": "Colorectal Cancer Project" },
+                        { "key": "ESC", "label": "Esophageal and Stomach Cancer Project" },
+                        { "key": "LMS", "label": "Leiomyosarcoma Project" },
+                        { "key": "MBC", "label": "Metastatic Breast Cancer Project" },
+                        { "key": "MBCSpanish", "label": "Proyecto de Cáncer de Mama Metastásico en Español" },
+                        { "key": "MPC", "label": "Metastatic Prostate Cancer Project" },
+                        { "key": "Osteo", "label": "Osteosarcoma Project" }
+                    ]
+                },
+                {
+                    "Title": "Impacto",
+                    "Paragraphs": [
+                        "Hasta la fecha, se han registrado más de 8,500 pacientes de Estados Unidos y Canadá para participar en proyectos de investigación de Count Me In, que abarcan varios tipos de cáncer. El equipo de Count Me In desea agradecer a cada uno de los pacientes que ha participado.",
+                        "Gracias a esta colaboración profunda se han generado grandes volúmenes de datos que han dado como resultado a más de diez publicaciones de datos en repositorios científicos de todos los proyectos actuales de Count Me In.",
+                        "Científicos de todas partes del mundo han usado datos de Count Me In para realizar descubrimientos en muchos sectores diversos y para desarrollar nuevos ensayos clínicos, como en el caso del angiosarcoma. Hemos recibido comunicaciones directas de más de 60 científicos que trabajan en entornos académicos e industriales en más de 10 países y están utilizando datos de Count Me In para propulsar su investigación.",
+                        "Los resultados de los estudios en que se utilizan datos de Count Me In se están difundiendo ampliamente en publicaciones científicas y existen más de 50 citas de los conjuntos de datos de Count Me In hasta el momento."
+                    ],
+                    "Examples": {
+                        "Title": "Los siguientes son algunos ejemplos de publicaciones que usan datos de proyectos de Count Me In:",
+                        "Links": [
+                            {
+                                "Title": "Proline rich 11 (PRR11) overexpression amplifies PI3K signaling and promotes antiestrogen resistance in breast cancer (La sobreexpresión de la proteína 11 rica en prolina [PRR11] amplifica la señalización de la PI3K y promueve la resistencia antiestrógenos en el cáncer de mama).",
+                                "Source": "<i>Nature Communications.</i> 30 de octubre de 2020;11(1):5488.",
+                                "Link": "https://www.nature.com/articles/s41467-020-19291-x"
+                            },
+                            {
+                                "Title": "Prevalence and mutational determinants of high tumor mutation burden in breast cancer (La prevalencia y los determinantes mutacionales de la carga mutacional tumoral elevada en el cáncer de mama).",
+                                "Source": "<i>Annals of Oncology</i>. Marzo de 2020;31(3):387-394.<br/>BioRxiv 745265 [preimpresión; agosto de 2019].",
+                                "Link": "https://www.annalsofoncology.org/article/S0923-7534(19)40698-4/fulltext"
+                            },
+                            {
+                                "Title": "The Angiosarcoma Project: enabling genomic and clinical discoveries in a rare cancer through patient-partnered research (El proyecto sobre angiosarcoma: propiciar descubrimientos genómicos y clínicos en un tipo de cáncer poco frecuente mediante investigaciones en asociación con pacientes).",
+                                "Source": "<i>Nature Medicine</i>. Febrero de 2020;26(2):181-187.<br/>BioRxiv 741744 [preimpresión; agosto de 2019].",
+                                "Link": "https://www.nature.com/articles/s41591-019-0749-z.epdf?author_access_token=cBBx7BAXQ6Z3D-FtgKtMatRgN0jAjWel9jnR3ZoTv0OuyqpOiBwU8Z8ASb5NY9IbXk1V1KF_R5v6TTbcRFo-JeMJ0-VLX-DiOKjqfH1Idg9OXZftog_CeSSuTvzZX78hU5-xKsQ6XRMok9B76DOedQ%3D%3D"
+                            }
+                        ]
+                    },
+                    "FinalText": "El impacto colectivo de Count Me In y los pacientes participantes seguirá creciendo a medida que continúe el trabajo de Count Me In. Todos los días, hay más pacientes que se unen y que se registran para participar, proyectos adicionales que se lanzarán, conjuntos de datos ampliados que se generarán y compartirán, y más descubrimientos que se harán para mejorar la vida de los pacientes con cáncer."
+                }
+            ]
+        },
+        "AboutUs": {
+            "Title": "Sobre Nosotros",
+            "Sections": [
+                {
+                    "Title": "Misión",
+                    "Paragraphs": [
+                        "Count Me In tiene un fuerte compromiso con valorar las experiencias de todos los pacientes para comprender más profundamente el cáncer.",
+                        "Los pacientes ayudan a dar forma e impulsan a la investigación al aportar información sobre el cáncer y sus experiencias a través de encuestas y al dar acceso directo a sus registros médicos y muestras biológicas para poder estudiarlas y analizarlas. El equipo de Count Me In comparte datos anonimizados libremente para impulsar descubrimientos sobre el cáncer a partir de los aportes de los participantes. Los datos generados por Count Me In se comparten periódicamente en plataformas científicas para que los investigadores de todas partes puedan usarlos con el fin de realizar descubrimientos significativos.",
+                        "Todas las personas viviendo con cáncer, incluyendo a aquellos de comunidades marginalizadas que han sido históricamente excluidas de la investigación, independientemente de donde vivan, pueden contribuir a los avances y aumentar el paso de la investigación biomédica."
+                    ]
+                },
+                {
+                    "Title": "Historia e hitos",
+                    "Paragraphs": [
+                        "Count Me In (CMI) se originó de conversaciones entre Emerson Collective y Broad Institute of MIT y Harvard en 2013. Desde el lanzamiento del primer proyecto de cáncer de mama metastásico a fines de 2015, miles de personas con cáncer de todo Estados Unidos y Canadá se han inscrito en “Count Me In” para asociarse con los investigadores y compartir sus experiencias.",
+                        "El proyecto de cáncer de mama metastásico (Metastatic Breast Cancer, MBC) fue la primera iteración de esta visión, seguido por el proyecto sobre angiosarcoma (Angiosarcoma, ASC) en 2017 y el proyecto de cáncer de próstata metastásico (Metastatic Prostate Cancer, MPC) en 2018. Desde entonces, CMI también ha lanzado el proyecto sobre cáncer de esófago y estómago (Esophageal and Stomach Cancer Project), el proyecto de tumor cerebral (Brain Tumor, BT), y el proyecto de osteosarcoma (Osteosarcoma, OS). En otoño de 2021, se abrió la inscripción en Count Me In a todos los pacientes de Estados Unidos o Canadá que alguna vez hayan sido diagnosticados con cáncer.",
+                        "En 2018, Count Me In fue establecida como una organización sin fines de lucros, comprometida a avanzar la colaboración entre pacientes y la investigación. Count Me In cuenta con el patrocinio de <a target='_blank' href='https://www.emersoncollective.com/'>Emerson Collective</a>, una organización orientada al cambio social basada en California; <a target='_blank' href='https://www.broadinstitute.org/'>Broad Institute</a>, una institución de investigación biomédica líder sin fines de lucro; y <a target='_blank' href='https://www.dana-farber.org/'>Dana Farber Cancer Institute</a>, un hospital oncológico líder.",
+                        "En agosto del 2021 abrimos nuestras puertas a todos en los Estados Unidos y Canadá quienes han sido diagnosticados con cáncer y continuaremos aprendiendo de cada paciente que se ha unido."
+                    ]
+                },
+                {
+                    "Title": "Personal",
+                    "PeopleList": [
+                        {
+                            "Title": "Liderazgo",
+                            "List": [
+                                "<b>Nikhil Wagle</b><br/> Director",
+                                "<b>Corrie Painter</b><br/> Directora Adjunta",
+                                "<b>Elana Anastasio</b><br/> Directora Asociada",
+                                "<b>Roeshana Moore-Evans</b><br/> Asesora Superior"
+                            ]
+                        },
+                        {
+                            "Title": "Junta Directiva",
+                            "List": [
+                                "<b>Todd Golub</b>, Copresidente<br/>Director, Broad Institute <br>Profesor de Pediatría, Escuela de Medicina Harvard Investigador de Charles A. Dana, Dana-Farber Cancer Institute ",
+                                "<b>Reed Jobs</b>, Copresidente<br/>Director General, Salud, Emerson Collective",
+                                "<b>Andrew Forrest</b><br/>Fundador y Presidente - Fortescue Metals Group, Fortescue Future Industries, Tattarang Group, y Minderoo Foundation",
+                                "<b>Cindy Citrone</b><br/> Fundadora y Directora Ejecutiva, Citrone 33",
+                                "<b>Greg Simon</b><br/>Presidente, Simonovation, LLC Previo Director Ejecutivo del Grupo Operativo del Cancer Moonshot de la Casa Blanca",
+                                "<b>Jesse Souweine</b><br/>Directora de Operaciones, Vicepresidenta Ejecutiva, Broad Institute"                                ,
+                                "<b>Laurie Glimcher</b><br/>Presidenta y Directora Ejecutiva, Directora de Dana-Farber Cancer Institute, Profesora de Medicina Dana-Farber/Harvard Cancer Center Richard y Susan Smith, Escuela de Medicina Harvard",
+                                "<b>Matt Bettonville</b><br/>Director, Venture Investing, Salud, Emerson Collective",
+                                "<b>Nikhil Wagle</b><br/>Director, Count Me In<br>Profesor Asistente de Medicina, Escuela de Medicina Harvard / Dana-Farber Cancer Institute<br>Miembro del Instituto, Broad Institute"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "FAQ": {
+            "Title": "Preguntas Frecuentes",
+            "Button": {
+                "Expand": "Expandir todo",
+                "Collapse": "Contraer todo",
+                "MoreFAQs": "Más preguntas frecuentes"
+            },
+            "Questions": [
+                {
+                    "Question": "¿Qué es Count Me In?",
+                    "Paragraphs": [
+                        "Count Me In es una iniciativa de investigación sin fines de lucro que permite a los pacientes hacer avances en la investigación del cáncer al compartir sus muestras, su información clínica y sus voces. Con el consentimiento de los pacientes, todos los datos recabados por Count Me In y generados por medio del proyecto se comparten periódicamente con la comunidad de investigación (después de remover la información de identificación personal) a través de bases de datos de información científica disponibles gratuitamente, de modo que los investigadores de cualquier parte puedan ayudar a agilizar los descubrimientos, ampliar nuestros conocimientos sobre el cáncer y desarrollar nuevas estrategias de tratamiento y, así, derribar las divisiones que existen en la investigación del cáncer."
+                    ]
+                },
+                {
+                    "Question": "¿Por qué es necesario?",
+                    "Paragraphs": [
+                        "Los pacientes tienen el poder de avanzar la investigación del cáncer de una forma única. Los registros médicos, las muestras de tumores y las experiencias personales de los pacientes contienen pistas (sobre qué tipos de cáncer responderán o serán resistentes a qué tratamientos) que no suelen encontrarse en los laboratorios de investigación o ensayos clínicos.<br/>La mayoría de los pacientes nunca han tenido la oportunidad de participar en estudios de investigación, porque casi todos los pacientes de cáncer reciben atención en clínicas comunitarias donde no se llevan a cabo estos estudios de investigación. A la mayoría de los pacientes nunca les han preguntado si les gustaría compartir sus muestras de tejidos e información médica con fines de investigación.<br/>Para responder muchas preguntas importantes sobre el cáncer se necesitarán la participación y el empoderamiento de muchos más pacientes como aliados, además de ofrecer a todas las personas que tienen cáncer la oportunidad de participar en investigaciones revolucionarias, independientemente de que vivan cerca de un hospital de investigación o no. La meta de Count Me In es hacer que esto sea posible."
+                    ]
+                },
+                {
+                    "Question": "¿Cómo puedo participar?",
+                    "Paragraphs": [
+                        "Si a usted o a su hijo(a) alguna vez le han diagnosticado cáncer, y vive en Estados Unidos o en territorios estadounidenses, incluido Puerto Rico, o si vive en Canadá, puede inscribirse haciendo clic en “Count Me In”. <a class='Link' href='/participation'>Haga clic aquí</a> para obtener más información sobre la participación.",
+                        "Si usted es un investigador del cáncer, puede tener acceso a los datos generados a través de los proyectos de Count Me In por medio de bases de datos actuales disponibles al público, como el cBioPortal for Cancer Genomics y el Genomic Data Commons del Instituto Nacional del Cáncer. Asimismo, puede inscribirse en nuestra lista de correo para recibir actualizaciones sobre nuevas publicaciones y lanzamientos de datos."
+                    ]
+                },
+                {
+                    "Question": "¿Qué hace Count Me In con los datos?",
+                    "Paragraphs": [
+                        "Después de remover toda la información personal que pueda identificar con facilidad a las personas, los datos se comparten libremente con el objetivo de agilizar los descubrimientos, al permitir que los investigadores identifiquen patrones en los datos. Los lotes de datos se harán disponibles al público de forma periódica y están disponibles para todos los investigadores, de manera que todos pueden utilizarlos para hacer descubrimientos y avances contra el cáncer, que incluyen nuevos medicamentos y métodos de diagnóstico.",
+                        "Enlaces rápidos a datos publicados: <br/><a class='Link' href='https://www.mbcproject.org/data-release'>https://www.mbcproject.org/data-release</a><br/><a class='Link' href='https://ascproject.org/data-release'>https://ascproject.org/data-release</a>"
+                    ]
+                },
+                {
+                    "Question": "¿Cómo han participado los pacientes en Count Me In?",
+                    "Paragraphs": [
+                        "Count Me In ha trabajado estrechamente con pacientes, padres, seres queridos y grupos aliados de pacientes en diversas comunidades relacionadas con el cáncer desde los inicios del primer proyecto, el Proyecto de cáncer de mama metastásico (Metastatic Breast Cancer Project), que se lanzó en 2015. Los pacientes participaron en todos los aspectos del diseño, incluidos el concepto, los objetivos, las comunicaciones, los formularios y el sitio web."
+                    ]
+                },
+                {
+                    "Question": "¿Cómo aborda Count Me In la inclusividad en la participación?",
+                    "Paragraphs": [
+                        "Count Me In entiende que existen muchas barreras (estructurales e históricas) que impiden la participación directa de comunidades subrepresentadas y marginadas en la investigación. Count Me In tiene un compromiso con el principio fundamental de que la experiencia de todos los pacientes con cáncer es importante, independientemente de dónde vivan, qué idioma hablen o cuál sea su patrimonio cultural, y la incorporación de su experiencia es imperativa para ampliar nuestros conocimientos sobre el cáncer.",
+                        "La investigación tradicional del cáncer no se presta a ser tan inclusiva como debería. Las desigualdades en torno al cáncer son prueba de todo el trabajo que todavía queda por hacer en este espacio, y reconocemos que nunca llegaremos a la culminación de esa labor, pero continuamos esforzándonos por lograrlo, junto con pacientes. Creemos que los pacientes deben ser aliados directos en la investigación del cáncer y sabemos que solo podemos avanzar nuestros conocimientos sobre el cáncer y acelerar los descubrimientos si lo hacemos juntos."
+                    ]
+                },
+                {
+                    "Question": "¿Cómo puedo recibir actualizaciones sobre Count Me In?",
+                    "Text1": "Por favor",
+                    "Button": "suscríbase a nuestra lista de correo",
+                    "Text2": "para recibir actualizaciones"
+                },
+                {
+                    "Question": "¿Recibiré algún pago por participar en este estudio de investigación?",
+                    "Paragraphs": [
+                        "No le pagarán por participar en este estudio."
+                    ]
+                },
+                {
+                    "Question": "¿Hay algún costo por participar en este estudio de investigación?",
+                    "Paragraphs": [
+                        "No hay costo por participar en este estudio."
+                    ]
+                },
+                {
+                    "Question": "¿Es este un ensayo clínico?",
+                    "Paragraphs": [
+                        "Count Me In no es un ensayo clínico. Participar no conlleva ningún impacto en la atención médica y Count Me In no tiene permiso para proporcionar asesoramiento clínico alguno como parte de la participación en este proyecto."
+                    ]
+                },
+                {
+                    "Question": "¿Puedo dejar de participar en Count Me In?",
+                    "Paragraphs": [
+                        "Puede dejar de participar en Count Me In en cualquier momento. Sin embargo, no podrá retirar la información que ya se haya usado en la investigación. Para revocar su permiso, envíe un correo electrónico al equipo del estudio a info@joincountmein.org.",
+                        "Si se retira, las muestras de tejidos que no se usaron se devolverán a los centros de donde se obtuvieron y las muestras de saliva y/o sangre restantes se destruirán. No se realizará ninguna otra prueba con las muestras. Tampoco solicitaremos registros médicos adicionales y destruiremos las copias que tengamos en nuestro poder. Sin embargo, conservaremos los resultados de las pruebas que hayamos realizado y la información que hayamos obtenido de sus registros médicos durante su participación."
+                    ]
+                },
+                {
+                    "Question": "Si decido compartir muestras de tejidos, ¿se usarán en su totalidad?",
+                    "Paragraphs": [
+                        "Count Me In tomará todas las medidas para garantizar que no se utilice la totalidad de las muestras como resultado de estos estudios. Se solicitará a los patólogos que tengan acceso a las muestras de tumores almacenadas que solo compartan una pequeña porción. Si no parece haber suficiente material para realizar futuras pruebas clínicas, Count Me In no solicitará muestras. Los tejidos que no fueron usados se devolverán."
+                    ]
+                },
+                {
+                    "Question": "¿Qué hace Count Me In con las copias de registros médicos?",
+                    "Paragraphs": [
+                        "Los registros médicos proporcionan información valiosa sobre las experiencias con el cáncer. A través de los registros médicos, los investigadores pueden aprender detalles importantes como los tipos de tratamientos que recibió y durante cuánto tiempo los recibió, detalles sobre la anatomía patológica de sus tumores, información acerca de su cáncer al momento del diagnóstico, entre otros.",
+                        "Para los investigadores que estudian el cáncer, es valioso poder analizar la información de su historia clínica junto con la información de sus muestras con el fin de realizar descubrimientos."
+                    ]
+                },
+                {
+                    "Question": "¿Por qué Count Me In está estudiando cohortes específicas?",
+                    "Paragraphs": [
+                        "Una cohorte consiste en un grupo de personas que comparten un conjunto de características similares. Estas podrían incluir diversos aspectos demográficos, tipos de cáncer, tipos de mutaciones, respuestas al tratamiento y mucho más. Al estudiar determinadas cohortes en profundidad, los investigadores pueden hallar patrones y detectar tendencias que podrían ayudarnos a comprender más a fondo diversos aspectos del cáncer."
+                    ]
+                },
+                {
+                    "Question": "Si me he inscrito en nombre de mi hijo(a), ¿qué sucede cuando se convierte en adulto?",
+                    "Paragraphs": [
+                        "Cuando su hijo(a) alcance la edad en la que puede dar su propio consentimiento, debe hacerlo para seguir participando. En el caso de Estados Unidos y Canadá, esta edad varía según el estado y territorio, y es entre las edades de 18 y 21 años. Count Me In se comunicará con usted antes de esta edad para obtener la información de contacto de su hijo(a).",
+                        "Si su hijo(a) decide permanecer en el estudio, el equipo del proyecto continuará solicitando registros médicos y muestras de tejidos en cualquier momento durante el tratamiento de cáncer de su hijo(a)."
+                    ]
+                }
+            ]
+        },
+        "ColorectalPage": {
+            "IntroductionSection": {
+                "Title": "Contribuya directamente al futuro del cáncer colorrectal.",
+                "Text": "Si alguna vez ha recibido un diagnóstico de cáncer colorrectal, únase a una iniciativa con participación de pacientes a nivel nacional y aporte sus muestras, historias clínicas y experiencia a la investigación sobre cáncer colorrectal. Juntos, podemos acelerar el desarrollo de futuros tratamientos."
+            },
+            "LearnMoreSection": {
+                "Title": "¿De qué se trata este proyecto?",
+                "Paragraphs": [
+                    "El Proyecto de cáncer colorrectal forma parte de <a class='Link' href='https://joincountmein.org'>Count Me In</a>, una iniciativa de investigación que permite que los pacientes con cáncer transformen de forma directa la investigación y los descubrimientos en el cáncer. Toda persona en Estados Unidos o Canadá que alguna vez haya recibido un diagnóstico de cáncer colorrectal puede compartir información sobre su experiencia respondiendo encuestas y compartiendo muestras biológicas y copias de sus registros medicos con los investigadores para acelerar el paso de los descubrimientos.",
+                    "El objetivo de <a class='Link' href='https://joincountmein.org'>Count Me In</a> es generar un gran conjunto de datos de información genómica, clínica y molecular aportada por los pacientes que pueda compartirse con la comunidad biomédica. La historia de cada paciente es una pieza del rompecabezas que puede ayudarnos a comprender mejor el cáncer. Al descubrir los genes y las variaciones que dan lugar al cáncer y compartir estos datos, esperamos poder obtener información valiosa para desarrollar más tratamientos eficaces."
+                ]
+            },
+            "FAQ": {
+                "Questions": [
+                    {
+                        "Question": "¿Cuál es el objetivo del Proyecto de cáncer colorrectal?",
+                        "Paragraphs": [
+                            "Nuestro objetivo es que los datos generados a partir de este proyecto puedan ayudarnos a comprender mejor el panorama del cáncer colorrectal y su tratamiento. Gracias a que podemos trabajar con todos los pacientes, sin importar dónde vivan (en los Estados Unidos o Canadá), esperamos llegar a poblaciones que no han sido lo suficientemente estudiadas, lo que incluye personas que han recibido un diagnóstico de cáncer colorrectal a una edad temprana, personas de comunidades marginadas que históricamente se han excluido de las investigaciones y pacientes con cáncer colorrectal metastásico."
+                        ]
+                    },
+                    {
+                        "Question": "¿Quiénes pueden participar?",
+                        "Paragraphs": [
+                            "Todas las personas que hayan recibido un diagnóstico de cáncer de colon y recto en algún momento de su vida pueden participar si viven en Estados Unidos o Canadá."
+                        ]
+                    },
+                    {
+                        "Question": "¿Qué hace Count Me In con los datos del Proyecto de cáncer colorrectal?",
+                        "Paragraphs": [
+                            "Después de eliminar toda la información personal que identificaría con facilidad a las personas, los datos se comparten libremente con el objetivo de agilizar los descubrimientos, al permitir que los investigadores identifiquen patrones en los datos. Los lotes de datos se haran disponibles al público de forma periódica y están disponibles para todos los investigadores, de manera que todos pueden utilizarlos para hacer descubrimientos y avances contra el cáncer, que incluyen nuevos medicamentos y métodos de diagnóstico.",
+                            "Enlaces rápidos a datos publicados: <br/><a class='Link' href='https://www.mbcproject.org/data-release'>https://www.mbcproject.org/data-release</a><br/><a class='Link' href='https://ascproject.org/data-release'>https://ascproject.org/data-release</a>"
+                        ]
+                    },
+                    {
+                        "Question": "¿Cómo aborda Count Me In la inclusividad en la participación?",
+                        "Paragraphs": [
+                            "Count Me In entiende que existen muchas barreras (estructurales e históricas) que impiden la participación directa de comunidades subrepresentadas y marginadas en la investigación. Count Me In tiene un compromiso con el principio fundamental de que la experiencia de todos los pacientes con cáncer es importante, independientemente de dónde vivan, qué idioma hablen o cuál sea su patrimonio cultural, y la incorporación de su experiencia es imperativa para ampliar nuestros conocimientos sobre el cáncer.",
+                            "La investigación tradicional del cáncer no se presta a ser tan inclusiva como debería. Las desigualdades en torno al cáncer son prueba de todo el trabajo que todavía queda por hacer en este espacio, y reconocemos que nunca llegaremos a la culminación de esa labor, pero continuamos esforzándonos por lograrlo, junto con pacientes. Creemos que los pacientes deben ser aliados directos en la investigación del cáncer y sabemos que solo podemos avanzar nuestros conocimientos sobre el cáncer y acelerar los descubrimientos si lo hacemos juntos."
+                        ]
+                    },
+                    {
+                        "Question": "¿Cómo ha sido la participación de los pacientes en el diseño de este proyecto?",
+                        "Paragraphs": [
+                            "Count Me In ha trabajado estrechamente con pacientes, seres queridos y defensores de pacientes en la comunidad del cáncer colorrectal para desarrollar este proyecto. Los pacientes participaron en todos los aspectos del diseño, incluidos el concepto, los objetivos, las comunicaciones, los formularios y el sitio web.",
+                            "Estamos orgullosos de tener como aliados a Colorectal Cancer Resource & Action Network, Raymond Foundation, GI Cancers Alliance, Colorectal Cancer Canada, Fight Colorectal Cancer, Colon Cancer Stars, Global Colon Cancer Association, Colorectal Cancer Alliance y Colon Cancer Coalition por colaborar y apoyar este proyecto."
+                        ]
+                    }
+                ]
+            },
+            "Partners": {
+                "Title": "Aliados",
+                "Alts": {
+                    "CCResource": "Colorectal Cancer Resource & Action Network logo",
+                    "Raymond": "Raymond Foundation logo",
+                    "GICAlliance": "GI Cancers Alliance logo",
+                    "CCCanada": "Colorectal Cancer Canada logo",
+                    "FightCC": "Fight Colorectal Cancer logo",
+                    "ColonCancerStars": "Colon Cancer Stars logo",
+                    "GCCA": "Global Colon Cancer Association logo",
+                    "CCAlliance": "Colorectal Cancer Alliance logo",
+                    "ColonCancerCoalition": "Colon Cancer Coalition logo"
+                },
+                "Text": "Para obtener más información sobre cómo participar en el Proyecto de cáncer colorrectal, comuníquese con el equipo en <a class='Link' href='mailto:info@colorectalcancerproject.org'>info@colorectalcancerproject.org</a>."
+            },
+            "CountMeInSection": {
+                "Title": "Únase al movimiento Count Me In y comparta su experiencia"
+            },
+            "Footer": {
+                "Text": "El Proyecto de cáncer colorrectal forma parte de <span class='bold'>Count Me In</span>, una iniciativa de investigación que une a pacientes y científicos para juntos acelerar los descubrimientos en la investigación del cáncer."
+            }
+        },
+        "LmsPage": {
+            "Title": "<span>Enrolling Soon:</span> <span>The Leiomyosarcoma (LMS) Project</span>",
+            "IntroductionSection": {
+                "Title": "Have a direct impact on the future of leiomyosarcoma.",
+                "Text": "If you have ever been diagnosed with leiomyosarcoma, join a movement of patients to contribute your samples, medical records, and experiences to LMS research. Together, we can speed the development of future therapies.",
+                "Notify": "Enrollment begins in early 2022. Get notified when we launch.",
+                "Button": "Notify Me"
+            },
+            "FAQ": {
+                "Questions": [
+                    {
+                        "Question": "What is the goal of this project?",
+                        "Paragraphs": [
+                            "Our goal is to partner with patients with leiomyosarcoma around the United States and Canada in order to study their cancer using cutting-edge genomic and molecular research studies performed at the Broad Institute, and to leverage technology to allow patients to participate in these studies regardless of where they are treated.",
+                            "We will generate a large dataset that includes genomic, clinical, molecular, and patient-reported information that can be shared with the biomedical community in order to accelerate discoveries and better therapies for this disease. Cancer is not a single disease, and each medical record, tumor, and patient's story holds part of the puzzle. Our goal is to help the research community better understand the landscape of leiomyosarcoma and accelerate discoveries by making data more readily available.",
+                            "In addition, our team will study our approaches to engaging with the LMS community and work directly with patients to improve our methods. We will focus on hearing from groups that have been historically left out of research, like rural and underrepresented participants. What we learn together will help improve future patient-partnered studies and increase the diversity of patients we partner with in an evidence-based way, to ensure that new insights are relevant to and benefit as many patients as possible."
+                        ]
+                    },
+                    {
+                        "Question": "What does participation look like?",
+                        "Paragraphs": [
+                            "Once the project is launched, people can join through the project website to share their information and experiences with us.",
+                            "<ul><li>Provide consent: The consent form will allow people to elect to share samples of saliva, blood, and/or tissue, as well as copies of their medical records. This document is several pages, but take your time.</li><li>Respond to simple surveys: In these surveys we ask questions about your experience with LMS, like when you were diagnosed and the types of treatments you’ve had. Participants may also be contacted by the team to participate in focus groups or additional surveys about their experiences participating in the project.</li><li>Provide a saliva and/or blood sample: We will send you a kit to collect a sample of your saliva and/or blood. We will compare the normal DNA in your saliva or blood to your tumor DNA.</li><li>Learn with us: If a participant elects to share archive tissue samples with the project and provides a saliva sample, we may be able to share learnings from the genomic sequencing of the tumor sample back with the participant. These shared learnings are intended to highlight how participant sample(s) are contributing to research and may not have implications for their treatment or prognosis.</li></ul>"
+                        ]
+                    },
+                    {
+                        "Question": "Who is eligible to participate?",
+                        "Paragraphs": [
+                            "Anyone who has been diagnosed with leiomyosarcoma at any point may participate if they live in the USA or Canada."
+                        ]
+                    },
+                    {
+                        "Question": "Who is conducting this research?",
+                        "Paragraphs": [
+                            "This project is being conducted by the Broad Institute of MIT and Harvard, Dana-Farber Cancer Institute, and Count Me In, a non-profit research initiative that conducts patient-partnered studies of cancer. This project and Count Me In's Osteosarcoma Project is supported by a grant from the National Cancer Institute's Cancer Moonshot program and is part of the Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers. Count Me In is stewarded by three leading organizations: Emerson Collective, a California-based social change organization; the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; and the Dana-Farber Cancer Institute, a leading cancer hospital."
+                        ]
+                    },
+                    {
+                        "Question": "Is this research being conducted for profit?",
+                        "Paragraphs": [
+                            "No. This project is a not-for-profit research endeavor. Our mission is to generate, aggregate, and freely share data with the research community in order to accelerate discoveries. All data will have readily identifiable information removed."
+                        ]
+                    }
+                ]
+            },
+            "Footer": {
+                "Text": "The Leiomyosarcoma Project (LMSproject) is part of <span class='bold'>Count Me In</span>, a research initiative that brings together patients and scientists as partners to speed up discoveries in cancer research."
+            }
+        },
+        "ImageAlts": {
+            "SplashPageLogo": "Logo"
+        },
+        "Header": {
+            "Logo": {
+                "Title": "Count<br>Me<br>In",
+                "ImageAlt": "logo de Pan-Cancer project"
+            }
+        },
+        "Navigation": {
+            "AboutUs": "Sobre Nosotros",
+            "Participation": "Participación",
+            "ScientificResearch": "Investigación científica",
+            "FAQ": "Preguntas Más Frecuentes",
+            "Join": "Únase",
+            "Dashboard": "Tablero de Progreso"
+        },
+        "Footer": {
+            "BackToTopButton": "Volver Arriba",
+            "Contacts": "Contáctenos",
+            "Copyright": "Copyright © 2021 Count Me In. Todos los derechos reservados.",
+            "Email": "Correo electrónico",
+            "Phone": "Teléfono"
+        }
+    },
+    "Toolkit": {
+        "AgeUpThankYou": {
+            "Title": "¡Gracias!",
+            "EmailVerified": "Su correo electrónico ha sido verificado. Le enviaremos un correo electrónico con más información sobre cómo volver a dar su consentimiento después de su cumpleaños.",
+            "EmailCollected": {
+                "TextPt1": "Se le enviará un correo electrónico a su hijo(a) para confirmar su dirección postal e informarle sobre el proceso para volver a dar su consentimiento. Si necesita cambiar el correo electrónico de su hijo(a), por favor comuníquese con nosotros a",
+                "TextPt2": "o",
+                "Button": "Ir a su tablero"
+            },
+            "ImageAlt": "Correo electrónico enviado"
+        },
+        "StayInformed": {
+            "Title": "¡Manténgase Informado!",
+            "Text": "Gracias por unirse a la lista de correo. Le enviaremos noticias para que este informado. Puede darse de baja en cualquier momento. Si tiene alguna pregunta sobre su estado en el proyecto, envíe un correo electrónico a ",
+            "ReturnButton": "REGRESAR A PÁGINA PRINCIPAL"
+        },
+        "Dashboard": {
+            "Title": "Tablero de Progreso",
+            "ParticipantsTitle": "Su Tablero de Progreso",
+            "AddParticipant": "Añadir Participante",
+            "ShowPanel": "Mostrar",
+            "HidePanel": "Esconder",
+            "UserLabel": "Usted",
+            "ChildLabel": "Su hijo(a){{suffix}}"
+        },
+        "Password": {
+            "Title": "Ingrese la contraseña.",
+            "Text": "Ingrese su contraseña.*",
+            "InputPlaceholder": "Contraseña",
+            "PasswordWrongError": "Contraseña incorrecta. Vuelva a intentarlo.",
+            "OtherError": "Lo sentimos, pero un error ha ocurrido. Inténtalo de nuevo, por favor.",
+            "PasswordRequiredError": "La contraseña es obligatoria."
+        },
+        "ErrorPage": {
+            "Title": "Hubo un error.",
+            "Text": "Lamentablemente, se produjo un error.",
+            "DefaultText": {
+                "TextPt1": "Espere un momento y vuelva a intentarlo. Si el problema continúa, envíenos un mensaje a",
+                "TextPt2": "o llámenos al"
+            }
+        },
+        "ErrorCodes": {
+            "PASSWORD_RESET_LINK_EXPIRED": "El enlace para restablecer su contraseña ha caducado"
+        },
+        "SessionExpired": {
+            "Text": "No hubo actividad en su cuenta durante varios minutos, así que por su seguridad cerramos la sesión. Vuelva a iniciar sesión para regresar a la última página que visitó."
+        },
+        "LoginLanding": {
+            "Text": "Por favor espere. Le estaremos dirigiendo a su página destinataria en un momento..."
+        },
+        "Dialogs": {
+            "JoinMailingList": {
+                "Title": "¡Manténgase Informada/o!",
+                "Text": "Ingrese su correo electrónico para estar al corriente sobre las nuevas noticias del proyecto.<br>Puede darse de baja en cualquier momento.",
+                "Fields": {
+                    "FirstName": {
+                        "Placeholder": "Nombre *",
+                        "Error": "Nombre es requirido"
+                    },
+                    "LastName": {
+                        "Placeholder": "Apellido *",
+                        "Error": "Apellido es requirido"
+                    },
+                    "Email": {
+                        "Placeholder": "Correo electrónico *",
+                        "Error": "Ingrese correo electrónico correcto, por favor"
+                    },
+                    "ConfirmEmail": {
+                        "Placeholder": "Confirmación de correo electrónico (ingrese correo electrónico nuevamente) *",
+                        "Error": "Ingrese correo electrónico correcto, por favor"
+                    }
+                },
+                "CancelButton": "CANCELAR",
+                "SubmitButton": "ENVIAR",
+                "Required": "* Requirido",
+                "MatchEmailsError": "Por favor asegurase que ambos correos electrónicos estén correctos.",
+                "LoadingError": "Lo sentimos, pero un error ha ocurrido."
+            },
+            "SessionWillExpire": {
+                "Title": "Su sesión terminará pronto",
+                "Text": "Para proteger su privacidad, este sistema cerrará su sesión por falta de inactividad. Haga clic en “Continuar” para mantenerse conectado. Haga clic en “Cerrar Sesión” si ha terminado por ahora",
+                "SignOut": "Cerrar Sesión",
+                "Continue": "Continuar",
+                "RenewalFailed": "No se pudo renovar la sesión. Por favor cierre la sesión y vuelva a intentar."
+            },
+            "StudyRedirect": {
+                "Title": "Su participación",
+                "Content": "<p>Count Me In tiene un proyecto abierto específico para su tipo de cáncer.</p><p>Use el botón a continuación para unirse al {{study}} y obtener más información sobre este trabajo en curso.</p>",
+                "GoToProject": "Ir al proyecto",
+                "Cancel": "Cancelar"
+            }
+        },
+        "Warning": {
+            "Title": "Descarge Chrome o Safari para continuar",
+            "Text1": "Este proyecto esta diseñado para su uso con los navegadores de internet mas populares y seguros -- Chrome y Safari.",
+            "Text2": "Parece que está utilizando Internet Explorer. Deberá utilizar otro navegador para unirse al proyecto. Le sugerimos que utilice Chrome o Safari para asegurarse de que su experiencia con el sitio web sea fluida y segura.",
+            "Text3": {
+                "Pt1": "Haga clic en los siguientes enlaces para descargar",
+                "Pt2": "o",
+                "Pt3": "Chrome y Safari siempre son gratis.",
+                "Chrome": "Chrome (para Mac y PC)",
+                "Safari": "Safari (para Mac)"
+            },
+            "SubmitButton": "Aceptar"
+        }
+    },
+    "SDK": {
+        "SubmitButton": "Enviar",
+        "CloseButton": "Cerrar",
+        "AddButton": "AGREGAR",
+        "CancelButton": "CANCELAR",
+        "NextButton": "Siguiente",
+        "PreviousButton": "Atrás",
+        "SavingButton": "Guardando...",
+        "EditButton": "Continuar",
+        "SaveButton": "Guardar",
+        "CompleteButton": "Editar",
+        "ReviewButton": "Ver",
+        "OpenButton": "Abrir",
+        "StartButton": "Comenzar",
+        "AgreeButton": "Acepto",
+        "ReportButton": "Reportar",
+        "NotAgreeButton": "Todavía no quiero aceptar",
+        "ValidateError": "Por favor complete todos los campos requeridos.",
+        "CommunicationError": "Hubo un problema al guardar sus datos. Revise el formulario y sus respuestas antes de enviar todo.",
+        "SignInOut": {
+            "SignIn": "Iniciar Sesión",
+            "SignOut": "Cerrar Sesión"
+        },
+        "LanguageSelector": {
+            "LanguageSelection": "selección de idioma"
+        },
+        "UserActivities": {
+            "ActivityName": "Forma",
+            "Summary": "Resumen",
+            "ActivityStatus": "Estado",
+            "ActivityDate": "Creado",
+            "ActivityActions": "Acciones"
+        },
+        "UserPreferences": {
+            "UserPreferencesTitle": "Preferencias del Usuario"
+        },
+        "DatePicker": {
+            "Day": "Escoja el día...",
+            "Month": "Escoja el mes...",
+            "Year": "Escoja el año...",
+            "January": "enero",
+            "February": "febrero",
+            "March": "marzo",
+            "April": "abril",
+            "May": "mayo",
+            "June": "junio",
+            "July": "julio",
+            "August": "agosto",
+            "September": "septiembre",
+            "October": "octubre",
+            "November": "noviembre",
+            "December": "diciembre"
+        },
+        "DateLabel": {
+            "YYYY": "AAAA",
+            "MM": "MM",
+            "DD": "DD"
+        },
+        "UserMenu": {
+            "DashboardButton": "Tablero de Progreso",
+            "SignOutButton": "Cerrar Sesión",
+            "PrismButton": "Prism"
+        },
+        "DetailsPlaceholder": {
+            "PluralForm": "caracteres restantes",
+            "SingularForm": "carácter restante"
+        },
+        "Title": {
+            "Default": "El Pan-Can Project",
+            "Alert": "Su sesión terminará pronto."
+        },
+        "EmailEntry": {
+            "InvalidEmail": "Ingrese un correo electrónico válido."
+        },
+        "Institutions": {
+            "Fields": {
+                "Name": "Nombre del doctor (si aplica)",
+                "Institution": "Institución",
+                "InstitutionAny": "Hospital/Institución (si aplica)",
+                "City": "Ciudad",
+                "State": "Estado"
+            },
+            "Form": {
+                "OtherPhysician": "Otro(a) hospital/institución",
+                "OtherInstitution": "Otra institución"
+            },
+            "PhysicianValidation": "Complete todos los campos obligatorios."
+        },
+        "MailAddress": {
+            "Fields": {
+                "Name": "Su nombre completo",
+                "Country": "País/territorio",
+                "Street1": "Dirección postal",
+                "Street2": "Apt / piso #",
+                "State": {
+                    "State": "Estado",
+                    "Province": "Provincia",
+                    "State/Province/Region": "Estado/Provincia/Región"
+                },
+                "City": "Ciudad",
+                "Phone": "Teléfono",
+                "Zip": {
+                    "Zip Code": "Código postal",
+                    "Postal Code": "Código postal",
+                    "Zip/Postal Code": "Código postal"
+                },
+                "Choose": "Elija {{field}}..."
+            },
+            "Suggestion": {
+                "Title": "Hemos verificado la dirección que ingresó y le sugerimos cambios para ayudar a que la entrega se haga correctamente.",
+                "Subtitle": "Haga clic en “Sugerencias” para actualizar el formulario. Podrá hacer clic en la opción “Datos originales” para que los datos queden tal como estaban.",
+                "Suggested": "Sugerencias:",
+                "AsEntered": "Datos originales:"
+            },
+            "Error": {
+                "InvalidAddress": "Dirección no válida.",
+                "CannotVerify": "No pudimos verificar la dirección. Revise si es correcta.",
+                "UnknownVerifyError": "Se produjo un error desconocido al verificar la dirección.",
+                "FieldIsRequired": "El campo {{field}} es obligatorio.",
+                "FieldIsInvalid": "El campo {{field}} tiene un valor no válido.",
+                "InvalidHouseNumber": "No se encontró el número de la calle.",
+                "INTERNAL_SERVER_ERROR": "Lamentablemente, algo salió mal. Si el problema continúa, envíe un mensaje a support@easypost.com.",
+                "NOT_ACCEPTABLE": "El recurso detectado por la solicitud solo puede generar entidades de respuesta cuyo contenido tiene características inaceptables según los encabezados aceptables enviados en la solicitud.",
+                "NOT_FOUND": "No se encontró el recurso solicitado.",
+                "FORBIDDEN": "No se puede acceder al recurso solicitado.",
+                "PAYMENT_REQUIRED": "Fondos insuficientes. Verifique las opciones de facturación en http://www.easypost.com/account/billing.",
+                "UNAUTHORIZED": "No se puede acceder al recurso solicitado. Hubo un error de autorización.",
+                "BAD_REQUEST": "Solicitud con estructura incorrecta. Verifique el contenido y vuelva a intentarlo.",
+                "PAYMENT_GATEWAY.ERROR": "El procesador de pagos no pudo gestionar la solicitud. Vuelva a intentarlo o envíe un mensaje a support@easypost.com si el problema continúa.",
+                "MODE.UNAUTHORIZED": "Este recurso requiere una clave API de producción para permitir el acceso.",
+                "MODE.CONFLICT": "El modo de la clave API está en conflicto con el modo de los parámetros.",
+                "DATE.PARSE.FAILURE": "Al menos una fecha tiene un formato incorrecto y no se pudo analizar.",
+                "PARAMETER.FORBIDDEN": "La solicitud no se pudo llevar a cabo porque los parámetros tienen propiedades prohibidas.",
+                "PARAMETER.REQUIRED": "Falta un parámetro obligatorio.",
+                "ADDRESS.PARAMETERS.INVALID_CHARACTER": "Los parámetros utilizados tenían un carácter no válido.",
+                "ADDRESS.PARAMETERS.INVALID": "Faltan los parámetros utilizados para crear la dirección o no son válidos.",
+                "ADDRESS.COUNTRY.INVALID": "País no válido. Indique un código de país ISO de dos caracteres.",
+                "ADDRESS.VERIFICATION.NOT_FOUND": "No se encontró la dirección.",
+                "ADDRESS.VERIFICATION.FAILURE": "No se pudo verificar la dirección.",
+                "ADDRESS.VERIFY.UNAVAILABLE": "No es posible verificar la dirección. Vuelva a intentarlo.",
+                "ADDRESS.VERIFICATION.INVALID": "Una de las verificaciones seleccionadas no es válida.",
+                "ADDRESS.VERIFY.FAILURE": "No se pudo verificar la dirección.",
+                "ADDRESS.VERIFY.CARRIER_INVALID": "No se puede verificar la dirección con el proveedor indicado.",
+                "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "No se puede verificar la dirección porque un servicio en la secuencia no responde. Vuelva a intentarlo.",
+                "ADDRESS.VERIFY.ONLY_US": "USPS solo permite validar direcciones de EE. UU.",
+                "ADDRESS.VERIFY.INTL_NOT_ENABLED": "En esta cuenta no se permite la verificación internacional. Envíe un mensaje a support@easypost.com.",
+                "ADDRESS.VERIFY.MISSING_STREET": "No se indicaron suficientes datos para la dirección. Se debe indicar una calle.",
+                "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "No se indicaron suficientes datos para la dirección. Se deben indicar una ciudad y un estado o un código postal.",
+                "E.COUNTRY.UNSUPPORTED": "Este país no se admite en este modo. Intente con el modo de producción.",
+                "E.ENGINE.UNAVAILABLE": "No hay ningún motor de verificación para prestar servicio a este país. Vuelva a intentarlo más tarde.",
+                "E.QUERY.UNANSWERABLE": "No podemos brindar suficientes datos en este país para llevar a cabo esa solicitud. Vuelva a intentarlo más tarde.",
+                "E.ADDRESS.NOT_FOUND": "No encontramos la dirección ingresada.",
+                "E.SECONDARY_INFORMATION.INVALID": "Información secundaria no válida (N.º de apartamento/oficina). Tenga en cuenta que eso puede causar errores en solicitudes correctas.",
+                "E.SECONDARY_INFORMATION.MISSING": "Falta información secundaria (N.º de apartamento/oficina). Tenga en cuenta que eso puede causar errores en solicitudes correctas.",
+                "E.HOUSE_NUMBER.MISSING": "Falta el número de casa.",
+                "E.HOUSE_NUMBER.INVALID": "No encontramos el número de calle indicado.",
+                "E.STREET.MISSING": "Falta la calle.",
+                "E.STREET.INVALID": "La calle no es válida.",
+                "E.BOX_NUMBER.MISSING": "Falta el número de casilla postal.",
+                "E.BOX_NUMBER.INVALID": "El número de casilla postal no es válido.",
+                "E.ADDRESS.INVALID": "Ciudad/Estado/Código postal no válidos.",
+                "E.ZIP.NOT_FOUND": "No se encontró el código postal.",
+                "E.ZIP.INVALID": "Código postal no válido.",
+                "E.ZIP.PLUS4.NOT_FOUND": "No se encontró el código postal + 4.",
+                "E.ADDRESS.MULTIPLE": "Encontramos varias direcciones con el mismo código postal.",
+                "E.ADDRESS.INSUFFICIENT": "Datos insuficientes/incorrectos en la dirección.",
+                "E.ADDRESS.DUAL": "Dirección duplicada.",
+                "E.STREET.MAGNET": "La dirección es ambigua.",
+                "E.CITY_STATE.INVALID": "Ciudad/Estado no verificables.",
+                "E.STATE.INVALID": "Estado no válido.",
+                "E.ADDRESS.DELIVERY.INVALID": "Dirección de entrega no válida.",
+                "E.TIMED_OUT": "Se superó el tiempo máximo de espera.",
+                "E.TIME_ZONE.UNAVAILABLE": "El servicio de zona horaria no está disponible en este momento.",
+                "E.PO_BOX.INTERNATIONAL": "No se puede verificar la casilla postal internacional. Tenga en cuenta que eso puede causar errores en solicitudes correctas."
+            }
+        },
+        "TooltipAlt": "Información",
+        "Validators": {
+            "DateNavyValidationRule": "La fecha es inválida",
+            "Autocomplete": "No se encuentra {{control}}"
+        },
+        "SubjectPanel": {
+            "Link": "Regresar a la búsqueda de participantes voluntarios",
+            "InvitationCode": "Código de invitación del participante voluntario:",
+            "Email": "Electrónico:",
+            "Name": "Nombre:",
+            "ShortId": "Id. breve/HRUID del sujeto:"
+        },
+        "AdminActionPanel": {
+            "ActivityEdit": "Haga clic en el botón Edit (Editar) para desbloquear la función de edición momentáneamente. Sus cambios se guardarán a medida que avance. Cuando haga clic para enviar o navegue a otro sitio, la actividad se volverá a bloquear automáticamente.",
+            "EditButton": "Editar"
+        }
+    }
+}

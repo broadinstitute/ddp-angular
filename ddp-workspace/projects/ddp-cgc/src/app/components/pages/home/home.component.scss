@@ -1,0 +1,91 @@
+@import '../../../../styles/variables';
+
+p {
+  font-size: 1.1rem;
+}
+
+.landing {
+  &__image {
+    background-image: url('/assets/images/home-background-lg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+
+    @media (max-width: 1300px) {
+      background-image: url('/assets/images/home-background-md.png');
+    }
+
+    @media (max-width: 768px) {
+      background-image: url('/assets/images/home-background-sm.png');
+    }
+
+    &::after {
+      content: '';
+
+      display: block;
+
+      width: 100%;
+
+      padding-top: 49%;
+
+      @media (max-width: 1300px) {
+        padding-top: 68.8%;
+      }
+
+      @media (max-width: 768px) {
+        padding-top: 177.5%;
+      }
+    }
+  }
+
+  &__content {
+    padding-top: 18%;
+
+    @media (max-width: 1300px) {
+      padding-top: 25%;
+    }
+
+    @media (max-width: 768px) {
+      padding-top: 45%;
+    }
+  }
+}
+
+.how-project-works {
+  background: #efefef;
+}
+
+.message {
+  &__icon {
+    height: 100%;
+
+    padding: 15px 25px 20px 25px;
+  }
+
+  &__title {
+    margin-bottom: 10px;
+
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 2rem;
+    color: $color-green;
+  }
+}
+
+.contact-us {
+  background: $color-dark-blue;
+}
+
+.text-shadow {
+  text-align: center;
+  color: #ffffff;
+  text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.8);
+}
+
+.vertical-space {
+  margin: 110px auto 150px auto;
+}
+
+.semibold {
+  color: inherit;
+}

@@ -36,9 +36,9 @@
   "Pages": {
     "PrivacyPolicy": {
       "Title1": "RARE-X DATA COLLECTION PROGRAM<br />WEBSITE PRIVACY POLICY",
-      "Paragraph1": "The RARE-X Data Collection Program (RARE-X DCP) website is a tool to help collect, store, and share information about patients with rare diseases for research. RARE-X is committed to protecting your privacy. This Privacy Policy applies to RARE-X and its agents. Agents are people who work closely with RARE-X and who sign agreements promising to follow this Policy. When this Privacy Policy uses the term “we” or “ours” it means RARE-X and its agents.",
+      "Paragraph1": "The RARE-X Data Collection Program (“RARE-X DCP” or “Program”) website is a tool to help collect, store, and share information about patients with rare diseases for research. RARE-X is committed to protecting your privacy. This Privacy Policy applies to RARE-X and its agents. Agents are people who work closely with RARE-X and who sign agreements promising to follow this Policy. When this Privacy Policy uses the term “we” or “ours” it means RARE-X and its agents.",
       "Paragraph2": "This Policy describes the information we will collect through the RARE-X DCP website. Most of the information that RARE-X will collect through this website comes from patients, their caregivers, family members or other legally authorized representatives (collectively called “caregivers”). In addition, RARE-X may collect a minimum amount of information from researchers and clinicians.",
-      "Paragraph3": "By visiting the RARE-X DCP website, you agree to this Privacy Policy",
+      "Paragraph3": "By visiting the RARE-X DCP website, you agree to this Privacy Policy.",
       "InformationUsage": {
         "Title": "How We Use and Share Your Information",
         "Paragraph1": "This section describes how we use and share information that patients and their caregivers or researchers give us. There is a separate section for Patients and Caregivers and another section for Researchers because these two groups give us different information.  There is also a section about data that is collected automatically in site navigation."
@@ -57,7 +57,7 @@
         },
         "Other": {
           "Title": "Other Information We Collect about Patients and Caregivers",
-          "Paragraph1": "After you have created an account, we will ask for detailed information about the patient(“patient information”). For example, we may ask the patient’s name and ask you to complete questions in surveys about the patient’s health and health treatment history. We may also ask questions about how the patient’s health condition has affected the patient’s caregivers. If you are interested in answering these surveys, you will do so on the RARE-X DCP website. We may have other ways for you to give information about the patient to us through the RARE-X DCP website, such as uploading test results or other records."
+          "Paragraph1": "After you have created an account, we will ask for detailed information about the patient (“patient information”). For example, we may ask the patient’s name and ask you to complete questions in surveys about the patient’s health and health treatment history. We may also ask questions about how the patient’s health condition has affected the patient’s caregivers. If you are interested in answering these surveys, you will do so on the RARE-X DCP website. We may have other ways for you to give information about the patient to us through the RARE-X DCP website, such as uploading test results or other records."
         },
         "InformationUsage": {
           "Title": "How We Use Patient and Caregiver Information",
@@ -87,7 +87,7 @@
           },
           "Providers": {
             "Title": "With service providers",
-            "Paragraph1": "We work with companies and other organizations to help us run our website and our data collection. We call these companies and organizations “service providers”. We share with service providers only the registration and patient information that they need to do their jobs. The service providers will have to sign a contract promising to use the information only for the job they are doing for us. Also, they will promise to keep the information safe."
+            "Paragraph1": "We work with companies and other organizations to help us run our website and our data collection. We call these companies and organizations “service providers.” We share with service providers only the registration and patient information that they need to do their jobs. The service providers will have to sign a contract promising to use the information only for the job they are doing for us. Also, they will promise to keep the information safe."
           },
           "Legal": {
             "Title": "For legal reasons",
@@ -98,11 +98,11 @@
         "RightsAndChoices": {
           "Title": "Patient and Caregiver Rights and Choices",
           "Paragraph1": "Patients and caregivers have rights and choices about how we use and share their information. You can choose the amount of information that you share with us. You can choose who we can share the patient’s information with for research. These choices are described in more detail in the consent form.",
-          "Paragraph2": "You can get a copy of the patient information that you directly give to us. To do this, call <a href=\"tel:+17164272739\">(716) 427-2739</a> or email us at ​<a href=\"mailto:datacollectionprogram@rare-x.org\">datacollectionprogram@rare-x.org​</a>.",
-          "Paragraph3": "You can stop using the RARE-X DCP website <a href=\"https://rare-x.org\">​https://rare-x.org</a> at any time. Please note that if you just stop using the website or delete your web account, it does <a class=\"bold italic\">​not</a> ​mean that you have quit taking part in the RARE-X DCP.",
-          "Paragraph4": "If you want to quit the Program so that researchers can no longer use your information you can call us <a href=\"tel:+17164272739\">+1 (716) 427-2739</a> or email us at ​<a href=\"mailto:datacollectionprogram@rare-x.org\">datacollectionprogram@rare-x.org​</a>. If you quit, you can ask us to delete your information from our digital storage. We will delete your information. But we can’t take it back from researchers who have already used it.",
+          "Paragraph2": "You can get a copy of the patient information that you directly give to us. To do this, call <a href=\"tel:+17164272739\">(716) 427-2739</a> or email us at ​<a href=\"mailto:support@rare-x.org\">support@rare-x.org​</a>.",
+          "Paragraph3": "You can stop using the RARE-X DCP website <a href=\"https://dcp.rare-x.org\" target=\"_blank\">​https://dcp.rare-x.org</a> at any time. Please note that if you just stop using the website or delete your web account, it does <a class=\"bold italic\">​not</a> ​mean that you have quit taking part in the RARE-X DCP.",
+          "Paragraph4": "If you want to quit the Program so that researchers can no longer use your information you can call us <a href=\"tel:+17164272739\">+1 (716) 427-2739</a> or email us at ​<a href=\"mailto:support@rare-x.org\">support@rare-x.org​</a>. If you quit, you can ask us to delete your information from our digital storage. We will delete your information. But we can’t take it back from researchers who have already used it.",
           "Paragraph5": "Because we have a responsibility to keep backups and archives of data, we may keep a copy of all the information we collect from you for a short time, even after asking us to delete it.",
-          "Paragraph6": "If you have questions about your rights and choices or would like more information about your rights and choices, call us at <a href=\"tel:+17164272739\">716-427-2739</a> or email us at ​<a href=\"mailto:datacollectionprogram@rare-x.org\">datacollectionprogram@rare-x.org</a>",
+          "Paragraph6": "If you have questions about your rights and choices or would like more information about your rights and choices, call us at <a href=\"tel:+17164272739\">(716) 427-2739</a> or email us at ​<a href=\"mailto:support@rare-x.org\">support@rare-x.org</a>.",
           "Paragraph7": "For information about how we use cookies and other ways of automatically collecting information, please read <span class=\"bold\">​Information We Collect from All Website Users​</span> below."
         }
       },
@@ -120,8 +120,8 @@
           "Title": "How We Share Researcher Registration Information",
           "Providers": {
             "Title": "Service providers",
-            "Paragraph1": "We work with companies and other organizations to help us run our website and our data collection. We call these companies and organizations “service providers”. We share with service providers the registration information that they need to do their jobs. The service providers will have to sign a contract promising to use the information only for the job they are doing for us. Also, they will promise to keep the information safe.",
-            "Paragraph2": "To participate in the RARE-X DCP as a researcher, you will click on a link and be directed to DUOS, a third-party service provided by the Broad Institute, which helps process data access requests. Once you are on the DUOS platform, you will be requested to provide additional information about yourself and the institution with which you are associated. The information that you provide in the DUOS platform is governed by the ​<a href=\"https://www.broadinstitute.org/contact-us/privacy-policy-broad-institute-website\">Broad’s Privacy Policy</a>​."
+            "Paragraph1": "We work with companies and other organizations to help us run our website and our data collection. We call these companies and organizations “service providers.” We share with service providers the registration information that they need to do their jobs. The service providers will have to sign a contract promising to use the information only for the job they are doing for us. Also, they will promise to keep the information safe.",
+            "Paragraph2": "To participate in the RARE-X DCP as a researcher, you will click on a link and be directed to DUOS, a third-party service provided by the Broad Institute, which helps process data access requests. Once you are on the DUOS platform, you will be requested to provide additional information about yourself and the institution with which you are associated. The information that you provide in the DUOS platform is governed by the ​<a href=\"https://www.broadinstitute.org/contact-us/privacy-policy-broad-institute-website\" target=\"_blank\">Broad’s Privacy Policy</a>​."
           },
           "Partners": {
             "Title": "RARE-X partners",
@@ -130,7 +130,7 @@
           "Legal": {
             "Title": "For legal reasons",
             "Paragraph1": "We may share information if we are required to by law. Otherwise, we will not share information for any civil, criminal, administrative, legislative, or other proceedings.",
-            "Paragraph2": "For information about how we use cookies and other ways of automatically collecting information, please read <span class=\"bold\">​Information We Collect from All Website Users​</span> below."
+            "Paragraph2": "For information about how we use cookies and other ways of automatically collecting information, please read <span class=\"bold\">​Information We Automatically Collect About How You Use the Website​</span> below."
           }
         }
       },
@@ -186,7 +186,7 @@
       },
       "Questions": {
         "Title": "Questions and Comments",
-        "Paragraph1": "If you have any questions, comments or requests, please contact us at <a href=\"tel:+17164272739\">+1 (716) 427-2739</a> or email us at <a href=\"mailto:​datacollectionprogram@rare-x.org\">​datacollectionprogram@rare-x.org</a>"
+        "Paragraph1": "If you have any questions, comments or requests, please contact us at <a href=\"tel:+17164272739\">+1 (716) 427-2739</a> or email us at <a href=\"mailto:privacy@rare-x.org\">privacy@rare-x.org</a>"
       }
     },
     "TermsAndConditions": {
@@ -315,6 +315,7 @@
     "Title": "Participant Dashboard",
     "NewParticipant": "New Participant",
     "NoParticipants": "You don't have any participants at this moment. You can add one by clicking the button below.",
+    "HelpTip": "Please select Participant by clicking his/her name in the list below.",
     "DeleteError": "This participant has already consented and can’t be deleted here. If you wish to withdraw consent, please contact Rare-X study personnel directly."
   },
   "ParticipantDeletionDialog": {
@@ -381,6 +382,9 @@
     "SignInOut": {
       "SignIn": "Log In",
       "SignOut": "Log Out"
+    },
+    "Title": {
+      "Alert": "RARE-X"
     },
     "StartButton": "Start",
     "ContinueButton": "Continue",

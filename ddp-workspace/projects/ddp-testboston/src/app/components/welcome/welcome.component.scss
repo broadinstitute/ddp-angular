@@ -22,7 +22,7 @@
 }
 
 .intro-block {
-    margin: 6rem auto 8rem auto;
+    margin: 2rem auto 4rem auto;
 
     &__title {
         color: mat-color($app-theme, 1200);
@@ -39,6 +39,7 @@
     }
 }
 
+
 .about-section {
     background-color: mat-color($app-theme, 1400);
     color: mat-color($app-theme, 700);
@@ -47,9 +48,46 @@
 .about-block {
     @include block-margin;
 
+
     &__text {
         margin: 2.5rem 0;
     }
+}
+
+.results-section {
+    background-color: mat-color($app-theme, 1400);
+    color: mat-color($app-theme, 700);
+}
+
+.results-block {
+    @include block-margin;
+    margin: 4rem auto 4rem auto;
+
+    &__text {
+        margin: 0rem 0rem auto auto;
+    }
+}
+
+.columns {
+    display: grid;
+    grid-auto-flow: column;
+    margin: 2rem auto 0rem auto;
+}
+
+.columns-child-left {
+    float: left;
+    margin: auto;
+}
+
+.columns-child-right {
+    float: right;
+    margin: auto;
+}
+
+.button_basic {
+    width: 225px;
+    height: 75px;
+    margin: auto auto auto 4rem;
 }
 
 .about-list {

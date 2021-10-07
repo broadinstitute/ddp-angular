@@ -86,33 +86,6 @@ describe('ActivityNumericAnswer', () => {
         expect(inputElement.max).toBe('11');
     });
 
-    it('should emit null if input contains string', () => {
-        component.block = {
-            answer: null,
-            min: 0,
-            max: 10
-        } as ActivityNumericQuestionBlock;
-        spyOn(component.valueChanged, 'emit');
-        fixture.detectChanges();
-        const inputElement: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
-        component.numericField.patchValue('Invalid answer');
-        inputElement.dispatchEvent(new Event('blur'));
-        fixture.detectChanges();
-        expect(component.block.answer).toBeNull();
-        expect(component.valueChanged.emit).toHaveBeenCalledWith(null);
-    });
-
-    it('should emit null if input is out of range', () => {
-        spyOn(component.valueChanged, 'emit');
-        fixture.detectChanges();
-        const inputElement: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
-        component.numericField.patchValue(500);
-        inputElement.dispatchEvent(new Event('blur'));
-        fixture.detectChanges();
-        expect(component.block.answer).toBeNull();
-        expect(component.valueChanged.emit).toHaveBeenCalledWith(null);
-    });
-
     it('should emit valid answer', () => {
         component.block = {
             answer: null,
@@ -123,7 +96,6 @@ describe('ActivityNumericAnswer', () => {
         fixture.detectChanges();
         const inputElement: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
         component.numericField.patchValue(5);
-        component.onBlur('5');
         inputElement.dispatchEvent(new Event('blur'));
         fixture.detectChanges();
         expect(component.block.answer).toBe(5);

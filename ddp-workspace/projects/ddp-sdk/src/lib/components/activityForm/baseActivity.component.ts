@@ -9,12 +9,6 @@ import {
     Component
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { WorkflowServiceAgent } from '../../services/serviceAgents/workflowServiceAgent.service';
-import { ActivityServiceAgent } from '../../services/serviceAgents/activityServiceAgent.service';
-import { ActivityResponse } from '../../models/activity/activityResponse';
-import { ActivityForm } from '../../models/activity/activityForm';
-import { BlockVisibility } from '../../models/activity/blockVisibility';
-import { CompositeDisposable } from '../../compositeDisposable';
 import { Observable, BehaviorSubject, Subject, combineLatest, merge } from 'rxjs';
 import {
     concatMap,
@@ -28,8 +22,15 @@ import {
     tap,
     withLatestFrom
 } from 'rxjs/operators';
+
+import { WorkflowServiceAgent } from '../../services/serviceAgents/workflowServiceAgent.service';
+import { ActivityServiceAgent } from '../../services/serviceAgents/activityServiceAgent.service';
+import { ActivityResponse } from '../../models/activity/activityResponse';
+import { ActivityForm } from '../../models/activity/activityForm';
+import { CompositeDisposable } from '../../compositeDisposable';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
 import { ConfigurationService } from '../../services/configuration.service';
+import { BlockVisibility } from '../../models/activity/blockVisibility';
 
 @Component({
     template: ``
@@ -50,7 +51,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     public model: ActivityForm;
     public validationRequested = false;
     public isLoaded$ = new BehaviorSubject<boolean>(false);
-    public isPageBusy: Subject<boolean> = new BehaviorSubject(false);
+    public isPageBusy = new BehaviorSubject(false);
     public isAllFormContentValid: BehaviorSubject<boolean> = new BehaviorSubject(false);
     public displayGlobalError$: Observable<boolean>;
     // flag to indicate to form to not allow data entry
@@ -61,6 +62,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     protected anchor: CompositeDisposable;
     protected visitedSectionIndexes: Array<boolean> = [true];
     protected submitAttempted = new Subject<boolean>();
+    protected readonly timeToDebounce = 250;
 
     protected constructor(injector: Injector) {
         this.serviceAgent = injector.get(ActivityServiceAgent);
@@ -106,6 +108,9 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
         .getActivity(this.studyGuidObservable, this.activityGuidObservable)
         .subscribe(
             x => {
+                // to prevent using `visitedSectionIndexes` from previous activity
+                this.resetVisitedSectionIndexes();
+
                 if (!x) {
                     this.model = new ActivityForm();
                 } else {
@@ -114,6 +119,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
                     this.activityCode.emit(this.model.activityCode);
                     this.initSteps();
                 }
+                this.submitAttempted.next(false);
                 this.isLoaded$.next(true);
 
                 // combine the latest status updates from the form model
@@ -124,7 +130,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
                         this.submissionManager.answerSubmissionResponse$,
                         // We don't automatically get model updates if local validation fails
                         // so trigger one when submit
-                        this.submitAttempted
+                        this.submitAttempted.pipe(filter(attempted => attempted))
                     ).pipe(
                         map(() => this.model.validate()),
                         // let's start with whatever it is the initial state of the form
@@ -193,7 +199,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
                 // Wait for activity in page to cease
                 // if not busy for debounce time then we good to go
                 concatMap(() => this.isPageBusy.pipe(
-                    debounceTime(250),
+                    debounceTime(this.timeToDebounce),
                     filter(isPageBusy => !isPageBusy),
                     take(1))
                 ),
@@ -235,9 +241,12 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
         );
     }
 
+    private resetVisitedSectionIndexes(): void {
+        this.visitedSectionIndexes = [true]; // start value
+    }
+
     protected resetValidationState(): void {
         this.setFlags(false);
-        this.submitAttempted.next(false);
     }
 
     protected nextWorkflowActivity(): void {

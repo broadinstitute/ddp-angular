@@ -18,6 +18,7 @@ import { SubmitAnnouncementService } from '../../services/submitAnnouncement.ser
 import { AnalyticsEventsService } from '../../services/analyticsEvents.service';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
 import { LoggingService } from '../../services/logging.service';
+import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/participantsSearchServiceAgent.service';
 
 @Component({
     selector: 'ddp-activity-redesigned',
@@ -28,20 +29,20 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
     @Input() agreeConsent = false;
 
     public isVerticalProgress: boolean;
-    private isAdminEditing = false;
     private subscription: Subscription;
 
     constructor(
         logger: LoggingService,
         windowRef: WindowRef,
-        private changeRef: ChangeDetectorRef,
+        changeRef: ChangeDetectorRef,
         renderer: Renderer2,
         submitService: SubmitAnnouncementService,
         analytics: AnalyticsEventsService,
+        participantsSearch: ParticipantsSearchServiceAgent,
         @Inject(DOCUMENT) document: any,
         injector: Injector
     ) {
-        super(logger, windowRef, renderer, submitService, analytics, document, injector);
+        super(logger, windowRef, renderer, submitService, analytics, participantsSearch, changeRef, document, injector);
         this.subscription = this.getIsLoaded$().subscribe(_ => {
             const activitiesWithVerticalProgress: string[] = this.config.usesVerticalStepper;
             this.isVerticalProgress = this.model && activitiesWithVerticalProgress.includes(this.model.activityCode);
@@ -52,13 +53,8 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
         return this.model.formType === 'CONSENT' && this.agreeConsent;
     }
 
-    public isReadonly(): boolean {
-        return !this.isAdminEditing && this.model.readonly;
-    }
-
-    public updateIsAdminEditing(adminEditing: boolean): void {
-        this.isAdminEditing = adminEditing;
-        this.changeRef.detectChanges();
+    public get useStepsWithCircle(): boolean {
+        return this.config.useStepsWithCircle;
     }
 
     public ngOnDestroy(): void {
