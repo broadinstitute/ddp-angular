@@ -1,0 +1,113 @@
+@import '../../../styles/colors';
+@import '../../../styles/breakpoints';
+
+.mat-table {
+  width: 100%;
+}
+
+.mat-header-row {
+  @include media-sm {
+    display: none;
+  }
+}
+
+.mat-row {
+  @include media-sm {
+    display: flex;
+    flex-flow: column nowrap;
+
+    height: auto;
+
+    border-radius: 6px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+
+    & + & {
+      margin-top: 2.4rem;
+    }
+  }
+}
+
+.mat-column {
+  &-name,
+  &-status,
+  &-actions {
+    width: 20%;
+
+    @include media-sm {
+      width: 100%;
+    }
+  }
+
+  &-summary {
+    width: 40%;
+
+    @include media-sm {
+      width: 100%;
+    }
+  }
+}
+
+.mat-header-cell,
+.mat-cell {
+  padding-left: 2.4rem;
+
+  @include media-sm {
+    padding: 1.6rem 2.4rem !important;
+  }
+
+  &:last-of-type {
+    padding-right: 2.4rem;
+
+    @include media-sm {
+      border-bottom: none;
+    }
+  }
+}
+
+.mat-cell {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+
+  @include media-sm {
+    align-items: flex-start;
+  }
+
+  .mat-icon {
+    width: 2.8rem;
+    height: 2.8rem;
+
+    margin-right: 0.8rem;
+
+    font-size: 2.8rem;
+
+    &.CREATED {
+      color: map-get($colors, 'scarlet');
+    }
+
+    &.IN_PROGRESS {
+      color: map-get($colors, 'teal');
+    }
+
+    &.COMPLETE {
+      color: map-get($colors, 'success');
+    }
+  }
+}
+
+.mobile-column-name {
+  display: none;
+
+  margin-bottom: 0.3rem;
+
+  font-size: 1.6rem;
+  color: map-get($colors, 'dark-grey');
+
+  @include media-sm {
+    display: block;
+  }
+}

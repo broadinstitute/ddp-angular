@@ -10,7 +10,8 @@ import {
     MailAddressBlock,
     NGXTranslateService,
     LoggingService,
-    ConfigurationService
+    ConfigurationService,
+    FieldError
 } from 'ddp-sdk';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioGroup, MatRadioModule } from '@angular/material/radio';
@@ -20,9 +21,9 @@ import { of, Subject, throwError } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { AddressVerificationStatus } from '../../models/addressVerificationStatus';
 import { cold, getTestScheduler, hot } from 'jasmine-marbles';
-import { AddressError } from '../../models/addressError';
 import { AddressVerificationResponse } from '../../models/addressVerificationResponse';
 import { TranslateTestingModule } from '../../testsupport/translateTestingModule';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
     selector: 'ddp-address-input',
@@ -88,7 +89,8 @@ describe('AddressEmbeddedComponent', () => {
                 return of(null);
             }
         });
-        const loggingServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logDebug', 'logWarning']);
+        const loggingServiceSpy: jasmine.SpyObj<LoggingService> =
+            jasmine.createSpyObj('LoggingService', ['logDebug', 'logWarning', 'logError']);
         const translateServiceSpy: jasmine.SpyObj<NGXTranslateService> = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
         // @ts-ignore
         translateServiceSpy.getTranslation.and.callFake((word: string | Array<string>) => {
@@ -106,7 +108,7 @@ describe('AddressEmbeddedComponent', () => {
                 {provide: LoggingService, useValue: loggingServiceSpy},
                 {provide: 'ddp.config', useValue: configService}
             ],
-            imports: [MatCardModule, MatRadioModule, ReactiveFormsModule, TranslateTestingModule]
+            imports: [MatCardModule, MatRadioModule, ReactiveFormsModule, TranslateTestingModule, MatCheckboxModule]
         })
             .compileComponents();
         fixture = TestBed.createComponent(AddressEmbeddedComponent);
@@ -181,6 +183,8 @@ describe('AddressEmbeddedComponent', () => {
         expect(errorComponent).toBeNull();
         // check that we are not feeding address back to input component
         expect(childComponent.address).toBeFalsy();
+        const checkbox = fixture.debugElement.query(By.css('.ignore-easy-post-errors'));
+        expect(checkbox).toBeFalsy();
     });
 
     it('ensure enforce required fields generates error', fakeAsync(() => {
@@ -314,7 +318,7 @@ describe('AddressEmbeddedComponent', () => {
         const addressToEnter = buildPerfectAddress();
         addressToEnter.street2 = 'NO PLACE THAT IS GOOD';
         // field 'address' is the global error.
-        const overallAddressErrors: AddressError[] = [{ code: '123', field: 'address', message: 'Bad address' }];
+        const overallAddressErrors: FieldError[] = [{ code: '123', field: 'address', message: 'Bad address', isEasyPostError: true }];
         const verificationStatus: AddressVerificationStatus = {
             address: new Address(),
             isDeliverable: false,
@@ -332,6 +336,14 @@ describe('AddressEmbeddedComponent', () => {
         expect(childComponent.addressErrors).toEqual([]);
         // we save temp address even if it has errors
         expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledWith(addressToEnter, '123');
+        const checkbox = fixture.debugElement.query(By.css('.ignore-easy-post-errors'));
+        expect(checkbox).toBeTruthy();
+
+        component.ignoreEasyPostErrorsCheckbox.setValue(true);
+        fixture.detectChanges();
+
+        const validationMessageAfterIgnoring = findValidationMessageDebug(fixture);
+        expect(validationMessageAfterIgnoring).toBeNull();
     });
 
     it('test field level error from EasyPost', () => {
@@ -341,7 +353,7 @@ describe('AddressEmbeddedComponent', () => {
         const addressToEnter = buildPerfectAddress();
         addressToEnter.street2 = 'NO PLACE THAT IS GOOD';
         // field 'address' is the global error.
-        const overallAddressErrors: AddressError[] = [{ code: '123', field: 'street1', message: 'Bad street1!!' }];
+        const overallAddressErrors: FieldError[] = [{ code: '123', field: 'street1', message: 'Bad street1!!', isEasyPostError: true }];
         const verificationStatus: AddressVerificationStatus = {
             address: new Address(),
             isDeliverable: false,
@@ -359,6 +371,19 @@ describe('AddressEmbeddedComponent', () => {
         expect(childComponent.addressErrors).toEqual(overallAddressErrors);
         // we save temp address even if it has errors
         expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledWith(addressToEnter, '123');
+        const checkbox = fixture.debugElement.query(By.css('.ignore-easy-post-errors'));
+        expect(checkbox).toBeTruthy();
+    });
+
+    it('do not show ignore-easy-post-errors checkbox if there are no easy post errors', () => {
+        component.activityGuid = '123';
+        const tempAddress = new Address({name: 'test'});
+        addressServiceSpy.getTempAddress.and.returnValue(of(tempAddress));
+        fixture.detectChanges();
+        const validationMessageAfter = findValidationMessageDebug(fixture);
+        expect(validationMessageAfter).not.toBeNull();
+        const checkbox = fixture.debugElement.query(By.css('.ignore-easy-post-errors'));
+        expect(checkbox).toBeFalsy();
     });
 
     it('test show verify warnings', fakeAsync(() => {
@@ -490,8 +515,13 @@ describe('AddressEmbeddedComponent', () => {
         expect(addressServiceSpy.saveTempAddress).toHaveBeenCalledTimes(1);
 
         // those methods are not called as we have formErrors check in saveRealAddressAction$ (line 531)
-        expect(addressServiceSpy.saveAddress).not.toHaveBeenCalledWith(partialAddressFromInputComponent, false);
+        expect(addressServiceSpy.saveAddress).not.toHaveBeenCalled();
         expect(addressServiceSpy.deleteTempAddress).not.toHaveBeenCalledWith('123');
+
+        component.ignoreEasyPostErrorsCheckbox.setValue(true);
+        component.saveAddress();
+
+        expect(addressServiceSpy.saveAddress).toHaveBeenCalledWith(partialAddressFromInputComponent, false);
         discardPeriodicTasks();
     }));
 
@@ -531,6 +561,49 @@ describe('AddressEmbeddedComponent', () => {
         expect(addressServiceSpy.deleteTempAddress).not.toHaveBeenCalled();
         discardPeriodicTasks();
     }));
+
+    it('emits valueChanged with null if saveAddress failed', fakeAsync(() => {
+        addressServiceSpy.saveAddress.and.returnValue(throwError('error'));
+        const defaultAddress = buildPerfectAddress();
+        defaultAddress.guid = '789';
+
+        // we are going to try call save in a tick or two
+        const spyOnSubmitAnnounced = spyOnProperty(submitAnnounceService, 'submitAnnounced$', 'get');
+        spyOnSubmitAnnounced.and.returnValue(hot('--a', { a: (new ActivityResponse('blah')) }));
+        addressServiceSpy.findDefaultAddress.and.returnValue(of(defaultAddress));
+        let componentIsBusy = false;
+        component.componentBusy.subscribe(isBusy => componentIsBusy = isBusy);
+        fixture.detectChanges();
+        const valueChangedSpy = spyOn(component.valueChanged, 'emit');
+        getTestScheduler().flush();
+
+        expect(componentIsBusy).toBe(false);
+        expect(valueChangedSpy).toHaveBeenCalledWith(null);
+        expect(addressServiceSpy.deleteTempAddress).not.toHaveBeenCalled();
+        discardPeriodicTasks();
+    }));
+
+    it('emit errorOrSuggestionWasShown on suggestion', () => {
+        const errorOrSuggestionWasShownSpy = spyOn(component.errorOrSuggestionWasShown, 'emit');
+        emitAddressThatTriggersSuggestion();
+        expect(errorOrSuggestionWasShownSpy).toHaveBeenCalled();
+    });
+
+    it('emit errorOrSuggestionWasShown on error', () => {
+        const errorOrSuggestionWasShownSpy = spyOn(component.errorOrSuggestionWasShown, 'emit');
+        const addressToEnter = buildPerfectAddress();
+        addressToEnter.street2 = 'NO PLACE THAT IS GOOD';
+        // field 'address' is the global error.
+        const verificationResponseWithWarningForEntered = new AddressVerificationResponse(addressToEnter);
+        verificationResponseWithWarningForEntered.warnings.entered = [{ code: 'WARNING', message: 'You have been warned!' }];
+        addressServiceSpy.verifyAddress.and.returnValue(of(verificationResponseWithWarningForEntered));
+        fixture.detectChanges();
+
+        childComponent.valueChanged.emit(addressToEnter);
+        fixture.detectChanges();
+
+        expect(errorOrSuggestionWasShownSpy).toHaveBeenCalled();
+    });
 
     it('hide country field when property is set', fakeAsync(() => {
         fixture.detectChanges();

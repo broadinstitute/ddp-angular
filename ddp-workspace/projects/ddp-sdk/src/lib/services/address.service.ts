@@ -96,7 +96,7 @@ export class AddressService extends UserServiceAgent<Address> {
             const path = `${this.BASE_URL}/${address.guid}` + (strict ? '' : '?strict=false');
             return this.putObservable(path, address, {}, true).pipe(
                 map(() => {
-                    return null;
+                    return address;
                 }),
                 catchError((error) => {
                     return throwError(error.error);

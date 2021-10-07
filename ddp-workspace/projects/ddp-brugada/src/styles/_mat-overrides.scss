@@ -1,0 +1,16 @@
+[class^='mat'] {
+  font-size: 1.8rem;
+}
+
+.mat-dialog-container {
+  margin: 0 2.4rem;
+
+  border: 1px solid grey;
+  border-radius: 12px !important;
+}
+
+.questions {
+  .mat-expansion-panel-body {
+    padding: 0 2.4rem 2.4rem 8.4rem;
+  }
+}

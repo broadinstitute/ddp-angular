@@ -1,0 +1,22 @@
+<div class="page">
+  <div class="page__container">
+    <h1 class="page__title">
+      {{ 'App.Dashboard.Title' | translate }}
+    </h1>
+
+    <div *ngIf="isLoading; else content" class="spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <ng-template #content>
+      <app-user-activities
+        [activities]="activities"
+        [isUIDisabled]="isUIDisabled"
+        (startActivity)="onStartActivity($event)"
+        (continueActivity)="onContinueActivity($event)"
+        (viewActivity)="onViewActivity($event)"
+        (updateActivity)="onUpdateActivity($event)"
+      ></app-user-activities>
+    </ng-template>
+  </div>
+</div>

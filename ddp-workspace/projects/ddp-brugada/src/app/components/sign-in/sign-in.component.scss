@@ -1,0 +1,31 @@
+@import '../../../styles/colors';
+@import '../../../styles/sign-forms';
+
+.actions {
+  display: flex;
+  margin-top: 32px;
+  margin-bottom: 20px;
+  justify-content: space-between;
+
+  &-block {
+    max-width: 250px;
+
+    button {
+      margin-top: 5px;
+    }
+
+    &-sub {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .actions {
+    display: block;
+
+    &-block {
+      margin-top: 20px;
+    }
+  }
+}

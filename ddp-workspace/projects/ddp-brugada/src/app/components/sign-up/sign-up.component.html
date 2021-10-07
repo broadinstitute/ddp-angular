@@ -1,0 +1,79 @@
+<div [formGroup]="form" class="form">
+  <div class="form-control">
+    <label for="firstName">{{ 'Join.FirstNameLabel' | translate }}</label>
+    <input
+      id="firstName"
+      type="text"
+      formControlName="firstName"
+      [placeholder]="'Join.FirstNamePlaceholder' | translate"
+    />
+    <div
+      class="form-control-error"
+      *ngIf="form.get('firstName')?.touched && form.get('firstName')?.hasError('required')"
+    >
+      {{ 'Join.FirstNameLabel' | translate }} {{ 'Join.RequiredError' | translate }}
+    </div>
+  </div>
+  <div class="form-control">
+    <label for="lastName">{{ 'Join.LastNameLabel' | translate }}</label>
+    <input
+      id="lastName"
+      type="text"
+      formControlName="lastName"
+      [placeholder]="'Join.LastNamePlaceholder' | translate"
+    />
+    <div class="form-control-error" *ngIf="form.get('lastName')?.touched && form.get('lastName')?.hasError('required')">
+      {{ 'Join.LastNameLabel' | translate }} {{ 'Join.RequiredError' | translate }}
+    </div>
+  </div>
+  <div class="form-control">
+    <label for="email">{{ 'Join.EmailLabel' | translate }}</label>
+    <input id="email" type="text" formControlName="email" [placeholder]="'Join.EmailPlaceholder' | translate" />
+    <div class="form-control-error" *ngIf="form.get('email')?.touched && form.get('email')?.hasError('required')">
+      {{ 'Join.EmailLabel' | translate }} {{ 'Join.RequiredError' | translate }}
+    </div>
+    <div class="form-control-error" *ngIf="form.get('email')?.touched && form.get('email')?.hasError('pattern')">
+      {{ 'Join.ValidError' | translate }} {{ 'Join.EmailLabel' | translate }}
+    </div>
+  </div>
+  <div class="form-control">
+    <label for="password">{{ 'Join.PasswordLabel' | translate }}</label>
+    <input
+      id="password"
+      type="password"
+      formControlName="password"
+      [placeholder]="'Join.PasswordPlaceholder' | translate"
+    />
+    <div class="form-control-error" *ngIf="form.get('password')?.touched && form.get('password')?.hasError('required')">
+      {{ 'Join.PasswordLabel' | translate }} {{ 'Join.RequiredError' | translate }}
+    </div>
+    <div
+      class="form-control-error"
+      *ngIf="
+        form.get('password')?.touched &&
+        form.get('password')?.hasError('minlength') &&
+        !form.get('password')?.hasError('pattern')
+      "
+    >
+      {{ 'Join.PasswordLabel' | translate }} {{ 'Join.LengthMoreError' | translate }}
+      {{ form.get('password').getError('minlength').requiredLength }}
+    </div>
+    <div
+      class="form-control-error"
+      [innerHtml]="'Join.PasswordPatternError' | translate"
+      *ngIf="form.get('password')?.touched && form.get('password')?.hasError('pattern')"
+    ></div>
+  </div>
+  <div class="form-control-error" *ngIf="error$ | async">
+    {{ error$ | async }}
+  </div>
+  <div class="actions">
+    <div class="actions-block">
+      <button type="submit" class="btn btn--scarlet" (click)="submit()">{{ 'Join.Submit' | translate }}</button>
+    </div>
+    <div class="actions-block">
+      <p>{{ 'Join.AlreadyRegistered' | translate }}</p>
+      <a [routerLink]="['/', Route.Login]">{{ 'Join.SignInLink' | translate }}</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,173 @@
+@import 'colors';
+@import 'breakpoints';
+
+.activity-block-title {
+  margin: 1.65em 0 0.5em;
+
+  font-size: 2.8rem;
+
+  @include media-sm {
+    font-size: 2.4rem;
+  }
+}
+
+.activity-question-title,
+.activity-text-title {
+  margin: 1.65em 0 0.5em;
+
+  font-size: 2.4rem;
+
+  @include media-sm {
+    font-size: 2rem;
+  }
+}
+
+.bullet-list,
+.numbered-list {
+  padding-left: 1em;
+
+  li {
+    margin: 0.5em 0;
+  }
+}
+
+.ErrorMessage,
+.error-message {
+  margin: 0.5em 0;
+
+  color: map-get($colors, 'scarlet');
+}
+
+.ddp-required-question-prompt {
+  .activity-question-title::after {
+    content: ' *';
+  }
+}
+
+[class^='composite-answer'] {
+  .Title-text {
+    align-items: flex-end !important;
+
+    span {
+      margin: 1.65em 0 0.25em;
+
+      font-size: 2.4rem;
+      font-weight: bold;
+
+      @include media-sm {
+        font-size: 2rem;
+      }
+    }
+
+    .mat-icon-button {
+      margin-top: 2.4rem;
+
+      .mat-icon {
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+ddp-date {
+  div {
+    div:first-of-type {
+      display: block !important;
+
+      .mat-dialog-content {
+        display: block;
+        width: 100%;
+
+        .mat-form-field {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .ddp-answer-container.picklist {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 0.5em;
+
+    @include media-sm {
+      flex-flow: column nowrap;
+    }
+
+    .ddp-answer-field {
+      width: 30%;
+      flex-grow: 0;
+
+      @include media-sm {
+        width: 100%;
+
+        &:not(:last-of-type) {
+          margin-bottom: 1.2rem;
+        }
+      }
+
+      select {
+        width: 100%;
+
+        padding: 0.8rem 0;
+
+        border: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+
+        font: inherit;
+        color: inherit;
+      }
+    }
+  }
+}
+
+ddp-activity-radiobuttons-picklist-question {
+  .mat-radio-group {
+    .margin-5 {
+      margin: 0;
+
+      &:not(:last-of-type) {
+        margin-bottom: 0.5em;
+      }
+
+      .mat-radio-button {
+        .mat-radio-container {
+          top: 3px;
+        }
+      }
+    }
+  }
+}
+
+ddp-activity-checkboxes-picklist-question {
+  .mat-list {
+    padding-top: 0;
+
+    &-item {
+      height: auto !important;
+      min-height: 3.6rem;
+
+      &:not(:last-of-type) {
+        margin-bottom: 0.5em;
+      }
+
+      &-content {
+        padding: 0 !important;
+
+        .mat-checkbox {
+          &-inner-container {
+            width: 2rem;
+            height: 2rem;
+
+            margin-top: 0;
+            margin-bottom: 0;
+
+            top: 3px;
+          }
+        }
+      }
+    }
+  }
+}
