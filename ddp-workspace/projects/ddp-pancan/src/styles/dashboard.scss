@@ -126,6 +126,16 @@ ddp-user-preferences {
     .form-subgroup-title {
         font-size: 1.2rem;
     }
+
+    .form-subgroup {
+        margin-bottom: 30px;
+
+        &--birthday {
+            .form-subgroup-title {
+                margin-bottom: 0;
+            }
+        }
+    }
 }
 
 @media only screen and(max-width: 650px) {

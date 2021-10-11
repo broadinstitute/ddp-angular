@@ -19,7 +19,8 @@ import {
     SortOrder,
     PicklistSortingPolicy,
     AnalyticsEventsService,
-    AnalyticsEvent
+    AnalyticsEvent,
+    UserProfileField
 } from 'ddp-sdk';
 
 import { ToolkitConfigurationService, ToolkitModule } from 'toolkit';
@@ -92,6 +93,7 @@ sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.useStepsWithCircle = true;
 sdkConfig.notSortedPicklistAutocompleteStableIds = ['PRIMARY_CANCER_SELF', 'PRIMARY_CANCER_CHILD'];
+sdkConfig.userProfileFieldsForEditing = [UserProfileField.DATE_OF_BIRTH];
 
 export function translateFactory(translate: TranslateService,
     injector: Injector,
