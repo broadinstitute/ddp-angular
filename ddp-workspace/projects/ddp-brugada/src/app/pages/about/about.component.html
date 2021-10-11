@@ -1,0 +1,23 @@
+<main class="content">
+  <section class="heading">
+    <h1 class="heading__title">
+      {{ 'App.About.Title' | translate }}
+    </h1>
+
+    <p [innerHTML]="'App.About.Subtitle' | translate"></p>
+  </section>
+
+  <section class="description">
+    <div class="description__container">
+      <ng-container *ngFor="let Paragraph of 'App.About.Paragraphs' | translate">
+        <h2 class="description__title">
+          {{ Paragraph.Title }}
+        </h2>
+
+        <p *ngFor="let Description of Paragraph.Descriptions" class="description__paragraph">
+          {{ Description }}
+        </p>
+      </ng-container>
+    </div>
+  </section>
+</main>

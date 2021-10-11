@@ -12,6 +12,7 @@ import { toolkitConfigProvider } from './config/toolkit.provider';
 import { MaterialModule } from './modules/material/material.module';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ErrorComponent } from './components/pages/error/error.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ActivityComponent } from './components/activity/activity.component';
 import { SurveyComponent } from './components/pages/survey/survey.component';
@@ -21,15 +22,18 @@ import { PreScreeningComponent } from './components/pages/pre-screening/pre-scre
 import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
 import { ActivitiesListComponent } from './components/activities-list/activities-list.component';
 import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
+import { SessionExpiredComponent } from './components/pages/session-expired/session-expired.component';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress.component';
 import { ParticipantsListComponent } from './components/pages/participant-list/participant-list.component';
 import { NotificationsDialogComponent } from './components/notifications-dialog/notifications-dialog.component';
+import { SessionExpiredDialogComponent } from './components/session-expired-dialog/session-expired-dialog.component';
 import { ParticipantDeletionDialogComponent } from './components/participant-deletion-dialog/participant-deletion-dialog.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    ErrorComponent,
     HeaderComponent,
     FooterComponent,
     SurveyComponent,
@@ -38,12 +42,14 @@ import { ParticipantDeletionDialogComponent } from './components/participant-del
     ActivityComponent,
     PreScreeningComponent,
     ActivityPageComponent,
+    SessionExpiredComponent,
     UserActivitiesComponent,
     ActivitiesListComponent,
     RedirectToLoginComponent,
     ParticipantsListComponent,
     WorkflowProgressComponent,
     NotificationsDialogComponent,
+    SessionExpiredDialogComponent,
     ParticipantDeletionDialogComponent,
   ],
   imports: [

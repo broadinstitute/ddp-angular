@@ -33,6 +33,7 @@
     <app-user-activities
       [activities]="activities"
       [isParticipantIneligible]="isContactUsStatus"
+      [isUiBlocked]="isUiBlocked"
       (startActivity)="goToActivity($event)"
       (continueActivity)="goToActivity($event)"
       (viewActivity)="goToActivity($event)"

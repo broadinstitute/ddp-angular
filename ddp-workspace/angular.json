@@ -2590,6 +2590,137 @@
         }
       }
     },
+    "ddp-brugada": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/ddp-brugada",
+      "sourceRoot": "projects/ddp-brugada/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ddp-brugada",
+            "index": "projects/ddp-brugada/src/index.html",
+            "main": "projects/ddp-brugada/src/main.ts",
+            "polyfills": "projects/ddp-brugada/src/polyfills.ts",
+            "tsConfig": "projects/ddp-brugada/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/ddp-brugada/src/favicon.ico",
+              "projects/ddp-brugada/src/favicon-alert.ico",
+              "projects/ddp-brugada/src/assets",
+              {
+                "glob": "pepperConfig.js",
+                "input": "projects/ddp-brugada/output-config/",
+                "output": "assets/config"
+              }
+            ],
+            "styles": ["projects/ddp-brugada/src/styles.scss"],
+            "scripts": [
+              "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ddp-brugada/src/environments/environment.ts",
+                  "with": "projects/ddp-brugada/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "25kb"
+                }
+              ]
+            },
+            "es5": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "25kb"
+                }
+              ],
+              "tsConfig": "projects/ddp-brugada/tsconfig.es5.json"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ddp-brugada:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ddp-brugada:build:production"
+            },
+            "es5": {
+              "browserTarget": "ddp-brugada:build:es5"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ddp-brugada:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ddp-brugada/src/test.ts",
+            "polyfills": "projects/ddp-brugada/src/polyfills.ts",
+            "tsConfig": "projects/ddp-brugada/tsconfig.spec.json",
+            "karmaConfig": "projects/ddp-brugada/karma.conf.js",
+            "assets": [
+              "projects/ddp-brugada/src/favicon.ico",
+              "projects/ddp-brugada/src/favicon-alert.ico",
+              "projects/ddp-brugada/src/assets"
+            ],
+            "styles": ["projects/ddp-brugada/src/styles.scss"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ddp-brugada/tsconfig.app.json",
+              "projects/ddp-brugada/tsconfig.spec.json",
+              "projects/ddp-brugada/e2e/tsconfig.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ddp-brugada/e2e/protractor.conf.js",
+            "devServerTarget": "ddp-brugada:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ddp-brugada:serve:production"
+            }
+          }
+        }
+      }
+    },
     "ddp-singular": {
       "projectType": "application",
       "schematics": {

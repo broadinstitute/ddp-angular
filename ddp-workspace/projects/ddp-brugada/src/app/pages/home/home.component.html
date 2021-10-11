@@ -1,0 +1,137 @@
+<section class="cta">
+  <div class="cta__container">
+    <div class="cta__text-wrapper">
+      <h1 class="cta__title text-shadow">
+        {{ 'App.Home.Cta.Title' | translate }}
+      </h1>
+
+      <h2 class="cta__subtitle text-shadow">
+        {{ 'App.Home.Cta.Subtitle' | translate }}
+      </h2>
+
+      <a class="btn btn--white cta-btn" [routerLink]="Route.Join">
+        {{ 'App.Home.Cta.Join' | translate }}
+      </a>
+    </div>
+
+    <div class="cta__img"></div>
+  </div>
+</section>
+
+<section class="mission">
+  <div class="mission__container">
+    <div class="mission__img-wrapper">
+      <img src="/assets/images/home/ecg-icon.png" [alt]="'App.Home.Mission.ImgAlt' | translate" />
+    </div>
+
+    <p class="mission__paragraph" [innerHTML]="'App.Home.Mission.Paragraph1' | translate"></p>
+
+    <p class="mission__paragraph">
+      {{ 'App.Home.Mission.Paragraph2' | translate }}
+    </p>
+
+    <a class="uppercased-link mission__link" [routerLink]="Route.About">
+      {{ 'App.Home.Mission.LearnMore' | translate }}
+    </a>
+  </div>
+</section>
+
+<section class="participation">
+  <div class="participation__container">
+    <h3 class="participation__title text-shadow">
+      {{ 'App.Home.Participation.Title' | translate }}
+    </h3>
+
+    <ul class="step-list participation__step-list">
+      <li *ngFor="let Step of 'App.Home.Participation.Steps' | translate; let i = index" class="step-list__item">
+        <div class="step">
+          <div class="step__img-wrapper">
+            <img [src]="'/assets/images/home/step-' + (i + 1) + '.png'" [alt]="Step.Name" />
+          </div>
+
+          <div class="step__text-wrapper">
+            <h4 class="step__name">
+              {{ Step.Name }}
+            </h4>
+
+            <p class="step__duration">
+              {{ Step.Duration }}
+            </p>
+
+            <p class="step__description">
+              {{ Step.Description }}
+            </p>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <a class="btn btn--white cta-btn" [routerLink]="Route.Join">
+      {{ 'App.Home.Participation.Start' | translate }}
+    </a>
+  </div>
+</section>
+
+<section class="institutions">
+  <div class="institutions__container">
+    <ul class="institutions-list">
+      <li class="institutions-list__item">
+        <a class="img-link" target="_blank" [href]="BROAD_URL">
+          <img src="/assets/images/home/broad-logo.png" [alt]="'App.Home.Institutions.ImageAlts.Broad' | translate" />
+        </a>
+      </li>
+
+      <li class="institutions-list__item">
+        <a class="img-link" target="_blank" [href]="MGH_URL">
+          <img src="/assets/images/home/mgh-logo.png" [alt]="'App.Home.Institutions.ImageAlts.MGH' | translate" />
+        </a>
+      </li>
+    </ul>
+
+    <h3 class="institutions__title">
+      {{ 'App.Home.Institutions.Title' | translate }}
+    </h3>
+
+    <ul class="institutions-list">
+      <li class="institutions-list__item">
+        <a class="img-link" target="_blank" [href]="SADS_URL">
+          <img src="/assets/images/home/sads-logo.png" [alt]="'App.Home.Institutions.ImageAlts.SADS' | translate" />
+        </a>
+      </li>
+
+      <li class="institutions-list__item">
+        <a class="img-link" target="_blank" [href]="VUMC_URL">
+          <img src="/assets/images/home/vumc-logo.png" [alt]="'App.Home.Institutions.ImageAlts.VUMC' | translate" />
+        </a>
+      </li>
+
+      <li class="institutions-list__item">
+        <a class="img-link" target="_blank" [href]="UWM_URL">
+          <img src="/assets/images/home/uwm-logo.png" [alt]="'App.Home.Institutions.ImageAlts.UWM' | translate" />
+        </a>
+      </li>
+
+      <li class="institutions-list__item">
+        <a class="link" target="_blank" [href]="STANFORD_URL">
+          {{ 'App.Home.Institutions.Stanford' | translate }}
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="join-project">
+  <div class="join-project__container">
+    <h3 class="join-project__title text-shadow">
+      {{ 'App.Home.JoinProject.Title' | translate }}
+    </h3>
+
+    <h4 class="join-project__subtitle text-shadow">
+      {{ 'App.Home.JoinProject.Subtitle' | translate }}
+    </h4>
+
+    <a class="btn btn--white cta-btn" [routerLink]="Route.Join">
+      {{ 'App.Home.JoinProject.Btn' | translate }}
+    </a>
+  </div>
+</section>

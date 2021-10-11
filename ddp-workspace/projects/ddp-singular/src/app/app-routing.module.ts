@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Route } from './constants/route';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginLandingRedesignedComponent } from 'toolkit';
+import { ErrorComponent } from './components/pages/error/error.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { SurveyComponent } from './components/pages/survey/survey.component';
 import { PasswordComponent } from './components/pages/password/password.component';
 import { IrbGuard, Auth0CodeCallbackComponent, AuthGuard, BrowserGuard } from 'ddp-sdk';
 import { ActivityPageComponent } from './components/pages/activity/activity-page.component';
 import { PreScreeningComponent } from './components/pages/pre-screening/pre-screening.component';
-import { LoginLandingRedesignedComponent, ErrorComponent, SessionExpiredComponent } from 'toolkit';
 import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
+import { SessionExpiredComponent } from './components/pages/session-expired/session-expired.component';
 import { ParticipantsListComponent } from './components/pages/participant-list/participant-list.component';
 
 

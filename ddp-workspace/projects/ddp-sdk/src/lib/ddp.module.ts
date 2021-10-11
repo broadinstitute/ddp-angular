@@ -425,6 +425,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         SignInOutComponent,
         UserProfileComponent,
         ParticipantProfileComponent,
+        UserPreferencesComponent,
         UserActivitiesComponent,
         DashboardComponent,
         ChangeLanguageRedirectComponent,

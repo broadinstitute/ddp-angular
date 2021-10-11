@@ -100,7 +100,8 @@
     },
     "CountMeIn": "Cont Me In",
     "Title": {
-      "Alert": "RARE-X"
+      "Default": "Project Singular",
+      "Alert": "Your session will time-out soon"
     },
     "StartButton": "Start",
     "ContinueButton": "Continue",
@@ -219,9 +220,15 @@
       }
     }
   },
+  "Error": {
+    "Title": "We've encountered an error",
+    "Paragraph1": "We're sorry, but an error has occurred.",
+    "Paragraph2": "Please wait a moment and retry."
+  },
   "Toolkit": {
     "SessionExpired": {
       "Text": {
+        "H1": "Session expired",
         "Pt1": "You were away for a while, so we logged you out as a security precaution.",
         "Pt2": "Please log in again to return to the last page you were on."
       },

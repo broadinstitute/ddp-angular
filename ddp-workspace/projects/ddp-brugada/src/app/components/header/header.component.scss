@@ -1,0 +1,168 @@
+@import '../../../styles/breakpoints';
+@import '../../../styles/link-list';
+@import '../../../styles/colors';
+
+$headerHeight: (
+  'default': 10rem,
+  'sm': 9.2rem,
+  'xs': 8.4rem,
+);
+
+.header {
+  height: map-get($headerHeight, 'default');
+
+  @include media-sm {
+    height: map-get($headerHeight, 'sm');
+  }
+
+  @include media-xs {
+    height: map-get($headerHeight, 'xs');
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+
+    max-width: 120rem;
+    height: 100%;
+
+    margin: 0 auto;
+    padding: 0 2.4rem;
+
+    @include media-md {
+      position: relative;
+    }
+  }
+
+  &__logo {
+    height: 3.6rem;
+
+    margin-right: 3.2rem;
+
+    @include media-md {
+      margin-right: auto;
+    }
+
+    @include media-sm {
+      height: 3.2rem;
+    }
+
+    @include media-xs {
+      height: 2.8rem;
+    }
+  }
+
+  &__logo-img {
+    height: 100%;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    @include media-md {
+      flex-flow: column nowrap;
+
+      position: absolute;
+      top: 100%;
+      left: 0;
+
+      height: calc(100vh - #{map-get($headerHeight, 'default')});
+
+      padding: 2.4rem;
+
+      background: map-get($colors, 'white');
+      border-top: 1px solid map-get($colors, 'beige');
+      box-shadow: 0 2.4rem 2.4rem rgba(0, 0, 0, 0.05);
+
+      transform: translate3d(-120%, 0, 0);
+      transition: transform 0.3s ease;
+      z-index: 10;
+
+      @include media-sm {
+        height: calc(100vh - #{map-get($headerHeight, 'sm')});
+      }
+
+      @include media-xs {
+        height: calc(100vh - #{map-get($headerHeight, 'xs')});
+      }
+
+      &--shown {
+        transform: translate3d(0, 0, 0);
+      }
+    }
+  }
+}
+
+.pull-right {
+  margin-left: auto;
+
+  @include media-md {
+    margin-top: auto;
+    margin-left: 0;
+  }
+}
+
+.toggle {
+  display: none;
+
+  position: relative;
+
+  width: 3.2rem;
+  height: 2rem;
+
+  background: transparent;
+  border: none;
+
+  cursor: pointer;
+
+  @include media-md {
+    display: block;
+  }
+
+  &--shown &__bar {
+    &:nth-of-type(1) {
+      transform: rotate(45deg) translate3d(0rem, -0.3rem, 0);
+    }
+
+    &:nth-of-type(2) {
+      opacity: 0;
+    }
+
+    &:nth-of-type(3) {
+      transform: rotate(-45deg) translate3d(0rem, 0.3rem, 0);
+    }
+  }
+
+  &__bar {
+    display: block;
+
+    position: absolute;
+    left: 0;
+
+    width: 100%;
+    height: 2px;
+
+    background: map-get($colors, 'font-dark');
+
+    transform-origin: left;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    backface-visibility: hidden;
+
+    &:nth-of-type(1) {
+      top: 0;
+    }
+
+    &:nth-of-type(2) {
+      top: 50%;
+
+      margin-top: -1px;
+    }
+
+    &:nth-of-type(3) {
+      bottom: 0;
+    }
+  }
+}

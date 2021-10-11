@@ -128,6 +128,9 @@
     },
     {
       "path": "./projects/ddp-singular/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ddp-brugada/tsconfig.spec.json"
     }
   ]
 }

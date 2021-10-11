@@ -1,0 +1,62 @@
+<section class="intro">
+  <div class="intro__container">
+    <h2 class="intro__title" [innerHTML]="'App.FAQ.Participants.Title' | translate"></h2>
+
+    <p class="intro__description" [innerHTML]="'App.FAQ.Participants.Description' | translate"></p>
+  </div>
+</section>
+
+<section class="questions">
+  <div class="questions__container">
+    <ng-container
+      [ngTemplateOutlet]="questionsTmpl"
+      [ngTemplateOutletContext]="{
+        questions: 'App.FAQ.Participants.Questions' | translate
+      }"
+    ></ng-container>
+  </div>
+</section>
+
+<section class="intro">
+  <div class="intro__container">
+    <h2 class="intro__title" [innerHTML]="'App.FAQ.Community.Title' | translate"></h2>
+  </div>
+</section>
+
+<section class="questions">
+  <div class="questions__container">
+    <ng-container
+      [ngTemplateOutlet]="questionsTmpl"
+      [ngTemplateOutletContext]="{
+        questions: 'App.FAQ.Community.Questions' | translate
+      }"
+    ></ng-container>
+  </div>
+</section>
+
+<ng-template #questionsTmpl let-questions="questions">
+  <mat-accordion multi hideToggle displayMode="flat">
+    <mat-expansion-panel #panel *ngFor="let Question of questions">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <p class="question__header">
+            <button
+              type="button"
+              class="question__toggle"
+              tabindex="-1"
+              [class.question__toggle--open]="panel.expanded"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+
+            <span class="question__name">
+              {{ Question.Name }}
+            </span>
+          </p>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <p *ngFor="let Answer of Question.Answers" class="question__answer" [innerHTML]="Answer"></p>
+    </mat-expansion-panel>
+  </mat-accordion>
+</ng-template>

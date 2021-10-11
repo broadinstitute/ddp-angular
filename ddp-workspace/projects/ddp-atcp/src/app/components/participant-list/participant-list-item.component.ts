@@ -82,6 +82,7 @@ import { Participant } from './participant-list.component';
           [activities]="participant.activities"
           [opaque]="true"
           [isParticipantIneligible]="isContactUsStatus"
+          [isUiBlocked]="isUiBlocked"
           (startActivity)="onStartActivity($event)"
           (continueActivity)="onStartActivity($event)"
           (viewActivity)="onStartActivity($event)"
@@ -96,6 +97,7 @@ export class ParticipantListItem {
   @Input() participant: Participant;
 
   expanded = false;
+  isUiBlocked = false;
 
   constructor(
     private router: Router,
@@ -150,6 +152,7 @@ export class ParticipantListItem {
   }
 
   private handleEditConsent(): void {
+    this.isUiBlocked = true;
     this.session.setParticipant(this.participant.guid);
 
     this.activityServiceAgent
@@ -161,6 +164,7 @@ export class ParticipantListItem {
   }
 
   private handleEditActivity(activityInstance: ActivityInstance): void {
+    this.isUiBlocked = true;
     this.session.setParticipant(this.participant.guid);
 
     this.activityServiceAgent
@@ -173,6 +177,7 @@ export class ParticipantListItem {
     activity: ActivityInstanceGuid,
     isConsentEditActivity: boolean = false,
   ): void => {
+    this.isUiBlocked = false;
     this.activityService.setCurrentActivity(
       activity.instanceGuid,
       isConsentEditActivity,

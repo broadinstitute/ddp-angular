@@ -1,0 +1,11 @@
+@import 'styles/main';
+
+a {
+  text-decoration: none;
+  color: map-get($colors, 'font-dark');
+}
+
+.session-expire-dialog button {
+  margin-left: 30px;
+  margin-bottom: 20px;
+}

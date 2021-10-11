@@ -1,0 +1,51 @@
+@import '../../../styles/colors';
+@import '../../../styles/breakpoints';
+
+.heading {
+  padding: 8rem 2.4rem 6.4rem;
+
+  text-align: center;
+
+  @include media-sm {
+    padding-top: 6.4rem;
+  }
+}
+
+.heading__title {
+  margin-bottom: 1.6rem;
+  font-size: 4rem;
+
+  @include media-sm {
+    font-size: 3.2rem;
+  }
+}
+
+.heading__link:hover {
+  opacity: 0.8;
+  transition: opacity 3s linear;
+}
+
+.description {
+  background: map-get($colors, 'beige');
+}
+
+.description__container {
+  max-width: 64rem;
+
+  margin: 0 auto;
+  padding: 0 2.4rem 8rem;
+}
+
+.description__title {
+  padding: 7.2rem 0 2.8rem;
+}
+
+.description__paragraph {
+  & + & {
+    margin-top: 2.4rem;
+  }
+}
+
+.description__paragraph:last-child {
+  margin-bottom: 0;
+}
