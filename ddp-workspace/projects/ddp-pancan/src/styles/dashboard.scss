@@ -136,6 +136,14 @@ ddp-user-preferences {
             }
         }
     }
+
+    .ddp-date-field-margin {
+        margin-right: 1rem;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
 }
 
 @media only screen and(max-width: 650px) {

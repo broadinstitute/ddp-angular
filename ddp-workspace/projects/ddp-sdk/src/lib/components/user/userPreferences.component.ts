@@ -95,7 +95,7 @@ export class UserPreferencesComponent implements OnDestroy {
     private readonly YEARS_BACK = 100;
     public readonly endYear: number;
     public readonly startYear: number;
-    public loaded = false;
+    public loaded = true;
     private userProfileModel: UserProfileDecorator | null;
     private ngUnsubscribe = new Subject();
     public readonly addressFormBlock: MailAddressBlock = new MailAddressBlock(null);
@@ -132,6 +132,7 @@ export class UserPreferencesComponent implements OnDestroy {
         this.startYear = this.endYear - this.YEARS_BACK;
 
         if (this.userProfileFieldsForEditing.size) {
+            this.loaded = false;
             serviceAgent.profile.pipe(
                 finalize(() => this.loaded = true),
                 takeUntil(this.ngUnsubscribe)
@@ -170,12 +171,16 @@ export class UserPreferencesComponent implements OnDestroy {
     }
 
     public canSaveUserPreferences(): boolean {
-        return this.loaded && this.isAddressValid && (this.profileForm.dirty || this.addressDirty)
+        return this.loaded && this.isAddressValid
             // let's allow to save preferences if user didn't touch empty birthday date since s/he can fill it later at action forms
             && (this.birthDate.valid || (this.birthDate.invalid && this.birthDate.pristine));
     }
 
     public save(): void {
+        if (!(this.profileForm.dirty || this.addressDirty)) {
+            this.dialogRef.close();
+            return;
+        }
         const shouldProfileBeUpdated = this.profileForm.dirty;
         if (shouldProfileBeUpdated) {
             this.userProfileModel.profile.birthYear = this.birthDate.value.year;
