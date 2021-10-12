@@ -306,6 +306,7 @@ var DDP_ENV = {
     {{end}}
 
     {{with secret (printf "secret/pepper/%s/%s/singular/conf" $environment $version)}}
+        DDP_ENV['analyticsToken'] = "{{.Data.analyticsToken}}";
         DDP_ENV['auth0ClientId'] = "{{.Data.auth0.clientId}}";
         DDP_ENV['auth0Domain'] = "{{.Data.auth0.loginDomain}}";
         DDP_ENV['auth0Audience'] = "{{.Data.auth0.loginDomain}}";
