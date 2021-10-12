@@ -605,6 +605,13 @@ describe('AddressEmbeddedComponent', () => {
         expect(errorOrSuggestionWasShownSpy).toHaveBeenCalled();
     });
 
+    it('emit inputAddress when ddp-address-input emits valueChanged', () => {
+        const inputAddressSpy = spyOn(component.inputAddress, 'emit');
+        childComponent.valueChanged.emit(buildPerfectAddress());
+
+        expect(inputAddressSpy).toHaveBeenCalled();
+    });
+
     it('hide country field when property is set', fakeAsync(() => {
         fixture.detectChanges();
         expect(childComponent.country).toBeNull();
