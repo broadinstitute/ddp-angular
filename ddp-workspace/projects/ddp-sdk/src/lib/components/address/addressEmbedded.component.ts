@@ -139,6 +139,10 @@ interface AddressSuggestion {
         :host ::ng-deep .mat-radio-label {
             white-space: normal;
         }
+
+        :host ::ng-deep .mat-checkbox-layout {
+            white-space: normal;
+        }
         `],
     changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -1,506 +1,507 @@
 {
-  "Activities": {
-    "StatusCodes": {
-      "CREATED": "New",
-      "IN_PROGRESS": "In Progress",
-      "COMPLETE": "Complete"
+    "Activities": {
+        "StatusCodes": {
+            "CREATED": "New",
+            "IN_PROGRESS": "In Progress",
+            "COMPLETE": "Complete"
+        },
+        "PageCount": "Page {{ current }} of {{ total }}"
     },
-    "PageCount": "Page {{ current }} of {{ total }}"
-  },
-  "Header": {
-    "Alts": {
-      "PoweredBy": "Powered by RARE-X"
-    }
-  },
-  "Footer": {
-    "Links": {
-      "Home": "RARE-X.org",
-      "TermsOfUse": "Terms of Use",
-      "PrivacyPolicy": "Privacy Policy"
-    }
-  },
-  "RedirectToLogin": {
-    "Text": "Please wait until you are redirected"
-  },
-  "WorkflowProgress": {
-    "AboutYou": "About You",
-    "LegacySurvey": "Legacy Survey",
-    "Consent": "Consent Form",
-    "Assent": "Assent Form",
-    "MedicalRelease": "Medical Release",
-    "DemographicsSurvey": "Demographics Survey",
-    "MedicalBackgroundSurvey": "Medical Background Survey",
-    "NeurodevelopmentSurvey": "Neurodevelopment Survey",
-    "QualityOfLifeSurvey": "Quality of Life Survey"
-  },
-  "Pages": {
-    "PrivacyPolicy": {
-      "Title1": "RARE-X DATA COLLECTION PROGRAM<br />WEBSITE PRIVACY POLICY",
-      "Paragraph1": "The RARE-X Data Collection Program (“RARE-X DCP” or “Program”) website is a tool to help collect, store, and share information about patients with rare diseases for research. RARE-X is committed to protecting your privacy. This Privacy Policy applies to RARE-X and its agents. Agents are people who work closely with RARE-X and who sign agreements promising to follow this Policy. When this Privacy Policy uses the term “we” or “ours” it means RARE-X and its agents.",
-      "Paragraph2": "This Policy describes the information we will collect through the RARE-X DCP website. Most of the information that RARE-X will collect through this website comes from patients, their caregivers, family members or other legally authorized representatives (collectively called “caregivers”). In addition, RARE-X may collect a minimum amount of information from researchers and clinicians.",
-      "Paragraph3": "By visiting the RARE-X DCP website, you agree to this Privacy Policy.",
-      "InformationUsage": {
-        "Title": "How We Use and Share Your Information",
-        "Paragraph1": "This section describes how we use and share information that patients and their caregivers or researchers give us. There is a separate section for Patients and Caregivers and another section for Researchers because these two groups give us different information.  There is also a section about data that is collected automatically in site navigation."
-      },
-      "PatientsAndCaregivers": {
-        "Title": "Patients and Caregivers",
-        "PreRegistration": {
-          "Title": "Patient Pre-Registration Information",
-          "Paragraph1": "Although we would like as many people as possible to participate in the RARE-X DCP, there are some requirements on who can participate. We will ask you a few questions, such as the patient’s age and where they live to help us figure out if the patient meets the requirements for joining this Program.",
-          "Paragraph2": "If the patient does not meet the requirements for this Program, you will not be able to register for an account, and we will delete the pre-registration information you provided.",
-          "Paragraph3": "If the patient meets the requirements for this Program, we will transfer this basic information that you provided to the account you create."
-        },
-        "Registration": {
-          "Title": "Patient and Caregiver Registration Information",
-          "Paragraph1": "To register for the RARE-X DCP, you will create an account. When you create an account, you will give us your username, password, and email address."
-        },
-        "Other": {
-          "Title": "Other Information We Collect about Patients and Caregivers",
-          "Paragraph1": "After you have created an account, we will ask for detailed information about the patient (“patient information”). For example, we may ask the patient’s name and ask you to complete questions in surveys about the patient’s health and health treatment history. We may also ask questions about how the patient’s health condition has affected the patient’s caregivers. If you are interested in answering these surveys, you will do so on the RARE-X DCP website. We may have other ways for you to give information about the patient to us through the RARE-X DCP website, such as uploading test results or other records."
-        },
-        "InformationUsage": {
-          "Title": "How We Use Patient and Caregiver Information",
-          "Paragraph1": "We may use your email address to contact you. Some examples of why we might contact you are to give you technical support or to tell you what’s new with RARE-X DCP. We may use your registration information and patient information to assist you in filling out surveys about the patient and their caregivers.",
-          "Paragraph2": "If you give your permission, we may contact you to:",
-          "List": [
-            "ask you to participate in other studies.",
-            "notify you about clinical trials that the patient might be eligible for."
-          ]
-        },
-        "InformationShare": {
-          "Title": "How We Share Patient and Caregiver Information with Others",
-          "Paragraph1": "We will share information you give us through the RARE-X DCP website only for the reasons we list below. Other than these reasons, we will not sell, rent, lease, give, or share your information without your permission.",
-          "Paragraph2": "We share patient and caregiver information with other persons and organizations for the following reasons:",
-          "Research": {
-            "Title": "For research",
-            "Paragraph1": "The RARE-X DCP aims to help researchers learn more about rare diseases and make discoveries about treating them. Patient and caregiver information we collect through the website will be stored in the RARE-X research database. With your permission, we will share patient and/or caregiver information with researchers for their studies. Before we share patient and/or caregiver information with researchers, we will remove the patient’s and caregiver’s name and other information that would easily identify them. You can learn more about how we share patient and caregiver information for research in the consent forms."
-          },
-          "Organizations": {
-            "Title": "For patient organizations to contact you",
-            "Paragraph1": "With your permission, we will share patient and caregiver information with patient organizations that are associated with the patient’s rare disease so that they may contact you to:",
-            "List": [
-              "help you answer questions about the patient and their caregivers;",
-              "notify you if researchers think the patient might be eligible for a clinical trial."
-            ],
-            "Paragraph2": "You can learn more about how we share information with patient organizations in the consent forms."
-          },
-          "Providers": {
-            "Title": "With service providers",
-            "Paragraph1": "We work with companies and other organizations to help us run our website and our data collection. We call these companies and organizations “service providers.” We share with service providers only the registration and patient information that they need to do their jobs. The service providers will have to sign a contract promising to use the information only for the job they are doing for us. Also, they will promise to keep the information safe."
-          },
-          "Legal": {
-            "Title": "For legal reasons",
-            "Paragraph1": "We may share information if we are required to by law. Otherwise, we will not share information for any civil, criminal, administrative, legislative, or other proceedings.",
-            "Paragraph2": "In cases where the law says we must share information, we will try to give out as little information as possible. We will try to protect your privacy as much as we can. Whenever possible, we will tell you if we have to give out information."
-          }
-        },
-        "RightsAndChoices": {
-          "Title": "Patient and Caregiver Rights and Choices",
-          "Paragraph1": "Patients and caregivers have rights and choices about how we use and share their information. You can choose the amount of information that you share with us. You can choose who we can share the patient’s information with for research. These choices are described in more detail in the consent form.",
-          "Paragraph2": "You can get a copy of the patient information that you directly give to us. To do this, call <a href=\"tel:+17164272739\">(716) 427-2739</a> or email us at ​<a href=\"mailto:support@rare-x.org\">support@rare-x.org​</a>.",
-          "Paragraph3": "You can stop using the RARE-X DCP website <a href=\"https://dcp.rare-x.org\" target=\"_blank\">​https://dcp.rare-x.org</a> at any time. Please note that if you just stop using the website or delete your web account, it does <a class=\"bold italic\">​not</a> ​mean that you have quit taking part in the RARE-X DCP.",
-          "Paragraph4": "If you want to quit the Program so that researchers can no longer use your information you can call us <a href=\"tel:+17164272739\">+1 (716) 427-2739</a> or email us at ​<a href=\"mailto:support@rare-x.org\">support@rare-x.org​</a>. If you quit, you can ask us to delete your information from our digital storage. We will delete your information. But we can’t take it back from researchers who have already used it.",
-          "Paragraph5": "Because we have a responsibility to keep backups and archives of data, we may keep a copy of all the information we collect from you for a short time, even after asking us to delete it.",
-          "Paragraph6": "If you have questions about your rights and choices or would like more information about your rights and choices, call us at <a href=\"tel:+17164272739\">(716) 427-2739</a> or email us at ​<a href=\"mailto:support@rare-x.org\">support@rare-x.org</a>.",
-          "Paragraph7": "For information about how we use cookies and other ways of automatically collecting information, please read <span class=\"bold\">​Information We Collect from All Website Users​</span> below."
+    "Header": {
+        "Alts": {
+            "PoweredBy": "Powered by RARE-X"
         }
-      },
-      "Researchers": {
-        "Title": "Researchers",
-        "Registration": {
-          "Title": "Researcher Registration Information",
-          "Paragraph1": "Researchers may create an account to participate in the RARE-X DCP on our website. When you create an account as a researcher, you will provide us with your username, password, and email address."
-        },
-        "InformationUsage": {
-          "Title": "How We Use Researcher Registration Information",
-          "Paragraph1": "We may use your email address to contact you. Some examples of why we might contact you are to give you technical support or to tell you what’s new with the RARE-X DCP."
-        },
-        "InformationShare": {
-          "Title": "How We Share Researcher Registration Information",
-          "Providers": {
-            "Title": "Service providers",
-            "Paragraph1": "We work with companies and other organizations to help us run our website and our data collection. We call these companies and organizations “service providers.” We share with service providers the registration information that they need to do their jobs. The service providers will have to sign a contract promising to use the information only for the job they are doing for us. Also, they will promise to keep the information safe.",
-            "Paragraph2": "To participate in the RARE-X DCP as a researcher, you will click on a link and be directed to DUOS, a third-party service provided by the Broad Institute, which helps process data access requests. Once you are on the DUOS platform, you will be requested to provide additional information about yourself and the institution with which you are associated. The information that you provide in the DUOS platform is governed by the ​<a href=\"https://www.broadinstitute.org/contact-us/privacy-policy-broad-institute-website\" target=\"_blank\">Broad’s Privacy Policy</a>​."
-          },
-          "Partners": {
-            "Title": "RARE-X partners",
-            "Paragraph1": "In certain circumstances, we might disclose information about you and the institution you are associated with to the owner of the data you are requesting to determine whether you are permitted to access the data."
-          },
-          "Legal": {
-            "Title": "For legal reasons",
-            "Paragraph1": "We may share information if we are required to by law. Otherwise, we will not share information for any civil, criminal, administrative, legislative, or other proceedings.",
-            "Paragraph2": "For information about how we use cookies and other ways of automatically collecting information, please read <span class=\"bold\">​Information We Automatically Collect About How You Use the Website​</span> below."
-          }
-        }
-      },
-      "InformationCollection": {
-        "Title": "Information We Automatically Collect About How You Use the Website",
-        "Paragraph1": "When you visit the RARE-X DCP website, we automatically collect information about the way you use the website. Here is a list of the information we collect:",
-        "List1": [
-          "The date and time of your visit to the RARE-X DCP website.",
-          "The pages you visit on the RARE-X DCP​ ​website.",
-          "The time you spend on each page.",
-          "Your actions on each page. For example, when you click a button on the page.",
-          "The type of device you use to visit our website. For example, whether you are using a tablet or mobile phone.",
-          "Your device’s IP (internet protocol) address. An IP address is a string of numbers that identifies a device on the internet. It does not identify the person using the device.",
-          "Your device’s operating system. For example, whether you use the Windows operating system or the Apple computer operating system iOS.",
-          "The browser you use to visit the RARE-X DCP​ ​website."
-        ],
-        "Paragraph2": "We will use this information we collect about how you use the ​RARE-X DCP w​ebsite:",
-        "List2": [
-          "To make sure the website works the way it is supposed to.",
-          "To improve the website.",
-          "To improve the way we collect information.",
-          "To make the website easier to use. For example, we will keep information you have entered so it does not need to be re-entered."
-        ],
-        "Paragraph3": "We use tags, beacons, and cookies to keep an eye on the RARE-X DCP website traffic. These web tools tell us things like how people get to our website and if they have visited before.",
-        "Paragraph4": "We also ask web service providers, like the Google Analytics platform, to tell us about RARE-X website traffic.",
-        "Paragraph5": "If you do not want us to track your use of the RARE-X DCP website, you can use ad blockers and/or Do Not Track preferences in your browser.",
-        "Paragraph6": "We do not link the information collected about your use of the RARE-X DCP website with your name or other easily identifiable information."
-      },
-      "InformationKeep": {
-        "Title": "How Long We Keep Your Information",
-        "Paragraph1": "There is no limit on the length of time we will keep your information unless you choose to delete your information or there are limits imposed by law."
-      },
-      "InformationProtection": {
-        "Title": "How We Protect the Information We Collect",
-        "Paragraph1": "Protecting the confidentiality of your and/or the patient’s information is important to us. We take privacy and security seriously. We use systems and procedures to protect the information that you have provided to us. Here are some of the steps we will take to ensure the information we collect is private and secure.",
-        "List": [
-          "Information we have collected will be stored on protected computers.",
-          "We will limit and track who can see this information.",
-          "We will limit who is allowed to see information that could directly identify you or the patient, like your names.",
-          "We will not share with others information that could directly identify you or the patient without your permission.",
-          "We will tell you if there is a serious information breach."
-        ],
-        "Paragraph2": "Although we take many steps to protect your information, we cannot promise that the information we collect from you is completely secure. There is a chance that your information could be compromised. We believe the risk is very small, but it is not zero."
-      },
-      "OtherCountries": {
-        "Title": "People in Countries Other than the United States",
-        "Paragraph1": "Currently, the RARE-X DCP website is intended for people in the United States. If you are in another country and use this website or sign up for an account, you understand that your information will be transmitted and stored on servers in the United States. You understand that the United States may have different laws about protecting information than the country where you live."
-      },
-      "Updates": {
-        "Title": "Updates to This Privacy Policy",
-        "Paragraph1": "We may update this Privacy Policy. We will post updates on this website. If you visit the website, it means you agree to the updated Privacy Policy.",
-        "Paragraph2": "If you have signed a consent for research, changes to the Privacy Policy will​ <span class=\"bold italic\">not​</span> affect the consent you signed."
-      },
-      "Questions": {
-        "Title": "Questions and Comments",
-        "Paragraph1": "If you have any questions, comments or requests, please contact us at <a href=\"tel:+17164272739\">+1 (716) 427-2739</a> or email us at <a href=\"mailto:privacy@rare-x.org\">privacy@rare-x.org</a>"
-      }
     },
-    "TermsAndConditions": {
-      "Title": "RARE-X TERMS OF USE",
-      "Paragraph1": "These terms of use (the “<span class=\"bold\">Terms</span>”) are a legal contract between you (“<span class=\"bold\">you</span>” and “<span class=\"bold\">your</span>”) and RARE-X (“<span class=\"bold\">RARE-X</span>,” “<span class=\"bold\">we</span>,” “<span class=\"bold\">us</span>,” or “<span class=\"bold\">our</span>”) and govern your access to, and use of, the RARE-X’s public facing website located at <a href=\"https://rare-x.org\">www.RARE-X.org</a>, and your registration for and participation in any of the RARE-X data collection program websites located at (collectively, the “<span class=\"bold\">Sites</span>”) and the Content (as defined below in Section 2).",
-      "Paragraph2": "BY ACCESSING AND/OR USING THE SITE(S) AND REGISTERING TO BE PART OF THE RARE-X DATA COLLECTION PROGRAM, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTAND, AND AGREE TO BE BOUND BY THESE TERMS. IF YOU DO NOT AGREE WITH ANY OF THESE TERMS, DO NOT ACCESS OR OTHERWISE USE THE SITE OR ANY INFORMATION CONTAINED ON THE SITE.",
-      "List": [
-        {
-          "Title": "CHANGES TO THE SITE AND CONTENT; MODIFICATION OF THESE TERMS",
-          "Paragraphs": [
-            "RARE-X MAY MAKE CHANGES TO, AND/OR DISCONTINUE OR SUSPEND ACCESS TO THE SITES, CONTENT AT ANY TIME WITHOUT NOTICE. YOU AGREE THAT RARE-X WILL NOT BE LIABLE TO YOU OR TO ANY THIRD PARTY FOR ANY CHANGES, SUSPENSION OR DISCONTINUANCE OF THE SITES, AND/OR CONTENT (OR ANY PART THEREOF).",
-            "RARE-X RESERVES THE RIGHT TO CHANGE OR MODIFY THESE TERMS AT ANY TIME. IF RARE-X MAKES ANY SUCH CHANGES, RARE-X WILL POST UPDATED TERMS OF USE ON THIS SITE. IF WE MAKE ANY MATERIAL CHANGES TO THESE TERMS, WE WILL NOTIFY YOU BY POSTING A NOTICE OF THE CHANGES ON THE SITE. IT IS YOUR RESPONSIBILITY TO REGULARLY VISIT AND REVIEW THESE TERMS. IF ANY MODIFICATION IS UNACCEPTABLE TO YOU, YOUR SOLE REMEDY SHALL BE TO CEASE USING THE SITE. IF YOU DO NOT CEASE USING THE SITE(S) AND/OR CONTENT FOLLOWING THE DATE WE POST THE UPDATED TERMS, YOU WILL BE DEEMED TO HAVE ACCEPTED THE CHANGE. NOTE THAT, ANY MODIFICATIONS TO THESE TERMS WILL NOT ACT TO MODIFY EITHER: THE PRIVACY POLICIES REFERRED TO IN SECTION 8 BELOW; OR THE TERMS OF ANY CONSENT FORMS THAT YOU AGREE TO IF YOU DECIDE TO PARTICIPATE IN ANY RARE-X DATA COLLECTION PROGRAMS."
-          ]
-        },
-        {
-          "Title": "ACCESS AND USE OF SITE AND CONTENT",
-          "Paragraphs": [
-            "Subject to your compliance with these Terms, RARE-X grants you a limited, revocable, nonexclusive right to access and use the Sites and the Content (as defined below) solely for your own internal use.",
-            "RARE-X and its licensors retain all right, title and interest in and to the Sites, including, without limitation, any and all text, graphics, images, music, software, audio, video, works of authorship of any kind, and information or other materials that are posted, generated, provided or otherwise made available through the Site (collectively, the “<span class=\"bold underline\">Content</span>”). All RARE-X trademarks are strictly owned by RARE-X, and nothing in these Terms will be construed to transfer ownership rights or grant any permission, license or other rights to any RARE-X trademark without written authorization from RARE-X. The names of actual companies and products mentioned within the Sites and/or Content may be the trademarks of their respective owners. RARE-X reserves all rights and licenses not expressly granted to you in these Terms and no implied license is granted by RARE-X. The Sites its underlying technology, are protected by copyright, trademark, patent, intellectual property, and other laws of the United States and foreign countries. You agree not to remove, change or obscure any copyright, trademark, service mark or other proprietary rights notices incorporated in or accompanying the Sites and/or any Content."
-          ]
-        },
-        {
-          "Title": "PROHIBITED USE",
-          "Paragraphs": [
-            "As a condition of your use of the Sites and Content, you warrant to RARE-X that you will not use the Sites, the Tool and/or Content for any purpose that is unlawful or prohibited by these Terms. Specifically, You are not allowed to (directly or indirectly): (a) resell or otherwise make commercial use of the Site, the Tool and/or Content; (b) collect or use any images, descriptions, or other content included in the Site, the Tool and/or Content, or any portion thereof; (c) copy, imitate, distribute, publicly perform, or publicly display Site, the Tool and/or Content; (d) modify or otherwise make any derivative uses of the Site, the Tool and/or Content, or any portion thereof; (e) use data mining, robots or similar data gathering or extraction methods on the Site; (f) perform, or release or disclose the results of, any benchmark testing or vulnerability assessments of the Site; (g) introduce into the Site any viruses, trojan horses, malware, spyware, adware or other disruptive software, or any software code, which is designed to disrupt, damage, or perform unauthorized actions on a computer system; (h) remove or alter any proprietary notices or labels on or in the Site, the Tool and/or Content; (i) use the Site, the Tool and/or Content to directly or indirectly develop any product or service that competes with the Site; (j) download (other than page caching) any portion of the Site, the Tool and/or Content or any information contained therein, except as expressly permitted on the Site; or (k) use the Site, the Tool and/or Content other than as expressly permitted in these Terms.",
-            "You may not use the Site, the Tool and/or Content in any manner that would violate any applicable laws, rules or regulations, or, which could damage, disable, overburden, or impair the Site or interfere with any other party's use and enjoyment of the Site, the Tool and/or Content. You may not obtain or attempt to obtain any materials or information through any means not intentionally made available or provided for through the Site, including, but not limited to, data mining, robots, or similar data gathering and extraction tools."
-          ]
-        },
-        {
-          "Title": "FEEDBACK",
-          "Paragraphs": [
-            "RARE-X shall be entitled to unrestricted use of any and all comments, suggestions, ideas, notes, drawings, concepts, problems or other information with respect to the Site, the Content or any RARE-X programs or services disclosed or offered by you to us (collectively, “<span class=\"bold\">Feedback</span>”). We may use the Feedback for any and all purposes whatsoever, commercial or otherwise, without any payment or other obligation to you or any other person involved with the creation of the Feedback."
-          ]
-        },
-        {
-          "Title": "TERMINATION",
-          "Paragraphs": [
-            "RARE-X reserves the right, in its sole discretion, to terminate and/or suspend your access to the Site, the Tool and/or Content or any portion thereof at any time, for any reason, without notice."
-          ]
-        },
-        {
-          "Title": "LINKS TO THIRD PARTY SITE",
-          "Paragraphs": [
-            "The Site may contain links to other third party websites which are not controlled or owned by RARE-X (“<span class=\"bold\">Linked Site</span>”). If you decide to access and use such Linked Site, be advised that your use is governed solely by the terms and conditions of such Linked Site, and RARE-X does not endorse, is not responsible for, and make no representations as to such Linked Site, their content or the manner in which they handle your data. RARE-X is not liable for any damage or loss caused or alleged to be caused by or in connection with your access or use of any such Linked Site, or your reliance on the privacy practices or other policies of such Linked Site."
-          ]
-        },
-        {
-          "Title": "AVAILABILITY OF THE SITE",
-          "Paragraphs": [
-            "RARE-X makes no claims regarding the availability or right to access or use of the Site, the Tool and/or Content outside of the United States. RARE-X may restrict access to the Site, the Tool and/or Content, or portions thereof, in certain countries in its sole discretion, and the Site the Tool and/or Content may not be available or accessible in all languages. If you use or access the Site, the Tool and/or Content outside of the United States, you are responsible for compliance with the laws and regulations of your jurisdiction with respect to your use of the Site, the Tool and/or Content in your country of residence."
-          ]
-        },
-        {
-          "Title": "PRIVACY AND PERSONAL INFORMATION",
-          "Paragraphs": [
-            "For information about RARE-X data protection practices, please read RARE-X’s General Website Privacy Policy, which applies to all users of the RARE-X.org websiteand the RARE-X Data Collection Program Privacy Policy, which applies specifically to users who register to participate in research. These policies explain how RARE-X treats your personal information and protects your privacy when you provide personally identifiable information to RARE-X in connection with your use of the Sites and any patient data collection program. In the event of a conflict between these Terms and either privacy policy or the terms of a patient data collection consent form that you have agreed to, the terms of the applicable privacy policy or patient data collection program consent form will control."
-          ]
-        },
-        {
-          "Title": "DISCLAIMER",
-          "Paragraphs": [
-            "THE SITES AND CONTENT (AND ANY PART THEREOF), AND ANY OTHER MATERIALS OR INFORMATION MADE AVAILABLE THROUGH THE SITES, ARE PROVIDED \"AS IS\" AND \"AS AVAILABLE\". RARE-X AND ITS LICENSORS AND SUPPLIERS HEREBY EXPRESSLY DISCLAIM ANY REPRESENTATIONS, WARRANTIES OR GUARANTEES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY, FITNESS FOR ANY PARTICULAR PURPOSE, SATISFACTORY PURPOSE, ACCURACY, OR NON-INFRINGEMENT.",
-            "RARE-X AND ITS LICENSORS AND SUPPLIERS DO NOT WARRANT OR MAKE ANY GUARANTEE THAT SITE, THE TOOL AND/OR CONTENT (OR ANY PART THEREOF), OR ANY OTHER MATERIALS OR INFORMATION MADE AVAILABLE THROUGH THE SITE: (I) WILL MEET YOUR REQUIREMENTS; (II) WILL BE COMPATIBLE WITH YOUR NETWORK, COMPUTER OR MOBILE DEVICE, OR ANY THIRD PARTY SITE; (III) WILL BE AVAILABLE ON AN UNINTERRUPTED, TIMELY, SECURE OR ERROR-FREE BASIS; OR (IV) WILL BE ACCURATE OR RELIABLE. NO ADVICE OR INFORMATION, WHETHER ORAL OR WRITTEN, OBTAINED BY YOU FROM RARE-X OR ANY THIRD PARTY, SHALL CREATE ANY WARRANTY.",
-            "RARE-X DOES NOT WARRANT, ENDORSE, GUARANTEE OR ASSUME RESPONSIBILITY FOR ANY LINKED SITE, ADVERTISED OR ACCESSIBLE THROUGH THE SITE THE TOOL AND/OR CONTENT, AND RARE-X WILL NOT BE A PARTY TO, OR IN ANY WAY MONITOR, ANY TRANSACTION BETWEEN YOU AND THE THIRD-PARTY OPERATORS OF SUCH LINKED SITE.",
-            "IF YOU ARE DISSATISFIED WITH ANY PORTION OF THE SITE, THE TOOL AND/OR CONTENT, YOUR SOLE AND EXCLUSIVE REMEDY IS TO DISCONTINUE USING THE SITE."
-          ]
-        },
-        {
-          "Title": "LIMITATION OF LIABILITY",
-          "Paragraphs": [
-            "TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL RARE-X BE LIABLE FOR ANY INDIRECT, PUNITIVE, INCIDENTAL, SPECIAL, CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER, OR FOR ANY DAMAGES FOR LOSS OF USE, DATA, OR PROFITS, ARISING OUT OF OR IN ANY WAY CONNECTED WITH THE USE OR PERFORMANCE OF THE SITE THE TOOL AND/OR CONTENT, WITH THE DELAY OR INABILITY TO USE THE SITE THE TOOL AND/OR CONTENT, OR FOR ANY INFORMATION OBTAINED THROUGH THE SITE THE TOOL AND/OR CONTENT, OR OTHERWISE ARISING OUT OF THE USE OF THE SITE THE TOOL AND/OR CONTENT, WHETHER BASED ON CONTRACT, TORT, NEGLIGENCE, STRICT LIABILITY OR OTHERWISE, EVEN IF RARE-X HAS BEEN ADVISED OF THE POSSIBILITY OF DAMAGES. IN NO EVENT SHALL RARE-X’S TOTAL CUMULATIVE LIABILITY ARISING FROM OR RELATED TO THESE TERMS OR THE ACCESS, USE OF, OR INABILITY TO ACCESS OR USE THE SITE, THE TOOL AND/OR CONTENT (OR ANY PART THEREOF), AND/OR ANY OR ANY OTHER MATERIALS OR INFORMATION MADE AVAILABLE THROUGH THE SITE, EXCEED ONE HUNDRED DOLLARS ($100.00). RARE-X DISCLAIMS ALL LIABILITY OF ANY KIND OF RARE-X’S LICENSORS AND SUPPLIERS."
-          ]
-        },
-        {
-          "Title": "APPLICATION OF DISCLAIMERS AND LIMITATIONS",
-          "Paragraphs": [
-            "BECAUSE SOME STATES/JURISDICTIONS DO NOT ALLOW THE DISCLAIMERS OF CERTAIN WARRANTIES AND/OR THE EXCLUSION OR LIMITATION OF LIABILITY FOR CONSEQUENTIAL, SPECIAL, INCIDENTAL OR OTHER DAMAGES, THE DISCLAIMERS AND LIMITATIONS SET FORTH IN SECTIONS 9 AND 10 MAY NOT APPLY TO YOU, INCLUDING WITH RESPECT TO BREACH OF SECTION 8. IN SUCH EVENT, THE LIABILITY OF RARE-X FOR SUCH DAMAGES WILL BE LIMITED TO THE GREATEST EXTENT PERMITTED BY APPLICABLE LAW IN SUCH JURISDICTION."
-          ]
-        },
-        {
-          "Title": "INDEMNIFICATION",
-          "Paragraphs": [
-            "You agree that you are solely responsible for (and that RARE-X has no responsibility to you or to any third party for) any breach of your obligations under the Terms and for the consequences (including any loss or damage which RARE-X may suffer) of any such breach. Except as prohibited by law, you will hold RARE-X and its officers, directors, employees and agents harmless for any indirect, punitive, special, incidental or consequential damage, however it arises (including attorneys' fees and all related costs and expenses of litigation and arbitration, or at trial or on appeal, if any, whether or not litigation or arbitration is instituted), whether in an action of contract, negligence or other tortious action, or arising out of or in connection with these Terms, including without limitation any claim for personal injury or property damage, arising from (i) your use of and access to the Site, the Tool and/or Content; and (ii) your violation of any of these Terms. We reserve the right to assume control of the defense of any third-party claim that is subject to indemnification by you, in which event you will cooperate with us in asserting any available defenses. This defense and indemnification obligation will survive these Terms and your use of the Services."
-          ]
-        },
-        {
-          "Title": "GOVERNING LAW AND DISPUTES",
-          "Paragraphs": [
-            "<span class=\"underline\">Governing Law</span>. These Terms will be governed by the laws of the State of California, United States of America without giving effect to any conflict of laws principles.",
-            "<span class=\"underline\">Disputes</span>. Except as otherwise set forth in these Terms, you agree that any dispute between you and RARE-X arising out of or relating to these Terms or the Site, the Tool and/or Content (or any part thereof) (collectively, “<span class=\"bold\">Disputes</span>”) shall be governed by the provisions set forth in this Section.",
-            "<span class=\"underline\">Informal Resolution</span>. Before resorting to formal dispute resolution in accordance with this Section, you agree to first contact us directly at [<a href=\"mailto:help@rare-x.org\">help@rare-x.org</a>] to seek an informal resolution to any Dispute. In the event a Dispute is not resolved within thirty (30) days after submission, you or RARE-X may institute arbitration in accordance with the procedures set forth in this Section.",
-            "<span class=\"underline\">Dispute Resolution</span>. Any and all Disputes that cannot be resolved through informal resolution as set forth above shall be resolved exclusively through the state or federal courts in Los Angeles California unless otherwise mutually agreed to by the parties. Alternatively, we may agree to use the JAMS Virtual Mediation & Arbitration services to resolve disputes remotely, by telephone, online and/or be solely based on written submissions and any judgment on the award rendered by the arbitrator shall be binding, final, and confidential, and may be entered in any court of competent jurisdiction."
-          ]
-        },
-        {
-          "Title": "GENERAL",
-          "SkipCount": true,
-          "Paragraphs": [
-            {
-              "Title": "<span class=\"underline\">Entire Agreement</span>",
-              "Content": "The Terms constitute the entire agreement between you and RARE-X, and supersedes all prior oral or written agreements or communications with regard to the subject matter described herein. Neither the rights nor the obligations arising under these Terms are assignable by you, and any such attempted assignment or transfer shall be void and without effect. The official text of these Terms (and any notice submitted hereunder) will be in English. The parties acknowledge that they require that these Terms be drawn up in the English language only. In the event of any dispute concerning the construction or meaning of these Terms, reference will be made only to these Terms as written in English and not to any translation into another language."
+    "Footer": {
+        "Links": {
+            "Home": "RARE-X.org",
+            "TermsOfUse": "Terms of Use",
+            "PrivacyPolicy": "Privacy Policy"
+        }
+    },
+    "RedirectToLogin": {
+        "Text": "Please wait until you are redirected"
+    },
+    "WorkflowProgress": {
+        "AboutYou": "About You",
+        "LegacySurvey": "Legacy Survey",
+        "Consent": "Consent Form",
+        "Assent": "Assent Form",
+        "MedicalRelease": "Medical Release",
+        "DemographicsSurvey": "Demographics Survey",
+        "MedicalBackgroundSurvey": "Medical Background Survey",
+        "NeurodevelopmentSurvey": "Neurodevelopment Survey",
+        "QualityOfLifeSurvey": "Quality of Life Survey"
+    },
+    "Pages": {
+        "PrivacyPolicy": {
+            "Title1": "RARE-X DATA COLLECTION PROGRAM<br />WEBSITE PRIVACY POLICY",
+            "Paragraph1": "The RARE-X Data Collection Program (“RARE-X DCP” or “Program”) website is a tool to help collect, store, and share information about patients with rare diseases for research. RARE-X is committed to protecting your privacy. This Privacy Policy applies to RARE-X and its agents. Agents are people who work closely with RARE-X and who sign agreements promising to follow this Policy. When this Privacy Policy uses the term “we” or “ours” it means RARE-X and its agents.",
+            "Paragraph2": "This Policy describes the information we will collect through the RARE-X DCP website. Most of the information that RARE-X will collect through this website comes from patients, their caregivers, family members or other legally authorized representatives (collectively called “caregivers”). In addition, RARE-X may collect a minimum amount of information from researchers and clinicians.",
+            "Paragraph3": "By visiting the RARE-X DCP website, you agree to this Privacy Policy.",
+            "InformationUsage": {
+                "Title": "How We Use and Share Your Information",
+                "Paragraph1": "This section describes how we use and share information that patients and their caregivers or researchers give us. There is a separate section for Patients and Caregivers and another section for Researchers because these two groups give us different information.  There is also a section about data that is collected automatically in site navigation."
             },
-            {
-              "Title": "<span class=\"underline\">Waiver</span>",
-              "Content": "You agree that if RARE-X does not exercise or enforce any legal right or remedy which is contained in the Terms (or which RARE-X has the benefit of under any applicable law), this will not be taken to be a formal waiver of RARE-X’s rights and that those rights or remedies will still be available to RARE-X. No waiver by either party of any breach of any provision hereof shall be deemed a waiver of any subsequent or prior breach of the same or any other provision."
+            "PatientsAndCaregivers": {
+                "Title": "Patients and Caregivers",
+                "PreRegistration": {
+                    "Title": "Patient Pre-Registration Information",
+                    "Paragraph1": "Although we would like as many people as possible to participate in the RARE-X DCP, there are some requirements on who can participate. We will ask you a few questions, such as the patient’s age and where they live to help us figure out if the patient meets the requirements for joining this Program.",
+                    "Paragraph2": "If the patient does not meet the requirements for this Program, you will not be able to register for an account, and we will delete the pre-registration information you provided.",
+                    "Paragraph3": "If the patient meets the requirements for this Program, we will transfer this basic information that you provided to the account you create."
+                },
+                "Registration": {
+                    "Title": "Patient and Caregiver Registration Information",
+                    "Paragraph1": "To register for the RARE-X DCP, you will create an account. When you create an account, you will give us your username, password, and email address."
+                },
+                "Other": {
+                    "Title": "Other Information We Collect about Patients and Caregivers",
+                    "Paragraph1": "After you have created an account, we will ask for detailed information about the patient (“patient information”). For example, we may ask the patient’s name and ask you to complete questions in surveys about the patient’s health and health treatment history. We may also ask questions about how the patient’s health condition has affected the patient’s caregivers. If you are interested in answering these surveys, you will do so on the RARE-X DCP website. We may have other ways for you to give information about the patient to us through the RARE-X DCP website, such as uploading test results or other records."
+                },
+                "InformationUsage": {
+                    "Title": "How We Use Patient and Caregiver Information",
+                    "Paragraph1": "We may use your email address to contact you. Some examples of why we might contact you are to give you technical support or to tell you what’s new with RARE-X DCP. We may use your registration information and patient information to assist you in filling out surveys about the patient and their caregivers.",
+                    "Paragraph2": "If you give your permission, we may contact you to:",
+                    "List": [
+                        "ask you to participate in other studies.",
+                        "notify you about clinical trials that the patient might be eligible for."
+                    ]
+                },
+                "InformationShare": {
+                    "Title": "How We Share Patient and Caregiver Information with Others",
+                    "Paragraph1": "We will share information you give us through the RARE-X DCP website only for the reasons we list below. Other than these reasons, we will not sell, rent, lease, give, or share your information without your permission.",
+                    "Paragraph2": "We share patient and caregiver information with other persons and organizations for the following reasons:",
+                    "Research": {
+                        "Title": "For research",
+                        "Paragraph1": "The RARE-X DCP aims to help researchers learn more about rare diseases and make discoveries about treating them. Patient and caregiver information we collect through the website will be stored in the RARE-X research database. With your permission, we will share patient and/or caregiver information with researchers for their studies. Before we share patient and/or caregiver information with researchers, we will remove the patient’s and caregiver’s name and other information that would easily identify them. You can learn more about how we share patient and caregiver information for research in the consent forms."
+                    },
+                    "Organizations": {
+                        "Title": "For patient organizations to contact you",
+                        "Paragraph1": "With your permission, we will share patient and caregiver information with patient organizations that are associated with the patient’s rare disease so that they may contact you to:",
+                        "List": [
+                            "help you answer questions about the patient and their caregivers;",
+                            "notify you if researchers think the patient might be eligible for a clinical trial."
+                        ],
+                        "Paragraph2": "You can learn more about how we share information with patient organizations in the consent forms."
+                    },
+                    "Providers": {
+                        "Title": "With service providers",
+                        "Paragraph1": "We work with companies and other organizations to help us run our website and our data collection. We call these companies and organizations “service providers.” We share with service providers only the registration and patient information that they need to do their jobs. The service providers will have to sign a contract promising to use the information only for the job they are doing for us. Also, they will promise to keep the information safe."
+                    },
+                    "Legal": {
+                        "Title": "For legal reasons",
+                        "Paragraph1": "We may share information if we are required to by law. Otherwise, we will not share information for any civil, criminal, administrative, legislative, or other proceedings.",
+                        "Paragraph2": "In cases where the law says we must share information, we will try to give out as little information as possible. We will try to protect your privacy as much as we can. Whenever possible, we will tell you if we have to give out information."
+                    }
+                },
+                "RightsAndChoices": {
+                    "Title": "Patient and Caregiver Rights and Choices",
+                    "Paragraph1": "Patients and caregivers have rights and choices about how we use and share their information. You can choose the amount of information that you share with us. You can choose who we can share the patient’s information with for research. These choices are described in more detail in the consent form.",
+                    "Paragraph2": "You can get a copy of the patient information that you directly give to us. To do this, call <a href=\"tel:+17164272739\">(716) 427-2739</a> or email us at ​<a href=\"mailto:support@rare-x.org\">support@rare-x.org​</a>.",
+                    "Paragraph3": "You can stop using the RARE-X DCP website <a href=\"https://dcp.rare-x.org\" target=\"_blank\">​https://dcp.rare-x.org</a> at any time. Please note that if you just stop using the website or delete your web account, it does <a class=\"bold italic\">​not</a> ​mean that you have quit taking part in the RARE-X DCP.",
+                    "Paragraph4": "If you want to quit the Program so that researchers can no longer use your information you can call us <a href=\"tel:+17164272739\">+1 (716) 427-2739</a> or email us at ​<a href=\"mailto:support@rare-x.org\">support@rare-x.org​</a>. If you quit, you can ask us to delete your information from our digital storage. We will delete your information. But we can’t take it back from researchers who have already used it.",
+                    "Paragraph5": "Because we have a responsibility to keep backups and archives of data, we may keep a copy of all the information we collect from you for a short time, even after asking us to delete it.",
+                    "Paragraph6": "If you have questions about your rights and choices or would like more information about your rights and choices, call us at <a href=\"tel:+17164272739\">(716) 427-2739</a> or email us at ​<a href=\"mailto:support@rare-x.org\">support@rare-x.org</a>.",
+                    "Paragraph7": "For information about how we use cookies and other ways of automatically collecting information, please read <span class=\"bold\">​Information We Collect from All Website Users​</span> below."
+                }
             },
-            {
-              "Title": "<span class=\"underline\">Severability</span>",
-              "Content": "If any court of law, having the jurisdiction to decide on this matter, rules that any provision of these Terms is invalid, then that provision will be removed from the Terms without affecting the rest of the Terms, which will remain in full force and effect."
+            "Researchers": {
+                "Title": "Researchers",
+                "Registration": {
+                    "Title": "Researcher Registration Information",
+                    "Paragraph1": "Researchers may create an account to participate in the RARE-X DCP on our website. When you create an account as a researcher, you will provide us with your username, password, and email address."
+                },
+                "InformationUsage": {
+                    "Title": "How We Use Researcher Registration Information",
+                    "Paragraph1": "We may use your email address to contact you. Some examples of why we might contact you are to give you technical support or to tell you what’s new with the RARE-X DCP."
+                },
+                "InformationShare": {
+                    "Title": "How We Share Researcher Registration Information",
+                    "Providers": {
+                        "Title": "Service providers",
+                        "Paragraph1": "We work with companies and other organizations to help us run our website and our data collection. We call these companies and organizations “service providers.” We share with service providers the registration information that they need to do their jobs. The service providers will have to sign a contract promising to use the information only for the job they are doing for us. Also, they will promise to keep the information safe.",
+                        "Paragraph2": "To participate in the RARE-X DCP as a researcher, you will click on a link and be directed to DUOS, a third-party service provided by the Broad Institute, which helps process data access requests. Once you are on the DUOS platform, you will be requested to provide additional information about yourself and the institution with which you are associated. The information that you provide in the DUOS platform is governed by the ​<a href=\"https://www.broadinstitute.org/contact-us/privacy-policy-broad-institute-website\" target=\"_blank\">Broad’s Privacy Policy</a>​."
+                    },
+                    "Partners": {
+                        "Title": "RARE-X partners",
+                        "Paragraph1": "In certain circumstances, we might disclose information about you and the institution you are associated with to the owner of the data you are requesting to determine whether you are permitted to access the data."
+                    },
+                    "Legal": {
+                        "Title": "For legal reasons",
+                        "Paragraph1": "We may share information if we are required to by law. Otherwise, we will not share information for any civil, criminal, administrative, legislative, or other proceedings.",
+                        "Paragraph2": "For information about how we use cookies and other ways of automatically collecting information, please read <span class=\"bold\">​Information We Automatically Collect About How You Use the Website​</span> below."
+                    }
+                }
+            },
+            "InformationCollection": {
+                "Title": "Information We Automatically Collect About How You Use the Website",
+                "Paragraph1": "When you visit the RARE-X DCP website, we automatically collect information about the way you use the website. Here is a list of the information we collect:",
+                "List1": [
+                    "The date and time of your visit to the RARE-X DCP website.",
+                    "The pages you visit on the RARE-X DCP​ ​website.",
+                    "The time you spend on each page.",
+                    "Your actions on each page. For example, when you click a button on the page.",
+                    "The type of device you use to visit our website. For example, whether you are using a tablet or mobile phone.",
+                    "Your device’s IP (internet protocol) address. An IP address is a string of numbers that identifies a device on the internet. It does not identify the person using the device.",
+                    "Your device’s operating system. For example, whether you use the Windows operating system or the Apple computer operating system iOS.",
+                    "The browser you use to visit the RARE-X DCP​ ​website."
+                ],
+                "Paragraph2": "We will use this information we collect about how you use the ​RARE-X DCP w​ebsite:",
+                "List2": [
+                    "To make sure the website works the way it is supposed to.",
+                    "To improve the website.",
+                    "To improve the way we collect information.",
+                    "To make the website easier to use. For example, we will keep information you have entered so it does not need to be re-entered."
+                ],
+                "Paragraph3": "We use tags, beacons, and cookies to keep an eye on the RARE-X DCP website traffic. These web tools tell us things like how people get to our website and if they have visited before.",
+                "Paragraph4": "We also ask web service providers, like the Google Analytics platform, to tell us about RARE-X website traffic.",
+                "Paragraph5": "If you do not want us to track your use of the RARE-X DCP website, you can use ad blockers and/or Do Not Track preferences in your browser.",
+                "Paragraph6": "We do not link the information collected about your use of the RARE-X DCP website with your name or other easily identifiable information."
+            },
+            "InformationKeep": {
+                "Title": "How Long We Keep Your Information",
+                "Paragraph1": "There is no limit on the length of time we will keep your information unless you choose to delete your information or there are limits imposed by law."
+            },
+            "InformationProtection": {
+                "Title": "How We Protect the Information We Collect",
+                "Paragraph1": "Protecting the confidentiality of your and/or the patient’s information is important to us. We take privacy and security seriously. We use systems and procedures to protect the information that you have provided to us. Here are some of the steps we will take to ensure the information we collect is private and secure.",
+                "List": [
+                    "Information we have collected will be stored on protected computers.",
+                    "We will limit and track who can see this information.",
+                    "We will limit who is allowed to see information that could directly identify you or the patient, like your names.",
+                    "We will not share with others information that could directly identify you or the patient without your permission.",
+                    "We will tell you if there is a serious information breach."
+                ],
+                "Paragraph2": "Although we take many steps to protect your information, we cannot promise that the information we collect from you is completely secure. There is a chance that your information could be compromised. We believe the risk is very small, but it is not zero."
+            },
+            "OtherCountries": {
+                "Title": "People in Countries Other than the United States",
+                "Paragraph1": "Currently, the RARE-X DCP website is intended for people in the United States. If you are in another country and use this website or sign up for an account, you understand that your information will be transmitted and stored on servers in the United States. You understand that the United States may have different laws about protecting information than the country where you live."
+            },
+            "Updates": {
+                "Title": "Updates to This Privacy Policy",
+                "Paragraph1": "We may update this Privacy Policy. We will post updates on this website. If you visit the website, it means you agree to the updated Privacy Policy.",
+                "Paragraph2": "If you have signed a consent for research, changes to the Privacy Policy will​ <span class=\"bold italic\">not​</span> affect the consent you signed."
+            },
+            "Questions": {
+                "Title": "Questions and Comments",
+                "Paragraph1": "If you have any questions, comments or requests, please contact us at <a href=\"tel:+17164272739\">+1 (716) 427-2739</a> or email us at <a href=\"mailto:privacy@rare-x.org\">privacy@rare-x.org</a>"
             }
-          ]
         },
-        {
-          "Title": "QUESTIONS",
-          "Paragraphs": [
-            "If you have any questions regarding these Terms, please send an email to [<a href=\"mailto:help@rare-x.org\" class=\"italic\">help@rare-x.org</a>]."
-          ]
+        "TermsAndConditions": {
+            "Title": "RARE-X TERMS OF USE",
+            "Paragraph1": "These terms of use (the “<span class=\"bold\">Terms</span>”) are a legal contract between you (“<span class=\"bold\">you</span>” and “<span class=\"bold\">your</span>”) and RARE-X (“<span class=\"bold\">RARE-X</span>,” “<span class=\"bold\">we</span>,” “<span class=\"bold\">us</span>,” or “<span class=\"bold\">our</span>”) and govern your access to, and use of, the RARE-X’s public facing website located at <a href=\"https://rare-x.org\">www.RARE-X.org</a>, and your registration for and participation in any of the RARE-X data collection program websites located at (collectively, the “<span class=\"bold\">Sites</span>”) and the Content (as defined below in Section 2).",
+            "Paragraph2": "BY ACCESSING AND/OR USING THE SITE(S) AND REGISTERING TO BE PART OF THE RARE-X DATA COLLECTION PROGRAM, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTAND, AND AGREE TO BE BOUND BY THESE TERMS. IF YOU DO NOT AGREE WITH ANY OF THESE TERMS, DO NOT ACCESS OR OTHERWISE USE THE SITE OR ANY INFORMATION CONTAINED ON THE SITE.",
+            "List": [
+                {
+                    "Title": "CHANGES TO THE SITE AND CONTENT; MODIFICATION OF THESE TERMS",
+                    "Paragraphs": [
+                        "RARE-X MAY MAKE CHANGES TO, AND/OR DISCONTINUE OR SUSPEND ACCESS TO THE SITES, CONTENT AT ANY TIME WITHOUT NOTICE. YOU AGREE THAT RARE-X WILL NOT BE LIABLE TO YOU OR TO ANY THIRD PARTY FOR ANY CHANGES, SUSPENSION OR DISCONTINUANCE OF THE SITES, AND/OR CONTENT (OR ANY PART THEREOF).",
+                        "RARE-X RESERVES THE RIGHT TO CHANGE OR MODIFY THESE TERMS AT ANY TIME. IF RARE-X MAKES ANY SUCH CHANGES, RARE-X WILL POST UPDATED TERMS OF USE ON THIS SITE. IF WE MAKE ANY MATERIAL CHANGES TO THESE TERMS, WE WILL NOTIFY YOU BY POSTING A NOTICE OF THE CHANGES ON THE SITE. IT IS YOUR RESPONSIBILITY TO REGULARLY VISIT AND REVIEW THESE TERMS. IF ANY MODIFICATION IS UNACCEPTABLE TO YOU, YOUR SOLE REMEDY SHALL BE TO CEASE USING THE SITE. IF YOU DO NOT CEASE USING THE SITE(S) AND/OR CONTENT FOLLOWING THE DATE WE POST THE UPDATED TERMS, YOU WILL BE DEEMED TO HAVE ACCEPTED THE CHANGE. NOTE THAT, ANY MODIFICATIONS TO THESE TERMS WILL NOT ACT TO MODIFY EITHER: THE PRIVACY POLICIES REFERRED TO IN SECTION 8 BELOW; OR THE TERMS OF ANY CONSENT FORMS THAT YOU AGREE TO IF YOU DECIDE TO PARTICIPATE IN ANY RARE-X DATA COLLECTION PROGRAMS."
+                    ]
+                },
+                {
+                    "Title": "ACCESS AND USE OF SITE AND CONTENT",
+                    "Paragraphs": [
+                        "Subject to your compliance with these Terms, RARE-X grants you a limited, revocable, nonexclusive right to access and use the Sites and the Content (as defined below) solely for your own internal use.",
+                        "RARE-X and its licensors retain all right, title and interest in and to the Sites, including, without limitation, any and all text, graphics, images, music, software, audio, video, works of authorship of any kind, and information or other materials that are posted, generated, provided or otherwise made available through the Site (collectively, the “<span class=\"bold underline\">Content</span>”). All RARE-X trademarks are strictly owned by RARE-X, and nothing in these Terms will be construed to transfer ownership rights or grant any permission, license or other rights to any RARE-X trademark without written authorization from RARE-X. The names of actual companies and products mentioned within the Sites and/or Content may be the trademarks of their respective owners. RARE-X reserves all rights and licenses not expressly granted to you in these Terms and no implied license is granted by RARE-X. The Sites its underlying technology, are protected by copyright, trademark, patent, intellectual property, and other laws of the United States and foreign countries. You agree not to remove, change or obscure any copyright, trademark, service mark or other proprietary rights notices incorporated in or accompanying the Sites and/or any Content."
+                    ]
+                },
+                {
+                    "Title": "PROHIBITED USE",
+                    "Paragraphs": [
+                        "As a condition of your use of the Sites and Content, you warrant to RARE-X that you will not use the Sites, the Tool and/or Content for any purpose that is unlawful or prohibited by these Terms. Specifically, You are not allowed to (directly or indirectly): (a) resell or otherwise make commercial use of the Site, the Tool and/or Content; (b) collect or use any images, descriptions, or other content included in the Site, the Tool and/or Content, or any portion thereof; (c) copy, imitate, distribute, publicly perform, or publicly display Site, the Tool and/or Content; (d) modify or otherwise make any derivative uses of the Site, the Tool and/or Content, or any portion thereof; (e) use data mining, robots or similar data gathering or extraction methods on the Site; (f) perform, or release or disclose the results of, any benchmark testing or vulnerability assessments of the Site; (g) introduce into the Site any viruses, trojan horses, malware, spyware, adware or other disruptive software, or any software code, which is designed to disrupt, damage, or perform unauthorized actions on a computer system; (h) remove or alter any proprietary notices or labels on or in the Site, the Tool and/or Content; (i) use the Site, the Tool and/or Content to directly or indirectly develop any product or service that competes with the Site; (j) download (other than page caching) any portion of the Site, the Tool and/or Content or any information contained therein, except as expressly permitted on the Site; or (k) use the Site, the Tool and/or Content other than as expressly permitted in these Terms.",
+                        "You may not use the Site, the Tool and/or Content in any manner that would violate any applicable laws, rules or regulations, or, which could damage, disable, overburden, or impair the Site or interfere with any other party's use and enjoyment of the Site, the Tool and/or Content. You may not obtain or attempt to obtain any materials or information through any means not intentionally made available or provided for through the Site, including, but not limited to, data mining, robots, or similar data gathering and extraction tools."
+                    ]
+                },
+                {
+                    "Title": "FEEDBACK",
+                    "Paragraphs": [
+                        "RARE-X shall be entitled to unrestricted use of any and all comments, suggestions, ideas, notes, drawings, concepts, problems or other information with respect to the Site, the Content or any RARE-X programs or services disclosed or offered by you to us (collectively, “<span class=\"bold\">Feedback</span>”). We may use the Feedback for any and all purposes whatsoever, commercial or otherwise, without any payment or other obligation to you or any other person involved with the creation of the Feedback."
+                    ]
+                },
+                {
+                    "Title": "TERMINATION",
+                    "Paragraphs": [
+                        "RARE-X reserves the right, in its sole discretion, to terminate and/or suspend your access to the Site, the Tool and/or Content or any portion thereof at any time, for any reason, without notice."
+                    ]
+                },
+                {
+                    "Title": "LINKS TO THIRD PARTY SITE",
+                    "Paragraphs": [
+                        "The Site may contain links to other third party websites which are not controlled or owned by RARE-X (“<span class=\"bold\">Linked Site</span>”). If you decide to access and use such Linked Site, be advised that your use is governed solely by the terms and conditions of such Linked Site, and RARE-X does not endorse, is not responsible for, and make no representations as to such Linked Site, their content or the manner in which they handle your data. RARE-X is not liable for any damage or loss caused or alleged to be caused by or in connection with your access or use of any such Linked Site, or your reliance on the privacy practices or other policies of such Linked Site."
+                    ]
+                },
+                {
+                    "Title": "AVAILABILITY OF THE SITE",
+                    "Paragraphs": [
+                        "RARE-X makes no claims regarding the availability or right to access or use of the Site, the Tool and/or Content outside of the United States. RARE-X may restrict access to the Site, the Tool and/or Content, or portions thereof, in certain countries in its sole discretion, and the Site the Tool and/or Content may not be available or accessible in all languages. If you use or access the Site, the Tool and/or Content outside of the United States, you are responsible for compliance with the laws and regulations of your jurisdiction with respect to your use of the Site, the Tool and/or Content in your country of residence."
+                    ]
+                },
+                {
+                    "Title": "PRIVACY AND PERSONAL INFORMATION",
+                    "Paragraphs": [
+                        "For information about RARE-X data protection practices, please read RARE-X’s General Website Privacy Policy, which applies to all users of the RARE-X.org websiteand the RARE-X Data Collection Program Privacy Policy, which applies specifically to users who register to participate in research. These policies explain how RARE-X treats your personal information and protects your privacy when you provide personally identifiable information to RARE-X in connection with your use of the Sites and any patient data collection program. In the event of a conflict between these Terms and either privacy policy or the terms of a patient data collection consent form that you have agreed to, the terms of the applicable privacy policy or patient data collection program consent form will control."
+                    ]
+                },
+                {
+                    "Title": "DISCLAIMER",
+                    "Paragraphs": [
+                        "THE SITES AND CONTENT (AND ANY PART THEREOF), AND ANY OTHER MATERIALS OR INFORMATION MADE AVAILABLE THROUGH THE SITES, ARE PROVIDED \"AS IS\" AND \"AS AVAILABLE\". RARE-X AND ITS LICENSORS AND SUPPLIERS HEREBY EXPRESSLY DISCLAIM ANY REPRESENTATIONS, WARRANTIES OR GUARANTEES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY, FITNESS FOR ANY PARTICULAR PURPOSE, SATISFACTORY PURPOSE, ACCURACY, OR NON-INFRINGEMENT.",
+                        "RARE-X AND ITS LICENSORS AND SUPPLIERS DO NOT WARRANT OR MAKE ANY GUARANTEE THAT SITE, THE TOOL AND/OR CONTENT (OR ANY PART THEREOF), OR ANY OTHER MATERIALS OR INFORMATION MADE AVAILABLE THROUGH THE SITE: (I) WILL MEET YOUR REQUIREMENTS; (II) WILL BE COMPATIBLE WITH YOUR NETWORK, COMPUTER OR MOBILE DEVICE, OR ANY THIRD PARTY SITE; (III) WILL BE AVAILABLE ON AN UNINTERRUPTED, TIMELY, SECURE OR ERROR-FREE BASIS; OR (IV) WILL BE ACCURATE OR RELIABLE. NO ADVICE OR INFORMATION, WHETHER ORAL OR WRITTEN, OBTAINED BY YOU FROM RARE-X OR ANY THIRD PARTY, SHALL CREATE ANY WARRANTY.",
+                        "RARE-X DOES NOT WARRANT, ENDORSE, GUARANTEE OR ASSUME RESPONSIBILITY FOR ANY LINKED SITE, ADVERTISED OR ACCESSIBLE THROUGH THE SITE THE TOOL AND/OR CONTENT, AND RARE-X WILL NOT BE A PARTY TO, OR IN ANY WAY MONITOR, ANY TRANSACTION BETWEEN YOU AND THE THIRD-PARTY OPERATORS OF SUCH LINKED SITE.",
+                        "IF YOU ARE DISSATISFIED WITH ANY PORTION OF THE SITE, THE TOOL AND/OR CONTENT, YOUR SOLE AND EXCLUSIVE REMEDY IS TO DISCONTINUE USING THE SITE."
+                    ]
+                },
+                {
+                    "Title": "LIMITATION OF LIABILITY",
+                    "Paragraphs": [
+                        "TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL RARE-X BE LIABLE FOR ANY INDIRECT, PUNITIVE, INCIDENTAL, SPECIAL, CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER, OR FOR ANY DAMAGES FOR LOSS OF USE, DATA, OR PROFITS, ARISING OUT OF OR IN ANY WAY CONNECTED WITH THE USE OR PERFORMANCE OF THE SITE THE TOOL AND/OR CONTENT, WITH THE DELAY OR INABILITY TO USE THE SITE THE TOOL AND/OR CONTENT, OR FOR ANY INFORMATION OBTAINED THROUGH THE SITE THE TOOL AND/OR CONTENT, OR OTHERWISE ARISING OUT OF THE USE OF THE SITE THE TOOL AND/OR CONTENT, WHETHER BASED ON CONTRACT, TORT, NEGLIGENCE, STRICT LIABILITY OR OTHERWISE, EVEN IF RARE-X HAS BEEN ADVISED OF THE POSSIBILITY OF DAMAGES. IN NO EVENT SHALL RARE-X’S TOTAL CUMULATIVE LIABILITY ARISING FROM OR RELATED TO THESE TERMS OR THE ACCESS, USE OF, OR INABILITY TO ACCESS OR USE THE SITE, THE TOOL AND/OR CONTENT (OR ANY PART THEREOF), AND/OR ANY OR ANY OTHER MATERIALS OR INFORMATION MADE AVAILABLE THROUGH THE SITE, EXCEED ONE HUNDRED DOLLARS ($100.00). RARE-X DISCLAIMS ALL LIABILITY OF ANY KIND OF RARE-X’S LICENSORS AND SUPPLIERS."
+                    ]
+                },
+                {
+                    "Title": "APPLICATION OF DISCLAIMERS AND LIMITATIONS",
+                    "Paragraphs": [
+                        "BECAUSE SOME STATES/JURISDICTIONS DO NOT ALLOW THE DISCLAIMERS OF CERTAIN WARRANTIES AND/OR THE EXCLUSION OR LIMITATION OF LIABILITY FOR CONSEQUENTIAL, SPECIAL, INCIDENTAL OR OTHER DAMAGES, THE DISCLAIMERS AND LIMITATIONS SET FORTH IN SECTIONS 9 AND 10 MAY NOT APPLY TO YOU, INCLUDING WITH RESPECT TO BREACH OF SECTION 8. IN SUCH EVENT, THE LIABILITY OF RARE-X FOR SUCH DAMAGES WILL BE LIMITED TO THE GREATEST EXTENT PERMITTED BY APPLICABLE LAW IN SUCH JURISDICTION."
+                    ]
+                },
+                {
+                    "Title": "INDEMNIFICATION",
+                    "Paragraphs": [
+                        "You agree that you are solely responsible for (and that RARE-X has no responsibility to you or to any third party for) any breach of your obligations under the Terms and for the consequences (including any loss or damage which RARE-X may suffer) of any such breach. Except as prohibited by law, you will hold RARE-X and its officers, directors, employees and agents harmless for any indirect, punitive, special, incidental or consequential damage, however it arises (including attorneys' fees and all related costs and expenses of litigation and arbitration, or at trial or on appeal, if any, whether or not litigation or arbitration is instituted), whether in an action of contract, negligence or other tortious action, or arising out of or in connection with these Terms, including without limitation any claim for personal injury or property damage, arising from (i) your use of and access to the Site, the Tool and/or Content; and (ii) your violation of any of these Terms. We reserve the right to assume control of the defense of any third-party claim that is subject to indemnification by you, in which event you will cooperate with us in asserting any available defenses. This defense and indemnification obligation will survive these Terms and your use of the Services."
+                    ]
+                },
+                {
+                    "Title": "GOVERNING LAW AND DISPUTES",
+                    "Paragraphs": [
+                        "<span class=\"underline\">Governing Law</span>. These Terms will be governed by the laws of the State of California, United States of America without giving effect to any conflict of laws principles.",
+                        "<span class=\"underline\">Disputes</span>. Except as otherwise set forth in these Terms, you agree that any dispute between you and RARE-X arising out of or relating to these Terms or the Site, the Tool and/or Content (or any part thereof) (collectively, “<span class=\"bold\">Disputes</span>”) shall be governed by the provisions set forth in this Section.",
+                        "<span class=\"underline\">Informal Resolution</span>. Before resorting to formal dispute resolution in accordance with this Section, you agree to first contact us directly at [<a href=\"mailto:help@rare-x.org\">help@rare-x.org</a>] to seek an informal resolution to any Dispute. In the event a Dispute is not resolved within thirty (30) days after submission, you or RARE-X may institute arbitration in accordance with the procedures set forth in this Section.",
+                        "<span class=\"underline\">Dispute Resolution</span>. Any and all Disputes that cannot be resolved through informal resolution as set forth above shall be resolved exclusively through the state or federal courts in Los Angeles California unless otherwise mutually agreed to by the parties. Alternatively, we may agree to use the JAMS Virtual Mediation & Arbitration services to resolve disputes remotely, by telephone, online and/or be solely based on written submissions and any judgment on the award rendered by the arbitrator shall be binding, final, and confidential, and may be entered in any court of competent jurisdiction."
+                    ]
+                },
+                {
+                    "Title": "GENERAL",
+                    "SkipCount": true,
+                    "Paragraphs": [
+                        {
+                            "Title": "<span class=\"underline\">Entire Agreement</span>",
+                            "Content": "The Terms constitute the entire agreement between you and RARE-X, and supersedes all prior oral or written agreements or communications with regard to the subject matter described herein. Neither the rights nor the obligations arising under these Terms are assignable by you, and any such attempted assignment or transfer shall be void and without effect. The official text of these Terms (and any notice submitted hereunder) will be in English. The parties acknowledge that they require that these Terms be drawn up in the English language only. In the event of any dispute concerning the construction or meaning of these Terms, reference will be made only to these Terms as written in English and not to any translation into another language."
+                        },
+                        {
+                            "Title": "<span class=\"underline\">Waiver</span>",
+                            "Content": "You agree that if RARE-X does not exercise or enforce any legal right or remedy which is contained in the Terms (or which RARE-X has the benefit of under any applicable law), this will not be taken to be a formal waiver of RARE-X’s rights and that those rights or remedies will still be available to RARE-X. No waiver by either party of any breach of any provision hereof shall be deemed a waiver of any subsequent or prior breach of the same or any other provision."
+                        },
+                        {
+                            "Title": "<span class=\"underline\">Severability</span>",
+                            "Content": "If any court of law, having the jurisdiction to decide on this matter, rules that any provision of these Terms is invalid, then that provision will be removed from the Terms without affecting the rest of the Terms, which will remain in full force and effect."
+                        }
+                    ]
+                },
+                {
+                    "Title": "QUESTIONS",
+                    "Paragraphs": [
+                        "If you have any questions regarding these Terms, please send an email to [<a href=\"mailto:help@rare-x.org\" class=\"italic\">help@rare-x.org</a>]."
+                    ]
+                }
+            ]
         }
-      ]
-    }
-  },
-  "Dashboard": {
-    "Title": "Dashboard"
-  },
-  "ParticipantsList": {
-    "Title": "Participant Dashboard",
-    "NewParticipant": "New Participant",
-    "NoParticipants": "You don't have any participants at this moment. You can add one by clicking the button below.",
-    "HelpTip": "Please select Participant by clicking his/her name in the list below.",
-    "DeleteError": "This participant has already consented and can’t be deleted here. If you wish to withdraw consent, please contact Rare-X study personnel directly."
-  },
-  "ParticipantDeletionDialog": {
-    "Text": "Are you sure you want to delete this participant? All data entered for this participant will be cleared."
-  },
-  "LoginLandingPage": {
-    "Text": "Please wait until you are redirected"
-  },
-  "ErrorPage": {
-    "Title": "Something went wrong",
-    "Text": "Something went wrong on our side, please try again later."
-  },
-  "Toolkit": {
-    "Password": {
-      "Title": "Please enter the password",
-      "Text": "Please enter your password *",
-      "InputPlaceholder": "Password",
-      "PasswordWrongError": "Incorrect password. Please try again.",
-      "PasswordRequiredError": "Password is required"
     },
     "Dashboard": {
-      "Title": "My Dashboard"
-    }
-  },
-  "Common": {
-    "Buttons": {
-      "ShareMyData": "I want to share my data",
-      "Submit": {
-        "Title": "Submit",
-        "AriaLabel": "Submit button"
-      },
-      "Delete": "Delete",
-      "Cancel": "Cancel"
+        "Title": "Dashboard"
     },
-    "Navigation": {
-      "Dashboard": "Dashboard"
+    "ParticipantsList": {
+        "Title": "Participant Dashboard",
+        "NewParticipant": "New Participant",
+        "NoParticipants": "You don't have any participants at this moment. You can add one by clicking the button below.",
+        "HelpTip": "Please select Participant by clicking his/her name in the list below.",
+        "DeleteError": "This participant has already consented and can’t be deleted here. If you wish to withdraw consent, please contact Rare-X study personnel directly."
     },
-    "LogoutReminder": "Please log out after completing your session."
-  },
-  "SDK": {
-    "DatePicker": {
-      "Day": "Day",
-      "Month": "Month",
-      "Year": "Year",
-      "January": "January",
-      "February": "February",
-      "March": "March",
-      "April": "April",
-      "May": "May",
-      "June": "June",
-      "July": "July",
-      "August": "August",
-      "September": "September",
-      "October": "October",
-      "November": "November",
-      "December": "December"
+    "ParticipantDeletionDialog": {
+        "Text": "Are you sure you want to delete this participant? All data entered for this participant will be cleared."
     },
-    "DateLabel": {
-      "YYYY": "YYYY",
-      "MM": "MM",
-      "DD": "DD"
+    "LoginLandingPage": {
+        "Text": "Please wait until you are redirected"
     },
-    "TooltipAlt": "Information",
-    "SignInOut": {
-      "SignIn": "Log In",
-      "SignOut": "Log Out"
+    "ErrorPage": {
+        "Title": "Something went wrong",
+        "Text": "Something went wrong on our side, please try again later."
     },
-    "Title": {
-      "Alert": "RARE-X"
-    },
-    "StartButton": "Start",
-    "ContinueButton": "Continue",
-    "SubmitButton": "Submit",
-    "NextButton": "Next",
-    "IUnderstandButton": "I Understand",
-    "CloseButton": "Close",
-    "PreviousButton": "Back",
-    "SavingButton": "Saving",
-    "EditButton": "Edit",
-    "ReviewButton": "View",
-    "UserActivities": {
-      "ActivityName": "Form",
-      "Summary": "Summary",
-      "ActivityStatus": "Status",
-      "ActivityDate": "Created",
-      "ActivityActions": "Actions",
-      "ActivityQuestionCount": "{{questionsAnswered}} / {{questionTotal}} questions"
-    },
-    "ValidateError": "Submission cannot proceed. Please review messages in form for details.",
-    "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
-    "SaveError": "We're sorry but an error occurred",
-    "DetailsPlaceholder": {
-      "PluralForm": "characters remaining",
-      "SingularForm": "character remaining"
-    },
-    "Validators": {
-      "DateNavyValidationRule": "Please check the date"
-    },
-    "MailAddress": {
-      "Fields": {
-        "Name": "Full Name",
-        "Country": "Country/Territory",
-        "Street1": "Street Address",
-        "Street2": "Apt/Floor #/Suite",
-        "State": {
-          "State": "State",
-          "Province": "Province",
-          "State/Province/Region": "State/Province/Region"
+    "Toolkit": {
+        "Password": {
+            "Title": "Please enter the password",
+            "Text": "Please enter your password *",
+            "InputPlaceholder": "Password",
+            "PasswordWrongError": "Incorrect password. Please try again.",
+            "PasswordRequiredError": "Password is required"
         },
-        "City": "City",
-        "Phone": "Phone",
-        "Zip": {
-          "Zip Code": "Zip Code",
-          "Postal Code": "Postal Code",
-          "Zip/Postal Code": "Zip/Postal Code"
+        "Dashboard": {
+            "Title": "My Dashboard"
+        }
+    },
+    "Common": {
+        "Buttons": {
+            "ShareMyData": "I want to share my data",
+            "Submit": {
+                "Title": "Submit",
+                "AriaLabel": "Submit button"
+            },
+            "Delete": "Delete",
+            "Cancel": "Cancel"
         },
-        "Choose": "Choose {{field}} ..."
-      },
-      "Suggestion": {
-        "Title": "We have checked your address entry and have suggested changes that could help ensure delivery.",
-        "Subtitle": "Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
-        "Suggested": "Suggested:",
-        "AsEntered": "As Entered:"
-      },
-      "Error": {
-        "InvalidAddress": "Please check the address information you provided.",
-        "CannotVerify": "Could not verify address, please double-check your address.",
-        "UnknownVerifyError": "An unknown error occurred while verifying address.",
-        "FieldIsRequired": "{{field}} is required",
-        "FieldIsInvalid": "{{field}} has an invalid value",
-        "InvalidHouseNumber": "Street number could not be found",
-        "INTERNAL_SERVER_ERROR": "We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
-        "NOT_ACCEPTABLE": "The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
-        "NOT_FOUND": "The requested resource could not be found.",
-        "FORBIDDEN": "Unable to access the requested resource.",
-        "PAYMENT_REQUIRED": "Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
-        "UNAUTHORIZED": "Unable to access the requested resource, authorization failed.",
-        "BAD_REQUEST": "Malformed request. Please check the contents and retry.",
-        "PAYMENT_GATEWAY.ERROR": "The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
-        "MODE.UNAUTHORIZED": "This resource requires a production API Key to access.",
-        "MODE.CONFLICT": "API Key mode conflicted with parameter mode.",
-        "DATE.PARSE.FAILURE": "At least one date was formatted incorrectly and could not be parsed.",
-        "PARAMETER.FORBIDDEN": "The request could not be completed due to forbidden properties present in the parameters.",
-        "PARAMETER.REQUIRED": "Missing required parameter.",
-        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "The parameters passed contained an invalid character.",
-        "ADDRESS.PARAMETERS.INVALID": "The parameters passed to create an Address were missing or invalid.",
-        "ADDRESS.COUNTRY.INVALID": "Invalid 'country', please provide a 2 character ISO country code.",
-        "ADDRESS.VERIFICATION.NOT_FOUND": "Address Not Found.",
-        "ADDRESS.VERIFICATION.FAILURE": "The address was unable to be verified.",
-        "ADDRESS.VERIFY.UNAVAILABLE": "Address verification is not available. Please try again.",
-        "ADDRESS.VERIFICATION.INVALID": "One of the verifications selected is invalid.",
-        "ADDRESS.VERIFY.FAILURE": "Unable to verify address.",
-        "ADDRESS.VERIFY.CARRIER_INVALID": "Unable to verify address using provided carrier.",
-        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "Address verification is not available due to an upstream service not responding. Please try again.",
-        "ADDRESS.VERIFY.ONLY_US": "USPS can only validate US addresses.",
-        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "International Verification not enabled on this account. Please contact support@easypost.com.",
-        "ADDRESS.VERIFY.MISSING_STREET": "Insufficient address data provided. A street must be provided.",
-        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Insufficient address data provided. A city and state or a zip must be provided.",
-        "E.COUNTRY.UNSUPPORTED": "This country is not supported in this mode. Try in production mode.",
-        "E.ENGINE.UNAVAILABLE": "No verification engine is available to service this country. Please try again later.",
-        "E.QUERY.UNANSWERABLE": "We can not provide enough data in this country to satisfy this request. Please try again later.",
-        "E.ADDRESS.NOT_FOUND": "We could not find the entered address.",
-        "E.SECONDARY_INFORMATION.INVALID": "Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
-        "E.SECONDARY_INFORMATION.MISSING": "Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
-        "E.HOUSE_NUMBER.MISSING": "House number is missing.",
-        "E.HOUSE_NUMBER.INVALID": "We could not find the street number provided.",
-        "E.STREET.MISSING": "Street is missing.",
-        "E.STREET.INVALID": "Street is invalid.",
-        "E.BOX_NUMBER.MISSING": "Box number is missing.",
-        "E.BOX_NUMBER.INVALID": "Box number is invalid.",
-        "E.ADDRESS.INVALID": "Invalid city/state/ZIP.",
-        "E.ZIP.NOT_FOUND": "Zip not found.",
-        "E.ZIP.INVALID": "Zip invalid.",
-        "E.ZIP.PLUS4.NOT_FOUND": "Zip + 4 not found.",
-        "E.ADDRESS.MULTIPLE": "Multiple addresses were returned with the same zip.",
-        "E.ADDRESS.INSUFFICIENT": "Insufficient/incorrect address data.",
-        "E.ADDRESS.DUAL": "Dual address.",
-        "E.STREET.MAGNET": "Street address is ambiguous.",
-        "E.CITY_STATE.INVALID": "Unverifiable city / state.",
-        "E.STATE.INVALID": "Invalid State.",
-        "E.ADDRESS.DELIVERY.INVALID": "Invalid delivery address.",
-        "E.TIMED_OUT": "Exceeded max timeout.",
-        "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
-        "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
-      }
+        "Navigation": {
+            "Dashboard": "Dashboard"
+        },
+        "LogoutReminder": "Please log out after completing your session."
+    },
+    "SDK": {
+        "DatePicker": {
+            "Day": "Day",
+            "Month": "Month",
+            "Year": "Year",
+            "January": "January",
+            "February": "February",
+            "March": "March",
+            "April": "April",
+            "May": "May",
+            "June": "June",
+            "July": "July",
+            "August": "August",
+            "September": "September",
+            "October": "October",
+            "November": "November",
+            "December": "December"
+        },
+        "DateLabel": {
+            "YYYY": "YYYY",
+            "MM": "MM",
+            "DD": "DD"
+        },
+        "TooltipAlt": "Information",
+        "SignInOut": {
+            "SignIn": "Log In",
+            "SignOut": "Log Out"
+        },
+        "Title": {
+            "Alert": "RARE-X"
+        },
+        "StartButton": "Start",
+        "ContinueButton": "Continue",
+        "SubmitButton": "Submit",
+        "NextButton": "Next",
+        "IUnderstandButton": "I Understand",
+        "CloseButton": "Close",
+        "PreviousButton": "Back",
+        "SavingButton": "Saving",
+        "EditButton": "Edit",
+        "ReviewButton": "View",
+        "UserActivities": {
+            "ActivityName": "Form",
+            "Summary": "Summary",
+            "ActivityStatus": "Status",
+            "ActivityDate": "Created",
+            "ActivityActions": "Actions",
+            "ActivityQuestionCount": "{{questionsAnswered}} / {{questionTotal}} questions"
+        },
+        "ValidateError": "Submission cannot proceed. Please review messages in form for details.",
+        "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
+        "SaveError": "We're sorry but an error occurred",
+        "DetailsPlaceholder": {
+            "PluralForm": "characters remaining",
+            "SingularForm": "character remaining"
+        },
+        "Validators": {
+            "DateNavyValidationRule": "Please check the date"
+        },
+        "MailAddress": {
+            "Fields": {
+                "Name": "Full Name",
+                "Country": "Country/Territory",
+                "Street1": "Street Address",
+                "Street2": "Apt/Floor #/Suite",
+                "State": {
+                    "State": "State",
+                    "Province": "Province",
+                    "State/Province/Region": "State/Province/Region"
+                },
+                "City": "City",
+                "Phone": "Phone",
+                "Zip": {
+                    "Zip Code": "Zip Code",
+                    "Postal Code": "Postal Code",
+                    "Zip/Postal Code": "Zip/Postal Code"
+                },
+                "Choose": "Choose {{field}} ..."
+            },
+            "Suggestion": {
+                "Title": "We have checked your address entry and have suggested changes that could help ensure delivery.",
+                "Subtitle": "Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
+                "Suggested": "Suggested:",
+                "AsEntered": "As Entered:"
+            },
+            "Error": {
+                "InvalidAddress": "Please check the address information you provided.",
+                "CannotVerify": "Could not verify address, please double-check your address.",
+                "UnknownVerifyError": "An unknown error occurred while verifying address.",
+                "FieldIsRequired": "{{field}} is required",
+                "FieldIsInvalid": "{{field}} has an invalid value",
+                "InvalidHouseNumber": "Street number could not be found",
+                "INTERNAL_SERVER_ERROR": "We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
+                "NOT_ACCEPTABLE": "The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
+                "NOT_FOUND": "The requested resource could not be found.",
+                "FORBIDDEN": "Unable to access the requested resource.",
+                "PAYMENT_REQUIRED": "Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
+                "UNAUTHORIZED": "Unable to access the requested resource, authorization failed.",
+                "BAD_REQUEST": "Malformed request. Please check the contents and retry.",
+                "PAYMENT_GATEWAY.ERROR": "The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
+                "MODE.UNAUTHORIZED": "This resource requires a production API Key to access.",
+                "MODE.CONFLICT": "API Key mode conflicted with parameter mode.",
+                "DATE.PARSE.FAILURE": "At least one date was formatted incorrectly and could not be parsed.",
+                "PARAMETER.FORBIDDEN": "The request could not be completed due to forbidden properties present in the parameters.",
+                "PARAMETER.REQUIRED": "Missing required parameter.",
+                "ADDRESS.PARAMETERS.INVALID_CHARACTER": "The parameters passed contained an invalid character.",
+                "ADDRESS.PARAMETERS.INVALID": "The parameters passed to create an Address were missing or invalid.",
+                "ADDRESS.COUNTRY.INVALID": "Invalid 'country', please provide a 2 character ISO country code.",
+                "ADDRESS.VERIFICATION.NOT_FOUND": "Address Not Found.",
+                "ADDRESS.VERIFICATION.FAILURE": "The address was unable to be verified.",
+                "ADDRESS.VERIFY.UNAVAILABLE": "Address verification is not available. Please try again.",
+                "ADDRESS.VERIFICATION.INVALID": "One of the verifications selected is invalid.",
+                "ADDRESS.VERIFY.FAILURE": "Unable to verify address.",
+                "ADDRESS.VERIFY.CARRIER_INVALID": "Unable to verify address using provided carrier.",
+                "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "Address verification is not available due to an upstream service not responding. Please try again.",
+                "ADDRESS.VERIFY.ONLY_US": "USPS can only validate US addresses.",
+                "ADDRESS.VERIFY.INTL_NOT_ENABLED": "International Verification not enabled on this account. Please contact support@easypost.com.",
+                "ADDRESS.VERIFY.MISSING_STREET": "Insufficient address data provided. A street must be provided.",
+                "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Insufficient address data provided. A city and state or a zip must be provided.",
+                "E.COUNTRY.UNSUPPORTED": "This country is not supported in this mode. Try in production mode.",
+                "E.ENGINE.UNAVAILABLE": "No verification engine is available to service this country. Please try again later.",
+                "E.QUERY.UNANSWERABLE": "We can not provide enough data in this country to satisfy this request. Please try again later.",
+                "E.ADDRESS.NOT_FOUND": "We could not find the entered address.",
+                "E.SECONDARY_INFORMATION.INVALID": "Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+                "E.SECONDARY_INFORMATION.MISSING": "Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+                "E.HOUSE_NUMBER.MISSING": "House number is missing.",
+                "E.HOUSE_NUMBER.INVALID": "We could not find the street number provided.",
+                "E.STREET.MISSING": "Street is missing.",
+                "E.STREET.INVALID": "Street is invalid.",
+                "E.BOX_NUMBER.MISSING": "Box number is missing.",
+                "E.BOX_NUMBER.INVALID": "Box number is invalid.",
+                "E.ADDRESS.INVALID": "Invalid city/state/ZIP.",
+                "E.ZIP.NOT_FOUND": "Zip not found.",
+                "E.ZIP.INVALID": "Zip invalid.",
+                "E.ZIP.PLUS4.NOT_FOUND": "Zip + 4 not found.",
+                "E.ADDRESS.MULTIPLE": "Multiple addresses were returned with the same zip.",
+                "E.ADDRESS.INSUFFICIENT": "Insufficient/incorrect address data.",
+                "E.ADDRESS.DUAL": "Dual address.",
+                "E.STREET.MAGNET": "Street address is ambiguous.",
+                "E.CITY_STATE.INVALID": "Unverifiable city / state.",
+                "E.STATE.INVALID": "Invalid State.",
+                "E.ADDRESS.DELIVERY.INVALID": "Invalid delivery address.",
+                "E.TIMED_OUT": "Exceeded max timeout.",
+                "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
+                "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+            },
+            "UseAsEntered": "We are unable to confirm that the address is valid. Please check this box to use the address as entered."
+        }
     }
-  }
 }
