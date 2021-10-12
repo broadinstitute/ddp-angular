@@ -108,7 +108,7 @@ $app-warn: mat-palette($md-warn);
 $app-theme: mat-light-theme($app-primary, $app-secondary, $app-warn);
 
 $app-typography: mat-typography-config(
-  $font-family: 'Catamaran, sans-serif',
+  $font-family: 'Spartan, sans-serif',
 );
 
 @include angular-material-theme($app-theme);

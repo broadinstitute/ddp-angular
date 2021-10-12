@@ -28,7 +28,9 @@ import { ParticipantsListComponent } from './components/pages/participant-list/p
 import { NotificationsDialogComponent } from './components/notifications-dialog/notifications-dialog.component';
 import { SessionExpiredDialogComponent } from './components/session-expired-dialog/session-expired-dialog.component';
 import { ParticipantDeletionDialogComponent } from './components/participant-deletion-dialog/participant-deletion-dialog.component';
-
+import { AcceptAgeUpComponent } from './components/pages/accept-age-up/accept-age-up.component';
+import { VerifyAgeUpComponent } from './components/pages/verify-age-up/verify-age-up.component';
+import { HomeComponent } from './components/pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,9 @@ import { ParticipantDeletionDialogComponent } from './components/participant-del
     NotificationsDialogComponent,
     SessionExpiredDialogComponent,
     ParticipantDeletionDialogComponent,
+    AcceptAgeUpComponent,
+    VerifyAgeUpComponent,
+    HomeComponent,
   ],
   imports: [
     DdpModule,
@@ -62,6 +67,6 @@ import { ParticipantDeletionDialogComponent } from './components/participant-del
     ReactiveFormsModule,
   ],
   providers: [SDKConfigProvider, toolkitConfigProvider, translateProvider],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

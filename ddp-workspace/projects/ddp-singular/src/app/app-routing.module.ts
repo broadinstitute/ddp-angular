@@ -12,13 +12,15 @@ import { PreScreeningComponent } from './components/pages/pre-screening/pre-scre
 import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
 import { SessionExpiredComponent } from './components/pages/session-expired/session-expired.component';
 import { ParticipantsListComponent } from './components/pages/participant-list/participant-list.component';
-
+import { AcceptAgeUpComponent } from './components/pages/accept-age-up/accept-age-up.component';
+import { VerifyAgeUpComponent } from './components/pages/verify-age-up/verify-age-up.component';
+import { HomeComponent } from './components/pages/home/home.component';
 
 const routes: Routes = [
   {
     path: Route.Home,
-    redirectTo: Route.About,
-    pathMatch: 'full'
+    component: HomeComponent,
+    pathMatch: 'full',
   },
   {
     path: Route.PreScreening,
@@ -65,9 +67,19 @@ const routes: Routes = [
     component: SessionExpiredComponent,
   },
   {
+    path: Route.AcceptAgeUp,
+    component: AcceptAgeUpComponent,
+    canActivate: [IrbGuard, BrowserGuard],
+  },
+  {
+    path: Route.VerifyAgeUp,
+    component: VerifyAgeUpComponent,
+    canActivate: [IrbGuard, BrowserGuard],
+  },
+  {
     path: Route.ParticipantList,
     component: ParticipantsListComponent,
-    canActivate: [IrbGuard, BrowserGuard, AuthGuard]
+    canActivate: [IrbGuard, BrowserGuard, AuthGuard],
   },
   {
     path: Route.Survey,
@@ -78,6 +90,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

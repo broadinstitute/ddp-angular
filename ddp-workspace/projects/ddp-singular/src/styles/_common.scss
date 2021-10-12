@@ -59,10 +59,18 @@ body {
 
 .container {
   margin: 0 auto;
-  width: 960px;
+  width: 100%;
+  max-width: 960px;
 }
 
 .session-expire-dialog button {
   margin-left: 30px;
   margin-bottom: 20px;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+
+  padding: 64px 0;
 }

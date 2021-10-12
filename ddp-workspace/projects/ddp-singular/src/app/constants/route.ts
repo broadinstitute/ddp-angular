@@ -19,4 +19,6 @@ export enum Route {
   ParticipantList = 'participants',
   ForResearchers = 'for-researchers',
   SessionExpired = 'session-expired',
+  AcceptAgeUp = 'accept',
+  VerifyAgeUp = 'verify',
 }
