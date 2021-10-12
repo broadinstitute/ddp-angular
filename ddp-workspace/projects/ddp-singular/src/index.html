@@ -10,7 +10,7 @@
     <script src="assets/config/pepperConfig.js"></script>
   </head>
 
-  <body onload="loadTcell()">
+  <body onload="loadTcell(); loadGA()">
     <app-root></app-root>
 
     <script type="text/javascript">
@@ -23,6 +23,27 @@
         tcellScript.async = true;
         document.body.appendChild(tcellScript);
       }
+
+      function loadGA() {
+        var gaScript = document.createElement('script');
+
+        gaScript.setAttribute('src', 'https://www.googletagmanager.com/gtag/js?id=' + DDP_ENV.analyticsToken);
+        gaScript.async = true;
+
+        document.body.appendChild(gaScript);
+      }
+    </script>
+
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        console.log('called');
+        dataLayer.push(arguments);
+      }
+
+      gtag('js', new Date());
+      gtag('config', DDP_ENV.analyticsToken);
     </script>
   </body>
 </html>
