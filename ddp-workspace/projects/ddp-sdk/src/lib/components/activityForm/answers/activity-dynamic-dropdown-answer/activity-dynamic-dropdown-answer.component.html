@@ -1,0 +1,10 @@
+<mat-form-field>
+  <mat-label *ngIf="block.label" [innerHTML]="block.label"></mat-label>
+
+  <mat-select
+    [placeholder]="placeholder"
+    [disabled]="readonly"
+    (selectionChange)="onSelectionChange($event.value)"
+    (focus)="onFocus()"
+  ></mat-select>
+</mat-form-field>

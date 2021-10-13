@@ -21,6 +21,7 @@ import { QuestionType } from '../../models/activity/questionType';
 import { ActivityFileQuestionBlock } from '../../models/activity/activityFileQuestionBlock';
 import * as _ from 'underscore';
 import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
+import { ActivityDynamicDropdownQuestionBlock } from '../../models/activity/activityDynamicDropdownQuestionBlock';
 
 const DETAIL_MAXLENGTH = 500;
 
@@ -155,6 +156,10 @@ export class ActivityQuestionConverter {
             {
                 type: QuestionType.File,
                 func: (questionJson) => this.getFileBlock(questionJson)
+            },
+            {
+                type: QuestionType.DynamicDropdown,
+                func: (questionJson) => this.getDynamicDropdownBlock(questionJson)
             }
         ];
     }
@@ -252,5 +257,11 @@ export class ActivityQuestionConverter {
         fileBlock.mimeTypes = questionJson.mimeTypes;
 
         return fileBlock;
+    }
+
+    private getDynamicDropdownBlock(questionJson: any): ActivityDynamicDropdownQuestionBlock {
+        const dynamicDropdownBlock = new ActivityDynamicDropdownQuestionBlock();
+
+        return dynamicDropdownBlock;
     }
 }
