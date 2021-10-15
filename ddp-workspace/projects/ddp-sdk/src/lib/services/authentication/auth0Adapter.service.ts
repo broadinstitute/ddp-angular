@@ -142,6 +142,9 @@ export class Auth0AdapterService implements OnDestroy {
      */
     public signup(additionalParams?: Record<string, string>): void {
         const temporarySession = this.session.isTemporarySession() ? this.session.session : null;
+        if (!temporarySession || !temporarySession.userGuid) {
+            this.log.logError(`${this.LOG_SOURCE}.signup.No temporal user guid`);
+        }
         const params = {
             ...(temporarySession && {
                 temp_user_guid: temporarySession.userGuid
@@ -306,8 +309,8 @@ export class Auth0AdapterService implements OnDestroy {
                     throw new Error('Token received does not match this session');
                 }
             }),
-            tap(result => this.renewNotifier.hideSessionExpirationNotifications()),
-            mergeMap(result => this.session.sessionObservable.pipe(take(1)))
+            tap(() => this.renewNotifier.hideSessionExpirationNotifications()),
+            mergeMap(() => this.session.sessionObservable.pipe(take(1)))
         );
     }
 

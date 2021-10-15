@@ -1,0 +1,38 @@
+$__scarlet: #c4353d;
+$__teal: #589297;
+$__white: #ffffff;
+
+$colors: (
+  'font-dark': #281d1c,
+  'font-light': #ffffff,
+  'scarlet': $__scarlet,
+  'scarlet:hover': darken($__scarlet, 4%),
+  'scarlet:active': darken($__scarlet, 7%),
+  'beige': #f8f5ec,
+  'beige:dark:1': #bfbaaf,
+  'beige:dark:2': #5a5656,
+  'teal': $__teal,
+  'teal:hover': darken($__teal, 3%),
+  'teal:active': darken($__teal, 7%),
+  'dark-grey': #49505a,
+  'progress-bar-border-grey': #808080,
+  'light-grey': #e3e3e3,
+  'white': $__white,
+  'white:hover': darken($__white, 8%),
+  'white:active': darken($__white, 13%),
+  'input-border': #bbbdbe,
+  'input-border-focus': #343434,
+  'form-control-error': $__scarlet,
+  'link': $__scarlet,
+  'success': #4a934a,
+  'reset-password-bar': #76d25f94,
+  'content-background': #f6f6f6,
+  'content-text': #201413,
+  'progress_bar-inactive-bg': #d8d8d8,
+  'progress_bar-inactive-border': #a0a2a6,
+  'progress_bar-inactive-color': #5a5656,
+  'progress_bar-inactive-label-color': #928d8d,
+  'progress_bar-active': #b64142,
+  'progress_bar-active-border': #b64142,
+  'progress_bar-active-passed-color': #261d1c,
+);

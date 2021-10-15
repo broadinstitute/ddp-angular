@@ -14,8 +14,6 @@ toolkit-dashboard-redesigned .main {
     }
 
     .dashboard-panel-header {
-        font-family: $primary-font-medium;
-        font-size: 1.125rem;
         background-color: #D9DDE5;
         height: 75px !important;
         border-radius: 0;
@@ -24,6 +22,12 @@ toolkit-dashboard-redesigned .main {
         &:focus {
             background-color: #c8ccd7 !important;
         }
+    }
+
+    .dashboard-panel-header,
+    .dashboard-panel-header .mat-button {
+        font-family: $primary-font-medium;
+        font-size: 1.125rem;
     }
 
     .dashboard-panel-description {
@@ -103,6 +107,9 @@ toolkit-dashboard-redesigned .main {
         font-family: $primary-font-medium;
     }
 
+    .edit-user-button {
+        margin-right: 10px;
+    }
 }
 
 .infobox_dashboard {
@@ -113,6 +120,11 @@ toolkit-dashboard-redesigned .main {
         position: absolute;
         top: 0;
         right: 0;
+    }
+}
+ddp-user-preferences {
+    .form-subgroup-title {
+        font-size: 1.2rem;
     }
 }
 

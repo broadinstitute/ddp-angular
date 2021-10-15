@@ -221,8 +221,8 @@ export class AddressInputService implements OnDestroy {
           .forEach(controlName => {
             const formControl = this.addressForm.get(controlName);
             readOnly ?
-              formControl.disable({ emitEvent: false, onlySelf: true }) :
-              formControl.enable({ emitEvent: false, onlySelf: true });
+              formControl.disable({ emitEvent: true, onlySelf: true }) :
+              formControl.enable({ emitEvent: true, onlySelf: true });
           });
       })
     );

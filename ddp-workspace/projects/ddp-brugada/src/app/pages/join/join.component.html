@@ -1,0 +1,10 @@
+<div class="join">
+  <div class="join__container">
+    <app-activity
+      [isPrequal]="true"
+      [activityGuid]="prequalInstanceGuid"
+      [studyGuid]="studyGuid"
+      (submit)="onSubmit($event)"
+    ></app-activity>
+  </div>
+</div>
