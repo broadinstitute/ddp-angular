@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Route } from './constants/route';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginLandingRedesignedComponent } from 'toolkit';
+import { FaqComponent } from './components/pages/faq/faq.component';
 import { ErrorComponent } from './components/pages/error/error.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { SurveyComponent } from './components/pages/survey/survey.component';
@@ -85,6 +86,11 @@ const routes: Routes = [
     path: Route.Survey,
     component: SurveyComponent,
     canActivate: [IrbGuard, BrowserGuard, AuthGuard],
+  },
+  {
+    path: Route.FAQ,
+    component: FaqComponent,
+    canActivate: [IrbGuard],
   },
 ];
 

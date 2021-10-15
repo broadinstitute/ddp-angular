@@ -1,0 +1,67 @@
+<section class="intro">
+  <div class="intro__container">
+    <h2 class="intro__title" [innerHTML]="'FAQ.Title' | translate"></h2>
+    <p class="intro__description" [innerHTML]="'FAQ.P1' | translate"></p>
+    <p class="intro__description" [innerHTML]="'FAQ.P2' | translate"></p>
+
+    <h2 class="intro__title" [innerHTML]="'FAQ.Title2' | translate"></h2>
+    <p class="intro__description" [innerHTML]="'FAQ.P3' | translate"></p>
+    <p class="intro__description" [innerHTML]="'FAQ.P4' | translate"></p>
+    <p class="intro__description" [innerHTML]="'FAQ.P5' | translate"></p>
+  </div>
+</section>
+
+<section class="questions">
+  <div class="questions__container">
+    <ng-container
+      [ngTemplateOutlet]="questionsTmpl"
+      [ngTemplateOutletContext]="{
+        questions: 'FAQ.Questions' | translate
+      }"
+    ></ng-container>
+  </div>
+</section>
+
+<section class="intro">
+  <div class="intro__container">
+    <h2 class="intro__title" [innerHTML]="'FAQ.VentricleHeartDefects.Title' | translate"></h2>
+    <p class="intro__description" [innerHTML]="'FAQ.VentricleHeartDefects.P1' | translate"></p>
+    <p class="intro__description" [innerHTML]="'FAQ.VentricleHeartDefects.P2' | translate"></p>
+    <p class="intro__description" [innerHTML]="'FAQ.VentricleHeartDefects.P3' | translate"></p>
+    <p class="intro__description" [innerHTML]="'FAQ.VentricleHeartDefects.P4' | translate"></p>
+    <p class="intro__description" [innerHTML]="'FAQ.VentricleHeartDefects.P5' | translate"></p>
+    <p class="intro__description" [innerHTML]="'FAQ.VentricleHeartDefects.P6' | translate"></p>
+  </div>
+</section>
+
+<ng-template #questionsTmpl let-questions="questions">
+  <ng-container *ngFor="let questionGroup of questions">
+    <section class="intro">
+      <div class="intro__container">
+        <h2 class="intro__title" [innerHTML]="questionGroup.Title | translate"></h2>
+      </div>
+    </section>
+    <mat-accordion multi hideToggle displayMode="flat">
+      <mat-expansion-panel #panel *ngFor="let item of questionGroup.Items">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <p class="question__header">
+              <button
+                      type="button"
+                      class="question__toggle"
+                      tabindex="-1"
+                      [class.question__toggle--open]="panel.expanded"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+              <span class="question__name">
+              {{ item.Name }}
+            </span>
+            </p>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p *ngFor="let Answer of item.Answers" class="question__answer" [innerHTML]="Answer"></p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </ng-container>
+</ng-template>
