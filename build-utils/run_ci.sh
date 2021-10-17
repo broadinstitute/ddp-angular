@@ -23,14 +23,16 @@ if [[ -z $COMMAND || -z $STUDY_KEY || -z $BRANCH || ($COMMAND == "deploy" && -z 
   exit 1
 fi
 
-
+if [[ -n $TARGET_ENV ]] ; then
+  DEPLOY_ENV_PROPERTY="\"deploy_env\": \"$TARGET_ENV\","
+fi
 
 echo "Will try to initiate build from branch: $BRANCH"
 curl -u "${CI_TOKEN}:" -X POST --header "Content-Type: application/json" -d "{
                                   \"branch\": \"$BRANCH\",
                                   \"parameters\": {
+                                      $DEPLOY_ENV_PROPERTY
                                       \"study_key\": \"$STUDY_KEY\",
-                                      \"api_call\": \"$COMMAND\",
-                                      \"deploy_env\": \"$TARGET_ENV\"
+                                      \"api_call\": \"$COMMAND\"
                                   }
 }" "https://circleci.com/api/v2/project/${CI_PROJECT_SLUG}/pipeline"
