@@ -551,7 +551,7 @@ workflows:
   version: 2
 
   api-build-and-store-workflow:
-    description: "Build specific study specified in api call"
+    description: "Build study specified in api call"
     when:
       and:
         - equal: ["build-and-store", << pipeline.parameters.api_call >>]
