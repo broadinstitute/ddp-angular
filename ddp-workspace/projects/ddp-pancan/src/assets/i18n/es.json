@@ -508,7 +508,7 @@
             "HidePanel": "Esconder",
             "UserLabel": "Usted",
             "ChildLabel": "Su hijo(a){{suffix}}",
-            "EditUser": "Editar"
+            "EditUser": "Editar Perfil"
         },
         "Password": {
             "Title": "Ingrese la contraseña.",
@@ -766,7 +766,7 @@
                 "E.TIME_ZONE.UNAVAILABLE": "El servicio de zona horaria no está disponible en este momento.",
                 "E.PO_BOX.INTERNATIONAL": "No se puede verificar la casilla postal internacional. Tenga en cuenta que eso puede causar errores en solicitudes correctas."
             },
-            "UseAsEntered":  "No podemos confirmar que esta dirección es válida. Marque esta casilla para confirmar el uso de esta dirección como ha sido ingresada."
+            "UseAsEntered": "No podemos confirmar que esta dirección es válida. Marque esta casilla para confirmar el uso de esta dirección como ha sido ingresada."
         },
         "TooltipAlt": "Información",
         "Validators": {

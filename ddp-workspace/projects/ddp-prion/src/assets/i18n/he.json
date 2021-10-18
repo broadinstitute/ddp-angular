@@ -798,7 +798,8 @@
                 "E.TIMED_OUT": "חריגה מהזמן הקצוב המרבי.",
                 "E.TIME_ZONE.UNAVAILABLE": "שירות אזור הזמן אינו זמין כרגע.",
                 "E.PO_BOX.INTERNATIONAL": "לא ניתן לאמת תא דואר בינלאומי. לתשומת לבכם הודעה זו יכולה להופיע כשגיאה בבקשה שהצליחה."
-            }
+            },
+            "UseAsEntered": "[HE] We are unable to confirm that the address is valid. Please check this box to use the address as entered."
         },
         "TooltipAlt": "מידע",
         "Validators": {
