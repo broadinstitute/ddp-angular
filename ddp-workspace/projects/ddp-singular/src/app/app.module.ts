@@ -9,6 +9,7 @@ import { SDKConfigProvider } from './config/sdk.provider';
 import { BrowserModule } from '@angular/platform-browser';
 import { translateProvider } from './config/translate.provider';
 import { toolkitConfigProvider } from './config/toolkit.provider';
+import { FaqComponent } from './components/pages/faq/faq.component';
 import { MaterialModule } from './modules/material/material.module';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -34,6 +35,7 @@ import { HomeComponent } from './components/pages/home/home.component';
 
 @NgModule({
   declarations: [
+    FaqComponent,
     AppComponent,
     ErrorComponent,
     HeaderComponent,
