@@ -187,7 +187,7 @@
 @media screen and (max-width: $desktop-breakpoint) {
     .section {
         &-0 {
-            background-size: auto 480px;
+            background-size: auto 480px !important;
         }
 
         &-1 {
@@ -219,7 +219,7 @@
 
     .section {
         &-0, &-1, &-2 {
-            background-size: auto $background-image-height;
+            background-size: auto $background-image-height !important;
         }
 
         &__content {
@@ -258,7 +258,7 @@
         padding-bottom: 2.5rem;
 
         &-0, &-1, &-2 {
-            background-size: auto 172px;
+            background-size: auto 172px !important;
             background-position-y: top;
         }
 
