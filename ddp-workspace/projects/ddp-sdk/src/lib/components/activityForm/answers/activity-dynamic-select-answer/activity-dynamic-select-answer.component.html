@@ -1,0 +1,18 @@
+<ddp-question-prompt [block]="block"></ddp-question-prompt>
+
+<div class="field-wrapper">
+  <mat-form-field>
+    <mat-label *ngIf="block.label" [innerHTML]="block.label"></mat-label>
+
+    <mat-select
+      [placeholder]="placeholder"
+      [disabled]="readonly"
+      (selectionChange)="onSelectionChange($event.value)"
+      (focus)="onFocus()"
+    >
+      <mat-option *ngFor="let option of options$ | async" [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

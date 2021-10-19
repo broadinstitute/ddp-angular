@@ -84,7 +84,7 @@ import { ActivityAgreementAnswer } from './components/activityForm/answers/activ
 import { ActivityTextAnswer } from './components/activityForm/answers/activityTextAnswer.component';
 import { ActivityTextInput } from './components/activityForm/answers/activity-text-input/activityTextInput.component';
 import { ActivityFileAnswer } from './components/activityForm/answers/activity-file-answer/activityFileAnswer.component';
-import { ActivityDynamicDropdownAnswer } from './components/activityForm/answers/activity-dynamic-dropdown-answer/activity-dynamic-dropdown-answer.component';
+import { ActivityDynamicSelectAnswerComponent } from './components/activityForm/answers/activity-dynamic-select-answer/activity-dynamic-select-answer.component';
 import { ActivityEmailInput } from './components/activityForm/answers/activityEmailInput.component';
 import { ActivityNumericAnswer } from './components/activityForm/answers/activityNumericAnswer.component';
 import { ActivitySectionComponent } from './components/activityForm/activitySection.component';
@@ -182,6 +182,7 @@ import { ChangeLanguageRedirectComponent } from './components/internationalizati
 import { LanguageServiceAgent } from './services/serviceAgents/languageServiceAgent.service';
 import { PopupWithCheckboxComponent } from './components/popupWithCheckbox.component';
 import { DisplayLanguagePopupServiceAgent } from './services/serviceAgents/displayLanguagePopupServiceAgent.service';
+import { DynamicSelectAnswerService } from './services/serviceAgents/dynamicSelectAnswer.service';
 import { InvitationPipe } from './pipes/invitationFormatter.pipe';
 import { StudyDetailServiceAgent } from './services/serviceAgents/studyDetailServiceAgent.service';
 import { StatisticsServiceAgent } from './services/serviceAgents/statisticsServiceAgent.service';
@@ -317,6 +318,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         RenewSessionNotifier,
         LanguageService,
         DisplayLanguagePopupServiceAgent,
+        DynamicSelectAnswerService,
         StudyDetailServiceAgent,
         StatisticsServiceAgent,
         ModalDialogService,
@@ -365,7 +367,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityTextAnswer,
         ActivityTextInput,
         ActivityFileAnswer,
-        ActivityDynamicDropdownAnswer,
+        ActivityDynamicSelectAnswerComponent,
         ActivityEmailInput,
         ActivityNumericAnswer,
         ActivityAnswerComponent,
@@ -441,7 +443,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityBooleanAnswer,
         ActivityTextAnswer,
         ActivityFileAnswer,
-        ActivityDynamicDropdownAnswer,
+        ActivityDynamicSelectAnswerComponent,
         ActivityEmailInput,
         ActivityNumericAnswer,
         ActivityAnswerComponent,
