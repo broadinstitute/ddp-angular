@@ -1,0 +1,47 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+build/dist
+# client
+/dist
+/tmp
+/node_modules
+/tslint.json
+/client/dist
+/client/tmp
+/client/node_modules
+/client/tslint.json
+
+client/src/assets/js/ddp_config.js
+/src/assets/js/ddp_config.js
+
+# IDEs and editors
+.idea
+.project
+.classpath
+*.launch
+.settings/
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage/*
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
+
+# e2e
+/e2e
+
+#System Files
+.DS_Store
+Thumbs.db
+
+# DO NOT COMMIT RENDERED SECRETS INTO SOURCE CONTROL
+
+logs
+*.log
+*.iml
+*.pem
+*.env
+*.jks
+

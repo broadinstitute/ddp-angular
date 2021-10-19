@@ -1,0 +1,342 @@
+<!--information added by assigneeMr-->
+<div class="Display--block" *ngIf="!tissue.deleted" [ngClass]="{'Green-background': tissue.tissueId === tissueId}">
+  <table class="Width--100" style="border: 1px solid black;">
+    <tr>
+      <td colspan="4" align="right" class="TD--Padding">
+        <button mat-mini-fab color="warn" [disabled]="!editable"
+                (click)="deleteTissue()">
+          <i class="fas fa-trash-alt fa-lg"></i>
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <td class="TD--Padding" style="width: 20%">Notes</td>
+      <td colspan="3">
+        <textarea maxlength="1000"
+                  [ngClass]="{'Width--100': true, 'Color--Field--Patched': isPatchedCurrently('tNotes')}"
+                  (blur)="currentField(null)" (focus)="currentField('tNotes')" [disabled]="!editable"
+                  [(ngModel)]="tissue.tNotes" (change)="valueChanged($event, 'tNotes')"></textarea>
+      </td>
+    </tr>
+    <tr *ngIf="getCompService().getRealm().toUpperCase()==='MBC' || tissue.countReceived > 0">
+      <td class="TD--Padding">Count Received</td>
+      <td colspan="3">
+        <mat-form-field [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently('countReceived')}">
+          <input matInput type="number" min="0" max="10" [disabled]="!editable"
+                 (blur)="currentField(null)" (focus)="currentField('countReceived')"
+                 [(ngModel)]="tissue.countReceived" (change)="valueChanged($event, 'countReceived')">
+        </mat-form-field>
+
+      </td>
+    </tr>
+    <tr>
+      <td class="TD--Padding">Materials received</td>
+      <td>
+        <mat-form-field [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently('ussCount')}">
+          <input matInput type="number" min="0" max="10" [disabled]="!editable"
+                 (blur)="currentField(null)" (focus)="currentField('ussCount')"
+                 [(ngModel)]="tissue.ussCount" (change)="valueChanged($event, 'ussCount')">
+        </mat-form-field>
+        USS (unstained slides)
+      </td>
+      <td class="TD--Padding">Tissue Type</td>
+      <td>
+        <mat-select placeholder="Tissue Type"
+                   [ngClass]="{'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('tissueType')}"
+                   [(ngModel)]="tissue.tissueType" [disabled]="!editable"
+                   (change)="valueChanged($event, 'tissueType')"
+                   (blur)="currentField(null)" (focus)="currentField('tissueType')">
+          <mat-option value="slide">Slide</mat-option>
+          <mat-option value="block">Block</mat-option>
+          <mat-option value="scrolls">Scrolls</mat-option>
+        </mat-select>
+      </td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td colspan="3">
+        <mat-form-field [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently('blocksCount')}">
+          <input matInput type="number" min="0" max="10" [disabled]="!editable"
+                 (blur)="currentField(null)" (focus)="currentField('blocksCount')"
+                 [(ngModel)]="tissue.blocksCount" (change)="valueChanged($event, 'blocksCount')">
+        </mat-form-field>
+        Block(s)
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td colspan="3">
+        <mat-form-field [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently('hECount')}">
+          <input matInput type="number" min="0" max="10" [disabled]="!editable"
+                 (blur)="currentField(null)" (focus)="currentField('hECount')"
+                 [(ngModel)]="tissue.hECount" (change)="valueChanged($event, 'hECount')">
+        </mat-form-field>
+        H&E(s)
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td colspan="3">
+        <mat-form-field [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently('scrollsCount')}">
+          <input matInput type="number" min="0" max="10" [disabled]="!editable"
+                 (blur)="currentField(null)" (focus)="currentField('scrollsCount')"
+                 [(ngModel)]="tissue.scrollsCount" (change)="valueChanged($event, 'scrollsCount')">
+        </mat-form-field>
+        Scroll(s)
+      </td>
+    </tr>
+    <tr *ngIf="tissue.tissueType != null && tissue.tissueType === 'block' ">
+      <td class="TD--Padding">Expected Return Date</td>
+      <td colspan="3">
+        <app-field-datepicker [dateString]="tissue.expectedReturn"
+                              [showNAButton]="true"
+                              [allowFutureDate]="true"
+                              (dateChanged)="valueChanged($event, 'expectedReturn')" [disabled]="!editable"
+                              [colorDuringPatch]="isPatchedCurrently('expectedReturn')"></app-field-datepicker>
+      </td>
+    </tr>
+    <tr *ngIf="tissue.tissueType!= null && tissue.tissueType ==='block' ">
+      <td class="TD--Padding">Return Date</td>
+      <td colspan="3">
+        <app-field-datepicker [dateString]="tissue.tissueReturnDate"
+                              [allowFutureDate]="true"
+                              (dateChanged)="valueChanged($event, 'tissueReturnDate')" [disabled]="false"
+                              [colorDuringPatch]="isPatchedCurrently('tissueReturnDate')"></app-field-datepicker>
+      </td>
+    </tr>
+    <tr *ngIf="tissue.tissueType != null && tissue.tissueType ==='block' && tissue.tissueReturnDate != null">
+      <td class="TD--Padding">Tracking Number</td>
+      <td colspan="3">
+        <mat-form-field
+          [ngClass]="{'Width--100': true, 'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('returnFedexId')}">
+          <input matInput maxlength="200" [disabled]="!editable"
+                 [(ngModel)]="tissue.returnFedexId" (change)="valueChanged($event, 'returnFedexId')"
+                 placeholder="Tracking Number" [value]="tissue.returnFedexId"
+                 (blur)="currentField(null)" (focus)="currentField('returnFedexId')">
+          <mat-hint class="ErrorMessageForm" *ngIf="currentPatchField === 'returnFedexId' && dup">Value already exists!
+          </mat-hint>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr *ngIf="getCompService().getRealm().toUpperCase()==='MBC' || tissue.countReceived > 0">
+      <td class="TD--Padding">H&E</td>
+      <td colspan="3">
+        <mat-select placeholder="H&E"
+                   [ngClass]="{'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('hE')}"
+                   [(ngModel)]="tissue.hE" [disabled]="!editable"
+                   (change)="valueChanged($event, 'hE')"
+                   (blur)="currentField(null)" (focus)="currentField('hE')">
+          <mat-option value="yes">Yes</mat-option>
+          <mat-option value="no">No</mat-option>
+        </mat-select>
+      </td>
+    </tr>
+    <tr>
+      <td class="TD--Padding">Pathology Report</td>
+      <td>
+        <mat-select placeholder="Pathology Report"
+                   [ngClass]="{'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('pathologyReport')}"
+                   [(ngModel)]="tissue.pathologyReport" [disabled]="!editable"
+                   (change)="valueChanged($event, 'pathologyReport')"
+                   (blur)="currentField(null)" (focus)="currentField('pathologyReport')">
+          <mat-option value="yes">Yes</mat-option>
+          <mat-option value="no">No</mat-option>
+        </mat-select>
+      </td>
+      <td class="TD--Padding">Tumor Type</td>
+      <td>
+        <mat-select placeholder="Tumor Type"
+                   [ngClass]="{'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('tumorType')}"
+                   [(ngModel)]="tissue.tumorType" [disabled]="!editable"
+                   (change)="valueChanged($event, 'tumorType')"
+                   (blur)="currentField(null)" (focus)="currentField('tumorType')">
+          <mat-option value="primary">Primary</mat-option>
+          <mat-option value="met">Met</mat-option>
+          <mat-option value="recurrent">Recurrent</mat-option>
+          <mat-option value="unknown">Unknown</mat-option>
+        </mat-select>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"></td>
+      <td class="TD--Padding">Tissue Site</td>
+      <td>
+        <app-lookup [lookupValue]="tissue.tissueSite" [lookupType]="'tSite'" [placeholder]="'Tissue Site'"
+                    (lookupResponse)="setTissueSite($event)" [disabled]="!editable" autocomplete="off"
+                    [fieldName]="'tissueSite'"
+                    [colorDuringPatch]="isPatchedCurrently('tissueSite')"></app-lookup>
+      </td>
+    </tr>
+    <tr>
+      <td class="TD--Padding">Collaborator Sample ID</td>
+      <td colspan="3">
+        <mat-form-field
+          [ngClass]="{'Input--Bigger-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('collaboratorSampleId')}">
+          <input #collaboratorSampleId matInput maxlength="200"
+                 placeholder="Collaborator Sample ID" autocomplete="off"
+                 [(ngModel)]="tissue.collaboratorSampleId" [disabled]="!editable"
+                 (change)="valueChanged($event, 'collaboratorSampleId')"
+                 (blur)="currentField(null)" (focus)="currentField('collaboratorSampleId'); checkCollaboratorId()">
+          <mat-hint class="ErrorMessageForm" *ngIf="currentPatchField === 'collaboratorSampleId' && dup">Value already
+            exists!
+          </mat-hint>
+        </mat-form-field>
+        <div>
+          <ul class="Lookup--Dropdown"
+              *ngIf="collaboratorS != null" [style.display]="getStyleDisplay()">
+            <li (click)="setLookup()">{{collaboratorS}}</li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+    <tr *ngIf="tissue.tissueType === 'block'">
+      <td class="TD--Padding">Block to SHL</td>
+      <td>
+        <app-field-datepicker [colorDuringPatch]="isPatchedCurrently('blockSent')" [allowFutureDate]="true"
+                              [disabled]="!editable"
+                              [dateString]="tissue.blockSent"
+                              (dateChanged)="valueChanged($event, 'blockSent')"></app-field-datepicker>
+      </td>
+      <td class="TD--Padding">SHL Work Number</td>
+      <td>
+        <mat-form-field
+          [ngClass]="{'Width--100': true, 'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('shlWorkNumber')}">
+          <input matInput maxlength="200" [disabled]="!editable" autocomplete="off"
+                 [(ngModel)]="tissue.shlWorkNumber" (change)="valueChanged($event, 'shlWorkNumber')"
+                 placeholder="SHL Work Number" [maxLength]="200"
+                 (blur)="currentField(null)" (focus)="currentField('shlWorkNumber')">
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr *ngIf="tissue.tissueType === 'block'">
+      <td class="TD--Padding">Scrolls back from SHL</td>
+      <td>
+        <app-field-datepicker [colorDuringPatch]="isPatchedCurrently('scrollsReceived')" [disabled]="!editable"
+                              [dateString]="tissue.scrollsReceived"
+                              (dateChanged)="valueChanged($event, 'scrollsReceived')"></app-field-datepicker>
+      </td>
+      <td class="TD--Padding">
+        Tumor Percentage as reported by SHL
+      </td>
+      <td>
+        <mat-form-field
+          [ngClass]="{'Width--100': true, 'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('tumorPercentage')}">
+          <input matInput maxlength="200" [disabled]="!editable" autocomplete="off"
+                 placeholder="Tumor Percentage"
+                 [(ngModel)]="tissue.tumorPercentage" (change)="valueChanged($event, 'tumorPercentage')"
+                 (blur)="currentField(null)" (focus)="currentField('skId')">
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td class="TD--Padding">SK ID</td>
+      <td colspan="3">
+        <mat-form-field
+          [ngClass]="{'Width--100': true, 'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('skId')}">
+          <input matInput maxlength="200" [disabled]="!editable" autocomplete="off"
+                 [(ngModel)]="tissue.skId" (change)="valueChanged($event, 'skId')"
+                 placeholder="SK ID"
+                 (blur)="currentField(null)" (focus)="currentField('skId')">
+          <mat-hint class="ErrorMessageForm" *ngIf="currentPatchField === 'skId' && dup">Value already exists!</mat-hint>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td class="TD--Padding">First SM ID</td>
+      <td colspan="3">
+        <mat-form-field
+          [ngClass]="{'Width--100': true, 'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('firstSmId')}">
+          <input matInput maxlength="200" [disabled]="!editable" autocomplete="off"
+                 [(ngModel)]="tissue.firstSmId" (change)="valueChanged($event, 'firstSmId')"
+                 placeholder="First SM ID" [maxLength]="200"
+                 (blur)="currentField(null)" (focus)="currentField('firstSmId')">
+          <mat-hint class="ErrorMessageForm" *ngIf="currentPatchField === 'firstSmId' && dup">Value already exists!
+          </mat-hint>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td class="TD--Padding">SM ID for H&E</td>
+      <td colspan="3">
+        <mat-form-field
+          [ngClass]="{'Width--100': true, 'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('smId')}">
+          <input matInput maxlength="200" [disabled]="!editable" autocomplete="off"
+                 [(ngModel)]="tissue.smId" (change)="valueChanged($event, 'smId')"
+                 placeholder="SM ID for H&E"
+                 (blur)="currentField(null)" (focus)="currentField('smId')">
+          <mat-hint class="ErrorMessageForm" *ngIf="currentPatchField === 'smId' && dup">Value already exists!</mat-hint>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr *ngFor="let col of additionalColumns">
+      <td class="TD--Padding">{{col.columnDisplay}}</td>
+      <td colspan="3">
+        <mat-form-field
+          *ngIf="col.displayType === 'text' || col.displayType === 'TEXT' || col.displayType === ''|| col.displayType == null"
+          [ngClass]="{'Width--100': true, 'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently(col.columnName)}">
+          <input matInput maxlength="200" [disabled]="!editable"
+                 value="{{getAdditionalValue(col.columnName)}}" placeholder="{{col.columnDisplay}}"
+                 (change)="onAdditionalColChange($event, col.columnName)"
+                 (blur)="currentField(null)" (focus)="currentField(col.columnName)">
+        </mat-form-field>
+        <mat-form-field *ngIf="col.displayType === 'NUMBER'"
+                            [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently(col.columnName)}">
+          <input matInput maxlength="200" type="number" [disabled]="!editable"
+                 value="{{getAdditionalValue(col.columnName)}}"
+                 (change)="onAdditionalColChange($event, col.columnName)"
+                 (blur)="currentField(null)" (focus)="currentField(col.columnName)">
+        </mat-form-field>
+        <textarea maxlength="1000"
+                  *ngIf="col.displayType === 'TEXTAREA'"
+                  [ngClass]="{'Width--100': true, 'Color--Field--Patched': isPatchedCurrently(col.columnName)}"
+                  (blur)="currentField(null)" (focus)="currentField(col.columnName)" [disabled]="!editable"
+                  value="{{getAdditionalValue(col.columnName)}}"
+                  (change)="onAdditionalColChange($event, col.columnName)"></textarea>
+        <mat-select *ngIf="col.displayType === 'OPTIONS'" placeholder="{{col.columnDisplay}}"
+                   [ngModel]="getAdditionalValue(col.columnName)"
+                   (change)="onAdditionalColChange($event, col.columnName)" [disabled]="!editable"
+                   [ngClass]="{'Color--Field--Patched': isPatchedCurrently(col.columnName)}">
+          <mat-option *ngFor="let op of col.possibleValues" [value]="op.value">{{op.value}}</mat-option>
+        </mat-select>
+        <mat-checkbox *ngIf="col.displayType === 'CHECKBOX'" color="primary" disableRipple
+                     [ngModel]="getAdditionalValue(col.columnName)"
+                     (change)="onAdditionalColChange($event, col.columnName)" [disabled]="!editable">
+        </mat-checkbox>
+        <app-field-datepicker *ngIf="col.displayType === 'DATE'" [colorDuringPatch]="isPatchedCurrently(col.columnName)"
+                              [disabled]="!editable"
+                              [dateString]="getAdditionalValue(col.columnName)"
+                              (dateChanged)="onAdditionalColChange($event, col.columnName)"></app-field-datepicker>
+      </td>
+    </tr>
+    <tr>
+      <td class="TD--Padding">Date sent to GP</td>
+      <td colspan="3">
+        <app-field-datepicker [colorDuringPatch]="isPatchedCurrently('sentGp')" [allowFutureDate]="true"
+                              [disabled]="!editable"
+                              [dateString]="tissue.sentGp"
+                              (dateChanged)="valueChanged($event, 'sentGp')"></app-field-datepicker>
+      </td>
+    </tr>
+    <tr>
+      <td class="TD--Padding">
+        Sequencing Results
+      </td>
+      <td colspan="3">
+        <mat-select [disabled]="!editable" [(ngModel)]="tissue.sequenceResults"
+                   (change)="valueChanged($event, 'sequenceResults')"
+                   [ngClass]="{'Color--Field--Patched': isPatchedCurrently('sequenceResults')}"
+                   placeholder="Sequence Results">
+          <mat-option value="failureSHL">Failure at SHL</mat-option>
+          <mat-option value="abandonedGP">Abandoned at GP</mat-option>
+          <mat-option value="failedPurity">Failed Purity</mat-option>
+          <mat-option value="externalPathFailed">External Path Review Failed</mat-option>
+          <mat-option value="success">Success</mat-option>
+          <mat-option value=""></mat-option>
+        </mat-select>
+      </td>
+
+    </tr>
+
+  </table>
+</div>

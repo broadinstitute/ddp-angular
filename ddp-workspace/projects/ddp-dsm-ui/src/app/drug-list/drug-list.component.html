@@ -1,0 +1,261 @@
+<h1> Drug List </h1>
+
+<div *ngIf="errorMessage != null">
+  <h3 class="Color--warn Line--Break">{{errorMessage}}</h3>
+  <br/>
+</div>
+<div *ngIf="additionalMessage != null">
+  <h3 class="Color--primary Line--Break">{{additionalMessage}}</h3>
+  <br/>
+</div>
+
+<div *ngIf="errorMessage == null">
+
+  <span [hidden]="!loading" class="Width--100">
+    <div align="center" class="Width--100 Height--100">
+      <i class="fas fa-spinner fa-spin fa-5x Color--primary"></i>
+    </div>
+  </span>
+  <br/>
+
+  <div *ngIf="hasRole().allowedToEditDrugList()">
+    <div>
+      <b>
+        Add new drug:
+      </b>
+    </div>
+    <mat-form-field class="Input">
+      <input matInput class="Input--Min-WIDTH" maxlength="200" placeholder="Display Name" autocomplete="off"
+             [ngModel]="displayName" (change)="checkDisplayName(null)" (ngModelChange)="displayName = $event.toUpperCase()">
+      <mat-hint class="ErrorMessageForm" *ngIf="notUniqueError">Name not unique</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="Input">
+      <input matInput type="text" class="Width--100" maxlength="100" placeholder="Generic Name" autocomplete="off"
+             [ngModel]="genericName" (change)="checkDuplicatedNames(null)" (ngModelChange)="genericName = $event.toUpperCase()">
+      <mat-hint class="ErrorMessageForm" *ngIf="duplicatedNamesError">Generic/Brand combo is not new</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="Input">
+      <input matInput type="text" class="Width--100" maxlength="100" placeholder="Brand Name" autocomplete="off"
+             [ngModel]="brandName" (change)="checkDuplicatedNames(null)" (ngModelChange)="brandName = $event.toUpperCase()">
+      <mat-hint class="ErrorMessageForm" *ngIf="duplicatedNamesError">Generic/Brand combo is not new</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="Input">
+      <input matInput type="text" class="Width--100" maxlength="100" placeholder="Chemo category" autocomplete="off"
+             [ngModel]="chemocat" (ngModelChange)="chemocat = $event.toUpperCase()">
+    </mat-form-field>
+
+    <mat-select class="Input--Min-WIDTH" [(ngModel)]="chemoType" placeholder="Chemo Type">
+      <mat-option value="A"> A</mat-option>
+      <mat-option value="H"> H</mat-option>
+      <mat-option value="O"> O</mat-option>
+      <mat-option value="I"> I</mat-option>
+      <mat-option value="R"> R</mat-option>
+    </mat-select>
+    <mat-checkbox color="primary" [checked]="studyDrug" (change)="studyDrug = $event.checked"
+                 disableRipple> Study Drug</mat-checkbox>
+
+    <mat-select class="Input--Min-WIDTH" [(ngModel)]="treatmentType" placeholder="Treatment Type">
+      <mat-option value="H"> H</mat-option>
+      <mat-option value="B"> B</mat-option>
+      <mat-option value="O"> O</mat-option>
+      <mat-option value="C"> C</mat-option>
+      <mat-option value="I"> I</mat-option>
+      <mat-option value="R"> R</mat-option>
+    </mat-select>
+
+    <mat-select class="Input--Min-WIDTH" [(ngModel)]="chemotherapy" placeholder="Chemotherapy">
+      <mat-option value="Y"> Yes</mat-option>
+      <mat-option value="N"> No</mat-option>
+    </mat-select>
+
+    <mat-checkbox color="primary" [checked]="active" (change)="active = $event.checked"
+                 disableRipple>Active</mat-checkbox>
+
+    <button type="button" class="btn btn-primary" (click)="addDrug()"
+            [disabled]="!goodNewDrug()">Add New Drug</button>
+  </div>
+  <br/>
+
+  <div *ngIf="drugList != null">
+    <table class="table table-striped"
+           [mfData]="drugList | drugFilter:filterDisplayName:filterGenericName:filterBrandName:filterChemocat:filterChemoType:filterTreatmentType:filterChemotherapy"
+           #mf="mfDataTable" [mfRowsOnPage]="10">
+      <thead>
+      <tr>
+        <th>
+          <mfDefaultSorter by="displayName">Display Name</mfDefaultSorter>
+        </th>
+        <th>
+          <mfDefaultSorter by="genericName">Generic Name</mfDefaultSorter>
+        </th>
+        <th>
+          <mfDefaultSorter by="brandName">Brand Name</mfDefaultSorter>
+        </th>
+        <th>
+          <mfDefaultSorter by="chemocat">Chemo category</mfDefaultSorter>
+        </th>
+        <th>
+          <mfDefaultSorter by="chemoType">Chemo Type</mfDefaultSorter>
+        </th>
+        <th>
+          <mfDefaultSorter by="studyDrug">Study Drug</mfDefaultSorter>
+        </th>
+        <th>
+          <mfDefaultSorter by="treatmentType">Treatment Type</mfDefaultSorter>
+        </th>
+        <th>
+          <mfDefaultSorter by="chemotherapy">Chemotherapy</mfDefaultSorter>
+        </th>
+        <th>
+          <mfDefaultSorter by="active">Active</mfDefaultSorter>
+        </th>
+      </tr>
+      <tr>
+        <th>
+          <input class="form-control" [(ngModel)]="filterDisplayName"/>
+        </th>
+        <th>
+          <input class="form-control" [(ngModel)]="filterGenericName"/>
+        </th>
+        <th>
+          <input class="form-control" [(ngModel)]="filterBrandName"/>
+        </th>
+        <th>
+          <input class="form-control" [(ngModel)]="filterChemocat"/>
+        </th>
+        <th>
+          <mat-select class="Input--Min-WIDTH" class="form-control" [(ngModel)]="filterChemoType">
+            <mat-option value=""></mat-option>
+            <mat-option value="A"> A</mat-option>
+            <mat-option value="H"> H</mat-option>
+            <mat-option value="O"> O</mat-option>
+            <mat-option value="I"> I</mat-option>
+            <mat-option value="R"> R</mat-option>
+          </mat-select>
+        </th>
+        <th>
+        </th>
+        <th>
+          <mat-select class="Input--Min-WIDTH" class="form-control" [(ngModel)]="filterTreatmentType">
+            <mat-option value=""></mat-option>
+            <mat-option value="H"> H</mat-option>
+            <mat-option value="B"> B</mat-option>
+            <mat-option value="O"> O</mat-option>
+            <mat-option value="C"> C</mat-option>
+            <mat-option value="I"> I</mat-option>
+            <mat-option value="R"> R</mat-option>
+          </mat-select>
+        </th>
+        <th>
+          <mat-select class="Input--Min-WIDTH" class="form-control" [(ngModel)]="filterChemotherapy">
+            <mat-option value=""></mat-option>
+            <mat-option value="Y"> Yes</mat-option>
+            <mat-option value="N"> No</mat-option>
+          </mat-select>
+        </th>
+        <th>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let drug of mf.data; let i = index">
+        <tr> <!-- For all columns, show as editable if user has permission, otherwise read only -->
+          <td>
+            <mat-form-field *ngIf="hasRole().allowedToEditDrugList()"
+                                [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently('displayName', i)}">
+              <input matInput class="Input--Min-WIDTH" maxlength="45" autocomplete="off"
+                     [(ngModel)]="drug.displayName"
+                     (change)="valueChanged($event, 'displayName', i)"
+                     (blur)="currentField(null, null)" (focus)="currentField('displayName', i)">
+              <mat-hint class="ErrorMessageForm" *ngIf="drug.notUniqueError">Name not unique</mat-hint>
+            </mat-form-field>
+            <div *ngIf="!hasRole().allowedToEditDrugList()">{{drug.displayName}}</div>
+          </td>
+
+          <td>
+            <mat-form-field *ngIf="hasRole().allowedToEditDrugList()"
+                                [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently('genericName', i)}">
+              <input matInput type="text" class="Width--100" maxlength="100" autocomplete="off"
+                     [(ngModel)]="drug.genericName"
+                     (change)="valueChanged($event, 'genericName', i)"
+                     (blur)="currentField(null, null)" (focus)="currentField('genericName', i)">
+              <mat-hint class="ErrorMessageForm" *ngIf="drug.duplicatedNamesError">Generic/Brand combo is not new</mat-hint>
+            </mat-form-field>
+            <div *ngIf="!hasRole().allowedToEditDrugList()">{{drug.genericName}}</div>
+          </td>
+          <td>
+            <mat-form-field *ngIf="hasRole().allowedToEditDrugList()"
+                                [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently('brandName', i)}">
+              <input matInput type="text" class="Width--100" maxlength="100" autocomplete="off"
+                     [(ngModel)]="drug.brandName"
+                     (change)="valueChanged($event, 'brandName', i)"
+                     (blur)="currentField(null, null)" (focus)="currentField('brandName', i)">
+              <mat-hint class="ErrorMessageForm" *ngIf="drug.duplicatedNamesError">Generic/Brand combo is not new</mat-hint>
+            </mat-form-field>
+            <div *ngIf="!hasRole().allowedToEditDrugList()">{{drug.brandName}}</div>
+          </td>
+          <td>
+            <mat-form-field *ngIf="hasRole().allowedToEditDrugList()"
+                                [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently('chemocat', i)}">
+              <input matInput type="text" class="Width--100" maxlength="100" autocomplete="off"
+                     [(ngModel)]="drug.chemocat"
+                     (change)="valueChanged($event, 'chemocat', i)"
+                     (blur)="currentField(null, null)" (focus)="currentField('chemocat', i)">
+            </mat-form-field>
+            <div *ngIf="!hasRole().allowedToEditDrugList()">{{drug.chemocat}}</div>
+          </td>
+          <td>
+            <mat-select class="Input--Min-WIDTH" [(ngModel)]="drug.chemoType"
+                       (change)="valueChanged($event, 'chemoType', i)" [disabled]="!hasRole().allowedToEditDrugList()">
+              <mat-option value="A"> A</mat-option>
+              <mat-option value="H"> H</mat-option>
+              <mat-option value="O"> O</mat-option>
+              <mat-option value="I"> I</mat-option>
+              <mat-option value="R"> R</mat-option>
+            </mat-select>
+          </td>
+          <td>
+            <mat-checkbox color="primary" [checked]="drug.studyDrug" (change)="drug.studyDrug = $event.checked; valueChanged($event, 'studyDrug', i)"
+                         [disabled]="!hasRole().allowedToEditDrugList()"
+                         disableRipple></mat-checkbox>
+          </td>
+          <td>
+            <mat-select [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently('treatmentType', i)}"
+                       [(ngModel)]="drug.treatmentType" (change)="valueChanged($event, 'treatmentType', i)" [disabled]="!hasRole().allowedToEditDrugList()">
+              <mat-option value="H"> H</mat-option>
+              <mat-option value="B"> B</mat-option>
+              <mat-option value="O"> O</mat-option>
+              <mat-option value="C"> C</mat-option>
+              <mat-option value="I"> I</mat-option>
+              <mat-option value="R"> R</mat-option>
+            </mat-select>
+          </td>
+          <td>
+            <mat-select [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently('chemotherapy', i)}"
+                       [(ngModel)]="drug.chemotherapy" (change)="valueChanged($event, 'chemotherapy', i)" [disabled]="!hasRole().allowedToEditDrugList()">
+              <mat-option value="Y"> Yes</mat-option>
+              <mat-option value="N"> No</mat-option>
+            </mat-select>
+          </td>
+          <td>
+            <mat-checkbox color="primary" [checked]="drug.active" (change)="drug.active = $event.checked; valueChanged($event, 'active', i)"
+                         [disabled]="!hasRole().allowedToEditDrugList()"
+                         disableRipple></mat-checkbox>
+          </td>
+        </tr>
+      </ng-container>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="9">
+          <mfBootstrapPaginator [rowsOnPageSet]="[10, 50, 100]"></mfBootstrapPaginator>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+    <br/>
+  </div>
+</div>
