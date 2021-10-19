@@ -18,7 +18,7 @@ import { FormBuilder, FormControl, ValidationErrors, ValidatorFn } from '@angula
     selector: 'ddp-user-preferences',
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
-        <h2 mat-dialog-title translate>{{'SDK.UserPreferences.UserPreferencesTitle' | translate}}: {{data.userName}}</h2>
+        <h2 mat-dialog-title translate>{{'SDK.UserPreferences.UserPreferencesTitle' | translate}}{{data.userName ? ': ' + data.userName : ''}}</h2>
         <ddp-loading [loaded]="loaded"></ddp-loading>
         <mat-dialog-content>
             <ng-container *ngIf="userProfileFieldsForEditing.size">

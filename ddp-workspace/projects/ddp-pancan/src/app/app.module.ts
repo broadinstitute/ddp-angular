@@ -19,8 +19,7 @@ import {
     SortOrder,
     PicklistSortingPolicy,
     AnalyticsEventsService,
-    AnalyticsEvent,
-    UserProfileField
+    AnalyticsEvent
 } from 'ddp-sdk';
 
 import { ToolkitConfigurationService, ToolkitModule } from 'toolkit';
@@ -69,6 +68,7 @@ toolkitConfig.lmsPageEmail = 'info@lmsproject.org';
 toolkitConfig.lmsStudyGuid = 'cmi-lms';
 toolkitConfig.useMultiParticipantDashboard = true;
 toolkitConfig.dashboardDisplayedColumns = ['name', 'summary', 'status', 'actions'];
+toolkitConfig.allowEditUserProfile = true;
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
@@ -93,7 +93,6 @@ sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.useStepsWithCircle = true;
 sdkConfig.notSortedPicklistAutocompleteStableIds = ['PRIMARY_CANCER_SELF', 'PRIMARY_CANCER_CHILD'];
-sdkConfig.userProfileFieldsForEditing = [UserProfileField.DATE_OF_BIRTH];
 
 export function translateFactory(translate: TranslateService,
     injector: Injector,
