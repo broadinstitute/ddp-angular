@@ -134,6 +134,7 @@ export class Auth0AdapterService implements OnDestroy {
             }),
             language: this.language.getCurrentLanguage()
         };
+        this.log.logToCloud(`Auth0 login modal is open: ${JSON.stringify(params)}`, { auth0Mode: Auth0Mode.LoginOnly });
         this.showAuth0Modal(Auth0Mode.LoginOnly, params);
     }
 
@@ -157,6 +158,8 @@ export class Auth0AdapterService implements OnDestroy {
             // @todo : hack delete when done
             serverUrl: this.configuration.backendUrl
         };
+        this.log.logToCloud(`Auth0 signup modal is open for user: ${JSON.stringify(params)}`,
+            { tempUserGuid: temporarySession?.userGuid, auth0Mode: Auth0Mode.SignupOnly });
         this.showAuth0Modal(Auth0Mode.SignupOnly, params);
     }
 
@@ -178,6 +181,7 @@ export class Auth0AdapterService implements OnDestroy {
                 this.windowRef.nativeWindow.location.hash = '';
                 this.setSession(authResult);
                 this.log.logEvent(`${this.LOG_SOURCE}.handleAuthentication`, authResult);
+                this.log.logToCloud(`${this.LOG_SOURCE}.handleAuthentication, authResult: ${JSON.stringify(authResult)}`);
                 this.analytics.emitCustomEvent(AnalyticsEventCategories.Authentication, AnalyticsEventActions.Login);
             } else if (err) {
                 this.log.logError(`${this.LOG_SOURCE}.handleAuthentication`, err);
@@ -235,12 +239,14 @@ export class Auth0AdapterService implements OnDestroy {
     public setSession(authResult, isAdmin: boolean = false): void {
         const decodedJwt = this.jwtHelper.decodeToken(authResult.idToken);
         this.log.logEvent(this.LOG_SOURCE, `authResult: ${decodedJwt}`);
+        this.log.logToCloud(`${this.LOG_SOURCE} authResult: ${JSON.stringify(decodedJwt)}`);
         const userGuid = decodedJwt['https://datadonationplatform.org/uid'];
 
         if (!userGuid) {
             this.log.logError(this.LOG_SOURCE, `No user guid found in jwt: ${JSON.stringify(decodedJwt)}`);
         } else {
             this.log.logEvent(this.LOG_SOURCE, `Logged in user: ${userGuid}`);
+            this.log.logToCloud(`${this.LOG_SOURCE} Logged in user ${userGuid}`, { userGuid });
         }
         let locale = decodedJwt['locale'];
         if (locale == null) {
@@ -258,10 +264,13 @@ export class Auth0AdapterService implements OnDestroy {
         this.isAdminSession = isAdmin;
         this.log.logEvent(this.LOG_SOURCE,
             `Successfully updated session token: ${JSON.stringify(decodedJwt)}`);
+        this.log.logToCloud(`${this.LOG_SOURCE} Successfully updated session token: ${JSON.stringify(decodedJwt)}`);
     }
 
     public logout(returnToUrl: string = ''): void {
         const baseUrl = this.configuration.baseUrl;
+        const userGuid = this.session.session?.userGuid || null;
+        this.log.logToCloud(`${this.LOG_SOURCE} logout for user ${userGuid}`, { userGuid });
         // Remove tokens and expiry time from localStorage
         this.session.clear();
         this.log.logEvent(this.LOG_SOURCE, 'logout');
@@ -317,6 +326,8 @@ export class Auth0AdapterService implements OnDestroy {
     public renewSession(renewalAuthResult): void {
         const decodedJwt = this.jwtHelper.decodeToken(renewalAuthResult.idToken);
         const oldSession = this.session.session;
+        this.log.logToCloud(`${this.LOG_SOURCE} renewSession for user ${oldSession.userGuid} with token: ${renewalAuthResult.accessToken}`,
+            { userGuid: oldSession.userGuid });
         this.session.setSession(
             renewalAuthResult.accessToken,
             renewalAuthResult.idToken,
@@ -344,6 +355,9 @@ export class Auth0AdapterService implements OnDestroy {
     }
 
     private handleExpiredTemporarySession(): void {
+        const temporarySession = this.session.isTemporarySession() ? this.session.session : null;
+        const userGuid = temporarySession?.userGuid;
+        this.log.logToCloud(`${this.LOG_SOURCE} expired session for temporal user ${userGuid}`, { tempUserGuid: userGuid });
         this.session.clear();
         window.location.reload();
     }
