@@ -5,6 +5,7 @@ import { QuestionType } from '../models/activity/questionType';
 @Injectable()
 export class ConfigurationService {
     backendUrl: string;
+    cloudLoggingUrl: string;
     baseUrl: string;
     auth0ClientId: string;
     auth0CodeRedirect: string;

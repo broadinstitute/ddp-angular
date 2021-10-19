@@ -2,11 +2,15 @@ import { Injectable, Inject } from '@angular/core';
 import { ConfigurationService } from './configuration.service';
 import { LogLevel } from '../models/logLevel';
 import { StackdriverErrorReporterService } from './stackdriverErrorReporter.service';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 type Logger = (message?: any, ...optionalParams: any[]) => void;
 
 @Injectable()
 export class LoggingService {
+    private readonly LOG_SOURCE = 'Logging';
     // tslint:disable-next-line:no-console
     public logDebug: Logger = this.showEvent(LogLevel.Debug) ? console.debug.bind(window.console) : () => { };
 
@@ -27,7 +31,8 @@ export class LoggingService {
 
     constructor(
         @Inject('ddp.config') private config: ConfigurationService,
-        private stackdriverErrorReporterService: StackdriverErrorReporterService) {}
+        private stackdriverErrorReporterService: StackdriverErrorReporterService,
+        private http: HttpClient) {}
 
     private showEvent(level: LogLevel): boolean {
         return this.config.logLevel <= level;
@@ -35,5 +40,25 @@ export class LoggingService {
 
     private stringify(obj: object): string {
         return Object.keys(obj).map(key => `${key}: ${obj[key]}`).join(', ');
+    }
+
+    public logToCloud(payload: string, labels?: {[key: string]: string}): void {
+        const url = `${this.config.cloudLoggingUrl}/LoggingService`;
+        const body = {
+            logName: `angular-${this.config.studyGuid}`,
+            severity: 'INFO',
+            textPayload: payload,
+            labels
+        };
+
+        this.http.post(
+            url,
+            body,
+            { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).pipe(
+            catchError((error: any) => {
+                this.logError(this.LOG_SOURCE, `HTTP POST: ${url}. Error:`, error);
+                return of(null);
+            })
+        ).subscribe();
     }
 }

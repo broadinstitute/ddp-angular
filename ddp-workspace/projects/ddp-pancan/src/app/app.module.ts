@@ -71,6 +71,7 @@ toolkitConfig.dashboardDisplayedColumns = ['name', 'summary', 'status', 'actions
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
+sdkConfig.cloudLoggingUrl = 'https://us-central1-broad-ddp-dev.cloudfunctions.net';
 sdkConfig.auth0Domain = DDP_ENV.auth0Domain;
 sdkConfig.auth0ClientId = DDP_ENV.auth0ClientId;
 sdkConfig.adminClientId = DDP_ENV.adminClientId;
