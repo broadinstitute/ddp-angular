@@ -72,19 +72,16 @@
             </button>
           </div>
         </div>
-
         <div
-                *ngIf="isParticipantContentExpanded(participant)"
-                class="participant__content"
+          class="participant__content"
+          *ngIf="isParticipantContentExpanded(participant)"
         >
           <app-activities-list
-                  [activities]="participant.activities"
-                  (startActivity)="onStartActivity(participant.userGuid, $event)"
-                  (continueActivity)="
-              onContinueActivity(participant.userGuid, $event)
-            "
-                  (editActivity)="onEditActivity(participant.userGuid, $event)"
-                  (viewActivity)="onViewActivity(participant.userGuid, $event)"
+            [activities]="participant.activities"
+            (editActivity)="onEditActivity(participant.userGuid, $event)"
+            (viewActivity)="onViewActivity(participant.userGuid, $event)"
+            (startActivity)="onStartActivity(participant.userGuid, $event)"
+            (continueActivity)="onContinueActivity(participant.userGuid, $event)"
           ></app-activities-list>
         </div>
       </div>

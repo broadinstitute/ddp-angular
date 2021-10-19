@@ -15,8 +15,6 @@
             *ngIf="isActivityShown && !isFetchingActivities"
             [studyGuid]="studyGuid"
             [activityGuid]="instanceGuid"
-            [isInitiallyReadonly]="isReadonly"
-            [hasPreviousInstance]="hasPreviousInstance"
             (submit)="onSubmit($event)"
     ></app-activity>
   </div>

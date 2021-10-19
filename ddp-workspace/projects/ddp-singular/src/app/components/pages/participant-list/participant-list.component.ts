@@ -119,7 +119,7 @@ export class ParticipantsListComponent implements OnInit {
   onStartActivity(participantGuid: string, activity: ActivityInstance): void {
     this.setParticipant(participantGuid);
     this.setCurrentActivity(activity);
-    this.redirectToSurvey();
+    this.redirectToSurvey(activity.instanceGuid);
   }
 
   onContinueActivity(
@@ -128,7 +128,7 @@ export class ParticipantsListComponent implements OnInit {
   ): void {
     this.setParticipant(participantGuid);
     this.setCurrentActivity(activity);
-    this.redirectToSurvey();
+    this.redirectToSurvey(activity.instanceGuid);
   }
 
   onEditActivity(
@@ -142,14 +142,14 @@ export class ParticipantsListComponent implements OnInit {
       .pipe(take(1))
       .subscribe(activity => {
         this.setCurrentActivity(activity as ActivityInstance);
-        this.redirectToSurvey();
+        this.redirectToSurvey(activity.instanceGuid);
       });
   }
 
   onViewActivity(participantGuid: string, activity: ActivityInstance): void {
     this.setParticipant(participantGuid);
     this.setCurrentActivity(activity, true);
-    this.redirectToSurvey();
+    this.redirectToSurvey(activity.instanceGuid);
   }
 
   onAddParticipantClick(): void {
@@ -164,12 +164,12 @@ export class ParticipantsListComponent implements OnInit {
         this.setCurrentActivity({
           instanceGuid: response.instanceGuid,
         } as ActivityInstance);
-        this.redirectToSurvey();
+        this.redirectToSurvey(response.instanceGuid);
       });
   }
 
-  private redirectToSurvey(): void {
-    this.router.navigateByUrl(Route.Survey);
+  private redirectToSurvey(id: string): void {
+    this.router.navigate(['survey', id]);
   }
 
   private setCurrentActivity(

@@ -1,55 +1,42 @@
 import { Observable, of } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { first, take, tap } from 'rxjs/operators';
 import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
-import { CurrentActivityService } from '../../../services/current-activity.service';
+import { CURRENT_ACTIVITY_ID_TOKEN, currentActivityIdProvider } from './providers';
 import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { ActivityInstance, ActivityResponse, UserActivityServiceAgent, CompositeDisposable, SessionMementoService } from 'ddp-sdk';
+import { ActivityInstance, ActivityResponse, UserActivityServiceAgent, SessionMementoService } from 'ddp-sdk';
 
 
 @Component({
   selector: 'app-survey',
   templateUrl: './survey.component.html',
   styleUrls: ['./survey.component.scss'],
+  providers: [currentActivityIdProvider]
 })
 export class SurveyComponent implements OnInit, OnDestroy {
   studyGuid: string;
-  isReadonly: boolean;
   instanceGuid: string;
   isActivityShown = true;
-  hasPreviousInstance: boolean;
   isFetchingActivities = false;
   activities: ActivityInstance[];
   isWorkflowProgressShown = false;
 
-  private _anchor = new CompositeDisposable();
-
   constructor(
     private readonly cdr: ChangeDetectorRef,
     private readonly session: SessionMementoService,
-    private readonly currentActivity: CurrentActivityService,
     private readonly userActivities: UserActivityServiceAgent,
     private readonly workflowBuilder: WorkflowBuilderService,
+    @Inject(CURRENT_ACTIVITY_ID_TOKEN) private readonly activityId$: Observable<string>,
     @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService,
   ) {}
 
   ngOnInit(): void {
-    this.studyGuid = this.toolkitConfiguration.studyGuid;
-    const activity = this.currentActivity.activity$.getValue();
-
-    if (!activity) {
-      return;
-    }
-
+    this.setInstanceGuid();
     this.getActivities().pipe(take(1)).subscribe();
-    this.instanceGuid = activity.instance.instanceGuid;
-    this.isReadonly = activity.isReadonly;
-    this.hasPreviousInstance = !!activity.instance.previousInstanceGuid;
+    this.studyGuid = this.toolkitConfiguration.studyGuid;
   }
 
   ngOnDestroy(): void {
-    this.currentActivity.activity$.next(null);
     this.session.setParticipant(null);
-    this._anchor.removeAll();
   }
 
   onSubmit(activityResponse: ActivityResponse): void {
@@ -69,7 +56,6 @@ export class SurveyComponent implements OnInit, OnDestroy {
 
   onChangeActivity(activity: ActivityInstance): void {
     this.instanceGuid = activity.instanceGuid;
-    this.hasPreviousInstance = !!activity.previousInstanceGuid;
     this.resetActivityComponent();
   }
 
@@ -80,10 +66,12 @@ export class SurveyComponent implements OnInit, OnDestroy {
       tap(activities => {
         this.isFetchingActivities = false;
 
-        if (!activities) return;
+        if (!activities) {
+          return;
+        }
 
         this.activities = activities;
-      }),
+      })
     );
   }
 
@@ -91,5 +79,12 @@ export class SurveyComponent implements OnInit, OnDestroy {
     this.isActivityShown = false;
     this.cdr.detectChanges();
     this.isActivityShown = true;
+  }
+
+  private setInstanceGuid(): void {
+    this.activityId$.pipe(
+      first(),
+      tap((id: string) => this.instanceGuid = id)
+    ).subscribe();
   }
 }
