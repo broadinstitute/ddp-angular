@@ -14,8 +14,16 @@ const logging = new Logging({projectId});
 // Selects the log to write to
 const log = logging.log('something');
 
-
 export const logMessage:  HttpFunction = (req: express.Request, res: express.Response) => {
+    res.header('Access-Control-Allow-Origin', '*');
+
+    if (req.method === 'OPTIONS') {
+        res.header('Access-Control-Allow-Methods', 'POST');
+        res.header('Access-Control-Allow-Headers', 'Content-Type');
+        res.header('Access-Control-Max-Age', '3600');
+        res.status(204).send();
+    }
+
     if (req.body) {
         let entry: LogEntry;
         try {
@@ -28,10 +36,8 @@ export const logMessage:  HttpFunction = (req: express.Request, res: express.Res
         log.write(new Entry(entry.toGoogleEntryMetadata()))
             .catch((error: any) => {
                 console.error("Could not write to log: %o", error);
-        });
+            });
         res.status(204).send();
-
     }
-
 };
 
