@@ -6,7 +6,7 @@ export enum Route {
   About = 'about',
   Login = 'login',
   Error = 'error',
-  Survey = 'survey',
+  Survey = 'survey/:id',
   Contacts = 'contacts',
   Password = 'password',
   Activity = 'activity',
