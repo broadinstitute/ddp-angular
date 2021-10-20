@@ -89,7 +89,8 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
                 if (value.length) {
                     this.handleStringValue(value);
                 } else {
-                    this.updateAnswer();
+                    this.block.answer = null;
+                    this.valueChanged.emit(null);
                 }
             } else {
                 this.updateAnswer(value.stableId);
