@@ -7,8 +7,9 @@
     <mat-select
       [placeholder]="placeholder"
       [disabled]="readonly"
+      [value]="block.answer"
       (selectionChange)="onSelectionChange($event.value)"
-      (focus)="onFocus()"
+      (opened)="onOpen()"
     >
       <mat-option *ngFor="let option of options$ | async" [value]="option">
         {{ option }}

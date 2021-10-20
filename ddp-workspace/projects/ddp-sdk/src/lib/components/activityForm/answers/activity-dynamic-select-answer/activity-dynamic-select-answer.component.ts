@@ -6,12 +6,12 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { ActivityDynamicSelectQuestionBlock } from '../../../../models/activity/activityDynamicSelectQuestionBlock';
-import { CompositeDisposable } from '../../../../compositeDisposable';
 import { DynamicSelectAnswerService } from '../../../../services/serviceAgents/dynamicSelectAnswer.service';
+import { CompositeDisposable } from '../../../../compositeDisposable';
 
 @Component({
   selector: 'ddp-activity-dynamic-select-answer',
@@ -25,15 +25,15 @@ export class ActivityDynamicSelectAnswerComponent implements OnInit, OnDestroy {
   @Output() valueChanged = new EventEmitter<string | null>();
   @Output() componentBusy = new EventEmitter<boolean>();
   public options$ = new BehaviorSubject<string[]>([]);
-  private focus$ = new Subject<void>();
+  private panelOpen$ = new Subject<void>();
   private subs = new CompositeDisposable();
 
-  constructor(
-    private dynamicSelectAnswerService: DynamicSelectAnswerService,
-  ) {}
+  constructor(private dynamicSelectAnswerService: DynamicSelectAnswerService) {}
 
   ngOnInit(): void {
     this.initListeners();
+
+    this.getOptions().subscribe();
   }
 
   ngOnDestroy(): void {
@@ -44,29 +44,30 @@ export class ActivityDynamicSelectAnswerComponent implements OnInit, OnDestroy {
     this.valueChanged.emit(value);
   }
 
-  onFocus(): void {
-    this.focus$.next();
+  onOpen(): void {
+    this.panelOpen$.next();
   }
 
   private initListeners(): void {
-    this.initFocusListener();
+    this.initPanelOpenListener();
   }
 
-  private initFocusListener(): void {
-    const sub = this.focus$
-      .pipe(
-        tap(() => {
-          this.componentBusy.next(true);
-        }),
-        switchMap(() =>
-          this.dynamicSelectAnswerService.getOptions(this.block.stableId),
-        ),
-      )
-      .subscribe(options => {
-        this.options$.next(options);
-        this.componentBusy.next(false);
-      });
+  private initPanelOpenListener(): void {
+    const sub = this.panelOpen$
+      .pipe(switchMap(() => this.getOptions()))
+      .subscribe();
 
     this.subs.addNew(sub);
+  }
+
+  private getOptions(): Observable<string[]> {
+    this.componentBusy.next(true);
+
+    return this.dynamicSelectAnswerService.getOptions(this.block.stableId).pipe(
+      tap(options => {
+        this.options$.next(options);
+        this.componentBusy.next(false);
+      }),
+    );
   }
 }
