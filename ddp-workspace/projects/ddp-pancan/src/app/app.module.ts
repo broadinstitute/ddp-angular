@@ -71,7 +71,6 @@ toolkitConfig.dashboardDisplayedColumns = ['name', 'summary', 'status', 'actions
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
-sdkConfig.cloudLoggingUrl = 'https://us-central1-broad-ddp-dev.cloudfunctions.net';
 sdkConfig.auth0Domain = DDP_ENV.auth0Domain;
 sdkConfig.auth0ClientId = DDP_ENV.auth0ClientId;
 sdkConfig.adminClientId = DDP_ENV.adminClientId;
@@ -90,6 +89,8 @@ sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
 sdkConfig.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
 sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
+sdkConfig.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl;
+sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.useStepsWithCircle = true;
 sdkConfig.notSortedPicklistAutocompleteStableIds = ['PRIMARY_CANCER_SELF', 'PRIMARY_CANCER_CHILD'];
