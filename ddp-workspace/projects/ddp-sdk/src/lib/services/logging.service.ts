@@ -5,6 +5,7 @@ import { StackdriverErrorReporterService } from './stackdriverErrorReporter.serv
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { SessionMementoService } from './sessionMemento.service';
 
 type Logger = (message?: any, ...optionalParams: any[]) => void;
 
@@ -32,7 +33,8 @@ export class LoggingService {
     constructor(
         @Inject('ddp.config') private config: ConfigurationService,
         private stackdriverErrorReporterService: StackdriverErrorReporterService,
-        private http: HttpClient) {}
+        private http: HttpClient,
+        private session: SessionMementoService) {}
 
     private showEvent(level: LogLevel): boolean {
         return this.config.logLevel <= level;
@@ -42,13 +44,18 @@ export class LoggingService {
         return Object.keys(obj).map(key => `${key}: ${obj[key]}`).join(', ');
     }
 
-    public logToCloud(payload: string, labels?: {[key: string]: string}): void {
-        const url = `${this.config.cloudLoggingUrl}/LoggingService`;
+    public logToCloud(payload: string, labels?: {[key: string]: string}, severity = 'INFO'): void {
+        if (!this.config.doCloudLogging) {
+            return;
+        }
+        const session =  this.session.session;
+        const url = this.config.cloudLoggingUrl;
         const body = {
             logName: `angular-${this.config.studyGuid}`,
-            severity: 'INFO',
+            severity,
             textPayload: payload,
-            labels
+            labels: { userGuid: session?.userGuid, isTemporarySession: this.session.isTemporarySession(), ...labels },
+            httpRequest: { requestUrl: location.href, userAgent: navigator.userAgent }
         };
 
         this.http.post(

@@ -158,8 +158,7 @@ export class Auth0AdapterService implements OnDestroy {
             // @todo : hack delete when done
             serverUrl: this.configuration.backendUrl
         };
-        this.log.logToCloud(`Auth0 signup modal is open for user: ${JSON.stringify(params)}`,
-            { tempUserGuid: temporarySession?.userGuid, auth0Mode: Auth0Mode.SignupOnly });
+        this.log.logToCloud(`Auth0 signup modal is open for user: ${JSON.stringify(params)}`, { auth0Mode: Auth0Mode.SignupOnly });
         this.showAuth0Modal(Auth0Mode.SignupOnly, params);
     }
 
@@ -269,8 +268,7 @@ export class Auth0AdapterService implements OnDestroy {
 
     public logout(returnToUrl: string = ''): void {
         const baseUrl = this.configuration.baseUrl;
-        const userGuid = this.session.session?.userGuid || null;
-        this.log.logToCloud(`${this.LOG_SOURCE} logout for user ${userGuid}`, { userGuid });
+        this.log.logToCloud(`${this.LOG_SOURCE} logout for user`);
         // Remove tokens and expiry time from localStorage
         this.session.clear();
         this.log.logEvent(this.LOG_SOURCE, 'logout');
@@ -326,7 +324,7 @@ export class Auth0AdapterService implements OnDestroy {
     public renewSession(renewalAuthResult): void {
         const decodedJwt = this.jwtHelper.decodeToken(renewalAuthResult.idToken);
         const oldSession = this.session.session;
-        this.log.logToCloud(`${this.LOG_SOURCE} renewSession for user ${oldSession.userGuid} with token: ${renewalAuthResult.accessToken}`,
+        this.log.logToCloud(`${this.LOG_SOURCE} renewSession with token: ${renewalAuthResult.accessToken}`,
             { userGuid: oldSession.userGuid });
         this.session.setSession(
             renewalAuthResult.accessToken,
@@ -355,9 +353,7 @@ export class Auth0AdapterService implements OnDestroy {
     }
 
     private handleExpiredTemporarySession(): void {
-        const temporarySession = this.session.isTemporarySession() ? this.session.session : null;
-        const userGuid = temporarySession?.userGuid;
-        this.log.logToCloud(`${this.LOG_SOURCE} expired session for temporal user ${userGuid}`, { tempUserGuid: userGuid });
+        this.log.logToCloud(`${this.LOG_SOURCE} expired temporary session`);
         this.session.clear();
         window.location.reload();
     }

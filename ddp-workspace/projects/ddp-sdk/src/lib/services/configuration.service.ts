@@ -5,7 +5,6 @@ import { QuestionType } from '../models/activity/questionType';
 @Injectable()
 export class ConfigurationService {
     backendUrl: string;
-    cloudLoggingUrl: string;
     baseUrl: string;
     auth0ClientId: string;
     auth0CodeRedirect: string;
@@ -66,6 +65,9 @@ export class ConfigurationService {
     // The flag indicates whether we need report JS errors to Google Cloud Error Report API
     // It set (and can be overridden for any single app) in pepperConfig
     doGcpErrorReporting: boolean;
+    cloudLoggingUrl: string;
+    // The flag indicates whether we need google cloud logging
+    doCloudLogging: boolean;
     // activities which should use a vertical progress indicator
     usesVerticalStepper: string[] = [];
     // if steps with circle should be used
