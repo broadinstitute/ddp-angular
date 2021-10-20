@@ -1,6 +1,6 @@
 import * as express from 'express';
 import { HttpFunction } from '@google-cloud/functions-framework';
-import { LogEntry } from './logEntry';
+import { LogEntry } from './model/logEntry';
 import { Entry } from '@google-cloud/logging/build/src';
 
 const {Logging} = require('@google-cloud/logging');
@@ -9,10 +9,10 @@ const DEFAULT_PROJECT_ID ='broad-ddp-dev';
 const projectId = process.env.GCP_PROJECT ? process.env.GCP_PROJECT : DEFAULT_PROJECT_ID;
 
 // Creates a client
-const logging = new Logging({projectId});
+const loggingClient = new Logging({projectId});
 
 // Selects the log to write to
-const log = logging.log('something');
+const log = loggingClient.log('something');
 
 export const logMessage:  HttpFunction = (req: express.Request, res: express.Response) => {
     res.header('Access-Control-Allow-Origin', '*');
