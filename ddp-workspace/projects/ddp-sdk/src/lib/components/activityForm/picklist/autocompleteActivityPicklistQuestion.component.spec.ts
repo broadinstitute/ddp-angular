@@ -237,14 +237,14 @@ describe('AutocompleteActivityPicklistQuestion', () => {
         expect(valueChangedSpy).not.toHaveBeenCalled();
     }));
 
-    it('should emit valueChanged with empty array if user resets the input', fakeAsync(() => {
+    it('should emit valueChanged with null if user resets the input', fakeAsync(() => {
         const valueChangedSpy = spyOn(component.valueChanged, 'emit');
         component.inputFormControl.setValue('');
         fixture.detectChanges();
         tick(200);
 
-        expect(component.block.answer).toEqual([]);
-        expect(valueChangedSpy).toHaveBeenCalledWith([]);
+        expect(component.block.answer).toEqual(null);
+        expect(valueChangedSpy).toHaveBeenCalledWith(null);
     }));
 
     it('should display suggested option correctly', () => {
