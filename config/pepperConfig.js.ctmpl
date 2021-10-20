@@ -12,6 +12,7 @@ var DDP_ENV = {
     errorReportingApiKey: "{{.Data.errorReportingApiKey}}",
     projectGcpId: "{{.Data.googleProjectId}}",
     cloudLoggingUrl:  "{{.Data.cloudLoggingUrl}}",
+    doCloudLogging: true,
     {{end}}
     // The flag indicates whether we need report JS errors to Google Cloud Error Report API
     doGcpErrorReporting: true,
