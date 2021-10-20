@@ -54,7 +54,7 @@ export class LoggingService {
             logName: `angular-${this.config.studyGuid}`,
             severity,
             textPayload: payload,
-            labels: { userGuid: session?.userGuid, isTemporarySession: this.session.isTemporarySession(), ...labels },
+            labels: { userGuid: session?.userGuid, isTemporarySession: String(this.session.isTemporarySession()), ...labels },
             httpRequest: { requestUrl: location.href, userAgent: navigator.userAgent }
         };
 
