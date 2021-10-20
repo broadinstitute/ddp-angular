@@ -70,8 +70,15 @@ commands:
       - run:
           name: Determine environment for branch << pipeline.git.branch >>
           command: |
-            case "<< pipeline.git.branch >>" in
-              develop)
+            if [ "<< pipeline.parameters.deploy_env >>" != "UNKNOWN" ]
+            then
+              DEPLOY_TARGET_ENV="<< pipeline.parameters.deploy_env >>"
+            else
+              DEPLOY_TARGET_ENV="<< pipeline.git.branch >>"
+            fi
+
+            case $DEPLOY_TARGET_ENV in
+              dev*)
                 DEPLOY_ENV=dev
                 BUILD_PARAMS=--sourceMap
               ;;
@@ -82,13 +89,13 @@ commands:
               staging)
                 DEPLOY_ENV=staging
               ;;
-              production)
+              prod*)
                 DEPLOY_ENV=prod
               ;;
               *)
                 DEPLOY_ENV=dev
                 BUILD_PARAMS=--sourceMap
-                echo "We are going to map << pipeline.git.branch >> to dev environment"
+                echo "Defaulting $DEPLOY_TARGET_ENV to dev environment"
               ;;
             esac
             echo "Setting deployment ENVIRONMENT to $DEPLOY_ENV"
@@ -528,12 +535,44 @@ parameters:
   study_guid:
     type: string
     default: "UNKNOWN"
+  api_call:
+    type: enum
+    enum: ["build-and-store","deploy","UNKNOWN"]
+    default: "UNKNOWN"
+  deploy_env:
+    type: enum
+    enum: ["dev", "test", "staging", "prod", "UNKNOWN"]
+    default: "UNKNOWN"
   do-builds:
     type: boolean
     default: false
 
 workflows:
   version: 2
+
+  api-build-and-store-workflow:
+    description: "Build study specified in api call"
+    when:
+      and:
+        - equal: ["build-and-store", << pipeline.parameters.api_call >>]
+        - not:
+            equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
+    jobs:
+      - app-build-and-store-job
+
+  api-deploy-workflow:
+    description: "Deploy a study build to environment specified in api call"
+    when:
+      and:
+        - equal: ["deploy", << pipeline.parameters.api_call >>]
+        - not:
+            equal: ["UNKNOWN", << pipeline.parameters.deploy_env >>]
+        - << pipeline.parameters.study_key >>
+        - not:
+            equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
+    jobs:
+      - deploy-stored-build-job:
+          study_key: << pipeline.parameters.study_key >>
 
   build-and-deploy-all-apps-workflow:
     unless: << pipeline.parameters.do-builds >>
@@ -545,15 +584,19 @@ workflows:
                 - develop
 
   build-and-deploy-workflow:
-    when: << pipeline.parameters.do-builds >>
+    when:
+      and:
+        - << pipeline.parameters.do-builds >>
+        - equal: ["UNKNOWN", << pipeline.parameters.deploy_env >>]
     jobs:
       - build-and-deploy-job:
+          study_key: << pipeline.parameters.study_key >>
           filters:
             branches:
               ignore:
                 - /^rc.*/
                 - /^hotfix.*/
-          study_key: << pipeline.parameters.study_key >>
+
 
   launch-all-app-builds-workflow:
     # using do-builds param to select which of the two workflows using the build-on-tag-filters
