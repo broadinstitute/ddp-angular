@@ -1,0 +1,10 @@
+@import '../app-theme.scss';
+
+.static-page-title-section {
+    padding: 2rem 0;
+    background-color: mat-color($app-theme, 350);
+}
+
+.static-page-content-section {
+    margin: 4rem 0;
+}

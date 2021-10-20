@@ -31,6 +31,7 @@
     "@nguniversal/express-engine": "10.1.0",
     "@ngx-translate/core": "13.0.0",
     "@ngx-translate/http-loader": "6.0.0",
+    "@tinymce/tinymce-angular": "^4.2.2",
     "auth0-js": "9.14.0",
     "auth0-lock": "^11.30.6",
     "bootstrap": "3.4.1",
