@@ -15,7 +15,7 @@ export class LogEntry {
             || !entry.textPayload
             || !entry.severity || !Object.values(LogSeverity).includes(entry.severity)
             || (entry.httpRequest && !isLogEntryHttpRequest(entry.httpRequest))
-            || (entry.labels.labels && Object.values(entry.labels).find(val => typeof val !== 'string'))) {
+            || (entry.labels && Object.values(entry.labels).find(val => typeof val !== 'string'))) {
             throw new Error("Invalid body");
         }
 
