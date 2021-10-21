@@ -594,6 +594,7 @@
         }
     },
     "SDK": {
+        "FinishButton": "Finish",
         "SubmitButton": "Submit",
         "CloseButton": "Close",
         "AddButton": "ADD",
@@ -680,6 +681,14 @@
                 "OtherInstitution": "Other institution"
             },
             "PhysicianValidation": "Please fill out all required fields"
+        },
+        "ModalActivityBlock": {
+            "SaveButton": "Save",
+            "NumQuestionsAnswered": "{{number}} questions answered",
+            "Complete": "Complete",
+            "EditButton": "Edit",
+            "DeleteButton": "Delete",
+            "CancelButton": "Cancel"
         },
         "MailAddress": {
             "Fields": {

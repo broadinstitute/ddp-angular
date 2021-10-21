@@ -94,6 +94,16 @@ sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.useStepsWithCircle = true;
 sdkConfig.notSortedPicklistAutocompleteStableIds = ['PRIMARY_CANCER_SELF', 'PRIMARY_CANCER_CHILD'];
+sdkConfig.usesVerticalStepper = [
+    'FAMILY_HISTORY',
+    'FAMILY_HISTORY_PARENT',
+    'FAMILY_HISTORY_PARENT_SIBLING',
+    'FAMILY_HISTORY_GRANDPARENT',
+    'FAMILY_HISTORY_SIBLING',
+    'FAMILY_HISTORY_CHILD',
+    'FAMILY_HISTORY_ADDITIONAL_DETAILS',
+    'DIET_LIFESTYLE',
+];
 
 export function translateFactory(translate: TranslateService,
     injector: Injector,

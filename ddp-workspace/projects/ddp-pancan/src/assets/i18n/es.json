@@ -592,6 +592,7 @@
         }
     },
     "SDK": {
+        "FinishButton": "Terminar",
         "SubmitButton": "Enviar",
         "CloseButton": "Cerrar",
         "AddButton": "AGREGAR",
@@ -678,6 +679,14 @@
                 "OtherInstitution": "Otra institución"
             },
             "PhysicianValidation": "Complete todos los campos obligatorios."
+        },
+        "ModalActivityBlock": {
+            "SaveButton": "Guardar",
+            "NumQuestionsAnswered": "{{number}} preguntas respondidas",
+            "Complete": "Completar",
+            "EditButton": "Editar",
+            "DeleteButton": "Eliminar",
+            "CancelButton": "Cancelar"
         },
         "MailAddress": {
             "Fields": {
