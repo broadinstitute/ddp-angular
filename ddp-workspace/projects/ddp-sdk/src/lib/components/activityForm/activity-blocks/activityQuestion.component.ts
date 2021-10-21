@@ -8,6 +8,7 @@ import { AnswerValue } from '../../../models/activity/answerValue';
 import { SubmissionManager } from '../../../services/serviceAgents/submissionManager.service';
 import { ConfigurationService } from '../../../services/configuration.service';
 import { ActivityValidationResult } from '../../../models/activity/activityValidationResult';
+import { QuestionType } from '../../../models/activity/questionType';
 
 @Component({
     selector: 'ddp-activity-question',
@@ -76,12 +77,17 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
             this.validationRequested$
         ]).pipe(
             // not displaying any local validations until a validation is requested
-            filter(([_, validationRequested]) => !!validationRequested),
+            // except some uniq cases
+            filter(([enteredValue, validationRequested]) => {
+                return (enteredValue && this.isExceptionToEnforceLocalValidation(this.block))
+                    || !!validationRequested;
+            }),
             map(() => {
                 const firstFailedValidator = this.block.validators.find(validator => !validator.recalculate());
                 return firstFailedValidator ? firstFailedValidator.result : null;
             })
         );
+
         const localValidatorMsg$: Observable<string | null> =
             firstFailedValidator$.pipe(
                 map((result) => {
@@ -155,5 +161,15 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
     public ngOnDestroy(): void {
         this.ngUnsubscribe.next();
         this.ngUnsubscribe.complete();
+    }
+
+    private isExceptionToEnforceLocalValidation(block: any): boolean {
+        // do run the local validation for an autocomplete picklist
+        // in cancer select [PANCAN study, PREQUAL activity]
+        return (block.questionType === QuestionType.Composite)
+            && block.children?.length
+            && block.children.some(child =>
+                (child.questionType === QuestionType.Picklist) && (child.renderMode === 'AUTOCOMPLETE')
+            );
     }
 }
