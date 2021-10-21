@@ -4,9 +4,13 @@ import { LogEntry } from './model/logEntry';
 import { Entry } from '@google-cloud/logging/build/src';
 
 const {Logging} = require('@google-cloud/logging');
-const DEFAULT_PROJECT_ID ='broad-ddp-dev';
 
-const projectId = process.env.GCP_PROJECT ? process.env.GCP_PROJECT : DEFAULT_PROJECT_ID;
+if (!process.env.GCP_PROJECT) {
+  console.error("Environment variable GCP_PROJECT was not set");
+  console.error("Environment: %o", process.env);
+}
+
+const projectId = process.env.GCP_PROJECT ? process.env.GCP_PROJECT : '';
 
 // Creates a client
 const loggingClient = new Logging({projectId});
@@ -27,6 +31,10 @@ export const logMessage:  HttpFunction = (req: express.Request, res: express.Res
 
     if (req.body) { 
         let entry: LogEntry;
+        if (!projectId) {
+          res.status(500).send({error: "GCP_PROJECT environment variable not set"});
+          return;
+        }
         try {
             entry = new LogEntry(projectId, req.body);
         } catch(error) {
