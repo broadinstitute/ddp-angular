@@ -77,7 +77,7 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
             this.validationRequested$
         ]).pipe(
             // not displaying any local validations until a validation is requested
-            // except some uniq cases
+            // except some unique cases
             filter(([enteredValue, validationRequested]) => {
                 return (enteredValue && this.isExceptionToEnforceLocalValidation(this.block))
                     || !!validationRequested;
