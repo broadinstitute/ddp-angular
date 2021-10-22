@@ -33,6 +33,9 @@ export class ActivityRequiredValidationRule extends ActivityAbstractValidationRu
         } else if (this.question.questionType === QuestionType.Picklist) {
             const value = this.question.answer as Array<ActivityPicklistAnswerDto>;
             valid = value.length > 0;
+        } else if (this.question.questionType === QuestionType.Composite) {
+            const answers = this.question.answer as Array<any>;
+            valid = answers?.length && answers.flatMap(x => x).every(answer => answer.value);
         } else if (this.question.questionType === QuestionType.Text) {
             const value = this.question.answer as string;
             valid = value.trim().length > 0;
