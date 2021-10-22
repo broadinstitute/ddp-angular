@@ -177,10 +177,6 @@ export class UserPreferencesComponent implements OnDestroy {
     }
 
     public save(): void {
-        if (!(this.profileForm.dirty || this.addressDirty)) {
-            this.dialogRef.close();
-            return;
-        }
         const shouldProfileBeUpdated = this.profileForm.dirty;
         if (shouldProfileBeUpdated) {
             this.userProfileModel.profile.birthYear = this.birthDate.value.year;
