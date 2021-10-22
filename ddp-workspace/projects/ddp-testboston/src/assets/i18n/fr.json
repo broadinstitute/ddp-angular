@@ -469,8 +469,7 @@
             "ManageParticipants": "Gérer les participants"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "Préférences utilisateur",
-            "UserPreferencesGender": "Sexe"
+            "UserPreferencesTitle": "Préférences utilisateur"
         },
         "Dashboard": {
             "Title": "Mon tableau de bord",

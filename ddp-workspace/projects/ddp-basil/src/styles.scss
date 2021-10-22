@@ -6,3 +6,17 @@
 body {
     font-family: 'Nunito', sans-serif;
 }
+
+$warn-color: #ad0000;
+.ErrorMessage {
+    border-top: 2px solid $warn-color;
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: $warn-color;
+    font-weight: 300;
+    padding: 15px 0;
+
+    a {
+        text-decoration: underline !important;
+    }
+}

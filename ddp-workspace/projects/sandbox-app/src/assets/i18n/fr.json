@@ -49,8 +49,7 @@
             "ManageParticipants": "Gérer les participants"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "Préférences de l'utilisateur",
-            "UserPreferencesGender": "Sexe"
+            "UserPreferencesTitle": "Préférences de l'utilisateur"
         },
         "Dashboard": {
             "Title": "My Study Information"

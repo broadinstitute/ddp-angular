@@ -49,8 +49,7 @@
             "ManageParticipants": "Управление участниками"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "Пользовательские настройки",
-            "UserPreferencesGender": "Пол"
+            "UserPreferencesTitle": "Пользовательские настройки"
         },
         "Dashboard": {
             "Title": "My Study Information"

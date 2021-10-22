@@ -422,7 +422,6 @@
             "SignOutButton": "Déconnexion"
         },
         "UserPreferences": {
-            "UserPreferencesGender": "Sexe",
             "UserPreferencesTitle": "Préférences utilisateur"
         },
         "ValidateError": "L'envoi ne peut être effectué. Veuillez consulter les messages dans le formulaire pour plus de détails.",

@@ -549,7 +549,6 @@
             "SignOutButton": "Sign Out"
         },
         "UserPreferences": {
-            "UserPreferencesGender": "Sex",
             "UserPreferencesTitle": "User preferences"
         },
         "ValidateError": "Submission cannot proceed. Please review messages in form for details.",

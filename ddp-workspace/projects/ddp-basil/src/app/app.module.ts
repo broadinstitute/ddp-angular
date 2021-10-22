@@ -70,7 +70,7 @@ sdkConfig.prismColumns = ['guid', 'shortId', 'userName', 'email', 'enrollmentSta
 sdkConfig.prismDashboardRoute = AppRoutes.Dashboard;
 sdkConfig.prismRoute = AppRoutes.Prism;
 sdkConfig.lookupPageUrl = AppRoutes.Prism;
-sdkConfig.userProfileFieldsForEditing = [UserProfileField.DATE_OF_BIRTH];
+sdkConfig.userProfileFieldsForEditing = [UserProfileField.DATE_OF_BIRTH, UserProfileField.NAME];
 
 export function translateFactory(translate: TranslateService,
     injector: Injector,

@@ -1,19 +1,28 @@
+.ddp-user-preferences-subgroup-title {
+    font-size: 1.2rem;
+}
+
+.ddp-user-preferences-subgroup {
+    margin-bottom: 30px;
+}
+
+.ddp-user-preferences-birthday {
+    .ddp-user-preferences-subgroup-title {
+        margin-bottom: 0;
+    }
+}
+
+.ddp-user-preferences-username-container {
+    display: flex;
+}
+
 ddp-user-preferences {
-    .form-subgroup-title {
-        font-size: 1.2rem;
+    .mat-form-field {
+        flex-grow: 1;
     }
 
-    .form-subgroup {
-        margin-bottom: 30px;
-
-        &--birthday {
-            .form-subgroup-title {
-                margin-bottom: 0;
-            }
-        }
-    }
-
-    .ddp-date-field-margin {
+    .ddp-date-field-margin,
+    .mat-form-field {
         margin-right: 1rem;
 
         &:last-child {

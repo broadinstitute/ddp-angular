@@ -12,7 +12,7 @@ import { SubmitAnnouncementService } from '../../services/submitAnnouncement.ser
 import { BehaviorSubject, forkJoin, of, Subject } from 'rxjs';
 import { DateRenderMode } from '../../models/activity/dateRenderMode';
 import { DatePickerValue } from '../../models/datePickerValue';
-import { FormBuilder, FormControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { FormBuilder, FormControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
     selector: 'ddp-user-preferences',
@@ -21,9 +21,10 @@ import { FormBuilder, FormControl, ValidationErrors, ValidatorFn } from '@angula
         <h2 mat-dialog-title translate>{{'SDK.UserPreferences.UserPreferencesTitle' | translate}}{{data.userName ? ': ' + data.userName : ''}}</h2>
         <ddp-loading [loaded]="loaded"></ddp-loading>
         <mat-dialog-content>
-            <ng-container *ngIf="userProfileFieldsForEditing.size">
-                <div *ngIf="userProfileFieldsForEditing.has(UserProfileField.DATE_OF_BIRTH)" class="form-subgroup form-subgroup--birthday">
-                    <h3 class="form-subgroup-title">User date of birth</h3>
+            <ng-container *ngIf="userProfileFieldsForEditing.size" [formGroup]="profileForm">
+                <div *ngIf="userProfileFieldsForEditing.has(UserProfileField.DATE_OF_BIRTH)"
+                     class="ddp-user-preferences-subgroup ddp-user-preferences-birthday">
+                    <h3 class="ddp-user-preferences-subgroup-title">{{'SDK.UserPreferences.DateOfBirth' | translate}}</h3>
                     <ddp-date [readonly]="!loaded"
                               [renderMode]="DateRenderMode.Picklist"
                               [startYear]="startYear"
@@ -31,10 +32,34 @@ import { FormBuilder, FormControl, ValidationErrors, ValidatorFn } from '@angula
                               [dateValue]="birthDate.value"
                               (valueChanged)="birthDateValueChanged($event)">
                     </ddp-date>
+                    <ddp-validation-message *ngIf="birthDate.dirty && birthDate.invalid"
+                                            [message]="'SDK.Validators.DateNavyValidationRule' | translate">
+                    </ddp-validation-message>
+                </div>
+                <div *ngIf="userProfileFieldsForEditing.has(UserProfileField.NAME)"
+                     class="ddp-user-preferences-subgroup ddp-user-preferences-username">
+                    <h3 class="ddp-user-preferences-subgroup-title">{{'SDK.UserPreferences.UserName' | translate}}</h3>
+                    <div class="ddp-user-preferences-username-container">
+                        <mat-form-field class="ddp-user-preferences-first-name">
+                            <input matInput
+                                   type="text"
+                                   formControlName="firstName"
+                                   [placeholder]="'SDK.UserPreferences.FirstUserName' | translate"/>
+                            <mat-error *ngIf="firstName.invalid">{{'SDK.UserPreferences.FirstNameFieldIsRequired' | translate}}</mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="ddp-user-preferences-last-name">
+                            <input matInput
+                                   type="text"
+                                   formControlName="lastName"
+                                   [placeholder]="'SDK.UserPreferences.LastUserName' | translate"
+                            />
+                            <mat-error *ngIf="lastName.invalid">{{'SDK.UserPreferences.LastNameFieldIsRequired' | translate}}</mat-error>
+                        </mat-form-field>
+                    </div>
                 </div>
             </ng-container>
-            <div class="form-subgroup">
-                <h3 class="form-subgroup-title">User Mailing Address</h3>
+            <div class="ddp-user-preferences-subgroup">
+                <h3 class="ddp-user-preferences-subgroup-title">User Mailing Address</h3>
                 <ddp-address-embedded [block]="addressFormBlock"
                                       [country]="supportedCountry"
                                       [readonly]="addressReadonly"
@@ -46,9 +71,6 @@ import { FormBuilder, FormControl, ValidationErrors, ValidatorFn } from '@angula
                 </ddp-address-embedded>
             </div>
         </mat-dialog-content>
-        <ddp-validation-message *ngIf="birthDate.dirty && birthDate.invalid"
-                                [message]="'SDK.Validators.DateNavyValidationRule' | translate">
-        </ddp-validation-message>
         <mat-dialog-actions>
             <button mat-flat-button
                     color="primary"
@@ -89,8 +111,10 @@ import { FormBuilder, FormControl, ValidationErrors, ValidatorFn } from '@angula
     providers: [SubmitAnnouncementService]
 })
 export class UserPreferencesComponent implements OnDestroy {
-    private profileForm = this.formBuilder.group({
+    public profileForm = this.formBuilder.group({
         birthDate: ['', this.getBirthDateValidator()],
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
     });
     private readonly YEARS_BACK = 100;
     public readonly endYear: number;
@@ -111,6 +135,12 @@ export class UserPreferencesComponent implements OnDestroy {
     public readonly userName: string;
     public get birthDate(): FormControl {
         return this.profileForm.get('birthDate') as FormControl;
+    }
+    public get firstName(): FormControl {
+        return this.profileForm.get('firstName') as FormControl;
+    }
+    public get lastName(): FormControl {
+        return this.profileForm.get('lastName') as FormControl;
     }
 
     constructor(
@@ -144,6 +174,8 @@ export class UserPreferencesComponent implements OnDestroy {
                         month: x.profile.birthMonth,
                         day: x.profile.birthDayInMonth,
                     });
+                    this.firstName.setValue(x.profile.firstName);
+                    this.lastName.setValue(x.profile.lastName);
                 }
             });
         }
@@ -172,8 +204,9 @@ export class UserPreferencesComponent implements OnDestroy {
 
     public canSaveUserPreferences(): boolean {
         return this.loaded && this.isAddressValid
-            // let's allow to save preferences if user didn't touch empty birthday date since s/he can fill it later at action forms
-            && (this.birthDate.valid || (this.birthDate.invalid && this.birthDate.pristine));
+            && (this.profileForm.valid
+                // let's allow to save preferences if user didn't touch empty profile fields since s/he can fill it later at action forms
+                || Object.values(this.profileForm.controls).filter(control => control.invalid).every(control => control.pristine));
     }
 
     public save(): void {
@@ -182,6 +215,8 @@ export class UserPreferencesComponent implements OnDestroy {
             this.userProfileModel.profile.birthYear = this.birthDate.value.year;
             this.userProfileModel.profile.birthMonth = this.birthDate.value.month;
             this.userProfileModel.profile.birthDayInMonth = this.birthDate.value.day;
+            this.userProfileModel.profile.firstName = this.firstName.value;
+            this.userProfileModel.profile.lastName = this.lastName.value;
         }
         const profileObservable = shouldProfileBeUpdated ?
             this.serviceAgent.saveProfile(this.userProfileModel.newProfile, this.userProfileModel.profile) :

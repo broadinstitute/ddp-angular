@@ -469,8 +469,7 @@
             "ManageParticipants": "إدارة المشاركين"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "تفضيلات المستخدم",
-            "UserPreferencesGender": "الجنس"
+            "UserPreferencesTitle": "تفضيلات المستخدم"
         },
         "Dashboard": {
             "Title": "لوحة المعلومات الخاصة بي",
