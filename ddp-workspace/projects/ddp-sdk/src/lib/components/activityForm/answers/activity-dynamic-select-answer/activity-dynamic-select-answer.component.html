@@ -5,7 +5,7 @@
     <mat-label *ngIf="block.label" [innerHTML]="block.label"></mat-label>
 
     <mat-select
-      [placeholder]="placeholder"
+      [placeholder]="placeholder || block.placeholder"
       [disabled]="readonly"
       [value]="block.answer"
       (selectionChange)="onSelectionChange($event.value)"

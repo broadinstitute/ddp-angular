@@ -18,7 +18,7 @@ import { CompositeDisposable } from '../../../../compositeDisposable';
   templateUrl: './activity-dynamic-select-answer.component.html',
   styleUrls: ['./activity-dynamic-select-answer.component.scss'],
 })
-export class ActivityDynamicSelectAnswerComponent implements OnInit, OnDestroy {
+export class ActivityDynamicSelectAnswer implements OnInit, OnDestroy {
   @Input() block: ActivityDynamicSelectQuestionBlock;
   @Input() placeholder: string;
   @Input() readonly: boolean;
