@@ -69,14 +69,19 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
         this.setupScrollToErrorAction();
     }
 
-
     private setupErrorMessage(): void {
         const firstFailedValidator$ =  combineLatest([
             this.enteredValue$.pipe(startWith(this.block.answer as AnswerValue)),
             this.validationRequested$
         ]).pipe(
-            // not displaying any local validations until a validation is requested
-            filter(([_, validationRequested]) => !!validationRequested),
+            // not displaying any local validations until
+            // - either a validation is requested
+            // - or the previous answer was invalid and then the answer is changed
+            filter(([enteredNewValue, validationRequested]) => {
+                let isInvalidPreviousAnswer: boolean;
+                this.errorMessage$.subscribe(x => isInvalidPreviousAnswer = !!x);
+                return !!validationRequested || (isInvalidPreviousAnswer && !!enteredNewValue);
+            }),
             map(() => {
                 const firstFailedValidator = this.block.validators.find(validator => !validator.recalculate());
                 return firstFailedValidator ? firstFailedValidator.result : null;
