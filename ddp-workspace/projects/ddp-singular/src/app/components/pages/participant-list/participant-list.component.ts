@@ -169,7 +169,7 @@ export class ParticipantsListComponent implements OnInit {
   }
 
   private redirectToSurvey(id: string): void {
-    this.router.navigate(['survey', id]);
+    this.router.navigate([Route.Activity, id]);
   }
 
   private setCurrentActivity(
