@@ -18,3 +18,19 @@ export const currentActivityIdProvider: Provider = {
   ),
   deps: [ActivatedRoute]
 };
+
+
+export const CURRENT_PARTICIPANT_ID_TOKEN: InjectionToken<Observable<string>> = new InjectionToken<Observable<string>>(
+  'A stream with activity id'
+);
+
+export const currentParticipantIdProvider: Provider = {
+  provide: CURRENT_PARTICIPANT_ID_TOKEN,
+  useFactory: (
+    activatedRoute: ActivatedRoute,
+  ) => activatedRoute.queryParams.pipe(
+    filter(({ participantGuid }: Params) => !!participantGuid),
+    map(({ participantGuid }: Params) => participantGuid)
+  ),
+  deps: [ActivatedRoute]
+};
