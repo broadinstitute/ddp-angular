@@ -59,11 +59,6 @@ const routes: Routes = [
     component: PasswordComponent,
   },
   {
-    path: Route.ActivityId,
-    component: ActivityPageComponent,
-    canActivate: [IrbGuard, AuthGuard],
-  },
-  {
     path: Route.SessionExpired,
     component: SessionExpiredComponent,
   },
@@ -83,7 +78,7 @@ const routes: Routes = [
     canActivate: [IrbGuard, BrowserGuard, AuthGuard],
   },
   {
-    path: Route.Survey,
+    path: Route.ActivityId,
     component: SurveyComponent,
     canActivate: [IrbGuard, BrowserGuard, AuthGuard],
   },
