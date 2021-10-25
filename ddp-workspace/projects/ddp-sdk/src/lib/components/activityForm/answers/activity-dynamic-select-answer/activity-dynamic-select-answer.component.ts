@@ -10,6 +10,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { ActivityDynamicSelectQuestionBlock } from '../../../../models/activity/activityDynamicSelectQuestionBlock';
+import { ActivityDynamicOption } from '../../../../models/activity/activityDynamicOption';
 import { DynamicSelectAnswerService } from '../../../../services/serviceAgents/dynamicSelectAnswer.service';
 import { CompositeDisposable } from '../../../../compositeDisposable';
 
@@ -24,7 +25,7 @@ export class ActivityDynamicSelectAnswer implements OnInit, OnDestroy {
   @Input() readonly: boolean;
   @Output() valueChanged = new EventEmitter<string | null>();
   @Output() componentBusy = new EventEmitter<boolean>();
-  public options$ = new BehaviorSubject<string[]>([]);
+  public options$ = new BehaviorSubject<ActivityDynamicOption[]>([]);
   private panelOpen$ = new Subject<void>();
   private subs = new CompositeDisposable();
 
@@ -40,12 +41,16 @@ export class ActivityDynamicSelectAnswer implements OnInit, OnDestroy {
     this.subs.removeAll();
   }
 
-  onSelectionChange(value: string): void {
-    this.valueChanged.emit(value);
+  onSelectionChange(option: ActivityDynamicOption): void {
+    this.valueChanged.emit(option.answerGuid);
   }
 
   onOpen(): void {
     this.panelOpen$.next();
+  }
+
+  compare(option: ActivityDynamicOption, answerGuid: string): boolean {
+    return option.answerGuid === answerGuid;
   }
 
   private initListeners(): void {
@@ -60,7 +65,7 @@ export class ActivityDynamicSelectAnswer implements OnInit, OnDestroy {
     this.subs.addNew(sub);
   }
 
-  private getOptions(): Observable<string[]> {
+  private getOptions(): Observable<ActivityDynamicOption[]> {
     this.componentBusy.next(true);
 
     return this.dynamicSelectAnswerService.getOptions(this.block.stableId).pipe(

@@ -8,11 +8,12 @@
       [placeholder]="placeholder || block.placeholder"
       [disabled]="readonly"
       [value]="block.answer"
+      [compareWith]="compare"
       (selectionChange)="onSelectionChange($event.value)"
       (opened)="onOpen()"
     >
       <mat-option *ngFor="let option of options$ | async" [value]="option">
-        {{ option }}
+        {{ option.answerValue }}
       </mat-option>
     </mat-select>
   </mat-form-field>
