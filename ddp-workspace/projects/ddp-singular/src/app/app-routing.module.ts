@@ -87,6 +87,11 @@ const routes: Routes = [
     component: FaqComponent,
     canActivate: [IrbGuard],
   },
+  {
+    path: Route.Dashboard,
+    redirectTo: Route.ParticipantList,
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({
