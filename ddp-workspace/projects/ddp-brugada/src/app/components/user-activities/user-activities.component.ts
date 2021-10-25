@@ -19,7 +19,7 @@ export class UserActivitiesComponent {
   dataSource: ActivityInstance[] = [];
   displayedColumns = ['name', 'summary', 'status', 'actions'];
   icons = {
-    [ActivityStatusCodes.CREATED]: 'info',
+    [ActivityStatusCodes.CREATED]: 'error',
     [ActivityStatusCodes.IN_PROGRESS]: 'pending',
     [ActivityStatusCodes.COMPLETE]: 'task_alt',
   };
