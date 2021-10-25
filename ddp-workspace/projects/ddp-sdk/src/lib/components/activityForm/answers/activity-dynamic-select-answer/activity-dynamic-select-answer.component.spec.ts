@@ -1,4 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  flush,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import {
   BrowserAnimationsModule,
@@ -31,7 +37,17 @@ describe('ActivityDynamicSelectAnswer', () => {
         {
           provide: DynamicSelectAnswerService,
           useValue: {
-            getOptions: () => of(['first', 'second']),
+            getOptions: () =>
+              of([
+                {
+                  answerGuid: 'ANSWERGUID1',
+                  answerValue: 'Bob',
+                },
+                {
+                  answerGuid: 'ANSWERGUID2',
+                  answerValue: 'Alice',
+                },
+              ]),
           },
         },
       ],
@@ -129,7 +145,21 @@ describe('ActivityDynamicSelectAnswer', () => {
     expect(initialOptions.length).toEqual(2);
 
     (component as any).dynamicSelectAnswerService = {
-      getOptions: () => of(['first', 'second', 'third']),
+      getOptions: () =>
+        of([
+          {
+            answerGuid: 'ANSWERGUID1',
+            answerValue: 'Bob',
+          },
+          {
+            answerGuid: 'ANSWERGUID2',
+            answerValue: 'Alice',
+          },
+          {
+            answerGuid: 'ANSWERGUID3',
+            answerValue: 'Jackie',
+          },
+        ]),
     };
 
     component.onOpen();
@@ -185,8 +215,35 @@ describe('ActivityDynamicSelectAnswer', () => {
     expect(value).toHaveBeenCalledTimes(1);
 
     const options = component.options$.getValue();
-    const firstOptionValue = options[0];
+    const firstOptionValue = options[0].answerGuid;
 
     expect(value).toHaveBeenCalledWith(firstOptionValue);
+  });
+
+  it('correctly updates rendered text if option was selected', () => {
+    component.ngOnInit();
+
+    fixture.detectChanges();
+
+    const selectTriggerEl = fixture.debugElement.query(
+      By.css('.mat-select-trigger'),
+    ).nativeElement;
+
+    selectTriggerEl.click();
+
+    fixture.detectChanges();
+
+    const firstOption = fixture.debugElement.query(By.css('.mat-option'));
+
+    firstOption.nativeElement.click();
+
+    fixture.detectChanges();
+
+    const displayedText = fixture.debugElement
+      .query(By.css('.mat-select-value-text'))
+      .nativeElement.textContent.trim();
+    const firstOptionText = component.options$.getValue()[0].answerValue;
+
+    expect(displayedText).toEqual(firstOptionText);
   });
 });
