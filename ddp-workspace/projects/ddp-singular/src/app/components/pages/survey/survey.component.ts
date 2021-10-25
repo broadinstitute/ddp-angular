@@ -48,18 +48,20 @@ export class SurveyComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(activityResponse: ActivityResponse): void {
-    if (activityResponse && activityResponse.instanceGuid) {
-      this.resetActivityComponent();
+    setTimeout(() => {
+      if (activityResponse && activityResponse.instanceGuid) {
+        this.resetActivityComponent();
 
-      this.instanceGuid = activityResponse.instanceGuid;
-      this.getActivities().pipe(take(1)).subscribe();
+        this.instanceGuid = activityResponse.instanceGuid;
+        this.getActivities().pipe(take(1)).subscribe();
 
-      return;
-    }
+        return;
+      }
 
-    this.workflowBuilder
-      .getCommand(new ActivityResponse(activityResponse.next))
-      .execute();
+      this.workflowBuilder
+        .getCommand(new ActivityResponse(activityResponse.next))
+        .execute();
+    });
   }
 
   onChangeActivity(activity: ActivityInstance): void {
