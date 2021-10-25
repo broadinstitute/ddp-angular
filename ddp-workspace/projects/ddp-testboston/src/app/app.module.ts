@@ -117,6 +117,8 @@ sdkConfig.scrollToErrorOffset = 130;
 sdkConfig.defaultLanguageCode = 'en';
 sdkConfig.rtlLanguages = ['ar'];
 sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
+sdkConfig.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl;
+sdkConfig.doCloudLogging = DDP_ENV.doCloudLogging;
 sdkConfig.useStepsWithCircle = true;
 
 export function translateFactory(translate: TranslateService,
