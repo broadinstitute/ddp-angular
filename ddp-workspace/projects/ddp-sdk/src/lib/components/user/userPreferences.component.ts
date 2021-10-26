@@ -66,7 +66,7 @@ import { FormBuilder, FormControl, ValidationErrors, ValidatorFn, Validators } f
                                       (validStatusChanged)="isAddressValid = $event"
                                       (valueChanged)="addressSubmitFinalized$.next($event)"
                                       (componentBusy)="isAddressComponentBusy$.next($event)"
-                                      (inputAddress)="addressDirty = true"
+                                      (dirtyStatusChanged)="addressDirty = $event"
                                       (errorOrSuggestionWasShown)="scrollToTheBottom()">
                 </ddp-address-embedded>
             </div>

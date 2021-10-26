@@ -84,7 +84,7 @@ interface AddressSuggestion {
         <p *ngIf="block.titleText" class="ddp-address-embedded__title" [innerHTML]="block.titleText"></p>
         <p *ngIf="block.subtitleText" class="ddp-address-embedded__subtitle" [innerHTML]="block.subtitleText"></p>
         <ddp-address-input
-            (valueChanged)="inputComponentAddress$.next($event); inputAddress.emit()"
+            (valueChanged)="inputComponentAddress$.next($event); dirtyStatusChanged.emit(true)"
             (formValidStatusChanged)="formValidStatusChanged$.next($event)"
             [address]="inputAddress$ | async"
             [addressErrors]="verifyFieldErrors$ | async"
@@ -188,7 +188,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
      * type {EventEmitter<Address>}
      */
     @Output()
-    public inputAddress = new EventEmitter<void>();
+    public dirtyStatusChanged = new EventEmitter<boolean>();
 
     /**
      * Will emit update to indicate if the mail address is considered to be valid

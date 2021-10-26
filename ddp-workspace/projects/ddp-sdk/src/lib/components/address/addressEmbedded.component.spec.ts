@@ -606,10 +606,10 @@ describe('AddressEmbeddedComponent', () => {
     });
 
     it('emit inputAddress when ddp-address-input emits valueChanged', () => {
-        const inputAddressSpy = spyOn(component.inputAddress, 'emit');
+        const dirtyStatusChangedSpy = spyOn(component.dirtyStatusChanged, 'emit');
         childComponent.valueChanged.emit(buildPerfectAddress());
 
-        expect(inputAddressSpy).toHaveBeenCalled();
+        expect(dirtyStatusChangedSpy).toHaveBeenCalledWith(true);
     });
 
     it('hide country field when property is set', fakeAsync(() => {

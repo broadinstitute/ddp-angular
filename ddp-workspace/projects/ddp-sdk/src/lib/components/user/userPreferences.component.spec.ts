@@ -12,7 +12,6 @@ import {
     UserProfileServiceAgent,
     ValidationMessage,
     UserPreferencesComponent,
-    UserProfile
 } from 'ddp-sdk';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -32,7 +31,7 @@ class FakeAddressComponent {
     @Output() componentBusy = new EventEmitter<boolean>();
     @Output() errorOrSuggestionWasShown = new EventEmitter();
     @Output() valueChanged = new EventEmitter<Address | null>();
-    @Output() inputAddress = new EventEmitter<Address | null>();
+    @Output() dirtyStatusChanged = new EventEmitter<boolean>();
     @Input() block: MailAddressBlock;
     @Input() country = null;
     @Input() readonly = false;
@@ -115,7 +114,7 @@ describe('UserPreferencesComponent', () => {
         fixture = TestBed.createComponent(UserPreferencesComponent);
         fixture.detectChanges();
 
-        const birthdayForm = fixture.debugElement.query(By.css('.form-subgroup--birthday'));
+        const birthdayForm = fixture.debugElement.query(By.css('.ddp-user-preferences-birthday'));
         expect(birthdayForm).toBeTruthy();
     });
 
@@ -256,7 +255,7 @@ describe('UserPreferencesComponent', () => {
         fixture = TestBed.createComponent(UserPreferencesComponent);
 
         const addressComponent = fixture.debugElement.query(By.directive(FakeAddressComponent));
-        addressComponent.componentInstance.inputAddress.emit(true);
+        addressComponent.componentInstance.dirtyStatusChanged.emit(true);
         addressComponent.componentInstance.componentBusy.emit(false);
         fixture.detectChanges();
         const saveProfileSpy = spyOn(userProfileServiceAgentMock, 'saveProfile').and.callThrough();
@@ -284,13 +283,15 @@ describe('UserPreferencesComponent', () => {
         saveButtonElement.nativeElement.click();
 
         expect(submitAnnouncementServiceSpy.announceSubmit).not.toHaveBeenCalled();
-        expect(saveProfileSpy).toHaveBeenCalledWith(false, { birthMonth: 1, birthDayInMonth: 30, birthYear: 1991 } as UserProfile);
+        expect(saveProfileSpy).toHaveBeenCalledWith(
+            false,
+            jasmine.objectContaining({ birthMonth: 1, birthDayInMonth: 30, birthYear: 1991 }));
         expect(matDialogRefSpy.close).toHaveBeenCalled();
     });
 
     it('disables address component when user clicks save', () => {
         const addressComponent = fixture.debugElement.query(By.directive(FakeAddressComponent));
-        addressComponent.componentInstance.inputAddress.emit(true);
+        addressComponent.componentInstance.dirtyStatusChanged.emit(true);
         addressComponent.componentInstance.componentBusy.emit(false);
         fixture.detectChanges();
 
@@ -302,7 +303,7 @@ describe('UserPreferencesComponent', () => {
 
     it('enables address component and does not close dialog when address submit call is failed', () => {
         const addressComponent = fixture.debugElement.query(By.directive(FakeAddressComponent));
-        addressComponent.componentInstance.inputAddress.emit(true);
+        addressComponent.componentInstance.dirtyStatusChanged.emit(true);
         addressComponent.componentInstance.componentBusy.emit(false);
         fixture.detectChanges();
 
@@ -316,7 +317,7 @@ describe('UserPreferencesComponent', () => {
 
     it('enables address component and closes dialog when address submit call is succeed', () => {
         const addressComponent = fixture.debugElement.query(By.directive(FakeAddressComponent));
-        addressComponent.componentInstance.inputAddress.emit(true);
+        addressComponent.componentInstance.dirtyStatusChanged.emit(true);
         addressComponent.componentInstance.componentBusy.emit(false);
         fixture.detectChanges();
 
