@@ -2720,7 +2720,129 @@
           }
         }
       }
-    }
+    },
+    "study-builder-ui": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/study-builder-ui",
+      "sourceRoot": "projects/study-builder-ui/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/study-builder-ui",
+            "index": "projects/study-builder-ui/src/index.html",
+            "main": "projects/study-builder-ui/src/main.ts",
+            "polyfills": "projects/study-builder-ui/src/polyfills.ts",
+            "tsConfig": "projects/study-builder-ui/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/study-builder-ui/src/favicon.ico",
+              "projects/study-builder-ui/src/assets"
+            ],
+            "styles": [
+              "projects/study-builder-ui/src/theme.scss",
+              "projects/study-builder-ui/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/study-builder-ui/src/environments/environment.ts",
+                  "with": "projects/study-builder-ui/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "study-builder-ui:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "study-builder-ui:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "study-builder-ui:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/study-builder-ui/src/test.ts",
+            "polyfills": "projects/study-builder-ui/src/polyfills.ts",
+            "tsConfig": "projects/study-builder-ui/tsconfig.spec.json",
+            "karmaConfig": "projects/study-builder-ui/karma.conf.js",
+            "assets": [
+              "projects/study-builder-ui/src/favicon.ico",
+              "projects/study-builder-ui/src/assets"
+            ],
+            "styles": [
+              "projects/study-builder-ui/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/study-builder-ui/tsconfig.app.json",
+              "projects/study-builder-ui/tsconfig.spec.json",
+              "projects/study-builder-ui/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/study-builder-ui/e2e/protractor.conf.js",
+            "devServerTarget": "study-builder-ui:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "study-builder-ui:serve:production"
+            }
+          }
+        }
+      }
+    },
   },
   "defaultProject": "ddp-sdk",
   "schematics": {
