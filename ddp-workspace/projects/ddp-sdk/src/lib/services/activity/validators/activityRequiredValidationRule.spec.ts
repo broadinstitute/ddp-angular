@@ -5,6 +5,7 @@ import { ActivityDateQuestionBlock } from '../../../models/activity/activityDate
 import { ActivityAgreementQuestionBlock } from '../../../models/activity/activityAgreementQuestionBlock';
 import { ActivityQuestionBlock } from '../../../models/activity/activityQuestionBlock';
 import { ActivityRequiredValidationRule } from './activityRequiredValidationRule';
+import { ActivityCompositeQuestionBlock } from '../../../models/activity/activityCompositeQuestionBlock';
 
 let validator: ActivityRequiredValidationRule;
 const MESSAGE = 'This question is required!';
@@ -101,5 +102,37 @@ describe('ActivityRequiredValidationRule', () => {
         expect(validator.result).toBe(MESSAGE);
         question.answer = 'TEST';
         expect(validator.recalculate()).toBeTruthy();
+    });
+
+    it('should test required rule for Composite question', () => {
+        const question = new ActivityCompositeQuestionBlock();
+        question.answer = null;
+        validator = new ActivityRequiredValidationRule(question);
+        validator.message = MESSAGE;
+        expect(validator.recalculate()).toBeFalsy();
+        expect(validator.result).toBe(MESSAGE);
+
+        question.answer = [[
+            {
+                stableId: 'PRIMARY_CANCER_SELF',
+                value: null
+            }
+        ]];
+        expect(validator.recalculate()).toBeFalsy();
+        expect(validator.result).toBe(MESSAGE);
+
+        question.answer = [[
+            {
+                stableId: 'PRIMARY_CANCER_SELF',
+                value: [
+                    {
+                        stableId: 'OTHER_CANCER',
+                        detail: 'some custom value'
+                    }
+                ]
+            }
+        ]];
+        expect(validator.recalculate()).toBeTruthy();
+        expect(validator.result).toBeNull();
     });
 });
