@@ -13,4 +13,8 @@ export class ActivityAgreementQuestionBlock extends ActivityQuestionBlock<boolea
     public canPatch(): boolean {
         return true;
     }
+
+    public hasRequiredAnswer(): boolean {
+        return this.answer === true;
+    }
 }

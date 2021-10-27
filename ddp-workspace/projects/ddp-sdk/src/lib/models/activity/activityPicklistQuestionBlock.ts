@@ -27,4 +27,8 @@ export class ActivityPicklistQuestionBlock extends ActivityQuestionBlock<Array<A
             .sort((a, b) => (a.stableId > b.stableId) ? 1 : -1)
             .map(answer => `${answer.stableId}${answer.detail ? ':' + answer.detail : ''}`).join(';');
     }
+
+    public hasRequiredAnswer(): boolean {
+        return this.answer?.length > 0;
+    }
 }

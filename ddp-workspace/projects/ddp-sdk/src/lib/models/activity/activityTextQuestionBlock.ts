@@ -37,4 +37,8 @@ export class ActivityTextQuestionBlock extends ActivityQuestionBlock<string> {
         this.validate();
       }
     }
+
+    public hasRequiredAnswer(): boolean {
+        return this.answer?.trim().length > 0;
+    }
 }

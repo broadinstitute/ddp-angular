@@ -22,4 +22,10 @@ export abstract class ActivityQuestionBlock<T> extends AbstractActivityQuestionB
     public convertToString(value: T): string {
         return String(value);
     }
+
+    /**
+     *  Whether the question has a valid answer
+     *  in case when the question validators include ActivityRequiredValidationRule
+     */
+    public abstract hasRequiredAnswer(): boolean;
 }
