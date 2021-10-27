@@ -8,6 +8,10 @@ class TestNumberActivityQuestionBlock extends ActivityQuestionBlock<number> {
     public get questionType(): QuestionType {
         return QuestionType.Boolean;
     }
+
+    hasRequiredAnswer(): boolean {
+        return false;
+    }
 }
 
 describe('ActivityQuestionBlock', () => {
