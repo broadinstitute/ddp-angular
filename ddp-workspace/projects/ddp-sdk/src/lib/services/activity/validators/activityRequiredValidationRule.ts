@@ -7,19 +7,11 @@ import { QuestionType } from '../../../models/activity/questionType';
 import { ActivityFileAnswerDto } from '../../../models/activity/activityFileAnswerDto';
 
 export class ActivityRequiredValidationRule extends ActivityAbstractValidationRule {
-    public isRequired: boolean;
-
-    constructor(question: ActivityQuestionBlock<any>, isRequired: boolean = true) {
+    constructor(question: ActivityQuestionBlock<any>) {
         super(question);
-        this.isRequired = isRequired;
     }
 
     public recalculate(): boolean {
-        if (!this.isRequired) {
-            this.result = null;
-            return true;
-        }
-
         let valid = true;
 
         if (this.question.answer == null) {
