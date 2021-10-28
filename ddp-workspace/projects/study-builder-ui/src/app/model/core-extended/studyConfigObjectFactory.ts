@@ -90,7 +90,7 @@ export class StudyConfigObjectFactory {
             hideNumber: false,
             inputType: 'TEXT',
             suggestionType: 'NONE',
-            placeholderTemplate: null,
+            placeholderTemplate: this.createBlankTemplate(),
             suggestions: []
         };
     }
