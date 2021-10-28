@@ -11,11 +11,12 @@ import { ConfigurationService } from '../configuration.service';
 import { SessionMementoService } from '../sessionMemento.service';
 import { LanguageService } from '../internationalization/languageService.service';
 import { AnswerValue } from '../../models/activity/answerValue';
-import { ActivityInstanceGuid } from '../../models/activityInstanceGuid';
 import { AnswerSubmission } from '../../models/activity/answerSubmission';
 import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivityForm } from '../../models/activity/activityForm';
 import { ActivityInstance } from '../../models/activityInstance';
+import { CreateActivityInstanceResponse } from '../../models/activity/createActivityInstanceResponse';
+import { DeleteActivityInstanceResponse } from '../../models/activity/deleteActivityInstanceResponse';
 
 interface GuidsObject {
     study: string;
@@ -107,7 +108,11 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
         return this.putObservable(`${baseUrl}/answers`, null);
     }
 
-    public createInstance(studyGuid: string, activityCode: string, parentInstanceGuid?: string): Observable<ActivityInstanceGuid | null> {
+    public createInstance(
+      studyGuid: string,
+      activityCode: string,
+      parentInstanceGuid?: string
+    ): Observable<CreateActivityInstanceResponse | null> {
         const baseUrl = this.getBaseUrl(studyGuid);
         let body: any = {activityCode};
         if (parentInstanceGuid) {
@@ -115,7 +120,7 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
         }
 
         return this.postObservable(baseUrl, body).pipe(
-            map(x => !!x ? x.body as ActivityInstanceGuid : null)
+            map(x => !!x ? x.body as CreateActivityInstanceResponse : null)
         );
     }
 
@@ -126,9 +131,12 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
             map(httpResponse => httpResponse));
     }
 
-    public deleteActivityInstance(studyGuid: string, activityGuid: string): Observable<any> {
+    public deleteActivityInstance(studyGuid: string, activityGuid: string): Observable<DeleteActivityInstanceResponse | null> {
         const baseUrl = this.getBaseUrl(studyGuid, activityGuid);
-        return this.deleteObservable(baseUrl, null, true);
+
+        return this.deleteObservable(baseUrl, null, true).pipe(
+            map(response => !!response ? response.body as DeleteActivityInstanceResponse : null)
+        );
     }
 
     private getBaseUrl(studyGuid: string, activityGuid: string = ''): string {

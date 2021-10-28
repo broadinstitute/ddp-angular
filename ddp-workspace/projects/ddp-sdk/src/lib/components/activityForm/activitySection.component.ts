@@ -62,6 +62,10 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
         this.subscription.unsubscribe();
     }
 
+    public onBlockVisibilityChanged(blockVisibility: BlockVisibility[]): void {
+        this.updateVisibilityAndValidation(blockVisibility);
+    }
+
     public updateVisibilityAndValidation(visibility: BlockVisibility[]): void {
         let blockVisibilityChanged = false;
         visibility.forEach(element => {

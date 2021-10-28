@@ -11,15 +11,15 @@ import {
     ViewChildren
 } from '@angular/core';
 import { Subject, throwError } from 'rxjs';
-import { catchError, concatMap, takeUntil } from 'rxjs/operators';
+import { catchError, concatMap, takeUntil, tap } from 'rxjs/operators';
 
 import { ActivityActivityBlock } from '../../../../models/activity/activityActivityBlock';
 import { ActivityRenderHintType } from '../../../../models/activity/activityRenderHintType';
 import { ActivityInstance } from '../../../../models/activityInstance';
 import { ActivityServiceAgent } from '../../../../services/serviceAgents/activityServiceAgent.service';
-import { ActivityInstanceGuid } from '../../../../models/activityInstanceGuid';
 import { LoggingService } from '../../../../services/logging.service';
 import { ModalActivityBlockComponent } from '../modalActivityBlock/modalActivityBlock.component';
+import { BlockVisibility } from '../../../../models/activity/blockVisibility';
 
 @Component({
     selector: 'ddp-activity-block',
@@ -35,6 +35,7 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     @Input() parentActivityInstanceGuid: string;
     @Output() validStatusChanged = new EventEmitter<{id: string; value: boolean}>();
     @Output() embeddedComponentBusy = new EventEmitter<boolean>();
+    @Output() blockVisibilityChanged = new EventEmitter<BlockVisibility[]>();
     @ViewChildren(ModalActivityBlockComponent) private modalActivities: QueryList<ModalActivityBlockComponent>;
     isModal: boolean;
     childInstances: ActivityInstance[];
@@ -63,8 +64,13 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     createChildInstance(): void {
         this.activityServiceAgent.createInstance(this.studyGuid, this.block.activityCode, this.parentActivityInstanceGuid)
             .pipe(
-                concatMap((instanceGuid: ActivityInstanceGuid) => {
-                    return this.activityServiceAgent.getActivitySummary(this.studyGuid, instanceGuid.instanceGuid);
+                tap(response => {
+                    if (response?.blockVisibility) {
+                        this.blockVisibilityChanged.emit(response.blockVisibility);
+                    }
+                }),
+                concatMap(response => {
+                    return this.activityServiceAgent.getActivitySummary(this.studyGuid, response.instanceGuid);
                 }),
                 catchError(err => {
                     this.logger.logError(this.LOG_SOURCE, 'An error during a new instance creation', err);

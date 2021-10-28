@@ -10,7 +10,8 @@
                                           [validationRequested]="validationRequested"
                                           [studyGuid]="studyGuid"
                                           (componentBusy)="embeddedComponentBusy.emit($event)"
-                                          (deletedActivity)="onDeleteChildInstance($event)">
+                                          (deletedActivity)="onDeleteChildInstance($event)"
+                                          (blockVisibilityChanged)="blockVisibilityChanged.emit($event)">
                 </ddp-modal-activity-block>
             </ng-container>
             <ng-template #embedded>
@@ -20,7 +21,8 @@
                                              [studyGuid]="studyGuid"
                                              (componentBusy)="embeddedComponentBusy.emit($event)"
                                              (validStatusChanged)="validStatusChanged.emit($event)"
-                                             (deletedActivity)="onDeleteChildInstance($event)">
+                                             (deletedActivity)="onDeleteChildInstance($event)"
+                                             (blockVisibilityChanged)="blockVisibilityChanged.emit($event)">
                 </ddp-embedded-activity-block>
             </ng-template>
         </div>

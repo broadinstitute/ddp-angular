@@ -73,7 +73,8 @@
                             [studyGuid]="studyGuid"
                             [parentActivityInstanceGuid]="activityGuid"
                             (validStatusChanged)="updateValidationStatusInSection(idPrefix.instance + $event.id, $event.value)"
-                            (embeddedComponentBusy)="componentBusy.emit($event)">
+                            (embeddedComponentBusy)="componentBusy.emit($event)"
+                            (blockVisibilityChanged)="onBlockVisibilityChanged($event)">
         </ddp-activity-block>
     </div>
 </div>

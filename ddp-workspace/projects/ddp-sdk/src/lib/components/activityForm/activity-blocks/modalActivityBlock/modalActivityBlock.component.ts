@@ -20,6 +20,7 @@ import { ActivityServiceAgent } from '../../../../services/serviceAgents/activit
 import { LoggingService } from '../../../../services/logging.service';
 import { ConfirmDialogComponent } from '../../../confirmDialog/confirmDialog.component';
 import { ModalDialogService, DEFAULT_DIALOG_SETTINGS } from '../../../../services/modal-dialog.service';
+import { BlockVisibility } from '../../../../models/activity/blockVisibility';
 
 const EDIT_DIALOG_CONFIG: MatDialogConfig = {
     ...DEFAULT_DIALOG_SETTINGS,
@@ -42,6 +43,7 @@ export class ModalActivityBlockComponent {
     @Input() readonly: boolean;
     @Output() componentBusy = new EventEmitter<boolean>(true);
     @Output() deletedActivity = new EventEmitter<string>();
+    @Output() blockVisibilityChanged = new EventEmitter<BlockVisibility[]>();
 
     @ViewChild('edit_dialog') private editModalRef: TemplateRef<any>;
     @ViewChild('delete_button', {read: ElementRef}) private deleteButtonRef: ElementRef;
@@ -70,7 +72,11 @@ export class ModalActivityBlockComponent {
             }),
             take(1),
             finalize(() => this.componentBusy.emit(false))
-        ).subscribe(() => {
+        ).subscribe(res => {
+            if (res?.blockVisibility) {
+                this.blockVisibilityChanged.emit(res.blockVisibility);
+            }
+
             this.deletedActivity.emit(this.instance.instanceGuid);
             this.dialog.closeAll();
         });
