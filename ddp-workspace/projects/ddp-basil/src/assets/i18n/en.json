@@ -123,7 +123,8 @@
             "FirstUserName": "First name",
             "LastUserName": "Last name",
             "FirstNameFieldIsRequired": "First name is required",
-            "LastNameFieldIsRequired": "Last name is required"
+            "LastNameFieldIsRequired": "Last name is required",
+            "MailingAddress": "Mailing Address"
         },
         "Dashboard": {
             "Title": "Participant Dashboard",
