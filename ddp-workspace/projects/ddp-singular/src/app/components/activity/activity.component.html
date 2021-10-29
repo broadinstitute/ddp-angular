@@ -81,6 +81,10 @@
       <span class="last-updated">{{ model.lastUpdatedText }} </span>
     </section>
 
+    <section *ngIf="isPrequal" class="section section--captcha">
+      <re-captcha [siteKey]="captchaSiteKey" (resolved)="onCaptchaResolve()"></re-captcha>
+    </section>
+
     <hr class="horizontal-divider" />
 
     <section class="section section--buttons">
@@ -88,7 +92,7 @@
         <button
           #submitButton
           class="button button--primary pull-right"
-          [disabled]="dataEntryDisabled || (isPageBusy | async)"
+          [disabled]="dataEntryDisabled || (isPageBusy | async) || !isCaptchaResolved"
           (click)="flush()"
           (mouseenter)="mouseEnterOnSubmit()"
         >
