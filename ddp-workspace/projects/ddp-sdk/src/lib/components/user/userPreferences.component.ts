@@ -22,20 +22,6 @@ import { FormBuilder, FormControl, ValidationErrors, ValidatorFn, Validators } f
         <ddp-loading [loaded]="loaded"></ddp-loading>
         <mat-dialog-content>
             <ng-container *ngIf="userProfileFieldsForEditing.size" [formGroup]="profileForm">
-                <div *ngIf="userProfileFieldsForEditing.has(UserProfileField.DATE_OF_BIRTH)"
-                     class="ddp-user-preferences-subgroup ddp-user-preferences-birthday">
-                    <h3 class="ddp-user-preferences-subgroup-title">{{'SDK.UserPreferences.DateOfBirth' | translate}}</h3>
-                    <ddp-date [readonly]="!loaded"
-                              [renderMode]="DateRenderMode.Picklist"
-                              [startYear]="startYear"
-                              [endYear]="endYear"
-                              [dateValue]="birthDate.value"
-                              (valueChanged)="birthDateValueChanged($event)">
-                    </ddp-date>
-                    <ddp-validation-message *ngIf="birthDate.dirty && birthDate.invalid"
-                                            [message]="'SDK.Validators.DateNavyValidationRule' | translate">
-                    </ddp-validation-message>
-                </div>
                 <div *ngIf="userProfileFieldsForEditing.has(UserProfileField.NAME)"
                      class="ddp-user-preferences-subgroup ddp-user-preferences-username">
                     <h3 class="ddp-user-preferences-subgroup-title">{{'SDK.UserPreferences.UserName' | translate}}</h3>
@@ -57,9 +43,23 @@ import { FormBuilder, FormControl, ValidationErrors, ValidatorFn, Validators } f
                         </mat-form-field>
                     </div>
                 </div>
+                <div *ngIf="userProfileFieldsForEditing.has(UserProfileField.DATE_OF_BIRTH)"
+                     class="ddp-user-preferences-subgroup ddp-user-preferences-birthday">
+                    <h3 class="ddp-user-preferences-subgroup-title">{{'SDK.UserPreferences.DateOfBirth' | translate}}</h3>
+                    <ddp-date [readonly]="!loaded"
+                              [renderMode]="DateRenderMode.Picklist"
+                              [startYear]="startYear"
+                              [endYear]="endYear"
+                              [dateValue]="birthDate.value"
+                              (valueChanged)="birthDateValueChanged($event)">
+                    </ddp-date>
+                    <ddp-validation-message *ngIf="birthDate.dirty && birthDate.invalid"
+                                            [message]="'SDK.Validators.DateNavyValidationRule' | translate">
+                    </ddp-validation-message>
+                </div>
             </ng-container>
             <div class="ddp-user-preferences-subgroup">
-                <h3 class="ddp-user-preferences-subgroup-title">User Mailing Address</h3>
+                <h3 class="ddp-user-preferences-subgroup-title">{{'SDK.UserPreferences.MailingAddress' | translate}}</h3>
                 <ddp-address-embedded [block]="addressFormBlock"
                                       [country]="supportedCountry"
                                       [readonly]="addressReadonly"

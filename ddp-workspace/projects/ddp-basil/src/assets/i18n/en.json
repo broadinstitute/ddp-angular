@@ -118,8 +118,8 @@
         },
         "UserPreferences": {
             "UserPreferencesTitle": "User preferences",
-            "DateOfBirth": "User date of birth",
-            "UserName": "User name",
+            "DateOfBirth": "Date of birth",
+            "UserName": "Name",
             "FirstUserName": "First name",
             "LastUserName": "Last name",
             "FirstNameFieldIsRequired": "First name is required",
