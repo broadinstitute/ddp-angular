@@ -1,0 +1,92 @@
+@import '../../../styles/colors';
+@import '../../../styles/breakpoints';
+
+.wrapper {
+  height: 92px;
+  display: flex;
+  margin: 5rem 0;
+  position: relative;
+  justify-content: space-between;
+  &:after {
+    top: 24px;
+    left: 20px;
+    width: 93%;
+    content: '';
+    z-index: -1;
+    height: 2px;
+    position: absolute;
+    background: map-get($colors, 'progress_bar-inactive-border');
+  }
+}
+
+.step-container {
+  width: 130px;
+  height: 150px;
+  display: flex;
+  margin: 0 2px;
+  flex-direction: column;
+  &:first-child, &:last-child {
+    width: 80px;
+  }
+  &_active {
+    color: map-get($colors, 'progress_bar-active-color');
+
+    & .circular { 
+      background: map-get($colors, 'progress_bar-active');
+      border: 3px solid map-get($colors, 'progress_bar-active-border');
+      & .number {
+        color: map-get($colors, 'progress_bar-active-number-color');
+      }
+    }
+
+    & .step-paragraph {
+      color: map-get($colors, 'progress_bar-active-passed-color');
+    }
+
+    &_white {
+      & .circular { 
+        background: map-get($colors, 'white');
+        border: 3px solid map-get($colors, 'progress_bar-active-border');
+        & .number {
+          color: map-get($colors, 'progress_bar-active');
+        }
+      }
+      & .step-paragraph {
+        color: map-get($colors, 'progress_bar-active');
+      }
+    }
+  }
+}
+
+.circular {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  align-self: center;
+  border-radius: 100%;
+  display: inline-block;
+  color: map-get($colors, 'progress_bar-inactive-color');
+  background: map-get($colors, 'progress_bar-inactive-bg');
+  border: 3px solid map-get($colors, 'progress_bar-inactive-border');
+}
+
+.number {
+  top: 13%;
+  left: 50%;
+  font-weight: bold;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  @include media-sm {
+    top: 17%;
+  }
+}
+
+.step-paragraph {
+  font-size: 14px;
+  max-width: 130px;
+  text-align: center;
+  color: map-get($colors, 'progress_bar-inactive-label-color');
+  @include media-sm {
+    font-size: 12px;
+  }
+}

@@ -3,6 +3,7 @@ $__dark-blue: #011c48;
 $__light-blue: #34cec3;
 $__font: $__dark-blue;
 $__light-font: $__white;
+$__purple: #521B93;
 
 $colors: (
   'header-bg': $__dark-blue,
@@ -17,4 +18,13 @@ $colors: (
   'list-item-hightlight-bg': $__light-blue,
   'list-item-hightlight-color': $__font,
   'faq-border': #ccc,
+  'progress_bar-active': $__purple,
+  'progress_bar-inactive-bg': #d8d8d8,
+  'progress_bar-inactive-color': #5a5656,
+  'progress_bar-active-color': $__purple,
+  'progress_bar-inactive-border': #a0a2a6,
+  'progress_bar-active-border': $__purple,
+  'progress_bar-inactive-label-color': #928d8d,
+  'progress_bar-active-number-color': $__white,
+  'progress_bar-active-passed-color': $__purple,
 );
