@@ -13,7 +13,7 @@ import { ActivityInstanceSelectAnswerService } from '../../../../services/servic
 import { QuestionPromptComponent } from '../question-prompt/questionPrompt.component';
 import { ActivityInstanceSelectAnswer } from './activity-instance-select-answer.component';
 
-describe('ActivityDynamicSelectAnswer', () => {
+describe('ActivityInstanceSelectAnswer', () => {
   let fixture: ComponentFixture<ActivityInstanceSelectAnswer>;
   let block: ActivityInstanceSelectQuestionBlock;
   let component: ActivityInstanceSelectAnswer;
