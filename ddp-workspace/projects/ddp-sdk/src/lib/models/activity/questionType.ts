@@ -8,5 +8,5 @@ export enum QuestionType {
     Agreement = 'AGREEMENT',
     Numeric = 'NUMERIC',
     File = 'FILE',
-    DynamicSelect = 'DYNAMIC_SELECT'
+    ActivityInstanceSelect = 'ACTIVITY_INSTANCE_SELECT'
 }

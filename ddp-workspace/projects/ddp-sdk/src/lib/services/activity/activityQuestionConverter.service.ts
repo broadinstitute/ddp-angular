@@ -21,7 +21,7 @@ import { QuestionType } from '../../models/activity/questionType';
 import { ActivityFileQuestionBlock } from '../../models/activity/activityFileQuestionBlock';
 import * as _ from 'underscore';
 import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
-import { ActivityDynamicSelectQuestionBlock } from '../../models/activity/activityDynamicSelectQuestionBlock';
+import { ActivityInstanceSelectQuestionBlock } from '../../models/activity/activityInstanceSelectQuestionBlock';
 
 const DETAIL_MAXLENGTH = 500;
 
@@ -158,8 +158,8 @@ export class ActivityQuestionConverter {
                 func: (questionJson) => this.getFileBlock(questionJson)
             },
             {
-                type: QuestionType.DynamicSelect,
-                func: (questionJson) => this.getDynamicSelectBlock(questionJson)
+                type: QuestionType.ActivityInstanceSelect,
+                func: (questionJson) => this.getActivityInstanceSelectBlock(questionJson)
             }
         ];
     }
@@ -259,9 +259,9 @@ export class ActivityQuestionConverter {
         return fileBlock;
     }
 
-    private getDynamicSelectBlock(questionJson: any): ActivityDynamicSelectQuestionBlock {
-        const dynamicSelectBlock = new ActivityDynamicSelectQuestionBlock();
+    private getActivityInstanceSelectBlock(questionJson: any): ActivityInstanceSelectQuestionBlock {
+        const activityInstanceSelectBlock = new ActivityInstanceSelectQuestionBlock();
 
-        return dynamicSelectBlock;
+        return activityInstanceSelectBlock;
     }
 }

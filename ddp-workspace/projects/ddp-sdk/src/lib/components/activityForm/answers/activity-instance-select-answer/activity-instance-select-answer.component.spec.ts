@@ -1,10 +1,4 @@
-import {
-  ComponentFixture,
-  fakeAsync,
-  flush,
-  TestBed,
-  tick,
-} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import {
   BrowserAnimationsModule,
@@ -14,38 +8,33 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { of } from 'rxjs';
 
-import { ActivityDynamicSelectQuestionBlock } from '../../../../models/activity/activityDynamicSelectQuestionBlock';
-import { DynamicSelectAnswerService } from '../../../../services/serviceAgents/dynamicSelectAnswer.service';
+import { ActivityInstanceSelectQuestionBlock } from '../../../../models/activity/activityInstanceSelectQuestionBlock';
+import { ActivityInstanceSelectAnswerService } from '../../../../services/serviceAgents/activityInstanceSelectAnswer.service';
 import { QuestionPromptComponent } from '../question-prompt/questionPrompt.component';
-import { ActivityDynamicSelectAnswer } from './activity-dynamic-select-answer.component';
+import { ActivityInstanceSelectAnswer } from './activity-instance-select-answer.component';
 
 describe('ActivityDynamicSelectAnswer', () => {
-  let fixture: ComponentFixture<ActivityDynamicSelectAnswer>;
-  let block: ActivityDynamicSelectQuestionBlock;
-  let component: ActivityDynamicSelectAnswer;
+  let fixture: ComponentFixture<ActivityInstanceSelectAnswer>;
+  let block: ActivityInstanceSelectQuestionBlock;
+  let component: ActivityInstanceSelectAnswer;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ActivityDynamicSelectAnswer, QuestionPromptComponent],
-      imports: [
-        NoopAnimationsModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        BrowserAnimationsModule,
-      ],
+      declarations: [ActivityInstanceSelectAnswer, QuestionPromptComponent],
+      imports: [NoopAnimationsModule, MatFormFieldModule, MatSelectModule, BrowserAnimationsModule],
       providers: [
         {
-          provide: DynamicSelectAnswerService,
+          provide: ActivityInstanceSelectAnswerService,
           useValue: {
             getOptions: () =>
               of([
                 {
-                  answerGuid: 'ANSWERGUID1',
-                  answerValue: 'Bob',
+                  guid: 'ANSWERGUID1',
+                  name: 'Bob',
                 },
                 {
-                  answerGuid: 'ANSWERGUID2',
-                  answerValue: 'Alice',
+                  guid: 'ANSWERGUID2',
+                  name: 'Alice',
                 },
               ]),
           },
@@ -55,14 +44,12 @@ describe('ActivityDynamicSelectAnswer', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ActivityDynamicSelectAnswer);
+    fixture = TestBed.createComponent(ActivityInstanceSelectAnswer);
 
     expect(fixture instanceof ComponentFixture).toBeTrue();
-    expect(
-      fixture.componentInstance instanceof ActivityDynamicSelectAnswer,
-    ).toBeTrue();
+    expect(fixture.componentInstance instanceof ActivityInstanceSelectAnswer).toBeTrue();
 
-    block = new ActivityDynamicSelectQuestionBlock();
+    block = new ActivityInstanceSelectQuestionBlock();
     block.stableId = 'STABLE_ID';
 
     component = fixture.componentInstance;
@@ -81,9 +68,7 @@ describe('ActivityDynamicSelectAnswer', () => {
 
     fixture.detectChanges();
 
-    expect(fixture.debugElement.nativeElement.textContent).toContain(
-      questionPrompt,
-    );
+    expect(fixture.debugElement.nativeElement.textContent).toContain(questionPrompt);
   });
 
   it('renders label if one is provided', () => {
@@ -106,14 +91,10 @@ describe('ActivityDynamicSelectAnswer', () => {
 
     fixture.detectChanges();
 
-    const matPlaceholder = fixture.debugElement.query(
-      By.css('.mat-select-placeholder'),
-    );
+    const matPlaceholder = fixture.debugElement.query(By.css('.mat-select-placeholder'));
 
     expect(matPlaceholder).not.toBeNull();
-    expect(matPlaceholder.nativeElement.textContent).toContain(
-      placeholderContent,
-    );
+    expect(matPlaceholder.nativeElement.textContent).toContain(placeholderContent);
   });
 
   it('disables input if readonly flag is true', () => {
@@ -144,20 +125,20 @@ describe('ActivityDynamicSelectAnswer', () => {
 
     expect(initialOptions.length).toEqual(2);
 
-    (component as any).dynamicSelectAnswerService = {
+    (component as any).activityInstanceSelectAnswerService = {
       getOptions: () =>
         of([
           {
-            answerGuid: 'ANSWERGUID1',
-            answerValue: 'Bob',
+            guid: 'ANSWERGUID1',
+            name: 'Bob',
           },
           {
-            answerGuid: 'ANSWERGUID2',
-            answerValue: 'Alice',
+            guid: 'ANSWERGUID2',
+            name: 'Alice',
           },
           {
-            answerGuid: 'ANSWERGUID3',
-            answerValue: 'Jackie',
+            guid: 'ANSWERGUID3',
+            name: 'Jackie',
           },
         ]),
     };
@@ -174,9 +155,7 @@ describe('ActivityDynamicSelectAnswer', () => {
 
     fixture.detectChanges();
 
-    const selectTrigger = fixture.debugElement.query(
-      By.css('.mat-select-trigger'),
-    );
+    const selectTrigger = fixture.debugElement.query(By.css('.mat-select-trigger'));
 
     expect(selectTrigger).not.toBeNull();
 
@@ -200,9 +179,7 @@ describe('ActivityDynamicSelectAnswer', () => {
 
     fixture.detectChanges();
 
-    const selectTriggerEl = fixture.debugElement.query(
-      By.css('.mat-select-trigger'),
-    ).nativeElement;
+    const selectTriggerEl = fixture.debugElement.query(By.css('.mat-select-trigger')).nativeElement;
 
     selectTriggerEl.click();
 
@@ -215,7 +192,7 @@ describe('ActivityDynamicSelectAnswer', () => {
     expect(value).toHaveBeenCalledTimes(1);
 
     const options = component.options$.getValue();
-    const firstOptionValue = options[0].answerGuid;
+    const firstOptionValue = options[0].guid;
 
     expect(value).toHaveBeenCalledWith(firstOptionValue);
   });
@@ -225,9 +202,7 @@ describe('ActivityDynamicSelectAnswer', () => {
 
     fixture.detectChanges();
 
-    const selectTriggerEl = fixture.debugElement.query(
-      By.css('.mat-select-trigger'),
-    ).nativeElement;
+    const selectTriggerEl = fixture.debugElement.query(By.css('.mat-select-trigger')).nativeElement;
 
     selectTriggerEl.click();
 
@@ -242,7 +217,7 @@ describe('ActivityDynamicSelectAnswer', () => {
     const displayedText = fixture.debugElement
       .query(By.css('.mat-select-value-text'))
       .nativeElement.textContent.trim();
-    const firstOptionText = component.options$.getValue()[0].answerValue;
+    const firstOptionText = component.options$.getValue()[0].name;
 
     expect(displayedText).toEqual(firstOptionText);
   });

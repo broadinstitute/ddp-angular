@@ -60,13 +60,13 @@ import { BlockType } from '../../../../models/activity/blockType';
                                       (valueChanged)="onChange($event)"
                                       (componentBusy)="componentBusy.next($event)">
             </ddp-activity-file-answer>
-            <ddp-activity-dynamic-select-answer *ngIf="isDynamicSelectQuestion(block)"
-                                                  [class]="'dynamic-dropdown-answer-' + block.stableId"
+            <ddp-activity-instance-select-answer *ngIf="isActivityInstanceSelectQuestion(block)"
+                                                  [class]="'activity-instance-select-answer-' + block.stableId"
                                                   [block]="block"
                                                   [readonly]="readonly"
                                                   (valueChanged)="onChange($event)"
                                                   (componentBusy)="componentBusy.next($event)"
-            ></ddp-activity-dynamic-select-answer>
+            ></ddp-activity-instance-select-answer>
             <span *ngIf="block.additionalInfoFooter"
                   [innerHTML]="block.additionalInfoFooter"
                   class="ddp-activity-answer__info-footer">
@@ -120,8 +120,8 @@ export class ActivityAnswerComponent {
         return this.isQuestion(block) && block.questionType === QuestionType.File;
     }
 
-    public isDynamicSelectQuestion(block: AbstractActivityQuestionBlock): boolean {
-        return this.isQuestion(block) && block.questionType === QuestionType.DynamicSelect;
+    public isActivityInstanceSelectQuestion(block: AbstractActivityQuestionBlock): boolean {
+        return this.isQuestion(block) && block.questionType === QuestionType.ActivityInstanceSelect;
     }
 
     private isQuestion(block: AbstractActivityQuestionBlock): boolean {

@@ -145,7 +145,7 @@ export * from './lib/components/activityForm/answers/activity-text-input/activit
 export * from './lib/components/activityForm/answers/activityTextAnswer.component';
 export * from './lib/components/activityForm/answers/activityBooleanAnswer.component';
 export * from './lib/components/activityForm/answers/activity-file-answer/activityFileAnswer.component';
-export * from './lib/components/activityForm/answers/activity-dynamic-select-answer/activity-dynamic-select-answer.component';
+export * from './lib/components/activityForm/answers/activity-instance-select-answer/activity-instance-select-answer.component';
 
 export * from './lib/components/activityForm/activity-blocks/activityQuestion.component';
 export * from './lib/components/activityForm/activity-blocks/modalActivityBlock/modalActivityBlock.component';
