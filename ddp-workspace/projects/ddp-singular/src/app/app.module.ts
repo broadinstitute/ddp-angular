@@ -32,6 +32,7 @@ import { ParticipantDeletionDialogComponent } from './components/participant-del
 import { AcceptAgeUpComponent } from './components/pages/accept-age-up/accept-age-up.component';
 import { VerifyAgeUpComponent } from './components/pages/verify-age-up/verify-age-up.component';
 import { HomeComponent } from './components/pages/home/home.component';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { HomeComponent } from './components/pages/home/home.component';
     BrowserModule,
     ToolkitModule,
     MaterialModule,
+    RecaptchaModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,

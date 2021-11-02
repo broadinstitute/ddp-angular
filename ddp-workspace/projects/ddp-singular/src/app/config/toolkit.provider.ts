@@ -12,6 +12,7 @@ toolkitConfig.studyGuid = DDP_ENV.studyGuid;
 toolkitConfig.dashboardUrl = Route.Dashboard;
 toolkitConfig.activityUrl = Route.Activity;
 toolkitConfig.participantListUrl = Route.ParticipantList;
+toolkitConfig.recaptchaSiteClientKey = DDP_ENV.recaptchaSiteClientKey;
 
 export const toolkitConfigProvider: Provider = {
   provide: 'toolkit.toolkitConfig',
