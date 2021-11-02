@@ -484,5 +484,21 @@
       "Text": "Thanks for joining the Global A-T Family Data Platfom mailing list. We will keep you informed about this initiative by the email address you provided.",
       "Title": "Stay informed"
     }
+  },
+  "ProgressBar": {
+    "Titles": {
+      "Consent": "Consent Form",
+      "AboutMe": "About Me",
+      "AboutMyChild": "About My Child",
+      "MedicalRecordRelease": "Medical Release",
+      "MedicalRecordFileUpload": "Medical Record File Upload",
+      "PatientSurvey": "Patient Survey"
+    }
+  },
+  "Common": {
+    "Buttons": {
+      "Delete": "Delete",
+      "Cancel": "Cancel"
+    }
   }
 }

@@ -20,10 +20,8 @@ import { ActivityInstance, ActivityResponse, UserActivityServiceAgent, SessionMe
 export class SurveyComponent implements OnInit, OnDestroy {
   studyGuid: string;
   instanceGuid: string;
-  isActivityShown = true;
   isFetchingActivities = false;
   activities: ActivityInstance[];
-  isWorkflowProgressShown = false;
 
   constructor(
     private readonly cdr: ChangeDetectorRef,
@@ -48,25 +46,19 @@ export class SurveyComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(activityResponse: ActivityResponse): void {
-    setTimeout(() => {
-      if (activityResponse && activityResponse.instanceGuid) {
-        this.resetActivityComponent();
+    if (!activityResponse) {
+      return;
+    }
 
+    setTimeout(() => {
+      if (activityResponse.instanceGuid) {
         this.instanceGuid = activityResponse.instanceGuid;
         this.getActivities().pipe(take(1)).subscribe();
-
-        return;
       }
-
       this.workflowBuilder
-        .getCommand(new ActivityResponse(activityResponse.next))
+        .getCommand(activityResponse)
         .execute();
     });
-  }
-
-  onChangeActivity(activity: ActivityInstance): void {
-    this.instanceGuid = activity.instanceGuid;
-    this.resetActivityComponent();
   }
 
   private getActivities(): Observable<ActivityInstance[]> {
@@ -83,12 +75,6 @@ export class SurveyComponent implements OnInit, OnDestroy {
         this.activities = activities;
       })
     );
-  }
-
-  private resetActivityComponent(): void {
-    this.isActivityShown = false;
-    this.cdr.detectChanges();
-    this.isActivityShown = true;
   }
 
   private setInstanceGuid(): void {

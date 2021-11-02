@@ -2,6 +2,7 @@ import { DdpModule } from 'ddp-sdk';
 import { ToolkitModule } from 'toolkit';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
+import { RecaptchaModule } from 'ng-recaptcha';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,12 +14,16 @@ import { FaqComponent } from './components/pages/faq/faq.component';
 import { MaterialModule } from './modules/material/material.module';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { HomeComponent } from './components/pages/home/home.component';
 import { ErrorComponent } from './components/pages/error/error.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ActivityComponent } from './components/activity/activity.component';
 import { SurveyComponent } from './components/pages/survey/survey.component';
 import { PasswordComponent } from './components/pages/password/password.component';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { ActivityPageComponent } from './components/pages/activity/activity-page.component';
+import { AcceptAgeUpComponent } from './components/pages/accept-age-up/accept-age-up.component';
+import { VerifyAgeUpComponent } from './components/pages/verify-age-up/verify-age-up.component';
 import { PreScreeningComponent } from './components/pages/pre-screening/pre-screening.component';
 import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
 import { ActivitiesListComponent } from './components/activities-list/activities-list.component';
@@ -29,15 +34,13 @@ import { ParticipantsListComponent } from './components/pages/participant-list/p
 import { NotificationsDialogComponent } from './components/notifications-dialog/notifications-dialog.component';
 import { SessionExpiredDialogComponent } from './components/session-expired-dialog/session-expired-dialog.component';
 import { ParticipantDeletionDialogComponent } from './components/participant-deletion-dialog/participant-deletion-dialog.component';
-import { AcceptAgeUpComponent } from './components/pages/accept-age-up/accept-age-up.component';
-import { VerifyAgeUpComponent } from './components/pages/verify-age-up/verify-age-up.component';
-import { HomeComponent } from './components/pages/home/home.component';
-import { RecaptchaModule } from 'ng-recaptcha';
+
 
 @NgModule({
   declarations: [
     FaqComponent,
     AppComponent,
+    HomeComponent,
     ErrorComponent,
     HeaderComponent,
     FooterComponent,
@@ -45,6 +48,9 @@ import { RecaptchaModule } from 'ng-recaptcha';
     AboutUsComponent,
     PasswordComponent,
     ActivityComponent,
+    AcceptAgeUpComponent,
+    VerifyAgeUpComponent,
+    ProgressBarComponent,
     PreScreeningComponent,
     ActivityPageComponent,
     SessionExpiredComponent,
@@ -56,9 +62,6 @@ import { RecaptchaModule } from 'ng-recaptcha';
     NotificationsDialogComponent,
     SessionExpiredDialogComponent,
     ParticipantDeletionDialogComponent,
-    AcceptAgeUpComponent,
-    VerifyAgeUpComponent,
-    HomeComponent,
   ],
   imports: [
     DdpModule,
