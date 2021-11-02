@@ -2,6 +2,7 @@ import { DdpModule } from 'ddp-sdk';
 import { ToolkitModule } from 'toolkit';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
+import { RecaptchaModule } from 'ng-recaptcha';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -67,6 +68,7 @@ import { ParticipantDeletionDialogComponent } from './components/participant-del
     BrowserModule,
     ToolkitModule,
     MaterialModule,
+    RecaptchaModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,

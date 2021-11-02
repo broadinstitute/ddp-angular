@@ -1,6 +1,7 @@
 import { Provider } from '@angular/core';
 import { Route } from '../constants/route';
 import { ConfigurationService } from 'ddp-sdk';
+import { sdkConfig } from '../../../../ddp-pancan/src/app/app.module';
 
 
 declare const DDP_ENV: { [key: string]: any };
@@ -24,6 +25,7 @@ configurationService.auth0Audience = DDP_ENV.auth0Audience;
 configurationService.auth0ClientId = DDP_ENV.auth0ClientId;
 configurationService.projectGAToken = DDP_ENV.projectGAToken;
 configurationService.loginLandingUrl = DDP_ENV.loginLandingUrl;
+configurationService.tooltipIconUrl = 'assets/images/info.png';
 configurationService.sessionExpiredUrl = Route.SessionExpired;
 configurationService.doLocalRegistration = DDP_ENV.doLocalRegistration;
 configurationService.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
