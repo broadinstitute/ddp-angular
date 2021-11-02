@@ -1,5 +1,5 @@
-<div class="wrapper" *ngIf="{ activities: activities$ | async } as State">
-  <ng-container *ngIf="State.activities">
+<ng-container *ngIf="{ activities: activities$ | async } as State">
+  <div class="wrapper" *ngIf="showBar(State.activities)">
     <div
       class="step-container"
       *ngFor="let activity of State.activities; index as i"
@@ -13,5 +13,5 @@
       </div>
       <p class="step-paragraph" [innerHtml]="activity.activityNameI18nKey | translate"></p>
     </div>
-  </ng-container>
-</div>
+  </div>
+</ng-container>

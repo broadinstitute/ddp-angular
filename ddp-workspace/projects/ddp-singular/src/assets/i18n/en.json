@@ -494,5 +494,11 @@
       "MedicalRecordFileUpload": "Medical Record File Upload",
       "PatientSurvey": "Patient Survey"
     }
+  },
+  "Common": {
+    "Buttons": {
+      "Delete": "Delete",
+      "Cancel": "Cancel"
+    }
   }
 }

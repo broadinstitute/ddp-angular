@@ -18,4 +18,8 @@ export class ProgressBarComponent {
   constructor(
     @Inject(ACTIVITIES) readonly activities$: Observable<ActivityListItem[]>
   ) {}
+
+  showBar(items: ActivityListItem[]): boolean {
+    return items?.some((item: ActivityListItem) => item.status);
+  }
 }
