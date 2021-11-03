@@ -18,6 +18,11 @@ export class SurveyComponentEditorComponent {
         map(block => this.isQuestion(block) && block.question.questionType === 'TEXT'),
         share()
     );
+    isPicklistQuestionBlock$: Observable<boolean> = this.currentBlock$.pipe(
+        map(block => this.isQuestion(block) && block.question.questionType === 'PICKLIST'),
+        share()
+    );
+
     // TODO: can we refactor type checking into one injectable object or service?
     constructor(private editorService: ActivityDefinitionEditorService) {
     }
