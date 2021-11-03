@@ -53,8 +53,11 @@ import { FormBuilder, FormControl, ValidationErrors, ValidatorFn, Validators } f
                               [dateValue]="birthDate.value"
                               (valueChanged)="birthDateValueChanged($event)">
                     </ddp-date>
-                    <ddp-validation-message *ngIf="birthDate.dirty && birthDate.invalid"
+                    <ddp-validation-message *ngIf="birthDate.dirty && birthDate.hasError('invalidDate')"
                                             [message]="'SDK.Validators.DateNavyValidationRule' | translate">
+                    </ddp-validation-message>
+                    <ddp-validation-message *ngIf="birthDate.hasError('futureDate')"
+                                            [message]="'SDK.UserPreferences.FutureBirthDateValidationError' | translate">
                     </ddp-validation-message>
                 </div>
             </ng-container>
@@ -194,11 +197,17 @@ export class UserPreferencesComponent implements OnDestroy {
 
     private getBirthDateValidator(): ValidatorFn {
         return (control: FormControl): ValidationErrors | null => {
-            const value = control.value;
+            const value: DatePickerValue = control.value;
             if (!value.year || !value.month || !value.day) {
                 return { invalidDate: true };
             }
-            return this.dateService.checkExistingDate(value.year, value.month, value.day) ? null : { invalidDate: true };
+            if (!this.dateService.checkExistingDate(value.year, value.month, value.day)) {
+                return { invalidDate: true };
+            }
+
+            const valueDate = new Date(value.year, value.month - 1, value.day);
+            const currentDate = new Date();
+            return valueDate.getTime() <= currentDate.getTime() ? null : { futureDate: true };
         };
     }
 

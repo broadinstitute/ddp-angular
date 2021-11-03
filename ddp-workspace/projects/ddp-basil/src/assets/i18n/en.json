@@ -124,7 +124,8 @@
             "LastUserName": "Last name",
             "FirstNameFieldIsRequired": "First name is required",
             "LastNameFieldIsRequired": "Last name is required",
-            "MailingAddress": "Mailing Address"
+            "MailingAddress": "Mailing Address",
+            "FutureBirthDateValidationError": "Date of birth cannot be a future date."
         },
         "Dashboard": {
             "Title": "Participant Dashboard",
