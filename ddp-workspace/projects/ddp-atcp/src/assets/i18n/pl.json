@@ -422,7 +422,6 @@
             "SignOutButton": "Wyloguj"
         },
         "UserPreferences": {
-            "UserPreferencesGender": "Płeć",
             "UserPreferencesTitle": "Preferencje użytkownika"
         },
         "ValidateError": "Nie można przesłać dalej. Aby uzyskać szczegółowe informacje, należy sprawdzić wiadomości w formularzu.",

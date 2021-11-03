@@ -26,6 +26,7 @@ export class TextQuestionEditorComponent implements OnInit, OnDestroy {
         inputType: [''],
         stableId: [''],
         prompt: [''],
+        placeholder: [''],
         required: [false]
     });
 
@@ -42,7 +43,7 @@ export class TextQuestionEditorComponent implements OnInit, OnDestroy {
         );
         const updateQuestionPipe = this.formGroup.valueChanges.pipe(
             map(formData => this.updateQuestion(formData)),
-            tap(question => this.questionBlockChanged.emit(this.questionBlockSubject.getValue()))
+            tap(() => this.questionBlockChanged.emit(this.questionBlockSubject.getValue()))
         );
         this.sub = merge(updateFormPipe, updateQuestionPipe).subscribe();
     }
@@ -53,10 +54,12 @@ export class TextQuestionEditorComponent implements OnInit, OnDestroy {
 
     private updateForm(question: TextQuestionDef): void {
         const simplifiedPromptTemplate = new SimpleTemplate(question.promptTemplate);
+        const simplifiedPlaceholderTemplate = new SimpleTemplate(question.placeholderTemplate);
         this.formGroup.patchValue({
             inputType: question.inputType,
             guid: question.stableId,
             prompt: simplifiedPromptTemplate.getTranslationText(this.config.defaultLanguageCode),
+            placeholder: simplifiedPlaceholderTemplate.getTranslationText(this.config.defaultLanguageCode),
             required: question.validations.some(val => val.ruleType === 'REQUIRED')
         });
     }
@@ -67,8 +70,11 @@ export class TextQuestionEditorComponent implements OnInit, OnDestroy {
             return;
         }
         const simplifiedPromptTemplate = new SimpleTemplate(question.promptTemplate);
+        const simplifiedPlaceholderTemplate = new SimpleTemplate(question.placeholderTemplate);
         simplifiedPromptTemplate.setTranslationText(this.config.defaultLanguageCode, formData.prompt);
+        simplifiedPlaceholderTemplate.setTranslationText(this.config.defaultLanguageCode, formData.placeholder);
         question.promptTemplate = simplifiedPromptTemplate.toTemplate();
+        question.placeholderTemplate = simplifiedPlaceholderTemplate.toTemplate();
         question.inputType = formData.inputType;
         question.stableId = formData.stableId;
         question.validations = formData.required ? [{ ruleType: 'REQUIRED', hintTemplate: null }] : [];
