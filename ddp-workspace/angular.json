@@ -2968,7 +2968,7 @@
               "projects/ddp-dsm-ui/tsconfig.spec.json"
             ],
             "exclude": [
-              "**/node_modules/**"
+              "**"
             ]
           }
         }
