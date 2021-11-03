@@ -62,9 +62,12 @@ export class AbstractionGroupComponent implements OnInit, OnDestroy {
           revertOnSpill: true
         } );
       }
+
       this.subs.add(
         this.dragulaService.dropModel(groupName)
-          .subscribe(() => {
+          .subscribe(({sourceModel}) => {
+            // updated model
+            this.fields = sourceModel;
             for (let i = 0; i < this.fields.length; i++) {
               this.fields[i].orderNumber = i + 1;
               this.fields[i].changed = true;
@@ -75,10 +78,7 @@ export class AbstractionGroupComponent implements OnInit, OnDestroy {
   }
 
   isPatchedCurrently( field: string ): boolean {
-    if (this.currentPatchField === field) {
-      return true;
-    }
-    return false;
+    return this.currentPatchField === field;
   }
 
   ngOnDestroy() {
@@ -87,7 +87,7 @@ export class AbstractionGroupComponent implements OnInit, OnDestroy {
   }
 
   getDisplayNameWithoutSpace() {
-    if (this.displayName != null && this.displayName != undefined) {
+    if (this.displayName != null) {
       return this.activity + "_" + this.displayName.replace( /\s/g, "" );
     }
     return "";
@@ -136,7 +136,7 @@ export class AbstractionGroupComponent implements OnInit, OnDestroy {
   }
 
   addMultiValue( value: Value ) {
-    if (value.values == null || value.values == undefined) {
+    if (value.values == null) {
       value.values = [];
     }
     let multiValue = new Value( null );
@@ -157,10 +157,7 @@ export class AbstractionGroupComponent implements OnInit, OnDestroy {
   }
 
   isActivityDone() {
-    if (this.activityStatus === "done") {
-      return true;
-    }
-    return false;
+    return this.activityStatus === "done";
   }
 
   applyAbstraction( field: AbstractionField, type: string ) {

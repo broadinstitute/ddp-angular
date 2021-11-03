@@ -1,39 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute, Router } from '@angular/router';
+/* tslint:disable:no-unused-variable */
 
-import { DSMService } from '../services/dsm.service';
-import { Auth } from '../services/auth.service';
-import { ComponentService } from '../services/component.service';
+import { TestBed, async } from '@angular/core/testing';
 import { PermalinkComponent } from './permalink.component';
 
-describe('Component: PermalinkComponent', () => {
-  let component: PermalinkComponent;
-  let fixture: ComponentFixture<PermalinkComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-        declarations: [
-          PermalinkComponent
-        ],
-        imports: [],
-        providers: [
-          { provide: Router, useValue: {}},
-          { provide: ActivatedRoute, useValue: {}},
-          { provide: DSMService, useValue: {}},
-          { provide: Auth, useValue: {}},
-          { provide: ComponentService, useValue: {}}
-        ],
-      })
-      .compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(PermalinkComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
+describe('Component: Permalink', () => {
+  it('should create an instance', () => {
+    let component = new PermalinkComponent();
     expect(component).toBeTruthy();
   });
 });
