@@ -12,6 +12,10 @@
             <textarea matInput matTextareaAutosize matAutosizeMinRows="3" formControlName="prompt" required></textarea>
         </mat-form-field>
     </div>
+    <mat-form-field>
+        <mat-label>Question Placeholder</mat-label>
+        <input matInput formControlName="placeholder"/>
+    </mat-form-field>
     <div>
         <mat-label>Input Type</mat-label>
         <mat-radio-group formControlName="inputType" class="radio-group">
@@ -28,7 +32,4 @@
         <mat-label>Validations</mat-label>
         <mat-checkbox formControlName="required">Required</mat-checkbox>
     </div>
-
-
-
 </form>

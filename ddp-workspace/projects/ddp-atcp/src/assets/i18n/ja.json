@@ -422,7 +422,6 @@
             "SignOutButton": "サインアウト"
         },
         "UserPreferences": {
-            "UserPreferencesGender": "性別",
             "UserPreferencesTitle": "ユーザー詳細設定"
         },
         "ValidateError": "提出を処理できません。詳細はフォームのメッセージを確認してください。",

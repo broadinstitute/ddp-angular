@@ -68,6 +68,7 @@ toolkitConfig.lmsPageEmail = 'info@lmsproject.org';
 toolkitConfig.lmsStudyGuid = 'cmi-lms';
 toolkitConfig.useMultiParticipantDashboard = true;
 toolkitConfig.dashboardDisplayedColumns = ['name', 'summary', 'status', 'actions'];
+toolkitConfig.allowEditUserProfile = true;
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;

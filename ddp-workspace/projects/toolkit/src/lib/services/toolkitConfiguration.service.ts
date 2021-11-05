@@ -89,4 +89,6 @@ export class ToolkitConfigurationService {
     usePrionPrivacyPolicyTemplate: boolean;
     // flag for using dashboard in multiple participants mode
     useMultiParticipantDashboard: boolean;
+    // show edit user profile button on dashboard page
+    allowEditUserProfile: boolean;
 }
