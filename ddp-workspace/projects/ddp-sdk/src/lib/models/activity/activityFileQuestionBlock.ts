@@ -14,7 +14,7 @@ export class ActivityFileQuestionBlock extends ActivityQuestionBlock<ActivityFil
         return QuestionType.File;
     }
 
-    public hasRequiredAnswer(): boolean {
+    public hasAnswer(): boolean {
         return this.answer?.fileName && (this.answer.fileSize != null);
     }
 }

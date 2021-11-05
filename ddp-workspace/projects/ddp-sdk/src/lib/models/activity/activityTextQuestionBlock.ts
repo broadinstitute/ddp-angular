@@ -38,7 +38,7 @@ export class ActivityTextQuestionBlock extends ActivityQuestionBlock<string> {
       }
     }
 
-    public hasRequiredAnswer(): boolean {
+    public hasAnswer(): boolean {
         return this.answer?.trim().length > 0;
     }
 }

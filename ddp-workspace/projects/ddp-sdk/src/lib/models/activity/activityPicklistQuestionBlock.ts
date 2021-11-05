@@ -28,7 +28,7 @@ export class ActivityPicklistQuestionBlock extends ActivityQuestionBlock<Array<A
             .map(answer => `${answer.stableId}${answer.detail ? ':' + answer.detail : ''}`).join(';');
     }
 
-    public hasRequiredAnswer(): boolean {
+    public hasAnswer(): boolean {
         return this.answer?.length > 0;
     }
 }

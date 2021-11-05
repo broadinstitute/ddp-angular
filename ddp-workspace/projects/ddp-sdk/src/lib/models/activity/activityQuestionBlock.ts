@@ -27,5 +27,5 @@ export abstract class ActivityQuestionBlock<T> extends AbstractActivityQuestionB
      *  Whether the question has a valid answer
      *  in case when the question validators include ActivityRequiredValidationRule
      */
-    public abstract hasRequiredAnswer(): boolean;
+    public abstract hasAnswer(): boolean;
 }

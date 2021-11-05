@@ -15,7 +15,7 @@ export class ActivityNumericQuestionBlock extends ActivityQuestionBlock<number> 
         return QuestionType.Numeric;
     }
 
-    public hasRequiredAnswer(): boolean {
+    public hasAnswer(): boolean {
         return this.answer != null;
     }
 }

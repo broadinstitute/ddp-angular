@@ -13,7 +13,7 @@ export class ActivityBooleanQuestionBlock extends ActivityQuestionBlock<boolean>
         return QuestionType.Boolean;
     }
 
-    public hasRequiredAnswer(): boolean {
+    public hasAnswer(): boolean {
         return this.answer != null;
     }
 }

@@ -7,7 +7,7 @@ export class ActivityRequiredValidationRule extends ActivityAbstractValidationRu
     }
 
     public recalculate(): boolean {
-        const isValid = this.question.hasRequiredAnswer();
+        const isValid = this.question.hasAnswer();
         this.result = isValid ? null : this.message;
 
         return isValid;

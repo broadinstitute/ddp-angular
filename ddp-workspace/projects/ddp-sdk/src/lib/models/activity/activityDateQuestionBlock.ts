@@ -63,7 +63,7 @@ export class ActivityDateQuestionBlock extends ActivityQuestionBlock<DatePickerV
         return `day:${value.day || ''};month:${value.month || ''};year:${value.year || ''}`;
     }
 
-    public hasRequiredAnswer(): boolean {
+    public hasAnswer(): boolean {
         return (this.answer != null) && this.isSpecifiedFieldsPresent(this.answer);
     }
 }

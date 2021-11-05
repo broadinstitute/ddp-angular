@@ -9,7 +9,7 @@ class TestNumberActivityQuestionBlock extends ActivityQuestionBlock<number> {
         return QuestionType.Boolean;
     }
 
-    hasRequiredAnswer(): boolean {
+    hasAnswer(): boolean {
         return false;
     }
 }

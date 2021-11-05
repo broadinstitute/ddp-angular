@@ -21,7 +21,7 @@ describe('ActivityRequiredValidationRule', () => {
     it('should return false if answer null', () => {
         const question = {
             answer: null,
-            hasRequiredAnswer: () => false
+            hasAnswer: () => false
         } as ActivityQuestionBlock<any>;
         validator = new ActivityRequiredValidationRule(question);
         validator.message = MESSAGE;
