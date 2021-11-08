@@ -2861,7 +2861,7 @@
             "index": "projects/ddp-dsm-ui/src/index.html",
             "main": "projects/ddp-dsm-ui/src/main.ts",
             "polyfills": "projects/ddp-dsm-ui/src/polyfills.ts",
-            "tsConfig": "projects/ddp-dsm-ui/src/tsconfig.app.json",
+            "tsConfig": "projects/ddp-dsm-ui/tsconfig.app.json",
             "aot": true,
             "assets": [
               "projects/ddp-dsm-ui/src/favicon.ico",
