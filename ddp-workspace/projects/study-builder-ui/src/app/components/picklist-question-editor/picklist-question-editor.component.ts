@@ -79,6 +79,8 @@ export class PicklistQuestionEditorComponent implements OnInit, OnDestroy {
         question.picklistLabelTemplate = simplifiedLabelTemplate.toTemplate();
         question.stableId = formData.stableId;
         question.validations = formData.required ? [{ ruleType: 'REQUIRED', hintTemplate: null }] : [];
+        question.selectMode = formData.selectMode;
+        question.renderMode = formData.renderMode;
         return question;
     }
 

@@ -7,6 +7,7 @@ import { filter, map, tap } from 'rxjs/operators';
 import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
 import { PicklistQuestionDef } from '../../model/core/picklistQuestionDef';
 import { PicklistOptionDef } from '../../model/core/picklistOptionDef';
+import { StudyConfigObjectFactory } from '../../model/core-extended/studyConfigObjectFactory';
 
 @Component({
     selector: 'app-picklist-question-block',
@@ -19,7 +20,10 @@ export class PicklistQuestionBlockComponent implements OnInit {
     definitionBlock$: Observable<QuestionBlockDef<PicklistQuestionDef>>;
     angularClientBlock$: Observable<ActivityPicklistQuestionBlock>;
 
-    constructor(private config: ConfigurationService) {}
+    private factory: StudyConfigObjectFactory;
+    constructor(private config: ConfigurationService) {
+        this.factory = new StudyConfigObjectFactory(config);
+    }
 
     ngOnInit(): void {
         this.angularClientBlock$ = this.definitionBlock$.pipe(
@@ -29,6 +33,15 @@ export class PicklistQuestionBlockComponent implements OnInit {
     }
 
     private buildFromDef(defBlock: QuestionBlockDef<PicklistQuestionDef>): ActivityPicklistQuestionBlock {
+        // todo replace mock options with custom options once options control would be added
+        const text1 = new SimpleTemplate(this.factory.createBlankTemplate());
+        text1.setTranslationText(this.config.defaultLanguageCode, 'test1');
+        const text2 = new SimpleTemplate(this.factory.createBlankTemplate());
+        text2.setTranslationText(this.config.defaultLanguageCode, 'test2');
+        const options: PicklistOptionDef[] =
+            [{stableId: 'test1', optionLabelTemplate: text1}, {stableId: 'test2', optionLabelTemplate: text2}];
+
+
         const newClientBlock = new ActivityPicklistQuestionBlock();
         const questionDef = defBlock.question;
         newClientBlock.selectMode = questionDef.selectMode;
@@ -37,7 +50,9 @@ export class PicklistQuestionBlockComponent implements OnInit {
         newClientBlock.stableId = questionDef.stableId;
         newClientBlock.question = new SimpleTemplate(questionDef.promptTemplate).getTranslationText(this.config.defaultLanguageCode);
         newClientBlock.picklistOptions =
-            questionDef.picklistOptions.map(picklistOption => this.convertOptionDefToActivityOption(picklistOption));
+            // questionDef.picklistOptions.map(picklistOption => this.convertOptionDefToActivityOption(picklistOption));
+            options.map(picklistOption => this.convertOptionDefToActivityOption(picklistOption));
+        newClientBlock.picklistGroups = [];
         return newClientBlock;
     }
 
@@ -54,7 +69,7 @@ export class PicklistQuestionBlockComponent implements OnInit {
             exclusive: !!option.exclusive,
             groupId: null,
             nestedOptionsLabel: option.nestedOptionsLabel,
-            nestedOptions: option.nestedOptions.map(nestedOption => this.convertOptionDefToActivityOption(nestedOption)),
+            nestedOptions: (option.nestedOptions || []).map(nestedOption => this.convertOptionDefToActivityOption(nestedOption)),
         };
     }
 }
