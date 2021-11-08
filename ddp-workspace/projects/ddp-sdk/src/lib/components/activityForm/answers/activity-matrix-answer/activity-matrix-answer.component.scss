@@ -1,0 +1,15 @@
+.matrix-answer-table {
+  width: 100%;
+
+  &__cell {
+    &--group,
+    &--option-label,
+    &--option-control {
+      text-align: center;
+    }
+  }
+}
+
+::ng-deep .mat-radio-button .mat-radio-label-content {
+  display: none;
+}

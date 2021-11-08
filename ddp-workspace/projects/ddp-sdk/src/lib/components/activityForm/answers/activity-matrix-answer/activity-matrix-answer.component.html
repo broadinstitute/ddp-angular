@@ -1,0 +1,68 @@
+<ddp-question-prompt [block]="block"></ddp-question-prompt>
+
+<table class="matrix-answer-table">
+  <thead class="matrix-answer-table__header">
+    <tr class="matrix-answer-table__row matrix-answer-table__row--header matrix-answer-table__row--groups">
+      <th class="matrix-answer-table__cell matrix-answer-table__cell--header">&nbsp;</th>
+      <th
+        *ngFor="let group of renderGroups"
+        [colSpan]="group.colSpan"
+        class="matrix-answer-table__cell matrix-answer-table__cell--header matrix-answer-table__cell--group"
+      >
+        {{ group.name }}
+      </th>
+    </tr>
+
+    <tr class="matrix-answer-table__row matrix-answer-table__row--header matrix-answer-table__row--options">
+      <th class="matrix-answer-table__cell matrix-answer-table__cell--header">&nbsp;</th>
+
+      <ng-container *ngFor="let group of renderGroups">
+        <ng-container *ngFor="let option of group.options">
+          <th
+            class="matrix-answer-table__cell matrix-answer-table__cell--header matrix-answer-table__cell--option-label"
+          >
+            {{ option.optionLabel }}
+          </th>
+        </ng-container>
+      </ng-container>
+    </tr>
+  </thead>
+
+  <tbody class="matrix-answer-table__body">
+    <tr *ngFor="let question of block.questions" class="matrix-answer-table__row matrix-answer-table__row--question">
+      <td class="matrix-answer-table__cell matrix-answer-table__cell--question">
+        {{ question.questionLabel }}
+      </td>
+
+      <ng-container *ngFor="let group of renderGroups">
+        <ng-container *ngFor="let option of group.options">
+          <td class="matrix-answer-table__cell matrix-answer-table__cell--option-control">
+            <ng-container
+              [ngTemplateOutlet]="isSingleMode ? radioButtons : checkboxes"
+              [ngTemplateOutletContext]="{ question: question, group: group, option: option }"
+            ></ng-container>
+          </td>
+        </ng-container>
+      </ng-container>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #radioButtons let-question="question" let-group="group" let-option="option">
+  <mat-radio-button
+    [aria-label]="question.questionLabel + ' ' + option.optionLabel"
+    [disabled]="readonly"
+    [name]="question.stableId"
+    [checked]="isOptionSelected(question, group, option)"
+    (change)="onOptionChange(question, group, option)"
+  ></mat-radio-button>
+</ng-template>
+
+<ng-template #checkboxes let-question="question" let-group="group" let-option="option">
+  <mat-checkbox
+    [aria-label]="question.questionLabel + ' ' + option.optionLabel"
+    [disabled]="readonly"
+    [checked]="isOptionSelected(question, group, option)"
+    (change)="onOptionChange(question, group, option)"
+  ></mat-checkbox>
+</ng-template>

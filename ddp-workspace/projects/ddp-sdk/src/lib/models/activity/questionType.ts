@@ -7,5 +7,6 @@ export enum QuestionType {
     Composite = 'COMPOSITE',
     Agreement = 'AGREEMENT',
     Numeric = 'NUMERIC',
-    File = 'FILE'
+    File = 'FILE',
+    Matrix = 'MATRIX'
 }

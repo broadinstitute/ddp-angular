@@ -19,6 +19,7 @@ import { ActivityAbstractValidationRule } from './validators/activityAbstractVal
 import { ActivityRequiredValidationRule } from './validators/activityRequiredValidationRule';
 import { QuestionType } from '../../models/activity/questionType';
 import { ActivityFileQuestionBlock } from '../../models/activity/activityFileQuestionBlock';
+import { ActivityMatrixQuestionBlock } from '../../models/activity/activityMatrixQuestionBlock';
 import * as _ from 'underscore';
 import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
 
@@ -155,6 +156,10 @@ export class ActivityQuestionConverter {
             {
                 type: QuestionType.File,
                 func: (questionJson) => this.getFileBlock(questionJson)
+            },
+            {
+                type: QuestionType.Matrix,
+                func: (questionJson) => this.getMatrixBlock(questionJson)
             }
         ];
     }
@@ -252,5 +257,16 @@ export class ActivityQuestionConverter {
         fileBlock.mimeTypes = questionJson.mimeTypes;
 
         return fileBlock;
+    }
+
+    private getMatrixBlock(questionJson: any): any {
+        const matrixBlock = new ActivityMatrixQuestionBlock();
+
+        matrixBlock.selectMode = questionJson.selectMode;
+        matrixBlock.questions = questionJson.matrixQuestions;
+        matrixBlock.options = questionJson.matrixOptions;
+        matrixBlock.groups = questionJson.groups;
+
+        return matrixBlock;
     }
 }
