@@ -49,6 +49,8 @@ export class PicklistQuestionBlockComponent implements OnInit {
         newClientBlock.isRequired = questionDef.validations.some(val => val.ruleType === 'REQUIRED');
         newClientBlock.stableId = questionDef.stableId;
         newClientBlock.question = new SimpleTemplate(questionDef.promptTemplate).getTranslationText(this.config.defaultLanguageCode);
+        newClientBlock.picklistLabel =
+            new SimpleTemplate(questionDef.picklistLabelTemplate).getTranslationText(this.config.defaultLanguageCode);
         newClientBlock.picklistOptions =
             // questionDef.picklistOptions.map(picklistOption => this.convertOptionDefToActivityOption(picklistOption));
             options.map(picklistOption => this.convertOptionDefToActivityOption(picklistOption));
