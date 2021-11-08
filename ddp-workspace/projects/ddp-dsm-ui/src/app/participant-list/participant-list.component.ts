@@ -506,6 +506,7 @@ export class ParticipantListComponent implements OnInit {
           jsonData.kitTypes.forEach((val) => {
             const kitType = KitType.parse(val);
             if (kitType.uploadReasons != null) {
+              // tslint:disable-next-line:no-shadowed-variable
               kitType.uploadReasons.forEach((val) => {
                 const found = optionsUpload.find(option => {
                   return option.value === val;

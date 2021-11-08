@@ -106,16 +106,16 @@ export class MailingListComponent implements OnInit {
 
   public downloadMailingList(): void {
     const map: { firstName: string; lastName: string; email: string; info: string; dateCreated: string }[] = [];
-    for (let i = 0; i < this.contactList.length; i++) {
+    for (const contact of this.contactList) {
       let dateCreated = '-';
-      if (this.contactList[ i ].dateCreated != null && this.contactList[ i ].dateCreated !== 0) {
-        dateCreated = Utils.getDateFormatted(new Date(this.contactList[ i ].dateCreated * 1000), Utils.DATE_STRING_IN_CVS);
+      if (contact.dateCreated != null && contact.dateCreated !== 0) {
+        dateCreated = Utils.getDateFormatted(new Date(contact.dateCreated * 1000), Utils.DATE_STRING_IN_CVS);
       }
       map.push({
-        firstName: this.contactList[ i ].firstName,
-        lastName: this.contactList[ i ].lastName,
-        email: this.contactList[ i ].email,
-        info: this.contactList[ i ].info,
+        firstName: contact.firstName,
+        lastName: contact.lastName,
+        email: contact.email,
+        info: contact.info,
         dateCreated
       });
     }

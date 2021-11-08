@@ -88,13 +88,13 @@ export class MedicalRecord {
     const result: FollowUp[] = [];
     const jsonArray = json.followUps;
     if (jsonArray !== undefined) {
-      // TODO: check is it correct ? - shadowed variables `json`
-      jsonArray.forEach((json) => {
+      jsonArray.forEach((jsonItem) => {
         result.push(new FollowUp(
-          json.fRequest1 == null ? null : json.fRequest1,
-          json.fRequest2 == null ? null : json.fRequest2,
-          json.fRequest3 == null ? null : json.fRequest3,
-          json.fReceived == null ? null : json.fReceived));
+          jsonItem.fRequest1 == null ? null : jsonItem.fRequest1,
+          jsonItem.fRequest2 == null ? null : jsonItem.fRequest2,
+          jsonItem.fRequest3 == null ? null : jsonItem.fRequest3,
+          jsonItem.fReceived == null ? null : jsonItem.fReceived
+        ));
       });
     }
     let data = json.additionalValues;

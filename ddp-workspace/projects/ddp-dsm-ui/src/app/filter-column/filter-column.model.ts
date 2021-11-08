@@ -380,6 +380,7 @@ export class Filter {
         continue;
       }
       if (allColumns[ filter.participantColumn.tableAlias ] != null) {
+        // tslint:disable-next-line:no-shadowed-variable
         const f = allColumns[ filter.participantColumn.tableAlias ].find(item => {
           return item.participantColumn.tableAlias === filter.participantColumn.tableAlias
             && item.participantColumn.name === filter.participantColumn.name;
@@ -416,6 +417,7 @@ export class Filter {
       } else {
         for (const source of Object.keys(allColumns)) {
           // TODO: check is it correct ? - shadowed variables f
+          // tslint:disable-next-line:no-shadowed-variable
           const f = allColumns[ source ].find(item => {
             return item.participantColumn.name === filter.participantColumn.name;
           });

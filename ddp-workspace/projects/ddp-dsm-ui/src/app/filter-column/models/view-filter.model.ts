@@ -66,6 +66,7 @@ export class ViewFilter {
     const v = new ViewFilter(
       f, Object.assign('', this.filterName), c,
       // TODO: check is it correct ? - new Boolean() ?
+      // tslint:disable-next-line
       Object.assign(new Boolean(), this.shared), Object.assign(new Boolean(), this.deleted),
       Object.assign('', this.userId), Object.assign('', this.id), Object.assign('', this.parent),
       Object.assign('', this.icon), Object.assign('', this.quickFilterName),

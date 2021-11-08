@@ -668,6 +668,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
           for (const oncHis of oncHistories) {
             if (oncHis.selected) {
               // TODO: check is it correct ? - shadowed variables `date`
+              // tslint:disable-next-line:no-shadowed-variable
               const date = new Date();
               if (oncHis.tFaxSent == null) {
                 oncHis.tFaxSent = Utils.getFormattedDate(date);
@@ -821,55 +822,66 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  lockParticipant(abstraction: Abstraction): void {
+  lockParticipant(abstractionData: Abstraction): void {
     this.loadingParticipantPage = true;
     const ddpParticipantId = this.participant.participant.ddpParticipantId;
-    this.dsmService.changeMedicalRecordAbstractionStatus(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), ddpParticipantId, 'in_progress', abstraction).subscribe(// need to subscribe, otherwise it will not send!
-      data => {
-        const result = Result.parse(data);
-        if (result.code !== 200) {
-          this.additionalMessage = 'Couldn\'t lock participant';
-        } else {
-          if (result.code === 200 && result.body != null) {
-            const jsonData: any | any[] = JSON.parse(result.body);
-            // TODO: check is it correct ? - shadowed variables `abstraction` (all over the file)
-            const abstraction: Abstraction = Abstraction.parse(jsonData);
-            this.participant[ abstraction.activity ] = abstraction;
-            this.activeTab = abstraction.activity;
-            if (this.participant.abstractionActivities != null) {
-              const activity = this.participant.abstractionActivities
-                .find(abstractActivity => abstractActivity.activity === abstraction.activity);
-              if (activity != null) {
-                const index = this.participant.abstractionActivities.indexOf(activity);
-                if (index !== -1) {
-                  activity.aStatus = abstraction.aStatus;
-                  this.participant.abstractionActivities[ index ] = activity;
+    this.dsmService.changeMedicalRecordAbstractionStatus(
+        localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+        ddpParticipantId,
+        'in_progress',
+        abstractionData
+      )
+      .subscribe(// need to subscribe, otherwise it will not send!
+        data => {
+          const result = Result.parse(data);
+          if (result.code !== 200) {
+            this.additionalMessage = 'Couldn\'t lock participant';
+          } else {
+            if (result.code === 200 && result.body != null) {
+              const jsonData: any | any[] = JSON.parse(result.body);
+              const abstraction: Abstraction = Abstraction.parse(jsonData);
+              this.participant[abstraction.activity] = abstraction;
+              this.activeTab = abstraction.activity;
+              if (this.participant.abstractionActivities != null) {
+                const activity = this.participant.abstractionActivities
+                  .find(abstractActivity => abstractActivity.activity === abstraction.activity);
+                if (activity != null) {
+                  const index = this.participant.abstractionActivities.indexOf(activity);
+                  if (index !== -1) {
+                    activity.aStatus = abstraction.aStatus;
+                    this.participant.abstractionActivities[index] = activity;
+                  }
+                } else {
+                  this.participant.abstractionActivities.push(abstraction);
                 }
               } else {
+                this.participant.abstractionActivities = [];
                 this.participant.abstractionActivities.push(abstraction);
               }
+              this.additionalMessage = null;
             } else {
-              this.participant.abstractionActivities = [];
-              this.participant.abstractionActivities.push(abstraction);
+              this.additionalMessage = 'Error';
             }
-            this.additionalMessage = null;
-          } else {
-            this.additionalMessage = 'Error';
+          }
+          this.loadingParticipantPage = false;
+        },
+        err => {
+          if (err._body === Auth.AUTHENTICATION_ERROR) {
+            this.router.navigate([Statics.HOME_URL]);
           }
         }
-        this.loadingParticipantPage = false;
-      },
-      err => {
-        if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([Statics.HOME_URL]);
-        }
-      }
-    );
+      );
   }
 
-  breakLockParticipant(abstraction: Abstraction): void {
+  breakLockParticipant(abstractionData: Abstraction): void {
     const ddpParticipantId = this.participant.participant.ddpParticipantId;
-    this.dsmService.changeMedicalRecordAbstractionStatus(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), ddpParticipantId, 'clear', abstraction).subscribe(// need to subscribe, otherwise it will not send!
+    this.dsmService.changeMedicalRecordAbstractionStatus(
+        localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+        ddpParticipantId,
+        'clear',
+        abstractionData
+      )
+      .subscribe(// need to subscribe, otherwise it will not send!
       data => {
         const result = Result.parse(data);
         if (result.code !== 200) {
@@ -902,14 +914,20 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
     );
   }
 
-  submitParticipant(abstraction: Abstraction): void {
+  submitParticipant(abstractionData: Abstraction): void {
     const ddpParticipantId = this.participant.participant.ddpParticipantId;
-    this.dsmService.changeMedicalRecordAbstractionStatus(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), ddpParticipantId, 'submit', abstraction).subscribe(// need to subscribe, otherwise it will not send!
+    this.dsmService.changeMedicalRecordAbstractionStatus(
+        localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+        ddpParticipantId,
+        'submit',
+        abstractionData
+      )
+      .subscribe(// need to subscribe, otherwise it will not send!
       data => {
         const result = Result.parse(data);
         if (result.code !== 200 && result.body != null) {
           this.additionalMessage = result.body;
-          abstraction.colorNotFinished = true;
+          abstractionData.colorNotFinished = true;
         } else if (result.code === 200 && result.body != null) {
           const jsonData: any | any[] = JSON.parse(result.body);
           const abstraction: Abstraction = Abstraction.parse(jsonData);
@@ -939,12 +957,17 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
     );
   }
 
-  abstractionFilesUsedChanged(abstraction: Abstraction): void {
+  abstractionFilesUsedChanged(abstractionData: Abstraction): void {
     this.currentPatchField = 'filesUsed';
     this.patchFinished = false;
     const ddpParticipantId = this.participant.participant.ddpParticipantId;
     // tslint:disable-next-line:max-line-length
-    this.dsmService.changeMedicalRecordAbstractionStatus(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), ddpParticipantId, null, abstraction)
+    this.dsmService.changeMedicalRecordAbstractionStatus(
+        localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+        ddpParticipantId,
+        null,
+        abstractionData
+      )
       .subscribe(// need to subscribe, otherwise it will not send!
         data => {
           const result = Result.parse(data);

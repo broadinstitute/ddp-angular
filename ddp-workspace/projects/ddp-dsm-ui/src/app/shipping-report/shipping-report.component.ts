@@ -104,14 +104,16 @@ export class ShippingReportComponent implements OnInit {
   saveReport(downloadData: any[]): void {
     const map: { kitType: string; month: string; ddpName: string; sent: number; received: number }[] = [];
     if (downloadData != null) {
-      for (let i = 0; i < downloadData.length; i++) {
-        if (downloadData[i].summaryKitTypeList != null) {
-          for (let j = 0; j < downloadData[i].summaryKitTypeList.length; j++) {
-            map.push({kitType: downloadData[i].summaryKitTypeList[j].kitType,
-              month: downloadData[i].summaryKitTypeList[j].month,
-              ddpName: downloadData[i].ddpName,
-              sent: downloadData[i].summaryKitTypeList[j].sent,
-              received: downloadData[i].summaryKitTypeList[j].received});
+      for (const dataItem of downloadData) {
+        if (dataItem.summaryKitTypeList != null) {
+          for (const item of dataItem.summaryKitTypeList) {
+            map.push({
+              kitType: item.kitType,
+              month: item.month,
+              ddpName: dataItem.ddpName,
+              sent: item.sent,
+              received: item.received
+            });
           }
         }
       }
