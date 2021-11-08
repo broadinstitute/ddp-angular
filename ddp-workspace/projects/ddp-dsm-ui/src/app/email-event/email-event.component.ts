@@ -39,7 +39,7 @@ export class EmailEventComponent implements OnInit {
               private role: RoleService,
               private route: ActivatedRoute,
               private router: Router,
-              // TODO: check is it correct ? - unused inject compService
+              // TODO: check is it correct ? - unused `compService`
               private compService: ComponentService) {
     if (!auth.authenticated()) {
       auth.logout();

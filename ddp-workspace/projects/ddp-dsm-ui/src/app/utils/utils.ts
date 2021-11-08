@@ -126,8 +126,8 @@ export class Utils {
           if (input.length === output.length) {
             temp.push(input[i] + output[i]);
           } else {
-            for (let j = 0; j < input.length; j++) {
-              temp.push(input[j] + output[i]);
+            for (const element of input) {
+              temp.push(element + output[i]);
             }
           }
         }
@@ -174,7 +174,7 @@ export class Utils {
     return [defaultFields.concat(resultOutputSplitted).join(this.COMMA)];
   }
 
-  public static makeCSVForObjectArray(data: Object, paths: any[], columns: {}, index: number): string[] {
+  public static makeCSVForObjectArray(data: object, paths: any[], columns: {}, index: number): string[] {
     const result: string[] = [];
     if (index > paths.length - 1) {
       return null;
@@ -206,14 +206,14 @@ export class Utils {
     }
   }
 
-  private static getObjectAdditionalValue(o: Object, fieldName: string, column: any): string {
+  private static getObjectAdditionalValue(o: object, fieldName: string, column: any): string {
     if (o[ fieldName ] != null) {
       return o[ fieldName ][ column.participantColumn.name ];
     }
     return '';
   }
 
-  private static makeCSVString(o: Object, columns: any[], data?: any): string {
+  private static makeCSVString(o: object, columns: any[], data?: any): string {
     let str = '';
     let col: Filter;
     if (columns != null) {
@@ -221,6 +221,7 @@ export class Utils {
         for (col of columns) {
           if (col.type === 'ADDITIONALVALUE') {
             const fieldName = 'additionalValues';
+            // TODO: check is it correct ? - `fieldName` is set on the previous line
             if (fieldName !== '') {
               let value = this.getObjectAdditionalValue(o, fieldName, col);
               value = value == null ? '' : value.toString();

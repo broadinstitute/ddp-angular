@@ -1,7 +1,6 @@
 import { QuestionAnswer } from './models/question-answer.model';
 
 export class ActivityData {
-
   constructor(public completedAt: number, public createdAt: number, public lastUpdatedAt: number, public activityCode: string,
                public activityVersion: string, public status: string, public questionsAnswers: Array<QuestionAnswer>) {
     this.completedAt = completedAt;
@@ -16,7 +15,7 @@ export class ActivityData {
   static parse(json): ActivityData {
     const questionAnswers: Array<QuestionAnswer> = [];
     if (json != null) {
-      Object.keys(json.questionsAnswers).forEach(function(key) {
+      Object.keys(json.questionsAnswers).forEach((key: string) => {
         const value: QuestionAnswer = json.questionsAnswers[ key ];
         questionAnswers.push(value);
       });

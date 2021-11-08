@@ -1,3 +1,5 @@
+// noinspection BadExpressionStatementJS
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Participant } from '../participant-list/participant-list.model';
 import { RoleService } from '../services/role.service';
@@ -498,10 +500,9 @@ export class TissueListComponent implements OnInit {
     }
     if (this.hasThisColumnSelected(this.selectedColumns[ parent ], column)) {
       console.log(this.selectedColumns[ parent ]);
-      // TODO: check isi t correct ? - shadowed variables `f`
-      const f = this.selectedColumns[ parent ].find(f => {
-        return f.participantColumn.tableAlias === column.participantColumn.tableAlias
-          && f.participantColumn.name === column.participantColumn.name;
+      const f = this.selectedColumns[ parent ].find(item => {
+        return item.participantColumn.tableAlias === column.participantColumn.tableAlias
+          && item.participantColumn.name === column.participantColumn.name;
       });
       const index = this.selectedColumns[ parent ].indexOf(f);
       console.log(index);
@@ -552,22 +553,18 @@ export class TissueListComponent implements OnInit {
         if (filterText != null) {
           json.push(filterText);
         }
-
-
       }
     }
 
-    const data = {
+    const jsonPatch = JSON.stringify({
       filters: json,
       parent: this.parent,
       quickFilterName: this.currentQuickFilterName,
-    };
-    const jsonPatch = JSON.stringify(data);
+    });
     this.currentFilter = json;
     this.currentView = jsonPatch;
     this.dsmService.filterData(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), jsonPatch, this.parent, null)
       .subscribe(
-        // TODO: check is it correct ? - shadowed variables `data`
         data => {
           this.loading = false;
           window.scrollTo(0, 0);
@@ -701,10 +698,10 @@ export class TissueListComponent implements OnInit {
   }
 
   getAllFilters(applyDefault: boolean): void {
-    this.dsmService.getFiltersForUserForRealm(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe(data => {
+    this.dsmService.getFiltersForUserForRealm(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent)
+      .subscribe(jsonData => {
         this.savedFilters = [];
         this.quickFilters = [];
-        const jsonData = data;
         jsonData.forEach((val) => {
           let view: ViewFilter;
           view = ViewFilter.parseFilter(val, this.allColumns);
@@ -781,7 +778,6 @@ export class TissueListComponent implements OnInit {
       if (result.code === 200) {
         this.getAllFilters(false);
       }
-    }, err => {
     });
   }
 
@@ -962,6 +958,7 @@ export class TissueListComponent implements OnInit {
   }
 
   public setSelectedFilterName(filterName): void {
+    // tslint:disable-next-line:no-unused-expression
     this.selectedFilterName === filterName;
   }
 

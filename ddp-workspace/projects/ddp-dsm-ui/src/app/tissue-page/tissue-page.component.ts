@@ -182,15 +182,14 @@ export class TissuePageComponent implements OnInit {
   }
 
   public doRequest(destructionPolicy): void {
-    const data = {
+    const jsonData = {
       facility: this.oncHistoryDetail.facility,
       policy: destructionPolicy,
       userId: this.role.userID(),
       userMail: this.role.userMail(),
     };
-    this.dsmService.applyDestructionPolicyToAll(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), JSON.stringify(data))
+    this.dsmService.applyDestructionPolicyToAll(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), JSON.stringify(jsonData))
       .subscribe(
-        // TODO: check is it correct ? - shadowed variables `data`
         data => {
           const result = Result.parse(data);
           if (result.code === 200) {

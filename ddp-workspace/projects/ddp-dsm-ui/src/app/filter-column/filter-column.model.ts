@@ -372,6 +372,7 @@ export class Filter {
     }
     const filters: Filter[] = [];
     for (const filter of json.filters) {
+      // TODO: check is it correct ? - shadowed variables f
       const f = this.isParticipantDataCorrespondingFilter(filter, parsedColumns);
       if (f) {
         const newFilter = Filter.createFilterFromJsonFilter(filter, f);
@@ -379,10 +380,9 @@ export class Filter {
         continue;
       }
       if (allColumns[ filter.participantColumn.tableAlias ] != null) {
-        // TODO: check is it correct ? - shadowed variables f
-        const f = allColumns[ filter.participantColumn.tableAlias ].find(f => {
-          return f.participantColumn.tableAlias === filter.participantColumn.tableAlias
-            && f.participantColumn.name === filter.participantColumn.name;
+        const f = allColumns[ filter.participantColumn.tableAlias ].find(item => {
+          return item.participantColumn.tableAlias === filter.participantColumn.tableAlias
+            && item.participantColumn.name === filter.participantColumn.name;
         });
         if (f != null) {
           filter.type = f.type;
@@ -416,8 +416,8 @@ export class Filter {
       } else {
         for (const source of Object.keys(allColumns)) {
           // TODO: check is it correct ? - shadowed variables f
-          const f = allColumns[ source ].find(f => {
-            return f.participantColumn.name === filter.participantColumn.name;
+          const f = allColumns[ source ].find(item => {
+            return item.participantColumn.name === filter.participantColumn.name;
           });
           if (f != null) {
             filter.type = f.type;

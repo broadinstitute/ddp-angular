@@ -14,8 +14,7 @@ export class SessionService {
   }
 
   public setDSMToken(value: string): void {
-    const expirationDate: Date = this.jwtHelper.getTokenExpirationDate(value);
-    this.authExpiration = expirationDate;
+    this.authExpiration = this.jwtHelper.getTokenExpirationDate(value);
     this.isLoggedIn = true;
   }
 

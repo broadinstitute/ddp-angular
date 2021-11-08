@@ -9,6 +9,7 @@ import { Statics } from '../utils/statics';
 @Injectable()
 export class AuthGuard implements CanActivate {
 
+  // TODO: check is it correct ? - unused `route` and `compService`
   constructor(private router: Router, private auth: Auth, private route: ActivatedRoute,
                private compService: ComponentService) {
   }

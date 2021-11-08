@@ -246,8 +246,8 @@ export class ScanComponent implements OnInit {
         && this.scanPairsValue[position].rightValue != null
         && this.scanErrors.length > 0
       ) {
-        for (let i = 0; i < this.scanErrors.length; i++) {
-          if (this.scanPairsValue[position].rightValue === this.scanErrors[i].kit) {
+        for (const scanError of this.scanErrors) {
+          if (this.scanPairsValue[position].rightValue === scanError.kit) {
             return true;
           }
         }
@@ -313,8 +313,8 @@ export class ScanComponent implements OnInit {
     if (this.singleScanValues.length > 0 && this.singleScanValues[position] != null
       && this.singleScanValues[position].kit != null
       && this.scanErrors.length > 0) {
-      for (let i = 0; i < this.scanErrors.length; i++) {
-        if (this.singleScanValues[position].kit === this.scanErrors[i].kit) {
+      for (const scanError of this.scanErrors) {
+        if (this.singleScanValues[position].kit === scanError.kit) {
           return true;
         }
       }

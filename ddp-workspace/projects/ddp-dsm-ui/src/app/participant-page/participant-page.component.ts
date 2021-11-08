@@ -1006,10 +1006,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
   getMedicalRecordName(name: string, ddpInstitutionId: string): string {
     if (this.participant.data != null && this.participant.data.profile != null && this.participant.data.medicalProviders != null) {
       const medicalProvider = this.participant.data.medicalProviders
-        // TODO: check is it correct ? - shadowed variables `medicalProvider`
-        .find(medicalProvider => {
-          const tmpId = medicalProvider.legacyGuid != null && medicalProvider.legacyGuid !== 0 ?
-            medicalProvider.legacyGuid : medicalProvider.guid;
+        .find(medProvider => {
+          const tmpId = medProvider.legacyGuid != null && medProvider.legacyGuid !== 0 ?
+            medProvider.legacyGuid : medProvider.guid;
           return tmpId === ddpInstitutionId;
         });
       if (name != null && name !== '') {
@@ -1169,8 +1168,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
                 if (question != null) {// && question.options != null) {
                   if (question.questionType !== 'BOOLEAN' && question.options != null) {
                     const options: NameValue[] = [];
-                    for (let i = 0; i < question.options.length; i++) {
-                      options.push(new NameValue(question.options[ i ].optionText, question.options[ i ].optionStableId));
+                    for (const option of question.options) {
+                      options.push(new NameValue(option.optionText, option.optionStableId));
                     }
                     return options;
                   } else {
@@ -1244,8 +1243,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
           });
         }
         if (fieldSetting.fieldType === 'RADIO' && fieldSetting.possibleValues != null) {
-          const possibleValues = fieldSetting.possibleValues;
-          const possibleValue = possibleValues.find(v => v.name === fieldSetting.columnName && v.values != null);
+          const possibleValue =  fieldSetting.possibleValues.find(v => v.name === fieldSetting.columnName && v.values != null);
         }
 
         let participantId = this.participant.data.profile[ 'guid' ];

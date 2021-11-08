@@ -289,9 +289,9 @@ export class ShippingComponent implements OnInit {
 
   selectSetting(event): void {
     this.selectedLabel = event;
-    for (let i = 0; i < this.labelSettings.length; i++) {
-      if (this.labelSettings[ i ].name === this.selectedLabel) {
-        this.selectedSetting = this.labelSettings[ i ];
+    for (const setting of this.labelSettings) {
+      if (setting.name === this.selectedLabel) {
+        this.selectedSetting = setting;
         break;
       }
     }
@@ -317,19 +317,24 @@ export class ShippingComponent implements OnInit {
           + 'location=no,status=no,titlebar=no');
 
         popup.window.focus();
-        popup.document.write('<!DOCTYPE html><html lang="en"><head>'
-          + '<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" '
-          + 'media="screen,print">'
-          + '<link rel="stylesheet" href="style.css" media="screen,print">'
-          + '<style type="text/css">'
-          + 'body { margin:0; }'
-          + '</style>'
-          + '</head><body onload="window.print()"><div class="reward-body">'
-          + printContents + '</div></html>');
+        popup.document.write(`
+          <!DOCTYPE html><html lang="en">
+          <head>
+            <title></title>
+            <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" media="screen,print">
+            <link rel="stylesheet" href="style.css" media="screen,print">
+            <style type="text/css">
+              body { margin:0; }
+            </style>
+          </head>
+          <body onload="window.print()">
+            <div class="reward-body">${printContents}</div>
+          </html>
+        `);
         popup.document.close();
 
         // to check if the print window is still open, if it is closed, user should be navigated to scan page
-        const subscription = interval(500).subscribe(n => {
+        const subscription = interval(500).subscribe(_ => {
           if (popup == null || popup.window == null || popup.window.closed) {
             this.closedWindow();
             subscription.unsubscribe();
@@ -352,10 +357,9 @@ export class ShippingComponent implements OnInit {
 
   private setAllCheckboxes(selected: boolean): void {
     this.needsNameLabels = selected && this.kitRequests[0] != null && this.kitRequests[0].nameLabel != null;
-
     this.isPrintButtonDisabled = !selected;
-    for (let i = 0; i < this.kitRequests.length; i++) {
-      this.kitRequests[ i ].isSelected = selected;
+    for (const kitRequest of this.kitRequests) {
+      kitRequest.isSelected = selected;
     }
     if (!selected) {
       this.isPrintButtonDisabled = true;
@@ -376,13 +380,12 @@ export class ShippingComponent implements OnInit {
     // find first selected to enable print button and check for name label
     // start from the beginning more likely that people select kits at the start of the list
     this.isPrintButtonDisabled = true;
-    for (let i = 0; i < this.kitRequests.length; i++) {
-      if (this.kitRequests[ i ].isSelected) {
+    for (const kitRequest of this.kitRequests) {
+      if (kitRequest.isSelected) {
         this.isPrintButtonDisabled = false;
         break;
       }
     }
-
     // find first unselected to set allSelected to false
     // start from the end more likely that at the end of list are kits not selected
     this.allSelected = true;
@@ -429,22 +432,23 @@ export class ShippingComponent implements OnInit {
     this.downloadKitList(fieldNames);
   }
 
-  private downloadKitList(fieldNames: string[]): void {
+  private downloadKitList(fieldNames?: string[]): void {
     const map: { realm: string; participantId: string; shortID: string; mfCode: string; sent: string; received: string }[] = [];
-    for (let i = 0; i < this.kitRequests.length; i++) {
+
+    for (const kitRequest of this.kitRequests) {
       let sentDate: string = null;
-      if (this.kitRequests[ i ].scanDate !== 0) {
-        sentDate = Utils.getDateFormatted(new Date(this.kitRequests[ i ].scanDate), Utils.DATE_STRING_IN_CVS);
+      if (kitRequest.scanDate !== 0) {
+        sentDate = Utils.getDateFormatted(new Date(kitRequest.scanDate), Utils.DATE_STRING_IN_CVS);
       }
       let receivedDate: string = null;
-      if (this.kitRequests[ i ].receiveDate !== 0) {
-        receivedDate = Utils.getDateFormatted(new Date(this.kitRequests[ i ].receiveDate), Utils.DATE_STRING_IN_CVS);
+      if (kitRequest.receiveDate !== 0) {
+        receivedDate = Utils.getDateFormatted(new Date(kitRequest.receiveDate), Utils.DATE_STRING_IN_CVS);
       }
       map.push({
-        realm: this.kitRequests[ i ].realm,
-        participantId: this.kitRequests[ i ].participantId,
-        shortID: this.kitRequests[ i ].getID(),
-        mfCode: this.kitRequests[ i ].kitLabel,
+        realm: kitRequest.realm,
+        participantId: kitRequest.participantId,
+        shortID: kitRequest.getID(),
+        mfCode: kitRequest.kitLabel,
         sent: sentDate,
         received: receivedDate
       });
@@ -599,8 +603,9 @@ export class ShippingComponent implements OnInit {
   sentCheckboxChecked(): void {
     this.isSentButtonDisabled = true;
     this.allSentSelected = true;
-    for (let i = 0; i < this.kitRequests.length; i++) {
-      if (this.kitRequests[ i ].setSent) {
+
+    for (const kitRequest of this.kitRequests) {
+      if (kitRequest.setSent) {
         this.isSentButtonDisabled = false;
       } else {
         this.allSentSelected = false;
@@ -609,8 +614,8 @@ export class ShippingComponent implements OnInit {
   }
 
   private setAllSentCheckboxes(selected: boolean): void {
-    for (let i = 0; i < this.kitRequests.length; i++) {
-      this.kitRequests[ i ].setSent = selected;
+    for (const kitRequest of this.kitRequests) {
+      kitRequest.setSent = selected;
       this.isSentButtonDisabled = !selected;
     }
     if (!selected) {
@@ -620,9 +625,9 @@ export class ShippingComponent implements OnInit {
 
   setKitSent(): void {
     const map: { kit: string } [] = [];
-    for (let i = 0; i < this.kitRequests.length; i++) {
-      if (this.kitRequests[ i ].setSent) {
-        map.push({kit: this.kitRequests[ i ].shippingId});
+    for (const kitRequest of this.kitRequests) {
+      if (kitRequest.setSent) {
+        map.push({kit: kitRequest.shippingId});
       }
     }
     this.dsmService.setKitSentRequest(JSON.stringify(map)).subscribe(

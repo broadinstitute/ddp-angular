@@ -4,9 +4,9 @@ export class DDPInformation {
 
   constructor(
     public ddpName: string, public sentCounters: Counter, public receivedCounters: Counter,
-    public deactivatedCounters: NameValue, public dashboardValues: Object,
-    public dashboardValuesDetailed: Object, public dashboardValuesPeriod: Object,
-    public dashboardValuesPeriodDetailed: Object, public unsentExpressKits: Array<NameValue>,
+    public deactivatedCounters: NameValue, public dashboardValues: object,
+    public dashboardValuesDetailed: object, public dashboardValuesPeriod: object,
+    public dashboardValuesPeriodDetailed: object, public unsentExpressKits: Array<NameValue>,
     public kits: Array<KitDDPSummary>
   ) {
     this.ddpName = ddpName;
@@ -20,9 +20,6 @@ export class DDPInformation {
     this.unsentExpressKits = unsentExpressKits;
     this.kits = kits;
   }
-
-  private salivaSent = 0;
-  private bloodSent = 0;
 
   static parse(json): DDPInformation {
     return new DDPInformation(

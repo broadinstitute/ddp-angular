@@ -140,7 +140,7 @@ export class DashboardComponent implements OnInit {
               this.additionalMessage = null;
             }
           },
-          err => {
+          _ => {
             return null;
           }
         );
@@ -176,7 +176,7 @@ export class DashboardComponent implements OnInit {
             }
             this.loadingDDPData = false;
           },
-          err => {
+          _ => {
             return null;
           }
         );
@@ -302,7 +302,7 @@ export class DashboardComponent implements OnInit {
     this.loadUnsentOverview();
   }
 
-  getActivityKeys(o: Object): string[] {
+  getActivityKeys(o: object): string[] {
     const keys = Object.keys(o)
       .filter(obj => obj.startsWith('activity') && !obj.endsWith('completed') && obj.indexOf('.') === obj.lastIndexOf('.'));
 
@@ -318,7 +318,7 @@ export class DashboardComponent implements OnInit {
     return keys;
   }
 
-  getActivityVersionKeys(o: Object, activity: string): string[] {
+  getActivityVersionKeys(o: object, activity: string): string[] {
     const keys = Object.keys(o)
       .filter(obj => obj.startsWith('activity') && !obj.endsWith('completed') && obj.indexOf('.') !== obj.lastIndexOf('.')
         && obj.indexOf(activity) > -1);
@@ -341,10 +341,10 @@ export class DashboardComponent implements OnInit {
       return obj.split('.') [ 1 ];
     });
     const uniqueIndexes = Array.from(new Set(allFollowUpIndexes));
-    const maxIndex = Math.max.apply(null, uniqueIndexes.map(o => {
+    // return maxIndex
+    return Math.max.apply(null, uniqueIndexes.map(o => {
       return Number(o);
     }));
-    return maxIndex;
   }
 
   getActivityName(dashboardKey: string): string {

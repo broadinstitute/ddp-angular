@@ -5,8 +5,8 @@ import { Computed } from './computed.model';
 import { MedicalProvider } from './medical-providers.model';
 
 export class Data {
-  constructor(public profile: Object, public status: string, public statusTimestamp: number,
-              public dsm: Object, public ddp: string, public medicalProviders: Array<MedicalProvider>,
+  constructor(public profile: object, public status: string, public statusTimestamp: number,
+              public dsm: object, public ddp: string, public medicalProviders: Array<MedicalProvider>,
                public activities: Array<ActivityData>, public address: Address, public invitations: Array<InvitationData>,
               public computed?: Computed
   ) {
