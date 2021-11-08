@@ -1,5 +1,5 @@
 import { Component, Input, AfterViewChecked } from '@angular/core';
-import { LabelSetting } from "../label-settings/label-settings.model";
+import { LabelSetting } from '../label-settings/label-settings.model';
 
 declare var JsBarcode: any;
 
@@ -10,71 +10,67 @@ declare var JsBarcode: any;
 })
 
 export class KitLabelComponent implements AfterViewChecked {
-
   @Input() urlTo: string;
   @Input() shippingId: string;
   @Input() urlReturn: string;
   @Input() labelSetting: LabelSetting;
 
-  constructor() {
-  }
-
-  ngAfterViewChecked() {
+  ngAfterViewChecked(): void {
     JsBarcode('#' + this.shippingId).init();
   }
 
-  public getLabelHeight() {
+  public getLabelHeight(): string {
     if (this.labelSetting != null) {
-      //making it a little smaller than it could be
-      return (this.labelSetting.labelHeight - 0.2) + "in";
+      // making it a little smaller than it could be
+      return (this.labelSetting.labelHeight - 0.2) + 'in';
     }
   }
 
-  public getHeightWithSpaceForBarcode() {
+  public getHeightWithSpaceForBarcode(): string {
     if (this.labelSetting != null) {
-      //making it a little smaller than it could be
-      if (this.getLabelHeight() != this.getLabelWidth()) {
+      // making it a little smaller than it could be
+      if (this.getLabelHeight() !== this.getLabelWidth()) {
         if (this.labelSetting.labelHeight - this.labelSetting.labelWidth <= 1) {
-          return (this.labelSetting.labelHeight - 0.5) + "in";
+          return (this.labelSetting.labelHeight - 0.5) + 'in';
         }
-      }
-      else {
+      } else {
         return this.getLabelHeight();
       }
     }
   }
 
-  public getFullLabelHeight() {
+  public getFullLabelHeight(): string {
     if (this.labelSetting != null) {
-      //making it a little smaller than it could be
-      return this.labelSetting.labelHeight + "in";
+      // making it a little smaller than it could be
+      return this.labelSetting.labelHeight + 'in';
     }
   }
 
-  public getLabelWidth() {
+  public getLabelWidth(): string {
     if (this.labelSetting != null) {
-      //making it a little smaller than it could be
-      return (this.labelSetting.labelWidth - 0.2) + "in";
+      // making it a little smaller than it could be
+      return (this.labelSetting.labelWidth - 0.2) + 'in';
     }
   }
 
-  public getFullLabelWidth() {
+  public getFullLabelWidth(): string {
     if (this.labelSetting != null) {
-      return this.labelSetting.labelWidth + "in";
+      return this.labelSetting.labelWidth + 'in';
     }
   }
 
-  public getLeftMargin() {
+  public getLeftMargin(): string {
     if (this.labelSetting != null) {
-      return this.labelSetting.leftMargin + "in";
+      return this.labelSetting.leftMargin + 'in';
     }
   }
 
-  public getMarginBetweenLeftRight() {
+  public getMarginBetweenLeftRight(): string {
     if (this.labelSetting != null && this.labelSetting.labelOnPage > 1) {
-      var letter = 8.5;
-      var space = letter - this.labelSetting.leftMargin - (this.labelSetting.labelWidth * (this.labelSetting.labelOnPage / 2)) - this.labelSetting.rightMargin;
-      return space + "in";
+      const letter = 8.5;
+      // tslint:disable-next-line:max-line-length
+      const space = letter - this.labelSetting.leftMargin - (this.labelSetting.labelWidth * (this.labelSetting.labelOnPage / 2)) - this.labelSetting.rightMargin;
+      return space + 'in';
     }
   }
 }

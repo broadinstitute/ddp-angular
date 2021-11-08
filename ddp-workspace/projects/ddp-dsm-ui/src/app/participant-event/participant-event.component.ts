@@ -1,13 +1,13 @@
-import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import {Result} from "../utils/result.model";
-import {ComponentService} from "../services/component.service";
-import {Statics} from "../utils/statics";
-import {DSMService} from "../services/dsm.service";
-import {Auth} from "../services/auth.service";
-import {RoleService} from "../services/role.service";
-import {EventType, ParticipantEvent} from "./participant-event.model";
+import { Result } from '../utils/result.model';
+import { ComponentService } from '../services/component.service';
+import { Statics } from '../utils/statics';
+import { DSMService } from '../services/dsm.service';
+import { Auth } from '../services/auth.service';
+import { RoleService } from '../services/role.service';
+import { EventType, ParticipantEvent } from './participant-event.model';
 
 @Component({
   selector: 'app-participant-event',
@@ -15,10 +15,9 @@ import {EventType, ParticipantEvent} from "./participant-event.model";
   styleUrls: ['./participant-event.component.css']
 })
 export class ParticipantEventComponent implements OnInit {
-
   errorMessage: string;
   additionalMessage: string;
-  loading: boolean = false;
+  loading = false;
 
   realm: string;
 
@@ -27,7 +26,7 @@ export class ParticipantEventComponent implements OnInit {
   event: string;
 
   participantId: string = null;
-  allowedToSeeInformation: boolean = false;
+  allowedToSeeInformation = false;
 
   constructor(private dsmService: DSMService, private auth: Auth, private router: Router, private role: RoleService,
               private compService: ComponentService, private route: ActivatedRoute) {
@@ -43,18 +42,17 @@ export class ParticipantEventComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
       this.realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       this.checkRight();
+    } else {
+      this.additionalMessage = 'Please select a realm';
     }
-    else {
-      this.additionalMessage = "Please select a realm";
-    }
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }
 
-  private checkRight() {
+  private checkRight(): void {
     this.additionalMessage = null;
     this.allowedToSeeInformation = false;
     let jsonData: any[];
@@ -69,17 +67,17 @@ export class ParticipantEventComponent implements OnInit {
           }
         });
         if (!this.allowedToSeeInformation) {
-          this.additionalMessage = "You are not allowed to see information of the selected realm at that category";
+          this.additionalMessage = 'You are not allowed to see information of the selected realm at that category';
         }
       },
-      err => {
+      _ => {
         return null;
       }
     );
   }
 
-  getListOfPossibleEvents() {
-    if (this.realm !== "") {
+  getListOfPossibleEvents(): void {
+    if (this.realm !== '') {
       this.errorMessage = null;
       this.additionalMessage = null;
       this.loading = true;
@@ -90,7 +88,7 @@ export class ParticipantEventComponent implements OnInit {
           // console.info(`received: ${JSON.stringify(data, null, 2)}`);
           jsonData = data;
           jsonData.forEach((val) => {
-            let type = EventType.parse(val);
+            const type = EventType.parse(val);
             this.possibleEvents.push(type);
           });
           this.loading = false;
@@ -100,27 +98,26 @@ export class ParticipantEventComponent implements OnInit {
             this.auth.logout();
           }
           this.loading = false;
-          this.errorMessage = "Error - Loading list of event types\nPlease contact your DSM developer";
+          this.errorMessage = 'Error - Loading list of event types\nPlease contact your DSM developer';
         }
       );
     }
   }
 
-  triggerSkippingEvent() {
-    if (this.realm !== "" && this.participantId !== "") {
+  triggerSkippingEvent(): void {
+    if (this.realm !== '' && this.participantId !== '') {
       this.errorMessage = null;
       this.loading = true;
-      var payload = {realm: this.realm, participantId: this.participantId, eventType: this.event, user: this.role.userID()};
+      const payload = {realm: this.realm, participantId: this.participantId, eventType: this.event, user: this.role.userID()};
       // console.log(JSON.stringify(triggerSurveyPayload));
       this.dsmService.skipEvent(JSON.stringify(payload)).subscribe(// need to subscribe, otherwise it will not send!
         data => {
           // console.log(data);
-          let result = Result.parse(data);
+          const result = Result.parse(data);
           if (result.code !== 200) {
             this.errorMessage = result.body;
-          }
-          else {
-            this.errorMessage = "Skipping Email for given participant";
+          } else {
+            this.errorMessage = 'Skipping Email for given participant';
             this.participantId = null;
             this.event = null;
             this.getSkippedParticipantEvents();
@@ -132,17 +129,16 @@ export class ParticipantEventComponent implements OnInit {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.router.navigate([Statics.HOME_URL]);
           }
-          this.errorMessage = "Failed to skip email for given participant";
+          this.errorMessage = 'Failed to skip email for given participant';
           this.loading = false;
         }
       );
-    }
-    else {
-      this.errorMessage = "Please select a realm and a event type and enter the AltPID for the participant";
+    } else {
+      this.errorMessage = 'Please select a realm and a event type and enter the AltPID for the participant';
     }
   }
 
-  getSkippedParticipantEvents() {
+  getSkippedParticipantEvents(): void {
     if (this.realm != null) {
       this.errorMessage = null;
       this.additionalMessage = null;
@@ -153,7 +149,7 @@ export class ParticipantEventComponent implements OnInit {
           this.participantsSkipped = [];
           jsonData = data;
           jsonData.forEach((val) => {
-            let participant = ParticipantEvent.parse(val);
+            const participant = ParticipantEvent.parse(val);
             this.participantsSkipped.push(participant);
           });
           // console.info(`${this.exitedParticipants.length} kit types received: ${JSON.stringify(data, null, 2)}`);
@@ -164,10 +160,9 @@ export class ParticipantEventComponent implements OnInit {
             this.auth.logout();
           }
           this.loading = false;
-          this.errorMessage = "Error - Loading list of skipped participant events\nPlease contact your DSM developer";
+          this.errorMessage = 'Error - Loading list of skipped participant events\nPlease contact your DSM developer';
         }
       );
     }
   }
-
 }

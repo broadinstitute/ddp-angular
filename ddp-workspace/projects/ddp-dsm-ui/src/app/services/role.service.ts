@@ -1,34 +1,33 @@
-import {Injectable} from "@angular/core";
-import {SessionService} from "./session.service";
-import {UserSetting} from "../user-setting/user-setting.model";
+import { Injectable } from '@angular/core';
+import { SessionService } from './session.service';
+import { UserSetting } from '../user-setting/user-setting.model';
 
 @Injectable()
 export class RoleService {
-
-  private _isShipping: boolean = false;
-  private _isMRRequesting: boolean = false;
-  private _isMRView: boolean = false;
-  private _isMailingList: boolean = false;
-  private _isUpload: boolean = false;
-  private _isExitParticipant: boolean = false;
-  private _isDeactivation: boolean = false;
-  private _isViewingEEL: boolean = false;
-  private _isReceiving: boolean = false;
-  private _isExpressKit: boolean = false;
-  private _isTriggeringSurveyCreation: boolean = false;
-  private _isSkipParticipant: boolean = false;
-  private _isDiscardingSamples: boolean = false;
-  private _isSampleListView: boolean = false;
-  private _isDownloadPDF: boolean = false;
-  private _isDownloadNDI: boolean = false;
-  private _noTissueRequest: boolean = false;
-  private _fieldSettings: boolean = false;
-  private _isAbstracter: boolean = false;
-  private _isQC: boolean = false;
-  private _isAbstractionAdmin: boolean = false;
-  private _canEditDrugList: boolean = false;
-  private _isParticipantListView: boolean = false;
-  private _isParticipantEdit: boolean = false;
+  private _isShipping = false;
+  private _isMRRequesting = false;
+  private _isMRView = false;
+  private _isMailingList = false;
+  private _isUpload = false;
+  private _isExitParticipant = false;
+  private _isDeactivation = false;
+  private _isViewingEEL = false;
+  private _isReceiving = false;
+  private _isExpressKit = false;
+  private _isTriggeringSurveyCreation = false;
+  private _isSkipParticipant = false;
+  private _isDiscardingSamples = false;
+  private _isSampleListView = false;
+  private _isDownloadPDF = false;
+  private _isDownloadNDI = false;
+  private _noTissueRequest = false;
+  private _fieldSettings = false;
+  private _isAbstracter = false;
+  private _isQC = false;
+  private _isAbstractionAdmin = false;
+  private _canEditDrugList = false;
+  private _isParticipantListView = false;
+  private _isParticipantEdit = false;
 
   private _userId: string;
   private _user: string;
@@ -36,194 +35,170 @@ export class RoleService {
   private _userSetting: UserSetting;
 
   constructor(private sessionService: SessionService) {
-    let token: string = this.sessionService.getDSMToken();
+    const token: string = this.sessionService.getDSMToken();
     this.setRoles(token);
   }
 
-  public setRoles(token: string) {
+  public setRoles(token: string): void {
     if (token != null) {
-      var obj: any = this.sessionService.getDSMClaims(token);
-      let accessRoles: string = obj.USER_ACCESS_ROLE;
+      const obj: any = this.sessionService.getDSMClaims(token);
+      const accessRoles: string = obj.USER_ACCESS_ROLE;
       if (accessRoles != null) {
         console.log(accessRoles);
-        let roles: string[] = JSON.parse(accessRoles);
-        for (let entry of roles) {
+        const roles: string[] = JSON.parse(accessRoles);
+        for (const entry of roles) {
           // only special kit_shipping_xxx rights should get added here, not the overall only kit_shipping_view
-          if (entry.startsWith("kit_shipping") && entry !== "kit_shipping_view") {
+          if (entry.startsWith('kit_shipping') && entry !== 'kit_shipping_view') {
             this._isShipping = true;
-          }
-          else if (entry === "mr_request") {
+          } else if (entry === 'mr_request') {
             this._isMRRequesting = true;
-          }
-          else if (entry === "mr_view") {
+          } else if (entry === 'mr_view') {
             this._isMRView = true;
-          }
-          else if (entry === "mailingList_view") {
+          } else if (entry === 'mailingList_view') {
             this._isMailingList = true;
-          }
-          else if (entry === "kit_upload") {
+          } else if (entry === 'kit_upload') {
             this._isUpload = true;
-          }
-          else if (entry === "participant_exit") {
+          } else if (entry === 'participant_exit') {
             this._isExitParticipant = true;
-          }
-          else if (entry === "kit_deactivation") {
+          } else if (entry === 'kit_deactivation') {
             this._isDeactivation = true;
-          }
-          else if (entry === "eel_view") {
+          } else if (entry === 'eel_view') {
             this._isViewingEEL = true;
-          }
-          else if (entry === "kit_receiving") {
+          } else if (entry === 'kit_receiving') {
             this._isReceiving = true;
-          }
-          else if (entry === "kit_express") {
+          } else if (entry === 'kit_express') {
             this._isExpressKit = true;
-          }
-          else if (entry === "survey_creation") {
+          } else if (entry === 'survey_creation') {
             this._isTriggeringSurveyCreation = true;
-          }
-          else if (entry === "participant_event") {
+          } else if (entry === 'participant_event') {
             this._isSkipParticipant = true;
-          }
-          else if (entry === "discard_sample") {
+          } else if (entry === 'discard_sample') {
             this._isDiscardingSamples = true;
-          }
-          else if (entry === "kit_shipping_view") {
+          } else if (entry === 'kit_shipping_view') {
             this._isSampleListView = true;
-          }
-          else if (entry === "pdf_download") {
+          } else if (entry === 'pdf_download') {
             this._isDownloadPDF = true;
-          }
-          else if (entry === "ndi_download") {
+          } else if (entry === 'ndi_download') {
             this._isDownloadNDI = true;
-          }
-          else if (entry === "mr_no_request_tissue") {
+          } else if (entry === 'mr_no_request_tissue') {
             this._noTissueRequest = true;
-          }
-          else if (entry === "field_settings") {
+          } else if (entry === 'field_settings') {
             this._fieldSettings = true;
-          }
-          else if (entry === "mr_abstracter") {
+          } else if (entry === 'mr_abstracter') {
             this._isAbstracter = true;
-          }
-          else if (entry === "mr_qc") {
+          } else if (entry === 'mr_qc') {
             this._isQC = true;
-          }
-          else if (entry === "mr_abstraction_admin") {
+          } else if (entry === 'mr_abstraction_admin') {
             this._isAbstractionAdmin = true;
-          }
-          else if (entry === 'drug_list_edit') {
+          } else if (entry === 'drug_list_edit') {
             this._canEditDrugList = true;
-          }
-          else if (entry === 'pt_list_view') {
+          } else if (entry === 'pt_list_view') {
             this._isParticipantListView = true;
-          }
-          else if (entry === 'participant_edit') {
+          } else if (entry === 'participant_edit') {
             this._isParticipantEdit = true;
           }
         }
       }
-      let userSettings: any = obj.USER_SETTINGS;
-      if (userSettings != null && userSettings !== "null") {
+      const userSettings: any = obj.USER_SETTINGS;
+      if (userSettings != null && userSettings !== 'null') {
         this._userSetting = UserSetting.parse(JSON.parse(userSettings));
       }
       this._userId = obj.USER_ID;
       this._user = obj.USER_NAME;
       this._userEmail = obj.USER_MAIL;
-      // console.log(obj);
     }
   }
 
-  public userID() {
+  public userID(): string {
     return this._userId;
   }
 
-  public userMail() {
+  public userMail(): string {
     return this._userEmail;
   }
 
-  public getUserName() {
+  public getUserName(): string {
     return this._user;
   }
 
-  public allowedToHandleSamples() {
+  public allowedToHandleSamples(): boolean {
     return this._isShipping;
   }
 
-  public allowedToViewMedicalRecords() {
+  public allowedToViewMedicalRecords(): boolean {
     return this._isMRView;
   }
 
-  public allowedToViewMailingList() {
+  public allowedToViewMailingList(): boolean {
     return this._isMailingList;
   }
 
-  public allowedToUploadKits() {
+  public allowedToUploadKits(): boolean {
     return this._isUpload;
   }
 
-  public allowedToExitParticipant() {
+  public allowedToExitParticipant(): boolean {
     return this._isExitParticipant;
   }
 
-  public allowedToDeactivateKits() {
+  public allowedToDeactivateKits(): boolean {
     return this._isDeactivation;
   }
 
-  public allowedToViewEELData() {
+  public allowedToViewEELData(): boolean {
     return this._isViewingEEL;
   }
 
-  public allowedToViewReceivingPage() {
+  public allowedToViewReceivingPage(): boolean {
     return this._isReceiving;
   }
 
-  public allowedToCreateExpressLabels() {
+  public allowedToCreateExpressLabels(): boolean {
     return this._isExpressKit;
   }
 
-  public allowedToCreateSurveys() {
+  public allowedToCreateSurveys(): boolean {
     return this._isTriggeringSurveyCreation;
   }
 
-  public allowedToSkipParticipantEvents() {
+  public allowedToSkipParticipantEvents(): boolean {
     return this._isSkipParticipant;
   }
 
-  public allowedToDiscardSamples() {
+  public allowedToDiscardSamples(): boolean {
     return this._isDiscardingSamples;
   }
 
-  public allowToViewSampleLists() {
+  public allowToViewSampleLists(): boolean {
     return this._isSampleListView;
   }
 
-  public allowedToDownloadPDF() {
+  public allowedToDownloadPDF(): boolean {
     return this._isDownloadPDF;
   }
 
-  public allowedToDownloadNDI() {
+  public allowedToDownloadNDI(): boolean {
     return this._isDownloadNDI;
 
   }
 
-  public prohibitedToRequestTissue() {
+  public prohibitedToRequestTissue(): boolean {
     return this._noTissueRequest;
   }
 
-  public allowedToChangeFieldSettings() {
+  public allowedToChangeFieldSettings(): boolean {
     return this._fieldSettings;
   }
 
-  public isAbstracter() {
+  public isAbstracter(): boolean {
     return this._isAbstracter;
   }
 
-  public isQC() {
+  public isQC(): boolean {
     return this._isQC;
   }
 
-  public isAbstractionAdmin() {
+  public isAbstractionAdmin(): boolean {
     return this._isAbstractionAdmin;
   }
 
@@ -231,19 +206,19 @@ export class RoleService {
     return this._userSetting;
   }
 
-  public setUserSetting(userSettings: UserSetting) {
+  public setUserSetting(userSettings: UserSetting): void {
     this._userSetting = userSettings;
   }
 
-  public allowedToEditDrugList() {
+  public allowedToEditDrugList(): boolean {
     return this._canEditDrugList;
   }
 
-  public allowedParticipantListView() {
+  public allowedParticipantListView(): boolean {
     return this._isParticipantListView;
   }
 
-  public allowedToEditParticipant() {
+  public allowedToEditParticipant(): boolean {
     return this._isParticipantEdit;
   }
 }

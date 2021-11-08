@@ -1,16 +1,16 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit, TemplateRef} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {DomSanitizer} from "@angular/platform-browser";
-import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
-import {Utils} from "../utils/utils";
-import {ComponentService} from "../services/component.service";
-import {Auth} from "../services/auth.service";
-import {DSMService} from "../services/dsm.service";
-import {RoleService} from "../services/role.service";
-import {DiscardSample} from "../discard-sample/discard-sample.model";
-import {Result} from "../utils/result.model";
-import {Subscription} from "rxjs";
+import { Utils } from '../utils/utils';
+import { ComponentService } from '../services/component.service';
+import { Auth } from '../services/auth.service';
+import { DSMService } from '../services/dsm.service';
+import { RoleService } from '../services/role.service';
+import { DiscardSample } from '../discard-sample/discard-sample.model';
+import { Result } from '../utils/result.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-discard-sample-page',
@@ -18,7 +18,7 @@ import {Subscription} from "rxjs";
   styleUrls: ['./discard-sample-page.component.css']
 })
 export class DiscardSamplePageComponent implements OnInit, OnDestroy {
-
+  // tslint:disable:no-console
   errorMessage: string;
   additionalMessage: string;
 
@@ -29,12 +29,12 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
   fileBSPScreenshot: File = null;
   fileSampleImage: File = null;
   imageToShow: any;
-  savingNote: boolean = false;
+  savingNote = false;
   fileToDelete: string;
 
   public modalRef: BsModalRef;
 
-  waiting: boolean = false;
+  waiting = false;
   subscription1: Subscription;
   subscription2: Subscription;
 
@@ -48,25 +48,24 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
       this.realm = params[DSMService.REALM] || null;
       if (this.realm != null) {
         //        this.compService.realmMenu = this.realm;
-        this.router.navigate(["/discardList"]);
+        this.router.navigate(['/discardList']);
       }
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (this.compService.discardSample != null) {
       this.sample = this.compService.discardSample;
     }
     if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
       this.realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    } else {
+      this.errorMessage = 'Error - Information is missing';
     }
-    else {
-      this.errorMessage = "Error - Information is missing";
-    }
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.subscription1 != null) {
       this.subscription1.unsubscribe();
     }
@@ -77,46 +76,45 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
 
   public backToDiscardSamples(): boolean {
     this.compService.discardSample = null;
-    this.router.navigate(["/discardList"]);
+    this.router.navigate(['/discardList']);
     return false;
   }
 
-  discard() {
+  discard(): void {
     if (this.realm != null) {
       this.errorMessage = null;
       this.additionalMessage = null;
-      let payload = {
-        'kitRequestId': this.sample.kitRequestId,
-        'kitDiscardId': this.sample.kitDiscardId,
-        'discardDate': this.sample.discardDate
+      const payload = {
+        kitRequestId: this.sample.kitRequestId,
+        kitDiscardId: this.sample.kitDiscardId,
+        discardDate: this.sample.discardDate
       };
       this.dsmService.setKitDiscarded(this.realm, JSON.stringify(payload)).subscribe(
-        data => {
+        _ => {
           // console.info(`received: ${JSON.stringify(data, null, 2)}`);
-          this.router.navigate(["/discardList"]);
+          this.router.navigate(['/discardList']);
         },
         err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
-          this.errorMessage = "Error - Loading list of samples of exited participants\nPlease contact your DSM developer";
+          this.errorMessage = 'Error - Loading list of samples of exited participants\nPlease contact your DSM developer';
         }
       );
     }
   }
 
-  uploadFile(pathName : string, file: File) {
+  uploadFile(pathName: string, file: File): void {
     this.waiting = true;
     this.dsmService.uploadFile(this.realm, this.sample.kitDiscardId, pathName, file).subscribe(
       data => {
         console.info(`received: ${JSON.stringify(data, null, 2)}`);
-        let result = Result.parse(data);
-        if (result.code == 200 && result.body != null) {
+        const result = Result.parse(data);
+        if (result.code === 200 && result.body != null) {
           this.sample[pathName] = result.body;
-          this.additionalMessage = "File uploaded"
-        }
-        else {
-          this.additionalMessage = "Failed to upload file"
+          this.additionalMessage = 'File uploaded';
+        } else {
+          this.additionalMessage = 'Failed to upload file';
         }
         this.waiting = false;
       },
@@ -124,13 +122,13 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
-        this.errorMessage = "Error - Uploading file\nPlease contact your DSM developer";
+        this.errorMessage = 'Error - Uploading file\nPlease contact your DSM developer';
         this.waiting = false;
       }
     );
   }
 
-  saveNote() {
+  saveNote(): void {
     if (this.realm != null && this.sample.note != null) {
       this.errorMessage = null;
       this.additionalMessage = null;
@@ -144,33 +142,32 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
-          this.errorMessage = "Error - Loading list of samples of exited participants\nPlease contact your DSM developer";
+          this.errorMessage = 'Error - Loading list of samples of exited participants\nPlease contact your DSM developer';
         }
       );
     }
   }
 
-  deleteFile(path: string, template: TemplateRef<any>) {
+  deleteFile(path: string, template: TemplateRef<any>): void {
     this.fileToDelete = path;
     this.openModal(template);
   }
 
-  deleteFileNow() {
+  deleteFileNow(): void {
     if (this.fileToDelete != null) {
       this.waiting = true;
       this.dsmService.deleteFile(this.realm, this.sample.kitDiscardId, this.fileToDelete, this.sample[this.fileToDelete]).subscribe(
         data => {
           console.info(`received: ${JSON.stringify(data, null, 2)}`);
-          let result = Result.parse(data);
-          if (result.code == 200) {
+          const result = Result.parse(data);
+          if (result.code === 200) {
             this.sample[this.fileToDelete] = null;
             this.fileToDelete = null;
-            this.additionalMessage = "File deleted";
+            this.additionalMessage = 'File deleted';
             this.errorMessage = null;
-          }
-          else {
+          } else {
             this.additionalMessage = null;
-            this.errorMessage = "Failed to delete file";
+            this.errorMessage = 'Failed to delete file';
           }
           this.modalRef.hide();
           this.waiting = false;
@@ -181,24 +178,24 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
           }
           this.modalRef.hide();
           this.additionalMessage = null;
-          this.errorMessage = "Error - Uploading file\nPlease contact your DSM developer";
+          this.errorMessage = 'Error - Uploading file\nPlease contact your DSM developer';
           this.waiting = false;
         }
       );
     }
   }
 
-  fileBSPSelected(file: File) {
+  fileBSPSelected(file: File): void {
     this.fileBSPScreenshot = file;
     if (this.fileBSPScreenshot != null) {
-      this.uploadFile("pathBSPScreenshot", this.fileBSPScreenshot);
+      this.uploadFile('pathBSPScreenshot', this.fileBSPScreenshot);
     }
   }
 
-  fileImageSelected(file: File) {
+  fileImageSelected(file: File): void {
     this.fileSampleImage = file;
     if (this.fileSampleImage != null) {
-      this.uploadFile("pathSampleImage", this.fileSampleImage);
+      this.uploadFile('pathSampleImage', this.fileSampleImage);
     }
   }
 
@@ -206,83 +203,80 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
     return this.role;
   }
 
-  discardDate(date: string) {
+  discardDate(date: string): void {
     this.sample.discardDate = date;
   }
 
-  show(path: string, template: TemplateRef<any>) {
-    let payload = {
-      'kitRequestId': this.sample.kitRequestId,
-      'kitDiscardId': this.sample.kitDiscardId,
-      'path': path
+  show(path: string, template: TemplateRef<any>): void {
+    const payload = {
+      kitRequestId: this.sample.kitRequestId,
+      kitDiscardId: this.sample.kitDiscardId,
+      path
     };
     // console.info("here" + path);
     this.dsmService.showUpload(this.realm, JSON.stringify(payload)).subscribe(
       data => {
         // console.info("received something back " + data);
-        var blob = new Blob([data]);
+        const blob = new Blob([data]);
         this.imageToShow = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(blob));
         this.openModal(template);
       },
       err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          console.info("received error back");
+          console.info('received error back');
           this.auth.logout();
         }
-        this.errorMessage = "Error - Loading list of samples of exited participants\nPlease contact your DSM developer";
+        this.errorMessage = 'Error - Loading list of samples of exited participants\nPlease contact your DSM developer';
       }
     );
   }
 
-  public openModal(template: TemplateRef<any>) {
+  public openModal(template: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(template);
   }
 
-  confirm() {
+  confirm(): void {
     this.auth.lockForDiscard.show();
 
     this.subscription1 = this.auth.confirmKitDiscard.subscribe(
       data => {
         // console.log(data);
-        this.confirmToken(data)
+        this.confirmToken(data);
       }
     );
   }
 
-  confirmToken(token: string) {
+  confirmToken(token: string): void {
     this.waiting = true;
-    let payload = {
-      'kitRequestId': this.sample.kitRequestId,
-      'kitDiscardId': this.sample.kitDiscardId,
-      'token': token,
+    const payload = {
+      kitRequestId: this.sample.kitRequestId,
+      kitDiscardId: this.sample.kitDiscardId,
+      token
     };
 
     this.subscription2 = this.dsmService.confirm(this.realm, JSON.stringify(payload)).subscribe(
       data => {
         console.info(`received: ${JSON.stringify(data, null, 2)}`);
-        let result = Result.parse(data);
-        if (result.code == 200 && result.body != null) {
+        const result = Result.parse(data);
+        if (result.code === 200 && result.body != null) {
           this.sample.userConfirm = result.body;
-          this.additionalMessage = "Confirmed";
-        }
-        else if (result.code == 500 && result.body != null) {
-          if (result.body === "DIFFERENT_USER") {
-            this.additionalMessage = "Someone else needs to confirm";
+          this.additionalMessage = 'Confirmed';
+        } else if (result.code === 500 && result.body != null) {
+          if (result.body === 'DIFFERENT_USER') {
+            this.additionalMessage = 'Someone else needs to confirm';
+          } else if (result.body === 'USER_NO_RIGHT') {
+            this.additionalMessage = 'User needs to have the right to see Samples menu or is allowed to discard';
           }
-          else if (result.body === "USER_NO_RIGHT") {
-            this.additionalMessage = "User needs to have the right to see Samples menu or is allowed to discard";
-          }
-        }
-        else {
+        } else {
           this.additionalMessage = null;
-          this.errorMessage = "Error - Confirming discard sample\nPlease contact your DSM developer";
+          this.errorMessage = 'Error - Confirming discard sample\nPlease contact your DSM developer';
         }
         this.waiting = false;
       },
-      err => {
+      _ => {
         this.waiting = false;
         this.additionalMessage = null;
-        this.errorMessage = "Error - Confirming discard sample\nPlease contact your DSM developer";
+        this.errorMessage = 'Error - Confirming discard sample\nPlease contact your DSM developer';
       }
     );
   }

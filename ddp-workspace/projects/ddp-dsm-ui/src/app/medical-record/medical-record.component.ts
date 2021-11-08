@@ -113,7 +113,7 @@ export class MedicalRecordComponent implements OnInit {
   followUpValueChanged( value: string, parameterName: string, i?: number ) {
     let v = value;
     this.medicalRecord.followUps[ i ][ parameterName ] = v;
-    let temp: FollowUp[] = new Array();
+    let temp: FollowUp[] = [];
     for (let j = 0; j < this.medicalRecord.followUps.length; j++) {
       if (!this.medicalRecord.followUps[ j ].isEmpty()) {
         temp.push( this.medicalRecord.followUps[ j ] );

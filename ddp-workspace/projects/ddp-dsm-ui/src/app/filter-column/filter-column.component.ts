@@ -1,26 +1,22 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {MatRadioChange} from "@angular/material/radio";
-import {Filter} from "./filter-column.model";
+import { Component, Input, OnInit } from '@angular/core';
+import { MatRadioChange } from '@angular/material/radio';
+import { Filter } from './filter-column.model';
 
-@Component( {
-  selector: "app-filter-column",
-  templateUrl: "./filter-column.component.html",
-  styleUrls: [ "./filter-column.component.css" ]
-} )
+@Component({
+  selector: 'app-filter-column',
+  templateUrl: './filter-column.component.html',
+  styleUrls: [ './filter-column.component.css' ]
+})
 export class FilterColumnComponent implements OnInit {
-
   @Input() dataFilter: Filter;
-  @Input() editable: boolean = true;
+  @Input() editable = true;
 
-  showOptions: boolean = false;
+  showOptions = false;
   selected: number;
 
-  constructor() {
-  }
-
-  ngOnInit() {
+  ngOnInit(): void {
     if (this.dataFilter.singleOption) {
-      for (let [ key, value ] of Object.entries( this.dataFilter.selectedOptions )) {
+      for (const [ key, value ] of Object.entries(this.dataFilter.selectedOptions)) {
         if (value) {
           this.selected = Number(key);
           break;
@@ -29,44 +25,41 @@ export class FilterColumnComponent implements OnInit {
     }
   }
 
-  dateChange( value: any, number: number ) {
+  dateChange(value: any, num: number): void {
     let v;
-    if (typeof value === "string") {
-      this.dataFilter[ "value" + number ] = value;
-    }
-    else {
-      if (value.srcElement != null && typeof value.srcElement.value === "string") {
+    if (typeof value === 'string') {
+      this.dataFilter[ 'value' + num ] = value;
+    } else {
+      if (value.srcElement != null && typeof value.srcElement.value === 'string') {
         v = value.srcElement.value;
-        this.dataFilter[ "value" + number ] = v;
+        this.dataFilter[ 'value' + num ] = v;
       }
     }
   }
 
-  changeValue( value, dataFilter: Filter ) {
+  changeValue(value, dataFilter: Filter): void {
     if (value.checked) {
       dataFilter.value1 = true;
       dataFilter.value2 = false;
-    }
-    else {
+    } else {
       dataFilter.value1 = false;
     }
   }
 
-  changeValue2( value, dataFilter: Filter ) {
+  changeValue2(value, dataFilter: Filter): void {
     if (value.checked) {
       dataFilter.value1 = false;
       dataFilter.value2 = true;
-    }
-    else {
+    } else {
       dataFilter.value2 = false;
     }
   }
 
-  hasSelectedOption( dataFilter: Filter ) {
+  hasSelectedOption(dataFilter: Filter): boolean {
     if (dataFilter.type !== Filter.OPTION_TYPE) {
       return false;
     }
-    for (let o of dataFilter.selectedOptions) {
+    for (const o of dataFilter.selectedOptions) {
       if (o) {
         return true;
       }
@@ -74,19 +67,19 @@ export class FilterColumnComponent implements OnInit {
     return false;
   }
 
-  radioChange( event: MatRadioChange ) {
-    //deselect all values
-    for (let i in this.dataFilter.selectedOptions) {
+  radioChange(event: MatRadioChange): void {
+    // deselect all values
+    for (const i in this.dataFilter.selectedOptions) {
       if (this.dataFilter.selectedOptions[ i ]) {
         this.dataFilter.selectedOptions[ i ] = false;
       }
     }
 
-    //set value to selected
+    // set value to selected
     this.dataFilter.selectedOptions[ event.value ] = true;
   }
 
   isDynamicField(dataFilter: Filter): boolean {
-    return dataFilter && dataFilter.participantColumn && (dataFilter.participantColumn.tableAlias == 'participantData');
+    return dataFilter?.participantColumn?.tableAlias === 'participantData';
   }
 }

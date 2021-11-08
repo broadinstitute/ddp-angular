@@ -1934,8 +1934,8 @@ export class ParticipantListComponent implements OnInit {
               }
 
             } else if (filterText[ "type" ] === "OPTIONS") {
-              let results: Participant[] = new Array();
-              let temp: Participant[] = new Array();
+              let results: Participant[] = [];
+              let temp: Participant[] = [];
               for (let option of filterText[ "selectedOptions" ]) {// status
                 temp = this.copyParticipantList.filter( participant =>
                   participant.data != null &&

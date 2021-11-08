@@ -1,15 +1,10 @@
-import {Utils} from "../utils/utils";
+import { Utils } from '../utils/utils';
 
 export class UserSetting {
-
-  private defaultRowsOnPage: number = 10;
-  private defaultRowsSet0: number = 10;
-  private defaultRowsSet1: number = 25;
-  private defaultRowsSet2: number = 50;
-  private defaultDateFormat: string = Utils.DATE_STRING_IN_CVS;
-
   constructor(public rowsOnPage: number, public rowSet0: number, public rowSet1: number, public rowSet2: number,
-              public favViews: any, public dateFormat: string, public defaultTissueFilter: string, public defaultParticipantFilter: string){
+              public favViews: any, public dateFormat: string, public defaultTissueFilter: string,
+              public defaultParticipantFilter: string
+  ) {
     this.setToDefaultValues();
 
     // if value is not 0 fill with actual value from user settings table
@@ -32,8 +27,19 @@ export class UserSetting {
     this.defaultTissueFilter = defaultTissueFilter;
   }
 
+  private defaultRowsOnPage = 10;
+  private defaultRowsSet0 = 10;
+  private defaultRowsSet1 = 25;
+  private defaultRowsSet2 = 50;
+  private defaultDateFormat: string = Utils.DATE_STRING_IN_CVS;
 
-  private setToDefaultValues() {
+  static parse(json): UserSetting {
+    return new UserSetting(json.rowsOnPage, json.rowSet0, json.rowSet1, json.rowSet2,
+      json.favViews, json._dateFormat, json.defaultTissueFilter, json.defaultParticipantFilter);
+  }
+
+
+  private setToDefaultValues(): void {
     this.rowsOnPage = this.defaultRowsOnPage;
     this.rowSet0 = this.defaultRowsSet0;
     this.rowSet1 = this.defaultRowsSet1;
@@ -57,13 +63,7 @@ export class UserSetting {
     return this.rowSet2;
   }
 
-
   public getDateFormat(): string {
     return this.dateFormat;
-  }
-
-  static parse(json): UserSetting {
-    return new UserSetting(json.rowsOnPage, json.rowSet0, json.rowSet1, json.rowSet2,
-      json.favViews, json._dateFormat, json.defaultTissueFilter, json.defaultParticipantFilter);
   }
 }

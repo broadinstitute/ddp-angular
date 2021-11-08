@@ -1,11 +1,11 @@
-import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ComponentService} from "../services/component.service";
-import {DSMService} from "../services/dsm.service";
-import {Auth} from "../services/auth.service";
-import {RoleService} from "../services/role.service";
-import {Statics} from "../utils/statics";
-import {DiscardSample} from "./discard-sample.model";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ComponentService } from '../services/component.service';
+import { DSMService } from '../services/dsm.service';
+import { Auth } from '../services/auth.service';
+import { RoleService } from '../services/role.service';
+import { Statics } from '../utils/statics';
+import { DiscardSample } from './discard-sample.model';
 
 @Component({
   selector: 'app-discard-sample',
@@ -13,13 +13,12 @@ import {DiscardSample} from "./discard-sample.model";
   styleUrls: ['./discard-sample.component.css']
 })
 export class DiscardSampleComponent implements OnInit {
-
   errorMessage: string;
   additionalMessage: string;
-  loading: boolean = false;
+  loading = false;
 
   realm: string;
-  allowedToSeeInformation: boolean = false;
+  allowedToSeeInformation = false;
 
   samples: Array<DiscardSample> = [];
 
@@ -37,7 +36,7 @@ export class DiscardSampleComponent implements OnInit {
     });
   }
 
-  private checkRight() {
+  private checkRight(): void {
     this.allowedToSeeInformation = false;
     this.additionalMessage = null;
     this.samples = [];
@@ -52,7 +51,7 @@ export class DiscardSampleComponent implements OnInit {
           }
         });
         if (!this.allowedToSeeInformation) {
-          this.additionalMessage = "You are not allowed to see information of the selected realm at that category";
+          this.additionalMessage = 'You are not allowed to see information of the selected realm at that category';
         }
       },
       err => {
@@ -61,25 +60,24 @@ export class DiscardSampleComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
       this.realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       this.checkRight();
+    } else {
+      this.additionalMessage = 'Please select a realm';
     }
-    else {
-      this.additionalMessage = "Please select a realm";
-    }
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }
 
-  openSample(sample: DiscardSample) {
-    if (sample != null && sample.receivedDate != 0 && sample.action !== "hold") {
+  openSample(sample: DiscardSample): void {
+    if (sample != null && sample.receivedDate !== 0 && sample.action !== 'hold') {
       this.compService.discardSample = sample;
-      this.router.navigate(["/discardSample"]);
+      this.router.navigate(['/discardSample']);
     }
   }
 
-  private getSamples() {
+  private getSamples(): void {
     if (this.realm != null) {
       this.errorMessage = null;
       this.additionalMessage = null;
@@ -91,7 +89,7 @@ export class DiscardSampleComponent implements OnInit {
           // console.info(`received: ${JSON.stringify(data, null, 2)}`);
           jsonData = data;
           jsonData.forEach((val) => {
-            let sample = DiscardSample.parse(val);
+            const sample = DiscardSample.parse(val);
             this.samples.push(sample);
           });
           this.loading = false;
@@ -101,7 +99,7 @@ export class DiscardSampleComponent implements OnInit {
             this.auth.logout();
           }
           this.loading = false;
-          this.errorMessage = "Error - Loading list of samples of exited participants\nPlease contact your DSM developer";
+          this.errorMessage = 'Error - Loading list of samples of exited participants\nPlease contact your DSM developer';
         }
       );
     }
@@ -111,18 +109,19 @@ export class DiscardSampleComponent implements OnInit {
     return this.role;
   }
 
-  triggerAction(index: number) {
+  triggerAction(index: number): void {
     if (this.realm != null) {
       this.errorMessage = null;
       this.additionalMessage = null;
       this.loading = true;
-      let payload = {
-        'kitRequestId': this.samples[index].kitRequestId,
-        'kitDiscardId': this.samples[index].kitDiscardId,
-        'action': this.samples[index].action
+      const payload = {
+        kitRequestId: this.samples[index].kitRequestId,
+        kitDiscardId: this.samples[index].kitDiscardId,
+        action: this.samples[index].action
       };
       this.dsmService.setKitDiscardAction(this.realm, JSON.stringify(payload)).subscribe(
         data => {
+          // tslint:disable-next-line:no-console
           console.info(`received: ${JSON.stringify(data, null, 2)}`);
           this.getSamples();
         },
@@ -131,7 +130,7 @@ export class DiscardSampleComponent implements OnInit {
             this.auth.logout();
           }
           this.loading = false;
-          this.errorMessage = "Error - Loading list of samples of exited participants\nPlease contact your DSM developer";
+          this.errorMessage = 'Error - Loading list of samples of exited participants\nPlease contact your DSM developer';
         }
       );
     }

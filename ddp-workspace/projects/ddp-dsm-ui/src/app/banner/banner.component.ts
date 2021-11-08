@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 declare var DDP_ENV: any;
 
@@ -7,14 +7,7 @@ declare var DDP_ENV: any;
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.css']
 })
-export class BannerComponent implements OnInit {
-
+export class BannerComponent {
   production: boolean = DDP_ENV.production;
   environment: string = DDP_ENV.environment;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }

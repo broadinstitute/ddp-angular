@@ -1,6 +1,5 @@
 export class MedicalRecordLog {
-
-  static DATA_REVIEW: string = "DATA_REVIEW";
+  static DATA_REVIEW = 'DATA_REVIEW';
 
   constructor(public medicalRecordLogId: string, public date: string, public comments: string, public type: string) {
     this.medicalRecordLogId = medicalRecordLogId;

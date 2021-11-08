@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Utils } from "../utils/utils";
-import { Auth } from "../services/auth.service";
-import { DSMService } from "../services/dsm.service";
-import { ShippingReport } from "./shipping-report.model";
-import {Result} from "../utils/result.model";
-import {Statics} from "../utils/statics";
+import { Utils } from '../utils/utils';
+import { Auth } from '../services/auth.service';
+import { DSMService } from '../services/dsm.service';
+import { ShippingReport } from './shipping-report.model';
+import { Result } from '../utils/result.model';
+import { Statics } from '../utils/statics';
 
 @Component({
   selector: 'app-shipping-report',
@@ -12,9 +12,8 @@ import {Statics} from "../utils/statics";
   styleUrls: ['./shipping-report.component.css']
 })
 export class ShippingReportComponent implements OnInit {
-
   errorMessage: string;
-  loadingReport: boolean = false;
+  loadingReport = false;
   startDate: string;
   endDate: string;
   reportData: any[];
@@ -25,29 +24,28 @@ export class ShippingReportComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-    let start = new Date();
+  ngOnInit(): void {
+    const start = new Date();
     start.setDate(start.getDate() - 7);
     this.startDate = Utils.getFormattedDate(start);
-    let end = new Date();
+    const end = new Date();
     this.endDate = Utils.getFormattedDate(end);
-    this.reload()
+    this.reload();
   }
 
-  private loadReport(startDate: string, endDate: string) {
+  private loadReport(startDate: string, endDate: string): void {
     this.loadingReport = true;
     let jsonData: any[];
     this.dsmService.getShippingReport(startDate, endDate).subscribe(
       data => {
         this.reportData = [];
-        let result = Result.parse(data);
+        const result = Result.parse(data);
         if (result.code != null && result.code !== 200) {
-          this.errorMessage = "Error - Loading Sample Report\nPlease contact your DSM developer";
-        }
-        else {
+          this.errorMessage = 'Error - Loading Sample Report\nPlease contact your DSM developer';
+        } else {
           jsonData = data;
           jsonData.forEach((val) => {
-            let kitType = ShippingReport.parse(val);
+            const kitType = ShippingReport.parse(val);
             this.reportData.push(kitType);
           });
         }
@@ -58,7 +56,7 @@ export class ShippingReportComponent implements OnInit {
           this.auth.logout();
         }
         this.loadingReport = false;
-        this.errorMessage = "Error - Loading Sample Report\nPlease contact your DSM developer";
+        this.errorMessage = 'Error - Loading Sample Report\nPlease contact your DSM developer';
       }
     );
   }
@@ -67,28 +65,27 @@ export class ShippingReportComponent implements OnInit {
     this.loadReport(this.startDate, this.endDate);
   }
 
-  startChanged(date: string) {
+  startChanged(date: string): void {
     this.startDate = date;
   }
 
-  endChanged(date: string) {
+  endChanged(date: string): void {
     this.endDate = date;
   }
 
-  downloadReport() {
+  downloadReport(): void {
     let jsonData: any[];
-    let downloadData: any[] = [];
+    const downloadData: any[] = [];
     this.dsmService.getShippingReportOverview().subscribe(
       data => {
         // console.info(`received: ${JSON.stringify(data, null, 2)}`);
-        let result = Result.parse(data);
+        const result = Result.parse(data);
         if (result.code != null && result.code !== 200) {
-          this.errorMessage = "Error - Downloading Sample Report\nPlease contact your DSM developer";
-        }
-        else {
+          this.errorMessage = 'Error - Downloading Sample Report\nPlease contact your DSM developer';
+        } else {
           jsonData = data;
           jsonData.forEach((val) => {
-            let kitType = ShippingReport.parse(val);
+            const kitType = ShippingReport.parse(val);
             downloadData.push(kitType);
           });
           this.saveReport(downloadData);
@@ -99,17 +96,17 @@ export class ShippingReportComponent implements OnInit {
           this.auth.logout();
         }
         this.loadingReport = false;
-        this.errorMessage = "Error - Loading Sample Report\nPlease contact your DSM developer";
+        this.errorMessage = 'Error - Loading Sample Report\nPlease contact your DSM developer';
       }
     );
   }
 
-  saveReport(downloadData: any[]){
-    let map: { kitType: string, month: string, ddpName: string, sent: number, received: number }[] = [];
+  saveReport(downloadData: any[]): void {
+    const map: { kitType: string; month: string; ddpName: string; sent: number; received: number }[] = [];
     if (downloadData != null) {
-      for (var i = 0; i < downloadData.length; i++) {
+      for (let i = 0; i < downloadData.length; i++) {
         if (downloadData[i].summaryKitTypeList != null) {
-          for (var j = 0; j < downloadData[i].summaryKitTypeList.length; j++) {
+          for (let j = 0; j < downloadData[i].summaryKitTypeList.length; j++) {
             map.push({kitType: downloadData[i].summaryKitTypeList[j].kitType,
               month: downloadData[i].summaryKitTypeList[j].month,
               ddpName: downloadData[i].ddpName,
@@ -119,13 +116,13 @@ export class ShippingReportComponent implements OnInit {
         }
       }
       if (map.length > 0) {
-        var fields = [{ label: "Material Type", value: "kitType" },
-          { label: "Month", value: "month" },
-          { label: "Project", value: "ddpName" },
-          { label: "Number of Samples Shipped", value: "sent" },
-          { label: "Number of Samples Received", value: "received" }];
-        var date = new Date();
-        Utils.createCSV(fields, map, "GP_Report_" + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION);
+        const fields = [{ label: 'Material Type', value: 'kitType' },
+          { label: 'Month', value: 'month' },
+          { label: 'Project', value: 'ddpName' },
+          { label: 'Number of Samples Shipped', value: 'sent' },
+          { label: 'Number of Samples Received', value: 'received' }];
+        const date = new Date();
+        Utils.createCSV(fields, map, 'GP_Report_' + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION);
       }
     }
   }

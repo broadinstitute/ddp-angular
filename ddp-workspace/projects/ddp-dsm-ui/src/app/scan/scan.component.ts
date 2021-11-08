@@ -1,13 +1,13 @@
-import {ChangeDetectorRef, Component, OnInit} from "@angular/core";
-import {ScanPairComponent} from "../scan-pair/scan-pair.component";
-import {ScanPair, ScanValue} from "./scan.model";
-import {DSMService} from "../services/dsm.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ScanError} from "./error.model";
-import {Auth} from "../services/auth.service";
-import {Statics} from "../utils/statics";
-import {ScanValueComponent} from "../scan-value/scan-value.component";
-import {ComponentService} from "../services/component.service";
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ScanPairComponent } from '../scan-pair/scan-pair.component';
+import { ScanPair, ScanValue } from './scan.model';
+import { DSMService } from '../services/dsm.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ScanError } from './error.model';
+import { Auth } from '../services/auth.service';
+import { Statics } from '../utils/statics';
+import { ScanValueComponent } from '../scan-value/scan-value.component';
+import { ComponentService } from '../services/component.service';
 
 @Component({
   selector: 'app-scan',
@@ -15,23 +15,23 @@ import {ComponentService} from "../services/component.service";
   styleUrls: ['./scan.component.css'],
 })
 export class ScanComponent implements OnInit {
-
   scanPairs: Array<ScanPairComponent> = [];
   private scanPairsValue: Array<ScanPair> = [];
   private scanErrors: Array<ScanError> = [];
 
-  duplicateDetected: boolean = false;
+  duplicateDetected = false;
 
   additionalMessage: string;
 
-  scanTracking: boolean = false;
-  leftPlaceholder: string = "Kit Label";
-  rightPlaceholder: string = "DSM Label";
+  scanTracking = false;
+  leftPlaceholder = 'Kit Label';
+  rightPlaceholder = 'DSM Label';
 
-  scanReceived: boolean = false;
+  scanReceived = false;
   scanValues: Array<ScanValueComponent> = [];
   private singleScanValues: Array<ScanValue> = [];
 
+  // TODO: check is it correct ? - inised `compService`
   constructor(private _changeDetectionRef: ChangeDetectorRef, private dsmService: DSMService, private router: Router,
               private auth: Auth, private route: ActivatedRoute, private compService: ComponentService) {
     if (!auth.authenticated()) {
@@ -43,28 +43,29 @@ export class ScanComponent implements OnInit {
       this.changePlaceholder();
       this.createNewComponents();
       this.additionalMessage = null;
-      let realm = params[DSMService.REALM] || null;
-      if (realm != null && realm !== "") {
+      const realm = params[DSMService.REALM] || null;
+
+      // TODO: check is it correct ? - is it needed ?
+      if (realm != null && realm !== '') {
         //        this.compService.realmMenu = realm;
       }
     });
   }
 
-  private changePlaceholder() {
+  private changePlaceholder(): void {
     if (this.scanTracking) {
-      this.leftPlaceholder = "Tracking Label";
-      this.rightPlaceholder = "Kit Label";
-    }
-    else if (this.scanReceived) {
-      this.leftPlaceholder = "SM-ID";
-    }
-    else {
-      this.leftPlaceholder = "Kit Label";
-      this.rightPlaceholder = "DSM Label";
+      this.leftPlaceholder = 'Tracking Label';
+      this.rightPlaceholder = 'Kit Label';
+    } else if (this.scanReceived) {
+      this.leftPlaceholder = 'SM-ID';
+    } else {
+      this.leftPlaceholder = 'Kit Label';
+      this.rightPlaceholder = 'DSM Label';
     }
   }
 
-  public scanDone(arg) { //arg[0] = leftvalue (ddpLabel), arg[1] = rightvalue (kitLabel) and arg[2] = position
+  public scanDone(arg): void {
+    // arg[0] = leftvalue (ddpLabel), arg[1] = rightvalue (kitLabel) and arg[2] = position
     if (arg.length === 3) {
       if (!this.checkIfKitLabelChanged(arg[0], arg[1], arg[2])) {
         this.scanPairsValue.push(new ScanPair(arg[0], arg[1]));
@@ -101,20 +102,18 @@ export class ScanComponent implements OnInit {
   private validateValue(labelValue: string, position: number, isLeft: boolean): boolean {
     let isDuplicate = false;
     for (let i = 0; i < this.scanPairsValue.length; i++) {
-      if (i != position) {
+      if (i !== position) {
         if (this.scanPairsValue[position].leftValue != null && labelValue === this.scanPairsValue[i].leftValue
-          || this.scanPairsValue[position].rightValue != null && labelValue === this.scanPairsValue[i].rightValue){
+          || this.scanPairsValue[position].rightValue != null && labelValue === this.scanPairsValue[i].rightValue) {
           isDuplicate = true;
         }
-      }
-      else {
+      } else {
         if (isLeft) {
-          if (this.scanPairsValue[position].rightValue != null && labelValue === this.scanPairsValue[i].rightValue){
+          if (this.scanPairsValue[position].rightValue != null && labelValue === this.scanPairsValue[i].rightValue) {
             isDuplicate = true;
           }
-        }
-        else {
-          if (this.scanPairsValue[position].leftValue != null && labelValue === this.scanPairsValue[i].leftValue){
+        } else {
+          if (this.scanPairsValue[position].leftValue != null && labelValue === this.scanPairsValue[i].leftValue) {
             isDuplicate = true;
           }
         }
@@ -123,22 +122,22 @@ export class ScanComponent implements OnInit {
     return isDuplicate;
   }
 
-  public removeScanPair(position: number) {
+  public removeScanPair(position: number): void {
     this.scanPairs.splice(position, 1);
     this.scanPairsValue.splice(position, 1);
   }
 
-  private addNewScanPair() {
-    let newRow = new ScanPairComponent();
+  private addNewScanPair(): void {
+    const newRow = new ScanPairComponent();
     this.scanPairs.push(newRow);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.additionalMessage = null;
     this.createNewComponents();
   }
 
-  createNewComponents() {
+  createNewComponents(): void {
     this.scanPairsValue = [];
     this.scanPairs = [];
     this.scanValues = [];
@@ -146,27 +145,25 @@ export class ScanComponent implements OnInit {
     if (this.scanTracking) {
       this.addNewScanPair();
       if (this.scanPairs.length < 1) {
-        let newScanPair = new ScanPairComponent();
+        const newScanPair = new ScanPairComponent();
         this.scanPairs.push(newScanPair);
       }
-    }
-    else if (this.scanReceived) {
+    } else if (this.scanReceived) {
       this.addNewSingleScan();
       if (this.scanValues.length < 1) {
-        let newScanValue = new ScanValueComponent();
+        const newScanValue = new ScanValueComponent();
         this.scanValues.push(newScanValue);
       }
-    }
-    else {
+    } else {
       this.addNewScanPair();
       if (this.scanPairs.length < 1) {
-        let newScanPair = new ScanPairComponent();
+        const newScanPair = new ScanPairComponent();
         this.scanPairs.push(newScanPair);
       }
     }
   }
 
-  public savePairs() {
+  public savePairs(): void {
     if (this.scanPairsValue.length > 0) {
       this.duplicateDetected = false;
       for (let i = 0; i < this.scanPairsValue.length; i++) {
@@ -183,40 +180,40 @@ export class ScanComponent implements OnInit {
       if (!this.duplicateDetected) {
         let jsonData: any[];
         this.scanErrors = [];
-        this.dsmService.transferScan(this.scanTracking, JSON.stringify(this.scanPairsValue)).subscribe(// need to subscribe, otherwise it will not send!
-          data => {
-            let failedSending: boolean = false;
-            jsonData = data;
-            jsonData.forEach((val) => {
-              this.scanErrors.push(ScanError.parse(val));
-              failedSending = true;
-            });
-            if (failedSending) {
-              this.removeSuccessfulScans();
-              this.additionalMessage = "Error - Failed to save all changes";
+        this.dsmService.transferScan(this.scanTracking, JSON.stringify(this.scanPairsValue))
+          .subscribe(// need to subscribe, otherwise it will not send!
+            data => {
+              let failedSending = false;
+              jsonData = data;
+              jsonData.forEach((val) => {
+                this.scanErrors.push(ScanError.parse(val));
+                failedSending = true;
+              });
+              if (failedSending) {
+                this.removeSuccessfulScans();
+                this.additionalMessage = 'Error - Failed to save all changes';
+              } else {
+                this.scanPairsValue = [];
+                this.scanPairs = [];
+                this.addNewScanPair();
+                this.additionalMessage = 'Data saved';
+              }
+            },
+            err => {
+              if (err._body === Auth.AUTHENTICATION_ERROR) {
+                this.router.navigate([Statics.HOME_URL]);
+              }
+              this.additionalMessage = 'Error - Failed to save data';
             }
-            else {
-              this.scanPairsValue = [];
-              this.scanPairs = [];
-              this.addNewScanPair();
-              this.additionalMessage =  "Data saved";
-            }
-          },
-          err => {
-            if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.router.navigate([Statics.HOME_URL]);
-            }
-            this.additionalMessage = "Error - Failed to save data";
-          }
-        );
+          );
       }
     }
   }
 
-  private removeSuccessfulScans(){
-    for (let i = this.scanPairsValue.length-1; i >= 0; i--) {
-      let found: boolean = false;
-      for (let j = this.scanErrors.length-1; j >= 0; j--) {
+  private removeSuccessfulScans(): void {
+    for (let i = this.scanPairsValue.length - 1; i >= 0; i--) {
+      let found = false;
+      for (let j = this.scanErrors.length - 1; j >= 0; j--) {
         if (this.scanPairsValue[i].rightValue === this.scanErrors[j].kit) {
           found = true;
         }
@@ -228,10 +225,10 @@ export class ScanComponent implements OnInit {
     }
   }
 
-  private removeSuccessfulSingleScans(){
-    for (let i = this.singleScanValues.length-1; i >= 0; i--) {
-      let found: boolean = false;
-      for (let j = this.scanErrors.length-1; j >=0; j--) {
+  private removeSuccessfulSingleScans(): void {
+    for (let i = this.singleScanValues.length - 1; i >= 0; i--) {
+      let found = false;
+      for (let j = this.scanErrors.length - 1; j >= 0; j--) {
         if (this.singleScanValues[i].kit === this.scanErrors[j].kit) {
           found = true;
         }
@@ -244,9 +241,11 @@ export class ScanComponent implements OnInit {
   }
 
   public checkSendStatus(position: number): boolean {
-      if (this.scanPairsValue.length > 0 && this.scanPairsValue[position] != null
+      if (
+        this.scanPairsValue.length > 0 && this.scanPairsValue[position] != null
         && this.scanPairsValue[position].rightValue != null
-        && this.scanErrors.length > 0) {
+        && this.scanErrors.length > 0
+      ) {
         for (let i = 0; i < this.scanErrors.length; i++) {
           if (this.scanPairsValue[position].rightValue === this.scanErrors[i].kit) {
             return true;
@@ -257,7 +256,8 @@ export class ScanComponent implements OnInit {
     return false;
   }
 
-  public setLeftValue(arg) { //arg[0] = dsmValue and arg[1] = position
+  public setLeftValue(arg): void {
+    // arg[0] = dsmValue and arg[1] = position
     if (arg.length === 2) {
       if (arg[1] < this.scanPairsValue.length) {
         this.scanPairsValue[arg[1]].leftValue = arg[0];
@@ -265,7 +265,8 @@ export class ScanComponent implements OnInit {
     }
   }
 
-  public singleValueScanDone(arg) { //arg[0] = singleValue (SM-ID) and arg[1] = position
+  public singleValueScanDone(arg): void {
+    // arg[0] = singleValue (SM-ID) and arg[1] = position
     if (arg.length === 2) {
       if (!this.checkIfSingleValueChanged(arg[0], arg[1])) {
         this.singleScanValues.push(new ScanValue(arg[0]));
@@ -284,12 +285,12 @@ export class ScanComponent implements OnInit {
     return false;
   }
 
-  private addNewSingleScan() {
-    let newRow = new ScanValueComponent();
+  private addNewSingleScan(): void {
+    const newRow = new ScanValueComponent();
     this.scanValues.push(newRow);
   }
 
-  public removeScanValue(position: number) {
+  public removeScanValue(position: number): void {
     this.scanValues.splice(position, 1);
     this.singleScanValues.splice(position, 1);
   }
@@ -297,10 +298,10 @@ export class ScanComponent implements OnInit {
   validateSingleScan(position: number): boolean {
     let isDuplicate = false;
     for (let i = 0; i < this.singleScanValues.length - 1; i++) {
-      if (i != position) {
+      if (i !== position) {
         if (this.singleScanValues[position] != null && this.singleScanValues[i] != null
           && this.singleScanValues[position].kit != null && this.singleScanValues[i].kit != null
-          && this.singleScanValues[position].kit === this.singleScanValues[i].kit){
+          && this.singleScanValues[position].kit === this.singleScanValues[i].kit) {
           isDuplicate = true;
         }
       }
@@ -322,7 +323,7 @@ export class ScanComponent implements OnInit {
     return false;
   }
 
-  public saveValues() {
+  public saveValues(): void {
     if (this.singleScanValues.length > 0) {
       this.duplicateDetected = false;
       for (let i = 0; i < this.singleScanValues.length; i++) {
@@ -335,32 +336,32 @@ export class ScanComponent implements OnInit {
       if (!this.duplicateDetected) {
         let jsonData: any[];
         this.scanErrors = [];
-        this.dsmService.setKitReceivedRequest(JSON.stringify(this.singleScanValues)).subscribe(// need to subscribe, otherwise it will not send!
-          data => {
-            let failedSending: boolean = false;
-            jsonData = data;
-            jsonData.forEach((val) => {
-              this.scanErrors.push(ScanError.parse(val));
-              failedSending = true;
-            });
-            if (failedSending) {
-              this.removeSuccessfulSingleScans();
-              this.additionalMessage = "Error - Failed to save all changes";
+        this.dsmService.setKitReceivedRequest(JSON.stringify(this.singleScanValues))
+          .subscribe(// need to subscribe, otherwise it will not send!
+            data => {
+              let failedSending = false;
+              jsonData = data;
+              jsonData.forEach((val) => {
+                this.scanErrors.push(ScanError.parse(val));
+                failedSending = true;
+              });
+              if (failedSending) {
+                this.removeSuccessfulSingleScans();
+                this.additionalMessage = 'Error - Failed to save all changes';
+              } else {
+                this.scanValues = [];
+                this.singleScanValues = [];
+                this.addNewSingleScan();
+                this.additionalMessage = 'Data saved';
+              }
+            },
+            err => {
+              if (err._body === Auth.AUTHENTICATION_ERROR) {
+                this.router.navigate([Statics.HOME_URL]);
+              }
+              this.additionalMessage = 'Error - Failed to save data';
             }
-            else {
-              this.scanValues = [];
-              this.singleScanValues = [];
-              this.addNewSingleScan();
-              this.additionalMessage =  "Data saved";
-            }
-          },
-          err => {
-            if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.router.navigate([Statics.HOME_URL]);
-            }
-            this.additionalMessage = "Error - Failed to save data";
-          }
-        );
+          );
       }
     }
   }

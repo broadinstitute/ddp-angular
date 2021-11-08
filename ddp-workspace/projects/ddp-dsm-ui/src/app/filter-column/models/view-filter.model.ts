@@ -1,12 +1,11 @@
-import {Filter} from "../filter-column.model";
+import { Filter } from '../filter-column.model';
 
 export class ViewFilter {
+  selected = false;
 
-  selected: boolean = false;
-
-  constructor( public filters: Filter[], public filterName: string, public columns: {}, public shared: boolean,
+  constructor(public filters: Filter[], public filterName: string, public columns: {}, public shared: boolean,
                public deleted: string, public userId: string, public id: string, public parent: string, public icon: string,
-               public quickFilterName: string, public queryItems: string ) {
+               public quickFilterName: string, public queryItems: string) {
     this.filters = filters;
     this.filterName = filterName;
     this.columns = columns;
@@ -19,59 +18,59 @@ export class ViewFilter {
     this.queryItems = queryItems;
   }
 
-  public static parseFilter( json, allColumns: {} ): ViewFilter {
-    let columns = json.columns;
+  public static parseFilter(json, allColumns: {}): ViewFilter {
+    const columns = json.columns;
     let currentFilter = null;
-    let parsedColumns: {} = Filter.parseToColumnArray( columns, allColumns );
-    if (json.userId !== "System" && json.filters != undefined) {
+    let parsedColumns: {} = Filter.parseToColumnArray(columns, allColumns);
+    if (json.userId !== 'System' && json.filters !== undefined) {
       currentFilter = Filter.parseToCurrentFilterArray(json, allColumns, parsedColumns);
-      let p = {};
-      for (let key of Object.keys( parsedColumns )) {
-        let tmp = new Array<Filter>();
-        for (let f of parsedColumns[ key ]) {
-          let filteredColumn = currentFilter.find( filter => {
+      const p = {};
+      for (const key of Object.keys(parsedColumns)) {
+        const tmp = new Array<Filter>();
+        for (const f of parsedColumns[ key ]) {
+          const filteredColumn = currentFilter.find(filter => {
             return filter.participantColumn.name === f.participantColumn.name && filter.participantColumn.tableAlias === key;
-          } );
-          if (filteredColumn == undefined) {
-            tmp.push( f );
+          });
+          if (filteredColumn === undefined) {
+            tmp.push(f);
+          } else {
+            tmp.push(filteredColumn);
           }
-          else {
-            tmp.push( filteredColumn );
-          }
         }
-        if (key === "o" || key === "ex" || key === "r") {
-          p[ "p" ] = tmp;
-        }
-        else if (key === "inst") {
-          p[ "m" ] = tmp;
-        }
-        else {
+        if (key === 'o' || key === 'ex' || key === 'r') {
+          p[ 'p' ] = tmp;
+        } else if (key === 'inst') {
+          p[ 'm' ] = tmp;
+        } else {
           p[ key ] = tmp;
         }
       }
       parsedColumns = p;
     }
-    return new ViewFilter( currentFilter, json.filterName, parsedColumns, json.shared, json.fDeleted, json.userId, json.id,
+    return new ViewFilter(currentFilter, json.filterName, parsedColumns, json.shared, json.fDeleted, json.userId, json.id,
       json.parent, json.icon, json.quickFilterName, json.queryItems);
   }
 
   public copy(): ViewFilter {
-    let f: Filter[] = [];
-    for (let filter of this.filters) {
-      f.push( filter.copy() );
+    const f: Filter[] = [];
+    for (const filter of this.filters) {
+      f.push(filter.copy());
     }
-    let c = {};
-    for (let key of Object.keys( this.columns )) {
+    const c = {};
+    for (const key of Object.keys(this.columns)) {
       c[ key ] = [];
-      for (let column of this.columns[ key ]) {
-        c[ key ].push( column.copy() );
+      for (const column of this.columns[ key ]) {
+        c[ key ].push(column.copy());
       }
     }
-    let v = new ViewFilter( f, Object.assign( "", this.filterName ), c, Object.assign( new Boolean(), this.shared ), Object.assign( new Boolean(), this.deleted ),
-      Object.assign( "", this.userId ), Object.assign( "", this.id ), Object.assign( "", this.parent ), Object.assign( "", this.icon ),
-      Object.assign( "", this.quickFilterName ), Object.assign( "", this.queryItems ) );
+    const v = new ViewFilter(
+      f, Object.assign('', this.filterName), c,
+      // TODO: check is it correct ? - new Boolean() ?
+      Object.assign(new Boolean(), this.shared), Object.assign(new Boolean(), this.deleted),
+      Object.assign('', this.userId), Object.assign('', this.id), Object.assign('', this.parent),
+      Object.assign('', this.icon), Object.assign('', this.quickFilterName),
+      Object.assign('', this.queryItems)
+    );
     return v;
   }
-
-
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -6,11 +6,6 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   templateUrl: './participant-update-result-dialog.component.html',
   styleUrls: ['./participant-update-result-dialog.component.css']
 })
-export class ParticipantUpdateResultDialogComponent implements OnInit {
-
+export class ParticipantUpdateResultDialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: {message: string}) { }
-
-  ngOnInit() {
-  }
-
 }

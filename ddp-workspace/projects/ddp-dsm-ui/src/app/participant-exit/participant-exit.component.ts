@@ -1,13 +1,13 @@
-import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import {DSMService} from "../services/dsm.service";
-import {Auth} from "../services/auth.service";
-import {ParticipantExit} from "./participant-exit.model";
-import {RoleService} from "../services/role.service";
-import {Statics} from "../utils/statics";
-import {ComponentService} from "../services/component.service";
-import {DiscardSample} from "../discard-sample/discard-sample.model";
+import { DSMService } from '../services/dsm.service';
+import { Auth } from '../services/auth.service';
+import { ParticipantExit } from './participant-exit.model';
+import { RoleService } from '../services/role.service';
+import { Statics } from '../utils/statics';
+import { ComponentService } from '../services/component.service';
+import { DiscardSample } from '../discard-sample/discard-sample.model';
 
 @Component({
   selector: 'app-participant-exit',
@@ -15,18 +15,17 @@ import {DiscardSample} from "../discard-sample/discard-sample.model";
   styleUrls: ['./participant-exit.component.css']
 })
 export class ParticipantExitComponent implements OnInit {
-
   errorMessage: string;
   additionalMessage: string;
-  loading: boolean = false;
+  loading = false;
 
   realm: string;
 
   participantId: string = null;
-  deletedFromDDP: boolean = false;
+  deletedFromDDP = false;
 
   exitedParticipants: Array<ParticipantExit> = [];
-  allowedToSeeInformation: boolean = false;
+  allowedToSeeInformation = false;
 
   kits: Array<DiscardSample> = null;
 
@@ -44,7 +43,7 @@ export class ParticipantExitComponent implements OnInit {
     });
   }
 
-  private checkRight() {
+  private checkRight(): void {
     this.allowedToSeeInformation = false;
     this.additionalMessage = null;
     this.exitedParticipants = [];
@@ -59,31 +58,33 @@ export class ParticipantExitComponent implements OnInit {
           }
         });
         if (!this.allowedToSeeInformation) {
-          this.additionalMessage = "You are not allowed to see information of the selected realm at that category";
+          this.additionalMessage = 'You are not allowed to see information of the selected realm at that category';
         }
       },
-      err => {
+      _ => {
         return null;
       }
     );
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
       this.realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       this.checkRight();
+    } else {
+      this.additionalMessage = 'Please select a realm';
     }
-    else {
-      this.additionalMessage = "Please select a realm";
-    }
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }
 
-  exitParticipant() {
-    if (this.realm != null && this.participantId !== "") {
+  exitParticipant(): void {
+    if (this.realm != null && this.participantId !== '') {
       this.loading = true;
       let jsonData: any[];
-      let participantExit: ParticipantExit = new ParticipantExit(this.realm, this.participantId, this.role.userID(), null, null, null, !this.deletedFromDDP);
+      const participantExit = new ParticipantExit(
+        this.realm, this.participantId, this.role.userID(),
+        null, null, null, !this.deletedFromDDP
+      );
       // console.log(JSON.stringify(participantExit));
       this.dsmService.exitParticipant(JSON.stringify(participantExit)).subscribe(// need to subscribe, otherwise it will not send!
         data => {
@@ -91,7 +92,7 @@ export class ParticipantExitComponent implements OnInit {
           this.kits = [];
           jsonData = data;
           jsonData.forEach((val) => {
-            let kit = DiscardSample.parse(val);
+            const kit = DiscardSample.parse(val);
             this.kits.push(kit);
           });
           this.participantId = null;
@@ -101,37 +102,36 @@ export class ParticipantExitComponent implements OnInit {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.router.navigate([Statics.HOME_URL]);
           }
-          this.errorMessage = "Error - Failed to exit participant";
+          this.errorMessage = 'Error - Failed to exit participant';
           this.loading = false;
         }
       );
-    }
-    else {
-      this.errorMessage = "Please select a realm and enter the AltPID for the participant you want to exit.";
+    } else {
+      this.errorMessage = 'Please select a realm and enter the AltPID for the participant you want to exit.';
     }
   }
 
-  saveStatusKits(kit: DiscardSample) {
-    let payload = {
-      'kitDiscardId': kit.kitDiscardId,
-      'action': kit.action
+  saveStatusKits(kit: DiscardSample): void {
+    const payload = {
+      kitDiscardId: kit.kitDiscardId,
+      action: kit.action
     };
     this.dsmService.setKitDiscardAction(this.realm, JSON.stringify(payload)).subscribe(
-      data => {
+      _ => {
         // console.info(`received: ${JSON.stringify(data, null, 2)}`);
-        this.additionalMessage = "Changed status";
+        this.additionalMessage = 'Changed status';
       },
       err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
         this.loading = false;
-        this.errorMessage = "Error - Loading list of samples of exited participants\nPlease contact your DSM developer";
+        this.errorMessage = 'Error - Loading list of samples of exited participants\nPlease contact your DSM developer';
       }
     );
   }
 
-  private getExitedParticipants() {
+  private getExitedParticipants(): void {
     if (this.realm != null) {
       this.errorMessage = null;
       this.additionalMessage = null;
@@ -143,7 +143,7 @@ export class ParticipantExitComponent implements OnInit {
           // console.info(`received: ${JSON.stringify(data, null, 2)}`);
           jsonData = data;
           jsonData.forEach((val) => {
-            let exitParticipant = ParticipantExit.parse(val);
+            const exitParticipant = ParticipantExit.parse(val);
             this.exitedParticipants.push(exitParticipant);
           });
           this.loading = false;
@@ -153,10 +153,9 @@ export class ParticipantExitComponent implements OnInit {
             this.auth.logout();
           }
           this.loading = false;
-          this.errorMessage = "Error - Loading list of exited participants\nPlease contact your DSM developer";
+          this.errorMessage = 'Error - Loading list of exited participants\nPlease contact your DSM developer';
         }
       );
     }
   }
-
 }
