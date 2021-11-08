@@ -129,6 +129,15 @@
     >
       {{ 'SDK.PreviousButton' | translate }}
     </button>
+    <button
+        *ngIf="!isFirstStep && displayDisagreeButton"
+        [routerLink]="['/', Route.Dashboard]"
+        class="button button--primary pull-left button__disagree"
+        [disabled]="dataEntryDisabled || (isPageBusy | async)"
+    >
+      <mat-icon>close</mat-icon>
+      {{ 'Activity.Actions.Disagree' | translate }}
+    </button>
 
     <button
       *ngIf="!isLastStep"
@@ -142,12 +151,13 @@
     <button
       #submitButton
       *ngIf="isLastStep"
-      class="button button--primary pull-right"
+      class="button button--primary pull-right button__agree"
       [disabled]="dataEntryDisabled || (isPageBusy | async)"
       (click)="flush()"
       (mouseenter)="mouseEnterOnSubmit()"
     >
-      {{ 'SDK.SubmitButton' | translate }}
+      <mat-icon *ngIf="displayAgreeIcon">done</mat-icon>
+      {{ submitText | translate }}
     </button>
   </ng-container>
 
