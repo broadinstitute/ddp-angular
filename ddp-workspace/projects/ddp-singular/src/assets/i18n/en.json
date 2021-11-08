@@ -395,6 +395,24 @@
         "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
         "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
       }
+    },
+    "FileUpload": {
+      "ConfirmReuploadTitle": "Are you sure you want \nto reupload the file?",
+      "ConfirmUndoUploadTitle": "Are you sure you want \nto remove uploaded file from server?",
+      "ConfirmCancelUploadTitle": "Are you sure you want \nto cancel upload?",
+      "ReuploadBtnText": "Reupload",
+      "UploadBtnText": "Upload",
+      "OkBtnText": "OK",
+      "CancelBtnText": "Cancel",
+      "MaxSize": "Max size: {{maxSize}}",
+      "AllowedFileTypes": "Allowed files: {{allowedFileTypes}}",
+      "ChooseFile": "Click and select \nor drag file to upload",
+      "Uploading": "Uploading {{filename}}",
+      "Size": "(size: {{size}})",
+      "MaxSizeErrorMessage": "Maximum file size exceeded",
+      "InvalidTypeErrorMessage": "Type of file selected is not valid",
+      "CancelUpload": "Cancel upload",
+      "RemoveUploadedFile": "Remove uploaded file"
     }
   },
   "Error": {
