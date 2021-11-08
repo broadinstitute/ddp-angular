@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
-import { ActivityInstanceSelectOption } from '../../models/activity/activityInstanceSelectOption';
+import { ActivityInstanceSelectOptionDto } from '../../models/activity/activityInstanceSelectOptionDto';
 import { UserServiceAgent } from './userServiceAgent.service';
 
 interface GetOptionsResponse {
-  results: ActivityInstanceSelectOption[];
+  results: ActivityInstanceSelectOptionDto[];
 }
 
 @Injectable()

@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { ActivityInstanceSelectQuestionBlock } from '../../../../models/activity/activityInstanceSelectQuestionBlock';
-import { ActivityInstanceSelectOption } from '../../../../models/activity/activityInstanceSelectOption';
+import { ActivityInstanceSelectOptionDto } from '../../../../models/activity/activityInstanceSelectOptionDto';
 import { ActivityInstanceSelectAnswerService } from '../../../../services/serviceAgents/activityInstanceSelectAnswer.service';
 import { CompositeDisposable } from '../../../../compositeDisposable';
 
@@ -18,7 +18,7 @@ export class ActivityInstanceSelectAnswer implements OnInit, OnDestroy {
   @Input() readonly: boolean;
   @Output() valueChanged = new EventEmitter<string | null>();
   @Output() componentBusy = new EventEmitter<boolean>();
-  public options$ = new BehaviorSubject<ActivityInstanceSelectOption[]>([]);
+  public options$ = new BehaviorSubject<ActivityInstanceSelectOptionDto[]>([]);
   private panelOpen$ = new Subject<void>();
   private subs = new CompositeDisposable();
 
@@ -34,15 +34,17 @@ export class ActivityInstanceSelectAnswer implements OnInit, OnDestroy {
     this.subs.removeAll();
   }
 
-  onSelectionChange(option: ActivityInstanceSelectOption): void {
-    this.valueChanged.emit(option.guid);
+  onSelectionChange(option: ActivityInstanceSelectOptionDto): void {
+    this.block.answer = option.guid;
+
+    this.valueChanged.emit(this.block.answer);
   }
 
   onOpen(): void {
     this.panelOpen$.next();
   }
 
-  compare(option: ActivityInstanceSelectOption, answerGuid: string): boolean {
+  compare(option: ActivityInstanceSelectOptionDto, answerGuid: string): boolean {
     return option.guid === answerGuid;
   }
 
@@ -56,7 +58,7 @@ export class ActivityInstanceSelectAnswer implements OnInit, OnDestroy {
     this.subs.addNew(sub);
   }
 
-  private getOptions(): Observable<ActivityInstanceSelectOption[]> {
+  private getOptions(): Observable<ActivityInstanceSelectOptionDto[]> {
     this.componentBusy.next(true);
 
     return this.activityInstanceSelectAnswerService.getOptions(this.block.stableId).pipe(
