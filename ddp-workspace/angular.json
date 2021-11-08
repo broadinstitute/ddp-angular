@@ -2842,6 +2842,137 @@
           }
         }
       }
+    },
+    "ddp-dsm-ui": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/ddp-dsm-ui",
+      "sourceRoot": "projects/ddp-dsm-ui/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ddp-dsm-ui",
+            "index": "projects/ddp-dsm-ui/src/index.html",
+            "main": "projects/ddp-dsm-ui/src/main.ts",
+            "polyfills": "projects/ddp-dsm-ui/src/polyfills.ts",
+            "tsConfig": "projects/ddp-dsm-ui/src/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/ddp-dsm-ui/src/favicon.ico",
+              "projects/ddp-dsm-ui/src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap/dist/css/bootstrap-theme.min.css",
+              "projects/ddp-dsm-ui/src/assets/dsm-theme.scss",
+              "projects/ddp-dsm-ui/src/styles.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ddp-dsm-ui/src/environments/environment.ts",
+                  "with": "projects/ddp-dsm-ui/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "25kb"
+                }
+              ]
+            },
+            "es5": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "25kb"
+                }
+              ],
+              "tsConfig": "projects/ddp-dsm-ui/tsconfig.es5.json"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ddp-dsm-ui:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ddp-dsm-ui:build:production"
+            },
+            "es5": {
+              "browserTarget": "ddp-dsm-ui:build:es5"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ddp-dsm-ui:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ddp-dsm-ui/src/test.ts",
+            "polyfills": "projects/ddp-dsm-ui/src/polyfills.ts",
+            "tsConfig": "projects/ddp-dsm-ui/tsconfig.spec.json",
+            "karmaConfig": "projects/ddp-dsm-ui/karma.conf.js",
+            "assets": [
+              "projects/ddp-dsm-ui/src/favicon.ico",
+              "projects/ddp-dsm-ui/src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap/dist/css/bootstrap-theme.min.css",
+              "projects/ddp-dsm-ui/src/assets/dsm-theme.scss",
+              "projects/ddp-dsm-ui/src/styles.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ddp-dsm-ui/tsconfig.app.json",
+              "projects/ddp-dsm-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+                "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ddp-sdk",
