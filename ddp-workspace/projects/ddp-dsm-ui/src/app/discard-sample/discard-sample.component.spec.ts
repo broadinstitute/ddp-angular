@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DiscardSampleComponent } from './discard-sample.component';
 
@@ -6,7 +6,7 @@ describe('DiscardSampleComponent', () => {
   let component: DiscardSampleComponent;
   let fixture: ComponentFixture<DiscardSampleComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ DiscardSampleComponent ]
     })

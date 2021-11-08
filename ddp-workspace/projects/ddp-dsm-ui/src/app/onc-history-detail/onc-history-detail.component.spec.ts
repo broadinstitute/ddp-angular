@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { OncHistoryDetailComponent } from './onc-history-detail.component';
 
@@ -6,7 +6,7 @@ describe('OncHistoryComponent', () => {
   let component: OncHistoryDetailComponent;
   let fixture: ComponentFixture<OncHistoryDetailComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ OncHistoryDetailComponent ]
     })

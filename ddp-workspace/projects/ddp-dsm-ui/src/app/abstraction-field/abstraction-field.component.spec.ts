@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AbstractionFieldComponent } from './abstraction-field.component';
 
@@ -6,7 +6,7 @@ describe('AbstractionFieldComponent', () => {
   let component: AbstractionFieldComponent;
   let fixture: ComponentFixture<AbstractionFieldComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AbstractionFieldComponent ]
     })
