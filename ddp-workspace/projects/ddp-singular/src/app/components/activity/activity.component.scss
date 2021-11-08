@@ -22,3 +22,16 @@
 .pull-right {
   margin-left: auto;
 }
+
+.button {
+  &:first-child {
+    margin-right: 20px;
+  }
+  &__disagree, &__agree {
+    & mat-icon {
+      top: 5px;
+      left: -5px;
+      position: relative;
+    }
+  }
+}

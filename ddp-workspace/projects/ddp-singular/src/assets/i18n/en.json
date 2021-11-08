@@ -500,5 +500,11 @@
       "Delete": "Delete",
       "Cancel": "Cancel"
     }
+  },
+  "Activity": {
+    "Actions": {
+      "Agree": "I agree",
+      "Disagree": "I am not ready to agree"
+    }
   }
 }
