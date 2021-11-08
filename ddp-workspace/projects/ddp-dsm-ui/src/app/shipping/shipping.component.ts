@@ -154,6 +154,7 @@ export class ShippingComponent implements OnInit {
           this.selectedLabel = null;
           jsonData = data;
           // TODO: check is it correct ? - shadowed variables `val`
+          // tslint:disable-next-line:no-shadowed-variable
           jsonData.forEach((val) => {
             const labelSetting = LabelSetting.parse(val);
             if (labelSetting.defaultPage) {
@@ -303,7 +304,7 @@ export class ShippingComponent implements OnInit {
     this.printLabels(target);
   }
 
-  public printLabels(target: string): void {
+  public printLabels(target: string): any {
     let printContents;
     if ('error' === target) {
       printContents = document.getElementById('errorLabelDiv').innerHTML;

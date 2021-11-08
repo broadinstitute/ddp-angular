@@ -7,8 +7,6 @@ import { ActivatedRoute } from '@angular/router';
 
 const fileSaver = require('file-saver');
 
-// declare var fileSaver: any;
-
 @Component({
   selector: 'app-ndiupload',
   templateUrl: './ndiupload.component.html',

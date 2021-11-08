@@ -222,6 +222,7 @@ export class Utils {
           if (col.type === 'ADDITIONALVALUE') {
             const fieldName = 'additionalValues';
             // TODO: check is it correct ? - `fieldName` is set on the previous line
+            // @ts-ignore
             if (fieldName !== '') {
               let value = this.getObjectAdditionalValue(o, fieldName, col);
               value = value == null ? '' : value.toString();
@@ -631,10 +632,9 @@ export class Utils {
       }
     }
     if (!ans && qdef.options) {
-      // TODO: check is it correct ? - shadowed variables `ans`
-      const ans = qdef.options.find(option => option.optionStableId === answer);
-      if (ans) {
-        text = ans.optionText;
+      const answ = qdef.options.find(option => option.optionStableId === answer);
+      if (answ) {
+        text = answ.optionText;
       }
     }
     return text;
