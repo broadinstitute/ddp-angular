@@ -2511,15 +2511,22 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "1mb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "1mb"
                 }
               ]
             },
             "es5": {
               "budgets": [
                 {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "5mb"
+                },
+                {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "1mb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "1mb"
                 }
               ],
               "tsConfig": "projects/ddp-pancan/tsconfig.es5.json"
