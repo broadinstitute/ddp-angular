@@ -144,8 +144,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "1mb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
                 }
               ]
             }
@@ -2511,7 +2511,7 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "25kb"
+                  "maximumWarning": "1mb"
                 }
               ]
             },
@@ -2519,7 +2519,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "25kb"
+                  "maximumWarning": "1mb"
                 }
               ],
               "tsConfig": "projects/ddp-pancan/tsconfig.es5.json"
