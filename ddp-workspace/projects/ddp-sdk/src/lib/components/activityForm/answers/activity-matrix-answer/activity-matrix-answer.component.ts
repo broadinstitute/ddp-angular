@@ -159,11 +159,36 @@ export class ActivityMatrixAnswer implements OnChanges {
 
           return arr;
         }, []);
+      } else {
+        /**
+         * If option is not exclusive
+         * check if user has already selected exclusive option
+         * and if so - remove it
+         */
+        answer = answer.reduce<ActivityMatrixAnswerDto[]>((arr, ans) => {
+          if (
+            ans.rowStableId === option.rowStableId &&
+            ans.groupStableId === option.groupStableId &&
+            this.isAnsweredOptionExclusive(ans)
+          ) {
+            return arr;
+          }
+
+          arr.push(ans);
+
+          return arr;
+        }, []);
       }
 
       answer.push(option);
 
       return answer;
     }
+  }
+
+  private isAnsweredOptionExclusive(answer: ActivityMatrixAnswerDto): boolean {
+    const associatedOption = this.block.options.find(option => option.stableId === answer.optionStableId);
+
+    return associatedOption.exclusive;
   }
 }
