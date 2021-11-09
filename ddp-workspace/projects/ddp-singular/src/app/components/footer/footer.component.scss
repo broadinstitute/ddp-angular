@@ -98,6 +98,12 @@
         & a.link {
           color: map-get($colors, 'list-item-hightlight-color');
         }
+        &_invert {
+          a, button {
+            color: map-get($colors, 'list-item-hightlight-bg');
+            background: map-get($colors, 'list-item-hightlight-color');
+          }
+        }
       }
     }
   }

@@ -43,8 +43,10 @@
         }
       }
       &_invert {
-        color: map-get($colors, 'list-item-hightlight-bg');
-        background: map-get($colors, 'list-item-hightlight-color');
+        a, button {
+          color: map-get($colors, 'list-item-hightlight-bg');
+          background: map-get($colors, 'list-item-hightlight-color');
+        }
       }
     }
   }
