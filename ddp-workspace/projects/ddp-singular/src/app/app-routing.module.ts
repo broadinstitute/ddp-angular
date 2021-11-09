@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginLandingRedesignedComponent } from 'toolkit';
 import { FaqComponent } from './components/pages/faq/faq.component';
 import { ErrorComponent } from './components/pages/error/error.component';
-import { AboutUsComponent } from './components/about-us/about-us.component';
+import { AboutUsComponent } from './components/pages/about-us/about-us.component';
 import { SurveyComponent } from './components/pages/survey/survey.component';
 import { PasswordComponent } from './components/pages/password/password.component';
 import { IrbGuard, Auth0CodeCallbackComponent, AuthGuard, BrowserGuard } from 'ddp-sdk';
