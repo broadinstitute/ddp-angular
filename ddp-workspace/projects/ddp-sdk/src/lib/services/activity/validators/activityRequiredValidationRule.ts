@@ -5,6 +5,7 @@ import { ActivityQuestionBlock } from '../../../models/activity/activityQuestion
 import { DatePickerValue } from '../../../models/datePickerValue';
 import { QuestionType } from '../../../models/activity/questionType';
 import { ActivityFileAnswerDto } from '../../../models/activity/activityFileAnswerDto';
+import { ActivityMatrixQuestionBlock } from '../../../models/activity/activityMatrixQuestionBlock';
 
 export class ActivityRequiredValidationRule extends ActivityAbstractValidationRule {
     public isRequired: boolean;
@@ -42,6 +43,17 @@ export class ActivityRequiredValidationRule extends ActivityAbstractValidationRu
         } else if (this.question.questionType === QuestionType.File) {
             const value = this.question.answer as ActivityFileAnswerDto;
             valid = value && !!value.fileName && (value.fileSize != null);
+        } else if (this.question.questionType === QuestionType.Matrix) {
+            const matrixBlock = this.question as ActivityMatrixQuestionBlock;
+            const questionAnswerMap = matrixBlock.questions.reduce((map, question) => {
+                map[question.stableId] = false;
+
+                return map;
+            }, {});
+
+            matrixBlock.answer?.forEach(ans => (questionAnswerMap[ans.rowStableId] = true));
+
+            valid = Object.values(questionAnswerMap).every(Boolean);
         }
 
         this.result = (valid ? null : this.message);

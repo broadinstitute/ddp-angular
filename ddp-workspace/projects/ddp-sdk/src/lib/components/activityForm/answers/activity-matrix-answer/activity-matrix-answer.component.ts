@@ -33,7 +33,6 @@ export class ActivityMatrixAnswer implements OnChanges {
   @Input() readonly: boolean;
   @Output() valueChanged = new EventEmitter<ActivityMatrixAnswerDto[]>();
   renderGroups: RenderGroup[];
-  NO_GROUP_IDENTIFIER = 'NO_GROUP';
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.block) {
@@ -61,7 +60,7 @@ export class ActivityMatrixAnswer implements OnChanges {
   onOptionChange(question: Question, group: Group, option: Option): void {
     const selectedOption: ActivityMatrixAnswerDto = {
       rowStableId: question.stableId,
-      groupStableId: group.identifier === this.NO_GROUP_IDENTIFIER ? null : group.identifier,
+      groupStableId: group.identifier,
       optionStableId: option.stableId,
     };
 
@@ -84,7 +83,7 @@ export class ActivityMatrixAnswer implements OnChanges {
     const ungroupedOptions = options.filter(option => option.groupId === null);
 
     renderGroups.unshift({
-      identifier: this.NO_GROUP_IDENTIFIER,
+      identifier: null,
       name: null,
       options: ungroupedOptions,
       colSpan: ungroupedOptions.length,
@@ -143,7 +142,23 @@ export class ActivityMatrixAnswer implements OnChanges {
        * Note: options with group of `null` are considered in the same "noname" group
        */
       if (isOptionExclusive) {
-        answer = answer.filter(a => a.rowStableId !== option.rowStableId && a.groupStableId !== option.groupStableId);
+        answer = answer.reduce<ActivityMatrixAnswerDto[]>((arr, ans) => {
+          if (ans.rowStableId === option.rowStableId) {
+            if (ans.groupStableId !== option.groupStableId) {
+              /**
+               * Only keep answers from other groups
+               */
+              arr.push(ans);
+            }
+          } else {
+            /**
+             * Don't do anything with answers for other questions, just keep
+             */
+            arr.push(ans);
+          }
+
+          return arr;
+        }, []);
       }
 
       answer.push(option);

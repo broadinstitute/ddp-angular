@@ -73,6 +73,12 @@ export class ActivityQuestionConverter {
                     picklist.answerId = questionJson.answers[0].answerGuid;
                     picklist.answer = questionJson.answers[0].value;
                 }
+            } else if (questionJson.questionType === QuestionType.Matrix) {
+                const matrixBlock = questionBlock as ActivityMatrixQuestionBlock;
+                const [answer] = questionJson.answers;
+
+                matrixBlock.answerId = answer?.answerGuid;
+                matrixBlock.answer = answer?.value;
             } else {
                 questionBlock.answerId = questionJson.answers[0].answerGuid;
                 const valueForQuestion = questionJson.answers[0].value;
