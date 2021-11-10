@@ -1,5 +1,4 @@
 @import '../../../styles/breakpoints';
-//@import '../../../styles/link-list';
 @import '../../../styles/colors';
 
 :host {
@@ -7,7 +6,6 @@
 }
 
 .footer {
-  margin-top: 50px;
   background: map-get($colors, 'footer-bg');
   color: map-get($colors, 'footer-color');
 
@@ -98,12 +96,12 @@
         & a.link {
           color: map-get($colors, 'list-item-hightlight-color');
         }
-        &_invert {
-          a, button {
-            color: map-get($colors, 'list-item-hightlight-bg');
-            background: map-get($colors, 'list-item-hightlight-color');
-          }
-        }
+        //&_invert {
+        //  a, button {
+        //    color: map-get($colors, 'list-item-hightlight-bg');
+        //    background: map-get($colors, 'list-item-hightlight-color');
+        //  }
+        //}
       }
     }
   }

@@ -524,5 +524,76 @@
       "Agree": "I agree",
       "Disagree": "I am not ready to agree"
     }
+  },
+  "About": {
+    "About": {
+      "Title": "About Us",
+      "PhotoCaption": "Judson, 5 years old, Double Inlet Left Ventricle.",
+      "P1": "Our singular goal is to improve the future of people with single ventricle heart disease by understanding its causes.",
+      "P2": "Project Singular is a research study by Additional Ventures, a nonprofit foundation that funds research on single ventricle heart defects.",
+      "P3": "We are committed to working with patients and their families in order to more deeply understand this disease, and we believe that their insights are critical to this study. Our patient and family community can contribute by sharing their personal medical journey and biomedical samples, and by working with us to design the study as it progresses.",
+      "P4": "We also work with researchers, patient organizations, doctors, nurses, and more to make sure the data collected can lead to discoveries.",
+      "P5": "Additional Ventures is working with the Broad Institute of MIT and Harvard, Boston Children’s Hospital, and Genome Medical to execute Project Singular."
+    },
+    "OurTeam": {
+      "Title": "Our Team",
+      "Team": [
+        {
+          "ImageUrl": "assets/images/Diane_circle_2x.png",
+          "Name": "Diane Pickles",
+          "About": "Program Director,<br/>Project Singular,<br/>Additional Ventures"
+        },
+        {
+          "ImageUrl": "assets/images/Keller_circle_2x.png",
+          "Name": "Kirstie Keller, PhD",
+          "About": "Principal Investigator,<br/>Project Singular<br/>Vice President of Programs,<br/>Additional Ventures"
+        }
+      ]
+    },
+    "Advisors": {
+      "Title": "Our Scientific Advisors",
+      "Advisors": [
+        {
+          "ImageUrl": "assets/images/Angela_circle_2x.png",
+          "Name": "Angela Lorts, MD",
+          "About": "Co-Founder and Co-Director of ACTION<br/>Professor, Pediatrics, University of Cincinnati College of Medicine"
+        },
+        {
+          "ImageUrl": "assets/images/Kurt_circle_2x.png",
+          "Name": "Kurt Schumacher, MD",
+          "About": "Medical Director, Pediatric Transplant Program, CS Mott Children's Hospital, University of Michigan<br/>Director, Data Coordinating Center, Pediatric Critical Care Consortium"
+        },
+        {
+          "ImageUrl": "assets/images/Benoit_circle_2x.png",
+          "Name": "Benoit Bruneau, PhD",
+          "About": "Director and Senior Investigator, <br/>Gladstone Institutes<br/>Professor, Department of Pediatrics, University of California San Francisco "
+        },
+        {
+          "ImageUrl": "assets/images/Sasha_circle_2x.png",
+          "Name": "Sasha Opotowsky, MD",
+          "About": "Director, Adult Congenital <br/>Heart Disease <br/>Program Professor, University of Cincinnati Department of Pediatrics<br/>Co-Director, Fontan Outcomes Network"
+        },
+        {
+          "ImageUrl": "assets/images/Jesse_circle_2x.png",
+          "Name": "Jesse Engreitz, PhD",
+          "About": "Assistant Professor, Department of Genetics and Children’s Heart Center Basic Science and Engineering (BASE) Initiative, Stanford University"
+        },
+        {
+          "ImageUrl": "assets/images/Rahul_circle_2x.png",
+          "Name": "Rahul Rathod, MD",
+          "About": "Director of Cardiology Operations and Strategy, Boston Children's Hospital <br/>Associate Professor at Harvard Medical School<br/>Director of FORCE Registry"
+        },
+        {
+          "ImageUrl": "assets/images/Kim_circle_2x.png",
+          "Name": "Kim McBride, MD",
+          "About": "Investigator, Center for Cardiovascular Research at Nationwide Children's Hospital; Chief, Division of Genetic and Genomic Medicine, and Associate Professor in the Department of Pediatrics at The Ohio State University College of Medicine"
+        },
+        {
+          "ImageUrl": "assets/images/Nadia_2x.png",
+          "Name": "Nadine Kasparian, PhD",
+          "About": "Director, Cincinnati Children’s Center for Heart Disease and Mental Health"
+        }
+      ]
+    }
   }
 }

@@ -1,11 +1,13 @@
-<app-progress-bar></app-progress-bar>
-<div class="rarex-activity-page">
-  <div class="rarex-activity-page__activity-container">
-    <app-activity
-      [studyGuid]="studyGuid"
-      (submit)="onSubmit($event)"
-      [activityGuid]="instanceGuid"
-      *ngIf="!isFetchingActivities"
-    ></app-activity>
+<div class="container">
+  <app-progress-bar></app-progress-bar>
+  <div class="rarex-activity-page">
+    <div class="rarex-activity-page__activity-container">
+      <app-activity
+        [studyGuid]="studyGuid"
+        (submit)="onSubmit($event)"
+        [activityGuid]="instanceGuid"
+        *ngIf="!isFetchingActivities"
+      ></app-activity>
+    </div>
   </div>
 </div>

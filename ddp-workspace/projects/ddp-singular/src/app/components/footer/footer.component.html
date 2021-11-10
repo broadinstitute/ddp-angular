@@ -50,7 +50,7 @@
               {{ 'Header.Links.Dashboard' | translate }}
             </a>
           </li>
-          <li class="link-list__item link-list__item_highlight-stroke link-list__item_highlight_invert" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active">
+          <li class="link-list__item link-list__item_highlight-stroke link-list__item_highlight-stroke_invert" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active">
             <ddp-sign-in-out [signOutReturnToUrl]="Route.Home"></ddp-sign-in-out>
           </li>
           <li class="link-list__item link-list__item_highlight link-list__item_highlight_invert" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active" *ngIf="!isAuthenticated">
