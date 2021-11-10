@@ -218,3 +218,9 @@ h4 {
 .close:hover {
     color: mat-color($app-theme, 650);
 }
+
+.tooltip__icon {
+    width: 24px;
+    height: 24px;
+    margin-left: 4px;
+}

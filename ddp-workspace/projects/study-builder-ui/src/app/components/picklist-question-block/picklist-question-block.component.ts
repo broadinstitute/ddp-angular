@@ -33,15 +33,6 @@ export class PicklistQuestionBlockComponent implements OnInit {
     }
 
     private buildFromDef(defBlock: QuestionBlockDef<PicklistQuestionDef>): ActivityPicklistQuestionBlock {
-        // todo replace mock options with custom options once options control would be added
-        const text1 = new SimpleTemplate(this.factory.createBlankTemplate());
-        text1.setTranslationText(this.config.defaultLanguageCode, 'test1');
-        const text2 = new SimpleTemplate(this.factory.createBlankTemplate());
-        text2.setTranslationText(this.config.defaultLanguageCode, 'test2');
-        const options: PicklistOptionDef[] =
-            [{stableId: 'test1', optionLabelTemplate: text1}, {stableId: 'test2', optionLabelTemplate: text2}];
-
-
         const newClientBlock = new ActivityPicklistQuestionBlock();
         const questionDef = defBlock.question;
         newClientBlock.selectMode = questionDef.selectMode;
@@ -52,9 +43,9 @@ export class PicklistQuestionBlockComponent implements OnInit {
         newClientBlock.picklistLabel =
             new SimpleTemplate(questionDef.picklistLabelTemplate).getTranslationText(this.config.defaultLanguageCode);
         newClientBlock.picklistOptions =
-            // questionDef.picklistOptions.map(picklistOption => this.convertOptionDefToActivityOption(picklistOption));
-            options.map(picklistOption => this.convertOptionDefToActivityOption(picklistOption));
+            questionDef.picklistOptions.map(picklistOption => this.convertOptionDefToActivityOption(picklistOption));
         newClientBlock.picklistGroups = [];
+        newClientBlock.detailMaxLength = 500;
         return newClientBlock;
     }
 

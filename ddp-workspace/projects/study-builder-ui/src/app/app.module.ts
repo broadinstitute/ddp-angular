@@ -28,11 +28,13 @@ import { ConfigurationService, DdpModule } from 'ddp-sdk';
 import { DummyErrorHandler } from './dummyErrorHandler';
 import { StaticContentBlockComponent } from './components/static-content-block/static-content-block.component';
 import { StaticContentBlockEditorComponent } from './components/static-content-block-editor/static-content-block-editor.component';
-
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ManageListComponent } from './components/manage-list/manage-list.component';
+import { PicklistOptionEditorComponent } from './components/picklist-option-editor/picklist-option-editor.component';
 
 const ddpConfig = new ConfigurationService();
 ddpConfig.doGcpErrorReporting = false;
-
+ddpConfig.tooltipIconUrl = 'assets/images/info.png';
 
 @NgModule({
     declarations: [
@@ -49,7 +51,9 @@ ddpConfig.doGcpErrorReporting = false;
         PicklistQuestionBlockComponent,
         PicklistQuestionEditorComponent,
         StaticContentBlockComponent,
-        StaticContentBlockEditorComponent
+        StaticContentBlockEditorComponent,
+        ManageListComponent,
+        PicklistOptionEditorComponent
     ],
     imports: [
         BrowserModule,
@@ -64,7 +68,8 @@ ddpConfig.doGcpErrorReporting = false;
         BrowserAnimationsModule,
         ReactiveFormsModule,
         MatCheckboxModule,
-        DdpModule
+        DdpModule,
+        DragDropModule
     ],
     providers: [
         {

@@ -1,0 +1,24 @@
+<ng-container [formGroup]="optionForm">
+    <mat-form-field class="stable-id-column">
+        <mat-label>stableId</mat-label>
+        <input matInput formControlName="stableId" required>
+    </mat-form-field>
+    <mat-form-field class="label-column">
+        <mat-label>Label</mat-label>
+        <input matInput formControlName="label" required>
+    </mat-form-field>
+    <mat-form-field class="tooltip-column">
+        <mat-label>Tooltip</mat-label>
+        <input matInput formControlName="tooltip">
+    </mat-form-field>
+    <div class="allow-details-column">
+        <mat-checkbox formControlName="allowDetails"></mat-checkbox>
+    </div>
+    <mat-form-field class="detail-label-column">
+        <mat-label>Detail label</mat-label>
+        <input matInput formControlName="detailLabel">
+    </mat-form-field>
+    <div class="exclusive-column">
+        <mat-checkbox formControlName="exclusive"></mat-checkbox>
+    </div>
+</ng-container>
