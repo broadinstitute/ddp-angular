@@ -26,6 +26,7 @@ import { ConfigurationService, DdpModule } from 'ddp-sdk';
 import { DummyErrorHandler } from './dummyErrorHandler';
 import { StaticContentBlockComponent } from './components/static-content-block/static-content-block.component';
 import { StaticContentBlockEditorComponent } from './components/static-content-block-editor/static-content-block-editor.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 const ddpConfig = new ConfigurationService();
@@ -60,7 +61,8 @@ ddpConfig.doGcpErrorReporting = false;
         BrowserAnimationsModule,
         ReactiveFormsModule,
         MatCheckboxModule,
-        DdpModule
+        DdpModule,
+        DragDropModule
     ],
     providers: [
         {

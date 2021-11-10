@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormBlockDef } from '../../model/core/formBlockDef';
 import { ActivityDefinitionEditorService } from '../../services/activity-definition-editor.service';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ObservableFormSectionDef } from '../../model/core-extended/observableFormSectionDef';
+import { IdentifiableFormBlockDef } from '../../model/core-extended/identifiableFormBlockDef';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'app-section',
@@ -30,5 +32,11 @@ export class SectionComponent implements OnInit {
 
     blockSelected(block: FormBlockDef): void {
         this.editorService.setSelectedBlock(block);
+    }
+
+    blockDrop(
+        event: CdkDragDrop<BehaviorSubject<IdentifiableFormBlockDef>[]>,
+        blocksSubjects: BehaviorSubject<IdentifiableFormBlockDef>[]): void {
+        moveItemInArray(blocksSubjects, event.previousIndex, event.currentIndex);
     }
 }
