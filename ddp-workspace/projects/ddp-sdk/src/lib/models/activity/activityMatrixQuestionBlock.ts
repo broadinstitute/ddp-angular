@@ -35,4 +35,14 @@ export class ActivityMatrixQuestionBlock extends ActivityQuestionBlock<ActivityM
   public get questionType(): QuestionType {
     return QuestionType.Matrix;
   }
+
+  hasAnswer(): boolean {
+    const sidMap = new Map<string, boolean>();
+
+    this.questions.forEach(question => sidMap.set(question.stableId, false));
+
+    this.answer.forEach(answer => sidMap.set(answer.rowStableId, true));
+
+    return Array.from(sidMap.values()).every(Boolean);
+  }
 }
