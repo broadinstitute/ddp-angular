@@ -82,12 +82,14 @@ export class ActivityMatrixAnswer implements OnChanges {
 
     const ungroupedOptions = options.filter(option => option.groupId === null);
 
-    renderGroups.unshift({
-      identifier: null,
-      name: null,
-      options: ungroupedOptions,
-      colSpan: ungroupedOptions.length,
-    });
+    if (ungroupedOptions.length) {
+      renderGroups.unshift({
+        identifier: null,
+        name: null,
+        options: ungroupedOptions,
+        colSpan: ungroupedOptions.length,
+      });
+    }
 
     return renderGroups;
   }
