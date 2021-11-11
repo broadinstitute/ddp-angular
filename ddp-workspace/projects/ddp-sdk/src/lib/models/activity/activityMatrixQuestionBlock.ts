@@ -41,7 +41,7 @@ export class ActivityMatrixQuestionBlock extends ActivityQuestionBlock<ActivityM
 
     this.questions.forEach(question => sidMap.set(question.stableId, false));
 
-    this.answer.forEach(answer => sidMap.set(answer.rowStableId, true));
+    this.answer?.forEach(answer => sidMap.set(answer.rowStableId, true));
 
     return Array.from(sidMap.values()).every(Boolean);
   }
