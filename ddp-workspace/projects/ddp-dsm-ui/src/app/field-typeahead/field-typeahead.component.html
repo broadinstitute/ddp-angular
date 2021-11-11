@@ -1,0 +1,17 @@
+<mat-form-field *ngIf="dataSource != undefined" [ngClass]="{'Input--Abstraction': true}">
+  <input matInput autocomplete="off" [disabled]="disabled"
+         [(ngModel)]="drug"
+         (change)="selectDrug($event)"
+         [typeahead]="dataSource"
+         [typeaheadMinLength]="0"
+         [typeaheadScrollable]="true"
+         [typeaheadOptionsInScrollableView]="6"
+         (typeaheadOnSelect)="selectDrug($event)"
+         placeholder="Start typing a {{fieldName}}...">
+</mat-form-field>
+
+<mat-form-field *ngIf="dataSource == undefined" [ngClass]="{'Input--Abstraction': true}">
+  <input matInput [disabled]="disabled"
+         [(ngModel)]="drug"
+         placeholder="Medication">
+</mat-form-field>
