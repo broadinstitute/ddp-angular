@@ -4,6 +4,11 @@
       <div class="footer-logo">
         <img src="assets/images/logo.png" [alt]="'Header.LogoAlt' | translate"/>
       </div>
+      <div class="footer-contacts">
+        Contact Us: (650) 761-6486<br/>
+        contact@projectsingular.org
+      </div>
+
       <div class="footer-social">
         <div class="footer-social-item">
           <img src="assets/images/twitter.svg" alt="twitter">
@@ -15,7 +20,7 @@
           <img src="assets/images/linkedin.svg" alt="linkedin">
         </div>
       </div>
-      <div class="footer-copyright">Copyright 2021</div>
+      <div class="footer-copyright">Copyright 2021 Additional Ventures</div>
     </div>
     <div class="footer-menu">
       <nav>
@@ -45,8 +50,13 @@
               {{ 'Header.Links.Dashboard' | translate }}
             </a>
           </li>
-          <li class="link-list__item" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active">
+          <li class="link-list__item link-list__item_highlight-stroke link-list__item_highlight-stroke_invert" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active">
             <ddp-sign-in-out [signOutReturnToUrl]="Route.Home"></ddp-sign-in-out>
+          </li>
+          <li class="link-list__item link-list__item_highlight link-list__item_highlight_invert" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active" *ngIf="!isAuthenticated">
+            <a class="link" [routerLink]="Route.PreScreening">
+              {{ 'Header.Links.SignMeUp' | translate }}
+            </a>
           </li>
         </ul>
       </nav>

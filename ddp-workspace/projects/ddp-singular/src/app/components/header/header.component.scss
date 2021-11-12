@@ -10,8 +10,13 @@ $headerHeight: (
 
 .header {
   font-family: Spartan-Bold, sans-serif;
-  background: map-get($colors, 'header-bg');
   color: map-get($colors, 'header-color');
+  ::ng-deep {
+    button {
+      font-family: Spartan-Bold;
+      color: map-get($colors, 'header-color');
+    }
+  }
   height: map-get($headerHeight, 'default');
 
   @include media-sm {
@@ -30,8 +35,8 @@ $headerHeight: (
   &__container {
     display: flex;
     align-items: center;
-
-    max-width: 1250px;
+    justify-content: space-between;
+    max-width: 1380px;
     height: 100%;
 
     margin: 0 auto;
@@ -44,8 +49,6 @@ $headerHeight: (
 
   &__logo {
     height: 3.6rem;
-
-    margin-right: 3.2rem;
 
     @include media-md {
       margin-right: auto;
@@ -67,8 +70,6 @@ $headerHeight: (
   &__nav {
     display: flex;
     align-items: center;
-
-    width: 100%;
 
     @include media-md {
       flex-flow: column nowrap;

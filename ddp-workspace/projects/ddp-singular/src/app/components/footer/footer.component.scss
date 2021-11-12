@@ -1,5 +1,4 @@
 @import '../../../styles/breakpoints';
-//@import '../../../styles/link-list';
 @import '../../../styles/colors';
 
 :host {
@@ -7,9 +6,13 @@
 }
 
 .footer {
-  margin-top: 50px;
   background: map-get($colors, 'footer-bg');
   color: map-get($colors, 'footer-color');
+
+  &-contacts {
+    font-size: 16px;
+    margin-top: 30px;
+  }
 
   & .container {
     padding-top: 50px;
@@ -64,6 +67,7 @@
 
   &-copyright {
     font-size: 16px;
+    opacity: .7;
     @include media-md {
       margin-bottom: 30px;
     }
@@ -92,6 +96,12 @@
         & a.link {
           color: map-get($colors, 'list-item-hightlight-color');
         }
+        //&_invert {
+        //  a, button {
+        //    color: map-get($colors, 'list-item-hightlight-bg');
+        //    background: map-get($colors, 'list-item-hightlight-color');
+        //  }
+        //}
       }
     }
   }

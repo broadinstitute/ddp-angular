@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'colors';
 
 .SimpleButton {
   color: #fff;
@@ -47,16 +48,16 @@
   }
 
   &--primary {
-    background: $color-green !important;
-    border: 1px solid $color-green !important;
+    background: $__purple !important;
+    border: 1px solid $__purple !important;
 
     color: #ffffff !important;
 
     &-outline {
       background: transparent !important;
-      border: 2px solid $color-green !important;
+      border: 2px solid $__purple !important;
 
-      color: $color-green !important;
+      color: $__purple !important;
     }
   }
 

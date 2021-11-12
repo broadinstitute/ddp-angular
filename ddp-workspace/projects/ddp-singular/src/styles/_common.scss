@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'colors';
 
 *,
 *::before,
@@ -60,7 +61,7 @@ body {
 .container {
   margin: 0 auto;
   width: 100%;
-  max-width: 960px;
+  max-width: 1380px;
 }
 
 .session-expire-dialog button {
@@ -73,4 +74,9 @@ body {
   justify-content: center;
 
   padding: 64px 0;
+}
+
+a {
+  font-family: Spartan-Bold, serif;
+  color: $__highlighted-font;
 }

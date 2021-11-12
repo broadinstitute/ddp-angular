@@ -1,11 +1,13 @@
-<div class="pre-screening">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-      <app-activity
-        [studyGuid]="studyGuid"
-        [activityGuid]="instanceGuid"
-        (submit)="onSubmit($event)"
-      ></app-activity>
+<div class="container">
+  <div class="pre-screening">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <app-activity
+          [studyGuid]="studyGuid"
+          [activityGuid]="instanceGuid"
+          (submit)="onSubmit($event)"
+        ></app-activity>
+      </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="about">
+    <div class="about-left">
+      <h1>{{ 'About.About.Title' | translate }}</h1>
+      <p [innerHTML]="'About.About.P1' | translate"></p>
+      <p [innerHTML]="'About.About.P2' | translate"></p>
+      <p [innerHTML]="'About.About.P3' | translate"></p>
+      <p [innerHTML]="'About.About.P4' | translate"></p>
+      <p [innerHTML]="'About.About.P5' | translate"></p>
+    </div>
+    <div class="about-right">
+      <img src="assets/images/Judson_2x.png" alt="">
+      <div class="img-description">{{ 'About.About.PhotoCaption' | translate }}</div>
+    </div>
+  </div>
+  <div class="our-team">
+    <h1>{{ 'About.OurTeam.Title' | translate }}</h1>
+    <div class="cards">
+      <ng-container *ngFor="let teamMember of 'About.OurTeam.Team' | translate">
+        <ng-container
+          [ngTemplateOutlet]="card"
+          [ngTemplateOutletContext]="{ person: teamMember }"
+        ></ng-container>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<div class="advisors">
+  <div class="container">
+    <h1>{{ 'About.Advisors.Title' | translate }}</h1>
+    <div class="cards">
+      <ng-container *ngFor="let advisor of 'About.Advisors.Advisors' | translate">
+        <ng-container
+          [ngTemplateOutlet]="card"
+          [ngTemplateOutletContext]="{ person: advisor }"
+        ></ng-container>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #card let-person="person">
+  <div class="cards-card">
+    <div class="cards-card-img">
+      <img src="{{ person.ImageUrl }}" alt="">
+    </div>
+    <div class="cards-card-description">
+      <div class="cards-card-description-name">{{ person.Name | translate }}</div>
+      <div class="cards-card-description-about" [innerHTML]="person.About | translate"></div>
+    </div>
+  </div>
+</ng-template>

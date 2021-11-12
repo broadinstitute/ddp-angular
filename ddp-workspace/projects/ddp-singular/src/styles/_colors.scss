@@ -1,22 +1,23 @@
 $__white: #ffffff;
 $__dark-blue: #011c48;
-$__light-blue: #34cec3;
-$__font: $__dark-blue;
+$__light-blue: #A2F4E9;
+$__font: #011C48;
+$__highlighted-font: #521B93;
 $__light-font: $__white;
 $__purple: #521B93;
 
 $colors: (
   'header-bg': $__dark-blue,
   'header-bar-bg': $__white,
-  'header-color': $__light-font,
+  'header-color': $__highlighted-font,
   'header-color-dark': $__font,
-  'footer-bg': $__dark-blue,
+  'footer-bg': $__highlighted-font,
   'footer-color': $__light-font,
   'footer-social-border': $__white,
   'font-dark': $__font,
   'font-light': $__white,
-  'list-item-hightlight-bg': $__light-blue,
-  'list-item-hightlight-color': $__font,
+  'list-item-hightlight-bg': $__highlighted-font,
+  'list-item-hightlight-color': $__white,
   'faq-border': #ccc,
   'progress_bar-active': $__purple,
   'progress_bar-inactive-bg': #d8d8d8,

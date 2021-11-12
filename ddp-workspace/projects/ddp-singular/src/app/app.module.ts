@@ -16,7 +16,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { ErrorComponent } from './components/pages/error/error.component';
-import { AboutUsComponent } from './components/about-us/about-us.component';
+import { AboutUsComponent } from './components/pages/about-us/about-us.component';
 import { ActivityComponent } from './components/activity/activity.component';
 import { SurveyComponent } from './components/pages/survey/survey.component';
 import { PasswordComponent } from './components/pages/password/password.component';
