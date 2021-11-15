@@ -7,6 +7,7 @@
             <ng-container *ngIf="isModal; else embedded">
                 <ddp-modal-activity-block [instance]="instance"
                                           [readonly]="readonly"
+                                          [enabled]="enabled"
                                           [validationRequested]="validationRequested"
                                           [studyGuid]="studyGuid"
                                           (componentBusy)="embeddedComponentBusy.emit($event)"
@@ -17,6 +18,7 @@
             <ng-template #embedded>
                 <ddp-embedded-activity-block [instance]="instance"
                                              [readonly]="readonly"
+                                             [enabled]="enabled"
                                              [validationRequested]="validationRequested"
                                              [studyGuid]="studyGuid"
                                              (componentBusy)="embeddedComponentBusy.emit($event)"
@@ -29,7 +31,7 @@
     </div>
 
     <button *ngIf="block.allowMultiple" mat-flat
-            [disabled]="readonly"
+            [disabled]="readonly || !enabled"
             class="add-btn button button_primary"
             (click)="createChildInstance()">
         <img lazy-resource src="assets/shared/add-person.svg" class="icon" [alt]="block.addButtonText">

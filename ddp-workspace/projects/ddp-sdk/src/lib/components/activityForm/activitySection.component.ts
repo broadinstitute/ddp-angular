@@ -75,6 +75,9 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
                         block.shown = element.shown;
                         blockVisibilityChanged = true;
                     }
+                    if (block.enabled !== element.enabled) {
+                        block.enabled = element.enabled;
+                    }
                     if (block.blockType === BlockType.Activity && !block.shown) {
                         this.updateValidationForHiddenEmbeddedActivity(block as ActivityActivityBlock);
                     }

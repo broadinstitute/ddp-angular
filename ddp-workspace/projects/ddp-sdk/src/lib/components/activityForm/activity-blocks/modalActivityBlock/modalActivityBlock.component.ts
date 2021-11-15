@@ -41,6 +41,7 @@ export class ModalActivityBlockComponent {
     @Input() instance: ActivityInstance;
     @Input() validationRequested: boolean;
     @Input() readonly: boolean;
+    @Input() enabled: boolean;
     @Output() componentBusy = new EventEmitter<boolean>(true);
     @Output() deletedActivity = new EventEmitter<string>();
     @Output() blockVisibilityChanged = new EventEmitter<BlockVisibility[]>();

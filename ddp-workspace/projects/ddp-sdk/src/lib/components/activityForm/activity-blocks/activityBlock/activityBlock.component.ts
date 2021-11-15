@@ -29,6 +29,7 @@ import { BlockVisibility } from '../../../../models/activity/blockVisibility';
 })
 export class ActivityBlockComponent implements OnInit, OnDestroy {
     @Input() block: ActivityActivityBlock;
+    @Input() enabled: boolean;
     @Input() readonly: boolean;
     @Input() validationRequested: boolean;
     @Input() studyGuid: string;

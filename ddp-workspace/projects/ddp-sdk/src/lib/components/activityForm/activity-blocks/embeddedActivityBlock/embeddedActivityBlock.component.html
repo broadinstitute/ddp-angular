@@ -9,7 +9,8 @@
         <button *ngIf="instance.canDelete"
                 mat-icon-button class="instance__close-btn"
                 #delete_button
-                (click)="openDeleteDialog()">
+                (click)="openDeleteDialog()"
+                [disabled]="!enabled">
             <mat-icon>close</mat-icon>
         </button>
     </div>
@@ -18,7 +19,7 @@
                           [section]="section"
                           [studyGuid]="studyGuid"
                           [activityGuid]="instance.instanceGuid"
-                          [readonly]="readonly"
+                          [readonly]="readonly || !enabled"
                           [validationRequested]="validationRequested">
     </ddp-activity-section>
 </ng-template>

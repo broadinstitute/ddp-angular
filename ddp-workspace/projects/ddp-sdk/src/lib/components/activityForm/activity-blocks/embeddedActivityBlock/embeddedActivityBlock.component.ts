@@ -33,6 +33,7 @@ import { BlockVisibility } from '../../../../models/activity/blockVisibility';
 export class EmbeddedActivityBlockComponent implements OnInit {
     @Input() instance: ActivityInstance;
     @Input() readonly: boolean;
+    @Input() enabled: boolean;
     @Input() validationRequested: boolean;
     @Input() studyGuid: string;
     @Output() componentBusy = new EventEmitter<boolean>();

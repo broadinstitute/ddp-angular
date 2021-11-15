@@ -3,6 +3,7 @@ import { BlockType } from './blockType';
 export abstract class ActivityBlock {
     public id: string;
     public shown: boolean;
+    public enabled = true;
     public scrollTo = false;
     public valid = true;
 
