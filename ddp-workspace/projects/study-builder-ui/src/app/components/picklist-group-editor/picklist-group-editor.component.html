@@ -1,0 +1,13 @@
+<ng-container [formGroup]="groupForm">
+    <button mat-raised-button (click)="addEmptyOptionToGroup()">Add new option</button>
+    <mat-form-field class="stable-id-column">
+        <mat-label>Group stableId</mat-label>
+        <input matInput formControlName="stableId" required>
+    </mat-form-field>
+    <mat-form-field class="stable-id-column">
+        <mat-label>Group name</mat-label>
+        <input matInput formControlName="name" required>
+    </mat-form-field>
+    <app-picklist-options-list [options]="options.value" (changed)="updateGroupOptions($event)">
+    </app-picklist-options-list>
+</ng-container>

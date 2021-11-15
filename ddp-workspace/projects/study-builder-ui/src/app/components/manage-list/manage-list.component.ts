@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PicklistOptionDef } from '../../model/core/picklistOptionDef';
 import { PicklistGroupDef } from '../../model/core/picklistGroupDef';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
 import { ConfigurationService } from '../../configuration.service';
 import { StudyConfigObjectFactory } from '../../model/core-extended/studyConfigObjectFactory';
@@ -21,7 +20,7 @@ import { StudyConfigObjectFactory } from '../../model/core-extended/studyConfigO
     ]
 })
 export class ManageListComponent implements ControlValueAccessor {
-    // @Input() groupsAllowed: boolean;
+    @Input() groupsAllowed: boolean;
 
     public groups: Array<PicklistGroupDef>;
     public options: PicklistOptionDef[] = [];
@@ -34,13 +33,11 @@ export class ManageListComponent implements ControlValueAccessor {
         this.factory = new StudyConfigObjectFactory(config);
     }
 
-    // onChange = (event: { groups: Array<PicklistGroupDef>; options: Array<PicklistOptionDef> }) => {};
-    onChange = (event: Array<PicklistOptionDef>) => {};
+    onChange = (event: {options: Array<PicklistOptionDef>; groups: Array<PicklistGroupDef>}) => {};
     onTouched = () => {};
 
-    // writeValue({ groups, options }: { groups: Array<PicklistGroupDef>; options: Array<PicklistOptionDef> }): void {
-    writeValue(options: Array<PicklistOptionDef>): void {
-        // this.groups = [...groups];
+    writeValue({ options, groups }: { options: Array<PicklistOptionDef>; groups: Array<PicklistGroupDef> }): void {
+        this.groups = [...groups];
         this.options = [...options];
     }
 
@@ -66,45 +63,51 @@ export class ManageListComponent implements ControlValueAccessor {
     addEmptyOption(): void {
         this.markAsTouched();
         if (!this.disabled) {
-            const newOptionGroup = {
+            const newOption = {
                 stableId: '',
                 optionLabelTemplate: new SimpleTemplate(this.factory.createBlankTemplate()),
             };
-            this.options.push(newOptionGroup);
-            this.onChange(this.options);
+            this.options = [...this.options, newOption];
+            this.onChange({options: this.options, groups: this.groups});
         }
     }
 
-    optionDrop(event: CdkDragDrop<PicklistOptionDef[]>): void {
+    addEmptyGroup(): void {
         this.markAsTouched();
         if (!this.disabled) {
-            moveItemInArray(this.options, event.previousIndex, event.currentIndex);
-            this.onChange(this.options);
+            const newOptionGroup: PicklistGroupDef = {
+                stableId: '',
+                nameTemplate: new SimpleTemplate(this.factory.createBlankTemplate()),
+                options: [],
+            };
+            this.groups.push(newOptionGroup);
+            this.onChange({options: this.options, groups: this.groups});
         }
     }
 
-    removeOptionByIndex(index: number): void {
+    removeGroupByIndex(index: number): void {
         this.markAsTouched();
         if (!this.disabled) {
-            this.options.splice(index, 1);
-            this.onChange(this.options);
+            this.groups.splice(index, 1);
+            this.onChange({options: this.options, groups: this.groups});
         }
     }
 
-    trackByOptions(index: number, item: PicklistOptionDef): string {
-        return String(index);
-    }
-
-    updateOption(updatedOption: PicklistOptionDef, index: number): void {
+    updateOptions(options: PicklistOptionDef[]): void {
         this.markAsTouched();
         if (!this.disabled) {
-            this.options[index].stableId = updatedOption.stableId;
-            this.options[index].optionLabelTemplate = updatedOption.optionLabelTemplate;
-            this.options[index].tooltipTemplate = updatedOption.tooltipTemplate;
-            this.options[index].detailLabelTemplate = updatedOption.detailLabelTemplate;
-            this.options[index].allowDetails = updatedOption.allowDetails;
-            this.options[index].exclusive = updatedOption.exclusive;
-            this.onChange(this.options);
+            this.options = [...options];
+            this.onChange({options: this.options, groups: this.groups});
+        }
+    }
+
+    updateGroup(group: PicklistGroupDef, groupIndex: number): void {
+        this.markAsTouched();
+        if (!this.disabled) {
+            this.groups[groupIndex].stableId = group.stableId;
+            this.groups[groupIndex].nameTemplate = group.nameTemplate;
+            this.groups[groupIndex].options = [...group.options];
+            this.onChange({options: this.options, groups: this.groups});
         }
     }
 }

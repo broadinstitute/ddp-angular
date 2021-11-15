@@ -11,7 +11,7 @@ import { SurveyEditorComponent } from './components/survey-editor/survey-editor.
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivityComponent } from './components/activity/activity.component';
 import { SectionComponent } from './components/section/section.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,6 +31,8 @@ import { StaticContentBlockEditorComponent } from './components/static-content-b
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ManageListComponent } from './components/manage-list/manage-list.component';
 import { PicklistOptionEditorComponent } from './components/picklist-option-editor/picklist-option-editor.component';
+import { PicklistOptionsListComponent } from './components/picklist-options-list/picklist-options-list.component';
+import { PicklistGroupEditorComponent } from './components/picklist-group-editor/picklist-group-editor.component';
 
 const ddpConfig = new ConfigurationService();
 ddpConfig.doGcpErrorReporting = false;
@@ -53,7 +55,9 @@ ddpConfig.tooltipIconUrl = 'assets/images/info.png';
         StaticContentBlockComponent,
         StaticContentBlockEditorComponent,
         ManageListComponent,
-        PicklistOptionEditorComponent
+        PicklistOptionEditorComponent,
+        PicklistOptionsListComponent,
+        PicklistGroupEditorComponent
     ],
     imports: [
         BrowserModule,
@@ -69,7 +73,8 @@ ddpConfig.tooltipIconUrl = 'assets/images/info.png';
         ReactiveFormsModule,
         MatCheckboxModule,
         DdpModule,
-        DragDropModule
+        DragDropModule,
+        FormsModule
     ],
     providers: [
         {
