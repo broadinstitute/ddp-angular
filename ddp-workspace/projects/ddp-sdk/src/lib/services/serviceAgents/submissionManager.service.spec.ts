@@ -303,7 +303,8 @@ describe('SubmissionManagerTest', () => {
             if (answerSubmission.stableId === '1') {
                 console.log('This is it!!!');
             }
-            const testBlockVisibility: BlockVisibility[] = answerSubmission.stableId === '1' ? [{ blockGuid: '2', shown: false }] : [];
+            const testBlockVisibility: BlockVisibility[] =
+                answerSubmission.stableId === '1' ? [{ blockGuid: '2', shown: false, enabled: true }] : [];
             return of({
                 answers: [],
                 blockVisibility: testBlockVisibility
