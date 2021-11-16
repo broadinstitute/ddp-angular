@@ -37,12 +37,12 @@ export class ActivityMatrixQuestionBlock extends ActivityQuestionBlock<ActivityM
   }
 
   hasAnswer(): boolean {
-    const sidMap = new Map<string, boolean>();
+    const stableIdsMap = new Map<string, boolean>();
 
-    this.questions.forEach(question => sidMap.set(question.stableId, false));
+    this.questions.forEach(question => stableIdsMap.set(question.stableId, false));
 
-    this.answer?.forEach(answer => sidMap.set(answer.rowStableId, true));
+    this.answer?.forEach(answer => stableIdsMap.set(answer.rowStableId, true));
 
-    return Array.from(sidMap.values()).every(Boolean);
+    return Array.from(stableIdsMap.values()).every(Boolean);
   }
 }

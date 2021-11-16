@@ -100,7 +100,7 @@ export class ActivityMatrixAnswer implements OnChanges {
   ): ActivityMatrixAnswerDto[] {
     let answer = this.block.answer ?? [];
 
-    if (this.block.selectMode === SelectMode.Single) {
+    if (this.isSingleMode) {
       /**
        * If `selectMode` is `SINGLE`
        * we remove previously given answer (if there is one)

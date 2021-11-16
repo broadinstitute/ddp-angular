@@ -101,9 +101,6 @@ describe('ActivityMatrixAnswer', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ActivityMatrixAnswer);
 
-    expect(fixture instanceof ComponentFixture).toBeTrue();
-    expect(fixture.componentInstance instanceof ActivityMatrixAnswer).toBeTrue();
-
     block = new ActivityMatrixQuestionBlock();
     block.selectMode = SelectMode.Single;
     block.question = 'Answer following questions';
@@ -117,8 +114,14 @@ describe('ActivityMatrixAnswer', () => {
     component.block = block;
   });
 
+  it('should create component', () => {
+    expect(fixture instanceof ComponentFixture).toBeTrue();
+    expect(fixture.componentInstance instanceof ActivityMatrixAnswer).toBeTrue();
+  });
+
   it('renders question prompt is one is provided', () => {
-    block.question = 'How are you?';
+    const prompt = 'How are you?';
+    block.question = prompt;
 
     component.ngOnChanges({ block: new SimpleChange(null, block, true) });
     fixture.detectChanges();
@@ -126,6 +129,10 @@ describe('ActivityMatrixAnswer', () => {
     const questionPrompt = fixture.debugElement.query(By.css('.ddp-question-prompt'));
 
     expect(questionPrompt).not.toBe(null);
+
+    const textPrompt = questionPrompt.nativeElement.textContent.trim();
+
+    expect(textPrompt).toBe(prompt);
   });
 
   it('renders table element', () => {
