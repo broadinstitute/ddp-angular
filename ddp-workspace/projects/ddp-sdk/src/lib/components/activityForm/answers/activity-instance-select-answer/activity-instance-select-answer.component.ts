@@ -64,7 +64,7 @@ export class ActivityInstanceSelectAnswer implements OnInit, OnDestroy {
     return this.activityInstanceSelectAnswerService.getOptions(this.block.stableId).pipe(
       tap(options => {
         this.options$.next(options);
-        this.componentBusy.next(false);
+        this.componentBusy.emit(false);
       }),
     );
   }
