@@ -59,7 +59,7 @@ export class ActivityInstanceSelectAnswer implements OnInit, OnDestroy {
   }
 
   private getOptions(): Observable<ActivityInstanceSelectOptionDto[]> {
-    this.componentBusy.next(true);
+    this.componentBusy.emit(true);
 
     return this.activityInstanceSelectAnswerService.getOptions(this.block.stableId).pipe(
       tap(options => {
