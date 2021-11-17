@@ -6,9 +6,11 @@
         <div>I got {{section.blocks.length}} blocks</div>
         <ng-container *ngFor="let block$ of section.blocksSubjects; index as i">
             <div class="section-block" *ngIf="block$ | async as block" [ngClass]="{'selection-highlight': block === (selectedBlock$ | async)}" (click)="blockSelected(block)">
-                <app-static-content-block  *ngIf="block.blockType === 'CONTENT'" [definitionBlock$]="block$"></app-static-content-block>
+                <app-static-content-block *ngIf="block.blockType === 'CONTENT'" [definitionBlock$]="block$"></app-static-content-block>
                 <app-text-question-block *ngIf="block.blockType === 'QUESTION' && block.question.questionType === 'TEXT'"
                                          [definitionBlock$]="block$"></app-text-question-block>
+                <app-picklist-question-block *ngIf="block.blockType === 'QUESTION' && block.question.questionType === 'PICKLIST'"
+                                         [definitionBlock$]="block$"></app-picklist-question-block>
             </div>
         </ng-container>
 

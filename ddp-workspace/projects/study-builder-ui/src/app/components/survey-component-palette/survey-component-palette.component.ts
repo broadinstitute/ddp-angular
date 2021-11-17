@@ -21,4 +21,8 @@ export class SurveyComponentPaletteComponent implements OnInit {
     addTextQuestionBlock(): void {
         this.editorService.addBlankTextQuestionBlockToActivity();
     }
+
+    addPicklistQuestionBlock(): void {
+        this.editorService.addBlankPicklistQuestionBlockToActivity();
+    }
 }
