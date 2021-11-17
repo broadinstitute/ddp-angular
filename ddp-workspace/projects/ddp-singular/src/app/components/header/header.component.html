@@ -1,5 +1,5 @@
 <header class="header">
-  <div class="header__container">
+  <div class="container">
     <a class="header__logo" [routerLink]="Route.Home">
       <img
               class="header__logo-img"
@@ -22,7 +22,7 @@
           </a>
         </li>
         <li class="link-list__item" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active">
-          <a class="link" [routerLink]="Route.StudyProgress">
+          <a class="link" href="https://www.additionalventures.org/project-singular-study-updates" target="_blank">
             {{ 'Header.Links.StudyProgress' | translate }}
           </a>
         </li>
@@ -45,7 +45,7 @@
           <ddp-sign-in-out [signOutReturnToUrl]="Route.Home"></ddp-sign-in-out>
         </li>
         <li class="link-list__item link-list__item_highlight" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active" *ngIf="!isAuthenticated">
-          <a class="link" [routerLink]="Route.PreScreening">
+          <a class="link sign-up" [routerLink]="Route.PreScreening">
             {{ 'Header.Links.SignMeUp' | translate }}
           </a>
         </li>

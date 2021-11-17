@@ -17,38 +17,30 @@ $headerHeight: (
       color: map-get($colors, 'header-color');
     }
   }
-  height: map-get($headerHeight, 'default');
-
-  @include media-sm {
-    height: map-get($headerHeight, 'sm');
-  }
-
-  @include media-xs {
-    height: map-get($headerHeight, 'xs');
-  }
+  margin-top: 30px;
+  margin-bottom: 50px;
 
   & a {
     font-family: Spartan-Bold, sans-serif;
     color: map-get($colors, 'header-color');
+    &.sign-up {
+      padding: 3px 7px;
+      display: inline-block;
+    }
   }
 
-  &__container {
+  .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 1380px;
     height: 100%;
-
-    margin: 0 auto;
-    padding: 0 2.4rem;
-
     @include media-md {
       position: relative;
     }
   }
 
   &__logo {
-    height: 3.6rem;
+    height: 100px;
 
     @include media-md {
       margin-right: auto;
@@ -70,7 +62,7 @@ $headerHeight: (
   &__nav {
     display: flex;
     align-items: center;
-
+    font-size: 17px;
     @include media-md {
       flex-flow: column nowrap;
 
@@ -99,11 +91,12 @@ $headerHeight: (
       }
 
       &--shown {
+        width: 100%;
         background: #fff;
         padding-left: 0;
         transform: translate3d(0, 0, 0);
         & ul {
-          padding-left: 0;
+          //padding-left: 0;
         }
         & a {
           color: map-get($colors, 'header-color-dark');

@@ -5,6 +5,13 @@
   margin-top: auto;
 }
 
+a {
+  &.sign-up {
+    padding: 3px 7px;
+    display: inline-block;
+  }
+}
+
 .footer {
   background: map-get($colors, 'footer-bg');
   color: map-get($colors, 'footer-color');
@@ -18,7 +25,6 @@
     padding-top: 50px;
     padding-bottom: 70px;
     display: flex;
-    width: 1250px;
     justify-content: space-between;
 
     @include media-md {
@@ -62,6 +68,17 @@
         top: 13px;
         left: 13px;
       }
+      &.instagram img {
+        top: 9px;
+      }
+      &.twitter img {
+        top: 12px;
+        left: 11px;
+      }
+      &.facebook img {
+        top: 8px;
+        left: 6px;
+      }
     }
   }
 
@@ -85,23 +102,34 @@
     }
 
     &__item {
-      margin-right: 25px;
+      font-size: 17px;
+      margin-right: 20px;
       @include media-md {
         margin-bottom: 10px;
       }
       &_highlight {
-        padding: 5px 15px;
-        border-radius: 5px;
         background: map-get($colors, 'list-item-hightlight-bg');
-        & a.link {
-          color: map-get($colors, 'list-item-hightlight-color');
+        &_invert {
+          a {
+            display: inline-block;
+            padding: 8px 12px;
+            border-radius: 5px;
+            color: map-get($colors, 'footer-color-hightlight');
+            background: $__white;
+          }
         }
-        //&_invert {
-        //  a, button {
-        //    color: map-get($colors, 'list-item-hightlight-bg');
-        //    background: map-get($colors, 'list-item-hightlight-color');
-        //  }
-        //}
+        &-stroke_invert {
+          ::ng-deep {
+            button {
+              min-width: 130px;
+              line-height: 15px!important;
+              padding: 14px 29px 15px;
+              border: 1px solid $__white;
+              border-radius: 5px;
+              cursor: pointer;
+            }
+          }
+        }
       }
     }
   }

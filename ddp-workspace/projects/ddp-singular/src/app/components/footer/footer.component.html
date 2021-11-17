@@ -10,14 +10,20 @@
       </div>
 
       <div class="footer-social">
-        <div class="footer-social-item">
-          <img src="assets/images/twitter.svg" alt="twitter">
+        <div class="footer-social-item twitter">
+          <a href="https://twitter.com/proj_singular" target="_blank">
+            <img src="assets/images/twitter.svg" alt="twitter">
+          </a>
         </div>
-        <div class="footer-social-item">
-          <img src="assets/images/youtube.svg" alt="youtube">
+        <div class="footer-social-item instagram">
+          <a href="https://www.instagram.com/project_singular/" target="_blank">
+            <img src="assets/images/linkedin.svg" alt="instagram">
+          </a>
         </div>
-        <div class="footer-social-item">
-          <img src="assets/images/linkedin.svg" alt="linkedin">
+        <div class="footer-social-item facebook">
+          <a href="https://www.facebook.com/project.singular.study" target="_blank">
+            <img src="assets/images/f.svg" alt="facebook">
+          </a>
         </div>
       </div>
       <div class="footer-copyright">Copyright 2021 Additional Ventures</div>
@@ -50,11 +56,11 @@
               {{ 'Header.Links.Dashboard' | translate }}
             </a>
           </li>
-          <li class="link-list__item link-list__item_highlight-stroke link-list__item_highlight-stroke_invert" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active">
+          <li class="link-list__item link-list__item_highlight-stroke_invert" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active">
             <ddp-sign-in-out [signOutReturnToUrl]="Route.Home"></ddp-sign-in-out>
           </li>
           <li class="link-list__item link-list__item_highlight link-list__item_highlight_invert" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active" *ngIf="!isAuthenticated">
-            <a class="link" [routerLink]="Route.PreScreening">
+            <a class="link sign-up" [routerLink]="Route.PreScreening">
               {{ 'Header.Links.SignMeUp' | translate }}
             </a>
           </li>

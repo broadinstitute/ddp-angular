@@ -71,14 +71,11 @@
 }
 
 .number {
-  top: 13%;
+  top: 52%;
   left: 50%;
   font-weight: bold;
   position: absolute;
   transform: translate(-50%, -50%);
-  @include media-sm {
-    top: 17%;
-  }
 }
 
 .step-paragraph {

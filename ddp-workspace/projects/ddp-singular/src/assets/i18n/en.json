@@ -6,7 +6,7 @@
       "StudyProgress": "Study Progress",
       "FAQs": "FAQs",
       "ContactUs": "Contact Us",
-      "SignMeUp": "Sign Me Up",
+      "SignMeUp": "Sign Me Up!",
       "Dashboard": "Dashboard"
     }
   },
@@ -275,7 +275,7 @@
       "SignIn": "Log In",
       "SignOut": "Log Out"
     },
-    "CountMeIn": "Cont Me In",
+    "CountMeIn": "Count Me In",
     "Title": {
       "Default": "Project Singular",
       "Alert": "Your session will time-out soon"
@@ -418,7 +418,7 @@
   "Error": {
     "Title": "We've encountered an error",
     "Paragraph1": "We're sorry, but an error has occurred.",
-    "Paragraph2": "Please wait a moment and retry."
+    "Paragraph2": "Please wait a moment and retry. If the trouble persists, please email us at <a href=\"mailto:contact@projectsingular.org\">contact@projectsingular.org</a> or call us at <a href=\"tel:6507616486\">(650)761-6486</a>."
   },
   "Toolkit": {
     "SessionExpired": {
