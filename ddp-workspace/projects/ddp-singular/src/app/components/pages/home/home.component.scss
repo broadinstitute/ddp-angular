@@ -1,5 +1,5 @@
 @import '../../../../styles/colors';
-
+@import "../../../../styles/breakpoints";
 
 :host {
   color: $__font;
@@ -16,14 +16,28 @@
     font-family: Spartan-Bold, serif;
     line-height: 57px;
   }
+  p {
+    line-height: 30px;
+  }
+  h1 {
+    @include media-sm {
+      font-size: 30px;
+      line-height: 46px;
+    }
+  }
 
   .header {
     &-wrapper {
       display: flex;
+      @include media-sm {
+        flex-direction: column-reverse;
+      }
     }
     &-description {
-      width: 49%;
       padding-right: 50px;
+      @include media-sm {
+        padding-right: 0;
+      }
       & p {
         font-size: 24px;
         line-height: 34px;
@@ -33,13 +47,14 @@
       }
     }
     &-photo {
-      width: 49%;
       & img {
         width: 100%;
       }
       &-description {
         font-size: 14px;
         width: 80%;
+        margin-bottom: 20px;
+        margin-top: 15px;
       }
     }
   }
@@ -48,8 +63,15 @@
     margin-top: 100px;
     display: flex;
     position: relative;
+    @include media-sm {
+      margin-top: 50px;
+      flex-direction: column-reverse;
+    }
     &-left {
-      width: 49%;
+      width: 100%;
+      @include media-sm {
+        padding: 20px;
+      }
       &:before {
         position: absolute;
         content: '';
@@ -58,17 +80,30 @@
         width: 52%;
         left: -49px;
         z-index: -1;
+        @include media-sm {
+          width: 100%;
+          left: 0;
+          height: 590px;
+        }
       }
     }
     &-right {
+      width: 100%;
       padding-left: 50px;
-      width: 49%;
+      @include media-sm {
+        padding-left: 0px;
+        margin-bottom: 50px;
+      }
     }
     &-items {
+      margin-top: 50px;
       &-item {
         margin-bottom: 50px;
         display: flex;
         margin-left: 30px;
+        @include media-sm {
+          margin-left: 0;
+        }
         &:nth-child(1) {
           & .about-items-item-img {
             background: url('/assets/images/know-1.svg') center center no-repeat;
@@ -107,14 +142,25 @@
 
 .join {
   margin-top: 100px;
+  @include media-sm {
+    h1 {
+      margin-top: 30px!important;
+    }
+    h3 {
+      line-height: 40px;
+    }
+  }
   &-wrapper {
     display: flex;
-  }
-  &-left, &-right {
-    width: 49%;
+    @include media-sm {
+      flex-direction: column-reverse;
+    }
   }
   &-left {
     padding-right: 40px;
+    @include media-md {
+      padding-right: 0px;
+    }
   }
   &-right {
     & img {
@@ -123,11 +169,15 @@
   }
   &-list {
     font-size: 18px;
+    line-height: 30px;
   }
   &-sign_up {
     width: 75%;
     margin: 0 auto;
     text-align: center;
+    @include media-md {
+      width: unset;
+    }
     &-text {
       margin-top: 70px;
       margin-bottom: 50px;
@@ -143,8 +193,15 @@
   &-steps {
     display: flex;
     justify-content: space-between;
+    @include media-sm {
+      flex-direction: column;
+    }
     &-step {
       width: 26%;
+      @include media-sm {
+        width: unset;
+        margin-bottom: 30px;
+      }
       padding: 30px;
       text-align: center;
       background: $__white;
@@ -164,26 +221,49 @@
   }
   &-FAQ {
     width: 65%;
+    @include media-sm {
+      width: unset;
+    }
     margin: 0 auto;
     text-align: center;
     &-text {
       padding: 40px;
+      @include media-md {
+        padding: 40px 0;
+      }
     }
   }
 }
 
 .partners {
+  h1 {
+    margin-top: 50px!important;
+    @include media-sm {
+      text-align: center;
+    }
+  }
   &-more-information {
     width: 65%;
     margin: 50px auto;
     text-align: center;
+    @include media-sm {
+      width: unset;
+      margin-top: 0;
+    }
   }
   &-list {
     display: flex;
     margin-bottom: 70px;
     align-items: center;
+    @include media-sm {
+      flex-direction: column;
+      margin-bottom: 0;
+    }
     &-item {
       padding: 0 50px;
+      @include media-sm {
+        margin-bottom: 40px;
+      }
       & img {
         width: 100%;
       }

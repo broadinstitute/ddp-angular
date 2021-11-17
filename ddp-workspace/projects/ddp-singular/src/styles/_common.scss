@@ -50,7 +50,12 @@ ul li {
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none!important;
+}
+
+h1 {
+  font-size: 31px;
+  margin-top: 0!important;
 }
 
 body {
@@ -59,9 +64,8 @@ body {
 }
 
 .container {
+  padding: 0 15px;
   margin: 0 auto;
-  width: 100%;
-  max-width: 1380px;
 }
 
 .session-expire-dialog button {
@@ -79,4 +83,15 @@ body {
 a {
   font-family: Spartan-Bold, serif;
   color: $__highlighted-font;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1290px;
+  }
+}
+
+.tooltip {
+  opacity: unset;
+  position: unset;
 }

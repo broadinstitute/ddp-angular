@@ -34,6 +34,7 @@ import { ParticipantsListComponent } from './components/pages/participant-list/p
 import { NotificationsDialogComponent } from './components/notifications-dialog/notifications-dialog.component';
 import { SessionExpiredDialogComponent } from './components/session-expired-dialog/session-expired-dialog.component';
 import { ParticipantDeletionDialogComponent } from './components/participant-deletion-dialog/participant-deletion-dialog.component';
+import { ForResearchesComponent } from './components/pages/for-researches/for-researches.component';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import { ParticipantDeletionDialogComponent } from './components/participant-del
     NotificationsDialogComponent,
     SessionExpiredDialogComponent,
     ParticipantDeletionDialogComponent,
+    ForResearchesComponent,
   ],
   imports: [
     DdpModule,

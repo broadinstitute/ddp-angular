@@ -1,3 +1,6 @@
+@import '../../../../styles/colors';
+
+
 .spinner-container {
   display: flex;
   justify-content: center;
@@ -12,6 +15,7 @@
 
 .title {
   margin: 2rem 0;
+  color: $__font;
 
   @media (max-width: 450px) {
     margin: 1.2rem 0;
@@ -52,6 +56,9 @@
 
     cursor: pointer;
 
+    background: $__purple;
+    color: $__white;
+
     @media (max-width: 768px) {
       padding: 1.2rem;
     }
@@ -73,6 +80,11 @@
       }
     }
   }
+
+  button {
+    background: unset;
+    border: 0;
+  }
 }
 
 .controls {
@@ -93,4 +105,9 @@
 .help-tip {
   font-weight: 600;
   opacity: 0.9;
+}
+
+.button_primary {
+  background: $__purple;
+  color: $__white;
 }

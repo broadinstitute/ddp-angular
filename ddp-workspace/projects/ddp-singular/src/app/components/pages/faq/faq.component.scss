@@ -2,7 +2,7 @@
 @import '../../../../styles/colors';
 
 .intro {
-  margin: 50px 0 30px;
+  margin: 0px 0 30px;
 
   &__container {
     max-width: 640px;
@@ -14,7 +14,9 @@
   }
 
   &__title {
-    margin-top: 70px;
+    &:not(:first-child) {
+      margin-top: 70px;
+    }
     font-weight: bold;
   }
 

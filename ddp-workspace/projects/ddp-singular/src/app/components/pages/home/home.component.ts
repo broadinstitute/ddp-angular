@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Route } from '../../../constants/route';
 
 
 @Component({
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent {}
+export class HomeComponent {
+  Route = Route;
+}

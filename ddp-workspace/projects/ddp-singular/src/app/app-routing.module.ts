@@ -16,6 +16,7 @@ import { ParticipantsListComponent } from './components/pages/participant-list/p
 import { AcceptAgeUpComponent } from './components/pages/accept-age-up/accept-age-up.component';
 import { VerifyAgeUpComponent } from './components/pages/verify-age-up/verify-age-up.component';
 import { HomeComponent } from './components/pages/home/home.component';
+import { ForResearchesComponent } from './components/pages/for-researches/for-researches.component';
 
 const routes: Routes = [
   {
@@ -88,10 +89,15 @@ const routes: Routes = [
     canActivate: [IrbGuard],
   },
   {
+    path: Route.ForResearchers,
+    component: ForResearchesComponent,
+    canActivate: [IrbGuard],
+  },
+  {
     path: Route.Dashboard,
     redirectTo: Route.ParticipantList,
     pathMatch: 'full'
-  }
+  },
 ];
 
 @NgModule({
