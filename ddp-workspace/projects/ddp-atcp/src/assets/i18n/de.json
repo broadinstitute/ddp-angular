@@ -422,7 +422,6 @@
             "SignOutButton": "Abmelden"
         },
         "UserPreferences": {
-            "UserPreferencesGender": "Geschlecht",
             "UserPreferencesTitle": "Nutzereinstellungen"
         },
         "ValidateError": "Einreichen nicht möglich. Für Einzelheiten prüfen Sie bitte die im Formular angezeigten Meldungen.",

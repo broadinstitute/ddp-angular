@@ -422,7 +422,6 @@
             "SignOutButton": "Cerrar sesión"
         },
         "UserPreferences": {
-            "UserPreferencesGender": "Sexo",
             "UserPreferencesTitle": "Preferencias de usuario"
         },
         "ValidateError": "No se puede enviar. Revise los mensajes en el formulario para obtener más información.",

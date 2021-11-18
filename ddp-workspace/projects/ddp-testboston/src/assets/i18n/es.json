@@ -469,8 +469,7 @@
             "ManageParticipants": "Administrar participantes"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "Preferencias del usuario",
-            "UserPreferencesGender": "Sexo"
+            "UserPreferencesTitle": "Preferencias del usuario"
         },
         "Dashboard": {
             "Title": "Mi panel",

@@ -23,4 +23,12 @@ export class ActivityCompositeQuestionBlock extends ActivityQuestionBlock<Answer
     public get questionType(): QuestionType {
         return QuestionType.Composite;
     }
+
+    public hasAnswer(): boolean {
+        const requiredChildren = this.children.filter(child => child.isRequired);
+
+        return requiredChildren ?
+            requiredChildren.every(childQuestion => childQuestion.hasAnswer())
+            : !!this.answer?.length;
+    }
 }
