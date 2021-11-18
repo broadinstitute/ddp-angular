@@ -12,11 +12,10 @@
         <th
           *ngFor="let group of renderGroups"
           [colSpan]="group.colSpan"
+          [innerHTML]="group.name"
           [attr.data-test-id]="'group-name-cell-' + group.identifier"
           class="matrix-answer-table__cell matrix-answer-table__cell--header matrix-answer-table__cell--group"
-        >
-          {{ group.name }}
-        </th>
+        ></th>
       </tr>
 
       <tr class="matrix-answer-table__row matrix-answer-table__row--header matrix-answer-table__row--options">
@@ -28,10 +27,9 @@
               class="
                 matrix-answer-table__cell matrix-answer-table__cell--header matrix-answer-table__cell--option-label
               "
+              [innerHTML]="option.optionLabel"
               [attr.data-test-id]="'option-label-cell-' + option.stableId"
-            >
-              {{ option.optionLabel }}
-            </th>
+            ></th>
           </ng-container>
         </ng-container>
       </tr>
@@ -41,10 +39,9 @@
       <tr *ngFor="let question of block.questions" class="matrix-answer-table__row matrix-answer-table__row--question">
         <th
           class="matrix-answer-table__cell matrix-answer-table__cell--question"
+          [innerHTML]="question.questionLabel"
           [attr.data-test-id]="'question-label-cell-' + question.stableId"
-        >
-          {{ question.questionLabel }}
-        </th>
+        ></th>
 
         <ng-container *ngFor="let group of renderGroups">
           <ng-container *ngFor="let option of group.options">
