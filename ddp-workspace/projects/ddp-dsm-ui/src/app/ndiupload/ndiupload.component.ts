@@ -3,7 +3,6 @@ import { FieldFilepickerComponent } from '../field-filepicker/field-filepicker.c
 import { DSMService } from '../services/dsm.service';
 import { Auth } from '../services/auth.service';
 import { ComponentService } from '../services/component.service';
-import { ActivatedRoute } from '@angular/router';
 
 const fileSaver = require('file-saver');
 
@@ -25,8 +24,7 @@ export class NDIUploadComponent implements OnInit {
 
   allowedToSeeInformation = false;
 
-  // TODO: check is it correct ? - unused route
-  constructor(private dsmService: DSMService, private auth: Auth, private compService: ComponentService, private route: ActivatedRoute) {
+  constructor(private dsmService: DSMService, private auth: Auth, private compService: ComponentService) {
     if (!auth.authenticated()) {
       auth.logout();
     }

@@ -645,7 +645,8 @@ export class ParticipantListComponent implements OnInit {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
-        throw new Error('Error - Loading display settings' + err);
+        // tslint:disable-next-line:no-string-throw
+        throw 'Error - Loading display settings' + err;
       }
     );
   }
@@ -1082,11 +1083,11 @@ export class ParticipantListComponent implements OnInit {
     }
   }
 
-  private isDataOfViewFilterExists(): any {
-    return this.viewFilter && this.viewFilter.columns && this.viewFilter.columns.data;
+  private isDataOfViewFilterExists(): boolean {
+    return !!(this.viewFilter && this.viewFilter.columns && this.viewFilter.columns.data);
   }
 
-  renewSelectedColumns(): any {
+  renewSelectedColumns(): void {
     if (this.savedSelectedColumns['data'] && this.sourceColumns['data']) {
       this.selectedColumns['data'] = this.savedSelectedColumns['data'].map(filter => {
         const column = this.sourceColumns['data'].find(f =>

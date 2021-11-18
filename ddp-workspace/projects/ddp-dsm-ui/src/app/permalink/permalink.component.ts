@@ -16,9 +16,7 @@ export class PermalinkComponent implements OnInit {
   participant: Participant;
   medicalRecord: MedicalRecord;
 
-  // TODO: check is it correct ? - unused `compService`
-  constructor(private router: Router, private route: ActivatedRoute, private dsmService: DSMService, private auth: Auth,
-               private compService: ComponentService) {
+  constructor(private router: Router, private route: ActivatedRoute, private dsmService: DSMService, private auth: Auth) {
     if (!auth.authenticated()) {
       auth.logout();
     }
@@ -28,7 +26,6 @@ export class PermalinkComponent implements OnInit {
     let realm: string;
     this.route.queryParams.forEach((p) => {
       realm = p[ DSMService.REALM ];
-      //      this.compService.realmMenu = realm;
     });
     if (this.router.url.indexOf('/participantList') > -1) {
       this.gotToParticipant(realm);
@@ -65,7 +62,8 @@ export class PermalinkComponent implements OnInit {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
-          throw new Error('Error loading institutions' + err);
+          // tslint:disable-next-line:no-string-throw
+          throw 'Error loading institutions' + err;
         }
       );
 
@@ -82,7 +80,8 @@ export class PermalinkComponent implements OnInit {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
-          throw new Error('Error loading medical record data' + err);
+          // tslint:disable-next-line:no-string-throw
+          throw 'Error loading medical record data' + err;
         }
       );
     } else {

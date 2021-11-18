@@ -367,7 +367,7 @@ export class Filter {
     }
     const filters: Filter[] = [];
     for (const filter of json.filters) {
-      // TODO: check is it correct ? - shadowed variables f
+      // TODO: check is it correct ? - shadowed variables f, also in line 415
       const f = this.isParticipantDataCorrespondingFilter(filter, parsedColumns);
       if (f) {
         const newFilter = Filter.createFilterFromJsonFilter(filter, f);
@@ -411,7 +411,6 @@ export class Filter {
         }
       } else {
         for (const source of Object.keys(allColumns)) {
-          // TODO: check is it correct ? - shadowed variables f
           // tslint:disable-next-line:no-shadowed-variable
           const f = allColumns[ source ].find(item => {
             return item.participantColumn.name === filter.participantColumn.name;
