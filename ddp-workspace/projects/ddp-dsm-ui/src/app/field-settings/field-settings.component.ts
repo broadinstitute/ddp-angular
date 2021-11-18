@@ -29,8 +29,7 @@ export class FieldSettingsComponent implements OnInit {
   settingsOfSelectedType: Array<FieldSettings> = [];
   allowedToSeeInformation = false;
   possibleTypes: Array<FieldType> = [
-    new FieldType('Participant', 'r'),
-    // because additional values of participants live in ddp_participant_record table
+    new FieldType('Participant', 'r'), // because additional values of participants live in ddp_participant_record table
     new FieldType('Medical Record', 'm'),
     new FieldType('Onc History', 'oD'),
     new FieldType('Tissue', 't')

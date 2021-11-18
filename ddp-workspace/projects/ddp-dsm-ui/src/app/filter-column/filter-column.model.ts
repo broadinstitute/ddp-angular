@@ -607,7 +607,7 @@ export class Filter {
     );
   }
 
-  public static getFilterJson(parent, filter1, filter2, selectedOptions, exact, type, range, empty, notEmpty, participantColumn): any {
+  public static getFilterJson(parent, filter1, filter2, selectedOptions, exact, type, range, empty, notEmpty, participantColumn): {} {
     const filterText = {
       parentName: parent,
       filter1,

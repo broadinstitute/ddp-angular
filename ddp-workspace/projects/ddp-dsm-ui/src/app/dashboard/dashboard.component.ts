@@ -488,10 +488,10 @@ export class DashboardComponent implements OnInit {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
-        throw new Error('Error - Loading display settings' + err);
+        // tslint:disable-next-line:no-string-throw
+        throw 'Error - Loading display settings' + err;
       }
     );
-
   }
 
   dataExport(source: string): void {

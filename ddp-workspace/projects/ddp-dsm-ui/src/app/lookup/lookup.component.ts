@@ -25,8 +25,7 @@ export class LookupComponent {
   lookups: Array<Lookup> = [];
   currentPatchField: string;
 
-  // TODO: check is it correct ? - unused compService
-  constructor(private dsmService: DSMService, private compService: ComponentService) {
+  constructor(private dsmService: DSMService) {
   }
 
   public checkForLookup(): Array<Lookup> {
