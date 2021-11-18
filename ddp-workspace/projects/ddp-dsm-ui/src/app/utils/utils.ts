@@ -344,14 +344,14 @@ export class Utils {
     return str;
   }
 
-  public static getSurveyData(participant: Participant, code: string): ActivityData {
+  public static getSurveyData(participant: Participant, code: string): ActivityData | null {
     if (participant != null && participant.data != null && participant.data.activities != null) {
       return participant.data.activities.find(x => x.activityCode === code);
     }
     return null;
   }
 
-  public static getQuestionAnswerByName(questionsAnswers: Array<QuestionAnswer>, name: string): QuestionAnswer {
+  public static getQuestionAnswerByName(questionsAnswers: Array<QuestionAnswer>, name: string): QuestionAnswer | undefined {
     return questionsAnswers.find(x => x.stableId === name);
   }
 
@@ -362,7 +362,7 @@ export class Utils {
     return null;
   }
 
-  public static getMultiKeys(o: any): string[] {
+  public static getMultiKeys(o: any): string[] | null {
     if (o != null) {
       return Object.keys(o);
     }
@@ -680,11 +680,11 @@ export class Utils {
     return null;
   }
 
-  getAbstractionGroup(groups: Array<AbstractionGroup>, groupId: string): AbstractionGroup {
+  getAbstractionGroup(groups: Array<AbstractionGroup>, groupId: string): AbstractionGroup | undefined {
     return groups.find(x => x.abstractionGroupId.toString() === groupId);
   }
 
-  getAbstractionField(fields: Array<AbstractionField>, fieldId: string): AbstractionField {
+  getAbstractionField(fields: Array<AbstractionField>, fieldId: string): AbstractionField | undefined {
     return fields.find(x => x.medicalRecordAbstractionFieldId.toString() === fieldId);
   }
 

@@ -1562,11 +1562,10 @@ export class TissueListComponent implements OnInit {
   }
 
   hasThisColumnSelected(selectedColumnArray: Array<Filter>, oncColumn: Filter): boolean {
-    const f = selectedColumnArray.find(x => {
-      return x.participantColumn.tableAlias === oncColumn.participantColumn.tableAlias
-        && x.participantColumn.name === oncColumn.participantColumn.name;
+    return !!selectedColumnArray.find(f => {
+      return f.participantColumn.tableAlias === oncColumn.participantColumn.tableAlias
+        && f.participantColumn.name === oncColumn.participantColumn.name;
     });
-    return f !== undefined;
   }
 
   createDefaultColumns(): any {

@@ -109,8 +109,7 @@ export class AddFamilyMemberComponent implements OnInit {
     return ddpParticipantDataId;
   }
 
-  // TODO: check is it correct ? - should return a boolean (not string) ?
-  isRelationshipIdExists(): any {
+  isRelationshipIdExists(): boolean {
     const relationshipIds: Array<string> = this.data.participant.participantData.map(pData => {
       const familyMemberData = pData.data;
       if (familyMemberData.hasOwnProperty(Statics.PARTICIPANT_RELATIONSHIP_ID)) {

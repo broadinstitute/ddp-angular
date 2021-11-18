@@ -64,8 +64,7 @@ export class ScanComponent implements OnInit {
     }
   }
 
-  public scanDone(arg): void {
-    // arg[0] = leftvalue (ddpLabel), arg[1] = rightvalue (kitLabel) and arg[2] = position
+  public scanDone(arg): void { // arg[0] = leftvalue (ddpLabel), arg[1] = rightvalue (kitLabel) and arg[2] = position
     if (arg.length === 3) {
       if (!this.checkIfKitLabelChanged(arg[0], arg[1], arg[2])) {
         this.scanPairsValue.push(new ScanPair(arg[0], arg[1]));
@@ -256,8 +255,7 @@ export class ScanComponent implements OnInit {
     return false;
   }
 
-  public setLeftValue(arg): void {
-    // arg[0] = dsmValue and arg[1] = position
+  public setLeftValue(arg): void { // arg[0] = dsmValue and arg[1] = position
     if (arg.length === 2) {
       if (arg[1] < this.scanPairsValue.length) {
         this.scanPairsValue[arg[1]].leftValue = arg[0];
@@ -265,8 +263,7 @@ export class ScanComponent implements OnInit {
     }
   }
 
-  public singleValueScanDone(arg): void {
-    // arg[0] = singleValue (SM-ID) and arg[1] = position
+  public singleValueScanDone(arg): void { // arg[0] = singleValue (SM-ID) and arg[1] = position
     if (arg.length === 2) {
       if (!this.checkIfSingleValueChanged(arg[0], arg[1])) {
         this.singleScanValues.push(new ScanValue(arg[0]));

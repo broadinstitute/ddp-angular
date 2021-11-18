@@ -96,11 +96,6 @@ export class Auth {
     this.lockForDiscard.on('authenticated', (authResult: any) => {
       this.kitDiscard.next(authResult.idToken);
     });
-    // TODO: check is it correct ? - is it needed ?
-    this.lockForDiscard.on('authorization_error', (authResult) => {
-      // console.log(authResult);
-      // console.log("user is not allowed to login ");
-    });
   }
 
   public authenticated(): boolean {

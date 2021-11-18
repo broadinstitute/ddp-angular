@@ -15,7 +15,7 @@ export class PatchUtil {
     this.ddpParticipantId = ddpParticipantId;
   }
 
-  public getPatch(): any {
+  public getPatch(): object {
     const patch = {
       id: this.id,
       user: this.user,
