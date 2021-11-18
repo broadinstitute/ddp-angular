@@ -569,8 +569,9 @@ export class ParticipantListComponent implements OnInit {
           possibleColumns.push(new Filter(new ParticipantColumn('Accepted', 'acceptedAt', 'invitations', null, true), Filter.DATE_TYPE));
           possibleColumns.push(new Filter(new ParticipantColumn('Verified', 'verifiedAt', 'invitations', null, true), Filter.DATE_TYPE));
           possibleColumns.push(new Filter(new ParticipantColumn('Voided', 'voidedAt', 'invitations', null, true), Filter.DATE_TYPE));
-          // tslint:disable-next-line:max-line-length
-          possibleColumns.push(new Filter(new ParticipantColumn('Contact Email', 'contactEmail', 'invitations', null, true), Filter.TEXT_TYPE));
+          possibleColumns.push(new Filter(
+            new ParticipantColumn('Contact Email', 'contactEmail', 'invitations', null, true), Filter.TEXT_TYPE)
+          );
           possibleColumns.push(new Filter(new ParticipantColumn('Invitation Code', 'guid', 'invitations', null, true), Filter.TEXT_TYPE));
           possibleColumns.push(new Filter(new ParticipantColumn('Notes', 'notes', 'invitations', null, true), Filter.TEXT_TYPE));
           possibleColumns.push(new Filter(new ParticipantColumn('Type', 'type', 'invitations', null, true), Filter.TEXT_TYPE));
@@ -1467,8 +1468,9 @@ export class ParticipantListComponent implements OnInit {
         }
       });
     } else if (this.sortParent === 'data' && object == null) {
-      // tslint:disable-next-line:max-line-length
-      this.participantList.sort((a, b) => (a.data == null || b.data == null) ? 1 : this.sort(a.data, b.data, order, this.sortField, colType));
+      this.participantList.sort((a, b) => (
+        a.data == null || b.data == null) ? 1 : this.sort(a.data, b.data, order, this.sortField, colType)
+      );
     } else if (this.sortParent === 'p') {
       this.participantList.sort((a, b) => {
         if (a.participant == null || (a.participant[ this.sortField ] == null && a.participant['additionalValues'] == null)) {
@@ -1477,8 +1479,13 @@ export class ParticipantListComponent implements OnInit {
           return -1;
         } else {
           if (a.participant['additionalValues'][this.sortField] != null || b.participant['additionalValues'][this.sortField] != null) {
-            // tslint:disable-next-line:max-line-length
-            return this.sort(a.participant['additionalValues'][ this.sortField ], b.participant['additionalValues'][ this.sortField ], order, undefined, colType);
+            return this.sort(
+              a.participant['additionalValues'][ this.sortField ],
+              b.participant['additionalValues'][ this.sortField ],
+              order,
+              undefined,
+              colType
+            );
           } else {
             return this.sort(a.participant[ this.sortField ], b.participant[ this.sortField ], order, undefined, colType);
           }

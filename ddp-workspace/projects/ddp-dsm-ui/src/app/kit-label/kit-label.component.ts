@@ -68,8 +68,8 @@ export class KitLabelComponent implements AfterViewChecked {
   public getMarginBetweenLeftRight(): string {
     if (this.labelSetting != null && this.labelSetting.labelOnPage > 1) {
       const letter = 8.5;
-      // tslint:disable-next-line:max-line-length
-      const space = letter - this.labelSetting.leftMargin - (this.labelSetting.labelWidth * (this.labelSetting.labelOnPage / 2)) - this.labelSetting.rightMargin;
+      const space = letter - this.labelSetting.leftMargin
+        - (this.labelSetting.labelWidth * (this.labelSetting.labelOnPage / 2)) - this.labelSetting.rightMargin;
       return space + 'in';
     }
   }

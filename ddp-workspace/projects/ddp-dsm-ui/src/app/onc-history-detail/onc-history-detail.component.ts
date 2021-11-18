@@ -277,8 +277,10 @@ export class OncHistoryDetailComponent implements OnInit {
   openTissuePage(oncHis: OncHistoryDetail): void {
     if (oncHis != null) {
       this.oncHistoryDetail = oncHis;
-      // tslint:disable-next-line:max-line-length
-      this.compService.editable = ((oncHis.request === 'sent') || (oncHis.request === 'received') || (oncHis.request === 'returned') || (oncHis.request === 'unableToObtain'));
+      this.compService.editable = (
+        (oncHis.request === 'sent') || (oncHis.request === 'received')
+        || (oncHis.request === 'returned') || (oncHis.request === 'unableToObtain')
+      );
       this.showTissue = true;
       this.openTissue.emit(oncHis);
     }

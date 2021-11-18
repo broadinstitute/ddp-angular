@@ -1,3 +1,4 @@
+/* tslint:disable:max-line-length */
 import { FieldSettings } from '../field-settings/field-settings.model';
 import { NameValue } from '../utils/name-value.model';
 import { Statics } from '../utils/statics';
@@ -219,13 +220,10 @@ export class Filter {
   public static STATUS_OUT = new Filter(ParticipantColumn.STATUS_OUT, Filter.TEXT_TYPE);
   public static STATUS_IN = new Filter(ParticipantColumn.STATUS_IN, Filter.TEXT_TYPE);
   public static CARE_EVOLVE = new Filter(ParticipantColumn.CARE_EVOLVE, Filter.CHECKBOX_TYPE);
-  // tslint:disable-next-line:max-line-length
   public static RESULT_TEST = new Filter(ParticipantColumn.RESULT_TEST, Filter.JSON_ARRAY_TYPE, null, new NameValue(ParticipantColumn.RESULT_TEST.name, '\''),
     false, true, null, null, null, null, false, false, false, false, Filter.TEXT_TYPE);
-  // tslint:disable-next-line:max-line-length
   public static CORRECTED_TEST = new Filter(ParticipantColumn.CORRECTED_TEST, Filter.JSON_ARRAY_TYPE, null, new NameValue(ParticipantColumn.CORRECTED_TEST.name, null),
     false, true, null, null, null, null, false, false, false, false, Filter.CHECKBOX_TYPE);
-  // tslint:disable-next-line:max-line-length
   public static TIME_TEST = new Filter(ParticipantColumn.TIME_TEST, Filter.JSON_ARRAY_TYPE, null, new NameValue(ParticipantColumn.TIME_TEST.name, '\''),
     false, true, null, null, null, null, false, false, false, false, Filter.DATE_TYPE);
 
@@ -242,13 +240,11 @@ export class Filter {
   public static ABSTRACTION_USER = new Filter(ParticipantColumn.ABSTRACTION_USER, Filter.TEXT_TYPE);
 
   public static ALL_COLUMNS = [
-    // tslint:disable-next-line:max-line-length
     Filter.REALM, Filter.SHORT_ID, Filter.LEGACY_SHORT_ID, Filter.LEGACY_PARTICIPANT_ID, Filter.PARTICIPANT_ID, Filter.FIRST_NAME, Filter.LAST_NAME,
     Filter.COUNTRY, Filter.ENROLLMENT_STATUS, Filter.EMAIL, Filter.REGISTRATION_DATE, Filter.DO_NOT_CONTACT,
     Filter.DATE_OF_MAJORITY, Filter.HAS_CONSENTED_TO_BLOOD, Filter.HAS_CONSENTED_TO_TISSUE, Filter.DATE_OF_BIRTH,
     Filter.DIAGNOSIS_MONTH, Filter.DIAGNOSIS_YEAR,
     Filter.ONC_HISTORY_CREATED, Filter.ONC_HISTORY_REVIEWED, Filter.PAPER_CR_SENT, Filter.PAPER_CR_RECEIVED,
-    // tslint:disable-next-line:max-line-length
     Filter.PARTICIPANT_NOTES, Filter.MINIMAL_RECORDS, Filter.ABSTRACTION_READY, Filter.ASSIGNEE_MR, Filter.ASSIGNEE_TISSUE, Filter.EXIT_DATE,
     Filter.MR_TYPE, Filter.MR_INSTITUTION_NAME, Filter.MR_INSTITUTION_CONTACT, Filter.MR_INSTITUTION_PHONE, Filter.MR_INSTITUTION_FAX,
     Filter.MR_FAX_SENT, Filter.MR_FAX_SENT_2, Filter.MR_FAX_SENT_3, Filter.MR_RECEIVED,
@@ -268,7 +264,6 @@ export class Filter {
     Filter.TISSUE_FIRST_SM_ID, Filter.TISSUE_SHL_NUMBER, Filter.TISSUE_TUMOR_PERCENT, Filter.TISSUE_SEQUENCE, Filter.SCROLLS_COUNT,
     Filter.USS_COUNT, Filter.H_E_COUNT, Filter.BLOCKS_COUNT,
     Filter.COLLABORATOR_SAMPLE, Filter.SAMPLE_SENT, Filter.SAMPLE_RECEIVED, Filter.SAMPLE_DEACTIVATION, Filter.SAMPLE_QUEUE,
-    // tslint:disable-next-line:max-line-length
     Filter.TRACKING_TO_PARTICIPANT, Filter.TRACKING_RETURN, Filter.MF_BARCODE, Filter.STATUS_OUT, Filter.STATUS_IN, Filter.RESULT_TEST, Filter.CORRECTED_TEST, Filter.TIME_TEST, Filter.CARE_EVOLVE,
     Filter.ABSTRACTION_ACTIVITY, Filter.ABSTRACTION_STATUS, Filter.ABSTRACTION_USER ];
 

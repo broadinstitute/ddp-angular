@@ -456,8 +456,12 @@ export class ShippingComponent implements OnInit {
     }
     const fields = [ 'realm', 'participantId', 'shortID', 'mfCode', 'sent', 'received' ];
     const date = new Date();
-    // tslint:disable-next-line:max-line-length
-    Utils.createCSV(fields, map, localStorage.getItem(ComponentService.MENU_SELECTED_REALM) + ' Kits ' + this.kitType.name + ' ' + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION);
+    Utils.createCSV(
+      fields,
+      map,
+      localStorage.getItem(ComponentService.MENU_SELECTED_REALM) + ' Kits ' + this.kitType.name + ' '
+      + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION
+    );
   }
 
   setKitRequest(kitRequest: KitRequest, modalType: string): void {
@@ -658,8 +662,9 @@ export class ShippingComponent implements OnInit {
   public getMarginBetweenTopBottom(): string {
     if (this.selectedSetting != null && this.selectedSetting.labelOnPage > 1) {
       const letter = 11;
-      // tslint:disable-next-line:max-line-length
-      const space = letter - this.selectedSetting.topMargin - (this.selectedSetting.labelHeight * (this.selectedSetting.labelOnPage / 2)) - this.selectedSetting.bottomMargin;
+      const space = letter - this.selectedSetting.topMargin -
+        (this.selectedSetting.labelHeight * (this.selectedSetting.labelOnPage / 2))
+        - this.selectedSetting.bottomMargin;
       return space + 'in';
     }
   }

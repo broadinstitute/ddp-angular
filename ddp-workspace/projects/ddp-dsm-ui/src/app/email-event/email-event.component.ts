@@ -142,8 +142,11 @@ export class EmailEventComponent implements OnInit {
         });
       });
     });
-    // tslint:disable-next-line:max-line-length
-    Utils.createCSV(fields, rawData, 'All Email Events '  + this.realm + ' ' + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION);
+    Utils.createCSV(
+      fields,
+      rawData,
+      'All Email Events '  + this.realm + ' ' + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION
+    );
   }
 
   csvFollowUpDownload(): void {
@@ -163,8 +166,11 @@ export class EmailEventComponent implements OnInit {
         });
       });
     });
-    // tslint:disable-next-line:max-line-length
-    Utils.createCSV(fields, rawData, 'Follow-up Email Events '  + this.realm + ' ' + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION);
+    Utils.createCSV(
+      fields,
+      rawData,
+      'Follow-up Email Events '  + this.realm + ' ' + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION
+    );
   }
 
   saveFollowUp(): void {

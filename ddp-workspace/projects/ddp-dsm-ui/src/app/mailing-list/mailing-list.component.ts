@@ -132,8 +132,11 @@ export class MailingListComponent implements OnInit {
     }
     fields.push('dateCreated');
     const date = new Date();
-    // tslint:disable-next-line:max-line-length
-    Utils.createCSV(fields, map, 'MailingList ' + this.realm + ' ' + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION);
+    Utils.createCSV(
+      fields,
+      map,
+      'MailingList ' + this.realm + ' ' + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION
+    );
   }
 
   hasRole(): RoleService {

@@ -252,8 +252,12 @@ export class UploadComponent implements OnInit {
       const fields = [ 'participantId', 'shortId', 'firstName', 'lastName', 'street1', 'street2',
         'city', 'postalCode', 'state', 'country' ];
       const date = new Date();
-      // tslint:disable-next-line:max-line-length
-      Utils.createCSV(fields, this.failedParticipants, 'Upload ' + this.realmNameStoredForFile + ' ' + this.kitType.name + ' Failed ' + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION);
+      Utils.createCSV(
+        fields,
+        this.failedParticipants,
+        'Upload ' + this.realmNameStoredForFile + ' ' + this.kitType.name + ' Failed '
+         + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION
+      );
       this.realmNameStoredForFile = null;
     } else {
       this.errorMessage = 'Error - Couldn\'t save failed participant list';

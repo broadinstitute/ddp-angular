@@ -961,7 +961,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
     this.currentPatchField = 'filesUsed';
     this.patchFinished = false;
     const ddpParticipantId = this.participant.participant.ddpParticipantId;
-    // tslint:disable-next-line:max-line-length
     this.dsmService.changeMedicalRecordAbstractionStatus(
         localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
         ddpParticipantId,
@@ -1123,8 +1122,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
         if (personsParticipantData.data[fieldSetting.columnName]) {
           return personsParticipantData.data[fieldSetting.columnName];
         } else if (fieldSetting.actions && fieldSetting.actions[0]) {
-          // tslint:disable-next-line:max-line-length
-          if (fieldSetting.actions[0].type === 'CALC' && fieldSetting.actions[0].value && personsParticipantData.data[fieldSetting.actions[0].value]) {
+          if (
+            fieldSetting.actions[0].type === 'CALC' && fieldSetting.actions[0].value
+            && personsParticipantData.data[fieldSetting.actions[0].value]
+          ) {
             return '' + this.countYears(personsParticipantData.data[fieldSetting.actions[0].value]);
           } else if (fieldSetting.actions[0].type === 'SAMPLE' && fieldSetting.actions[0].type2 === 'MAP_TO_KIT') {
             return this.getSampleFieldValue(fieldSetting, personsParticipantData);
@@ -1225,8 +1226,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
     if (groupSetting != null) {
       fieldTypeId = groupSetting.fieldType;
     }
-    // tslint:disable-next-line:max-line-length
-    if (this.participant != null && this.participant.participantData != null && fieldTypeId != null && fieldSetting.columnName != null && dataId != null) {
+    if (
+      this.participant != null && this.participant.participantData != null
+      && fieldTypeId != null && fieldSetting.columnName != null && dataId != null
+    ) {
       let participantData: ParticipantData = this.participant.participantData.find(pData => pData.dataId === dataId);
       if (participantData == null) {
         const data: { [ k: string ]: any } = {};

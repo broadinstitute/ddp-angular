@@ -84,8 +84,16 @@ export class TissueListComponent implements OnInit {
   };
 
   selectedFilterName = '';
-  // tslint:disable-next-line:max-line-length
-  defaultOncHistoryColumns = [ Filter.ACCESSION_NUMBER, Filter.DATE_PX, Filter.TYPE_PX, Filter.LOCATION_PX, Filter.HISTOLOGY, Filter.GENDER, Filter.FACILITY, Filter.DESTRUCTION_POLICY ];
+  defaultOncHistoryColumns = [
+    Filter.ACCESSION_NUMBER,
+    Filter.DATE_PX,
+    Filter.TYPE_PX,
+    Filter.LOCATION_PX,
+    Filter.HISTOLOGY,
+    Filter.GENDER,
+    Filter.FACILITY,
+    Filter.DESTRUCTION_POLICY
+  ];
   defaultTissueColumns = [ Filter.COLLABORATOR_SAMPLE_ID ];
   defaultESColumns = [ Filter.SHORT_ID, Filter.FIRST_NAME, Filter.LAST_NAME ];
   destructionPolicyColumns = {
@@ -1131,8 +1139,12 @@ export class TissueListComponent implements OnInit {
     if (this.selectedColumns[ 't' ] != null && this.selectedColumns[ 't' ].length > 0) {
       Utils.downloadCurrentData(this.tissueListWrappers, [ [ 'data', Statics.ES_ALIAS ], [ 'tissueList', '', 'oncHistoryDetails', 'oD' ], [ 'tissueList', '', 'tissue', 't' ] ], this.selectedColumns, fileName);
     } else {
-      // tslint:disable-next-line:max-line-length
-      Utils.downloadCurrentData(this.tissueListOncHistories, [ [ 'data', Statics.ES_ALIAS ], [ 'tissueList', '', 'oncHistoryDetails', 'oD' ], [ 'tissue', 't' ] ], this.selectedColumns, fileName);
+      Utils.downloadCurrentData(
+        this.tissueListOncHistories,
+        [ [ 'data', Statics.ES_ALIAS ], [ 'tissueList', '', 'oncHistoryDetails', 'oD' ], [ 'tissue', 't' ] ],
+        this.selectedColumns,
+        fileName
+      );
     }
   }
 
@@ -1212,8 +1224,10 @@ export class TissueListComponent implements OnInit {
               return (order * a.data[ this.sortColumn.participantColumn.object ][ this.sortField ]
                 .localeCompare(b.data[ this.sortColumn.participantColumn.object ][ this.sortField ]));
             } else {
-              // tslint:disable-next-line:max-line-length
-              return (order * a.data[ this.sortColumn.participantColumn.object ][ this.sortField ] - b.data[ this.sortColumn.participantColumn.object ][ this.sortField ]);
+              return (
+                order * a.data[ this.sortColumn.participantColumn.object ][ this.sortField ]
+                - b.data[ this.sortColumn.participantColumn.object ][ this.sortField ]
+              );
             }
           },
         );
@@ -1230,8 +1244,10 @@ export class TissueListComponent implements OnInit {
               return (order * a.data[ this.sortColumn.participantColumn.object ][ this.sortField ]
                 .localeCompare(b.data[ this.sortColumn.participantColumn.object ][ this.sortField ]));
             } else {
-              // tslint:disable-next-line:max-line-length
-              return (order * a.data[ this.sortColumn.participantColumn.object ][ this.sortField ] - a.data[ this.sortColumn.participantColumn.object ][ this.sortField ]);
+              return (
+                order * a.data[ this.sortColumn.participantColumn.object ][ this.sortField ]
+                - a.data[ this.sortColumn.participantColumn.object ][ this.sortField ]
+              );
             }
           },
         );
@@ -1260,8 +1276,10 @@ export class TissueListComponent implements OnInit {
                 return (order * a.tissueList.oncHistoryDetails[ this.sortField ][ fieldName ]
                   .localeCompare(b.tissueList.oncHistoryDetails[ this.sortField ][ fieldName ]));
               } else {
-                // tslint:disable-next-line:max-line-length
-                return (order * a.tissueList.oncHistoryDetails[ this.sortField ][ fieldName ] - b.tissueList.oncHistoryDetails[ this.sortField ][ fieldName ]);
+                return (
+                  order * a.tissueList.oncHistoryDetails[ this.sortField ][ fieldName ]
+                  - b.tissueList.oncHistoryDetails[ this.sortField ][ fieldName ]
+                );
               }
 
             } else {
@@ -1305,8 +1323,10 @@ export class TissueListComponent implements OnInit {
                 return (order * a.tissueList.oncHistoryDetails[ this.sortField ][ fieldName ]
                   .localeCompare(b.tissueList.oncHistoryDetails[ this.sortField ][ fieldName ]));
               } else {
-                // tslint:disable-next-line:max-line-length
-                return (order * a.tissueList.oncHistoryDetails[ this.sortField ][ fieldName ] - b.tissueList.oncHistoryDetails[ this.sortField ][ fieldName ]);
+                return (
+                  order * a.tissueList.oncHistoryDetails[ this.sortField ][ fieldName ]
+                  - b.tissueList.oncHistoryDetails[ this.sortField ][ fieldName ]
+                );
               }
 
             } else {

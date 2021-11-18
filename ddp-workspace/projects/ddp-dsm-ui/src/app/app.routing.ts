@@ -82,8 +82,11 @@ export const AppRoutes = [
   {path: 'userSettings', component: UserSettingComponent, canActivate: [ AuthGuard ]},
 
   // Permalink
-  // tslint:disable-next-line:max-line-length
-  {path: Statics.PERMALINK + Statics.MEDICALRECORD_URL + '/:participantid/:medicalrecordid', component: PermalinkComponent, canActivate: [ AuthGuard ]},
+  {
+    path: Statics.PERMALINK + Statics.MEDICALRECORD_URL + '/:participantid/:medicalrecordid',
+    component: PermalinkComponent,
+    canActivate: [ AuthGuard ]
+  },
   {path: Statics.PERMALINK + Statics.SHIPPING_URL, component: ShippingComponent, canActivate: [ AuthGuard ]},
   {path: Statics.PERMALINK + Statics.UNSENT_OVERVIEW_URL, component: DashboardComponent, canActivate: [ AuthGuard ]},
   {path: '**', redirectTo: '/home'}
