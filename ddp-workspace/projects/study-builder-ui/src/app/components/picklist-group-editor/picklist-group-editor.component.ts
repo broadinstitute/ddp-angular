@@ -24,6 +24,14 @@ export class PicklistGroupEditorComponent implements OnDestroy {
         };
         this.groupForm.patchValue(optionValue);
     }
+    @Input()
+    set disabled(disabled: boolean) {
+        if (disabled) {
+            this.groupForm.disable();
+        } else {
+            this.groupForm.enable();
+        }
+    }
     @Output() groupChanged = new EventEmitter<PicklistGroupDef>();
 
     public groupForm = this.fb.group({

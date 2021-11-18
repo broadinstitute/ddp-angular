@@ -91,4 +91,10 @@ export class PicklistQuestionEditorComponent implements OnInit, OnDestroy {
     private currentQuestion(): PicklistQuestionDef | null {
         return this.questionBlockSubject.getValue()?.question as PicklistQuestionDef;
     }
+
+    public allowCreateOptionsGroups(): boolean {
+        const selectMode = this.formGroup.get('selectMode').value;
+        const renderMode = this.formGroup.get('renderMode').value;
+        return selectMode === 'MULTIPLE' && renderMode === 'LIST' || renderMode === 'CHECKBOX_LIST' || renderMode === 'AUTOCOMPLETE';
+    }
 }

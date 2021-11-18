@@ -5,6 +5,7 @@ import { PicklistGroupDef } from '../../model/core/picklistGroupDef';
 import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
 import { ConfigurationService } from '../../configuration.service';
 import { StudyConfigObjectFactory } from '../../model/core-extended/studyConfigObjectFactory';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'app-manage-list',
@@ -109,5 +110,10 @@ export class ManageListComponent implements ControlValueAccessor {
             this.groups[groupIndex].options = [...group.options];
             this.onChange({options: this.options, groups: this.groups});
         }
+    }
+
+    groupDrop(event: CdkDragDrop<PicklistGroupDef[]>): void {
+        moveItemInArray(this.groups, event.previousIndex, event.currentIndex);
+        this.onChange({options: this.options, groups: this.groups});
     }
 }

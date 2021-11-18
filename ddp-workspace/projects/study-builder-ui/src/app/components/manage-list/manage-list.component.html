@@ -1,16 +1,21 @@
 <button mat-raised-button (click)="addEmptyOption()">Add new option</button>
 <button mat-raised-button (click)="addEmptyGroup()" [disabled]="!groupsAllowed">Add new group</button>
-<div cdkDropListGroup *ngIf="groupsAllowed">
-    <div cdkDropList *ngFor="let group of groups; let i = index;">
-        <div class="drag-indicator-column" cdkDragHandle>
-            <mat-icon>drag_indicator</mat-icon>
+<div cdkDropListGroup *ngIf="groupsAllowed || groups.length">
+    <div cdkDropList (cdkDropListDropped)="groupDrop($event)">
+        <div *ngFor="let group of groups; let i = index;" class="group-row" cdkDrag cdkDragLockAxis="y">
+            <div class="drag-indicator-column" cdkDragHandle [cdkDragHandleDisabled]="!groupsAllowed">
+                <mat-icon>drag_indicator</mat-icon>
+            </div>
+            <div class="remove-column">
+                <button mat-icon-button (click)="removeGroupByIndex(i)" [disabled]="!groupsAllowed">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+            <app-picklist-group-editor [group]="group"
+                                       [disabled]="!groupsAllowed"
+                                       (groupChanged)="updateGroup($event, i)">
+            </app-picklist-group-editor>
         </div>
-        <div class="remove-column">
-            <button mat-icon-button (click)="removeGroupByIndex(i)">
-                <mat-icon>delete</mat-icon>
-            </button>
-        </div>
-        <app-picklist-group-editor [group]="group" (groupChanged)="updateGroup($event, i)"></app-picklist-group-editor>
     </div>
 </div>
 <app-picklist-options-list [options]="options" (changed)="updateOptions($event)"></app-picklist-options-list>

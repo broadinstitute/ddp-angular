@@ -35,7 +35,9 @@
         <mat-label>Validations</mat-label>
         <mat-checkbox formControlName="required">Required</mat-checkbox>
     </div>
-    <mat-checkbox #allowGroups>Allow groups</mat-checkbox>
-    <app-manage-list class="options-editor" formControlName="optionsData" [groupsAllowed]="allowGroups.checked">
+    <mat-checkbox #allowGroups [disabled]="!allowCreateOptionsGroups()">Allow groups</mat-checkbox>
+    <app-manage-list class="options-editor"
+                     formControlName="optionsData"
+                     [groupsAllowed]="allowGroups.checked && allowCreateOptionsGroups()">
     </app-manage-list>
 </form>
