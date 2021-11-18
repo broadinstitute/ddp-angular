@@ -132,7 +132,7 @@ export class Auth {
 
     dsmObservable.subscribe(
       response => dsmResponse = response,
-      _ => {
+      () => {
       },
       () => {
         const dsmToken = dsmResponse.dsmToken;

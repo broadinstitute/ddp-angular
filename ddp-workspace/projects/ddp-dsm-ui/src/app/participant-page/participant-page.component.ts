@@ -152,7 +152,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
               this.openResultDialog(parsedData[ 'errorMessage' ]);
             }
          },
-         _ => {
+         () => {
             this.openResultDialog('Error - Failed to update participant');
          }
         );
@@ -225,10 +225,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
     this.taskType = 'UPDATE_FIRSTNAME';
     this.payload[ 'data' ][ 'firstName' ] = this.updatedFirstName;
     this.dsmService.updateParticipant(JSON.stringify(this.payload)).subscribe(
-      _ => {
+      () => {
 
       },
-      _ => {
+      () => {
         this.openResultDialog('Error - Failed to update participant');
       }
     );
@@ -240,10 +240,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
     this.taskType = 'UPDATE_LASTNAME';
     this.payload[ 'data' ][ 'lastName' ] = this.updatedLastName;
     this.dsmService.updateParticipant(JSON.stringify(this.payload)).subscribe(
-      _ => {
+      () => {
 
       },
-      _ => {
+      () => {
         this.openResultDialog('Error - Failed to update participant');
       }
     );
@@ -255,10 +255,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
     this.taskType = 'UPDATE_EMAIL';
     this.payload[ 'data' ][ 'email' ] = this.updatedEmail;
     this.dsmService.updateParticipant(JSON.stringify(this.payload)).subscribe(
-      _ => {
+      () => {
 
       },
-      _ => {
+      () => {
         this.openResultDialog('Error - Failed to update participant');
       }
     );
@@ -636,7 +636,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
     const patch = patch1.getPatch();
 
     this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(// need to subscribe, otherwise it will not send!
-      _ => {
+      () => {
         // console.info( `response saving data: ${JSON.stringify( data, null, 2 )}` );
       },
       err => {

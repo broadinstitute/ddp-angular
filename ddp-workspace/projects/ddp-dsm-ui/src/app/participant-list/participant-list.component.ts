@@ -159,7 +159,7 @@ export class ParticipantListComponent implements OnInit {
           .subscribe(
             data => {
               this.setFilterDataOnSuccess(data);
-            }, _ => {
+            }, () => {
               this.participantList = [];
               this.originalParticipantList = [];
               this.copyParticipantList = [];
@@ -231,7 +231,7 @@ export class ParticipantListComponent implements OnInit {
           this.errorMessage = 'You are not allowed to see information of the selected realm at that category';
         }
       },
-      _ => {
+      () => {
         this.loadingParticipants = null;
         return null;
       }
@@ -942,7 +942,7 @@ export class ParticipantListComponent implements OnInit {
         });
         this.savedFilters.sort((f1, f2) => f1.filterName.localeCompare(f2.filterName));
       },
-      _ => {
+      () => {
         this.showSavedFilters = false;
         this.errorMessage = 'Error - Loading Filter List, Please contact your DSM developer';
       });
@@ -1150,7 +1150,7 @@ export class ParticipantListComponent implements OnInit {
               }
               this.loadingParticipants = null;
             },
-            _ => {
+            () => {
               this.errorMessage = 'Error - Loading Participant Information, Please contact your DSM developer';
             }
           );
@@ -1368,7 +1368,7 @@ export class ParticipantListComponent implements OnInit {
       if (result.code === 200) {
         this.savedFilters[ i ].shared = (value === '1');
       }
-    }, _ => {
+    }, () => {
       this.additionalMessage = 'Error - Sharing Filter, Please contact your DSM developer';
     });
   }
@@ -1385,7 +1385,7 @@ export class ParticipantListComponent implements OnInit {
       if (result.code === 200) {
         this.getFilters();
       }
-    }, _ => {
+    }, () => {
       this.additionalMessage = 'Error - Deleting Filter, Please contact your DSM developer';
     });
   }
@@ -1437,7 +1437,7 @@ export class ParticipantListComponent implements OnInit {
           this.modal.hide();
         }
       },
-      _ => {
+      () => {
         this.additionalMessage = 'Error - Saving Filter, Please contact your DSM developer';
       });
   }
@@ -1846,7 +1846,7 @@ export class ParticipantListComponent implements OnInit {
         }
         this.loadingParticipants = null;
         this.filterQuery = queryText;
-      }, _ => {
+      }, () => {
         this.participantList = [];
         this.originalParticipantList = [];
         this.copyParticipantList = [];

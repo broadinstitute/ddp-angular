@@ -94,7 +94,7 @@ export class LabelSettingsComponent implements OnInit {
     } else {
       this.loading = true;
       this.dsmService.saveLabelSettings(JSON.stringify(cleanedSettings)).subscribe(
-        _ => {
+        () => {
           this.getListOfLabelSettings();
           this.loading = false;
           this.additionalMessage = 'Data saved';

@@ -70,7 +70,7 @@ export class ParticipantEventComponent implements OnInit {
           this.additionalMessage = 'You are not allowed to see information of the selected realm at that category';
         }
       },
-      _ => {
+      () => {
         return null;
       }
     );

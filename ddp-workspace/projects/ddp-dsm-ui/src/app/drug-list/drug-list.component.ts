@@ -173,7 +173,7 @@ export class DrugListComponent implements OnInit {
   saveDrugList(drug: DrugList): void {
     this.loading = true;
     this.dsmService.saveDrug(JSON.stringify(drug)).subscribe(
-      _ => {
+      () => {
         this.getListOfDrugObjects();
         this.loading = false;
         this.additionalMessage = 'Data saved';

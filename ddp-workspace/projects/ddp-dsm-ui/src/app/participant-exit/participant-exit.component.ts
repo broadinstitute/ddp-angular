@@ -61,7 +61,7 @@ export class ParticipantExitComponent implements OnInit {
           this.additionalMessage = 'You are not allowed to see information of the selected realm at that category';
         }
       },
-      _ => {
+      () => {
         return null;
       }
     );
@@ -117,7 +117,7 @@ export class ParticipantExitComponent implements OnInit {
       action: kit.action
     };
     this.dsmService.setKitDiscardAction(this.realm, JSON.stringify(payload)).subscribe(
-      _ => {
+      () => {
         // console.info(`received: ${JSON.stringify(data, null, 2)}`);
         this.additionalMessage = 'Changed status';
       },

@@ -140,7 +140,7 @@ export class DashboardComponent implements OnInit {
               this.additionalMessage = null;
             }
           },
-          _ => {
+          () => {
             return null;
           }
         );
@@ -176,7 +176,7 @@ export class DashboardComponent implements OnInit {
             }
             this.loadingDDPData = false;
           },
-          _ => {
+          () => {
             return null;
           }
         );
@@ -341,7 +341,6 @@ export class DashboardComponent implements OnInit {
       return obj.split('.') [ 1 ];
     });
     const uniqueIndexes = Array.from(new Set(allFollowUpIndexes));
-    // return maxIndex
     return Math.max.apply(null, uniqueIndexes.map(o => {
       return Number(o);
     }));

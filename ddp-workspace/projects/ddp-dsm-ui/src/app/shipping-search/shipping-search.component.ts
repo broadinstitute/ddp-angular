@@ -40,7 +40,7 @@ export class ShippingSearchComponent implements OnInit {
           this.allowedRealms.push(val);
         });
       },
-      _ => {
+      () => {
         return null;
       }
     );

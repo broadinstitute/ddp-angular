@@ -14,7 +14,6 @@ import { AbstractionGroup } from '../abstraction-group/abstraction-group.model';
   styleUrls: ['./abstraction-settings.component.css']
 })
 export class AbstractionSettingsComponent implements OnInit {
-
   errorMessage: string;
   additionalMessage: string;
 
@@ -31,7 +30,8 @@ export class AbstractionSettingsComponent implements OnInit {
   constructor(
     private _changeDetectionRef: ChangeDetectorRef,
     private dsmService: DSMService,
-    private auth: Auth, private role: RoleService,
+    private auth: Auth,
+    private role: RoleService,
     private compService: ComponentService,
     private route: ActivatedRoute
   ) {
@@ -74,7 +74,7 @@ export class AbstractionSettingsComponent implements OnInit {
           this.additionalMessage = 'You are not allowed to see information of the selected realm at that category';
         }
       },
-      _ => {
+      () => {
         return null;
       }
     );
@@ -123,7 +123,7 @@ export class AbstractionSettingsComponent implements OnInit {
               if (value !== null) return value;
             }))
           .subscribe(
-            _ => {
+            () => {
               this.loadAbstractionFormControls();
             },
             err => {

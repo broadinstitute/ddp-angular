@@ -221,7 +221,7 @@ export class MedicalRecordComponent implements OnInit {
       this.readonly = true;
       this.dsmService.saveMedicalRecordLog(this.currentLog.medicalRecordLogId, JSON.stringify(this.currentLog))
         .subscribe(// need to subscribe, otherwise it will not send!
-          _ => {
+          () => {
             this.additionalMessage = 'Data saved';
             this.logsHistory.push(this.currentLog);
             this.currentLog = null;

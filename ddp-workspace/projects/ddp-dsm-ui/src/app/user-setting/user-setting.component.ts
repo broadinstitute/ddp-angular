@@ -79,7 +79,7 @@ export class UserSettingComponent implements OnInit {
           this.errorMessage = 'You are not allowed to see information of the selected realm at that category';
         }
       },
-      _ => {
+      () => {
         // this.loadingParticipants = null;
         return null;
       },
@@ -127,7 +127,7 @@ export class UserSettingComponent implements OnInit {
     const jsonString = JSON.stringify(json);
     this.saving = true;
     this.dsmService.setDefaultFilter(jsonString, filterName, parent, localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe(
-      _ => {
+      () => {
         this.additionalMessage = '';
         if (parent === 'participantList') {
           this.role.getUserSetting().defaultParticipantFilter = filterName;

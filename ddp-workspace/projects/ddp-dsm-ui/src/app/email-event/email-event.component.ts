@@ -71,7 +71,7 @@ export class EmailEventComponent implements OnInit {
           this.additionalMessage = 'You are not allowed to see information of the selected realm at that category';
         }
       },
-      _ => {
+      () => {
         return null;
       }
     );
@@ -184,7 +184,7 @@ export class EmailEventComponent implements OnInit {
     // console.log(`send changes to dsm: ${JSON.stringify(followedUpEmailEvents, null, 2)}`);
     this.dsmService.followUpEmailEvent(this.realm, JSON.stringify(followedUpEmailEvents))
       .subscribe(// need to subscribe, otherwise it will not send!
-        _ => {
+        () => {
           this.additionalMessage = 'Data saved';
         },
         err => {

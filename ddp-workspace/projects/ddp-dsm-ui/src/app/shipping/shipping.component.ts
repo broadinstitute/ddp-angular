@@ -139,7 +139,7 @@ export class ShippingComponent implements OnInit {
           this.additionalMessage = 'You are not allowed to see information of the selected realm at that category';
         }
       },
-      _ => {
+      () => {
         return null;
       }
     );
@@ -166,7 +166,7 @@ export class ShippingComponent implements OnInit {
           });
         });
       },
-      _ => {
+      () => {
         return null;
       }
     );
@@ -335,7 +335,7 @@ export class ShippingComponent implements OnInit {
         popup.document.close();
 
         // to check if the print window is still open, if it is closed, user should be navigated to scan page
-        const subscription = interval(500).subscribe(_ => {
+        const subscription = interval(500).subscribe(() => {
           if (popup == null || popup.window == null || popup.window.closed) {
             this.closedWindow();
             subscription.unsubscribe();
@@ -494,7 +494,7 @@ export class ShippingComponent implements OnInit {
       };
       // console.log(JSON.stringify(payload));
       this.dsmService.deactivateKitRequest(this.kitRequest.dsmKitRequestId, JSON.stringify(payload)).subscribe(
-        _ => {
+        () => {
           // console.log(`Deactivating kit request received: ${JSON.stringify(data, null, 2)}`);
           if (this.kitType != null) {
             this.loadKitRequestData(this.kitType);
@@ -524,7 +524,7 @@ export class ShippingComponent implements OnInit {
       this.loading = true;
       this.kitRequests = [];
       this.dsmService.expressLabel(this.kitRequest.dsmKitRequestId).subscribe(
-        _ => {
+        () => {
           // console.log(`Deactivating kit request received: ${JSON.stringify(data, null, 2)}`);
           if (this.kitType != null) {
             this.loadKitRequestData(this.kitType);
@@ -632,7 +632,7 @@ export class ShippingComponent implements OnInit {
       }
     }
     this.dsmService.setKitSentRequest(JSON.stringify(map)).subscribe(
-      _ => {
+      () => {
         // console.log(`Deactivating kit request received: ${JSON.stringify(data, null, 2)}`);
         if (this.kitType != null) {
           this.loadKitRequestData(this.kitType);

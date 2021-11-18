@@ -206,7 +206,7 @@ export class TissuePageComponent implements OnInit {
             this.applyToAllModal.show();
           }
         },
-        _ => {
+        () => {
           this._showWarningModal = true;
           this._warningMessage = this._warningUnsuccessfulMessage;
           this.applyToAllModal.show();

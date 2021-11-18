@@ -90,7 +90,7 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
         discardDate: this.sample.discardDate
       };
       this.dsmService.setKitDiscarded(this.realm, JSON.stringify(payload)).subscribe(
-        _ => {
+        () => {
           // console.info(`received: ${JSON.stringify(data, null, 2)}`);
           this.router.navigate(['/discardList']);
         },
@@ -273,7 +273,7 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
         }
         this.waiting = false;
       },
-      _ => {
+      () => {
         this.waiting = false;
         this.additionalMessage = null;
         this.errorMessage = 'Error - Confirming discard sample\nPlease contact your DSM developer';

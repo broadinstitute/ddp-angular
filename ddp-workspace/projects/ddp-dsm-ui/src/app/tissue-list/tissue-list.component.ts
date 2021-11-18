@@ -193,7 +193,7 @@ export class TissueListComponent implements OnInit {
           this.errorMessage = 'You are not allowed to see information of the selected realm at that category';
         }
       },
-      _ => {
+      () => {
         return null;
       },
     );
