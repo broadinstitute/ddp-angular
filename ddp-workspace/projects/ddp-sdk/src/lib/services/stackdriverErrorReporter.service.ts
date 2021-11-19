@@ -1,16 +1,13 @@
 import { Injectable, Inject, ErrorHandler } from '@angular/core';
 import { ConfigurationService } from './configuration.service';
 import { SessionMementoService } from './sessionMemento.service';
-
-declare const StackdriverErrorReporter: any;
+import StackdriverErrorReporter from 'stackdriver-errors-js';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StackdriverErrorReporterService extends ErrorHandler {
-  // TODO: update stackdriver-errors-js lib and add typings as soon as this PR merged and a new lib version released:
-  // https://github.com/GoogleCloudPlatform/stackdriver-errors-js/pull/82
-  protected errorHandler: any;
+  protected errorHandler: StackdriverErrorReporter;
 
   constructor(
     @Inject('ddp.config') private config: ConfigurationService,
