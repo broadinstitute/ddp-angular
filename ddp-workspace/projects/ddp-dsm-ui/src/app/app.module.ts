@@ -118,17 +118,25 @@ import { AddFamilyMemberComponent } from './popups/add-family-member/add-family-
 import { FieldTableComponent } from './field-table/field-table.component';
 import { ConfigurationService, DdpModule } from 'ddp-sdk';
 
+const base = document.querySelector('base')?.getAttribute('href') || '';
 
 declare const DDP_ENV: any;
 
 export const sdkConfig = new ConfigurationService();
+sdkConfig.backendUrl = DDP_ENV.baseUrl;
+sdkConfig.auth0Domain = DDP_ENV.auth0Domain;
+sdkConfig.auth0ClientId = DDP_ENV.auth0ClientKey;
+sdkConfig.adminClientId = DDP_ENV.adminClientId || DDP_ENV.auth0ClientKey;
+sdkConfig.studyGuid = DDP_ENV.serviceName;
+sdkConfig.logLevel = DDP_ENV.logLevel || 1;
+sdkConfig.baseUrl = location.origin + base;
+sdkConfig.auth0CodeRedirect = location.origin + base + 'auth';
+sdkConfig.localRegistrationUrl = sdkConfig.backendUrl + '/pepper/v1/register';
 sdkConfig.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
-sdkConfig.studyGuid = DDP_ENV.serviceName;
 sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
-sdkConfig.logLevel = 1; // = DDP_ENV.logLevel;
+sdkConfig.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl; // TODO: add the URL value in config file
 sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
-
 
 @NgModule({
   declarations: [
