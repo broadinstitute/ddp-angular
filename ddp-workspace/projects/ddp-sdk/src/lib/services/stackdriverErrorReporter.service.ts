@@ -10,7 +10,7 @@ declare const StackdriverErrorReporter: any;
 export class StackdriverErrorReporterService extends ErrorHandler {
   // TODO: update stackdriver-errors-js lib and add typings as soon as this PR merged and a new lib version released:
   // https://github.com/GoogleCloudPlatform/stackdriver-errors-js/pull/82
-  private errorHandler: any;
+  protected errorHandler: any;
 
   constructor(
     @Inject('ddp.config') private config: ConfigurationService,
@@ -33,11 +33,12 @@ export class StackdriverErrorReporterService extends ErrorHandler {
   }
 
   public handleError(error: Error | string): void {
-    if (this.config.doGcpErrorReporting) {
-      this.errorHandler.report(error);
-    }
-    // Pass the error to the original handleError otherwise it gets swallowed in the browser console
-    super.handleError(error);
+      // TODO: TEMP
+    // if (this.config.doGcpErrorReporting) {
+    //   this.errorHandler.report(error);
+    // }
+    // // Pass the error to the original handleError otherwise it gets swallowed in the browser console
+    // super.handleError(error);
   }
 
   private checkReportingParams(key: string, projectId: string): void {
@@ -54,7 +55,7 @@ export class StackdriverErrorReporterService extends ErrorHandler {
     }
   }
 
-  private getUserInfo(): string {
+  protected getUserInfo(): string {
     return this.sessionService.session ? this.sessionService.session.userGuid : 'unknown';
   }
 }

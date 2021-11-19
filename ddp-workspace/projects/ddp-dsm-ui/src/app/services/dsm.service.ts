@@ -13,7 +13,7 @@ import { PDFModel } from '../pdf-download/pdf-download.model';
 import { Statics } from '../utils/statics';
 import { Value } from '../utils/value.model';
 import { ComponentService } from './component.service';
-import { LoggingService } from './logging.service';
+import { LoggingDsmService } from './logging.service';
 import { RoleService } from './role.service';
 import { SessionService } from './session.service';
 
@@ -33,7 +33,7 @@ export class DSMService {
                private sessionService: SessionService,
                private role: RoleService,
                private router: Router,
-               private logger: LoggingService) {
+               private logger: LoggingDsmService) {
   }
 
   public transferScan(scanTracking: boolean, json: string): Observable<any> {
