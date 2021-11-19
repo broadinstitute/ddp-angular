@@ -1,0 +1,70 @@
+.cdk-drag-placeholder {
+    opacity: 0;
+}
+
+.cdk-drag {
+    background-color: white;
+}
+
+.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drop-list-dragging .picklist-option:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.grid-headers,
+.picklist-option,
+app-picklist-option-editor {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.picklist-option {
+    text-align: center;
+}
+
+:host ::ng-deep {
+    .stable-id-column {
+        width: 90px;
+        min-width: 90px;
+        flex: 1 1 90px;
+    }
+
+    .label-column,
+    .tooltip-column,
+    .detail-label-column {
+        width: 170px;
+        min-width: 170px;
+        flex: 1 1 170px;
+    }
+
+    .allow-details-column,
+    .exclusive-column {
+        width: 50px;
+        min-width: 50px;
+        flex: 1 1 50px;
+    }
+
+    .drag-indicator-column,
+    .remove-column {
+        width: 40px;
+        min-width: 40px;
+        flex: 1 1 40px;
+    }
+}
+
+.grid-headers {
+    width: fit-content;
+}
+
+.list-container {
+    overflow-x: scroll;
+}
+
+.drag-indicator-column {
+    cursor: move;
+    opacity: .3;
+}

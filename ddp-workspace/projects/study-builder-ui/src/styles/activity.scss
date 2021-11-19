@@ -214,7 +214,7 @@
 
 // consent agree question
 .consent-agree {
-    margin: 0rem 0 -1.5rem 0;
+    margin: 0 0 -1.5rem 0;
 }
 
 // question text
@@ -260,7 +260,7 @@ select:disabled {
 // picklist
 .mat-checkbox-label,
 .mat-radio-label-content {
-    font-size: 1.25rem;
+    font-size: 1rem;
     line-height: 1.25rem !important;
     color: mat-color($app-theme, 700);
 }
@@ -314,7 +314,7 @@ select:disabled {
 // input
 .mat-form-field-infix {
     color: mat-color($app-theme, 700);
-    font-size: 1.25rem;
+    font-size: 1rem;
 }
 
 // agreement question

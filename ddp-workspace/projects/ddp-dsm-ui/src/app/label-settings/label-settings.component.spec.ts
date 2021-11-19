@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+// import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { LabelSettingsComponent } from './label-settings.component';
 
 describe('LabelSettingsComponent', () => {
-  let component: LabelSettingsComponent;
-  let fixture: ComponentFixture<LabelSettingsComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ LabelSettingsComponent ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(LabelSettingsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should be created', () => {
-    expect(component).toBeTruthy();
-  });
+  // let component: LabelSettingsComponent;
+  // let fixture: ComponentFixture<LabelSettingsComponent>;
+  //
+  // beforeEach(waitForAsync(() => {
+  //   TestBed.configureTestingModule({
+  //     declarations: [ LabelSettingsComponent ]
+  //   })
+  //   .compileComponents();
+  // }));
+  //
+  // beforeEach(() => {
+  //   fixture = TestBed.createComponent(LabelSettingsComponent);
+  //   component = fixture.componentInstance;
+  //   fixture.detectChanges();
+  // });
+  //
+  // it('should be created', () => {
+  //   expect(component).toBeTruthy();
+  // });
 });

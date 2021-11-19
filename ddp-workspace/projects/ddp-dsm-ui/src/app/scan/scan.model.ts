@@ -1,5 +1,4 @@
 export class ScanPair {
-
   public error: string;
 
   constructor(public leftValue: string, public rightValue: string) {
@@ -8,8 +7,8 @@ export class ScanPair {
   }
 }
 
+// tslint:disable-next-line:max-classes-per-file
 export class ScanValue {
-
   public error: string;
 
   constructor(public kit: string) {

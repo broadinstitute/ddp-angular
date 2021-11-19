@@ -1,18 +1,17 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {AbstractionGroup} from "../abstraction-group/abstraction-group.model";
-import {Participant} from "../participant-list/participant-list.model";
-import {AbstractionField} from "./medical-record-abstraction-field.model";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AbstractionGroup } from '../abstraction-group/abstraction-group.model';
+import { Participant } from '../participant-list/participant-list.model';
+import { AbstractionField } from './medical-record-abstraction-field.model';
 
-@Component( {
-  selector: "app-medical-record-abstraction",
-  templateUrl: "./medical-record-abstraction.component.html",
-  styleUrls: [ "./medical-record-abstraction.component.css" ]
-} )
-export class MedicalRecordAbstractionComponent implements OnInit {
-
+@Component({
+  selector: 'app-medical-record-abstraction',
+  templateUrl: './medical-record-abstraction.component.html',
+  styleUrls: [ './medical-record-abstraction.component.css' ]
+})
+export class MedicalRecordAbstractionComponent {
   @Input() participant: Participant;
   @Input() abstractionFormControls: Array<AbstractionGroup> = [];
-  @Input() editForm: boolean = false;
+  @Input() editForm = false;
   @Input() abstractionActivity: string;
   @Input() status: string;
   @Input() fileList: string[];
@@ -25,43 +24,37 @@ export class MedicalRecordAbstractionComponent implements OnInit {
   newGroup: string;
   notUniqueError: boolean;
 
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
-
-  addGroup() {
+  addGroup(): void {
     if (!this.notUniqueError) {
-      let fields: AbstractionField[] = [];
-      let newAbstractionGroup = new AbstractionGroup( null, this.newGroup, this.abstractionFormControls.length, fields );
+      const fields: AbstractionField[] = [];
+      const newAbstractionGroup = new AbstractionGroup(null, this.newGroup, this.abstractionFormControls.length, fields);
       newAbstractionGroup.changed = true;
       newAbstractionGroup.newAdded = true;
-      this.abstractionFormControls.push( newAbstractionGroup );
+      this.abstractionFormControls.push(newAbstractionGroup);
       this.newGroup = null;
     }
   }
 
-  addFileToList( fileName: string ) {
-    if (fileName != null && fileName !== "") {
-      let found: boolean = false;
-      for (let file of this.fileList) {
+  addFileToList(fileName: string): void {
+    if (fileName != null && fileName !== '') {
+      let found = false;
+      for (const file of this.fileList) {
         if (file === fileName) {
           found = true;
           break;
         }
       }
       if (!found) {
-        this.fileList.push( fileName );
+        this.fileList.push(fileName);
       }
       this.nameCurrentFile = fileName;
-      this.emitFileName.emit( fileName );
+      this.emitFileName.emit(fileName);
     }
   }
 
-  checkName( displayName: string ) {
+  checkName(displayName: string): void {
     this.notUniqueError = false;
-    for (let field of this.abstractionFormControls) {
+    for (const field of this.abstractionFormControls) {
       if (field.displayName.toLowerCase() === displayName.toLowerCase()) {
         this.notUniqueError = true;
       }
@@ -69,12 +62,11 @@ export class MedicalRecordAbstractionComponent implements OnInit {
     return null;
   }
 
-  findGroup( group: Array<AbstractionGroup>, medicalRecordAbstractionGroupId: number ): AbstractionGroup {
+  findGroup(group: Array<AbstractionGroup>, medicalRecordAbstractionGroupId: number): AbstractionGroup {
     if (group != null) {
-      return group.find( gr => {
-        return gr.abstractionGroupId == medicalRecordAbstractionGroupId;
-      } );
+      return group.find(gr => {
+        return gr.abstractionGroupId === medicalRecordAbstractionGroupId;
+      });
     }
   }
-
 }

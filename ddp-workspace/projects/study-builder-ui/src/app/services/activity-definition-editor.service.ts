@@ -66,6 +66,10 @@ export class ActivityDefinitionEditorService  {
         this.addNewBlock(this.factory.createDefaultTextQuestionBlock());
     }
 
+    public addBlankPicklistQuestionBlockToActivity(): void {
+        this.addNewBlock(this.factory.createDefaultPicklistQuestionBlock());
+    }
+
     private addNewBlock(newBlock: IdentifiableFormBlockDef): void {
         // TODO: refactor access to sectionSubjects when we dealing with multiple sections
         this.selectedBlockSubject = this.currentActivityDefSubject.value.sectionsSubjects[0].value.addBlock(newBlock);

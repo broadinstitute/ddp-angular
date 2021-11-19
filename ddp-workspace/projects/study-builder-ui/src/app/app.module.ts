@@ -19,6 +19,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { ContentBlockComponent } from './components/content-block/content-block.component';
 import { TextQuestionBlockComponent } from './components/text-question-block/text-question-block.component';
 import { TextQuestionEditorComponent } from './components/text-question-editor/text-question-editor.component';
+import { PicklistQuestionBlockComponent } from './components/picklist-question-block/picklist-question-block.component';
+import { PicklistQuestionEditorComponent } from './components/picklist-question-editor/picklist-question-editor.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -27,27 +29,32 @@ import { DummyErrorHandler } from './dummyErrorHandler';
 import { StaticContentBlockComponent } from './components/static-content-block/static-content-block.component';
 import { StaticContentBlockEditorComponent } from './components/static-content-block-editor/static-content-block-editor.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-
+import { ManageListComponent } from './components/manage-list/manage-list.component';
+import { PicklistOptionEditorComponent } from './components/picklist-option-editor/picklist-option-editor.component';
 
 const ddpConfig = new ConfigurationService();
 ddpConfig.doGcpErrorReporting = false;
-
+ddpConfig.tooltipIconUrl = 'assets/images/info.png';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SurveyCanvasComponent,
-    SurveyComponentEditorComponent,
-    SurveyComponentPaletteComponent,
-    SurveyEditorComponent,
-    ActivityComponent,
-    SectionComponent,
-    ContentBlockComponent,
-    TextQuestionBlockComponent,
-    TextQuestionEditorComponent,
-    StaticContentBlockComponent,
-    StaticContentBlockEditorComponent
-  ],
+    declarations: [
+        AppComponent,
+        SurveyCanvasComponent,
+        SurveyComponentEditorComponent,
+        SurveyComponentPaletteComponent,
+        SurveyEditorComponent,
+        ActivityComponent,
+        SectionComponent,
+        ContentBlockComponent,
+        TextQuestionBlockComponent,
+        TextQuestionEditorComponent,
+        PicklistQuestionBlockComponent,
+        PicklistQuestionEditorComponent,
+        StaticContentBlockComponent,
+        StaticContentBlockEditorComponent,
+        ManageListComponent,
+        PicklistOptionEditorComponent
+    ],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -74,7 +81,7 @@ ddpConfig.doGcpErrorReporting = false;
             provide: ErrorHandler,
             useClass: DummyErrorHandler
         }],
-  bootstrap: [AppComponent]
+    bootstrap: [AppComponent]
 })
 
 export class AppModule { }

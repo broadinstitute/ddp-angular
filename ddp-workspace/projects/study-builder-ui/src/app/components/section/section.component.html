@@ -18,6 +18,8 @@
                     <app-static-content-block  *ngIf="block.blockType === 'CONTENT'" [definitionBlock$]="block$"></app-static-content-block>
                     <app-text-question-block *ngIf="block.blockType === 'QUESTION' && block.question.questionType === 'TEXT'"
                                              [definitionBlock$]="block$"></app-text-question-block>
+                    <app-picklist-question-block *ngIf="block.blockType === 'QUESTION' && block.question.questionType === 'PICKLIST'"
+                                                 [definitionBlock$]="block$"></app-picklist-question-block>
                 </div>
             </ng-container>
         </div>

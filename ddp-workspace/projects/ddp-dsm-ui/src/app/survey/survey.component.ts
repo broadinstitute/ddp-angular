@@ -1,16 +1,16 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import {DSMService} from "../services/dsm.service";
-import {Auth} from "../services/auth.service";
-import {RoleService} from "../services/role.service";
-import {Result} from "../utils/result.model";
-import {Statics} from "../utils/statics";
-import {ComponentService} from "../services/component.service";
-import {ParticipantSurveyUploadObject, Survey, SurveyStatus, TriggerResponse} from "./survey.model";
-import {Utils} from "../utils/utils";
-import {ModalComponent} from "../modal/modal.component";
-import {FieldFilepickerComponent} from "../field-filepicker/field-filepicker.component";
+import { DSMService } from '../services/dsm.service';
+import { Auth } from '../services/auth.service';
+import { RoleService } from '../services/role.service';
+import { Result } from '../utils/result.model';
+import { Statics } from '../utils/statics';
+import { ComponentService } from '../services/component.service';
+import { ParticipantSurveyUploadObject, Survey, SurveyStatus, TriggerResponse } from './survey.model';
+import { Utils } from '../utils/utils';
+import { ModalComponent } from '../modal/modal.component';
+import { FieldFilepickerComponent } from '../field-filepicker/field-filepicker.component';
 
 @Component({
   selector: 'app-survey',
@@ -18,7 +18,6 @@ import {FieldFilepickerComponent} from "../field-filepicker/field-filepicker.com
   styleUrls: ['./survey.component.css']
 })
 export class SurveyComponent implements OnInit {
-
   @ViewChild(ModalComponent)
   public modal: ModalComponent;
 
@@ -27,7 +26,7 @@ export class SurveyComponent implements OnInit {
 
   errorMessage: string;
   additionalMessage: string;
-  loading: boolean = false;
+  loading = false;
 
   realm: string;
 
@@ -36,17 +35,17 @@ export class SurveyComponent implements OnInit {
   survey: Survey;
 
   participantId: string = null;
-  allowedToSeeInformation: boolean = false;
+  allowedToSeeInformation = false;
 
   file: File = null;
   reason: string = null;
 
-  noSurveyStatus: boolean = false;
+  noSurveyStatus = false;
 
-  filterParticipantId: string = "";
-  filterShortId: string = "";
-  filterReason: string = "";
-  filterUser: string = "";
+  filterParticipantId = '';
+  filterShortId = '';
+  filterReason = '';
+  filterUser = '';
 
   failedTrigger: Array<ParticipantSurveyUploadObject> = [];
   alreadyTriggered: Array<ParticipantSurveyUploadObject> = [];
@@ -65,18 +64,17 @@ export class SurveyComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
       this.realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       this.checkRight();
+    } else {
+      this.additionalMessage = 'Please select a realm';
     }
-    else {
-      this.additionalMessage = "Please select a realm";
-    }
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }
 
-  private checkRight() {
+  private checkRight(): void {
     this.additionalMessage = null;
     this.noSurveyStatus = false;
     this.surveyStatus = [];
@@ -95,17 +93,17 @@ export class SurveyComponent implements OnInit {
           }
         });
         if (!this.allowedToSeeInformation) {
-          this.additionalMessage = "You are not allowed to see information of the selected realm at that category";
+          this.additionalMessage = 'You are not allowed to see information of the selected realm at that category';
         }
       },
-      err => {
+      () => {
         return null;
       }
     );
   }
 
-  getListOfPossibleSurveys() {
-    if (this.realm !== "") {
+  getListOfPossibleSurveys(): void {
+    if (this.realm !== '') {
       this.errorMessage = null;
       this.additionalMessage = null;
       this.loading = true;
@@ -118,7 +116,7 @@ export class SurveyComponent implements OnInit {
           // console.info(`received: ${JSON.stringify(data, null, 2)}`);
           jsonData = data;
           jsonData.forEach((val) => {
-            let survey = Survey.parse(val);
+            const survey = Survey.parse(val);
             this.possibleSurveys.push(survey);
           });
           this.loading = false;
@@ -128,14 +126,14 @@ export class SurveyComponent implements OnInit {
             this.auth.logout();
           }
           this.loading = false;
-          this.errorMessage = "Error - Loading list of surveys\nPlease contact your DSM developer";
+          this.errorMessage = 'Error - Loading list of surveys\nPlease contact your DSM developer';
         }
       );
     }
   }
 
-  getListOfSurveyStatus() {
-    if (this.realm !== "" && (this.survey != null && this.survey.name !== "")) {
+  getListOfSurveyStatus(): void {
+    if (this.realm !== '' && (this.survey != null && this.survey.name !== '')) {
       this.errorMessage = null;
       this.additionalMessage = null;
       this.loading = true;
@@ -144,15 +142,14 @@ export class SurveyComponent implements OnInit {
       this.dsmService.getSurveyStatus(this.realm, this.survey.name).subscribe(
         data => {
           this.surveyStatus = [];
-          let result = Result.parse(data);
-          if (result.code == 200 && result.body === "NO_SURVEY_STATUS") {
+          const result = Result.parse(data);
+          if (result.code === 200 && result.body === 'NO_SURVEY_STATUS') {
             this.noSurveyStatus = true;
-          }
-          else {
+          } else {
             // console.info(`received: ${JSON.stringify(data, null, 2)}`);
             jsonData = data;
             jsonData.forEach((val) => {
-              let surveyStatus = SurveyStatus.parse(val);
+              const surveyStatus = SurveyStatus.parse(val);
               this.surveyStatus.push(surveyStatus);
             });
             this.noSurveyStatus = false;
@@ -164,87 +161,80 @@ export class SurveyComponent implements OnInit {
             this.auth.logout();
           }
           this.loading = false;
-          this.errorMessage = "Error - Loading list of survey status\nPlease contact your DSM developer";
+          this.errorMessage = 'Error - Loading list of survey status\nPlease contact your DSM developer';
         }
       );
     }
   }
 
-  triggerSurvey() {
-    if (this.realm !== "" && (this.participantId !== "" || this.file != null)) {
+  triggerSurvey(): void {
+    if (this.realm !== '' && (this.participantId !== '' || this.file != null)) {
       this.errorMessage = null;
       this.loading = true;
-      var triggerSurveyPayload: any = null;
-      var isFileUpload: boolean = false;
+      let triggerSurveyPayload: any = null;
+      let isFileUpload = false;
 
-      if (this.participantId != null && this.participantId !== "") {
-        var participantPayload = {participantId: this.participantId};
+      if (this.participantId != null && this.participantId !== '') {
+        const participantPayload = {participantId: this.participantId};
         triggerSurveyPayload = JSON.stringify(participantPayload);
-      }
-      else if (this.file != null) {
+      } else if (this.file != null) {
         triggerSurveyPayload = this.file;
         isFileUpload = true;
       }
-      // console.log(this.file + " " + triggerSurveyPayload);
-      this.dsmService.triggerSurvey(this.realm, this.survey.name, this.survey.type, this.reason, isFileUpload, triggerSurveyPayload).subscribe(// need to subscribe, otherwise it will not send!
-        data => {
-          // console.log(data);
-          this.loading = false;
-          if (typeof data === "string") {
-            this.errorMessage = "Error - Uploading txt.\n" + data;
-          }
-          else {
-            let result = Result.parse(data);
-            if (result.code == 200) {
-              this.additionalMessage = "Survey triggered";
-              this.participantId = null;
-              this.reason = null;
-            }
-            else {
-              // console.log(`received: ${JSON.stringify(data, null, 2)}`);
-              let response: TriggerResponse = TriggerResponse.parse(data);
-              response.failedToTrigger.forEach((val) => {
-                this.failedTrigger.push(ParticipantSurveyUploadObject.parse(val));
-              });
-              if (this.failedTrigger.length > 0) {
-                this.errorMessage = "Failed to trigger survey for " + this.failedTrigger.length + " participant(s)";
-              }
+      this.dsmService.triggerSurvey(this.realm, this.survey.name, this.survey.type, this.reason, isFileUpload, triggerSurveyPayload)
+        .subscribe(// need to subscribe, otherwise it will not send!
+          data => {
+            this.loading = false;
+            if (typeof data === 'string') {
+              this.errorMessage = 'Error - Uploading txt.\n' + data;
+            } else {
+              const result = Result.parse(data);
+              if (result.code === 200) {
+                this.additionalMessage = 'Survey triggered';
+                this.participantId = null;
+                this.reason = null;
+              } else {
+                const response: TriggerResponse = TriggerResponse.parse(data);
+                response.failedToTrigger.forEach((val) => {
+                  this.failedTrigger.push(ParticipantSurveyUploadObject.parse(val));
+                });
+                if (this.failedTrigger.length > 0) {
+                  this.errorMessage = 'Failed to trigger survey for ' + this.failedTrigger.length + ' participant(s)';
+                }
 
-              response.alreadyTriggered.forEach((val) => {
-                this.alreadyTriggered.push(ParticipantSurveyUploadObject.parse(val));
-              });
-              if (this.alreadyTriggered.length > 0) {
-                let showAlreadyTriggered: boolean = false;
-                for (let survey of this.possibleSurveys) {
-                  if (survey.name === this.survey.name) {
-                    showAlreadyTriggered = true;
+                response.alreadyTriggered.forEach((val) => {
+                  this.alreadyTriggered.push(ParticipantSurveyUploadObject.parse(val));
+                });
+                if (this.alreadyTriggered.length > 0) {
+                  let showAlreadyTriggered = false;
+                  for (const survey of this.possibleSurveys) {
+                    if (survey.name === this.survey.name) {
+                      showAlreadyTriggered = true;
+                    }
+                  }
+                  if (showAlreadyTriggered) {
+                    this.modal.show();
+                  } else {
+                    this.additionalMessage = 'Your list contained participants which already had that survey.\nThese participants were ignored, rest was triggered';
+                    this.getListOfSurveyStatus();
                   }
                 }
-                if (showAlreadyTriggered) {
-                  this.modal.show();
+                if (this.failedTrigger.length === 0 && this.alreadyTriggered.length === 0) {
+                  this.additionalMessage = 'DDP was triggered to sent out survey(s).';
+                  this.file = null;
+                  this.filepicker.unselectFile();
+                  this.reason = null;
                 }
-                else {
-                  this.additionalMessage = "Your list contained participants which already had that survey.\nThese participants were ignored, rest was triggered";
-                  this.getListOfSurveyStatus();
-                }
-              }
-              if (this.failedTrigger.length === 0 && this.alreadyTriggered.length === 0) {
-                this.additionalMessage = "DDP was triggered to sent out survey(s).";
-                this.file = null;
-                this.filepicker.unselectFile();
-                this.reason = null;
               }
             }
           }
-        }
-      );
-    }
-    else {
-      this.errorMessage = "Please select a realm and a survey and enter the participant ID for the participant";
+        );
+    } else {
+      this.errorMessage = 'Please select a realm and a survey and enter the participant ID for the participant';
     }
   }
 
-  fileSelected(file: File) {
+  fileSelected(file: File): void {
     this.file = file;
   }
 
@@ -254,11 +244,10 @@ export class SurveyComponent implements OnInit {
 
   disableButton(): boolean {
     if (!this.noSurveyStatus) {
-      if ((this.participantId !== "" || this.file != null) && this.reason != null) {
+      if ((this.participantId !== '' || this.file != null) && this.reason != null) {
         return false;
       }
-    }
-    else {
+    } else {
       if (this.participantId != null || this.file != null) {
         return false;
       }
@@ -266,41 +255,41 @@ export class SurveyComponent implements OnInit {
     return true;
   }
 
-  triggerAgain() {
-    for (var i = this.alreadyTriggered.length-1; i >= 0; i--) {
+  triggerAgain(): void {
+    for (let i = this.alreadyTriggered.length - 1; i >= 0; i--) {
       if (!this.alreadyTriggered[i].selected) {
         this.alreadyTriggered.splice(i, 1);
       }
     }
-    var jsonParticipants = JSON.stringify(this.alreadyTriggered);
+    const jsonParticipants = JSON.stringify(this.alreadyTriggered);
     // console.log(jsonParticipants);
-    this.dsmService.triggerAgain(this.realm, this.survey.name, this.survey.type, this.reason + " - (Re-triggered)", jsonParticipants).subscribe(
-      data => {
-        this.loading = false;
-        if (typeof data === "string") {
-          this.errorMessage = "Error - Triggering again.\n" + data;
+    this.dsmService.triggerAgain(this.realm, this.survey.name, this.survey.type, this.reason + ' - (Re-triggered)', jsonParticipants)
+      .subscribe(
+        data => {
+          this.loading = false;
+          if (typeof data === 'string') {
+            this.errorMessage = 'Error - Triggering again.\n' + data;
+          } else {
+            this.errorMessage = 'All surveys were triggered.';
+            this.getListOfSurveyStatus();
+          }
+        },
+        err => {
+          this.loading = false;
+          if (err._body === Auth.AUTHENTICATION_ERROR) {
+            this.auth.logout();
+          }
+          this.errorMessage = 'Error - Uploading txt\n' + err;
         }
-        else {
-          this.errorMessage = "All surveys were triggered.";
-          this.getListOfSurveyStatus();
-        }
-      },
-      err => {
-        this.loading = false;
-        if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
-        }
-        this.errorMessage = "Error - Uploading txt\n" + err;
-      }
-    );
+      );
     this.emptyUpload();
   }
 
-  forgetParticipants() {
+  forgetParticipants(): void {
     this.emptyUpload();
   }
 
-  emptyUpload() {
+  emptyUpload(): void {
     this.modal.hide();
     this.alreadyTriggered = [];
     this.reason = null;
@@ -311,5 +300,4 @@ export class SurveyComponent implements OnInit {
   hasRole(): RoleService {
     return this.role;
   }
-
 }

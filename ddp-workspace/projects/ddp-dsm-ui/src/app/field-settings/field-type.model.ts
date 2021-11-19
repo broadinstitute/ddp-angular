@@ -1,5 +1,5 @@
 export class FieldType {
-  selected: boolean = false;
+  selected = false;
 
   constructor(public name: string, public tableAlias: string) {
     this.name = name;

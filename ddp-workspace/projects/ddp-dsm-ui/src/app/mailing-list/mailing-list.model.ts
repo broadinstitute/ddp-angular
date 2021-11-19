@@ -8,11 +8,11 @@ export class MailingListContact {
     this.dateCreated = dateCreated;
   }
 
-  public getDate(): number{
-    return this.dateCreated * 1000;
-  }
-
   static parse(json): MailingListContact {
     return new MailingListContact(json.firstName, json.lastName, json.email, json.info, json.dateCreated);
+  }
+
+  public getDate(): number {
+    return this.dateCreated * 1000;
   }
 }

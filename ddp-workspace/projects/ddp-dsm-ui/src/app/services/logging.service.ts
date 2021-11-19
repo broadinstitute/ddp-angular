@@ -1,12 +1,10 @@
-import { Injectable, Inject } from '@angular/core';
-import {StackdriverErrorReporterService} from "./stackdriver-error-reporter.service";
+import { Injectable } from '@angular/core';
+import { StackdriverErrorReporterService } from './stackdriver-error-reporter.service';
 
 type Logger = (message?: any, ...optionalParams: any[]) => void;
 
 @Injectable()
 export class LoggingService {
-  // tslint:disable-next-line:no-console
-
   public logError: Logger =
     (...args) => {
       const stringifiedArgs = args.map(item => {
@@ -15,7 +13,7 @@ export class LoggingService {
 
       this.stackdriverErrorReporterService.handleError(stringifiedArgs.join(', '));
       console.error.apply(window.console, stringifiedArgs);
-    };
+    }
 
   constructor(
     private stackdriverErrorReporterService: StackdriverErrorReporterService) {}

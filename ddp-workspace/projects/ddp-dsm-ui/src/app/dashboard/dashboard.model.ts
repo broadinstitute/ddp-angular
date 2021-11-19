@@ -1,13 +1,14 @@
-import {NameValue} from "../utils/name-value.model";
+import { NameValue } from '../utils/name-value.model';
 
 export class DDPInformation {
 
-  private salivaSent: number = 0;
-  private bloodSent: number = 0;
-
-  constructor( public ddpName: string, public sentCounters: Counter, public receivedCounters: Counter, public deactivatedCounters: NameValue,
-               public dashboardValues: Object, public dashboardValuesDetailed: Object, public dashboardValuesPeriod: Object, public dashboardValuesPeriodDetailed: Object,
-               public unsentExpressKits: Array<NameValue>, public kits: Array<KitDDPSummary> ) {
+  constructor(
+    public ddpName: string, public sentCounters: Counter, public receivedCounters: Counter,
+    public deactivatedCounters: NameValue, public dashboardValues: object,
+    public dashboardValuesDetailed: object, public dashboardValuesPeriod: object,
+    public dashboardValuesPeriodDetailed: object, public unsentExpressKits: Array<NameValue>,
+    public kits: Array<KitDDPSummary>
+  ) {
     this.ddpName = ddpName;
     this.sentCounters = sentCounters;
     this.receivedCounters = receivedCounters;
@@ -20,21 +21,29 @@ export class DDPInformation {
     this.kits = kits;
   }
 
-  public unsentExpressName( index: number ): string {
+  static parse(json): DDPInformation {
+    return new DDPInformation(
+      json.ddpName, json.sentCounters, json.receivedCounters, json.deactivatedCounters,
+      json.dashboardValues, json.dashboardValuesDetailed, json.dashboardValuesPeriod,
+      json.dashboardValuesPeriodDetailed, json.unsentExpressKits, json.kits
+    );
+  }
+
+  public unsentExpressName(index: number): string {
     if (this.unsentExpressKits[ index ] != null && this.unsentExpressKits[ index ].name != null) {
-      return this.unsentExpressKits[ index ].name.replace( "_", " " );
+      return this.unsentExpressKits[ index ].name.replace('_', ' ');
     }
     return this.unsentExpressKits[ index ].name;
   }
-
-  static parse( json ): DDPInformation {
-    return new DDPInformation( json.ddpName, json.sentCounters, json.receivedCounters, json.deactivatedCounters,
-      json.dashboardValues, json.dashboardValuesDetailed, json.dashboardValuesPeriod, json.dashboardValuesPeriodDetailed, json.unsentExpressKits, json.kits );
-  }
 }
 
+// tslint:disable-next-line:max-classes-per-file
 export class KitDDPSummary {
-  constructor( public realm: string, public kitType: string, public kitsNoLabel: string, public kitsNoLabelMinDate: number, public kitsQueue: string, public kitsError: string ) {
+  constructor(
+    public realm: string, public kitType: string,
+    public kitsNoLabel: string, public kitsNoLabelMinDate: number,
+    public kitsQueue: string, public kitsError: string
+  ) {
     this.realm = realm;
     this.kitType = kitType;
     this.kitsNoLabel = kitsNoLabel;
@@ -44,8 +53,9 @@ export class KitDDPSummary {
   }
 }
 
+// tslint:disable-next-line:max-classes-per-file
 export class Counter {
-  constructor( public kitType: string, public counters: Array<NameValue> ) {
+  constructor(public kitType: string, public counters: Array<NameValue>) {
     this.kitType = kitType;
     this.counters = counters;
   }

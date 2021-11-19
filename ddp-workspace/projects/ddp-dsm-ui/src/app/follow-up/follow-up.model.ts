@@ -7,7 +7,7 @@ export class FollowUp {
   }
 
   public isEmpty(): boolean {
-    return (this.fReceived === null || this.fReceived === "") && (this.fRequest1 === null || this.fRequest1 === "") &&
-      (this.fRequest2 === null || this.fRequest2 === "") && (this.fRequest3 === null || this.fRequest3 === "");
+    return (this.fReceived === null || this.fReceived === '') && (this.fRequest1 === null || this.fRequest1 === '') &&
+      (this.fRequest2 === null || this.fRequest2 === '') && (this.fRequest3 === null || this.fRequest3 === '');
   }
 }
