@@ -33,12 +33,11 @@ export class StackdriverErrorReporterService extends ErrorHandler {
   }
 
   public handleError(error: Error | string): void {
-      // TODO: TEMP
-    // if (this.config.doGcpErrorReporting) {
-    //   this.errorHandler.report(error);
-    // }
-    // // Pass the error to the original handleError otherwise it gets swallowed in the browser console
-    // super.handleError(error);
+    if (this.config.doGcpErrorReporting) {
+      this.errorHandler.report(error);
+    }
+    // Pass the error to the original handleError otherwise it gets swallowed in the browser console
+    super.handleError(error);
   }
 
   private checkReportingParams(key: string, projectId: string): void {
