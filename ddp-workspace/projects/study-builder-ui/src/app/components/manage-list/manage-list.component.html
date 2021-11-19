@@ -13,9 +13,14 @@
             </div>
             <app-picklist-group-editor [group]="group"
                                        [disabled]="!groupsAllowed"
+                                       [notUniqueStableId]="groupHasNotUniqueStableId(group)"
+                                       [notUniqueOptionsStableIds]="notUniqueOptionsStableIdsForGroup(group)"
                                        (groupChanged)="updateGroup($event, i)">
             </app-picklist-group-editor>
         </div>
     </div>
 </div>
-<app-picklist-options-list [options]="options" (changed)="updateOptions($event)"></app-picklist-options-list>
+<app-picklist-options-list [options]="options"
+                           [notUniqueOptionsStableIds]="notUniqueOptionsStableIds()"
+                           (changed)="updateOptions($event)">
+</app-picklist-options-list>

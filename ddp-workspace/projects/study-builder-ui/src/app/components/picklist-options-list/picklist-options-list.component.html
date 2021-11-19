@@ -21,7 +21,9 @@
                 <mat-icon>delete</mat-icon>
             </button>
         </div>
-        <app-picklist-option-editor [option]="option" (optionChanged)="updateOption($event, i)">
+        <app-picklist-option-editor [option]="option"
+                                    [notUniqueStableId]="notUniqueOptionsStableIds.includes(option.stableId)"
+                                    (optionChanged)="updateOption($event, i)">
         </app-picklist-option-editor>
     </div>
 </div>

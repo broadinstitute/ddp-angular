@@ -4,6 +4,9 @@
         <mat-form-field class="stable-id-column">
             <mat-label>Group stableId</mat-label>
             <input matInput formControlName="stableId" required>
+            <mat-error *ngIf="groupForm.get('stableId').hasError('stableIdIsNotUnique')">
+                Group stable ID should be unique
+            </mat-error>
         </mat-form-field>
         <mat-form-field class="name-column">
             <mat-label>Group name</mat-label>
@@ -12,6 +15,7 @@
     </div>
     <app-picklist-options-list *ngIf="options.value.length"
                                [options]="options.value"
+                               [notUniqueOptionsStableIds]="notUniqueOptionsStableIds"
                                (changed)="updateGroupOptions($event)">
     </app-picklist-options-list>
 </ng-container>

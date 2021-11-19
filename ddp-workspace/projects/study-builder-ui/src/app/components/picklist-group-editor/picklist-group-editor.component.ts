@@ -32,6 +32,15 @@ export class PicklistGroupEditorComponent implements OnDestroy {
             this.groupForm.enable();
         }
     }
+    @Input()
+    set notUniqueStableId(stableIdIsNotUnique: boolean) {
+        if (stableIdIsNotUnique) {
+            this.groupForm.get('stableId').setErrors({stableIdIsNotUnique: true});
+        } else {
+            this.groupForm.get('stableId').setErrors(null);
+        }
+    }
+    @Input() notUniqueOptionsStableIds: string[];
     @Output() groupChanged = new EventEmitter<PicklistGroupDef>();
 
     public groupForm = this.fb.group({

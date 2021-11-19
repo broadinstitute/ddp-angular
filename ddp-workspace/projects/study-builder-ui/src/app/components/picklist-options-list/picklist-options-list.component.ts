@@ -10,6 +10,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 })
 export class PicklistOptionsListComponent {
     @Input() options: PicklistOptionDef[];
+    @Input() notUniqueOptionsStableIds: string[] = [];
     @Output() changed = new EventEmitter<PicklistOptionDef[]>();
 
     optionDrop(event: CdkDragDrop<PicklistOptionDef[]>): void {

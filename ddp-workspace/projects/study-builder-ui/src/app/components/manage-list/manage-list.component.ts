@@ -1,5 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ControlValueAccessor, FormBuilder, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, Input, OnInit, Self } from '@angular/core';
+import {
+    ControlValueAccessor,
+    FormBuilder,
+    FormControl,
+    NgControl,
+    ValidationErrors
+} from '@angular/forms';
 import { PicklistOptionDef } from '../../model/core/picklistOptionDef';
 import { PicklistGroupDef } from '../../model/core/picklistGroupDef';
 import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
@@ -12,15 +18,8 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
     templateUrl: 'manage-list.component.html',
     styleUrls: ['manage-list.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            multi: true,
-            useExisting: ManageListComponent
-        }
-    ]
 })
-export class ManageListComponent implements ControlValueAccessor {
+export class ManageListComponent implements OnInit, ControlValueAccessor {
     @Input() groupsAllowed: boolean;
 
     public groups: Array<PicklistGroupDef>;
@@ -30,8 +29,14 @@ export class ManageListComponent implements ControlValueAccessor {
 
     private factory: StudyConfigObjectFactory;
 
-    constructor(private fb: FormBuilder, private config: ConfigurationService) {
+    constructor(private fb: FormBuilder, private config: ConfigurationService, @Self() private controlDirective: NgControl) {
         this.factory = new StudyConfigObjectFactory(config);
+        controlDirective.valueAccessor = this;
+    }
+
+    ngOnInit(): void {
+        this.controlDirective.control.setValidators([this.validate.bind(this)]);
+        this.controlDirective.control.updateValueAndValidity();
     }
 
     onChange = (event: {options: Array<PicklistOptionDef>; groups: Array<PicklistGroupDef>}) => {};
@@ -55,6 +60,54 @@ export class ManageListComponent implements ControlValueAccessor {
             this.onTouched();
             this.touched = true;
         }
+    }
+
+    validate({ value }: FormControl): ValidationErrors | null {
+        const allOptions: PicklistOptionDef[] = [...value.options, ...value.groups.flatMap(group => group.options)];
+        const notUniqueOptionsStableIds = this.getNotUniqueStableIds(allOptions);
+        const notUniqueGroupsStableIds = this.getNotUniqueStableIds(this.groups);
+        const isNotValid = !!notUniqueOptionsStableIds.length || !!notUniqueGroupsStableIds.length;
+        return isNotValid && {
+            ...(notUniqueOptionsStableIds ? {notUniqueOptionsStableIds} : {}),
+            ...(notUniqueGroupsStableIds ? {notUniqueGroupsStableIds} : {}),
+        };
+    }
+
+    private getNotUniqueStableIds(array: PicklistOptionDef[] | PicklistGroupDef[]): string[] {
+        const stableIdToCountMap = new Map<string, number>();
+        for (const item of array) {
+            if (stableIdToCountMap.has(item.stableId)) {
+                const currentCount = stableIdToCountMap.get(item.stableId);
+                stableIdToCountMap.set(item.stableId, currentCount + 1);
+            } else {
+                stableIdToCountMap.set(item.stableId, 1);
+            }
+        }
+        return [...stableIdToCountMap.entries()]
+            .filter(([_, count]) => count > 1).map(([stableId]) => stableId);
+    }
+
+    get invalid(): boolean {
+        return this.controlDirective?.invalid || false;
+    }
+
+    get errors(): ValidationErrors | null {
+        return this.controlDirective?.errors || null;
+    }
+
+    groupHasNotUniqueStableId(group: PicklistGroupDef): boolean {
+        return this.controlDirective.invalid && this.controlDirective.errors?.notUniqueGroupsStableIds?.includes(group.stableId);
+    }
+
+    notUniqueOptionsStableIdsForGroup(group: PicklistGroupDef): string[] {
+        return (this.controlDirective.invalid
+                && this.controlDirective.errors?.notUniqueOptionsStableIds?.filter(value =>
+                    group.options.map(({stableId}) => stableId).includes(value)))
+            || [];
+    }
+
+    notUniqueOptionsStableIds(): string[] {
+        return (this.controlDirective.invalid && this.controlDirective.errors?.notUniqueOptionsStableIds) || [];
     }
 
     setDisabledState(disabled: boolean): void {
