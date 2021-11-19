@@ -1,19 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
-export class ModalComponent implements OnInit {
-
+export class ModalComponent {
   visible = false;
   visibleAnimate = false;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
   public show(): void {
     this.visible = true;
@@ -24,5 +18,4 @@ export class ModalComponent implements OnInit {
     this.visibleAnimate = false;
     setTimeout(() => this.visible = false, 300);
   }
-
 }

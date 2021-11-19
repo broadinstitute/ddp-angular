@@ -7,9 +7,9 @@ export class DrugList {
   notUniqueError = false;
   duplicatedNamesError = false;
 
-  constructor( public drugId: string, public genericName: string, public brandName: string, public displayName: string,
+  constructor(public drugId: string, public genericName: string, public brandName: string, public displayName: string,
                public chemocat: string, public chemoType: string, public studyDrug: boolean, public treatmentType: string,
-               public chemotherapy: string, public active: boolean ) {
+               public chemotherapy: string, public active: boolean) {
     this.drugId = drugId;
     this.genericName = genericName;
     this.brandName = brandName;
@@ -22,21 +22,22 @@ export class DrugList {
     this.active = active;
   }
 
-  static parse( json ): DrugList {
-    return new DrugList( json.drugId, json.genericName, json.brandName, json.displayName, json.chemocat, json.chemoType,
-      json.studyDrug, json.treatmentType, json.chemotherapy, json.active );
+  static parse(json): DrugList {
+    return new DrugList(json.drugId, json.genericName, json.brandName, json.displayName, json.chemocat, json.chemoType,
+      json.studyDrug, json.treatmentType, json.chemotherapy, json.active);
   }
 
   // Submit button gives the full list of drugs from the page, so we want to trim down to only the subset that user updated
   // cleanedDrugList will be an array of DrugList components
-  static removeUnchangedDrugs( array: Array<DrugList> ): Array<DrugList> {
-    let cleanedDrugList: Array<DrugList> = [];
-    for (let drug of array) {
+  static removeUnchangedDrugs(array: Array<DrugList>): Array<DrugList> {
+    const cleanedDrugList: Array<DrugList> = [];
+    for (const drug of array) {
       if (drug.changed || drug.addedNew) {
-        if (drug.displayName == null || drug.displayName === "") {
+        if (drug.displayName == null || drug.displayName === '') {
+          // TODO: check is it correct ?
           drug.displayName = drug.displayName;
         }
-        cleanedDrugList.push( drug );
+        cleanedDrugList.push(drug);
       }
     }
     return cleanedDrugList;

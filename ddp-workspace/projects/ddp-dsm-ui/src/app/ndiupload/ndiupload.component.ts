@@ -1,53 +1,46 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {FieldFilepickerComponent} from "../field-filepicker/field-filepicker.component";
-import {DSMService} from "../services/dsm.service";
-import {Auth} from "../services/auth.service";
-import {ComponentService} from "../services/component.service";
-import {ActivatedRoute} from "@angular/router";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FieldFilepickerComponent } from '../field-filepicker/field-filepicker.component';
+import { DSMService } from '../services/dsm.service';
+import { Auth } from '../services/auth.service';
+import { ComponentService } from '../services/component.service';
 
-var fileSaver = require("file-saver");
-
-//declare var fileSaver: any;
+const fileSaver = require('file-saver');
 
 @Component({
-  selector: "app-ndiupload",
-  templateUrl: "./ndiupload.component.html",
-  styleUrls: ["./ndiupload.component.css"]
+  selector: 'app-ndiupload',
+  templateUrl: './ndiupload.component.html',
+  styleUrls: ['./ndiupload.component.css']
 })
 export class NDIUploadComponent implements OnInit {
-
-
   @ViewChild(FieldFilepickerComponent)
   public filepicker: FieldFilepickerComponent;
 
   errorMessage: string;
   additionalMessage: string;
 
-  loading: boolean = false;
-
+  loading = false;
 
   file: File = null;
 
-  allowedToSeeInformation: boolean = false;
+  allowedToSeeInformation = false;
 
-  constructor(private dsmService: DSMService, private auth: Auth, private compService: ComponentService, private route: ActivatedRoute) {
+  constructor(private dsmService: DSMService, private auth: Auth, private compService: ComponentService) {
     if (!auth.authenticated()) {
       auth.logout();
     }
   }
 
-
-  ngOnInit() {
+  ngOnInit(): void {
     window.scrollTo(0, 0);
   }
 
-  upload() {
+  upload(): void {
     this.errorMessage = null;
     this.additionalMessage = null;
     this.loading = true;
     this.dsmService.uploadNdiFile(this.file).subscribe(
       data => {
-        this.errorMessage ="";
+        this.errorMessage = '';
           this.loading = false;
         //        console.log(`received: ${JSON.stringify(data, null, 2)}`);
         this.downloadFile(data);
@@ -58,19 +51,18 @@ export class NDIUploadComponent implements OnInit {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
-        this.errorMessage = "Error - Uploading txt\n" + err._body;
+        this.errorMessage = 'Error - Uploading txt\n' + err._body;
       }
     );
   }
 
-
-  downloadFile(data: any) {
-    var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
-    fileSaver.saveAs(blob, "output" + ".txt");
+  downloadFile(data: any): void {
+    const blob = new Blob([data], {type: 'text/plain;charset=utf-8'});
+    fileSaver.saveAs(blob, 'output' + '.txt');
   }
 
 
-  fileSelected(file: File) {
+  fileSelected(file: File): void {
     this.file = file;
   }
 

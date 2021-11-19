@@ -1,6 +1,5 @@
 export class Result {
-
-  constructor(public code: number, public body: string){
+  constructor(public code: number, public body: string) {
     this.code = code;
     this.body = body;
   }

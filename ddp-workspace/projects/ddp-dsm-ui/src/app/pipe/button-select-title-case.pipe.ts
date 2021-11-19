@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from "@angular/core";
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'buttonSelect'
@@ -13,16 +13,13 @@ export class ButtonSelectTitleCasePipe implements PipeTransform {
       return value;
     }
 
-    if (value === "na") {
+    if (value === 'na') {
       return value.toUpperCase();
-    }
-    else if (value === "not done") {
-      return "Not Done";
-    }
-    else if (value === "I" || value === "II" || value === "III" || value === "IV" || value === "I-II" || value === "II-III" ) {
+    } else if (value === 'not done') {
+      return 'Not Done';
+    } else if (value === 'I' || value === 'II' || value === 'III' || value === 'IV' || value === 'I-II' || value === 'II-III') {
       return value;
-    }
-    else {
+    } else {
       return value[0].toUpperCase() + value.substr(1).toLowerCase();
     }
   }

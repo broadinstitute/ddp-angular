@@ -1,6 +1,9 @@
 export class EmailEventRawData {
-
-  constructor(public template: string, public name:string, public email: string, public event: string, public time: string, public url: string) {
+  constructor(
+    public template: string, public name: string,
+    public email: string, public event: string,
+    public time: string, public url: string
+  ) {
     this.template = template;
     this.name = name;
     this.email = email;

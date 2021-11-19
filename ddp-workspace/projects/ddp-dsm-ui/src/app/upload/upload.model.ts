@@ -1,5 +1,4 @@
 export class UploadResponse {
-
   constructor(public invalidKitAddressList: string[], public duplicateKitList: string[], public specialKitList: string[],
               public specialMessage: string) {
     this.invalidKitAddressList = invalidKitAddressList;
@@ -13,13 +12,13 @@ export class UploadResponse {
   }
 }
 
+// tslint:disable-next-line:max-classes-per-file
 export class UploadParticipant {
+  selected = false;
 
-  selected: boolean = false;
-
-  constructor(public externalOrderNumber: string, public participantId: string, public shortId: string, public firstName: string, public lastName: string,
-              public name: string, public street1: string, public street2: string, public city: string, public postalCode: string,
-              public state: string, public country: string, public phoneNumber: string) {
+  constructor(public externalOrderNumber: string, public participantId: string, public shortId: string, public firstName: string,
+              public lastName: string, public name: string, public street1: string, public street2: string, public city: string,
+              public postalCode: string, public state: string, public country: string, public phoneNumber: string) {
     this.externalOrderNumber = externalOrderNumber;
     this.participantId = participantId;
     this.shortId = shortId;
@@ -40,5 +39,4 @@ export class UploadParticipant {
       json.name, json.street1, json.street2, json.city, json.postalCode,
       json.state, json.country, json.phoneNumber);
   }
-
 }

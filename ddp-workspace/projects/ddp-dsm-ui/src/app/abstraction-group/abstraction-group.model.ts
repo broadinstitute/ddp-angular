@@ -1,29 +1,29 @@
-import { AbstractionField } from "../medical-record-abstraction/medical-record-abstraction-field.model";
+import { AbstractionField } from '../medical-record-abstraction/medical-record-abstraction-field.model';
 
 export class AbstractionGroup {
-
-  newAdded: boolean = false;
-  deleted: boolean = false;
-  changed: boolean = false;
-  notUniqueError: boolean = false;
-
-  constructor(public abstractionGroupId: number, public displayName: string, public orderNumber: number, public fields: AbstractionField[]) {
+  constructor(
+    public abstractionGroupId: number,
+    public displayName: string,
+    public orderNumber: number,
+    public fields: AbstractionField[]
+  ) {
     this.abstractionGroupId = abstractionGroupId;
     this.displayName = displayName;
     this.orderNumber = orderNumber;
     this.fields = fields;
   }
 
-  getDisplayNameWithoutSpace(activity: string) {
-    return activity + "_" + this.displayName.replace(/\s/g, '');
-  }
+  newAdded = false;
+  deleted = false;
+  changed = false;
+  notUniqueError = false;
 
   static parse(json): AbstractionGroup {
-    let abstractionFields: Array<AbstractionField> = [];
-    let jsonData: any[] = json.fields;
+    const abstractionFields: Array<AbstractionField> = [];
+    const jsonData: any[] = json.fields;
     if (jsonData != null) {
       jsonData.forEach((val) => {
-        let field = AbstractionField.parse(val);
+        const field = AbstractionField.parse(val);
         abstractionFields.push(field);
       });
     }
@@ -31,9 +31,9 @@ export class AbstractionGroup {
   }
 
   static removeUnchangedSetting(array: Array<AbstractionGroup>): Array<AbstractionGroup> {
-    let cleanedSettings: Array<AbstractionGroup> = [];
-    for (let setting of array) {
-      let fields = AbstractionField.removeUnchangedSetting(setting.fields);
+    const cleanedSettings: Array<AbstractionGroup> = [];
+    for (const setting of array) {
+      const fields = AbstractionField.removeUnchangedSetting(setting.fields);
       if (fields.length > 0) {
         setting.changed = true;
         setting.fields = fields;
@@ -47,10 +47,20 @@ export class AbstractionGroup {
     return cleanedSettings;
   }
 
+  getDisplayNameWithoutSpace(activity: string): string {
+    return activity + '_' + this.displayName.replace(/\s/g, '');
+  }
+
 }
 
+// tslint:disable-next-line:max-classes-per-file
 export class AbstractionWrapper {
-  constructor(public abstraction: AbstractionGroup[], public review: AbstractionGroup[], public qc: AbstractionGroup[], public finalFields: AbstractionGroup[]) {
+  constructor(
+    public abstraction: AbstractionGroup[],
+    public review: AbstractionGroup[],
+    public qc: AbstractionGroup[],
+    public finalFields: AbstractionGroup[]
+  ) {
     this.abstraction = abstraction;
     this.review = review;
     this.qc = qc;

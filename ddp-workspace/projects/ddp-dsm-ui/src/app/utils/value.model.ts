@@ -1,7 +1,6 @@
 export class Value {
-
-  newAdded: boolean = false;
-  selected: boolean = true;
+  newAdded = false;
+  selected = true;
 
   constructor(public value?: string, public type?: string, public type2?: string, public name?: string, public values?: Value[]) {
     this.value = value;
@@ -11,7 +10,7 @@ export class Value {
     this.values = values;
   }
 
-  static parse( json ): Value {
+  static parse(json): Value {
     return new Value(json.value, json.type, json.type2, json.name, json.values);
   }
 }
