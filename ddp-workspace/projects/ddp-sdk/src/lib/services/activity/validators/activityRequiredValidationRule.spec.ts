@@ -5,8 +5,6 @@ import { ActivityDateQuestionBlock } from '../../../models/activity/activityDate
 import { ActivityAgreementQuestionBlock } from '../../../models/activity/activityAgreementQuestionBlock';
 import { ActivityQuestionBlock } from '../../../models/activity/activityQuestionBlock';
 import { ActivityRequiredValidationRule } from './activityRequiredValidationRule';
-import { ActivityCompositeQuestionBlock } from '../../../models/activity/activityCompositeQuestionBlock';
-import { ActivityBooleanQuestionBlock } from '../../../models/activity/activityBooleanQuestionBlock';
 
 let validator: ActivityRequiredValidationRule;
 const MESSAGE = 'This question is required!';
