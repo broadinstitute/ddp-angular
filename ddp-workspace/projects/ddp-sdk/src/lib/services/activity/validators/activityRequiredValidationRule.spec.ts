@@ -100,21 +100,21 @@ describe('ActivityRequiredValidationRule', () => {
         expect(validator.recalculate()).toBeTruthy();
     });
 
-    it('should test required rule for Composite question', () => {
-        const question = new ActivityCompositeQuestionBlock();
-        question.answer = null;
-        validator = new ActivityRequiredValidationRule(question);
-        validator.message = MESSAGE;
-        expect(validator.recalculate()).toBeFalsy();
-        expect(validator.result).toBe(MESSAGE);
-
-        question.answer = !null as any;
-        const child1 = new ActivityTextQuestionBlock();
-        child1.answer = 'text answer';
-        const child2 =  new ActivityBooleanQuestionBlock();
-        child2.answer = true;
-        question.children = [child1, child2];
-        expect(validator.recalculate()).toBeTruthy();
-        expect(validator.result).toBeNull();
-    });
+    // it('should test required rule for Composite question', () => {
+    //     const question = new ActivityCompositeQuestionBlock();
+    //     question.answer = null;
+    //     validator = new ActivityRequiredValidationRule(question);
+    //     validator.message = MESSAGE;
+    //     expect(validator.recalculate()).toBeFalsy();
+    //     expect(validator.result).toBe(MESSAGE);
+    //
+    //     question.answer = !null as any;
+    //     const child1 = new ActivityTextQuestionBlock();
+    //     child1.answer = 'text answer';
+    //     const child2 =  new ActivityBooleanQuestionBlock();
+    //     child2.answer = true;
+    //     question.children = [child1, child2];
+    //     expect(validator.recalculate()).toBeTruthy();
+    //     expect(validator.result).toBeNull();
+    // });
 });
