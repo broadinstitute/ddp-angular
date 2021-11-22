@@ -12,7 +12,6 @@ type Logger = (message?: any, ...optionalParams: any[]) => void;
 @Injectable()
 export class LoggingService {
     private readonly LOG_SOURCE = 'Logging';
-    hello: Observable<void> = of();
     // tslint:disable-next-line:no-console
     public logDebug: Logger = this.showEvent(LogLevel.Debug) ? console.debug.bind(window.console) : () => { };
 
