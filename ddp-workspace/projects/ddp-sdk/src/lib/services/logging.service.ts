@@ -46,7 +46,7 @@ export class LoggingService {
 
     public logToCloud(payload: string, labels?: {[key: string]: string}, severity = 'INFO'): Observable<void> {
         if (!this.config.doCloudLogging) {
-            return of();
+            return of(void 0);
         }
         const session =  this.session.session;
         const url = this.config.cloudLoggingUrl;
