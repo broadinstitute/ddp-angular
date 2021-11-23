@@ -100,21 +100,67 @@ describe('ActivityRequiredValidationRule', () => {
         expect(validator.recalculate()).toBeTruthy();
     });
 
-    it('should test required rule for Composite question', () => {
-        const question = new ActivityCompositeQuestionBlock();
-        question.answer = null;
-        validator = new ActivityRequiredValidationRule(question);
-        validator.message = MESSAGE;
-        expect(validator.recalculate()).toBeFalsy();
-        expect(validator.result).toBe(MESSAGE);
+    describe(': test required rule for Composite question', () => {
+        let question: ActivityCompositeQuestionBlock;
 
-        question.answer = !null as any;
-        const child1 = new ActivityTextQuestionBlock();
-        child1.answer = 'text answer';
-        const child2 =  new ActivityBooleanQuestionBlock();
-        child2.answer = true;
-        question.children = [child1, child2];
-        expect(validator.recalculate()).toBeTruthy();
-        expect(validator.result).toBeNull();
+        beforeEach(() => {
+            question = new ActivityCompositeQuestionBlock();
+            question.answer = null;
+            validator = new ActivityRequiredValidationRule(question);
+            validator.message = MESSAGE;
+        });
+
+        it('should be falsy if no answers', () => {
+            expect(validator.recalculate()).toBeFalsy();
+            expect(validator.result).toBe(MESSAGE);
+        });
+
+        it('should be falsy if a child is required but does not have an answer', () => {
+            const child1 = new ActivityTextQuestionBlock();
+            child1.isRequired = true;
+            child1.answer = undefined;
+            const child2 = new ActivityBooleanQuestionBlock();
+            child2.answer = true;
+            question.children = [child1, child2];
+            expect(validator.recalculate()).toBeFalsy();
+            expect(validator.result).toBe(MESSAGE);
+        });
+
+        it('should be truthy if a child is required and has an answer', () => {
+            const child1 = new ActivityTextQuestionBlock();
+            child1.isRequired = true;
+            child1.answer = 'some answer';
+            const child2 = new ActivityBooleanQuestionBlock();
+            child2.answer = true;
+            question.children = [child1, child2];
+            expect(validator.recalculate()).toBeTruthy();
+            expect(validator.result).toBeNull();
+        });
+
+        it('should be falsy if there are no required children and there is not any answer', () => {
+            const child1 = new ActivityTextQuestionBlock();
+            const child2 = new ActivityBooleanQuestionBlock();
+            question.children = [child1, child2];
+            expect(validator.recalculate()).toBeFalsy();
+            expect(validator.result).toBe(MESSAGE);
+        });
+
+        it('should be truthy if there are no required children and there is an answer', () => {
+            const child1 = new ActivityTextQuestionBlock();
+            child1.answer = 'some answer';
+            const child2 = new ActivityBooleanQuestionBlock();
+            child2.answer = true;
+            question.children = [child1, child2];
+            question.setAnswer([
+                [
+                    {
+                        stableId: 'stableId',
+                        value: 'some answer'
+                    }
+                ]
+            ]);
+            expect(validator.recalculate()).toBeTruthy();
+            expect(validator.result).toBeNull();
+        });
     });
 });
