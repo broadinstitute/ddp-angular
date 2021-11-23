@@ -101,7 +101,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     public ngOnChanges(changes: SimpleChanges): void {
         super.ngOnChanges(changes);
 
-        if (changes['readonly'].currentValue) {
+        if (changes['readonly']?.currentValue) {
             this.inputFormControl.disable({emitEvent: false});
         } else {
             this.inputFormControl.enable({emitEvent: false});
