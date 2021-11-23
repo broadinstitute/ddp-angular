@@ -45,7 +45,7 @@ export class LoggingService {
     }
 
     public logToCloud(payload: string, labels?: {[key: string]: string}, severity = 'INFO'): void {
-        if (!this.config.doCloudLogging) {
+        if (!this.config.doCloudLogging || !this.config.cloudLoggingUrl) {
             return;
         }
         const session =  this.session.session;
