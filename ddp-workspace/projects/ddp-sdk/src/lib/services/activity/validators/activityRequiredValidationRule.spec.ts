@@ -110,12 +110,12 @@ describe('ActivityRequiredValidationRule', () => {
             validator.message = MESSAGE;
         });
 
-        it('should be falsy if no answers', () => {
+        it('should be falsy if there are no answers', () => {
             expect(validator.recalculate()).toBeFalsy();
             expect(validator.result).toBe(MESSAGE);
         });
 
-        it('should be falsy if a child is required but does not have an answer', () => {
+        it('should be falsy if a child is required but the child does not have an answer', () => {
             const child1 = new ActivityTextQuestionBlock();
             child1.isRequired = true;
             child1.answer = undefined;
@@ -126,7 +126,7 @@ describe('ActivityRequiredValidationRule', () => {
             expect(validator.result).toBe(MESSAGE);
         });
 
-        it('should be truthy if a child is required and has an answer', () => {
+        it('should be truthy if a child is required and the child has an answer', () => {
             const child1 = new ActivityTextQuestionBlock();
             child1.isRequired = true;
             child1.answer = 'some answer';
