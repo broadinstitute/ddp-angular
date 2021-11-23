@@ -1,6 +1,6 @@
 import { ActivityServiceAgent } from './activityServiceAgent.service';
 import { Observable, of, from, interval, timer, throwError } from 'rxjs';
-import { delayWhen, take, tap } from 'rxjs/operators';
+import { delay, delayWhen, take, tap } from 'rxjs/operators';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
 import { SubmissionManager } from './submissionManager.service';
@@ -59,9 +59,15 @@ describe('SubmissionManagerTest', () => {
 
         let previousCompletedRequestIdx = -1;
         const startTime: number = new Date().getTime();
-        httpCallDelays.forEach((delay, requestIdx) => {
+        httpCallDelays.forEach((delayVal, requestIdx) => {
             setTimeout(() => {
-                submissionManager.patchAnswer(httpCallDelays[requestIdx] + '', requestIdx + '', 'y', 'dummyValue', 'blockGuid');
+                submissionManager.patchAnswer(
+                    httpCallDelays[requestIdx] + '',
+                    requestIdx + '',
+                    'y',
+                    'dummyValue',
+                    'blockGuid'
+                );
             }, requestIdx * 10);
         });
         setTimeout(() => {
@@ -79,7 +85,6 @@ describe('SubmissionManagerTest', () => {
                     console.log('All she wrote');
                 }
             });
-
     });
 
     it('test isSubmissionInProgress$ observable', (done) => {
@@ -90,7 +95,7 @@ describe('SubmissionManagerTest', () => {
             return of({
                 answers: [],
                 blockVisibility: []
-            }).pipe(delayWhen(() => timer(httpCallDelay)));
+            }).pipe(delay(httpCallDelay));
         });
 
         interface ValueAndDelay {
@@ -136,7 +141,6 @@ describe('SubmissionManagerTest', () => {
             console.log('Checks completed!');
             done();
         }, 2000);
-
     });
 
     it('test answer queued submissions', (done) => {
