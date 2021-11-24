@@ -1,4 +1,10 @@
 @import '../../../../styles/breakpoints';
+@import '../../../../styles/mixins';
+@import '../../../../styles/colors';
+
+
+@include narrow-container;
+
 
 
 .about {
@@ -11,9 +17,13 @@
     color: #011C48;
     font-size: 24px;
     line-height: 37px;
+    margin-bottom: 40px;
+  }
+  h1 {
+    margin-bottom: 40px;
   }
   &-left {
-    width: 43%;
+    width: 49%;
     @include media-sm {
       width: unset;
     }
@@ -50,7 +60,7 @@ h1 {
     display: flex;
     align-items: center;
     margin-bottom: 50px;
-    margin-right: 90px;
+    margin-right: 30px;
     @include media-sm {
       flex-direction: column;
       align-items: center;
@@ -63,12 +73,13 @@ h1 {
         margin-bottom: 20px;
       }
       & img {
-        width: 190px;
-        height: 190px;
+        width: 150px;
+        height: 150px;
       }
     }
     &-description {
       color: #011C48;
+      font-size: 19px;
       @include media-sm {
         text-align: center;
       }

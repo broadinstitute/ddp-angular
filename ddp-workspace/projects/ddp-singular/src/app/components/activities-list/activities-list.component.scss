@@ -51,3 +51,10 @@ button {
     padding: 8px 24px;
   }
 }
+
+.actions-wrapper {
+  display: flex;
+  & button:not(:last-child) {
+    margin-right: 5px;
+  }
+}

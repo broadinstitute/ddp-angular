@@ -1,5 +1,8 @@
 @import '../../../styles/breakpoints';
 @import '../../../styles/colors';
+@import '../../../styles/mixins';
+
+@include narrow-container;
 
 :host {
   margin-top: auto;
@@ -40,7 +43,7 @@ a {
   }
 
   &-logo img {
-    width: 150px;
+    width: 215px;
   }
 
   &-menu {
@@ -69,7 +72,8 @@ a {
         left: 13px;
       }
       &.instagram img {
-        top: 9px;
+        top: 13px;
+        width: 21px;
       }
       &.twitter img {
         top: 12px;
