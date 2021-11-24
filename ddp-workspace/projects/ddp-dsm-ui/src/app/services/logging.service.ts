@@ -1,25 +1,17 @@
-import { Injectable } from '@angular/core';
-import { StackdriverErrorReporterService } from './stackdriver-error-reporter.service';
+import { Inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-type Logger = (message?: any, ...optionalParams: any[]) => void;
+import { ConfigurationService, LoggingService, SessionMementoService } from 'ddp-sdk';
+import { StackdriverErrorReporterDsmService } from './stackdriver-error-reporter.service';
 
 @Injectable()
-export class LoggingService {
-  public logError: Logger =
-    (...args) => {
-      const stringifiedArgs = args.map(item => {
-        return (typeof item === 'object') ? this.stringify(item) : item;
-      });
-
-      this.stackdriverErrorReporterService.handleError(stringifiedArgs.join(', '));
-      console.error.apply(window.console, stringifiedArgs);
-    }
-
+export class LoggingDsmService extends LoggingService {
   constructor(
-    private stackdriverErrorReporterService: StackdriverErrorReporterService) {}
-
-
-  private stringify(obj: object): string {
-    return Object.keys(obj).map(key => `${key}: ${obj[key]}`).join(', ');
+    @Inject('ddp.config') private _config: ConfigurationService,
+    private _stackdriverErrorReporterDsmService: StackdriverErrorReporterDsmService,
+    private _http: HttpClient,
+    private _session: SessionMementoService
+  ) {
+    super(_config, _stackdriverErrorReporterDsmService, _http, _session);
   }
 }

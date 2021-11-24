@@ -42,7 +42,7 @@ import { ScanComponent } from './scan/scan.component';
 import { AuthGuard } from './auth0/auth.guard';
 import { Auth } from './services/auth.service';
 import { ScanPairComponent } from './scan-pair/scan-pair.component';
-import { LoggingService } from './services/logging.service';
+import { LoggingDsmService } from './services/logging.service';
 import { SessionService } from './services/session.service';
 import { RoleService } from './services/role.service';
 import { ModalComponent } from './modal/modal.component';
@@ -52,7 +52,7 @@ import { ParticipantPageComponent } from './participant-page/participant-page.co
 import { ComponentService } from './services/component.service';
 import { PermalinkComponent } from './permalink/permalink.component';
 import { MedicalRecordLogSortPipe } from './pipe/medical-record-log-sort.pipe';
-import { StackdriverErrorReporterService } from './services/stackdriver-error-reporter.service';
+import { StackdriverErrorReporterDsmService } from './services/stackdriver-error-reporter.service';
 import { Language } from './utils/language';
 import { Utils } from './utils/utils';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -116,6 +116,27 @@ import { ParticipantUpdateResultDialogComponent } from './dialogs/participant-up
 import { FormDataComponent } from './form-data/form-data.component';
 import { AddFamilyMemberComponent } from './popups/add-family-member/add-family-member.component';
 import { FieldTableComponent } from './field-table/field-table.component';
+import { ConfigurationService, DdpModule } from 'ddp-sdk';
+
+const base = document.querySelector('base')?.getAttribute('href') || '';
+
+declare const DDP_ENV: any;
+
+export const sdkConfig = new ConfigurationService();
+sdkConfig.backendUrl = DDP_ENV.baseUrl;
+sdkConfig.auth0Domain = DDP_ENV.auth0Domain;
+sdkConfig.auth0ClientId = DDP_ENV.auth0ClientKey;
+sdkConfig.adminClientId = DDP_ENV.adminClientId || DDP_ENV.auth0ClientKey;
+sdkConfig.studyGuid = DDP_ENV.serviceName;
+sdkConfig.logLevel = DDP_ENV.logLevel || 1;
+sdkConfig.baseUrl = location.origin + base;
+sdkConfig.auth0CodeRedirect = location.origin + base + 'auth';
+sdkConfig.localRegistrationUrl = sdkConfig.backendUrl + '/pepper/v1/register';
+sdkConfig.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
+sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
+sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
+sdkConfig.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl; // TODO: add the URL value in config file
+sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
 
 @NgModule({
   declarations: [
@@ -151,7 +172,6 @@ import { FieldTableComponent } from './field-table/field-table.component';
     DiscardSampleComponent,
     DiscardSamplePageComponent,
     FieldSettingsComponent,
-
 
     MedicalRecordLogSortPipe,
     DashboardDateSortPipe,
@@ -196,10 +216,10 @@ import { FieldTableComponent } from './field-table/field-table.component';
     FormDataComponent,
     AddFamilyMemberComponent,
     FieldTableComponent
-
   ],
   entryComponents: [ParticipantUpdateResultDialogComponent, AddFamilyMemberComponent],
   imports: [
+    DdpModule,
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(AppRoutes, {enableTracing: true}),
@@ -233,6 +253,10 @@ import { FieldTableComponent } from './field-table/field-table.component';
     DragulaModule.forRoot()
   ],
   providers: [
+    {
+      provide: 'ddp.config',
+      useValue: sdkConfig
+    },
     Auth,
     AuthGuard,
     ComponentService,
@@ -242,9 +266,9 @@ import { FieldTableComponent } from './field-table/field-table.component';
     Utils,
     Statics,
     Language,
-    StackdriverErrorReporterService,
-    LoggingService,
-    { provide: ErrorHandler, useClass: StackdriverErrorReporterService }
+    StackdriverErrorReporterDsmService,
+    LoggingDsmService,
+    { provide: ErrorHandler, useClass: StackdriverErrorReporterDsmService }
   ],
   bootstrap: [ AppComponent ]
 })
