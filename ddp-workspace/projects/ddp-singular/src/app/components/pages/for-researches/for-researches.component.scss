@@ -1,4 +1,5 @@
 @import '../../../../styles/colors';
+@import '../../../../styles/mixins';
 @import '../../../../styles/breakpoints';
 
 :host {
@@ -16,6 +17,8 @@
     font-family: Spartan-Bold, serif;
     line-height: 57px;
   }
+
+  @include narrow-container;
 }
 
 .uncovering {
@@ -26,13 +29,13 @@
       flex-direction: column-reverse;
     }
     .left {
-      width: 50%;
+      width: 47%;
       @include media-sm {
         width: unset;
       }
     }
     .right {
-      width: 49%;
+      width: 52%;
       @include media-sm {
         width: unset;
         display: none;
@@ -42,14 +45,13 @@
       width: 100%;
     }
     p {
-      margin-bottom: 40px;
+      margin-bottom: 30px;
     }
     ul {
       padding-left: 20px;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
       li {
         list-style: disc;
-        margin-bottom: 10px;
       }
     }
   }
@@ -72,7 +74,7 @@
       flex-direction: column;
     }
     &-step {
-      width: 26%;
+      width: 31%;
       padding: 30px;
       text-align: center;
       background: $__white;

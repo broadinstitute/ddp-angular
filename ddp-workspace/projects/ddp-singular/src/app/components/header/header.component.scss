@@ -8,6 +8,10 @@ $headerHeight: (
   'xs': 8.4rem,
 );
 
+a {
+  border-bottom: none;
+}
+
 .header {
   font-family: Spartan-Bold, sans-serif;
   color: map-get($colors, 'header-color');

@@ -27,6 +27,9 @@
   }
 
   .header {
+    h1 {
+      margin-bottom: 40px;
+    }
     &-wrapper {
       display: flex;
       @include media-sm {
@@ -34,16 +37,17 @@
       }
     }
     &-description {
-      padding-right: 50px;
+      padding-right: 60px;
       @include media-sm {
         padding-right: 0;
       }
       & p {
         font-size: 24px;
         line-height: 34px;
+        margin-bottom: 40px;
       }
       & button {
-        margin-top: 50px;
+        margin-top: 10px;
       }
     }
     &-photo {
@@ -130,6 +134,10 @@
           max-width: 400px;
           font-size: 20px;
           line-height: 28px;
+          padding-right: 60px;
+          @include media-sm {
+            padding-right: unset;
+          }
         }
       }
     }
@@ -142,6 +150,12 @@
 
 .join {
   margin-top: 100px;
+  h1 {
+    margin-bottom: 35px;
+  }
+  h3 {
+    margin-bottom: 40px;
+  }
   @include media-sm {
     h1 {
       margin-top: 30px!important;
@@ -163,6 +177,10 @@
     }
   }
   &-right {
+    margin-top: 90px;
+    @include media-md {
+      margin-top: unset;
+    }
     & img {
       width: 100%;
     }
@@ -170,9 +188,44 @@
   &-list {
     font-size: 18px;
     line-height: 30px;
+    padding-left: 70px;
+    &-item {
+      position: relative;
+      margin-bottom: 40px;
+      padding-right: 60px;
+      @include media-md {
+        padding-right: unset;
+      }
+      &:before {
+        position: absolute;
+        content: '';
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        top: 12%;
+        left: -70px;
+        flex-shrink: 0;
+      }
+      &__violette {
+        &:before {
+          top: 26%;
+          background: $__purple;
+        }
+      }
+      &__blue {
+        &:before {
+          background: #D8D8D8;
+        }
+      }
+      &__green {
+        &:before {
+          background: #8FF6C0;
+        }
+      }
+    }
   }
   &-sign_up {
-    width: 75%;
+    width: 85%;
     margin: 0 auto;
     text-align: center;
     @include media-md {
@@ -181,6 +234,8 @@
     &-text {
       margin-top: 70px;
       margin-bottom: 50px;
+      font-size: 24px;
+      line-height: 34px;
     }
   }
 }
@@ -197,14 +252,17 @@
       flex-direction: column;
     }
     &-step {
-      width: 26%;
+      width: 31%;
       @include media-sm {
         width: unset;
         margin-bottom: 30px;
       }
-      padding: 30px;
+      padding: 30px 40px;
       text-align: center;
       background: $__white;
+      p {
+        margin-bottom: 25px;
+      }
       &-img {
         height: 100px;
         margin: 30px 0;
@@ -213,6 +271,7 @@
         font-size: 24px;
         font-family: Spartan-Bold, serif;
         color: $__highlighted-font;
+        margin-bottom: 20px;
       }
       &-text {
 
@@ -227,7 +286,9 @@
     margin: 0 auto;
     text-align: center;
     &-text {
-      padding: 40px;
+      padding: 60px 40px 40px;
+      font-size: 24px;
+      line-height: 34px;
       @include media-md {
         padding: 40px 0;
       }
@@ -237,14 +298,14 @@
 
 .partners {
   h1 {
-    margin-top: 50px!important;
+    margin-top: 70px!important;
     @include media-sm {
       text-align: center;
     }
   }
   &-more-information {
     width: 65%;
-    margin: 50px auto;
+    margin: 80px auto 90px;
     text-align: center;
     @include media-sm {
       width: unset;
@@ -260,7 +321,13 @@
       margin-bottom: 0;
     }
     &-item {
-      padding: 0 50px;
+      padding: 0 40px;
+      &:first-child {
+        padding-left: 0;
+      }
+      &:last-child {
+        padding-right: 0;
+      }
       @include media-sm {
         margin-bottom: 40px;
       }

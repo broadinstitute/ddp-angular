@@ -22,14 +22,11 @@ export class ActivitiesListComponent {
     'activityStatus',
     'activityActions',
   ];
+  ActivityCode = ActivityCode;
   ActivityStatusCodes = ActivityStatusCodes;
   private allowedToEditActivities = [
-    // ActivityCode.GeneralInformation,
-    // ActivityCode.HealthAndDevelopment,
-    // ActivityCode.QualityOfLife,
-    // ActivityCode.ChildQualityOfLife,
-    // ActivityCode.PatientQualityOfLife,
-    // ActivityCode.DataSharing,
+    ActivityCode.AboutPatient,
+    ActivityCode.MedicalRecordRelease,
   ];
   private consentActivities = [
     // ActivityCode.SelfConsent,

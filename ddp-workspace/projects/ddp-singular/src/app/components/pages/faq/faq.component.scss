@@ -1,26 +1,54 @@
 @import '../../../../styles/breakpoints';
 @import '../../../../styles/colors';
+@import '../../../../styles/mixins';
 
+
+@include narrow-container;
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 80px;
+  font-family: Spartan-Bold, serif;
+}
+
+.wrapper {
+  max-width: 830px;
+  .question__header {
+    font-size: 18px;
+    margin-bottom: 0;
+    padding: 15px 0;
+    font-family: Spartan-Semibold, serif;
+    mat-icon {
+      height: 36px;
+      font-size: 36px;
+    }
+    span {
+      padding-top: 5px;
+    }
+    .question__toggle {
+      margin-right: 15px;
+    }
+  }
+}
 .intro {
   margin: 0px 0 30px;
 
   &__container {
-    max-width: 640px;
+    //max-width: 640px;
+    //
+    //margin: 0 auto;
+    //padding: 0 2.4rem;
 
-    margin: 0 auto;
-    padding: 0 2.4rem;
-
-    text-align: center;
+    //text-align: center;
   }
 
   &__title {
-    &:not(:first-child) {
-      margin-top: 70px;
-    }
-    font-weight: bold;
+    margin-top: 70px;
+    font-size: 28px;
+    font-family: Spartan-Bold, serif;
   }
 
-  &__description {
+  &__description:not(:first-child) {
     margin-top: 1.6rem;
   }
 }
@@ -86,10 +114,23 @@
   }
 
   &__answer {
+    font-size: 18px;
     line-height: 1.5;
+    padding-left: 85px;
+    @include media-sm {
+      padding-left: 70px;
+    }
 
     & + & {
       margin-top: 20px;
+    }
+
+
+    ul {
+      margin-top: 20px;
+      li {
+        margin-top: 20px;
+      }
     }
   }
 
@@ -98,5 +139,44 @@
       list-style: disc;
       margin-bottom: 15px;
     }
+  }
+}
+
+::ng-deep {
+  ul {
+    margin-top: 20px;
+    li {
+      margin-top: 20px;
+      list-style: disc;
+    }
+  }
+}
+
+.about {
+  display: flex;
+  @include media-sm {
+    flex-direction: column;
+  }
+  &-left {
+    width: 53%;
+    @include media-sm {
+      width: unset;
+    }
+  }
+  &-right {
+    width: 47%;
+    padding-left: 80px;
+    @include media-sm {
+      width: unset;
+      padding-left: unset;
+      margin-top: 20px;
+    }
+    img {
+      width: 100%;
+    }
+  }
+  &-image__description {
+    font-size: 14px;
+    margin-top: 20px;
   }
 }
