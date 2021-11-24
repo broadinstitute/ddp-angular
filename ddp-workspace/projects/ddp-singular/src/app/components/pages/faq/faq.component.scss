@@ -142,13 +142,11 @@ h1 {
   }
 }
 
-::ng-deep {
-  ul {
+ul {
+  margin-top: 20px;
+  li {
     margin-top: 20px;
-    li {
-      margin-top: 20px;
-      list-style: disc;
-    }
+    list-style: disc;
   }
 }
 
