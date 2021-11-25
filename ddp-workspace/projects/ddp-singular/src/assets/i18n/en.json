@@ -315,6 +315,7 @@
       "DateNavyValidationRule": "Please check the date"
     },
     "MailAddress": {
+      "UseAsEntered": "We are unable to confirm that the address is valid. Please check this box to use the address as entered.",
       "Fields": {
         "Name": "Full Name",
         "Country": "Country",
