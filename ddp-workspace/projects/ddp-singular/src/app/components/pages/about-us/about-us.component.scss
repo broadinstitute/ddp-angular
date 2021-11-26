@@ -5,7 +5,9 @@
 
 @include narrow-container;
 
-
+.container {
+  max-width: 1300px !important;
+}
 
 .about {
   display: flex;
@@ -87,7 +89,7 @@ h1 {
         font-family: 'Spartan-Bold', sans-serif;
       }
       &-about {
-
+        font-family: 'Spartan-Medium', sans-serif;
       }
     }
   }
@@ -107,9 +109,15 @@ h1 {
 }
 
 .advisors {
-  padding-top: 50px;
-  padding-bottom: 70px;
+  margin: 0 -74px;
+  padding: 50px 74px 70px;
   background: rgba(162,244,233,0.2);
+
+  @media (max-width: 1300px) {
+    margin: -24px;
+    padding: 50px 24px 70px;
+  }
+
   h1 {
     @include media-sm {
       text-align: center;
