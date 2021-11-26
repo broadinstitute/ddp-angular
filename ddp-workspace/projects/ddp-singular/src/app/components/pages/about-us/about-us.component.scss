@@ -105,14 +105,8 @@ h1 {
 }
 
 .advisors {
-  margin: 0 -74px;
-  padding: 50px 74px 70px;
+  padding: 50px 0 70px;
   background: rgba(162,244,233,0.2);
-
-  @media (max-width: 1300px) {
-    margin: -24px;
-    padding: 50px 24px 70px;
-  }
 
   h1 {
     @include media-sm {
