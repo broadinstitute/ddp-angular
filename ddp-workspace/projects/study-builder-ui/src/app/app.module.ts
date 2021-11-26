@@ -31,6 +31,7 @@ import { StaticContentBlockEditorComponent } from './components/static-content-b
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ManageListComponent } from './components/manage-list/manage-list.component';
 import { PicklistOptionEditorComponent } from './components/picklist-option-editor/picklist-option-editor.component';
+import { ResizableModule } from 'angular-resizable-element';
 
 const ddpConfig = new ConfigurationService();
 ddpConfig.doGcpErrorReporting = false;
@@ -69,7 +70,8 @@ ddpConfig.tooltipIconUrl = 'assets/images/info.png';
         ReactiveFormsModule,
         MatCheckboxModule,
         DdpModule,
-        DragDropModule
+        DragDropModule,
+        ResizableModule
     ],
     providers: [
         {

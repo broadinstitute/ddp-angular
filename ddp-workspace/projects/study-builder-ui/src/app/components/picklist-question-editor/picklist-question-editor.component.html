@@ -1,7 +1,8 @@
 <form [formGroup]="formGroup" class="container">
+    <p>Picklist question editor</p>
     <div>
         <mat-form-field>
-            <mat-label>stableId</mat-label>
+            <mat-label>Stable Id</mat-label>
             <input matInput formControlName="stableId" required>
         </mat-form-field>
     </div>
@@ -11,19 +12,21 @@
             <textarea matInput matTextareaAutosize matAutosizeMinRows="3" formControlName="prompt" required></textarea>
         </mat-form-field>
     </div>
-    <mat-form-field>
-        <mat-label>Question Label</mat-label>
-        <input matInput formControlName="label"/>
-    </mat-form-field>
     <div>
-        <mat-label>Select Mode</mat-label>
+        <mat-form-field>
+            <mat-label>Question Label</mat-label>
+            <input matInput formControlName="label"/>
+        </mat-form-field>
+    </div>
+    <div>
+        <label>Select Mode</label>
         <mat-radio-group formControlName="selectMode" class="radio-group">
             <mat-radio-button value="SINGLE">Single</mat-radio-button>
             <mat-radio-button value="MULTIPLE">Multiple</mat-radio-button>
         </mat-radio-group>
     </div>
     <div>
-        <mat-label>Render Mode</mat-label>
+        <label class="form-label">Render Mode</label>
         <mat-radio-group formControlName="renderMode" class="radio-group">
             <mat-radio-button value="LIST">List</mat-radio-button>
             <mat-radio-button value="CHECKBOX_LIST">Checkbox list</mat-radio-button>
@@ -32,7 +35,7 @@
         </mat-radio-group>
     </div>
     <div class="validations">
-        <mat-label>Validations</mat-label>
+        <label class="form-label">Validations</label>
         <mat-checkbox formControlName="required">Required</mat-checkbox>
     </div>
     <app-manage-list class="options-editor" formControlName="options"></app-manage-list>
