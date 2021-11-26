@@ -7,6 +7,11 @@
     font-family: 'Spartan-Bold', sans-serif;
     font-size: 32px;
     line-height: 44px;
+
+    @media (max-width: 600px) {
+      font-size: 28px;
+      line-height: 36px;
+    }
   }
 
   .activity-block-title {
@@ -15,6 +20,11 @@
     font-family: 'Spartan-Bold', sans-serif;
     font-size: 28px;
     line-height: 36px;
+
+    @media (max-width: 600px) {
+      font-size: 24px;
+      line-height: 32px;
+    }
   }
 
   .activity-text-title,
@@ -27,6 +37,11 @@
     font-family: 'Spartan-Medium', sans-serif;
     font-size: 24px;
     line-height: 32px;
+
+    @media (max-width: 600px) {
+      font-size: 20px;
+      line-height: 28px;
+    }
   }
 
   .ddp-question-prompt {

@@ -237,7 +237,7 @@
   margin-top: 100px;
   padding: 40px 40px;
   padding-bottom: 60px;
-  background: $__light-blue;
+  background: rgba(162, 244, 233, 0.5);;
   &-steps {
     display: flex;
     justify-content: space-between;
@@ -334,4 +334,8 @@
 
 .text-semibold {
   font-family: 'Spartan-Semibold', sans-serif;
+}
+
+.button--lg {
+  width: 225px;
 }
