@@ -16,37 +16,13 @@
     & + & {
       margin-left: 25px;
 
+      @media (max-width: 1200px) {
+        margin-left: 12px;
+      }
+
       @include media-md {
         margin-top: 1.6rem;
         margin-left: 0;
-      }
-    }
-    &_highlight {
-      padding: 5px 15px;
-      border-radius: 5px;
-      background: map-get($colors, 'list-item-hightlight-bg');
-      & a.link {
-        color: map-get($colors, 'list-item-hightlight-color');
-      }
-      &-stroke {
-        ::ng-deep button {
-          border-radius: 5px;
-          border: 1px solid map-get($colors, 'list-item-hightlight-bg');
-          line-height: 28px;
-          padding: 10px 45px 6px;
-          transition: .3s;
-          cursor: pointer;
-          &:hover {
-            background: map-get($colors, 'list-item-hightlight-bg');
-            color: map-get($colors, 'list-item-hightlight-color');
-          }
-          &_invert {
-            a {
-              color: map-get($colors, 'list-item-hightlight-bg');
-              background: map-get($colors, 'list-item-hightlight-color');
-            }
-          }
-        }
       }
     }
   }

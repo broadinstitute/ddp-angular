@@ -7,10 +7,8 @@
 
 .mat-cell, .mat-header-cell {
   padding: 20px;
-}
 
-button {
-  font-size: 15px;
+  font-size: 0.8rem;
 }
 
 @include media-sm {
@@ -56,5 +54,13 @@ button {
   display: flex;
   & button:not(:last-child) {
     margin-right: 5px;
+  }
+}
+
+.mat-row {
+  &:last-of-type {
+    .mat-cell {
+      border: none;
+    }
   }
 }

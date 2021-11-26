@@ -10,14 +10,14 @@
 
 html {
   height: 100%;
-  font-size: 20px;
+  font-size: 18px;
 
-  @media (max-width: 1280px) {
-    font-size: 18px;
+  @media (max-width: 1200px) {
+    font-size: 16px;
   }
 
   @media (max-width: 1026px) {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 
@@ -67,8 +67,11 @@ body {
 }
 
 .container {
-  padding: 0 15px;
-  margin: 0 auto;
+  width: auto !important;
+  max-width: 1200px;
+
+  margin: 0 auto !important;
+  padding: 0 24px !important;
 }
 
 .session-expire-dialog button {
@@ -86,12 +89,6 @@ body {
 a {
   font-family: Spartan-Bold, serif;
   color: $__highlighted-font;
-}
-
-@media (min-width: 1200px) {
-  .container {
-    width: 1290px;
-  }
 }
 
 .tooltip {

@@ -4,15 +4,7 @@
 
 :host {
   color: $__font;
-  .button {
-    &__highlight {
-      padding: 18px 20px;
-      border-radius: 5px;
-      color: $__white;
-      font-size: 28px;
-      background: $__highlighted-font;
-    }
-  }
+
   h1, h2 {
     font-family: Spartan-Bold, serif;
     line-height: 57px;

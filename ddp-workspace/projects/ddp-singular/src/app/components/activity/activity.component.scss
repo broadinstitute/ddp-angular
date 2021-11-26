@@ -10,28 +10,19 @@
 .section--buttons {
   display: flex;
   align-items: center;
-}
 
-.horizontal-divider {
-  margin: 40px 0;
-
-  border: none;
-  border-top: 2px solid $color-light-grey-2;
+  margin: 1.5rem 0;
 }
 
 .pull-right {
   margin-left: auto;
 }
 
-.button {
-  &:first-child {
-    margin-right: 20px;
-  }
-  &__disagree, &__agree {
-    & mat-icon {
-      top: 5px;
-      left: -5px;
-      position: relative;
-    }
-  }
+.button + .button:not(.pull-right) {
+  margin-left: 24px;
+}
+
+.section--global-error,
+.section--communication-error {
+  margin: 1rem 0;
 }

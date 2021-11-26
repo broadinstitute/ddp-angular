@@ -11,21 +11,14 @@
     {{ 'ParticipantsList.Title' | translate }}
   </h1>
 
-  <ng-container
-          *ngTemplateOutlet="participants.length ? participantsList : noParticipants"
-  ></ng-container>
+  <ng-container *ngTemplateOutlet="participants.length ? participantsList : noParticipants"></ng-container>
 
   <div *ngIf="errorMessage" class="ErrorMessage">
     <span>{{ errorMessage }}</span>
   </div>
 
   <div class="controls">
-    <button
-            class="button button_primary button_medium"
-            (click)="onAddParticipantClick()"
-    >
-      Add Participant
-    </button>
+    <button class="button button--primary" (click)="onAddParticipantClick()">Add Participant</button>
   </div>
 </ng-template>
 
@@ -36,46 +29,35 @@
 
   <ul *ngIf="participants.length" class="participants-list">
     <li
-            *ngFor="let participant of participants"
-            class="participants-list__item"
-            [class.participants-list__item--no-border-bottom]="
-        !isParticipantContentExpanded(participant)
-      "
+      *ngFor="let participant of participants"
+      class="participants-list__item"
+      [class.participants-list__item--no-border-bottom]="!isParticipantContentExpanded(participant)"
     >
       <div class="participant">
-        <div
-                class="participant__header"
-                role="button"
-                (click)="onExpandClick(participant)"
-        >
+        <div class="participant__header" role="button" (click)="onExpandClick(participant)">
           <span class="participant__name">
             {{ getParticipantName(participant) }}
           </span>
 
           <div class="participant__icon-container">
             <button
-                    mat-icon-button
-                    class="participant__delete-btn"
-                    (click)="$event.stopPropagation(); onDeleteClick(participant)"
+              mat-icon-button
+              class="participant__delete-btn"
+              (click)="$event.stopPropagation(); onDeleteClick(participant)"
             >
               <mat-icon>delete</mat-icon>
             </button>
 
             <button
-                    mat-icon-button
-                    class="participant__expand-btn"
-                    [class.participant__expand-btn--rotate]="
-                isParticipantContentExpanded(participant)
-              "
+              mat-icon-button
+              class="participant__expand-btn"
+              [class.participant__expand-btn--rotate]="isParticipantContentExpanded(participant)"
             >
               <mat-icon>expand_more</mat-icon>
             </button>
           </div>
         </div>
-        <div
-          class="participant__content"
-          *ngIf="isParticipantContentExpanded(participant)"
-        >
+        <div class="participant__content" *ngIf="isParticipantContentExpanded(participant)">
           <app-activities-list
             [activities]="participant.activities"
             (editActivity)="onEditActivity(participant.userGuid, $event)"

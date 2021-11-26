@@ -7,10 +7,7 @@
     <section class="section">
       <ddp-subject-panel></ddp-subject-panel>
 
-      <ddp-admin-action-panel
-        [activityReadonly]="isReadonly()"
-        (requestActivityEdit)="updateIsAdminEditing($event)"
-      >
+      <ddp-admin-action-panel [activityReadonly]="isReadonly()" (requestActivityEdit)="updateIsAdminEditing($event)">
       </ddp-admin-action-panel>
     </section>
 
@@ -22,10 +19,7 @@
       <div [innerHTML]="model.subtitle"></div>
     </section>
 
-    <section
-      *ngIf="shouldShowReadonlyHint"
-      class="section section--readonly-hint"
-    >
+    <section *ngIf="shouldShowReadonlyHint" class="section section--readonly-hint">
       <div class="infobox" [innerHTML]="model.readonlyHint"></div>
     </section>
 
@@ -36,9 +30,7 @@
         [validationRequested]="validationRequested"
         [studyGuid]="studyGuid"
         [activityGuid]="activityGuid"
-        (embeddedComponentsValidationStatus)="
-          updateEmbeddedComponentValidationStatus(0, $event)
-        "
+        (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(0, $event)"
         (componentBusy)="embeddedComponentBusy$[0].next($event)"
       >
       </ddp-activity-section>
@@ -51,9 +43,7 @@
         [validationRequested]="validationRequested"
         [studyGuid]="studyGuid"
         [activityGuid]="activityGuid"
-        (embeddedComponentsValidationStatus)="
-          updateEmbeddedComponentValidationStatus(1, $event)
-        "
+        (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
         (componentBusy)="embeddedComponentBusy$[1].next($event)"
       >
       </ddp-activity-section>
@@ -66,26 +56,19 @@
         [validationRequested]="validationRequested"
         [studyGuid]="studyGuid"
         [activityGuid]="activityGuid"
-        (embeddedComponentsValidationStatus)="
-          updateEmbeddedComponentValidationStatus(2, $event)
-        "
+        (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(2, $event)"
         (componentBusy)="embeddedComponentBusy$[2].next($event)"
       >
       </ddp-activity-section>
     </section>
 
-    <section
-      *ngIf="model.lastUpdatedText"
-      class="section section--last-updated"
-    >
+    <section *ngIf="model.lastUpdatedText" class="section section--last-updated">
       <span class="last-updated">{{ model.lastUpdatedText }} </span>
     </section>
 
     <section *ngIf="isPrequal" class="section section--captcha">
       <re-captcha [siteKey]="captchaSiteKey" (resolved)="onCaptchaResolve()"></re-captcha>
     </section>
-
-    <hr class="horizontal-divider" />
 
     <section class="section section--buttons">
       <ng-container *ngIf="isPrequal; else commonActivityButtons">
@@ -101,20 +84,12 @@
       </ng-container>
     </section>
 
-    <section
-      *ngIf="displayGlobalError$ | async"
-      class="section section--global-error"
-    >
-      <span class="error-message"> {{ 'SDK.ValidateError' | translate }}</span>
+    <section *ngIf="displayGlobalError$ | async" class="section section--global-error">
+      <div class="error-message">{{ 'SDK.ValidateError' | translate }}</div>
     </section>
 
-    <section
-      *ngIf="communicationErrorOccurred"
-      class="section section--communication-error"
-    >
-      <span class="error-message">
-        {{ 'SDK.CommunicationError' | translate }}</span
-      >
+    <section *ngIf="communicationErrorOccurred" class="section section--communication-error">
+      <div class="error-message">{{ 'SDK.CommunicationError' | translate }}</div>
     </section>
   </ng-container>
 </div>
@@ -123,17 +98,17 @@
   <ng-container *ngIf="isStepped">
     <button
       *ngIf="!isFirstStep"
-      class="button button--primary pull-left"
+      class="button button--primary"
       [disabled]="dataEntryDisabled || (isPageBusy | async)"
       (click)="decrementStep()"
     >
       {{ 'SDK.PreviousButton' | translate }}
     </button>
     <button
-        *ngIf="!isFirstStep && displayDisagreeButton"
-        [routerLink]="['/', Route.Dashboard]"
-        class="button button--primary pull-left button__disagree"
-        [disabled]="dataEntryDisabled || (isPageBusy | async)"
+      *ngIf="!isFirstStep && displayDisagreeButton"
+      [routerLink]="['/', Route.Dashboard]"
+      class="button button--primary button--icon"
+      [disabled]="dataEntryDisabled || (isPageBusy | async)"
     >
       <mat-icon>close</mat-icon>
       {{ 'Activity.Actions.Disagree' | translate }}
@@ -148,27 +123,39 @@
       {{ 'SDK.NextButton' | translate }}
     </button>
 
+    <ng-container *ngIf="isLastStep">
+      <button
+        #submitButton
+        *ngIf="!isReadonly()"
+        class="button button--primary pull-right button--icon"
+        [disabled]="dataEntryDisabled || (isPageBusy | async)"
+        (click)="flush()"
+        (mouseenter)="mouseEnterOnSubmit()"
+      >
+        <mat-icon *ngIf="displayAgreeIcon">done</mat-icon>
+        {{ submitText | translate }}
+      </button>
+
+      <button *ngIf="isReadonly()" class="button button--primary pull-right" (click)="close()">
+        {{ 'SDK.CloseButton' | translate }}
+      </button>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="!isStepped">
     <button
       #submitButton
-      *ngIf="isLastStep"
-      class="button button--primary pull-right button__agree"
+      *ngIf="!isReadonly()"
+      class="button button--primary pull-right"
       [disabled]="dataEntryDisabled || (isPageBusy | async)"
       (click)="flush()"
       (mouseenter)="mouseEnterOnSubmit()"
     >
-      <mat-icon *ngIf="displayAgreeIcon">done</mat-icon>
-      {{ submitText | translate }}
+      {{ 'SDK.SubmitButton' | translate }}
+    </button>
+
+    <button *ngIf="isReadonly()" class="button button--primary pull-right" (click)="close()">
+      {{ 'SDK.CloseButton' | translate }}
     </button>
   </ng-container>
-
-  <button
-    #submitButton
-    *ngIf="!isStepped"
-    class="button button--primary pull-right"
-    [disabled]="dataEntryDisabled || (isPageBusy | async)"
-    (click)="flush()"
-    (mouseenter)="mouseEnterOnSubmit()"
-  >
-    {{ 'SDK.SubmitButton' | translate }}
-  </button>
 </ng-template>
