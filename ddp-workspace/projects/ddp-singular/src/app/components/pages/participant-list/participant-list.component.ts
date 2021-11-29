@@ -32,6 +32,7 @@ interface GovernedParticipant extends Participant {
   styleUrls: ['./participant-list.component.scss'],
 })
 export class ParticipantsListComponent implements OnInit {
+  isAddParticipantBtnDisabled = false;
   loading = false;
   messages: AnnouncementMessage[] = [];
   participants: GovernedParticipant[] = [];
@@ -153,6 +154,8 @@ export class ParticipantsListComponent implements OnInit {
   }
 
   onAddParticipantClick(): void {
+    this.isAddParticipantBtnDisabled = true;
+
     this.governedParticipantsService
       .addParticipant(this.config.studyGuid)
       .pipe(
@@ -160,11 +163,18 @@ export class ParticipantsListComponent implements OnInit {
         tap(participant => this.sessionService.setParticipant(participant)),
         mergeMap(() => this.workflowService.fromParticipantList()),
       )
-      .subscribe(response => {
-        this.setCurrentActivity({
-          instanceGuid: response.instanceGuid,
-        } as ActivityInstance);
-        this.redirectToSurvey(response.instanceGuid);
+      .subscribe({
+        next: response => {
+          this.isAddParticipantBtnDisabled = false;
+
+          this.setCurrentActivity({
+            instanceGuid: response.instanceGuid,
+          } as ActivityInstance);
+          this.redirectToSurvey(response.instanceGuid);
+        },
+        error: () => {
+          this.isAddParticipantBtnDisabled = false;
+        },
       });
   }
 
