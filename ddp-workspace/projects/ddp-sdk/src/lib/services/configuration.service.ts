@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LogLevel } from '../models/logLevel';
 import { QuestionType } from '../models/activity/questionType';
+import { MailAddressFormErrorFormatter } from '../models/mailAddressFormErrorFormatter';
 
 @Injectable()
 export class ConfigurationService {
@@ -96,4 +97,9 @@ export class ConfigurationService {
      * Behavior with this flag enabled: English is selected => shows Spanish in language selector.
      */
     reverseBinaryLanguageSelector = false;
+    /**
+     * Can be used to customize which i18n key is used
+     * to display an error for each field in mailing address form.
+     */
+    mailAddressFormErrorFormatter: MailAddressFormErrorFormatter | null = null;
 }

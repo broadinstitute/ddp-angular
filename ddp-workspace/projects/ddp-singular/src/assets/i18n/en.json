@@ -315,24 +315,25 @@
       "DateNavyValidationRule": "Please check the date"
     },
     "MailAddress": {
+      "UseAsEntered": "We are unable to confirm that the address is valid. Please check this box to use the address as entered.",
       "Fields": {
         "Name": "Full Name",
-        "Country": "Country/Territory",
+        "Country": "Country",
         "Street1": "Street Address",
-        "Street2": "Apt/Floor #/Suite",
+        "Street2": "Apt/Floor #",
         "State": {
-          "State": "State",
+          "State": "State or Province",
           "Province": "Province",
           "State/Province/Region": "State/Province/Region"
         },
         "City": "City",
-        "Phone": "Phone",
+        "Phone": "Telephone Contact Number",
         "Zip": {
-          "Zip Code": "Zip Code",
-          "Postal Code": "Postal Code",
-          "Zip/Postal Code": "Zip/Postal Code"
+          "Zip Code": "Zip Code or Postal Code",
+          "Postal Code": "Zip Code or Postal Code",
+          "Zip/Postal Code": "Zip Code or Postal Code"
         },
-        "Choose": "Choose {{field}} ..."
+        "Choose": "Select {{field}}"
       },
       "Suggestion": {
         "Title": "We have checked your address entry and have suggested changes that could help ensure delivery.",
@@ -400,6 +401,44 @@
         "E.TIMED_OUT": "Exceeded max timeout.",
         "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
         "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+      },
+      "FormError": {
+        "name": {
+          "required": "Please enter full name",
+          "pattern": ""
+        },
+        "country": {
+          "required": "Please choose a country",
+          "pattern": ""
+        },
+        "street1": {
+          "required": "Please enter a street address",
+          "pattern": ""
+        },
+        "city": {
+          "required": "Please enter a city",
+          "pattern": ""
+        },
+        "state/province/region": {
+          "required": "Please choose a state, province or region",
+          "pattern": ""
+        },
+        "state or province": {
+          "required": "Please choose a state",
+          "pattern": ""
+        },
+        "province": {
+          "required": "Please choose a province",
+          "pattern": ""
+        },
+        "zip": {
+          "required": "Please enter a zip code or postal code",
+          "pattern": ""
+        },
+        "phone": {
+          "required": "Please enter a telephone number",
+          "pattern": ""
+        }
       }
     },
     "FileUpload": {

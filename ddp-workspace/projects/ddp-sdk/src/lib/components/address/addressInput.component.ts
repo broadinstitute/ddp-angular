@@ -5,6 +5,7 @@ import {
     ElementRef,
     EventEmitter,
     Input,
+    Inject,
     OnDestroy,
     OnInit,
     Output,
@@ -23,6 +24,7 @@ import { AddressInputService } from './addressInput.service';
 import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
 import { AddressService } from '../../services/address.service';
 import { LoggingService } from '../../services/logging.service';
+import { ConfigurationService } from '../../services/configuration.service';
 
 @Component({
     selector: 'ddp-address-input',
@@ -230,7 +232,8 @@ export class AddressInputComponent implements OnInit, OnDestroy {
         private countryService: CountryService,
         private addressService: AddressService,
         private cdr: ChangeDetectorRef,
-        private ngxTranslate: NGXTranslateService) {
+        private ngxTranslate: NGXTranslateService,
+        @Inject('ddp.config') private config: ConfigurationService) {
         this.ais = new AddressInputService(this.logger, this.countryService, this.addressService, this.cdr, this.phoneRequired);
     }
 
@@ -321,13 +324,19 @@ export class AddressInputComponent implements OnInit, OnDestroy {
         const errors = control ? control.errors : null;
         const transErrorKeyPrefix = 'SDK.MailAddress.Error.';
         if (errors) {
+            const customErrorFormatter = this.config.mailAddressFormErrorFormatter;
+
             return this.getLabelForControl(formControlName).pipe(
                 mergeMap(fieldLabel => {
                     if (errors.required) {
-                        return this.ngxTranslate.getTranslation(`${transErrorKeyPrefix}FieldIsRequired`, {field: fieldLabel});
+                        const i18nKey = customErrorFormatter ? customErrorFormatter(formControlName, fieldLabel, 'required') : `${transErrorKeyPrefix}FieldIsRequired`;
+
+                        return this.ngxTranslate.getTranslation(i18nKey, {field: fieldLabel});
                     }
                     if (errors.pattern) {
-                        return this.ngxTranslate.getTranslation(`${transErrorKeyPrefix}FieldIsInvalid`, {field: fieldLabel});
+                        const i18nKey = customErrorFormatter ? customErrorFormatter(formControlName, fieldLabel, 'pattern') : `${transErrorKeyPrefix}FieldIsInvalid`;
+
+                        return this.ngxTranslate.getTranslation(i18nKey, {field: fieldLabel});
                     }
                     if (errors.verify) {
                         return of(errors.verify);

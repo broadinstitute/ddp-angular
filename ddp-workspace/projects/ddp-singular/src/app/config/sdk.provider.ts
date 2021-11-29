@@ -1,8 +1,6 @@
 import { Provider } from '@angular/core';
 import { Route } from '../constants/route';
 import { ConfigurationService } from 'ddp-sdk';
-import { sdkConfig } from '../../../../ddp-pancan/src/app/app.module';
-
 
 declare const DDP_ENV: { [key: string]: any };
 
@@ -33,6 +31,13 @@ configurationService.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
 configurationService.auth0CodeRedirect = location.origin + base + 'auth';
 configurationService.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 configurationService.localRegistrationUrl = configurationService.backendUrl + '/pepper/v1/register';
+configurationService.mailAddressFormErrorFormatter = (formControlName, fieldLabel, error) => {
+  if (formControlName === 'state') {
+    return `SDK.MailAddress.FormError.${fieldLabel.toLowerCase()}.${error}`;
+  }
+
+  return `SDK.MailAddress.FormError.${formControlName}.${error}`;
+};
 
 export const SDKConfigProvider: Provider = {
   provide: 'ddp.config',
