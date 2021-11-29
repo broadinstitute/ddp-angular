@@ -8,7 +8,6 @@ import { catchError, filter, map, mergeMap, take, tap } from 'rxjs/operators';
 import { CurrentActivityService } from '../../../services/current-activity.service';
 import { ParticipantDeletionDialogComponent } from '../../participant-deletion-dialog/participant-deletion-dialog.component';
 import {
-  Participant,
   ActivityInstance,
   AnnouncementMessage,
   ActivityServiceAgent,
@@ -19,11 +18,15 @@ import {
   AnnouncementsServiceAgent,
   UserManagementServiceAgent,
   GovernedParticipantsServiceAgent,
+  UserProfileServiceAgent,
 } from 'ddp-sdk';
 
-
-interface GovernedParticipant extends Participant {
+interface Participant {
+  firstName: string;
+  lastName: string;
+  guid: string;
   activities: ActivityInstance[];
+  isOperator: boolean;
 }
 
 @Component({
@@ -33,9 +36,10 @@ interface GovernedParticipant extends Participant {
 })
 export class ParticipantsListComponent implements OnInit {
   isAddParticipantBtnDisabled = false;
+  isAddMyselfBtnDisabled = false;
   loading = false;
   messages: AnnouncementMessage[] = [];
-  participants: GovernedParticipant[] = [];
+  participants: Participant[] = [];
   private expandedMap: Record<string, boolean> = {};
   errorMessage: string | null = null;
 
@@ -49,6 +53,7 @@ export class ParticipantsListComponent implements OnInit {
     private userActivityService: UserActivityServiceAgent,
     private currentActivityService: CurrentActivityService,
     private announcementsService: AnnouncementsServiceAgent,
+    private userProfileService: UserProfileServiceAgent,
     private userManagementService: UserManagementServiceAgent,
     @Inject('ddp.config') private config: ConfigurationService,
     private governedParticipantsService: GovernedParticipantsServiceAgent,
@@ -59,9 +64,7 @@ export class ParticipantsListComponent implements OnInit {
     this.loadData();
   }
 
-  getParticipantName({ userProfile }: GovernedParticipant): string {
-    const { firstName, lastName } = userProfile;
-
+  getParticipantName({ firstName, lastName }: Participant): string {
     if (!firstName && !lastName) {
       return this.translateService.instant('ParticipantsList.NewParticipant');
     }
@@ -69,15 +72,15 @@ export class ParticipantsListComponent implements OnInit {
     return `${firstName} ${lastName}`;
   }
 
-  isParticipantContentExpanded({ userGuid }: GovernedParticipant): boolean {
-    return !!this.expandedMap[userGuid];
+  isParticipantContentExpanded({ guid }: Participant): boolean {
+    return !!this.expandedMap[guid];
   }
 
-  onExpandClick({ userGuid }: GovernedParticipant): void {
-    this.expandedMap[userGuid] = !this.expandedMap[userGuid];
+  onExpandClick({ guid }: Participant): void {
+    this.expandedMap[guid] = !this.expandedMap[guid];
   }
 
-  onDeleteClick({ userGuid }: GovernedParticipant): void {
+  onDeleteClick({ guid }: Participant): void {
     const dialogRef = this.dialog.open(ParticipantDeletionDialogComponent, {
       maxWidth: '640px',
       autoFocus: false,
@@ -91,26 +94,22 @@ export class ParticipantsListComponent implements OnInit {
           this.loading = true;
           this.errorMessage = null;
         }),
-        mergeMap(() => this.deleteParticipant(userGuid)),
+        mergeMap(() => this.deleteParticipant(guid)),
         tap(() => {
-          this.participants = this.participants.filter(
-            participant => participant.userGuid !== userGuid,
-          );
+          this.participants = this.participants.filter(participant => participant.guid !== guid);
         }),
         catchError(() => {
-          this.errorMessage = this.translateService.instant(
-            'ParticipantsList.DeleteError',
-          );
+          this.errorMessage = this.translateService.instant('ParticipantsList.DeleteError');
 
           return of(null);
         }),
       )
       .subscribe(() => {
         this.loading = false;
-        this.expandedMap[userGuid] = null;
+        this.expandedMap[guid] = null;
 
         if (this.participants.length === 1) {
-          const [{ userGuid: leftUserGuid }] = this.participants;
+          const [{ guid: leftUserGuid }] = this.participants;
 
           this.expandedMap[leftUserGuid] = true;
         }
@@ -123,19 +122,13 @@ export class ParticipantsListComponent implements OnInit {
     this.redirectToSurvey(activity.instanceGuid);
   }
 
-  onContinueActivity(
-    participantGuid: string,
-    activity: ActivityInstance,
-  ): void {
+  onContinueActivity(participantGuid: string, activity: ActivityInstance): void {
     this.setParticipant(participantGuid);
     this.setCurrentActivity(activity);
     this.redirectToSurvey(activity.instanceGuid);
   }
 
-  onEditActivity(
-    participantGuid: string,
-    activityToEdit: ActivityInstance,
-  ): void {
+  onEditActivity(participantGuid: string, activityToEdit: ActivityInstance): void {
     this.setParticipant(participantGuid);
 
     this.activityService
@@ -160,7 +153,7 @@ export class ParticipantsListComponent implements OnInit {
       .addParticipant(this.config.studyGuid)
       .pipe(
         take(1),
-        tap(participant => this.sessionService.setParticipant(participant)),
+        tap(participantGuid => this.sessionService.setParticipant(participantGuid)),
         mergeMap(() => this.workflowService.fromParticipantList()),
       )
       .subscribe({
@@ -178,14 +171,36 @@ export class ParticipantsListComponent implements OnInit {
       });
   }
 
+  onAddMyselfClick(): void {
+    this.isAddMyselfBtnDisabled = true;
+
+    this.sessionService.setParticipant(null);
+
+    this.workflowService
+      .fromParticipantList()
+      .pipe(filter(res => !!res))
+      .subscribe({
+        next: res => {
+          this.isAddMyselfBtnDisabled = false;
+
+          if (res.instanceGuid) {
+            this.setCurrentActivity({
+              instanceGuid: res.instanceGuid,
+            } as ActivityInstance);
+            this.redirectToSurvey(res.instanceGuid);
+          }
+        },
+        error: () => {
+          this.isAddMyselfBtnDisabled = false;
+        },
+      });
+  }
+
   private redirectToSurvey(id: string): void {
     this.router.navigate([Route.Activity, id]);
   }
 
-  private setCurrentActivity(
-    activity: ActivityInstance,
-    isReadonly = false,
-  ): void {
+  private setCurrentActivity(activity: ActivityInstance, isReadonly = false): void {
     this.currentActivityService.activity$.next({
       instance: activity,
       isReadonly,
@@ -211,8 +226,8 @@ export class ParticipantsListComponent implements OnInit {
         mergeMap(() => this.loadParticipants()),
         map(participants =>
           participants.map(participant =>
-            this.loadParticipantActivity(participant.userGuid).pipe(
-              map<ActivityInstance[], GovernedParticipant>(activities => ({
+            this.loadParticipantActivity(participant.guid).pipe(
+              map<ActivityInstance[], Participant>(activities => ({
                 ...participant,
                 activities,
               })),
@@ -220,26 +235,34 @@ export class ParticipantsListComponent implements OnInit {
           ),
         ),
         mergeMap(participantsActivities$ => forkJoin(participantsActivities$)),
+        /**
+         * Delete participant without any activities
+         */
         mergeMap(participants => {
-          const accidentallyCreatedParticipant = participants.find(
-            participant => !participant.activities.length,
-          );
+          const accidentallyCreatedParticipant = participants.find(participant => !participant.activities.length);
 
-          if (!accidentallyCreatedParticipant) {
+          if (!accidentallyCreatedParticipant || accidentallyCreatedParticipant.isOperator) {
             return of(participants);
           }
 
-          return this.deleteParticipant(
-            accidentallyCreatedParticipant.userGuid,
-          ).pipe(
-            map(() =>
-              participants.filter(
-                participant =>
-                  participant.userGuid !==
-                  accidentallyCreatedParticipant.userGuid,
-              ),
-            ),
+          return this.deleteParticipant(accidentallyCreatedParticipant.guid).pipe(
+            map(() => participants.filter(participant => participant.guid !== accidentallyCreatedParticipant.guid)),
           );
+        }),
+        /**
+         * Hide operator if they haven't enrolled themselves yet
+         */
+        map(participants => {
+          /**
+           * Operator is always first in the list, see line `this.loadParticipants` method
+           */
+          const [operator, ...rest] = participants;
+
+          if (!operator.activities.length) {
+            return rest;
+          }
+
+          return participants;
         }),
       )
       .subscribe({
@@ -247,9 +270,9 @@ export class ParticipantsListComponent implements OnInit {
           this.participants = participants;
 
           if (this.participants.length === 1) {
-            const [{ userGuid }] = this.participants;
+            const [{ guid }] = this.participants;
 
-            this.expandedMap[userGuid] = true;
+            this.expandedMap[guid] = true;
           }
         },
         complete: () => {
@@ -261,20 +284,47 @@ export class ParticipantsListComponent implements OnInit {
   }
 
   private loadMessages(): Observable<AnnouncementMessage[]> {
-    return this.announcementsService
-      .getMessages(this.config.studyGuid)
-      .pipe(take(1));
+    return this.announcementsService.getMessages(this.config.studyGuid).pipe(take(1));
+  }
+
+  private loadOperator(): Observable<Participant> {
+    return this.userProfileService.profile.pipe(
+      filter(profile => !!profile),
+      map(({ profile }) => ({
+        firstName: profile.firstName,
+        lastName: profile.lastName,
+        activities: [],
+        guid: this.sessionService.session.userGuid,
+        isOperator: true,
+      })),
+    );
   }
 
   private loadParticipants(): Observable<Participant[]> {
-    return this.governedParticipantsService
+    const operator$ = this.loadOperator();
+    const governedParticipants$ = this.governedParticipantsService
       .getGovernedStudyParticipants(this.config.studyGuid)
       .pipe(take(1));
+
+    return forkJoin({
+      operator: operator$,
+      governedParticipants: governedParticipants$,
+    }).pipe(
+      map(({ operator, governedParticipants }) => {
+        const participants: Participant[] = governedParticipants.map(p => ({
+          firstName: p.userProfile.firstName,
+          lastName: p.userProfile.lastName,
+          activities: [],
+          guid: p.userGuid,
+          isOperator: false,
+        }));
+
+        return [operator, ...participants];
+      }),
+    );
   }
 
-  private loadParticipantActivity(
-    participantGuid: string,
-  ): Observable<ActivityInstance[]> {
+  private loadParticipantActivity(participantGuid: string): Observable<ActivityInstance[]> {
     return new Observable(observer => {
       this.sessionService.setParticipant(participantGuid);
 
