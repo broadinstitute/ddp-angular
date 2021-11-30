@@ -19,8 +19,10 @@
   }
 
   .header {
-    h1 {
+    &-title {
       margin-bottom: 40px;
+
+      line-height: 44px;
     }
     &-wrapper {
       display: flex;
@@ -57,86 +59,124 @@
 
   .about {
     margin-top: 100px;
-    display: flex;
-    position: relative;
-    @include media-sm {
-      margin-top: 50px;
-      flex-direction: column-reverse;
+
+    background: linear-gradient(to right, rgba($__light-blue, 50%) 50%, transparent 50%);
+
+    @media (max-width: 960px) {
+      background: transparent;
     }
+
+    .container {
+      display: flex;
+
+      @media (max-width: 960px) {
+        flex-flow: column nowrap;
+      }
+    }
+
     &-left {
       width: 100%;
-      @include media-sm {
-        padding: 20px;
-      }
-      &:before {
-        position: absolute;
-        content: '';
-        background: $__light-blue;
-        height: 100%;
-        width: 52%;
-        left: -49px;
-        z-index: -1;
-        opacity: 0.5;
-        @include media-sm {
-          width: 100%;
-          left: 0;
-          height: 590px;
-        }
+
+      margin-right: 80px;
+
+      @media (max-width: 960px) {
+        width: 100vw;
+
+        margin: 0 -24px;
+        padding: 0 24px 42px;
+
+        background: rgba($__light-blue, 50%);
       }
     }
+
     &-right {
       width: 100%;
-      padding-left: 50px;
-      @include media-sm {
-        padding-left: 0px;
-        margin-bottom: 50px;
+    }
+
+    &-title {
+      margin: 42px 0 36px;
+
+      font-size: 28px;
+      line-height: 28px;
+
+      @media (max-width: 600px) {
+        font-size: 24px;
+        line-height: 32px;
       }
     }
+
     &-items {
-      margin-top: 50px;
       &-item {
-        margin-bottom: 50px;
         display: flex;
-        margin-left: 30px;
-        @include media-sm {
-          margin-left: 0;
+        align-items: center;
+
+        padding-left: 42px;
+
+        @media (max-width: 600px) {
+          padding-left: 24px;
         }
+
+        &:not(:last-of-type) {
+          margin-bottom: 54px;
+        }
+
         &:nth-child(1) {
           & .about-items-item-img {
+            height: 87px;
+
             background: url('/assets/images/know-1.svg') center center no-repeat;
             background-size: contain;
+
+            @media (max-width: 600px) {
+              height: 64px;
+            }
           }
         }
         &:nth-child(2) {
           & .about-items-item-img {
+            height: 87px;
+
             background: url('/assets/images/know-2.svg') center center no-repeat;
             background-size: contain;
+
+            @media (max-width: 600px) {
+              height: 64px;
+            }
           }
         }
         &:nth-child(3) {
           & .about-items-item-img {
+            height: 72px;
+
             background: url('/assets/images/know-3.svg') center center no-repeat;
             background-size: contain;
+
+            @media (max-width: 600px) {
+              height: 52px;
+            }
           }
         }
+
         &-img {
-          width: 60px;
-          margin-right: 20px;
+          flex: 0 0 83px;
+
+          margin-right: 42px;
+
+          @media (max-width: 600px) {
+            flex: 0 0 64px;
+
+            margin-right: 24px;
+          }
         }
         &-text {
-          max-width: 400px;
           font-size: 20px;
           line-height: 28px;
-          padding-right: 60px;
-          @include media-sm {
-            padding-right: unset;
-          }
         }
       }
     }
     & p {
       font-size: 18px;
-      margin-bottom: 30px;
+      margin-bottom: 24px;
     }
   }
 }
@@ -207,7 +247,7 @@
       }
       &__blue {
         &:before {
-          background: #D8D8D8;
+          background: #34cec3;
         }
       }
       &__green {
