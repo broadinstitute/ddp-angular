@@ -93,7 +93,6 @@
 
         <ng-container *ngIf="activity.statusCode === ActivityStatusCodes.COMPLETE">
           <ng-container *ngIf="canCopyActivity(activity); else viewAction">
-            <ng-container *ngTemplateOutlet="viewAction"></ng-container>
             <button class="button button--primary button--sm" (click)="onEditClick(activity)">
               {{ 'SDK.EditButton' | translate }}
             </button>

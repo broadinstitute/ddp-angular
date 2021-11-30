@@ -9,10 +9,6 @@
   justify-content: flex-end;
 }
 
-.button {
-  padding: 12px 24px;
-
-  & + & {
-    margin-left: 12px;
-  }
+.button + .button {
+  margin-left: 12px;
 }
