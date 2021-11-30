@@ -18,7 +18,12 @@
   </div>
 
   <div class="controls">
-    <button class="button button--outline" (click)="onAddMyselfClick()" [disabled]="isAddMyselfBtnDisabled">
+    <button
+      *ngIf="!isOperatorEnrolled"
+      class="button button--outline"
+      (click)="onAddMyselfClick()"
+      [disabled]="isAddMyselfBtnDisabled"
+    >
       Add Myself
     </button>
 

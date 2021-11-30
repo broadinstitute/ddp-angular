@@ -25,7 +25,6 @@ import { ActivityPageComponent } from './components/pages/activity/activity-page
 import { AcceptAgeUpComponent } from './components/pages/accept-age-up/accept-age-up.component';
 import { VerifyAgeUpComponent } from './components/pages/verify-age-up/verify-age-up.component';
 import { PreScreeningComponent } from './components/pages/pre-screening/pre-screening.component';
-import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
 import { ActivitiesListComponent } from './components/activities-list/activities-list.component';
 import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
 import { SessionExpiredComponent } from './components/pages/session-expired/session-expired.component';
@@ -55,7 +54,6 @@ import { ForResearchesComponent } from './components/pages/for-researches/for-re
     PreScreeningComponent,
     ActivityPageComponent,
     SessionExpiredComponent,
-    UserActivitiesComponent,
     ActivitiesListComponent,
     RedirectToLoginComponent,
     ParticipantsListComponent,

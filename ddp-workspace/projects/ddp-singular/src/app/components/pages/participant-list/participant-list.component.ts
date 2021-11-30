@@ -20,6 +20,7 @@ import {
   GovernedParticipantsServiceAgent,
   UserProfileServiceAgent,
 } from 'ddp-sdk';
+import { ActivityCode } from '../../../constants/activity-code';
 
 interface Participant {
   firstName: string;
@@ -37,6 +38,7 @@ interface Participant {
 export class ParticipantsListComponent implements OnInit {
   isAddParticipantBtnDisabled = false;
   isAddMyselfBtnDisabled = false;
+  isOperatorEnrolled = false;
   loading = false;
   messages: AnnouncementMessage[] = [];
   participants: Participant[] = [];
@@ -64,9 +66,9 @@ export class ParticipantsListComponent implements OnInit {
     this.loadData();
   }
 
-  getParticipantName({ firstName, lastName }: Participant): string {
+  getParticipantName({ firstName, lastName, isOperator }: Participant): string {
     if (!firstName && !lastName) {
-      return this.translateService.instant('ParticipantsList.NewParticipant');
+      return this.translateService.instant(isOperator ? 'ParticipantsList.MySelf' : 'ParticipantsList.NewParticipant');
     }
 
     return `${firstName} ${lastName}`;
@@ -236,33 +238,49 @@ export class ParticipantsListComponent implements OnInit {
         ),
         mergeMap(participantsActivities$ => forkJoin(participantsActivities$)),
         /**
-         * Delete participant without any activities
+         * Delete participant with only "Add Participant" activity
          */
         mergeMap(participants => {
-          const accidentallyCreatedParticipant = participants.find(participant => !participant.activities.length);
+          const accidentallyCreatedParticipant = participants.find(
+            participant => !participant.isOperator && this.hasOnlyAddParticipantActivity(participant.activities),
+          );
 
-          if (!accidentallyCreatedParticipant || accidentallyCreatedParticipant.isOperator) {
+          if (!accidentallyCreatedParticipant) {
             return of(participants);
           }
 
           return this.deleteParticipant(accidentallyCreatedParticipant.guid).pipe(
-            map(() => participants.filter(participant => participant.guid !== accidentallyCreatedParticipant.guid)),
+            /**
+             * Filter out deleted participant
+             */
+            map(() => {
+              return participants.filter(participant => participant.guid !== accidentallyCreatedParticipant.guid);
+            }),
           );
         }),
         /**
-         * Hide operator if they haven't enrolled themselves yet
+         * Remove "Add Participant" activity from view & hide operator if they haven't enrolled themselves yet
          */
         map(participants => {
-          /**
-           * Operator is always first in the list, see line `this.loadParticipants` method
-           */
-          const [operator, ...rest] = participants;
+          return participants.reduce<Participant[]>((acc, participant) => {
+            if (participant.isOperator) {
+              if (participant.activities.length > 1) {
+                this.isOperatorEnrolled = true;
 
-          if (!operator.activities.length) {
-            return rest;
-          }
+                acc.push({
+                  ...participant,
+                  activities: this.filterOutAddParticipant(participant.activities),
+                });
+              }
+            } else {
+              acc.push({
+                ...participant,
+                activities: this.filterOutAddParticipant(participant.activities),
+              });
+            }
 
-          return participants;
+            return acc;
+          }, []);
         }),
       )
       .subscribe({
@@ -340,5 +358,23 @@ export class ParticipantsListComponent implements OnInit {
 
   private deleteParticipant(participantGuid: string): Observable<void> {
     return this.userManagementService.deleteUser(participantGuid).pipe(take(1));
+  }
+
+  private hasOnlyAddParticipantActivity(activities: ActivityInstance[]): boolean {
+    return (
+      activities.length === 1 &&
+      [ActivityCode.AddParticipantSelf, ActivityCode.AddParticipantParental].includes(
+        activities[0].activityCode as ActivityCode,
+      )
+    );
+  }
+
+  private filterOutAddParticipant(activities: ActivityInstance[]): ActivityInstance[] {
+    return activities.filter(
+      activity =>
+        ![ActivityCode.AddParticipantSelf, ActivityCode.AddParticipantParental].includes(
+          activity.activityCode as ActivityCode,
+        ),
+    );
   }
 }

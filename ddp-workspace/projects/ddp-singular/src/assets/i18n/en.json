@@ -57,6 +57,7 @@
   },
   "ParticipantsList": {
     "Title": "Participant Dashboard",
+    "MySelf": "My Self",
     "NewParticipant": "New Participant",
     "NoParticipants": "You don't have any participants at this moment. You can add one by clicking the button below.",
     "HelpTip": "Please select Participant by clicking his/her name in the list below.",
