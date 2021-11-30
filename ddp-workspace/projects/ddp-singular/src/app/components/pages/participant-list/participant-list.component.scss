@@ -1,4 +1,5 @@
 @import '../../../../styles/colors';
+@import '../../../../styles/breakpoints';
 
 
 .spinner-container {
@@ -109,6 +110,16 @@
   justify-content: flex-end;
 
   margin-top: 1.6rem;
+
+  .button {
+    @include media-xs {
+      width: 100%;
+    }
+  }
+
+  .button + .button {
+    margin-left: 1.2rem;
+  }
 }
 
 .help-tip {
