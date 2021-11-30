@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { FieldMultiTypeArrayComponent } from './field-multi-type-array.component';
 
@@ -6,7 +6,7 @@ describe('FieldMultiTypeArrayComponent', () => {
   let component: FieldMultiTypeArrayComponent;
   let fixture: ComponentFixture<FieldMultiTypeArrayComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ FieldMultiTypeArrayComponent ]
     })

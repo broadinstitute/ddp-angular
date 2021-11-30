@@ -1,6 +1,5 @@
 export class Tissue {
-
-  deleted: boolean = false;
+  deleted = false;
 
   constructor(public tissueId: string, public oncHistoryDetailId: string, public tNotes: string, public countReceived: number,
               public tissueType: string, public tissueSite: string, public tumorType: string,
@@ -42,7 +41,7 @@ export class Tissue {
     let additionalValues: {};
     let jsonData = json.additionalValues;
     if (jsonData != null) {
-      jsonData = "{" + jsonData.substring(1, jsonData.length - 1) + "}";
+      jsonData = '{' + jsonData.substring(1, jsonData.length - 1) + '}';
       additionalValues = JSON.parse(jsonData);
     }
     return new Tissue(json.tissueId, json.oncHistoryDetailId, json.tNotes, json.countReceived, json.tissueType,

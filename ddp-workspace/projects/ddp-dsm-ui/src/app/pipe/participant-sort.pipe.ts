@@ -1,3 +1,4 @@
+// TODO: check is it correct ? - is this file needed ?
 // import { Pipe, PipeTransform } from "@angular/core";
 // import { Participant } from "../participant/participant.model";
 //

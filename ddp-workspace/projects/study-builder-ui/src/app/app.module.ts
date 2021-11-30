@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, Injector, NgModule } from '@angular/core';
 import { EditorModule } from '@tinymce/tinymce-angular';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -24,7 +24,7 @@ import { PicklistQuestionEditorComponent } from './components/picklist-question-
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { ConfigurationService, DdpModule } from 'ddp-sdk';
+import { ConfigurationService, DdpModule, LanguageService, LoggingService } from 'ddp-sdk';
 import { DummyErrorHandler } from './dummyErrorHandler';
 import { StaticContentBlockComponent } from './components/static-content-block/static-content-block.component';
 import { StaticContentBlockEditorComponent } from './components/static-content-block-editor/static-content-block-editor.component';
@@ -33,10 +33,40 @@ import { ManageListComponent } from './components/manage-list/manage-list.compon
 import { PicklistOptionEditorComponent } from './components/picklist-option-editor/picklist-option-editor.component';
 import { PicklistOptionsListComponent } from './components/picklist-options-list/picklist-options-list.component';
 import { PicklistGroupEditorComponent } from './components/picklist-group-editor/picklist-group-editor.component';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LOCATION_INITIALIZED } from '@angular/common';
+import { DummyLoggingService } from './dummyLoggingService';
+import { HttpBackend, HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 const ddpConfig = new ConfigurationService();
 ddpConfig.doGcpErrorReporting = false;
 ddpConfig.tooltipIconUrl = 'assets/images/info.png';
+
+export function translateFactory(translate: TranslateService,
+                                 injector: Injector,
+                                 language: LanguageService): () => Promise<any> {
+    return () => new Promise<any>((resolve: any) => {
+        const LOG_SOURCE = 'AppModule';
+        const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
+        locationInitialized.then(() => {
+            const locale = language.getAppLanguageCode();
+            translate.setDefaultLang(locale);
+            translate.use(locale).subscribe(() => {
+                console.log(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
+            }, err => {
+                console.error(LOG_SOURCE, `Problem with '${locale}' language initialization:`, err);
+            }, () => {
+                resolve(null);
+            });
+        });
+    });
+}
+
+function createTranslateLoader(handler: HttpBackend): TranslateHttpLoader {
+    const http = new HttpClient(handler);
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
     declarations: [
@@ -74,18 +104,40 @@ ddpConfig.tooltipIconUrl = 'assets/images/info.png';
         MatCheckboxModule,
         DdpModule,
         DragDropModule,
-        FormsModule
+        FormsModule,
+        DragDropModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpBackend],
+            },
+        }),
     ],
     providers: [
         {
             provide: 'ddp.config',
             useValue: ddpConfig
-        }
-        ,
+        },
         {
             provide: ErrorHandler,
             useClass: DummyErrorHandler
-        }],
+        },
+        {
+            provide: LoggingService,
+            useClass: DummyLoggingService
+        },
+        {
+            provide: APP_INITIALIZER,
+            useFactory: translateFactory,
+            deps: [
+                TranslateService,
+                Injector,
+                LanguageService
+            ],
+            multi: true
+        }
+    ],
     bootstrap: [AppComponent]
 })
 

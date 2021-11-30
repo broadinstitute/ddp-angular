@@ -18,7 +18,6 @@ export class ContentBlockComponent implements OnInit {
     return {
       toolbar: 'pepper',
       setup: editor => {
-        let toggled = false;
         editor.ui.registry.addMenuButton('pepper', {
           text: 'pepper',
           fetch: callback => {
@@ -27,7 +26,7 @@ export class ContentBlockComponent implements OnInit {
               type: 'menuitem',
               text: '$pepper.firstName()',
               onAction: () => {
-                editor.insertContent('<strong>$pepper.firstName()</strong>')
+                editor.insertContent('<strong>$pepper.firstName()</strong>');
               }
             }
             ]);
@@ -52,7 +51,7 @@ export class ContentBlockComponent implements OnInit {
     console.log(editor);
 
     const data = editor.getContent();
-    console.log("the content:", data);
+    console.log('the content:', data);
     const translation = this.block.bodyTemplate.variables[0].translations[0];
     translation.text = data;
   }

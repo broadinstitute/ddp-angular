@@ -1,14 +1,12 @@
 export class LabelSetting {
+  addedNew = false;
+  changed = false;
+  deleted = false;
+  notUniqueError = false;
 
-  addedNew: boolean = false;
-  changed: boolean = false;
-  deleted: boolean = false;
-
-  notUniqueError: boolean = false;
-
-  constructor(public labelSettingId: string, public name: string, public description: string, public defaultPage: boolean, public labelOnPage: number,
-              public labelHeight: number, public labelWidth: number, public topMargin: number, public rightMargin: number,
-              public bottomMargin: number, public leftMargin: number) {
+  constructor(public labelSettingId: string, public name: string, public description: string, public defaultPage: boolean,
+              public labelOnPage: number, public labelHeight: number, public labelWidth: number, public topMargin: number,
+              public rightMargin: number, public bottomMargin: number, public leftMargin: number) {
     this.labelSettingId = labelSettingId;
     this.name = name;
     this.description = description;
@@ -28,10 +26,10 @@ export class LabelSetting {
   }
 
   static removeUnchangedLabelSetting(array: Array<LabelSetting>): Array<LabelSetting> {
-    let cleanedSettings: Array<LabelSetting> = [];
-    for (let oncHis of array) {
+    const cleanedSettings: Array<LabelSetting> = [];
+    for (const oncHis of array) {
       if (oncHis.changed) {
-        if (oncHis.description == null || oncHis.description === "") {
+        if (oncHis.description == null || oncHis.description === '') {
           oncHis.description = oncHis.name;
         }
         cleanedSettings.push(oncHis);
@@ -39,5 +37,4 @@ export class LabelSetting {
     }
     return cleanedSettings;
   }
-
 }

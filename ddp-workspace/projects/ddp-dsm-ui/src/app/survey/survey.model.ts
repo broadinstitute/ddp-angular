@@ -1,6 +1,6 @@
 export class Survey {
-
-  static NONREPEATING: string = "NONREPEATING";
+  // TODO: check is it correct ? - is it needed ?
+  static NONREPEATING = 'REPEATING';
 
   constructor(public name: string, public type: string) {
     this.name = name;
@@ -12,8 +12,8 @@ export class Survey {
   }
 }
 
+// tslint:disable-next-line:max-classes-per-file
 export class SurveyStatus {
-
   constructor(public surveyInfo: ParticipantSurveyInfo, public reason: string, public user: string, public triggeredDate: number) {
     this.surveyInfo = surveyInfo;
     this.reason = reason;
@@ -26,10 +26,12 @@ export class SurveyStatus {
   }
 }
 
+// tslint:disable-next-line:max-classes-per-file
 export class ParticipantSurveyInfo {
-
-  constructor(public participantId: string, public shortId: string, public legacyShortId: string, public survey: string, public followUpInstance: number,
-              public surveyQueued: number, public surveyStatus: string, public triggerId: number) {
+  constructor(public participantId: string, public shortId: string, public legacyShortId: string,
+              public survey: string, public followUpInstance: number,
+              public surveyQueued: number, public surveyStatus: string, public triggerId: number
+  ) {
     this.participantId = participantId;
     this.shortId = shortId;
     this.legacyShortId = legacyShortId;
@@ -46,8 +48,8 @@ export class ParticipantSurveyInfo {
   }
 }
 
+// tslint:disable-next-line:max-classes-per-file
 export class TriggerResponse {
-
   constructor(public failedToTrigger: string[], public alreadyTriggered: string[]) {
     this.failedToTrigger = failedToTrigger;
     this.alreadyTriggered = alreadyTriggered;
@@ -58,11 +60,13 @@ export class TriggerResponse {
   }
 }
 
+// tslint:disable-next-line:max-classes-per-file
 export class ParticipantSurveyUploadObject {
+  selected = false;
 
-  selected: boolean = false;
-
-  constructor(public ddpParticipantId: string, public shortId: string, public firstName: string, public lastName: string, public email: string) {
+  constructor(public ddpParticipantId: string, public shortId: string,
+              public firstName: string, public lastName: string, public email: string
+  ) {
     this.ddpParticipantId = ddpParticipantId;
     this.shortId = shortId;
     this.firstName = firstName;

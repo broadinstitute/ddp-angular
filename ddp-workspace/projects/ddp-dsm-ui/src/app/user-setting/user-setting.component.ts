@@ -1,33 +1,34 @@
-import {Component, OnInit} from "@angular/core";
-import {RoleService} from "../services/role.service";
-import {UserSetting} from "./user-setting.model";
-import {DSMService} from "../services/dsm.service";
-import {Result} from "../utils/result.model";
-import {Auth} from "../services/auth.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Statics} from "../utils/statics";
-import {Utils} from "../utils/utils";
-import {ComponentService} from "../services/component.service";
+import { Component, OnInit } from '@angular/core';
+import { RoleService } from '../services/role.service';
+import { UserSetting } from './user-setting.model';
+import { DSMService } from '../services/dsm.service';
+import { Result } from '../utils/result.model';
+import { Auth } from '../services/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Statics } from '../utils/statics';
+import { Utils } from '../utils/utils';
+import { ComponentService } from '../services/component.service';
 
 @Component({
-  selector: "app-user-setting",
-  templateUrl: "./user-setting.component.html",
-  styleUrls: ["./user-setting.component.css"],
+  selector: 'app-user-setting',
+  templateUrl: './user-setting.component.html',
+  styleUrls: ['./user-setting.component.css'],
 })
 export class UserSettingComponent implements OnInit {
-
   errorMessage: string;
   additionalMessage: string;
 
-  saving: boolean = false;
+  saving = false;
 
   userSetting: UserSetting = null;
   tissueListFilterNames: string[] = [];
   participantListFilterNames: string[] = [];
   realm: string;
 
-  constructor(private route: ActivatedRoute, private role: RoleService, private dsmService: DSMService, private router: Router, private auth: Auth, private util: Utils,
-              private compService: ComponentService) {
+  constructor(private route: ActivatedRoute, private role: RoleService, private dsmService: DSMService,
+              private router: Router, private auth: Auth, private util: Utils,
+              private compService: ComponentService
+  ) {
     if (!auth.authenticated()) {
       auth.logout();
     }
@@ -42,8 +43,9 @@ export class UserSettingComponent implements OnInit {
     window.scrollTo(0, 0);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.additionalMessage = null;
+    // TODO: check is it correct ? - are the commented lines needed ?
     // if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) == null || localStorage.getItem(ComponentService.MENU_SELECTED_REALM)
     // === undefined) { this.additionalMessage = "Please select a realm"; } else {
     this.checkRight();
@@ -56,7 +58,7 @@ export class UserSettingComponent implements OnInit {
     return this.role;
   }
 
-  private checkRight() {
+  private checkRight(): void {
     let jsonData: any[];
     let allowedToSeeInformation = false;
     this.dsmService.getRealmsAllowed(Statics.MEDICALRECORD).subscribe(
@@ -72,12 +74,12 @@ export class UserSettingComponent implements OnInit {
             this.additionalMessage = null;
           }
         });
-        if (!allowedToSeeInformation && localStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== null && localStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== undefined) {
+        if (!allowedToSeeInformation && localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
           this.compService.customViews = null;
-          this.errorMessage = "You are not allowed to see information of the selected realm at that category";
+          this.errorMessage = 'You are not allowed to see information of the selected realm at that category';
         }
       },
-      err => {
+      () => {
         // this.loadingParticipants = null;
         return null;
       },
@@ -85,17 +87,16 @@ export class UserSettingComponent implements OnInit {
 
   }
 
-  saveUserSettings() {
+  saveUserSettings(): void {
     this.saving = true;
     this.dsmService.saveUserSettings(JSON.stringify(this.userSetting)).subscribe(// need to subscribe, otherwise it will not send!
       data => {
-        this.additionalMessage = "";
+        this.additionalMessage = '';
         // console.log(`received: ${JSON.stringify(data, null, 2)}`);
-        let result = Result.parse(data);
+        const result = Result.parse(data);
         if (result.code !== 200) {
           this.additionalMessage = result.body;
-        }
-        else {
+        } else {
           this.role.setUserSetting(this.userSetting);
         }
         this.saving = false;
@@ -104,70 +105,66 @@ export class UserSettingComponent implements OnInit {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.router.navigate([Statics.HOME_URL]);
         }
-        this.additionalMessage = "Error - Saving user settings\n" + err;
+        this.additionalMessage = 'Error - Saving user settings\n' + err;
         this.saving = false;
       },
     );
   }
 
-  setDefaultFilter(value, parent: string) {
+  setDefaultFilter(value, parent: string): void {
     let filterName;
-    if (typeof value === "string") {
+    if (typeof value === 'string') {
       filterName = value;
-    }
-    else {
+    } else {
       filterName = value.value;
     }
     if (filterName === undefined) {
-      filterName = "";
+      filterName = '';
     }
-    let json = {
+    const json = {
       user: this.role.userMail(),
     };
-    let jsonString = JSON.stringify(json);
+    const jsonString = JSON.stringify(json);
     this.saving = true;
     this.dsmService.setDefaultFilter(jsonString, filterName, parent, localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe(
-      data => {
-        this.additionalMessage = "";
-        if (parent === "participantList") {
+      () => {
+        this.additionalMessage = '';
+        if (parent === 'participantList') {
           this.role.getUserSetting().defaultParticipantFilter = filterName;
           this.userSetting.defaultParticipantFilter = filterName;
-        }
-        else if (parent === "tissueList") {
+        } else if (parent === 'tissueList') {
           this.role.getUserSetting().defaultTissueFilter = filterName;
           this.userSetting.defaultTissueFilter = filterName;
         }
         this.saving = false;
-        this.additionalMessage = "Default filter changed"
+        this.additionalMessage = 'Default filter changed';
       },
       err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.router.navigate([Statics.HOME_URL]);
         }
-        this.additionalMessage = "Error - Saving user settings\n" + err;
+        this.additionalMessage = 'Error - Saving user settings\n' + err;
         this.saving = false;
 
       },
     );
   }
 
-  getSavedFilters() {
-    this.dsmService.getFiltersForUserForRealm(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null).subscribe(data => {
+  getSavedFilters(): void {
+    this.dsmService.getFiltersForUserForRealm(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null)
+      .subscribe(jsonData => {
         this.tissueListFilterNames = [];
         this.participantListFilterNames = [];
-        let jsonData = data;
         jsonData.forEach((val) => {
-          if (val.parent === "tissueList") {
+          if (val.parent === 'tissueList') {
             this.tissueListFilterNames.push(val.filterName);
-          }
-          else if (val.parent === "participantList") {
+          } else if (val.parent === 'participantList') {
             this.participantListFilterNames.push(val.filterName);
           }
         });
       },
       err => {
-        this.errorMessage = "Error getting a list of filters, Please contact your DSM Developer\n" + err;
+        this.errorMessage = 'Error getting a list of filters, Please contact your DSM Developer\n' + err;
       });
   }
-
 }

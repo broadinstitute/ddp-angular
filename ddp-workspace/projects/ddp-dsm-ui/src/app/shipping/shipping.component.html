@@ -57,10 +57,10 @@
 
     <div *ngIf="kitRequests.length > 0">
 
-      <table class="table table-striped Width--100" [mfData]="kitRequests | kitRequestSort:sort_field:sort_dir |
+      <table class="table table-striped Width--100" [mfData]="kitRequests | kitRequestSort:sortField:sortDir |
              kitRequestFilter:shortId:shippingId:reason:trackingTo:trackingReturn:mfCode:noReturn:externalOrderNumber:externalOrderStatus" #mf="mfDataTable"
              [mfRowsOnPage]="getRole().getUserSetting().getRowsPerPage()"
-             [mfSortBy]="sort_field" [(mfSortOrder)]="sort_dir">
+             [mfSortBy]="sortField" [(mfSortOrder)]="sortDir">
         <thead>
         <tr>
           <th *ngIf="getRole().allowedToHandleSamples() && (queueToPrint() || shippingPage === UPLOADED) && !kitType.externalShipper" class="Line--Break">Print Kit

@@ -1,5 +1,4 @@
 export class ParticipantEvent {
-
   constructor(public participantId: string, public shortId: string, public user: string, public date: number,
               public eventType: string) {
     this.participantId = participantId;
@@ -12,11 +11,10 @@ export class ParticipantEvent {
   static parse(json): ParticipantEvent {
     return new ParticipantEvent(json.participantId, json.shortId, json.user, json.date, json.eventType);
   }
-
 }
 
+// tslint:disable-next-line:max-classes-per-file
 export class EventType {
-
   constructor(public name: string, public description: string) {
     this.name = name;
     this.description = description;

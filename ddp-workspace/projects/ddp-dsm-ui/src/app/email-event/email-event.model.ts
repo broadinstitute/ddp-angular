@@ -1,9 +1,9 @@
 export class EmailEvent {
 
-  public expanded: boolean = false;
+  public expanded = false;
 
   constructor(public templateId: string, public name: string, public emails: Array<Email>, public email: string,
-              public templates: Array<Template>, public workflowId: number, public needsAttention: boolean){
+              public templates: Array<Template>, public workflowId: number, public needsAttention: boolean) {
     this.templateId = templateId;
     this.name = name;
     this.emails = emails;
@@ -18,11 +18,9 @@ export class EmailEvent {
   }
 }
 
+// tslint:disable-next-line:max-classes-per-file
 export class Template {
-
-  templateExpanded: boolean = false;
-
-  followUpChanged: boolean = false;
+  followUpChanged = false;
 
   constructor(public templateId: string, public name: string, public workflowId: number, public followUpDateString: string,
               public sgeId: string, public events: Array<Event>) {
@@ -39,9 +37,10 @@ export class Template {
   }
 }
 
+// tslint:disable-next-line:max-classes-per-file
 export class Email {
 
-  emailExpanded: boolean = false;
+  emailExpanded = false;
 
   constructor(public email: string, public events: Array<Event>) {
     this.email = email;
@@ -53,6 +52,7 @@ export class Email {
   }
 }
 
+// tslint:disable-next-line:max-classes-per-file
 export class Event {
 
   constructor(public event: string, public timestamp: number, public url: string) {

@@ -1,6 +1,5 @@
 export class EasypostLabelRate {
-
-  constructor(public express: string, public normal: string){
+  constructor(public express: string, public normal: string) {
     this.express = express;
     this.normal = normal;
   }

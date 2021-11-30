@@ -1,12 +1,11 @@
 export class ParticipantData {
-
-  constructor(public dataId: string, public fieldTypeId: string, public data: {} ) {
+  constructor(public dataId: string, public fieldTypeId: string, public data: {}) {
     this.dataId = dataId;
     this.fieldTypeId = fieldTypeId;
     this.data = data;
   }
 
-  static parse( json ): ParticipantData {
+  static parse(json): ParticipantData {
     let data = {};
     if (json.data != null) {
       data = JSON.parse(json.data);

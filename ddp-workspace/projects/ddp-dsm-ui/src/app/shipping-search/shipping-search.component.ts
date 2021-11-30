@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {ScanError} from "../scan/error.model";
-import {ScanValue} from "../scan/scan.model";
-import { Auth } from "../services/auth.service";
-import { Statics } from "../utils/statics";
-import { DSMService } from "../services/dsm.service";
-import { KitRequest } from "../shipping/shipping.model";
-import { RoleService } from "../services/role.service";
+import { ScanValue } from '../scan/scan.model';
+import { Auth } from '../services/auth.service';
+import { Statics } from '../utils/statics';
+import { DSMService } from '../services/dsm.service';
+import { KitRequest } from '../shipping/shipping.model';
+import { RoleService } from '../services/role.service';
 
 @Component({
   selector: 'app-shipping-search',
@@ -13,12 +12,11 @@ import { RoleService } from "../services/role.service";
   styleUrls: ['./shipping-search.component.css']
 })
 export class ShippingSearchComponent implements OnInit {
-
   errorMessage: string;
   additionalMessage: string;
   searchValue: string = null;
   searchField: string = null;
-  searching: boolean = false;
+  searching = false;
   allowedRealms: string[] = [];
   kit: KitRequest[] = [];
 
@@ -28,11 +26,11 @@ export class ShippingSearchComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.checkRight();
   }
 
-  private checkRight() {
+  private checkRight(): void {
     this.allowedRealms = [];
     let jsonData: any[];
     this.dsmService.getRealmsAllowed(Statics.SHIPPING).subscribe(
@@ -42,13 +40,13 @@ export class ShippingSearchComponent implements OnInit {
           this.allowedRealms.push(val);
         });
       },
-      err => {
+      () => {
         return null;
       }
     );
   }
 
-  searchKit() {
+  searchKit(): void {
     if (this.allowedRealms != null && this.allowedRealms.length > 0) {
       this.searching = true;
       this.kit = [];
@@ -63,7 +61,7 @@ export class ShippingSearchComponent implements OnInit {
             this.kit.push(KitRequest.parse(val));
           });
           if (this.kit == null || this.kit.length < 1) {
-            this.additionalMessage = "Kit was not found.";
+            this.additionalMessage = 'Kit was not found.';
           }
           console.log(this.kit);
           this.searching = false;
@@ -73,13 +71,12 @@ export class ShippingSearchComponent implements OnInit {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
-          this.errorMessage = "Error - Loading ddp information\nPlease contact your DSM developer";
+          this.errorMessage = 'Error - Loading ddp information\nPlease contact your DSM developer';
           this.searching = false;
         }
       );
-    }
-    else {
-      this.additionalMessage = "You are not allowed to see kit information";
+    } else {
+      this.additionalMessage = 'You are not allowed to see kit information';
     }
   }
 
@@ -87,11 +84,11 @@ export class ShippingSearchComponent implements OnInit {
     return this.role;
   }
 
-  showColumn( name: string ): boolean {
+  showColumn(name: string): boolean {
     if (this.kit != null) {
-      let foundColumn = this.kit.find( kit => {
-        return kit[ name ] != null && kit[ name ] !== "" && kit[ name ] != 0;
-      } );
+      const foundColumn = this.kit.find(kit => {
+        return kit[ name ] != null && kit[ name ] !== '' && kit[ name ] !== 0;
+      });
       if (foundColumn != null) {
         return true;
       }
@@ -99,16 +96,10 @@ export class ShippingSearchComponent implements OnInit {
     return false;
   }
 
-  receiveATKit(kitRequest: KitRequest) {
-    let singleScanValues: Array<ScanValue> = [];
+  receiveATKit(kitRequest: KitRequest): void {
+    const singleScanValues: Array<ScanValue> = [];
     singleScanValues.push(new ScanValue(kitRequest.kitLabel));
-    this.dsmService.setKitReceivedRequest(JSON.stringify(singleScanValues)).subscribe(// need to subscribe, otherwise it will not send!
-      data => {
-        // kitRequest.receiveDateString =
-      },
-      err => {
-      }
-    );
-
+    this.dsmService.setKitReceivedRequest(JSON.stringify(singleScanValues))
+      .subscribe(); // need to subscribe, otherwise it will not send!
   }
 }
