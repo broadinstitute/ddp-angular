@@ -69,52 +69,41 @@ export class Auth0AdapterService implements OnDestroy {
     }
 
     private createWebAuth(clientId: string, redirectUri: string): any {
-        try {
-            // TODO Clarify how audience should be used, what is the correct value,etc.
-            // TODO refactor and document differences between localregistration flow and "normal" flow
-            let audience = 'https://' + this.configuration.auth0Domain;
-            if (!_.isUndefined(this.configuration.auth0Audience)) {
-                // when using a custom auth0 domain, the audience and domain will differ
-                // and the audience needs to be the original name of the tenant
-                audience = 'https://' + this.configuration.auth0Audience;
-            }
-            audience = audience + '/userinfo';
-
-            return new auth0.WebAuth({
-                domain: this.configuration.auth0Domain,
-                clientID: clientId,
-                responseType: 'token id_token',
-                audience,
-                scope: 'openid profile',
-                redirectUri
-            });
-        } catch (e) {
-            console.error(e);
-            throw new Error(e);
+        // TODO Clarify how audience should be used, what is the correct value,etc.
+        // TODO refactor and document differences between localregistration flow and "normal" flow
+        let audience = 'https://' + this.configuration.auth0Domain;
+        if (!_.isUndefined(this.configuration.auth0Audience)) {
+            // when using a custom auth0 domain, the audience and domain will differ
+            // and the audience needs to be the original name of the tenant
+            audience = 'https://' + this.configuration.auth0Audience;
         }
+        audience = audience + '/userinfo';
+        return new auth0.WebAuth({
+            domain: this.configuration.auth0Domain,
+            clientID: clientId,
+            responseType: 'token id_token',
+            audience,
+            scope: 'openid profile',
+            redirectUri
+        });
     }
 
     private createLocalWebAuth(clientId: string): any {
-        try {
-            // TODO see audience in createWebAuth()
-            let audience = 'https://' + this.configuration.auth0Domain;
-            if (!_.isUndefined(this.configuration.auth0Audience)) {
-                audience = 'https://' + this.configuration.auth0Audience;
-            }
-            audience = audience + '/userinfo';
-            return new auth0.WebAuth({
-                domain: this.configuration.auth0Domain,
-                clientID: clientId,
-                studyGuid: this.configuration.studyGuid,
-                responseType: 'code',
-                audience,
-                scope: 'offline_access openid profile',
-                redirectUri: this.configuration.auth0CodeRedirect
-            });
-        } catch (e) {
-            console.error(e);
-            throw new Error(e);
+        // TODO see audience in createWebAuth()
+        let audience = 'https://' + this.configuration.auth0Domain;
+        if (!_.isUndefined(this.configuration.auth0Audience)) {
+            audience = 'https://' + this.configuration.auth0Audience;
         }
+        audience = audience + '/userinfo';
+        return new auth0.WebAuth({
+            domain: this.configuration.auth0Domain,
+            clientID: clientId,
+            studyGuid: this.configuration.studyGuid,
+            responseType: 'code',
+            audience,
+            scope: 'offline_access openid profile',
+            redirectUri: this.configuration.auth0CodeRedirect
+        });
     }
 
     /**
