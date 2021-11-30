@@ -13,8 +13,17 @@
 
 .section-block {
     min-height: 25px;
+    display: flex;
     background-color: white;
     margin: 15px 0;
     border-radius: 5px;
     padding: 5px;
+}
+
+.drag-indicator {
+    cursor: move;
+    opacity: .3;
+    padding: 0 15px 0 5px;
+    align-items: center;
+    display: flex;
 }
