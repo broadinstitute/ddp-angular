@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { QuestionBlockDef } from '../../model/core/questionBlockDef';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { BehaviorSubject, merge, Subscription } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { ConfigurationService } from '../../configuration.service';
@@ -31,6 +31,31 @@ export class PicklistQuestionEditorComponent implements OnInit, OnDestroy {
         required: [false],
         options: [[]]
     });
+
+    get selectMode(): FormControl {
+        return this.formGroup.get('selectMode') as FormControl;
+    }
+
+    get renderMode(): FormControl {
+        return this.formGroup.get('renderMode') as FormControl;
+    }
+
+    readonly modesCompatibilityMap = new Map<string, string[]>([
+        ['SINGLE', ['LIST', 'CHECKBOX_LIST', 'DROPDOWN', 'AUTOCOMPLETE']],
+        ['MULTIPLE', ['LIST', 'CHECKBOX_LIST', 'DROPDOWN']],
+    ]);
+
+    readonly renderModes = new Map<string, string>([
+        ['LIST', 'List'],
+        ['CHECKBOX_LIST', 'Checkbox list'],
+        ['DROPDOWN', 'Dropdown'],
+        ['AUTOCOMPLETE', 'Autocomplete list'],
+    ]);
+
+    readonly selectModes = new Map<string, string>([
+        ['SINGLE', 'Single'],
+        ['MULTIPLE', 'Multiple']
+    ]);
 
     private sub: Subscription;
 
@@ -89,5 +114,17 @@ export class PicklistQuestionEditorComponent implements OnInit, OnDestroy {
 
     private currentQuestion(): PicklistQuestionDef | null {
         return this.questionBlockSubject.getValue()?.question as PicklistQuestionDef;
+    }
+
+    selectedSelectModeCompatibleWithRenderMode(renderMode: string): boolean {
+        return this.modesCompatibilityMap.get(this.selectMode.value)?.includes(renderMode);
+    }
+
+    selectedRenderModeCompatibleWithSelectMode(selectMode: string): boolean {
+        return this.modesCompatibilityMap.get(selectMode)?.includes(this.renderMode.value);
+    }
+
+    originalOrder(): number {
+        return 0;
     }
 }
