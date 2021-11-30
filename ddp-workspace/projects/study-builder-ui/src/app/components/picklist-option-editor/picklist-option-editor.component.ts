@@ -31,11 +31,8 @@ export class PicklistOptionEditorComponent implements OnDestroy {
     }
     @Input()
     set notUniqueStableId(stableIdIsNotUnique: boolean) {
-        if (stableIdIsNotUnique) {
-            this.optionForm.get('stableId').setErrors({stableIdIsNotUnique: true});
-        } else {
-            this.optionForm.get('stableId').setErrors(null);
-        }
+        const error = stableIdIsNotUnique ? {stableIdIsNotUnique: true} : null;
+        this.optionForm.get('stableId').setErrors(error);
     }
     @Output() optionChanged = new EventEmitter<PicklistOptionDef>();
 

@@ -34,11 +34,8 @@ export class PicklistGroupEditorComponent implements OnDestroy {
     }
     @Input()
     set notUniqueStableId(stableIdIsNotUnique: boolean) {
-        if (stableIdIsNotUnique) {
-            this.groupForm.get('stableId').setErrors({stableIdIsNotUnique: true});
-        } else {
-            this.groupForm.get('stableId').setErrors(null);
-        }
+        const error = stableIdIsNotUnique ? {stableIdIsNotUnique: true} : null;
+        this.groupForm.get('stableId').setErrors(error);
     }
     @Input() notUniqueOptionsStableIds: string[];
     @Output() groupChanged = new EventEmitter<PicklistGroupDef>();

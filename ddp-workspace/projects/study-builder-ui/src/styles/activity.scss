@@ -395,3 +395,17 @@ ddp-activity-composite-answer {
 .mat-error {
     font-size: 0.9rem;
 }
+
+.ddp-picklist-group-container {
+    grid-template-columns: repeat(2, 50%) !important;
+
+    .mat-checkbox-layout {
+        margin-bottom: 15px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .ddp-picklist-group-container {
+        grid-template-columns: repeat(1, 100%) !important;
+    }
+}

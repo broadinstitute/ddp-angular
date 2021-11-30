@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, Self } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, Self } from '@angular/core';
 import {
     ControlValueAccessor,
     FormBuilder,
@@ -29,7 +29,12 @@ export class ManageListComponent implements OnInit, ControlValueAccessor {
 
     private factory: StudyConfigObjectFactory;
 
-    constructor(private fb: FormBuilder, private config: ConfigurationService, @Self() private controlDirective: NgControl) {
+    constructor(
+        private fb: FormBuilder,
+        private config: ConfigurationService,
+        private cdr: ChangeDetectorRef,
+        @Self() private controlDirective: NgControl,
+        ) {
         this.factory = new StudyConfigObjectFactory(config);
         controlDirective.valueAccessor = this;
     }
@@ -45,6 +50,7 @@ export class ManageListComponent implements OnInit, ControlValueAccessor {
     writeValue({ options, groups }: { options: Array<PicklistOptionDef>; groups: Array<PicklistGroupDef> }): void {
         this.groups = [...groups];
         this.options = [...options];
+        this.cdr.markForCheck();
     }
 
     registerOnChange(onChange: any): void {
