@@ -5,17 +5,16 @@ import {
   CURRENT_ACTIVITY_ID_TOKEN,
   CURRENT_PARTICIPANT_ID_TOKEN,
   currentActivityIdProvider,
-  currentParticipantIdProvider
+  currentParticipantIdProvider,
 } from './providers';
 import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivityInstance, ActivityResponse, UserActivityServiceAgent, SessionMementoService } from 'ddp-sdk';
-
 
 @Component({
   selector: 'app-survey',
   templateUrl: './survey.component.html',
   styleUrls: ['./survey.component.scss'],
-  providers: [currentActivityIdProvider, currentParticipantIdProvider]
+  providers: [currentActivityIdProvider, currentParticipantIdProvider],
 })
 export class SurveyComponent implements OnInit, OnDestroy {
   studyGuid: string;
@@ -55,16 +54,14 @@ export class SurveyComponent implements OnInit, OnDestroy {
         this.instanceGuid = activityResponse.instanceGuid;
         this.getActivities().pipe(take(1)).subscribe();
       }
-      this.workflowBuilder
-        .getCommand(activityResponse)
-        .execute();
+      this.workflowBuilder.getCommand(activityResponse).execute();
     });
   }
 
   private getActivities(): Observable<ActivityInstance[]> {
     this.isFetchingActivities = true;
 
-    return this.userActivities.getActivities(of(this.studyGuid)).pipe(
+    return this.userActivities.getActivities(of(this.toolkitConfiguration.studyGuid)).pipe(
       tap(activities => {
         this.isFetchingActivities = false;
 
@@ -73,21 +70,25 @@ export class SurveyComponent implements OnInit, OnDestroy {
         }
 
         this.activities = activities;
-      })
+      }),
     );
   }
 
   private setInstanceGuid(): void {
-    this.activityId$.pipe(
-      first(),
-      tap((id: string) => this.instanceGuid = id)
-    ).subscribe();
+    this.activityId$
+      .pipe(
+        first(),
+        tap((id: string) => (this.instanceGuid = id)),
+      )
+      .subscribe();
   }
 
   private setParticipantGuid(): void {
-    this.participantId$.pipe(
-      first(),
-      tap((participantGuid: string) => this.sessionService.setParticipant(participantGuid))
-    ).subscribe();
+    this.participantId$
+      .pipe(
+        first(),
+        tap((participantGuid: string) => this.sessionService.setParticipant(participantGuid)),
+      )
+      .subscribe();
   }
 }

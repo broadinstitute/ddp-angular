@@ -554,8 +554,8 @@
       "Consent": "Consent Form",
       "AboutMe": "About Me",
       "AboutMyChild": "About My Child",
-      "MedicalRecordRelease": "Medical Release",
-      "MedicalRecordFileUpload": "Medical Record File Upload",
+      "MedicalReleaseForm": "Medical Release",
+      "MedicalRecordUpload": "Medical Record File Upload",
       "PatientSurvey": "Patient Survey"
     }
   },

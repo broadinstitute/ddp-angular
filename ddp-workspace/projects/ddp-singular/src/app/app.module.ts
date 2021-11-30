@@ -21,14 +21,12 @@ import { ActivityComponent } from './components/activity/activity.component';
 import { SurveyComponent } from './components/pages/survey/survey.component';
 import { PasswordComponent } from './components/pages/password/password.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
-import { ActivityPageComponent } from './components/pages/activity/activity-page.component';
 import { AcceptAgeUpComponent } from './components/pages/accept-age-up/accept-age-up.component';
 import { VerifyAgeUpComponent } from './components/pages/verify-age-up/verify-age-up.component';
 import { PreScreeningComponent } from './components/pages/pre-screening/pre-screening.component';
 import { ActivitiesListComponent } from './components/activities-list/activities-list.component';
 import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
 import { SessionExpiredComponent } from './components/pages/session-expired/session-expired.component';
-import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress.component';
 import { ParticipantsListComponent } from './components/pages/participant-list/participant-list.component';
 import { NotificationsDialogComponent } from './components/notifications-dialog/notifications-dialog.component';
 import { SessionExpiredDialogComponent } from './components/session-expired-dialog/session-expired-dialog.component';
@@ -52,12 +50,10 @@ import { ForResearchesComponent } from './components/pages/for-researches/for-re
     VerifyAgeUpComponent,
     ProgressBarComponent,
     PreScreeningComponent,
-    ActivityPageComponent,
     SessionExpiredComponent,
     ActivitiesListComponent,
     RedirectToLoginComponent,
     ParticipantsListComponent,
-    WorkflowProgressComponent,
     NotificationsDialogComponent,
     SessionExpiredDialogComponent,
     ParticipantDeletionDialogComponent,

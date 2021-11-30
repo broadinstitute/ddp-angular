@@ -8,7 +8,6 @@ import { AboutUsComponent } from './components/pages/about-us/about-us.component
 import { SurveyComponent } from './components/pages/survey/survey.component';
 import { PasswordComponent } from './components/pages/password/password.component';
 import { IrbGuard, Auth0CodeCallbackComponent, AuthGuard, BrowserGuard } from 'ddp-sdk';
-import { ActivityPageComponent } from './components/pages/activity/activity-page.component';
 import { PreScreeningComponent } from './components/pages/pre-screening/pre-screening.component';
 import { RedirectToLoginComponent } from './components/redirect-to-login/redirect-to-login.component';
 import { SessionExpiredComponent } from './components/pages/session-expired/session-expired.component';
