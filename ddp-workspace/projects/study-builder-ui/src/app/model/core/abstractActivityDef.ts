@@ -29,5 +29,5 @@ export interface AbstractActivityDef {
   // not in GSON mapping! Comes from StudyBuilder conf file
   mappings: Array<Mapping>;
   // not in GSON mapping! Comes from StudyBuilder conf file
-  validations: Array<ActivityValidation>
+  validations: Array<ActivityValidation>;
 }

@@ -2825,7 +2825,7 @@
               "projects/study-builder-ui/e2e/tsconfig.json"
             ],
             "exclude": [
-              "**"
+              "**/node_modules/**"
             ]
           }
         },
