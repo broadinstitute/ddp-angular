@@ -40,7 +40,6 @@ import 'web-animations-js';  // Run `npm install --save web-animations-js`.
  */
 import 'zone.js';  // Included with Angular CLI.
 
-import 'hammerjs';
 
 /***************************************************************************************************
  * APPLICATION IMPORTS

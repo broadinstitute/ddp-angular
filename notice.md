@@ -56,7 +56,6 @@ Our thanks to the many open-source projects that we rely on for Pepper, each of 
 * [Auth0 Lock](https://github.com/auth0/lock)
 * [Auth0 JS](https://github.com/auth0/auth0.js)
 * [Enum Values]( https://github.com/slavik57/enum-values)
-* [HammerJS](https://github.com/hammerjs/hammer.js)
 * [kaop-ts](https://github.com/k1r0s/kaop-ts)
 * [npm-sass](https://github.com/lennym/npm-sass)
 * [Package](https://github.com/vesln/package)
