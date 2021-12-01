@@ -1,20 +1,23 @@
 .no-blocks {
     height: 300px;
-    border: 2px dashed black;
 
     .mid {
-        padding: 100px;
-        align: middle;
+        padding-top: 35px;
+        text-align: center;
     }
 }
 
 .selection-highlight {
-    border: 2px dotted #db4d4d;
+    border: 2px solid grey;
 }
 
 .section-block {
     min-height: 25px;
     display: flex;
+    background-color: white;
+    margin: 15px 0;
+    border-radius: 5px;
+    padding: 5px;
 }
 
 .drag-indicator {

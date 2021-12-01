@@ -3,7 +3,6 @@
     </ng-container>
 
     <ng-template #hasBlocks>
-        <div>I got {{section.blocks.length}} blocks</div>
         <div cdkDropList (cdkDropListDropped)="blockDrop($event, section.blocksSubjects)">
             <ng-container *ngFor="let block$ of section.blocksSubjects; index as i">
                 <div class="section-block"
@@ -27,7 +26,7 @@
 
     <ng-template #noBlocks>
         <div class="no-blocks">
-            <div class="mid">no blocks</div>
+            <div class="mid"><strong>No blocks are created yet</strong></div>
         </div>
     </ng-template>
 </ng-container>
