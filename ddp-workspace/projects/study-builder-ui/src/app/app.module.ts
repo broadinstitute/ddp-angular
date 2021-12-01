@@ -11,7 +11,7 @@ import { SurveyEditorComponent } from './components/survey-editor/survey-editor.
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivityComponent } from './components/activity/activity.component';
 import { SectionComponent } from './components/section/section.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,6 +31,8 @@ import { StaticContentBlockEditorComponent } from './components/static-content-b
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ManageListComponent } from './components/manage-list/manage-list.component';
 import { PicklistOptionEditorComponent } from './components/picklist-option-editor/picklist-option-editor.component';
+import { PicklistOptionsListComponent } from './components/picklist-options-list/picklist-options-list.component';
+import { PicklistGroupEditorComponent } from './components/picklist-group-editor/picklist-group-editor.component';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { DummyLoggingService } from './dummyLoggingService';
@@ -84,7 +86,9 @@ function createTranslateLoader(handler: HttpBackend): TranslateHttpLoader {
         StaticContentBlockComponent,
         StaticContentBlockEditorComponent,
         ManageListComponent,
-        PicklistOptionEditorComponent
+        PicklistOptionEditorComponent,
+        PicklistOptionsListComponent,
+        PicklistGroupEditorComponent
     ],
     imports: [
         BrowserModule,
@@ -100,6 +104,8 @@ function createTranslateLoader(handler: HttpBackend): TranslateHttpLoader {
         ReactiveFormsModule,
         MatCheckboxModule,
         DdpModule,
+        DragDropModule,
+        FormsModule,
         DragDropModule,
         ResizableModule,
         TranslateModule.forRoot({

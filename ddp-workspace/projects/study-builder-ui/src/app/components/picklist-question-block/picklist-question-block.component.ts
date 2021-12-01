@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { QuestionBlockDef } from '../../model/core/questionBlockDef';
-import { ActivityPicklistOption, ActivityPicklistQuestionBlock } from 'ddp-sdk';
+import { ActivityPicklistNormalizedGroup, ActivityPicklistOption, ActivityPicklistQuestionBlock } from 'ddp-sdk';
 import { Observable } from 'rxjs';
 import { ConfigurationService } from '../../configuration.service';
 import { filter, map, tap } from 'rxjs/operators';
@@ -8,6 +8,7 @@ import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
 import { PicklistQuestionDef } from '../../model/core/picklistQuestionDef';
 import { PicklistOptionDef } from '../../model/core/picklistOptionDef';
 import { StudyConfigObjectFactory } from '../../model/core-extended/studyConfigObjectFactory';
+import { PicklistGroupDef } from '../../model/core/picklistGroupDef';
 
 @Component({
     selector: 'app-picklist-question-block',
@@ -44,7 +45,7 @@ export class PicklistQuestionBlockComponent implements OnInit {
             new SimpleTemplate(questionDef.picklistLabelTemplate).getTranslationText(this.config.defaultLanguageCode);
         newClientBlock.picklistOptions =
             questionDef.picklistOptions.map(picklistOption => this.convertOptionDefToActivityOption(picklistOption));
-        newClientBlock.picklistGroups = [];
+        newClientBlock.picklistGroups = questionDef.groups.map(group => this.convertGroupDefToActivityGroup(group));
         newClientBlock.detailMaxLength = 500;
         return newClientBlock;
     }
@@ -63,6 +64,13 @@ export class PicklistQuestionBlockComponent implements OnInit {
             groupId: null,
             nestedOptionsLabel: option.nestedOptionsLabel,
             nestedOptions: (option.nestedOptions || []).map(nestedOption => this.convertOptionDefToActivityOption(nestedOption)),
+        };
+    }
+
+    private convertGroupDefToActivityGroup(group: PicklistGroupDef): ActivityPicklistNormalizedGroup {
+        return {
+            name: new SimpleTemplate(group.nameTemplate).getTranslationText(this.config.defaultLanguageCode),
+            options: group.options.map(option => this.convertOptionDefToActivityOption(option))
         };
     }
 }

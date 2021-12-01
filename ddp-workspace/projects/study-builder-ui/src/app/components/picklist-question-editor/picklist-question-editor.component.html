@@ -21,22 +21,30 @@
     <div>
         <label>Select Mode</label>
         <mat-radio-group formControlName="selectMode" class="radio-group">
-            <mat-radio-button value="SINGLE">Single</mat-radio-button>
-            <mat-radio-button value="MULTIPLE">Multiple</mat-radio-button>
+            <mat-radio-button *ngFor="let item of selectModes | keyvalue: originalOrder"
+                              [value]="item.key"
+                              [disabled]="!selectedRenderModeCompatibleWithSelectMode(item.key)">
+                {{item.value}}
+            </mat-radio-button>
         </mat-radio-group>
     </div>
     <div>
         <label class="form-label">Render Mode</label>
         <mat-radio-group formControlName="renderMode" class="radio-group">
-            <mat-radio-button value="LIST">List</mat-radio-button>
-            <mat-radio-button value="CHECKBOX_LIST">Checkbox list</mat-radio-button>
-            <mat-radio-button value="DROPDOWN">Dropdown</mat-radio-button>
-            <mat-radio-button value="AUTOCOMPLETE">Autocomplete list</mat-radio-button>
+
+            <mat-radio-button *ngFor="let item of renderModes | keyvalue: originalOrder"
+                              [value]="item.key"
+                              [disabled]="!selectedSelectModeCompatibleWithRenderMode(item.key)">
+                {{item.value}}
+            </mat-radio-button>
         </mat-radio-group>
     </div>
     <div class="validations">
         <label class="form-label">Validations</label>
         <mat-checkbox formControlName="required">Required</mat-checkbox>
     </div>
-    <app-manage-list class="options-editor" formControlName="options"></app-manage-list>
+    <app-manage-list class="options-editor"
+                     formControlName="optionsData"
+                     [groupsAllowed]="allowCreateOptionsGroups()">
+    </app-manage-list>
 </form>

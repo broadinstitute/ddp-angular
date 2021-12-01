@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { QuestionBlockDef } from '../../model/core/questionBlockDef';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { BehaviorSubject, merge, Subscription } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { ConfigurationService } from '../../configuration.service';
@@ -29,8 +29,33 @@ export class PicklistQuestionEditorComponent implements OnInit, OnDestroy {
         prompt: [''],
         label: [''],
         required: [false],
-        options: [[]]
+        optionsData: [{options: [], groups: []}]
     });
+
+    get selectMode(): FormControl {
+        return this.formGroup.get('selectMode') as FormControl;
+    }
+
+    get renderMode(): FormControl {
+        return this.formGroup.get('renderMode') as FormControl;
+    }
+
+    readonly modesCompatibilityMap = new Map<string, string[]>([
+        ['SINGLE', ['LIST', 'CHECKBOX_LIST', 'DROPDOWN', 'AUTOCOMPLETE']],
+        ['MULTIPLE', ['LIST', 'CHECKBOX_LIST', 'DROPDOWN']],
+    ]);
+
+    readonly renderModes = new Map<string, string>([
+        ['LIST', 'List'],
+        ['CHECKBOX_LIST', 'Checkbox list'],
+        ['DROPDOWN', 'Dropdown'],
+        ['AUTOCOMPLETE', 'Autocomplete list'],
+    ]);
+
+    readonly selectModes = new Map<string, string>([
+        ['SINGLE', 'Single'],
+        ['MULTIPLE', 'Multiple']
+    ]);
 
     private sub: Subscription;
 
@@ -64,7 +89,7 @@ export class PicklistQuestionEditorComponent implements OnInit, OnDestroy {
             prompt: simplifiedPromptTemplate.getTranslationText(this.config.defaultLanguageCode),
             label: simplifiedLabelTemplate.getTranslationText(this.config.defaultLanguageCode),
             required: question.validations.some(val => val.ruleType === 'REQUIRED'),
-            options: question.picklistOptions
+            optionsData: { options: question.picklistOptions, groups: question.groups },
         });
     }
 
@@ -83,11 +108,30 @@ export class PicklistQuestionEditorComponent implements OnInit, OnDestroy {
         question.validations = formData.required ? [{ ruleType: 'REQUIRED', hintTemplate: null }] : [];
         question.selectMode = formData.selectMode;
         question.renderMode = formData.renderMode;
-        question.picklistOptions = formData.options;
+        question.picklistOptions = formData.optionsData.options;
+        question.groups = formData.optionsData.groups;
         return question;
     }
 
     private currentQuestion(): PicklistQuestionDef | null {
         return this.questionBlockSubject.getValue()?.question as PicklistQuestionDef;
+    }
+
+    public allowCreateOptionsGroups(): boolean {
+        const selectMode = this.formGroup.get('selectMode').value;
+        const renderMode = this.formGroup.get('renderMode').value;
+        return selectMode === 'MULTIPLE' && renderMode === 'LIST' || renderMode === 'CHECKBOX_LIST' || renderMode === 'AUTOCOMPLETE';
+    }
+
+    selectedSelectModeCompatibleWithRenderMode(renderMode: string): boolean {
+        return this.modesCompatibilityMap.get(this.selectMode.value)?.includes(renderMode);
+    }
+
+    selectedRenderModeCompatibleWithSelectMode(selectMode: string): boolean {
+        return this.modesCompatibilityMap.get(selectMode)?.includes(this.renderMode.value);
+    }
+
+    originalOrder(): number {
+        return 0;
     }
 }

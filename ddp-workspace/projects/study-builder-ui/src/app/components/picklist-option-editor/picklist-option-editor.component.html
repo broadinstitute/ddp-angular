@@ -2,6 +2,9 @@
     <mat-form-field class="stable-id-column">
         <mat-label>stableId</mat-label>
         <input matInput formControlName="stableId" required>
+        <mat-error *ngIf="optionForm.get('stableId').hasError('stableIdIsNotUnique')">
+            Option stable ID should be unique
+        </mat-error>
     </mat-form-field>
     <mat-form-field class="label-column">
         <mat-label>Label</mat-label>
