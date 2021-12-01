@@ -22,9 +22,16 @@ export class ActivitiesListComponent {
     ActivityCode.AboutPatient,
     ActivityCode.MedicalRecordRelease,
   ];
+  private consentActivities = [
+    // ActivityCode.SelfConsent,
+    // ActivityCode.ConsentAssent,
+    // ActivityCode.ParentalConsent,
+    // ActivityCode.LarConsent,
+    // ActivityCode.LarConsentAssent,
+  ];
 
   canCopyActivity(activity: ActivityInstance): boolean {
-    return this.allowedToEditActivities.includes(activity.activityCode as ActivityCode) && !activity.readonly;
+    return this.allowedToEditActivities.includes(activity.activityCode as ActivityCode);
   }
 
   onStartClick(activity: ActivityInstance): void {
