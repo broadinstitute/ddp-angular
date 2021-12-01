@@ -40,5 +40,8 @@
         <mat-label>Validations</mat-label>
         <mat-checkbox formControlName="required">Required</mat-checkbox>
     </div>
-    <app-manage-list class="options-editor" formControlName="options"></app-manage-list>
+    <app-manage-list class="options-editor"
+                     formControlName="optionsData"
+                     [groupsAllowed]="allowCreateOptionsGroups()">
+    </app-manage-list>
 </form>

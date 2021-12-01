@@ -29,7 +29,7 @@ export class PicklistQuestionEditorComponent implements OnInit, OnDestroy {
         prompt: [''],
         label: [''],
         required: [false],
-        options: [[]]
+        optionsData: [{options: [], groups: []}]
     });
 
     get selectMode(): FormControl {
@@ -89,7 +89,7 @@ export class PicklistQuestionEditorComponent implements OnInit, OnDestroy {
             prompt: simplifiedPromptTemplate.getTranslationText(this.config.defaultLanguageCode),
             label: simplifiedLabelTemplate.getTranslationText(this.config.defaultLanguageCode),
             required: question.validations.some(val => val.ruleType === 'REQUIRED'),
-            options: question.picklistOptions
+            optionsData: { options: question.picklistOptions, groups: question.groups },
         });
     }
 
@@ -108,12 +108,19 @@ export class PicklistQuestionEditorComponent implements OnInit, OnDestroy {
         question.validations = formData.required ? [{ ruleType: 'REQUIRED', hintTemplate: null }] : [];
         question.selectMode = formData.selectMode;
         question.renderMode = formData.renderMode;
-        question.picklistOptions = formData.options;
+        question.picklistOptions = formData.optionsData.options;
+        question.groups = formData.optionsData.groups;
         return question;
     }
 
     private currentQuestion(): PicklistQuestionDef | null {
         return this.questionBlockSubject.getValue()?.question as PicklistQuestionDef;
+    }
+
+    public allowCreateOptionsGroups(): boolean {
+        const selectMode = this.formGroup.get('selectMode').value;
+        const renderMode = this.formGroup.get('renderMode').value;
+        return selectMode === 'MULTIPLE' && renderMode === 'LIST' || renderMode === 'CHECKBOX_LIST' || renderMode === 'AUTOCOMPLETE';
     }
 
     selectedSelectModeCompatibleWithRenderMode(renderMode: string): boolean {

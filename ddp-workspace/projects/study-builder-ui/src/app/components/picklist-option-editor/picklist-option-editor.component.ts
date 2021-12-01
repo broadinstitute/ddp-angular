@@ -29,6 +29,11 @@ export class PicklistOptionEditorComponent implements OnDestroy {
         };
         this.optionForm.patchValue(optionValue);
     }
+    @Input()
+    set notUniqueStableId(stableIdIsNotUnique: boolean) {
+        const error = stableIdIsNotUnique ? {stableIdIsNotUnique: true} : null;
+        this.optionForm.get('stableId').setErrors(error);
+    }
     @Output() optionChanged = new EventEmitter<PicklistOptionDef>();
 
     public optionForm = this.fb.group({

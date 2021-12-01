@@ -1,27 +1,26 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ControlValueAccessor, FormBuilder, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, Self } from '@angular/core';
+import {
+    ControlValueAccessor,
+    FormBuilder,
+    FormControl,
+    NgControl,
+    ValidationErrors
+} from '@angular/forms';
 import { PicklistOptionDef } from '../../model/core/picklistOptionDef';
 import { PicklistGroupDef } from '../../model/core/picklistGroupDef';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
 import { ConfigurationService } from '../../configuration.service';
 import { StudyConfigObjectFactory } from '../../model/core-extended/studyConfigObjectFactory';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'app-manage-list',
     templateUrl: 'manage-list.component.html',
     styleUrls: ['manage-list.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            multi: true,
-            useExisting: ManageListComponent
-        }
-    ]
 })
-export class ManageListComponent implements ControlValueAccessor {
-    // @Input() groupsAllowed: boolean;
+export class ManageListComponent implements OnInit, ControlValueAccessor {
+    @Input() groupsAllowed: boolean;
 
     public groups: Array<PicklistGroupDef>;
     public options: PicklistOptionDef[] = [];
@@ -30,18 +29,28 @@ export class ManageListComponent implements ControlValueAccessor {
 
     private factory: StudyConfigObjectFactory;
 
-    constructor(private fb: FormBuilder, private config: ConfigurationService) {
+    constructor(
+        private fb: FormBuilder,
+        private config: ConfigurationService,
+        private cdr: ChangeDetectorRef,
+        @Self() private controlDirective: NgControl,
+        ) {
         this.factory = new StudyConfigObjectFactory(config);
+        controlDirective.valueAccessor = this;
     }
 
-    // onChange = (event: { groups: Array<PicklistGroupDef>; options: Array<PicklistOptionDef> }) => {};
-    onChange = (event: Array<PicklistOptionDef>) => {};
+    ngOnInit(): void {
+        this.controlDirective.control.setValidators([this.validate.bind(this)]);
+        this.controlDirective.control.updateValueAndValidity();
+    }
+
+    onChange = (event: {options: Array<PicklistOptionDef>; groups: Array<PicklistGroupDef>}) => {};
     onTouched = () => {};
 
-    // writeValue({ groups, options }: { groups: Array<PicklistGroupDef>; options: Array<PicklistOptionDef> }): void {
-    writeValue(options: Array<PicklistOptionDef>): void {
-        // this.groups = [...groups];
+    writeValue({ options, groups }: { options: Array<PicklistOptionDef>; groups: Array<PicklistGroupDef> }): void {
+        this.groups = [...groups];
         this.options = [...options];
+        this.cdr.markForCheck();
     }
 
     registerOnChange(onChange: any): void {
@@ -59,6 +68,54 @@ export class ManageListComponent implements ControlValueAccessor {
         }
     }
 
+    validate({ value }: FormControl): ValidationErrors | null {
+        const allOptions: PicklistOptionDef[] = [...value.options, ...value.groups.flatMap(group => group.options)];
+        const notUniqueOptionsStableIds = this.getNotUniqueStableIds(allOptions);
+        const notUniqueGroupsStableIds = this.getNotUniqueStableIds(this.groups);
+        const isNotValid = !!notUniqueOptionsStableIds.length || !!notUniqueGroupsStableIds.length;
+        return isNotValid && {
+            ...(notUniqueOptionsStableIds ? {notUniqueOptionsStableIds} : {}),
+            ...(notUniqueGroupsStableIds ? {notUniqueGroupsStableIds} : {}),
+        };
+    }
+
+    private getNotUniqueStableIds(array: PicklistOptionDef[] | PicklistGroupDef[]): string[] {
+        const stableIdToCountMap = new Map<string, number>();
+        for (const item of array) {
+            if (stableIdToCountMap.has(item.stableId)) {
+                const currentCount = stableIdToCountMap.get(item.stableId);
+                stableIdToCountMap.set(item.stableId, currentCount + 1);
+            } else {
+                stableIdToCountMap.set(item.stableId, 1);
+            }
+        }
+        return [...stableIdToCountMap.entries()]
+            .filter(([_, count]) => count > 1).map(([stableId]) => stableId);
+    }
+
+    get invalid(): boolean {
+        return this.controlDirective?.invalid || false;
+    }
+
+    get errors(): ValidationErrors | null {
+        return this.controlDirective?.errors || null;
+    }
+
+    groupHasNotUniqueStableId(group: PicklistGroupDef): boolean {
+        return this.controlDirective.invalid && this.controlDirective.errors?.notUniqueGroupsStableIds?.includes(group.stableId);
+    }
+
+    notUniqueOptionsStableIdsForGroup(group: PicklistGroupDef): string[] {
+        return (this.controlDirective.invalid
+                && this.controlDirective.errors?.notUniqueOptionsStableIds?.filter(value =>
+                    group.options.map(({stableId}) => stableId).includes(value)))
+            || [];
+    }
+
+    notUniqueOptionsStableIds(): string[] {
+        return (this.controlDirective.invalid && this.controlDirective.errors?.notUniqueOptionsStableIds) || [];
+    }
+
     setDisabledState(disabled: boolean): void {
         this.disabled = disabled;
     }
@@ -66,45 +123,56 @@ export class ManageListComponent implements ControlValueAccessor {
     addEmptyOption(): void {
         this.markAsTouched();
         if (!this.disabled) {
-            const newOptionGroup = {
+            const newOption = {
                 stableId: '',
                 optionLabelTemplate: new SimpleTemplate(this.factory.createBlankTemplate()),
             };
-            this.options.push(newOptionGroup);
-            this.onChange(this.options);
+            this.options = [...this.options, newOption];
+            this.onChange({options: this.options, groups: this.groups});
         }
     }
 
-    optionDrop(event: CdkDragDrop<PicklistOptionDef[]>): void {
+    addEmptyGroup(): void {
         this.markAsTouched();
         if (!this.disabled) {
-            moveItemInArray(this.options, event.previousIndex, event.currentIndex);
-            this.onChange(this.options);
+            const newOptionGroup: PicklistGroupDef = {
+                stableId: '',
+                nameTemplate: new SimpleTemplate(this.factory.createBlankTemplate()),
+                options: [],
+            };
+            this.groups.push(newOptionGroup);
+            this.onChange({options: this.options, groups: this.groups});
         }
     }
 
-    removeOptionByIndex(index: number): void {
+    removeGroupByIndex(index: number): void {
         this.markAsTouched();
         if (!this.disabled) {
-            this.options.splice(index, 1);
-            this.onChange(this.options);
+            this.groups.splice(index, 1);
+            this.onChange({options: this.options, groups: this.groups});
         }
     }
 
-    trackByOptions(index: number, item: PicklistOptionDef): string {
-        return String(index);
-    }
-
-    updateOption(updatedOption: PicklistOptionDef, index: number): void {
+    updateOptions(options: PicklistOptionDef[]): void {
         this.markAsTouched();
         if (!this.disabled) {
-            this.options[index].stableId = updatedOption.stableId;
-            this.options[index].optionLabelTemplate = updatedOption.optionLabelTemplate;
-            this.options[index].tooltipTemplate = updatedOption.tooltipTemplate;
-            this.options[index].detailLabelTemplate = updatedOption.detailLabelTemplate;
-            this.options[index].allowDetails = updatedOption.allowDetails;
-            this.options[index].exclusive = updatedOption.exclusive;
-            this.onChange(this.options);
+            this.options = [...options];
+            this.onChange({options: this.options, groups: this.groups});
         }
+    }
+
+    updateGroup(group: PicklistGroupDef, groupIndex: number): void {
+        this.markAsTouched();
+        if (!this.disabled) {
+            this.groups[groupIndex].stableId = group.stableId;
+            this.groups[groupIndex].nameTemplate = group.nameTemplate;
+            this.groups[groupIndex].options = [...group.options];
+            this.onChange({options: this.options, groups: this.groups});
+        }
+    }
+
+    groupDrop(event: CdkDragDrop<PicklistGroupDef[]>): void {
+        moveItemInArray(this.groups, event.previousIndex, event.currentIndex);
+        this.onChange({options: this.options, groups: this.groups});
     }
 }
