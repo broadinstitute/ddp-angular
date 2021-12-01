@@ -1,0 +1,14 @@
+FROM study-manager-base:latest
+
+COPY ddp-workspace/package.json /ddp-workspace/projects/ddp-dsm-ui/app/
+COPY ddp-workspace/angular.json /ddp-workspace/projects/ddp-dsm-ui/app/
+
+COPY ddp-workspace/projects/ddp-dsm-ui/karma.conf.js /ddp-workspace/projects/ddp-dsm-ui/app/
+COPY ddp-workspace/projects/ddp-dsm-ui/protractor.conf.js /ddp-workspace/projects/ddp-dsm-ui/app/
+COPY ddp-workspace/projects/ddp-dsm-ui/tsconfig.app.json /ddp-workspace/projects/ddp-dsm-ui/app/
+COPY ddp-workspace/projects/ddp-dsm-ui/tsconfig.es5.json /ddp-workspace/projects/ddp-dsm-ui/app/
+COPY ddp-workspace/projects/ddp-dsm-ui/tsconfig.spec.json /ddp-workspace/projects/ddp-dsm-ui/app/
+COPY ddp-workspace/projects/ddp-dsm-ui/docker-build.sh /ddp-workspace/projects/ddp-dsm-ui/app/
+COPY ddp-workspace/projects/ddp-dsm-ui/src /ddp-workspace/projects/ddp-dsm-ui/app/src/
+
+CMD ["ddp-workspace/projects/ddp-dsm-ui/app/docker-build.sh"]
