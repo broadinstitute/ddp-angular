@@ -38,6 +38,7 @@ import { LOCATION_INITIALIZED } from '@angular/common';
 import { DummyLoggingService } from './dummyLoggingService';
 import { HttpBackend, HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ResizableModule } from 'angular-resizable-element';
 
 const ddpConfig = new ConfigurationService();
 ddpConfig.doGcpErrorReporting = false;
@@ -106,6 +107,7 @@ function createTranslateLoader(handler: HttpBackend): TranslateHttpLoader {
         DragDropModule,
         FormsModule,
         DragDropModule,
+        ResizableModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

@@ -1,15 +1,37 @@
 .control-bar {
-  height: 70px;
-  border: 2px solid blue;
+    height: 70px;
+    padding: 10px;
+    z-index: 1;
 }
 .right-canvas-panel {
-  border-color: gray;
-  border-style: dashed;
-  min-height: 500px;
-
+    min-height: 500px;
+    background-color: #ede7f6;
 }
+
 .left-panel {
-  height: 100%;
-  border: 2px solid red;
+    height: 100%;
+    position: relative;
+    padding: 15px 0 0 10px;
+    background-color: white;
+    border-right: 1px solid;
+    box-sizing: border-box;
 }
 
+.create-new-activity-btn {
+    margin-left: 15px;
+}
+
+.resize-handle-right {
+    position: absolute;
+    height: 100%;
+    cursor: col-resize;
+    width: 5px;
+    top: 0;
+    background-color: #e3e1e1;
+    z-index: 10;
+    right: 0;
+}
+
+.container {
+    height: 100%;
+}

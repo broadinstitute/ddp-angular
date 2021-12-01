@@ -1,10 +1,10 @@
 <form [formGroup]="formGroup" class="container">
+    <p>Text question editor</p>
     <div>
-    <mat-form-field>
-        <mat-label>stableId</mat-label>
-    <input matInput
-           formControlName="stableId" required>
-    </mat-form-field>
+        <mat-form-field>
+            <mat-label>Stable Id</mat-label>
+            <input matInput formControlName="stableId" required>
+        </mat-form-field>
     </div>
     <div>
         <mat-form-field>
@@ -12,12 +12,14 @@
             <textarea matInput matTextareaAutosize matAutosizeMinRows="3" formControlName="prompt" required></textarea>
         </mat-form-field>
     </div>
-    <mat-form-field>
-        <mat-label>Question Placeholder</mat-label>
-        <input matInput formControlName="placeholder"/>
-    </mat-form-field>
     <div>
-        <mat-label>Input Type</mat-label>
+        <mat-form-field>
+            <mat-label>Question Placeholder</mat-label>
+            <input matInput formControlName="placeholder"/>
+        </mat-form-field>
+    </div>
+    <div>
+        <label class="form-label">Input Type</label>
         <mat-radio-group formControlName="inputType" class="radio-group">
             <mat-radio-button  value="TEXT">Text</mat-radio-button>
 
@@ -29,7 +31,7 @@
         </mat-radio-group>
     </div>
     <div class="validations">
-        <mat-label>Validations</mat-label>
+        <label class="form-label">Validations</label>
         <mat-checkbox formControlName="required">Required</mat-checkbox>
     </div>
 </form>
