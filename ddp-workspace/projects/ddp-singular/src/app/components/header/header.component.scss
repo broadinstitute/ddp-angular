@@ -3,12 +3,12 @@
 @import '../../../styles/colors';
 
 $headerHeight: (
-  'default': 10rem,
-  'sm': 9.2rem,
-  'xs': 8.4rem,
+  'default': 110px,
+  'sm': 74px,
+  'xs': 68px,
 );
 
-a {
+a:not(.button) {
   border-bottom: none;
 }
 
@@ -17,19 +17,18 @@ a {
   color: map-get($colors, 'header-color');
   ::ng-deep {
     button {
-      font-family: Spartan-Bold;
+      font-family: Spartan-Bold, sans-serif;
       color: map-get($colors, 'header-color');
     }
   }
   margin-top: 30px;
   margin-bottom: 50px;
 
-  & a {
-    font-family: Spartan-Bold, sans-serif;
-    color: map-get($colors, 'header-color');
-    &.sign-up {
-      padding: 3px 7px;
-      display: inline-block;
+  .link {
+    color: $__purple;
+
+    &:hover {
+      color: #4d198b;
     }
   }
 
@@ -37,7 +36,10 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    max-width: 1400px;
     height: 100%;
+
     @include media-md {
       position: relative;
     }
@@ -45,6 +47,10 @@ a {
 
   &__logo {
     height: 100px;
+
+    @media (max-width: 1280px) {
+      height: 80px;
+    }
 
     @include media-md {
       margin-right: auto;
@@ -66,7 +72,7 @@ a {
   &__nav {
     display: flex;
     align-items: center;
-    font-size: 17px;
+    font-size: 16px;
     @include media-md {
       flex-flow: column nowrap;
 
@@ -78,8 +84,7 @@ a {
 
       padding: 2.4rem;
 
-      background: map-get($colors, 'white');
-      border-top: 1px solid map-get($colors, 'beige');
+      background: #ffffff;
       box-shadow: 0 2.4rem 2.4rem rgba(0, 0, 0, 0.05);
 
       transform: translate3d(-120%, 0, 0);
@@ -104,6 +109,14 @@ a {
         }
         & a {
           color: map-get($colors, 'header-color-dark');
+        }
+      }
+
+      .link-list {
+        height: 100%;
+
+        .auth-item {
+          margin-top: auto;
         }
       }
     }
@@ -174,5 +187,13 @@ a {
     &:nth-of-type(3) {
       bottom: 0;
     }
+  }
+}
+
+.button--wide {
+  width: 160px;
+
+  @media (max-width: 1200px) {
+    width: auto;
   }
 }

@@ -41,11 +41,11 @@
             {{ 'Header.Links.Dashboard' | translate }}
           </a>
         </li>
-        <li class="link-list__item link-list__item_highlight-stroke" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active">
+        <li class="link-list__item auth-item" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active">
           <ddp-sign-in-out [signOutReturnToUrl]="Route.Home"></ddp-sign-in-out>
         </li>
-        <li class="link-list__item link-list__item_highlight" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active" *ngIf="!isAuthenticated">
-          <a class="link sign-up" [routerLink]="Route.PreScreening">
+        <li class="link-list__item" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active" *ngIf="!isAuthenticated">
+          <a class="button button--primary button--wide" [routerLink]="Route.PreScreening">
             {{ 'Header.Links.SignMeUp' | translate }}
           </a>
         </li>

@@ -2,8 +2,11 @@
 @import '../../../../styles/colors';
 @import '../../../../styles/mixins';
 
-
 @include narrow-container;
+
+:host {
+  color: #011c48;
+}
 
 h1 {
   font-size: 32px;
@@ -13,25 +16,30 @@ h1 {
 
 .wrapper {
   max-width: 830px;
+
   .question__header {
     font-size: 18px;
     margin-bottom: 0;
     padding: 15px 0;
     font-family: Spartan-Semibold, serif;
+
     mat-icon {
       height: 36px;
       font-size: 36px;
     }
+
     span {
       padding-top: 5px;
     }
+
     .question__toggle {
       margin-right: 15px;
     }
   }
 }
+
 .intro {
-  margin: 0px 0 30px;
+  margin: 0px 0 60px;
 
   &__container {
     //max-width: 640px;
@@ -113,21 +121,42 @@ h1 {
     }
   }
 
+  &__name {
+    font-family: 'Spartan-Semibold', sans-serif;
+    line-height: 24px;
+  }
+
   &__answer {
     font-size: 18px;
     line-height: 1.5;
-    padding-left: 85px;
+    padding-left: 112px;
     @include media-sm {
       padding-left: 70px;
+    }
+
+    &::before {
+      content: '';
+
+      display: block;
+
+      position: relative;
+      top: 12px;
+      left: -24px;
+
+      width: 3px;
+      height: 3px;
+
+      background: currentColor;
+      border-radius: 1.5px;
     }
 
     & + & {
       margin-top: 20px;
     }
 
-
     ul {
       margin-top: 20px;
+
       li {
         margin-top: 20px;
       }
@@ -144,6 +173,7 @@ h1 {
 
 ul {
   margin-top: 20px;
+
   li {
     margin-top: 20px;
     list-style: disc;
@@ -155,12 +185,14 @@ ul {
   @include media-sm {
     flex-direction: column;
   }
+
   &-left {
     width: 53%;
     @include media-sm {
       width: unset;
     }
   }
+
   &-right {
     width: 47%;
     padding-left: 80px;
@@ -169,10 +201,12 @@ ul {
       padding-left: unset;
       margin-top: 20px;
     }
+
     img {
       width: 100%;
     }
   }
+
   &-image__description {
     font-size: 14px;
     margin-top: 20px;

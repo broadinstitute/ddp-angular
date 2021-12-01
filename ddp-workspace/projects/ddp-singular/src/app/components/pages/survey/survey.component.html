@@ -1,7 +1,7 @@
 <div class="container">
-  <app-progress-bar></app-progress-bar>
-  <div class="rarex-activity-page">
-    <div class="rarex-activity-page__activity-container">
+  <app-progress-bar [instanceGuid]="instanceGuid" [activities]="activities"></app-progress-bar>
+  <div>
+    <div>
       <app-activity
         [studyGuid]="studyGuid"
         (submit)="onSubmit($event)"

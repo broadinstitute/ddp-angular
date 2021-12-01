@@ -1,4 +1,5 @@
 @import '../../../../styles/colors';
+@import '../../../../styles/breakpoints';
 
 
 .spinner-container {
@@ -9,12 +10,13 @@
 }
 
 .container {
-  margin-top: 1.2rem;
-  margin-bottom: 2.4rem;
+  margin-bottom: 42px !important;
 }
 
 .title {
   margin: 2rem 0;
+
+  font-family: 'Spartan-Bold', sans-serif;
   color: $__font;
 
   @media (max-width: 450px) {
@@ -32,7 +34,10 @@
     margin: 0;
 
     border: 1px solid #26355c;
+    border-radius: 8px;
     background-color: #f4efea;
+
+    overflow: hidden;
 
     &:not(:last-of-type) {
       margin-bottom: 16px;
@@ -65,8 +70,9 @@
   }
 
   &__name {
-    font-size: 1.2rem;
-    font-weight: bold;
+    margin-top: 5px;
+
+    font-family: 'Spartan-Bold', sans-serif;
   }
 
   &__expand-btn {
@@ -81,6 +87,18 @@
     }
   }
 
+  &__icon-container {
+    display: flex;
+    align-items: center;
+
+    button {
+      display: flex;
+
+      background: unset;
+      border: 0;
+    }
+  }
+
   button {
     background: unset;
     border: 0;
@@ -92,6 +110,22 @@
   justify-content: flex-end;
 
   margin-top: 1.6rem;
+
+  .button {
+    @include media-xs {
+      width: 100%;
+    }
+  }
+
+  .button + .button {
+    margin-left: 1.2rem;
+  }
+}
+
+.help-tip {
+  margin: 1rem 0;
+
+  font-family: 'Spartan-Medium', sans-serif;
 }
 
 .logout-reminder {
@@ -100,14 +134,4 @@
   border-width: 1px;
 
   text-align: center;
-}
-
-.help-tip {
-  font-weight: 600;
-  opacity: 0.9;
-}
-
-.button_primary {
-  background: $__purple;
-  color: $__white;
 }

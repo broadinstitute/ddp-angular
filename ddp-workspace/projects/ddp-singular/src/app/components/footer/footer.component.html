@@ -60,7 +60,7 @@
             <ddp-sign-in-out [signOutReturnToUrl]="Route.Home"></ddp-sign-in-out>
           </li>
           <li class="link-list__item link-list__item_highlight link-list__item_highlight_invert" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active" *ngIf="!isAuthenticated">
-            <a class="link sign-up" [routerLink]="Route.PreScreening">
+            <a class="button button--white" [routerLink]="Route.PreScreening">
               {{ 'Footer.Links.SignUp' | translate }}
             </a>
           </li>

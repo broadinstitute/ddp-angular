@@ -1,97 +1,217 @@
 @import 'variables';
 @import 'colors';
 
-.SimpleButton {
-  color: #fff;
-  font-size: 19px;
-  text-shadow: none;
-  padding: 0;
-  background: 0;
-  border: 0;
-}
-
-.SimpleButton:hover {
-  text-decoration: none;
-  color: #fff;
-}
-
-.SimpleButton:focus {
-  text-decoration: none;
-  color: #fff;
-}
-
-@media only screen and (max-width: 1030px) {
-  .SimpleButton {
-    font-size: 17px;
-  }
-}
-
 .button {
   display: inline-block;
-  padding: 7px 50px;
-  font-size: 1rem;
-  font-family: 'Spartan-Medium';
-  line-height: 1.4rem;
+
+  padding: 9px 14px 5px;
+
+  font-family: 'Spartan-Bold', sans-serif;
+  font-size: 18px;
   text-align: center;
-  text-decoration: none !important;
-  border: none;
-  border-radius: 2px;
-  outline: none;
-  font-weight: 400;
-  transition: all 0.5s ease;
+  text-decoration: none;
+
+  border: 2px solid transparent;
+  border-radius: 8px;
+
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
   cursor: pointer;
 
+  @media (max-width: 1200px) {
+    padding: 7px 12px 4px;
+
+    font-size: 16px;
+  }
+
   &:disabled {
-    opacity: 0.8;
+    background: #e3e3e3 !important;
+    border-color: #e3e3e3 !important;
+
+    color: #a8a8a9 !important;
+
     cursor: not-allowed;
   }
 
   &--primary {
     background: $__purple !important;
-    border: 1px solid $__purple !important;
+    border-color: $__purple !important;
 
     color: #ffffff !important;
-
-    &-outline {
-      background: transparent !important;
-      border: 2px solid $__purple !important;
-
-      color: $__purple !important;
-    }
-  }
-
-  &--lg {
-    padding: 15px 15px !important;
-  }
-
-  &--sm {
-    padding: 1.4rem 2.6rem;
-    border-radius: 10px;
-    font-size: 1.6rem;
-  }
-
-  &--blue {
-    background: $button-background;
-
-    color: $button-color;
 
     &:not(:disabled) {
       &:hover,
       &:focus {
-        background: lighten($button-background, 5%);
+        background: #4d198b !important;
+        border-color: #4d198b !important;
       }
 
       &:active {
-        background: lighten($button-background, 10%);
+        background: #4b1887 !important;
+        border-color: #4b1887 !important;
       }
+    }
+  }
+
+  &--outline {
+    background: transparent;
+    border-color: $__purple;
+
+    color: $__purple;
+
+    &:not(:disabled) {
+      &:hover,
+      &:focus {
+        background: #4d198b;
+        border-color: #4d198b;
+
+        color: #ffffff;
+      }
+
+      &:active {
+        background: #4b1887;
+        border-color: #4b1887;
+
+        color: #ffffff;
+      }
+    }
+  }
+
+  &--white {
+    background: #ffffff !important;
+    border-color: #ffffff !important;
+
+    color: $__purple !important;
+
+    &:not(:disabled) {
+      &:hover,
+      &:focus {
+        background: darken(#ffffff, 3%) !important;
+        border-color: darken(#ffffff, 3%) !important;
+      }
+
+      &:active {
+        background: darken(#ffffff, 6%) !important;
+        border-color: darken(#ffffff, 6%) !important;
+      }
+    }
+  }
+
+  &--sm {
+    padding: 7px 12px 5px;
+
+    font-size: 15px;
+  }
+
+  &--lg {
+    padding: 18px 19px 16px;
+
+    font-size: 28px;
+  }
+
+  &--icon {
+    display: inline-flex;
+
+    .mat-icon {
+      margin-top: -1px;
+      margin-right: 8px;
     }
   }
 }
 
-@media only screen and (max-width: 780px) {
-  .button {
-    &--lg {
-      padding: 14px 9px !important;
+.SimpleButton {
+  display: inline-block;
+
+  padding: 9px 14px 5px;
+
+  font-family: 'Spartan-Bold', sans-serif;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+
+  background: transparent;
+  border: 2px solid $__purple;
+  border-radius: 8px;
+
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+
+  color: $__purple;
+
+  @media (max-width: 1200px) {
+    padding: 7px 12px 4px;
+
+    font-size: 16px;
+  }
+
+  &:disabled {
+    background: #e3e3e3;
+    border-color: #e3e3e3;
+
+    color: #a8a8a9;
+
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled) {
+    &:hover,
+    &:focus {
+      background: #4d198b;
+      border-color: #4d198b;
+
+      color: #ffffff;
+    }
+
+    &:active {
+      background: #4b1887;
+      border-color: #4b1887;
+
+      color: #ffffff;
     }
   }
+}
+
+.header .SimpleButton {
+  width: 160px;
+
+  @media (max-width: 1200px) {
+    width: auto;
+  }
+}
+
+.footer .SimpleButton {
+  width: 112px;
+
+  border-color: #ffffff;
+
+  color: #ffffff;
+
+  &:not(:disabled) {
+    &:hover,
+    &:focus {
+      background: #ffffff;
+      border-color: #ffffff;
+
+      color: $__purple;
+    }
+
+    &:active {
+      background: darken(#ffffff, 6%);
+      border-color: darken(#ffffff, 6%);
+    }
+  }
+}
+
+.ButtonFilled {
+  display: inline-block;
+
+  padding: 12px 16px 7px;
+
+  background: $__purple;
+  border: none;
+  border-radius: 8px;
+
+  font-family: 'Spartan-Bold', sans-serif;
+  font-size: 18px;
+  line-height: 1;
+  color: #ffffff;
 }

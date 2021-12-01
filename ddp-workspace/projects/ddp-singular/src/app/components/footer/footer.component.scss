@@ -8,14 +8,9 @@
   margin-top: auto;
 }
 
-a {
-  &.sign-up {
-    padding: 3px 7px;
-    display: inline-block;
-  }
-}
-
 .footer {
+  padding: 48px 0 60px;
+
   background: map-get($colors, 'footer-bg');
   color: map-get($colors, 'footer-color');
 
@@ -25,12 +20,10 @@ a {
   }
 
   & .container {
-    padding-top: 50px;
-    padding-bottom: 70px;
     display: flex;
     justify-content: space-between;
 
-    @include media-md {
+    @media (max-width: 1024px) {
       display: block;
       width: auto;
       padding-left: 20px;
@@ -38,7 +31,7 @@ a {
     }
   }
 
-  & a {
+  & a:not(.button) {
     color: map-get($colors, 'footer-color');
   }
 
@@ -99,6 +92,8 @@ a {
     align-items: center;
     list-style: none;
 
+    padding: 0;
+
     @include media-md {
       flex-direction: column;
       align-items: unset;
@@ -106,35 +101,23 @@ a {
     }
 
     &__item {
-      font-size: 17px;
-      margin-right: 20px;
-      @include media-md {
-        margin-bottom: 10px;
+      font-size: 16px;
+
+      &:not(:last-of-type) {
+        margin-right: 20px;
+
+        @include media-md {
+          margin-bottom: 14px;
+        }
       }
-      &_highlight {
-        background: map-get($colors, 'list-item-hightlight-bg');
-        &_invert {
-          a {
-            display: inline-block;
-            padding: 8px 12px;
-            border-radius: 5px;
-            color: map-get($colors, 'footer-color-hightlight');
-            background: $__white;
-          }
-        }
-        &-stroke_invert {
-          ::ng-deep {
-            button {
-              min-width: 130px;
-              line-height: 15px!important;
-              padding: 14px 29px 15px;
-              border: 1px solid $__white;
-              border-radius: 5px;
-              cursor: pointer;
-            }
-          }
-        }
+
+      .link {
+        color: #ffffff !important;
       }
     }
   }
+}
+
+.button {
+  width: 112px;
 }

@@ -71,7 +71,7 @@
       <div class="actions-wrapper">
         <button
           *ngIf="activity.statusCode === ActivityStatusCodes.CREATED && !hasPreviousInstance(activity)"
-          class="button button_primary button_small"
+          class="button button--primary button--sm"
           (click)="onStartClick(activity)"
         >
           {{ 'SDK.StartButton' | translate }}
@@ -85,7 +85,7 @@
             (activity.statusCode === ActivityStatusCodes.IN_PROGRESS &&
               !hasPreviousInstance(activity))
           "
-          class="button button_primary button_small"
+          class="button button--primary button--sm"
           (click)="onContinueClick(activity)"
         >
           {{ 'SDK.ContinueButton' | translate }}
@@ -93,20 +93,19 @@
 
         <ng-container *ngIf="activity.statusCode === ActivityStatusCodes.COMPLETE">
           <ng-container *ngIf="canCopyActivity(activity); else viewAction">
-            <ng-container *ngTemplateOutlet="viewAction"></ng-container>
-            <button class="button button_small button_primary" (click)="onEditClick(activity)">
+            <button class="button button--primary button--sm" (click)="onEditClick(activity)">
               {{ 'SDK.EditButton' | translate }}
             </button>
           </ng-container>
 
           <ng-template #viewAction>
             <ng-container *ngIf="activity.activityCode === ActivityCode.MedicalRecordFileUpload; else viewActionButton">
-              <button class="button button_small button_secondary" (click)="onViewClick(activity)">
+              <button class="button button--primary button--sm" (click)="onViewClick(activity)">
                 {{ 'SDK.UploadButton' | translate }}
               </button>
             </ng-container>
             <ng-template #viewActionButton>
-              <button class="button button_small button_secondary" (click)="onViewClick(activity)">
+              <button class="button button--outline button--sm" (click)="onViewClick(activity)">
                 {{ 'SDK.ReviewButton' | translate }}
               </button>
             </ng-template>

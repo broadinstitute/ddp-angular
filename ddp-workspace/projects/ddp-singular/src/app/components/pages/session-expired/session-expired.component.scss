@@ -16,20 +16,7 @@
     }
 
     .container {
-      width: 550px;
-      margin: 0 auto;
-      padding-left: 5.2rem;
-      padding-right: 5.2rem;
-    }
-  }
-
-  @media only screen and (max-width: 600px) {
-    .wrapper .container {
-      width: 100%;
-
-      h1 {
-        text-align: left;
-      }
+      max-width: 600px !important;
     }
   }
 }

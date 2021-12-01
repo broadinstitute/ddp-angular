@@ -3,7 +3,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivityInstance, ActivityStatusCodes } from 'ddp-sdk';
 import { ActivityCode } from '../../constants/activity-code';
 
-
 @Component({
   selector: 'app-activities-list',
   templateUrl: './activities-list.component.html',
@@ -15,16 +14,11 @@ export class ActivitiesListComponent {
   @Output() continueActivity = new EventEmitter<ActivityInstance>();
   @Output() editActivity = new EventEmitter<ActivityInstance>();
   @Output() viewActivity = new EventEmitter<ActivityInstance>();
-  displayedColumns = [
-    'activityName',
-    'activitySummary',
-    'activityCreatedAt',
-    'activityStatus',
-    'activityActions',
-  ];
+  displayedColumns = ['activityName', 'activitySummary', 'activityCreatedAt', 'activityStatus', 'activityActions'];
   ActivityCode = ActivityCode;
   ActivityStatusCodes = ActivityStatusCodes;
   private allowedToEditActivities = [
+    ActivityCode.AboutHealthy,
     ActivityCode.AboutPatient,
     ActivityCode.MedicalRecordRelease,
   ];
@@ -37,9 +31,7 @@ export class ActivitiesListComponent {
   ];
 
   canCopyActivity(activity: ActivityInstance): boolean {
-    return this.allowedToEditActivities.includes(
-      activity.activityCode as ActivityCode,
-    );
+    return this.allowedToEditActivities.includes(activity.activityCode as ActivityCode);
   }
 
   onStartClick(activity: ActivityInstance): void {

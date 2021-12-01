@@ -5,7 +5,6 @@ import { ActivityRedesignedComponent, SubmissionManager, SubmitAnnouncementServi
 
 declare const DDP_ENV: Record<string, any>;
 
-
 @Component({
   selector: 'app-activity',
   templateUrl: './activity.component.html',
@@ -25,17 +24,21 @@ export class ActivityComponent extends ActivityRedesignedComponent {
   }
 
   get submitText(): string {
-    return this.isActivityWithUnusualButtons()
-      ? 'Activity.Actions.Agree'
-      : 'SDK.SubmitButton';
+    return this.isActivityWithUnusualButtons() ? 'Activity.Actions.Agree' : 'SDK.SubmitButton';
   }
 
   get displayDisagreeButton(): boolean {
-    return this.isActivityWithUnusualButtons();
+    return this.isActivityWithUnusualButtons() && this.isLastTwoSections;
   }
 
   get displayAgreeIcon(): boolean {
     return this.isActivityWithUnusualButtons();
+  }
+
+  get isLastTwoSections(): boolean {
+    const totalSections = this.model.sections.length;
+
+    return [totalSections, totalSections - 1].includes(this.currentSectionIndex + 1);
   }
 
   onCaptchaResolve(): void {
@@ -43,8 +46,11 @@ export class ActivityComponent extends ActivityRedesignedComponent {
   }
 
   private isActivityWithUnusualButtons(): boolean {
-    return this.model?.activityCode === ActivityCode.ConsentSelf
-      || this.model?.activityCode === ActivityCode.ConsentAssent
-      || this.model?.activityCode === ActivityCode.ConsentParental;
+    return (
+      !this.isReadonly() &&
+      (this.model?.activityCode === ActivityCode.ConsentSelf ||
+        this.model?.activityCode === ActivityCode.ConsentAssent ||
+        this.model?.activityCode === ActivityCode.ConsentParental)
+    );
   }
 }

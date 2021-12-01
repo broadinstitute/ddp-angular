@@ -7,6 +7,7 @@ export enum ActivityCode {
   MedicalRecordRelease = 'MEDICAL_RECORD_RELEASE',
   ConsentAssent = 'CONSENT_ASSENT',
   PatientSurvey = 'PATIENT_SURVEY',
-  AddParticipant = 'ADD_PARTICIPANT',
+  AddParticipantSelf = 'ADD_PARTICIPANT_SELF',
+  AddParticipantParental = 'ADD_PARTICIPANT_PARENTAL',
   MedicalRecordFileUpload = 'MEDICAL_RECORD_FILE_UPLOAD',
 }

@@ -1,17 +1,45 @@
-<ng-container *ngIf="{ activities: activities$ | async } as State">
-  <div class="wrapper" *ngIf="showBar(State.activities)">
-    <div
-      class="step-container"
-      *ngFor="let activity of State.activities; index as i"
-      [ngClass]="{
-        'step-container_active': activity.status === ActivityStatusCodes.COMPLETE,
-        'step-container_active_white': activity.status === ActivityStatusCodes.IN_PROGRESS
-      }"
-    >
-      <div class="circular">
-        <p class="number">{{ i + 1 }}</p>
-      </div>
-      <p class="step-paragraph" [innerHtml]="activity.activityNameI18nKey | translate"></p>
-    </div>
-  </div>
+<!--<ng-container *ngIf="{ activities: activities$ | async } as State">-->
+<!--  <div class="wrapper" *ngIf="showBar(State.activities)">-->
+<!--    <div-->
+<!--      class="step-container"-->
+<!--      *ngFor="let activity of State.activities; index as i"-->
+<!--      [ngClass]="{-->
+<!--        'step-container_active': activity.status === ActivityStatusCodes.COMPLETE,-->
+<!--        'step-container_active_white': activity.status === ActivityStatusCodes.IN_PROGRESS-->
+<!--      }"-->
+<!--    >-->
+<!--      <div class="circular">-->
+<!--        <p class="number">{{ i + 1 }}</p>-->
+<!--      </div>-->
+<!--      <p class="step-paragraph" [innerHtml]="activity.activityNameI18nKey | translate"></p>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</ng-container>-->
+
+<ng-container *ngIf="isProgressBarDisplayed">
+  <ol class="pb">
+    <ng-container *ngFor="let activity of renderActivities; let idx = index; let isLast = last">
+      <li class="pb__item">
+        <div class="item" [class.item--current]="activity.isCurrent" [class.item--complete]="activity.isComplete">
+          <div class="item__circle">
+            <span class="item__count">{{ idx + 1 }}</span>
+          </div>
+
+          <p class="item__name">
+            {{ 'ProgressBar.Titles.' + activity.i18nKey | translate }}
+          </p>
+        </div>
+      </li>
+
+      <li
+        *ngIf="!isLast"
+        class="pb__divider"
+        [class.pb__divider--colored]="
+          activity.isComplete &&
+          renderActivities[idx + 1] &&
+          (renderActivities[idx + 1].isCurrent || renderActivities[idx + 1].isComplete)
+        "
+      ></li>
+    </ng-container>
+  </ol>
 </ng-container>
