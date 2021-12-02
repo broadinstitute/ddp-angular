@@ -23,7 +23,11 @@
       <div class="infobox" [innerHTML]="model.readonlyHint"></div>
     </section>
 
-    <section *ngIf="model.introduction" class="section section--introduction">
+    <section
+      *ngIf="model.introduction"
+      [class.consent-separator]="isConsent"
+      class="section section--introduction"
+    >
       <ddp-activity-section
         [section]="model.introduction"
         [readonly]="isReadonly() || dataEntryDisabled"

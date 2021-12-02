@@ -41,16 +41,17 @@ export class ActivityComponent extends ActivityRedesignedComponent {
     return [totalSections, totalSections - 1].includes(this.currentSectionIndex + 1);
   }
 
+  get isConsent(): boolean {
+    return this.model?.activityCode === ActivityCode.ConsentSelf ||
+      this.model?.activityCode === ActivityCode.ConsentAssent ||
+      this.model?.activityCode === ActivityCode.ConsentParental;
+  }
+
   onCaptchaResolve(): void {
     this.isCaptchaResolved = true;
   }
 
   private isActivityWithUnusualButtons(): boolean {
-    return (
-      !this.isReadonly() &&
-      (this.model?.activityCode === ActivityCode.ConsentSelf ||
-        this.model?.activityCode === ActivityCode.ConsentAssent ||
-        this.model?.activityCode === ActivityCode.ConsentParental)
-    );
+    return !this.isReadonly() && this.isConsent;
   }
 }
