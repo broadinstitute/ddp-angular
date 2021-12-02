@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PexService } from './components/pex/pex.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'study-builder-ui';
+  constructor(public pexService: PexService) {
+
+      this.pexService.mapPEXModeltoString();
+
+  }
 }

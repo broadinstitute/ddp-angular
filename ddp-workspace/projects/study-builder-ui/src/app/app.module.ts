@@ -39,6 +39,7 @@ import { DummyLoggingService } from './dummyLoggingService';
 import { HttpBackend, HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ResizableModule } from 'angular-resizable-element';
+import { PexComponent } from './components/pex/pex.component';
 
 const ddpConfig = new ConfigurationService();
 ddpConfig.doGcpErrorReporting = false;
@@ -88,7 +89,8 @@ function createTranslateLoader(handler: HttpBackend): TranslateHttpLoader {
         ManageListComponent,
         PicklistOptionEditorComponent,
         PicklistOptionsListComponent,
-        PicklistGroupEditorComponent
+        PicklistGroupEditorComponent,
+        PexComponent
     ],
     imports: [
         BrowserModule,
