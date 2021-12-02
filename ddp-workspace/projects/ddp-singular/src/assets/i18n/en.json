@@ -1,0 +1,645 @@
+{
+  "Header": {
+    "Links": {
+      "AboutUs": "About Us",
+      "ForResearchers": "For Researchers",
+      "StudyProgress": "Study Progress",
+      "FAQs": "FAQs",
+      "ContactUs": "Contact Us",
+      "SignMeUp": "Sign me up!",
+      "Dashboard": "Dashboard"
+    }
+  },
+  "Activities": {
+    "StatusCodes": {
+      "CREATED": "New",
+      "IN_PROGRESS": "In Progress",
+      "COMPLETE": "Complete"
+    },
+    "PageCount": "Page {{ current }} of {{ total }}"
+  },
+  "Dashboard": {
+    "Title": "Dashboard"
+  },
+  "LoginLandingPage": {
+    "Text": "Please wait until you are redirected"
+  },
+  "PasswordPage": {
+    "Form": {
+      "Password": {
+        "Label": "Please enter the site password",
+        "Required": "Please enter the site password",
+        "Invalid": "Incorrect password. Please try again."
+      }
+    }
+  },
+  "ErrorPage": {
+    "Title": "Something went wrong",
+    "Text": "Something went wrong on our side, please try again later."
+  },
+  "UserActivities": {
+    "Title": "Activities",
+    "Header": {
+      "Form": "Form",
+      "Status": "Status",
+      "Actions": "Actions"
+    },
+    "Statuses": {
+      "CREATED": "Not started",
+      "IN_PROGRESS": "In progress",
+      "COMPLETE": "Complete"
+    },
+    "Actions": {
+      "Start": "Start",
+      "Continue": "Continue",
+      "View": "View"
+    }
+  },
+  "ParticipantsList": {
+    "Title": "Participant Dashboard",
+    "MySelf": "My Self",
+    "NewParticipant": "New Participant",
+    "NoParticipants": "You don't have any participants at this moment. You can add one by clicking the button below.",
+    "HelpTip": "Please select Participant by clicking his/her name in the list below.",
+    "DeleteError": "This participant has already consented and can’t be deleted here. If you wish to withdraw consent, please contact Project Singular study personnel directly."
+  },
+  "ParticipantDeletionDialog": {
+    "Text": "Are you sure you want to delete this participant? All data entered for this participant will be cleared."
+  },
+  "Footer": {
+    "Links": {
+      "SignUp": "Sign up"
+    }
+  },
+  "FAQ": {
+    "Title": "About Project Singular",
+    "P1": "We don’t know why some children are born with single ventricle heart defects. Project Singular is a research study that will try to find out.",
+    "P2": "To do this, we need to look at DNA from at least 5,000 people with single ventricle heart disease. We also need to look at DNA from some of their close family members. We hope that by doing this, we can find the cause of single ventricle heart defects.  We hope that will lead to better treatments for single ventricle heart disease.",
+    "Title2": "About the Research",
+    "P3": "The goal of Project Singular is to find out why single ventricle heart defects form. To do this, we want to study DNA from patients with these defects. We also want to study DNA from some of their close family members.",
+    "P4": "We don’t know what causes single ventricle heart disease. This makes treatment very hard. Project Singular will collect genetic data and health information from at least 5,000 patients. We also wish to collect this information from some of their close family members. It will help us learn why single ventricle heart defects form. It will also help us learn how these defects may lead to other health problems.",
+    "P5": "When we look at information from many patients and their families, we may find patterns. We may also find differences. This can help answer why and how single ventricle heart defects form. This may help us prevent these defects in the future.  This may also help us find better treatments.",
+    "Questions": [
+      {
+        "Title": "Questions About the Study",
+        "Items": [
+          {
+            "Name": "How will Project Singular learn about single ventricle heart defects?",
+            "Answers": [
+              "We will collect a saliva (spit) sample from people enrolled in this study. We will use these samples to look at DNA. We want to see if we can find the causes of single ventricle heart defects. If we can learn what causes single ventricle heart defects, we will be able develop better treatments.",
+              "If you join, we will ask for your medical records to be shared with us. You will fill out a short survey to help us learn a bit more about you and your medical history. Your privacy is very important to us so we will store the information from your spit sample and medical records in a secure online location."
+            ]
+          },
+          {
+            "Name": "Who can take part in Project Singular?",
+            "Answers": [
+              "The study is open to anyone living in the United States or Canada who is: <ul><li>Living with a single ventricle heart defect. The person can be any age. They can be at any stage in their patient journey (pre-Fontan, post-Fontan, or post-heart transplant).</li><li>A biological(birth) parent or sibling of someone with a single ventricle heart defect.</li><li>A biological (birth) child of someone with a single ventricle heart defect.</li></ul>",
+              "Children who are minors must have consent from a parent or guardian.",
+              "Adults not able to consent themselves must have consent from a legally authorized representative (such as a guardian). "
+            ]
+          },
+          {
+            "Name": "What should I know about participating in this study?",
+            "Answers": [
+              "You won’t need to go to a clinic to take part. You can sign up on this website. We will mail you a saliva (spit) collection kit to use at home.",
+              "You will not be paid to take part in this study.",
+              "There is no cost to take part in this study.",
+              "You can quit the study at any time.",
+              "If you have any questions, you may call us at 650-761-6486. Or email us at contact@projectsingular.org."
+            ]
+          },
+          {
+            "Name": "Will I learn anything about my (or my child or other family member’s) single ventricle heart defect?",
+            "Answers": [
+              "Not right now. This is because we don’t know which parts of DNA cause single ventricle heart defects. That’s why we’re doing this study. This means we don’t know which parts of your (or your child or family member’s) DNA may cause single ventricle heart disease. So we cannot give you any information about your (or your family’s) genetic cause.",
+              "In the future, we may make those discoveries. If we do, we may contact you. We may ask if you want information about your (or your child’s) genetics specific to single ventricle heart disease. We don’t know if or when this might be possible.",
+              "Single ventricle heart disease likely comes from many causes. That means all results may not apply to all patients. Not even major discoveries.  Project Singular may provide a summary of research results. We may email you the summary or we may put it on our website. We may publish results. But the results may not be specific to your (or your child or family member’s) single ventricle heart defect. ",
+              "Your doctor will not get your (or your child’s) genetic results. You will not get any data files such as your (or your child’s) genetic sequence."
+            ]
+          },
+          {
+            "Name": "Will I learn anything about any other conditions that may affect my (or my child’s) health?",
+            "Answers": [
+              "Maybe.  In this study, we want to understand the causes of single ventricle heart disease. To do this, we will look at every piece of your (or your child’s) DNA. When we do, we may find changes in the DNA. These changes may be linked to some other disease that is not single ventricle heart disease. These results are called “secondary findings.” This type of result is not common. Most people in this study will not have a result like this.",
+              "But we could find this result. If we do, and you have told us you want to know, we will contact you. We will make sure you want to know your result. Because this is a research study, we can’t promise a specific timeframe that we can send you the result.",
+              "Right now, we cannot return these secondary findings to those who live in Canada because of local and country guidelines.  If those guidelines change in the future to allow for return of these results, we will do so.",
+              "If you have one of these rare secondary findings and you have told us that you would want to know about it, we will connect you with our partner <a href=\"https://www.genomemedical.com/\" target=\"_blank\">Genome Medical</a>, who can arrange a second genetic test to confirm the finding. <a href=\"https://www.genomemedical.com/\" target=\"_blank\">Genome Medical</a> is a national full-service medical group that will coordinate your secondary testing and has board certified genetic counselors that you can speak to when you get your results. This second test is free of charge to you.",
+              "If the finding is confirmed, the genetic counselor will work with you. They will answer your questions and help you understand what the finding means. They can also arrange for other family members to be tested free of charge. They will help you understand what the next steps are for you."
+            ]
+          },
+          {
+            "Name": "Why are family members of people with single ventricle disease asked to participate?",
+            "Answers": [
+              "The causes of single ventricle heart disease are complex.  Looking at the DNA of patients’ family members may help. This may show changes that lead to single ventricle heart defects within the family. What we learn may help us find causes for single ventricle heart disease.  That might help develop better treatments.",
+              "<p>How many family members do you need to take part?<p><ul><li>The more DNA samples we have, the better. We would like patients and their close family members to join the study. But even one family member is helpful.</li></ul>"
+            ]
+          },
+          {
+            "Name": "Who pays for Project Singular?",
+            "Answers": [
+              "Additional Ventures is paying for Project Singular. Additional Ventures is a nonprofit foundation. This means Additional Ventures does not make money (a profit) for its work on Project Singular."
+            ]
+          },
+          {
+            "Name": "Will you contact me in the future?",
+            "Answers": [
+              "<p>We may contact you in the future for:<p><ul><li>More information we may need for the study.</li><li>To invite you to take other surveys or studies.</li><li>To share information about the study progress and/or discoveries.</li></ul>"
+            ]
+          },
+          {
+            "Name": "How long will it take to reach the project goal?",
+            "Answers": [
+              "We don’t know how long it will take to reach our goal. That’s why we don’t have an end date for Project Singular right now."
+            ]
+          },
+          {
+            "Name": "Will you find new treatments for people with single ventricle heart defects?",
+            "Answers": [
+              "We don’t know. But results from Project Singular could be the first step to help find new treatments."
+            ]
+          },
+          {
+            "Name": "How much spit do you need for the sample?",
+            "Answers": [
+              "We need a little less than one teaspoon."
+            ]
+          },
+          {
+            "Name": "How do I mail back my saliva kit if I live in the U.S.? ",
+            "Answers": [
+              "The kit will have a prepaid return label on the outside of the box. You can mail the kit at a U.S. post office near you. All costs will already be paid by the study. There is no cost to you to mail it back to us."
+            ]
+          },
+          {
+            "Name": "How do I mail back my saliva kit if I live in Canada?",
+            "Answers": [
+              "The kit will include a commercial invoice label. Put the label on the front of the box. It’s okay to cover up the logo.",
+              "Take the kit to any FedEx office or drop box. The kit already has a prepaid return label on the back of the box. All costs are will already be paid by the study. There is no cost to you to mail it back to us."
+            ]
+          }
+        ]
+      },
+      {
+        "Title": "Questions About DNA and Genetics",
+        "Items": [
+          {
+            "Name": "What is DNA and why is it important?",
+            "Answers": [
+              "We will study your spit so we can look at your cells. We want to read the DNA inside these cells. We can do this through gene sequencing. Genes are part of your DNA. Genes have instructions for how your body should work. Sometimes genes give instructions that make it more likely for us to get a certain disease.",
+              "Genetic research is the study of DNA. We want to find out which genes and things in a person’s environment might lead to disease. If we can find what causes diseases, we can find better ways to prevent, diagnose, and treat the diseases."
+            ]
+          },
+          {
+            "Name": "How will Project Singular study DNA?",
+            "Answers": [
+              "Sometimes researchers study only a small part of DNA. They may look at just the part they know can cause a disease. We don’t know much about single ventricle heart disease. So we will look at all or most of your genes. This gives us a detailed look. That way researchers can try to find which genes may play a role in single ventricle heart disease.",
+              "The goal of Project Singular is to collect DNA and health information from many people. This will help speed up single ventricle heart disease research and discovery."
+            ]
+          }
+        ]
+      },
+      {
+        "Title": "Questions About Data",
+        "Items": [
+          {
+            "Name": "How will my information be kept safe?",
+            "Answers": [
+              "Your privacy is very important to us. Your information will be stored in a secure online system.",
+              "The information will be “de-identified.” This means we will take out details like your name or birth date. This makes it harder to identify you from the information. ",
+              "The principal investigator (lead researcher) for Project Singular works for Additional Ventures. They have signed an agreement to keep all information private. If you have questions or concerns, please let us know. You can call us at 650-761-6486. Or you can email us at contact@projectsingular.org."
+            ]
+          },
+          {
+            "Name": "Who will have access to my information?",
+            "Answers": [
+              "Only approved study members on this study will have access to your identifiable information.",
+              "We may share your de-identified information with other researchers.  This means they won’t be able to identify you.  It also means they can’t ask you if they can use your information in future studies.  You won’t get to choose if your information is used in these studies.",
+              "These researchers will be approved by a science review committee before granted access to your deidentified data. \n",
+              "Some of these studies may be on diseases other than single ventricle heart disease. Some researchers may study ways to measure health.  They may want to see how health might change with certain treatments or care.  Some of these studies may be with for-profit companies for commercial uses.  These companies may try to develop new treatments.",
+              "Researchers can’t attempt to identify you. They can't attempt to contact you. Outside researchers must sign an agreement with Project Singular. In it, they agree to only use the information for studies approved by the science review committee. "
+            ]
+          },
+          {
+            "Name": "Could I be identified from my information?",
+            "Answers": [
+              "There is a small risk someone may see your information without permission. There is a chance your information could be breached by accident. This could identify you. We think the chance of this is very small. But we can’t say it is impossible."
+            ]
+          },
+          {
+            "Name": "Will I get my results or learn anything about my (or my child or family member’s) single ventricle heart defect?",
+            "Answers": [
+              "Not right now. We don’t know which parts of DNA cause single ventricle heart defects.  That’s why we’re doing this study.",
+              "This means we don’t know which parts of your (or your family member’s) DNA may cause single ventricle heart disease.  That means we can’t give you any information about you/your family’s genetic cause. ",
+              "In the future, we may make those discoveries. If we do, we may contact you.  We may ask if you want information about your genetics specific to single ventricle heart disease. But we don’t know if or when this will be possible.",
+              "We will be looking at every piece of your DNA and it is possible that we may find changes in your DNA.  These changes may be linked to some other disease that is not single ventricle heart disease.  These results are called “secondary findings.”  They are very rare.  If you have told us you would want to know about a secondary finding, we will notify you.  Most people in this study will not receive a result like this.",
+              "These secondary findings will be shared with you if you have told us you want to know about it. We have partnered with <a href=\"https://www.genomemedical.com/\" target=\"_blank\">Genome Medical</a>, a national full-service medical group and digital health company, to answer any questions you may have around secondary findings. They can also order a test to confirm the finding if medically appropriate.  This testing will be performed at no cost to you."
+            ]
+          }
+        ]
+      }
+    ],
+    "VentricleHeartDefects": {
+      "Title": "About Single Ventricle Heart Defects",
+      "P1": "Before a baby is born, the first organ to grow is the heart. In most hearts, there are four chambers. Two are atria. The other two are ventricles. In some people, one ventricle doesn’t grow fully. That ventricle may be smaller. Or it may not develop all the way. Or it may be missing an important piece. When any of these things happen it is called a single ventricle heart defect.",
+      "P2": "<p><b>There are many types of single ventricle heart defects. The most common are:</b></p><ul class=\"simple-list\"><li>Hypoplastic Left Heart Syndrome (HLHS)</li><li>Tricuspid Atresia</li><li>Double Inlet Left Ventricle (DILV)</li><li>Double Outlet Right Ventricle (DORV)</li><li>Single Left Ventricle</li><li>Pulmonary Atresia with Intact Ventricular<br /> Septum (PA-IVS)</li><li>Unbalanced Atrioventricular Canal</li></ul>",
+      "P3": "Scientists are trying to find out why some people’s hearts grow this way. But they don't have the full picture. We know that single ventricle heart defects are likely caused by more than one thing.  One cause may be in a person’s DNA. We want to learn more about the DNA of patients with single ventricle heart defects. We may find something in their DNA linked to these defects.",
+      "P4": "Each patient is unique. But right now, most children with a single ventricle heart defect will need three stages of surgery. First, a Norwood or a shunt. Next, a Glenn procedure. And last, a Fontan procedure. These surgeries are done to make a new circulatory system. This allows blood to flow to all parts of the body and bring more oxygen to the lungs. But some patients end up with other health problems after surgery.",
+      "P5": "Right now, there is no cure for single ventricle heart defects and there are other health issues that often develop in other parts of the body. Sometimes the person’s single ventricle can fail.  The best option right now for a failing single ventricle is a heart transplant. But there are a lot of people who need a heart transplant. And there are not enough hearts. Also, a heart transplant has many challenges. It requires lifelong treatment. This can affect quality of life. Also, transplanted organs have a limited lifespan. ",
+      "P6": "<span class=\"text-semibold\">We don’t know if Project Singular will lead to a cure. But we believe it will help us learn more. We hope to learn more about people with single ventricle may lead to better treatments and medicines. And maybe one day, it could lead to a cure.</span>"
+    }
+  },
+  "SDK": {
+    "DatePicker": {
+      "Day": "Day",
+      "Month": "Month",
+      "Year": "Year",
+      "January": "January",
+      "February": "February",
+      "March": "March",
+      "April": "April",
+      "May": "May",
+      "June": "June",
+      "July": "July",
+      "August": "August",
+      "September": "September",
+      "October": "October",
+      "November": "November",
+      "December": "December"
+    },
+    "ManageParticipants": {
+      "AddParticipant": "Add a Participant",
+      "ParticipantPlaceholder": "Participant",
+      "ParticipantsList": "Family members who have A-T"
+    },
+    "DateLabel": {
+      "YYYY": "YYYY",
+      "MM": "MM",
+      "DD": "DD"
+    },
+    "TooltipAlt": "Information",
+    "SignInOut": {
+      "SignIn": "Log In",
+      "SignOut": "Log Out"
+    },
+    "CountMeIn": "Sign me up!",
+    "Title": {
+      "Default": "Project Singular",
+      "Alert": "Your session will time-out soon"
+    },
+    "StartButton": "Start",
+    "ContinueButton": "Continue",
+    "SubmitButton": "Submit",
+    "NextButton": "Next",
+    "IUnderstandButton": "I Understand",
+    "CloseButton": "Close",
+    "PreviousButton": "Back",
+    "SavingButton": "Saving",
+    "EditButton": "Update",
+    "ReviewButton": "View",
+    "UploadButton": "Upload",
+    "UserActivities": {
+      "ActivityName": "Form",
+      "Summary": "Summary",
+      "ActivityStatus": "Status",
+      "ActivityDate": "Created",
+      "ActivityActions": "Actions",
+      "ActivityQuestionCount": "{{questionsAnswered}} / {{questionTotal}} questions"
+    },
+    "ValidateError": "Submission cannot proceed. Please review messages in form for details.",
+    "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
+    "SaveError": "We're sorry but an error occurred",
+    "DetailsPlaceholder": {
+      "PluralForm": "characters remaining",
+      "SingularForm": "character remaining"
+    },
+    "Validators": {
+      "DateNavyValidationRule": "Please check the date"
+    },
+    "MailAddress": {
+      "UseAsEntered": "We are unable to confirm that the address is valid. Please check this box to use the address as entered.",
+      "Fields": {
+        "Name": "Full Name",
+        "Country": "Country",
+        "Street1": "Street Address",
+        "Street2": "Apt/Floor #",
+        "State": {
+          "State": "State or Province",
+          "Province": "Province",
+          "State/Province/Region": "State/Province/Region"
+        },
+        "City": "City",
+        "Phone": "Telephone Contact Number",
+        "Zip": {
+          "Zip Code": "Zip Code or Postal Code",
+          "Postal Code": "Zip Code or Postal Code",
+          "Zip/Postal Code": "Zip Code or Postal Code"
+        },
+        "Choose": "Select {{field}}"
+      },
+      "Suggestion": {
+        "Title": "We have checked your address entry and have suggested changes that could help ensure delivery.",
+        "Subtitle": "Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
+        "Suggested": "Suggested:",
+        "AsEntered": "As Entered:"
+      },
+      "Error": {
+        "InvalidAddress": "Please check the address information you provided.",
+        "CannotVerify": "Could not verify address, please double-check your address.",
+        "UnknownVerifyError": "An unknown error occurred while verifying address.",
+        "FieldIsRequired": "{{field}} is required",
+        "FieldIsInvalid": "{{field}} has an invalid value",
+        "InvalidHouseNumber": "Street number could not be found",
+        "INTERNAL_SERVER_ERROR": "We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
+        "NOT_ACCEPTABLE": "The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
+        "NOT_FOUND": "The requested resource could not be found.",
+        "FORBIDDEN": "Unable to access the requested resource.",
+        "PAYMENT_REQUIRED": "Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
+        "UNAUTHORIZED": "Unable to access the requested resource, authorization failed.",
+        "BAD_REQUEST": "Malformed request. Please check the contents and retry.",
+        "PAYMENT_GATEWAY.ERROR": "The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
+        "MODE.UNAUTHORIZED": "This resource requires a production API Key to access.",
+        "MODE.CONFLICT": "API Key mode conflicted with parameter mode.",
+        "DATE.PARSE.FAILURE": "At least one date was formatted incorrectly and could not be parsed.",
+        "PARAMETER.FORBIDDEN": "The request could not be completed due to forbidden properties present in the parameters.",
+        "PARAMETER.REQUIRED": "Missing required parameter.",
+        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "The parameters passed contained an invalid character.",
+        "ADDRESS.PARAMETERS.INVALID": "The parameters passed to create an Address were missing or invalid.",
+        "ADDRESS.COUNTRY.INVALID": "Invalid 'country', please provide a 2 character ISO country code.",
+        "ADDRESS.VERIFICATION.NOT_FOUND": "Address Not Found.",
+        "ADDRESS.VERIFICATION.FAILURE": "The address was unable to be verified.",
+        "ADDRESS.VERIFY.UNAVAILABLE": "Address verification is not available. Please try again.",
+        "ADDRESS.VERIFICATION.INVALID": "One of the verifications selected is invalid.",
+        "ADDRESS.VERIFY.FAILURE": "Unable to verify address.",
+        "ADDRESS.VERIFY.CARRIER_INVALID": "Unable to verify address using provided carrier.",
+        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "Address verification is not available due to an upstream service not responding. Please try again.",
+        "ADDRESS.VERIFY.ONLY_US": "USPS can only validate US addresses.",
+        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "International Verification not enabled on this account. Please contact support@easypost.com.",
+        "ADDRESS.VERIFY.MISSING_STREET": "Insufficient address data provided. A street must be provided.",
+        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Insufficient address data provided. A city and state or a zip must be provided.",
+        "E.COUNTRY.UNSUPPORTED": "This country is not supported in this mode. Try in production mode.",
+        "E.ENGINE.UNAVAILABLE": "No verification engine is available to service this country. Please try again later.",
+        "E.QUERY.UNANSWERABLE": "We can not provide enough data in this country to satisfy this request. Please try again later.",
+        "E.ADDRESS.NOT_FOUND": "We could not find the entered address.",
+        "E.SECONDARY_INFORMATION.INVALID": "Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+        "E.SECONDARY_INFORMATION.MISSING": "Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+        "E.HOUSE_NUMBER.MISSING": "House number is missing.",
+        "E.HOUSE_NUMBER.INVALID": "We could not find the street number provided.",
+        "E.STREET.MISSING": "Street is missing.",
+        "E.STREET.INVALID": "Street is invalid.",
+        "E.BOX_NUMBER.MISSING": "Box number is missing.",
+        "E.BOX_NUMBER.INVALID": "Box number is invalid.",
+        "E.ADDRESS.INVALID": "Invalid city/state/ZIP.",
+        "E.ZIP.NOT_FOUND": "Zip not found.",
+        "E.ZIP.INVALID": "Zip invalid.",
+        "E.ZIP.PLUS4.NOT_FOUND": "Zip + 4 not found.",
+        "E.ADDRESS.MULTIPLE": "Multiple addresses were returned with the same zip.",
+        "E.ADDRESS.INSUFFICIENT": "Insufficient/incorrect address data.",
+        "E.ADDRESS.DUAL": "Dual address.",
+        "E.STREET.MAGNET": "Street address is ambiguous.",
+        "E.CITY_STATE.INVALID": "Unverifiable city / state.",
+        "E.STATE.INVALID": "Invalid State.",
+        "E.ADDRESS.DELIVERY.INVALID": "Invalid delivery address.",
+        "E.TIMED_OUT": "Exceeded max timeout.",
+        "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
+        "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+      },
+      "FormError": {
+        "name": {
+          "required": "Please enter full name",
+          "pattern": ""
+        },
+        "country": {
+          "required": "Please choose a country",
+          "pattern": ""
+        },
+        "street1": {
+          "required": "Please enter a street address",
+          "pattern": ""
+        },
+        "city": {
+          "required": "Please enter a city",
+          "pattern": ""
+        },
+        "state/province/region": {
+          "required": "Please choose a state, province or region",
+          "pattern": ""
+        },
+        "state or province": {
+          "required": "Please choose a state",
+          "pattern": ""
+        },
+        "province": {
+          "required": "Please choose a province",
+          "pattern": ""
+        },
+        "zip": {
+          "required": "Please enter a zip code or postal code",
+          "pattern": ""
+        },
+        "phone": {
+          "required": "Please enter a telephone number",
+          "pattern": ""
+        }
+      }
+    },
+    "FileUpload": {
+      "ConfirmReuploadTitle": "Are you sure you want \nto reupload the file?",
+      "ConfirmUndoUploadTitle": "Are you sure you want \nto remove uploaded file from server?",
+      "ConfirmCancelUploadTitle": "Are you sure you want \nto cancel upload?",
+      "ReuploadBtnText": "Reupload",
+      "UploadBtnText": "Upload",
+      "OkBtnText": "OK",
+      "CancelBtnText": "Cancel",
+      "MaxSize": "Max size: {{maxSize}}",
+      "AllowedFileTypes": "Allowed files: {{allowedFileTypes}}",
+      "ChooseFile": "Click and select \nor drag file to upload",
+      "Uploading": "Uploading {{filename}}",
+      "Size": "(size: {{size}})",
+      "MaxSizeErrorMessage": "Maximum file size exceeded",
+      "InvalidTypeErrorMessage": "Type of file selected is not valid",
+      "CancelUpload": "Cancel upload",
+      "RemoveUploadedFile": "Remove uploaded file"
+    }
+  },
+  "Error": {
+    "Title": "We've encountered an error",
+    "Paragraph1": "We're sorry, but an error has occurred.",
+    "Paragraph2": "Please wait a moment and retry. If the trouble persists, please email us at <a href=\"mailto:contact@projectsingular.org\">contact@projectsingular.org</a> or call us at <a href=\"tel:6507616486\">(650)761-6486</a>."
+  },
+  "Toolkit": {
+    "SessionExpired": {
+      "Text": {
+        "H1": "Session expired",
+        "Pt1": "You were away for a while, so we logged you out as a security precaution.",
+        "Pt2": "Please log in again to return to the last page you were on."
+      },
+     "LogInButton": "Log In"
+    },
+    "ActivityActions": {
+      "Continue": "Continue",
+      "Start": "Start",
+      "View": "View",
+      "Edit": "Edit"
+    },
+    "Dashboard": {
+      "Actions": "Actions",
+      "AddSelf": "Add self",
+      "EnrollmentStatus": "Enrollment Status",
+      "NoData": "---",
+      "NoParticipants": "No participants yet",
+      "Participant": "Participant",
+      "Text": "Every person who has been diagnosed with A-T can participate in our research initiative. Enroll here and share your medical and possibly genetic information so that researchers can better understand A-T.",
+      "Title": "Thank you for joining the Project Singular"
+    },
+    "Dialogs": {
+      "JoinMailingList": {
+        "CancelButton": "Cancel",
+        "Fields": {
+          "ConfirmEmail": {
+            "Error": "Please enter a valid email address",
+            "Placeholder": "Email confirmation *"
+          },
+          "Email": {
+            "Error": "Please enter a valid email address",
+            "Placeholder": "Email address *"
+          },
+          "FirstName": {
+            "Error": "First Name is required",
+            "Placeholder": "First Name *"
+          },
+          "LastName": {
+            "Error": "Last Name is required",
+            "Placeholder": "Last Name *"
+          }
+        },
+        "LoadingError": "We're sorry, but an error has occurred.",
+        "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
+        "Required": "",
+        "SubmitButton": "Join Mailing List",
+        "Text": "Provide us with an email address and we will keep you informed on the progress of the Global A-T Family Data Platform.",
+        "Title": "Sign up to stay informed"
+      },
+      "SessionWillExpire": {
+        "Continue": "Continue",
+        "SignOut": "Sign Out",
+        "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+        "Title": "Your session will time-out soon"
+      }
+    },
+    "ErrorCodes": {
+      "PASSWORD_RESET_LINK_EXPIRED": "Your password reset link has expired."
+    },
+    "ErrorPage": {
+      "DefaultText": {
+        "TextPt1": "Please contact the ",
+        "TextPt2": "if you continue to experience difficulties."
+      },
+      "Text": "",
+      "Title": "We're sorry, but an error occurred. Please try again later."
+    },
+    "Password": {
+      "InputPlaceholder": "Password",
+      "PasswordRequiredError": "Password is required",
+      "PasswordWrongError": "Incorrect password. Please try again.",
+      "Text": "Please enter your password *",
+      "Title": "Please enter the password"
+    },
+    "StayInformed": {
+      "Text": "Thanks for joining the Global A-T Family Data Platfom mailing list. We will keep you informed about this initiative by the email address you provided.",
+      "Title": "Stay informed"
+    }
+  },
+  "ProgressBar": {
+    "Titles": {
+      "Consent": "Consent Form",
+      "AboutMe": "About Me",
+      "AboutMyChild": "About My Child",
+      "MedicalReleaseForm": "Medical Release",
+      "MedicalRecordUpload": "Medical Record File Upload",
+      "PatientSurvey": "Patient Survey"
+    }
+  },
+  "Common": {
+    "Buttons": {
+      "Delete": "Delete",
+      "Cancel": "Cancel"
+    }
+  },
+  "Activity": {
+    "Actions": {
+      "Agree": "I agree",
+      "Disagree": "I am not ready to agree"
+    }
+  },
+  "About": {
+    "About": {
+      "Title": "About Us",
+      "PhotoCaption": "Judson, 5 years old, Double Inlet Left Ventricle.",
+      "P1": "Our singular goal is to improve the future of people with single ventricle heart disease by understanding its causes.",
+      "P2": "<b>Project Singular</b> is a research study by <a href=\"https://www.additionalventures.org/\" target=\"_blank\">Additional Ventures</a>, a nonprofit foundation that funds research on single ventricle heart defects.",
+      "P3": "We are committed to working with patients and their families in order to more deeply understand this disease, and we believe that their insights are critical to this study. Our patient and family community can contribute by sharing their personal medical journey and biomedical samples, and by working with us to design the study as it progresses.",
+      "P4": "We also work with researchers, patient organizations, doctors, nurses, and more to make sure the data collected can lead to discoveries.",
+      "P5": "<a href=\"https://www.additionalventures.org/\" target=\"_blank\">Additional Ventures</a> is working with the <a href=\"https://www.broadinstitute.org/\" target=\"_blank\">Broad Institute of MIT and Harvard</a>, <a href=\"https://www.childrenshospital.org/\" target=\"_blank\">Boston Children’s Hospital</a>, and <a href=\"https://www.genomemedical.com/\" target=\"_blank\">Genome Medical</a> to execute Project Singular."
+    },
+    "OurTeam": {
+      "Title": "Our Team",
+      "Team": [
+        {
+          "ImageUrl": "assets/images/Diane_circle_2x.png",
+          "Name": "Diane Pickles",
+          "About": "Program Director,<br/>Project Singular,<br/>Additional Ventures"
+        },
+        {
+          "ImageUrl": "assets/images/Keller_circle_2x.png",
+          "Name": "Kirstie Keller, PhD",
+          "About": "Principal Investigator,<br/>Project Singular<br/>Vice President of Programs,<br/>Additional Ventures"
+        }
+      ]
+    },
+    "Advisors": {
+      "Title": "Our Scientific Advisors",
+      "Advisors": [
+        {
+          "ImageUrl": "assets/images/Angela_circle_2x.png",
+          "Name": "Angela Lorts, MD",
+          "About": "Co-Founder and Co-Director of ACTION<br/>Professor, Pediatrics, University of Cincinnati College of Medicine"
+        },
+        {
+          "ImageUrl": "assets/images/Kurt_circle_2x.png",
+          "Name": "Kurt Schumacher, MD",
+          "About": "Medical Director, Pediatric Transplant Program, CS Mott Children's Hospital, University of Michigan<br/>Director, Data Coordinating Center, Pediatric Critical Care Consortium"
+        },
+        {
+          "ImageUrl": "assets/images/Benoit_circle_2x.png",
+          "Name": "Benoit Bruneau, PhD",
+          "About": "Director and Senior Investigator, <br/>Gladstone Institutes<br/>Professor, Department of Pediatrics, University of California San Francisco "
+        },
+        {
+          "ImageUrl": "assets/images/Sasha_circle_2x.png",
+          "Name": "Sasha Opotowsky, MD",
+          "About": "Director, Adult Congenital <br/>Heart Disease <br/>Program Professor, University of Cincinnati Department of Pediatrics<br/>Co-Director, Fontan Outcomes Network"
+        },
+        {
+          "ImageUrl": "assets/images/Jesse_circle_2x.png",
+          "Name": "Jesse Engreitz, PhD",
+          "About": "Assistant Professor, Department of Genetics and Children’s Heart Center Basic Science and Engineering (BASE) Initiative, Stanford University"
+        },
+        {
+          "ImageUrl": "assets/images/Rahul_circle_2x.png",
+          "Name": "Rahul Rathod, MD",
+          "About": "Director of Cardiology Operations and Strategy, Boston Children's Hospital <br/>Associate Professor at Harvard Medical School<br/>Director of FORCE Registry"
+        },
+        {
+          "ImageUrl": "assets/images/Kim_circle_2x.png",
+          "Name": "Kim McBride, MD",
+          "About": "Investigator, Center for Cardiovascular Research at Nationwide Children's Hospital; Chief, Division of Genetic and Genomic Medicine, and Associate Professor in the Department of Pediatrics at The Ohio State University College of Medicine"
+        },
+        {
+          "ImageUrl": "assets/images/Nadia_2x.png",
+          "Name": "Nadine Kasparian, PhD",
+          "About": "Director, Cincinnati Children’s Center for Heart Disease and Mental Health"
+        }
+      ]
+    }
+  }
+}

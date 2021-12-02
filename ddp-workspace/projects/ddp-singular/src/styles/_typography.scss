@@ -1,0 +1,72 @@
+@import 'variables';
+
+p {
+  font-family: 'Spartan-Regular', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 400;
+  line-height: 42px;
+}
+
+h1, h2 {
+  margin: 50px 0 20px 0;
+}
+
+h1.Title {
+  font-size: 2rem;
+}
+
+h2.Title {
+  margin-bottom: 15px;
+
+  font-size: 1.6rem;
+  color: $color-dark-grey;
+}
+
+h1.Title,
+h2.Title {
+  font-family: 'Lato', sans-serif;
+  font-weight: 900;
+}
+
+.semibold {
+  font-family: 'Spartan-Semibold', sans-serif !important;
+}
+
+.medium {
+  font-weight: 500;
+}
+
+.medium,
+.normal {
+  font-family: 'Spartan-Regular', sans-serif;
+}
+
+.light {
+  font-weight: 300;
+}
+
+.title {
+  font-weight: 900;
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+  color: $color-dark-grey;
+  font-family: Lato,sans-serif;
+}
+
+.learn-more {
+  p {
+    margin: 0 0 20px 10px;
+  }
+}
+
+b {
+  font-family: Spartan-Bold, serif;
+}

@@ -1,0 +1,14 @@
+.title {
+  margin: 0 0 16px 0;
+
+  font-size: 1.25rem;
+}
+
+.controls {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button + .button {
+  margin-left: 12px;
+}

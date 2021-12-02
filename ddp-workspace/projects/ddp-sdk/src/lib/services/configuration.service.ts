@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { LogLevel } from '../models/logLevel';
 import { QuestionType } from '../models/activity/questionType';
 import { UserProfileField } from '../models/userProfileFieldType';
+import { MailAddressFormErrorFormatter } from '../models/mailAddressFormErrorFormatter';
 
 @Injectable()
 export class ConfigurationService {
@@ -104,4 +105,9 @@ export class ConfigurationService {
      * List of user fields which will be displayed for editing in User Preferences component
      */
     userProfileFieldsForEditing: UserProfileField[] = [];
+    /**
+     * Can be used to customize which i18n key is used
+     * to display an error for each field in mailing address form.
+     */
+    mailAddressFormErrorFormatter: MailAddressFormErrorFormatter | null = null;
 }

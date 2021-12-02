@@ -1,0 +1,32 @@
+$__white: #ffffff;
+$__dark-blue: #011c48;
+$__light-blue: #A2F4E9;
+$__font: #011C48;
+$__highlighted-font: #521B93;
+$__light-font: $__white;
+$__purple: #521B93;
+
+$colors: (
+  'header-bg': $__dark-blue,
+  'header-bar-bg': $__purple,
+  'header-color': $__highlighted-font,
+  'header-color-dark': $__font,
+  'footer-bg': $__highlighted-font,
+  'footer-color-hightlight': $__highlighted-font,
+  'footer-color': $__light-font,
+  'footer-social-border': $__white,
+  'font-dark': $__font,
+  'font-light': $__white,
+  'list-item-hightlight-bg': $__highlighted-font,
+  'list-item-hightlight-color': $__white,
+  'faq-border': #ccc,
+  'progress_bar-active': $__purple,
+  'progress_bar-inactive-bg': #d8d8d8,
+  'progress_bar-inactive-color': #5a5656,
+  'progress_bar-active-color': $__purple,
+  'progress_bar-inactive-border': #a0a2a6,
+  'progress_bar-active-border': $__purple,
+  'progress_bar-inactive-label-color': #928d8d,
+  'progress_bar-active-number-color': $__white,
+  'progress_bar-active-passed-color': $__purple,
+);

@@ -1,0 +1,123 @@
+@import '../../../styles/breakpoints';
+@import '../../../styles/colors';
+@import '../../../styles/mixins';
+
+@include narrow-container;
+
+:host {
+  margin-top: auto;
+}
+
+.footer {
+  padding: 48px 0 60px;
+
+  background: map-get($colors, 'footer-bg');
+  color: map-get($colors, 'footer-color');
+
+  &-contacts {
+    font-size: 16px;
+    margin-top: 30px;
+  }
+
+  & .container {
+    display: flex;
+    justify-content: space-between;
+
+    @media (max-width: 1024px) {
+      display: block;
+      width: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+  & a:not(.button) {
+    color: map-get($colors, 'footer-color');
+  }
+
+  &-logo img {
+    width: 215px;
+  }
+
+  &-menu {
+    & a {
+      font-family: Spartan-Bold, sans-serif;
+    }
+    & .link-list {
+      margin-top: 0;
+    }
+  }
+
+  &-social {
+    margin: 40px 0;
+    display: flex;
+    &-item {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+      position: relative;
+      border-radius: 100px;
+      border: 2px solid map-get($colors, 'footer-social-border');
+      & img {
+        filter: invert(1);
+        position: absolute;
+        top: 13px;
+        left: 13px;
+      }
+      &.instagram img {
+        top: 13px;
+        width: 21px;
+      }
+      &.twitter img {
+        top: 12px;
+        left: 11px;
+      }
+      &.facebook img {
+        top: 8px;
+        left: 6px;
+      }
+    }
+  }
+
+  &-copyright {
+    font-size: 16px;
+    opacity: .7;
+    @include media-md {
+      margin-bottom: 30px;
+    }
+  }
+
+  .link-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+
+    padding: 0;
+
+    @include media-md {
+      flex-direction: column;
+      align-items: unset;
+      padding-left: 0;
+    }
+
+    &__item {
+      font-size: 16px;
+
+      &:not(:last-of-type) {
+        margin-right: 20px;
+
+        @include media-md {
+          margin-bottom: 14px;
+        }
+      }
+
+      .link {
+        color: #ffffff !important;
+      }
+    }
+  }
+}
+
+.button {
+  width: 112px;
+}

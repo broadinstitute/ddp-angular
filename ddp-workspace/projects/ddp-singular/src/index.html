@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Singular</title>
+    <base href="/" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block" rel="stylesheet" />
+    <script src="assets/config/pepperConfig.js"></script>
+  </head>
+
+  <body onload="loadTcell(); loadGA()">
+    <app-root></app-root>
+
+    <script type="text/javascript">
+      function loadTcell() {
+        var tcellScript = document.createElement('script');
+        tcellScript.setAttribute('src', 'https://us.jsagent.tcell.insight.rapid7.com/tcellagent.min.js');
+        tcellScript.setAttribute('tcellbaseurl', DDP_ENV.tcellbaseurl);
+        tcellScript.setAttribute('tcellappid', DDP_ENV.tcellappid);
+        tcellScript.setAttribute('tcellapikey', DDP_ENV.tcellapikey);
+        tcellScript.async = true;
+        document.body.appendChild(tcellScript);
+      }
+
+      function loadGA() {
+        var gaScript = document.createElement('script');
+
+        gaScript.setAttribute('src', 'https://www.googletagmanager.com/gtag/js?id=' + DDP_ENV.analyticsToken);
+        gaScript.async = true;
+
+        document.body.appendChild(gaScript);
+      }
+    </script>
+
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      gtag('js', new Date());
+      gtag('config', DDP_ENV.analyticsToken);
+    </script>
+  </body>
+</html>

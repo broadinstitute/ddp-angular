@@ -1,0 +1,111 @@
+@import '../../../../styles/colors';
+@import '../../../../styles/mixins';
+@import '../../../../styles/breakpoints';
+
+:host {
+  color: $__font;
+
+  h1, h2 {
+    font-family: Spartan-Bold, serif;
+    line-height: 57px;
+  }
+
+  @include narrow-container;
+}
+
+.uncovering {
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    @include media-sm {
+      flex-direction: column-reverse;
+    }
+    .left {
+      width: 47%;
+      @include media-sm {
+        width: unset;
+      }
+    }
+    .right {
+      width: 52%;
+      @include media-sm {
+        width: unset;
+        display: none;
+      }
+    }
+    img {
+      width: 100%;
+    }
+    p {
+      margin-bottom: 30px;
+    }
+    ul {
+      padding-left: 20px;
+      margin-bottom: 30px;
+      li {
+        list-style: disc;
+      }
+    }
+  }
+}
+
+.accessing {
+  margin-top: 100px;
+  padding: 50px 0 80px;
+  background: rgba(162, 244, 233, 0.5);
+  @include media-sm {
+    margin-top: 20px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  &-steps {
+    display: flex;
+    justify-content: space-between;
+    @include media-sm {
+      flex-direction: column;
+    }
+    &-step {
+      width: 31%;
+      padding: 30px;
+      text-align: center;
+      background: $__white;
+      border-radius: 8px;
+      @include media-sm {
+        width: unset;
+        margin-bottom: 20px;
+      }
+      &-img {
+        height: 100px;
+        margin: 30px 0;
+      }
+      &-title {
+        font-size: 24px;
+        font-family: Spartan-Bold, serif;
+        color: $__highlighted-font;
+      }
+      &-text {
+
+      }
+    }
+  }
+  &-FAQ {
+    max-width: 974px;
+    margin: 60px auto 0;
+
+    text-align: center;
+
+    @include media-sm {
+      margin: 15px 0;
+    }
+    &-text {
+      margin-bottom: 54px;
+
+      font-size: 24px;
+      line-height: 34px;
+    }
+  }
+}
+
+.button--apply {
+  width: 260px;
+}

@@ -1,0 +1,66 @@
+@import '../../../styles/breakpoints';
+
+
+.dashboard-table {
+  width: 100%;
+}
+
+.mat-cell, .mat-header-cell {
+  padding: 20px;
+
+  font-size: 0.8rem;
+}
+
+@include media-sm {
+  .dashboard-table {
+    display: flex;
+    flex-direction: column;
+    max-height: 500px;
+    min-width: 300px;
+  }
+
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+
+  .mobile-label {
+    display: none;
+  }
+
+  .mat-cell, .mat-header-cell {
+    padding: 20px;
+    min-width: 160px;
+  }
+
+  .mobile-label {
+    width: 80px;
+    display: inline-block;
+    font-weight: bold;
+  }
+
+  .mat-header-row {
+    display: none;
+  }
+
+  .mat-row, .mat-header-row {
+    flex-direction: column;
+    align-items: start;
+    padding: 8px 24px;
+  }
+}
+
+.actions-wrapper {
+  display: flex;
+  & button:not(:last-child) {
+    margin-right: 5px;
+  }
+}
+
+.mat-row {
+  &:last-of-type {
+    .mat-cell {
+      border: none;
+    }
+  }
+}

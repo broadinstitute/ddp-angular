@@ -12,9 +12,9 @@ references:
       - *npm_cache_key
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-    "basil osteo brain angio mbc testboston mpc prion atcp rarex rgp esc cgc circadia pancan brugada"
+    "basil osteo brain angio mbc testboston mpc prion atcp rarex rgp esc cgc circadia pancan singular brugada"
   study_guids: &study_guids
-    "basil CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc circadia cmi-pancan brugada"
+    "basil CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc circadia cmi-pancan singular brugada"
 
 # Container for all the builds
 executors:
@@ -507,6 +507,8 @@ jobs:
       - conditionally-launch-build-and-store:
           study_key: pancan
       - conditionally-launch-build-and-store:
+          study_key: singular
+      - conditionally-launch-build-and-store:
           study_key: brugada
 
   app-build-and-store-job:
@@ -674,6 +676,9 @@ workflows:
           study_key: pancan
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
+          study_key: singular
+      - deploy-stored-build-job:
+          <<: *deploy_branch_filters
           study_key: brugada
 
   nightly:
@@ -730,6 +735,9 @@ workflows:
       - build-and-deploy-job:
           name: pancan-nightly
           study_key: pancan
+      - build-and-deploy-job:
+          name: singular-nightly
+          study_key: singular
       - build-and-deploy-job:
           name: brugada-nightly
           study_key: brugada
