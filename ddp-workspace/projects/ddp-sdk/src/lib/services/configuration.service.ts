@@ -105,7 +105,7 @@ export class ConfigurationService {
      * List of user fields which will be displayed for editing in User Preferences component
      */
     userProfileFieldsForEditing: UserProfileField[] = [];
-	/**
+    /**
      * Can be used to customize which i18n key is used
      * to display an error for each field in mailing address form.
      */
