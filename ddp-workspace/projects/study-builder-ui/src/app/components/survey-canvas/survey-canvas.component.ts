@@ -11,12 +11,12 @@ export class SurveyCanvasComponent implements OnChanges {
   activitySubject = new BehaviorSubject<ActivityDef | null>(null);
   @Input()
   set activity(newActivity: ActivityDef) {
-    console.log("updating activitydef from input");
+    console.log('updating activitydef from input');
     this.activitySubject.next(newActivity);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this + " got a new activity def!!");
+    console.log(this + ' got a new activity def!!');
   }
 
 }

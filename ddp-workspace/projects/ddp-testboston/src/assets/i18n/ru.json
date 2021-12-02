@@ -469,8 +469,7 @@
             "ManageParticipants": "Доступ к информации об участниках"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "Предпочтения пользователя",
-            "UserPreferencesGender": "Пол"
+            "UserPreferencesTitle": "Предпочтения пользователя"
         },
         "Dashboard": {
             "Title": "Моя контрольная панель",

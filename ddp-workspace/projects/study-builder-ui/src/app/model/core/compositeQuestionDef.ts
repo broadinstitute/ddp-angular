@@ -1,7 +1,7 @@
 import { AbstractQuestionDef } from './abstractQuestionDef';
 import { Template } from './template';
 import { QuestionDef } from './questionDef';
-import { OrientationType} from './orientationType';
+import { OrientationType } from './orientationType';
 
 export interface CompositeQuestionDef extends AbstractQuestionDef {
   children: Array<QuestionDef>;

@@ -10,7 +10,8 @@ import {
     AnalyticsEventsService,
     AnalyticsEvent,
     LoggingService,
-    LanguageService
+    LanguageService,
+    UserProfileField
 } from 'ddp-sdk';
 
 import {
@@ -41,6 +42,7 @@ toolkitConfig.adminDashboardUrl = AppRoutes.Prism;
 toolkitConfig.dashboardUrl = AppRoutes.Dashboard;
 toolkitConfig.activityUrl = AppRoutes.Activity;
 toolkitConfig.errorUrl = AppRoutes.Error;
+toolkitConfig.allowEditUserProfile = true;
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
@@ -63,13 +65,14 @@ sdkConfig.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
 sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 sdkConfig.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl;
-sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
+sdkConfig.doCloudLogging = DDP_ENV.doCloudLogging;
 sdkConfig.dashboardShowQuestionCount = true;
 sdkConfig.dashboardShowQuestionCountExceptions = ['CONSENT'];
 sdkConfig.prismColumns = ['guid', 'shortId', 'userName', 'email', 'enrollmentStatus', 'dashboardLink'];
 sdkConfig.prismDashboardRoute = AppRoutes.Dashboard;
 sdkConfig.prismRoute = AppRoutes.Prism;
 sdkConfig.lookupPageUrl = AppRoutes.Prism;
+sdkConfig.userProfileFieldsForEditing = [UserProfileField.DATE_OF_BIRTH, UserProfileField.NAME];
 
 export function translateFactory(translate: TranslateService,
     injector: Injector,

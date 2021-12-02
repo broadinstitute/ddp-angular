@@ -626,7 +626,8 @@
             "ActivityActions": "Acciones"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "Preferencias del Usuario"
+            "UserPreferencesTitle": "Preferencias del Usuario",
+            "MailingAddress": "[ES] Mailing Address"
         },
         "DatePicker": {
             "Day": "Escoja el día...",

@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.validations {
+  display: flex;
+  flex-direction: column;
+}
+
+.options-editor {
+    margin-top: 15px;
+}
+
+.mat-form-field {
+    width: 400px;
+}
+
+.form-label {
+    margin-bottom: 15px;
+    display: block;
+}

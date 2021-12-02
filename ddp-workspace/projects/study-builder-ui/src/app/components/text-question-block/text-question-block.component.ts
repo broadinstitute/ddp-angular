@@ -36,6 +36,8 @@ export class TextQuestionBlockComponent implements OnInit {
         newClientBlock.inputType = questionDef.inputType;
         newClientBlock.isRequired = questionDef.validations.some(val => val.ruleType === 'REQUIRED');
         newClientBlock.stableId = questionDef.stableId;
+        newClientBlock.placeholder = new SimpleTemplate(questionDef.placeholderTemplate)
+            .getTranslationText(this.config.defaultLanguageCode);
         newClientBlock.question = new SimpleTemplate(questionDef.promptTemplate).getTranslationText(this.config.defaultLanguageCode);
         return newClientBlock;
     }

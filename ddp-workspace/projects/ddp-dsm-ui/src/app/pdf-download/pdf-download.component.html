@@ -1,0 +1,84 @@
+<h1> PDF Download </h1>
+
+<div *ngIf="errorMessage != null">
+  <h3 class="Color--warn Line--Break">{{errorMessage}}</h3>
+  <br/>
+</div>
+<div *ngIf="additionalMessage != null">
+  <h3 class="Color--primary Line--Break">{{additionalMessage}}</h3>
+  <br/>
+</div>
+
+<div *ngIf="additionalMessage == null">
+  <span [hidden]="!loading" class="Width--100">
+    <div align="center" class="Width--100 Height--100">
+      <i class="fas fa-spinner fa-spin fa-5x Color--primary"></i>
+    </div>
+  </span>
+
+  <div *ngIf="allowedToSeeInformation">
+    <br/>
+    <div *ngIf="realm != null" class="Width--60">
+      <ng-container *ngIf="hasParticipantSpecificPDFs">
+        <p>If your participant is a migrated one and has a altPID please use that ID for the PDF download, otherwise use the GUID</p>
+
+        <mat-form-field>
+          <input maxlength="200" style="width: 10cm" matInput type="text" placeholder="Participant ID"
+                 [(ngModel)]="participantId">
+        </mat-form-field>
+        <button mat-raised-button type="button" color="primary"
+                (click)="getParticipantsPDFs()"
+                [disabled]="participantId == null || loading">Get List of PDFs for Participant
+        </button>
+
+        <div *ngIf="participantPDFs != null && participantPDFs.length != 0">
+          <mat-select placeholder="Select PDF" class="Input--Abstraction" [(ngModel)]="selectedPDF">
+            <mat-option *ngFor="let e of participantPDFs" [value]="e.configName">
+              {{e.displayName}}
+            </mat-option>
+          </mat-select>
+          <br/>
+          <br/>
+          <button mat-raised-button color="primary"
+                  [disabled]="selectedPDF == null || selectedPDF === ''"
+                  (click)="downloadPDF(selectedPDF)">Download selected PDF
+          </button>
+        </div>
+
+      </ng-container>
+
+
+      <ng-container *ngIf="!hasParticipantSpecificPDFs">
+        <p>Select a pdf type and enter the participant participant ID to download the pdf</p>
+        <p>If your participant is a migrated one and has a altPID please use that ID for the PDF download, otherwise use the GUID</p>
+
+        <div *ngIf="possiblePDFs.length === 0">
+          <h4>There are no PDFs setup for that realm </h4>
+        </div>
+
+        <div *ngIf="possiblePDFs.length > 0">
+          <mat-select placeholder="PDF" class="Input--Bigger-WIDTH"
+                     [(ngModel)]="selectedPDF">
+            <mat-option *ngFor="let pdf of possiblePDFs"
+                       [value]="pdf">
+              {{ pdf | titlecase }}
+            </mat-option>
+          </mat-select>
+        </div>
+
+        <div *ngIf="realm != null && selectedPDF != null" class="Width--80">
+          <br/>
+          <mat-form-field>
+            <input maxlength="200" style="width: 10cm" matInput type="text" placeholder="Participant ID"
+                   [(ngModel)]="participantId">
+          </mat-form-field>
+          <button mat-raised-button type="button" color="primary"
+                  (click)="downloadPDF(selectedPDF)"
+                  [disabled]="participantId == null || loading">Download PDF
+          </button>
+        </div>
+      </ng-container>
+      <br/>
+    </div>
+  </div>
+</div>

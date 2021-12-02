@@ -1,12 +1,24 @@
 .container {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
+
 .radio-group {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
 }
+
 .validations {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+}
+
+.mat-form-field {
+    width: 400px;
+}
+
+.form-label {
+    margin-bottom: 15px;
+    display: block;
 }

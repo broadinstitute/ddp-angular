@@ -2,8 +2,8 @@ import { Injectable, Inject } from '@angular/core';
 import { ConfigurationService } from './configuration.service';
 import { LogLevel } from '../models/logLevel';
 import { StackdriverErrorReporterService } from './stackdriverErrorReporter.service';
-import { catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SessionMementoService } from './sessionMemento.service';
 
@@ -44,9 +44,9 @@ export class LoggingService {
         return Object.keys(obj).map(key => `${key}: ${obj[key]}`).join(', ');
     }
 
-    public logToCloud(payload: string, labels?: {[key: string]: string}, severity = 'INFO'): void {
-        if (!this.config.doCloudLogging) {
-            return;
+    public logToCloud(payload: string, labels?: {[key: string]: string}, severity = 'INFO'): Observable<void> {
+        if (!this.config.doCloudLogging || !this.config.cloudLoggingUrl) {
+            return of(void 0);
         }
         const session =  this.session.session;
         const url = this.config.cloudLoggingUrl;
@@ -58,14 +58,15 @@ export class LoggingService {
             httpRequest: { requestUrl: location.href, userAgent: navigator.userAgent }
         };
 
-        this.http.post(
+        return this.http.post(
             url,
             body,
             { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).pipe(
             catchError((error: any) => {
                 this.logError(this.LOG_SOURCE, `HTTP POST: ${url}. Error:`, error);
                 return of(null);
-            })
-        ).subscribe();
+            }),
+            map(() => void 0)
+        );
     }
 }
