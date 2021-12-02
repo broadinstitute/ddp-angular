@@ -1,0 +1,33 @@
+<ng-container *ngIf="section$ | async as section">
+    <ng-container *ngIf="section.blocks.length > 0; then hasBlocks else noBlocks">
+    </ng-container>
+
+    <ng-template #hasBlocks>
+        <div cdkDropList (cdkDropListDropped)="blockDrop($event, section.blocksSubjects)">
+            <ng-container *ngFor="let block$ of section.blocksSubjects; index as i">
+                <div class="section-block"
+                     *ngIf="block$ | async as block"
+                     [ngClass]="{'selection-highlight': block === (selectedBlock$ | async)}"
+                     (click)="blockSelected(block)"
+                     cdkDrag
+                     cdkDragLockAxis="y">
+                    <div class="drag-indicator" cdkDragHandle>
+                        <mat-icon>drag_indicator</mat-icon>
+                    </div>
+                    <app-static-content-block  *ngIf="block.blockType === 'CONTENT'" [definitionBlock$]="block$"></app-static-content-block>
+                    <app-text-question-block *ngIf="block.blockType === 'QUESTION' && block.question.questionType === 'TEXT'"
+                                             [definitionBlock$]="block$"></app-text-question-block>
+                    <app-picklist-question-block *ngIf="block.blockType === 'QUESTION' && block.question.questionType === 'PICKLIST'"
+                                                 [definitionBlock$]="block$"></app-picklist-question-block>
+                </div>
+            </ng-container>
+        </div>
+    </ng-template>
+
+    <ng-template #noBlocks>
+        <div class="no-blocks">
+            <div class="mid"><strong>No blocks are created yet</strong></div>
+        </div>
+    </ng-template>
+</ng-container>
+

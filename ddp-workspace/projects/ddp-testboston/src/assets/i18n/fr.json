@@ -469,8 +469,7 @@
             "ManageParticipants": "Gérer les participants"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "Préférences utilisateur",
-            "UserPreferencesGender": "Sexe"
+            "UserPreferencesTitle": "Préférences utilisateur"
         },
         "Dashboard": {
             "Title": "Mon tableau de bord",
@@ -613,7 +612,8 @@
                 "E.TIMED_OUT": "Délai d’attente maximal dépassé.",
                 "E.TIME_ZONE.UNAVAILABLE": "Le service de fuseau horaire n’est pas disponible actuellement.",
                 "E.PO_BOX.INTERNATIONAL": "Impossible de vérifier la boîte postale internationale. Veuillez noter qu’une erreur peut apparaître pour une requête réussie."
-            }
+            },
+            "UseAsEntered": "[FR] We are unable to confirm that the address is valid. Please check this box to use the address as entered."
         },
         "TooltipAlt": "Informations",
         "SubjectPanel": {

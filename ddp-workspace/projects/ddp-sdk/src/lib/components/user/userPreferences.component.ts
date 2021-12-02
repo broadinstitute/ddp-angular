@@ -1,6 +1,5 @@
-import { Component, ElementRef, Inject, NgZone, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, NgZone, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { CompositeDisposable } from '../../compositeDisposable';
 import { UserProfileServiceAgent } from '../../services/serviceAgents/userProfileServiceAgent.service';
 import { DateService } from '../../services/dateService.service';
 import { UserProfileDecorator } from '../../models/userProfileDecorator';
@@ -8,67 +7,78 @@ import { finalize, take, takeUntil } from 'rxjs/operators';
 import { ConfigurationService } from '../../services/configuration.service';
 import { MailAddressBlock } from '../../models/activity/MailAddressBlock';
 import { Address } from '../../models/address';
+import { UserProfileField } from '../../models/userProfileFieldType';
 import { SubmitAnnouncementService } from '../../services/submitAnnouncement.service';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, forkJoin, of, Subject } from 'rxjs';
+import { DateRenderMode } from '../../models/activity/dateRenderMode';
+import { DatePickerValue } from '../../models/datePickerValue';
+import { FormBuilder, FormControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
     selector: 'ddp-user-preferences',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
-        <h2 mat-dialog-title translate>{{'SDK.UserPreferences.UserPreferencesTitle' | translate}}: {{data.userName}}</h2>
+        <h2 mat-dialog-title translate>{{'SDK.UserPreferences.UserPreferencesTitle' | translate}}{{data.userName ? ': ' + data.userName : ''}}</h2>
         <ddp-loading [loaded]="loaded"></ddp-loading>
         <mat-dialog-content>
-            <ng-container *ngIf="showProfileFields">
-                <mat-form-field class="field-row" data-ddp-test="birthday::month">
-                    <mat-select placeholder="Month" [(value)]="monthOfBirth">
-                        <mat-option *ngFor="let month of months" [value]="month">
-                            {{ month }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field class="field-row" data-ddp-test="birthday::day">
-                    <mat-select placeholder="Date" [(value)]="dayOfBirth">
-                        <mat-option *ngFor="let day of days" [value]="day">
-                            {{ day }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field class="field-row" data-ddp-test="birthday::year">
-                    <mat-select placeholder="Year" [(value)]="yearOfBirth" >
-                        <mat-option *ngFor="let year of years" [value]="year">
-                            {{ year }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <div class="row">
-                    <mat-form-field data-ddp-test="gender">
-                        <mat-select placeholder="{{'SDK.UserPreferences.UserPreferencesGender' | translate}}"
-                                    [(value)]="sex"
-                                    [disabled]="!loaded">
-                            <mat-option value="MALE" data-ddp-test="sex::Male">Male</mat-option>
-                            <mat-option value="FEMALE" data-ddp-test="sex::Female">Female</mat-option>
-                            <mat-option value="INTERSEX" data-ddp-test="sex::Intersex">Intersex</mat-option>
-                            <mat-option value="PREFER_NOT_TO_ANSWER" data-ddp-test="sex::Other">Prefer not to answer</mat-option>
-                        </mat-select>
-                    </mat-form-field>
+            <ng-container *ngIf="userProfileFieldsForEditing.size" [formGroup]="profileForm">
+                <div *ngIf="userProfileFieldsForEditing.has(UserProfileField.NAME)"
+                     class="ddp-user-preferences-subgroup ddp-user-preferences-username">
+                    <h3 class="ddp-user-preferences-subgroup-title">{{'SDK.UserPreferences.UserName' | translate}}</h3>
+                    <div class="ddp-user-preferences-username-container">
+                        <mat-form-field class="ddp-user-preferences-first-name">
+                            <input matInput
+                                   type="text"
+                                   formControlName="firstName"
+                                   [placeholder]="'SDK.UserPreferences.FirstUserName' | translate"/>
+                            <mat-error *ngIf="firstName.invalid">{{'SDK.UserPreferences.FirstNameFieldIsRequired' | translate}}</mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="ddp-user-preferences-last-name">
+                            <input matInput
+                                   type="text"
+                                   formControlName="lastName"
+                                   [placeholder]="'SDK.UserPreferences.LastUserName' | translate"
+                            />
+                            <mat-error *ngIf="lastName.invalid">{{'SDK.UserPreferences.LastNameFieldIsRequired' | translate}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div *ngIf="userProfileFieldsForEditing.has(UserProfileField.DATE_OF_BIRTH)"
+                     class="ddp-user-preferences-subgroup ddp-user-preferences-birthday">
+                    <h3 class="ddp-user-preferences-subgroup-title">{{'SDK.UserPreferences.DateOfBirth' | translate}}</h3>
+                    <ddp-date [readonly]="!loaded"
+                              [renderMode]="DateRenderMode.Picklist"
+                              [startYear]="startYear"
+                              [endYear]="endYear"
+                              [dateValue]="birthDate.value"
+                              (valueChanged)="birthDateValueChanged($event)">
+                    </ddp-date>
+                    <ddp-validation-message *ngIf="birthDate.dirty && birthDate.hasError('invalidDate')"
+                                            [message]="'SDK.Validators.DateNavyValidationRule' | translate">
+                    </ddp-validation-message>
+                    <ddp-validation-message *ngIf="birthDate.hasError('futureDate')"
+                                            [message]="'SDK.UserPreferences.FutureBirthDateValidationError' | translate">
+                    </ddp-validation-message>
                 </div>
             </ng-container>
-            <h3 class="form-subgroup-title">User Mailing Address</h3>
-            <ddp-address-embedded [block]="addressFormBlock"
-                                  [country]="config.supportedCountry"
-                                  [readonly]="addressReadonly"
-                                  (validStatusChanged)="isAddressValid = $event"
-                                  (valueChanged)="addressSubmitFinalized$.next($event)"
-                                  (componentBusy)="isAddressComponentBusy$.next($event)"
-                                  (errorOrSuggestionWasShown)="scrollToTheBottom()">
-            </ddp-address-embedded>
+            <div class="ddp-user-preferences-subgroup">
+                <h3 class="ddp-user-preferences-subgroup-title">{{'SDK.UserPreferences.MailingAddress' | translate}}</h3>
+                <ddp-address-embedded [block]="addressFormBlock"
+                                      [country]="supportedCountry"
+                                      [readonly]="addressReadonly"
+                                      (validStatusChanged)="isAddressValid = $event"
+                                      (valueChanged)="addressSubmitFinalized$.next($event)"
+                                      (componentBusy)="isAddressComponentBusy$.next($event)"
+                                      (dirtyStatusChanged)="addressDirty = $event"
+                                      (errorOrSuggestionWasShown)="scrollToTheBottom()">
+                </ddp-address-embedded>
+            </div>
         </mat-dialog-content>
-        <ddp-validation-message *ngIf="!isDateValid" message="invalid date">
-        </ddp-validation-message>
         <mat-dialog-actions>
             <button mat-flat-button
                     color="primary"
                     class="button button_medium save-button"
-                    [disabled]="!loaded || !isAddressValid"
+                    [disabled]="!this.canSaveUserPreferences()"
                     (click)="save()"
                     data-ddp-test="okButton">
                 {{'SDK.SaveButton' | translate}}
@@ -83,7 +93,6 @@ import { BehaviorSubject, Subject } from 'rxjs';
     `,
     styles: [`
         .field-row {
-            float: left;
             width: 30%;
             padding-right: 5px;
         }
@@ -105,33 +114,37 @@ import { BehaviorSubject, Subject } from 'rxjs';
     providers: [SubmitAnnouncementService]
 })
 export class UserPreferencesComponent implements OnDestroy {
-    public sex: string | null;
-    public dayOfBirth: number | null;
-    public monthOfBirth: number | null;
-    public yearOfBirth: number | null;
-    public days: Array<number> = [
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-        11, 12, 13, 14, 15, 16, 17, 18,
-        19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
-    ];
-    public months: Array<number> = [
-        1, 2, 3, 4, 5, 6,
-        7, 8, 9, 10, 11, 12
-    ];
-    public years: Array<number> = [];
-    public loaded = false;
-    private showError = false;
-    private anchor: CompositeDisposable;
-    private model: UserProfileDecorator | null;
+    public profileForm = this.formBuilder.group({
+        birthDate: ['', this.getBirthDateValidator()],
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+    });
+    private readonly YEARS_BACK = 100;
+    public readonly endYear: number;
+    public readonly startYear: number;
+    public loaded = true;
+    private userProfileModel: UserProfileDecorator | null;
     private ngUnsubscribe = new Subject();
     public readonly addressFormBlock: MailAddressBlock = new MailAddressBlock(null);
     public isAddressValid = true;
     public isAddressComponentBusy$ = new BehaviorSubject(false);
     public addressSubmitFinalized$ = new Subject<Address | null>();
     public addressReadonly = false;
-    // todo display fields after address editing will be delivered
-    public showProfileFields = false;
+    public addressDirty = false;
+    public readonly supportedCountry: string | null;
+    public readonly userProfileFieldsForEditing: Set<UserProfileField>;
+    public readonly UserProfileField = UserProfileField;
+    public readonly DateRenderMode = DateRenderMode;
     public readonly userName: string;
+    public get birthDate(): FormControl {
+        return this.profileForm.get('birthDate') as FormControl;
+    }
+    public get firstName(): FormControl {
+        return this.profileForm.get('firstName') as FormControl;
+    }
+    public get lastName(): FormControl {
+        return this.profileForm.get('lastName') as FormControl;
+    }
 
     constructor(
         private serviceAgent: UserProfileServiceAgent,
@@ -140,27 +153,32 @@ export class UserPreferencesComponent implements OnDestroy {
         private submitAnnouncementService: SubmitAnnouncementService,
         private element: ElementRef,
         private ngZone: NgZone,
-        @Inject('ddp.config') public config: ConfigurationService,
+        private formBuilder: FormBuilder,
+        @Inject('ddp.config') config: ConfigurationService,
         @Inject(MAT_DIALOG_DATA) public data: { userName: string }
         ) {
         this.userName = data.userName;
-        this.anchor = new CompositeDisposable();
+        this.supportedCountry = config.supportedCountry;
+        this.userProfileFieldsForEditing = new Set(config.userProfileFieldsForEditing);
 
-        for (let i = 0; i < 50; i++) {
-            // todo: fix year selection
-            this.years.push(2005 - i);
-        }
-        if (this.showProfileFields) {
+        this.endYear = new Date().getFullYear();
+        this.startYear = this.endYear - this.YEARS_BACK;
+
+        if (this.userProfileFieldsForEditing.size) {
+            this.loaded = false;
             serviceAgent.profile.pipe(
                 finalize(() => this.loaded = true),
                 takeUntil(this.ngUnsubscribe)
             ).subscribe(x => {
-                this.model = x;
+                this.userProfileModel = x;
                 if (x && x.profile) {
-                    this.sex = x.profile.sex;
-                    this.yearOfBirth = x.profile.birthYear;
-                    this.monthOfBirth = x.profile.birthMonth;
-                    this.dayOfBirth = x.profile.birthDayInMonth;
+                    this.birthDate.setValue({
+                        year: x.profile.birthYear,
+                        month: x.profile.birthMonth,
+                        day: x.profile.birthDayInMonth,
+                    });
+                    this.firstName.setValue(x.profile.firstName);
+                    this.lastName.setValue(x.profile.lastName);
                 }
             });
         }
@@ -170,14 +188,6 @@ export class UserPreferencesComponent implements OnDestroy {
             .subscribe((isBusy) => {
                 this.loaded = !isBusy;
             });
-        this.addressSubmitFinalized$
-            .pipe(takeUntil(this.ngUnsubscribe))
-            .subscribe((result) => {
-                this.addressReadonly = false;
-                if (result) {
-                    this.dialogRef.close();
-                }
-            });
     }
 
     public ngOnDestroy(): void {
@@ -185,47 +195,60 @@ export class UserPreferencesComponent implements OnDestroy {
         this.ngUnsubscribe.complete();
     }
 
-    public isDateReadyForSave(isFirstInput: boolean): boolean {
-        if (!this.yearOfBirth && !this.monthOfBirth && !this.dayOfBirth) {
-            return true;
-        }
-        if (!this.yearOfBirth || !this.monthOfBirth || !this.dayOfBirth) {
-            return !isFirstInput;
-        }
-        return this.dateService.checkExistingDate(this.yearOfBirth, this.monthOfBirth, this.dayOfBirth);
+    private getBirthDateValidator(): ValidatorFn {
+        return (control: FormControl): ValidationErrors | null => {
+            const value: DatePickerValue = control.value;
+            if (!value.year || !value.month || !value.day) {
+                return { invalidDate: true };
+            }
+            if (!this.dateService.checkExistingDate(value.year, value.month, value.day)) {
+                return { invalidDate: true };
+            }
+
+            const valueDate = new Date(value.year, value.month - 1, value.day);
+            const currentDate = new Date();
+            return valueDate.getTime() <= currentDate.getTime() ? null : { futureDate: true };
+        };
     }
 
-    public get isDateValid(): boolean {
-        return this.isDateReadyForSave(this.showError);
+    public canSaveUserPreferences(): boolean {
+        return this.loaded && this.isAddressValid
+            && (this.profileForm.valid
+                // let's allow to save preferences if user didn't touch empty profile fields since s/he can fill it later at action forms
+                || Object.values(this.profileForm.controls).filter(control => control.invalid).every(control => control.pristine));
     }
 
     public save(): void {
-        if (!this.isDateReadyForSave(true)) {
-            this.showError = true;
-            return;
+        const shouldProfileBeUpdated = this.profileForm.dirty;
+        if (shouldProfileBeUpdated) {
+            this.userProfileModel.profile.birthYear = this.birthDate.value.year;
+            this.userProfileModel.profile.birthMonth = this.birthDate.value.month;
+            this.userProfileModel.profile.birthDayInMonth = this.birthDate.value.day;
+            this.userProfileModel.profile.firstName = this.firstName.value;
+            this.userProfileModel.profile.lastName = this.lastName.value;
         }
-
-        if (this.model) {
-            if (this.yearOfBirth && this.monthOfBirth && this.dayOfBirth) {
-                this.model.profile.birthYear = this.yearOfBirth;
-                this.model.profile.birthMonth = this.monthOfBirth;
-                this.model.profile.birthDayInMonth = this.dayOfBirth;
-            }
-            this.model.profile.sex = this.sex;
-
-            this.loaded = false;
-            const profile = this.serviceAgent
-                .saveProfile(this.model.newProfile, this.model.profile)
-                .pipe(finalize(() => this.loaded = true))
-                .subscribe(() => {
-                    this.dialogRef.close();
-                });
-            this.anchor.addNew(profile);
-        }
+        const profileObservable = shouldProfileBeUpdated ?
+            this.serviceAgent.saveProfile(this.userProfileModel.newProfile, this.userProfileModel.profile) :
+            of(true);
 
         // emit address update submit
-        this.submitAnnouncementService.announceSubmit();
+        if (this.addressDirty) {
+            this.submitAnnouncementService.announceSubmit();
+        }
+        const addressObservable = this.addressDirty ? this.addressSubmitFinalized$.pipe(take(1)) : of(true);
+
+        this.loaded = false;
         this.addressReadonly = true;
+        forkJoin([profileObservable, addressObservable])
+            .pipe(takeUntil(this.ngUnsubscribe), finalize(() => {
+                this.loaded = true;
+                this.addressReadonly = false;
+            }))
+            .subscribe(([_, address]) => {
+                if (address) {
+                    this.dialogRef.close();
+                }
+            });
     }
 
     public scrollToTheBottom(): void {
@@ -233,5 +256,10 @@ export class UserPreferencesComponent implements OnDestroy {
             const contentElement = this.element.nativeElement.querySelector('mat-dialog-content');
             contentElement.scrollTop = contentElement.scrollHeight;
         });
+    }
+
+    public birthDateValueChanged(date: DatePickerValue): void {
+        this.birthDate.setValue(date);
+        this.birthDate.markAsDirty();
     }
 }

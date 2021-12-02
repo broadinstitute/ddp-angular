@@ -654,8 +654,7 @@
             "ManageParticipants": "Administrar participantes"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "Preferencias del usuario",
-            "UserPreferencesGender": "Sexo"
+            "UserPreferencesTitle": "Preferencias del usuario"
         },
         "Dashboard": {
             "Title": "¡Le damos la bienvenida a Prion Registry!",
@@ -798,7 +797,8 @@
                 "E.TIMED_OUT": "Se superó el tiempo máximo de espera.",
                 "E.TIME_ZONE.UNAVAILABLE": "El servicio de zonas horarias no está disponible en este momento.",
                 "E.PO_BOX.INTERNATIONAL": "No se puede verificar la casilla postal internacional. Tenga en cuenta que este error puede aparecer en solicitudes satisfactorias."
-            }
+            },
+            "UseAsEntered": "No podemos confirmar que esta dirección es válida. Marque esta casilla para confirmar el uso de esta dirección como ha sido ingresada."
         },
         "TooltipAlt": "Información",
         "Validators": {

@@ -469,8 +469,7 @@
             "ManageParticipants": "Jere patisipan yo"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "Preferans itilizatè",
-            "UserPreferencesGender": "Sèks"
+            "UserPreferencesTitle": "Preferans itilizatè"
         },
         "Dashboard": {
             "Title": "Dach mwen an",
@@ -613,7 +612,8 @@
                 "E.TIMED_OUT": "Depasman delè maksimòm lan.",
                 "E.TIME_ZONE.UNAVAILABLE": "Sèvis lè zòn lan pa disponib aktyèlman.",
                 "E.PO_BOX.INTERNATIONAL": "Nou pa ka verifye bwat postal entènasyonal. Tanpri konnen, sa kapab parèt kòm yon erè sou yon demann ki reyisi."
-            }
+            },
+            "UseAsEntered": "[HT] We are unable to confirm that the address is valid. Please check this box to use the address as entered."
         },
         "TooltipAlt": "Enfòmasyon",
         "SubjectPanel": {

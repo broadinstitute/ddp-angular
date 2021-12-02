@@ -89,7 +89,8 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
                 if (value.length) {
                     this.handleStringValue(value);
                 } else {
-                    this.updateAnswer();
+                    this.block.answer = null;
+                    this.valueChanged.emit(null);
                 }
             } else {
                 this.updateAnswer(value.stableId);
@@ -100,7 +101,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     public ngOnChanges(changes: SimpleChanges): void {
         super.ngOnChanges(changes);
 
-        if (changes['readonly'].currentValue) {
+        if (changes['readonly']?.currentValue) {
             this.inputFormControl.disable({emitEvent: false});
         } else {
             this.inputFormControl.enable({emitEvent: false});

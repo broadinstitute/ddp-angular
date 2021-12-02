@@ -43,7 +43,7 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
         injector: Injector
     ) {
         super(logger, windowRef, renderer, submitService, analytics, participantsSearch, changeRef, document, injector);
-        this.subscription = this.getIsLoaded$().subscribe(_ => {
+        this.subscription = this.getIsLoaded$().subscribe(() => {
             const activitiesWithVerticalProgress: string[] = this.config.usesVerticalStepper;
             this.isVerticalProgress = this.model && activitiesWithVerticalProgress.includes(this.model.activityCode);
         });

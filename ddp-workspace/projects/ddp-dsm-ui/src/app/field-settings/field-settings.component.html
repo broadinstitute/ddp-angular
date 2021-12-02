@@ -1,0 +1,148 @@
+<h1> Field Settings </h1>
+
+<div *ngIf="errorMessage != null">
+  <h3 class="Color--warn Line--Break">{{errorMessage}}</h3>
+  <br/>
+</div>
+
+<div *ngIf="additionalMessage != null">
+  <h3 class="Color--primary Line--Break">{{additionalMessage}}</h3>
+  <br/>
+</div>
+
+<div *ngIf="errorMessage == null && allowedToSeeInformation">
+
+  <span [hidden]="!loading" class="Width--100">
+    <div align="center" class="Width--100 Height--100">
+      <i class="fas fa-spinner fa-spin fa-5x Color--primary"></i>
+    </div>
+  </span>
+  <br/>
+
+  <div *ngIf="realm != null">
+    <div class="Float--left Width--25">
+      <div *ngIf="possibleTypes != null && possibleTypes.length > 0">
+        <div *ngFor="let type of possibleTypes">
+          <mat-checkbox color="primary" [checked]="type.selected" (change)="type.selected = $event.checked;
+          typeChecked(type)" disableRipple>
+            {{type.name}}
+          </mat-checkbox>
+        </div>
+        <br/>
+      </div>
+    </div>
+
+    <!--Show the settings of the selected type-->
+    <div *ngIf="selectedType != null && settingsOfSelectedType != null">
+      <table class="table table-striped" [mfData]="settingsOfSelectedType" #mf="mfDataTable"
+             [mfRowsOnPage]="settingsOfSelectedType.length">
+        <thead>
+        <tr>
+          <th colspan="5">
+            <h4>{{selectedType.name}} Settings</h4>
+          </th>
+        </tr>
+        <tr>
+          <th>
+            Variable Name
+          </th>
+          <th>
+            Display Name
+          </th>
+          <th>
+            Display Type
+          </th>
+          <th>
+            Possible Values
+          </th>
+          <th>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let setting of mf.data; let i = index">
+          <tr class="settings_container">
+            <td>
+              <ng-container *ngIf="setting.addedNew">
+                <mat-form-field class="Input">
+                  <input matInput class="Width--100" maxlength="45" [(ngModel)]="setting.columnName"
+                         (change)="checkColName(i); onChange(i)" autocomplete="off">
+                  <mat-hint class="ErrorMessageForm" *ngIf="setting.notUniqueError">Name not unique</mat-hint>
+                  <mat-hint class="ErrorMessageForm" *ngIf="setting.spaceError">No space allowed</mat-hint>
+                </mat-form-field>
+              </ng-container>
+              <ng-container *ngIf="!setting.addedNew">
+                {{setting.columnName}}
+              </ng-container>
+            </td>
+            <td>
+              <mat-form-field>
+                <input matInput type="text" [(ngModel)]="setting.columnDisplay" (change)="onChange(i)"
+                       maxlength="45" autocomplete="off">
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-select class="Input--Min-WIDTH" maxlength="100" placeholder="Display Type" floatPlaceholder="never"
+                         [(ngModel)]="setting.displayType" (change)="onDisplayTypeChange(i)">
+                <mat-option value="CHECKBOX">
+                  <mat-icon>
+                    <i class="fas fa-check-square fa-sm"></i>
+                  </mat-icon>
+                  Checkbox</mat-option>
+                <mat-option value="DATE">
+                  <mat-icon>
+                    <i class="fas fa-calendar-alt fa-sm"></i>
+                  </mat-icon>
+                  Date</mat-option>
+                <mat-option value="NUMBER">Number</mat-option>
+                <mat-option value="OPTIONS">Select</mat-option>
+                <mat-option value="TEXT">
+                  <mat-icon>
+                    <i class="fas fa-window-minimize fa-sm"></i>
+                  </mat-icon>
+                  Text</mat-option>
+                <mat-option value="TEXTAREA">Textarea</mat-option>
+                <mat-hint class="ErrorMessageForm" *ngIf="setting.missingDispError">Display type not selected</mat-hint>
+              </mat-select>
+            </td>
+            <td>
+              <ng-container *ngIf="setting.displayType === 'MULTI_OPTIONS' || setting.displayType === 'OPTIONS'">
+                <ng-container *ngFor="let value of setting.possibleValues; let j=index">
+                  <mat-form-field class="Input">
+                    <input matInput maxlength="100" (change)="onChange(i)" [(ngModel)]="value.value"
+                           placeholder="Value {{j+1}}" autocomplete="off">
+                    <mat-hint class="ErrorMessageForm" *ngIf="setting.missingOptionsError">Missing possible
+                      values
+                    </mat-hint>
+                  </mat-form-field>
+                </ng-container>
+                <button mat-mini-fab color="primary" tooltip="Add Value" (click)="addValue(setting)">
+                  <i class="fas fa-plus fa-lg"></i>
+                </button>
+              </ng-container>
+            </td>
+            <td>
+              <button mat-mini-fab color="warn"
+                      *ngIf="i < settingsOfSelectedType.length - 1"
+                      (click)="deleteFieldSetting(i)">
+                <i class="fas fa-trash-alt fa-lg"></i>
+              </button>
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="10">
+            <mfBootstrapPaginator [rowsOnPageSet]="[10, 15, 20]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+      <br/>
+      <button mat-raised-button (click)="saveFieldSettings()" color="primary"
+              [disabled]="saving">Save Settings
+      </button>
+    </div>
+  </div>
+</div>

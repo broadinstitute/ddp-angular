@@ -422,7 +422,6 @@
             "SignOutButton": "Выйти"
         },
         "UserPreferences": {
-            "UserPreferencesGender": "Пол",
             "UserPreferencesTitle": "Предпочтения пользователя"
         },
         "ValidateError": "Отправка невозможна. Подробнее см. в сообщениях в форме.",

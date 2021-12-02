@@ -77,6 +77,8 @@ config.dashboardShowQuestionCount = true;
 config.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 config.projectGcpId = DDP_ENV.projectGcpId;
 config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
+config.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl;
+config.doCloudLogging = DDP_ENV.doCloudLogging;
 config.usesVerticalStepper = [
   ActivityCodes.HealthAndDevelopment,
   ActivityCodes.ChildQualityOfLife,

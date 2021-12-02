@@ -469,8 +469,7 @@
             "ManageParticipants": "Quản lý người tham gia"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "Chế độ người dùng ưa thích",
-            "UserPreferencesGender": "Giới tính"
+            "UserPreferencesTitle": "Chế độ người dùng ưa thích"
         },
         "Dashboard": {
             "Title": "Bảng điều khiển của tôi",
@@ -613,7 +612,8 @@
                 "E.TIMED_OUT": "Vượt quá thời gian chờ tối đa.",
                 "E.TIME_ZONE.UNAVAILABLE": "Hiện tại chưa có chức năng hiệu chỉnh múi giờ.",
                 "E.PO_BOX.INTERNATIONAL": "Không thể kiểm tra địa chỉ hộp thư quốc tế. Xin lưu ý, thông báo này có thể xuất hiện do lỗi dù yêu cầu của quý vị đã được ghi nhận."
-            }
+            },
+            "UseAsEntered": "[VI] We are unable to confirm that the address is valid. Please check this box to use the address as entered."
         },
         "TooltipAlt": "Thông tin",
         "SubjectPanel": {

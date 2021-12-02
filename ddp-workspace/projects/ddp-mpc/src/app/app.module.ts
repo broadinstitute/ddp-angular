@@ -81,6 +81,8 @@ sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
 sdkConfig.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
 sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
+sdkConfig.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl;
+sdkConfig.doCloudLogging = DDP_ENV.doCloudLogging;
 
 export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {

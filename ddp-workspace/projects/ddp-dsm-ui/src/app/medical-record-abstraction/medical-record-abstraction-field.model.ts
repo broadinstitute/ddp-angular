@@ -1,0 +1,113 @@
+import { Value } from '../utils/value.model';
+
+export class AbstractionField {
+  newAdded = false;
+  deleted = false;
+  changed = false;
+  notUniqueError = false;
+  viewHelpText = false;
+  copiedActivity = '';
+
+  constructor(public medicalRecordAbstractionFieldId: number, public displayName: string, public type: string,
+              public helpText: string, public orderNumber: number,
+              public possibleValues: Value[], public additionalType: string, public hide: boolean,
+              // tslint:disable-next-line:max-line-length
+              public fieldValue: AbstractionFieldValue, public qcWrapper: QCWrapper, public fileInfo: boolean) { // last line are value fields!
+    this.medicalRecordAbstractionFieldId = medicalRecordAbstractionFieldId;
+    this.displayName = displayName;
+    this.helpText = helpText;
+    this.type = type;
+    this.orderNumber = orderNumber;
+    this.possibleValues = possibleValues;
+    this.additionalType = additionalType;
+    this.fieldValue = fieldValue;
+    this.qcWrapper = qcWrapper;
+    this.fileInfo = fileInfo;
+  }
+
+  static parse(json): AbstractionField {
+    let fValue: AbstractionFieldValue = json.fieldValue;
+    if (fValue == null) {
+      fValue = new AbstractionFieldValue(null, null, '', 0, '', '', false, false, null, '', null);
+    }
+    let wrapper: QCWrapper = json.qcWrapper;
+    if (wrapper == null) {
+      const fieldValue: AbstractionFieldValue = new AbstractionFieldValue(null, null, '', 0, '', '', false, false, null, '', null);
+      wrapper = new QCWrapper(fieldValue, fieldValue, false, false);
+    }
+    return new AbstractionField(
+      json.medicalRecordAbstractionFieldId, json.displayName, json.type, json.helpText,
+      json.orderNumber, json.possibleValues, json.additionalType, json.hide, fValue, wrapper, json.fileInfo
+    );
+  }
+
+  static removeUnchangedSetting(array: Array<AbstractionField>): Array<AbstractionField> {
+    const cleanedSettings: Array<AbstractionField> = [];
+    for (const setting of array) {
+      if (setting.changed) {
+        if (!(setting.newAdded && setting.deleted)) {
+          if (setting.possibleValues != null && setting.possibleValues.length > 0) {
+            setting.possibleValues.forEach((item, index) => {
+              if (item.value == null || item.value === '') {
+                setting.possibleValues.splice(index, 1);
+              } else if (item.values != null) {
+                if (item.values.length > 0) {
+                  const possibleValues = [];
+                  item.values.forEach((value) => {
+                    if (value.value != null && value.value !== '' && value.value.trim() !== '') {
+                      possibleValues.push(value);
+                    }
+                  });
+                  item.values = possibleValues;
+                }
+              }
+            });
+          }
+          cleanedSettings.push(setting);
+        }
+      }
+    }
+    return cleanedSettings;
+  }
+}
+
+// tslint:disable-next-line:max-classes-per-file
+export class AbstractionFieldValue {
+  constructor(public medicalRecordAbstractionFieldId: number, public primaryKeyId: number, public value: string | string[],
+              public valueCounter: number, public note: string, public question: string, public noData: boolean,
+              public doubleCheck: boolean, public filePage: string, public fileName: string, public matchPhrase: string) {
+    this.medicalRecordAbstractionFieldId = medicalRecordAbstractionFieldId;
+    this.primaryKeyId = primaryKeyId;
+    this.value = value;
+    this.valueCounter = valueCounter;
+    this.note = note;
+    this.question = question;
+    this.noData = noData;
+    this.doubleCheck = doubleCheck;
+    this.filePage = filePage;
+    this.fileName = fileName;
+    this.matchPhrase = matchPhrase;
+  }
+
+  static parse(json): AbstractionFieldValue {
+    return new AbstractionFieldValue(
+      json.medicalRecordAbstractionFieldId, json.primaryKeyId, json.value, json.valueCounter, json.note, json.question,
+      json.noData, json.doubleCheck, json.filePage, json.fileName, json.matchPhrase
+    );
+  }
+}
+
+// tslint:disable-next-line:max-classes-per-file
+export class QCWrapper {
+  constructor(public abstraction: AbstractionFieldValue, public review: AbstractionFieldValue,
+              public equals: boolean, public check: boolean) {
+    this.abstraction = abstraction;
+    this.review = review;
+    this.equals = equals;
+    this.check = check;
+  }
+
+  static parse(json): QCWrapper {
+    return new QCWrapper(json.abstraction, json.review, json.equals, json.check);
+  }
+}

@@ -500,6 +500,7 @@ describe('DashboardRedesignedComponent', () => {
     it('set participant when user clicks on participant edit button', async () => {
         const participantGuid = 'gdh123';
         toolkitConfigMock.useMultiParticipantDashboard = true;
+        toolkitConfigMock.allowEditUserProfile = true;
         userActivityServiceAgentSpy.getActivities.and.returnValue(of([]));
         userActivityServiceAgentSpy.getActivities.withArgs(jasmine.anything(), participantGuid).and.returnValue(of([activityMock]));
         governedParticipantsSpy.getGovernedStudyParticipants.and.returnValue(of([

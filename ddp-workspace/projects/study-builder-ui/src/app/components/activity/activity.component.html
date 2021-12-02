@@ -1,0 +1,15 @@
+<main class="main-container">
+  <section>
+    <div class="metadata">
+      <div>
+        <strong>Activity Code: </strong>{{activity.activityCode}}
+      </div>
+      <div *ngIf="title">
+        <strong>Title: </strong><span [innerHtml]="title"></span>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <app-section *ngIf="activity.sectionsObservables[0]" [section$]="activity.sectionsObservables[0]"></app-section>
+  </section>
+</main>

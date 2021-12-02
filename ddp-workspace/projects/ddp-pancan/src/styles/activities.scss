@@ -128,6 +128,57 @@
     }
 }
 
+.with-vertical-progress-indicator {
+    .header-section {
+        text-align: center;
+    }
+
+    .article-content {
+        display: flex;
+        width: auto;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5625rem;
+
+        .content {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    .activity-steps {
+        flex-direction: column;
+        justify-content: flex-start;
+        margin: 24px 24px 0 0;
+        padding: 0;
+
+        @media (max-width: $tablet-breakpoint) {
+            margin: 16px 24px 0 0 !important;
+        }
+
+        &__divider {
+            flex: 0 0 24px;
+            margin: 0 0 0 12px;
+            border: none;
+            width: 2px;
+            background: $activity-step-default;
+
+            @media (max-width: $tablet-breakpoint) {
+                flex: 0 0 12px;
+                margin: 0 0 0 9px;
+            }
+        }
+    }
+
+    .activity-step {
+        &__text {
+            @media (max-width: $tablet-breakpoint) {
+                display: none;
+            }
+        }
+    }
+}
+
 // activity lists
 .ddp-list {
     padding: 0 0 0 1.5rem;
@@ -542,6 +593,54 @@ select:disabled {
                                 }
                             }
                         }
+
+                        ddp-activity-checkboxes-picklist-question {
+                            .mat-list {
+                                display: flex;
+                                align-items: center;
+
+                                height: 100%;
+
+                                padding-top: 0;
+
+                                .mat-list-item {
+                                    flex: 1 0;
+
+                                    margin-bottom: 0;
+
+                                    .mat-list-item-content {
+                                        height: 100%;
+
+                                        .mat-list-text {
+                                            height: 100%;
+
+                                            .mat-checkbox {
+                                                height: 100%;
+                                                width: 100%;
+
+                                                .mat-checkbox-layout {
+                                                    width: 100%;
+
+                                                    .mat-checkbox-inner-container {
+                                                        margin-top: 0;
+                                                        margin-right: auto !important;
+                                                        margin-bottom: 0;
+                                                        margin-left: auto;
+
+                                                        width: 1.3rem !important;
+                                                        height: 1.3rem !important;
+                                                    }
+
+                                                    .mat-checkbox-label {
+                                                        display: none;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -577,6 +676,34 @@ select:disabled {
 
                                             text-align: center;
                                         }
+                                    }
+                                }
+                            }
+                        }
+
+                        .mat-list {
+                            align-items: stretch;
+
+                            .mat-checkbox {
+                                .mat-checkbox-layout {
+                                    display: flex;
+                                    flex-direction: column-reverse;
+                                    height: 100%;
+
+                                    .mat-checkbox-inner-container {
+                                        margin-top: 2rem !important;
+                                        margin-bottom: 2rem !important;
+                                    }
+
+                                    .mat-checkbox-label {
+                                        display: block !important;
+
+                                        margin-bottom: auto;
+                                        padding: 0;
+
+                                        font-size: 1rem;
+                                        line-height: 1.35;
+                                        text-align: center;
                                     }
                                 }
                             }

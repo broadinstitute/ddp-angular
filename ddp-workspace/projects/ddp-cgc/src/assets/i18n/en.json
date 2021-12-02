@@ -256,8 +256,7 @@
             "ManageParticipants": "Manage participants"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "User preferences",
-            "UserPreferencesGender": "Sex"
+            "UserPreferencesTitle": "User preferences"
         },
         "Dashboard": {
             "Title": "My Dashboard",
@@ -396,7 +395,8 @@
                 "E.TIMED_OUT": "Exceeded max timeout.",
                 "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
                 "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
-            }
+            },
+            "UseAsEntered": "We are unable to confirm that the address is valid. Please check this box to use the address as entered."
         },
         "TooltipAlt": "Information",
         "SubjectPanel": {

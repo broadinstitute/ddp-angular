@@ -3,7 +3,7 @@
     {{ 'ErrorPage.Title' | translate }}
   </h1>
 
-  <p>
-    {{ 'ErrorPage.Text' | translate }}
+  <p class="error-message">
+    {{ errorMessage || ('ErrorPage.Text' | translate) }}
   </p>
 </div>
