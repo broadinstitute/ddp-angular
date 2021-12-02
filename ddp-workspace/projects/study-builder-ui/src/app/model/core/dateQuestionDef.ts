@@ -10,5 +10,5 @@ export interface DateQuestionDef extends AbstractQuestionDef {
   fields: Array<DateFieldType>;
   picklistConfig?: DatePicklistDef | null;
   placeholderTemplate?: Template | null;
-  questionType: 'DATE'
+  questionType: 'DATE';
 }

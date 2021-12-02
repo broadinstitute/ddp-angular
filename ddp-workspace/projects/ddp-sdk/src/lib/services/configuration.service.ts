@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LogLevel } from '../models/logLevel';
 import { QuestionType } from '../models/activity/questionType';
+import { UserProfileField } from '../models/userProfileFieldType';
 
 @Injectable()
 export class ConfigurationService {
@@ -99,4 +100,8 @@ export class ConfigurationService {
      * Behavior with this flag enabled: English is selected => shows Spanish in language selector.
      */
     reverseBinaryLanguageSelector = false;
+    /**
+     * List of user fields which will be displayed for editing in User Preferences component
+     */
+    userProfileFieldsForEditing: UserProfileField[] = [];
 }

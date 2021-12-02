@@ -6,6 +6,7 @@ import { concatMap, map, switchMap, take, tap, withLatestFrom } from 'rxjs/opera
 import { FormControl, FormGroup } from '@angular/forms';
 import { ObservableActivityDef } from '../../model/core-extended/observableActvityDef';
 import { ActivityDefDao } from '../../activity-def-dao.service';
+import { ResizeEvent } from 'angular-resizable-element';
 
 @Component({
     selector: 'app-survey-editor',
@@ -19,6 +20,7 @@ export class SurveyEditorComponent implements OnInit {
     // @TODO
     public studyGuid$ = of('Hello');
     readonly form: FormGroup;
+    leftPanelWidth = '800px';
 
     constructor(private editorService: ActivityDefinitionEditorService, private dao: ActivityDefDao) {
         this.form = new FormGroup({
@@ -61,5 +63,9 @@ export class SurveyEditorComponent implements OnInit {
             take(1)
         ).subscribe();
 
+    }
+
+    onResizeEnd(event: ResizeEvent): void {
+        this.leftPanelWidth = `${event.rectangle.width}px`;
     }
 }

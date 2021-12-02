@@ -432,7 +432,6 @@
             "SignOutButton": "साइन आउट करें"
         },
         "UserPreferences": {
-            "UserPreferencesGender": "लिंग",
             "UserPreferencesTitle": "उपयोगकर्ता की वरीयताएँ"
         },
         "ValidateError": "सबमिट करना आगे नहीं बढ़ सकता है। कृपया अधिक जानकारी के लिए, प्रपत्र में मोजूद संदेशों की समीक्षा करें।",

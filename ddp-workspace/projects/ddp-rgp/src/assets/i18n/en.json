@@ -101,6 +101,7 @@
         },
         "Partners": {
             "Title": "Our advocacy partners",
+            "RareAsOne": "Rare As One Project",
             "NOFRDD": "National Organization for Rare Disorders",
             "SWAN": "Syndromes without a Name",
             "Rare": "Rare science accelerating cures for rare kids",
@@ -1370,8 +1371,7 @@
             "ManageParticipants": "Manage participants"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "User preferences",
-            "UserPreferencesGender": "Sex"
+            "UserPreferencesTitle": "User preferences"
         },
         "Dashboard": {
             "Title": "My Dashboard",

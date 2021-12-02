@@ -654,8 +654,7 @@
             "ManageParticipants": "Manage participants"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "User preferences",
-            "UserPreferencesGender": "Sex"
+            "UserPreferencesTitle": "User preferences"
         },
         "Dashboard": {
             "Title": "Welcome to the Prion Registry!",

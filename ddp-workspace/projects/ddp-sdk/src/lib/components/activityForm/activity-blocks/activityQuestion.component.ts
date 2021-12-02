@@ -69,7 +69,6 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
         this.setupScrollToErrorAction();
     }
 
-
     private setupErrorMessage(): void {
         const firstFailedValidator$ =  combineLatest([
             this.enteredValue$.pipe(startWith(this.block.answer as AnswerValue)),

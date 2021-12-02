@@ -8,6 +8,8 @@ import { ConfigurationService } from '../../configuration.service';
 import { ObservableFormSectionDef } from './observableFormSectionDef';
 import { ContentBlockDef } from '../core/contentBlockDef';
 import { FormSectionDef } from '../core/formSectionDef';
+import { PicklistQuestionDef } from '../core/picklistQuestionDef';
+import { AbstractQuestionDef } from '../core/abstractQuestionDef';
 
 export class StudyConfigObjectFactory {
     static idCounter = 0;
@@ -70,6 +72,14 @@ export class StudyConfigObjectFactory {
         };
     }
 
+    public createDefaultPicklistQuestionBlock(): QuestionBlockDef<PicklistQuestionDef> & Identifiable {
+        return {
+            blockType: 'QUESTION',
+            question: this.createDefaultPicklistQuestion(),
+            id: this.generateIdentifier()
+        };
+    }
+
     public createDefaultContentBlock(): ContentBlockDef & Identifiable {
         return {
             blockType: 'CONTENT',
@@ -79,19 +89,38 @@ export class StudyConfigObjectFactory {
         };
     }
 
-    private createDefaultTextQuestion(): TextQuestionDef {
+    private createDefaultBaseQuestion(): AbstractQuestionDef {
         return {
-            questionType: 'TEXT',
             stableId: '',
             isRestricted: false,
             isDeprecated: false,
             promptTemplate: this.createBlankTemplate(),
             validations: [],
             hideNumber: false,
+            questionType: 'TEXT'
+        };
+    }
+
+    private createDefaultTextQuestion(): TextQuestionDef {
+        return {
+            ...this.createDefaultBaseQuestion(),
+            questionType: 'TEXT',
             inputType: 'TEXT',
             suggestionType: 'NONE',
-            placeholderTemplate: null,
+            placeholderTemplate: this.createBlankTemplate(),
             suggestions: []
+        };
+    }
+
+    private createDefaultPicklistQuestion(): PicklistQuestionDef {
+        return {
+            ...this.createDefaultBaseQuestion(),
+            questionType: 'PICKLIST',
+            selectMode: 'SINGLE',
+            renderMode: 'LIST',
+            picklistLabelTemplate: this.createBlankTemplate(),
+            groups: [],
+            picklistOptions: [],
         };
     }
 

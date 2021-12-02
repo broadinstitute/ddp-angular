@@ -23,7 +23,8 @@
     },
     "Toolkit": {
         "Dashboard": {
-            "Title": "Participant Dashboard"
+            "Title": "Participant Dashboard",
+            "EditUser": "Edit profile"
         },
         "Password": {
             "Title": "Site Gatekeeper",
@@ -58,11 +59,12 @@
         "SubmitButton": "Submit",
         "CloseButton": "Close",
         "AddButton": "ADD",
-        "CancelButton": "CANCEL",
+        "CancelButton": "Cancel",
         "NextButton": "Next",
         "PreviousButton": "Back",
         "SavingButton": "Saving",
         "EditButton": "Continue",
+        "SaveButton": "Save",
         "CompleteButton": "Edit",
         "ReviewButton": "View",
         "OpenButton": "Open",
@@ -116,7 +118,14 @@
         },
         "UserPreferences": {
             "UserPreferencesTitle": "User preferences",
-            "UserPreferencesGender": "Sex"
+            "DateOfBirth": "Date of birth",
+            "UserName": "Name",
+            "FirstUserName": "First name",
+            "LastUserName": "Last name",
+            "FirstNameFieldIsRequired": "First name is required",
+            "LastNameFieldIsRequired": "Last name is required",
+            "MailingAddress": "Mailing Address",
+            "FutureBirthDateValidationError": "Date of birth cannot be a future date."
         },
         "Dashboard": {
             "Title": "Participant Dashboard",

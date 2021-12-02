@@ -55,6 +55,9 @@ interface DashboardParticipant {
                                 {{'Toolkit.Dashboard.AddParticipant' | translate}}
                             </button>
                         </div>
+                        <ng-container *ngIf="!toolkitConfig.useMultiParticipantDashboard && toolkitConfig.allowEditUserProfile">
+                            <ng-container *ngTemplateOutlet="editUserButton"></ng-container>
+                        </ng-container>
                     </div>
                     <p *ngIf="invitationId" class="invitation-code">
                         <span class="invitation-code__text" translate>Toolkit.Dashboard.Invitation.InvitationCode</span>
@@ -102,11 +105,10 @@ interface DashboardParticipant {
                                         {{participant.label}}
                                     </mat-panel-title>
                                     <mat-panel-description fxLayoutAlign="end center" class="dashboard-panel-description">
-                                        <button mat-button
-                                                class="edit-user-button"
-                                                (click)="$event.stopPropagation(); openUserEditDialog(participant.userGuid, participant.label)">
-                                            {{'Toolkit.Dashboard.EditUser' | translate}}
-                                        </button>
+                                        <ng-container *ngIf="toolkitConfig.allowEditUserProfile">
+                                            <ng-container *ngTemplateOutlet="editUserButton; context: { participant: participant }">
+                                            </ng-container>
+                                        </ng-container>
                                         <ng-container *ngIf="participantUserGuidToPanelIsOpen.get(participant.userGuid); else show">
                                             {{'Toolkit.Dashboard.HidePanel' | translate}}
                                             <mat-icon>expand_less</mat-icon>
@@ -134,6 +136,13 @@ interface DashboardParticipant {
                         </ng-template>
                     </div>
                 </section>
+            </ng-template>
+            <ng-template #editUserButton let-participant="participant">
+                <button mat-button
+                        class="edit-user-button"
+                        (click)="$event.stopPropagation(); openUserEditDialog(participant)">
+                    {{'Toolkit.Dashboard.EditUser' | translate}}
+                </button>
             </ng-template>
         </main>`,
     styles: [`
@@ -305,16 +314,20 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
         return participant.userGuid;
     }
 
-    public openUserEditDialog(participantGuid: string, participantName: string): void {
-        this.session.setParticipant(participantGuid);
+    public openUserEditDialog(participant?: DashboardParticipant): void {
+        if (participant) {
+            this.session.setParticipant(participant.userGuid);
+        }
         const dialogRef = this.dialog.open(UserPreferencesComponent, {
             width: '650px',
             autoFocus: false,
-            data: { userName: participantName }
+            data: { userName: participant?.label || null }
         });
-        dialogRef.afterClosed().subscribe(() => {
-            this.session.setParticipant(null);
-        });
+        if (participant) {
+            dialogRef.afterClosed().subscribe(() => {
+                this.session.setParticipant(null);
+            });
+        }
     }
 
     public ngOnDestroy(): void {

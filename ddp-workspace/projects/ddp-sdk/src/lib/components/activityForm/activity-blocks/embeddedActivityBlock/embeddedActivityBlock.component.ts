@@ -117,7 +117,7 @@ export class EmbeddedActivityBlockComponent implements OnInit {
                     this.componentBusy.emit(false);
                 }
             }),
-            filter(_ => activityValidStatus),
+            filter(() => activityValidStatus),
             concatMap(() => this.activityServiceAgent.flushForm(this.studyGuid, this.instance.instanceGuid)),
             catchError(err => {
                 this.logger.logError(this.LOG_SOURCE, 'An error during completing an activity', err);

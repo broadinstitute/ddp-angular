@@ -122,10 +122,9 @@ toolkit-dashboard-redesigned .main {
         right: 0;
     }
 }
-ddp-user-preferences {
-    .form-subgroup-title {
-        font-size: 1.2rem;
-    }
+
+.ddp-user-preferences-subgroup-title {
+    font-size: 1.2rem;
 }
 
 @media only screen and(max-width: 650px) {
