@@ -5,4 +5,8 @@ export class ActivityInstanceSelectQuestionBlock extends ActivityQuestionBlock<s
   public get questionType(): QuestionType {
     return QuestionType.ActivityInstanceSelect;
   }
+
+  public hasAnswer(): boolean {
+    return this.answer != null;
+  }
 }
