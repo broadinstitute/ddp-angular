@@ -68,6 +68,7 @@ toolkitConfig.lmsPageEmail = 'info@lmsproject.org';
 toolkitConfig.lmsStudyGuid = 'cmi-lms';
 toolkitConfig.useMultiParticipantDashboard = true;
 toolkitConfig.dashboardDisplayedColumns = ['name', 'summary', 'status', 'actions'];
+toolkitConfig.allowEditUserProfile = true;
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
@@ -89,9 +90,21 @@ sdkConfig.projectGAToken = DDP_ENV.projectGAToken;
 sdkConfig.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
 sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
+sdkConfig.doCloudLogging = DDP_ENV.doCloudLogging;
+sdkConfig.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl;
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.useStepsWithCircle = true;
 sdkConfig.notSortedPicklistAutocompleteStableIds = ['PRIMARY_CANCER_SELF', 'PRIMARY_CANCER_CHILD'];
+sdkConfig.usesVerticalStepper = [
+    'FAMILY_HISTORY',
+    'FAMILY_HISTORY_PARENT',
+    'FAMILY_HISTORY_PARENT_SIBLING',
+    'FAMILY_HISTORY_GRANDPARENT',
+    'FAMILY_HISTORY_SIBLING',
+    'FAMILY_HISTORY_CHILD',
+    'FAMILY_HISTORY_ADDITIONAL_DETAILS',
+    'DIET_LIFESTYLE',
+];
 
 export function translateFactory(translate: TranslateService,
     injector: Injector,

@@ -53,6 +53,7 @@ export * from './lib/models/statistic';
 export * from './lib/models/searchParticipant';
 export * from './lib/models/enrollmentStatusType';
 export * from './lib/models/userStatusResponse';
+export * from './lib/models/userProfileFieldType';
 export * from './lib/models/session';
 export * from './lib/models/mailAddressFormErrorFormatter';
 

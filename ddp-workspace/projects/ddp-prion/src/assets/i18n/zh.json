@@ -654,8 +654,7 @@
             "ManageParticipants": "管理参与者"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "用户偏好",
-            "UserPreferencesGender": "性别"
+            "UserPreferencesTitle": "用户偏好"
         },
         "Dashboard": {
             "Title": "欢迎访问朊蛋白病注册库！",
@@ -798,7 +797,8 @@
                 "E.TIMED_OUT": "超出最大超时时间。",
                 "E.TIME_ZONE.UNAVAILABLE": "时区服务当前不可用。",
                 "E.PO_BOX.INTERNATIONAL": "无法验证国际邮政信箱。请注意，这可能会在成功请求后显示为错误。"
-            }
+            },
+            "UseAsEntered": "[ZH] We are unable to confirm that the address is valid. Please check this box to use the address as entered."
         },
         "TooltipAlt": "信息",
         "Validators": {

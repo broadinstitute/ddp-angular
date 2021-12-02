@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LogLevel } from '../models/logLevel';
 import { QuestionType } from '../models/activity/questionType';
+import { UserProfileField } from '../models/userProfileFieldType';
 import { MailAddressFormErrorFormatter } from '../models/mailAddressFormErrorFormatter';
 
 @Injectable()
@@ -66,6 +67,9 @@ export class ConfigurationService {
     // The flag indicates whether we need report JS errors to Google Cloud Error Report API
     // It set (and can be overridden for any single app) in pepperConfig
     doGcpErrorReporting: boolean;
+    cloudLoggingUrl: string;
+    // The flag indicates whether we need google cloud logging
+    doCloudLogging: boolean;
     // activities which should use a vertical progress indicator
     usesVerticalStepper: string[] = [];
     // if steps with circle should be used
@@ -98,6 +102,10 @@ export class ConfigurationService {
      */
     reverseBinaryLanguageSelector = false;
     /**
+     * List of user fields which will be displayed for editing in User Preferences component
+     */
+    userProfileFieldsForEditing: UserProfileField[] = [];
+	/**
      * Can be used to customize which i18n key is used
      * to display an error for each field in mailing address form.
      */

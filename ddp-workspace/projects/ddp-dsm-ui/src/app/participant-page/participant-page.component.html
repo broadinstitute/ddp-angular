@@ -1,0 +1,1146 @@
+<ng-container *ngIf="showMedicalRecord">
+  <app-medical-record [participant]="participant" [medicalRecord]="medicalRecord" [settings]="settings"
+                      [mrCoverPdfSettings]="mrCoverPdfSettings"
+                      (leaveMedicalRecord)="showMedicalRecord=false"
+                      (leaveParticipant)="leavePage()"></app-medical-record>
+</ng-container>
+
+<ng-container *ngIf="showTissue">
+  <app-tissue-page [participant]="participant" [oncHistoryDetail]="oncHistoryDetail"
+                   [settings]="settings"
+                   (leaveTissue)="showTissue=false" (leaveParticipant)="leavePage()"></app-tissue-page>
+</ng-container>
+
+<ng-container *ngIf="!showMedicalRecord && !showTissue">
+  <h1> Participant Page </h1>
+
+  <div *ngIf="errorMessage != null">
+    <h3 class="Color--warn">{{errorMessage}}</h3>
+    <br/>
+  </div>
+
+  <div *ngIf="additionalMessage != null">
+    <h3 class="Color--warn Line--Break">{{additionalMessage}}</h3>
+    <br/>
+  </div>
+
+  <div *ngIf="errorMessage == null" class="Width--100">
+
+    <br/>
+    <a href="#" (click)="leavePage()"><b> << back to 'List' </b></a>
+    <br/><br/><br/>
+
+    <span [hidden]="!loadingParticipantPage && !updatingParticipant" class="Width--100">
+    <div align="center" class="Width--100 Height--100">
+      <i class="fas fa-spinner fa-spin fa-5x Color--primary"></i>
+    </div>
+  </span>
+    <div class="Width--100">
+      <h4>{{message}}</h4>
+      <span [hidden]="!downloading" class="Width--100">
+    <div align="center" class="Width--100 Height--100">
+      <i class="fas fa-spinner fa-spin fa-5x Color--primary"></i>
+    </div>
+  </span>
+    </div>
+
+
+    <div *ngIf="!loadingParticipantPage && !updatingParticipant" class="Width--100">
+
+      <div *ngIf="participantExited">
+        <h3 class="Color--warn Line--Break">Participant was withdrawn from the study!</h3>
+        <br/>
+      </div>
+      <div *ngIf="participantNotConsented">
+        <h3 class="Color--warn Line--Break">Lost to Follow-Up</h3>
+        <br/>
+      </div>
+
+      <div class="Float--left" *ngIf="participant.data != null">
+        <table class="table table-condensed">
+          <tbody>
+          <tr *ngIf="participant.data.status != null">
+            <td>Status</td>
+            <td>{{participant.data.status | buttonSelect}}</td>
+          </tr>
+          <tr *ngIf="participant.data.profile['createdAt'] != null">
+            <td>Registration Date</td>
+            <td>{{participant.data.profile['createdAt']| date:'medium'}}</td>
+          </tr>
+          <tr *ngIf="participant.data.profile['hruid'] != null">
+            <td>Short ID</td>
+            <td>{{participant.data.profile['hruid']}}</td>
+          </tr>
+          <tr
+            *ngIf="participant.data.profile['legacyShortId'] != null && participant.data.profile['legacyShortId'] !== ''">
+            <td>Legacy Short ID</td>
+            <td>{{participant.data.profile['legacyShortId']}}</td>
+          </tr>
+          <tr *ngIf="participant.data.profile['guid'] != null">
+            <td>Internal Participant ID</td>
+            <td>{{participant.data.profile['guid']}}</td>
+          </tr>
+          <tr
+            *ngIf="participant.data.profile['legacyAltPid'] != null && participant.data.profile['legacyAltPid'] !== ''">
+            <td>Legacy Participant ID</td>
+            <td>{{participant.data.profile['legacyAltPid']}}</td>
+          </tr>
+          <tr>
+            <td>First Name</td>
+            <td *ngIf="hasRole().allowedToEditParticipant()">
+              <input matInput type="text" maxlength="200" autocomplete="off" placeholder="First Name"
+                    [(ngModel)]="updatedFirstName"
+                    class="update-participant-input">
+              <button mat-raised-button color="primary"
+                      (click)="updateFirstName()"
+                      [disabled]="updatedFirstName === participant.data.profile['firstName'] || updatedFirstName.length == 0"
+                      >Update
+              </button>
+            </td>
+            <td *ngIf="!hasRole().allowedToEditParticipant()">
+              {{participant.data.profile['firstName']}}
+            </td>
+          </tr>
+          <tr>
+            <td>Last Name</td>
+            <td *ngIf="hasRole().allowedToEditParticipant()">
+              <input matInput type="text" maxlength="200" autocomplete="off" placeholder="Last Name"
+                  [(ngModel)]="updatedLastName"
+                  class="update-participant-input">
+              <button mat-raised-button color="primary"
+                      [disabled]="updatedLastName === participant.data.profile['lastName'] || updatedLastName.length == 0"
+                      (click)="updateLastName()">Update
+              </button>
+            </td>
+            <td *ngIf="!hasRole().allowedToEditParticipant()">
+              {{participant.data.profile['lastName']}}
+            </td>
+          </tr>
+          <tr>
+            <td>E-Mail</td>
+            <td *ngIf="hasRole().allowedToEditParticipant()">
+              <span *ngIf="isEmailValid == false" class="invalid-email">E-Mail is not valid</span>
+              <input matInput type="email" maxlength="200" autocomplete="off" placeholder="Email"
+              [ngModel]="updatedEmail"
+              (ngModelChange)="validateEmailInput($event)"
+              email
+              class="update-participant-input">
+              <button mat-raised-button color="primary"
+              [disabled]="updatedEmail === participant.data.profile['email'] || updatedEmail.length == 0 || isEmailValid == false"
+              (click)="updateEmail()">Update
+            </button>
+          </td>
+          <td *ngIf="!hasRole().allowedToEditParticipant()">
+            {{participant.data.profile['email']}}
+          </td>
+          </tr>
+          <tr>
+            <td>Do Not Contact</td>
+            <td>{{getUtil().getYesNo(participant.data.profile['doNotContact'])}}</td>
+          </tr>
+          <tr>
+            <td>Date of Birth</td>
+            <td>{{getUtil().getDateFormatted(participant.data.dsm['dateOfBirth'])}}</td>
+          </tr>
+          <tr *ngIf="participant.data.dsm != null && participant.data.dsm['dateOfMajority'] != null">
+            <td>Date of Majority</td>
+            <td>{{getUtil().getDateFormatted(participant.data.dsm['dateOfMajority'])}}</td>
+          </tr>
+          <tr *ngIf="participant.data.dsm != null && (participant.data.dsm['diagnosisMonth'] != null ||
+          participant.data.dsm['diagnosisYear'] != null)">
+            <td>Date of Diagnosis</td>
+            <td>
+              <ng-container *ngIf="participant.data.dsm != null && participant.data.dsm['diagnosisMonth'] != null &&
+participant.data.dsm['diagnosisYear'] != null">
+                {{participant.data.dsm['diagnosisMonth']}}/{{participant.data.dsm['diagnosisYear']}}
+              </ng-container>
+              <ng-container *ngIf="participant.data.dsm != null && participant.data.dsm['diagnosisMonth'] != null &&
+participant.data.dsm['diagnosisYear'] == null">
+                {{participant.data.dsm['diagnosisMonth']}}/null
+              </ng-container>
+              <ng-container *ngIf="participant.data.dsm != null && participant.data.dsm['diagnosisMonth'] == null &&
+participant.data.dsm['diagnosisYear'] != null">
+                {{participant.data.dsm['diagnosisYear']}}
+              </ng-container>
+            </td>
+          </tr>
+          <tr *ngIf="participant.medicalRecords != null && participant.medicalRecords.length > 0">
+            <td>Consent Tissue</td>
+            <td>{{getUtil().getYesNo(getTissueConsent())}}</td>
+          </tr>
+          <tr *ngIf="participant.medicalRecords != null && participant.medicalRecords.length > 0">
+            <td>Consent Blood</td>
+            <td>{{getUtil().getYesNo(getBloodConsent())}}</td>
+          </tr>
+          <tr *ngIf="participant.oncHistoryDetails != null && participant.oncHistoryDetails.length > 0">
+            <td>Gender</td>
+            <td>{{gender | titlecase}}</td>
+          </tr>
+          <tr *ngIf="participant.data.profile['preferredLanguage'] != null && participant.data.profile['preferredLanguage'] !== ''">
+            <td>Preferred Language</td>
+            <td>{{getLanguageName(participant.data.profile['preferredLanguage'])}}</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <div *ngIf="isAddFamilyMember" class="Float--right Width--100">
+          <div class="family-member-button">
+            <button mat-mini-fab color="primary" class="mat-fab-bottom-left" (click)="showFamilyMemberPopUpOnClick()">
+              <i class="fas fa-plus fa-lg"></i>
+            </button>
+            <span>Add Family Member</span>
+          </div>
+        </div>
+
+        <ng-container *ngIf="participant.proxyData != null && participant.proxyData.length > 0">
+          <b>Proxy Data</b>
+          <table class="table table-condensed">
+            <tbody>
+              <ng-container *ngFor="let proxy of participant.proxyData">
+                <tr>
+                  <td>Name</td>
+                  <td>{{proxy.profile['firstName']}} {{proxy.profile['lastName']}}</td>
+                </tr>
+                <tr *ngIf="proxy.profile['email'] != null">
+                  <td>E-Mail</td>
+                  <td>{{proxy.profile['email']}}</td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </ng-container>
+        <ng-container *ngIf="participant.data.invitations != null && participant.data.invitations.length > 0">
+          <ng-container *ngFor="let invitation of participant.data.invitations">
+            <app-invitation-data *ngIf="invitation != null" [invitation]="invitation"></app-invitation-data>
+          </ng-container>
+        </ng-container>
+        <br/>
+        <br/>
+      </div>
+      <div class="Float--left TD--Padding-Left-BIG">
+        <!--PDF download-->
+        <ng-container *ngIf="participant.participant == null">
+          <ng-container *ngIf="pdfs != null && pdfs.length != 0 && hasRole().allowedToDownloadPDF()">
+            <mat-select placeholder="Select PDF" class="Input--Abstraction" [(ngModel)]="selectedPDF">
+              <mat-option *ngFor="let e of pdfs" [value]="e.configName">
+                {{e.displayName}}
+              </mat-option>
+            </mat-select>
+            <br/>
+            <br/>
+            <button mat-raised-button color="primary"
+                    [disabled]="selectedPDF == null || selectedPDF === '' || disableDownload"
+                    (click)="downloadPDFs(selectedPDF)">Download selected PDF
+            </button>
+          </ng-container>
+        </ng-container>
+
+        <!--Abstraction start buttons-->
+        <div *ngIf="counterReceived > 0 && parentList === 'participantList'">
+          <div class="Float--left TD--Padding">
+            <div class="Float--left Width--100">
+              <b>First Abstraction</b> <b *ngIf="participant.abstraction.aStatus === 'not_started'"> not started yet</b>
+            </div>
+            <div class="Float--left" *ngIf="participant.abstraction.aStatus !== 'in_progress' && participant.abstraction.aStatus !== 'done' && participant.abstraction.aStatus !== 'clear'
+                  && hasRole().isAbstracter()">
+              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"
+                      (click)="lockParticipant(participant.abstraction)">Start First MR Abstraction
+              </button>
+            </div>
+            <div class="Float--left" *ngIf="participant.abstraction.aStatus === 'clear' && hasRole().isAbstracter()
+                  && ((participant.review != null && participant.review.user !== hasRole().getUserName()) || participant.review == null || participant.review.aStatus === 'clear')">
+              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"
+                      (click)="lockParticipant(participant.abstraction)">Continue First MR Abstraction
+              </button>
+            </div>
+            <div class="Float--left Width--100"
+                 *ngIf="participant.abstraction.aStatus !== 'not_started' && participant.abstraction.aStatus !== 'clear' && participant.abstraction.lastChanged == 0">
+              <b>{{participant.abstraction.user}}</b>
+              <b>started: {{participant.abstraction.startDate | date:'medium'}}</b>
+            </div>
+            <div class="Float--left Width--100"
+                 *ngIf="participant.abstraction.aStatus !== 'not_started' && participant.abstraction.aStatus !== 'clear' && participant.abstraction.lastChanged != 0">
+              <b>{{participant.abstraction.user}}</b>
+              <b>continued: {{participant.abstraction.lastChanged | date:'medium'}}</b>
+            </div>
+            <div class="Float--left Width--100" *ngIf="participant.abstraction.aStatus === 'clear'">
+              <b>{{participant.abstraction.user}}</b>
+              <b>broke lock on: {{participant.abstraction.lastChanged | date:'medium'}}</b>
+            </div>
+            <div class="Float--left Width--100"
+                 *ngIf="participant.abstraction.aStatus === 'in_progress' && hasRole().isAbstractionAdmin()">
+              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"
+                      (click)="breakLockParticipant(participant.abstraction)">Un-lock First MR Abstraction
+              </button>
+            </div>
+            <div class="Float--left Width--100" *ngIf="participant.abstraction.aStatus === 'done'">
+              <b>Finished: {{participant.abstraction.lastChanged | date:'medium'}}</b>
+            </div>
+          </div>
+        </div>
+
+        <div
+          *ngIf="participant.abstraction != null && (participant.abstraction.aStatus === 'in_progress' || participant.abstraction.aStatus === 'done' || participant.abstraction.aStatus === 'clear')
+             && parentList === 'participantList'">
+          <div class="Float--left TD--Padding">
+            <div class="Float--left Width--100">
+              <b>Second Abstraction</b> <b *ngIf="participant.review.aStatus === 'not_started'"> not started yet</b>
+            </div>
+            <div class="Float--left" *ngIf="participant.review.aStatus !== 'in_progress' && participant.review.aStatus !== 'done' && participant.review.aStatus !== 'clear'
+                   && participant.abstraction.user !== hasRole().getUserName() && hasRole().isAbstracter()">
+              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"
+                      (click)="lockParticipant(participant.review)">Start Second MR Abstraction
+              </button>
+            </div>
+            <div class="Float--left" *ngIf="participant.review.aStatus === 'clear' && hasRole().isAbstracter()
+                   && (participant.abstraction.user !== hasRole().getUserName() || participant.abstraction.aStatus === 'clear')">
+              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"
+                      (click)="lockParticipant(participant.review)">Continue Second MR Abstraction
+              </button>
+            </div>
+            <div class="Float--left Width--100"
+                 *ngIf="participant.review.aStatus !== 'not_started' && participant.review.aStatus !== 'clear' && participant.review.lastChanged == 0">
+              <b>{{participant.review.user}}</b>
+              <b>started: {{participant.review.startDate | date:'medium'}}</b>
+            </div>
+            <div class="Float--left Width--100"
+                 *ngIf="participant.review.aStatus !== 'not_started' && participant.review.aStatus !== 'clear' && participant.review.lastChanged != 0">
+              <b>{{participant.review.user}}</b>
+              <b>continued: {{participant.review.lastChanged | date:'medium'}}</b>
+            </div>
+            <div class="Float--left Width--100" *ngIf="participant.review.aStatus === 'clear'">
+              <b>{{participant.review.user}}</b>
+              <b>broke lock on: {{participant.review.lastChanged | date:'medium'}}</b>
+            </div>
+            <div class="Float--left Width--100"
+                 *ngIf="participant.review.aStatus === 'in_progress' && hasRole().isAbstractionAdmin()">
+              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"
+                      (click)="breakLockParticipant(participant.review)">Un-lock Second MR Abstraction
+              </button>
+            </div>
+            <div class="Float--left Width--100" *ngIf="participant.review.aStatus === 'done'">
+              <b>Finished: {{participant.review.lastChanged | date:'medium'}}</b>
+            </div>
+          </div>
+        </div>
+
+        <!--tie breaker is only able to start when abstraction and review are done-->
+        <div
+          *ngIf="participant.abstraction != null && participant.abstraction.aStatus === 'done' && participant.review != null && participant.review.aStatus === 'done'
+           && parentList === 'participantList'">
+          <div class="Float--left TD--Padding">
+            <div class="Float--left Width--100">
+              <b>QC</b> <b *ngIf="participant.qc.aStatus === 'not_started'"> not started yet</b>
+            </div>
+            <div class="Float--left" *ngIf="participant.qc.aStatus !== 'in_progress' && participant.qc.aStatus !== 'done' && participant.qc.aStatus !== 'clear'
+                    && participant.abstraction.user !== hasRole().getUserName() && participant.review.user !== hasRole().getUserName()
+                    && hasRole().isQC()">
+              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"
+                      (click)="lockParticipant(participant.qc)">Start QC
+              </button>
+            </div>
+            <div class="Float--left" *ngIf="participant.qc.aStatus === 'clear'
+                  && hasRole().isAbstracter()">
+              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"
+                      (click)="lockParticipant(participant.qc)">Continue QC
+              </button>
+            </div>
+            <div class="Float--left Width--100"
+                 *ngIf="participant.qc.aStatus !== 'not_started' && participant.qc.aStatus !== 'clear'">
+              <b>{{participant.qc.user}}</b>
+              <b>started: {{participant.qc.startDate | date:'medium'}}</b>
+            </div>
+            <div class="Float--left Width--100" *ngIf="participant.qc.aStatus === 'clear'">
+              <b>{{participant.qc.user}}</b>
+              <b>broke lock on: {{participant.qc.lastChanged | date:'medium'}}</b>
+            </div>
+            <div class="Float--left Width--100"
+                 *ngIf="participant.qc.aStatus === 'in_progress' && hasRole().isAbstractionAdmin()">
+              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"
+                      (click)="breakLockParticipant(participant.qc)">Un-lock QC
+              </button>
+            </div>
+            <div class="Float--left Width--100" *ngIf="participant.qc.aStatus === 'done'">
+              <b>Finished: {{participant.qc.lastChanged | date:'medium'}}</b>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="Float--left Width--100" *ngIf="participant.participant != null">
+        <table class="Width--100">
+          <tr *ngIf="participant.medicalRecords != null && participant.medicalRecords.length > 0">
+            <td class="Width--20">Participant Notes</td>
+            <td class="Width--80">
+            <textarea maxlength="1000" [disabled]="participantExited"
+                      [ngClass]="{'Width--100': true, 'Color--Field--Patched': isPatchedCurrently('ptNotes')}"
+                      (blur)="currentField(null)" (focus)="currentField('ptNotes')"
+                      [(ngModel)]="participant.participant.ptNotes"
+                      (change)="valueChanged($event, 'ptNotes', 'r')"></textarea>
+            </td>
+          </tr>
+          <ng-container *ngIf="showParticipantRecord">
+            <tr *ngIf="participant.medicalRecords != null && participant.medicalRecords.length > 0">
+              <td>Paper C/R Sent</td>
+              <td>
+                <div class="Float--left">
+                  <app-field-datepicker [dateString]="participant.participant.paperCRSent"
+                                        [disabled]="participantExited"
+                                        [colorDuringPatch]="isPatchedCurrently('paperCRSent')"
+                                        (dateChanged)="valueChanged($event, 'paperCRSent', 'r')"></app-field-datepicker>
+                </div>
+                <div *ngIf="participant.participant.paperCRSent != null" class="Float--left Router--Outlet">Paper C/R
+                  Received
+                  <app-field-datepicker [dateString]="participant.participant.paperCRReceived"
+                                        [disabled]="participantExited"
+                                        [colorDuringPatch]="isPatchedCurrently('paperCRReceived')"
+                                        (dateChanged)="valueChanged($event, 'paperCRReceived', 'r')"></app-field-datepicker>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+          <tr *ngIf="participant.medicalRecords != null && participant.medicalRecords.length > 0">
+            <td>Onc History Created</td>
+            <td>
+              <div class="Float--left">
+                <app-field-datepicker [dateString]="participant.participant.createdOncHistory"
+                                      [disabled]="participantExited"
+                                      [colorDuringPatch]="isPatchedCurrently('createdOncHistory')"
+                                      (dateChanged)="valueChanged($event, 'createdOncHistory', 'o')"></app-field-datepicker>
+              </div>
+              <div *ngIf="participant.participant.createdOncHistory != null" class="Float--left Router--Outlet">Onc
+                History Reviewed
+                <app-field-datepicker [dateString]="participant.participant.reviewedOncHistory"
+                                      [disabled]="participantExited"
+                                      [colorDuringPatch]="isPatchedCurrently('reviewedOncHistory')"
+                                      (dateChanged)="valueChanged($event, 'reviewedOncHistory', 'o')"></app-field-datepicker>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="participant.medicalRecords != null && participant.medicalRecords.length > 0">
+            <td>
+              Incomplete/Minimal Medical Records
+            </td>
+            <td>
+              <mat-checkbox color="primary" [disabled]="participantExited"
+                           [ngClass]="{'Width--100': true, 'Color--Field--Patched': isPatchedCurrently('minimalMR')}"
+                           [(ngModel)]="participant.participant.minimalMR"
+                           (change)="valueChanged($event, 'minimalMR', 'r')"
+                           disableRipple>
+              </mat-checkbox>
+            </td>
+          </tr>
+          <tr *ngIf="participant.medicalRecords != null && participant.medicalRecords.length > 0">
+            <td>
+              Ready for Abstraction
+            </td>
+            <td>
+              <mat-checkbox color="primary" [disabled]="participantExited"
+                           [ngClass]="{'Width--100': true, 'Color--Field--Patched': isPatchedCurrently('abstractionReady')}"
+                           [(ngModel)]="participant.participant.abstractionReady"
+                           (change)="valueChanged($event, 'abstractionReady', 'r')"
+                           disableRipple>
+              </mat-checkbox>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Float--left Width--100" *ngIf="settings['r'] != null">
+        <table class="Width--100">
+            <tr *ngFor="let fieldSetting of settings['r']">
+              <td>{{fieldSetting.columnDisplay}}</td>
+              <td>
+                <br/>
+                <mat-form-field
+                  *ngIf="fieldSetting.displayType === 'TEXT' || fieldSetting.displayType === ''|| fieldSetting.displayType == null"
+                  [ngClass]="{'Width--100': true, 'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently(fieldSetting.columnName)}">
+                  <input matInput maxlength="200" [disabled]="participantExited"
+                         value="{{getAdditionalValue(fieldSetting.columnName)}}"
+                         placeholder="{{fieldSetting.columnDisplay}}"
+                         (change)="onAdditionalValueChange($event, fieldSetting.columnName)"
+                         (blur)="currentField(null)" (focus)="currentField(fieldSetting.columnName)">
+                </mat-form-field>
+                <mat-form-field *ngIf="fieldSetting.displayType === 'NUMBER'"
+                                    [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently(fieldSetting.columnName)}">
+                  <input matInput maxlength="200" type="number" [disabled]="participantExited"
+                         value="{{getAdditionalValue(fieldSetting.columnName)}}"
+                         (change)="onAdditionalValueChange($event, fieldSetting.columnName)"
+                         (blur)="currentField(null)" (focus)="currentField(fieldSetting.columnName)">
+                </mat-form-field>
+                <textarea maxlength="50000" *ngIf="fieldSetting.displayType === 'TEXTAREA'"
+                          [ngClass]="{'Width--100': true, 'Color--Field--Patched': isPatchedCurrently(fieldSetting.columnName)}"
+                          (blur)="currentField(null)" (focus)="currentField(fieldSetting.columnName)"
+                          [disabled]="participantExited"
+                          value="{{getAdditionalValue(fieldSetting.columnName)}}"
+                          (change)="onAdditionalValueChange($event, fieldSetting.columnName)"></textarea>
+                <mat-select *ngIf="fieldSetting.displayType === 'OPTIONS'" placeholder="{{fieldSetting.columnDisplay}}"
+                           [ngModel]="getAdditionalValue(fieldSetting.columnName)"
+                           (change)="onAdditionalValueChange($event, fieldSetting.columnName)"
+                           [disabled]="participantExited"
+                           [ngClass]="{'Color--Field--Patched': isPatchedCurrently(fieldSetting.columnName)}">
+                  <mat-option *ngFor="let op of fieldSetting.possibleValues" [value]="op.value">{{op.value}}</mat-option>
+                </mat-select>
+                <mat-checkbox *ngIf="fieldSetting.displayType === 'CHECKBOX'" color="primary" disableRipple
+                             [ngModel]="getAdditionalValue(fieldSetting.columnName)"
+                             (change)="onAdditionalValueChange($event, fieldSetting.columnName)"
+                             [disabled]="participantExited">
+                </mat-checkbox>
+                <app-field-datepicker *ngIf="fieldSetting.displayType === 'DATE'"
+                                      [colorDuringPatch]="isPatchedCurrently(fieldSetting.columnName)"
+                                      [disabled]="participantExited"
+                                      [dateString]="getAdditionalValue(fieldSetting.columnName)"
+                                      (dateChanged)="onAdditionalValueChange($event, fieldSetting.columnName)"></app-field-datepicker>
+              </td>
+            </tr>
+        </table>
+      </div>
+
+      <div class="Float--left Width--100">
+          <!--tab order is not working when tabs have ngIf, will just put them at the end of static tabs. therefore ngIf=true is added to static tabs-->
+          <tabset>
+            <tab
+              *ngIf="participant != null && participant.data != null && participant.data.activities != null && participant.data.activities.length > 0
+                && activityDefinitions != null"
+              heading="Survey Data" [active]="tabActive('Survey Data')" (selectTab)="onSelect($event, 'Survey Data')">
+              <br/><br/>
+              <div class="Float--left Width--100">
+                <div class="Float--left Width--100"
+                     *ngIf="participant.data != null && participant.data.activities != null && participant.data.activities.length > 0">
+                  <b class="Group--Title">Jump to:</b>
+                </div>
+                <div class="Float--left Width--100"
+                     *ngIf="participant.data != null && participant.data.activities != null && participant.data.activities.length > 0">
+                  <ng-container *ngFor="let activity of participant.data.activities; let i = index">
+                    <div class="Float--left" *ngIf="getActivityDefinition(activity.activityCode, activity.activityVersion) as activityDef3">
+                      <a class="Abstraction--Jump--Group" pageScroll href="{{getGroupHref(activity.activityCode)}}"
+                         *ngIf="activityDef3 != null">{{activityDef3.activityName}} {{activityDef3.activityVersion}}</a>
+                    </div>
+                    <ng-container *ngIf="i < participant.data.activities.length - 1">
+                      <div class="Float--left Vertical--line"></div>
+                    </ng-container>
+                  </ng-container>
+                </div>
+
+                <!--assumption for now is that activity will be different per ddp > dynamic-->
+                <div class="Float--left Width--100"
+                     *ngIf="participant.data != null && participant.data.activities != null && participant.data.activities.length > 0">
+                  <hr style="border-color: black">
+                  <ng-container *ngFor="let activity of participant.data.activities">
+                    <ng-container *ngIf="getActivityDefinition(activity.activityCode, activity.activityVersion) as activityDef4">
+                      <app-activity-data *ngIf="activityDef4 != null" [activityDefinition]="activityDef4"
+                                         [activity]="activity"></app-activity-data>
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </div>
+            </tab>
+
+            <!--sample information-->
+            <tab *ngIf="!hideSamplesTab && participant.kits != null && participant.kits.length > 0" heading="Sample Information">
+              <ng-container *ngFor="let sample of participant.kits; let i = index">
+                <fieldset style="border: 1px black solid">
+                  <legend class="Group--Title" id="{{sample.kitType}}_{{i}}">Sample Type: {{sample.kitType}}</legend>
+                  <div class="Router--Outlet">
+                    <table class="Width--100 Table--box">
+                      <tr>
+                        <td class="TD--Padding Width--50 Data-Display-Question">Status:</td>
+                      </tr>
+                      <tr>
+                        <td class="TD--Padding-Left Width--50">{{sample[ "sampleQueue" ]}}</td>
+                      </tr>
+                      <hr style="border-color: lightgray">
+                      <tr>
+                        <td class="TD--Padding Width--50 Data-Display-Question">Kit Upload Type:</td>
+                      </tr>
+                      <tr>
+                        <td class="TD--Padding Width--50">{{sample.uploadReason}}</td>
+                      </tr>
+                      <hr style="border-color: lightgray">
+                      <tr>
+                        <td class="TD--Padding Width--50 Data-Display-Question">MF Barcode:</td>
+                      </tr>
+                      <tr>
+                        <td class="TD--Padding-Left Width--50">{{sample.kitLabel}}</td>
+                      </tr>
+                      <hr *ngIf="sample.externalOrderNumber != null && sample.externalOrderNumber != undefined" style="border-color: lightgray">
+                      <tr *ngIf="sample.externalOrderNumber != null && sample.externalOrderNumber != undefined">
+                        <td class="TD--Padding Width--50 Data-Display-Question">External Order Number:</td>
+                      </tr>
+                      <tr *ngIf="sample.externalOrderNumber != null && sample.externalOrderNumber != undefined">
+                        <td class="TD--Padding-Left Width--50">{{sample.externalOrderNumber}}</td>
+                      </tr>
+                      <hr style="border-color: lightgray">
+                      <tr>
+                        <td class="TD--Padding Width--50 Data-Display-Question">Sent:</td>
+                      </tr>
+                      <tr>
+                        <td class="TD--Padding-Left Width--50">{{sample.scanDate === 0 ? "-" : sample.scanDate | date:'medium'}}</td>
+                      </tr>
+                      <hr style="border-color: lightgray">
+                      <tr>
+                        <td class="TD--Padding Width--50 Data-Display-Question">Received:</td>
+                      </tr>
+                      <tr>
+                        <td class="TD--Padding-Left Width--50">{{sample.receiveDate === 0 ? "-" : sample.receiveDate | date:'medium'}}</td>
+                      </tr>
+                      <div *ngIf="sample.deactivatedDate !== 0">
+                        <hr style="border-color: lightgray">
+                        <tr>
+                          <td class="TD--Padding Width--50 Data-Display-Question">Deactivated:</td>
+                        </tr>
+                        <tr>
+                          <td class="TD--Padding-Left Width--50">{{sample.deactivatedDate | date:'medium'}}</td>
+                        </tr>
+                      </div>
+                      <hr *ngIf="sample.trackingNumberTo != null"style="border-color: lightgray">
+                      <tr *ngIf="sample.trackingNumberTo != null">
+                        <td class="TD--Padding Width--50 Data-Display-Question">Tracking-out:</td>
+                      </tr>
+                      <tr *ngIf="sample.trackingNumberTo != null">
+                        <td class="TD--Padding-Left Width--50">{{sample.trackingNumberTo}}</td>
+                      </tr>
+                      <hr *ngIf="sample.upsTrackingStatus != null"style="border-color: lightgray">
+                      <tr *ngIf="sample.upsTrackingStatus != null">
+                        <td class="TD--Padding Width--50 Data-Display-Question">Status-out:</td>
+                      </tr>
+                      <tr *ngIf="sample.upsTrackingStatus != null">
+                        <td class="TD--Padding-Left Width--50">{{sample.upsTrackingStatus}}</td>
+                      </tr>
+                      <hr *ngIf="sample.trackingNumberReturn != null"style="border-color: lightgray">
+                      <tr *ngIf="sample.trackingNumberReturn != null">
+                        <td class="TD--Padding Width--50 Data-Display-Question">Tracking-in:</td>
+                      </tr>
+                      <tr *ngIf="sample.trackingNumberReturn != null">
+                        <td class="TD--Padding-Left Width--50">{{sample.trackingNumberReturn}}</td>
+                      </tr>
+                      <hr *ngIf="sample.upsReturnStatus != null"style="border-color: lightgray">
+                      <tr *ngIf="sample.upsReturnStatus != null">
+                        <td class="TD--Padding Width--50 Data-Display-Question">Status-in:</td>
+                      </tr>
+                      <tr *ngIf="sample.upsReturnStatus != null">
+                        <td class="TD--Padding-Left Width--50">{{sample.upsReturnStatus}}</td>
+                      </tr>
+                      <hr *ngIf="sample.testResult != null">
+                      <tr *ngIf="sample.testResult != null">
+                        <td class="TD--Padding Width--50 Data-Display-Question">Results:</td>
+                      </tr>
+                      <tr *ngIf="sample.testResult != null">
+                        <td class="TD--Padding-Left Width--50">
+                          <div *ngFor="let r of sample.testResult; let j = index">
+                            <b *ngIf="r.isCorrected">
+                              <p>Result: {{r.result}}</p>
+                              <p>Is Corrected: {{r.isCorrected}}</p>
+                              <p>Time Completed: {{r.timeCompleted | date:'medium'}}</p>
+                            </b>
+                            <ng-container *ngIf="!r.isCorrected">
+                              <p>Result: {{r.result}}</p>
+                              <p>Is Corrected: {{r.isCorrected}}</p>
+                              <p>Time Completed: {{r.timeCompleted | date:'medium'}}</p>
+                            </ng-container>
+                            <hr *ngIf="j !== sample.testResult.length-1" style="border-color: lightgray">
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </fieldset>
+              </ng-container>
+            </tab>
+
+          <tab *ngIf="showContactInformation" heading="Contact Information">
+            <legend class="Group--Title">
+              <div class="Float--left Width--100">
+                <ng-container *ngIf="participant && (!participant.data ||!participant.data.address)">
+                  <div>
+                    <p>Not Entered</p>
+                  </div>
+                </ng-container>
+                <table class="Width--100 Table--box">
+                  <tr *ngIf="participant && participant.data && participant.data.address && participant.data.address.street1">
+                    <td class="TD--Padding-Left Width--50"> Street 1: {{ participant.data.address.street1 }} </td>
+                  </tr>
+                  <tr *ngIf="participant && participant.data && participant.data.address && participant.data.address.street2">
+                    <td class="TD--Padding-Left Width--50"> Street 2: {{ participant.data.address.street2 }} </td>
+                  </tr>
+                  <tr *ngIf="participant && participant.data && participant.data.address && participant.data.address.city">
+                    <td class="TD--Padding-Left Width--50"> City: {{ participant.data.address.city }} </td>
+                  </tr>
+                  <tr *ngIf="participant && participant.data && participant.data.address && participant.data.address.postalCode">
+                    <td class="TD--Padding-Left Width--50"> PostalCode: {{ participant.data.address.postalCode }} </td>
+                  </tr>
+                  <tr *ngIf="participant && participant.data && participant.data.address && participant.data.address.state">
+                    <td class="TD--Padding-Left Width--50"> State: {{ participant.data.address.state }} </td>
+                  </tr>
+                  <tr *ngIf="participant && participant.data && participant.data.address && participant.data.address.country">
+                    <td class="TD--Padding-Left Width--50"> Country: {{ participant.data.address.country }} </td>
+                  </tr>
+                  <tr *ngIf="participant && participant.data && participant.data.address && participant.data.address.mailToName">
+                    <td class="TD--Padding-Left Width--50"> Mail To Name: {{ participant.data.address.mailToName }} </td>
+                  </tr>
+                  <tr *ngIf="participant && participant.data && participant.data.address && participant.data.address.zip">
+                    <td class="TD--Padding-Left Width--50"> Zip: {{ participant.data.address.zip }} </td>
+                  </tr>
+                  <tr *ngIf="participant && participant.data && participant.data.address && participant.data.address.valid">
+                    <td class="TD--Padding-Left Width--50"> Valid: {{ participant.data.address.valid }} </td>
+                  </tr>
+                  </table>
+                </div>
+              </legend>
+          </tab>
+
+          <tab *ngIf="showComputedObject" heading="Morning Evening Questionnaire Scores">
+            <legend class="Group--Title">
+              <div class="Float--left Width--100">
+                <table class="Width--100 Table--box">
+                  <tr *ngIf="participant && participant.data && participant.data.computed && participant.data.computed.meqScore">
+                    <td class="TD--Padding-Left Width--50"> MEQ Score: {{ participant.data.computed.meqScore }} </td>
+                  </tr>
+                  <tr *ngIf="participant && participant.data && participant.data.computed && participant.data.computed.meqChronotype">
+                    <td class="TD--Padding-Left Width--50"> MEQ Chronotype: {{ participant.data.computed.meqChronotype }} </td>
+                  </tr>
+                  </table>
+                </div>
+              </legend>
+          </tab>
+
+            <tab heading="Medical Records"
+                 *ngIf="participant.medicalRecords != null && participant.medicalRecords.length > 0"
+                 [active]="tabActive('Medical Records')" (selectTab)="onSelect($event, 'Medical Records')">
+              <br/><br/><br/>
+
+              <table class="table table-striped Width--100" [mfData]="participant.medicalRecords" #mf="mfDataTable"
+                     [mfRowsOnPage]="hasRole().getUserSetting().getRowsPerPage()">
+                <thead>
+                <tr>
+                  <th>
+                    <mfDefaultSorter by="typeDDP">Type</mfDefaultSorter>
+                  </th>
+                  <th>Institution</th>
+                  <th>MR Status</th>
+                  <th>
+                    <mfDefaultSorter by="mrProblem">MR Problem</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="reviewMedicalRecord">MR Requires Review</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="crRequired">Paper C/R Required</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="followUpRequired">MR Follow-Up Required</mfDefaultSorter>
+                  </th>
+                  <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let mr of mf.data">
+                  <ng-container *ngIf="mr.showInstitution()">
+                    <td (click)="openMedicalRecord(mr)">{{mr.getType()}}</td>
+                    <td (click)="openMedicalRecord(mr)">
+                      <ng-container
+                        *ngIf="participant.data != null && participant.data.medicalProviders != null">{{getMedicalRecordName(mr.name,
+                        mr.ddpInstitutionId)}}
+                      </ng-container>
+                      <ng-container *ngIf="participant.data == null || participant.data.medicalProviders == null">
+                        {{mr.getName()}}
+                      </ng-container>
+                    </td>
+                    <td (click)="openMedicalRecord(mr)">{{mr.getMRStatus()}}</td>
+                    <td (click)="openMedicalRecord(mr)">{{getUtil().getYesNo(mr.mrProblem)}}</td>
+                    <td (click)="openMedicalRecord(mr)">{{getUtil().getYesNo(mr.reviewMedicalRecord)}}</td>
+                    <td (click)="openMedicalRecord(mr)">{{getUtil().getYesNo(mr.crRequired)}}</td>
+                    <td (click)="openMedicalRecord(mr)">{{getUtil().getYesNo(mr.followUpRequired)}}</td>
+                    <td>
+                      <button mat-mini-fab [color]="getButtonColorStyle(mr.mrNotes)" placement="left"
+                              tooltip='{{mr.mrNotes}}'
+                              (click)="openNoteModal(mr); universalModal.show()">
+                        <i class="fas fa-comment-alt fa-lg" data-fa-transform="down-2"></i>
+                      </button>
+                    </td>
+                  </ng-container>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <td colspan="8">
+                    <mfBootstrapPaginator
+                      [rowsOnPageSet]="[hasRole().getUserSetting().getRowSet0(), hasRole().getUserSetting().getRowSet1(), hasRole().getUserSetting().getRowSet2()]"></mfBootstrapPaginator>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="8">
+                    <b># of institutions: {{getInstitutionCount()}}</b>
+                  </td>
+                </tr>
+                </tfoot>
+              </table>
+            </tab>
+
+            <tab heading="Onc History"
+                 *ngIf="participant.oncHistoryDetails != null && participant.oncHistoryDetails.length > 0"
+                 [active]="tabActive('Onc History')" (selectTab)="onSelect($event, 'Onc History')">
+              <br/><br/><br/>
+
+              <ng-container *ngIf="getTissueConsent() == null || !getTissueConsent()">
+                <b>This participant did not consent to sharing tissue</b><br/>
+
+                <div class="Float--left Width--100">
+                  <div>
+                    <app-onc-history-detail [participant]="participant" [settings]="settings"
+                                            [oncHistory]="participant.oncHistoryDetails"
+                                            [editable]="false"
+                                            [oncHistoryId]="oncHistoryId"
+                                            (valueChanged)="onOncHistoryDetailChange()"
+                                            (openTissue)="openTissue($event)"
+                                            (selectionChanged)="onOncHistoryDetailSelectionChange()">
+                    </app-onc-history-detail>
+                  </div>
+                </div>
+
+              </ng-container>
+              <ng-container *ngIf="getTissueConsent() == null || getTissueConsent()">
+                <span *ngIf="getTissueConsent() == null">
+                  <b>Please check that this participant did consent to sharing tissue</b><br/>
+                </span>
+
+                <div class="Float--left Width--100">
+                  <div>
+                    <app-onc-history-detail [participant]="participant" [settings]="settings"
+                                            [oncHistory]="participant.oncHistoryDetails"
+                                            (valueChanged)="onOncHistoryDetailChange()"
+                                            [oncHistoryId]="oncHistoryId"
+                                            (openTissue)="openTissue($event)"
+                                            (selectionChanged)="onOncHistoryDetailSelectionChange()">
+                    </app-onc-history-detail>
+                  </div>
+
+                  <div
+                    *ngIf="participant != null && participant.oncHistoryDetails.length > 0 && getTissueConsent() == null || getTissueConsent()">
+                    <button mat-raised-button (click)="requestTissue(false)" color="primary" [disabled]="participantExited"
+                            [disabled]="disableTissueRequestButton || hasRole().prohibitedToRequestTissue()"> Download Request Documents
+                    </button>
+                    <button mat-raised-button color="primary"
+                            [disabled]="downloading"
+                            (click)="requestTissue(true)">Download PDF Bundle
+                    </button>
+                    <a href="#" (click)="doNothing('bundle')" *ngIf="!downloading" class="Router--Outlet"><b> Change order/files in Bundle</b></a>
+                  </div>
+                </div>
+              </ng-container>
+            </tab>
+
+            <tab heading="First Medical Record Abstraction" [active]="tabActive('abstraction')"
+                 (selectTab)="onSelect($event, 'abstraction'); getFileList(participant.abstraction)"
+                 *ngIf="(participant.abstraction != null && abstractionFields != null
+                 && (participant.abstraction.aStatus === 'in_progress' || participant.abstraction.aStatus === 'done'))
+                 && participant.finalA != null && participant.finalA.aStatus !== 'done'
+                 && (hasRole().isAbstractionAdmin() || hasRole().isAbstracter() || hasRole().isQC())"
+                 [disabled]="participant.abstraction.user !== hasRole().getUserName()">
+              <br/>
+              <div class="Float--left Width--100">
+                <mat-form-field class="Input--Bigger-WIDTH">
+                  <input matInput maxlength="500" placeholder="Files used in the abstraction" type="text"
+                         [disabled]="participantExited"
+                         [ngClass]="{'Input': true, 'Input--Bigger-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('filesUsed')}"
+                         [(ngModel)]="participant.abstraction.filesUsed"
+                         (change)="abstractionFilesUsedChanged(participant.abstraction)"
+                         (blur)="currentField(null)" (focus)="currentField('filesUsed')">
+                </mat-form-field>
+              </div>
+              <div class="Float--left Width--100">
+                <b class="Group--Title">Jump to:</b>
+              </div>
+              <div class="Float--left Width--100">
+                <ng-container *ngFor="let groups of abstractionFields; let i = index">
+                  <div class="Float--left">
+                    <a class="Abstraction--Jump--Group" pageScroll
+                       href="{{getGroupHref(groups.getDisplayNameWithoutSpace('abstraction'))}}">{{groups.displayName}}</a>
+                  </div>
+                  <ng-container *ngIf="i < abstractionFields.length - 1">
+                    <div class="Float--left Vertical--line"></div>
+                  </ng-container>
+                </ng-container>
+              </div>
+
+              <div class="Float--left Width--100">
+                <hr style="border-color: black">
+                <app-medical-record-abstraction [abstractionFormControls]="abstractionFields"
+                                                [abstractionActivity]="'abstraction'"
+                                                [status]="participant.abstraction.aStatus" [participant]="participant"
+                                                [fileList]="fileListUsed" [drugList]="drugs" [cancerList]="cancers"
+                                                (emitFileName)="addFileToParticipant($event, participant.abstraction)">
+                </app-medical-record-abstraction>
+              </div>
+
+              <div class="Float--left Width--100" *ngIf="participant.abstraction.aStatus !== 'done'">
+                <hr style="border-color: black">
+                <button mat-raised-button type="button" color="primary"
+                        (click)="submitParticipant(participant.abstraction)">Submit MR Abstraction
+                </button>
+              </div>
+            </tab>
+
+            <tab heading="Second Medical Record Abstraction" [active]="tabActive('review')"
+                 (selectTab)="onSelect($event, 'review'); getFileList(participant.review)"
+                 *ngIf="(participant.review != null && reviewFields != null && (participant.review.aStatus === 'in_progress' || participant.review.aStatus === 'done')) && participant.finalA != null && participant.finalA.aStatus !== 'done' &&
+                    (hasRole().isAbstractionAdmin() || hasRole().isAbstracter() || hasRole().isQC())"
+                 [disabled]="participant.review.user !== hasRole().getUserName()">
+              <br/>
+              <div class="Float--left Width--100">
+                <mat-form-field
+                  [ngClass]="{'Input': true, 'Input--Bigger-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('filesUsed')}">
+                  <input matInput maxlength="500" placeholder="Files used in the abstraction" type="text"
+                         [disabled]="participantExited"
+                         [(ngModel)]="participant.review.filesUsed"
+                         (change)="abstractionFilesUsedChanged(participant.review)"
+                         (blur)="currentField(null)" (focus)="currentField('filesUsed')">
+                </mat-form-field>
+              </div>
+              <div class="Float--left Width--100">
+                <b class="Group--Title">Jump to:</b>
+              </div>
+              <div class="Float--left Width--100">
+                <ng-container *ngFor="let groups of reviewFields; let i = index">
+                  <div class="Float--left">
+                    <a class="Abstraction--Jump--Group" pageScroll
+                       href="{{getGroupHref(groups.getDisplayNameWithoutSpace('review'))}}">{{groups.displayName}}</a>
+                  </div>
+                  <ng-container *ngIf="i < reviewFields.length - 1">
+                    <div class="Float--left Vertical--line"></div>
+                  </ng-container>
+                </ng-container>
+              </div>
+
+              <div class="Float--left Width--100">
+                <hr style="border-color: black">
+                <app-medical-record-abstraction [abstractionFormControls]="reviewFields"
+                                                [abstractionActivity]="'review'" [status]="participant.review.aStatus"
+                                                [fileList]="fileListUsed" [drugList]="drugs" [cancerList]="cancers" [participant]="participant"
+                                                (emitFileName)="addFileToParticipant($event, participant.review)">
+                </app-medical-record-abstraction>
+              </div>
+
+              <div class="Float--left Width--100" *ngIf="participant.review.aStatus !== 'done'">
+                <hr style="border-color: black">
+                <button mat-raised-button type="button" color="primary"
+                        (click)="submitParticipant(participant.review)">Submit MR Abstraction
+                </button>
+              </div>
+            </tab>
+
+            <tab heading="QC" [active]="tabActive('qc')" (selectTab)="onSelect($event, 'qc'); getFileList(participant.qc)"
+                 *ngIf="(participant.qc != null && qcFields != null && (participant.qc.aStatus === 'in_progress' || participant.qc.aStatus === 'done')) && participant.finalA != null && participant.finalA.aStatus !== 'done' &&
+                    (hasRole().isAbstractionAdmin() || hasRole().isAbstracter() || hasRole().isQC())"
+                 [disabled]="participant.qc.user !== hasRole().getUserName()">
+              <br/>
+              <div class="Float--left Width--100">
+                <mat-form-field
+                  [ngClass]="{'Input': true, 'Input--Bigger-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('filesUsed')}">
+                  <input matInput maxlength="500" placeholder="Files used in the abstraction" type="text"
+                         [disabled]="participantExited"
+                         [(ngModel)]="participant.finalA.filesUsed"
+                         (change)="abstractionFilesUsedChanged(participant.finalA)"
+                         (blur)="currentField(null)" (focus)="currentField('filesUsed')">
+                </mat-form-field>
+              </div>
+              <div class="Float--left Width--100">
+                <b class="Group--Title">Jump to:</b>
+              </div>
+              <div class="Float--left Width--100">
+                <ng-container *ngFor="let groups of qcFields; let i = index">
+                  <div class="Float--left">
+                    <a class="Abstraction--Jump--Group" pageScroll
+                       href="{{getGroupHref(groups.getDisplayNameWithoutSpace('qc'))}}">{{groups.displayName}}</a>
+                  </div>
+                  <ng-container *ngIf="i < qcFields.length - 1">
+                    <div class="Float--left Vertical--line"></div>
+                  </ng-container>
+                </ng-container>
+              </div>
+
+              <div class="Float--left Width--100">
+                <hr style="border-color: black">
+                <app-medical-record-abstraction [abstractionFormControls]="qcFields" [abstractionActivity]="'qc'"
+                                                [status]="participant.qc.aStatus" [participant]="participant"
+                                                [fileList]="fileListUsed" [drugList]="drugs" [cancerList]="cancers"
+                                                (emitFileName)="addFileToParticipant($event, participant.qc)">
+                </app-medical-record-abstraction>
+              </div>
+
+              <div class="Float--left Width--100" *ngIf="participant.qc.aStatus !== 'done'">
+                <hr style="border-color: black">
+                <button mat-raised-button type="button" color="primary"
+                        (click)="submitParticipant(participant.qc)">Submit QC
+                </button>
+              </div>
+            </tab>
+
+            <tab heading="Final Abstraction Values" [active]="tabActive('final')" (selectTab)="onSelect($event, 'final')"
+                 *ngIf="participant.finalA != null && finalFields != null && participant.finalA.aStatus === 'done'">
+              <br/>
+              <div class="Float--left Width--100">
+                <b class="Group--Title">Jump to:</b>
+              </div>
+              <div class="Float--left Width--100">
+                <ng-container *ngFor="let groups of finalFields; let i = index">
+                  <div class="Float--left">
+                    <a class="Abstraction--Jump--Group" pageScroll
+                       href="{{getGroupHref(groups.getDisplayNameWithoutSpace('final'))}}">{{groups.displayName}}</a>
+                  </div>
+                  <ng-container *ngIf="i < finalFields.length - 1">
+                    <div class="Float--left Vertical--line"></div>
+                  </ng-container>
+                </ng-container>
+              </div>
+
+              <div class="Float--left Width--100">
+                <hr style="border-color: black">
+                <app-medical-record-abstraction [abstractionFormControls]="finalFields" [abstractionActivity]="'final'"
+                                                [status]="participant.finalA.aStatus"
+                                                [fileList]="fileListUsed" [participant]="participant">
+                </app-medical-record-abstraction>
+              </div>
+            </tab>
+
+            <ng-container *ngIf="dynamicFormType(settings); else groupForm">
+              <ng-container *ngFor="let relative of participant.participantData">
+                <!--RGP tabs from fieldSettings-->
+                <ng-container *ngFor="let tab of settings['TAB_GROUPED']">
+                  <ng-container *ngIf="displayTab(tab)">
+                    <tab heading="{{createRelativeTabHeading(relative.data)}}" [active]="tabActive(relative.dataId)" (selectTab)="onSelect($event, relative.dataId)" >
+                    <br/><br/>
+                      <div *ngIf="settings[tab.columnName].length > 0 && settings[tab.columnName][0].displayType === 'GROUP'">
+                        <div class="Float--left Width--100"
+                             *ngIf="settings[tab.columnName].length > 0">
+                          <b class="Group--Title">Jump to:</b>
+                        </div>
+                        <div class="Float--left Width--100"
+                             *ngIf="settings[tab.columnName].length > 0">
+                          <ng-container *ngFor="let activity of settings[tab.columnName]; let i = index">
+
+                            <div class="Float--left" *ngIf="true">
+                              <a class="Abstraction--Jump--Group" (click)="openAccordionPanel(activity.columnName)" pageScroll href="{{getGroupHref(activity.columnName)}}"
+                                 *ngIf="activity != null">{{activity.columnDisplay}}</a>
+                            </div>
+                            <ng-container *ngIf="i < settings[tab.columnName].length - 1">
+                              <div class="Float--left Vertical--line"></div>
+                            </ng-container>
+                          </ng-container>
+                        </div>
+                      </div><br/><br/><br/>
+                      <ng-container *ngIf="tabActive(relative.dataId)">
+                        <accordion>
+                          <accordion-group *ngFor="let setting of settings[tab.columnName]; let settingIndex = index"
+                            [heading]="setting.columnDisplay" [isOpen]="isAccordionPanelOpen(setting.columnName)" [isDisabled]="showGroupFields"
+                            (isOpenChange)="onOpenChangeAccordionPanel($event)">
+                            <div class="Float--left Width--100">
+                              <div *ngIf="setting.displayType === 'GROUP'">
+                                <hr style="border-color: black">
+                                <fieldset style="border: 1px black solid">
+                                  <legend class="Group--Title" id="{{setting.columnName}}"></legend>
+                                  <ng-container *ngFor="let field of settings[setting.columnName]; let fieldIndex = index">
+                                    <app-form-data [fieldSetting]="field" [participantData]="getParticipantData(field, relative)"
+                                                  [activityData]="getActivityData(field)" [activityOptions]="getActivityOptions(field)"
+                                                  (patchData)="formPatch($event, field, setting, relative.dataId)"></app-form-data>
+                                    <hr *ngIf="fieldIndex !== settings[setting.columnName].length-1" style="border-color: lightgray">
+                                  </ng-container>
+                                </fieldset>
+                              </div>
+                            </div>
+                          </accordion-group>
+                        </accordion>
+                      </ng-container>
+                    </tab>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+
+            <!--AT tabs from fieldSettings-->
+            <ng-template #groupForm>
+              <ng-container *ngFor="let tab of settings['TAB']">
+                <ng-container *ngIf="displayTab(tab)">
+                  <tab heading="{{getDisplayName(tab.columnDisplay, tab.columnName)}}" [active]="tabActive(tab.columnDisplay)" (selectTab)="onSelect($event, tab.columnDisplay)" >
+                    <ng-container *ngFor="let setting of settings[tab.columnName]; let settingIndex = index">
+                      <ng-container *ngIf="tabActive(tab.columnDisplay)">
+                        <div class="Float--left Width--100">
+                          <ng-container *ngIf="setting.displayType !== 'GROUP'">
+                            <app-form-data [fieldSetting]="setting" [participantData]="getParticipantDataFromSingleParticipant(setting)"
+                                          [activityData]="getActivityData(setting)" [activityOptions]="getActivityOptions(setting)"
+                                          (patchData)="formPatch($event, setting, null, findDataId(setting))"></app-form-data>
+                            <hr *ngIf="settingIndex !== settings[tab.columnName].length-1" style="border-color: lightgray">
+                          </ng-container>
+                        </div>
+                      </ng-container>
+                    </ng-container>
+                  </tab>
+                </ng-container>
+              </ng-container>
+            </ng-template>
+          </tabset>
+      </div>
+    </div>
+  </div>
+
+  <app-modal>
+    <div class="app-modal-header">
+      <ng-container *ngIf="source === 'normal'">
+        Note for medical record:
+      </ng-container>
+      <ng-container *ngIf="source === 'warning'">
+        Tissue Request Warning
+      </ng-container>
+      <ng-container *ngIf="source === 'bundle'">
+        Change order of PDFs in bundle
+      </ng-container>
+    </div>
+    <div class="app-modal-body">
+      <ng-container *ngIf="source === 'normal'">
+      <textarea class="Width--100" maxlength="1000" [disabled]="participantExited"
+                *ngIf="noteMedicalRecord != null" [(ngModel)]="noteMedicalRecord.mrNotes"></textarea>
+      </ng-container>
+      <ng-container *ngIf="source === 'warning'">
+        {{warning}}
+      </ng-container>
+      <ng-container *ngIf="source === 'bundle'">
+        <table class="table table-condensed">
+          <tbody>
+          <tr *ngFor="let pdf of pdfs">
+            <td>
+              <mat-select placeholder="Select PDF" [(ngModel)]="pdf.order">
+                <mat-option *ngFor="let item of [].constructor(pdfs.length + 1); let i = index" [value]="i">
+                  {{i}}
+                </mat-option>
+              </mat-select>
+            </td>
+            <td>
+              {{pdf.displayName}}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        Order = 0 will not add the pdf to the bundle
+      </ng-container>
+    </div>
+    <div class="app-modal-footer">
+      <button type="button" class="btn btn-default"
+              (click)="universalModal.hide()">Close
+      </button>
+      <ng-container *ngIf="source === 'normal'">
+        <button type="button" class="btn btn-primary" [disabled]="participantExited"
+                (click)="saveNote()">Save & Close
+        </button>
+      </ng-container>
+      <ng-container *ngIf="source === 'warning'">
+        <button type="button" class="btn btn-default" [disabled]="participantExited"
+                (click)="doRequest(bundle)">Request Anyway
+        </button>
+      </ng-container>
+      <ng-container *ngIf="source === 'bundle'">
+        <button type="button" class="btn btn-primary" [disabled]="participantExited"
+                (click)="doRequest(true)">Download PDF Bundle
+        </button>
+      </ng-container>
+    </div>
+  </app-modal>
+</ng-container>

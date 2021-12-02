@@ -469,8 +469,7 @@
             "ManageParticipants": "Gerir participantes"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "Preferências de utilizador ",
-            "UserPreferencesGender": "Sexo"
+            "UserPreferencesTitle": "Preferências de utilizador "
         },
         "Dashboard": {
             "Title": "O meu painel",
@@ -613,7 +612,8 @@
                 "E.TIMED_OUT": "Excedeu tempo limite máximo.",
                 "E.TIME_ZONE.UNAVAILABLE": "O serviço para esse fuso horário está atualmente indisponível.",
                 "E.PO_BOX.INTERNATIONAL": "Não foi possível verificar o Nº Apartado internacional. Tenha em atenção que isto pode aparecer como erro num pedido posterior."
-            }
+            },
+            "UseAsEntered": "[PT] We are unable to confirm that the address is valid. Please check this box to use the address as entered."
         },
         "TooltipAlt": "Informação",
         "SubjectPanel": {

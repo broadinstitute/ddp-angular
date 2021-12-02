@@ -422,7 +422,6 @@
             "SignOutButton": "Disconnetti"
         },
         "UserPreferences": {
-            "UserPreferencesGender": "Sesso",
             "UserPreferencesTitle": "Preferenze utente"
         },
         "ValidateError": "Impossibile procedere con l'invio. Rivedi i messaggi nel modulo per i dettagli.",

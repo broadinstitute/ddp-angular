@@ -422,7 +422,6 @@
             "SignOutButton": "Sair"
         },
         "UserPreferences": {
-            "UserPreferencesGender": "Sexo",
             "UserPreferencesTitle": "Preferências do usuário"
         },
         "ValidateError": "Não é possível concluir o envio. Confira as mensagens no formulário para saber detalhes.",

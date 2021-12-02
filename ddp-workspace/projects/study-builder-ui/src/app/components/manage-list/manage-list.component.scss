@@ -1,0 +1,61 @@
+.cdk-drag-placeholder {
+    opacity: 0;
+}
+
+.cdk-drag {
+    background-color: white;
+}
+
+.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drop-list-dragging .group-row:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+:host ::ng-deep {
+    .stable-id-column {
+        width: 90px;
+        min-width: 90px;
+        flex: 0 1 90px;
+    }
+
+    .label-column,
+    .tooltip-column,
+    .detail-label-column,
+    .name-column {
+        width: 170px;
+        min-width: 170px;
+        flex: 0 1 170px;
+    }
+
+    .allow-details-column,
+    .exclusive-column {
+        width: 50px;
+        min-width: 50px;
+        flex: 1 1 50px;
+    }
+
+    .drag-indicator-column,
+    .remove-column {
+        width: 40px;
+        min-width: 40px;
+        flex: 0 1 40px;
+    }
+}
+
+.drag-indicator-column {
+    cursor: move;
+    opacity: .3;
+}
+
+.group-row {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+app-picklist-group-editor {
+    overflow: auto;
+}

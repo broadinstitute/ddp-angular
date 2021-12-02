@@ -1,0 +1,24 @@
+<ng-container *ngFor="let group of abstractionFormControls" class="Width--100">
+  <app-abstraction-group [participant]="participant"
+                         [displayName]="group.displayName" [fields]="group.fields" [setupForm]="editForm" [activityStatus]="status"
+                         [fileNames]="fileList" [drugNames]="drugList" [cancerNames]="cancerList" [currentFile]="nameCurrentFile" [activity]="abstractionActivity"
+                         (emitFile)="addFileToList($event)">
+  </app-abstraction-group>
+</ng-container>
+
+<div class="Width--100">
+  <ng-container *ngIf="editForm">
+    <div class="TD--Padding">
+      <mat-form-field [ngClass]="{'Width--100': true, 'Input--Abstraction': true}">
+        <input matInput maxlength="200" (change)="checkName(newGroup)"
+               placeholder="New Group" autocomplete="off"
+               [(ngModel)]="newGroup">
+        <mat-hint class="ErrorMessageForm" *ngIf="notUniqueError">Display name not unique</mat-hint>
+      </mat-form-field>
+      <button mat-mini-fab color="primary" tooltip="Add Group" [disabled]="newGroup == null || newGroup == null || notUniqueError"
+              (click)="addGroup()">
+        <i class="fas fa-plus fa-lg"></i>
+      </button>
+    </div>
+  </ng-container>
+</div>

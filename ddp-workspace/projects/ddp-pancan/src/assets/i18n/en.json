@@ -594,6 +594,7 @@
         }
     },
     "SDK": {
+        "FinishButton": "Finish",
         "SubmitButton": "Submit",
         "CloseButton": "Close",
         "AddButton": "ADD",
@@ -627,7 +628,8 @@
             "ActivityActions": "Actions"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "User preferences"
+            "UserPreferencesTitle": "User preferences",
+            "MailingAddress": "Mailing Address"
         },
         "DatePicker": {
             "Day": "Choose day...",
@@ -680,6 +682,14 @@
                 "OtherInstitution": "Other institution"
             },
             "PhysicianValidation": "Please fill out all required fields"
+        },
+        "ModalActivityBlock": {
+            "SaveButton": "Save",
+            "NumQuestionsAnswered": "{{number}} questions answered",
+            "Complete": "Complete",
+            "EditButton": "Edit",
+            "DeleteButton": "Delete",
+            "CancelButton": "Cancel"
         },
         "MailAddress": {
             "Fields": {
@@ -768,7 +778,7 @@
                 "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
                 "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
             },
-            "UseAsEntered":  "We are unable to confirm that the address is valid. Please check this box to use the address as entered."
+            "UseAsEntered": "We are unable to confirm that the address is valid. Please check this box to use the address as entered."
         },
         "TooltipAlt": "Information",
         "Validators": {

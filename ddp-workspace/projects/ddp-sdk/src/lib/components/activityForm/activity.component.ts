@@ -201,15 +201,18 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                             this.currentSection.validate();
                             this.model && this.model.shouldScrollToFirstInvalidQuestion();
                             // triggers scrolling
+                            // and allows a local validation if answer is changed
+                            // (see activityQuestion.component.ts, setupErrorMessage method)
                             this.validationRequested = true;
                         }),
                         // delay needed for validationRequested to be processed
                         delay(0),
                         tap(() => {
                             this.sendSectionAnalytics();
-                            // reset scrolling signal
-                            this.validationRequested = false;
                             if (this.currentSection.valid) {
+                                // reset scrolling signal and disable a local validation
+                                this.validationRequested = false;
+
                                 this.visitedSectionIndexes[nextIndex] = true;
                                 this.saveLastVisitedSectionIndex(nextIndex);
                                 this.currentSectionIndex = nextIndex;

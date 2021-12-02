@@ -51,7 +51,9 @@ export class LoginLandingComponent implements OnInit {
       );
     }
 
-    this.router.navigateByUrl(RoutePaths.Error);
+    this.router.navigateByUrl(RoutePaths.Error, {
+        state: { errorMessage: error?.message }
+    });
   }
 
   private redirect(): void {

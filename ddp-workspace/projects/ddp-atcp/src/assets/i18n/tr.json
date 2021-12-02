@@ -422,7 +422,6 @@
             "SignOutButton": "Oturumu Kapat"
         },
         "UserPreferences": {
-            "UserPreferencesGender": "Cinsiyet",
             "UserPreferencesTitle": "Kullanıcı tercihleri"
         },
         "ValidateError": "Gönderme işlemine devam edilemiyor. Ayrıntılar için lütfen formdaki mesajları gözden geçirin.",

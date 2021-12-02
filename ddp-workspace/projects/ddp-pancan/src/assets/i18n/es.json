@@ -592,6 +592,7 @@
         }
     },
     "SDK": {
+        "FinishButton": "Terminar",
         "SubmitButton": "Enviar",
         "CloseButton": "Cerrar",
         "AddButton": "AGREGAR",
@@ -625,7 +626,8 @@
             "ActivityActions": "Acciones"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "Preferencias del Usuario"
+            "UserPreferencesTitle": "Preferencias del Usuario",
+            "MailingAddress": "[ES] Mailing Address"
         },
         "DatePicker": {
             "Day": "Escoja el día...",
@@ -678,6 +680,14 @@
                 "OtherInstitution": "Otra institución"
             },
             "PhysicianValidation": "Complete todos los campos obligatorios."
+        },
+        "ModalActivityBlock": {
+            "SaveButton": "Guardar",
+            "NumQuestionsAnswered": "{{number}} preguntas respondidas",
+            "Complete": "Completar",
+            "EditButton": "Editar",
+            "DeleteButton": "Eliminar",
+            "CancelButton": "Cancelar"
         },
         "MailAddress": {
             "Fields": {
@@ -766,7 +776,7 @@
                 "E.TIME_ZONE.UNAVAILABLE": "El servicio de zona horaria no está disponible en este momento.",
                 "E.PO_BOX.INTERNATIONAL": "No se puede verificar la casilla postal internacional. Tenga en cuenta que eso puede causar errores en solicitudes correctas."
             },
-            "UseAsEntered":  "No podemos confirmar que esta dirección es válida. Marque esta casilla para confirmar el uso de esta dirección como ha sido ingresada."
+            "UseAsEntered": "No podemos confirmar que esta dirección es válida. Marque esta casilla para confirmar el uso de esta dirección como ha sido ingresada."
         },
         "TooltipAlt": "Información",
         "Validators": {

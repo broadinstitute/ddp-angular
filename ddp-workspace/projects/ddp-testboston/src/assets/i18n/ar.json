@@ -469,8 +469,7 @@
             "ManageParticipants": "إدارة المشاركين"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "تفضيلات المستخدم",
-            "UserPreferencesGender": "الجنس"
+            "UserPreferencesTitle": "تفضيلات المستخدم"
         },
         "Dashboard": {
             "Title": "لوحة المعلومات الخاصة بي",
@@ -613,7 +612,8 @@
                 "E.TIMED_OUT": "تم تجاوز الحد الأقصى للمهلة.",
                 "E.TIME_ZONE.UNAVAILABLE": "خدمة المنطقة الزمنية غير متوفرة حاليًا.",
                 "E.PO_BOX.INTERNATIONAL": "لا يمكن التحقق من صندوق البريد الدولي. يُرجى ملاحظة أن هذا قد يظهر كخطأ في وجود طلب ناجح."
-            }
+            },
+            "UseAsEntered": "[AR] We are unable to confirm that the address is valid. Please check this box to use the address as entered."
         },
         "TooltipAlt": "المعلومات",
         "SubjectPanel": {

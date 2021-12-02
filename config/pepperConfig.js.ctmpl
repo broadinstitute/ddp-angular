@@ -11,11 +11,14 @@ var DDP_ENV = {
     mapsApiKey: "{{.Data.mapsApiKey}}",
     errorReportingApiKey: "{{.Data.errorReportingApiKey}}",
     projectGcpId: "{{.Data.googleProjectId}}",
+    cloudLoggingUrl:  "{{.Data.cloudLoggingUrl}}",
+    doCloudLogging: true,
     {{end}}
     // The flag indicates whether we need report JS errors to Google Cloud Error Report API
     doGcpErrorReporting: true,
     studyGuid: "{{$study_guid}}",
-    tcellbaseurl: "https://us.agent.tcell.insight.rapid7.com/api/v1"
+    tcellbaseurl: "https://us.agent.tcell.insight.rapid7.com/api/v1",
+
 };
 
 // Log levels: 1 - debug; 2 - info; 3 - warning; 4 - error. E.g. 1 includes debug level and higher, 2 includes info and higher, etc.

@@ -1,0 +1,29 @@
+.LIST-SEPARATOR:not(:last-child) {
+  border-bottom:1px solid lightgrey;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.BIT-OF-MARGIN {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  min-height: 20px;
+}
+
+.NO-PADDING-START{
+  padding-inline-start: 0;
+  list-style-type:none;
+}
+
+button.mat-icon-button {
+  width: auto;
+}
+
+.mat-icon {
+  font-size: 14px;
+  width: auto;
+}
+
+td {
+  white-space: nowrap;
+}

@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "target": "es5"
+  },
+  "include": [
+    "projects/ddp-dsm-ui/src/**/*.d.ts"
+  ]
+}

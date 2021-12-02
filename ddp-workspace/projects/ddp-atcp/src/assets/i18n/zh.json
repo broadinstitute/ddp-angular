@@ -427,7 +427,6 @@
             "SignOutButton": "登出"
         },
         "UserPreferences": {
-            "UserPreferencesGender": "性别",
             "UserPreferencesTitle": "用户偏好设置"
         },
         "ValidateError": "无法继续提交。有关详细信息，请查看表单中的消息。",

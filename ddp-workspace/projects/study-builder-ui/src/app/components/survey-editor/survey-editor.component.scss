@@ -1,0 +1,37 @@
+.control-bar {
+    height: 70px;
+    padding: 10px;
+    z-index: 1;
+}
+.right-canvas-panel {
+    min-height: 500px;
+    background-color: #ede7f6;
+}
+
+.left-panel {
+    height: 100%;
+    position: relative;
+    padding: 15px 0 0 10px;
+    background-color: white;
+    border-right: 1px solid;
+    box-sizing: border-box;
+}
+
+.create-new-activity-btn {
+    margin-left: 15px;
+}
+
+.resize-handle-right {
+    position: absolute;
+    height: 100%;
+    cursor: col-resize;
+    width: 5px;
+    top: 0;
+    background-color: #e3e1e1;
+    z-index: 10;
+    right: 0;
+}
+
+.container {
+    height: 100%;
+}
