@@ -117,7 +117,19 @@
         margin: 1rem 0;
 
         .mat-list-item-content {
+          display: flex;
+          flex-flow: column;
+          align-items: flex-start;
+
           padding: 0;
+
+          .mat-form-field {
+            width: 100%;
+
+            margin-top: 1rem;
+
+            font-size: 1rem;
+          }
         }
       }
     }
@@ -187,7 +199,7 @@
 }
 
 .mat-tooltip {
-  max-width: 280px !important;
+  max-width: 360px !important;
 
   padding: 16px 24px !important;
 
