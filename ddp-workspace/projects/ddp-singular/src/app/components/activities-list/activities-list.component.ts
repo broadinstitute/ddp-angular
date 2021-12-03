@@ -17,15 +17,6 @@ export class ActivitiesListComponent {
   displayedColumns = ['activityName', 'activitySummary', 'activityCreatedAt', 'activityStatus', 'activityActions'];
   ActivityCode = ActivityCode;
   ActivityStatusCodes = ActivityStatusCodes;
-  private allowedToEditActivities = [
-    ActivityCode.AboutHealthy,
-    ActivityCode.AboutPatient,
-    ActivityCode.MedicalRecordRelease,
-  ];
-
-  canCopyActivity(activity: ActivityInstance): boolean {
-    return this.allowedToEditActivities.includes(activity.activityCode as ActivityCode) && !activity.readonly;
-  }
 
   onStartClick(activity: ActivityInstance): void {
     this.startActivity.emit(activity);
@@ -60,5 +51,9 @@ export class ActivitiesListComponent {
     }
 
     return activity.statusCode as ActivityStatusCodes;
+  }
+
+  isActivityEditable(activity: ActivityInstance): boolean {
+    return activity.statusCode === ActivityStatusCodes.COMPLETE && !activity.readonly;
   }
 }
