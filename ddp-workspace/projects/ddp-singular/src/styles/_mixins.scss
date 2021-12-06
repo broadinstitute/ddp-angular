@@ -1,0 +1,10 @@
+@import 'breakpoints';
+
+@mixin narrow-container {
+  .container {
+    padding: 0 50px;
+    @include media-md {
+      padding: 0 15px;
+    }
+  }
+}

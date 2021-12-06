@@ -1,5 +1,4 @@
 export class DDPParticipantInformation {
-
   constructor(public dob: string, public dateOfDiagnosis: string, public drawBloodConsent: number, public tissueSampleConsent: number,
               public institutions: Array<DDPInstitutionInformation>) {
     this.dob = dob;
@@ -15,8 +14,8 @@ export class DDPParticipantInformation {
   }
 }
 
+// tslint:disable-next-line:max-classes-per-file
 export class DDPInstitutionInformation {
-
   constructor(public type: string, public id: string, public physician: string,
               public institution: string, public streetAddress: string, public city: string, public state: string) {
     this.type = type;

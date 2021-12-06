@@ -1,0 +1,71 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer-meta">
+      <div class="footer-logo">
+        <img src="assets/images/logo.png" [alt]="'Header.LogoAlt' | translate"/>
+      </div>
+      <div class="footer-contacts">
+        Contact Us: (650) 761-6486<br/>
+        contact@projectsingular.org
+      </div>
+
+      <div class="footer-social">
+        <div class="footer-social-item twitter">
+          <a href="https://twitter.com/proj_singular" target="_blank">
+            <img src="assets/images/twitter.svg" alt="twitter">
+          </a>
+        </div>
+        <div class="footer-social-item instagram">
+          <a href="https://www.instagram.com/project_singular/" target="_blank">
+            <img src="assets/images/inst.svg" alt="instagram">
+          </a>
+        </div>
+        <div class="footer-social-item facebook">
+          <a href="https://www.facebook.com/project.singular.study" target="_blank">
+            <img src="assets/images/f.svg" alt="facebook">
+          </a>
+        </div>
+      </div>
+      <div class="footer-copyright">Copyright 2021 Additional Ventures</div>
+    </div>
+    <div class="footer-menu">
+      <nav>
+        <ul class="link-list">
+          <li class="link-list__item" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active">
+            <a class="link" [routerLink]="Route.About">
+              {{ 'Header.Links.AboutUs' | translate }}
+            </a>
+          </li>
+          <li class="link-list__item" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active">
+            <a class="link" [routerLink]="Route.StudyProgress">
+              {{ 'Header.Links.StudyProgress' | translate }}
+            </a>
+          </li>
+          <li class="link-list__item" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active">
+            <a class="link" [routerLink]="Route.FAQ">
+              {{ 'Header.Links.FAQs' | translate }}
+            </a>
+          </li>
+          <li class="link-list__item" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active">
+            <a class="link" [routerLink]="Route.ForResearchers">
+              {{ 'Header.Links.ForResearchers' | translate }}
+            </a>
+          </li>
+          <li class="link-list__item" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active" *ngIf="isAuthenticated">
+            <a class="link" [routerLink]="Route.Dashboard">
+              {{ 'Header.Links.Dashboard' | translate }}
+            </a>
+          </li>
+          <li class="link-list__item link-list__item_highlight-stroke_invert" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active">
+            <ddp-sign-in-out [signOutReturnToUrl]="Route.Home"></ddp-sign-in-out>
+          </li>
+          <li class="link-list__item link-list__item_highlight link-list__item_highlight_invert" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active" *ngIf="!isAuthenticated">
+            <a class="button button--white" [routerLink]="Route.PreScreening">
+              {{ 'Footer.Links.SignUp' | translate }}
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</footer>

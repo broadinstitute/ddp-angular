@@ -44,9 +44,9 @@ export class ActivityComponent {
             .filter(each => each.value !== null) as Array<NameValue>;
 
         let templateValue = template.templateText;
-        varNameToValue.forEach(varNameToValue =>
-            //@TODO handle case where $ is being escaped
-            templateValue = templateValue.replace('$' + varNameToValue.name, varNameToValue.value)
+        varNameToValue.forEach(item =>
+            // @TODO handle case where $ is being escaped
+            templateValue = templateValue.replace('$' + item.name, item.value)
         );
         return templateValue;
     }

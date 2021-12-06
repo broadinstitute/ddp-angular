@@ -50,6 +50,7 @@ describe('AddressInputComponent', () => {
         {provide: AddressService, useValue: addressServiceSpy},
         {provide: NGXTranslateService, useValue: translateServiceSpy},
         {provide: LoggingService, useValue: loggingServiceSpy},
+        {provide: 'ddp.config', useValue: {}},
         AddressInputService],
       imports: [MatFormFieldModule, MatSelectModule, ReactiveFormsModule, MatInputModule, NoopAnimationsModule, TranslateTestingModule],
       // schemas needed to avoid problems with google autocomplete directive attributes in input element

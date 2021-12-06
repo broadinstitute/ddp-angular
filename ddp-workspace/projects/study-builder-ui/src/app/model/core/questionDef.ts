@@ -6,4 +6,5 @@ import { TextQuestionDef } from './textQuestionDef';
 import { CompositeQuestionDef } from './compositeQuestionDef';
 import { NumericQuestionDef } from './numericQuestionDef';
 
-export type QuestionDef = AgreementQuestionDef | BooleanQuestionDef | DateQuestionDef | PicklistQuestionDef | TextQuestionDef | CompositeQuestionDef | NumericQuestionDef;
+export type QuestionDef = AgreementQuestionDef | BooleanQuestionDef | DateQuestionDef | PicklistQuestionDef | TextQuestionDef
+    | CompositeQuestionDef | NumericQuestionDef;

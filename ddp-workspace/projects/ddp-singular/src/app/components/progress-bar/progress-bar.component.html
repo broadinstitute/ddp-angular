@@ -1,0 +1,27 @@
+<ng-container *ngIf="isProgressBarDisplayed">
+  <ol class="pb">
+    <ng-container *ngFor="let activity of renderActivities; let idx = index; let isLast = last">
+      <li class="pb__item">
+        <div class="item" [class.item--current]="activity.isCurrent" [class.item--complete]="activity.isComplete">
+          <div class="item__circle">
+            <span class="item__count">{{ idx + 1 }}</span>
+          </div>
+
+          <p class="item__name">
+            {{ 'ProgressBar.Titles.' + activity.i18nKey | translate }}
+          </p>
+        </div>
+      </li>
+
+      <li
+        *ngIf="!isLast"
+        class="pb__divider"
+        [class.pb__divider--colored]="
+          activity.isComplete &&
+          renderActivities[idx + 1] &&
+          (renderActivities[idx + 1].isCurrent || renderActivities[idx + 1].isComplete)
+        "
+      ></li>
+    </ng-container>
+  </ol>
+</ng-container>

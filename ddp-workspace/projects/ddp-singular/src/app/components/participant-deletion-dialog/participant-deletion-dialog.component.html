@@ -1,0 +1,16 @@
+<p>
+  {{ 'ParticipantDeletionDialog.Text' | translate }}
+</p>
+
+<div class="controls">
+  <button class="button button--outline" (click)="onYesClick()">
+    {{ 'Common.Buttons.Delete' | translate }}
+  </button>
+
+  <button
+    class="button button--primary"
+    (click)="onNoClick()"
+  >
+    {{ 'Common.Buttons.Cancel' | translate }}
+  </button>
+</div>

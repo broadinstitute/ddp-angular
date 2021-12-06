@@ -55,6 +55,7 @@ export * from './lib/models/enrollmentStatusType';
 export * from './lib/models/userStatusResponse';
 export * from './lib/models/userProfileFieldType';
 export * from './lib/models/session';
+export * from './lib/models/mailAddressFormErrorFormatter';
 
 export * from './lib/services/logging.service';
 export * from './lib/services/serviceAgents/serviceAgent.service';

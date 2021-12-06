@@ -1,8 +1,7 @@
-import {OncHistoryDetail} from "../onc-history-detail/onc-history-detail.model";
-import {Tissue} from "../tissue/tissue.model";
+import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
+import { Tissue } from '../tissue/tissue.model';
 
 export class TissueList {
-
   constructor(public oncHistoryDetails: OncHistoryDetail, public tissue: Tissue, public ddpParticipantId: string) {
     this.oncHistoryDetails = oncHistoryDetails;
     this.ddpParticipantId = ddpParticipantId;
@@ -10,9 +9,9 @@ export class TissueList {
   }
 
   static parse(json): TissueList {
-    let oncHistory: OncHistoryDetail = OncHistoryDetail.parse(json.oncHistoryDetails);
+    const oncHistory: OncHistoryDetail = OncHistoryDetail.parse(json.oncHistoryDetails);
     let tissue: Tissue;
-    if (json.tissue != null && json.tissue != undefined) {
+    if (json.tissue != null) {
       tissue = Tissue.parse(json.tissue);
     }
     return new TissueList(oncHistory, tissue, json.ddpParticipantId);

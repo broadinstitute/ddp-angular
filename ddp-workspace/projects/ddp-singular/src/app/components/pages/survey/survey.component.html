@@ -1,0 +1,13 @@
+<div class="container">
+  <app-progress-bar [instanceGuid]="instanceGuid" [activities]="activities"></app-progress-bar>
+  <div>
+    <div>
+      <app-activity
+        [studyGuid]="studyGuid"
+        (submit)="onSubmit($event)"
+        [activityGuid]="instanceGuid"
+        *ngIf="!isFetchingActivities"
+      ></app-activity>
+    </div>
+  </div>
+</div>

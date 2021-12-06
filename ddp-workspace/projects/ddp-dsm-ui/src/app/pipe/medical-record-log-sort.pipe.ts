@@ -1,20 +1,17 @@
-import {Pipe, PipeTransform} from "@angular/core";
-import {MedicalRecordLog} from "../medical-record/model/medical-record-log.model";
+import { Pipe, PipeTransform } from '@angular/core';
+import { MedicalRecordLog } from '../medical-record/model/medical-record-log.model';
 
 @Pipe({
-  name: "medicalRecordLogSort"
+  name: 'medicalRecordLogSort'
 })
 export class MedicalRecordLogSortPipe implements PipeTransform {
-
   transform(array: MedicalRecordLog[]): MedicalRecordLog[] {
     array.sort((a, b) => {
       if (a.medicalRecordLogId < b.medicalRecordLogId) {
         return 1;
-      }
-      else if (a.medicalRecordLogId > b.medicalRecordLogId) {
+      } else if (a.medicalRecordLogId > b.medicalRecordLogId) {
         return -1;
-      }
-      else {
+      } else {
         return 0;
       }
     });

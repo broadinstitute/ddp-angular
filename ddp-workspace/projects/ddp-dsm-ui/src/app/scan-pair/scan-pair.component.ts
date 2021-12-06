@@ -10,31 +10,31 @@ export class ScanPairComponent implements OnInit {
 
   @Input() positionScanPair: number;
   @Input() countScanPair: number;
-  @Input() isLeftValueDuplicate: boolean = false;
-  @Input() isRightValueDuplicate: boolean = false;
-  @Input() hadErrorSending: boolean = false;
-  @Input() leftInputPlaceholder: string = "Kit Label";
-  @Input() rightInputPlaceholder: string = "DSM Label";
+  @Input() isLeftValueDuplicate = false;
+  @Input() isRightValueDuplicate = false;
+  @Input() hadErrorSending = false;
+  @Input() leftInputPlaceholder = 'Kit Label';
+  @Input() rightInputPlaceholder = 'DSM Label';
   @Input() errorMessage: string;
 
   @Output() pairScanned = new EventEmitter();
   @Output() removeScanPair = new EventEmitter();
   @Output() leftLabelAdded = new EventEmitter();
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.leftInput.nativeElement.focus();
   }
 
-  moveFocus(leftValue: string) {
+  moveFocus(leftValue: string): void {
     this.rightInput.nativeElement.focus();
     this.leftLabelAdded.next([leftValue, this.positionScanPair]);
   }
 
-  nextPair(leftValue: string, rightValue: string) {
+  nextPair(leftValue: string, rightValue: string): void {
     this.pairScanned.next([leftValue, rightValue, this.positionScanPair]);
   }
 
-  removeMe() {
+  removeMe(): void {
     this.removeScanPair.next(this.positionScanPair);
   }
 }

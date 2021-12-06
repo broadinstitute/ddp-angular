@@ -1,0 +1,29 @@
+@import 'breakpoints';
+@import 'colors';
+
+
+.link-list {
+  display: flex;
+  align-items: center;
+
+  list-style: none;
+
+  @include media-md {
+    flex-flow: column nowrap;
+  }
+
+  &__item {
+    & + & {
+      margin-left: 25px;
+
+      @media (max-width: 1200px) {
+        margin-left: 12px;
+      }
+
+      @include media-md {
+        margin-top: 1.6rem;
+        margin-left: 0;
+      }
+    }
+  }
+}

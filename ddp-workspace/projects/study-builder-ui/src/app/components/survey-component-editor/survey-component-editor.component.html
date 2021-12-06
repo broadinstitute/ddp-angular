@@ -1,5 +1,14 @@
 <ng-container *ngIf="currentBlock$ | async as currentBlock">
-{{ currentBlock.blockType }}
-<app-text-question-editor *ngIf="isTextQuestionBlock$ | async" [questionBlock]="currentBlock$ | async" (questionBlockChanged)="blockChanged($event)"></app-text-question-editor>
-<app-static-content-block-editor *ngIf="isContentBlock(currentBlock)" [contentBlock]="currentBlock" (contentBlockChanged)="blockChanged($event)"></app-static-content-block-editor>
+    <app-text-question-editor *ngIf="isTextQuestionBlock$ | async"
+                              [questionBlock]="currentBlock"
+                              (questionBlockChanged)="blockChanged($event)">
+    </app-text-question-editor>
+    <app-picklist-question-editor *ngIf="isPicklistQuestionBlock$ | async"
+                                  [questionBlock]="currentBlock"
+                                  (questionBlockChanged)="blockChanged($event)">
+    </app-picklist-question-editor>
+    <app-static-content-block-editor *ngIf="isContentBlock(currentBlock)"
+                                     [contentBlock]="currentBlock"
+                                     (contentBlockChanged)="blockChanged($event)">
+    </app-static-content-block-editor>
 </ng-container>

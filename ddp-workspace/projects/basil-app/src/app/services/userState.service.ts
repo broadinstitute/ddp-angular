@@ -40,7 +40,7 @@ export class UserStateService {
             mergeMap(s => {
                 if (s != null) {
                     return this.getConsentState().pipe(
-                        mergeMap(_ => this.getPrequalifierState()).pipe(
+                        mergeMap(() => this.getPrequalifierState()).pipe(
                             map(getConsent)
                         )
                     );

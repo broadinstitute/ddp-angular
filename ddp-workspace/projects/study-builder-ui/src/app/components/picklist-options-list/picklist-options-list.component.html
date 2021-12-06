@@ -1,0 +1,29 @@
+<div cdkDropList (cdkDropListDropped)="optionDrop($event)" class="list-container">
+    <div class="grid-headers" *ngIf="options.length">
+        <div class="drag-indicator-column"></div>
+        <div class="remove-column"></div>
+        <div class="stable-id-column">StableId</div>
+        <div class="label-column">Label</div>
+        <div class="tooltip-column">Tooltip</div>
+        <div class="allow-details-column">Allow details</div>
+        <div class="detail-label-column">Detail label</div>
+        <div class="exclusive-column">Exclusive</div>
+    </div>
+    <div *ngFor="let option of options; let i = index; trackBy: trackByOptions"
+         cdkDrag
+         cdkDragLockAxis="y"
+         class="picklist-option">
+        <div class="drag-indicator-column" cdkDragHandle>
+            <mat-icon>drag_indicator</mat-icon>
+        </div>
+        <div class="remove-column">
+            <button mat-icon-button (click)="removeOptionByIndex(options, i)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+        <app-picklist-option-editor [option]="option"
+                                    [notUniqueStableId]="notUniqueOptionsStableIds.includes(option.stableId)"
+                                    (optionChanged)="updateOption($event, i)">
+        </app-picklist-option-editor>
+    </div>
+</div>

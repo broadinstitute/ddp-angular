@@ -1,27 +1,30 @@
-
-
-<div fxLayout="column" [formGroup]="form">
-  <div class="control-bar">
-    <mat-form-field appearance="fill">
-      <mat-label>Activity</mat-label>
-      <mat-select formControlName="activityCode">
-        <mat-option *ngFor="let activity of allActivities$ | async" [value]="activity.activityCode">
-          {{activity.activityCode}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <button mat-raised-button (click)="createNewActivity()">New</button>
-  </div>
-
-  <div fxLayout="row" class="zero">
-
-    <div fxFlex="500px" fxLayout="column" class="left-panel">
-      <app-survey-component-palette></app-survey-component-palette>
-      <app-survey-component-editor></app-survey-component-editor>
+<div fxLayout="column" [formGroup]="form" class="container">
+    <div class="control-bar mat-elevation-z2">
+        <mat-form-field appearance="outline">
+            <mat-label>Activity</mat-label>
+            <mat-select formControlName="activityCode">
+                <mat-option *ngFor="let activity of allActivities$ | async" [value]="activity.activityCode">
+                    {{activity.activityCode}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button mat-raised-button (click)="createNewActivity()" class="create-new-activity-btn">New</button>
     </div>
 
-    <div fxFlex="100%" class="right-canvas-panel">
-      <app-survey-canvas [activity]="currentActivity$ | async"></app-survey-canvas>
+    <div fxLayout="row" fxFlex="1 0 auto" class="zero">
+
+        <div [style.width]="leftPanelWidth" class="left-panel" mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event)">
+            <app-survey-component-palette></app-survey-component-palette>
+            <app-survey-component-editor></app-survey-component-editor>
+            <div
+                class="resize-handle-right"
+                mwlResizeHandle
+                [resizeEdges]="{ right: true }"
+            ></div>
+        </div>
+
+        <div fxFlex="1 1 auto" class="right-canvas-panel">
+            <app-survey-canvas [activity]="currentActivity$ | async"></app-survey-canvas>
+        </div>
     </div>
-  </div>
 </div>

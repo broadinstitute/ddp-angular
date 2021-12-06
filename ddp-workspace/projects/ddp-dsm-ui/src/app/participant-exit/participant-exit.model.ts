@@ -1,5 +1,4 @@
 export class ParticipantExit {
-
   constructor(public realm: string, public participantId: string, public user: string, public exitDate: number,
               public shortId: string, public legacyShortId: string, public inDDP: boolean) {
     this.realm = realm;

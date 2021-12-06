@@ -1,26 +1,26 @@
 
-import {Component, OnInit} from "@angular/core";
-import {DomSanitizer} from "@angular/platform-browser";
-import {ActivatedRoute, Router} from "@angular/router";
-import {filter} from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
-import {Auth} from "./services/auth.service";
-import {RoleService} from "./services/role.service";
-import {ComponentService} from "./services/component.service";
+import { Auth } from './services/auth.service';
+import { RoleService } from './services/role.service';
+import { ComponentService } from './services/component.service';
 
-@Component( {
-  selector: "app-root",
-  templateUrl: "./app.component.html"
-} )
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html'
+})
 export class AppComponent implements OnInit {
   private realmFromUrl: string;
 
-  constructor( private router: Router, private auth: Auth, private sanitizer: DomSanitizer, private role: RoleService
-    , private route: ActivatedRoute ) {
+  constructor(private router: Router, private auth: Auth, private sanitizer: DomSanitizer,
+              private role: RoleService, private route: ActivatedRoute) {
   }
 
-  ngOnInit() {
-    window.scrollTo( 0, 0 );
+  ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.route.queryParams.pipe(
       filter(params => params.realm)
     )
@@ -29,25 +29,24 @@ export class AppComponent implements OnInit {
       });
   }
 
-  doNothing() { //needed for the menu, otherwise page will refresh!
+  doNothing(): boolean { // needed for the menu, otherwise page will refresh!
     return false;
   }
 
-  selectRealmAndDoNothing( newValue ) {
+  selectRealmAndDoNothing(newValue): void {
     this.auth.selectRealm(newValue);
     this.doNothing();
   }
 
-  isRealmChosen( realm ) {
+  isRealmChosen(realm): boolean {
     return this.realmFromUrl === realm;
   }
 
-  doLogin() {
-    localStorage.removeItem( ComponentService.MENU_SELECTED_REALM ); //if user logs in new or logs out, remove stored menu!
+  doLogin(): boolean {
+    localStorage.removeItem(ComponentService.MENU_SELECTED_REALM); // if user logs in new or logs out, remove stored menu!
     if (this.auth.authenticated()) {
       this.auth.logout();
-    }
-    else {
+    } else {
       this.auth.lock.show();
     }
     return false;
@@ -62,13 +61,10 @@ export class AppComponent implements OnInit {
   }
 
   shouldSeeRealmSelection(): boolean {
-    if (this.role.allowedToHandleSamples() || this.role.allowedToViewMedicalRecords() ||
+    return this.role.allowedToHandleSamples() || this.role.allowedToViewMedicalRecords() ||
       this.role.allowedToViewMailingList() || this.role.allowedToViewEELData() ||
       this.role.allowedToExitParticipant() || this.role.allowedToSkipParticipantEvents() ||
       this.role.allowedToDiscardSamples() || this.role.allowToViewSampleLists() ||
-      this.role.allowedParticipantListView()) {
-      return true;
-    }
-    return false;
+      this.role.allowedParticipantListView();
   }
 }

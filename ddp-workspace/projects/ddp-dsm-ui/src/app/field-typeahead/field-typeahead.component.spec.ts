@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { FieldTypeaheadComponent } from './field-typeahead.component';
 
@@ -6,7 +6,7 @@ describe('FieldTypeaheadComponent', () => {
   let component: FieldTypeaheadComponent;
   let fixture: ComponentFixture<FieldTypeaheadComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ FieldTypeaheadComponent ]
     })
