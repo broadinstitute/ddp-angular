@@ -46,12 +46,9 @@ export class ActivityMatrixAnswer implements OnChanges {
     return this.block.selectMode === SelectMode.Single;
   }
 
-  isOptionSelected(question: Question, group: Group, option: Option): boolean {
+  isOptionSelected(question: Question, option: Option): boolean {
     const existingAnswer = this.block.answer?.find(
-      a =>
-        a.rowStableId === question.stableId &&
-        a.groupStableId === group.identifier &&
-        a.optionStableId === option.stableId,
+      a => a.rowStableId === question.stableId && a.optionStableId === option.stableId,
     );
 
     return !!existingAnswer;
@@ -60,13 +57,16 @@ export class ActivityMatrixAnswer implements OnChanges {
   onOptionChange(question: Question, group: Group, option: Option): void {
     const selectedOption: ActivityMatrixAnswerDto = {
       rowStableId: question.stableId,
-      groupStableId: group.identifier,
       optionStableId: option.stableId,
     };
 
-    this.block.answer = this.composeAnswer(selectedOption, option.exclusive);
+    this.block.answer = this.composeAnswer(selectedOption, option.exclusive, group.identifier);
 
     this.valueChanged.emit(this.block.answer);
+  }
+
+  anyGroupHasName(groups: RenderGroup[]): boolean {
+    return groups.some(group => !!group.name);
   }
 
   private getRenderGroups({ groups, options }: ActivityMatrixQuestionBlock): RenderGroup[] {
@@ -80,23 +80,13 @@ export class ActivityMatrixAnswer implements OnChanges {
       };
     });
 
-    const ungroupedOptions = options.filter(option => option.groupId === null);
-
-    if (ungroupedOptions.length) {
-      renderGroups.unshift({
-        identifier: null,
-        name: null,
-        options: ungroupedOptions,
-        colSpan: ungroupedOptions.length,
-      });
-    }
-
     return renderGroups;
   }
 
   private composeAnswer(
-    option: ActivityMatrixAnswerDto,
+    newAnswer: ActivityMatrixAnswerDto,
     isOptionExclusive: boolean = false,
+    newOptionGroupStableId: string,
   ): ActivityMatrixAnswerDto[] {
     let answer = this.block.answer ?? [];
 
@@ -106,9 +96,9 @@ export class ActivityMatrixAnswer implements OnChanges {
        * we remove previously given answer (if there is one)
        * and add newly selected option
        */
-      answer = answer.filter(a => a.rowStableId !== option.rowStableId);
+      answer = answer.filter(a => a.rowStableId !== newAnswer.rowStableId);
 
-      answer.push(option);
+      answer.push(newAnswer);
 
       return answer;
     } else {
@@ -122,10 +112,7 @@ export class ActivityMatrixAnswer implements OnChanges {
        * 1st - check if user tries to remove existing answer
        */
       const existingAnswerIdx = answer.findIndex(
-        a =>
-          a.rowStableId === option.rowStableId &&
-          a.groupStableId === option.groupStableId &&
-          a.optionStableId === option.optionStableId,
+        a => a.rowStableId === newAnswer.rowStableId && a.optionStableId === newAnswer.optionStableId,
       );
 
       if (existingAnswerIdx !== -1) {
@@ -145,8 +132,10 @@ export class ActivityMatrixAnswer implements OnChanges {
        */
       if (isOptionExclusive) {
         answer = answer.reduce<ActivityMatrixAnswerDto[]>((arr, ans) => {
-          if (ans.rowStableId === option.rowStableId) {
-            if (ans.groupStableId !== option.groupStableId) {
+          if (ans.rowStableId === newAnswer.rowStableId) {
+            const answeredOptionGroupStableId = this.getGroupStableId(ans.optionStableId);
+
+            if (answeredOptionGroupStableId !== newOptionGroupStableId) {
               /**
                * Only keep answers from other groups
                */
@@ -163,14 +152,15 @@ export class ActivityMatrixAnswer implements OnChanges {
         }, []);
       } else {
         /**
-         * If option is not exclusive
-         * check if user has already selected exclusive option
-         * and if so - remove it
+         * Since selected option is not exclusive,
+         * check & remove other selected exclusive options in this group
          */
         answer = answer.reduce<ActivityMatrixAnswerDto[]>((arr, ans) => {
+          const answeredOptionGroupStableId = this.getGroupStableId(ans.optionStableId);
+
           if (
-            ans.rowStableId === option.rowStableId &&
-            ans.groupStableId === option.groupStableId &&
+            ans.rowStableId === newAnswer.rowStableId &&
+            answeredOptionGroupStableId === newOptionGroupStableId &&
             this.isAnsweredOptionExclusive(ans)
           ) {
             return arr;
@@ -182,7 +172,7 @@ export class ActivityMatrixAnswer implements OnChanges {
         }, []);
       }
 
-      answer.push(option);
+      answer.push(newAnswer);
 
       return answer;
     }
@@ -192,5 +182,11 @@ export class ActivityMatrixAnswer implements OnChanges {
     const associatedOption = this.block.options.find(option => option.stableId === answer.optionStableId);
 
     return associatedOption.exclusive;
+  }
+
+  private getGroupStableId(optionStableId: string): string {
+    const associatedOption = this.block.options.find(option => option.stableId === optionStableId);
+
+    return associatedOption.groupId;
   }
 }

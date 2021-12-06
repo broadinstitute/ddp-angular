@@ -269,8 +269,8 @@ export class ActivityQuestionConverter {
         const matrixBlock = new ActivityMatrixQuestionBlock();
 
         matrixBlock.selectMode = questionJson.selectMode;
-        matrixBlock.questions = questionJson.matrixQuestions;
-        matrixBlock.options = questionJson.matrixOptions;
+        matrixBlock.questions = questionJson.questions;
+        matrixBlock.options = questionJson.options;
         matrixBlock.groups = questionJson.groups;
 
         return matrixBlock;

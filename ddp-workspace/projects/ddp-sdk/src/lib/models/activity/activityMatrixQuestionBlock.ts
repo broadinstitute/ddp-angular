@@ -18,7 +18,7 @@ export interface Option {
 
 export interface Group {
   identifier: string;
-  name: string;
+  name: string | null;
 }
 
 export enum SelectMode {

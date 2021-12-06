@@ -462,12 +462,10 @@ describe('ActivityMatrixAnswer', () => {
     newBlock.setAnswer([
       {
         rowStableId: mockQuestions[0].stableId,
-        groupStableId: mockGroups[0].identifier,
         optionStableId: mockOptions[0].stableId,
       },
       {
         rowStableId: mockQuestions[1].stableId,
-        groupStableId: mockGroups[1].identifier,
         optionStableId: mockOptions[1].stableId,
       },
     ]);
@@ -551,12 +549,10 @@ describe('ActivityMatrixAnswer', () => {
     newBlock.setAnswer([
       {
         rowStableId: q1.stableId,
-        groupStableId: g1.identifier,
         optionStableId: o1.stableId,
       },
       {
         rowStableId: q2.stableId,
-        groupStableId: g2.identifier,
         optionStableId: o2.stableId,
       },
     ]);
@@ -596,22 +592,18 @@ describe('ActivityMatrixAnswer', () => {
     newBlock.setAnswer([
       {
         rowStableId: q1.stableId,
-        groupStableId: g1.identifier,
         optionStableId: o2.stableId,
       },
       {
         rowStableId: q1.stableId,
-        groupStableId: g1.identifier,
         optionStableId: o3.stableId,
       },
       {
         rowStableId: q1.stableId,
-        groupStableId: g2.identifier,
         optionStableId: o4.stableId,
       },
       {
         rowStableId: q2.stableId,
-        groupStableId: g1.identifier,
         optionStableId: o1.stableId,
       },
     ]);
@@ -635,7 +627,6 @@ describe('ActivityMatrixAnswer', () => {
        */
       {
         rowStableId: q1.stableId,
-        groupStableId: g2.identifier,
         optionStableId: o4.stableId,
       },
       /**
@@ -643,12 +634,10 @@ describe('ActivityMatrixAnswer', () => {
        */
       {
         rowStableId: q2.stableId,
-        groupStableId: g1.identifier,
         optionStableId: o1.stableId,
       },
       {
         rowStableId: q1.stableId,
-        groupStableId: g1.identifier,
         optionStableId: o1.stableId,
       },
     ];
@@ -674,17 +663,14 @@ describe('ActivityMatrixAnswer', () => {
     newBlock.setAnswer([
       {
         rowStableId: q1.stableId,
-        groupStableId: g1.identifier,
         optionStableId: o1.stableId,
       },
       {
         rowStableId: q2.stableId,
-        groupStableId: g1.identifier,
         optionStableId: o2.stableId,
       },
       {
         rowStableId: q2.stableId,
-        groupStableId: g1.identifier,
         optionStableId: o3.stableId,
       },
     ]);
@@ -706,17 +692,14 @@ describe('ActivityMatrixAnswer', () => {
        */
       {
         rowStableId: q2.stableId,
-        groupStableId: g1.identifier,
         optionStableId: o2.stableId,
       },
       {
         rowStableId: q2.stableId,
-        groupStableId: g1.identifier,
         optionStableId: o3.stableId,
       },
       {
         rowStableId: q1.stableId,
-        groupStableId: g1.identifier,
         optionStableId: o2.stableId,
       },
     ];
