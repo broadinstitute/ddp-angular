@@ -11,7 +11,7 @@ import {
     ViewChildren
 } from '@angular/core';
 import { Subject, throwError } from 'rxjs';
-import { catchError, concatMap, takeUntil, tap } from 'rxjs/operators';
+import { catchError, concatMap, takeUntil, tap, map } from 'rxjs/operators';
 
 import { ActivityActivityBlock } from '../../../../models/activity/activityActivityBlock';
 import { ActivityRenderHintType } from '../../../../models/activity/activityRenderHintType';
@@ -65,13 +65,20 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     createChildInstance(): void {
         this.activityServiceAgent.createInstance(this.studyGuid, this.block.activityCode, this.parentActivityInstanceGuid)
             .pipe(
-                tap(response => {
-                    if (response?.blockVisibility) {
-                        this.blockVisibilityChanged.emit(response.blockVisibility);
-                    }
-                }),
                 concatMap(response => {
-                    return this.activityServiceAgent.getActivitySummary(this.studyGuid, response.instanceGuid);
+                    return this.activityServiceAgent
+                        .getActivitySummary(this.studyGuid, response.instanceGuid)
+                        .pipe(
+                            map<ActivityInstance, { instance: ActivityInstance; blockVisibility?: BlockVisibility[] }>(
+                                instance => {
+                                    if (response?.blockVisibility) {
+                                        return { instance, blockVisibility: response.blockVisibility };
+                                    }
+
+                                    return { instance };
+                                }
+                            ),
+                        );
                 }),
                 catchError(err => {
                     this.logger.logError(this.LOG_SOURCE, 'An error during a new instance creation', err);
@@ -79,9 +86,19 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
                 }),
                 takeUntil(this.ngUnsubscribe)
             )
-            .subscribe((instance: ActivityInstance) => {
+            .subscribe(({ instance, blockVisibility }) => {
                 this.childInstances.push(instance);
-                this.cdr.detectChanges();
+
+                if (blockVisibility) {
+                    this.blockVisibilityChanged.emit(blockVisibility);
+                } else {
+                    /**
+                     * Emitting a `blockVisibilityChanged` event will call `detectChanges`
+                     * so we call this here only if there were no changes in block visibility
+                     */
+                    this.cdr.detectChanges();
+                }
+
                 this.openCreatedInstanceDialog(instance.instanceGuid);
             });
     }
