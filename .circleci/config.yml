@@ -59,8 +59,8 @@ commands:
             - set-deployment-environment
 #            - run-linter-check
 #            - run-tests
-#            - build-app:
-#                study_key: << parameters.study_key >>
+            - build-app:
+                study_key: << parameters.study_key >>
             - deploy-exploded-build:
                 study_key: << parameters.study_key >>
 
