@@ -1,0 +1,82 @@
+<ddp-question-prompt [block]="block"></ddp-question-prompt>
+
+<div class="table-container">
+  <table class="matrix-answer-table" data-test-id="matrix-answer-table">
+    <thead class="matrix-answer-table__header">
+      <tr
+        *ngIf="anyGroupHasName(renderGroups)"
+        class="matrix-answer-table__row matrix-answer-table__row--header matrix-answer-table__row--groups"
+        data-test-id="table-header-groups"
+      >
+        <th class="matrix-answer-table__cell matrix-answer-table__cell--header">&nbsp;</th>
+        <th
+          *ngFor="let group of renderGroups"
+          [colSpan]="group.colSpan"
+          [innerHTML]="group.name"
+          [attr.data-test-id]="'group-name-cell-' + group.identifier"
+          class="matrix-answer-table__cell matrix-answer-table__cell--header matrix-answer-table__cell--group"
+        ></th>
+      </tr>
+
+      <tr class="matrix-answer-table__row matrix-answer-table__row--header matrix-answer-table__row--options">
+        <th class="matrix-answer-table__cell matrix-answer-table__cell--header">&nbsp;</th>
+
+        <ng-container *ngFor="let group of renderGroups">
+          <ng-container *ngFor="let option of group.options">
+            <th
+              class="
+                matrix-answer-table__cell matrix-answer-table__cell--header matrix-answer-table__cell--option-label
+              "
+              [innerHTML]="option.optionLabel"
+              [attr.data-test-id]="'option-label-cell-' + option.stableId"
+            ></th>
+          </ng-container>
+        </ng-container>
+      </tr>
+    </thead>
+
+    <tbody class="matrix-answer-table__body">
+      <tr *ngFor="let question of block.questions" class="matrix-answer-table__row matrix-answer-table__row--question">
+        <th
+          class="matrix-answer-table__cell matrix-answer-table__cell--question"
+          [innerHTML]="question.questionLabel"
+          [attr.data-test-id]="'question-label-cell-' + question.stableId"
+        ></th>
+
+        <ng-container *ngFor="let group of renderGroups">
+          <ng-container *ngFor="let option of group.options">
+            <td class="matrix-answer-table__cell matrix-answer-table__cell--option-control">
+              <ng-container
+                [ngTemplateOutlet]="isSingleMode ? radioButtons : checkboxes"
+                [ngTemplateOutletContext]="{ question: question, group: group, option: option }"
+              ></ng-container>
+            </td>
+          </ng-container>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #radioButtons let-question="question" let-group="group" let-option="option">
+  <mat-radio-button
+    [aria-label]="question.questionLabel + ' ' + option.optionLabel"
+    [disabled]="readonly"
+    [name]="question.stableId"
+    [checked]="isOptionSelected(question, option)"
+    [attr.data-test-id]="'radio-option'"
+    [attr.data-test-radio-id]="'radio-option-' + question.stableId + '-' + option.stableId"
+    (change)="onOptionChange(question, group, option)"
+  ></mat-radio-button>
+</ng-template>
+
+<ng-template #checkboxes let-question="question" let-group="group" let-option="option">
+  <mat-checkbox
+    [aria-label]="question.questionLabel + ' ' + option.optionLabel"
+    [disabled]="readonly"
+    [checked]="isOptionSelected(question, option)"
+    [attr.data-test-id]="'checkbox-option'"
+    [attr.data-test-checkbox-id]="'checkbox-option-' + question.stableId + '-' + option.stableId"
+    (change)="onOptionChange(question, group, option)"
+  ></mat-checkbox>
+</ng-template>
