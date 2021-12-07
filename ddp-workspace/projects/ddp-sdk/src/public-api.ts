@@ -55,6 +55,7 @@ export * from './lib/models/enrollmentStatusType';
 export * from './lib/models/userStatusResponse';
 export * from './lib/models/userProfileFieldType';
 export * from './lib/models/session';
+export * from './lib/models/mailAddressFormErrorFormatter';
 
 export * from './lib/services/logging.service';
 export * from './lib/services/serviceAgents/serviceAgent.service';
@@ -146,6 +147,7 @@ export * from './lib/components/activityForm/answers/activity-text-input/activit
 export * from './lib/components/activityForm/answers/activityTextAnswer.component';
 export * from './lib/components/activityForm/answers/activityBooleanAnswer.component';
 export * from './lib/components/activityForm/answers/activity-file-answer/activityFileAnswer.component';
+export * from './lib/components/activityForm/answers/activity-matrix-answer/activity-matrix-answer.component';
 export * from './lib/components/activityForm/answers/activity-instance-select-answer/activity-instance-select-answer.component';
 
 export * from './lib/components/activityForm/activity-blocks/activityQuestion.component';

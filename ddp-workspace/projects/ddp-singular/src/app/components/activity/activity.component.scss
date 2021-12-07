@@ -1,0 +1,33 @@
+@import '../../../styles/variables';
+
+.section--spinner {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 4em;
+}
+
+.section--buttons {
+  display: flex;
+  align-items: center;
+
+  margin: 1.5rem 0;
+}
+
+.pull-right {
+  margin-left: auto;
+}
+
+.button + .button:not(.pull-right) {
+  margin-left: 24px;
+}
+
+.section--global-error,
+.section--communication-error {
+  margin: 1rem 0;
+}
+
+.consent-separator {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+}

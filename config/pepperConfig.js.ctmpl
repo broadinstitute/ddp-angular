@@ -300,6 +300,24 @@ var DDP_ENV = {
     {{end}}
 {{end}}
 
+{{if eq $study_guid "singular"}}
+    {{if eq $environment "local"}}
+        DDP_ENV['auth0ClientId'] = "4bFP99CkKCY71IeCDkmcUQSkbxvaIJXZ";
+        DDP_ENV['auth0Domain'] = "singular-dev.us.auth0.com";
+        DDP_ENV['auth0Audience'] = "singular-dev.us.auth0.com";
+        DDP_ENV['basePepperUrl'] = "http://localhost:5556";
+    {{end}}
+
+    {{with secret (printf "secret/pepper/%s/%s/singular/conf" $environment $version)}}
+        DDP_ENV['analyticsToken'] = "{{.Data.analyticsToken}}";
+        DDP_ENV['auth0ClientId'] = "{{.Data.auth0.clientId}}";
+        DDP_ENV['auth0Domain'] = "{{.Data.auth0.loginDomain}}";
+        DDP_ENV['auth0Audience'] = "{{.Data.auth0.loginDomain}}";
+        DDP_ENV['basePepperUrl'] = "{{.Data.serverBaseUrl}}";
+        DDP_ENV['recaptchaSiteClientKey'] = "{{.Data.recaptchaSiteClientKey}}";
+    {{end}}
+{{end}}
+
 {{if eq $study_guid "cgc"}}
     {{if eq $environment "local"}}
         DDP_ENV['auth0ClientId'] = "rJyIQ6yXIZsXiOUobx5nb9lqAaJcIypR";

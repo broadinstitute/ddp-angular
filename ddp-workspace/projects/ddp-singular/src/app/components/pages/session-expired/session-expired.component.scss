@@ -1,0 +1,22 @@
+:host {
+  height: 100%;
+
+  .wrapper {
+    padding-top: 40px;
+    padding-bottom: 75px;
+    height: 100%;
+
+    h1 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    p {
+      margin-bottom: 20px;
+    }
+
+    .container {
+      max-width: 600px !important;
+    }
+  }
+}
