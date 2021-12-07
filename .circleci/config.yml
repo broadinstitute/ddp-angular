@@ -57,8 +57,8 @@ commands:
           condition: << parameters.skip_build >>
           steps:
             - set-deployment-environment
-            - run-linter-check
-            - run-tests
+#            - run-linter-check
+#            - run-tests
             - build-app:
                 study_key: << parameters.study_key >>
             - deploy-exploded-build:
@@ -161,7 +161,9 @@ commands:
                 cp "${ANGULAR_PROJECT_DIR_PATH}/output-config/app.yaml" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
               fi
             else
-              gcloud --project="broad-ddp-${ENVIRONMENT}" secrets versions access latest --secret="study-manager-ui-config" > "${OUTPUT_DIR}/assets/js/ddp_config.js"
+              CONFIG_DIR="${OUTPUT_DIR}/assets/js"
+              mkdir -p $CONFIG_DIR
+              gcloud --project="broad-ddp-${ENVIRONMENT}" secrets versions access latest --secret="study-manager-ui-config" > "${CONFIG_DIR}/ddp_config.js"
             fi
           environment: #Setting this ENV variable prevents launching a new Docker within build-study-sh script
             USE_DOCKER: false
