@@ -145,6 +145,12 @@ commands:
         type: string
     steps:
       - run:
+          name: Setup gcloud context
+          command: |
+            set -u
+            readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+      - run:
           name: <<parameters.study_key>> generate config files and copy pepperConfig.js
           command: |
             set -u
@@ -163,17 +169,12 @@ commands:
             else
               CONFIG_DIR="${OUTPUT_DIR}/assets/js"
               mkdir -p $CONFIG_DIR
+              gcloud auth activate-service-account --key-file=-
               gcloud --project="broad-ddp-${ENVIRONMENT}" secrets versions access latest --secret="study-manager-ui-config" > "${CONFIG_DIR}/ddp_config.js"
             fi
           environment: #Setting this ENV variable prevents launching a new Docker within build-study-sh script
             USE_DOCKER: false
           working_directory: *repo_path
-      - run:
-          name: Setup gcloud context
-          command: |
-            set -u
-            readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
-            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
       - run:
           name: Deploy to GAE
           command: |
