@@ -1,4 +1,4 @@
-service: pancan
+service: dsm-ui
 runtime: python37
 
 # This setting will not matter except to prevent default automatic-scaling which prevents disabling
