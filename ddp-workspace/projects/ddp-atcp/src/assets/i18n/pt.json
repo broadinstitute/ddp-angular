@@ -52,15 +52,15 @@
                 }
             ],
             "SubTitle": "A plataforma funciona assim:",
-            "Text": "A Global A-T Family Data Platform é uma iniciativa liderada por pacientes e supervisionada por famílias e especialistas em A-T de todo o mundo através da qual informações de saúde, dados genéticos e potencialmente outros tipos de dados sobre pessoas com A-T podem ser compartilhados com pesquisadores. A missão da nossa plataforma é permitir aos pesquisadores acessar importantes dados de pacientes de todo o mundo de maneira rápida, segura e eficiente, o que, esperamos, leve a novas descobertas.",
-            "Title": "A iniciativa Global A-T Family Data Platform"
+            "Text": "A Plataforma Global de Dados das Famílias A-T é uma iniciativa liderada por pacientes e supervisionada por famílias e especialistas em A-T de todo o mundo através da qual informações de saúde, dados genéticos e potencialmente outros tipos de dados sobre pessoas com A-T podem ser compartilhados com pesquisadores. A missão da nossa plataforma é permitir aos pesquisadores acessar importantes dados de pacientes de todo o mundo de maneira rápida, segura e eficiente, o que, esperamos, leve a novas descobertas.",
+            "Title": "Plataforma Global de Dados das Famílias A-T"
         },
         "Title": "Sobre esta iniciativa"
     },
     "AboutPage": {
         "DataAccess": {
             "Header": "Comitê de Acesso a Dados",
-            "Text": "As informações da Global A-T Family Data Platform somente podem ser acessadas por investigadores qualificados autorizados pelo Comitê de Acesso a Dados. Esse comitê é composto por representantes de famílias com A-T recrutados do nosso Conselho Familiar de Supervisão que, por sua vez, recrutam especialistas para nosso Conselho Consultivo Científico e Médico – o que garante que o projeto de cada pesquisador seja consistente com as metas dessa iniciativa.  O Conselho Familiar de Supervisão supervisionará o Conselho Consultivo Científico e Médico."
+            "Text": "As informações da Plataforma Global de Dados das Famílias A-T somente podem ser acessadas por investigadores qualificados autorizados pelo Comitê de Acesso a Dados. Esse comitê é composto por representantes de famílias com A-T recrutados do nosso Conselho Familiar de Supervisão que, por sua vez, recrutam especialistas para nosso Conselho Consultivo Científico e Médico – o que garante que o projeto de cada pesquisador seja consistente com as metas dessa iniciativa.  O Conselho Familiar de Supervisão supervisionará o Conselho Consultivo Científico e Médico."
         },
         "Doctors": [
             {
@@ -174,7 +174,7 @@
             "Text": "A missão da nossa plataforma é permitir aos pesquisadores acessar importantes dados de pacientes de todo o mundo de maneira rápida, segura e eficiente, o que, esperamos, leve a novas descobertas. Para garantir que nossa missão e nossas atividades estejam sempre alinhadas com o que é melhor para as pessoas com A-T em todo o mundo, estabelecemos um Conselho Familiar de Supervisão internacional.  Atualmente, os parentes de pessoas com A-T a seguir (listados em ordem alfabética) concordaram gentilmente em atuar nesse conselho:"
         },
         "FinancialSupport": {
-            "Header": "Apoio financeiro à Global A-T Family Data Platform",
+            "Header": "Apoio financeiro à Plataforma Global de Dados das Famílias A-T",
             "Text": {
                 "First": "Currently, the development and operation of the Global A-T Family Data Platform is being financially supported only by the Ataxia-Telangiectasia Children's Project, Inc., better known as the A-Â­T Children's Project, which is a nonÂ­profit organization based in Coconut Creek, Florida, USA, that raises funds to support and coordinate biomedical research projects, scientific conferences and clinical centers aimed at finding life improving therapies for A-T.",
                 "Second": "Ainda que o A-T Children's Project tenha iniciado este projeto, espera-se que organizações dedicadas à A-T e médicos e famílias de todo o mundo apoiem este empreendimento encorajando a participação de famílias, ajudando a supervisionar o acesso a dados e, quando possível, contribuindo financeiramente."
@@ -227,7 +227,7 @@
             }
         ],
         "PageTitle": "Sobre nós",
-        "PlatformName": "A iniciativa Global A-T Family Data Platform",
+        "PlatformName": "Plataforma Global de Dados das Famílias A-T",
         "ScientificBoard": {
             "Header": "Conselho Consultivo Científico e Médico",
             "Text": "Além de garantir que as atividades da plataforma promovam e possibilitem o compartilhamento de dados e, ao mesmo tempo, protejam as pessoas com A-T, o Conselho Consultivo Familiar selecionou e convidou cientistas e clínicos respeitados para se juntar a um Conselho Consultivo Científico e Médico que proporcionará aconselhamento especializado ao Conselho Familiar Consultivo.  Espera-se que os membros desse conselho consultivo incluam não somente especialistas na apresentação clínica e na biologia subjacente da ataxia telangiectasia, mas também especialistas na análise de grandes conjuntos de dados, tais como dados de sequências genômicas, bioestatísticas, interfaces de programação de aplicativos, segurança de dados, ética médica, assuntos legais e metodologias de pesquisa.  Atualmente, os especialistas a seguir (listados em ordem alfabética) se ofereceram generosamente para atuar nesse conselho consultivo:"
@@ -235,7 +235,7 @@
         "Text": {
             "First": " é uma iniciativa liderada por pacientes e supervisionada por famílias e especialistas em A-T de todo o mundo através da qual informações de saúde, dados genéticos e potencialmente outros tipos de dados sobre pessoas com A-T podem ser compartilhadas com pesquisadores.",
             "Second": "Estamos selecionando parceiros estratégicos para vários componentes dessa iniciativa, um dos quais é o Broad Institute of MIT and Harvard, que nos oferecerá o serviço de sequenciamento genômico. Também estamos formando uma parceria com a equipe do A-T Children's Project, que foi treinada para responder a perguntas sobre essa plataforma e enviar kits para testagem de DNA às famílias que os solicitam.",
-            "Third": "WEsperamos que a Global A-T Family Data Platform forme futuramente parcerias com mais organizações para coletar outros tipos de dados biológicos e de estilo de vida, tais como o uso de tecnologias usáveis para registrar informações sobre como uma pessoa com A-T se locomove."
+            "Third": "WEsperamos que a Plataforma Global de Dados das Famílias A-T forme futuramente parcerias com mais organizações para coletar outros tipos de dados biológicos e de estilo de vida, tais como o uso de tecnologias usáveis para registrar informações sobre como uma pessoa com A-T se locomove."
         }
     },
     "AccountActivation": {
@@ -398,7 +398,7 @@
         },
         "Title": {
             "Alert": "Sua sessão será encerrada em breve",
-            "Default": "A Global A-T Family Data Platform"
+            "Default": "Plataforma Global de Dados das Famílias A-T"
         },
         "TooltipAlt": "Devo informar o nome de quem?",
         "UserActivities": {
@@ -462,7 +462,7 @@
             "NoParticipants": "Nenhum participante ainda",
             "Participant": "Participante",
             "Text": "Todas as pessoas com diagnóstico de A-T podem participar da nossa iniciativa de pesquisa. Inscreva-se aqui e compartilhe suas informações médicas e, possivelmente, genéticas, para que pesquisadores possam entender melhor a A-T.",
-            "Title": "Obrigado por se associar à Global A-T Family Data Platform!"
+            "Title": "Obrigado por se associar à Plataforma Global de Dados das Famílias A-T!"
         },
         "Dialogs": {
             "JoinMailingList": {
@@ -489,7 +489,7 @@
                 "MatchEmailsError": "Ambos os campos de e-mail devem ser preenchidos e os endereços devem ser iguais.",
                 "Required": "",
                 "SubmitButton": "Participar da lista de discussão",
-                "Text": "Forneça um endereço de e-mail e nós manteremos você informado sobre o progresso da Global A-T Family Data Platform.",
+                "Text": "Forneça um endereço de e-mail e nós manteremos você informado sobre o progresso da Plataforma Global de Dados das Famílias A-T.",
                 "Title": "Assine para ficar informado"
             },
             "SessionWillExpire": {
@@ -521,7 +521,7 @@
             "Text": "Você está ausente há algum tempo e encerraremos a sessão como medida de segurança. Faça login novamente para voltar à página em que estava."
         },
         "StayInformed": {
-            "Text": "Obrigado por se associar à lista de discussão da Global A-T Family Data Platfom. Manteremos você informado sobre essa iniciativa usando o endereço de e-mail que você forneceu.",
+            "Text": "Obrigado por se associar à lista de discussão da Plataforma Global de Dados das Famílias A-T. Manteremos você informado sobre essa iniciativa usando o endereço de e-mail que você forneceu.",
             "Title": "Mantenha-se informado"
         }
     },
