@@ -170,6 +170,7 @@ commands:
               CONFIG_DIR="${OUTPUT_DIR}/assets/js"
               mkdir -p $CONFIG_DIR
               gcloud --project="broad-ddp-${ENVIRONMENT}" secrets versions access latest --secret="study-manager-ui-config" > "${CONFIG_DIR}/ddp_config.js"
+              ls -l  "${CONFIG_DIR}/ddp_config.js"
             fi
           environment: #Setting this ENV variable prevents launching a new Docker within build-study-sh script
             USE_DOCKER: false
