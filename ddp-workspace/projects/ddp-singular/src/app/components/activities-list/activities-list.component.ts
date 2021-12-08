@@ -56,4 +56,8 @@ export class ActivitiesListComponent {
   isActivityEditable(activity: ActivityInstance): boolean {
     return activity.statusCode === ActivityStatusCodes.COMPLETE && !activity.readonly;
   }
+
+  isMedicalRecordFileUpload(activity: ActivityInstance): boolean {
+    return activity.activityCode === ActivityCode.MedicalRecordFileUpload;
+  }
 }

@@ -1,16 +1,26 @@
 .pb {
   display: flex;
 
-  margin: 0;
+  margin: 1.6rem 0 3.2rem;
   padding: 0;
 
   list-style: none;
+
+  @media (max-width: 450px) {
+    flex-flow: column nowrap;
+
+    margin: 0 0 2.4rem;
+  }
 
   &__item {
     position: relative;
     z-index: 10;
 
     flex: 0 0 92px;
+
+    @media (max-width: 450px) {
+      flex: auto;
+    }
   }
 
   &__divider {
@@ -24,6 +34,17 @@
 
     background: #c1c1c1;
 
+    @media (max-width: 768px) {
+      margin: 16px -32px 0;
+    }
+
+    @media (max-width: 450px) {
+      width: 2px;
+      flex: 16px;
+
+      margin: 0 15px 0;
+    }
+
     &--colored {
       background: #521b93;
     }
@@ -34,6 +55,10 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+
+  @media (max-width: 450px) {
+    flex-flow: row nowrap;
+  }
 
   &__circle {
     display: flex;
@@ -48,6 +73,18 @@
     background: #d8d8d8;
     border: 2px solid #c1c1c1;
     border-radius: 27px;
+
+    @media (max-width: 768px) {
+      width: 32px;
+      height: 32px;
+
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 450px) {
+      margin-right: 8px;
+      margin-bottom: 0;
+    }
   }
 
   &__count {
@@ -56,11 +93,25 @@
     font-family: 'Spartan-Semibold', sans-serif;
     font-size: 16px;
     line-height: 1;
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
   }
 
   &__name {
+    margin: 0;
+
     font-family: 'Spartan-Semibold', sans-serif;
     text-align: center;
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
+
+    @media (max-width: 450px) {
+      margin-top: 4px;
+    }
   }
 
   &--complete &__circle {
