@@ -170,10 +170,6 @@ commands:
               CONFIG_DIR="${OUTPUT_DIR}/assets/js"
               mkdir -p $CONFIG_DIR
               gcloud --project="broad-ddp-${ENVIRONMENT}" secrets versions access latest --secret="study-manager-ui-config" > "${CONFIG_DIR}/ddp_config.js"
-              ls -R "${OUTPUT_DIR}"
-              ls -l  "${CONFIG_DIR}"
-              ls -l  "${CONFIG_DIR}/ddp_config.js"
-
             fi
           environment: #Setting this ENV variable prevents launching a new Docker within build-study-sh script
             USE_DOCKER: false
@@ -356,9 +352,7 @@ commands:
           command: |
             set -u
             export NODE_OPTIONS="--max-old-space-size=4096"
-            echo "The output dir is ${OUTPUT_DIR}"
             ng build $ANGULAR_PROJECT_NAME $BUILD_PARAMS --prod --aot --base-href=/ --output-path=$OUTPUT_DIR --verbose=true --progress=true
-            ls -R "${OUTPUT_DIR}"
 
   store-app-build:
     description: "Copy build to cloud storage"
