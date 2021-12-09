@@ -9,4 +9,8 @@ import { Route } from '../../../constants/route';
 })
 export class HomeComponent {
   Route = Route;
+  readonly ADDITIONAL_VENTURES_URL = 'https://www.additionalventures.org';
+  readonly BROAD_INSTITUTE_URL = 'https://www.broadinstitute.org';
+  readonly BOSTON_HOSPITAL_URL = 'https://www.childrenshospital.org';
+  readonly GENOME_MEDICAL_URL = 'https://www.genomemedical.com';
 }
