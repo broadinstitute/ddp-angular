@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./for-researches.component.scss']
 })
 export class ForResearchesComponent implements OnInit {
+  readonly TERRA_BIO_URL = 'https://terra.bio/';
 
   constructor() { }
 
