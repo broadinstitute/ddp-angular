@@ -85,6 +85,7 @@ import { ActivityTextAnswer } from './components/activityForm/answers/activityTe
 import { ActivityTextInput } from './components/activityForm/answers/activity-text-input/activityTextInput.component';
 import { ActivityFileAnswer } from './components/activityForm/answers/activity-file-answer/activityFileAnswer.component';
 import { ActivityMatrixAnswer } from './components/activityForm/answers/activity-matrix-answer/activity-matrix-answer.component';
+import { ActivityInstanceSelectAnswer } from './components/activityForm/answers/activity-instance-select-answer/activity-instance-select-answer.component';
 import { ActivityEmailInput } from './components/activityForm/answers/activityEmailInput.component';
 import { ActivityNumericAnswer } from './components/activityForm/answers/activityNumericAnswer.component';
 import { ActivitySectionComponent } from './components/activityForm/activitySection.component';
@@ -182,6 +183,7 @@ import { ChangeLanguageRedirectComponent } from './components/internationalizati
 import { LanguageServiceAgent } from './services/serviceAgents/languageServiceAgent.service';
 import { PopupWithCheckboxComponent } from './components/popupWithCheckbox.component';
 import { DisplayLanguagePopupServiceAgent } from './services/serviceAgents/displayLanguagePopupServiceAgent.service';
+import { ActivityInstanceSelectAnswerService } from './services/serviceAgents/activityInstanceSelectAnswer.service';
 import { InvitationPipe } from './pipes/invitationFormatter.pipe';
 import { StudyDetailServiceAgent } from './services/serviceAgents/studyDetailServiceAgent.service';
 import { StatisticsServiceAgent } from './services/serviceAgents/statisticsServiceAgent.service';
@@ -317,6 +319,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         RenewSessionNotifier,
         LanguageService,
         DisplayLanguagePopupServiceAgent,
+        ActivityInstanceSelectAnswerService,
         StudyDetailServiceAgent,
         StatisticsServiceAgent,
         ModalDialogService,
@@ -366,6 +369,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityTextInput,
         ActivityFileAnswer,
         ActivityMatrixAnswer,
+        ActivityInstanceSelectAnswer,
         ActivityEmailInput,
         ActivityNumericAnswer,
         ActivityAnswerComponent,
@@ -442,6 +446,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityTextAnswer,
         ActivityFileAnswer,
         ActivityMatrixAnswer,
+        ActivityInstanceSelectAnswer,
         ActivityEmailInput,
         ActivityNumericAnswer,
         ActivityAnswerComponent,

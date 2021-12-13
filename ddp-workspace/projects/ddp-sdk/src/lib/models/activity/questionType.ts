@@ -8,5 +8,6 @@ export enum QuestionType {
     Agreement = 'AGREEMENT',
     Numeric = 'NUMERIC',
     File = 'FILE',
-    Matrix = 'MATRIX'
+    Matrix = 'MATRIX',
+    ActivityInstanceSelect = 'ACTIVITY_INSTANCE_SELECT',
 }

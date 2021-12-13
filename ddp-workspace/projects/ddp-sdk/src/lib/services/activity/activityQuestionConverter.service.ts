@@ -22,6 +22,7 @@ import { ActivityFileQuestionBlock } from '../../models/activity/activityFileQue
 import { ActivityMatrixQuestionBlock } from '../../models/activity/activityMatrixQuestionBlock';
 import * as _ from 'underscore';
 import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
+import { ActivityInstanceSelectQuestionBlock } from '../../models/activity/activityInstanceSelectQuestionBlock';
 
 const DETAIL_MAXLENGTH = 500;
 
@@ -165,7 +166,11 @@ export class ActivityQuestionConverter {
             },
             {
                 type: QuestionType.Matrix,
-                func: (questionJson) => this.getMatrixBlock(questionJson)
+                func: (questionJson) => this.getMatrixBlock(questionJson),
+            },
+            {
+                type: QuestionType.ActivityInstanceSelect,
+                func: (questionJson) => this.getActivityInstanceSelectBlock(questionJson)
             }
         ];
     }
@@ -274,5 +279,11 @@ export class ActivityQuestionConverter {
         matrixBlock.groups = questionJson.groups;
 
         return matrixBlock;
+    }
+
+    private getActivityInstanceSelectBlock(questionJson: any): ActivityInstanceSelectQuestionBlock {
+        const activityInstanceSelectBlock = new ActivityInstanceSelectQuestionBlock();
+
+        return activityInstanceSelectBlock;
     }
 }

@@ -150,6 +150,7 @@ export * from './lib/components/activityForm/answers/activityTextAnswer.componen
 export * from './lib/components/activityForm/answers/activityBooleanAnswer.component';
 export * from './lib/components/activityForm/answers/activity-file-answer/activityFileAnswer.component';
 export * from './lib/components/activityForm/answers/activity-matrix-answer/activity-matrix-answer.component';
+export * from './lib/components/activityForm/answers/activity-instance-select-answer/activity-instance-select-answer.component';
 
 export * from './lib/components/activityForm/activity-blocks/activityQuestion.component';
 export * from './lib/components/activityForm/activity-blocks/modalActivityBlock/modalActivityBlock.component';
