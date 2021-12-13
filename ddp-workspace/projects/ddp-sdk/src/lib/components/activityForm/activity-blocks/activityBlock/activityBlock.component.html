@@ -7,27 +7,31 @@
             <ng-container *ngIf="isModal; else embedded">
                 <ddp-modal-activity-block [instance]="instance"
                                           [readonly]="readonly"
+                                          [enabled]="enabled"
                                           [validationRequested]="validationRequested"
                                           [studyGuid]="studyGuid"
                                           (componentBusy)="embeddedComponentBusy.emit($event)"
-                                          (deletedActivity)="onDeleteChildInstance($event)">
+                                          (deletedActivity)="onDeleteChildInstance($event)"
+                                          (blockVisibilityChanged)="blockVisibilityChanged.emit($event)">
                 </ddp-modal-activity-block>
             </ng-container>
             <ng-template #embedded>
                 <ddp-embedded-activity-block [instance]="instance"
                                              [readonly]="readonly"
+                                             [enabled]="enabled"
                                              [validationRequested]="validationRequested"
                                              [studyGuid]="studyGuid"
                                              (componentBusy)="embeddedComponentBusy.emit($event)"
                                              (validStatusChanged)="validStatusChanged.emit($event)"
-                                             (deletedActivity)="onDeleteChildInstance($event)">
+                                             (deletedActivity)="onDeleteChildInstance($event)"
+                                             (blockVisibilityChanged)="blockVisibilityChanged.emit($event)">
                 </ddp-embedded-activity-block>
             </ng-template>
         </div>
     </div>
 
     <button *ngIf="block.allowMultiple" mat-flat
-            [disabled]="readonly"
+            [disabled]="readonly || !enabled"
             class="add-btn button button_primary"
             (click)="createChildInstance()">
         <img lazy-resource src="assets/shared/add-person.svg" class="icon" [alt]="block.addButtonText">
