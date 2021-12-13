@@ -67,6 +67,8 @@ a:not(.button) {
 
   &__logo-img {
     height: 100%;
+    position: relative;
+    top: -13px;
   }
 
   &__nav {

@@ -148,14 +148,25 @@
 
   <ng-container *ngIf="!isStepped">
     <button
+      *ngIf="displayDisagreeButton"
+      [routerLink]="['/', Route.Dashboard]"
+      class="button button--primary button--icon"
+      [disabled]="dataEntryDisabled || (isPageBusy | async)"
+    >
+      <mat-icon>close</mat-icon>
+      {{ 'Activity.Actions.Disagree' | translate }}
+    </button>
+
+    <button
       #submitButton
       *ngIf="!isReadonly()"
-      class="button button--primary pull-right"
+      class="button button--primary pull-right button--icon"
       [disabled]="dataEntryDisabled || (isPageBusy | async)"
       (click)="flush()"
       (mouseenter)="mouseEnterOnSubmit()"
     >
-      {{ 'SDK.SubmitButton' | translate }}
+      <mat-icon *ngIf="displayAgreeIcon">done</mat-icon>
+      {{ submitText | translate }}
     </button>
 
     <button *ngIf="isReadonly()" class="button button--primary pull-right" (click)="close()">

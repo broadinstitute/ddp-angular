@@ -4,7 +4,7 @@
 .button {
   display: inline-block;
 
-  padding: 9px 14px 5px;
+  padding: 6px 14px 5px;
 
   font-family: 'Spartan-Bold', sans-serif;
   font-size: 18px;
@@ -121,7 +121,7 @@
 .SimpleButton {
   display: inline-block;
 
-  padding: 9px 14px 5px;
+  padding: 6px 14px 5px;
 
   font-family: 'Spartan-Bold', sans-serif;
   font-size: 18px;
@@ -171,7 +171,7 @@
 }
 
 .header .SimpleButton {
-  width: 160px;
+  width: 140px;
 
   @media (max-width: 1200px) {
     width: auto;
