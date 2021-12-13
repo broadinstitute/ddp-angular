@@ -104,6 +104,14 @@
                     "site": "University of Zurich, Institute of Neuropathology, Zurich, Switzerland",
                     "eligibilityRequirements": "Confirmed PRNP mutation carriers (symptomatic+asymptomatic), individuals from families with PRNP mutations without known PRNP status, wild-type PRNP family members from patients with confirmed PRNP mutations",
                     "moreInfo": "See <a target=\"_blank\" href=\"{{bucketUrl}}/studies/aguzzi-KEK-ZH-Nr-2015-0514-leaflet.pdf\">PDF</a>, contact Karl Frontzek  Karl.Frontzek@usz.ch to enroll"
+                },
+                {
+                    "studyName": "Early diagnosis and longitudinal assessment of human prion diseases and other rapidly progressive neurological conditions",
+                    "description": "The primary goal of this study is to develop and test methods for differentiating Creutzfeldt-Jakob disease (CJD) from other diseases and to learn how to diagnose CJD as early as possible. A secondary goal of this study is to learn more about how CJD and other rapid neurological conditions progress by studying these diseases in each patient over time. Because CJD is a rare condition and very rapidly progressive, diagnosis of the disease is often made very late in the illness. If any future treatments for CJD are to be successful, they likely will need to be given to patients as early as possible, before the disease progresses too far. It is therefore important that we learn how to make an accurate diagnosis earlier.",
+                    "nameOfPI": "<a target=\"_blank\" href=\"mailto:mgeschwind@memory.ucsf.edu\"><strong>Michael Geschwind</strong></a>",
+                    "site": "Memory and Aging Center, University of California San Francisco (UCSF), San Francisco, California, USA",
+                    "eligibilityRequirements": "Research subjects must fulfill WHO Revised Criteria for CJD, have a family history of familial human prion disease (fCJD, FFI, GSS), or have a history of progressive neurologic decline resulting in dementia or significant functional impairment from patient’s baseline over two years or less from symptoms onset. Research subjects must have an informant who has frequent contact with the subject and is available to provide information about the subject. Those who are unable to undergo MRI due contraindication to this procedure (e.g., pacemaker, pregnant women) will not be eligible for this study.",
+                    "moreInfo": "Contact <a target=\"_blank\" href=\"mailto:cjdstudies@ucsf.edu\">cjdstudies@ucsf.edu</a>; <a target=\"_blank\" href=\"tel:4154768791\">415-476-8791</a> for more information or to enroll."
                 }
             ],
             "InputPlaceholder": "Filter all columns"
