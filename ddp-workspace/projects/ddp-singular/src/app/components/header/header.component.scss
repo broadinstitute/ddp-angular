@@ -107,9 +107,6 @@ a:not(.button) {
         & ul {
           //padding-left: 0;
         }
-        & a {
-          color: map-get($colors, 'header-color-dark');
-        }
       }
 
       .link-list {
