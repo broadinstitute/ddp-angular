@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SessionMementoService } from 'ddp-sdk';
 
 @Component({
@@ -6,12 +6,9 @@ import { SessionMementoService } from 'ddp-sdk';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   constructor(private session: SessionMementoService) { }
-
-  ngOnInit(): void {
-  }
 
   public get isAuthenticated(): boolean {
       return this.session.isAuthenticatedSession();
