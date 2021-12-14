@@ -1,1 +1,5 @@
-<ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+<ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code" (onInit)="editorInit($event)"></ngx-monaco-editor>
+
+<div *ngFor="let error of errors">
+  {{error.message}}
+</div>

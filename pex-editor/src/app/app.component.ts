@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Error, validate } from 'src/parser-utils/validator';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,13 @@ import { Component } from '@angular/core';
 export class AppComponent {
   editorOptions = {theme: 'myCoolTheme', language: 'pex'};
   code: string = 'user.studies["A"].forms["B"].questions["COUNTRY"].answers.hasOption("US")';
+  errors: Error[] = [];
+
+  editorInit(editor: monaco.editor.IStandaloneCodeEditor) {
+    editor.onDidChangeModelContent((e: monaco.editor.IModelContentChangedEvent) => {
+      console.log(JSON.stringify(e, null, '\t'));
+      console.log(this.code);
+      this.errors = validate(this.code);
+    });
+  }
 }

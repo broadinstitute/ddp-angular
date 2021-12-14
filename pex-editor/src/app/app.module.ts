@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { MonacoEditorModule, NgxMonacoEditorConfig } from 'ngx-monaco-editor';
 import { FormsModule } from '@angular/forms';
 import { PexTokensProvider } from '../parser-utils/pexTokensProvider';
+import { CommonModule } from '@angular/common';
 
 function onMonacoLoad() {
   monaco.languages.register({ id: 'pex' });
@@ -47,7 +48,8 @@ const monacoConfig: NgxMonacoEditorConfig = {
   imports: [
     BrowserModule,
     FormsModule,
-    MonacoEditorModule.forRoot(monacoConfig)
+    MonacoEditorModule.forRoot(monacoConfig),
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
