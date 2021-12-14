@@ -2379,15 +2379,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-circadia/tsconfig.app.json",
-              "projects/ddp-circadia/tsconfig.spec.json",
-              "projects/ddp-circadia/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-circadia/**/*.ts",
+              "projects/ddp-circadia/**/*.html"
             ]
           }
         },
