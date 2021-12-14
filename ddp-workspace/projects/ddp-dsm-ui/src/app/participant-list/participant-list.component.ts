@@ -506,7 +506,7 @@ export class ParticipantListComponent implements OnInit {
           jsonData.kitTypes.forEach((val) => {
             const kitType = KitType.parse(val);
             if (kitType.uploadReasons != null) {
-              // tslint:disable-next-line:no-shadowed-variable
+              // eslint-disable-next-line @typescript-eslint/no-shadow
               kitType.uploadReasons.forEach((val) => {
                 const found = optionsUpload.find(option => {
                   return option.value === val;
@@ -645,7 +645,7 @@ export class ParticipantListComponent implements OnInit {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
-        // tslint:disable-next-line:no-string-throw
+        // eslint-disable-next-line no-throw-literal
         throw 'Error - Loading display settings' + err;
       }
     );

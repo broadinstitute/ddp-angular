@@ -62,7 +62,7 @@ export class PermalinkComponent implements OnInit {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
-          // tslint:disable-next-line:no-string-throw
+          // eslint-disable-next-line no-throw-literal
           throw 'Error loading institutions' + err;
         }
       );
@@ -80,7 +80,7 @@ export class PermalinkComponent implements OnInit {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
-          // tslint:disable-next-line:no-string-throw
+          // eslint-disable-next-line no-throw-literal
           throw 'Error loading medical record data' + err;
         }
       );

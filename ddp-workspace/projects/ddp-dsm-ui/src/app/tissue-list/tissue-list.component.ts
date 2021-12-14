@@ -966,7 +966,7 @@ export class TissueListComponent implements OnInit {
   }
 
   public setSelectedFilterName(filterName): void {
-    // tslint:disable-next-line:no-unused-expression
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     this.selectedFilterName === filterName;
   }
 

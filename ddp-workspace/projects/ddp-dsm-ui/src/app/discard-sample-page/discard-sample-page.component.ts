@@ -18,7 +18,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./discard-sample-page.component.css']
 })
 export class DiscardSamplePageComponent implements OnInit, OnDestroy {
-  // tslint:disable:no-console
+  /* eslint-disable no-console */
   errorMessage: string;
   additionalMessage: string;
 

@@ -668,7 +668,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
           for (const oncHis of oncHistories) {
             if (oncHis.selected) {
               // TODO: check is it correct ? - shadowed variables `date`
-              // tslint:disable-next-line:no-shadowed-variable
+              // eslint-disable-next-line @typescript-eslint/no-shadow
               const date = new Date();
               if (oncHis.tFaxSent == null) {
                 oncHis.tFaxSent = Utils.getFormattedDate(date);

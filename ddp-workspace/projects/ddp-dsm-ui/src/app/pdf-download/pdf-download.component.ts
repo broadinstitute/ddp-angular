@@ -148,7 +148,7 @@ export class PdfDownloadComponent implements OnInit {
     this.dsmService.downloadPDF(this.participantId, null, null, null, null, this.compService.getRealm(),
       configName, null, null).subscribe(
       data => {
-        // tslint:disable-next-line:no-console
+        // eslint-disable-next-line no-console
         console.info(data);
         this.downloadFile(data, '_' + configName);
         this.loading = false;
