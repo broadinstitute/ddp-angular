@@ -1061,15 +1061,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/basil-app/tsconfig.app.json",
-              "projects/basil-app/tsconfig.spec.json",
-              "projects/basil-app/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/basil-app/**/*.ts",
+              "projects/basil-app/**/*.html"
             ]
           }
         },
@@ -2599,7 +2595,9 @@
                 "output": "assets/config"
               }
             ],
-            "styles": ["projects/ddp-brugada/src/styles.scss"],
+            "styles": [
+              "projects/ddp-brugada/src/styles.scss"
+            ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
             ]
@@ -2674,7 +2672,9 @@
               "projects/ddp-brugada/src/favicon-alert.ico",
               "projects/ddp-brugada/src/assets"
             ],
-            "styles": ["projects/ddp-brugada/src/styles.scss"],
+            "styles": [
+              "projects/ddp-brugada/src/styles.scss"
+            ],
             "scripts": []
           }
         },
@@ -2686,7 +2686,9 @@
               "projects/ddp-brugada/tsconfig.spec.json",
               "projects/ddp-brugada/e2e/tsconfig.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "e2e": {
@@ -2953,7 +2955,7 @@
               "projects/ddp-dsm-ui/tsconfig.spec.json"
             ],
             "exclude": [
-                "**/node_modules/**"
+              "**/node_modules/**"
             ]
           }
         }
