@@ -332,15 +332,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-angio/tsconfig.app.json",
-              "projects/ddp-angio/tsconfig.spec.json",
-              "projects/ddp-angio/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-angio/**/*.ts",
+              "projects/ddp-angio/**/*.html"
             ]
           }
         },
