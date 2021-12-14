@@ -37,10 +37,15 @@
             "type": "attribute"
           }
         ],
+        "@angular-eslint/no-output-rename": "off",
+        "@angular-eslint/no-output-native": "off",
+        "@typescript-eslint/ban-types": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "no-extra-boolean-cast": "off",
         "no-unused-vars": "off",
         "no-undef": "off",
-        "@angular-eslint/no-output-native": "off",
-        "@typescript-eslint/no-explicit-any": "off",
         "prefer-const": "warn"
       }
     },
@@ -49,7 +54,9 @@
       "extends": [
         "plugin:@angular-eslint/template/recommended"
       ],
-      "rules": {}
+      "rules": {
+        "@angular-eslint/template/no-negated-async":  "off"
+      }
     },
     {
       "env": {

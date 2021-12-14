@@ -11,8 +11,6 @@ import {
 import { Subscription } from 'rxjs';
 import { ToolkitConfigurationService } from 'toolkit';
 
-import * as Routes from '../../router-resources';
-
 @Component({
   selector: 'app-atcp-auth0-code-callback',
   template: `<p>Registering with ddp...</p>`,

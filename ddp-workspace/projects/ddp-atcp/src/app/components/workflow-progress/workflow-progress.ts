@@ -26,7 +26,7 @@ export class WorkflowProgressComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     const translate$ = this.ngxTranslate.getTranslation(['WorkflowProgress.Statuses'])
-      .subscribe((statuses: object) => {
+      .subscribe((statuses: Record<string, unknown>) => {
         this.statuses = statuses;
       });
     this.anchor.addNew(translate$);
