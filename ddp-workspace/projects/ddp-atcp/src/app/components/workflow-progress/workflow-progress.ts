@@ -13,7 +13,7 @@ export const COMPLETE = 'COMPLETE';
 export class WorkflowProgressComponent implements OnInit, OnDestroy {
   @Input() public steps: ActivityInstance[] = [];
   @Input() public instanceGuid: string;
-  // tslint:disable-next-line:no-output-on-prefix
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() public onChangeActivity = new EventEmitter<ActivityInstance>();
 
   public CREATED = CREATED;

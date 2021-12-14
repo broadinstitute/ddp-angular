@@ -1,4 +1,4 @@
-/* tslint:disable:variable-name */
+/* eslint-disable @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match */
 export class DataAccessParameters {
   request_date: string; // required. Example: 2017-11-06
   researcher_name: string; // required

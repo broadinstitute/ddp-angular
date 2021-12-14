@@ -504,15 +504,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-atcp/tsconfig.app.json",
-              "projects/ddp-atcp/tsconfig.spec.json",
-              "projects/ddp-atcp/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-atcp/**/*.ts",
+              "projects/ddp-atcp/**/*.html"
             ]
           }
         },
