@@ -266,15 +266,15 @@ export class WelcomeComponent implements OnInit {
         return this.windowRef.nativeWindow.pageYOffset <= this.HEADER_HEIGHT;
     }
 
-    public scrollTo(target: any): void {
+    public scrollTo(target: HTMLElement): void {
         this.isIE ? this.simpleScrolling(target) : this.smoothScrolling(target);
     }
 
-    private simpleScrolling(target: any): void {
+    private simpleScrolling(target: HTMLElement): void {
         this.windowRef.nativeWindow.scrollTo(0, target.offsetTop);
     }
 
-    private smoothScrolling(target: any): void {
+    private smoothScrolling(target: HTMLElement): void {
         this.windowRef.nativeWindow.scrollTo({
             top: target.offsetTop,
             behavior: 'smooth'
