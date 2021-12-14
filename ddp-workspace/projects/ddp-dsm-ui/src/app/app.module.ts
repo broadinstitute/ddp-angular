@@ -222,7 +222,7 @@ sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
     DdpModule,
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(AppRoutes, {enableTracing: true}),
+    RouterModule.forRoot(AppRoutes, { enableTracing: true, relativeLinkResolution: 'legacy' }),
     HttpClientModule,
     ReactiveFormsModule,
 

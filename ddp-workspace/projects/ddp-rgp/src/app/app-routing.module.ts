@@ -50,11 +50,8 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [IrbGuard],
   },
-  {
-    matcher: lgmdMatcher,
-    redirectTo: AppRoutes.LGMD,
-    canActivate: [IrbGuard],
-  },
+  { matcher: lgmdMatcher,
+    redirectTo: AppRoutes.LGMD },
   {
     path: AppRoutes.Auth,
     component: Auth0CodeCallbackComponent,
@@ -149,11 +146,8 @@ const routes: Routes = [
     path: AppRoutes.Password,
     component: PasswordComponent,
   },
-  {
-    path: AppRoutes.CountMeIn,
-    redirectTo: AppRoutes.TellUsYourStory,
-    canActivate: [IrbGuard],
-  },
+  { path: AppRoutes.CountMeIn,
+    redirectTo: AppRoutes.TellUsYourStory },
   {
     path: AppRoutes.StayInformed,
     component: StayInformedComponent,
@@ -187,9 +181,10 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-      enableTracing: false,
-      scrollPositionRestoration: 'top',
-    }),
+    enableTracing: false,
+    scrollPositionRestoration: 'top',
+    relativeLinkResolution: 'legacy'
+}),
   ],
   exports: [RouterModule],
 })

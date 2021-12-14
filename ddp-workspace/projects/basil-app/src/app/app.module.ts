@@ -96,7 +96,7 @@ declare const ga: (...args: any[]) => void;
     LoginLandingComponent
   ],
   imports: [
-    RouterModule.forRoot(appRoutes, { enableTracing: false }),
+    RouterModule.forRoot(appRoutes, { enableTracing: false, relativeLinkResolution: 'legacy' }),
     BrowserModule,
     DdpModule,
     MatButtonModule, MatToolbarModule, MatIconModule, MatMenuModule, MatCardModule,

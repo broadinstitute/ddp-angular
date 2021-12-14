@@ -163,7 +163,8 @@ const routes: Routes = [
 const routerOptions: ExtraOptions = {
     scrollPositionRestoration: 'top',
     anchorScrolling: 'enabled',
-    scrollOffset: [0, 150] /* 150px to top when scrolling as to see full content */
+    scrollOffset: [0, 150] /* 150px to top when scrolling as to see full content */,
+    relativeLinkResolution: 'legacy'
 };
 
 @NgModule({
