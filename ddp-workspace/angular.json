@@ -2663,15 +2663,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-brugada/tsconfig.app.json",
-              "projects/ddp-brugada/tsconfig.spec.json",
-              "projects/ddp-brugada/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-brugada/**/*.ts",
+              "projects/ddp-brugada/**/*.html"
             ]
           }
         },
