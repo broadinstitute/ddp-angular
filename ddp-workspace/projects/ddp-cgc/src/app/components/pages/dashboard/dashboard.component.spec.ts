@@ -26,7 +26,7 @@ describe('DashboardComponent', () => {
         {
           provide: ActivityServiceAgent,
           useValue: {
-            createInstance: (studyGuid: string, activityCode: string, parentInstanceGuid?: string) => of(null)
+            createInstance: () => of(null)
           }
         },
         {

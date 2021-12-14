@@ -1,6 +1,6 @@
 import { ActivityStatusCodes } from 'ddp-sdk';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { BaseActivities } from '../base-activities/base-activities.component';
+import { BaseActivitiesComponent } from '../base-activities/base-activities.component';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { BaseActivities } from '../base-activities/base-activities.component';
   styleUrls: ['./user-activities.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserActivitiesComponent extends BaseActivities {
+export class UserActivitiesComponent extends BaseActivitiesComponent {
   ActivityStatusCode = ActivityStatusCodes;
   displayedColumns: string[] = ['name', 'status', 'actions'];
 }

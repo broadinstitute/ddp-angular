@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ActivityInstance } from './../../../../../ddp-sdk/src/lib/models/activityInstance';
+import { ActivityInstance } from 'ddp-sdk';
 
 
 @Component({
   template: ''
 })
-export abstract class BaseActivities {
+export abstract class BaseActivitiesComponent {
   abstract displayedColumns: string[];
 
   @Input() activities: ActivityInstance[];
