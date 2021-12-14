@@ -647,15 +647,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-brain/tsconfig.app.json",
-              "projects/ddp-brain/tsconfig.spec.json",
-              "projects/ddp-brain/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-brain/**/*.ts",
+              "projects/ddp-brain/**/*.html"
             ]
           }
         },
