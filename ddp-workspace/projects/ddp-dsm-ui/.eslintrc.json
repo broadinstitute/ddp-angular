@@ -11,8 +11,7 @@
       "parserOptions": {
         "project": [
           "projects/ddp-dsm-ui/tsconfig.app.json",
-          "projects/ddp-dsm-ui/tsconfig.spec.json",
-          "projects/ddp-dsm-ui/e2e/tsconfig.json"
+          "projects/ddp-dsm-ui/tsconfig.spec.json"
         ],
         "createDefaultProgram": true
       },
@@ -32,7 +31,10 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "no-var": "off",
+        "no-prototype-builtins": "off",
+        "@typescript-eslint/no-var-requires": "off"
       }
     },
     {

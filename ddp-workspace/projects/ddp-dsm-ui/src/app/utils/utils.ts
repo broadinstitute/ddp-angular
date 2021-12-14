@@ -222,7 +222,6 @@ export class Utils {
           if (col.type === 'ADDITIONALVALUE') {
             const fieldName = 'additionalValues';
             // TODO: check is it correct ? - `fieldName` is set on the previous line
-            // @ts-ignore
             if (fieldName !== '') {
               let value = this.getObjectAdditionalValue(o, fieldName, col);
               value = value == null ? '' : value.toString();

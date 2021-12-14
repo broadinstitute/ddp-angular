@@ -1,4 +1,4 @@
-import { ScanComponent } from './scan.component';
+// import { ScanComponent } from './scan.component';
 
 describe('Component: Scan', () => {
   // it('should create an instance', () => {

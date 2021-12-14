@@ -147,7 +147,7 @@ export class ShippingComponent implements OnInit {
     this.dsmService.getLabelSettings().subscribe(
       data => {
         jsonData = data;
-        jsonData.forEach((val) => {
+        jsonData.forEach(() => {
           this.labelSettings = [];
           this.labelNames = [];
           this.selectedSetting = null;

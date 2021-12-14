@@ -1,4 +1,4 @@
-import { ShippingComponent } from './shipping.component';
+// import { ShippingComponent } from './shipping.component';
 
 describe('Component: Shipping', () => {
   // it('should create an instance', () => {

@@ -30,6 +30,7 @@ export class FieldQuestionComponent implements OnInit , OnChanges {
   setQuestion(): void {
     if (this._question != null) {
       // TODO: check is it correct ?
+      /* eslint-disable-next-line */
       this._question = this._question;
     } else {
       if (this.valueJson != null && this.valueJson !== '') {

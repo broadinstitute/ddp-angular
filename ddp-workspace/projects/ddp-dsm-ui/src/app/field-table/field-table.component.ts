@@ -39,6 +39,7 @@ export class FieldTableComponent implements OnInit, OnChanges {
     this.setMultiTypes();
   }
 
+  /* eslint-disable @angular-eslint/no-empty-lifecycle-method*/
   ngOnChanges(changes: SimpleChanges): void {
     // TODO: check is it correct ? - commented method call
 //    this.setMultiTypes();

@@ -1,4 +1,4 @@
-import { UserSettingComponent } from './user-setting.component';
+// import { UserSettingComponent } from './user-setting.component';
 
 describe('Component: UserSetting', () => {
   // it('should create an instance', () => {

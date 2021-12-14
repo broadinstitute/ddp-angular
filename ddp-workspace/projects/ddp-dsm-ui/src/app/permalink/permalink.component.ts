@@ -41,7 +41,7 @@ export class PermalinkComponent implements OnInit {
     }
   }
 
-  public gotToParticipant(realm: string): void {
+  public gotToParticipant(realm?: string): void {
     this.router.navigate([ '/participantList' ]);
   }
 

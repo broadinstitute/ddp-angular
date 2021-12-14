@@ -1,6 +1,6 @@
 // import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { NDIUploadComponent } from './ndiupload.component';
+// import { NDIUploadComponent } from './ndiupload.component';
 
 describe('NDIUploadComponent', () => {
   // let component: NDIUploadComponent;

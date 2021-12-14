@@ -541,9 +541,8 @@ export class DashboardComponent implements OnInit {
   getParticipantData(): void {
     this.dsmService.applyFilter(null, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), 'participantList', null).subscribe(
       data => {
-        let jsonData: any[];
         this.participantList = [];
-        jsonData = data.participants;
+        const jsonData = data.participants;
         jsonData.forEach((val) => {
           const participant = Participant.parse(val);
           this.participantList.push(participant);

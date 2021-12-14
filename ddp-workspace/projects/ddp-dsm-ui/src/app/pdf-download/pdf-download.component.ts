@@ -121,8 +121,7 @@ export class PdfDownloadComponent implements OnInit {
         data => {
           this.participantPDFs = [];
           // console.info( `received: ${JSON.stringify( data, null, 2 )}` );
-          let jsonData: any[];
-          jsonData = data;
+          const jsonData = data;
           if (jsonData != null) {
             jsonData.forEach((val) => {
               const participantPdf = PDFModel.parse(val);
