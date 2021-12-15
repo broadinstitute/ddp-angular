@@ -22,12 +22,18 @@
     }
     .left {
       width: 47%;
+      font-size: 20px;
+      line-height: 28px;
+      p {
+        font-size: 20px;
+        line-height: 28px;
+      }
       @include media-sm {
         width: unset;
       }
     }
     .right {
-      width: 52%;
+      width: 48%;
       @include media-sm {
         width: unset;
         display: none;
@@ -35,6 +41,8 @@
     }
     img {
       width: 100%;
+      position: relative;
+      top: -20px;
     }
     p {
       margin-bottom: 30px;
