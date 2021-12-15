@@ -24,7 +24,7 @@ import { TellUsYourStoryComponent } from './components/tell-us-your-story/tell-u
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { Auth0LandingComponent } from './components/auth0-landing/auth0-landing.component';
 import { Auth0RedirectComponent } from './components/auth0-redirect/auth0-redirect.component';
-import { RedirectToAuth0Landing } from './components/redirect-to-auth0-landing/redirect-to-auth0-landing.component';
+import { RedirectToAuth0LandingComponent } from './components/redirect-to-auth0-landing/redirect-to-auth0-landing.component';
 import { SessionExpiredComponent } from './components/session-expired/session-expired.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { EmailVerifiedCallbackComponent } from './components/email-verified-callback/email-verified-callback.component';
@@ -69,7 +69,7 @@ const routes: Routes = [
   },
   {
     path: AppRoutes.PasswordResetDone,
-    component: RedirectToAuth0Landing,
+    component: RedirectToAuth0LandingComponent,
     canActivate: [IrbGuard],
   },
   {

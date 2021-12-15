@@ -50,7 +50,7 @@ export class PasswordComponent implements OnInit {
           this.setErrorMessage('PasswordPage.PasswordWrongError');
         }
       },
-      error => {
+      () => {
         this.setErrorMessage('PasswordPage.OtherError');
       }
     );
