@@ -2729,15 +2729,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/study-builder-ui/tsconfig.app.json",
-              "projects/study-builder-ui/tsconfig.spec.json",
-              "projects/study-builder-ui/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/study-builder-ui/**/*.ts",
+              "projects/study-builder-ui/**/*.html"
             ]
           }
         },
