@@ -1194,15 +1194,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-osteo/tsconfig.app.json",
-              "projects/ddp-osteo/tsconfig.spec.json",
-              "projects/ddp-osteo/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-osteo/**/*.ts",
+              "projects/ddp-osteo/**/*.html"
             ]
           }
         },
