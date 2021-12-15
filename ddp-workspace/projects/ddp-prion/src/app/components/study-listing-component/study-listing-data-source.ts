@@ -46,7 +46,7 @@ export class StudyListingDataSource extends DataSource<StudyInfo> {
     this.updateDataProcessing();
   }
 
-  public addSort(shouldSort: boolean = false, sortIndex: number = -1, sortDir: string = null): void {
+  public addSort(shouldSort = false, sortIndex = -1, sortDir: string = null): void {
     this.shouldSort = shouldSort;
     this.sortIndex = sortIndex;
     this.sortDir = sortDir;
