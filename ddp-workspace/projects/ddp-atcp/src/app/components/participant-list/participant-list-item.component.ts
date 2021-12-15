@@ -93,7 +93,7 @@ import { Participant } from './participant-list.component';
   `,
   styleUrls: ['./participant-list-item.component.scss'],
 })
-export class ParticipantListItem {
+export class ParticipantListItemComponent {
   @Input() participant: Participant;
 
   expanded = false;

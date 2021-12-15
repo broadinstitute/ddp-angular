@@ -191,8 +191,7 @@ export class ParticipantListComponent implements OnInit {
     this.originalParticipantList = [];
     this.copyParticipantList = [];
     if (data != null) {
-      let jsonData: {};
-      jsonData = data;
+      const jsonData = data;
       jsonData['participants'].forEach((val) => {
         const participant = Participant.parse(val);
         this.participantList.push(participant);
@@ -749,8 +748,7 @@ export class ParticipantListComponent implements OnInit {
               this.participantList = [];
               this.originalParticipantList = [];
               this.copyParticipantList = [];
-              let jsonData: {};
-              jsonData = data;
+              const jsonData = data;
               jsonData['participants'].forEach((val) => {
                 const participant = Participant.parse(val);
                 this.participantList.push(participant);
@@ -848,8 +846,7 @@ export class ParticipantListComponent implements OnInit {
             this.additionalMessage = '';
             this.originalParticipantList = [];
             this.copyParticipantList = [];
-            let jsonData: {};
-            jsonData = data;
+            const jsonData = data;
             jsonData['participants'].forEach((val) => {
               const participant = Participant.parse(val);
               this.participantList.push(participant);
@@ -1216,13 +1213,12 @@ export class ParticipantListComponent implements OnInit {
         .subscribe(
           data => {
             if (data != null && data !== '') {
-              let jsonData: {};
               this.participantList = [];
               this.additionalMessage = '';
               this.originalParticipantList = [];
               this.copyParticipantList = [];
               this.filterQuery = '';
-              jsonData = data;
+              const jsonData = data;
               jsonData['participants'].forEach((val) => {
                 const participant = Participant.parse(val);
                 this.participantList.push(participant);
@@ -1519,6 +1515,7 @@ export class ParticipantListComponent implements OnInit {
         }
       });
     } else if (this.sortParent === 't') {
+      //TODO: do we need the empty block statement ?
     } else if (this.sortParent === 'k') {
       this.participantList.map(participant =>
         participant.kits.sort((n, m) => this.sort(n[ this.sortField ], m[ this.sortField ], order, undefined, colType))
@@ -1702,8 +1699,6 @@ export class ParticipantListComponent implements OnInit {
         paths.push(['proxyData', source]);
       } else if (source.includes('GROUP')) {
         paths.push(['participantData', source]);
-      } else if (source === 'proxy') {
-        paths.push(['proxyData', source]);
       } else {
         paths.push([source, source]);
       }
@@ -1840,8 +1835,7 @@ export class ParticipantListComponent implements OnInit {
         this.originalParticipantList = [];
         this.copyParticipantList = [];
         if (data != null) {
-          let jsonData: {};
-          jsonData = data;
+          const jsonData = data;
           jsonData['participants'].forEach((val) => {
             const participant = Participant.parse(val);
             this.participantList.push(participant);
