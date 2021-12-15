@@ -1946,15 +1946,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-rgp/tsconfig.app.json",
-              "projects/ddp-rgp/tsconfig.spec.json",
-              "projects/ddp-rgp/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-rgp/**/*.ts",
+              "projects/ddp-rgp/**/*.html"
             ]
           }
         },
