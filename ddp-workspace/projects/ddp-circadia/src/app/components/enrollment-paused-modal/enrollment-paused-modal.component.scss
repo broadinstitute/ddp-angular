@@ -1,0 +1,37 @@
+.enrollment-paused-modal {
+  position: relative;
+}
+
+.paragraph {
+  margin: 42px 0 24px;
+}
+
+.close-btn {
+  position: absolute;
+  top: -6px;
+  right: 0px;
+}
+
+.name-container {
+  display: flex;
+  justify-content: space-between;
+
+  .mat-form-field {
+    width: 46%;
+  }
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 0.4rem;
+
+  .button:not(:last-of-type) {
+    margin-right: 1.2rem;
+  }
+}

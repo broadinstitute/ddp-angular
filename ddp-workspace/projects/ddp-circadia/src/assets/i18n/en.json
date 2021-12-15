@@ -209,6 +209,9 @@
             }
         }
     },
+    "EnrollmentPaused": {
+        "Paragraph": "Thank you for your interest in the Circadia study! We have currently paused participant enrollment, but we will open enrollment again in the near future. In the meantime, we encourage you to follow us on <a href=\"https://twitter.com/circadiastudy\" target=\"_blank\" class=\"text-link\">Twitter</a>, <a href=\"https://instagram.com/circadiastudy\" target=\"_blank\" class=\"text-link\">Instagram</a>, and/or <a href=\"https://facebook.com/circadiastudy\" target=\"_blank\" class=\"text-link\">Facebook</a> at @circadiastudy. If you are interested in participating in the study in the future, please join our mailing list here:"
+    },
     "StayInformed": {
         "Title": "Stay Informed",
         "Paragraph": "Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the study, please email <a class=\"text-link\" href=\"mailto:circadiastudy@mgh.harvard.edu\">circadiastudy@mgh.harvard.edu</a>.",
