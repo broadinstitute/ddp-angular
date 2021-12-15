@@ -8,7 +8,7 @@ import { ActivityInstance, ActivityStatusCodes, ConfigurationService, UserActivi
 
 
 const getUpdatedActivityMap = (activities: ActivityInstance[], activeActivityId: string): Map<string, ActivityListItem> => {
-  const isConsentSelf: boolean = !!activities.find(
+  const isConsentSelf = !!activities.find(
     (activity: ActivityInstance) => activity.activityCode === ActivityCode.ConsentSelf
   );
   const consentKey: ActivityCode = isConsentSelf ? ActivityCode.ConsentSelf : ActivityCode.ConsentParental;
