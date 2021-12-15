@@ -1605,15 +1605,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-testboston/tsconfig.app.json",
-              "projects/ddp-testboston/tsconfig.spec.json",
-              "projects/ddp-testboston/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-testboston/**/*.ts",
+              "projects/ddp-testboston/**/*.html"
             ]
           }
         },
