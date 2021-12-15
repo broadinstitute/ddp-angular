@@ -10,11 +10,9 @@
       ],
       "parserOptions": {
         "project": [
-          "projects/sandbox-app/tsconfig.app.json",
-          "projects/sandbox-app/tsconfig.spec.json",
-          "projects/sandbox-app/e2e/tsconfig.json"
+          "projects/sandbox-app/tsconfig.eslint.json"
         ],
-        "createDefaultProgram": true
+        "createDefaultProgram": false
       },
       "rules": {
         "@angular-eslint/directive-selector": [

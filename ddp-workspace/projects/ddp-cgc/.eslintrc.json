@@ -10,11 +10,9 @@
       ],
       "parserOptions": {
         "project": [
-          "projects/ddp-cgc/tsconfig.app.json",
-          "projects/ddp-cgc/tsconfig.spec.json",
-          "projects/ddp-cgc/e2e/tsconfig.json"
+          "projects/ddp-cgc/tsconfig.eslint.json"
         ],
-        "createDefaultProgram": true
+        "createDefaultProgram": false
       },
       "rules": {
         "@angular-eslint/directive-selector": [

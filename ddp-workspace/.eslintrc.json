@@ -8,12 +8,6 @@
       "files": [
         "*.ts"
       ],
-      "parserOptions": {
-        "project": [
-          "tsconfig.json"
-        ],
-        "createDefaultProgram": true
-      },
       "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
@@ -66,14 +60,6 @@
       "rules": {
         "@angular-eslint/template/no-negated-async":  "off"
       }
-    },
-    {
-      "env": {
-        "jasmine": true
-      },
-      "files": [
-        "**/*.spec.ts", "**/*.e2e-spec.ts"
-      ]
     }
   ]
 }

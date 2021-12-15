@@ -10,10 +10,9 @@
       ],
       "parserOptions": {
         "project": [
-          "projects/toolkit-prion/tsconfig.lib.json",
-          "projects/toolkit-prion/tsconfig.spec.json"
+          "projects/toolkit-prion/tsconfig.eslint.json"
         ],
-        "createDefaultProgram": true
+        "createDefaultProgram": false
       },
       "rules": {
         "@angular-eslint/directive-selector": [

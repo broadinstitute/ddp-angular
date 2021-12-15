@@ -10,8 +10,7 @@
       ],
       "parserOptions": {
         "project": [
-          "projects/toolkit/tsconfig.lib.json",
-          "projects/toolkit/tsconfig.spec.json"
+          "projects/toolkit/tsconfig.eslint.json"
         ],
         "createDefaultProgram": true
       },

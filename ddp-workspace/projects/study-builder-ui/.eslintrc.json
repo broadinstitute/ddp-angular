@@ -10,11 +10,9 @@
       ],
       "parserOptions": {
         "project": [
-          "projects/study-builder-ui/tsconfig.app.json",
-          "projects/study-builder-ui/tsconfig.spec.json",
-          "projects/study-builder-ui/e2e/tsconfig.json"
+          "projects/study-builder-ui/tsconfig.eslint.json"
         ],
-        "createDefaultProgram": true
+        "createDefaultProgram": false
       },
       "rules": {
         "@angular-eslint/directive-selector": [

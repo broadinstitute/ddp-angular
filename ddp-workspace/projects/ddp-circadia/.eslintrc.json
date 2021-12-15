@@ -10,11 +10,9 @@
       ],
       "parserOptions": {
         "project": [
-          "projects/ddp-circadia/tsconfig.app.json",
-          "projects/ddp-circadia/tsconfig.spec.json",
-          "projects/ddp-circadia/e2e/tsconfig.json"
+          "projects/ddp-circadia/tsconfig.eslint.json"
         ],
-        "createDefaultProgram": true
+        "createDefaultProgram": false
       },
       "rules": {
         "@angular-eslint/directive-selector": [
