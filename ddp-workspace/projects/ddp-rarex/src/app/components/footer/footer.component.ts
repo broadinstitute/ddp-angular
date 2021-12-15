@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { RoutePaths } from '../../router-resources';
 
@@ -14,7 +14,7 @@ interface NavLink {
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
   readonly rarexUrl = 'https://rare-x.org/';
   navLinks: NavLink[] = [
     {
@@ -34,8 +34,4 @@ export class FooterComponent implements OnInit {
       openNewTab: true
     },
   ];
-
-  constructor() {}
-
-  public ngOnInit(): void {}
 }
