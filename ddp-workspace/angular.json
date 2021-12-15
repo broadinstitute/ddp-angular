@@ -907,15 +907,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/sandbox-app/tsconfig.app.json",
-              "projects/sandbox-app/tsconfig.spec.json",
-              "projects/sandbox-app/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/sandbox-app/**/*.ts",
+              "projects/sandbox-app/**/*.html"
             ]
           }
         },
