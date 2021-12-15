@@ -5,7 +5,7 @@ grammar Pex;
 pex : expr ;
 
 // Ordering of rule alternatives (aka right-hand-side) determines precedence. Top to bottom is highest
-// to lowest precedence. Having a higer precedence means that the syntactic elements will "bind" closer together.
+// to lowest precedence. Having a higher precedence means that the syntactic elements will "bind" closer together.
 expr
   : BOOL              # BoolLiteralExpr
   | INT               # IntLiteralExpr
@@ -109,9 +109,8 @@ TIMEUNIT : 'DAYS' | 'WEEKS' | 'MONTHS' | 'YEARS' ;  // just a java.time.temporal
 UNARY_OPERATOR : '!' | '-' ;
 RELATION_OPERATOR : '<' | '<=' | '>' | '>=' ;
 EQUALITY_OPERATOR : '==' | '!=' ;
-UNRECOGNIZED : . ;
-
 
 // Misc
 
 WS : [ \t\r\n] -> skip ;    // Whitespace is not significant
+UNRECOGNIZED : . ;
