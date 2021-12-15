@@ -31,7 +31,7 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
         private converter: ActivityConverter,
         http: HttpClient,
         logger: LoggingService,
-        private __language: LanguageService) { // tslint:disable-line:variable-name
+        private __language: LanguageService) { // eslint-disable-line @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match
         super(session, configuration, http, logger, null);
     }
 

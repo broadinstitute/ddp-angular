@@ -12,7 +12,7 @@ type Logger = (message?: any, ...optionalParams: any[]) => void;
 @Injectable()
 export class LoggingService {
     private readonly LOG_SOURCE = 'Logging';
-    // tslint:disable-next-line:no-console
+    // eslint-disable-next-line no-console
     public logDebug: Logger = this.showEvent(LogLevel.Debug) ? console.debug.bind(window.console) : () => { };
 
     public logEvent: Logger = this.showEvent(LogLevel.Info) ? console.log.bind(window.console) : () => { };
