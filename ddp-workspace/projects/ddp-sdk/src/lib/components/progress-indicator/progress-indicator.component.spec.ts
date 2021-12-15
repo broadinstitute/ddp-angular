@@ -168,7 +168,6 @@ describe('ProgressIndicatorComponent', () => {
             lastStepLabel.click(); // open the final step
             fixture.detectChanges();
 
-            spy = spyOn(component, 'finish');
             finishButton = getFinishButton();
             finishButton.click();
             fixture.detectChanges();

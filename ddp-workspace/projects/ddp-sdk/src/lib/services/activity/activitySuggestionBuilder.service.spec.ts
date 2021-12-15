@@ -57,7 +57,7 @@ describe('ActivitySuggestionBuilder Test', () => {
         const searchValue = 'foo';
         const provider = service.getSuggestionProvider({
             suggestionType: 'INCLUDED',
-            suggestions: ['bar foowar', 'foobar', 'foowoo', 'bar foobar', 'bar foo', 'zarbarfoo aoo', , 'yarbarfoo www', 'barbarfoo', 'barfoo', 'foo']
+            suggestions: ['bar foowar', 'foobar', 'foowoo', 'bar foobar', 'bar foo', 'zarbarfoo aoo', 'yarbarfoo www', 'barbarfoo', 'barfoo', 'foo']
         });
         if (provider) {
             provider(of(searchValue)).subscribe(value => {

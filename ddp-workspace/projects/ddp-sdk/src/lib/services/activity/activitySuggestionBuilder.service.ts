@@ -23,15 +23,15 @@ export class ActivitySuggestionBuilder {
         this.suggestionBuilders = [
             {
                 type: SuggestionType.None,
-                func: (x) => null
+                func: () => null
             },
             {
                 type: SuggestionType.Drug,
-                func: (x) => this.getDrugSuggestions()
+                func: () => this.getDrugSuggestions()
             },
             {
                 type: SuggestionType.Cancer,
-                func: (x) => this.getCancerSuggestions()
+                func: () => this.getCancerSuggestions()
             },
             {
                 type: SuggestionType.Included,
@@ -39,7 +39,7 @@ export class ActivitySuggestionBuilder {
             },
             {
                 type: SuggestionType.Institution,
-                func: (x) => this.getInstitutionSuggestions()
+                func: () => this.getInstitutionSuggestions()
             }
         ];
     }

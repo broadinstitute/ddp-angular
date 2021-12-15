@@ -10,7 +10,7 @@ import {
     UserProfileDecorator,
     UserProfileField,
     UserProfileServiceAgent,
-    ValidationMessage,
+    ValidationMessageComponent,
     UserPreferencesComponent,
 } from 'ddp-sdk';
 import { MatButtonModule } from '@angular/material/button';
@@ -89,7 +89,7 @@ describe('UserPreferencesComponent', () => {
                 { provide: MatDialogRef, useValue: matDialogRefSpy },
                 { provide: MAT_DIALOG_DATA, useValue: {} }
             ],
-            declarations: [UserPreferencesComponent, FakeAddressComponent, loadingMock, dateMock, ValidationMessage],
+            declarations: [UserPreferencesComponent, FakeAddressComponent, loadingMock, dateMock, ValidationMessageComponent],
         })
             .overrideComponent(
                 UserPreferencesComponent,

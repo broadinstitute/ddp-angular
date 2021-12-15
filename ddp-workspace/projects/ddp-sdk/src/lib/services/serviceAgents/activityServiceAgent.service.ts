@@ -43,8 +43,7 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
                 switchMap(() => studyGuid$)
             );
 
-        let getActivity$: (x) => Observable<any>;
-        getActivity$ = (x: GuidsObject) => {
+        const getActivity$: (x) => Observable<any> = (x: GuidsObject) => {
             if (x.study == null || x.study === '' ||
                 x.activity == null || x.activity === '') {
                 return of(null);

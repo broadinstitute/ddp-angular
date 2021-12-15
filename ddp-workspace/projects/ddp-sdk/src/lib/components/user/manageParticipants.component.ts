@@ -66,8 +66,8 @@ export class ManageParticipantsComponent implements OnDestroy {
         @Inject(MAT_DIALOG_DATA) public data: any) {
         this.reloadingSubject = new Subject<void>();
         this.anchor = this.reloadingSubject.pipe(
-            tap(x => this.logger.logEvent(this.LOG_SOURCE, 'data loading...')),
-            mergeMap(x => this.serviceAgent.getGovernedStudyParticipants(this.config.studyGuid)),
+            tap(() => this.logger.logEvent(this.LOG_SOURCE, 'data loading...')),
+            mergeMap(() => this.serviceAgent.getGovernedStudyParticipants(this.config.studyGuid)),
             tap(x => this.logger.logEvent(this.LOG_SOURCE, `data loaded: ${JSON.stringify(x)}`)))
             .subscribe(x => {
                 this.participants = x;
