@@ -35,7 +35,7 @@ import { ToolkitConfigurationService } from '../../services/toolkitConfiguration
         </section>
     </main>`
 })
-export class AgeUpThankYou implements OnInit {
+export class AgeUpThankYouComponent implements OnInit {
     public isEmailVerified: boolean;
     public isEmailCollected: boolean;
     public dashboardUrl: string;

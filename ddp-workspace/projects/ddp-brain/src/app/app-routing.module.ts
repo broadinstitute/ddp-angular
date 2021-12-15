@@ -20,7 +20,7 @@ import {
     ErrorRedesignedComponent,
     HeaderActionGuard,
     RedirectToLoginLandingRedesignedComponent,
-    AgeUpThankYou,
+    AgeUpThankYouComponent,
     VerifyAgeUpPageComponent,
     AcceptAgeUpPageComponent,
     SessionExpiredRedesignedComponent,
@@ -242,7 +242,7 @@ const routes: Routes = [
     },
     {
         path: AppRoutes.ThankYou,
-        component: AgeUpThankYou,
+        component: AgeUpThankYouComponent,
         canActivate: [
             IrbGuard
         ],
@@ -252,7 +252,7 @@ const routes: Routes = [
     },
     {
         path: AppRoutes.ProxyThankYou,
-        component: AgeUpThankYou,
+        component: AgeUpThankYouComponent,
         canActivate: [
             IrbGuard
         ],
