@@ -12,7 +12,7 @@ import { JOIN_MAILING_LIST_DIALOG_SETTINGS } from '../../../utils/join-mailing-l
 import { AnalyticsEventsService } from 'ddp-sdk';
 
 class TranslateLoaderMock implements TranslateLoader {
-    getTranslation(code: string = ''): Observable<object> {
+    getTranslation(code = ''): Observable<object> {
         const TRANSLATIONS = {
             en: {
                 App: {

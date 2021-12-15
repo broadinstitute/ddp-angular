@@ -10,7 +10,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { FooterComponent } from './footer.component';
 
 class TranslateLoaderMock implements TranslateLoader {
-    getTranslation(code: string = ''): Observable<object> {
+    getTranslation(code = ''): Observable<object> {
         const TRANSLATIONS = {
             en: {}
         };

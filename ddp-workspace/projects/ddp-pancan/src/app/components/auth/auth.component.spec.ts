@@ -11,7 +11,7 @@ import { mockComponent, SessionMementoService } from 'ddp-sdk';
 import { AuthComponent } from './auth.component';
 
 class TranslateLoaderMock implements TranslateLoader {
-    getTranslation(code: string = ''): Observable<object> {
+    getTranslation(code = ''): Observable<object> {
         const TRANSLATIONS = {
             en: {
                 App: {

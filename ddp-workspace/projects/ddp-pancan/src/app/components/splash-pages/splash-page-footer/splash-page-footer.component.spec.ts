@@ -10,7 +10,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 
 class TranslateLoaderMock implements TranslateLoader {
-    getTranslation(code: string = ''): Observable<object> {
+    getTranslation(code = ''): Observable<object> {
         const TRANSLATIONS = {
             en: {
                 App: {

@@ -11,7 +11,7 @@ import { AnalyticsEventsService, mockComponent } from 'ddp-sdk';
 import { CommunicationService } from 'toolkit';
 
 class TranslateLoaderMock implements TranslateLoader {
-    getTranslation(code: string = ''): Observable<object> {
+    getTranslation(code = ''): Observable<object> {
         const TRANSLATIONS = {
             en: {
                 App: {

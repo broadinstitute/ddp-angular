@@ -7,7 +7,7 @@ import { ParticipationComponent } from './participation.component';
 
 
 class TranslateLoaderMock implements TranslateLoader {
-    getTranslation(code: string = ''): Observable<object> {
+    getTranslation(code= ''): Observable<object> {
         const TRANSLATIONS = {
             en: {
                 App: {

@@ -8,7 +8,7 @@ import { mockComponent } from 'ddp-sdk';
 import { ColorectalPageComponent } from './colorectal-page.component';
 
 class TranslateLoaderMock implements TranslateLoader {
-    getTranslation(code: string = ''): Observable<object> {
+    getTranslation(code= ''): Observable<object> {
         const TRANSLATIONS = {
             en: {
                 App: {
