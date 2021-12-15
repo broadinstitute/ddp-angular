@@ -126,7 +126,7 @@ export class DSMService {
   }
 
   public filterData(realm: string, json: string, parent: string, defaultFilter: boolean,
-                    from = 0, to: number = this.role.getUserSetting().getRowsPerPage()
+                    from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage()
   ): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'filterList';
     const map: { name: string; value: any }[] = [];
@@ -155,7 +155,7 @@ export class DSMService {
   }
 
   public applyFilter(json: ViewFilter, realm: string, parent: string, filterQuery: string,
-                     from = 0, to: number = this.role.getUserSetting().getRowsPerPage()
+                     from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage()
   ): Observable<any> {
     let viewFilterCopy = null;
     if (json != null) {

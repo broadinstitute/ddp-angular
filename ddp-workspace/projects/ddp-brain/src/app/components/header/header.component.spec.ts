@@ -12,7 +12,7 @@ import { Observable, of } from 'rxjs';
 import { AppRoutes } from '../../app-routes';
 
 class TranslateLoaderMock implements TranslateLoader {
-  getTranslation(code = ''): Observable<object> {
+  getTranslation(code: string = ''): Observable<object> {
     const TRANSLATIONS = {
       en: {}
     };

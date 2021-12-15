@@ -6,7 +6,7 @@ import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-transla
 import { ErrorComponent } from './error.component';
 
 class TranslateLoaderMock implements TranslateLoader {
-    getTranslation(code= ''): Observable<object> {
+    getTranslation(code: string = ''): Observable<object> {
         const TRANSLATIONS = {
             en: {
                 ErrorPage: {

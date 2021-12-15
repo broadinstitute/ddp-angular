@@ -93,7 +93,7 @@ import { Participant } from './participant-list.component';
   `,
   styleUrls: ['./participant-list-item.component.scss'],
 })
-export class ParticipantListItemComponent {
+export class ParticipantListItem {
   @Input() participant: Participant;
 
   expanded = false;
@@ -175,7 +175,7 @@ export class ParticipantListItemComponent {
 
   private handleActivityCreation = (
     activity: ActivityInstanceGuid,
-    isConsentEditActivity = false,
+    isConsentEditActivity: boolean = false,
   ): void => {
     this.isUiBlocked = false;
     this.activityService.setCurrentActivity(

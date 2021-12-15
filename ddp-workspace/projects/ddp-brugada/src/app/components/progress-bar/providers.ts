@@ -21,7 +21,7 @@ const getUpdatedActivityMap = (activities: ActivityInstance[], activeActivityId:
     })
   );
 
-  const isCurentActivityAdditional = !activitiesDictionary.has(
+  const isCurentActivityAdditional: boolean = !activitiesDictionary.has(
     activities
       .find(
         (activity: ActivityInstance) => activity.instanceGuid === activeActivityId

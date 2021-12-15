@@ -13,7 +13,7 @@ import { JOIN_MAILING_LIST_DIALOG_SETTINGS } from '../../utils/join-mailing-list
 import { ActivatedRoute } from '@angular/router';
 
 class TranslateLoaderMock implements TranslateLoader {
-    getTranslation(code= ''): Observable<object> {
+    getTranslation(code: string = ''): Observable<object> {
         const TRANSLATIONS = {
             en: {
                 App: {

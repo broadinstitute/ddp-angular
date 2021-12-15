@@ -6,7 +6,7 @@ export class Column {
   columnIndex: number;
   filterInfo: FilterInfo;
 
-  public constructor(columnIndex: number, canFilter: boolean, isFiltered = false, filterString: string = null) {
+  public constructor(columnIndex: number, canFilter: boolean, isFiltered: boolean = false, filterString: string = null) {
     this.columnName = 'App.StudyListing.Columns.' + columnIndex + '.name';
     this.columnTitleKey = 'App.StudyListing.Columns.' + columnIndex + '.title';
     this.columnIndex = columnIndex;

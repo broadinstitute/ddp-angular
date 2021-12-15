@@ -142,7 +142,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   private handleActivityCreation = (
     activity: ActivityInstanceGuid,
-    isConsentEditActivity = false,
+    isConsentEditActivity: boolean = false,
   ): void => {
     this.isUiBlocked = false;
     this.activityService.setCurrentActivity(

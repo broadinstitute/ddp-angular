@@ -19,7 +19,7 @@ export class ActivityComponent extends ActivityRedesignedComponent {
     return this.model.activityCode === ActivityCode.Enrollment;
   }
 
-  public incrementStep(scroll = true): void {
+  public incrementStep(scroll: boolean = true): void {
     const nextIndex = this.nextAvailableSectionIndex();
     if (nextIndex !== -1) {
       if (scroll) {
