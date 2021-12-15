@@ -86,7 +86,7 @@ body {
   padding: 64px 0;
 }
 
-a {
+a:not(.button) {
   font-family: Spartan-Bold, serif;
   color: $__highlighted-font !important;
 }
