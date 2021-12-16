@@ -131,6 +131,12 @@
     },
     {
       "path": "./projects/ddp-brugada/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ddp-lms/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ddp-lms/tsconfig.spec.json"
     }
   ]
 }
