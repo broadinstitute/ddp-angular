@@ -42,15 +42,19 @@
         },
         "About": {
             "Title": "About the Study",
-            "Paragraph": "The Circadia research study is focused on better understanding the genetics of circadian rhythm disorders. Circadian rhythms are an integral part of our functioning, regulating and syncing our human behavior and physiology with the external environment and the 24-hour day. While research has been able to identify core components of our molecular circadian clock, much is still unknown about the genetics and physiological mechanisms driving our circadian rhythms."
+            "Paragraph": "The Circadia research study is focused on better understanding the genetics of circadian rhythm disorders. Circadian rhythms are an integral part of our functioning, regulating and syncing our human behavior and physiology with the external environment and the 24-hour day. While research has been able to identify core components of our molecular circadian clock, much is still unknown about the genetics and physiological mechanisms driving our circadian rhythms.",
+            "Paragraph2":  "Partnering with individuals in the atypical circadian rhythm community, we plan to uncover the genetic basis of circadian rhythms. With your help, we can use our findings to improve health outcomes for people with atypical circadian rhythms."
         },
         "Participation": {
             "Title": "Participation",
             "Description": "To participate in this study you will first need to complete our online screening questionnaire. The online screening questionnaire will allow us to check that you are eligible to participate in the Circadia research study. To complete the questionnaire, please use the Sign-Up button located at the top right of the screen.",
             "Subtitle": "Quick facts",
-            "Duration": "<span class=\"semibold\">Study duration:</span> Approximately 6 weeks",
-            "Provided": "<span class=\"semibold\">We provide:</span> Monetary compensation, up to $200; all study material is provided",
-            "Activities": "<span class=\"semibold\">Activities:</span> Completing sample DNA kits; journaling about sleep, meals, and mood; wearing a biosensor to track sleep patterns and daily activity"
+            "Duration": "<span class=\"semibold\">Study Duration</span>: Approximately 4-6 weeks",
+            "Provided": "<span class=\"semibold\">Monetary Compensation</span>: Up to $270",
+            "Activities": "<span class=\"semibold\">Activities</span>: Sleep logging, answering questionnaires, wearing a watch that tracks sleep and light input patterns, and completing 2 dim light melatonin assays. All study materials are provided.",
+            "Video": {
+                "Title": "Introduction to the Circadia Study"
+            }
         },
         "FAQ": {
             "Title": "Frequently Asked Questions",

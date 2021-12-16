@@ -37,6 +37,10 @@
     <p class="paragraph">
       {{ 'HomePage.About.Paragraph' | translate }}
     </p>
+
+    <p class="paragraph">
+      {{ 'HomePage.About.Paragraph2' | translate }}
+    </p>
   </div>
 </section>
 
@@ -68,6 +72,17 @@
       class="paragraph"
       [innerHTML]="'HomePage.Participation.Activities' | translate"
     ></p>
+
+    <div class="yt-video mt-5">
+      <iframe
+        class="yt-video__iframe"
+        src="https://www.youtube.com/embed/-dUHcXNDwug"
+        [title]="'HomePage.Participation.Video.Title' | translate"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
   </div>
 </section>
 
