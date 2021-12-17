@@ -25,7 +25,7 @@
   <div class="Width--60">
     <div *ngIf="kitTypes != null && kitTypes.length > 1">
       <div *ngFor="let type of kitTypes">
-        <mat-checkbox color="primary" [checked]="type.selected || kitTypes.length == 1"
+        <mat-checkbox color="primary" [checked]="type.selected || kitTypes.length === 1"
                      (change)="type.selected = $event.checked; typeChecked(type)"
                      disableRipple>{{type.displayName}}</mat-checkbox>
       </div>

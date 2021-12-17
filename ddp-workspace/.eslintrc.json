@@ -58,7 +58,13 @@
         "plugin:@angular-eslint/template/recommended"
       ],
       "rules": {
-        "@angular-eslint/template/no-negated-async":  "off"
+        "@angular-eslint/template/no-negated-async":  "off",
+        "@angular-eslint/template/eqeqeq": [
+          "error",
+            {
+              "allowNullOrUndefined": true
+            }
+        ]
       }
     }
   ]

@@ -42,7 +42,7 @@ import { NewRequestMockComponent } from './newRequestMock.component';
           </mat-form-field>
           <mat-icon color="warn" class="material-icons.md-18"
                     matTooltip="This will be thrown as exception"
-                    *ngIf="feed.mockedCode != 200 && !feed.returnNull">
+                    *ngIf="feed.mockedCode !== 200 && !feed.returnNull">
             warning
           </mat-icon>
         <p>
