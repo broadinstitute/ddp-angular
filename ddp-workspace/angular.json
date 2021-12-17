@@ -96,7 +96,6 @@
             "main": "projects/ddp-basil/src/main.ts",
             "polyfills": "projects/ddp-basil/src/polyfills.ts",
             "tsConfig": "projects/ddp-basil/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-basil/src/favicon.ico",
               "projects/ddp-basil/src/assets",
@@ -112,7 +111,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -142,7 +147,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -216,7 +222,6 @@
             "main": "projects/ddp-angio/src/main.ts",
             "polyfills": "projects/ddp-angio/src/polyfills.ts",
             "tsConfig": "projects/ddp-angio/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-angio/src/favicon.ico",
               "projects/ddp-angio/src/favicon-alert.ico",
@@ -238,7 +243,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -276,7 +287,8 @@
               ],
               "tsConfig": "projects/ddp-angio/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -374,7 +386,6 @@
             "main": "projects/ddp-atcp/src/main.ts",
             "polyfills": "projects/ddp-atcp/src/polyfills.ts",
             "tsConfig": "projects/ddp-atcp/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-atcp/src/favicon.ico",
               "projects/ddp-atcp/src/favicon-alert.ico",
@@ -410,7 +421,13 @@
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -448,7 +465,8 @@
               ],
               "tsConfig": "projects/ddp-atcp/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -535,7 +553,6 @@
             "main": "projects/ddp-brain/src/main.ts",
             "polyfills": "projects/ddp-brain/src/polyfills.ts",
             "tsConfig": "projects/ddp-brain/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-brain/src/favicon.ico",
               "projects/ddp-brain/src/favicon-alert.ico",
@@ -557,7 +574,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -595,7 +618,8 @@
               ],
               "tsConfig": "projects/ddp-brain/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -682,7 +706,6 @@
             "main": "projects/ddp-mbc/src/main.ts",
             "polyfills": "projects/ddp-mbc/src/polyfills.ts",
             "tsConfig": "projects/ddp-mbc/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-mbc/src/favicon.ico",
               "projects/ddp-mbc/src/favicon-alert.ico",
@@ -704,7 +727,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -742,7 +771,8 @@
               ],
               "tsConfig": "projects/ddp-mbc/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -829,7 +859,6 @@
             "main": "projects/sandbox-app/src/main.ts",
             "polyfills": "projects/sandbox-app/src/polyfills.ts",
             "tsConfig": "projects/sandbox-app/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/sandbox-app/src/favicon.ico",
               "projects/sandbox-app/src/assets"
@@ -838,7 +867,13 @@
               "projects/sandbox-app/src/theme.scss",
               "projects/sandbox-app/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -867,7 +902,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -945,7 +981,6 @@
             "main": "projects/basil-app/src/main.ts",
             "polyfills": "projects/basil-app/src/polyfills.ts",
             "tsConfig": "projects/basil-app/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/basil-app/src/favicon.ico",
               "projects/basil-app/src/assets"
@@ -953,7 +988,13 @@
             "styles": [
               "projects/basil-app/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -991,7 +1032,8 @@
               ],
               "tsConfig": "projects/basil-app/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -1068,7 +1110,6 @@
             "main": "projects/ddp-osteo/src/main.ts",
             "polyfills": "projects/ddp-osteo/src/polyfills.ts",
             "tsConfig": "projects/ddp-osteo/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-osteo/src/favicon.ico",
               "projects/ddp-osteo/src/favicon-alert.ico",
@@ -1095,7 +1136,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -1133,7 +1180,8 @@
               ],
               "tsConfig": "projects/ddp-osteo/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -1221,7 +1269,6 @@
             "main": "projects/ddp-rarex/src/main.ts",
             "polyfills": "projects/ddp-rarex/src/polyfills.ts",
             "tsConfig": "projects/ddp-rarex/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-rarex/src/favicon.ico",
               "projects/ddp-rarex/src/favicon-alert.ico",
@@ -1238,7 +1285,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -1266,7 +1319,8 @@
             "es5": {
               "tsConfig": "projects/ddp-rarex/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -1353,7 +1407,6 @@
             "main": "projects/ddp-prion/src/main.ts",
             "polyfills": "projects/ddp-prion/src/polyfills.ts",
             "tsConfig": "projects/ddp-prion/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-prion/src/favicon.ico",
               "projects/ddp-prion/src/assets",
@@ -1374,7 +1427,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -1413,7 +1472,8 @@
               ],
               "tsConfig": "projects/ddp-prion/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -1492,7 +1552,6 @@
             "main": "projects/ddp-testboston/src/main.ts",
             "polyfills": "projects/ddp-testboston/src/polyfills.ts",
             "tsConfig": "projects/ddp-testboston/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-testboston/src/favicon.ico",
               "projects/ddp-testboston/src/favicon-alert.ico",
@@ -1514,7 +1573,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -1552,7 +1617,8 @@
               ],
               "tsConfig": "projects/ddp-testboston/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -1639,7 +1705,6 @@
             "main": "projects/ddp-mpc/src/main.ts",
             "polyfills": "projects/ddp-mpc/src/polyfills.ts",
             "tsConfig": "projects/ddp-mpc/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-mpc/src/favicon.ico",
               "projects/ddp-mpc/src/favicon-alert.ico",
@@ -1661,7 +1726,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -1699,7 +1770,8 @@
               ],
               "tsConfig": "projects/ddp-mpc/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -1823,7 +1895,6 @@
             "main": "projects/ddp-rgp/src/main.ts",
             "polyfills": "projects/ddp-rgp/src/polyfills.ts",
             "tsConfig": "projects/ddp-rgp/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-rgp/src/favicon.ico",
               "projects/ddp-rgp/src/favicon-alert.ico",
@@ -1845,7 +1916,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -1883,7 +1960,8 @@
               ],
               "tsConfig": "projects/ddp-rgp/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -1970,7 +2048,6 @@
             "main": "projects/ddp-esc/src/main.ts",
             "polyfills": "projects/ddp-esc/src/polyfills.ts",
             "tsConfig": "projects/ddp-esc/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-esc/src/favicon.ico",
               "projects/ddp-esc/src/favicon-alert.ico",
@@ -1992,7 +2069,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -2030,7 +2113,8 @@
               ],
               "tsConfig": "projects/ddp-esc/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -2117,7 +2201,6 @@
             "main": "projects/ddp-cgc/src/main.ts",
             "polyfills": "projects/ddp-cgc/src/polyfills.ts",
             "tsConfig": "projects/ddp-cgc/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-cgc/src/favicon.ico",
               "projects/ddp-cgc/src/assets",
@@ -2136,7 +2219,13 @@
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -2166,7 +2255,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -2240,7 +2330,6 @@
             "main": "projects/ddp-circadia/src/main.ts",
             "polyfills": "projects/ddp-circadia/src/polyfills.ts",
             "tsConfig": "projects/ddp-circadia/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-circadia/src/favicon.ico",
               "projects/ddp-circadia/src/favicon-alert.ico",
@@ -2256,7 +2345,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -2294,7 +2389,8 @@
               ],
               "tsConfig": "projects/ddp-circadia/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -2375,7 +2471,6 @@
             "main": "projects/ddp-pancan/src/main.ts",
             "polyfills": "projects/ddp-pancan/src/polyfills.ts",
             "tsConfig": "projects/ddp-pancan/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-pancan/src/favicon.ico",
               "projects/ddp-pancan/src/assets",
@@ -2396,7 +2491,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -2434,7 +2535,8 @@
               ],
               "tsConfig": "projects/ddp-pancan/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -2511,7 +2613,6 @@
             "main": "projects/ddp-brugada/src/main.ts",
             "polyfills": "projects/ddp-brugada/src/polyfills.ts",
             "tsConfig": "projects/ddp-brugada/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-brugada/src/favicon.ico",
               "projects/ddp-brugada/src/favicon-alert.ico",
@@ -2527,7 +2628,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -2565,7 +2672,8 @@
               ],
               "tsConfig": "projects/ddp-brugada/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -2647,7 +2755,6 @@
             "main": "projects/study-builder-ui/src/main.ts",
             "polyfills": "projects/study-builder-ui/src/polyfills.ts",
             "tsConfig": "projects/study-builder-ui/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/study-builder-ui/src/favicon.ico",
               "projects/study-builder-ui/src/assets"
@@ -2656,7 +2763,13 @@
               "projects/study-builder-ui/src/theme.scss",
               "projects/study-builder-ui/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -2686,7 +2799,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -2764,7 +2878,6 @@
             "main": "projects/ddp-dsm-ui/src/main.ts",
             "polyfills": "projects/ddp-dsm-ui/src/polyfills.ts",
             "tsConfig": "projects/ddp-dsm-ui/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-dsm-ui/src/favicon.ico",
               "projects/ddp-dsm-ui/src/assets"
@@ -2783,7 +2896,13 @@
             "allowedCommonJsDependencies": [
               "file-saver",
               "json2csv"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -2821,7 +2940,8 @@
               ],
               "tsConfig": "projects/ddp-dsm-ui/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -2896,7 +3016,6 @@
             "main": "projects/ddp-singular/src/main.ts",
             "polyfills": "projects/ddp-singular/src/polyfills.ts",
             "tsConfig": "projects/ddp-singular/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-singular/src/favicon.ico",
               "projects/ddp-singular/src/assets",
@@ -2912,7 +3031,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -2957,7 +3082,8 @@
               ],
               "tsConfig": "projects/ddp-singular/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
