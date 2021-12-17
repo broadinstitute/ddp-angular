@@ -50,7 +50,7 @@
     "ngx-page-scroll": "^7.0.5",
     "ngx-page-scroll-core": "^7.0.5",
     "ngx-pagination": "^5.1.1",
-    "npm-sass": "2.3.0",
+    "npm-sass": "^3.0.0",
     "package": "1.0.1",
     "raw-loader": "0.5.1",
     "rxjs": "6.6.7",
