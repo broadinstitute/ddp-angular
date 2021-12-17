@@ -745,7 +745,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         const isEmpty = (val: string) => val == null || util.isEmpty(val.trim());
         const format = (val: string) => isEmpty(val) ? '' : ', ' + val.trim();
         const streetFormat = (val: string) => isEmpty(val) ? '' : val.trim();
-        // tslint:disable-next-line:max-line-length
+        // eslint-disable-next-line max-len
         return `${isEmpty(a.name) ? '' : a.name}${isEmpty(a.name) ? streetFormat(a.street1) : format(a.street1)}${format(a.street2)}${format(a.city)}${format(a.state)}`
             + `${format(a.zip)}${format(a.country)}${isEmpty(a.phone) ? '' : ', Phone: ' + a.phone}`;
     }

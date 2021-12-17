@@ -64,7 +64,6 @@ describe('UserActivitiesComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(UserActivitiesComponent);
         component = fixture.debugElement.componentInstance;
-        debugElement = fixture.debugElement;
         fixture.detectChanges();
     });
 

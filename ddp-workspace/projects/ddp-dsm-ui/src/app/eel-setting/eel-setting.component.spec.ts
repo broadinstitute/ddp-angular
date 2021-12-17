@@ -1,4 +1,4 @@
-import { EelSettingComponent } from './eel-setting.component';
+// import { EelSettingComponent } from './eel-setting.component';
 
 describe('Component: EelSetting', () => {
   // it('should create an instance', () => {

@@ -4,6 +4,7 @@ import { CookieOptions, CookieService } from 'ngx-cookie';
 declare const DDP_ENV: any;
 declare const ga: (...args: any[]) => {};
 
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 @Injectable()
 export class AnalyticsManagementService {
 

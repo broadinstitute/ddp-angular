@@ -18,23 +18,21 @@ import { LoggingService } from '../../services/logging.service';
 @Directive({
   selector: '[addressgoogleautocomplete]'
 })
-class FakeAddressGoogleAutocomplete {
+class FakeAddressGoogleAutocompleteDirective {
   @Input() autocompleteRestrictCountryCode: string | Array<string>;
-
 }
+
 describe('AddressInputComponent', () => {
   let component: AddressInputComponent;
   let fixture: ComponentFixture<AddressInputComponent>;
   let countryServiceSpy: jasmine.SpyObj<CountryService>;
-  let aisSpy: jasmine.SpyObj<AddressInputService>;
   let addressServiceSpy: jasmine.SpyObj<AddressService>;
   const translateServiceSpy: jasmine.SpyObj<NGXTranslateService> = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
 
   beforeEach(waitForAsync(() => {
     countryServiceSpy = jasmine.createSpyObj('CountryService', ['findAllCountryInfoSummaries']);
-    aisSpy = jasmine.createSpyObj('AddressInputService', ['createForm']);
-
     addressServiceSpy = jasmine.createSpyObj('AddressService', ['verifyAddress']);
+    /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
     // @ts-ignore
     translateServiceSpy.getTranslation.and.callFake((word: string | Array<string>, keyToValue?: object) => {
       return of(Array.isArray(word) ?
@@ -44,7 +42,7 @@ describe('AddressInputComponent', () => {
     const loggingServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logDebug']);
 
     TestBed.configureTestingModule({
-      declarations: [ AddressInputComponent, FakeAddressGoogleAutocomplete ],
+      declarations: [ AddressInputComponent, FakeAddressGoogleAutocompleteDirective ],
       providers: [
         {provide: CountryService, useValue: countryServiceSpy},
         {provide: AddressService, useValue: addressServiceSpy},

@@ -58,7 +58,7 @@ import { WorkflowProgressComponent } from './components/workflow-progress/workfl
 import { ParticipantListComponent } from './components/participant-list/participant-list.component';
 import * as RouterResource from './router-resources';
 import { UserPreferencesServiceAgent } from './services/serviceAgents/userPreferencesServiceAgent';
-import { ParticipantListItem } from './components/participant-list/participant-list-item.component';
+import { ParticipantListItemComponent } from './components/participant-list/participant-list-item.component';
 import { ActivityRedirectComponent } from './components/activity-redirect/activity-redirect.component';
 import { MailingListComponent } from './components/mailing-list/mailing-list.component';
 import { ActivityPrintComponent } from './components/activity-print/activity-print.component';
@@ -95,7 +95,7 @@ tkCfg.infoEmail = 'support@atfamilies.org';
 tkCfg.phone = '+1 954-481-6611';
 tkCfg.activityUrl = 'activity';
 tkCfg.recaptchaSiteClientKey = DDP_ENV.recaptchaSiteClientKey;
-export let config = new ConfigurationService();
+export const config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
 config.auth0Domain = DDP_ENV.auth0Domain;
 config.auth0ClientId = DDP_ENV.auth0ClientId;
@@ -215,7 +215,7 @@ export function translateFactory(
     FileUploaderComponent,
     PopupMessageComponent,
     ParticipantListComponent,
-    ParticipantListItem,
+    ParticipantListItemComponent,
     DashboardComponent,
     UserActivitiesComponent,
     ActivityRedirectComponent,

@@ -10,7 +10,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ddp-sdk/tsconfig.lib.json",
             "project": "projects/ddp-sdk/ng-package.json"
@@ -30,14 +30,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-sdk/tsconfig.lib.json",
-              "projects/ddp-sdk/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-sdk/**/*.ts",
+              "projects/ddp-sdk/**/*.html"
             ]
           }
         }
@@ -50,7 +47,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/toolkit/tsconfig.lib.json",
             "project": "projects/toolkit/ng-package.json"
@@ -70,14 +67,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/toolkit/tsconfig.lib.json",
-              "projects/toolkit/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/toolkit/**/*.ts",
+              "projects/toolkit/**/*.html"
             ]
           }
         }
@@ -131,7 +125,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -186,15 +179,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-basil/tsconfig.app.json",
-              "projects/ddp-basil/tsconfig.spec.json",
-              "projects/ddp-basil/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-basil/**/*.ts",
+              "projects/ddp-basil/**/*.html"
             ]
           }
         },
@@ -262,7 +251,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -334,15 +322,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-angio/tsconfig.app.json",
-              "projects/ddp-angio/tsconfig.spec.json",
-              "projects/ddp-angio/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-angio/**/*.ts",
+              "projects/ddp-angio/**/*.html"
             ]
           }
         },
@@ -367,7 +351,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ddp-atcp/src/auth0/auth0-scripts/tsconfig.lib.json",
             "project": "projects/ddp-atcp/src/auth0/auth0-scripts/ng-package.json"
@@ -439,7 +423,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -511,15 +494,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-atcp/tsconfig.app.json",
-              "projects/ddp-atcp/tsconfig.spec.json",
-              "projects/ddp-atcp/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-atcp/**/*.ts",
+              "projects/ddp-atcp/**/*.html"
             ]
           }
         },
@@ -591,7 +570,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -663,15 +641,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-brain/tsconfig.app.json",
-              "projects/ddp-brain/tsconfig.spec.json",
-              "projects/ddp-brain/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-brain/**/*.ts",
+              "projects/ddp-brain/**/*.html"
             ]
           }
         },
@@ -743,7 +717,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -815,15 +788,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-mbc/tsconfig.app.json",
-              "projects/ddp-mbc/tsconfig.spec.json",
-              "projects/ddp-mbc/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-mbc/**/*.ts",
+              "projects/ddp-mbc/**/*.html"
             ]
           }
         },
@@ -882,7 +851,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -936,15 +904,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/sandbox-app/tsconfig.app.json",
-              "projects/sandbox-app/tsconfig.spec.json",
-              "projects/sandbox-app/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/sandbox-app/**/*.ts",
+              "projects/sandbox-app/**/*.html"
             ]
           }
         },
@@ -1002,7 +966,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -1068,15 +1031,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/basil-app/tsconfig.app.json",
-              "projects/basil-app/tsconfig.spec.json",
-              "projects/basil-app/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/basil-app/**/*.ts",
+              "projects/basil-app/**/*.html"
             ]
           }
         },
@@ -1149,7 +1108,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -1226,15 +1184,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-osteo/tsconfig.app.json",
-              "projects/ddp-osteo/tsconfig.spec.json",
-              "projects/ddp-osteo/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-osteo/**/*.ts",
+              "projects/ddp-osteo/**/*.html"
             ]
           }
         },
@@ -1297,7 +1251,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -1359,15 +1312,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-rarex/tsconfig.app.json",
-              "projects/ddp-rarex/tsconfig.spec.json",
-              "projects/ddp-rarex/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-rarex/**/*.ts",
+              "projects/ddp-rarex/**/*.html"
             ]
           }
         },
@@ -1438,7 +1387,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -1507,15 +1455,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-prion/tsconfig.app.json",
-              "projects/ddp-prion/tsconfig.spec.json",
-              "projects/ddp-prion/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-prion/**/*.ts",
+              "projects/ddp-prion/**/*.html"
             ]
           }
         },
@@ -1583,7 +1527,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -1655,15 +1598,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-testboston/tsconfig.app.json",
-              "projects/ddp-testboston/tsconfig.spec.json",
-              "projects/ddp-testboston/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-testboston/**/*.ts",
+              "projects/ddp-testboston/**/*.html"
             ]
           }
         },
@@ -1735,7 +1674,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -1807,15 +1745,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-mpc/tsconfig.app.json",
-              "projects/ddp-mpc/tsconfig.spec.json",
-              "projects/ddp-mpc/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-mpc/**/*.ts",
+              "projects/ddp-mpc/**/*.html"
             ]
           }
         },
@@ -1840,7 +1774,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/toolkit-prion/tsconfig.lib.json",
             "project": "projects/toolkit-prion/ng-package.json"
@@ -1860,14 +1794,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/toolkit-prion/tsconfig.lib.json",
-              "projects/toolkit-prion/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/toolkit-prion/**/*.ts",
+              "projects/toolkit-prion/**/*.html"
             ]
           }
         }
@@ -1927,7 +1858,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -1999,15 +1929,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-rgp/tsconfig.app.json",
-              "projects/ddp-rgp/tsconfig.spec.json",
-              "projects/ddp-rgp/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-rgp/**/*.ts",
+              "projects/ddp-rgp/**/*.html"
             ]
           }
         },
@@ -2079,7 +2005,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -2151,15 +2076,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-esc/tsconfig.app.json",
-              "projects/ddp-esc/tsconfig.spec.json",
-              "projects/ddp-esc/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-esc/**/*.ts",
+              "projects/ddp-esc/**/*.html"
             ]
           }
         },
@@ -2228,7 +2149,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -2283,15 +2203,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-cgc/tsconfig.app.json",
-              "projects/ddp-cgc/tsconfig.spec.json",
-              "projects/ddp-cgc/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-cgc/**/*.ts",
+              "projects/ddp-cgc/**/*.html"
             ]
           }
         },
@@ -2353,7 +2269,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -2419,15 +2334,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-circadia/tsconfig.app.json",
-              "projects/ddp-circadia/tsconfig.spec.json",
-              "projects/ddp-circadia/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-circadia/**/*.ts",
+              "projects/ddp-circadia/**/*.html"
             ]
           }
         },
@@ -2498,7 +2409,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -2564,15 +2474,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-pancan/tsconfig.app.json",
-              "projects/ddp-pancan/tsconfig.spec.json",
-              "projects/ddp-pancan/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-pancan/**/*.ts",
+              "projects/ddp-pancan/**/*.html"
             ]
           }
         },
@@ -2616,7 +2522,9 @@
                 "output": "assets/config"
               }
             ],
-            "styles": ["projects/ddp-brugada/src/styles.scss"],
+            "styles": [
+              "projects/ddp-brugada/src/styles.scss"
+            ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
             ]
@@ -2632,7 +2540,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -2692,19 +2599,19 @@
               "projects/ddp-brugada/src/favicon-alert.ico",
               "projects/ddp-brugada/src/assets"
             ],
-            "styles": ["projects/ddp-brugada/src/styles.scss"],
+            "styles": [
+              "projects/ddp-brugada/src/styles.scss"
+            ],
             "scripts": []
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-brugada/tsconfig.app.json",
-              "projects/ddp-brugada/tsconfig.spec.json",
-              "projects/ddp-brugada/e2e/tsconfig.json"
-            ],
-            "exclude": ["**/node_modules/**"]
+            "lintFilePatterns": [
+              "projects/ddp-brugada/**/*.ts",
+              "projects/ddp-brugada/**/*.html"
+            ]
           }
         },
         "e2e": {
@@ -2762,7 +2669,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -2817,15 +2723,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/study-builder-ui/tsconfig.app.json",
-              "projects/study-builder-ui/tsconfig.spec.json",
-              "projects/study-builder-ui/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/study-builder-ui/**/*.ts",
+              "projects/study-builder-ui/**/*.html"
             ]
           }
         },
@@ -2894,7 +2796,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -2966,14 +2867,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-dsm-ui/tsconfig.app.json",
-              "projects/ddp-dsm-ui/tsconfig.spec.json"
-            ],
-            "exclude": [
-                "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-dsm-ui/**/*.ts",
+              "projects/ddp-dsm-ui/**/*.html"
             ]
           }
         }
@@ -3027,7 +2925,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -3097,15 +2994,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-singular/tsconfig.app.json",
-              "projects/ddp-singular/tsconfig.spec.json",
-              "projects/ddp-singular/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-singular/**/*.ts",
+              "projects/ddp-singular/**/*.html"
             ]
           }
         },
@@ -3131,6 +3024,7 @@
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "defaultCollection": "@angular-eslint/schematics"
   }
 }

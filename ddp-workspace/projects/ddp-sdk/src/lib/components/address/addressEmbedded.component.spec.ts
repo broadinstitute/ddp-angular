@@ -2,7 +2,7 @@ import { ComponentFixture, discardPeriodicTasks, fakeAsync, TestBed, tick, waitF
 import {
     AddressEmbeddedComponent,
     AddressInputComponent,
-    ValidationMessage,
+    ValidationMessageComponent,
     ActivityResponse,
     AddressService,
     Address,
@@ -92,6 +92,7 @@ describe('AddressEmbeddedComponent', () => {
         const loggingServiceSpy: jasmine.SpyObj<LoggingService> =
             jasmine.createSpyObj('LoggingService', ['logDebug', 'logWarning', 'logError']);
         const translateServiceSpy: jasmine.SpyObj<NGXTranslateService> = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
+        /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
         // @ts-ignore
         translateServiceSpy.getTranslation.and.callFake((word: string | Array<string>) => {
             return of(Array.isArray(word) ?
@@ -100,7 +101,7 @@ describe('AddressEmbeddedComponent', () => {
         });
 
         TestBed.configureTestingModule({
-            declarations: [AddressEmbeddedComponent, FakeAddressInputComponent, ValidationMessage],
+            declarations: [AddressEmbeddedComponent, FakeAddressInputComponent, ValidationMessageComponent],
             providers: [
                 {provide: AddressService, useValue: addressServiceSpy},
                 {provide: SubmitAnnouncementService, useValue: submitAnnounceService},
@@ -179,7 +180,7 @@ describe('AddressEmbeddedComponent', () => {
         expect(addressServiceSpy.saveAddress).not.toHaveBeenCalled();
         const suggestionMatCard = fixture.debugElement.query(By.css('#suggestionMatCard'));
         expect(suggestionMatCard).toBeNull();
-        const errorComponent = fixture.debugElement.query(By.directive(ValidationMessage));
+        const errorComponent = fixture.debugElement.query(By.directive(ValidationMessageComponent));
         expect(errorComponent).toBeNull();
         // check that we are not feeding address back to input component
         expect(childComponent.address).toBeFalsy();
@@ -678,7 +679,7 @@ describe('AddressEmbeddedComponent', () => {
 });
 
 const findValidationMessageDebug = (fixture): DebugElement =>
-    fixture.debugElement.query(By.directive(ValidationMessage));
+    fixture.debugElement.query(By.directive(ValidationMessageComponent));
 
 const findRadioGroupDebug = (fixture): DebugElement =>
     fixture.debugElement.query(By.directive(MatRadioGroup));

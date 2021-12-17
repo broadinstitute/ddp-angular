@@ -15,7 +15,7 @@ const windowHeight = containerHeight - smallSpaceToPartlyHideElement + notRecogn
 function getTestComponentTemplateWithStyles(hostWidth = '100px', padding = '0'): string {
   return `<div style="height: 150px; padding-top: ${padding}; display: block; overflow-y: auto;">
                <div class="directive-host"
-                    sticky-scroll
+                    stickyScroll
                     style="width: ${hostWidth}; height: ${containerHeight}px; white-space: nowrap; overflow: auto;">
                  <span>very very very very long long long long looong content</span>
                </div>
@@ -41,9 +41,9 @@ describe('Directive: StickyScrollDirective', () => {
     directiveHost = fixture.debugElement.query(By.css('.directive-host'));
   }
 
-  function checkScrollbarIsVisible(): void {
-    expect(stickyScrollbar.styles['visibility']).toBe('visible');
-  }
+  // function checkScrollbarIsVisible(): void {
+  //   expect(stickyScrollbar.styles['visibility']).toBe('visible');
+  // }
 
   function checkScrollbarIsHidden(): void {
     expect(stickyScrollbar.styles['visibility']).toBe('hidden');

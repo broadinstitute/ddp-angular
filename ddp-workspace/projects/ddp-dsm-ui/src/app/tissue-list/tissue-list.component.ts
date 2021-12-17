@@ -380,13 +380,12 @@ export class TissueListComponent implements OnInit {
             }
             const date = new Date();
             this.loadedTimeStamp = Utils.getDateFormatted(date, Utils.DATE_STRING_IN_EVENT_CVS);
-            let jsonData: any[];
             this.tissueListWrappers = [];
             this.originalTissueListWrappers = [];
             this.copyTissueListWrappers = [];
             this.tissueListsMap = {};
             this.tissueListOncHistories = [];
-            jsonData = data;
+            const jsonData = data;
             this.tissueListWrappers = this.parseTissueListWrapperData(jsonData);
             console.log(this.tissueListWrappers);
             this.originalTissueListWrappers = this.tissueListWrappers;
@@ -432,13 +431,12 @@ export class TissueListComponent implements OnInit {
         data => {
           const date = new Date();
           this.loadedTimeStamp = Utils.getDateFormatted(date, Utils.DATE_STRING_IN_EVENT_CVS);
-          let jsonData: any[];
           this.tissueListWrappers = [];
           this.originalTissueListWrappers = [];
           this.copyTissueListWrappers = [];
           this.tissueListsMap = {};
           this.tissueListOncHistories = [];
-          jsonData = data;
+          const jsonData = data;
           this.tissueListWrappers = this.parseTissueListWrapperData(jsonData);
           this.originalTissueListWrappers = this.tissueListWrappers;
           for (const tissueList of this.tissueListWrappers) {
@@ -578,13 +576,12 @@ export class TissueListComponent implements OnInit {
           window.scrollTo(0, 0);
           const date = new Date();
           this.loadedTimeStamp = Utils.getDateFormatted(date, Utils.DATE_STRING_IN_EVENT_CVS);
-          let jsonData: any[];
           this.tissueListWrappers = [];
           this.originalTissueListWrappers = [];
           this.copyTissueListWrappers = [];
           this.tissueListsMap = {};
           this.tissueListOncHistories = [];
-          jsonData = data;
+          const jsonData = data;
           jsonData.forEach((val) => {
             const tissueList = TissueListWrapper.parse(val);
             this.tissueListWrappers.push(tissueList);
@@ -711,8 +708,7 @@ export class TissueListComponent implements OnInit {
         this.savedFilters = [];
         this.quickFilters = [];
         jsonData.forEach((val) => {
-          let view: ViewFilter;
-          view = ViewFilter.parseFilter(val, this.allColumns);
+          const view: ViewFilter = ViewFilter.parseFilter(val, this.allColumns);
 
           if (val.userId.includes('System')) {
             this.quickFilters.push(view);
@@ -815,13 +811,12 @@ export class TissueListComponent implements OnInit {
         }
         const date = new Date();
         this.loadedTimeStamp = Utils.getDateFormatted(date, Utils.DATE_STRING_IN_EVENT_CVS);
-        let jsonData: any[];
         this.tissueListWrappers = [];
         this.originalTissueListWrappers = [];
         this.copyTissueListWrappers = [];
         this.tissueListsMap = {};
         this.tissueListOncHistories = [];
-        jsonData = data;
+        const jsonData = data;
         this.tissueListWrappers = this.parseTissueListWrapperData(jsonData);
         this.originalTissueListWrappers = this.tissueListWrappers;
         this.currentFilter = savedFilter.filters;
@@ -876,13 +871,12 @@ export class TissueListComponent implements OnInit {
         const date = new Date();
         this.loadedTimeStamp = Utils.getDateFormatted(date, Utils.DATE_STRING_IN_EVENT_CVS);
         this.currentQuickFilterName = quickFilter.filterName;
-        let jsonData: any[];
         this.tissueListWrappers = [];
         this.originalTissueListWrappers = [];
         this.copyTissueListWrappers = [];
         this.tissueListsMap = {};
         this.tissueListOncHistories = [];
-        jsonData = data;
+        const jsonData = data;
         this.tissueListWrappers = this.parseTissueListWrapperData(jsonData);
         for (const tissueList of this.tissueListWrappers) {
           this.tissueListsMap[ tissueList.tissueList.oncHistoryDetails.oncHistoryDetailId ] = tissueList;
@@ -934,13 +928,12 @@ export class TissueListComponent implements OnInit {
           }
           const date = new Date();
           this.loadedTimeStamp = Utils.getDateFormatted(date, Utils.DATE_STRING_IN_EVENT_CVS);
-          let jsonData: any[];
           this.tissueListWrappers = [];
           this.originalTissueListWrappers = [];
           this.copyTissueListWrappers = [];
           this.tissueListsMap = {};
           this.tissueListOncHistories = [];
-          jsonData = data;
+          const jsonData = data;
           this.tissueListWrappers = this.parseTissueListWrapperData(jsonData);
           for (const tissueList of this.tissueListWrappers) {
             this.tissueListsMap[tissueList.tissueList.oncHistoryDetails.oncHistoryDetailId] = tissueList;
@@ -966,7 +959,7 @@ export class TissueListComponent implements OnInit {
   }
 
   public setSelectedFilterName(filterName): void {
-    // tslint:disable-next-line:no-unused-expression
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     this.selectedFilterName === filterName;
   }
 
@@ -1155,13 +1148,12 @@ export class TissueListComponent implements OnInit {
         const date = new Date();
         this.additionalMessage = null;
         this.loadedTimeStamp = Utils.getDateFormatted(date, Utils.DATE_STRING_IN_EVENT_CVS);
-        let jsonData: any[];
         this.tissueListWrappers = [];
         this.originalTissueListWrappers = [];
         this.copyTissueListWrappers = [];
         this.tissueListsMap = {};
         this.tissueListOncHistories = [];
-        jsonData = data;
+        const jsonData = data;
         this.tissueListWrappers = this.parseTissueListWrapperData(jsonData);
         for (const tissueList of this.tissueListWrappers) {
           this.tissueListsMap[tissueList.tissueList.oncHistoryDetails.oncHistoryDetailId] = tissueList;

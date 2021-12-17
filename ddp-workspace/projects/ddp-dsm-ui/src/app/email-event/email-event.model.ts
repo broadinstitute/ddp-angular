@@ -18,7 +18,7 @@ export class EmailEvent {
   }
 }
 
-// tslint:disable-next-line:max-classes-per-file
+// eslint-disable-next-line max-classes-per-file
 export class Template {
   followUpChanged = false;
 
@@ -37,7 +37,7 @@ export class Template {
   }
 }
 
-// tslint:disable-next-line:max-classes-per-file
+// eslint-disable-next-line max-classes-per-file
 export class Email {
 
   emailExpanded = false;
@@ -52,7 +52,7 @@ export class Email {
   }
 }
 
-// tslint:disable-next-line:max-classes-per-file
+// eslint-disable-next-line max-classes-per-file
 export class Event {
 
   constructor(public event: string, public timestamp: number, public url: string) {

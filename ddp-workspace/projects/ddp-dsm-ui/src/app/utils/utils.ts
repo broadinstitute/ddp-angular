@@ -222,6 +222,7 @@ export class Utils {
           if (col.type === 'ADDITIONALVALUE') {
             const fieldName = 'additionalValues';
             // TODO: check is it correct ? - `fieldName` is set on the previous line
+            /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
             // @ts-ignore
             if (fieldName !== '') {
               let value = this.getObjectAdditionalValue(o, fieldName, col);

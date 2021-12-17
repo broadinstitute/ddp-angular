@@ -117,7 +117,6 @@ describe('PrismComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(PrismComponent);
         component = fixture.debugElement.componentInstance;
-        debugElement = fixture.debugElement;
         fixture.detectChanges();
         router = TestBed.inject(Router);
     });
@@ -414,7 +413,6 @@ describe('PrismComponent with storage', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(PrismComponent);
         component = fixture.debugElement.componentInstance;
-        debugElement = fixture.debugElement;
         fixture.detectChanges();
     });
 

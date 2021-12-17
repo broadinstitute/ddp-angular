@@ -27,9 +27,7 @@ describe('SubmissionManagerTest', () => {
 
     it('test submission manager mock', (done) => {
         expect(submissionManager).not.toBeNull();
-        serviceAgent.saveAnswerSubmission.and.callFake((studyGuid: string, activityGuid: string, answerSubmission: AnswerSubmission,
-                                                        throwAnError: boolean): Observable<PatchAnswerResponse> => {
-
+        serviceAgent.saveAnswerSubmission.and.callFake((): Observable<PatchAnswerResponse> => {
             return of({ answers: [], blockVisibility: [] }).pipe(delayWhen(() => timer(2000)));
         });
         const start = new Date().getTime();
@@ -90,8 +88,7 @@ describe('SubmissionManagerTest', () => {
     it('test isSubmissionInProgress$ observable', (done) => {
         // Fake the call to service agent, including the response delay
         const httpCallDelay = 500;
-        serviceAgent.saveAnswerSubmission.and.callFake((studyGuid: string, activityGuid: string, answerSubmission: AnswerSubmission,
-                                                        throwAnError: boolean): Observable<PatchAnswerResponse> => {
+        serviceAgent.saveAnswerSubmission.and.callFake((): Observable<PatchAnswerResponse> => {
             return of({
                 answers: [],
                 blockVisibility: []

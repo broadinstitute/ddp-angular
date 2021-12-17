@@ -80,7 +80,7 @@ tkCfg.instagramId = 'the_osproject';
 tkCfg.lightswitchInstagramWidgetId = '814feee04df55de38ec37791efea075e';
 tkCfg.countMeInUrl = 'https://joincountmein.org/';
 
-export let config = new ConfigurationService();
+export const config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
 config.auth0Domain = DDP_ENV.auth0Domain;
 config.auth0ClientId = DDP_ENV.auth0ClientId;

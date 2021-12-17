@@ -1,4 +1,4 @@
-import { UploadComponent } from './upload.component';
+// import { UploadComponent } from './upload.component';
 
 describe('Component: Upload', () => {
   // it('should create an instance', () => {

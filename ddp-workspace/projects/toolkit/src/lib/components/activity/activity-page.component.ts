@@ -53,7 +53,7 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
         @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) {
         this.activityGuid = this.activatedRoute.snapshot.data.activityGuid;
         // by default we will not create a new instance
-        const createActivityInstance: boolean = !!(this.activatedRoute.snapshot.data.createActivityInstance);
+        const createActivityInstance = !!(this.activatedRoute.snapshot.data.createActivityInstance);
         this.studyGuid = this.toolkitConfiguration.studyGuid;
         const existingActivityInstance$: Observable<any | null> = this.userActivityServiceAgent.getActivities(of(this.studyGuid))
             .pipe(

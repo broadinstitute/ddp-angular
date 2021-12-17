@@ -1,4 +1,4 @@
-import { ParticipantPageComponent } from './participant-page.component';
+// import { ParticipantPageComponent } from './participant-page.component';
 
 describe('Component: ParticipantPage', () => {
   // it('should create an instance', () => {

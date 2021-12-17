@@ -1,4 +1,4 @@
-/* tslint:disable:max-line-length */
+/* eslint-disable max-len */
 import { FieldSettings } from '../field-settings/field-settings.model';
 import { NameValue } from '../utils/name-value.model';
 import { Statics } from '../utils/statics';
@@ -375,7 +375,7 @@ export class Filter {
         continue;
       }
       if (allColumns[ filter.participantColumn.tableAlias ] != null) {
-        // tslint:disable-next-line:no-shadowed-variable
+        // eslint-disable-next-line @typescript-eslint/no-shadow
         const f = allColumns[ filter.participantColumn.tableAlias ].find(item => {
           return item.participantColumn.tableAlias === filter.participantColumn.tableAlias
             && item.participantColumn.name === filter.participantColumn.name;
@@ -411,7 +411,7 @@ export class Filter {
         }
       } else {
         for (const source of Object.keys(allColumns)) {
-          // tslint:disable-next-line:no-shadowed-variable
+          // eslint-disable-next-line @typescript-eslint/no-shadow
           const f = allColumns[ source ].find(item => {
             return item.participantColumn.name === filter.participantColumn.name;
           });

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivityDefinitionEditorService } from '../../services/activity-definition-editor.service';
 
 @Component({
@@ -6,12 +6,9 @@ import { ActivityDefinitionEditorService } from '../../services/activity-definit
     templateUrl: './survey-component-palette.component.html',
     styleUrls: ['./survey-component-palette.component.scss']
 })
-export class SurveyComponentPaletteComponent implements OnInit {
+export class SurveyComponentPaletteComponent {
 
     constructor(private editorService: ActivityDefinitionEditorService) {
-    }
-
-    ngOnInit(): void {
     }
 
     addContentBlock(): void {

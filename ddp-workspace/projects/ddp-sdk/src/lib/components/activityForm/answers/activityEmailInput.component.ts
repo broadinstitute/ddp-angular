@@ -7,7 +7,7 @@ import { InstantErrorStateMatcher } from '../../../utility/ui/instantErrorStateM
 
 // Need to hold off on this expression for now until https://broadinstitute.atlassian.net/browse/DDP-4311 is fixed
 // const EMAIL_REGEXP =
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 // /^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 // Expression being used in server to test email format
 export const EMAIL_REGEXP = /^\S+@\S+\.\S+$/;

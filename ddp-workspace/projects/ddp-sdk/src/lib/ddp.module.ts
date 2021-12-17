@@ -41,8 +41,8 @@ import { IrbGuard } from './guards/irb.guard';
 import { BrowserGuard } from './guards/browser.guard';
 
 import { NetworkSnifferComponent } from './components/networkSniffer.component';
-import { NewRequestMock } from './components/newRequestMock.component';
-import { ValidationMessage } from './components/validationMessage.component';
+import { NewRequestMockComponent } from './components/newRequestMock.component';
+import { ValidationMessageComponent } from './components/validationMessage.component';
 // Logging components
 import { LoggingService } from './services/logging.service';
 import { StackdriverErrorReporterService } from './services/stackdriverErrorReporter.service';
@@ -345,8 +345,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ],
     declarations: [
         NetworkSnifferComponent,
-        NewRequestMock,
-        ValidationMessage,
+        NewRequestMockComponent,
+        ValidationMessageComponent,
 
         LoginComponent,
         SignInOutComponent,
@@ -425,7 +425,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ],
     exports: [
         NetworkSnifferComponent,
-        NewRequestMock,
+        NewRequestMockComponent,
 
         LoginComponent,
         SignInOutComponent,
@@ -484,7 +484,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         AddressEmbeddedComponent,
         VerifyAgeUpComponent,
         AcceptAgeUpComponent,
-        ValidationMessage,
+        ValidationMessageComponent,
         TranslateModule,
         LazyLoadResourcesDirective,
         RouteTransformerDirective,

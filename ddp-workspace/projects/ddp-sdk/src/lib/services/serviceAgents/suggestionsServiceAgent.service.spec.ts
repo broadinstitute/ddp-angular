@@ -20,13 +20,9 @@ describe('SuggestionServiceAgent Test', () => {
     beforeEach(() => {
         config = new ConfigurationService();
         config.backendUrl = 'https://pepper-dev.datadonationplatform.org';
-        // config.backendUrl = 'http://localhost:5555';
         config.studyGuid = 'ANGIO';
-        // Faking out the cookieservice
-        const cookieServiceSpy: jasmine.SpyObj<CookieService> = jasmine.createSpyObj('CookieService', ['put']);
         // called within the parent class
         const loggingServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logException']);
-        // const sessionSpy: jasmine.SpyObj<SessionMementoService> = jasmine.createSpyObj('SessionMementoService', ['sessionObservable']);
         const sessionSpy = new SessionMementoService({} as TranslateService, config);
         spyOnProperty(sessionSpy, 'sessionObservable').and.returnValue(of({ participanteGuid: 'USERGUID' }));
 

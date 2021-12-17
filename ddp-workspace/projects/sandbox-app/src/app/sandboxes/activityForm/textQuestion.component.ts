@@ -94,7 +94,7 @@ export class TextQuestionComponent extends QuestionComponent<ActivityTextQuestio
         let position = -1;
         let step = 1;
         const matches: Array<SuggestionMatch> = [];
-        // tslint:disable-next-line:no-conditional-assignment
+        // eslint-disable-next-line no-cond-assign
         while ((position = lowerCaseSuggestion.indexOf(lowerCaseValue, position + step)) !== -1) {
           matches.push({
             offset: position,
