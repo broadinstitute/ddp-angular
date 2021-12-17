@@ -43,8 +43,8 @@ sdkConfig.cloudLoggingUrl = DDP_ENV.cloudLogginUrl;
 sdkConfig.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 sdkConfig.defaultLanguageCode = 'en';
 sdkConfig.baseUrl = location.origin + base;
-sdkConfig.localRegistrationUrl = sdkConfig.backendUrl + '/pepper/v1/register';
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
+sdkConfig.localRegistrationUrl = sdkConfig.backendUrl + '/pepper/v1/register';
 sdkConfig.loginLandingUrl = DDP_ENV.loginLandingUrl;
 
 /**
