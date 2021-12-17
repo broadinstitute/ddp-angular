@@ -92,6 +92,6 @@
     "protractor": "7.0.0",
     "ts-node": "9.0.0",
     "tslint-jasmine-rules": "^1.6.1",
-    "typescript": "4.5.4"
+    "typescript": "^4.4.4"
   }
 }
