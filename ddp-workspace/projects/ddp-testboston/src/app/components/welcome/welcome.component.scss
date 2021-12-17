@@ -65,14 +65,14 @@
     margin: 4rem auto 4rem auto;
 
     &__text {
-        margin: 0rem 0rem auto auto;
+        margin: 0 0 auto auto;
     }
 }
 
 .columns {
     display: grid;
     grid-auto-flow: column;
-    margin: 2rem auto 0rem auto;
+    margin: 2rem auto 0 auto;
 }
 
 .columns-child-left {
