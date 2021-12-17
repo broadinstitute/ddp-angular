@@ -84,6 +84,7 @@ import { ActivityAgreementAnswer } from './components/activityForm/answers/activ
 import { ActivityTextAnswer } from './components/activityForm/answers/activityTextAnswer.component';
 import { ActivityTextInput } from './components/activityForm/answers/activity-text-input/activityTextInput.component';
 import { ActivityFileAnswer } from './components/activityForm/answers/activity-file-answer/activityFileAnswer.component';
+import { ActivityFileAnswerSuccess } from './components/activityForm/answers/activity-file-answer-success/activityFileAnswerSuccess.component';
 import { ActivityMatrixAnswer } from './components/activityForm/answers/activity-matrix-answer/activity-matrix-answer.component';
 import { ActivityInstanceSelectAnswer } from './components/activityForm/answers/activity-instance-select-answer/activity-instance-select-answer.component';
 import { ActivityEmailInput } from './components/activityForm/answers/activityEmailInput.component';
@@ -366,6 +367,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityTextAnswer,
         ActivityTextInput,
         ActivityFileAnswer,
+        ActivityFileAnswerSuccess,
         ActivityMatrixAnswer,
         ActivityInstanceSelectAnswer,
         ActivityEmailInput,
