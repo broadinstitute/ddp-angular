@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 $color-primary: #26355c;
 
 $color-secondary-blue: #4e6888;
@@ -9,4 +10,4 @@ $color-tertiary-orange: #ffc94e;
 $color-text: #414042;
 $color-background: #f4efea;
 
-$app-typography: mat-typography-config($font-family: 'Roboto');
+$app-typography: mat.define-typography-config($font-family: 'Roboto');

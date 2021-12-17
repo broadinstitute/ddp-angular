@@ -1,7 +1,8 @@
+@use '~@angular/material' as mat;
 @import '../../../app-theme.scss';
 
 .header {
-    background-color: mat-color($app-theme, 100);
+    background-color: mat.get-color-from-palette($app-theme, 100);
     position: fixed;
     top: 0;
     left: 0;
@@ -98,7 +99,7 @@
     &__button {
         display: flex;
         align-items: center;
-        border: 2px solid mat-color($app-theme, 200);
+        border: 2px solid mat.get-color-from-palette($app-theme, 200);
         width: 100px;
         height: 40px;
         justify-content: center;
@@ -130,7 +131,7 @@
         display: flex;
         height: 2px;
         width: 100%;
-        background: mat-color($app-theme, 200);
+        background: mat.get-color-from-palette($app-theme, 200);
 
         &:not(:last-child) {
             margin-bottom: 4px;
@@ -146,7 +147,7 @@
     left: 0;
     top: 0;
     z-index: 1;
-    background-color: mat-color($app-theme, 100);
+    background-color: mat.get-color-from-palette($app-theme, 100);
     overflow: hidden;
     transition: 0.5s;
 

@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import '../../../app-theme.scss';
 
 .gallery {
@@ -22,7 +23,7 @@
     justify-content: flex-start;
     grid-area: text;
     padding: 3rem 1.5rem 2rem 1.5rem;
-    background-color: mat-color($app-theme, 550);
+    background-color: mat.get-color-from-palette($app-theme, 550);
 }
 
 .gallery__controls {
@@ -38,13 +39,13 @@
 .dot {
     height: 1.125rem;
     width: 1.125rem;
-    background-color: mat-color($app-theme, 550);
+    background-color: mat.get-color-from-palette($app-theme, 550);
     border-radius: 50%;
     transition: background-color 150ms ease-in-out;
 }
 
 .dot_active {
-    background-color: mat-color($app-theme, 100);
+    background-color: mat.get-color-from-palette($app-theme, 100);
 }
 
 @media screen and (max-width: 920px) {

@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import '../../../app-theme.scss';
 
 .modal {
@@ -31,11 +32,11 @@
     transition: 0.3s;
     background-color: transparent;
     border: none;
-    color: mat-color($app-theme, 100);
+    color: mat.get-color-from-palette($app-theme, 100);
     padding: 1rem;
 
     &:hover {
         cursor: pointer;
-        color: mat-color($app-theme, 400);
+        color: mat.get-color-from-palette($app-theme, 400);
     }
 }

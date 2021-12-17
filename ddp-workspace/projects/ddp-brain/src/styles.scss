@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import 'app-theme.scss';
 @import './styles/fonts.scss';
 @import './styles/buttons.scss';
@@ -10,8 +11,8 @@
 @import './styles/dashboard.scss';
 @import './styles/session-expired.scss';
 
-$custom-typography: mat-typography-config($font-family: 'Untitled-Sans-Regular');
-@include mat-core($custom-typography);
+$custom-typography: mat.define-typography-config($font-family: 'Untitled-Sans-Regular');
+@include mat.core($custom-typography);
 
 html,
 body {
@@ -19,7 +20,7 @@ body {
     padding: 0;
     height: 100vh;
     font-size: 16px;
-    color: mat-color($app-theme, 200);
+    color: mat.get-color-from-palette($app-theme, 200);
 }
 
 body {
@@ -94,7 +95,7 @@ body {
 a {
     cursor: pointer;
     text-decoration: none;
-    color: mat-color($app-theme, 200);
+    color: mat.get-color-from-palette($app-theme, 200);
 }
 
 a:focus {
@@ -127,7 +128,7 @@ p {
 
 .Link {
     font-family: 'Untitled-Sans-Medium', sans-serif;
-    color: mat-color($app-theme, 250);
+    color: mat.get-color-from-palette($app-theme, 250);
     text-decoration: none;
 
     &_italic {
@@ -140,7 +141,7 @@ p {
 }
 
 .Link:active {
-    color: mat-color($app-theme, 300);
+    color: mat.get-color-from-palette($app-theme, 300);
     text-decoration: underline;
 }
 
@@ -160,7 +161,7 @@ p {
 }
 
 .ddp-close-button:hover {
-    color: mat-color($app-theme, 400);
+    color: mat.get-color-from-palette($app-theme, 400);
     transition: 0.3s;
 }
 

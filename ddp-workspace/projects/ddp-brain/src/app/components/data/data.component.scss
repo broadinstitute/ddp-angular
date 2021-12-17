@@ -1,7 +1,8 @@
+@use '~@angular/material' as mat;
 @import '../../../app-theme.scss';
 
 .map-section {
-    background-color: mat-color($app-theme, 1000);
+    background-color: mat.get-color-from-palette($app-theme, 1000);
 }
 
 .map-block {
@@ -62,7 +63,7 @@
     &__image {
         max-width: 100%;
         height: auto;
-        border: 2px solid mat-color($app-theme, 900);
+        border: 2px solid mat.get-color-from-palette($app-theme, 900);
         border-radius: 7px;
 
         &_modal {
@@ -71,19 +72,19 @@
     }
 
     &__title {
-        color: mat-color($app-theme, 250);
+        color: mat.get-color-from-palette($app-theme, 250);
         font-family: 'Untitled-Sans-Medium', sans-serif;
         margin-bottom: 0;
     }
 
     &__data {
         margin-top: 0;
-        color: mat-color($app-theme, 450);
+        color: mat.get-color-from-palette($app-theme, 450);
     }
 }
 
 .mailing-list-section {
-    background-color: mat-color($app-theme, 800);
+    background-color: mat.get-color-from-palette($app-theme, 800);
 }
 
 .mailing-list-block {
@@ -103,13 +104,13 @@
 
     &__button {
         &:hover {
-            color: mat-color($app-theme, 800);
+            color: mat.get-color-from-palette($app-theme, 800);
         }
     }
 }
 
 .data-release-section {
-    background-color: mat-color($app-theme, 500);
+    background-color: mat.get-color-from-palette($app-theme, 500);
 }
 
 .data-release-block {

@@ -1,8 +1,9 @@
+@use '~@angular/material' as mat;
 @import '../app-theme.scss';
 
 .static-page-title-section {
     padding: 2rem 0;
-    background-color: mat-color($app-theme, 800);
+    background-color: mat.get-color-from-palette($app-theme, 800);
 }
 
 .static-page-content-section {

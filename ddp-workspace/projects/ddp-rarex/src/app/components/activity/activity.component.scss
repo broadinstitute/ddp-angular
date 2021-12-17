@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import '../../../app-theme';
 
 .activity-stepper {
@@ -34,7 +35,7 @@
       left: 0;
       transform: translate(0, -50%);
 
-      background-color: mat-color($app-theme, 650);
+      background-color: mat.get-color-from-palette($app-theme, 650);
       transition: background-color 0.2s ease;
     }
 
@@ -50,18 +51,18 @@
       left: 50%;
       transform: translate(-50%, -50%);
 
-      background-color: mat-color($app-theme, 650);
+      background-color: mat.get-color-from-palette($app-theme, 650);
       border-radius: 12px;
       transition: background-color 0.2s ease;
     }
 
     &--completed {
       &::before {
-        background-color: mat-color($app-theme, 300);
+        background-color: mat.get-color-from-palette($app-theme, 300);
       }
 
       &::after {
-        background-color: mat-color($app-theme, 300);
+        background-color: mat.get-color-from-palette($app-theme, 300);
       }
     }
 
@@ -71,11 +72,11 @@
 
     &--active {
       &::before {
-        background-color: mat-color($app-theme, 350);
+        background-color: mat.get-color-from-palette($app-theme, 350);
       }
 
       &::after {
-        background-color: mat-color($app-theme, 350);
+        background-color: mat.get-color-from-palette($app-theme, 350);
       }
     }
   }

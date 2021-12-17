@@ -1,11 +1,12 @@
+@use '~@angular/material' as mat;
 @import '~@angular/material/theming';
 
-$custom-typography: mat-typography-config(
+$custom-typography: mat.define-typography-config(
   $font-family: 'Raleway, sans-serif'
 );
 
 //Override typography in core CSS
-@include mat-core($custom-typography);
+@include mat.core($custom-typography);
 
 $md-primary: (
     50: transparent,
@@ -54,4 +55,4 @@ $md-primary: (
     )
 );
 
-$app-theme: mat-palette($md-primary);
+$app-theme: mat.define-palette($md-primary);

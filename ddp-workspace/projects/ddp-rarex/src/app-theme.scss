@@ -1,7 +1,8 @@
+@use '~@angular/material' as mat;
 @import '~@angular/material/theming';
 @import './styles/variables';
 
-@include mat-core();
+@include mat.core();
 
 $mat-primary: (
   50: transparent,
@@ -42,4 +43,4 @@ $mat-primary: (
   )
 );
 
-$app-theme: mat-palette($mat-primary);
+$app-theme: mat.define-palette($mat-primary);

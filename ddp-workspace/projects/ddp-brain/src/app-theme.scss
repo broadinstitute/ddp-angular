@@ -1,5 +1,6 @@
+@use '~@angular/material' as mat;
 @import '~@angular/material/theming';
-@include mat-core();
+@include mat.core();
 
 $md-primary: (
     50: transparent,
@@ -44,4 +45,4 @@ $md-primary: (
     )
 );
 
-$app-theme: mat-palette($md-primary);
+$app-theme: mat.define-palette($md-primary);

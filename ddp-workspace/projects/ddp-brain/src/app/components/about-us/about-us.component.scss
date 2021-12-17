@@ -1,13 +1,14 @@
+@use '~@angular/material' as mat;
 @import '../../../app-theme.scss';
 
 @mixin sac-member-name {
     font-size: 1.375rem;
     line-height: 1.625rem;
-    color: mat-color($app-theme, 250);
+    color: mat.get-color-from-palette($app-theme, 250);
 }
 
 .intro-section {
-    background-color: mat-color($app-theme, 500);
+    background-color: mat.get-color-from-palette($app-theme, 500);
 }
 
 .image-block {
@@ -31,14 +32,14 @@
     position: relative;
     width: 40rem;
     top: -10rem;
-    background-color: mat-color($app-theme, 100);
+    background-color: mat.get-color-from-palette($app-theme, 100);
     margin: auto;
     border-radius: 4px;
     box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 0.2);
 
     &__text {
         padding: 2.2rem 2rem;
-        border-bottom: 1px solid mat-color($app-theme, 400);
+        border-bottom: 1px solid mat.get-color-from-palette($app-theme, 400);
     }
 
     &__link {
@@ -51,7 +52,7 @@
 }
 
 .cmi-link {
-    color: mat-color($app-theme, 250);
+    color: mat.get-color-from-palette($app-theme, 250);
     font-size: 1.125rem;
     line-height: 1.4375rem;
 
@@ -138,7 +139,7 @@
     margin: 0.5rem 0 0 0;
 
     &__text {
-        color: mat-color($app-theme, 700);
+        color: mat.get-color-from-palette($app-theme, 700);
         font-size: 16px;
         line-height: 24px;
         margin: 0;
@@ -150,7 +151,7 @@
 }
 
 .learn-more-section {
-    background-color: mat-color($app-theme, 650);
+    background-color: mat.get-color-from-palette($app-theme, 650);
 }
 
 @media screen and (max-width: 1300px) {

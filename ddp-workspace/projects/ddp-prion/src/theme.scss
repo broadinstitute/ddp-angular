@@ -1,15 +1,16 @@
+@use '~@angular/material' as mat;
 @import '~@angular/material/theming';
 
-$custom-typography: mat-typography-config(
+$custom-typography: mat.define-typography-config(
   $font-family: 'Raleway, sans-serif'
 );
 
 
 //Override typography for all Angular Material
-@include angular-material-typography($custom-typography);
+@include mat.all-component-typographies($custom-typography);
 
 //Override typography in core CSS
-@include mat-core($custom-typography);
+@include mat.core($custom-typography);
 
 $md-primary: (
     50 : #fdf6e3,
@@ -115,17 +116,17 @@ $md-warn: (
 );
 
 
-$test-app-primary: mat-palette($md-primary, 500, 500, 500);
-$test-app-accent: mat-palette($md-secondary, 900, 700, A500);
-$test-app-warn: mat-palette($md-warn, 900, A400, A500);
+$test-app-primary: mat.define-palette($md-primary, 500, 500, 500);
+$test-app-accent: mat.define-palette($md-secondary, 900, 700, A500);
+$test-app-warn: mat.define-palette($md-warn, 900, A400, A500);
 
-$test-app-theme: mat-light-theme($test-app-primary, $test-app-accent, $test-app-warn);
+$test-app-theme: mat.define-light-theme($test-app-primary, $test-app-accent, $test-app-warn);
 
-@include angular-material-theme($test-app-theme);
+@include mat.all-component-themes($test-app-theme);
 
 
 .validation-div {
-    color: mat-color($test-app-warn);
+    color: mat.get-color-from-palette($test-app-warn);
 }
 
 

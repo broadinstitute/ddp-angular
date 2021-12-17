@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import "../app-theme.scss";
 
 .button {
@@ -38,37 +39,37 @@
 }
 
 .button_primary {
-    background-color: mat-color($app-theme, 250);
-    border: 2px solid mat-color($app-theme, 50);
-    color: mat-color($app-theme, 100);
+    background-color: mat.get-color-from-palette($app-theme, 250);
+    border: 2px solid mat.get-color-from-palette($app-theme, 50);
+    color: mat.get-color-from-palette($app-theme, 100);
 }
 
 .button_primary:disabled {
-    background-color: mat-color($app-theme, 350);
+    background-color: mat.get-color-from-palette($app-theme, 350);
 }
 
 .button_secondary {
-    background-color: mat-color($app-theme, 50);
-    color: mat-color($app-theme, 200);
-    border: 2px solid mat-color($app-theme, 200);
+    background-color: mat.get-color-from-palette($app-theme, 50);
+    color: mat.get-color-from-palette($app-theme, 200);
+    border: 2px solid mat.get-color-from-palette($app-theme, 200);
 }
 
 .button_secondary:disabled {
-    background-color: mat-color($app-theme, 50);
-    color: mat-color($app-theme, 400);
-    border: 2px solid mat-color($app-theme, 400);
+    background-color: mat.get-color-from-palette($app-theme, 50);
+    color: mat.get-color-from-palette($app-theme, 400);
+    border: 2px solid mat.get-color-from-palette($app-theme, 400);
 }
 
 .button_primary:hover:not([disabled]),
 .button_primary:hover:enabled {
-    color: mat-color($app-theme, 100);
-    background-color: mat-color($app-theme, 300);
+    color: mat.get-color-from-palette($app-theme, 100);
+    background-color: mat.get-color-from-palette($app-theme, 300);
 }
 
 .button_secondary:hover:not([disabled]),
 .button_secondary:hover:enabled {
-    background-color: mat-color($app-theme, 200);
-    color: mat-color($app-theme, 100);
+    background-color: mat.get-color-from-palette($app-theme, 200);
+    color: mat.get-color-from-palette($app-theme, 100);
 }
 
 .button_new-item {
@@ -83,7 +84,7 @@
     border: none;
     padding: 0;
     cursor: pointer;
-    color: mat-color($app-theme, 200);
+    color: mat.get-color-from-palette($app-theme, 200);
     text-decoration: none;
     font-size: 16px;
     line-height: 20px;

@@ -1,14 +1,15 @@
+@use '~@angular/material' as mat;
 @import '../../../app-theme.scss';
 
 @mixin block-title-font {
     font-size: 14px;
     font-weight: 700;
     line-height: 19px;
-    color: mat-color($app-theme, 1000);
+    color: mat.get-color-from-palette($app-theme, 1000);
 }
 
 @mixin text {
-    color: mat-color($app-theme, 400);
+    color: mat.get-color-from-palette($app-theme, 400);
     font-size: 1.125rem;
     line-height: 1.5rem;
     margin: 0;
@@ -37,7 +38,7 @@
 }
 
 .title {
-    color: mat-color($app-theme, 400);
+    color: mat.get-color-from-palette($app-theme, 400);
     font-size: 1.375rem;
     line-height: 2.0625rem;
     margin: 0;
@@ -68,7 +69,7 @@
     width: 24rem;
 
     &__icon {
-        color: mat-color($app-theme, 900);
+        color: mat.get-color-from-palette($app-theme, 900);
     }
 
     &__clear {
@@ -77,12 +78,12 @@
         border: none;
         text-decoration: underline;
         background: none;
-        color: mat-color($app-theme, 900);
+        color: mat.get-color-from-palette($app-theme, 900);
         display: none;
         transition: 0.3s;
 
         &:hover {
-            color: mat-color($app-theme, 400);
+            color: mat.get-color-from-palette($app-theme, 400);
         }
 
         &_visible {
@@ -109,7 +110,7 @@
 .error {
     display: flex;
     align-items: center;
-    color: mat-color($app-theme, 2700);
+    color: mat.get-color-from-palette($app-theme, 2700);
     font-size: 1.125rem;
     line-height: 1.125rem;
     font-weight: 700;
@@ -129,7 +130,7 @@
 }
 
 .success {
-    color: mat-color($app-theme, 3800);
+    color: mat.get-color-from-palette($app-theme, 3800);
 }
 
 .info-block {
@@ -142,7 +143,7 @@
         line-height: 2rem;
         font-weight: 300;
         margin: 0;
-        color: mat-color($app-theme, 400);
+        color: mat.get-color-from-palette($app-theme, 400);
     }
 }
 
@@ -179,7 +180,7 @@
         padding: 1rem;
         font-size: 1.25rem;
         line-height: 1.5rem;
-        border: 1px solid mat-color($app-theme, 3300);
+        border: 1px solid mat.get-color-from-palette($app-theme, 3300);
         border-radius: 4px;
     }
 }

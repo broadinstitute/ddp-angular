@@ -1,6 +1,7 @@
+@use '~@angular/material' as mat;
 @import '~@angular/material/theming';
 
-@include mat-core();
+@include mat.core();
 
 $md-primary: (
   50: #e5e7eb,
@@ -101,10 +102,10 @@ $md-warn: (
   )
 );
 
-$app-primary-palette: mat-palette($md-primary);
-$app-accent-palette: mat-palette($md-secondary);
-$app-warn-palette: mat-palette($md-warn);
+$app-primary-palette: mat.define-palette($md-primary);
+$app-accent-palette: mat.define-palette($md-secondary);
+$app-warn-palette: mat.define-palette($md-warn);
 
-$app-theme: mat-light-theme($app-primary-palette, $app-accent-palette, $app-warn-palette);
+$app-theme: mat.define-light-theme($app-primary-palette, $app-accent-palette, $app-warn-palette);
 
-@include angular-material-theme($app-theme);
+@include mat.all-component-themes($app-theme);

@@ -1,34 +1,35 @@
+@use '~@angular/material' as mat;
 @import '~@angular/material/theming';
 
-@include mat-core();
+@include mat.core();
 
 // Default colors
-$my-app-primary: mat-palette($mat-teal, 700, 100, 800);
-$my-app-accent: mat-palette($mat-teal, 700, 100, 800);
+$my-app-primary: mat.define-palette(mat.$teal-palette, 700, 100, 800);
+$my-app-accent: mat.define-palette(mat.$teal-palette, 700, 100, 800);
 
-$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent);
-@include angular-material-theme($my-app-theme);
+$my-app-theme: mat.define-light-theme($my-app-primary, $my-app-accent);
+@include mat.all-component-themes($my-app-theme);
 
 // Dark theme
-$dark-primary: mat-palette($mat-blue-grey);
-$dark-accent: mat-palette($mat-amber, A200, A100, A400);
-$dark-warn: mat-palette($mat-deep-orange);
+$dark-primary: mat.define-palette(mat.$blue-grey-palette);
+$dark-accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
+$dark-warn: mat.define-palette(mat.$deep-orange-palette);
 
-$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+$dark-theme: mat.define-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
 .dark-theme {
-    @include angular-material-theme($dark-theme);
+    @include mat.all-component-themes($dark-theme);
 }
 
 // Light theme
-$light-primary: mat-palette($mat-grey, 200, 500, 300);
-$light-accent: mat-palette($mat-brown, 200);
-$light-warn: mat-palette($mat-deep-orange, 200);
+$light-primary: mat.define-palette(mat.$grey-palette, 200, 500, 300);
+$light-accent: mat.define-palette(mat.$brown-palette, 200);
+$light-warn: mat.define-palette(mat.$deep-orange-palette, 200);
 
-$light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
+$light-theme: mat.define-light-theme($light-primary, $light-accent, $light-warn);
 
 .light-theme {
-    @include angular-material-theme($light-theme)
+    @include mat.all-component-themes($light-theme)
 }
 
 .ddp-login-button {

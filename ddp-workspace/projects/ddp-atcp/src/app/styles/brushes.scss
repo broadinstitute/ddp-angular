@@ -1,8 +1,9 @@
+@use '~@angular/material' as mat;
 @import '../styles/variables';
 @import 'theme';
 
 html, body {
-  color: mat-color($app-theme);
+  color: mat.get-color-from-palette($app-theme);
 }
 
 @mixin c-white($important: '') {

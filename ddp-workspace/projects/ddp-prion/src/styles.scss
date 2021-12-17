@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import "app-theme.scss";
 $warning-height: 150px;
 
@@ -281,8 +282,8 @@ a:focus {
     text-align: center;
     margin-top: 5px;
     outline: none;
-    color: mat-color($app-theme, 100);
-    background-color: mat-color($app-theme, 600);
+    color: mat.get-color-from-palette($app-theme, 100);
+    background-color: mat.get-color-from-palette($app-theme, 600);
 }
 
 //Next button
@@ -333,14 +334,14 @@ a:focus {
 }
 
 .ButtonFilled--white {
-    background-color: mat-color($app-theme, 100) !important;
-    color: mat-color($app-theme, 1500) !important;
+    background-color: mat.get-color-from-palette($app-theme, 100) !important;
+    color: mat.get-color-from-palette($app-theme, 1500) !important;
     font-size: 0.95rem;
     margin-top: 20px;
 }
 
 .ButtonFilled--white:hover {
-    background-color: mat-color($app-theme, 100) !important;
+    background-color: mat.get-color-from-palette($app-theme, 100) !important;
 }
 
 .ButtonFilled--neutral {
@@ -381,8 +382,8 @@ a:focus {
 .ButtonBordered:hover {
     text-decoration: none;
     background-color: transparent;
-    color: mat-color($app-theme, 700);
-    border-color: mat-color($app-theme, 700);
+    color: mat.get-color-from-palette($app-theme, 700);
+    border-color: mat.get-color-from-palette($app-theme, 700);
 }
 
 .Button--countMeIn{
@@ -402,8 +403,8 @@ a:focus {
 
 .ButtonBordered--orange,
 .ButtonBordered--orange:visited {
-    color: mat-color($app-theme, 600) !important;
-    border-color: mat-color($app-theme, 600) !important;
+    color: mat.get-color-from-palette($app-theme, 600) !important;
+    border-color: mat.get-color-from-palette($app-theme, 600) !important;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
     transition: all 0.3s ease-out;
 }
@@ -414,8 +415,8 @@ a:focus {
 
 .ButtonBordered--white,
 .ButtonBordered--white:visited {
-    color: mat-color($app-theme, 100);
-    border-color: mat-color($app-theme, 100);
+    color: mat.get-color-from-palette($app-theme, 100);
+    border-color: mat.get-color-from-palette($app-theme, 100);
 }
 
 .Button--cell {
@@ -437,10 +438,10 @@ a:focus {
 
 .CountButton {
     font-weight: 500;
-    border: 2px solid mat-color($app-theme, 100);
+    border: 2px solid mat.get-color-from-palette($app-theme, 100);
     padding: 8px 25px;
     margin: 5px 5px 5px 5px;
-    color: mat-color($app-theme, 100);
+    color: mat.get-color-from-palette($app-theme, 100);
     border-radius: 3px;
     text-decoration: none;
     cursor: pointer;
@@ -451,7 +452,7 @@ a:focus {
 .MenuButton {
     display: inline-flex;
     text-decoration: none;
-    color: mat-color($app-theme, 100);
+    color: mat.get-color-from-palette($app-theme, 100);
     cursor: pointer;
 }
 
@@ -466,7 +467,7 @@ a:focus {
     cursor: pointer;
     font-weight: 500;
     text-decoration: none;
-    color: mat-color($app-theme, 100);
+    color: mat.get-color-from-palette($app-theme, 100);
     margin-top: 5px;
 }
 
@@ -489,19 +490,19 @@ a:focus {
 
 // Language selector styles
 .SimpleButton .ddp-globe {
-    stroke: mat-color($app-theme, 100);
+    stroke: mat.get-color-from-palette($app-theme, 100);
     fill: transparent;
     vertical-align: middle;
     transition: stroke 0.3s ease;
 }
 
 .SimpleButton:hover .ddp-globe {
-    stroke: mat-color($app-theme, 700);
+    stroke: mat.get-color-from-palette($app-theme, 700);
     fill: transparent;
 }
 
 .SimpleButton:active .ddp-globe {
-    stroke: mat-color($app-theme, 600);
+    stroke: mat.get-color-from-palette($app-theme, 600);
     fill: transparent;
 }
 
@@ -925,7 +926,7 @@ button[data-ddp-test="signInButton"], button[ data-ddp-test="signOutButton"] {
     font-size: 0.95rem;
     font-weight: 300;
     line-height: 1.6em;
-    color: mat-color($app-theme, 100);
+    color: mat.get-color-from-palette($app-theme, 100);
     margin: 5px 0 5px 0;
 }
 
@@ -940,7 +941,7 @@ button[data-ddp-test="signInButton"], button[ data-ddp-test="signOutButton"] {
     text-align: right;
     font-weight: 300;
     padding: 5px;
-    color: mat-color($app-theme, 800);
+    color: mat.get-color-from-palette($app-theme, 800);
 }
 
 // Start of footer section
@@ -1139,11 +1140,11 @@ html[dir='rtl'] .PageLayout.row .col-lg-8.col-md-10.col-sm-12.col-xs-12 {
     font-size: 1rem;
     font-weight: 300;
     line-height: 1.6em;
-    color: mat-color($app-theme, 600);
+    color: mat.get-color-from-palette($app-theme, 600);
 }
 
 .PageHeader-title small {
-    color: mat-color($app-theme, 100);
+    color: mat.get-color-from-palette($app-theme, 100);
     font-style: italic;
     font-weight: 300;
     font-size: 55%;
@@ -1163,13 +1164,13 @@ html[dir='rtl'] .PageLayout.row .col-lg-8.col-md-10.col-sm-12.col-xs-12 {
     width: 60%;
     margin: 0 auto !important;
     border-radius: 2px;
-    background-color: mat-color($app-theme, 100);
+    background-color: mat.get-color-from-palette($app-theme, 100);
     text-align: left;
     z-index: 1;
 }
 
 .PageHeader-boxContent {
-    color: mat-color($app-theme, 1000);
+    color: mat.get-color-from-palette($app-theme, 1000);
     padding: 40px;
     font-size: 1.5rem;
     line-height: 1.25;
@@ -1201,7 +1202,7 @@ html[dir='rtl'] .PageLayout.row .col-lg-8.col-md-10.col-sm-12.col-xs-12 {
 
 .Message-quote {
     text-align: right;
-    color: mat-color($app-theme, 1000);
+    color: mat.get-color-from-palette($app-theme, 1000);
     font-weight: 300;
     font-size: 1.5rem;
     line-height: 1.25;
@@ -1227,7 +1228,7 @@ html[dir='rtl'] .PageLayout.row .col-lg-8.col-md-10.col-sm-12.col-xs-12 {
 }
 
 .InputRadio-label {
-    color: mat-color($app-theme, 800);
+    color: mat.get-color-from-palette($app-theme, 800);
     font-size: 1rem;
     font-weight: 300;
 }
@@ -1368,7 +1369,7 @@ html[dir='rtl'] .PageLayout.row .col-lg-8.col-md-10.col-sm-12.col-xs-12 {
     margin: 0 0 20px 0;
     padding: 35px 35px 30px 35px;
     background: #f9f3e8;
-    border: 2px solid mat-color($app-theme, 600);
+    border: 2px solid mat.get-color-from-palette($app-theme, 600);
     position: relative;
 
     .close-button {
@@ -1400,7 +1401,7 @@ ul {
 }
 
 .Link {
-    color: mat-color($app-theme, 600) !important;
+    color: mat.get-color-from-palette($app-theme, 600) !important;
     cursor: pointer;
     font-weight: 500;
     font-size: 1rem;
@@ -1412,7 +1413,7 @@ ul {
 
 .Link:hover,
 .Link:focus {
-    color: mat-color($app-theme, 700) !important;
+    color: mat.get-color-from-palette($app-theme, 700) !important;
 }
 
 .Link--neutral {
@@ -1428,7 +1429,7 @@ ul {
 }
 
 .Link--green:hover {
-  color: mat-color($app-theme, 600) !important;
+  color: mat.get-color-from-palette($app-theme, 600) !important;
 }
 
 .PageContent-title {
@@ -1462,7 +1463,7 @@ ul {
 }
 
 .Color--neutral {
-    color: mat-color($app-theme, 800) !important;
+    color: mat.get-color-from-palette($app-theme, 800) !important;
 }
 
 .Normal {
@@ -1597,12 +1598,12 @@ ul {
 
 .Message--intro .Message-title,
 .Message--intro .Message-text {
-    color: mat-color($app-theme, 1000);
+    color: mat.get-color-from-palette($app-theme, 1000);
 }
 
 .Separator {
     width: 1px;
-    background: mat-color($app-theme, 700);
+    background: mat.get-color-from-palette($app-theme, 700);
     margin: 50px auto;
     position: relative;
 }
@@ -1624,7 +1625,7 @@ ul {
     border-radius: 100%;
     position: absolute;
     left: -3px;
-    background: mat-color($app-theme, 700);
+    background: mat.get-color-from-palette($app-theme, 700);
 }
 
 .Separator:before {
@@ -1643,7 +1644,7 @@ ul {
 .Message-text {
     font-size: 1rem;
     font-weight: 300;
-    color: mat-color($app-theme, 1100);
+    color: mat.get-color-from-palette($app-theme, 1100);
     line-height: 1.6;
     margin-bottom: 18px;
 }
@@ -1686,7 +1687,7 @@ ul {
     line-height: 1.6;
     text-align: left;
     padding: 0 0 0 30px;
-    color: mat-color($app-theme, 800);
+    color: mat.get-color-from-palette($app-theme, 800);
 }
 
 .Message-quote blockquote {
@@ -1714,7 +1715,7 @@ ul {
 .Message-quote blockquote:after {
     font-size: 60px;
     line-height: 1;
-    color: mat-color($app-theme, 600);
+    color: mat.get-color-from-palette($app-theme, 600);
     position: absolute;
 }
 
@@ -1723,7 +1724,7 @@ ul {
 }
 
 .Color--orange {
-    color: mat-color($app-theme, 600);
+    color: mat.get-color-from-palette($app-theme, 600);
 }
 
 .Semibold {
@@ -1771,7 +1772,7 @@ ul {
 
 .Login-landing-header {
     height: 78px;
-    background-color: mat-color($app-theme, 600);
+    background-color: mat.get-color-from-palette($app-theme, 600);
 }
 
 .Modal-title {
@@ -1965,13 +1966,13 @@ html[dir='rtl'] .WizardStepsContainer {
     width: 100%;
     padding: 3rem;
     background: #f9f3e8;
-    border: 2px solid mat-color($app-theme, 600);
+    border: 2px solid mat.get-color-from-palette($app-theme, 600);
     box-shadow: none;
     font-size: 1rem;
 }
 
 .PageContent-box-text {
-    color: mat-color($app-theme, 1000);
+    color: mat.get-color-from-palette($app-theme, 1000);
 }
 
 .PageContent-strong-text {
@@ -1988,7 +1989,7 @@ html[dir='rtl'] .WizardStepsContainer {
     font-weight: 300 !important;
     font-size: 1.1rem !important;
     line-height: 1.6rem;
-    color: mat-color($app-theme, 800) !important;
+    color: mat.get-color-from-palette($app-theme, 800) !important;
     margin: 0 !important;
 }
 
@@ -2001,7 +2002,7 @@ html[dir='rtl'] .WizardStepsContainer {
 }
 
 .PageContent-closing-text {
-    color: mat-color($app-theme, 800);
+    color: mat.get-color-from-palette($app-theme, 800);
     font-size: 1rem;
     font-weight: 300;
     margin: 0 20px;
@@ -2018,7 +2019,7 @@ html[dir='rtl'] .WizardStepsContainer {
 .PageContent-infobox {
     padding: 1rem;
     background: #f9f3e8;
-    border: 2px solid mat-color($app-theme, 600);
+    border: 2px solid mat.get-color-from-palette($app-theme, 600);
     box-shadow: none;
     font-size: 1rem;
     margin: 0 20px;
@@ -2089,7 +2090,7 @@ select:-webkit-autofill {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: mat-color($app-theme, 2000);
+    background-color: mat.get-color-from-palette($app-theme, 2000);
     z-index: 3;
     display: flex;
     justify-content: center;
@@ -2100,7 +2101,7 @@ select:-webkit-autofill {
 
 .warning-message {
     .warning-message-text {
-        color: mat-color($app-theme, 1700);
+        color: mat.get-color-from-palette($app-theme, 1700);
         font-size: 1.1rem;
         line-height: 1.1rem;
         font-weight: 300;
@@ -2143,7 +2144,7 @@ select:-webkit-autofill {
     font-size: 1.1rem;
     font-weight: 300;
     margin: 0 0 0 0;
-    color: mat-color($app-theme, 1700);
+    color: mat.get-color-from-palette($app-theme, 1700);
     padding: 0 0 0 0;
 }
 
@@ -2197,7 +2198,7 @@ mat-form-field.mat-form-field-type-mat-input.mat-focused input {
     margin: 0;
     font-size: 1rem;
     font-weight: 300;
-    color: mat-color($app-theme, 800);
+    color: mat.get-color-from-palette($app-theme, 800);
 }
 
 .ddp-question {
@@ -2215,7 +2216,7 @@ mat-form-field.mat-form-field-type-mat-input.mat-focused input {
     }
 
     li {
-        color: mat-color($app-theme, 800);
+        color: mat.get-color-from-palette($app-theme, 800);
     }
 }
 
@@ -2229,7 +2230,7 @@ mat-form-field.mat-form-field-type-mat-input.mat-focused input {
         font-size: 1rem;
         line-height: 1.5rem;
         font-weight: 400;
-        color: mat-color($app-theme, 1700);
+        color: mat.get-color-from-palette($app-theme, 1700);
     }
 
   p.Input-label {
@@ -2272,7 +2273,7 @@ p.Input-label {
 .ddp-dropdown {
     padding: 10px;
     margin: 0 0 5px 0;
-    border: 1px solid mat-color($app-theme, 1800);
+    border: 1px solid mat.get-color-from-palette($app-theme, 1800);
     border-radius: 2px;
 }
 
@@ -2287,7 +2288,7 @@ p.Input-label {
 }
 
 .ddp-block-title-bold {
-    color: mat-color($app-theme, 1000);
+    color: mat.get-color-from-palette($app-theme, 1000);
     font-weight: 400;
     font-size: 1.2rem;
     line-height: 1.8rem;
@@ -2308,11 +2309,11 @@ p.Input-label {
     line-height: 1.8rem;
     font-weight: 300;
     margin: 2rem 0 1rem 0;
-    color: mat-color($app-theme, 800);
+    color: mat.get-color-from-palette($app-theme, 800);
 }
 
 .ddp-li-bullet {
-    color: mat-color($app-theme, 800) !important;
+    color: mat.get-color-from-palette($app-theme, 800) !important;
 }
 
 .ddp-date-field-margin {
@@ -2399,7 +2400,7 @@ ddp-activity-composite-answer .ddp-answer-container {
 .ddp-close-button {
     margin-left: auto;
     cursor: pointer;
-    color: mat-color($app-theme, 300);
+    color: mat.get-color-from-palette($app-theme, 300);
     font-size: 1rem;
     font-weight: 900;
 }
@@ -2408,17 +2409,17 @@ ddp-activity-composite-answer .ddp-answer-container {
     outline: none;
     font-size: 1rem;
     font-weight: 300;
-    color: mat-color($app-theme, 1000);
+    color: mat.get-color-from-palette($app-theme, 1000);
 }
 
 .ddp-user-menu-button:active,
 .ddp-user-menu-button:focus,
 .ddp-user-menu-button:hover {
-    color: mat-color($app-theme, 1000);
+    color: mat.get-color-from-palette($app-theme, 1000);
 }
 
 .ddp-user {
-    color: mat-color($app-theme, 100);
+    color: mat.get-color-from-palette($app-theme, 100);
 }
 
 
@@ -2512,7 +2513,7 @@ ddp-activity-composite-answer .ddp-answer-container {
 .mat-snack-bar-container {
     box-shadow: 0 2px 2px rgba(0, 0, 0, .24), 0 0 2px rgba(0, 0, 0, .12);
     margin: 4px;
-    background-color: mat-color($app-theme, 100);
+    background-color: mat.get-color-from-palette($app-theme, 100);
     padding: 0 0 0 0 !important;
 }
 
@@ -2527,7 +2528,7 @@ ddp-activity-composite-answer .ddp-answer-container {
 }
 
 .mat-select-placeholder {
-    color: mat-color($app-theme, 1700);
+    color: mat.get-color-from-palette($app-theme, 1700);
 }
 
 .mat-checkbox-frame {
@@ -2545,11 +2546,11 @@ ddp-activity-composite-answer .ddp-answer-container {
 }
 
 .mat-dialog-container {
-    background-color: mat-color($app-theme, 1300);
+    background-color: mat.get-color-from-palette($app-theme, 1300);
 }
 
 .mat-form-field-invalid .mat-form-field-label {
-    color: mat-color($app-theme, 1200);
+    color: mat.get-color-from-palette($app-theme, 1200);
 }
 
 label.mat-form-field-label {
@@ -2558,11 +2559,11 @@ label.mat-form-field-label {
 }
 
 .mat-error {
-    color: mat-color($app-theme, 1200);
+    color: mat.get-color-from-palette($app-theme, 1200);
 }
 
 .mat-form-field-invalid .mat-form-field-ripple {
-    background-color: mat-color($app-theme, 1200);
+    background-color: mat.get-color-from-palette($app-theme, 1200);
 }
 
 .mat-form-field-label-wrapper {
@@ -2714,7 +2715,7 @@ p.ddp-helper {
 }
 
 .ddp-counter-color {
-    color: mat-color($app-theme, 600) !important;
+    color: mat.get-color-from-palette($app-theme, 600) !important;
 }
 
 .mat-option-text {
