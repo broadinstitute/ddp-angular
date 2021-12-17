@@ -14,6 +14,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { HowToParticipateComponent } from './pages/how-to-participate/how-to-participate.component';
 import { ScientificImpactComponent } from './pages/scientific-impact/scientific-impact.component';
 import { AppComponent } from './components/app/app.component';
+import { HeaderComponent } from './components/header/header.component';
+import { Route } from './constants/Route';
 import { AppRoutingModule } from './app-routing.module';
 
 declare const DDP_ENV: Record<string, any>;
@@ -50,6 +52,17 @@ sdkConfig.loginLandingUrl = DDP_ENV.loginLandingUrl;
  */
 const toolkitConfig = new ToolkitConfigurationService();
 toolkitConfig.studyGuid = DDP_ENV.studyGuid;
+toolkitConfig.activityUrl = Route.Activity;
+toolkitConfig.dashboardUrl = Route.Dashboard;
+toolkitConfig.doneUrl = Route.AgeUpThankYouProxy;
+toolkitConfig.errorUrl = Route.Error;
+toolkitConfig.phone = 'TBD';
+toolkitConfig.infoEmail = 'TBD';
+toolkitConfig.twitterAccountId = 'TBD';
+toolkitConfig.facebookGroupId = 'TBD';
+toolkitConfig.countMeInUrl = 'https://joincountmein.org';
+toolkitConfig.useMultiParticipantDashboard = true;
+toolkitConfig.dashboardDisplayedColumns = ['name', 'summary', 'status', 'actions'];
 
 const translateFactory =
   (
@@ -91,6 +104,7 @@ const translateFactory =
     HowToParticipateComponent,
     ScientificImpactComponent,
     AppComponent,
+    HeaderComponent,
   ],
   imports: [BrowserModule, DdpModule, ToolkitModule, AppRoutingModule],
   providers: [

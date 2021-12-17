@@ -1,12 +1,61 @@
 {
+  "Common": {
+    "Buttons": {
+      "Login": {
+        "Title": "Log In",
+        "AriaLabel": "Log In"
+      },
+      "Submit": {
+        "Title": "Submit",
+        "AriaLabel": "Submit"
+      },
+      "HeaderMenu": {
+        "AriaLabel": "Header menu button"
+      }
+    },
+    "Alts": {
+      "Twitter": "Twitter logo",
+      "Facebook": "Facebook logo",
+      "Instagram": "Instagram logo",
+      "JoinCMI": "Join Count Me In logo"
+    }
+  },
+  "Header": {
+    "Links": {
+      "About": "About us",
+      "Participation": "Participation",
+      "ScientificImpact": "Scientific Impact",
+      "FAQ": "FAQs",
+      "MailingList": "Join Mailing List",
+      "ForYourPhysician": "For Your Physician",
+      "CountMeIn": "Count Me In"
+    }
+  },
   "Toolkit": {
+    "AgeUpThankYou": {
+      "Title": "Thank you!",
+      "EmailVerified": "Your email address has been verified. We will be sending an email with more information on re-consent shortly after your birthday.",
+      "EmailCollected": {
+        "TextPt1": "An email will be sent to your child to confirm their address and tell them about the upcoming re-consent process. If you need to change the email you provided for your child, please contact the project team at",
+        "TextPt2": "or",
+        "Button": "Go to Dashboard"
+      },
+      "ImageAlt": "Email sent"
+    },
+    "StayInformed": {
+      "Title": "Stay Informed!",
+      "Text": "Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email ",
+      "ReturnButton": "RETURN HOME"
+    },
     "Dashboard": {
       "Title": "Dashboard",
-      "Invitation": {
-        "InvitationCode": "Invitation Code:",
-        "Message": "Please use the look-up tool to manage a participant.",
-        "Button": "Go"
-      }
+      "ParticipantsTitle": "Participant Dashboard",
+      "AddParticipant": "Add Participant",
+      "ShowPanel": "Show",
+      "HidePanel": "Hide",
+      "UserLabel": "You",
+      "ChildLabel": "Your child{{suffix}}",
+      "EditUser": "Edit profile"
     },
     "Password": {
       "Title": "Please enter the password",
@@ -24,28 +73,82 @@
         "TextPt2": "or call us at"
       }
     },
+    "ErrorCodes": {
+      "PASSWORD_RESET_LINK_EXPIRED": "Your password reset link has expired."
+    },
     "SessionExpired": {
       "Text": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
     },
+    "LoginLanding": {
+      "Text": "Please wait. You will be redirected to a destination soon..."
+    },
     "Dialogs": {
+      "JoinMailingList": {
+        "Title": "Stay informed!",
+        "Text": "Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
+        "Fields": {
+          "FirstName": {
+            "Placeholder": "First Name *",
+            "Error": "First Name is required"
+          },
+          "LastName": {
+            "Placeholder": "Last Name *",
+            "Error": "Last Name is required"
+          },
+          "Email": {
+            "Placeholder": "Email Address *",
+            "Error": "Please enter a valid Email Address"
+          },
+          "ConfirmEmail": {
+            "Placeholder": "Email Confirmation (Reenter Email) *",
+            "Error": "Please enter a valid Email Address"
+          }
+        },
+        "CancelButton": "Cancel",
+        "SubmitButton": "Join",
+        "Required": "* Required field",
+        "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
+        "LoadingError": "We're sorry, but an error has occurred."
+      },
       "SessionWillExpire": {
         "Title": "Your session will time-out soon",
         "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
         "SignOut": "Sign Out",
         "Continue": "Continue",
         "RenewalFailed": "Session renewal failed. Please log out and log back in again."
+      },
+      "StudyRedirect": {
+        "Title": "Your participation",
+        "Content": "<p>Count Me In has an open project specific to your cancer type.</p><p>Use the button below to join the {{study}} and learn more about this existing work.</p>",
+        "GoToProject": "Go to project",
+        "Cancel": "Cancel"
       }
+    },
+    "Warning": {
+      "Title": "Download Chrome or Safari to Continue",
+      "Text1": "This project is designed for use with the internet's safest and most popular browsers -- Chrome and Safari.",
+      "Text2": "It looks like you are using Internet Explorer. You will need to use another browser in order to join the project. We suggest you use Chrome or Safari to ensure that your experience with the website is smooth and secure.",
+      "Text3": {
+        "Pt1": "Click the following links to download",
+        "Pt2": "or",
+        "Pt3": "Chrome and Safari are always free.",
+        "Chrome": "Chrome (for Mac & PC)",
+        "Safari": "Safari (for Mac)"
+      },
+      "SubmitButton": "OK"
     }
   },
   "SDK": {
+    "FinishButton": "Finish",
     "SubmitButton": "Submit",
     "CloseButton": "Close",
-    "AddButton": "ADD",
-    "CancelButton": "CANCEL",
+    "AddButton": "Add",
+    "CancelButton": "Cancel",
     "NextButton": "Next",
-    "PreviousButton": "Back",
+    "PreviousButton": "Prev",
     "SavingButton": "Saving",
-    "EditButton": "Continue",
+    "EditButton": "Edit",
+    "SaveButton": "Save",
     "CompleteButton": "Edit",
     "ReviewButton": "View",
     "OpenButton": "Open",
@@ -54,26 +157,10 @@
     "ReportButton": "Report",
     "NotAgreeButton": "I'm not ready to agree",
     "ValidateError": "Please complete all required fields.",
-    "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
-    "SaveError": "We're sorry but an error occurred",
-    "ExportStudy": {
-      "Export": "EXPORT"
-    },
-    "ListStudies": {
-      "StudyName": "Study Name",
-      "ParticipantCount": "Participant Count"
-    },
-    "ListWorkspaces": {
-      "WorkspaceName": "Workspace Name",
-      "WorkspaceNamespace": "Workspace Namespace"
-    },
-    "Login": {
-      "Login": "LOG IN",
-      "Logout": "LOG OUT"
-    },
+    "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting.",
     "SignInOut": {
-      "SignIn": "Sign In",
-      "SignOut": "Sign Out"
+      "SignIn": "Log In",
+      "SignOut": "Log Out"
     },
     "LanguageSelector": {
       "LanguageSelection": "language selection"
@@ -83,25 +170,11 @@
       "Summary": "Summary",
       "ActivityStatus": "Status",
       "ActivityDate": "Created",
-      "ActivityActions": "Actions",
-      "ActivityQuestionCount": "{{questionsAnswered}} of {{questionTotal}} Answered",
-      "HiddenTooltip": "This activity is hidden."
-    },
-    "ManageParticipants": {
-      "GovernedParticipants": "Governed participants",
-      "ParticipantPlaceholder": "Participant",
-      "ParticipantsList": "Participants"
-    },
-    "ParticipantProfile": {
-      "OpenProfile": "Profile",
-      "ViewAs": "View As",
-      "ManageParticipants": "Manage participants"
+      "ActivityActions": "Actions"
     },
     "UserPreferences": {
-      "UserPreferencesTitle": "User preferences"
-    },
-    "Dashboard": {
-      "Title": "My Dashboard"
+      "UserPreferencesTitle": "User preferences",
+      "MailingAddress": "Mailing Address"
     },
     "DatePicker": {
       "Day": "Choose day...",
@@ -127,7 +200,8 @@
     },
     "UserMenu": {
       "DashboardButton": "Dashboard",
-      "SignOutButton": "Sign Out"
+      "SignOutButton": "Sign Out",
+      "PrismButton": "Prism"
     },
     "DetailsPlaceholder": {
       "PluralForm": "characters remaining",
@@ -142,17 +216,25 @@
     },
     "Institutions": {
       "Fields": {
-        "Name": "Physician Name",
+        "Name": "Physician Name (if applicable)",
         "Institution": "Institution",
-        "InstitutionAny": "Institution (if any)",
+        "InstitutionAny": "Hospital/Institution (if any)",
         "City": "City",
         "State": "State"
       },
       "Form": {
-        "OtherPhysician": "Other physician",
+        "OtherPhysician": "Other hospital/institution",
         "OtherInstitution": "Other institution"
       },
       "PhysicianValidation": "Please fill out all required fields"
+    },
+    "ModalActivityBlock": {
+      "SaveButton": "Save",
+      "NumQuestionsAnswered": "{{number}} questions answered",
+      "Complete": "Complete",
+      "EditButton": "Edit",
+      "DeleteButton": "Delete",
+      "CancelButton": "Cancel"
     },
     "MailAddress": {
       "Fields": {
@@ -244,16 +326,20 @@
       "UseAsEntered": "We are unable to confirm that the address is valid. Please check this box to use the address as entered."
     },
     "TooltipAlt": "Information",
+    "Validators": {
+      "DateNavyValidationRule": "Entered date is invalid",
+      "Autocomplete": "No {{control}} is found"
+    },
     "SubjectPanel": {
       "Link": "Return to subject look-up",
-      "Text": "Subject Invitation Code: "
+      "InvitationCode": "Subject Invitation Code:",
+      "Email": "Email:",
+      "Name": "Name:",
+      "ShortId": "Subject Short ID/HRUID:"
     },
     "AdminActionPanel": {
       "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
       "EditButton": "Edit"
-    },
-    "Validators": {
-      "DateNavyValidationRule": "Entered date is invalid"
     }
   }
 }

@@ -1,0 +1,42 @@
+.header {
+  height: 100px;
+
+  padding: 0 24px;
+
+  &__nav {
+    height: 100%;
+  }
+}
+
+.links-list {
+  display: flex;
+  align-items: center;
+
+  height: 100%;
+
+  list-style: none;
+
+  &__item {
+    &:not(:first-of-type) {
+      margin-left: 24px;
+    }
+  }
+}
+
+.link {
+  display: inline-block;
+
+  background: transparent;
+  border: none;
+
+  font: inherit;
+  line-height: 1;
+  text-decoration: none;
+  color: currentColor;
+
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
