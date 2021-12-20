@@ -115,7 +115,6 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
     public setupSavingData(): void {
         this.enteredValue$.pipe(
             filter(() => this.block.canPatch()),
-            filter(() => this.block.enabled),
             tap(value =>
                 this.submissionManager.patchAnswer(
                     this.studyGuid,
