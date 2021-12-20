@@ -22,7 +22,7 @@ import { ActivityValidationResult } from '../../../models/activity/activityValid
                 (valueChanged)="enteredValue$.next($event)"
                 (componentBusy)="componentBusy.next($event)">
             </ddp-activity-answer>
-            <ng-container *ngIf="block.shown">
+            <ng-container *ngIf="block.shown && block.enabled">
                 <div class="ddp-activity-validation" *ngIf="errorMessage$ | async as errorMsg">
                     <ddp-validation-message [message]="errorMsg" [translationParams]="errorMessageTranslationParams$ | async">
                     </ddp-validation-message>
@@ -115,6 +115,7 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
     public setupSavingData(): void {
         this.enteredValue$.pipe(
             filter(() => this.block.canPatch()),
+            filter(() => this.block.enabled),
             tap(value =>
                 this.submissionManager.patchAnswer(
                     this.studyGuid,
