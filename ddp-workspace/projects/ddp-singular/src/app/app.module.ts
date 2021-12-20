@@ -32,6 +32,8 @@ import { NotificationsDialogComponent } from './components/notifications-dialog/
 import { SessionExpiredDialogComponent } from './components/session-expired-dialog/session-expired-dialog.component';
 import { ParticipantDeletionDialogComponent } from './components/participant-deletion-dialog/participant-deletion-dialog.component';
 import { ForResearchesComponent } from './components/pages/for-researches/for-researches.component';
+import { SuccessMessageComponent } from './components/success-message/success-message.component';
+import { SuccessMessageDialogComponent } from './components/success-message-dialog/success-message-dialog.component';
 
 
 @NgModule({
@@ -58,6 +60,8 @@ import { ForResearchesComponent } from './components/pages/for-researches/for-re
     SessionExpiredDialogComponent,
     ParticipantDeletionDialogComponent,
     ForResearchesComponent,
+    SuccessMessageComponent,
+    SuccessMessageDialogComponent,
   ],
   imports: [
     DdpModule,
