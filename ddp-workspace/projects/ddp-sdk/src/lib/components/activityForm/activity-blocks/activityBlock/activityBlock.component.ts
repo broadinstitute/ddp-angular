@@ -11,7 +11,7 @@ import {
     ViewChildren
 } from '@angular/core';
 import { Subject, throwError } from 'rxjs';
-import { catchError, concatMap, takeUntil, tap, map } from 'rxjs/operators';
+import { catchError, concatMap, takeUntil, map } from 'rxjs/operators';
 
 import { ActivityActivityBlock } from '../../../../models/activity/activityActivityBlock';
 import { ActivityRenderHintType } from '../../../../models/activity/activityRenderHintType';
@@ -40,7 +40,7 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     @ViewChildren(ModalActivityBlockComponent) private modalActivities: QueryList<ModalActivityBlockComponent>;
     isModal: boolean;
     childInstances: ActivityInstance[];
-    private ngUnsubscribe = new Subject();
+    private ngUnsubscribe = new Subject<void>();
     private readonly LOG_SOURCE = 'ActivityBlockComponent';
 
     constructor(private activityServiceAgent: ActivityServiceAgent,

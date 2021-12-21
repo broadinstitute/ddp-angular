@@ -27,7 +27,7 @@ export class Auth0AdapterService implements OnDestroy {
      */
     public webAuth: any;
     public adminWebAuth: any | null;
-    private ngUnsubscribe = new Subject<any>();
+    private ngUnsubscribe = new Subject<void>();
     private isAdminSession = false;
     private readonly LOG_SOURCE = 'Auth0AdapterService';
 

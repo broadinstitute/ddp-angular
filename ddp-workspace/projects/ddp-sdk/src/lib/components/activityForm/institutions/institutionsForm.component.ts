@@ -121,9 +121,8 @@ export class InstitutionsFormComponent implements OnInit, OnDestroy {
         ).subscribe(() => this.requestsInProgress.next(-1));
 
         this.anchor.add(get);
-        this.subjectsAnchor
-            .add(sub)
-            .add(del);
+        this.subjectsAnchor.add(sub);
+        this.subjectsAnchor.add(del);
     }
 
     public ngOnDestroy(): void {

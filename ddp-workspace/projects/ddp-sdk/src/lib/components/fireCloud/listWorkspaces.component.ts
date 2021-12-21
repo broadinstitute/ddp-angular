@@ -59,9 +59,8 @@ export class FireCloudListWorkspacesComponent implements OnInit, OnDestroy {
             this.listWorkspacesMessage = listWorkspaceMessage);
         const nameSpace = this.serviceAgent.currentListWorkspaceNamespacesMessage.subscribe(listWorkspaceNamespacesMessage =>
             this.listWorkspaceNamespacesMessage = listWorkspaceNamespacesMessage);
-        this.anchor
-            .add(message)
-            .add(nameSpace);
+        this.anchor.add(message);
+        this.anchor.add(nameSpace);
     }
 
     public ngOnDestroy(): void {
