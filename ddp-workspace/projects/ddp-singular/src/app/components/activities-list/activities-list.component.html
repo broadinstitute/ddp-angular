@@ -56,20 +56,20 @@
 
           <ng-template #start>
             <button type="button" class="button button--primary button--sm" (click)="onStartClick(activity)">
-              {{ 'SDK.StartButton' | translate }}
+              {{ (isMedicalRecordFileUpload(activity) ? 'SDK.UploadButton' : 'SDK.StartButton') | translate }}
             </button>
           </ng-template>
 
           <ng-template #continue>
             <button type="button" class="button button--primary button--sm" (click)="onContinueClick(activity)">
-              {{ 'SDK.ContinueButton' | translate }}
+              {{ (isMedicalRecordFileUpload(activity) ? 'SDK.UploadButton' : 'SDK.ContinueButton') | translate }}
             </button>
           </ng-template>
         </ng-container>
 
         <ng-container *ngSwitchCase="ActivityStatusCodes.IN_PROGRESS">
           <button type="button" class="button button--primary button--sm" (click)="onContinueClick(activity)">
-            {{ 'SDK.ContinueButton' | translate }}
+            {{ (isMedicalRecordFileUpload(activity) ? 'SDK.UploadButton' : 'SDK.ContinueButton') | translate }}
           </button>
         </ng-container>
 
