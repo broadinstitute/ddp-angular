@@ -1,5 +1,5 @@
 import { UrlString } from './urlString';
-import { FormSectionState } from './sectionState';
+import { FormSectionState } from './formSectionState';
 
 export interface IconConfig {
   state: FormSectionState;
