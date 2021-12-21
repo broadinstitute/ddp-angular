@@ -40,7 +40,7 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
     // this could be overkill, but has nice property that actually trigger the onComplete
     // call on subscribe, so you can be sure it has been cleaned up.
     // | async subscriptions are cleaned up by Angular
-    private ngUnsubscribe = new Subject();
+    private ngUnsubscribe = new Subject<void>();
     private readonly LOG_SOURCE = 'ActivityPageComponent';
 
     constructor(

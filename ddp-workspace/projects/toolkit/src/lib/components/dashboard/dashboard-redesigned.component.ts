@@ -159,7 +159,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
     public dashboardParticipants$: Observable<DashboardParticipant[]>;
     public participantUserGuidToPanelIsOpen = new Map<string, boolean>();
     public addParticipantButtonDisabled = false;
-    private ngUnsubscribe = new Subject();
+    private ngUnsubscribe = new Subject<void>();
 
     constructor(
         private headerConfig: HeaderConfigurationService,
