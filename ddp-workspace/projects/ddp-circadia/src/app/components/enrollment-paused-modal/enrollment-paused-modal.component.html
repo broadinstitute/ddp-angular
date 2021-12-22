@@ -1,0 +1,79 @@
+<div class="enrollment-paused-modal">
+  <button mat-icon-button class="close-btn" (click)="onClose()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <div mat-dialog-content>
+    <p class="paragraph" [innerHTML]="'EnrollmentPaused.Paragraph' | translate"></p>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="name-container">
+      <mat-form-field>
+        <mat-label>{{ 'MailingListModal.Form.Fields.FirstName.Label' | translate }}</mat-label>
+
+        <input matInput type="text" formControlName="firstName" />
+
+        <mat-error *ngIf="hasError('firstName', 'required')">
+          {{ 'MailingListModal.Form.Errors.Required' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>{{ 'MailingListModal.Form.Fields.LastName.Label' | translate }}</mat-label>
+
+        <input matInput type="text" formControlName="lastName" />
+
+        <mat-error *ngIf="hasError('lastName', 'required')">
+          {{ 'MailingListModal.Form.Errors.Required' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <mat-label>{{ 'MailingListModal.Form.Fields.Email.Label' | translate }}</mat-label>
+
+        <input matInput type="email" formControlName="email" />
+
+        <mat-error *ngIf="hasError('email', 'required')">
+          {{ 'MailingListModal.Form.Errors.Required' | translate }}
+        </mat-error>
+
+        <mat-error *ngIf="hasError('email', 'email')">
+          {{ 'MailingListModal.Form.Errors.EmailNotValid' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <mat-label>{{ 'MailingListModal.Form.Fields.EmailConfirmation.Label' | translate }}</mat-label>
+
+        <input matInput type="email" formControlName="emailConfirmation" />
+
+        <mat-error *ngIf="hasError('emailConfirmation', 'required')">
+          {{ 'MailingListModal.Form.Errors.Required' | translate }}
+        </mat-error>
+
+        <mat-error *ngIf="hasError('emailConfirmation', 'email')">
+          {{ 'MailingListModal.Form.Errors.EmailNotValid' | translate }}
+        </mat-error>
+
+        <mat-error *ngIf="hasError('emailConfirmation', 'emailsDoNotMatch')">
+          {{ 'MailingListModal.Form.Errors.FieldsDoNotMatch' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="btn-container">
+      <button type="button" class="button button--sm button--opaque" [disabled]="loading" (click)="onClose()">
+        {{ 'MailingListModal.Form.Buttons.Cancel' | translate }}
+      </button>
+
+      <button type="submit" class="button button--sm button--yellow" [disabled]="loading">
+        {{ 'MailingListModal.Form.Buttons.Join' | translate }}
+      </button>
+    </div>
+  </form>
+</div>
