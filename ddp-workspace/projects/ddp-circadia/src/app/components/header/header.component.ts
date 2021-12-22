@@ -5,11 +5,18 @@ import { BehaviorSubject } from 'rxjs';
 import { CompositeDisposable, SessionMementoService } from 'ddp-sdk';
 
 import { Route } from '../../constants/route';
+import { AppAuth0AdapterService, SDKAuth0AdapterService } from '../../services/auth0Adapter.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  providers: [
+    {
+      provide: SDKAuth0AdapterService,
+      useClass: AppAuth0AdapterService,
+    }
+  ],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   Route = Route;

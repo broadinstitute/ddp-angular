@@ -283,6 +283,7 @@ var DDP_ENV = {
 {{if eq $study_guid "circadia"}}
     {{with secret (printf "secret/pepper/%s/%s/%s/conf" $environment $version $study) }}
         DDP_ENV['sleepLogConnectorUrl'] = "{{.Data.sleepLogConnectorUrl}}",
+        DDP_ENV['enrollmentPaused'] = {{.Data.enrollmentPaused}},
     {{end}}
 
     {{if eq $environment "local"}}
@@ -290,6 +291,7 @@ var DDP_ENV = {
         DDP_ENV['auth0Domain'] = "circadia-dev.us.auth0.com";
         DDP_ENV['auth0Audience'] = "circadia-dev.us.auth0.com";
         DDP_ENV['basePepperUrl'] = "http://localhost:5556";
+        DDP_ENV['enrollmentPaused'] = false,
     {{end}}
 
     {{with secret (printf "secret/pepper/%s/%s/circadia/conf" $environment $version)}}
