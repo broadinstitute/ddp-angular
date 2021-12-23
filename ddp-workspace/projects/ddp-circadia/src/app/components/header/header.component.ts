@@ -6,6 +6,9 @@ import { CompositeDisposable, SessionMementoService } from 'ddp-sdk';
 
 import { Route } from '../../constants/route';
 import { AppAuth0AdapterService, SDKAuth0AdapterService } from '../../services/auth0Adapter.service';
+import { EnrollmentPausedService } from '../../services/enrollment-paused.service';
+
+declare const DDP_ENV: Record<string, any>;
 
 @Component({
   selector: 'app-header',
@@ -21,12 +24,14 @@ import { AppAuth0AdapterService, SDKAuth0AdapterService } from '../../services/a
 export class HeaderComponent implements OnInit, OnDestroy {
   Route = Route;
   isSticky = false;
+  isEnrollmentPaused = DDP_ENV.enrollmentPaused;
   private isNavbarOpen$ = new BehaviorSubject<boolean>(false);
   private subs = new CompositeDisposable();
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private sessionService: SessionMementoService,
+    private enrollmentPausedService: EnrollmentPausedService,
   ) {}
 
   ngOnInit(): void {
@@ -69,6 +74,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
       this.setIsNavbarOpen(false);
     }
+  }
+
+  onSignUpClick(): void {
+    this.enrollmentPausedService.openDialog();
   }
 
   @HostListener('document:scroll')
