@@ -3,3 +3,9 @@
 <div *ngFor="let error of errors">
   {{error.message}}
 </div>
+<ng-container *ngIf="completions">
+  <div *ngFor="let completion of completions">
+    {{completion}}
+  </div>
+</ng-container>
+

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { Error, validate } from 'src/parser-utils/validator';
+import { Error, getCompletion, validate } from 'src/parser-utils/validator';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +10,7 @@ export class AppComponent {
   editorOptions = {theme: 'myCoolTheme', language: 'pex'};
   code: string = 'user.studies["A"].forms["B"].questions["COUNTRY"].answers.hasOption("US")';
   errors: Error[] = [];
+  completions?: string[];
 
   constructor(private cd: ChangeDetectorRef) {}
 
@@ -18,6 +19,12 @@ export class AppComponent {
       console.log(JSON.stringify(e, null, '\t'));
       console.log(this.code);
       this.errors = validate(this.code);
+      this.cd.detectChanges();
+    });
+
+    editor.onDidChangeCursorPosition((e: monaco.editor.ICursorPositionChangedEvent) => {
+      const caretPosition = { line: e.position.lineNumber, column: e.position.column - 1 };
+      this.completions = getCompletion(this.code, caretPosition);
       this.cd.detectChanges();
     });
   }
