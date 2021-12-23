@@ -1,7 +1,8 @@
+@use '@angular/material' as mat;
 @import '../../../app-theme.scss';
 
 .help-section {
-    background-color: mat-color($app-theme, 3200);
+    background-color: mat.get-color-from-palette($app-theme, 3200);
 }
 
 .help-block {
@@ -51,7 +52,7 @@
     font-size: 1.625rem;
     line-height: 2.0625rem;
     text-decoration: underline;
-    color: mat-color($app-theme, 1200);
+    color: mat.get-color-from-palette($app-theme, 1200);
     font-weight: 600;
 
     &__image {
@@ -66,7 +67,7 @@
     &__image {
         width: 100%;
         height: 100%;
-        border: 1px solid mat-color($app-theme, 1000);
+        border: 1px solid mat.get-color-from-palette($app-theme, 1000);
         max-width: 700px;
         box-sizing: border-box;
     }
@@ -114,9 +115,9 @@
         width: 6%;
         height: 8%;
         border-radius: 5px;
-        border: 2px solid mat-color($app-theme, 2000);
-        background-color: mat-color($app-theme, 3900);
-        color: mat-color($app-theme, 100);
+        border: 2px solid mat.get-color-from-palette($app-theme, 2000);
+        background-color: mat.get-color-from-palette($app-theme, 3900);
+        color: mat.get-color-from-palette($app-theme, 100);
         font-size: 1.2rem;
         display: flex;
         align-items: center;

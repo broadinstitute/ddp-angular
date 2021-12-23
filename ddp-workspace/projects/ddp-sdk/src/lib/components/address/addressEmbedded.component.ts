@@ -234,7 +234,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     public isEasyPostInvalid$ = new BehaviorSubject(false);
     public generateTaggedAddress = generateTaggedAddress;
 
-    private ngUnsubscribe = new Subject();
+    private ngUnsubscribe = new Subject<void>();
     private saveTrigger$ = new Subject<void>();
     private state$: Observable<ComponentState>;
     private stateUpdates$ = new Subject<Partial<ComponentState>>();

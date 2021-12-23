@@ -1,3 +1,4 @@
+@use '@angular/material' as mat;
 @import 'app-theme.scss';
 @import './styles/activity.scss';
 @import './styles/buttons.scss';
@@ -13,9 +14,9 @@
 @import './styles/variables.scss';
 @import './styles/family-history.scss';
 
-$custom-typography: mat-typography-config($font-family: 'Source Sans Pro');
+$custom-typography: mat.define-typography-config($font-family: 'Source Sans Pro');
 
-@include mat-core($custom-typography);
+@include mat.core($custom-typography);
 
 html,
 body {
@@ -23,7 +24,7 @@ body {
     padding: 0;
     height: 100vh;
     font-size: 16px;
-    color: mat-color($app-theme, 200);
+    color: mat.get-color-from-palette($app-theme, 200);
 }
 
 body {
@@ -46,7 +47,7 @@ body {
 a {
     cursor: pointer;
     text-decoration: none;
-    color: mat-color($app-theme, 200);
+    color: mat.get-color-from-palette($app-theme, 200);
 }
 
 a:focus {
@@ -186,7 +187,7 @@ h4 {
 }
 
 .black {
-    color: mat-color($app-theme, 200);
+    color: mat.get-color-from-palette($app-theme, 200);
 }
 
 .image {
@@ -196,11 +197,11 @@ h4 {
 }
 
 .secondary-text {
-    color: mat-color($app-theme, 700);
+    color: mat.get-color-from-palette($app-theme, 700);
 }
 
 .Link {
-    color: mat-color($app-theme, 250);
+    color: mat.get-color-from-palette($app-theme, 250);
     text-decoration: none;
     white-space: nowrap;
 }
@@ -210,7 +211,7 @@ h4 {
 }
 
 .Link:active {
-    color: mat-color($app-theme, 300);
+    color: mat.get-color-from-palette($app-theme, 300);
     text-decoration: underline;
 }
 
@@ -219,5 +220,5 @@ h4 {
 }
 
 .close:hover {
-    color: mat-color($app-theme, 650);
+    color: mat.get-color-from-palette($app-theme, 650);
 }

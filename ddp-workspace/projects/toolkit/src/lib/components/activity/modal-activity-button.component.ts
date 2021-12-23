@@ -43,7 +43,7 @@ export class ModalActivityButtonComponent implements OnInit, OnDestroy {
 
   public instanceGuid = new BehaviorSubject(null);
   public activityInstance$: Observable<ActivityInstanceGuid | null>;
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe = new Subject<void>();
   private anchor: Subscription = new Subscription();
   private readonly LOG_SOURCE = 'ModalActivityButtonComponent';
   @ViewChild('modal', { static: true }) private modalRef: TemplateRef<any>;

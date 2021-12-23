@@ -31,7 +31,7 @@ export class PrismComponent implements OnDestroy, AfterViewInit {
     public isSearchLoading = false;
     public isSearchDebounce = false;
     public MIN_SEARCH_LENGTH = 4;
-    private ngUnsubscribe = new Subject();
+    private ngUnsubscribe = new Subject<void>();
     public readonly enrollmentStatusTypeToLabel = enrollmentStatusTypeToLabel;
     public readonly initialPageIndex: number;
     public readonly initialPageSize: number;

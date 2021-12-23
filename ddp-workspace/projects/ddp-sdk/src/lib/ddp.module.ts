@@ -348,7 +348,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         NetworkSnifferComponent,
         NewRequestMockComponent,
         ValidationMessageComponent,
-
         LoginComponent,
         SignInOutComponent,
         UserProfileComponent,
@@ -359,7 +358,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ChangeLanguageRedirectComponent,
         PopupWithCheckboxComponent,
         PrismComponent,
-
         // activity form
         ActivityComponent,
         ActivityRedesignedComponent,
@@ -428,7 +426,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     exports: [
         NetworkSnifferComponent,
         NewRequestMockComponent,
-
         LoginComponent,
         SignInOutComponent,
         UserProfileComponent,
@@ -439,7 +436,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ChangeLanguageRedirectComponent,
         PopupWithCheckboxComponent,
         PrismComponent,
-
         ActivityComponent,
         ActivityRedesignedComponent,
         ActivitySectionComponent,
@@ -469,7 +465,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         AutocompleteActivityPicklistQuestion,
         InstitutionComponent,
         InstitutionsFormComponent,
-
         LoadingComponent,
         LoaderComponent,
         UserMenuComponent,
@@ -481,7 +476,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         FireCloudListWorkspacesComponent,
         ExportStudyComponent,
         DatePickerComponent,
-
         AddressInputComponent,
         AddressEmbeddedComponent,
         VerifyAgeUpComponent,
@@ -502,8 +496,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ProgressIndicatorComponent,
         ActivityBlockComponent,
         ConfirmDialogComponent
-    ],
-    entryComponents: [ConfirmDialogComponent]
+    ]
 })
 export class DdpModule {
 }

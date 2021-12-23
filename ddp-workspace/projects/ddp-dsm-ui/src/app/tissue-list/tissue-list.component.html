@@ -127,7 +127,7 @@
           My Views
           <table>
             <ng-container *ngFor="let savedFilter of this.savedFilters; let i=index">
-              <tr *ngIf="role.userID() == savedFilter.userId">
+              <tr *ngIf="role.userID() === savedFilter.userId">
                 <td>
           <span style="font-size: 15px; padding-right: 30px;">
             {{savedFilter.filterName}}
@@ -139,7 +139,7 @@
                     </mat-icon>
                   </button>
                   <button class="float-right"
-                          mat-icon-button [color]="savedFilter.shared == true ? 'accent' : 'black'"
+                          mat-icon-button [color]="savedFilter.shared ? 'accent' : 'black'"
                           (click)="shareFilter(savedFilter, i)">
                     <mat-icon>
                       <i class="fas fa-share-square"></i>
@@ -165,7 +165,7 @@
           Shared Views
           <table>
             <ng-container *ngFor="let savedFilter of this.savedFilters">
-              <tr *ngIf="role.userID() != savedFilter.userId">
+              <tr *ngIf="role.userID() !== savedFilter.userId">
                 <td>
             <span style="font-size: 15px; padding-right: 30px;">
             {{savedFilter.filterName}}
@@ -376,7 +376,7 @@
             </tr>
           </ng-container>
         </ng-container>
-        <ng-container *ngIf="selectedColumns['t'] == undefined || selectedColumns['t'].length == 0">
+        <ng-container *ngIf="selectedColumns['t'] == undefined || selectedColumns['t'].length === 0">
           <ng-container
             *ngFor="let value of tissueListOncHistories| paginate: { itemsPerPage: hasRole().getUserSetting().getRowsPerPage(), currentPage: activePage }; let i=index">
             <!--<ng-container *ngFor="let value of this.tissueListOncHistories; let i=index;">-->
@@ -457,7 +457,7 @@
             <b># of Tissues: {{tissueListWrappers.length}}</b>
           </td>
         </tr>
-        <tr *ngIf="selectedColumns['t'] == undefined || selectedColumns['t'].length == 0">
+        <tr *ngIf="selectedColumns['t'] == undefined || selectedColumns['t'].length === 0">
           <td [attr.colspan]="selectedColumns['data'].length+selectedColumns['oD'].length">
             <b># of Procedures: {{tissueListOncHistories.length}}</b>
           </td>

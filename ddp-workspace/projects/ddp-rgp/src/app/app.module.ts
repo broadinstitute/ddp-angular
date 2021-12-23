@@ -130,81 +130,78 @@ export function translateFactory(
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    HeaderComponent,
-    FooterComponent,
-    AboutUsComponent,
-    AboutUsDialogComponent,
-    FaqComponent,
-    PasswordComponent,
-    EligibilityCriteriaComponent,
-    HowItWorksComponent,
-    PrivacyAndYourDataComponent,
-    ForYourPhysicianComponent,
-    DataSharingComponent,
-    LGMDComponent,
-    CraniofacialComponent,
-    StayInformedComponent,
-    ErrorComponent,
-    TellUsYourStoryComponent,
-    Auth0LandingComponent,
-    Auth0RedirectComponent,
-    RedirectToAuth0LandingComponent,
-    SessionExpiredComponent,
-    UserDashboardComponent,
-    EmailVerifiedCallbackComponent,
-    WorkflowStartActivityComponent,
-    ThankYouComponent,
-    Auth0CodeCallbackComponent,
-    EmailVerificationRequiredComponent,
-    ActivityComponent,
-    SurveyComponent,
-    UserActivitiesComponent,
-    StudyMessagesComponent,
-  ],
-  entryComponents: [
-    AboutUsDialogComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    DdpModule,
-    ToolkitModule,
-    MatIconModule,
-    MatDialogModule,
-    CollapseModule.forRoot(),
-    BsDropdownModule.forRoot(),
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatProgressSpinnerModule,
-    MatTableModule,
-  ],
-  providers: [
-    {
-      provide: 'ddp.config',
-      useValue: config
-    },
-    {
-      provide: 'toolkit.toolkitConfig',
-      useValue: toolkitConfig
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: translateFactory,
-      deps: [
-        TranslateService,
-        Injector,
-        LanguageService,
-      ],
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        HeaderComponent,
+        FooterComponent,
+        AboutUsComponent,
+        AboutUsDialogComponent,
+        FaqComponent,
+        PasswordComponent,
+        EligibilityCriteriaComponent,
+        HowItWorksComponent,
+        PrivacyAndYourDataComponent,
+        ForYourPhysicianComponent,
+        DataSharingComponent,
+        LGMDComponent,
+        CraniofacialComponent,
+        StayInformedComponent,
+        ErrorComponent,
+        TellUsYourStoryComponent,
+        Auth0LandingComponent,
+        Auth0RedirectComponent,
+        RedirectToAuth0LandingComponent,
+        SessionExpiredComponent,
+        UserDashboardComponent,
+        EmailVerifiedCallbackComponent,
+        WorkflowStartActivityComponent,
+        ThankYouComponent,
+        Auth0CodeCallbackComponent,
+        EmailVerificationRequiredComponent,
+        ActivityComponent,
+        SurveyComponent,
+        UserActivitiesComponent,
+        StudyMessagesComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        DdpModule,
+        ToolkitModule,
+        MatIconModule,
+        MatDialogModule,
+        CollapseModule.forRoot(),
+        BsDropdownModule.forRoot(),
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatProgressSpinnerModule,
+        MatTableModule,
+    ],
+    providers: [
+        {
+            provide: 'ddp.config',
+            useValue: config
+        },
+        {
+            provide: 'toolkit.toolkitConfig',
+            useValue: toolkitConfig
+        },
+        {
+            provide: APP_INITIALIZER,
+            useFactory: translateFactory,
+            deps: [
+                TranslateService,
+                Injector,
+                LanguageService,
+            ],
+            multi: true
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(private analytics: AnalyticsEventsService) {

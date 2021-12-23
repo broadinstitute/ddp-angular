@@ -41,17 +41,17 @@ import { CommunicationService, HeaderComponent, ToolkitConfigurationService } fr
               </span>
             </li>
             <li *ngIf="isLoggedIn()" class="Nav-item">
-                        <span (click)="clickDashboard()" id="Dashboard" class="Nav-itemLink" [ngClass]="{'Nav-itemLink--active': currentRoute == '/dashboard'}" translate>
+                        <span (click)="clickDashboard()" id="Dashboard" class="Nav-itemLink" [ngClass]="{'Nav-itemLink--active': currentRoute === '/dashboard'}" translate>
                             Toolkit.Common.Dashboard
                         </span>
             </li>
             <li class="Nav-item">
-                        <span (click)="clickLearnMore()" id="Learn More" class="Nav-itemLink" [ngClass]="{'Nav-itemLink--active': currentRoute == '/learn-more'}" translate>
+                        <span (click)="clickLearnMore()" id="Learn More" class="Nav-itemLink" [ngClass]="{'Nav-itemLink--active': currentRoute === '/learn-more'}" translate>
                             Toolkit.Common.LearnMore
                         </span>
             </li>
             <li class="Nav-item">
-                        <span (click)="clickStudyListing()" id="Study Listing" class="Nav-itemLink" [ngClass]="{'Nav-itemLink--active': currentRoute == '/study-listing'}" translate>
+                        <span (click)="clickStudyListing()" id="Study Listing" class="Nav-itemLink" [ngClass]="{'Nav-itemLink--active': currentRoute === '/study-listing'}" translate>
                             Toolkit.Common.StudyListing
                         </span>
             </li>

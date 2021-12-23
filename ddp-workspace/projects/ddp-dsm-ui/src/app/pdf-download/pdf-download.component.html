@@ -31,7 +31,7 @@
                 [disabled]="participantId == null || loading">Get List of PDFs for Participant
         </button>
 
-        <div *ngIf="participantPDFs != null && participantPDFs.length != 0">
+        <div *ngIf="participantPDFs != null && participantPDFs.length !== 0">
           <mat-select placeholder="Select PDF" class="Input--Abstraction" [(ngModel)]="selectedPDF">
             <mat-option *ngFor="let e of participantPDFs" [value]="e.configName">
               {{e.displayName}}

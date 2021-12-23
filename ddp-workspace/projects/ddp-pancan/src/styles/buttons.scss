@@ -1,3 +1,4 @@
+@use '@angular/material' as mat;
 @import '../theme.scss';
 @import 'variables';
 
@@ -40,14 +41,14 @@
 
 .button_primary,
 .mat-flat-button.mat-primary {
-    background-color: mat-color($app-primary, 500);
-    border: 2px solid mat-color($app-primary, 500);
+    background-color: mat.get-color-from-palette($app-primary, 500);
+    border: 2px solid mat.get-color-from-palette($app-primary, 500);
     color: white;
 
     &:hover:not([disabled]),
     &:hover:enabled {
-        background-color: darken(mat-color($app-primary, 500), 35%);
-        border-color: darken(mat-color($app-primary, 500), 35%);
+        background-color: darken(mat.get-color-from-palette($app-primary, 500), 35%);
+        border-color: darken(mat.get-color-from-palette($app-primary, 500), 35%);
     }
 }
 
