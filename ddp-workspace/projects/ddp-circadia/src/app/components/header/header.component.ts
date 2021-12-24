@@ -8,8 +8,6 @@ import { Route } from '../../constants/route';
 import { AppAuth0AdapterService, SDKAuth0AdapterService } from '../../services/auth0Adapter.service';
 import { EnrollmentPausedService } from '../../services/enrollment-paused.service';
 
-declare const DDP_ENV: Record<string, any>;
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -24,7 +22,7 @@ declare const DDP_ENV: Record<string, any>;
 export class HeaderComponent implements OnInit, OnDestroy {
   Route = Route;
   isSticky = false;
-  isEnrollmentPaused = DDP_ENV.enrollmentPaused;
+  isEnrollmentPaused = this.enrollmentPausedService.isEnrollmentPaused;
   private isNavbarOpen$ = new BehaviorSubject<boolean>(false);
   private subs = new CompositeDisposable();
 

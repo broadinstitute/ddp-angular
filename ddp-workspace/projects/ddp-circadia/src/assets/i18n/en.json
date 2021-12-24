@@ -190,16 +190,16 @@
         "Form": {
             "Fields": {
                 "FirstName": {
-                    "Label": "First name *"
+                    "Label": "First name"
                 },
                 "LastName": {
-                    "Label": "Last name *"
+                    "Label": "Last name"
                 },
                 "Email": {
-                    "Label": "Email address *"
+                    "Label": "Email address"
                 },
                 "EmailConfirmation": {
-                    "Label": "Email confirmation *"
+                    "Label": "Email confirmation"
                 }
             },
             "Buttons": {

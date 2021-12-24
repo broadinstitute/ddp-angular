@@ -9,21 +9,31 @@
     </p>
 
     <div class="cta__btn-container">
-      <a
-        *ngIf="!isAuthenticated"
-        class="button button--yellow"
-        [routerLink]="Route.JoinUs"
-      >
-        {{ 'HomePage.Cta.JoinBtn' | translate }}
-      </a>
+      <ng-container [ngTemplateOutlet]="isEnrollmentPaused ? enrollmentPausedButton : regularButtons"></ng-container>
 
-      <a
-        *ngIf="isAuthenticated"
-        class="button button--yellow"
-        [routerLink]="Route.Dashboard"
-      >
-        {{ 'HomePage.Cta.DashboardBtn' | translate }}
-      </a>
+      <ng-template #regularButtons>
+        <a
+          *ngIf="!isAuthenticated"
+          class="button button--yellow"
+          [routerLink]="Route.JoinUs"
+        >
+          {{ 'HomePage.Cta.JoinBtn' | translate }}
+        </a>
+
+        <a
+          *ngIf="isAuthenticated"
+          class="button button--yellow"
+          [routerLink]="Route.Dashboard"
+        >
+          {{ 'HomePage.Cta.DashboardBtn' | translate }}
+        </a>
+      </ng-template>
+
+      <ng-template #enrollmentPausedButton>
+        <button type="button" class="button button--yellow" (click)="onJoinClick()">
+          {{ 'HomePage.Cta.JoinBtn' | translate }}
+        </button>
+      </ng-template>
     </div>
   </div>
 </section>
