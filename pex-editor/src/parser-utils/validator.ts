@@ -5,6 +5,7 @@ import { Token } from 'antlr4ts/Token';
 import { CodeCompletionCore } from 'antlr4-c3';
 import { ParseTree } from 'antlr4ts/tree';
 import { TerminalNode } from 'antlr4ts/tree/TerminalNode';
+import { EditorLexer } from './editorLexer';
 
 export class Error {
   startLine: number;
@@ -95,9 +96,8 @@ export function getCompletion(input: string, caretPosition?: CaretPosition): str
   if (!token) {
     return [];
   }
-  const tokenDisplayName = parser.vocabulary.getDisplayName(token.type);
-  const endOfTheLine = caretPosition.column > (tree.stop?.charPositionInLine || 0) && (["'.'", "']'"].includes(tokenDisplayName)) ? token.tokenIndex + 1 : token.tokenIndex;
-  const collections = core.collectCandidates(endOfTheLine);
+  const index = token.type === EditorLexer.UNRECOGNIZED ? token.tokenIndex : token.tokenIndex + 1;
+  const collections = core.collectCandidates(index);
 
   let keywords: string[] = [];
   if (collections) {
