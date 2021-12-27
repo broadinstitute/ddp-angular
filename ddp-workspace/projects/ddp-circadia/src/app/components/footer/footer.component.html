@@ -74,9 +74,17 @@
 
         <ul class="links__list">
           <li *ngIf="!isAuthenticated" class="links__list-item">
-            <a class="links__link" [routerLink]="Route.JoinUs">{{
-              'Footer.Participation.SignUp' | translate
-            }}</a>
+            <ng-container [ngTemplateOutlet]="isEnrollmentPaused ? modal : signUp"></ng-container>
+
+            <ng-template #signUp>
+              <a class="links__link" [routerLink]="Route.JoinUs">{{ 'Footer.Participation.SignUp' | translate }}</a>
+            </ng-template>
+
+            <ng-template #modal>
+              <button type="button" class="links__link" (click)="onSignUpClick()">
+                {{ 'Footer.Participation.SignUp' | translate }}
+              </button>
+            </ng-template>
           </li>
 
           <li class="links__list-item">
