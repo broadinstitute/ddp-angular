@@ -53,6 +53,16 @@
   }
 
   &__link {
+    display: inline-block;
+
+    background: transparent;
+    border: none;
+    border-radius: 0;
+
+    font: inherit;
+
+    cursor: pointer;
+
     &,
     &:visited {
       color: #ffffff;
