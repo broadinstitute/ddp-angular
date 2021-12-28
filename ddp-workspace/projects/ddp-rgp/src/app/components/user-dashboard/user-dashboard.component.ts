@@ -10,7 +10,6 @@ import {
 } from 'ddp-sdk';
 
 import { StudyPerson } from '../../models/StudyPerson';
-import { StudyMessage } from '../../models/StudyMessage';
 import { StudyMessagesService } from '../../services/study-messages.service';
 import { filter, take } from 'rxjs/operators';
 import { Routes } from '../../routes';

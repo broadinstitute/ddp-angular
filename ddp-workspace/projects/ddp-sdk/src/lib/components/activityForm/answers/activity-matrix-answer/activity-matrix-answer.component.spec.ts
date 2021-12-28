@@ -543,7 +543,6 @@ describe('ActivityMatrixAnswer', () => {
     newBlock.options = mockOptions;
 
     const [q1, q2] = mockQuestions;
-    const [g1, g2] = mockGroups;
     const [o1, o2] = mockOptions;
 
     newBlock.setAnswer([
@@ -586,7 +585,6 @@ describe('ActivityMatrixAnswer', () => {
     newBlock.options = mockExclusiveOptions;
 
     const [q1, q2] = mockQuestions;
-    const [g1, g2] = mockGroups;
     const [o1, o2, o3, o4] = mockExclusiveOptions;
 
     newBlock.setAnswer([

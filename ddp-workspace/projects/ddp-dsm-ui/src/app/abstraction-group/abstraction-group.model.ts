@@ -53,7 +53,7 @@ export class AbstractionGroup {
 
 }
 
-// tslint:disable-next-line:max-classes-per-file
+// eslint-disable-next-line max-classes-per-file
 export class AbstractionWrapper {
   constructor(
     public abstraction: AbstractionGroup[],

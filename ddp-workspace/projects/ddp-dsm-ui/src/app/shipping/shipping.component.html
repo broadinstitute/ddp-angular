@@ -173,12 +173,12 @@
         <tbody>
         <tr *ngFor="let kitRequest of mf.data; let i = index">
           <td *ngIf="getRole().allowedToHandleSamples() && (queueToPrint() || shippingPage === UPLOADED) && !kitType.externalShipper">
-            <ng-container *ngIf="(shippingPage === UPLOADED && kitRequest.labelTriggeredDate == 0) || queueToPrint()">
+            <ng-container *ngIf="(shippingPage === UPLOADED && kitRequest.labelTriggeredDate === 0) || queueToPrint()">
               <mat-checkbox color="primary" disableRipple
                            [checked]="kitRequest.isSelected" (click)="shiftClick(i, $event)"
                            (change)="kitRequest.isSelected = $event.checked; checkboxChecked()"></mat-checkbox>
             </ng-container>
-            <ng-container *ngIf="(shippingPage === UPLOADED && kitRequest.labelTriggeredDate != 0)">
+            <ng-container *ngIf="(shippingPage === UPLOADED && kitRequest.labelTriggeredDate !== 0)">
               <i class="fas fa-spin fa-cog fa-lg Color--primary"></i>
             </ng-container>
           </td>

@@ -19,7 +19,7 @@
     <ng-template #content>
         <div *ngIf="isConditional(block)">
             <ddp-conditional-block [block]="block"
-                                   [readonly]="readonly"
+                                   [readonly]="readonly || !block.enabled"
                                    [validationRequested]="validationRequested"
                                    [studyGuid]="studyGuid"
                                    [activityGuid]="activityGuid">
@@ -27,7 +27,7 @@
         </div>
         <div *ngIf="isQuestion(block)">
             <ddp-activity-question [block]="block"
-                                   [readonly]="readonly"
+                                   [readonly]="readonly || !block.enabled"
                                    [validationRequested]="validationRequested"
                                    [studyGuid]="studyGuid"
                                    [activityGuid]="activityGuid"
@@ -37,7 +37,7 @@
         <div *ngIf="isInstitution(block)">
             <ddp-institutions-form [block]="block"
                                    [studyGuid]="studyGuid"
-                                   [readonly]="readonly"
+                                   [readonly]="readonly || !block.enabled"
                                    [validationRequested]="validationRequested"
                                    (validStatusChanged)="updateValidationStatusInSection(idPrefix.block + block.id, $event)"
                                    (componentBusy)="componentBusy.emit($event)">
@@ -46,7 +46,7 @@
         <div *ngIf="isMailAddress(block)">
             <ddp-address-embedded [block]="block"
                                   [country]="config.supportedCountry"
-                                  [readonly]="readonly"
+                                  [readonly]="readonly || !block.enabled"
                                   [activityGuid]="activityGuid"
                                   (validStatusChanged)="updateValidationStatusInSection(idPrefix.block + block.id, $event)"
                                   [validationRequested]="validationRequested"
@@ -60,7 +60,7 @@
     </div>
     <div *ngIf="isGroup(block)">
         <ddp-group-block [block]="block"
-                         [readonly]="readonly"
+                         [readonly]="readonly || !block.enabled"
                          [validationRequested]="validationRequested"
                          [studyGuid]="studyGuid"
                          [activityGuid]="activityGuid">
@@ -68,12 +68,14 @@
     </div>
     <div *ngIf="isActivityBlock(block)">
         <ddp-activity-block [block]="block"
+                            [enabled]="block.enabled"
                             [readonly]="readonly"
                             [validationRequested]="validationRequested"
                             [studyGuid]="studyGuid"
                             [parentActivityInstanceGuid]="activityGuid"
                             (validStatusChanged)="updateValidationStatusInSection(idPrefix.instance + $event.id, $event.value)"
-                            (embeddedComponentBusy)="componentBusy.emit($event)">
+                            (embeddedComponentBusy)="componentBusy.emit($event)"
+                            (blockVisibilityChanged)="onBlockVisibilityChanged($event)">
         </ddp-activity-block>
     </div>
 </div>

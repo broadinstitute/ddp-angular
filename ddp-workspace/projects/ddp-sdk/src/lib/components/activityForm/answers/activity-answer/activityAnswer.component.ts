@@ -66,6 +66,13 @@ import { BlockType } from '../../../../models/activity/blockType';
                                         [readonly]="readonly"
                                         (valueChanged)="onChange($event)">
             </ddp-activity-matrix-answer>
+            <ddp-activity-instance-select-answer *ngIf="isActivityInstanceSelectQuestion(block)"
+                                                 [class]="'activity-instance-select-answer-' + block.stableId"
+                                                 [block]="block"
+                                                 [readonly]="readonly"
+                                                 (valueChanged)="onChange($event)"
+                                                 (componentBusy)="componentBusy.next($event)"
+            ></ddp-activity-instance-select-answer>
             <span *ngIf="block.additionalInfoFooter"
                   [innerHTML]="block.additionalInfoFooter"
                   class="ddp-activity-answer__info-footer">
@@ -121,6 +128,10 @@ export class ActivityAnswerComponent {
 
     public isMatrixQuestion(block: AbstractActivityQuestionBlock): boolean {
         return this.isQuestion(block) && block.questionType === QuestionType.Matrix;
+    }
+
+    public isActivityInstanceSelectQuestion(block: AbstractActivityQuestionBlock): boolean {
+        return this.isQuestion(block) && block.questionType === QuestionType.ActivityInstanceSelect;
     }
 
     private isQuestion(block: AbstractActivityQuestionBlock): boolean {

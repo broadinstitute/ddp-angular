@@ -1,6 +1,6 @@
 // import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { DrugListComponent } from './drug-list.component';
+// import { DrugListComponent } from './drug-list.component';
 
 describe('DrugListComponent', () => {
   // let component: DrugListComponent;

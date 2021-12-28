@@ -1,6 +1,6 @@
 // import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { SurveyComponent } from './survey.component';
+// import { SurveyComponent } from './survey.component';
 
 describe('SurveyComponent', () => {
   // let component: SurveyComponent;

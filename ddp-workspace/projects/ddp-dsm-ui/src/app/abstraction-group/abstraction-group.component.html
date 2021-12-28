@@ -142,7 +142,7 @@
                         <i class="fas fa-plus fa-lg"></i>
                       </button>
                     </div>
-                    <button *ngIf="i == (field.possibleValues.length-1)"
+                    <button *ngIf="i === (field.possibleValues.length-1)"
                             mat-mini-fab color="primary" tooltip="Add Sub Field"
                             (click)="addMultiType(field)" [disabled]="value.type == null || value.value == null">
                       <i class="fas fa-plus fa-lg"></i>

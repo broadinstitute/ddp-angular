@@ -59,7 +59,7 @@ export class ActivityPrintComponent implements OnInit, OnDestroy {
   activityForm: ActivityForm;
   blocks: Block[] = [];
   blockTypes = BlockTypes;
-  fetchActivityForm$ = new Subject();
+  fetchActivityForm$ = new Subject<void>();
 
   private anchor = new CompositeDisposable();
   private logSource = 'ActivityPrintComponent';

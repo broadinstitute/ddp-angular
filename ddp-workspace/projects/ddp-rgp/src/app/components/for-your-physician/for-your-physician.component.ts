@@ -14,7 +14,7 @@ export class ForYourPhysicianComponent implements OnInit, OnDestroy {
   public phone: string;
   public phoneHref: string;
   public currentLang: string;
-  private ngUnsub = new Subject();
+  private ngUnsub = new Subject<void>();
 
   constructor(
     private translateService: TranslateService,

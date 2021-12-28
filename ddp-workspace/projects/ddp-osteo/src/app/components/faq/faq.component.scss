@@ -1,7 +1,8 @@
+@use '@angular/material' as mat;
 @import "../../../app-theme.scss";
 
 .faq-section {
-    background-color: mat-color($app-theme, 350);
+    background-color: mat.get-color-from-palette($app-theme, 350);
 }
 
 .intro-faq-block__content {
@@ -28,18 +29,18 @@
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 1.25rem;
     line-height: 2.25rem;
-    color: mat-color($app-theme, 700);
+    color: mat.get-color-from-palette($app-theme, 700);
 }
 
 // accordion
 .mat-expansion-panel {
     border-radius: unset !important;
     box-shadow: unset !important;
-    border-top: 1px solid mat-color($app-theme, 650);
+    border-top: 1px solid mat.get-color-from-palette($app-theme, 650);
 }
 
 .mat-expansion-panel:last-child {
-    border-bottom: 1px solid mat-color($app-theme, 650);
+    border-bottom: 1px solid mat.get-color-from-palette($app-theme, 650);
 }
 
 .mat-expansion-panel-header {

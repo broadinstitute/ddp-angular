@@ -53,5 +53,5 @@ export const prepareUiElements = (url: string): void => {
   });
 };
 
-export const showTooltip = (x) => x.parentElement.getElementsByClassName("tooltip")[0].classList.add("in");
-export const hideTooltip = (x) => x.parentElement.getElementsByClassName("tooltip")[0].classList.remove("in");
+export const showTooltip = (x) => x.parentElement.getElementsByClassName('tooltip')[0].classList.add('in');
+export const hideTooltip = (x) => x.parentElement.getElementsByClassName('tooltip')[0].classList.remove('in');

@@ -1,4 +1,4 @@
-import { PermalinkComponent } from './permalink.component';
+// import { PermalinkComponent } from './permalink.component';
 
 describe('Component: Permalink', () => {
   // it('should create an instance', () => {

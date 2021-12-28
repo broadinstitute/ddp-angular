@@ -191,8 +191,7 @@ export class ParticipantListComponent implements OnInit {
     this.originalParticipantList = [];
     this.copyParticipantList = [];
     if (data != null) {
-      let jsonData: {};
-      jsonData = data;
+      const jsonData = data;
       jsonData['participants'].forEach((val) => {
         const participant = Participant.parse(val);
         this.participantList.push(participant);
@@ -506,7 +505,7 @@ export class ParticipantListComponent implements OnInit {
           jsonData.kitTypes.forEach((val) => {
             const kitType = KitType.parse(val);
             if (kitType.uploadReasons != null) {
-              // tslint:disable-next-line:no-shadowed-variable
+              // eslint-disable-next-line @typescript-eslint/no-shadow
               kitType.uploadReasons.forEach((val) => {
                 const found = optionsUpload.find(option => {
                   return option.value === val;
@@ -645,7 +644,7 @@ export class ParticipantListComponent implements OnInit {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
-        // tslint:disable-next-line:no-string-throw
+        // eslint-disable-next-line no-throw-literal
         throw 'Error - Loading display settings' + err;
       }
     );
@@ -749,8 +748,7 @@ export class ParticipantListComponent implements OnInit {
               this.participantList = [];
               this.originalParticipantList = [];
               this.copyParticipantList = [];
-              let jsonData: {};
-              jsonData = data;
+              const jsonData = data;
               jsonData['participants'].forEach((val) => {
                 const participant = Participant.parse(val);
                 this.participantList.push(participant);
@@ -848,8 +846,7 @@ export class ParticipantListComponent implements OnInit {
             this.additionalMessage = '';
             this.originalParticipantList = [];
             this.copyParticipantList = [];
-            let jsonData: {};
-            jsonData = data;
+            const jsonData = data;
             jsonData['participants'].forEach((val) => {
               const participant = Participant.parse(val);
               this.participantList.push(participant);
@@ -1033,7 +1030,7 @@ export class ParticipantListComponent implements OnInit {
 
   public parseMillisToDateString(dateInMillis: number): string {
     const date = new Date(dateInMillis);
-    const options = {
+    const options: Intl.DateTimeFormatOptions = {
       year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'UTC'
     };
     return date.toLocaleString('en-US', options);
@@ -1216,13 +1213,12 @@ export class ParticipantListComponent implements OnInit {
         .subscribe(
           data => {
             if (data != null && data !== '') {
-              let jsonData: {};
               this.participantList = [];
               this.additionalMessage = '';
               this.originalParticipantList = [];
               this.copyParticipantList = [];
               this.filterQuery = '';
-              jsonData = data;
+              const jsonData = data;
               jsonData['participants'].forEach((val) => {
                 const participant = Participant.parse(val);
                 this.participantList.push(participant);
@@ -1519,6 +1515,7 @@ export class ParticipantListComponent implements OnInit {
         }
       });
     } else if (this.sortParent === 't') {
+      //TODO: do we need the empty block statement ?
     } else if (this.sortParent === 'k') {
       this.participantList.map(participant =>
         participant.kits.sort((n, m) => this.sort(n[ this.sortField ], m[ this.sortField ], order, undefined, colType))
@@ -1702,8 +1699,6 @@ export class ParticipantListComponent implements OnInit {
         paths.push(['proxyData', source]);
       } else if (source.includes('GROUP')) {
         paths.push(['participantData', source]);
-      } else if (source === 'proxy') {
-        paths.push(['proxyData', source]);
       } else {
         paths.push([source, source]);
       }
@@ -1840,8 +1835,7 @@ export class ParticipantListComponent implements OnInit {
         this.originalParticipantList = [];
         this.copyParticipantList = [];
         if (data != null) {
-          let jsonData: {};
-          jsonData = data;
+          const jsonData = data;
           jsonData['participants'].forEach((val) => {
             const participant = Participant.parse(val);
             this.participantList.push(participant);

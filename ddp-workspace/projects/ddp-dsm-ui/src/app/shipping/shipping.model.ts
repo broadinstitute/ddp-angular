@@ -126,7 +126,7 @@ export class KitRequest {
   }
 }
 
-// tslint:disable-next-line:max-classes-per-file
+// eslint-disable-next-line max-classes-per-file
 export class TriggerLabel {
   constructor(public dsmKitRequestId: string, public dsmKitId: string) {
     this.dsmKitRequestId = dsmKitRequestId;

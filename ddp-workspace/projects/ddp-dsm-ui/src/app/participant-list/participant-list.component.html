@@ -132,7 +132,7 @@
       </span>
           <table>
             <ng-container *ngFor="let savedFilter of savedFilters; let i=index">
-              <tr *ngIf="hasRole().userID() == savedFilter.userId">
+              <tr *ngIf="hasRole().userID() === savedFilter.userId">
                 <td>
                   {{savedFilter.filterName}}
                 </td>
@@ -170,7 +170,7 @@
       </span>
           <table>
             <ng-container *ngFor="let savedFilter of savedFilters">
-              <tr *ngIf="hasRole().userID() != savedFilter.userId">
+              <tr *ngIf="hasRole().userID() !== savedFilter.userId">
                 <td>
                   {{savedFilter.filterName}}
                 </td>
@@ -500,7 +500,7 @@ questionAnswer.dateFields.month != null && questionAnswer.dateFields.month !== '
                       {{getUtil().getYesNo(pt.participant[col.participantColumn.name])}}
                     </ng-container>
                     <ng-container *ngIf="pt.participant[col.participantColumn.name] != null && col.type === 'DATE'
-                        && pt.participant[col.participantColumn.name] != 0">
+                        && pt.participant[col.participantColumn.name] !== 0">
                       {{pt.participant[col.participantColumn.name] | date:'shortDate'}}
                     </ng-container>
                   </div>
@@ -628,7 +628,7 @@ questionAnswer.dateFields.month != null && questionAnswer.dateFields.month !== '
                               *ngIf="col.type === 'BOOLEAN' || col.type === 'CHECKBOX'">{{getUtil().getYesNo(sample[col.participantColumn.name])}}
                             </ng-container>
                             <ng-container
-                              *ngIf="col.type === 'DATE' && sample[col.participantColumn.name] != 0">{{sample[col.participantColumn.name] |
+                              *ngIf="col.type === 'DATE' && sample[col.participantColumn.name] !== 0">{{sample[col.participantColumn.name] |
                               date:'medium'}}
                             </ng-container>
                             <ng-container
@@ -642,7 +642,7 @@ questionAnswer.dateFields.month != null && questionAnswer.dateFields.month !== '
                                     *ngIf="col.type === 'OPTIONS'">{{getOptionDisplay(col.options, r[col.participantColumn.name])}}
                                   </ng-container>
                                   <ng-container
-                                    *ngIf="col.type === 'DATE' && r[col.participantColumn.name] != 0">{{r[col.participantColumn.name] |
+                                    *ngIf="col.type === 'DATE' && r[col.participantColumn.name] !== 0">{{r[col.participantColumn.name] |
                                     date:'medium'}}
                                   </ng-container>
                                   <ng-container
@@ -720,7 +720,7 @@ questionAnswer.dateFields.month != null && questionAnswer.dateFields.month !== '
                               <ng-container *ngIf="getPersonType(personData)">
                                 {{getPersonType(personData)}}:
                               </ng-container>{{getPersonField(personData, col, pt)}}
-                            <hr *ngIf="i != pt.participantData.length - 1" style="border-color: lightgray">
+                            <hr *ngIf="i !== pt.participantData.length - 1" style="border-color: lightgray">
                           </div>
                         </ng-container>
                       </li>

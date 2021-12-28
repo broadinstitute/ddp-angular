@@ -165,8 +165,8 @@
                 <span *ngIf="surveyStatus.surveyInfo.triggerId >= 0">{{surveyStatus.reason}}</span>
               </td>
               <td>{{surveyStatus.user}}</td>
-              <td *ngIf="surveyStatus.triggeredDate != 0">{{surveyStatus.triggeredDate | date:'medium'}}</td>
-              <td *ngIf="surveyStatus.triggeredDate == 0"></td>
+              <td *ngIf="surveyStatus.triggeredDate !== 0">{{surveyStatus.triggeredDate | date:'medium'}}</td>
+              <td *ngIf="surveyStatus.triggeredDate === 0"></td>
             </tr>
             <tbody>
             <tfoot>

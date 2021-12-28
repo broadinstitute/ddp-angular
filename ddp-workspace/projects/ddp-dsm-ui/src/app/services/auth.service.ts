@@ -88,7 +88,7 @@ export class Auth {
       };
       this.doLogin(payload);
     });
-    this.lock.on('authorization_error', (authResult) => {
+    this.lock.on('authorization_error', () => {
       // console.log("user is not allowed to login ");
       this.eventsSource.next('authorization_error');
     });

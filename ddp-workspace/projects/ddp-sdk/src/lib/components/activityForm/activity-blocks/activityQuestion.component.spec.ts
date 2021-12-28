@@ -2,7 +2,7 @@ import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angul
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import {
     WindowRef,
-    ValidationMessage,
+    ValidationMessageComponent,
     ActivityQuestionComponent,
     SubmissionManager,
     ConfigurationService,
@@ -47,7 +47,7 @@ describe('ActivityQuestionComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 ActivityQuestionComponent,
-                ValidationMessage,
+                ValidationMessageComponent,
                 FakeActivityActivityAnswerComponent
             ],
             providers: [
@@ -186,6 +186,6 @@ describe('ActivityQuestionComponent', () => {
         expect(getValidationMessageFixture()).toBeFalsy();
     }));
 
-    const getValidationMessageFixture = () => fixture.debugElement.query(By.directive(ValidationMessage));
+    const getValidationMessageFixture = () => fixture.debugElement.query(By.directive(ValidationMessageComponent));
     const getAnswerComponentFixture = () => fixture.debugElement.query(By.css('ddp-activity-answer'));
 });

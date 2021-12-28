@@ -37,7 +37,7 @@ export abstract class AbstractActivityQuestionBlock extends ActivityBlock {
   public abstract get questionType(): QuestionType;
 
   public canPatch(): boolean {
-    return this.validators
+    return this.enabled && this.validators
       .filter(validator => !validator.allowSave)
       .reduce((accumulator, validator) => accumulator && validator.recalculate(), true);
   }

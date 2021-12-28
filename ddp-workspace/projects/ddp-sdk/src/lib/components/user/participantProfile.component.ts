@@ -63,7 +63,7 @@ export class ParticipantProfileComponent implements OnDestroy {
             });
         this.reloadingSubject = new Subject<void>();
         this.anchor = this.reloadingSubject.pipe(
-            mergeMap(x => {
+            mergeMap(() => {
                 return this.serviceAgent.getGovernedStudyParticipants(this.config.studyGuid);
             }),
             tap(x => this.logger.logEvent(this.LOG_SOURCE, `data loaded: ${JSON.stringify(x)}`))
@@ -97,7 +97,7 @@ export class ParticipantProfileComponent implements OnDestroy {
             width: '450px',
             data: {}
         });
-        dialogRef.afterClosed().subscribe(result => { });
+        dialogRef.afterClosed().subscribe(() => { });
     }
 
     public openManageParticipants(): void {
@@ -105,6 +105,6 @@ export class ParticipantProfileComponent implements OnDestroy {
             width: '350px',
             data: {}
         });
-        dialogRef.afterClosed().subscribe(result => this.reloadingSubject.next());
+        dialogRef.afterClosed().subscribe(() => this.reloadingSubject.next());
     }
 }

@@ -1,3 +1,4 @@
+@use '@angular/material' as mat;
 @import './../../../app-theme.scss';
 
 @mixin block-margin {
@@ -44,7 +45,7 @@
         margin: 1.5rem 3rem 1.5rem 0;
         font-size: 16px;
         line-height: 22px;
-        color: mat-color($app-theme, 450);
+        color: mat.get-color-from-palette($app-theme, 450);
     }
 }
 
@@ -68,7 +69,7 @@
 }
 
 .about-section {
-    background-color: mat-color($app-theme, 500);
+    background-color: mat.get-color-from-palette($app-theme, 500);
 }
 
 .about-block {
@@ -111,7 +112,7 @@
     }
 
     &_underlined {
-        border-bottom: 1px solid mat-color($app-theme, 600);
+        border-bottom: 1px solid mat.get-color-from-palette($app-theme, 600);
     }
 }
 
@@ -126,7 +127,7 @@
 
     &__links {
         display: inline;
-        color: mat-color($app-theme, 250);
+        color: mat.get-color-from-palette($app-theme, 250);
     }
 }
 
@@ -139,7 +140,7 @@
         height: 12px;
         width: 12px;
         border-radius: 6px;
-        background-color: mat-color($app-theme, 550);
+        background-color: mat.get-color-from-palette($app-theme, 550);
     }
 
     &__index {
@@ -155,11 +156,11 @@
 }
 
 .learn-more-section {
-    background-color: mat-color($app-theme, 650);
+    background-color: mat.get-color-from-palette($app-theme, 650);
 }
 
 .partners-section {
-    background-color: mat-color($app-theme, 500);
+    background-color: mat.get-color-from-palette($app-theme, 500);
 }
 
 .partners-block {
@@ -232,7 +233,7 @@
 }
 
 .join-section {
-    background-color: mat-color($app-theme, 500);
+    background-color: mat.get-color-from-palette($app-theme, 500);
 }
 
 .join-block {

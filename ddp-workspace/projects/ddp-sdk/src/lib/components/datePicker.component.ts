@@ -7,15 +7,15 @@ import { DateRenderMode } from '../models/activity/dateRenderMode';
 @Component({
     selector: 'ddp-date',
     template: `
-      <div *ngIf="renderMode == 'TEXT'" style="overflow: hidden;">
+      <div *ngIf="renderMode === 'TEXT'" style="overflow: hidden;">
         <div style="display: flex; flex-direction: row;">
           <mat-dialog-content *ngFor="let dateField of dateFields; let fieldIdx = index">
-            {{ (dateField == 'MM' && dateFields.indexOf('MM') > 0) ? ' / ' : '' }}
-            <mat-form-field class="two-char-input" *ngIf="dateField == 'MM'" [floatLabel]="floatLabelType()">
+            {{ (dateField === 'MM' && dateFields.indexOf('MM') > 0) ? ' / ' : '' }}
+            <mat-form-field class="two-char-input" *ngIf="dateField === 'MM'" [floatLabel]="floatLabelType()">
               <mat-label *ngIf="label" [innerHTML]="label && fieldIdx === 0 ? label : ('')"></mat-label>
               <input matInput
                      appInputRestriction="integer"
-                     [placeholder]="placeholder && dateFields.length == 1 ? placeholder : ('SDK.DateLabel.MM' | translate)"
+                     [placeholder]="placeholder && dateFields.length === 1 ? placeholder : ('SDK.DateLabel.MM' | translate)"
                      size="3"
                      maxlength="2"
                      #MM
@@ -26,8 +26,8 @@ import { DateRenderMode } from '../models/activity/dateRenderMode';
                      class="date-text"
                      [(ngModel)]="selectedMonth"/>
             </mat-form-field>
-            {{ (dateField == 'DD' && dateFields.indexOf('DD') > 0) ? ' / ' : '' }}
-            <mat-form-field class="two-char-input" *ngIf="dateField == 'DD'" [floatLabel]="floatLabelType()">
+            {{ (dateField === 'DD' && dateFields.indexOf('DD') > 0) ? ' / ' : '' }}
+            <mat-form-field class="two-char-input" *ngIf="dateField === 'DD'" [floatLabel]="floatLabelType()">
               <mat-label *ngIf="label" [innerHTML]="label && fieldIdx === 0 ? label : ('')"></mat-label>
               <input matInput
                      appInputRestriction="integer"
@@ -42,12 +42,12 @@ import { DateRenderMode } from '../models/activity/dateRenderMode';
                      class="date-text"
                      [(ngModel)]="selectedDay"/>
             </mat-form-field>
-            {{ (dateField == 'YYYY' && dateFields.indexOf('YYYY') > 0) ? ' / ' : '' }}
-            <mat-form-field class="four-char-input" *ngIf="dateField == 'YYYY'" [floatLabel]="floatLabelType()">
+            {{ (dateField === 'YYYY' && dateFields.indexOf('YYYY') > 0) ? ' / ' : '' }}
+            <mat-form-field class="four-char-input" *ngIf="dateField === 'YYYY'" [floatLabel]="floatLabelType()">
               <mat-label *ngIf="label" [innerHTML]="label && fieldIdx === 0 ? label : ('')"></mat-label>
               <input matInput
                      appInputRestriction="integer"
-                     [placeholder]="(placeholder && dateFields.length == 1) ? placeholder : ('SDK.DateLabel.YYYY' | translate)"
+                     [placeholder]="(placeholder && dateFields.length === 1) ? placeholder : ('SDK.DateLabel.YYYY' | translate)"
                      size="5"
                      maxlength="4"
                      #YYYY
@@ -66,7 +66,7 @@ import { DateRenderMode } from '../models/activity/dateRenderMode';
                  (dateChange)="addEvent($event)">
         </div>
       </div>
-      <div *ngIf="renderMode == 'SINGLE_TEXT'" style="overflow: hidden;">
+      <div *ngIf="renderMode === 'SINGLE_TEXT'" style="overflow: hidden;">
         <div style="float: left;">
           <mat-form-field floatLabel="always">
             <mat-label *ngIf="label" [innerHTML]="label"></mat-label>
@@ -77,7 +77,7 @@ import { DateRenderMode } from '../models/activity/dateRenderMode';
           </mat-form-field>
         </div>
       </div>
-      <div *ngIf="renderMode == 'PICKLIST'" class="picklist ddp-answer-container">
+      <div *ngIf="renderMode === 'PICKLIST'" class="picklist ddp-answer-container">
         <div *ngFor="let dateField of dateFields; let fieldIdx = index"
              class="date-field ddp-answer-field"
              [ngClass]="{'ddp-date-field-margin': dateFields.length > 1, 'native-select': !label}">
@@ -101,7 +101,7 @@ import { DateRenderMode } from '../models/activity/dateRenderMode';
               </select>
             </mat-form-field>
 
-            <mat-form-field *ngIf="dateField == 'YYYY'"  floatLabel="always">
+            <mat-form-field *ngIf="dateField === 'YYYY'"  floatLabel="always">
               <mat-label [innerHTML]="fieldIdx === 0 ? label : ('')"></mat-label>
               <select matNativeControl
                       [(ngModel)]="dropdownYear"
@@ -125,7 +125,7 @@ import { DateRenderMode } from '../models/activity/dateRenderMode';
                     (change)="inputChanged()">
               <ng-container *ngTemplateOutlet="dayOptions"></ng-container>
             </select>
-            <select *ngIf="dateField == 'YYYY'"
+            <select *ngIf="dateField === 'YYYY'"
                     [(ngModel)]="dropdownYear"
                     [disabled]="readonly"
                     (change)="inputChanged()">

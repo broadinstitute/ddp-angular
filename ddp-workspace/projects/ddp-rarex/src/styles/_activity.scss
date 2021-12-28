@@ -1,8 +1,9 @@
+@use '@angular/material' as mat;
 @import '../app-theme.scss';
 
 // DDP styles
 .ddp-close-button:hover {
-  color: mat-color($app-theme, 650);
+  color: mat.get-color-from-palette($app-theme, 650);
 }
 
 .ddp-activity-validation {
@@ -12,7 +13,7 @@
 
   .ErrorMessageItem {
     font-size: 1.0625rem;
-    color: mat-color($app-theme, 500);
+    color: mat.get-color-from-palette($app-theme, 500);
     margin: 0.3rem 0;
     padding: 0 0 0 0;
   }
@@ -65,7 +66,7 @@ ddp-activity-content {
 
   font-size: 1.25rem;
   line-height: 1.95rem;
-  color: mat-color($app-theme, 200);
+  color: mat.get-color-from-palette($app-theme, 200);
 }
 
 .ddp-question-prompt {
@@ -107,12 +108,12 @@ ddp-activity-composite-answer {
   margin: 0;
   font-size: 1.125rem !important;
   line-height: 1.4375rem;
-  color: mat-color($app-theme, 700);
+  color: mat.get-color-from-palette($app-theme, 700);
   font-weight: 400;
 }
 
 .ddp-counter-color {
-  color: mat-color($app-theme, 250);
+  color: mat.get-color-from-palette($app-theme, 250);
 }
 
 .ddp-picklist-option-list-item {
@@ -154,7 +155,7 @@ ddp-date .picklist {
   summary {
     padding: 1.2rem 4.2rem 1.2rem 1.6rem;
 
-    background-color: mat-color($app-theme, 300);
+    background-color: mat.get-color-from-palette($app-theme, 300);
 
     font-size: 1rem;
     font-weight: bold;
@@ -169,7 +170,7 @@ ddp-date .picklist {
 
     &:focus,
     &:hover {
-      background-color: darken(mat-color($app-theme, 300), 5%);
+      background-color: darken(mat.get-color-from-palette($app-theme, 300), 5%);
 
       outline: none;
     }
@@ -225,7 +226,7 @@ ddp-date .picklist {
 
   font-size: 1.0625rem;
   line-height: 1.5;
-  color: mat-color($app-theme, 500);
+  color: mat.get-color-from-palette($app-theme, 500);
 }
 
 // Material styles
@@ -234,7 +235,7 @@ ddp-date .picklist {
 }
 
 .mat-form-field-infix {
-  color: mat-color($app-theme, 200);
+  color: mat.get-color-from-palette($app-theme, 200);
   font-size: 1.0625rem;
 }
 
@@ -244,14 +245,14 @@ ddp-date .picklist {
 }
 
 .mat-select-value {
-  color: mat-color($app-theme, 700);
+  color: mat.get-color-from-palette($app-theme, 700);
 }
 
 .mat-checkbox-label,
 .mat-radio-label-content {
   font-size: 1.0625rem;
   line-height: 1.65rem !important;
-  color: mat-color($app-theme, 700);
+  color: mat.get-color-from-palette($app-theme, 700);
 }
 
 .mat-checkbox-inner-container {
@@ -282,7 +283,7 @@ ddp-date .picklist {
 
 .rarex-activity {
   a {
-    color: mat-color($app-theme, 300);
+    color: mat.get-color-from-palette($app-theme, 300);
   }
 }
 
@@ -296,7 +297,7 @@ ddp-date .picklist {
 // native dropdown
 select {
   font-size: 1.0625rem;
-  color: mat-color($app-theme, 700);
+  color: mat.get-color-from-palette($app-theme, 700);
   background-color: rgba(255, 255, 255, 0.9);
   width: 100%;
   padding: 0;
@@ -320,12 +321,12 @@ select:disabled {
   margin-bottom: 1.5rem;
   padding: 1.2rem 0.6rem;
 
-  background-color: mat-color($app-theme, 100);
+  background-color: mat.get-color-from-palette($app-theme, 100);
 
   text-align: center;
 
   &__link {
-    color: darken(mat-color($app-theme, 350), 15%) !important;
+    color: darken(mat.get-color-from-palette($app-theme, 350), 15%) !important;
   }
 }
 
@@ -360,7 +361,7 @@ p.question-sub {
 .PageContent-infobox {
   padding: 1.2rem;
 
-  border: 3px solid mat-color($app-theme, 300);
+  border: 3px solid mat.get-color-from-palette($app-theme, 300);
   background: #f4efea;
 }
 

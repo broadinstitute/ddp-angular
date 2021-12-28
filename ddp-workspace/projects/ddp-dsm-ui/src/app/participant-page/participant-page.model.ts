@@ -14,7 +14,7 @@ export class DDPParticipantInformation {
   }
 }
 
-// tslint:disable-next-line:max-classes-per-file
+// eslint-disable-next-line max-classes-per-file
 export class DDPInstitutionInformation {
   constructor(public type: string, public id: string, public physician: string,
               public institution: string, public streetAddress: string, public city: string, public state: string) {

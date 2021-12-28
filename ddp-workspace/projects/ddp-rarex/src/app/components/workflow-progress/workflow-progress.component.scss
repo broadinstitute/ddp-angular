@@ -1,3 +1,4 @@
+@use '@angular/material' as mat;
 @import '../../../app-theme';
 
 .workflow-progress {
@@ -55,11 +56,11 @@
     }
 
     &--blue {
-      background-color: mat-color($app-theme, 300);
+      background-color: mat.get-color-from-palette($app-theme, 300);
     }
 
     &--teal {
-      background-color: mat-color($app-theme, 350);
+      background-color: mat.get-color-from-palette($app-theme, 350);
     }
   }
 }
@@ -94,13 +95,13 @@
     }
 
     &--complete {
-      border-color: mat-color($app-theme, 300);
-      background-color: mat-color($app-theme, 300);
+      border-color: mat.get-color-from-palette($app-theme, 300);
+      background-color: mat.get-color-from-palette($app-theme, 300);
     }
 
     &--active {
-      border-color: mat-color($app-theme, 350);
-      background-color: mat-color($app-theme, 350);
+      border-color: mat.get-color-from-palette($app-theme, 350);
+      background-color: mat.get-color-from-palette($app-theme, 350);
     }
   }
 

@@ -16,6 +16,7 @@ import { LoginLandingComponent } from './components/pages/login-landing/login-la
 import { SessionExpiredComponent } from './components/pages/session-expired/session-expired.component';
 import { StayInformedComponent } from './components/pages/stay-informed/stay-informed.component';
 import { Route } from './constants/route';
+import { EnrollmentPausedGuard } from './guards/enrollment-paused.guard';
 
 const routes: Routes = [
   {
@@ -51,7 +52,7 @@ const routes: Routes = [
   {
     path: Route.JoinUs,
     component: JoinUsComponent,
-    canActivate: [IrbGuard],
+    canActivate: [IrbGuard, EnrollmentPausedGuard],
   },
   {
     path: Route.StayInformed,
@@ -82,8 +83,9 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-      enableTracing: false,
-    }),
+    enableTracing: false,
+    relativeLinkResolution: 'legacy'
+}),
   ],
   exports: [RouterModule],
 })

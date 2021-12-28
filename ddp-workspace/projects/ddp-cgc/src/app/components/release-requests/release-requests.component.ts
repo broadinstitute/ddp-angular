@@ -1,6 +1,6 @@
 import { ActivityStatusCodes } from 'ddp-sdk';
 import { ActivityCode } from '../../constants/activity-code';
-import { BaseActivities } from '../base-activities/base-activities.component';
+import { BaseActivitiesComponent } from '../base-activities/base-activities.component';
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 
 
@@ -10,7 +10,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angul
   styleUrls: ['./release-requests.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ReleaseRequestsComponent extends BaseActivities {
+export class ReleaseRequestsComponent extends BaseActivitiesComponent {
   ActivityCode = ActivityCode;
   ActivityStatusCode = ActivityStatusCodes;
 

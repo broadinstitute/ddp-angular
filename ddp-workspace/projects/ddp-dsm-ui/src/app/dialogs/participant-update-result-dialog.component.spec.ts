@@ -1,6 +1,6 @@
 // import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { ParticipantUpdateResultDialogComponent } from './participant-update-result-dialog.component';
+// import { ParticipantUpdateResultDialogComponent } from './participant-update-result-dialog.component';
 
 describe('ParticipantUpdateResultDialogComponent', () => {
   // let component: ParticipantUpdateResultDialogComponent;

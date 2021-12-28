@@ -25,6 +25,7 @@ import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
 
 import { ActivityComponent } from './components/activity/activity.component';
 import { AppComponent } from './components/app/app.component';
+import { EnrollmentPausedModalComponent } from './components/enrollment-paused-modal/enrollment-paused-modal.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MailingListModalComponent } from './components/mailing-list-modal/mailing-list-modal.component';
@@ -125,6 +126,7 @@ export function translateFactory(
   declarations: [
     ActivityComponent,
     AppComponent,
+    EnrollmentPausedModalComponent,
     FooterComponent,
     HeaderComponent,
     MailingListModalComponent,

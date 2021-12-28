@@ -11,7 +11,7 @@ export class AbstractionField {
   constructor(public medicalRecordAbstractionFieldId: number, public displayName: string, public type: string,
               public helpText: string, public orderNumber: number,
               public possibleValues: Value[], public additionalType: string, public hide: boolean,
-              // tslint:disable-next-line:max-line-length
+              // eslint-disable-next-line max-len
               public fieldValue: AbstractionFieldValue, public qcWrapper: QCWrapper, public fileInfo: boolean) { // last line are value fields!
     this.medicalRecordAbstractionFieldId = medicalRecordAbstractionFieldId;
     this.displayName = displayName;
@@ -71,7 +71,7 @@ export class AbstractionField {
   }
 }
 
-// tslint:disable-next-line:max-classes-per-file
+// eslint-disable-next-line max-classes-per-file
 export class AbstractionFieldValue {
   constructor(public medicalRecordAbstractionFieldId: number, public primaryKeyId: number, public value: string | string[],
               public valueCounter: number, public note: string, public question: string, public noData: boolean,
@@ -97,7 +97,7 @@ export class AbstractionFieldValue {
   }
 }
 
-// tslint:disable-next-line:max-classes-per-file
+// eslint-disable-next-line max-classes-per-file
 export class QCWrapper {
   constructor(public abstraction: AbstractionFieldValue, public review: AbstractionFieldValue,
               public equals: boolean, public check: boolean) {

@@ -1,4 +1,4 @@
-import { MailingListComponent } from './mailing-list.component';
+// import { MailingListComponent } from './mailing-list.component';
 
 describe('Component: MailingList', () => {
   // it('should create an instance', () => {

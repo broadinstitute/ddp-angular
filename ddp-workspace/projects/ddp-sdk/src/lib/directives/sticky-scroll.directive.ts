@@ -11,7 +11,7 @@ import { WindowRef } from '../services/windowRef';
  * In order to update it outside of directive use the directive instance refresh() method.
  */
 @Directive({
-  selector: '[sticky-scroll]'
+  selector: '[stickyScroll]'
 })
 export class StickyScrollDirective implements AfterViewInit, OnDestroy {
   private readonly element: HTMLElement;

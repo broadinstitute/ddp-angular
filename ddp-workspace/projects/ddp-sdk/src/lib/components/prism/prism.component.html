@@ -32,7 +32,7 @@
                [pageSize]="initialPageSize"
                (page)="updatePageDataInStorage($event)">
 </mat-paginator>
-<div class="table-container" sticky-scroll>
+<div class="table-container" stickyScroll>
     <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="userName">
             <th mat-header-cell *matHeaderCellDef mat-sort-header class="user-name-column">

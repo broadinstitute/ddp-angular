@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
 
 import { StaticContentBlockComponent } from './static-content-block.component';
+import { ActivityContentComponent } from 'ddp-sdk';
 
 describe('StaticContentBlockComponent', () => {
   let component: StaticContentBlockComponent;
@@ -8,7 +10,7 @@ describe('StaticContentBlockComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StaticContentBlockComponent ]
+      declarations: [ StaticContentBlockComponent, ActivityContentComponent ]
     })
     .compileComponents();
   });
@@ -16,6 +18,7 @@ describe('StaticContentBlockComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(StaticContentBlockComponent);
     component = fixture.componentInstance;
+    component.definitionBlock$ = of({}) as any;
     fixture.detectChanges();
   });
 

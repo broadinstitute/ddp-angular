@@ -45,7 +45,7 @@ export class PicklistOptionEditorComponent implements OnDestroy {
         exclusive: [false],
     });
 
-    private ngUnsubscribe = new Subject();
+    private ngUnsubscribe = new Subject<void>();
     private factory: StudyConfigObjectFactory;
 
     constructor(private fb: FormBuilder, private config: ConfigurationService) {

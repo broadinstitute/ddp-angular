@@ -10,6 +10,7 @@ import { SessionMementoService } from 'ddp-sdk';
 })
 export class FooterComponent {
   Route = Route;
+  readonly STUDY_PROGRESS_URL = 'https://www.additionalventures.org/project-singular-study-updates';
 
   constructor(
     private readonly sessionService: SessionMementoService

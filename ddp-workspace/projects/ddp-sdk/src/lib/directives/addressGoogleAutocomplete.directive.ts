@@ -26,7 +26,7 @@ export class AddressGoogleAutocompleteDirective implements OnInit, OnDestroy, On
     private autoComplete: Autocomplete;
     private scriptLoader$: Observable<any>;
     private countryCode$: Subject<string> = new Subject();
-    private ngUnsubscribe = new Subject();
+    private ngUnsubscribe = new Subject<void>();
     private readonly LOG_SOURCE = 'AddressGoogleAutocompleteDirective';
 
     constructor(private autocompleteInput: ElementRef,

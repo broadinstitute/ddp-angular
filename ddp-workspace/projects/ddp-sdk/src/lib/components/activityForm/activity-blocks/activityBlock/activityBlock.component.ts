@@ -11,15 +11,15 @@ import {
     ViewChildren
 } from '@angular/core';
 import { Subject, throwError } from 'rxjs';
-import { catchError, concatMap, takeUntil } from 'rxjs/operators';
+import { catchError, concatMap, takeUntil, map } from 'rxjs/operators';
 
 import { ActivityActivityBlock } from '../../../../models/activity/activityActivityBlock';
 import { ActivityRenderHintType } from '../../../../models/activity/activityRenderHintType';
 import { ActivityInstance } from '../../../../models/activityInstance';
 import { ActivityServiceAgent } from '../../../../services/serviceAgents/activityServiceAgent.service';
-import { ActivityInstanceGuid } from '../../../../models/activityInstanceGuid';
 import { LoggingService } from '../../../../services/logging.service';
 import { ModalActivityBlockComponent } from '../modalActivityBlock/modalActivityBlock.component';
+import { BlockVisibility } from '../../../../models/activity/blockVisibility';
 
 @Component({
     selector: 'ddp-activity-block',
@@ -29,16 +29,18 @@ import { ModalActivityBlockComponent } from '../modalActivityBlock/modalActivity
 })
 export class ActivityBlockComponent implements OnInit, OnDestroy {
     @Input() block: ActivityActivityBlock;
+    @Input() enabled: boolean;
     @Input() readonly: boolean;
     @Input() validationRequested: boolean;
     @Input() studyGuid: string;
     @Input() parentActivityInstanceGuid: string;
     @Output() validStatusChanged = new EventEmitter<{id: string; value: boolean}>();
     @Output() embeddedComponentBusy = new EventEmitter<boolean>();
+    @Output() blockVisibilityChanged = new EventEmitter<BlockVisibility[]>();
     @ViewChildren(ModalActivityBlockComponent) private modalActivities: QueryList<ModalActivityBlockComponent>;
     isModal: boolean;
     childInstances: ActivityInstance[];
-    private ngUnsubscribe = new Subject();
+    private ngUnsubscribe = new Subject<void>();
     private readonly LOG_SOURCE = 'ActivityBlockComponent';
 
     constructor(private activityServiceAgent: ActivityServiceAgent,
@@ -63,8 +65,20 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     createChildInstance(): void {
         this.activityServiceAgent.createInstance(this.studyGuid, this.block.activityCode, this.parentActivityInstanceGuid)
             .pipe(
-                concatMap((instanceGuid: ActivityInstanceGuid) => {
-                    return this.activityServiceAgent.getActivitySummary(this.studyGuid, instanceGuid.instanceGuid);
+                concatMap(response => {
+                    return this.activityServiceAgent
+                        .getActivitySummary(this.studyGuid, response.instanceGuid)
+                        .pipe(
+                            map<ActivityInstance, { instance: ActivityInstance; blockVisibility?: BlockVisibility[] }>(
+                                instance => {
+                                    if (response?.blockVisibility) {
+                                        return { instance, blockVisibility: response.blockVisibility };
+                                    }
+
+                                    return { instance };
+                                }
+                            ),
+                        );
                 }),
                 catchError(err => {
                     this.logger.logError(this.LOG_SOURCE, 'An error during a new instance creation', err);
@@ -72,9 +86,19 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
                 }),
                 takeUntil(this.ngUnsubscribe)
             )
-            .subscribe((instance: ActivityInstance) => {
+            .subscribe(({ instance, blockVisibility }) => {
                 this.childInstances.push(instance);
-                this.cdr.detectChanges();
+
+                if (blockVisibility) {
+                    this.blockVisibilityChanged.emit(blockVisibility);
+                } else {
+                    /**
+                     * Emitting a `blockVisibilityChanged` event will call `detectChanges`
+                     * so we call this here only if there were no changes in block visibility
+                     */
+                    this.cdr.detectChanges();
+                }
+
                 this.openCreatedInstanceDialog(instance.instanceGuid);
             });
     }

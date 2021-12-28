@@ -15,7 +15,7 @@ import { LoggingService } from '../../../../services/logging.service';
 import { ModalDialogService } from '../../../../services/modal-dialog.service';
 import { ActivityFileQuestionBlock } from '../../../../models/activity/activityFileQuestionBlock';
 import { QuestionPromptComponent } from '../question-prompt/questionPrompt.component';
-import { ValidationMessage } from '../../../validationMessage.component';
+import { ValidationMessageComponent } from '../../../validationMessage.component';
 import { ActivityFileValidationRule } from '../../../../services/activity/validators/activityFileValidationRule';
 import { FileSizeFormatterPipe } from '../../../../pipes/fileSizeFormatter.pipe';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -54,7 +54,7 @@ describe('ActivityFileAnswer', () => {
             declarations: [
                 ActivityFileAnswer,
                 QuestionPromptComponent,
-                ValidationMessage,
+                ValidationMessageComponent,
                 FileSizeFormatterPipe
             ],
             imports: [

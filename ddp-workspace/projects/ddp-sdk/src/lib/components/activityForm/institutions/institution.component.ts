@@ -129,9 +129,8 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
             this.formUpdated.emit();
         });
 
-        this.anchor
-            .add(get)
-            .add(form);
+        this.anchor.add(get);
+        this.anchor.add(form);
     }
 
     public ngOnChanges(changes: { [propKey: string]: SimpleChange }): void {

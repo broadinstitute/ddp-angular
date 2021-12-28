@@ -1,5 +1,5 @@
 // import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { BannerComponent } from './banner.component';
+// import { BannerComponent } from './banner.component';
 
 describe('BannerComponent', () => {
   // let component: BannerComponent;
