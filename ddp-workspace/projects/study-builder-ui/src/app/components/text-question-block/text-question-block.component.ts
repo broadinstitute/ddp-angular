@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { filter, map, tap } from 'rxjs/operators';
+
 import { QuestionBlockDef } from '../../model/core/questionBlockDef';
 import { ActivityTextQuestionBlock } from 'ddp-sdk';
 import { TextQuestionDef } from '../../model/core/textQuestionDef';
-import { Observable } from 'rxjs';
 import { ConfigurationService } from '../../configuration.service';
-import { filter, map, tap } from 'rxjs/operators';
 import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
+import { ActivityQuestionConverter } from '../../../../../ddp-sdk/src/lib/services/activity/activityQuestionConverter.service';
 
 @Component({
     selector: 'app-text-question-block',
@@ -19,9 +21,10 @@ export class TextQuestionBlockComponent implements OnInit {
     definitionBlock$: Observable<QuestionBlockDef<TextQuestionDef>>;
     angularClientBlock$: Observable<ActivityTextQuestionBlock>;
 
-    constructor(private config: ConfigurationService) {
-    }
-
+    constructor(
+        private config: ConfigurationService,
+        private questionConverter: ActivityQuestionConverter
+    ) {}
 
     ngOnInit(): void {
         this.angularClientBlock$ = this.definitionBlock$.pipe(
@@ -31,11 +34,17 @@ export class TextQuestionBlockComponent implements OnInit {
     }
 
     private buildFromDef(defBlock: QuestionBlockDef<TextQuestionDef>): ActivityTextQuestionBlock {
-        const newClientBlock = new ActivityTextQuestionBlock();
         const questionDef = defBlock.question;
-        newClientBlock.inputType = questionDef.inputType;
-        newClientBlock.isRequired = questionDef.validations.some(val => val.ruleType === 'REQUIRED');
-        newClientBlock.stableId = questionDef.stableId;
+        const modifiedQuestionJson = {
+            ...questionDef,
+            validations: questionDef.validations.map(
+                // rename `ruleType` keys to `rule`
+                ({ruleType: rule, ...rest}) => ({rule, ...rest})
+            )
+        };
+
+        const newClientBlock = this.questionConverter.buildQuestionBlock(modifiedQuestionJson, null) as ActivityTextQuestionBlock;
+
         newClientBlock.placeholder = new SimpleTemplate(questionDef.placeholderTemplate)
             .getTranslationText(this.config.defaultLanguageCode);
         newClientBlock.question = new SimpleTemplate(questionDef.promptTemplate).getTranslationText(this.config.defaultLanguageCode);
