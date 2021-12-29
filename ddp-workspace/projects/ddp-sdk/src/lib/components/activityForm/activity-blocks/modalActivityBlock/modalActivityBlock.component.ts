@@ -4,6 +4,7 @@ import {
     Component,
     ElementRef,
     EventEmitter,
+    Inject,
     Input,
     Output,
     TemplateRef,
@@ -21,6 +22,7 @@ import { LoggingService } from '../../../../services/logging.service';
 import { ConfirmDialogComponent } from '../../../confirmDialog/confirmDialog.component';
 import { ModalDialogService, DEFAULT_DIALOG_SETTINGS } from '../../../../services/modal-dialog.service';
 import { BlockVisibility } from '../../../../models/activity/blockVisibility';
+import { ConfigurationService } from '../../../../services/configuration.service';
 
 const EDIT_DIALOG_CONFIG: MatDialogConfig = {
     ...DEFAULT_DIALOG_SETTINGS,
@@ -57,11 +59,16 @@ export class ModalActivityBlockComponent {
                 private dialog: MatDialog,
                 private cdr: ChangeDetectorRef,
                 private logger: LoggingService,
-                private modalDialogService: ModalDialogService) {
+                private modalDialogService: ModalDialogService,
+                @Inject('ddp.config') private config: ConfigurationService) {
     }
 
     get isAllQuestionsCompleted(): boolean {
         return this.instance.numQuestionsAnswered === this.instance.numQuestions;
+    }
+
+    get alwaysShowQuestionsCount(): boolean {
+        return this.config.alwaysShowQuestionsCountInModalNestedActivity;
     }
 
     public deleteActivityInstance(): void {

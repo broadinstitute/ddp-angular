@@ -105,6 +105,7 @@ sdkConfig.usesVerticalStepper = [
     'FAMILY_HISTORY_ADDITIONAL_DETAILS',
     'DIET_LIFESTYLE',
 ];
+sdkConfig.alwaysShowQuestionsCountInModalNestedActivity = true;
 
 export function translateFactory(translate: TranslateService,
     injector: Injector,

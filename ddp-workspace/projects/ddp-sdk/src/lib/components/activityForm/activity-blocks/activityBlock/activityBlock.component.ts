@@ -11,7 +11,7 @@ import {
     ViewChildren
 } from '@angular/core';
 import { Subject, throwError } from 'rxjs';
-import { catchError, concatMap, takeUntil, map } from 'rxjs/operators';
+import { catchError, concatMap, filter, takeUntil, map } from 'rxjs/operators';
 
 import { ActivityActivityBlock } from '../../../../models/activity/activityActivityBlock';
 import { ActivityRenderHintType } from '../../../../models/activity/activityRenderHintType';
@@ -65,6 +65,7 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     createChildInstance(): void {
         this.activityServiceAgent.createInstance(this.studyGuid, this.block.activityCode, this.parentActivityInstanceGuid)
             .pipe(
+                filter(response => !!response),
                 concatMap(response => {
                     return this.activityServiceAgent
                         .getActivitySummary(this.studyGuid, response.instanceGuid)
