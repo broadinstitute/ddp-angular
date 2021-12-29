@@ -1,3 +1,7 @@
+// this file was copied from
+// https://github.com/broadinstitute/ddp-study-server/blob/develop/pepper-apis/src/main/antlr4/org/broadinstitute/ddp/pex/lang/Pex.g4
+// with few extensions which are marked with EXTN word
+
 // PEX - The Pepper Expression Language
 grammar Pex;
 
@@ -20,17 +24,17 @@ expr
   ;
 
 query
-  : USER_TYPE '.' study '.' studyPredicate                                                  # StudyQuery
-  | USER_TYPE '.' study '.' form '.' formPredicate                                          # FormQuery
-  | USER_TYPE '.' study '.' form '.' instance '.' formInstancePredicate                     # FormInstanceQuery
-  | USER_TYPE '.' study '.' form '.' question '.' questionPredicate                         # QuestionQuery
-  | USER_TYPE '.' study '.' form '.' question '.' 'answers' '.' predicate                   # DefaultLatestAnswerQuery
-  | USER_TYPE '.' study '.' form '.' question '.' child '.' 'answers' '.' predicate         # DefaultLatestChildAnswerQuery
-  | USER_TYPE '.' study '.' form '.' instance '.' question '.' 'answers' '.' predicate      # AnswerQuery
-  | USER_TYPE '.' study '.' form '.' instance '.' question '.' child '.' 'answers' '.' predicate # ChildAnswerQuery
-  | USER_TYPE '.' 'profile' '.' profileDataQuery                                            # ProfileQuery
-  | USER_TYPE '.' 'event' '.' 'kit' '.' kitEventQuery                                       # EventKitQuery
-  | USER_TYPE '.' 'event' '.' 'testResult' '.' testResultQuery                              # EventTestResultQuery
+  : userType '.' study '.' studyPredicate                                                  # StudyQuery
+  | userType '.' study '.' form '.' formPredicate                                          # FormQuery
+  | userType '.' study '.' form '.' instance '.' formInstancePredicate                     # FormInstanceQuery
+  | userType '.' study '.' form '.' question '.' questionPredicate                         # QuestionQuery
+  | userType '.' study '.' form '.' question '.' 'answers' '.' predicate                   # DefaultLatestAnswerQuery
+  | userType '.' study '.' form '.' question '.' child '.' 'answers' '.' predicate         # DefaultLatestChildAnswerQuery
+  | userType '.' study '.' form '.' instance '.' question '.' 'answers' '.' predicate      # AnswerQuery
+  | userType '.' study '.' form '.' instance '.' question '.' child '.' 'answers' '.' predicate # ChildAnswerQuery
+  | userType '.' 'profile' '.' profileDataQuery                                            # ProfileQuery
+  | userType '.' 'event' '.' 'kit' '.' kitEventQuery                                       # EventKitQuery
+  | userType '.' 'event' '.' 'testResult' '.' testResultQuery                              # EventTestResultQuery
   ;
 
 study : 'studies' '[' STR ']' ;
@@ -38,6 +42,12 @@ form : 'forms' '[' STR ']' ;
 instance : 'instances' '[' INSTANCE_TYPE ']' ;
 question : 'questions' '[' STR ']' ;
 child : 'children' '[' STR ']';
+
+// EXTN allows antlr-c3 tool to suggest 'user' and 'operator' strings instead of 'USER_TYPE'
+userType
+  : USER  #user
+  | OPERATOR  #operator
+  ;
 
 // Predicates operating on study-level data
 studyPredicate
@@ -99,8 +109,8 @@ testResultQuery
 
 
 // Lexical rules
-
-USER_TYPE : 'user' | 'operator' ;
+USER: 'user' ;
+OPERATOR: 'operator' ;
 INSTANCE_TYPE : 'latest' | 'specific' ;
 BOOL : 'true' | 'false' ;
 STR : '"' .*? '"' ;
@@ -113,4 +123,6 @@ EQUALITY_OPERATOR : '==' | '!=' ;
 // Misc
 
 WS : [ \t\r\n] -> skip ;    // Whitespace is not significant
+
+// EXTN allows to highlight unrecognized symbols with separate color
 UNRECOGNIZED : . ;

@@ -1,3 +1,4 @@
+/// <reference path="../../../../node_modules/monaco-editor/monaco.d.ts" />
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, ErrorHandler, Injector, NgModule } from '@angular/core';
 import { EditorModule } from '@tinymce/tinymce-angular';
@@ -39,6 +40,10 @@ import { DummyLoggingService } from './dummyLoggingService';
 import { HttpBackend, HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ResizableModule } from 'angular-resizable-element';
+import { PexEditorSandboxComponent } from './components/pex-editor-sandbox/pex-editor-sandbox.component';
+import { PexEditorComponent } from './components/pex-editor/pex-editor.component';
+import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { monacoConfig } from './monaco-config';
 
 const ddpConfig = new ConfigurationService();
 ddpConfig.doGcpErrorReporting = false;
@@ -88,7 +93,9 @@ function createTranslateLoader(handler: HttpBackend): TranslateHttpLoader {
         ManageListComponent,
         PicklistOptionEditorComponent,
         PicklistOptionsListComponent,
-        PicklistGroupEditorComponent
+        PicklistGroupEditorComponent,
+        PexEditorComponent,
+        PexEditorSandboxComponent,
     ],
     imports: [
         BrowserModule,
@@ -115,6 +122,7 @@ function createTranslateLoader(handler: HttpBackend): TranslateHttpLoader {
                 deps: [HttpBackend],
             },
         }),
+        MonacoEditorModule.forRoot(monacoConfig),
     ],
     providers: [
         {
