@@ -40,7 +40,7 @@ export class PexEditorComponent {
     }
 
     private getValidationErrors(input: string): PexError[] {
-        let errors : PexError[] = []
+        const errors : PexError[] = []
 
         const lexer = createLexer(input);
         lexer.removeErrorListeners();

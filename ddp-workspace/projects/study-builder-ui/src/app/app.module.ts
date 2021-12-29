@@ -1,4 +1,3 @@
-/// <reference path="../../../../node_modules/monaco-editor/monaco.d.ts" />
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, ErrorHandler, Injector, NgModule } from '@angular/core';
 import { EditorModule } from '@tinymce/tinymce-angular';

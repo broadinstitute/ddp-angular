@@ -1,9 +1,9 @@
 import { PEXLanguage } from '../../antlr4-pex-grammar/pex-config';
 
-let literalFg = '3b8737';
-let symbolsFg = '000000';
-let keywordFg = '7132a8';
-let errorFg = 'ff0000';
+const literalFg = '3b8737';
+const symbolsFg = '000000';
+const keywordFg = '7132a8';
+const errorFg = 'ff0000';
 
 export const pexTheme: monaco.editor.IStandaloneThemeData = {
     base: 'vs',

@@ -54,12 +54,12 @@ function tokensForLine(input: string): monaco.languages.ILineTokens {
     }
     const lexer = createLexer(input);
     lexer.removeErrorListeners();
-    let errorListener = new ErrorCollectorListener();
+    const errorListener = new ErrorCollectorListener();
     lexer.addErrorListener(errorListener);
     let done = false;
-    let myTokens: monaco.languages.IToken[] = [];
+    const myTokens: monaco.languages.IToken[] = [];
     do {
-        let token = lexer.nextToken();
+        const token = lexer.nextToken();
         if (token == null) {
             done = true
         } else {
@@ -67,14 +67,14 @@ function tokensForLine(input: string): monaco.languages.ILineTokens {
             if (token.type == EOF) {
                 done = true;
             } else {
-                let tokenTypeName = lexer.vocabulary.getSymbolicName(token.type) || '';
-                let myToken = new PexToken(tokenTypeName, token.startIndex);
+                const tokenTypeName = lexer.vocabulary.getSymbolicName(token.type) || '';
+                const myToken = new PexToken(tokenTypeName, token.startIndex);
                 myTokens.push(myToken);
             }
         }
     } while (!done);
     // Add all errors
-    for (let e of errorStartingPoints) {
+    for (const e of errorStartingPoints) {
         myTokens.push(new PexToken(`error.${PEXLanguage}`, e));
     }
     myTokens.sort((a, b) => (a.startIndex > b.startIndex) ? 1 : -1)

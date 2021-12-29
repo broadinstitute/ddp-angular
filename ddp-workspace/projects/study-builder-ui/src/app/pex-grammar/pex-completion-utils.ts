@@ -16,8 +16,8 @@ function computeToken(parseTree: ParseTree, caretPosition: CaretPosition): Token
 }
 
 function computeTokenOfTerminalNode(parseTree: TerminalNode, caretPosition: CaretPosition): Token | undefined {
-    let start = parseTree.symbol.charPositionInLine;
-    let stop = parseTree.symbol.charPositionInLine + parseTree.text.length;
+    const start = parseTree.symbol.charPositionInLine;
+    const stop = parseTree.symbol.charPositionInLine + parseTree.text.length;
     if (parseTree.symbol.line == caretPosition.lineNumber && start <= caretPosition.column && stop >= caretPosition.column) {
         return parseTree.symbol;
     } else {
@@ -27,7 +27,7 @@ function computeTokenOfTerminalNode(parseTree: TerminalNode, caretPosition: Care
 
 function computeTokenOfChildNode(parseTree: ParseTree, caretPosition: CaretPosition): Token | undefined {
     for (let i = 0; i < parseTree.childCount; i++) {
-        let index = computeToken(parseTree.getChild(i), caretPosition);
+        const index = computeToken(parseTree.getChild(i), caretPosition);
         if (index !== undefined) {
             return index;
         }
@@ -39,7 +39,7 @@ export function getCompletions(input: string, caretPosition?: CaretPosition): st
     if (!caretPosition) return [];
     const lexer = createLexer(input);
     const parser = createParserFromLexer(lexer);
-    let core = new CodeCompletionCore(parser);
+    const core = new CodeCompletionCore(parser);
     const tree = parser.pex();
     const token = computeToken(tree, caretPosition);
     if (!token) {
@@ -48,9 +48,9 @@ export function getCompletions(input: string, caretPosition?: CaretPosition): st
     const index = token.type === PexEditorLexer.UNRECOGNIZED ? token.tokenIndex : token.tokenIndex + 1;
     const collections = core.collectCandidates(index);
 
-    let keywords: string[] = [];
+    const keywords: string[] = [];
     if (collections) {
-        for (let candidate of collections.tokens) {
+        for (const candidate of collections.tokens) {
             const tokens = [candidate[0], ...candidate[1]]
 
             keywords.push(tokens.map(token => {

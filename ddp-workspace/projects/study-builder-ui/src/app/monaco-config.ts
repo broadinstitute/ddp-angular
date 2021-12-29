@@ -1,3 +1,6 @@
+// todo try to find better solution with injecting monaco type declaration
+// eslint-disable-next-line
+/// <reference path="../../../../node_modules/monaco-editor/monaco.d.ts" />
 import { NgxMonacoEditorConfig } from 'ngx-monaco-editor';
 import { pexTheme } from './monaco-providers/pex-theme';
 import { PexTokensProvider } from './monaco-providers/pex-tokens-provider';
