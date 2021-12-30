@@ -603,6 +603,8 @@
         "PreviousButton": "Prev",
         "SavingButton": "Saving",
         "EditButton": "Edit",
+        "DeleteButton": "Delete",
+        "CancelBtn": "Cancel",
         "SaveButton": "Save",
         "CompleteButton": "Edit",
         "ReviewButton": "View",
@@ -685,7 +687,7 @@
         },
         "ModalActivityBlock": {
             "SaveButton": "Save",
-            "NumQuestionsAnswered": "{{number}} questions answered",
+            "NumQuestionsAnswered": "{{number}}/{{total}} questions answered",
             "Complete": "Complete",
             "EditButton": "Edit",
             "DeleteButton": "Delete",
@@ -795,6 +797,7 @@
         "AdminActionPanel": {
             "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
             "EditButton": "Edit"
-        }
+        },
+        "ConfirmDeletion": "Are you sure you want to delete \nthis information?"
     }
 }

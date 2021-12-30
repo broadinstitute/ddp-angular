@@ -9,21 +9,34 @@
                 {{instance.activityDescription}}
             </mat-card-subtitle>
 
-            <div *ngIf="instance.statusCode !== 'CREATED'"
-                 class="modal-activity-block__success-message">
-                <mat-icon *ngIf="isAllQuestionsCompleted" inline>check_circle</mat-icon>
-                <span *ngIf="!isAllQuestionsCompleted; else completeBlock"
-                      class="modal-activity-block__label"
-                      [innerHTML]="'SDK.ModalActivityBlock.NumQuestionsAnswered'| translate: {
-                      number: instance.numQuestionsAnswered
-                      }">
-                </span>
-                <ng-template #completeBlock>
-                    <span class="modal-activity-block__label"
-                          [innerHTML]="'SDK.ModalActivityBlock.Complete' | translate">
-                    </span>
-                </ng-template>
+            <div class="modal-activity-block__success-message">
+                <ng-container [ngTemplateOutlet]="alwaysShowQuestionsCount ? questionsCount : questionsCountWithCompleteMessage"></ng-container>
             </div>
+
+            <ng-template #questionsCountWithCompleteMessage>
+                <ng-container *ngIf="instance.statusCode !== 'CREATED'">
+                    <ng-container [ngTemplateOutlet]="isAllQuestionsCompleted ? completeBlock : questionsCount"></ng-container>
+
+                    <ng-template #completeBlock>
+                        <mat-icon inline>check_circle</mat-icon>
+                        <span class="modal-activity-block__label"
+                              [innerHTML]="'SDK.ModalActivityBlock.Complete' | translate">
+                        </span>
+                    </ng-template>
+                </ng-container>
+            </ng-template>
+
+            <ng-template #questionsCount>
+                <span
+                  class="modal-activity-block__label"
+                  [innerHTML]="
+                    'SDK.ModalActivityBlock.NumQuestionsAnswered' | translate: {
+                      number: instance.numQuestionsAnswered,
+                      total: instance.numQuestions
+                    }
+                  "
+                ></span>
+            </ng-template>
         </div>
 
         <mat-card-actions class="modal-activity-block__card-buttons">
