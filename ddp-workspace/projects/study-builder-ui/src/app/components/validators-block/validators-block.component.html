@@ -1,0 +1,33 @@
+<button mat-stroked-button *ngIf="!validatorsDataSubject.value"
+        color="primary"
+        class="validators-btn"
+        (click)="addValidators()">Add validators
+</button>
+
+<div class="validators" *ngIf="validatorsDataSubject.value">
+    <form [formGroup]="validatorsGroup" class="validators-container">
+        <p class="title">Validators</p>
+
+        <div formGroupName="REQUIRED" class="validator">
+            <mat-checkbox formControlName="on">Required</mat-checkbox>
+            <mat-form-field class="message">
+                <input matInput formControlName="message" placeholder="Validator message">
+            </mat-form-field>
+        </div>
+
+        <div formGroupName="LENGTH" class="validator">
+            <mat-checkbox formControlName="on"></mat-checkbox>
+            <mat-form-field class="length">
+                <mat-label>Min length</mat-label>
+                <input matInput  formControlName="minLength" type="number">
+            </mat-form-field>
+            <mat-form-field class="length">
+                <mat-label>Max length</mat-label>
+                <input matInput  formControlName="maxLength" type="number">
+            </mat-form-field>
+            <mat-form-field class="message">
+                <input matInput formControlName="message" placeholder="Validator message">
+            </mat-form-field>
+        </div>
+    </form>
+</div>

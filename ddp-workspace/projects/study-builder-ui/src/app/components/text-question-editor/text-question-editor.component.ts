@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { QuestionBlockDef } from '../../model/core/questionBlockDef';
 import { FormBuilder } from '@angular/forms';
-import { TextQuestionDef } from '../../model/core/textQuestionDef';
 import { BehaviorSubject, merge, Subscription } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
-import { ConfigurationService } from '../../configuration.service';
+import { filter, map, take, tap } from 'rxjs/operators';
+import { QuestionBlockDef } from '../../model/core/questionBlockDef';
+import { TextQuestionDef } from '../../model/core/textQuestionDef';
 import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
+import { RuleDef } from '../../model/core/ruleDef';
+import { ConfigurationService } from '../../configuration.service';
 
 @Component({
     selector: 'app-text-question-editor',
@@ -17,6 +18,11 @@ export class TextQuestionEditorComponent implements OnInit, OnDestroy {
 
     @Input()
     set questionBlock(questionBlock: QuestionBlockDef<TextQuestionDef>) {
+        // FOR DEBUG
+        // (questionBlock as any).question.validations =  [
+        //     { ruleType: 'REQUIRED', hintTemplate: null },
+        //     { ruleType: 'LENGTH', minLength: 2, maxLength: 5, message: 'Wrong length' }
+        // ];
         this.questionBlockSubject.next(questionBlock);
     }
     @Output()
@@ -26,16 +32,20 @@ export class TextQuestionEditorComponent implements OnInit, OnDestroy {
         inputType: [''],
         stableId: [''],
         prompt: [''],
-        placeholder: [''],
-        required: [false]
+        placeholder: ['']
     });
-
+    initialValidators: RuleDef[];
     private sub: Subscription;
 
     constructor(private fb: FormBuilder, private config: ConfigurationService) {
     }
 
     ngOnInit(): void {
+        this.questionBlockSubject.pipe(
+            take(1),
+            map(block => block?.question?.validations),
+        ).subscribe(validations => this.initialValidators = validations);
+
         const updateFormPipe = this.questionBlockSubject.pipe(
             filter(block => !!block),
             map(block => block.question),
@@ -52,6 +62,15 @@ export class TextQuestionEditorComponent implements OnInit, OnDestroy {
         this.sub.unsubscribe();
     }
 
+    changeValidators(validationRules) {
+        const question = this.currentQuestion();
+        if (!question) {
+            return;
+        }
+        question.validations = validationRules || [];
+        this.questionBlockChanged.emit(this.questionBlockSubject.getValue());
+    }
+
     private updateForm(question: TextQuestionDef): void {
         const simplifiedPromptTemplate = new SimpleTemplate(question.promptTemplate);
         const simplifiedPlaceholderTemplate = new SimpleTemplate(question.placeholderTemplate);
@@ -59,8 +78,7 @@ export class TextQuestionEditorComponent implements OnInit, OnDestroy {
             inputType: question.inputType,
             guid: question.stableId,
             prompt: simplifiedPromptTemplate.getTranslationText(this.config.defaultLanguageCode),
-            placeholder: simplifiedPlaceholderTemplate.getTranslationText(this.config.defaultLanguageCode),
-            required: question.validations.some(val => val.ruleType === 'REQUIRED')
+            placeholder: simplifiedPlaceholderTemplate.getTranslationText(this.config.defaultLanguageCode)
         });
     }
 
@@ -77,7 +95,6 @@ export class TextQuestionEditorComponent implements OnInit, OnDestroy {
         question.placeholderTemplate = simplifiedPlaceholderTemplate.toTemplate();
         question.inputType = formData.inputType;
         question.stableId = formData.stableId;
-        question.validations = formData.required ? [{ ruleType: 'REQUIRED', hintTemplate: null }] : [];
         return question;
     }
 
