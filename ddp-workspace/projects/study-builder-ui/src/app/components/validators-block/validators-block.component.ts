@@ -70,7 +70,7 @@ export class ValidatorsBlockComponent implements OnInit, OnDestroy {
             if (key === 'on') continue;
             isOn ? controls[key].enable() : controls[key].disable();
         }
-    };
+    }
 
     private updateForm(validators: ValidationControlsData) {
         this.validatorsGroup.patchValue(validators);
