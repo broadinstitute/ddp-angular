@@ -13,7 +13,7 @@ import { RuleDef } from '../../model/core/ruleDef';
 })
 export class ValidatorsBlockComponent implements OnInit, OnDestroy {
     @Input() set validators(data: RuleDef[]) {
-        if (data?.length) {
+        if (data) {
             this.validatorsDataSubject.next(ValidatorsMapper.mapToValidationControlsData(data));
         }
     }
@@ -60,7 +60,7 @@ export class ValidatorsBlockComponent implements OnInit, OnDestroy {
     }
 
     addValidators() {
-        this.validatorsDataSubject.next(true);
+        this.showValidatorsBlock();
         this.validatorsGroup.reset();
     }
 
@@ -73,9 +73,24 @@ export class ValidatorsBlockComponent implements OnInit, OnDestroy {
     }
 
     private updateForm(validators: ValidationControlsData) {
-        this.validatorsGroup.patchValue(validators);
-        for (const validatorName in validators) {
-            this.toggleControls(validatorName, validators[validatorName].on)
+        const areValidatorsEmpty = Object.keys(validators).length === 0;
+        this.validatorsGroup.reset();
+
+        if (areValidatorsEmpty) {
+           this.hideValidatorsBlock();
+        } else {
+            this.validatorsGroup.patchValue(validators);
+            for (const validatorName in validators) {
+                this.toggleControls(validatorName, validators[validatorName].on)
+            }
         }
+    }
+
+    private hideValidatorsBlock() {
+        this.validatorsDataSubject.next(false);
+    }
+
+    private showValidatorsBlock() {
+        this.validatorsDataSubject.next(true);
     }
 }

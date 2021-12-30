@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { BehaviorSubject, merge, Subscription } from 'rxjs';
-import { filter, map, take, tap } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import { QuestionBlockDef } from '../../model/core/questionBlockDef';
 import { TextQuestionDef } from '../../model/core/textQuestionDef';
 import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
@@ -23,6 +23,7 @@ export class TextQuestionEditorComponent implements OnInit, OnDestroy {
         //     { ruleType: 'REQUIRED', hintTemplate: null },
         //     { ruleType: 'LENGTH', minLength: 2, maxLength: 5, message: 'Wrong length' }
         // ];
+
         this.questionBlockSubject.next(questionBlock);
     }
     @Output()
@@ -42,8 +43,7 @@ export class TextQuestionEditorComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.questionBlockSubject.pipe(
-            take(1),
-            map(block => block?.question?.validations),
+            map(block => block?.question?.validations)
         ).subscribe(validations => this.initialValidators = validations);
 
         const updateFormPipe = this.questionBlockSubject.pipe(
