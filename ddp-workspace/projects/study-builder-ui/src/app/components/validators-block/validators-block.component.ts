@@ -64,6 +64,11 @@ export class ValidatorsBlockComponent implements OnInit, OnDestroy {
         this.validatorsGroup.reset();
     }
 
+    removeValidators() {
+        this.hideValidatorsBlock();
+        this.validatorsGroup.reset();
+    }
+
     private toggleControls(validatorName: string, isOn: boolean) {
         const controls = (this.validatorsGroup.get(validatorName) as FormGroup).controls;
         for (const key of Object.keys(controls)) {

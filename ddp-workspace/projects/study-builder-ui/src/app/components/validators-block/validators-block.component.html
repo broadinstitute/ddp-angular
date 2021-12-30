@@ -7,6 +7,13 @@
 <div class="validators" *ngIf="validatorsDataSubject.value">
     <form [formGroup]="validatorsGroup" class="validators-container">
         <p class="title">Validators</p>
+        <button mat-mini-fab
+                color="warn"
+                class="remove-btn"
+                (click)="removeValidators()">
+            <mat-icon>delete</mat-icon>
+        </button>
+
 
         <div formGroupName="REQUIRED" class="validator">
             <mat-checkbox formControlName="on">Required</mat-checkbox>
