@@ -18,12 +18,6 @@ export class TextQuestionEditorComponent implements OnInit, OnDestroy {
 
     @Input()
     set questionBlock(questionBlock: QuestionBlockDef<TextQuestionDef>) {
-        // FOR DEBUG
-        // (questionBlock as any).question.validations =  [
-        //     { ruleType: 'REQUIRED', hintTemplate: null },
-        //     { ruleType: 'LENGTH', minLength: 2, maxLength: 5, message: 'Wrong length' }
-        // ];
-
         this.questionBlockSubject.next(questionBlock);
     }
     @Output()
