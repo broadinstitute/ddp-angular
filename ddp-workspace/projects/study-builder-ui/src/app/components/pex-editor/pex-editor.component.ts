@@ -1,7 +1,7 @@
 /**
  *  Before using this component run `antlr4ts Pex.g4`  from `src/antlr4-pex-grammar` folder in order to generate pex lexer and parser .ts files.
  */
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { PEXLanguage } from '../../../antlr4-pex-grammar/pex-config';
 import { ConsoleErrorListener } from 'antlr4ts';
 import { CollectorErrorListener, PexError } from '../../pex-grammar/collector-error-listener';
@@ -16,6 +16,7 @@ import { getCompletions } from '../../pex-grammar/pex-completion-utils';
 })
 export class PexEditorComponent {
     @Input() expression: string;
+    @Output() changed = new EventEmitter<string>();
     errors: PexError[] = [];
     completions: string[] = [];
 
@@ -26,6 +27,7 @@ export class PexEditorComponent {
     public editorInit(editor: monaco.editor.IStandaloneCodeEditor): void {
         editor.onDidChangeModelContent(() => {
             this.errors = this.getValidationErrors(this.expression);
+            this.changed.emit(this.expression);
             this.cd.detectChanges();
         });
 

@@ -98,6 +98,7 @@ export * from './lib/services/submitAnnouncement.service';
 export * from './lib/services/serviceAgents/submissionManager.service';
 export * from './lib/services/serviceAgents/statisticsServiceAgent.service';
 export * from './lib/services/serviceAgents/participantsSearchServiceAgent.service';
+export * from './lib/services/serviceAgents/studiesServiceAgent.service';
 export * from './lib/services/stackdriverErrorReporter.service';
 export * from './lib/services/modal-dialog.service';
 export * from './lib/services/picklistSortingPolicy.service';

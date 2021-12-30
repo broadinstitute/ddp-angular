@@ -202,6 +202,7 @@ import { StickyScrollDirective } from './directives/sticky-scroll.directive';
 import { AutocompleteActivityPicklistQuestion } from './components/activityForm/picklist/autocompleteActivityPicklistQuestion.component';
 import { SearchHighlightPipe } from './pipes/searchHighlight.pipe';
 import { PicklistSortingPolicy } from './services/picklistSortingPolicy.service';
+import { StudiesServiceAgentService } from './services/serviceAgents/studiesServiceAgent.service';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter = () => sessionService.token;
@@ -322,6 +323,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         DisplayLanguagePopupServiceAgent,
         ActivityInstanceSelectAnswerService,
         StudyDetailServiceAgent,
+        StudiesServiceAgentService,
         StatisticsServiceAgent,
         ModalDialogService,
         FileUploadService,

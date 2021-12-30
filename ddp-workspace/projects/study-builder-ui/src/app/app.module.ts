@@ -1,3 +1,6 @@
+// todo try to find better solution with injecting monaco type declaration
+// eslint-disable-next-line
+/// <reference path="../../../../node_modules/monaco-editor/monaco.d.ts" />
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, ErrorHandler, Injector, NgModule } from '@angular/core';
 import { EditorModule } from '@tinymce/tinymce-angular';
@@ -24,7 +27,7 @@ import { PicklistQuestionEditorComponent } from './components/picklist-question-
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { ConfigurationService, DdpModule, LanguageService, LoggingService } from 'ddp-sdk';
+import { ConfigurationService, DdpModule, LanguageService, LoggingService, StudiesServiceAgentService } from 'ddp-sdk';
 import { DummyErrorHandler } from './dummyErrorHandler';
 import { StaticContentBlockComponent } from './components/static-content-block/static-content-block.component';
 import { StaticContentBlockEditorComponent } from './components/static-content-block-editor/static-content-block-editor.component';
@@ -41,8 +44,11 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ResizableModule } from 'angular-resizable-element';
 import { PexEditorSandboxComponent } from './components/pex-editor-sandbox/pex-editor-sandbox.component';
 import { PexEditorComponent } from './components/pex-editor/pex-editor.component';
-import { MonacoEditorModule } from 'ngx-monaco-editor';
-import { monacoConfig } from './monaco-config';
+import { MonacoEditorModule, NGX_MONACO_EDITOR_CONFIG, NgxMonacoEditorConfig } from 'ngx-monaco-editor';
+import { PEXLanguage } from '../antlr4-pex-grammar/pex-config';
+import { PexTokensProvider } from './monaco-providers/pex-tokens-provider';
+import { pexTheme } from './monaco-providers/pex-theme';
+import { pexProvideCompletionItems } from './monaco-providers/pex-completion-item-provider';
 
 const ddpConfig = new ConfigurationService();
 ddpConfig.doGcpErrorReporting = false;
@@ -71,6 +77,17 @@ export function translateFactory(translate: TranslateService,
 function createTranslateLoader(handler: HttpBackend): TranslateHttpLoader {
     const http = new HttpClient(handler);
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
+function onMonacoLoad(studiesServiceAgent: StudiesServiceAgentService) {
+    monaco.languages.register({ id: PEXLanguage });
+    monaco.languages.setTokensProvider(PEXLanguage, new PexTokensProvider());
+    monaco.editor.defineTheme('ddp-theme', pexTheme);
+
+    const pexCompletionItemProvider: monaco.languages.CompletionItemProvider = {
+        provideCompletionItems: (model: monaco.editor.ITextModel, position: monaco.Position) => pexProvideCompletionItems(model, position, studiesServiceAgent)
+    };
+    monaco.languages.registerCompletionItemProvider(PEXLanguage, pexCompletionItemProvider);
 }
 
 @NgModule({
@@ -121,7 +138,7 @@ function createTranslateLoader(handler: HttpBackend): TranslateHttpLoader {
                 deps: [HttpBackend],
             },
         }),
-        MonacoEditorModule.forRoot(monacoConfig),
+        MonacoEditorModule.forRoot(),
     ],
     providers: [
         {
@@ -145,6 +162,16 @@ function createTranslateLoader(handler: HttpBackend): TranslateHttpLoader {
                 LanguageService
             ],
             multi: true
+        },
+        {
+            provide: NGX_MONACO_EDITOR_CONFIG,
+            useFactory: (studiesServiceAgent: StudiesServiceAgentService) => {
+                const monacoConfig: NgxMonacoEditorConfig = {
+                    onMonacoLoad: () => onMonacoLoad(studiesServiceAgent)
+                };
+                return monacoConfig;
+            },
+            deps: [StudiesServiceAgentService]
         }
     ],
     bootstrap: [AppComponent]
