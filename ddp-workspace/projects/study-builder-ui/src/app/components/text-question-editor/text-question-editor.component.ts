@@ -70,7 +70,7 @@ export class TextQuestionEditorComponent implements OnInit, OnDestroy {
         const simplifiedPlaceholderTemplate = new SimpleTemplate(question.placeholderTemplate);
         this.formGroup.patchValue({
             inputType: question.inputType,
-            guid: question.stableId,
+            stableId: question.stableId,
             prompt: simplifiedPromptTemplate.getTranslationText(this.config.defaultLanguageCode),
             placeholder: simplifiedPlaceholderTemplate.getTranslationText(this.config.defaultLanguageCode)
         });
