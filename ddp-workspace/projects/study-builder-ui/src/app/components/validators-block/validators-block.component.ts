@@ -17,7 +17,7 @@ export class ValidatorsBlockComponent implements OnInit, OnDestroy {
             this.validatorsDataSubject.next(ValidatorsMapper.mapToValidationControlsData(data));
         }
     }
-    @Output() validatorsChanged = new EventEmitter<any>();
+    @Output() validatorsChanged = new EventEmitter<RuleDef[]>();
 
     validatorsDataSubject = new BehaviorSubject<ValidationControlsData | boolean>(false);
     validatorsGroup = this.fb.group({
