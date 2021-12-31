@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { BehaviorSubject, merge, Subscription } from 'rxjs';
+import { BehaviorSubject, merge, Observable, Subscription } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 import * as _ from 'underscore';
 import { ValidationControlsData, ValidatorsMapper } from './validators.mapper';
@@ -34,8 +34,9 @@ export class ValidatorsBlockComponent implements OnInit, OnDestroy {
     });
     private sub: Subscription;
 
-    constructor(private fb: FormBuilder) {
-    }
+    constructor(
+        private fb: FormBuilder
+    ) {}
 
     ngOnInit(): void {
         const updateForm$ = this.validatorsDataSubject.pipe(
@@ -45,13 +46,8 @@ export class ValidatorsBlockComponent implements OnInit, OnDestroy {
         const updateValidators$ = this.validatorsGroup.valueChanges.pipe(
             tap((data: ValidationControlsData) => this.validatorsChanged.emit(ValidatorsMapper.mapToValidationRules(data)))
         );
-        const toggleRequiredControls$ = this.validatorsGroup.get('REQUIRED').get('on').valueChanges.pipe(
-            tap((isRequiredOn: boolean) => this.toggleControls('REQUIRED', isRequiredOn))
-        );
-        const toggleLengthControls$ = this.validatorsGroup.get('LENGTH').get('on').valueChanges.pipe(
-            tap((isRequiredOn: boolean) => this.toggleControls('LENGTH', isRequiredOn))
-        );
-
+        const toggleRequiredControls$ = this.toggleValidatorControl$('REQUIRED');
+        const toggleLengthControls$ = this.toggleValidatorControl$('LENGTH');
         this.sub = merge(updateForm$, updateValidators$, toggleRequiredControls$, toggleLengthControls$).subscribe();
     }
 
@@ -59,17 +55,26 @@ export class ValidatorsBlockComponent implements OnInit, OnDestroy {
         this.sub.unsubscribe();
     }
 
-    addValidators() {
+    addValidators(): void {
         this.showValidatorsBlock();
         this.validatorsGroup.reset();
     }
 
-    removeValidators() {
+    removeValidators(): void {
         this.hideValidatorsBlock();
         this.validatorsGroup.reset();
     }
 
-    private toggleControls(validatorName: string, isOn: boolean) {
+    private toggleValidatorControl$(controlName: string): Observable<boolean> {
+        const toggleValidatorControlName = 'on'; // a checkbox to on/off a validator
+        return this.validatorsGroup.get(controlName)
+            .get(toggleValidatorControlName)
+            .valueChanges.pipe(
+                tap((isRequiredOn: boolean) => this.toggleControls(controlName, isRequiredOn))
+            );
+    }
+
+    private toggleControls(validatorName: string, isOn: boolean): void {
         const controls = (this.validatorsGroup.get(validatorName) as FormGroup).controls;
         for (const key of Object.keys(controls)) {
             if (key === 'on') continue;
@@ -77,7 +82,7 @@ export class ValidatorsBlockComponent implements OnInit, OnDestroy {
         }
     }
 
-    private updateForm(validators: ValidationControlsData) {
+    private updateForm(validators: ValidationControlsData): void {
         const areValidatorsEmpty = Object.keys(validators).length === 0;
         this.validatorsGroup.reset();
 
@@ -91,11 +96,11 @@ export class ValidatorsBlockComponent implements OnInit, OnDestroy {
         }
     }
 
-    private hideValidatorsBlock() {
+    private hideValidatorsBlock(): void {
         this.validatorsDataSubject.next(false);
     }
 
-    private showValidatorsBlock() {
+    private showValidatorsBlock(): void {
         this.validatorsDataSubject.next(true);
     }
 }
