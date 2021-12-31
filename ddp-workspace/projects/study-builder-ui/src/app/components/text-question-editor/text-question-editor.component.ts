@@ -32,18 +32,19 @@ export class TextQuestionEditorComponent implements OnInit, OnDestroy {
     initialValidators: RuleDef[];
     private sub: Subscription;
 
-    constructor(private fb: FormBuilder, private config: ConfigurationService) {
-    }
+    constructor(
+        private fb: FormBuilder,
+        private config: ConfigurationService
+    ) {}
 
     ngOnInit(): void {
-        this.questionBlockSubject.pipe(
-            map(block => block?.question?.validations)
-        ).subscribe(validations => this.initialValidators = validations);
-
         const updateFormPipe = this.questionBlockSubject.pipe(
             filter(block => !!block),
             map(block => block.question),
-            tap(question => this.updateForm(question as TextQuestionDef))
+            tap(question => {
+                this.initValidators(question);
+                this.updateForm(question as TextQuestionDef);
+            })
         );
         const updateQuestionPipe = this.formGroup.valueChanges.pipe(
             map(formData => this.updateQuestion(formData)),
@@ -63,6 +64,10 @@ export class TextQuestionEditorComponent implements OnInit, OnDestroy {
         }
         question.validations = validationRules || [];
         this.questionBlockChanged.emit(this.questionBlockSubject.getValue());
+    }
+
+    private initValidators(question: TextQuestionDef): void {
+        this.initialValidators = question.validations;
     }
 
     private updateForm(question: TextQuestionDef): void {
