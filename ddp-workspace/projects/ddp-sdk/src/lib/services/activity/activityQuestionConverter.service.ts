@@ -19,8 +19,10 @@ import { ActivityAbstractValidationRule } from './validators/activityAbstractVal
 import { ActivityRequiredValidationRule } from './validators/activityRequiredValidationRule';
 import { QuestionType } from '../../models/activity/questionType';
 import { ActivityFileQuestionBlock } from '../../models/activity/activityFileQuestionBlock';
+import { ActivityMatrixQuestionBlock } from '../../models/activity/activityMatrixQuestionBlock';
 import * as _ from 'underscore';
 import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
+import { ActivityInstanceSelectQuestionBlock } from '../../models/activity/activityInstanceSelectQuestionBlock';
 
 const DETAIL_MAXLENGTH = 500;
 
@@ -72,6 +74,12 @@ export class ActivityQuestionConverter {
                     picklist.answerId = questionJson.answers[0].answerGuid;
                     picklist.answer = questionJson.answers[0].value;
                 }
+            } else if (questionJson.questionType === QuestionType.Matrix) {
+                const matrixBlock = questionBlock as ActivityMatrixQuestionBlock;
+                const [answer] = questionJson.answers;
+
+                matrixBlock.answerId = answer?.answerGuid;
+                matrixBlock.answer = answer?.value;
             } else {
                 questionBlock.answerId = questionJson.answers[0].answerGuid;
                 const valueForQuestion = questionJson.answers[0].value;
@@ -155,6 +163,14 @@ export class ActivityQuestionConverter {
             {
                 type: QuestionType.File,
                 func: (questionJson) => this.getFileBlock(questionJson)
+            },
+            {
+                type: QuestionType.Matrix,
+                func: (questionJson) => this.getMatrixBlock(questionJson),
+            },
+            {
+                type: QuestionType.ActivityInstanceSelect,
+                func: (questionJson) => this.getActivityInstanceSelectBlock(questionJson)
             }
         ];
     }
@@ -252,5 +268,22 @@ export class ActivityQuestionConverter {
         fileBlock.mimeTypes = questionJson.mimeTypes;
 
         return fileBlock;
+    }
+
+    private getMatrixBlock(questionJson: any): any {
+        const matrixBlock = new ActivityMatrixQuestionBlock();
+
+        matrixBlock.selectMode = questionJson.selectMode;
+        matrixBlock.questions = questionJson.questions;
+        matrixBlock.options = questionJson.options;
+        matrixBlock.groups = questionJson.groups;
+
+        return matrixBlock;
+    }
+
+    private getActivityInstanceSelectBlock(questionJson: any): ActivityInstanceSelectQuestionBlock {
+        const activityInstanceSelectBlock = new ActivityInstanceSelectQuestionBlock();
+
+        return activityInstanceSelectBlock;
     }
 }

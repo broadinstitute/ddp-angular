@@ -1,6 +1,6 @@
 // import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { InvitationDataComponent } from './invitation-data.component';
+// import { InvitationDataComponent } from './invitation-data.component';
 
 describe('InvitationDataComponent', () => {
   // let component: InvitationDataComponent;

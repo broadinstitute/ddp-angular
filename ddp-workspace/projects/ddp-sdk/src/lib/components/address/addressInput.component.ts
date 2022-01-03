@@ -223,7 +223,7 @@ export class AddressInputComponent implements OnInit, OnDestroy {
 
     public ais: AddressInputService;
 
-    private ngUnsubscribe = new Subject();
+    private ngUnsubscribe = new Subject<void>();
     private readonly LOG_SOURCE = 'AddressInputComponent';
 
     // See if we can continue making stuff in form observable as much as possible

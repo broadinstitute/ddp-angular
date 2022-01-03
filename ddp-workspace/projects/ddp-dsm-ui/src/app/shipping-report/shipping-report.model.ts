@@ -9,7 +9,7 @@ export class ShippingReport {
   }
 }
 
-// tslint:disable-next-line:max-classes-per-file
+// eslint-disable-next-line max-classes-per-file
 export class SummaryKitType {
   constructor(public kitType: string, public newK: number, public sent: number, public received: number,
               public newPeriod: number, public sentPeriod: number, public receivedPeriod: number, public month: string) {

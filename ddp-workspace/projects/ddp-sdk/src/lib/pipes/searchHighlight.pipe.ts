@@ -5,6 +5,7 @@ import { StringsHelper } from '../utility/stringsHelper';
     name: 'searchHighlight'
 })
 export class SearchHighlightPipe implements PipeTransform {
+    /* eslint-disable no-useless-escape */
     transform(text: string, search: string, ignoredSymbols?: string[]): string {
         const normalizedSearch = StringsHelper.normalizeString(search, ignoredSymbols || []);
 

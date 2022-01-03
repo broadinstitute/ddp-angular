@@ -1,7 +1,8 @@
+@use '@angular/material' as mat;
 @import '../../../app-theme.scss';
 
 .footer {
-    background-color: mat-color($app-theme, 900);
+    background-color: mat.get-color-from-palette($app-theme, 900);
     min-height: 20rem;
 }
 
@@ -29,7 +30,7 @@
 
 .nav {
     padding: 0 3.25rem 3.25rem 0;
-    border-bottom: 1px solid mat-color($app-theme, 700);
+    border-bottom: 1px solid mat.get-color-from-palette($app-theme, 700);
 }
 
 .navigation,
@@ -61,16 +62,16 @@
 
 .footer-link:link,
 .footer-link:visited {
-    color: mat-color($app-theme, 200);
+    color: mat.get-color-from-palette($app-theme, 200);
 }
 
 .footer-link:hover {
-    color: mat-color($app-theme, 650);
+    color: mat.get-color-from-palette($app-theme, 650);
     text-decoration: underline;
 }
 
 .footer-link:active {
-    color: mat-color($app-theme, 200);
+    color: mat.get-color-from-palette($app-theme, 200);
     text-decoration: underline;
 }
 

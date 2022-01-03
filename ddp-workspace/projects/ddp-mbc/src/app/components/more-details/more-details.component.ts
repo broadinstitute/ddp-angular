@@ -2,7 +2,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ToolkitConfigurationService } from 'toolkit';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { NGXTranslateService } from 'ddp-sdk';
 
 @Component({

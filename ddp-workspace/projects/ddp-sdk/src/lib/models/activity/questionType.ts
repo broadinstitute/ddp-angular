@@ -7,5 +7,7 @@ export enum QuestionType {
     Composite = 'COMPOSITE',
     Agreement = 'AGREEMENT',
     Numeric = 'NUMERIC',
-    File = 'FILE'
+    File = 'FILE',
+    Matrix = 'MATRIX',
+    ActivityInstanceSelect = 'ACTIVITY_INSTANCE_SELECT',
 }

@@ -41,8 +41,8 @@ import { IrbGuard } from './guards/irb.guard';
 import { BrowserGuard } from './guards/browser.guard';
 
 import { NetworkSnifferComponent } from './components/networkSniffer.component';
-import { NewRequestMock } from './components/newRequestMock.component';
-import { ValidationMessage } from './components/validationMessage.component';
+import { NewRequestMockComponent } from './components/newRequestMock.component';
+import { ValidationMessageComponent } from './components/validationMessage.component';
 // Logging components
 import { LoggingService } from './services/logging.service';
 import { StackdriverErrorReporterService } from './services/stackdriverErrorReporter.service';
@@ -84,6 +84,9 @@ import { ActivityAgreementAnswer } from './components/activityForm/answers/activ
 import { ActivityTextAnswer } from './components/activityForm/answers/activityTextAnswer.component';
 import { ActivityTextInput } from './components/activityForm/answers/activity-text-input/activityTextInput.component';
 import { ActivityFileAnswer } from './components/activityForm/answers/activity-file-answer/activityFileAnswer.component';
+import { ActivityFileAnswerSuccess } from './components/activityForm/answers/activity-file-answer-success/activityFileAnswerSuccess.component';
+import { ActivityMatrixAnswer } from './components/activityForm/answers/activity-matrix-answer/activity-matrix-answer.component';
+import { ActivityInstanceSelectAnswer } from './components/activityForm/answers/activity-instance-select-answer/activity-instance-select-answer.component';
 import { ActivityEmailInput } from './components/activityForm/answers/activityEmailInput.component';
 import { ActivityNumericAnswer } from './components/activityForm/answers/activityNumericAnswer.component';
 import { ActivitySectionComponent } from './components/activityForm/activitySection.component';
@@ -181,6 +184,7 @@ import { ChangeLanguageRedirectComponent } from './components/internationalizati
 import { LanguageServiceAgent } from './services/serviceAgents/languageServiceAgent.service';
 import { PopupWithCheckboxComponent } from './components/popupWithCheckbox.component';
 import { DisplayLanguagePopupServiceAgent } from './services/serviceAgents/displayLanguagePopupServiceAgent.service';
+import { ActivityInstanceSelectAnswerService } from './services/serviceAgents/activityInstanceSelectAnswer.service';
 import { InvitationPipe } from './pipes/invitationFormatter.pipe';
 import { StudyDetailServiceAgent } from './services/serviceAgents/studyDetailServiceAgent.service';
 import { StatisticsServiceAgent } from './services/serviceAgents/statisticsServiceAgent.service';
@@ -316,6 +320,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         RenewSessionNotifier,
         LanguageService,
         DisplayLanguagePopupServiceAgent,
+        ActivityInstanceSelectAnswerService,
         StudyDetailServiceAgent,
         StatisticsServiceAgent,
         ModalDialogService,
@@ -341,9 +346,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ],
     declarations: [
         NetworkSnifferComponent,
-        NewRequestMock,
-        ValidationMessage,
-
+        NewRequestMockComponent,
+        ValidationMessageComponent,
         LoginComponent,
         SignInOutComponent,
         UserProfileComponent,
@@ -354,7 +358,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ChangeLanguageRedirectComponent,
         PopupWithCheckboxComponent,
         PrismComponent,
-
         // activity form
         ActivityComponent,
         ActivityRedesignedComponent,
@@ -364,6 +367,9 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityTextAnswer,
         ActivityTextInput,
         ActivityFileAnswer,
+        ActivityFileAnswerSuccess,
+        ActivityMatrixAnswer,
+        ActivityInstanceSelectAnswer,
         ActivityEmailInput,
         ActivityNumericAnswer,
         ActivityAnswerComponent,
@@ -419,8 +425,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ],
     exports: [
         NetworkSnifferComponent,
-        NewRequestMock,
-
+        NewRequestMockComponent,
         LoginComponent,
         SignInOutComponent,
         UserProfileComponent,
@@ -431,7 +436,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ChangeLanguageRedirectComponent,
         PopupWithCheckboxComponent,
         PrismComponent,
-
         ActivityComponent,
         ActivityRedesignedComponent,
         ActivitySectionComponent,
@@ -439,6 +443,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityBooleanAnswer,
         ActivityTextAnswer,
         ActivityFileAnswer,
+        ActivityMatrixAnswer,
+        ActivityInstanceSelectAnswer,
         ActivityEmailInput,
         ActivityNumericAnswer,
         ActivityAnswerComponent,
@@ -459,7 +465,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         AutocompleteActivityPicklistQuestion,
         InstitutionComponent,
         InstitutionsFormComponent,
-
         LoadingComponent,
         LoaderComponent,
         UserMenuComponent,
@@ -471,12 +476,11 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         FireCloudListWorkspacesComponent,
         ExportStudyComponent,
         DatePickerComponent,
-
         AddressInputComponent,
         AddressEmbeddedComponent,
         VerifyAgeUpComponent,
         AcceptAgeUpComponent,
-        ValidationMessage,
+        ValidationMessageComponent,
         TranslateModule,
         LazyLoadResourcesDirective,
         RouteTransformerDirective,
@@ -492,8 +496,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ProgressIndicatorComponent,
         ActivityBlockComponent,
         ConfirmDialogComponent
-    ],
-    entryComponents: [ConfirmDialogComponent]
+    ]
 })
 export class DdpModule {
 }

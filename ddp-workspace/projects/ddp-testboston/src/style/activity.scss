@@ -1,3 +1,4 @@
+@use '@angular/material' as mat;
 @import '../app-theme.scss';
 
 // common activity styles
@@ -29,7 +30,7 @@
 // consent header
 .header-section {
     margin: 0 0 2rem 0;
-    background-color: mat-color($app-theme, 3400);
+    background-color: mat.get-color-from-palette($app-theme, 3400);
 }
 
 .activity-header {
@@ -39,7 +40,7 @@
     justify-content: space-between;
     font-family: 'Nunito', sans-serif;
     margin: 4rem 0;
-    color: mat-color($app-theme, 100);
+    color: mat.get-color-from-palette($app-theme, 100);
 
     &__icon {
         height: 1.25rem;
@@ -110,7 +111,7 @@
 
 // info box
 .infobox {
-    border: 2px solid mat-color($app-theme, 1200);
+    border: 2px solid mat.get-color-from-palette($app-theme, 1200);
     border-radius: 8px;
     background-color: rgba(113, 84, 255, 0.06);
     padding: 1rem;
@@ -119,7 +120,7 @@
 
 // a box that calls out important information
 .callout-box {
-    border: 2px solid mat-color($app-theme, 1200);
+    border: 2px solid mat.get-color-from-palette($app-theme, 1200);
     border-radius: 3px;
     background-color: rgba(252, 246, 224, 1);
     padding: 1rem;
@@ -128,7 +129,7 @@
 
 // a box that provides a fixed-height scroll
 .scroll-box {
-    border: 2px solid mat-color($app-theme, 1200);
+    border: 2px solid mat.get-color-from-palette($app-theme, 1200);
     border-radius: 3px;
     padding: 1rem;
     margin: 2rem 0;
@@ -143,7 +144,7 @@
     font-size: 1.25rem;
     line-height: 1.875rem;
     margin: 1rem 0;
-    color: mat-color($app-theme, 2700);
+    color: mat.get-color-from-palette($app-theme, 2700);
     font-family: 'Nunito', sans-serif;
     font-weight: 500;
 }
@@ -171,7 +172,7 @@
 
     &__divider {
         flex: 1;
-        border-top: 3px solid mat-color($app-theme, 3500);
+        border-top: 3px solid mat.get-color-from-palette($app-theme, 3500);
         margin: 20px 0 0 0;
     }
 }
@@ -189,7 +190,7 @@
         justify-content: center;
         width: 40px;
         height: 40px;
-        background-color: mat-color($app-theme, 3500);
+        background-color: mat.get-color-from-palette($app-theme, 3500);
         border-radius: 20px;
         font-size: 20px;
         line-height: 38px;
@@ -208,11 +209,11 @@
     .activity-step {
         &__number {
             color: white;
-            background-color: mat-color($app-theme, 1300);
+            background-color: mat.get-color-from-palette($app-theme, 1300);
         }
 
         &__text {
-            color: mat-color($app-theme, 1300);
+            color: mat.get-color-from-palette($app-theme, 1300);
         }
     }
 }
@@ -223,11 +224,11 @@
     .activity-step {
         &__number {
             color: white;
-            background-color: mat-color($app-theme, 1200);
+            background-color: mat.get-color-from-palette($app-theme, 1200);
         }
 
         &__text {
-            color: mat-color($app-theme, 1200) !important;
+            color: mat.get-color-from-palette($app-theme, 1200) !important;
         }
     }
 }
@@ -264,7 +265,7 @@
 
     mat-checkbox,
     mat-radio-button {
-        color: mat-color($app-theme, 700) !important;
+        color: mat.get-color-from-palette($app-theme, 700) !important;
     }
 
     .mat-radio-label {
@@ -287,7 +288,7 @@ ddp-activity-boolean-answer {
         flex-direction: column;
 
         mat-radio-button {
-            margin: 5px 30px 5px 0px !important;
+            margin: 5px 30px 5px 0 !important;
         }
     }
 }
@@ -312,7 +313,7 @@ ddp-activity-boolean-answer {
 .mat-radio-label-content {
     font-size: 1.25rem !important;
     line-height: 1.875rem !important;
-    color: mat-color($app-theme, 700);
+    color: mat.get-color-from-palette($app-theme, 700);
 }
 
 .mat-list-item-content {
@@ -334,7 +335,7 @@ ddp-activity-boolean-answer {
     .mat-form-field-label {
         font-size: 20px !important;
         font-weight: 700 !important;
-        color: mat-color($app-theme, 700) !important;
+        color: mat.get-color-from-palette($app-theme, 700) !important;
         text-overflow: unset !important;
         overflow: initial !important;
     }
@@ -360,7 +361,7 @@ ddp-activity-boolean-answer {
 .native-select {
     select {
         font-size: 1.375rem;
-        color: mat-color($app-theme, 900);
+        color: mat.get-color-from-palette($app-theme, 900);
         background-color: rgba(255, 255, 255, 0.9);
         width: 100%;
         padding: 0;
@@ -416,7 +417,7 @@ ddp-activity-boolean-answer {
 }
 
 .static-text {
-    color: mat-color($app-theme, 3600);
+    color: mat.get-color-from-palette($app-theme, 3600);
     margin-top: 0;
 }
 
@@ -433,7 +434,7 @@ ddp-activity-boolean-answer {
 
 // material dropdown
 .mat-select-value {
-    color: mat-color($app-theme, 900) !important;
+    color: mat.get-color-from-palette($app-theme, 900) !important;
 }
 
 // picklist characters counter
@@ -443,13 +444,13 @@ ddp-activity-boolean-answer {
 }
 
 .ddp-counter-color {
-    color: mat-color($app-theme, 1700);
+    color: mat.get-color-from-palette($app-theme, 1700);
 }
 
 // native dropdown
 select {
     font-size: 1.375rem;
-    color: mat-color($app-theme, 900);
+    color: mat.get-color-from-palette($app-theme, 900);
     background-color: rgba(255, 255, 255, 0.9);
     width: 100%;
     padding: 0;

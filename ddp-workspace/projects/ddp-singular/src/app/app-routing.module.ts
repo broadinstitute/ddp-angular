@@ -95,12 +95,12 @@ const routes: Routes = [
   {
     path: Route.Dashboard,
     redirectTo: Route.ParticipantList,
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top', relativeLinkResolution: 'legacy' })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

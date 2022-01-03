@@ -96,7 +96,11 @@ export class Utils {
     let csv = this.makeCSV(data, paths, columns);
     csv = headers + '\r\n' + csv;
     const blob = new Blob([ csv ], {type: 'text/csv;charset=utf-8;'});
+    /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+    // @ts-ignore
     if (navigator.msSaveBlob) { // IE 10+
+      /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+      // @ts-ignore
       navigator.msSaveBlob(blob, fileName);
     } else {
       const link = document.createElement('a');
@@ -222,6 +226,7 @@ export class Utils {
           if (col.type === 'ADDITIONALVALUE') {
             const fieldName = 'additionalValues';
             // TODO: check is it correct ? - `fieldName` is set on the previous line
+            /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
             // @ts-ignore
             if (fieldName !== '') {
               let value = this.getObjectAdditionalValue(o, fieldName, col);

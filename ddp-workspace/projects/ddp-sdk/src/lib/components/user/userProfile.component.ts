@@ -39,6 +39,6 @@ export class UserProfileComponent implements OnDestroy {
             width: '450px',
             data: {}
         });
-        dialogRef.afterClosed().subscribe(result => { });
+        dialogRef.afterClosed().subscribe(() => { });
     }
 }

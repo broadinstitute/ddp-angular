@@ -1,4 +1,4 @@
-/* tslint:disable:max-classes-per-file */
+/* eslint-disable max-classes-per-file */
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -10,6 +10,7 @@ import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-transla
 import { ActivityInstance, ActivityServiceAgent, LoggingService, ModalActivityBlockComponent } from 'ddp-sdk';
 import { ModalDialogService } from '../../../../services/modal-dialog.service';
 import { MatIconModule } from '@angular/material/icon';
+import { ConfigurationService } from '../../../../services/configuration.service';
 
 describe('ModalActivityBlockComponent', () => {
   @Component({
@@ -52,7 +53,8 @@ describe('ModalActivityBlockComponent', () => {
         { provide: ActivityServiceAgent, useValue: {} },
         { provide: MatDialog, useValue: {} },
         { provide: LoggingService, useValue: {} },
-        { provide: ModalDialogService, useValue: {} }
+        { provide: ModalDialogService, useValue: {} },
+        { provide: 'ddp.config', useValue: new ConfigurationService() }
       ],
       imports: [
         MatCardModule,

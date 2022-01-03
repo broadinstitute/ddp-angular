@@ -1,6 +1,6 @@
 // import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { ScanValueComponent } from './scan-value.component';
+// import { ScanValueComponent } from './scan-value.component';
 
 describe('ScanValueComponent', () => {
   // let component: ScanValueComponent;

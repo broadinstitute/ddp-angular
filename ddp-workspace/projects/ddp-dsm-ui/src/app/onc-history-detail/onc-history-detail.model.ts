@@ -50,9 +50,8 @@ export class OncHistoryDetail {
   }
 
   static parse(json): OncHistoryDetail {
-    let jsonData: any[];
     const tissues: Array<Tissue> = [];
-    jsonData = json.tissues;
+    const jsonData = json.tissues;
     if (jsonData != null) {
       jsonData.forEach((val) => {
         const tissue = Tissue.parse(val);

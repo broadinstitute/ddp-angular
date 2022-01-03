@@ -1,3 +1,4 @@
+@use '@angular/material' as mat;
 @import '../../../app-theme.scss';
 
 @mixin block-margin {
@@ -25,7 +26,7 @@
     margin: 2rem auto 4rem auto;
 
     &__title {
-        color: mat-color($app-theme, 1200);
+        color: mat.get-color-from-palette($app-theme, 1200);
     }
 }
 
@@ -35,14 +36,14 @@
     margin: 1rem 0 0 0;
 
     .button:last-child {
-        color: mat-color($app-theme, 1300) !important;
+        color: mat.get-color-from-palette($app-theme, 1300) !important;
     }
 }
 
 
 .about-section {
-    background-color: mat-color($app-theme, 1400);
-    color: mat-color($app-theme, 700);
+    background-color: mat.get-color-from-palette($app-theme, 1400);
+    color: mat.get-color-from-palette($app-theme, 700);
 }
 
 .about-block {
@@ -55,8 +56,8 @@
 }
 
 .results-section {
-    background-color: mat-color($app-theme, 1400);
-    color: mat-color($app-theme, 700);
+    background-color: mat.get-color-from-palette($app-theme, 1400);
+    color: mat.get-color-from-palette($app-theme, 700);
 }
 
 .results-block {
@@ -64,14 +65,14 @@
     margin: 4rem auto 4rem auto;
 
     &__text {
-        margin: 0rem 0rem auto auto;
+        margin: 0 0 auto auto;
     }
 }
 
 .columns {
     display: grid;
     grid-auto-flow: column;
-    margin: 2rem auto 0rem auto;
+    margin: 2rem auto 0 auto;
 }
 
 .columns-child-left {
@@ -112,7 +113,7 @@
 }
 
 .question-section {
-    background-color: mat-color($app-theme, 3200);
+    background-color: mat.get-color-from-palette($app-theme, 3200);
 }
 
 .question-block {
@@ -134,7 +135,7 @@
         font-family: 'Nunito', sans-serif;
         font-size: 1.25rem;
         line-height: 2.25rem;
-        color: mat-color($app-theme, 400);
+        color: mat.get-color-from-palette($app-theme, 400);
     }
 
     &__help {
@@ -154,21 +155,21 @@
     margin: 3.5rem 0;
 
     &__title {
-        color: mat-color($app-theme, 1200);
+        color: mat.get-color-from-palette($app-theme, 1200);
         font-size: 1.625rem;
         font-weight: 600;
         @include member;
     }
 
     &__affiliations {
-        color: mat-color($app-theme, 700);
+        color: mat.get-color-from-palette($app-theme, 700);
         font-size: 1.375rem;
         font-weight: 600;
         @include member;
     }
 
     &__info {
-        color: mat-color($app-theme, 700);
+        color: mat.get-color-from-palette($app-theme, 700);
         font-size: 1.25rem;
         @include member;
     }
@@ -176,7 +177,7 @@
 
 .others {
     &__title {
-        color: mat-color($app-theme, 1200);
+        color: mat.get-color-from-palette($app-theme, 1200);
         font-size: 1.625rem;
         font-weight: 600;
         @include member;
@@ -189,14 +190,14 @@
     }
 
     &__name {
-        color: mat-color($app-theme, 700);
+        color: mat.get-color-from-palette($app-theme, 700);
         font-size: 1.25rem;
         @include member;
     }
 }
 
 .mailing-list-section {
-    background-color: mat-color($app-theme, 1600);
+    background-color: mat.get-color-from-palette($app-theme, 1600);
 
     h2 {
         font-size: 2rem;
@@ -216,8 +217,8 @@
 .mat-expansion-panel {
     border-radius: unset !important;
     box-shadow: unset !important;
-    border-top: 1px solid mat-color($app-theme, 500);
-    background-color: mat-color($app-theme, 3200);
+    border-top: 1px solid mat.get-color-from-palette($app-theme, 500);
+    background-color: mat.get-color-from-palette($app-theme, 3200);
 }
 
 .mat-expansion-panel-header {
@@ -225,7 +226,7 @@
 }
 
 .mat-expansion-panel:last-child {
-    border-bottom: 1px solid mat-color($app-theme, 500);
+    border-bottom: 1px solid mat.get-color-from-palette($app-theme, 500);
 }
 
 .mat-expansion-panel-header {

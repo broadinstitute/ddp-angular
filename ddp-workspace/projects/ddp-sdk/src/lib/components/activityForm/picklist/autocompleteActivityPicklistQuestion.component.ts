@@ -50,7 +50,7 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     filteredOptions: ActivityPicklistOption[] = [];
     inputFormControl = new FormControl();
     readonly ignoredSymbolsInQuery: string[];
-    private readonly ngUnsubscribe = new Subject();
+    private readonly ngUnsubscribe = new Subject<void>();
 
     constructor(
         translate: NGXTranslateService,

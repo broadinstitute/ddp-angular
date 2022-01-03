@@ -16,7 +16,7 @@ export class ExtractTranslationPathsForArrayPipe implements PipeTransform {
 
   constructor(private _translateService: TranslateService) {
   }
-  async transform(key: any): Promise<any[]> {
+  async transform(key: string): Promise<any[]> {
     return await this._translateService.getTranslation('en').toPromise()
       .then(x => {
         const translations = this.resolve(key, x);
@@ -29,7 +29,7 @@ export class ExtractTranslationPathsForArrayPipe implements PipeTransform {
       });
   }
 
-  resolve(path, obj): any {
+  resolve(path: string, obj: any): any {
     return path.split('.').reduce((prev, curr) => prev ? prev[curr] : null, obj || '');
   }
 }

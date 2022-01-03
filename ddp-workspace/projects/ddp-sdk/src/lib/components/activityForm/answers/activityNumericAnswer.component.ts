@@ -53,7 +53,7 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
                 this.initForm();
             }
             if (propName === 'readonly' && !changes['readonly'].firstChange) {
-                this.readonly ? this.numericField.disable() : this.numericField.enable();
+                this.readonly ? this.numericField.disable({ emitEvent: false }) : this.numericField.enable({ emitEvent: false });
             }
         }
     }

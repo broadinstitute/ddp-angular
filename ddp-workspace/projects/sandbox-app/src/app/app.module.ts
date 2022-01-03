@@ -63,7 +63,7 @@ if (baseElt) {
 
 declare let DDP_ENV: any;
 
-export let config = new ConfigurationService();
+export const config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
 config.auth0Domain = DDP_ENV.auth0Domain;
 config.auth0ClientId = DDP_ENV.auth0ClientId;
@@ -166,7 +166,10 @@ declare const ga: (...args: any[]) => void;
   imports: [
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: false } // <-- debugging purposes only
+      {
+        enableTracing: false, // <-- debugging purposes only
+        relativeLinkResolution: 'legacy'
+      }
     ),
     BrowserModule,
     DdpModule,

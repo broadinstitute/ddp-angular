@@ -1,4 +1,4 @@
-import { DashboardComponent } from './dashboard.component';
+// import { DashboardComponent } from './dashboard.component';
 
 describe('Component: Dashboard', () => {
   // it('should create an instance', () => {

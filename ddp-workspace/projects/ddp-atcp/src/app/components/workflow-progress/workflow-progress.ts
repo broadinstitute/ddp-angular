@@ -13,7 +13,7 @@ export const COMPLETE = 'COMPLETE';
 export class WorkflowProgressComponent implements OnInit, OnDestroy {
   @Input() public steps: ActivityInstance[] = [];
   @Input() public instanceGuid: string;
-  // tslint:disable-next-line:no-output-on-prefix
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() public onChangeActivity = new EventEmitter<ActivityInstance>();
 
   public CREATED = CREATED;
@@ -26,7 +26,7 @@ export class WorkflowProgressComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     const translate$ = this.ngxTranslate.getTranslation(['WorkflowProgress.Statuses'])
-      .subscribe((statuses: object) => {
+      .subscribe((statuses: Record<string, unknown>) => {
         this.statuses = statuses;
       });
     this.anchor.addNew(translate$);

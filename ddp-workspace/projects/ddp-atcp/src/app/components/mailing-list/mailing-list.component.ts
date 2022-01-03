@@ -67,7 +67,9 @@ export class MailingListComponent implements OnInit, OnDestroy {
     });
   }
 
-  signIn(): void {}
+  signIn(): void {
+      //TODO: check if we need the empty method?
+  }
 
   private makeEmailForm(userInfo: UserInfo): FormGroup {
     return new FormGroup({

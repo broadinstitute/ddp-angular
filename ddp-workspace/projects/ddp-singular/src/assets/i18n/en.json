@@ -7,7 +7,7 @@
       "FAQs": "FAQs",
       "ContactUs": "Contact Us",
       "SignMeUp": "Sign me up!",
-      "Dashboard": "Dashboard"
+      "Dashboard": "My Dashboard"
     }
   },
   "Activities": {
@@ -93,7 +93,7 @@
           {
             "Name": "Who can take part in Project Singular?",
             "Answers": [
-              "The study is open to anyone living in the United States or Canada who is: <ul><li>Living with a single ventricle heart defect. The person can be any age. They can be at any stage in their patient journey (pre-Fontan, post-Fontan, or post-heart transplant).</li><li>A biological(birth) parent or sibling of someone with a single ventricle heart defect.</li><li>A biological (birth) child of someone with a single ventricle heart defect.</li></ul>",
+              "The study is open to anyone living in the United States or Canada who is: <ul class=\"simple-list\"><li>Living with a single ventricle heart defect. The person can be any age. They can be at any stage in their patient journey (pre-Fontan, post-Fontan, or post-heart transplant).</li><li>A biological(birth) parent or sibling of someone with a single ventricle heart defect.</li><li>A biological (birth) child of someone with a single ventricle heart defect.</li></ul>",
               "Children who are minors must have consent from a parent or guardian.",
               "Adults not able to consent themselves must have consent from a legally authorized representative (such as a guardian). "
             ]
@@ -105,7 +105,7 @@
               "You will not be paid to take part in this study.",
               "There is no cost to take part in this study.",
               "You can quit the study at any time.",
-              "If you have any questions, you may call us at 650-761-6486. Or email us at contact@projectsingular.org."
+              "If you have any questions, you may call us at <a href=\"tel:6507616486\">650-761-6486</a>. Or email us at <a href=\"mailto:contact@projectsingular.org\">contact@projectsingular.org</a>."
             ]
           },
           {
@@ -131,7 +131,7 @@
             "Name": "Why are family members of people with single ventricle disease asked to participate?",
             "Answers": [
               "The causes of single ventricle heart disease are complex.  Looking at the DNA of patients’ family members may help. This may show changes that lead to single ventricle heart defects within the family. What we learn may help us find causes for single ventricle heart disease.  That might help develop better treatments.",
-              "<p>How many family members do you need to take part?<p><ul><li>The more DNA samples we have, the better. We would like patients and their close family members to join the study. But even one family member is helpful.</li></ul>"
+              "<p>How many family members do you need to take part?<p><ul class=\"simple-list\"><li>The more DNA samples we have, the better. We would like patients and their close family members to join the study. But even one family member is helpful.</li></ul>"
             ]
           },
           {
@@ -143,7 +143,7 @@
           {
             "Name": "Will you contact me in the future?",
             "Answers": [
-              "<p>We may contact you in the future for:<p><ul><li>More information we may need for the study.</li><li>To invite you to take other surveys or studies.</li><li>To share information about the study progress and/or discoveries.</li></ul>"
+              "<p>We may contact you in the future for:<p><ul class=\"simple-list\"><li>More information we may need for the study.</li><li>To invite you to take other surveys or studies.</li><li>To share information about the study progress and/or discoveries.</li></ul>"
             ]
           },
           {
@@ -206,7 +206,7 @@
             "Answers": [
               "Your privacy is very important to us. Your information will be stored in a secure online system.",
               "The information will be “de-identified.” This means we will take out details like your name or birth date. This makes it harder to identify you from the information. ",
-              "The principal investigator (lead researcher) for Project Singular works for Additional Ventures. They have signed an agreement to keep all information private. If you have questions or concerns, please let us know. You can call us at 650-761-6486. Or you can email us at contact@projectsingular.org."
+              "The principal investigator (lead researcher) for Project Singular works for Additional Ventures. They have signed an agreement to keep all information private. If you have questions or concerns, please let us know. You can call us at <a href=\"tel:6507616486\">650-761-6486</a>. Or you can email us at <a href=\"mailto:contact@projectsingular.org\">contact@projectsingular.org</a>."
             ]
           },
           {
@@ -241,11 +241,12 @@
     "VentricleHeartDefects": {
       "Title": "About Single Ventricle Heart Defects",
       "P1": "Before a baby is born, the first organ to grow is the heart. In most hearts, there are four chambers. Two are atria. The other two are ventricles. In some people, one ventricle doesn’t grow fully. That ventricle may be smaller. Or it may not develop all the way. Or it may be missing an important piece. When any of these things happen it is called a single ventricle heart defect.",
+      "Link": "Click here for a helpful video explaining single ventricle heart defects.",
       "P2": "<p><b>There are many types of single ventricle heart defects. The most common are:</b></p><ul class=\"simple-list\"><li>Hypoplastic Left Heart Syndrome (HLHS)</li><li>Tricuspid Atresia</li><li>Double Inlet Left Ventricle (DILV)</li><li>Double Outlet Right Ventricle (DORV)</li><li>Single Left Ventricle</li><li>Pulmonary Atresia with Intact Ventricular<br /> Septum (PA-IVS)</li><li>Unbalanced Atrioventricular Canal</li></ul>",
       "P3": "Scientists are trying to find out why some people’s hearts grow this way. But they don't have the full picture. We know that single ventricle heart defects are likely caused by more than one thing.  One cause may be in a person’s DNA. We want to learn more about the DNA of patients with single ventricle heart defects. We may find something in their DNA linked to these defects.",
       "P4": "Each patient is unique. But right now, most children with a single ventricle heart defect will need three stages of surgery. First, a Norwood or a shunt. Next, a Glenn procedure. And last, a Fontan procedure. These surgeries are done to make a new circulatory system. This allows blood to flow to all parts of the body and bring more oxygen to the lungs. But some patients end up with other health problems after surgery.",
       "P5": "Right now, there is no cure for single ventricle heart defects and there are other health issues that often develop in other parts of the body. Sometimes the person’s single ventricle can fail.  The best option right now for a failing single ventricle is a heart transplant. But there are a lot of people who need a heart transplant. And there are not enough hearts. Also, a heart transplant has many challenges. It requires lifelong treatment. This can affect quality of life. Also, transplanted organs have a limited lifespan. ",
-      "P6": "<span class=\"text-semibold\">We don’t know if Project Singular will lead to a cure. But we believe it will help us learn more. We hope to learn more about people with single ventricle may lead to better treatments and medicines. And maybe one day, it could lead to a cure.</span>"
+      "P6": "<span class=\"text-semibold\">We don’t know if Project Singular will lead to a cure. But we believe it will help us learn more. We hope to learn more about people with single ventricle and think that will lead to better treatments and medicines. And maybe one day, it could lead to a cure.</span>"
     }
   },
   "SDK": {
@@ -458,7 +459,8 @@
       "MaxSizeErrorMessage": "Maximum file size exceeded",
       "InvalidTypeErrorMessage": "Type of file selected is not valid",
       "CancelUpload": "Cancel upload",
-      "RemoveUploadedFile": "Remove uploaded file"
+      "RemoveUploadedFile": "Remove uploaded file",
+      "Success": "Thank you for uploading the following file:"
     }
   },
   "Error": {
@@ -593,6 +595,11 @@
           "ImageUrl": "assets/images/Keller_circle_2x.png",
           "Name": "Kirstie Keller, PhD",
           "About": "Principal Investigator,<br/>Project Singular<br/>Vice President of Programs,<br/>Additional Ventures"
+        },
+        {
+          "ImageUrl": "assets/images/taylor-maclean.jpg",
+          "Name": "Taylor MacLean, MS",
+          "About": "Program Manager, Project&nbsp;Singular, Additional Ventures"
         }
       ]
     },
@@ -602,7 +609,7 @@
         {
           "ImageUrl": "assets/images/Angela_circle_2x.png",
           "Name": "Angela Lorts, MD",
-          "About": "Co-Founder and Co-Director of ACTION<br/>Professor, Pediatrics, University of Cincinnati College of Medicine"
+          "About": "Co-Founder and Co-Director<br/>of ACTION<br/>Professor, Pediatrics, University of Cincinnati College of Medicine"
         },
         {
           "ImageUrl": "assets/images/Kurt_circle_2x.png",
@@ -632,7 +639,7 @@
         {
           "ImageUrl": "assets/images/Kim_circle_2x.png",
           "Name": "Kim McBride, MD",
-          "About": "Investigator, Center for Cardiovascular Research at Nationwide Children's Hospital; Chief, Division of Genetic and Genomic Medicine, and Associate Professor in the Department of Pediatrics at The Ohio State University College of Medicine"
+          "About": "Investigator, Center for Cardiovascular Research at Nationwide Children's Hospital; Chief, Division of Genetic and Genomic Medicine, and Associate Professor in the Department of<br>Pediatrics at The Ohio State University College of Medicine"
         },
         {
           "ImageUrl": "assets/images/Nadia_2x.png",

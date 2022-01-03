@@ -34,8 +34,6 @@ export class UserActivitiesComponent {
   statusCodes = { COMPLETE, CREATED, IN_PROGRESS };
   activityCodes = ActivityCodes;
 
-  constructor() {}
-
   get currentActivity(): ActivityInstance | null {
     const inProgressActivity = this.activities.find(
       activity =>

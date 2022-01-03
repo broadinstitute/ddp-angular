@@ -32,6 +32,8 @@ export * from './lib/models/activity/MailAddressBlock';
 export * from './lib/models/activity/numericType';
 export * from './lib/models/activity/textSuggestion';
 export * from './lib/models/activity/activityForm';
+export * from './lib/models/activity/createActivityInstanceResponse';
+export * from './lib/models/activity/deleteActivityInstanceResponse';
 export * from './lib/models/suggestionMatch';
 export * from './lib/models/userProfileDto';
 export * from './lib/models/auth0-mode';
@@ -147,6 +149,8 @@ export * from './lib/components/activityForm/answers/activity-text-input/activit
 export * from './lib/components/activityForm/answers/activityTextAnswer.component';
 export * from './lib/components/activityForm/answers/activityBooleanAnswer.component';
 export * from './lib/components/activityForm/answers/activity-file-answer/activityFileAnswer.component';
+export * from './lib/components/activityForm/answers/activity-matrix-answer/activity-matrix-answer.component';
+export * from './lib/components/activityForm/answers/activity-instance-select-answer/activity-instance-select-answer.component';
 
 export * from './lib/components/activityForm/activity-blocks/activityQuestion.component';
 export * from './lib/components/activityForm/activity-blocks/modalActivityBlock/modalActivityBlock.component';

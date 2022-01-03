@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import {
   AnalyticsEventActions,
@@ -12,15 +12,13 @@ import {
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   readonly rarexLink = 'https://rare-x.org/';
 
   constructor(
     private session: SessionMementoService,
     private analytics: AnalyticsEventsService,
   ) {}
-
-  public ngOnInit(): void {}
 
   public get isAuthenticated(): boolean {
     return this.session.isAuthenticatedSession();

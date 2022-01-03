@@ -1,0 +1,26 @@
+{
+  "extends": "../../.eslintrc.json",
+  "ignorePatterns": [
+    "!**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "projects/basil-app/tsconfig.eslint.json"
+        ],
+        "createDefaultProgram": false
+      },
+      "rules": {}
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "rules": {}
+    }
+  ]
+}

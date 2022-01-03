@@ -121,7 +121,7 @@ export class DiscardSampleComponent implements OnInit {
       };
       this.dsmService.setKitDiscardAction(this.realm, JSON.stringify(payload)).subscribe(
         data => {
-          // tslint:disable-next-line:no-console
+          // eslint-disable-next-line no-console
           console.info(`received: ${JSON.stringify(data, null, 2)}`);
           this.getSamples();
         },

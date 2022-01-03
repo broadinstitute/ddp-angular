@@ -16,7 +16,11 @@ describe('ActivityComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ActivityComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    component.activity = {
+      activityCode: 'activityCode',
+      sectionsObservables: []
+    } as any;
+      fixture.detectChanges();
   });
 
   it('should create', () => {

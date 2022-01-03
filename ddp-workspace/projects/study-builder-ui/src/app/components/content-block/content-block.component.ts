@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ContentBlockDef } from '../../model/core/contentBlockDef';
 
 @Component({
@@ -6,13 +6,8 @@ import { ContentBlockDef } from '../../model/core/contentBlockDef';
   templateUrl: './content-block.component.html',
   styleUrls: ['./content-block.component.scss']
 })
-export class ContentBlockComponent implements OnInit {
+export class ContentBlockComponent {
   @Input() block: ContentBlockDef;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
   public editorInit(): object {
     return {

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { take } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { ConfigurationService, MailingListServiceAgent } from 'ddp-sdk';
   templateUrl: './mailing-list-modal.component.html',
   styleUrls: ['./mailing-list-modal.component.scss'],
 })
-export class MailingListModalComponent implements OnInit {
+export class MailingListModalComponent {
   loading = false;
   form: FormGroup = new FormGroup(
     {
@@ -38,8 +38,6 @@ export class MailingListModalComponent implements OnInit {
     private mailingListService: MailingListServiceAgent,
     @Inject('ddp.config') private config: ConfigurationService,
   ) {}
-
-  ngOnInit(): void {}
 
   onClose(): void {
     this.dialogRef.close();

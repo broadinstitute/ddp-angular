@@ -147,14 +147,14 @@ export class ShippingComponent implements OnInit {
     this.dsmService.getLabelSettings().subscribe(
       data => {
         jsonData = data;
-        jsonData.forEach((val) => {
+        jsonData.forEach(() => {
           this.labelSettings = [];
           this.labelNames = [];
           this.selectedSetting = null;
           this.selectedLabel = null;
           jsonData = data;
           // TODO: check is it correct ? - shadowed variables `val`
-          // tslint:disable-next-line:no-shadowed-variable
+          // eslint-disable-next-line @typescript-eslint/no-shadow
           jsonData.forEach((val) => {
             const labelSetting = LabelSetting.parse(val);
             if (labelSetting.defaultPage) {

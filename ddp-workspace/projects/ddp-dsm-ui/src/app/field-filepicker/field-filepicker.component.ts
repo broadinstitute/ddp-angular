@@ -13,10 +13,8 @@ export class FieldFilepickerComponent {
   error: string = null;
   file: File = null;
 
-  userFile(event: EventTarget): void {
-    const eventObj: MSInputMethodContext = event as MSInputMethodContext;
-    const target: HTMLInputElement = eventObj.target as HTMLInputElement;
-    const files: FileList = target.files;
+  userFile(event: Event): void {
+    const files: FileList = (event.target as HTMLInputElement).files;
     if (this.fileFormat === '*') {
       this.file = files[0];
       this.fileSelected.emit(this.file);

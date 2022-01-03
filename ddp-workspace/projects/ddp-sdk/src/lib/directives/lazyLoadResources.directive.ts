@@ -1,6 +1,9 @@
 import { Directive, AfterViewInit, Input, ElementRef, Renderer2, OnChanges, SimpleChanges } from '@angular/core';
 import { WindowRef } from '../services/windowRef';
 
+
+// TODO: fix the linter error "The selector should be camelCase" in a separate PR
+/* eslint-disable @angular-eslint/directive-selector */
 @Directive({
     selector: '[lazy-resource]'
 })

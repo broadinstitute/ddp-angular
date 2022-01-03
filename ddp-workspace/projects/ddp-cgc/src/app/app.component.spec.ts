@@ -28,7 +28,7 @@ describe('AppComponent', () => {
           provide: MatDialog,
           useValue: {
             closeAll: () => {},
-            open: (component, options) => {}
+            open: () => {}
           }
         },
         {

@@ -1,3 +1,4 @@
+@use '@angular/material' as mat;
 @import "../app-theme.scss";
 
 // common activity styles
@@ -27,7 +28,7 @@
     z-index: 2;
     position: fixed;
     top: 6.25rem; // header's height
-    background-color: mat-color($app-theme, 250);
+    background-color: mat.get-color-from-palette($app-theme, 250);
     transition: all 200ms linear;
 }
 
@@ -41,12 +42,12 @@
     .sticky__text {
         font-size: 1.0625rem;
         line-height: 1.375rem;
-        color: mat-color($app-theme, 100);
+        color: mat.get-color-from-palette($app-theme, 100);
         font-weight: 200;
     }
 
     .Link {
-        color: mat-color($app-theme, 100);
+        color: mat.get-color-from-palette($app-theme, 100);
         font-weight: 600;
     }
 }
@@ -62,13 +63,13 @@
 }
 
 .ddp-close-button:hover {
-    color: mat-color($app-theme, 650);
+    color: mat.get-color-from-palette($app-theme, 650);
 }
 
 .sticky__text {
     font-size: 1.0625rem;
     line-height: 1.375rem;
-    color: mat-color($app-theme, 700);
+    color: mat.get-color-from-palette($app-theme, 700);
 }
 
 // steps
@@ -82,15 +83,15 @@
 
 .activity-step {
     cursor: pointer;
-    color: mat-color($app-theme, 650);
+    color: mat.get-color-from-palette($app-theme, 650);
 }
 
 .activity-step.completed {
-    color: mat-color($app-theme, 700);
+    color: mat.get-color-from-palette($app-theme, 700);
 }
 
 .activity-step.active.completed {
-    color: mat-color($app-theme, 200);
+    color: mat.get-color-from-palette($app-theme, 200);
 }
 
 @media only screen and (max-width: 600px) {
@@ -115,7 +116,7 @@
 .ddp-block-body {
     font-size: 1.375rem;
     line-height: 2.25rem;
-    color: mat-color($app-theme, 700);
+    color: mat.get-color-from-palette($app-theme, 700);
     margin: 1rem 0 1rem -1.5625rem;
     font-weight: 400;
 }
@@ -153,10 +154,10 @@
 
 .ol-flat-list {
     font-weight: 600;
-    color: mat-color($app-theme, 200);
+    color: mat.get-color-from-palette($app-theme, 200);
 
     p {
-        color: mat-color($app-theme, 700);
+        color: mat.get-color-from-palette($app-theme, 700);
     }
 }
 
@@ -182,8 +183,8 @@
     font-size: 1.25rem;
     line-height: 1.875rem;
     margin: 1rem 0;
-    color: mat-color($app-theme, 500);
-    border-top: 1px solid mat-color($app-theme, 500);
+    color: mat.get-color-from-palette($app-theme, 500);
+    border-top: 1px solid mat.get-color-from-palette($app-theme, 500);
 }
 
 
@@ -198,7 +199,7 @@
 
     .ErrorMessageItem {
         font-size: 1.25rem;
-        color: mat-color($app-theme, 500);
+        color: mat.get-color-from-palette($app-theme, 500);
         margin: .3rem 0;
         padding: 0 0 0 0;
     }
@@ -206,7 +207,7 @@
 
 // info box
 .infobox {
-    border: 2px solid mat-color($app-theme, 250);
+    border: 2px solid mat.get-color-from-palette($app-theme, 250);
     border-radius: 8px;
     background-color: rgba(113, 84, 255, 0.06);
     padding: 1rem;
@@ -232,7 +233,7 @@
 // native dropdown
 select {
     font-size: 1.25rem;
-    color: mat-color($app-theme, 700);
+    color: mat.get-color-from-palette($app-theme, 700);
     background-color: rgba(255, 255, 255, 0.9);
     width: 100%;
     padding: 0;
@@ -254,7 +255,7 @@ select:disabled {
 
 // material dropdown
 .mat-select-value {
-    color: mat-color($app-theme, 700);
+    color: mat.get-color-from-palette($app-theme, 700);
 }
 
 // picklist
@@ -262,7 +263,7 @@ select:disabled {
 .mat-radio-label-content {
     font-size: 1rem;
     line-height: 1.25rem !important;
-    color: mat-color($app-theme, 700);
+    color: mat.get-color-from-palette($app-theme, 700);
 }
 
 .mat-checkbox-inner-container {
@@ -303,24 +304,24 @@ select:disabled {
     margin: 0;
     font-size: 1.125rem;
     line-height: 1.4375rem;
-    color: mat-color($app-theme, 700);
+    color: mat.get-color-from-palette($app-theme, 700);
     font-weight: 400;
 }
 
 .ddp-counter-color {
-    color: mat-color($app-theme, 250);
+    color: mat.get-color-from-palette($app-theme, 250);
 }
 
 // input
 .mat-form-field-infix {
-    color: mat-color($app-theme, 700);
+    color: mat.get-color-from-palette($app-theme, 700);
     font-size: 1rem;
 }
 
 // agreement question
 .ddp-agreement-text {
     white-space: normal;
-    color: mat-color($app-theme, 700);
+    color: mat.get-color-from-palette($app-theme, 700);
 }
 
 .ddp-agreement {
@@ -384,7 +385,7 @@ ddp-activity-composite-answer {
     font-size: 1rem;
     line-height: 1.5rem;
     margin: 0 0 0.5rem 0;
-    color: mat-color($app-theme, 700);
+    color: mat.get-color-from-palette($app-theme, 700);
 }
 
 .ddp-institutions-form__button {

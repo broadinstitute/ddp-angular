@@ -8,7 +8,6 @@ export class FileSizeFormatterPipe implements PipeTransform {
 
     transform(value: number): string {
         let resValue: number;
-        let resMeasure: string;
         const round = 2; // digits after comma
         const limit = 1024; // 1024 bytes
 
@@ -29,7 +28,7 @@ export class FileSizeFormatterPipe implements PipeTransform {
             resValue = 1;
             exponent++;
         }
-        resMeasure = this.getMeasure(exponent, resValue === 1);
+        const resMeasure = this.getMeasure(exponent, resValue === 1);
 
         return `${resValue} ${resMeasure}`;
     }

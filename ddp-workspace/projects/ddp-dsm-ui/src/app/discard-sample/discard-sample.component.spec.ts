@@ -1,6 +1,6 @@
 // import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { DiscardSampleComponent } from './discard-sample.component';
+// import { DiscardSampleComponent } from './discard-sample.component';
 
 describe('DiscardSampleComponent', () => {
   // let component: DiscardSampleComponent;

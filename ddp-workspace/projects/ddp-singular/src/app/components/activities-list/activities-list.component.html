@@ -19,11 +19,7 @@
     <th mat-header-cell *matHeaderCellDef>
       {{ 'SDK.UserActivities.Summary' | translate }}
     </th>
-    <td
-      mat-cell
-      *matCellDef="let activity"
-      [attr.data-label]="'SDK.UserActivities.Summary' | translate"
-    >
+    <td mat-cell *matCellDef="let activity" [attr.data-label]="'SDK.UserActivities.Summary' | translate">
       {{ activity.activitySummary }}
     </td>
   </ng-container>
@@ -33,11 +29,7 @@
     <th mat-header-cell *matHeaderCellDef>
       {{ 'SDK.UserActivities.ActivityDate' | translate }}
     </th>
-    <td
-      mat-cell
-      *matCellDef="let activity"
-      [attr.data-label]="'SDK.UserActivities.ActivityDate' | translate"
-    >
+    <td mat-cell *matCellDef="let activity" [attr.data-label]="'SDK.UserActivities.ActivityDate' | translate">
       {{ activity.createdAt | date: 'MM/dd/yyyy' }}
     </td>
   </ng-container>
@@ -47,14 +39,8 @@
     <th mat-header-cell *matHeaderCellDef>
       {{ 'SDK.UserActivities.ActivityStatus' | translate }}
     </th>
-    <td
-      mat-cell
-      *matCellDef="let activity"
-      [attr.data-label]="'SDK.UserActivities.ActivityStatus' | translate"
-    >
-      {{
-        'Activities.StatusCodes.' + getActivityStatusCode(activity) | translate
-      }}
+    <td mat-cell *matCellDef="let activity" [attr.data-label]="'SDK.UserActivities.ActivityStatus' | translate">
+      {{ 'Activities.StatusCodes.' + getActivityStatusCode(activity) | translate }}
     </td>
   </ng-container>
 
@@ -63,55 +49,46 @@
     <th mat-header-cell *matHeaderCellDef>
       {{ 'SDK.UserActivities.ActivityActions' | translate }}
     </th>
-    <td
-      mat-cell
-      *matCellDef="let activity"
-      [attr.data-label]="'SDK.UserActivities.ActivityActions' | translate"
-    >
-      <div class="actions-wrapper">
-        <button
-          *ngIf="activity.statusCode === ActivityStatusCodes.CREATED && !hasPreviousInstance(activity)"
-          class="button button--primary button--sm"
-          (click)="onStartClick(activity)"
-        >
-          {{ 'SDK.StartButton' | translate }}
-        </button>
+    <td mat-cell *matCellDef="let activity" [attr.data-label]="'SDK.UserActivities.ActivityActions' | translate">
+      <ng-container [ngSwitch]="activity.statusCode">
+        <ng-container *ngSwitchCase="ActivityStatusCodes.CREATED">
+          <ng-container *ngTemplateOutlet="hasPreviousInstance(activity) ? continue : start"></ng-container>
 
-        <button
-          *ngIf="
-            ((activity.statusCode === ActivityStatusCodes.CREATED ||
-              activity.statusCode === ActivityStatusCodes.IN_PROGRESS) &&
-              hasPreviousInstance(activity)) ||
-            (activity.statusCode === ActivityStatusCodes.IN_PROGRESS &&
-              !hasPreviousInstance(activity))
-          "
-          class="button button--primary button--sm"
-          (click)="onContinueClick(activity)"
-        >
-          {{ 'SDK.ContinueButton' | translate }}
-        </button>
-
-        <ng-container *ngIf="activity.statusCode === ActivityStatusCodes.COMPLETE">
-          <ng-container *ngIf="canCopyActivity(activity); else viewAction">
-            <button class="button button--primary button--sm" (click)="onEditClick(activity)">
-              {{ 'SDK.EditButton' | translate }}
+          <ng-template #start>
+            <button type="button" class="button button--primary button--sm" (click)="onStartClick(activity)">
+              {{ (isMedicalRecordFileUpload(activity) ? 'SDK.UploadButton' : 'SDK.StartButton') | translate }}
             </button>
-          </ng-container>
+          </ng-template>
 
-          <ng-template #viewAction>
-            <ng-container *ngIf="activity.activityCode === ActivityCode.MedicalRecordFileUpload; else viewActionButton">
-              <button class="button button--primary button--sm" (click)="onViewClick(activity)">
-                {{ 'SDK.UploadButton' | translate }}
-              </button>
-            </ng-container>
-            <ng-template #viewActionButton>
-              <button class="button button--outline button--sm" (click)="onViewClick(activity)">
-                {{ 'SDK.ReviewButton' | translate }}
-              </button>
-            </ng-template>
+          <ng-template #continue>
+            <button type="button" class="button button--primary button--sm" (click)="onContinueClick(activity)">
+              {{ (isMedicalRecordFileUpload(activity) ? 'SDK.UploadButton' : 'SDK.ContinueButton') | translate }}
+            </button>
           </ng-template>
         </ng-container>
-      </div>
+
+        <ng-container *ngSwitchCase="ActivityStatusCodes.IN_PROGRESS">
+          <button type="button" class="button button--primary button--sm" (click)="onContinueClick(activity)">
+            {{ (isMedicalRecordFileUpload(activity) ? 'SDK.UploadButton' : 'SDK.ContinueButton') | translate }}
+          </button>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="ActivityStatusCodes.COMPLETE">
+          <ng-container *ngTemplateOutlet="isActivityEditable(activity) ? update : view"></ng-container>
+
+          <ng-template #update>
+            <button type="button" class="button button--primary button--sm" (click)="onEditClick(activity)">
+              {{ (isMedicalRecordFileUpload(activity) ? 'SDK.UploadButton' : 'SDK.EditButton') | translate }}
+            </button>
+          </ng-template>
+
+          <ng-template #view>
+            <button type="button" class="button button--outline button--sm" (click)="onViewClick(activity)">
+              {{ 'SDK.ReviewButton' | translate }}
+            </button>
+          </ng-template>
+        </ng-container>
+      </ng-container>
     </td>
   </ng-container>
 

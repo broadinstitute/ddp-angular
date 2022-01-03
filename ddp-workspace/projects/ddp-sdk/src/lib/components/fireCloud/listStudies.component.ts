@@ -27,7 +27,7 @@ import { Subscription } from 'rxjs';
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"
-                     [ngClass] = "{'highlight': selectedHighlightedRowIndex == row.id}"
+                     [ngClass] = "{'highlight': selectedHighlightedRowIndex === row.id}"
                      (mouseover)="highlight(row);"
                      (mouseleave)="leaveRow(row);"
                       >

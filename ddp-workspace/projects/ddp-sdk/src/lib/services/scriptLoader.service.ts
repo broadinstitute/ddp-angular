@@ -34,7 +34,7 @@ export class ScriptLoaderService {
           observer.complete();
         };
 
-        scriptElement.onerror = (error: any) => {
+        scriptElement.onerror = () => {
           observer.error(`Couldn't load script ` + script.src);
         };
 

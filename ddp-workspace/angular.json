@@ -10,7 +10,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ddp-sdk/tsconfig.lib.json",
             "project": "projects/ddp-sdk/ng-package.json"
@@ -30,14 +30,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-sdk/tsconfig.lib.json",
-              "projects/ddp-sdk/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-sdk/**/*.ts",
+              "projects/ddp-sdk/**/*.html"
             ]
           }
         }
@@ -50,7 +47,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/toolkit/tsconfig.lib.json",
             "project": "projects/toolkit/ng-package.json"
@@ -70,14 +67,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/toolkit/tsconfig.lib.json",
-              "projects/toolkit/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/toolkit/**/*.ts",
+              "projects/toolkit/**/*.html"
             ]
           }
         }
@@ -102,7 +96,6 @@
             "main": "projects/ddp-basil/src/main.ts",
             "polyfills": "projects/ddp-basil/src/polyfills.ts",
             "tsConfig": "projects/ddp-basil/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-basil/src/favicon.ico",
               "projects/ddp-basil/src/assets",
@@ -118,7 +111,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -131,7 +130,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -149,7 +147,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -186,15 +185,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-basil/tsconfig.app.json",
-              "projects/ddp-basil/tsconfig.spec.json",
-              "projects/ddp-basil/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-basil/**/*.ts",
+              "projects/ddp-basil/**/*.html"
             ]
           }
         },
@@ -227,7 +222,6 @@
             "main": "projects/ddp-angio/src/main.ts",
             "polyfills": "projects/ddp-angio/src/polyfills.ts",
             "tsConfig": "projects/ddp-angio/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-angio/src/favicon.ico",
               "projects/ddp-angio/src/favicon-alert.ico",
@@ -249,7 +243,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -262,7 +262,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -288,7 +287,8 @@
               ],
               "tsConfig": "projects/ddp-angio/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -334,15 +334,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-angio/tsconfig.app.json",
-              "projects/ddp-angio/tsconfig.spec.json",
-              "projects/ddp-angio/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-angio/**/*.ts",
+              "projects/ddp-angio/**/*.html"
             ]
           }
         },
@@ -367,7 +363,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ddp-atcp/src/auth0/auth0-scripts/tsconfig.lib.json",
             "project": "projects/ddp-atcp/src/auth0/auth0-scripts/ng-package.json"
@@ -390,7 +386,6 @@
             "main": "projects/ddp-atcp/src/main.ts",
             "polyfills": "projects/ddp-atcp/src/polyfills.ts",
             "tsConfig": "projects/ddp-atcp/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-atcp/src/favicon.ico",
               "projects/ddp-atcp/src/favicon-alert.ico",
@@ -426,7 +421,13 @@
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -439,7 +440,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -465,7 +465,8 @@
               ],
               "tsConfig": "projects/ddp-atcp/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -511,15 +512,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-atcp/tsconfig.app.json",
-              "projects/ddp-atcp/tsconfig.spec.json",
-              "projects/ddp-atcp/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-atcp/**/*.ts",
+              "projects/ddp-atcp/**/*.html"
             ]
           }
         },
@@ -556,7 +553,6 @@
             "main": "projects/ddp-brain/src/main.ts",
             "polyfills": "projects/ddp-brain/src/polyfills.ts",
             "tsConfig": "projects/ddp-brain/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-brain/src/favicon.ico",
               "projects/ddp-brain/src/favicon-alert.ico",
@@ -578,7 +574,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -591,7 +593,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -617,7 +618,8 @@
               ],
               "tsConfig": "projects/ddp-brain/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -663,15 +665,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-brain/tsconfig.app.json",
-              "projects/ddp-brain/tsconfig.spec.json",
-              "projects/ddp-brain/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-brain/**/*.ts",
+              "projects/ddp-brain/**/*.html"
             ]
           }
         },
@@ -708,7 +706,6 @@
             "main": "projects/ddp-mbc/src/main.ts",
             "polyfills": "projects/ddp-mbc/src/polyfills.ts",
             "tsConfig": "projects/ddp-mbc/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-mbc/src/favicon.ico",
               "projects/ddp-mbc/src/favicon-alert.ico",
@@ -730,7 +727,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -743,7 +746,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -769,7 +771,8 @@
               ],
               "tsConfig": "projects/ddp-mbc/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -815,15 +818,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-mbc/tsconfig.app.json",
-              "projects/ddp-mbc/tsconfig.spec.json",
-              "projects/ddp-mbc/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-mbc/**/*.ts",
+              "projects/ddp-mbc/**/*.html"
             ]
           }
         },
@@ -860,7 +859,6 @@
             "main": "projects/sandbox-app/src/main.ts",
             "polyfills": "projects/sandbox-app/src/polyfills.ts",
             "tsConfig": "projects/sandbox-app/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/sandbox-app/src/favicon.ico",
               "projects/sandbox-app/src/assets"
@@ -869,7 +867,13 @@
               "projects/sandbox-app/src/theme.scss",
               "projects/sandbox-app/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -882,7 +886,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -899,7 +902,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -936,15 +940,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/sandbox-app/tsconfig.app.json",
-              "projects/sandbox-app/tsconfig.spec.json",
-              "projects/sandbox-app/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/sandbox-app/**/*.ts",
+              "projects/sandbox-app/**/*.html"
             ]
           }
         },
@@ -981,7 +981,6 @@
             "main": "projects/basil-app/src/main.ts",
             "polyfills": "projects/basil-app/src/polyfills.ts",
             "tsConfig": "projects/basil-app/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/basil-app/src/favicon.ico",
               "projects/basil-app/src/assets"
@@ -989,7 +988,13 @@
             "styles": [
               "projects/basil-app/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -1002,7 +1007,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -1028,7 +1032,8 @@
               ],
               "tsConfig": "projects/basil-app/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -1068,15 +1073,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/basil-app/tsconfig.app.json",
-              "projects/basil-app/tsconfig.spec.json",
-              "projects/basil-app/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/basil-app/**/*.ts",
+              "projects/basil-app/**/*.html"
             ]
           }
         },
@@ -1109,7 +1110,6 @@
             "main": "projects/ddp-osteo/src/main.ts",
             "polyfills": "projects/ddp-osteo/src/polyfills.ts",
             "tsConfig": "projects/ddp-osteo/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-osteo/src/favicon.ico",
               "projects/ddp-osteo/src/favicon-alert.ico",
@@ -1136,7 +1136,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -1149,7 +1155,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -1175,7 +1180,8 @@
               ],
               "tsConfig": "projects/ddp-osteo/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -1226,15 +1232,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-osteo/tsconfig.app.json",
-              "projects/ddp-osteo/tsconfig.spec.json",
-              "projects/ddp-osteo/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-osteo/**/*.ts",
+              "projects/ddp-osteo/**/*.html"
             ]
           }
         },
@@ -1267,7 +1269,6 @@
             "main": "projects/ddp-rarex/src/main.ts",
             "polyfills": "projects/ddp-rarex/src/polyfills.ts",
             "tsConfig": "projects/ddp-rarex/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-rarex/src/favicon.ico",
               "projects/ddp-rarex/src/favicon-alert.ico",
@@ -1284,7 +1285,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -1297,7 +1304,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -1313,7 +1319,8 @@
             "es5": {
               "tsConfig": "projects/ddp-rarex/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -1359,15 +1366,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-rarex/tsconfig.app.json",
-              "projects/ddp-rarex/tsconfig.spec.json",
-              "projects/ddp-rarex/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-rarex/**/*.ts",
+              "projects/ddp-rarex/**/*.html"
             ]
           }
         },
@@ -1404,7 +1407,6 @@
             "main": "projects/ddp-prion/src/main.ts",
             "polyfills": "projects/ddp-prion/src/polyfills.ts",
             "tsConfig": "projects/ddp-prion/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-prion/src/favicon.ico",
               "projects/ddp-prion/src/assets",
@@ -1425,7 +1427,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -1438,7 +1446,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -1465,7 +1472,8 @@
               ],
               "tsConfig": "projects/ddp-prion/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -1507,15 +1515,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-prion/tsconfig.app.json",
-              "projects/ddp-prion/tsconfig.spec.json",
-              "projects/ddp-prion/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-prion/**/*.ts",
+              "projects/ddp-prion/**/*.html"
             ]
           }
         },
@@ -1548,7 +1552,6 @@
             "main": "projects/ddp-testboston/src/main.ts",
             "polyfills": "projects/ddp-testboston/src/polyfills.ts",
             "tsConfig": "projects/ddp-testboston/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-testboston/src/favicon.ico",
               "projects/ddp-testboston/src/favicon-alert.ico",
@@ -1570,7 +1573,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -1583,7 +1592,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -1609,7 +1617,8 @@
               ],
               "tsConfig": "projects/ddp-testboston/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -1655,15 +1664,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-testboston/tsconfig.app.json",
-              "projects/ddp-testboston/tsconfig.spec.json",
-              "projects/ddp-testboston/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-testboston/**/*.ts",
+              "projects/ddp-testboston/**/*.html"
             ]
           }
         },
@@ -1700,7 +1705,6 @@
             "main": "projects/ddp-mpc/src/main.ts",
             "polyfills": "projects/ddp-mpc/src/polyfills.ts",
             "tsConfig": "projects/ddp-mpc/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-mpc/src/favicon.ico",
               "projects/ddp-mpc/src/favicon-alert.ico",
@@ -1722,7 +1726,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -1735,7 +1745,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -1761,7 +1770,8 @@
               ],
               "tsConfig": "projects/ddp-mpc/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -1807,15 +1817,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-mpc/tsconfig.app.json",
-              "projects/ddp-mpc/tsconfig.spec.json",
-              "projects/ddp-mpc/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-mpc/**/*.ts",
+              "projects/ddp-mpc/**/*.html"
             ]
           }
         },
@@ -1840,7 +1846,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/toolkit-prion/tsconfig.lib.json",
             "project": "projects/toolkit-prion/ng-package.json"
@@ -1860,14 +1866,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/toolkit-prion/tsconfig.lib.json",
-              "projects/toolkit-prion/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/toolkit-prion/**/*.ts",
+              "projects/toolkit-prion/**/*.html"
             ]
           }
         }
@@ -1892,7 +1895,6 @@
             "main": "projects/ddp-rgp/src/main.ts",
             "polyfills": "projects/ddp-rgp/src/polyfills.ts",
             "tsConfig": "projects/ddp-rgp/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-rgp/src/favicon.ico",
               "projects/ddp-rgp/src/favicon-alert.ico",
@@ -1914,7 +1916,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -1927,7 +1935,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -1953,7 +1960,8 @@
               ],
               "tsConfig": "projects/ddp-rgp/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -1999,15 +2007,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-rgp/tsconfig.app.json",
-              "projects/ddp-rgp/tsconfig.spec.json",
-              "projects/ddp-rgp/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-rgp/**/*.ts",
+              "projects/ddp-rgp/**/*.html"
             ]
           }
         },
@@ -2044,7 +2048,6 @@
             "main": "projects/ddp-esc/src/main.ts",
             "polyfills": "projects/ddp-esc/src/polyfills.ts",
             "tsConfig": "projects/ddp-esc/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-esc/src/favicon.ico",
               "projects/ddp-esc/src/favicon-alert.ico",
@@ -2066,7 +2069,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -2079,7 +2088,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -2105,7 +2113,8 @@
               ],
               "tsConfig": "projects/ddp-esc/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -2151,15 +2160,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-esc/tsconfig.app.json",
-              "projects/ddp-esc/tsconfig.spec.json",
-              "projects/ddp-esc/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-esc/**/*.ts",
+              "projects/ddp-esc/**/*.html"
             ]
           }
         },
@@ -2196,7 +2201,6 @@
             "main": "projects/ddp-cgc/src/main.ts",
             "polyfills": "projects/ddp-cgc/src/polyfills.ts",
             "tsConfig": "projects/ddp-cgc/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-cgc/src/favicon.ico",
               "projects/ddp-cgc/src/assets",
@@ -2215,7 +2219,13 @@
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -2228,7 +2238,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -2246,7 +2255,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -2283,15 +2293,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-cgc/tsconfig.app.json",
-              "projects/ddp-cgc/tsconfig.spec.json",
-              "projects/ddp-cgc/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-cgc/**/*.ts",
+              "projects/ddp-cgc/**/*.html"
             ]
           }
         },
@@ -2324,7 +2330,6 @@
             "main": "projects/ddp-circadia/src/main.ts",
             "polyfills": "projects/ddp-circadia/src/polyfills.ts",
             "tsConfig": "projects/ddp-circadia/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-circadia/src/favicon.ico",
               "projects/ddp-circadia/src/favicon-alert.ico",
@@ -2340,7 +2345,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -2353,7 +2364,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -2379,7 +2389,8 @@
               ],
               "tsConfig": "projects/ddp-circadia/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -2419,15 +2430,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-circadia/tsconfig.app.json",
-              "projects/ddp-circadia/tsconfig.spec.json",
-              "projects/ddp-circadia/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-circadia/**/*.ts",
+              "projects/ddp-circadia/**/*.html"
             ]
           }
         },
@@ -2464,7 +2471,6 @@
             "main": "projects/ddp-pancan/src/main.ts",
             "polyfills": "projects/ddp-pancan/src/polyfills.ts",
             "tsConfig": "projects/ddp-pancan/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-pancan/src/favicon.ico",
               "projects/ddp-pancan/src/assets",
@@ -2485,7 +2491,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -2498,7 +2510,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -2524,7 +2535,8 @@
               ],
               "tsConfig": "projects/ddp-pancan/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -2564,15 +2576,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-pancan/tsconfig.app.json",
-              "projects/ddp-pancan/tsconfig.spec.json",
-              "projects/ddp-pancan/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-pancan/**/*.ts",
+              "projects/ddp-pancan/**/*.html"
             ]
           }
         },
@@ -2605,7 +2613,6 @@
             "main": "projects/ddp-brugada/src/main.ts",
             "polyfills": "projects/ddp-brugada/src/polyfills.ts",
             "tsConfig": "projects/ddp-brugada/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-brugada/src/favicon.ico",
               "projects/ddp-brugada/src/favicon-alert.ico",
@@ -2616,10 +2623,18 @@
                 "output": "assets/config"
               }
             ],
-            "styles": ["projects/ddp-brugada/src/styles.scss"],
+            "styles": [
+              "projects/ddp-brugada/src/styles.scss"
+            ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -2632,7 +2647,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -2658,7 +2672,8 @@
               ],
               "tsConfig": "projects/ddp-brugada/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -2692,19 +2707,19 @@
               "projects/ddp-brugada/src/favicon-alert.ico",
               "projects/ddp-brugada/src/assets"
             ],
-            "styles": ["projects/ddp-brugada/src/styles.scss"],
+            "styles": [
+              "projects/ddp-brugada/src/styles.scss"
+            ],
             "scripts": []
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-brugada/tsconfig.app.json",
-              "projects/ddp-brugada/tsconfig.spec.json",
-              "projects/ddp-brugada/e2e/tsconfig.json"
-            ],
-            "exclude": ["**/node_modules/**"]
+            "lintFilePatterns": [
+              "projects/ddp-brugada/**/*.ts",
+              "projects/ddp-brugada/**/*.html"
+            ]
           }
         },
         "e2e": {
@@ -2740,7 +2755,6 @@
             "main": "projects/study-builder-ui/src/main.ts",
             "polyfills": "projects/study-builder-ui/src/polyfills.ts",
             "tsConfig": "projects/study-builder-ui/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/study-builder-ui/src/favicon.ico",
               "projects/study-builder-ui/src/assets"
@@ -2749,7 +2763,13 @@
               "projects/study-builder-ui/src/theme.scss",
               "projects/study-builder-ui/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -2762,7 +2782,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -2780,7 +2799,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -2817,15 +2837,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/study-builder-ui/tsconfig.app.json",
-              "projects/study-builder-ui/tsconfig.spec.json",
-              "projects/study-builder-ui/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/study-builder-ui/**/*.ts",
+              "projects/study-builder-ui/**/*.html"
             ]
           }
         },
@@ -2862,7 +2878,6 @@
             "main": "projects/ddp-dsm-ui/src/main.ts",
             "polyfills": "projects/ddp-dsm-ui/src/polyfills.ts",
             "tsConfig": "projects/ddp-dsm-ui/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-dsm-ui/src/favicon.ico",
               "projects/ddp-dsm-ui/src/assets"
@@ -2881,7 +2896,13 @@
             "allowedCommonJsDependencies": [
               "file-saver",
               "json2csv"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -2894,7 +2915,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -2920,7 +2940,8 @@
               ],
               "tsConfig": "projects/ddp-dsm-ui/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -2966,14 +2987,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-dsm-ui/tsconfig.app.json",
-              "projects/ddp-dsm-ui/tsconfig.spec.json"
-            ],
-            "exclude": [
-                "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-dsm-ui/**/*.ts",
+              "projects/ddp-dsm-ui/**/*.html"
             ]
           }
         }
@@ -2998,7 +3016,6 @@
             "main": "projects/ddp-singular/src/main.ts",
             "polyfills": "projects/ddp-singular/src/polyfills.ts",
             "tsConfig": "projects/ddp-singular/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ddp-singular/src/favicon.ico",
               "projects/ddp-singular/src/assets",
@@ -3014,7 +3031,13 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -3027,7 +3050,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -3060,7 +3082,8 @@
               ],
               "tsConfig": "projects/ddp-singular/tsconfig.es5.json"
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -3097,15 +3120,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ddp-singular/tsconfig.app.json",
-              "projects/ddp-singular/tsconfig.spec.json",
-              "projects/ddp-singular/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ddp-singular/**/*.ts",
+              "projects/ddp-singular/**/*.html"
             ]
           }
         },
@@ -3131,6 +3150,7 @@
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "defaultCollection": "@angular-eslint/schematics"
   }
 }

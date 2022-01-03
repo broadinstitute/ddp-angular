@@ -24,7 +24,7 @@ class TranslateLoaderMock implements TranslateLoader {
         return of(TRANSLATIONS[code]);
     }
 }
-// tslint:disable-next-line:max-classes-per-file
+// eslint-disable-next-line max-classes-per-file
 @Component({
     template: `
         <ng-template #step1><div class="page page__1">Page 1</div></ng-template>

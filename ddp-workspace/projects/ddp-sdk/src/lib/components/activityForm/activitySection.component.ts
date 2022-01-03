@@ -62,14 +62,22 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
         this.subscription.unsubscribe();
     }
 
+    public onBlockVisibilityChanged(blockVisibility: BlockVisibility[]): void {
+        this.updateVisibilityAndValidation(blockVisibility);
+    }
+
     public updateVisibilityAndValidation(visibility: BlockVisibility[]): void {
-        let blockVisibilityChanged = false;
+        let blockStateChanged = false;
         visibility.forEach(element => {
             this.section.allChildBlocks().forEach(block => {
                 if (block.id === element.blockGuid) {
                     if (block.shown !== element.shown) {
                         block.shown = element.shown;
-                        blockVisibilityChanged = true;
+                        blockStateChanged = true;
+                    }
+                    if (block.enabled !== element.enabled) {
+                        block.enabled = element.enabled;
+                        blockStateChanged = true;
                     }
                     if (block.blockType === BlockType.Activity && !block.shown) {
                         this.updateValidationForHiddenEmbeddedActivity(block as ActivityActivityBlock);
@@ -77,7 +85,7 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
                 }
             });
         });
-        if (blockVisibilityChanged) {
+        if (blockStateChanged) {
             this.cdr.detectChanges();
         }
     }

@@ -44,7 +44,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('document:click')
-  public onWindowClick(e: MouseEvent): void {
+  public onWindowClick(): void {
     this.isFamiliesMenuShown = false;
     this.isResearchersMenuShown = false;
     this.isProjectsMenuShown = false;

@@ -488,7 +488,7 @@ export class DashboardComponent implements OnInit {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
-        // tslint:disable-next-line:no-string-throw
+        // eslint-disable-next-line no-throw-literal
         throw 'Error - Loading display settings' + err;
       }
     );
@@ -541,9 +541,8 @@ export class DashboardComponent implements OnInit {
   getParticipantData(): void {
     this.dsmService.applyFilter(null, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), 'participantList', null).subscribe(
       data => {
-        let jsonData: any[];
         this.participantList = [];
-        jsonData = data.participants;
+        const jsonData = data.participants;
         jsonData.forEach((val) => {
           const participant = Participant.parse(val);
           this.participantList.push(participant);

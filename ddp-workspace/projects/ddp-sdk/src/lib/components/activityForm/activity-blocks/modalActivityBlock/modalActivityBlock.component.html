@@ -9,27 +9,41 @@
                 {{instance.activityDescription}}
             </mat-card-subtitle>
 
-            <div *ngIf="instance.statusCode !== 'CREATED'"
-                 class="modal-activity-block__success-message">
-                <mat-icon *ngIf="isAllQuestionsCompleted" inline>check_circle</mat-icon>
-                <span *ngIf="!isAllQuestionsCompleted; else completeBlock"
-                      class="modal-activity-block__label"
-                      [innerHTML]="'SDK.ModalActivityBlock.NumQuestionsAnswered'| translate: {
-                      number: instance.numQuestionsAnswered
-                      }">
-                </span>
-                <ng-template #completeBlock>
-                    <span class="modal-activity-block__label"
-                          [innerHTML]="'SDK.ModalActivityBlock.Complete' | translate">
-                    </span>
-                </ng-template>
+            <div class="modal-activity-block__success-message">
+                <ng-container [ngTemplateOutlet]="alwaysShowQuestionsCount ? questionsCount : questionsCountWithCompleteMessage"></ng-container>
             </div>
+
+            <ng-template #questionsCountWithCompleteMessage>
+                <ng-container *ngIf="instance.statusCode !== 'CREATED'">
+                    <ng-container [ngTemplateOutlet]="isAllQuestionsCompleted ? completeBlock : questionsCount"></ng-container>
+
+                    <ng-template #completeBlock>
+                        <mat-icon inline>check_circle</mat-icon>
+                        <span class="modal-activity-block__label"
+                              [innerHTML]="'SDK.ModalActivityBlock.Complete' | translate">
+                        </span>
+                    </ng-template>
+                </ng-container>
+            </ng-template>
+
+            <ng-template #questionsCount>
+                <span
+                  class="modal-activity-block__label"
+                  [innerHTML]="
+                    'SDK.ModalActivityBlock.NumQuestionsAnswered' | translate: {
+                      number: instance.numQuestionsAnswered,
+                      total: instance.numQuestions
+                    }
+                  "
+                ></span>
+            </ng-template>
         </div>
 
         <mat-card-actions class="modal-activity-block__card-buttons">
             <button mat-mini-fab
                     class="button_primary"
-                    (click)="openEditDialog()">
+                    (click)="openEditDialog()"
+                    [disabled]="!enabled">
                 <img *ngIf="!readonly" src="assets/shared/pencil.svg"
                      [alt]="'SDK.ModalActivityBlock.EditButton' | translate">
                 <mat-icon *ngIf="readonly">remove_red_eye</mat-icon>
@@ -38,7 +52,8 @@
                     *ngIf="instance.canDelete && !readonly"
                     #delete_button
                     class="button_secondary"
-                    (click)="openDeleteDialog()">
+                    (click)="openDeleteDialog()"
+                    [disabled]="!enabled">
                 <img src="assets/shared/trash.svg"
                      [alt]="'SDK.ModalActivityBlock.DeleteButton' | translate">
             </button>

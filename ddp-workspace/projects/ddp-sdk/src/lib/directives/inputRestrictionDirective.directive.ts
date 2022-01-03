@@ -33,7 +33,7 @@ export class InputRestrictionDirective {
         let m;
         let matches = 0;
 
-        // tslint:disable-next-line:no-conditional-assignment
+        // eslint-disable-next-line no-cond-assign
         while ((m = regex.exec(pasteData)) !== null) {
           // This is necessary to avoid infinite loops with zero-width matches
             if (m.index === regex.lastIndex) {

@@ -1,8 +1,9 @@
+@use '@angular/material' as mat;
 @import '../app-theme.scss';
 
 .dashboard-title-section {
     padding: 2rem 0 0 0;
-    background-color: mat-color($app-theme, 800);
+    background-color: mat.get-color-from-palette($app-theme, 800);
 }
 
 .dashboard-section {
@@ -31,7 +32,7 @@
 .infobox-text_small {
     font-size: 1rem;
     line-height: 1.5rem;
-    color: mat-color($app-theme, 200);
+    color: mat.get-color-from-palette($app-theme, 200);
 }
 
 .ddp-dashboard {
@@ -70,7 +71,7 @@
     }
 
     .Link {
-        color: mat-color($app-theme, 200);
+        color: mat.get-color-from-palette($app-theme, 200);
         white-space: normal;
     }
 
@@ -104,5 +105,5 @@
 }
 
 .dashboard-activity-button:hover {
-    color: mat-color($app-theme, 400) !important;
+    color: mat.get-color-from-palette($app-theme, 400) !important;
 }

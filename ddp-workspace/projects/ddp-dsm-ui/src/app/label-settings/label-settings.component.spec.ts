@@ -1,6 +1,6 @@
 // import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { LabelSettingsComponent } from './label-settings.component';
+// import { LabelSettingsComponent } from './label-settings.component';
 
 describe('LabelSettingsComponent', () => {
   // let component: LabelSettingsComponent;

@@ -156,6 +156,7 @@ export class ActivityConverter {
                         continue;
                     }
                     this.buildShownField(block, inputBlock);
+                    this.buildEnabledField(block, inputBlock);
                     block.id = inputBlock.blockGuid;
                     section.blocks.push(block);
                 } else {
@@ -169,6 +170,11 @@ export class ActivityConverter {
 
     private buildShownField<TBlock extends ActivityBlock>(block: TBlock, inputBlock: any): TBlock {
         block.shown = (inputBlock.shown != null) ? inputBlock.shown : true;
+        return block;
+    }
+
+    private buildEnabledField<TBlock extends ActivityBlock>(block: TBlock, inputBlock: any): TBlock {
+        block.enabled = inputBlock.enabled ?? true;
         return block;
     }
 

@@ -39,7 +39,7 @@ export class SurveyComponent implements OnInit, OnDestroy {
 
   private anchor = new CompositeDisposable();
   private isFirstRun = true;
-  private fetchActivities$ = new Subject();
+  private fetchActivities$ = new Subject<void>();
 
   constructor(
     private multiGovernedUserService: MultiGovernedUserService,

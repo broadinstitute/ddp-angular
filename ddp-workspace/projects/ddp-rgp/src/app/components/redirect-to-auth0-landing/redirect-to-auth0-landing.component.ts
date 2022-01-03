@@ -8,7 +8,7 @@ import { RedirectToLoginLandingComponent } from 'toolkit';
   templateUrl: './redirect-to-auth0-landing.component.html',
   styleUrls: ['./redirect-to-auth0-landing.component.scss']
 })
-export class RedirectToAuth0Landing extends RedirectToLoginLandingComponent {
+export class RedirectToAuth0LandingComponent extends RedirectToLoginLandingComponent {
   constructor(
     route: ActivatedRoute,
     translate: NGXTranslateService) {

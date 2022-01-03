@@ -1,6 +1,6 @@
 // import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { ParticipantEventComponent } from './participant-event.component';
+// import { ParticipantEventComponent } from './participant-event.component';
 
 describe('ParticipantEventComponent', () => {
   // let component: ParticipantEventComponent;

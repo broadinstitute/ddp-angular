@@ -1,3 +1,4 @@
+@use '@angular/material' as mat;
 @import 'theme';
 @import 'variables.scss';
 
@@ -9,7 +10,7 @@ body {
 a {
   cursor: pointer;
   text-decoration: none;
-  color: mat-color($app-theme, 300);
+  color: mat.get-color-from-palette($app-theme, 300);
 
   &:focus {
     text-decoration: underline;

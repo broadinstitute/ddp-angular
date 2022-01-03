@@ -24,7 +24,7 @@ import {
     HeaderActionGuard,
     VerifyAgeUpPageComponent,
     AcceptAgeUpPageComponent,
-    AgeUpThankYou,
+    AgeUpThankYouComponent,
     ThankYouFamilyHistoryComponent
 } from 'toolkit';
 
@@ -211,13 +211,13 @@ const routes: Routes = [
 
     {
         path: 'thank-you',
-        component: AgeUpThankYou,
+        component: AgeUpThankYouComponent,
         canActivate: [IrbGuard],
         data: { verify: true }
     },
     {
         path: 'proxy-thank-you',
-        component: AgeUpThankYou,
+        component: AgeUpThankYouComponent,
         canActivate: [IrbGuard],
         data: { collect: true }
     },
@@ -273,9 +273,10 @@ const routes: Routes = [
 
 @NgModule({
     imports: [RouterModule.forRoot(routes, {
-        enableTracing: false,
-        scrollPositionRestoration: 'top'
-    })],
+    enableTracing: false,
+    scrollPositionRestoration: 'top',
+    relativeLinkResolution: 'legacy'
+})],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }

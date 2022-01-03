@@ -22,6 +22,7 @@ import { ActivitySection } from '../../../../models/activity/activitySection';
 import { SubmitAnnouncementService } from '../../../../services/submitAnnouncement.service';
 import { ModalDialogService } from '../../../../services/modal-dialog.service';
 import { ConfirmDialogComponent } from '../../../confirmDialog/confirmDialog.component';
+import { BlockVisibility } from '../../../../models/activity/blockVisibility';
 
 @Component({
     selector: 'ddp-embedded-activity-block',
@@ -32,11 +33,13 @@ import { ConfirmDialogComponent } from '../../../confirmDialog/confirmDialog.com
 export class EmbeddedActivityBlockComponent implements OnInit {
     @Input() instance: ActivityInstance;
     @Input() readonly: boolean;
+    @Input() enabled: boolean;
     @Input() validationRequested: boolean;
     @Input() studyGuid: string;
     @Output() componentBusy = new EventEmitter<boolean>();
     @Output() validStatusChanged = new EventEmitter<{id: string; value: boolean}>();
     @Output() deletedActivity = new EventEmitter<string>();
+    @Output() blockVisibilityChanged = new EventEmitter<BlockVisibility[]>();
     @ViewChild('delete_button', {read: ElementRef}) private deleteButtonRef: ElementRef;
 
     public activity: ActivityForm;
@@ -86,7 +89,11 @@ export class EmbeddedActivityBlockComponent implements OnInit {
             }),
             take(1),
             finalize(() => this.componentBusy.emit(false))
-        ).subscribe(() => {
+        ).subscribe(res => {
+            if (res?.blockVisibility) {
+                this.blockVisibilityChanged.emit(res.blockVisibility);
+            }
+
             this.deletedActivity.emit(this.instance.instanceGuid);
         });
     }

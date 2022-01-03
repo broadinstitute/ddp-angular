@@ -93,7 +93,7 @@
                     class="update-participant-input">
               <button mat-raised-button color="primary"
                       (click)="updateFirstName()"
-                      [disabled]="updatedFirstName === participant.data.profile['firstName'] || updatedFirstName.length == 0"
+                      [disabled]="updatedFirstName === participant.data.profile['firstName'] || updatedFirstName.length === 0"
                       >Update
               </button>
             </td>
@@ -108,7 +108,7 @@
                   [(ngModel)]="updatedLastName"
                   class="update-participant-input">
               <button mat-raised-button color="primary"
-                      [disabled]="updatedLastName === participant.data.profile['lastName'] || updatedLastName.length == 0"
+                      [disabled]="updatedLastName === participant.data.profile['lastName'] || updatedLastName.length === 0"
                       (click)="updateLastName()">Update
               </button>
             </td>
@@ -119,14 +119,14 @@
           <tr>
             <td>E-Mail</td>
             <td *ngIf="hasRole().allowedToEditParticipant()">
-              <span *ngIf="isEmailValid == false" class="invalid-email">E-Mail is not valid</span>
+              <span *ngIf="!isEmailValid" class="invalid-email">E-Mail is not valid</span>
               <input matInput type="email" maxlength="200" autocomplete="off" placeholder="Email"
               [ngModel]="updatedEmail"
               (ngModelChange)="validateEmailInput($event)"
               email
               class="update-participant-input">
               <button mat-raised-button color="primary"
-              [disabled]="updatedEmail === participant.data.profile['email'] || updatedEmail.length == 0 || isEmailValid == false"
+              [disabled]="updatedEmail === participant.data.profile['email'] || updatedEmail.length === 0 || !isEmailValid"
               (click)="updateEmail()">Update
             </button>
           </td>
@@ -220,7 +220,7 @@ participant.data.dsm['diagnosisYear'] != null">
       <div class="Float--left TD--Padding-Left-BIG">
         <!--PDF download-->
         <ng-container *ngIf="participant.participant == null">
-          <ng-container *ngIf="pdfs != null && pdfs.length != 0 && hasRole().allowedToDownloadPDF()">
+          <ng-container *ngIf="pdfs != null && pdfs.length !== 0 && hasRole().allowedToDownloadPDF()">
             <mat-select placeholder="Select PDF" class="Input--Abstraction" [(ngModel)]="selectedPDF">
               <mat-option *ngFor="let e of pdfs" [value]="e.configName">
                 {{e.displayName}}
@@ -254,12 +254,12 @@ participant.data.dsm['diagnosisYear'] != null">
               </button>
             </div>
             <div class="Float--left Width--100"
-                 *ngIf="participant.abstraction.aStatus !== 'not_started' && participant.abstraction.aStatus !== 'clear' && participant.abstraction.lastChanged == 0">
+                 *ngIf="participant.abstraction.aStatus !== 'not_started' && participant.abstraction.aStatus !== 'clear' && participant.abstraction.lastChanged === 0">
               <b>{{participant.abstraction.user}}</b>
               <b>started: {{participant.abstraction.startDate | date:'medium'}}</b>
             </div>
             <div class="Float--left Width--100"
-                 *ngIf="participant.abstraction.aStatus !== 'not_started' && participant.abstraction.aStatus !== 'clear' && participant.abstraction.lastChanged != 0">
+                 *ngIf="participant.abstraction.aStatus !== 'not_started' && participant.abstraction.aStatus !== 'clear' && participant.abstraction.lastChanged !== 0">
               <b>{{participant.abstraction.user}}</b>
               <b>continued: {{participant.abstraction.lastChanged | date:'medium'}}</b>
             </div>
@@ -299,12 +299,12 @@ participant.data.dsm['diagnosisYear'] != null">
               </button>
             </div>
             <div class="Float--left Width--100"
-                 *ngIf="participant.review.aStatus !== 'not_started' && participant.review.aStatus !== 'clear' && participant.review.lastChanged == 0">
+                 *ngIf="participant.review.aStatus !== 'not_started' && participant.review.aStatus !== 'clear' && participant.review.lastChanged === 0">
               <b>{{participant.review.user}}</b>
               <b>started: {{participant.review.startDate | date:'medium'}}</b>
             </div>
             <div class="Float--left Width--100"
-                 *ngIf="participant.review.aStatus !== 'not_started' && participant.review.aStatus !== 'clear' && participant.review.lastChanged != 0">
+                 *ngIf="participant.review.aStatus !== 'not_started' && participant.review.aStatus !== 'clear' && participant.review.lastChanged !== 0">
               <b>{{participant.review.user}}</b>
               <b>continued: {{participant.review.lastChanged | date:'medium'}}</b>
             </div>

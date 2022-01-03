@@ -1,16 +1,17 @@
+@use '@angular/material' as mat;
 @import '../../../app-theme.scss';
 
 @mixin font {
     font-size: 16px;
     line-height: 25px;
-    color: mat-color($app-theme, 100);
+    color: mat.get-color-from-palette($app-theme, 100);
     margin-bottom: 8px;
     display: flex;
 }
 
 .footer {
     height: 22rem;
-    background-color: mat-color($app-theme, 1300);
+    background-color: mat.get-color-from-palette($app-theme, 1300);
 }
 
 .footer-content {

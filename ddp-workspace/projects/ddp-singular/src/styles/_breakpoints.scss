@@ -1,5 +1,7 @@
+@use "sass:math";
+
 @function createBreakpoint($px) {
-  @return $px / 16 * 1em;
+    @return math.div($px, 16) * 1em;
 }
 
 $breakpoints: (

@@ -1,3 +1,4 @@
+@use '@angular/material' as mat;
 @import '../../../app-theme.scss';
 
 ul {
@@ -25,8 +26,8 @@ li {
 
 .workflow-content__circle {
     border-radius: 50%;
-    background-color: mat-color($app-theme, 750);
-    color: mat-color($app-theme, 100);
+    background-color: mat.get-color-from-palette($app-theme, 750);
+    color: mat.get-color-from-palette($app-theme, 100);
     width: 25px;
     height: 25px;
     line-height: 25px;
@@ -35,20 +36,20 @@ li {
 .workflow-content__text {
     padding: 0 0 0 5px;
     white-space: nowrap;
-    color: mat-color($app-theme, 700);
+    color: mat.get-color-from-palette($app-theme, 700);
 }
 
 .workflow-content__text_current {
-    color: mat-color($app-theme, 200);
+    color: mat.get-color-from-palette($app-theme, 200);
 }
 
 .workflow-content__circle_current {
-    background-color: mat-color($app-theme, 250);
+    background-color: mat.get-color-from-palette($app-theme, 250);
 }
 
 .workflow-divider {
     flex-grow: 1;
-    border-top: 2px solid mat-color($app-theme, 800);
+    border-top: 2px solid mat.get-color-from-palette($app-theme, 800);
     margin: 0 10px;
     max-width: 60px;
 }

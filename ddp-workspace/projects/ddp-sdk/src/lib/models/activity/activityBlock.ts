@@ -3,6 +3,7 @@ import { BlockType } from './blockType';
 export abstract class ActivityBlock {
     public id: string;
     public shown: boolean;
+    public enabled = true;
     public scrollTo = false;
     public valid = true;
 
@@ -21,7 +22,7 @@ export abstract class ActivityBlock {
     }
 
     public validate(): boolean {
-        const result = this.validateInternally();
+        const result = this.enabled ? this.validateInternally() : true;
         this.valid = result;
         return result;
     }

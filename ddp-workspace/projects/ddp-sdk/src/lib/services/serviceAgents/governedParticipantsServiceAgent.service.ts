@@ -6,7 +6,7 @@ import { ConfigurationService } from '../configuration.service';
 import { SessionMementoService } from '../sessionMemento.service';
 import { Participant } from '../../models/participant';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { AddParticipantPayload } from '../../models/addParticipantPayload';
 import { AddParticipantResponse } from '../../models/addParticipantResponse';
 

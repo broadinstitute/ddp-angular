@@ -121,8 +121,7 @@ export class PdfDownloadComponent implements OnInit {
         data => {
           this.participantPDFs = [];
           // console.info( `received: ${JSON.stringify( data, null, 2 )}` );
-          let jsonData: any[];
-          jsonData = data;
+          const jsonData = data;
           if (jsonData != null) {
             jsonData.forEach((val) => {
               const participantPdf = PDFModel.parse(val);
@@ -148,7 +147,7 @@ export class PdfDownloadComponent implements OnInit {
     this.dsmService.downloadPDF(this.participantId, null, null, null, null, this.compService.getRealm(),
       configName, null, null).subscribe(
       data => {
-        // tslint:disable-next-line:no-console
+        // eslint-disable-next-line no-console
         console.info(data);
         this.downloadFile(data, '_' + configName);
         this.loading = false;

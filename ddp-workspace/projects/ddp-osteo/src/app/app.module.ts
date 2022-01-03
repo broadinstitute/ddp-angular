@@ -1,5 +1,5 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
-import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -29,7 +29,6 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { HeaderComponent } from './components/header/header.component';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress.component';
-import { MyHammerConfig } from './my-hammer-config';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -80,7 +79,7 @@ tkCfg.instagramId = 'the_osproject';
 tkCfg.lightswitchInstagramWidgetId = '814feee04df55de38ec37791efea075e';
 tkCfg.countMeInUrl = 'https://joincountmein.org/';
 
-export let config = new ConfigurationService();
+export const config = new ConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
 config.auth0Domain = DDP_ENV.auth0Domain;
 config.auth0ClientId = DDP_ENV.auth0ClientId;
@@ -159,10 +158,6 @@ export function translateFactory(translate: TranslateService, injector: Injector
         LoggingService
       ],
       multi: true
-    },
-    {
-      provide: HAMMER_GESTURE_CONFIG,
-      useClass: MyHammerConfig
     }
   ],
   bootstrap: [AppComponent]

@@ -55,7 +55,7 @@ import { RedirectToAuth0LoginRedesignedComponent } from './components/redirect-t
 import { SessionWillExpireComponent } from './components/dialogs/sessionWillExpire.component';
 import { VerifyAgeUpPageComponent } from './components/age-up/verifyAgeUpPage.component';
 import { AcceptAgeUpPageComponent } from './components/age-up/acceptAgeUpPage.component';
-import { AgeUpThankYou } from './components/thank-you/age-up-thank-you.component';
+import { AgeUpThankYouComponent } from './components/thank-you/age-up-thank-you.component';
 import { InstagramFeedLightwidgetPluginComponent } from './components/instagram-feed-lightwidget-plugin/instagram-feed-lightwidget-plugin.component';
 import { TwitterTimelineWidgetComponent } from './components/twitter-widget/twitter-timeline-widget.component';
 import { CookiesManagementService } from './services/cookiesManagement.service';
@@ -169,7 +169,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
         SessionWillExpireComponent,
         VerifyAgeUpPageComponent,
         AcceptAgeUpPageComponent,
-        AgeUpThankYou,
+        AgeUpThankYouComponent,
         InstagramFeedLightwidgetPluginComponent,
         TwitterTimelineWidgetComponent,
         CookiesBannerComponent,
@@ -216,7 +216,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
         RedirectToAuth0LoginRedesignedComponent,
         VerifyAgeUpPageComponent,
         AcceptAgeUpPageComponent,
-        AgeUpThankYou,
+        AgeUpThankYouComponent,
         InstagramFeedLightwidgetPluginComponent,
         TwitterTimelineWidgetComponent,
         CommonLandingComponent,

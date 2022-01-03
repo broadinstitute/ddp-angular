@@ -42,7 +42,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     uploadedFile: ActivityFileAnswerDto | null;
     errorMessage: string;
     isLoading: boolean;
-    private ngUnsubscribe = new Subject();
+    private ngUnsubscribe = new Subject<void>();
     private readonly panelClass = 'file-upload-confirm-dialog';
 
     constructor(private fileUploadService: FileUploadService,
