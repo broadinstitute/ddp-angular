@@ -13,7 +13,10 @@
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ddp-sdk/tsconfig.lib.json",
-            "project": "projects/ddp-sdk/ng-package.json"
+            "project": "projects/ddp-sdk/ng-package.json",
+            "allowedCommonJsDependencies": [
+              "stackdriver-errors-js"
+            ]
           },
           "configurations": {
             "production": {
@@ -2491,6 +2494,9 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "stackdriver-errors-js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,
