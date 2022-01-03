@@ -13,10 +13,7 @@
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ddp-sdk/tsconfig.lib.json",
-            "project": "projects/ddp-sdk/ng-package.json",
-            "allowedCommonJsDependencies": [
-              "stackdriver-errors-js"
-            ]
+            "project": "projects/ddp-sdk/ng-package.json"
           },
           "configurations": {
             "production": {
