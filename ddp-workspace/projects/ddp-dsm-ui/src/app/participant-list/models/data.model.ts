@@ -3,6 +3,7 @@ import { Address } from '../../address/address.model';
 import { InvitationData } from '../../invitation-data/invitation-data.model';
 import { Computed } from './computed.model';
 import { MedicalProvider } from './medical-providers.model';
+import { QuestionAnswer } from '../../activity-data/models/question-answer.model';
 
 export class Data {
   constructor(public profile: object, public status: string, public statusTimestamp: number,
@@ -20,6 +21,20 @@ export class Data {
     this.address = address;
     this.invitations = invitations;
     this.computed = computed;
+  }
+
+  getMultipleDatesForActivity( activityData: ActivityData, name: string ) {
+    let answers: Array<QuestionAnswer> = new Array();
+    for (let x of this.activities) {
+      if (x.activityCode === activityData.activityCode) {
+        for (let y of x.questionsAnswers) {
+          if (y.stableId === name) {
+            answers.push(y);
+          }
+        }
+      }
+    }
+    return answers.reverse();
   }
 
   static parse(json): Data {
