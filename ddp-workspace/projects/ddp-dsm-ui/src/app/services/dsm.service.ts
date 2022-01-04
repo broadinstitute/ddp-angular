@@ -798,40 +798,6 @@ export class DSMService {
     );
   }
 
-  public getEmailEventData(source: string, target: string): Observable<any> {
-    const url = this.baseUrl + DSMService.UI + 'emailEvent/' + source;
-    const map: { name: string; value: any }[] = [];
-    if (target != null && target !== '') {
-      map.push({name: DSMService.TARGET, value: target});
-    }
-    return this.http.get(url, this.buildQueryHeader(map)).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  public getEmailSettings(source: string): Observable<any> {
-    const url = this.baseUrl + DSMService.UI + 'emailSettings/' + source;
-    return this.http.get(url, this.buildHeader()).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  public saveEmailSettings(source: string, json: string): Observable<any> {
-    const url = this.baseUrl + DSMService.UI + 'emailSettings/' + source;
-    return this.http.patch(url, json, this.buildHeader()).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  public followUpEmailEvent(source: string, json: string): Observable<any> {
-    const url = this.baseUrl + DSMService.UI + 'followUpEmailEvent/' + source;
-    const map: { name: string; value: any }[] = [];
-    map.push({name: 'userId', value: this.role.userID()});
-    return this.http.patch(url, json, this.buildQueryHeader(map)).pipe(
-      catchError(this.handleError)
-    );
-  }
-
   public getFieldSettings(source: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'fieldSettings/' + source;
     return this.http.get(url, this.buildHeader()).pipe(
