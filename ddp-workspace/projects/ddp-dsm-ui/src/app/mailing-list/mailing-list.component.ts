@@ -157,13 +157,20 @@ export class MailingListComponent implements OnInit {
 
   getPossibleInfoColumns(contact: MailingListContact): void {
     if (contact != null && contact.info != null) {
-        const k: string[] = Object.keys(contact);
+      const o: any = JSON.parse( contact.info );
+      if (o != null) {
+        const k: string[] = Object.keys( o );
         k.forEach(key => {
           if (!this.keys.includes(key)) {
             this.keys.push(key);
           }
         });
+      }
     }
+  }
+
+  getJsonValue( info: string, key: string ): string {
+    return JSON.parse( info )[ key ];
   }
 
   sortByJson(key: string): void {

@@ -372,18 +372,26 @@
                             </ng-container>
                           </ng-container>
                           <ng-container
-                            *ngIf="questionAnswer.questionType === 'COMPOSITE' && questionAnswer.answer != null">
-                            <div *ngFor="let answer of questionAnswer.answer; let i = index">
-                              <div *ngFor="let compPart of answer" class="TD--Padding-Left-Bigger">
-                                {{getUtil().getNiceUserText(compPart)}}
-                              </div>
-                              <hr *ngIf="i !== questionAnswer.answer.length-1" style="border-color: lightgray">
-                            </div>
-                          </ng-container>
-                          <ng-container
-                            *ngIf="questionAnswer.questionType === 'PICKLIST' && questionAnswer.answer != null">
+                            *ngIf="getUtil().getQuestionDefinition(activityDefinitionList, alias, questionAnswer.stableId, activityData.activityVersion) as qDef">
                             <ng-container
-                              *ngIf="getUtil().getQuestionDefinition(activityDefinitionList, alias, questionAnswer.stableId, activityData.activityVersion) as qDef">
+                              *ngIf="questionAnswer.questionType === 'COMPOSITE' && questionAnswer.answer != null">
+                              <div *ngFor="let answer of questionAnswer.answer; let i = index">
+                                <div *ngFor="let cQ of qDef.childQuestions; let i = index" class="TD--Padding-Left-Bigger">
+                                  <div *ngIf="cQ.questionType === 'DATE' && answer[i] != null">
+                                    {{getUtil().getNiceUserText(answer[i])}}
+                                  </div>
+                                  <div *ngIf="cQ.questionType === 'PICKLIST' && answer[i] != null">
+                                    {{getUtil().getOptionOrGroupText(cQ, answer[i])}}
+                                  </div>
+                                  <div *ngIf="cQ.questionType !== 'DATE' && cQ.questionType !== 'PICKLIST' && answer[i] != null">
+                                    {{getUtil().getNiceUserText(answer[i])}}
+                                  </div>
+                                </div>
+                                <hr *ngIf="i !== questionAnswer.answer.length-1" style="border-color: lightgray">
+                              </div>
+                            </ng-container>
+                            <ng-container
+                              *ngIf="questionAnswer.questionType === 'PICKLIST' && questionAnswer.answer != null">
                               <ng-container *ngIf="qDef.selectMode === 'MULTIPLE'">
                                 <ng-container *ngIf="qDef.options !== null">
                                   <ul *ngFor="let o of qDef.options">
@@ -582,7 +590,20 @@
                             <p class="BIT-OF-MARGIN" *ngIf="tissue.tissueId != null && tissue.tissueId !== ''">
                               <ng-container
                                 *ngIf="col.type !== 'ADDITIONALVALUE' && col.type !== 'DATE' && col.type !== 'OPTIONS' && col.type !== 'CHECKBOX' && col.type !== 'BOOLEAN'">
-                                {{tissue[col.participantColumn.name]}}
+                                <ng-container *ngIf="col.participantColumn.tableAlias === 'sm'">
+                                  <ng-container *ngFor="let smid of tissue.ussSMId">
+                                    {{smid.smIdValue}}
+                                  </ng-container>
+                                  <ng-container *ngFor="let smid of tissue.HESMId">
+                                    {{smid.smIdValue}}
+                                  </ng-container>
+                                  <ng-container *ngFor="let smid of tissue.scrollSMId">
+                                    {{smid.smIdValue}}
+                                  </ng-container>
+                                </ng-container>
+                                <ng-container *ngIf="col.participantColumn.tableAlias !== 'sm'">
+                                  {{tissue[col.participantColumn.name]}}
+                                </ng-container>
                               </ng-container>
                               <ng-container *ngIf="col.type === 'ADDITIONALVALUE' && tissue['additionalValues'] != null
                               && tissue['additionalValues'][col.participantColumn.name] != null">

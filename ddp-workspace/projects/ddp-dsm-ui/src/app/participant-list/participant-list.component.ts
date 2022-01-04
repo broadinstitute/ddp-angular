@@ -309,6 +309,11 @@ export class ParticipantListComponent implements OnInit {
                   this.sourceColumns[ 'p' ] = [];
                 }
                 this.sourceColumns[ 'p' ].push(filter);
+              } else if (key === 'sm') {
+                if (this.sourceColumns[ 't' ] == null || this.sourceColumns[ 't' ] == undefined) {
+                  this.sourceColumns[ 't' ] = [];
+                }
+                this.sourceColumns[ 't' ].push( filter );
               } else {
                 if (this.sourceColumns[ fieldSetting.fieldType ] == null) {
                   this.sourceColumns[ fieldSetting.fieldType ] = [];
@@ -694,6 +699,8 @@ export class ParticipantListComponent implements OnInit {
         this.sourceColumns[ 'p' ].push(filter);
       } else if (filter.participantColumn.tableAlias === 'inst') {
         this.sourceColumns[ 'm' ].push(filter);
+      }  else if (filter.participantColumn.tableAlias === 'sm') {
+        this.sourceColumns[ 't' ].push( filter );
       } else if (this.sourceColumns[ filter.participantColumn.tableAlias ] != null) {
         // TODO - can be changed to add all after all DDPs are migrated
         if (this.hasESData) {
@@ -829,6 +836,8 @@ export class ParticipantListComponent implements OnInit {
                   t = 'p';
                 } else if (t === 'inst') {
                   t = 'm';
+                } else if (t === 'sm') {
+                  t = 't';
                 } else if (t === 'participantData') {
                   t = filter.participantColumn.object;
                 }
@@ -1520,6 +1529,16 @@ export class ParticipantListComponent implements OnInit {
       });
     } else if (this.sortParent === 't') {
       //TODO: do we need the empty block statement ?
+    } else if (this.sortParent === 'proxy') {
+      this.participantList.sort( (c1, c2) => {
+        if (!c1.proxyData[0]) {
+          return 1;
+        } else if (!c2.proxyData[0]) {
+          return -1;
+        } else {
+          return this.sort( c1.proxyData[0].profile[this.sortField], c2.proxyData[0].profile[this.sortField], order, undefined, colType );
+        }
+      })
     } else if (this.sortParent === 'k') {
       this.participantList.map(participant =>
         participant.kits.sort((n, m) => this.sort(n[ this.sortField ], m[ this.sortField ], order, undefined, colType))
