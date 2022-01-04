@@ -102,7 +102,7 @@ export class ParticipantColumn {
   public static BLOCKS_COUNT = new ParticipantColumn('Block(s)', 'blocksCount', 't');
   public static USS_COUNT = new ParticipantColumn('USS (unstained slides)', 'ussCount', 't');
   public static H_E_COUNT = new ParticipantColumn('H&E(s)', 'hECount', 't');
-
+  public static SM_ID_VALUE = new ParticipantColumn("SM-ID value", "smIdValue", "sm");
 
   // abstraction column
   public static ABSTRACTION = new ParticipantColumn('Abstraction', 'abstraction');
