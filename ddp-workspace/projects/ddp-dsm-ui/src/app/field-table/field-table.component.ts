@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { ModalComponent } from '../modal/modal.component';
 import { Value } from '../utils/value.model';
-import { AbstractionField, AbstractionFieldValue } from "../medical-record-abstraction/medical-record-abstraction-field.model";
+import { AbstractionField, AbstractionFieldValue } from '../medical-record-abstraction/medical-record-abstraction-field.model';
 
 @Component({
   selector: 'app-field-table',

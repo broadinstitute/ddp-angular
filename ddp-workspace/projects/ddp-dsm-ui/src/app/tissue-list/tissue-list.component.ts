@@ -18,8 +18,8 @@ import { ModalComponent } from '../modal/modal.component';
 import { Utils } from '../utils/utils';
 import { TissueListWrapper } from './tissue-list-wrapper.model';
 import { FieldSettings } from '../field-settings/field-settings.model';
-import { Assignee } from "../assignee/assignee.model";
-import {AssigneeParticipant} from "../participant-list/models/assignee-participant.model";
+import { Assignee } from '../assignee/assignee.model';
+import { AssigneeParticipant } from '../participant-list/models/assignee-participant.model';
 
 @Component({
   selector: 'app-tissue-view-page',
