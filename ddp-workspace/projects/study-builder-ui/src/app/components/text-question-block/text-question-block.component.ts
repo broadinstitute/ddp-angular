@@ -3,11 +3,10 @@ import { Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 
 import { QuestionBlockDef } from '../../model/core/questionBlockDef';
-import { ActivityTextQuestionBlock } from 'ddp-sdk';
+import { ActivityTextQuestionBlock, ActivityQuestionConverter } from 'ddp-sdk';
 import { TextQuestionDef } from '../../model/core/textQuestionDef';
 import { ConfigurationService } from '../../configuration.service';
 import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
-import { ActivityQuestionConverter } from '../../../../../ddp-sdk/src/lib/services/activity/activityQuestionConverter.service';
 
 @Component({
     selector: 'app-text-question-block',
