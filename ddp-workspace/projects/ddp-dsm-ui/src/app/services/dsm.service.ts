@@ -36,6 +36,16 @@ export class DSMService {
                private logger: LoggingDsmService) {
   }
 
+  sendAnalyticsMetric( realm: string, passed: number ) {
+    let url = this.baseUrl + DSMService.UI + "googleAnalytics";
+    let map: { name: string, value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: realm} );
+    map.push( {name: "timer", value: passed} );
+    return this.http.patch(url, null, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError.bind(this))
+    );
+  }
+
   public transferScan(scanTracking: boolean, json: string): Observable<any> {
     let url = this.baseUrl + DSMService.UI;
     if (scanTracking) {
