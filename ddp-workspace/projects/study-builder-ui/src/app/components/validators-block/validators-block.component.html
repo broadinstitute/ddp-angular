@@ -1,18 +1,6 @@
-<button mat-stroked-button *ngIf="!validatorsDataSubject.value"
-        color="primary"
-        class="validators-btn"
-        (click)="addValidators()">Add validators
-</button>
-
-<div class="validators" *ngIf="validatorsDataSubject.value">
+<div class="validators">
     <form [formGroup]="validatorsGroup" class="validators-container">
         <p class="title">Validators</p>
-        <button mat-mini-fab
-                color="warn"
-                class="remove-btn"
-                (click)="removeValidators()">
-            <mat-icon>delete</mat-icon>
-        </button>
 
         <div formGroupName="REQUIRED" class="validator">
             <mat-checkbox formControlName="on">Required</mat-checkbox>

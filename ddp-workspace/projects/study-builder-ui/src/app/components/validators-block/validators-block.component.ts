@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BehaviorSubject, merge, Observable, Subscription } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
-import * as _ from 'underscore';
 import { ValidationControlsData, ValidatorsMapper } from './validators.mapper';
 import { RuleDef } from '../../model/core/ruleDef';
 
@@ -19,7 +18,7 @@ export class ValidatorsBlockComponent implements OnInit, OnDestroy {
     }
     @Output() validatorsChanged = new EventEmitter<RuleDef[]>();
 
-    validatorsDataSubject = new BehaviorSubject<ValidationControlsData | boolean>(false);
+    validatorsDataSubject = new BehaviorSubject<ValidationControlsData | null>(null);
     validatorsGroup = this.fb.group({
         REQUIRED: this.fb.group({
             on: [false],
@@ -36,11 +35,12 @@ export class ValidatorsBlockComponent implements OnInit, OnDestroy {
 
     constructor(
         private fb: FormBuilder
-    ) {}
+    ) {
+    }
 
     ngOnInit(): void {
         const updateForm$ = this.validatorsDataSubject.pipe(
-            filter(data => !_.isBoolean(data)),
+            filter(data => !!data),
             tap(this.updateForm.bind(this))
         );
         const updateValidators$ = this.validatorsGroup.valueChanges.pipe(
@@ -53,16 +53,6 @@ export class ValidatorsBlockComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.sub.unsubscribe();
-    }
-
-    addValidators(): void {
-        this.showValidatorsBlock();
-        this.validatorsGroup.reset();
-    }
-
-    removeValidators(): void {
-        this.hideValidatorsBlock();
-        this.validatorsGroup.reset();
     }
 
     private toggleValidatorControl$(controlName: string): Observable<boolean> {
@@ -86,21 +76,11 @@ export class ValidatorsBlockComponent implements OnInit, OnDestroy {
         const areValidatorsEmpty = Object.keys(validators).length === 0;
         this.validatorsGroup.reset();
 
-        if (areValidatorsEmpty) {
-           this.hideValidatorsBlock();
-        } else {
+        if (!areValidatorsEmpty) {
             this.validatorsGroup.patchValue(validators);
             for (const validatorName in validators) {
-                this.toggleControls(validatorName, validators[validatorName].on)
+                this.toggleControls(validatorName, validators[validatorName].on);
             }
         }
-    }
-
-    private hideValidatorsBlock(): void {
-        this.validatorsDataSubject.next(false);
-    }
-
-    private showValidatorsBlock(): void {
-        this.validatorsDataSubject.next(true);
     }
 }
