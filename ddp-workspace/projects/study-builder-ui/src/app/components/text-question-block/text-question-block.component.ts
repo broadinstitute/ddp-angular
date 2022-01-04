@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 
+import { ActivityTextQuestionBlock, ActivityQuestionConverter, ActivityQuestionComponent } from 'ddp-sdk';
 import { QuestionBlockDef } from '../../model/core/questionBlockDef';
-import { ActivityTextQuestionBlock, ActivityQuestionConverter } from 'ddp-sdk';
 import { TextQuestionDef } from '../../model/core/textQuestionDef';
 import { ConfigurationService } from '../../configuration.service';
 import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
@@ -14,22 +14,42 @@ import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
     styleUrls: ['./text-question-block.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TextQuestionBlockComponent implements OnInit {
-
-    @Input()
-    definitionBlock$: Observable<QuestionBlockDef<TextQuestionDef>>;
+export class TextQuestionBlockComponent implements OnInit, OnDestroy {
+    @Input() definitionBlock$: Observable<QuestionBlockDef<TextQuestionDef>>;
     angularClientBlock$: Observable<ActivityTextQuestionBlock>;
+    validationErrorMessages: string[] = [];
+    private sub = new Subscription();
 
     constructor(
         private config: ConfigurationService,
         private questionConverter: ActivityQuestionConverter
-    ) {}
+    ) {
+    }
 
     ngOnInit(): void {
         this.angularClientBlock$ = this.definitionBlock$.pipe(
             tap(defBlock => console.log('getting defblock: %o', defBlock)),
             filter(block => !!block),
-            map(defBlock => this.buildFromDef(defBlock)));
+            map(defBlock => this.buildFromDef(defBlock))
+        );
+    }
+
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
+
+    valueChanged(value: string) {
+        const valueChangedSub = this.angularClientBlock$.subscribe((block: ActivityTextQuestionBlock) => {
+            block.setAnswer(value);
+            for (const validator of block.validators) {
+                validator.recalculate();
+            }
+            this.validationErrorMessages = block.validators.map(validator => {
+                const result = validator.result;
+                return ActivityQuestionComponent.isActivityValidationResult(result) ? result.message : result;
+            });
+        });
+        this.sub.add(valueChangedSub);
     }
 
     private buildFromDef(defBlock: QuestionBlockDef<TextQuestionDef>): ActivityTextQuestionBlock {
@@ -72,5 +92,4 @@ export class TextQuestionBlockComponent implements OnInit {
     // public serverValidationMessages$: Observable<Array<string>>;
     // newClientBlock.validators = questionDef.validators;<ActivityAbstractValidationRule> = [];
     // private serverValidationMessagesSubject: BehaviorSubject<Array<string>> = new BehaviorSubject([]);
-
 }
