@@ -19,6 +19,14 @@
             align-items: baseline;
         }
 
+        .toggle {
+            width: 130px;
+
+            &.mat-checkbox-checked {
+                font-weight: 600;
+            }
+        }
+
         .length {
             width: 100px;
         }
