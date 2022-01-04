@@ -156,6 +156,7 @@ commands:
             set -u
             if [[ "<<parameters.study_key>>" != "dsm-ui" ]]; then
               ./build-study.sh v1 $ENVIRONMENT . <<parameters.study_key>> "$STUDY_GUID" --config
+              cd ddp-workspace
               CONFIG_DIR="${OUTPUT_DIR}/assets/config"
               mkdir -p $CONFIG_DIR
               CONFIG_FILE_SRC_PATH="${ANGULAR_PROJECT_DIR_PATH}/output-config/pepperConfig.js"
