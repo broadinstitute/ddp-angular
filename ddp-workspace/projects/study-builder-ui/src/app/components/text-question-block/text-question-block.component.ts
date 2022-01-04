@@ -18,37 +18,30 @@ export class TextQuestionBlockComponent implements OnInit, OnDestroy {
     @Input() definitionBlock$: Observable<QuestionBlockDef<TextQuestionDef>>;
     angularClientBlock$: Observable<ActivityTextQuestionBlock>;
     validationErrorMessages: string[] = [];
+    private blockCurrentAnswer = '';
     private sub = new Subscription();
 
     constructor(
         private config: ConfigurationService,
         private questionConverter: ActivityQuestionConverter
-    ) {
-    }
+    ) {}
 
     ngOnInit(): void {
         this.angularClientBlock$ = this.definitionBlock$.pipe(
             tap(defBlock => console.log('getting defblock: %o', defBlock)),
             filter(block => !!block),
-            map(defBlock => this.buildFromDef(defBlock))
+            map(defBlock => this.buildFromDef(defBlock)),
+            tap((block: ActivityTextQuestionBlock) => this.validate(block))
         );
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.sub.unsubscribe();
     }
 
-    valueChanged(value: string) {
-        const valueChangedSub = this.angularClientBlock$.subscribe((block: ActivityTextQuestionBlock) => {
-            block.setAnswer(value);
-            for (const validator of block.validators) {
-                validator.recalculate();
-            }
-            this.validationErrorMessages = block.validators.map(validator => {
-                const result = validator.result;
-                return ActivityQuestionComponent.isActivityValidationResult(result) ? result.message : result;
-            });
-        });
+    valueChanged(value: string): void {
+        this.blockCurrentAnswer = value;
+        const valueChangedSub = this.angularClientBlock$.subscribe((block: ActivityTextQuestionBlock) => this.validate(block, value));
         this.sub.add(valueChangedSub);
     }
 
@@ -67,8 +60,36 @@ export class TextQuestionBlockComponent implements OnInit, OnDestroy {
         newClientBlock.placeholder = new SimpleTemplate(questionDef.placeholderTemplate)
             .getTranslationText(this.config.defaultLanguageCode);
         newClientBlock.question = new SimpleTemplate(questionDef.promptTemplate).getTranslationText(this.config.defaultLanguageCode);
+
+        if (this.blockCurrentAnswer) {
+            newClientBlock.setAnswer(this.blockCurrentAnswer, false);
+        }
         return newClientBlock;
     }
+
+    private validate(block: ActivityTextQuestionBlock, answer: string = block.answer): void {
+        block.setAnswer(answer || '', false);
+        for (const validator of block.validators) {
+            validator.recalculate();
+        }
+        this.validationErrorMessages = block.validators.map(validator => {
+            const result = validator.result;
+            return ActivityQuestionComponent.isActivityValidationResult(result) ? result.message : result;
+        });
+    }
+
+    // private checkRequiredValidator(block: ActivityTextQuestionBlock): void {
+    //     const requiredValidator = block.validators.
+    //         filter((validator: ActivityAbstractValidationRule) => validator instanceof ActivityRequiredValidationRule)[0];
+    //     if (!requiredValidator) return;
+    //
+    //     // block.setAnswer(block.answer || '');
+    //     requiredValidator.recalculate();
+    //     if (requiredValidator.result) {
+    //         console.log('RES=', requiredValidator.result);
+    //         this.validationErrorMessages[0] = requiredValidator.result as string;
+    //     }
+    // }
 
 
     // newClientBlock.placeholder = questionDef.placeholder;
