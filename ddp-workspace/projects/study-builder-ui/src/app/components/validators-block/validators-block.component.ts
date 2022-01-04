@@ -48,7 +48,7 @@ export class ValidatorsBlockComponent implements OnInit, OnDestroy {
         );
         const toggleRequiredControls$ = this.toggleValidatorControl$('REQUIRED');
         const toggleLengthControls$ = this.toggleValidatorControl$('LENGTH');
-        this.sub = merge(updateForm$, updateValidators$, toggleRequiredControls$, toggleLengthControls$).subscribe();
+        this.sub = merge(updateForm$, updateValidators$, toggleRequiredControls$, toggleLengthControls$).subscribe({});
     }
 
     ngOnDestroy(): void {

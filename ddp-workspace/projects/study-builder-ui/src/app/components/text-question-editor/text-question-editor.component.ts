@@ -50,14 +50,14 @@ export class TextQuestionEditorComponent implements OnInit, OnDestroy {
             map(formData => this.updateQuestion(formData)),
             tap(() => this.questionBlockChanged.emit(this.questionBlockSubject.getValue()))
         );
-        this.sub = merge(updateFormPipe, updateQuestionPipe).subscribe();
+        this.sub = merge(updateFormPipe, updateQuestionPipe).subscribe({});
     }
 
     ngOnDestroy(): void {
         this.sub.unsubscribe();
     }
 
-    changeValidators(validationRules) {
+    changeValidators(validationRules: RuleDef[]): void {
         const question = this.currentQuestion();
         if (!question) {
             return;
