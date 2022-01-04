@@ -78,7 +78,7 @@ export class UploadComponent implements OnInit {
           }
         });
         if (!this.allowedToSeeInformation) {
-          this.additionalMessage = 'You are not allowed to see information of the selected realm at that category';
+          this.additionalMessage = 'You are not allowed to see information of the selected study at that category';
         }
       },
       () => {
@@ -91,7 +91,7 @@ export class UploadComponent implements OnInit {
     if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
       this.checkRight();
     } else {
-      this.additionalMessage = 'Please select a realm';
+      this.additionalMessage = 'Please select a study';
     }
     window.scrollTo(0, 0);
   }

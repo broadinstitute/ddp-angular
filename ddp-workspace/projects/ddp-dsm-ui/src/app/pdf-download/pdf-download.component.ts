@@ -50,7 +50,7 @@ export class PdfDownloadComponent implements OnInit {
       this.realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       this.checkRight();
     } else {
-      this.additionalMessage = 'Please select a realm';
+      this.additionalMessage = 'Please select a study';
     }
     window.scrollTo(0, 0);
   }
@@ -69,7 +69,7 @@ export class PdfDownloadComponent implements OnInit {
           }
         });
         if (!this.allowedToSeeInformation) {
-          this.additionalMessage = 'You are not allowed to see information of the selected realm at that category';
+          this.additionalMessage = 'You are not allowed to see information of the selected study at that category';
         }
       },
       () => {

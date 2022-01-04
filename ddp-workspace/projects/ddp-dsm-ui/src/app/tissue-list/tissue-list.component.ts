@@ -198,7 +198,7 @@ export class TissueListComponent implements OnInit {
           }
         });
         if (!allowedToSeeInformation) {
-          this.errorMessage = 'You are not allowed to see information of the selected realm at that category';
+          this.errorMessage = 'You are not allowed to see information of the selected study at that category';
         }
       },
       () => {
@@ -213,11 +213,11 @@ export class TissueListComponent implements OnInit {
       this.realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       //      this.compService.realmMenu = this.realm;
     } else {
-      this.errorMessage = 'Please select a realm';
+      this.errorMessage = 'Please select a study';
     }
     window.scrollTo(0, 0);
     if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) == null) {
-      this.errorMessage = 'Please select a realm';
+      this.errorMessage = 'Please select a study';
       return;
     } else {
       //      this.setAllColumns();
@@ -307,7 +307,7 @@ export class TissueListComponent implements OnInit {
         }
       },
       err => {
-        this.errorMessage = 'Could not getting the field settings for this realm. Please contact your DSM developer\n ' + err;
+        this.errorMessage = 'Could not getting the field settings for this study. Please contact your DSM developer\n ' + err;
       },
     );
   }
@@ -1073,7 +1073,7 @@ export class TissueListComponent implements OnInit {
           data => {
             const participant: Participant = Participant.parse(data[0]);
             if (participant == null) {
-              this.errorMessage = 'Participant  not found';
+              this.errorMessage = 'Participant not found';
             }
             if (name === 't') {
               this.openTissue(tissueListWrapper.tissueList.oncHistoryDetails, participant, tissueId);
@@ -1121,7 +1121,7 @@ export class TissueListComponent implements OnInit {
       }
     }
     if (message.length > 0) {
-      message = 'The following columns do not apply in this realm: ' + message;
+      message = 'The following columns do not apply in this study: ' + message;
     }
     return message;
   }

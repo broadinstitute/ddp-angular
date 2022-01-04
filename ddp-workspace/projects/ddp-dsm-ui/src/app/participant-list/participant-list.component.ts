@@ -135,7 +135,7 @@ export class ParticipantListComponent implements OnInit {
   ngOnInit(): void {
     this.additionalMessage = null;
     if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) == null) {
-      this.additionalMessage = 'Please select a realm';
+      this.additionalMessage = 'Please select a study';
     } else {
       this.checkRight();
     }
@@ -227,7 +227,7 @@ export class ParticipantListComponent implements OnInit {
         if (!allowedToSeeInformation) {
           this.loadingParticipants = null;
           this.compService.customViews = null;
-          this.errorMessage = 'You are not allowed to see information of the selected realm at that category';
+          this.errorMessage = 'You are not allowed to see information of the selected study at that category';
         }
       },
       () => {

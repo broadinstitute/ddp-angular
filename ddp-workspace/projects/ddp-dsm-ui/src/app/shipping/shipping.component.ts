@@ -105,7 +105,7 @@ export class ShippingComponent implements OnInit {
         //        this.compService.realmMenu = realm;
         this.checkRight();
       } else {
-        this.additionalMessage = 'Please select a realm';
+        this.additionalMessage = 'Please select a study';
       }
     });
   }
@@ -114,7 +114,7 @@ export class ShippingComponent implements OnInit {
     if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
       this.checkRight();
     } else {
-      this.additionalMessage = 'Please select a realm';
+      this.additionalMessage = 'Please select a study';
     }
     window.scrollTo(0, 0);
   }
@@ -136,7 +136,7 @@ export class ShippingComponent implements OnInit {
           }
         });
         if (!this.allowedToSeeInformation) {
-          this.additionalMessage = 'You are not allowed to see information of the selected realm at that category';
+          this.additionalMessage = 'You are not allowed to see information of the selected study at that category';
         }
       },
       () => {
@@ -228,7 +228,7 @@ export class ShippingComponent implements OnInit {
       this.additionalMessage = null;
     } else {
       this.kitTypes = [];
-      this.additionalMessage = 'Please select a realm';
+      this.additionalMessage = 'Please select a study';
     }
   }
 
@@ -284,7 +284,7 @@ export class ShippingComponent implements OnInit {
       );
     } else {
       this.kitRequests = [];
-      this.additionalMessage = 'Please select a realm';
+      this.additionalMessage = 'Please select a study';
     }
   }
 
