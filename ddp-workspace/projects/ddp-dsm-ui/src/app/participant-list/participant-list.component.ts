@@ -1413,7 +1413,8 @@ export class ParticipantListComponent implements OnInit {
     this.dataSources.forEach((value: string, key: string) => {
       if (this.selectedColumns != null && this.selectedColumns[ key ] != null) {
         for (const col of this.selectedColumns[ key ]) {
-          columns.push(col.participantColumn.tableAlias + '.' + col.participantColumn.name);
+          let name = col.participantColumn.name;
+          columns.push( col.participantColumn.tableAlias + '.' + name );
         }
       }
     });

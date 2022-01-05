@@ -1,6 +1,6 @@
 <div class="Display--block Width--100">
   <fieldset style="border: 1px black solid">
-    <legend class="Group--Title" id="{{activity.activityCode}}">{{activityDefinition.activityName}}</legend>
+    <legend class="Group--Title" id="{{getActivityCode(activity)}}">{{getActivityName(activityDefinition)}}</legend>
     <div class="Router--Outlet">
       <div>Survey Version: {{activity.activityVersion}}</div>
       <div>Created: {{activity.createdAt | date:'medium'}}</div>

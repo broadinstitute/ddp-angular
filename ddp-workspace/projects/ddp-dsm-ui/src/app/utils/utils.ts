@@ -31,6 +31,8 @@ export class Utils {
   static DATE_PARTIAL = 'partial date';
   static COMMA = ',';
   static EMPTY_STRING_CSV = '""';
+  static DATA: string = 'data';
+  static PROFILE: string = 'profile';
 
   YES = 'Yes';
   NO = 'No';
@@ -210,6 +212,22 @@ export class Utils {
     }
   }
 
+  private static isColumnNestedInParticipantData( data: Object, paths: any[], index: number ): boolean {
+    return Utils.participantDataExists( data, paths, index ) && data[ Utils.DATA ][ paths[ index ] ];
+  }
+
+  private static participantDataExists( data: Object, path: any[], index: number ): boolean {
+    return data && data[ Utils.DATA ];
+  }
+
+  private static isColumnNestedInProfileData( data: Object, columnName: string ) {
+    return this.profileDataExists( data ) && data[ Utils.PROFILE ][ columnName ];
+  }
+
+  private static profileDataExists( data: Object ): boolean {
+    return data && data[ Utils.PROFILE ];
+  }
+
   private static getObjectAdditionalValue(o: object, fieldName: string, column: any): string {
     if (o[ fieldName ] != null) {
       return o[ fieldName ][ column.participantColumn.name ];
@@ -280,7 +298,13 @@ export class Utils {
               }
             }
           } else {
-            let value = o[ col.participantColumn.name ];
+            let value = null;
+            if (Utils.isColumnNestedInProfileData( o, col.participantColumn.name )) {
+              value = o[ Utils.PROFILE ][ col.participantColumn.name ];
+            }
+            else {
+              value = o[ col.participantColumn.name ];
+            }
             if (col.participantColumn.object != null && o[ col.participantColumn.object ] != null) {
               value = o[ col.participantColumn.object ][ col.participantColumn.name ];
             } else if (o['data'] && o['data'][col.participantColumn.name]) {
@@ -307,11 +331,11 @@ export class Utils {
             if (activityDataArray != null) {
               if (activityDataArray.length == 1) {
                 let activityData = activityDataArray[ 0 ];
-                if (( col.participantColumn.name === "createdAt" || col.participantColumn.name === "completedAt"
-                  || col.participantColumn.name === "lastUpdatedAt" ) && activityData[ col.participantColumn.name ] != null) {
+                if (( col.participantColumn.name === 'createdAt' || col.participantColumn.name === 'completedAt'
+                  || col.participantColumn.name === 'lastUpdatedAt' ) && activityData[ col.participantColumn.name ] != null) {
                   value = this.getDateFormatted( new Date( activityData[ col.participantColumn.name ] ), this.DATE_STRING_IN_CVS );
                 }
-                else if (col.participantColumn.name === "status" && activityData[ col.participantColumn.name ] != null) {
+                else if (col.participantColumn.name === 'status' && activityData[ col.participantColumn.name ] != null) {
                   value = activityData[ col.participantColumn.name ];
                 }
                 else {
@@ -501,8 +525,7 @@ export class Utils {
   }
 
   public static getActivityDataValues(fieldSetting: FieldSettings, participant: Participant,
-                                      activityDefinitions: ActivityDefinition[]
-  ): string {
+                                      activityDefinitions: ActivityDefinition[]): string {
     if (
       fieldSetting != null
       && fieldSetting.possibleValues != null
@@ -731,16 +754,16 @@ export class Utils {
   }
 
   private static getActivityValueForMultipleActivities( activityDataArray: ActivityData[], name: string ) {
-    let value = "";
+    let value = '';
     for (let activityData of activityDataArray) {
       for (let questionsAnswer of activityData.questionsAnswers) {
         if (questionsAnswer.stableId === name) {
-          if (questionsAnswer.questionType === "DATE"){
-            value += this.getDateFormatted( new Date( questionsAnswer.date ), this.DATE_STRING_IN_CVS )+", ";
+          if (questionsAnswer.questionType === 'DATE'){
+            value += this.getDateFormatted( new Date( questionsAnswer.date ), this.DATE_STRING_IN_CVS ) + ', ';
           }
           else if (questionsAnswer.answer) {
             for (let answer of questionsAnswer.answer) {
-              value += answer + ", ";
+              value += answer + ', ';
             }
           }
         }
