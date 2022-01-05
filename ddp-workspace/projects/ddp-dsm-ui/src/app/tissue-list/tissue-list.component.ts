@@ -828,7 +828,6 @@ export class TissueListComponent implements OnInit {
         }
       }
     }
-    console.log(savedFilter);
 
     this.dsmService.applyFilter(savedFilter, this.realm, this.parent, null).subscribe(
       data => {
