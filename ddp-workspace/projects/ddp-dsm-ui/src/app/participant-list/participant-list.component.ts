@@ -305,12 +305,12 @@ export class ParticipantListComponent implements OnInit {
                 this.settings[ key ] = [];
               }
               if (key === 'r') {
-                if (this.sourceColumns[ 'p' ] == null || this.sourceColumns[ 'p' ] == null) {
+                if (this.sourceColumns[ 'p' ] == null) {
                   this.sourceColumns[ 'p' ] = [];
                 }
                 this.sourceColumns[ 'p' ].push(filter);
               } else if (key === 'sm') {
-                if (this.sourceColumns[ 't' ] == null || this.sourceColumns[ 't' ] == undefined) {
+                if (this.sourceColumns[ 't' ] == null) {
                   this.sourceColumns[ 't' ] = [];
                 }
                 this.sourceColumns[ 't' ].push( filter );
@@ -2302,9 +2302,6 @@ export class ParticipantListComponent implements OnInit {
 
   private sendAnalyticsMetric(  ) {
     let passed = new Date().getTime() - this.start;
-    this.dsmService.sendAnalyticsMetric(this.getRealm(), passed).subscribe(
-      data=>{},
-      err=>{}
-    );
+    this.dsmService.sendAnalyticsMetric(this.getRealm(), passed).subscribe({});
   }
 }

@@ -13,7 +13,7 @@ export class TissueSmId {
   }
 
   static parseArray( jsonArray: any[] ) {
-    let arr = new Array();
+    let arr = [];
     if (jsonArray === undefined || jsonArray === null) {
       return arr;
     }

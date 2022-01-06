@@ -24,7 +24,7 @@ export class Data {
   }
 
   getMultipleDatesForActivity( activityData: ActivityData, name: string ) {
-    let answers: Array<QuestionAnswer> = new Array();
+    let answers: Array<QuestionAnswer> = [];
     for (let x of this.activities) {
       if (x.activityCode === activityData.activityCode) {
         for (let y of x.questionsAnswers) {
