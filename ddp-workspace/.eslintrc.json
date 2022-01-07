@@ -86,7 +86,8 @@
             "code": 140,
             "ignoreUrls": true,
             "ignoreTrailingComments": true,
-            "ignoreTemplateLiterals": true
+            "ignoreTemplateLiterals": true,
+            "ignoreRegExpLiterals": true
           }
         ],
         "quotes": [
@@ -119,7 +120,10 @@
         "no-throw-literal": "error",
         "no-trailing-spaces": "error",
         "no-undef-init": "error",
-        "no-unused-expressions": "error",
+        "no-unused-expressions": ["error", {
+          "allowTernary": true,
+          "allowShortCircuit": true
+        }],
         "prefer-const": "error",
         "semi": [
           "error",

@@ -54,7 +54,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.anchor.addNew(this.router.events.subscribe(() => {
       this.isWelcomePage = this.router.url === '/';
-      this.isBasePage = this.baseUrls.includes(this.router.url.substr(1).split('?')[0]);
+      this.isBasePage = this.baseUrls.includes(this.router.url.slice(1).split('?')[0]);
     }));
     this.mailingListDialogListener();
     this.sessionExpiredDialogListener();

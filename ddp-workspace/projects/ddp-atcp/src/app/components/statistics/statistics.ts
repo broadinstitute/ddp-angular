@@ -131,9 +131,8 @@ export class StatisticsComponent implements OnInit, OnDestroy {
       return 0;
     }
 
-    return distributionStatistic.statistics.reduce((count, country) => {
-      return count + +country.data.count;
-    }, 0);
+    return distributionStatistic.statistics
+      .reduce((count, country) => (count + +country.data.count), 0);
   }
 
   private getCountriesCount(

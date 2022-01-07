@@ -40,13 +40,13 @@ export class WorkflowProgressComponent implements OnInit, OnDestroy {
     const inProgressActivity = this.steps.find(
       activity => activity.statusCode === IN_PROGRESS
     );
-
+    // eslint-disable-next-line curly
     if (inProgressActivity) return inProgressActivity;
 
     const createdActivity = this.steps.find(
       activity => activity.statusCode === CREATED
     );
-
+    // eslint-disable-next-line curly
     if (createdActivity) return createdActivity;
 
     return null;

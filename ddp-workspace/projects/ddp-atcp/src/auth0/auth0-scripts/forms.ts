@@ -1,4 +1,5 @@
 import {screensIds} from './ui-actions';
+import { FuncType } from 'ddp-sdk';
 
 declare const FormValidator;
 declare const $;
@@ -78,7 +79,7 @@ const resendInstructions: Config = {
   customValidators: [checkEmail],
 };
 
-export const createForm = (params: Config, success: ($form, data) => void) => {
+export const createForm: FuncType<any> = (params: Config, success: ($form, data) => void) => {
   const { id, validators, customValidators } = params;
   const validator = new FormValidator(id, validators, (errors, event) => {
     event.preventDefault();
