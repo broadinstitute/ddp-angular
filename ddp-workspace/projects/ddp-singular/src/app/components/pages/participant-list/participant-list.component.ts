@@ -253,14 +253,15 @@ export class ParticipantsListComponent implements OnInit {
             /**
              * Filter out deleted participant
              */
-            map(() => {
-              return participants.filter(participant => participant.guid !== accidentallyCreatedParticipant.guid);
-            }),
+            map(() => participants
+                .filter(participant => participant.guid !== accidentallyCreatedParticipant.guid)
+            ),
           );
         }),
         /**
          * Remove "Add Participant" activity from view & hide operator if they haven't enrolled themselves yet
          */
+        // eslint-disable-next-line arrow-body-style
         map(participants => {
           return participants.reduce<Participant[]>((acc, participant) => {
             if (participant.isOperator) {
