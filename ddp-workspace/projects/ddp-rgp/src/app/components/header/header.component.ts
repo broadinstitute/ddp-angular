@@ -62,7 +62,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   @HostListener('window:scroll')
   public onWindowScroll(): void {
-    const yPos = window.scrollY || window.pageYOffset || 0;
+    const yPos = window.scrollY || 0;
 
     this.isHeaderWhite =
       this.isHeaderWhiteRoute || yPos > this.scrollYThreshold;
