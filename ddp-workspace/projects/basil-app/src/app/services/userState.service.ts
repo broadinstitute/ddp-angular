@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { SessionMementoService, UserActivityServiceAgent, ConsentServiceAgent, LoggingService, Session } from 'ddp-sdk';
-import { UserState } from '../model/userState';
 import { Observable, of } from 'rxjs';
 import { mergeMap, map } from 'rxjs/operators';
+import { SessionMementoService, UserActivityServiceAgent, ConsentServiceAgent, LoggingService, Session, FuncType } from 'ddp-sdk';
+import { UserState } from '../model/userState';
 
 @Injectable()
 export class UserStateService {
@@ -20,14 +20,12 @@ export class UserStateService {
     }
 
     public refreshState(): Observable<UserState> {
-        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-        const getConsent = (c, p) => ({
+        const getConsent: FuncType<any> = (c, p) => ({
             consent: c,
             prequalifier: p
         });
 
-        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-        const getConsentConfig =  (s: any, x: any) => {
+        const getConsentConfig: FuncType<any> =  (s: any, x: any) => {
             this.logger.logEvent(`${this.LOG_SOURCE} %o`, s);
             return {
                 session: s != null,
@@ -36,8 +34,7 @@ export class UserStateService {
             };
         };
 
-        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-        const getConsentAndPrequalifier = (session: Session) => {
+        const getConsentAndPrequalifier: FuncType<any> = (session: Session) => {
             if (session != null) {
                 return this.getConsentState().pipe(
                     mergeMap(() => this.getPrequalifierState().pipe(
