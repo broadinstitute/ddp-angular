@@ -84,14 +84,14 @@ export class UserRegistrationPrequalComponent implements OnInit, OnDestroy {
     this.formGroup.disable();
     this.invitationService.check(invitationId, recaptchaToken, zip).pipe(
       take(1)
-    ).subscribe(
-      () => this.auth0.signup({ invitation_id: invitationId }),
-      (error) => {
+    ).subscribe({
+      next: () => this.auth0.signup({ invitation_id: invitationId }),
+      error: (error) => {
         this.formGroup.enable();
         this.captcha.reset();
         this.error = error;
       }
-    );
+    });
   }
 
   private rejectRegistration(): void {
