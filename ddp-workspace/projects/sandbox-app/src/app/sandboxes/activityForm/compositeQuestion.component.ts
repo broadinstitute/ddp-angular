@@ -258,9 +258,7 @@ export class CompositeQuestionComponent extends QuestionComponent<ActivityCompos
         }
       },
       {
-        type: 'AGREEMENT', func: (questionJson) => {
-          return new ActivityAgreementQuestionBlock();
-        }
+        type: 'AGREEMENT', func: () => new ActivityAgreementQuestionBlock()
       }
     ];
   }
