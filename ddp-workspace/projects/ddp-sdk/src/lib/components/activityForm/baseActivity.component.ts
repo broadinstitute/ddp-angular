@@ -106,8 +106,8 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     protected getActivity(): void {
       const get = this.serviceAgent
         .getActivity(this.studyGuidObservable, this.activityGuidObservable)
-        .subscribe(
-            x => {
+        .subscribe({
+            next: x => {
                 // to prevent using `visitedSectionIndexes` from previous activity
                 this.resetVisitedSectionIndexes();
 
@@ -145,10 +145,10 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
 
               this.anchor.addNew(canSaveSub);
             },
-            () => {
+            error: () => {
                 this.navigateToErrorPage();
             }
-        );
+        });
       this.anchor.addNew(get);
     }
 

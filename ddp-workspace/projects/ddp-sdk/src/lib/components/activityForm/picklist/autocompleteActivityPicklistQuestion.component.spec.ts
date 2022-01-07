@@ -47,14 +47,14 @@ describe('AutocompleteActivityPicklistQuestion', () => {
 
     let component: AutocompleteActivityPicklistQuestion;
     let fixture: ComponentFixture<AutocompleteActivityPicklistQuestion>;
-    const ngxTranslateServiceSpy = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
-    ngxTranslateServiceSpy.getTranslation.and.callFake(() => {
-        return of({
-            'SDK.Validators.Autocomplete': 'No {{text}} is found',
-        });
-    });
+    let ngxTranslateServiceSpy;
 
     beforeEach(() => {
+        ngxTranslateServiceSpy = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
+        ngxTranslateServiceSpy.getTranslation.and.callFake(() => of({
+            'SDK.Validators.Autocomplete': 'No {{text}} is found',
+        }));
+
         TestBed.configureTestingModule({
             imports: [
                 MatInputModule,
@@ -294,13 +294,15 @@ describe('AutocompleteActivityPicklistQuestion sorting (with default ALPHABETICA
 
     let component: AutocompleteActivityPicklistQuestion;
     let fixture: ComponentFixture<AutocompleteActivityPicklistQuestion>;
-    const configServiceSpy = jasmine.createSpyObj('ddp.config', null,
-        {
-            notSortedPicklistAutocompleteStableIds: [],
-            picklistAutocompleteIgnoredSymbols: []
-        });
+    let configServiceSpy;
 
     beforeEach(() => {
+        configServiceSpy = jasmine.createSpyObj('ddp.config', null,
+            {
+                notSortedPicklistAutocompleteStableIds: [],
+                picklistAutocompleteIgnoredSymbols: []
+            });
+
         TestBed.configureTestingModule({
             imports: [
                 MatInputModule,

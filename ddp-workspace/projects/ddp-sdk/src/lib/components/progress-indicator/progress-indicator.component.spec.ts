@@ -6,6 +6,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { ProgressIndicatorComponent } from './progress-indicator.component';
+import { FuncType } from 'ddp-sdk';
 
 const ACTIVE_STEP_LABEL_SELECTOR = '.mat-vertical-stepper-header[aria-selected="true"] .mat-step-text-label';
 const ACTIVE_STEP_CONTENT_SELECTOR = '.mat-vertical-stepper-content[aria-expanded="true"] .page';
@@ -49,15 +50,9 @@ describe('ProgressIndicatorComponent', () => {
     let component: ProgressIndicatorComponent;
     let debugElement: DebugElement;
 
-    const getNextButton = () => {
-        return debugElement.queryAll(By.css('.button.right'))[0].nativeElement;
-    };
-    const getPreviousButton = () => {
-        return debugElement.queryAll(By.css('.button.left'))[0].nativeElement;
-    };
-    const getFinishButton = () => {
-        return debugElement.queryAll(By.css('.button.finish'))[0].nativeElement;
-    };
+    const getNextButton: FuncType<any> = () => debugElement.queryAll(By.css('.button.right'))[0].nativeElement;
+    const getPreviousButton: FuncType<any> = () => debugElement.queryAll(By.css('.button.left'))[0].nativeElement;
+    const getFinishButton: FuncType<any> = () => debugElement.queryAll(By.css('.button.finish'))[0].nativeElement;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
@@ -115,12 +110,12 @@ describe('ProgressIndicatorComponent', () => {
             expect(selectedIndex).toEqual(1);
         });
 
-        it('should have valid label', () => {
+        it('should have valid label, case 1', () => {
             const label = debugElement.queryAll(By.css(ACTIVE_STEP_LABEL_SELECTOR))[0];
             expect(label.nativeElement.textContent.trim()).toEqual('Step 2');
         });
 
-        it('should have valid page content', () => {
+        it('should have valid page content, case 1', () => {
             const textContent = debugElement.queryAll(By.css(ACTIVE_STEP_CONTENT_SELECTOR))[0];
             expect(textContent.nativeElement.textContent.trim()).toEqual('Page 2');
         });
@@ -145,12 +140,12 @@ describe('ProgressIndicatorComponent', () => {
             expect(selectedIndex).toEqual(0);
         });
 
-        it('should have valid label', () => {
+        it('should have valid label, case 2', () => {
             const label = debugElement.queryAll(By.css(ACTIVE_STEP_LABEL_SELECTOR))[0];
             expect(label.nativeElement.textContent.trim()).toEqual('Step 1');
         });
 
-        it('should have valid page content', () => {
+        it('should have valid page content, case 2', () => {
             const textContent = debugElement.queryAll(By.css(ACTIVE_STEP_CONTENT_SELECTOR))[0];
             expect(textContent.nativeElement.textContent.trim()).toEqual('Page 1');
         });

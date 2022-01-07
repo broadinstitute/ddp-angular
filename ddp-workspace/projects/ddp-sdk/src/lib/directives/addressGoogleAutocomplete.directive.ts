@@ -11,6 +11,7 @@ import Autocomplete = google.maps.places.Autocomplete;
 import PlaceResult = google.maps.places.PlaceResult;
 import AutocompleteOptions = google.maps.places.AutocompleteOptions;
 import ComponentRestrictions = google.maps.places.ComponentRestrictions;
+import { FuncType } from 'ddp-sdk';
 
 @Directive({
     selector: '[addressgoogleautocomplete]'
@@ -41,14 +42,14 @@ export class AddressGoogleAutocompleteDirective implements OnInit, OnDestroy, On
     }
 
     public ngOnInit(): void {
-        this.scriptLoader$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(
-            () => {
+        this.scriptLoader$.pipe(takeUntil(this.ngUnsubscribe)).subscribe({
+            next: () => {
                 if (!this.autoComplete) {
                     this.setupAutocomplete();
                 }
             },
-            () => this.logger.logWarning(this.LOG_SOURCE, 'Could not load google-maps-places script.')
-        );
+            error: () => this.logger.logWarning(this.LOG_SOURCE, 'Could not load google-maps-places script.')
+        });
         // making sure that any countryCodes handled AFTER scriptloader has processed
         concat(this.scriptLoader$, this.countryCode$).pipe(
             skip(1),
@@ -105,7 +106,7 @@ export class AddressGoogleAutocompleteDirective implements OnInit, OnDestroy, On
         }
 
         // a little utility to pick out the data we need from Google's PlaceResult
-        const fieldVal = (typeName: string, useLongName = true) => {
+        const fieldVal: FuncType<string> = (typeName: string, useLongName = true) => {
             const comp: any | null = place.address_components.find(o => o.types.indexOf(typeName) >= 0);
             return comp ? comp[useLongName ? 'long_name' : 'short_name'] : '';
         };

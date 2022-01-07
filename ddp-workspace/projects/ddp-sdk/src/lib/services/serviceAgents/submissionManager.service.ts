@@ -11,6 +11,7 @@ import * as _ from 'underscore';
 
 type GuidToShown = Record<string, boolean>;
 
+/* eslint-disable arrow-body-style */
 @Injectable()
 export class SubmissionManager implements OnDestroy {
     public static DEFAULT_RETRY_DELAY_MS = 5000;

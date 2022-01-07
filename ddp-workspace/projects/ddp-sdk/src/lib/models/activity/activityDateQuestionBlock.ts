@@ -3,9 +3,15 @@ import { QuestionType } from './questionType';
 import { DatePickerValue } from '../datePickerValue';
 import { DateField } from './dateField';
 import { DateRenderMode } from './dateRenderMode';
-import { ActivityDayRequiredDateValidationRule } from '../../services/activity/validators/dateValidators/activityDayRequiredDateValidationRule';
-import { ActivityMonthRequiredDateValidationRule } from '../../services/activity/validators/dateValidators/activityMonthRequiredDateValidationRule';
-import { ActivityYearRequiredDateValidationRule } from '../../services/activity/validators/dateValidators/activityYearRequiredDateValidationRule';
+import {
+    ActivityDayRequiredDateValidationRule
+} from '../../services/activity/validators/dateValidators/activityDayRequiredDateValidationRule';
+import {
+    ActivityMonthRequiredDateValidationRule
+} from '../../services/activity/validators/dateValidators/activityMonthRequiredDateValidationRule';
+import {
+    ActivityYearRequiredDateValidationRule
+} from '../../services/activity/validators/dateValidators/activityYearRequiredDateValidationRule';
 
 export class ActivityDateQuestionBlock extends ActivityQuestionBlock<DatePickerValue> {
     public renderMode: DateRenderMode;

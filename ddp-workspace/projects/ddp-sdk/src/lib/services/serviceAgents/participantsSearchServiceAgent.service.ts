@@ -33,6 +33,7 @@ export class ParticipantsSearchServiceAgent extends SessionServiceAgent<any> {
 
     private getParticipantData(): Observable<SearchParticipant | null> {
         const { session } = this.session;
+        // eslint-disable-next-line curly
         if (!session?.participantGuid || !this.isAdmin()) return of(null);
 
         return this.getObservable(`/admin/studies/${this.configuration.studyGuid}/participants/${session.participantGuid}`)

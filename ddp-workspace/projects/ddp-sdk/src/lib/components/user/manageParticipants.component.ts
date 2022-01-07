@@ -86,8 +86,12 @@ export class ManageParticipantsComponent implements OnDestroy {
           timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         };
 
-        if (firstName) payload.firstName = firstName;
-        if (lastName) payload.lastName = lastName;
+        if (firstName) {
+            payload.firstName = firstName;
+        }
+        if (lastName) {
+            payload.lastName = lastName;
+        }
 
         this.userProfile.profile
             .pipe(

@@ -3,6 +3,7 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { DateService } from '../services/dateService.service';
 import { DatePickerValue } from '../models/datePickerValue';
 import { DateRenderMode } from '../models/activity/dateRenderMode';
+import { FuncType } from '../models/funcType';
 
 @Component({
     selector: 'ddp-date',
@@ -370,9 +371,7 @@ export class DatePickerComponent implements OnChanges {
 
     public moveFocus(value: string, field: string): void {
         if (value.length === field.length) {
-            const index = this.dateFields.findIndex((item) => {
-                return field === item;
-            });
+            const index = this.dateFields.findIndex((item) => (field === item));
             const nextIndex = index + 1;
             if (this.dateFields[nextIndex]) {
                 const item = this.dateFields[nextIndex];
@@ -382,8 +381,8 @@ export class DatePickerComponent implements OnChanges {
     }
 
     public formatDate(): void {
-        const shouldAutoformat = (value: string) => parseInt(value, 10) >= 1 && parseInt(value, 10) <= 9;
-        const addZero = (value: string) => ('0' + value).slice(-2);
+        const shouldAutoformat: FuncType<boolean> = (value: string) => parseInt(value, 10) >= 1 && parseInt(value, 10) <= 9;
+        const addZero: FuncType<string> = (value: string) => ('0' + value).slice(-2);
         if (shouldAutoformat(this.selectedMonth)) {
             this.selectedMonth = addZero(this.selectedMonth);
         }

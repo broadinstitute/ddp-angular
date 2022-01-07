@@ -119,8 +119,9 @@ export class AddressInputService implements OnDestroy {
     const cachingCountryInfoOp: UnaryFunction<Observable<string>, Observable<CountryAddressInfo>> = pipe(
       distinctUntilChanged(),
       switchMap((code: string) => {
-        if (!code) return of(null);
-        else if (countryCache.getValue()[code]) {
+        if (!code) {
+            return of(null);
+        } else if (countryCache.getValue()[code]) {
           return of(countryCache.getValue()[code]);
         } else {
           // if we got here, we did not find in cache
@@ -138,13 +139,11 @@ export class AddressInputService implements OnDestroy {
       // todo maybe some way to introduce derived updates and make it so state is updated atomically?
       this.addressForm.valueChanges.pipe(
         distinctUntilChanged((x, y) => _.isEqual(x, y)),
-        switchMap((formValue) => {
-          return of(formValue['country']).pipe(
-            cachingCountryInfoOp,
-            map(countryInfo => ({ country: countryInfo ? countryInfo.code : '', countryInfo })),
-            map(countryInfoState => ({ ...{ formData: formValue }, ...countryInfoState, ...{ formDataSource: 'COMPONENT' } }))
-          );
-        }),
+        switchMap((formValue) => of(formValue['country']).pipe(
+          cachingCountryInfoOp,
+          map(countryInfo => ({country: countryInfo ? countryInfo.code : '', countryInfo})),
+          map(countryInfoState => ({...{formData: formValue}, ...countryInfoState, ...{formDataSource: 'COMPONENT'}}))
+        ))
       ),
 
       this.inputIsReadOnly$.pipe(
@@ -153,24 +152,22 @@ export class AddressInputService implements OnDestroy {
 
       this.defaultCountryCode$.pipe(
         // The form needs to be updated too!
-        tap(countryCode => this.addressForm.patchValue({ country: countryCode }, { onlySelf: true, emitEvent: false })),
+        tap(countryCode => this.addressForm.patchValue({country: countryCode}, {onlySelf: true, emitEvent: false})),
         cachingCountryInfoOp,
-        map(countryInfo => ({ country: (countryInfo ? countryInfo.code : ''), countryInfo })),
+        map(countryInfo => ({country: (countryInfo ? countryInfo.code : ''), countryInfo})),
         map(countryInfoState => ({
-          formData: new Address({ country: countryInfoState.country }),
+          formData: new Address({country: countryInfoState.country}),
           ...countryInfoState, formDataSource: 'INPUT'
         }))
       ),
 
       this.inputAddress$.pipe(
         filter(address => !!address),
-        switchMap((address) => {
-          return of(address['country']).pipe(
-            cachingCountryInfoOp,
-            map(countryInfo => ({ country: (countryInfo ? countryInfo.code : ''), countryInfo })),
-            map(countryInfoState => ({ formData: address, ...countryInfoState, formDataSource: 'INPUT' }))
-          );
-        })
+        switchMap((address) => of(address['country']).pipe(
+          cachingCountryInfoOp,
+          map(countryInfo => ({country: (countryInfo ? countryInfo.code : ''), countryInfo})),
+          map(countryInfoState => ({formData: address, ...countryInfoState, formDataSource: 'INPUT'}))
+        ))
       )
     ).pipe(
       startWith(({
@@ -187,9 +184,15 @@ export class AddressInputService implements OnDestroy {
     this.countryInfo$ = componentState$.pipe(
       pluck('countryInfo'),
       distinctUntilChanged((x, y) => {
-        if (x == null && y == null) return true;
-        if (x == null && y != null) return false;
-        if (x != null && y == null) return false;
+        if (x == null && y == null) {
+          return true;
+        }
+        if (x == null && y != null) {
+          return false;
+        }
+        if (x != null && y == null) {
+          return false;
+        }
         return x.code === y.code;
       })
     );
@@ -206,12 +209,9 @@ export class AddressInputService implements OnDestroy {
       shareReplay(1)
     );
 
-
     const isReadOnly$: Observable<boolean> = componentState$.pipe(
       pluck<AddressInputComponentState, 'isReadOnly'>('isReadOnly'),
-      distinctUntilChanged((x, y) => {
-        return x === y;
-      }),
+      distinctUntilChanged((x, y) => (x === y)),
       share()
     );
 
@@ -321,7 +321,9 @@ export class AddressInputService implements OnDestroy {
     // update controls
     const countryInfoFormChanges$ = this.countryInfo$.pipe(
       tap((countryInfo) => {
-        if (!countryInfo || !this.addressForm) return;
+        if (!countryInfo || !this.addressForm) {
+          return;
+        }
         this.addressForm.get('zip').setValidators([Validators.required, Validators.pattern(countryInfo.postalCodeRegex)]);
       }));
 

@@ -218,15 +218,9 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
 
         // Create an observable that will check each applicable option and return the first valid language found, if any
         const langObservable: Observable<StudyLanguage> = langFromURLSubject.pipe(
-            mergeMap(langFromURL => {
-                return this.getNextObservable(langFromURL, profileLangObservable);
-            }),
-            mergeMap(profileLang => {
-                return this.getNextObservable(profileLang, currentStoredLangObservable);
-            }),
-            mergeMap(currentStoredLang => {
-                return this.getNextObservable(currentStoredLang, defaultLangObservable);
-            })
+            mergeMap(langFromURL => this.getNextObservable(langFromURL, profileLangObservable)),
+            mergeMap(profileLang => this.getNextObservable(profileLang, currentStoredLangObservable)),
+            mergeMap(currentStoredLang => this.getNextObservable(currentStoredLang, defaultLangObservable))
         );
 
         // Return an observable that uses langObservable to get the language and if found, sets the language and

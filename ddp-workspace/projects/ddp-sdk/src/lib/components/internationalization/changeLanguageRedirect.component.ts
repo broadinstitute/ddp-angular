@@ -47,13 +47,17 @@ export class ChangeLanguageRedirectComponent implements OnInit {
 
         // Try to switch to the specified language
         const langChangeObservable: Observable<any> = this.languageService.changeLanguageObservable(this.lang);
-        langChangeObservable.subscribe(() => {
-          this.logger.logEvent(this.LOG_SOURCE, `Changed language to ${this.languageService.getCurrentLanguage()}`);
-        }, (err) => {
-          this.logger.logError(this.LOG_SOURCE, `Could not change language to ${this.lang}:`,  err);
-        }, () => {
-          // Do the redirect
-          this.router.navigate([this.dest], { relativeTo: this.route.root });
+        langChangeObservable.subscribe({
+          next: () => {
+            this.logger.logEvent(this.LOG_SOURCE, `Changed language to ${this.languageService.getCurrentLanguage()}`);
+          },
+          error: (err) => {
+            this.logger.logError(this.LOG_SOURCE, `Could not change language to ${this.lang}:`, err);
+          },
+          complete: () => {
+            // Do the redirect
+            this.router.navigate([this.dest], {relativeTo: this.route.root});
+          }
         });
       });
   }

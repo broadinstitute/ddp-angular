@@ -73,8 +73,7 @@ export class ActivityValidatorBuilder {
         return rules.concat(additionalLocalRules);
     }
 
-    private buildQuestionLocalValidatorRules(questionBlock: ActivityQuestionBlock<any>)
-        : Array<ActivityAbstractValidationRule> {
+    private buildQuestionLocalValidatorRules(questionBlock: ActivityQuestionBlock<any>): Array<ActivityAbstractValidationRule> {
         const localRules = [];
 
         if (questionBlock.questionType === QuestionType.Date) {

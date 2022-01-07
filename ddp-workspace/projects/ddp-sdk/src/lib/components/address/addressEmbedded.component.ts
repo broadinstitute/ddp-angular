@@ -48,6 +48,7 @@ import { AddressVerificationWarnings } from '../../models/addressVerificationWar
 import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
 import { LoggingService } from '../../services/logging.service';
 import { ConfigurationService } from '../../services/configuration.service';
+import { FuncType } from '../../models/funcType';
 
 interface IsEasyPostError {
     isEasyPostError: boolean;
@@ -503,9 +504,9 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         }
 
 
-        const isVerificationStatusError = (error: any) => error && error.errors && error.errors.length > 0 && error.code;
+        const isVerificationStatusError: FuncType<boolean> = (error: any) => error && error.errors && error.errors.length > 0 && error.code;
 
-        const clearSuggestionDisplay = () => this.stateUpdates$.next({showSuggestion: false, suggestedAddress: null});
+        const clearSuggestionDisplay: FuncType<void> = () => this.stateUpdates$.next({showSuggestion: false, suggestedAddress: null});
 
         const processVerificationStatusErrorAction$ = verificationError$.pipe(
             filter((error) => isVerificationStatusError(error)),
@@ -555,13 +556,15 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             tap((errorMessage) => this.stateUpdates$.next({formErrorMessages: [{ message: errorMessage, isEasyPostError: false }]}))
         );
 
-        const canSaveRealAddress = (address: Address | null) =>
+        const canSaveRealAddress: FuncType<boolean> = (address: Address | null) =>
             this.enoughDataToSave(address) && this.meetsActivityRequirements(address);
 
         // "Real" as opposed to "Temp". Important we return the saved address as properties are added on server
         const saveRealAddressAction$ = this.saveTrigger$.pipe(
             withLatestFrom(currentAddress$, this.formErrorMessages$, this.verifyFieldErrors$, ignoreEasyPostErrorsObservable),
+            // eslint-disable-next-line arrow-body-style
             filter(([_, addressToSave, formErrors, fieldErrors, ignoreEasyPost]) => {
+              //
                 return !formErrors?.filter(error => !(ignoreEasyPost && error.isEasyPostError)).length
                     && !fieldErrors?.filter(error => !(ignoreEasyPost && error.isEasyPostError)).length
                     && canSaveRealAddress(addressToSave);
@@ -732,7 +735,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     }
 
     countOfFieldsWithData(address: Address): number {
-        const isNonBlankString = (val) => util.isString(val) && val.trim().length > 0;
+        const isNonBlankString: FuncType<boolean> = (val) => util.isString(val) && val.trim().length > 0;
         const propsToCheck: (keyof Address)[] = ['name', 'country', 'street1', 'street2', 'state', 'city', 'zip', 'phone'];
         return propsToCheck.map(prop => address[prop]).filter((value) => isNonBlankString(value)).length;
     }
@@ -742,9 +745,9 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     }
 
     public convertToFormattedString(a: Address): string {
-        const isEmpty = (val: string) => val == null || util.isEmpty(val.trim());
-        const format = (val: string) => isEmpty(val) ? '' : ', ' + val.trim();
-        const streetFormat = (val: string) => isEmpty(val) ? '' : val.trim();
+        const isEmpty: FuncType<boolean> = (val: string) => val == null || util.isEmpty(val.trim());
+        const format: FuncType<string> = (val: string) => isEmpty(val) ? '' : ', ' + val.trim();
+        const streetFormat: FuncType<string> = (val: string) => isEmpty(val) ? '' : val.trim();
         // eslint-disable-next-line max-len
         return `${isEmpty(a.name) ? '' : a.name}${isEmpty(a.name) ? streetFormat(a.street1) : format(a.street1)}${format(a.street2)}${format(a.city)}${format(a.state)}`
             + `${format(a.zip)}${format(a.country)}${isEmpty(a.phone) ? '' : ', Phone: ' + a.phone}`;

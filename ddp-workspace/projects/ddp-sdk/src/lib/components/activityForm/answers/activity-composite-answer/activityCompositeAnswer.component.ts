@@ -42,6 +42,7 @@ export class ActivityCompositeAnswer implements OnChanges {
                     this.childQuestionBlocks = [];
                     this.addBlankRow();
                 } else {
+                    // eslint-disable-next-line arrow-body-style
                     const questionsRows: ActivityQuestionBlock<any>[][] = newAnswers.map((rowOfAnswers: ActivityQuestionBlock<any>[]) => {
                         // assuming order of answers same as order of questions here.
                         // And adding braces and a return statement here fixes a bug that should not be happening
@@ -132,9 +133,10 @@ export class ActivityCompositeAnswer implements OnChanges {
 
     private buildComponentAnswers(): any[][] {
         return this.childQuestionBlocks.map(childQuestionBlockRow =>
-            childQuestionBlockRow.map((childQuestionBlock) => {
-                return this.buildChildAnswer(childQuestionBlock);
-            }));
+            childQuestionBlockRow.map((childQuestionBlock) =>
+                this.buildChildAnswer(childQuestionBlock)
+            )
+        );
     }
 
     private buildChildAnswer(childQuestionBlock: ActivityQuestionBlock<any>, answer?: any): any {

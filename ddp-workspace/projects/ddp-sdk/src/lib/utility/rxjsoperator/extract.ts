@@ -12,6 +12,7 @@ interface Extract {
     <T, R>(projection: Projection<T, R>, opts?: ExtractOptions): OperatorFunction<T, R>;
 }
 
+// eslint-disable-next-line arrow-body-style
 export const extract: Extract = (mapper, opts: ExtractOptions = { onlyDistinct: true }) => {
     return pipe(
         util.isFunction(mapper) ? map(mapper) : pluck(mapper),

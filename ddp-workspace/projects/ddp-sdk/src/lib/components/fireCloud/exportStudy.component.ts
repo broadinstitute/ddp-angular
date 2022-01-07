@@ -114,16 +114,17 @@ export class ExportStudyComponent implements OnInit {
 
     public exportStudy(): void {
         let successfulExport = true;
-        this.serviceAgent.exportStudy(this.listStudiesMessage, this.listWorkspaceNamespacesMessage, this.listWorkspacesMessage).subscribe(
-            () => {
+        this.serviceAgent.exportStudy(this.listStudiesMessage, this.listWorkspaceNamespacesMessage, this.listWorkspacesMessage).subscribe({
+            next: () => {
                 this.serviceAgent.changeExportSuccessStatus(successfulExport);
                 this.showExportStatus();
             },
-            () => {
+            error: () => {
                 successfulExport = false;
                 this.serviceAgent.changeExportSuccessStatus(successfulExport);
                 this.showExportStatus();
-            });
+            }
+           });
     }
 
     private showExportStatus(): void {

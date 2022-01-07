@@ -16,9 +16,7 @@ export class ActivityInstanceSelectAnswerService extends UserServiceAgent<GetOpt
       `/studies/${this.configuration.studyGuid}/activity-instance-select/${questionStableId}`,
     ).pipe(
       take(1),
-      map(response => {
-        return response === null ? [] : response.results;
-      }),
+      map(response => (response === null ? [] : response.results)),
     );
   }
 }

@@ -121,7 +121,7 @@ describe('PrismComponent', () => {
         router = TestBed.inject(Router);
     });
 
-    it('should create component', () => {
+    it('should create component (PrismComponent)', () => {
         expect(component).toBeTruthy();
     });
 
@@ -416,7 +416,7 @@ describe('PrismComponent with storage', () => {
         fixture.detectChanges();
     });
 
-    it('should create component', () => {
+    it('should create component (PrismComponent with storage)', () => {
         expect(component).toBeTruthy();
     });
 

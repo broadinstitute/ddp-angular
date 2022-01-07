@@ -89,11 +89,11 @@ export class ActivityTextInput implements OnInit, OnChanges, OnDestroy {
         const adjustedOffset = tagsAddedLength + match.offset;
 
         taggedValue =
-          taggedValue.substr(0, adjustedOffset) +
+          taggedValue.substring(0, adjustedOffset) +
           openTag +
-          taggedValue.substr(adjustedOffset, match.length) +
+          taggedValue.substring(adjustedOffset, adjustedOffset + match.length) +
           closeTag +
-          taggedValue.substr(adjustedOffset + match.length);
+          taggedValue.substring(adjustedOffset + match.length);
 
         tagsAddedLength = tagsAddedLength + openTag.length + closeTag.length;
       });
