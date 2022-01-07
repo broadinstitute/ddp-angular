@@ -49,11 +49,11 @@ export class StayInformedComponent {
         studyGuid: this.config.studyGuid,
       })
       .pipe(take(1))
-      .subscribe(
-        () => {
+      .subscribe({
+        next: () => {
           this.router.navigateByUrl(Route.Home);
         },
-        err => {
+        error: err => {
           this.loggingService.logError(
             this.LOG_SOURCE,
             'Mailing list join error',
@@ -62,6 +62,6 @@ export class StayInformedComponent {
 
           this.router.navigateByUrl(Route.Error);
         },
-      );
+      });
   }
 }
