@@ -1,7 +1,9 @@
 {
   "root": true,
   "ignorePatterns": [
-    "projects/**/*"
+    "projects/**/*",
+    "node_modules/**/*",
+    "dist/**/*"
   ],
   "overrides": [
     {
@@ -12,7 +14,16 @@
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates"
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:jasmine/recommended"
+      ],
+      "plugins": [
+        "@angular-eslint/eslint-plugin",
+        "@angular-eslint/eslint-plugin-template",
+        "@typescript-eslint",
+        "@angular-eslint",
+        "deprecation",
+        "jasmine"
       ],
       "rules": {
         "@angular-eslint/component-selector": [
@@ -39,32 +50,109 @@
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-inferrable-types": [
-            "warn",
-            {
-                "ignoreParameters": true
-            }
+          "warn",
+          {
+            "ignoreParameters": true
+          }
         ],
         "@typescript-eslint/no-empty-function": "off",
         "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/explicit-function-return-type": [
+          "error",
+          {
+            "allowExpressions": true
+          }
+        ],
+        "@typescript-eslint/type-annotation-spacing": [
+          "error"
+        ],
+        "@typescript-eslint/member-delimiter-style": [
+          "error"
+        ],
+        "@typescript-eslint/unified-signatures": [
+          "error"
+        ],
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/typedef": [
+          "error"
+        ],
+        "@typescript-eslint/no-shadow": "error",
         "no-extra-boolean-cast": "off",
         "no-unused-vars": "off",
         "no-undef": "off",
-        "prefer-const": "warn",
-        "quotes": ["error", "single", { "allowTemplateLiterals": true }]
+        "max-len": [
+          "error",
+          140
+        ],
+        "quotes": [
+          "error",
+          "single",
+          {
+            "allowTemplateLiterals": true
+          }
+        ],
+        "deprecation/deprecation": "warn",
+        "quote-props": [
+          "error",
+          "as-needed"
+        ],
+        "no-console": [
+          "error",
+          {
+            "allow": [
+              "log",
+              "error"
+            ]
+          }
+        ],
+        "arrow-body-style": [
+          "warn",
+          "as-needed"
+        ],
+        "curly": "error",
+        "no-duplicate-imports": "error",
+        "no-throw-literal": "error",
+        "no-trailing-spaces": "error",
+        "no-undef-init": "error",
+        "no-unused-expressions": "error",
+        "prefer-const": "error",
+        "semi": [
+          "error",
+          "always"
+        ],
+        "space-before-function-paren": [
+          "error",
+          {
+            "anonymous": "never",
+            "named": "never",
+            "asyncArrow": "always"
+          }
+        ],
+        "default-case": "error",
+        "no-fallthrough": "error",
+        "eqeqeq": [
+          "error",
+          "allow-null"
+        ],
+        "jasmine/new-line-before-expect": "off",
+        "jasmine/no-expect-in-setup-teardown": "off",
+        "jasmine/prefer-toHaveBeenCalledWith": "off"
       }
     },
     {
-      "files": ["*.html"],
+      "files": [
+        "*.html"
+      ],
       "extends": [
         "plugin:@angular-eslint/template/recommended"
       ],
       "rules": {
-        "@angular-eslint/template/no-negated-async":  "off",
+        "@angular-eslint/template/no-negated-async": "off",
         "@angular-eslint/template/eqeqeq": [
           "error",
-            {
-              "allowNullOrUndefined": true
-            }
+          {
+            "allowNullOrUndefined": true
+          }
         ]
       }
     }
