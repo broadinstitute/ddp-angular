@@ -82,7 +82,12 @@
         "no-undef": "off",
         "max-len": [
           "error",
-          140
+          {
+            "code": 140,
+            "ignoreUrls": true,
+            "ignoreTrailingComments": true,
+            "ignoreTemplateLiterals": true
+          }
         ],
         "quotes": [
           "error",
