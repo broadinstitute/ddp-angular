@@ -9,7 +9,7 @@ declare const DDP_ENV: Record<string, any>;
   providedIn: 'root',
 })
 export class EnrollmentPausedService {
-  isEnrollmentPaused: boolean = !!DDP_ENV.enrollmentPaused;
+  isEnrollmentPaused = !!DDP_ENV.enrollmentPaused;
 
   constructor(private dialog: MatDialog) {}
 
