@@ -40,6 +40,7 @@ export class ActivityRedirectComponent implements OnInit, OnDestroy {
 
     if (instanceGuid) {
       getActivities$ = getActivities$.pipe(
+        // eslint-disable-next-line arrow-body-style
         map(activities => {
           return activities
             ? activities.find(
@@ -52,6 +53,7 @@ export class ActivityRedirectComponent implements OnInit, OnDestroy {
 
     if (activityCode) {
       getActivities$ = getActivities$.pipe(
+        // eslint-disable-next-line arrow-body-style
         map(activities => {
           return activities
             ? activities.find(

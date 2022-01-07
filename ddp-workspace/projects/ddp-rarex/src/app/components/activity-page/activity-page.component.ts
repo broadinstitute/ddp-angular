@@ -100,6 +100,7 @@ export class ActivityPageComponent implements OnInit, OnDestroy {
       tap(activities => {
         this.isFetchingActivities = false;
 
+        // eslint-disable-next-line curly
         if (!activities) return;
 
         this.activities = activities;
