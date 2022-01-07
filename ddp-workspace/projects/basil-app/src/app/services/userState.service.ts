@@ -20,13 +20,13 @@ export class UserStateService {
     }
 
     public refreshState(): Observable<UserState> {
-        const getConsent = (c, p) => {
-            return {
-                consent: c,
-                prequalifier: p
-            };
-        };
+        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+        const getConsent = (c, p) => ({
+            consent: c,
+            prequalifier: p
+        });
 
+        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
         const getConsentConfig =  (s: any, x: any) => {
             this.logger.logEvent(`${this.LOG_SOURCE} %o`, s);
             return {
@@ -36,6 +36,7 @@ export class UserStateService {
             };
         };
 
+        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
         const getConsentAndPrequalifier = (session: Session) => {
             if (session != null) {
                 return this.getConsentState().pipe(
