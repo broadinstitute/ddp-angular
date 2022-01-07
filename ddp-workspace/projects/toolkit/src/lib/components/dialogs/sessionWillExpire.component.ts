@@ -88,10 +88,10 @@ export class SessionWillExpireComponent implements OnInit, OnDestroy {
         this.auth0.auth0RenewToken().pipe(
             take(1),
             finalize(() => this.blockUI = false)
-        ).subscribe(
-            () => { },
-            err => this.renewalFailed = true
-        );
+        ).subscribe({
+            next: () => {},
+            error: () => this.renewalFailed = true
+        });
     }
 
     public closeDialog(): void {

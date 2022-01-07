@@ -22,7 +22,8 @@ import {
     WorkflowServiceAgent,
     UserManagementServiceAgent,
     ActivityResponse,
-    UserPreferencesComponent
+    UserPreferencesComponent,
+    ActivityInstanceStatusServiceAgent
 } from 'ddp-sdk';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable, of, throwError } from 'rxjs';
@@ -33,7 +34,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { MatExpansionPanelHarness } from '@angular/material/expansion/testing';
-import { ActivityInstanceStatusServiceAgent } from '../../../../../ddp-sdk/src/lib/services/serviceAgents/activityInstanceStatusServiceAgent.service';
 import { MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
