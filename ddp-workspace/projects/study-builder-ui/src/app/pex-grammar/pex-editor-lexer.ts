@@ -24,6 +24,16 @@ export class PexEditorLexer extends PexLexer {
         }
         this.recognizedTokenQueue.push(next);
 
-        return new CommonToken(PexLexer.UNRECOGNIZED, tokensString, {source: lastToken.tokenSource, stream: lastToken.inputStream}, lastToken.channel, firstToken.startIndex, lastToken.stopIndex);
+        return new CommonToken(
+            PexLexer.UNRECOGNIZED,
+            tokensString,
+            {
+                source: lastToken.tokenSource,
+                stream: lastToken.inputStream
+            },
+            lastToken.channel,
+            firstToken.startIndex,
+            lastToken.stopIndex
+        );
     }
 }

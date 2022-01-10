@@ -6,26 +6,19 @@ import { ParserErrorListener } from 'antlr4ts';
 import { Token } from 'antlr4ts/Token';
 
 export class PexError {
-    startLine: number;
-    endLine: number;
-    startCol: number;
-    endCol: number;
-    message: string;
-    constructor(startLine: number, endLine: number, startCol: number, endCol: number, message: string) {
-        this.startLine = startLine;
-        this.endLine = endLine;
-        this.startCol = startCol;
-        this.endCol = endCol;
-        this.message = message;
-    }
+    constructor(
+        public startLine: number,
+        public endLine: number,
+        public startCol: number,
+        public endCol: number,
+        public message: string
+    ) {}
 }
 
 export class CollectorErrorListener implements ParserErrorListener {
-    private errors : PexError[] = []
-    constructor(errors: PexError[]) {
-        this.errors = errors
-    }
-    syntaxError(_: any, offendingSymbol: Token|undefined, line: number, column: number, msg: string) {
+    constructor(private errors: PexError[] = []) {}
+
+    syntaxError(_: any, offendingSymbol: Token | undefined, line: number, column: number, msg: string) {
         let endColumn = column + 1;
         if (offendingSymbol?.text != null) {
             endColumn = column + offendingSymbol.text.length;

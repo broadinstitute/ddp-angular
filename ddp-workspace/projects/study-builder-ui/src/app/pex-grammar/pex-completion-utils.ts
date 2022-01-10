@@ -18,7 +18,10 @@ function computeToken(parseTree: ParseTree, caretPosition: CaretPosition): Token
 function computeTokenOfTerminalNode(parseTree: TerminalNode, caretPosition: CaretPosition): Token | undefined {
     const start = parseTree.symbol.charPositionInLine;
     const stop = parseTree.symbol.charPositionInLine + parseTree.text.length;
-    if (parseTree.symbol.line == caretPosition.lineNumber && start <= caretPosition.column && stop >= caretPosition.column) {
+    if (parseTree.symbol.line === caretPosition.lineNumber &&
+        start <= caretPosition.column &&
+        stop >= caretPosition.column
+    ) {
         return parseTree.symbol;
     } else {
         return undefined;
@@ -37,6 +40,7 @@ function computeTokenOfChildNode(parseTree: ParseTree, caretPosition: CaretPosit
 
 export function getCompletions(input: string, caretPosition?: CaretPosition): string[] {
     if (!caretPosition) return [];
+
     const lexer = createLexer(input);
     const parser = createParserFromLexer(lexer);
     const core = new CodeCompletionCore(parser);

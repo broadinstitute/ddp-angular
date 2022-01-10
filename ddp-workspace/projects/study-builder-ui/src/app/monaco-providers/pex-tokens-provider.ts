@@ -47,32 +47,32 @@ class PexLineTokens implements monaco.languages.ILineTokens {
 const EOF = -1;
 function tokensForLine(input: string): monaco.languages.ILineTokens {
     const errorStartingPoints : number[] = []
+
     class ErrorCollectorListener extends ConsoleErrorListener {
         syntaxError(_: any, __: any, ___: any, column: number) {
             errorStartingPoints.push(column)
         }
     }
+
     const lexer = createLexer(input);
     lexer.removeErrorListeners();
-    const errorListener = new ErrorCollectorListener();
-    lexer.addErrorListener(errorListener);
+    lexer.addErrorListener(new ErrorCollectorListener());
+
     let done = false;
     const myTokens: monaco.languages.IToken[] = [];
     do {
         const token = lexer.nextToken();
-        if (token == null) {
-            done = true
+        if (token == null ||
+            token?.type == EOF  // We exclude EOF
+        ) {
+            done = true;
         } else {
-            // We exclude EOF
-            if (token.type == EOF) {
-                done = true;
-            } else {
-                const tokenTypeName = lexer.vocabulary.getSymbolicName(token.type) || '';
-                const myToken = new PexToken(tokenTypeName, token.startIndex);
-                myTokens.push(myToken);
-            }
+            const tokenTypeName = lexer.vocabulary.getSymbolicName(token.type) || '';
+            const myToken = new PexToken(tokenTypeName, token.startIndex);
+            myTokens.push(myToken);
         }
     } while (!done);
+
     // Add all errors
     for (const e of errorStartingPoints) {
         myTokens.push(new PexToken(`error.${PEXLanguage}`, e));

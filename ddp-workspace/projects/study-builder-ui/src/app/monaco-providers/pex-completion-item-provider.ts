@@ -4,7 +4,8 @@ import { StudiesServiceAgentService } from 'ddp-sdk';
 export function pexProvideCompletionItems(
     model: monaco.editor.ITextModel,
     position: monaco.Position,
-    studiesServiceAgent: StudiesServiceAgentService) {
+    studiesServiceAgent: StudiesServiceAgentService // TODO: fetch studies from studiesServiceAgent for the suggestions below
+) {
     const completions = getCompletions(model.getValue(), position);
     const word = model.getWordUntilPosition(position);
     const range = {

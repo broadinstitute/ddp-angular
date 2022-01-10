@@ -2766,7 +2766,9 @@
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
-                "antlr4ts"
+                "antlr4ts",
+                "antlr4-c3",
+                "stackdriver-errors-js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,
