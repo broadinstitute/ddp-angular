@@ -244,6 +244,9 @@
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
             ],
+            "allowedCommonJsDependencies": [
+              "stackdriver-errors-js"
+            ],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
@@ -422,6 +425,9 @@
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
             ],
+            "allowedCommonJsDependencies": [
+              "stackdriver-errors-js"
+            ],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
@@ -575,6 +581,9 @@
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
             ],
+            "allowedCommonJsDependencies": [
+              "stackdriver-errors-js"
+            ],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
@@ -727,6 +736,9 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "stackdriver-errors-js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -1137,6 +1149,9 @@
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
             ],
+            "allowedCommonJsDependencies": [
+              "stackdriver-errors-js"
+            ],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
@@ -1286,6 +1301,9 @@
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
             ],
+            "allowedCommonJsDependencies": [
+              "stackdriver-errors-js"
+            ],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
@@ -1427,6 +1445,9 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "stackdriver-errors-js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -1573,6 +1594,9 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "stackdriver-errors-js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -1726,6 +1750,9 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "stackdriver-errors-js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -1917,6 +1944,9 @@
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
             ],
+            "allowedCommonJsDependencies": [
+              "stackdriver-errors-js"
+            ],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
@@ -2070,6 +2100,9 @@
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
             ],
+            "allowedCommonJsDependencies": [
+              "stackdriver-errors-js"
+            ],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
@@ -2220,6 +2253,9 @@
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
             ],
+            "allowedCommonJsDependencies": [
+              "stackdriver-errors-js"
+            ],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
@@ -2345,6 +2381,9 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "stackdriver-errors-js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -2632,6 +2671,9 @@
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
             ],
+            "allowedCommonJsDependencies": [
+              "stackdriver-errors-js"
+            ],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
@@ -2898,7 +2940,8 @@
             ],
             "allowedCommonJsDependencies": [
               "file-saver",
-              "json2csv"
+              "json2csv",
+              "stackdriver-errors-js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -3034,6 +3077,9 @@
             ],
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "stackdriver-errors-js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,
