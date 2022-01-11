@@ -17,6 +17,7 @@ import { Routes } from '../../routes';
 export class EmailVerifiedCallbackComponent implements OnInit {
   private readonly SUCCESS_CODE = 'success';
   private readonly LOG_SOURCE = 'EmailVerifiedCallbackComponent';
+  private readonly URL_CAN_ONLY_BE_USED_ONCE_MSG = 'This URL can be used only once&success=false';
 
   constructor(
     private route: ActivatedRoute,
@@ -29,7 +30,7 @@ export class EmailVerifiedCallbackComponent implements OnInit {
   ngOnInit(): void {
     const queryParams = this.route.snapshot.queryParams;
 
-    if (queryParams.code && queryParams.code === this.SUCCESS_CODE) {
+    if ((queryParams.code && queryParams.code === this.SUCCESS_CODE) || queryParams?.message === this.URL_CAN_ONLY_BE_USED_ONCE_MSG) {
       this.loggingService.logEvent(
         this.LOG_SOURCE,
         'Email successfully verified',
