@@ -17,7 +17,7 @@ import { Routes } from '../../routes';
 export class EmailVerifiedCallbackComponent implements OnInit {
   private readonly SUCCESS_CODE = 'success';
   private readonly LOG_SOURCE = 'EmailVerifiedCallbackComponent';
-  private readonly URL_CAN_ONLY_BE_USED_ONCE_MSG = 'This URL can be used only once&success=false';
+  private readonly URL_CAN_ONLY_BE_USED_ONCE_MSG = 'This URL can be used only once';
 
   constructor(
     private route: ActivatedRoute,
