@@ -2492,6 +2492,9 @@
             "scripts": [
               "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
             ],
+            "allowedCommonJsDependencies": [
+              "stackdriver-errors-js"
+            ],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
