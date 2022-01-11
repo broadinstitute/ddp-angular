@@ -58,7 +58,7 @@ commands:
           steps:
             - set-deployment-environment
             - run-linter-check
-            - run-tests
+#            - run-tests
             - build-app:
                 study_key: << parameters.study_key >>
             - deploy-exploded-build:
