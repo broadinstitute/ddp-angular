@@ -13,8 +13,6 @@ import {
 
 import { WorkflowBuilderService } from 'toolkit';
 
-import { Route } from '../../constants/Route';
-
 @Component({
   selector: 'app-join',
   templateUrl: './join.component.html',

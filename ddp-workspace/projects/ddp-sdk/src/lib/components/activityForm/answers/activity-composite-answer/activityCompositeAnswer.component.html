@@ -10,7 +10,7 @@
         <ng-container *ngFor="let childBlock of childBlockRow; let column = index">
             <ddp-activity-answer
                 class="ddp-answer-field"
-                [class.ddp-composite-text]="childBlock.questionType == 'text' && block.childOrientation !== 'VERTICAL'"
+                [class.ddp-composite-text]="childBlock.questionType === 'text' && block.childOrientation !== 'VERTICAL'"
                 [block]="childBlock"
                 [readonly]="readonly"
                 [validationRequested]="validationRequested"

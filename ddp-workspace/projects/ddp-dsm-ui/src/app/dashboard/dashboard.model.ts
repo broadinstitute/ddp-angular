@@ -37,7 +37,7 @@ export class DDPInformation {
   }
 }
 
-// tslint:disable-next-line:max-classes-per-file
+// eslint-disable-next-line max-classes-per-file
 export class KitDDPSummary {
   constructor(
     public realm: string, public kitType: string,
@@ -53,7 +53,7 @@ export class KitDDPSummary {
   }
 }
 
-// tslint:disable-next-line:max-classes-per-file
+// eslint-disable-next-line max-classes-per-file
 export class Counter {
   constructor(public kitType: string, public counters: Array<NameValue>) {
     this.kitType = kitType;

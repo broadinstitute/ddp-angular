@@ -13,7 +13,7 @@ export class ParticipantEvent {
   }
 }
 
-// tslint:disable-next-line:max-classes-per-file
+// eslint-disable-next-line max-classes-per-file
 export class EventType {
   constructor(public name: string, public description: string) {
     this.name = name;

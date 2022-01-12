@@ -5,6 +5,7 @@ import { ReplaySubject } from 'rxjs';
 import { CompositeDisposable, SessionMementoService } from 'ddp-sdk';
 
 import { Route } from '../../../constants/route';
+import { EnrollmentPausedService } from '../../../services/enrollment-paused.service';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ import { Route } from '../../../constants/route';
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   Route = Route;
+  isEnrollmentPaused = this.enrollmentPausedService.isEnrollmentPaused;
   private fragment$ = new ReplaySubject<string | null | undefined>(1);
   private headerHeight = 10;
   private subs = new CompositeDisposable();
@@ -20,6 +22,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private sessionService: SessionMementoService,
+    private enrollmentPausedService: EnrollmentPausedService,
   ) {}
 
   ngOnInit(): void {
@@ -52,6 +55,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   get isAuthenticated(): boolean {
     return this.sessionService.isAuthenticatedSession();
+  }
+
+  onJoinClick(): void {
+    this.enrollmentPausedService.openDialog();
   }
 
   private scrollToTop(): void {

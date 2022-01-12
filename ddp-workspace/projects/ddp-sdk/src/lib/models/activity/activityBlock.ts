@@ -22,7 +22,7 @@ export abstract class ActivityBlock {
     }
 
     public validate(): boolean {
-        const result = this.validateInternally();
+        const result = this.enabled ? this.validateInternally() : true;
         this.valid = result;
         return result;
     }

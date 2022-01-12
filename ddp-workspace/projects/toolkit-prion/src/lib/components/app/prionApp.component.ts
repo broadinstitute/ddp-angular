@@ -84,7 +84,8 @@ export class PrionAppComponent implements OnInit, OnDestroy {
     const modalClose = this.renewNotifier.closeDialogEvents.subscribe(() => {
       this.closeSessionWillExpireDialog();
     });
-    this.anchor.add(modalOpen).add(modalClose);
+    this.anchor.add(modalOpen);
+    this.anchor.add(modalClose);
   }
 
   private initHasToSetCookiesPreferencesListener(): void {

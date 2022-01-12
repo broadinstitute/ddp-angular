@@ -35,6 +35,7 @@ export class DrugList {
       if (drug.changed || drug.addedNew) {
         if (drug.displayName == null || drug.displayName === '') {
           // TODO: check is it correct ?
+          /* eslint-disable-next-line */
           drug.displayName = drug.displayName;
         }
         cleanedDrugList.push(drug);

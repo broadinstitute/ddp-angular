@@ -1,5 +1,5 @@
 <h1 *ngIf="dashboardVersion != null && dashboardVersion === UNSENTOVERVIEW"> Unsent Kit Overview </h1>
-<h4 *ngIf="dashboardVersion != null && dashboardVersion === UNSENTOVERVIEW && isCreatingLabels != 0" class="Color--primary"> DSM is creating labels since {{
+<h4 *ngIf="dashboardVersion != null && dashboardVersion === UNSENTOVERVIEW && isCreatingLabels !== 0" class="Color--primary"> DSM is creating labels since {{
   isCreatingLabels | date:'medium' }}</h4>
 <h1 *ngIf="dashboardVersion != null && dashboardVersion === SHIPPINGDASHBOARD"> Sample Summary </h1>
 <h1 *ngIf="dashboardVersion != null && dashboardVersion === MEDICALRECORDDASHBOARD"> Study Dashboard </h1>
@@ -72,7 +72,7 @@
           <tr>
             <td>
             </td>
-            <td>Kits without Labels <span *ngIf="sKit.kitsNoLabelMinDate != 0">(Oldest Kit: {{sKit.kitsNoLabelMinDate | date:'medium'}})</span></td>
+            <td>Kits without Labels <span *ngIf="sKit.kitsNoLabelMinDate !== 0">(Oldest Kit: {{sKit.kitsNoLabelMinDate | date:'medium'}})</span></td>
             <td>{{sKit.kitsNoLabel}}</td>
             <td>
             </td>
@@ -1136,7 +1136,7 @@
             </mat-select>
             <button type="button" mat-raised-button color="primary"
                     (click)="dataExport(downloadSource)"
-                    [disabled]="participantList.length == 0 || downloadSource == null">Export Data
+                    [disabled]="participantList.length === 0 || downloadSource == null">Export Data
             </button>
           </td>
         </tr>

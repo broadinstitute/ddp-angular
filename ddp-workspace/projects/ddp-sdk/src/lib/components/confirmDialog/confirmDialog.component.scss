@@ -1,5 +1,7 @@
+@use "sass:math";
+
 $dialog-arrow-width: 20px;
-$dialog-arrow-half-width: $dialog-arrow-width / 2;
+$dialog-arrow-half-width: math.div($dialog-arrow-width, 2);
 
 .confirm-dialog {
     display: flex;

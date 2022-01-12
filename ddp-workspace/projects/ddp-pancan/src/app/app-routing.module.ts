@@ -4,7 +4,7 @@ import { Auth0CodeCallbackComponent, AuthGuard, BrowserGuard, IrbGuard } from 'd
 import {
     AcceptAgeUpPageComponent,
     ActivityRedesignedComponent,
-    AgeUpThankYou,
+    AgeUpThankYouComponent,
     DashboardRedesignedComponent,
     ErrorRedesignedComponent,
     LoginLandingRedesignedComponent,
@@ -113,13 +113,13 @@ const routes: Routes = [
     },
     {
         path: AppRoutes.AgeUpThankYouProxy,
-        component: AgeUpThankYou,
+        component: AgeUpThankYouComponent,
         canActivate: [IrbGuard],
         data: { collect: true }
     },
     {
         path: AppRoutes.AgeUpThankYouVerify,
-        component: AgeUpThankYou,
+        component: AgeUpThankYouComponent,
         canActivate: [IrbGuard],
         data: { verify: true }
     },
@@ -163,7 +163,8 @@ const routes: Routes = [
 const routerOptions: ExtraOptions = {
     scrollPositionRestoration: 'top',
     anchorScrolling: 'enabled',
-    scrollOffset: [0, 150] /* 150px to top when scrolling as to see full content */
+    scrollOffset: [0, 150] /* 150px to top when scrolling as to see full content */,
+    relativeLinkResolution: 'legacy'
 };
 
 @NgModule({

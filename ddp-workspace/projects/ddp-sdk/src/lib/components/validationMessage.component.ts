@@ -21,7 +21,7 @@ import * as _ from 'underscore';
  * Note we are using OnPush detection strategy. Make sure when modifying the message that you are creating
  * passing new object, not just modifying the message object. Important when passing arrays of messages.
  */
-export class ValidationMessage {
+export class ValidationMessageComponent {
   @Input() public message: string[] | string | null;
   @Input() public translationParams: {[key: string]: string} = {};
 

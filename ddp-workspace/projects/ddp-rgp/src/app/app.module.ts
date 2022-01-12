@@ -48,7 +48,7 @@ import { HowItWorksComponent } from './components/how-it-works/how-it-works.comp
 import { LGMDComponent } from './components/lgmd/lgmd.component';
 import { PasswordComponent } from './components/password/password.component';
 import { PrivacyAndYourDataComponent } from './components/privacy-and-your-data/privacy-and-your-data.component';
-import { RedirectToAuth0Landing } from './components/redirect-to-auth0-landing/redirect-to-auth0-landing.component';
+import { RedirectToAuth0LandingComponent } from './components/redirect-to-auth0-landing/redirect-to-auth0-landing.component';
 import { SessionExpiredComponent } from './components/session-expired/session-expired.component';
 import { StayInformedComponent } from './components/stay-informed/stay-informed.component';
 import { SurveyComponent } from './components/survey/survey.component';
@@ -130,81 +130,78 @@ export function translateFactory(
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    HeaderComponent,
-    FooterComponent,
-    AboutUsComponent,
-    AboutUsDialogComponent,
-    FaqComponent,
-    PasswordComponent,
-    EligibilityCriteriaComponent,
-    HowItWorksComponent,
-    PrivacyAndYourDataComponent,
-    ForYourPhysicianComponent,
-    DataSharingComponent,
-    LGMDComponent,
-    CraniofacialComponent,
-    StayInformedComponent,
-    ErrorComponent,
-    TellUsYourStoryComponent,
-    Auth0LandingComponent,
-    Auth0RedirectComponent,
-    RedirectToAuth0Landing,
-    SessionExpiredComponent,
-    UserDashboardComponent,
-    EmailVerifiedCallbackComponent,
-    WorkflowStartActivityComponent,
-    ThankYouComponent,
-    Auth0CodeCallbackComponent,
-    EmailVerificationRequiredComponent,
-    ActivityComponent,
-    SurveyComponent,
-    UserActivitiesComponent,
-    StudyMessagesComponent,
-  ],
-  entryComponents: [
-    AboutUsDialogComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    DdpModule,
-    ToolkitModule,
-    MatIconModule,
-    MatDialogModule,
-    CollapseModule.forRoot(),
-    BsDropdownModule.forRoot(),
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatProgressSpinnerModule,
-    MatTableModule,
-  ],
-  providers: [
-    {
-      provide: 'ddp.config',
-      useValue: config
-    },
-    {
-      provide: 'toolkit.toolkitConfig',
-      useValue: toolkitConfig
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: translateFactory,
-      deps: [
-        TranslateService,
-        Injector,
-        LanguageService,
-      ],
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        HeaderComponent,
+        FooterComponent,
+        AboutUsComponent,
+        AboutUsDialogComponent,
+        FaqComponent,
+        PasswordComponent,
+        EligibilityCriteriaComponent,
+        HowItWorksComponent,
+        PrivacyAndYourDataComponent,
+        ForYourPhysicianComponent,
+        DataSharingComponent,
+        LGMDComponent,
+        CraniofacialComponent,
+        StayInformedComponent,
+        ErrorComponent,
+        TellUsYourStoryComponent,
+        Auth0LandingComponent,
+        Auth0RedirectComponent,
+        RedirectToAuth0LandingComponent,
+        SessionExpiredComponent,
+        UserDashboardComponent,
+        EmailVerifiedCallbackComponent,
+        WorkflowStartActivityComponent,
+        ThankYouComponent,
+        Auth0CodeCallbackComponent,
+        EmailVerificationRequiredComponent,
+        ActivityComponent,
+        SurveyComponent,
+        UserActivitiesComponent,
+        StudyMessagesComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        DdpModule,
+        ToolkitModule,
+        MatIconModule,
+        MatDialogModule,
+        CollapseModule.forRoot(),
+        BsDropdownModule.forRoot(),
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatProgressSpinnerModule,
+        MatTableModule,
+    ],
+    providers: [
+        {
+            provide: 'ddp.config',
+            useValue: config
+        },
+        {
+            provide: 'toolkit.toolkitConfig',
+            useValue: toolkitConfig
+        },
+        {
+            provide: APP_INITIALIZER,
+            useFactory: translateFactory,
+            deps: [
+                TranslateService,
+                Injector,
+                LanguageService,
+            ],
+            multi: true
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(private analytics: AnalyticsEventsService) {

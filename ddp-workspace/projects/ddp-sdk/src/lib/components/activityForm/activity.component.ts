@@ -328,6 +328,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     }
 
     private previousAvailableSectionIndex(): number {
+        /* eslint-disable-next-line for-direction */
         for (let index = this.currentSectionIndex - 1; index < this.model.sections.length; index--) {
             if (this.model.sections[index].visible) {
                 return index;

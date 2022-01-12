@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommunicationAspect } from '../services/communicationAspect.service';
 import { NetworkingMock } from '../models/networkingMock';
 import { MatDialog } from '@angular/material/dialog';
-import { NewRequestMock } from './newRequestMock.component';
+import { NewRequestMockComponent } from './newRequestMock.component';
 
 @Component({
   selector: 'ddp-network-sniffer',
@@ -42,7 +42,7 @@ import { NewRequestMock } from './newRequestMock.component';
           </mat-form-field>
           <mat-icon color="warn" class="material-icons.md-18"
                     matTooltip="This will be thrown as exception"
-                    *ngIf="feed.mockedCode != 200 && !feed.returnNull">
+                    *ngIf="feed.mockedCode !== 200 && !feed.returnNull">
             warning
           </mat-icon>
         <p>
@@ -68,10 +68,10 @@ export class NetworkSnifferComponent {
   }
 
   public openDialog(): void {
-    const dialogRef = this.dialog.open(NewRequestMock, {
+    const dialogRef = this.dialog.open(NewRequestMockComponent, {
       width: '800px',
       data: {}
     });
-    dialogRef.afterClosed().subscribe(result => { });
+    dialogRef.afterClosed().subscribe(() => { });
   }
 }

@@ -1,8 +1,9 @@
-@import '~@angular/material/theming';
+@use '@angular/material' as mat;
+@import '@angular/material/theming';
 @import 'styles/variables';
 
-$custom-typography: mat-typography-config($font-family: $primary-font);
-@include mat-core($custom-typography);
+$custom-typography: mat.define-typography-config($font-family: $primary-font);
+@include mat.core($custom-typography);
 
 // generated via http://mcg.mbitson.com
 $md-primary: (
@@ -38,9 +39,14 @@ $md-primary: (
     )
 );
 
-$app-primary: mat-palette($md-primary, 500, 500, 500);
-$app-accent: mat-palette($md-primary, 900, 700, A500);
+$app-primary: mat.define-palette($md-primary, 500, 500, 500);
+$app-accent: mat.define-palette($md-primary, 900, 700, A500);
 
-$test-app-theme: mat-light-theme($app-primary, $app-accent);
+$test-app-theme: mat.define-light-theme((
+    color: (
+        primary: $app-primary,
+        accent: $app-accent,
+    )
+));
 
-@include angular-material-theme($test-app-theme);
+@include mat.all-component-themes($test-app-theme);

@@ -1,3 +1,4 @@
+@use '@angular/material' as mat;
 @import '../../../app-theme.scss';
 
 .intro-media-block {
@@ -44,7 +45,7 @@
 }
 
 .steps-section {
-    background-color: mat-color($app-theme, 350);
+    background-color: mat.get-color-from-palette($app-theme, 350);
 }
 
 .steps-block {
@@ -81,7 +82,7 @@
 }
 
 .help-section {
-    background-color: mat-color($app-theme, 400);
+    background-color: mat.get-color-from-palette($app-theme, 400);
 }
 
 .help-block {
@@ -108,7 +109,7 @@
 }
 
 .gallery-section {
-    background-color: mat-color($app-theme, 450);
+    background-color: mat.get-color-from-palette($app-theme, 450);
 }
 
 .gallery-block {
@@ -198,7 +199,7 @@
 }
 
 .join-us-section {
-    background-color: mat-color($app-theme, 350);
+    background-color: mat.get-color-from-palette($app-theme, 350);
 }
 
 .join-us-block {
@@ -253,7 +254,7 @@
 
     .media-block__text {
         order: 2;
-        margin: 0px 3.125rem;
+        margin: 0 3.125rem;
     }
 
     .youtube-video {

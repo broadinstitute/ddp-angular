@@ -27,7 +27,7 @@ import { FireCloudWorkspacesDataSource } from './fireCloudWorkspacesDataSource';
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"
-                     [ngClass] = "{'highlight': selectedHighlightedRowIndex == row.id}"
+                     [ngClass] = "{'highlight': selectedHighlightedRowIndex === row.id}"
                      (mouseover)="highlight(row);"
                      (mouseleave)="leaveRow(row);">
             </mat-row>
@@ -59,9 +59,8 @@ export class FireCloudListWorkspacesComponent implements OnInit, OnDestroy {
             this.listWorkspacesMessage = listWorkspaceMessage);
         const nameSpace = this.serviceAgent.currentListWorkspaceNamespacesMessage.subscribe(listWorkspaceNamespacesMessage =>
             this.listWorkspaceNamespacesMessage = listWorkspaceNamespacesMessage);
-        this.anchor
-            .add(message)
-            .add(nameSpace);
+        this.anchor.add(message);
+        this.anchor.add(nameSpace);
     }
 
     public ngOnDestroy(): void {

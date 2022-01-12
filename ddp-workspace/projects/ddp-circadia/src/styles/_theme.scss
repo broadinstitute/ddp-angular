@@ -1,6 +1,7 @@
-@import '~@angular/material/theming';
+@use '@angular/material' as mat;
+@import '@angular/material/theming';
 
-@include mat-core();
+@include mat.core();
 
 $md-primary: (
   50: #e3e6ed,
@@ -101,15 +102,15 @@ $md-warn: (
   ),
 );
 
-$app-primary: mat-palette($md-primary);
-$app-secondary: mat-palette($md-secondary);
-$app-warn: mat-palette($md-warn);
+$app-primary: mat.define-palette($md-primary);
+$app-secondary: mat.define-palette($md-secondary);
+$app-warn: mat.define-palette($md-warn);
 
-$app-theme: mat-light-theme($app-primary, $app-secondary, $app-warn);
+$app-theme: mat.define-light-theme($app-primary, $app-secondary, $app-warn);
 
-$app-typography: mat-typography-config(
+$app-typography: mat.define-typography-config(
   $font-family: 'Nunito, sans-serif',
 );
 
-@include angular-material-theme($app-theme);
-@include angular-material-typography($app-typography);
+@include mat.all-component-themes($app-theme);
+@include mat.all-component-typographies($app-typography);

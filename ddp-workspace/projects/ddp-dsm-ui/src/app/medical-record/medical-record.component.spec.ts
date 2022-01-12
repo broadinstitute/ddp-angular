@@ -1,4 +1,4 @@
-import { MedicalRecordComponent } from './medical-record.component';
+// import { MedicalRecordComponent } from './medical-record.component';
 
 describe('Component: MedicalRecord', () => {
   // it('should create an instance', () => {

@@ -12,7 +12,7 @@ export class Survey {
   }
 }
 
-// tslint:disable-next-line:max-classes-per-file
+// eslint-disable-next-line max-classes-per-file
 export class SurveyStatus {
   constructor(public surveyInfo: ParticipantSurveyInfo, public reason: string, public user: string, public triggeredDate: number) {
     this.surveyInfo = surveyInfo;
@@ -26,7 +26,7 @@ export class SurveyStatus {
   }
 }
 
-// tslint:disable-next-line:max-classes-per-file
+// eslint-disable-next-line max-classes-per-file
 export class ParticipantSurveyInfo {
   constructor(public participantId: string, public shortId: string, public legacyShortId: string,
               public survey: string, public followUpInstance: number,
@@ -48,7 +48,7 @@ export class ParticipantSurveyInfo {
   }
 }
 
-// tslint:disable-next-line:max-classes-per-file
+// eslint-disable-next-line max-classes-per-file
 export class TriggerResponse {
   constructor(public failedToTrigger: string[], public alreadyTriggered: string[]) {
     this.failedToTrigger = failedToTrigger;
@@ -60,7 +60,7 @@ export class TriggerResponse {
   }
 }
 
-// tslint:disable-next-line:max-classes-per-file
+// eslint-disable-next-line max-classes-per-file
 export class ParticipantSurveyUploadObject {
   selected = false;
 

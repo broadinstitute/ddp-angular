@@ -57,7 +57,6 @@ describe('ActivityNumericAnswer', () => {
 
         fixture = TestBed.createComponent(ActivityNumericAnswer);
         component = fixture.componentInstance;
-        debugElement = fixture.debugElement;
         component.block = questionBlock;
         fixture.detectChanges();
     }));

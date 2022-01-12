@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormBlockDef } from '../../model/core/formBlockDef';
 import { ActivityDefinitionEditorService } from '../../services/activity-definition-editor.service';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -13,7 +13,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class SectionComponent implements OnInit {
+export class SectionComponent {
     @Input()
     section$: Observable<ObservableFormSectionDef>;
     public validationRequested = false;
@@ -25,9 +25,6 @@ export class SectionComponent implements OnInit {
 
     constructor(private editorService: ActivityDefinitionEditorService) {
         this.selectedBlock$ = this.editorService.currentBlockDef$;
-    }
-
-    ngOnInit(): void {
     }
 
     blockSelected(block: FormBlockDef): void {

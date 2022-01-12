@@ -74,7 +74,7 @@ export class ActivityCompositeAnswer implements OnChanges {
     }
 
     // Use original child question blocks as the prototypes to make real working ones
-    // tslint:disable-next-line:max-line-length
+    // eslint-disable-next-line max-len
     private buildBlockForChildQuestion(childQuestionBlock: ActivityQuestionBlock<any>, answerContainer: any, shown: boolean): ActivityQuestionBlock<any> {
         // Each child will need its own copy of the block to work properly
         const newQuestionBlock: ActivityQuestionBlock<any> = this.deepClone(childQuestionBlock);

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ContentBlockComponent } from './content-block.component';
+import { EditorComponent } from '@tinymce/tinymce-angular';
 
 describe('ContentBlockComponent', () => {
   let component: ContentBlockComponent;
@@ -8,7 +9,7 @@ describe('ContentBlockComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ContentBlockComponent ]
+      declarations: [ ContentBlockComponent, EditorComponent]
     })
     .compileComponents();
   });
@@ -16,6 +17,15 @@ describe('ContentBlockComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ContentBlockComponent);
     component = fixture.componentInstance;
+    component.block = {
+        bodyTemplate: {
+            variables: [{
+                translations: [{
+                    text: ''
+                }]
+            }]
+        }
+    } as any;
     fixture.detectChanges();
   });
 

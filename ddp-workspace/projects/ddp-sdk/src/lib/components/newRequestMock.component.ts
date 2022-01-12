@@ -38,12 +38,12 @@ import { CommunicationAspect } from '../services/communicationAspect.service';
     </mat-dialog-actions>
     `
 })
-export class NewRequestMock {
+export class NewRequestMockComponent {
     public verb: string;
     public url: string;
 
     constructor(
-        public dialogRef: MatDialogRef<NewRequestMock>,
+        public dialogRef: MatDialogRef<NewRequestMockComponent>,
         @Inject('ddp.config') private configuration: ConfigurationService,
         @Inject(MAT_DIALOG_DATA) public data: any) {
         this.url = this.configuration.backendUrl;

@@ -3,8 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { WorkflowBuilderService } from 'toolkit';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivityPageComponent } from './activity-page.component';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ComponentType } from '@angular/cdk/overlay';
+import { MatDialog } from '@angular/material/dialog';
 import { AnnouncementsServiceAgent } from 'ddp-sdk';
 
 
@@ -26,19 +25,19 @@ describe('ActivityComponent', () => {
         {
           provide: WorkflowBuilderService,
           useValue: {
-            getActivities: (response) => ({ execute: () => {} })
+            getActivities: () => ({ execute: () => {} })
           }
         },
         {
           provide: MatDialog,
           useValue: {
-            open: (cmp: ComponentType<unknown>, config?: MatDialogConfig<unknown>) => {}
+            open: () => {}
           }
         },
         {
           provide: AnnouncementsServiceAgent,
           useValue: {
-            getMessages: (id: string) => of([])
+            getMessages: () => of([])
           }
         }
       ]

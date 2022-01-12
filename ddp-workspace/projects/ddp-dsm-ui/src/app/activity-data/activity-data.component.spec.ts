@@ -1,7 +1,7 @@
 // import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { ActivityDataComponent } from './activity-data.component';
-import { Utils } from '../utils/utils';
+// import { ActivityDataComponent } from './activity-data.component';
+// import { Utils } from '../utils/utils';
 
 describe('ActivityDataComponent', () => {
   // let component: ActivityDataComponent;

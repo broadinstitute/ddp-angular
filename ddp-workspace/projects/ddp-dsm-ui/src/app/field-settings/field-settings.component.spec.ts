@@ -1,6 +1,6 @@
 // import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { FieldSettingsComponent } from './field-settings.component';
+// import { FieldSettingsComponent } from './field-settings.component';
 
 describe('FieldSettingsComponent', () => {
   // let component: FieldSettingsComponent;

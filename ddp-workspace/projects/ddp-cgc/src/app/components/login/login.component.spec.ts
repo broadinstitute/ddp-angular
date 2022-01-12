@@ -1,6 +1,7 @@
 import { SessionMementoService } from 'ddp-sdk';
 import { LoginComponent } from './login.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 
 describe('LoginComponent', () => {
@@ -10,6 +11,7 @@ describe('LoginComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
+      imports: [RouterTestingModule],
       providers: [
         { provide: SessionMementoService, useValue: { isAuthenticatedSession: () => true }}
       ]

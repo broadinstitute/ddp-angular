@@ -124,7 +124,7 @@ export class UserPreferencesComponent implements OnDestroy {
     public readonly startYear: number;
     public loaded = true;
     private userProfileModel: UserProfileDecorator | null;
-    private ngUnsubscribe = new Subject();
+    private ngUnsubscribe = new Subject<void>();
     public readonly addressFormBlock: MailAddressBlock = new MailAddressBlock(null);
     public isAddressValid = true;
     public isAddressComponentBusy$ = new BehaviorSubject(false);

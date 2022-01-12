@@ -1,7 +1,8 @@
+@use '@angular/material' as mat;
 @import '../app-theme.scss';
 
 .dashboard-title-section {
-    background-color: mat-color($app-theme, 3100);
+    background-color: mat.get-color-from-palette($app-theme, 3100);
 
     &__title {
         font-weight: 600;
@@ -50,7 +51,7 @@
 .infobox-text_small {
     font-size: 1rem;
     line-height: 1.5rem;
-    color: mat-color($app-theme, 700);
+    color: mat.get-color-from-palette($app-theme, 700);
     margin: 0.5rem 0;
 }
 
@@ -119,7 +120,7 @@
     }
 
     .Link {
-        color: mat-color($app-theme, 700);
+        color: mat.get-color-from-palette($app-theme, 700);
         white-space: normal;
     }
 
@@ -137,7 +138,7 @@
 
         .mat-header-cell:first-of-type,
         .mat-cell:first-of-type {
-            padding-left: 0px !important;
+            padding-left: 0 !important;
         }
 
         .mat-column-status {
@@ -159,7 +160,7 @@
 }
 
 .dashboard-activity-button:hover {
-    color: mat-color($app-theme, 650) !important;
+    color: mat.get-color-from-palette($app-theme, 650) !important;
 }
 
 

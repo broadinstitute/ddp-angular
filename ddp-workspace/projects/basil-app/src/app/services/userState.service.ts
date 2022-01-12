@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SessionMementoService, UserActivityServiceAgent, ConsentServiceAgent, LoggingService } from 'ddp-sdk';
+import { SessionMementoService, UserActivityServiceAgent, ConsentServiceAgent, LoggingService, Session } from 'ddp-sdk';
 import { UserState } from '../model/userState';
 import { Observable, of } from 'rxjs';
 import { mergeMap, map } from 'rxjs/operators';
@@ -36,19 +36,22 @@ export class UserStateService {
             };
         };
 
+        const getConsentAndPrequalifier = (session: Session) => {
+            if (session != null) {
+                return this.getConsentState().pipe(
+                    mergeMap(() => this.getPrequalifierState().pipe(
+                        map(getConsent)
+                    ))
+                );
+            } else {
+                return of(getConsent(null, null));
+            }
+        };
+
         return this.session.sessionObservable.pipe(
-            mergeMap(s => {
-                if (s != null) {
-                    return this.getConsentState().pipe(
-                        mergeMap(() => this.getPrequalifierState()).pipe(
-                            map(getConsent)
-                        )
-                    );
-                } else {
-                    return of(getConsent(null, null));
-                }
-            }).pipe(
-                map(getConsentConfig)
+            mergeMap((s: Session) => getConsentAndPrequalifier(s).pipe(
+                    map(getConsentConfig)
+                )
             ),
             mergeMap((x: any) => {
                 if (!x.session) {

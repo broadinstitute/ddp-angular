@@ -117,7 +117,7 @@ export class OncHistoryDetailComponent implements OnInit {
       // do normal patch because oncHistoryDetailId is already set
       this.patch(patch, index);
     } else {
-      const subscription = interval(250).subscribe(n => {
+      const subscription = interval(250).subscribe(() => {
         if (this.oncHistory[ index ].oncHistoryDetailId != null) {
           subscription.unsubscribe();
           patch.id = this.oncHistory[ index ].oncHistoryDetailId;

@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { FooterComponent } from './footer.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 
 @Pipe({name: 'translate'})
@@ -16,6 +17,7 @@ describe('FooterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
       declarations: [ FooterComponent, MockTranslatePipe ]
     })
     .compileComponents();

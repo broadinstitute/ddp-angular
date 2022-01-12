@@ -1,4 +1,4 @@
-import { HomeComponent } from './home.component';
+// import { HomeComponent } from './home.component';
 
 describe('Component: Home', () => {
   // it('should create an instance', () => {

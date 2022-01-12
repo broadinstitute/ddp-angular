@@ -1,6 +1,6 @@
 <div class="wizard-page">
   <div class="wizard">
-    <app-progress-bar [count]="countTabs" [active]="activeTab" (onChange)="setActiveTab($event)"></app-progress-bar>
+    <app-progress-bar [count]="countTabs" [active]="activeTab" (activeTabChanged)="setActiveTab($event)"></app-progress-bar>
   </div>
   <form class="content" #form="ngForm" (ngSubmit)="submit(form)" [ngClass]="{submitted : form.submitted}">
     <div [ngClass]="{'active' : activeTab === 0}">

@@ -38,6 +38,8 @@
             <ddp-loading [loaded]="!isLoading" class="loading-bar"></ddp-loading>
         </ng-container>
 
+        <ddp-activity-file-answer-success *ngIf="uploadedFile"></ddp-activity-file-answer-success>
+
         <mat-chip-list>
             <mat-chip *ngIf="uploadedFile"
                       class="uploaded-file-chip"

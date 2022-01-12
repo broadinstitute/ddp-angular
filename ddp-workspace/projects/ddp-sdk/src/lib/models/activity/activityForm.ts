@@ -53,7 +53,7 @@ export class ActivityForm {
     private getAllSections(): Array<ActivitySection> {
         const allSections: ActivitySection[] = [];
         this.introduction && allSections.push(this.introduction);
-        allSections.push.apply(allSections, this.sections);
+        allSections.push(...this.sections);
         this.closing && allSections.push(this.closing);
         return allSections;
     }

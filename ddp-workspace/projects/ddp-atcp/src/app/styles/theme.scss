@@ -1,7 +1,8 @@
+@use '../../../../../node_modules/@angular/material' as mat;
 @import '../../../../../node_modules/@angular/material/theming';
 @import 'variables';
 
-@include mat-core();
+@include mat.core();
 
 $md-primary: (
     50 : #eeeaff,
@@ -102,21 +103,21 @@ $md-warn: (
     )
 );
 
-$app-primary: mat-palette($md-primary, 500, 500, 500);
-$app-accent: mat-palette($md-secondary, 900, 700, A500);
-$app-warn: mat-palette($md-warn, 900, A400, A500);
+$app-primary: mat.define-palette($md-primary, 500, 500, 500);
+$app-accent: mat.define-palette($md-secondary, 900, 700, A500);
+$app-warn: mat.define-palette($md-warn, 900, A400, A500);
 
-$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+$app-theme: mat.define-light-theme($app-primary, $app-accent, $app-warn);
 
-$app-typography: mat-typography-config(
+$app-typography: mat.define-typography-config(
   $font-family: 'Lato, sans-serif',
 );
 
-@include angular-material-theme($app-theme);
-@include angular-material-typography($app-typography);
+@include mat.all-component-themes($app-theme);
+@include mat.all-component-typographies($app-typography);
 
 .validation-div {
-    color: mat-color($app-warn);
+    color: mat.get-color-from-palette($app-warn);
 }
 
 
@@ -127,5 +128,5 @@ $app-typography: mat-typography-config(
 }
 
 ddp-validation-message{
-  color: mat-color($md-warn, 900)
+  color: mat.get-color-from-palette($md-warn, 900)
 }

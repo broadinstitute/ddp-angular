@@ -12,7 +12,7 @@ export class UploadResponse {
   }
 }
 
-// tslint:disable-next-line:max-classes-per-file
+// eslint-disable-next-line max-classes-per-file
 export class UploadParticipant {
   selected = false;
 
