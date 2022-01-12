@@ -6,7 +6,7 @@ import { Auth0CodeCallbackComponent, AuthGuard, BrowserGuard, IrbGuard } from 'd
 import {
   AcceptAgeUpPageComponent,
   ActivityRedesignedComponent,
-  AgeUpThankYou,
+  AgeUpThankYouComponent,
   DashboardRedesignedComponent,
   ErrorRedesignedComponent,
   LoginLandingRedesignedComponent,
@@ -85,13 +85,13 @@ const routes: Routes = [
   },
   {
     path: Route.AgeUpThankYouProxy,
-    component: AgeUpThankYou,
+    component: AgeUpThankYouComponent,
     canActivate: [IrbGuard],
     data: { collect: true },
   },
   {
     path: Route.AgeUpThankYouVerify,
-    component: AgeUpThankYou,
+    component: AgeUpThankYouComponent,
     canActivate: [IrbGuard],
     data: { collect: true },
   },
