@@ -1,0 +1,46 @@
+@import '../../../styles/colors';
+
+.wrapper {
+  background: map-get($colors, 'content-background');
+  padding-top: 40px;
+  padding-bottom: 75px;
+
+  h1 {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  p {
+    color: map-get($colors, 'content-text');
+    margin-bottom: 60px;
+  }
+
+  .container {
+    width: 550px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .wrapper .container {
+    width: 100%;
+
+    h1 {
+      text-align: left;
+    }
+
+    p {
+      margin-bottom: 30px;
+    }
+  }
+  app-sign-up {
+    ::ng-deep {
+      button {
+        margin: 0 auto;
+        display: block;
+      }
+    }
+  }
+}

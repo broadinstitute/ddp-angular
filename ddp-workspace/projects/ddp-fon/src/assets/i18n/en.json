@@ -1,0 +1,669 @@
+{
+    "App": {
+        "Header": {
+            "Links": {
+                "About": "About",
+                "Team": "Our Team",
+                "FAQ": "FAQ",
+                "Physicians": "For Physicians",
+                "MailingList": "Join Mailing List",
+                "Join": "Join the Brugada Project",
+                "Login": "Log in",
+                "Dashboard": "Dashboard"
+            },
+            "LogoAlt": "Brugada Project"
+        },
+        "Footer": {
+            "Links": {
+                "Back": "Back to top",
+                "About": "About",
+                "Team": "Our Team",
+                "FAQ": "FAQ",
+                "Physicians": "For Physicians",
+                "MailingList": "Join Mailing List"
+            },
+            "Contact": {
+                "Label": "Contact Us",
+                "Email": "<a class=\"link\" href=\"mailto:info@linkmyheart.org\" tabindex=\"-1\">info@linkmyheart.org</a>",
+                "Phone": "<a class=\"link\" href=\"tel:6177147560\" tabindex=\"-1\">(617) 714-7560</a>",
+                "Project": "Link My Heart",
+                "Address1": "The Broad Institute of MIT and Harvard",
+                "Address2": "415 Main Street",
+                "Address3": "Cambridge, MA 02142",
+                "Address4": "United States"
+            },
+            "LogoAlt": "Brugada Project"
+        },
+        "Home": {
+            "Cta": {
+                "Title": "Let’s advance research on Brugada syndrome together",
+                "Subtitle": "By donating genetic and medical data, people living with Brugada syndrome can help scientists more easily study this disease.",
+                "Join": "Join Today"
+            },
+            "Mission": {
+                "ImgAlt": "ECG image",
+                "Paragraph1": "Link My Heart is committed to connecting <span class=\"text-bold\">patients with researchers</span> to work towards improving research, discovery, and treatment for individuals with inherited heart conditions that may lead to sudden cardiac death.",
+                "Paragraph2": "The Brugada Project is a sub-initiative of Link My Heart, and directly partners with patients with Brugada syndrome to collect health information and samples, with the goal of advancing genetic research. This condition is individually rare, and by directly connecting patients and researchers, we hope to rapidly expand our understanding of the genetic basis of Brugada syndrome, and ultimately other inherited heart conditions, to improve the health of patients and their family members.",
+                "LearnMore": "Learn More About The Project"
+            },
+            "Participation": {
+                "Title": "How to participate",
+                "Steps": [
+                    {
+                        "Name": "Step 1",
+                        "Duration": "1 minute",
+                        "Description": "See if you qualify to participate and create an account."
+                    },
+                    {
+                        "Name": "Step 2",
+                        "Duration": "2 minutes",
+                        "Description": "Read the consent form and decide if you’d like to join the Brugada Project."
+                    },
+                    {
+                        "Name": "Step 3",
+                        "Duration": "3 minutes",
+                        "Description": "Choose to share your home address, medical records, the names of your doctors, and where you receive medical care."
+                    },
+                    {
+                        "Name": "Step 4",
+                        "Duration": "3 minutes",
+                        "Description": "Answer two health surveys related to your experience with Brugada syndrome."
+                    }
+                ],
+                "Start": "Get Started"
+            },
+            "Institutions": {
+                "Title": "Collaborating Institutions",
+                "ImageAlts": {
+                    "Broad": "Broad Institute",
+                    "MGH": "Massachusetts General Hospital",
+                    "VUMC": "Vanderbilt University Medical Center",
+                    "UWM": "University of Wisconsin | Department of Medicine",
+                    "SADS": "SADS Foundation"
+                },
+                "Stanford": "Stanford Center for Inherited Cardiovascular Diseases"
+            },
+            "JoinProject": {
+                "Title": "You can help make an impact on the future of research into Brugada syndrome",
+                "Subtitle": "By participating, you can make a critical impact on our understanding of Brugada syndrome.",
+                "Btn": "Join the Brugada Project"
+            }
+        },
+        "About": {
+            "Title": "About the Brugada Project",
+            "Subtitle": "For more detailed information, visit our <a class=\"underlined-link\" href=\"/faq\">frequently asked questions</a>.",
+            "Paragraphs": [
+                {
+                    "Title": "Our vision",
+                    "Descriptions": [
+                        "Link My Heart is an initiative that connects patients with researchers focused on improving research, discovery, and treatment for individuals with inherited heart conditions that may lead to sudden cardiac death. Link My Heart is the parent initiative to the Brugada Project.",
+                        "The Brugada Project directly partners with patients with Brugada syndrome to collect health information and samples, with the goal of advancing genetic research. This condition is individually rare, and by directly connecting patients and researchers, we hope to rapidly expand our understanding of the genetic basis of Brugada syndrome, and ultimately other inherited heart conditions, to improve the health of patients and their family members."
+                    ]
+                },
+                {
+                    "Title": "About Brugada syndrome",
+                    "Descriptions": [
+                        "Brugada syndrome is a condition characterized by abnormalities in the electrical activity of the heart. Individuals are usually diagnosed with Brugada syndrome due to a specific pattern seen on the electrocardiogram (ECG or EKG), a test that records electrical activity of the heart.",
+                        "While some people with Brugada syndrome will not show any signs or symptoms, individuals with Brugada syndrome are at risk for having irregular heartbeats that, if left untreated, can cause fainting episodes, cardiac arrest, or sudden death. Therefore, it is important to recognize who is at-risk for Brugada syndrome to help prevent sudden death.",
+                        "Brugada syndrome can be inherited. Brugada syndrome can be caused by changes (called “variants” or “mutations”) in genes that can be passed down in families from generation to generation. However, the genetic variants that cause Brugada syndrome cannot be found in most individuals, because we do not know which genes to look for or how to interpret all of the variation in the human genome.",
+                        "We expect that researching the DNA of individuals with Brugada syndrome will help us learn which genetic variants cause Brugada syndrome. This may allow us to better identify individuals at risk for Brugada syndrome, and develop treatments specific for the condition.",
+                        "Inherited heart conditions like Brugada syndrome are an important cause of sudden death. These conditions are individually rare, making them difficult to study. We would therefore like to enable individuals with Brugada syndrome to contribute to research to help us move the science forward. Ultimately, we hope to advance our understanding of the genetic basis of Brugada syndrome, and other inherited heart conditions, by connecting the data of patients together."
+                    ]
+                }
+            ]
+        },
+        "FAQ": {
+            "Participants": {
+                "Title": "Frequently Asked Questions<br />for Participants",
+                "Description": "Below are some common questions that we receive from participants, relatives, and community members that are interested. If we have not answered a question of yours, we are happy to connect with you directly. Please contact a study staff member at <a class=\"underlined-link\" href=\"tel:6177147560\">617-714-7560</a>, or email at <a class=\"underlined-link\" href=\"mailto:info@linkmyheart.org\">info@linkmyheart.org</a>.",
+                "Questions": [
+                    {
+                        "Name": "What is the rationale for this project?",
+                        "Answers": [
+                            "Brugada syndrome can cause abnormal heart rhythms that can be dangerous and life threatening. The causes of the condition and the best methods for treating it are not well understood; as such, there is a critical need to understand the underlying causes for this condition.",
+                            "Brugada syndrome is also rare, making it difficult to study. Our motivation for this project is to empower patients throughout North America to help advance our understanding of the condition. We will do so by creating an easy and convenient opportunity for patients to participate in research relevant to Brugada syndrome.",
+                            "The ultimate goal is to improve our understanding of the medical and genetic aspects of patients with Brugada syndrome. We hope to achieve this by connecting the data of many patients with this condition throughout the United States and Canada."
+                        ]
+                    },
+                    {
+                        "Name": "What will I be asked to do for this project?",
+                        "Answers": [
+                            "We will first ask you to complete a brief online survey to help us learn more about you, and your diagnosis. You will then be asked to complete an online consent form that provides us with permission to request copies of your medical records from your healthcare providers. We will need you to provide the names of the hospitals or clinics, as well as the name of your cardiologist(s) that you’ve seen, so we know where to request your information.",
+                            "We will also send you a saliva collection kit. From your sample, we will extract your DNA and study it through genotyping or whole genome or exome sequencing, which involves reading through all the letters of your DNA to look for changes that may be causing disease. Studying your DNA may allow us to discover new genes that cause Brugada syndrome, or to better understand the genetic changes that are present in patients with this condition.",
+                            "You also have the opportunity to participate in optional surveys to help us answer important research questions relevant for your inherited heart rhythm condition."
+                        ]
+                    },
+                    {
+                        "Name": "Can I receive my genetic data as a result of participating in this project?",
+                        "Answers": [
+                            "The type of genetic testing we are performing is research based. Research based testing is different from the genetic testing ordered by your provider, and is not useful in informing clinical care. As a result, we will not be returning your genetic data to you."
+                        ]
+                    },
+                    {
+                        "Name": "Who will have access to the data that I provide?",
+                        "Answers": [
+                            "Your genetic data, as well as any medical records we receive will be deidentified before we share with other researchers. This means information that could easily identify you such as name and date of birth will be removed before sharing.  The deidentified medical and genetic data may be requested and shared with other clinical or biomedical researchers who are interested in studying the clinical and genetic aspects of Brugada syndrome.",
+                            "Your genetic and medical data will be centrally stored on secure servers at the Broad Institute and Massachusetts General Hospital. Only clinical and biomedical researchers that have been approved will have access to this identifiable data. When sharing data with other researchers, only deidentified medical and genetic information will be shared."
+                        ]
+                    },
+                    {
+                        "Name": "What benefits are there to participating in this project?",
+                        "Answers": [
+                            "By participating, you will be contributing to discoveries on the clinical and genetic aspects of Brugada syndrome that may benefit individuals with this condition as a whole. However, there are no direct benefits to you for participating in this project. If interested, you may receive notice about publications based off of data collected for this project.",
+                            "We may also share research progress and discoveries, in aggregate, which you can access by signing up for our <a class=\"underlined-link mailing-list-toggle\">mailing list</a> or checking our website. You will not receive your genetic data as a result from the study."
+                        ]
+                    },
+                    {
+                        "Name": "What resources are out there?",
+                        "Answers": [
+                            "The Sudden Arrhythmia Death Syndromes Foundation (SADS) is a patient advocacy non-profit whose mission is “to save the lives and support the families of children and adults who are genetically predisposed to sudden death due to heart rhythm abnormalities”. SADS offers patient and family support services, physician and health professional education, raises public awareness about the risks of cardiac arrhythmias, engages in advocacy, and encourages research into conditions that lead to sudden cardiac death. You can learn more about their work and sign up for their mailing list at <a class=\"underlined-link\" target=\"_blank\" href=\"https://www.sads.org\">www.StopSADS.org</a>."
+                        ]
+                    },
+                    {
+                        "Name": "Are there any costs for me to participate in this project?",
+                        "Answers": [
+                            "No. All costs associated (request of records, mailing, sample collection and others) will be covered by the study."
+                        ]
+                    },
+                    {
+                        "Name": "Can I withdraw my participation from this project at any time?",
+                        "Answers": [
+                            "Yes. You may withdraw from this study if you decide to change your mind in the future. Your genetic and medical data will not be included in any additional research studies moving  forward, and your information, including records and genetic data, will be destroyed."
+                        ]
+                    },
+                    {
+                        "Name": "Is there information that I can bring to my doctor so that I can discuss this study with them?",
+                        "Answers": [
+                            "Yes, you can print out or use your mobile device to share the documents <a class=\"underlined-link\" target=\"_blank\" href=\"/assets/pdf/for-physicians.pdf\">here</a>."
+                        ]
+                    },
+                    {
+                        "Name": "How do I mail back my saliva kit if I live in the USA?",
+                        "Answers": [
+                            "The saliva kit will have a prepaid return shipping label already on the outside of the box. The saliva kit can be mailed at your nearest USPS location. <span class=\"text-bold\">All costs associated with the project, including shipping, are paid in advance by the study -- there will be no cost to you.</span>"
+                        ]
+                    },
+                    {
+                        "Name": "How do I mail back my saliva kit if I live in Canada?",
+                        "Answers": [
+                            "1. Before returning your saliva kit, please place the included commercial invoice label on the front of the box (it is okay to cover up the logo).",
+                            "2. Drop your kit off at a FedEx location or FedEx dropbox if preferred. The saliva kit already has a prepaid return shipping label on the back of the box. <span class=\"text-bold\">All costs associated with the project, including shipping, are paid in advance by the study--there will be no cost to you.</span>"
+                        ]
+                    }
+                ]
+            },
+            "Community": {
+                "Title": "Frequently Asked Questions<br />for Relatives and the Community",
+                "Questions": [
+                    {
+                        "Name": "My family members also have Brugada syndrome. Can they participate in this project?",
+                        "Answers": [
+                            "Yes. We would be enthusiastic to include your relatives that have been diagnosed with Brugada syndrome as part of our study. Please ask them to fill out the initial survey, and they will also be asked to fill out a consent form to allow us to request their records, as well as mail a saliva kit to them."
+                        ]
+                    },
+                    {
+                        "Name": "My family member with Brugada syndrome has passed away, and there is postmortem tissue available. Can I participate on behalf of this family member?",
+                        "Answers": [
+                            "We cannot currently obtain medical records or tissue samples for individuals who have passed away. We may have future plans for next-of-kin process, but this will take time to develop. If you later become diagnosed with Brugada syndrome, we would be interested in having you participate in our project."
+                        ]
+                    },
+                    {
+                        "Name": "I don’t have Brugada syndrome, but I was diagnosed with another inherited heart rhythm condition. Can I still participate?",
+                        "Answers": [
+                            "We are happy to hear your interest! But for the first phase of our project, we are only recruiting patients who have been diagnosed with Brugada syndrome. However, we expect to recruit patients with other inherited heart rhythm conditions in the future.",
+                            "If you are interested in participating in a future project that is specifically related to your inherited heart condition, please consider checking our website periodically or signing up for our <a class=\"underlined-link mailing-list-toggle\">mailing list</a> as we will update these when future projects become available."
+                        ]
+                    }
+                ]
+            }
+        },
+        "Team": {
+            "Title": "Our Team",
+            "WhoWeAre": {
+                "Title": "Who we are",
+                "Description": "The Brugada Project, and its parent initiative, Link My Heart, is stewarded by the Broad Institute of MIT and Harvard, and Massachusetts General Hospital. The Brugada Project was designed and implemented by physicians, researchers, genetic counselors, computational scientists, software engineers, and patient advocates with the aim to empower patients to directly connect with researchers.  The Brugada Project is an effort led by investigators at several collaborating academic institutions who are focused on rapidly advancing genetic research related to heart disease."
+            },
+            "Sections": [
+                {
+                    "Title": "Leadership",
+                    "Members": [
+                        {
+                            "Name": "Steven A. Lubitz",
+                            "Degree": "MD, MPH",
+                            "Institution": "Massachusetts General Hospital and Broad Institute",
+                            "Bio": "Dr. Lubitz is an Associate Professor of Medicine at Harvard Medical School (HMS), Associate Physician in the Massachusetts General Hospital (MGH) Cardiac Arrhythmia Service, and Associate Member in Medical and Population Genetics at the Broad Institute. His research expertise includes human genetics, risk assessment, and clinical implementation science. Dr. Lubitz is responsible for leading and coordinating all aspects of this project.",
+                            "Image": "steven-lubitz.jpeg"
+                        },
+                        {
+                            "Name": "Patrick Ellinor",
+                            "Degree": "",
+                            "Institution": "Massachusetts General Hospital and Broad Institute",
+                            "Bio": "Dr. Ellinor is an Institute Member at the Broad Institute, and directs the Cardiovascular Disease Initiative. He is also a Professor of Medicine at Harvard Medical School and Director of the Cardiac Arrhythmia Service at MGH. He serves on the Scientific Advisory Council of this project and collaborates with Dr. Lubitz to oversee the development of patient surveys, recruitment, and project execution.",
+                            "Image": "patrick-ellinor.png"
+                        },
+                        {
+                            "Name": "Anthony Philippakis",
+                            "Degree": "",
+                            "Institution": "Broad Institute",
+                            "Bio": "Dr. Philippakis is the Chief Data Officer at the Broad Institute and directs the Data Sciences Platform. Dr. Philippakis serves on the Scientific Advisory Council of this project and collaborates with Dr. Lubitz to oversee project development and execution.",
+                            "Image": "anthony-philippakis.jpeg"
+                        }
+                    ]
+                },
+                {
+                    "Title": "Scientific Advisory Council",
+                    "Members": [
+                        {
+                            "Name": "Lee L. Eckhardt",
+                            "Degree": "MD, MS",
+                            "Institution": "University of Wisconsin-Madison",
+                            "Bio": "Dr. Eckhardt is an Associate Professor of Medicine at the University of Wisconsin-Madison and is the co-director of the Inherited Arrhythmia Clinic. She is a physician scientist with a focus on functional genomics centered around inherited arrhythmia syndromes and unexplained sudden cardiac death. Dr. Eckhardt serves on the Scientific Advisory Council for this project and collaborates with Dr. Lubitz on the research direction, project development, and recruitment initiatives.",
+                            "Image": "lee-eckhardt.jpg"
+                        },
+                        {
+                            "Name": "Marco V. Perez",
+                            "Degree": "MD",
+                            "Institution": "Stanford University",
+                            "Bio": "Dr. Perez is an Associate Professor of medicine at the Stanford University Medical School. He is a clinical cardiac electrophysiologist and directs the Stanford Inherited Arrhythmia Clinic. His research interests are in understanding the genetics and epidemiology of cardiac arrhythmias. He is working on the Scientific Advisory Council to help build an innovative approach to studying rare inherited cardiovascular disease.",
+                            "Image": "marco-perez.jpg"
+                        },
+                        {
+                            "Name": "M. Ben Shoemaker",
+                            "Degree": "MD, MSCI",
+                            "Institution": "Vanderbilt University",
+                            "Bio": "Dr. Shoemaker is an Assistant Professor of Medicine at Vanderbilt University Medical Center and Staff Physician at the Nashville VA Medical Center. He is a physician scientist and clinical cardiac electrophysiologist with a research program focused on improving the care of patients with inherited arrhythmia and cardiomyopathy syndromes. He serves on the Scientific Advisory Council for this project and collaborates with Dr. Lubitz on the research direction, project development, and recruitment initiatives.",
+                            "Image": "ben-shoemaker.jpg"
+                        }
+                    ]
+                }
+            ],
+            "Council": {
+                "Title": "Project Advisory Council",
+                "Members": ["Kathleen Lewis", "Ana T. Lipsanopoulos", "Stephanie Harris", "Eugene Wong", "Victor Nauffal"]
+            },
+            "Collaboration": {
+                "Title": "Collaborating Partners",
+                "Partners": [
+                    {
+                        "Name": "SADS Foundation",
+                        "Description": "The SADS Foundation - Sudden Arrhythmia Death Syndromes Foundation (SAD) was established in 1991 and is a global non-profit organization. Its mission is to save the lives and support the families of children and adults who are genetically predisposed to sudden death due to heart rhythm conditions."
+                    }
+                ]
+            }
+        },
+        "Error": {
+            "Title": "We've encountered an error",
+            "Paragraph1": "We're sorry, but an error has occurred.",
+            "Paragraph2": "Please wait a moment and retry. If the trouble persists, please email us at <a class=\"underlined-link\" href=\"mailto:info@linkmyheart.org\">info@linkmyheart.org</a> or call us at <a class=\"underlined-link\" href=\"tel:6177147560\">(617) 714-7560</a>."
+        },
+        "ForgotPassword": {
+            "Title": "Reset your password",
+            "Subtitle": "Please enter your email address. We will send you an email to reset your password.",
+            "Paragraph": "If you haven't registered yet, <a class=\"underlined-link\" href=\"/join\">please do so here</a>.",
+            "EmailLabel": "Email Address",
+            "EmailPlaceholder": "yours@example.com",
+            "Errors": {
+                "Required": "Field is required",
+                "NotValid": "Provided email is not a valid"
+            },
+            "Buttons": {
+                "Submit": "Send Email"
+            }
+        },
+        "MailingList": {
+            "Title": "Join Mailing List",
+            "Paragraph": "Hello! Thanks for your interest in joining the Link My Heart mailing list. Provide your email below and we will send general updates about the progress of the research project and keep you informed when future projects become available. You can unsubscribe at any time.",
+            "Thanking": "Thank you!",
+            "Form": {
+                "Fields": {
+                    "Email": {
+                        "Label": "Email Address *"
+                    },
+                    "EmailConfirmation": {
+                        "Label": "Email Confirmation *"
+                    }
+                },
+                "Buttons": {
+                    "Cancel": "Cancel",
+                    "Join": "Join"
+                },
+                "Errors": {
+                    "Required": "Field is required",
+                    "EmailNotValid": "Provided email is not a valid email address",
+                    "FieldsDoNotMatch": "Provided emails do not match"
+                }
+            }
+        },
+        "Password": {
+            "Title": "Please enter the password",
+            "InputPlaceholder": "Password",
+            "Errors": {
+                "Wrong": "Incorrect password. Please try again.",
+                "Communication": "We're sorry, but an error has occurred. Please try again.",
+                "Invalid": "Password is required"
+            }
+        },
+        "Dashboard": {
+            "Title": "Dashboard"
+        },
+        "ProgressBar": {
+            "Titles": {
+                "Consent": "Consent form",
+                "MedicalRecordRelease": "Medical Record Release Form",
+                "BackgroundInformation": "Background Information Survey",
+                "GeneticTesting": "Genetic Testing & Family History Survey",
+                "Other": "Additional<br/>survey"
+            }
+        },
+        "UserActivities": {
+            "Columns": {
+                "Name": "Name",
+                "Summary": "Summary",
+                "Status": "Status",
+                "Actions": "Actions"
+            },
+            "Status": {
+                "CREATED": "New",
+                "IN_PROGRESS": "In Progress",
+                "COMPLETE": "Complete"
+            },
+            "Button": {
+                "Start": "Start",
+                "Continue": "Continue",
+                "View": "View",
+                "Update": "Update"
+            }
+        }
+    },
+    "Common": {
+        "Buttons": {
+            "Submit": {
+                "Title": "Submit",
+                "AriaLabel": "Submit button"
+            },
+            "Login": {
+                "Title": "Log In",
+                "AriaLabel": "Log In button"
+            }
+        }
+    },
+    "Toolkit": {
+        "StayInformed": {
+            "Title": "Stay Informed!",
+            "Text": "Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email ",
+            "ReturnButton": "RETURN HOME"
+        },
+        "Dashboard": {
+            "Title": "Dashboard"
+        },
+        "ErrorPage": {
+            "Title": "We've encountered an error",
+            "Text": "We're sorry, but an error has occurred.",
+            "DefaultText": {
+                "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
+                "TextPt2": "or call us at"
+            }
+        },
+        "ErrorCodes": {
+            "PASSWORD_RESET_LINK_EXPIRED": "Your password reset link has expired."
+        },
+        "SessionExpired": {
+            "Text": {
+                "H1": "Session expired",
+                "Pt1": "You were away for a while so the system logged you out. To continue, please log in again.",
+                "Pt2": "Thank you."
+            },
+            "LogInButton": "Sign in"
+        },
+        "LoginLanding": {
+            "Text": "Please wait. You will be redirected to a destination soon..."
+        },
+        "Dialogs": {
+            "SessionWillExpire": {
+                "Title": "Your session will time-out soon",
+                "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+                "SignOut": "Sign Out",
+                "Continue": "Continue",
+                "RenewalFailed": "Session renewal failed. Please log out and log back in again."
+            },
+            "StudyRedirect": {
+                "Title": "Your participation",
+                "Text1": "Count Me In has an open project specific to your cancer type.",
+                "Text2": "Use the button below to join the {{study}} and learn more about this existing work.",
+                "GoToProject": "Go to project",
+                "Cancel": "Cancel"
+            }
+        },
+        "Warning": {
+            "Title": "Download Chrome or Safari to Continue",
+            "Text1": "This project is designed for use with the internet's safest and most popular browsers -- Chrome and Safari.",
+            "Text2": "It looks like you are using Internet Explorer. You will need to use another browser in order to join the project. We suggest you use Chrome or Safari to ensure that your experience with the website is smooth and secure.",
+            "Text3": {
+                "Pt1": "Click the following links to download",
+                "Pt2": "or",
+                "Pt3": "Chrome and Safari are always free.",
+                "Chrome": "Chrome (for Mac & PC)",
+                "Safari": "Safari (for Mac)"
+            },
+            "SubmitButton": "OK"
+        }
+    },
+    "Join": {
+        "Title": "Create your account",
+        "Description": "You will use this information to later sign in to your Brugada Project account.  The Brugada Project will use the email address provided to communicate with you.",
+        "FirstNameLabel": "First Name",
+        "LastNameLabel": "Last Name",
+        "EmailLabel": "Email address",
+        "PasswordLabel": "Password",
+        "PasswordPlaceholder": "your password",
+        "EmailPlaceholder": "yours@example.com",
+        "FirstNamePlaceholder": "Your first name",
+        "LastNamePlaceholder": "Your last name",
+        "RequiredError": "is required",
+        "ValidError": "Enter a valid",
+        "LengthMoreError": "length must be more than",
+        "PasswordPatternError": "Password should contain: <br>- at least one number <br> - at least one lower case letter <br>- at least one upper case letter",
+        "AlreadyRegistered": "Already registered?",
+        "SignInLink": "Sign in with existing account",
+        "Submit": "Submit"
+    },
+    "Login": {
+        "Title": "Log in to your account",
+        "Description": "You will use this information to later sign in to your Brugada Project account.  The Brugada Project will use the email address provided to communicate with you.",
+        "ForgotPassword": "Don't remember your password?",
+        "RestorePassword": "Restore password",
+        "Register": "If you haven't registered yet, please",
+        "RegisterLink": "do so here.",
+        "CheckEmail": "If you have previously registered, please check your email to reset your password"
+    },
+    "SDK": {
+        "SubmitButton": "Submit",
+        "CloseButton": "Close",
+        "AddButton": "Add",
+        "CancelButton": "Cancel",
+        "NextButton": "Next",
+        "PreviousButton": "Previous",
+        "SavingButton": "Saving",
+        "EditButton": "Edit",
+        "CompleteButton": "Complete",
+        "ReviewButton": "View",
+        "OpenButton": "Open",
+        "StartButton": "Start",
+        "AgreeButton": "I agree",
+        "ReportButton": "Report",
+        "NotAgreeButton": "I am not ready to agree",
+        "ValidateError": "Please complete all required fields.",
+        "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting.",
+        "SignInOut": {
+            "SignIn": "Log In",
+            "SignOut": "Log Out"
+        },
+        "LanguageSelector": {
+            "LanguageSelection": "language selection"
+        },
+        "UserActivities": {
+            "ActivityName": "Form",
+            "Summary": "Summary",
+            "ActivityStatus": "Status",
+            "ActivityDate": "Created",
+            "ActivityActions": "Actions"
+        },
+        "DatePicker": {
+            "Day": "Choose day...",
+            "Month": "Choose month...",
+            "Year": "Choose year...",
+            "January": "January",
+            "February": "February",
+            "March": "March",
+            "April": "April",
+            "May": "May",
+            "June": "June",
+            "July": "July",
+            "August": "August",
+            "September": "September",
+            "October": "October",
+            "November": "November",
+            "December": "December"
+        },
+        "DateLabel": {
+            "YYYY": "YYYY",
+            "MM": "MM",
+            "DD": "DD"
+        },
+        "UserMenu": {
+            "DashboardButton": "Dashboard",
+            "SignOutButton": "Sign Out",
+            "PrismButton": "Prism"
+        },
+        "DetailsPlaceholder": {
+            "PluralForm": "characters remaining",
+            "SingularForm": "character remaining"
+        },
+        "Title": {
+            "Default": "The Pan-Can Project",
+            "Alert": "Your session will time-out soon"
+        },
+        "EmailEntry": {
+            "InvalidEmail": "Please enter a valid email"
+        },
+        "Institutions": {
+            "Fields": {
+                "Name": "Physician Name (if applicable)",
+                "Institution": "Institution",
+                "InstitutionAny": "Hospital/Institution (if any)",
+                "City": "City",
+                "State": "State"
+            },
+            "Form": {
+                "OtherPhysician": "Other hospital/institution",
+                "OtherInstitution": "Other institution"
+            },
+            "PhysicianValidation": "Please fill out all required fields"
+        },
+        "MailAddress": {
+            "Fields": {
+                "Name": "Full Name",
+                "Country": "Country/Territory",
+                "Street1": "Street Address",
+                "Street2": "Apt/Floor #",
+                "State": {
+                    "State": "State",
+                    "Province": "Province",
+                    "State/Province/Region": "State/Province/Region"
+                },
+                "City": "City",
+                "Phone": "Phone",
+                "Zip": {
+                    "Zip Code": "Zip Code",
+                    "Postal Code": "Postal Code",
+                    "Zip/Postal Code": "Zip/Postal Code"
+                },
+                "Choose": "Choose {{field}} ..."
+            },
+            "Suggestion": {
+                "Title": "We have checked your address entry and have suggested changes that could help ensure delivery.",
+                "Subtitle": "Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
+                "Suggested": "Suggested:",
+                "AsEntered": "As Entered:"
+            },
+            "Error": {
+                "InvalidAddress": "Invalid address.",
+                "CannotVerify": "Could not verify address, please double-check your address.",
+                "UnknownVerifyError": "An unknown error occurred while verifying address.",
+                "FieldIsRequired": "{{field}} is required",
+                "FieldIsInvalid": "{{field}} has an invalid value",
+                "InvalidHouseNumber": "Street number could not be found",
+                "INTERNAL_SERVER_ERROR": "We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
+                "NOT_ACCEPTABLE": "The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
+                "NOT_FOUND": "The requested resource could not be found.",
+                "FORBIDDEN": "Unable to access the requested resource.",
+                "PAYMENT_REQUIRED": "Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
+                "UNAUTHORIZED": "Unable to access the requested resource, authorization failed.",
+                "BAD_REQUEST": "Malformed request. Please check the contents and retry.",
+                "PAYMENT_GATEWAY.ERROR": "The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
+                "MODE.UNAUTHORIZED": "This resource requires a production API Key to access.",
+                "MODE.CONFLICT": "API Key mode conflicted with parameter mode.",
+                "DATE.PARSE.FAILURE": "At least one date was formatted incorrectly and could not be parsed.",
+                "PARAMETER.FORBIDDEN": "The request could not be completed due to forbidden properties present in the parameters.",
+                "PARAMETER.REQUIRED": "Missing required parameter.",
+                "ADDRESS.PARAMETERS.INVALID_CHARACTER": "The parameters passed contained an invalid character.",
+                "ADDRESS.PARAMETERS.INVALID": "The parameters passed to create an Address were missing or invalid.",
+                "ADDRESS.COUNTRY.INVALID": "Invalid 'country', please provide a 2 character ISO country code.",
+                "ADDRESS.VERIFICATION.NOT_FOUND": "Address Not Found.",
+                "ADDRESS.VERIFICATION.FAILURE": "The address was unable to be verified.",
+                "ADDRESS.VERIFY.UNAVAILABLE": "Address verification is not available. Please try again.",
+                "ADDRESS.VERIFICATION.INVALID": "One of the verifications selected is invalid.",
+                "ADDRESS.VERIFY.FAILURE": "Unable to verify address.",
+                "ADDRESS.VERIFY.CARRIER_INVALID": "Unable to verify address using provided carrier.",
+                "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "Address verification is not available due to an upstream service not responding. Please try again.",
+                "ADDRESS.VERIFY.ONLY_US": "USPS can only validate US addresses.",
+                "ADDRESS.VERIFY.INTL_NOT_ENABLED": "International Verification not enabled on this account. Please contact support@easypost.com.",
+                "ADDRESS.VERIFY.MISSING_STREET": "Insufficient address data provided. A street must be provided.",
+                "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Insufficient address data provided. A city and state or a zip must be provided.",
+                "E.COUNTRY.UNSUPPORTED": "This country is not supported in this mode. Try in production mode.",
+                "E.ENGINE.UNAVAILABLE": "No verification engine is available to service this country. Please try again later.",
+                "E.QUERY.UNANSWERABLE": "We can not provide enough data in this country to satisfy this request. Please try again later.",
+                "E.ADDRESS.NOT_FOUND": "We could not find the entered address.",
+                "E.SECONDARY_INFORMATION.INVALID": "Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+                "E.SECONDARY_INFORMATION.MISSING": "Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+                "E.HOUSE_NUMBER.MISSING": "House number is missing.",
+                "E.HOUSE_NUMBER.INVALID": "We could not find the street number provided.",
+                "E.STREET.MISSING": "Street is missing.",
+                "E.STREET.INVALID": "Street is invalid.",
+                "E.BOX_NUMBER.MISSING": "Box number is missing.",
+                "E.BOX_NUMBER.INVALID": "Box number is invalid.",
+                "E.ADDRESS.INVALID": "Invalid city/state/ZIP.",
+                "E.ZIP.NOT_FOUND": "Zip not found.",
+                "E.ZIP.INVALID": "Zip invalid.",
+                "E.ZIP.PLUS4.NOT_FOUND": "Zip + 4 not found.",
+                "E.ADDRESS.MULTIPLE": "Multiple addresses were returned with the same zip.",
+                "E.ADDRESS.INSUFFICIENT": "Insufficient/incorrect address data.",
+                "E.ADDRESS.DUAL": "Dual address.",
+                "E.STREET.MAGNET": "Street address is ambiguous.",
+                "E.CITY_STATE.INVALID": "Unverifiable city / state.",
+                "E.STATE.INVALID": "Invalid State.",
+                "E.ADDRESS.DELIVERY.INVALID": "Invalid delivery address.",
+                "E.TIMED_OUT": "Exceeded max timeout.",
+                "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
+                "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+            },
+            "UseAsEntered": "We are unable to confirm that the address is valid. Please check this box to use the address as entered."
+        },
+        "TooltipAlt": "Information",
+        "Validators": {
+            "DateNavyValidationRule": "Entered date is invalid",
+            "Autocomplete": "No {{control}} is found"
+        },
+        "SubjectPanel": {
+            "Link": "Return to subject look-up",
+            "InvitationCode": "Subject Invitation Code:",
+            "Email": "Email:",
+            "Name": "Name:",
+            "ShortId": "Subject Short ID/HRUID:"
+        },
+        "AdminActionPanel": {
+            "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+            "EditButton": "Edit"
+        }
+    }
+}

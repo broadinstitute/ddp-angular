@@ -1,0 +1,55 @@
+<header class="header">
+  <div class="header__container">
+    <a class="header__logo" [routerLink]="Route.Home">
+      <img
+        class="header__logo-img"
+        src="/assets/images/logo-transparent.png"
+        [alt]="'App.Header.LogoAlt' | translate"
+      />
+    </a>
+
+    <button class="toggle" [class.toggle--shown]="isNavigationShown" (click)="onToggleClick()">
+      <span class="toggle__bar"></span>
+      <span class="toggle__bar"></span>
+      <span class="toggle__bar"></span>
+    </button>
+
+    <nav class="header__nav" [class.header__nav--shown]="isNavigationShown" (click)="onNavClick($event)">
+      <ul class="link-list">
+        <li class="link-list__item">
+          <a class="link" [routerLink]="Route.About">
+            {{ 'App.Header.Links.About' | translate }}
+          </a>
+        </li>
+
+        <li class="link-list__item">
+          <a class="link" [routerLink]="Route.Team">
+            {{ 'App.Header.Links.Team' | translate }}
+          </a>
+        </li>
+
+        <li class="link-list__item">
+          <a class="link" [routerLink]="Route.FAQ">
+            {{ 'App.Header.Links.FAQ' | translate }}
+          </a>
+        </li>
+
+        <li class="link-list__item">
+          <a class="link" href="/assets/pdf/for-physicians.pdf" target="_blank">
+            {{ 'App.Header.Links.Physicians' | translate }}
+          </a>
+        </li>
+
+        <li class="link-list__item">
+          <button class="link" (click)="openMailingListModal()">
+            {{ 'App.Header.Links.MailingList' | translate }}
+          </button>
+        </li>
+      </ul>
+
+      <div class="pull-right">
+        <app-sign-in-out></app-sign-in-out>
+      </div>
+    </nav>
+  </div>
+</header>

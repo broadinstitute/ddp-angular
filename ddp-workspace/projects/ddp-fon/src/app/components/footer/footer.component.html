@@ -1,0 +1,82 @@
+<footer class="footer">
+  <div class="footer__container">
+    <div class="footer__left-side">
+      <ul class="link-list">
+        <li class="link-list__item">
+          <button class="link link-icon" (click)="onBackToTopClick()">
+            <mat-icon> arrow_upward</mat-icon>
+            {{ 'App.Footer.Links.Back' | translate }}
+          </button>
+        </li>
+
+        <li class="link-list__item">
+          <a class="link" [routerLink]="Route.About">
+            {{ 'App.Footer.Links.About' | translate }}
+          </a>
+        </li>
+
+        <li class="link-list__item">
+          <a class="link" [routerLink]="Route.Team">
+            {{ 'App.Footer.Links.Team' | translate }}
+          </a>
+        </li>
+
+        <li class="link-list__item">
+          <a class="link" [routerLink]="Route.FAQ">
+            {{ 'App.Footer.Links.FAQ' | translate }}
+          </a>
+        </li>
+
+        <li class="link-list__item">
+          <a class="link" href="/assets/pdf/for-physicians.pdf" target="_blank">
+            {{ 'App.Footer.Links.Physicians' | translate }}
+          </a>
+        </li>
+
+        <li class="link-list__item">
+          <button class="link" (click)="onMailingListClick()">
+            {{ 'App.Footer.Links.MailingList' | translate }}
+          </button>
+        </li>
+      </ul>
+
+      <img
+        src="/assets/images/logo-transparent-white.png"
+        class="footer__logo"
+        [alt]="'App.Footer.LogoAlt' | translate"
+      />
+    </div>
+
+    <div class="contact-us">
+      <h4 class="contact-us__label">
+        {{ 'App.Footer.Contact.Label' | translate }}
+      </h4>
+
+      <div>
+        <p class="info text-bold" [innerHTML]="'App.Footer.Contact.Email' | translate"></p>
+
+        <p class="info text-bold" [innerHTML]="'App.Footer.Contact.Phone' | translate"></p>
+
+        <p class="info" style="margin-top: 1.4rem">
+          {{ 'App.Footer.Contact.Project' | translate }}
+        </p>
+
+        <p class="info">
+          {{ 'App.Footer.Contact.Address1' | translate }}
+        </p>
+
+        <p class="info">
+          {{ 'App.Footer.Contact.Address2' | translate }}
+        </p>
+
+        <p class="info">
+          {{ 'App.Footer.Contact.Address3' | translate }}
+        </p>
+
+        <p class="info">
+          {{ 'App.Footer.Contact.Address4' | translate }}
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
