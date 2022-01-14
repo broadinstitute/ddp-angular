@@ -46,6 +46,7 @@ sdkConfig.baseUrl = location.origin + base;
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
 sdkConfig.localRegistrationUrl = sdkConfig.backendUrl + '/pepper/v1/register';
 sdkConfig.loginLandingUrl = DDP_ENV.loginLandingUrl;
+sdkConfig.usesVerticalStepper = ['FAMILY_HISTORY'];
 
 /**
  * Toolkit Config
