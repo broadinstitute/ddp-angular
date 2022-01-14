@@ -59,7 +59,7 @@ import { ActivatedRoute, Router } from '@angular/router';
                 <button
                     mat-menu-item
                     *ngFor="let lang of getUnselectedLanguages()"
-                    (click)="changeLanguage(lang); clearURLParam()"
+                    (click)="changeLanguage(lang); shouldUpdateQueryParam ? updateURLParam() : clearURLParam();"
                 >
                     {{lang.displayName}}
                 </button>
@@ -87,6 +87,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class LanguageSelectorComponent implements OnInit, OnDestroy {
     @Input() isScrolled: boolean;
     @Input() languageQueryParam = 'lang';
+    @Input() shouldUpdateQueryParam = false;
     @Output() isVisible: EventEmitter<boolean> = new EventEmitter();
     @Output() beforeLanguageChange: EventEmitter<StudyLanguage> = new EventEmitter<StudyLanguage>();
     @Output() afterProfileLanguageChange: EventEmitter<void> = new EventEmitter();
@@ -246,6 +247,15 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         this.router.navigate([], {
             queryParams: {
                 [this.languageQueryParam]: null,
+            },
+            queryParamsHandling: 'merge'
+        });
+    }
+
+    public updateURLParam(): void {
+        this.router.navigate([], {
+            queryParams: {
+                [this.languageQueryParam]: this.currentLanguage.languageCode,
             },
             queryParamsHandling: 'merge'
         });
