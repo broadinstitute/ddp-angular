@@ -1,5 +1,6 @@
 import { BasicActivityDef } from '../model/core/basicActivityDef';
 
+/* eslint-disable max-len*/
 export const TestBostonCovidSurvey: BasicActivityDef = {
   activityCode: 'BASELINE_COVID',
   activityType: 'FORMS',

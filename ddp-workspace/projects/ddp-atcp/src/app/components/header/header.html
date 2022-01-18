@@ -10,6 +10,8 @@
     <ul>
       <li class="dropdown">
         <ddp-language-selector
+          languageQueryParam="locale"
+          [shouldUpdateQueryParam]="true"
           (beforeLanguageChange)="onBeforeLanguageChange()"
           (afterProfileLanguageChange)="onAfterProfileLanguageChange()"
         ></ddp-language-selector>

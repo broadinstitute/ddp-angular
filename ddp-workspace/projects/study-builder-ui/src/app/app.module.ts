@@ -63,12 +63,16 @@ export function translateFactory(translate: TranslateService,
         locationInitialized.then(() => {
             const locale = language.getAppLanguageCode();
             translate.setDefaultLang(locale);
-            translate.use(locale).subscribe(() => {
-                console.log(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
-            }, err => {
-                console.error(LOG_SOURCE, `Problem with '${locale}' language initialization:`, err);
-            }, () => {
-                resolve(null);
+            translate.use(locale).subscribe({
+                next: () => {
+                    console.log(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
+                },
+                error: err => {
+                    console.error(LOG_SOURCE, `Problem with '${locale}' language initialization:`, err);
+                },
+                complete: () => {
+                    resolve(null);
+                }
             });
         });
     });

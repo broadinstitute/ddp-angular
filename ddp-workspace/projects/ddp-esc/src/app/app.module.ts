@@ -90,12 +90,16 @@ export function translateFactory(translate: TranslateService, injector: Injector
     locationInitialized.then(() => {
       const locale = 'en';
       translate.setDefaultLang(locale);
-      translate.use(locale).subscribe(() => {
-        logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
-      }, err => {
-        logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization:`, err);
-      }, () => {
-        resolve(null);
+      translate.use(locale).subscribe({
+        next: () => {
+          logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
+        },
+        error: err => {
+          logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization:`, err);
+        },
+        complete: () => {
+          resolve(null);
+        }
       });
     });
   });

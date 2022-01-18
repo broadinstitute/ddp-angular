@@ -601,6 +601,8 @@
         "PreviousButton": "Atrás",
         "SavingButton": "Guardando...",
         "EditButton": "Continuar",
+        "DeleteButton": "Eliminar",
+        "CancelBtn": "Cancelar",
         "SaveButton": "Guardar",
         "CompleteButton": "Editar",
         "ReviewButton": "Ver",
@@ -683,7 +685,7 @@
         },
         "ModalActivityBlock": {
             "SaveButton": "Guardar",
-            "NumQuestionsAnswered": "{{number}} preguntas respondidas",
+            "NumQuestionsAnswered": "{{number}}/{{total}} preguntas respondidas",
             "Complete": "Completar",
             "EditButton": "Editar",
             "DeleteButton": "Eliminar",
@@ -793,6 +795,7 @@
         "AdminActionPanel": {
             "ActivityEdit": "Haga clic en el botón Edit (Editar) para desbloquear la función de edición momentáneamente. Sus cambios se guardarán a medida que avance. Cuando haga clic para enviar o navegue a otro sitio, la actividad se volverá a bloquear automáticamente.",
             "EditButton": "Editar"
-        }
+        },
+        "ConfirmDeletion": "¿Está seguro de que desea eliminar esta información?"
     }
 }

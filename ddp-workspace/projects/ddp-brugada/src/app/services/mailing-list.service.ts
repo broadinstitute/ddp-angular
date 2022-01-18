@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { MailingListModalComponent } from '../components/mailing-list-modal/mailing-list-modal.component';
+import { FuncType } from 'ddp-sdk';
 
 type Cache = Array<{
   node: Node;
@@ -22,7 +23,7 @@ export class MailingListService {
 
     nodes.forEach(node => {
       const eventType = 'click';
-      const handler = (e: MouseEvent) => {
+      const handler: FuncType<any> = (e: MouseEvent) => {
         e.preventDefault();
 
         this.openDialog();

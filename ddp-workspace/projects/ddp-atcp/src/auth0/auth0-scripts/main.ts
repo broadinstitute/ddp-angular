@@ -41,7 +41,7 @@ const translator = Translator.create(`${baseUrl}${languageDataDir}`);
 prepareUiElements(baseUrl);
 
 $('[data-toggle="tooltip"]').tooltip({
-  title: function () {
+  title: function() {
     const el = $(this);
     const translateKey = el.data('translate-tooltip');
 
@@ -106,7 +106,7 @@ if (!isResetPasswordPage) {
           window.location.assign(result.result_url.split('?')[0]);
         }
       },
-      error: error => {
+      error: () => {
         showModal(
           translator.currentDictionary.modal.SuccessChangedPassword,
           true
