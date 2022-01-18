@@ -86,16 +86,16 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
         tap(participantGuid => this.session.setParticipant(participantGuid)),
         switchMap(() => this.workflowAgent.fromParticipantList()),
       )
-      .subscribe(
-        () => {
+      .subscribe({
+        next: () => {
           this.disableAddParticipantsButton = false;
           this.activityService.setCurrentActivity(null);
           this.router.navigateByUrl(RouterResources.Survey);
         },
-        () => {
+        error: () => {
           this.disableAddParticipantsButton = false;
         }
-      );
+      });
   }
 
   private getParticipants(): void {

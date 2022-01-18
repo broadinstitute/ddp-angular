@@ -12,6 +12,7 @@ import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
 import { ConfigurationService } from '../../configuration.service';
 import { StudyConfigObjectFactory } from '../../model/core-extended/studyConfigObjectFactory';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { FuncType } from 'ddp-sdk';
 
 @Component({
     selector: 'app-manage-list',
@@ -44,8 +45,8 @@ export class ManageListComponent implements OnInit, ControlValueAccessor {
         this.controlDirective.control.updateValueAndValidity();
     }
 
-    onChange = (event: {options: Array<PicklistOptionDef>; groups: Array<PicklistGroupDef>}) => {};
-    onTouched = () => {};
+    onChange: FuncType<void> = (event: {options: Array<PicklistOptionDef>; groups: Array<PicklistGroupDef>}) => {};
+    onTouched: FuncType<void> = () => {};
 
     writeValue({ options, groups }: { options: Array<PicklistOptionDef>; groups: Array<PicklistGroupDef> }): void {
         this.groups = [...groups];

@@ -110,4 +110,9 @@ export class ConfigurationService {
      * to display an error for each field in mailing address form.
      */
     mailAddressFormErrorFormatter: MailAddressFormErrorFormatter | null = null;
+    /**
+     * Can be used to show answered questions count instead of "Complete" message
+     * when all questions in nested modal activity are answered
+     */
+    alwaysShowQuestionsCountInModalNestedActivity = false;
 }

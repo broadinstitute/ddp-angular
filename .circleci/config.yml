@@ -12,9 +12,9 @@ references:
       - *npm_cache_key
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-    "basil osteo brain angio mbc testboston mpc prion atcp rarex rgp esc cgc circadia pancan singular brugada"
+    "basil dsm-ui osteo brain angio mbc testboston mpc prion atcp rarex rgp esc cgc circadia pancan singular brugada"
   study_guids: &study_guids
-    "basil CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc circadia cmi-pancan singular brugada"
+    "basil NA CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc circadia cmi-pancan singular brugada"
 
 # Container for all the builds
 executors:
@@ -145,29 +145,36 @@ commands:
         type: string
     steps:
       - run:
-          name: <<parameters.study_key>> generate config files and copy pepperConfig.js
-          command: |
-            set -u
-            ./build-study.sh v1 $ENVIRONMENT . <<parameters.study_key>> "$STUDY_GUID" --config
-            cd ddp-workspace
-            CONFIG_DIR="${OUTPUT_DIR}/assets/config"
-            mkdir -p $CONFIG_DIR
-            CONFIG_FILE_SRC_PATH="${ANGULAR_PROJECT_DIR_PATH}/output-config/pepperConfig.js"
-            cp  $CONFIG_FILE_SRC_PATH $CONFIG_DIR
-            echo "$CONFIG_FILE_SRC_PATH has been copied to $CONFIG_DIR"
-
-            if [[ "<<parameters.study_key>>" == "atcp" ]]; then
-              cp "${ANGULAR_PROJECT_DIR_PATH}/output-config/app.yaml" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
-            fi
-          environment: #Setting this ENV variable prevents launching a new Docker within build-study-sh script
-            USE_DOCKER: false
-          working_directory: *repo_path
-      - run:
           name: Setup gcloud context
           command: |
             set -u
             readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+      - run:
+          name: <<parameters.study_key>> generate config files and copy pepperConfig.js
+          command: |
+            set -u
+            if [[ "<<parameters.study_key>>" != "dsm-ui" ]]; then
+              ./build-study.sh v1 $ENVIRONMENT . <<parameters.study_key>> "$STUDY_GUID" --config
+              cd ddp-workspace
+              CONFIG_DIR="${OUTPUT_DIR}/assets/config"
+              mkdir -p $CONFIG_DIR
+              CONFIG_FILE_SRC_PATH="${ANGULAR_PROJECT_DIR_PATH}/output-config/pepperConfig.js"
+              cp  $CONFIG_FILE_SRC_PATH $CONFIG_DIR
+              echo "$CONFIG_FILE_SRC_PATH has been copied to $CONFIG_DIR"
+
+              if [[ "<<parameters.study_key>>" == "atcp" ]]; then
+                cp "${ANGULAR_PROJECT_DIR_PATH}/output-config/app.yaml" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
+              fi
+            else
+              cd ddp-workspace
+              CONFIG_DIR="${OUTPUT_DIR}/assets/js"
+              mkdir -p $CONFIG_DIR
+              gcloud --project="broad-ddp-${ENVIRONMENT}" secrets versions access latest --secret="study-manager-ui-config" > "${CONFIG_DIR}/ddp_config.js"
+            fi
+          environment: #Setting this ENV variable prevents launching a new Docker within build-study-sh script
+            USE_DOCKER: false
+          working_directory: *repo_path
       - run:
           name: Deploy to GAE
           command: |

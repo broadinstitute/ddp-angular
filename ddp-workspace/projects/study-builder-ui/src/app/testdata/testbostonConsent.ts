@@ -1,5 +1,6 @@
 import { ConsentActivityDef } from '../model/core/consentActivityDef';
 
+/* eslint-disable max-len*/
 export const TestBostonConsent: ConsentActivityDef = {
   activityCode: 'CONSENT',
   activityType: 'FORMS',
