@@ -6,11 +6,13 @@ type Formatter = (inputState: TextInputState) => TextInputState;
 
 describe('InvitationCodeFormatterDirective', () => {
     let loggingServiceSpy: jasmine.SpyObj<LoggingService>;
-    const formatterObject = new InvitationCodeInputFormatter(loggingServiceSpy);
-    const formatter: Formatter = new InvitationCodeInputFormatter(loggingServiceSpy).format;
+    let formatterObject: InvitationCodeInputFormatter;
+    let formatter: Formatter;
 
     beforeAll(() => {
         loggingServiceSpy = jasmine.createSpyObj('LoggingService', ['logDebug']);
+        formatterObject = new InvitationCodeInputFormatter(loggingServiceSpy);
+        formatter = new InvitationCodeInputFormatter(loggingServiceSpy).format;
     });
 
     it('blank works', () => {
