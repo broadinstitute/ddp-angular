@@ -59,6 +59,7 @@ export class UserPreferencesServiceAgent extends UserServiceAgent<UserProfile> {
     } else {
       return this.patchObservable('/profile', JSON.stringify(profile), {}, true)
         .pipe(
+          // eslint-disable-next-line  arrow-body-style
           catchError(e => {
             return throwError(e);
           }),

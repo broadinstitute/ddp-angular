@@ -267,7 +267,11 @@ export class WelcomeComponent implements OnInit {
     }
 
     public scrollTo(target: HTMLElement): void {
-        this.isIE ? this.simpleScrolling(target) : this.smoothScrolling(target);
+        if (this.isIE) {
+            this.simpleScrolling(target);
+        } else {
+            this.smoothScrolling(target);
+        }
     }
 
     private simpleScrolling(target: HTMLElement): void {

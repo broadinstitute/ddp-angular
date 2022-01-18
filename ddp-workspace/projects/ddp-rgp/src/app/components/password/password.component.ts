@@ -42,18 +42,18 @@ export class PasswordComponent implements OnInit {
 
     this.irbPassword.checkPassword(password).pipe(
       take(1)
-    ).subscribe(
-      response => {
+    ).subscribe({
+      next: response => {
         if (response) {
           this.router.navigateByUrl('');
         } else {
           this.setErrorMessage('PasswordPage.PasswordWrongError');
         }
       },
-      () => {
+      error: () => {
         this.setErrorMessage('PasswordPage.OtherError');
       }
-    );
+    });
   }
 
   private setErrorMessage(key: string): void {
