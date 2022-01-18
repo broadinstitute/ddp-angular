@@ -32,6 +32,7 @@ export class ChangeLanguageRedirectComponent implements OnInit {
     @Inject('ddp.config') private config: ConfigurationService) {
   }
 
+  // TODO: get rid of Promises in the component (replace with Observables)
   public ngOnInit(): void {
     // Get the specified language and specified destination and store for later
     const queryParamPromise: Promise<void> = this.getQueryParamInfo();

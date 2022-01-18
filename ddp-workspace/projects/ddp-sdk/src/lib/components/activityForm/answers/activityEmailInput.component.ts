@@ -104,8 +104,6 @@ export class ActivityEmailInput implements OnInit, OnChanges, OnDestroy {
         const EmailPatternValidator = Validators.pattern(EMAIL_REGEXP);
 
         if (this.block.confirmEntry) {
-            // eslint-disable-next-line deprecation/deprecation
-            // TODO: refactor the deprecation
             this.emailForm = this.formBuilder.group({
                 email: new FormControl({
                     value: this.block.answer,
@@ -116,7 +114,7 @@ export class ActivityEmailInput implements OnInit, OnChanges, OnDestroy {
                     disabled: this.readonly
                 }, EmailPatternValidator)
             }, {
-                validator: this.fieldsMatcher('email', 'confirmEmail')
+                validators: this.fieldsMatcher('email', 'confirmEmail')
             });
         } else {
             this.emailForm = new FormGroup({
