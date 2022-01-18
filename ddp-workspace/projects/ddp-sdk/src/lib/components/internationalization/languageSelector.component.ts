@@ -59,7 +59,7 @@ import { ActivatedRoute, Router } from '@angular/router';
                 <button
                     mat-menu-item
                     *ngFor="let lang of getUnselectedLanguages()"
-                    (click)="changeLanguage(lang); clearURLParam()"
+                    (click)="changeLanguage(lang); shouldUpdateQueryParam ? updateURLParam() : clearURLParam();"
                 >
                     {{lang.displayName}}
                 </button>
@@ -86,6 +86,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class LanguageSelectorComponent implements OnInit, OnDestroy {
     @Input() isScrolled: boolean;
+    @Input() languageQueryParam = 'lang';
+    @Input() shouldUpdateQueryParam = false;
     @Output() isVisible: EventEmitter<boolean> = new EventEmitter();
     @Output() beforeLanguageChange: EventEmitter<StudyLanguage> = new EventEmitter<StudyLanguage>();
     @Output() afterProfileLanguageChange: EventEmitter<void> = new EventEmitter();
@@ -96,7 +98,6 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
     private anchor: CompositeDisposable;
     private readonly defaultIconUrl: string = 'assets/images/globe.svg#Language-Selector-3';
     private readonly LOG_SOURCE = 'LanguageSelectorComponent';
-    private readonly LANGUAGE_QUERY_PARAM = 'lang';
     @ViewChild(PopupWithCheckboxComponent, { static: false }) private popup: PopupWithCheckboxComponent;
 
     constructor(
@@ -184,7 +185,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
                 const langObs: Observable<any> = this.language.changeLanguageObservable(lang.languageCode);
                 let sub;
                 // not update user profile language if language was taken from URL
-                if (this.hasUserProfile() && !this.route.snapshot.queryParamMap.get(this.LANGUAGE_QUERY_PARAM)) {
+                if (this.hasUserProfile() && !this.route.snapshot.queryParamMap.get(this.languageQueryParam)) {
                     sub = this.launchPopup();
                     const sub2 = this.updateProfileLanguage().pipe(concatMap(() => langObs)).subscribe();
                     this.anchor.addNew(sub2);
@@ -203,7 +204,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
     public findCurrentLanguage(): Observable<boolean> {
         const langFromURLSubject = new BehaviorSubject<StudyLanguage|null>(null);
         this.route.queryParamMap.pipe(
-            map(params => params.get(this.LANGUAGE_QUERY_PARAM)),
+            map(params => params.get(this.languageQueryParam)),
             filter(langCode => !!langCode),
             map(langCode => this.studyLanguages.find(studyLang => studyLang.languageCode === langCode)))
             .subscribe(langFromURLSubject);
@@ -239,7 +240,16 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
     public clearURLParam(): void {
         this.router.navigate([], {
             queryParams: {
-                [this.LANGUAGE_QUERY_PARAM]: null,
+                [this.languageQueryParam]: null,
+            },
+            queryParamsHandling: 'merge'
+        });
+    }
+
+    public updateURLParam(): void {
+        this.router.navigate([], {
+            queryParams: {
+                [this.languageQueryParam]: this.currentLanguage.languageCode,
             },
             queryParamsHandling: 'merge'
         });
