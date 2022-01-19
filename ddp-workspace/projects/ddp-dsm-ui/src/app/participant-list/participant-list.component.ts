@@ -1068,6 +1068,9 @@ export class ParticipantListComponent implements OnInit {
     this.activePage = 1;
     this.rowsPerPage = this.role.getUserSetting().getRowsPerPage();
   }
+  getUtilStatic(){
+    return Utils;
+  }
 
   public setSelectedFilterName(filterName): void {
     this.selectedFilterName = filterName;
@@ -1731,8 +1734,12 @@ export class ParticipantListComponent implements OnInit {
     Utils.downloadCurrentData(
       this.participantList, paths, columns,
       'Participants-'  + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION,
-      false
+      false, this.activityDefinitionList
     );
+  }
+
+  isMultipleOrSingleSelectMode( qDef: QuestionDefinition ) {
+    return (qDef.selectMode === 'MULTIPLE' || qDef.selectMode === 'SINGLE');
   }
 
   getOptionDisplay(options: NameValue[], key: string): string {

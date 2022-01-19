@@ -24,12 +24,12 @@ export class Data {
   }
 
   getMultipleDatesForActivity( activityData: ActivityData, name: string ) {
-    let answers: Array<QuestionAnswer> = [];
+    let answers: Array<QuestionAnswer> = new Array();
     for (let x of this.activities) {
       if (x.activityCode === activityData.activityCode) {
         for (let y of x.questionsAnswers) {
           if (y.stableId === name) {
-            answers.push(y);
+            answers.push( y );
           }
         }
       }
@@ -55,6 +55,32 @@ export class Data {
       json.ddp, medicalProviders, json.activities, json.address, json.invitations, json.computed
     );
   }
+
+  public getGroupedOptionsForAnswer(activityData: ActivityData, name: string, questionAnswer:string){
+    let answers: Array<string> = new Array();
+    for (let x of this.activities) {
+      if (x.activityCode === activityData.activityCode) {
+        for (let y of x.questionsAnswers) {
+          if (y.stableId === name) {
+            for (let answer of y.answer) {
+              if (answer === questionAnswer) {
+                if (y.groupedOptions) {
+                  let ans = y.groupedOptions[ answer ];
+                  if (ans) {
+                    for (let a of ans) {
+                      answers.push( a );
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    return answers.reverse();
+  }
+
 
   getActivityDataByCode(code: string): any {
     return this.activities.find(x => x.activityCode === code);

@@ -19,6 +19,10 @@ export class ActivityDataComponent {
     return this.util;
   }
 
+  getUtilStatic() {
+    return Utils;
+  }
+
   getActivityName(activityDefinition: ActivityDefinition) {
     return activityDefinition.activityName;
   }
