@@ -18,6 +18,8 @@ import { ModalComponent } from '../modal/modal.component';
 import { Utils } from '../utils/utils';
 import { TissueListWrapper } from './tissue-list-wrapper.model';
 import { FieldSettings } from '../field-settings/field-settings.model';
+import { Assignee } from '../assignee/assignee.model';
+import { AssigneeParticipant } from '../participant-list/models/assignee-participant.model';
 
 @Component({
   selector: 'app-tissue-view-page',
@@ -44,6 +46,8 @@ export class TissueListComponent implements OnInit {
   parent = 'tissueList';
   loadedTimeStamp: string;
   selectedTissueStatus: string;
+  assignees: Array<Assignee> = [];
+  assignee: Assignee;
 
   showFilters = false;
   showCustomizeViewTable = false;
@@ -55,6 +59,9 @@ export class TissueListComponent implements OnInit {
   edit = true;
   newFilterModal = false;
   openTissueModal = false;
+  openAssigneeModal = false;
+  assignTissue: boolean = false;
+  isAssignButtonDisabled: boolean = true;
 
   sortField: string = null;
   sortDir: string = null;
@@ -81,6 +88,7 @@ export class TissueListComponent implements OnInit {
     data: 'Participant',
     oD: 'Onc History',
     t: 'Tissue',
+    sm: 'sm id',
   };
 
   selectedFilterName = '';
@@ -168,7 +176,6 @@ export class TissueListComponent implements OnInit {
       this.allColumns[ source ] = new Array<Filter>();
       this.selectedColumns[ source ] = new Array<Filter>();
     }
-    //    this.getESColumns();
     this.getFieldSettings();
     for (const col of this.allColumns[ Statics.TISSUE_ALIAS ]) {
       this.allFieldNames.add(col.participantColumn.tableAlias + Statics.DELIMITER_ALIAS + col.participantColumn.name);
@@ -176,6 +183,10 @@ export class TissueListComponent implements OnInit {
     for (const col of this.allColumns[ Statics.ONCDETAIL_ALIAS ]) {
       this.allFieldNames.add(col.participantColumn.tableAlias + Statics.DELIMITER_ALIAS + col.participantColumn.name);
     }
+  }
+
+  assigneeSelected( evt: any ) {
+    this.assignee = evt;
   }
 
   private checkRight(defaultFilter: boolean): void {
@@ -195,10 +206,11 @@ export class TissueListComponent implements OnInit {
             this.getDefaultFilterName();
             this.getAllFilters(true);
             this.getTissueListData(defaultFilter);
+            this.getAssignees(localStorage.getItem( ComponentService.MENU_SELECTED_REALM ));
           }
         });
         if (!allowedToSeeInformation) {
-          this.errorMessage = 'You are not allowed to see information of the selected realm at that category';
+          this.errorMessage = 'You are not allowed to see information of the selected study at that category';
         }
       },
       () => {
@@ -213,11 +225,11 @@ export class TissueListComponent implements OnInit {
       this.realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       //      this.compService.realmMenu = this.realm;
     } else {
-      this.errorMessage = 'Please select a realm';
+      this.errorMessage = 'Please select a study';
     }
     window.scrollTo(0, 0);
     if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) == null) {
-      this.errorMessage = 'Please select a realm';
+      this.errorMessage = 'Please select a study';
       return;
     } else {
       //      this.setAllColumns();
@@ -261,7 +273,11 @@ export class TissueListComponent implements OnInit {
             if (filter.participantColumn.tableAlias === key) {
               // TODO - can be changed to add all after all DDPs are migrated
               if (this.hasESData) {
-                this.allColumns[ key ].push(filter);
+                if (filter.participantColumn.tableAlias === 'sm') {
+                  this.allColumns[ 't' ].push( filter );
+                } else{
+                  this.allColumns[ key ].push( filter );
+                }
                 if (filter.participantColumn.tableAlias !== 'data') {
                   const t = filter.participantColumn.object != null ? filter.participantColumn.object : filter.participantColumn.tableAlias;
                   this.allFieldNames.add(t + Statics.DELIMITER_ALIAS + filter.participantColumn.name);
@@ -282,9 +298,14 @@ export class TissueListComponent implements OnInit {
                     this.allFieldNames.add(t + Statics.DELIMITER_ALIAS + filter.participantColumn.name);
                   }
                 } else if (filter.participantColumn.tableAlias !== 'data') {
-                  this.allColumns[ key ].push(filter);
-                  const t = filter.participantColumn.object != null ? filter.participantColumn.object : filter.participantColumn.tableAlias;
-                  this.allFieldNames.add(t + Statics.DELIMITER_ALIAS + filter.participantColumn.name);
+                  if (filter.participantColumn.tableAlias === 'sm') {
+                    this.allColumns[ 't' ].push( filter );
+                  }
+                  else {
+                    this.allColumns[ key ].push( filter );
+                  }
+                  const t = filter.participantColumn.object !== null && filter.participantColumn.object !== undefined ? filter.participantColumn.object : filter.participantColumn.tableAlias;
+                  this.allFieldNames.add( t + Statics.DELIMITER_ALIAS + filter.participantColumn.name );
                 }
               }
             }
@@ -307,7 +328,7 @@ export class TissueListComponent implements OnInit {
         }
       },
       err => {
-        this.errorMessage = 'Could not getting the field settings for this realm. Please contact your DSM developer\n ' + err;
+        this.errorMessage = 'Could not getting the field settings for this study. Please contact your DSM developer\n ' + err;
       },
     );
   }
@@ -387,7 +408,6 @@ export class TissueListComponent implements OnInit {
             this.tissueListOncHistories = [];
             const jsonData = data;
             this.tissueListWrappers = this.parseTissueListWrapperData(jsonData);
-            console.log(this.tissueListWrappers);
             this.originalTissueListWrappers = this.tissueListWrappers;
 
             if (this.defaultFilter != null && this.defaultFilter.filters != null) {
@@ -462,7 +482,6 @@ export class TissueListComponent implements OnInit {
               for (const key of Object.keys(this.tissueListsMap)) {
                 this.tissueListOncHistories.push(this.tissueListsMap[ key ]);
               }
-
             }
           }
           this.loading = false;
@@ -505,13 +524,11 @@ export class TissueListComponent implements OnInit {
       this.selectedColumns[ parent ] = [];
     }
     if (this.hasThisColumnSelected(this.selectedColumns[ parent ], column)) {
-      console.log(this.selectedColumns[ parent ]);
       const f = this.selectedColumns[ parent ].find(item => {
         return item.participantColumn.tableAlias === column.participantColumn.tableAlias
           && item.participantColumn.name === column.participantColumn.name;
       });
       const index = this.selectedColumns[ parent ].indexOf(f);
-      console.log(index);
       this.selectedColumns[ parent ].splice(index, 1);
     } else {
       this.selectedColumns[ parent ].push(column);
@@ -641,6 +658,15 @@ export class TissueListComponent implements OnInit {
     this.showModal = true;
     this.newFilterModal = true;
     this.openTissueModal = false;
+    this.openAssigneeModal = false
+    this.modal.show();
+  }
+
+  showAssignModal(){
+    this.showModal = true;
+    this.newFilterModal = false;
+    this.openTissueModal = false;
+    this.openAssigneeModal = true
     this.modal.show();
   }
 
@@ -802,7 +828,6 @@ export class TissueListComponent implements OnInit {
         }
       }
     }
-    console.log(savedFilter);
 
     this.dsmService.applyFilter(savedFilter, this.realm, this.parent, null).subscribe(
       data => {
@@ -1073,7 +1098,7 @@ export class TissueListComponent implements OnInit {
           data => {
             const participant: Participant = Participant.parse(data[0]);
             if (participant == null) {
-              this.errorMessage = 'Participant  not found';
+              this.errorMessage = 'Participant not found';
             }
             if (name === 't') {
               this.openTissue(tissueListWrapper.tissueList.oncHistoryDetails, participant, tissueId);
@@ -1121,7 +1146,7 @@ export class TissueListComponent implements OnInit {
       }
     }
     if (message.length > 0) {
-      message = 'The following columns do not apply in this realm: ' + message;
+      message = 'The following columns do not apply in this study: ' + message;
     }
     return message;
   }
@@ -1528,6 +1553,9 @@ export class TissueListComponent implements OnInit {
       } else if (t === 'inst') {
         t = 'm';
       }
+      else if (t === 'sm') {
+        t = 't';
+      }
       for (const f of this.allColumns[ t ]) {
         if (f.participantColumn.name === filter.participantColumn.name) {
           const index = this.allColumns[ t ].indexOf(f);
@@ -1565,5 +1593,72 @@ export class TissueListComponent implements OnInit {
     this.selectedColumns['oD'] = this.defaultOncHistoryColumns;
     this.selectedColumns['t'] = this.defaultTissueColumns;
     return this.selectedColumns;
+  }
+
+  assign() {
+    this.additionalMessage = null;
+    if (this.assignee != null && this.tissueListWrappers.length > 0) {
+      let assignParticipants: Array<AssigneeParticipant> = [];
+      for (let tissue of this.tissueListWrappers) {
+        if (tissue.isSelected) {
+
+          assignParticipants.push( new AssigneeParticipant( tissue.tissueList.participantId, this.assignee.assigneeId,
+            this.assignee.email, tissue.data.profile[ 'shortId' ] ) );
+        }
+      }
+      this.deselect();
+      this.dsmService.assignParticipant( localStorage.getItem( ComponentService.MENU_SELECTED_REALM ), false,
+        this.assignTissue, JSON.stringify( assignParticipants ) ).subscribe(// need to subscribe, otherwise it will not send!
+        data => {
+          let result = Result.parse( data );
+          if (result.code !== 200) {
+            this.additionalMessage = result.body;
+          }
+          this.assignTissue = false;
+        },
+        err => {
+          if (err._body === Auth.AUTHENTICATION_ERROR) {
+            this.router.navigate( [Statics.HOME_URL] );
+          }
+          this.additionalMessage = 'Error - Assigning Tissues, Please contact your DSM developer';
+        }
+      );
+    }
+    this.modal.hide();
+    window.scrollTo( 0, 0 );
+  }
+
+  deselect() {
+    for (let tissueListWrapper of this.tissueListWrappers) {
+      if (tissueListWrapper.isSelected) {
+        tissueListWrapper.isSelected = false;
+      }
+    }
+  }
+
+  checkboxChecked() {
+    this.isAssignButtonDisabled = true;
+    for (let tissueListWrapper of this.tissueListWrappers) {
+      if (tissueListWrapper.isSelected) {
+        this.isAssignButtonDisabled = false;
+        break;
+      }
+    }
+  }
+
+  hasAssignees() {
+    return Array.isArray(this.assignees) && this.assignees.length > 0;
+  }
+
+  private getAssignees( realm: string ) {
+    this.dsmService.getAssignees(realm).subscribe(
+      data =>{
+        this.assignees.push( new Assignee( '-1', 'Remove Assignee', '' ) );
+        data.forEach( ( val ) => {
+          this.assignees.push( Assignee.parse( val ) );
+        } );
+      },
+      err =>{console.log(err);}
+    );
   }
 }

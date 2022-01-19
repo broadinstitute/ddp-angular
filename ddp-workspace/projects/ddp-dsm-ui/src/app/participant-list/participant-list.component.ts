@@ -113,7 +113,7 @@ export class ParticipantListComponent implements OnInit {
   participantsSize = 0;
   jsonPatch: any;
   viewFilter: any;
-
+  private start: number;
 
   constructor(private role: RoleService, private dsmService: DSMService, private compService: ComponentService,
                private router: Router, private auth: Auth, private route: ActivatedRoute, private util: Utils) {
@@ -135,7 +135,7 @@ export class ParticipantListComponent implements OnInit {
   ngOnInit(): void {
     this.additionalMessage = null;
     if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) == null) {
-      this.additionalMessage = 'Please select a realm';
+      this.additionalMessage = 'Please select a study';
     } else {
       this.checkRight();
     }
@@ -207,6 +207,7 @@ export class ParticipantListComponent implements OnInit {
 
   private checkRight(): void {
     // assumption for now: profile parameters are always the same, only survey will be dynamic per ddp
+    this.start = new Date().getTime();
     this.loadingParticipants = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     this.setSelectedFilterName('');
     this.currentFilter = null;
@@ -227,7 +228,7 @@ export class ParticipantListComponent implements OnInit {
         if (!allowedToSeeInformation) {
           this.loadingParticipants = null;
           this.compService.customViews = null;
-          this.errorMessage = 'You are not allowed to see information of the selected realm at that category';
+          this.errorMessage = 'You are not allowed to see information of the selected study at that category';
         }
       },
       () => {
@@ -304,10 +305,15 @@ export class ParticipantListComponent implements OnInit {
                 this.settings[ key ] = [];
               }
               if (key === 'r') {
-                if (this.sourceColumns[ 'p' ] == null || this.sourceColumns[ 'p' ] == null) {
+                if (this.sourceColumns[ 'p' ] == null) {
                   this.sourceColumns[ 'p' ] = [];
                 }
                 this.sourceColumns[ 'p' ].push(filter);
+              } else if (key === 'sm') {
+                if (this.sourceColumns[ 't' ] == null) {
+                  this.sourceColumns[ 't' ] = [];
+                }
+                this.sourceColumns[ 't' ].push( filter );
               } else {
                 if (this.sourceColumns[ fieldSetting.fieldType ] == null) {
                   this.sourceColumns[ fieldSetting.fieldType ] = [];
@@ -693,6 +699,8 @@ export class ParticipantListComponent implements OnInit {
         this.sourceColumns[ 'p' ].push(filter);
       } else if (filter.participantColumn.tableAlias === 'inst') {
         this.sourceColumns[ 'm' ].push(filter);
+      }  else if (filter.participantColumn.tableAlias === 'sm') {
+        this.sourceColumns[ 't' ].push( filter );
       } else if (this.sourceColumns[ filter.participantColumn.tableAlias ] != null) {
         // TODO - can be changed to add all after all DDPs are migrated
         if (this.hasESData) {
@@ -763,6 +771,7 @@ export class ParticipantListComponent implements OnInit {
               this.selectedColumns[ key ] = [];
             });
             this.refillWithDefaultColumns();
+            this.sendAnalyticsMetric();
           },
           err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
@@ -827,6 +836,8 @@ export class ParticipantListComponent implements OnInit {
                   t = 'p';
                 } else if (t === 'inst') {
                   t = 'm';
+                } else if (t === 'sm') {
+                  t = 't';
                 } else if (t === 'participantData') {
                   t = filter.participantColumn.object;
                 }
@@ -903,6 +914,7 @@ export class ParticipantListComponent implements OnInit {
             this.loadedTimeStamp = Utils.getDateFormatted(date, Utils.DATE_STRING_IN_EVENT_CVS);
           }
           this.loadingParticipants = null;
+          this.sendAnalyticsMetric();
         },
         err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
@@ -995,6 +1007,7 @@ export class ParticipantListComponent implements OnInit {
   }
 
   public clearFilter(): void {
+    this.start = new Date().getTime();
     this.filterQuery = null;
     this.deselectQuickFilters();
     this.clearManualFilters();
@@ -1054,6 +1067,9 @@ export class ParticipantListComponent implements OnInit {
     this.jsonPatch = null;
     this.activePage = 1;
     this.rowsPerPage = this.role.getUserSetting().getRowsPerPage();
+  }
+  getUtilStatic(){
+    return Utils;
   }
 
   public setSelectedFilterName(filterName): void {
@@ -1400,7 +1416,8 @@ export class ParticipantListComponent implements OnInit {
     this.dataSources.forEach((value: string, key: string) => {
       if (this.selectedColumns != null && this.selectedColumns[ key ] != null) {
         for (const col of this.selectedColumns[ key ]) {
-          columns.push(col.participantColumn.tableAlias + '.' + col.participantColumn.name);
+          let name = col.participantColumn.name;
+          columns.push( col.participantColumn.tableAlias + '.' + name );
         }
       }
     });
@@ -1516,6 +1533,16 @@ export class ParticipantListComponent implements OnInit {
       });
     } else if (this.sortParent === 't') {
       //TODO: do we need the empty block statement ?
+    } else if (this.sortParent === 'proxy') {
+      this.participantList.sort( (c1, c2) => {
+        if (!c1.proxyData[0]) {
+          return 1;
+        } else if (!c2.proxyData[0]) {
+          return -1;
+        } else {
+          return this.sort( c1.proxyData[0].profile[this.sortField], c2.proxyData[0].profile[this.sortField], order, undefined, colType );
+        }
+      })
     } else if (this.sortParent === 'k') {
       this.participantList.map(participant =>
         participant.kits.sort((n, m) => this.sort(n[ this.sortField ], m[ this.sortField ], order, undefined, colType))
@@ -1707,8 +1734,12 @@ export class ParticipantListComponent implements OnInit {
     Utils.downloadCurrentData(
       this.participantList, paths, columns,
       'Participants-'  + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION,
-      false
+      false, this.activityDefinitionList
     );
+  }
+
+  isMultipleOrSingleSelectMode( qDef: QuestionDefinition ) {
+    return (qDef.selectMode === 'MULTIPLE' || qDef.selectMode === 'SINGLE');
   }
 
   getOptionDisplay(options: NameValue[], key: string): string {
@@ -1748,7 +1779,7 @@ export class ParticipantListComponent implements OnInit {
           }
           if (this.assignTissue) {
             if (this.assignee.assigneeId === '-1') {
-              pt.participant.assigneeMr = null;
+              pt.participant.assigneeTissue = null;
             } else {
               pt.participant.assigneeTissue = this.assignee.name;
             }
@@ -2274,5 +2305,10 @@ export class ParticipantListComponent implements OnInit {
       this.allFieldNames.add(tmp + '.' + filter.participantColumn.name);
      });
      this.orderColumns();
+  }
+
+  private sendAnalyticsMetric(  ) {
+    let passed = new Date().getTime() - this.start;
+    this.dsmService.sendAnalyticsMetric(this.getRealm(), passed).subscribe({});
   }
 }

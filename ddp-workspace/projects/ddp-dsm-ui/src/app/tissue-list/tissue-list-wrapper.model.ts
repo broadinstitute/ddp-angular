@@ -2,6 +2,9 @@ import { TissueList } from './tissue-list.model';
 import { Data } from '../participant-list/models/data.model';
 
 export class TissueListWrapper {
+
+  isSelected:boolean = false;
+
   constructor(public tissueList: TissueList, public data: Data) {
     this.tissueList = tissueList;
     this.data = data;

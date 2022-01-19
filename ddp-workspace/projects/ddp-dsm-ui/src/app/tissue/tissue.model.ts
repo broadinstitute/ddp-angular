@@ -1,3 +1,5 @@
+import {TissueSmId} from './sm-id.model';
+
 export class Tissue {
   deleted = false;
 
@@ -7,7 +9,8 @@ export class Tissue {
               public scrollsReceived: string, public skId: string, public smId: string, public sentGp: string, public firstSmId: string,
               public additionalValues: {}, public expectedReturn: string, public tissueReturnDate: string,
               public returnFedexId: string, public shlWorkNumber: string, public sequenceResults: string, public tumorPercentage: string,
-              public scrollsCount: number, public ussCount: number, public blocksCount: number, public hECount: number) {
+              public scrollsCount: number, public ussCount: number, public blocksCount: number, public hECount: number,
+              public scrollSMId: Array<TissueSmId>, public ussSMId: Array<TissueSmId>, public HESMId: Array<TissueSmId>) {
     this.tissueId = tissueId;
     this.oncHistoryDetailId = oncHistoryDetailId;
     this.tNotes = tNotes;
@@ -35,6 +38,9 @@ export class Tissue {
     this.ussCount = ussCount;
     this.blocksCount = blocksCount;
     this.hECount = hECount;
+    this.scrollSMId = scrollSMId;
+    this.ussSMId = ussSMId;
+    this.HESMId = HESMId;
   }
 
   static parse(json): Tissue {
@@ -48,6 +54,7 @@ export class Tissue {
       json.tissueSite, json.tumorType, json.hE, json.pathologyReport, json.collaboratorSampleId, json.blockSent,
       json.scrollsReceived, json.skId, json.smId, json.sentGp, json.firstSmId, additionalValues, json.expectedReturn,
       json.tissueReturnDate, json.returnFedexId, json.shlWorkNumber, json.sequenceResults, json.tumorPercentage,
-      json.scrollsCount, json.ussCount, json.blocksCount, json.hECount);
+      json.scrollsCount, json.ussCount, json.blocksCount, json.hECount,
+      TissueSmId.parseArray(json.scrollSMID), TissueSmId.parseArray(json.ussSMID), TissueSmId.parseArray(json.heSMID));
   }
 }

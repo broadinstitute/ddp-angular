@@ -202,6 +202,7 @@ export class Filter {
   public static BLOCKS_COUNT = new Filter(ParticipantColumn.BLOCKS_COUNT, Filter.NUMBER_TYPE);
   public static USS_COUNT = new Filter(ParticipantColumn.USS_COUNT, Filter.NUMBER_TYPE);
   public static H_E_COUNT = new Filter(ParticipantColumn.H_E_COUNT, Filter.NUMBER_TYPE);
+  public static SM_ID_TISSUE_VALUE = new Filter( ParticipantColumn.SM_ID_VALUE, Filter.TEXT_TYPE );
 
   // sample columns
   public static SAMPLE_SENT = new Filter(ParticipantColumn.SAMPLE_SENT, Filter.DATE_TYPE);
@@ -257,7 +258,7 @@ export class Filter {
     Filter.TISSUE_RECEIVED, Filter.TYPE_PX,
     Filter.GENDER, Filter.TISSUE_PROBLEM_OPTION, Filter.UNABLE_OBTAIN_TISSUE, Filter.DESTRUCTION_POLICY,
     Filter.COUNT_RECEIVED, Filter.TISSUE_TYPE,
-    Filter.TISSUE_SITE, Filter.TUMOR_TYPE, Filter.TISSUE_NOTES, Filter.H_E,
+    Filter.TISSUE_SITE, Filter.TUMOR_TYPE, Filter.TISSUE_NOTES, Filter.H_E, Filter.SM_ID_TISSUE_VALUE,
     Filter.COLLABORATOR_SAMPLE_ID, Filter.BLOCK_SENT, Filter.PATHOLOGY_REPORT,
     Filter.SCROLL_RECEIVED, Filter.SK_ID, Filter.SM_ID, Filter.SENT_GP,
     Filter.TISSUE_EXPECTED_RETURN, Filter.TISSUE_RETURNED, Filter.TISSUE_TRACKING_NUMBER,
@@ -493,8 +494,9 @@ export class Filter {
     return value;
   }
 
-  public static getFilterText(filter: Filter, parent: string): {} {
+  public static getFilterText(filter: Filter, p: string): {} {
     let filterText = {};
+    let parent = filter.participantColumn.tableAlias ? filter.participantColumn.tableAlias : p;
     if (filter.type === Filter.TEXT_TYPE || filter.type === Filter.NUMBER_TYPE || filter.type === Filter.DATE_TYPE
       || filter.type === Filter.EPOCH_DATE_TYPE
       || filter.type === Filter.COMPOSITE_TYPE || filter.type === Filter.SHORT_DATE_TYPE) {

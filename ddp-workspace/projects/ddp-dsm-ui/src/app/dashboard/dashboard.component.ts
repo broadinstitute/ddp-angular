@@ -87,7 +87,7 @@ export class DashboardComponent implements OnInit {
     if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) == null
       || localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === undefined
     ) {
-      this.additionalMessage = 'Please select a realm';
+      this.additionalMessage = 'Please select a study';
     } else {
       if (this.auth.authenticated()) {
         this.getDashboardInformation(this.router.url);
@@ -134,7 +134,7 @@ export class DashboardComponent implements OnInit {
               }
             });
             if (!this.allowedToSeeInformation) {
-              this.additionalMessage = 'You are not allowed to see information of the selected realm at that category';
+              this.additionalMessage = 'You are not allowed to see information of the selected study at that category';
               this.loadingDDPData = false;
             } else {
               this.additionalMessage = null;
@@ -169,7 +169,7 @@ export class DashboardComponent implements OnInit {
               }
             });
             if (!this.allowedToSeeInformation) {
-              this.additionalMessage = 'You are not allowed to see information of the selected realm at that category';
+              this.additionalMessage = 'You are not allowed to see information of the selected study at that category';
               this.loadingDDPData = false;
             } else {
               this.additionalMessage = null;
@@ -184,7 +184,7 @@ export class DashboardComponent implements OnInit {
         this.errorMessage = 'Error - Router has wrong url ';
       }
     } else {
-      this.additionalMessage = 'Please select a realm';
+      this.additionalMessage = 'Please select a study';
     }
   }
 
@@ -229,7 +229,7 @@ export class DashboardComponent implements OnInit {
       window.scrollTo(0, 0);
     } else {
       this.loadingDDPData = false;
-      this.additionalMessage = 'Please select a realm';
+      this.additionalMessage = 'Please select a study';
     }
   }
 

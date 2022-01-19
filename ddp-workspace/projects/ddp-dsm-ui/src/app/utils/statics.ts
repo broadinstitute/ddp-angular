@@ -24,9 +24,6 @@ export class Statics {
   public static MEDICALRECORD_DASHBOARD = 'medicalRecordDashboard';
   public static DYNAMIC_DASHBOARD = 'dynamicDashboard';
 
-  public static EMAIL_EVENT = 'emailEvent';
-  public static EMAIL_EVENT_FOLLOW_UP = 'emailEventFollowUp';
-
   public static SURVEY_CREATION = 'surveyCreation';
   public static PARTICIPANT_EVENT = 'participantEvent';
   public static PARTICIPANT_EXIT = 'participantExit';
@@ -60,6 +57,7 @@ export class Statics {
   public static PARTICIPANT_PAGE_URL: string = Statics.URL + 'participantPage';
 
   public static TISSUE_ALIAS = 't';
+  public static SM_ID_ALIAS = 'sm';
   public static ONCDETAIL_ALIAS = 'oD';
   public static ES_ALIAS = 'data';
   public static PT_ALIAS = 'p';

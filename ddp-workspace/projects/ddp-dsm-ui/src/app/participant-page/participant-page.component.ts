@@ -105,6 +105,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
   updatedFirstName: string;
   updatedLastName: string;
   updatedEmail: string;
+  updatedDNC: boolean = false;
   updatingParticipant = false;
   private taskType: string;
   private checkParticipantStatusInterval: any;
@@ -177,6 +178,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
     this.updatedFirstName = this.participant.data.profile[ 'firstName' ];
     this.updatedLastName = this.participant.data.profile[ 'lastName' ];
     this.updatedEmail = this.participant.data.profile[ 'email' ];
+    this.updatedDNC = this.participant.data.profile[ 'doNotContact' ];
   }
 
   private isReturnedUserAndParticipantTheSame(parsedData: any): boolean {
@@ -196,6 +198,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
       }
       case 'UPDATE_EMAIL': {
         this.participant.data.profile[ 'email' ] = this.updatedEmail;
+        break;
+      }
+      case 'UPDATE_DNC': {
+        this.participant.data.profile[ 'doNotContact' ] = this.updatedDNC;
         break;
       }
       default: {
@@ -275,6 +281,21 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
     } else {
       this.isEmailValid = false;
     }
+  }
+
+  updateDNC() {
+    this.updatingParticipant = true;
+    this.taskType = 'UPDATE_DNC';
+    this.payload[ 'data' ][ 'doNotContact' ] = this.updatedDNC;
+    this.dsmService.updateParticipant( JSON.stringify( this.payload ) ).subscribe(
+      data => {
+
+      },
+      err => {
+        this.openResultDialog( 'Error - Failed to update participant' );
+      }
+    );
+    delete this.payload['data' ][ 'doNotContact' ];
   }
 
   getLanguageName(languageCode: string): string {
@@ -383,13 +404,13 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
           tissues.push(new Tissue(null, oncHis.oncHistoryDetailId, null, null, null, null,
             null, null, null, null, null, null, null, null
             , null, null, null, null, null, null, null, null, null,
-            null, null, null, null));
+            null, null, null, null, null, null, null));
           oncHis.tissues = tissues;
         } else if (oncHis.tissues.length < 1) {
           oncHis.tissues.push(new Tissue(null, oncHis.oncHistoryDetailId, null, null, null, null,
             null, null, null, null, null, null, null, null, null, null
             , null, null, null, null, null, null, null,
-            null, null, null, null));
+            null, null, null, null, null, null, null));
         }
       }
       if (!hasEmptyOncHis) {
@@ -397,7 +418,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
         tissues.push(new Tissue(null, null, null, null, null, null, null,
           null, null, null, null, null, null, null, null, null,
           null, null, null, null, null, null, null,
-          null, null, null, null));
+          null, null, null, null, null, null, null));
 
         const oncHis = new OncHistoryDetail(this.participant.participant.participantId,
           null, null, null, null, null, null, null, null, null, null,

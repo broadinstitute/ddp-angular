@@ -76,7 +76,7 @@ export class UserSettingComponent implements OnInit {
         });
         if (!allowedToSeeInformation && localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
           this.compService.customViews = null;
-          this.errorMessage = 'You are not allowed to see information of the selected realm at that category';
+          this.errorMessage = 'You are not allowed to see information of the selected study at that category';
         }
       },
       () => {
