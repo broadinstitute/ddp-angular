@@ -48,8 +48,8 @@ export class ParticipantExitComponent implements OnInit {
     this.additionalMessage = null;
     this.exitedParticipants = [];
     let jsonData: any[];
-    this.dsmService.getRealmsAllowed(Statics.PARTICIPANT_EXIT).subscribe(
-      data => {
+    this.dsmService.getRealmsAllowed(Statics.PARTICIPANT_EXIT).subscribe({
+      next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
           if (this.realm === val) {
@@ -61,10 +61,8 @@ export class ParticipantExitComponent implements OnInit {
           this.additionalMessage = 'You are not allowed to see information of the selected study at that category';
         }
       },
-      () => {
-        return null;
-      }
-    );
+      error: () => null
+    });
   }
 
   ngOnInit(): void {
@@ -86,8 +84,8 @@ export class ParticipantExitComponent implements OnInit {
         null, null, null, !this.deletedFromDDP
       );
       // console.log(JSON.stringify(participantExit));
-      this.dsmService.exitParticipant(JSON.stringify(participantExit)).subscribe(// need to subscribe, otherwise it will not send!
-        data => {
+      this.dsmService.exitParticipant(JSON.stringify(participantExit)).subscribe({ // need to subscribe, otherwise it will not send!
+        next: data => {
           // console.info(`received: ${JSON.stringify(data, null, 2)}`);
           this.kits = [];
           jsonData = data;
@@ -98,14 +96,14 @@ export class ParticipantExitComponent implements OnInit {
           this.participantId = null;
           this.getExitedParticipants();
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.router.navigate([Statics.HOME_URL]);
           }
           this.errorMessage = 'Error - Failed to exit participant';
           this.loading = false;
         }
-      );
+      });
     } else {
       this.errorMessage = 'Please select a realm and enter the AltPID for the participant you want to exit.';
     }
@@ -116,19 +114,19 @@ export class ParticipantExitComponent implements OnInit {
       kitDiscardId: kit.kitDiscardId,
       action: kit.action
     };
-    this.dsmService.setKitDiscardAction(this.realm, JSON.stringify(payload)).subscribe(
-      () => {
+    this.dsmService.setKitDiscardAction(this.realm, JSON.stringify(payload)).subscribe({
+      next: () => {
         // console.info(`received: ${JSON.stringify(data, null, 2)}`);
         this.additionalMessage = 'Changed status';
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
         this.loading = false;
         this.errorMessage = 'Error - Loading list of samples of exited participants\nPlease contact your DSM developer';
       }
-    );
+    });
   }
 
   private getExitedParticipants(): void {
@@ -137,8 +135,8 @@ export class ParticipantExitComponent implements OnInit {
       this.additionalMessage = null;
       this.loading = true;
       let jsonData: any[];
-      this.dsmService.getExitedParticipants(this.realm).subscribe(
-        data => {
+      this.dsmService.getExitedParticipants(this.realm).subscribe({
+        next: data => {
           this.exitedParticipants = [];
           // console.info(`received: ${JSON.stringify(data, null, 2)}`);
           jsonData = data;
@@ -148,14 +146,14 @@ export class ParticipantExitComponent implements OnInit {
           });
           this.loading = false;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading list of exited participants\nPlease contact your DSM developer';
         }
-      );
+      });
     }
   }
 }

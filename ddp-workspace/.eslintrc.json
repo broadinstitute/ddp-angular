@@ -97,7 +97,7 @@
             "allowTemplateLiterals": true
           }
         ],
-        "deprecation/deprecation": "warn",
+        "deprecation/deprecation": "off", // Temporarily changed from 'warn' to 'off'
         "quote-props": [
           "error",
           "as-needed"

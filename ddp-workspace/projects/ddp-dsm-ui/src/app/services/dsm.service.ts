@@ -36,11 +36,11 @@ export class DSMService {
                private logger: LoggingDsmService) {
   }
 
-  sendAnalyticsMetric( realm: string, passed: number ) {
-    let url = this.baseUrl + DSMService.UI + "googleAnalytics";
-    let map: { name: string, value: any }[] = [];
+  sendAnalyticsMetric( realm: string, passed: number ): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'googleAnalytics';
+    const map: { name: string; value: any }[] = [];
     map.push( {name: DSMService.REALM, value: realm} );
-    map.push( {name: "timer", value: passed} );
+    map.push( {name: 'timer', value: passed} );
     return this.http.patch(url, null, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );
@@ -244,8 +244,8 @@ export class DSMService {
   }
 
   public getAssignees(realm: string): Observable<any> {
-    let url = this.baseUrl + DSMService.UI + 'assignees';
-    let map: { name: string, value: any }[] = [];
+    const url = this.baseUrl + DSMService.UI + 'assignees';
+    const map: { name: string; value: any }[] = [];
     map.push( {name: DSMService.REALM, value: realm} );
     return this.http.get(url, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))

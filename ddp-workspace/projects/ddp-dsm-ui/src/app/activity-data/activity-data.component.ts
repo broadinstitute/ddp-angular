@@ -19,15 +19,15 @@ export class ActivityDataComponent {
     return this.util;
   }
 
-  getUtilStatic() {
+  getUtilStatic(): typeof Utils {
     return Utils;
   }
 
-  getActivityName(activityDefinition: ActivityDefinition) {
+  getActivityName(activityDefinition: ActivityDefinition): string {
     return activityDefinition.activityName;
   }
 
-  getActivityCode( activity: ActivityData ) {
+  getActivityCode( activity: ActivityData ): string {
     return activity.activityCode;
   }
 }

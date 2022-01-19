@@ -21,7 +21,7 @@ export class FieldTableComponent implements OnInit, OnChanges {
   @Input() finished: boolean;
   @Input() field: AbstractionField;
   @Input() viewValue: AbstractionFieldValue;
-  @Input() hideDoubleCheck: boolean = false;
+  @Input() hideDoubleCheck = false;
   @Output() changes = new EventEmitter();
   @Output() noDataValueChanges = new EventEmitter();
   @Output() doubleCheckValueChanges = new EventEmitter();
@@ -122,7 +122,7 @@ export class FieldTableComponent implements OnInit, OnChanges {
       });
       this.multiTypes.push(multiType);
     }
-    let newOther = {};
+    const newOther = {};
     if (this.possibleValues != null) {
       this.possibleValues.forEach( value => {
         newOther[ value.value ] = null;
@@ -200,7 +200,7 @@ export class FieldTableComponent implements OnInit, OnChanges {
     }
   }
 
-  private abstractionValueChanged( value: any, fieldName: string ) {
+  abstractionValueChanged( value: any, fieldName: string ): void {
     if(fieldName === 'noData'){
       this.noDataValueChanges.emit(value);
     } else if (fieldName=== 'doubleCheck'){

@@ -132,8 +132,8 @@ export class OncHistoryDetailComponent implements OnInit {
   }
 
   patch(patch: any, index: number): void {
-    this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(// need to subscribe, otherwise it will not send!
-      data => {
+    this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
+      next: data => {
         const result = Result.parse(data);
         if (result.code === 200 && result.body != null && result.body !== '') {
           const jsonData: any | any[] = JSON.parse(result.body);
@@ -176,12 +176,12 @@ export class OncHistoryDetailComponent implements OnInit {
         this.currentPatchField = null;
         this.currentPatchFieldRow = null;
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.router.navigate([ Statics.HOME_URL ]);
         }
       }
-    );
+    });
   }
 
   onRequestChange(index: number): void {
@@ -251,8 +251,8 @@ export class OncHistoryDetailComponent implements OnInit {
     );
     const patch = patch1.getPatch();
     this.patchFinished = false;
-    this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(// need to subscribe, otherwise it will not send!
-      data => {
+    this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
+      next: data => {
         const result = Result.parse(data);
         if (result.code === 200) {
           this.oncHistory.splice(index, 1);
@@ -260,12 +260,12 @@ export class OncHistoryDetailComponent implements OnInit {
         this.patchFinished = true;
         this.currentPatchField = null;
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.router.navigate([ Statics.HOME_URL ]);
         }
       }
-    );
+    });
 
     this.triggerReload.next(true);
 

@@ -31,7 +31,7 @@ export class ScanComponent implements OnInit {
   scanValues: Array<ScanValueComponent> = [];
   private singleScanValues: Array<ScanValue> = [];
 
-  // TODO: check is it correct ? - inised `compService`
+  // TODO: check is it correct ? - unused `compService`
   constructor(private _changeDetectionRef: ChangeDetectorRef, private dsmService: DSMService, private router: Router,
               private auth: Auth, private route: ActivatedRoute, private compService: ComponentService) {
     if (!auth.authenticated()) {
@@ -180,8 +180,8 @@ export class ScanComponent implements OnInit {
         let jsonData: any[];
         this.scanErrors = [];
         this.dsmService.transferScan(this.scanTracking, JSON.stringify(this.scanPairsValue))
-          .subscribe(// need to subscribe, otherwise it will not send!
-            data => {
+          .subscribe({ // need to subscribe, otherwise it will not send!
+            next: data => {
               let failedSending = false;
               jsonData = data;
               jsonData.forEach((val) => {
@@ -198,13 +198,13 @@ export class ScanComponent implements OnInit {
                 this.additionalMessage = 'Data saved';
               }
             },
-            err => {
+            error: err => {
               if (err._body === Auth.AUTHENTICATION_ERROR) {
                 this.router.navigate([Statics.HOME_URL]);
               }
               this.additionalMessage = 'Error - Failed to save data';
             }
-          );
+          });
       }
     }
   }
@@ -334,8 +334,8 @@ export class ScanComponent implements OnInit {
         let jsonData: any[];
         this.scanErrors = [];
         this.dsmService.setKitReceivedRequest(JSON.stringify(this.singleScanValues))
-          .subscribe(// need to subscribe, otherwise it will not send!
-            data => {
+          .subscribe({ // need to subscribe, otherwise it will not send!
+            next: data => {
               let failedSending = false;
               jsonData = data;
               jsonData.forEach((val) => {
@@ -352,13 +352,13 @@ export class ScanComponent implements OnInit {
                 this.additionalMessage = 'Data saved';
               }
             },
-            err => {
+            error: err => {
               if (err._body === Auth.AUTHENTICATION_ERROR) {
                 this.router.navigate([Statics.HOME_URL]);
               }
               this.additionalMessage = 'Error - Failed to save data';
             }
-          );
+          });
       }
     }
   }

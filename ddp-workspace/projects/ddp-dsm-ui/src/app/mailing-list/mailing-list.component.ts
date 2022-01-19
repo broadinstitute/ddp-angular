@@ -46,8 +46,8 @@ export class MailingListComponent implements OnInit {
     this.additionalMessage = null;
     this.contactList = [];
     let jsonData: any[];
-    this.dsmService.getRealmsAllowed(Statics.MAILING_LIST).subscribe(
-      data => {
+    this.dsmService.getRealmsAllowed(Statics.MAILING_LIST).subscribe({
+      next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
           if (this.realm === val) {
@@ -59,10 +59,8 @@ export class MailingListComponent implements OnInit {
           this.additionalMessage = 'You are not allowed to see information of the selected study at that category';
         }
       },
-      () => {
-        return null;
-      }
-    );
+      error: () => null
+    });
   }
 
   ngOnInit(): void {
@@ -81,8 +79,8 @@ export class MailingListComponent implements OnInit {
       let jsonData: any[];
       this.additionalMessage = null;
       this.keys = [];
-      this.dsmService.getMailingList(this.realm).subscribe(
-        data => {
+      this.dsmService.getMailingList(this.realm).subscribe({
+        next: data => {
           this.contactList = [];
           jsonData = data;
           jsonData.forEach((val) => {
@@ -93,14 +91,14 @@ export class MailingListComponent implements OnInit {
           // console.info(`${this.contactList.length} contacts received: ${JSON.stringify(data, null, 2)}`);
           this.loadingContacts = false;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.errorMessage = 'Error - Loading contacts  ' + err;
           this.loadingContacts = false;
         }
-      );
+      });
     }
   }
 
@@ -145,9 +143,7 @@ export class MailingListComponent implements OnInit {
 
   showColumn(name: string): boolean {
     if (this.contactList != null) {
-      const foundContact = this.contactList.find(contact => {
-        return contact[ name ] != null && contact[ name ] !== '';
-      });
+      const foundContact = this.contactList.find(contact => (contact[ name ] != null && contact[ name ] !== ''));
       if (foundContact != null) {
         return true;
       }

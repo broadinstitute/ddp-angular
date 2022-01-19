@@ -83,8 +83,8 @@ export class SurveyComponent implements OnInit {
     this.errorMessage = null;
     this.survey = null;
     let jsonData: any[];
-    this.dsmService.getRealmsAllowed(Statics.SURVEY_CREATION).subscribe(
-      data => {
+    this.dsmService.getRealmsAllowed(Statics.SURVEY_CREATION).subscribe({
+      next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
           if (this.realm === val) {
@@ -96,10 +96,8 @@ export class SurveyComponent implements OnInit {
           this.additionalMessage = 'You are not allowed to see information of the selected study at that category';
         }
       },
-      () => {
-        return null;
-      }
-    );
+      error: () => null
+    });
   }
 
   getListOfPossibleSurveys(): void {
@@ -110,8 +108,8 @@ export class SurveyComponent implements OnInit {
       this.noSurveyStatus = false;
       this.surveyStatus = [];
       let jsonData: any[];
-      this.dsmService.getPossibleSurveys(this.realm).subscribe(
-        data => {
+      this.dsmService.getPossibleSurveys(this.realm).subscribe({
+        next: data => {
           this.possibleSurveys = [];
           // console.info(`received: ${JSON.stringify(data, null, 2)}`);
           jsonData = data;
@@ -121,14 +119,14 @@ export class SurveyComponent implements OnInit {
           });
           this.loading = false;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading list of surveys\nPlease contact your DSM developer';
         }
-      );
+      });
     }
   }
 
@@ -139,8 +137,8 @@ export class SurveyComponent implements OnInit {
       this.loading = true;
       this.noSurveyStatus = false;
       let jsonData: any[];
-      this.dsmService.getSurveyStatus(this.realm, this.survey.name).subscribe(
-        data => {
+      this.dsmService.getSurveyStatus(this.realm, this.survey.name).subscribe({
+        next: data => {
           this.surveyStatus = [];
           const result = Result.parse(data);
           if (result.code === 200 && result.body === 'NO_SURVEY_STATUS') {
@@ -156,14 +154,14 @@ export class SurveyComponent implements OnInit {
           }
           this.loading = false;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading list of survey status\nPlease contact your DSM developer';
         }
-      );
+      });
     }
   }
 
@@ -215,6 +213,7 @@ export class SurveyComponent implements OnInit {
                   if (showAlreadyTriggered) {
                     this.modal.show();
                   } else {
+                    // eslint-disable-next-line max-len
                     this.additionalMessage = 'Your list contained participants which already had that survey.\nThese participants were ignored, rest was triggered';
                     this.getListOfSurveyStatus();
                   }
@@ -264,8 +263,8 @@ export class SurveyComponent implements OnInit {
     const jsonParticipants = JSON.stringify(this.alreadyTriggered);
     // console.log(jsonParticipants);
     this.dsmService.triggerAgain(this.realm, this.survey.name, this.survey.type, this.reason + ' - (Re-triggered)', jsonParticipants)
-      .subscribe(
-        data => {
+      .subscribe({
+        next: data => {
           this.loading = false;
           if (typeof data === 'string') {
             this.errorMessage = 'Error - Triggering again.\n' + data;
@@ -274,14 +273,14 @@ export class SurveyComponent implements OnInit {
             this.getListOfSurveyStatus();
           }
         },
-        err => {
+        error: err => {
           this.loading = false;
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.errorMessage = 'Error - Uploading txt\n' + err;
         }
-      );
+      });
     this.emptyUpload();
   }
 

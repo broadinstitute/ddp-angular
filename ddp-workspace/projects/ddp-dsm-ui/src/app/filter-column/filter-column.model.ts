@@ -293,6 +293,7 @@ export class Filter {
             const tableName = columnName.substr(0, columnName.indexOf('.'));
             const cName = columnName.substr(columnName.indexOf('.') + 1);
             if (allColumns[ tableName ] != null) {
+              // eslint-disable-next-line  arrow-body-style
               const f = allColumns[ tableName ].find(filter => {
                 return filter.participantColumn.tableAlias === tableName && filter.participantColumn.name === cName;
               });
@@ -377,10 +378,10 @@ export class Filter {
       }
       if (allColumns[ filter.participantColumn.tableAlias ] != null) {
         // eslint-disable-next-line @typescript-eslint/no-shadow
-        const f = allColumns[ filter.participantColumn.tableAlias ].find(item => {
-          return item.participantColumn.tableAlias === filter.participantColumn.tableAlias
-            && item.participantColumn.name === filter.participantColumn.name;
-        });
+        const f = allColumns[filter.participantColumn.tableAlias].find(item =>
+          item.participantColumn.tableAlias === filter.participantColumn.tableAlias
+          && item.participantColumn.name === filter.participantColumn.name
+        );
         if (f != null) {
           filter.type = f.type;
           filter.participantColumn = f.participantColumn;
@@ -413,9 +414,7 @@ export class Filter {
       } else {
         for (const source of Object.keys(allColumns)) {
           // eslint-disable-next-line @typescript-eslint/no-shadow
-          const f = allColumns[ source ].find(item => {
-            return item.participantColumn.name === filter.participantColumn.name;
-          });
+          const f = allColumns[ source ].find(item => item.participantColumn.name === filter.participantColumn.name);
           if (f != null) {
             filter.type = f.type;
             filter.participantColumn = f.participantColumn;
@@ -496,7 +495,7 @@ export class Filter {
 
   public static getFilterText(filter: Filter, p: string): {} {
     let filterText = {};
-    let parent = filter.participantColumn.tableAlias ? filter.participantColumn.tableAlias : p;
+    const parent = filter.participantColumn.tableAlias ? filter.participantColumn.tableAlias : p;
     if (filter.type === Filter.TEXT_TYPE || filter.type === Filter.NUMBER_TYPE || filter.type === Filter.DATE_TYPE
       || filter.type === Filter.EPOCH_DATE_TYPE
       || filter.type === Filter.COMPOSITE_TYPE || filter.type === Filter.SHORT_DATE_TYPE) {
