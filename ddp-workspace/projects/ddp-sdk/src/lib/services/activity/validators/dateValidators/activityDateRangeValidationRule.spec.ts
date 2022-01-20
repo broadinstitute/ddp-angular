@@ -88,7 +88,7 @@ describe('ActivityDateRangeValidationRule', () => {
         expect(validator.result).toBe(MESSAGE);
     });
 
-    it('should check date range if only day and month fields are exist', () => {
+    it('should check date range if only day and month fields are exist, case 1', () => {
         const question = new ActivityDateQuestionBlock();
         question.fields = [DateField.Day, DateField.Month];
         question.answer = {
@@ -109,7 +109,7 @@ describe('ActivityDateRangeValidationRule', () => {
         expect(validator.result).toBe(MESSAGE);
     });
 
-    it('should check date range if only day and month fields are exist', () => {
+    it('should check date range if only day and month fields are exist, case 2', () => {
         const question = new ActivityDateQuestionBlock();
         question.fields = [DateField.Day, DateField.Year];
         question.answer = {

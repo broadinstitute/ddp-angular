@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivityPicklistNormalizedGroup } from '../models/activity/activityPicklistNormalizedGroup';
 import { SortOrder } from './sortOrder';
 import { ActivityPicklistOption } from '../models/activity/activityPicklistOption';
+import { FuncType } from '../models/funcType';
 
 @Injectable()
 export class PicklistSortingPolicy {
@@ -19,7 +20,11 @@ export class PicklistSortingPolicy {
     public sortPicklistOptions(options: Array<ActivityPicklistOption>): Array<ActivityPicklistOption> {
         const optionsCopy = options.slice();
         if (this.lastStableId || this.mainSortOrder === SortOrder.ALPHABETICAL) {
-            const comparePicklistOptions = (a: ActivityPicklistOption, b: ActivityPicklistOption, lastOptionStableId?: string) => {
+            const comparePicklistOptions: FuncType<number> = (
+                a: ActivityPicklistOption,
+                b: ActivityPicklistOption,
+                lastOptionStableId?: string
+            ) => {
                 if (lastOptionStableId) {
                     if (a.stableId === lastOptionStableId) {
                         return 1;

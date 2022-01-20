@@ -11,8 +11,9 @@ type Logger = (message?: any, ...optionalParams: any[]) => void;
 
 @Injectable()
 export class LoggingService {
+    /* eslint-disable no-console */
     private readonly LOG_SOURCE = 'Logging';
-    // eslint-disable-next-line no-console
+
     public logDebug: Logger = this.showEvent(LogLevel.Debug) ? console.debug.bind(window.console) : () => { };
 
     public logEvent: Logger = this.showEvent(LogLevel.Info) ? console.log.bind(window.console) : () => { };
@@ -21,9 +22,9 @@ export class LoggingService {
 
     public logError: Logger = this.showEvent(LogLevel.Error) ?
         (...args) => {
-            const stringifiedArgs = args.map(item => {
-                return (typeof item === 'object') ? this.stringify(item) : item;
-            });
+            const stringifiedArgs = args.map(item => (
+                 (typeof item === 'object') ? this.stringify(item) : item
+            ));
 
             this.stackdriverErrorReporterService.handleError(stringifiedArgs.join(', '));
             console.error.apply(window.console, stringifiedArgs);

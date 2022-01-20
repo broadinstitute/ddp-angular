@@ -48,7 +48,7 @@ export class CommunicationAspect {
     }
 
     private static getHttpVerb(observableMethod: string): string {
-        return observableMethod.substr(0, observableMethod.indexOf('Observable')).toUpperCase();
+        return observableMethod.substring(0, observableMethod.indexOf('Observable')).toUpperCase();
     }
 }
 

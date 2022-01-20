@@ -53,9 +53,10 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
         };
 
         return combineLatest([studyGuidEmitted$, activityGuid$]).pipe(
-            map((guids: Array<string>) => {
-                return {study: guids[0], activity: guids[1]} as GuidsObject;
-            }),
+            map((guids: Array<string>) => ({
+                study: guids[0],
+                activity: guids[1]
+            } as GuidsObject)),
             mergeMap((guidsObj: GuidsObject) => getActivity$(guidsObj)),
             catchError(e => {
                 if (e.error && e.error.code && e.error.code === 'ACTIVITY_NOT_FOUND') {

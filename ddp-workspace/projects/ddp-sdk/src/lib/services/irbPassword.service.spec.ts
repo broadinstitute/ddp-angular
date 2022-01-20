@@ -16,14 +16,18 @@ describe('IrbPasswordService', () => {
     config.studyGuid = 'study';
     const mockRequestUrl = `${config.backendUrl}/pepper/v1/studies/${config.studyGuid}/irb-password-check`;
     // Faking out the cookieservice
-    const cookieServiceSpy: jasmine.SpyObj<CookieService> = jasmine.createSpyObj('CookieService', ['put']);
+    let cookieServiceSpy: jasmine.SpyObj<CookieService>;
     // called within the parent class
-    const loggingServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj(
-      'LoggingService', ['logException', 'logEvent', 'logError']
-    );
-    const injectorSpy: jasmine.SpyObj<Injector> = jasmine.createSpyObj('Injector', ['get']);
+    let loggingServiceSpy: jasmine.SpyObj<LoggingService>;
+    let injectorSpy: jasmine.SpyObj<Injector>;
 
     beforeEach(() => {
+        cookieServiceSpy = jasmine.createSpyObj('CookieService', ['put']);
+        loggingServiceSpy = jasmine.createSpyObj(
+            'LoggingService', ['logException', 'logEvent', 'logError']
+        );
+        injectorSpy = jasmine.createSpyObj('Injector', ['get']);
+
         TestBed.configureTestingModule({
             // this the import to get a real httpclient
             imports: [

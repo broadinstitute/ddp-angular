@@ -85,6 +85,7 @@ describe('Directive: StickyScrollDirective', () => {
     setupComponent();
     const {nativeElement} = directiveHost;
 
+    // eslint-disable-next-line jasmine/prefer-jasmine-matcher
     expect(nativeElement.scrollWidth <= nativeElement.clientWidth).toBeTrue();
     checkScrollbarIsHidden();
   });

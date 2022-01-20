@@ -27,18 +27,20 @@ describe('AddressInputComponent', () => {
   let fixture: ComponentFixture<AddressInputComponent>;
   let countryServiceSpy: jasmine.SpyObj<CountryService>;
   let addressServiceSpy: jasmine.SpyObj<AddressService>;
-  const translateServiceSpy: jasmine.SpyObj<NGXTranslateService> = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
+  let translateServiceSpy: jasmine.SpyObj<NGXTranslateService>;
 
   beforeEach(waitForAsync(() => {
     countryServiceSpy = jasmine.createSpyObj('CountryService', ['findAllCountryInfoSummaries']);
     addressServiceSpy = jasmine.createSpyObj('AddressService', ['verifyAddress']);
+    translateServiceSpy = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
     /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
     // @ts-ignore
-    translateServiceSpy.getTranslation.and.callFake((word: string | Array<string>, keyToValue?: object) => {
-      return of(Array.isArray(word) ?
-          word.map((each, i) => ({ each: 'label' + i })).reduce((prev, current) => ({ ...prev, ...current }), {}) as object :
-          'label1');
-    });
+    translateServiceSpy.getTranslation.and.callFake((word: string | Array<string>, keyToValue?: object) => of(
+        Array.isArray(word) ?
+          word.map((each, i) => ({each: 'label' + i})).reduce((prev, current) => ({...prev, ...current}), {}) as object :
+          'label1'
+      )
+    );
     const loggingServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logDebug']);
 
     TestBed.configureTestingModule({

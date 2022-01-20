@@ -18,14 +18,15 @@ export class InvitationCodeInputFormatter {
         this.logger.logDebug(`${this.LOG_SOURCE}. The state after filter is %o`, currentState);
         currentState = this.truncate(currentState.value, currentState.selectionStart);
         return currentState;
-    }
+    };
 
     addSeparator = (value: string, originalSelectionStart: number, isBackSpace: boolean = false): TextInputState => {
         let pos = 0;
         let formattedString = '';
         let selectionStart = originalSelectionStart;
         while (pos < value.length) {
-            const currentChunk = value.substr(pos, this.CHUNK_SIZE);
+            const currentChunk = value.substring(pos, this.CHUNK_SIZE + pos);
+
             formattedString = formattedString.concat(currentChunk);
             pos += currentChunk.length;
             this.logger.logDebug(`${this.LOG_SOURCE}. Position after appending chunk %d`, pos);
@@ -46,24 +47,25 @@ export class InvitationCodeInputFormatter {
             }
         }
         return { value: formattedString, selectionStart };
-    }
+    };
 
     format = (inputState: TextInputState): TextInputState => {
         let currentState = this.cleanupInput(inputState.value, inputState.selectionStart);
         currentState = this.addSeparator(currentState.value, currentState.selectionStart, inputState.isBackSpace);
         this.logger.logDebug(`${this.LOG_SOURCE}. The state after addSeparator is %o`, currentState);
         return currentState;
-    }
+    };
 
-    toUppercase = (value: string, selStart: number): TextInputState => {
-        return { value: value.toLocaleUpperCase(), selectionStart: selStart };
-    }
+    toUppercase = (value: string, selStart: number): TextInputState => ({
+        value: value.toLocaleUpperCase(),
+        selectionStart: selStart
+    });
 
     filter = (value: string, originalSelStart: number): TextInputState => {
         let currentString = '';
         let selStart = originalSelStart;
         for (let i = 0; i < value.length; i++) {
-            const currentVal = value.substr(i, 1);
+            const currentVal = value.substring(i, i + 1);
             if (this.VALID_VAL_REGEX.test(currentVal)) {
                 currentString = currentString.concat(currentVal);
             } else if (i + 1 <= originalSelStart) {
@@ -71,9 +73,10 @@ export class InvitationCodeInputFormatter {
             }
         }
         return { value: currentString, selectionStart: Math.min(currentString.length, selStart) };
-    }
+    };
 
-    truncate = (value: string, selStart: number): TextInputState => {
-        return { value: value.substr(0, this.MAX_VALUE_LEN), selectionStart: Math.min(selStart, this.MAX_VALUE_LEN) };
-    }
+    truncate = (value: string, selStart: number): TextInputState => ({
+        value: value.substring(0, this.MAX_VALUE_LEN),
+        selectionStart: Math.min(selStart, this.MAX_VALUE_LEN)
+    });
 }

@@ -114,7 +114,7 @@ export class ActivityEmailInput implements OnInit, OnChanges, OnDestroy {
                     disabled: this.readonly
                 }, EmailPatternValidator)
             }, {
-                validator: this.fieldsMatcher('email', 'confirmEmail')
+                validators: this.fieldsMatcher('email', 'confirmEmail')
             });
         } else {
             this.emailForm = new FormGroup({

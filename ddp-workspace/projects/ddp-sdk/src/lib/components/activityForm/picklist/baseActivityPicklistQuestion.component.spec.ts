@@ -5,15 +5,15 @@ import { of } from 'rxjs';
 
 describe('BaseActivityPicklistQuestion', () => {
     let component: BaseActivityPicklistQuestion;
-    const ngxTranslateServiceSpy = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
-    ngxTranslateServiceSpy.getTranslation.and.callFake(() => {
-        return of({
-            'SDK.DetailsPlaceholder.PluralForm': 'characters remaining',
-            'SDK.DetailsPlaceholder.SingularForm': 'character remaining'
-        });
-    });
+    let ngxTranslateServiceSpy;
 
     beforeEach(() => {
+        ngxTranslateServiceSpy = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
+        ngxTranslateServiceSpy.getTranslation.and.callFake(() => of({
+            'SDK.DetailsPlaceholder.PluralForm': 'characters remaining',
+            'SDK.DetailsPlaceholder.SingularForm': 'character remaining'
+        }));
+
         component = new BaseActivityPicklistQuestion(ngxTranslateServiceSpy);
         component.block = {
             picklistOptions: [

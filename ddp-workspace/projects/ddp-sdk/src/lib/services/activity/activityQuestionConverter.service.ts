@@ -87,6 +87,7 @@ export class ActivityQuestionConverter {
                 if (_.isArray(valueForQuestion)) {
                     const answer = (valueForQuestion as any[][]).map(rowOfValues => {
                         if (_.isArray(rowOfValues)) {
+                            // eslint-disable-next-line arrow-body-style
                             return (rowOfValues as any[]).map(eachValue => {
                                 // todo this object signature ought to have its own interface
                                 return eachValue !== null ? {value: eachValue.value, stableId: questionJson.stableId} : null;

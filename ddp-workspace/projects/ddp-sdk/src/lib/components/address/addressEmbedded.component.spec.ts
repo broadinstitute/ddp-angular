@@ -1,17 +1,17 @@
 import { ComponentFixture, discardPeriodicTasks, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import {
-    AddressEmbeddedComponent,
-    AddressInputComponent,
-    ValidationMessageComponent,
-    ActivityResponse,
-    AddressService,
-    Address,
-    SubmitAnnouncementService,
-    MailAddressBlock,
-    NGXTranslateService,
-    LoggingService,
-    ConfigurationService,
-    FieldError
+  AddressEmbeddedComponent,
+  AddressInputComponent,
+  ValidationMessageComponent,
+  ActivityResponse,
+  AddressService,
+  Address,
+  SubmitAnnouncementService,
+  MailAddressBlock,
+  NGXTranslateService,
+  LoggingService,
+  ConfigurationService,
+  FieldError, FuncType
 } from 'ddp-sdk';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioGroup, MatRadioModule } from '@angular/material/radio';
@@ -94,11 +94,11 @@ describe('AddressEmbeddedComponent', () => {
         const translateServiceSpy: jasmine.SpyObj<NGXTranslateService> = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
         /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
         // @ts-ignore
-        translateServiceSpy.getTranslation.and.callFake((word: string | Array<string>) => {
-            return of(Array.isArray(word) ?
-                word.map((each, i) => ({ each: 'label' + i })).reduce((prev, current) => ({ ...prev, ...current }), {}) as object :
-                'label1');
-        });
+        translateServiceSpy.getTranslation.and.callFake((word: string | Array<string>) => of(
+            Array.isArray(word) ?
+                word.map((each, i) => ({each: 'label' + i})).reduce((prev, current) => ({...prev, ...current}), {}) as object :
+                'label1'
+        ));
 
         TestBed.configureTestingModule({
             declarations: [AddressEmbeddedComponent, FakeAddressInputComponent, ValidationMessageComponent],
@@ -161,8 +161,8 @@ describe('AddressEmbeddedComponent', () => {
         fixture.detectChanges();
         expect(addressServiceSpy.getTempAddress).toHaveBeenCalled();
         const componentInstance = childComponentFixture.componentInstance;
-        expect(componentInstance instanceof FakeAddressInputComponent);
-        expect((componentInstance as FakeAddressInputComponent).address === tempAddress);
+        expect(componentInstance instanceof FakeAddressInputComponent).toBeTrue();
+        expect((componentInstance as FakeAddressInputComponent).address).toEqual(tempAddress);
     });
 
     it('ensure handling of PERFECT new address', () => {
@@ -663,7 +663,7 @@ describe('AddressEmbeddedComponent', () => {
         expect(busySpy).toHaveBeenCalledWith(false);
     }));
 
-    const emitAddressThatTriggersSuggestion = () => {
+    const emitAddressThatTriggersSuggestion: FuncType<{ enteredAddress: Address; suggestedAddress: Address }> = () => {
         component.activityGuid = '123';
         // suggestion will differ from entered address
         const enteredAddress = buildPerfectAddress();
@@ -685,7 +685,7 @@ const findRadioGroupDebug = (fixture): DebugElement =>
     fixture.debugElement.query(By.directive(MatRadioGroup));
 
 // some test support utils
-const clone = (obj) => Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));
+const clone: FuncType<any> = (obj) => Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));
 const buildPerfectAddress = (): Address => {
     const perfectAddress = new Address();
     perfectAddress.name = 'RAPUNZEL';
@@ -699,6 +699,4 @@ const buildPerfectAddress = (): Address => {
     return perfectAddress;
 };
 
-const buildPerfectAddressVerification = (): AddressVerificationResponse => {
-    return new AddressVerificationResponse(buildPerfectAddress());
-};
+const buildPerfectAddressVerification: FuncType<AddressVerificationResponse> = () => new AddressVerificationResponse(buildPerfectAddress());
