@@ -232,7 +232,7 @@ export class WelcomeComponent implements OnInit {
     }
 
     public get showArrow(): boolean {
-        return window.pageYOffset <= this.HEADER_HEIGHT;
+        return window.scrollY <= this.HEADER_HEIGHT;
     }
 
     public scrollTo(target: any): void {

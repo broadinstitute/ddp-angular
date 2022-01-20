@@ -183,5 +183,5 @@ export class ParticipantListItemComponent {
       isConsentEditActivity,
     );
     this.router.navigateByUrl(RouterResources.Survey);
-  }
+  };
 }

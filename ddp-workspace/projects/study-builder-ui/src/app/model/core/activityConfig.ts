@@ -18,14 +18,14 @@ export interface ActivityConfig {
   creationExpr: PexExpression | null;
   displayOrder: number;
   editTimeoutSec: null;
-  elections: [{ selectedExpr: PexExpression, stableId: string }];
+  elections: [{ selectedExpr: PexExpression; stableId: string }];
   excludeFromDisplay: boolean;
   formType: FormType;
-  introduction: any //tbd
+  introduction: any; //tbd
   lastUpdated: TimestampString | null;
   lastUpdatedTextTemplate: Template | null;
   listStyleHint: ListStyleHint;
-  mappings: any[] //TBD
+  mappings: any[]; //TBD
   maxInstancePerUser: number; // positive integer
   readOnlyHint: Template | null;
   sections: Section[];

@@ -75,11 +75,11 @@ export class Translator {
       }
 
       if (config && config.extraParams && config.extraParams.language) {
-        const langCode = config.extraParams.language;
+        const langCodeFromConfig = config.extraParams.language;
 
-        console.log(`Initialized language as "${langCode}" from config`);
+        console.log(`Initialized language as "${langCodeFromConfig}" from config`);
 
-        return this.changeLanguage(langCode);
+        return this.changeLanguage(langCodeFromConfig);
       }
 
       console.log('Initializing default "en" language');
@@ -90,7 +90,7 @@ export class Translator {
 
   private translateElements(): void {
     const lang = this.languages.find(
-      lang => lang.code === this.currentLangCode
+      language => language.code === this.currentLangCode
     );
 
     if (lang) {

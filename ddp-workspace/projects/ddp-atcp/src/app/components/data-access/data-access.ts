@@ -139,10 +139,10 @@ export class DataAccessComponent implements OnInit, OnDestroy {
 
     of(this.recaptchaToken)
       .pipe(switchMap(token => iif(() => !!token, sendDar$, getTokenFirst$)))
-      .subscribe(
-        () => this.showResponse(),
-        () => this.showError(),
-      );
+      .subscribe({
+        next: () => this.showResponse(),
+        error: () => this.showError(),
+      });
   }
 
   private showResponse(): void {

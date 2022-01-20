@@ -81,18 +81,18 @@ export class PasswordComponent implements OnInit {
         }
         this.irbPassword.checkPassword(password).pipe(
             take(1)
-        ).subscribe(
-            response => {
+        ).subscribe({
+            next: response => {
                 if (response) {
                     this.router.navigateByUrl('');
                 } else {
                     this.isPasswordWrong = true;
                 }
             },
-            error => {
+            error: () => {
                 this.isCommunicationError = true;
             }
-        );
+        });
     }
 
     public hideErrors(): void {
