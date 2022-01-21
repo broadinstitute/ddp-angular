@@ -1,0 +1,12 @@
+<div class="dialog-container">
+  <button mat-icon-button class="close-btn" (click)="onClose()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <ddp-activity-matrix-answer-table
+    [block]="data.block"
+    [renderGroups]="data.renderGroups"
+    [readonly]="data.readonly"
+    (valueChanged)="data.valueChanged($event)"
+  ></ddp-activity-matrix-answer-table>
+</div>

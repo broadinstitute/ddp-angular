@@ -3,16 +3,20 @@ import { ComponentFixture, fakeAsync, TestBed, waitForAsync } from '@angular/cor
 import { By } from '@angular/platform-browser';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialog } from '@angular/material/dialog';
 
 import {
   ActivityMatrixQuestionBlock,
   Group,
   Option,
   Question,
+  RenderMode,
   SelectMode,
 } from '../../../../models/activity/activityMatrixQuestionBlock';
 import { ActivityMatrixAnswerDto } from '../../../../models/activity/activityMatrixAnswerDto';
 import { QuestionPromptComponent } from '../question-prompt/questionPrompt.component';
+import { ActivityMatrixAnswerDialogComponent } from './activity-matrix-answer-dialog/activity-matrix-answer-dialog.component';
+import { ActivityMatrixAnswerTableComponent } from './activity-matrix-answer-table/activity-matrix-answer-table.component';
 import { ActivityMatrixAnswer } from './activity-matrix-answer.component';
 
 const mockQuestions: Question[] = [
@@ -92,8 +96,19 @@ describe('ActivityMatrixAnswer', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [QuestionPromptComponent, ActivityMatrixAnswer],
+        declarations: [
+          QuestionPromptComponent,
+          ActivityMatrixAnswerDialogComponent,
+          ActivityMatrixAnswerTableComponent,
+          ActivityMatrixAnswer,
+        ],
         imports: [MatRadioModule, MatCheckboxModule],
+        providers: [
+          {
+            provide: MatDialog,
+            useValue: {},
+          },
+        ],
       }).compileComponents();
     }),
   );
@@ -102,6 +117,7 @@ describe('ActivityMatrixAnswer', () => {
     fixture = TestBed.createComponent(ActivityMatrixAnswer);
 
     block = new ActivityMatrixQuestionBlock();
+    block.renderMode = RenderMode.Inline;
     block.selectMode = SelectMode.Single;
     block.question = 'Answer following questions';
     block.stableId = 'MATRIX_BLOCK';
@@ -136,6 +152,8 @@ describe('ActivityMatrixAnswer', () => {
   });
 
   it('renders table element', () => {
+    fixture.detectChanges();
+
     const tableEl = fixture.debugElement.query(By.css('[data-test-id="matrix-answer-table"]'));
 
     expect(tableEl).not.toBe(null);
@@ -154,7 +172,9 @@ describe('ActivityMatrixAnswer', () => {
 
     component.block = newBlock;
 
-    fixture.componentInstance.ngOnChanges({ block: new SimpleChange(prevBlock, newBlock, true) });
+    fixture.componentInstance.ngOnChanges({
+      block: new SimpleChange(prevBlock, newBlock, true),
+    });
     fixture.detectChanges();
 
     const headerEl = fixture.debugElement.query(By.css('[data-test-id="table-header-groups"]'));
@@ -171,11 +191,16 @@ describe('ActivityMatrixAnswer', () => {
     newBlock.stableId = prevBlock.stableId;
     newBlock.questions = mockQuestions;
     newBlock.groups = [];
-    newBlock.options = mockOptions.map(mockOption => ({ ...mockOption, groupId: null }));
+    newBlock.options = mockOptions.map(mockOption => ({
+      ...mockOption,
+      groupId: null,
+    }));
 
     component.block = newBlock;
 
-    fixture.componentInstance.ngOnChanges({ block: new SimpleChange(prevBlock, newBlock, true) });
+    fixture.componentInstance.ngOnChanges({
+      block: new SimpleChange(prevBlock, newBlock, true),
+    });
     fixture.detectChanges();
 
     const headerEl = fixture.debugElement.query(By.css('[data-test-id="table-header-groups"]'));
@@ -196,7 +221,9 @@ describe('ActivityMatrixAnswer', () => {
 
     component.block = newBlock;
 
-    fixture.componentInstance.ngOnChanges({ block: new SimpleChange(prevBlock, newBlock, true) });
+    fixture.componentInstance.ngOnChanges({
+      block: new SimpleChange(prevBlock, newBlock, true),
+    });
     fixture.detectChanges();
 
     mockGroups.forEach(mockGroup => {
@@ -223,7 +250,9 @@ describe('ActivityMatrixAnswer', () => {
 
     component.block = newBlock;
 
-    fixture.componentInstance.ngOnChanges({ block: new SimpleChange(prevBlock, newBlock, true) });
+    fixture.componentInstance.ngOnChanges({
+      block: new SimpleChange(prevBlock, newBlock, true),
+    });
     fixture.detectChanges();
 
     mockOptions.forEach(mockOption => {
@@ -250,7 +279,9 @@ describe('ActivityMatrixAnswer', () => {
 
     component.block = newBlock;
 
-    fixture.componentInstance.ngOnChanges({ block: new SimpleChange(prevBlock, newBlock, true) });
+    fixture.componentInstance.ngOnChanges({
+      block: new SimpleChange(prevBlock, newBlock, true),
+    });
     fixture.detectChanges();
 
     mockQuestions.forEach(mockQuestion => {
@@ -277,7 +308,9 @@ describe('ActivityMatrixAnswer', () => {
 
     component.block = newBlock;
 
-    fixture.componentInstance.ngOnChanges({ block: new SimpleChange(prevBlock, newBlock, true) });
+    fixture.componentInstance.ngOnChanges({
+      block: new SimpleChange(prevBlock, newBlock, true),
+    });
     fixture.detectChanges();
 
     const radioList = fixture.debugElement.queryAll(By.css('[data-test-id="radio-option"]'));
@@ -303,7 +336,9 @@ describe('ActivityMatrixAnswer', () => {
 
     component.block = newBlock;
 
-    fixture.componentInstance.ngOnChanges({ block: new SimpleChange(prevBlock, newBlock, true) });
+    fixture.componentInstance.ngOnChanges({
+      block: new SimpleChange(prevBlock, newBlock, true),
+    });
     fixture.detectChanges();
 
     const checkboxList = fixture.debugElement.queryAll(By.css('[data-test-id="checkbox-option"]'));
@@ -329,7 +364,9 @@ describe('ActivityMatrixAnswer', () => {
 
     component.block = newBlock;
 
-    fixture.componentInstance.ngOnChanges({ block: new SimpleChange(prevBlock, newBlock, true) });
+    fixture.componentInstance.ngOnChanges({
+      block: new SimpleChange(prevBlock, newBlock, true),
+    });
     fixture.detectChanges();
 
     let radioInputList = fixture.debugElement.queryAll(By.css('.mat-radio-input'));
@@ -362,7 +399,9 @@ describe('ActivityMatrixAnswer', () => {
 
     component.block = newBlock;
 
-    fixture.componentInstance.ngOnChanges({ block: new SimpleChange(prevBlock, newBlock, true) });
+    fixture.componentInstance.ngOnChanges({
+      block: new SimpleChange(prevBlock, newBlock, true),
+    });
     fixture.detectChanges();
 
     let checkboxList = fixture.debugElement.queryAll(By.css('.mat-checkbox-input'));
@@ -397,7 +436,9 @@ describe('ActivityMatrixAnswer', () => {
 
     component.block = newBlock;
 
-    fixture.componentInstance.ngOnChanges({ block: new SimpleChange(prevBlock, newBlock, true) });
+    fixture.componentInstance.ngOnChanges({
+      block: new SimpleChange(prevBlock, newBlock, true),
+    });
     fixture.detectChanges();
 
     const firstRadioOption = fixture.debugElement.query(By.css('.mat-radio-input'));
@@ -424,7 +465,9 @@ describe('ActivityMatrixAnswer', () => {
 
     component.block = newBlock;
 
-    fixture.componentInstance.ngOnChanges({ block: new SimpleChange(prevBlock, newBlock, true) });
+    fixture.componentInstance.ngOnChanges({
+      block: new SimpleChange(prevBlock, newBlock, true),
+    });
     fixture.detectChanges();
 
     const firstQuestionStableId = mockQuestions[0].stableId;
@@ -472,7 +515,9 @@ describe('ActivityMatrixAnswer', () => {
 
     component.block = newBlock;
 
-    fixture.componentInstance.ngOnChanges({ block: new SimpleChange(prevBlock, newBlock, true) });
+    fixture.componentInstance.ngOnChanges({
+      block: new SimpleChange(prevBlock, newBlock, true),
+    });
     fixture.detectChanges();
 
     const firstOptionSelector = `[data-test-radio-id="radio-option-${mockQuestions[0].stableId}-${mockOptions[0].stableId}"]`;
@@ -510,7 +555,9 @@ describe('ActivityMatrixAnswer', () => {
 
     component.block = newBlock;
 
-    fixture.componentInstance.ngOnChanges({ block: new SimpleChange(prevBlock, newBlock, true) });
+    fixture.componentInstance.ngOnChanges({
+      block: new SimpleChange(prevBlock, newBlock, true),
+    });
     fixture.detectChanges();
 
     mockQuestions.forEach(mockQuestion => {
@@ -558,7 +605,9 @@ describe('ActivityMatrixAnswer', () => {
 
     component.block = newBlock;
 
-    fixture.componentInstance.ngOnChanges({ block: new SimpleChange(prevBlock, newBlock, true) });
+    fixture.componentInstance.ngOnChanges({
+      block: new SimpleChange(prevBlock, newBlock, true),
+    });
     fixture.detectChanges();
 
     const checkbox1 = fixture.debugElement.query(
@@ -608,7 +657,9 @@ describe('ActivityMatrixAnswer', () => {
 
     component.block = newBlock;
 
-    fixture.componentInstance.ngOnChanges({ block: new SimpleChange(prevBlock, newBlock, true) });
+    fixture.componentInstance.ngOnChanges({
+      block: new SimpleChange(prevBlock, newBlock, true),
+    });
     fixture.detectChanges();
 
     const exclusiveCheckbox = fixture.debugElement.query(
@@ -675,7 +726,9 @@ describe('ActivityMatrixAnswer', () => {
 
     component.block = newBlock;
 
-    fixture.componentInstance.ngOnChanges({ block: new SimpleChange(prevBlock, newBlock, true) });
+    fixture.componentInstance.ngOnChanges({
+      block: new SimpleChange(prevBlock, newBlock, true),
+    });
     fixture.detectChanges();
 
     const checkbox = fixture.debugElement.query(
