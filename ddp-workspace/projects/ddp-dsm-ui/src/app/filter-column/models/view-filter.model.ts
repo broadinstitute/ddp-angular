@@ -28,9 +28,10 @@ export class ViewFilter {
       for (const key of Object.keys(parsedColumns)) {
         const tmp = new Array<Filter>();
         for (const f of parsedColumns[ key ]) {
-          const filteredColumn = currentFilter.find(filter => {
-            return filter.participantColumn.name === f.participantColumn.name && filter.participantColumn.tableAlias === key;
-          });
+          const filteredColumn = currentFilter.find(filter =>
+            filter.participantColumn.name === f.participantColumn.name &&
+            filter.participantColumn.tableAlias === key
+          );
           if (filteredColumn === undefined) {
             tmp.push(f);
           } else {

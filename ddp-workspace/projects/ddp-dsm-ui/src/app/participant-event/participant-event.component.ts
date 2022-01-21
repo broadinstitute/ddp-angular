@@ -56,8 +56,8 @@ export class ParticipantEventComponent implements OnInit {
     this.additionalMessage = null;
     this.allowedToSeeInformation = false;
     let jsonData: any[];
-    this.dsmService.getRealmsAllowed(Statics.PARTICIPANT_EVENT).subscribe(
-      data => {
+    this.dsmService.getRealmsAllowed(Statics.PARTICIPANT_EVENT).subscribe({
+      next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
           if (this.realm === val) {
@@ -70,10 +70,8 @@ export class ParticipantEventComponent implements OnInit {
           this.additionalMessage = 'You are not allowed to see information of the selected study at that category';
         }
       },
-      () => {
-        return null;
-      }
-    );
+      error: () => null
+    });
   }
 
   getListOfPossibleEvents(): void {
@@ -82,8 +80,8 @@ export class ParticipantEventComponent implements OnInit {
       this.additionalMessage = null;
       this.loading = true;
       let jsonData: any[];
-      this.dsmService.getPossibleEventTypes(this.realm).subscribe(
-        data => {
+      this.dsmService.getPossibleEventTypes(this.realm).subscribe({
+        next: data => {
           this.possibleEvents = [];
           // console.info(`received: ${JSON.stringify(data, null, 2)}`);
           jsonData = data;
@@ -93,14 +91,14 @@ export class ParticipantEventComponent implements OnInit {
           });
           this.loading = false;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading list of event types\nPlease contact your DSM developer';
         }
-      );
+      });
     }
   }
 
@@ -110,8 +108,8 @@ export class ParticipantEventComponent implements OnInit {
       this.loading = true;
       const payload = {realm: this.realm, participantId: this.participantId, eventType: this.event, user: this.role.userID()};
       // console.log(JSON.stringify(triggerSurveyPayload));
-      this.dsmService.skipEvent(JSON.stringify(payload)).subscribe(// need to subscribe, otherwise it will not send!
-        data => {
+      this.dsmService.skipEvent(JSON.stringify(payload)).subscribe({ // need to subscribe, otherwise it will not send!
+        next: data => {
           // console.log(data);
           const result = Result.parse(data);
           if (result.code !== 200) {
@@ -124,7 +122,7 @@ export class ParticipantEventComponent implements OnInit {
           }
           this.loading = false;
         },
-        err => {
+        error: err => {
           // console.log(err);
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.router.navigate([Statics.HOME_URL]);
@@ -132,7 +130,7 @@ export class ParticipantEventComponent implements OnInit {
           this.errorMessage = 'Failed to skip email for given participant';
           this.loading = false;
         }
-      );
+      });
     } else {
       this.errorMessage = 'Please select a study and a event type and enter the AltPID for the participant';
     }
@@ -144,8 +142,8 @@ export class ParticipantEventComponent implements OnInit {
       this.additionalMessage = null;
       this.loading = true;
       let jsonData: any[];
-      this.dsmService.getSkippedParticipantEvents(this.realm).subscribe(
-        data => {
+      this.dsmService.getSkippedParticipantEvents(this.realm).subscribe({
+        next: data => {
           this.participantsSkipped = [];
           jsonData = data;
           jsonData.forEach((val) => {
@@ -155,14 +153,14 @@ export class ParticipantEventComponent implements OnInit {
           // console.info(`${this.exitedParticipants.length} kit types received: ${JSON.stringify(data, null, 2)}`);
           this.loading = false;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading list of skipped participant events\nPlease contact your DSM developer';
         }
-      );
+      });
     }
   }
 }

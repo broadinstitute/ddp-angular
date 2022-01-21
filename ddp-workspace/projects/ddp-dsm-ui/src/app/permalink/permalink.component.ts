@@ -49,8 +49,8 @@ export class PermalinkComponent implements OnInit {
     this.participant = null;
     this.medicalRecord = null;
     if (medicalRecordId != null && medicalRecordId !== '' && participantId != null && participantId !== '') {
-      this.dsmService.getParticipant(participantId, localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe(
-        data => {
+      this.dsmService.getParticipant(participantId, localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
+        next: data => {
           // console.info(`participant data received: ${JSON.stringify(data, null, 2)}`);
           this.participant = Participant.parse(data);
 
@@ -58,17 +58,17 @@ export class PermalinkComponent implements OnInit {
             this.router.navigate([ Statics.MEDICALRECORD_URL ]);
           }
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           // eslint-disable-next-line no-throw-literal
           throw 'Error loading institutions' + err;
         }
-      );
+      });
 
-      this.dsmService.getMedicalRecord(participantId, medicalRecordId).subscribe(
-        data => {
+      this.dsmService.getMedicalRecord(participantId, medicalRecordId).subscribe({
+        next: data => {
           // console.info(`institution data received: ${JSON.stringify(data, null, 2)}`);
           this.medicalRecord = MedicalRecord.parse(data);
 
@@ -76,14 +76,14 @@ export class PermalinkComponent implements OnInit {
             this.router.navigate([ Statics.MEDICALRECORD_URL ]);
           }
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           // eslint-disable-next-line no-throw-literal
           throw 'Error loading medical record data' + err;
         }
-      );
+      });
     } else {
       this.router.navigate([ Statics.HOME_URL ]);
     }

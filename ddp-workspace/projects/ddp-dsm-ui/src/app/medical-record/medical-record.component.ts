@@ -159,8 +159,8 @@ export class MedicalRecordComponent implements OnInit {
       if (parameterName !== 'followUps') {
         this.currentPatchField = parameterName;
       }
-      this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(// need to subscribe, otherwise it will not send!
-        data => {
+      this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
+        next: data => {
           const result = Result.parse(data);
           if (result.code === 200) {
             if (result.body != null) {
@@ -176,13 +176,13 @@ export class MedicalRecordComponent implements OnInit {
           this.patchFinished = true;
           this.currentPatchField = null;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.router.navigate([ Statics.HOME_URL ]);
           }
           this.additionalMessage = 'Error - Saving changes \n' + err;
         }
-      );
+      });
     }
   }
 
@@ -192,8 +192,8 @@ export class MedicalRecordComponent implements OnInit {
 
   private loadLogs(): void {
     let jsonData: any[];
-    this.dsmService.getMedicalRecordLog(this.medicalRecord.medicalRecordId).subscribe(
-      data => {
+    this.dsmService.getMedicalRecordLog(this.medicalRecord.medicalRecordId).subscribe({
+      next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
           const log = MedicalRecordLog.parse(val);
@@ -207,33 +207,33 @@ export class MedicalRecordComponent implements OnInit {
         });
         // console.info(`${this.logsHistory.length} log data received: ${JSON.stringify(data, null, 2)}`);
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
         this.errorMessage = 'Error - Loading mr log\nPlease contact your DSM developer';
       }
-    );
+    });
   }
 
   saveLog(): void {
     if (this.currentLog.date != null && this.currentLog.comments != null && this.currentLog.comments !== '') {
       this.readonly = true;
       this.dsmService.saveMedicalRecordLog(this.currentLog.medicalRecordLogId, JSON.stringify(this.currentLog))
-        .subscribe(// need to subscribe, otherwise it will not send!
-          () => {
+        .subscribe({ // need to subscribe, otherwise it will not send!
+          next: () => {
             this.additionalMessage = 'Data saved';
             this.logsHistory.push(this.currentLog);
             this.currentLog = null;
             this.isReviewDataChanged = false;
           },
-          err => {
+          error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
               this.router.navigate([Statics.HOME_URL]);
             }
             this.additionalMessage = 'Error - Saving log data\nPlease contact your DSM developer';
           }
-        );
+        });
     } else {
       this.additionalMessage = 'Both Date and Comment are required';
     }
@@ -258,8 +258,8 @@ export class MedicalRecordComponent implements OnInit {
         this.startDate, this.endDate, this.mrCoverPdfSettings, localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
         configName, this.pdfs, null
       )
-        .subscribe(
-          data => {
+        .subscribe({
+          next: data => {
             let tmp = configName;
             if (tmp == null) {
               tmp = 'all';
@@ -268,14 +268,14 @@ export class MedicalRecordComponent implements OnInit {
             this.downloading = false;
             this.message = 'Download finished.';
           },
-          err => {
+          error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
               this.router.navigate([Statics.HOME_URL]);
             }
             this.message = 'Failed to download pdf.';
             this.downloading = false;
           }
-        );
+        });
     }
     this.modal.hide();
   }

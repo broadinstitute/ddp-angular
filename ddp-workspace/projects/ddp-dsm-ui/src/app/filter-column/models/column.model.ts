@@ -102,7 +102,7 @@ export class ParticipantColumn {
   public static BLOCKS_COUNT = new ParticipantColumn('Block(s)', 'blocksCount', 't');
   public static USS_COUNT = new ParticipantColumn('USS (unstained slides)', 'ussCount', 't');
   public static H_E_COUNT = new ParticipantColumn('H&E(s)', 'hECount', 't');
-  public static SM_ID_VALUE = new ParticipantColumn("SM-ID value", "smIdValue", "sm");
+  public static SM_ID_VALUE = new ParticipantColumn('SM-ID value', 'smIdValue', 'sm');
 
   // abstraction column
   public static ABSTRACTION = new ParticipantColumn('Abstraction', 'abstraction');
@@ -132,7 +132,7 @@ export class ParticipantColumn {
   public static CORRECTED_TEST = new ParticipantColumn('Test Corrected', 'isCorrected', 'k', 'testResult');
   public static TIME_TEST = new ParticipantColumn('Test Time Completed', 'timeCompleted', 'k', 'testResult');
 
-  constructor (public display: string, public name: string, public tableAlias?: string, public object?: string, public esData?: boolean) {
+  constructor(public display: string, public name: string, public tableAlias?: string, public object?: string, public esData?: boolean) {
     this.display = display;
     this.name = name;
     this.tableAlias = tableAlias;
@@ -140,7 +140,7 @@ export class ParticipantColumn {
     this.esData = esData;
   }
 
-  public static parse (json): ParticipantColumn {
+  public static parse(json): ParticipantColumn {
     if (json === undefined) {
       return null;
     }

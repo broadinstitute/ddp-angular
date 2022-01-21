@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 import { NameValue } from '../utils/name-value.model';
 import { PatchUtil } from '../utils/patch.model';
 import { ModalComponent } from '../modal/modal.component';
-import {TissueSmId} from "./sm-id.model";
+import {TissueSmId} from './sm-id.model';
 
 @Component({
   selector: 'app-tissue',
@@ -44,21 +44,17 @@ export class TissueComponent {
   selectedSmIds = 0;
   smIdDuplicate = {};
 
-  constructor (private role: RoleService, private dsmService: DSMService, private compService: ComponentService,
-               private router: Router) {
+  constructor(private role: RoleService, private dsmService: DSMService, private compService: ComponentService, private router: Router) {
     this.smIdDuplicate[ this.uss ] = new Set();
     this.smIdDuplicate[ this.he ] = new Set();
     this.smIdDuplicate[ this.scrolls ] = new Set();
   }
 
-  ngOnInit() {
-  }
-
-  public getCompService (): ComponentService {
+  public getCompService(): ComponentService {
     return this.compService;
   }
 
-  public setTissueSite (object: any): void {
+  public setTissueSite(object: any): void {
     if (object != null) {
       if (event instanceof MouseEvent) {
         this.tissue.tissueSite = object.field1.value;
@@ -69,7 +65,7 @@ export class TissueComponent {
     }
   }
 
-  onAdditionalColChange (evt: any, colName: string): void {
+  onAdditionalColChange(evt: any, colName: string): void {
     let v;
     if (typeof evt === 'string') {
       v = evt;
@@ -95,7 +91,7 @@ export class TissueComponent {
   }
 
   // display additional value
-  getAdditionalValue (colName: string): string {
+  getAdditionalValue(colName: string): string {
     if (this.tissue.additionalValues != null) {
       if (this.tissue.additionalValues[colName] != null) {
         return this.tissue.additionalValues[colName];
@@ -104,7 +100,7 @@ export class TissueComponent {
     return null;
   }
 
-  valueChanged (value: any, parameterName: string, pName?: string, pId?, alias?, smId?, smIdArray?, index?, value2?, parameter2?): void {
+  valueChanged(value: any, parameterName: string, pName?: string, pId?, alias?, smId?, smIdArray?, index?, value2?, parameter2?): void {
     let v;
     let parentName = 'oncHistoryDetailId';
     if (pName) {
@@ -142,8 +138,8 @@ export class TissueComponent {
       let nameValues = null;
       if (tAlias !== 'sm') {
         if (parameterName !== 'additionalValues') {
-          for (let oncTissue of this.oncHistoryDetail.tissues) {
-            if (oncTissue.tissueId == this.tissue.tissueId) {
+          for (const oncTissue of this.oncHistoryDetail.tissues) {
+            if (oncTissue.tissueId === this.tissue.tissueId) {
               oncTissue[ parameterName ] = v;
             }
           }
@@ -152,11 +148,11 @@ export class TissueComponent {
       }
       if (parameter2 && value2) {
         nameValues = [];
-        let nameValueForType = {
+        const nameValueForType = {
           name: parameterName,
           value: v
         };
-        let nameValueForValue = {
+        const nameValueForValue = {
           name: parameter2,
           value: value2
         };
@@ -172,8 +168,8 @@ export class TissueComponent {
       );
       const patch = patch1.getPatch();
       this.patchFinished = false;
-      this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(// need to subscribe, otherwise it will not send!
-        data => {
+      this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
+        next: data => {
           const result = Result.parse(data);
           if (result.code === 200 && result.body != null && result.body !== '' && this.tissue.tissueId == null) {
             const jsonData: any | any[] = JSON.parse(result.body);
@@ -198,7 +194,7 @@ export class TissueComponent {
             }
           } else if (result.code === 200) {
             if (result.body != null && result.body !== '') {
-              let jsonData: any | any[] = JSON.parse( result.body );
+              const jsonData: any | any[] = JSON.parse( result.body );
               if (tAlias === 'sm') {
                 if (jsonData.smId) {
                   smId = jsonData.smId;
@@ -215,9 +211,9 @@ export class TissueComponent {
               }
               if (jsonData instanceof Array) {
                 jsonData.forEach( ( val ) => {
-                  let nameValue = NameValue.parse( val );
-                  if (nameValue.name && nameValue.name.indexOf( '.' ) != -1) {
-                    nameValue.name = nameValue.name.substr( nameValue.name.indexOf( '.' ) + 1 );
+                  const nameValue = NameValue.parse( val );
+                  if (nameValue.name && nameValue.name.indexOf( '.' ) !== -1) {
+                    nameValue.name = nameValue.name.substring( nameValue.name.indexOf( '.' ) + 1 );
                   }
                   this.oncHistoryDetail[ nameValue.name ] = nameValue.value;
                 } );
@@ -228,64 +224,64 @@ export class TissueComponent {
             this.dup = false;
           }
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.router.navigate([ Statics.HOME_URL ]);
           }
         },
-      );
+      });
     }
   }
 
-  deleteTissue (): void {
+  deleteTissue(): void {
     this.tissue.deleted = true;
   }
 
-  public getStyleDisplay (): string {
+  public getStyleDisplay(): string {
     return this.collaboratorS != null ? Statics.DISPLAY_BLOCK : Statics.DISPLAY_NONE;
   }
 
-  public checkCollaboratorId (): void {
+  public checkCollaboratorId(): void {
     let jsonData: any[];
     if (this.collaboratorS == null && (this.tissue.collaboratorSampleId == null || this.tissue.collaboratorSampleId === '')) {
       this.dsmService.lookupCollaboratorId(
         'tCollab', this.participant.participant.ddpParticipantId,
           this.participant.data.profile['hruid'], localStorage.getItem(ComponentService.MENU_SELECTED_REALM)
         )
-        .subscribe(// need to subscribe, otherwise it will not send!
-          data => {
+        .subscribe({// need to subscribe, otherwise it will not send!
+          next: data => {
             jsonData = data;
             jsonData.forEach((val) => {
               const con = Lookup.parse(val);
               this.collaboratorS = con.field1.value + '_';
             });
           },
-          err => {
+          error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
               this.router.navigate([Statics.HOME_URL]);
             }
           },
-        );
+        });
     }
   }
 
-  public setLookup (): void {
+  public setLookup(): void {
     this.tissue.collaboratorSampleId = this.collaboratorS;
     this.collaboratorS = null;
     this.collaboratorSampleIdInputField.nativeElement.focus();
   }
 
-  isPatchedCurrently (field: string): boolean {
+  isPatchedCurrently(field: string): boolean {
     return this.currentPatchField === field;
   }
 
-  currentField (field: string): void {
+  currentField(field: string): void {
     if (field != null || (field == null && this.patchFinished)) {
       this.currentPatchField = field;
     }
   }
 
-  changeSmId( event: any, parameterName, id, type, smIdArray, index, filedName? ) {
+  changeSmId( event: any, parameterName, id, type, smIdArray, index, filedName? ): void {
     let value: any;
     if (typeof event === 'string') {
       value = event;
@@ -303,62 +299,63 @@ export class TissueComponent {
       this.currentPatchField = filedName;
     }
     if (!id) {
-      this.valueChanged( type, 'smIdType', 'tissueId', this.tissue.tissueId, Statics.SM_ID_ALIAS, id, smIdArray, index, value, parameterName );
-
+      this.valueChanged(
+        type, 'smIdType', 'tissueId',
+        this.tissue.tissueId, Statics.SM_ID_ALIAS, id, smIdArray, index, value, parameterName
+      );
     }
     else {
       this.valueChanged( value, parameterName, 'tissueId', this.tissue.tissueId, Statics.SM_ID_ALIAS, id, smIdArray, index );
     }
   }
 
-  openUSSModal() {
+  openUSSModal(): void {
     this.currentSMIDField = this.uss;
     this.SMIDModal.show();
   }
 
-  openHEModal() {
+  openHEModal(): void {
     this.currentSMIDField = this.he;
     this.SMIDModal.show();
   }
 
-  openScrollsModal() {
+  openScrollsModal(): void {
     this.currentSMIDField = this.scrolls;
     this.SMIDModal.show();
   }
 
-  getValue( s: TissueSmId ) {
+  getValue( s: TissueSmId ): string {
     if (!s || !s.smIdValue) {
       return '';
     }
     return s.smIdValue;
   }
 
-  exitModal() {
+  exitModal(): void {
     this.SMIDModal.hide();
   }
 
-  goNext( name: string, i: number ) {
-    let nextId = name + ( i + 1 );
-    let nextElement = document.getElementById( nextId );
+  goNext( name: string, i: number ): void {
+    const nextId = name + ( i + 1 );
+    const nextElement = document.getElementById( nextId );
     if (nextElement) {
       nextElement.focus();
     }
   }
 
-  smIdCountMatch( array: any[], num: number ) {
+  smIdCountMatch( array: any[], num: number ): boolean {
     if (!array) {
-      return num == 0;
+      return num === 0;
     }
-    return array.length == num;
+    return array.length === num;
   }
 
-  addSMId( name ) {
+  addSMId( name ): void {
     if (name === this.uss) {
       if (!this.tissue.ussSMId) {
         this.tissue.ussSMId = [];
       }
       this.tissue.ussSMId.push( new TissueSmId( null, this.uss, null, this.tissue.tissueId, false ) );
-
     }
     else if (name === this.scrolls) {
       if (!this.tissue.scrollSMId) {
@@ -374,7 +371,7 @@ export class TissueComponent {
     }
   }
 
-  deleteSMID( array: TissueSmId[], i: number ) {
+  deleteSMID( array: TissueSmId[], i: number ): void {
     array[ i ].deleted = true;
     if (array[ i ].smIdPk) {
       this.changeSmId( '1', 'deleted', array[ i ].smIdPk, array[ i ].smIdType, array, i );
@@ -385,7 +382,7 @@ export class TissueComponent {
     array.splice( i, 1 );
   }
 
-  checkboxChecked( event: any, smidArray: TissueSmId[], index: number ) {
+  checkboxChecked( event: any, smidArray: TissueSmId[], index: number ): void {
     if (event.checked && event.checked === true) {
       smidArray[ index ].isSelected = true;
       this.selectedSmIds += 1;
@@ -396,7 +393,7 @@ export class TissueComponent {
     }
   }
 
-  exitModalAndDeleteRest( name ) {
+  exitModalAndDeleteRest( name ): void {
     if (name === this.uss) {
       for (let i = 0; i < this.tissue.ussSMId.length; i += 1) {
         if (!this.tissue.ussSMId[ i ].isSelected) {
@@ -406,7 +403,6 @@ export class TissueComponent {
           this.tissue.ussSMId[ i ].isSelected = false;
         }
       }
-
     }
     else if (name === this.scrolls) {
       for (let i = 0; i < this.tissue.scrollSMId.length; i += 1) {
@@ -436,35 +432,41 @@ export class TissueComponent {
       if (!this.tissue.ussSMId) {
         this.tissue.ussSMId = new Array<TissueSmId>();
       }
-      return ( this.tissue.ussCount < this.tissue.ussSMId.length && !this.smIdDuplicate[ this.uss ].has( this.createDuplicateIndex(index, name) ) );
+      return ( this.tissue.ussCount < this.tissue.ussSMId.length &&
+        !this.smIdDuplicate[ this.uss ].has( this.createDuplicateIndex(index, name) )
+      );
     }
     else if (name === this.scrolls) {
       if (!this.tissue.scrollSMId) {
         this.tissue.scrollSMId = new Array<TissueSmId>();
       }
-      return ( this.tissue.scrollsCount < this.tissue.scrollSMId.length && !this.smIdDuplicate[ this.scrolls ].has( this.createDuplicateIndex(index, name)  ) );
+      return ( this.tissue.scrollsCount < this.tissue.scrollSMId.length &&
+        !this.smIdDuplicate[ this.scrolls ].has( this.createDuplicateIndex(index, name)  )
+      );
     }
     else if (name === this.he) {
       if (!this.tissue.HESMId) {
         this.tissue.HESMId = new Array<TissueSmId>();
       }
-      return ( this.tissue.hECount < this.tissue.HESMId.length && !this.smIdDuplicate[ this.he ].has( this.createDuplicateIndex(index, name)  ) );
+      return ( this.tissue.hECount < this.tissue.HESMId.length &&
+        !this.smIdDuplicate[ this.he ].has( this.createDuplicateIndex(index, name)  )
+      );
     }
   }
 
-  isDuplicate( currentSMIDField: string,  index ) {
+  isDuplicate( currentSMIDField: string,  index: number ): boolean {
     return ( this.smIdDuplicate[ currentSMIDField ].has( this.createDuplicateIndex( index, currentSMIDField ) ) );
-
   }
 
-  createDuplicateIndex( i, name? ) {
-    if(!name)
+  createDuplicateIndex( i: number, name?: string ): string {
+    if(!name) {
       name = this.currentSMIDField;
+    }
     return name + i;
   }
 
-  canChangeThis(i, name){
-    let index = this.createDuplicateIndex(i, name);
+  canChangeThis(i: number, name: string): boolean {
+    const index = this.createDuplicateIndex(i, name);
     return this.editable && (this.smIdDuplicate[name].size === 0 || this.smIdDuplicate[name].has(index));
   }
 }

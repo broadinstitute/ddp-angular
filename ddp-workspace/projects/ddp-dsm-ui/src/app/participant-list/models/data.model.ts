@@ -23,11 +23,11 @@ export class Data {
     this.computed = computed;
   }
 
-  getMultipleDatesForActivity( activityData: ActivityData, name: string ) {
-    let answers: Array<QuestionAnswer> = new Array();
-    for (let x of this.activities) {
+  getMultipleDatesForActivity( activityData: ActivityData, name: string ): QuestionAnswer[] {
+    const answers: Array<QuestionAnswer> = [];
+    for (const x of this.activities) {
       if (x.activityCode === activityData.activityCode) {
-        for (let y of x.questionsAnswers) {
+        for (const y of x.questionsAnswers) {
           if (y.stableId === name) {
             answers.push( y );
           }
@@ -42,7 +42,7 @@ export class Data {
     let medicalProviders: Array<MedicalProvider> = null;
     if (json.medicalProviders != null) {
       jsonData = json.medicalProviders;
-      if (json != null && jsonData != null) {
+      if (jsonData != null) {
         medicalProviders = [];
         jsonData.forEach((val) => {
           const medicalProvider = MedicalProvider.parse(val);
@@ -56,18 +56,18 @@ export class Data {
     );
   }
 
-  public getGroupedOptionsForAnswer(activityData: ActivityData, name: string, questionAnswer:string){
-    let answers: Array<string> = new Array();
-    for (let x of this.activities) {
+  public getGroupedOptionsForAnswer(activityData: ActivityData, name: string, questionAnswer: string): string[] {
+    const answers: Array<string> = [];
+    for (const x of this.activities) {
       if (x.activityCode === activityData.activityCode) {
-        for (let y of x.questionsAnswers) {
+        for (const y of x.questionsAnswers) {
           if (y.stableId === name) {
-            for (let answer of y.answer) {
+            for (const answer of y.answer) {
               if (answer === questionAnswer) {
                 if (y.groupedOptions) {
-                  let ans = y.groupedOptions[ answer ];
+                  const ans = y.groupedOptions[ answer ];
                   if (ans) {
-                    for (let a of ans) {
+                    for (const a of ans) {
                       answers.push( a );
                     }
                   }
