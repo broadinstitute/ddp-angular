@@ -135,6 +135,7 @@ export * from './lib/components/activityForm/picklist/radiobuttonsActivityPickli
 export * from './lib/components/activityForm/picklist/checkboxesActivityPicklistQuestion.component';
 export * from './lib/components/activityForm/picklist/dropdownActivityPicklistQuestion.component';
 export * from './lib/components/activityForm/picklist/activityPicklistAnswer.component';
+export * from './lib/components/activityForm/picklist/autocompleteActivityPicklistQuestion.component';
 export * from './lib/components/activityForm/answers/question-prompt/questionPrompt.component';
 export * from './lib/components/activityForm/activity-blocks/conditionalBlock.component';
 export * from './lib/components/activityForm/activity-blocks/groupBlockList.component';
@@ -169,14 +170,17 @@ export * from './lib/components/networkSniffer.component';
 export * from './lib/components/user/participantProfile.component';
 export * from './lib/components/progress-indicator/progress-indicator.component';
 export * from './lib/components/confirmDialog/confirmDialog.component';
+export * from './lib/components/prism/prism.component';
 
 export * from './lib/directives/upperCaseInputDirective.directive';
 export * from './lib/directives/routeTransformer.directive';
 export * from './lib/directives/lazyLoadResources.directive';
 export * from './lib/directives/invitationCodeFormatter.directive';
+export * from './lib/directives/sticky-scroll.directive';
 
 export * from './lib/pipes/invitationFormatter.pipe';
 export * from './lib/pipes/fileSizeFormatter.pipe';
+export * from './lib/pipes/searchHighlight.pipe';
 
 export * from './lib/guards/auth.guard';
 export * from './lib/guards/adminAuth.guard';

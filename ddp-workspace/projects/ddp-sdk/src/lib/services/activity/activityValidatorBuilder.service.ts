@@ -24,7 +24,7 @@ import * as _ from 'underscore';
 import { ActivityFileValidationRule } from './validators/activityFileValidationRule';
 import { ActivityFileQuestionBlock } from '../../models/activity/activityFileQuestionBlock';
 import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
-import { ActivityPicklistQuestionBlock } from 'ddp-sdk';
+import { ActivityPicklistQuestionBlock } from '../../models/activity/activityPicklistQuestionBlock';
 import { ActivityStrictMatchValidationRule } from './validators/activityStrictMatchValidationRule';
 import { ActivityUniqueValidationRule } from './validators/activityUniqueValidationRule';
 

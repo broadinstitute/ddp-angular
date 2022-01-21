@@ -1,17 +1,19 @@
 /// <reference types="@types/googlemaps" />
 import { Directive, ElementRef, EventEmitter, Inject, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
-import { ScriptLoaderService } from '../services/scriptLoader.service';
-import { Address } from '../models/address';
-import { ConfigurationService } from '../services/configuration.service';
 import { concat, Observable, Subject } from 'rxjs';
 import { share, skip, takeUntil } from 'rxjs/operators';
-import { LoggingService } from '../services/logging.service';
 import * as _ from 'underscore';
+
+import { ScriptLoaderService } from '../services/scriptLoader.service';
+import { ConfigurationService } from '../services/configuration.service';
+import { LoggingService } from '../services/logging.service';
+import { Address } from '../models/address';
+import { FuncType } from '../models/funcType';
+
 import Autocomplete = google.maps.places.Autocomplete;
 import PlaceResult = google.maps.places.PlaceResult;
 import AutocompleteOptions = google.maps.places.AutocompleteOptions;
 import ComponentRestrictions = google.maps.places.ComponentRestrictions;
-import { FuncType } from 'ddp-sdk';
 
 @Directive({
     selector: '[addressgoogleautocomplete]'
