@@ -207,7 +207,6 @@ import { FileAnswerMapperService } from './services/fileAnswerMapper.service';
 import { StickyScrollDirective } from './directives/sticky-scroll.directive';
 import { AutocompleteActivityPicklistQuestion } from './components/activityForm/picklist/autocompleteActivityPicklistQuestion.component';
 import { SearchHighlightPipe } from './pipes/searchHighlight.pipe';
-import { PicklistSortingPolicy } from './services/picklistSortingPolicy.service';
 import { FuncType } from './models/funcType';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
@@ -335,12 +334,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         InvitationPipe,
         FileAnswerMapperService,
         ParticipantsSearchServiceAgent,
-        // Angular Injection does not like that we have optional arguments in constructor
-        // Need to create our default instance ourselves
-        {
-            provide: PicklistSortingPolicy,
-            useValue: new PicklistSortingPolicy()
-        },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
