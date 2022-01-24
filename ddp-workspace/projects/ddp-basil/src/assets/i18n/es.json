@@ -2,11 +2,11 @@
     "Common": {
         "Buttons": {
             "Login": {
-                "Title": "[ES] Log In",
+                "Title": "Iniciar sesión",
                 "AriaLabel": "[ES] Log In"
             },
             "Submit": {
-                "Title": "[ES] Submit",
+                "Title": "Enviar",
                 "AriaLabel": "[ES] Submit"
             },
             "HeaderMenu": {
@@ -16,7 +16,7 @@
     },
     "App": {
         "Navigation": {
-            "Home": "[ES] Home",
+            "Home": "Página principal",
             "Prequal": "[ES] Prequal",
             "Dashboard": "[ES] Dashboard"
         }
@@ -132,21 +132,21 @@
             "Text": "[ES] The dashboard below describes each Basil Project form and its status."
         },
         "DatePicker": {
-            "Day": "[ES] Choose day...",
-            "Month": "[ES] Choose month...",
-            "Year": "[ES] Choose year...",
-            "January": "[ES] January",
-            "February": "[ES] February",
-            "March": "[ES] March",
-            "April": "[ES] April",
-            "May": "[ES] May",
-            "June": "[ES] June",
-            "July": "[ES] July",
-            "August": "[ES] August",
-            "September": "[ES] September",
-            "October": "[ES] October",
-            "November": "[ES] November",
-            "December": "[ES] December"
+            "Day": "Seleccione el día...",
+            "Month": "Seleccione el mes...",
+            "Year": "Seleccione el año...",
+            "January": "Enero",
+            "February": "Febrero",
+            "March": "Marzo",
+            "April": "Abril",
+            "May": "Mayo",
+            "June": "Junio",
+            "July": "Julio",
+            "August": "Agosto",
+            "September": "Septiembre",
+            "October": "Octubre",
+            "November": "Noviembre",
+            "December": "Diciembre"
         },
         "DateLabel": {
             "YYYY": "AAAA",
