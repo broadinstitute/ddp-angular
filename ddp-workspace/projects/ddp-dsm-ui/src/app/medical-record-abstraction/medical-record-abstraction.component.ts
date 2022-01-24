@@ -64,9 +64,7 @@ export class MedicalRecordAbstractionComponent {
 
   findGroup(group: Array<AbstractionGroup>, medicalRecordAbstractionGroupId: number): AbstractionGroup {
     if (group != null) {
-      return group.find(gr => {
-        return gr.abstractionGroupId === medicalRecordAbstractionGroupId;
-      });
+      return group.find(gr => gr.abstractionGroupId === medicalRecordAbstractionGroupId);
     }
   }
 }

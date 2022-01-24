@@ -6,12 +6,6 @@ import { ActivitySuggestionBuilder } from './activitySuggestionBuilder.service';
 import { ActivityPicklistQuestionBlock, QuestionType, LoggingService, ActivityPicklistOption } from 'ddp-sdk';
 import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
 
-let service: ActivityQuestionConverter;
-const loggerServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logError']);
-const validatorBuilderSpy: jasmine.SpyObj<ActivityValidatorBuilder> = jasmine.createSpyObj('ActivityValidatorBuilder', {
-    buildQuestionValidatorRule: []
-});
-const suggestionBuilderSpy: jasmine.SpyObj<ActivitySuggestionBuilder> = jasmine.createSpyObj('ActivitySuggestionBuilder', ['getSuggestionProvider']);
 const question = {
     picklistOptions: [
         {
@@ -33,7 +27,18 @@ const question = {
 };
 
 describe('ActivityQuestionConverter Test', () => {
+    let service: ActivityQuestionConverter;
+    let loggerServiceSpy: jasmine.SpyObj<LoggingService>;
+    let validatorBuilderSpy: jasmine.SpyObj<ActivityValidatorBuilder>;
+    let suggestionBuilderSpy: jasmine.SpyObj<ActivitySuggestionBuilder>;
+
     beforeEach(() => {
+        loggerServiceSpy = jasmine.createSpyObj('LoggingService', ['logError']);
+        validatorBuilderSpy = jasmine.createSpyObj('ActivityValidatorBuilder', {
+            buildQuestionValidatorRule: []
+        });
+        suggestionBuilderSpy = jasmine.createSpyObj('ActivitySuggestionBuilder', ['getSuggestionProvider']);
+
         TestBed.configureTestingModule({
             imports: [HttpClientModule],
             providers: [

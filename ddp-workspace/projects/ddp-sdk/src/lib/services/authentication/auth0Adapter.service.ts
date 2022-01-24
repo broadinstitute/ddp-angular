@@ -16,6 +16,7 @@ import { takeUntil, take, tap, mergeMap } from 'rxjs/operators';
 import * as auth0 from 'auth0-js';
 import * as _ from 'underscore';
 import { Session } from '../../models/session';
+import { FuncType } from '../../models/funcType';
 
 /**
  * Main class that handles Auth0 authentication
@@ -311,7 +312,7 @@ export class Auth0AdapterService implements OnDestroy {
         const studyGuid = this.configuration.studyGuid;
         const auth0IdToken = this.jwtHelper.decodeToken(currentSession.idToken)['sub'];
         const clientId = currentSession.isAdmin ? this.configuration.adminClientId : this.configuration.auth0ClientId;
-        const resultMatchesThisSession = (result: any) => {
+        const resultMatchesThisSession: FuncType<boolean> = (result: any) => {
             const resultClientId: any = result.idTokenPayload['https://datadonationplatform.org/cid'];
             return result.idTokenPayload['sub'] === auth0IdToken && resultClientId && resultClientId === clientId;
         };

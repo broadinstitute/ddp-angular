@@ -5,11 +5,15 @@ import { LoggingService } from '../../services/logging.service';
 type Formatter = (inputState: TextInputState) => TextInputState;
 
 describe('InvitationCodeFormatterDirective', () => {
-    const loggingServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logDebug']);
-    const formatterObject = new InvitationCodeInputFormatter(loggingServiceSpy);
-    const formatter: Formatter = new InvitationCodeInputFormatter(loggingServiceSpy).format;
+    let loggingServiceSpy: jasmine.SpyObj<LoggingService>;
+    let formatterObject: InvitationCodeInputFormatter;
+    let formatter: Formatter;
 
-    beforeAll(() => { });
+    beforeAll(() => {
+        loggingServiceSpy = jasmine.createSpyObj('LoggingService', ['logDebug']);
+        formatterObject = new InvitationCodeInputFormatter(loggingServiceSpy);
+        formatter = new InvitationCodeInputFormatter(loggingServiceSpy).format;
+    });
 
     it('blank works', () => {
         expect(formatter({ value: '', selectionStart: 0 })).toEqual({ value: '', selectionStart: 0 });
@@ -79,15 +83,15 @@ describe('InvitationCodeFormatterDirective', () => {
         expect(formatterObject.filter('1&', 2)).toEqual({ value: '1', selectionStart: 1 });
     });
 
-    it('filter with cursor before end', () => {
+    it('filter with cursor before end, case 1', () => {
         expect(formatterObject.filter('1&', 1)).toEqual({ value: '1', selectionStart: 1 });
     });
 
-    it('filter with cursor before end', () => {
+    it('filter with cursor before end, case 2', () => {
         expect(formatterObject.filter('12345 - X8', 8)).toEqual({ value: '12345X8', selectionStart: 5 });
     });
 
-    it('filter with cursor before end', () => {
+    it('filter with cursor before end, case 3', () => {
         expect(formatterObject.filter('1 - X8', 4)).toEqual({ value: '1X8', selectionStart: 1 });
     });
 

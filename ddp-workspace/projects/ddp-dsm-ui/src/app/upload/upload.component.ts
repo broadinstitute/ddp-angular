@@ -66,8 +66,8 @@ export class UploadComponent implements OnInit {
     this.allowedToSeeInformation = false;
     this.additionalMessage = null;
     let jsonData: any[];
-    this.dsmService.getRealmsAllowed(Statics.SHIPPING).subscribe(
-      data => {
+    this.dsmService.getRealmsAllowed(Statics.SHIPPING).subscribe({
+      next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
           if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
@@ -78,30 +78,28 @@ export class UploadComponent implements OnInit {
           }
         });
         if (!this.allowedToSeeInformation) {
-          this.additionalMessage = 'You are not allowed to see information of the selected realm at that category';
+          this.additionalMessage = 'You are not allowed to see information of the selected study at that category';
         }
       },
-      () => {
-        return null;
-      }
-    );
+      error: () => null
+    });
   }
 
   ngOnInit(): void {
     if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
       this.checkRight();
     } else {
-      this.additionalMessage = 'Please select a realm';
+      this.additionalMessage = 'Please select a study';
     }
     window.scrollTo(0, 0);
   }
 
   getPossibleKitType(): void {
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null && localStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== '') {
+    if (this.isSelectedRealm()) {
       this.loading = true;
       let jsonData: any[];
-      this.dsmService.getKitTypes(localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe(
-        data => {
+      this.dsmService.getKitTypes(localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
+        next: data => {
           this.kitTypes = [];
           jsonData = data;
           jsonData.forEach((val) => {
@@ -114,23 +112,23 @@ export class UploadComponent implements OnInit {
           // console.info(`${this.kitTypes.length} kit types received: ${JSON.stringify(data, null, 2)}`);
           this.loading = false;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading kit types\n' + err;
         }
-      );
+      });
     }
   }
 
   getUploadReasons(): void {
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null && localStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== '') {
+    if (this.isSelectedRealm()) {
       this.loading = true;
       let jsonData: any[];
-      this.dsmService.getUploadReasons(localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe(
-        data => {
+      this.dsmService.getUploadReasons(localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
+        next: data => {
           this.uploadReasons = [];
           jsonData = data;
           jsonData.forEach((val) => {
@@ -138,23 +136,23 @@ export class UploadComponent implements OnInit {
           });
           this.loading = false;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading kit upload reasons\n' + err;
         }
-      );
+      });
     }
   }
 
   getShippingCarriers(): void {
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null && localStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== '') {
+    if (this.isSelectedRealm()) {
       this.loading = true;
       let jsonData: any[];
-      this.dsmService.getShippingCarriers(localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe(
-        data => {
+      this.dsmService.getShippingCarriers(localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
+        next: data => {
           this.carriers = [];
           jsonData = data;
           jsonData.forEach((val) => {
@@ -162,14 +160,14 @@ export class UploadComponent implements OnInit {
           });
           this.loading = false;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading shipping carriers\n' + err;
         }
-      );
+      });
     }
   }
 
@@ -197,8 +195,8 @@ export class UploadComponent implements OnInit {
       localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.kitType.name,
         this.file, this.selectedReason, this.selectedCarrier
       )
-      .subscribe(
-        data => {
+      .subscribe({
+        next: data => {
           this.loading = false;
           if (typeof data === 'string') {
             this.errorMessage = 'Error - Uploading txt.\n' + data;
@@ -213,6 +211,7 @@ export class UploadComponent implements OnInit {
                 this.failedParticipants.push(UploadParticipant.parse(val));
               });
               if (this.failedParticipants.length > 0) {
+                // eslint-disable-next-line max-len
                 this.errorMessage = 'Participants uploaded.\nCouldn\'t create kit requests for ' + this.failedParticipants.length + ' participant(s)';
               }
 
@@ -236,14 +235,14 @@ export class UploadComponent implements OnInit {
             }
           }
         },
-        err => {
+        error: err => {
           this.loading = false;
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.errorMessage = 'Error - Uploading txt\n' + err;
         }
-      );
+      });
   }
 
   downloadFailed(): void {
@@ -284,8 +283,8 @@ export class UploadComponent implements OnInit {
         localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.kitType.name,
         jsonParticipants, this.selectedReason, this.selectedCarrier
       )
-      .subscribe(
-        data => {
+      .subscribe({
+        next: data => {
           this.loading = false;
           if (typeof data === 'string') {
             this.errorMessage = 'Error - Uploading duplicate.\n' + data;
@@ -293,14 +292,14 @@ export class UploadComponent implements OnInit {
             this.additionalMessage = 'All participants were uploaded.';
           }
         },
-        err => {
+        error: err => {
           this.loading = false;
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.errorMessage = 'Error - Uploading txt\n' + err;
         }
-      );
+      });
     this.emptyUpload();
   }
 
@@ -330,5 +329,10 @@ export class UploadComponent implements OnInit {
     this.uploadPossible = this.kitType != null && (this.uploadReasons.length === 0 || this.selectedReason !== null) &&
       (this.carriers.length === 0 || this.selectedCarrier !== null);
     return this.uploadPossible;
+  }
+
+  private isSelectedRealm(): boolean {
+    return localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null &&
+      localStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== '';
   }
 }

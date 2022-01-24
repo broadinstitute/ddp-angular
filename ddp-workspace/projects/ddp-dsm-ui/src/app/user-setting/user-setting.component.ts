@@ -61,8 +61,8 @@ export class UserSettingComponent implements OnInit {
   private checkRight(): void {
     let jsonData: any[];
     let allowedToSeeInformation = false;
-    this.dsmService.getRealmsAllowed(Statics.MEDICALRECORD).subscribe(
-      data => {
+    this.dsmService.getRealmsAllowed(Statics.MEDICALRECORD).subscribe({
+      next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
           if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
@@ -76,21 +76,17 @@ export class UserSettingComponent implements OnInit {
         });
         if (!allowedToSeeInformation && localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
           this.compService.customViews = null;
-          this.errorMessage = 'You are not allowed to see information of the selected realm at that category';
+          this.errorMessage = 'You are not allowed to see information of the selected study at that category';
         }
       },
-      () => {
-        // this.loadingParticipants = null;
-        return null;
-      },
-    );
-
+      error: () => null
+    });
   }
 
   saveUserSettings(): void {
     this.saving = true;
-    this.dsmService.saveUserSettings(JSON.stringify(this.userSetting)).subscribe(// need to subscribe, otherwise it will not send!
-      data => {
+    this.dsmService.saveUserSettings(JSON.stringify(this.userSetting)).subscribe({// need to subscribe, otherwise it will not send!
+      next: data => {
         this.additionalMessage = '';
         // console.log(`received: ${JSON.stringify(data, null, 2)}`);
         const result = Result.parse(data);
@@ -101,14 +97,14 @@ export class UserSettingComponent implements OnInit {
         }
         this.saving = false;
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.router.navigate([Statics.HOME_URL]);
         }
         this.additionalMessage = 'Error - Saving user settings\n' + err;
         this.saving = false;
       },
-    );
+    });
   }
 
   setDefaultFilter(value, parent: string): void {
@@ -126,45 +122,48 @@ export class UserSettingComponent implements OnInit {
     };
     const jsonString = JSON.stringify(json);
     this.saving = true;
-    this.dsmService.setDefaultFilter(jsonString, filterName, parent, localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe(
-      () => {
-        this.additionalMessage = '';
-        if (parent === 'participantList') {
-          this.role.getUserSetting().defaultParticipantFilter = filterName;
-          this.userSetting.defaultParticipantFilter = filterName;
-        } else if (parent === 'tissueList') {
-          this.role.getUserSetting().defaultTissueFilter = filterName;
-          this.userSetting.defaultTissueFilter = filterName;
-        }
-        this.saving = false;
-        this.additionalMessage = 'Default filter changed';
-      },
-      err => {
-        if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([Statics.HOME_URL]);
-        }
-        this.additionalMessage = 'Error - Saving user settings\n' + err;
-        this.saving = false;
+    this.dsmService.setDefaultFilter(jsonString, filterName, parent, localStorage.getItem(ComponentService.MENU_SELECTED_REALM))
+      .subscribe({
+        next: () => {
+          this.additionalMessage = '';
+          if (parent === 'participantList') {
+            this.role.getUserSetting().defaultParticipantFilter = filterName;
+            this.userSetting.defaultParticipantFilter = filterName;
+          } else if (parent === 'tissueList') {
+            this.role.getUserSetting().defaultTissueFilter = filterName;
+            this.userSetting.defaultTissueFilter = filterName;
+          }
+          this.saving = false;
+          this.additionalMessage = 'Default filter changed';
+        },
+        error: err => {
+          if (err._body === Auth.AUTHENTICATION_ERROR) {
+            this.router.navigate([Statics.HOME_URL]);
+          }
+          this.additionalMessage = 'Error - Saving user settings\n' + err;
+          this.saving = false;
 
-      },
-    );
+        },
+      });
   }
 
   getSavedFilters(): void {
     this.dsmService.getFiltersForUserForRealm(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null)
-      .subscribe(jsonData => {
-        this.tissueListFilterNames = [];
-        this.participantListFilterNames = [];
-        jsonData.forEach((val) => {
-          if (val.parent === 'tissueList') {
-            this.tissueListFilterNames.push(val.filterName);
-          } else if (val.parent === 'participantList') {
-            this.participantListFilterNames.push(val.filterName);
-          }
-        });
-      },
-      err => {
-        this.errorMessage = 'Error getting a list of filters, Please contact your DSM Developer\n' + err;
+      .subscribe({
+        next: jsonData => {
+          this.tissueListFilterNames = [];
+          this.participantListFilterNames = [];
+          jsonData.forEach((val) => {
+            if (val.parent === 'tissueList') {
+              this.tissueListFilterNames.push(val.filterName);
+            } else if (val.parent === 'participantList') {
+              this.participantListFilterNames.push(val.filterName);
+            }
+          });
+        },
+        error: err => {
+          this.errorMessage = 'Error getting a list of filters, Please contact your DSM Developer\n' + err;
+        }
       });
   }
 }

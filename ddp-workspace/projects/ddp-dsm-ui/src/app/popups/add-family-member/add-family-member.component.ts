@@ -61,13 +61,13 @@ export class AddFamilyMemberComponent implements OnInit {
       userId: this.role.userID()
     };
     this.isDataLoading = true;
-    this.dsmService.addFamilyMemberRequest(JSON.stringify(payload)).subscribe(
-      data => {
+    this.dsmService.addFamilyMemberRequest(JSON.stringify(payload)).subscribe({
+      next: data => {
         this.openResultDialog('Successfully added family member');
         this.close();
         this.data.participant.participantData.push(data);
       },
-      err => {
+      error: err => {
         if (err.status === 400) {
           const result = JSON.parse(err._body);
           this.openResultDialog(result.body);
@@ -76,7 +76,7 @@ export class AddFamilyMemberComponent implements OnInit {
         }
         this.close();
       },
-    );
+    });
   }
 
   private openResultDialog(text: string): void {

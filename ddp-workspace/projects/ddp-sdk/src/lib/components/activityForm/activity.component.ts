@@ -95,17 +95,17 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
             .subscribe(() => this.submitAnnouncementService.announceSubmit());
 
         // all PATCH responses routed to here
-        const resSub = this.submissionManager.answerSubmissionResponse$.subscribe(
-            (response) => {
-                    this.updateVisibility((response as PatchAnswerResponse).blockVisibility);
-                    this.updateServerValidationMessages(response);
-                    this.communicationErrorOccurred = false;
-                },
-                (error) => {
-                    this.logger.logError(this.LOG_SOURCE, 'There has been unexpected error:', error);
-                    this.navigateToErrorPage();
-                }
-            );
+        const resSub = this.submissionManager.answerSubmissionResponse$.subscribe({
+            next: (response) => {
+                this.updateVisibility((response as PatchAnswerResponse).blockVisibility);
+                this.updateServerValidationMessages(response);
+                this.communicationErrorOccurred = false;
+            },
+            error: (error) => {
+                this.logger.logError(this.LOG_SOURCE, 'There has been unexpected error:', error);
+                this.navigateToErrorPage();
+            }
+        });
 
         // If there are communication problems, there is a chance we might have missed some visibility updates
         // user should double-check their work

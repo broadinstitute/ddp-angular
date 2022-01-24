@@ -116,9 +116,7 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
 
         const form = this.answerSubject.pipe(
             filter(answer => answer !== null),
-            distinctUntilChanged((answer1, answer2) => {
-                return _.isEqual(answer1, answer2);
-            }),
+            distinctUntilChanged((answer1, answer2) => _.isEqual(answer1, answer2) ),
             tap(() => this.componentBusy.emit(1)),
             concatMap((answer: ActivityInstitutionInfo) => iif(() => !!this.guid,
                 this.updateForm(answer),

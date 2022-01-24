@@ -3,6 +3,7 @@ import { Address } from '../../address/address.model';
 import { InvitationData } from '../../invitation-data/invitation-data.model';
 import { Computed } from './computed.model';
 import { MedicalProvider } from './medical-providers.model';
+import { QuestionAnswer } from '../../activity-data/models/question-answer.model';
 
 export class Data {
   constructor(public profile: object, public status: string, public statusTimestamp: number,
@@ -22,12 +23,26 @@ export class Data {
     this.computed = computed;
   }
 
+  getMultipleDatesForActivity( activityData: ActivityData, name: string ): QuestionAnswer[] {
+    const answers: Array<QuestionAnswer> = [];
+    for (const x of this.activities) {
+      if (x.activityCode === activityData.activityCode) {
+        for (const y of x.questionsAnswers) {
+          if (y.stableId === name) {
+            answers.push( y );
+          }
+        }
+      }
+    }
+    return answers.reverse();
+  }
+
   static parse(json): Data {
     let jsonData: any[];
     let medicalProviders: Array<MedicalProvider> = null;
     if (json.medicalProviders != null) {
       jsonData = json.medicalProviders;
-      if (json != null && jsonData != null) {
+      if (jsonData != null) {
         medicalProviders = [];
         jsonData.forEach((val) => {
           const medicalProvider = MedicalProvider.parse(val);
@@ -40,6 +55,32 @@ export class Data {
       json.ddp, medicalProviders, json.activities, json.address, json.invitations, json.computed
     );
   }
+
+  public getGroupedOptionsForAnswer(activityData: ActivityData, name: string, questionAnswer: string): string[] {
+    const answers: Array<string> = [];
+    for (const x of this.activities) {
+      if (x.activityCode === activityData.activityCode) {
+        for (const y of x.questionsAnswers) {
+          if (y.stableId === name) {
+            for (const answer of y.answer) {
+              if (answer === questionAnswer) {
+                if (y.groupedOptions) {
+                  const ans = y.groupedOptions[ answer ];
+                  if (ans) {
+                    for (const a of ans) {
+                      answers.push( a );
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    return answers.reverse();
+  }
+
 
   getActivityDataByCode(code: string): any {
     return this.activities.find(x => x.activityCode === code);

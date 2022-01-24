@@ -19,7 +19,9 @@ import {
     SortOrder,
     PicklistSortingPolicy,
     AnalyticsEventsService,
-    AnalyticsEvent
+    AnalyticsEvent,
+    PICKLIST_SORTING_POLICY_LAST_STABLE_ID,
+    PICKLIST_SORTING_POLICY_MAIN_SORT_ORDER
 } from 'ddp-sdk';
 
 import { ToolkitConfigurationService, ToolkitModule } from 'toolkit';
@@ -188,9 +190,14 @@ export function translateFactory(translate: TranslateService,
         },
         // Ensure that sorting of autocomplete picklist options is as specified
         {
-            provide: PicklistSortingPolicy,
-            useValue: new PicklistSortingPolicy(SortOrder.ALPHABETICAL, 'UNSURE')
-        }
+            provide: PICKLIST_SORTING_POLICY_MAIN_SORT_ORDER,
+            useValue: SortOrder.ALPHABETICAL
+        },
+        {
+            provide: PICKLIST_SORTING_POLICY_LAST_STABLE_ID,
+            useValue: 'UNSURE'
+        },
+        PicklistSortingPolicy
     ],
     bootstrap: [AppComponent]
 })

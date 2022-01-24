@@ -55,8 +55,8 @@ export class DrugListComponent implements OnInit {
   getListOfDrugObjects(): void {
     this.loading = true;
     let jsonData: any[];
-    this.dsmService.getDrugs().subscribe(
-      data => {
+    this.dsmService.getDrugs().subscribe({
+      next: data => {
         this.drugList = [];
         jsonData = data;
         // console.info(`received: ${JSON.stringify(data, null, 2)}`);
@@ -66,14 +66,14 @@ export class DrugListComponent implements OnInit {
         });
         this.loading = false;
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
         this.loading = false;
         this.errorMessage = 'Error - Loading Drug List\nPlease contact your DSM developer';
       }
-    );
+    });
   }
 
   hasRole(): RoleService {
@@ -125,8 +125,8 @@ export class DrugListComponent implements OnInit {
   }
 
   patch(patch: any): void {
-    this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(// need to subscribe, otherwise it will not send!
-      data => {
+    this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
+      next: data => {
         const result = Result.parse(data);
         if (result.code !== 200) {
           this.additionalMessage = 'Error - Saving Drug\nPlease contact your DSM developer';
@@ -135,12 +135,12 @@ export class DrugListComponent implements OnInit {
         this.currentPatchField = null;
         this.currentPatchFieldRow = null;
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
       }
-    );
+    });
   }
 
   addDrug(): void {
@@ -160,32 +160,34 @@ export class DrugListComponent implements OnInit {
   }
 
   goodNewDrug(): boolean {
-    if (this.genericName == null || this.genericName === '' || this.displayName == null || this.displayName === '' ||
-      this.chemocat == null || this.chemocat === '' || this.chemoType == null || this.chemoType === '' ||
-      this.treatmentType == null || this.treatmentType === '' || this.chemotherapy == null || this.chemotherapy === '' ||
-      this.notUniqueError || this.duplicatedNamesError
-    ) {
-      return false;
-    }
-    return true;
+    return ([
+      this.genericName,
+      this.displayName,
+      this.chemocat,
+      this.chemoType,
+      this.treatmentType,
+      this.chemotherapy
+    ].every(item => item != null && item !== '') &&
+      !this.notUniqueError && !this.duplicatedNamesError
+    );
   }
 
   saveDrugList(drug: DrugList): void {
     this.loading = true;
-    this.dsmService.saveDrug(JSON.stringify(drug)).subscribe(
-      () => {
+    this.dsmService.saveDrug(JSON.stringify(drug)).subscribe({
+      next: () => {
         this.getListOfDrugObjects();
         this.loading = false;
         this.additionalMessage = 'Data saved';
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
         this.loading = false;
         this.additionalMessage = 'Error - Saving Drug\nPlease contact your DSM developer';
       }
-    );
+    });
     window.scrollTo(0, 0);
   }
 

@@ -59,7 +59,7 @@ export class FieldSettingsComponent implements OnInit {
       this.realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       this.checkRight();
     } else {
-      this.additionalMessage = 'Please select a realm';
+      this.additionalMessage = 'Please select a study';
     }
     window.scrollTo(0, 0);
   }
@@ -70,8 +70,8 @@ export class FieldSettingsComponent implements OnInit {
     this.selectedType = null;
     this.settingsOfSelectedType = [];
     let jsonData: any[];
-    this.dsmService.getRealmsAllowed(Statics.MEDICALRECORD).subscribe(
-      data => {
+    this.dsmService.getRealmsAllowed(Statics.MEDICALRECORD).subscribe({
+      next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
           if (this.realm === val) {
@@ -80,13 +80,11 @@ export class FieldSettingsComponent implements OnInit {
           }
         });
         if (!this.allowedToSeeInformation) {
-          this.additionalMessage = 'You are not allowed to see information of the selected realm at that category';
+          this.additionalMessage = 'You are not allowed to see information of the selected study at that category';
         }
       },
-      () => {
-        return null;
-      }
-    );
+      error: () => null
+    });
   }
 
   typeChecked(type: FieldType): void {
@@ -126,8 +124,8 @@ export class FieldSettingsComponent implements OnInit {
     this.loading = true;
     let jsonData: Map<string, Array<FieldSettings>>;
 
-    this.dsmService.getFieldSettings(this.realm).subscribe(
-      data => {
+    this.dsmService.getFieldSettings(this.realm).subscribe({
+      next: data => {
         this.fieldSettings = new Map<string, Array<FieldSettings>>();
         jsonData = data;
 
@@ -153,15 +151,16 @@ export class FieldSettingsComponent implements OnInit {
         }
         this.loading = false;
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
         this.loading = false;
         const returnedMessage = JSON.parse(err._body);
-        this.errorMessage = returnedMessage['body'] ? returnedMessage['body'] : 'Error - Loading FieldSettings\nPlease contact your DSM developer';
+        this.errorMessage = returnedMessage['body'] ?
+          returnedMessage['body'] : 'Error - Loading FieldSettings\nPlease contact your DSM developer';
       }
-    );
+    });
   }
 
   saveFieldSettings(): void {
@@ -188,8 +187,8 @@ export class FieldSettingsComponent implements OnInit {
         const updatedFieldSettings: object = {};
         updatedFieldSettings[ this.selectedType.tableAlias ] = cleanedFieldSettings;
 
-        this.dsmService.saveFieldSettings(this.realm, JSON.stringify(updatedFieldSettings)).subscribe(
-          data => {
+        this.dsmService.saveFieldSettings(this.realm, JSON.stringify(updatedFieldSettings)).subscribe({
+          next: data => {
             this.loadFieldSettings();
             if (data.hasOwnProperty('code') && data[ 'code' ] !== 200) {
               this.additionalMessage = 'Error - Saving field settings\nPlease contact your DSM developer';
@@ -197,14 +196,14 @@ export class FieldSettingsComponent implements OnInit {
               this.additionalMessage = 'Data saved';
             }
           },
-          err => {
+          error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
               this.auth.logout();
               this.loading = false;
             }
             this.additionalMessage = JSON.parse(err._body).body;
           }
-        );
+        });
       }
 
       this.saving = false;

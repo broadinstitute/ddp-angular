@@ -1,12 +1,12 @@
 # DDP-Workspace
 # DataDonationPlatform Angular SDK and Toolkit libraries; basil-app, sandbox-app sample apps; ddp-angio, ddp-brain, ddp-mbc apps
 
-These libraries and projects were generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
+These libraries and projects were generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.0.
 
 ## Initial steps
 ```
-nvm use 12.20.0
-npm install -g @angular/cli@10.2.0
+nvm use 16.13.1
+npm install -g @angular/cli@13.1
 npm install
 ```
 ## Launch apps

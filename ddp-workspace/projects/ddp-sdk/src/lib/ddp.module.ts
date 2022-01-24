@@ -84,9 +84,13 @@ import { ActivityAgreementAnswer } from './components/activityForm/answers/activ
 import { ActivityTextAnswer } from './components/activityForm/answers/activityTextAnswer.component';
 import { ActivityTextInput } from './components/activityForm/answers/activity-text-input/activityTextInput.component';
 import { ActivityFileAnswer } from './components/activityForm/answers/activity-file-answer/activityFileAnswer.component';
-import { ActivityFileAnswerSuccess } from './components/activityForm/answers/activity-file-answer-success/activityFileAnswerSuccess.component';
+import {
+    ActivityFileAnswerSuccess
+} from './components/activityForm/answers/activity-file-answer-success/activityFileAnswerSuccess.component';
 import { ActivityMatrixAnswer } from './components/activityForm/answers/activity-matrix-answer/activity-matrix-answer.component';
-import { ActivityInstanceSelectAnswer } from './components/activityForm/answers/activity-instance-select-answer/activity-instance-select-answer.component';
+import {
+    ActivityInstanceSelectAnswer
+} from './components/activityForm/answers/activity-instance-select-answer/activity-instance-select-answer.component';
 import { ActivityEmailInput } from './components/activityForm/answers/activityEmailInput.component';
 import { ActivityNumericAnswer } from './components/activityForm/answers/activityNumericAnswer.component';
 import { ActivitySectionComponent } from './components/activityForm/activitySection.component';
@@ -100,7 +104,9 @@ import { ActivityCompositeAnswer } from './components/activityForm/answers/activ
 import { ActivityContentComponent } from './components/activityForm/activity-blocks/activityContent.component';
 import { GroupBlock } from './components/activityForm/activity-blocks/groupBlock.component';
 import { GroupBlockList } from './components/activityForm/activity-blocks/groupBlockList.component';
-import { EmbeddedActivityBlockComponent } from './components/activityForm/activity-blocks/embeddedActivityBlock/embeddedActivityBlock.component';
+import {
+    EmbeddedActivityBlockComponent
+} from './components/activityForm/activity-blocks/embeddedActivityBlock/embeddedActivityBlock.component';
 
 import { InstitutionComponent } from './components/activityForm/institutions/institution.component';
 import { InstitutionsFormComponent } from './components/activityForm/institutions/institutionsForm.component';
@@ -201,11 +207,11 @@ import { FileAnswerMapperService } from './services/fileAnswerMapper.service';
 import { StickyScrollDirective } from './directives/sticky-scroll.directive';
 import { AutocompleteActivityPicklistQuestion } from './components/activityForm/picklist/autocompleteActivityPicklistQuestion.component';
 import { SearchHighlightPipe } from './pipes/searchHighlight.pipe';
-import { PicklistSortingPolicy } from './services/picklistSortingPolicy.service';
 import { StudiesServiceAgentService } from './services/serviceAgents/studiesServiceAgent.service';
+import { FuncType } from './models/funcType';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
-    const getter = () => sessionService.token;
+    const getter: FuncType<string> = () => sessionService.token;
     return {
         tokenGetter: getter
     };
@@ -330,12 +336,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         InvitationPipe,
         FileAnswerMapperService,
         ParticipantsSearchServiceAgent,
-        // Angular Injection does not like that we have optional arguments in constructor
-        // Need to create our default instance ourselves
-        {
-            provide: PicklistSortingPolicy,
-            useValue: new PicklistSortingPolicy()
-        },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,

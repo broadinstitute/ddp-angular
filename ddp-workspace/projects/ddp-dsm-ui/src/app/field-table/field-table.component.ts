@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { ModalComponent } from '../modal/modal.component';
 import { Value } from '../utils/value.model';
+import { AbstractionField, AbstractionFieldValue } from '../medical-record-abstraction/medical-record-abstraction-field.model';
 
 @Component({
   selector: 'app-field-table',
@@ -18,7 +19,12 @@ export class FieldTableComponent implements OnInit, OnChanges {
   @Input() drugs: string[];
   @Input() cancers: string[];
   @Input() finished: boolean;
+  @Input() field: AbstractionField;
+  @Input() viewValue: AbstractionFieldValue;
+  @Input() hideDoubleCheck = false;
   @Output() changes = new EventEmitter();
+  @Output() noDataValueChanges = new EventEmitter();
+  @Output() doubleCheckValueChanges = new EventEmitter();
 
   multiTypes = [];
   nope = false;
@@ -116,6 +122,13 @@ export class FieldTableComponent implements OnInit, OnChanges {
       });
       this.multiTypes.push(multiType);
     }
+    const newOther = {};
+    if (this.possibleValues != null) {
+      this.possibleValues.forEach( value => {
+        newOther[ value.value ] = null;
+      } );
+    }
+    this._other.push(newOther);
   }
 
   changeToNothing(): void {
@@ -184,6 +197,14 @@ export class FieldTableComponent implements OnInit, OnChanges {
         }
         this._other[ i ][ value.value ] = val;
       });
+    }
+  }
+
+  abstractionValueChanged( value: any, fieldName: string ): void {
+    if(fieldName === 'noData'){
+      this.noDataValueChanges.emit(value);
+    } else if (fieldName=== 'doubleCheck'){
+      this.doubleCheckValueChanges.emit(value);
     }
   }
 }

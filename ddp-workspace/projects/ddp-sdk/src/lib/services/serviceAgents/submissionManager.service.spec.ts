@@ -8,7 +8,8 @@ import { AnswerSubmission } from '../../models/activity/answerSubmission';
 import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { BlockVisibility } from '../../models/activity/blockVisibility';
 
-describe('SubmissionManagerTest', () => {
+/* eslint-disable arrow-body-style */
+describe('SubmissionManagerTest',() => {
     let submissionManager: SubmissionManager;
     let serviceAgent: jasmine.SpyObj< ActivityServiceAgent>;
 
@@ -38,6 +39,7 @@ describe('SubmissionManagerTest', () => {
         });
 
     });
+
     it('test patch calls serialized observable', (done) => {
         // Let's do 5 calls that if were done is parallel instead of serialized, would finish in a different order than that of submission
         const httpCallDelays = [40, 50, 10, 30, 20];
@@ -275,20 +277,20 @@ describe('SubmissionManagerTest', () => {
         const responses: PatchAnswerResponse[] = [];
 
         // subscribe. Just want to make sure that we got (at least) the expected number of responses
-        submissionManager.answerSubmissionResponse$.subscribe(
-            (response: PatchAnswerResponse) => {
+        submissionManager.answerSubmissionResponse$.subscribe({
+            next: (response: PatchAnswerResponse) => {
                 responses.push(response);
 
                 if (responses.length === numberOfRequestsToMake) {
                     done.fail('We should have died already. Did not get the expected thrown error');
                 }},
-            (error) => {
+            error: (error) => {
                 console.log('The error handler is being executed!!!');
                 expect(error).not.toBeNull();
                 expect(error.message).toBe(errorMessage);
                 done();
             }
-        );
+        });
 
         // push out our requests. our subscription is all set waiting for the responses.
         for (let activityGuidNumber = 0; activityGuidNumber < numberOfRequestsToMake; activityGuidNumber++) {
@@ -336,3 +338,7 @@ describe('SubmissionManagerTest', () => {
         }, 10000);
     });
 });
+
+
+
+

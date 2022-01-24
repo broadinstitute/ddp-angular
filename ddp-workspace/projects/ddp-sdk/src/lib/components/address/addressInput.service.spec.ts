@@ -57,7 +57,7 @@ describe('AddressInputService', () => {
     ais.addressForm.patchValue({ country: '' });
   });
 
-  it('change in country updates postalCodeLabel$ observable', done => {
+  it('change in country updates postalCodeLabel$ observable, case 1', done => {
     expect(countryServiceSpy.findCountryInfoByCode).not.toHaveBeenCalled();
     ais.postalCodeLabel$.pipe(bufferCount(3)).subscribe(postalCodeLabels => {
       expect(postalCodeLabels.length).toBe(3);
@@ -72,7 +72,7 @@ describe('AddressInputService', () => {
     ais.addressForm.patchValue({ country: '' });
   });
 
-  it('change in country updates postalCodeLabel$ observable', done => {
+  it('change in country updates postalCodeLabel$ observable, case 2', done => {
     expect(countryServiceSpy.findCountryInfoByCode).not.toHaveBeenCalled();
     const testPostalCodeLabel = 'Province';
     countryServiceSpy.findCountryInfoByCode.and.callFake((arg) => {

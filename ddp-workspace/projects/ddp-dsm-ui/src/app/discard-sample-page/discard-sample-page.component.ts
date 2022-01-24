@@ -38,7 +38,7 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
   subscription1: Subscription;
   subscription2: Subscription;
 
-  constructor (private _changeDetectionRef: ChangeDetectorRef, private auth: Auth, private compService: ComponentService,
+  constructor(private _changeDetectionRef: ChangeDetectorRef, private auth: Auth, private compService: ComponentService,
                private dsmService: DSMService, private router: Router, private sanitizer: DomSanitizer,
                private role: RoleService, private util: Utils, private route: ActivatedRoute, private modalService: BsModalService) {
     if (!auth.authenticated()) {
@@ -89,25 +89,25 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
         kitDiscardId: this.sample.kitDiscardId,
         discardDate: this.sample.discardDate
       };
-      this.dsmService.setKitDiscarded(this.realm, JSON.stringify(payload)).subscribe(
-        () => {
+      this.dsmService.setKitDiscarded(this.realm, JSON.stringify(payload)).subscribe({
+        next: () => {
           // console.info(`received: ${JSON.stringify(data, null, 2)}`);
           this.router.navigate(['/discardList']);
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.errorMessage = 'Error - Loading list of samples of exited participants\nPlease contact your DSM developer';
         }
-      );
+      });
     }
   }
 
   uploadFile(pathName: string, file: File): void {
     this.waiting = true;
-    this.dsmService.uploadFile(this.realm, this.sample.kitDiscardId, pathName, file).subscribe(
-      data => {
+    this.dsmService.uploadFile(this.realm, this.sample.kitDiscardId, pathName, file).subscribe({
+      next: data => {
         console.info(`received: ${JSON.stringify(data, null, 2)}`);
         const result = Result.parse(data);
         if (result.code === 200 && result.body != null) {
@@ -118,14 +118,14 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
         }
         this.waiting = false;
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
         this.errorMessage = 'Error - Uploading file\nPlease contact your DSM developer';
         this.waiting = false;
       }
-    );
+    });
   }
 
   saveNote(): void {
@@ -133,18 +133,18 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
       this.errorMessage = null;
       this.additionalMessage = null;
       this.savingNote = true;
-      this.dsmService.saveNote(this.realm, this.sample.kitDiscardId, this.sample.note).subscribe(
-        data => {
+      this.dsmService.saveNote(this.realm, this.sample.kitDiscardId, this.sample.note).subscribe({
+        next: data => {
           console.info(`received: ${JSON.stringify(data, null, 2)}`);
           this.savingNote = false;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.errorMessage = 'Error - Loading list of samples of exited participants\nPlease contact your DSM developer';
         }
-      );
+      });
     }
   }
 
@@ -156,8 +156,8 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
   deleteFileNow(): void {
     if (this.fileToDelete != null) {
       this.waiting = true;
-      this.dsmService.deleteFile(this.realm, this.sample.kitDiscardId, this.fileToDelete, this.sample[this.fileToDelete]).subscribe(
-        data => {
+      this.dsmService.deleteFile(this.realm, this.sample.kitDiscardId, this.fileToDelete, this.sample[this.fileToDelete]).subscribe({
+        next: data => {
           console.info(`received: ${JSON.stringify(data, null, 2)}`);
           const result = Result.parse(data);
           if (result.code === 200) {
@@ -172,7 +172,7 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
           this.modalRef.hide();
           this.waiting = false;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
@@ -181,7 +181,7 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
           this.errorMessage = 'Error - Uploading file\nPlease contact your DSM developer';
           this.waiting = false;
         }
-      );
+      });
     }
   }
 
@@ -214,21 +214,21 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
       path
     };
     // console.info("here" + path);
-    this.dsmService.showUpload(this.realm, JSON.stringify(payload)).subscribe(
-      data => {
+    this.dsmService.showUpload(this.realm, JSON.stringify(payload)).subscribe({
+      next: data => {
         // console.info("received something back " + data);
         const blob = new Blob([data]);
         this.imageToShow = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(blob));
         this.openModal(template);
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           console.info('received error back');
           this.auth.logout();
         }
         this.errorMessage = 'Error - Loading list of samples of exited participants\nPlease contact your DSM developer';
       }
-    );
+    });
   }
 
   public openModal(template: TemplateRef<any>): void {
@@ -254,8 +254,8 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
       token
     };
 
-    this.subscription2 = this.dsmService.confirm(this.realm, JSON.stringify(payload)).subscribe(
-      data => {
+    this.subscription2 = this.dsmService.confirm(this.realm, JSON.stringify(payload)).subscribe({
+      next: data => {
         console.info(`received: ${JSON.stringify(data, null, 2)}`);
         const result = Result.parse(data);
         if (result.code === 200 && result.body != null) {
@@ -273,11 +273,11 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
         }
         this.waiting = false;
       },
-      () => {
+      error: () => {
         this.waiting = false;
         this.additionalMessage = null;
         this.errorMessage = 'Error - Confirming discard sample\nPlease contact your DSM developer';
       }
-    );
+    });
   }
 }

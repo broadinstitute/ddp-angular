@@ -7,7 +7,7 @@ import {
     SubmissionManager,
     ConfigurationService,
     ActivityPicklistQuestionBlock,
-    ActivityTextQuestionBlock
+    ActivityTextQuestionBlock, FuncType
 } from 'ddp-sdk';
 import { InputType } from '../../../models/activity/inputType';
 import { Component, DebugElement, EventEmitter, Input, Output } from '@angular/core';
@@ -186,6 +186,6 @@ describe('ActivityQuestionComponent', () => {
         expect(getValidationMessageFixture()).toBeFalsy();
     }));
 
-    const getValidationMessageFixture = () => fixture.debugElement.query(By.directive(ValidationMessageComponent));
-    const getAnswerComponentFixture = () => fixture.debugElement.query(By.css('ddp-activity-answer'));
+    const getValidationMessageFixture: FuncType<DebugElement> = () => fixture.debugElement.query(By.directive(ValidationMessageComponent));
+    const getAnswerComponentFixture: FuncType<DebugElement> = () => fixture.debugElement.query(By.css('ddp-activity-answer'));
 });

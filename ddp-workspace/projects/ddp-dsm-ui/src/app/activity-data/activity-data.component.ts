@@ -18,4 +18,16 @@ export class ActivityDataComponent {
   getUtil(): Utils {
     return this.util;
   }
+
+  getUtilStatic(): typeof Utils {
+    return Utils;
+  }
+
+  getActivityName(activityDefinition: ActivityDefinition): string {
+    return activityDefinition.activityName;
+  }
+
+  getActivityCode( activity: ActivityData ): string {
+    return activity.activityCode;
+  }
 }

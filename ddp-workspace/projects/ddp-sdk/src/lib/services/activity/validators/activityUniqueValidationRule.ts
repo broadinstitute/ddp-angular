@@ -1,7 +1,10 @@
-import { ActivityQuestionBlock } from '../../../models/activity/activityQuestionBlock';
 import { ActivityAbstractValidationRule } from './activityAbstractValidationRule';
+import { ActivityQuestionBlock } from '../../../models/activity/activityQuestionBlock';
 import { QuestionType } from '../../../models/activity/questionType';
-import { ActivityCompositeQuestionBlock, AnswerContainer } from 'ddp-sdk';
+import {
+    ActivityCompositeQuestionBlock,
+    AnswerContainer
+} from '../../../models/activity/activityCompositeQuestionBlock';
 
 export class ActivityUniqueValidationRule extends ActivityAbstractValidationRule {
     constructor(question: ActivityQuestionBlock<any>) {

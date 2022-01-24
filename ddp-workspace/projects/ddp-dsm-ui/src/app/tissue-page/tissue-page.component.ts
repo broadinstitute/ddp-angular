@@ -94,7 +94,7 @@ export class TissuePageComponent implements OnInit {
   addTissue(): void {
     this.oncHistoryDetail.tissues.push(new Tissue(null, this.oncHistoryDetail.oncHistoryDetailId, null, null, null, null,
       null, null, null, null, null, null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null, null, null));
+      null, null, null, null, null, null, null, null, null, null, null, null));
   }
 
   isPatchedCurrently(field: string): boolean {
@@ -154,7 +154,7 @@ export class TissuePageComponent implements OnInit {
               if (jsonData instanceof Array) {
                 jsonData.forEach((val) => {
                   const nameValue = NameValue.parse(val);
-                  this.oncHistoryDetail[ nameValue.name.substr(nameValue.name.indexOf('.') + 1) ] = nameValue.value;
+                  this.oncHistoryDetail[ nameValue.name.substring(nameValue.name.indexOf('.') + 1) ] = nameValue.value;
                 });
               }
             }
@@ -189,8 +189,8 @@ export class TissuePageComponent implements OnInit {
       userMail: this.role.userMail(),
     };
     this.dsmService.applyDestructionPolicyToAll(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), JSON.stringify(jsonData))
-      .subscribe(
-        data => {
+      .subscribe({
+        next: data => {
           const result = Result.parse(data);
           if (result.code === 200) {
             for (const oncHis of this.participant.oncHistoryDetails) {
@@ -206,11 +206,12 @@ export class TissuePageComponent implements OnInit {
             this.applyToAllModal.show();
           }
         },
-        () => {
+        error: () => {
           this._showWarningModal = true;
           this._warningMessage = this._warningUnsuccessfulMessage;
           this.applyToAllModal.show();
-        });
+        }
+      });
   }
 
   getUtil(): Utils {

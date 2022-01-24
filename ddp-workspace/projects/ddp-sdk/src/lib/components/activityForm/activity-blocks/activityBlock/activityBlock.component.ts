@@ -66,21 +66,21 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
         this.activityServiceAgent.createInstance(this.studyGuid, this.block.activityCode, this.parentActivityInstanceGuid)
             .pipe(
                 filter(response => !!response),
-                concatMap(response => {
-                    return this.activityServiceAgent
+                concatMap(response =>
+                    this.activityServiceAgent
                         .getActivitySummary(this.studyGuid, response.instanceGuid)
                         .pipe(
                             map<ActivityInstance, { instance: ActivityInstance; blockVisibility?: BlockVisibility[] }>(
                                 instance => {
                                     if (response?.blockVisibility) {
-                                        return { instance, blockVisibility: response.blockVisibility };
+                                        return {instance, blockVisibility: response.blockVisibility};
                                     }
 
-                                    return { instance };
+                                    return {instance};
                                 }
                             ),
-                        );
-                }),
+                        )
+                ),
                 catchError(err => {
                     this.logger.logError(this.LOG_SOURCE, 'An error during a new instance creation', err);
                     return throwError(err);

@@ -63,7 +63,7 @@ describe('ActivityAgeRangeValidationRule: Common year', () => {
         expect(validator.recalculate()).toBeFalsy();
     });
 
-    it('should return true if birthday today', () => {
+    it('should return true if birthday today, case 1', () => {
         const MIN_AGE = 18;
         const question = {} as ActivityQuestionBlock<any>;
         question.answer = {
@@ -99,7 +99,7 @@ describe('ActivityAgeRangeValidationRule: Common year', () => {
         expect(validator.recalculate()).toBeTruthy();
     });
 
-    it('should return true if birthday today', () => {
+    it('should return true if birthday today, case 2', () => {
         const MAX_AGE = 70;
         const question = {} as ActivityQuestionBlock<any>;
         question.answer = {

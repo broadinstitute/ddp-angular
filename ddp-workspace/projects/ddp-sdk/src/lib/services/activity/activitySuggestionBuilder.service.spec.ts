@@ -6,13 +6,17 @@ import { InstitutionServiceAgent } from '../serviceAgents/institutionServiceAgen
 import { ActivitySuggestionBuilder } from './activitySuggestionBuilder.service';
 import { of } from 'rxjs';
 
-let service: ActivitySuggestionBuilder;
-const loggerServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logError']);
-const drugServiceSpy: jasmine.SpyObj<SuggestionServiceAgent> = jasmine.createSpyObj('SuggestionServiceAgent', ['findDrugSuggestions']);
-const institutionServiceSpy: jasmine.SpyObj<InstitutionServiceAgent> = jasmine.createSpyObj('InstitutionServiceAgent', ['getSummary']);
-
 describe('ActivitySuggestionBuilder Test', () => {
+    let service: ActivitySuggestionBuilder;
+    let loggerServiceSpy: jasmine.SpyObj<LoggingService>;
+    let drugServiceSpy: jasmine.SpyObj<SuggestionServiceAgent>;
+    let institutionServiceSpy: jasmine.SpyObj<InstitutionServiceAgent>;
+
     beforeEach(() => {
+        loggerServiceSpy = jasmine.createSpyObj('LoggingService', ['logError']);
+        drugServiceSpy = jasmine.createSpyObj('SuggestionServiceAgent', ['findDrugSuggestions']);
+        institutionServiceSpy = jasmine.createSpyObj('InstitutionServiceAgent', ['getSummary']);
+
         TestBed.configureTestingModule({
             imports: [HttpClientModule],
             providers: [
@@ -57,7 +61,10 @@ describe('ActivitySuggestionBuilder Test', () => {
         const searchValue = 'foo';
         const provider = service.getSuggestionProvider({
             suggestionType: 'INCLUDED',
-            suggestions: ['bar foowar', 'foobar', 'foowoo', 'bar foobar', 'bar foo', 'zarbarfoo aoo', 'yarbarfoo www', 'barbarfoo', 'barfoo', 'foo']
+            suggestions: [
+                'bar foowar', 'foobar', 'foowoo', 'bar foobar', 'bar foo',
+                'zarbarfoo aoo', 'yarbarfoo www', 'barbarfoo', 'barfoo', 'foo'
+            ]
         });
         if (provider) {
             provider(of(searchValue)).subscribe(value => {
@@ -180,7 +187,7 @@ describe('ActivitySuggestionBuilder Test', () => {
         }
     });
 
-    it('should return 1 suggestion with 1 match(regexp should handle value with parentheses)', () => {
+    it('should return 1 suggestion with 1 match(regexp should handle value with parentheses), case 1', () => {
         const searchValue = 'bar)';
         const provider = service.getSuggestionProvider({
             suggestionType: 'INCLUDED',
@@ -203,7 +210,7 @@ describe('ActivitySuggestionBuilder Test', () => {
         }
     });
 
-    it('should return 1 suggestion with 1 match(regexp should handle value with parentheses)', () => {
+    it('should return 1 suggestion with 1 match(regexp should handle value with parentheses), case 2', () => {
         const searchValue = '(bar';
         const provider = service.getSuggestionProvider({
             suggestionType: 'INCLUDED',

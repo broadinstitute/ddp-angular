@@ -36,6 +36,16 @@ export class DSMService {
                private logger: LoggingDsmService) {
   }
 
+  sendAnalyticsMetric( realm: string, passed: number ): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'googleAnalytics';
+    const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: realm} );
+    map.push( {name: 'timer', value: passed} );
+    return this.http.patch(url, null, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError.bind(this))
+    );
+  }
+
   public transferScan(scanTracking: boolean, json: string): Observable<any> {
     let url = this.baseUrl + DSMService.UI;
     if (scanTracking) {
@@ -228,6 +238,15 @@ export class DSMService {
     const map: { name: string; value: any }[] = [];
     map.push({name: 'userId', value: this.role.userID()});
     map.push({name: 'parent', value: parent});
+    return this.http.get(url, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError.bind(this))
+    );
+  }
+
+  public getAssignees(realm: string): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'assignees';
+    const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: realm} );
     return this.http.get(url, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );
@@ -791,40 +810,6 @@ export class DSMService {
 
   public saveUserSettings(json: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'userSettings';
-    const map: { name: string; value: any }[] = [];
-    map.push({name: 'userId', value: this.role.userID()});
-    return this.http.patch(url, json, this.buildQueryHeader(map)).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  public getEmailEventData(source: string, target: string): Observable<any> {
-    const url = this.baseUrl + DSMService.UI + 'emailEvent/' + source;
-    const map: { name: string; value: any }[] = [];
-    if (target != null && target !== '') {
-      map.push({name: DSMService.TARGET, value: target});
-    }
-    return this.http.get(url, this.buildQueryHeader(map)).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  public getEmailSettings(source: string): Observable<any> {
-    const url = this.baseUrl + DSMService.UI + 'emailSettings/' + source;
-    return this.http.get(url, this.buildHeader()).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  public saveEmailSettings(source: string, json: string): Observable<any> {
-    const url = this.baseUrl + DSMService.UI + 'emailSettings/' + source;
-    return this.http.patch(url, json, this.buildHeader()).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  public followUpEmailEvent(source: string, json: string): Observable<any> {
-    const url = this.baseUrl + DSMService.UI + 'followUpEmailEvent/' + source;
     const map: { name: string; value: any }[] = [];
     map.push({name: 'userId', value: this.role.userID()});
     return this.http.patch(url, json, this.buildQueryHeader(map)).pipe(
