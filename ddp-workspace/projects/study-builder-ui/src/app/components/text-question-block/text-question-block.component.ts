@@ -79,40 +79,4 @@ export class TextQuestionBlockComponent implements OnInit, OnDestroy {
             return ActivityQuestionComponent.isActivityValidationResult(result) ? result.message : result;
         });
     }
-
-    // private checkRequiredValidator(block: ActivityTextQuestionBlock): void {
-    //     const requiredValidator = block.validators.
-    //         filter((validator: ActivityAbstractValidationRule) => validator instanceof ActivityRequiredValidationRule)[0];
-    //     if (!requiredValidator) return;
-    //
-    //     // block.setAnswer(block.answer || '');
-    //     requiredValidator.recalculate();
-    //     if (requiredValidator.result) {
-    //         console.log('RES=', requiredValidator.result);
-    //         this.validationErrorMessages[0] = requiredValidator.result as string;
-    //     }
-    // }
-
-
-    // newClientBlock.placeholder = questionDef.placeholder;
-    //
-    //
-    //   newClientBlock.label = questionDef.label;
-    // newClientBlock.tooltip = questionDef.tooltip;
-    //   newClientBlock.displayNumber = questionDef.displayNumber;
-    // newClientBlock.readonly = questionDef.readonly;| false;
-    //   newClientBlock.additionalInfoHeader = questionDef.additionalInfoHeader;
-    //   newClientBlock.additionalInfoFooter = questionDef.additionalInfoFooter;
-    //   newClientBlock.minLength = questionDef.minLength;
-    //   newClientBlock.maxLength = questionDef.maxLength;
-    //   newClientBlock.regexPattern = questionDef.regexPattern;
-    //   newClientBlock.textSuggestionSource = questionDef.textSuggestionSource;
-    //   newClientBlock.confirmEntry = questionDef.confirmEntry;
-    //   newClientBlock.confirmPrompt = questionDef.confirmPrompt;
-    //   newClientBlock.mismatchMessage = questionDef.mismatchMessage;
-
-    // newClientBlock.displayNumber = questionDef.displayNumber;
-    // public serverValidationMessages$: Observable<Array<string>>;
-    // newClientBlock.validators = questionDef.validators;<ActivityAbstractValidationRule> = [];
-    // private serverValidationMessagesSubject: BehaviorSubject<Array<string>> = new BehaviorSubject([]);
 }
