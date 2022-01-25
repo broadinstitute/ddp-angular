@@ -2,7 +2,7 @@ import { RuleDef } from '../../model/core/ruleDef';
 import { RuleType } from '../../model/core/ruleType';
 
 export type ValidationControlsData = Record<RuleType, {
-    [key: string]: any
+    [key: string]: any;
 }>;
 
 export class ValidatorsMapper {
@@ -17,9 +17,9 @@ export class ValidatorsMapper {
         return Object.keys(validatorsData).reduce((acc, validatorName) => {
             const {on, ...rest} = validatorsData[validatorName];
             if (on) {
-                const notEmptyProperties = Object.keys(rest).reduce((acc, currentKey) => {
-                    acc[currentKey] = rest[currentKey] || undefined;
-                    return acc;
+                const notEmptyProperties = Object.keys(rest).reduce((accum, currentKey) => {
+                    accum[currentKey] = rest[currentKey] || undefined;
+                    return accum;
                 }, {});
                 const rule = {ruleType: validatorName, ...notEmptyProperties};
                 acc.push(rule);

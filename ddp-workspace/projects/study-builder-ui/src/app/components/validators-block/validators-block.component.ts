@@ -67,7 +67,9 @@ export class ValidatorsBlockComponent implements OnInit, OnDestroy {
     private toggleControls(validatorName: string, isOn: boolean): void {
         const controls = (this.validatorsGroup.get(validatorName) as FormGroup).controls;
         for (const key of Object.keys(controls)) {
-            if (key === 'on') continue;
+            if (key === 'on') {
+                continue;
+            }
             isOn ? controls[key].enable() : controls[key].disable();
         }
     }
