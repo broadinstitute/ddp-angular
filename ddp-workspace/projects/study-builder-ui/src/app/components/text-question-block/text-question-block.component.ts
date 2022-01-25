@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { filter, map, takeUntil, tap } from 'rxjs/operators';
 
 import { ActivityTextQuestionBlock, ActivityQuestionConverter, ActivityQuestionComponent } from 'ddp-sdk';
 import { QuestionBlockDef } from '../../model/core/questionBlockDef';
@@ -19,7 +19,7 @@ export class TextQuestionBlockComponent implements OnInit, OnDestroy {
     angularClientBlock$: Observable<ActivityTextQuestionBlock>;
     validationErrorMessages: string[] = [];
     private blockCurrentAnswer = '';
-    private sub = new Subscription();
+    private ngUnsubscribe = new Subject<void>();
 
     constructor(
         private config: ConfigurationService,
@@ -36,13 +36,15 @@ export class TextQuestionBlockComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.sub.unsubscribe();
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
     }
 
     valueChanged(value: string): void {
         this.blockCurrentAnswer = value;
-        const valueChangedSub = this.angularClientBlock$.subscribe((block: ActivityTextQuestionBlock) => this.validate(block, value));
-        this.sub.add(valueChangedSub);
+        this.angularClientBlock$.pipe(
+            takeUntil(this.ngUnsubscribe)
+        ).subscribe((block: ActivityTextQuestionBlock) => this.validate(block, value));
     }
 
     private buildFromDef(defBlock: QuestionBlockDef<TextQuestionDef>): ActivityTextQuestionBlock {
