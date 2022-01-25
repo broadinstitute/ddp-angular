@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { filter, map, takeUntil, tap } from 'rxjs/operators';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { takeUntil, tap } from 'rxjs/operators';
 
-import { ActivityTextQuestionBlock, ActivityQuestionConverter, ActivityQuestionComponent } from 'ddp-sdk';
+import { ActivityQuestionConverter, ActivityTextQuestionBlock } from 'ddp-sdk';
 import { QuestionBlockDef } from '../../model/core/questionBlockDef';
 import { TextQuestionDef } from '../../model/core/textQuestionDef';
 import { ConfigurationService } from '../../configuration.service';
 import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
+import { BaseBlockComponent } from './base-block.component';
 
 @Component({
     selector: 'app-text-question-block',
@@ -14,30 +14,24 @@ import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
     styleUrls: ['./text-question-block.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TextQuestionBlockComponent implements OnInit, OnDestroy {
-    @Input() definitionBlock$: Observable<QuestionBlockDef<TextQuestionDef>>;
-    angularClientBlock$: Observable<ActivityTextQuestionBlock>;
-    validationErrorMessages: string[] = [];
+export class TextQuestionBlockComponent
+    extends BaseBlockComponent<QuestionBlockDef<TextQuestionDef>, ActivityTextQuestionBlock, string>
+    implements OnInit {
+
+    protected defaultAnswer = '';
     private blockCurrentAnswer = '';
-    private ngUnsubscribe = new Subject<void>();
 
     constructor(
-        private config: ConfigurationService,
+        protected config: ConfigurationService,
         private questionConverter: ActivityQuestionConverter
-    ) {}
-
-    ngOnInit(): void {
-        this.angularClientBlock$ = this.definitionBlock$.pipe(
-            tap(defBlock => console.log('getting defblock: %o', defBlock)),
-            filter(block => !!block),
-            map(defBlock => this.buildFromDef(defBlock)),
-            tap((block: ActivityTextQuestionBlock) => this.validate(block))
-        );
+    ) {
+        super();
     }
 
-    ngOnDestroy(): void {
-        this.ngUnsubscribe.next();
-        this.ngUnsubscribe.complete();
+    ngOnInit(): void {
+        this.angularClientBlock$ = this.getAngularClientBlock$().pipe(
+            tap((block: ActivityTextQuestionBlock) => this.validate(block))
+        );
     }
 
     valueChanged(value: string): void {
@@ -47,7 +41,7 @@ export class TextQuestionBlockComponent implements OnInit, OnDestroy {
         ).subscribe((block: ActivityTextQuestionBlock) => this.validate(block, value));
     }
 
-    private buildFromDef(defBlock: QuestionBlockDef<TextQuestionDef>): ActivityTextQuestionBlock {
+    protected buildFromDef(defBlock: QuestionBlockDef<TextQuestionDef>): ActivityTextQuestionBlock {
         const questionDef = defBlock.question;
         const modifiedQuestionJson = {
             ...questionDef,
@@ -67,16 +61,5 @@ export class TextQuestionBlockComponent implements OnInit, OnDestroy {
             newClientBlock.setAnswer(this.blockCurrentAnswer, false);
         }
         return newClientBlock;
-    }
-
-    private validate(block: ActivityTextQuestionBlock, answer: string = block.answer): void {
-        block.setAnswer(answer || '', false);
-        for (const validator of block.validators) {
-            validator.recalculate();
-        }
-        this.validationErrorMessages = block.validators.map(validator => {
-            const result = validator.result;
-            return ActivityQuestionComponent.isActivityValidationResult(result) ? result.message : result;
-        });
     }
 }
