@@ -12,14 +12,14 @@ interface BaseQuestionBlock<T> {
 @Component({
     template: ''
 })
-export abstract class BaseBlockComponent<DefinitionBlockType, BlockType extends BaseQuestionBlock<AnswerType>, AnswerType>
+export abstract class BaseBlockComponent<DefinitionBlockType, BlockType, AnswerType>
     implements OnDestroy {
 
     @Input() definitionBlock$: Observable<DefinitionBlockType>;
     angularClientBlock$: Observable<BlockType>;
     validationErrorMessages: string[] = [];
     protected ngUnsubscribe = new Subject<void>();
-    protected abstract defaultAnswer: AnswerType;
+    protected abstract defaultAnswer: AnswerType | null;
 
     protected abstract buildFromDef(defBlock: DefinitionBlockType): BlockType;
 
@@ -31,7 +31,7 @@ export abstract class BaseBlockComponent<DefinitionBlockType, BlockType extends 
         );
     }
 
-    protected validate(block: BlockType, answer: AnswerType = block.answer): void {
+    protected validate(block: (BlockType & BaseQuestionBlock<AnswerType>), answer: AnswerType = block.answer): void {
         block.setAnswer(answer || this.defaultAnswer, false);
         for (const validator of block.validators) {
             validator.recalculate();

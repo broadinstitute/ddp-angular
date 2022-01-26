@@ -6,7 +6,7 @@ import { QuestionBlockDef } from '../../model/core/questionBlockDef';
 import { TextQuestionDef } from '../../model/core/textQuestionDef';
 import { ConfigurationService } from '../../configuration.service';
 import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
-import { BaseBlockComponent } from './base-block.component';
+import { BaseBlockComponent } from '../base-block/base-block.component';
 
 @Component({
     selector: 'app-text-question-block',

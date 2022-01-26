@@ -34,6 +34,7 @@ export * from './lib/models/activity/textSuggestion';
 export * from './lib/models/activity/activityForm';
 export * from './lib/models/activity/createActivityInstanceResponse';
 export * from './lib/models/activity/deleteActivityInstanceResponse';
+export * from './lib/models/activity/activityPicklistAnswerDto';
 export * from './lib/models/suggestionMatch';
 export * from './lib/models/userProfileDto';
 export * from './lib/models/auth0-mode';
