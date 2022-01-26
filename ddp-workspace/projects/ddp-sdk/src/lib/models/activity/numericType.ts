@@ -1,3 +1,4 @@
 export enum NumericType {
-    Integer = 'INTEGER'
+    Integer = 'INTEGER',
+    Decimal = 'DECIMAL'
 }
