@@ -2802,7 +2802,12 @@
             "tsConfig": "projects/study-builder-ui/tsconfig.app.json",
             "assets": [
               "projects/study-builder-ui/src/favicon.ico",
-              "projects/study-builder-ui/src/assets"
+              "projects/study-builder-ui/src/assets",
+              {
+                "glob": "*.*",
+                "input": "projects/study-builder-ui/src/assets/",
+                "output": "assets"
+              }
             ],
             "styles": [
               "projects/study-builder-ui/src/theme.scss",
