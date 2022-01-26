@@ -2813,6 +2813,9 @@
               "projects/study-builder-ui/src/theme.scss",
               "projects/study-builder-ui/src/styles.scss"
             ],
+            "allowedCommonJsDependencies": [
+              "stackdriver-errors-js"
+            ],
             "scripts": [],
             "vendorChunk": true,
             "extractLicenses": false,
