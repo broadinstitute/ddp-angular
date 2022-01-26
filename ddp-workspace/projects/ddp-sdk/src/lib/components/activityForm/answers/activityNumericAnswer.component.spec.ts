@@ -1,18 +1,21 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatInputModule } from '@angular/material/input';
+
 import { QuestionPromptComponent } from './question-prompt/questionPrompt.component';
 import { TooltipComponent } from '../../tooltip.component';
 import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
 import { ActivityNumericQuestionBlock } from '../../../models/activity/activityNumericQuestionBlock';
 import { ActivityNumericAnswer } from './activityNumericAnswer.component';
-import { MatInputModule } from '@angular/material/input';
+import { NumericType } from 'ddp-sdk';
 
 describe('ActivityNumericAnswer', () => {
     const questionBlock = {
+        numericType: NumericType.Integer,
         answer: null,
         min: 1,
         max: 10
@@ -87,6 +90,7 @@ describe('ActivityNumericAnswer', () => {
 
     it('should emit valid answer', () => {
         component.block = {
+            numericType: NumericType.Integer,
             answer: null,
             min: 0,
             max: 10
