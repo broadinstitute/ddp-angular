@@ -654,8 +654,11 @@ export class Filter {
     return selected;
   }
 
-  public getSelectedOptionsBoolean(): Array<boolean> {
+  public getSelectedOptionsBoolean(selectedOptions?: any[]): Array<boolean> {
     const selected = [];
+    if(!this.options && selectedOptions){
+      this.options = selectedOptions;
+    }
     if (this.selectedOptions != null && this.options != null) {
       for (const o of this.options) {
         selected.push(this.selectedOptions.includes(o.name));
