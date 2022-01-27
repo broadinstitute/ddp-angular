@@ -1,5 +1,6 @@
 <ng-container *ngIf="showParticipantInformation">
   <app-participant-page [parentList]="parent" [participant]="participant" [activeTab]="selectedTab"
+                        [selectedActivityCode]="selectedActivity"
                         [drugs]="drugs" [cancers]="cancers" [settings]="settings"
                         [mrCoverPdfSettings]="mrCoverPdfSettings" [preferredLanguage]="preferredLanguages"
                         [activityDefinitions]="activityDefinitionList"
@@ -59,7 +60,7 @@
             <ng-container *ngFor="let key of getKeys()">
               <ng-container *ngIf="key !== 'a'">
                 <table *ngFor="let filter of selectedColumns[key]" style="border: none">
-                  <ng-container *ngIf="filter.participantColumn.name !== 'ddp'">
+                  <ng-container *ngIf="filter.participantColumn.name !== 'ddp'&& filter.searchable">
                     <app-filter-column [dataFilter]="filter" [editable]="true"></app-filter-column>
                   </ng-container>
                 </table>
@@ -455,6 +456,39 @@
                 </ng-container>
                 <ng-container *ngIf="!col.participantColumn.esData">
                   <div *ngIf="alias === 'data' && pt.data != null">
+                    <ng-container *ngIf="col.participantColumn.name === 'activityStatus' && !col.searchable">
+                      <ng-container *ngIf="pt.data.activities">
+                        <ng-container *ngIf=" pt.getActivitiesSorted(activityDefinitionList) as activities">
+                          <ng-container *ngFor="let activityData of activities; let i = index;">
+                            <ng-container
+                              *ngIf="getUtilStatic().getActivityDefinition(activityDefinitionList,  activityData.activityCode, activityData.activityVersion) as acDef">
+                              <ng-container *ngIf="acDef.showActivityStatus"  >
+                                <ng-container *ngIf="activityData.status === 'COMPLETE'">
+                                <span tooltip="{{activityData.activityCode}}"  (click)="openParticipant(pt, col, activityData.activityCode)">
+                                <i class="fas fa-circle"></i>
+                                  </span>
+                                </ng-container>
+                                <ng-container *ngIf="activityData.status === 'CREATED'">
+                                <span tooltip="{{activityData.activityCode}}"  (click)="openParticipant(pt, col, activityData.activityCode)">
+                                <i class="far fa-circle"></i>
+                                </span>
+                                </ng-container>
+                                <ng-container *ngIf="activityData.status === 'IN_PROGRESS'">
+                                <span tooltip="{{activityData.activityCode}}" (click)="openParticipant(pt, col, activityData.activityCode)">
+                                <i class="fas fa-adjust"></i>
+                                </span>
+                                </ng-container>
+                                <ng-container *ngIf="activityData.status === 'ERROR'">
+                                <span tooltip="{{activityData.activityCode}}"  (click)="openParticipant(pt, col, activityData.activityCode)" style="color: red">
+                                <i class="fas fa-circle"></i>
+                                </span>
+                                </ng-container>
+                              </ng-container>
+                            </ng-container>
+                          </ng-container>
+                        </ng-container>
+                      </ng-container>
+                    </ng-container>
                     <ng-container *ngIf="col.type === 'DATE'">
                       <ng-container *ngIf="col.participantColumn.object != null && pt.data[col.participantColumn.object] != null">
                         {{pt.data[col.participantColumn.object][col.participantColumn.name] | date:'medium'}}

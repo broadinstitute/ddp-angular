@@ -244,7 +244,11 @@ export class Utils {
     if (columns != null) {
       if (o != null) {
         for (col of columns) {
-          if (col.type === 'ADDITIONALVALUE') {
+          if(!col.searchable){
+            let value = col.func(data,  activityDefinitionList);
+            str = str + "\"" + value + "\"" + ",";
+          }
+          else if (col.type === 'ADDITIONALVALUE') {
             const fieldName = 'additionalValues';
             // TODO: check is it correct ? - `fieldName` is set on the previous line
             /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
@@ -750,6 +754,10 @@ export class Utils {
       return questions.find(x => x.stableId === stableId);
     }
     return null;
+  }
+
+  static getActivityDefinition( activities: ActivityDefinition[], activityCode: string, version: string ) {
+    return  activities.find( x => x.activityCode === activityCode && x.activityVersion === version );
   }
 
   getAbstractionGroup(groups: Array<AbstractionGroup>, groupId: string): AbstractionGroup | undefined {
