@@ -1,6 +1,6 @@
 <ddp-activity-text-answer *ngIf="angularClientBlock$ | async as angularClientBlock"
                           [block]="angularClientBlock"
-                          (valueChanged)="valueChanged($event)">
+                          (valueChanged)="valueChanged($event, angularClientBlock)">
 </ddp-activity-text-answer>
 
 <ng-container *ngFor="let message of validationErrorMessages">

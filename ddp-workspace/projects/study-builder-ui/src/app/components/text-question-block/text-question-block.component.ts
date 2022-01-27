@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { takeUntil, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 import { ActivityQuestionConverter, ActivityTextQuestionBlock } from 'ddp-sdk';
 import { QuestionBlockDef } from '../../model/core/questionBlockDef';
@@ -34,11 +34,9 @@ export class TextQuestionBlockComponent
         );
     }
 
-    valueChanged(value: string): void {
+    valueChanged(value: string, block: ActivityTextQuestionBlock): void {
         this.blockCurrentAnswer = value;
-        this.angularClientBlock$.pipe(
-            takeUntil(this.ngUnsubscribe)
-        ).subscribe((block: ActivityTextQuestionBlock) => this.validate(block, value));
+        this.validate(block, value);
     }
 
     protected buildFromDef(defBlock: QuestionBlockDef<TextQuestionDef>): ActivityTextQuestionBlock {

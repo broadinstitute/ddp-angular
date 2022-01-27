@@ -1,5 +1,5 @@
-import { Component, Input, OnDestroy } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { ActivityQuestionComponent } from 'ddp-sdk';
 
@@ -12,13 +12,10 @@ interface BaseQuestionBlock<T> {
 @Component({
     template: ''
 })
-export abstract class BaseBlockComponent<DefinitionBlockType, BlockType, AnswerType>
-    implements OnDestroy {
-
+export abstract class BaseBlockComponent<DefinitionBlockType, BlockType, AnswerType> {
     @Input() definitionBlock$: Observable<DefinitionBlockType>;
     angularClientBlock$: Observable<BlockType>;
     validationErrorMessages: string[] = [];
-    protected ngUnsubscribe = new Subject<void>();
     protected abstract defaultAnswer: AnswerType | null;
 
     protected abstract buildFromDef(defBlock: DefinitionBlockType): BlockType;
@@ -40,10 +37,5 @@ export abstract class BaseBlockComponent<DefinitionBlockType, BlockType, AnswerT
             const result = validator.result;
             return ActivityQuestionComponent.isActivityValidationResult(result) ? result.message : result;
         });
-    }
-
-    ngOnDestroy(): void {
-        this.ngUnsubscribe.next();
-        this.ngUnsubscribe.complete();
     }
 }
