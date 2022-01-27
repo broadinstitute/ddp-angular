@@ -820,7 +820,12 @@ export class Utils {
 
   public static getCorrectTextAsAnswerForCSV( questionAnswer: QuestionAnswer, qDef: QuestionDefinition ): string[] {
     const answers = [];
-    for (let answer of questionAnswer.answer) {
+    let probableAnswer = questionAnswer.answer;
+    if (!(questionAnswer.answer instanceof Array)){
+      probableAnswer = new Array();
+      probableAnswer.push(questionAnswer.answer);
+    }
+    for (let answer of probableAnswer) {
       let text = answer;
       let activityAnswers = '';
       const ans = this.getAnswerGroupOrOptionText( answer, qDef );
