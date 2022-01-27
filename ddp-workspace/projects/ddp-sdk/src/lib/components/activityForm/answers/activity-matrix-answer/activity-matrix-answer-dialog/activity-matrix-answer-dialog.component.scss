@@ -4,6 +4,15 @@
   padding-top: 3rem;
 }
 
+.dialog-container-header {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 0px;
+  width: 100%;
+  justify-content: space-between;
+}
+
 .close-btn {
   position: absolute;
   top: 0px;
