@@ -207,6 +207,7 @@ import { FileAnswerMapperService } from './services/fileAnswerMapper.service';
 import { StickyScrollDirective } from './directives/sticky-scroll.directive';
 import { AutocompleteActivityPicklistQuestion } from './components/activityForm/picklist/autocompleteActivityPicklistQuestion.component';
 import { SearchHighlightPipe } from './pipes/searchHighlight.pipe';
+import { StudiesServiceAgentService } from './services/serviceAgents/studiesServiceAgent.service';
 import { FuncType } from './models/funcType';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
@@ -328,6 +329,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         DisplayLanguagePopupServiceAgent,
         ActivityInstanceSelectAnswerService,
         StudyDetailServiceAgent,
+        StudiesServiceAgentService,
         StatisticsServiceAgent,
         ModalDialogService,
         FileUploadService,

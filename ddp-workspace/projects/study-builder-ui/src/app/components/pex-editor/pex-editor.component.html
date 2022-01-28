@@ -1,0 +1,16 @@
+<ngx-monaco-editor [options]="editorOptions" [(ngModel)]="expression" (onInit)="editorInit($event)"></ngx-monaco-editor>
+
+<ng-container *ngIf="errors.length">
+    <b>Errors:</b>
+    <div *ngFor="let error of errors">
+        <span class="error">{{error.message}}</span>
+    </div>
+</ng-container>
+<br/>
+<ng-container *ngIf="completions.length">
+    <b>Suggestions for completion:</b>
+    <div *ngFor="let completion of completions">
+        {{completion}}
+    </div>
+</ng-container>
+
