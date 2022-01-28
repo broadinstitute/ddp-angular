@@ -2803,7 +2803,16 @@
             "assets": [
               "projects/study-builder-ui/src/favicon.ico",
               "projects/study-builder-ui/src/assets",
-              { "glob": "**/*", "input": "node_modules/monaco-editor", "output": "assets/monaco-editor" }
+              {
+                "glob": "**/*",
+                "input": "node_modules/monaco-editor",
+                "output": "assets/monaco-editor"
+              },
+              {
+                "glob": "*.*",
+                "input": "projects/study-builder-ui/src/assets/",
+                "output": "assets"
+              }
             ],
             "styles": [
               "projects/study-builder-ui/src/theme.scss",

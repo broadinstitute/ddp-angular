@@ -1,0 +1,38 @@
+.validators {
+    border: 2px solid grey;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 10px 10px 0;
+
+    &-container {
+        .title {
+            margin-top: 0;
+            text-align: center;
+        }
+
+        mat-form-field {
+            margin-left: 15px;
+        }
+
+        .validator {
+            display: flex;
+            align-items: baseline;
+        }
+
+        .toggle {
+            width: 130px;
+
+            &.mat-checkbox-checked {
+                font-weight: 600;
+            }
+        }
+
+        .length {
+            width: 100px;
+        }
+
+        .message {
+            flex-grow: 2;
+        }
+    }
+}

@@ -2,308 +2,308 @@
     "Common": {
         "Buttons": {
             "Login": {
-                "Title": "Log In",
-                "AriaLabel": "Log In"
+                "Title": "Iniciar sesión",
+                "AriaLabel": "[ES] Log In"
             },
             "Submit": {
-                "Title": "Submit",
-                "AriaLabel": "Submit"
+                "Title": "Enviar",
+                "AriaLabel": "[ES] Submit"
             },
             "HeaderMenu": {
-                "AriaLabel": "Header menu button"
+                "AriaLabel": "[ES] Header menu button"
             }
         }
     },
     "App": {
         "Navigation": {
-            "Home": "[ES] Home",
+            "Home": "Página principal",
             "Prequal": "[ES] Prequal",
             "Dashboard": "[ES] Dashboard"
         }
     },
     "Toolkit": {
         "Dashboard": {
-            "Title": "Participant Dashboard",
-            "EditUser": "Edit profile"
+            "Title": "[ES] Participant Dashboard",
+            "EditUser": "[ES] Edit profile"
         },
         "Password": {
-            "Title": "Site Gatekeeper",
-            "Text": "Please enter the site password *",
-            "InputPlaceholder": "Password",
-            "PasswordWrongError": "Incorrect password. Please try again.",
-            "OtherError": "We're sorry, but an error has occurred. Please try again.",
-            "PasswordRequiredError": "Password is required"
+            "Title": "[ES] Site Gatekeeper",
+            "Text": "[ES] Please enter the site password *",
+            "InputPlaceholder": "[ES] Password",
+            "PasswordWrongError": "[ES] Incorrect password. Please try again.",
+            "OtherError": "[ES] We're sorry, but an error has occurred. Please try again.",
+            "PasswordRequiredError": "[ES] Password is required"
         },
         "ErrorPage": {
-            "Title": "We've encountered an error",
-            "Text": "We're sorry, but an error has occurred.",
+            "Title": "[ES] We've encountered an error",
+            "Text": "[ES] We're sorry, but an error has occurred.",
             "DefaultText": {
-                "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
-                "TextPt2": "or call us at"
+                "TextPt1": "[ES] Please wait a moment and retry. If the trouble persists, please email us at",
+                "TextPt2": "[ES] or call us at"
             }
         },
         "SessionExpired": {
-            "Text": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
+            "Text": "[ES] You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
         },
         "Dialogs": {
             "SessionWillExpire": {
-                "Title": "Your session will time-out soon",
-                "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
-                "SignOut": "Sign Out",
-                "Continue": "Continue",
-                "RenewalFailed": "Session renewal failed. Please log out and log back in again."
+                "Title": "[ES] Your session will time-out soon",
+                "Text": "[ES] To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+                "SignOut": "[ES] Sign Out",
+                "Continue": "[ES] Continue",
+                "RenewalFailed": "[ES] Session renewal failed. Please log out and log back in again."
             }
         }
     },
     "SDK": {
-        "SubmitButton": "Submit",
-        "CloseButton": "Close",
-        "AddButton": "ADD",
-        "CancelButton": "Cancel",
-        "NextButton": "Next",
-        "PreviousButton": "Back",
-        "SavingButton": "Saving",
-        "EditButton": "Continue",
-        "SaveButton": "Save",
-        "CompleteButton": "Edit",
-        "ReviewButton": "View",
-        "OpenButton": "Open",
-        "StartButton": "Start",
-        "AgreeButton": "I agree",
-        "ReportButton": "Report",
-        "NotAgreeButton": "I'm not ready to agree",
-        "ValidateError": "Please complete all required fields.",
-        "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
-        "SaveError": "We're sorry but an error occurred",
+        "SubmitButton": "[ES] Submit",
+        "CloseButton": "[ES] Close",
+        "AddButton": "[ES] ADD",
+        "CancelButton": "[ES] Cancel",
+        "NextButton": "[ES] Next",
+        "PreviousButton": "[ES] Back",
+        "SavingButton": "[ES] Saving",
+        "EditButton": "[ES] Continue",
+        "SaveButton": "[ES] Save",
+        "CompleteButton": "[ES] Edit",
+        "ReviewButton": "[ES] View",
+        "OpenButton": "[ES] Open",
+        "StartButton": "[ES] Start",
+        "AgreeButton": "[ES] I agree",
+        "ReportButton": "[ES] Report",
+        "NotAgreeButton": "[ES] I'm not ready to agree",
+        "ValidateError": "[ES] Please complete all required fields.",
+        "CommunicationError": "[ES] There was a problem saving your data. Please check the form and your answers before submitting",
+        "SaveError": "[ES] We're sorry but an error occurred",
         "ExportStudy": {
-            "Export": "EXPORT"
+            "Export": "[ES] EXPORT"
         },
         "ListStudies": {
-            "StudyName": "Study Name",
-            "ParticipantCount": "Participant Count"
+            "StudyName": "[ES] Study Name",
+            "ParticipantCount": "[ES] Participant Count"
         },
         "ListWorkspaces": {
-            "WorkspaceName": "Workspace Name",
-            "WorkspaceNamespace": "Workspace Namespace"
+            "WorkspaceName": "[ES] Workspace Name",
+            "WorkspaceNamespace": "[ES] Workspace Namespace"
         },
         "Login": {
-            "Login": "LOG IN",
-            "Logout": "LOG OUT"
+            "Login": "[ES] LOG IN",
+            "Logout": "[ES] LOG OUT"
         },
         "SignInOut": {
-            "SignIn": "Sign In",
-            "SignOut": "Sign Out"
+            "SignIn": "[ES] Sign In",
+            "SignOut": "[ES] Sign Out"
         },
         "LanguageSelector": {
-            "LanguageSelection": "language selection"
+            "LanguageSelection": "[ES] language selection"
         },
         "UserActivities": {
-            "ActivityName": "Form",
-            "Summary": "Summary",
-            "ActivityStatus": "Status",
-            "ActivityDate": "Created",
-            "ActivityActions": "Actions",
-            "ActivityQuestionCount": "{{questionsAnswered}} of {{questionTotal}} answered",
-            "HiddenTooltip": "This activity is hidden."
+            "ActivityName": "[ES] Form",
+            "Summary": "[ES] Summary",
+            "ActivityStatus": "[ES] Status",
+            "ActivityDate": "[ES] Created",
+            "ActivityActions": "[ES] Actions",
+            "ActivityQuestionCount": "[ES] {{questionsAnswered}} of {{questionTotal}} answered",
+            "HiddenTooltip": "[ES] This activity is hidden."
         },
         "ManageParticipants": {
-            "GovernedParticipants": "Governed participants",
-            "ParticipantPlaceholder": "Participant",
-            "ParticipantsList": "Participants"
+            "GovernedParticipants": "[ES] Governed participants",
+            "ParticipantPlaceholder": "[ES] Participant",
+            "ParticipantsList": "[ES] Participants"
         },
         "ParticipantProfile": {
-            "OpenProfile": "Profile",
-            "ViewAs": "View As",
-            "ManageParticipants": "Manage participants"
+            "OpenProfile": "[ES] Profile",
+            "ViewAs": "[ES] View As",
+            "ManageParticipants": "[ES] Manage participants"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "User preferences",
-            "DateOfBirth": "Date of birth",
-            "UserName": "Name",
-            "FirstUserName": "First name",
-            "LastUserName": "Last name",
-            "FirstNameFieldIsRequired": "First name is required",
-            "LastNameFieldIsRequired": "Last name is required",
-            "MailingAddress": "Mailing Address",
-            "FutureBirthDateValidationError": "Date of birth cannot be a future date."
+            "UserPreferencesTitle": "[ES] User preferences",
+            "DateOfBirth": "[ES] Date of birth",
+            "UserName": "[ES] Name",
+            "FirstUserName": "[ES] First name",
+            "LastUserName": "[ES] Last name",
+            "FirstNameFieldIsRequired": "[ES] First name is required",
+            "LastNameFieldIsRequired": "[ES] Last name is required",
+            "MailingAddress": "[ES] Mailing Address",
+            "FutureBirthDateValidationError": "[ES] Date of birth cannot be a future date."
         },
         "Dashboard": {
-            "Title": "Participant Dashboard",
-            "Text": "The dashboard below describes each Basil Project form and its status."
+            "Title": "[ES] Participant Dashboard",
+            "Text": "[ES] The dashboard below describes each Basil Project form and its status."
         },
         "DatePicker": {
-            "Day": "Choose day...",
-            "Month": "Choose month...",
-            "Year": "Choose year...",
-            "January": "January",
-            "February": "February",
-            "March": "March",
-            "April": "April",
-            "May": "May",
-            "June": "June",
-            "July": "July",
-            "August": "August",
-            "September": "September",
-            "October": "October",
-            "November": "November",
-            "December": "December"
+            "Day": "Seleccione el día...",
+            "Month": "Seleccione el mes...",
+            "Year": "Seleccione el año...",
+            "January": "Enero",
+            "February": "Febrero",
+            "March": "Marzo",
+            "April": "Abril",
+            "May": "Mayo",
+            "June": "Junio",
+            "July": "Julio",
+            "August": "Agosto",
+            "September": "Septiembre",
+            "October": "Octubre",
+            "November": "Noviembre",
+            "December": "Diciembre"
         },
         "DateLabel": {
-            "YYYY": "YYYY",
+            "YYYY": "AAAA",
             "MM": "MM",
             "DD": "DD"
         },
         "UserMenu": {
-            "DashboardButton": "Dashboard",
-            "SignOutButton": "Sign Out"
+            "DashboardButton": "[ES] Dashboard",
+            "SignOutButton": "[ES] Sign Out"
         },
         "DetailsPlaceholder": {
-            "PluralForm": "characters remaining",
-            "SingularForm": "character remaining"
+            "PluralForm": "[ES] characters remaining",
+            "SingularForm": "[ES] character remaining"
         },
         "Title": {
-            "Default": "Basil Project",
-            "Alert": "Your session will time-out soon"
+            "Default": "[ES] Basil Project",
+            "Alert": "[ES] Your session will time-out soon"
         },
         "EmailEntry": {
-            "InvalidEmail": "Please enter a valid email"
+            "InvalidEmail": "[ES] Please enter a valid email"
         },
         "Institutions": {
             "Fields": {
-                "Name": "Physician Name",
-                "Institution": "Institution",
-                "InstitutionAny": "Institution (if any)",
-                "City": "City",
-                "State": "State"
+                "Name": "[ES] Physician Name",
+                "Institution": "[ES] Institution",
+                "InstitutionAny": "[ES] Institution (if any)",
+                "City": "[ES] City",
+                "State": "[ES] State"
             },
             "Form": {
-                "OtherPhysician": "Other physician",
-                "OtherInstitution": "Other institution"
+                "OtherPhysician": "[ES] Other physician",
+                "OtherInstitution": "[ES] Other institution"
             },
-            "PhysicianValidation": "Please fill out all required fields"
+            "PhysicianValidation": "[ES] Please fill out all required fields"
         },
         "MailAddress": {
             "Fields": {
-                "Name": "Full Name",
-                "Country": "Country/Territory",
-                "Street1": "Street Address",
-                "Street2": "Apt/Floor #",
+                "Name": "[ES] Full Name",
+                "Country": "[ES] Country/Territory",
+                "Street1": "[ES] Street Address",
+                "Street2": "[ES] Apt/Floor #",
                 "State": {
-                    "State": "State",
-                    "Province": "Province",
-                    "State/Province/Region": "State/Province/Region"
+                    "State": "[ES] State",
+                    "Province": "[ES] Province",
+                    "State/Province/Region": "[ES] State/Province/Region"
                 },
-                "City": "City",
-                "Phone": "Phone",
+                "City": "[ES] City",
+                "Phone": "[ES] Phone",
                 "Zip": {
-                    "Zip Code": "Zip Code",
-                    "Postal Code": "Postal Code",
-                    "Zip/Postal Code": "Zip/Postal Code"
+                    "Zip Code": "[ES] Zip Code",
+                    "Postal Code": "[ES] Postal Code",
+                    "Zip/Postal Code": "[ES] Zip/Postal Code"
                 },
-                "Choose": "Choose {{field}} ..."
+                "Choose": "[ES] Choose {{field}} ..."
             },
             "Suggestion": {
-                "Title": "We have checked your address entry and have suggested changes that could help ensure delivery.",
-                "Subtitle": "Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
-                "Suggested": "Suggested:",
-                "AsEntered": "As Entered:"
+                "Title": "[ES] We have checked your address entry and have suggested changes that could help ensure delivery.",
+                "Subtitle": "[ES] Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
+                "Suggested": "[ES] Suggested:",
+                "AsEntered": "[ES] As Entered:"
             },
             "Error": {
-                "InvalidAddress": "Invalid address.",
-                "CannotVerify": "Could not verify address, please double-check your address.",
-                "UnknownVerifyError": "An unknown error occurred while verifying address.",
-                "FieldIsRequired": "{{field}} is required",
-                "FieldIsInvalid": "{{field}} has an invalid value",
-                "InvalidHouseNumber": "Street number could not be found",
-                "INTERNAL_SERVER_ERROR": "We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
-                "NOT_ACCEPTABLE": "The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
-                "NOT_FOUND": "The requested resource could not be found.",
-                "FORBIDDEN": "Unable to access the requested resource.",
-                "PAYMENT_REQUIRED": "Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
-                "UNAUTHORIZED": "Unable to access the requested resource, authorization failed.",
-                "BAD_REQUEST": "Malformed request. Please check the contents and retry.",
-                "PAYMENT_GATEWAY.ERROR": "The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
-                "MODE.UNAUTHORIZED": "This resource requires a production API Key to access.",
-                "MODE.CONFLICT": "API Key mode conflicted with parameter mode.",
-                "DATE.PARSE.FAILURE": "At least one date was formatted incorrectly and could not be parsed.",
-                "PARAMETER.FORBIDDEN": "The request could not be completed due to forbidden properties present in the parameters.",
-                "PARAMETER.REQUIRED": "Missing required parameter.",
-                "ADDRESS.PARAMETERS.INVALID_CHARACTER": "The parameters passed contained an invalid character.",
-                "ADDRESS.PARAMETERS.INVALID": "The parameters passed to create an Address were missing or invalid.",
-                "ADDRESS.COUNTRY.INVALID": "Invalid 'country', please provide a 2 character ISO country code.",
-                "ADDRESS.VERIFICATION.NOT_FOUND": "Address Not Found.",
-                "ADDRESS.VERIFICATION.FAILURE": "The address was unable to be verified.",
-                "ADDRESS.VERIFY.UNAVAILABLE": "Address verification is not available. Please try again.",
-                "ADDRESS.VERIFICATION.INVALID": "One of the verifications selected is invalid.",
-                "ADDRESS.VERIFY.FAILURE": "Unable to verify address.",
-                "ADDRESS.VERIFY.CARRIER_INVALID": "Unable to verify address using provided carrier.",
-                "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "Address verification is not available due to an upstream service not responding. Please try again.",
-                "ADDRESS.VERIFY.ONLY_US": "USPS can only validate US addresses.",
-                "ADDRESS.VERIFY.INTL_NOT_ENABLED": "International Verification not enabled on this account. Please contact support@easypost.com.",
-                "ADDRESS.VERIFY.MISSING_STREET": "Insufficient address data provided. A street must be provided.",
-                "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Insufficient address data provided. A city and state or a zip must be provided.",
-                "E.COUNTRY.UNSUPPORTED": "This country is not supported in this mode. Try in production mode.",
-                "E.ENGINE.UNAVAILABLE": "No verification engine is available to service this country. Please try again later.",
-                "E.QUERY.UNANSWERABLE": "We can not provide enough data in this country to satisfy this request. Please try again later.",
-                "E.ADDRESS.NOT_FOUND": "We could not find the entered address.",
-                "E.SECONDARY_INFORMATION.INVALID": "Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
-                "E.SECONDARY_INFORMATION.MISSING": "Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
-                "E.HOUSE_NUMBER.MISSING": "House number is missing.",
-                "E.HOUSE_NUMBER.INVALID": "We could not find the street number provided.",
-                "E.STREET.MISSING": "Street is missing.",
-                "E.STREET.INVALID": "Street is invalid.",
-                "E.BOX_NUMBER.MISSING": "Box number is missing.",
-                "E.BOX_NUMBER.INVALID": "Box number is invalid.",
-                "E.ADDRESS.INVALID": "Invalid city/state/ZIP.",
-                "E.ZIP.NOT_FOUND": "Zip not found.",
-                "E.ZIP.INVALID": "Zip invalid.",
-                "E.ZIP.PLUS4.NOT_FOUND": "Zip + 4 not found.",
-                "E.ADDRESS.MULTIPLE": "Multiple addresses were returned with the same zip.",
-                "E.ADDRESS.INSUFFICIENT": "Insufficient/incorrect address data.",
-                "E.ADDRESS.DUAL": "Dual address.",
-                "E.STREET.MAGNET": "Street address is ambiguous.",
-                "E.CITY_STATE.INVALID": "Unverifiable city / state.",
-                "E.STATE.INVALID": "Invalid State.",
-                "E.ADDRESS.DELIVERY.INVALID": "Invalid delivery address.",
-                "E.TIMED_OUT": "Exceeded max timeout.",
-                "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
-                "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+                "InvalidAddress": "[ES] Invalid address.",
+                "CannotVerify": "[ES] Could not verify address, please double-check your address.",
+                "UnknownVerifyError": "[ES] An unknown error occurred while verifying address.",
+                "FieldIsRequired": "[ES] {{field}} is required",
+                "FieldIsInvalid": "[ES] {{field}} has an invalid value",
+                "InvalidHouseNumber": "[ES] Street number could not be found",
+                "INTERNAL_SERVER_ERROR": "[ES] We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
+                "NOT_ACCEPTABLE": "[ES] The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
+                "NOT_FOUND": "[ES] The requested resource could not be found.",
+                "FORBIDDEN": "[ES] Unable to access the requested resource.",
+                "PAYMENT_REQUIRED": "[ES] Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
+                "UNAUTHORIZED": "[ES] Unable to access the requested resource, authorization failed.",
+                "BAD_REQUEST": "[ES] Malformed request. Please check the contents and retry.",
+                "PAYMENT_GATEWAY.ERROR": "[ES] The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
+                "MODE.UNAUTHORIZED": "[ES] This resource requires a production API Key to access.",
+                "MODE.CONFLICT": "[ES] API Key mode conflicted with parameter mode.",
+                "DATE.PARSE.FAILURE": "[ES] At least one date was formatted incorrectly and could not be parsed.",
+                "PARAMETER.FORBIDDEN": "[ES] The request could not be completed due to forbidden properties present in the parameters.",
+                "PARAMETER.REQUIRED": "[ES] Missing required parameter.",
+                "ADDRESS.PARAMETERS.INVALID_CHARACTER": "[ES] The parameters passed contained an invalid character.",
+                "ADDRESS.PARAMETERS.INVALID": "[ES] The parameters passed to create an Address were missing or invalid.",
+                "ADDRESS.COUNTRY.INVALID": "[ES] Invalid 'country', please provide a 2 character ISO country code.",
+                "ADDRESS.VERIFICATION.NOT_FOUND": "[ES] Address Not Found.",
+                "ADDRESS.VERIFICATION.FAILURE": "[ES] The address was unable to be verified.",
+                "ADDRESS.VERIFY.UNAVAILABLE": "[ES] Address verification is not available. Please try again.",
+                "ADDRESS.VERIFICATION.INVALID": "[ES] One of the verifications selected is invalid.",
+                "ADDRESS.VERIFY.FAILURE": "[ES] Unable to verify address.",
+                "ADDRESS.VERIFY.CARRIER_INVALID": "[ES] Unable to verify address using provided carrier.",
+                "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "[ES] Address verification is not available due to an upstream service not responding. Please try again.",
+                "ADDRESS.VERIFY.ONLY_US": "[ES] USPS can only validate US addresses.",
+                "ADDRESS.VERIFY.INTL_NOT_ENABLED": "[ES] International Verification not enabled on this account. Please contact support@easypost.com.",
+                "ADDRESS.VERIFY.MISSING_STREET": "[ES] Insufficient address data provided. A street must be provided.",
+                "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "[ES] Insufficient address data provided. A city and state or a zip must be provided.",
+                "E.COUNTRY.UNSUPPORTED": "[ES] This country is not supported in this mode. Try in production mode.",
+                "E.ENGINE.UNAVAILABLE": "[ES] No verification engine is available to service this country. Please try again later.",
+                "E.QUERY.UNANSWERABLE": "[ES] We can not provide enough data in this country to satisfy this request. Please try again later.",
+                "E.ADDRESS.NOT_FOUND": "[ES] We could not find the entered address.",
+                "E.SECONDARY_INFORMATION.INVALID": "[ES] Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+                "E.SECONDARY_INFORMATION.MISSING": "[ES] Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+                "E.HOUSE_NUMBER.MISSING": "[ES] House number is missing.",
+                "E.HOUSE_NUMBER.INVALID": "[ES] We could not find the street number provided.",
+                "E.STREET.MISSING": "[ES] Street is missing.",
+                "E.STREET.INVALID": "[ES] Street is invalid.",
+                "E.BOX_NUMBER.MISSING": "[ES] Box number is missing.",
+                "E.BOX_NUMBER.INVALID": "[ES] Box number is invalid.",
+                "E.ADDRESS.INVALID": "[ES] Invalid city/state/ZIP.",
+                "E.ZIP.NOT_FOUND": "[ES] Zip not found.",
+                "E.ZIP.INVALID": "[ES] Zip invalid.",
+                "E.ZIP.PLUS4.NOT_FOUND": "[ES] Zip + 4 not found.",
+                "E.ADDRESS.MULTIPLE": "[ES] Multiple addresses were returned with the same zip.",
+                "E.ADDRESS.INSUFFICIENT": "[ES] Insufficient/incorrect address data.",
+                "E.ADDRESS.DUAL": "[ES] Dual address.",
+                "E.STREET.MAGNET": "[ES] Street address is ambiguous.",
+                "E.CITY_STATE.INVALID": "[ES] Unverifiable city / state.",
+                "E.STATE.INVALID": "[ES] Invalid State.",
+                "E.ADDRESS.DELIVERY.INVALID": "[ES] [ES] Invalid delivery address.",
+                "E.TIMED_OUT": "[ES] Exceeded max timeout.",
+                "E.TIME_ZONE.UNAVAILABLE": "[ES] The time zone service is currently unavailable.",
+                "E.PO_BOX.INTERNATIONAL": "[ES] Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
             },
-            "UseAsEntered": "We are unable to confirm that the address is valid. Please check this box to use the address as entered."
+            "UseAsEntered": "[ES] We are unable to confirm that the address is valid. Please check this box to use the address as entered."
         },
-        "TooltipAlt": "Information",
+        "TooltipAlt": "[ES] Information",
         "SubjectPanel": {
-            "Link": "Return to subject look-up",
-            "InvitationCode": "Subject Invitation Code:",
-            "Email": "Email:",
-            "Name": "Name:",
-            "ShortId": "Subject Short ID/HRUID:"
+            "Link": "[ES] Return to subject look-up",
+            "InvitationCode": "[ES] Subject Invitation Code:",
+            "Email": "[ES] Email:",
+            "Name": "[ES] Name:",
+            "ShortId": "[ES] Subject Short ID/HRUID:"
         },
         "AdminActionPanel": {
-            "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
-            "EditButton": "Edit"
+            "ActivityEdit": "[ES] Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+            "EditButton": "[ES] Edit"
         },
         "Validators": {
-            "DateNavyValidationRule": "Entered date is invalid",
-            "Autocomplete": "No {{control}} is found"
+            "DateNavyValidationRule": "[ES] Entered date is invalid",
+            "Autocomplete": "[ES] No {{control}} is found"
         },
         "FileUpload": {
-            "ConfirmReuploadTitle": "Are you sure you want \nto reupload the file?",
-            "ConfirmUndoUploadTitle": "Are you sure you want \nto remove uploaded file from server?",
-            "ConfirmCancelUploadTitle": "Are you sure you want \nto cancel upload?",
-            "ReuploadBtnText": "Reupload",
-            "UploadBtnText": "Upload",
-            "OkBtnText": "OK",
-            "CancelBtnText": "Cancel",
-            "MaxSize": "Max size: {{maxSize}}",
-            "AllowedFileTypes": "Allowed files: {{allowedFileTypes}}",
-            "ChooseFile": "Click and select \nor drag file to upload",
-            "Uploading": "Uploading {{filename}}",
-            "Size": "(size: {{size}})",
-            "MaxSizeErrorMessage": "Maximum file size exceeded",
-            "InvalidTypeErrorMessage": "Type of file selected is not valid",
-            "CancelUpload": "Cancel upload",
-            "RemoveUploadedFile": "Remove uploaded file"
+            "ConfirmReuploadTitle": "[ES] Are you sure you want \nto reupload the file?",
+            "ConfirmUndoUploadTitle": "[ES] Are you sure you want \nto remove uploaded file from server?",
+            "ConfirmCancelUploadTitle": "[ES] Are you sure you want \nto cancel upload?",
+            "ReuploadBtnText": "[ES] Reupload",
+            "UploadBtnText": "[ES] Upload",
+            "OkBtnText": "[ES] OK",
+            "CancelBtnText": "[ES] Cancel",
+            "MaxSize": "[ES] Max size: {{maxSize}}",
+            "AllowedFileTypes": "[ES] Allowed files: {{allowedFileTypes}}",
+            "ChooseFile": "[ES] Click and select \nor drag file to upload",
+            "Uploading": "[ES] Uploading {{filename}}",
+            "Size": "[ES] (size: {{size}})",
+            "MaxSizeErrorMessage": "[ES] Maximum file size exceeded",
+            "InvalidTypeErrorMessage": "[ES] Type of file selected is not valid",
+            "CancelUpload": "[ES] Cancel upload",
+            "RemoveUploadedFile": "[ES] Remove uploaded file"
         }
     }
 }

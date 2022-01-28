@@ -49,6 +49,7 @@ import { PEXLanguage } from '../antlr4-pex-grammar/pex-config';
 import { PexTokensProvider } from './monaco-providers/pex-tokens-provider';
 import { pexTheme } from './monaco-providers/pex-theme';
 import { pexProvideCompletionItems } from './monaco-providers/pex-completion-item-provider';
+import { ValidatorsBlockComponent } from './components/validators-block/validators-block.component';
 
 const ddpConfig = new ConfigurationService();
 ddpConfig.doGcpErrorReporting = false;
@@ -116,6 +117,7 @@ function onMonacoLoad(studiesServiceAgent: StudiesServiceAgentService) {
         PicklistGroupEditorComponent,
         PexEditorComponent,
         PexEditorSandboxComponent,
+        ValidatorsBlockComponent
     ],
     imports: [
         BrowserModule,

@@ -5,4 +5,5 @@ export interface AbstractRuleDef {
   ruleType: RuleType;
   hintTemplate?: Template | null;
   allowSave?: boolean;
+  message?: string;
 }

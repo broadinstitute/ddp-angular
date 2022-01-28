@@ -1,14 +1,19 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+
+import {
+    ActivityPicklistAnswerDto,
+    ActivityPicklistNormalizedGroup,
+    ActivityPicklistOption,
+    ActivityPicklistQuestionBlock
+} from 'ddp-sdk';
 import { QuestionBlockDef } from '../../model/core/questionBlockDef';
-import { ActivityPicklistNormalizedGroup, ActivityPicklistOption, ActivityPicklistQuestionBlock } from 'ddp-sdk';
-import { Observable } from 'rxjs';
 import { ConfigurationService } from '../../configuration.service';
-import { filter, map, tap } from 'rxjs/operators';
 import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
 import { PicklistQuestionDef } from '../../model/core/picklistQuestionDef';
 import { PicklistOptionDef } from '../../model/core/picklistOptionDef';
 import { StudyConfigObjectFactory } from '../../model/core-extended/studyConfigObjectFactory';
 import { PicklistGroupDef } from '../../model/core/picklistGroupDef';
+import { BaseBlockComponent } from '../base-block/base-block.component';
 
 @Component({
     selector: 'app-picklist-question-block',
@@ -16,24 +21,23 @@ import { PicklistGroupDef } from '../../model/core/picklistGroupDef';
     styleUrls: ['./picklist-question-block.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PicklistQuestionBlockComponent implements OnInit {
-    @Input()
-    definitionBlock$: Observable<QuestionBlockDef<PicklistQuestionDef>>;
-    angularClientBlock$: Observable<ActivityPicklistQuestionBlock>;
+    export class PicklistQuestionBlockComponent
+    extends BaseBlockComponent<QuestionBlockDef<PicklistQuestionDef>, ActivityPicklistQuestionBlock, ActivityPicklistAnswerDto[]>
+    implements OnInit {
 
+    protected defaultAnswer = [];
     private factory: StudyConfigObjectFactory;
+
     constructor(private config: ConfigurationService) {
+        super();
         this.factory = new StudyConfigObjectFactory(config);
     }
 
     ngOnInit(): void {
-        this.angularClientBlock$ = this.definitionBlock$.pipe(
-            tap(defBlock => console.log('getting defblock: %o', defBlock)),
-            filter(block => !!block),
-            map(defBlock => this.buildFromDef(defBlock)));
+        this.angularClientBlock$ = this.getAngularClientBlock$();
     }
 
-    private buildFromDef(defBlock: QuestionBlockDef<PicklistQuestionDef>): ActivityPicklistQuestionBlock {
+    protected buildFromDef(defBlock: QuestionBlockDef<PicklistQuestionDef>): ActivityPicklistQuestionBlock {
         const newClientBlock = new ActivityPicklistQuestionBlock();
         const questionDef = defBlock.question;
         newClientBlock.selectMode = questionDef.selectMode;

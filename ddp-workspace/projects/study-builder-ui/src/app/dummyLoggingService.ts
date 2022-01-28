@@ -1,8 +1,8 @@
 export class DummyLoggingService {
-    logError(error: any): void {
-        console.error(error);
+    logError(...args: any): void {
+        console.error(args.join(', '));
     }
-    logEvent(error: any): void {
-        console.log(error);
+    logEvent(...args: any): void {
+        console.log(args.join(', '));
     }
 }

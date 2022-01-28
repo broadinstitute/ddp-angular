@@ -10,14 +10,22 @@ export class ActivityLengthValidationRule extends ActivityAbstractValidationRule
     }
 
     public recalculate(): boolean {
-        if (this.question.answer !== null &&
-            ((this.minLength !== null && this.question.answer.length < this.minLength)
-                || (this.maxLength != null && this.question.answer.length > this.maxLength))) {
+        if ( this.question.answer !== null
+            && (this.isAnswerTooShort() || this.isAnswerTooLong())
+        ) {
             this.result = this.message;
             return false;
         } else {
             this.result = null;
             return true;
         }
+    }
+
+    private isAnswerTooShort(): boolean {
+        return this.minLength !== null && this.question.answer.length < this.minLength;
+    }
+
+    private isAnswerTooLong(): boolean {
+        return this.maxLength != null && this.question.answer.length > this.maxLength;
     }
 }
