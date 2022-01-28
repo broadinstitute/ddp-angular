@@ -34,6 +34,7 @@ export * from './lib/models/activity/textSuggestion';
 export * from './lib/models/activity/activityForm';
 export * from './lib/models/activity/createActivityInstanceResponse';
 export * from './lib/models/activity/deleteActivityInstanceResponse';
+export * from './lib/models/activity/activityPicklistAnswerDto';
 export * from './lib/models/suggestionMatch';
 export * from './lib/models/userProfileDto';
 export * from './lib/models/auth0-mode';
@@ -104,6 +105,7 @@ export * from './lib/services/modal-dialog.service';
 export * from './lib/services/picklistSortingPolicy.service';
 export * from './lib/services/sortOrder';
 export * from './lib/services/sessionStorage.service';
+export * from './lib/services/activity/activityQuestionConverter.service';
 export * from './lib/services/serviceAgents/activityInstanceStatusServiceAgent.service';
 
 export * from './lib/components/login/auth0-code-callback.component';
