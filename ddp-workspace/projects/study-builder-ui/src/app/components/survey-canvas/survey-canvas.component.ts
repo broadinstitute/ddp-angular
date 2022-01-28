@@ -16,7 +16,6 @@ export class SurveyCanvasComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this + ' got a new activity def!!');
+    console.log('SurveyCanvasComponent got a new activity def!', changes);
   }
-
 }

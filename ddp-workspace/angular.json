@@ -2802,13 +2802,28 @@
             "tsConfig": "projects/study-builder-ui/tsconfig.app.json",
             "assets": [
               "projects/study-builder-ui/src/favicon.ico",
-              "projects/study-builder-ui/src/assets"
+              "projects/study-builder-ui/src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/monaco-editor",
+                "output": "assets/monaco-editor"
+              },
+              {
+                "glob": "*.*",
+                "input": "projects/study-builder-ui/src/assets/",
+                "output": "assets"
+              }
             ],
             "styles": [
               "projects/study-builder-ui/src/theme.scss",
               "projects/study-builder-ui/src/styles.scss"
             ],
             "scripts": [],
+            "allowedCommonJsDependencies": [
+                "antlr4ts",
+                "antlr4-c3",
+                "stackdriver-errors-js"
+            ],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,

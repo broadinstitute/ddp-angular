@@ -1,0 +1,27 @@
+<div class="validators">
+    <form [formGroup]="validatorsGroup" class="validators-container">
+        <p class="title">Validators</p>
+
+        <div formGroupName="REQUIRED" class="validator">
+            <mat-checkbox formControlName="on" class="toggle">Required</mat-checkbox>
+            <mat-form-field class="message">
+                <input matInput formControlName="message" placeholder="Validator message">
+            </mat-form-field>
+        </div>
+
+        <div formGroupName="LENGTH" class="validator">
+            <mat-checkbox formControlName="on" class="toggle">String length</mat-checkbox>
+            <mat-form-field class="length">
+                <mat-label>Min length</mat-label>
+                <input matInput  formControlName="minLength" type="number">
+            </mat-form-field>
+            <mat-form-field class="length">
+                <mat-label>Max length</mat-label>
+                <input matInput  formControlName="maxLength" type="number">
+            </mat-form-field>
+            <mat-form-field class="message">
+                <input matInput formControlName="message" placeholder="Validator message">
+            </mat-form-field>
+        </div>
+    </form>
+</div>
