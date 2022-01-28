@@ -46,11 +46,11 @@ class PexLineTokens implements monaco.languages.ILineTokens {
 }
 const EOF = -1;
 function tokensForLine(input: string): monaco.languages.ILineTokens {
-    const errorStartingPoints : number[] = []
+    const errorStartingPoints: number[] = [];
 
     class ErrorCollectorListener extends ConsoleErrorListener {
-        syntaxError(_: any, __: any, ___: any, column: number) {
-            errorStartingPoints.push(column)
+        syntaxError(_: any, __: any, ___: any, column: number): void {
+            errorStartingPoints.push(column);
         }
     }
 
@@ -63,7 +63,7 @@ function tokensForLine(input: string): monaco.languages.ILineTokens {
     do {
         const token = lexer.nextToken();
         if (token == null ||
-            token?.type == EOF  // We exclude EOF
+            token?.type === EOF  // We exclude EOF
         ) {
             done = true;
         } else {
@@ -77,6 +77,6 @@ function tokensForLine(input: string): monaco.languages.ILineTokens {
     for (const e of errorStartingPoints) {
         myTokens.push(new PexToken(`error.${PEXLanguage}`, e));
     }
-    myTokens.sort((a, b) => (a.startIndex > b.startIndex) ? 1 : -1)
+    myTokens.sort((a, b) => (a.startIndex > b.startIndex) ? 1 : -1);
     return new PexLineTokens(myTokens);
 }

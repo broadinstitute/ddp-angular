@@ -84,13 +84,14 @@ function createTranslateLoader(handler: HttpBackend): TranslateHttpLoader {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-function onMonacoLoad(studiesServiceAgent: StudiesServiceAgentService) {
-    monaco.languages.register({ id: PEXLanguage });
+function onMonacoLoad(studiesServiceAgent: StudiesServiceAgentService): void {
+    monaco.languages.register({id: PEXLanguage});
     monaco.languages.setTokensProvider(PEXLanguage, new PexTokensProvider());
     monaco.editor.defineTheme('ddp-theme', pexTheme);
 
     const pexCompletionItemProvider: monaco.languages.CompletionItemProvider = {
-        provideCompletionItems: (model: monaco.editor.ITextModel, position: monaco.Position) => pexProvideCompletionItems(model, position, studiesServiceAgent)
+        provideCompletionItems: (model: monaco.editor.ITextModel, position: monaco.Position) =>
+            pexProvideCompletionItems(model, position, studiesServiceAgent)
     };
     monaco.languages.registerCompletionItemProvider(PEXLanguage, pexCompletionItemProvider);
 }

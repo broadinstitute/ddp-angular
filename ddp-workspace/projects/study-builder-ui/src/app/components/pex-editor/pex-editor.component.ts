@@ -1,5 +1,6 @@
 /**
- *  Before using this component run `antlr4ts Pex.g4`  from `src/antlr4-pex-grammar` folder in order to generate pex lexer and parser .ts files.
+ *  Before using this component run `antlr4ts Pex.g4`  from `src/antlr4-pex-grammar` folder
+ *  in order to generate pex lexer and parser .ts files.
  */
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { PEXLanguage } from '../../../antlr4-pex-grammar/pex-config';
@@ -42,7 +43,7 @@ export class PexEditorComponent {
     }
 
     private getValidationErrors(input: string): PexError[] {
-        const errors : PexError[] = []
+        const errors: PexError[] = [];
 
         const lexer = createLexer(input);
         lexer.removeErrorListeners();

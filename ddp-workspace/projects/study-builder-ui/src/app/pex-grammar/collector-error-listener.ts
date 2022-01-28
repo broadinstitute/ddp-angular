@@ -18,7 +18,7 @@ export class PexError {
 export class CollectorErrorListener implements ParserErrorListener {
     constructor(private errors: PexError[] = []) {}
 
-    syntaxError(_: any, offendingSymbol: Token | undefined, line: number, column: number, msg: string) {
+    syntaxError(_: any, offendingSymbol: Token | undefined, line: number, column: number, msg: string): void {
         let endColumn = column + 1;
         if (offendingSymbol?.text != null) {
             endColumn = column + offendingSymbol.text.length;

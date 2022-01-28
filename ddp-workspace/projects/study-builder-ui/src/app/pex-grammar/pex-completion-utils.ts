@@ -5,7 +5,10 @@ import { createLexer, createParserFromLexer } from './pex-grammar-utils';
 import { CodeCompletionCore } from 'antlr4-c3';
 import { PexEditorLexer } from './pex-editor-lexer';
 
-interface CaretPosition { lineNumber: number, column: number }
+interface CaretPosition {
+    lineNumber: number;
+    column: number;
+}
 
 function computeToken(parseTree: ParseTree, caretPosition: CaretPosition): Token | undefined {
     if(parseTree instanceof TerminalNode) {
@@ -39,7 +42,9 @@ function computeTokenOfChildNode(parseTree: ParseTree, caretPosition: CaretPosit
 }
 
 export function getCompletions(input: string, caretPosition?: CaretPosition): string[] {
-    if (!caretPosition) return [];
+    if (!caretPosition) {
+        return [];
+    }
 
     const lexer = createLexer(input);
     const parser = createParserFromLexer(lexer);
@@ -55,13 +60,13 @@ export function getCompletions(input: string, caretPosition?: CaretPosition): st
     const keywords: string[] = [];
     if (collections) {
         for (const candidate of collections.tokens) {
-            const tokens = [candidate[0], ...candidate[1]]
+            const tokens = [candidate[0], ...candidate[1]];
 
-            keywords.push(tokens.map(token => {
-                if (token === PexEditorLexer.STR) {
+            keywords.push(tokens.map(t => {
+                if (t === PexEditorLexer.STR) {
                     return '""';
                 }
-                return parser.vocabulary.getDisplayName(token).replace(/['"]+/g, '');
+                return parser.vocabulary.getDisplayName(t).replace(/['"]+/g, '');
             }).join(''));
         }
     }

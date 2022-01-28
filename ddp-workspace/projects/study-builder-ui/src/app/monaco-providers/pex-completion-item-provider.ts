@@ -5,7 +5,7 @@ export function pexProvideCompletionItems(
     model: monaco.editor.ITextModel,
     position: monaco.Position,
     studiesServiceAgent: StudiesServiceAgentService // TODO: fetch studies from studiesServiceAgent for the suggestions below
-) {
+): any {
     const completions = getCompletions(model.getValue(), position);
     const word = model.getWordUntilPosition(position);
     const range = {
