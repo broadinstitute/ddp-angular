@@ -1,0 +1,8 @@
+.button-filled {
+    background-color: rgb(2, 175, 2);
+    border-color: rgb(2, 175, 2);
+    &:hover {
+        background-color: rgb(2, 121, 2);
+        border-color: rgb(2, 121, 2);
+    }
+}
