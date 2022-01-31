@@ -1,5 +1,5 @@
 import {screensIds} from './ui-actions';
-import { FuncType } from 'ddp-sdk';
+import { FuncType } from './auth';
 
 declare const FormValidator;
 declare const $;
