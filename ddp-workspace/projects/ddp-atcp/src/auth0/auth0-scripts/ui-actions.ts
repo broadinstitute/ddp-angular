@@ -1,4 +1,4 @@
-import { FuncType } from 'ddp-sdk';
+import { FuncType } from './auth';
 
 declare const $;
 

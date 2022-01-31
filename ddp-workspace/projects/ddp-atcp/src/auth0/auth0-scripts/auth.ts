@@ -1,4 +1,4 @@
-import { FuncType } from 'ddp-sdk';
+export type FuncType<T> = (...args) => T;
 
 declare const auth0;
 
