@@ -315,6 +315,7 @@ commands:
           command: |
             set -u
             ng build ddp-atcp-auth
+            npm run convert-atcp-auth-build-to-UMD
       - run:
           name: build atcp auth0 styles
           command: |
