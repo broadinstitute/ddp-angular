@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "convert-atcp-auth-build-to-UMD": "rollup --config projects/ddp-atcp/src/auth0/auth0-scripts/rollup.config.js"
   },
   "private": true,
   "husky": {
