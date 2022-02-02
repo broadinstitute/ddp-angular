@@ -18,8 +18,7 @@
       <h1 class="activity__title" [innerHTML]="model.title"></h1>
     </section>
 
-    <section *ngIf="isStepped" class="section section--stepper"
-    style="display: flex; justify-content: center;">
+    <section *ngIf="isStepped" class="section section--stepper">
       <ol class="stepper-list">
         <ng-container *ngFor="let section of model.sections; let i = index">
           <li class="stepper-list__item">
