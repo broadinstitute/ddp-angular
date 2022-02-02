@@ -1,5 +1,5 @@
 // transform an FESM2015 input file to UMD
-// because it requires in `ddp-study-server\study-builder\tenants\atcp\pages\login.html`
+// because it is required in `ddp-study-server\study-builder\tenants\atcp\pages\login.html`
 // in <script> tag
 
 export default {
