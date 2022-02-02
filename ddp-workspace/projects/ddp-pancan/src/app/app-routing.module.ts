@@ -3,7 +3,6 @@ import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { Auth0CodeCallbackComponent, AuthGuard, BrowserGuard, IrbGuard } from 'ddp-sdk';
 import {
     AcceptAgeUpPageComponent,
-    ActivityRedesignedComponent,
     AgeUpThankYouComponent,
     DashboardRedesignedComponent,
     ErrorRedesignedComponent,
@@ -24,6 +23,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ScientificResearchComponent } from './components/scientific-research/scientific-research.component';
 import { ColorectalPageComponent } from './components/splash-pages/colorectal-page/colorectal-page.component';
 import { LmsPageComponent } from './components/splash-pages/lms-page/lms-page.component';
+import { ActivityPageComponent } from './components/activity-page/activity-page.component';
 
 const routes: Routes = [
     {
@@ -95,7 +95,7 @@ const routes: Routes = [
     },
     {
         path: AppRoutes.ActivityId,
-        component: ActivityRedesignedComponent,
+        component: ActivityPageComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
@@ -104,7 +104,7 @@ const routes: Routes = [
     },
     {
         path: AppRoutes.ActivityLinkId,
-        component: ActivityRedesignedComponent,
+        component: ActivityPageComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
