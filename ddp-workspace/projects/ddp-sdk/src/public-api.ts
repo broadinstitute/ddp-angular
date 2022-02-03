@@ -155,9 +155,9 @@ export * from './lib/components/activityForm/answers/activity-file-answer/activi
 export * from './lib/components/activityForm/answers/activity-matrix-answer/activity-matrix-answer.component';
 export * from './lib/components/activityForm/answers/activity-instance-select-answer/activity-instance-select-answer.component';
 // eslint-disable-next-line max-len
-export * from './lib/components/activityForm/answers/activity-matrix-answer/activity-matrix-answer-dialog/activity-matrix-answer-dialog.component';
+//export * from './lib/components/activityForm/answers/activity-matrix-answer/activity-matrix-answer-dialog/activity-matrix-answer-dialog.component';
 // eslint-disable-next-line max-len
-export * from './lib/components/activityForm/answers/activity-matrix-answer/activity-matrix-answer-table/activity-matrix-answer-table.component';
+//export * from './lib/components/activityForm/answers/activity-matrix-answer/activity-matrix-answer-table/activity-matrix-answer-table.component';
 
 export * from './lib/components/activityForm/activity-blocks/activityQuestion.component';
 export * from './lib/components/activityForm/activity-blocks/modalActivityBlock/modalActivityBlock.component';
