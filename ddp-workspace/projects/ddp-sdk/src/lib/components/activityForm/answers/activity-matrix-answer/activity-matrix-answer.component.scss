@@ -1,39 +1,8 @@
-* {
-  box-sizing: border-box;
-}
-
-.table-container {
-  box-sizing: border-box;
-  overflow-x: auto;
-}
-
-.matrix-answer-table {
-  width: 100%;
-  height: 100%;
-
-  border-collapse: collapse;
-  border-spacing: 0;
-  overflow: hidden;
-
-  &__cell {
-    &--group,
-    &--option-label,
-    &--option-control {
-      min-width: 140px;
-
-      padding: 1em 0.5em;
-
-      text-align: center;
+.button-filled {
+    background-color: rgb(184, 184, 184);
+    border-color: rgb(184, 184, 184);
+    &:hover {
+        background-color: rgb(143, 143, 143);
+        border-color: rgb(143, 143, 143);
     }
-
-    &--question {
-      min-width: 200px;
-
-      padding: 1em;
-    }
-  }
-}
-
-::ng-deep .mat-radio-button .mat-radio-label-content {
-  display: none;
 }

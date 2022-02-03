@@ -1,6 +1,7 @@
 {
   "name": "ddp-atcp-auth",
   "version": "1.0.0",
+  "main": "./ddp-atcp-auth.umd.js",
   "peerDependencies": {
   }
 }

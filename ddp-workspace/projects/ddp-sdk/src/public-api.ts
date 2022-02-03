@@ -14,6 +14,9 @@ export * from './lib/models/logLevel';
 export * from './lib/models/activity/activityStatusCodes';
 export * from './lib/models/activity/dateRenderMode';
 export * from './lib/models/activity/dateField';
+export * from './lib/models/activity/activityActivityBlock';
+export * from './lib/models/activity/activitySection';
+export * from './lib/models/activity/activityRenderHintType';
 export * from './lib/models/activity/activityPicklistOption';
 export * from './lib/models/activity/activityPicklistNormalizedGroup';
 export * from './lib/models/activity/activityAgreementQuestionBlock';
@@ -157,6 +160,10 @@ export * from './lib/components/activityForm/answers/activityBooleanAnswer.compo
 export * from './lib/components/activityForm/answers/activity-file-answer/activityFileAnswer.component';
 export * from './lib/components/activityForm/answers/activity-matrix-answer/activity-matrix-answer.component';
 export * from './lib/components/activityForm/answers/activity-instance-select-answer/activity-instance-select-answer.component';
+// eslint-disable-next-line max-len
+export * from './lib/components/activityForm/answers/activity-matrix-answer/activity-matrix-answer-dialog/activity-matrix-answer-dialog.component';
+// eslint-disable-next-line max-len
+export * from './lib/components/activityForm/answers/activity-matrix-answer/activity-matrix-answer-table/activity-matrix-answer-table.component';
 
 export * from './lib/components/activityForm/activity-blocks/activityQuestion.component';
 export * from './lib/components/activityForm/activity-blocks/modalActivityBlock/modalActivityBlock.component';

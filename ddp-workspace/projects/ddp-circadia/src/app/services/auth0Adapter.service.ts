@@ -35,12 +35,6 @@ export class AppAuth0AdapterService extends SDKAuth0AdapterService {
   }
 
   login(params?: Record<string, string>): void {
-    const { enrollmentPaused } = DDP_ENV;
-
-    if (enrollmentPaused) {
-      return this.enrollmentPausedService.openDialog();
-    }
-
     return super.login(params);
   }
 }

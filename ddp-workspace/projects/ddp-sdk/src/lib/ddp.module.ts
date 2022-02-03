@@ -91,6 +91,12 @@ import { ActivityMatrixAnswer } from './components/activityForm/answers/activity
 import {
     ActivityInstanceSelectAnswer
 } from './components/activityForm/answers/activity-instance-select-answer/activity-instance-select-answer.component';
+import {
+    ActivityMatrixAnswerDialogComponent
+} from './components/activityForm/answers/activity-matrix-answer/activity-matrix-answer-dialog/activity-matrix-answer-dialog.component';
+import {
+    ActivityMatrixAnswerTableComponent
+} from './components/activityForm/answers/activity-matrix-answer/activity-matrix-answer-table/activity-matrix-answer-table.component';
 import { ActivityEmailInput } from './components/activityForm/answers/activityEmailInput.component';
 import { ActivityNumericAnswer } from './components/activityForm/answers/activityNumericAnswer.component';
 import { ActivitySectionComponent } from './components/activityForm/activitySection.component';
@@ -371,6 +377,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityFileAnswer,
         ActivityFileAnswerSuccess,
         ActivityMatrixAnswer,
+        ActivityMatrixAnswerDialogComponent,
+        ActivityMatrixAnswerTableComponent,
         ActivityInstanceSelectAnswer,
         ActivityEmailInput,
         ActivityNumericAnswer,
@@ -446,6 +454,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityTextAnswer,
         ActivityFileAnswer,
         ActivityMatrixAnswer,
+        ActivityMatrixAnswerDialogComponent,
+        ActivityMatrixAnswerTableComponent,
         ActivityInstanceSelectAnswer,
         ActivityEmailInput,
         ActivityNumericAnswer,
