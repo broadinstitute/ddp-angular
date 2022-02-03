@@ -45,6 +45,8 @@ import { JoinCmiSectionComponent } from './components/welcome/join-cmi-section/j
 import { ColorectalPageComponent } from './components/splash-pages/colorectal-page/colorectal-page.component';
 import { SplashPageFooterComponent } from './components/splash-pages/splash-page-footer/splash-page-footer.component';
 import { LmsPageComponent } from './components/splash-pages/lms-page/lms-page.component';
+import { ActivityComponent } from './components/activity/activity.component';
+import { ActivityPageComponent } from './components/activity-page/activity-page.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -154,6 +156,8 @@ export function translateFactory(translate: TranslateService,
         ColorectalPageComponent,
         SplashPageFooterComponent,
         LmsPageComponent,
+        ActivityComponent,
+        ActivityPageComponent,
     ],
     imports: [
         BrowserModule,
