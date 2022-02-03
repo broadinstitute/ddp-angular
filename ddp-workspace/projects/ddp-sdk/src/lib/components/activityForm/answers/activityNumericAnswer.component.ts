@@ -1,13 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { ActivityNumericQuestionBlock } from '../../../models/activity/activityNumericQuestionBlock';
-import { NumericType } from '../../../models/activity/numericType';
-
-interface DecimalAnswer {
-    value: number;
-    scale: number;
-}
+import { ActivityNumericQuestionBlock, DecimalAnswer, NumericAnswerType } from '../../../models/activity/activityNumericQuestionBlock';
+import { QuestionType } from '../../../models/activity/questionType';
 
 @Component({
     selector: 'ddp-activity-numeric-answer',
@@ -33,10 +28,10 @@ interface DecimalAnswer {
 })
 export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
     @Input() block: ActivityNumericQuestionBlock;
-    @Input() valueChangeStep: number;
+    @Input() valueChangeStep = 1;
     @Input() placeholder: string;
     @Input() readonly: boolean;
-    @Output() valueChanged: EventEmitter<number> = new EventEmitter();
+    @Output() valueChanged: EventEmitter<NumericAnswerType> = new EventEmitter();
     public numericField: FormControl;
     private subs: Subscription;
 
@@ -47,11 +42,11 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
 
         this.subs = this.numericField.valueChanges.subscribe((enteredValue: number) => {
             const answerToDisplay: string = this.mapAnswerToDisplay(enteredValue);
-            const answerToPatch: number | DecimalAnswer = this.mapAnswerToPatchToServer(answerToDisplay);
+            const answerToPatch: NumericAnswerType = this.mapAnswerToPatchToServer(answerToDisplay);
 
             this.numericField.patchValue(answerToDisplay, {onlySelf: true, emitEvent: false});
-            this.block.answer = answerToPatch as any;
-            this.valueChanged.emit(answerToPatch as any);
+            this.block.answer = answerToPatch;
+            this.valueChanged.emit(answerToPatch);
         });
     }
 
@@ -72,13 +67,13 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
 
     private initForm(): void {
         this.numericField = new FormControl({
-            value: this.mapAnswerToDisplay(this.block.answer),
+            value: this.mapAnswerToDisplay(this.block.answer as number),
             disabled: this.readonly
         }, {updateOn: 'blur'});
     }
 
     private get isIntegerQuestion(): boolean {
-        return this.block.numericType === NumericType.Integer;
+        return this.block.questionType === QuestionType.Numeric; // otherwise Question.Decimal
     }
 
     // e.g. .71 => '0.710' (scale = 3)
@@ -96,7 +91,7 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
     //   "value": 710,  // the significand of a decimal number
     //   "scale": 3     // the exponent of a decimal number
     // }
-    private mapAnswerToPatchToServer(answerValue: string): number | DecimalAnswer | null {
+    private mapAnswerToPatchToServer(answerValue: string): NumericAnswerType | null {
         if (answerValue === null) {
             return null;
         }
@@ -138,5 +133,4 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
         console.log('Decimal to display:', res);
         return res;
     }
-
 }

@@ -146,6 +146,10 @@ export class ActivityQuestionConverter {
                 func: (questionJson) => this.getNumericBlock(questionJson)
             },
             {
+                type: QuestionType.Decimal,
+                func: (questionJson) => this.getNumericBlock(questionJson, true)
+            },
+            {
                 type: QuestionType.Picklist,
                 func: (questionJson) => this.getPicklistBlock(questionJson)
             },
@@ -208,10 +212,9 @@ export class ActivityQuestionConverter {
         return textBlock;
     }
 
-    private getNumericBlock(questionJson: any): ActivityNumericQuestionBlock {
-        const numericBlock = new ActivityNumericQuestionBlock();
+    private getNumericBlock(questionJson: any, isDecimal?: boolean): ActivityNumericQuestionBlock {
+        const numericBlock = new ActivityNumericQuestionBlock(isDecimal);
         numericBlock.placeholder = questionJson.placeholderText;
-        numericBlock.numericType = questionJson.numericType;
         questionJson.validations.forEach(validation => {
             if (_.isNumber(validation.min)) {
                 numericBlock.min = validation.min;

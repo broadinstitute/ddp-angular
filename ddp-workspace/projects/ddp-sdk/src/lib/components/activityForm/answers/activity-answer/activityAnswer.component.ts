@@ -3,7 +3,6 @@ import { AbstractActivityQuestionBlock } from '../../../../models/activity/abstr
 import { AnswerValue } from '../../../../models/activity/answerValue';
 import { QuestionType } from '../../../../models/activity/questionType';
 import { BlockType } from '../../../../models/activity/blockType';
-import { NumericType } from '../../../../models/activity/numericType';
 import { ActivityNumericQuestionBlock } from '../../../../models/activity/activityNumericQuestionBlock';
 
 @Component({
@@ -21,7 +20,7 @@ import { ActivityNumericQuestionBlock } from '../../../../models/activity/activi
                                       [readonly]="readonly"
                                       (valueChanged)="onChange($event)">
             </ddp-activity-text-answer>
-            <ddp-activity-numeric-answer *ngIf="isNumericQuestion(block)"
+            <ddp-activity-numeric-answer *ngIf="isNumericQuestion(block) || isDecimalQuestion(block)"
                                          [class]="'numeric-answer-' + block.stableId"
                                          [block]="block"
                                          [valueChangeStep]="numericValueStep"
@@ -94,9 +93,8 @@ export class ActivityAnswerComponent {
     @Output() componentBusy = new EventEmitter<boolean>();
 
     public get numericValueStep(): number {
-        if (this.isNumericQuestion(this.block)) {
-            const block = this.block as ActivityNumericQuestionBlock;
-            return (block.numericType === NumericType.Integer) ? 1 : Math.pow(10, -(block.scale));
+        if (this.isDecimalQuestion(this.block)) {
+            return Math.pow(10, -( (this.block as ActivityNumericQuestionBlock).scale) );
         }
     }
 
@@ -114,6 +112,10 @@ export class ActivityAnswerComponent {
 
     public isNumericQuestion(block: AbstractActivityQuestionBlock): boolean {
         return this.isQuestion(block) && block.questionType === QuestionType.Numeric;
+    }
+
+    public isDecimalQuestion(block: AbstractActivityQuestionBlock): boolean {
+        return this.isQuestion(block) && block.questionType === QuestionType.Decimal;
     }
 
     public isPicklistQuestion(block: AbstractActivityQuestionBlock): boolean {
