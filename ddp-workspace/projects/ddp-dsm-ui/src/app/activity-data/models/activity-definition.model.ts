@@ -7,7 +7,8 @@ export class ActivityDefinition {
     public activityName: string,
     public activityVersion: string,
     public questions: Array<QuestionDefinition>,
-    public displayOrder:number=1, public showActivityStatus = true
+    public displayOrder: number = 1,
+    public showActivityStatus = false
   ) {
     this.activityCode = activityCode;
     this.activityName = activityName;

@@ -1140,7 +1140,7 @@ export class ParticipantListComponent implements OnInit {
           tabAnchor = proband.dataId;
         }
       }
-      if(tabAnchor === "Survey Data") {
+      if(tabAnchor === 'Survey Data') {
         this.selectedActivity = selectedActivity;
       }
       if (this.filtered && participant.participant != null && participant.participant.ddpParticipantId != null) {

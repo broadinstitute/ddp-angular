@@ -56,13 +56,13 @@ export class Data {
     );
   }
 
-  public getGroupedOptionsForAnswer( questionAnswer:QuestionAnswer) {
-      let answers: Array<string> = new Array();
-      for (let answer of questionAnswer.answer) {
+  public getGroupedOptionsForAnswer( questionAnswer: QuestionAnswer): string[]  {
+      const answers: Array<string> = [];
+      for (const answer of questionAnswer.answer) {
         if (questionAnswer.groupedOptions) {
-          let ans = questionAnswer.groupedOptions[ answer ];
+          const ans = questionAnswer.groupedOptions[ answer ];
           if (ans) {
-            for (let a of ans) {
+            for (const a of ans) {
               answers.push( a );
           }
         }
@@ -77,10 +77,10 @@ export class Data {
   }
 
   getMultipleAnswersForPickList(activityData: ActivityData, name: string): QuestionAnswer[] {
-    let answers: Array<QuestionAnswer> = new Array();
+    const answers: Array<QuestionAnswer> = [];
     for (const x of this.activities) {
       if (x.activityCode === activityData.activityCode) {
-        for (let questionAnswer of x.questionsAnswers) {
+        for (const questionAnswer of x.questionsAnswers) {
           if (questionAnswer.stableId === name) {
             answers.push( questionAnswer );
           }

@@ -1,5 +1,5 @@
 import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
-import {ParticipantDSMInformation} from "../participant-list/models/participant.model";
+import {ParticipantDSMInformation} from '../participant-list/models/participant.model';
 import { Tissue } from '../tissue/tissue.model';
 
 export class TissueList {
@@ -17,7 +17,7 @@ export class TissueList {
     if (json.tissue != null) {
       tissue = Tissue.parse(json.tissue);
     }
-    let participant = ParticipantDSMInformation.parse(json.participant);
+    const participant = ParticipantDSMInformation.parse(json.participant);
     return new TissueList(oncHistory, tissue, json.ddpParticipantId, json.participantId, participant);
   }
 }

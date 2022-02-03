@@ -245,8 +245,8 @@ export class Utils {
       if (o != null) {
         for (col of columns) {
           if(!col.searchable){
-            let value = col.func(data,  activityDefinitionList);
-            str = str + "\"" + value + "\"" + ",";
+            const value = col.func(data,  activityDefinitionList);
+            str = str + '"' + value + '"' + ',';
           }
           else if (col.type === 'ADDITIONALVALUE') {
             const fieldName = 'additionalValues';
@@ -756,7 +756,7 @@ export class Utils {
     return null;
   }
 
-  static getActivityDefinition( activities: ActivityDefinition[], activityCode: string, version: string ) {
+  static getActivityDefinition( activities: ActivityDefinition[], activityCode: string, version: string ): ActivityDefinition{
     return  activities.find( x => x.activityCode === activityCode && x.activityVersion === version );
   }
 
@@ -830,7 +830,7 @@ export class Utils {
     const answers = [];
     let probableAnswer = questionAnswer.answer;
     if (!(questionAnswer.answer instanceof Array)){
-      probableAnswer = new Array();
+      probableAnswer = [];
       probableAnswer.push(questionAnswer.answer);
     }
     for (let answer of probableAnswer) {

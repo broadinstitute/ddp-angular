@@ -1,7 +1,7 @@
 // noinspection BadExpressionStatementJS
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {ParticipantColumn} from "../filter-column/models/column.model";
+import {ParticipantColumn} from '../filter-column/models/column.model';
 import { Participant } from '../participant-list/participant-list.model';
 import { RoleService } from '../services/role.service';
 import { DSMService } from '../services/dsm.service';
@@ -567,7 +567,7 @@ export class TissueListComponent implements OnInit {
       }
       for (const filter of this.selectedColumns[ array ]) {
         const filterText = Filter.getFilterText(filter, array);
-        if (filterText != null && array === Statics.ES_ALIAS&& filter.participantColumn.name != ParticipantColumn.ASSIGNEE_TISSUE.name) {
+        if (filterText !== null && array === Statics.ES_ALIAS&& filter.participantColumn.name !== ParticipantColumn.ASSIGNEE_TISSUE.name) {
           filterText[ 'exactMatch' ] = true;
           filterText[ 'parentName' ] = filter.participantColumn.object;
         }
@@ -846,7 +846,7 @@ export class TissueListComponent implements OnInit {
         this.selectedFilterName = savedFilter.filterName;
         this.selectedColumns = savedFilter.columns;
         if (savedFilter != null) {
-          for (const filter of savedFilter.filters) {
+          for (let filter of savedFilter.filters) {
             if (filter.type === Filter.OPTION_TYPE) {
               if (filter.participantColumn.name === ParticipantColumn.ASSIGNEE_TISSUE.name) {
                 filter = this.adjustAssigneeSavedFilterColumn(filter);
@@ -1564,8 +1564,8 @@ export class TissueListComponent implements OnInit {
       else if (t === 'sm') {
         t = 't';
       }
-      else if (t === "p") {
-        t = "data";
+      else if (t === 'p') {
+        t = 'data';
       }
       for (const f of this.allColumns[ t ]) {
         if (f.participantColumn.name === filter.participantColumn.name) {
@@ -1670,31 +1670,30 @@ export class TissueListComponent implements OnInit {
         data.forEach( ( val ) => {
           this.assignees.push( Assignee.parse( val ) );
         } );
-        let assigneesMap = this.getAssigneeAsNameValue();
-        if(!this.allColumns["data"].find( f => f.participantColumn.name === ParticipantColumn.ASSIGNEE_TISSUE.name))
-          this.allColumns["data"].push(new Filter( ParticipantColumn.ASSIGNEE_TISSUE, Filter.OPTION_TYPE, assigneesMap ));
-        for (let data of this.dataSources) {
-          this.allColumns[ data ].sort( ( a, b ) => {
-            return a.participantColumn.display.localeCompare( b.participantColumn.display );
-          } );
+        const assigneesMap = this.getAssigneeAsNameValue();
+        if(!this.allColumns['data'].find( f => f.participantColumn.name === ParticipantColumn.ASSIGNEE_TISSUE.name))
+          {this.allColumns['data'].push(new Filter( ParticipantColumn.ASSIGNEE_TISSUE, Filter.OPTION_TYPE, assigneesMap ));}
+        for (const dataSource of this.dataSources) {
+          this.allColumns[ dataSource ].sort( ( a, b ) => a.participantColumn.display.localeCompare( b.participantColumn.display ) );
         }
       },
       error: err => { console.log(err); }
     });
   }
 
-  getAssigneeById( assigneeId: any ) {
-    for (let assignee of this.assignees){
+  getAssigneeById( assigneeId: any ): string {
+    for (const assignee of this.assignees){
       if(assignee.assigneeId === assigneeId)
-        return assignee.name;
+        {return assignee.name;}
     }
+    return null;
   }
 
-  getAssigneeAsNameValue(){
-    let assigneesMap = [];
+  getAssigneeAsNameValue(): NameValue[]{
+    const assigneesMap = [];
     if (this.assignees) {
       this.assignees.forEach( assignee => {
-        if (assignee.assigneeId !== "-1") {
+        if (assignee.assigneeId !== '-1') {
           assigneesMap.push( new NameValue( assignee.assigneeId, assignee.name ) );
         }
       } );
@@ -1702,20 +1701,18 @@ export class TissueListComponent implements OnInit {
     return assigneesMap;
   }
 
-  adjustAssigneeSavedFilterColumn(filter: Filter) {
-    let assigneesMap = this.getAssigneeAsNameValue();
-    let selectedOptions = filter.getSelectedOptionsBoolean( assigneesMap );
+  adjustAssigneeSavedFilterColumn(filter: Filter): Filter {
+    const assigneesMap = this.getAssigneeAsNameValue();
+    const selectedOptions = filter.getSelectedOptionsBoolean( assigneesMap );
     filter.selectedOptions = selectedOptions;
-    let f = this.selectedColumns[ 'data' ].find( filter => filter.participantColumn.name === ParticipantColumn.ASSIGNEE_TISSUE.name );
+    const f = this.selectedColumns[ 'data' ].find( filter1 => filter1.participantColumn.name === ParticipantColumn.ASSIGNEE_TISSUE.name );
     if (f) {
-      let index = this.selectedColumns[ 'data' ].indexOf( f );
+      const index = this.selectedColumns[ 'data' ].indexOf( f );
       this.selectedColumns[ 'data' ].splice( index, 1 );
       f.selectedOptions = selectedOptions;
       this.selectedColumns[ 'data' ].push( f );
-      for (let data of this.dataSources) {
-        this.selectedColumns[ data ].sort( ( a, b ) => {
-          return a.participantColumn.display.localeCompare( b.participantColumn.display );
-        } );
+      for (const data of this.dataSources) {
+        this.selectedColumns[ data ].sort( ( a, b ) => a.participantColumn.display.localeCompare( b.participantColumn.display ) );
       }
     }
     return filter;

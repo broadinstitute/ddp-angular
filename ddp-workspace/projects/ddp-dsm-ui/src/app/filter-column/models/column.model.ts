@@ -133,7 +133,7 @@ export class ParticipantColumn {
   public static TIME_TEST = new ParticipantColumn('Test Time Completed', 'timeCompleted', 'k', 'testResult');
 
   //FON
-  public static ACTIVITY_STATUS = new ParticipantColumn("Enrollmentt Status", "activityStatus", "data");
+  public static ACTIVITY_STATUS = new ParticipantColumn('Enrollmentt Status', 'activityStatus', 'data');
 
   constructor(public display: string, public name: string, public tableAlias?: string, public object?: string, public esData?: boolean) {
     this.display = display;
