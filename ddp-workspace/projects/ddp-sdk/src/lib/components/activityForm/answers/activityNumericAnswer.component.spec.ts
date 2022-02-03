@@ -1,4 +1,4 @@
-import { Component, DebugElement } from '@angular/core';
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,11 +11,10 @@ import { TooltipComponent } from '../../tooltip.component';
 import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
 import { ActivityNumericQuestionBlock } from '../../../models/activity/activityNumericQuestionBlock';
 import { ActivityNumericAnswer } from './activityNumericAnswer.component';
-import { NumericType } from 'ddp-sdk';
+import { QuestionType } from '../../../models/activity/questionType';
 
-describe('ActivityNumericAnswer', () => {
+describe('ActivityNumericAnswer (Integer number answers)', () => {
     const questionBlock = {
-        numericType: NumericType.Integer,
         answer: null,
         min: 1,
         max: 10
@@ -38,7 +37,6 @@ describe('ActivityNumericAnswer', () => {
 
     let component: ActivityNumericAnswer;
     let fixture: ComponentFixture<ActivityNumericAnswer>;
-    let debugElement: DebugElement;
 
   beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -90,10 +88,10 @@ describe('ActivityNumericAnswer', () => {
 
     it('should emit valid answer', () => {
         component.block = {
-            numericType: NumericType.Integer,
             answer: null,
             min: 0,
-            max: 10
+            max: 10,
+            questionType: QuestionType.Numeric
         } as ActivityNumericQuestionBlock;
         spyOn(component.valueChanged, 'emit');
         fixture.detectChanges();
