@@ -40,6 +40,7 @@ export class ActivityMatrixQuestionBlock extends ActivityQuestionBlock<
   groups: Group[] = [];
   renderMode = RenderMode.Inline;
   openBtnText = 'Open Question'; // Take value from response when backend changes are implemented
+  modalTitle = '';
 
   public get questionType(): QuestionType {
     return QuestionType.Matrix;
