@@ -1,9 +1,7 @@
 <mat-card class="modal-activity-block__card">
     <mat-card-content class="modal-activity-block__card-content">
         <div>
-            <mat-card-title class="modal-activity-block__card-title">
-                {{instance.activityName}}
-            </mat-card-title>
+            <mat-card-title class="modal-activity-block__card-title" [innerHTML]="instance.activityName"></mat-card-title>
             <mat-card-subtitle *ngIf="instance.activityDescription"
                                class="modal-activity-block__card-subtitle">
                 {{instance.activityDescription}}
@@ -63,7 +61,7 @@
 
 <ng-template #edit_dialog>
     <div mat-dialog-title class="modal-activity-block__edit-dialog-title">
-        <div>{{instance.activityName}}</div>
+        <div [innerHTML]="instance.activityName"></div>
         <button mat-icon-button mat-dialog-close class="modal-activity-block__close-button">
             <mat-icon>close</mat-icon>
         </button>
