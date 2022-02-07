@@ -72,6 +72,7 @@ export class ParticipantListComponent implements OnInit {
   showParticipantInformation = false;
   showTissue = false;
   selectedTab: string;
+  selectedActivity: string;
   selectedMR = '';
   selectedOncOrTissue = '';
 
