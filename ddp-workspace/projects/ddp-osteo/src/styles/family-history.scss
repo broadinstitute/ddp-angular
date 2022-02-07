@@ -120,10 +120,11 @@
         }
     }
 
+    .mat-list-base {
+        padding-top: 0;
+    }
+
     .mat-list {
-        .mat-list-item {
-            margin-bottom: 0;
-        }
 
         .mat-checkbox-inner-container {
             width: 18px !important;
