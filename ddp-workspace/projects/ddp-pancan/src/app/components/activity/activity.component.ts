@@ -20,8 +20,6 @@ export class ActivityComponent extends ActivityRedesignedComponent {
     get hasNoEmptyNestedActivity(): boolean {
         const enabledActivityBlocks = this.currentSection.blocks.filter(this.isActiveModalActivityBlock) as ActivityActivityBlock[];
 
-        console.log('activity blocks', enabledActivityBlocks);
-
         return enabledActivityBlocks.every(this.blockHasAnswers);
     }
 
