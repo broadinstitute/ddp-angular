@@ -280,6 +280,7 @@ export class ActivityQuestionConverter {
         matrixBlock.groups = questionJson.groups;
         matrixBlock.renderMode = questionJson.renderMode;
         matrixBlock.openBtnText = questionJson.modal;
+        matrixBlock.modalTitle = questionJson.modalTitle;
         return matrixBlock;
     }
 
