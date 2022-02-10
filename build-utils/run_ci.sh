@@ -20,6 +20,8 @@ if [[ -z $COMMAND || -z $STUDY_KEY || -z $BRANCH || ($COMMAND == "deploy" && -z 
   echo "        Create build of given study and store for later use"
   echo "    deploy"
   echo "        Deploy saved build of corresponding to given branch to specified TARGET_ENV"
+  echo "    run-tests"
+  echo "        Run tests for given study and given branch"
   exit 1
 fi
 
