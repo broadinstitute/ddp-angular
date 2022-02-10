@@ -18,6 +18,14 @@ describe('ActivityInstanceSelectAnswer', () => {
   let block: ActivityInstanceSelectQuestionBlock;
   let component: ActivityInstanceSelectAnswer;
 
+  function fireClickOnSelect(): void {
+      component.ngOnInit();
+      fixture.detectChanges();
+      const selectTriggerEl = fixture.debugElement.query(By.css('.mat-select-trigger')).nativeElement;
+      selectTriggerEl.click();
+      fixture.detectChanges();
+  }
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ActivityInstanceSelectAnswer, QuestionPromptComponent],
@@ -151,17 +159,7 @@ describe('ActivityInstanceSelectAnswer', () => {
   });
 
   it('renders options', () => {
-    component.ngOnInit();
-
-    fixture.detectChanges();
-
-    const selectTrigger = fixture.debugElement.query(By.css('.mat-select-trigger'));
-
-    expect(selectTrigger).not.toBeNull();
-
-    selectTrigger.nativeElement.click();
-
-    fixture.detectChanges();
+    fireClickOnSelect();
 
     const selectPanel = fixture.debugElement.query(By.css('.mat-select-panel'));
 
@@ -174,16 +172,7 @@ describe('ActivityInstanceSelectAnswer', () => {
 
   it('emits `valueChanged` event when option is selected', () => {
     const value = spyOn(component.valueChanged, 'emit');
-
-    component.ngOnInit();
-
-    fixture.detectChanges();
-
-    const selectTriggerEl = fixture.debugElement.query(By.css('.mat-select-trigger')).nativeElement;
-
-    selectTriggerEl.click();
-
-    fixture.detectChanges();
+    fireClickOnSelect();
 
     const firstOption = fixture.debugElement.query(By.css('.mat-option'));
 
@@ -198,16 +187,7 @@ describe('ActivityInstanceSelectAnswer', () => {
   });
 
   it('correctly updates rendered text if option was selected', () => {
-    component.ngOnInit();
-
-    fixture.detectChanges();
-
-    const selectTriggerEl = fixture.debugElement.query(By.css('.mat-select-trigger')).nativeElement;
-
-    selectTriggerEl.click();
-
-    fixture.detectChanges();
-
+    fireClickOnSelect();
     const firstOption = fixture.debugElement.query(By.css('.mat-option'));
 
     firstOption.nativeElement.click();

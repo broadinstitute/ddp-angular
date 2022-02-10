@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
 
 import { FieldTableComponent } from './field-table.component';
+import { ModalComponent } from '../modal/modal.component';
+
 
 describe('FieldTableComponent', () => {
   let component: FieldTableComponent;
@@ -8,7 +12,8 @@ describe('FieldTableComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ FieldTableComponent ]
+      imports: [MatCheckboxModule, FormsModule],
+      declarations: [ FieldTableComponent, ModalComponent ]
     })
     .compileComponents();
   }));
@@ -16,6 +21,9 @@ describe('FieldTableComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FieldTableComponent);
     component = fixture.componentInstance;
+    component.field = {
+      fieldValue: {}
+    } as any;
     fixture.detectChanges();
   });
 
