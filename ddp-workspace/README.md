@@ -11,7 +11,7 @@ npm install
 ```
 ## Launch apps
 
-Don't forget to [render](../README.md/#rendering-pepperconfigjs-and-ddpconfigjs-files "rendering config") `ddpConfig.js/pepperConfig.js`.
+Don't forget to render `ddpConfig.js/pepperConfig.js`.
 
 Sample apps:
 ```
