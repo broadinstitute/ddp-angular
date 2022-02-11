@@ -121,6 +121,17 @@ Run `ng test %app/library-name%` to execute the unit tests via [Karma](https://k
 
 Run `ng e2e %app/library-name%` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
+## Running unit tests in CircleCI on a specific branch
+
+Being in `ddp-angular` folder run the following script 
+
+`./build-utils/run_ci.sh run-tests [study_key] [branch_name] [target_env]`
+
+(e.g.: `./build-utils/run_ci.sh run-tests pancan some-branch dev`)
+
+to trigger the execution of all Angular tests in a PR branch
+(for the pointed project/study (study_key) and also ddp-sdk and toolkit as common libraries).
+
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
