@@ -112,18 +112,13 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
     }
 
     private formatDecimalAnswerToDisplay(enteredValue: number): string {
-        const precise: number = this.block.precision;
         const scale: number = this.block.scale;
-        const hideLeadingZero: boolean = this.block.hideLeadingZero || false;
 
         let [
-            integerPart = hideLeadingZero ? '' : '0',
+            // eslint-disable-next-line prefer-const
+            integerPart = '0',
             decimalPart = '0'.repeat(scale)
         ] = String(enteredValue).split('.');
-
-        if (precise && !!Number(integerPart)) {
-            integerPart = integerPart.slice(0, precise);
-        }
 
         if (decimalPart.length < scale) {
             decimalPart += '0'.repeat(scale - decimalPart.length);
