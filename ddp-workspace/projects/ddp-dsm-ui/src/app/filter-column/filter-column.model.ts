@@ -612,17 +612,17 @@ export class Filter {
 
   public static getFilterJson(parent, filter1, filter2, selectedOptions, exact, type, range, empty, notEmpty, participantColumn, additionalType?): {} {
     const filterText = {
-      "parentName": parent,
-      "filter1": filter1,
-      "filter2": filter2,
-      "exactMatch": exact,
-      "selectedOptions": selectedOptions,
-      "type": type,
-      "range": range,
-      "empty": empty,
-      "notEmpty": notEmpty,
-      "participantColumn": participantColumn,
-      "additionalType": additionalType
+      'parentName': parent,
+      'filter1': filter1,
+      'filter2': filter2,
+      'exactMatch': exact,
+      'selectedOptions': selectedOptions,
+      'type': type,
+      'range': range,
+      'empty': empty,
+      'notEmpty': notEmpty,
+      'participantColumn': participantColumn,
+      'additionalType': additionalType
     };
     return filterText;
   }
