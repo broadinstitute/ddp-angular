@@ -505,7 +505,7 @@ export class Filter {
           if (filter.filter2 != null) {
             filter.filter2.value = filter.value2;
           } else {
-            filter.filter2 = new NameValue(filter.participantColumn.name, null);
+            filter.filter2 = new NameValue(filter.participantColumn.name, filter.value2);
             //            filter.filter2.name = filter.participantColumn.name;
           }
         }
@@ -543,11 +543,19 @@ export class Filter {
         return null;
       }
     } else if (filter.type === Filter.ADDITIONAL_VALUE_TYPE) {
-      if ((filter.value1 !== null && filter.value1 !== '' && filter.value1 !== undefined) || (filter.empty || filter.notEmpty)) {
+      if (( filter.value1 ) || ( filter.empty || filter.notEmpty )) {
         filterText = this.getFilterJson(parent,
-          new NameValue('additionalValues', filter.value1),
+          new NameValue('additionalValuesJson', filter.value1),
           filter.filter2, null,
-          filter.exactMatch, filter.type, filter.range, filter.empty, filter.notEmpty, filter.participantColumn);
+          filter.exactMatch, filter.type, filter.range, filter.empty, filter.notEmpty, filter.participantColumn, filter.additionalType);
+      } else if (filter.selectedOptions.length > 0) {
+        let selectedOptions = <Array<boolean>> filter.selectedOptions
+        let trueIndex = selectedOptions.indexOf(true);
+        let chosenValue = filter.options[trueIndex].value;
+        filterText = this.getFilterJson( parent,
+          new NameValue( 'additionalValuesJson', chosenValue ),
+          filter.filter2, null,
+          filter.exactMatch, filter.type, filter.range, filter.empty, filter.notEmpty, filter.participantColumn, filter.additionalType );
       } else {
         return null;
       }
@@ -557,7 +565,7 @@ export class Filter {
           filter.participantColumn.tableAlias, // changing parent to tableAlias for type json because object is json name
           new NameValue(filter.participantColumn.object, filter.value1),
           filter.filter2, null,
-          filter.exactMatch, filter.type, filter.range, filter.empty, filter.notEmpty, filter.participantColumn
+          filter.exactMatch, filter.type, filter.range, filter.empty, filter.notEmpty, filter.participantColumn, filter.additionalType
         );
       } else {
         return null;
@@ -602,18 +610,19 @@ export class Filter {
     );
   }
 
-  public static getFilterJson(parent, filter1, filter2, selectedOptions, exact, type, range, empty, notEmpty, participantColumn): {} {
+  public static getFilterJson(parent, filter1, filter2, selectedOptions, exact, type, range, empty, notEmpty, participantColumn, additionalType?): {} {
     const filterText = {
-      parentName: parent,
-      filter1,
-      filter2,
-      exactMatch: exact,
-      selectedOptions,
-      type,
-      range,
-      empty,
-      notEmpty,
-      participantColumn
+      "parentName": parent,
+      "filter1": filter1,
+      "filter2": filter2,
+      "exactMatch": exact,
+      "selectedOptions": selectedOptions,
+      "type": type,
+      "range": range,
+      "empty": empty,
+      "notEmpty": notEmpty,
+      "participantColumn": participantColumn,
+      "additionalType": additionalType
     };
     return filterText;
   }

@@ -425,7 +425,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
 
   valueChanged(value: any, parameterName: string, tableAlias: string): void {
     let v;
-    if (parameterName === 'additionalValues') {
+    if (parameterName === 'additionalValuesJson') {
       v = JSON.stringify(value);
     } else if (typeof value === 'string') {
       this.participant.participant[ parameterName ] = value;
@@ -456,17 +456,15 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
       // console.log( JSON.stringify( patch ) );
       this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
         next: data => {
-          const result = Result.parse(data);
-          if (result.code === 200 && result.body != null) {
-            const jsonData: any | any[] = JSON.parse(result.body);
-            if (jsonData instanceof Array) {
-              jsonData.forEach((val) => {
+          if (data) {
+          if (data instanceof Array) {
+            data.forEach( ( val ) => {
                 const nameValue = NameValue.parse(val);
                 this.participant.participant[ nameValue.name ] = nameValue.value;
               });
             } else {
-              if (jsonData.participantId != null) {
-                this.participant.participant.participantId = jsonData.participantId;
+              if (data['participantId']) {
+              this.participant.participant.participantId = data['participantId'];
               }
             }
           }
@@ -511,11 +509,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
       this.currentPatchField = parameterName;
       this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
         next: data => {
-          const result = Result.parse(data);
-          if (result.code === 200 && result.body != null) {
-            const jsonData: any[] = JSON.parse(result.body);
-            if (jsonData instanceof Array) {
-              jsonData.forEach((val) => {
+          if (data) {
+            if (data instanceof Array) {
+              data.forEach( ( val ) => {
                 const nameValue = NameValue.parse(val);
                 oncHis[ nameValue.name.substring(3) ] = nameValue.value;
               });
@@ -596,8 +592,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
           }
         } else {
           if (firstOncHis.facility !== oncHis.facility ||
-            firstOncHis.fPhone !== oncHis.fPhone ||
-            firstOncHis.fFax !== oncHis.fFax) {
+            firstOncHis.phone !== oncHis.phone ||
+            firstOncHis.fax !== oncHis.fax) {
             doIt = false;
             this.warning = 'Tissues are not from the same facility';
           }
@@ -636,7 +632,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
   saveNote(): void {
     const patch1 = new PatchUtil(
       this.noteMedicalRecord.medicalRecordId, this.role.userMail(),
-      {name: 'mrNotes', value: this.noteMedicalRecord.mrNotes},
+      {name: 'notes', value: this.noteMedicalRecord.notes},
       null, null, null, Statics.MR_ALIAS,  null,
       localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.participant.participant.ddpParticipantId
     );
@@ -679,18 +675,18 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
               // TODO: check is it correct ? - shadowed variables `date`
               // eslint-disable-next-line @typescript-eslint/no-shadow
               const date = new Date();
-              if (oncHis.tFaxSent == null) {
-                oncHis.tFaxSent = Utils.getFormattedDate(date);
-                oncHis.tFaxSentBy = this.role.userID();
-                this.oncHistoryValueChanged(oncHis.tFaxSent, 'tFaxSent', oncHis);
-              } else if (oncHis.tFaxSent2 == null) {
-                oncHis.tFaxSent2 = Utils.getFormattedDate(date);
-                oncHis.tFaxSent2By = this.role.userID();
-                this.oncHistoryValueChanged(oncHis.tFaxSent2, 'tFaxSent2', oncHis);
+              if (oncHis.faxSent == null) {
+                oncHis.faxSent = Utils.getFormattedDate( date );
+                oncHis.faxSentBy = this.role.userID();
+                this.oncHistoryValueChanged( oncHis.faxSent, 'faxSent', oncHis );
+              } else if (oncHis.faxSent2 == null) {
+                oncHis.faxSent2 = Utils.getFormattedDate( date );
+                oncHis.faxSent2By = this.role.userID();
+                this.oncHistoryValueChanged( oncHis.faxSent2, 'faxSent2', oncHis );
               } else {
-                oncHis.tFaxSent3 = Utils.getFormattedDate(date);
-                oncHis.tFaxSent3By = this.role.userID();
-                this.oncHistoryValueChanged(oncHis.tFaxSent3, 'tFaxSent3', oncHis);
+                oncHis.faxSent3 = Utils.getFormattedDate( date );
+                oncHis.faxSent3By = this.role.userID();
+                this.oncHistoryValueChanged( oncHis.faxSent3, 'faxSent3', oncHis );
               }
               oncHis.changedBy = this.role.userMail();
               oncHis.changed = true;
@@ -1074,8 +1070,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
       }
     }
     if (v !== null) {
-      if (this.participant.participant != null && this.participant.participant.additionalValues != null) {
-        this.participant.participant.additionalValues[ colName ] = v;
+      if (this.participant.participant != null && this.participant.participant.additionalValuesJson != null) {
+        this.participant.participant.additionalValuesJson[ colName ] = v;
       } else {
         let participantId = this.participant.data.profile[ 'guid' ];
         if (this.participant.data.profile[ 'legacyAltPid' ] != null && this.participant.data.profile[ 'legacyAltPid' ] !== '') {
@@ -1088,19 +1084,20 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
         );
         const addArray = {};
         addArray[ colName ] = v;
-        this.participant.participant.additionalValues = addArray;
+        this.participant.participant.additionalValuesJson = addArray;
       }
-      this.valueChanged(this.participant.participant.additionalValues, 'additionalValues', 'r');
+      this.valueChanged(this.participant.participant.additionalValuesJson, 'additionalValuesJson', 'r');
     }
   }
 
   // display additional value
   getAdditionalValue(colName: string): string {
-    if (this.participant.participant != null && this.participant.participant.additionalValues != null) {
-      if (this.participant.participant.additionalValues[ colName ] != null) {
-        return this.participant.participant.additionalValues[ colName ];
-      }
+    if (this.participant.participant != null && this.participant.participant.additionalValuesJson != null) {
+    let camelCaseColumnName = Utils.convertUnderScoresToCamelCase(colName);
+    if (this.participant.participant.additionalValuesJson[ camelCaseColumnName ] != undefined && this.participant.participant.additionalValuesJson[ camelCaseColumnName ] != null) {
+      return this.participant.participant.additionalValuesJson[ camelCaseColumnName ];
     }
+  }
     return '';
   }
 
@@ -1268,10 +1265,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
                   actionPatch.push(action);
                 }
               }
-              if (participantDataSec != null && participantDataSec.data != null) {
-                participantDataSec.data[ action.name ] = action.value;
-                nameValue.unshift({name: 'd.data', value: JSON.stringify(participantDataSec.data)});
-              }
+              // if (participantDataSec != null && participantDataSec.data != null) {
+              //   participantDataSec.data[ action.name ] = action.value;
+              //   nameValue.unshift({name: 'd.data', value: JSON.stringify(participantDataSec.data)});
+              // }
             }
           });
         }
@@ -1292,19 +1289,16 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
           realm:  localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
           nameValues: nameValue,
           actions: actionPatch,
+          tableAlias: 'd',
           ddpParticipantId: participantId
         };
 
         this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
           next: data => {
-            const result = Result.parse(data);
-            if (result.code === 200) {
-              if (result.body != null && result.body !== '') {
-                const jsonData: any | any[] = JSON.parse(result.body);
-                if (jsonData.participantDataId !== undefined && jsonData.participantDataId !== '') {
-                  if (participantData != null) {
-                    participantData.dataId = jsonData.participantDataId;
-                  }
+            if (data) {
+            if (data['participantDataId']) {
+              if (participantData != null) {
+                participantData.dataId = data['participantDataId'];
                 }
               }
             }

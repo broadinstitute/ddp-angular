@@ -332,9 +332,9 @@ export class TissueListComponent implements OnInit {
 
   // display additional value
   getOncHisAdditionalValue(index: number, colName: string): string {
-    if (this.tissueListWrappers[ index ].tissueList.oncHistoryDetails.additionalValues != null) {
-      if (this.tissueListWrappers[ index ].tissueList.oncHistoryDetails.additionalValues[ colName ] != null) {
-        return this.tissueListWrappers[ index ].tissueList.oncHistoryDetails.additionalValues[ colName ];
+    if (this.tissueListWrappers[ index ].tissueList.oncHistoryDetails.additionalValuesJson != null) {
+      if (this.tissueListWrappers[ index ].tissueList.oncHistoryDetails.additionalValuesJson[ colName ] != null) {
+        return this.tissueListWrappers[ index ].tissueList.oncHistoryDetails.additionalValuesJson[ colName ];
       }
     }
     return null;
@@ -343,11 +343,11 @@ export class TissueListComponent implements OnInit {
   getTissueAdditionalValue(tissueListIndex, colName: string): string {
     if (
       this.tissueListWrappers[ tissueListIndex ].tissueList.tissue != null
-      && this.tissueListWrappers[ tissueListIndex ].tissueList.tissue.additionalValues != null
-      && Object.keys(this.tissueListWrappers[ tissueListIndex ].tissueList.tissue.additionalValues).length > 0
+      && this.tissueListWrappers[ tissueListIndex ].tissueList.tissue.additionalValuesJson != null
+      && Object.keys(this.tissueListWrappers[ tissueListIndex ].tissueList.tissue.additionalValuesJson).length > 0
     ) {
-      return this.tissueListWrappers[ tissueListIndex ].tissueList.tissue.additionalValues[ colName ] === undefined ?
-        null : this.tissueListWrappers[ tissueListIndex ].tissueList.tissue.additionalValues[ colName ];
+      return this.tissueListWrappers[ tissueListIndex ].tissueList.tissue.additionalValuesJson[ colName ] === undefined ?
+        null : this.tissueListWrappers[ tissueListIndex ].tissueList.tissue.additionalValuesJson[ colName ];
     }
     return null;
   }
@@ -788,10 +788,7 @@ export class TissueListComponent implements OnInit {
       { name: 'shared', value }, null, this.parent, null, null, null, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null);
     const patch = patch1.getPatch();
     this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(data => {
-      const result = Result.parse(data);
-      if (result.code === 200) {
-        this.savedFilters[ i ].shared = (value === '1');
-      }
+      this.savedFilters[ i ].shared = (value === "1");
     });
   }
 
@@ -804,10 +801,7 @@ export class TissueListComponent implements OnInit {
     );
     const patch = patch1.getPatch();
     this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(data => {
-      const result = Result.parse(data);
-      if (result.code === 200) {
-        this.getAllFilters(false);
-      }
+      this.getAllFilters(false);
     });
   }
 
@@ -1026,23 +1020,21 @@ export class TissueListComponent implements OnInit {
   patch(patch: any, index: number): void {
     this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({  // need to subscribe, otherwise it will not send!
       next: data => {
-        const result = Result.parse(data);
-        if (result.code === 200 && result.body != null && result.body !== '') {
-          const jsonData: any | any[] = JSON.parse(result.body);
-          if (jsonData instanceof Array) {
-            jsonData.forEach((val) => {
+        if (data) {
+          if (data instanceof Array) {
+            data.forEach( ( val ) => {
               const nameValue = NameValue.parse(val);
               this.tissueListWrappers[ index ].tissueList.oncHistoryDetails[ nameValue.name ] = nameValue.value;
             });
           } else {
-            this.tissueListWrappers[ index ].tissueList.oncHistoryDetails.oncHistoryDetailId = jsonData.oncHistoryDetailId;
+            this.tissueListWrappers[ index ].tissueList.oncHistoryDetails.oncHistoryDetailId = data['oncHistoryDetailId'];
             // set oncHistoryDetailId to tissue as well
             for (const tissue of this.tissueListWrappers[ index ].tissueList.oncHistoryDetails.tissues) {
               tissue.oncHistoryDetailId = this.tissueListWrappers[ index ].tissueList.oncHistoryDetails.oncHistoryDetailId;
             }
             // set other workflow values
-            if (jsonData.NameValue != null) {
-              const innerJson: any | any[] = JSON.parse(jsonData.NameValue);
+            if (data['NameValue'] != null) {
+              let innerJson: any | any[] = JSON.parse( data['NameValue'] );
               if (innerJson instanceof Array) {
                 innerJson.forEach((val) => {
                   const nameValue = NameValue.parse(val);
@@ -1279,7 +1271,7 @@ export class TissueListComponent implements OnInit {
       if (this.selectedColumns[ 't' ] != null && this.selectedColumns[ 't' ].length > 0) {
         this.tissueListWrappers.sort((a, b) => {
             if (this.sortColumn.type === 'ADDITIONALVALUE') {
-              this.sortField = 'additionalValues';
+              this.sortField = 'additionalValuesJson';
               if (
                 a.tissueList.oncHistoryDetails[ this.sortField ] == null
                 || a.tissueList.oncHistoryDetails[ this.sortField ][ fieldName ] == null
@@ -1326,7 +1318,7 @@ export class TissueListComponent implements OnInit {
       } else {
         this.tissueListOncHistories.sort((a, b) => {
             if (this.sortColumn.type === 'ADDITIONALVALUE') {
-              this.sortField = 'additionalValues';
+              this.sortField = 'additionalValuesJson';
               if (
                 a.tissueList.oncHistoryDetails[ this.sortField ] == null
                 || a.tissueList.oncHistoryDetails[ this.sortField ][ fieldName ] == null
@@ -1373,7 +1365,7 @@ export class TissueListComponent implements OnInit {
     } else if (this.sortParent === 't') {
       this.tissueListWrappers.sort((a, b) => {
           if (this.sortColumn.type === 'ADDITIONALVALUE') {
-            this.sortField = 'additionalValues';
+            this.sortField = 'additionalValuesJson';
             if (a.tissueList.tissue == null || a.tissueList.tissue[ this.sortField ] == null) {
               return 1;
             }

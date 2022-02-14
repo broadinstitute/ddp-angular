@@ -298,9 +298,8 @@ export class ParticipantListComponent implements OnInit {
                   });
                 }
               }
-              const filter = new Filter(
-                new ParticipantColumn(fieldSetting.columnDisplay, fieldSetting.columnName, key),
-                Filter.ADDITIONAL_VALUE_TYPE, options, new NameValue(fieldSetting.columnName, null),
+              const filter = new Filter( new ParticipantColumn( fieldSetting.columnDisplay, Utils.convertUnderScoresToCamelCase(fieldSetting.columnName), key ),
+                Filter.ADDITIONAL_VALUE_TYPE, options, new NameValue( fieldSetting.columnName, null ),
                 false, true, null, null, null, null, false,
                 false, false, false, fieldSetting.displayType
               );
@@ -1381,10 +1380,7 @@ export class ParticipantListComponent implements OnInit {
     const patch = patch1.getPatch();
     this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({
       next: data => {
-        const result = Result.parse(data);
-        if (result.code === 200) {
-          this.savedFilters[i].shared = (value === '1');
-        }
+        this.savedFilters[ i ].shared = ( value === "1" );
       },
       error: () => {
         this.additionalMessage = 'Error - Sharing Filter, Please contact your DSM developer';
@@ -1401,10 +1397,7 @@ export class ParticipantListComponent implements OnInit {
     const patch = patch1.getPatch();
     this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({
       next: data => {
-        const result = Result.parse(data);
-        if (result.code === 200) {
-          this.getFilters();
-        }
+        this.getFilters();
       },
       error: () => {
         this.additionalMessage = 'Error - Deleting Filter, Please contact your DSM developer';
@@ -1496,15 +1489,15 @@ export class ParticipantListComponent implements OnInit {
       );
     } else if (this.sortParent === 'p') {
       this.participantList.sort((a, b) => {
-        if (a.participant == null || (a.participant[ this.sortField ] == null && a.participant['additionalValues'] == null)) {
+        if (a.participant == null || (a.participant[ this.sortField ] == null && a.participant['additionalValuesJson'] == null)) {
           return 1;
-        } else if (b.participant == null || (b.participant[ this.sortField ] == null && b.participant['additionalValues'] == null)) {
+        } else if (b.participant == null || (b.participant[ this.sortField ] == null && b.participant['additionalValuesJson'] == null)) {
           return -1;
         } else {
-          if (a.participant['additionalValues'][this.sortField] != null || b.participant['additionalValues'][this.sortField] != null) {
+          if (a.participant['additionalValuesJson'][this.sortField] != null || b.participant['additionalValuesJson'][this.sortField] != null) {
             return this.sort(
-              a.participant['additionalValues'][ this.sortField ],
-              b.participant['additionalValues'][ this.sortField ],
+              a.participant['additionalValuesJson'][ this.sortField ],
+              b.participant['additionalValuesJson'][ this.sortField ],
               order,
               undefined,
               colType
@@ -1777,16 +1770,16 @@ export class ParticipantListComponent implements OnInit {
         if (pt.isSelected) {
           if (this.assignMR) {
             if (this.assignee.assigneeId === '-1') {
-              pt.participant.assigneeMr = null;
+              pt.participant.assigneeIdMr = null;
             } else {
-              pt.participant.assigneeMr = this.assignee.name;
+              pt.participant.assigneeIdMr = this.assignee.name;
             }
           }
           if (this.assignTissue) {
             if (this.assignee.assigneeId === '-1') {
-              pt.participant.assigneeTissue = null;
+              pt.participant.assigneeIdTissue = null;
             } else {
-              pt.participant.assigneeTissue = this.assignee.name;
+              pt.participant.assigneeIdTissue = this.assignee.name;
             }
           }
           assignParticipants.push(new AssigneeParticipant(pt.participant.participantId, this.assignee.assigneeId,
