@@ -1,23 +1,16 @@
 import { ActivityQuestionBlock } from './activityQuestionBlock';
 import { QuestionType } from './questionType';
 
-export interface DecimalAnswer {
-    value: number;
-    scale: number;
-}
-export type NumericAnswerType = number | DecimalAnswer;
-
-export class ActivityNumericQuestionBlock extends ActivityQuestionBlock<NumericAnswerType> {
+export class ActivityNumericQuestionBlock extends ActivityQuestionBlock<number> {
     public min: number | null = null;
     public max: number | null = null;
-    public scale: number; // for decimal answers - the maximum number of allowed decimal digits
 
-    constructor(private isDecimal: boolean = false) {
+    constructor() {
         super();
     }
 
     public get questionType(): QuestionType {
-        return this.isDecimal ? QuestionType.Decimal : QuestionType.Numeric;
+        return QuestionType.Numeric;
     }
 
     public hasAnswer(): boolean {

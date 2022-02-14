@@ -1,8 +1,15 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { ActivityNumericQuestionBlock, DecimalAnswer, NumericAnswerType } from '../../../models/activity/activityNumericQuestionBlock';
+import * as _ from 'underscore';
+import { ActivityNumericQuestionBlock } from '../../../models/activity/activityNumericQuestionBlock';
 import { QuestionType } from '../../../models/activity/questionType';
+import {
+    ActivityDecimalQuestionBlock,
+    DecimalAnswer,
+    NumericAnswerType
+} from '../../../models/activity/activityDecimalQuestionBlock';
+import { ActivityQuestionBlock } from '../../../models/activity/activityQuestionBlock';
 
 @Component({
     selector: 'ddp-activity-numeric-answer',
@@ -27,7 +34,7 @@ import { QuestionType } from '../../../models/activity/questionType';
     `]
 })
 export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
-    @Input() block: ActivityNumericQuestionBlock;
+    @Input() block: ActivityNumericQuestionBlock | ActivityDecimalQuestionBlock;
     @Input() valueChangeStep = 1;
     @Input() placeholder: string;
     @Input() readonly: boolean;
@@ -45,7 +52,7 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
             const answerToPatch: NumericAnswerType = this.mapAnswerToPatchToServer(answerToDisplay);
 
             this.numericField.patchValue(answerToDisplay, {onlySelf: true, emitEvent: false});
-            this.block.answer = answerToPatch;
+            (this.block as ActivityQuestionBlock<NumericAnswerType>).answer = answerToPatch;
             this.valueChanged.emit(answerToPatch);
         });
     }
@@ -67,7 +74,7 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
 
     private initForm(): void {
         this.numericField = new FormControl({
-            value: this.mapAnswerToDisplay(this.block.answer as number),
+            value: this.mapAnswerToDisplay(this.block.answer),
             disabled: this.readonly
         }, {updateOn: 'blur'});
     }
@@ -76,8 +83,8 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
         return this.block.questionType === QuestionType.Numeric; // otherwise Question.Decimal
     }
 
-    // e.g. .71 => '0.710' (scale = 3)
-    private mapAnswerToDisplay(patchAnswer: number | null): string {
+    // e.g. for decimal: 0.71 => '0.710' (scale = 3)
+    private mapAnswerToDisplay(patchAnswer: NumericAnswerType | null): string {
         if (patchAnswer == null) {
             return '';
         }
@@ -87,7 +94,7 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
             this.formatDecimalAnswerToDisplay(patchAnswer);
     }
 
-    // e.g. '0.710' => {  // a decimal floating-point value represented by (value * 10^-scale)
+    // e.g. for decimal: '0.710' => {  // a decimal floating-point value represented by (value * 10^-scale)
     //   "value": 710,  // the significand of a decimal number
     //   "scale": 3     // the exponent of a decimal number
     // }
@@ -111,14 +118,14 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
         return res;
     }
 
-    private formatDecimalAnswerToDisplay(enteredValue: number): string {
-        const scale: number = this.block.scale;
-
+    private formatDecimalAnswerToDisplay(answer: NumericAnswerType): string {
+        const scale: number = (this.block as ActivityDecimalQuestionBlock).scale;
+        const numberAnswer = _.isNumber(answer) ? answer : this.mapDecimalAnswerToNumber(answer as DecimalAnswer);
         let [
             // eslint-disable-next-line prefer-const
             integerPart = '0',
             decimalPart = '0'.repeat(scale)
-        ] = String(enteredValue).split('.');
+        ] = String(numberAnswer).split('.');
 
         if (decimalPart.length < scale) {
             decimalPart += '0'.repeat(scale - decimalPart.length);
@@ -127,5 +134,9 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
 
         console.log('Decimal to display:', res);
         return res;
+    }
+
+    private mapDecimalAnswerToNumber(answer: DecimalAnswer ): number {
+        return answer.value * Math.pow(10, -(answer.scale || 0));
     }
 }

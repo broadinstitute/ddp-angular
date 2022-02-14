@@ -3,7 +3,7 @@ import { AbstractActivityQuestionBlock } from '../../../../models/activity/abstr
 import { AnswerValue } from '../../../../models/activity/answerValue';
 import { QuestionType } from '../../../../models/activity/questionType';
 import { BlockType } from '../../../../models/activity/blockType';
-import { ActivityNumericQuestionBlock } from '../../../../models/activity/activityNumericQuestionBlock';
+import { ActivityDecimalQuestionBlock } from '../../../../models/activity/activityDecimalQuestionBlock';
 
 @Component({
     selector: 'ddp-activity-answer',
@@ -94,7 +94,7 @@ export class ActivityAnswerComponent {
 
     public get numericValueStep(): number {
         if (this.isDecimalQuestion(this.block)) {
-            return Math.pow(10, -( (this.block as ActivityNumericQuestionBlock).scale) );
+            return Math.pow(10, -( (this.block as ActivityDecimalQuestionBlock).scale) );
         }
     }
 

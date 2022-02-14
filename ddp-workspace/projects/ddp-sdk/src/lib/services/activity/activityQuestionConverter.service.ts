@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LoggingService } from '../logging.service';
 import { ActivitySuggestionBuilder } from './activitySuggestionBuilder.service';
-import { ActivityValidatorBuilder } from './activityValidatorBuilder.service';
+import { ActivityValidatorBuilder, ValidationRuleType } from './activityValidatorBuilder.service';
 import { ActivityRule } from '../../models/activity/activityRule';
 import { ActivityBooleanQuestionBlock } from '../../models/activity/activityBooleanQuestionBlock';
 import { ActivityAgreementQuestionBlock } from '../../models/activity/activityAgreementQuestionBlock';
@@ -23,6 +23,7 @@ import { ActivityMatrixQuestionBlock } from '../../models/activity/activityMatri
 import * as _ from 'underscore';
 import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
 import { ActivityInstanceSelectQuestionBlock } from '../../models/activity/activityInstanceSelectQuestionBlock';
+import { ActivityDecimalQuestionBlock } from '../../models/activity/activityDecimalQuestionBlock';
 
 const DETAIL_MAXLENGTH = 500;
 
@@ -147,7 +148,7 @@ export class ActivityQuestionConverter {
             },
             {
                 type: QuestionType.Decimal,
-                func: (questionJson) => this.getNumericBlock(questionJson, true)
+                func: (questionJson) => this.getDecimalBlock(questionJson)
             },
             {
                 type: QuestionType.Picklist,
@@ -212,18 +213,24 @@ export class ActivityQuestionConverter {
         return textBlock;
     }
 
-    private getNumericBlock(questionJson: any, isDecimal?: boolean): ActivityNumericQuestionBlock {
-        const numericBlock = new ActivityNumericQuestionBlock(isDecimal);
+    private getNumericBlock(questionJson: any): ActivityNumericQuestionBlock {
+        const numericBlock = new ActivityNumericQuestionBlock();
         numericBlock.placeholder = questionJson.placeholderText;
-        questionJson.validations.forEach(validation => {
-            if (_.isNumber(validation.min)) {
-                numericBlock.min = validation.min;
-            }
-            if (_.isNumber(validation.max)) {
-                numericBlock.max = validation.max;
-            }
-        });
+        const intRangeValidation = questionJson.validations.find(validation => validation.rule === ValidationRuleType.IntRange);
+        if (intRangeValidation) {
+            numericBlock.min = intRangeValidation.min || null;
+            numericBlock.max = intRangeValidation.max || null;
+        }
         return numericBlock;
+    }
+
+    private getDecimalBlock(questionJson: any): ActivityDecimalQuestionBlock {
+        const decimalBlock = new ActivityDecimalQuestionBlock();
+        decimalBlock.placeholder = questionJson.placeholderText;
+        decimalBlock.scale = questionJson.scale;
+
+        // TODO: add min/max from ValidationRuleType.DecimalRange (in scope of DDP-7573)
+        return decimalBlock;
     }
 
     private getPicklistBlock(questionJson: any): ActivityPicklistQuestionBlock {
