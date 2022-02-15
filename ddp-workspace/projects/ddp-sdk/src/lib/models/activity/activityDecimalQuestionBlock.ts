@@ -21,7 +21,6 @@ export class ActivityDecimalQuestionBlock extends ActivityQuestionBlock<DecimalA
     }
 
     public hasAnswer(): boolean {
-        // TODO: tweak it for `REQUIRED` validation rule
-        return this.answer != null;
+        return this.answer?.value && !!this.answer.scale;
     }
 }
