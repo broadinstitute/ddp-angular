@@ -27,6 +27,7 @@ import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
 import { ActivityPicklistQuestionBlock } from '../../models/activity/activityPicklistQuestionBlock';
 import { ActivityStrictMatchValidationRule } from './validators/activityStrictMatchValidationRule';
 import { ActivityUniqueValidationRule } from './validators/activityUniqueValidationRule';
+import { DecimalHelper } from '../../utility/decimalHelper';
 
 export enum ValidationRuleType {
     Required = 'REQUIRED',
@@ -40,6 +41,7 @@ export enum ValidationRuleType {
     DateRange = 'DATE_RANGE',
     AgeRange = 'AGE_RANGE',
     IntRange = 'INT_RANGE',
+    DecimalRange = 'DECIMAL_RANGE',
     Unique = 'UNIQUE'
 }
 
@@ -65,6 +67,7 @@ export class ActivityValidatorBuilder {
             { type: ValidationRuleType.DateRange, factory: (x, y) => this.buildDateRangeValidator(x, y) },
             { type: ValidationRuleType.AgeRange, factory: (x, y) => this.buildAgeRangeValidator(x, y) },
             { type: ValidationRuleType.IntRange, factory: (x, y) => this.buildNumericRangeValidator(x, y) },
+            { type: ValidationRuleType.DecimalRange, factory: (x, y) => this.buildDecimalRangeValidator(x, y) },
             { type: ValidationRuleType.Unique, factory: (x, y) => new ActivityUniqueValidationRule(y) },
         ];
     }
@@ -159,5 +162,17 @@ export class ActivityValidatorBuilder {
             numericRangeRule.max = validationJson.max;
         }
         return numericRangeRule;
+    }
+
+    private buildDecimalRangeValidator(validationJson: any, questionBlock: ActivityQuestionBlock<any>):
+        ActivityNumericRangeValidationRule {
+        const decimalRangeRule = new ActivityNumericRangeValidationRule(questionBlock);
+        if (DecimalHelper.isDecimalAnswerType(validationJson.min)) {
+            decimalRangeRule.min = validationJson.min;
+        }
+        if (DecimalHelper.isDecimalAnswerType(validationJson.max)) {
+            decimalRangeRule.max = validationJson.max;
+        }
+        return decimalRangeRule;
     }
 }

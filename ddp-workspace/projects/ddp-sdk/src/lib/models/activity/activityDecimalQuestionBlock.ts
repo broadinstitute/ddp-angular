@@ -1,5 +1,6 @@
 import { ActivityQuestionBlock } from './activityQuestionBlock';
 import { QuestionType } from './questionType';
+import { DecimalHelper } from '../../utility/decimalHelper';
 
 export interface DecimalAnswer {
     value: number;
@@ -21,6 +22,6 @@ export class ActivityDecimalQuestionBlock extends ActivityQuestionBlock<DecimalA
     }
 
     public hasAnswer(): boolean {
-        return this.answer?.value && !!this.answer.scale;
+        return DecimalHelper.isDecimalAnswerType(this.answer);
     }
 }

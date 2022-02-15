@@ -10,6 +10,7 @@ import {
     NumericAnswerType
 } from '../../../models/activity/activityDecimalQuestionBlock';
 import { ActivityQuestionBlock } from '../../../models/activity/activityQuestionBlock';
+import { DecimalHelper } from '../../../utility/decimalHelper';
 
 @Component({
     selector: 'ddp-activity-numeric-answer',
@@ -116,7 +117,7 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
 
     private formatDecimalAnswerToDisplay(answer: NumericAnswerType): string {
         const scale: number = (this.block as ActivityDecimalQuestionBlock).scale;
-        const numberAnswer = _.isNumber(answer) ? answer : this.mapDecimalAnswerToNumber(answer as DecimalAnswer);
+        const numberAnswer = _.isNumber(answer) ? answer : DecimalHelper.mapDecimalAnswerToNumber(answer as DecimalAnswer);
         let [
             // eslint-disable-next-line prefer-const
             integerPart = '0',
@@ -128,9 +129,5 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
         }
 
         return integerPart + (scale ? `.${decimalPart.slice(0, scale)}` : '');
-    }
-
-    private mapDecimalAnswerToNumber(answer: DecimalAnswer ): number {
-        return answer.value * Math.pow(10, -(answer.scale || 0));
     }
 }
