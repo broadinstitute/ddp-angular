@@ -538,6 +538,16 @@ jobs:
       - deploy-stored-build:
           study_key: << parameters.study_key >>
 
+  app-run-tests-job:
+    working_directory: *ng_workspace_path
+    executor:
+      name: build-executor
+    steps:
+      - setup-build-workspace
+      - setup-shared-env:
+          study_key: << pipeline.parameters.study_key >>
+      - run-tests
+
 parameters:
   study_key:
     type: string
@@ -547,7 +557,7 @@ parameters:
     default: "UNKNOWN"
   api_call:
     type: enum
-    enum: ["build-and-store","deploy","UNKNOWN"]
+    enum: ["build-and-store","deploy", "run-tests", "UNKNOWN"]
     default: "UNKNOWN"
   deploy_env:
     type: enum
@@ -561,7 +571,7 @@ workflows:
   version: 2
 
   api-build-and-store-workflow:
-    description: "Build study specified in api call"
+    # Build study specified in api call
     when:
       and:
         - equal: ["build-and-store", << pipeline.parameters.api_call >>]
@@ -571,7 +581,7 @@ workflows:
       - app-build-and-store-job
 
   api-deploy-workflow:
-    description: "Deploy a study build to environment specified in api call"
+    # Deploy a study build to environment specified in api call
     when:
       and:
         - equal: ["deploy", << pipeline.parameters.api_call >>]
@@ -583,6 +593,16 @@ workflows:
     jobs:
       - deploy-stored-build-job:
           study_key: << pipeline.parameters.study_key >>
+
+  api-run-tests-workflow:
+    # Run tests for study specified in api call (also tests for sdk and toolkit)
+      when:
+        and:
+          - equal: ["run-tests", << pipeline.parameters.api_call >>]
+          - not:
+              equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
+      jobs:
+        - app-run-tests-job
 
   build-and-deploy-all-apps-workflow:
     unless: << pipeline.parameters.do-builds >>

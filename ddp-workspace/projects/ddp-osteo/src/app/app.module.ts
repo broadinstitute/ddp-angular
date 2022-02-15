@@ -10,7 +10,8 @@ import {
   ConfigurationService,
   AnalyticsEventsService,
   AnalyticsEvent,
-  LoggingService
+  LoggingService,
+  PicklistSortingPolicy
 } from 'ddp-sdk';
 
 import {
@@ -100,6 +101,7 @@ config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 config.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl;
 config.doCloudLogging = DDP_ENV.doCloudLogging;
 config.usesVerticalStepper = ['FAMILY_HISTORY'];
+config.alwaysShowQuestionsCountInModalNestedActivity = true;
 
 export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {
@@ -162,7 +164,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
         LoggingService
       ],
       multi: true
-    }
+    },
+    PicklistSortingPolicy
   ],
   bootstrap: [AppComponent]
 })
