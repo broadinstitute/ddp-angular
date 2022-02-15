@@ -170,7 +170,7 @@ describe('ActivityNumericAnswer (Decimal answers)', () => {
         // expect(inputElement.max).toBe();
     });
 
-    it('should emit valid numeric answer', () => {
+    it('should emit valid decimal answer', () => {
         component.block = {
             answer: null,
             scale: 2,
