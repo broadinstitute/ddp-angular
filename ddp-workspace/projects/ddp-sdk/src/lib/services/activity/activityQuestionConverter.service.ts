@@ -227,8 +227,9 @@ export class ActivityQuestionConverter {
     private getDecimalBlock(questionJson: any): ActivityDecimalQuestionBlock {
         const decimalBlock = new ActivityDecimalQuestionBlock();
         decimalBlock.placeholder = questionJson.placeholderText;
-        decimalBlock.scale = questionJson.scale;
-
+        if (questionJson.scale) {
+            decimalBlock.scale = questionJson.scale;
+        }
         // TODO: add min/max from ValidationRuleType.DecimalRange (in scope of DDP-7573)
         return decimalBlock;
     }

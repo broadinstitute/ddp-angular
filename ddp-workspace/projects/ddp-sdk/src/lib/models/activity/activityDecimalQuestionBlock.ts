@@ -10,7 +10,7 @@ export type NumericAnswerType = number | DecimalAnswer;
 export class ActivityDecimalQuestionBlock extends ActivityQuestionBlock<DecimalAnswer> {
     public min: DecimalAnswer | null = null;
     public max: DecimalAnswer | null = null;
-    public scale = 2; // for decimal answers - the maximum number of allowed decimal digits. Default value = 2
+    public scale = 0; // for decimal answers - the maximum number of allowed decimal digits. Default value = 0
 
     constructor() {
         super();

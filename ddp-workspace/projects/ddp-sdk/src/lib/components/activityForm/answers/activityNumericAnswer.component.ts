@@ -130,7 +130,7 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
         if (decimalPart.length < scale) {
             decimalPart += '0'.repeat(scale - decimalPart.length);
         }
-        const res = (`${integerPart}.${decimalPart.slice(0, scale)}`);
+        const res = integerPart + (scale ? `.${decimalPart.slice(0, scale)}` : '');
 
         console.log('Decimal to display:', res);
         return res;
