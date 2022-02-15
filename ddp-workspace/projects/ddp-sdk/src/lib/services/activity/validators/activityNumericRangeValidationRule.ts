@@ -15,10 +15,10 @@ export class ActivityNumericRangeValidationRule extends ActivityAbstractValidati
         const answer = this.question.answer;
         if (answer !== null && _.isNumber(answer)) {
             if (_.isNumber(this.min) && this.max === null) {
-                valid = answer < this.min ? false : true;
+                valid = answer >= this.min;
             }
             if (_.isNumber(this.max) && this.min === null) {
-                valid = answer > this.max ? false : true;
+                valid = answer <= this.max;
             }
             if (_.isNumber(this.max) && _.isNumber(this.min)) {
                 valid = answer >= this.min && answer <= this.max ? true : false;
