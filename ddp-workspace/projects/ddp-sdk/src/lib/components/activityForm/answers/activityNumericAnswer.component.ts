@@ -43,8 +43,6 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
     private subs: Subscription;
 
     public ngOnInit(): void {
-        console.log('question:', this.block);
-
         this.initForm();
 
         this.subs = this.numericField.valueChanges.subscribe((enteredValue: number) => {
@@ -110,12 +108,10 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
 
     private formatDecimalAnswer(answerValue: string): DecimalAnswer {
         const [integerPart = '', decimalPart = ''] = answerValue.split('.');
-        const res = {
+        return {
             value: +integerPart.concat(decimalPart),
             scale: decimalPart.length
         };
-        console.log('Decimal to patch:', res);
-        return res;
     }
 
     private formatDecimalAnswerToDisplay(answer: NumericAnswerType): string {
@@ -130,10 +126,8 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
         if (decimalPart.length < scale) {
             decimalPart += '0'.repeat(scale - decimalPart.length);
         }
-        const res = integerPart + (scale ? `.${decimalPart.slice(0, scale)}` : '');
 
-        console.log('Decimal to display:', res);
-        return res;
+        return integerPart + (scale ? `.${decimalPart.slice(0, scale)}` : '');
     }
 
     private mapDecimalAnswerToNumber(answer: DecimalAnswer ): number {
