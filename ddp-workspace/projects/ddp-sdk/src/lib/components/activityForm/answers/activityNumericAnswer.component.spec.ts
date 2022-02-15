@@ -108,15 +108,17 @@ describe('ActivityNumericAnswer (Decimal answers)', () => {
 
         fixture = TestBed.createComponent(ActivityNumericAnswer);
         component = fixture.componentInstance;
-        component.block = questionBlock;
-        fixture.detectChanges();
     }));
 
     it('should create', () => {
+        component.block = questionBlock;
+        fixture.detectChanges();
         expect(component).toBeTruthy();
     });
 
     it('should init input', () => {
+        component.block = questionBlock;
+        fixture.detectChanges();
         const inputElement: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
         expect(inputElement.value).toBe('2.35');
         // TODO: fix commented tests below in scope of DDP-7573
@@ -125,7 +127,21 @@ describe('ActivityNumericAnswer (Decimal answers)', () => {
     });
 
     it('should update input', () => {
-        component.readonly = false;
+        component.block = {
+            answer: { value: 456, scale: 1 },
+            // min: {},
+            // max: {},
+            scale: 2,
+            questionType: QuestionType.Decimal
+        } as ActivityDecimalQuestionBlock;
+        fixture.detectChanges();
+        const inputElement: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
+        expect(inputElement.value).toBe('45.60');
+        // expect(inputElement.min).toBe();
+        // expect(inputElement.max).toBe();
+    });
+
+    it('should update input if answer is null', () => {
         component.block = {
             answer: null,
             // min: {},
@@ -136,6 +152,20 @@ describe('ActivityNumericAnswer (Decimal answers)', () => {
         fixture.detectChanges();
         const inputElement: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
         expect(inputElement.value).toBe('');
+        // expect(inputElement.min).toBe();
+        // expect(inputElement.max).toBe();
+    });
+
+    it('should update input with default question scale value (0)', () => {
+        component.block = {
+            answer: { value: 123, scale: 1 },
+            // min: {},
+            // max: {},
+            questionType: QuestionType.Decimal
+        } as ActivityDecimalQuestionBlock;
+        fixture.detectChanges();
+        const inputElement: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
+        expect(inputElement.value).toBe('12');
         // expect(inputElement.min).toBe();
         // expect(inputElement.max).toBe();
     });
