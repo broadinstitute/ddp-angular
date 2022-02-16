@@ -1,13 +1,12 @@
 import { ActivityAbstractValidationRule } from './activityAbstractValidationRule';
 import { ActivityQuestionBlock } from '../../../models/activity/activityQuestionBlock';
-import { DecimalAnswer } from '../../../models/activity/activityDecimalQuestionBlock';
 import { DecimalHelper } from '../../../utility/decimalHelper';
 
 export class ActivityDecimalRangeValidationRule extends ActivityAbstractValidationRule {
     constructor(
         public question: ActivityQuestionBlock<any>,
-        public min: DecimalAnswer | null = null,
-        public max: DecimalAnswer | null = null) {
+        public min: number | null = null,
+        public max: number | null = null) {
         super(question);
     }
 
@@ -16,20 +15,16 @@ export class ActivityDecimalRangeValidationRule extends ActivityAbstractValidati
 
         if (DecimalHelper.isDecimalAnswerType(this.question.answer)) {
             const answer = DecimalHelper.mapDecimalAnswerToNumber(this.question.answer);
-            const min = this.min && DecimalHelper.mapDecimalAnswerToNumber(this.min);
-            const max = this.max && DecimalHelper.mapDecimalAnswerToNumber(this.max);
-
-            if (min && max === null) {
-                valid = answer >= min;
+            if (this.min && this.max === null) {
+                valid = answer >= this.min;
             }
-            if (max && min === null) {
-                valid = answer <= max;
+            if (this.max && this.min === null) {
+                valid = answer <= this.max;
             }
-            if (min && max) {
-                valid = answer >= min && answer <= max;
+            if (this.min && this.max) {
+                valid = answer >= this.min && answer <= this.max;
             }
         }
-
         this.result = valid ? null : this.message;
         return valid;
     }

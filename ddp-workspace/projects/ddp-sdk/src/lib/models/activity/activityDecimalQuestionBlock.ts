@@ -9,8 +9,8 @@ export interface DecimalAnswer {
 export type NumericAnswerType = number | DecimalAnswer;
 
 export class ActivityDecimalQuestionBlock extends ActivityQuestionBlock<DecimalAnswer> {
-    public min: DecimalAnswer | null = null;
-    public max: DecimalAnswer | null = null;
+    public min: number | null = null;
+    public max: number | null = null;
     public scale = 0; // for decimal answers - the maximum number of allowed decimal digits. Default value = 0
 
     constructor() {

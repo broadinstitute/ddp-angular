@@ -28,6 +28,7 @@ import { ActivityPicklistQuestionBlock } from '../../models/activity/activityPic
 import { ActivityStrictMatchValidationRule } from './validators/activityStrictMatchValidationRule';
 import { ActivityUniqueValidationRule } from './validators/activityUniqueValidationRule';
 import { DecimalHelper } from '../../utility/decimalHelper';
+import { ActivityDecimalRangeValidationRule } from './validators/activityDecimalRangeValidationRule';
 
 export enum ValidationRuleType {
     Required = 'REQUIRED',
@@ -165,13 +166,13 @@ export class ActivityValidatorBuilder {
     }
 
     private buildDecimalRangeValidator(validationJson: any, questionBlock: ActivityQuestionBlock<any>):
-        ActivityNumericRangeValidationRule {
-        const decimalRangeRule = new ActivityNumericRangeValidationRule(questionBlock);
+        ActivityDecimalRangeValidationRule {
+        const decimalRangeRule = new ActivityDecimalRangeValidationRule(questionBlock);
         if (DecimalHelper.isDecimalAnswerType(validationJson.min)) {
-            decimalRangeRule.min = validationJson.min;
+            decimalRangeRule.min = DecimalHelper.mapDecimalAnswerToNumber(validationJson.min);
         }
         if (DecimalHelper.isDecimalAnswerType(validationJson.max)) {
-            decimalRangeRule.max = validationJson.max;
+            decimalRangeRule.max = DecimalHelper.mapDecimalAnswerToNumber(validationJson.max);
         }
         return decimalRangeRule;
     }

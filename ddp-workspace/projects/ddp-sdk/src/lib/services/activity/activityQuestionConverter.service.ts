@@ -24,6 +24,7 @@ import * as _ from 'underscore';
 import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
 import { ActivityInstanceSelectQuestionBlock } from '../../models/activity/activityInstanceSelectQuestionBlock';
 import { ActivityDecimalQuestionBlock } from '../../models/activity/activityDecimalQuestionBlock';
+import { DecimalHelper } from '../../utility/decimalHelper';
 
 const DETAIL_MAXLENGTH = 500;
 
@@ -230,7 +231,11 @@ export class ActivityQuestionConverter {
         if (questionJson.scale) {
             decimalBlock.scale = questionJson.scale;
         }
-        // TODO: add min/max from ValidationRuleType.DecimalRange (in scope of DDP-7573)
+        const decimalRangeValidation = questionJson.validations.find(validation => validation.rule === ValidationRuleType.DecimalRange);
+        if (decimalRangeValidation) {
+            decimalBlock.min = decimalRangeValidation.min && DecimalHelper.mapDecimalAnswerToNumber(decimalRangeValidation.min) || null;
+            decimalBlock.max = decimalRangeValidation.max && DecimalHelper.mapDecimalAnswerToNumber(decimalRangeValidation.max) || null;
+        }
         return decimalBlock;
     }
 
