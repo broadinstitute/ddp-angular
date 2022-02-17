@@ -1,7 +1,7 @@
 import { DatePickerValue } from '../datePickerValue';
 import { ActivityPicklistAnswerDto } from './activityPicklistAnswerDto';
 import { ActivityMatrixAnswerDto } from './activityMatrixAnswerDto';
-import { NumericAnswerType } from './activityDecimalQuestionBlock';
+import { NumericAnswerType } from './numericAnswerType';
 
 export type AnswerValue =
   | boolean

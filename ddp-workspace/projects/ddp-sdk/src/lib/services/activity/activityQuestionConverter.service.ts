@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LoggingService } from '../logging.service';
 import { ActivitySuggestionBuilder } from './activitySuggestionBuilder.service';
-import { ActivityValidatorBuilder, ValidationRuleType } from './activityValidatorBuilder.service';
+import { ActivityValidatorBuilder } from './activityValidatorBuilder.service';
 import { ActivityRule } from '../../models/activity/activityRule';
 import { ActivityBooleanQuestionBlock } from '../../models/activity/activityBooleanQuestionBlock';
 import { ActivityAgreementQuestionBlock } from '../../models/activity/activityAgreementQuestionBlock';
@@ -24,6 +24,7 @@ import * as _ from 'underscore';
 import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
 import { ActivityInstanceSelectQuestionBlock } from '../../models/activity/activityInstanceSelectQuestionBlock';
 import { ActivityDecimalQuestionBlock } from '../../models/activity/activityDecimalQuestionBlock';
+import { ValidationRuleType } from './validationRuleType';
 import { DecimalHelper } from '../../utility/decimalHelper';
 
 const DETAIL_MAXLENGTH = 500;

@@ -1,12 +1,7 @@
 import { ActivityQuestionBlock } from './activityQuestionBlock';
 import { QuestionType } from './questionType';
+import { DecimalAnswer } from './decimalAnswer';
 import { DecimalHelper } from '../../utility/decimalHelper';
-
-export interface DecimalAnswer {
-    value: number;
-    scale: number;
-}
-export type NumericAnswerType = number | DecimalAnswer;
 
 export class ActivityDecimalQuestionBlock extends ActivityQuestionBlock<DecimalAnswer> {
     public min: number | null = null;

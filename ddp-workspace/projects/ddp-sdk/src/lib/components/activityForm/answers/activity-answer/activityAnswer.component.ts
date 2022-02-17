@@ -3,7 +3,6 @@ import { AbstractActivityQuestionBlock } from '../../../../models/activity/abstr
 import { AnswerValue } from '../../../../models/activity/answerValue';
 import { QuestionType } from '../../../../models/activity/questionType';
 import { BlockType } from '../../../../models/activity/blockType';
-import { ActivityDecimalQuestionBlock } from '../../../../models/activity/activityDecimalQuestionBlock';
 
 @Component({
     selector: 'ddp-activity-answer',
@@ -23,7 +22,6 @@ import { ActivityDecimalQuestionBlock } from '../../../../models/activity/activi
             <ddp-activity-numeric-answer *ngIf="isNumericQuestion(block) || isDecimalQuestion(block)"
                                          [class]="'numeric-answer-' + block.stableId"
                                          [block]="block"
-                                         [valueChangeStep]="numericValueStep"
                                          [readonly]="readonly"
                                          (valueChanged)="onChange($event)">
             </ddp-activity-numeric-answer>
@@ -91,12 +89,6 @@ export class ActivityAnswerComponent {
     @Input() activityGuid: string;
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
     @Output() componentBusy = new EventEmitter<boolean>();
-
-    public get numericValueStep(): number {
-        if (this.isDecimalQuestion(this.block)) {
-            return Math.pow(10, -( (this.block as ActivityDecimalQuestionBlock).scale) );
-        }
-    }
 
     public onChange(value: AnswerValue): void {
         this.valueChanged.emit(value);

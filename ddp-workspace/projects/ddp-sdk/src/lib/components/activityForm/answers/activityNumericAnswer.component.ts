@@ -4,12 +4,11 @@ import { Subscription } from 'rxjs';
 import * as _ from 'underscore';
 import { ActivityNumericQuestionBlock } from '../../../models/activity/activityNumericQuestionBlock';
 import { QuestionType } from '../../../models/activity/questionType';
-import {
-    ActivityDecimalQuestionBlock,
-    DecimalAnswer,
-    NumericAnswerType
-} from '../../../models/activity/activityDecimalQuestionBlock';
+import { ActivityDecimalQuestionBlock } from '../../../models/activity/activityDecimalQuestionBlock';
 import { ActivityQuestionBlock } from '../../../models/activity/activityQuestionBlock';
+import { NumericAnswerType } from '../../../models/activity/numericAnswerType';
+import { DecimalAnswer } from '../../../models/activity/decimalAnswer';
+import { AbstractActivityQuestionBlock } from '../../../models/activity/abstractActivityQuestionBlock';
 import { DecimalHelper } from '../../../utility/decimalHelper';
 
 @Component({
@@ -36,7 +35,6 @@ import { DecimalHelper } from '../../../utility/decimalHelper';
 })
 export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
     @Input() block: ActivityNumericQuestionBlock | ActivityDecimalQuestionBlock;
-    @Input() valueChangeStep = 1;
     @Input() placeholder: string;
     @Input() readonly: boolean;
     @Output() valueChanged: EventEmitter<NumericAnswerType> = new EventEmitter();
@@ -69,6 +67,10 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
                 this.readonly ? this.numericField.disable({ emitEvent: false }) : this.numericField.enable({ emitEvent: false });
             }
         }
+    }
+
+    public get valueChangeStep(): number {
+        return this.isDecimalQuestion(this.block) ? Math.pow(10, -((this.block as ActivityDecimalQuestionBlock).scale)) : 1;
     }
 
     private initForm(): void {
@@ -129,5 +131,9 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
         }
 
         return integerPart + (scale ? `.${decimalPart.slice(0, scale)}` : '');
+    }
+
+    private isDecimalQuestion(block: AbstractActivityQuestionBlock): boolean {
+        return block.questionType === QuestionType.Decimal;
     }
 }
