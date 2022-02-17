@@ -8,6 +8,7 @@ import { ActivityDecimalQuestionBlock } from '../../../models/activity/activityD
 import { ActivityQuestionBlock } from '../../../models/activity/activityQuestionBlock';
 import { NumericAnswerType } from '../../../models/activity/numericAnswerType';
 import { DecimalAnswer } from '../../../models/activity/decimalAnswer';
+import { AbstractActivityQuestionBlock } from '../../../models/activity/abstractActivityQuestionBlock';
 
 @Component({
     selector: 'ddp-activity-numeric-answer',
@@ -33,7 +34,6 @@ import { DecimalAnswer } from '../../../models/activity/decimalAnswer';
 })
 export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
     @Input() block: ActivityNumericQuestionBlock | ActivityDecimalQuestionBlock;
-    @Input() valueChangeStep = 1;
     @Input() placeholder: string;
     @Input() readonly: boolean;
     @Output() valueChanged: EventEmitter<NumericAnswerType> = new EventEmitter();
@@ -66,6 +66,10 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
                 this.readonly ? this.numericField.disable({ emitEvent: false }) : this.numericField.enable({ emitEvent: false });
             }
         }
+    }
+
+    public get valueChangeStep(): number {
+        return this.isDecimalQuestion(this.block) ? Math.pow(10, -((this.block as ActivityDecimalQuestionBlock).scale)) : 1;
     }
 
     private initForm(): void {
@@ -130,5 +134,9 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
 
     private mapDecimalAnswerToNumber(answer: DecimalAnswer ): number {
         return answer.value * Math.pow(10, -(answer.scale || 0));
+    }
+
+    private isDecimalQuestion(block: AbstractActivityQuestionBlock): boolean {
+        return block.questionType === QuestionType.Decimal;
     }
 }
