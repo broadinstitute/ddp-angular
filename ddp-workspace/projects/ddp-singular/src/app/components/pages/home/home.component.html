@@ -50,13 +50,13 @@
   <div class="container">
     <div class="join-wrapper">
       <div class="join-left">
-        <h1>Who can join?</h1>
-        <h3>For those who live in the USA or Canada:</h3>
-        <div class="join-list">
-          <div class="join-list-item join-list-item__violette">Anyone who has ever been diagnosed with a<br>single ventricle heart defect, including transplant recipients, can participate.</div>
-          <div class="join-list-item join-list-item__blue">Biological parents, siblings, or children of a person<br>with a single ventricle heart defect can participate.</div>
-          <div class="join-list-item join-list-item__green">We welcome people of all ages, genders, races, ethnicities, and abilities.</div>
-        </div>
+        <h1 class="join-left-heading">Who can join?</h1>
+        <ul class="join-list">
+          <li>People who have been diagnosed with a single ventricle heart defect, including transplant recipients.</li>
+          <li>Biological parents, siblings, or children of a person with a single ventricle heart defect.</li>
+          <li>Must live in the United States or Canada.</li>
+          <li>We welcome people of all ages, genders, races, ethnicities, and abilities</li>
+        </ul>
       </div>
       <div class="join-right">
         <img src="assets/images/about-join.png" alt="">
@@ -74,37 +74,48 @@
     <h1>Participating is Easy</h1>
     <div class="participating-steps">
       <div class="participating-steps-step">
-        <img src="assets/images/step-1.svg" alt="" class="participating-steps-step-img">
-        <div class="participating-steps-step-title">Step 1</div>
+        <img src="assets/images/step-1.png" alt="participating steps image" class="participating-steps-step-img">
+        <div class="participating-steps-step-title">STEP 1</div>
+        <div class="participating-steps-step-name">Enroll Participant(s)</div>
         <div class="participating-steps-step-text">
-          <p>To enroll, set up an account on this website.</p>
-          <p>Complete a short survey and sign a consent.</p>
+          <p>To enroll, each participant will need to agree to a research consent form that explains the study.</p>
+          <a href="https://storage.googleapis.com/singular-dev-assets/consent_self.pdf" target="_blank">Preview Consent Form</a>
         </div>
       </div>
       <div class="participating-steps-step">
-        <img src="assets/images/step-2.svg" alt="" class="participating-steps-step-img">
-        <div class="participating-steps-step-title">Step 2</div>
+        <img src="assets/images/step-2.png" alt="participating steps image" class="participating-steps-step-img">
+        <div class="participating-steps-step-title">STEP 2</div>
+        <div class="participating-steps-step-name">Answer Short Surveys</div>
         <div class="participating-steps-step-text">
-          <p>Provide your spit sample (we’ll send a returnable kit).</p>
-          <p>Patients will be asked to share their medical records.</p>
+          <p>Participants will be asked to answer surveys about their health and share related medical records.</p>
         </div>
       </div>
       <div class="participating-steps-step">
-        <img src="assets/images/step-3.svg" alt="" class="participating-steps-step-img">
-        <div class="participating-steps-step-title">Step 3</div>
+        <img src="assets/images/step-3.png" alt="participating steps image" class="participating-steps-step-img">
+        <div class="participating-steps-step-title">STEP 3</div>
+        <div class="participating-steps-step-name">Provide Split Sample(s)</div>
         <div class="participating-steps-step-text">
-          <p>Check back here and on our social media pages to learn about progress and when there are more ways to help.</p>
+          <p>Once enrolled, we will send each participant a returnable spit kit to learn about your DNA,</p>
+        </div>
+        <div class="participating-steps-step-link">
+          <a href="https://storage.googleapis.com/singular-dev-assets/saliva_kit.pdf" target="_blank">Preview Kit Instructions</a>
         </div>
       </div>
-    </div>
-    <div class="participating-FAQ">
-      <div class="participating-FAQ-text">
-        <p>We are committed to protecting your privacy. Learn about how we are keeping your information safe, why we are asking for medical records, and more in our FAQs.</p>
-      </div>
-      <button class="button button--primary button--lg" [routerLink]="Route.FAQ">Visit FAQs</button>
     </div>
   </div>
 </section>
+
+<section class="privacy">
+    <div class="privacy-title">
+        <img src="assets/images/privacy-lock.png" alt="lock image">
+        <h1>Privacy Note</h1>
+    </div>
+    <div class="privacy-text">
+        <p>We are committed to protecting your privacy. Learn about how we are keeping your information safe, why we are asking for medical records, and more in
+            <a [routerLink]="Route.FAQ">our FAQs</a>.</p>
+    </div>
+</section>
+
 
 <section class="partners">
   <div class="container">
