@@ -4,12 +4,10 @@ import { Subscription } from 'rxjs';
 import * as _ from 'underscore';
 import { ActivityNumericQuestionBlock } from '../../../models/activity/activityNumericQuestionBlock';
 import { QuestionType } from '../../../models/activity/questionType';
-import {
-    ActivityDecimalQuestionBlock,
-    DecimalAnswer,
-    NumericAnswerType
-} from '../../../models/activity/activityDecimalQuestionBlock';
+import { ActivityDecimalQuestionBlock } from '../../../models/activity/activityDecimalQuestionBlock';
 import { ActivityQuestionBlock } from '../../../models/activity/activityQuestionBlock';
+import { NumericAnswerType } from '../../../models/activity/numericAnswerType';
+import { DecimalAnswer } from '../../../models/activity/decimalAnswer';
 
 @Component({
     selector: 'ddp-activity-numeric-answer',

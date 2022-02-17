@@ -1,11 +1,6 @@
 import { ActivityQuestionBlock } from './activityQuestionBlock';
 import { QuestionType } from './questionType';
-
-export interface DecimalAnswer {
-    value: number;
-    scale: number;
-}
-export type NumericAnswerType = number | DecimalAnswer;
+import { DecimalAnswer } from './decimalAnswer';
 
 export class ActivityDecimalQuestionBlock extends ActivityQuestionBlock<DecimalAnswer> {
     public min: DecimalAnswer | null = null;
