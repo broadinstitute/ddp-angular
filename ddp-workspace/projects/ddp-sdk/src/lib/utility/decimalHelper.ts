@@ -1,4 +1,4 @@
-import { DecimalAnswer } from '../models/activity/activityDecimalQuestionBlock';
+import { DecimalAnswer } from '../models/activity/decimalAnswer';
 
 export  class DecimalHelper {
     static mapDecimalAnswerToNumber(answer: DecimalAnswer ): number {
