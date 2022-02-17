@@ -599,7 +599,7 @@
         {
           "ImageUrl": "assets/images/taylor-maclean.jpg",
           "Name": "Taylor MacLean, MS",
-          "About": "Program Manager, Project&nbsp;Singular, Additional Ventures"
+          "About": "Program Manager, <br/> Project&nbsp;Singular, <br/> Additional Ventures"
         }
       ]
     },
@@ -624,7 +624,7 @@
         {
           "ImageUrl": "assets/images/Sasha_circle_2x.png",
           "Name": "Sasha Opotowsky, MD",
-          "About": "Director, Adult Congenital <br/>Heart Disease <br/>Program Professor, University of Cincinnati Department of Pediatrics<br/>Co-Director, Fontan Outcomes Network"
+          "About": "Director, Adult Congenital <br/>Heart Disease Program <br/> Professor, University of Cincinnati Department of Pediatrics<br/>Co-Director, Fontan Outcomes Network"
         },
         {
           "ImageUrl": "assets/images/Jesse_circle_2x.png",
@@ -639,7 +639,7 @@
         {
           "ImageUrl": "assets/images/Kim_circle_2x.png",
           "Name": "Kim McBride, MD",
-          "About": "Investigator, Center for Cardiovascular Research at Nationwide Children's Hospital; Chief, Division of Genetic and Genomic Medicine, and Associate Professor in the Department of<br>Pediatrics at The Ohio State University College of Medicine"
+          "About": "Investigator, Center for Cardiovascular Research, Nationwide Children's Hospital; Chief, Division of Genetic and Genomic Medicine and Associate Professor, Department of Pediatrics, Ohio State University College of Medicine"
         },
         {
           "ImageUrl": "assets/images/Nadia_2x.png",
