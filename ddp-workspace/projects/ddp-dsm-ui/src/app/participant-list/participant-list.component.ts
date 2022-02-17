@@ -72,6 +72,7 @@ export class ParticipantListComponent implements OnInit {
   showParticipantInformation = false;
   showTissue = false;
   selectedTab: string;
+  selectedActivity: string;
   selectedMR = '';
   selectedOncOrTissue = '';
 
@@ -1117,7 +1118,7 @@ export class ParticipantListComponent implements OnInit {
     this.savedSelectedColumns = this.selectedColumns;
   }
 
-  openParticipant(participant: Participant, colSource: string): void {
+  openParticipant(participant: Participant, colSource: string, selectedActivity?): void {
     if (participant != null) {
       let tabAnchor = 'Survey Data';
       if (colSource === 'm' || participant.data.activities == null) {
@@ -1138,6 +1139,9 @@ export class ParticipantListComponent implements OnInit {
         if (proband && proband.dataId) {
           tabAnchor = proband.dataId;
         }
+      }
+      if(tabAnchor === 'Survey Data') {
+        this.selectedActivity = selectedActivity;
       }
       if (this.filtered && participant.participant != null && participant.participant.ddpParticipantId != null) {
         this.loadingParticipants = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);

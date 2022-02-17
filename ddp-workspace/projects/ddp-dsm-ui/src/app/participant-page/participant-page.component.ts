@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy } from '@angular/core';
+import {ViewportScroller} from '@angular/common';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy, AfterViewChecked} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TabDirective } from 'ngx-bootstrap/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -37,7 +38,7 @@ const fileSaver = require('file-saver');
   templateUrl: './participant-page.component.html',
   styleUrls: [ './participant-page.component.css' ]
 })
-export class ParticipantPageComponent implements OnInit, OnDestroy {
+export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild(ModalComponent)
   public universalModal: ModalComponent;
 
@@ -58,6 +59,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
   @Input() hideSamplesTab: boolean;
   @Input() showContactInformation: boolean;
   @Input() showComputedObject: boolean;
+  @Input() selectedActivityCode: string;
   @Output() leaveParticipant = new EventEmitter();
   @Output('ngModelChange') update = new EventEmitter();
 
@@ -118,6 +120,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
   downloading = false;
   message: string = null;
   bundle = false;
+  private scrolled: boolean;
   constructor(private auth: Auth, private compService: ComponentService, private dsmService: DSMService, private router: Router,
                private role: RoleService, private util: Utils, private route: ActivatedRoute, public dialog: MatDialog) {
     if (!auth.authenticated()) {
@@ -160,7 +163,19 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
       }
     }, 5000);
     this.loadInstitutions();
-    window.scrollTo(0, 0);
+    this.scrolled = false;
+    if(!this.selectedActivityCode) {
+      window.scrollTo( 0, 0 );
+      this.scrolled = true;
+    }
+  }
+
+  ngAfterViewChecked(): void{
+    if ( !this.selectedActivityCode || this.scrolled || !document.getElementById(this.selectedActivityCode))
+      {return;}
+
+    document.getElementById(this.selectedActivityCode).scrollIntoView();
+    this.scrolled = true;
   }
 
   ngOnDestroy(): void {

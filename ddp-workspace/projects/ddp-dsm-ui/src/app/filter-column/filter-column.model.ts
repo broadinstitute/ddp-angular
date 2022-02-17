@@ -1,17 +1,20 @@
 /* eslint-disable max-len */
-import { FieldSettings } from '../field-settings/field-settings.model';
-import { NameValue } from '../utils/name-value.model';
-import { Statics } from '../utils/statics';
-import { Value } from '../utils/value.model';
-import { ParticipantColumn } from './models/column.model';
+import {FieldSettings} from '../field-settings/field-settings.model';
+import {NameValue} from '../utils/name-value.model';
+import {Statics} from '../utils/statics';
+import {Value} from '../utils/value.model';
+import {ParticipantColumn} from './models/column.model';
+import {Participant} from "../participant-list/participant-list.model";
+import {ActivityDefinition} from "../activity-data/models/activity-definition.model";
+import {Utils} from "../utils/utils";
 
 export class Filter {
 
   constructor(public participantColumn: ParticipantColumn, public type: string, public options?: NameValue[], public filter2?: NameValue,
-               public range?: boolean, public exactMatch?: boolean, public filter1?: NameValue,
-               public selectedOptions?: any, public value1?: any, public value2?: any, public sortAsc?: boolean,
-               public empty?: boolean, public notEmpty?: boolean, public singleOption?: boolean, public additionalType?: string,
-               public parentName?: string) {
+              public range?: boolean, public exactMatch?: boolean, public filter1?: NameValue,
+              public selectedOptions?: any, public value1?: any, public value2?: any, public sortAsc?: boolean,
+              public empty?: boolean, public notEmpty?: boolean, public singleOption?: boolean, public additionalType?: string,
+              public parentName?: string, public func?: (a: any, b: any) => string, public searchable: boolean = true) {
     this.participantColumn = participantColumn;
     this.type = type;
     if (options != null) {
@@ -103,7 +106,7 @@ export class Filter {
   public static MR_RECEIVED = new Filter(ParticipantColumn.MR_RECEIVED, Filter.DATE_TYPE);
   public static MR_DOCUMENT = new Filter(ParticipantColumn.MR_DOCUMENT, Filter.OPTION_TYPE, [
     new NameValue('Full', 'Full'),
-    new NameValue('Partial', 'Partial') ]);
+    new NameValue('Partial', 'Partial')]);
   public static MR_DOCUMENT_FILES = new Filter(ParticipantColumn.MR_DOCUMENT_FILES, Filter.TEXT_TYPE);
   public static MR_PROBLEM = new Filter(ParticipantColumn.MR_PROBLEM, Filter.CHECKBOX_TYPE);
   public static MR_PROBLEM_TEXT = new Filter(ParticipantColumn.MR_PROBLEM_TEXT, Filter.TEXT_TYPE);
@@ -113,11 +116,11 @@ export class Filter {
   public static MR_PAPER_CR = new Filter(ParticipantColumn.MR_PAPER_CR, Filter.CHECKBOX_TYPE);
   public static PATHOLOGY_RESENT = new Filter(ParticipantColumn.PATHOLOGY_RESENT, Filter.OPTION_TYPE, [
     new NameValue('yes', 'Yes'),
-    new NameValue('no', 'No') ]);
+    new NameValue('no', 'No')]);
   public static MR_NOTES = new Filter(ParticipantColumn.MR_NOTES, Filter.TEXT_TYPE);
   public static MR_REVIEW = new Filter(ParticipantColumn.MR_REVIEW, Filter.OPTION_TYPE, [
     new NameValue('yes', 'Yes'),
-    new NameValue('no', 'No') ]);
+    new NameValue('no', 'No')]);
   // public static MR_FOLLOW_UP = new Filter( ParticipantColumn.MR_FOLLOW_UP, Filter.CHECKBOX_TYPE ); //TODO wrong Type
   public static MR_FOLLOW_REQUIRED = new Filter(ParticipantColumn.MR_FOLLOW_REQUIRED, Filter.CHECKBOX_TYPE);
   public static MR_FOLLOW_REQUIRED_TEXT = new Filter(ParticipantColumn.MR_FOLLOW_REQUIRED_TEXT, Filter.TEXT_TYPE);
@@ -148,7 +151,7 @@ export class Filter {
   public static TISSUE_RECEIVED = new Filter(ParticipantColumn.TISSUE_RECEIVED, Filter.DATE_TYPE);
   public static GENDER = new Filter(ParticipantColumn.GENDER, Filter.OPTION_TYPE, [
     new NameValue('male', 'Male'),
-    new NameValue('female', 'Female') ]);
+    new NameValue('female', 'Female')]);
   public static TISSUE_PROBLEM_OPTION = new Filter(ParticipantColumn.TISSUE_PROBLEM_OPTION, Filter.OPTION_TYPE, [
     new NameValue('insufficientPath', 'Insufficient material per path'),
     new NameValue('insufficientSHL', 'Insufficient material per SHL'),
@@ -156,7 +159,7 @@ export class Filter {
     new NameValue('pathPolicy', 'Path department policy'),
     new NameValue('pathNoLocate', 'Path department unable to locate'),
     new NameValue('destroyed', 'Tissue destroyed'),
-    new NameValue('other', 'Other') ]);
+    new NameValue('other', 'Other')]);
   public static UNABLE_OBTAIN_TISSUE = new Filter(ParticipantColumn.UNABLE_OBTAIN_TISSUE, Filter.CHECKBOX_TYPE);
   public static DESTRUCTION_POLICY = new Filter(ParticipantColumn.DESTRUCTION_POLICY, Filter.TEXT_TYPE);
 
@@ -166,19 +169,19 @@ export class Filter {
   public static TISSUE_TYPE = new Filter(ParticipantColumn.TISSUE_TYPE, Filter.OPTION_TYPE, [
     new NameValue('block', 'Block'),
     new NameValue('slide', 'Slide'),
-    new NameValue('scrolls', 'Scrolls') ]);
+    new NameValue('scrolls', 'Scrolls')]);
   public static TISSUE_SITE = new Filter(ParticipantColumn.TISSUE_SITE, Filter.TEXT_TYPE);
   public static TUMOR_TYPE = new Filter(ParticipantColumn.TUMOR_TYPE, Filter.OPTION_TYPE, [
     new NameValue('Primary', 'Primary'),
     new NameValue('Met', 'Met'),
     new NameValue('Recurrent', 'Recurrent'),
-    new NameValue('Unknown', 'Unknown') ]);
+    new NameValue('Unknown', 'Unknown')]);
   public static H_E = new Filter(ParticipantColumn.H_E, Filter.OPTION_TYPE, [
     new NameValue('yes', 'Yes'),
-    new NameValue('no', 'No') ]);
+    new NameValue('no', 'No')]);
   public static PATHOLOGY_REPORT = new Filter(ParticipantColumn.PATHOLOGY_REPORT, Filter.OPTION_TYPE, [
     new NameValue('yes', 'Yes'),
-    new NameValue('no', 'No') ]);
+    new NameValue('no', 'No')]);
   public static COLLABORATOR_SAMPLE_ID = new Filter(ParticipantColumn.COLLABORATOR_SAMPLE_ID, Filter.TEXT_TYPE);
   public static BLOCK_SENT = new Filter(ParticipantColumn.BLOCK_SENT, Filter.DATE_TYPE);
   public static SCROLL_RECEIVED = new Filter(ParticipantColumn.SCROLL_RECEIVED, Filter.DATE_TYPE);
@@ -202,7 +205,7 @@ export class Filter {
   public static BLOCKS_COUNT = new Filter(ParticipantColumn.BLOCKS_COUNT, Filter.NUMBER_TYPE);
   public static USS_COUNT = new Filter(ParticipantColumn.USS_COUNT, Filter.NUMBER_TYPE);
   public static H_E_COUNT = new Filter(ParticipantColumn.H_E_COUNT, Filter.NUMBER_TYPE);
-  public static SM_ID_TISSUE_VALUE = new Filter( ParticipantColumn.SM_ID_VALUE, Filter.TEXT_TYPE );
+  public static SM_ID_TISSUE_VALUE = new Filter(ParticipantColumn.SM_ID_VALUE, Filter.TEXT_TYPE);
 
   // sample columns
   public static SAMPLE_SENT = new Filter(ParticipantColumn.SAMPLE_SENT, Filter.DATE_TYPE);
@@ -214,7 +217,7 @@ export class Filter {
     new NameValue('error', 'GP manual Label'),
     new NameValue('deactivated', 'Deactivated'),
     new NameValue('shipped', 'Shipped'),
-    new NameValue('received', 'Received') ], null, false, true, null, null, null, null, true, false, false, true);
+    new NameValue('received', 'Received')], null, false, true, null, null, null, null, true, false, false, true);
   public static TRACKING_TO_PARTICIPANT = new Filter(ParticipantColumn.TRACKING_TO_PARTICIPANT, Filter.TEXT_TYPE);
   public static TRACKING_RETURN = new Filter(ParticipantColumn.TRACKING_RETURN, Filter.TEXT_TYPE);
   public static MF_BARCODE = new Filter(ParticipantColumn.MF_BARCODE, Filter.TEXT_TYPE);
@@ -229,16 +232,40 @@ export class Filter {
     false, true, null, null, null, null, false, false, false, false, Filter.DATE_TYPE);
 
   // abstraction
-  public static ABSTRACTION_STATUS = new Filter(ParticipantColumn.ABSTRACTION_STATUS, Filter.OPTION_TYPE, [
-    new NameValue('done', 'Done'),
-    new NameValue('in_progress', 'In Progress'),
-    new NameValue('not_started', 'Not Started'),
-    new NameValue('clear', 'Lock Broken') ]);
-  public static ABSTRACTION_ACTIVITY = new Filter(ParticipantColumn.ABSTRACTION_ACTIVITY, Filter.OPTION_TYPE, [
-    new NameValue('abstraction', 'First Abstraction'),
-    new NameValue('review', 'Second Abstraction'),
-    new NameValue('qc', 'QC') ]);
-  public static ABSTRACTION_USER = new Filter(ParticipantColumn.ABSTRACTION_USER, Filter.TEXT_TYPE);
+  public static ABSTRACTION_STATUS = new Filter( ParticipantColumn.ABSTRACTION_STATUS, Filter.OPTION_TYPE, [
+    new NameValue( 'done', 'Done' ),
+    new NameValue( 'in_progress', 'In Progress' ),
+    new NameValue( 'not_started', 'Not Started' ),
+    new NameValue( 'clear', 'Lock Broken' ) ] );
+  public static ABSTRACTION_ACTIVITY = new Filter( ParticipantColumn.ABSTRACTION_ACTIVITY, Filter.OPTION_TYPE, [
+    new NameValue( 'abstraction', 'First Abstraction' ),
+    new NameValue( 'review', 'Second Abstraction' ),
+    new NameValue( 'qc', 'QC' ) ] );
+  public static ABSTRACTION_USER = new Filter( ParticipantColumn.ABSTRACTION_USER, Filter.TEXT_TYPE );
+
+  public static ACTIVITY_STATUS = new Filter( ParticipantColumn.ACTIVITY_STATUS, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+    ( participant: Participant, activityDefinitionList: ActivityDefinition[] ) => {
+      let str = '';
+      const activityDataArray = participant.data.activities;
+      activityDataArray.sort( ( ac1, ac2 ) => {
+          const acDef1 = Utils.getActivityDefinition( activityDefinitionList, ac1.activityCode, ac1.activityVersion );
+          const acDef2 = Utils.getActivityDefinition( activityDefinitionList, ac2.activityCode, ac2.activityVersion );
+          return acDef1.displayOrder - acDef2.displayOrder;
+        }
+      );
+      const niceText = {
+        COMPLETE: 'Completed',
+        CREATED: 'Created',
+        IN_PROGRESS: 'In Progress',
+        ERROR: 'Error'
+      };
+      for (let i = 0; i < activityDataArray.length; i++) {
+        const activityData = activityDataArray[ i ];
+        const acDef = Utils.getActivityDefinition( activityDefinitionList, activityData.activityCode, activityData.activityVersion );
+        str += acDef.activityName + ' : ' + niceText[ activityData.status ] + ', ';
+      }
+      return str;
+    }, false );
 
   public static ALL_COLUMNS = [
     Filter.REALM, Filter.SHORT_ID, Filter.LEGACY_SHORT_ID, Filter.LEGACY_PARTICIPANT_ID, Filter.PARTICIPANT_ID, Filter.FIRST_NAME, Filter.LAST_NAME,
@@ -266,25 +293,28 @@ export class Filter {
     Filter.USS_COUNT, Filter.H_E_COUNT, Filter.BLOCKS_COUNT,
     Filter.COLLABORATOR_SAMPLE, Filter.SAMPLE_SENT, Filter.SAMPLE_RECEIVED, Filter.SAMPLE_DEACTIVATION, Filter.SAMPLE_QUEUE,
     Filter.TRACKING_TO_PARTICIPANT, Filter.TRACKING_RETURN, Filter.MF_BARCODE, Filter.STATUS_OUT, Filter.STATUS_IN, Filter.RESULT_TEST, Filter.CORRECTED_TEST, Filter.TIME_TEST, Filter.CARE_EVOLVE,
-    Filter.ABSTRACTION_ACTIVITY, Filter.ABSTRACTION_STATUS, Filter.ABSTRACTION_USER ];
+    Filter.ABSTRACTION_ACTIVITY, Filter.ABSTRACTION_STATUS, Filter.ABSTRACTION_USER, Filter.ACTIVITY_STATUS];
 
   public static parseToColumnArray(json, allColumns, surveyNames?, surveyColumns?): {} {
     const result = {};
     for (const tableAlias of Object.keys(json)) {
-      const colArray = json[ tableAlias ];
+      const colArray = json[tableAlias];
       let found = false;
       loop: for (const columnName of colArray) {
         if (tableAlias === 'ES') { // backend will sent "ES" if it didn't find the columns in the dsm tables!
           // get profile column
           if (columnName.indexOf(Filter.SHORT_ID.participantColumn.tableAlias) === 0) {
             for (const filter of Filter.ALL_COLUMNS) {
-              const tableName = columnName.substr(0, columnName.indexOf('.'));
-              const cName = columnName.substr(columnName.indexOf('.') + 1);
+              if (!filter.searchable) {
+                continue;
+              }
+              const tableName = columnName.substr( 0, columnName.indexOf( '.' ) );
+              const cName = columnName.substr( columnName.indexOf( '.' ) + 1 );
               if (cName === filter.participantColumn.name && tableName === filter.participantColumn.tableAlias) {
-                if (result[ filter.participantColumn.tableAlias ] == null) {
-                  result[ filter.participantColumn.tableAlias ] = [];
+                if (result[filter.participantColumn.tableAlias] == null) {
+                  result[filter.participantColumn.tableAlias] = [];
                 }
-                result[ filter.participantColumn.tableAlias ].push(filter);
+                result[filter.participantColumn.tableAlias].push(filter);
                 found = true;
                 continue loop;
               }
@@ -292,16 +322,16 @@ export class Filter {
           } else if (columnName.includes('.')) {
             const tableName = columnName.substr(0, columnName.indexOf('.'));
             const cName = columnName.substr(columnName.indexOf('.') + 1);
-            if (allColumns[ tableName ] != null) {
+            if (allColumns[tableName] != null) {
               // eslint-disable-next-line  arrow-body-style
-              const f = allColumns[ tableName ].find(filter => {
+              const f = allColumns[tableName].find(filter => {
                 return filter.participantColumn.tableAlias === tableName && filter.participantColumn.name === cName;
               });
               if (f != null) {
-                if (result[ tableName ] == null) {
-                  result[ tableName ] = [];
+                if (result[tableName] == null) {
+                  result[tableName] = [];
                 }
-                result[ tableName ].push(f);
+                result[tableName].push(f);
                 found = true;
                 continue;
               }
@@ -320,12 +350,12 @@ export class Filter {
             // none profile columns (survey columns)
             if (!found && surveyNames != null && surveyColumns != null) {
               for (const survey of surveyNames) {
-                for (const col of surveyColumns[ survey ]) {
+                for (const col of surveyColumns[survey]) {
                   if (col.participantColumn.name === columnName) {
-                    if (result[ survey ] == null) {
-                      result[ survey ] = [];
+                    if (result[survey] == null) {
+                      result[survey] = [];
                     }
-                    result[ survey ].push(col);
+                    result[survey].push(col);
                     found = true;
                     continue loop;
                   }
@@ -335,12 +365,12 @@ export class Filter {
           }
         }
         for (const key of Object.keys(allColumns)) {
-          for (const filter of allColumns[ key ]) {
+          for (const filter of allColumns[key]) {
             if (filter.participantColumn.name === columnName && filter.participantColumn.tableAlias === tableAlias) {
-              if (result[ key ] == null) {
-                result[ key ] = [];
+              if (result[key] == null) {
+                result[key] = [];
               }
-              result[ key ].push(filter);
+              result[key].push(filter);
               continue loop;
             }
           }
@@ -376,7 +406,7 @@ export class Filter {
         filters.push(newFilter);
         continue;
       }
-      if (allColumns[ filter.participantColumn.tableAlias ] != null) {
+      if (allColumns[filter.participantColumn.tableAlias] != null) {
         // eslint-disable-next-line @typescript-eslint/no-shadow
         const f = allColumns[filter.participantColumn.tableAlias].find(item =>
           item.participantColumn.tableAlias === filter.participantColumn.tableAlias
@@ -414,7 +444,7 @@ export class Filter {
       } else {
         for (const source of Object.keys(allColumns)) {
           // eslint-disable-next-line @typescript-eslint/no-shadow
-          const f = allColumns[ source ].find(item => item.participantColumn.name === filter.participantColumn.name);
+          const f = allColumns[source].find(item => item.participantColumn.name === filter.participantColumn.name);
           if (f != null) {
             filter.type = f.type;
             filter.participantColumn = f.participantColumn;
@@ -524,13 +554,13 @@ export class Filter {
       }
     } else if (filter.type === Filter.OPTION_TYPE || filter.type === Filter.RADIO_TYPE) {
       const selected = [];
-      for (const [ key, value ] of Object.entries(filter.selectedOptions)) {
+      for (const [key, value] of Object.entries(filter.selectedOptions)) {
         if (value) {
           if (filter.participantColumn && filter.participantColumn.tableAlias && filter.participantColumn.tableAlias === 'participantData'
-              && filter.additionalType !== Filter.ACTIVITY_STAFF_TYPE) {
-            selected.push(filter.options[ key ].value);
+            && filter.additionalType !== Filter.ACTIVITY_STAFF_TYPE) {
+            selected.push(filter.options[key].value);
           } else {
-            selected.push(filter.options[ key ].name);
+            selected.push(filter.options[key].name);
           }
         }
       }
@@ -543,19 +573,19 @@ export class Filter {
         return null;
       }
     } else if (filter.type === Filter.ADDITIONAL_VALUE_TYPE) {
-      if (( filter.value1 ) || ( filter.empty || filter.notEmpty )) {
+      if ((filter.value1) || (filter.empty || filter.notEmpty)) {
         filterText = this.getFilterJson(parent,
           new NameValue('additionalValuesJson', filter.value1),
           filter.filter2, null,
           filter.exactMatch, filter.type, filter.range, filter.empty, filter.notEmpty, filter.participantColumn, filter.additionalType);
       } else if (filter.selectedOptions.length > 0) {
-        let selectedOptions = <Array<boolean>> filter.selectedOptions
+        let selectedOptions = <Array<boolean>>filter.selectedOptions
         let trueIndex = selectedOptions.indexOf(true);
         let chosenValue = filter.options[trueIndex].value;
-        filterText = this.getFilterJson( parent,
-          new NameValue( 'additionalValuesJson', chosenValue ),
+        filterText = this.getFilterJson(parent,
+          new NameValue('additionalValuesJson', chosenValue),
           filter.filter2, null,
-          filter.exactMatch, filter.type, filter.range, filter.empty, filter.notEmpty, filter.participantColumn, filter.additionalType );
+          filter.exactMatch, filter.type, filter.range, filter.empty, filter.notEmpty, filter.participantColumn, filter.additionalType);
       } else {
         return null;
       }
@@ -589,7 +619,7 @@ export class Filter {
       && filter.participantColumn.object !== undefined && filter.participantColumn.object !== null
     ) {
       // filterText[ "exactMatch" ] = true;
-      filterText[ 'parentName' ] = filter.participantColumn.object;
+      filterText['parentName'] = filter.participantColumn.object;
     }
     return filterText;
   }
@@ -629,16 +659,19 @@ export class Filter {
 
   public getSelectedOptionsName(): Array<string> {
     const selected = [];
-    for (const [ key, value ] of Object.entries(this.selectedOptions)) {
+    for (const [key, value] of Object.entries(this.selectedOptions)) {
       if (value) {
-        selected.push(this.options[ key ].name);
+        selected.push(this.options[key].name);
       }
     }
     return selected;
   }
 
-  public getSelectedOptionsBoolean(): Array<boolean> {
+  public getSelectedOptionsBoolean(selectedOptions?: any[]): Array<boolean> {
     const selected = [];
+    if (!this.options && selectedOptions) {
+      this.options = selectedOptions;
+    }
     if (this.selectedOptions != null && this.options != null) {
       for (const o of this.options) {
         selected.push(this.selectedOptions.includes(o.name));

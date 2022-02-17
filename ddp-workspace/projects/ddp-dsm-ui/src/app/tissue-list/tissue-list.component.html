@@ -302,12 +302,19 @@
                   {{value.data['ddp']}}
                 </td>
                 <td *ngFor="let col of selectedColumns['data']" [height]="40" (click)="getParticipant(value, 'oD')">
-                  <span *ngIf="col.participantColumn.object === null || col.participantColumn.object === undefined">
-                    <span *ngIf="col.type ==='DATE' || col.type === 'EPOCHDATE'">
-                    {{value.data[col.participantColumn.name] | dateFormatPipe}}
+                  <span *ngIf="col.participantColumn.tableAlias === 'p'">
+                    <span *ngIf="col.participantColumn.name.indexOf('assignee') !== -1">
+                      {{getAssigneeById(value.tissueList.participant[col.participantColumn.name])}}
+                    </span>
+                    {{value.tissueList.participant[col.participantColumn.name]}}
+                  </span>
+                  <ng-container *ngIf="col.participantColumn.tableAlias !== 'p'">
+                    <span *ngIf="col.participantColumn.object === null || col.participantColumn.object === undefined">
+                      <span *ngIf="col.type ==='DATE' || col.type === 'EPOCHDATE'">
+                      {{value.data[col.participantColumn.name] | dateFormatPipe}}
                       </span>
                     <span *ngIf="col.type !=='DATE' && col.type !== 'EPOCHDATE'">
-                    {{value.data[col.participantColumn.name]}}
+                      {{value.data[col.participantColumn.name]}}
                       </span>
                   </span>
                   <span
@@ -315,13 +322,14 @@
                   </span>
                   <span
                     *ngIf="col.participantColumn.object !== null && col.participantColumn.object !== undefined && value.data[col.participantColumn.object] !== undefined">
-                    <span *ngIf="col.type ==='DATE' || col.type === 'EPOCHDATE'">
+                      <span *ngIf="col.type ==='DATE' || col.type === 'EPOCHDATE'">
                     {{value.data[col.participantColumn.object][col.participantColumn.name] | dateFormatPipe}}
                       </span>
-                    <span *ngIf="col.type !=='DATE' && col.type !== 'EPOCHDATE'">
-                    {{value.data[col.participantColumn.object][col.participantColumn.name]}}
+                      <span *ngIf="col.type !=='DATE' && col.type !== 'EPOCHDATE'">
+                        {{value.data[col.participantColumn.object][col.participantColumn.name]}}
                     </span>
                   </span>
+                  </ng-container>
                 </td>
               </ng-container>
               <ng-container>

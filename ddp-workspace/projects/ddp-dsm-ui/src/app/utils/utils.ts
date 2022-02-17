@@ -244,7 +244,11 @@ export class Utils {
     if (columns != null) {
       if (o != null) {
         for (col of columns) {
-          if (col.type === 'ADDITIONALVALUE') {
+          if(!col.searchable){
+            const value = col.func(data,  activityDefinitionList);
+            str = str + '"' + value + '"' + ',';
+          }
+          else if (col.type === 'ADDITIONALVALUE') {
             const fieldName = 'additionalValuesJson';
             // TODO: check is it correct ? - `fieldName` is set on the previous line
             /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
@@ -752,6 +756,10 @@ export class Utils {
     return null;
   }
 
+  static getActivityDefinition( activities: ActivityDefinition[], activityCode: string, version: string ): ActivityDefinition{
+    return  activities.find( x => x.activityCode === activityCode && x.activityVersion === version );
+  }
+
   getAbstractionGroup(groups: Array<AbstractionGroup>, groupId: string): AbstractionGroup | undefined {
     return groups.find(x => x.abstractionGroupId.toString() === groupId);
   }
@@ -820,7 +828,12 @@ export class Utils {
 
   public static getCorrectTextAsAnswerForCSV( questionAnswer: QuestionAnswer, qDef: QuestionDefinition ): string[] {
     const answers = [];
-    for (let answer of questionAnswer.answer) {
+    let probableAnswer = questionAnswer.answer;
+    if (!(questionAnswer.answer instanceof Array)){
+      probableAnswer = [];
+      probableAnswer.push(questionAnswer.answer);
+    }
+    for (let answer of probableAnswer) {
       let text = answer;
       let activityAnswers = '';
       const ans = this.getAnswerGroupOrOptionText( answer, qDef );
