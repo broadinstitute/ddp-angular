@@ -27,21 +27,7 @@ import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
 import { ActivityPicklistQuestionBlock } from '../../models/activity/activityPicklistQuestionBlock';
 import { ActivityStrictMatchValidationRule } from './validators/activityStrictMatchValidationRule';
 import { ActivityUniqueValidationRule } from './validators/activityUniqueValidationRule';
-
-export enum ValidationRuleType {
-    Required = 'REQUIRED',
-    Complete = 'COMPLETE',
-    Length = 'LENGTH',
-    Regex = 'REGEX',
-    NumOptionsSelected = 'NUM_OPTIONS_SELECTED',
-    YearRequired = 'YEAR_REQUIRED',
-    MonthRequired = 'MONTH_REQUIRED',
-    DayRequired = 'DAY_REQUIRED',
-    DateRange = 'DATE_RANGE',
-    AgeRange = 'AGE_RANGE',
-    IntRange = 'INT_RANGE',
-    Unique = 'UNIQUE'
-}
+import { ValidationRuleType } from './validationRuleType';
 
 @Injectable()
 export class ActivityValidatorBuilder {
