@@ -12,6 +12,20 @@ a:not(.button) {
   border-bottom: none;
 }
 
+:host-context(app-header) {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 0;
+    z-index: 2;
+    padding-bottom: 50px;
+
+    .header {
+        padding-top: 30px;
+        background-color: white;
+        box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+    }
+}
+
 .header {
   font-family: Spartan-Bold, sans-serif;
   color: map-get($colors, 'header-color');
@@ -21,8 +35,6 @@ a:not(.button) {
       color: map-get($colors, 'header-color');
     }
   }
-  margin-top: 30px;
-  margin-bottom: 50px;
 
   .link {
     color: $__purple;

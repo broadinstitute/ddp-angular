@@ -56,24 +56,14 @@ export class Data {
     );
   }
 
-  public getGroupedOptionsForAnswer(activityData: ActivityData, name: string, questionAnswer: string): string[] {
-    const answers: Array<string> = [];
-    for (const x of this.activities) {
-      if (x.activityCode === activityData.activityCode) {
-        for (const y of x.questionsAnswers) {
-          if (y.stableId === name) {
-            for (const answer of y.answer) {
-              if (answer === questionAnswer) {
-                if (y.groupedOptions) {
-                  const ans = y.groupedOptions[ answer ];
-                  if (ans) {
-                    for (const a of ans) {
-                      answers.push( a );
-                    }
-                  }
-                }
-              }
-            }
+  public getGroupedOptionsForAnswer( questionAnswer: QuestionAnswer): string[]  {
+      const answers: Array<string> = [];
+      for (const answer of questionAnswer.answer) {
+        if (questionAnswer.groupedOptions) {
+          const ans = questionAnswer.groupedOptions[ answer ];
+          if (ans) {
+            for (const a of ans) {
+              answers.push( a );
           }
         }
       }
@@ -86,15 +76,13 @@ export class Data {
     return this.activities.find(x => x.activityCode === code);
   }
 
-  getMultipleAnswersForPickList(activityData: ActivityData, name: string): string[] {
-    const answers: Array<string> = [];
+  getMultipleAnswersForPickList(activityData: ActivityData, name: string): QuestionAnswer[] {
+    const answers: Array<QuestionAnswer> = [];
     for (const x of this.activities) {
       if (x.activityCode === activityData.activityCode) {
-        for (const y of x.questionsAnswers) {
-          if (y.stableId === name) {
-            for (const answer of y.answer) {
-              answers.push(answer);
-            }
+        for (const questionAnswer of x.questionsAnswers) {
+          if (questionAnswer.stableId === name) {
+            answers.push( questionAnswer );
           }
         }
       }

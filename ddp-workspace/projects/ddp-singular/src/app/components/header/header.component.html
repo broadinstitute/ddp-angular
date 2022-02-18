@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header" #header>
   <div class="container">
     <a class="header__logo" [routerLink]="Route.Home">
       <img
@@ -22,7 +22,7 @@
           </a>
         </li>
         <li class="link-list__item" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active">
-          <a class="link" href="https://www.additionalventures.org/project-singular-study-updates" target="_blank">
+          <a class="link" href="https://www.additionalventures.org/project-singular-study/study-updates/" target="_blank">
             {{ 'Header.Links.StudyProgress' | translate }}
           </a>
         </li>
