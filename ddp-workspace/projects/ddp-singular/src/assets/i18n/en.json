@@ -86,7 +86,7 @@
           {
             "Name": "How will Project Singular learn about single ventricle heart defects?",
             "Answers": [
-              "We will collect a saliva (spit) sample from people enrolled in this study. We will use these samples to look at DNA. We want to see if we can find the causes of single ventricle heart defects. If we can learn what causes single ventricle heart defects, we will be able develop better treatments.",
+              "We will collect a saliva (spit) sample from people enrolled in this study. We will use these samples to look at DNA. We want to see if we can find the causes of single ventricle heart defects. If we understand the causes, researchers may be able to develop new and better treatments.",
               "If you join, we will ask for your medical records to be shared with us. You will fill out a short survey to help us learn a bit more about you and your medical history. Your privacy is very important to us so we will store the information from your spit sample and medical records in a secure online location."
             ]
           },
@@ -121,19 +121,24 @@
             "Name": "Will I learn anything about any other conditions that may affect my (or my child’s) health?",
             "Answers": [
               "Maybe.  In this study, we want to understand the causes of single ventricle heart disease. To do this, we will look at every piece of your (or your child’s) DNA. When we do, we may find changes in the DNA. These changes may be linked to some other disease that is not single ventricle heart disease. These results are called “secondary findings.” This type of result is not common. Most people in this study will not have a result like this.",
-              "But we could find this result. If we do, and you have told us you want to know, we will contact you. We will make sure you want to know your result. Because this is a research study, we can’t promise a specific timeframe that we can send you the result.",
+              "But we could find this result. If we do, and you have told us you want to know, we will contact you. Because this is a research study, we can’t promise a specific timeframe that we can send you the result.",
               "Right now, we cannot return these secondary findings to those who live in Canada because of local and country guidelines.  If those guidelines change in the future to allow for return of these results, we will do so.",
-              "If you have one of these rare secondary findings and you have told us that you would want to know about it, we will connect you with our partner <a href=\"https://www.genomemedical.com/\" target=\"_blank\">Genome Medical</a>, who can arrange a second genetic test to confirm the finding. <a href=\"https://www.genomemedical.com/\" target=\"_blank\">Genome Medical</a> is a national full-service medical group that will coordinate your secondary testing and has board certified genetic counselors that you can speak to when you get your results. This second test is free of charge to you.",
+              "If you have one of these rare secondary findings and you have told us that you would want to know about it, we will connect you with our partner <a href=\"https://www.genomemedical.com/\" target=\"_blank\">Genome Medical</a>, who can arrange a second genetic test to confirm the finding. Genome Medical is a national full-service medical group that will coordinate your secondary testing and has board certified genetic counselors that you can speak to when you get your results. This second test is free of charge to you.",
               "If the finding is confirmed, the genetic counselor will work with you. They will answer your questions and help you understand what the finding means. They can also arrange for other family members to be tested free of charge. They will help you understand what the next steps are for you."
             ]
           },
           {
             "Name": "Why are family members of people with single ventricle disease asked to participate?",
             "Answers": [
-              "The causes of single ventricle heart disease are complex.  Looking at the DNA of patients’ family members may help. This may show changes that lead to single ventricle heart defects within the family. What we learn may help us find causes for single ventricle heart disease.  That might help develop better treatments.",
-              "<p>How many family members do you need to take part?<p><ul class=\"simple-list\"><li>The more DNA samples we have, the better. We would like patients and their close family members to join the study. But even one family member is helpful.</li></ul>"
-            ]
+              "The causes of single ventricle heart disease are complex.  Looking at the DNA of patients’ family members may help. This may show changes that lead to single ventricle heart defects within the family. What we learn may help us find causes for single ventricle heart disease.  That might help develop better treatments."
+              ]
           },
+            {
+                "Name": "How many family members do you need to take part?",
+                "Answers": [
+                    "The more DNA samples we have, the better. We would like many family members to join the study. But even one family member is helpful."
+                ]
+            },
           {
             "Name": "Who pays for Project Singular?",
             "Answers": [
@@ -143,7 +148,7 @@
           {
             "Name": "Will you contact me in the future?",
             "Answers": [
-              "<p>We may contact you in the future for:<p><ul class=\"simple-list\"><li>More information we may need for the study.</li><li>To invite you to take other surveys or studies.</li><li>To share information about the study progress and/or discoveries.</li></ul>"
+              "<p>We may contact you in the future for:<p><ul class=\"simple-list\"><li>More information we may need for the study.</li><li>To invite you to take part in other surveys or studies.</li><li>To share information about the study progress and/or discoveries.</li></ul>"
             ]
           },
           {
@@ -174,7 +179,7 @@
             "Name": "How do I mail back my saliva kit if I live in Canada?",
             "Answers": [
               "The kit will include a commercial invoice label. Put the label on the front of the box. It’s okay to cover up the logo.",
-              "Take the kit to any FedEx office or drop box. The kit already has a prepaid return label on the back of the box. All costs are will already be paid by the study. There is no cost to you to mail it back to us."
+              "Take the kit to any FedEx office or drop box. The kit already has a prepaid return label on the back of the box. All costs will already be paid by the study. There is no cost to you to mail it back to us."
             ]
           }
         ]
@@ -185,7 +190,7 @@
           {
             "Name": "What is DNA and why is it important?",
             "Answers": [
-              "We will study your spit so we can look at your cells. We want to read the DNA inside these cells. We can do this through gene sequencing. Genes are part of your DNA. Genes have instructions for how your body should work. Sometimes genes give instructions that make it more likely for us to get a certain disease.",
+              "We will study your spit so we can read the DNA inside your cells. We want to read the DNA inside these cells. We can do this through gene sequencing. Genes are part of your DNA. Genes have instructions for how your body should work. Sometimes genes give instructions that make it more likely for us to get a certain disease.",
               "Genetic research is the study of DNA. We want to find out which genes and things in a person’s environment might lead to disease. If we can find what causes diseases, we can find better ways to prevent, diagnose, and treat the diseases."
             ]
           },
@@ -214,7 +219,7 @@
             "Answers": [
               "Only approved study members on this study will have access to your identifiable information.",
               "We may share your de-identified information with other researchers.  This means they won’t be able to identify you.  It also means they can’t ask you if they can use your information in future studies.  You won’t get to choose if your information is used in these studies.",
-              "These researchers will be approved by a science review committee before granted access to your deidentified data. \n",
+              "These researchers will be approved by a science review committee before being granted access to your deidentified data. \n",
               "Some of these studies may be on diseases other than single ventricle heart disease. Some researchers may study ways to measure health.  They may want to see how health might change with certain treatments or care.  Some of these studies may be with for-profit companies for commercial uses.  These companies may try to develop new treatments.",
               "Researchers can’t attempt to identify you. They can't attempt to contact you. Outside researchers must sign an agreement with Project Singular. In it, they agree to only use the information for studies approved by the science review committee. "
             ]
@@ -242,11 +247,11 @@
       "Title": "About Single Ventricle Heart Defects",
       "P1": "Before a baby is born, the first organ to grow is the heart. In most hearts, there are four chambers. Two are atria. The other two are ventricles. In some people, one ventricle doesn’t grow fully. That ventricle may be smaller. Or it may not develop all the way. Or it may be missing an important piece. When any of these things happen it is called a single ventricle heart defect.",
       "Link": "Click here for a helpful video explaining single ventricle heart defects.",
-      "P2": "<p><b>There are many types of single ventricle heart defects. The most common are:</b></p><ul class=\"simple-list\"><li>Hypoplastic Left Heart Syndrome (HLHS)</li><li>Tricuspid Atresia</li><li>Double Inlet Left Ventricle (DILV)</li><li>Double Outlet Right Ventricle (DORV)</li><li>Single Left Ventricle</li><li>Pulmonary Atresia with Intact Ventricular<br /> Septum (PA-IVS)</li><li>Unbalanced Atrioventricular Canal</li></ul>",
+      "P2": "<p><b>There are many types of single ventricle heart defects. The most common are:</b></p><ul class=\"simple-list\"><li>Hypoplastic Left Heart Syndrome (HLHS)</li><li>Tricuspid Atresia</li><li>Double Inlet Left Ventricle (DILV)</li><li>Double Outlet Right Ventricle (DORV)</li><li>Hypoplastic Right Heart or Single Left Ventricle</li><li>Pulmonary Atresia with Intact Ventricular<br /> Septum (PA-IVS)</li><li>Unbalanced Atrioventricular Canal</li></ul>",
       "P3": "Scientists are trying to find out why some people’s hearts grow this way. But they don't have the full picture. We know that single ventricle heart defects are likely caused by more than one thing.  One cause may be in a person’s DNA. We want to learn more about the DNA of patients with single ventricle heart defects. We may find something in their DNA linked to these defects.",
       "P4": "Each patient is unique. But right now, most children with a single ventricle heart defect will need three stages of surgery. First, a Norwood or a shunt. Next, a Glenn procedure. And last, a Fontan procedure. These surgeries are done to make a new circulatory system. This allows blood to flow to all parts of the body and bring more oxygen to the lungs. But some patients end up with other health problems after surgery.",
       "P5": "Right now, there is no cure for single ventricle heart defects and there are other health issues that often develop in other parts of the body. Sometimes the person’s single ventricle can fail.  The best option right now for a failing single ventricle is a heart transplant. But there are a lot of people who need a heart transplant. And there are not enough hearts. Also, a heart transplant has many challenges. It requires lifelong treatment. This can affect quality of life. Also, transplanted organs have a limited lifespan. ",
-      "P6": "<span class=\"text-semibold\">We don’t know if Project Singular will lead to a cure. But we believe it will help us learn more. We hope to learn more about people with single ventricle and think that will lead to better treatments and medicines. And maybe one day, it could lead to a cure.</span>"
+      "P6": "<span class=\"text-semibold\">We don’t know if Project Singular will lead to a cure. But we believe it will help us learn more. We believe that knowledge will lead to better treatments and medicines. And maybe one day, it could lead to a cure</span>"
     }
   },
   "SDK": {
@@ -599,7 +604,7 @@
         {
           "ImageUrl": "assets/images/taylor-maclean.jpg",
           "Name": "Taylor MacLean, MS",
-          "About": "Program Manager, Project&nbsp;Singular, Additional Ventures"
+          "About": "Program Manager, <br/> Project&nbsp;Singular, <br/> Additional Ventures"
         }
       ]
     },
@@ -624,7 +629,7 @@
         {
           "ImageUrl": "assets/images/Sasha_circle_2x.png",
           "Name": "Sasha Opotowsky, MD",
-          "About": "Director, Adult Congenital <br/>Heart Disease <br/>Program Professor, University of Cincinnati Department of Pediatrics<br/>Co-Director, Fontan Outcomes Network"
+          "About": "Director, Adult Congenital <br/>Heart Disease Program <br/> Professor, University of Cincinnati Department of Pediatrics<br/>Co-Director, Fontan Outcomes Network"
         },
         {
           "ImageUrl": "assets/images/Jesse_circle_2x.png",
@@ -639,7 +644,7 @@
         {
           "ImageUrl": "assets/images/Kim_circle_2x.png",
           "Name": "Kim McBride, MD",
-          "About": "Investigator, Center for Cardiovascular Research at Nationwide Children's Hospital; Chief, Division of Genetic and Genomic Medicine, and Associate Professor in the Department of<br>Pediatrics at The Ohio State University College of Medicine"
+          "About": "Investigator, Center for Cardiovascular Research, Nationwide Children's Hospital; Chief, Division of Genetic and Genomic Medicine and Associate Professor, Department of Pediatrics, Ohio State University College of Medicine"
         },
         {
           "ImageUrl": "assets/images/Nadia_2x.png",

@@ -11,7 +11,7 @@ npm install
 ```
 ## Launch apps
 
-Don't forget to [render](../README.md/#rendering-pepperconfigjs-and-ddpconfigjs-files "rendering config") `ddpConfig.js/pepperConfig.js`.
+Don't forget to render `ddpConfig.js/pepperConfig.js`.
 
 Sample apps:
 ```
@@ -120,6 +120,17 @@ Run `ng test %app/library-name%` to execute the unit tests via [Karma](https://k
 ## Running end-to-end tests
 
 Run `ng e2e %app/library-name%` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Running unit tests in CircleCI on a specific branch
+
+Being in `ddp-angular` folder run the following script 
+
+`./build-utils/run_ci.sh run-tests [study_key] [branch_name] [target_env]`
+
+(e.g.: `./build-utils/run_ci.sh run-tests pancan some-branch dev`)
+
+to trigger the execution of all Angular tests in a PR branch
+(for the pointed project/study (study_key) and also ddp-sdk and toolkit as common libraries).
 
 ## Further help
 
