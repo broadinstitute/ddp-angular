@@ -304,11 +304,11 @@
     "ReviewButton": "View",
     "UploadButton": "Upload",
     "UserActivities": {
-      "ActivityName": "Form",
+      "ActivityName": "Title",
       "Summary": "Summary",
       "ActivityStatus": "Status",
       "ActivityDate": "Created",
-      "ActivityActions": "Actions",
+      "ActivityActions": "Action",
       "ActivityQuestionCount": "{{questionsAnswered}} / {{questionTotal}} questions"
     },
     "ValidateError": "Submission cannot proceed. Please review messages in form for details.",
