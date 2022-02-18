@@ -27,6 +27,7 @@ import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
 import { ActivityPicklistQuestionBlock } from '../../models/activity/activityPicklistQuestionBlock';
 import { ActivityStrictMatchValidationRule } from './validators/activityStrictMatchValidationRule';
 import { ActivityUniqueValidationRule } from './validators/activityUniqueValidationRule';
+import { ValidationRuleType } from './validationRuleType';
 
 @Injectable()
 export class ActivityValidatorBuilder {
@@ -37,20 +38,20 @@ export class ActivityValidatorBuilder {
         private dateService: DateService,
         private logger: LoggingService) {
         this.rules = [
-            { type: 'REQUIRED', factory: (x, y) => new ActivityRequiredValidationRule(y) },
-            { type: 'COMPLETE', factory: (x, y) => new ActivityCompleteValidationRule(y) },
-            { type: 'LENGTH', factory: (x, y) => this.buildLengthValidator(x, y) },
-            { type: 'REGEX', factory: (x, y) => new ActivityRegexValidationRule(y, x.regexPattern) },
-            { type: 'NUM_OPTIONS_SELECTED',
+            { type: ValidationRuleType.Required, factory: (x, y) => new ActivityRequiredValidationRule(y) },
+            { type: ValidationRuleType.Complete, factory: (x, y) => new ActivityCompleteValidationRule(y) },
+            { type: ValidationRuleType.Length, factory: (x, y) => this.buildLengthValidator(x, y) },
+            { type: ValidationRuleType.Regex, factory: (x, y) => new ActivityRegexValidationRule(y, x.regexPattern) },
+            { type: ValidationRuleType.NumOptionsSelected,
               factory: (x, y) => new ActivityOptionsAmountValidationRule(y, x.minSelections, x.maxSelections)
             },
-            { type: 'YEAR_REQUIRED', factory: (x, y) => new ActivityYearRequiredDateValidationRule(y) },
-            { type: 'MONTH_REQUIRED', factory: (x, y) => new ActivityMonthRequiredDateValidationRule(y) },
-            { type: 'DAY_REQUIRED', factory: (x, y) => new ActivityDayRequiredDateValidationRule(y) },
-            { type: 'DATE_RANGE', factory: (x, y) => this.buildDateRangeValidator(x, y) },
-            { type: 'AGE_RANGE', factory: (x, y) => this.buildAgeRangeValidator(x, y) },
-            { type: 'INT_RANGE', factory: (x, y) => this.buildNumericRangeValidator(x, y) },
-            { type: 'UNIQUE', factory: (x, y) => new ActivityUniqueValidationRule(y) },
+            { type: ValidationRuleType.YearRequired, factory: (x, y) => new ActivityYearRequiredDateValidationRule(y) },
+            { type: ValidationRuleType.MonthRequired, factory: (x, y) => new ActivityMonthRequiredDateValidationRule(y) },
+            { type: ValidationRuleType.DayRequired, factory: (x, y) => new ActivityDayRequiredDateValidationRule(y) },
+            { type: ValidationRuleType.DateRange, factory: (x, y) => this.buildDateRangeValidator(x, y) },
+            { type: ValidationRuleType.AgeRange, factory: (x, y) => this.buildAgeRangeValidator(x, y) },
+            { type: ValidationRuleType.IntRange, factory: (x, y) => this.buildNumericRangeValidator(x, y) },
+            { type: ValidationRuleType.Unique, factory: (x, y) => new ActivityUniqueValidationRule(y) },
         ];
     }
 
