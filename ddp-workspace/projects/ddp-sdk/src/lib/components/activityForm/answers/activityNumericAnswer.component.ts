@@ -100,7 +100,7 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
     //   "scale": 3     // the exponent of a decimal number
     // }
     private mapAnswerToPatchToServer(answerValue: string): NumericAnswerType | null {
-        if (answerValue === null) {
+        if (answerValue === null || answerValue === '') {
             return null;
         }
 
