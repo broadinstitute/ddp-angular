@@ -612,6 +612,7 @@
         "ReportButton": "Reportar",
         "NotAgreeButton": "Todavía no quiero aceptar",
         "ValidateError": "Por favor complete todos los campos requeridos.",
+        "CompletionError": "Ingrese la información del familiar anterior o elimine la entrada vacía",
         "CommunicationError": "Hubo un problema al guardar sus datos. Revise el formulario y sus respuestas antes de enviar todo.",
         "SignInOut": {
             "SignIn": "Iniciar Sesión",
