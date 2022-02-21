@@ -15,8 +15,11 @@ describe('DecimalHelper', () => {
         expect(DecimalHelper.isDecimalAnswerType(0)).toBeFalsy();
         expect(DecimalHelper.isDecimalAnswerType('some answer')).toBeFalsy();
         expect(DecimalHelper.isDecimalAnswerType({customProperty: 1})).toBeFalsy();
+        expect(DecimalHelper.isDecimalAnswerType({value: {}, scale: null})).toBeFalsy();
         expect(DecimalHelper.isDecimalAnswerType({value: -12})).toBeFalsy();
         expect(DecimalHelper.isDecimalAnswerType({scale: 5})).toBeFalsy();
-        expect(DecimalHelper.isDecimalAnswerType({value:457, scale: 5})).toBeTrue();
+
+        expect(DecimalHelper.isDecimalAnswerType({value: 457, scale: 5})).toBeTrue();
+        expect(DecimalHelper.isDecimalAnswerType({value: 0, scale: 0})).toBeTrue();
     });
 });

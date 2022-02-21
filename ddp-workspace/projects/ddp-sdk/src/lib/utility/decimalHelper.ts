@@ -1,4 +1,5 @@
 import { DecimalAnswer } from '../models/activity/decimalAnswer';
+import * as _ from 'underscore';
 
 export  class DecimalHelper {
     static mapDecimalAnswerToNumber(answer: DecimalAnswer ): number {
@@ -6,6 +7,6 @@ export  class DecimalHelper {
     }
 
     static isDecimalAnswerType(obj: any): boolean {
-        return obj?.value && !!obj.scale;
+        return obj && _.isNumber(obj.value) && _.isNumber(obj.scale);
     }
 }
