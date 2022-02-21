@@ -1,12 +1,14 @@
+import { ActivityRequiredValidationRule } from './activityRequiredValidationRule';
 import { ActivityTextQuestionBlock } from '../../../models/activity/activityTextQuestionBlock';
 import { ActivityPicklistQuestionBlock } from '../../../models/activity/activityPicklistQuestionBlock';
 import { DateField } from '../../../models/activity/dateField';
 import { ActivityDateQuestionBlock } from '../../../models/activity/activityDateQuestionBlock';
 import { ActivityAgreementQuestionBlock } from '../../../models/activity/activityAgreementQuestionBlock';
 import { ActivityQuestionBlock } from '../../../models/activity/activityQuestionBlock';
-import { ActivityRequiredValidationRule } from './activityRequiredValidationRule';
 import { ActivityCompositeQuestionBlock } from '../../../models/activity/activityCompositeQuestionBlock';
 import { ActivityBooleanQuestionBlock } from '../../../models/activity/activityBooleanQuestionBlock';
+import { ActivityNumericQuestionBlock } from '../../../models/activity/activityNumericQuestionBlock';
+import { ActivityDecimalQuestionBlock } from '../../../models/activity/activityDecimalQuestionBlock';
 
 let validator: ActivityRequiredValidationRule;
 const MESSAGE = 'This question is required!';
@@ -97,6 +99,28 @@ describe('ActivityRequiredValidationRule', () => {
         expect(validator.recalculate()).toBeFalsy();
         expect(validator.result).toBe(MESSAGE);
         question.answer = 'TEST';
+        expect(validator.recalculate()).toBeTruthy();
+    });
+
+    it('should test required rule for Numeric question', () => {
+        const question = new ActivityNumericQuestionBlock();
+        question.answer = null;
+        validator = new ActivityRequiredValidationRule(question);
+        validator.message = MESSAGE;
+        expect(validator.recalculate()).toBeFalsy();
+        expect(validator.result).toBe(MESSAGE);
+        question.answer = 152;
+        expect(validator.recalculate()).toBeTruthy();
+    });
+
+    it('should test required rule for Decimal question', () => {
+        const question = new ActivityDecimalQuestionBlock();
+        question.answer = null;
+        validator = new ActivityRequiredValidationRule(question);
+        validator.message = MESSAGE;
+        expect(validator.recalculate()).toBeFalsy();
+        expect(validator.result).toBe(MESSAGE);
+        question.answer = {value: 125, scale: 2};
         expect(validator.recalculate()).toBeTruthy();
     });
 
