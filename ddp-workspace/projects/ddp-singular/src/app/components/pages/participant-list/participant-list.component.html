@@ -71,6 +71,7 @@
               class="participant__expand-btn"
               [class.participant__expand-btn--rotate]="isParticipantContentExpanded(participant)"
             >
+                {{ isParticipantContentExpanded(participant) ? 'Hide' : 'Show' }}
               <mat-icon>expand_more</mat-icon>
             </button>
           </div>

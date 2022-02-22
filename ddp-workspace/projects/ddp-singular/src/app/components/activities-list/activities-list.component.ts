@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { ActivityInstance, ActivityStatusCodes } from 'ddp-sdk';
 import { ActivityCode } from '../../constants/activity-code';
+import {ActivityIcons} from "../../constants/activity-icons";
 
 @Component({
   selector: 'app-activities-list',
@@ -14,7 +15,7 @@ export class ActivitiesListComponent {
   @Output() continueActivity = new EventEmitter<ActivityInstance>();
   @Output() editActivity = new EventEmitter<ActivityInstance>();
   @Output() viewActivity = new EventEmitter<ActivityInstance>();
-  displayedColumns = ['activityName', 'activitySummary', 'activityCreatedAt', 'activityStatus', 'activityActions'];
+  displayedColumns = ['activityName', 'activitySummary', 'activityStatus', 'activityActions'];
   ActivityCode = ActivityCode;
   ActivityStatusCodes = ActivityStatusCodes;
 
@@ -36,6 +37,10 @@ export class ActivitiesListComponent {
 
   hasPreviousInstance(activity: ActivityInstance): boolean {
     return !!activity.previousInstanceGuid;
+  }
+
+  getStatusIcon(status: ActivityInstance) {
+      return ActivityIcons[this.getActivityStatusCode(status)]
   }
 
   getActivityStatusCode(activity: ActivityInstance): ActivityStatusCodes {

@@ -52,8 +52,8 @@
   &__item {
     margin: 0;
 
-    border: 1px solid #26355c;
-    border-radius: 8px;
+    border: 1.5px solid #D4D4D4;
+    border-radius: 1px;
     background-color: #f4efea;
 
     overflow: hidden;
@@ -76,11 +76,11 @@
 
     padding: 16px 24px;
 
-    border-bottom: 1px solid #26355c;
+    border-bottom: 1px solid #e8e8e8;
 
     cursor: pointer;
 
-    background: $__purple;
+    background: $__light-gray;
     color: $__white;
 
     @media (max-width: 768px) {
@@ -88,14 +88,20 @@
     }
   }
 
+    &__content {
+        background-color: white;
+    }
   &__name {
     margin-top: 5px;
-
+    color: black;
     font-family: 'Spartan-Bold', sans-serif;
   }
 
   &__expand-btn {
+      color:black;
+      font-weight: bold;
     mat-icon {
+        margin-top: 1px;
       transition: transform 0.2s ease;
     }
 
