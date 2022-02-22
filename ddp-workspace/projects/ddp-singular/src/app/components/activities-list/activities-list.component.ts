@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { ActivityInstance, ActivityStatusCodes } from 'ddp-sdk';
 import { ActivityCode } from '../../constants/activity-code';
-import {ActivityIcons} from "../../constants/activity-icons";
+import { ActivityIcons } from '../../constants/activity-icons';
 
 @Component({
   selector: 'app-activities-list',
@@ -39,8 +39,8 @@ export class ActivitiesListComponent {
     return !!activity.previousInstanceGuid;
   }
 
-  getStatusIcon(status: ActivityInstance) {
-      return ActivityIcons[this.getActivityStatusCode(status)]
+  getStatusIcon(status: ActivityInstance): ActivityIcons {
+      return ActivityIcons[this.getActivityStatusCode(status)];
   }
 
   getActivityStatusCode(activity: ActivityInstance): ActivityStatusCodes {
