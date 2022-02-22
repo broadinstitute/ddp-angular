@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
+import {ConfigurationService} from "ddp-sdk";
 import { SessionService } from './session.service';
 import { UserSetting } from '../user-setting/user-setting.model';
 
@@ -34,15 +35,16 @@ export class RoleService {
   private _userEmail: string;
   private _userSetting: UserSetting;
 
-  constructor(private sessionService: SessionService) {
+
+  constructor(private sessionService: SessionService,
+              @Inject('ddp.config') private config: ConfigurationService) {
     const token: string = this.sessionService.getDSMToken();
     this.setRoles(token);
   }
 
   public setRoles(token: string): void {
     if (token != null) {
-      const obj: any = this.sessionService.getDSMClaims(token);
-      const accessRoles: string = obj.USER_ACCESS_ROLE;
+      const accessRoles: string = this.getClaimByKeyName(token, 'USER_ACCESS_ROLE');
       if (accessRoles != null) {
         console.log(accessRoles);
         const roles: string[] = JSON.parse(accessRoles);
@@ -99,13 +101,13 @@ export class RoleService {
           }
         }
       }
-      const userSettings: any = obj.USER_SETTINGS;
+      const userSettings: any = this.getClaimByKeyName(token, 'USER_SETTINGS');
       if (userSettings != null && userSettings !== 'null') {
         this._userSetting = UserSetting.parse(JSON.parse(userSettings));
       }
-      this._userId = obj.USER_ID;
-      this._user = obj.USER_NAME;
-      this._userEmail = obj.USER_MAIL;
+      this._userId = this.getClaimByKeyName(token, 'USER_ID');
+      this._user = this.getClaimByKeyName(token, 'USER_NAME');
+      this._userEmail = this.getClaimByKeyName(token, 'USER_MAIL');
     }
   }
 
@@ -220,5 +222,9 @@ export class RoleService {
 
   public allowedToEditParticipant(): boolean {
     return this._isParticipantEdit;
+  }
+
+  private getClaimByKeyName( token: any, key: string ) {
+      return this.sessionService.getDSMClaims(token)[this.config.auth0ClaimNameSpace + key];
   }
 }

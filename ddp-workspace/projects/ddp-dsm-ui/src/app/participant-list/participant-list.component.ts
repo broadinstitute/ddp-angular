@@ -2321,6 +2321,6 @@ export class ParticipantListComponent implements OnInit {
 
   private sendAnalyticsMetric(): void {
     const passed = new Date().getTime() - this.start;
-    this.dsmService.sendAnalyticsMetric(this.getRealm(), passed).subscribe({});
+//    this.dsmService.sendAnalyticsMetric(this.getRealm(), passed).subscribe({});
   }
 }
