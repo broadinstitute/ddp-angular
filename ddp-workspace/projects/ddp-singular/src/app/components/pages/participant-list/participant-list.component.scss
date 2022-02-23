@@ -6,12 +6,11 @@
   display: flex;
   justify-content: center;
 
-  margin-top: 2.4rem;
+  margin: 8.39rem;
 }
 
 :host-context(app-participant-list) {
     background-color: $__cultured;
-    height: 100%;
 }
 
 .container {
