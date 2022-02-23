@@ -11,23 +11,16 @@
 
 :host-context(app-participant-list) {
     background-color: $__cultured;
+    height: 100%;
 }
 
 .container {
-  margin-bottom: 42px !important;
+  margin: 50px auto!important;
 }
 
 .grouper {
-    margin: 75px 400px 370px 100px;
-    @include media-md {
-        margin: 75px 300px 370px 100px;
-    }
-    @include media-sm {
-        margin: 75px 200px 370px 100px;
-    }
-    @include media-xs {
-        margin: 75px 50px 370px 100px;
-    }
+    width: 90%;
+    margin: 0 auto 370px auto;
 
 .title {
   margin: .7rem 0;
@@ -139,7 +132,7 @@
   margin-top: 1.6rem;
 
   .button {
-    width: 57%;
+    width: 35%;
     display: flex;
     padding: 15px 15px;
     align-items: center;

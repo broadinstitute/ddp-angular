@@ -16,13 +16,13 @@ a:not(.button) {
     position: -webkit-sticky !important;
     position: sticky !important;
     top: 0;
-    z-index: 2;
-    padding-bottom: 50px;
+    z-index: 20;
 
     .header {
         padding-top: 20px;
         background-color: white;
         box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+
     }
 }
 
