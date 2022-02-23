@@ -5,7 +5,7 @@ import { AnswerValue } from '../../models/activity/answerValue';
 import { AnswerSubmission } from '../../models/activity/answerSubmission';
 import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivityInstanceAnswerSubmission } from '../../models/activity/activityInstanceAnswerSubmission';
-import { Observable, Subject, BehaviorSubject, timer, merge } from 'rxjs';
+import { Observable, Subject, BehaviorSubject, timer, merge, EMPTY } from 'rxjs';
 import { concatMap, distinctUntilChanged, filter, map, mergeMap, retryWhen, scan, share, take } from 'rxjs/operators';
 import * as _ from 'underscore';
 
@@ -132,6 +132,9 @@ export class SubmissionManager implements OnDestroy {
                                     // Would have preferred to throw error, and have subscriber handle it in the error handler
                                     // but could not get the error
                                     this.answerSubmissionFailureSubject.next(submissionError);
+                                    if (submissionError?.status === 422) {
+                                        return EMPTY;
+                                    }
                                     throw submissionError;
                                 } else {
                                     this.answerSubmissionErrorSubject.next(submissionError);

@@ -30,6 +30,7 @@ import { LoggingService } from '../../services/logging.service';
 import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
 import { SearchParticipant } from '../../models/searchParticipant';
 import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/participantsSearchServiceAgent.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'ddp-activity',
@@ -48,7 +49,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     @ViewChild('subtitle', { static: false }) subtitle: ElementRef;
     @ViewChild('submitButton', { static: false }) submitButton;
 
-    public selectedUser$: Observable<SearchParticipant|null>;
+    public selectedUser$: Observable<SearchParticipant | null>;
     public currentSectionIndex = 0;
     public isScrolled = false;
     public communicationErrorOccurred = false;
@@ -77,7 +78,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         super(injector);
     }
 
-    @HostListener('window: scroll') public onWindowScroll(): void {
+    @HostListener('window: scroll')
+    public onWindowScroll(): void {
         const scrolledPixels = this.windowRef.nativeWindow.pageYOffset ||
             this.document.documentElement.scrollTop ||
             this.document.body.scrollTop || 0;
@@ -102,8 +104,11 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 this.communicationErrorOccurred = false;
             },
             error: (error) => {
-                this.logger.logError(this.LOG_SOURCE, 'There has been unexpected error:', error);
-                this.navigateToErrorPage();
+                if (error?.status !== 422) {
+                    console.log('ERROR:', error);
+                    this.logger.logError(this.LOG_SOURCE, 'There has been unexpected error:', error);
+                    this.navigateToErrorPage();
+                }
             }
         });
 
@@ -114,9 +119,13 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         });
 
         // Get notified of failure patching. Submission Manager has given up.
-        const subErrSub = this.submissionManager.answerSubmissionFailure$.subscribe((error) => {
-            this.logger.logError('ActivityComponent', 'There was an error during submission:', error);
-            return this.navigateToErrorPage();
+        const subErrSub = this.submissionManager.answerSubmissionFailure$.subscribe((error: Error | HttpErrorResponse) => {
+            if ((error as HttpErrorResponse).status === 422) {
+                this.addServerValidationMessagesToViolatedQuestions(error as HttpErrorResponse);
+            } else {
+                this.logger.logError('ActivityComponent', 'There was an error during submission:', error);
+                return this.navigateToErrorPage();
+            }
         });
 
         // if we are patching or an embedded component is busy, page is busy
@@ -338,8 +347,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     }
 
     private updateServerValidationMessages(response: PatchAnswerResponse): void {
-        const questionBlocks: AbstractActivityQuestionBlock[] = this.model.sections.reduce((allBlocks, section) =>
-            allBlocks.concat(section.blocks.filter(block => block.blockType === BlockType.Question)), []);
+        const questionBlocks = this.getQuestionBlocks();
 
         // We should clear server-side validations each time to prevent messages accumulating
         questionBlocks.forEach(qBlock => qBlock.serverValidationMessages = []);
@@ -399,5 +407,29 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     public updateIsAdminEditing(adminEditing: boolean): void {
         this.isAdminEditing = adminEditing;
         this.changeRef.detectChanges();
+    }
+
+    private addServerValidationMessagesToViolatedQuestions(error: HttpErrorResponse): void {
+        if (!error?.error?.violations) {
+            return;
+        }
+        const questionBlocks = this.getQuestionBlocks();
+        for (const violation of error.error.violations) {
+            const violatedQuestions = questionBlocks.filter(qBlock => qBlock.stableId === violation.stableId);
+            this.handleViolation(violatedQuestions, violation.rules);
+        }
+    }
+
+    private handleViolation(violatedQuestions: AbstractActivityQuestionBlock[], validationRules = []): void {
+        for (const violatedQuestion of violatedQuestions) {
+            validationRules.map(rule => rule.message)
+                .filter(Boolean)
+                .forEach(message => violatedQuestion.addServerValidationMessage(message));
+        }
+    }
+
+    private getQuestionBlocks(): AbstractActivityQuestionBlock[] {
+        return this.model.sections.reduce((allBlocks, section) =>
+            allBlocks.concat(section.blocks.filter(block => block.blockType === BlockType.Question)), []);
     }
 }
