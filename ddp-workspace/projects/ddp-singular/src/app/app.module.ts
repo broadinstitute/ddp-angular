@@ -34,7 +34,7 @@ import { ParticipantDeletionDialogComponent } from './components/participant-del
 import { ForResearchesComponent } from './components/pages/for-researches/for-researches.component';
 import { SuccessMessageComponent } from './components/success-message/success-message.component';
 import { SuccessMessageDialogComponent } from './components/success-message-dialog/success-message-dialog.component';
-import {NotificationsComponent} from "./components/notifications/notifications.component";
+import {NotificationsComponent} from './components/notifications/notifications.component';
 
 
 @NgModule({
