@@ -87,7 +87,7 @@
                     <span class="last-updated">{{model.lastUpdatedText}} </span>
                 </ng-container>
 
-                <div *ngIf="!hasNoEmptyNestedActivity" class="ErrorMessage">Please enter information for the family member above or remove the empty entry.</div>
+                <div *ngIf="!hasNoEmptyNestedActivity" class="ErrorMessage" translate>SDK.CompletionError</div>
 
                 <div class="activity-buttons" *ngIf="activityGuid"
                      [ngClass]="{'activity-buttons_mobile': (!isStepped || isLastStep) && isAgree() && isLoaded && !isReadonly()}">
