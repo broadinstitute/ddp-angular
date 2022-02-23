@@ -40,7 +40,8 @@
       {{ 'SDK.UserActivities.ActivityStatus' | translate }}
     </th>
     <td mat-cell *matCellDef="let activity" [attr.data-label]="'SDK.UserActivities.ActivityStatus' | translate">
-      {{ 'Activities.StatusCodes.' + getActivityStatusCode(activity) | translate }}
+        <ng-container *ngTemplateOutlet="statusIconTemplate; context: {statusIcon: getStatusIcon(activity)}" ></ng-container>
+        {{'Activities.StatusCodes.' + getActivityStatusCode(activity) | translate}}
     </td>
   </ng-container>
 
@@ -77,13 +78,13 @@
           <ng-container *ngTemplateOutlet="isActivityEditable(activity) ? update : view"></ng-container>
 
           <ng-template #update>
-            <button type="button" class="button button--primary button--sm" (click)="onEditClick(activity)">
+            <button type="button" class="button button--outline button--sm fixed-button" (click)="onEditClick(activity)">
               {{ (isMedicalRecordFileUpload(activity) ? 'SDK.UploadButton' : 'SDK.EditButton') | translate }}
             </button>
           </ng-template>
 
           <ng-template #view>
-            <button type="button" class="button button--outline button--sm" (click)="onViewClick(activity)">
+            <button type="button" class="button button--outline button--sm fixed-button" (click)="onViewClick(activity)">
               {{ 'SDK.ReviewButton' | translate }}
             </button>
           </ng-template>
@@ -95,3 +96,8 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
+
+<!--status icon template-->
+<ng-template #statusIconTemplate let-statusIconVar="statusIcon">
+    <img *ngIf="statusIconVar" [src]="statusIconVar" [alt]="statusIconVar"/>
+</ng-template>

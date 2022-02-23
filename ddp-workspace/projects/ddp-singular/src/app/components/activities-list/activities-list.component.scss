@@ -2,13 +2,29 @@
 
 
 .dashboard-table {
-  width: 100%;
+  margin: 0 auto;
+  width: 97%;
 }
 
 .mat-cell, .mat-header-cell {
   padding: 20px;
 
   font-size: 0.8rem;
+}
+
+.mat-column-activityStatus {
+    margin-left: 20px;
+    width: 20%;
+    img {
+        width: 10%;
+        margin-bottom: 2px;
+    }
+}
+
+
+.fixed-button {
+    width: 90px;
+    height: 43px;
 }
 
 @include media-sm {
