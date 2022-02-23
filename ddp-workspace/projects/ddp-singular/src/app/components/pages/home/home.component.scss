@@ -3,6 +3,7 @@
 
 :host {
   color: $__font;
+    margin-top: 50px;
 
   h1, h2 {
     font-family: Spartan-Bold, serif;
@@ -285,8 +286,7 @@
 
 .participating {
   margin-top: 100px;
-  padding: 40px 40px;
-  padding-bottom: 60px;
+  padding: 40px 40px 60px;
   background: rgba(162, 244, 233, 0.5);
   &-steps {
     display: flex;
@@ -295,14 +295,14 @@
       flex-direction: column;
     }
     &-step {
-      width: 31%;
+      width: 30%;
       display: flex;
       flex-direction: column;
       @include media-sm {
         width: unset;
         margin-bottom: 30px;
       }
-      padding: 30px 40px;
+      padding: 17px 40px 50px 40px;
       background: $__white;
       border-radius: 8px;
       p {
@@ -337,55 +337,54 @@
 }
 
 .privacy {
-    margin: 68px 125px;
-    padding: 0 27px 53px;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px inset $__gainsboro;
-    @include media-sm {
-        margin: 68px 0;
-    }
-    @include media-md {
-        margin: 68px 50px;
-    }
-    &-title {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        width: 18%;
-        @include media-sm {
-            flex-direction: column;
-            justify-content: center;
-            margin-right: 10px;
-        }
 
-        h1 {
-            font-size: 1rem;
-            margin: 0!important;
-            padding: 0!important;
+    .container {
+        display: flex;
+        padding: 60px 40px 40px!important;
+        justify-content: space-between;
+        border-bottom: 1px inset $__gainsboro;
+        .title {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 18%;
             @include media-sm {
-                font-size: .5em;
+                flex-direction: column;
+                justify-content: center;
+                margin-right: 10px;
             }
-            @include media-md {
-                font-size: .7em;
+
+            h1 {
+                font-size: 1.1rem;
+                margin: 0!important;
+                padding: 0!important;
+                color: $__black!important;
+                @include media-sm {
+                    font-size: .5em;
+                }
+                @include media-md {
+                    font-size: .7em;
+                }
+                @include media-xs {
+                    line-height: 2;
+                }
             }
-            @include media-xs {
-                line-height: 2;
+            img {
+                height: 20px;
+                margin-right: 13px;
+                margin-bottom: 5px;
+                color: $__black!important;
             }
         }
-        img {
-            height: 20px;
-            margin-right: 13px;
-            margin-bottom: 5px;
-        }
-    }
-    &-text {
-        width: 82%;
-        p {
-            margin: 0!important;
+        .text {
+            width: 82%;
+            p {
+                margin: 0!important;
+            }
         }
     }
 }
+
 .partners {
   h1 {
     margin-top: 70px!important;
