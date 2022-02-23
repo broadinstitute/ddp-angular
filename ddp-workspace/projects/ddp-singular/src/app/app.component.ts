@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef} from '@angular/core';
 
 
 @Component({
@@ -8,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ddp-singular';
+  constructor(private elRef: ElementRef) {}
+
+    onActivate() {
+        this.elRef.nativeElement.scrollTo(0,0)
+    }
 }
