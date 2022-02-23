@@ -350,15 +350,15 @@
                   <span *ngIf="col.participantColumn.name === 'request'  ">
                 <div class="btn-group">
                 <mat-select [(ngModel)]="value.tissueList.oncHistoryDetails[col.participantColumn.name]"
-                           (change)="onRequestChange(i)">
-                <mat-option value="review">Needs Review</mat-option>
-                <mat-option value="no">Don't Request</mat-option>
-                <mat-option value="hold">On Hold</mat-option>
-                <mat-option value="request">Request</mat-option>
-                <mat-option value="sent" disabled>Sent</mat-option>
-                <mat-option value="received" disabled>Received</mat-option>
-                <mat-option value="returned" disabled>Returned</mat-option>
-                <mat-option value="unableToObtain" disabled>Unable to Obtain</mat-option>
+                           (selectionChange)="onRequestChange(i)">
+                  <mat-option value="review">Needs Review</mat-option>
+                  <mat-option value="no">Don't Request</mat-option>
+                  <mat-option value="hold">On Hold</mat-option>
+                  <mat-option value="request">Request</mat-option>
+                  <mat-option value="sent" disabled>Sent</mat-option>
+                  <mat-option value="received" disabled>Received</mat-option>
+                  <mat-option value="returned" disabled>Returned</mat-option>
+                  <mat-option value="unableObtainTissue" disabled>Unable to Obtain</mat-option>
                 </mat-select>
                 </div>
                 </span>
@@ -451,15 +451,15 @@
                 <span *ngIf="col.participantColumn.name === 'request'  ">
         <div class="btn-group">
         <mat-select [(ngModel)]="value.tissueList.oncHistoryDetails[col.participantColumn.name]"
-                   (change)="onRequestChange(i)">
-        <mat-option value="review">Needs Review</mat-option>
-        <mat-option value="no">Don't Request</mat-option>
-        <mat-option value="hold">On Hold</mat-option>
-        <mat-option value="request">Request</mat-option>
-        <mat-option value="sent" disabled>Sent</mat-option>
-        <mat-option value="received" disabled>Received</mat-option>
-        <mat-option value="returned" disabled>Returned</mat-option>
-        <mat-option value="unableToObtain" disabled>Unable to Obtain</mat-option>
+                   (selectionChange)="onRequestChange(i)">
+          <mat-option value="review">Needs Review</mat-option>
+          <mat-option value="no">Don't Request</mat-option>
+          <mat-option value="hold">On Hold</mat-option>
+          <mat-option value="request">Request</mat-option>
+          <mat-option value="sent" disabled>Sent</mat-option>
+          <mat-option value="received" disabled>Received</mat-option>
+          <mat-option value="returned" disabled>Returned</mat-option>
+          <mat-option value="unableObtainTissue" disabled>Unable to Obtain</mat-option>
         </mat-select>
         </div>
         </span>
