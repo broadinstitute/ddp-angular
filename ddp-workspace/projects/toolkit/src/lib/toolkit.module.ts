@@ -95,6 +95,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { AppRedesignedBaseComponent } from './components/app/app-redesigned-base.component';
 
 @NgModule({
     imports: [
@@ -184,7 +185,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
         PrionPrivacyPolicyComponent,
         ModalActivityButtonComponent,
         ModalActivityComponent,
-        ThankYouFamilyHistoryComponent
+        ThankYouFamilyHistoryComponent,
+        AppRedesignedBaseComponent
     ],
     exports: [
         FooterComponent,
@@ -227,7 +229,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
         CommonLandingRedesignedComponent,
         CookiesBannerComponent,
         PrionPrivacyPolicyComponent,
-        ThankYouFamilyHistoryComponent
+        ThankYouFamilyHistoryComponent,
+        AppRedesignedBaseComponent
     ]
 })
 export class ToolkitModule {
