@@ -205,6 +205,8 @@ export class ActivityQuestionConverter {
                 textBlock.regexPattern = validation.regexPattern;
             }
         });
+        textBlock.hasUniqueValueValidator = !!questionJson.validations
+            .find(validation => validation.rule === ValidationRuleType.UniqueValue);
         textBlock.confirmEntry = questionJson.confirmEntry;
         textBlock.confirmPrompt = questionJson.confirmPrompt;
         textBlock.confirmPlaceholder = questionJson.confirmPlaceholderText;
