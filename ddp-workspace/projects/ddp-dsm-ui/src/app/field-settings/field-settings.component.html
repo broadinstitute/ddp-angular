@@ -44,9 +44,6 @@
         </tr>
         <tr>
           <th>
-            Variable Name
-          </th>
-          <th>
             Display Name
           </th>
           <th>
@@ -62,19 +59,6 @@
         <tbody>
         <ng-container *ngFor="let setting of mf.data; let i = index">
           <tr class="settings_container">
-            <td>
-              <ng-container *ngIf="setting.addedNew">
-                <mat-form-field class="Input">
-                  <input matInput class="Width--100" maxlength="45" [(ngModel)]="setting.columnName"
-                         (change)="checkColName(i); onChange(i)" autocomplete="off">
-                  <mat-hint class="ErrorMessageForm" *ngIf="setting.notUniqueError">Name not unique</mat-hint>
-                  <mat-hint class="ErrorMessageForm" *ngIf="setting.spaceError">No space allowed</mat-hint>
-                </mat-form-field>
-              </ng-container>
-              <ng-container *ngIf="!setting.addedNew">
-                {{setting.columnName}}
-              </ng-container>
-            </td>
             <td>
               <mat-form-field>
                 <input matInput type="text" [(ngModel)]="setting.columnDisplay" (change)="onChange(i)"

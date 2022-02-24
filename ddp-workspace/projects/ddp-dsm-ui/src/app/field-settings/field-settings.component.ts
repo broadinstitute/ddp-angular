@@ -1,18 +1,18 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FieldSettings } from './field-settings.model';
-import { ActivatedRoute } from '@angular/router';
-import { ComponentService } from '../services/component.service';
-import { DSMService } from '../services/dsm.service';
-import { RoleService } from '../services/role.service';
-import { Auth } from '../services/auth.service';
-import { Statics } from '../utils/statics';
-import { FieldType } from './field-type.model';
-import { Value } from '../utils/value.model';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {FieldSettings} from './model/field-settings.model';
+import {ActivatedRoute} from '@angular/router';
+import {ComponentService} from '../services/component.service';
+import {DSMService} from '../services/dsm.service';
+import {RoleService} from '../services/role.service';
+import {Auth} from '../services/auth.service';
+import {Statics} from '../utils/statics';
+import {FieldType} from './model/field-type.model';
+import {Value} from '../utils/value.model';
 
 @Component({
   selector: 'app-field-settings',
   templateUrl: './field-settings.component.html',
-  styleUrls: [ './field-settings.component.css' ]
+  styleUrls: ['./field-settings.component.css']
 })
 export class FieldSettingsComponent implements OnInit {
   errorMessage: string;
@@ -36,12 +36,12 @@ export class FieldSettingsComponent implements OnInit {
   ];
 
   constructor(private _changeDetectionRef: ChangeDetectorRef, private dsmService: DSMService, private auth: Auth,
-               private role: RoleService, private compService: ComponentService, private route: ActivatedRoute) {
+              private role: RoleService, private compService: ComponentService, private route: ActivatedRoute) {
     if (!auth.authenticated()) {
       auth.logout();
     }
     this.route.queryParams.subscribe(params => {
-      this.realm = params[ DSMService.REALM ] || null;
+      this.realm = params[DSMService.REALM] || null;
       if (this.realm != null) {
         //        this.compService.realmMenu = this.realm;
         for (const posType of this.possibleTypes) {
@@ -114,7 +114,7 @@ export class FieldSettingsComponent implements OnInit {
         this.settingsOfSelectedType.push(setting);
       }
     }
-    const newSetting: FieldSettings = new FieldSettings(null, null, null, this.selectedType.name,
+    const newSetting: FieldSettings = new FieldSettings(null, null, null, this.selectedType.tableAlias,
       null, null, 1, null, null);
     newSetting.addedNew = true;
     this.settingsOfSelectedType.push(newSetting);
@@ -129,7 +129,7 @@ export class FieldSettingsComponent implements OnInit {
         this.fieldSettings = new Map<string, Array<FieldSettings>>();
         jsonData = data;
 
-        for (const [ key, value ] of Object.entries(jsonData)) {
+        for (const [key, value] of Object.entries(jsonData)) {
           const type = this.possibleTypes.find(x => x.tableAlias === key);
           for (const setting of value) {
             const event = FieldSettings.parse(setting);
@@ -144,7 +144,7 @@ export class FieldSettingsComponent implements OnInit {
               this.settingsOfSelectedType.push(setting);
             }
           }
-          const newSetting: FieldSettings = new FieldSettings(null, null, null, this.selectedType.name,
+          const newSetting: FieldSettings = new FieldSettings(null, null, null, this.selectedType.tableAlias,
             null, null, 1, null, null);
           newSetting.addedNew = true;
           this.settingsOfSelectedType.push(newSetting);
@@ -166,45 +166,33 @@ export class FieldSettingsComponent implements OnInit {
   saveFieldSettings(): void {
     if (this.realm != null) {
       this.saving = true;
-      let foundError = false;
-      let cleanedFieldSettings: Array<FieldSettings>;
-      if (this.settingsOfSelectedType != null && this.settingsOfSelectedType.length > 0) {
-        cleanedFieldSettings = FieldSettings.removeUnchangedFieldSettings(this.settingsOfSelectedType, this.selectedType);
-        for (const setting of cleanedFieldSettings) {
-          if (setting.notUniqueError || setting.spaceError) {
-            foundError = true;
-          }
-        }
-      } else {
-        cleanedFieldSettings = null;
-      }
-      if (foundError) {
-        this.additionalMessage = 'Please fix errors first!';
-      } else if (cleanedFieldSettings === null) {
-        this.additionalMessage = 'Nothing to save!';
-      } else {
-        // Create an object that JSON can convert better...
-        const updatedFieldSettings: object = {};
-        updatedFieldSettings[ this.selectedType.tableAlias ] = cleanedFieldSettings;
+      // let cleanedFieldSettings: Array<FieldSettings>;
+      // if (this.settingsOfSelectedType != null && this.settingsOfSelectedType.length > 0) {
+      //   cleanedFieldSettings = FieldSettings.removeUnchangedFieldSettings(this.settingsOfSelectedType, this.selectedType);
+      // } else {
+      //   cleanedFieldSettings = null;
+      // }
+      // Create an object that JSON can convert better...
+      const updatedFieldSettings: object = {};
+      updatedFieldSettings[this.selectedType.tableAlias] = this.settingsOfSelectedType;
 
-        this.dsmService.saveFieldSettings(this.realm, JSON.stringify(updatedFieldSettings)).subscribe({
-          next: data => {
-            this.loadFieldSettings();
-            if (data.hasOwnProperty('code') && data[ 'code' ] !== 200) {
-              this.additionalMessage = 'Error - Saving field settings\nPlease contact your DSM developer';
-            } else {
-              this.additionalMessage = 'Data saved';
-            }
-          },
-          error: err => {
-            if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.auth.logout();
-              this.loading = false;
-            }
-            this.additionalMessage = JSON.parse(err._body).body;
+      this.dsmService.saveFieldSettings(this.realm, JSON.stringify(updatedFieldSettings)).subscribe({
+        next: data => {
+          this.loadFieldSettings();
+          if (data.hasOwnProperty('code') && data['code'] !== 200) {
+            this.additionalMessage = 'Error - Saving field settings\nPlease contact your DSM developer';
+          } else {
+            this.additionalMessage = 'Data saved';
           }
-        });
-      }
+        },
+        error: err => {
+          if (err._body === Auth.AUTHENTICATION_ERROR) {
+            this.auth.logout();
+            this.loading = false;
+          }
+          this.additionalMessage = JSON.parse(err._body).body;
+        }
+      });
 
       this.saving = false;
       window.scrollTo(0, 0);
@@ -212,7 +200,7 @@ export class FieldSettingsComponent implements OnInit {
   }
 
   onDisplayTypeChange(index: number): void {
-    const setting: FieldSettings = this.settingsOfSelectedType[ index ];
+    const setting: FieldSettings = this.settingsOfSelectedType[index];
     setting.possibleValues = [];
     setting.possibleValues.push(new Value(null));
 
@@ -221,8 +209,8 @@ export class FieldSettingsComponent implements OnInit {
   }
 
   onChange(index: number): void {
-    this.settingsOfSelectedType[ index ].changedBy = this.role.userMail();
-    this.settingsOfSelectedType[ index ].changed = true;
+    this.settingsOfSelectedType[index].changedBy = this.role.userMail();
+    this.settingsOfSelectedType[index].changed = true;
     if (index === this.settingsOfSelectedType.length - 1) {
       this.addNewFieldSetting();
     }
@@ -230,7 +218,6 @@ export class FieldSettingsComponent implements OnInit {
 
   addNewFieldSetting(): void {
     const fieldSetting: FieldSettings = new FieldSettings(null, null, null, this.selectedType.name, null, null, 1, null, null);
-    fieldSetting.addedNew = true;
     this.settingsOfSelectedType.push(fieldSetting);
   }
 
@@ -242,21 +229,8 @@ export class FieldSettingsComponent implements OnInit {
   }
 
   deleteFieldSetting(index: number): void {
-    this.settingsOfSelectedType[ index ].deleted = true;
+    this.settingsOfSelectedType[index].deleted = true;
     this.onChange(index);
     this.saveFieldSettings();
-  }
-
-  checkColName(index: number): void {
-    const setting: FieldSettings = this.settingsOfSelectedType[ index ];
-    setting.notUniqueError = false;
-    setting.spaceError = setting.columnName.indexOf(' ') > -1;
-    for (let i = 0; i < this.settingsOfSelectedType.length; i++) {
-      if (i !== index) {
-        if (this.settingsOfSelectedType[ i ].columnName === setting.columnName) {
-          setting.notUniqueError = true;
-        }
-      }
-    }
   }
 }

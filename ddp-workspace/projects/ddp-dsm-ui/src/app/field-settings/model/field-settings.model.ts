@@ -1,5 +1,5 @@
-import { Value } from '../utils/value.model';
-import { FieldType } from './field-type.model';
+import {Value} from '../../utils/value.model';
+import {FieldType} from './field-type.model';
 
 export class FieldSettings {
   changed = false;
@@ -7,9 +7,6 @@ export class FieldSettings {
   changedBy: string;
 
   addedNew = false;
-
-  notUniqueError = false;
-  spaceError = false;
 
   constructor(public fieldSettingId: string, public columnName: string, public columnDisplay: string, public fieldType: string,
               public displayType: string, public possibleValues: Value[], public orderNumber: number, public actions: Value[],
