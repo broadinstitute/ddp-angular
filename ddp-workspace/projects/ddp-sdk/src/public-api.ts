@@ -32,7 +32,6 @@ export * from './lib/models/activity/activityGroupBlock';
 export * from './lib/models/activity/activityContentBlock';
 export * from './lib/models/activity/conditionalBlock';
 export * from './lib/models/activity/MailAddressBlock';
-export * from './lib/models/activity/numericType';
 export * from './lib/models/activity/textSuggestion';
 export * from './lib/models/activity/activityForm';
 export * from './lib/models/activity/createActivityInstanceResponse';

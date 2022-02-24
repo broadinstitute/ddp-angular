@@ -127,10 +127,6 @@ export class DrugListComponent implements OnInit {
   patch(patch: any): void {
     this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
       next: data => {
-        const result = Result.parse(data);
-        if (result.code !== 200) {
-          this.additionalMessage = 'Error - Saving Drug\nPlease contact your DSM developer';
-        }
         this.patchFinished = true;
         this.currentPatchField = null;
         this.currentPatchFieldRow = null;

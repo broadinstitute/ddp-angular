@@ -16,13 +16,13 @@ a:not(.button) {
     position: -webkit-sticky !important;
     position: sticky !important;
     top: 0;
-    z-index: 2;
-    padding-bottom: 50px;
+    z-index: 20;
 
     .header {
-        padding-top: 30px;
+        padding-top: 20px;
         background-color: white;
         box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+
     }
 }
 
@@ -59,7 +59,9 @@ a:not(.button) {
 
   &__logo {
     height: 100px;
-
+    margin-bottom: 13px;
+      display: flex;
+      align-items: start;
     @media (max-width: 1280px) {
       height: 80px;
     }
@@ -69,18 +71,22 @@ a:not(.button) {
     }
 
     @include media-sm {
-      height: 3.2rem;
+      height: 56px;
+        @supports (-webkit-appearance:none) {
+            width: 181.68px;
+        }
     }
 
     @include media-xs {
       height: 2.8rem;
+        @supports (-webkit-appearance:none) {
+            width: 126.18px;
+        }
     }
   }
 
   &__logo-img {
     height: 100%;
-    position: relative;
-    top: -13px;
   }
 
   &__nav {

@@ -43,7 +43,7 @@
           <mat-select *ngIf="field.type2 === options"
                      [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently(field.value, i)}"
                      [(ngModel)]="row[field.value]" [disabled]="disabled"
-                     (change)="multiTypeValueChanged($event, row, field.value, field, i); ">
+                     (selectionChange)="multiTypeValueChanged($event, row, field.value, field, i); ">
             <mat-option *ngFor="let drug of drugs" [value]="drug">
               {{drug}}
             </mat-option>
@@ -52,7 +52,7 @@
           <mat-select *ngIf="field.type2 === multiOptions"
                      [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently(field.value, i)}"
                      [(ngModel)]="row[field.value]" [disabled]="disabled"
-                     (change)="multiTypeValueChanged($event, row, field.value, field, i)" multiple>
+                     (selectionChange)="multiTypeValueChanged($event, row, field.value, field, i)" multiple>
             <mat-option *ngFor="let drug of drugs" [value]="drug" >
               {{drug}}
             </mat-option>
@@ -68,7 +68,7 @@
           <mat-select *ngIf="field.type2 === options"
                      [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently(field.value, i)}"
                      [(ngModel)]="row[field.value]" [disabled]="disabled"
-                     (change)="multiTypeValueChanged($event, row, field.value, field, i)">
+                     (selectionChange)="multiTypeValueChanged($event, row, field.value, field, i)">
             <mat-option *ngFor="let cancer of cancers" [value]="cancer">
               {{cancer}}
             </mat-option>
@@ -77,7 +77,7 @@
           <mat-select *ngIf="field.type2 === multiOptions"
                      [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently(field.value, i)}"
                      [(ngModel)]="row[field.value]" [disabled]="disabled"
-                     (change)="multiTypeValueChanged($event, row, field.value, field, i)" multiple>
+                     (selectionChange)="multiTypeValueChanged($event, row, field.value, field, i)" multiple>
             <mat-option *ngFor="let cancer of cancers" [value]="cancer" >
               {{cancer}}
             </mat-option>
@@ -129,7 +129,7 @@
         <mat-select *ngIf="field.type === options"
                    [ngClass]="{'TD--Padding-Top': true, 'Input': true, 'Color--Field--Patched': isPatchedCurrently(field.value, i)}"
                    [(ngModel)]="row[field.value]" [disabled]="disabled"
-                   (change)="multiTypeValueChanged($event, row, field.value, field, i)">
+                   (selectionChange)="multiTypeValueChanged($event, row, field.value, field, i)">
           <mat-option *ngFor="let noName of field.values" [value]="noName.value">
             {{noName.value}}
           </mat-option>
@@ -139,7 +139,7 @@
         <mat-select *ngIf="field.type === multiOptions"
                    [ngClass]="{'TD--Padding-Top': true, 'Input': true, 'Color--Field--Patched': isPatchedCurrently(field.value, i)}"
                    [(ngModel)]="row[field.value]" [disabled]="disabled"
-                   (change)="multiTypeValueChanged($event, row, field.value, field, i)" multiple>
+                   (selectionChange)="multiTypeValueChanged($event, row, field.value, field, i)" multiple>
           <mat-option *ngFor="let noName of field.values" [value]="noName.value">
             {{noName.value}}
           </mat-option>

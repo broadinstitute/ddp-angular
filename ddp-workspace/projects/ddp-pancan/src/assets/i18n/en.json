@@ -614,6 +614,7 @@
         "ReportButton": "Report",
         "NotAgreeButton": "I'm not ready to agree",
         "ValidateError": "Please complete all required fields.",
+        "CompletionError": "Please enter information for the family member above or remove the empty entry.",
         "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting.",
         "SignInOut": {
             "SignIn": "Log In",

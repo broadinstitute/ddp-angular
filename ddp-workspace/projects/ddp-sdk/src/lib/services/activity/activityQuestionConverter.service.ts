@@ -23,6 +23,8 @@ import { ActivityMatrixQuestionBlock } from '../../models/activity/activityMatri
 import * as _ from 'underscore';
 import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
 import { ActivityInstanceSelectQuestionBlock } from '../../models/activity/activityInstanceSelectQuestionBlock';
+import { ActivityDecimalQuestionBlock } from '../../models/activity/activityDecimalQuestionBlock';
+import { ValidationRuleType } from './validationRuleType';
 
 const DETAIL_MAXLENGTH = 500;
 
@@ -146,6 +148,10 @@ export class ActivityQuestionConverter {
                 func: (questionJson) => this.getNumericBlock(questionJson)
             },
             {
+                type: QuestionType.Decimal,
+                func: (questionJson) => this.getDecimalBlock(questionJson)
+            },
+            {
                 type: QuestionType.Picklist,
                 func: (questionJson) => this.getPicklistBlock(questionJson)
             },
@@ -211,16 +217,22 @@ export class ActivityQuestionConverter {
     private getNumericBlock(questionJson: any): ActivityNumericQuestionBlock {
         const numericBlock = new ActivityNumericQuestionBlock();
         numericBlock.placeholder = questionJson.placeholderText;
-        numericBlock.numericType = questionJson.numericType;
-        questionJson.validations.forEach(validation => {
-            if (_.isNumber(validation.min)) {
-                numericBlock.min = validation.min;
-            }
-            if (_.isNumber(validation.max)) {
-                numericBlock.max = validation.max;
-            }
-        });
+        const intRangeValidation = questionJson.validations.find(validation => validation.rule === ValidationRuleType.IntRange);
+        if (intRangeValidation) {
+            numericBlock.min = intRangeValidation.min || null;
+            numericBlock.max = intRangeValidation.max || null;
+        }
         return numericBlock;
+    }
+
+    private getDecimalBlock(questionJson: any): ActivityDecimalQuestionBlock {
+        const decimalBlock = new ActivityDecimalQuestionBlock();
+        decimalBlock.placeholder = questionJson.placeholderText;
+        if (questionJson.scale) {
+            decimalBlock.scale = questionJson.scale;
+        }
+        // TODO: add min/max from ValidationRuleType.DecimalRange (in scope of DDP-7573)
+        return decimalBlock;
     }
 
     private getPicklistBlock(questionJson: any): ActivityPicklistQuestionBlock {

@@ -292,13 +292,12 @@ export class AbstractionFieldComponent implements OnInit {
               if (putOtherBack) {
                 this.setOtherOptionText();
               }
-              if (result.body != null && result.body !== '') {
-                const jsonData: any | any[] = JSON.parse(result.body);
-                if (jsonData.primaryKeyId !== undefined && jsonData.primaryKeyId !== '') {
-                  field.fieldValue.primaryKeyId = jsonData.primaryKeyId;
+              if (data) {
+                if (data['primaryKeyId']) {
+                  field.fieldValue.primaryKeyId = data['primaryKeyId'];
                 }
-                if (jsonData instanceof Array) {
-                  jsonData.forEach((val) => {
+                if (data instanceof Array) {
+                  data.forEach((val) => {
                     const nameValue = NameValue.parse(val);
                     if (fieldName === 'question') {
                       this.field.fieldValue.question = nameValue.value;
@@ -342,13 +341,9 @@ export class AbstractionFieldComponent implements OnInit {
     };
     this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({// need to subscribe, otherwise it will not send!
       next: data => {
-        const result = Result.parse(data);
-        if (result.code === 200) {
-          if (result.body != null && result.body !== '') {
-            const jsonData: any | any[] = JSON.parse(result.body);
-            if (jsonData.primaryKeyId !== undefined && jsonData.primaryKeyId !== '') {
-              field.fieldValue.primaryKeyId = jsonData.primaryKeyId;
-            }
+      if (data) {
+        if (data['primaryKeyId']) {
+          field.fieldValue.primaryKeyId = data['primaryKeyId'];
           }
         }
       },

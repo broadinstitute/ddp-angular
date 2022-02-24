@@ -1,0 +1,40 @@
+.announcement {
+  padding: 1.2rem 2.4rem;
+  width: 66%;
+  margin: 15px auto 40px;
+  border: 2.3px solid #b1d8d2;
+  border-radius: 6px;
+  background-color: #e4fbf8;
+
+  position: relative;
+
+  .close-button {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    cursor: pointer;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+
+    color: #000000!important;
+
+      mat-icon {
+          opacity: 1;
+          color: #000000!important;
+      }
+
+  }
+
+  .content {
+    padding: 0;
+      h1 {
+          font-size: 1rem;
+            font-weight: bold;
+      }
+      div {
+          font-weight: 500;
+      }
+  }
+}
+
