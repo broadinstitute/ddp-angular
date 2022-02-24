@@ -54,6 +54,7 @@ export class DSMService {
       url += 'finalScan';
     }
     const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: localStorage.getItem(ComponentService.MENU_SELECTED_REALM)} );
     map.push({name: 'userId', value: this.role.userID()});
     return this.http.post(url, json, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
@@ -63,6 +64,7 @@ export class DSMService {
   public setKitReceivedRequest(json: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'receivedKits';
     const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: localStorage.getItem(ComponentService.MENU_SELECTED_REALM)} );
     map.push({name: 'userId', value: this.role.userID()});
     return this.http.post(url, json, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
@@ -87,6 +89,7 @@ export class DSMService {
     const url = this.baseUrl + DSMService.UI + 'sentKits';
     const map: { name: string; value: any }[] = [];
     map.push({name: 'userId', value: this.role.userID()});
+    map.push( {name: DSMService.REALM, value: localStorage.getItem(ComponentService.MENU_SELECTED_REALM)} );
     return this.http.post(url, json, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );
@@ -116,7 +119,7 @@ export class DSMService {
     const userId = this.role.userID();
     map.push({name: DSMService.REALM, value: realm});
     map.push({name: 'userId', value: userId});
-    map.push({name: 'parent', value: parent});
+    if (parent) map.push( {name: "parent", value: parent} );
     return this.http.get(url, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );
@@ -583,6 +586,7 @@ export class DSMService {
   public singleKitLabel(kitJson: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'kitLabel';
     const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: localStorage.getItem(ComponentService.MENU_SELECTED_REALM)} );
     map.push({name: 'userId', value: this.role.userID()});
     return this.http.post(url, kitJson, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError)

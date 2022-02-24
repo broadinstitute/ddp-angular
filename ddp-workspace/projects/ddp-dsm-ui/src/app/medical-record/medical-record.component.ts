@@ -130,7 +130,7 @@ export class MedicalRecordComponent implements OnInit {
 
   valueChanged(value: any, parameterName: string): void {
     let v;
-    if (parameterName === 'additionalValues') {
+    if (parameterName === 'additionalValuesJson') {
       v = JSON.stringify(value);
     } else if (typeof value === 'string') {
       if (parameterName !== 'followUps') {
@@ -161,16 +161,12 @@ export class MedicalRecordComponent implements OnInit {
       }
       this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
         next: data => {
-          const result = Result.parse(data);
-          if (result.code === 200) {
-            if (result.body != null) {
-              const jsonData: any | any[] = JSON.parse(result.body);
-              if (jsonData instanceof Array) {
-                jsonData.forEach((val) => {
+          if (data) {
+          if (data instanceof Array) {
+            data.forEach( ( val ) => {
                   const nameValue = NameValue.parse(val);
                   this.medicalRecord[ nameValue.name ] = nameValue.value;
                 });
-              }
             }
           }
           this.patchFinished = true;
@@ -453,22 +449,23 @@ export class MedicalRecordComponent implements OnInit {
       }
     }
     if (v !== null) {
-      if (this.medicalRecord.additionalValues != null) {
-        this.medicalRecord.additionalValues[ colName ] = v;
+      if (this.medicalRecord.additionalValuesJson != null) {
+        this.medicalRecord.additionalValuesJson[ colName ] = v;
       } else {
         const addArray = {};
         addArray[ colName ] = v;
-        this.medicalRecord.additionalValues = addArray;
+        this.medicalRecord.additionalValuesJson = addArray;
       }
-      this.valueChanged(this.medicalRecord.additionalValues, 'additionalValues');
+      this.valueChanged(this.medicalRecord.additionalValuesJson, 'additionalValuesJson');
     }
   }
 
   // display additional value
   getAdditionalValue(colName: string): string {
-    if (this.medicalRecord.additionalValues != null) {
-      if (this.medicalRecord.additionalValues[ colName ] != null) {
-        return this.medicalRecord.additionalValues[ colName ];
+    if (this.medicalRecord.additionalValuesJson != null) {
+      let camelCaseColumnName = Utils.convertUnderScoresToCamelCase(colName);
+      if (this.medicalRecord.additionalValuesJson[ camelCaseColumnName ] != undefined && this.medicalRecord.additionalValuesJson[ camelCaseColumnName ] != null) {
+        return this.medicalRecord.additionalValuesJson[ camelCaseColumnName ];
       }
     }
     return null;

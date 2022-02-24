@@ -249,7 +249,7 @@ export class Utils {
             str = str + '"' + value + '"' + ',';
           }
           else if (col.type === 'ADDITIONALVALUE') {
-            const fieldName = 'additionalValues';
+            const fieldName = 'additionalValuesJson';
             // TODO: check is it correct ? - `fieldName` is set on the previous line
             /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
             // @ts-ignore
@@ -952,5 +952,25 @@ export class Utils {
       }
     }
     return answers.reverse();
+  }
+
+  public static convertUnderScoresToCamelCase(colName: string) {
+    let camelCaseColumnName = '';
+    let camelCaseRegex = new RegExp('[a-z]{1,}([A-Z][a-z]{1,}){1,}');
+    let splittedWords = colName.split('_');
+    if (splittedWords.length == 1) {
+      camelCaseColumnName = camelCaseRegex.test(splittedWords[0]) ? splittedWords[0] : splittedWords[0].toLowerCase();
+    } else {
+      splittedWords = splittedWords.map(word => word.toLowerCase());
+      for (let i = 0; i < splittedWords.length; i++) {
+        if (i == 0) {
+          camelCaseColumnName += splittedWords[i].toLowerCase();
+        } else {
+          let word = splittedWords[i][0].toUpperCase() + splittedWords[i].substring(1);
+          camelCaseColumnName += word;
+        }
+      }
+    }
+    return camelCaseColumnName;
   }
 }
