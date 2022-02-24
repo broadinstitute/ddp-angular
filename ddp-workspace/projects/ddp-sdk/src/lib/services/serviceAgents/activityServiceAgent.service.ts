@@ -33,21 +33,27 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
         private converter: ActivityConverter,
         http: HttpClient,
         logger: LoggingService,
-        private __language: LanguageService) { // eslint-disable-line @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match
+        private __language: LanguageService
+    ) {
+        // eslint-disable-line @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match
         super(session, configuration, http, logger, null);
     }
 
-    public getActivity(studyGuid$: Observable<string | null>,
-                       activityGuid$: Observable<string | null>): Observable<ActivityForm> {
-
-        const studyGuidEmitted$: Observable<string | null> = this.__language.getProfileLanguageUpdateNotifier()
-            .pipe(
-                switchMap(() => studyGuid$)
-            );
+    public getActivity(
+        studyGuid$: Observable<string | null>,
+        activityGuid$: Observable<string | null>
+    ): Observable<ActivityForm> {
+        const studyGuidEmitted$: Observable<string | null> = this.__language
+            .getProfileLanguageUpdateNotifier()
+            .pipe(switchMap(() => studyGuid$));
 
         const getActivity$: (x) => Observable<any> = (x: GuidsObject) => {
-            if (x.study == null || x.study === '' ||
-                x.activity == null || x.activity === '') {
+            if (
+                x.study == null ||
+                x.study === '' ||
+                x.activity == null ||
+                x.activity === ''
+            ) {
                 return of(null);
             }
             this.studyGuid = x.study;
@@ -58,18 +64,25 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
         };
 
         return combineLatest([studyGuidEmitted$, activityGuid$]).pipe(
-            map((guids: Array<string>) => ({
-                study: guids[0],
-                activity: guids[1]
-            } as GuidsObject)),
+            map(
+                (guids: Array<string>) =>
+                    ({
+                        study: guids[0],
+                        activity: guids[1],
+                    } as GuidsObject)
+            ),
             mergeMap((guidsObj: GuidsObject) => getActivity$(guidsObj)),
-            catchError(e => {
-                if (e.error && e.error.code && e.error.code === 'ACTIVITY_NOT_FOUND') {
+            catchError((e) => {
+                if (
+                    e.error &&
+                    e.error.code &&
+                    e.error.code === 'ACTIVITY_NOT_FOUND'
+                ) {
                     return throwError('ACTIVITY_NOT_FOUND');
                 }
                 return throwError(e);
             }),
-            map(activity => {
+            map((activity) => {
                 if (activity == null) {
                     return null;
                 }
@@ -78,39 +91,62 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
         );
     }
 
-    getPickListOptions(questionStableId: string, query: string = '') {
+    getPickListOptions(
+        questionStableId: string,
+        query: string = ''
+    ): Observable<any> {
         const baseUrl = this.getBaseUrl(this.studyGuid, this.activityGuid);
-        return this.getObservable(`${baseUrl}/questions/${questionStableId}/options${query}`, {}, [404]);
+        return this.getObservable(
+            `${baseUrl}/questions/${questionStableId}/options?${query}`,
+            {},
+            [404]
+        );
     }
 
-    public getActivitySummary(studyGuid: string, activityGuid: string): Observable<ActivityInstance> {
+    public getActivitySummary(
+        studyGuid: string,
+        activityGuid: string
+    ): Observable<ActivityInstance> {
         const baseUrl = this.getBaseUrl(studyGuid, activityGuid);
         return this.getObservable(`${baseUrl}/summary`, {}, [404]);
     }
 
-    public saveAnswerSubmission(studyGuid: string,
-                                activityGuid: string,
-                                answerSubmission: AnswerSubmission,
-                                throwErrorFlag: boolean): Observable<PatchAnswerResponse> {
-        const payload = {answers: [answerSubmission]};
+    public saveAnswerSubmission(
+        studyGuid: string,
+        activityGuid: string,
+        answerSubmission: AnswerSubmission,
+        throwErrorFlag: boolean
+    ): Observable<PatchAnswerResponse> {
+        const payload = { answers: [answerSubmission] };
         const baseUrl = this.getBaseUrl(studyGuid, activityGuid);
-        return this.patchObservable(`${baseUrl}/answers`, payload, {}, throwErrorFlag).pipe(
-            map(httpResponse => httpResponse.body));
+        return this.patchObservable(
+            `${baseUrl}/answers`,
+            payload,
+            {},
+            throwErrorFlag
+        ).pipe(map((httpResponse) => httpResponse.body));
     }
 
-    public saveAnswer(studyGuid: string,
-                      activityGuid: string,
-                      questionStableId: string,
-                      value: AnswerValue,
-                      answerId: string | null = null,
-                      throwErrorFlag = false): Observable<any> {
+    public saveAnswer(
+        studyGuid: string,
+        activityGuid: string,
+        questionStableId: string,
+        value: AnswerValue,
+        answerId: string | null = null,
+        throwErrorFlag = false
+    ): Observable<any> {
         const data: AnswerSubmission = {
             stableId: questionStableId,
             answerGuid: answerId,
-            value
+            value,
         };
 
-        return this.saveAnswerSubmission(studyGuid, activityGuid, data, throwErrorFlag);
+        return this.saveAnswerSubmission(
+            studyGuid,
+            activityGuid,
+            data,
+            throwErrorFlag
+        );
     }
 
     public flushForm(studyGuid: string, activityGuid: string): Observable<any> {
@@ -119,33 +155,47 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
     }
 
     public createInstance(
-      studyGuid: string,
-      activityCode: string,
-      parentInstanceGuid?: string
+        studyGuid: string,
+        activityCode: string,
+        parentInstanceGuid?: string
     ): Observable<CreateActivityInstanceResponse | null> {
         const baseUrl = this.getBaseUrl(studyGuid);
-        let body: any = {activityCode};
+        let body: any = { activityCode };
         if (parentInstanceGuid) {
-            body = {...body, parentInstanceGuid};
+            body = { ...body, parentInstanceGuid };
         }
 
         return this.postObservable(baseUrl, body).pipe(
-            map(x => !!x ? x.body as CreateActivityInstanceResponse : null)
+            map((x) =>
+                !!x ? (x.body as CreateActivityInstanceResponse) : null
+            )
         );
     }
 
-    public saveLastVisitedActivitySection(studyGuid: string, activityGuid: string, index: number): Observable<number> {
-        const payload = {index};
+    public saveLastVisitedActivitySection(
+        studyGuid: string,
+        activityGuid: string,
+        index: number
+    ): Observable<number> {
+        const payload = { index };
         const baseUrl = this.getBaseUrl(studyGuid, activityGuid);
         return this.patchObservable(baseUrl, payload).pipe(
-            map(httpResponse => httpResponse));
+            map((httpResponse) => httpResponse)
+        );
     }
 
-    public deleteActivityInstance(studyGuid: string, activityGuid: string): Observable<DeleteActivityInstanceResponse | null> {
+    public deleteActivityInstance(
+        studyGuid: string,
+        activityGuid: string
+    ): Observable<DeleteActivityInstanceResponse | null> {
         const baseUrl = this.getBaseUrl(studyGuid, activityGuid);
 
         return this.deleteObservable(baseUrl, null, true).pipe(
-            map(response => !!response ? response.body as DeleteActivityInstanceResponse : null)
+            map((response) =>
+                !!response
+                    ? (response.body as DeleteActivityInstanceResponse)
+                    : null
+            )
         );
     }
 
