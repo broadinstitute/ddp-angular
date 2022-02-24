@@ -10,7 +10,7 @@ import { OptionDetail } from '../activity-data/models/option-detail.model';
 import { Option } from '../activity-data/models/option.model';
 import { QuestionAnswer } from '../activity-data/models/question-answer.model';
 import { QuestionDefinition } from '../activity-data/models/question-definition.model';
-import { FieldSettings } from '../field-settings/field-settings.model';
+import { FieldSettings } from '../field-settings/model/field-settings.model';
 import { Filter } from '../filter-column/filter-column.model';
 import { AbstractionField } from '../medical-record-abstraction/medical-record-abstraction-field.model';
 import { Participant } from '../participant-list/participant-list.model';

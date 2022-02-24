@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import {FieldSettings} from '../field-settings/field-settings.model';
+import {FieldSettings} from '../field-settings/model/field-settings.model';
 import {NameValue} from '../utils/name-value.model';
 import {Statics} from '../utils/statics';
 import {Value} from '../utils/value.model';

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FieldSettings } from '../field-settings/field-settings.model';
+import { FieldSettings } from '../field-settings/model/field-settings.model';
 import { Value } from '../utils/value.model';
 
 @Component({

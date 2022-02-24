@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { FieldSettings } from '../field-settings/field-settings.model';
+import { FieldSettings } from '../field-settings/model/field-settings.model';
 import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
 import { Participant } from '../participant-list/participant-list.model';
 import { Tissue } from './tissue.model';

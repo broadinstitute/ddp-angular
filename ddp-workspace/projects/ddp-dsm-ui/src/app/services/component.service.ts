@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { DiscardSample } from '../discard-sample/discard-sample.model';
-import { FieldSettings } from '../field-settings/field-settings.model';
+import { FieldSettings } from '../field-settings/model/field-settings.model';
 
 // Service to send information to a childComponent, which is called per router!
 @Injectable()

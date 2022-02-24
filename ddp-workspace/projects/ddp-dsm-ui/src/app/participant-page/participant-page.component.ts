@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TabDirective } from 'ngx-bootstrap/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActivityDefinition } from '../activity-data/models/activity-definition.model';
-import { FieldSettings } from '../field-settings/field-settings.model';
+import { FieldSettings } from '../field-settings/model/field-settings.model';
 import { ParticipantData } from '../participant-list/models/participant-data.model';
 import { PreferredLanguage } from '../participant-list/models/preferred-languages.model';
 import { Participant } from '../participant-list/participant-list.model';

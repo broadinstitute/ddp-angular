@@ -27,7 +27,7 @@ import { AssigneeParticipant } from './models/assignee-participant.model';
 import { PreferredLanguage } from './models/preferred-languages.model';
 import { Sample } from './models/sample.model';
 import { Participant } from './participant-list.model';
-import { FieldSettings } from '../field-settings/field-settings.model';
+import { FieldSettings } from '../field-settings/model/field-settings.model';
 import { ParticipantData } from './models/participant-data.model';
 
 @Component({
