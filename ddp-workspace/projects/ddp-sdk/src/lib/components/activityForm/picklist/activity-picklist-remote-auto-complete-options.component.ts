@@ -113,7 +113,10 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
         return typeof option === 'string' ? option : option?.optionLabel || '';
     }
 
-    onValueSelect(value: ActivityPicklistOption, detail: string | null = null) {
+    onValueSelect(
+        value: ActivityPicklistOption,
+        detail: string | null = null
+    ): void {
         this.block.answer = value ? [{ stableId: value.stableId, detail }] : [];
         console.log([...this.block.answer]);
         this.valueChanged.emit([...this.block.answer]);
