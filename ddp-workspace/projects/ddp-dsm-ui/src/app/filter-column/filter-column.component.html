@@ -16,9 +16,6 @@
 </ng-container>
 <ng-container
   *ngIf="dataFilter.type === 'BOOLEAN' || dataFilter.type === 'AGREEMENT' || dataFilter.type === 'CHECKBOX' || (dataFilter.type === 'ADDITIONALVALUE' && dataFilter.additionalType === 'CHECKBOX')">
-  <div>
-    <b>{{dataFilter.participantColumn.display}}</b>
-  </div>
   <ng-container>
     <mat-checkbox color="primary" disableRipple
                [checked]="dataFilter.value1" [(ngModel)]="dataFilter.value1" (change)="changeValue($event, dataFilter)"> Yes
