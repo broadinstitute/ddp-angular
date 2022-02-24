@@ -1,5 +1,7 @@
 <div
-  *ngIf="dataFilter.type === 'DATE' || dataFilter.type === 'EPOCHDATE' || dataFilter.type === 'DATE_SHORT' || dataFilter.type === 'OPTIONS' || dataFilter.type === 'RADIO' || dataFilter.type === 'BOOLEAN' || dataFilter.type === 'CHECKBOX' || dataFilter.type === 'JSONARRAY'
+  *ngIf="dataFilter.type === 'DATE' || dataFilter.type === 'EPOCHDATE' || dataFilter.type === 'DATE_SHORT'
+  || dataFilter.type === 'OPTIONS' || dataFilter.type === 'RADIO' || dataFilter.type === 'BOOLEAN'
+  || dataFilter.type === 'CHECKBOX' || dataFilter.type === 'JSONARRAY' || dataFilter.type === 'AGREEMENT'
   || (dataFilter.type === 'ADDITIONALVALUE' && (dataFilter.additionalType !== 'TEXT' && dataFilter.additionalType !== 'text' && dataFilter.additionalType !== 'TEXTAREA'))">
   <b>{{dataFilter.participantColumn.display}}</b>
 </div>
