@@ -1040,7 +1040,7 @@ export class TissueListComponent implements OnInit {
               if (innerJson instanceof Array) {
                 innerJson.forEach((val) => {
                   const nameValue = NameValue.parse(val);
-                  if (nameValue.name === 'createdOncHistory') {
+                  if (nameValue.name === 'created') {
                     this.participant.participant[ nameValue.name ] = nameValue.value;
                   } else {
                     this.tissueListWrappers[ index ].tissueList.oncHistoryDetails[ nameValue.name ] = nameValue.value;
