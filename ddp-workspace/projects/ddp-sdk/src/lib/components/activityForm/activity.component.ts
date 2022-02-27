@@ -104,11 +104,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 this.communicationErrorOccurred = false;
             },
             error: (error) => {
-                if (error?.status !== 422) {
-                    console.log('ERROR:', error);
-                    this.logger.logError(this.LOG_SOURCE, 'There has been unexpected error:', error);
-                    this.navigateToErrorPage();
-                }
+                this.logger.logError(this.LOG_SOURCE, 'There has been unexpected error:', error);
+                this.navigateToErrorPage();
             }
         });
 
@@ -422,6 +419,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
 
     private handleViolation(violatedQuestions: AbstractActivityQuestionBlock[], validationRules = []): void {
         for (const violatedQuestion of violatedQuestions) {
+            violatedQuestion.serverValidationMessages = [];
             validationRules.map(rule => rule.message)
                 .filter(Boolean)
                 .forEach(message => violatedQuestion.addServerValidationMessage(message));

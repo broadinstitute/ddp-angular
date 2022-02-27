@@ -6,7 +6,7 @@ import { AnswerSubmission } from '../../models/activity/answerSubmission';
 import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivityInstanceAnswerSubmission } from '../../models/activity/activityInstanceAnswerSubmission';
 import { Observable, Subject, BehaviorSubject, timer, merge, EMPTY } from 'rxjs';
-import { concatMap, distinctUntilChanged, filter, map, mergeMap, retryWhen, scan, share, take } from 'rxjs/operators';
+import { catchError, concatMap, distinctUntilChanged, filter, map, mergeMap, retryWhen, scan, share, take } from 'rxjs/operators';
 import * as _ from 'underscore';
 
 type GuidToShown = Record<string, boolean>;
@@ -49,9 +49,10 @@ export class SubmissionManager implements OnDestroy {
     maxRetryCount = SubmissionManager.DEFAULT_MAX_RETRY_COUNT;
     private answerSubmissionFailureSubject = new Subject<Error>();
     private answerSubmissionErrorSubject = new Subject<Error>();
-    private answerSubmissions: Subject<ActivityInstanceAnswerSubmission> = new Subject();
+    private answerSubmissions = new Subject<ActivityInstanceAnswerSubmission>();
     private blockGuidToVisibility$ = new BehaviorSubject<GuidToShown>({});
     private _answerSubmissionResponse$: Observable<PatchAnswerResponse>;
+    private answerSubmissionPatch422ErrorSubject = new Subject<string[]>();
 
     constructor(private serviceAgent: ActivityServiceAgent) {
         this.setupAnswerSubmissionPipeline();
@@ -122,26 +123,35 @@ export class SubmissionManager implements OnDestroy {
         const submitAnswerWithRetry: (submission: ActivityInstanceAnswerSubmission) => Observable<PatchAnswerResponse> =
             (submission) => {
                 return executeAnswerSubmission(submission).pipe(
+                    catchError(err => {
+                        if (err?.status === 422) {
+                            this.answerSubmissionFailureSubject.next(err);
+                            this.answerSubmissionPatch422ErrorSubject.next(this.getViolatedStableIds(err?.error?.violations));
+                            return EMPTY;
+                        } else {
+                            // let's proceed to the next handler `retryWhen`
+                            throw err;
+                        }
+                    }),
                     retryWhen((error: Observable<any>) => {
                         return error.pipe(
                             mergeMap((submissionError, i) => {
                                 const errorCount = ++i;
                                 // we will retry on HTTP errors that are not the ones listed here
                                 if (errorCount > this.maxRetryCount || !(submissionError instanceof HttpErrorResponse)
-                                    || [400, 404, 401, 422].includes(submissionError.status)) {
+                                    || [400, 404, 401].includes(submissionError.status)) {
                                     // Would have preferred to throw error, and have subscriber handle it in the error handler
                                     // but could not get the error
                                     this.answerSubmissionFailureSubject.next(submissionError);
-                                    if (submissionError?.status === 422) {
-                                        return EMPTY;
-                                    }
                                     throw submissionError;
                                 } else {
                                     this.answerSubmissionErrorSubject.next(submissionError);
                                     return timer(this.retryDelayMs);
                                 }
-                            }));
-                    }));
+                            })
+                        );
+                    })
+                );
             };
 
         // this is the high-level pipeline that takes incoming answers, send them to server, and returns the PATCH responses
@@ -150,7 +160,11 @@ export class SubmissionManager implements OnDestroy {
         // important that filterOutHidden inside same concatMap as submitAnswerRetry, otherwise there is no real queue
         // of waiting submissions to examine
         this._answerSubmissionResponse$ = this.answerSubmissions.pipe(
-            concatMap(x => filterOutHidden(x).pipe(concatMap(submitAnswerWithRetry))), share());
+            concatMap(x => filterOutHidden(x).pipe(
+                concatMap(submitAnswerWithRetry))
+            ),
+            share()
+        );
 
         // visibility subject updated here: extract the visibility info in the PATCH responses
         // and update the our Observable map
@@ -197,11 +211,21 @@ export class SubmissionManager implements OnDestroy {
                 });
             }));
 
+        // remove submissions that include failed answers PATCH with 422 error
+        const submissionRemovalOnPatch422Error$: QueueOpObservable = this.answerSubmissionPatch422ErrorSubject.pipe(
+            map((stableIds: string[]) => (queue: ActivityInstanceAnswerSubmission[]) => {
+                return queue.filter(item => {
+                    return !stableIds.includes(item.stableId);
+                });
+            })
+        );
+
         // merge additions, completions, and removal of submissions to create an observable state of the queue
         const workingSubmissionQueue: Observable<ActivityInstanceAnswerSubmission[]> = merge(
             submissionQueueAdditions$,
             submissionQueueRemovalsOnCompletion$,
-            submissionRemovalOnHideResponse$
+            submissionRemovalOnHideResponse$,
+            submissionRemovalOnPatch422Error$
         ).pipe(
             scan((acc: ActivityInstanceAnswerSubmission[], currentOperation: QueueOp) => {
               return currentOperation(acc.slice(0));
@@ -237,5 +261,9 @@ export class SubmissionManager implements OnDestroy {
 
     private setupAnswerSubmissionWarning(): void {
         this.answerSubmissionWarning$ = this.answerSubmissionErrorSubject.pipe(map(() => true));
+    }
+
+    private getViolatedStableIds(violations: any[]): string[] {
+        return violations ? violations.map(violation => violation.stableId) : [];
     }
 }
