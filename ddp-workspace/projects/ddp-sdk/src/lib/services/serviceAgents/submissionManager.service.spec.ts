@@ -166,7 +166,7 @@ describe('SubmissionManagerTest', () => {
 
         // capture the changes to the queue over time
         submissionManager.pendingAnswerSubmissionQueue$.subscribe((pendingSubmissions: AnswerSubmission[]) => {
-            console.log('I got ' + pendingSubmissions.length + 'from the subcriptions!!!');
+            console.log('I got ' + pendingSubmissions.length + 'from the subscriptions!!!');
             pendingSubmissionsOverTime.push({time: new Date().getTime() - startTime, queue: pendingSubmissions});
         });
         // this is needed to get things going
@@ -343,5 +343,29 @@ describe('SubmissionManagerTest', () => {
             expect(invalidSubmissions[0].stableId).toBe('2');
             done();
         }, 10000);
+    });
+
+    it('test fail an answer PATH with 422 error',(done) => {
+        serviceAgent.saveAnswerSubmission.and.returnValue(throwError(() => new HttpErrorResponse({
+            error: {
+                violations: [
+                    {
+                        rules: [{ruleType: 'UNIQUE_VALUE', message: 'validation message'}],
+                        stableId: 'COMMENTS'
+                    }
+                ]
+            },
+            status: 422
+        })));
+
+        submissionManager.answerSubmissionFailure$.subscribe({
+            next: (error: HttpErrorResponse) => {
+                expect(error.status).toBe(422);
+                expect(error.error.violations[0].stableId).toBe('COMMENTS');
+                done();
+            }
+        });
+
+        submissionManager.patchAnswer('studyGuid', 'activityGuid', 'stableId', 'a value', 'blockGuid');
     });
 });
