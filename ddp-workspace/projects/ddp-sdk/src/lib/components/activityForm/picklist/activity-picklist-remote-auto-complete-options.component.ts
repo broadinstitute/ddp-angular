@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Inject, Input, OnInit, SimpleChanges } from '@angular/core';
 import { BehaviorSubject, Observable, of, switchMap, tap } from 'rxjs';
 import { ActivityPicklistNormalizedGroup } from '../../../models/activity/activityPicklistNormalizedGroup';
 import { ActivityPicklistOption } from '../../../models/activity/activityPicklistOption';
@@ -60,6 +60,8 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     extends BaseActivityPicklistQuestion
     implements OnInit
 {
+    @Input() studyGuid: string;
+    @Input() activityGuid: string;
     filteredGroups: ActivityPicklistNormalizedGroup[] = [];
 
     searchValue$ = new BehaviorSubject('');
@@ -78,6 +80,7 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     }
 
     ngOnInit(): void {
+        console.log(this.studyGuid, this.activityGuid);
         this.picklistOptions$ = this.searchValue$.pipe(
             switchMap((searchValue) => {
                 this.sortPolicy = this.shouldBeSorted

@@ -36,17 +36,19 @@ import { PicklistRenderMode } from './../../../models/activity/picklistRenderMod
                 (valueChanged)="valueChanged.emit($event)"
             >
             </ddp-activity-dropdown-picklist-question>
-            <ddp-activity-autocomplete-picklist-question
+            <!-- <ddp-activity-autocomplete-picklist-question
                 *ngIf="block.renderMode === RENDER_MODE.AUTOCOMPLETE"
                 [block]="block"
                 [readonly]="readonly"
                 (valueChanged)="valueChanged.emit($event)"
             >
-            </ddp-activity-autocomplete-picklist-question>
+            </ddp-activity-autocomplete-picklist-question> -->
             <ddp-activity-picklist-remote-auto-complete-options
-                *ngIf="block.renderMode === RENDER_MODE.REMOTE_AUTOCOMPLETE"
+                *ngIf="block.renderMode === RENDER_MODE.AUTOCOMPLETE"
                 [block]="block"
                 [readonly]="readonly"
+                [studyGuid]="studyGuid"
+                [activityGuid]="activityGuid"
                 (valueChanged)="valueChanged.emit($event)"
             >
             </ddp-activity-picklist-remote-auto-complete-options>
@@ -55,6 +57,9 @@ import { PicklistRenderMode } from './../../../models/activity/picklistRenderMod
 export class ActivityPicklistAnswer {
     @Input() block: ActivityPicklistQuestionBlock;
     @Input() readonly: boolean;
+    @Input() studyGuid: string;
+    @Input() activityGuid: string;
+
     @Output() valueChanged: EventEmitter<Array<ActivityPicklistAnswerDto>> =
         new EventEmitter();
 
