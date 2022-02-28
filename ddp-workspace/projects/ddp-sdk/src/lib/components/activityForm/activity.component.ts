@@ -408,6 +408,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
 
     private addServerValidationMessagesToViolatedQuestions(error: HttpErrorResponse): void {
         if (!error?.error?.violations) {
+            this.logger.logError('ActivityComponent', 'There was an error during submission (a violated question handler):', error);
             return;
         }
         const questionBlocks = this.getQuestionBlocks();
