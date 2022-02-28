@@ -127,7 +127,7 @@ export class ParticipantColumn {
   public static EXTERNAL_ORDER_DATE = new ParticipantColumn('External Order Date', 'externalOrderDate', 'k');
   public static CARE_EVOLVE = new ParticipantColumn('Ordered at CareEvolve', 'careEvolve', 'k');
   public static UPLOAD_REASON = new ParticipantColumn('Upload Reason', 'uploadReason', 'k');
-  public static SAMPLE_QUEUE = new ParticipantColumn("Status", "sampleQueue", "k");
+  public static SAMPLE_QUEUE = new ParticipantColumn('Status', 'sampleQueue', 'k');
   public static RESULT_TEST = new ParticipantColumn('Test Result', 'result', 'k', 'testResult');
   public static CORRECTED_TEST = new ParticipantColumn('Test Corrected', 'isCorrected', 'k', 'testResult');
   public static TIME_TEST = new ParticipantColumn('Test Time Completed', 'timeCompleted', 'k', 'testResult');
