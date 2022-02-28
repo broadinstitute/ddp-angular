@@ -11,6 +11,7 @@ import { ComponentService } from '../services/component.service';
 import { Statics } from '../utils/statics';
 import { FieldFilepickerComponent } from '../field-filepicker/field-filepicker.component';
 import { Result } from '../utils/result.model';
+import { RoleService } from '../services/role.service';
 
 @Component({
   selector: 'app-upload',
@@ -47,8 +48,10 @@ export class UploadComponent implements OnInit {
   realmNameStoredForFile: string;
   allowedToSeeInformation = false;
   specialMessage: string;
+  skipAddressValidation: boolean = false;
 
-  constructor(private dsmService: DSMService, private auth: Auth, private compService: ComponentService, private route: ActivatedRoute) {
+  constructor( private dsmService: DSMService, private auth: Auth, private compService: ComponentService, private route: ActivatedRoute,
+               private role: RoleService ) {
     if (!auth.authenticated()) {
       auth.logout();
     }
@@ -193,7 +196,7 @@ export class UploadComponent implements OnInit {
     this.loading = true;
     this.dsmService.uploadTxtFile(
       localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.kitType.name,
-        this.file, this.selectedReason, this.selectedCarrier
+        this.file, this.selectedReason, this.selectedCarrier, this.skipAddressValidation
       )
       .subscribe({
         next: data => {
@@ -281,7 +284,7 @@ export class UploadComponent implements OnInit {
     const jsonParticipants = JSON.stringify(array);
     this.dsmService.uploadDuplicateParticipant(
         localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.kitType.name,
-        jsonParticipants, this.selectedReason, this.selectedCarrier
+        jsonParticipants, this.selectedReason, this.selectedCarrier, this.skipAddressValidation
       )
       .subscribe({
         next: data => {
@@ -325,7 +328,7 @@ export class UploadComponent implements OnInit {
     return this.compService;
   }
 
-  allOptionesSelected(): boolean {
+  allOptionsSelected(): boolean {
     this.uploadPossible = this.kitType != null && (this.uploadReasons.length === 0 || this.selectedReason !== null) &&
       (this.carriers.length === 0 || this.selectedCarrier !== null);
     return this.uploadPossible;
@@ -334,5 +337,9 @@ export class UploadComponent implements OnInit {
   private isSelectedRealm(): boolean {
     return localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null &&
       localStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== '';
+  }
+
+  hasRole(): RoleService {
+    return this.role;
   }
 }
