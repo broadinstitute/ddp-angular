@@ -63,7 +63,7 @@
   .about {
     margin-top: 100px;
 
-    background: linear-gradient(to right, #A2F4E9 50%, transparent 50%);
+    background: linear-gradient(to right, rgba(162, 244, 233, 0.5) 50%, transparent 50%);
 
     @media (max-width: 960px) {
       background: transparent;
