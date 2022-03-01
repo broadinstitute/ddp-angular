@@ -14,8 +14,7 @@ export class Sort {
     }
 
     static parse(filter: Filter, order: string): Sort {
-        return new Sort(filter.type, filter.additionalType, filter.participantColumn.tableAlias, 
+        return new Sort(filter.type, filter.additionalType, filter.participantColumn.tableAlias,
             filter.participantColumn.object, filter.participantColumn.name, order);
         }
-
 }

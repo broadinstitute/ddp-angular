@@ -1478,8 +1478,8 @@ export class ParticipantListComponent implements OnInit {
   }
 
   sortByColumnName(col: Filter, sortParent: string): void {
-    this.sortOrder = this.sortBy !== null 
-          ? this.sortBy.innerProperty === col.participantColumn.name 
+    this.sortOrder = this.sortBy !== null
+          ? this.sortBy.innerProperty === col.participantColumn.name
           ? ( this.sortOrder === 'asc' ? 'desc' : 'asc' ) : 'asc' : 'asc';
     this.sortParent = sortParent;
     const sort = Sort.parse(col, this.sortOrder);
@@ -1489,9 +1489,11 @@ export class ParticipantListComponent implements OnInit {
   }
 
   getLatestActivityVersion(column: Filter): string[] {
-    if (column.participantColumn === null) return null;
+    if (column.participantColumn === null) {
+      return null 
+    };
     const activityCode = column.participantColumn.tableAlias;
-    let activityVersions = this.activityDefinitionList
+    const activityVersions = this.activityDefinitionList
         .filter(activity => activityCode === activity.activityCode)
         .map(activity => activity.activityVersion);
     if (activityVersions.length > 0) {
