@@ -1490,8 +1490,8 @@ export class ParticipantListComponent implements OnInit {
 
   getLatestActivityVersion(column: Filter): string[] {
     if (column.participantColumn === null) {
-      return null 
-    };
+      return null;
+    }
     const activityCode = column.participantColumn.tableAlias;
     const activityVersions = this.activityDefinitionList
         .filter(activity => activityCode === activity.activityCode)
