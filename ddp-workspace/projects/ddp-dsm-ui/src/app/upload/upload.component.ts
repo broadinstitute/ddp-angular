@@ -48,7 +48,7 @@ export class UploadComponent implements OnInit {
   realmNameStoredForFile: string;
   allowedToSeeInformation = false;
   specialMessage: string;
-  skipAddressValidation: boolean = false;
+  skipAddressValidation = false;
 
   constructor( private dsmService: DSMService, private auth: Auth, private compService: ComponentService, private route: ActivatedRoute,
                private role: RoleService ) {
