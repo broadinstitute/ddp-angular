@@ -300,7 +300,8 @@ export class ParticipantListComponent implements OnInit {
                   });
                 }
               }
-              const filter = new Filter( new ParticipantColumn( fieldSetting.columnDisplay, Utils.convertUnderScoresToCamelCase(fieldSetting.columnName), key ),
+              const filter = new Filter(
+                new ParticipantColumn( fieldSetting.columnDisplay, Utils.convertUnderScoresToCamelCase(fieldSetting.columnName), key),
                 Filter.ADDITIONAL_VALUE_TYPE, options, new NameValue( fieldSetting.columnName, null ),
                 false, true, null, null, null, null, false,
                 false, false, false, fieldSetting.displayType
@@ -1385,7 +1386,7 @@ export class ParticipantListComponent implements OnInit {
     const patch = patch1.getPatch();
     this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({
       next: data => {
-        this.savedFilters[ i ].shared = ( value === "1" );
+        this.savedFilters[ i ].shared = ( value === '1' );
       },
       error: () => {
         this.additionalMessage = 'Error - Sharing Filter, Please contact your DSM developer';

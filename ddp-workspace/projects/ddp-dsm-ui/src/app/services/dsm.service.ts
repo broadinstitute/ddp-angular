@@ -120,7 +120,7 @@ export class DSMService {
     const userId = this.role.userID();
     map.push({name: DSMService.REALM, value: realm});
     map.push({name: 'userId', value: userId});
-    if (parent) map.push( {name: "parent", value: parent} );
+    if (parent) {map.push( {name: 'parent', value: parent} );}
     return this.http.get(url, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );
@@ -524,7 +524,8 @@ export class DSMService {
     );
   }
 
-  public uploadTxtFile(realm: string, kitType: string, file: File, reason: string, carrier: string): Observable<any> {
+  public uploadTxtFile(realm: string, kitType: string, file: File, reason: string, carrier: string,
+                       skipAddressValidation: boolean): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'kitUpload';
     const map: { name: string; value: any }[] = [];
     map.push({name: DSMService.REALM, value: realm});
@@ -532,7 +533,7 @@ export class DSMService {
     map.push({name: 'userId', value: this.role.userID()});
     map.push({name: 'reason', value: reason});
     map.push({name: 'carrier', value: carrier});
-
+    map.push( {name: 'skipAddressValidation', value: skipAddressValidation} );
     return this.http.post(url, file, this.buildQueryUploadHeader(map)).pipe(
       catchError(this.handleError)
     );
@@ -548,7 +549,7 @@ export class DSMService {
   }
 
   public uploadDuplicateParticipant(realm: string, kitType: string, jsonParticipants: string,
-                                    reason: string, carrier: string
+                                    reason: string, carrier: string, skipAddressValidation: boolean
   ): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'kitUpload';
     const map: { name: string; value: any }[] = [];
@@ -559,7 +560,7 @@ export class DSMService {
     map.push({name: 'Content-Type', value: 'application/json; charset=utf-8'});
     map.push({name: 'reason', value: reason});
     map.push({name: 'carrier', value: carrier});
-
+    map.push( {name: 'skipAddressValidation', value: skipAddressValidation} );
     return this.http.post(url, jsonParticipants, this.buildQueryUploadHeader(map)).pipe(
       catchError(this.handleError)
     );

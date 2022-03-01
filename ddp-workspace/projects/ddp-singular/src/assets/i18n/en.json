@@ -59,7 +59,7 @@
     "Title": "My Dashboard",
     "MySelf": "My Self",
     "NewParticipant": "New Participant",
-    "NoParticipants": "Get started by first enrolling yourself or your child/dependent. If you have multiple children or dependents, you will be able to enroll them later.",
+    "NoParticipants": "Get started by first enrolling yourself or your child/dependent. If you have multiple <br/> children or dependents, you will be able to enroll them later.",
     "HelpTip": "Please select Participant by clicking his/her name in the list below.",
     "DeleteError": "This participant has already consented and can’t be deleted here. If you wish to withdraw consent, please contact Project Singular study personnel directly."
   },

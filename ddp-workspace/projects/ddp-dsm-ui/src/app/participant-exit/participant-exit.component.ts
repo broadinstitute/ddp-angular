@@ -105,7 +105,7 @@ export class ParticipantExitComponent implements OnInit {
         }
       });
     } else {
-      this.errorMessage = 'Please select a realm and enter the AltPID for the participant you want to exit.';
+      this.errorMessage = 'Please select a study and enter the AltPID for the participant you want to exit.';
     }
   }
 

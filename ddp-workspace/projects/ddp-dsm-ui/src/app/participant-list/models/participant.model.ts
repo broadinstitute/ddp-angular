@@ -26,7 +26,7 @@ export class ParticipantDSMInformation {
     let data = json.dynamicFields;
     let additionalValuesJson = {};
     if (data != null) {
-      data = "{" + data.substring(1, data.length - 1) + "}";
+      data = '{' + data.substring(1, data.length - 1) + '}';
       additionalValuesJson = JSON.parse(data);
     }
     return new ParticipantDSMInformation( json.participantId, json.ddpParticipantId, json.realm, json.assigneeIdMr, json.assigneeIdTissue,

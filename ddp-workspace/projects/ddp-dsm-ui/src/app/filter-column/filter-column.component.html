@@ -1,5 +1,7 @@
 <div
-  *ngIf="dataFilter.type === 'DATE' || dataFilter.type === 'EPOCHDATE' || dataFilter.type === 'DATE_SHORT' || dataFilter.type === 'OPTIONS' || dataFilter.type === 'RADIO' || dataFilter.type === 'BOOLEAN' || dataFilter.type === 'CHECKBOX' || dataFilter.type === 'JSONARRAY'
+  *ngIf="dataFilter.type === 'DATE' || dataFilter.type === 'EPOCHDATE' || dataFilter.type === 'DATE_SHORT'
+  || dataFilter.type === 'OPTIONS' || dataFilter.type === 'RADIO' || dataFilter.type === 'BOOLEAN'
+  || dataFilter.type === 'CHECKBOX' || dataFilter.type === 'JSONARRAY' || dataFilter.type === 'AGREEMENT'
   || (dataFilter.type === 'ADDITIONALVALUE' && (dataFilter.additionalType !== 'TEXT' && dataFilter.additionalType !== 'text' && dataFilter.additionalType !== 'TEXTAREA'))">
   <b>{{dataFilter.participantColumn.display}}</b>
 </div>
@@ -16,9 +18,6 @@
 </ng-container>
 <ng-container
   *ngIf="dataFilter.type === 'BOOLEAN' || dataFilter.type === 'AGREEMENT' || dataFilter.type === 'CHECKBOX' || (dataFilter.type === 'ADDITIONALVALUE' && dataFilter.additionalType === 'CHECKBOX')">
-  <div>
-    <b>{{dataFilter.participantColumn.display}}</b>
-  </div>
   <ng-container>
     <mat-checkbox color="primary" disableRipple
                [checked]="dataFilter.value1" [(ngModel)]="dataFilter.value1" (change)="changeValue($event, dataFilter)"> Yes

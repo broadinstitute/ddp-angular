@@ -13,7 +13,6 @@ import { Tissue } from '../tissue/tissue.model';
 import { NameValue } from '../utils/name-value.model';
 import { Statics } from '../utils/statics';
 import { Auth } from '../services/auth.service';
-import { Result } from '../utils/result.model';
 import { PatchUtil } from '../utils/patch.model';
 
 @Component({
@@ -154,7 +153,7 @@ export class OncHistoryDetailComponent implements OnInit {
             }
             // set other workflow fieldValue
           if (data['NameValue'] != null) {
-            let innerJson: any | any[] = JSON.parse( data['NameValue'] );
+            const innerJson: any | any[] = JSON.parse( data['NameValue'] );
               // should be only needed for setting oncHistoryDetails on pt level to created
               if (innerJson instanceof Array) {
                 innerJson.forEach((val) => {
@@ -215,9 +214,9 @@ export class OncHistoryDetailComponent implements OnInit {
 
   // display additional value
   getAdditionalValue(index: number, colName: string): string {
-    let camelCaseColumnName = Utils.convertUnderScoresToCamelCase(colName);
-    if (this.oncHistory[ index ].additionalValuesJson != null && this.oncHistory[ index ].additionalValuesJson[ camelCaseColumnName ] != undefined) {
-      return this.oncHistory[ index ].additionalValuesJson[ camelCaseColumnName ];
+    const camelCaseColumnName = Utils.convertUnderScoresToCamelCase(colName);
+    if (this.oncHistory[index].additionalValuesJson != null && this.oncHistory[index].additionalValuesJson[camelCaseColumnName] != null) {
+      return this.oncHistory[index].additionalValuesJson[camelCaseColumnName];
     }
     return null;
   }
@@ -249,7 +248,7 @@ export class OncHistoryDetailComponent implements OnInit {
     const patch = patch1.getPatch();
     this.patchFinished = false;
     this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
-      next: data => {
+      next: () => {
         this.oncHistory.splice( index, 1 );
         this.patchFinished = true;
         this.currentPatchField = null;

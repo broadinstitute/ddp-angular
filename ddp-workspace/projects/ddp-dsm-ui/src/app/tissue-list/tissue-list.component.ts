@@ -786,7 +786,7 @@ export class TissueListComponent implements OnInit {
       { name: 'shared', value }, null, this.parent, null, null, null, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null);
     const patch = patch1.getPatch();
     this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(data => {
-      this.savedFilters[ i ].shared = (value === "1");
+      this.savedFilters[ i ].shared = (value === '1');
     });
   }
 
@@ -1036,7 +1036,7 @@ export class TissueListComponent implements OnInit {
             }
             // set other workflow values
             if (data['NameValue'] != null) {
-              let innerJson: any | any[] = JSON.parse( data['NameValue'] );
+              const innerJson: any | any[] = JSON.parse( data['NameValue'] );
               if (innerJson instanceof Array) {
                 innerJson.forEach((val) => {
                   const nameValue = NameValue.parse(val);
