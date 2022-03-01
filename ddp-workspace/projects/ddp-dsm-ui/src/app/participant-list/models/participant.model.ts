@@ -2,8 +2,9 @@ export class ParticipantDSMInformation {
 
   constructor(public participantId: string, public ddpParticipantId: string, public realm: string,
               public assigneeIdMr: string, public assigneeIdTissue: string, public created: string, public reviewed: string,
-              public crSent: string, public crReceived: string, public notes: string, public minimalMr: boolean, public abstractionReady: boolean,
-              public mrNeedsAttention: boolean, public tissueNeedsAttention: boolean, public exitDate: number, public additionalValuesJson: {} ) {
+              public crSent: string, public crReceived: string, public notes: string, public minimalMr: boolean,
+              public abstractionReady: boolean, public mrNeedsAttention: boolean, public tissueNeedsAttention: boolean, 
+              public exitDate: number, public additionalValuesJson: {} ) {
     this.participantId = participantId;
     this.ddpParticipantId = ddpParticipantId;
     this.realm = realm;

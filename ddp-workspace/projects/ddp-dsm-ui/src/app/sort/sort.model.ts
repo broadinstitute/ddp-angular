@@ -1,4 +1,4 @@
-import { Filter } from "../filter-column/filter-column.model";
+import { Filter } from '../filter-column/filter-column.model';
 
 export class Sort {
 
@@ -16,6 +16,6 @@ export class Sort {
     static parse(filter: Filter, order: string): Sort {
         return new Sort(filter.type, filter.additionalType, filter.participantColumn.tableAlias, 
             filter.participantColumn.object, filter.participantColumn.name, order);
-    }
+        }
 
 }

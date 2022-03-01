@@ -29,7 +29,7 @@ import { Sample } from './models/sample.model';
 import { Participant } from './participant-list.model';
 import { FieldSettings } from '../field-settings/field-settings.model';
 import { ParticipantData } from './models/participant-data.model';
-import { Sort } from "../sort/sort.model";
+import { Sort } from '../sort/sort.model';
 
 @Component({
   selector: 'app-participant-list',
@@ -157,7 +157,9 @@ export class ParticipantListComponent implements OnInit {
        this.applyFilter(this.viewFilter, from, to);
     } else {
       if (this.jsonPatch) {
-        this.dsmService.filterData(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.jsonPatch, this.parent, null, from, to, this.sortBy)
+        this.dsmService.filterData(localStorage.getItem(
+          ComponentService.MENU_SELECTED_REALM), this.jsonPatch, this.parent, null, from, to, this.sortBy
+        )
           .subscribe({
             next: data => {
               this.setFilterDataOnSuccess(data);
@@ -171,7 +173,9 @@ export class ParticipantListComponent implements OnInit {
             }
           });
       } else {
-        this.dsmService.filterData(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null, this.parent, true, from, to, this.sortBy)
+        this.dsmService.filterData(
+          localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null, this.parent, true, from, to, this.sortBy
+          )
           .subscribe({
             next: data => {
               this.setFilterDataOnSuccess(data);
@@ -413,7 +417,7 @@ export class ParticipantListComponent implements OnInit {
                   if (filterInPossibleColumns == null) {
                     const displayName = this.getQuestionOrStableId(question);
                     const filter = new Filter(
-                      new ParticipantColumn(displayName, question.stableId, activityDefinition.activityCode, "questionsAnswers", true),
+                      new ParticipantColumn(displayName, question.stableId, activityDefinition.activityCode, 'questionsAnswers', true),
                       type,
                       options
                     );
@@ -1474,20 +1478,28 @@ export class ParticipantListComponent implements OnInit {
   }
 
   sortByColumnName(col: Filter, sortParent: string): void {
-    this.sortOrder = this.sortBy !== null ? this.sortBy.innerProperty === col.participantColumn.name ? ( this.sortOrder === "asc" ? "desc" : "asc" ) : "asc" : "asc";
+    this.sortOrder = this.sortBy !== null 
+          ? this.sortBy.innerProperty === col.participantColumn.name 
+          ? ( this.sortOrder === 'asc' ? 'desc' : 'asc' ) : 'asc' : 'asc';
     this.sortParent = sortParent;
-    let sort = Sort.parse(col, this.sortOrder);
+    const sort = Sort.parse(col, this.sortOrder);
     sort.activityVersions = this.getLatestActivityVersion(col);
     this.sortBy = sort;
     this.pageChanged(this.activePage, this.rowsPerPage);
   }
 
-  getLatestActivityVersion(column: Filter) {
+  getLatestActivityVersion(column: Filter): string[] {
     if (column.participantColumn === null) return null;
-    let activityCode = column.participantColumn.tableAlias;
-    let activityVersions = this.activityDefinitionList.filter(activity => activityCode === activity.activityCode).map(activity => activity.activityVersion);
-    if (activityVersions.length > 0) return activityVersions;
-    else return null;
+    const activityCode = column.participantColumn.tableAlias;
+    let activityVersions = this.activityDefinitionList
+        .filter(activity => activityCode === activity.activityCode)
+        .map(activity => activity.activityVersion);
+    if (activityVersions.length > 0) {
+      return activityVersions;
+    }
+    else {
+      return null;
+    }
   }
 
   private sort(x, y, order, sortField?, colType?): number {
