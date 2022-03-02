@@ -182,19 +182,31 @@ export class ActivityConverter {
       this.blockBuilders = [
           {
               type: BlockType.Content,
-              func: (input) => this.convertContentBlock(input)
+              func: (input) => {
+                  console.log(input, 'Content')
+                  this.convertContentBlock(input)
+              }
           },
           {
               type: BlockType.Question,
-              func: (input) => this.questionConverter.buildQuestionBlock(input.question, input.displayNumber)
+              func: (input) => {
+                  console.log(input, 'Question')
+                 return this.questionConverter.buildQuestionBlock(input.question, input.displayNumber)
+              }
           },
           {
               type: BlockType.Component,
-              func: (input) => this.componentConverter.convertComponent(input)
+              func: (input) => {
+                  console.log(input, 'Component')
+                  return this.componentConverter.convertComponent(input)
+              }
           },
           {
               type: BlockType.Group,
-              func: (input) => this.convertGroupBlock(input)
+              func: (input) => {
+                  console.log(input, 'Block')
+                  return this.convertGroupBlock(input)
+              }
           },
           {
               type: BlockType.Conditional,
@@ -202,7 +214,10 @@ export class ActivityConverter {
           },
           {
               type: BlockType.Activity,
-              func: (input) => this.convertActivityBlock(input)
+              func: (input) => {
+                  console.log(input, 'Activity')
+                  return this.convertActivityBlock(input)
+              }
           }
       ];
   }
