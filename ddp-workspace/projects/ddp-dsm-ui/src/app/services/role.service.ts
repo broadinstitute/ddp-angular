@@ -28,7 +28,7 @@ export class RoleService {
   private _canEditDrugList = false;
   private _isParticipantListView = false;
   private _isParticipantEdit = false;
-  private _isKitUploadInvalidAddress: boolean = false;
+  private _isKitUploadInvalidAddress = false;
 
   private _userId: string;
   private _user: string;
@@ -225,7 +225,7 @@ export class RoleService {
     return this._isParticipantEdit;
   }
 
-  public allowedToUploadKitInvalidAddress() {
+  public allowedToUploadKitInvalidAddress(): boolean {
     return this._isKitUploadInvalidAddress;
   }
 }
