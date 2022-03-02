@@ -13,7 +13,7 @@ declare const DDP_ENV: Record<string, any>;
 })
 export class ActivityComponent extends ActivityRedesignedComponent {
   Route = Route;
-  isCaptchaResolved = false;
+  isCaptchaResolved = true;
 
   get isPrequal(): boolean {
     return this.model && this.model.activityCode === ActivityCode.Prequal;

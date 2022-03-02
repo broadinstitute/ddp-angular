@@ -2,7 +2,7 @@ import { DdpModule } from 'ddp-sdk';
 import { ToolkitModule } from 'toolkit';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { RecaptchaModule } from 'ng-recaptcha';
+// import { RecaptchaModule } from 'ng-recaptcha';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -74,7 +74,7 @@ import {LoginComponent} from './components/login/login.component';
     BrowserModule,
     ToolkitModule,
     MaterialModule,
-    RecaptchaModule,
+    // RecaptchaModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,

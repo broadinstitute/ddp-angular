@@ -7,7 +7,6 @@ $drop-block-active-color: lightyellow;
 
 .file-upload-content {
     display: flex;
-    flex-wrap: wrap;
 }
 
 .file-upload-content.readonly {
@@ -55,6 +54,9 @@ $drop-block-active-color: lightyellow;
 }
 
 .uploaded-file {
+    display: flex;
+    flex-direction: column;
+    //border: 2px solid black;
     .title {
         float: left;
     }

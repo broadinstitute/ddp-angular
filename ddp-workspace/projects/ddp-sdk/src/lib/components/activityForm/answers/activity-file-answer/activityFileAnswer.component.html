@@ -11,9 +11,10 @@
 
 <div class="file-upload-content" [class.readonly]="readonly">
     <input type="file" class="file-input"
+           multiple
            [accept]="(block.mimeTypes || []).join(',')"
            (click)="fileUpload.value = null;"
-           (change)="onFilesSelected($event.target.files)" #fileUpload>
+           (change)="onFilesSelected($event)" #fileUpload>
 
     <div class="file-select">
         <div class="drop-block"
@@ -38,23 +39,25 @@
             <ddp-loading [loaded]="!isLoading" class="loading-bar"></ddp-loading>
         </ng-container>
 
-        <ddp-activity-file-answer-success *ngIf="uploadedFile"></ddp-activity-file-answer-success>
+        <ddp-activity-file-answer-success *ngIf="uploadedFiles && uploadedFiles.length > 1"></ddp-activity-file-answer-success>
 
-        <mat-chip-list>
-            <mat-chip *ngIf="uploadedFile"
-                      class="uploaded-file-chip"
-                      color="primary" selected
-                      (removed)="undoUploadedFile()"
-                      #uploaded>
-                {{uploadedFile.fileName}}
-                <span class="file-size">{{'SDK.FileUpload.Size' | translate : { size: uploadedFile.fileSize | fileSize} }}</span>
-                <button matChipRemove *ngIf="!readonly"
-                        mat-icon-button
-                        [attr.aria-label]="'SDK.FileUpload.RemoveUploadedFile' | translate"
-                        #undoUploadBtn>
-                    <mat-icon>cancel</mat-icon>
-                </button>
-            </mat-chip>
+        <mat-chip-list *ngIf="uploadedFiles && uploadedFiles.length > 0">
+            <ng-container *ngFor="let uploadedFile of uploadedFiles; let i = index">
+                <mat-chip
+                    class="uploaded-file-chip"
+                    color="primary" selected
+                    (removed)="undoUploadedFile(i)"
+                    #uploaded>
+                    {{ uploadedFile.fileName.length > 15 ? '...' + uploadedFile.fileName.slice(uploadedFile.fileName.length - 15) : uploadedFile.fileName }}
+                    <span class="file-size">{{'SDK.FileUpload.Size' | translate : { size: uploadedFile.fileSize | fileSize} }}</span>
+                    <button matChipRemove *ngIf="!readonly"
+                            mat-icon-button
+                            [attr.aria-label]="'SDK.FileUpload.RemoveUploadedFile' | translate"
+                            #undoUploadBtn>
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip>
+            </ng-container>
         </mat-chip-list>
     </div>
 </div>

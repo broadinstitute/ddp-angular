@@ -111,6 +111,7 @@ export class SubmissionManager implements OnDestroy {
                 answerGuid: patchSubmission.answerGuid,
                 value: patchSubmission.value
             };
+            console.log(answerSubmission, 'answer subb')
             const patchAnswerFunction = (submission: AnswerSubmission): Observable<PatchAnswerResponse> => {
                 return this.serviceAgent.saveAnswerSubmission(patchSubmission.studyGuid, patchSubmission.activityInstanceGuid, submission,
                     true);

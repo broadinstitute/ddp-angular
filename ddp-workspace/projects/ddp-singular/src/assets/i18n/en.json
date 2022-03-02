@@ -451,7 +451,7 @@
       "InvalidTypeErrorMessage": "Type of file selected is not valid",
       "CancelUpload": "Cancel upload",
       "RemoveUploadedFile": "Remove uploaded file",
-      "Success": "Thank you for uploading the following file:"
+      "Success": "Thank you for uploading the following file(s)"
     }
   },
   "Error": {
