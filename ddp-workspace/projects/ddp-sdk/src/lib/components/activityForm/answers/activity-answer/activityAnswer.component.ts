@@ -102,7 +102,7 @@ import { BlockType } from '../../../../models/activity/blockType';
     </ng-container>`,
     styleUrls: ['activityAnswer.component.scss'],
 })
-export class ActivityAnswerComponent implements OnInit {
+export class ActivityAnswerComponent {
     @Input() block: AbstractActivityQuestionBlock;
     @Input() readonly: boolean;
     @Input() validationRequested: boolean;
@@ -115,10 +115,6 @@ export class ActivityAnswerComponent implements OnInit {
         this.valueChanged.emit(value);
     }
 
-    ngOnInit(): void {
-        console.log(this.activityGuid, this.studyGuid);
-        console.log(this.isPicklistQuestion(this.block));
-    }
     public isBooleanQuestion(block: AbstractActivityQuestionBlock): boolean {
         return (
             this.isQuestion(block) &&
