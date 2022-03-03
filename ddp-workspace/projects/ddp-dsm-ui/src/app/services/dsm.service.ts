@@ -6,6 +6,7 @@ import { throwError as observableThrowError, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { Filter } from '../filter-column/filter-column.model';
+import {Sort} from '../sort/sort.model';
 import { ViewFilter } from '../filter-column/models/view-filter.model';
 import { Abstraction } from '../medical-record-abstraction/medical-record-abstraction.model';
 import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
@@ -139,7 +140,7 @@ export class DSMService {
   }
 
   public filterData(realm: string, json: string, parent: string, defaultFilter: boolean,
-                    from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage()
+                    from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage(), sortBy?: Sort
   ): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'filterList';
     const map: { name: string; value: any }[] = [];
@@ -149,6 +150,9 @@ export class DSMService {
     map.push({name: 'to', value: to});
     map.push({name: 'userId', value: this.role.userID()});
     map.push({name: 'userMail', value: this.role.userMail()});
+    if (sortBy) {
+      map.push( {name: 'sortBy', value: JSON.stringify(sortBy)} );
+    }
     map.push({name: 'defaultFilter', value: defaultFilter === true ? '1' : defaultFilter != null ? '0' : ''});
     return this.http.patch(url, json, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
