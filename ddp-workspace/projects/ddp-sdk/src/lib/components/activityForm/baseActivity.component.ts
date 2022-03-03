@@ -6,16 +6,10 @@ import {
     OnDestroy,
     Output,
     SimpleChange,
-    Component,
+    Component
 } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-    Observable,
-    BehaviorSubject,
-    Subject,
-    combineLatest,
-    merge,
-} from 'rxjs';
+import { Observable, BehaviorSubject, Subject, combineLatest, merge } from 'rxjs';
 import {
     concatMap,
     debounceTime,
@@ -26,7 +20,7 @@ import {
     startWith,
     take,
     tap,
-    withLatestFrom,
+    withLatestFrom
 } from 'rxjs/operators';
 
 import { WorkflowServiceAgent } from '../../services/serviceAgents/workflowServiceAgent.service';
@@ -39,18 +33,15 @@ import { ConfigurationService } from '../../services/configuration.service';
 import { BlockVisibility } from '../../models/activity/blockVisibility';
 
 @Component({
-    template: ``,
+    template: ``
 })
 export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     @Input() studyGuid: string;
     @Input() activityGuid: string;
-    @Output() submit: EventEmitter<ActivityResponse | null> = new EventEmitter(
-        true
-    );
+    @Output() submit: EventEmitter<ActivityResponse | null> = new EventEmitter(true);
     @Output() stickySubtitle: EventEmitter<string | null> = new EventEmitter();
     @Output() activityCode: EventEmitter<string> = new EventEmitter();
-    @Output() sectionsVisibilityChanged: EventEmitter<number> =
-        new EventEmitter();
+    @Output() sectionsVisibilityChanged: EventEmitter<number> = new EventEmitter();
     protected embeddedComponentsValidStatusChanged = new Subject<boolean>();
     protected serviceAgent: ActivityServiceAgent;
     protected workflow: WorkflowServiceAgent;
@@ -61,8 +52,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     public validationRequested = false;
     public isLoaded$ = new BehaviorSubject<boolean>(false);
     public isPageBusy = new BehaviorSubject(false);
-    public isAllFormContentValid: BehaviorSubject<boolean> =
-        new BehaviorSubject(false);
+    public isAllFormContentValid: BehaviorSubject<boolean> = new BehaviorSubject(false);
     public displayGlobalError$: Observable<boolean>;
     // flag to indicate to form to not allow data entry
     public dataEntryDisabled = false;
@@ -114,57 +104,52 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     }
 
     protected getActivity(): void {
-        const get = this.serviceAgent
-            .getActivity(this.studyGuidObservable, this.activityGuidObservable)
-            .subscribe({
-                next: (activity) => {
-                    // to prevent using `visitedSectionIndexes` from previous activity
-                    this.resetVisitedSectionIndexes();
+      const get = this.serviceAgent
+        .getActivity(this.studyGuidObservable, this.activityGuidObservable)
+        .subscribe({
+            next: x => {
+                // to prevent using `visitedSectionIndexes` from previous activity
+                this.resetVisitedSectionIndexes();
 
-                    if (!activity) {
-                        this.model = new ActivityForm();
-                    } else {
-                        this.model = activity;
-                        this.stickySubtitle.emit(this.model.subtitle);
-                        this.activityCode.emit(this.model.activityCode);
-                        this.initSteps();
-                    }
-                    this.submitAttempted.next(false);
-                    this.isLoaded$.next(true);
+                if (!x) {
+                    this.model = new ActivityForm();
+                } else {
+                    this.model = x;
+                    this.stickySubtitle.emit(this.model.subtitle);
+                    this.activityCode.emit(this.model.activityCode);
+                    this.initSteps();
+                }
+                this.submitAttempted.next(false);
+                this.isLoaded$.next(true);
 
-                    // combine the latest status updates from the form model
-                    // and from the embedded components into one observable
-                    const canSaveSub = combineLatest([
-                        // update as we get responses from server
-                        merge(
-                            this.submissionManager.answerSubmissionResponse$,
-                            // We don't automatically get model updates if local validation fails
-                            // so trigger one when submit
-                            this.submitAttempted.pipe(
-                                filter((attempted) => attempted)
-                            )
-                        ).pipe(
-                            map(() => this.model.validate()),
-                            // let's start with whatever it is the initial state of the form
-                            startWith(this.model.validate())
-                        ),
-                        this.embeddedComponentsValidStatusChanged
-                            .asObservable()
-                            .pipe(startWith(true)),
-                    ])
-                        .pipe(
-                            map((status) => status[0] && status[1]),
-                            delay(1)
-                        )
-                        .subscribe(this.isAllFormContentValid);
+                // combine the latest status updates from the form model
+                // and from the embedded components into one observable
+                const canSaveSub = combineLatest([
+                    // update as we get responses from server
+                    merge(
+                        this.submissionManager.answerSubmissionResponse$,
+                        // We don't automatically get model updates if local validation fails
+                        // so trigger one when submit
+                        this.submitAttempted.pipe(filter(attempted => attempted))
+                    ).pipe(
+                        map(() => this.model.validate()),
+                        // let's start with whatever it is the initial state of the form
+                        startWith(this.model.validate())
+                    ),
+                    this.embeddedComponentsValidStatusChanged.asObservable().pipe(startWith(true))
+                ])
+                    .pipe(
+                        map(status => status[0] && status[1]),
+                        delay(1)
+                    ).subscribe(this.isAllFormContentValid);
 
-                    this.anchor.addNew(canSaveSub);
-                },
-                error: () => {
-                    this.navigateToErrorPage();
-                },
-            });
-        this.anchor.addNew(get);
+              this.anchor.addNew(canSaveSub);
+            },
+            error: () => {
+                this.navigateToErrorPage();
+            }
+        });
+      this.anchor.addNew(get);
     }
 
     protected navigateToErrorPage(): void {
@@ -176,9 +161,9 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     }
 
     public updateVisibility(visibility: BlockVisibility[]): void {
-        visibility.forEach((element) => {
-            this.model.sections.forEach((section) => {
-                section.blocks.forEach((block) => {
+        visibility.forEach(element => {
+            this.model.sections.forEach(section => {
+                section.blocks.forEach(block => {
                     if (block.id === element.blockGuid) {
                         block.shown = element.shown;
                     }
@@ -204,36 +189,24 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
         // place if error is way complicated  let's revisit this
         const sub = this.submitAttempted
             .pipe(
-                filter((userPushedButton) => userPushedButton),
+                filter(userPushedButton => userPushedButton),
                 // delay allows for isAllFormContentValid to be updated first
                 delay(1),
                 tap(() => {
-                    this.model &&
-                        this.model.shouldScrollToFirstInvalidQuestion();
+                    this.model && this.model.shouldScrollToFirstInvalidQuestion();
                     this.setFlags(true);
                 }),
                 // Wait for activity in page to cease
                 // if not busy for debounce time then we good to go
-                concatMap(() =>
-                    this.isPageBusy.pipe(
-                        debounceTime(this.timeToDebounce),
-                        filter((isPageBusy) => !isPageBusy),
-                        take(1)
-                    )
+                concatMap(() => this.isPageBusy.pipe(
+                    debounceTime(this.timeToDebounce),
+                    filter(isPageBusy => !isPageBusy),
+                    take(1))
                 ),
                 // if we can't save we are not going past filter, so do necessary cleanup here
-                tap(
-                    () =>
-                        !this.isAllFormContentValid.value &&
-                        (this.dataEntryDisabled = false)
-                ),
+                tap(() => !this.isAllFormContentValid.value && (this.dataEntryDisabled = false)),
                 filter(() => this.isAllFormContentValid.value),
-                concatMap(() =>
-                    this.serviceAgent.flushForm(
-                        this.studyGuid,
-                        this.activityGuid
-                    )
-                )
+                concatMap(() => this.serviceAgent.flushForm(this.studyGuid, this.activityGuid))
             )
             .subscribe((x) => {
                 if (x) {
@@ -255,9 +228,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
         } else if (this.model.sections.length > 1) {
             const length = this.model.sections.length;
             for (let i = 1; i < length; i++) {
-                this.model.readonly
-                    ? this.visitedSectionIndexes.push(true)
-                    : this.visitedSectionIndexes.push(false);
+                this.model.readonly ? this.visitedSectionIndexes.push(true) : this.visitedSectionIndexes.push(false);
             }
         }
     }
@@ -279,9 +250,8 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     }
 
     protected nextWorkflowActivity(): void {
-        this.workflow
-            .getNext()
+        this.workflow.getNext()
             .pipe(take(1))
-            .subscribe((response) => this.submit.emit(response));
+            .subscribe(response => this.submit.emit(response));
     }
 }
