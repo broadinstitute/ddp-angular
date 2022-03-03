@@ -4,7 +4,6 @@ import { ActivityCode } from '../../constants/activity-code';
 import { ActivityRedesignedComponent, SubmissionManager, SubmitAnnouncementService } from 'ddp-sdk';
 
 declare const DDP_ENV: Record<string, any>;
-type InputIds = {[key: string]: number};
 
 @Component({
   selector: 'app-activity',
