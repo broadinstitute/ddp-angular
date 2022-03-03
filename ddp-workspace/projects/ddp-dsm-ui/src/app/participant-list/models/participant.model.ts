@@ -4,24 +4,7 @@ export class ParticipantDSMInformation {
               public assigneeIdMr: string, public assigneeIdTissue: string, public created: string, public reviewed: string,
               public crSent: string, public crReceived: string, public notes: string, public minimalMr: boolean,
               public abstractionReady: boolean, public mrNeedsAttention: boolean, public tissueNeedsAttention: boolean,
-              public exitDate: number, public additionalValuesJson: {}) {
-    this.participantId = participantId;
-    this.ddpParticipantId = ddpParticipantId;
-    this.realm = realm;
-    this.assigneeIdMr = assigneeIdMr;
-    this.assigneeIdTissue = assigneeIdTissue;
-    this.created = created;
-    this.reviewed = reviewed;
-    this.crSent = crSent;
-    this.crReceived = crReceived;
-    this.notes = notes;
-    this.minimalMr = minimalMr;
-    this.abstractionReady = abstractionReady;
-    this.mrNeedsAttention = mrNeedsAttention;
-    this.tissueNeedsAttention = tissueNeedsAttention;
-    this.exitDate = exitDate;
-    this.additionalValuesJson = additionalValuesJson;
-  }
+              public exitDate: number, public additionalValuesJson: {}) {}
 
   static parse( json ): ParticipantDSMInformation {
     let data = json.dynamicFields;

@@ -1470,17 +1470,13 @@ export class ParticipantListComponent implements OnInit {
   }
 
   public isSortField(name: string): boolean {
-    if (this.sortBy) {
-      return name === this.sortBy.innerProperty;
-    } else {
-      return false;
-    }
+    return name === this.sortBy?.innerProperty;
   }
 
   sortByColumnName(col: Filter, sortParent: string): void {
     this.sortOrder = this.sortBy !== null
-          ? this.sortBy.innerProperty === col.participantColumn.name
-          ? ( this.sortOrder === 'asc' ? 'desc' : 'asc' ) : 'asc' : 'asc';
+          ? this.sortBy.innerProperty === col.participantColumn.name ? ( this.sortOrder === 'asc' ? 'desc' : 'asc' ) : 'asc' 
+          : 'asc';
     this.sortParent = sortParent;
     const sort = Sort.parse(col, this.sortOrder);
     sort.activityVersions = this.getLatestActivityVersion(col);
