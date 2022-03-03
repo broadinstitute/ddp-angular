@@ -713,7 +713,7 @@ participant.data.dsm['diagnosisYear'] != null">
           </tab>
 
             <tab heading="Medical Records"
-                 *ngIf="participant.medicalRecords != null"
+                 *ngIf="participant.medicalRecords != null && participant.medicalRecords.length > 0"
                  [active]="tabActive('Medical Records')" (selectTab)="onSelect($event, 'Medical Records')">
               <br/><br/><br/>
 
