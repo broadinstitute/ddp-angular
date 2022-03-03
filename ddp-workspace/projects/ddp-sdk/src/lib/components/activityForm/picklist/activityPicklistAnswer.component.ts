@@ -36,15 +36,15 @@ import { PicklistRenderMode } from './../../../models/activity/picklistRenderMod
                 (valueChanged)="valueChanged.emit($event)"
             >
             </ddp-activity-dropdown-picklist-question>
-            <!-- <ddp-activity-autocomplete-picklist-question
+            <ddp-activity-autocomplete-picklist-question
                 *ngIf="block.renderMode === RENDER_MODE.AUTOCOMPLETE"
                 [block]="block"
                 [readonly]="readonly"
                 (valueChanged)="valueChanged.emit($event)"
             >
-            </ddp-activity-autocomplete-picklist-question> -->
+            </ddp-activity-autocomplete-picklist-question>
             <ddp-activity-picklist-remote-auto-complete-options
-                *ngIf="block.renderMode === RENDER_MODE.AUTOCOMPLETE"
+                *ngIf="block.renderMode === RENDER_MODE.REMOTE_AUTOCOMPLETE"
                 [block]="block"
                 [readonly]="readonly"
                 [studyGuid]="studyGuid"
