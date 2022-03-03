@@ -1474,8 +1474,10 @@ export class ParticipantListComponent implements OnInit {
   }
 
   sortByColumnName(col: Filter, sortParent: string): void {
+    const isSortingByTheSameColumn = col.participantColumn.name === this.sortBy?.innerProperty;
+    const isPreviouslySortedByAscending = 'asc' === this.sortOrder;
     this.sortOrder = this.sortBy !== null
-          ? this.sortBy.innerProperty === col.participantColumn.name ? ( this.sortOrder === 'asc' ? 'desc' : 'asc' ) : 'asc' 
+          ? isSortingByTheSameColumn ? ( isPreviouslySortedByAscending ? 'desc' : 'asc' ) : 'asc'
           : 'asc';
     this.sortParent = sortParent;
     const sort = Sort.parse(col, this.sortOrder);
