@@ -5,6 +5,7 @@ import { ActivityPicklistOption } from '../../../models/activity/activityPicklis
 import { ConfigurationService } from '../../../services/configuration.service';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { PicklistSortingPolicy } from '../../../services/picklistSortingPolicy.service';
+// import { ActivityServiceAgent } from '../../../services/serviceAgents/activityServiceAgent.service';
 import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
 
 @Component({
@@ -80,22 +81,23 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     }
 
     ngOnInit(): void {
-        console.log(this.studyGuid, this.activityGuid);
+        this.sortPolicy = this.shouldBeSorted
+            ? this.sortPolicy
+            : new PicklistSortingPolicy();
+
         this.picklistOptions$ = this.searchValue$.pipe(
             switchMap((searchValue) => {
-                this.sortPolicy = this.shouldBeSorted
-                    ? this.sortPolicy
-                    : new PicklistSortingPolicy();
-
                 const sortedOptions = this.sortPolicy.sortPicklistOptions(
                     this.block.picklistOptions
                 );
 
-                //TO-DO uncomment when there is a valid endpoint
+                // TO-DO uncomment when there is a valid endpoint
                 // this.activityService.getPickListOptions(
                 //     this.block.stableId,
-                //     searchValue
-                // )
+                //     searchValue,
+                //     this.studyGuid,
+                //     this.activityGuid
+                // );
 
                 return of(
                     sortedOptions.filter((option) =>

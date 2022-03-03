@@ -25,8 +25,6 @@ interface GuidsObject {
 
 @Injectable()
 export class ActivityServiceAgent extends UserServiceAgent<any> {
-    studyGuid: string;
-    activityGuid: string;
     constructor(
         session: SessionMementoService,
         @Inject('ddp.config') configuration: ConfigurationService,
@@ -56,9 +54,6 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
             ) {
                 return of(null);
             }
-            this.studyGuid = x.study;
-            this.activityGuid = x.activity;
-            console.log(this.studyGuid, this.activityGuid);
             const baseUrl = this.getBaseUrl(x.study, x.activity);
             return this.getObservable(baseUrl, {}, [404]);
         };
@@ -93,9 +88,11 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
 
     getPickListOptions(
         questionStableId: string,
-        query: string = ''
+        query: string = '',
+        studyGuid: string,
+        activityGuid: string
     ): Observable<any> {
-        const baseUrl = this.getBaseUrl(this.studyGuid, this.activityGuid);
+        const baseUrl = this.getBaseUrl(studyGuid, activityGuid);
         return this.getObservable(
             `${baseUrl}/questions/${questionStableId}/options?${query}`,
             {},
