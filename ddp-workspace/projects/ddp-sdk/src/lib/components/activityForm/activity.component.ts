@@ -20,6 +20,7 @@ import { AnalyticsEventsService } from '../../services/analyticsEvents.service';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
 import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivitySection } from '../../models/activity/activitySection';
+import { NavigateFields } from '../../models/activity/navigateFields';
 import { AnalyticsEventCategories } from '../../models/analyticsEventCategories';
 import { CompositeDisposable } from '../../compositeDisposable';
 import { BehaviorSubject, combineLatest, Observable, Subscription, timer } from 'rxjs';
@@ -61,6 +62,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     private readonly LOG_SOURCE = 'ActivityComponent';
     private shouldSaveLastStep = false;
     private isAdminEditing = false;
+    private carouselRevert:boolean = false;
 
     constructor(
         private logger: LoggingService,
@@ -86,6 +88,38 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         } else if (scrolledPixels < this.HEADER_HEIGHT) {
             this.isScrolled = false;
         }
+    }
+    // Navigate through fields
+    protected nextField(event: Event, {elements, preventDefault = false, carousel = false}: NavigateFields) {
+        preventDefault && event.preventDefault();
+        if(elements && elements.length > 0) {
+            // All provided elements array, excluding those, which doesn't have id
+            const elementsArray: Element[] = Array.from(document.querySelectorAll(elements.join(','))).filter(input => input.id && (input as HTMLElement)?.style.display !== 'none');
+            // Map data structure for elements in order to easily find them
+            const elementsObjects: Map<Element, number> = new Map(elementsArray.map((input, i) => [input, i]));
+            // Pressed element in a DOM
+            const pressedElement = event.target as Element;
+            // One-sided or Carousel behaviour while moving through fields
+            this.switchBehaviour(elementsArray, elementsObjects.get(pressedElement), carousel)
+        }
+    }
+    // Decide behaviour while navigation
+    private switchBehaviour(elements: Element[] | HTMLElement, elementIndex: number | undefined, carousel:boolean) {
+        if(carousel){
+            if(((elements as Element[]).length - 1 === elementIndex)) this.carouselRevert = true;
+            if(elementIndex === 0) this.carouselRevert = false;
+
+            this.carouselRevert ? this.moveBack(elements, elementIndex) : this.moveToNextField(elements, elementIndex);
+        } else {
+            this.moveToNextField(elements, elementIndex)
+        }
+    }
+
+    private moveToNextField(elements: Element[] | HTMLElement, elementIndex: number | undefined) {
+       elementIndex > -1 && elementIndex !== undefined ? elements[elementIndex + 1]?.focus() : elements[0]?.focus();
+    }
+    private moveBack(elements: Element[] | HTMLElement, elementIndex: number | undefined) {
+       elementIndex > -1 && elementIndex !== undefined ? elements[elementIndex - 1]?.focus() : elements[0]?.focus();
     }
 
     public ngOnInit(): void {

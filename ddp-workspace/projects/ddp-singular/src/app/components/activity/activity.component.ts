@@ -17,23 +17,11 @@ export class ActivityComponent extends ActivityRedesignedComponent {
   isCaptchaResolved = false;
 
   @HostListener('document:keydown.enter', ['$event']) onEnter(event:KeyboardEvent) {
-      event.preventDefault();
-      this.nextLineInput(event)
-  }
-
-  private nextLineInput(event: KeyboardEvent) {
-      const inputsArray: Element[] = Array.from(document.querySelectorAll('input, mat-select, select')).filter(input => input.id)
-      const inputsIdsObject: InputIds = Object.fromEntries(inputsArray.map((input, i) => [input.id, i]))
-      const pressedInputId = (event.target as HTMLInputElement).id;
-
-      inputsIdsObject[pressedInputId] > -1 ? this.moveToNextInput(inputsArray, inputsIdsObject,pressedInputId) :
-          this.moveToNextInput(inputsArray, inputsIdsObject, pressedInputId, true)
-  }
-
-  private moveToNextInput(inputs: Element[] | HTMLInputElement, inputsIdsObject:InputIds, PII: string, first?:boolean) {
-      !first ?
-          ((inputsIdsObject[PII] !== undefined && inputsIdsObject[PII] > -1) &&  inputs[inputsIdsObject[PII]+1] && inputs[inputsIdsObject[PII]+1].focus()) :
-          inputs[0]?.focus();
+      super.nextField(event, {
+          elements: ['input', 'mat-select', 'select', 'textarea'],
+          preventDefault: true,
+          carousel: true
+      })
   }
 
   get isPrequal(): boolean {
