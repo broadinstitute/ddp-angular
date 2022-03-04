@@ -32,7 +32,7 @@ describe('ActivityDecimalRangeValidationRule', () => {
     });
 
     it('should return true if the answer is between min and max(positive range)', () => {
-        const MIN = 1;
+        const MIN = 0;
         const MAX = 3;
         const question = {} as ActivityQuestionBlock<any>;
         question.answer = {value: 2345, scale: 3};
@@ -44,7 +44,7 @@ describe('ActivityDecimalRangeValidationRule', () => {
 
     it('should return true if the answer is between min and max(negative range)', () => {
         const MIN = -5;
-        const MAX = -1;
+        const MAX = 0;
         const question = {} as ActivityQuestionBlock<any>;
         question.answer = {value: -200, scale: 2};
         validator = new ActivityDecimalRangeValidationRule(question, MIN, MAX);
