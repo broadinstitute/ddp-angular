@@ -1,7 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import {Observable, tap, throwError} from 'rxjs';
+import {catchError, map } from 'rxjs/operators';
+import {zip} from 'rxjs';
 
 import { LoggingService } from './logging.service';
 import { ConfigurationService } from './configuration.service';
@@ -21,23 +22,26 @@ export class FileUploadService extends UserServiceAgent<any> {
         super(session, configuration, http, logger, null);
     }
 
-    getUploadUrl(studyGuid: string, activityGuid: string, questionStableId: string, file: File): Observable<FileUploadResponse> {
+    getUploadUrl(studyGuid: string, activityGuid: string, questionStableId: string, files: File[]): Observable<FileUploadResponse[]> {
         const path = `/studies/${studyGuid}/activities/${activityGuid}/uploads`;
 
-        const requestBody: FileUploadBody = {
-            questionStableId,
-            fileName: file.name,
-            fileSize: file.size,
-            mimeType: file.type
-        };
-
-        return this.postObservable(path, requestBody, {}, true).pipe(
-            catchError(error => {
-                this.logger.logDebug('getUploadUrl error', error);
-                return throwError(error.error);
+        const acceptedFiles: Observable<FileUploadResponse | null>[] = files.map<FileUploadBody>(file =>  {
+            return {
+                questionStableId,
+                fileName: file.name,
+                fileSize: file.size,
+                mimeType: file.type
+            }
+        }).map(accFile =>
+            this.postObservable(path, accFile, {}, true).pipe(
+             catchError(error => {
+             this.logger.logDebug('getUploadUrl error', error);
+             return throwError(error.error);
             }),
             map(x => !!x ? x.body as FileUploadResponse : null)
-        );
+         ))
+
+        return  zip(...acceptedFiles)
     }
 
     // Upload a file to GCP Bucket via an authorized upload URL (received in `getUploadUrl` method above)
