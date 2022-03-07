@@ -33,7 +33,7 @@
     padding: 0 2rem 0 1.5rem;
 }
 
-.back-to-top {
+.footer-btn {
     font-size: 1.25rem;
     text-align: left;
     padding: 0 5px 0 0;
@@ -48,6 +48,11 @@
     }
 }
 
+a.footer-btn {
+    flex-shrink: 1;
+    white-space: normal;
+}
+
 .contacts__item {
     font-family: $primary-font-medium;
     margin-left: 1.5rem;
@@ -58,6 +63,22 @@
     display: flex;
     align-items: center;
     min-width: fit-content;
+}
+
+@media screen and (max-width: 1400px) and (min-width: $desktop-breakpoint) {
+    .auth {
+        flex-direction: column;
+    }
+
+    .actions {
+        padding: 1.15rem 0.5rem 1.15rem 0.5rem;
+        height: auto;
+
+        &__wrapper {
+            flex-wrap: wrap;
+            padding: 0 1rem;
+        }
+    }
 }
 
 @media screen and (max-width: $desktop-breakpoint) {
@@ -113,7 +134,7 @@
         }
     }
 
-    .back-to-top {
+    .footer-btn {
         width: fit-content;
     }
 }
