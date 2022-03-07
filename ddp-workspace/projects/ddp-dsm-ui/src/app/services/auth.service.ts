@@ -81,7 +81,6 @@ export class Auth {
   constructor(private router: Router, private http: HttpClient, private sessionService: SessionService, private role: RoleService,
                private compService: ComponentService, private dsmService: DSMService) {
     // Add callback for lock `authenticated` event
-    console.log(this.lock);
     this.lock.on('authenticated', (authResult: any) => {
       localStorage.setItem(Auth.AUTH0_TOKEN_NAME, authResult.idToken);
       const payload = {
@@ -120,7 +119,6 @@ export class Auth {
   }
 
   public doLogin(authPayload: any): void {
-    console.log(authPayload);
     const dsmObservable = this.http.post(this.authUrl, authPayload, this.buildHeaders()).pipe(
       catchError(this.handleError)
     );
