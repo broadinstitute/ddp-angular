@@ -6,12 +6,11 @@
   display: flex;
   justify-content: center;
 
-  margin-top: 2.4rem;
+  margin: 8.39rem;
 }
 
 :host-context(app-participant-list) {
     background-color: $__cultured;
-    height: 100%;
 }
 
 .container {
@@ -24,7 +23,7 @@
 
 .title {
   margin: .7rem 0;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-family: 'Spartan-Bold', sans-serif;
   color: $__font;
 
@@ -132,10 +131,13 @@
   margin-top: 1.6rem;
 
   .button {
-    width: 35%;
+    width: 433px;
+    height: 67px;
     display: flex;
-    padding: 15px 15px;
+    border-radius: 6px!important;
+    padding: 14.5px 5.5px 14.5px 11.5px;
     align-items: center;
+    justify-content: space-between;
     @include media-md {
         width: 80%;
     }
@@ -146,20 +148,56 @@
         width: 100%;
     }
 
-    p {
-        font-weight: bold;
-        margin: 5px 0 0 0;
-    }
-    .user {
-        height: 1.2em;
-        margin-right: 13px;
-    }
-    .next {
-        filter: invert(100%);
-        -webkit-filter: invert(100%);
-        height: 1.2em;
-        margin-left: auto;
-    }
+      .user-container {
+          width: 38px;
+          height: 38px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          img {
+              height: 26px!important;
+              width: 24px!important;
+          }
+      }
+      .users-container {
+          width: 38px;
+          height: 38px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          img {
+              height: 24px!important;
+              width: 32px!important;
+
+          }
+      }
+      .text-container {
+          width: 80%;
+          height: 38px;
+          display: flex;
+          align-items: center;
+          margin-top: 3px;
+          justify-content: start;
+          p {
+              text-align: start;
+              font-size: 20px!important;
+              margin:  0 0 0 8px!important;
+              font-family: Spartan-Semibold, sans-serif!important;
+          }
+      }
+      .next-container {
+          width: 38px;
+          height: 38px;
+          display: flex;
+          align-items: center;
+
+          img {
+              width: 30px;
+              height: 30px;
+              float: right;
+              margin: 0 auto;
+          }
+      }
   }
 
   .button + .button {

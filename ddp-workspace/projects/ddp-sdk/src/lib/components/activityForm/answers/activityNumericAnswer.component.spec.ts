@@ -121,53 +121,50 @@ describe('ActivityNumericAnswer (Decimal answers)', () => {
         fixture.detectChanges();
         const inputElement: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
         expect(inputElement.value).toBe('2.35');
-        // TODO: fix commented tests below in scope of DDP-7573
-        // expect(inputElement.min).toBe(null);
-        // expect(inputElement.max).toBe(null);
     });
 
     it('should update input', () => {
         component.block = {
             answer: { value: 456, scale: 1 },
-            // min: {},
-            // max: {},
+            min: 10,
+            max: 99,
             scale: 2,
             questionType: QuestionType.Decimal
         } as ActivityDecimalQuestionBlock;
         fixture.detectChanges();
         const inputElement: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
         expect(inputElement.value).toBe('45.60');
-        // expect(inputElement.min).toBe();
-        // expect(inputElement.max).toBe();
+        expect(inputElement.min).toBe('10');
+        expect(inputElement.max).toBe('99');
     });
 
     it('should update input if answer is null', () => {
         component.block = {
             answer: null,
-            // min: {},
-            // max: {},
+            min: 0,
+            max: 10,
             scale: 2,
             questionType: QuestionType.Decimal
         } as ActivityDecimalQuestionBlock;
         fixture.detectChanges();
         const inputElement: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
         expect(inputElement.value).toBe('');
-        // expect(inputElement.min).toBe();
-        // expect(inputElement.max).toBe();
+        expect(inputElement.min).toBe('0');
+        expect(inputElement.max).toBe('10');
     });
 
     it('should update input with default question scale value (0)', () => {
         component.block = {
             answer: { value: 123, scale: 1 },
-            // min: {},
-            // max: {},
+            min: 1,
+            max: 25,
             questionType: QuestionType.Decimal
         } as ActivityDecimalQuestionBlock;
         fixture.detectChanges();
         const inputElement: HTMLInputElement = fixture.debugElement.query(By.css('input')).nativeElement;
         expect(inputElement.value).toBe('12');
-        // expect(inputElement.min).toBe();
-        // expect(inputElement.max).toBe();
+        expect(inputElement.min).toBe('1');
+        expect(inputElement.max).toBe('25');
     });
 
     it('should emit valid decimal answer', () => {

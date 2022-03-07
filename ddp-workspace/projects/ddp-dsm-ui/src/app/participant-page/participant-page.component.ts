@@ -1,4 +1,3 @@
-import {ViewportScroller} from '@angular/common';
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy, AfterViewChecked} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TabDirective } from 'ngx-bootstrap/tabs';
@@ -1108,11 +1107,11 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   // display additional value
   getAdditionalValue(colName: string): string {
     if (this.participant.participant != null && this.participant.participant.additionalValuesJson != null) {
-    let camelCaseColumnName = Utils.convertUnderScoresToCamelCase(colName);
-    if (this.participant.participant.additionalValuesJson[ camelCaseColumnName ] != undefined && this.participant.participant.additionalValuesJson[ camelCaseColumnName ] != null) {
-      return this.participant.participant.additionalValuesJson[ camelCaseColumnName ];
+      const camelCaseColumnName = Utils.convertUnderScoresToCamelCase(colName);
+      if (this.participant.participant.additionalValuesJson[camelCaseColumnName] != null) {
+        return this.participant.participant.additionalValuesJson[camelCaseColumnName];
+      }
     }
-  }
     return '';
   }
 

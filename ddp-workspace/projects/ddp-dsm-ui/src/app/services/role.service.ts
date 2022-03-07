@@ -30,6 +30,7 @@ export class RoleService {
   private _isParticipantListView = false;
   private _isParticipantEdit = false;
   private _isDSSTesting = true; //TODO remove before final merge, for testing only
+  private _isKitUploadInvalidAddress = false;
 
   private _userId: string;
   private _user: string;
@@ -99,6 +100,8 @@ export class RoleService {
             this._isParticipantListView = true;
           } else if (entry === 'participant_edit') {
             this._isParticipantEdit = true;
+          } else if (entry === 'kit_upload_invalid_address') {
+            this._isKitUploadInvalidAddress = true;
           }
         }
       }
@@ -231,5 +234,9 @@ export class RoleService {
 
   private getClaimByKeyName( token: any, key: string ) {
       return this.sessionService.getDSMClaims(token)[this.config.auth0ClaimNameSpace + key];
+  }
+
+  public allowedToUploadKitInvalidAddress(): boolean {
+    return this._isKitUploadInvalidAddress;
   }
 }

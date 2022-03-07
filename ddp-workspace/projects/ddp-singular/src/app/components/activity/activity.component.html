@@ -160,13 +160,13 @@
     <button
       #submitButton
       *ngIf="!isReadonly()"
-      class="button button--primary pull-right button--icon"
+      class="button button--primary pull-right submit-btn"
       [disabled]="dataEntryDisabled || (isPageBusy | async)"
       (click)="flush()"
       (mouseenter)="mouseEnterOnSubmit()"
     >
       <mat-icon *ngIf="displayAgreeIcon">done</mat-icon>
-      {{ submitText | translate }}
+      {{ 'SDK.NextButton' | translate }}
     </button>
 
     <button *ngIf="isReadonly()" class="button button--primary pull-right" (click)="close()">

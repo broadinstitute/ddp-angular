@@ -229,7 +229,7 @@ export class SurveyComponent implements OnInit {
           }
         );
     } else {
-      this.errorMessage = 'Please select a realm and a survey and enter the participant ID for the participant';
+      this.errorMessage = 'Please select a study and a survey and enter the participant ID for the participant';
     }
   }
 

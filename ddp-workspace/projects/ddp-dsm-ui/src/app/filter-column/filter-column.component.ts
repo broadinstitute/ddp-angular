@@ -83,7 +83,7 @@ export class FilterColumnComponent implements OnInit {
     return dataFilter?.participantColumn?.tableAlias === 'participantData';
   }
 
-  inputValueChanged() {
+  inputValueChanged(): void {
     this.dataFilter.notEmpty = false;
     this.dataFilter.empty = false;
   }
