@@ -28,6 +28,8 @@ import { ActivityPicklistQuestionBlock } from '../../models/activity/activityPic
 import { ActivityStrictMatchValidationRule } from './validators/activityStrictMatchValidationRule';
 import { ActivityUniqueValidationRule } from './validators/activityUniqueValidationRule';
 import { ValidationRuleType } from './validationRuleType';
+import { DecimalHelper } from '../../utility/decimalHelper';
+import { ActivityDecimalRangeValidationRule } from './validators/activityDecimalRangeValidationRule';
 
 @Injectable()
 export class ActivityValidatorBuilder {
@@ -51,6 +53,7 @@ export class ActivityValidatorBuilder {
             { type: ValidationRuleType.DateRange, factory: (x, y) => this.buildDateRangeValidator(x, y) },
             { type: ValidationRuleType.AgeRange, factory: (x, y) => this.buildAgeRangeValidator(x, y) },
             { type: ValidationRuleType.IntRange, factory: (x, y) => this.buildNumericRangeValidator(x, y) },
+            { type: ValidationRuleType.DecimalRange, factory: (x, y) => this.buildDecimalRangeValidator(x, y) },
             { type: ValidationRuleType.Unique, factory: (x, y) => new ActivityUniqueValidationRule(y) },
             { type: ValidationRuleType.UniqueValue },
         ];
@@ -149,5 +152,17 @@ export class ActivityValidatorBuilder {
             numericRangeRule.max = validationJson.max;
         }
         return numericRangeRule;
+    }
+
+    private buildDecimalRangeValidator(validationJson: any, questionBlock: ActivityQuestionBlock<any>):
+        ActivityDecimalRangeValidationRule {
+        const decimalRangeRule = new ActivityDecimalRangeValidationRule(questionBlock);
+        if (DecimalHelper.isDecimalAnswerType(validationJson.min)) {
+            decimalRangeRule.min = DecimalHelper.mapDecimalAnswerToNumber(validationJson.min);
+        }
+        if (DecimalHelper.isDecimalAnswerType(validationJson.max)) {
+            decimalRangeRule.max = DecimalHelper.mapDecimalAnswerToNumber(validationJson.max);
+        }
+        return decimalRangeRule;
     }
 }

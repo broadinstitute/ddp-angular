@@ -2,7 +2,7 @@
 
 .activity {
   .activity-header {
-    margin: 2.5rem 0 1.5rem;
+    margin: 2.5rem 0 19px;
 
     font-family: 'Spartan-Bold', sans-serif;
     font-size: 32px;
@@ -48,11 +48,18 @@
     * {
       font-family: 'Spartan-Medium', sans-serif;
     }
+    margin:0!important;
 
     .activity-question-title {
       display: inline;
-
-      margin: 0;
+      font-family: Spartan-Semibold, sans-serif!important;
+      font-size: 20px!important;
+      margin-top: 19px!important;
+    }
+    .activity-question-title2 {
+        font-family: Spartan, sans-serif!important;
+        font-size: 18px!important;
+        margin-bottom: 24px!important;
     }
   }
 

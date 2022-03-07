@@ -28,6 +28,7 @@ export class RoleService {
   private _canEditDrugList = false;
   private _isParticipantListView = false;
   private _isParticipantEdit = false;
+  private _isKitUploadInvalidAddress = false;
 
   private _userId: string;
   private _user: string;
@@ -96,6 +97,8 @@ export class RoleService {
             this._isParticipantListView = true;
           } else if (entry === 'participant_edit') {
             this._isParticipantEdit = true;
+          } else if (entry === 'kit_upload_invalid_address') {
+            this._isKitUploadInvalidAddress = true;
           }
         }
       }
@@ -220,5 +223,9 @@ export class RoleService {
 
   public allowedToEditParticipant(): boolean {
     return this._isParticipantEdit;
+  }
+
+  public allowedToUploadKitInvalidAddress(): boolean {
+    return this._isKitUploadInvalidAddress;
   }
 }

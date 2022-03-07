@@ -21,8 +21,8 @@ export class ParticipantColumn {
   public static DIAGNOSIS_MONTH = new ParticipantColumn('Diagnosis Month', 'diagnosisMonth', 'data', 'dsm');
   public static DIAGNOSIS_YEAR = new ParticipantColumn('Diagnosis Year', 'diagnosisYear', 'data', 'dsm');
 
-  public static ONC_HISTORY_CREATED = new ParticipantColumn('Onc History Created', 'createdOncHistory', 'o');
-  public static ONC_HISTORY_REVIEWED = new ParticipantColumn('Onc History Reviewed', 'reviewedOncHistory', 'o');
+  public static ONC_HISTORY_CREATED = new ParticipantColumn('Onc History Created', 'created', 'o');
+  public static ONC_HISTORY_REVIEWED = new ParticipantColumn('Onc History Reviewed', 'reviewed', 'o');
   public static PAPER_CR_SENT = new ParticipantColumn('Paper C/R Sent', 'crSent', 'r');
   public static PAPER_CR_RECEIVED = new ParticipantColumn('Paper C/R Received', 'crReceived', 'r');
   public static PARTICIPANT_NOTES = new ParticipantColumn('Participant Notes', 'notes', 'r');
@@ -127,7 +127,7 @@ export class ParticipantColumn {
   public static EXTERNAL_ORDER_DATE = new ParticipantColumn('External Order Date', 'externalOrderDate', 'k');
   public static CARE_EVOLVE = new ParticipantColumn('Ordered at CareEvolve', 'careEvolve', 'k');
   public static UPLOAD_REASON = new ParticipantColumn('Upload Reason', 'uploadReason', 'k');
-  public static SAMPLE_QUEUE = new ParticipantColumn("Status", "sampleQueue", "k");
+  public static SAMPLE_QUEUE = new ParticipantColumn('Status', 'sampleQueue', 'k');
   public static RESULT_TEST = new ParticipantColumn('Test Result', 'result', 'k', 'testResult');
   public static CORRECTED_TEST = new ParticipantColumn('Test Corrected', 'isCorrected', 'k', 'testResult');
   public static TIME_TEST = new ParticipantColumn('Test Time Completed', 'timeCompleted', 'k', 'testResult');

@@ -4,9 +4,9 @@ import {NameValue} from '../utils/name-value.model';
 import {Statics} from '../utils/statics';
 import {Value} from '../utils/value.model';
 import {ParticipantColumn} from './models/column.model';
-import {Participant} from "../participant-list/participant-list.model";
-import {ActivityDefinition} from "../activity-data/models/activity-definition.model";
-import {Utils} from "../utils/utils";
+import {Participant} from '../participant-list/participant-list.model';
+import {ActivityDefinition} from '../activity-data/models/activity-definition.model';
+import {Utils} from '../utils/utils';
 
 export class Filter {
 
@@ -579,9 +579,9 @@ export class Filter {
           filter.filter2, null,
           filter.exactMatch, filter.type, filter.range, filter.empty, filter.notEmpty, filter.participantColumn, filter.additionalType);
       } else if (filter.selectedOptions.length > 0) {
-        let selectedOptions = <Array<boolean>>filter.selectedOptions
-        let trueIndex = selectedOptions.indexOf(true);
-        let chosenValue = filter.options[trueIndex].value;
+        const selectedOptions = <Array<boolean>>filter.selectedOptions;
+        const trueIndex = selectedOptions.indexOf(true);
+        const chosenValue = filter.options[trueIndex].value;
         filterText = this.getFilterJson(parent,
           new NameValue('additionalValuesJson', chosenValue),
           filter.filter2, null,
@@ -642,17 +642,17 @@ export class Filter {
 
   public static getFilterJson(parent, filter1, filter2, selectedOptions, exact, type, range, empty, notEmpty, participantColumn, additionalType?): {} {
     const filterText = {
-      'parentName': parent,
-      'filter1': filter1,
-      'filter2': filter2,
-      'exactMatch': exact,
-      'selectedOptions': selectedOptions,
-      'type': type,
-      'range': range,
-      'empty': empty,
-      'notEmpty': notEmpty,
-      'participantColumn': participantColumn,
-      'additionalType': additionalType
+      parentName: parent,
+      filter1: filter1,
+      filter2: filter2,
+      exactMatch: exact,
+      selectedOptions: selectedOptions,
+      type: type,
+      range: range,
+      empty: empty,
+      notEmpty: notEmpty,
+      participantColumn: participantColumn,
+      additionalType: additionalType
     };
     return filterText;
   }

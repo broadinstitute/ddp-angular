@@ -6,6 +6,7 @@ import { throwError as observableThrowError, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { Filter } from '../filter-column/filter-column.model';
+import {Sort} from '../sort/sort.model';
 import { ViewFilter } from '../filter-column/models/view-filter.model';
 import { Abstraction } from '../medical-record-abstraction/medical-record-abstraction.model';
 import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
@@ -119,7 +120,7 @@ export class DSMService {
     const userId = this.role.userID();
     map.push({name: DSMService.REALM, value: realm});
     map.push({name: 'userId', value: userId});
-    if (parent) map.push( {name: "parent", value: parent} );
+    if (parent) {map.push( {name: 'parent', value: parent} );}
     return this.http.get(url, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );
@@ -139,7 +140,7 @@ export class DSMService {
   }
 
   public filterData(realm: string, json: string, parent: string, defaultFilter: boolean,
-                    from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage()
+                    from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage(), sortBy?: Sort
   ): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'filterList';
     const map: { name: string; value: any }[] = [];
@@ -149,6 +150,9 @@ export class DSMService {
     map.push({name: 'to', value: to});
     map.push({name: 'userId', value: this.role.userID()});
     map.push({name: 'userMail', value: this.role.userMail()});
+    if (sortBy) {
+      map.push( {name: 'sortBy', value: JSON.stringify(sortBy)} );
+    }
     map.push({name: 'defaultFilter', value: defaultFilter === true ? '1' : defaultFilter != null ? '0' : ''});
     return this.http.patch(url, json, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
@@ -522,7 +526,8 @@ export class DSMService {
     );
   }
 
-  public uploadTxtFile(realm: string, kitType: string, file: File, reason: string, carrier: string): Observable<any> {
+  public uploadTxtFile(realm: string, kitType: string, file: File, reason: string, carrier: string,
+                       skipAddressValidation: boolean): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'kitUpload';
     const map: { name: string; value: any }[] = [];
     map.push({name: DSMService.REALM, value: realm});
@@ -530,7 +535,7 @@ export class DSMService {
     map.push({name: 'userId', value: this.role.userID()});
     map.push({name: 'reason', value: reason});
     map.push({name: 'carrier', value: carrier});
-
+    map.push( {name: 'skipAddressValidation', value: skipAddressValidation} );
     return this.http.post(url, file, this.buildQueryUploadHeader(map)).pipe(
       catchError(this.handleError)
     );
@@ -546,7 +551,7 @@ export class DSMService {
   }
 
   public uploadDuplicateParticipant(realm: string, kitType: string, jsonParticipants: string,
-                                    reason: string, carrier: string
+                                    reason: string, carrier: string, skipAddressValidation: boolean
   ): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'kitUpload';
     const map: { name: string; value: any }[] = [];
@@ -557,7 +562,7 @@ export class DSMService {
     map.push({name: 'Content-Type', value: 'application/json; charset=utf-8'});
     map.push({name: 'reason', value: reason});
     map.push({name: 'carrier', value: carrier});
-
+    map.push( {name: 'skipAddressValidation', value: skipAddressValidation} );
     return this.http.post(url, jsonParticipants, this.buildQueryUploadHeader(map)).pipe(
       catchError(this.handleError)
     );

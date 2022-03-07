@@ -13,7 +13,6 @@ import { DSMService } from '../services/dsm.service';
 import { RoleService } from '../services/role.service';
 import { NameValue } from '../utils/name-value.model';
 import { PatchUtil } from '../utils/patch.model';
-import { Result } from '../utils/result.model';
 import { Statics } from '../utils/statics';
 import { Utils } from '../utils/utils';
 import { MedicalRecord } from './medical-record.model';
@@ -463,8 +462,8 @@ export class MedicalRecordComponent implements OnInit {
   // display additional value
   getAdditionalValue(colName: string): string {
     if (this.medicalRecord.additionalValuesJson != null) {
-      let camelCaseColumnName = Utils.convertUnderScoresToCamelCase(colName);
-      if (this.medicalRecord.additionalValuesJson[ camelCaseColumnName ] != undefined && this.medicalRecord.additionalValuesJson[ camelCaseColumnName ] != null) {
+      const camelCaseColumnName = Utils.convertUnderScoresToCamelCase(colName);
+      if (this.medicalRecord.additionalValuesJson[ camelCaseColumnName ] != null) {
         return this.medicalRecord.additionalValuesJson[ camelCaseColumnName ];
       }
     }

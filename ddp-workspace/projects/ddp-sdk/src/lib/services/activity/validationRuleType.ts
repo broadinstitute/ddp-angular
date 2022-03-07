@@ -10,6 +10,7 @@ export enum ValidationRuleType {
     DateRange = 'DATE_RANGE',
     AgeRange = 'AGE_RANGE',
     IntRange = 'INT_RANGE',
+    DecimalRange = 'DECIMAL_RANGE',
     Unique = 'UNIQUE',
     UniqueValue = 'UNIQUE_VALUE'  // UniqueValue is server-side validation
 }

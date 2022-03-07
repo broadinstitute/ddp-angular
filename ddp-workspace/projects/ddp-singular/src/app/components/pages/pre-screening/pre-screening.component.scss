@@ -1,5 +1,67 @@
+@import '../../../../styles/colors';
+
 .container {
   max-width: 720px !important;
     margin-top: 50px!important;
   margin-bottom: 42px !important;
+}
+
+:host-context(app-pre-screening) {
+    background-color: $__cultured;
+
+    ::ng-deep.activity-question-title {
+        font-family: Spartan-Semibold, sans-serif!important;
+        font-size: 18px!important;
+    }
+    ::ng-deep.ddp-activity-question {
+        margin-top: 48px;
+    }
+    ::ng-deep button.ng-star-inserted {
+        padding: 13px 23px;
+        height: 53px;
+        width: 200px;
+    }
+    ::ng-deep.ng-tns-c90-0 {
+        width: 138px;
+    }
+
+    ::ng-deep.ng-tns-c90-1 {
+        width: 300px;
+    }
+
+    ::ng-deep.ddp-required-question-prompt {
+        margin: 2rem 0 5px!important;
+    }
+
+    ::ng-deep.mat-focus-indicator {
+        width: 45px!important;
+        height: 45px!important;
+    }
+    ::ng-deep.mat-radio-inner-circle,
+    ::ng-deep.mat-radio-outer-circle {
+        width: 25px!important;
+        height: 25px!important;
+        border-width: 1px!important;
+    }
+
+    ::ng-deep.mat-radio-label-content {
+        margin-top: 5px!important;
+        margin-left: 5px!important;
+    }
+
+    ::ng-deep.activity-question-footnote {
+        margin-top: 4px;
+        font-size: 14px;
+    }
+
+    ::ng-deep.paragraph {
+        a:not(.button) {
+            font-family: inherit;
+        }
+    }
+
+    ::ng-deep iframe[title="reCAPTCHA"] {
+        margin-top: 35px!important;
+    }
+;
 }
