@@ -5,7 +5,7 @@ import { ActivityPicklistOption } from '../../../models/activity/activityPicklis
 import { ConfigurationService } from '../../../services/configuration.service';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { PicklistSortingPolicy } from '../../../services/picklistSortingPolicy.service';
-// import { ActivityServiceAgent } from '../../../services/serviceAgents/activityServiceAgent.service';
+import { ActivityServiceAgent } from '../../../services/serviceAgents/activityServiceAgent.service';
 import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
 
 @Component({
@@ -73,7 +73,8 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     constructor(
         translate: NGXTranslateService,
         private sortPolicy: PicklistSortingPolicy,
-        @Inject('ddp.config') public config: ConfigurationService // private activityService: ActivityServiceAgent
+        @Inject('ddp.config') public config: ConfigurationService,
+        private activityService: ActivityServiceAgent
     ) {
         super(translate);
         this.ignoredSymbolsInQuery =
@@ -91,20 +92,11 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
                     this.block.picklistOptions
                 );
 
-                // TO-DO uncomment when there is a valid endpoint
-                // this.activityService.getPickListOptions(
-                //     this.block.stableId,
-                //     searchValue,
-                //     this.studyGuid,
-                //     this.activityGuid
-                // );
-
-                return of(
-                    sortedOptions.filter((option) =>
-                        option.optionLabel
-                            .toLowerCase()
-                            .includes(searchValue.toLowerCase())
-                    )
+               return this.activityService.getPickListOptions(
+                    this.block.stableId,
+                    searchValue,
+                    this.studyGuid,
+                    this.activityGuid
                 );
             })
         );
