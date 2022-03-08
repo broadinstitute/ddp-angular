@@ -35,7 +35,7 @@ import { ForResearchesComponent } from './components/pages/for-researches/for-re
 import { SuccessMessageComponent } from './components/success-message/success-message.component';
 import { SuccessMessageDialogComponent } from './components/success-message-dialog/success-message-dialog.component';
 import {NotificationsComponent} from './components/notifications/notifications.component';
-import {LoginComponent} from "./components/login/login.component";
+import {LoginComponent} from './components/login/login.component';
 
 
 @NgModule({

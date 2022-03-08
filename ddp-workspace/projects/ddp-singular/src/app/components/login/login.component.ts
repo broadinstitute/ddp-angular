@@ -1,5 +1,5 @@
-import { Component} from "@angular/core";
-import {Auth0AdapterService} from "ddp-sdk";
+import { Component} from '@angular/core';
+import {Auth0AdapterService} from 'ddp-sdk';
 
 @Component({
     selector: 'app-login',
@@ -7,6 +7,6 @@ import {Auth0AdapterService} from "ddp-sdk";
 })
 export class LoginComponent {
     constructor(private auth0: Auth0AdapterService) {
-        this.auth0.login()
+        this.auth0.login();
     }
 }
