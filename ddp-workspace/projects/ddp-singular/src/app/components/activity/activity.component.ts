@@ -15,16 +15,16 @@ export class ActivityComponent extends ActivityRedesignedComponent {
   Route = Route;
   isCaptchaResolved = false;
 
-  @HostListener('document:keydown.enter', ['$event']) onEnter(event:KeyboardEvent) {
+  @HostListener('document:keydown.enter', ['$event']) onEnter(event: KeyboardEvent): void {
       super.nextField(event, {
           elements: ['input', 'mat-select', 'select', 'textarea'],
           preventDefault: true,
           carousel: true
-      })
+      });
   }
 
   get isPrequal(): boolean {
-    return this.model && this.model.activityCode === ActivityCode.Prequal;
+    return this.model?.activityCode === ActivityCode.Prequal;
   }
 
   get captchaSiteKey(): string {

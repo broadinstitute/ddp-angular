@@ -1,5 +1,5 @@
-export interface NavigateFields {
-    elements: string[] | [] | undefined,
+export interface NavigateFieldsOptionsModel {
+    elements: string[];
     preventDefault?: boolean;
     carousel?: boolean;
 }
