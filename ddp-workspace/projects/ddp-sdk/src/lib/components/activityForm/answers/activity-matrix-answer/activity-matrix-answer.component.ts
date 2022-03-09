@@ -74,7 +74,7 @@ export class ActivityMatrixAnswer implements OnChanges {
     this.dialog.open(ActivityMatrixAnswerDialogComponent, {
       data,
       width: '100%',
-      maxWidth: 1600,
+      maxWidth: 1700,
       maxHeight: 768,
       autoFocus: false,
       scrollStrategy: new NoopScrollStrategy(),
