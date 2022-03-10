@@ -601,7 +601,7 @@ export class Filter {
         return null;
       }
     } else if (filter.type === Filter.BOOLEAN_TYPE || filter.type === Filter.CHECKBOX_TYPE || filter.type === Filter.AGREEMENT) {
-      if ((filter.value1 !== null && filter.value1 === true)) {
+      if ((filter.value1 !== null && filter.value1 === true) || filter.notEmpty) {
         filterText = this.getFilterJson(parent,
           new NameValue(filter.participantColumn.name, 'true'),
           filter.filter2, null,
