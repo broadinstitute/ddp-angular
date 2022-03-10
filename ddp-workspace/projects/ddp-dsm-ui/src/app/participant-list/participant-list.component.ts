@@ -1469,8 +1469,8 @@ export class ParticipantListComponent implements OnInit {
     });
   }
 
-  public isSortField(name: string): boolean {
-    return name === this.sortBy?.innerProperty;
+  public isSortField(name: string, tableAlias: string): boolean {
+    return name === this.sortBy?.innerProperty && tableAlias === this.sortBy?.tableAlias;
   }
 
   sortByColumnName(col: Filter, sortParent: string): void {
