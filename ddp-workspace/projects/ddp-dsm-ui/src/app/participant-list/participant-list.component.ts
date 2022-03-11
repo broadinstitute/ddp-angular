@@ -1016,19 +1016,34 @@ export class ParticipantListComponent implements OnInit {
   public clearFilter(): void {
     this.start = new Date().getTime();
     this.filterQuery = null;
-    // this.deselectQuickFilters();
     this.clearManualFilters();
-    // this.selectedFilterName = '';
     this.getData();
-    // this.setDefaultColumns();
+    this.setDefaultColumns();
   }
 
   private setDefaultColumns(): void {
+    if (this.isQuickFilterSelected() || this.isSavedFilterSelected()) return;
     const filteredColumns = this.extractDefaultColumns(this.selectedColumns);
     Object.assign(this.selectedColumns, filteredColumns);
     if (this.isDataOfViewFilterExists()) {
       this.viewFilter.columns = this.extractDefaultColumns(this.viewFilter.columns);
     }
+  }
+
+  private isQuickFilterSelected(): boolean {
+    let isQuickFilterSelected = false;
+    this.quickFilters.forEach(viewFilter => {
+      if (viewFilter.selected) isQuickFilterSelected = true;
+    })
+    return isQuickFilterSelected;
+  }
+
+  private isSavedFilterSelected(): boolean {
+    let isSavedFilterSelected = false;
+    this.savedFilters.forEach(viewFilter => {
+      if (viewFilter.selected) isSavedFilterSelected = true;
+    })
+    return isSavedFilterSelected;
   }
 
   private extractDefaultColumns(selectedColumns: {}): {} {
