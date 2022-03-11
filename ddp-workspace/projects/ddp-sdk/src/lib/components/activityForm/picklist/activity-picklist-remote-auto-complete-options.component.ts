@@ -1,5 +1,14 @@
 import { Component, Inject, Input, OnInit, SimpleChanges } from '@angular/core';
-import { BehaviorSubject, map, Observable, of, switchMap, tap } from 'rxjs';
+import {
+    BehaviorSubject,
+    debounceTime,
+    distinctUntilChanged,
+    map,
+    Observable,
+    of,
+    switchMap,
+    tap,
+} from 'rxjs';
 import { ActivityPicklistNormalizedGroup } from '../../../models/activity/activityPicklistNormalizedGroup';
 import { ActivityPicklistOption } from '../../../models/activity/activityPicklistOption';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
@@ -77,14 +86,16 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
 
     ngOnInit(): void {
         this.picklistOptions$ = this.searchValue$.pipe(
-            switchMap((searchValue) => {
-                return this.activityService.getPickListOptions(
+            debounceTime(500),
+            distinctUntilChanged(),
+            switchMap((searchValue) =>
+                this.activityService.getPickListOptions(
                     this.block.stableId,
                     searchValue,
                     this.studyGuid,
                     this.activityGuid
-                );
-            }),
+                )
+            ),
             map((data) => data.results)
         );
     }
