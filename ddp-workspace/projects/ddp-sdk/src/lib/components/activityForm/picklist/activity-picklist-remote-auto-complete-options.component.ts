@@ -2,9 +2,7 @@ import { Component, Inject, Input, OnInit, SimpleChanges } from '@angular/core';
 import { BehaviorSubject, Observable, of, switchMap, tap } from 'rxjs';
 import { ActivityPicklistNormalizedGroup } from '../../../models/activity/activityPicklistNormalizedGroup';
 import { ActivityPicklistOption } from '../../../models/activity/activityPicklistOption';
-import { ConfigurationService } from '../../../services/configuration.service';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
-import { PicklistSortingPolicy } from '../../../services/picklistSortingPolicy.service';
 import { ActivityServiceAgent } from '../../../services/serviceAgents/activityServiceAgent.service';
 import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
 
@@ -72,26 +70,15 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
 
     constructor(
         translate: NGXTranslateService,
-        private sortPolicy: PicklistSortingPolicy,
-        @Inject('ddp.config') public config: ConfigurationService,
         private activityService: ActivityServiceAgent
     ) {
         super(translate);
-        this.ignoredSymbolsInQuery =
-            this.config.picklistAutocompleteIgnoredSymbols;
     }
 
     ngOnInit(): void {
-        this.sortPolicy = this.shouldBeSorted
-            ? this.sortPolicy
-            : new PicklistSortingPolicy();
 
         this.picklistOptions$ = this.searchValue$.pipe(
             switchMap((searchValue) => {
-                const sortedOptions = this.sortPolicy.sortPicklistOptions(
-                    this.block.picklistOptions
-                );
-
                return this.activityService.getPickListOptions(
                     this.block.stableId,
                     searchValue,
@@ -115,13 +102,7 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
         detail: string | null = null
     ): void {
         this.block.answer = value ? [{ stableId: value.stableId, detail }] : [];
-        console.log([...this.block.answer]);
         this.valueChanged.emit([...this.block.answer]);
     }
 
-    private get shouldBeSorted(): boolean {
-        return !this.config.notSortedPicklistAutocompleteStableIds.includes(
-            this.block.stableId
-        );
-    }
 }
