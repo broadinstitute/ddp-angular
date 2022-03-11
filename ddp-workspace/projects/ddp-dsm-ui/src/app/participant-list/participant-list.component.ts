@@ -1016,11 +1016,11 @@ export class ParticipantListComponent implements OnInit {
   public clearFilter(): void {
     this.start = new Date().getTime();
     this.filterQuery = null;
-    this.deselectQuickFilters();
+    // this.deselectQuickFilters();
     this.clearManualFilters();
-    this.selectedFilterName = '';
+    // this.selectedFilterName = '';
     this.getData();
-    this.setDefaultColumns();
+    // this.setDefaultColumns();
   }
 
   private setDefaultColumns(): void {
