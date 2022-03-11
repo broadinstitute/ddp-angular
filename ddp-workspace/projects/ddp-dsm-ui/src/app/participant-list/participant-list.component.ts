@@ -1022,7 +1022,9 @@ export class ParticipantListComponent implements OnInit {
   }
 
   private setDefaultColumns(): void {
-    if (this.isQuickFilterSelected() || this.isSavedFilterSelected()) return;
+    if (this.isQuickFilterSelected() || this.isSavedFilterSelected()) {
+      return;
+    }
     const filteredColumns = this.extractDefaultColumns(this.selectedColumns);
     Object.assign(this.selectedColumns, filteredColumns);
     if (this.isDataOfViewFilterExists()) {
@@ -1033,16 +1035,20 @@ export class ParticipantListComponent implements OnInit {
   private isQuickFilterSelected(): boolean {
     let isQuickFilterSelected = false;
     this.quickFilters.forEach(viewFilter => {
-      if (viewFilter.selected) isQuickFilterSelected = true;
-    })
+      if (viewFilter.selected) {
+        isQuickFilterSelected = true;
+      }
+    });
     return isQuickFilterSelected;
   }
 
   private isSavedFilterSelected(): boolean {
     let isSavedFilterSelected = false;
     this.savedFilters.forEach(viewFilter => {
-      if (viewFilter.selected) isSavedFilterSelected = true;
-    })
+      if (viewFilter.selected) {
+        isSavedFilterSelected = true;
+      }
+    });
     return isSavedFilterSelected;
   }
 
