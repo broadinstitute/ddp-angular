@@ -136,8 +136,8 @@ export class OncHistoryDetailComponent implements OnInit {
         if (data instanceof Array) {
         data.forEach( ( val ) => {
               const nameValue = NameValue.parse(val);
-              if (nameValue.name === 'createdOncHistory') {
-                this.participant.participant[ 'createdOncHistory' ] = nameValue.value;
+              if (nameValue.name === 'created') {
+                this.participant.participant[ 'created' ] = nameValue.value;
               } else {
                 this.oncHistory[ index ][ nameValue.name ] = nameValue.value;
               }
@@ -158,7 +158,7 @@ export class OncHistoryDetailComponent implements OnInit {
               if (innerJson instanceof Array) {
                 innerJson.forEach((val) => {
                   const nameValue = NameValue.parse(val);
-                  if (nameValue.name === 'createdOncHistory') {
+                  if (nameValue.name === 'created') {
                     this.participant.participant[ nameValue.name ] = nameValue.value;
                   } else {
                     this.oncHistory[ index ][ nameValue.name ] = nameValue.value;

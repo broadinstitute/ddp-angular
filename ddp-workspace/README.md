@@ -113,6 +113,11 @@ Go to the dist folder `cd dist/toolkit` and run `npm pack` or `npm publish`.
 Run `ng generate component component-name --project ddp-sdk` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ddp-sdk`.
 > Note: Don't forget to add `--project ddp-sdk`(or another project) or else it will be added to the default project in your `angular.json` file.
 
+
+## Running linter
+
+Run `ng lint` for all projects or `ng lint %project_name%` for a specific project. See linter warnings/errors in console if any.
+
 ## Running unit tests
 
 Run `ng test %app/library-name%` to execute the unit tests via [Karma](https://karma-runner.github.io).
