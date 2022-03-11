@@ -263,8 +263,4 @@ export class RoleService {
   public allowedToUploadKitInvalidAddress(): boolean {
     return this._isKitUploadInvalidAddress;
   }
-
-  public getUserGuid(): string {
-    return this._userId;
-  }
 }
