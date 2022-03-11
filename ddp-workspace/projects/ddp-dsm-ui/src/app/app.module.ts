@@ -112,6 +112,7 @@ import { FormDataComponent } from './form-data/form-data.component';
 import { AddFamilyMemberComponent } from './popups/add-family-member/add-family-member.component';
 import { FieldTableComponent } from './field-table/field-table.component';
 import { ConfigurationService, DdpModule } from 'ddp-sdk';
+import { TestDssComponent } from './test-dss/test-dss.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -204,7 +205,8 @@ sdkConfig.auth0ClaimNameSpace = DDP_ENV.auth0ClaimNameSpace;
         ParticipantUpdateResultDialogComponent,
         FormDataComponent,
         AddFamilyMemberComponent,
-        FieldTableComponent
+        FieldTableComponent,
+        TestDssComponent
     ],
     imports: [
         DdpModule,
