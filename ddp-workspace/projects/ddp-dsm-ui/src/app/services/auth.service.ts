@@ -232,7 +232,7 @@ export class Auth {
 
   private setDssSession(dsmToken: string): void {
     const accessToken = null;
-    const userGuid = this.role.getUserGuid();
+    const userGuid = null;
     const locale = 'en';
     const expiresAtInSeconds = 1e10; // TODO: get rid of that by using a study config flag as to not renew a session
     // set DSS Session partially

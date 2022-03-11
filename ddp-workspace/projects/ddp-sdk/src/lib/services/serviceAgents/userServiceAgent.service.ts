@@ -36,6 +36,11 @@ export class UserServiceAgent<TEntity> extends SessionServiceAgent<TEntity> impl
     }
 
     protected getBackendUrl(): string {
-        return this.configuration.backendUrl + '/pepper/v1/user/' + this.userGuid;
+        // TODO: add a configure flag about FON project ?
+        // const domain = this.configuration.isFONproject ? 'https://pepper-dev.datadonationplatform.org' : this.configuration.backendUrl;
+
+        // hardcoded for test DSS requests in DSM (dev env)
+        const domain = 'https://pepper-dev.datadonationplatform.org'; // this.configuration.backendUrl;
+        return domain + '/pepper/v1/user/' + this.userGuid;
     }
 }
