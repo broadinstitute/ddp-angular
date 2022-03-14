@@ -17,6 +17,7 @@ import { VerifyAgeUpComponent } from './components/pages/verify-age-up/verify-ag
 import { HomeComponent } from './components/pages/home/home.component';
 import { ForResearchesComponent } from './components/pages/for-researches/for-researches.component';
 import {LoginComponent} from './components/login/login.component';
+import { ForCliniciansComponent } from './components/pages/for-clinicians/for-clinicians.component';
 
 const routes: Routes = [
   {
@@ -96,6 +97,11 @@ const routes: Routes = [
   {
     path: Route.ForResearchers,
     component: ForResearchesComponent,
+    canActivate: [IrbGuard],
+  },
+  {
+    path: Route.ForClinicians,
+    component: ForCliniciansComponent,
     canActivate: [IrbGuard],
   },
   {

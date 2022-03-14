@@ -17,6 +17,7 @@ export enum Route {
   LoginRedirect = 'login-redirect',
   ParticipantList = 'participants',
   ForResearchers = 'for-researchers',
+  ForClinicians = 'for-clinicians',
   SessionExpired = 'session-expired',
   AcceptAgeUp = 'accept',
   VerifyAgeUp = 'verify',
