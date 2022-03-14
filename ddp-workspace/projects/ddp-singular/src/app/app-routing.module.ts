@@ -16,12 +16,18 @@ import { AcceptAgeUpComponent } from './components/pages/accept-age-up/accept-ag
 import { VerifyAgeUpComponent } from './components/pages/verify-age-up/verify-age-up.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { ForResearchesComponent } from './components/pages/for-researches/for-researches.component';
+import {LoginComponent} from './components/login/login.component';
 
 const routes: Routes = [
   {
     path: Route.Home,
     component: HomeComponent,
     pathMatch: 'full',
+  },
+  {
+    path: Route.Login,
+    component: LoginComponent,
+    canActivate: [IrbGuard]
   },
   {
     path: Route.PreScreening,

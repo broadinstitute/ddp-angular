@@ -1,10 +1,11 @@
 import { ActivityAbstractValidationRule } from './activityAbstractValidationRule';
 import { ActivityQuestionBlock } from '../../../models/activity/activityQuestionBlock';
+import { DecimalHelper } from '../../../utility/decimalHelper';
 import * as _ from 'underscore';
 
-export class ActivityNumericRangeValidationRule extends ActivityAbstractValidationRule {
+export class ActivityDecimalRangeValidationRule extends ActivityAbstractValidationRule {
     constructor(
-        public question: ActivityQuestionBlock<number>,
+        public question: ActivityQuestionBlock<any>,
         public min: number | null = null,
         public max: number | null = null) {
         super(question);
@@ -12,8 +13,9 @@ export class ActivityNumericRangeValidationRule extends ActivityAbstractValidati
 
     public recalculate(): boolean {
         let valid = true;
-        const answer = this.question.answer;
-        if (_.isNumber(answer)) {
+
+        if (DecimalHelper.isDecimalAnswerType(this.question.answer)) {
+            const answer = DecimalHelper.mapDecimalAnswerToNumber(this.question.answer);
             if (_.isNumber(this.min)) {
                 valid = answer >= this.min;
             }
