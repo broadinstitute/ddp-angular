@@ -110,7 +110,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   updatingParticipant = false;
   private taskType: string;
   private checkParticipantStatusInterval: any;
-  isEmailValid: boolean = true;
+  isEmailValid: boolean;
 
   accordionOpenedPanel = '';
 
@@ -167,6 +167,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       window.scrollTo( 0, 0 );
       this.scrolled = true;
     }
+    this.validateEmailInput(this.participant.data.profile['email'])
   }
 
   ngAfterViewChecked(): void{
