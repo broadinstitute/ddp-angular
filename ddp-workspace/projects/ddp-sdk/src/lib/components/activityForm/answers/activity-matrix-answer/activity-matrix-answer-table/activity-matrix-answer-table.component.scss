@@ -4,7 +4,16 @@
 
 .table-container {
   box-sizing: border-box;
-  overflow-x: auto;
+  overflow: auto;
+  max-height: 680px;
+}
+
+.matrix-answer-table__header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #ffffff;
+  box-shadow: 0 0 5px 0 #80808080;
 }
 
 .matrix-answer-table {
@@ -13,7 +22,6 @@
 
   border-collapse: collapse;
   border-spacing: 0;
-  overflow: hidden;
 
   &__cell {
     &--group,
