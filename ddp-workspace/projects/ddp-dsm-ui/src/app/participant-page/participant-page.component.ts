@@ -110,7 +110,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   updatingParticipant = false;
   private taskType: string;
   private checkParticipantStatusInterval: any;
-  isEmailValid: boolean;
+  isEmailValid: boolean = true;
 
   accordionOpenedPanel = '';
 
