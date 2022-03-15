@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith, takeUntil } from 'rxjs/operators';
 import { MatAutocomplete, MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import { boundMethod } from 'autobind-decorator';
 
 import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
 import { ActivityPicklistNormalizedGroup } from '../../../models/activity/activityPicklistNormalizedGroup';
@@ -20,7 +21,8 @@ import { StringsHelper } from '../../../utility/stringsHelper';
                #autocompleteInput
                [formControl]="inputFormControl"
                [placeholder]="block.picklistLabel"
-               [matAutocomplete]="autoCompleteFromSource" />
+               [matAutocomplete]="autoCompleteFromSource"
+               (click)="openAutocompleteOptions()" />
 
         <mat-autocomplete #autoCompleteFromSource="matAutocomplete" class="autoCompletePanel" [displayWith]="displayAutoComplete">
             <mat-optgroup *ngFor="let group of filteredGroups">
@@ -120,13 +122,20 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
         window.removeEventListener('scroll', this.onScroll, true);
     }
 
-    onScroll = (event): void => {
+    @boundMethod
+    public onScroll(event): void {
         const isAutoCompleteOptionsScrolling = event.target === this.autocompleteSource.panel?.nativeElement;
 
         if (this.autocompleteTrigger.panelOpen && !isAutoCompleteOptionsScrolling) {
             this.autocompleteTrigger.closePanel();
         }
-    };
+    }
+
+    public openAutocompleteOptions(): void {
+        if (!this.autocompleteTrigger.panelOpen) {
+            this.autocompleteTrigger.openPanel();
+        }
+    }
 
     private initInputValue(): void {
         const answer = this.block.answer && this.block.answer[0];
