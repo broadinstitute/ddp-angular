@@ -3,7 +3,6 @@ import { FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith, takeUntil } from 'rxjs/operators';
 import { MatAutocomplete, MatAutocompleteTrigger } from '@angular/material/autocomplete';
-import { boundMethod } from 'autobind-decorator';
 
 import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
 import { ActivityPicklistNormalizedGroup } from '../../../models/activity/activityPicklistNormalizedGroup';
@@ -122,14 +121,13 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
         window.removeEventListener('scroll', this.onScroll, true);
     }
 
-    @boundMethod
-    public onScroll(event): void {
+    public onScroll = (event): void => {
         const isAutoCompleteOptionsScrolling = event.target === this.autocompleteSource.panel?.nativeElement;
 
         if (this.autocompleteTrigger.panelOpen && !isAutoCompleteOptionsScrolling) {
             this.autocompleteTrigger.closePanel();
         }
-    }
+    };
 
     public openAutocompleteOptions(): void {
         if (!this.autocompleteTrigger.panelOpen) {
