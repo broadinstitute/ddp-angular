@@ -76,6 +76,7 @@ export class ActivityMatrixAnswer implements OnChanges {
       width: '100%',
       maxWidth: 1700,
       maxHeight: 768,
+      panelClass: 'activity-matrix-answer-dialog',
       autoFocus: false,
       scrollStrategy: new NoopScrollStrategy(),
     });

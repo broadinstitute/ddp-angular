@@ -1,0 +1,66 @@
+@import '../../../../styles/colors';
+@import '../../../../styles/mixins';
+@import '../../../../styles/breakpoints';
+
+:host {
+  color: $__font;
+
+  h1,
+  h2 {
+    font-family: Spartan-Bold, serif;
+    line-height: 57px;
+  }
+
+  @include narrow-container;
+}
+
+.container {
+  margin-top: 50px !important;
+  max-width: 1400px;
+}
+
+.uncovering {
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    @include media-sm {
+      flex-direction: column-reverse;
+    }
+
+    .left {
+      width: 47%;
+      font-size: 20px;
+      line-height: 28px;
+      p {
+        font-size: 20px;
+        line-height: 28px;
+      }
+      @include media-sm {
+        width: unset;
+      }
+    }
+    .right {
+      width: 48%;
+      @include media-sm {
+        width: unset;
+        display: none;
+      }
+    }
+    img {
+      width: 100%;
+      position: relative;
+      top: -20px;
+    }
+    p {
+      margin-bottom: 30px;
+    }
+    ul {
+      padding-left: 20px;
+      margin-bottom: 30px;
+      li {
+        list-style: disc;
+      }
+    }
+  }
+}

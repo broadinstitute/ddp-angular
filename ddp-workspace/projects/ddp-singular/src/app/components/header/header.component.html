@@ -36,6 +36,11 @@
             {{ 'Header.Links.ForResearchers' | translate }}
           </a>
         </li>
+        <li class="link-list__item" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active">
+          <a class="link" [routerLink]="Route.ForClinicians">
+            {{ 'Header.Links.ForClinicians' | translate }}
+          </a>
+        </li>
         <li class="link-list__item" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active" *ngIf="isAuthenticated">
           <a class="button button--outline" [routerLink]="Route.ParticipantList">
             {{ 'Header.Links.Dashboard' | translate }}
