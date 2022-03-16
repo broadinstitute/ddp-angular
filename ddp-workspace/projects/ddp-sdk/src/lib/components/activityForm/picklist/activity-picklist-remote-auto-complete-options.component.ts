@@ -70,7 +70,6 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
 {
     @Input() studyGuid: string;
     @Input() activityGuid: string;
-    filteredGroups: ActivityPicklistNormalizedGroup[] = [];
 
     searchValue$ = new BehaviorSubject('');
     picklistOptions$: Observable<ActivityPicklistOption[]>;
