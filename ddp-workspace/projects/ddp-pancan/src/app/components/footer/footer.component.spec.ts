@@ -55,7 +55,7 @@ describe('FooterComponent', () => {
     });
 
     it('should scroll to the top when click on back-to-top button', () => {
-        const backToTopButton = fixture.debugElement.query(By.css('.back-to-top')).nativeElement;
+        const backToTopButton = fixture.debugElement.query(By.css('[data-test-id="scroll-to-top"]')).nativeElement;
         backToTopButton.click();
         expect(nativeWindowSpy.scrollTo).toHaveBeenCalled();
     });

@@ -32,10 +32,11 @@ import { NotificationsDialogComponent } from './components/notifications-dialog/
 import { SessionExpiredDialogComponent } from './components/session-expired-dialog/session-expired-dialog.component';
 import { ParticipantDeletionDialogComponent } from './components/participant-deletion-dialog/participant-deletion-dialog.component';
 import { ForResearchesComponent } from './components/pages/for-researches/for-researches.component';
+import { ForCliniciansComponent } from './components/pages/for-clinicians/for-clinicians.component';
 import { SuccessMessageComponent } from './components/success-message/success-message.component';
 import { SuccessMessageDialogComponent } from './components/success-message-dialog/success-message-dialog.component';
 import {NotificationsComponent} from './components/notifications/notifications.component';
-import {LoginComponent} from "./components/login/login.component";
+import {LoginComponent} from './components/login/login.component';
 
 
 @NgModule({
@@ -64,6 +65,7 @@ import {LoginComponent} from "./components/login/login.component";
     SessionExpiredDialogComponent,
     ParticipantDeletionDialogComponent,
     ForResearchesComponent,
+    ForCliniciansComponent,
     SuccessMessageComponent,
     SuccessMessageDialogComponent,
   ],
