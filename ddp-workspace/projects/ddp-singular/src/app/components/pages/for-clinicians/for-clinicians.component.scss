@@ -16,6 +16,7 @@
 
 .container {
   margin-top: 50px !important;
+  margin-bottom: 50px !important;
   max-width: 1400px;
 }
 
@@ -48,9 +49,8 @@
       }
     }
     img {
-      width: 100%;
-      position: relative;
-      top: -20px;
+      width: auto;
+      max-height: 430px;
     }
     p {
       margin-bottom: 30px;
