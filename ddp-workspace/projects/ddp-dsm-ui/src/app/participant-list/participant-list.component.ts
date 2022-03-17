@@ -1036,14 +1036,14 @@ export class ParticipantListComponent implements OnInit {
     }
   }
 
-  private setSavedFilterColumnsIfSelected() {
+  private setSavedFilterColumnsIfSelected(): void {
     const selectedSavedFilter = this.savedFilters.find(sf => sf.selected);
     if (selectedSavedFilter) {
       this.selectedColumns = selectedSavedFilter.columns;
     }
   }
 
-  private setQuickFilterColumnsIfSelected() {
+  private setQuickFilterColumnsIfSelected(): void {
     const selectedQuickFilter = this.quickFilters.find(qf => qf.selected);
     if (selectedQuickFilter) {
       this.selectedColumns = selectedQuickFilter.columns;
@@ -1138,9 +1138,6 @@ export class ParticipantListComponent implements OnInit {
     } else {
       this.selectedColumns[ parent ].push(column);
     }
-    // if (this.isDataOfViewFilterExists()) {
-    //   this.viewFilter.columns.data.push(column);
-    // }
   }
 
   private isDataOfViewFilterExists(): boolean {
