@@ -831,7 +831,7 @@ export class ParticipantListComponent implements OnInit {
   }
 
   private applyFilter(viewFilter: ViewFilter, from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage()): void {
-    this.dsmService.applyFilter(viewFilter, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent, null, from, to)
+    this.dsmService.applyFilter(viewFilter, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent, null, from, to, this.sortBy)
       .subscribe({
         next: data => {
           if (data != null) {
@@ -1022,7 +1022,18 @@ export class ParticipantListComponent implements OnInit {
   }
 
   private setDefaultColumns(): void {
-    if (this.isQuickFilterSelected() || this.isSavedFilterSelected()) {
+    if (this.isQuickFilterSelected()) {
+      const selectedQuickFilter = this.quickFilters.find(qf => qf.selected)
+      if (selectedQuickFilter) {
+        Object.assign(this.selectedColumns, selectedQuickFilter.columns)    
+      }  
+      return;
+    }
+    else if (this.isSavedFilterSelected()) {
+      const selectedSavedFilter = this.savedFilters.find(sf => sf.selected)
+      if (selectedSavedFilter) {
+        Object.assign(this.selectedColumns, selectedSavedFilter.columns)    
+      }
       return;
     }
     const filteredColumns = this.extractDefaultColumns(this.selectedColumns);
@@ -1036,7 +1047,7 @@ export class ParticipantListComponent implements OnInit {
     let isQuickFilterSelected = false;
     this.quickFilters.forEach(viewFilter => {
       if (viewFilter.selected) {
-        isQuickFilterSelected = true;
+        isQuickFilterSelected = true; 
       }
     });
     return isQuickFilterSelected;
