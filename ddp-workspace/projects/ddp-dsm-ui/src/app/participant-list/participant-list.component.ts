@@ -1022,18 +1022,7 @@ export class ParticipantListComponent implements OnInit {
   }
 
   private setDefaultColumns(): void {
-    if (this.isQuickFilterSelected()) {
-      const selectedQuickFilter = this.quickFilters.find(qf => qf.selected)
-      if (selectedQuickFilter) {
-        Object.assign(this.selectedColumns, selectedQuickFilter.columns)    
-      }  
-      return;
-    }
-    else if (this.isSavedFilterSelected()) {
-      const selectedSavedFilter = this.savedFilters.find(sf => sf.selected)
-      if (selectedSavedFilter) {
-        Object.assign(this.selectedColumns, selectedSavedFilter.columns)    
-      }
+    if (this.isQuickFilterSelected() || this.isSavedFilterSelected()) {
       return;
     }
     const filteredColumns = this.extractDefaultColumns(this.selectedColumns);
