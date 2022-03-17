@@ -16,7 +16,8 @@
 
 .container {
   margin-top: 50px !important;
-  max-width: 1400px;
+  margin-bottom: 50px !important;
+  max-width: 1300px;
 }
 
 .uncovering {
@@ -29,7 +30,7 @@
     }
 
     .left {
-      width: 47%;
+      width: 50%;
       font-size: 20px;
       line-height: 28px;
       p {
@@ -41,16 +42,15 @@
       }
     }
     .right {
-      width: 48%;
+      width: 45%;
       @include media-sm {
         width: unset;
         display: none;
       }
     }
     img {
-      width: 100%;
-      position: relative;
-      top: -20px;
+      width: auto;
+      max-height: 430px;
     }
     p {
       margin-bottom: 30px;
