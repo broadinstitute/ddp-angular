@@ -1022,13 +1022,31 @@ export class ParticipantListComponent implements OnInit {
   }
 
   private setDefaultColumns(): void {
-    if (this.isQuickFilterSelected() || this.isSavedFilterSelected()) {
+    if (this.isQuickFilterSelected()) {
+      this.setQuickFilterColumnsIfSelected();
+      return;
+    } else if (this.isSavedFilterSelected()) {
+      this.setSavedFilterColumnsIfSelected();
       return;
     }
     const filteredColumns = this.extractDefaultColumns(this.selectedColumns);
     Object.assign(this.selectedColumns, filteredColumns);
     if (this.isDataOfViewFilterExists()) {
       this.viewFilter.columns = this.extractDefaultColumns(this.viewFilter.columns);
+    }
+  }
+
+  private setSavedFilterColumnsIfSelected() {
+    const selectedSavedFilter = this.savedFilters.find(sf => sf.selected);
+    if (selectedSavedFilter) {
+      this.selectedColumns = selectedSavedFilter.columns;
+    }
+  }
+
+  private setQuickFilterColumnsIfSelected() {
+    const selectedQuickFilter = this.quickFilters.find(qf => qf.selected);
+    if (selectedQuickFilter) {
+      this.selectedColumns = selectedQuickFilter.columns;
     }
   }
 
@@ -1120,9 +1138,9 @@ export class ParticipantListComponent implements OnInit {
     } else {
       this.selectedColumns[ parent ].push(column);
     }
-    if (this.isDataOfViewFilterExists()) {
-      this.viewFilter.columns.data.push(column);
-    }
+    // if (this.isDataOfViewFilterExists()) {
+    //   this.viewFilter.columns.data.push(column);
+    // }
   }
 
   private isDataOfViewFilterExists(): boolean {
