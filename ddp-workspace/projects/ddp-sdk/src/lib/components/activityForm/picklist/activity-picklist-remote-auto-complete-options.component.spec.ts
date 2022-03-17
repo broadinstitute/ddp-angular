@@ -9,6 +9,7 @@ import { PicklistRenderMode } from '../../../models/activity/picklistRenderMode'
 import { SearchHighlightPipe } from '../../../pipes/searchHighlight.pipe';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { PicklistSortingPolicy } from '../../../services/picklistSortingPolicy.service';
+import { ActivityServiceAgent } from '../../../services/serviceAgents/activityServiceAgent.service';
 import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
 
 import { ActivityPicklistRemoteAutoCompleteOptionsComponent } from './activity-picklist-remote-auto-complete-options.component';
@@ -49,6 +50,12 @@ describe('ActivityPicklistRemoteAutoCompleteOptionsComponent', () => {
                     provide: NGXTranslateService,
                     useValue: ngxTranslateServiceSpy,
                 },
+                {
+                    provide: ActivityServiceAgent,
+                    useValue: {
+                      createInstance: () => of(null)
+                    }
+                  },
                 {
                     provide: PicklistSortingPolicy,
                     useValue: new PicklistSortingPolicy(),
