@@ -1036,7 +1036,7 @@ export class ParticipantListComponent implements OnInit {
     let isQuickFilterSelected = false;
     this.quickFilters.forEach(viewFilter => {
       if (viewFilter.selected) {
-        isQuickFilterSelected = true; 
+        isQuickFilterSelected = true;
       }
     });
     return isQuickFilterSelected;
