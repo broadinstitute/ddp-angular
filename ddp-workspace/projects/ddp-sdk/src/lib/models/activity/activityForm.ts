@@ -50,7 +50,7 @@ export class ActivityForm {
         return this.sections.filter(section => section.visible).length;
     }
 
-    private getAllSections(visible:boolean): Array<ActivitySection> {
+    private getAllSections(visible: boolean): Array<ActivitySection> {
         const allSections: ActivitySection[] = [];
         this.introduction && allSections.push(this.introduction);
         allSections.push(...this.sections);
