@@ -3,12 +3,12 @@ import { Address } from '../address/address.model';
 export class KitRequest {
   constructor(public participantId: string, public collaboratorParticipantId: string, public bspCollaboratorSampleId: string,
               public realm: string, public kitTypeName: string, public dsmKitRequestId: string, public dsmKitId: string,
-              public shippingId: string, public labelUrlTo: string, public labelUrlReturn: string,
+              public ddpLabel: string, public labelUrlTo: string, public labelUrlReturn: string,
               public trackingNumberTo: string, public trackingReturnId: string, public trackingUrlTo: string,
               public trackingUrlReturn: string, public scanDate: number, public error: boolean, public message: string,
               public receiveDate: number, public deactivatedDate: number, public deactivationReason: string, public participant: Address,
               public easypostAddressId: string, public nameLabel: string, public kitLabel: string, public express: boolean,
-              public labelTriggeredDate: number, public noReturn: boolean, public externalOrderNumber: string,
+              public labelDate: number, public noReturn: boolean, public externalOrderNumber: string,
               public externalOrderStatus: string, public preferredLanguage: string,
               public receiveDateString: string, public hruid: string, public gender: string) {
     this.participantId = participantId;
@@ -18,7 +18,7 @@ export class KitRequest {
     this.kitTypeName = kitTypeName;
     this.dsmKitRequestId = dsmKitRequestId;
     this.dsmKitId = dsmKitId;
-    this.shippingId = shippingId;
+    this.ddpLabel = ddpLabel;
     this.labelUrlTo = labelUrlTo;
     this.labelUrlReturn = labelUrlReturn;
     this.trackingNumberTo = trackingNumberTo;
@@ -36,7 +36,7 @@ export class KitRequest {
     this.nameLabel = nameLabel;
     this.kitLabel = kitLabel;
     this.express = express;
-    this.labelTriggeredDate = labelTriggeredDate;
+    this.labelDate = labelDate;
     this.noReturn = noReturn;
     this.externalOrderNumber = externalOrderNumber;
     this.externalOrderStatus = externalOrderStatus;
@@ -55,11 +55,11 @@ export class KitRequest {
     return new KitRequest(
       json.participantId, json.collaboratorParticipantId, json.bspCollaboratorSampleId, json.realm, json.kitTypeName,
       json.dsmKitRequestId, json.dsmKitId,
-      json.shippingId, json.labelUrlTo, json.labelUrlReturn,
+      json.ddpLabel, json.labelUrlTo, json.labelUrlReturn,
       json.trackingNumberTo, json.trackingReturnId, json.trackingUrlTo,
       json.trackingUrlReturn, json.scanDate, json.error, json.message,
       json.receiveDate, json.deactivatedDate, json.deactivationReason, json.participant, json.easypostAddressId, json.nameLabel,
-      json.kitLabel, json.express, json.labelTriggeredDate, json.noReturn, json.externalOrderNumber, json.externalOrderStatus,
+      json.kitLabel, json.express, json.labelDate, json.noReturn, json.externalOrderNumber, json.externalOrderStatus,
       json.preferredLanguage, json.receiveDateString, json.hruid, json.gender
     );
   }
@@ -102,7 +102,7 @@ export class KitRequest {
       }
       return this.message;
     } else {
-      return this.shippingId;
+      return this.ddpLabel;
     }
   }
 
