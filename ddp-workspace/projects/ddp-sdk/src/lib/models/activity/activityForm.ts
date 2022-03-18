@@ -19,9 +19,9 @@ export class ActivityForm {
     public sectionIndex: number | null;
     public statusCode: ActivityStatusCodes;
 
-    public validate(): boolean {
+    public validate(validateVisibleSections?: boolean): boolean {
         let isValid = true;
-        for (const section of this.getAllSections()) {
+        for (const section of this.getAllSections(validateVisibleSections)) {
             isValid = section.validate() && isValid;
         }
         this.validationState.next(isValid);
@@ -50,11 +50,11 @@ export class ActivityForm {
         return this.sections.filter(section => section.visible).length;
     }
 
-    private getAllSections(): Array<ActivitySection> {
+    private getAllSections(visible:boolean): Array<ActivitySection> {
         const allSections: ActivitySection[] = [];
         this.introduction && allSections.push(this.introduction);
         allSections.push(...this.sections);
         this.closing && allSections.push(this.closing);
-        return allSections;
+        return visible ? allSections.filter(section => section.visible) : allSections;
     }
 }
