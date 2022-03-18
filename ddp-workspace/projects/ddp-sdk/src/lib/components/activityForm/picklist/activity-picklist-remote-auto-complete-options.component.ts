@@ -28,6 +28,7 @@ import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.com
             [placeholder]="block.picklistLabel"
             [matAutocomplete]="autoCompleteFromSource"
             (keyup)="onInput($event.target.value)"
+            [(ngModel)]="block.answer[0].detail"
         />
 
         <mat-autocomplete
@@ -51,7 +52,7 @@ import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.com
                 ></span>
             </mat-option>
         </mat-autocomplete>
-    </mat-form-field>`,
+    </mat-form-field> `,
     styles: [
         `
             .full-width {
@@ -85,15 +86,17 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
 
     ngOnInit(): void {
         this.picklistOptions$ = this.searchValue$.pipe(
-            debounceTime(500),
+            debounceTime(1000),
             distinctUntilChanged(),
             switchMap((searchValue) =>
-                this.activityService.getPickListOptions(
-                    this.block.stableId,
-                    searchValue,
-                    this.studyGuid,
-                    this.activityGuid
-                )
+                searchValue.length > 0
+                    ? this.activityService.getPickListOptions(
+                          this.block.stableId,
+                          searchValue,
+                          this.studyGuid,
+                          this.activityGuid
+                      )
+                    : of({ results: [] })
             ),
             map((data) => data.results)
         );
@@ -107,11 +110,10 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
         return typeof option === 'string' ? option : option?.optionLabel || '';
     }
 
-    onValueSelect(
-        value: ActivityPicklistOption,
-        detail: string | null = null
-    ): void {
-        this.block.answer = value ? [{ stableId: value.stableId, detail }] : [];
+    onValueSelect(value: ActivityPicklistOption): void {
+        this.block.answer = value
+            ? [{ stableId: value.stableId, detail: value.optionLabel }]
+            : [];
         this.valueChanged.emit([...this.block.answer]);
     }
 }
