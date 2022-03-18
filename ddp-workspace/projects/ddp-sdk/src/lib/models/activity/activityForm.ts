@@ -19,9 +19,9 @@ export class ActivityForm {
     public sectionIndex: number | null;
     public statusCode: ActivityStatusCodes;
 
-    public validate(validateVisibleSections?: boolean): boolean {
+    public validate(validateOnlyVisibleSections?: boolean): boolean {
         let isValid = true;
-        for (const section of this.getAllSections(validateVisibleSections)) {
+        for (const section of this.getAllSections(validateOnlyVisibleSections)) {
             isValid = section.validate() && isValid;
         }
         this.validationState.next(isValid);
