@@ -132,9 +132,9 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
                         // so trigger one when submit
                         this.submitAttempted.pipe(filter(attempted => attempted))
                     ).pipe(
-                        map(() => this.model.validate()),
+                        map(() => this.model.validate(this.config.validateOnlyVisibleSections)),
                         // let's start with whatever it is the initial state of the form
-                        startWith(this.model.validate())
+                        startWith(this.model.validate(this.config.validateOnlyVisibleSections))
                     ),
                     this.embeddedComponentsValidStatusChanged.asObservable().pipe(startWith(true))
                 ])
