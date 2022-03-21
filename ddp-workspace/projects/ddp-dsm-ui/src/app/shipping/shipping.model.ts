@@ -11,39 +11,6 @@ export class KitRequest {
               public labelDate: number, public noReturn: boolean, public externalOrderNumber: string,
               public externalOrderStatus: string, public preferredLanguage: string,
               public receiveDateString: string, public hruid: string, public gender: string) {
-    this.participantId = participantId;
-    this.collaboratorParticipantId = collaboratorParticipantId;
-    this.bspCollaboratorSampleId = bspCollaboratorSampleId;
-    this.realm = realm;
-    this.kitTypeName = kitTypeName;
-    this.dsmKitRequestId = dsmKitRequestId;
-    this.dsmKitId = dsmKitId;
-    this.ddpLabel = ddpLabel;
-    this.labelUrlTo = labelUrlTo;
-    this.labelUrlReturn = labelUrlReturn;
-    this.trackingNumberTo = trackingNumberTo;
-    this.trackingReturnId = trackingReturnId;
-    this.trackingUrlTo = trackingUrlTo;
-    this.trackingUrlReturn = trackingUrlReturn;
-    this.scanDate = scanDate;
-    this.error = error;
-    this.message = message;
-    this.receiveDate = receiveDate;
-    this.deactivatedDate = deactivatedDate;
-    this.deactivationReason = deactivationReason;
-    this.participant = participant;
-    this.easypostAddressId = easypostAddressId;
-    this.nameLabel = nameLabel;
-    this.kitLabel = kitLabel;
-    this.express = express;
-    this.labelDate = labelDate;
-    this.noReturn = noReturn;
-    this.externalOrderNumber = externalOrderNumber;
-    this.externalOrderStatus = externalOrderStatus;
-    this.preferredLanguage = preferredLanguage;
-    this.receiveDateString = receiveDateString;
-    this.hruid = hruid;
-    this.gender = gender;
   }
 
   public TRACKING_LINK = 'https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber=';
