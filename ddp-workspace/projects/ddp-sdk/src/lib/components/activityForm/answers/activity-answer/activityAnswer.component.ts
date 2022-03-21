@@ -25,12 +25,15 @@ import { BlockType } from '../../../../models/activity/blockType';
                                          [readonly]="readonly"
                                          (valueChanged)="onChange($event)">
             </ddp-activity-numeric-answer>
-            <ddp-activity-picklist-answer *ngIf="isPicklistQuestion(block)"
-                                          [class]="'picklist-answer-' + block.stableId"
-                                          [block]="block"
-                                          [readonly]="readonly"
-                                          (valueChanged)="onChange($event)">
-            </ddp-activity-picklist-answer>
+            <ddp-activity-picklist-answer  *ngIf="isPicklistQuestion(block)"
+                                            [class]="'picklist-answer-' + block.stableId"
+                                            [block]="block"
+                                            [readonly]="readonly"
+                                            [studyGuid]="studyGuid"
+                                            [activityGuid]="activityGuid"
+                                            (valueChanged)="onChange($event)"
+        >
+        </ddp-activity-picklist-answer>
             <ddp-activity-date-answer *ngIf="isDateQuestion(block)"
                                       [class]="'date-answer-' + block.stableId"
                                       [block]="block"

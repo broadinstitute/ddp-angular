@@ -172,7 +172,7 @@ export class DSMService {
   }
 
   public applyFilter(json: ViewFilter, realm: string, parent: string, filterQuery: string,
-                     from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage()
+                     from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage(), sortBy?: Sort
   ): Observable<any> {
     let viewFilterCopy = null;
     if (json != null) {
@@ -201,6 +201,9 @@ export class DSMService {
     map.push({name: 'to', value: to});
     map.push({name: 'userId', value: userId});
     map.push({name: 'parent', value: parent});
+    if (sortBy) {
+      map.push( {name: 'sortBy', value: JSON.stringify(sortBy)} );
+    }
 
     if (filterQuery != null) {
       map.push({name: 'filterQuery', value: filterQuery});
