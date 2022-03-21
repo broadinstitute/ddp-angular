@@ -172,7 +172,7 @@ export class DSMService {
   }
 
   public applyFilter(json: ViewFilter, realm: string, parent: string, filterQuery: string,
-                     from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage()
+                     from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage(), sortBy?: Sort
   ): Observable<any> {
     let viewFilterCopy = null;
     if (json != null) {
@@ -201,6 +201,9 @@ export class DSMService {
     map.push({name: 'to', value: to});
     map.push({name: 'userId', value: userId});
     map.push({name: 'parent', value: parent});
+    if (sortBy) {
+      map.push( {name: 'sortBy', value: JSON.stringify(sortBy)} );
+    }
 
     if (filterQuery != null) {
       map.push({name: 'filterQuery', value: filterQuery});
@@ -371,6 +374,15 @@ export class DSMService {
 
   public getMedicalRecordLog(medicalRecordId: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'medicalRecord/' + medicalRecordId + '/log';
+    return this.http.get(url, this.buildHeader()).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+//TODO remove before final merge, for testing only
+  testDSSGetActivity( participantId: string ): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'dsstest/' + participantId;
     return this.http.get(url, this.buildHeader()).pipe(
       catchError(this.handleError)
     );
@@ -1000,5 +1012,4 @@ export class DSMService {
       return true;
     }
   }
-
 }

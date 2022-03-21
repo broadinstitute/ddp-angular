@@ -17,6 +17,7 @@ import { ActivityForm } from '../../models/activity/activityForm';
 import { ActivityInstance } from '../../models/activityInstance';
 import { CreateActivityInstanceResponse } from '../../models/activity/createActivityInstanceResponse';
 import { DeleteActivityInstanceResponse } from '../../models/activity/deleteActivityInstanceResponse';
+import { ActivityPicklistOption } from '../../models/activity/activityPicklistOption';
 
 interface GuidsObject {
     study: string;
@@ -142,5 +143,19 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
     private getBaseUrl(studyGuid: string, activityGuid: string = ''): string {
         const activityGuidPart = activityGuid ? `/${activityGuid}` : '';
         return `/studies/${studyGuid}/activities${activityGuidPart}`;
+    }
+
+    getPickListOptions(
+        questionStableId: string,
+        query: string = '',
+        studyGuid: string,
+        activityGuid: string
+    ): Observable<{ query: string; results: ActivityPicklistOption[] }> {
+        const baseUrl = this.getBaseUrl(studyGuid, activityGuid);
+        return this.getObservable(
+            `${baseUrl}/questions/${questionStableId}/options?q=${query}`,
+            {},
+            [404]
+        );
     }
 }

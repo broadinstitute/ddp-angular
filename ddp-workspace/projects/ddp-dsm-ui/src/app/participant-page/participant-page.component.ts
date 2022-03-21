@@ -167,6 +167,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       window.scrollTo( 0, 0 );
       this.scrolled = true;
     }
+    this.validateEmailInput(this.participant.data.profile['email']);
   }
 
   ngAfterViewChecked(): void{
@@ -1374,5 +1375,15 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     this.source = source;
     this.universalModal.show();
     return false;
+  }
+  //TODO remove before final merge, for testing only
+  testGetActivity(participantId: string): void {
+    this.dsmService.testDSSGetActivity(participantId).subscribe(
+      data => {
+        console.log(data);
+      },
+      err =>{}
+    );
+
   }
 }

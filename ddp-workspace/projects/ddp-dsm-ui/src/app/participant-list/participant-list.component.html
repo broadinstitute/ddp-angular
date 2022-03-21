@@ -230,9 +230,9 @@
           <ng-container *ngFor="let alias of getKeys()">
             <th *ngFor="let col of selectedColumns[alias]" (click)="sortByColumnName(col, alias)"
                 tooltip="{{getTableAlias(col.participantColumn)}}.{{col.participantColumn.name}}"
-                [ngClass]="{'Table--Sticky': true, 'Color--blue': isSortField(col.participantColumn.name)}">
+                [ngClass]="{'Table--Sticky': true, 'Color--blue': isSortField(col.participantColumn.name, col.participantColumn.tableAlias)}">
               {{col.participantColumn.display}}
-              <span *ngIf="isSortField(col.participantColumn.name)">
+              <span *ngIf="isSortField(col.participantColumn.name, col.participantColumn.tableAlias)">
                <span *ngIf="sortOrder === 'asc'">
                  <i class="fas fa-sort-alpha-down"></i>
                </span>
@@ -331,7 +331,9 @@
             || col.participantColumn.name === 'lastUpdatedAt' || col.participantColumn.name === 'status'">
                       <div
                         *ngIf="activityData[col.participantColumn.name] != null && col.participantColumn.name !== 'status'">
-                        {{activityData[col.participantColumn.name] | date:'medium'}}
+                        <ng-container *ngIf="activityData[col.participantColumn.name] !== 0">
+                          {{activityData[col.participantColumn.name] | date:'medium'}}
+                        </ng-container>
                       </div>
                       <div
                         *ngIf="activityData[col.participantColumn.name] != null && col.participantColumn.name === 'status'">

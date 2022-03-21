@@ -831,7 +831,7 @@ export class ParticipantListComponent implements OnInit {
   }
 
   private applyFilter(viewFilter: ViewFilter, from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage()): void {
-    this.dsmService.applyFilter(viewFilter, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent, null, from, to)
+    this.dsmService.applyFilter(viewFilter, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent, null, from, to, this.sortBy)
       .subscribe({
         next: data => {
           if (data != null) {
@@ -1016,19 +1016,58 @@ export class ParticipantListComponent implements OnInit {
   public clearFilter(): void {
     this.start = new Date().getTime();
     this.filterQuery = null;
-    this.deselectQuickFilters();
     this.clearManualFilters();
-    this.selectedFilterName = '';
     this.getData();
     this.setDefaultColumns();
   }
 
   private setDefaultColumns(): void {
+    if (this.isQuickFilterSelected()) {
+      this.setQuickFilterColumnsIfSelected();
+      return;
+    } else if (this.isSavedFilterSelected()) {
+      this.setSavedFilterColumnsIfSelected();
+      return;
+    }
     const filteredColumns = this.extractDefaultColumns(this.selectedColumns);
     Object.assign(this.selectedColumns, filteredColumns);
     if (this.isDataOfViewFilterExists()) {
       this.viewFilter.columns = this.extractDefaultColumns(this.viewFilter.columns);
     }
+  }
+
+  private setSavedFilterColumnsIfSelected(): void {
+    const selectedSavedFilter = this.savedFilters.find(sf => sf.selected);
+    if (selectedSavedFilter) {
+      this.selectedColumns = selectedSavedFilter.columns;
+    }
+  }
+
+  private setQuickFilterColumnsIfSelected(): void {
+    const selectedQuickFilter = this.quickFilters.find(qf => qf.selected);
+    if (selectedQuickFilter) {
+      this.selectedColumns = selectedQuickFilter.columns;
+    }
+  }
+
+  private isQuickFilterSelected(): boolean {
+    let isQuickFilterSelected = false;
+    this.quickFilters.forEach(viewFilter => {
+      if (viewFilter.selected) {
+        isQuickFilterSelected = true;
+      }
+    });
+    return isQuickFilterSelected;
+  }
+
+  private isSavedFilterSelected(): boolean {
+    let isSavedFilterSelected = false;
+    this.savedFilters.forEach(viewFilter => {
+      if (viewFilter.selected) {
+        isSavedFilterSelected = true;
+      }
+    });
+    return isSavedFilterSelected;
   }
 
   private extractDefaultColumns(selectedColumns: {}): {} {
@@ -1098,9 +1137,6 @@ export class ParticipantListComponent implements OnInit {
       this.selectedColumns[ parent ].splice(index, 1);
     } else {
       this.selectedColumns[ parent ].push(column);
-    }
-    if (this.isDataOfViewFilterExists()) {
-      this.viewFilter.columns.data.push(column);
     }
   }
 
@@ -1469,8 +1505,8 @@ export class ParticipantListComponent implements OnInit {
     });
   }
 
-  public isSortField(name: string): boolean {
-    return name === this.sortBy?.innerProperty;
+  public isSortField(name: string, tableAlias: string): boolean {
+    return name === this.sortBy?.innerProperty && tableAlias === this.sortBy?.tableAlias;
   }
 
   sortByColumnName(col: Filter, sortParent: string): void {
