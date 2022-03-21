@@ -1,13 +1,17 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Observable, Subject, BehaviorSubject, timer, merge, EMPTY } from 'rxjs';
+import { catchError, concatMap, distinctUntilChanged, filter, map, mergeMap, retryWhen, scan, share, take } from 'rxjs/operators';
+import * as _ from 'underscore';
+
 import { ActivityServiceAgent } from './activityServiceAgent.service';
 import { AnswerValue } from '../../models/activity/answerValue';
 import { AnswerSubmission } from '../../models/activity/answerSubmission';
 import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivityInstanceAnswerSubmission } from '../../models/activity/activityInstanceAnswerSubmission';
-import { Observable, Subject, BehaviorSubject, timer, merge, EMPTY } from 'rxjs';
-import { catchError, concatMap, distinctUntilChanged, filter, map, mergeMap, retryWhen, scan, share, take } from 'rxjs/operators';
-import * as _ from 'underscore';
+import { AnswerSubmissionError } from '../../models/answerSubmissionError';
+import { AnswerSubmissionErrorType } from '../../models/answerSubmissionErrorType';
+import { AnswerValidationError } from '../../models/answerValidationError';
 
 type GuidToShown = Record<string, boolean>;
 
@@ -38,16 +42,16 @@ export class SubmissionManager implements OnDestroy {
       return this._answerSubmissionResponse$;
     }
     /**
-     * Observable with errors in submission process
+     * Observable with server side validation errors in submission process
      */
-    public answerSubmissionFailure$: Observable<Error>;
+    public answerDataErrors$: Observable<AnswerValidationError>;
     /**
      * Situation has arisen that user yshould
      */
     public answerSubmissionWarning$: Observable<boolean>;
     retryDelayMs = SubmissionManager.DEFAULT_RETRY_DELAY_MS;
     maxRetryCount = SubmissionManager.DEFAULT_MAX_RETRY_COUNT;
-    private answerSubmissionFailureSubject = new Subject<Error>();
+    private answerDataErrorsSubject = new Subject<AnswerValidationError>();
     private answerSubmissionErrorSubject = new Subject<Error>();
     private answerSubmissions = new Subject<ActivityInstanceAnswerSubmission>();
     private blockGuidToVisibility$ = new BehaviorSubject<GuidToShown>({});
@@ -117,7 +121,7 @@ export class SubmissionManager implements OnDestroy {
         };
 
         // Send errors down this Observable. having problems catching errors!
-        this.answerSubmissionFailure$ = this.answerSubmissionFailureSubject.asObservable();
+        this.answerDataErrors$ = this.answerDataErrorsSubject.asObservable();
 
         // Chunk that will actually send PATCH to server. includes the retry in case of failure
         const submitAnswerWithRetry: (submission: ActivityInstanceAnswerSubmission) => Observable<PatchAnswerResponse> =
@@ -125,8 +129,8 @@ export class SubmissionManager implements OnDestroy {
                 return executeAnswerSubmission(submission).pipe(
                     catchError(err => {
                         if (err?.status === 422) {
-                            this.answerSubmissionFailureSubject.next(err);
-                            this.answerSubmissionPatch422ErrorSubject.next(this.getViolatedStableIds(err?.error?.violations));
+                            this.answerDataErrorsSubject.next(err.error);
+                            this.answerSubmissionPatch422ErrorSubject.next(this.getViolatedStableIds(err.error?.violations));
                             return EMPTY;
                         } else {
                             // let's proceed to the next handler `retryWhen`
@@ -137,14 +141,14 @@ export class SubmissionManager implements OnDestroy {
                         return error.pipe(
                             mergeMap((submissionError, i) => {
                                 const errorCount = ++i;
-                                // we will retry on HTTP errors that are not the ones listed here
-                                if (errorCount > this.maxRetryCount || !(submissionError instanceof HttpErrorResponse)
-                                    || [400, 404, 401].includes(submissionError.status)) {
-                                    // Would have preferred to throw error, and have subscriber handle it in the error handler
-                                    // but could not get the error
-                                    this.answerSubmissionFailureSubject.next(submissionError);
+                                if ( !(submissionError instanceof HttpErrorResponse) ) {
                                     throw submissionError;
+                                } else if (errorCount > this.maxRetryCount) {
+                                    throw new AnswerSubmissionError(AnswerSubmissionErrorType.ExceededMaxRetryCount, submissionError);
+                                } else if ([400, 404, 401].includes(submissionError.status)) {
+                                    throw new AnswerSubmissionError(AnswerSubmissionErrorType.ClientErrorResponse, submissionError);
                                 } else {
+                                    // we will retry on HTTP errors that are not the ones above
                                     this.answerSubmissionErrorSubject.next(submissionError);
                                     return timer(this.retryDelayMs);
                                 }
