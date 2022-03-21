@@ -1,12 +1,14 @@
-import { ActivityServiceAgent } from './activityServiceAgent.service';
-import { Observable, of, from, interval, timer, throwError } from 'rxjs';
-import { delayWhen, take, tap } from 'rxjs/operators';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
+import { Observable, of, from, interval, timer, throwError } from 'rxjs';
+import { delayWhen, take, tap } from 'rxjs/operators';
+
+import { ActivityServiceAgent } from './activityServiceAgent.service';
 import { SubmissionManager } from './submissionManager.service';
 import { AnswerSubmission } from '../../models/activity/answerSubmission';
 import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { BlockVisibility } from '../../models/activity/blockVisibility';
+import { AnswerValidationError } from '../../models/answerValidationError';
 
 /* eslint-disable arrow-body-style */
 describe('SubmissionManagerTest', () => {
@@ -358,10 +360,9 @@ describe('SubmissionManagerTest', () => {
             status: 422
         })));
 
-        submissionManager.answerSubmissionFailure$.subscribe({
-            next: (error: HttpErrorResponse) => {
-                expect(error.status).toBe(422);
-                expect(error.error.violations[0].stableId).toBe('COMMENTS');
+        submissionManager.answerDataErrors$.subscribe({
+            next: (error: AnswerValidationError) => {
+                expect(error.violations[0].stableId).toBe('COMMENTS');
                 done();
             }
         });
