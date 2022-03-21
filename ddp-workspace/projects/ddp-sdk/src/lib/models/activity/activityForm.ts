@@ -21,7 +21,9 @@ export class ActivityForm {
 
     public validate(validateOnlyVisibleSections?: boolean): boolean {
         let isValid = true;
-        for (const section of this.getAllSections(validateOnlyVisibleSections)) {
+        const sectionsToValidate = this.getAllSections()
+            .filter(section => validateOnlyVisibleSections ? section.visible : section);
+        for (const section of sectionsToValidate) {
             isValid = section.validate() && isValid;
         }
         this.validationState.next(isValid);
@@ -50,11 +52,11 @@ export class ActivityForm {
         return this.sections.filter(section => section.visible).length;
     }
 
-    private getAllSections(onlyVisible: boolean): Array<ActivitySection> {
+    private getAllSections(): Array<ActivitySection> {
         const allSections: ActivitySection[] = [];
         this.introduction && allSections.push(this.introduction);
         allSections.push(...this.sections);
         this.closing && allSections.push(this.closing);
-        return onlyVisible ? allSections.filter(section => section.visible) : allSections;
+        return allSections;
     }
 }
