@@ -56,7 +56,6 @@ export class SubmissionManager implements OnDestroy {
     private answerSubmissions = new Subject<ActivityInstanceAnswerSubmission>();
     private blockGuidToVisibility$ = new BehaviorSubject<GuidToShown>({});
     private _answerSubmissionResponse$: Observable<PatchAnswerResponse>;
-    private answerSubmissionPatch422ErrorSubject = new Subject<string[]>();
 
     constructor(private serviceAgent: ActivityServiceAgent) {
         this.setupAnswerSubmissionPipeline();
@@ -120,7 +119,6 @@ export class SubmissionManager implements OnDestroy {
             return patchAnswerFunction(answerSubmission);
         };
 
-        // Send errors down this Observable. having problems catching errors!
         this.answerDataErrors$ = this.answerDataErrorsSubject.asObservable();
 
         // Chunk that will actually send PATCH to server. includes the retry in case of failure
@@ -130,7 +128,6 @@ export class SubmissionManager implements OnDestroy {
                     catchError(err => {
                         if (err?.status === 422) {
                             this.answerDataErrorsSubject.next(err.error);
-                            this.answerSubmissionPatch422ErrorSubject.next(this.getViolatedStableIds(err.error?.violations));
                             return EMPTY;
                         } else {
                             // let's proceed to the next handler `retryWhen`
@@ -215,12 +212,11 @@ export class SubmissionManager implements OnDestroy {
                 });
             }));
 
-        // remove submissions that include failed answers PATCH with 422 error
-        const submissionRemovalOnPatch422Error$: QueueOpObservable = this.answerSubmissionPatch422ErrorSubject.pipe(
-            map((stableIds: string[]) => (queue: ActivityInstanceAnswerSubmission[]) => {
-                return queue.filter(item => {
-                    return !stableIds.includes(item.stableId);
-                });
+        // remove a submission that includes failed answer's PATCH with 422 error (the last one in the queue)
+        const submissionRemovalOnPatch422Error$: QueueOpObservable = this.answerDataErrorsSubject.pipe(
+            map(() => (queue: ActivityInstanceAnswerSubmission[]) => {
+                queue.shift();
+                return queue;
             })
         );
 
@@ -265,9 +261,5 @@ export class SubmissionManager implements OnDestroy {
 
     private setupAnswerSubmissionWarning(): void {
         this.answerSubmissionWarning$ = this.answerSubmissionErrorSubject.pipe(map(() => true));
-    }
-
-    private getViolatedStableIds(violations: any[]): string[] {
-        return violations ? violations.map(violation => violation.stableId) : [];
     }
 }
