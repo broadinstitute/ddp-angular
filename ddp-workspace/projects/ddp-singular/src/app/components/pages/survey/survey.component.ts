@@ -9,6 +9,7 @@ import {
 } from './providers';
 import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivityInstance, ActivityResponse, UserActivityServiceAgent, SessionMementoService } from 'ddp-sdk';
+import { isConsentActivity } from '../../../utils';
 
 @Component({
   selector: 'app-survey',
@@ -58,6 +59,12 @@ export class SurveyComponent implements OnInit, OnDestroy {
     });
   }
 
+  get isConsent(): boolean {
+    const { activityCode } = this.getCurrentActivity() ?? {};
+
+    return isConsentActivity(activityCode);
+  }
+
   private getActivities(): Observable<ActivityInstance[]> {
     this.isFetchingActivities = true;
 
@@ -90,5 +97,11 @@ export class SurveyComponent implements OnInit, OnDestroy {
         tap((participantGuid: string) => this.sessionService.setParticipant(participantGuid)),
       )
       .subscribe();
+  }
+
+  private getCurrentActivity(): ActivityInstance | undefined {
+    const [current] = this.activities?.filter(({ instanceGuid }) => this.instanceGuid === instanceGuid) ?? [];
+
+    return current;
   }
 }
