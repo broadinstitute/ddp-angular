@@ -104,12 +104,17 @@ export class ActivityTextInput implements OnInit, OnChanges, OnDestroy {
   private buildForm(): void {
     this.controlName = this.block.stableId;
 
-    const formGroup = new FormGroup({
-      [this.controlName]: new FormControl({
-        value: this.block.answer,
-        disabled: this.readonly,
-      }),
-    });
+    const formGroup = new FormGroup(
+      {
+        [this.controlName]: new FormControl({
+          value: this.block.answer,
+          disabled: this.readonly,
+        }),
+      },
+      {
+        updateOn: this.block.hasUniqueValueValidator ? 'blur' : 'change'
+      }
+    );
 
     if (this.block.confirmEntry) {
       this.confirmationControlName = `${this.confirmationControlNamePrefix}${this.block.stableId}`;

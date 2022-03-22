@@ -13,6 +13,9 @@ import {
     ViewChild
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { BehaviorSubject, combineLatest, Observable, Subscription, timer } from 'rxjs';
+import { debounceTime, delay, filter, map, mergeMap, startWith, take, tap } from 'rxjs/operators';
+
 import { BaseActivityComponent } from './baseActivity.component';
 import { WindowRef } from '../../services/windowRef';
 import { SubmitAnnouncementService } from '../../services/submitAnnouncement.service';
@@ -22,14 +25,14 @@ import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { ActivitySection } from '../../models/activity/activitySection';
 import { AnalyticsEventCategories } from '../../models/analyticsEventCategories';
 import { CompositeDisposable } from '../../compositeDisposable';
-import { BehaviorSubject, combineLatest, Observable, Subscription, timer } from 'rxjs';
-import { debounceTime, delay, filter, map, mergeMap, startWith, take, tap } from 'rxjs/operators';
 import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
 import { LoggingService } from '../../services/logging.service';
 import { ActivityStatusCodes } from '../../models/activity/activityStatusCodes';
 import { SearchParticipant } from '../../models/searchParticipant';
 import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/participantsSearchServiceAgent.service';
+import { AnswerSubmissionError } from '../../models/answerSubmissionError';
+import { AnswerValidationError } from '../../models/answerValidationError';
 
 @Component({
     selector: 'ddp-activity',
@@ -48,7 +51,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     @ViewChild('subtitle', { static: false }) subtitle: ElementRef;
     @ViewChild('submitButton', { static: false }) submitButton;
 
-    public selectedUser$: Observable<SearchParticipant|null>;
+    public selectedUser$: Observable<SearchParticipant | null>;
     public currentSectionIndex = 0;
     public isScrolled = false;
     public communicationErrorOccurred = false;
@@ -77,7 +80,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         super(injector);
     }
 
-    @HostListener('window: scroll') public onWindowScroll(): void {
+    @HostListener('window: scroll')
+    public onWindowScroll(): void {
         const scrolledPixels = this.windowRef.nativeWindow.pageYOffset ||
             this.document.documentElement.scrollTop ||
             this.document.body.scrollTop || 0;
@@ -102,7 +106,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                 this.communicationErrorOccurred = false;
             },
             error: (error) => {
-                this.logger.logError(this.LOG_SOURCE, 'There has been unexpected error:', error);
+                const errType = error instanceof AnswerSubmissionError ? 'error during submission' : 'unexpected error';
+                this.logger.logError(this.LOG_SOURCE, `There has been an ${errType}:`, error);
                 this.navigateToErrorPage();
             }
         });
@@ -113,10 +118,9 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
             this.communicationErrorOccurred = true;
         });
 
-        // Get notified of failure patching. Submission Manager has given up.
-        const subErrSub = this.submissionManager.answerSubmissionFailure$.subscribe((error) => {
-            this.logger.logError('ActivityComponent', 'There was an error during submission:', error);
-            return this.navigateToErrorPage();
+        // Get failed validation from server side
+        const subErrSub = this.submissionManager.answerDataErrors$.subscribe((error: AnswerValidationError) => {
+            this.addServerValidationMessagesToViolatedQuestions(error);
         });
 
         // if we are patching or an embedded component is busy, page is busy
@@ -338,8 +342,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     }
 
     private updateServerValidationMessages(response: PatchAnswerResponse): void {
-        const questionBlocks: AbstractActivityQuestionBlock[] = this.model.sections.reduce((allBlocks, section) =>
-            allBlocks.concat(section.blocks.filter(block => block.blockType === BlockType.Question)), []);
+        const questionBlocks = this.getQuestionBlocks();
 
         // We should clear server-side validations each time to prevent messages accumulating
         questionBlocks.forEach(qBlock => qBlock.serverValidationMessages = []);
@@ -399,5 +402,31 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     public updateIsAdminEditing(adminEditing: boolean): void {
         this.isAdminEditing = adminEditing;
         this.changeRef.detectChanges();
+    }
+
+    private addServerValidationMessagesToViolatedQuestions(error: AnswerValidationError): void {
+        if (!error?.violations) {
+            this.logger.logError('ActivityComponent', 'There was an error during submission (a violated question handler):', error);
+            return;
+        }
+        const questionBlocks = this.getQuestionBlocks();
+        for (const violation of error.violations) {
+            const violatedQuestions = questionBlocks.filter(qBlock => qBlock.stableId === violation.stableId);
+            this.handleViolation(violatedQuestions, violation.rules);
+        }
+    }
+
+    private handleViolation(violatedQuestions: AbstractActivityQuestionBlock[], validationRules = []): void {
+        for (const violatedQuestion of violatedQuestions) {
+            violatedQuestion.serverValidationMessages = [];
+            validationRules.map(rule => rule.message)
+                .filter(Boolean)
+                .forEach(message => violatedQuestion.addServerValidationMessage(message));
+        }
+    }
+
+    private getQuestionBlocks(): AbstractActivityQuestionBlock[] {
+        return this.model.sections.reduce((allBlocks, section) =>
+            allBlocks.concat(section.blocks.filter(block => block.blockType === BlockType.Question)), []);
     }
 }
