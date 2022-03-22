@@ -11,6 +11,7 @@ import {
 } from 'rxjs';
 import { ActivityPicklistNormalizedGroup } from '../../../models/activity/activityPicklistNormalizedGroup';
 import { ActivityPicklistOption } from '../../../models/activity/activityPicklistOption';
+import { ActivityPicklistQuestionBlock } from '../../../models/activity/activityPicklistQuestionBlock';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { ActivityServiceAgent } from '../../../services/serviceAgents/activityServiceAgent.service';
 import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
@@ -28,7 +29,7 @@ import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.com
             [placeholder]="block.picklistLabel"
             [matAutocomplete]="autoCompleteFromSource"
             (keyup)="onInput($event.target.value)"
-            [(ngModel)]="block.answer[0].detail"
+            [ngModel] = "block.picklistOptions[0].optionLabel"
         />
 
         <mat-autocomplete
@@ -52,7 +53,7 @@ import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.com
                 ></span>
             </mat-option>
         </mat-autocomplete>
-    </mat-form-field> `,
+    </mat-form-field>`,
     styles: [
         `
             .full-width {
@@ -89,14 +90,12 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
             debounceTime(1000),
             distinctUntilChanged(),
             switchMap((searchValue) =>
-                searchValue.length > 0
-                    ? this.activityService.getPickListOptions(
-                          this.block.stableId,
-                          searchValue,
-                          this.studyGuid,
-                          this.activityGuid
-                      )
-                    : of({ results: [] })
+                this.activityService.getPickListOptions(
+                    this.block.stableId,
+                    searchValue,
+                    this.studyGuid,
+                    this.activityGuid
+                )
             ),
             map((data) => data.results)
         );
@@ -110,10 +109,12 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
         return typeof option === 'string' ? option : option?.optionLabel || '';
     }
 
-    onValueSelect(value: ActivityPicklistOption): void {
-        this.block.answer = value
-            ? [{ stableId: value.stableId, detail: value.optionLabel }]
-            : [];
+    onValueSelect(
+        value: ActivityPicklistOption,
+        detail: string | null = null
+    ): void {
+        this.block.answer = value ? [{ stableId: value.stableId, detail }] : [];
         this.valueChanged.emit([...this.block.answer]);
     }
+
 }
