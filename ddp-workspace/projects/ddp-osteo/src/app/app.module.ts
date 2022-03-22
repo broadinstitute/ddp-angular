@@ -102,6 +102,7 @@ config.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl;
 config.doCloudLogging = DDP_ENV.doCloudLogging;
 config.usesVerticalStepper = ['FAMILY_HISTORY'];
 config.alwaysShowQuestionsCountInModalNestedActivity = true;
+config.validateOnlyVisibleSections = true;
 
 export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {
