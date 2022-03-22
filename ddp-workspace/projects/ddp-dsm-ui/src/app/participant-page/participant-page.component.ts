@@ -111,6 +111,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   private taskType: string;
   private checkParticipantStatusInterval: any;
   isEmailValid: boolean;
+  isOncHistoryVisible = false;
 
   accordionOpenedPanel = '';
 
@@ -133,6 +134,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       }
     });
   }
+
 
   ngOnInit(): void {
     this.setDefaultProfileValues();
@@ -168,6 +170,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       this.scrolled = true;
     }
     this.validateEmailInput(this.participant.data.profile['email']);
+    this.isOncHistoryVisible = !!this.participant.data.dsm[ 'hasConsentedToTissueSample' ]
+                            && !!this.participant.participant.ddpParticipantId;
   }
 
   ngAfterViewChecked(): void{
