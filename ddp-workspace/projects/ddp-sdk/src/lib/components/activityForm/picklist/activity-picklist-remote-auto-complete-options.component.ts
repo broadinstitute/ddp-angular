@@ -29,7 +29,7 @@ import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.com
             [placeholder]="block.picklistLabel"
             [matAutocomplete]="autoCompleteFromSource"
             (keyup)="onInput($event.target.value)"
-            [ngModel] = "block.picklistOptions[0].optionLabel"
+            [ngModel] = "getInitialAnswerOptionLabel()"
         />
 
         <mat-autocomplete
@@ -115,6 +115,12 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     ): void {
         this.block.answer = value ? [{ stableId: value.stableId, detail }] : [];
         this.valueChanged.emit([...this.block.answer]);
+    }
+
+    getInitialAnswerOptionLabel(): string {
+        if(this.block.selectMode === 'SINGLE') {
+            return this.block.picklistOptions[0].optionLabel;
+        }
     }
 
 }
