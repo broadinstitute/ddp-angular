@@ -37,6 +37,7 @@ import { SuccessMessageComponent } from './components/success-message/success-me
 import { SuccessMessageDialogComponent } from './components/success-message-dialog/success-message-dialog.component';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {LoginComponent} from './components/login/login.component';
+import { ActivitySectionProgressBarComponent } from './components/activity-section-progress-bar/activity-section-progress-bar.component';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import {LoginComponent} from './components/login/login.component';
     ForCliniciansComponent,
     SuccessMessageComponent,
     SuccessMessageDialogComponent,
+    ActivitySectionProgressBarComponent,
   ],
   imports: [
     DdpModule,

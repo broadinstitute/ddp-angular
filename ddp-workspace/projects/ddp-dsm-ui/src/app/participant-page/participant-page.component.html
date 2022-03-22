@@ -794,7 +794,7 @@ participant.data.dsm['diagnosisYear'] != null">
             </tab>
 
             <tab heading="Onc History"
-                 *ngIf="participant.oncHistoryDetails != null && participant.oncHistoryDetails.length > 0"
+                 *ngIf="participant.participant.ddpParticipantId"
                  [active]="tabActive('Onc History')" (selectTab)="onSelect($event, 'Onc History')">
               <br/><br/><br/>
 
