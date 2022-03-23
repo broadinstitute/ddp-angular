@@ -53,7 +53,7 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="type === 'NUMERIC'">
+  <ng-container *ngIf="type === 'NUMERIC' || type === 'DECIMAL'">
     <div *ngIf="answer">
       <h5 style="color: #A9A9A9" innerHTML="{{question}} <b>({{stableId}})</b>"></h5>
       <p><b>{{ answer }}</b></p>

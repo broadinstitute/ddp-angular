@@ -28,6 +28,10 @@ export class BuildingFactoryService {
         func: (input) => this.generateNumericQuestion(input.answer, input.question)
       },
       {
+        type: QuestionTypeEnum.Decimal,
+        func: (input) => this.generateNumericQuestion(input.answer, input.question)
+      },
+      {
         type: QuestionTypeEnum.Date,
         func: (input) => this.generateDateQuestion(input.answer, input.question)
       },
