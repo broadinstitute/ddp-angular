@@ -1,20 +1,21 @@
-import { Component, Inject, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
     BehaviorSubject,
     debounceTime,
     distinctUntilChanged,
     map,
     Observable,
-    of,
     switchMap,
-    tap,
 } from 'rxjs';
-import { ActivityPicklistNormalizedGroup } from '../../../models/activity/activityPicklistNormalizedGroup';
 import { ActivityPicklistOption } from '../../../models/activity/activityPicklistOption';
-import { ActivityPicklistQuestionBlock } from '../../../models/activity/activityPicklistQuestionBlock';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { ActivityServiceAgent } from '../../../services/serviceAgents/activityServiceAgent.service';
 import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
+
+interface SplittedData {
+    plOptions: ActivityPicklistOption[];
+    otherOption: ActivityPicklistOption;
+}
 
 @Component({
     selector: 'ddp-activity-picklist-remote-auto-complete-options',
@@ -29,7 +30,6 @@ import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.com
             [placeholder]="block.picklistLabel"
             [matAutocomplete]="autoCompleteFromSource"
             (keyup)="onInput($event.target.value)"
-            [ngModel]="getInitialAnswerOptionLabel()"
         />
 
         <mat-autocomplete
@@ -86,21 +86,45 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     }
 
     ngOnInit(): void {
+        const initSearchValue = this.getAnswer();
+        this.searchValue$ = new BehaviorSubject(initSearchValue);
+
         this.picklistOptions$ = this.searchValue$.pipe(
-            debounceTime(1000),
+            debounceTime(500),
             distinctUntilChanged(),
             switchMap((searchValue) =>
-                searchValue.length > 0
-                    ? this.activityService.getPickListOptions(
-                          this.block.stableId,
-                          searchValue,
-                          this.studyGuid,
-                          this.activityGuid
-                      )
-                    : of({ results: [] })
+                this.activityService.getPickListOptions(
+                    this.block.stableId,
+                    searchValue,
+                    this.studyGuid,
+                    this.activityGuid
+                )
             ),
-            map((data) => data.results)
+            map((data) => this.splitOtherOptionFromPLOptions(data.results)),
+            map((splittedData) =>
+                this.validateIfMissingOptionShouldBeDisplayed(
+                    splittedData.plOptions
+                )
+                    ? this.createNotListedOption(splittedData)
+                    : splittedData.plOptions
+            )
         );
+    }
+    splitOtherOptionFromPLOptions(
+        data: ActivityPicklistOption[]
+    ): SplittedData {
+        return {
+            plOptions: data.filter((pl) => pl.stableId !== 'OTHER'),
+            otherOption: data.find((pl) => pl.stableId === 'OTHER'),
+        };
+    }
+
+    createNotListedOption(data: SplittedData) {
+        const notListedOption = {
+            ...data.otherOption,
+            optionLabel: this.searchValue$.value.toLocaleUpperCase(),
+        };
+        return [...data.plOptions, notListedOption];
     }
 
     onInput(value): void {
@@ -115,7 +139,17 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
         value: ActivityPicklistOption,
         detail: string | null = null
     ): void {
-        this.block.answer = value ? [{ stableId: value.stableId, detail }] : [];
+        this.block.answer = value
+            ? [
+                  {
+                      stableId: value.stableId,
+                      detail:
+                          value.stableId === 'OTHER'
+                              ? value.optionLabel
+                              : detail,
+                  },
+              ]
+            : [];
         this.valueChanged.emit([...this.block.answer]);
     }
 
@@ -126,5 +160,27 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
         ) {
             return this.block.picklistOptions[0].optionLabel;
         }
+    }
+
+    getAnswer(): string {
+        const option = this.block.picklistOptions.find(
+            (pl) => pl.stableId === this.block.answer[0].stableId
+        );
+        return this.block.answer
+            ? option.stableId === 'OTHER'
+                ? option.detailLabel
+                : option.optionLabel
+            : '';
+    }
+
+    validateIfMissingOptionShouldBeDisplayed(
+        picklistOptions: ActivityPicklistOption[]
+    ): boolean {
+        return (
+            this.searchValue$.value.length &&
+            !picklistOptions.filter((pl) =>
+                pl.optionLabel.includes(this.searchValue$.value)
+            ).length
+        );
     }
 }
