@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, Injector, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LOCATION_INITIALIZED } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { DataTableModule } from '@pascalhonegger/ng-datatable';
@@ -111,9 +112,11 @@ import { ParticipantUpdateResultDialogComponent } from './dialogs/participant-up
 import { FormDataComponent } from './form-data/form-data.component';
 import { AddFamilyMemberComponent } from './popups/add-family-member/add-family-member.component';
 import { FieldTableComponent } from './field-table/field-table.component';
-import { ConfigurationService, DdpModule } from 'ddp-sdk';
+import { ConfigurationService, DdpModule, LanguageService, LoggingService } from 'ddp-sdk';
 import { TestDssComponent } from './test-dss/test-dss.component';
 import { DssErrorPageComponent } from './test-dss/dss-error-page/dss-error-page.component';
+
+import { TranslateService } from '@ngx-translate/core';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -136,6 +139,32 @@ sdkConfig.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl; // TODO: add the URL value 
 sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
 sdkConfig.auth0ClaimNameSpace = DDP_ENV.auth0ClaimNameSpace;
 sdkConfig.errorPageUrl = 'dss-error';
+
+export function translateFactory(translate: TranslateService,
+                                 injector: Injector,
+                                 logger: LoggingService,
+                                 // language: LanguageService // TODO: setup languages for DSM
+): () => Promise<any> {
+  return () => new Promise<any>((resolve: any) => {
+    const LOG_SOURCE = 'DSM AppModule';
+    const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
+    locationInitialized.then(() => {
+      const locale = 'en'; // language.getAppLanguageCode();
+      translate.setDefaultLang(locale);
+      translate.use(locale).subscribe({
+        next: () => {
+          logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
+        },
+        error: err => {
+          logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization:`, err);
+        },
+        complete: () => {
+          resolve(null);
+        }
+      });
+    });
+  });
+}
 
 @NgModule({
     declarations: [
@@ -260,7 +289,18 @@ sdkConfig.errorPageUrl = 'dss-error';
         Language,
         StackdriverErrorReporterDsmService,
         LoggingDsmService,
-        { provide: ErrorHandler, useClass: StackdriverErrorReporterDsmService }
+        { provide: ErrorHandler, useClass: StackdriverErrorReporterDsmService },
+        {
+          provide: APP_INITIALIZER,
+          useFactory: translateFactory,
+          deps: [
+            TranslateService,
+            Injector,
+            LoggingService,
+            LanguageService
+          ],
+          multi: true
+        }
     ],
     bootstrap: [AppComponent]
 })
