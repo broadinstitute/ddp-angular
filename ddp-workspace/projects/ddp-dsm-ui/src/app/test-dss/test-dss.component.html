@@ -1,14 +1,48 @@
 <h2>test-dss works!</h2>
-<hr>
 
-<button (click)="createActivity()">CREATE</button>
+<section class="controls">
+  <h3>Fill in all required fields and click GET button</h3>
+  <mat-form-field appearance="outline">
+    <mat-label>userGuid</mat-label>
+    <input matInput
+           #userGuidInput
+           required
+           [formControl]="userGuidFormControl"
+    />
+    <mat-icon matSuffix (click)="userGuidFormControl.setValue(existingUserGuid)">add_circle_outline</mat-icon>
+  </mat-form-field>
 
-<button (click)="getActivity()">GET</button>
+  <mat-form-field appearance="outline">
+    <mat-label>studyGuid</mat-label>
+    <input matInput
+           #studyGuidInput
+           required
+           [formControl]="studyGuidFormControl"
+    />
+    <mat-icon matSuffix (click)="studyGuidFormControl.setValue(existingStudyGuid)">add_circle_outline</mat-icon>
+  </mat-form-field>
 
-<button (click)="fetchActivity()">FETCH</button>
+  <mat-form-field appearance="outline">
+    <mat-label>activityGuid</mat-label>
+    <input matInput
+           #activityGuidInput
+           required
+           [formControl]="activityGuidFormControl"
+    />
+    <mat-icon matSuffix (click)="activityGuidFormControl.setValue(existingActivityGuid)">add_circle_outline</mat-icon>
+  </mat-form-field>
 
-<!--<ddp-activity-redesigned [studyGuid]="studyGuid"-->
-<!--                         [activityGuid]="activityGuid"-->
-<!--                         (submit)="navigate($event)"-->
-<!--                         (activityCode)="activityCodeChanged($event)">-->
-<!--</ddp-activity-redesigned>-->
+  <button mat-flat-button color="primary"
+          [disabled]="!(userGuidInput.value && studyGuidInput.value && activityGuidInput.value)"
+          (click)="doRequest=true">Get the activity
+  </button>
+</section>
+
+<div *ngIf="doRequest">
+  <ddp-activity-redesigned [studyGuid]="studyGuidInput.value"
+                           [activityGuid]="activityGuidInput.value"
+                           (submit)="navigate($event)"
+                           (activityCode)="activityCodeChanged($event)">
+  </ddp-activity-redesigned>
+</div>
+

@@ -1,30 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { ActivityServiceAgent, SessionMementoService } from 'ddp-sdk';
 
-// https://pepper-dev.datadonationplatform.org/pepper/v1/user/V83QCBFYFLJV4HI57Z6U/studies/cmi-pancan/activities/82D0REQIBC
-const userGuid = 'V83QCBFYFLJV4HI57Z6U'; // an existing Pancan user
-const studyGuid = 'cmi-pancan';
-const activityGuid = '82D0REQIBC'; // an existing activity for the Pancan user above
-
-const existingDSMToken = '';  // PUT HERE your DSM token for debugging locally only! DO NOT PUSH it!
-const params = {
-  method: 'GET',
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    // eslint-disable-next-line max-len
-    Authorization: `Bearer ${existingDSMToken}`
-  }
-};
+const USER_GUID = '9KS6ZC8G15YZ9ZV8LORZ'; // an existing Pancan user
+const STUDY_GUID = 'cmi-pancan';
+const ACTIVITY_GUID = '4DWU10NBJ4'; // an existing activity for the Pancan user above
 
 @Component({
   selector: 'app-test-dss',
   templateUrl: './test-dss.component.html',
   styleUrls: ['./test-dss.component.scss']
 })
-export class TestDssComponent implements OnInit {
-  studyGuid = studyGuid;
-  activityGuid = activityGuid;
+export class TestDssComponent implements OnInit, OnDestroy {
+  existingUserGuid = USER_GUID;
+  existingStudyGuid = STUDY_GUID;
+  existingActivityGuid = ACTIVITY_GUID;
+
+  userGuidFormControl = new FormControl('', [Validators.required]);
+  studyGuidFormControl = new FormControl('', [Validators.required]);
+  activityGuidFormControl = new FormControl('', [Validators.required]);
+  doRequest: boolean;
+  private readonly ngUnsubscribe = new Subject<void>();
 
   constructor(
     private activityServiceAgent: ActivityServiceAgent,
@@ -32,41 +30,26 @@ export class TestDssComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // update DSS session with a current userGuid
-    this.sessionService.setParticipant(userGuid);
+    this.userGuidFormControl.valueChanges.pipe(
+      distinctUntilChanged(),
+      debounceTime(200),
+      takeUntil(this.ngUnsubscribe)
+    ).subscribe(userIdValue => {
+      // update DSS session with a current userGuid
+      this.sessionService.setParticipant(userIdValue);
+    });
   }
 
-  createActivity(): void {
-    this.activityServiceAgent.createInstance(studyGuid, activityGuid)
-      .subscribe({
-        next: x => console.log('CREATED', x),
-        error: err => console.log('CREATED ERROR', err)
-      });
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
-  getActivity(): void {
-    this.activityServiceAgent
-        .getActivitySummary(studyGuid, activityGuid)
-        .subscribe({
-          next: res => console.log('GET', res),
-          error: err=> console.log('GET ERROR', err),
-        });
+  activityCodeChanged(event: any): void {
+    console.log('activityCodeChanged');
   }
 
-  fetchActivity(): void {
-    const URL = `https://pepper-dev.datadonationplatform.org/pepper/v1/user/${userGuid}/studies/${studyGuid}/activities/${activityGuid}`;
-
-    window.fetch(URL, params)
-      .then(res => res.json())
-      .then(x => console.log('FETCH', x))
-      .catch(err => console.log('FETCH ERR', err));
+  navigate($event: any): void {
+    console.log('navigate');
   }
-
-  // activityCodeChanged(event: any): void {
-  //   console.log('activityCodeChanged');
-  // }
-  //
-  // navigate($event: any): void {
-  //   console.log('navigate');
-  // }
 }
