@@ -113,6 +113,7 @@ import { AddFamilyMemberComponent } from './popups/add-family-member/add-family-
 import { FieldTableComponent } from './field-table/field-table.component';
 import { ConfigurationService, DdpModule } from 'ddp-sdk';
 import { TestDssComponent } from './test-dss/test-dss.component';
+import { DssErrorPageComponent } from './test-dss/dss-error-page/dss-error-page.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -134,6 +135,7 @@ sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 sdkConfig.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl; // TODO: add the URL value in config file
 sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
 sdkConfig.auth0ClaimNameSpace = DDP_ENV.auth0ClaimNameSpace;
+sdkConfig.errorPageUrl = 'dss-error';
 
 @NgModule({
     declarations: [
@@ -206,7 +208,8 @@ sdkConfig.auth0ClaimNameSpace = DDP_ENV.auth0ClaimNameSpace;
         FormDataComponent,
         AddFamilyMemberComponent,
         FieldTableComponent,
-        TestDssComponent
+        TestDssComponent,
+        DssErrorPageComponent
     ],
     imports: [
         DdpModule,
