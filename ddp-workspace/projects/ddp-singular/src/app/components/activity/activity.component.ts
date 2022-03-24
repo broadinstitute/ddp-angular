@@ -13,7 +13,7 @@ declare const DDP_ENV: Record<string, any>;
   providers: [SubmitAnnouncementService, SubmissionManager],
 })
 export class ActivityComponent extends ActivityRedesignedComponent {
-  @Input() isLastActivity = false;
+  @Input('isLastOfMultipleActivities') isLastOfActivities = false;
   Route = Route;
   isCaptchaResolved = false;
 

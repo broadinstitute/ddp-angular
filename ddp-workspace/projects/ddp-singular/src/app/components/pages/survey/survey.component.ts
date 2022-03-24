@@ -9,7 +9,7 @@ import {
 } from './providers';
 import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivityInstance, ActivityResponse, UserActivityServiceAgent, SessionMementoService } from 'ddp-sdk';
-import { isConsentActivity } from '../../../utils';
+import { getRenderActivities, isConsentActivity, RenderActivityKey } from '../../../utils';
 
 @Component({
   selector: 'app-survey',
@@ -65,11 +65,17 @@ export class SurveyComponent implements OnInit, OnDestroy {
     return isConsentActivity(activityCode);
   }
 
-  get isLastActivity(): boolean {
-    const current = this.getCurrentActivity();
-    const last = this.activities?.[this.activities.length - 1];
+  get isLastOfMultipleActivities(): boolean {
+    if (this.activities.length <= 1) {
+      return false;
+    }
 
-    return !!last?.instanceGuid && !!current?.instanceGuid && last.instanceGuid === current.instanceGuid;
+    const currentActivity = this.getCurrentActivity();
+
+    const renderedActivities = getRenderActivities(this.instanceGuid, this.activities);
+    const lastRenderedActivity = renderedActivities[renderedActivities.length - 1];
+
+    return RenderActivityKey[lastRenderedActivity.i18nKey] === currentActivity.activityCode;
   }
 
   private getActivities(): Observable<ActivityInstance[]> {
