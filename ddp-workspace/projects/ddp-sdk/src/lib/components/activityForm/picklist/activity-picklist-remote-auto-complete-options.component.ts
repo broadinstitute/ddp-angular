@@ -88,7 +88,7 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     ngOnInit(): void {
         const initSearchValue = this.getAnswer();
         this.searchValue$ = new BehaviorSubject(initSearchValue);
-        
+
         this.picklistOptions$ = this.searchValue$.pipe(
             debounceTime(500),
             distinctUntilChanged(),
@@ -119,7 +119,7 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
         };
     }
 
-    createNotListedOption(data: SplittedData) {
+    createNotListedOption(data: SplittedData): ActivityPicklistOption[] {
         const notListedOption = {
             ...data.otherOption,
             optionLabel: this.searchValue$.value.toLocaleUpperCase(),
