@@ -471,12 +471,6 @@ export class Filter {
         }
       }
     }
-    for (const filter of filters) {
-      if (filter.type !== Filter.JSON_ARRAY_TYPE && filter.participantColumn.object != null && filter.participantColumn.object !== '') {
-        filter.parentName = filter.participantColumn.object;
-      }
-
-    }
     return filters;
   }
 
