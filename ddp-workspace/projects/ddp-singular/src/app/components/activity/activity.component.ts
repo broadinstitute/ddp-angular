@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Route } from '../../constants/route';
 import { ActivityCode } from '../../constants/activity-code';
+import { isConsentActivity } from '../../utils';
 import { ActivityRedesignedComponent, SubmissionManager, SubmitAnnouncementService } from 'ddp-sdk';
 
 declare const DDP_ENV: Record<string, any>;
@@ -28,23 +29,22 @@ export class ActivityComponent extends ActivityRedesignedComponent {
   }
 
   get displayDisagreeButton(): boolean {
-    return this.isActivityWithUnusualButtons() && this.isLastTwoSections;
+    return this.isActivityWithUnusualButtons() && this.isLastSection;
   }
 
   get displayAgreeIcon(): boolean {
     return this.isActivityWithUnusualButtons();
   }
 
-  get isLastTwoSections(): boolean {
-    const totalSections = this.model.sections.length;
-
-    return [totalSections, totalSections - 1].includes(this.currentSectionIndex + 1);
+  get isLastSection(): boolean {
+    return this.model.sections.length - 1 === this.currentSectionIndex;
   }
 
   get isConsent(): boolean {
+    // return isConsentActivity(this.model?.activityCode);
     return this.model?.activityCode === ActivityCode.ConsentSelf ||
-      this.model?.activityCode === ActivityCode.ConsentAssent ||
-      this.model?.activityCode === ActivityCode.ConsentParental;
+    this.model?.activityCode === ActivityCode.ConsentAssent ||
+    this.model?.activityCode === ActivityCode.ConsentParental;
   }
 
   onCaptchaResolve(): void {

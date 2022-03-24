@@ -48,6 +48,7 @@ const getRenderActivityKeyByActivityCode = (activityCode: ActivityCode): RenderA
 export class ProgressBarComponent {
   renderActivities: RenderActivity[] | null = null;
   @Input() instanceGuid: string | null = null;
+  @Input() hidden = false;
 
   @Input() set activities(activities: ActivityInstance[]) {
     if (activities) {
@@ -56,7 +57,7 @@ export class ProgressBarComponent {
   }
 
   get isProgressBarDisplayed(): boolean {
-    return this.renderActivities !== null;
+    return this.renderActivities !== null && !this.hidden;
   }
 
   private getRenderActivities(activities: ActivityInstance[]): RenderActivity[] {
