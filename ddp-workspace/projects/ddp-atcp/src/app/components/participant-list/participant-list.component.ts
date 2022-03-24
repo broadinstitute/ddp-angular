@@ -185,7 +185,7 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
         activity => activity.activityCode === ActivityCodes.REGISTRATION,
       );
 
-      return registrationActivity.statusCode !== this.COMPLETE_STATUS_CODE;
+      return registrationActivity.statusCode !== this.COMPLETE_STATUS_CODE && !registrationActivity.previousInstanceGuid;
     });
 
     if (!accidentalParticipant) {
