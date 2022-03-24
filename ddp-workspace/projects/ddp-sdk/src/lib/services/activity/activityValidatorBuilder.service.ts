@@ -55,6 +55,7 @@ export class ActivityValidatorBuilder {
             { type: ValidationRuleType.IntRange, factory: (x, y) => this.buildNumericRangeValidator(x, y) },
             { type: ValidationRuleType.DecimalRange, factory: (x, y) => this.buildDecimalRangeValidator(x, y) },
             { type: ValidationRuleType.Unique, factory: (x, y) => new ActivityUniqueValidationRule(y) },
+            { type: ValidationRuleType.UniqueValue },
         ];
     }
 
@@ -64,6 +65,9 @@ export class ActivityValidatorBuilder {
         for (const validationJson of questionJson.validations) {
             const buildRule = this.rules.find(x => x.type === validationJson.rule);
             if (buildRule != null) {
+                if (!buildRule.factory) {
+                    continue;
+                }
                 const rule = buildRule.factory(validationJson, questionBlock);
                 rule.message = validationJson.message;
                 _.isBoolean(validationJson.allowSave) && (rule.allowSave = validationJson.allowSave);

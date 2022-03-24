@@ -1,131 +1,126 @@
-<div class="Display--block Width--100">
-  <fieldset style="border: 1px black solid">
-    <legend class="Group--Title" id="{{getActivityCode(activity)}}">{{getActivityName(activityDefinition)}}</legend>
+<mat-accordion>
+  <mat-expansion-panel hideToggle style="margin-bottom: 10px;"
+                       (click)="generateActivity()"
+                       id="{{ activityDefinition.activityCode }}">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>{{ activityDefinition.activityName }}</b>
+      </mat-panel-title>
+      <mat-panel-description class="align-header">
+        Survey Version: {{activity.activityVersion}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
     <div class="Router--Outlet">
-      <div>Survey Version: {{activity.activityVersion}}</div>
+      <p class="grey-color"><b>Activity information</b></p>
       <div>Created: {{activity.createdAt | date:'medium'}}</div>
       <div>Completed: <ng-container *ngIf="activity.completedAt !== 0">{{activity.completedAt | date:'medium'}}</ng-container></div>
       <div>Last Updated: {{activity.lastUpdatedAt | date:'medium'}}</div>
     </div>
-    <table class="Width--100 Table--box" *ngFor="let questionAnswer of activity.questionsAnswers; let questionIndex = index">
-      <!--abstraction fields-->
-      <ng-container *ngIf="questionAnswer != null && questionAnswer.stableId != null && activityDefinition != null && activityDefinition.questions != null">
-        <ng-container *ngIf="activityDefinition.getQuestionDefinition(questionAnswer.stableId) as qDef">
-          <ng-container *ngIf="qDef != null">
-            <tr>
-              <td class="TD--Padding Width--50 Data-Display-Question">{{qDef.questionText}} <b>({{questionAnswer.stableId}})</b></td>
-            </tr>
-            <tr>
-              <td class="TD--Padding-Left Width--50">
-                <ng-container *ngIf="qDef.questionType !== 'TEXT' && qDef.questionType !== 'NUMERIC' && qDef.questionType !== 'BOOLEAN' && qDef.questionType !== 'AGREEMENT'
-                  && qDef.questionType !== 'COMPOSITE' && qDef.questionType !== 'PICKLIST' && qDef.questionType !== 'DATE'">
-                  {{questionAnswer.questionType}}
-                </ng-container>
-                <b *ngIf="qDef.questionType === 'TEXT' || qDef.questionType === 'NUMERIC'" class="TD--Padding-Left-Bigger">
-                  {{questionAnswer.answer}}
-                </b>
-                <ng-container *ngIf="qDef.questionType === 'DATE'">
-                  <b class="TD--Padding-Left-Bigger">
-                    <ng-container
-                      *ngIf="questionAnswer.dateFields != null">
-                      <ng-container *ngIf="questionAnswer.dateFields.day != null && questionAnswer.dateFields.day !== '' &&
-questionAnswer.dateFields.month != null && questionAnswer.dateFields.month !== ''">
-                        {{questionAnswer.dateFields.month}}/{{questionAnswer.dateFields.day}}/{{questionAnswer.dateFields.year}}
-                      </ng-container>
-                      <ng-container *ngIf="(questionAnswer.dateFields.day == null || questionAnswer.dateFields.day === '') &&
-questionAnswer.dateFields.month != null && questionAnswer.dateFields.month !== '' && questionAnswer.dateFields.year != null && questionAnswer.dateFields.year !== ''">
-                        {{questionAnswer.dateFields.month}}/{{questionAnswer.dateFields.year}}
-                      </ng-container>
-                      <ng-container *ngIf="(questionAnswer.dateFields.day == null || questionAnswer.dateFields.day === '') &&
-questionAnswer.dateFields.month == null || questionAnswer.dateFields.month === ''">{{questionAnswer.dateFields.year}}
-                      </ng-container>
-                      <ng-container *ngIf="(questionAnswer.dateFields.year == null || questionAnswer.dateFields.year === '') &&
-questionAnswer.dateFields.month != null && questionAnswer.dateFields.month !== ''">{{questionAnswer.dateFields.month}}/null
-                      </ng-container>
-                    </ng-container>
-                  </b>
-                </ng-container>
-                <b *ngIf="qDef.questionType === 'BOOLEAN' || qDef.questionType === 'AGREEMENT'" class="TD--Padding-Left-Bigger">
-                  {{getUtil().getYesNo(questionAnswer.answer)}}
-                </b>
-                <ng-container *ngIf="qDef.questionType === 'COMPOSITE' && questionAnswer.answer != null">
-                  <!--TODO add allowMultiple-->
-                  <div *ngFor="let answer of questionAnswer.answer; let i = index">
-                    <div *ngFor="let cQ of qDef.childQuestions; let i = index" class="TD--Padding-Left-Bigger">
-                      <b *ngIf="cQ.questionType === 'DATE' && answer[i] != null">
-                        {{getUtil().getNiceUserText(answer[i])}}
-                      </b>
-                      <b *ngIf="cQ.questionType === 'PICKLIST' && answer[i] != null">
-                        {{getUtil().getOptionOrGroupText(cQ, answer[i])}}
-                      </b>
-                      <b *ngIf="cQ.questionType !== 'DATE' && cQ.questionType !== 'PICKLIST' && answer[i] != null">
-                        {{getUtil().getNiceUserText(answer[i])}}
-                      </b>
-                      <b *ngIf="cQ.questionText != null && cQ.questionText !== ''" class="Data-Display-Question">
-                        ({{cQ.questionText}})
-                      </b>
-                    </div>
-                    <hr *ngIf="i !== questionAnswer.answer.length-1" style="border-color: lightgray">
-                  </div>
-                </ng-container>
-                <ng-container *ngIf="qDef.questionType === 'PICKLIST' && questionAnswer.answer != null">
-                  <ng-container *ngIf="qDef.selectMode === 'MULTIPLE'">
-                    <ng-container *ngIf="qDef.options !== null">
-                      <ul *ngFor="let o of qDef.options">
-                        <li *ngIf="getUtil().isOptionSelected(questionAnswer.answer, o.optionStableId)"><b>{{o.optionText}}</b>
-                          <ng-container *ngIf="questionAnswer.optionDetails != null">
-                            <ng-container *ngIf="getUtilStatic().getOptionDetails(questionAnswer.optionDetails, o.optionStableId) as oDetail">
-                              <div>{{oDetail.details}}
-                              </div>
-                            </ng-container>
-                          </ng-container>
-                          <ng-container *ngIf="questionAnswer.nestedOptions != null && questionAnswer.nestedOptions[o.optionStableId] !== null && o.nestedOptions !== null">
-                            <ul *ngFor="let nOption of questionAnswer.nestedOptions[o.optionStableId]">
-                              <li *ngIf="getUtil().getAnswerText(nOption, o.nestedOptions) as option"><b>{{option.optionText}}</b>
-                              </li>
-                            </ul>
-                          </ng-container>
-                        </li>
-                      </ul>
-                    </ng-container>
-                    <ng-container *ngIf="qDef.groups !== null && questionAnswer.answer !== null">
-                      <ul *ngFor="let group of qDef.groups">
-                        <li *ngIf="getUtil().isGroupSelected(questionAnswer.answer, group)"><b>{{group.groupText}}</b>
-                          <ng-container *ngIf="questionAnswer.groupedOptions[group.groupStableId] !== null">
-                            <ul *ngFor="let gAnswer of questionAnswer.groupedOptions[group.groupStableId]">
-                              <li *ngIf="getUtil().getAnswerText(gAnswer, group.options) as option"><b>{{option.optionText}}</b>
-                                <ng-container *ngIf="getUtilStatic().getOptionDetails(questionAnswer.optionDetails, gAnswer) as oDetail">
-                                  <div>{{oDetail.details}}
-                                  </div>
-                                </ng-container>
-                              </li>
-                            </ul>
-                          </ng-container>
-                        </li>
-                      </ul>
-                    </ng-container>
-                  </ng-container>
-                  <ng-container *ngIf="qDef.selectMode === 'SINGLE'">
-                    <ng-container *ngIf="getUtil().getCorrectTextAsAnswer(questionAnswer) as answers">
-                      <ul class="NO-PADDING-START" >
-                        <li class="LIST-SEPARATOR" *ngFor="let answer of answers" >
-                          <p class="BIT-OF-MARGIN">
-                            {{getUtilStatic().getAnswerGroupOrOptionText( answer, qDef)}}
-                          </p>
-                          <p class="BIT-OF-MARGIN" *ngIf="getUtilStatic().getOptionDetails(questionAnswer.optionDetails, answer) as oDetail">
-                            {{oDetail.details}}
-                          </p>
-                        </li>
-                      </ul>
-                  </ng-container>
-                </ng-container>
-                </ng-container>
-              </td>
-            </tr>
-            <hr *ngIf="questionIndex !== activity.questionsAnswers.length-1" style="border-color: lightgray">
-          </ng-container>
-        </ng-container>
+    <hr/>
+    <div *ngFor="let item of questionsAndAnswers;">
+      <ng-container *ngTemplateOutlet="questionUI;
+      context: {
+      type: item.type,
+      stableId: item.stableId,
+      question: item.question,
+      questionTypes: { answer: item.answer, picklist: item.picklistAnswer, composite: item.compositeAnswer, matrix: item.matrixAnswer }
+      }">
       </ng-container>
-    </table>
-  </fieldset>
-</div>
+      <hr/>
+    </div>
+
+  </mat-expansion-panel>
+</mat-accordion>
+
+
+
+
+<!--Different templates for different question types-->
+<ng-template #questionUI
+             let-type="type"
+             let-stableId="stableId"
+             let-question="question"
+             let-answer="questionTypes.answer"
+             let-composite="questionTypes.composite"
+             let-picklist="questionTypes.picklist"
+             let-matrix="questionTypes.matrix"
+>
+  <h5 class="grey-color" innerHTML="{{question}} <b>({{stableId}})</b>"></h5>
+
+  <ng-container *ngIf="type === 'TEXT'">
+    <div *ngIf="answer">
+      <p><b>{{ answer }}</b></p>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="type === 'NUMERIC' || type === 'DECIMAL'">
+    <div *ngIf="answer">
+      <p><b>{{ answer }}</b></p>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="type === 'PICKLIST'">
+
+    <div *ngIf="picklist.multiple">
+
+     <ul *ngFor="let option of picklist.multiple.options">
+       <li *ngIf="option.text"><b>{{ option.text }}</b></li>
+       <p *ngIf="option.details">{{ option.details }}</p>
+       <ul>
+          <li *ngFor="let nt of option.nText"><b>{{ nt }}</b></li>
+       </ul>
+     </ul>
+
+
+      <ul>
+        <li *ngFor="let group of picklist.multiple.groups">
+          <p *ngIf="group.text"><b>{{ group.text }}</b></p>
+          <ul>
+            <li *ngFor="let gd of group.details"><b>{{ gd }}</b> </li>
+          </ul>
+          <ul>
+            <li *ngFor="let optText of group.optionText"><b>{{ optText }}</b> </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="picklist.single">
+
+      <ul>
+        <ul *ngFor="let single of picklist.single">
+          <li *ngIf="single.text"><b>{{ single.text }}</b> </li>
+          <p *ngIf="single.details"><b>{{ single.details }}</b> </p>
+        </ul>
+      </ul>
+
+    </div>
+
+  </ng-container>
+
+  <ng-container *ngIf="type === 'COMPOSITE'">
+      <div *ngFor="let compose of composite">
+        <p *ngIf="compose.answer"><b>{{compose.answer}}</b>  (<span *ngIf="compose.question">{{compose.question}}</span>)</p>
+      </div>
+  </ng-container>
+
+  <ng-container *ngIf="type === 'BOOLEAN'">
+    <p><b>{{ answer }}</b></p>
+  </ng-container>
+
+  <ng-container *ngIf="type === 'AGREEMENT'">
+    <p><b>{{ answer }}</b></p>
+  </ng-container>
+
+  <ng-container *ngIf="type === 'MATRIX'">
+    <ul>
+      <li *ngFor="let mat of matrix"><b>{{mat.answer}}</b> ({{mat.question}})</li>
+    </ul>
+  </ng-container>
+
+  <ng-container *ngIf="type === 'DATE'">
+    <p><b>{{ answer }}</b></p>
+  </ng-container>
+
+</ng-template>
