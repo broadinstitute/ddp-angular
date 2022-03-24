@@ -140,6 +140,9 @@ sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
 sdkConfig.auth0ClaimNameSpace = DDP_ENV.auth0ClaimNameSpace;
 sdkConfig.errorPageUrl = 'dss-error';
 
+// TODO: move the value below to DDP_ENV (main config file), depending on environment
+sdkConfig.backendUrlDSS = 'https://pepper-dev.datadonationplatform.org';
+
 export function translateFactory(translate: TranslateService,
                                  injector: Injector,
                                  logger: LoggingService,
