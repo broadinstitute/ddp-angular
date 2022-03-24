@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Route } from '../../constants/route';
 import { ActivityCode } from '../../constants/activity-code';
 import { isConsentActivity } from '../../utils';
@@ -13,6 +13,7 @@ declare const DDP_ENV: Record<string, any>;
   providers: [SubmitAnnouncementService, SubmissionManager],
 })
 export class ActivityComponent extends ActivityRedesignedComponent {
+  @Input() isLastActivity = false;
   Route = Route;
   isCaptchaResolved = false;
 
