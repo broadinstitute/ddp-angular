@@ -65,6 +65,13 @@ export class SurveyComponent implements OnInit, OnDestroy {
     return isConsentActivity(activityCode);
   }
 
+  get isLastActivity(): boolean {
+    const current = this.getCurrentActivity();
+    const last = this.activities?.[this.activities.length - 1];
+
+    return !!last?.instanceGuid && !!current?.instanceGuid && last.instanceGuid === current.instanceGuid;
+  }
+
   private getActivities(): Observable<ActivityInstance[]> {
     this.isFetchingActivities = true;
 

@@ -12,6 +12,7 @@ export class ActivityTextQuestionBlock extends ActivityQuestionBlock<string> {
     public confirmPrompt: string | null = null;
     public confirmPlaceholder: string | null = null;
     public mismatchMessage: string | null = null;
+    public hasUniqueValueValidator: boolean;
     protected _confirmationAnswer: string | null = null;
 
     constructor() {

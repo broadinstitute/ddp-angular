@@ -16,7 +16,7 @@
     </section>
 
     <section *ngIf="model.subtitle" class="section sticky-section" [ngClass]="{'sticky-section_shadow': isScrolled}">
-      <div class="content content_tight">
+      <div class="sticky-hint-text">
         <div class="sticky-block" [innerHTML]="model.subtitle"></div>
       </div>
     </section>
@@ -175,7 +175,7 @@
       (mouseenter)="mouseEnterOnSubmit()"
     >
       <mat-icon *ngIf="displayAgreeIcon">done</mat-icon>
-      {{ 'SDK.NextButton' | translate }}
+      {{ (isLastStep && isLastActivity ? submitText : 'SDK.NextButton') | translate }}
     </button>
 
     <button *ngIf="isReadonly()" class="button button--primary pull-right activity-action" (click)="close()">

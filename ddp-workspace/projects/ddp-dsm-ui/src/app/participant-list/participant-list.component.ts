@@ -154,7 +154,7 @@ export class ParticipantListComponent implements OnInit {
     const from = (pageNumber - 1) * rowsPerPage;
     const to = pageNumber * rowsPerPage;
     if (this.viewFilter) {
-       this.applyFilter(this.viewFilter, from, to);
+      this.applyFilter(this.buildTemporaryViewFilter(), from, to);
     } else {
       if (this.jsonPatch) {
         this.dsmService.filterData(localStorage.getItem(
@@ -192,6 +192,16 @@ export class ParticipantListComponent implements OnInit {
     }
 
     this.activePage = pageNumber;
+  }
+
+  private buildTemporaryViewFilter(): ViewFilter {
+    //used for applyFilter method which manipulates selected columns to avoid
+    //columns loss on page change if participant has chosen default filter from settings
+    const tempViewFilter = this.viewFilter.copy();
+    const tempColumns = {};
+    Object.assign(tempColumns, tempViewFilter.columns);
+    Object.assign(tempViewFilter.columns, this.selectedColumns);
+    return tempViewFilter;
   }
 
   private setFilterDataOnSuccess(data: any): void {
@@ -831,8 +841,9 @@ export class ParticipantListComponent implements OnInit {
   }
 
   private applyFilter(viewFilter: ViewFilter, from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage()): void {
-    this.dsmService
-      .applyFilter(viewFilter, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent, null, from, to, this.sortBy)
+    this.dsmService.applyFilter(
+      viewFilter, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent, null, from, to, this.sortBy
+      )
       .subscribe({
         next: data => {
           if (data != null) {

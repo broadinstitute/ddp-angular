@@ -36,7 +36,6 @@
 
 .sticky-block {
   margin: 0.8rem 0;
-  text-align: center;
 
   .sticky__text {
       font-size: 1.0625rem;
@@ -104,4 +103,11 @@
 .progress-title {
   text-align: center;
   margin-bottom: 25px;
+}
+
+.sticky-hint-text { 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
 }

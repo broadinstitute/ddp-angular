@@ -32,7 +32,7 @@ export class ConfigurationService {
     projectGAToken: string;
     studyGuid: string;
     // Validate only visible sections
-    validateOnlyVisibleSections: boolean = false;
+    validateOnlyVisibleSections = false;
     // country code if limiting app to just one country
     supportedCountry: string | null = null;
     // whether dashboard status should display a count of questions
