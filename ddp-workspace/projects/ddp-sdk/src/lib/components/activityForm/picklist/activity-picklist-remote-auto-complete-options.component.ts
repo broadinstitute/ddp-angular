@@ -88,7 +88,7 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     ngOnInit(): void {
         const initSearchValue = this.getAnswer();
         this.searchValue$ = new BehaviorSubject(initSearchValue);
-
+        
         this.picklistOptions$ = this.searchValue$.pipe(
             debounceTime(500),
             distinctUntilChanged(),
@@ -163,13 +163,12 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     }
 
     getAnswer(): string {
-        const option = this.block.picklistOptions.find(
-            (pl) => pl.stableId === this.block.answer[0].stableId
-        );
-        return this.block.answer
-            ? option.stableId === 'OTHER'
-                ? option.detailLabel
-                : option.optionLabel
+        return this.block.answer && this.block.answer[0]
+            ? this.block.answer[0].stableId !== 'OTHER'
+                ? this.block.picklistOptions.find(
+                      (pl) => pl.stableId === this.block.answer[0].stableId
+                  ).optionLabel
+                : this.block.answer[0].detail
             : '';
     }
 
@@ -179,7 +178,9 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
         return (
             this.searchValue$.value.length &&
             !picklistOptions.filter((pl) =>
-                pl.optionLabel.includes(this.searchValue$.value)
+                pl.optionLabel
+                    .toLocaleLowerCase()
+                    .includes(this.searchValue$.value.toLocaleLowerCase())
             ).length
         );
     }
