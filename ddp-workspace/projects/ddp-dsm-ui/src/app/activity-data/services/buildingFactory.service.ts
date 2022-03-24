@@ -156,7 +156,7 @@ export class BuildingFactoryService {
     };
   }
 
-  private picklistMultiple(answer: QuestionAnswer, question: QuestionDefinition): Object {
+  private picklistMultiple(answer: QuestionAnswer, question: QuestionDefinition): any {
     const picklistOptions = [];
     const picklistGroups = [];
 
@@ -210,7 +210,7 @@ export class BuildingFactoryService {
     return {groups: picklistGroups, options: picklistOptions};
   }
 
-  private picklistSingle(answer: QuestionAnswer, question: QuestionDefinition): Object {
+  private picklistSingle(answer: QuestionAnswer, question: QuestionDefinition): any {
     const picklistOptions = [];
 
     if(this.getCorrectTextAsAnswer(answer)) {
