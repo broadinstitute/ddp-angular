@@ -1,8 +1,8 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {ActivityData} from './activity-data.model';
 import {ActivityDefinition} from './models/activity-definition.model';
-import {buildActivityDataService} from "./services/buildActivityData.service";
-import {QuestionTypeModel} from "./models/question-type-models";
+import {buildActivityDataService} from './services/buildActivityData.service';
+import {QuestionTypeModel} from './models/question-type-models';
 
 @Component({
   selector: 'app-activity-data',
@@ -20,8 +20,8 @@ export class ActivityDataComponent {
   constructor(private ActDataBuilderService: buildActivityDataService) {
   }
 
-  generateActivity() {
+  generateActivity(): void {
     !this.questionsAndAnswers ? this.questionsAndAnswers = this.ActDataBuilderService
-      .buildActivity(this.activityDefinition, this.activity) : false;
+      .buildActivity(this.activityDefinition, this.activity) : this.questionsAndAnswers = undefined;
   }
 }
