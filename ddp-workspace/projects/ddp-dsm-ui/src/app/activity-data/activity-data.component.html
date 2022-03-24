@@ -6,13 +6,13 @@
       <mat-panel-title>
         <b>{{ activityDefinition.activityName }}</b>
       </mat-panel-title>
-      <mat-panel-description style="justify-content: flex-end">
+      <mat-panel-description class="align-header">
         Survey Version: {{activity.activityVersion}}
       </mat-panel-description>
     </mat-expansion-panel-header>
 
     <div class="Router--Outlet">
-      <p style="color: #A9A9A9"><b>Activity information</b></p>
+      <p class="grey-color"><b>Activity information</b></p>
       <div>Created: {{activity.createdAt | date:'medium'}}</div>
       <div>Completed: <ng-container *ngIf="activity.completedAt !== 0">{{activity.completedAt | date:'medium'}}</ng-container></div>
       <div>Last Updated: {{activity.lastUpdatedAt | date:'medium'}}</div>
@@ -46,95 +46,80 @@
              let-picklist="questionTypes.picklist"
              let-matrix="questionTypes.matrix"
 >
+  <h5 class="grey-color" innerHTML="{{question}} <b>({{stableId}})</b>"></h5>
+
   <ng-container *ngIf="type === 'TEXT'">
     <div *ngIf="answer">
-      <h5 style="color: #A9A9A9" innerHTML="{{question}} <b>({{stableId}})</b>"></h5>
       <p><b>{{ answer }}</b></p>
     </div>
   </ng-container>
 
   <ng-container *ngIf="type === 'NUMERIC' || type === 'DECIMAL'">
     <div *ngIf="answer">
-      <h5 style="color: #A9A9A9" innerHTML="{{question}} <b>({{stableId}})</b>"></h5>
       <p><b>{{ answer }}</b></p>
     </div>
   </ng-container>
 
   <ng-container *ngIf="type === 'PICKLIST'">
-    <h5 style="color: #A9A9A9" innerHTML="{{question}} <b>({{stableId}})</b>"></h5>
 
     <div *ngIf="picklist.multiple">
-      <ul>
-        <li *ngFor="let option of picklist.multiple.options">
 
-          <span *ngIf="option.text"><b>Text:</b> {{ option.text }}</span>
-          <br/>
+     <ul *ngFor="let option of picklist.multiple.options">
+       <li *ngIf="option.text"><b>{{ option.text }}</b></li>
+       <p *ngIf="option.details">{{ option.details }}</p>
+       <ul>
+          <li *ngFor="let nt of option.nText"><b>{{ nt }}</b></li>
+       </ul>
+     </ul>
 
-          <ul>
-            <li *ngFor="let nt of option.nText"><b>nText:</b> {{ nt }}</li>
-          </ul>
-          <span *ngIf="option.details"><b>Details:</b> {{ option.details }}</span>
-          <br/>
-        </li>
-
-      </ul>
 
       <ul>
         <li *ngFor="let group of picklist.multiple.groups">
-
-          <span *ngIf="group.text"><b>Text (Group):</b> {{ group.text }}</span>
-          <br/>
-
+          <p *ngIf="group.text"><b>{{ group.text }}</b></p>
           <ul>
-            <li *ngFor="let optText of group.optionText"><b>Option text (Group):</b> {{ optText }}</li>
+            <li *ngFor="let gd of group.details"><b>{{ gd }}</b> </li>
           </ul>
-          <br/>
-
           <ul>
-            <li *ngFor="let gd of group.details"><b>Details (Group):</b> {{ gd }}</li>
+            <li *ngFor="let optText of group.optionText"><b>{{ optText }}</b> </li>
           </ul>
-
         </li>
       </ul>
     </div>
+
     <div *ngIf="picklist.single">
+
       <ul>
-        <li *ngFor="let single of picklist.single">
-          <span *ngIf="single.text"><b>Text:</b> {{ single.text }}</span>
-          <br/>
-          <span *ngIf="single.details"><b>Details:</b> {{ single.details }}</span>
-        </li>
+        <ul *ngFor="let single of picklist.single">
+          <li *ngIf="single.text"><b>{{ single.text }}</b> </li>
+          <p *ngIf="single.details"><b>{{ single.details }}</b> </p>
+        </ul>
       </ul>
+
     </div>
+
   </ng-container>
 
   <ng-container *ngIf="type === 'COMPOSITE'">
-    <h5 style="color: #A9A9A9"  innerHTML="{{question}} <b>({{stableId}})</b>"></h5>
-    <ul>
-      <li *ngFor="let compose of composite"><b *ngIf="compose.question">{{compose.question}}:</b>
-        <span *ngIf="compose.answer">{{compose.answer}}</span></li>
-    </ul>
+      <div *ngFor="let compose of composite">
+        <p *ngIf="compose.answer"><b>{{compose.answer}}</b>  (<span *ngIf="compose.question">{{compose.question}}</span>)</p>
+      </div>
   </ng-container>
 
   <ng-container *ngIf="type === 'BOOLEAN'">
-    <h5 style="color: #A9A9A9" innerHTML="{{question}} <b>({{stableId}})</b>"></h5>
     <p><b>{{ answer }}</b></p>
   </ng-container>
 
   <ng-container *ngIf="type === 'AGREEMENT'">
-    <h5 style="color: #A9A9A9" innerHTML="{{question}} <b>({{stableId}})</b>"></h5>
     <p><b>{{ answer }}</b></p>
   </ng-container>
 
   <ng-container *ngIf="type === 'MATRIX'">
-    <h5 style="color: #A9A9A9" innerHTML="{{question}} <b>({{stableId}})</b>"></h5>
     <ul>
-      <li *ngFor="let mat of matrix"><b>{{mat.question}}:</b> {{mat.answer}}</li>
+      <li *ngFor="let mat of matrix"><b>{{mat.answer}}</b> ({{mat.question}})</li>
     </ul>
   </ng-container>
 
   <ng-container *ngIf="type === 'DATE'">
-    <h5 style="color: #A9A9A9" innerHTML="{{question}} <b>({{stableId}})</b>"></h5>
     <p><b>{{ answer }}</b></p>
   </ng-container>
 
