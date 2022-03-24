@@ -1,11 +1,11 @@
-import {Injectable} from "@angular/core";
-import {QuestionTypeEnum} from "../enums/questionType.enum";
-import {QuestionAnswer} from "../models/question-answer.model";
-import {QuestionDefinition} from "../models/question-definition.model";
-import {QuestionTypeModel} from "../models/question-type-models";
-import {SectionModeEnum} from "../enums/sectionMode.enum";
-import {Utils} from "../../utils/utils";
-import {ActivityRule} from "../models/activity-rule";
+import {Injectable} from '@angular/core';
+import {QuestionTypeEnum} from '../enums/questionType.enum';
+import {QuestionAnswer} from '../models/question-answer.model';
+import {QuestionDefinition} from '../models/question-definition.model';
+import {QuestionTypeModel} from '../models/question-type-models';
+import {SectionModeEnum} from '../enums/sectionMode.enum';
+import {Utils} from '../../utils/utils';
+import {ActivityRule} from '../models/activity-rule';
 
 @Injectable({providedIn: 'root'})
 
@@ -14,10 +14,10 @@ export class BuildingFactoryService {
   public buildBlocks: Array<ActivityRule>;
 
   constructor(private util: Utils) {
-    this.insertBuildingBlocks()
+    this.insertBuildingBlocks();
   }
 
-  private insertBuildingBlocks() {
+  private insertBuildingBlocks(): void {
     this.buildBlocks = [
       {
         type: QuestionTypeEnum.Text,
@@ -55,7 +55,7 @@ export class BuildingFactoryService {
         type: QuestionTypeEnum.Matrix,
         func: (input) => this.generateMatrixQuestion(input.answer, input.question)
       }
-    ]
+    ];
   }
 
   /* Generating question according to its own type */
@@ -67,7 +67,7 @@ export class BuildingFactoryService {
       stableId: answer.stableId,
       question: question.questionText,
       answer: answer.answer
-    }
+    };
   }
 
   // Numeric
@@ -77,7 +77,7 @@ export class BuildingFactoryService {
       stableId: answer.stableId,
       question: question.questionText,
       answer: answer.answer
-    }
+    };
   }
 
   // Date
@@ -87,7 +87,7 @@ export class BuildingFactoryService {
       stableId: answer.stableId,
       question: question.questionText,
       answer: answer.date
-    }
+    };
   }
 
   // Boolean
@@ -97,7 +97,7 @@ export class BuildingFactoryService {
       stableId: answer.stableId,
       question: question.questionText,
       answer: this.util.getYesNo(answer.answer)
-    }
+    };
   }
 
   // Agreement
@@ -107,12 +107,12 @@ export class BuildingFactoryService {
       stableId: answer.stableId,
       question: question.questionText,
       answer: this.util.getYesNo(answer.answer)
-    }
+    };
   }
 
   // Composite
   private generateCompositeQuestion(answer: QuestionAnswer, question: QuestionDefinition): QuestionTypeModel {
-    const compositeAnswer = []
+    const compositeAnswer = [];
 
     answer.answer.forEach(compAnswer => {
       question.childQuestions.forEach((childQuestion, index) => {
@@ -130,15 +130,15 @@ export class BuildingFactoryService {
             endAnswer = this.getNiceUserText(compAnswer[index]);
         }
         compositeAnswer.push({question: endQuestion, answer: endAnswer});
-      })
-    })
+      });
+    });
 
     return {
       type: question.questionType,
       question: question.questionText,
       stableId: answer.stableId,
       compositeAnswer: compositeAnswer
-    }
+    };
   }
 
 
@@ -147,23 +147,23 @@ export class BuildingFactoryService {
     const picklistAnswers = {
       multiple: question.selectMode === SectionModeEnum.Multiple ? this.picklistMultiple(answer, question) : undefined,
       single: question.selectMode === SectionModeEnum.Single ? this.picklistSingle(answer, question) : undefined
-    }
+    };
     return {
       type: question.questionType,
       question: question.questionText,
       stableId: answer.stableId,
       picklistAnswer: picklistAnswers
-    }
+    };
   }
 
-  private picklistMultiple(answer: QuestionAnswer, question: QuestionDefinition) {
-    let picklistOptions = [];
-    let picklistGroups = [];
+  private picklistMultiple(answer: QuestionAnswer, question: QuestionDefinition): Object {
+    const picklistOptions = [];
+    const picklistGroups = [];
 
     // Options
     if(question.options !== null) {
-      let optionsObject = {};
-      for(let o of question.options) {
+      const optionsObject = {};
+      for(const o of question.options) {
         //  options and details
         if(this.util.isOptionSelected(answer.answer, o.optionStableId)) {
           optionsObject['text'] = o.optionText;
@@ -171,7 +171,7 @@ export class BuildingFactoryService {
           // Nested options
           if(answer.nestedOptions != null && o.nestedOptions !== null && answer.nestedOptions[o.optionStableId]) {
             optionsObject['nText'] = [];
-            for(let nOption of answer?.nestedOptions[o.optionStableId]) {
+            for(const nOption of answer.nestedOptions[o.optionStableId]) {
               optionsObject['nText'].push(this.util.getAnswerText(nOption, o.nestedOptions).optionText);
             }
           } else {
@@ -184,24 +184,24 @@ export class BuildingFactoryService {
 
     // Groups
     if(question.groups !== null && answer.answer !== null) {
-      let groupsObject = {};
-      for(let group of question.groups) {
+      const groupsObject = {};
+      for(const group of question.groups) {
         if(this.util.isGroupSelected(answer.answer, group)) {
           groupsObject['text'] = group.groupText;
           if(answer.groupedOptions[group.groupStableId] !== null) {
             groupsObject['details'] = [];
             groupsObject['optionText'] = [];
-            for(let gAnswer of answer.groupedOptions[group.groupStableId]) {
+            for(const gAnswer of answer.groupedOptions[group.groupStableId]) {
               if(this.util.getAnswerText(gAnswer, group.options)) {
-                groupsObject['details'].push(this.util.getAnswerText(gAnswer, group.options))
-                groupsObject['optionText'].push(Utils.getOptionDetails(answer.optionDetails, gAnswer))
+                groupsObject['details'].push(this.util.getAnswerText(gAnswer, group.options));
+                groupsObject['optionText'].push(Utils.getOptionDetails(answer.optionDetails, gAnswer));
               }
             }
           } else {
             groupsObject['details'] = undefined;
             groupsObject['optionText'] = undefined;
           }
-          picklistGroups.push({...groupsObject})
+          picklistGroups.push({...groupsObject});
         }
       }
 
@@ -210,16 +210,16 @@ export class BuildingFactoryService {
     return {groups: picklistGroups, options: picklistOptions};
   }
 
-  private picklistSingle(answer: QuestionAnswer, question: QuestionDefinition) {
+  private picklistSingle(answer: QuestionAnswer, question: QuestionDefinition): Object {
     const picklistOptions = [];
 
     if(this.getCorrectTextAsAnswer(answer)) {
-      let optionsObject = {};
-      for(let an of this.getCorrectTextAsAnswer(answer)) {
+      const optionsObject = {};
+      for(const an of this.getCorrectTextAsAnswer(answer)) {
         optionsObject['text'] = Utils.getAnswerGroupOrOptionText(an, question);
         optionsObject['details'] = Utils.getOptionDetails(answer.optionDetails, an);
       }
-      picklistOptions.push({...optionsObject})
+      picklistOptions.push({...optionsObject});
     }
 
     return picklistOptions;
@@ -233,7 +233,7 @@ export class BuildingFactoryService {
       stableId: answer.stableId,
       question: question.questionText,
       matrixAnswer: this.getMatrix(answer, question)
-    }
+    };
   }
 
 
@@ -279,12 +279,10 @@ export class BuildingFactoryService {
   }
 
   private getMatrix(selectedAnswers: Object, questDef: Object): any {
-    return Object.entries(selectedAnswers['matrixSelected']).map(([questionId, answerId]): Object => {
-      return {
+    return Object.entries(selectedAnswers['matrixSelected']).map(([questionId, answerId]): Object => ({
         question: this.getMatrixQuestion(questionId, questDef['rows']),
         answer: this.getMatrixAnswer((answerId as string), questDef['options'])
-      };
-    });
+      }));
   }
 
   private getMatrixQuestion(questionId: string, rows: Array<Object>): string {
