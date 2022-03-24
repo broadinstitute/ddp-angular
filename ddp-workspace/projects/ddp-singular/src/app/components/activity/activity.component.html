@@ -175,7 +175,7 @@
       (mouseenter)="mouseEnterOnSubmit()"
     >
       <mat-icon *ngIf="displayAgreeIcon">done</mat-icon>
-      {{ 'SDK.NextButton' | translate }}
+      {{ (isLastStep && isLastActivity ? submitText : 'SDK.NextButton') | translate }}
     </button>
 
     <button *ngIf="isReadonly()" class="button button--primary pull-right activity-action" (click)="close()">
