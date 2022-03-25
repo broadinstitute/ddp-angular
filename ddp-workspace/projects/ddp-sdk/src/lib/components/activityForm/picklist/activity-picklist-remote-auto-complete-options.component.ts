@@ -30,6 +30,7 @@ interface SplittedData {
             [placeholder]="block.picklistLabel"
             [matAutocomplete]="autoCompleteFromSource"
             (keyup)="onInput($event.target.value)"
+            (blur)="onBlur($event.target.value, picklistOptions)"
         />
 
         <mat-autocomplete
@@ -38,7 +39,7 @@ interface SplittedData {
             [displayWith]="displayAutoComplete"
         >
             <mat-option
-                *ngFor="let option of picklistOptions"
+                *ngFor="let option of picklistOptions.plOptions"
                 class="autoCompleteOption"
                 [value]="option"
                 (click)="onValueSelect(option)"
@@ -74,7 +75,7 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     @Input() activityGuid: string;
 
     searchValue$ = new BehaviorSubject('');
-    picklistOptions$: Observable<ActivityPicklistOption[]>;
+    picklistOptions$: Observable<SplittedData>;
 
     readonly ignoredSymbolsInQuery: string[];
 
@@ -101,12 +102,7 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
                 )
             ),
             map((data) => this.splitOtherOptionFromPLOptions(data.results)),
-            map((splittedData) =>
-                this.validateIfMissingOptionShouldBeDisplayed(
-                    splittedData.plOptions
-                )
-                    ? this.createNotListedOption(splittedData)
-                    : splittedData.plOptions
+            map((splittedData) => splittedData
             )
         );
     }
@@ -114,17 +110,16 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
         data: ActivityPicklistOption[]
     ): SplittedData {
         return {
-            plOptions: data.filter((pl) => pl.stableId !== 'OTHER'),
-            otherOption: data.find((pl) => pl.stableId === 'OTHER'),
+            plOptions: data.filter((pl) => pl.allowDetails !== true),
+            otherOption: data.find((pl) => pl.allowDetails === true),
         };
     }
 
-    createNotListedOption(data: SplittedData): ActivityPicklistOption[] {
-        const notListedOption = {
-            ...data.otherOption,
+    createNotListedOption(otherOption: ActivityPicklistOption): ActivityPicklistOption {
+        return {
+            ...otherOption,
             optionLabel: this.searchValue$.value.toLocaleUpperCase(),
         };
-        return [...data.plOptions, notListedOption];
     }
 
     onInput(value): void {
@@ -136,20 +131,11 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     }
 
     onValueSelect(
-        value: ActivityPicklistOption,
-        detail: string | null = null
+        value: ActivityPicklistOption
     ): void {
-        this.block.answer = value
-            ? [
-                  {
-                      stableId: value.stableId,
-                      detail:
-                          value.stableId === 'OTHER'
-                              ? value.optionLabel
-                              : detail,
-                  },
-              ]
-            : [];
+        this.block.answer = value ? [{ stableId: value.stableId, detail:  value.allowDetails === true
+        ? value.optionLabel
+        : null }] : [];
         this.valueChanged.emit([...this.block.answer]);
     }
 
@@ -163,13 +149,10 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     }
 
     getAnswer(): string {
-        return this.block.answer && this.block.answer[0]
-            ? this.block.answer[0].stableId !== 'OTHER'
-                ? this.block.picklistOptions.find(
-                      (pl) => pl.stableId === this.block.answer[0].stableId
-                  ).optionLabel
-                : this.block.answer[0].detail
-            : '';
+        if(this.block.answer[0]) {
+            return this.block.answer[0].detail ? this.block.answer[0].detail: this.block.picklistOptions[0].optionLabel;
+        }
+        return '';
     }
 
     validateIfMissingOptionShouldBeDisplayed(
@@ -183,5 +166,11 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
                     .includes(this.searchValue$.value.toLocaleLowerCase())
             ).length
         );
+    }
+
+    onBlur(value: string, data: SplittedData) {
+        const matchingOption = data.plOptions.find(pl => value.toLocaleLowerCase() === pl.optionLabel.toLocaleLowerCase());
+        const plOption = matchingOption ? matchingOption : this.createNotListedOption(data.otherOption);
+        this.onValueSelect(plOption);
     }
 }
