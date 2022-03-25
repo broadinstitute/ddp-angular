@@ -445,7 +445,7 @@
       "MaxSize": "Max size: {{maxSize}}",
       "AllowedFileTypes": "Allowed files: {{allowedFileTypes}}",
       "ChooseFile": "Click and select \nor drag file to upload",
-      "Uploading": "Uploading {{filename}}",
+      "Uploading": "Uploading file(s)",
       "Size": "(size: {{size}})",
       "MaxSizeErrorMessage": "Maximum file size exceeded",
       "InvalidTypeErrorMessage": "Type of file selected is not valid",
