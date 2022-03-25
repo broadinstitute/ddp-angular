@@ -13,6 +13,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AccordionModule } from 'ngx-bootstrap/accordion';
@@ -217,6 +218,7 @@ sdkConfig.auth0ClaimNameSpace = DDP_ENV.auth0ClaimNameSpace;
         MatInputModule,
         MatSelectModule,
         MatRadioModule,
+        MatExpansionModule,
         MatButtonToggleModule,
         MatAutocompleteModule,
         MatDialogModule,

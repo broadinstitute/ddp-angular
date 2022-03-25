@@ -1,12 +1,14 @@
-import { ActivityServiceAgent } from './activityServiceAgent.service';
-import { Observable, of, from, interval, timer, throwError } from 'rxjs';
-import { delayWhen, take, tap } from 'rxjs/operators';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
+import { Observable, of, from, interval, timer, throwError } from 'rxjs';
+import { delayWhen, take, tap } from 'rxjs/operators';
+
+import { ActivityServiceAgent } from './activityServiceAgent.service';
 import { SubmissionManager } from './submissionManager.service';
 import { AnswerSubmission } from '../../models/activity/answerSubmission';
 import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { BlockVisibility } from '../../models/activity/blockVisibility';
+import { AnswerValidationError } from '../../models/answerValidationError';
 
 /* eslint-disable arrow-body-style */
 describe('SubmissionManagerTest', () => {
@@ -166,7 +168,7 @@ describe('SubmissionManagerTest', () => {
 
         // capture the changes to the queue over time
         submissionManager.pendingAnswerSubmissionQueue$.subscribe((pendingSubmissions: AnswerSubmission[]) => {
-            console.log('I got ' + pendingSubmissions.length + 'from the subcriptions!!!');
+            console.log('I got ' + pendingSubmissions.length + 'from the subscriptions!!!');
             pendingSubmissionsOverTime.push({time: new Date().getTime() - startTime, queue: pendingSubmissions});
         });
         // this is needed to get things going
@@ -343,5 +345,28 @@ describe('SubmissionManagerTest', () => {
             expect(invalidSubmissions[0].stableId).toBe('2');
             done();
         }, 10000);
+    });
+
+    it('test fail an answer PATH with 422 error',(done) => {
+        serviceAgent.saveAnswerSubmission.and.returnValue(throwError(() => new HttpErrorResponse({
+            error: {
+                violations: [
+                    {
+                        rules: [{ruleType: 'UNIQUE_VALUE', message: 'validation message'}],
+                        stableId: 'COMMENTS'
+                    }
+                ]
+            },
+            status: 422
+        })));
+
+        submissionManager.answerDataErrors$.subscribe({
+            next: (error: AnswerValidationError) => {
+                expect(error.violations[0].stableId).toBe('COMMENTS');
+                done();
+            }
+        });
+
+        submissionManager.patchAnswer('studyGuid', 'activityGuid', 'stableId', 'a value', 'blockGuid');
     });
 });

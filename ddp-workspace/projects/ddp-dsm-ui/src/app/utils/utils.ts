@@ -639,12 +639,6 @@ export class Utils {
     return null;
   }
 
-  public getNiceUserText(text: string): string {
-    if (text != null && text.indexOf('-null') > -1) {
-      return text.replace('-null', '').replace('-null', '');
-    }
-    return text;
-  }
 
   public getNameValue(nameValues: Array<NameValue>, text: string): string {
     const nameValue = nameValues.find(x => x.name === text);
@@ -719,29 +713,6 @@ export class Utils {
     return selected.find(x => x === optionStableId);
   }
 
-  getOptionOrGroupText(questionDefinition: QuestionDefinition, stableId: string): string {
-    if (questionDefinition.options) {
-      const option = questionDefinition.options.find(x => x.optionStableId === stableId);
-      if (option != null) {
-        return option.optionText;
-      }
-    }
-    if (questionDefinition.groups) {
-      let text = '';
-      questionDefinition.groups.find(g => {
-        if (g.options) {
-          const option = g.options.find(o => o.optionStableId === stableId);
-          if (option) {
-            text = option.optionText;
-            return true;
-          }
-        }
-        return false;
-      });
-      return text;
-    }
-    return '';
-  }
 
   static getOptionDetails(optionDetails: Array<OptionDetail>, stableId: string): OptionDetail {
     return optionDetails.find(x => x.option === stableId);
@@ -886,13 +857,6 @@ export class Utils {
     return answers;
   }
 
-  getCorrectTextAsAnswer( questionAnswer: QuestionAnswer ): any[] {
-    const answers = [];
-    for (const answer of questionAnswer.answer) {
-      answers.push( answer );
-    }
-    return answers;
-  }
 
   public static getNiceTextForCSVCompositeType( questionAnswer: QuestionAnswer, qdef: QuestionDefinition ): string[] {
     const answers = [];

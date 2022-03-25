@@ -1,4 +1,7 @@
-.tooltip-inner {
-  max-width: none;
-  white-space: nowrap;
+.grey-color {
+  color: #A9A9A9
+}
+
+.align-header {
+  justify-content: flex-end
 }

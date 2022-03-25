@@ -106,6 +106,8 @@
 
   &--icon {
     display: inline-flex;
+    justify-content: center;
+    align-items: center;
 
     .mat-icon {
       margin-top: -1px;
