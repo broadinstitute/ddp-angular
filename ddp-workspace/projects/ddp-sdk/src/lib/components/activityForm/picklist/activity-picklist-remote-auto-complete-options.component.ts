@@ -168,7 +168,7 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
         );
     }
 
-    onBlur(value: string, data: SplittedData) {
+    onBlur(value: string, data: SplittedData): void {
         const matchingOption = data.plOptions.find(pl => value.toLocaleLowerCase() === pl.optionLabel.toLocaleLowerCase());
         const plOption = matchingOption ? matchingOption : this.createNotListedOption(data.otherOption);
         this.onValueSelect(plOption);
