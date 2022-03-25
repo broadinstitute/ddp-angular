@@ -149,7 +149,7 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     }
 
     getAnswer(): string {
-        if(this.block.answer[0]) {
+        if(this.block.answer && this.block.answer[0]) {
             return this.block.answer[0].detail ? this.block.answer[0].detail: this.block.picklistOptions[0].optionLabel;
         }
         return '';
