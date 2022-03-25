@@ -118,9 +118,9 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
                     this.stickySubtitle.emit(this.model.subtitle);
                     this.activityCode.emit(this.model.activityCode);
                     this.initSteps();
+                    this.isLoaded$.next(true);
                 }
                 this.submitAttempted.next(false);
-                this.isLoaded$.next(true);
 
                 // combine the latest status updates from the form model
                 // and from the embedded components into one observable
