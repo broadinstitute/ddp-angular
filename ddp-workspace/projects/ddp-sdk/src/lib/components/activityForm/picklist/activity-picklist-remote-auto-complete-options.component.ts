@@ -155,18 +155,6 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
         return '';
     }
 
-    validateIfMissingOptionShouldBeDisplayed(
-        picklistOptions: ActivityPicklistOption[]
-    ): boolean {
-        return (
-            this.searchValue$.value.length &&
-            !picklistOptions.filter((pl) =>
-                pl.optionLabel
-                    .toLocaleLowerCase()
-                    .includes(this.searchValue$.value.toLocaleLowerCase())
-            ).length
-        );
-    }
 
     onBlur(value: string, data: SplittedData): void {
         const matchingOption = data.plOptions.find(pl => value.toLocaleLowerCase() === pl.optionLabel.toLocaleLowerCase());
