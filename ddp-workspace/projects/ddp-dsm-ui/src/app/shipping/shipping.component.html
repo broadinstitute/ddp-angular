@@ -72,13 +72,13 @@
             <mfDefaultSorter by="preferredLanguage">Preferred Language</mfDefaultSorter>
           </th>
           <th *ngIf="shippingPage !== DEACTIVATED && !kitType.externalShipper">
-            <mfDefaultSorter by="shippingId">Shipping ID</mfDefaultSorter>
+            <mfDefaultSorter by="ddpLabel">Shipping ID</mfDefaultSorter>
           </th>
           <th *ngIf="shippingPage !== DEACTIVATED && kitType.externalShipper">
-            <mfDefaultSorter by="shippingId">External Shipping ID</mfDefaultSorter>
+            <mfDefaultSorter by="ddpLabel">External Shipping ID</mfDefaultSorter>
           </th>
           <th *ngIf="shippingPage !== DEACTIVATED && kitType.externalShipper">
-            <mfDefaultSorter by="shippingId">External Shipping Status</mfDefaultSorter>
+            <mfDefaultSorter by="ddpLabel">External Shipping Status</mfDefaultSorter>
           </th>
           <th *ngIf="shippingPage === ERROR">
             <mfDefaultSorter by="message">Error Reason</mfDefaultSorter>
@@ -173,12 +173,12 @@
         <tbody>
         <tr *ngFor="let kitRequest of mf.data; let i = index">
           <td *ngIf="getRole().allowedToHandleSamples() && (queueToPrint() || shippingPage === UPLOADED) && !kitType.externalShipper">
-            <ng-container *ngIf="(shippingPage === UPLOADED && kitRequest.labelTriggeredDate === 0) || queueToPrint()">
+            <ng-container *ngIf="(shippingPage === UPLOADED && kitRequest.labelDate === 0) || queueToPrint()">
               <mat-checkbox color="primary" disableRipple
                            [checked]="kitRequest.isSelected" (click)="shiftClick(i, $event)"
                            (change)="kitRequest.isSelected = $event.checked; checkboxChecked()"></mat-checkbox>
             </ng-container>
-            <ng-container *ngIf="(shippingPage === UPLOADED && kitRequest.labelTriggeredDate !== 0)">
+            <ng-container *ngIf="(shippingPage === UPLOADED && kitRequest.labelDate !== 0)">
               <i class="fas fa-spin fa-cog fa-lg Color--primary"></i>
             </ng-container>
           </td>
@@ -192,7 +192,7 @@
           <td *ngIf="(shippingPage === UPLOADED || shippingPage === QUEUE || shippingPage === ERROR) && showPreferredLanguage()">
             <ng-container *ngIf="kitRequest.preferredLanguage != null && kitRequest.preferredLanguage !== ''">{{getLanguage().getLanguageName(kitRequest.preferredLanguage)}}</ng-container>
           </td>
-          <td *ngIf="shippingPage !== DEACTIVATED && !kitType.externalShipper" class="Line--Break">{{kitRequest.shippingId}}</td>
+          <td *ngIf="shippingPage !== DEACTIVATED && !kitType.externalShipper" class="Line--Break">{{kitRequest.ddpLabel}}</td>
           <td *ngIf="shippingPage !== DEACTIVATED && kitType.externalShipper" class="Line--Break">{{kitRequest.externalOrderNumber}}</td>
           <td *ngIf="shippingPage !== DEACTIVATED && kitType.externalShipper" class="Line--Break">{{kitRequest.externalOrderStatus}}</td>
           <td *ngIf="shippingPage === ERROR" class="Line--Break">{{kitRequest.getError()}}</td>
@@ -369,7 +369,7 @@
     <ng-container *ngFor="let label of selectedKitRequests; let e = even; let i = index;">
       <div *ngIf="e" [ngStyle]="{'height': getTopMargin()}" class="DIV--Without-Border"></div>
       <div [ngStyle]="{'height': getLabelHeight()}" class="DIV--Without-Border">
-        <app-kit-label class="DIV--Without-Border Display--Inline-Block" [urlTo]="label.labelUrlTo" [shippingId]="label.shippingId"
+        <app-kit-label class="DIV--Without-Border Display--Inline-Block" [urlTo]="label.labelUrlTo" [shippingId]="label.ddpLabel"
                        [urlReturn]="label.labelUrlReturn" [labelSetting]="selectedSetting"></app-kit-label>
       </div>
       <div *ngIf="e" [ngStyle]="{'height': getMarginBetweenTopBottom()}" class="DIV--Without-Border"></div>
@@ -381,7 +381,7 @@
     <ng-container *ngFor="let label of selectedKitRequests; let e = even; let i = index;">
       <div *ngIf="e" [ngStyle]="{'height': getTopMargin()}" class="DIV--Without-Border"></div>
       <div [ngStyle]="{'height': getLabelHeight()}" class="DIV--Without-Border">
-        <app-error-label class="DIV--Without-Border Display--Inline-Block" [address]="label.participant" [shippingId]="label.shippingId"
+        <app-error-label class="DIV--Without-Border Display--Inline-Block" [address]="label.participant" [shippingId]="label.ddpLabel"
                          [labelSetting]="selectedSetting"></app-error-label>
       </div>
       <div *ngIf="e" [ngStyle]="{'height': getMarginBetweenTopBottom()}" class="DIV--Without-Border"></div>

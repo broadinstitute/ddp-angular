@@ -60,8 +60,8 @@
           <th *ngIf="showColumn('bspCollaboratorSampleId')">
             <mfDefaultSorter by="bspCollaboratorSampleId">Collaborator Sample ID</mfDefaultSorter>
           </th>
-          <th *ngIf="showColumn('shippingId')">
-            <mfDefaultSorter by="shippingId">Shipping ID</mfDefaultSorter>
+          <th *ngIf="showColumn('ddpLabel')">
+            <mfDefaultSorter by="ddpLabel">Shipping ID</mfDefaultSorter>
           </th>
           <th>
             <mfDefaultSorter by="kitLabel">MF barcode</mfDefaultSorter>
@@ -107,7 +107,7 @@
         <td *ngIf="showColumn('hruid')">{{kitRequest.hruid}}</td>
         <td>{{kitRequest.collaboratorParticipantId}}</td>
         <td *ngIf="showColumn('bspCollaboratorSampleId')">{{kitRequest.bspCollaboratorSampleId}}</td>
-        <td *ngIf="showColumn('shippingId')">{{kitRequest.shippingId}}</td>
+        <td *ngIf="showColumn('ddpLabel')">{{kitRequest.ddpLabel}}</td>
         <td>
           {{kitRequest.kitLabel}}
         </td>
