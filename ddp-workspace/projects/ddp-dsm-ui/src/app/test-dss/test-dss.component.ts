@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { ActivityServiceAgent, SessionMementoService } from 'ddp-sdk';
 
-const USER_GUID = '9KS6ZC8G15YZ9ZV8LORZ'; // an existing Pancan user
+const USER_GUID = 'PUAXMC6835DKEOHI2B2C'; // an existing Pancan user
 const STUDY_GUID = 'cmi-pancan';
-const ACTIVITY_GUID = '4DWU10NBJ4'; // an existing activity for the Pancan user above
+const ACTIVITY_GUID = 'H1DHEDGF1A'; // an existing activity for the Pancan user above
 
 @Component({
   selector: 'app-test-dss',
@@ -21,12 +21,14 @@ export class TestDssComponent implements OnInit, OnDestroy {
   userGuidFormControl = new FormControl('', [Validators.required]);
   studyGuidFormControl = new FormControl('', [Validators.required]);
   activityGuidFormControl = new FormControl('', [Validators.required]);
-  doRequest: boolean;
+  parentInstanceGuidFormControl = new FormControl('');
+  showActivity: boolean;
+  receivedData = new BehaviorSubject('');
   private readonly ngUnsubscribe = new Subject<void>();
 
   constructor(
     private activityServiceAgent: ActivityServiceAgent,
-    private sessionService: SessionMementoService,
+    private sessionService: SessionMementoService
   ) { }
 
   ngOnInit(): void {
@@ -45,11 +47,43 @@ export class TestDssComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  activityCodeChanged(event: any): void {
-    console.log('activityCodeChanged');
+  get allInputsHaveValues(): boolean {
+    return [
+      this.studyGuidFormControl,
+      this.activityGuidFormControl,
+      this.activityGuidFormControl
+    ].every(control => control.value);
+  }
+
+  activityCodeChanged(code: string): void {
+    console.log('activityCodeChanged', code);
   }
 
   navigate($event: any): void {
     console.log('navigate');
+  }
+
+  createActivity(): void {
+    this.clearResults();
+
+    this.activityServiceAgent.createInstance(
+      this.studyGuidFormControl.value,
+      this.activityGuidFormControl.value,
+      this.parentInstanceGuidFormControl.value
+    ).subscribe(data => this.receivedData.next(`Created an instance with activityGuid=${data.instanceGuid}`));
+  }
+
+  deleteActivity(): void {
+    this.clearResults();
+
+    this.activityServiceAgent.deleteActivityInstance(
+      this.studyGuidFormControl.value,
+      this.activityGuidFormControl.value
+    ).subscribe(() => this.receivedData.next(`Instance with activityGuid=${this.activityGuidFormControl.value} was removed`));
+  }
+
+  private clearResults(): void {
+    this.showActivity = false;
+    this.receivedData.next('');
   }
 }
