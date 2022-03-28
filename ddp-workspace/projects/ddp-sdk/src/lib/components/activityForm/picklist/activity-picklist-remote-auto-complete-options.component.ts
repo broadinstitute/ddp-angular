@@ -1,19 +1,21 @@
-import { Component, Inject, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
     BehaviorSubject,
     debounceTime,
     distinctUntilChanged,
     map,
     Observable,
-    of,
     switchMap,
-    tap,
 } from 'rxjs';
-import { ActivityPicklistNormalizedGroup } from '../../../models/activity/activityPicklistNormalizedGroup';
 import { ActivityPicklistOption } from '../../../models/activity/activityPicklistOption';
 import { NGXTranslateService } from '../../../services/internationalization/ngxTranslate.service';
 import { ActivityServiceAgent } from '../../../services/serviceAgents/activityServiceAgent.service';
 import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
+
+interface CategorizedPicklistOptions {
+    currentAutoCompleteOptions: ActivityPicklistOption[];
+    userEnteredStringOption: ActivityPicklistOption;
+}
 
 @Component({
     selector: 'ddp-activity-picklist-remote-auto-complete-options',
@@ -28,6 +30,7 @@ import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.com
             [placeholder]="block.picklistLabel"
             [matAutocomplete]="autoCompleteFromSource"
             (keyup)="onInput($event.target.value)"
+            (blur)="onBlur($event.target.value, picklistOptions)"
         />
 
         <mat-autocomplete
@@ -36,7 +39,7 @@ import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.com
             [displayWith]="displayAutoComplete"
         >
             <mat-option
-                *ngFor="let option of picklistOptions"
+                *ngFor="let option of picklistOptions.plOptions"
                 class="autoCompleteOption"
                 [value]="option"
                 (click)="onValueSelect(option)"
@@ -72,7 +75,7 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     @Input() activityGuid: string;
 
     searchValue$ = new BehaviorSubject('');
-    picklistOptions$: Observable<ActivityPicklistOption[]>;
+    picklistOptions$: Observable<CategorizedPicklistOptions>;
 
     readonly ignoredSymbolsInQuery: string[];
 
@@ -84,19 +87,39 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     }
 
     ngOnInit(): void {
+        const initSearchValue = this.getAnswer();
+        this.searchValue$ = new BehaviorSubject(initSearchValue);
+
         this.picklistOptions$ = this.searchValue$.pipe(
             debounceTime(500),
             distinctUntilChanged(),
             switchMap((searchValue) =>
                 this.activityService.getPickListOptions(
-                    this.block.stableId,
-                    searchValue,
                     this.studyGuid,
-                    this.activityGuid
+                    this.activityGuid,
+                    this.block.stableId,
+                    searchValue
                 )
             ),
-            map((data) => data.results)
+            map((data) => this.splitOtherOptionFromPLOptions(data.results)),
+            map((splittedData) => splittedData
+            )
         );
+    }
+    splitOtherOptionFromPLOptions(
+        data: ActivityPicklistOption[]
+    ): CategorizedPicklistOptions {
+        return {
+            currentAutoCompleteOptions: data.filter((pl) => pl.allowDetails !== true),
+            userEnteredStringOption: data.find((pl) => pl.allowDetails === true),
+        };
+    }
+
+    createNotListedOption(otherOption: ActivityPicklistOption): ActivityPicklistOption {
+        return {
+            ...otherOption,
+            optionLabel: this.searchValue$.value.toLocaleUpperCase(),
+        };
     }
 
     onInput(value): void {
@@ -108,10 +131,34 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     }
 
     onValueSelect(
-        value: ActivityPicklistOption,
-        detail: string | null = null
+        value: ActivityPicklistOption
     ): void {
-        this.block.answer = value ? [{ stableId: value.stableId, detail }] : [];
+        this.block.answer = value ? [{ stableId: value.stableId, detail:  value.allowDetails === true
+        ? value.optionLabel
+        : null }] : [];
         this.valueChanged.emit([...this.block.answer]);
+    }
+
+    getInitialAnswerOptionLabel(): string {
+        if (
+            this.block.selectMode === 'SINGLE' &&
+            this.block.picklistOptions.length
+        ) {
+            return this.block.picklistOptions[0].optionLabel;
+        }
+    }
+
+    getAnswer(): string {
+        if(this.block.answer && this.block.answer[0]) {
+            return this.block.answer[0].detail ? this.block.answer[0].detail: this.block.picklistOptions[0].optionLabel;
+        }
+        return '';
+    }
+
+
+    onBlur(value: string, data: CategorizedPicklistOptions): void {
+        const matchingOption = data.currentAutoCompleteOptions.find(pl => value.toLocaleLowerCase() === pl.optionLabel.toLocaleLowerCase());
+        const plOption = matchingOption ? matchingOption : this.createNotListedOption(data.userEnteredStringOption);
+        this.onValueSelect(plOption);
     }
 }
