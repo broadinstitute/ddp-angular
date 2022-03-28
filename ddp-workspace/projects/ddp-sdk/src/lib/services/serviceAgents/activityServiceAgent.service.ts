@@ -148,7 +148,7 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
     getPickListOptions(
         studyGuid: string,
         activityGuid: string,
-        stableId: string,
+        questionStableId: string,
         query: string = ''
     ): Observable<{ query: string; results: ActivityPicklistOption[] }> {
         const baseUrl = this.getBaseUrl(studyGuid, activityGuid);
