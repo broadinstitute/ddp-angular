@@ -21,7 +21,9 @@ export class ActivityDataComponent {
   }
 
   generateActivity(): void {
-    !this.questionsAndAnswers ? this.questionsAndAnswers = this.ActDataBuilderService
-      .buildActivity(this.activityDefinition, this.activity) : this.questionsAndAnswers = undefined;
+    if(!this.questionsAndAnswers) {
+      this.questionsAndAnswers = this.ActDataBuilderService
+        .buildActivity(this.activityDefinition, this.activity);
+    }
   }
 }
