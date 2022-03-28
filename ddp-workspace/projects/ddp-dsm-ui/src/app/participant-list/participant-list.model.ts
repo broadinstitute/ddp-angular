@@ -139,7 +139,7 @@ export class Participant {
     let status = '';
     if (this.kits != null && this.kits.length > 0) {
       for (const sample of this.kits) {
-        status += sample.kitType + ': ' + sample[ 'sampleQueue' ] + '\n';
+        status += sample.kitTypeName + ': ' + sample[ 'sampleQueue' ] + '\n';
       }
     }
     return status;

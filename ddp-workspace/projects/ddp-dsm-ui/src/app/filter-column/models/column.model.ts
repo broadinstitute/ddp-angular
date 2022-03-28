@@ -33,7 +33,7 @@ export class ParticipantColumn {
   public static EXIT_DATE = new ParticipantColumn('Date Withdrawn', 'exitDate', 'ex');
 
   // mr columns
-  public static MR_TYPE = new ParticipantColumn('Type', 'type', 'inst');
+  public static MR_TYPE = new ParticipantColumn('Type', 'type', 'm');
   public static MR_INSTITUTION_NAME = new ParticipantColumn('Institution Name', 'name', 'm');
   public static MR_INSTITUTION_CONTACT = new ParticipantColumn('Institution Contact Person', 'contact', 'm');
   public static MR_INSTITUTION_PHONE = new ParticipantColumn('Institution Phone', 'phone', 'm');
@@ -114,7 +114,7 @@ export class ParticipantColumn {
 
   // kit
   public static COLLABORATOR_SAMPLE = new ParticipantColumn('Collaborator Sample ID', 'bspCollaboratorSampleId', 'k');
-  public static SAMPLE_TYPE = new ParticipantColumn('Sample Type', 'kitType', 'k');
+  public static SAMPLE_TYPE = new ParticipantColumn('Sample Type', 'kitTypeName', 'k');
   public static SAMPLE_SENT = new ParticipantColumn('Sample Sent', 'scanDate', 'k');
   public static SAMPLE_RECEIVED = new ParticipantColumn('Sample Received', 'receiveDate', 'k');
   public static SAMPLE_DEACTIVATION = new ParticipantColumn('Sample Deactivation', 'deactivatedDate', 'k');
