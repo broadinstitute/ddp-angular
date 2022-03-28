@@ -95,10 +95,10 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
             distinctUntilChanged(),
             switchMap((searchValue) =>
                 this.activityService.getPickListOptions(
-                    this.block.stableId,
-                    searchValue,
                     this.studyGuid,
-                    this.activityGuid
+                    this.activityGuid,
+                    this.block.stableId,
+                    searchValue
                 )
             ),
             map((data) => this.splitOtherOptionFromPLOptions(data.results)),
