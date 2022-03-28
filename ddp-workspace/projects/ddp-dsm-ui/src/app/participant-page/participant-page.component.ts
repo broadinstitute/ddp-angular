@@ -172,9 +172,11 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     this.validateEmailInput(this.participant.data.profile['email']);
     this.isOncHistoryVisible = !!this.participant.data.dsm[ 'hasConsentedToTissueSample' ]
                             && !!this.participant.participant.ddpParticipantId;
+
+    this.displayAtivityOrder();
   }
 
-  ngAfterViewChecked(): void{
+  ngAfterViewChecked(): void {
     if ( !this.selectedActivityCode || this.scrolled || !document.getElementById(this.selectedActivityCode))
       {return;}
 
@@ -184,6 +186,19 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   ngOnDestroy(): void {
     clearInterval(this.checkParticipantStatusInterval);
+  }
+
+  displayAtivityOrder(): void {
+    const orderedActivities = [];
+
+    [...this.activityDefinitions].sort(({displayOrder: A},{displayOrder: B}) => A - B)
+      .forEach(activity => {
+      const foundActivity = this.participant.data.activities
+        .find(a => activity.activityCode === a.activityCode && activity.activityVersion === a.activityVersion);
+      foundActivity && orderedActivities.push(foundActivity);
+    });
+
+    this.participant.data.activities = orderedActivities;
   }
 
   showFamilyMemberPopUpOnClick(): void {
