@@ -12,9 +12,9 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
 import { ActivityServiceAgent } from '../../../services/serviceAgents/activityServiceAgent.service';
 import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
 
-interface SplittedData {
-    plOptions: ActivityPicklistOption[];
-    otherOption: ActivityPicklistOption;
+interface CategorizedPicklistOptions {
+    currentAutoCompleteOptions: ActivityPicklistOption[];
+    userEnteredStringOption: ActivityPicklistOption;
 }
 
 @Component({
@@ -75,7 +75,7 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     @Input() activityGuid: string;
 
     searchValue$ = new BehaviorSubject('');
-    picklistOptions$: Observable<SplittedData>;
+    picklistOptions$: Observable<CategorizedPicklistOptions>;
 
     readonly ignoredSymbolsInQuery: string[];
 
@@ -108,10 +108,10 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     }
     splitOtherOptionFromPLOptions(
         data: ActivityPicklistOption[]
-    ): SplittedData {
+    ): CategorizedPicklistOptions {
         return {
-            plOptions: data.filter((pl) => pl.allowDetails !== true),
-            otherOption: data.find((pl) => pl.allowDetails === true),
+            currentAutoCompleteOptions: data.filter((pl) => pl.allowDetails !== true),
+            userEnteredStringOption: data.find((pl) => pl.allowDetails === true),
         };
     }
 
@@ -156,9 +156,9 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     }
 
 
-    onBlur(value: string, data: SplittedData): void {
-        const matchingOption = data.plOptions.find(pl => value.toLocaleLowerCase() === pl.optionLabel.toLocaleLowerCase());
-        const plOption = matchingOption ? matchingOption : this.createNotListedOption(data.otherOption);
+    onBlur(value: string, data: CategorizedPicklistOptions): void {
+        const matchingOption = data.currentAutoCompleteOptions.find(pl => value.toLocaleLowerCase() === pl.optionLabel.toLocaleLowerCase());
+        const plOption = matchingOption ? matchingOption : this.createNotListedOption(data.userEnteredStringOption);
         this.onValueSelect(plOption);
     }
 }
