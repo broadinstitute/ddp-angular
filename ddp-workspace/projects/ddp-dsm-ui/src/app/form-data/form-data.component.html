@@ -15,7 +15,7 @@
 
       <ng-container *ngIf="fieldSetting.displayType === 'CHECKBOX'">
         <mat-checkbox [color]="isCheckboxPatchedCurrently(fieldSetting.columnName)" [disabled]="fieldSetting.readonly" disableRipple
-                     (change)="valueChanged($event)">
+                     (change)="valueChanged($event)" [checked]="getActivityAnswer()" >
         </mat-checkbox>
       </ng-container>
 
