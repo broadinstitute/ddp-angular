@@ -157,10 +157,10 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         }
     }
 
-    private startUploadingFiles(files: File[], fileUploadsArray: any[], guids: string[]): void {
+    private startUploadingFiles(files: File[], fileUploadsArray$: Observable<any>[], guids: string[]): void {
         this.isLoading = true;
 
-        forkJoin(fileUploadsArray)
+        forkJoin(fileUploadsArray$)
             .pipe(
                 catchError(err => {
                     this.logger.logDebug('ActivityFileAnswer uploadFile error:', err);
