@@ -16,7 +16,7 @@ import { Value } from '../utils/value.model';
 })
 export class FieldSettingsComponent implements OnInit {
   errorMessage: string;
-  patternError: boolean = false;
+  patternError = false;
   additionalMessage: string;
 
   loading = false;
@@ -225,10 +225,10 @@ export class FieldSettingsComponent implements OnInit {
     if(value) {
       value.every(fs => this.testRegex(fs.columnName)) ? this.changeFields(index) : this.patternError = true;
     }
-    else this.changeFields(index);
+    else {this.changeFields(index);}
   }
 
-  changeFields(index: number) {
+  changeFields(index: number): void {
     this.patternError = false;
     this.settingsOfSelectedType[ index ].changedBy = this.role.userMail();
     this.settingsOfSelectedType[ index ].changed = true;
@@ -237,7 +237,7 @@ export class FieldSettingsComponent implements OnInit {
     }
   }
 
-  testRegex(input: string) {
+  testRegex(input: string): boolean {
     return /(^[a-z])([a-z_]+$)/gi.test(input);
   }
 
