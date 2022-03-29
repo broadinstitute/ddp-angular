@@ -24,7 +24,7 @@ export class FileUploadService extends UserServiceAgent<any> {
     getUploadUrl(studyGuid: string, activityGuid: string, questionStableId: string, files: File[]): Observable<FileUploadResponse[]> {
         const path = `/studies/${studyGuid}/activities/${activityGuid}/uploads`;
 
-        const acceptedFiles$: Observable<FileUploadResponse | null>[] = files.map<Observable<FileUploadResponse>>(file => {
+        const acceptedFiles$: Observable<FileUploadResponse | null>[] = files.map(file => {
             const accFile: FileUploadBody = {
                 questionStableId,
                 fileName: file.name,
