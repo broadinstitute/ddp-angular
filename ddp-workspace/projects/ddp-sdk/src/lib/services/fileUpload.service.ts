@@ -24,19 +24,23 @@ export class FileUploadService extends UserServiceAgent<any> {
     getUploadUrl(studyGuid: string, activityGuid: string, questionStableId: string, files: File[]): Observable<FileUploadResponse[]> {
         const path = `/studies/${studyGuid}/activities/${activityGuid}/uploads`;
 
-        const acceptedFiles$: Observable<FileUploadResponse | null>[] = files.map<FileUploadBody>(file =>  ({
+        const acceptedFiles$ : Observable<FileUploadResponse | null>[] = files.map<Observable<FileUploadResponse>>(file => {
+            const accFile = {
                 questionStableId,
                 fileName: file.name,
                 fileSize: file.size,
                 mimeType: file.type
-            })).map(accFile =>
-            this.postObservable(path, accFile, {}, true).pipe(
-             catchError(error => {
-             this.logger.logDebug('getUploadUrl error', error);
-             return throwError(error.error);
-            }),
-            map(x => !!x ? x.body as FileUploadResponse : null)
-         ));
+            }
+
+            return this.postObservable(path, accFile, {}, true)
+                .pipe(
+                    catchError(error => {
+                        this.logger.logDebug('getUploadUrl error', error);
+                        return throwError(error.error);
+                    }),
+                    map(x => !!x ? x.body as FileUploadResponse : null)
+                )
+        })
 
         return  zip(...acceptedFiles$);
     }
