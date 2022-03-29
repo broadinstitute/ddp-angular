@@ -553,7 +553,7 @@ export class Filter {
             selected.push(filter.options[key].value);
           } else {
             if (Filter.isFilterRelatedToAssignees(filter.participantColumn.name)) {
-              selected.push(filter.options[key].value);  
+              selected.push(filter.options[key].value);
             } else {
               selected.push(filter.options[key].name);
             }
@@ -577,7 +577,7 @@ export class Filter {
       } else if (filter.selectedOptions && filter.selectedOptions.length > 0) {
         const selectedOptions = <Array<boolean>>filter.selectedOptions;
         const trueIndex = selectedOptions.indexOf(true);
-        if (trueIndex != -1) {
+        if (trueIndex !== -1) {
           const chosenValue = filter.options[trueIndex].value;
           filterText = this.getFilterJson(parent,
           new NameValue('additionalValuesJson', chosenValue),
@@ -623,7 +623,7 @@ export class Filter {
   }
 
   private static isFilterRelatedToAssignees(filter: String): Boolean {
-    return filter == "assigneeIdMr" || filter == "assigneeIdTissue";
+    return filter === 'assigneeIdMr' || filter === 'assigneeIdTissue';
   }
 
   public static parseFieldSettingsToColumns(fieldSetting: FieldSettings, tableAlias): Filter {

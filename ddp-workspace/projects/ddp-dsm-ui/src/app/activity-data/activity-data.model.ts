@@ -1,4 +1,5 @@
 import { QuestionAnswer } from './models/question-answer.model';
+import {QuestionDefinition} from './models/question-definition.model';
 
 export class ActivityData {
   constructor(public completedAt: number, public createdAt: number, public lastUpdatedAt: number, public activityCode: string,
@@ -23,5 +24,9 @@ export class ActivityData {
         json.activityVersion, json.status, questionAnswers);
     }
     return null;
+  }
+
+  checkAnswerStableId(stableId: string): QuestionAnswer {
+    return this.questionsAnswers.find(x => x.stableId === stableId);
   }
 }
