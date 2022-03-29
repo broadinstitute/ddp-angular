@@ -39,7 +39,7 @@
             <ddp-loading [loaded]="!isLoading" class="loading-bar"></ddp-loading>
         </ng-container>
 
-        <ddp-activity-file-answer-success *ngIf="uploadedFiles && uploadedFiles.length > 0"></ddp-activity-file-answer-success>
+        <ddp-activity-file-answer-success *ngIf="uploadedFiles?.length > 0"></ddp-activity-file-answer-success>
 
         <mat-chip-list *ngIf="uploadedFiles && uploadedFiles.length > 0">
             <ng-container *ngFor="let uploadedFile of uploadedFiles; let i = index">
