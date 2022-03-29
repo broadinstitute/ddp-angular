@@ -152,7 +152,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
 
     private initUploadedFiles(): void {
         if(this.block?.answer?.length > 0 && this.block?.answer[0] !== null) {
-            this.block.answer && this.uploadedFiles.push(...this.block.answer);
+            this.uploadedFiles.push(...this.block.answer);
             this.uploadFilesGuids = this.block.answer.map(fileAnswer => fileAnswer.uploadGuid);
         }
     }
