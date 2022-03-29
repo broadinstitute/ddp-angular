@@ -24,13 +24,13 @@ export class FileUploadService extends UserServiceAgent<any> {
     getUploadUrl(studyGuid: string, activityGuid: string, questionStableId: string, files: File[]): Observable<FileUploadResponse[]> {
         const path = `/studies/${studyGuid}/activities/${activityGuid}/uploads`;
 
-        const acceptedFiles$ : Observable<FileUploadResponse | null>[] = files.map<Observable<FileUploadResponse>>(file => {
+        const acceptedFiles$: Observable<FileUploadResponse | null>[] = files.map<Observable<FileUploadResponse>>(file => {
             const accFile: FileUploadBody = {
                 questionStableId,
                 fileName: file.name,
                 fileSize: file.size,
                 mimeType: file.type
-            }
+            };
 
             return this.postObservable(path, accFile, {}, true)
                 .pipe(
@@ -39,8 +39,8 @@ export class FileUploadService extends UserServiceAgent<any> {
                         return throwError(error.error);
                     }),
                     map(x => !!x ? x.body as FileUploadResponse : null)
-                )
-        })
+                );
+        });
 
         return  zip(...acceptedFiles$);
     }
