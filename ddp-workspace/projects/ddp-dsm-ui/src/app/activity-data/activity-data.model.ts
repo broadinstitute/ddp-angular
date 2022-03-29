@@ -1,5 +1,4 @@
 import { QuestionAnswer } from './models/question-answer.model';
-import {QuestionDefinition} from './models/question-definition.model';
 
 export class ActivityData {
   constructor(public completedAt: number, public createdAt: number, public lastUpdatedAt: number, public activityCode: string,
