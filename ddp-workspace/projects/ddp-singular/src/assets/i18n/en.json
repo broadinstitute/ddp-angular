@@ -445,13 +445,13 @@
       "MaxSize": "Max size: {{maxSize}}",
       "AllowedFileTypes": "Allowed files: {{allowedFileTypes}}",
       "ChooseFile": "Click and select \nor drag file to upload",
-      "Uploading": "Uploading {{filename}}",
+      "Uploading": "Uploading file(s)",
       "Size": "(size: {{size}})",
       "MaxSizeErrorMessage": "Maximum file size exceeded",
       "InvalidTypeErrorMessage": "Type of file selected is not valid",
       "CancelUpload": "Cancel upload",
       "RemoveUploadedFile": "Remove uploaded file",
-      "Success": "Thank you for uploading the following file:"
+      "Success": "Thank you for uploading the following file(s)"
     }
   },
   "Error": {

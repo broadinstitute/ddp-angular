@@ -83,7 +83,14 @@ export class ActivityQuestionConverter {
 
                 matrixBlock.answerId = answer?.answerGuid;
                 matrixBlock.answer = answer?.value;
-            } else {
+            } else if (questionJson.questionType === QuestionType.File) {
+                const file = questionBlock as ActivityFileQuestionBlock;
+                if(file) {
+                    const [answers] = questionJson.answers;
+                    file.answer = answers.value;
+                }
+            }
+            else {
                 questionBlock.answerId = questionJson.answers[0].answerGuid;
                 const valueForQuestion = questionJson.answers[0].value;
                 // case where we are getting answer for composite
