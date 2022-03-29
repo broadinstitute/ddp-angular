@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ChangeDetectorRef, Component, Inject, Injector, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 import {
     ActivityRedesignedComponent,
@@ -6,8 +8,13 @@ import {
     SubmitAnnouncementService,
     ActivitySection,
     ActivityActivityBlock,
-    ActivityRenderHintType
+    ActivityRenderHintType,
+    LoggingService,
+    WindowRef,
+    AnalyticsEventsService,
+    ParticipantsSearchServiceAgent
 } from 'ddp-sdk';
+import { Subscription } from 'rxjs';
 
 type Block = ActivitySection['blocks'][number]
 
@@ -16,7 +23,37 @@ type Block = ActivitySection['blocks'][number]
     templateUrl: './activity.component.html',
     providers: [SubmitAnnouncementService, SubmissionManager],
 })
-export class ActivityComponent extends ActivityRedesignedComponent {
+export class ActivityComponent extends ActivityRedesignedComponent implements OnInit, OnDestroy {
+    dialogsClosedSubscription: Subscription;
+
+    constructor(
+        public editDialog: MatDialog,
+        logger: LoggingService,
+        windowRef: WindowRef,
+        changeRef: ChangeDetectorRef,
+        renderer: Renderer2,
+        submitService: SubmitAnnouncementService,
+        analytics: AnalyticsEventsService,
+        participantsSearch: ParticipantsSearchServiceAgent,
+        @Inject(DOCUMENT) document: any,
+        injector: Injector
+    ) {
+        super(logger, windowRef, changeRef, renderer, submitService, analytics, participantsSearch, document, injector);
+    }
+
+    public ngOnInit(): void {
+        super.ngOnInit();
+
+        this.dialogsClosedSubscription = this.editDialog.afterAllClosed.subscribe(() => {
+            this.showEmptyNestedActivityError = !this.hasNoEmptyNestedActivity;
+            setTimeout(() => this.showEmptyNestedActivityError = !this.hasNoEmptyNestedActivity, 200); // quick and dirty solution to re-check, in case activity was deleted a bit later
+        });
+    }
+
+    public ngOnDestroy(): void {
+        this.dialogsClosedSubscription.unsubscribe();
+    }
+
     showEmptyNestedActivityError = false;
 
     public incrementStep(): void {
@@ -29,9 +66,13 @@ export class ActivityComponent extends ActivityRedesignedComponent {
     }
 
     get hasNoEmptyNestedActivity(): boolean {
-        const enabledActivityBlocks = this.currentSection.blocks.filter(this.isActiveModalActivityBlock) as ActivityActivityBlock[];
+        try {
+            const enabledActivityBlocks = this.currentSection.blocks.filter(this.isActiveModalActivityBlock) as ActivityActivityBlock[];
 
-        return enabledActivityBlocks.every(this.blockHasAnswers);
+            return enabledActivityBlocks.every(this.blockHasAnswers);
+        } catch {
+            return true;
+        }
     }
 
     private isActiveModalActivityBlock = (block: ActivityActivityBlock): boolean =>
