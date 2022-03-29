@@ -24,7 +24,7 @@ export class FileUploadService extends UserServiceAgent<any> {
     getUploadUrl(studyGuid: string, activityGuid: string, questionStableId: string, files: File[]): Observable<FileUploadResponse[]> {
         const path = `/studies/${studyGuid}/activities/${activityGuid}/uploads`;
 
-        const acceptedFiles: Observable<FileUploadResponse | null>[] = files.map<FileUploadBody>(file =>  ({
+        const acceptedFiles$: Observable<FileUploadResponse | null>[] = files.map<FileUploadBody>(file =>  ({
                 questionStableId,
                 fileName: file.name,
                 fileSize: file.size,
@@ -38,7 +38,7 @@ export class FileUploadService extends UserServiceAgent<any> {
             map(x => !!x ? x.body as FileUploadResponse : null)
          ));
 
-        return  zip(...acceptedFiles);
+        return  zip(...acceptedFiles$);
     }
 
     // Upload a file to GCP Bucket via an authorized upload URL (received in `getUploadUrl` method above)
