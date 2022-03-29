@@ -76,19 +76,6 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         }
     }
 
-    validateAndSubmitFileUpload(files: File[], fileUploadRes: FileUploadResponse[]): void {
-        const isValid = files.every(file => {
-            const failedLocalValidator = this.getFailedLocalValidator(file);
-            if (failedLocalValidator) {
-                this.errorMessage = failedLocalValidator.result as string;
-                this.componentBusy.emit(false);
-                return false;
-            }
-            return true;
-        });
-
-        isValid && this.prepareFileUploads(fileUploadRes, files);
-    }
 
     prepareFileUploads(fileUploadRes: FileUploadResponse[], files: File[]): void {
         const fileUploadsArray: any[] = [];
@@ -145,6 +132,20 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.ngUnsubscribe.next();
         this.ngUnsubscribe.complete();
+    }
+
+    private validateAndSubmitFileUpload(files: File[], fileUploadRes: FileUploadResponse[]): void {
+        const isValid = files.every(file => {
+            const failedLocalValidator = this.getFailedLocalValidator(file);
+            if (failedLocalValidator) {
+                this.errorMessage = failedLocalValidator.result as string;
+                this.componentBusy.emit(false);
+                return false;
+            }
+            return true;
+        });
+
+        isValid && this.prepareFileUploads(fileUploadRes, files);
     }
 
     private initUploadedFiles(): void {
