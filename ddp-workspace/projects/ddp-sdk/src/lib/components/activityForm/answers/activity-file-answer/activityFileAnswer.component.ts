@@ -138,7 +138,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         this.validateFiles(files) && this.prepareFileUploads(fileUploadRes, files);
     }
 
-    private validateFiles(files: File[]) {
+    private validateFiles(files: File[]): boolean {
         return files.every(file => {
             const failedLocalValidator = this.getFailedLocalValidator(file);
             if (failedLocalValidator) {
