@@ -25,7 +25,7 @@ export class ActivityData {
     return null;
   }
 
-  checkAnswerStableId(stableId: string): QuestionAnswer {
+  searchForAnswerByStableId(stableId: string): QuestionAnswer {
     return this.questionsAnswers.find(x => x.stableId === stableId);
   }
 }

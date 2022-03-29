@@ -15,9 +15,9 @@ export class buildActivityDataService {
 
     public buildActivity(activityDefinition: ActivityDefinition, activity: ActivityData): QuestionTypeModel[] {
       activityDefinition?.questions.forEach(question => {
-        const questionAnswer = activity.checkAnswerStableId(question.stableId);
+        const questionAnswer = activity.searchForAnswerByStableId(question.stableId);
 
-        questionAnswer?.stableId && question ? this.checkQuestionType(questionAnswer, question)
+        questionAnswer?.stableId ? this.checkQuestionType(questionAnswer, question)
           : this.activityQuestions.push(this.noAnswer(question));
       });
 
