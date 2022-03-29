@@ -135,7 +135,11 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     }
 
     private validateAndSubmitFileUpload(files: File[], fileUploadRes: FileUploadResponse[]): void {
-        const isValid = files.every(file => {
+        this.validateFiles(files) && this.prepareFileUploads(fileUploadRes, files);
+    }
+
+    private validateFiles(files: File[]) {
+        return files.every(file => {
             const failedLocalValidator = this.getFailedLocalValidator(file);
             if (failedLocalValidator) {
                 this.errorMessage = failedLocalValidator.result as string;
@@ -144,8 +148,6 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
             }
             return true;
         });
-
-        isValid && this.prepareFileUploads(fileUploadRes, files);
     }
 
     private initUploadedFiles(): void {
