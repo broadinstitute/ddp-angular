@@ -71,7 +71,11 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
                     takeUntil(this.ngUnsubscribe)
                 )
                 .subscribe((res: FileUploadResponse[]) => {
-                    this.validateAndSubmitFileUpload(filesGroup, res);
+                    if(this.validateFiles(filesGroup)) {
+                        const {fileUploads, fileUploadGuids} = this.prepareFileUploads(res, filesGroup);
+
+                        this.startUploadingFiles(filesGroup, fileUploads, fileUploadGuids);
+                    }
                 });
         }
     }
@@ -123,7 +127,9 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         this.ngUnsubscribe.complete();
     }
 
-    private prepareFileUploads(fileUploadRes: FileUploadResponse[], files: File[]): void {
+    private prepareFileUploads(fileUploadRes: FileUploadResponse[], files: File[]):
+        {fileUploads: Observable<any>[]; fileUploadGuids: string[]}
+    {
         const fileUploadsArray: any[] = [];
         const fileUploadGuidsArray: string[] = [];
         fileUploadRes.forEach((upRes, i) => {
@@ -131,11 +137,10 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
             fileUploadsArray.push(this.fileUploadService.uploadFile(upRes.uploadUrl, files[i]));
         });
 
-        this.startUploadingFiles(files, fileUploadsArray, fileUploadGuidsArray);
-    }
-
-    private validateAndSubmitFileUpload(files: File[], fileUploadRes: FileUploadResponse[]): void {
-        this.validateFiles(files) && this.prepareFileUploads(fileUploadRes, files);
+        return {
+            fileUploads: fileUploadsArray,
+            fileUploadGuids: fileUploadGuidsArray
+        };
     }
 
     private validateFiles(files: File[]): boolean {
