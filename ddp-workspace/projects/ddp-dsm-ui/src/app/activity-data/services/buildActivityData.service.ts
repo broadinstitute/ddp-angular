@@ -18,7 +18,7 @@ export class buildActivityDataService {
         const questionAnswer = activity.searchForAnswerByStableId(question.stableId);
 
         questionAnswer?.stableId ? this.checkQuestionType(questionAnswer, question)
-          : this.activityQuestions.push(this.noAnswer(question));
+          : this.activityQuestions.push(this.buildNoAnswer(question));
       });
 
       return this.activityQuestions;
@@ -29,7 +29,7 @@ export class buildActivityDataService {
       activityQuestion && this.activityQuestions.push(activityQuestion.func({answer, question}));
     }
 
-    private noAnswer(question: QuestionDefinition): QuestionTypeModel {
+    private buildNoAnswer(question: QuestionDefinition): QuestionTypeModel {
       return {
         type: '',
         stableId: question.stableId,
