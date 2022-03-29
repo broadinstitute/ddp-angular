@@ -52,8 +52,12 @@ export class Data {
     }
     return new Data(
       json.profile, json.status, json.statusTimestamp, json.dsm,
-      json.ddp, medicalProviders, json.activities, json.address, json.invitations, json.computed
+      json.ddp, medicalProviders, this.activities(json.activities), json.address, json.invitations, json.computed
     );
+  }
+
+  private static activities(acts: ActivityData[]): ActivityData[] {
+    return acts.map(act => ActivityData.parse(act));
   }
 
   public getGroupedOptionsForAnswer( questionAnswer: QuestionAnswer): string[]  {
