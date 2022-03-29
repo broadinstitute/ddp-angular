@@ -77,17 +77,6 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     }
 
 
-    prepareFileUploads(fileUploadRes: FileUploadResponse[], files: File[]): void {
-        const fileUploadsArray: any[] = [];
-        const fileUploadGuidsArray: string[] = [];
-        fileUploadRes.forEach((upRes, i) => {
-            fileUploadGuidsArray.push(upRes.uploadGuid);
-            fileUploadsArray.push(this.fileUploadService.uploadFile(upRes.uploadUrl, files[i]));
-        });
-
-        this.startUploadingFiles(files, fileUploadsArray, fileUploadGuidsArray);
-    }
-
     undoUploadedFile(index): void {
         const config = this.modalDialogService.getDialogConfig(this.undoUploadButtonRef, this.panelClass);
         config.data = {
@@ -132,6 +121,17 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.ngUnsubscribe.next();
         this.ngUnsubscribe.complete();
+    }
+
+    private prepareFileUploads(fileUploadRes: FileUploadResponse[], files: File[]): void {
+        const fileUploadsArray: any[] = [];
+        const fileUploadGuidsArray: string[] = [];
+        fileUploadRes.forEach((upRes, i) => {
+            fileUploadGuidsArray.push(upRes.uploadGuid);
+            fileUploadsArray.push(this.fileUploadService.uploadFile(upRes.uploadUrl, files[i]));
+        });
+
+        this.startUploadingFiles(files, fileUploadsArray, fileUploadGuidsArray);
     }
 
     private validateAndSubmitFileUpload(files: File[], fileUploadRes: FileUploadResponse[]): void {
