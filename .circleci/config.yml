@@ -285,7 +285,8 @@ commands:
       - run:
           name: Linter check
           command: |
-            set -eo pipefail
+            set -e
+            mkdir /sdfsjflksjdf/hsdafljasdfljsdf
             ng lint ddp-sdk
             ng lint toolkit
             ng lint $ANGULAR_PROJECT_NAME
