@@ -95,100 +95,99 @@ describe('ActivityFileAnswer', () => {
 
     describe('There is already uploaded file', () => {
         beforeEach(() => {
-            component.block.answer.push({
+            component.block.answer = [{
                 fileName: '1.png',
                 fileSize: 5000000
-            });
+            }];
             component.ngOnInit();
             fixture.detectChanges();
         });
 
-        // it('should init previously uploaded file if any', () => {
-        //     expect(component.uploadedFiles[0]).toEqual({
-        //         fileName: '1.png',
-        //         fileSize: 5000000
-        //     });
-        // });
+        it('should init previously uploaded file if any', () => {
+            expect(component.uploadedFiles[0]).toEqual({
+                fileName: '1.png',
+                fileSize: 5000000
+            });
+        });
 
-        // it('should display an uploaded file data', () => {
-        //     const uploadedFile = fixture.debugElement.query(By.css('.uploaded-file-chip')).nativeElement;
-        //     expect(uploadedFile.textContent.trim()).toContain('1.png (size: 1.91 MB)');
-        // });
+        it('should display an uploaded file data', () => {
+            const uploadedFile = fixture.debugElement.query(By.css('.uploaded-file-chip')).nativeElement;
+            expect(uploadedFile.textContent.trim()).toContain('1.png (size: 4.77 MB)');
+        });
 
-        // it('should call undoUploadedFile by click on remove uploaded file button', () => {
-        //     spyOn(component, 'undoUploadedFile');
-        //     const removeUploadedFileBtn = fixture.debugElement.query(By.css('.uploaded-file mat-icon')).nativeElement;
-        //     removeUploadedFileBtn.click();
-        //     expect(component.undoUploadedFile).toHaveBeenCalled();
-        // });
+        it('should call undoUploadedFile by click on remove uploaded file button', () => {
+            spyOn(component, 'undoUploadedFile');
+            const removeUploadedFileBtn = fixture.debugElement.query(By.css('.uploaded-file mat-icon')).nativeElement;
+            removeUploadedFileBtn.click();
+            expect(component.undoUploadedFile).toHaveBeenCalled();
+        });
 
-        // it('should set uploaded file as null on undoUploadedFile', () => {
-        //     matDialogSpy.open.and.returnValue({
-        //         afterClosed: () => of(true)
-        //     } as any);
-        //     modalDialogServiceSpy.getDialogConfig.and.returnValue({});
-        //     component.undoUploadedFile(0);
-        //     expect(component.uploadedFiles.length).toBeFalsy();
-        // });
+        it('should set uploaded file as null on undoUploadedFile', () => {
+            matDialogSpy.open.and.returnValue({
+                afterClosed: () => of(true)
+            } as any);
+            modalDialogServiceSpy.getDialogConfig.and.returnValue({});
+            component.undoUploadedFile(0);
+            expect(component.uploadedFiles[0]).toBeFalsy();
+        });
 
-        // it('should patch null on undoUploadedFile', () => {
-        //     spyOn(component.valueChanged, 'emit');
-        //     matDialogSpy.open.and.returnValue({
-        //         afterClosed: () => of(true)
-        //     } as any);
-        //     modalDialogServiceSpy.getDialogConfig.and.returnValue({});
-        //     component.undoUploadedFile(0);
-        //     expect(component.block.answer).toBeNull();
-        //     expect(component.valueChanged.emit).toHaveBeenCalledWith(null);
-        // });
+        it('should patch null on undoUploadedFile', () => {
+            spyOn(component.valueChanged, 'emit');
+            matDialogSpy.open.and.returnValue({
+                afterClosed: () => of(true)
+            } as any);
+            modalDialogServiceSpy.getDialogConfig.and.returnValue({});
+            component.undoUploadedFile(0);
+            expect(component.block.answer[0]).toBeFalsy();
+            expect(component.valueChanged.emit).toHaveBeenCalledWith([]);
+        });
 
-        // it('should upload file after confirmation', () => {
-        //     fileUploadServiceSpy.getUploadUrl.and.returnValue(of([{
-        //         uploadGuid: 'uploadGuid',
-        //         uploadUrl: 'uploadUrl'
-        //     }]));
-        //     fileUploadServiceSpy.uploadFile.and.returnValue(of({}));
-        //     matDialogSpy.open.and.returnValue({
-        //         afterClosed: () => of(true)
-        //     } as any);
-        //     modalDialogServiceSpy.getDialogConfig.and.returnValue({});
-        //     component.onFilesSelected([{name: 'fileName', size: 2000000, type: '*.png'}] as unknown as Event);
-        //     fixture.detectChanges();
-        //
-        //     // component.openReuploadConfirmDialog({} as File, 'uploadGuid', 'uploadUrl');
-        //     expect(fileUploadServiceSpy.uploadFile).toHaveBeenCalled();
-        // });
+        it('should upload file after confirmation', () => {
+            fileUploadServiceSpy.getUploadUrl.and.returnValue(of([{
+                uploadGuid: 'uploadGuid',
+                uploadUrl: 'uploadUrl'
+            }]));
+            fileUploadServiceSpy.uploadFile.and.returnValue(of({}));
+            matDialogSpy.open.and.returnValue({
+                afterClosed: () => of(true)
+            } as any);
+            modalDialogServiceSpy.getDialogConfig.and.returnValue({});
+            component.onFilesSelected({target: {files: [{name: 'fileName', size: 2000000, type: '*.png'}]}} as unknown as Event);
+            fixture.detectChanges();
+
+            expect(fileUploadServiceSpy.uploadFile).toHaveBeenCalled();
+        });
     });
 
     describe('There is not any uploaded file', () => {
 
-        // it('should patch file answer after upload', () => {
-        //     spyOn(component.valueChanged, 'emit');
-        //     modalDialogServiceSpy.getDialogConfig.and.returnValue({});
-        //     fileUploadServiceSpy.getUploadUrl.and.returnValue(of([{
-        //         uploadGuid: 'uploadGuid',
-        //         uploadUrl: 'uploadUrl'
-        //     }]));
-        //     fileUploadServiceSpy.uploadFile.and.returnValue(of({}));
-        //     component.uploadedFiles = [];
-        //     component.onFilesSelected([{name: 'fileName', size: 2000000, type: '*.png'}] as unknown as Event);
-        //     fixture.detectChanges();
-        //
-        //     expect(component.block.answer).toEqual([{fileName: 'fileName', fileSize: 5000000, fileMimeType: '*.png'}]);
-        //     expect(component.valueChanged.emit).toHaveBeenCalledWith(['uploadGuid']);
-        //     // expect(component.fileNameToUpload).toBe('');
-        //     expect(component.errorMessage).toBe('');
-        // });
+        it('should patch file answer after upload', () => {
+            spyOn(component.valueChanged, 'emit');
+            modalDialogServiceSpy.getDialogConfig.and.returnValue({});
+            fileUploadServiceSpy.getUploadUrl.and.returnValue(of([{
+                uploadGuid: 'uploadGuid',
+                uploadUrl: 'uploadUrl'
+            }]));
+            fileUploadServiceSpy.uploadFile.and.returnValue(of({}));
+            component.uploadedFiles = [];
+            component.onFilesSelected({target: {files: [{name: 'fileName', size: 5000000, type: '*.png'}]}} as unknown as Event);
+            fixture.detectChanges();
 
-        // it('should show error message if a local validator failed', () => {
-        //     const errorMessage = 'The file size is too big';
-        //     const localValidator = new ActivityFileValidationRule({} as any);
-        //     localValidator.result = errorMessage;
-        //     localValidator.recalculate = () => false;
-        //     component.block.validators = [localValidator];
-        //
-        //     // component.submitFileUpload({} as File, 'uploadGuid', 'uploadUrl');
-        //     expect(component.errorMessage).toBe(errorMessage);
-        // });
+            expect(component.block.answer[0])
+                .toEqual(jasmine.objectContaining({fileName: 'fileName', fileSize: 5000000, fileMimeType: '*.png'}));
+            expect(component.valueChanged.emit).toHaveBeenCalledWith(['uploadGuid']);
+            expect(component.errorMessage).toBe('');
+        });
+
+        it('should show error message if a local validator failed', () => {
+            const errorMessage = 'The file size is too big';
+            const localValidator = new ActivityFileValidationRule({} as any);
+            localValidator.result = errorMessage;
+            localValidator.recalculate = () => false;
+            component.block.validators = [localValidator];
+
+            component.validateFiles([{}] as File[]);
+            expect(component.errorMessage).toBe(errorMessage);
+        });
     });
 });

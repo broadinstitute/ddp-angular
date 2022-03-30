@@ -127,6 +127,18 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         this.ngUnsubscribe.complete();
     }
 
+    validateFiles(files: File[]): boolean {
+        return files.every(file => {
+            const failedLocalValidator = this.getFailedLocalValidator(file);
+            if (failedLocalValidator) {
+                this.errorMessage = failedLocalValidator.result as string;
+                this.componentBusy.emit(false);
+                return false;
+            }
+            return true;
+        });
+    }
+
     private prepareFileUploads(fileUploadRes: FileUploadResponse[], files: File[]):
         {fileUploads: Observable<any>[]; fileUploadGuids: string[]}
     {
@@ -143,17 +155,6 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         };
     }
 
-    private validateFiles(files: File[]): boolean {
-        return files.every(file => {
-            const failedLocalValidator = this.getFailedLocalValidator(file);
-            if (failedLocalValidator) {
-                this.errorMessage = failedLocalValidator.result as string;
-                this.componentBusy.emit(false);
-                return false;
-            }
-            return true;
-        });
-    }
 
     private initUploadedFiles(): void {
         if(this.block?.answer?.length > 0 && this.block?.answer[0] !== null) {
@@ -197,7 +198,9 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         if(files !== null) {
             this.uploadedFiles.push(...files);
             this.uploadFilesGuids.push(...guids);
-            this.block?.answer?.push(...files);
+
+            if(this.block?.answer) {this.block.answer.push(...files);}
+            else {this.block.answer = files;}
         }
         this.valueChanged.emit(this.uploadFilesGuids);
     }
