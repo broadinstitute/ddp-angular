@@ -6,17 +6,16 @@ import {
     ActivityRedesignedComponent,
     SubmissionManager,
     SubmitAnnouncementService,
-    ActivitySection,
     ActivityActivityBlock,
     ActivityRenderHintType,
     LoggingService,
     WindowRef,
     AnalyticsEventsService,
-    ParticipantsSearchServiceAgent
+    ParticipantsSearchServiceAgent,
+    ActivityActionsAgent,
+    ActivityBlockType,
 } from 'ddp-sdk';
 import { Subscription } from 'rxjs';
-
-type Block = ActivitySection['blocks'][number]
 
 @Component({
     selector: 'app-activity',
@@ -24,10 +23,13 @@ type Block = ActivitySection['blocks'][number]
     providers: [SubmitAnnouncementService, SubmissionManager],
 })
 export class ActivityComponent extends ActivityRedesignedComponent implements OnInit, OnDestroy {
+    showEmptyNestedActivityError = false;
     dialogsClosedSubscription: Subscription;
+    activityInstanceDeletedSubscription: Subscription;
 
     constructor(
-        public editDialog: MatDialog,
+        private editDialog: MatDialog,
+        private activityActionsAgent: ActivityActionsAgent,
         logger: LoggingService,
         windowRef: WindowRef,
         changeRef: ChangeDetectorRef,
@@ -44,20 +46,23 @@ export class ActivityComponent extends ActivityRedesignedComponent implements On
     public ngOnInit(): void {
         super.ngOnInit();
 
-        this.dialogsClosedSubscription = this.editDialog.afterAllClosed.subscribe(() => {
-            this.showEmptyNestedActivityError = !this.hasNoEmptyNestedActivity;
-            setTimeout(() => this.showEmptyNestedActivityError = !this.hasNoEmptyNestedActivity, 200); // quick and dirty solution to re-check, in case activity was deleted a bit later
-        });
+        this.dialogsClosedSubscription = this.editDialog.afterAllClosed.subscribe(this.updateErrorMessageDisplayState);
+
+        this.activityInstanceDeletedSubscription =
+            this.activityActionsAgent.activityBlockInstancesUpdated.subscribe(this.updateErrorMessageDisplayState);
     }
 
     public ngOnDestroy(): void {
         this.dialogsClosedSubscription.unsubscribe();
+        this.activityInstanceDeletedSubscription.unsubscribe();
     }
 
-    showEmptyNestedActivityError = false;
+    public updateErrorMessageDisplayState = (): void => {
+        this.showEmptyNestedActivityError = !this.allNestedActivitiesHaveAnswers;
+    };
 
     public incrementStep(): void {
-        if (this.hasNoEmptyNestedActivity) {
+        if (this.allNestedActivitiesHaveAnswers) {
             this.showEmptyNestedActivityError = false;
             super.incrementStep();
         } else {
@@ -65,20 +70,16 @@ export class ActivityComponent extends ActivityRedesignedComponent implements On
         }
     }
 
-    get hasNoEmptyNestedActivity(): boolean {
-        try {
-            const enabledActivityBlocks = this.currentSection.blocks.filter(this.isActiveModalActivityBlock) as ActivityActivityBlock[];
+    get allNestedActivitiesHaveAnswers(): boolean {
+        const enabledActivityBlocks = this.currentSection.blocks.filter(this.isActiveModalActivityBlock) as ActivityActivityBlock[];
 
-            return enabledActivityBlocks.every(this.blockHasAnswers);
-        } catch {
-            return true;
-        }
+        return enabledActivityBlocks.every(this.blockHasAnswers);
     }
 
-    private isActiveModalActivityBlock = (block: ActivityActivityBlock): boolean =>
+    private isActiveModalActivityBlock = (block: ActivityBlockType): boolean =>
         this.isActivityBlock(block) ? block.enabled && block.renderHint === ActivityRenderHintType.Modal : false;
 
-    private isActivityBlock(block: Block): block is ActivityActivityBlock {
+    private isActivityBlock(block: ActivityBlockType): block is ActivityActivityBlock {
         return 'activityCode' in block && typeof block.activityCode === 'string';
     }
 

@@ -265,7 +265,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     }
 
     public get isStepped(): boolean {
-        return this.model.sections.length > 1;
+        return this.model?.sections.length > 1;
     }
 
     public get isLastStep(): boolean {
@@ -277,9 +277,9 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     }
 
     public get currentSection(): ActivitySection {
-        if (this.isStepped && this.currentSectionIndex < this.model.sections.length) {
+        if (this.isStepped && this.currentSectionIndex < this.model?.sections.length) {
             return this.model.sections[this.currentSectionIndex];
-        } else if (this.model.sections.length > 0) {
+        } else if (this.model?.sections.length > 0) {
             return this.model.sections[0];
         }
         return new ActivitySection();
