@@ -12,7 +12,7 @@ export class AppComponent  {
   constructor(private elRef: ElementRef) {
   }
 
-  onActivate() {
+  onActivate(): void {
     this.elRef.nativeElement.scrollTo(0,0);
   }
 }
