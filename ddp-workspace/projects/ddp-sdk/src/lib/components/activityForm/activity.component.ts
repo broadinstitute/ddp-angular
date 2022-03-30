@@ -312,7 +312,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     }
 
     protected scrollToTop(): void {
-        this.windowRef.nativeWindow.scrollTo(0, 0);
+        this.document.body.firstElementChild.scrollTo(0,0)
     }
 
     protected nextAvailableSectionIndex(): number {
