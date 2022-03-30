@@ -39,7 +39,9 @@ interface CategorizedPicklistOptions {
             [displayWith]="displayAutoComplete"
         >
             <mat-option
-                *ngFor="let option of picklistOptions.currentAutoCompleteOptions"
+                *ngFor="
+                    let option of picklistOptions.currentAutoCompleteOptions
+                "
                 class="autoCompleteOption"
                 [value]="option"
                 (click)="onValueSelect(option)"
@@ -102,20 +104,25 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
                 )
             ),
             map((data) => this.splitOtherOptionFromPLOptions(data.results)),
-            map((splittedData) => splittedData
-            )
+            map((splittedData) => splittedData)
         );
     }
     splitOtherOptionFromPLOptions(
         data: ActivityPicklistOption[]
     ): CategorizedPicklistOptions {
         return {
-            currentAutoCompleteOptions: data.filter((pl) => pl.allowDetails !== true),
-            userEnteredStringOption: data.find((pl) => pl.allowDetails === true),
+            currentAutoCompleteOptions: data.filter(
+                (pl) => pl.allowDetails !== true
+            ),
+            userEnteredStringOption: data.find(
+                (pl) => pl.allowDetails === true
+            ),
         };
     }
 
-    createNotListedOption(otherOption: ActivityPicklistOption): ActivityPicklistOption {
+    createNotListedOption(
+        otherOption: ActivityPicklistOption
+    ): ActivityPicklistOption {
         return {
             ...otherOption,
             optionLabel: this.searchValue$.value.toLocaleUpperCase(),
@@ -130,12 +137,18 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
         return typeof option === 'string' ? option : option?.optionLabel || '';
     }
 
-    onValueSelect(
-        value: ActivityPicklistOption
-    ): void {
-        this.block.answer = value ? [{ stableId: value.stableId, detail:  value.allowDetails === true
-        ? value.optionLabel
-        : null }] : [];
+    onValueSelect(value: ActivityPicklistOption): void {
+        this.block.answer = value
+            ? [
+                  {
+                      stableId: value.stableId,
+                      detail:
+                          value.allowDetails === true
+                              ? value.optionLabel
+                              : null,
+                  },
+              ]
+            : [];
         this.valueChanged.emit([...this.block.answer]);
     }
 
@@ -149,17 +162,24 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     }
 
     getAnswer(): string {
-        if(this.block.answer && this.block.answer[0]) {
-            return this.block.answer[0].detail ? this.block.answer[0].detail: this.block.picklistOptions[0].optionLabel;
+        if (this.block.answer && this.block.answer[0]) {
+            return this.block.answer[0].detail
+                ? this.block.answer[0].detail
+                : this.block.picklistOptions[0].optionLabel;
         }
         return '';
     }
 
-
     onBlur(value: string, data: CategorizedPicklistOptions): void {
-        if(value) {
-            const matchingOption = data.currentAutoCompleteOptions.find(pl => value.toLocaleLowerCase() === pl.optionLabel.toLocaleLowerCase());
-            const plOption = matchingOption ? matchingOption : this.createNotListedOption(data.userEnteredStringOption);
+        if (value) {
+            const matchingOption = data.currentAutoCompleteOptions.find(
+                (pl) =>
+                    value.toLocaleLowerCase() ===
+                    pl.optionLabel.toLocaleLowerCase()
+            );
+            const plOption = matchingOption
+                ? matchingOption
+                : this.createNotListedOption(data.userEnteredStringOption);
             this.onValueSelect(plOption);
         }
     }
