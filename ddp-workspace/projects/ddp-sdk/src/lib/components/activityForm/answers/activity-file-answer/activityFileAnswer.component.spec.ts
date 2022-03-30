@@ -186,7 +186,12 @@ describe('ActivityFileAnswer', () => {
             localValidator.recalculate = () => false;
             component.block.validators = [localValidator];
 
-            component.validateFiles([{}] as File[]);
+            fileUploadServiceSpy.getUploadUrl.and.returnValue(of([{
+                uploadGuid: 'uploadGuid',
+                uploadUrl: 'uploadUrl'
+            }]));
+
+            component.onFilesSelected({target: {files: [{name: 'fileName', size: 5000000, type: '*.png'}]}} as unknown as Event);
             expect(component.errorMessage).toBe(errorMessage);
         });
     });

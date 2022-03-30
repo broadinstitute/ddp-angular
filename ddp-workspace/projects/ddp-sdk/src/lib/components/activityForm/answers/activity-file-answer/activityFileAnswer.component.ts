@@ -127,7 +127,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         this.ngUnsubscribe.complete();
     }
 
-    validateFiles(files: File[]): boolean {
+    private validateFiles(files: File[]): boolean {
         return files.every(file => {
             const failedLocalValidator = this.getFailedLocalValidator(file);
             if (failedLocalValidator) {
