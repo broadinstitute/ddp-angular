@@ -1,7 +1,8 @@
 <mat-accordion>
   <mat-expansion-panel hideToggle style="margin-bottom: 10px;"
-                       (click)="generateActivity()"
-                       id="{{ activityDefinition.activityCode }}">
+                       id="{{ activityDefinition.activityCode }}"
+                       [expanded]="activityDefinition.activityCode === openActivity"
+                       (opened)="generateActivity()">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <b>{{ activityDefinition.activityName }}</b>

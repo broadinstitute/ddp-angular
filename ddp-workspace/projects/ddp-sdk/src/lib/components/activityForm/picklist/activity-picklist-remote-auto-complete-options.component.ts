@@ -39,7 +39,7 @@ interface CategorizedPicklistOptions {
             [displayWith]="displayAutoComplete"
         >
             <mat-option
-                *ngFor="let option of picklistOptions.plOptions"
+                *ngFor="let option of picklistOptions.currentAutoCompleteOptions"
                 class="autoCompleteOption"
                 [value]="option"
                 (click)="onValueSelect(option)"
@@ -157,8 +157,10 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
 
 
     onBlur(value: string, data: CategorizedPicklistOptions): void {
-        const matchingOption = data.currentAutoCompleteOptions.find(pl => value.toLocaleLowerCase() === pl.optionLabel.toLocaleLowerCase());
-        const plOption = matchingOption ? matchingOption : this.createNotListedOption(data.userEnteredStringOption);
-        this.onValueSelect(plOption);
+        if(value) {
+            const matchingOption = data.currentAutoCompleteOptions.find(pl => value.toLocaleLowerCase() === pl.optionLabel.toLocaleLowerCase());
+            const plOption = matchingOption ? matchingOption : this.createNotListedOption(data.userEnteredStringOption);
+            this.onValueSelect(plOption);
+        }
     }
 }

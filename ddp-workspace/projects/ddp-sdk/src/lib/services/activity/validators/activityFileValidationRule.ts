@@ -13,7 +13,7 @@ export class ActivityFileValidationRule extends ActivityAbstractValidationRule {
     }
 
     public recalculate(answerBeforeUpload?: ActivityFileAnswerDto): boolean {
-        const answer = answerBeforeUpload || this.block.answer;
+        const answer = answerBeforeUpload;
 
         if (this.isMaxFileSizeExceeded(answer)) {
             this.result = FILE_VALIDATION_MESSAGE.maxSize;

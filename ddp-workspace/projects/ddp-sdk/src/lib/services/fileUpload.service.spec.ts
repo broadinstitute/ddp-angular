@@ -61,8 +61,8 @@ describe('FileUploadService', () => {
         };
 
         it('positive case (get)', (done) => {
-            service.getUploadUrl(studyGuid, activityGuid, questionStableId, file).subscribe((res: FileUploadResponse) => {
-                expect(res).toEqual(response);
+            service.getUploadUrl(studyGuid, activityGuid, questionStableId, [file]).subscribe((res: FileUploadResponse[]) => {
+                expect(res).toEqual([response]);
                 done();
             });
 
@@ -74,7 +74,7 @@ describe('FileUploadService', () => {
         });
 
         it('negative case (get)', (done) => {
-            service.getUploadUrl(studyGuid, activityGuid, questionStableId, file).subscribe({
+            service.getUploadUrl(studyGuid, activityGuid, questionStableId, [file]).subscribe({
                 next: () => fail('should have failed with an error'),
                 error: (error) => {
                     expect(error.message).toEqual('An error occurred');
