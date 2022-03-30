@@ -191,14 +191,6 @@ participant.data.dsm['diagnosisYear'] != null">
           </tr>
           </tbody>
         </table>
-        <!--TODO remove before final merge, for testing only -->
-        <div *ngIf="hasRole().allowedToTestDSSActivity() && participant.data != null">
-          <button mat-mini-fab color="primary" class="mat-fab-bottom-left" (click)="testGetActivity(participant.data.profile['guid'])">
-            <i class="fa-thin fa-badge-check"></i>
-          </button>
-          <span>Test GET Activity</span>
-
-        </div>
 
         <div *ngIf="isAddFamilyMember" class="Float--right Width--100">
           <div class="family-member-button">
@@ -556,7 +548,7 @@ participant.data.dsm['diagnosisYear'] != null">
             <tab *ngIf="!hideSamplesTab && participant.kits != null && participant.kits.length > 0" heading="Sample Information">
               <ng-container *ngFor="let sample of participant.kits; let i = index">
                 <fieldset style="border: 1px black solid">
-                  <legend class="Group--Title" id="{{sample.kitType}}_{{i}}">Sample Type: {{sample.kitType}}</legend>
+                  <legend class="Group--Title" id="{{sample.kitTypeName}}_{{i}}">Sample Type: {{sample.kitTypeName}}</legend>
                   <div class="Router--Outlet">
                     <table class="Width--100 Table--box">
                       <tr>
@@ -571,6 +563,13 @@ participant.data.dsm['diagnosisYear'] != null">
                       </tr>
                       <tr>
                         <td class="TD--Padding Width--50">{{sample.uploadReason}}</td>
+                      </tr>
+                      <hr style="border-color: lightgray">
+                      <tr>
+                        <td class="TD--Padding Width--50 Data-Display-Question">Collaborator Sample Id:</td>
+                      </tr>
+                      <tr>
+                        <td class="TD--Padding-Left Width--50">{{sample.bspCollaboratorSampleId}}</td>
                       </tr>
                       <hr style="border-color: lightgray">
                       <tr>
@@ -751,7 +750,8 @@ participant.data.dsm['diagnosisYear'] != null">
                 </thead>
                 <tbody>
                 <tr *ngFor="let mr of mf.data">
-                  <ng-container *ngIf="mr.showInstitution()">
+                  aaaa
+                  <ng-container *ngIf="getInstitutionType(mr.ddpInstitutionId)">
                     <td (click)="openMedicalRecord(mr)">{{mr.getType()}}</td>
                     <td (click)="openMedicalRecord(mr)">
                       <ng-container

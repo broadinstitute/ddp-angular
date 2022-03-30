@@ -403,6 +403,21 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     }
   }
 
+  getInstitutionType(ddpInstitutionId: string): boolean {
+    if (this.participant != null && this.participant.data != null
+      && this.participant.data.profile != null && this.participant.data.medicalProviders != null) {
+      const medicalProvider = this.participant.data.medicalProviders.find(medProvider => {
+        const tmpId = medProvider.legacyGuid != null && medProvider.legacyGuid !== 0 ?
+          medProvider.legacyGuid : medProvider.guid;
+        return tmpId === ddpInstitutionId;
+      });
+      if (medicalProvider != null) {
+        return 'PHYSICIAN' === medicalProvider.type || 'INSTITUTION' === medicalProvider.type || 'INITIAL_BIOPSY' === medicalProvider.type;
+      }
+    }
+    return false;
+  }
+
   addEmptyOncHistoryRow(): void {
     if (this.participant.data.dsm[ 'hasConsentedToTissueSample' ]) {
       let hasEmptyOncHis = false;
