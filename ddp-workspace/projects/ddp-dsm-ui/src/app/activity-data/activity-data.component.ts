@@ -14,6 +14,7 @@ import {QuestionTypeModel} from './models/question-type-models';
 export class ActivityDataComponent {
   @Input() activity: ActivityData;
   @Input() activityDefinition: ActivityDefinition;
+  @Input() openActivity: string;
 
   public questionsAndAnswers: QuestionTypeModel[];
 
