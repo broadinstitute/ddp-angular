@@ -73,6 +73,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   source = 'normal';
 
+  openActivity: string;
+
   loadingParticipantPage = false;
 
   noteMedicalRecord: MedicalRecord;

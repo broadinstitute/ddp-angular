@@ -233,7 +233,7 @@
       "Title": "About Single Ventricle Heart Defects",
       "P1": "Before a baby is born, the first organ to grow is the heart. In most hearts, there are four chambers. Two are atria, and the other two are ventricles. In some people, one ventricle doesn’t grow fully. That ventricle may be smaller. It may not develop all the way, or it may be missing an important piece. When any of these things happen, it is called a single ventricle heart defect.",
       "Link": "Click here for a helpful video explaining single ventricle heart defects.",
-      "P2": "<p><b>There are many types of single ventricle heart defects. The most common are:</b></p><ul class=\"simple-list\"><li>Hypoplastic Left Heart Syndrome (HLHS)</li><li>Tricuspid Atresia</li><li>Double Inlet Left Ventricle (DILV)</li><li>Double Outlet Right Ventricle (DORV)</li><li>Hypoplastic Right Heart or Single Left Ventricle</li><li>Pulmonary Atresia with Intact Ventricular<br /> Septum (PA-IVS)</li><li>Unbalanced Atrioventricular Canal</li></ul>",
+      "P2": "<p><b>There are many types of single ventricle heart defects. The most common are:</b></p><ul class=\"simple-list\"><li>Hypoplastic Left Heart Syndrome (HLHS)</li><li>Hypoplastic right heart</li><li>Tricuspid Atresia</li><li>Double Inlet Left Ventricle (DILV)</li><li>Double outlet right ventricle (DORV) – some types</li><li>Ebstein Anomaly</li><li>Single left ventricle</li><li>Pulmonary atresia with intact ventricular septum (PA-IVS) – some types</li><li>Unbalanced atrioventricular (AV) canal</li><li>Other complex heart defects leading to a Fontan and/or Glenn operation and a single functioning pumping chamber</li></ul>",
       "P3": "Scientists are trying to find out why some people’s hearts grow this way, but they don't have the full picture. We know that single ventricle heart defects are likely caused by more than one thing. One cause may be in a person’s DNA. We want to learn more about the DNA of patients with single ventricle heart defects. We may find something in their DNA linked to these defects.",
       "P4": "Each patient is unique, but right now, most children with a single ventricle heart defect will need three stages of surgery. First, a Norwood or a shunt. Next, a Glenn procedure. And last, a Fontan procedure. These surgeries are done to make a new circulatory system. This allows blood to flow to all parts of the body and bring more oxygen to the lungs, but some patients end up with other health problems after surgery.",
       "P5": "Right now, there is no cure for single ventricle heart defects and there are other health issues that often develop in other parts of the body. Sometimes, the person’s single ventricle can fail. The best option right now for a failing single ventricle is a heart transplant. There are a lot of people who need a heart transplant, and there are often not enough hearts for everyone who needs one. Additionally, a heart transplant has many challenges requiring lifelong treatment that can affect quality of life. Also, transplanted organs have a limited lifespan.",
@@ -445,13 +445,13 @@
       "MaxSize": "Max size: {{maxSize}}",
       "AllowedFileTypes": "Allowed files: {{allowedFileTypes}}",
       "ChooseFile": "Click and select \nor drag file to upload",
-      "Uploading": "Uploading {{filename}}",
+      "Uploading": "Uploading file(s)",
       "Size": "(size: {{size}})",
       "MaxSizeErrorMessage": "Maximum file size exceeded",
       "InvalidTypeErrorMessage": "Type of file selected is not valid",
       "CancelUpload": "Cancel upload",
       "RemoveUploadedFile": "Remove uploaded file",
-      "Success": "Thank you for uploading the following file:"
+      "Success": "Thank you for uploading the following file(s)"
     }
   },
   "Error": {

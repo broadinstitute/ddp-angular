@@ -24,4 +24,8 @@ export class ActivityData {
     }
     return null;
   }
+
+  searchForAnswerByStableId(stableId: string): QuestionAnswer {
+    return this.questionsAnswers.find(x => x.stableId === stableId);
+  }
 }

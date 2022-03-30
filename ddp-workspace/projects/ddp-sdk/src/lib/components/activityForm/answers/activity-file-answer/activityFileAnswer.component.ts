@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import { EMPTY, Subject } from 'rxjs';
+import {EMPTY, forkJoin, Observable, Subject} from 'rxjs';
 import { catchError, finalize, takeUntil } from 'rxjs/operators';
 
 import { ActivityFileQuestionBlock } from '../../../../models/activity/activityFileQuestionBlock';
@@ -33,15 +33,15 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     @Input() readonly: boolean;
     @Input() studyGuid: string;
     @Input() activityGuid: string;
-    @Output() valueChanged: EventEmitter<string | null> = new EventEmitter();
+    @Output() valueChanged: EventEmitter<string[] | null> = new EventEmitter();
     @Output() componentBusy = new EventEmitter<boolean>();
     @ViewChild('uploaded', {read: ElementRef}) private uploadedFileRef: ElementRef;
     @ViewChild('undoUploadBtn', {read: ElementRef}) private undoUploadButtonRef: ElementRef;
     @ViewChild('cancelUploadBtn', {read: ElementRef}) private cancelUploadingButtonRef: ElementRef;
-    fileNameToUpload: string;
-    uploadedFile: ActivityFileAnswerDto | null;
+    uploadedFiles: ActivityFileAnswerDto[] | null = [];
     errorMessage: string;
     isLoading: boolean;
+    private uploadFilesGuids: string[] = [];
     private ngUnsubscribe = new Subject<void>();
     private readonly panelClass = 'file-upload-confirm-dialog';
 
@@ -52,16 +52,15 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.initUploadedFile();
+        this.initUploadedFiles();
     }
 
-    onFilesSelected(files: FileList): void {
+    onFilesSelected(files: Event): void {
         this.errorMessage = '';
-        const file: File = files[0];
-
-        if (file) {
+        const filesGroup: File[] = Array.from((files.target as HTMLInputElement).files);
+        if (filesGroup && filesGroup.length > 0) {
             this.componentBusy.emit(true);
-            this.fileUploadService.getUploadUrl(this.studyGuid, this.activityGuid, this.block.stableId, file)
+            this.fileUploadService.getUploadUrl(this.studyGuid, this.activityGuid, this.block.stableId, filesGroup)
                 .pipe(
                     catchError(err => {
                         this.logger.logDebug('ActivityFileAnswer getUploadUrl error:', err);
@@ -71,47 +70,18 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
                     }),
                     takeUntil(this.ngUnsubscribe)
                 )
-                .subscribe((res: FileUploadResponse) => {
-                    this.submitFileUpload(file, res.uploadGuid, res.uploadUrl);
+                .subscribe((res: FileUploadResponse[]) => {
+                    if(this.validateFiles(filesGroup)) {
+                        const {fileUploads, fileUploadGuids} = this.prepareFileUploads(res, filesGroup);
+
+                        this.startUploadingFiles(filesGroup, fileUploads, fileUploadGuids);
+                    }
                 });
         }
     }
 
-    submitFileUpload(file: File, uploadGuid: string, uploadUrl: string): void {
-        const failedLocalValidator = this.getFailedLocalValidator(file);
-        if (failedLocalValidator) {
-            this.errorMessage = failedLocalValidator.result as string;
-            this.componentBusy.emit(false);
-            return;
-        }
 
-        if (this.uploadedFile) {
-            this.openReuploadConfirmDialog(file, uploadGuid, uploadUrl);
-        } else {
-            this.uploadFile(file, uploadGuid, uploadUrl);
-        }
-    }
-
-    openReuploadConfirmDialog(file: File, uploadGuid: string, uploadUrl: string): void {
-        const config = this.modalDialogService.getDialogConfig(this.uploadedFileRef, this.panelClass);
-        config.data = {
-            title: 'SDK.FileUpload.ConfirmReuploadTitle',
-            confirmBtnText: 'SDK.FileUpload.ReuploadBtnText',
-            cancelBtnText: 'SDK.FileUpload.CancelBtnText',
-            confirmBtnColor: 'primary'
-        };
-
-        const dialogRef = this.dialog.open(ConfirmDialogComponent, config);
-        dialogRef.afterClosed().subscribe((confirmUpload: boolean) => {
-            if (confirmUpload) {
-                this.uploadFile(file, uploadGuid, uploadUrl);
-            } else {
-                this.componentBusy.emit(false);
-            }
-        });
-    }
-
-    undoUploadedFile(): void {
+    undoUploadedFile(index): void {
         const config = this.modalDialogService.getDialogConfig(this.undoUploadButtonRef, this.panelClass);
         config.data = {
             title: 'SDK.FileUpload.ConfirmUndoUploadTitle',
@@ -123,9 +93,10 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         const dialogRef = this.dialog.open(ConfirmDialogComponent, config);
         dialogRef.afterClosed().subscribe((confirmUndo: boolean) => {
             if (confirmUndo) {
-                this.patchAnswer(null);
-                this.setUploadedFile(null);
-                this.fileNameToUpload = '';
+                this.uploadFilesGuids.splice(index, 1);
+                this.uploadedFiles.splice(index, 1);
+                this.block?.answer?.splice(index, 1);
+                this.patchAnswer(null, this.uploadFilesGuids);
             }
         });
     }
@@ -156,20 +127,45 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         this.ngUnsubscribe.complete();
     }
 
-    private initUploadedFile(): void {
-        if (this.block?.answer) {
-            this.setUploadedFile({
-                fileName: this.block.answer.fileName,
-                fileSize: this.block.answer.fileSize
-            });
+    private prepareFileUploads(fileUploadRes: FileUploadResponse[], files: File[]):
+        {fileUploads: Observable<any>[]; fileUploadGuids: string[]}
+    {
+        const fileUploadsArray: any[] = [];
+        const fileUploadGuidsArray: string[] = [];
+        fileUploadRes.forEach((upRes, i) => {
+            fileUploadGuidsArray.push(upRes.uploadGuid);
+            fileUploadsArray.push(this.fileUploadService.uploadFile(upRes.uploadUrl, files[i]));
+        });
+
+        return {
+            fileUploads: fileUploadsArray,
+            fileUploadGuids: fileUploadGuidsArray
+        };
+    }
+
+    private validateFiles(files: File[]): boolean {
+        return files.every(file => {
+            const failedLocalValidator = this.getFailedLocalValidator(file);
+            if (failedLocalValidator) {
+                this.errorMessage = failedLocalValidator.result as string;
+                this.componentBusy.emit(false);
+                return false;
+            }
+            return true;
+        });
+    }
+
+    private initUploadedFiles(): void {
+        if(this.block?.answer?.length > 0 && this.block?.answer[0] !== null) {
+            this.uploadedFiles.push(...this.block.answer);
+            this.uploadFilesGuids = this.block.answer.map(fileAnswer => fileAnswer.uploadGuid);
         }
     }
 
-    private uploadFile(file: File, uploadGuid: string, uploadUrl: string): void {
+    private startUploadingFiles(files: File[], fileUploadsArray$: Observable<any>[], guids: string[]): void {
         this.isLoading = true;
-        this.fileNameToUpload = file?.name;
 
-        this.fileUploadService.uploadFile(uploadUrl, file)
+        forkJoin(fileUploadsArray$)
             .pipe(
                 catchError(err => {
                     this.logger.logDebug('ActivityFileAnswer uploadFile error:', err);
@@ -179,28 +175,31 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
                 finalize(() => {
                     this.componentBusy.emit(false);
                     this.isLoading = false;
-                    this.fileNameToUpload = '';
                 })
             )
             .subscribe(() => {
-                const fileAnswer: ActivityFileAnswerDto = {
-                    fileName: file?.name,
-                    fileSize: file?.size,
-                    fileMimeType: file?.type
-                };
-                this.patchAnswer(fileAnswer, uploadGuid);
-                this.setUploadedFile(fileAnswer);
                 this.errorMessage = '';
+                this.componentBusy.emit(false);
+                this.isLoading = false;
+
+                const uploadedFiles: ActivityFileAnswerDto[] = files.map((file, i) => ({
+                        fileName: file?.name,
+                        fileSize: file?.size,
+                        fileMimeType: file?.type,
+                        uploadGuid: this.uploadFilesGuids[i]
+                    }));
+
+                this.patchAnswer(uploadedFiles, guids);
             });
     }
 
-    private setUploadedFile(file: ActivityFileAnswerDto | null): void {
-        this.uploadedFile = file;
-    }
-
-    private patchAnswer(file: ActivityFileAnswerDto | null, fileUploadGuid?: string): void {
-        this.block.answer = file || null;
-        this.valueChanged.emit(fileUploadGuid || null);
+    private patchAnswer(files: ActivityFileAnswerDto[] | null, guids: string[]): void {
+        if(files !== null) {
+            this.uploadedFiles.push(...files);
+            this.uploadFilesGuids.push(...guids);
+            this.block?.answer?.push(...files);
+        }
+        this.valueChanged.emit(this.uploadFilesGuids);
     }
 
     private getFailedLocalValidator(file: File): ActivityFileValidationRule {
