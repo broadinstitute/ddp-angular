@@ -38,6 +38,8 @@ a:not(.button) {
 
   .link {
     color: $__purple;
+    text-align: center;
+    display: inline-block;
 
     &:hover {
       color: #4d198b;
