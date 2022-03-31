@@ -20,7 +20,7 @@ import { ActivityServiceAgent } from '../../../../services/serviceAgents/activit
 import { LoggingService } from '../../../../services/logging.service';
 import { ModalActivityBlockComponent } from '../modalActivityBlock/modalActivityBlock.component';
 import { BlockVisibility } from '../../../../models/activity/blockVisibility';
-import { ActivityActionsAgent } from 'ddp-sdk';
+import { ActivityActionsAgent } from '../../../../services/serviceAgents/activityActionsAgent.service';
 
 @Component({
     selector: 'ddp-activity-block',
