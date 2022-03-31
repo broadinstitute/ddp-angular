@@ -132,7 +132,6 @@ sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
 sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 sdkConfig.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl; // TODO: add the URL value in config file
 sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
-sdkConfig.auth0ClaimNameSpace = DDP_ENV.auth0ClaimNameSpace;
 
 @NgModule({
     declarations: [

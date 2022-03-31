@@ -379,15 +379,6 @@ export class DSMService {
     );
   }
 
-
-//TODO remove before final merge, for testing only
-  testDSSGetActivity( participantId: string ): Observable<any> {
-    const url = this.baseUrl + DSMService.UI + 'dsstest/' + participantId;
-    return this.http.get(url, this.buildHeader()).pipe(
-      catchError(this.handleError)
-    );
-  }
-
   public saveMedicalRecordLog(medicalRecordId: string, json: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'medicalRecord/' + medicalRecordId + '/log';
     return this.http.patch(url, json, this.buildHeader()).pipe(
