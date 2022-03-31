@@ -158,7 +158,8 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
 
     onBlur(value: string, data: CategorizedPicklistOptions): void {
         if(value) {
-            const matchingOption = data.currentAutoCompleteOptions.find(pl => value.toLocaleLowerCase() === pl.optionLabel.toLocaleLowerCase());
+            const matchingOption =
+                data.currentAutoCompleteOptions.find(pl => value.toLocaleLowerCase() === pl.optionLabel.toLocaleLowerCase());
             const plOption = matchingOption ? matchingOption : this.createNotListedOption(data.userEnteredStringOption);
             this.onValueSelect(plOption);
         }
