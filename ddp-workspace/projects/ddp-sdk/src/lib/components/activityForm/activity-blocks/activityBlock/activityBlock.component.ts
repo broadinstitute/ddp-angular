@@ -20,6 +20,7 @@ import { ActivityServiceAgent } from '../../../../services/serviceAgents/activit
 import { LoggingService } from '../../../../services/logging.service';
 import { ModalActivityBlockComponent } from '../modalActivityBlock/modalActivityBlock.component';
 import { BlockVisibility } from '../../../../models/activity/blockVisibility';
+import { ActivityActionsAgent } from '../../../../services/serviceAgents/activityActionsAgent.service';
 
 @Component({
     selector: 'ddp-activity-block',
@@ -44,6 +45,7 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     private readonly LOG_SOURCE = 'ActivityBlockComponent';
 
     constructor(private activityServiceAgent: ActivityServiceAgent,
+                private activityActionsAgent: ActivityActionsAgent,
                 private logger: LoggingService,
                 private cdr: ChangeDetectorRef) {
     }
@@ -60,6 +62,7 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
     onDeleteChildInstance(instanceGuid: string): void {
         const index = this.childInstances.findIndex(instance => instance.instanceGuid === instanceGuid);
         this.childInstances.splice(index, 1);
+        this.activityActionsAgent.emitActivityBlockInstancesUpdated();
     }
 
     createChildInstance(): void {

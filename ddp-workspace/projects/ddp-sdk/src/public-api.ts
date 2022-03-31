@@ -14,6 +14,7 @@ export * from './lib/models/logLevel';
 export * from './lib/models/activity/activityStatusCodes';
 export * from './lib/models/activity/dateRenderMode';
 export * from './lib/models/activity/dateField';
+export * from './lib/models/activity/activityBlockType';
 export * from './lib/models/activity/activityActivityBlock';
 export * from './lib/models/activity/activitySection';
 export * from './lib/models/activity/activityRenderHintType';
@@ -64,6 +65,7 @@ export * from './lib/models/mailAddressFormErrorFormatter';
 export * from './lib/models/funcType';
 
 export * from './lib/services/logging.service';
+export * from './lib/services/serviceAgents/activityActionsAgent.service';
 export * from './lib/services/serviceAgents/serviceAgent.service';
 export * from './lib/services/serviceAgents/userActivityServiceAgent.service';
 export * from './lib/services/serviceAgents/activityServiceAgent.service';
