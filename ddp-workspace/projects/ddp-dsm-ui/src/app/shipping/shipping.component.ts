@@ -633,7 +633,7 @@ export class ShippingComponent implements OnInit {
     const map: { kit: string } [] = [];
     for (const kitRequest of this.kitRequests) {
       if (kitRequest.setSent) {
-        map.push({kit: kitRequest.shippingId});
+        map.push({kit: kitRequest.ddpLabel});
       }
     }
     this.dsmService.setKitSentRequest(JSON.stringify(map)).subscribe({

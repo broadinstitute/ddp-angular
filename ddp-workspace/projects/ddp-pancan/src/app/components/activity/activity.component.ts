@@ -17,6 +17,17 @@ type Block = ActivitySection['blocks'][number]
     providers: [SubmitAnnouncementService, SubmissionManager],
 })
 export class ActivityComponent extends ActivityRedesignedComponent {
+    showEmptyNestedActivityError = false;
+
+    public incrementStep(): void {
+        if (this.hasNoEmptyNestedActivity) {
+            this.showEmptyNestedActivityError = false;
+            super.incrementStep();
+        } else {
+            this.showEmptyNestedActivityError = true;
+        }
+    }
+
     get hasNoEmptyNestedActivity(): boolean {
         const enabledActivityBlocks = this.currentSection.blocks.filter(this.isActiveModalActivityBlock) as ActivityActivityBlock[];
 

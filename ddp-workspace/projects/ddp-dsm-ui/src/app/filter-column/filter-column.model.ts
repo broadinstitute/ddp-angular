@@ -118,9 +118,7 @@ export class Filter {
     new NameValue('yes', 'Yes'),
     new NameValue('no', 'No')]);
   public static MR_NOTES = new Filter(ParticipantColumn.MR_NOTES, Filter.TEXT_TYPE);
-  public static MR_REVIEW = new Filter(ParticipantColumn.MR_REVIEW, Filter.OPTION_TYPE, [
-    new NameValue('yes', 'Yes'),
-    new NameValue('no', 'No')]);
+  public static MR_REVIEW = new Filter(ParticipantColumn.MR_REVIEW, Filter.CHECKBOX_TYPE);
   // public static MR_FOLLOW_UP = new Filter( ParticipantColumn.MR_FOLLOW_UP, Filter.CHECKBOX_TYPE ); //TODO wrong Type
   public static MR_FOLLOW_REQUIRED = new Filter(ParticipantColumn.MR_FOLLOW_REQUIRED, Filter.CHECKBOX_TYPE);
   public static MR_FOLLOW_REQUIRED_TEXT = new Filter(ParticipantColumn.MR_FOLLOW_REQUIRED_TEXT, Filter.TEXT_TYPE);
@@ -471,12 +469,6 @@ export class Filter {
         }
       }
     }
-    for (const filter of filters) {
-      if (filter.type !== Filter.JSON_ARRAY_TYPE && filter.participantColumn.object != null && filter.participantColumn.object !== '') {
-        filter.parentName = filter.participantColumn.object;
-      }
-
-    }
     return filters;
   }
 
@@ -560,7 +552,11 @@ export class Filter {
             && filter.additionalType !== Filter.ACTIVITY_STAFF_TYPE) {
             selected.push(filter.options[key].value);
           } else {
-            selected.push(filter.options[key].name);
+            if (Filter.isFilterRelatedToAssignees(filter.participantColumn.name)) {
+              selected.push(filter.options[key].value);
+            } else {
+              selected.push(filter.options[key].name);
+            }
           }
         }
       }
@@ -578,14 +574,16 @@ export class Filter {
           new NameValue('additionalValuesJson', filter.value1),
           filter.filter2, null,
           filter.exactMatch, filter.type, filter.range, filter.empty, filter.notEmpty, filter.participantColumn, filter.additionalType);
-      } else if (filter.selectedOptions.length > 0) {
+      } else if (filter.selectedOptions && filter.selectedOptions.length > 0) {
         const selectedOptions = <Array<boolean>>filter.selectedOptions;
         const trueIndex = selectedOptions.indexOf(true);
-        const chosenValue = filter.options[trueIndex].value;
-        filterText = this.getFilterJson(parent,
+        if (trueIndex !== -1) {
+          const chosenValue = filter.options[trueIndex].value;
+          filterText = this.getFilterJson(parent,
           new NameValue('additionalValuesJson', chosenValue),
           filter.filter2, null,
           filter.exactMatch, filter.type, filter.range, filter.empty, filter.notEmpty, filter.participantColumn, filter.additionalType);
+        }
       } else {
         return null;
       }
@@ -622,6 +620,10 @@ export class Filter {
       filterText['parentName'] = filter.participantColumn.object;
     }
     return filterText;
+  }
+
+  private static isFilterRelatedToAssignees(filter: String): Boolean {
+    return filter === 'assigneeIdMr' || filter === 'assigneeIdTissue';
   }
 
   public static parseFieldSettingsToColumns(fieldSetting: FieldSettings, tableAlias): Filter {

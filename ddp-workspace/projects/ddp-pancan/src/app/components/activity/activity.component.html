@@ -87,7 +87,7 @@
                     <span class="last-updated">{{model.lastUpdatedText}} </span>
                 </ng-container>
 
-                <div *ngIf="!hasNoEmptyNestedActivity" class="ErrorMessage" translate>SDK.CompletionError</div>
+                <div *ngIf="showEmptyNestedActivityError" class="ErrorMessage" translate>SDK.CompletionError</div>
 
                 <div class="activity-buttons" *ngIf="activityGuid"
                      [ngClass]="{'activity-buttons_mobile': (!isStepped || isLastStep) && isAgree() && isLoaded && !isReadonly()}">
@@ -158,7 +158,7 @@
             [innerHTML]="'SDK.PreviousButton' | translate">
     </button>
     <button *ngIf="!isLastStep"
-            [disabled]="(isPageBusy | async) || dataEntryDisabled || !hasNoEmptyNestedActivity"
+            [disabled]="(isPageBusy | async) || dataEntryDisabled"
             class="button button_right next_button"
             [ngClass]="isVerticalProgress? 'button_secondary button_small' : 'button_primary button_medium'"
             (click)="incrementStep()"
