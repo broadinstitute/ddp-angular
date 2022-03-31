@@ -234,7 +234,7 @@ export class Auth {
     const accessToken = null;
     const userGuid = null;
     const locale = 'en';
-    const expiresAtInSeconds = 1e10; // TODO: get rid of that by using a study config flag as to not renew a session
+    const expiresAtInSeconds: number = +this.sessionService.getTokenExpiration();
     // set DSS Session partially
     this.dssSessionService.setSession(accessToken, dsmToken, userGuid, locale, expiresAtInSeconds);
   }

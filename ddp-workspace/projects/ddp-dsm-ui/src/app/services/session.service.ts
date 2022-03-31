@@ -40,4 +40,8 @@ export class SessionService {
   public getDSMClaims(value: string): any {
     return this.jwtHelper.decodeToken(value);
   }
+
+  getTokenExpiration(): Date {
+    return this.authExpiration;
+  }
 }
