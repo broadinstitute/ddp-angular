@@ -25,10 +25,6 @@ export class ActivityComponent extends ActivityRedesignedComponent {
      document.body.firstElementChild.scrollTo(0,0);
   }
 
-  flush(): void {
-      super.flush();
-      this.scrollToTop();
-  }
 
   get captchaSiteKey(): string {
     return DDP_ENV.recaptchaSiteClientKey;
