@@ -18,18 +18,11 @@ export class FormDataComponent {
 
   currentPatchField: string;
 
-  getActivityAnswer(): any {
+  getActivityAnswer(): string {
     if (this.fieldSetting.displayType !== 'ACTIVITY')  {
       // get data from dsm db if it is not type activity
       if (this.fieldSetting.displayType !== 'ACTIVITY_STAFF') {
         // return savedAnswer if it is not type activity_staff
-       if (this.fieldSetting.displayType === 'CHECKBOX') {
-         if (this.participantData === 'true') {
-           return true;
-         } else {
-           return false;
-         }
-       }
         return this.participantData ? this.participantData.toString() : this.participantData;
       } else {
         // if it is type activity_staff only return if it is not empty, otherwise return answer from the activity
