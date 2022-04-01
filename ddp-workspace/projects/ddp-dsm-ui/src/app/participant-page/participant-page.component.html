@@ -191,6 +191,14 @@ participant.data.dsm['diagnosisYear'] != null">
           </tr>
           </tbody>
         </table>
+        <!--TODO remove before final merge, for testing only -->
+        <div *ngIf="hasRole().allowedToTestDSSActivity() && participant.data != null">
+          <button mat-mini-fab color="primary" class="mat-fab-bottom-left" (click)="testGetActivity(participant.data.profile['guid'])">
+            <i class="fa-thin fa-badge-check"></i>
+          </button>
+          <span>Test GET Activity</span>
+
+        </div>
 
         <div *ngIf="isAddFamilyMember" class="Float--right Width--100">
           <div class="family-member-button">
@@ -750,7 +758,7 @@ participant.data.dsm['diagnosisYear'] != null">
                 </thead>
                 <tbody>
                 <tr *ngFor="let mr of mf.data">
-                  <ng-container *ngIf="getInstitutionType(mr.ddpInstitutionId)">
+                  <ng-container *ngIf="mr.showInstitution()">
                     <td (click)="openMedicalRecord(mr)">{{mr.getType()}}</td>
                     <td (click)="openMedicalRecord(mr)">
                       <ng-container
