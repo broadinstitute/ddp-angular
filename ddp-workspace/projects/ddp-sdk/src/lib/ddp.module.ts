@@ -63,6 +63,7 @@ import { InstitutionServiceAgent } from './services/serviceAgents/institutionSer
 import { ResendEmailServiceAgent } from './services/serviceAgents/resendEmailServiceAgent.service';
 import { ParticipantsSearchServiceAgent } from './services/serviceAgents/participantsSearchServiceAgent.service';
 
+import { ActivityActionsAgent } from './services/serviceAgents/activityActionsAgent.service';
 import { ActivityConverter } from './services/activity/activityConverter.service';
 import { ActivityQuestionConverter } from './services/activity/activityQuestionConverter.service';
 import { ActivityComponentConverter } from './services/activity/activityComponentConverter.service';
@@ -305,6 +306,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         MailingListServiceAgent,
         ActivityValidatorBuilder,
         ActivitySuggestionBuilder,
+        ActivityActionsAgent,
         ActivityConverter,
         ActivityQuestionConverter,
         ActivityComponentConverter,

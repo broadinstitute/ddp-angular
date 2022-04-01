@@ -1,15 +1,10 @@
-import { ActivityContentBlock } from './activityContentBlock';
-import { ActivityQuestionBlock } from './activityQuestionBlock';
-import { ActivityInstitutionBlock } from './activityInstitutionBlock';
 import { ActivitySectionIcon } from './activitySectionIcon';
-import { ActivityActivityBlock } from './activityActivityBlock';
-
-type ActivityBlock = ActivityContentBlock | ActivityQuestionBlock<any> | ActivityInstitutionBlock | ActivityActivityBlock;
+import { ActivityBlockType } from './activityBlockType';
 
 export class ActivitySection {
     public name: string;
     public icons: ActivitySectionIcon[];
-    public blocks: Array<ActivityBlock> = [];
+    public blocks: Array<ActivityBlockType> = [];
     public valid: boolean;
     public visible: boolean;
 
@@ -18,7 +13,7 @@ export class ActivitySection {
     }
 
     // recursively return all the child blocks contained in section
-    public allChildBlocks(): Array<ActivityBlock> {
+    public allChildBlocks(): Array<ActivityBlockType> {
         return this.blocks.reduce((acc, val) => acc.concat(val.blocks), []);
     }
 

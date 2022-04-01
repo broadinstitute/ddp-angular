@@ -546,6 +546,7 @@ jobs:
       - setup-build-workspace
       - setup-shared-env:
           study_key: << pipeline.parameters.study_key >>
+      - run-linter-check
       - run-tests
 
 parameters:
