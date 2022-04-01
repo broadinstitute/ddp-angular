@@ -57,7 +57,7 @@ export class Data {
   }
 
   private static activities(acts: ActivityData[]): ActivityData[] {
-    return acts.map(act => ActivityData.parse(act));
+    return acts?.map(act => ActivityData.parse(act));
   }
 
   public getGroupedOptionsForAnswer( questionAnswer: QuestionAnswer): string[]  {

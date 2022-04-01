@@ -2127,7 +2127,7 @@ export class ParticipantListComponent implements OnInit {
   private createFilter(field: any): Filter {
     let showType = field.displayType;
     let filter: Filter = new Filter(
-      new ParticipantColumn(field.columnDisplay.replace('*', ''), field.columnName, 'participantData', field.fieldType, false),
+      new ParticipantColumn(field.columnDisplay?.replace('*', ''), field.columnName, 'participantData', field.fieldType, false),
       showType,
       field.possibleValues
     );
