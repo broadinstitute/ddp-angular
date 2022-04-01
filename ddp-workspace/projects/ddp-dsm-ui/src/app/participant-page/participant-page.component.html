@@ -750,7 +750,7 @@ participant.data.dsm['diagnosisYear'] != null">
                 </thead>
                 <tbody>
                 <tr *ngFor="let mr of mf.data">
-                  <ng-container *ngIf="getInstitutionType(mr.ddpInstitutionId)">
+                  <ng-container *ngIf="mr.showInstitution()">
                     <td (click)="openMedicalRecord(mr)">{{mr.getType()}}</td>
                     <td (click)="openMedicalRecord(mr)">
                       <ng-container

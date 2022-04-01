@@ -172,10 +172,32 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       this.scrolled = true;
     }
     this.validateEmailInput(this.participant.data.profile['email']);
-    this.isOncHistoryVisible = !!this.participant.data.dsm[ 'hasConsentedToTissueSample' ]
-                            && !!this.participant.participant.ddpParticipantId;
+    this.isOncHistoryVisible = this.participant.data.status === 'ENROLLED';
 
-    this.displayAtivityOrder();
+    this.displayActivityOrder();
+    this.addMedicalProviderInformation();
+  }
+
+  addMedicalProviderInformation() {
+    if (this.participant != null && this.participant.data != null
+      && this.participant.data.profile != null && this.participant.data.medicalProviders != null && this.participant.medicalRecords) {
+      if (this.participant.medicalRecords.length > 0) {
+        this.participant.medicalRecords.forEach(medicalRecord => {
+          const medicalProvider = this.participant.data.medicalProviders.find(medProvider => {
+            const tmpId = medProvider.legacyGuid != null && medProvider.legacyGuid !== 0 ?
+              medProvider.legacyGuid : medProvider.guid;
+            return tmpId === medicalRecord.ddpInstitutionId;
+          });
+          medicalRecord.type = medicalProvider.type;
+          medicalRecord.nameDDP = medicalProvider.physicianName;
+          medicalRecord.institutionDDP = medicalProvider.institutionName;
+          medicalRecord.streetAddressDDP = medicalProvider.street;
+          medicalRecord.cityDDP = medicalProvider.city;
+          medicalRecord.stateDDP = medicalProvider.state;
+        })
+      }
+    }
+    debugger;
   }
 
   ngAfterViewChecked(): void {
@@ -190,7 +212,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     clearInterval(this.checkParticipantStatusInterval);
   }
 
-  displayAtivityOrder(): void {
+  displayActivityOrder(): void {
     const orderedActivities = [];
 
     [...this.activityDefinitions].sort(({displayOrder: A},{displayOrder: B}) => A - B)
@@ -403,21 +425,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         this.addEmptyOncHistoryRow();
       }
     }
-  }
-
-  getInstitutionType(ddpInstitutionId: string): boolean {
-    if (this.participant != null && this.participant.data != null
-      && this.participant.data.profile != null && this.participant.data.medicalProviders != null) {
-      const medicalProvider = this.participant.data.medicalProviders.find(medProvider => {
-        const tmpId = medProvider.legacyGuid != null && medProvider.legacyGuid !== 0 ?
-          medProvider.legacyGuid : medProvider.guid;
-        return tmpId === ddpInstitutionId;
-      });
-      if (medicalProvider != null) {
-        return 'PHYSICIAN' === medicalProvider.type || 'INSTITUTION' === medicalProvider.type || 'INITIAL_BIOPSY' === medicalProvider.type;
-      }
-    }
-    return false;
   }
 
   addEmptyOncHistoryRow(): void {
