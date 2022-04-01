@@ -1,41 +1,41 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy, AfterViewChecked} from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { TabDirective } from 'ngx-bootstrap/tabs';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ActivityDefinition } from '../activity-data/models/activity-definition.model';
-import { FieldSettings } from '../field-settings/field-settings.model';
-import { ParticipantData } from '../participant-list/models/participant-data.model';
-import { PreferredLanguage } from '../participant-list/models/preferred-languages.model';
-import { Participant } from '../participant-list/participant-list.model';
-import { PDFModel } from '../pdf-download/pdf-download.model';
+import {AfterViewChecked, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {TabDirective} from 'ngx-bootstrap/tabs';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ActivityDefinition} from '../activity-data/models/activity-definition.model';
+import {FieldSettings} from '../field-settings/field-settings.model';
+import {ParticipantData} from '../participant-list/models/participant-data.model';
+import {PreferredLanguage} from '../participant-list/models/preferred-languages.model';
+import {Participant} from '../participant-list/participant-list.model';
+import {PDFModel} from '../pdf-download/pdf-download.model';
 
-import { ComponentService } from '../services/component.service';
-import { Auth } from '../services/auth.service';
-import { DSMService } from '../services/dsm.service';
-import { MedicalRecord } from '../medical-record/medical-record.model';
-import { RoleService } from '../services/role.service';
-import { Statics } from '../utils/statics';
-import { Utils } from '../utils/utils';
-import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
-import { ModalComponent } from '../modal/modal.component';
-import { Tissue } from '../tissue/tissue.model';
-import { Value } from '../utils/value.model';
-import { Result } from '../utils/result.model';
-import { NameValue } from '../utils/name-value.model';
-import { Abstraction } from '../medical-record-abstraction/medical-record-abstraction.model';
-import { AbstractionGroup, AbstractionWrapper } from '../abstraction-group/abstraction-group.model';
-import { PatchUtil } from '../utils/patch.model';
-import { ParticipantUpdateResultDialogComponent } from '../dialogs/participant-update-result-dialog.component';
-import { AddFamilyMemberComponent } from '../popups/add-family-member/add-family-member.component';
-import { Sample } from '../participant-list/models/sample.model';
-import { ParticipantDSMInformation } from '../participant-list/models/participant.model';
+import {ComponentService} from '../services/component.service';
+import {Auth} from '../services/auth.service';
+import {DSMService} from '../services/dsm.service';
+import {MedicalRecord} from '../medical-record/medical-record.model';
+import {RoleService} from '../services/role.service';
+import {Statics} from '../utils/statics';
+import {Utils} from '../utils/utils';
+import {OncHistoryDetail} from '../onc-history-detail/onc-history-detail.model';
+import {ModalComponent} from '../modal/modal.component';
+import {Tissue} from '../tissue/tissue.model';
+import {Value} from '../utils/value.model';
+import {Result} from '../utils/result.model';
+import {NameValue} from '../utils/name-value.model';
+import {Abstraction} from '../medical-record-abstraction/medical-record-abstraction.model';
+import {AbstractionGroup, AbstractionWrapper} from '../abstraction-group/abstraction-group.model';
+import {PatchUtil} from '../utils/patch.model';
+import {ParticipantUpdateResultDialogComponent} from '../dialogs/participant-update-result-dialog.component';
+import {AddFamilyMemberComponent} from '../popups/add-family-member/add-family-member.component';
+import {Sample} from '../participant-list/models/sample.model';
+import {ParticipantDSMInformation} from '../participant-list/models/participant.model';
 
 const fileSaver = require('file-saver');
 
 @Component({
   selector: 'app-participant-page',
   templateUrl: './participant-page.component.html',
-  styleUrls: [ './participant-page.component.css' ]
+  styleUrls: ['./participant-page.component.css']
 })
 export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild(ModalComponent)
@@ -123,13 +123,14 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   message: string = null;
   bundle = false;
   private scrolled: boolean;
+
   constructor(private auth: Auth, private compService: ComponentService, private dsmService: DSMService, private router: Router,
-               private role: RoleService, private util: Utils, private route: ActivatedRoute, public dialog: MatDialog) {
+              private role: RoleService, private util: Utils, private route: ActivatedRoute, public dialog: MatDialog) {
     if (!auth.authenticated()) {
       auth.logout();
     }
     this.route.queryParams.subscribe(params => {
-      const realm = params[ DSMService.REALM ] || null;
+      const realm = params[DSMService.REALM] || null;
       if (realm != null) {
         //        this.compService.realmMenu = realm;
         this.leaveParticipant.emit(null);
@@ -141,7 +142,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   ngOnInit(): void {
     this.setDefaultProfileValues();
     this.payload = {
-      participantGuid: this.participant.data.profile[ 'guid' ],
+      participantGuid: this.participant.data.profile['guid'],
       instanceName: this.compService.getRealm(),
       data: {}
     };
@@ -150,37 +151,38 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         this.dsmService.checkUpdatingParticipantStatus().subscribe({
           next: data => {
             const parsedData = JSON.parse(data.body);
-            if (parsedData[ 'resultType' ] === 'SUCCESS'
-                && this.isReturnedUserAndParticipantTheSame(parsedData)) {
+            if (parsedData['resultType'] === 'SUCCESS'
+              && this.isReturnedUserAndParticipantTheSame(parsedData)) {
               this.updateParticipantObjectOnSuccess();
               this.openResultDialog('Participant successfully updated');
-            } else if (parsedData[ 'resultType' ] === 'ERROR'
-                && this.isReturnedUserAndParticipantTheSame(parsedData)) {
-              this.openResultDialog(parsedData[ 'errorMessage' ]);
+            } else if (parsedData['resultType'] === 'ERROR'
+              && this.isReturnedUserAndParticipantTheSame(parsedData)) {
+              this.openResultDialog(parsedData['errorMessage']);
             }
-         },
+          },
           error: () => {
             this.openResultDialog('Error - Failed to update participant');
-         }
+          }
         });
       }
     }, 5000);
     this.loadInstitutions();
     this.scrolled = false;
-    if(!this.selectedActivityCode) {
-      window.scrollTo( 0, 0 );
+    if (!this.selectedActivityCode) {
+      window.scrollTo(0, 0);
       this.scrolled = true;
     }
     this.validateEmailInput(this.participant.data.profile['email']);
-    this.isOncHistoryVisible = !!this.participant.data.dsm[ 'hasConsentedToTissueSample' ]
-                            && !!this.participant.participant.ddpParticipantId;
+    this.isOncHistoryVisible = !!this.participant.data.dsm['hasConsentedToTissueSample']
+      && !!this.participant.participant.ddpParticipantId;
 
     this.displayAtivityOrder();
   }
 
   ngAfterViewChecked(): void {
-    if ( !this.selectedActivityCode || this.scrolled || !document.getElementById(this.selectedActivityCode))
-      {return;}
+    if (!this.selectedActivityCode || this.scrolled || !document.getElementById(this.selectedActivityCode)) {
+      return;
+    }
 
     document.getElementById(this.selectedActivityCode).scrollIntoView();
     this.scrolled = true;
@@ -193,51 +195,51 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   displayAtivityOrder(): void {
     const orderedActivities = [];
 
-    [...this.activityDefinitions].sort(({displayOrder: A},{displayOrder: B}) => A - B)
+    [...this.activityDefinitions].sort(({displayOrder: A}, {displayOrder: B}) => A - B)
       .forEach(activity => {
-      const foundActivity = this.participant.data.activities
-        .find(a => activity.activityCode === a.activityCode && activity.activityVersion === a.activityVersion);
-      foundActivity && orderedActivities.push(foundActivity);
-    });
+        const foundActivity = this.participant.data.activities
+          .find(a => activity.activityCode === a.activityCode && activity.activityVersion === a.activityVersion);
+        foundActivity && orderedActivities.push(foundActivity);
+      });
 
     this.participant.data.activities = orderedActivities;
   }
 
   showFamilyMemberPopUpOnClick(): void {
     this.dialog.open(AddFamilyMemberComponent, {
-      data: {participant : this.participant},
-      disableClose : true,
+      data: {participant: this.participant},
+      disableClose: true,
     });
   }
 
   private setDefaultProfileValues(): void {
-    this.updatedFirstName = this.participant.data.profile[ 'firstName' ];
-    this.updatedLastName = this.participant.data.profile[ 'lastName' ];
-    this.updatedEmail = this.participant.data.profile[ 'email' ];
-    this.updatedDNC = this.participant.data.profile[ 'doNotContact' ];
+    this.updatedFirstName = this.participant.data.profile['firstName'];
+    this.updatedLastName = this.participant.data.profile['lastName'];
+    this.updatedEmail = this.participant.data.profile['email'];
+    this.updatedDNC = this.participant.data.profile['doNotContact'];
   }
 
   private isReturnedUserAndParticipantTheSame(parsedData: any): boolean {
-    return parsedData[ 'participantGuid' ] === this.participant.data.profile[ 'guid' ]
-    && parsedData[ 'userId'] === this.role.userID();
+    return parsedData['participantGuid'] === this.participant.data.profile['guid']
+      && parsedData['userId'] === this.role.userID();
   }
 
   private updateParticipantObjectOnSuccess(): void {
     switch (this.taskType) {
       case 'UPDATE_FIRSTNAME': {
-        this.participant.data.profile[ 'firstName' ] = this.updatedFirstName;
+        this.participant.data.profile['firstName'] = this.updatedFirstName;
         break;
       }
       case 'UPDATE_LASTNAME': {
-        this.participant.data.profile[ 'lastName' ] = this.updatedLastName;
+        this.participant.data.profile['lastName'] = this.updatedLastName;
         break;
       }
       case 'UPDATE_EMAIL': {
-        this.participant.data.profile[ 'email' ] = this.updatedEmail;
+        this.participant.data.profile['email'] = this.updatedEmail;
         break;
       }
       case 'UPDATE_DNC': {
-        this.participant.data.profile[ 'doNotContact' ] = this.updatedDNC;
+        this.participant.data.profile['doNotContact'] = this.updatedDNC;
         break;
       }
       default: {
@@ -250,7 +252,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   private openResultDialog(text: string): void {
     this.updatingParticipant = false;
     this.dialog.open(ParticipantUpdateResultDialogComponent, {
-      data: { message: text },
+      data: {message: text},
     });
   }
 
@@ -265,37 +267,37 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   updateFirstName(): void {
     this.updatingParticipant = true;
     this.taskType = 'UPDATE_FIRSTNAME';
-    this.payload[ 'data' ][ 'firstName' ] = this.updatedFirstName;
+    this.payload['data']['firstName'] = this.updatedFirstName;
     this.dsmService.updateParticipant(JSON.stringify(this.payload)).subscribe({
       error: () => {
         this.openResultDialog('Error - Failed to update participant');
       }
     });
-    delete this.payload[ 'data' ][ 'firstName' ];
+    delete this.payload['data']['firstName'];
   }
 
   updateLastName(): void {
     this.updatingParticipant = true;
     this.taskType = 'UPDATE_LASTNAME';
-    this.payload[ 'data' ][ 'lastName' ] = this.updatedLastName;
+    this.payload['data']['lastName'] = this.updatedLastName;
     this.dsmService.updateParticipant(JSON.stringify(this.payload)).subscribe({
       error: () => {
         this.openResultDialog('Error - Failed to update participant');
       }
     });
-    delete this.payload[ 'data' ][ 'lastName' ];
+    delete this.payload['data']['lastName'];
   }
 
   updateEmail(): void {
     this.updatingParticipant = true;
     this.taskType = 'UPDATE_EMAIL';
-    this.payload[ 'data' ][ 'email' ] = this.updatedEmail;
+    this.payload['data']['email'] = this.updatedEmail;
     this.dsmService.updateParticipant(JSON.stringify(this.payload)).subscribe({
       error: () => {
         this.openResultDialog('Error - Failed to update participant');
       }
     });
-    delete this.payload[ 'data' ][ 'email' ];
+    delete this.payload['data']['email'];
   }
 
   validateEmailInput(changedValue): void {
@@ -313,13 +315,13 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   updateDNC(): void {
     this.updatingParticipant = true;
     this.taskType = 'UPDATE_DNC';
-    this.payload[ 'data' ][ 'doNotContact' ] = this.updatedDNC;
-    this.dsmService.updateParticipant( JSON.stringify( this.payload ) ).subscribe({
+    this.payload['data']['doNotContact'] = this.updatedDNC;
+    this.dsmService.updateParticipant(JSON.stringify(this.payload)).subscribe({
       error: () => {
-        this.openResultDialog( 'Error - Failed to update participant' );
+        this.openResultDialog('Error - Failed to update participant');
       }
     });
-    delete this.payload['data' ][ 'doNotContact' ];
+    delete this.payload['data']['doNotContact'];
   }
 
   getLanguageName(languageCode: string): string {
@@ -359,10 +361,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         this.participantNotConsented = false;
       }
       this.pdfs = new Array<PDFModel>();
-      if (this.participant.data != null && this.participant.data.dsm != null && this.participant.data.dsm[ 'pdfs' ] != null
-        && this.participant.data.dsm[ 'pdfs' ].length > 0
+      if (this.participant.data != null && this.participant.data.dsm != null && this.participant.data.dsm['pdfs'] != null
+        && this.participant.data.dsm['pdfs'].length > 0
       ) {
-        const tmp = this.participant.data.dsm[ 'pdfs' ];
+        const tmp = this.participant.data.dsm['pdfs'];
         if (tmp != null && tmp.length > 0) {
           let pos = 1;
           if (this.participant.oncHistoryDetails != null && this.participant.oncHistoryDetails.length > 0) {
@@ -406,7 +408,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   }
 
   addEmptyOncHistoryRow(): void {
-    if (this.participant.data.dsm[ 'hasConsentedToTissueSample' ]) {
+    if (this.participant.data.dsm['hasConsentedToTissueSample']) {
       let hasEmptyOncHis = false;
       for (const oncHis of this.participant.oncHistoryDetails) {
         if (oncHis.oncHistoryDetailId === null) {
@@ -464,7 +466,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     if (parameterName === 'additionalValuesJson') {
       v = JSON.stringify(value);
     } else if (typeof value === 'string') {
-      this.participant.participant[ parameterName ] = value;
+      this.participant.participant[parameterName] = value;
       v = value;
     } else {
       if (value.srcElement != null && typeof value.srcElement.value === 'string') {
@@ -475,9 +477,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     }
     if (v !== null) {
       const participantId = this.participant.participant.participantId;
-      let ddpParticipantId = this.participant.data.profile[ 'guid' ];
-      if (this.participant.data.profile[ 'legacyAltPid' ] != null && this.participant.data.profile[ 'legacyAltPid' ] !== '') {
-        ddpParticipantId = this.participant.data.profile[ 'legacyAltPid' ];
+      let ddpParticipantId = this.participant.data.profile['guid'];
+      if (this.participant.data.profile['legacyAltPid'] != null && this.participant.data.profile['legacyAltPid'] !== '') {
+        ddpParticipantId = this.participant.data.profile['legacyAltPid'];
       }
       const patch1 = new PatchUtil(
         participantId, this.role.userMail(),
@@ -493,14 +495,14 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
         next: data => {
           if (data) {
-          if (data instanceof Array) {
-            data.forEach( ( val ) => {
+            if (data instanceof Array) {
+              data.forEach((val) => {
                 const nameValue = NameValue.parse(val);
-                this.participant.participant[ nameValue.name ] = nameValue.value;
+                this.participant.participant[nameValue.name] = nameValue.value;
               });
             } else {
               if (data['participantId']) {
-              this.participant.participant.participantId = data['participantId'];
+                this.participant.participant.participantId = data['participantId'];
               }
             }
           }
@@ -522,7 +524,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     let v;
     const realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     if (typeof value === 'string') {
-      oncHis[ parameterName ] = value;
+      oncHis[parameterName] = value;
       v = value;
     } else if (value != null) {
       if (value.srcElement != null && typeof value.srcElement.value === 'string') {
@@ -537,7 +539,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
       const patch1 = new PatchUtil(
         oncHis.oncHistoryDetailId, this.role.userMail(), {name: parameterName, value: v},
-        null, 'participantId', oncHis.participantId, Statics.ONCDETAIL_ALIAS,  null,
+        null, 'participantId', oncHis.participantId, Statics.ONCDETAIL_ALIAS, null,
         realm, this.participant.participant.ddpParticipantId
       );
       const patch = patch1.getPatch();
@@ -547,9 +549,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         next: data => {
           if (data) {
             if (data instanceof Array) {
-              data.forEach( ( val ) => {
+              data.forEach((val) => {
                 const nameValue = NameValue.parse(val);
-                oncHis[ nameValue.name.substring(3) ] = nameValue.value;
+                oncHis[nameValue.name.substring(3)] = nameValue.value;
               });
             }
           }
@@ -669,7 +671,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     const patch1 = new PatchUtil(
       this.noteMedicalRecord.medicalRecordId, this.role.userMail(),
       {name: 'notes', value: this.noteMedicalRecord.notes},
-      null, null, null, Statics.MR_ALIAS,  null,
+      null, null, null, Statics.MR_ALIAS, null,
       localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.participant.participant.ddpParticipantId
     );
     const patch = patch1.getPatch();
@@ -712,17 +714,17 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
               // eslint-disable-next-line @typescript-eslint/no-shadow
               const date = new Date();
               if (oncHis.faxSent == null) {
-                oncHis.faxSent = Utils.getFormattedDate( date );
+                oncHis.faxSent = Utils.getFormattedDate(date);
                 oncHis.faxSentBy = this.role.userID();
-                this.oncHistoryValueChanged( oncHis.faxSent, 'faxSent', oncHis );
+                this.oncHistoryValueChanged(oncHis.faxSent, 'faxSent', oncHis);
               } else if (oncHis.faxSent2 == null) {
-                oncHis.faxSent2 = Utils.getFormattedDate( date );
+                oncHis.faxSent2 = Utils.getFormattedDate(date);
                 oncHis.faxSent2By = this.role.userID();
-                this.oncHistoryValueChanged( oncHis.faxSent2, 'faxSent2', oncHis );
+                this.oncHistoryValueChanged(oncHis.faxSent2, 'faxSent2', oncHis);
               } else {
-                oncHis.faxSent3 = Utils.getFormattedDate( date );
+                oncHis.faxSent3 = Utils.getFormattedDate(date);
                 oncHis.faxSent3By = this.role.userID();
-                this.oncHistoryValueChanged( oncHis.faxSent3, 'faxSent3', oncHis );
+                this.oncHistoryValueChanged(oncHis.faxSent3, 'faxSent3', oncHis);
               }
               oncHis.changedBy = this.role.userMail();
               oncHis.changed = true;
@@ -749,7 +751,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   downloadFile(data: any, type: string): void {
     const blob = new Blob([data], {type: 'application/pdf'});
-    const shortId = this.participant.data.profile[ 'hruid' ];
+    const shortId = this.participant.data.profile['hruid'];
     fileSaver.saveAs(blob, shortId + type + Statics.PDF_FILE_EXTENSION);
   }
 
@@ -805,11 +807,11 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   }
 
   getBloodConsent(): boolean {
-    return this.participant.data.dsm[ 'hasConsentedToBloodDraw' ];
+    return this.participant.data.dsm['hasConsentedToBloodDraw'];
   }
 
   getTissueConsent(): boolean {
-    return this.participant.data.dsm[ 'hasConsentedToTissueSample' ];
+    return this.participant.data.dsm['hasConsentedToTissueSample'];
   }
 
   private loadAbstractionValues(): void {
@@ -867,11 +869,11 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     this.loadingParticipantPage = true;
     const ddpParticipantId = this.participant.participant.ddpParticipantId;
     this.dsmService.changeMedicalRecordAbstractionStatus(
-        localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
-        ddpParticipantId,
-        'in_progress',
-        abstractionData
-      )
+      localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+      ddpParticipantId,
+      'in_progress',
+      abstractionData
+    )
       .subscribe({ // need to subscribe, otherwise it will not send!
         next: data => {
           const result = Result.parse(data);
@@ -1107,11 +1109,11 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     }
     if (v !== null) {
       if (this.participant.participant != null && this.participant.participant.additionalValuesJson != null) {
-        this.participant.participant.additionalValuesJson[ colName ] = v;
+        this.participant.participant.additionalValuesJson[colName] = v;
       } else {
-        let participantId = this.participant.data.profile[ 'guid' ];
-        if (this.participant.data.profile[ 'legacyAltPid' ] != null && this.participant.data.profile[ 'legacyAltPid' ] !== '') {
-          participantId = this.participant.data.profile[ 'legacyAltPid' ];
+        let participantId = this.participant.data.profile['guid'];
+        if (this.participant.data.profile['legacyAltPid'] != null && this.participant.data.profile['legacyAltPid'] !== '') {
+          participantId = this.participant.data.profile['legacyAltPid'];
         }
         this.participant.participant = new ParticipantDSMInformation(
           null, participantId, localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
@@ -1119,7 +1121,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           false, false, false, false, 0, null
         );
         const addArray = {};
-        addArray[ colName ] = v;
+        addArray[colName] = v;
         this.participant.participant.additionalValuesJson = addArray;
       }
       this.valueChanged(this.participant.participant.additionalValuesJson, 'additionalValuesJson', 'r');
@@ -1176,12 +1178,12 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     return '';
   }
 
-  getParticipantDataFromSingleParticipant(fieldSetting: FieldSettings): string {
+  getParticipantForDynamicField(fieldSetting: FieldSettings): string {
     if (this.participant && this.participant.participantData && fieldSetting.columnName) {
-      for (const participantData of this.participant.participantData) {
-        if (participantData != null && participantData.data != null && participantData.data[fieldSetting.columnName] != null) {
-          return participantData.data[fieldSetting.columnName];
-        }
+      const participantDataFound = this.participant.participantData
+        .find(participantData => participantData.data && participantData.data[fieldSetting.columnName] != null);
+      if (participantDataFound) {
+        return participantDataFound.data[fieldSetting.columnName];
       }
     }
     return '';
@@ -1199,7 +1201,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         const participantData = this.participant.participantData.find(pData => pData.fieldTypeId === columnName);
         if (participantData != null && participantData.data != null) {
           replacements.forEach(replace => {
-            const value = participantData.data[ replace.trim() ];
+            const value = participantData.data[replace.trim()];
             if (value != null) {
               tmp = tmp.replace('#' + replace.trim(), value);
             }
@@ -1222,13 +1224,13 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     if (fieldSetting.displayType === 'ACTIVITY' || fieldSetting.displayType === 'ACTIVITY_STAFF') {
       if (fieldSetting.possibleValues != null && fieldSetting.possibleValues[0] != null && fieldSetting.possibleValues[0].value != null
         && fieldSetting.possibleValues[0].type != null) {
-        const tmp: string[] = fieldSetting.possibleValues[ 0 ].value.split('.');
+        const tmp: string[] = fieldSetting.possibleValues[0].value.split('.');
         if (tmp != null && tmp.length > 1) {
           if (tmp.length === 2) {
             if (this.activityDefinitions != null) {
-              const definition: ActivityDefinition = this.activityDefinitions.find(def => def.activityCode === tmp[ 0 ]);
+              const definition: ActivityDefinition = this.activityDefinitions.find(def => def.activityCode === tmp[0]);
               if (definition != null && definition.questions != null) {
-                const question = definition.questions.find(q => q.stableId === tmp[ 1 ]);
+                const question = definition.questions.find(q => q.stableId === tmp[1]);
                 if (question != null) {// && question.options != null) {
                   if (question.questionType !== 'BOOLEAN' && question.options != null) {
                     const options: NameValue[] = [];
@@ -1272,9 +1274,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     ) {
       let participantData: ParticipantData = this.participant.participantData.find(pData => pData.dataId === dataId);
       if (participantData == null) {
-        const data: { [ k: string ]: any } = {};
+        const data: { [k: string]: any } = {};
         data[fieldSetting.columnName] = value;
-        participantData = new ParticipantData (null, fieldTypeId, data);
+        participantData = new ParticipantData(null, fieldTypeId, data);
         this.participant.participantData.push(participantData);
       }
       if (participantData != null && participantData.data != null) {
@@ -1290,8 +1292,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
               participantDataSec = this.participant.participantData.find(pData => pData.fieldTypeId === action.type);
               if (participantDataSec == null) {
                 if (action.type !== 'ELASTIC_EXPORT.workflows' && action.type !== 'PARTICIPANT_EVENT') {
-                  const data: { [ k: string ]: any } = {};
-                  data[ action.name ] = action.value;
+                  const data: { [k: string]: any } = {};
+                  data[action.name] = action.value;
                   participantDataSec = new ParticipantData(null, action.type, data);
                 } else {
                   // all others studies we do the actions for everyone
@@ -1309,12 +1311,12 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           });
         }
         if (fieldSetting.fieldType === 'RADIO' && fieldSetting.possibleValues != null) {
-          const possibleValue =  fieldSetting.possibleValues.find(v => v.name === fieldSetting.columnName && v.values != null);
+          const possibleValue = fieldSetting.possibleValues.find(v => v.name === fieldSetting.columnName && v.values != null);
         }
 
-        let participantId = this.participant.data.profile[ 'guid' ];
-        if (this.participant.data.profile[ 'legacyAltPid' ] != null && this.participant.data.profile[ 'legacyAltPid' ] !== '') {
-          participantId = this.participant.data.profile[ 'legacyAltPid' ];
+        let participantId = this.participant.data.profile['guid'];
+        if (this.participant.data.profile['legacyAltPid'] != null && this.participant.data.profile['legacyAltPid'] !== '') {
+          participantId = this.participant.data.profile['legacyAltPid'];
         }
         const patch = {
           id: participantData.dataId,
@@ -1322,7 +1324,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           parentId: participantId,
           user: this.role.userMail(),
           fieldId: fieldTypeId,
-          realm:  localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+          realm: localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
           nameValues: nameValue,
           actions: actionPatch,
           tableAlias: 'd',
@@ -1332,9 +1334,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
           next: data => {
             if (data) {
-            if (data['participantDataId']) {
-              if (participantData != null) {
-                participantData.dataId = data['participantDataId'];
+              if (data['participantDataId']) {
+                if (participantData != null) {
+                  participantData.dataId = data['participantDataId'];
                 }
               }
             }
@@ -1342,7 +1344,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.router.navigate([ Statics.HOME_URL ]);
+              this.router.navigate([Statics.HOME_URL]);
             }
           }
         });
@@ -1397,13 +1399,15 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     this.universalModal.show();
     return false;
   }
+
   //TODO remove before final merge, for testing only
   testGetActivity(participantId: string): void {
     this.dsmService.testDSSGetActivity(participantId).subscribe(
       data => {
         console.log(data);
       },
-      err =>{}
+      err => {
+      }
     );
 
   }
