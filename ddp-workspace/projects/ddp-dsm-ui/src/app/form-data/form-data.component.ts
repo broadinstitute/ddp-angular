@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {FieldSettings} from '../field-settings/field-settings.model';
-import {Value} from '../utils/value.model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FieldSettings } from '../field-settings/field-settings.model';
+import { Value } from '../utils/value.model';
 
 @Component({
   selector: 'app-form-data',
@@ -19,7 +19,7 @@ export class FormDataComponent {
   currentPatchField: string;
 
   getActivityAnswer(): string {
-    if (this.fieldSetting.displayType !== 'ACTIVITY') {
+    if (this.fieldSetting.displayType !== 'ACTIVITY')  {
       // get data from dsm db if it is not type activity
       if (this.fieldSetting.displayType !== 'ACTIVITY_STAFF') {
         // return savedAnswer if it is not type activity_staff
