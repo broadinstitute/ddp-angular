@@ -173,7 +173,6 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
         this.sendLastSectionAnalytics();
         this.sendActivityAnalytics(AnalyticsEventCategories.SubmitSurvey);
         super.flush();
-        this.scrollToTop();
     }
 
     public isActive(step: number): boolean {
@@ -313,7 +312,7 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     }
 
     protected scrollToTop(): void {
-        this.document.body.firstElementChild.scrollTo(0,0);
+        this.windowRef.nativeWindow.scrollTo(0,0);
     }
 
     protected nextAvailableSectionIndex(): number {
