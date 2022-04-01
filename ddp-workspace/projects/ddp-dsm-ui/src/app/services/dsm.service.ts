@@ -231,6 +231,48 @@ export class DSMService {
     );
   }
 
+  public downloadParticipantData(realm: string, parent: string, columns: {}, json: ViewFilter, filterQuery: string, sortBy?: Sort): Observable<any> {
+    let viewFilterCopy = null;
+    if (json != null) {
+      if (json.filters != null) {
+        viewFilterCopy = json.copy();
+        for (const filter of json.filters) {
+          if (filter.type === Filter.OPTION_TYPE && filter.participantColumn.tableAlias !== 'participantData') {
+            filter.selectedOptions = filter.getSelectedOptionsName();
+          }
+        }
+      }
+      if (viewFilterCopy != null && viewFilterCopy.filters != null) {
+        for (const filter of viewFilterCopy.filters) {
+          if (filter.type === Filter.OPTION_TYPE && filter.participantColumn.tableAlias !== 'participantData') {
+            filter.selectedOptions = filter.getSelectedOptionsName();
+            filter.options = null;
+          }
+        }
+      }
+    }
+    const url = this.baseUrl + DSMService.UI + 'participantList';
+    const map: { name: string; value: any }[] = [];
+    const userId = this.role.userID();
+    map.push({name: DSMService.REALM, value: realm});
+    map.push({name: 'userId', value: userId});
+    map.push({name: 'parent', value: parent});
+    if (sortBy) {
+      map.push({name: 'sortBy', value: JSON.stringify(sortBy)})
+    }
+    if (filterQuery != null) {
+      map.push({name: 'filterQuery', value: filterQuery});
+    } else if (json == null || json.filters == null) {
+      json && map.push({name: 'filterName', value: json.filterName});
+    } else if (viewFilterCopy != null) {
+      map.push({name: 'filters', value: JSON.stringify(viewFilterCopy.filters)});
+    }
+    const body = {columnNames: columns}
+    return this.http.post(url, JSON.stringify(body), this.buildQueryBlobHeader(map)).pipe(
+      catchError(this.handleError.bind(this))
+    );
+  }
+
   public getParticipantDsmData(realm: string, ddpParticipantId: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'getParticipantData';
     const map: { name: string; value: any }[] = [];
@@ -351,7 +393,7 @@ export class DSMService {
         json[ mrSetting.value ] = mrSetting.selected;
       }
     }
-    return this.http.post(url, JSON.stringify(json), this.buildQueryPDFHeader(map)).pipe(
+    return this.http.post(url, JSON.stringify(json), this.buildQueryBlobHeader(map)).pipe(
       catchError(err => this.handleError(err))
     );
   }
@@ -731,7 +773,7 @@ export class DSMService {
     const url = this.baseUrl + DSMService.UI + 'showUpload';
     const map: { name: string; value: any }[] = [];
     map.push({name: DSMService.REALM, value: realm});
-    return this.http.patch(url, json, this.buildQueryPDFHeader(map)).pipe(
+    return this.http.patch(url, json, this.buildQueryBlobHeader(map)).pipe(
       catchError(this.handleError)
     );
   }
@@ -932,15 +974,7 @@ export class DSMService {
     };
   }
 
-  private buildPDFHeader(): any {
-    return {
-      headers: this.buildJsonAuthHeader(),
-      withCredentials: true,
-      responseType: 'blob'
-    };
-  }
-
-  private buildQueryPDFHeader(map: any[]): any {
+  private buildQueryBlobHeader(map: any[]): any {
     let params: HttpParams = new HttpParams();
     for (const param of map) {
       params = params.append(param.name, param.value);
@@ -949,6 +983,7 @@ export class DSMService {
       headers: this.buildJsonAuthHeader(),
       withCredentials: true,
       responseType: 'blob',
+      observe: 'response',
       params
     };
   }
