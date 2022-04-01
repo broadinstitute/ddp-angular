@@ -172,8 +172,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     public flush(): void {
         this.sendLastSectionAnalytics();
         this.sendActivityAnalytics(AnalyticsEventCategories.SubmitSurvey);
-        this.scrollToTop();
         super.flush();
+        this.scrollToTop();
     }
 
     public isActive(step: number): boolean {
