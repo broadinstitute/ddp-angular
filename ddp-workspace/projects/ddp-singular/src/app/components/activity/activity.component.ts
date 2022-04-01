@@ -21,9 +21,13 @@ export class ActivityComponent extends ActivityRedesignedComponent {
     return this.model && this.model.activityCode === ActivityCode.Prequal;
   }
 
-  flush() {
+  protected scrollToTop(): void {
+     document.body.firstElementChild.scrollTo(0,0);
+  }
+
+  flush(): void {
       super.flush();
-      document.body.firstElementChild.scrollTo(0,0);
+      this.scrollToTop();
   }
 
   get captchaSiteKey(): string {
