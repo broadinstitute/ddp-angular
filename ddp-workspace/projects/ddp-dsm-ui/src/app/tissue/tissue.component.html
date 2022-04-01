@@ -27,7 +27,7 @@
                  [(ngModel)]="tissue.countReceived" (change)="valueChanged($event, 'countReceived')">
         </mat-form-field>
 
-      </td>
+      </td> 
     </tr>
     <tr>
       <td class="TD--Padding">Materials received</td>
@@ -86,6 +86,23 @@
         Scroll(s)
       </td>
     </tr>
+   
+   
+
+    <tr *ngFor="let type of extractSmIdTypes()">
+      <td class="TD--Padding">{{ type }} SM-IDS</td>
+      <td colspan="3">
+        <button md-mini-fab [disabled]="!editable" color="primary" [ngClass]="{'changed':!smIdCountMatch(filterSmIdsByType(type), getCountByType(type))}"
+                (click)="openUSSModal()">
+          <i class="fas fa-plus fa-lg"></i>
+        </button>
+        <span *ngIf="!smIdCountMatch(this.tissue.ussSMId, this.tissue.ussCount)" color="warn">
+          Count and entered SM-IDs do not match! Please open and adjust.
+        </span>
+      </td>
+    </tr>
+
+
     <tr>
       <td class="TD--Padding">USS SM-IDS</td>
       <td colspan="3">

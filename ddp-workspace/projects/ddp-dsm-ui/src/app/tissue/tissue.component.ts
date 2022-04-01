@@ -308,6 +308,11 @@ export class TissueComponent {
     }
   }
 
+  openModalByType(type: string): void {
+    this.currentSMIDField = type;
+    this.SMIDModal.show();
+  }
+
   openUSSModal(): void {
     this.currentSMIDField = this.uss;
     this.SMIDModal.show();
@@ -467,5 +472,32 @@ export class TissueComponent {
   canChangeThis(i: number, name: string): boolean {
     const index = this.createDuplicateIndex(i, name);
     return this.editable && (this.smIdDuplicate[name].size === 0 || this.smIdDuplicate[name].has(index));
+  }
+
+  extractSmIdTypes(): Set<string> {
+    return new Set<string>(this.tissue.smIds?.map(smId => smId.smIdType));
+  }
+
+  filterSmIdsByType(type: string): Array<TissueSmId> {
+    return this.tissue.smIds?.filter(smId => smId.smIdType === type);
+  }
+
+  getCountByType(type: string): number {
+    let count;  
+    switch (type) {
+      case 'uss':
+        count = this.tissue.ussCount;
+        break;
+      case 'he':
+        count = this.tissue.hECount;
+        break;
+      case 'scrolls':
+        count = this.tissue.scrollsCount;
+        break;
+      default:
+        count = -1;
+        break;     
+    }
+    return count;
   }
 }
