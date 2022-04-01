@@ -197,7 +197,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         })
       }
     }
-    debugger;
   }
 
   ngAfterViewChecked(): void {
