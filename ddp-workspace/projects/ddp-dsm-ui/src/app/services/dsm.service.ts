@@ -213,7 +213,8 @@ export class DSMService {
     );
   }
 
-  public downloadParticipantData(realm: string, parent: string, columns: {}, json: ViewFilter, filterQuery: string, sortBy?: Sort): Observable<any> {
+  public downloadParticipantData(realm: string, parent: string, columns: {}, json: ViewFilter, filterQuery: string, sortBy?: Sort):
+    Observable<any> {
     const viewFilterCopy = this.getFilter(json);
     const url = this.baseUrl + DSMService.UI + 'participantList';
     const map: { name: string; value: any }[] = [];
@@ -222,7 +223,7 @@ export class DSMService {
     map.push({name: 'userId', value: userId});
     map.push({name: 'parent', value: parent});
     if (sortBy) {
-      map.push({name: 'sortBy', value: JSON.stringify(sortBy)})
+      map.push({name: 'sortBy', value: JSON.stringify(sortBy)});
     }
     if (filterQuery != null) {
       map.push({name: 'filterQuery', value: filterQuery});
@@ -231,7 +232,7 @@ export class DSMService {
     } else if (viewFilterCopy != null) {
       map.push({name: 'filters', value: JSON.stringify(viewFilterCopy.filters)});
     }
-    const body = {columnNames: columns}
+    const body = {columnNames: columns};
     return this.http.post(url, JSON.stringify(body), this.buildQueryBlobHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );
@@ -1011,7 +1012,7 @@ export class DSMService {
       return true;
     }
   }
-  private getFilter(json : ViewFilter) : ViewFilter {
+  private getFilter(json: ViewFilter): ViewFilter {
     let viewFilterCopy = null;
     if (json != null) {
       if (json.filters != null) {
