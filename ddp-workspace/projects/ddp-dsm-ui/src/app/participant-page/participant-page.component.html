@@ -1018,7 +1018,7 @@ participant.data.dsm['diagnosisYear'] != null">
               </div>
             </tab>
 
-            <ng-container *ngIf="dynamicFormTypeAndStudyRGP(settings); else groupForm">
+            <ng-container *ngIf="settings | dynamicFormTypeAndStudyRGP; else groupForm">
 
 
 

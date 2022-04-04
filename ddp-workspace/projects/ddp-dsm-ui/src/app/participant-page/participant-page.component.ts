@@ -178,7 +178,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     this.addMedicalProviderInformation();
   }
 
-  addMedicalProviderInformation() {
+  addMedicalProviderInformation(): void {
     if (this.participant != null && this.participant.data != null
       && this.participant.data.profile != null && this.participant.data.medicalProviders != null && this.participant.medicalRecords) {
       if (this.participant.medicalRecords.length > 0) {
@@ -194,7 +194,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           medicalRecord.streetAddressDDP = medicalProvider.street;
           medicalRecord.cityDDP = medicalProvider.city;
           medicalRecord.stateDDP = medicalProvider.state;
-        })
+        });
       }
     }
   }
@@ -1208,9 +1208,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     return '';
   }
 
-  dynamicFormTypeAndStudyRGP(settings: FieldSettings[]): boolean {
-    return settings['TAB_GROUPED'] && localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === 'RGP';
-  }
 
   getDisplayName(displayName: string, columnName: string): string {
     if (displayName.indexOf('#') > -1) {
