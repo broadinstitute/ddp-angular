@@ -380,56 +380,6 @@ export class MedicalRecordComponent implements OnInit {
     }
   }
 
-  getParticipantEnteredAddress(ddpInstitutionId: string): string {
-    if (this.participant != null && this.participant.data != null
-      && this.participant.data.profile != null && this.participant.data.medicalProviders != null) {
-      const medicalProvider = this.participant.data.medicalProviders.find(medProvider => {
-        const tmpId = medProvider.legacyGuid != null && medProvider.legacyGuid !== 0 ?
-          medProvider.legacyGuid : medProvider.guid;
-        return tmpId === ddpInstitutionId;
-      });
-
-      if (medicalProvider != null) {
-        let address = '';
-        if (medicalProvider.physicianName) {
-          address += medicalProvider.physicianName;
-        }
-        if (medicalProvider.institutionName) {
-          address += this.addLineBreak(address);
-          address += medicalProvider.institutionName;
-        }
-        if (medicalProvider.street) {
-          address += this.addLineBreak(address);
-          address += medicalProvider.street;
-        }
-        if (medicalProvider.city && medicalProvider.state) {
-          // both are not empty, so add them both
-          address += this.addLineBreak(address);
-          address += medicalProvider.city + ' ' + medicalProvider.state;
-        } else {
-          // one is not empty, so add that one
-          if (medicalProvider.city) {
-            address += this.addLineBreak(address);
-            address += medicalProvider.city;
-          }
-          if (medicalProvider.state) {
-            address += this.addLineBreak(address);
-            address += medicalProvider.state;
-          }
-        }
-        return address;
-      }
-      return '';
-    }
-  }
-
-  addLineBreak(address: string): string {
-    if (address) {
-      return '\n';
-    }
-    return '';
-  }
-
   getMedicalRecord(): MedicalRecord {
     return this.medicalRecord;
   }

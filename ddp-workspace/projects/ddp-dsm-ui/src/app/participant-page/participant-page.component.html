@@ -1026,7 +1026,7 @@ participant.data.dsm['diagnosisYear'] != null">
               </div>
             </tab>
 
-          <ng-container *ngIf="dynamicFormTypeAndStudyRGP(settings); else groupForm">
+          <ng-container *ngIf="settings | dynamicFormTypeAndStudyRGP; else groupForm">
             <ng-container *ngFor="let relative of participant.participantData">
               <!--RGP tabs from fieldSettings-->
               <ng-container *ngFor="let tab of settings['TAB_GROUPED']">

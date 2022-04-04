@@ -248,7 +248,7 @@
                         currentPage: activePage, totalItems: getPaginationParticipantListSize() }">
             <!--checkbox to assign or trigger blood kits-->
             <td *ngIf="hasAssignees()">
-              <mat-checkbox color="primary" disableRipple *ngIf="pt.participant != null"
+              <mat-checkbox color="primary" disableRipple *ngIf="pt.data.status === 'ENROLLED'"
                            [checked]="pt.isSelected"
                            (change)="pt.isSelected = $event.checked; checkboxChecked()"></mat-checkbox>
             </td>
