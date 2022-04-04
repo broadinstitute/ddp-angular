@@ -117,4 +117,5 @@ export class ConfigurationService {
      * when all questions in nested modal activity are answered
      */
     alwaysShowQuestionsCountInModalNestedActivity = false;
+    auth0ClaimNameSpace: string;
 }
