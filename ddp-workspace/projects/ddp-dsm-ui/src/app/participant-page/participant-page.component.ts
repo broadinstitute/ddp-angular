@@ -1208,10 +1208,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     return '';
   }
 
-  dynamicFormTypeAndStudyRGP(settings: FieldSettings[]): boolean {
-    return settings['TAB_GROUPED'] && localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === 'RGP';
-  }
-
   getDisplayName(displayName: string, columnName: string): string {
     if (displayName.indexOf('#') > -1) {
       const replacements: string[] = displayName.split('#');
