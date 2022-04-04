@@ -40,13 +40,13 @@ export class Sample {
     if (this.externalOrderStatus !== null && this.externalOrderStatus !== undefined) {
       return this.externalOrderStatus + ' (GBF)';
     }
-    if (this.deactivatedDate !== 0) {
+    if (this.deactivatedDate !== undefined) {
       return Sample.DEACTIVATED;
     }
-    if (this.receiveDate !== 0) {
+    if (this.receiveDate !== undefined) {
       return Sample.RECEIVED;
     }
-    if (this.scanDate !== 0) {
+    if (this.scanDate !== undefined) {
       return Sample.SENT;
     }
     if (this.error) {
