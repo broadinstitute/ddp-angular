@@ -43,9 +43,9 @@
     <div class="Float--left Width--60">
       <table class="table table-condensed">
         <tbody>
-        <tr *ngIf="participant.participant != null">
+        <tr *ngIf="participant.data != null">
           <td>DDP</td>
-          <td>{{participant.participant.realm}}</td>
+          <td>{{participant.data.ddp}}</td>
         </tr>
         <tr *ngIf="participant.participant != null">
           <td>Assignee</td>
@@ -101,19 +101,18 @@
         </tr>
         <tr>
           <td>Institution Info</td>
-          <td class="Line--Break">
-            <ng-container>{{getParticipantEnteredAddress(medicalRecord.ddpInstitutionId)}}</ng-container>
-            <ng-container>{{getMedicalRecord().getParticipantEnteredAddress()}}</ng-container>
+          <td>
+            <p *ngIf="medicalRecord.nameDDP">{{medicalRecord.nameDDP}}</p>
+            <p *ngIf="medicalRecord.institutionDDP">{{medicalRecord.institutionDDP}}</p>
+            <p *ngIf="medicalRecord.streetAddressDDP">{{medicalRecord.streetAddressDDP}}</p>
+            <p *ngIf="medicalRecord.cityDDP">{{medicalRecord.cityDDP}}</p>
+            <p *ngIf="medicalRecord.stateDDP">{{medicalRecord.stateDDP}}</p>
           </td>
         </tr>
         </tbody>
       </table>
     </div>
-    <div class="Float--left Width--10">
-      <br/>
-      <br/>
-    </div>
-    <div class="Float--left Width--30" *ngIf="participant.participant != null && !participantExited">
+    <div class="Width--30" *ngIf="participant.participant != null && !participantExited">
       <div *ngIf="pdfs != null && pdfs.length !== 0 && getRole().allowedToDownloadPDF()">
         <tr>
           <td>

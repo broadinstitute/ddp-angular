@@ -112,6 +112,7 @@ import { FormDataComponent } from './form-data/form-data.component';
 import { AddFamilyMemberComponent } from './popups/add-family-member/add-family-member.component';
 import { FieldTableComponent } from './field-table/field-table.component';
 import { ConfigurationService, DdpModule } from 'ddp-sdk';
+import {dynamicFormTypeAndStudyRGP} from './participant-page/pipes/dynamicFormTypeForRgp.pipe';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -204,7 +205,8 @@ sdkConfig.auth0ClaimNameSpace = DDP_ENV.auth0ClaimNameSpace;
         ParticipantUpdateResultDialogComponent,
         FormDataComponent,
         AddFamilyMemberComponent,
-        FieldTableComponent
+        FieldTableComponent,
+        dynamicFormTypeAndStudyRGP
     ],
     imports: [
         DdpModule,
