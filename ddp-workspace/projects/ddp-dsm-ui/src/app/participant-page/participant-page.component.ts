@@ -1197,17 +1197,16 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     return '';
   }
 
-  getParticipantDataFromSingleParticipant(fieldSetting: FieldSettings): string {
+  getParticipantForDynamicField(fieldSetting: FieldSettings): string {
     if (this.participant && this.participant.participantData && fieldSetting.columnName) {
-      for (const participantData of this.participant.participantData) {
-        if (participantData != null && participantData.data != null && participantData.data[fieldSetting.columnName] != null) {
-          return participantData.data[fieldSetting.columnName];
-        }
+      const participantDataFound = this.participant.participantData
+        .find(participantData => participantData.data && participantData.data[fieldSetting.columnName] != null);
+      if (participantDataFound) {
+        return participantDataFound.data[fieldSetting.columnName];
       }
     }
     return '';
   }
-
 
   getDisplayName(displayName: string, columnName: string): string {
     if (displayName.indexOf('#') > -1) {
