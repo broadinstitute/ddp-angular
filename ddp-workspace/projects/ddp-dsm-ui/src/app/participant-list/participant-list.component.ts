@@ -1612,9 +1612,9 @@ export class ParticipantListComponent implements OnInit {
 
   downloadCurrentData(): void {
     const columns = [];
-    for(const key in this.selectedColumns) {
-      for (const key1 in this.selectedColumns[key]) {
-        columns.push(this.selectedColumns[key][key1]['participantColumn'])
+    for(const col in this.selectedColumns) {
+      for (const key in this.selectedColumns[col]) {
+        columns.push(this.selectedColumns[col][key]['participantColumn'])
       }
     }
     this.dsmService.downloadParticipantData(
@@ -1626,7 +1626,6 @@ export class ParticipantListComponent implements OnInit {
       this.sortBy
     ).subscribe({
       next: response => {
-        console.log(response)
         let fileName = 'file';
         const contentDisposition = response.headers.get('Content-Disposition');
         if (contentDisposition) {

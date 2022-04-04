@@ -174,25 +174,7 @@ export class DSMService {
   public applyFilter(json: ViewFilter, realm: string, parent: string, filterQuery: string,
                      from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage(), sortBy?: Sort
   ): Observable<any> {
-    let viewFilterCopy = null;
-    if (json != null) {
-      if (json.filters != null) {
-        viewFilterCopy = json.copy();
-        for (const filter of json.filters) {
-          if (filter.type === Filter.OPTION_TYPE && filter.participantColumn.tableAlias !== 'participantData') {
-            filter.selectedOptions = filter.getSelectedOptionsName();
-          }
-        }
-      }
-      if (viewFilterCopy != null && viewFilterCopy.filters != null) {
-        for (const filter of viewFilterCopy.filters) {
-          if (filter.type === Filter.OPTION_TYPE && filter.participantColumn.tableAlias !== 'participantData') {
-            filter.selectedOptions = filter.getSelectedOptionsName();
-            filter.options = null;
-          }
-        }
-      }
-    }
+    const viewFilterCopy = this.getFilter(json);
     const url = this.baseUrl + DSMService.UI + 'applyFilter';
     const userId = this.role.userID();
     const map: { name: string; value: any }[] = [];
@@ -232,25 +214,7 @@ export class DSMService {
   }
 
   public downloadParticipantData(realm: string, parent: string, columns: {}, json: ViewFilter, filterQuery: string, sortBy?: Sort): Observable<any> {
-    let viewFilterCopy = null;
-    if (json != null) {
-      if (json.filters != null) {
-        viewFilterCopy = json.copy();
-        for (const filter of json.filters) {
-          if (filter.type === Filter.OPTION_TYPE && filter.participantColumn.tableAlias !== 'participantData') {
-            filter.selectedOptions = filter.getSelectedOptionsName();
-          }
-        }
-      }
-      if (viewFilterCopy != null && viewFilterCopy.filters != null) {
-        for (const filter of viewFilterCopy.filters) {
-          if (filter.type === Filter.OPTION_TYPE && filter.participantColumn.tableAlias !== 'participantData') {
-            filter.selectedOptions = filter.getSelectedOptionsName();
-            filter.options = null;
-          }
-        }
-      }
-    }
+    const viewFilterCopy = this.getFilter(json);
     const url = this.baseUrl + DSMService.UI + 'participantList';
     const map: { name: string; value: any }[] = [];
     const userId = this.role.userID();
@@ -1046,5 +1010,27 @@ export class DSMService {
       }
       return true;
     }
+  }
+  private getFilter(json : ViewFilter) : ViewFilter {
+    let viewFilterCopy = null;
+    if (json != null) {
+      if (json.filters != null) {
+        viewFilterCopy = json.copy();
+        for (const filter of json.filters) {
+          if (filter.type === Filter.OPTION_TYPE && filter.participantColumn.tableAlias !== 'participantData') {
+            filter.selectedOptions = filter.getSelectedOptionsName();
+          }
+        }
+      }
+      if (viewFilterCopy != null && viewFilterCopy.filters != null) {
+        for (const filter of viewFilterCopy.filters) {
+          if (filter.type === Filter.OPTION_TYPE && filter.participantColumn.tableAlias !== 'participantData') {
+            filter.selectedOptions = filter.getSelectedOptionsName();
+            filter.options = null;
+          }
+        }
+      }
+    }
+    return viewFilterCopy;
   }
 }
