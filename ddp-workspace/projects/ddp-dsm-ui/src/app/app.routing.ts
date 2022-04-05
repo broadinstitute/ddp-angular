@@ -28,6 +28,8 @@ import { TissuePageComponent } from './tissue-page/tissue-page.component';
 import { MedicalRecordComponent } from './medical-record/medical-record.component';
 import { ParticipantPageComponent } from './participant-page/participant-page.component';
 import { FieldSettingsComponent } from './field-settings/field-settings.component';
+import { TestDssComponent } from './test-dss/test-dss.component';
+import { DssErrorPageComponent } from './test-dss/dss-error-page/dss-error-page.component';
 
 export const AppRoutes = [
 
@@ -89,5 +91,9 @@ export const AppRoutes = [
   },
   {path: Statics.PERMALINK + Statics.SHIPPING_URL, component: ShippingComponent, canActivate: [ AuthGuard ]},
   {path: Statics.PERMALINK + Statics.UNSENT_OVERVIEW_URL, component: DashboardComponent, canActivate: [ AuthGuard ]},
+
+  {path: 'test-dss', component: TestDssComponent},
+  {path: 'dss-error', component: DssErrorPageComponent},
+
   {path: '**', redirectTo: '/home'}
 ];
