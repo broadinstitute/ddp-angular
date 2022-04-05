@@ -60,9 +60,9 @@ describe('FileUploadService', () => {
             uploadUrl: 'url'
         };
 
-        it('positive case', (done) => {
-            service.getUploadUrl(studyGuid, activityGuid, questionStableId, file).subscribe((res: FileUploadResponse) => {
-                expect(res).toEqual(response);
+        it('positive case (get)', (done) => {
+            service.getUploadUrl(studyGuid, activityGuid, questionStableId, [file]).subscribe((res: FileUploadResponse[]) => {
+                expect(res).toEqual([response]);
                 done();
             });
 
@@ -73,15 +73,16 @@ describe('FileUploadService', () => {
             httpTestingController.verify();
         });
 
-        it('negative case', (done) => {
-            service.getUploadUrl(studyGuid, activityGuid, questionStableId, file).subscribe(
-                () => fail('should have failed with an error'),
-                (error) => {
+        it('negative case (get)', (done) => {
+            service.getUploadUrl(studyGuid, activityGuid, questionStableId, [file]).subscribe({
+                next: () => fail('should have failed with an error'),
+                error: (error) => {
                     expect(error.message).toEqual('An error occurred');
                     expect(error.error.status).toEqual(401);
                     expect(loggingServiceSpy.logDebug).toHaveBeenCalled();
                     done();
-                });
+                }
+            });
 
             const req = httpTestingController.expectOne(`${backendUrl}/pepper/v1/user/${userGuid}/studies/${studyGuid}/activities/${activityGuid}/uploads`);
             expect(req.request.method).toBe('POST');
@@ -99,7 +100,7 @@ describe('FileUploadService', () => {
         const path = 'https://storage.googleapis.com/ddp-dev-file-uploads/some-file-path';
         const file = {name: '1.png', size: 1000, type: 'image/png'} as File;
 
-        it('positive case', (done) => {
+        it('positive case (upload)', (done) => {
             service.uploadFile(path, file).subscribe(() => {
                 done();
             });
@@ -111,7 +112,7 @@ describe('FileUploadService', () => {
             req.flush({});
         });
 
-        it('negative case', (done) => {
+        it('negative case (upload)', (done) => {
             service.uploadFile(path, file).subscribe(
                 () => fail('should have failed with an error'),
                 (error) => {

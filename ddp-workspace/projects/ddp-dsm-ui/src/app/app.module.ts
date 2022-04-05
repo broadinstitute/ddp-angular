@@ -13,6 +13,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AccordionModule } from 'ngx-bootstrap/accordion';
@@ -65,16 +66,10 @@ import { UploadComponent } from './upload/upload.component';
 import { ParticipantExitComponent } from './participant-exit/participant-exit.component';
 import { ParticipantExitSortPipe } from './pipe/participant-exit-sort.pipe';
 import { UserSettingComponent } from './user-setting/user-setting.component';
-import { EmailEventComponent } from './email-event/email-event.component';
-import { EelSettingComponent } from './eel-setting/eel-setting.component';
-import { EelSettingSortPipe } from './pipe/eel-setting-sort.pipe';
 import { Statics } from './utils/statics';
 import { ScanValueComponent } from './scan-value/scan-value.component';
 import { BannerComponent } from './banner/banner.component';
 import { FieldDatepickerComponent } from './field-datepicker/field-datepicker.component';
-import { EmailTemplateSortPipe } from './pipe/email-template-sort.pipe';
-import { EmailEventSortPipe } from './pipe/email-event-sort.pipe';
-import { EmailEmailSortPipe } from './pipe/email-email-sort.pipe';
 import { OncHistoryDetailComponent } from './onc-history-detail/onc-history-detail.component';
 import { TissuePageComponent } from './tissue-page/tissue-page.component';
 import { TissueComponent } from './tissue/tissue.component';
@@ -117,6 +112,7 @@ import { FormDataComponent } from './form-data/form-data.component';
 import { AddFamilyMemberComponent } from './popups/add-family-member/add-family-member.component';
 import { FieldTableComponent } from './field-table/field-table.component';
 import { ConfigurationService, DdpModule } from 'ddp-sdk';
+import {dynamicFormTypeAndStudyRGP} from './participant-page/pipes/dynamicFormTypeForRgp.pipe';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -137,6 +133,7 @@ sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
 sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 sdkConfig.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl; // TODO: add the URL value in config file
 sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
+sdkConfig.auth0ClaimNameSpace = DDP_ENV.auth0ClaimNameSpace;
 
 @NgModule({
     declarations: [
@@ -158,8 +155,6 @@ sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
         UploadComponent,
         ParticipantExitComponent,
         UserSettingComponent,
-        EmailEventComponent,
-        EelSettingComponent,
         ScanValueComponent,
         BannerComponent,
         FieldDatepickerComponent,
@@ -177,10 +172,6 @@ sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
         KitRequestSortPipe,
         KitRequestFilterPipe,
         ParticipantExitSortPipe,
-        EelSettingSortPipe,
-        EmailEventSortPipe,
-        EmailEmailSortPipe,
-        EmailTemplateSortPipe,
         OncHistoryDetailSortPipe,
         ButtonSelectTitleCasePipe,
         OrdinalPipe,
@@ -214,7 +205,8 @@ sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
         ParticipantUpdateResultDialogComponent,
         FormDataComponent,
         AddFamilyMemberComponent,
-        FieldTableComponent
+        FieldTableComponent,
+        dynamicFormTypeAndStudyRGP
     ],
     imports: [
         DdpModule,
@@ -228,6 +220,7 @@ sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
         MatInputModule,
         MatSelectModule,
         MatRadioModule,
+        MatExpansionModule,
         MatButtonToggleModule,
         MatAutocompleteModule,
         MatDialogModule,

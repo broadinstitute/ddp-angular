@@ -150,5 +150,5 @@ export class DashboardComponent implements OnInit, OnDestroy {
       isConsentEditActivity,
     );
     this.router.navigateByUrl(RouterResources.Survey);
-  }
+  };
 }

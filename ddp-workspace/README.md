@@ -1,17 +1,17 @@
 # DDP-Workspace
 # DataDonationPlatform Angular SDK and Toolkit libraries; basil-app, sandbox-app sample apps; ddp-angio, ddp-brain, ddp-mbc apps
 
-These libraries and projects were generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
+These libraries and projects were generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.0.
 
 ## Initial steps
 ```
-nvm use 12.20.0
-npm install -g @angular/cli@10.2.0
+nvm use 16.13.1
+npm install -g @angular/cli@13.1
 npm install
 ```
 ## Launch apps
 
-Don't forget to [render](../README.md/#rendering-pepperconfigjs-and-ddpconfigjs-files "rendering config") `ddpConfig.js/pepperConfig.js`.
+Don't forget to render `ddpConfig.js/pepperConfig.js`.
 
 Sample apps:
 ```
@@ -113,6 +113,11 @@ Go to the dist folder `cd dist/toolkit` and run `npm pack` or `npm publish`.
 Run `ng generate component component-name --project ddp-sdk` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ddp-sdk`.
 > Note: Don't forget to add `--project ddp-sdk`(or another project) or else it will be added to the default project in your `angular.json` file.
 
+
+## Running linter
+
+Run `ng lint` for all projects or `ng lint %project_name%` for a specific project. See linter warnings/errors in console if any.
+
 ## Running unit tests
 
 Run `ng test %app/library-name%` to execute the unit tests via [Karma](https://karma-runner.github.io).
@@ -120,6 +125,17 @@ Run `ng test %app/library-name%` to execute the unit tests via [Karma](https://k
 ## Running end-to-end tests
 
 Run `ng e2e %app/library-name%` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Running unit tests in CircleCI on a specific branch
+
+Being in `ddp-angular` folder run the following script 
+
+`./build-utils/run_ci.sh run-tests [study_key] [branch_name] [target_env]`
+
+(e.g.: `./build-utils/run_ci.sh run-tests pancan some-branch dev`)
+
+to trigger the execution of all Angular tests in a PR branch
+(for the pointed project/study (study_key) and also ddp-sdk and toolkit as common libraries).
 
 ## Further help
 

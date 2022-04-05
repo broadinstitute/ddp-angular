@@ -29,6 +29,8 @@ import { Sample } from './models/sample.model';
 import { Participant } from './participant-list.model';
 import { FieldSettings } from '../field-settings/field-settings.model';
 import { ParticipantData } from './models/participant-data.model';
+import { Sort } from '../sort/sort.model';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-participant-list',
@@ -72,6 +74,7 @@ export class ParticipantListComponent implements OnInit {
   showParticipantInformation = false;
   showTissue = false;
   selectedTab: string;
+  selectedActivity: string;
   selectedMR = '';
   selectedOncOrTissue = '';
 
@@ -96,8 +99,8 @@ export class ParticipantListComponent implements OnInit {
   cancers: string[] = [];
   mrCoverPdfSettings: Value[] = [];
 
-  sortField: string = null;
-  sortDir: string = null;
+  sortBy: Sort = null;
+  sortOrder: string = null;
   sortParent: string = null;
   currentView: string = null;
   showHelp = false;
@@ -113,7 +116,7 @@ export class ParticipantListComponent implements OnInit {
   participantsSize = 0;
   jsonPatch: any;
   viewFilter: any;
-
+  private start: number;
 
   constructor(private role: RoleService, private dsmService: DSMService, private compService: ComponentService,
                private router: Router, private auth: Auth, private route: ActivatedRoute, private util: Utils) {
@@ -135,7 +138,7 @@ export class ParticipantListComponent implements OnInit {
   ngOnInit(): void {
     this.additionalMessage = null;
     if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) == null) {
-      this.additionalMessage = 'Please select a realm';
+      this.additionalMessage = 'Please select a study';
     } else {
       this.checkRight();
     }
@@ -152,37 +155,54 @@ export class ParticipantListComponent implements OnInit {
     const from = (pageNumber - 1) * rowsPerPage;
     const to = pageNumber * rowsPerPage;
     if (this.viewFilter) {
-       this.applyFilter(this.viewFilter, from, to);
+      this.applyFilter(this.buildTemporaryViewFilter(), from, to);
     } else {
       if (this.jsonPatch) {
-        this.dsmService.filterData(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.jsonPatch, this.parent, null, from, to)
-          .subscribe(
-            data => {
+        this.dsmService.filterData(localStorage.getItem(
+          ComponentService.MENU_SELECTED_REALM), this.jsonPatch, this.parent, null, from, to, this.sortBy
+        )
+          .subscribe({
+            next: data => {
               this.setFilterDataOnSuccess(data);
-            }, () => {
+            },
+            error: () => {
               this.participantList = [];
               this.originalParticipantList = [];
               this.copyParticipantList = [];
               this.loadingParticipants = null;
               this.additionalMessage = 'Error - Filtering Participant List, Please contact your DSM developer';
-            });
-      } else {
-        this.dsmService.filterData(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null, this.parent, true, from, to).subscribe(
-          data => {
-            this.setFilterDataOnSuccess(data);
-          },
-          err => {
-            if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.auth.logout();
             }
-            this.loadingParticipants = null;
-            this.errorMessage = 'Error - Loading Participant List, Please contact your DSM developer';
-          }
-        );
+          });
+      } else {
+        this.dsmService.filterData(
+          localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null, this.parent, true, from, to, this.sortBy
+          )
+          .subscribe({
+            next: data => {
+              this.setFilterDataOnSuccess(data);
+            },
+            error: err => {
+              if (err._body === Auth.AUTHENTICATION_ERROR) {
+                this.auth.logout();
+              }
+              this.loadingParticipants = null;
+              this.errorMessage = 'Error - Loading Participant List, Please contact your DSM developer';
+            }
+          });
       }
     }
 
     this.activePage = pageNumber;
+  }
+
+  private buildTemporaryViewFilter(): ViewFilter {
+    //used for applyFilter method which manipulates selected columns to avoid
+    //columns loss on page change if participant has chosen default filter from settings
+    const tempViewFilter = this.viewFilter.copy();
+    const tempColumns = {};
+    Object.assign(tempColumns, tempViewFilter.columns);
+    Object.assign(tempViewFilter.columns, this.selectedColumns);
+    return tempViewFilter;
   }
 
   private setFilterDataOnSuccess(data: any): void {
@@ -207,6 +227,7 @@ export class ParticipantListComponent implements OnInit {
 
   private checkRight(): void {
     // assumption for now: profile parameters are always the same, only survey will be dynamic per ddp
+    this.start = new Date().getTime();
     this.loadingParticipants = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     this.setSelectedFilterName('');
     this.currentFilter = null;
@@ -215,8 +236,8 @@ export class ParticipantListComponent implements OnInit {
     this.errorMessage = null;
     this.participantList = null;
     let jsonData: any[];
-    this.dsmService.getRealmsAllowed(Statics.MEDICALRECORD).subscribe(
-      data => {
+    this.dsmService.getRealmsAllowed(Statics.MEDICALRECORD).subscribe({
+      next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
           if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
@@ -227,21 +248,21 @@ export class ParticipantListComponent implements OnInit {
         if (!allowedToSeeInformation) {
           this.loadingParticipants = null;
           this.compService.customViews = null;
-          this.errorMessage = 'You are not allowed to see information of the selected realm at that category';
+          this.errorMessage = 'You are not allowed to see information of the selected study at that category';
         }
       },
-      () => {
+      error: () => {
         this.loadingParticipants = null;
         return null;
       }
-    );
+    });
   }
 
   loadSettings(): void {
     this.rowsPerPage = this.role.getUserSetting().getRowsPerPage();
     let jsonData: any;
-    this.dsmService.getSettings(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe(
-      data => {
+    this.dsmService.getSettings(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe({
+      next: data => {
         this.assignees = [];
         this.drugs = [];
         this.cancers = [];
@@ -264,8 +285,8 @@ export class ParticipantListComponent implements OnInit {
         this.selectedColumns = {};
         this.settings = {};
         this.dataSources.forEach((value: string, key: string) => {
-          this.selectedColumns[ key ] = [];
-          this.sourceColumns[ key ] = [];
+          this.selectedColumns[key] = [];
+          this.sourceColumns[key] = [];
         });
         if (jsonData.assignees != null) {
           jsonData.assignees.forEach((val) => {
@@ -284,7 +305,7 @@ export class ParticipantListComponent implements OnInit {
         }
         if (jsonData.fieldSettings != null) {
           Object.keys(jsonData.fieldSettings).forEach((key) => {
-            jsonData.fieldSettings[ key ].forEach((fieldSetting: FieldSettings) => {
+            jsonData.fieldSettings[key].forEach((fieldSetting: FieldSettings) => {
               let options: Array<NameValue> = null;
               if (fieldSetting.displayType === 'OPTIONS') {
                 options = new Array<NameValue>();
@@ -295,22 +316,27 @@ export class ParticipantListComponent implements OnInit {
                 }
               }
               const filter = new Filter(
-                new ParticipantColumn(fieldSetting.columnDisplay, fieldSetting.columnName, key),
-                Filter.ADDITIONAL_VALUE_TYPE, options, new NameValue(fieldSetting.columnName, null),
+                new ParticipantColumn( fieldSetting.columnDisplay, Utils.convertUnderScoresToCamelCase(fieldSetting.columnName), key),
+                Filter.ADDITIONAL_VALUE_TYPE, options, new NameValue( fieldSetting.columnName, null ),
                 false, true, null, null, null, null, false,
                 false, false, false, fieldSetting.displayType
               );
-              if (this.settings[ key ] == null || this.settings[ key ] == null) {
-                this.settings[ key ] = [];
+              if (this.settings[key] == null || this.settings[key] == null) {
+                this.settings[key] = [];
               }
               if (key === 'r') {
-                if (this.sourceColumns[ 'p' ] == null || this.sourceColumns[ 'p' ] == null) {
-                  this.sourceColumns[ 'p' ] = [];
+                if (this.sourceColumns['p'] == null) {
+                  this.sourceColumns['p'] = [];
                 }
-                this.sourceColumns[ 'p' ].push(filter);
+                this.sourceColumns['p'].push(filter);
+              } else if (key === 'sm') {
+                if (this.sourceColumns['t'] == null) {
+                  this.sourceColumns['t'] = [];
+                }
+                this.sourceColumns['t'].push(filter);
               } else {
-                if (this.sourceColumns[ fieldSetting.fieldType ] == null) {
-                  this.sourceColumns[ fieldSetting.fieldType ] = [];
+                if (this.sourceColumns[fieldSetting.fieldType] == null) {
+                  this.sourceColumns[fieldSetting.fieldType] = [];
                 }
                 if (key === null || key === 'null') {
                   if (fieldSetting.displayType === 'TAB' && !this.dataSources.has(fieldSetting.columnName)) {
@@ -318,10 +344,10 @@ export class ParticipantListComponent implements OnInit {
                   }
                 }
                 if (fieldSetting.displayType == null || fieldSetting.displayType !== 'GROUP') {
-                  this.sourceColumns[ fieldSetting.fieldType ].push(filter);
+                  this.sourceColumns[fieldSetting.fieldType].push(filter);
                 }
               }
-              this.settings[ key ].push(fieldSetting);
+              this.settings[key].push(fieldSetting);
               if (fieldSetting.displayType == null || fieldSetting.displayType !== 'GROUP') {
                 this.allFieldNames.add(filter.participantColumn.tableAlias + '.' + filter.participantColumn.name);
               }
@@ -332,7 +358,7 @@ export class ParticipantListComponent implements OnInit {
         if (jsonData.activityDefinitions != null) {
           Object.keys(jsonData.activityDefinitions).forEach((key) => {
             this.hasESData = true;
-            const activityDefinition: ActivityDefinition = ActivityDefinition.parse(jsonData.activityDefinitions[ key ]);
+            const activityDefinition: ActivityDefinition = ActivityDefinition.parse(jsonData.activityDefinitions[key]);
             let possibleColumns: Array<Filter> = [];
             if (this.sourceColumns[activityDefinition.activityCode] != null) {
               possibleColumns = this.sourceColumns[activityDefinition.activityCode];
@@ -398,13 +424,11 @@ export class ParticipantListComponent implements OnInit {
                   } else if (question.questionType === 'NUMERIC') {
                     type = Filter.NUMBER_TYPE;
                   }
-                  const filterInPossibleColumns = possibleColumns.find(filter => {
-                    return filter.participantColumn.name === question.stableId;
-                  });
+                  const filterInPossibleColumns = possibleColumns.find(filter => filter.participantColumn.name === question.stableId);
                   if (filterInPossibleColumns == null) {
                     const displayName = this.getQuestionOrStableId(question);
                     const filter = new Filter(
-                      new ParticipantColumn(displayName, question.stableId, activityDefinition.activityCode, null, true),
+                      new ParticipantColumn(displayName, question.stableId, activityDefinition.activityCode, 'questionsAnswers', true),
                       type,
                       options
                     );
@@ -415,8 +439,8 @@ export class ParticipantListComponent implements OnInit {
               const name = activityDefinition.activityName == null || activityDefinition.activityName === '' ?
                 activityDefinition.activityCode : activityDefinition.activityName;
               this.dataSources.set(activityDefinition.activityCode, name);
-              this.sourceColumns[ activityDefinition.activityCode ] = possibleColumns;
-              this.selectedColumns[ activityDefinition.activityCode ] = [];
+              this.sourceColumns[activityDefinition.activityCode] = possibleColumns;
+              this.selectedColumns[activityDefinition.activityCode] = [];
               // add now all these columns to allFieldsName for the search-bar
               possibleColumns.forEach(filter => {
                 const tmp = filter.participantColumn.object != null ? filter.participantColumn.object : filter.participantColumn.tableAlias;
@@ -461,7 +485,7 @@ export class ParticipantListComponent implements OnInit {
               } else if (field.type === 'multi_type' || field.type === 'multi_type_array') {
                 tmpType = field.type;
               }
-              this.sourceColumns[ 'a' ].push(
+              this.sourceColumns['a'].push(
                 new Filter(
                   new ParticipantColumn(field.displayName, tmp, abstractionGroup.abstractionGroupId.toString(), 'final'),
                   tmpType,
@@ -471,7 +495,7 @@ export class ParticipantListComponent implements OnInit {
             });
           });
           // add now all these columns to allFieldsName for the search-bar
-          this.sourceColumns[ 'a' ].forEach(filter => {
+          this.sourceColumns['a'].forEach(filter => {
             const tmp = filter.participantColumn.object != null ? filter.participantColumn.object : filter.participantColumn.tableAlias;
             // add when abstraction is searchable
             // this.allFieldNames.add( tmp + "." + filter.participantColumn.name );
@@ -507,9 +531,7 @@ export class ParticipantListComponent implements OnInit {
             if (kitType.uploadReasons != null) {
               // eslint-disable-next-line @typescript-eslint/no-shadow
               kitType.uploadReasons.forEach((val) => {
-                const found = optionsUpload.find(option => {
-                  return option.value === val;
-                });
+                const found = optionsUpload.find(option => option.value === val);
                 if (found == null) {
                   optionsUpload.push(new NameValue(val, val));
                 }
@@ -522,13 +544,13 @@ export class ParticipantListComponent implements OnInit {
           });
           if (optionsUpload.length > 0) {
             optionsUpload.push(new NameValue('SAMPLE_UPLOAD_EMPTY', 'NORMAL'));
-            this.sourceColumns[ 'k' ].push(new Filter(ParticipantColumn.UPLOAD_REASON, Filter.OPTION_TYPE, optionsUpload));
+            this.sourceColumns['k'].push(new Filter(ParticipantColumn.UPLOAD_REASON, Filter.OPTION_TYPE, optionsUpload));
             this.allFieldNames.add('k' + '.' + ParticipantColumn.UPLOAD_REASON.name);
           }
-          this.sourceColumns[ 'k' ].push(new Filter(ParticipantColumn.SAMPLE_TYPE, Filter.OPTION_TYPE, options));
+          this.sourceColumns['k'].push(new Filter(ParticipantColumn.SAMPLE_TYPE, Filter.OPTION_TYPE, options));
           if (hasExternalShipper) {
-            this.sourceColumns[ 'k' ].push(new Filter(ParticipantColumn.EXTERNAL_ORDER_NUMBER, Filter.TEXT_TYPE));
-            this.sourceColumns[ 'k' ].push(new Filter(ParticipantColumn.EXTERNAL_ORDER_DATE, Filter.DATE_TYPE));
+            this.sourceColumns['k'].push(new Filter(ParticipantColumn.EXTERNAL_ORDER_NUMBER, Filter.TEXT_TYPE));
+            this.sourceColumns['k'].push(new Filter(ParticipantColumn.EXTERNAL_ORDER_DATE, Filter.DATE_TYPE));
             this.allFieldNames.add('k' + '.' + ParticipantColumn.EXTERNAL_ORDER_NUMBER.name);
             this.allFieldNames.add('k' + '.' + ParticipantColumn.EXTERNAL_ORDER_DATE.name);
           }
@@ -543,7 +565,7 @@ export class ParticipantListComponent implements OnInit {
             this.preferredLanguages.push(language);
             options.push(new NameValue(language.languageCode, language.displayName));
           });
-          this.sourceColumns[ 'data' ].push(new Filter(ParticipantColumn.PREFERRED_LANGUAGE, Filter.OPTION_TYPE, options));
+          this.sourceColumns['data'].push(new Filter(ParticipantColumn.PREFERRED_LANGUAGE, Filter.OPTION_TYPE, options));
         }
 
         if (jsonData.hideMRTissueWorkflow != null) {
@@ -575,8 +597,8 @@ export class ParticipantListComponent implements OnInit {
           possibleColumns.push(new Filter(new ParticipantColumn('Notes', 'notes', 'invitations', null, true), Filter.TEXT_TYPE));
           possibleColumns.push(new Filter(new ParticipantColumn('Type', 'type', 'invitations', null, true), Filter.TEXT_TYPE));
 
-          this.sourceColumns[ 'invitations' ] = possibleColumns;
-          this.selectedColumns[ 'invitations' ] = [];
+          this.sourceColumns['invitations'] = possibleColumns;
+          this.selectedColumns['invitations'] = [];
           possibleColumns.forEach(filter => {
             const tmp = filter.participantColumn.object != null ? filter.participantColumn.object : filter.participantColumn.tableAlias;
             this.allFieldNames.add(tmp + '.' + filter.participantColumn.name);
@@ -598,8 +620,8 @@ export class ParticipantListComponent implements OnInit {
           possibleColumns.push(new Filter(new ParticipantColumn('Last Name', 'lastName', 'proxy', null, true), Filter.TEXT_TYPE));
           possibleColumns.push(new Filter(new ParticipantColumn('Email', 'email', 'proxy', null, true), Filter.TEXT_TYPE));
 
-          this.sourceColumns[ 'proxy' ] = possibleColumns;
-          this.selectedColumns[ 'proxy' ] = [];
+          this.sourceColumns['proxy'] = possibleColumns;
+          this.selectedColumns['proxy'] = [];
           possibleColumns.forEach(filter => {
             const tmp = filter.participantColumn.object != null ? filter.participantColumn.object : filter.participantColumn.tableAlias;
             this.allFieldNames.add(tmp + '.' + filter.participantColumn.name);
@@ -616,7 +638,7 @@ export class ParticipantListComponent implements OnInit {
             hideESFields.forEach((field) => {
               const esField = field.value.split('.');
               if (esField != null) {
-                this.sourceColumns[ 'data' ].forEach(source => {
+                this.sourceColumns['data'].forEach(source => {
                   if (source.participantColumn.object === esField[0] && source.participantColumn.name === esField[1]) {
                     // remove the ES columns
                     this.removeColumnFromSourceColumns('data', source);
@@ -638,16 +660,16 @@ export class ParticipantListComponent implements OnInit {
         }
         this.orderColumns();
         this.getData();
-        },
-        // this.renewSelectedColumns(); commented out because if we have defaultColumns for all the studies we won't need it anymore
-      err => {
+      },
+      // this.renewSelectedColumns(); commented out because if we have defaultColumns for all the studies we won't need it anymore
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
         // eslint-disable-next-line no-throw-literal
         throw 'Error - Loading display settings' + err;
       }
-    );
+    });
   }
 
   private addDynamicFieldDefaultColumns(defaultColumn: any): void {
@@ -693,6 +715,8 @@ export class ParticipantListComponent implements OnInit {
         this.sourceColumns[ 'p' ].push(filter);
       } else if (filter.participantColumn.tableAlias === 'inst') {
         this.sourceColumns[ 'm' ].push(filter);
+      }  else if (filter.participantColumn.tableAlias === 'sm') {
+        this.sourceColumns[ 't' ].push( filter );
       } else if (this.sourceColumns[ filter.participantColumn.tableAlias ] != null) {
         // TODO - can be changed to add all after all DDPs are migrated
         if (this.hasESData) {
@@ -726,23 +750,20 @@ export class ParticipantListComponent implements OnInit {
     // find viewFilter by filterName
     let defaultFilter: ViewFilter = null;
     if (this.role.getUserSetting().defaultParticipantFilter) {
-      defaultFilter = this.savedFilters.find(filter => {
-        return filter.filterName === this.role.getUserSetting().defaultParticipantFilter;
-      });
+      defaultFilter = this.savedFilters.find(filter => filter.filterName === this.role.getUserSetting().defaultParticipantFilter);
       if (defaultFilter == null) {
-        defaultFilter = this.quickFilters.find(filter => {
-          return filter.filterName === this.role.getUserSetting().defaultParticipantFilter;
-        });
+        defaultFilter = this.quickFilters.find(filter => filter.filterName === this.role.getUserSetting().defaultParticipantFilter);
       }
       if (defaultFilter != null) {
         this.selectFilter(defaultFilter);
       } else if (this.role.getUserSetting().defaultParticipantFilter !== ''
         && this.role.getUserSetting().defaultParticipantFilter != null
       ) {
+        // eslint-disable-next-line max-len
         this.additionalMessage = 'The default filter seems to be deleted, however it is still the default filter as long as not changed in the user settings.';
         this.loadingParticipants = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
-        this.dsmService.filterData(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null, this.parent, true).subscribe(
-          data => {
+        this.dsmService.filterData(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null, this.parent, true).subscribe({
+          next: data => {
             if (data != null) {
               this.additionalMessage = '';
               this.participantList = [];
@@ -763,15 +784,16 @@ export class ParticipantListComponent implements OnInit {
               this.selectedColumns[ key ] = [];
             });
             this.refillWithDefaultColumns();
+            this.sendAnalyticsMetric();
           },
-          err => {
+          error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
               this.auth.logout();
             }
             this.loadingParticipants = null;
             this.errorMessage = 'Error - Loading Participant List, Please contact your DSM developer';
           }
-        );
+        });
       }
     } else {
       this.selectFilter(null);
@@ -781,7 +803,11 @@ export class ParticipantListComponent implements OnInit {
   private refillWithDefaultColumns(): void {
     this.selectedColumns['data'] = [];
     for (const defaultColumn of this.defaultColumns) {
-      if (defaultColumn.participantColumn && defaultColumn.participantColumn.object && defaultColumn.participantColumn.tableAlias === 'participantData') {
+      if (
+        defaultColumn.participantColumn &&
+        defaultColumn.participantColumn.object &&
+        defaultColumn.participantColumn.tableAlias === 'participantData'
+      ) {
         if (!this.selectedColumns[defaultColumn.participantColumn.object]) {
           this.selectedColumns[defaultColumn.participantColumn.object] = [];
         }
@@ -795,7 +821,7 @@ export class ParticipantListComponent implements OnInit {
     }
   }
 
-  private removeColumnFromSourceColumns (source: string, filter: Filter): void {
+  private removeColumnFromSourceColumns(source: string, filter: Filter): void {
     const index = this.sourceColumns[ source ].indexOf(filter);
     if (index !== -1) {
       this.sourceColumns[ source ].splice(index, 1);
@@ -816,9 +842,10 @@ export class ParticipantListComponent implements OnInit {
   }
 
   private applyFilter(viewFilter: ViewFilter, from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage()): void {
-    this.dsmService.applyFilter(viewFilter, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent, null, from, to)
-      .subscribe(
-        data => {
+    this.dsmService.applyFilter(viewFilter, localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+      this.parent, null, from, to, this.sortBy)
+      .subscribe({
+        next: data => {
           if (data != null) {
             if (viewFilter != null && viewFilter.filters != null) {
               for (const filter of viewFilter.filters) {
@@ -827,6 +854,8 @@ export class ParticipantListComponent implements OnInit {
                   t = 'p';
                 } else if (t === 'inst') {
                   t = 'm';
+                } else if (t === 'sm') {
+                  t = 't';
                 } else if (t === 'participantData') {
                   t = filter.participantColumn.object;
                 }
@@ -903,15 +932,16 @@ export class ParticipantListComponent implements OnInit {
             this.loadedTimeStamp = Utils.getDateFormatted(date, Utils.DATE_STRING_IN_EVENT_CVS);
           }
           this.loadingParticipants = null;
+          this.sendAnalyticsMetric();
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.loadingParticipants = null;
           this.errorMessage = 'Error - Loading Participant List, Please contact your DSM developer';
         }
-      );
+      });
   }
 
   isSelectedColumnsNotEmpty(): boolean {
@@ -929,8 +959,8 @@ export class ParticipantListComponent implements OnInit {
   }
 
   getFilters(): void {
-    this.dsmService.getFiltersForUserForRealm(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe(
-      jsonData => {
+    this.dsmService.getFiltersForUserForRealm(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe({
+      next: jsonData => {
         this.savedFilters = [];
         jsonData.forEach((val) => {
           let view: ViewFilter;
@@ -941,10 +971,11 @@ export class ParticipantListComponent implements OnInit {
         });
         this.savedFilters.sort((f1, f2) => f1.filterName.localeCompare(f2.filterName));
       },
-      () => {
+      error: () => {
         this.showSavedFilters = false;
         this.errorMessage = 'Error - Loading Filter List, Please contact your DSM developer';
-      });
+      }
+    });
   }
 
   public onclickDropDown(e): void {
@@ -995,20 +1026,60 @@ export class ParticipantListComponent implements OnInit {
   }
 
   public clearFilter(): void {
+    this.start = new Date().getTime();
     this.filterQuery = null;
-    this.deselectQuickFilters();
     this.clearManualFilters();
-    this.selectedFilterName = '';
     this.getData();
     this.setDefaultColumns();
   }
 
   private setDefaultColumns(): void {
+    if (this.isQuickFilterSelected()) {
+      this.setQuickFilterColumnsIfSelected();
+      return;
+    } else if (this.isSavedFilterSelected()) {
+      this.setSavedFilterColumnsIfSelected();
+      return;
+    }
     const filteredColumns = this.extractDefaultColumns(this.selectedColumns);
     Object.assign(this.selectedColumns, filteredColumns);
     if (this.isDataOfViewFilterExists()) {
       this.viewFilter.columns = this.extractDefaultColumns(this.viewFilter.columns);
     }
+  }
+
+  private setSavedFilterColumnsIfSelected(): void {
+    const selectedSavedFilter = this.savedFilters.find(sf => sf.selected);
+    if (selectedSavedFilter) {
+      this.selectedColumns = selectedSavedFilter.columns;
+    }
+  }
+
+  private setQuickFilterColumnsIfSelected(): void {
+    const selectedQuickFilter = this.quickFilters.find(qf => qf.selected);
+    if (selectedQuickFilter) {
+      this.selectedColumns = selectedQuickFilter.columns;
+    }
+  }
+
+  private isQuickFilterSelected(): boolean {
+    let isQuickFilterSelected = false;
+    this.quickFilters.forEach(viewFilter => {
+      if (viewFilter.selected) {
+        isQuickFilterSelected = true;
+      }
+    });
+    return isQuickFilterSelected;
+  }
+
+  private isSavedFilterSelected(): boolean {
+    let isSavedFilterSelected = false;
+    this.savedFilters.forEach(viewFilter => {
+      if (viewFilter.selected) {
+        isSavedFilterSelected = true;
+      }
+    });
+    return isSavedFilterSelected;
   }
 
   private extractDefaultColumns(selectedColumns: {}): {} {
@@ -1056,6 +1127,10 @@ export class ParticipantListComponent implements OnInit {
     this.rowsPerPage = this.role.getUserSetting().getRowsPerPage();
   }
 
+  getUtilStatic(): typeof Utils {
+    return Utils;
+  }
+
   public setSelectedFilterName(filterName): void {
     this.selectedFilterName = filterName;
   }
@@ -1066,17 +1141,14 @@ export class ParticipantListComponent implements OnInit {
       this.selectedColumns[ parent ] = [];
     }
     if (this.hasThisColumnSelected(this.selectedColumns[ parent ], column)) {
-      const f = this.selectedColumns[ parent ].find(item => {
-        return item.participantColumn.tableAlias === column.participantColumn.tableAlias
-          && item.participantColumn.name === column.participantColumn.name;
-      });
+      const f = this.selectedColumns[ parent ].find(item =>
+        item.participantColumn.tableAlias === column.participantColumn.tableAlias &&
+        item.participantColumn.name === column.participantColumn.name
+      );
       const index = this.selectedColumns[ parent ].indexOf(f);
       this.selectedColumns[ parent ].splice(index, 1);
     } else {
       this.selectedColumns[ parent ].push(column);
-    }
-    if (this.isDataOfViewFilterExists()) {
-      this.viewFilter.columns.data.push(column);
     }
   }
 
@@ -1100,7 +1172,7 @@ export class ParticipantListComponent implements OnInit {
     this.savedSelectedColumns = this.selectedColumns;
   }
 
-  openParticipant(participant: Participant, colSource: string): void {
+  openParticipant(participant: Participant, colSource: string, selectedActivity?): void {
     if (participant != null) {
       let tabAnchor = 'Survey Data';
       if (colSource === 'm' || participant.data.activities == null) {
@@ -1122,6 +1194,9 @@ export class ParticipantListComponent implements OnInit {
           tabAnchor = proband.dataId;
         }
       }
+      if(tabAnchor === 'Survey Data') {
+        this.selectedActivity = selectedActivity;
+      }
       if (this.filtered && participant.participant != null && participant.participant.ddpParticipantId != null) {
         this.loadingParticipants = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
         this.dsmService.getParticipantData(
@@ -1129,8 +1204,8 @@ export class ParticipantListComponent implements OnInit {
             participant.participant.ddpParticipantId,
             this.parent
           )
-          .subscribe(
-            data => {
+          .subscribe({
+            next: data => {
               if (data != null && data[0] != null) {
                 const pt: Participant = Participant.parse(data[0]);
                 if (pt == null) {
@@ -1149,10 +1224,10 @@ export class ParticipantListComponent implements OnInit {
               }
               this.loadingParticipants = null;
             },
-            () => {
+            error: () => {
               this.errorMessage = 'Error - Loading Participant Information, Please contact your DSM developer';
             }
-          );
+          });
       } else {
         this.selectedTab = tabAnchor;
         this.participant = participant;
@@ -1210,8 +1285,8 @@ export class ParticipantListComponent implements OnInit {
       this.filtered = true;
       this.loadingParticipants = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       this.dsmService.filterData(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), jsonPatch, this.parent, null)
-        .subscribe(
-          data => {
+        .subscribe({
+          next: data => {
             if (data != null && data !== '') {
               this.participantList = [];
               this.additionalMessage = '';
@@ -1238,11 +1313,11 @@ export class ParticipantListComponent implements OnInit {
               this.additionalMessage = 'Something went wrong while filtering - List was not filtered!';
             }
           },
-          err => {
+          error: err => {
             this.loadingParticipants = null;
             this.errorMessage = 'Error - Loading Participant List, Please contact your DSM developer\n ' + err;
           }
-        );
+        });
     } else {
       this.filtered = false;
       this.filterQuery = '';
@@ -1361,13 +1436,13 @@ export class ParticipantListComponent implements OnInit {
     const patch1 = new PatchUtil(savedFilter.id, this.role.userMail(),
       {name: 'shared', value}, null, this.parent, null, null, null, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null);
     const patch = patch1.getPatch();
-    this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(data => {
-      const result = Result.parse(data);
-      if (result.code === 200) {
-        this.savedFilters[ i ].shared = (value === '1');
+    this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({
+      next: data => {
+        this.savedFilters[ i ].shared = ( value === '1' );
+      },
+      error: () => {
+        this.additionalMessage = 'Error - Sharing Filter, Please contact your DSM developer';
       }
-    }, () => {
-      this.additionalMessage = 'Error - Sharing Filter, Please contact your DSM developer';
     });
   }
 
@@ -1378,13 +1453,13 @@ export class ParticipantListComponent implements OnInit {
       localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null
     );
     const patch = patch1.getPatch();
-    this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(data => {
-      const result = Result.parse(data);
-      if (result.code === 200) {
+    this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({
+      next: data => {
         this.getFilters();
+      },
+      error: () => {
+        this.additionalMessage = 'Error - Deleting Filter, Please contact your DSM developer';
       }
-    }, () => {
-      this.additionalMessage = 'Error - Deleting Filter, Please contact your DSM developer';
     });
   }
 
@@ -1400,7 +1475,8 @@ export class ParticipantListComponent implements OnInit {
     this.dataSources.forEach((value: string, key: string) => {
       if (this.selectedColumns != null && this.selectedColumns[ key ] != null) {
         for (const col of this.selectedColumns[ key ]) {
-          columns.push(col.participantColumn.tableAlias + '.' + col.participantColumn.name);
+          const name = col.participantColumn.name;
+          columns.push( col.participantColumn.tableAlias + '.' + name );
         }
       }
     });
@@ -1422,8 +1498,8 @@ export class ParticipantListComponent implements OnInit {
     };
     const jsonPatch = JSON.stringify(jsonData);
     this.currentView = jsonPatch;
-    this.dsmService.saveCurrentFilter(jsonPatch, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe(
-      data => {
+    this.dsmService.saveCurrentFilter(jsonPatch, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe({
+      next: data => {
         const result = Result.parse(data);
         if (result.code === 500 && result.body != null) {
           this.dup = true;
@@ -1435,174 +1511,42 @@ export class ParticipantListComponent implements OnInit {
           this.modal.hide();
         }
       },
-      () => {
+      error: () => {
         this.additionalMessage = 'Error - Saving Filter, Please contact your DSM developer';
-      });
+      }
+    });
   }
 
-  public isSortField(name: string): boolean {
-    return name === this.sortField;
+  public isSortField(name: string, tableAlias: string): boolean {
+    return name === this.sortBy?.innerProperty && tableAlias === this.sortBy?.tableAlias;
   }
 
   sortByColumnName(col: Filter, sortParent: string): void {
-    this.sortDir = this.sortField === col.participantColumn.name ? (this.sortDir === 'asc' ? 'desc' : 'asc') : 'asc';
-    this.sortField = col.participantColumn.name;
+    const isSortingByTheSameColumn = col.participantColumn.name === this.sortBy?.innerProperty;
+    const isPreviouslySortedByAscending = 'asc' === this.sortOrder;
+    this.sortOrder = this.sortBy !== null
+          ? isSortingByTheSameColumn ? ( isPreviouslySortedByAscending ? 'desc' : 'asc' ) : 'asc'
+          : 'asc';
     this.sortParent = sortParent;
-    this.doSort(col.participantColumn.object, col);
+    const sort = Sort.parse(col, this.sortOrder);
+    sort.activityVersions = this.getLatestActivityVersion(col);
+    this.sortBy = sort;
+    this.pageChanged(this.activePage, this.rowsPerPage);
   }
 
-  private doSort(object: string, col: Filter): void {
-    const colType = col.type;
-    const order = this.sortDir === 'asc' ? 1 : -1;
-    if (this.sortParent === 'data' && object != null) {
-      this.participantList.sort((a, b) => {
-        if (a.data[ object ] == null) {
-          return 1;
-        } else if (b.data[ object ] == null) {
-          return -1;
-        } else {
-          return this.sort(a.data[ object ][ this.sortField ], b.data[ object ][ this.sortField ], order, undefined, colType);
-        }
-      });
-    } else if (this.sortParent === 'data' && object == null) {
-      this.participantList.sort((a, b) => (
-        a.data == null || b.data == null) ? 1 : this.sort(a.data, b.data, order, this.sortField, colType)
-      );
-    } else if (this.sortParent === 'p') {
-      this.participantList.sort((a, b) => {
-        if (a.participant == null || (a.participant[ this.sortField ] == null && a.participant['additionalValues'] == null)) {
-          return 1;
-        } else if (b.participant == null || (b.participant[ this.sortField ] == null && b.participant['additionalValues'] == null)) {
-          return -1;
-        } else {
-          if (a.participant['additionalValues'][this.sortField] != null || b.participant['additionalValues'][this.sortField] != null) {
-            return this.sort(
-              a.participant['additionalValues'][ this.sortField ],
-              b.participant['additionalValues'][ this.sortField ],
-              order,
-              undefined,
-              colType
-            );
-          } else {
-            return this.sort(a.participant[ this.sortField ], b.participant[ this.sortField ], order, undefined, colType);
-          }
-        }
-      });
-    } else if (this.sortParent === 'm') {
-      this.participantList.map(participant =>
-        participant.medicalRecords.sort((n, m) => this.sort(n[ this.sortField ], m[ this.sortField ], order, undefined, colType))
-      );
-      this.participantList.sort((a, b) => {
-        if (a.medicalRecords == null || a.medicalRecords.length < 1) {
-          return 1;
-        } else if (b.medicalRecords == null || b.medicalRecords.length < 1) {
-          return -1;
-        } else {
-          return this.sort(a.medicalRecords[0][this.sortField], b.medicalRecords[0][this.sortField], order, undefined, colType);
-        }
-      });
-    } else if (this.sortParent === 'oD') {
-      this.participantList.map(participant =>
-        participant.oncHistoryDetails.sort((n, m) => this.sort(n[ this.sortField ], m[ this.sortField ], order, undefined, colType))
-      );
-      this.participantList.sort((a, b) => {
-        if (a.oncHistoryDetails == null || a.oncHistoryDetails.length < 1) {
-          return 1;
-        } else if (b.oncHistoryDetails == null || b.oncHistoryDetails.length < 1) {
-          return -1;
-        } else {
-          return this.sort(a.oncHistoryDetails[0][this.sortField], b.oncHistoryDetails[0][this.sortField], order, undefined, colType);
-        }
-      });
-    } else if (this.sortParent === 't') {
-      //TODO: do we need the empty block statement ?
-    } else if (this.sortParent === 'k') {
-      this.participantList.map(participant =>
-        participant.kits.sort((n, m) => this.sort(n[ this.sortField ], m[ this.sortField ], order, undefined, colType))
-      );
-      this.participantList.sort((a, b) => {
-        if (a.kits == null || a.kits.length < 1) {
-          return 1;
-        } else if (b.kits == null || b.kits.length < 1) {
-          return -1;
-        } else {
-          return this.sort(a.kits[0][this.sortField], b.kits[0][this.sortField], order, undefined, colType);
-        }
-      });
-    } else if (this.checkIfColumnIsTabGrouped(this.sortParent) || this.checkIfColumnIsTabbed(this.sortParent)) {
-      this.participantList.forEach(participant => {
-        if (participant.participantData.length > 1) {
-          participant.participantData
-            .sort((n, m) => this.sort(this.getPersonField(n, col, null), this.getPersonField(m, col, null), order));
-        }
-      });
-      this.participantList.sort((a, b) => {
-        if (a.participantData && !a.participantData[0] == null || this.getPersonField(a.participantData[0], col, null) == null) {
-          return 1;
-        } else if (!b.participantData && !b.participantData[0] == null || !this.getPersonField(b.participantData[0], col, null) == null) {
-          return 0;
-        } else {
-          return this.sort(this.getPersonField(a.participantData[0], col, null),
-            this.getPersonField(b.participantData[0], col, null), order, undefined, colType);
-        }
-      });
-    } else {
-      // activity data
-      this.participantList.map(participant => {
-        const activityData = participant.data.getActivityDataByCode(this.sortParent);
-        if (activityData !== null && activityData !== undefined) {
-          const questionAnswer = this.getQuestionAnswerByName(activityData.questionsAnswers, this.sortField);
-          if (questionAnswer !== null && questionAnswer !== undefined && questionAnswer.questionType === 'COMPOSITE') {
-            questionAnswer.answer.sort((n, m) => this.sort(n.join(), m.join(), order));
-          }
-        }
-      });
-      this.participantList.sort((a, b) => {
-        const activityDataA = a.data.getActivityDataByCode(this.sortParent);
-        const activityDataB = b.data.getActivityDataByCode(this.sortParent);
-        if (activityDataA == null) {
-          return 1;
-        } else if (activityDataB == null) {
-          return -1;
-        } else {
-          if (this.sortField === 'createdAt' || this.sortField === 'completedAt' || this.sortField === 'lastUpdatedAt' || this.sortField === 'status') {
-            return this.sort(activityDataA[ this.sortField ], activityDataB[ this.sortField ], order);
-          } else {
-            const questionAnswerA = this.getQuestionAnswerByName(activityDataA.questionsAnswers, this.sortField);
-            const questionAnswerB = this.getQuestionAnswerByName(activityDataB.questionsAnswers, this.sortField);
-            if (questionAnswerA == null) {
-              return 1;
-            } else if (questionAnswerB == null) {
-              return -1;
-            } else {
-              if (questionAnswerA.questionType === 'DATE') {
-                return this.sort(questionAnswerA.date, questionAnswerB.date, order);
-              } else if (questionAnswerA.questionType === 'PICKLIST') {
-                const optionsA = this.selectedColumns[activityDataA.activityCode]
-                  .find(f => f.participantColumn.name === questionAnswerA.stableId).options;
-                let sortedListStringA = '';
-                optionsA.forEach(element => {
-                  if (questionAnswerA.answer.includes(element.name)) {
-                    sortedListStringA += this.findOptionValue(element.name, activityDataA.activityCode, questionAnswerA.stableId);
-                  }
-                });
-
-                const optionsB = this.selectedColumns[activityDataB.activityCode]
-                  .find(f => f.participantColumn.name === questionAnswerB.stableId).options;
-                let sortedListStringB = '';
-                optionsB.forEach(element => {
-                  if (questionAnswerB.answer.includes(element.name)) {
-                    sortedListStringB += this.findOptionValue(element.name, activityDataB.activityCode, questionAnswerB.stableId);
-                  }
-                });
-                return this.sort(sortedListStringA, sortedListStringB, order);
-              } else {
-                return this.sort(questionAnswerA.answer, questionAnswerB.answer, order);
-              }
-            }
-          }
-        }
-      });
+  getLatestActivityVersion(column: Filter): string[] {
+    if (column.participantColumn === null) {
+      return null;
+    }
+    const activityCode = column.participantColumn.tableAlias;
+    const activityVersions = this.activityDefinitionList
+        .filter(activity => activityCode === activity.activityCode)
+        .map(activity => activity.activityVersion);
+    if (activityVersions.length > 0) {
+      return activityVersions;
+    }
+    else {
+      return null;
     }
   }
 
@@ -1651,9 +1595,7 @@ export class ParticipantListComponent implements OnInit {
   }
 
   getLanguageName(languageCode: string): string {
-      const language = this.preferredLanguages.find(obj => {
-        return obj.languageCode === languageCode;
-      });
+      const language = this.preferredLanguages.find(obj => obj.languageCode === languageCode);
       if (language != null) {
         return language.displayName;
       }
@@ -1669,53 +1611,44 @@ export class ParticipantListComponent implements OnInit {
   }
 
   downloadCurrentData(): void {
-    const date = new Date();
-    const columns = {};
-    this.dataSources.forEach((value: string, key: string) => {
-      if (this.selectedColumns[ key ] != null && this.selectedColumns[ key ].length !== 0) {
-        columns[ key ] = this.selectedColumns[ key ];
-      }
-    });
-
-    const paths: any[][] = [];
-
-    for (const source of Object.keys(columns)) {
-      if (source === 'p') {
-        paths.push(['participant', source]);
-      } else if (source === 't') {
-        paths.push(['tissues', source]);
-      } else if (source === 'm') {
-        paths.push(['medicalRecords', source]);
-      } else if (source === 'oD') {
-        paths.push(['oncHistoryDetails', source]);
-      } else if (source === 'k') {
-        paths.push(['kits', source]);
-      } else if (source === 'a') {
-        paths.push(['abstractionActivities', source]);
-        paths.push(['abstractionSummary', source]);
-      } else if (source === 'invitations') {
-        paths.push(['invitations', source]);
-      } else if (source === 'proxy') {
-        paths.push(['proxyData', source]);
-      } else if (source.includes('GROUP')) {
-        paths.push(['participantData', source]);
-      } else {
-        paths.push([source, source]);
+    const columns = [];
+    for(const col in this.selectedColumns) {
+      for (const key in this.selectedColumns[col]) {
+        columns.push(this.selectedColumns[col][key]['participantColumn']);
       }
     }
-
-    Utils.downloadCurrentData(
-      this.participantList, paths, columns,
-      'Participants-'  + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION,
-      false
+    this.dsmService.downloadParticipantData(
+      localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+      this.parent,
+      columns,
+      this.viewFilter,
+      null,
+      this.sortBy
+    ).subscribe({
+      next: response => {
+        let fileName = 'file';
+        const contentDisposition = response.headers.get('Content-Disposition');
+        if (contentDisposition) {
+          const fileNameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+          const matches = fileNameRegex.exec(contentDisposition);
+          if (matches != null && matches[1]) {
+            fileName = matches[1].replace(/['"]/g, '');
+          }
+        }
+        const fileContent = response.body;
+        const blob = new Blob([fileContent], { type: 'application/octet-stream' });
+        saveAs(blob, fileName);
+      }}
     );
+  }
+
+  isMultipleOrSingleSelectMode( qDef: QuestionDefinition ): boolean {
+    return (qDef.selectMode === 'MULTIPLE' || qDef.selectMode === 'SINGLE');
   }
 
   getOptionDisplay(options: NameValue[], key: string): string {
     if (options != null) {
-      const nameValue = options.find(obj => {
-        return obj.name === key;
-      });
+      const nameValue = options.find(obj => obj.name === key);
       if (nameValue != null) {
         return nameValue.value;
       }
@@ -1741,16 +1674,16 @@ export class ParticipantListComponent implements OnInit {
         if (pt.isSelected) {
           if (this.assignMR) {
             if (this.assignee.assigneeId === '-1') {
-              pt.participant.assigneeMr = null;
+              pt.participant.assigneeIdMr = null;
             } else {
-              pt.participant.assigneeMr = this.assignee.name;
+              pt.participant.assigneeIdMr = this.assignee.name;
             }
           }
           if (this.assignTissue) {
             if (this.assignee.assigneeId === '-1') {
-              pt.participant.assigneeMr = null;
+              pt.participant.assigneeIdTissue = null;
             } else {
-              pt.participant.assigneeTissue = this.assignee.name;
+              pt.participant.assigneeIdTissue = this.assignee.name;
             }
           }
           assignParticipants.push(new AssigneeParticipant(pt.participant.participantId, this.assignee.assigneeId,
@@ -1762,8 +1695,8 @@ export class ParticipantListComponent implements OnInit {
           localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
           this.assignMR, this.assignTissue, JSON.stringify(assignParticipants)
         )
-        .subscribe(// need to subscribe, otherwise it will not send!
-          data => {
+        .subscribe({ // need to subscribe, otherwise it will not send!
+          next: data => {
             const result = Result.parse(data);
             if (result.code !== 200) {
               this.additionalMessage = result.body;
@@ -1772,13 +1705,13 @@ export class ParticipantListComponent implements OnInit {
             this.assignMR = false;
             this.assignTissue = false;
           },
-          err => {
+          error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
               this.router.navigate([Statics.HOME_URL]);
             }
             this.additionalMessage = 'Error - Assigning Participants, Please contact your DSM developer';
           }
-        );
+        });
     }
     this.modal.hide();
     window.scrollTo(0, 0);
@@ -1829,31 +1762,34 @@ export class ParticipantListComponent implements OnInit {
     this.jsonPatch = jsonPatch;
     this.loadingParticipants = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     this.dsmService.filterData(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), jsonPatch, this.parent, null)
-      .subscribe(data => {
-        this.participantList = [];
-        this.additionalMessage = '';
-        this.originalParticipantList = [];
-        this.copyParticipantList = [];
-        if (data != null) {
-          const jsonData = data;
-          jsonData['participants'].forEach((val) => {
-            const participant = Participant.parse(val);
-            this.participantList.push(participant);
-          });
-          this.originalParticipantList = this.participantList;
-          this.participantsSize = jsonData['totalCount'];
-          const date = new Date();
-          this.loadedTimeStamp = Utils.getDateFormatted(date, Utils.DATE_STRING_IN_EVENT_CVS);
-          this.additionalMessage = null;
+      .subscribe({
+        next: data => {
+          this.participantList = [];
+          this.additionalMessage = '';
+          this.originalParticipantList = [];
+          this.copyParticipantList = [];
+          if (data != null) {
+            const jsonData = data;
+            jsonData['participants'].forEach((val) => {
+              const participant = Participant.parse(val);
+              this.participantList.push(participant);
+            });
+            this.originalParticipantList = this.participantList;
+            this.participantsSize = jsonData['totalCount'];
+            const date = new Date();
+            this.loadedTimeStamp = Utils.getDateFormatted(date, Utils.DATE_STRING_IN_EVENT_CVS);
+            this.additionalMessage = null;
+          }
+          this.loadingParticipants = null;
+          this.filterQuery = queryText;
+        },
+        error: () => {
+          this.participantList = [];
+          this.originalParticipantList = [];
+          this.copyParticipantList = [];
+          this.loadingParticipants = null;
+          this.additionalMessage = 'Error - Filtering Participant List, Please contact your DSM developer';
         }
-        this.loadingParticipants = null;
-        this.filterQuery = queryText;
-      }, () => {
-        this.participantList = [];
-        this.originalParticipantList = [];
-        this.copyParticipantList = [];
-        this.loadingParticipants = null;
-        this.additionalMessage = 'Error - Filtering Participant List, Please contact your DSM developer';
       });
   }
 
@@ -1894,9 +1830,7 @@ export class ParticipantListComponent implements OnInit {
   updateParticipant(participant: Participant): void {
     if (participant != null) {
       this.showParticipantInformation = false;
-      const pt = this.participantList.find(p => {
-        return p.data.profile[ 'guid' ] === participant.data.profile[ 'guid' ];
-      });
+      const pt = this.participantList.find(p => p.data.profile[ 'guid' ] === participant.data.profile[ 'guid' ]);
       if (pt != null) {
         const index = this.participantList.indexOf(pt);
         this.participantList[ index ] = participant;
@@ -2010,10 +1944,10 @@ export class ParticipantListComponent implements OnInit {
   }
 
   hasThisColumnSelected(selectedColumnArray: Array<Filter>, oncColumn: Filter): boolean {
-    const f = selectedColumnArray.find(item => {
-      return item.participantColumn.tableAlias === oncColumn.participantColumn.tableAlias
-        && item.participantColumn.name === oncColumn.participantColumn.name;
-    });
+    const f = selectedColumnArray.find(item =>
+      item.participantColumn.tableAlias === oncColumn.participantColumn.tableAlias &&
+      item.participantColumn.name === oncColumn.participantColumn.name
+    );
     return f !== undefined;
   }
 
@@ -2103,7 +2037,9 @@ export class ParticipantListComponent implements OnInit {
     if (participant == null) {
       return '';
     }
-    const sample: Sample = participant.kits.find(kit => kit.bspCollaboratorSampleId === personsParticipantData.data['COLLABORATOR_PARTICIPANT_ID']);
+    const sample: Sample = participant.kits.find(kit =>
+      kit.bspCollaboratorSampleId === personsParticipantData.data['COLLABORATOR_PARTICIPANT_ID']
+    );
     if (sample && fieldSetting.actions[0].value && sample[fieldSetting.actions[0].value] && fieldSetting.displayType) {
       if (fieldSetting.displayType === 'DATE') {
         return new Date(sample[fieldSetting.actions[0].value]).toISOString().split('T')[0];
@@ -2181,7 +2117,7 @@ export class ParticipantListComponent implements OnInit {
   private createFilter(field: any): Filter {
     let showType = field.displayType;
     let filter: Filter = new Filter(
-      new ParticipantColumn(field.columnDisplay.replace('*', ''), field.columnName, 'participantData', field.fieldType, false),
+      new ParticipantColumn(field.columnDisplay?.replace('*', ''), field.columnName, 'participantData', field.fieldType, false),
       showType,
       field.possibleValues
     );
@@ -2274,5 +2210,10 @@ export class ParticipantListComponent implements OnInit {
       this.allFieldNames.add(tmp + '.' + filter.participantColumn.name);
      });
      this.orderColumns();
+  }
+
+  private sendAnalyticsMetric(): void {
+    const passed = new Date().getTime() - this.start;
+    this.dsmService.sendAnalyticsMetric(this.getRealm(), passed).subscribe({});
   }
 }

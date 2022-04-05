@@ -9,11 +9,12 @@ import { LoggingService, ActivityPicklistQuestionBlock, QuestionType, ActivityCo
 import { ActivityStrictMatchValidationRule } from './validators/activityStrictMatchValidationRule';
 import { ActivityUniqueValidationRule } from './validators/activityUniqueValidationRule';
 
-let service: ActivityValidatorBuilder;
-const loggerServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logError']);
-
 describe('ActivityValidatorBuilder Test', () => {
+    let service: ActivityValidatorBuilder;
+    let loggerServiceSpy: jasmine.SpyObj<LoggingService>;
+
     beforeEach(() => {
+        loggerServiceSpy = jasmine.createSpyObj('LoggingService', ['logError']);
         TestBed.configureTestingModule({
             imports: [HttpClientModule],
             providers: [

@@ -6,31 +6,50 @@
 
 <ng-template #content>
   <app-notifications [messages]="messages"></app-notifications>
+  <div class="grouper">
+      <h1 class="title">
+          {{ 'ParticipantsList.Title' | translate }}
+      </h1>
 
-  <h1 class="title">
-    {{ 'ParticipantsList.Title' | translate }}
-  </h1>
+      <ng-container *ngTemplateOutlet="participants.length ? participantsList : noParticipants"></ng-container>
 
-  <ng-container *ngTemplateOutlet="participants.length ? participantsList : noParticipants"></ng-container>
+      <div *ngIf="errorMessage" class="ErrorMessage">
+          <span>{{ errorMessage }}</span>
+      </div>
 
-  <div *ngIf="errorMessage" class="ErrorMessage">
-    <span>{{ errorMessage }}</span>
+      <div class="controls">
+          <button
+              *ngIf="!isOperatorEnrolled"
+              class="button button--primary"
+              (click)="onAddMyselfClick()"
+              [disabled]="isAddMyselfBtnDisabled"
+          >
+              <div class="user-container">
+                  <img class="user" src="/assets/images/user.png" alt="user icon">
+              </div>
+              <div class="text-container">
+                  <p>Enroll myself</p>
+              </div>
+              <div class="next-container">
+                  <ng-container *ngTemplateOutlet="chevronRightSvg"></ng-container>
+              </div>
+
+          </button>
+
+          <button class="button button--primary" (click)="onAddParticipantClick()" [disabled]="isAddParticipantBtnDisabled">
+              <div class="users-container">
+                  <img class="user" src="/assets/images/user-friends.png" alt="users icon">
+              </div>
+              <div class="text-container">
+                  <p class="bolder">Enroll my child/dependent</p>
+              </div>
+              <div class="next-container">
+                  <ng-container *ngTemplateOutlet="chevronRightSvg"></ng-container>
+              </div>
+          </button>
+      </div>
   </div>
 
-  <div class="controls">
-    <button
-      *ngIf="!isOperatorEnrolled"
-      class="button button--outline"
-      (click)="onAddMyselfClick()"
-      [disabled]="isAddMyselfBtnDisabled"
-    >
-      Add Myself
-    </button>
-
-    <button class="button button--primary" (click)="onAddParticipantClick()" [disabled]="isAddParticipantBtnDisabled">
-      Add Participant
-    </button>
-  </div>
 </ng-template>
 
 <ng-template #participantsList>
@@ -65,6 +84,7 @@
               class="participant__expand-btn"
               [class.participant__expand-btn--rotate]="isParticipantContentExpanded(participant)"
             >
+                {{ isParticipantContentExpanded(participant) ? 'Hide' : 'Show' }}
               <mat-icon>expand_more</mat-icon>
             </button>
           </div>
@@ -84,7 +104,10 @@
 </ng-template>
 
 <ng-template #noParticipants>
-  <p class="no-participants">
-    {{ 'ParticipantsList.NoParticipants' | translate }}
-  </p>
+  <p class="no-participants" [innerHTML]="'ParticipantsList.NoParticipants' | translate"></p>
+</ng-template>
+
+<!--svg image container-->
+<ng-template #chevronRightSvg>
+    <img src="/assets/images/next.svg" alt="next button">
 </ng-template>

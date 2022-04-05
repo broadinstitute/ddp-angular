@@ -14,8 +14,9 @@
       </ng-container>
 
       <ng-container *ngIf="fieldSetting.displayType === 'CHECKBOX'">
-        <mat-checkbox [color]="isCheckboxPatchedCurrently(fieldSetting.columnName)" [disabled]="fieldSetting.readonly" disableRipple
-                     (change)="valueChanged($event)">
+        <mat-checkbox [color]="isCheckboxPatchedCurrently(fieldSetting.columnName)" [disabled]="fieldSetting.readonly"
+                      disableRipple
+                      (change)="valueChanged($event)" [checked]="isChecked()">
         </mat-checkbox>
       </ng-container>
 
@@ -23,7 +24,7 @@
         <mat-select [ngClass]="{'Input--Abstraction': true, 'Color--Field--Patched': isPatchedCurrently(fieldSetting.columnName)}" placeholder="{{fieldSetting.columnDisplay}}"
                   [ngModel]="getActivityAnswer()"
                   [disabled]="fieldSetting.readonly"
-                  (change)="valueChanged($event)">
+                  (selectionChange)="valueChanged($event)">
           <mat-option *ngFor="let value of fieldSetting.possibleValues" [value]="value.value">
             <ng-container *ngIf="value.name !== undefined">
               {{value.name}}

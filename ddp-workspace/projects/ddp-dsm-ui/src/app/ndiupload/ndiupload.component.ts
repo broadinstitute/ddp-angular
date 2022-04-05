@@ -38,14 +38,14 @@ export class NDIUploadComponent implements OnInit {
     this.errorMessage = null;
     this.additionalMessage = null;
     this.loading = true;
-    this.dsmService.uploadNdiFile(this.file).subscribe(
-      data => {
+    this.dsmService.uploadNdiFile(this.file).subscribe({
+      next: data => {
         this.errorMessage = '';
           this.loading = false;
         //        console.log(`received: ${JSON.stringify(data, null, 2)}`);
         this.downloadFile(data);
       },
-      err => {
+      error: err => {
         //        console.log(`received***: ${JSON.stringify(err, null, 2)}`);
         this.loading = false;
         if (err._body === Auth.AUTHENTICATION_ERROR) {
@@ -53,7 +53,7 @@ export class NDIUploadComponent implements OnInit {
         }
         this.errorMessage = 'Error - Uploading txt\n' + err._body;
       }
-    );
+    });
   }
 
   downloadFile(data: any): void {

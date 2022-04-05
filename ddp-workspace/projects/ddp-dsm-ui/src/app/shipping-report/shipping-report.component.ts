@@ -36,8 +36,8 @@ export class ShippingReportComponent implements OnInit {
   private loadReport(startDate: string, endDate: string): void {
     this.loadingReport = true;
     let jsonData: any[];
-    this.dsmService.getShippingReport(startDate, endDate).subscribe(
-      data => {
+    this.dsmService.getShippingReport(startDate, endDate).subscribe({
+      next: data => {
         this.reportData = [];
         const result = Result.parse(data);
         if (result.code != null && result.code !== 200) {
@@ -51,14 +51,14 @@ export class ShippingReportComponent implements OnInit {
         }
         this.loadingReport = false;
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
         this.loadingReport = false;
         this.errorMessage = 'Error - Loading Sample Report\nPlease contact your DSM developer';
       }
-    );
+    });
   }
 
   public reload(): void {
@@ -76,8 +76,8 @@ export class ShippingReportComponent implements OnInit {
   downloadReport(): void {
     let jsonData: any[];
     const downloadData: any[] = [];
-    this.dsmService.getShippingReportOverview().subscribe(
-      data => {
+    this.dsmService.getShippingReportOverview().subscribe({
+      next: data => {
         // console.info(`received: ${JSON.stringify(data, null, 2)}`);
         const result = Result.parse(data);
         if (result.code != null && result.code !== 200) {
@@ -91,14 +91,14 @@ export class ShippingReportComponent implements OnInit {
           this.saveReport(downloadData);
         }
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
         this.loadingReport = false;
         this.errorMessage = 'Error - Loading Sample Report\nPlease contact your DSM developer';
       }
-    );
+    });
   }
 
   saveReport(downloadData: any[]): void {

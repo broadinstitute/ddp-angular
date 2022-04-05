@@ -1,3 +1,5 @@
+import { FuncType } from './auth';
+
 declare const $;
 
 export const screensIds = {
@@ -9,20 +11,20 @@ export const screensIds = {
   activateAccount: 'activate-account',
 };
 
-const onChangeScreen = (screenName: string) => {
+const onChangeScreen: FuncType<void> = (screenName: string) => {
   $('.path').addClass('not-visible');
   $('.path.' + screenName).removeClass('not-visible').addClass('visible');
 };
 
-export const onActivateSignUp = () => onChangeScreen(screensIds.signUp);
-export const onActivateLogin = () => onChangeScreen(screensIds.login);
-export const onActivateForgotPassword = () => onChangeScreen(screensIds.forgetPassword);
-export const onActivateResendInstructions = () => onChangeScreen(screensIds.resendInstructions);
-export const onActivateActivateAccount = () => onChangeScreen(screensIds.activateAccount);
-export const onActivateResetPasssword = () => onChangeScreen(screensIds.resetPassword);
+export const onActivateSignUp: FuncType<void> = () => onChangeScreen(screensIds.signUp);
+export const onActivateLogin: FuncType<void> = () => onChangeScreen(screensIds.login);
+export const onActivateForgotPassword: FuncType<void> = () => onChangeScreen(screensIds.forgetPassword);
+export const onActivateResendInstructions: FuncType<void> = () => onChangeScreen(screensIds.resendInstructions);
+export const onActivateActivateAccount: FuncType<void> = () => onChangeScreen(screensIds.activateAccount);
+export const onActivateResetPasssword: FuncType<void> = () => onChangeScreen(screensIds.resetPassword);
 
 let timeoutId;
-export const showModal = (message?: string, isError?: boolean) => {
+export const showModal: FuncType<void> = (message?: string, isError?: boolean) => {
   if (isError) {
     $('.NoticesModal--success').addClass('NoticesModal--danger');
   } else {
@@ -38,7 +40,7 @@ export const showModal = (message?: string, isError?: boolean) => {
   }, 5000);
 };
 
-export const hideModal = () => {
+export const hideModal: FuncType<any> = () => {
   if (timeoutId) {
     clearTimeout(timeoutId);
   }
@@ -46,12 +48,12 @@ export const hideModal = () => {
   $('.NoticesModal--success').removeClass('NoticesModal--danger');
 };
 
-export const prepareUiElements = (url: string): void => {
+export const prepareUiElements: FuncType<void> = (url: string): void => {
   $('.prepare-link-host').map((i, el) => {
     const $el = $(el);
     $el.attr('href', url + $el.attr('href'));
   });
 };
 
-export const showTooltip = (x) => x.parentElement.getElementsByClassName('tooltip')[0].classList.add('in');
-export const hideTooltip = (x) => x.parentElement.getElementsByClassName('tooltip')[0].classList.remove('in');
+export const showTooltip: FuncType<void> = (x) => x.parentElement.getElementsByClassName('tooltip')[0].classList.add('in');
+export const hideTooltip: FuncType<void> = (x) => x.parentElement.getElementsByClassName('tooltip')[0].classList.remove('in');

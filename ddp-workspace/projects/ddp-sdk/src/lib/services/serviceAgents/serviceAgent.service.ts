@@ -132,7 +132,6 @@ export class ServiceAgent<TEntity> {
                             } else {
                                 return of(null);
                             }
-
                         })
                     );
             })

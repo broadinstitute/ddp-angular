@@ -27,12 +27,12 @@ describe('QuestionPromptComponent', () => {
     let fixture: ComponentFixture<QuestionPromptComponent>;
     let debugElement: DebugElement;
 
-    const configServiceSpy = jasmine.createSpyObj('ddp.config', ['tooltipIconUrl']);
-    configServiceSpy.tooltipIconUrl.and.callFake(() => {
-        return '/path/';
-    });
+    let configServiceSpy;
 
     beforeEach(waitForAsync(() => {
+        configServiceSpy = jasmine.createSpyObj('ddp.config', ['tooltipIconUrl']);
+        configServiceSpy.tooltipIconUrl.and.callFake(() => '/path/');
+
         TestBed.configureTestingModule({
             imports: [
                 BrowserAnimationsModule,

@@ -1,7 +1,7 @@
 .pb {
   display: flex;
 
-  margin: 1.6rem 0 3.2rem;
+  margin-top: 1.6rem;
   padding: 0;
 
   list-style: none;
@@ -115,16 +115,22 @@
   }
 
   &--complete &__circle {
-    background: #521b93;
-    border-color: #521b93;
+    background-image: url("../../../assets/images/Check.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-color: #6FCE24;
   }
 
   &--complete &__count {
-    color: #ffffff;
+    display: none;
+  }
+  &--current &__count {
+    color: #FFFFFF!important;
   }
 
   &--current &__circle {
-    background: #ffffff;
+    background: #521b93;
     border-color: #521b93;
   }
 

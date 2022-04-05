@@ -23,6 +23,9 @@ import { ActivityMatrixQuestionBlock } from '../../models/activity/activityMatri
 import * as _ from 'underscore';
 import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
 import { ActivityInstanceSelectQuestionBlock } from '../../models/activity/activityInstanceSelectQuestionBlock';
+import { ActivityDecimalQuestionBlock } from '../../models/activity/activityDecimalQuestionBlock';
+import { ValidationRuleType } from './validationRuleType';
+import { DecimalHelper } from '../../utility/decimalHelper';
 
 const DETAIL_MAXLENGTH = 500;
 
@@ -80,13 +83,21 @@ export class ActivityQuestionConverter {
 
                 matrixBlock.answerId = answer?.answerGuid;
                 matrixBlock.answer = answer?.value;
-            } else {
+            } else if (questionJson.questionType === QuestionType.File) {
+                const file = questionBlock as ActivityFileQuestionBlock;
+                if(file) {
+                    const [answers] = questionJson.answers;
+                    file.answer = answers.value;
+                }
+            }
+            else {
                 questionBlock.answerId = questionJson.answers[0].answerGuid;
                 const valueForQuestion = questionJson.answers[0].value;
                 // case where we are getting answer for composite
                 if (_.isArray(valueForQuestion)) {
                     const answer = (valueForQuestion as any[][]).map(rowOfValues => {
                         if (_.isArray(rowOfValues)) {
+                            // eslint-disable-next-line arrow-body-style
                             return (rowOfValues as any[]).map(eachValue => {
                                 // todo this object signature ought to have its own interface
                                 return eachValue !== null ? {value: eachValue.value, stableId: questionJson.stableId} : null;
@@ -145,6 +156,10 @@ export class ActivityQuestionConverter {
                 func: (questionJson) => this.getNumericBlock(questionJson)
             },
             {
+                type: QuestionType.Decimal,
+                func: (questionJson) => this.getDecimalBlock(questionJson)
+            },
+            {
                 type: QuestionType.Picklist,
                 func: (questionJson) => this.getPicklistBlock(questionJson)
             },
@@ -198,6 +213,8 @@ export class ActivityQuestionConverter {
                 textBlock.regexPattern = validation.regexPattern;
             }
         });
+        textBlock.hasUniqueValueValidator = !!questionJson.validations
+            .find(validation => validation.rule === ValidationRuleType.UniqueValue);
         textBlock.confirmEntry = questionJson.confirmEntry;
         textBlock.confirmPrompt = questionJson.confirmPrompt;
         textBlock.confirmPlaceholder = questionJson.confirmPlaceholderText;
@@ -210,16 +227,26 @@ export class ActivityQuestionConverter {
     private getNumericBlock(questionJson: any): ActivityNumericQuestionBlock {
         const numericBlock = new ActivityNumericQuestionBlock();
         numericBlock.placeholder = questionJson.placeholderText;
-        numericBlock.numericType = questionJson.numericType;
-        questionJson.validations.forEach(validation => {
-            if (_.isNumber(validation.min)) {
-                numericBlock.min = validation.min;
-            }
-            if (_.isNumber(validation.max)) {
-                numericBlock.max = validation.max;
-            }
-        });
+        const intRangeValidation = questionJson.validations.find(validation => validation.rule === ValidationRuleType.IntRange);
+        if (intRangeValidation) {
+            numericBlock.min = intRangeValidation.min || null;
+            numericBlock.max = intRangeValidation.max || null;
+        }
         return numericBlock;
+    }
+
+    private getDecimalBlock(questionJson: any): ActivityDecimalQuestionBlock {
+        const decimalBlock = new ActivityDecimalQuestionBlock();
+        decimalBlock.placeholder = questionJson.placeholderText;
+        if (questionJson.scale) {
+            decimalBlock.scale = questionJson.scale;
+        }
+        const decimalRangeValidation = questionJson.validations.find(validation => validation.rule === ValidationRuleType.DecimalRange);
+        if (decimalRangeValidation) {
+            decimalBlock.min = decimalRangeValidation.min && DecimalHelper.mapDecimalAnswerToNumber(decimalRangeValidation.min) || null;
+            decimalBlock.max = decimalRangeValidation.max && DecimalHelper.mapDecimalAnswerToNumber(decimalRangeValidation.max) || null;
+        }
+        return decimalBlock;
     }
 
     private getPicklistBlock(questionJson: any): ActivityPicklistQuestionBlock {
@@ -277,7 +304,9 @@ export class ActivityQuestionConverter {
         matrixBlock.questions = questionJson.questions;
         matrixBlock.options = questionJson.options;
         matrixBlock.groups = questionJson.groups;
-
+        matrixBlock.renderMode = questionJson.renderMode;
+        matrixBlock.openBtnText = questionJson.modal;
+        matrixBlock.modalTitle = questionJson.modalTitle;
         return matrixBlock;
     }
 

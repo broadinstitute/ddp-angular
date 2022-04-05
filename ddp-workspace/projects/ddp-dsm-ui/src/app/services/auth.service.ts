@@ -125,11 +125,9 @@ export class Auth {
 
     let dsmResponse: any;
 
-    dsmObservable.subscribe(
-      response => dsmResponse = response,
-      () => {
-      },
-      () => {
+    dsmObservable.subscribe({
+      next: response => dsmResponse = response,
+      complete: () => {
         const dsmToken = dsmResponse.dsmToken;
         localStorage.setItem(SessionService.DSM_TOKEN_NAME, dsmToken);
         this.sessionService.setDSMToken(dsmToken);
@@ -159,7 +157,7 @@ export class Auth {
           this.redirect();
         }
       }
-    );
+    });
   }
 
   public buildHeaders(): any {

@@ -94,7 +94,7 @@ export class TissuePageComponent implements OnInit {
   addTissue(): void {
     this.oncHistoryDetail.tissues.push(new Tissue(null, this.oncHistoryDetail.oncHistoryDetailId, null, null, null, null,
       null, null, null, null, null, null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null, null, null));
+      null, null, null, null, null, null, null, null, null, null, null, null));
   }
 
   isPatchedCurrently(field: string): boolean {
@@ -146,17 +146,13 @@ export class TissuePageComponent implements OnInit {
       this.currentPatchField = parameterName;
       this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(// need to subscribe, otherwise it will not send!
         data => {
-          const result = Result.parse(data);
-          if (result.code === 200) {
-            this.oncHistoryDetail[ parameterName ] = v;
-            if (result.body != null) {
-              const jsonData: any | any[] = JSON.parse(result.body);
-              if (jsonData instanceof Array) {
-                jsonData.forEach((val) => {
-                  const nameValue = NameValue.parse(val);
-                  this.oncHistoryDetail[ nameValue.name.substr(nameValue.name.indexOf('.') + 1) ] = nameValue.value;
-                });
-              }
+          if (data) {
+          this.oncHistoryDetail[ parameterName ] = v;
+          if (data instanceof Array) {
+            data.forEach( ( val ) => {
+              const nameValue = NameValue.parse( val );
+              this.oncHistoryDetail[ nameValue.name.substr( nameValue.name.indexOf( '.' ) + 1 ) ] = nameValue.value;
+            } );
             }
           }
           // console.info(`response saving data: ${JSON.stringify(data, null, 2)}`);
@@ -189,8 +185,8 @@ export class TissuePageComponent implements OnInit {
       userMail: this.role.userMail(),
     };
     this.dsmService.applyDestructionPolicyToAll(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), JSON.stringify(jsonData))
-      .subscribe(
-        data => {
+      .subscribe({
+        next: data => {
           const result = Result.parse(data);
           if (result.code === 200) {
             for (const oncHis of this.participant.oncHistoryDetails) {
@@ -206,11 +202,12 @@ export class TissuePageComponent implements OnInit {
             this.applyToAllModal.show();
           }
         },
-        () => {
+        error: () => {
           this._showWarningModal = true;
           this._warningMessage = this._warningUnsuccessfulMessage;
           this.applyToAllModal.show();
-        });
+        }
+      });
   }
 
   getUtil(): Utils {

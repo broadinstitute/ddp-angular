@@ -1,7 +1,7 @@
 {
   "extends": "../../.eslintrc.json",
   "ignorePatterns": [
-    "!**/*"
+    "src/antlr4-pex-grammar/**"
   ],
   "overrides": [
     {

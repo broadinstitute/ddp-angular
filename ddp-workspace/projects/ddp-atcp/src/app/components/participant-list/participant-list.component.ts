@@ -86,16 +86,16 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
         tap(participantGuid => this.session.setParticipant(participantGuid)),
         switchMap(() => this.workflowAgent.fromParticipantList()),
       )
-      .subscribe(
-        () => {
+      .subscribe({
+        next: () => {
           this.disableAddParticipantsButton = false;
           this.activityService.setCurrentActivity(null);
           this.router.navigateByUrl(RouterResources.Survey);
         },
-        () => {
+        error: () => {
           this.disableAddParticipantsButton = false;
         }
-      );
+      });
   }
 
   private getParticipants(): void {
@@ -185,7 +185,7 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
         activity => activity.activityCode === ActivityCodes.REGISTRATION,
       );
 
-      return registrationActivity.statusCode !== this.COMPLETE_STATUS_CODE;
+      return registrationActivity.statusCode !== this.COMPLETE_STATUS_CODE && !registrationActivity.previousInstanceGuid;
     });
 
     if (!accidentalParticipant) {

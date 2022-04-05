@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy, AfterViewChecked} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TabDirective } from 'ngx-bootstrap/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -37,7 +37,7 @@ const fileSaver = require('file-saver');
   templateUrl: './participant-page.component.html',
   styleUrls: [ './participant-page.component.css' ]
 })
-export class ParticipantPageComponent implements OnInit, OnDestroy {
+export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild(ModalComponent)
   public universalModal: ModalComponent;
 
@@ -58,6 +58,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
   @Input() hideSamplesTab: boolean;
   @Input() showContactInformation: boolean;
   @Input() showComputedObject: boolean;
+  @Input() selectedActivityCode: string;
   @Output() leaveParticipant = new EventEmitter();
   @Output('ngModelChange') update = new EventEmitter();
 
@@ -71,6 +72,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
   additionalMessage: string;
 
   source = 'normal';
+
+  openActivity: string;
 
   loadingParticipantPage = false;
 
@@ -105,10 +108,12 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
   updatedFirstName: string;
   updatedLastName: string;
   updatedEmail: string;
+  updatedDNC = false;
   updatingParticipant = false;
   private taskType: string;
   private checkParticipantStatusInterval: any;
   isEmailValid: boolean;
+  isOncHistoryVisible = false;
 
   accordionOpenedPanel = '';
 
@@ -117,6 +122,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
   downloading = false;
   message: string = null;
   bundle = false;
+  private scrolled: boolean;
   constructor(private auth: Auth, private compService: ComponentService, private dsmService: DSMService, private router: Router,
                private role: RoleService, private util: Utils, private route: ActivatedRoute, public dialog: MatDialog) {
     if (!auth.authenticated()) {
@@ -131,6 +137,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
     });
   }
 
+
   ngOnInit(): void {
     this.setDefaultProfileValues();
     this.payload = {
@@ -140,8 +147,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
     };
     this.checkParticipantStatusInterval = setInterval(() => {
       if (this.updatingParticipant) {
-        this.dsmService.checkUpdatingParticipantStatus().subscribe(
-          data => {
+        this.dsmService.checkUpdatingParticipantStatus().subscribe({
+          next: data => {
             const parsedData = JSON.parse(data.body);
             if (parsedData[ 'resultType' ] === 'SUCCESS'
                 && this.isReturnedUserAndParticipantTheSame(parsedData)) {
@@ -152,18 +159,69 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
               this.openResultDialog(parsedData[ 'errorMessage' ]);
             }
          },
-         () => {
+          error: () => {
             this.openResultDialog('Error - Failed to update participant');
          }
-        );
+        });
       }
     }, 5000);
     this.loadInstitutions();
-    window.scrollTo(0, 0);
+    this.scrolled = false;
+    if(!this.selectedActivityCode) {
+      window.scrollTo( 0, 0 );
+      this.scrolled = true;
+    }
+    this.validateEmailInput(this.participant.data.profile['email']);
+    this.isOncHistoryVisible = this.participant.data.status === 'ENROLLED';
+
+    this.displayActivityOrder();
+    this.addMedicalProviderInformation();
+  }
+
+  addMedicalProviderInformation(): void {
+    if (this.participant != null && this.participant.data != null
+      && this.participant.data.profile != null && this.participant.data.medicalProviders != null && this.participant.medicalRecords) {
+      if (this.participant.medicalRecords.length > 0) {
+        this.participant.medicalRecords.forEach(medicalRecord => {
+          const medicalProvider = this.participant.data.medicalProviders.find(medProvider => {
+            const tmpId = medProvider.legacyGuid != null && medProvider.legacyGuid !== 0 ?
+              medProvider.legacyGuid : medProvider.guid;
+            return tmpId === medicalRecord.ddpInstitutionId;
+          });
+          medicalRecord.type = medicalProvider.type;
+          medicalRecord.nameDDP = medicalProvider.physicianName;
+          medicalRecord.institutionDDP = medicalProvider.institutionName;
+          medicalRecord.streetAddressDDP = medicalProvider.street;
+          medicalRecord.cityDDP = medicalProvider.city;
+          medicalRecord.stateDDP = medicalProvider.state;
+        });
+      }
+    }
+  }
+
+  ngAfterViewChecked(): void {
+    if ( !this.selectedActivityCode || this.scrolled || !document.getElementById(this.selectedActivityCode))
+      {return;}
+
+    document.getElementById(this.selectedActivityCode).scrollIntoView();
+    this.scrolled = true;
   }
 
   ngOnDestroy(): void {
     clearInterval(this.checkParticipantStatusInterval);
+  }
+
+  displayActivityOrder(): void {
+    const orderedActivities = [];
+
+    [...this.activityDefinitions].sort(({displayOrder: A},{displayOrder: B}) => A - B)
+      .forEach(activity => {
+      const foundActivity = this.participant.data.activities
+        .find(a => activity.activityCode === a.activityCode && activity.activityVersion === a.activityVersion);
+      foundActivity && orderedActivities.push(foundActivity);
+    });
+
+    this.participant.data.activities = orderedActivities;
   }
 
   showFamilyMemberPopUpOnClick(): void {
@@ -177,6 +235,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
     this.updatedFirstName = this.participant.data.profile[ 'firstName' ];
     this.updatedLastName = this.participant.data.profile[ 'lastName' ];
     this.updatedEmail = this.participant.data.profile[ 'email' ];
+    this.updatedDNC = this.participant.data.profile[ 'doNotContact' ];
   }
 
   private isReturnedUserAndParticipantTheSame(parsedData: any): boolean {
@@ -196,6 +255,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
       }
       case 'UPDATE_EMAIL': {
         this.participant.data.profile[ 'email' ] = this.updatedEmail;
+        break;
+      }
+      case 'UPDATE_DNC': {
+        this.participant.data.profile[ 'doNotContact' ] = this.updatedDNC;
         break;
       }
       default: {
@@ -224,14 +287,11 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
     this.updatingParticipant = true;
     this.taskType = 'UPDATE_FIRSTNAME';
     this.payload[ 'data' ][ 'firstName' ] = this.updatedFirstName;
-    this.dsmService.updateParticipant(JSON.stringify(this.payload)).subscribe(
-      () => {
-
-      },
-      () => {
+    this.dsmService.updateParticipant(JSON.stringify(this.payload)).subscribe({
+      error: () => {
         this.openResultDialog('Error - Failed to update participant');
       }
-    );
+    });
     delete this.payload[ 'data' ][ 'firstName' ];
   }
 
@@ -239,14 +299,11 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
     this.updatingParticipant = true;
     this.taskType = 'UPDATE_LASTNAME';
     this.payload[ 'data' ][ 'lastName' ] = this.updatedLastName;
-    this.dsmService.updateParticipant(JSON.stringify(this.payload)).subscribe(
-      () => {
-
-      },
-      () => {
+    this.dsmService.updateParticipant(JSON.stringify(this.payload)).subscribe({
+      error: () => {
         this.openResultDialog('Error - Failed to update participant');
       }
-    );
+    });
     delete this.payload[ 'data' ][ 'lastName' ];
   }
 
@@ -254,14 +311,11 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
     this.updatingParticipant = true;
     this.taskType = 'UPDATE_EMAIL';
     this.payload[ 'data' ][ 'email' ] = this.updatedEmail;
-    this.dsmService.updateParticipant(JSON.stringify(this.payload)).subscribe(
-      () => {
-
-      },
-      () => {
+    this.dsmService.updateParticipant(JSON.stringify(this.payload)).subscribe({
+      error: () => {
         this.openResultDialog('Error - Failed to update participant');
       }
-    );
+    });
     delete this.payload[ 'data' ][ 'email' ];
   }
 
@@ -277,11 +331,21 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
     }
   }
 
+  updateDNC(): void {
+    this.updatingParticipant = true;
+    this.taskType = 'UPDATE_DNC';
+    this.payload[ 'data' ][ 'doNotContact' ] = this.updatedDNC;
+    this.dsmService.updateParticipant( JSON.stringify( this.payload ) ).subscribe({
+      error: () => {
+        this.openResultDialog( 'Error - Failed to update participant' );
+      }
+    });
+    delete this.payload['data' ][ 'doNotContact' ];
+  }
+
   getLanguageName(languageCode: string): string {
     if (this.preferredLanguage != null && this.preferredLanguage.length > 0) {
-      const language = this.preferredLanguage.find(obj => {
-        return obj.languageCode === languageCode;
-      });
+      const language = this.preferredLanguage.find(obj => obj.languageCode === languageCode);
       if (language != null) {
         return language.displayName;
       }
@@ -383,13 +447,13 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
           tissues.push(new Tissue(null, oncHis.oncHistoryDetailId, null, null, null, null,
             null, null, null, null, null, null, null, null
             , null, null, null, null, null, null, null, null, null,
-            null, null, null, null));
+            null, null, null, null, null, null, null));
           oncHis.tissues = tissues;
         } else if (oncHis.tissues.length < 1) {
           oncHis.tissues.push(new Tissue(null, oncHis.oncHistoryDetailId, null, null, null, null,
             null, null, null, null, null, null, null, null, null, null
             , null, null, null, null, null, null, null,
-            null, null, null, null));
+            null, null, null, null, null, null, null));
         }
       }
       if (!hasEmptyOncHis) {
@@ -397,7 +461,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
         tissues.push(new Tissue(null, null, null, null, null, null, null,
           null, null, null, null, null, null, null, null, null,
           null, null, null, null, null, null, null,
-          null, null, null, null));
+          null, null, null, null, null, null, null));
 
         const oncHis = new OncHistoryDetail(this.participant.participant.participantId,
           null, null, null, null, null, null, null, null, null, null,
@@ -418,7 +482,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
 
   valueChanged(value: any, parameterName: string, tableAlias: string): void {
     let v;
-    if (parameterName === 'additionalValues') {
+    if (parameterName === 'additionalValuesJson') {
       v = JSON.stringify(value);
     } else if (typeof value === 'string') {
       this.participant.participant[ parameterName ] = value;
@@ -447,19 +511,17 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
       this.currentPatchField = parameterName;
       this.patchFinished = false;
       // console.log( JSON.stringify( patch ) );
-      this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(// need to subscribe, otherwise it will not send!
-        data => {
-          const result = Result.parse(data);
-          if (result.code === 200 && result.body != null) {
-            const jsonData: any | any[] = JSON.parse(result.body);
-            if (jsonData instanceof Array) {
-              jsonData.forEach((val) => {
+      this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
+        next: data => {
+          if (data) {
+          if (data instanceof Array) {
+            data.forEach( ( val ) => {
                 const nameValue = NameValue.parse(val);
                 this.participant.participant[ nameValue.name ] = nameValue.value;
               });
             } else {
-              if (jsonData.participantId != null) {
-                this.participant.participant.participantId = jsonData.participantId;
+              if (data['participantId']) {
+              this.participant.participant.participantId = data['participantId'];
               }
             }
           }
@@ -467,13 +529,13 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
           this.patchFinished = true;
           this.additionalMessage = null;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.router.navigate([Statics.HOME_URL]);
           }
           this.additionalMessage = 'Error - Saving changed field \n' + err;
         }
-      );
+      });
     }
   }
 
@@ -502,27 +564,25 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
       const patch = patch1.getPatch();
       this.patchFinished = false;
       this.currentPatchField = parameterName;
-      this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(// need to subscribe, otherwise it will not send!
-        data => {
-          const result = Result.parse(data);
-          if (result.code === 200 && result.body != null) {
-            const jsonData: any[] = JSON.parse(result.body);
-            if (jsonData instanceof Array) {
-              jsonData.forEach((val) => {
+      this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
+        next: data => {
+          if (data) {
+            if (data instanceof Array) {
+              data.forEach( ( val ) => {
                 const nameValue = NameValue.parse(val);
-                oncHis[ nameValue.name.substr(3) ] = nameValue.value;
+                oncHis[ nameValue.name.substring(3) ] = nameValue.value;
               });
             }
           }
           this.patchFinished = true;
           this.currentPatchField = null;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.router.navigate([Statics.HOME_URL]);
           }
         }
-      );
+      });
     }
   }
 
@@ -589,8 +649,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
           }
         } else {
           if (firstOncHis.facility !== oncHis.facility ||
-            firstOncHis.fPhone !== oncHis.fPhone ||
-            firstOncHis.fFax !== oncHis.fFax) {
+            firstOncHis.phone !== oncHis.phone ||
+            firstOncHis.fax !== oncHis.fax) {
             doIt = false;
             this.warning = 'Tissues are not from the same facility';
           }
@@ -629,23 +689,23 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
   saveNote(): void {
     const patch1 = new PatchUtil(
       this.noteMedicalRecord.medicalRecordId, this.role.userMail(),
-      {name: 'mrNotes', value: this.noteMedicalRecord.mrNotes},
+      {name: 'notes', value: this.noteMedicalRecord.notes},
       null, null, null, Statics.MR_ALIAS,  null,
       localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.participant.participant.ddpParticipantId
     );
     const patch = patch1.getPatch();
 
-    this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(// need to subscribe, otherwise it will not send!
-      () => {
+    this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
+      next: () => {
         // console.info( `response saving data: ${JSON.stringify( data, null, 2 )}` );
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.router.navigate([Statics.HOME_URL]);
         }
         this.additionalMessage = 'Error - Saving paper C/R changes \n' + err;
       }
-    );
+    });
     this.noteMedicalRecord = null;
     this.universalModal.hide();
   }
@@ -657,9 +717,11 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
     if (!bundle) {
       configName = 'tissue';
     }
-    this.dsmService.downloadPDF(this.participant.participant.ddpParticipantId, null, null, null, null,
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM), configName, this.pdfs, requestOncHistoryList).subscribe(
-      data => {
+    this.dsmService.downloadPDF(this.participant.participant.ddpParticipantId,
+      null, null, null, null,
+      localStorage.getItem(ComponentService.MENU_SELECTED_REALM), configName, this.pdfs, requestOncHistoryList
+    ).subscribe({
+      next: data => {
         const date = new Date();
         this.downloadFile(data, '_TissueRequest_' + this.facilityName + '_' + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS));
 
@@ -670,18 +732,18 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
               // TODO: check is it correct ? - shadowed variables `date`
               // eslint-disable-next-line @typescript-eslint/no-shadow
               const date = new Date();
-              if (oncHis.tFaxSent == null) {
-                oncHis.tFaxSent = Utils.getFormattedDate(date);
-                oncHis.tFaxSentBy = this.role.userID();
-                this.oncHistoryValueChanged(oncHis.tFaxSent, 'tFaxSent', oncHis);
-              } else if (oncHis.tFaxSent2 == null) {
-                oncHis.tFaxSent2 = Utils.getFormattedDate(date);
-                oncHis.tFaxSent2By = this.role.userID();
-                this.oncHistoryValueChanged(oncHis.tFaxSent2, 'tFaxSent2', oncHis);
+              if (oncHis.faxSent == null) {
+                oncHis.faxSent = Utils.getFormattedDate( date );
+                oncHis.faxSentBy = this.role.userID();
+                this.oncHistoryValueChanged( oncHis.faxSent, 'faxSent', oncHis );
+              } else if (oncHis.faxSent2 == null) {
+                oncHis.faxSent2 = Utils.getFormattedDate( date );
+                oncHis.faxSent2By = this.role.userID();
+                this.oncHistoryValueChanged( oncHis.faxSent2, 'faxSent2', oncHis );
               } else {
-                oncHis.tFaxSent3 = Utils.getFormattedDate(date);
-                oncHis.tFaxSent3By = this.role.userID();
-                this.oncHistoryValueChanged(oncHis.tFaxSent3, 'tFaxSent3', oncHis);
+                oncHis.faxSent3 = Utils.getFormattedDate( date );
+                oncHis.faxSent3By = this.role.userID();
+                this.oncHistoryValueChanged( oncHis.faxSent3, 'faxSent3', oncHis );
               }
               oncHis.changedBy = this.role.userMail();
               oncHis.changed = true;
@@ -694,7 +756,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
         this.downloading = false;
         this.message = 'Download finished.';
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.router.navigate([Statics.HOME_URL]);
         }
@@ -702,7 +764,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
         this.downloading = false;
         this.message = 'Failed to download pdf.';
       }
-    );
+    });
     window.scrollTo(0, 0);
   }
 
@@ -776,8 +838,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
       // this.summaryFields = [];
       this.loadingParticipantPage = true;
       const ddpParticipantId = this.participant.participant.ddpParticipantId;
-      this.dsmService.getAbstractionValues(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), ddpParticipantId).subscribe(
-        data => {
+      this.dsmService.getAbstractionValues(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), ddpParticipantId).subscribe({
+        next: data => {
           let jsonData: any | any[];
           if (data != null) {
             jsonData = AbstractionWrapper.parse(data);
@@ -813,12 +875,12 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
           }
           this.loadingParticipantPage = false;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
         }
-      );
+      });
     }
   }
 
@@ -831,8 +893,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
         'in_progress',
         abstractionData
       )
-      .subscribe(// need to subscribe, otherwise it will not send!
-        data => {
+      .subscribe({ // need to subscribe, otherwise it will not send!
+        next: data => {
           const result = Result.parse(data);
           if (result.code !== 200) {
             this.additionalMessage = 'Couldn\'t lock participant';
@@ -865,24 +927,23 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
           }
           this.loadingParticipantPage = false;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.router.navigate([Statics.HOME_URL]);
           }
         }
-      );
+      });
   }
 
   breakLockParticipant(abstractionData: Abstraction): void {
     const ddpParticipantId = this.participant.participant.ddpParticipantId;
     this.dsmService.changeMedicalRecordAbstractionStatus(
-        localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
-        ddpParticipantId,
-        'clear',
-        abstractionData
-      )
-      .subscribe(// need to subscribe, otherwise it will not send!
-      data => {
+      localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+      ddpParticipantId,
+      'clear',
+      abstractionData
+    ).subscribe({ // need to subscribe, otherwise it will not send!
+      next: data => {
         const result = Result.parse(data);
         if (result.code !== 200) {
           this.additionalMessage = 'Couldn\'t break lock of participant';
@@ -890,14 +951,14 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
           if (result.code === 200 && result.body != null) {
             const jsonData: any | any[] = JSON.parse(result.body);
             const abstraction: Abstraction = Abstraction.parse(jsonData);
-            this.participant[ abstraction.activity ] = abstraction;
+            this.participant[abstraction.activity] = abstraction;
             const activity = this.participant.abstractionActivities
               .find(abstractActivity => abstractActivity.activity === abstraction.activity);
             if (activity != null) {
               const index = this.participant.abstractionActivities.indexOf(activity);
               if (index !== -1) {
                 activity.aStatus = abstraction.aStatus;
-                this.participant.abstractionActivities[ index ] = activity;
+                this.participant.abstractionActivities[index] = activity;
               }
             }
             this.additionalMessage = null;
@@ -906,24 +967,23 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
           }
         }
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.router.navigate([Statics.HOME_URL]);
         }
       }
-    );
+    });
   }
 
   submitParticipant(abstractionData: Abstraction): void {
     const ddpParticipantId = this.participant.participant.ddpParticipantId;
     this.dsmService.changeMedicalRecordAbstractionStatus(
-        localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
-        ddpParticipantId,
-        'submit',
-        abstractionData
-      )
-      .subscribe(// need to subscribe, otherwise it will not send!
-      data => {
+      localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+      ddpParticipantId,
+      'submit',
+      abstractionData
+    ).subscribe({ // need to subscribe, otherwise it will not send!
+      next: data => {
         const result = Result.parse(data);
         if (result.code !== 200 && result.body != null) {
           this.additionalMessage = result.body;
@@ -931,14 +991,14 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
         } else if (result.code === 200 && result.body != null) {
           const jsonData: any | any[] = JSON.parse(result.body);
           const abstraction: Abstraction = Abstraction.parse(jsonData);
-          this.participant[ abstraction.activity ] = abstraction;
+          this.participant[abstraction.activity] = abstraction;
           const activity = this.participant.abstractionActivities
             .find(abstractActivity => abstractActivity.activity === abstraction.activity);
           if (activity != null) {
             const index = this.participant.abstractionActivities.indexOf(activity);
             if (index !== -1) {
               activity.aStatus = abstraction.aStatus;
-              this.participant.abstractionActivities[ index ] = activity;
+              this.participant.abstractionActivities[index] = activity;
             }
           }
           this.additionalMessage = null;
@@ -949,12 +1009,12 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
 
         window.scrollTo(0, 0);
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.router.navigate([Statics.HOME_URL]);
         }
       }
-    );
+    });
   }
 
   abstractionFilesUsedChanged(abstractionData: Abstraction): void {
@@ -962,34 +1022,33 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
     this.patchFinished = false;
     const ddpParticipantId = this.participant.participant.ddpParticipantId;
     this.dsmService.changeMedicalRecordAbstractionStatus(
-        localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
-        ddpParticipantId,
-        null,
-        abstractionData
-      )
-      .subscribe(// need to subscribe, otherwise it will not send!
-        data => {
-          const result = Result.parse(data);
-          if (result.code !== 200 && result.body != null) {
-            this.additionalMessage = result.body;
-          } else if (result.code === 200 && result.body != null) {
-            const jsonData: any | any[] = JSON.parse(result.body);
-            const abstraction: Abstraction = Abstraction.parse(jsonData);
-            this.participant[abstraction.activity] = abstraction;
-            this.getFileList(abstraction);
-            this.additionalMessage = null;
-            this.currentPatchField = null;
-            this.patchFinished = true;
-          } else {
-            this.errorMessage = 'Something went wrong! Please contact your DSM developer';
-          }
-        },
-        err => {
-          if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.router.navigate([Statics.HOME_URL]);
-          }
+      localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+      ddpParticipantId,
+      null,
+      abstractionData
+    ).subscribe({ // need to subscribe, otherwise it will not send!
+      next: data => {
+        const result = Result.parse(data);
+        if (result.code !== 200 && result.body != null) {
+          this.additionalMessage = result.body;
+        } else if (result.code === 200 && result.body != null) {
+          const jsonData: any | any[] = JSON.parse(result.body);
+          const abstraction: Abstraction = Abstraction.parse(jsonData);
+          this.participant[abstraction.activity] = abstraction;
+          this.getFileList(abstraction);
+          this.additionalMessage = null;
+          this.currentPatchField = null;
+          this.patchFinished = true;
+        } else {
+          this.errorMessage = 'Something went wrong! Please contact your DSM developer';
         }
-      );
+      },
+      error: err => {
+        if (err._body === Auth.AUTHENTICATION_ERROR) {
+          this.router.navigate([Statics.HOME_URL]);
+        }
+      }
+    });
   }
 
   addFileToParticipant(fileName: string, abstraction: Abstraction): boolean {
@@ -1068,8 +1127,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
       }
     }
     if (v !== null) {
-      if (this.participant.participant != null && this.participant.participant.additionalValues != null) {
-        this.participant.participant.additionalValues[ colName ] = v;
+      if (this.participant.participant != null && this.participant.participant.additionalValuesJson != null) {
+        this.participant.participant.additionalValuesJson[ colName ] = v;
       } else {
         let participantId = this.participant.data.profile[ 'guid' ];
         if (this.participant.data.profile[ 'legacyAltPid' ] != null && this.participant.data.profile[ 'legacyAltPid' ] !== '') {
@@ -1082,17 +1141,18 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
         );
         const addArray = {};
         addArray[ colName ] = v;
-        this.participant.participant.additionalValues = addArray;
+        this.participant.participant.additionalValuesJson = addArray;
       }
-      this.valueChanged(this.participant.participant.additionalValues, 'additionalValues', 'r');
+      this.valueChanged(this.participant.participant.additionalValuesJson, 'additionalValuesJson', 'r');
     }
   }
 
   // display additional value
   getAdditionalValue(colName: string): string {
-    if (this.participant.participant != null && this.participant.participant.additionalValues != null) {
-      if (this.participant.participant.additionalValues[ colName ] != null) {
-        return this.participant.participant.additionalValues[ colName ];
+    if (this.participant.participant != null && this.participant.participant.additionalValuesJson != null) {
+      const camelCaseColumnName = Utils.convertUnderScoresToCamelCase(colName);
+      if (this.participant.participant.additionalValuesJson[camelCaseColumnName] != null) {
+        return this.participant.participant.additionalValuesJson[camelCaseColumnName];
       }
     }
     return '';
@@ -1100,20 +1160,21 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
 
   downloadPDFs(configName: string): void {
     this.disableDownload = true;
-    this.dsmService.downloadPDF(this.participant.data.profile[ 'guid' ], null, null, null, null,
-      this.compService.getRealm(), configName, null, null).subscribe(
-      data => {
+    this.dsmService.downloadPDF(this.participant.data.profile['guid'], null, null, null, null,
+      this.compService.getRealm(), configName, null, null
+    ).subscribe({
+      next: data => {
         this.downloadFile(data, '_' + configName);
         this.disableDownload = false;
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.router.navigate([Statics.HOME_URL]);
         }
         this.additionalMessage = 'Error - Downloading consent pdf file\nPlease contact your DSM developer';
         this.disableDownload = false;
       },
-    );
+    });
   }
 
   getParticipantData(fieldSetting: FieldSettings, personsParticipantData: ParticipantData): string {
@@ -1136,19 +1197,15 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
     return '';
   }
 
-  getParticipantDataFromSingleParticipant(fieldSetting: FieldSettings): string {
+  getParticipantForDynamicField(fieldSetting: FieldSettings): string {
     if (this.participant && this.participant.participantData && fieldSetting.columnName) {
-      for (const participantData of this.participant.participantData) {
-        if (participantData != null && participantData.data != null && participantData.data[fieldSetting.columnName] != null) {
-          return participantData.data[fieldSetting.columnName];
-        }
+      const participantDataFound = this.participant.participantData
+        .find(participantData => participantData.data && participantData.data[fieldSetting.columnName] != null);
+      if (participantDataFound) {
+        return participantDataFound.data[fieldSetting.columnName];
       }
     }
     return '';
-  }
-
-  dynamicFormType(settings: FieldSettings[]): boolean {
-    return settings['TAB_GROUPED'];
   }
 
   getDisplayName(displayName: string, columnName: string): string {
@@ -1261,10 +1318,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
                   actionPatch.push(action);
                 }
               }
-              if (participantDataSec != null && participantDataSec.data != null) {
-                participantDataSec.data[ action.name ] = action.value;
-                nameValue.unshift({name: 'd.data', value: JSON.stringify(participantDataSec.data)});
-              }
+              // if (participantDataSec != null && participantDataSec.data != null) {
+              //   participantDataSec.data[ action.name ] = action.value;
+              //   nameValue.unshift({name: 'd.data', value: JSON.stringify(participantDataSec.data)});
+              // }
             }
           });
         }
@@ -1285,30 +1342,27 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
           realm:  localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
           nameValues: nameValue,
           actions: actionPatch,
+          tableAlias: 'd',
           ddpParticipantId: participantId
         };
 
-        this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(// need to subscribe, otherwise it will not send!
-          data => {
-            const result = Result.parse(data);
-            if (result.code === 200) {
-              if (result.body != null && result.body !== '') {
-                const jsonData: any | any[] = JSON.parse(result.body);
-                if (jsonData.participantDataId !== undefined && jsonData.participantDataId !== '') {
-                  if (participantData != null) {
-                    participantData.dataId = jsonData.participantDataId;
-                  }
+        this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
+          next: data => {
+            if (data) {
+            if (data['participantDataId']) {
+              if (participantData != null) {
+                participantData.dataId = data['participantDataId'];
                 }
               }
             }
             this.patchFinished = true;
           },
-          err => {
+          error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
               this.router.navigate([ Statics.HOME_URL ]);
             }
           }
-        );
+        });
       }
     }
   }
@@ -1359,5 +1413,15 @@ export class ParticipantPageComponent implements OnInit, OnDestroy {
     this.source = source;
     this.universalModal.show();
     return false;
+  }
+  //TODO remove before final merge, for testing only
+  testGetActivity(participantId: string): void {
+    this.dsmService.testDSSGetActivity(participantId).subscribe(
+      data => {
+        console.log(data);
+      },
+      err =>{}
+    );
+
   }
 }

@@ -39,7 +39,13 @@
     width: 215px;
   }
 
+  &-meta {
+    max-width: 30%;
+  }
+
   &-menu {
+    flex: 1;
+
     & a {
       font-family: Spartan-Bold, sans-serif;
     }
@@ -113,6 +119,8 @@
 
       .link {
         color: #ffffff !important;
+        text-align: center;
+        display: inline-block;
       }
     }
   }

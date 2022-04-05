@@ -119,8 +119,8 @@ export class EnrollmentComponent implements OnInit {
           return this.session.session.participantGuid ? this.userProfile.profile : of(new UserProfileDecorator());
         }
       })
-    ).subscribe(
-      response => {
+    ).subscribe({
+      next: response => {
         if (response) {
           this.accountForm.controls.firstName.patchValue(response.profile.firstName);
           this.accountForm.controls.lastName.patchValue(response.profile.lastName);
@@ -129,9 +129,9 @@ export class EnrollmentComponent implements OnInit {
           this.router.navigateByUrl(this.appRoutes.Error);
         }
       },
-      error => {
+      error: () => {
         this.showError = true;
       }
-    );
+    });
   }
 }

@@ -19,18 +19,21 @@ import { BlockType } from '../../../../models/activity/blockType';
                                       [readonly]="readonly"
                                       (valueChanged)="onChange($event)">
             </ddp-activity-text-answer>
-            <ddp-activity-numeric-answer *ngIf="isNumericQuestion(block)"
+            <ddp-activity-numeric-answer *ngIf="isNumericQuestion(block) || isDecimalQuestion(block)"
                                          [class]="'numeric-answer-' + block.stableId"
                                          [block]="block"
                                          [readonly]="readonly"
                                          (valueChanged)="onChange($event)">
             </ddp-activity-numeric-answer>
-            <ddp-activity-picklist-answer *ngIf="isPicklistQuestion(block)"
-                                          [class]="'picklist-answer-' + block.stableId"
-                                          [block]="block"
-                                          [readonly]="readonly"
-                                          (valueChanged)="onChange($event)">
-            </ddp-activity-picklist-answer>
+            <ddp-activity-picklist-answer  *ngIf="isPicklistQuestion(block)"
+                                            [class]="'picklist-answer-' + block.stableId"
+                                            [block]="block"
+                                            [readonly]="readonly"
+                                            [studyGuid]="studyGuid"
+                                            [activityGuid]="activityGuid"
+                                            (valueChanged)="onChange($event)"
+        >
+        </ddp-activity-picklist-answer>
             <ddp-activity-date-answer *ngIf="isDateQuestion(block)"
                                       [class]="'date-answer-' + block.stableId"
                                       [block]="block"
@@ -104,6 +107,10 @@ export class ActivityAnswerComponent {
 
     public isNumericQuestion(block: AbstractActivityQuestionBlock): boolean {
         return this.isQuestion(block) && block.questionType === QuestionType.Numeric;
+    }
+
+    public isDecimalQuestion(block: AbstractActivityQuestionBlock): boolean {
+        return this.isQuestion(block) && block.questionType === QuestionType.Decimal;
     }
 
     public isPicklistQuestion(block: AbstractActivityQuestionBlock): boolean {

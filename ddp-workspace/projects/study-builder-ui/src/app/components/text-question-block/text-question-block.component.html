@@ -1,1 +1,9 @@
-<ddp-activity-text-answer *ngIf="angularClientBlock$ | async as angularClientBlock" [block]="angularClientBlock"></ddp-activity-text-answer>
+<ddp-activity-text-answer *ngIf="angularClientBlock$ | async as angularClientBlock"
+                          [block]="angularClientBlock"
+                          (valueChanged)="valueChanged($event, angularClientBlock)">
+</ddp-activity-text-answer>
+
+<ng-container *ngFor="let message of validationErrorMessages">
+    <ddp-validation-message [message]="message"></ddp-validation-message>
+</ng-container>
+

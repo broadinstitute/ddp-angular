@@ -1,11 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { tap } from 'rxjs/operators';
+
+import { ActivityQuestionConverter, ActivityTextQuestionBlock } from 'ddp-sdk';
 import { QuestionBlockDef } from '../../model/core/questionBlockDef';
-import { ActivityTextQuestionBlock } from 'ddp-sdk';
 import { TextQuestionDef } from '../../model/core/textQuestionDef';
-import { Observable } from 'rxjs';
 import { ConfigurationService } from '../../configuration.service';
-import { filter, map, tap } from 'rxjs/operators';
 import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
+import { BaseBlockComponent } from '../base-block/base-block.component';
 
 @Component({
     selector: 'app-text-question-block',
@@ -13,56 +14,50 @@ import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
     styleUrls: ['./text-question-block.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TextQuestionBlockComponent implements OnInit {
+export class TextQuestionBlockComponent
+    extends BaseBlockComponent<QuestionBlockDef<TextQuestionDef>, ActivityTextQuestionBlock, string>
+    implements OnInit {
 
-    @Input()
-    definitionBlock$: Observable<QuestionBlockDef<TextQuestionDef>>;
-    angularClientBlock$: Observable<ActivityTextQuestionBlock>;
+    protected defaultAnswer = '';
+    private blockCurrentAnswer = '';
 
-    constructor(private config: ConfigurationService) {
+    constructor(
+        protected config: ConfigurationService,
+        private questionConverter: ActivityQuestionConverter
+    ) {
+        super();
     }
-
 
     ngOnInit(): void {
-        this.angularClientBlock$ = this.definitionBlock$.pipe(
-            tap(defBlock => console.log('getting defblock: %o', defBlock)),
-            filter(block => !!block),
-            map(defBlock => this.buildFromDef(defBlock)));
+        this.angularClientBlock$ = this.getAngularClientBlock$().pipe(
+            tap((block: ActivityTextQuestionBlock) => this.validate(block))
+        );
     }
 
-    private buildFromDef(defBlock: QuestionBlockDef<TextQuestionDef>): ActivityTextQuestionBlock {
-        const newClientBlock = new ActivityTextQuestionBlock();
+    valueChanged(value: string, block: ActivityTextQuestionBlock): void {
+        this.blockCurrentAnswer = value;
+        this.validate(block, value);
+    }
+
+    protected buildFromDef(defBlock: QuestionBlockDef<TextQuestionDef>): ActivityTextQuestionBlock {
         const questionDef = defBlock.question;
-        newClientBlock.inputType = questionDef.inputType;
-        newClientBlock.isRequired = questionDef.validations.some(val => val.ruleType === 'REQUIRED');
-        newClientBlock.stableId = questionDef.stableId;
+        const modifiedQuestionJson = {
+            ...questionDef,
+            validations: questionDef.validations.map(
+                // rename `ruleType` keys to `rule`
+                ({ruleType: rule, ...rest}) => ({rule, ...rest})
+            )
+        };
+
+        const newClientBlock = this.questionConverter.buildQuestionBlock(modifiedQuestionJson, null) as ActivityTextQuestionBlock;
+
         newClientBlock.placeholder = new SimpleTemplate(questionDef.placeholderTemplate)
             .getTranslationText(this.config.defaultLanguageCode);
         newClientBlock.question = new SimpleTemplate(questionDef.promptTemplate).getTranslationText(this.config.defaultLanguageCode);
+
+        if (this.blockCurrentAnswer) {
+            newClientBlock.setAnswer(this.blockCurrentAnswer, false);
+        }
         return newClientBlock;
     }
-
-
-    // newClientBlock.placeholder = questionDef.placeholder;
-    //
-    //
-    //   newClientBlock.label = questionDef.label;
-    // newClientBlock.tooltip = questionDef.tooltip;
-    //   newClientBlock.displayNumber = questionDef.displayNumber;
-    // newClientBlock.readonly = questionDef.readonly;| false;
-    //   newClientBlock.additionalInfoHeader = questionDef.additionalInfoHeader;
-    //   newClientBlock.additionalInfoFooter = questionDef.additionalInfoFooter;
-    //   newClientBlock.minLength = questionDef.minLength;
-    //   newClientBlock.maxLength = questionDef.maxLength;
-    //   newClientBlock.regexPattern = questionDef.regexPattern;
-    //   newClientBlock.textSuggestionSource = questionDef.textSuggestionSource;
-    //   newClientBlock.confirmEntry = questionDef.confirmEntry;
-    //   newClientBlock.confirmPrompt = questionDef.confirmPrompt;
-    //   newClientBlock.mismatchMessage = questionDef.mismatchMessage;
-
-    // newClientBlock.displayNumber = questionDef.displayNumber;
-    // public serverValidationMessages$: Observable<Array<string>>;
-    // newClientBlock.validators = questionDef.validators;<ActivityAbstractValidationRule> = [];
-    // private serverValidationMessagesSubject: BehaviorSubject<Array<string>> = new BehaviorSubject([]);
-
 }

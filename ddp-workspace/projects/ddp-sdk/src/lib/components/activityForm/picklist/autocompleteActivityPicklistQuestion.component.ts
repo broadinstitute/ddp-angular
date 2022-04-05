@@ -1,7 +1,8 @@
-import { Component, Inject, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Inject, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith, takeUntil } from 'rxjs/operators';
+import { MatAutocomplete, MatAutocompleteTrigger } from '@angular/material/autocomplete';
 
 import { BaseActivityPicklistQuestion } from './baseActivityPicklistQuestion.component';
 import { ActivityPicklistNormalizedGroup } from '../../../models/activity/activityPicklistNormalizedGroup';
@@ -19,7 +20,8 @@ import { StringsHelper } from '../../../utility/stringsHelper';
                #autocompleteInput
                [formControl]="inputFormControl"
                [placeholder]="block.picklistLabel"
-               [matAutocomplete]="autoCompleteFromSource" />
+               [matAutocomplete]="autoCompleteFromSource"
+               (click)="openAutocompleteOptions()" />
 
         <mat-autocomplete #autoCompleteFromSource="matAutocomplete" class="autoCompletePanel" [displayWith]="displayAutoComplete">
             <mat-optgroup *ngFor="let group of filteredGroups">
@@ -51,6 +53,8 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
     inputFormControl = new FormControl();
     readonly ignoredSymbolsInQuery: string[];
     private readonly ngUnsubscribe = new Subject<void>();
+    @ViewChild('autocompleteInput', { read: MatAutocompleteTrigger }) autocompleteTrigger: MatAutocompleteTrigger;
+    @ViewChild('autoCompleteFromSource') autocompleteSource: MatAutocomplete;
 
     constructor(
         translate: NGXTranslateService,
@@ -96,6 +100,8 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
                 this.updateAnswer(value.stableId);
             }
         });
+
+        window.addEventListener('scroll', this.onScroll, true);
     }
 
     public ngOnChanges(changes: SimpleChanges): void {
@@ -112,6 +118,21 @@ export class AutocompleteActivityPicklistQuestion extends BaseActivityPicklistQu
         super.ngOnDestroy();
         this.ngUnsubscribe.next();
         this.ngUnsubscribe.complete();
+        window.removeEventListener('scroll', this.onScroll, true);
+    }
+
+    public onScroll = (event): void => {
+        const isAutoCompleteOptionsScrolling = event.target === this.autocompleteSource.panel?.nativeElement;
+
+        if (this.autocompleteTrigger.panelOpen && !isAutoCompleteOptionsScrolling) {
+            this.autocompleteTrigger.closePanel();
+        }
+    };
+
+    public openAutocompleteOptions(): void {
+        if (!this.autocompleteTrigger.panelOpen) {
+            this.autocompleteTrigger.openPanel();
+        }
     }
 
     private initInputValue(): void {

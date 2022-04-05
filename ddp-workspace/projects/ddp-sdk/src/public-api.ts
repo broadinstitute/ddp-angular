@@ -14,6 +14,10 @@ export * from './lib/models/logLevel';
 export * from './lib/models/activity/activityStatusCodes';
 export * from './lib/models/activity/dateRenderMode';
 export * from './lib/models/activity/dateField';
+export * from './lib/models/activity/activityBlockType';
+export * from './lib/models/activity/activityActivityBlock';
+export * from './lib/models/activity/activitySection';
+export * from './lib/models/activity/activityRenderHintType';
 export * from './lib/models/activity/activityPicklistOption';
 export * from './lib/models/activity/activityPicklistNormalizedGroup';
 export * from './lib/models/activity/activityAgreementQuestionBlock';
@@ -29,11 +33,11 @@ export * from './lib/models/activity/activityGroupBlock';
 export * from './lib/models/activity/activityContentBlock';
 export * from './lib/models/activity/conditionalBlock';
 export * from './lib/models/activity/MailAddressBlock';
-export * from './lib/models/activity/numericType';
 export * from './lib/models/activity/textSuggestion';
 export * from './lib/models/activity/activityForm';
 export * from './lib/models/activity/createActivityInstanceResponse';
 export * from './lib/models/activity/deleteActivityInstanceResponse';
+export * from './lib/models/activity/activityPicklistAnswerDto';
 export * from './lib/models/suggestionMatch';
 export * from './lib/models/userProfileDto';
 export * from './lib/models/auth0-mode';
@@ -58,8 +62,10 @@ export * from './lib/models/userStatusResponse';
 export * from './lib/models/userProfileFieldType';
 export * from './lib/models/session';
 export * from './lib/models/mailAddressFormErrorFormatter';
+export * from './lib/models/funcType';
 
 export * from './lib/services/logging.service';
+export * from './lib/services/serviceAgents/activityActionsAgent.service';
 export * from './lib/services/serviceAgents/serviceAgent.service';
 export * from './lib/services/serviceAgents/userActivityServiceAgent.service';
 export * from './lib/services/serviceAgents/activityServiceAgent.service';
@@ -98,11 +104,14 @@ export * from './lib/services/submitAnnouncement.service';
 export * from './lib/services/serviceAgents/submissionManager.service';
 export * from './lib/services/serviceAgents/statisticsServiceAgent.service';
 export * from './lib/services/serviceAgents/participantsSearchServiceAgent.service';
+export * from './lib/services/serviceAgents/studiesServiceAgent.service';
 export * from './lib/services/stackdriverErrorReporter.service';
 export * from './lib/services/modal-dialog.service';
 export * from './lib/services/picklistSortingPolicy.service';
 export * from './lib/services/sortOrder';
 export * from './lib/services/sessionStorage.service';
+export * from './lib/services/activity/activityQuestionConverter.service';
+export * from './lib/services/serviceAgents/activityInstanceStatusServiceAgent.service';
 
 export * from './lib/components/login/auth0-code-callback.component';
 export * from './lib/components/address/addressEmbedded.component';
@@ -133,6 +142,7 @@ export * from './lib/components/activityForm/picklist/radiobuttonsActivityPickli
 export * from './lib/components/activityForm/picklist/checkboxesActivityPicklistQuestion.component';
 export * from './lib/components/activityForm/picklist/dropdownActivityPicklistQuestion.component';
 export * from './lib/components/activityForm/picklist/activityPicklistAnswer.component';
+export * from './lib/components/activityForm/picklist/autocompleteActivityPicklistQuestion.component';
 export * from './lib/components/activityForm/answers/question-prompt/questionPrompt.component';
 export * from './lib/components/activityForm/activity-blocks/conditionalBlock.component';
 export * from './lib/components/activityForm/activity-blocks/groupBlockList.component';
@@ -151,6 +161,10 @@ export * from './lib/components/activityForm/answers/activityBooleanAnswer.compo
 export * from './lib/components/activityForm/answers/activity-file-answer/activityFileAnswer.component';
 export * from './lib/components/activityForm/answers/activity-matrix-answer/activity-matrix-answer.component';
 export * from './lib/components/activityForm/answers/activity-instance-select-answer/activity-instance-select-answer.component';
+// eslint-disable-next-line max-len
+export * from './lib/components/activityForm/answers/activity-matrix-answer/activity-matrix-answer-dialog/activity-matrix-answer-dialog.component';
+// eslint-disable-next-line max-len
+export * from './lib/components/activityForm/answers/activity-matrix-answer/activity-matrix-answer-table/activity-matrix-answer-table.component';
 
 export * from './lib/components/activityForm/activity-blocks/activityQuestion.component';
 export * from './lib/components/activityForm/activity-blocks/modalActivityBlock/modalActivityBlock.component';
@@ -167,14 +181,17 @@ export * from './lib/components/networkSniffer.component';
 export * from './lib/components/user/participantProfile.component';
 export * from './lib/components/progress-indicator/progress-indicator.component';
 export * from './lib/components/confirmDialog/confirmDialog.component';
+export * from './lib/components/prism/prism.component';
 
 export * from './lib/directives/upperCaseInputDirective.directive';
 export * from './lib/directives/routeTransformer.directive';
 export * from './lib/directives/lazyLoadResources.directive';
 export * from './lib/directives/invitationCodeFormatter.directive';
+export * from './lib/directives/sticky-scroll.directive';
 
 export * from './lib/pipes/invitationFormatter.pipe';
 export * from './lib/pipes/fileSizeFormatter.pipe';
+export * from './lib/pipes/searchHighlight.pipe';
 
 export * from './lib/guards/auth.guard';
 export * from './lib/guards/adminAuth.guard';

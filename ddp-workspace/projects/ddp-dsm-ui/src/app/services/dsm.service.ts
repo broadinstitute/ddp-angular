@@ -6,6 +6,7 @@ import { throwError as observableThrowError, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { Filter } from '../filter-column/filter-column.model';
+import {Sort} from '../sort/sort.model';
 import { ViewFilter } from '../filter-column/models/view-filter.model';
 import { Abstraction } from '../medical-record-abstraction/medical-record-abstraction.model';
 import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
@@ -36,6 +37,16 @@ export class DSMService {
                private logger: LoggingDsmService) {
   }
 
+  sendAnalyticsMetric( realm: string, passed: number ): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'googleAnalytics';
+    const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: realm} );
+    map.push( {name: 'timer', value: passed} );
+    return this.http.patch(url, null, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError.bind(this))
+    );
+  }
+
   public transferScan(scanTracking: boolean, json: string): Observable<any> {
     let url = this.baseUrl + DSMService.UI;
     if (scanTracking) {
@@ -44,6 +55,7 @@ export class DSMService {
       url += 'finalScan';
     }
     const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: localStorage.getItem(ComponentService.MENU_SELECTED_REALM)} );
     map.push({name: 'userId', value: this.role.userID()});
     return this.http.post(url, json, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
@@ -53,6 +65,7 @@ export class DSMService {
   public setKitReceivedRequest(json: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'receivedKits';
     const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: localStorage.getItem(ComponentService.MENU_SELECTED_REALM)} );
     map.push({name: 'userId', value: this.role.userID()});
     return this.http.post(url, json, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
@@ -77,6 +90,7 @@ export class DSMService {
     const url = this.baseUrl + DSMService.UI + 'sentKits';
     const map: { name: string; value: any }[] = [];
     map.push({name: 'userId', value: this.role.userID()});
+    map.push( {name: DSMService.REALM, value: localStorage.getItem(ComponentService.MENU_SELECTED_REALM)} );
     return this.http.post(url, json, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );
@@ -106,7 +120,7 @@ export class DSMService {
     const userId = this.role.userID();
     map.push({name: DSMService.REALM, value: realm});
     map.push({name: 'userId', value: userId});
-    map.push({name: 'parent', value: parent});
+    if (parent) {map.push( {name: 'parent', value: parent} );}
     return this.http.get(url, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );
@@ -126,7 +140,7 @@ export class DSMService {
   }
 
   public filterData(realm: string, json: string, parent: string, defaultFilter: boolean,
-                    from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage()
+                    from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage(), sortBy?: Sort
   ): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'filterList';
     const map: { name: string; value: any }[] = [];
@@ -136,6 +150,9 @@ export class DSMService {
     map.push({name: 'to', value: to});
     map.push({name: 'userId', value: this.role.userID()});
     map.push({name: 'userMail', value: this.role.userMail()});
+    if (sortBy) {
+      map.push( {name: 'sortBy', value: JSON.stringify(sortBy)} );
+    }
     map.push({name: 'defaultFilter', value: defaultFilter === true ? '1' : defaultFilter != null ? '0' : ''});
     return this.http.patch(url, json, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
@@ -155,27 +172,9 @@ export class DSMService {
   }
 
   public applyFilter(json: ViewFilter, realm: string, parent: string, filterQuery: string,
-                     from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage()
+                     from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage(), sortBy?: Sort
   ): Observable<any> {
-    let viewFilterCopy = null;
-    if (json != null) {
-      if (json.filters != null) {
-        viewFilterCopy = json.copy();
-        for (const filter of json.filters) {
-          if (filter.type === Filter.OPTION_TYPE && filter.participantColumn.tableAlias !== 'participantData') {
-            filter.selectedOptions = filter.getSelectedOptionsName();
-          }
-        }
-      }
-      if (viewFilterCopy != null && viewFilterCopy.filters != null) {
-        for (const filter of viewFilterCopy.filters) {
-          if (filter.type === Filter.OPTION_TYPE && filter.participantColumn.tableAlias !== 'participantData') {
-            filter.selectedOptions = filter.getSelectedOptionsName();
-            filter.options = null;
-          }
-        }
-      }
-    }
+    const viewFilterCopy = this.getFilter(json);
     const url = this.baseUrl + DSMService.UI + 'applyFilter';
     const userId = this.role.userID();
     const map: { name: string; value: any }[] = [];
@@ -184,6 +183,9 @@ export class DSMService {
     map.push({name: 'to', value: to});
     map.push({name: 'userId', value: userId});
     map.push({name: 'parent', value: parent});
+    if (sortBy) {
+      map.push( {name: 'sortBy', value: JSON.stringify(sortBy)} );
+    }
 
     if (filterQuery != null) {
       map.push({name: 'filterQuery', value: filterQuery});
@@ -211,6 +213,31 @@ export class DSMService {
     );
   }
 
+  public downloadParticipantData(realm: string, parent: string, columns: {}, json: ViewFilter, filterQuery: string, sortBy?: Sort):
+    Observable<any> {
+    const viewFilterCopy = this.getFilter(json);
+    const url = this.baseUrl + DSMService.UI + 'participantList';
+    const map: { name: string; value: any }[] = [];
+    const userId = this.role.userID();
+    map.push({name: DSMService.REALM, value: realm});
+    map.push({name: 'userId', value: userId});
+    map.push({name: 'parent', value: parent});
+    if (sortBy) {
+      map.push({name: 'sortBy', value: JSON.stringify(sortBy)});
+    }
+    if (filterQuery != null) {
+      map.push({name: 'filterQuery', value: filterQuery});
+    } else if (json == null || json.filters == null) {
+      json && map.push({name: 'filterName', value: json.filterName});
+    } else if (viewFilterCopy != null) {
+      map.push({name: 'filters', value: JSON.stringify(viewFilterCopy.filters)});
+    }
+    const body = {columnNames: columns};
+    return this.http.post(url, JSON.stringify(body), this.buildQueryBlobHeader(map)).pipe(
+      catchError(this.handleError.bind(this))
+    );
+  }
+
   public getParticipantDsmData(realm: string, ddpParticipantId: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'getParticipantData';
     const map: { name: string; value: any }[] = [];
@@ -228,6 +255,15 @@ export class DSMService {
     const map: { name: string; value: any }[] = [];
     map.push({name: 'userId', value: this.role.userID()});
     map.push({name: 'parent', value: parent});
+    return this.http.get(url, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError.bind(this))
+    );
+  }
+
+  public getAssignees(realm: string): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'assignees';
+    const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: realm} );
     return this.http.get(url, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );
@@ -322,7 +358,7 @@ export class DSMService {
         json[ mrSetting.value ] = mrSetting.selected;
       }
     }
-    return this.http.post(url, JSON.stringify(json), this.buildQueryPDFHeader(map)).pipe(
+    return this.http.post(url, JSON.stringify(json), this.buildQueryBlobHeader(map)).pipe(
       catchError(err => this.handleError(err))
     );
   }
@@ -345,6 +381,15 @@ export class DSMService {
 
   public getMedicalRecordLog(medicalRecordId: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'medicalRecord/' + medicalRecordId + '/log';
+    return this.http.get(url, this.buildHeader()).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+//TODO remove before final merge, for testing only
+  testDSSGetActivity( participantId: string ): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'dsstest/' + participantId;
     return this.http.get(url, this.buildHeader()).pipe(
       catchError(this.handleError)
     );
@@ -500,7 +545,8 @@ export class DSMService {
     );
   }
 
-  public uploadTxtFile(realm: string, kitType: string, file: File, reason: string, carrier: string): Observable<any> {
+  public uploadTxtFile(realm: string, kitType: string, file: File, reason: string, carrier: string,
+                       skipAddressValidation: boolean): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'kitUpload';
     const map: { name: string; value: any }[] = [];
     map.push({name: DSMService.REALM, value: realm});
@@ -508,7 +554,7 @@ export class DSMService {
     map.push({name: 'userId', value: this.role.userID()});
     map.push({name: 'reason', value: reason});
     map.push({name: 'carrier', value: carrier});
-
+    map.push( {name: 'skipAddressValidation', value: skipAddressValidation} );
     return this.http.post(url, file, this.buildQueryUploadHeader(map)).pipe(
       catchError(this.handleError)
     );
@@ -524,7 +570,7 @@ export class DSMService {
   }
 
   public uploadDuplicateParticipant(realm: string, kitType: string, jsonParticipants: string,
-                                    reason: string, carrier: string
+                                    reason: string, carrier: string, skipAddressValidation: boolean
   ): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'kitUpload';
     const map: { name: string; value: any }[] = [];
@@ -535,7 +581,7 @@ export class DSMService {
     map.push({name: 'Content-Type', value: 'application/json; charset=utf-8'});
     map.push({name: 'reason', value: reason});
     map.push({name: 'carrier', value: carrier});
-
+    map.push( {name: 'skipAddressValidation', value: skipAddressValidation} );
     return this.http.post(url, jsonParticipants, this.buildQueryUploadHeader(map)).pipe(
       catchError(this.handleError)
     );
@@ -555,6 +601,7 @@ export class DSMService {
   public singleKitLabel(kitJson: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'kitLabel';
     const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: localStorage.getItem(ComponentService.MENU_SELECTED_REALM)} );
     map.push({name: 'userId', value: this.role.userID()});
     return this.http.post(url, kitJson, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError)
@@ -691,7 +738,7 @@ export class DSMService {
     const url = this.baseUrl + DSMService.UI + 'showUpload';
     const map: { name: string; value: any }[] = [];
     map.push({name: DSMService.REALM, value: realm});
-    return this.http.patch(url, json, this.buildQueryPDFHeader(map)).pipe(
+    return this.http.patch(url, json, this.buildQueryBlobHeader(map)).pipe(
       catchError(this.handleError)
     );
   }
@@ -798,40 +845,6 @@ export class DSMService {
     );
   }
 
-  public getEmailEventData(source: string, target: string): Observable<any> {
-    const url = this.baseUrl + DSMService.UI + 'emailEvent/' + source;
-    const map: { name: string; value: any }[] = [];
-    if (target != null && target !== '') {
-      map.push({name: DSMService.TARGET, value: target});
-    }
-    return this.http.get(url, this.buildQueryHeader(map)).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  public getEmailSettings(source: string): Observable<any> {
-    const url = this.baseUrl + DSMService.UI + 'emailSettings/' + source;
-    return this.http.get(url, this.buildHeader()).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  public saveEmailSettings(source: string, json: string): Observable<any> {
-    const url = this.baseUrl + DSMService.UI + 'emailSettings/' + source;
-    return this.http.patch(url, json, this.buildHeader()).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  public followUpEmailEvent(source: string, json: string): Observable<any> {
-    const url = this.baseUrl + DSMService.UI + 'followUpEmailEvent/' + source;
-    const map: { name: string; value: any }[] = [];
-    map.push({name: 'userId', value: this.role.userID()});
-    return this.http.patch(url, json, this.buildQueryHeader(map)).pipe(
-      catchError(this.handleError)
-    );
-  }
-
   public getFieldSettings(source: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'fieldSettings/' + source;
     return this.http.get(url, this.buildHeader()).pipe(
@@ -926,15 +939,7 @@ export class DSMService {
     };
   }
 
-  private buildPDFHeader(): any {
-    return {
-      headers: this.buildJsonAuthHeader(),
-      withCredentials: true,
-      responseType: 'blob'
-    };
-  }
-
-  private buildQueryPDFHeader(map: any[]): any {
+  private buildQueryBlobHeader(map: any[]): any {
     let params: HttpParams = new HttpParams();
     for (const param of map) {
       params = params.append(param.name, param.value);
@@ -943,6 +948,7 @@ export class DSMService {
       headers: this.buildJsonAuthHeader(),
       withCredentials: true,
       responseType: 'blob',
+      observe: 'response',
       params
     };
   }
@@ -1006,5 +1012,26 @@ export class DSMService {
       return true;
     }
   }
-
+  private getFilter(json: ViewFilter): ViewFilter {
+    let viewFilterCopy = null;
+    if (json != null) {
+      if (json.filters != null) {
+        viewFilterCopy = json.copy();
+        for (const filter of json.filters) {
+          if (filter.type === Filter.OPTION_TYPE && filter.participantColumn.tableAlias !== 'participantData') {
+            filter.selectedOptions = filter.getSelectedOptionsName();
+          }
+        }
+      }
+      if (viewFilterCopy != null && viewFilterCopy.filters != null) {
+        for (const filter of viewFilterCopy.filters) {
+          if (filter.type === Filter.OPTION_TYPE && filter.participantColumn.tableAlias !== 'participantData') {
+            filter.selectedOptions = filter.getSelectedOptionsName();
+            filter.options = null;
+          }
+        }
+      }
+    }
+    return viewFilterCopy;
+  }
 }

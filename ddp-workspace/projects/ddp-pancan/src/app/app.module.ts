@@ -19,7 +19,9 @@ import {
     SortOrder,
     PicklistSortingPolicy,
     AnalyticsEventsService,
-    AnalyticsEvent
+    AnalyticsEvent,
+    PICKLIST_SORTING_POLICY_LAST_STABLE_ID,
+    PICKLIST_SORTING_POLICY_MAIN_SORT_ORDER
 } from 'ddp-sdk';
 
 import { ToolkitConfigurationService, ToolkitModule } from 'toolkit';
@@ -43,6 +45,8 @@ import { JoinCmiSectionComponent } from './components/welcome/join-cmi-section/j
 import { ColorectalPageComponent } from './components/splash-pages/colorectal-page/colorectal-page.component';
 import { SplashPageFooterComponent } from './components/splash-pages/splash-page-footer/splash-page-footer.component';
 import { LmsPageComponent } from './components/splash-pages/lms-page/lms-page.component';
+import { ActivityComponent } from './components/activity/activity.component';
+import { ActivityPageComponent } from './components/activity-page/activity-page.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -117,12 +121,16 @@ export function translateFactory(translate: TranslateService,
         locationInitialized.then(() => {
             const locale = language.getAppLanguageCode();
             translate.setDefaultLang(locale);
-            translate.use(locale).subscribe(() => {
-                logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
-            }, err => {
-                logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization:`, err);
-            }, () => {
-                resolve(null);
+            translate.use(locale).subscribe({
+                next: () => {
+                    logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
+                },
+                error: err => {
+                    logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization:`, err);
+                },
+                complete: () => {
+                    resolve(null);
+                }
             });
         });
     });
@@ -148,6 +156,8 @@ export function translateFactory(translate: TranslateService,
         ColorectalPageComponent,
         SplashPageFooterComponent,
         LmsPageComponent,
+        ActivityComponent,
+        ActivityPageComponent,
     ],
     imports: [
         BrowserModule,
@@ -184,9 +194,14 @@ export function translateFactory(translate: TranslateService,
         },
         // Ensure that sorting of autocomplete picklist options is as specified
         {
-            provide: PicklistSortingPolicy,
-            useValue: new PicklistSortingPolicy(SortOrder.ALPHABETICAL, 'UNSURE')
-        }
+            provide: PICKLIST_SORTING_POLICY_MAIN_SORT_ORDER,
+            useValue: SortOrder.ALPHABETICAL
+        },
+        {
+            provide: PICKLIST_SORTING_POLICY_LAST_STABLE_ID,
+            useValue: 'UNSURE'
+        },
+        PicklistSortingPolicy
     ],
     bootstrap: [AppComponent]
 })

@@ -5,7 +5,7 @@ import { ConfigurationService, LoggingService, LogLevel, StackdriverErrorReporte
 describe('LoggingService', () => {
     let service: LoggingService;
     let config: ConfigurationService;
-    const stackdriverErrorReporterServiceSpy = jasmine.createSpyObj('StackdriverErrorReporterService', ['handleError']);
+    let stackdriverErrorReporterServiceSpy: jasmine.SpyObj<StackdriverErrorReporterService>;
     let httpClientSpy: jasmine.SpyObj<HttpClient>;
     let sessionMock: SessionMementoService;
 
@@ -14,6 +14,7 @@ describe('LoggingService', () => {
             isTemporarySession: () => true,
             session: ({ userGuid: '1243' } as Session)
         } as SessionMementoService;
+        stackdriverErrorReporterServiceSpy = jasmine.createSpyObj('StackdriverErrorReporterService', ['handleError']);
         httpClientSpy = jasmine.createSpyObj('HttpClient', ['post']);
         TestBed.configureTestingModule({
             providers: [

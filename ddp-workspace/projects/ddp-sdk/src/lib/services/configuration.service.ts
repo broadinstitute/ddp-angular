@@ -31,6 +31,8 @@ export class ConfigurationService {
     projectGcpId: string;
     projectGAToken: string;
     studyGuid: string;
+    // Validate only visible sections
+    validateOnlyVisibleSections = false;
     // country code if limiting app to just one country
     supportedCountry: string | null = null;
     // whether dashboard status should display a count of questions
@@ -115,4 +117,5 @@ export class ConfigurationService {
      * when all questions in nested modal activity are answered
      */
     alwaysShowQuestionsCountInModalNestedActivity = false;
+    auth0ClaimNameSpace: string;
 }

@@ -135,12 +135,17 @@ export class AbstractionFieldComponent implements OnInit {
     }
 
     if (v !== null) {
-      if (field.type === 'textarea' && fieldName !== 'note' && fieldName !== 'question' && fieldName !== 'noData' && fieldName !== 'filePage' && fieldName !== 'matchPhrase') {
+      if (field.type === 'textarea' &&
+        !['note', 'question', 'noData', 'filePage', 'matchPhrase'].includes(fieldName)
+      ) {
         field.fieldValue.value = v.toUpperCase();
       }
       if (fieldName === 'value' && field.type === 'date') {
         field.fieldValue.value = v;
-      } else if (fieldName === 'value' && (field.type === 'multi_options' || field.additionalType === 'multi_options' || field.type === 'options' || field.additionalType === 'options')) {
+      } else if (fieldName === 'value' &&
+        ( field.type === 'multi_options' || field.additionalType === 'multi_options' ||
+          field.type === 'options' || field.additionalType === 'options')
+      ) {
         if (field.fieldValue.value.indexOf('other') > -1) {
           if (this._other !== '' && this._other != null) {
             const selectName = field.displayName;
@@ -280,20 +285,19 @@ export class AbstractionFieldComponent implements OnInit {
         this.currentPatchPart = fieldName;
       }
       if (patch != null) {
-        this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(// need to subscribe, otherwise it will not send!
-          data => {
+        this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({// need to subscribe, otherwise it will not send!
+          next: data => {
             const result = Result.parse(data);
             if (result.code === 200) {
               if (putOtherBack) {
                 this.setOtherOptionText();
               }
-              if (result.body != null && result.body !== '') {
-                const jsonData: any | any[] = JSON.parse(result.body);
-                if (jsonData.primaryKeyId !== undefined && jsonData.primaryKeyId !== '') {
-                  field.fieldValue.primaryKeyId = jsonData.primaryKeyId;
+              if (data) {
+                if (data['primaryKeyId']) {
+                  field.fieldValue.primaryKeyId = data['primaryKeyId'];
                 }
-                if (jsonData instanceof Array) {
-                  jsonData.forEach((val) => {
+                if (data instanceof Array) {
+                  data.forEach((val) => {
                     const nameValue = NameValue.parse(val);
                     if (fieldName === 'question') {
                       this.field.fieldValue.question = nameValue.value;
@@ -308,17 +312,17 @@ export class AbstractionFieldComponent implements OnInit {
               this.currentPatchPart = null;
             }
           },
-          err => {
+          error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
               this.router.navigate([ Statics.HOME_URL ]);
             }
           }
-        );
+        });
       }
     }
   }
 
-  saveSelectedQc (field: AbstractionField): void {
+  saveSelectedQc(field: AbstractionField): void {
     field.fieldValue.valueCounter++;
     const patch = {
       id: field.fieldValue.primaryKeyId,
@@ -335,24 +339,20 @@ export class AbstractionFieldComponent implements OnInit {
       realm : localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
       ddpParticipantId: this.participant.participant.ddpParticipantId
     };
-    this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(// need to subscribe, otherwise it will not send!
-      data => {
-        const result = Result.parse(data);
-        if (result.code === 200) {
-          if (result.body != null && result.body !== '') {
-            const jsonData: any | any[] = JSON.parse(result.body);
-            if (jsonData.primaryKeyId !== undefined && jsonData.primaryKeyId !== '') {
-              field.fieldValue.primaryKeyId = jsonData.primaryKeyId;
-            }
+    this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({// need to subscribe, otherwise it will not send!
+      next: data => {
+      if (data) {
+        if (data['primaryKeyId']) {
+          field.fieldValue.primaryKeyId = data['primaryKeyId'];
           }
         }
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.router.navigate([ Statics.HOME_URL ]);
         }
       }
-    );
+    });
   }
 
   addFileNameToList(fileName: string): void {
@@ -369,10 +369,7 @@ export class AbstractionFieldComponent implements OnInit {
   }
 
   isPatchedCurrently(field: string, part: string): boolean {
-    if (this.currentPatchField === field && this.currentPatchPart === part) {
-      return true;
-    }
-    return false;
+    return (this.currentPatchField === field && this.currentPatchPart === part);
   }
 
   doNothing(): boolean { // needed for the menu, otherwise page will refresh!

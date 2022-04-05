@@ -103,20 +103,20 @@ export const translateFactory = (
       const locale = languageService.getAppLanguageCode();
 
       translateService.setDefaultLang(locale);
-      translateService.use(locale).subscribe(
-        () => {
+      translateService.use(locale).subscribe({
+        next: () => {
           loggingService.logEvent(
             `Successfully initialized '${locale}' language`,
           );
         },
-        err => {
+        error: err => {
           loggingService.logError(
             `Problem with '${locale}' initialization, error is:`,
             err,
           );
         },
-        () => resolve(null),
-      );
+        complete: () => resolve(null)
+      });
     });
   });
 

@@ -32,9 +32,7 @@ export class AddressService extends UserServiceAgent<Address> {
 
     public verifyAddress(address: Address): Observable<AddressVerificationResponse> {
         return this.postObservable(`${this.BASE_URL}/verify`, {...address, studyGuid: this.configuration.studyGuid}, null, true).pipe(
-            map((data: any) => {
-                return new AddressVerificationResponse(data.body);
-            }),
+            map((data: any) => new AddressVerificationResponse(data.body)),
             catchError((error) => {
                 const verificationStatus = error.error as AddressVerificationStatus;
                 return this.translate.getTranslation(verificationStatus.errors
@@ -51,6 +49,7 @@ export class AddressService extends UserServiceAgent<Address> {
 
     public saveTempAddress(address: Address, activityInstanceGuid: string): Observable<any> {
         return this.putObservable(`${this.BASE_URL}/temp/${activityInstanceGuid}`, address, {}, true).pipe(
+            // eslint-disable-next-line arrow-body-style
             catchError((error) => {
                 return throwError(error.error);
             })
@@ -66,6 +65,7 @@ export class AddressService extends UserServiceAgent<Address> {
                     return null;
                 }
             }),
+            // eslint-disable-next-line arrow-body-style
             catchError((error) => {
                 return throwError(error.error);
             })
@@ -88,6 +88,7 @@ export class AddressService extends UserServiceAgent<Address> {
                             return null;
                         }
                     }),
+                // eslint-disable-next-line arrow-body-style
                 catchError((error) => {
                     return throwError(error.error);
                 })
@@ -95,9 +96,8 @@ export class AddressService extends UserServiceAgent<Address> {
         } else {
             const path = `${this.BASE_URL}/${address.guid}` + (strict ? '' : '?strict=false');
             return this.putObservable(path, address, {}, true).pipe(
-                map(() => {
-                    return address;
-                }),
+                map(() => address),
+                // eslint-disable-next-line arrow-body-style
                 catchError((error) => {
                     return throwError(error.error);
                 })
@@ -114,6 +114,7 @@ export class AddressService extends UserServiceAgent<Address> {
                     return null;
                 }
             }),
+            // eslint-disable-next-line arrow-body-style
             catchError((error) => {
                 return throwError(error.error);
             })
@@ -129,6 +130,7 @@ export class AddressService extends UserServiceAgent<Address> {
                     return null;
                 }
             }),
+            // eslint-disable-next-line arrow-body-style
             catchError((error) => {
                 return throwError(error.error);
             })

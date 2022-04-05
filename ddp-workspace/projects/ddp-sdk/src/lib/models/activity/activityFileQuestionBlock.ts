@@ -2,7 +2,7 @@ import { ActivityQuestionBlock } from './activityQuestionBlock';
 import { QuestionType } from './questionType';
 import { ActivityFileAnswerDto } from './activityFileAnswerDto';
 
-export class ActivityFileQuestionBlock extends ActivityQuestionBlock<ActivityFileAnswerDto> {
+export class ActivityFileQuestionBlock extends ActivityQuestionBlock<ActivityFileAnswerDto[]> {
     public maxFileSize: number;
     public mimeTypes: string[];
 
@@ -15,6 +15,6 @@ export class ActivityFileQuestionBlock extends ActivityQuestionBlock<ActivityFil
     }
 
     public hasAnswer(): boolean {
-        return this.answer?.fileName && (this.answer.fileSize != null);
+        return this.answer?.length > 0;
     }
 }

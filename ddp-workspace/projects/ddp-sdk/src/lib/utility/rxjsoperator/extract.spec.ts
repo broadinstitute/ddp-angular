@@ -78,7 +78,7 @@ describe('Custom extract operator', () => {
         expect(count).toBe(4);
     });
 
-    it('check using projection function works', () => {
+    it('check using projection function worksm case 1', () => {
         interface Greeting {
             hello: string;
             goodbye: string;
@@ -89,7 +89,7 @@ describe('Custom extract operator', () => {
         });
     });
 
-    it('check using projection function works', () => {
+    it('check using projection function works, case 2', () => {
         interface State {
             readOnly: boolean;
             temporarilyDisabled: boolean;

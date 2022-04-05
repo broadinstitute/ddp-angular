@@ -1,5 +1,7 @@
 <div
-  *ngIf="dataFilter.type === 'DATE' || dataFilter.type === 'EPOCHDATE' || dataFilter.type === 'DATE_SHORT' || dataFilter.type === 'OPTIONS' || dataFilter.type === 'RADIO' || dataFilter.type === 'BOOLEAN' || dataFilter.type === 'CHECKBOX' || dataFilter.type === 'JSONARRAY'
+  *ngIf="dataFilter.type === 'DATE' || dataFilter.type === 'EPOCHDATE' || dataFilter.type === 'DATE_SHORT'
+  || dataFilter.type === 'OPTIONS' || dataFilter.type === 'RADIO' || dataFilter.type === 'BOOLEAN'
+  || dataFilter.type === 'CHECKBOX' || dataFilter.type === 'JSONARRAY' || dataFilter.type === 'AGREEMENT'
   || (dataFilter.type === 'ADDITIONALVALUE' && (dataFilter.additionalType !== 'TEXT' && dataFilter.additionalType !== 'text' && dataFilter.additionalType !== 'TEXTAREA'))">
   <b>{{dataFilter.participantColumn.display}}</b>
 </div>
@@ -16,9 +18,6 @@
 </ng-container>
 <ng-container
   *ngIf="dataFilter.type === 'BOOLEAN' || dataFilter.type === 'AGREEMENT' || dataFilter.type === 'CHECKBOX' || (dataFilter.type === 'ADDITIONALVALUE' && dataFilter.additionalType === 'CHECKBOX')">
-  <div>
-    <b>{{dataFilter.participantColumn.display}}</b>
-  </div>
   <ng-container>
     <mat-checkbox color="primary" disableRipple
                [checked]="dataFilter.value1" [(ngModel)]="dataFilter.value1" (change)="changeValue($event, dataFilter)"> Yes
@@ -31,12 +30,12 @@
 <ng-container *ngIf="dataFilter.type === 'NUMBER' || (dataFilter.type === 'ADDITIONALVALUE' && dataFilter.additionalType === 'NUMBER')">
   <mat-form-field>
     <input matInput maxlength="500" placeholder="{{dataFilter.participantColumn.display}}" type="number" [(ngModel)]="dataFilter.value1"
-           [disabled]="!editable" autocomplete="off">
+           [disabled]="!editable" autocomplete="off" (ngModelChange)="inputValueChanged()">
   </mat-form-field>
   <ng-container *ngIf="dataFilter.range">
     <mat-form-field>
       <input matInput maxlength="500" placeholder="{{dataFilter.participantColumn.display}}" type="number" [(ngModel)]="dataFilter.value2"
-             [disabled]="!editable" autocomplete="off">
+             [disabled]="!editable" autocomplete="off" (ngModelChange)="inputValueChanged()">
     </mat-form-field>
   </ng-container>
 </ng-container>
@@ -44,7 +43,7 @@
   *ngIf="dataFilter.type === 'TEXT' || dataFilter.type === 'COMPOSITE' ||  dataFilter.type === 'JSONARRAY' || (dataFilter.type === 'ADDITIONALVALUE' && (dataFilter.additionalType === null || dataFilter.additionalType === undefined || dataFilter.additionalType === '' || dataFilter.additionalType === 'TEXT' || dataFilter.additionalType === 'text' || dataFilter.additionalType === 'TEXTAREA'))">
   <mat-form-field>
     <input matInput maxlength="500" placeholder="{{dataFilter.participantColumn.display}}" type="text" [(ngModel)]="dataFilter.value1"
-           autocomplete="off" [disabled]="!editable">
+           autocomplete="off" [disabled]="!editable" (ngModelChange)="inputValueChanged()">
   </mat-form-field>
 </ng-container>
 <ng-container

@@ -13,7 +13,6 @@ import { DSMService } from '../services/dsm.service';
 import { RoleService } from '../services/role.service';
 import { NameValue } from '../utils/name-value.model';
 import { PatchUtil } from '../utils/patch.model';
-import { Result } from '../utils/result.model';
 import { Statics } from '../utils/statics';
 import { Utils } from '../utils/utils';
 import { MedicalRecord } from './medical-record.model';
@@ -130,7 +129,7 @@ export class MedicalRecordComponent implements OnInit {
 
   valueChanged(value: any, parameterName: string): void {
     let v;
-    if (parameterName === 'additionalValues') {
+    if (parameterName === 'additionalValuesJson') {
       v = JSON.stringify(value);
     } else if (typeof value === 'string') {
       if (parameterName !== 'followUps') {
@@ -159,30 +158,26 @@ export class MedicalRecordComponent implements OnInit {
       if (parameterName !== 'followUps') {
         this.currentPatchField = parameterName;
       }
-      this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(// need to subscribe, otherwise it will not send!
-        data => {
-          const result = Result.parse(data);
-          if (result.code === 200) {
-            if (result.body != null) {
-              const jsonData: any | any[] = JSON.parse(result.body);
-              if (jsonData instanceof Array) {
-                jsonData.forEach((val) => {
+      this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
+        next: data => {
+          if (data) {
+          if (data instanceof Array) {
+            data.forEach( ( val ) => {
                   const nameValue = NameValue.parse(val);
                   this.medicalRecord[ nameValue.name ] = nameValue.value;
                 });
-              }
             }
           }
           this.patchFinished = true;
           this.currentPatchField = null;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.router.navigate([ Statics.HOME_URL ]);
           }
           this.additionalMessage = 'Error - Saving changes \n' + err;
         }
-      );
+      });
     }
   }
 
@@ -192,8 +187,8 @@ export class MedicalRecordComponent implements OnInit {
 
   private loadLogs(): void {
     let jsonData: any[];
-    this.dsmService.getMedicalRecordLog(this.medicalRecord.medicalRecordId).subscribe(
-      data => {
+    this.dsmService.getMedicalRecordLog(this.medicalRecord.medicalRecordId).subscribe({
+      next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
           const log = MedicalRecordLog.parse(val);
@@ -207,33 +202,33 @@ export class MedicalRecordComponent implements OnInit {
         });
         // console.info(`${this.logsHistory.length} log data received: ${JSON.stringify(data, null, 2)}`);
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
         this.errorMessage = 'Error - Loading mr log\nPlease contact your DSM developer';
       }
-    );
+    });
   }
 
   saveLog(): void {
     if (this.currentLog.date != null && this.currentLog.comments != null && this.currentLog.comments !== '') {
       this.readonly = true;
       this.dsmService.saveMedicalRecordLog(this.currentLog.medicalRecordLogId, JSON.stringify(this.currentLog))
-        .subscribe(// need to subscribe, otherwise it will not send!
-          () => {
+        .subscribe({ // need to subscribe, otherwise it will not send!
+          next: () => {
             this.additionalMessage = 'Data saved';
             this.logsHistory.push(this.currentLog);
             this.currentLog = null;
             this.isReviewDataChanged = false;
           },
-          err => {
+          error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
               this.router.navigate([Statics.HOME_URL]);
             }
             this.additionalMessage = 'Error - Saving log data\nPlease contact your DSM developer';
           }
-        );
+        });
     } else {
       this.additionalMessage = 'Both Date and Comment are required';
     }
@@ -258,8 +253,8 @@ export class MedicalRecordComponent implements OnInit {
         this.startDate, this.endDate, this.mrCoverPdfSettings, localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
         configName, this.pdfs, null
       )
-        .subscribe(
-          data => {
+        .subscribe({
+          next: data => {
             let tmp = configName;
             if (tmp == null) {
               tmp = 'all';
@@ -268,14 +263,14 @@ export class MedicalRecordComponent implements OnInit {
             this.downloading = false;
             this.message = 'Download finished.';
           },
-          err => {
+          error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
               this.router.navigate([Statics.HOME_URL]);
             }
             this.message = 'Failed to download pdf.';
             this.downloading = false;
           }
-        );
+        });
     }
     this.modal.hide();
   }
@@ -385,56 +380,6 @@ export class MedicalRecordComponent implements OnInit {
     }
   }
 
-  getParticipantEnteredAddress(ddpInstitutionId: string): string {
-    if (this.participant != null && this.participant.data != null
-      && this.participant.data.profile != null && this.participant.data.medicalProviders != null) {
-      const medicalProvider = this.participant.data.medicalProviders.find(medProvider => {
-        const tmpId = medProvider.legacyGuid != null && medProvider.legacyGuid !== 0 ?
-          medProvider.legacyGuid : medProvider.guid;
-        return tmpId === ddpInstitutionId;
-      });
-
-      if (medicalProvider != null) {
-        let address = '';
-        if (medicalProvider.physicianName) {
-          address += medicalProvider.physicianName;
-        }
-        if (medicalProvider.institutionName) {
-          address += this.addLineBreak(address);
-          address += medicalProvider.institutionName;
-        }
-        if (medicalProvider.street) {
-          address += this.addLineBreak(address);
-          address += medicalProvider.street;
-        }
-        if (medicalProvider.city && medicalProvider.state) {
-          // both are not empty, so add them both
-          address += this.addLineBreak(address);
-          address += medicalProvider.city + ' ' + medicalProvider.state;
-        } else {
-          // one is not empty, so add that one
-          if (medicalProvider.city) {
-            address += this.addLineBreak(address);
-            address += medicalProvider.city;
-          }
-          if (medicalProvider.state) {
-            address += this.addLineBreak(address);
-            address += medicalProvider.state;
-          }
-        }
-        return address;
-      }
-      return '';
-    }
-  }
-
-  addLineBreak(address: string): string {
-    if (address) {
-      return '\n';
-    }
-    return '';
-  }
-
   getMedicalRecord(): MedicalRecord {
     return this.medicalRecord;
   }
@@ -453,22 +398,23 @@ export class MedicalRecordComponent implements OnInit {
       }
     }
     if (v !== null) {
-      if (this.medicalRecord.additionalValues != null) {
-        this.medicalRecord.additionalValues[ colName ] = v;
+      if (this.medicalRecord.additionalValuesJson != null) {
+        this.medicalRecord.additionalValuesJson[ colName ] = v;
       } else {
         const addArray = {};
         addArray[ colName ] = v;
-        this.medicalRecord.additionalValues = addArray;
+        this.medicalRecord.additionalValuesJson = addArray;
       }
-      this.valueChanged(this.medicalRecord.additionalValues, 'additionalValues');
+      this.valueChanged(this.medicalRecord.additionalValuesJson, 'additionalValuesJson');
     }
   }
 
   // display additional value
   getAdditionalValue(colName: string): string {
-    if (this.medicalRecord.additionalValues != null) {
-      if (this.medicalRecord.additionalValues[ colName ] != null) {
-        return this.medicalRecord.additionalValues[ colName ];
+    if (this.medicalRecord.additionalValuesJson != null) {
+      const camelCaseColumnName = Utils.convertUnderScoresToCamelCase(colName);
+      if (this.medicalRecord.additionalValuesJson[ camelCaseColumnName ] != null) {
+        return this.medicalRecord.additionalValuesJson[ camelCaseColumnName ];
       }
     }
     return null;

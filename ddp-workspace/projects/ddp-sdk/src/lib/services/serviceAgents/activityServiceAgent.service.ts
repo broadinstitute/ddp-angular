@@ -17,6 +17,7 @@ import { ActivityForm } from '../../models/activity/activityForm';
 import { ActivityInstance } from '../../models/activityInstance';
 import { CreateActivityInstanceResponse } from '../../models/activity/createActivityInstanceResponse';
 import { DeleteActivityInstanceResponse } from '../../models/activity/deleteActivityInstanceResponse';
+import { ActivityPicklistOption } from '../../models/activity/activityPicklistOption';
 
 interface GuidsObject {
     study: string;
@@ -53,9 +54,10 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
         };
 
         return combineLatest([studyGuidEmitted$, activityGuid$]).pipe(
-            map((guids: Array<string>) => {
-                return {study: guids[0], activity: guids[1]} as GuidsObject;
-            }),
+            map((guids: Array<string>) => ({
+                study: guids[0],
+                activity: guids[1]
+            } as GuidsObject)),
             mergeMap((guidsObj: GuidsObject) => getActivity$(guidsObj)),
             catchError(e => {
                 if (e.error && e.error.code && e.error.code === 'ACTIVITY_NOT_FOUND') {
@@ -141,5 +143,19 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
     private getBaseUrl(studyGuid: string, activityGuid: string = ''): string {
         const activityGuidPart = activityGuid ? `/${activityGuid}` : '';
         return `/studies/${studyGuid}/activities${activityGuidPart}`;
+    }
+
+    getPickListOptions(
+        studyGuid: string,
+        activityGuid: string,
+        questionStableId: string,
+        query: string = ''
+    ): Observable<{ query: string; results: ActivityPicklistOption[] }> {
+        const baseUrl = this.getBaseUrl(studyGuid, activityGuid);
+        return this.getObservable(
+            `${baseUrl}/questions/${questionStableId}/options?q=${query}`,
+            {},
+            [404]
+        );
     }
 }

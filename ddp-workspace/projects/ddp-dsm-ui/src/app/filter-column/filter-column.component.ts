@@ -82,4 +82,9 @@ export class FilterColumnComponent implements OnInit {
   isDynamicField(dataFilter: Filter): boolean {
     return dataFilter?.participantColumn?.tableAlias === 'participantData';
   }
+
+  inputValueChanged(): void {
+    this.dataFilter.notEmpty = false;
+    this.dataFilter.empty = false;
+  }
 }

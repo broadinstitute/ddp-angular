@@ -281,8 +281,8 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
   protected getActivity(): void {
     const get = this.currentActivityService
       .getActivity(this.studyGuidObservable, this.activityGuidObservable)
-      .subscribe(
-        x => {
+      .subscribe({
+        next: x => {
           if (!x) {
             this.model = new ActivityForm();
           } else {
@@ -316,10 +316,10 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
 
           this.anchor.addNew(canSaveSub);
         },
-        () => {
+        error: () => {
           this.navigateToErrorPage();
         }
-      );
+      });
     this.anchor.addNew(get);
   }
 

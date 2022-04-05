@@ -193,6 +193,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
             this.getOperatorParticipant(),
             this.getGovernedParticipants()
         ]).pipe(
+            // eslint-disable-next-line arrow-body-style
             map(([operatorParticipant, participants]) => {
                 return [...(operatorParticipant ? [operatorParticipant] : []), ...participants];
             })
@@ -258,9 +259,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
         this.userInvitation.getInvitations().pipe(
             take(1),
             filter(invitations => !!invitations),
-            map(invitations => invitations.find(invitation => {
-                return invitation.invitationType === InvitationType.RECRUITMENT;
-            })),
+            map(invitations => invitations.find(invitation => invitation.invitationType === InvitationType.RECRUITMENT) ),
             filter(invitation => !!invitation)
         ).subscribe(invitation => this.invitationId = invitation.invitationId);
     }

@@ -2,12 +2,19 @@
     <div class="actions">
         <div class="actions__wrapper">
             <button mat-button
-                    class="back-to-top button button_small"
+                    class="footer-btn button button_small"
+                    data-test-id="scroll-to-top"
                     (click)="goToTop()">
                 <mat-icon>arrow_drop_up</mat-icon>
                 {{'App.Footer.BackToTopButton' | translate}}
             </button>
             <app-navigation></app-navigation>
+            <a mat-button
+               target="_blank"
+               href="privacy_policy.pdf"
+               class="footer-btn button button_small">
+                {{'App.Footer.PrivacyPolicy' | translate}}
+            </a>
         </div>
         <div class="auth">
             <ddp-language-selector></ddp-language-selector>

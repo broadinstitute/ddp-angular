@@ -50,7 +50,7 @@ export class PdfDownloadComponent implements OnInit {
       this.realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       this.checkRight();
     } else {
-      this.additionalMessage = 'Please select a realm';
+      this.additionalMessage = 'Please select a study';
     }
     window.scrollTo(0, 0);
   }
@@ -59,8 +59,8 @@ export class PdfDownloadComponent implements OnInit {
     this.additionalMessage = null;
     this.allowedToSeeInformation = false;
     let jsonData: any[];
-    this.dsmService.getRealmsAllowed(Statics.PDF_DOWNLOAD_MENU).subscribe(
-      data => {
+    this.dsmService.getRealmsAllowed(Statics.PDF_DOWNLOAD_MENU).subscribe({
+      next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
           if (this.realm === val) {
@@ -69,13 +69,11 @@ export class PdfDownloadComponent implements OnInit {
           }
         });
         if (!this.allowedToSeeInformation) {
-          this.additionalMessage = 'You are not allowed to see information of the selected realm at that category';
+          this.additionalMessage = 'You are not allowed to see information of the selected study at that category';
         }
       },
-      () => {
-        return null;
-      }
-    );
+      error: () => null
+    });
   }
 
   // TODO can be changed after all DDPs are migrated
@@ -85,8 +83,8 @@ export class PdfDownloadComponent implements OnInit {
       this.additionalMessage = null;
       this.loading = true;
       let jsonData: any[];
-      this.dsmService.getPossiblePDFs(this.realm).subscribe(
-        data => {
+      this.dsmService.getPossiblePDFs(this.realm).subscribe({
+        next: data => {
           this.possiblePDFs = [];
           // console.info(`received: ${JSON.stringify(data, null, 2)}`);
           jsonData = data;
@@ -101,14 +99,14 @@ export class PdfDownloadComponent implements OnInit {
           });
           this.loading = false;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading list of event types\nPlease contact your DSM developer';
         }
-      );
+      });
     }
   }
 
@@ -117,8 +115,8 @@ export class PdfDownloadComponent implements OnInit {
       this.errorMessage = null;
       this.additionalMessage = null;
       this.loading = true;
-      this.dsmService.getParticipantsPDFs(this.realm, this.participantId).subscribe(
-        data => {
+      this.dsmService.getParticipantsPDFs(this.realm, this.participantId).subscribe({
+        next: data => {
           this.participantPDFs = [];
           // console.info( `received: ${JSON.stringify( data, null, 2 )}` );
           const jsonData = data;
@@ -131,35 +129,36 @@ export class PdfDownloadComponent implements OnInit {
           console.log(this.participantPDFs);
           this.loading = false;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading list of event types\nPlease contact your DSM developer';
         }
-      );
+      });
     }
   }
 
   downloadPDF(configName: string): void {
     this.loading = true;
     this.dsmService.downloadPDF(this.participantId, null, null, null, null, this.compService.getRealm(),
-      configName, null, null).subscribe(
-      data => {
+      configName, null, null
+    ).subscribe({
+      next: data => {
         // eslint-disable-next-line no-console
         console.info(data);
         this.downloadFile(data, '_' + configName);
         this.loading = false;
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([ Statics.HOME_URL ]);
+          this.router.navigate([Statics.HOME_URL]);
         }
         this.additionalMessage = 'Error - Downloading consent pdf file\nPlease contact your DSM developer';
         this.loading = false;
       }
-    );
+    });
   }
 
   downloadFile(data: any, type: string): void {

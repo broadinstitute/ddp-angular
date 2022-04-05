@@ -19,9 +19,15 @@ export class ActivityForm {
     public sectionIndex: number | null;
     public statusCode: ActivityStatusCodes;
 
-    public validate(): boolean {
+    public validate(validateOnlyVisibleSections?: boolean): boolean {
         let isValid = true;
-        for (const section of this.getAllSections()) {
+
+        const sectionsToValidate = this.getAllSections().filter(
+            // section should be considered visible as long as `visible` prop isn't explicitly set to `false`
+            section => validateOnlyVisibleSections ? section.visible !== false : section
+        );
+
+        for (const section of sectionsToValidate) {
             isValid = section.validate() && isValid;
         }
         this.validationState.next(isValid);

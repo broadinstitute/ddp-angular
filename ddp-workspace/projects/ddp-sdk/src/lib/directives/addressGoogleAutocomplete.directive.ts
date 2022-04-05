@@ -1,12 +1,15 @@
 /// <reference types="@types/googlemaps" />
 import { Directive, ElementRef, EventEmitter, Inject, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
-import { ScriptLoaderService } from '../services/scriptLoader.service';
-import { Address } from '../models/address';
-import { ConfigurationService } from '../services/configuration.service';
 import { concat, Observable, Subject } from 'rxjs';
 import { share, skip, takeUntil } from 'rxjs/operators';
-import { LoggingService } from '../services/logging.service';
 import * as _ from 'underscore';
+
+import { ScriptLoaderService } from '../services/scriptLoader.service';
+import { ConfigurationService } from '../services/configuration.service';
+import { LoggingService } from '../services/logging.service';
+import { Address } from '../models/address';
+import { FuncType } from '../models/funcType';
+
 import Autocomplete = google.maps.places.Autocomplete;
 import PlaceResult = google.maps.places.PlaceResult;
 import AutocompleteOptions = google.maps.places.AutocompleteOptions;
@@ -41,14 +44,14 @@ export class AddressGoogleAutocompleteDirective implements OnInit, OnDestroy, On
     }
 
     public ngOnInit(): void {
-        this.scriptLoader$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(
-            () => {
+        this.scriptLoader$.pipe(takeUntil(this.ngUnsubscribe)).subscribe({
+            next: () => {
                 if (!this.autoComplete) {
                     this.setupAutocomplete();
                 }
             },
-            () => this.logger.logWarning(this.LOG_SOURCE, 'Could not load google-maps-places script.')
-        );
+            error: () => this.logger.logWarning(this.LOG_SOURCE, 'Could not load google-maps-places script.')
+        });
         // making sure that any countryCodes handled AFTER scriptloader has processed
         concat(this.scriptLoader$, this.countryCode$).pipe(
             skip(1),
@@ -105,7 +108,7 @@ export class AddressGoogleAutocompleteDirective implements OnInit, OnDestroy, On
         }
 
         // a little utility to pick out the data we need from Google's PlaceResult
-        const fieldVal = (typeName: string, useLongName = true) => {
+        const fieldVal: FuncType<string> = (typeName: string, useLongName = true) => {
             const comp: any | null = place.address_components.find(o => o.types.indexOf(typeName) >= 0);
             return comp ? comp[useLongName ? 'long_name' : 'short_name'] : '';
         };

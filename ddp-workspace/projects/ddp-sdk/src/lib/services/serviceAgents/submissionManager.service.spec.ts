@@ -1,16 +1,19 @@
-import { ActivityServiceAgent } from './activityServiceAgent.service';
-import { Observable, of, from, interval, timer, throwError } from 'rxjs';
-import { delay, delayWhen, take, tap } from 'rxjs/operators';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
+import { Observable, of, from, interval, timer, throwError } from 'rxjs';
+import { delayWhen, take, tap } from 'rxjs/operators';
+
+import { ActivityServiceAgent } from './activityServiceAgent.service';
 import { SubmissionManager } from './submissionManager.service';
 import { AnswerSubmission } from '../../models/activity/answerSubmission';
 import { PatchAnswerResponse } from '../../models/activity/patchAnswerResponse';
 import { BlockVisibility } from '../../models/activity/blockVisibility';
+import { AnswerValidationError } from '../../models/answerValidationError';
 
+/* eslint-disable arrow-body-style */
 describe('SubmissionManagerTest', () => {
     let submissionManager: SubmissionManager;
-    let serviceAgent: jasmine.SpyObj< ActivityServiceAgent>;
+    let serviceAgent: jasmine.SpyObj<ActivityServiceAgent>;
 
     beforeEach(() => {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
@@ -20,7 +23,7 @@ describe('SubmissionManagerTest', () => {
             imports: [HttpClientModule],
             providers: [ActivityServiceAgent]
         });
-        serviceAgent  = jasmine.createSpyObj('ActivityServiceAgent', ['saveAnswerSubmission']);
+        serviceAgent = jasmine.createSpyObj('ActivityServiceAgent', ['saveAnswerSubmission']);
 
         submissionManager = new SubmissionManager(serviceAgent);
     });
@@ -28,16 +31,17 @@ describe('SubmissionManagerTest', () => {
     it('test submission manager mock', (done) => {
         expect(submissionManager).not.toBeNull();
         serviceAgent.saveAnswerSubmission.and.callFake((): Observable<PatchAnswerResponse> => {
-            return of({ answers: [], blockVisibility: [] }).pipe(delayWhen(() => timer(2000)));
+            return of({answers: [], blockVisibility: []}).pipe(delayWhen(() => timer(2000)));
         });
         const start = new Date().getTime();
-        serviceAgent.saveAnswerSubmission('hey', 'ho', { stableId: 'blah', value: 'boo' }, true).subscribe(x => {
+        serviceAgent.saveAnswerSubmission('hey', 'ho', {stableId: 'blah', value: 'boo'}, true).subscribe(x => {
             console.log('The milliseconds gone by are:' + (new Date().getTime() - start));
             expect(x['answers']).not.toBeNull();
             done();
         });
 
     });
+
     it('test patch calls serialized observable', (done) => {
         // Let's do 5 calls that if were done is parallel instead of serialized, would finish in a different order than that of submission
         const httpCallDelays = [40, 50, 10, 30, 20];
@@ -71,7 +75,8 @@ describe('SubmissionManagerTest', () => {
         setTimeout(() => {
             done();
         }, 6000);
-        const subscription = submissionManager.answerSubmissionResponse$
+
+        submissionManager.answerSubmissionResponse$
             .subscribe(patchResponse => {
                 expect(patchResponse).not.toBeNull();
                 // remember: we stored the requestIdx in the response like so
@@ -88,11 +93,14 @@ describe('SubmissionManagerTest', () => {
     it('test isSubmissionInProgress$ observable', (done) => {
         // Fake the call to service agent, including the response delay
         const httpCallDelay = 500;
+
         serviceAgent.saveAnswerSubmission.and.callFake((): Observable<PatchAnswerResponse> => {
             return of({
                 answers: [],
                 blockVisibility: []
-            }).pipe(delay(httpCallDelay));
+            }).pipe(
+                delayWhen(() => timer(httpCallDelay))
+            );
         });
 
         interface ValueAndDelay {
@@ -106,9 +114,11 @@ describe('SubmissionManagerTest', () => {
         // Let's set the start Time
         const startTime: number = new Date().getTime();
 
-        // this is what we are actually testing: the subscription to isSubmissioninProgress$
-        submissionManager.isAnswerSubmissionInProgress$.subscribe(isInProgress => {
-            returnedInProgressValues.push({value: isInProgress, delay: (new Date().getTime() - startTime)});
+        // this is what we are actually testing: the subscription to isSubmissionInProgress$
+        submissionManager.isAnswerSubmissionInProgress$.subscribe((isInProgress: boolean) => {
+            const value = {value: isInProgress, delay: (new Date().getTime() - startTime)};
+            console.log('returnedInProgressValue:', value);
+            returnedInProgressValues.push(value);
         });
 
         submissionManager.pendingAnswerSubmissionQueue$.subscribe(queue => {
@@ -154,12 +164,12 @@ describe('SubmissionManagerTest', () => {
 
         const startTime: number = new Date().getTime();
 
-        const pendingSubmissionsOverTime: Array<{time: number; queue: AnswerSubmission[]}> = [];
+        const pendingSubmissionsOverTime: Array<{ time: number; queue: AnswerSubmission[] }> = [];
 
         // capture the changes to the queue over time
         submissionManager.pendingAnswerSubmissionQueue$.subscribe((pendingSubmissions: AnswerSubmission[]) => {
-            console.log('I got ' + pendingSubmissions.length + 'from the subcriptions!!!');
-            pendingSubmissionsOverTime.push({time: new Date().getTime() - startTime, queue: pendingSubmissions });
+            console.log('I got ' + pendingSubmissions.length + 'from the subscriptions!!!');
+            pendingSubmissionsOverTime.push({time: new Date().getTime() - startTime, queue: pendingSubmissions});
         });
         // this is needed to get things going
         submissionManager.answerSubmissionResponse$.subscribe(x => console.log('Got response for: ' + x.answers[0].stableId));
@@ -169,8 +179,8 @@ describe('SubmissionManagerTest', () => {
         const requestCreationTimes$: Observable<number> = from([20, 50, 100, 250]);
 
         requestCreationTimes$.pipe(
-            delayWhen(start => timer(start)),
-            tap(() => submissionManager.patchAnswer('x', requestId++ + '', 'z', 'boo', 'blockGuid')))
+                delayWhen(start => timer(start)),
+                tap(() => submissionManager.patchAnswer('x', requestId++ + '', 'z', 'boo', 'blockGuid')))
             .subscribe(x => console.log('There goes request ' + x + ' at ' + (new Date().getTime() - startTime)));
 
         // wait some time and check what happened.
@@ -275,20 +285,21 @@ describe('SubmissionManagerTest', () => {
         const responses: PatchAnswerResponse[] = [];
 
         // subscribe. Just want to make sure that we got (at least) the expected number of responses
-        submissionManager.answerSubmissionResponse$.subscribe(
-            (response: PatchAnswerResponse) => {
+        submissionManager.answerSubmissionResponse$.subscribe({
+            next: (response: PatchAnswerResponse) => {
                 responses.push(response);
 
                 if (responses.length === numberOfRequestsToMake) {
                     done.fail('We should have died already. Did not get the expected thrown error');
-                }},
-            (error) => {
+                }
+            },
+            error: (error) => {
                 console.log('The error handler is being executed!!!');
                 expect(error).not.toBeNull();
                 expect(error.message).toBe(errorMessage);
                 done();
             }
-        );
+        });
 
         // push out our requests. our subscription is all set waiting for the responses.
         for (let activityGuidNumber = 0; activityGuidNumber < numberOfRequestsToMake; activityGuidNumber++) {
@@ -305,7 +316,7 @@ describe('SubmissionManagerTest', () => {
                 console.log('This is it!!!');
             }
             const testBlockVisibility: BlockVisibility[] =
-                answerSubmission.stableId === '1' ? [{ blockGuid: '2', shown: false, enabled: true }] : [];
+                answerSubmission.stableId === '1' ? [{blockGuid: '2', shown: false, enabled: true}] : [];
             return of({
                 answers: [],
                 blockVisibility: testBlockVisibility
@@ -334,5 +345,28 @@ describe('SubmissionManagerTest', () => {
             expect(invalidSubmissions[0].stableId).toBe('2');
             done();
         }, 10000);
+    });
+
+    it('test fail an answer PATH with 422 error',(done) => {
+        serviceAgent.saveAnswerSubmission.and.returnValue(throwError(() => new HttpErrorResponse({
+            error: {
+                violations: [
+                    {
+                        rules: [{ruleType: 'UNIQUE_VALUE', message: 'validation message'}],
+                        stableId: 'COMMENTS'
+                    }
+                ]
+            },
+            status: 422
+        })));
+
+        submissionManager.answerDataErrors$.subscribe({
+            next: (error: AnswerValidationError) => {
+                expect(error.violations[0].stableId).toBe('COMMENTS');
+                done();
+            }
+        });
+
+        submissionManager.patchAnswer('studyGuid', 'activityGuid', 'stableId', 'a value', 'blockGuid');
     });
 });
