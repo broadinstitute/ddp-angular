@@ -662,7 +662,7 @@ export class Utils {
     }
     let text = answer;
     let ans;
-    if (qdef.groups) {
+    if (qdef.groups?.length > 0) {
       loop1: for (const group of qdef.groups) {
         if(group.groupStableId === answer){
           ans = group.groupText;
@@ -679,12 +679,12 @@ export class Utils {
         text = ans;
       }
     }
-    if (!ans && qdef.options) {
+    if (!ans && qdef.options?.length > 0) {
       // TODO: check is it correct ? shadow variable 'ans'
       // eslint-disable-next-line @typescript-eslint/no-shadow
       const ans = qdef.options.find( option => option.optionStableId === answer );
       if (ans) {
-        text = ans.optionText;
+        text = ans.optionText || ans.optionStableId;
       }
     }
     return text;

@@ -73,6 +73,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   source = 'normal';
 
+  openActivity: string;
+
   loadingParticipantPage = false;
 
   noteMedicalRecord: MedicalRecord;
@@ -170,11 +172,34 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       this.scrolled = true;
     }
     this.validateEmailInput(this.participant.data.profile['email']);
-    this.isOncHistoryVisible = !!this.participant.data.dsm[ 'hasConsentedToTissueSample' ]
-                            && !!this.participant.participant.ddpParticipantId;
+    this.isOncHistoryVisible = this.participant.data.status === 'ENROLLED';
+
+    this.displayActivityOrder();
+    this.addMedicalProviderInformation();
   }
 
-  ngAfterViewChecked(): void{
+  addMedicalProviderInformation(): void {
+    if (this.participant != null && this.participant.data != null
+      && this.participant.data.profile != null && this.participant.data.medicalProviders != null && this.participant.medicalRecords) {
+      if (this.participant.medicalRecords.length > 0) {
+        this.participant.medicalRecords.forEach(medicalRecord => {
+          const medicalProvider = this.participant.data.medicalProviders.find(medProvider => {
+            const tmpId = medProvider.legacyGuid != null && medProvider.legacyGuid !== 0 ?
+              medProvider.legacyGuid : medProvider.guid;
+            return tmpId === medicalRecord.ddpInstitutionId;
+          });
+          medicalRecord.type = medicalProvider.type;
+          medicalRecord.nameDDP = medicalProvider.physicianName;
+          medicalRecord.institutionDDP = medicalProvider.institutionName;
+          medicalRecord.streetAddressDDP = medicalProvider.street;
+          medicalRecord.cityDDP = medicalProvider.city;
+          medicalRecord.stateDDP = medicalProvider.state;
+        });
+      }
+    }
+  }
+
+  ngAfterViewChecked(): void {
     if ( !this.selectedActivityCode || this.scrolled || !document.getElementById(this.selectedActivityCode))
       {return;}
 
@@ -184,6 +209,19 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   ngOnDestroy(): void {
     clearInterval(this.checkParticipantStatusInterval);
+  }
+
+  displayActivityOrder(): void {
+    const orderedActivities = [];
+
+    [...this.activityDefinitions].sort(({displayOrder: A},{displayOrder: B}) => A - B)
+      .forEach(activity => {
+      const foundActivity = this.participant.data.activities
+        .find(a => activity.activityCode === a.activityCode && activity.activityVersion === a.activityVersion);
+      foundActivity && orderedActivities.push(foundActivity);
+    });
+
+    this.participant.data.activities = orderedActivities;
   }
 
   showFamilyMemberPopUpOnClick(): void {
@@ -1159,19 +1197,15 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     return '';
   }
 
-  getParticipantDataFromSingleParticipant(fieldSetting: FieldSettings): string {
+  getParticipantForDynamicField(fieldSetting: FieldSettings): string {
     if (this.participant && this.participant.participantData && fieldSetting.columnName) {
-      for (const participantData of this.participant.participantData) {
-        if (participantData != null && participantData.data != null && participantData.data[fieldSetting.columnName] != null) {
-          return participantData.data[fieldSetting.columnName];
-        }
+      const participantDataFound = this.participant.participantData
+        .find(participantData => participantData.data && participantData.data[fieldSetting.columnName] != null);
+      if (participantDataFound) {
+        return participantDataFound.data[fieldSetting.columnName];
       }
     }
     return '';
-  }
-
-  dynamicFormType(settings: FieldSettings[]): boolean {
-    return settings['TAB_GROUPED'];
   }
 
   getDisplayName(displayName: string, columnName: string): string {

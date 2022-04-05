@@ -113,6 +113,7 @@ import { FormDataComponent } from './form-data/form-data.component';
 import { AddFamilyMemberComponent } from './popups/add-family-member/add-family-member.component';
 import { FieldTableComponent } from './field-table/field-table.component';
 import { ConfigurationService, DdpModule, LanguageService, LoggingService } from 'ddp-sdk';
+import {dynamicFormTypeAndStudyRGP} from './participant-page/pipes/dynamicFormTypeForRgp.pipe';
 import { TestDssComponent } from './test-dss/test-dss.component';
 import { DssErrorPageComponent } from './test-dss/dss-error-page/dss-error-page.component';
 
@@ -237,6 +238,7 @@ export function translateFactory(translate: TranslateService,
         FormDataComponent,
         AddFamilyMemberComponent,
         FieldTableComponent,
+        dynamicFormTypeAndStudyRGP,
         TestDssComponent,
         DssErrorPageComponent
     ],

@@ -7,7 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { Observable, of } from 'rxjs';
 
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
-import { ActivityInstance, ActivityServiceAgent, LoggingService, ModalActivityBlockComponent } from 'ddp-sdk';
+import { ActivityActionsAgent, ActivityInstance, ActivityServiceAgent, LoggingService, ModalActivityBlockComponent } from 'ddp-sdk';
 import { ModalDialogService } from '../../../../services/modal-dialog.service';
 import { MatIconModule } from '@angular/material/icon';
 import { ConfigurationService } from '../../../../services/configuration.service';
@@ -51,6 +51,7 @@ describe('ModalActivityBlockComponent', () => {
       declarations: [ModalActivityBlockComponent, TestHostComponent],
       providers: [
         { provide: ActivityServiceAgent, useValue: {} },
+        { provide: ActivityActionsAgent, useValue: {} },
         { provide: MatDialog, useValue: {} },
         { provide: LoggingService, useValue: {} },
         { provide: ModalDialogService, useValue: {} },

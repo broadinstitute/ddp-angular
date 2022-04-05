@@ -34,6 +34,13 @@ export class FormDataComponent {
     return this.activityData ? this.activityData.toString() : this.activityData;
   }
 
+  isChecked(): boolean {
+    if (this.participantData === 'true' || this.participantData) {
+      return true;
+    }
+    return false;
+  }
+
   getOptions(): Value[] | string[] {
     if (this.fieldSetting.displayType !== 'ACTIVITY' && this.fieldSetting.displayType !== 'ACTIVITY_STAFF') {
       return this.fieldSetting.possibleValues;
