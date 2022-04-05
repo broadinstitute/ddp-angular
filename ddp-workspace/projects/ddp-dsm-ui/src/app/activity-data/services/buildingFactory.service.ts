@@ -247,11 +247,11 @@ export class BuildingFactoryService {
   }
 
   private getOptionOrGroupText(questionDefinition: QuestionDefinition, stableId: string): string {
-    const composedStableId = stableId.includes('|') ? stableId.split('|')[0] : stableId;
+    const composedStableId = stableId?.includes('|') ? stableId?.split('|')[0] : stableId;
     if (questionDefinition.options) {
       const option = questionDefinition.options.find(x => x.optionStableId === composedStableId);
       if (option != null) {
-        return stableId.includes('|') ? stableId.split('|')[1] : option.optionText;
+        return stableId?.includes('|') ? stableId?.split('|')[1] : option.optionText;
       }
     }
     if (questionDefinition.groups) {
