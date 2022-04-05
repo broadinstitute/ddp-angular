@@ -799,20 +799,6 @@ participant.data.dsm['diagnosisYear'] != null">
 
               <ng-container *ngIf="getTissueConsent() == null || !getTissueConsent()">
                 <b>This participant did not consent to sharing tissue</b><br/>
-
-                <div class="Float--left Width--100">
-                  <div>
-                    <app-onc-history-detail [participant]="participant" [settings]="settings"
-                                            [oncHistory]="participant.oncHistoryDetails"
-                                            [editable]="false"
-                                            [oncHistoryId]="oncHistoryId"
-                                            (valueChanged)="onOncHistoryDetailChange()"
-                                            (openTissue)="openTissue($event)"
-                                            (selectionChanged)="onOncHistoryDetailSelectionChange()">
-                    </app-onc-history-detail>
-                  </div>
-                </div>
-
               </ng-container>
               <ng-container *ngIf="getTissueConsent() == null || getTissueConsent()">
                 <span *ngIf="getTissueConsent() == null">
