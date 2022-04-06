@@ -48,8 +48,6 @@ export class ActivityBooleanRadioButtonsAnswerComponent {
 
     constructor() {}
 
-    ngOnInit(): void {}
-
     public saveValue(value: boolean): void {
         this.block.answer = value;
         this.valueChanged.emit(value);

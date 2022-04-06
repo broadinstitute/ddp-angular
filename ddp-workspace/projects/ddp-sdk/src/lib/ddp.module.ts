@@ -217,11 +217,11 @@ import { StudiesServiceAgentService } from './services/serviceAgents/studiesServ
 import { FuncType } from './models/funcType';
 import { ActivityPicklistRemoteAutoCompleteOptionsComponent }
     from './components/activityForm/picklist/activity-picklist-remote-auto-complete-options.component';
-import { ActivityBooleanAnswer } 
+import { ActivityBooleanAnswer }
     from './components/activityForm/answers/boolean/activityBooleanAnswer.component';
-import { ActivityBooleanCheckboxAnswerComponent } 
+import { ActivityBooleanCheckboxAnswerComponent }
     from './components/activityForm/answers/boolean/activity-boolean-checkbox-answer/activity-boolean-checkbox-answer.component';
-import { ActivityBooleanRadioButtonsAnswerComponent } 
+import { ActivityBooleanRadioButtonsAnswerComponent }
     from './components/activityForm/answers/boolean/activity-boolean-radio-buttons-answer/activity-boolean-radio-buttons-answer.component';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
