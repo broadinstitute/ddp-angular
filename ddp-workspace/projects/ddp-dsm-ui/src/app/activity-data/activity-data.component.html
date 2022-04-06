@@ -92,7 +92,7 @@
       <ul>
         <ul *ngFor="let single of picklist.single">
           <li *ngIf="single.text"><b>{{ single.text }}</b> </li>
-          <p *ngIf="single.details"><b>{{ single.details }}</b> </p>
+          <p *ngIf="single.details"><b>{{ single.details.details }}</b> </p>
         </ul>
       </ul>
 
