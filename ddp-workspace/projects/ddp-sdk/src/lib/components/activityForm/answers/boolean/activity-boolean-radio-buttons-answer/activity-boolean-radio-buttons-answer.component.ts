@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivityBooleanQuestionBlock } from '../../../../../models/activity/activityBooleanQuestionBlock';
 
 @Component({
@@ -41,7 +41,7 @@ import { ActivityBooleanQuestionBlock } from '../../../../../models/activity/act
         `,
     ],
 })
-export class ActivityBooleanRadioButtonsAnswerComponent implements OnInit {
+export class ActivityBooleanRadioButtonsAnswerComponent {
     @Input() block: ActivityBooleanQuestionBlock;
     @Input() readonly: boolean;
     @Output() valueChanged: EventEmitter<boolean> = new EventEmitter();

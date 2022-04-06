@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivityBooleanQuestionBlock } from '../../../../../models/activity/activityBooleanQuestionBlock';
 
 @Component({
@@ -26,20 +26,18 @@ import { ActivityBooleanQuestionBlock } from '../../../../../models/activity/act
         `,
     ],
 })
-export class ActivityBooleanCheckboxAnswerComponent implements OnInit {
+export class ActivityBooleanCheckboxAnswerComponent{
     @Input() block: ActivityBooleanQuestionBlock;
     @Input() readonly: boolean;
     @Output() valueChanged: EventEmitter<boolean> = new EventEmitter();
 
     constructor() {}
 
-    ngOnInit(): void {}
-
-    toggleAnswer() {
+    toggleAnswer(): void {
         this.block.answer = !this.block.answer;
     }
 
-    onValueChange() {
+    onValueChange(): void {
         this.toggleAnswer();
         this.valueChanged.emit(this.block.answer);
     }
