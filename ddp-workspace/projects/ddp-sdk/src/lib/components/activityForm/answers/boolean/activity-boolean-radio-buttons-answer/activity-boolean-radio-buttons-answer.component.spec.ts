@@ -1,3 +1,6 @@
+
+import { ActivityBooleanRadioButtonsAnswerComponent } from './activity-boolean-radio-buttons-answer.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
@@ -5,13 +8,12 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { ActivityBooleanQuestionBlock } from '../../../models/activity/activityBooleanQuestionBlock';
-import { ActivityBooleanAnswer } from './activityBooleanAnswer.component';
-import { QuestionPromptComponent } from './question-prompt/questionPrompt.component';
-import { TooltipComponent } from '../../tooltip.component';
-import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
+import { ActivityBooleanQuestionBlock } from '../../../../../models/activity/activityBooleanQuestionBlock';
+import { QuestionPromptComponent } from './../../question-prompt/questionPrompt.component';
+import { TooltipComponent } from '../../../../tooltip.component';
+import { TranslateTestingModule } from '../../../../../testsupport/translateTestingModule';
 
-describe('ActivityBooleanAnswer', () => {
+describe('ActivityBooleanRadioButtonsAnswerComponent', () => {
     const questionBlock = {
         answer: null,
         question: 'Are you agree?',
@@ -23,10 +25,10 @@ describe('ActivityBooleanAnswer', () => {
 
     @Component({
         template: `
-        <ddp-activity-boolean-answer [block]="block"
+        <ddp-activity-boolean-radio-buttons-answer [block]="block"
                                      [readonly]="readonly"
                                      (valueChanged)="changed($event)">
-        </ddp-activity-boolean-answer>`
+        </ddp-activity-boolean-radio-buttons-answer>`
     })
     class TestHostComponent {
         block = questionBlock;
@@ -35,8 +37,8 @@ describe('ActivityBooleanAnswer', () => {
         changed(value: any): void { }
     }
 
-    let component: ActivityBooleanAnswer;
-    let fixture: ComponentFixture<ActivityBooleanAnswer>;
+    let component: ActivityBooleanRadioButtonsAnswerComponent;
+    let fixture: ComponentFixture<ActivityBooleanRadioButtonsAnswerComponent>;
     let debugElement: DebugElement;
 
     beforeEach(waitForAsync(() => {
@@ -50,13 +52,13 @@ describe('ActivityBooleanAnswer', () => {
             ],
             declarations: [
                 TestHostComponent,
-                ActivityBooleanAnswer,
+                ActivityBooleanRadioButtonsAnswerComponent,
                 QuestionPromptComponent,
                 TooltipComponent
             ]
         }).compileComponents();
 
-        fixture = TestBed.createComponent(ActivityBooleanAnswer);
+        fixture = TestBed.createComponent(ActivityBooleanRadioButtonsAnswerComponent);
         component = fixture.componentInstance;
         debugElement = fixture.debugElement;
         component.block = questionBlock;
@@ -95,3 +97,4 @@ describe('ActivityBooleanAnswer', () => {
         expect(component.block.answer).toBe(false);
     });
 });
+

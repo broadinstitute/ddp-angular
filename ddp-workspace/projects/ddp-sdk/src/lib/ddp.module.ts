@@ -80,7 +80,6 @@ import { WindowRef } from './services/windowRef';
 import { ActivityComponent } from './components/activityForm/activity.component';
 import { ActivityRedesignedComponent } from './components/activityForm/activity-redesigned.component';
 import { ActivityQuestionComponent } from './components/activityForm/activity-blocks/activityQuestion.component';
-import { ActivityBooleanAnswer } from './components/activityForm/answers/activityBooleanAnswer.component';
 import { ActivityAgreementAnswer } from './components/activityForm/answers/activityAgreementAnswer.component';
 import { ActivityTextAnswer } from './components/activityForm/answers/activityTextAnswer.component';
 import { ActivityTextInput } from './components/activityForm/answers/activity-text-input/activityTextInput.component';
@@ -218,6 +217,9 @@ import { StudiesServiceAgentService } from './services/serviceAgents/studiesServ
 import { FuncType } from './models/funcType';
 import { ActivityPicklistRemoteAutoCompleteOptionsComponent }
     from './components/activityForm/picklist/activity-picklist-remote-auto-complete-options.component';
+import { ActivityBooleanAnswer } from './components/activityForm/answers/boolean/activityBooleanAnswer.component';
+import { ActivityBooleanCheckboxAnswerComponent } from './components/activityForm/answers/boolean/activity-boolean-checkbox-answer/activity-boolean-checkbox-answer.component';
+import { ActivityBooleanRadioButtonsAnswerComponent } from './components/activityForm/answers/boolean/activity-boolean-radio-buttons-answer/activity-boolean-radio-buttons-answer.component';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter: FuncType<string> = () => sessionService.token;
@@ -436,7 +438,9 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityBlockComponent,
         ConfirmDialogComponent,
         DropFileToUploadDirective,
-        ActivityPicklistRemoteAutoCompleteOptionsComponent
+        ActivityPicklistRemoteAutoCompleteOptionsComponent,
+        ActivityBooleanCheckboxAnswerComponent,
+        ActivityBooleanRadioButtonsAnswerComponent
     ],
     exports: [
         NetworkSnifferComponent,

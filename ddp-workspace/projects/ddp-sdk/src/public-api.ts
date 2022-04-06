@@ -157,7 +157,7 @@ export * from './lib/components/activityForm/answers/activityNumericAnswer.compo
 export * from './lib/components/activityForm/answers/activityEmailInput.component';
 export * from './lib/components/activityForm/answers/activity-text-input/activityTextInput.component';
 export * from './lib/components/activityForm/answers/activityTextAnswer.component';
-export * from './lib/components/activityForm/answers/activityBooleanAnswer.component';
+export * from './lib/components/activityForm/answers/boolean/activityBooleanAnswer.component';
 export * from './lib/components/activityForm/answers/activity-file-answer/activityFileAnswer.component';
 export * from './lib/components/activityForm/answers/activity-matrix-answer/activity-matrix-answer.component';
 export * from './lib/components/activityForm/answers/activity-instance-select-answer/activity-instance-select-answer.component';
