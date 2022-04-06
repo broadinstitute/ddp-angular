@@ -1,0 +1,73 @@
+<h2>DSS SDK test</h2>
+
+<section class="controls">
+  <h4>Fill in all required fields and click a proper button</h4>
+  <div class="inputs">
+    <mat-form-field appearance="outline">
+      <mat-label>userGuid</mat-label>
+      <input matInput
+             #userGuidInput
+             required
+             [formControl]="userGuidFormControl"/>
+      <mat-icon matSuffix (click)="userGuidFormControl.setValue(existingUserGuid)">add_circle_outline</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>studyGuid</mat-label>
+      <input matInput
+             #studyGuidInput
+             required
+             [formControl]="studyGuidFormControl"/>
+      <mat-icon matSuffix (click)="studyGuidFormControl.setValue(existingStudyGuid)">add_circle_outline</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>activityGuid</mat-label>
+      <input matInput
+             #activityGuidInput
+             required
+             [formControl]="activityGuidFormControl"/>
+      <mat-icon matSuffix (click)="activityGuidFormControl.setValue(existingActivityGuid)">add_circle_outline</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>parentInstanceGuid</mat-label>
+      <input matInput
+             #parentInstanceGuidInput
+             [formControl]="parentInstanceGuidFormControl"/>
+    </mat-form-field>
+  </div>
+
+  <div class="buttons">
+    <button mat-flat-button color="primary"
+            [disabled]="!allInputsHaveValues"
+            (click)="showActivity=true">Get the activity
+    </button>
+
+    <button mat-flat-button color="primary"
+            [disabled]="!allInputsHaveValues"
+            (click)="createActivity()">Create activity instance
+    </button>
+
+    <button mat-flat-button color="primary"
+            [disabled]="!allInputsHaveValues"
+            (click)="deleteActivity()">Delete activity instance
+    </button>
+  </div>
+</section>
+
+<section class="results">
+  <h4>Results</h4>
+  <div *ngIf="showActivity && allInputsHaveValues">
+    <ddp-activity-redesigned [studyGuid]="studyGuidInput.value"
+                             [activityGuid]="activityGuidInput.value"
+                             (submit)="navigate($event)"
+                             (activityCode)="activityCodeChanged($event)">
+    </ddp-activity-redesigned>
+  </div>
+
+  <div class="results--message" *ngIf="!showActivity">
+    {{receivedData | async}}
+  </div>
+</section>
+
