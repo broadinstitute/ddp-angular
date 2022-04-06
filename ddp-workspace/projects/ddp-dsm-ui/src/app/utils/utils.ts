@@ -728,7 +728,7 @@ export class Utils {
   }
 
   static getActivityDefinition( activities: ActivityDefinition[], activityCode: string, version: string ): ActivityDefinition{
-    return  activities.find( x => x.activityCode === activityCode && x.activityVersion === version );
+    return  activities?.find( x => x.activityCode === activityCode && x.activityVersion === version );
   }
 
   getAbstractionGroup(groups: Array<AbstractionGroup>, groupId: string): AbstractionGroup | undefined {
