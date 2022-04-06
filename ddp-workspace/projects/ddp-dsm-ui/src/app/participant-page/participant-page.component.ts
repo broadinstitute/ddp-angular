@@ -505,7 +505,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         participantId, this.role.userMail(),
         {name: parameterName, value: v}, null, 'ddpParticipantId',
         ddpParticipantId, tableAlias, null, localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
-        this.participant.participant.ddpParticipantId
+        ddpParticipantId
       );
       patch1.realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       const patch = patch1.getPatch();
