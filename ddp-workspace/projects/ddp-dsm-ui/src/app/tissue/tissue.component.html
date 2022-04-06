@@ -86,7 +86,7 @@
         Scroll(s)
       </td>
     </tr>
-    <tr>
+    <!-- <tr>
       <td class="TD--Padding">USS SM-IDS</td>
       <td colspan="3">
         <button md-mini-fab [disabled]="!editable" color="primary" [ngClass]="{'changed':!smIdCountMatch(this.tissue.ussSMId, this.tissue.ussCount)}"
@@ -121,7 +121,7 @@
           Count and entered SM-IDs do not match! Please open and adjust.
         </span>
       </td>
-    </tr>
+    </tr> -->
     <tr *ngIf="tissue.tissueType != null && tissue.tissueType === 'block' ">
       <td class="TD--Padding">Expected Return Date</td>
       <td colspan="3">
