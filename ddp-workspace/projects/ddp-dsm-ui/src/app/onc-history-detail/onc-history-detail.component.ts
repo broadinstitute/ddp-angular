@@ -307,12 +307,7 @@ export class OncHistoryDetailComponent implements OnInit {
         if (contact.field5 != null) {
           this.oncHistory[ index ].destructionPolicy = contact.field5.value;
         }
-        const nameValues = [ {name: 'oD.facility', value: contact.field1.value}, {
-          name: 'oD.phone',
-          value: contact.field3.value
-        }, {
-          name: 'oD.fax', value: contact.field4.value
-        }, {name: 'oD.destructionPolicy', value: contact.field5.value} ];
+        const nameValues = this.buildFacilityNameValues(contact);
         const patch1 = new PatchUtil(
           this.oncHistory[ index ].oncHistoryDetailId, this.role.userMail(),
           null, nameValues, 'participantId', this.oncHistory[ index ].participantId,
@@ -337,6 +332,23 @@ export class OncHistoryDetailComponent implements OnInit {
         this.patch(patch, index);
       }
     }
+  }
+
+  private buildFacilityNameValues(contact: any): Array<NameValue> {
+    const nameValues = [];
+    if (contact.field1.value) {
+      nameValues.push({ name: 'oD.facility', value: contact.field1.value });
+    }
+    if (contact.field3.value) {
+      nameValues.push({ name: 'oD.phone', value: contact.field3.value });
+    }
+    if (contact.field4.value) {
+      nameValues.push({ name: 'oD.fax', value: contact.field4.value });
+    }
+    if (contact.field5.value) {
+      nameValues.push({ name: 'oD.destructionPolicy', value: contact.field5.value });
+    }
+    return nameValues;
   }
 
   public setTypePx(object: any, index: number): void {
