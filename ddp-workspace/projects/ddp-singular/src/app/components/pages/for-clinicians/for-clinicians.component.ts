@@ -17,7 +17,7 @@ import { Component } from '@angular/core';
             <p>
               Please contact us by email at
               <a href="mailto:contact@projectsingular.org">contact@projectsingular.org</a> or by phone at
-              <a href="tel:+(650)7616486">(650) 761-6486</a> to let us know you are interested and the quantities of
+              <a href="tel:+(650)7616486">(650) 561-6750</a> to let us know you are interested and the quantities of
               each you would like to receive.
             </p>
             <p>
