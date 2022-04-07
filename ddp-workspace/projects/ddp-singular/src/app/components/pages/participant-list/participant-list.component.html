@@ -71,7 +71,7 @@
 
           <div class="participant__icon-container">
             <button
-              *ngIf="!participant.isOperator"
+              *ngIf="allowParticipantRemoval && !participant.isOperator"
               mat-icon-button
               class="participant__delete-btn"
               (click)="$event.stopPropagation(); onDeleteClick(participant)"
