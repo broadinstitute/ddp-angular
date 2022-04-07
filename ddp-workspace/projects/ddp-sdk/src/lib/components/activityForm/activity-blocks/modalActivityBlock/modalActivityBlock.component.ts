@@ -23,6 +23,7 @@ import { ConfirmDialogComponent } from '../../../confirmDialog/confirmDialog.com
 import { ModalDialogService, DEFAULT_DIALOG_SETTINGS } from '../../../../services/modal-dialog.service';
 import { BlockVisibility } from '../../../../models/activity/blockVisibility';
 import { ConfigurationService } from '../../../../services/configuration.service';
+import { ActivityActionsAgent } from '../../../../services/serviceAgents/activityActionsAgent.service';
 
 const EDIT_DIALOG_CONFIG: MatDialogConfig = {
     ...DEFAULT_DIALOG_SETTINGS,
@@ -56,6 +57,7 @@ export class ModalActivityBlockComponent {
     private readonly LOG_SOURCE = 'ModalActivityBlockComponent';
 
     constructor(private readonly activityServiceAgent: ActivityServiceAgent,
+                private readonly activityActionsAgent: ActivityActionsAgent,
                 private dialog: MatDialog,
                 private cdr: ChangeDetectorRef,
                 private logger: LoggingService,
@@ -113,6 +115,7 @@ export class ModalActivityBlockComponent {
             take(1)
         ).subscribe((activityInstance: ActivityInstance) => {
             this.mutateWithNewPropertiesValues(this.instance, activityInstance);
+            this.activityActionsAgent.emitActivityBlockInstancesUpdated();
             this.cdr.detectChanges();
             this.dialog.closeAll();
         });

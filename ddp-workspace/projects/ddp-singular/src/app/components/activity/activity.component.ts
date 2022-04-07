@@ -21,6 +21,11 @@ export class ActivityComponent extends ActivityRedesignedComponent {
     return this.model && this.model.activityCode === ActivityCode.Prequal;
   }
 
+  protected scrollToTop(): void {
+     document.body.firstElementChild.scrollTo(0,0);
+  }
+
+
   get captchaSiteKey(): string {
     return DDP_ENV.recaptchaSiteClientKey;
   }

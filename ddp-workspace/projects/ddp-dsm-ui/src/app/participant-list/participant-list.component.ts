@@ -30,6 +30,7 @@ import { Participant } from './participant-list.model';
 import { FieldSettings } from '../field-settings/field-settings.model';
 import { ParticipantData } from './models/participant-data.model';
 import { Sort } from '../sort/sort.model';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-participant-list',
@@ -1610,45 +1611,34 @@ export class ParticipantListComponent implements OnInit {
   }
 
   downloadCurrentData(): void {
-    const date = new Date();
-    const columns = {};
-    this.dataSources.forEach((value: string, key: string) => {
-      if (this.selectedColumns[ key ] != null && this.selectedColumns[ key ].length !== 0) {
-        columns[ key ] = this.selectedColumns[ key ];
-      }
-    });
-
-    const paths: any[][] = [];
-
-    for (const source of Object.keys(columns)) {
-      if (source === 'p') {
-        paths.push(['participant', source]);
-      } else if (source === 't') {
-        paths.push(['tissues', source]);
-      } else if (source === 'm') {
-        paths.push(['medicalRecords', source]);
-      } else if (source === 'oD') {
-        paths.push(['oncHistoryDetails', source]);
-      } else if (source === 'k') {
-        paths.push(['kits', source]);
-      } else if (source === 'a') {
-        paths.push(['abstractionActivities', source]);
-        paths.push(['abstractionSummary', source]);
-      } else if (source === 'invitations') {
-        paths.push(['invitations', source]);
-      } else if (source === 'proxy') {
-        paths.push(['proxyData', source]);
-      } else if (source.includes('GROUP')) {
-        paths.push(['participantData', source]);
-      } else {
-        paths.push([source, source]);
+    const columns = [];
+    for(const col in this.selectedColumns) {
+      for (const key in this.selectedColumns[col]) {
+        columns.push(this.selectedColumns[col][key]['participantColumn']);
       }
     }
-
-    Utils.downloadCurrentData(
-      this.participantList, paths, columns,
-      'Participants-'  + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION,
-      false, this.activityDefinitionList
+    this.dsmService.downloadParticipantData(
+      localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+      this.parent,
+      columns,
+      this.viewFilter,
+      null,
+      this.sortBy
+    ).subscribe({
+      next: response => {
+        let fileName = 'file';
+        const contentDisposition = response.headers.get('Content-Disposition');
+        if (contentDisposition) {
+          const fileNameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+          const matches = fileNameRegex.exec(contentDisposition);
+          if (matches != null && matches[1]) {
+            fileName = matches[1].replace(/['"]/g, '');
+          }
+        }
+        const fileContent = response.body;
+        const blob = new Blob([fileContent], { type: 'application/octet-stream' });
+        saveAs(blob, fileName);
+      }}
     );
   }
 
@@ -2127,7 +2117,7 @@ export class ParticipantListComponent implements OnInit {
   private createFilter(field: any): Filter {
     let showType = field.displayType;
     let filter: Filter = new Filter(
-      new ParticipantColumn(field.columnDisplay.replace('*', ''), field.columnName, 'participantData', field.fieldType, false),
+      new ParticipantColumn(field.columnDisplay?.replace('*', ''), field.columnName, 'participantData', field.fieldType, false),
       showType,
       field.possibleValues
     );
@@ -2225,5 +2215,14 @@ export class ParticipantListComponent implements OnInit {
   private sendAnalyticsMetric(): void {
     const passed = new Date().getTime() - this.start;
     this.dsmService.sendAnalyticsMetric(this.getRealm(), passed).subscribe({});
+  }
+
+  private displayCheckbox(pt: Participant): boolean {
+    if (pt.data.status === 'ENROLLED'
+      && pt.data.medicalProviders != null && pt.medicalRecords != null
+      && pt.data.medicalProviders.length > 0 && pt.medicalRecords.length > 0) {
+      return true;
+    }
+    return false;
   }
 }

@@ -7,6 +7,7 @@ import { MailAddressFormErrorFormatter } from '../models/mailAddressFormErrorFor
 @Injectable()
 export class ConfigurationService {
     backendUrl: string;
+    backendUrlDSS: string;
     baseUrl: string;
     auth0ClientId: string;
     auth0CodeRedirect: string;

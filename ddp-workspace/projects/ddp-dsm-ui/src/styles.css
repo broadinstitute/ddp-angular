@@ -1,3 +1,7 @@
+@import 'styles/variables.scss';
+@import 'styles/activities.scss';
+@import 'styles/buttons.scss';
+
 md-hint.ErrorMessageForm {
   font-size: 14px;
   display: table-cell;

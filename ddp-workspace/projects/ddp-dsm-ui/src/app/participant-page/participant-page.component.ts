@@ -172,10 +172,32 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       this.scrolled = true;
     }
     this.validateEmailInput(this.participant.data.profile['email']);
-    this.isOncHistoryVisible = !!this.participant.data.dsm[ 'hasConsentedToTissueSample' ]
-                            && !!this.participant.participant.ddpParticipantId;
+    this.isOncHistoryVisible = (this.participant.data.status === 'ENROLLED'
+      && this.participant.data.medicalProviders != null && this.participant.medicalRecords != null
+      && this.participant.data.medicalProviders.length > 0 && this.participant.medicalRecords.length > 0);
 
-    this.displayAtivityOrder();
+    this.displayActivityOrder();
+    this.addMedicalProviderInformation();
+  }
+
+  addMedicalProviderInformation(): void {
+    if (this.participant != null && this.participant.data != null
+      && this.participant.data.profile != null && this.participant.data.medicalProviders != null
+      && this.participant.medicalRecords != null && this.participant.medicalRecords.length > 0) {
+      this.participant.medicalRecords.forEach(medicalRecord => {
+        const medicalProvider = this.participant.data.medicalProviders.find(medProvider => {
+          const tmpId = medProvider.legacyGuid != null && medProvider.legacyGuid !== 0 ?
+            medProvider.legacyGuid : medProvider.guid;
+          return tmpId === medicalRecord.ddpInstitutionId;
+        });
+        medicalRecord.type = medicalProvider.type;
+        medicalRecord.nameDDP = medicalProvider.physicianName;
+        medicalRecord.institutionDDP = medicalProvider.institutionName;
+        medicalRecord.streetAddressDDP = medicalProvider.street;
+        medicalRecord.cityDDP = medicalProvider.city;
+        medicalRecord.stateDDP = medicalProvider.state;
+      });
+    }
   }
 
   ngAfterViewChecked(): void {
@@ -190,7 +212,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     clearInterval(this.checkParticipantStatusInterval);
   }
 
-  displayAtivityOrder(): void {
+  displayActivityOrder(): void {
     const orderedActivities = [];
 
     [...this.activityDefinitions].sort(({displayOrder: A},{displayOrder: B}) => A - B)
@@ -483,7 +505,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         participantId, this.role.userMail(),
         {name: parameterName, value: v}, null, 'ddpParticipantId',
         ddpParticipantId, tableAlias, null, localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
-        this.participant.participant.ddpParticipantId
+        ddpParticipantId
       );
       patch1.realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       const patch = patch1.getPatch();
@@ -1176,19 +1198,15 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     return '';
   }
 
-  getParticipantDataFromSingleParticipant(fieldSetting: FieldSettings): string {
+  getParticipantForDynamicField(fieldSetting: FieldSettings): string {
     if (this.participant && this.participant.participantData && fieldSetting.columnName) {
-      for (const participantData of this.participant.participantData) {
-        if (participantData != null && participantData.data != null && participantData.data[fieldSetting.columnName] != null) {
-          return participantData.data[fieldSetting.columnName];
-        }
+      const participantDataFound = this.participant.participantData
+        .find(participantData => participantData.data && participantData.data[fieldSetting.columnName] != null);
+      if (participantDataFound) {
+        return participantDataFound.data[fieldSetting.columnName];
       }
     }
     return '';
-  }
-
-  dynamicFormType(settings: FieldSettings[]): boolean {
-    return settings['TAB_GROUPED'];
   }
 
   getDisplayName(displayName: string, columnName: string): string {
