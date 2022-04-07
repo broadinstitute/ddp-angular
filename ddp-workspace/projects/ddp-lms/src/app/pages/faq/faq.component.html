@@ -1,1 +1,41 @@
-FAQ
+<main class="faq">
+    <h2 class="title static-page-title" translate>App.FAQ.Title</h2>
+
+    <section class="section">
+        <div class="content content_tight intro-faq-block">
+            <div class="intro-faq-block__content">
+                <p>
+                    As part of the LMS project, patients contribute their experiences, clinical information, and samples
+                    to
+                    make data freely available for any LMS researchers. By generating the most comprehensive dataset for
+                    LMS,
+                    the entire cancer research community can make discoveries that can lead to a better understanding of
+                    the
+                    disease and changes for future treatments. The project is part of Count Me In, a nonprofit
+                    organization
+                    that brings together patients and researchers as partners to accelerate discoveries in cancer
+                    research.
+                    The project also works in collaboration with a growing coalition of nonprofit advocacy partners.
+                </p>
+                <p>
+                    This project has been built with the guidance and input of many different members of the LMS
+                    community.
+                    Below we have answered some general questions about this project, as well as questions that are
+                    specific
+                    to different members of the community - please read any and all that may apply. If you have any
+                    questions,
+                    please feel free to reach out to us at info@LMSproject.org or by phone at XXX-XXX-XXXX.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <ng-container *ngFor="let faqSection of 'App.FAQ.Sections' | translate">
+        <app-faq-section [title]="faqSection.Title" [questions]="faqSection.Questions"></app-faq-section>
+    </ng-container>
+
+
+    <section>
+        <p>Still have more questions? Feel free to reach out to us at info@LMSproject.org or by phone at XXX-XXX-XXXX.</p>
+    </section>
+</main>
