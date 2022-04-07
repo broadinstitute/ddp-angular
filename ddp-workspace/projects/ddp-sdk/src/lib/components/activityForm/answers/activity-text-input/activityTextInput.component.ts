@@ -15,7 +15,7 @@ import { debounceTime, map, switchMap } from 'rxjs/operators';
 
 import { ActivityTextQuestionBlock } from '../../../../models/activity/activityTextQuestionBlock';
 import { TextSuggestion } from '../../../../models/activity/textSuggestion';
-import { ConfigurationService } from "../../../../services/configuration.service";
+import { ConfigurationService } from '../../../../services/configuration.service';
 
 @Component({
   selector: 'ddp-activity-text-input',
@@ -106,12 +106,12 @@ export class ActivityTextInput implements OnInit, OnChanges, OnDestroy {
     return taggedValue;
   }
 
-  onEnter(event: Event) {
+  onEnter(event: Event): void {
     event.preventDefault();
     this.configuration.moveToNextFieldWhileInTextInput && this.prepareElementsToMove(event);
   }
 
-  private prepareElementsToMove(event: Event) {
+  private prepareElementsToMove(event: Event): void {
       const elementsArray: Element[] = Array.from(document.querySelectorAll(['input', 'mat-select', 'select', 'textarea'].join(',')))
           .filter(input => input.id && (input as HTMLElement)?.style.display !== 'none');
       const elementsObjects: Map<Element, number> = new Map(elementsArray.map((input, i) => [input, i]));
