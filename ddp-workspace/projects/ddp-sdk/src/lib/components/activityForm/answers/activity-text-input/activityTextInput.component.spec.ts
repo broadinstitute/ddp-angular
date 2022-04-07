@@ -43,6 +43,9 @@ describe('ActivityTextInput', () => {
           BrowserAnimationsModule,
           TranslateTestingModule,
         ],
+        providers: [
+            { provide: 'ddp.config', useValue: {} },
+        ]
       }).compileComponents();
     }),
   );
