@@ -1,4 +1,8 @@
-<form class="activity-text-input" [ngClass]="formClass" [formGroup]="formGroup">
+<form class="activity-text-input"
+      [ngClass]="formClass"
+      [formGroup]="formGroup"
+      (keydown.enter)="onEnter($event)"
+>
   <mat-form-field
     class="example-input-field"
     [floatLabel]="block.label ? 'always' : null"

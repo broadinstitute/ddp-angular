@@ -176,4 +176,10 @@ export class ActivityTextInput implements OnInit, OnChanges, OnDestroy {
       this.filteredSuggestions$ = of([]);
     }
   }
+
+  onEnter(event: KeyboardEvent): void {
+    // to prevent the form submit when Enter is pressed on any <input> in the form
+    // and the event is propagated up to the <form>
+    event.preventDefault();
+  }
 }
