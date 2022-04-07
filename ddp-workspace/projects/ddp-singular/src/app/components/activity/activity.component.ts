@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Route } from '../../constants/route';
 import { ActivityCode } from '../../constants/activity-code';
-import { isConsentActivity } from '../../utils';
+import { isConsentActivity, isMedicalRecordReleaseActivity } from '../../utils';
 import { ActivityRedesignedComponent, SubmissionManager, SubmitAnnouncementService } from 'ddp-sdk';
 
 declare const DDP_ENV: Record<string, any>;
@@ -47,10 +47,15 @@ export class ActivityComponent extends ActivityRedesignedComponent {
   }
 
   get isConsent(): boolean {
-    // return isConsentActivity(this.model?.activityCode);
-    return this.model?.activityCode === ActivityCode.ConsentSelf ||
-    this.model?.activityCode === ActivityCode.ConsentAssent ||
-    this.model?.activityCode === ActivityCode.ConsentParental;
+    return isConsentActivity(this.model?.activityCode);
+  }
+
+  get isMedicalRelease(): boolean {
+    return isMedicalRecordReleaseActivity(this.model?.activityCode);
+  }
+
+  get shouldShowSectionsProgress(): boolean {
+    return this.isConsent || this.isMedicalRelease;
   }
 
   onCaptchaResolve(): void {

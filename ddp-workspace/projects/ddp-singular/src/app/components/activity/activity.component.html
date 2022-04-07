@@ -25,10 +25,13 @@
       <div class="infobox" [innerHTML]="model.readonlyHint"></div>
     </section>
     
-    <h3 *ngIf="isConsent" class="progress-title">Page {{ currentSectionIndex + 1 }} of {{ model.sections.length }}</h3>
+    <app-activity-section-page-progress *ngIf="shouldShowSectionsProgress"
+      [current]="currentSectionIndex + 1"
+      [total]="model.sections.length">
+    </app-activity-section-page-progress>
 
-    <div [class.consent-document-layout]="isConsent">
-      <app-activity-section-progress-bar *ngIf="isConsent"
+    <div [class.consent-document-layout]="shouldShowSectionsProgress">
+      <app-activity-section-progress-bar *ngIf="shouldShowSectionsProgress"
         [sections]="model.sections"
         [currentIndex]="currentSectionIndex">
       </app-activity-section-progress-bar>
