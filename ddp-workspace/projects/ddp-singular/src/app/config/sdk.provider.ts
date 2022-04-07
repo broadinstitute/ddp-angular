@@ -31,6 +31,7 @@ configurationService.auth0SilentRenewUrl = DDP_ENV.auth0SilentRenewUrl;
 configurationService.auth0CodeRedirect = location.origin + base + 'auth';
 configurationService.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 configurationService.localRegistrationUrl = configurationService.backendUrl + '/pepper/v1/register';
+configurationService.moveToNextFieldWhileInTextInput = true;
 configurationService.mailAddressFormErrorFormatter = (formControlName, fieldLabel, error) => {
   if (formControlName === 'state') {
     return `SDK.MailAddress.FormError.${fieldLabel.toLowerCase()}.${error}`;

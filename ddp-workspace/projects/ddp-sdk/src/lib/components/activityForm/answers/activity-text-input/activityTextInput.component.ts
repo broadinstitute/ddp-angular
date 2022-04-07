@@ -1,6 +1,7 @@
 import {
   Component,
   EventEmitter,
+  Inject,
   Input,
   OnChanges,
   OnDestroy,
@@ -14,6 +15,7 @@ import { debounceTime, map, switchMap } from 'rxjs/operators';
 
 import { ActivityTextQuestionBlock } from '../../../../models/activity/activityTextQuestionBlock';
 import { TextSuggestion } from '../../../../models/activity/textSuggestion';
+import { ConfigurationService } from "../../../../services/configuration.service";
 
 @Component({
   selector: 'ddp-activity-text-input',
@@ -33,6 +35,9 @@ export class ActivityTextInput implements OnInit, OnChanges, OnDestroy {
   private input$ = new Subject<string>();
   private readonly confirmationControlNamePrefix = 'confirmation_';
   private readonly typeAheadMinInputLength = 3;
+
+  constructor(@Inject('ddp.config') private configuration: ConfigurationService) {
+  }
 
   ngOnInit(): void {
     this.buildForm();
@@ -99,6 +104,24 @@ export class ActivityTextInput implements OnInit, OnChanges, OnDestroy {
       });
 
     return taggedValue;
+  }
+
+  onEnter(event: Event) {
+    event.preventDefault();
+    this.configuration.moveToNextFieldWhileInTextInput && this.prepareElementsToMove(event);
+  }
+
+  private prepareElementsToMove(event: Event) {
+      const elementsArray: Element[] = Array.from(document.querySelectorAll(['input', 'mat-select', 'select', 'textarea'].join(',')))
+          .filter(input => input.id && (input as HTMLElement)?.style.display !== 'none');
+      const elementsObjects: Map<Element, number> = new Map(elementsArray.map((input, i) => [input, i]));
+      const pressedElement = event.target as Element;
+      this.moveToTheNextField(elementsArray, elementsObjects.get(pressedElement));
+  }
+
+  private moveToTheNextField(elements: Element[], elementIndex: number): void {
+      const nextElement = elementIndex >= 0 && elements[elementIndex + 1];
+      nextElement && (nextElement as HTMLElement).focus();
   }
 
   private buildForm(): void {
