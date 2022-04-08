@@ -11,6 +11,9 @@ export const isConsentActivity = (activityCode: string): boolean => (
     activityCode === ActivityCode.ConsentParental
   );
 
+export const isMedicalRecordReleaseActivity = (activityCode: string): boolean =>
+  activityCode === ActivityCode.MedicalRecordRelease;
+
 
 const getRenderActivityKeyByActivityCode = (activityCode: ActivityCode): RenderActivityKey => {
   if ([ActivityCode.ConsentSelf, ActivityCode.ConsentParental, ActivityCode.ConsentAssent].includes(activityCode)) {
