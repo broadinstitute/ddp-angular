@@ -326,7 +326,7 @@ describe('AddressEmbeddedComponent', () => {
             code: 'BAD!',
             errors: overallAddressErrors
         };
-        addressServiceSpy.verifyAddress.and.returnValue(throwError(verificationStatus));
+        addressServiceSpy.verifyAddress.and.returnValue(throwError(() => verificationStatus));
         fixture.detectChanges();
 
         childComponent.valueChanged.emit(addressToEnter);
@@ -361,7 +361,7 @@ describe('AddressEmbeddedComponent', () => {
             code: 'REALLY_BAD!',
             errors: overallAddressErrors
         };
-        addressServiceSpy.verifyAddress.and.returnValue(throwError(verificationStatus));
+        addressServiceSpy.verifyAddress.and.returnValue(throwError(() => verificationStatus));
         fixture.detectChanges();
 
         childComponent.valueChanged.emit(addressToEnter);
@@ -491,7 +491,7 @@ describe('AddressEmbeddedComponent', () => {
                     suggestion: null
                 }, { code: 'E.ADDRESS.NOT_FOUND', field: 'address', message: 'Address not found', suggestion: null }]
         };
-        addressServiceSpy.verifyAddress.and.returnValue(throwError(validationFailureResponse));
+        addressServiceSpy.verifyAddress.and.returnValue(throwError(() => validationFailureResponse));
         // here comes the partial address
         console.log('Emitting address');
         childComponent.address = partialAddressFromInputComponent;
@@ -564,7 +564,7 @@ describe('AddressEmbeddedComponent', () => {
     }));
 
     it('emits valueChanged with null if saveAddress failed', fakeAsync(() => {
-        addressServiceSpy.saveAddress.and.returnValue(throwError('error'));
+        addressServiceSpy.saveAddress.and.throwError('error');
         const defaultAddress = buildPerfectAddress();
         defaultAddress.guid = '789';
 

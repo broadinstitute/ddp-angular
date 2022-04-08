@@ -34,15 +34,17 @@ export class InvitationServiceAgent extends NotAuthenticatedServiceAgent<any> {
                 map(response => response ? response.body : null),
                 //eslint-disable-next-line arrow-body-style
                 catchError((err: HttpErrorResponse) => {
-                    return throwError(this.buildErrorObject(err));
+                    return throwError(() => this.buildErrorObject(err));
                 })
             );
     }
 
     public verify(invitationId: string): Observable<never> {
-        return this.postObservable(`/studies/${this.configuration.studyGuid}/invitation-verify`, { invitationId })
+        return this.postObservable(`/studies/${this.configuration.studyGuid}/invitation-verify`, {invitationId})
             .pipe(
-                mergeMap(response => response && response.status === this.OK_STATUS ? EMPTY : throwError('Email verification failed'))
+                mergeMap(response => response && response.status === this.OK_STATUS ?
+                    EMPTY : throwError(() => new Error('Email verification failed'))
+                )
             );
     }
 
