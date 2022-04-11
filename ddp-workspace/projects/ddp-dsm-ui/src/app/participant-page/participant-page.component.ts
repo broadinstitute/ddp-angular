@@ -1417,12 +1417,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   }
   //TODO remove before final merge, for testing only
   testGetActivity(participantId: string): void {
-    this.dsmService.testDSSGetActivity(participantId).subscribe(
-      data => {
-        console.log(data);
-      },
-      err =>{}
-    );
-
+    this.dsmService.testDSSGetActivity(participantId).subscribe(data => {
+      console.log(data);
+    });
   }
 }

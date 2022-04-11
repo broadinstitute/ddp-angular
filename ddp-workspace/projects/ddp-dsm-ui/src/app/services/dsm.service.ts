@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { throwError as observableThrowError, Observable } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { Filter } from '../filter-column/filter-column.model';
@@ -929,7 +929,7 @@ export class DSMService {
 
   private handleError(error: any): Observable<any> {
     this.logger.logError('ERROR: ' + JSON.stringify(error));
-    return observableThrowError(error);
+    return throwError(() => error);
   }
 
   private buildHeader(): any {
