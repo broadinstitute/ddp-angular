@@ -376,7 +376,7 @@ export class TissueComponent {
   deleteSMID( array: TissueSmId[], i: number ): void {
     array[ i ].deleted = true;
     if (array[ i ].smIdPk) {
-      this.changeSmId(true, 'deleted', array[ i ].smIdPk, array[ i ].smIdType, array, i );
+      this.changeSmId('1', 'deleted', array[ i ].smIdPk, array[ i ].smIdType, array, i );
     }
     if (this.smIdDuplicate[ this.currentSMIDField ].has( this.createDuplicateIndex( i ) )) {
       this.smIdDuplicate[ this.currentSMIDField ].delete( this.createDuplicateIndex( i ) );
