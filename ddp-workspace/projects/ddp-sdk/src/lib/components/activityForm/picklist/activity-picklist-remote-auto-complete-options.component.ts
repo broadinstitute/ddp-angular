@@ -96,14 +96,12 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
             debounceTime(500),
             distinctUntilChanged(),
             switchMap((searchValue) =>
-                {console.log(                    this.studyGuid,
-                    this.activityGuid,
-                    this.block.stableId); return this.activityService.getPickListOptions(
+                this.activityService.getPickListOptions(
                     this.studyGuid,
                     this.activityGuid,
                     this.block.stableId,
                     searchValue
-                )}
+                )
             ),
             map((data) => this.splitOtherOptionFromPLOptions(data.results)),
             map((splittedData) => splittedData)
@@ -140,20 +138,16 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     }
 
     onValueSelect(value: ActivityPicklistOption): void {
-        if(value.stableId) {
+        if (value.stableId) {
             this.block.answer = [
                 {
                     stableId: value.stableId,
                     detail:
-                        value.allowDetails === true
-                            ? value.optionLabel
-                            : null,
+                        value.allowDetails === true ? value.optionLabel : null,
                 },
             ];
-        this.valueChanged.emit([...this.block.answer]);
+            this.valueChanged.emit([...this.block.answer]);
         }
-
-        
     }
 
     getInitialAnswerOptionLabel(): string {
