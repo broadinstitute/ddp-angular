@@ -30,12 +30,18 @@
         </div>
     </section>
 
+    <mat-divider class="faq-into-divider"></mat-divider>
+
     <ng-container *ngFor="let faqSection of 'App.FAQ.Sections' | translate">
         <app-faq-section [title]="faqSection.Title" [questions]="faqSection.Questions"></app-faq-section>
     </ng-container>
 
 
     <section>
-        <p>Still have more questions? Feel free to reach out to us at info@LMSproject.org or by phone at XXX-XXX-XXXX.</p>
+        <div class="content_tight faq-closing-section">
+            <p>
+                <b>Still have more questions? Feel free to reach out to us at <br> <a href="mailto:info@LMSproject.org">info@LMSproject.org</a> or by phone at XXX-XXX-XXXX.</b>
+            </p>
+        </div>
     </section>
 </main>

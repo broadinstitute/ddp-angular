@@ -7,8 +7,8 @@ type Question = { Question: string; Paragraphs: string[] };
   selector: 'app-faq-section',
   // templateUrl: './faq-section.component.html',
   template: `
-    <div>
-      <div>
+    <div class="content_tight faq-section">
+      <div class="faq-section-header">
         <button mat-flat-button class="expand-btn" (click)="toggleAll()">
           <mat-icon class="icon">{{ isAllOpened ? 'clear' : 'add' }}</mat-icon>
           <span>{{ (isAllOpened ? 'App.FAQ.Button.Collapse' : 'App.FAQ.Button.Expand') | translate }}</span>
@@ -19,7 +19,7 @@ type Question = { Question: string; Paragraphs: string[] };
 
       <mat-accordion #a="matAccordion" hideToggle="true" multi="true" displayMode="flat">
         <ng-container *ngFor="let item of questions">
-          <mat-expansion-panel #panel>
+          <mat-expansion-panel #panel class="faq-section-expansion-panel">
             <mat-expansion-panel-header collapsedHeight="100%" expandedHeight="100%">
               <mat-icon *ngIf="!panel.expanded" class="faq-block__icon">add</mat-icon>
               <mat-icon *ngIf="panel.expanded" class="faq-block__icon">clear</mat-icon>
@@ -37,6 +37,8 @@ type Question = { Question: string; Paragraphs: string[] };
         </ng-container>
       </mat-accordion>
     </div>
+
+    <mat-divider></mat-divider>
   `,
   styleUrls: ['./faq-section.component.scss'],
 })

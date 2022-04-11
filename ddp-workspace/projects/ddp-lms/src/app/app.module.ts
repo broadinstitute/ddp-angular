@@ -21,6 +21,7 @@ import { FaqSectionComponent } from './pages/faq-section/faq-section.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 
 declare const DDP_ENV: Record<string, any>;
 
@@ -119,7 +120,8 @@ const translateFactory =
     AppRoutingModule,
     MatExpansionModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDividerModule
   ],
   providers: [
     {
