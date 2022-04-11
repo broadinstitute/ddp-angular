@@ -183,7 +183,7 @@ export class TissueComponent {
             }
             if (data['smIdPk']) {
               smIdArray[index].smIdPk = data['smIdPk'];
-            }        
+            }
 
           // } else if (result.code === 500 && result.body != null) {
           //   this.dup = true;
