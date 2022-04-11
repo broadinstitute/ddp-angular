@@ -89,7 +89,7 @@
     <tr>
       <td class="TD--Padding">USS SM-IDS</td>
       <td colspan="3">
-        <button md-mini-fab [disabled]="!editable" color="primary" [ngClass]="{'changed':!smIdCountMatch(this.tissue.ussSMId, this.tissue.ussCount)}"
+        <button md-mini-fab [disabled]="!editable || !this.tissue.tissueId" color="primary" [ngClass]="{'changed':!smIdCountMatch(this.tissue.ussSMId, this.tissue.ussCount)}"
                 (click)="openUSSModal()">
           <i class="fas fa-plus fa-lg"></i>
         </button>
@@ -101,7 +101,7 @@
     <tr>
       <td class="TD--Padding">scrolls SM-IDS</td>
       <td colspan="3">
-        <button md-mini-fab [disabled]="!editable" color="primary" [ngClass]="{'changed':!smIdCountMatch(this.tissue.scrollSMId, this.tissue.scrollsCount)}"
+        <button md-mini-fab [disabled]="!editable || !this.tissue.tissueId" color="primary" [ngClass]="{'changed':!smIdCountMatch(this.tissue.scrollSMId, this.tissue.scrollsCount)}"
                 (click)="openScrollsModal()">
           <i class="fas fa-plus fa-lg"></i>
         </button>
@@ -113,7 +113,7 @@
     <tr>
       <td class="TD--Padding">H&E SM-IDS</td>
       <td colspan="3">
-        <button md-mini-fab [disabled]="!editable" color="primary" [ngClass]="{'changed':!smIdCountMatch(this.tissue.HESMId, this.tissue.hECount)}"
+        <button md-mini-fab [disabled]="!editable || !this.tissue.tissueId" color="primary" [ngClass]="{'changed':!smIdCountMatch(this.tissue.HESMId, this.tissue.hECount)}"
                 (click)="openHEModal()">
           <i class="fas fa-plus fa-lg"></i>
         </button>
