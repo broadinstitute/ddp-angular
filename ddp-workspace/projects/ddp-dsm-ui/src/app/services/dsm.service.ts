@@ -233,7 +233,7 @@ export class DSMService {
       map.push({name: 'filters', value: JSON.stringify(viewFilterCopy.filters)});
     }
     const body = {columnNames: columns};
-    return this.http.post(url, JSON.stringify(body), this.buildQueryBlobHeader(map)).pipe(
+    return this.http.post(url, JSON.stringify(body), this.buildQueryCsvBlobHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );
   }
@@ -948,11 +948,22 @@ export class DSMService {
       headers: this.buildJsonAuthHeader(),
       withCredentials: true,
       responseType: 'blob',
+      params
+    };
+  }
+  private buildQueryCsvBlobHeader(map: any[]): any {
+    let params: HttpParams = new HttpParams();
+    for (const param of map) {
+      params = params.append(param.name, param.value);
+    }
+    return {
+      headers: this.buildJsonAuthHeader(),
+      withCredentials: true,
+      responseType: 'blob',
       observe: 'response',
       params
     };
   }
-
   private buildQueryHeader(map: any[]): any {
     let params: HttpParams = new HttpParams();
     for (const param of map) {
