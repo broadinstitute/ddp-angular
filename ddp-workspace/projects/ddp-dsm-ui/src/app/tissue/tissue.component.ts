@@ -180,8 +180,7 @@ export class TissueComponent {
                 const nameValue = NameValue.parse(val);
                 this.oncHistoryDetail[nameValue.name] = nameValue.value;
               });
-            }
-        
+            }      
           // } else if (result.code === 500 && result.body != null) {
           //   this.dup = true;
           //   if (tAlias === 'sm') {
