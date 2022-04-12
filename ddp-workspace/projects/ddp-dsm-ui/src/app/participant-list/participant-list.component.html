@@ -44,6 +44,13 @@
     <div *ngIf="getRealm() != null && loadingParticipants === null && participantList != null">
       <div class="Width--15 Float--left">
         <div>
+          <mat-checkbox [checked]="selectAll"
+                        color="primary"
+                        (change)="toggleColumns($event.checked)">
+            {{selectAllColumnsLabel}}
+          </mat-checkbox>
+        </div>
+        <div>
           <button mat-mini-fab [color]="getButtonColorStyle(showFilters)"
                   (click)="showFiltersTable()">
             <!--<i class="fas fa-dataFilter"></i>-->

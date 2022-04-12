@@ -117,6 +117,8 @@ export class ParticipantListComponent implements OnInit {
   jsonPatch: any;
   viewFilter: any;
   private start: number;
+  selectAll : boolean = false;
+  selectAllColumnsLabel: string = 'Select all'
 
   constructor(private role: RoleService, private dsmService: DSMService, private compService: ComponentService,
                private router: Router, private auth: Auth, private route: ActivatedRoute, private util: Utils) {
@@ -2224,5 +2226,11 @@ export class ParticipantListComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  private toggleColumns(checked: boolean) {
+    if (checked) {
+      this.selectedColumns = Object.assign({}, this.sourceColumns);
+    }
   }
 }
