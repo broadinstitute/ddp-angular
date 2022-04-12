@@ -180,12 +180,7 @@ export class TissueComponent {
                 const nameValue = NameValue.parse(val);
                 this.oncHistoryDetail[nameValue.name] = nameValue.value;
               });
-            }
-
-            if (data['smIdPk']) {
-              smIdArray[index].smIdPk = data['smIdPk'];
-            }
-            
+            }    
           // } else if (result.code === 500 && result.body != null) {
           //   this.dup = true;
           //   if (tAlias === 'sm') {
@@ -224,6 +219,9 @@ export class TissueComponent {
           //   this.patchFinished = true;
           //   this.currentPatchField = null;
           //   this.dup = false;
+          }
+          if (data['smIdPk']) {
+            smIdArray[index].smIdPk = data['smIdPk'];
           }
         },
         error: err => {
