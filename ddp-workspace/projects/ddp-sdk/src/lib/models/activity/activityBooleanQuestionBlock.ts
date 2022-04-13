@@ -17,6 +17,6 @@ export class ActivityBooleanQuestionBlock extends ActivityQuestionBlock<boolean>
     }
 
     public hasAnswer(): boolean {
-        return this.answer != null
+        return this.answer != null;
     }
 }
