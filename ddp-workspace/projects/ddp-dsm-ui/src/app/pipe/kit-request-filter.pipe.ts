@@ -11,7 +11,7 @@ export class KitRequestFilterPipe implements PipeTransform {
       return array.filter(row => row.getID() != null && row.getID().indexOf(filterShortId) > -1);
     }
     if (filterShippingId !== '') {
-      return array.filter(row => row.shippingId != null && row.shippingId.indexOf(filterShippingId) > -1);
+      return array.filter(row => row.ddpLabel != null && row.ddpLabel.indexOf(filterShippingId) > -1);
     }
     if (filterReason !== '') {
       return array.filter(row => row.deactivationReason != null && row.deactivationReason.indexOf(filterReason) > -1);
@@ -20,7 +20,7 @@ export class KitRequestFilterPipe implements PipeTransform {
       return array.filter(row => row.trackingNumberTo != null && row.trackingNumberTo.indexOf(filterTrackingTo) > -1);
     }
     if (filterTrackingReturn !== '') {
-      return array.filter(row => (row.trackingNumberReturn != null && row.trackingNumberReturn.indexOf(filterTrackingReturn) > -1));
+      return array.filter(row => (row.trackingReturnId != null && row.trackingReturnId.indexOf(filterTrackingReturn) > -1));
     }
     if (filterMfCode !== '') {
       return array.filter(row => row.kitLabel != null && row.kitLabel.indexOf(filterMfCode) > -1);

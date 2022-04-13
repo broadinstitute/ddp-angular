@@ -105,7 +105,7 @@ export class ShippingComponent implements OnInit {
         //        this.compService.realmMenu = realm;
         this.checkRight();
       } else {
-        this.additionalMessage = 'Please select a realm';
+        this.additionalMessage = 'Please select a study';
       }
     });
   }
@@ -114,7 +114,7 @@ export class ShippingComponent implements OnInit {
     if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
       this.checkRight();
     } else {
-      this.additionalMessage = 'Please select a realm';
+      this.additionalMessage = 'Please select a study';
     }
     window.scrollTo(0, 0);
   }
@@ -126,8 +126,8 @@ export class ShippingComponent implements OnInit {
     this.kitRequests = [];
     this.kitTypes = [];
     let jsonData: any[];
-    this.dsmService.getRealmsAllowed(Statics.SHIPPING).subscribe(
-      data => {
+    this.dsmService.getRealmsAllowed(Statics.SHIPPING).subscribe({
+      next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
           if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
@@ -136,16 +136,14 @@ export class ShippingComponent implements OnInit {
           }
         });
         if (!this.allowedToSeeInformation) {
-          this.additionalMessage = 'You are not allowed to see information of the selected realm at that category';
+          this.additionalMessage = 'You are not allowed to see information of the selected study at that category';
         }
       },
-      () => {
-        return null;
-      }
-    );
+      error: () => null
+    });
 
-    this.dsmService.getLabelSettings().subscribe(
-      data => {
+    this.dsmService.getLabelSettings().subscribe({
+      next: data => {
         jsonData = data;
         jsonData.forEach(() => {
           this.labelSettings = [];
@@ -166,10 +164,8 @@ export class ShippingComponent implements OnInit {
           });
         });
       },
-      () => {
-        return null;
-      }
-    );
+      error: () => null
+    });
   }
 
   setShippingPage(url: string): void {
@@ -204,10 +200,12 @@ export class ShippingComponent implements OnInit {
     this.kitRequests = [];
     let jsonData: any[];
 
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null && localStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== '') {
+    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null &&
+      localStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== ''
+    ) {
       this.loading = true;
-      this.dsmService.getKitTypes(localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe(
-        data => {
+      this.dsmService.getKitTypes(localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
+        next: data => {
           this.kitTypes = [];
           jsonData = data;
           jsonData.forEach((val) => {
@@ -217,18 +215,18 @@ export class ShippingComponent implements OnInit {
           this.loading = false;
           // console.info(`${this.kitTypes.length} kit types received: ${JSON.stringify(data, null, 2)}`);
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.loading = false;
           this.additionalMessage = 'Error - Loading kit types\n' + err;
         }
-      );
+      });
       this.additionalMessage = null;
     } else {
       this.kitTypes = [];
-      this.additionalMessage = 'Please select a realm';
+      this.additionalMessage = 'Please select a study';
     }
   }
 
@@ -258,33 +256,36 @@ export class ShippingComponent implements OnInit {
     this.loading = true;
 
     let jsonData: any[];
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null && localStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== '') {
-      this.dsmService.getKitRequests(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.shippingPage, kitType.name).subscribe(
-        data => {
-          this.kitRequests = [];
-          jsonData = data;
-          jsonData.forEach((val) => {
-            const kit = KitRequest.parse(val);
-            if (kit.noReturn) {
-              this.kitsWithNoReturn = true;
-            }
-            this.kitRequests.push(kit);
-          });
+    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null &&
+      localStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== ''
+    ) {
+      this.dsmService.getKitRequests(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.shippingPage, kitType.name)
+        .subscribe({
+          next: data => {
+            this.kitRequests = [];
+            jsonData = data;
+            jsonData.forEach((val) => {
+              const kit = KitRequest.parse(val);
+              if (kit.noReturn) {
+                this.kitsWithNoReturn = true;
+              }
+              this.kitRequests.push(kit);
+            });
 
-          // console.log(`${this.kitRequests.length} KitRequest data received: ${JSON.stringify(data, null, 2)}`);
-          this.loading = false;
-        },
-        err => {
-          if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            // console.log(`${this.kitRequests.length} KitRequest data received: ${JSON.stringify(data, null, 2)}`);
+            this.loading = false;
+          },
+          error: err => {
+            if (err._body === Auth.AUTHENTICATION_ERROR) {
+              this.auth.logout();
+            }
+            this.loading = false;
+            this.errorMessage = 'Error - Loading kit request data\n' + err;
           }
-          this.loading = false;
-          this.errorMessage = 'Error - Loading kit request data\n' + err;
-        }
-      );
+        });
     } else {
       this.kitRequests = [];
-      this.additionalMessage = 'Please select a realm';
+      this.additionalMessage = 'Please select a study';
     }
   }
 
@@ -468,8 +469,8 @@ export class ShippingComponent implements OnInit {
     this.kitRequest = kitRequest;
     this.modalType = modalType;
     if (modalType !== this.DEACTIVATED) {
-      this.dsmService.rateOfExpressLabel(this.kitRequest.dsmKitRequestId).subscribe(
-        data => {
+      this.dsmService.rateOfExpressLabel(this.kitRequest.dsmKitRequestId).subscribe({
+        next: data => {
           // console.log(`Deactivating kit request received: ${JSON.stringify(data, null, 2)}`);
           if (data != null) {
             this.labelRate = EasypostLabelRate.parse(data);
@@ -479,14 +480,14 @@ export class ShippingComponent implements OnInit {
           }
           this.loading = false;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Buying express label\n' + err;
         }
-      );
+      });
     }
   }
 
@@ -497,22 +498,22 @@ export class ShippingComponent implements OnInit {
         reason: this.deactivationReason
       };
       // console.log(JSON.stringify(payload));
-      this.dsmService.deactivateKitRequest(this.kitRequest.dsmKitRequestId, JSON.stringify(payload)).subscribe(
-        () => {
+      this.dsmService.deactivateKitRequest(this.kitRequest.dsmKitRequestId, JSON.stringify(payload)).subscribe({
+        next: () => {
           // console.log(`Deactivating kit request received: ${JSON.stringify(data, null, 2)}`);
           if (this.kitType != null) {
             this.loadKitRequestData(this.kitType);
           }
           this.loading = false;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Deactivating kit request\n' + err;
         }
-      );
+      });
       this.kitRequest = null;
       this.deactivationReason = null;
       this.modal.hide();
@@ -527,22 +528,22 @@ export class ShippingComponent implements OnInit {
       this.errorMessage = null;
       this.loading = true;
       this.kitRequests = [];
-      this.dsmService.expressLabel(this.kitRequest.dsmKitRequestId).subscribe(
-        () => {
+      this.dsmService.expressLabel(this.kitRequest.dsmKitRequestId).subscribe({
+        next: () => {
           // console.log(`Deactivating kit request received: ${JSON.stringify(data, null, 2)}`);
           if (this.kitType != null) {
             this.loadKitRequestData(this.kitType);
           }
           this.loading = false;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Deactivating kit request\n' + err;
         }
-      );
+      });
       this.kitRequest = null;
       this.deactivationReason = null;
       this.modal.hide();
@@ -557,8 +558,8 @@ export class ShippingComponent implements OnInit {
       this.modal.hide();
     }
     if (kitRequest != null) {
-      this.dsmService.activateKitRequest(kitRequest.dsmKitRequestId, activate).subscribe(
-        data => {
+      this.dsmService.activateKitRequest(kitRequest.dsmKitRequestId, activate).subscribe({
+        next: data => {
           // console.log(`Deactivating kit request received: ${JSON.stringify(data, null, 2)}`);
           const result = Result.parse(data);
           if (result.code === 200) {
@@ -577,14 +578,14 @@ export class ShippingComponent implements OnInit {
           }
           this.loading = false;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Activating kit request.\nPlease contact your DSM developer';
         }
-      );
+      });
     }
   }
 
@@ -632,25 +633,25 @@ export class ShippingComponent implements OnInit {
     const map: { kit: string } [] = [];
     for (const kitRequest of this.kitRequests) {
       if (kitRequest.setSent) {
-        map.push({kit: kitRequest.shippingId});
+        map.push({kit: kitRequest.ddpLabel});
       }
     }
-    this.dsmService.setKitSentRequest(JSON.stringify(map)).subscribe(
-      () => {
+    this.dsmService.setKitSentRequest(JSON.stringify(map)).subscribe({
+      next: () => {
         // console.log(`Deactivating kit request received: ${JSON.stringify(data, null, 2)}`);
         if (this.kitType != null) {
           this.loadKitRequestData(this.kitType);
         }
         this.loading = false;
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
         this.loading = false;
         this.errorMessage = 'Error - Deactivating kit request\n' + err;
       }
-    );
+    });
   }
 
   public getTopMargin(): string {
@@ -684,8 +685,8 @@ export class ShippingComponent implements OnInit {
   triggerLabelCreation(): void {
     this.loading = true;
     const cleanedKits: Array<KitRequest> = KitRequest.removeUnselectedKitRequests(this.kitRequests);
-    this.dsmService.singleKitLabel(JSON.stringify(cleanedKits)).subscribe(
-      data => {
+    this.dsmService.singleKitLabel(JSON.stringify(cleanedKits)).subscribe({
+      next: data => {
         const result = Result.parse(data);
         if (result.code === 200) {
           this.additionalMessage = 'Triggered label creation';
@@ -694,14 +695,14 @@ export class ShippingComponent implements OnInit {
         }
         this.loading = false;
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
         this.loading = false;
         this.errorMessage = 'Error - Loading ddp information ' + err;
       }
-    );
+    });
   }
 
   reload(): void {
@@ -722,9 +723,9 @@ export class ShippingComponent implements OnInit {
 
   showPreferredLanguage(): boolean {
     if (this.kitRequests != null) {
-      const foundPreferredLanguage = this.kitRequests.find(kitRequest => {
-        return kitRequest.preferredLanguage != null && kitRequest.preferredLanguage !== '';
-      });
+      const foundPreferredLanguage = this.kitRequests.find(kitRequest =>
+        kitRequest.preferredLanguage != null && kitRequest.preferredLanguage !== ''
+      );
       if (foundPreferredLanguage != null) {
         return true;
       }

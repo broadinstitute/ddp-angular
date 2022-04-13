@@ -32,6 +32,7 @@ export class ChangeLanguageRedirectComponent implements OnInit {
     @Inject('ddp.config') private config: ConfigurationService) {
   }
 
+  // TODO: get rid of Promises in the component (replace with Observables)
   public ngOnInit(): void {
     // Get the specified language and specified destination and store for later
     const queryParamPromise: Promise<void> = this.getQueryParamInfo();
@@ -47,13 +48,17 @@ export class ChangeLanguageRedirectComponent implements OnInit {
 
         // Try to switch to the specified language
         const langChangeObservable: Observable<any> = this.languageService.changeLanguageObservable(this.lang);
-        langChangeObservable.subscribe(() => {
-          this.logger.logEvent(this.LOG_SOURCE, `Changed language to ${this.languageService.getCurrentLanguage()}`);
-        }, (err) => {
-          this.logger.logError(this.LOG_SOURCE, `Could not change language to ${this.lang}:`,  err);
-        }, () => {
-          // Do the redirect
-          this.router.navigate([this.dest], { relativeTo: this.route.root });
+        langChangeObservable.subscribe({
+          next: () => {
+            this.logger.logEvent(this.LOG_SOURCE, `Changed language to ${this.languageService.getCurrentLanguage()}`);
+          },
+          error: (err) => {
+            this.logger.logError(this.LOG_SOURCE, `Could not change language to ${this.lang}:`, err);
+          },
+          complete: () => {
+            // Do the redirect
+            this.router.navigate([this.dest], {relativeTo: this.route.root});
+          }
         });
       });
   }

@@ -63,9 +63,7 @@ export class ParticipantProfileComponent implements OnDestroy {
             });
         this.reloadingSubject = new Subject<void>();
         this.anchor = this.reloadingSubject.pipe(
-            mergeMap(() => {
-                return this.serviceAgent.getGovernedStudyParticipants(this.config.studyGuid);
-            }),
+            mergeMap(() => this.serviceAgent.getGovernedStudyParticipants(this.config.studyGuid)),
             tap(x => this.logger.logEvent(this.LOG_SOURCE, `data loaded: ${JSON.stringify(x)}`))
         ).subscribe(x => this.participants = x);
         this.reloadingSubject.next();

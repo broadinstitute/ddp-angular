@@ -107,14 +107,14 @@ export class CheckboxesActivityPicklistQuestion extends BaseActivityPicklistQues
         let text: string | null = null;
         const questionOptionDetailKey = this.getQuestionOptionDetailKey(id);
         if (this.block.answer) {
-            this.block.answer.filter((item) => {
-                return item.stableId === id;
-            }).forEach((item) => {
-                text = item.detail;
-                if (text) {
-                    this.cachedDetailTextForQuestionAndOption[questionOptionDetailKey] = text;
-                }
-            });
+            this.block.answer
+                .filter((item) => item.stableId === id)
+                .forEach((item) => {
+                    text = item.detail;
+                    if (text) {
+                        this.cachedDetailTextForQuestionAndOption[questionOptionDetailKey] = text;
+                    }
+                });
         }
         if (text === null) {
             if (this.cachedDetailTextForQuestionAndOption[questionOptionDetailKey]) {

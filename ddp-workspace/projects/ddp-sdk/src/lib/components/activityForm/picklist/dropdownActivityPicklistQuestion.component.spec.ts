@@ -72,15 +72,15 @@ describe('DropdownActivityPicklistQuestion', () => {
     let component: DropdownActivityPicklistQuestion;
     let fixture: ComponentFixture<DropdownActivityPicklistQuestion>;
     let debugElement: DebugElement;
-    const ngxTranslateServiceSpy = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
-    ngxTranslateServiceSpy.getTranslation.and.callFake(() => {
-        return of({
-            'SDK.DetailsPlaceholder.PluralForm': 'characters remaining',
-            'SDK.DetailsPlaceholder.SingularForm': 'character remaining'
-        });
-    });
+    let ngxTranslateServiceSpy;
 
     beforeEach(() => {
+        ngxTranslateServiceSpy = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
+        ngxTranslateServiceSpy.getTranslation.and.callFake(() => of({
+            'SDK.DetailsPlaceholder.PluralForm': 'characters remaining',
+            'SDK.DetailsPlaceholder.SingularForm': 'character remaining'
+        }));
+
         TestBed.configureTestingModule({
             imports: [
                 MatInputModule,

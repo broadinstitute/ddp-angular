@@ -40,7 +40,7 @@ export class UserActivitiesComponent {
         activity.statusCode === this.statusCodes.IN_PROGRESS &&
         activity.previousInstanceGuid === null
     );
-
+    // eslint-disable-next-line curly
     if (inProgressActivity) return inProgressActivity;
 
     const createdActivity = this.activities.find(
@@ -48,7 +48,7 @@ export class UserActivitiesComponent {
         activity.statusCode === this.statusCodes.CREATED &&
         activity.previousInstanceGuid === null
     );
-
+    // eslint-disable-next-line curly
     if (createdActivity) return createdActivity;
 
     return null;

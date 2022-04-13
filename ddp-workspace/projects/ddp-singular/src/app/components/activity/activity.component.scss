@@ -1,4 +1,5 @@
 @import '../../../styles/variables';
+@import '../../../styles/colors';
 
 .section--spinner {
   display: flex;
@@ -14,12 +15,71 @@
   margin: 1.5rem 0;
 }
 
+.sticky-section {
+  z-index: 10;
+  position: fixed;
+  top: 7.4rem;
+  left: 0;
+  background-color: $__purple;
+  color: $__white;
+  transition: all 200ms linear;
+  width: calc(100% - 17px);
+
+  @media (max-width: 1280px) {
+    top: 6.3rem;
+  }
+}
+
+.sticky-section_shadow {
+  box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.2);
+}
+
+.sticky-block {
+  margin: 0.8rem 0;
+
+  .sticky__text {
+      font-size: 1.0625rem;
+      line-height: 1.375rem;
+      color: white;
+  }
+
+  ::ng-deep .Link {
+      color: white !important;
+      border-bottom-color: white;
+  }
+}
+
+
+.activity-header {
+  text-align: center;
+}
+
+::ng-deep.activity-question-address-title {
+    color: #000000;
+    font-family: Spartan-Bold, sans-serif;
+    font-size: 18px!important;
+    letter-spacing: 0;
+    line-height: 26px;
+    margin-bottom: 5px!important;
+}
+
 .pull-right {
   margin-left: auto;
 }
 
 .button + .button:not(.pull-right) {
-  margin-left: 24px;
+  margin-left: 44px;
+}
+
+.activity-action {
+  padding: 11px 22px;
+  min-width: 193px;
+}
+
+.submit-btn {
+    height: 53px!important;
+    width: 200px!important;
+    padding: 0!important;
 }
 
 .section--global-error,
@@ -30,4 +90,19 @@
 .consent-separator {
   padding-bottom: 20px;
   border-bottom: 1px solid #ccc;
+}
+
+.consent-document-layout {
+  border: 1px solid #dedede;
+  border-radius: 4px;
+  box-shadow: 0 1px 10px 1px rgb(0 0 0 / 20%);
+  padding: 40px 50px;
+  position: relative;
+}
+
+.sticky-hint-text { 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
 }

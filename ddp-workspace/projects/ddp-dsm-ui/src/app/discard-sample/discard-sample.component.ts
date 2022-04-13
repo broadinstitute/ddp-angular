@@ -41,8 +41,8 @@ export class DiscardSampleComponent implements OnInit {
     this.additionalMessage = null;
     this.samples = [];
     let jsonData: any[];
-    this.dsmService.getRealmsAllowed(Statics.DISCARD_SAMPLES).subscribe(
-      data => {
+    this.dsmService.getRealmsAllowed(Statics.DISCARD_SAMPLES).subscribe({
+      next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
           if (this.realm === val) {
@@ -51,13 +51,11 @@ export class DiscardSampleComponent implements OnInit {
           }
         });
         if (!this.allowedToSeeInformation) {
-          this.additionalMessage = 'You are not allowed to see information of the selected realm at that category';
+          this.additionalMessage = 'You are not allowed to see information of the selected study at that category';
         }
       },
-      err => {
-        return null;
-      }
-    );
+      error: () => null
+    });
   }
 
   ngOnInit(): void {
@@ -65,7 +63,7 @@ export class DiscardSampleComponent implements OnInit {
       this.realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       this.checkRight();
     } else {
-      this.additionalMessage = 'Please select a realm';
+      this.additionalMessage = 'Please select a study';
     }
     window.scrollTo(0, 0);
   }
@@ -83,8 +81,8 @@ export class DiscardSampleComponent implements OnInit {
       this.additionalMessage = null;
       this.loading = true;
       let jsonData: any[];
-      this.dsmService.getKitExitedParticipants(this.realm).subscribe(
-        data => {
+      this.dsmService.getKitExitedParticipants(this.realm).subscribe({
+        next: data => {
           this.samples = [];
           // console.info(`received: ${JSON.stringify(data, null, 2)}`);
           jsonData = data;
@@ -94,14 +92,14 @@ export class DiscardSampleComponent implements OnInit {
           });
           this.loading = false;
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading list of samples of exited participants\nPlease contact your DSM developer';
         }
-      );
+      });
     }
   }
 
@@ -119,20 +117,20 @@ export class DiscardSampleComponent implements OnInit {
         kitDiscardId: this.samples[index].kitDiscardId,
         action: this.samples[index].action
       };
-      this.dsmService.setKitDiscardAction(this.realm, JSON.stringify(payload)).subscribe(
-        data => {
+      this.dsmService.setKitDiscardAction(this.realm, JSON.stringify(payload)).subscribe({
+        next: data => {
           // eslint-disable-next-line no-console
           console.info(`received: ${JSON.stringify(data, null, 2)}`);
           this.getSamples();
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading list of samples of exited participants\nPlease contact your DSM developer';
         }
-      );
+      });
     }
   }
 }

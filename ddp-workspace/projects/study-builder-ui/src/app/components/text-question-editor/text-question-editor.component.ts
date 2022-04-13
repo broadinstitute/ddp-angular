@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { QuestionBlockDef } from '../../model/core/questionBlockDef';
 import { FormBuilder } from '@angular/forms';
-import { TextQuestionDef } from '../../model/core/textQuestionDef';
 import { BehaviorSubject, merge, Subscription } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
-import { ConfigurationService } from '../../configuration.service';
+import { QuestionBlockDef } from '../../model/core/questionBlockDef';
+import { TextQuestionDef } from '../../model/core/textQuestionDef';
 import { SimpleTemplate } from '../../model/core-extended/simpleTemplate';
+import { RuleDef } from '../../model/core/ruleDef';
+import { ConfigurationService } from '../../configuration.service';
 
 @Component({
     selector: 'app-text-question-editor',
@@ -26,30 +27,47 @@ export class TextQuestionEditorComponent implements OnInit, OnDestroy {
         inputType: [''],
         stableId: [''],
         prompt: [''],
-        placeholder: [''],
-        required: [false]
+        placeholder: ['']
     });
-
+    initialValidators: RuleDef[];
     private sub: Subscription;
 
-    constructor(private fb: FormBuilder, private config: ConfigurationService) {
-    }
+    constructor(
+        private fb: FormBuilder,
+        private config: ConfigurationService
+    ) {}
 
     ngOnInit(): void {
         const updateFormPipe = this.questionBlockSubject.pipe(
             filter(block => !!block),
             map(block => block.question),
-            tap(question => this.updateForm(question as TextQuestionDef))
+            tap(question => {
+                this.initValidators(question);
+                this.updateForm(question as TextQuestionDef);
+            })
         );
         const updateQuestionPipe = this.formGroup.valueChanges.pipe(
             map(formData => this.updateQuestion(formData)),
             tap(() => this.questionBlockChanged.emit(this.questionBlockSubject.getValue()))
         );
-        this.sub = merge(updateFormPipe, updateQuestionPipe).subscribe();
+        this.sub = merge(updateFormPipe, updateQuestionPipe).subscribe({});
     }
 
     ngOnDestroy(): void {
         this.sub.unsubscribe();
+    }
+
+    changeValidators(validationRules: RuleDef[]): void {
+        const question = this.currentQuestion();
+        if (!question) {
+            return;
+        }
+        question.validations = validationRules || [];
+        this.questionBlockChanged.emit(this.questionBlockSubject.getValue());
+    }
+
+    private initValidators(question: TextQuestionDef): void {
+        this.initialValidators = question.validations;
     }
 
     private updateForm(question: TextQuestionDef): void {
@@ -57,10 +75,9 @@ export class TextQuestionEditorComponent implements OnInit, OnDestroy {
         const simplifiedPlaceholderTemplate = new SimpleTemplate(question.placeholderTemplate);
         this.formGroup.patchValue({
             inputType: question.inputType,
-            guid: question.stableId,
+            stableId: question.stableId,
             prompt: simplifiedPromptTemplate.getTranslationText(this.config.defaultLanguageCode),
-            placeholder: simplifiedPlaceholderTemplate.getTranslationText(this.config.defaultLanguageCode),
-            required: question.validations.some(val => val.ruleType === 'REQUIRED')
+            placeholder: simplifiedPlaceholderTemplate.getTranslationText(this.config.defaultLanguageCode)
         });
     }
 
@@ -77,7 +94,6 @@ export class TextQuestionEditorComponent implements OnInit, OnDestroy {
         question.placeholderTemplate = simplifiedPlaceholderTemplate.toTemplate();
         question.inputType = formData.inputType;
         question.stableId = formData.stableId;
-        question.validations = formData.required ? [{ ruleType: 'REQUIRED', hintTemplate: null }] : [];
         return question;
     }
 

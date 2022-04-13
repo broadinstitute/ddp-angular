@@ -9,6 +9,7 @@ import {
 } from './providers';
 import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivityInstance, ActivityResponse, UserActivityServiceAgent, SessionMementoService } from 'ddp-sdk';
+import { getRenderActivities, isConsentActivity, RenderActivityKey } from '../../../utils';
 
 @Component({
   selector: 'app-survey',
@@ -56,6 +57,31 @@ export class SurveyComponent implements OnInit, OnDestroy {
       }
       this.workflowBuilder.getCommand(activityResponse).execute();
     });
+
+      this.scrollToTop();
+  }
+
+  get isConsent(): boolean {
+    const { activityCode } = this.getCurrentActivity() ?? {};
+
+    return isConsentActivity(activityCode);
+  }
+
+  get isLastOfMultipleActivities(): boolean {
+    if (this.activities.length <= 1) {
+      return false;
+    }
+
+    const currentActivity = this.getCurrentActivity();
+
+    const renderedActivities = getRenderActivities(this.instanceGuid, this.activities);
+    const lastRenderedActivity = renderedActivities[renderedActivities.length - 1];
+
+    return RenderActivityKey[lastRenderedActivity.i18nKey] === currentActivity.activityCode;
+  }
+
+  private scrollToTop(): void {
+      document.body.firstElementChild.scrollTo(0,0);
   }
 
   private getActivities(): Observable<ActivityInstance[]> {
@@ -90,5 +116,11 @@ export class SurveyComponent implements OnInit, OnDestroy {
         tap((participantGuid: string) => this.sessionService.setParticipant(participantGuid)),
       )
       .subscribe();
+  }
+
+  private getCurrentActivity(): ActivityInstance | undefined {
+    const [current] = this.activities?.filter(({ instanceGuid }) => this.instanceGuid === instanceGuid) ?? [];
+
+    return current;
   }
 }

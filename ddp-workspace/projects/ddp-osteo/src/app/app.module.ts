@@ -10,7 +10,8 @@ import {
   ConfigurationService,
   AnalyticsEventsService,
   AnalyticsEvent,
-  LoggingService
+  LoggingService,
+  PicklistSortingPolicy
 } from 'ddp-sdk';
 
 import {
@@ -99,7 +100,10 @@ config.projectGcpId = DDP_ENV.projectGcpId;
 config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 config.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl;
 config.doCloudLogging = DDP_ENV.doCloudLogging;
-config.usesVerticalStepper = ['FAMILY_HISTORY'];
+config.tooltipIconUrl = 'assets/images/info.png';
+config.usesVerticalStepper = ['FAMILY_HISTORY', 'FAMILY_HISTORY_V2'];
+config.alwaysShowQuestionsCountInModalNestedActivity = true;
+config.validateOnlyVisibleSections = true;
 
 export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {
@@ -108,12 +112,16 @@ export function translateFactory(translate: TranslateService, injector: Injector
     locationInitialized.then(() => {
       const locale = 'en';
       translate.setDefaultLang(locale);
-      translate.use(locale).subscribe(() => {
-        logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
-      }, err => {
-        logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization:`, err);
-      }, () => {
-        resolve(null);
+      translate.use(locale).subscribe({
+        next: () => {
+          logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
+        },
+        error: err => {
+          logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization:`, err);
+        },
+        complete: () => {
+          resolve(null);
+        }
       });
     });
   });
@@ -158,7 +166,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
         LoggingService
       ],
       multi: true
-    }
+    },
+    PicklistSortingPolicy
   ],
   bootstrap: [AppComponent]
 })

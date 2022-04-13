@@ -136,7 +136,16 @@
           </tr>
           <tr>
             <td>Do Not Contact</td>
-            <td>{{getUtil().getYesNo(participant.data.profile['doNotContact'])}}</td>
+            <td *ngIf="hasRole().allowedToEditParticipant()">
+            <mat-checkbox [(ngModel)]="updatedDNC" color="primary" disableRipple></mat-checkbox>
+            <button mat-raised-button color="primary"
+                    [disabled]="updatedDNC === participant.data.profile['doNotContact']"
+                    (click)="updateDNC()">Update
+            </button>
+          </td>
+            <td *ngIf="!hasRole().allowedToEditParticipant()">
+              {{getUtil().getYesNo(participant.data.profile['doNotContact'])}}
+            </td>
           </tr>
           <tr>
             <td>Date of Birth</td>
@@ -182,6 +191,14 @@ participant.data.dsm['diagnosisYear'] != null">
           </tr>
           </tbody>
         </table>
+        <!--TODO remove before final merge, for testing only -->
+        <div *ngIf="hasRole().allowedToTestDSSActivity() && participant.data != null">
+          <button mat-mini-fab color="primary" class="mat-fab-bottom-left" (click)="testGetActivity(participant.data.profile['guid'])">
+            <i class="fa-thin fa-badge-check"></i>
+          </button>
+          <span>Test GET Activity</span>
+
+        </div>
 
         <div *ngIf="isAddFamilyMember" class="Float--right Width--100">
           <div class="family-member-button">
@@ -373,10 +390,10 @@ participant.data.dsm['diagnosisYear'] != null">
             <td class="Width--20">Participant Notes</td>
             <td class="Width--80">
             <textarea maxlength="1000" [disabled]="participantExited"
-                      [ngClass]="{'Width--100': true, 'Color--Field--Patched': isPatchedCurrently('ptNotes')}"
-                      (blur)="currentField(null)" (focus)="currentField('ptNotes')"
-                      [(ngModel)]="participant.participant.ptNotes"
-                      (change)="valueChanged($event, 'ptNotes', 'r')"></textarea>
+                      [ngClass]="{'Width--100': true, 'Color--Field--Patched': isPatchedCurrently('notes')}"
+                      (blur)="currentField(null)" (focus)="currentField('notes')"
+                      [(ngModel)]="participant.participant.notes"
+                      (change)="valueChanged($event, 'notes', 'r')"></textarea>
             </td>
           </tr>
           <ng-container *ngIf="showParticipantRecord">
@@ -384,17 +401,17 @@ participant.data.dsm['diagnosisYear'] != null">
               <td>Paper C/R Sent</td>
               <td>
                 <div class="Float--left">
-                  <app-field-datepicker [dateString]="participant.participant.paperCRSent"
+                  <app-field-datepicker [dateString]="participant.participant.crSent"
                                         [disabled]="participantExited"
-                                        [colorDuringPatch]="isPatchedCurrently('paperCRSent')"
-                                        (dateChanged)="valueChanged($event, 'paperCRSent', 'r')"></app-field-datepicker>
+                                        [colorDuringPatch]="isPatchedCurrently('crSent')"
+                                        (dateChanged)="valueChanged($event, 'crSent', 'r')"></app-field-datepicker>
                 </div>
-                <div *ngIf="participant.participant.paperCRSent != null" class="Float--left Router--Outlet">Paper C/R
+                <div *ngIf="participant.participant.crSent != null" class="Float--left Router--Outlet">Paper C/R
                   Received
-                  <app-field-datepicker [dateString]="participant.participant.paperCRReceived"
+                  <app-field-datepicker [dateString]="participant.participant.crReceived"
                                         [disabled]="participantExited"
-                                        [colorDuringPatch]="isPatchedCurrently('paperCRReceived')"
-                                        (dateChanged)="valueChanged($event, 'paperCRReceived', 'r')"></app-field-datepicker>
+                                        [colorDuringPatch]="isPatchedCurrently('crReceived')"
+                                        (dateChanged)="valueChanged($event, 'crReceived', 'r')"></app-field-datepicker>
                 </div>
               </td>
             </tr>
@@ -403,17 +420,17 @@ participant.data.dsm['diagnosisYear'] != null">
             <td>Onc History Created</td>
             <td>
               <div class="Float--left">
-                <app-field-datepicker [dateString]="participant.participant.createdOncHistory"
+                <app-field-datepicker [dateString]="participant.participant.created"
                                       [disabled]="participantExited"
-                                      [colorDuringPatch]="isPatchedCurrently('createdOncHistory')"
-                                      (dateChanged)="valueChanged($event, 'createdOncHistory', 'o')"></app-field-datepicker>
+                                      [colorDuringPatch]="isPatchedCurrently('created')"
+                                      (dateChanged)="valueChanged($event, 'created', 'o')"></app-field-datepicker>
               </div>
-              <div *ngIf="participant.participant.createdOncHistory != null" class="Float--left Router--Outlet">Onc
+              <div *ngIf="participant.participant.created != null" class="Float--left Router--Outlet">Onc
                 History Reviewed
-                <app-field-datepicker [dateString]="participant.participant.reviewedOncHistory"
+                <app-field-datepicker [dateString]="participant.participant.reviewed"
                                       [disabled]="participantExited"
-                                      [colorDuringPatch]="isPatchedCurrently('reviewedOncHistory')"
-                                      (dateChanged)="valueChanged($event, 'reviewedOncHistory', 'o')"></app-field-datepicker>
+                                      [colorDuringPatch]="isPatchedCurrently('reviewed')"
+                                      (dateChanged)="valueChanged($event, 'reviewed', 'o')"></app-field-datepicker>
               </div>
             </td>
           </tr>
@@ -423,9 +440,9 @@ participant.data.dsm['diagnosisYear'] != null">
             </td>
             <td>
               <mat-checkbox color="primary" [disabled]="participantExited"
-                           [ngClass]="{'Width--100': true, 'Color--Field--Patched': isPatchedCurrently('minimalMR')}"
-                           [(ngModel)]="participant.participant.minimalMR"
-                           (change)="valueChanged($event, 'minimalMR', 'r')"
+                           [ngClass]="{'Width--100': true, 'Color--Field--Patched': isPatchedCurrently('minimalMr')}"
+                           [(ngModel)]="participant.participant.minimalMr"
+                           (change)="valueChanged($event, 'minimalMr', 'r')"
                            disableRipple>
               </mat-checkbox>
             </td>
@@ -475,7 +492,7 @@ participant.data.dsm['diagnosisYear'] != null">
                           (change)="onAdditionalValueChange($event, fieldSetting.columnName)"></textarea>
                 <mat-select *ngIf="fieldSetting.displayType === 'OPTIONS'" placeholder="{{fieldSetting.columnDisplay}}"
                            [ngModel]="getAdditionalValue(fieldSetting.columnName)"
-                           (change)="onAdditionalValueChange($event, fieldSetting.columnName)"
+                           (selectionChange)="onAdditionalValueChange($event, fieldSetting.columnName)"
                            [disabled]="participantExited"
                            [ngClass]="{'Color--Field--Patched': isPatchedCurrently(fieldSetting.columnName)}">
                   <mat-option *ngFor="let op of fieldSetting.possibleValues" [value]="op.value">{{op.value}}</mat-option>
@@ -512,7 +529,7 @@ participant.data.dsm['diagnosisYear'] != null">
                      *ngIf="participant.data != null && participant.data.activities != null && participant.data.activities.length > 0">
                   <ng-container *ngFor="let activity of participant.data.activities; let i = index">
                     <div class="Float--left" *ngIf="getActivityDefinition(activity.activityCode, activity.activityVersion) as activityDef3">
-                      <a class="Abstraction--Jump--Group" pageScroll href="{{getGroupHref(activity.activityCode)}}"
+                      <a  class="Abstraction--Jump--Group" pageScroll (click)="openActivity = activity.activityCode" href="{{getGroupHref(activity.activityCode)}}"
                          *ngIf="activityDef3 != null">{{activityDef3.activityName}} {{activityDef3.activityVersion}}</a>
                     </div>
                     <ng-container *ngIf="i < participant.data.activities.length - 1">
@@ -527,7 +544,7 @@ participant.data.dsm['diagnosisYear'] != null">
                   <hr style="border-color: black">
                   <ng-container *ngFor="let activity of participant.data.activities">
                     <ng-container *ngIf="getActivityDefinition(activity.activityCode, activity.activityVersion) as activityDef4">
-                      <app-activity-data *ngIf="activityDef4 != null" [activityDefinition]="activityDef4"
+                      <app-activity-data [openActivity]="openActivity" *ngIf="activityDef4 != null" [activityDefinition]="activityDef4"
                                          [activity]="activity"></app-activity-data>
                     </ng-container>
                   </ng-container>
@@ -539,7 +556,7 @@ participant.data.dsm['diagnosisYear'] != null">
             <tab *ngIf="!hideSamplesTab && participant.kits != null && participant.kits.length > 0" heading="Sample Information">
               <ng-container *ngFor="let sample of participant.kits; let i = index">
                 <fieldset style="border: 1px black solid">
-                  <legend class="Group--Title" id="{{sample.kitType}}_{{i}}">Sample Type: {{sample.kitType}}</legend>
+                  <legend class="Group--Title" id="{{sample.kitTypeName}}_{{i}}">Sample Type: {{sample.kitTypeName}}</legend>
                   <div class="Router--Outlet">
                     <table class="Width--100 Table--box">
                       <tr>
@@ -554,6 +571,13 @@ participant.data.dsm['diagnosisYear'] != null">
                       </tr>
                       <tr>
                         <td class="TD--Padding Width--50">{{sample.uploadReason}}</td>
+                      </tr>
+                      <hr style="border-color: lightgray">
+                      <tr>
+                        <td class="TD--Padding Width--50 Data-Display-Question">Collaborator Sample Id:</td>
+                      </tr>
+                      <tr>
+                        <td class="TD--Padding-Left Width--50">{{sample.bspCollaboratorSampleId}}</td>
                       </tr>
                       <hr style="border-color: lightgray">
                       <tr>
@@ -606,12 +630,12 @@ participant.data.dsm['diagnosisYear'] != null">
                       <tr *ngIf="sample.upsTrackingStatus != null">
                         <td class="TD--Padding-Left Width--50">{{sample.upsTrackingStatus}}</td>
                       </tr>
-                      <hr *ngIf="sample.trackingNumberReturn != null"style="border-color: lightgray">
-                      <tr *ngIf="sample.trackingNumberReturn != null">
+                      <hr *ngIf="sample.trackingReturnId != null"style="border-color: lightgray">
+                      <tr *ngIf="sample.trackingReturnId != null">
                         <td class="TD--Padding Width--50 Data-Display-Question">Tracking-in:</td>
                       </tr>
-                      <tr *ngIf="sample.trackingNumberReturn != null">
-                        <td class="TD--Padding-Left Width--50">{{sample.trackingNumberReturn}}</td>
+                      <tr *ngIf="sample.trackingReturnId != null">
+                        <td class="TD--Padding-Left Width--50">{{sample.trackingReturnId}}</td>
                       </tr>
                       <hr *ngIf="sample.upsReturnStatus != null"style="border-color: lightgray">
                       <tr *ngIf="sample.upsReturnStatus != null">
@@ -727,7 +751,7 @@ participant.data.dsm['diagnosisYear'] != null">
                     <mfDefaultSorter by="crRequired">Paper C/R Required</mfDefaultSorter>
                   </th>
                   <th>
-                    <mfDefaultSorter by="followUpRequired">MR Follow-Up Required</mfDefaultSorter>
+                    <mfDefaultSorter by="followupRequired">MR Follow-Up Required</mfDefaultSorter>
                   </th>
                   <th></th>
                 </tr>
@@ -749,10 +773,10 @@ participant.data.dsm['diagnosisYear'] != null">
                     <td (click)="openMedicalRecord(mr)">{{getUtil().getYesNo(mr.mrProblem)}}</td>
                     <td (click)="openMedicalRecord(mr)">{{getUtil().getYesNo(mr.reviewMedicalRecord)}}</td>
                     <td (click)="openMedicalRecord(mr)">{{getUtil().getYesNo(mr.crRequired)}}</td>
-                    <td (click)="openMedicalRecord(mr)">{{getUtil().getYesNo(mr.followUpRequired)}}</td>
+                    <td (click)="openMedicalRecord(mr)">{{getUtil().getYesNo(mr.followupRequired)}}</td>
                     <td>
-                      <button mat-mini-fab [color]="getButtonColorStyle(mr.mrNotes)" placement="left"
-                              tooltip='{{mr.mrNotes}}'
+                      <button mat-mini-fab [color]="getButtonColorStyle(mr.notes)" placement="left"
+                              tooltip='{{mr.notes}}'
                               (click)="openNoteModal(mr); universalModal.show()">
                         <i class="fas fa-comment-alt fa-lg" data-fa-transform="down-2"></i>
                       </button>
@@ -777,26 +801,12 @@ participant.data.dsm['diagnosisYear'] != null">
             </tab>
 
             <tab heading="Onc History"
-                 *ngIf="participant.oncHistoryDetails != null && participant.oncHistoryDetails.length > 0"
+                 *ngIf="isOncHistoryVisible"
                  [active]="tabActive('Onc History')" (selectTab)="onSelect($event, 'Onc History')">
               <br/><br/><br/>
 
               <ng-container *ngIf="getTissueConsent() == null || !getTissueConsent()">
                 <b>This participant did not consent to sharing tissue</b><br/>
-
-                <div class="Float--left Width--100">
-                  <div>
-                    <app-onc-history-detail [participant]="participant" [settings]="settings"
-                                            [oncHistory]="participant.oncHistoryDetails"
-                                            [editable]="false"
-                                            [oncHistoryId]="oncHistoryId"
-                                            (valueChanged)="onOncHistoryDetailChange()"
-                                            (openTissue)="openTissue($event)"
-                                            (selectionChanged)="onOncHistoryDetailSelectionChange()">
-                    </app-onc-history-detail>
-                  </div>
-                </div>
-
               </ng-container>
               <ng-container *ngIf="getTissueConsent() == null || getTissueConsent()">
                 <span *ngIf="getTissueConsent() == null">
@@ -1002,82 +1012,117 @@ participant.data.dsm['diagnosisYear'] != null">
               </div>
             </tab>
 
-            <ng-container *ngIf="dynamicFormType(settings); else groupForm">
-              <ng-container *ngFor="let relative of participant.participantData">
-                <!--RGP tabs from fieldSettings-->
-                <ng-container *ngFor="let tab of settings['TAB_GROUPED']">
-                  <ng-container *ngIf="displayTab(tab)">
-                    <tab heading="{{createRelativeTabHeading(relative.data)}}" [active]="tabActive(relative.dataId)" (selectTab)="onSelect($event, relative.dataId)" >
-                    <br/><br/>
-                      <div *ngIf="settings[tab.columnName].length > 0 && settings[tab.columnName][0].displayType === 'GROUP'">
-                        <div class="Float--left Width--100"
-                             *ngIf="settings[tab.columnName].length > 0">
-                          <b class="Group--Title">Jump to:</b>
-                        </div>
-                        <div class="Float--left Width--100"
-                             *ngIf="settings[tab.columnName].length > 0">
-                          <ng-container *ngFor="let activity of settings[tab.columnName]; let i = index">
-
-                            <div class="Float--left" *ngIf="true">
-                              <a class="Abstraction--Jump--Group" (click)="openAccordionPanel(activity.columnName)" pageScroll href="{{getGroupHref(activity.columnName)}}"
-                                 *ngIf="activity != null">{{activity.columnDisplay}}</a>
-                            </div>
-                            <ng-container *ngIf="i < settings[tab.columnName].length - 1">
-                              <div class="Float--left Vertical--line"></div>
-                            </ng-container>
-                          </ng-container>
-                        </div>
-                      </div><br/><br/><br/>
-                      <ng-container *ngIf="tabActive(relative.dataId)">
-                        <accordion>
-                          <accordion-group *ngFor="let setting of settings[tab.columnName]; let settingIndex = index"
-                            [heading]="setting.columnDisplay" [isOpen]="isAccordionPanelOpen(setting.columnName)" [isDisabled]="showGroupFields"
-                            (isOpenChange)="onOpenChangeAccordionPanel($event)">
-                            <div class="Float--left Width--100">
-                              <div *ngIf="setting.displayType === 'GROUP'">
-                                <hr style="border-color: black">
-                                <fieldset style="border: 1px black solid">
-                                  <legend class="Group--Title" id="{{setting.columnName}}"></legend>
-                                  <ng-container *ngFor="let field of settings[setting.columnName]; let fieldIndex = index">
-                                    <app-form-data [fieldSetting]="field" [participantData]="getParticipantData(field, relative)"
-                                                  [activityData]="getActivityData(field)" [activityOptions]="getActivityOptions(field)"
-                                                  (patchData)="formPatch($event, field, setting, relative.dataId)"></app-form-data>
-                                    <hr *ngIf="fieldIndex !== settings[setting.columnName].length-1" style="border-color: lightgray">
-                                  </ng-container>
-                                </fieldset>
-                              </div>
-                            </div>
-                          </accordion-group>
-                        </accordion>
-                      </ng-container>
-                    </tab>
-                  </ng-container>
-                </ng-container>
-              </ng-container>
-            </ng-container>
-
-            <!--AT tabs from fieldSettings-->
-            <ng-template #groupForm>
-              <ng-container *ngFor="let tab of settings['TAB']">
+          <ng-container *ngIf="settings | dynamicFormTypeAndStudyRGP; else groupForm">
+            <ng-container *ngFor="let relative of participant.participantData">
+              <!--RGP tabs from fieldSettings-->
+              <ng-container *ngFor="let tab of settings['TAB_GROUPED']">
                 <ng-container *ngIf="displayTab(tab)">
-                  <tab heading="{{getDisplayName(tab.columnDisplay, tab.columnName)}}" [active]="tabActive(tab.columnDisplay)" (selectTab)="onSelect($event, tab.columnDisplay)" >
-                    <ng-container *ngFor="let setting of settings[tab.columnName]; let settingIndex = index">
-                      <ng-container *ngIf="tabActive(tab.columnDisplay)">
-                        <div class="Float--left Width--100">
-                          <ng-container *ngIf="setting.displayType !== 'GROUP'">
-                            <app-form-data [fieldSetting]="setting" [participantData]="getParticipantDataFromSingleParticipant(setting)"
-                                          [activityData]="getActivityData(setting)" [activityOptions]="getActivityOptions(setting)"
-                                          (patchData)="formPatch($event, setting, null, findDataId(setting))"></app-form-data>
-                            <hr *ngIf="settingIndex !== settings[tab.columnName].length-1" style="border-color: lightgray">
+                  <tab heading="{{createRelativeTabHeading(relative.data)}}" [active]="tabActive(relative.dataId)"
+                       (selectTab)="onSelect($event, relative.dataId)">
+                    <br/><br/>
+                    <div
+                      *ngIf="settings[tab.columnName].length > 0 && settings[tab.columnName][0].displayType === 'GROUP'">
+                      <div class="Float--left Width--100"
+                           *ngIf="settings[tab.columnName].length > 0">
+                        <b class="Group--Title">Jump to:</b>
+                      </div>
+                      <div class="Float--left Width--100"
+                           *ngIf="settings[tab.columnName].length > 0">
+                        <ng-container *ngFor="let activity of settings[tab.columnName]; let i = index">
+
+                          <div class="Float--left" *ngIf="true">
+                            <a class="Abstraction--Jump--Group" (click)="openAccordionPanel(activity.columnName)"
+                               pageScroll href="{{getGroupHref(activity.columnName)}}"
+                               *ngIf="activity != null">{{activity.columnDisplay}}</a>
+                          </div>
+                          <ng-container *ngIf="i < settings[tab.columnName].length - 1">
+                            <div class="Float--left Vertical--line"></div>
                           </ng-container>
-                        </div>
-                      </ng-container>
+                        </ng-container>
+                      </div>
+                    </div>
+                    <br/><br/><br/>
+                    <ng-container *ngIf="tabActive(relative.dataId)">
+                      <accordion>
+                        <accordion-group *ngFor="let setting of settings[tab.columnName]; let settingIndex = index"
+                                         [heading]="setting.columnDisplay"
+                                         [isOpen]="isAccordionPanelOpen(setting.columnName)"
+                                         [isDisabled]="showGroupFields"
+                                         (isOpenChange)="onOpenChangeAccordionPanel($event)">
+                          <div class="Float--left Width--100">
+                            <div *ngIf="setting.displayType === 'GROUP'">
+                              <hr style="border-color: black">
+                              <fieldset style="border: 1px black solid">
+                                <legend class="Group--Title" id="{{setting.columnName}}"></legend>
+                                <ng-container
+                                  *ngFor="let field of settings[setting.columnName]; let fieldIndex = index">
+                                  <app-form-data [fieldSetting]="field"
+                                                 [participantData]="getParticipantData(field, relative)"
+                                                 [activityData]="getActivityData(field)"
+                                                 [activityOptions]="getActivityOptions(field)"
+                                                 (patchData)="formPatch($event, field, setting, relative.dataId)"></app-form-data>
+                                  <hr *ngIf="fieldIndex !== settings[setting.columnName].length-1"
+                                      style="border-color: lightgray">
+                                </ng-container>
+                              </fieldset>
+                            </div>
+                          </div>
+                        </accordion-group>
+                      </accordion>
                     </ng-container>
                   </tab>
                 </ng-container>
               </ng-container>
-            </ng-template>
-          </tabset>
+            </ng-container>
+          </ng-container>
+
+          <!--AT tabs from fieldSettings-->
+          <ng-template #groupForm>
+            <ng-container *ngFor="let tab of settings['TAB_GROUPED']">
+              <tab heading="{{getDisplayName(tab.columnDisplay, tab.columnName)}}"
+                   [active]="tabActive(tab.columnDisplay)" (select)="onSelect($event, tab.columnDisplay)">
+                <ng-container *ngFor="let setting of settings[tab.columnName]; let settingIndex = index">
+                  <div *ngIf="setting.displayType === 'GROUP'">
+                    <hr style="border-color: black">
+                    <fieldset style="border: 1px black solid">
+                      <b class="Group--Title">{{setting.columnDisplay}}</b>
+                      <ng-container *ngFor="let field of settings[setting.columnName]; let fieldIndex = index">
+                        <app-form-data [fieldSetting]="field" [participantData]="getParticipantForDynamicField(field)"
+                                       [activityData]="getActivityData(field)"
+                                       [activityOptions]="getActivityOptions(field)"
+                                       (patchData)="formPatch($event, field, setting, findDataId(setting))"></app-form-data>
+                        <hr *ngIf="fieldIndex !== settings[setting.columnName].length-1"
+                            style="border-color: lightgray">
+                      </ng-container>
+                    </fieldset>
+                  </div>
+                </ng-container>
+              </tab>
+            </ng-container>
+            <ng-container *ngFor="let tab of settings['TAB']">
+              <ng-container *ngIf="displayTab(tab)">
+                <tab heading="{{getDisplayName(tab.columnDisplay, tab.columnName)}}"
+                     [active]="tabActive(tab.columnDisplay)" (selectTab)="onSelect($event, tab.columnDisplay)">
+                  <ng-container *ngFor="let setting of settings[tab.columnName]; let settingIndex = index">
+                    <ng-container *ngIf="tabActive(tab.columnDisplay)">
+                      <div class="Float--left Width--100">
+                        <ng-container *ngIf="setting.displayType !== 'GROUP'">
+                          <app-form-data [fieldSetting]="setting"
+                                         [participantData]="getParticipantForDynamicField(setting)"
+                                         [activityData]="getActivityData(setting)"
+                                         [activityOptions]="getActivityOptions(setting)"
+                                         (patchData)="formPatch($event, setting, null, findDataId(setting))"></app-form-data>
+                          <hr *ngIf="settingIndex !== settings[tab.columnName].length-1"
+                              style="border-color: lightgray">
+                        </ng-container>
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                </tab>
+              </ng-container>
+            </ng-container>
+          </ng-template>
+        </tabset>
       </div>
     </div>
   </div>

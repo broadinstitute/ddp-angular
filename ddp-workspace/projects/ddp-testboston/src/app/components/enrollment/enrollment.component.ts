@@ -11,7 +11,7 @@ import {
 } from 'ddp-sdk';
 import { WorkflowBuilderService } from 'toolkit';
 import { AppRoutes } from '../../app-routes';
-import { of, throwError, Observable } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { take, tap, mergeMap } from 'rxjs/operators';
 
 @Component({
@@ -109,18 +109,18 @@ export class EnrollmentComponent implements OnInit {
         if (invitationId) {
           return this.subjectInvitation.lookupInvitation(invitationId);
         } else {
-          return throwError('There is no invitationId!');
+          throw new Error('There is no invitationId!');
         }
       }),
       mergeMap(studySubject => {
         if (studySubject.userLoginEmail) {
-          return throwError('The subject already has email-associated account!');
+          throw new Error('The subject already has email-associated account!');
         } else {
           return this.session.session.participantGuid ? this.userProfile.profile : of(new UserProfileDecorator());
         }
       })
-    ).subscribe(
-      response => {
+    ).subscribe({
+      next: response => {
         if (response) {
           this.accountForm.controls.firstName.patchValue(response.profile.firstName);
           this.accountForm.controls.lastName.patchValue(response.profile.lastName);
@@ -129,9 +129,9 @@ export class EnrollmentComponent implements OnInit {
           this.router.navigateByUrl(this.appRoutes.Error);
         }
       },
-      error => {
+      error: () => {
         this.showError = true;
       }
-    );
+    });
   }
 }

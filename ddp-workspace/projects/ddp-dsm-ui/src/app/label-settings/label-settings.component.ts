@@ -26,8 +26,8 @@ export class LabelSettingsComponent implements OnInit {
     this.pageSettings = [];
     this.loading = true;
     let jsonData: any[];
-    this.dsmService.getLabelSettings().subscribe(
-      data => {
+    this.dsmService.getLabelSettings().subscribe({
+      next: data => {
         jsonData = data;
         // console.info(`received: ${JSON.stringify(data, null, 2)}`);
         jsonData.forEach((val) => {
@@ -37,14 +37,14 @@ export class LabelSettingsComponent implements OnInit {
         this.addPageSetting();
         this.loading = false;
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
         this.loading = false;
         this.errorMessage = 'Error - Loading Label Settings\nPlease contact your DSM developer';
       }
-    );
+    });
   }
 
   check(index: number): void {
@@ -93,20 +93,20 @@ export class LabelSettingsComponent implements OnInit {
       this.additionalMessage = 'Please fix errors first!';
     } else {
       this.loading = true;
-      this.dsmService.saveLabelSettings(JSON.stringify(cleanedSettings)).subscribe(
-        () => {
+      this.dsmService.saveLabelSettings(JSON.stringify(cleanedSettings)).subscribe({
+        next: () => {
           this.getListOfLabelSettings();
           this.loading = false;
           this.additionalMessage = 'Data saved';
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.loading = false;
           this.additionalMessage = 'Error - Saving label settings\nPlease contact your DSM developer';
         }
-      );
+      });
     }
     window.scrollTo(0, 0);
   }

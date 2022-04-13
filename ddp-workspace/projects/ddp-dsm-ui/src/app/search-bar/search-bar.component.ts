@@ -200,7 +200,7 @@ export class SearchBarComponent {
         case 8:
           if (
             logicalOperators.includes(part) || operators.includes(part)
-            || parenthesis.includes(part) || (part.substr(1, part.length - 2).includes('\''))
+            || parenthesis.includes(part) || (part.substring(1, part.length - 1).includes('\''))
           ) {
             return false;
           } else {

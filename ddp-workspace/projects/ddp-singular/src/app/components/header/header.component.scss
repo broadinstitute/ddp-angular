@@ -12,6 +12,20 @@ a:not(.button) {
   border-bottom: none;
 }
 
+:host-context(app-header) {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 0;
+    z-index: 20;
+
+    .header {
+        padding-top: 20px;
+        background-color: white;
+        box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+
+    }
+}
+
 .header {
   font-family: Spartan-Bold, sans-serif;
   color: map-get($colors, 'header-color');
@@ -21,11 +35,11 @@ a:not(.button) {
       color: map-get($colors, 'header-color');
     }
   }
-  margin-top: 30px;
-  margin-bottom: 50px;
 
   .link {
     color: $__purple;
+    text-align: center;
+    display: inline-block;
 
     &:hover {
       color: #4d198b;
@@ -47,7 +61,9 @@ a:not(.button) {
 
   &__logo {
     height: 100px;
-
+    margin-bottom: 13px;
+      display: flex;
+      align-items: start;
     @media (max-width: 1280px) {
       height: 80px;
     }
@@ -57,18 +73,22 @@ a:not(.button) {
     }
 
     @include media-sm {
-      height: 3.2rem;
+      height: 56px;
+        @supports (-webkit-appearance:none) {
+            width: 181.68px;
+        }
     }
 
     @include media-xs {
       height: 2.8rem;
+        @supports (-webkit-appearance:none) {
+            width: 126.18px;
+        }
     }
   }
 
   &__logo-img {
     height: 100%;
-    position: relative;
-    top: -13px;
   }
 
   &__nav {

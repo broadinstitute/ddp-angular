@@ -22,6 +22,7 @@ import { ActivityTextQuestionBlock } from '../../../../models/activity/activityT
 import { TextSuggestion } from '../../../../models/activity/textSuggestion';
 import { TranslateTestingModule } from '../../../../testsupport/translateTestingModule';
 import { ActivityTextInput } from './activityTextInput.component';
+import { FuncType } from 'ddp-sdk';
 
 describe('ActivityTextInput', () => {
   let component: ActivityTextInput;
@@ -330,9 +331,7 @@ const updateInputValue = (
   inputEl.dispatchEvent(new Event('input'));
 };
 
-const isElementVisible = (el: HTMLElement) => {
-  return el.offsetParent && !el.hidden && el.offsetHeight !== 0;
-};
+const isElementVisible: FuncType<boolean> = (el: HTMLElement) => (el.offsetParent && !el.hidden && el.offsetHeight !== 0);
 
 const buildTestTextSuggestions = (matchingVal: string): TextSuggestion[] => {
   const textMatchValue = 'The Blahney Stone';

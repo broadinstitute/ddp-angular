@@ -181,6 +181,13 @@
                         "Logo": "assets/images/PBTF-logo.png",
                         "Alt": "Pediatric Brain Tumor Foundation logo"
                     }
+                ],
+                [
+                    {
+                        "Website": "https://www.braintumour.ca",
+                        "Logo": "assets/images/BTFC-logo.png",
+                        "Alt": "Brain Tumor Foundation of Canada"
+                    }
                 ]
             ],
             "Text": "For more information on how to become a partner for the Brain Tumor Project, contact the team at"

@@ -33,17 +33,15 @@ export class ShippingSearchComponent implements OnInit {
   private checkRight(): void {
     this.allowedRealms = [];
     let jsonData: any[];
-    this.dsmService.getRealmsAllowed(Statics.SHIPPING).subscribe(
-      data => {
+    this.dsmService.getRealmsAllowed(Statics.SHIPPING).subscribe({
+      next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
           this.allowedRealms.push(val);
         });
       },
-      () => {
-        return null;
-      }
-    );
+      error: () => null
+    });
   }
 
   searchKit(): void {
@@ -53,8 +51,8 @@ export class ShippingSearchComponent implements OnInit {
       this.errorMessage = null;
       this.additionalMessage = null;
       let jsonData: any[];
-      this.dsmService.getKit(this.searchField, this.searchValue, this.allowedRealms).subscribe(
-        data => {
+      this.dsmService.getKit(this.searchField, this.searchValue, this.allowedRealms).subscribe({
+        next: data => {
           // console.log(`received: ${JSON.stringify(data, null, 2)}`);
           jsonData = data;
           jsonData.forEach((val) => {
@@ -67,14 +65,14 @@ export class ShippingSearchComponent implements OnInit {
           this.searching = false;
           // console.log(this.ddp);
         },
-        err => {
+        error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.errorMessage = 'Error - Loading ddp information\nPlease contact your DSM developer';
           this.searching = false;
         }
-      );
+      });
     } else {
       this.additionalMessage = 'You are not allowed to see kit information';
     }
@@ -86,9 +84,7 @@ export class ShippingSearchComponent implements OnInit {
 
   showColumn(name: string): boolean {
     if (this.kit != null) {
-      const foundColumn = this.kit.find(kit => {
-        return kit[ name ] != null && kit[ name ] !== '' && kit[ name ] !== 0;
-      });
+      const foundColumn = this.kit.find(kit => (kit[ name ] != null && kit[ name ] !== '' && kit[ name ] !== 0));
       if (foundColumn != null) {
         return true;
       }

@@ -20,3 +20,16 @@ $warn-color: #ad0000;
         text-decoration: underline !important;
     }
 }
+
+ddp-language-selector {
+    .ddp-globe {
+        stroke: green;
+        fill: transparent;
+        vertical-align: bottom;
+        margin-right: 0.3rem;
+    }
+
+    .ddp-current-language {
+        vertical-align: super;
+    }
+}

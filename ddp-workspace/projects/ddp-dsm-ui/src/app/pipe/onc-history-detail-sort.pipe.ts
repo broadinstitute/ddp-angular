@@ -10,12 +10,12 @@ export class OncHistoryDetailSortPipe implements PipeTransform {
     const reN = /[^0-9]/g;
 
     array.sort((a, b) => {
-      if (a.datePX != null && b.datePX != null) {
-        const aA = a.datePX.replace(reA, '');
-        const bA = b.datePX.replace(reA, '');
+      if (a.datePx != null && b.datePx != null) {
+        const aA = a.datePx.replace(reA, '');
+        const bA = b.datePx.replace(reA, '');
         if (aA === bA) {
-          const aN = parseInt(a.datePX.replace(reN, ''), 10);
-          const bN = parseInt(b.datePX.replace(reN, ''), 10);
+          const aN = parseInt(a.datePx.replace(reN, ''), 10);
+          const bN = parseInt(b.datePx.replace(reN, ''), 10);
           return aN === bN ? 0 : aN > bN ? 1 : -1;
         } else {
           return aA > bA ? 1 : -1;
@@ -24,10 +24,10 @@ export class OncHistoryDetailSortPipe implements PipeTransform {
       if (b.oncHistoryDetailId == null) {
         return -1;
       }
-      if (a.datePX == null) {
+      if (a.datePx == null) {
         return 1;
       }
-      if (b.datePX == null) {
+      if (b.datePx == null) {
         return -1;
       }
     });

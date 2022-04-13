@@ -3,7 +3,7 @@ import { forkJoin, Observable, of } from 'rxjs';
 import { Route } from '../../../constants/route';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { catchError, filter, map, mergeMap, take, tap } from 'rxjs/operators';
 import { CurrentActivityService } from '../../../services/current-activity.service';
 import { ParticipantDeletionDialogComponent } from '../../participant-deletion-dialog/participant-deletion-dialog.component';
@@ -44,6 +44,7 @@ export class ParticipantsListComponent implements OnInit {
   participants: Participant[] = [];
   private expandedMap: Record<string, boolean> = {};
   errorMessage: string | null = null;
+  @Input() allowParticipantRemoval = false;
 
   constructor(
     private router: Router,
@@ -253,14 +254,15 @@ export class ParticipantsListComponent implements OnInit {
             /**
              * Filter out deleted participant
              */
-            map(() => {
-              return participants.filter(participant => participant.guid !== accidentallyCreatedParticipant.guid);
-            }),
+            map(() => participants
+                .filter(participant => participant.guid !== accidentallyCreatedParticipant.guid)
+            ),
           );
         }),
         /**
          * Remove "Add Participant" activity from view & hide operator if they haven't enrolled themselves yet
          */
+        // eslint-disable-next-line arrow-body-style
         map(participants => {
           return participants.reduce<Participant[]>((acc, participant) => {
             if (participant.isOperator) {

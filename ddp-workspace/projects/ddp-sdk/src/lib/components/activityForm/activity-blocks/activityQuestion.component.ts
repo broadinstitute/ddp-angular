@@ -83,16 +83,16 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
         );
         const localValidatorMsg$: Observable<string | null> =
             firstFailedValidator$.pipe(
-                map((result) => {
-                    return ActivityQuestionComponent.isActivityValidationResult(result) ? result.message : result;
-                }),
+                map((result) =>
+                    ActivityQuestionComponent.isActivityValidationResult(result) ? result.message : result
+                ),
                 startWith(null as string | null)
             );
 
         this.errorMessageTranslationParams$ = firstFailedValidator$.pipe(
-            map((result) => {
-                return ActivityQuestionComponent.isActivityValidationResult(result) ? result.params : null;
-            })
+            map((result) =>
+                ActivityQuestionComponent.isActivityValidationResult(result) ? result.params : null
+            )
         );
 
         // merge these together and initialize with messages coming from the question definition

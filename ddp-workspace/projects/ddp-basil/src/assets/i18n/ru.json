@@ -1,0 +1,309 @@
+{
+    "Common": {
+        "Buttons": {
+            "Login": {
+                "Title": "Авторизоваться",
+                "AriaLabel": "[RU] Log In"
+            },
+            "Submit": {
+                "Title": "Отправить",
+                "AriaLabel": "[RU] Submit"
+            },
+            "HeaderMenu": {
+                "AriaLabel": "[RU] Header menu button"
+            }
+        }
+    },
+    "App": {
+        "Navigation": {
+            "Home": "На главную страницу",
+            "Prequal": "[RU] Prequal",
+            "Dashboard": "[RU] Dashboard"
+        }
+    },
+    "Toolkit": {
+        "Dashboard": {
+            "Title": "[RU] Participant Dashboard",
+            "EditUser": "[RU] Редактировать профиль"
+        },
+        "Password": {
+            "Title": "[RU] Site Gatekeeper",
+            "Text": "Пожалуйста введите пароль *",
+            "InputPlaceholder": "Пароль",
+            "PasswordWrongError": "Пароль неверный. Пожалуйста попробуйте ещё раз.",
+            "OtherError": "Извините, произошла ошибка. Пожалуйста попробуйте ещё раз.",
+            "PasswordRequiredError": "Пароль обязателен"
+        },
+        "ErrorPage": {
+            "Title": "[RU] We've encountered an error",
+            "Text": "[RU] We're sorry, but an error has occurred.",
+            "DefaultText": {
+                "TextPt1": "[RU] Please wait a moment and retry. If the trouble persists, please email us at",
+                "TextPt2": "[RU] or call us at"
+            }
+        },
+        "SessionExpired": {
+            "Text": "[RU] You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
+        },
+        "Dialogs": {
+            "SessionWillExpire": {
+                "Title": "[RU] Your session will time-out soon",
+                "Text": "[RU] To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+                "SignOut": "Выход",
+                "Continue": "Продолжить",
+                "RenewalFailed": "[RU] Session renewal failed. Please log out and log back in again."
+            }
+        }
+    },
+    "SDK": {
+        "SubmitButton": "Отправить",
+        "CloseButton": "Закрыть",
+        "AddButton": "Добавить",
+        "CancelButton": "Отмена",
+        "NextButton": "Дальше",
+        "PreviousButton": "Назад",
+        "SavingButton": "Сохраняется",
+        "EditButton": "Продолжить",
+        "SaveButton": "Сохранить",
+        "CompleteButton": "Редактировать",
+        "ReviewButton": "Просмотр",
+        "OpenButton": "Открыть",
+        "StartButton": "Начать",
+        "AgreeButton": "Согласен",
+        "ReportButton": "Сообщить",
+        "NotAgreeButton": "Я не согласеню",
+        "ValidateError": "Пожалуйста заполните все требуемые поля.",
+        "CommunicationError": "[RU] There was a problem saving your data. Please check the form and your answers before submitting",
+        "SaveError": "[RU] We're sorry but an error occurred",
+        "ExportStudy": {
+            "Export": "Экспорт"
+        },
+        "ListStudies": {
+            "StudyName": "[RU] Study Name",
+            "ParticipantCount": "[RU] Participant Count"
+        },
+        "ListWorkspaces": {
+            "WorkspaceName": "[RU] Workspace Name",
+            "WorkspaceNamespace": "[RU] Workspace Namespace"
+        },
+        "Login": {
+            "Login": "[RU] LOG IN",
+            "Logout": "[RU] LOG OUT"
+        },
+        "SignInOut": {
+            "SignIn": "[RU] Sign In",
+            "SignOut": "[RU] Sign Out"
+        },
+        "LanguageSelector": {
+            "LanguageSelection": "выбор языка"
+        },
+        "UserActivities": {
+            "ActivityName": "[RU] Form",
+            "Summary": "[RU] Summary",
+            "ActivityStatus": "[RU] Status",
+            "ActivityDate": "[RU] Created",
+            "ActivityActions": "[RU] Actions",
+            "ActivityQuestionCount": "[RU] {{questionsAnswered}} of {{questionTotal}} answered",
+            "HiddenTooltip": "[RU] This activity is hidden."
+        },
+        "ManageParticipants": {
+            "GovernedParticipants": "[RU] Governed participants",
+            "ParticipantPlaceholder": "[RU] Participant",
+            "ParticipantsList": "[RU] Participants"
+        },
+        "ParticipantProfile": {
+            "OpenProfile": "[RU] Profile",
+            "ViewAs": "[RU] View As",
+            "ManageParticipants": "[RU] Manage participants"
+        },
+        "UserPreferences": {
+            "UserPreferencesTitle": "[RU] User preferences",
+            "DateOfBirth": "Дата рождения",
+            "UserName": "Имя",
+            "FirstUserName": "Имя",
+            "LastUserName": "Фамилия",
+            "FirstNameFieldIsRequired": "Имя обязательно",
+            "LastNameFieldIsRequired": "Фамилия обязательна",
+            "MailingAddress": "Почтовый адрес",
+            "FutureBirthDateValidationError": "Дата рождения не может быть в будущем."
+        },
+        "Dashboard": {
+            "Title": "[RU] Participant Dashboard",
+            "Text": "[RU] The dashboard below describes each Basil Project form and its status."
+        },
+        "DatePicker": {
+            "Day": "Выбрать день...",
+            "Month": "Выбрать месяц...",
+            "Year": "Выбрать год...",
+            "January": "Январь",
+            "February": "Февраль",
+            "March": "Март",
+            "April": "Апрель",
+            "May": "Май",
+            "June": "Июнь",
+            "July": "Июль",
+            "August": "Август",
+            "September": "Сентябрь",
+            "October": "Октябрь",
+            "November": "Ноябрь",
+            "December": "Декабрь"
+        },
+        "DateLabel": {
+            "YYYY": "ГГГГ",
+            "MM": "MM",
+            "DD": "ДД"
+        },
+        "UserMenu": {
+            "DashboardButton": "[RU] Dashboard",
+            "SignOutButton": "[RU] Sign Out"
+        },
+        "DetailsPlaceholder": {
+            "PluralForm": "символов осталось",
+            "SingularForm": "символов осталось"
+        },
+        "Title": {
+            "Default": "Basil проект",
+            "Alert": "Ваша сессия скоро закончится"
+        },
+        "EmailEntry": {
+            "InvalidEmail": "Пожалуйста введите корректный email"
+        },
+        "Institutions": {
+            "Fields": {
+                "Name": "[RU] Physician Name",
+                "Institution": "[RU] Institution",
+                "InstitutionAny": "[RU] Institution (if any)",
+                "City": "[RU] City",
+                "State": "[RU] State"
+            },
+            "Form": {
+                "OtherPhysician": "[RU] Other physician",
+                "OtherInstitution": "[RU] Other institution"
+            },
+            "PhysicianValidation": "[RU] Please fill out all required fields"
+        },
+        "MailAddress": {
+            "Fields": {
+                "Name": "[RU] Full Name",
+                "Country": "[RU] Country/Territory",
+                "Street1": "[RU] Street Address",
+                "Street2": "[RU] Apt/Floor #",
+                "State": {
+                    "State": "[RU] State",
+                    "Province": "[RU] Province",
+                    "State/Province/Region": "[RU] State/Province/Region"
+                },
+                "City": "[RU] City",
+                "Phone": "[RU] Phone",
+                "Zip": {
+                    "Zip Code": "[RU] Zip Code",
+                    "Postal Code": "[RU] Postal Code",
+                    "Zip/Postal Code": "[RU] Zip/Postal Code"
+                },
+                "Choose": "[RU] Choose {{field}} ..."
+            },
+            "Suggestion": {
+                "Title": "[RU] We have checked your address entry and have suggested changes that could help ensure delivery.",
+                "Subtitle": "[RU] Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
+                "Suggested": "[RU] Suggested:",
+                "AsEntered": "[RU] As Entered:"
+            },
+            "Error": {
+                "InvalidAddress": "[RU] Invalid address.",
+                "CannotVerify": "[RU] Could not verify address, please double-check your address.",
+                "UnknownVerifyError": "[RU] An unknown error occurred while verifying address.",
+                "FieldIsRequired": "[RU] {{field}} is required",
+                "FieldIsInvalid": "[RU] {{field}} has an invalid value",
+                "InvalidHouseNumber": "[RU] Street number could not be found",
+                "INTERNAL_SERVER_ERROR": "[RU] We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
+                "NOT_ACCEPTABLE": "[RU] The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
+                "NOT_FOUND": "[RU] The requested resource could not be found.",
+                "FORBIDDEN": "[RU] Unable to access the requested resource.",
+                "PAYMENT_REQUIRED": "[RU] Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
+                "UNAUTHORIZED": "[RU] Unable to access the requested resource, authorization failed.",
+                "BAD_REQUEST": "[RU] Malformed request. Please check the contents and retry.",
+                "PAYMENT_GATEWAY.ERROR": "[RU] The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
+                "MODE.UNAUTHORIZED": "[RU] This resource requires a production API Key to access.",
+                "MODE.CONFLICT": "[RU] API Key mode conflicted with parameter mode.",
+                "DATE.PARSE.FAILURE": "[RU] At least one date was formatted incorrectly and could not be parsed.",
+                "PARAMETER.FORBIDDEN": "[RU] The request could not be completed due to forbidden properties present in the parameters.",
+                "PARAMETER.REQUIRED": "[RU] Missing required parameter.",
+                "ADDRESS.PARAMETERS.INVALID_CHARACTER": "[RU] The parameters passed contained an invalid character.",
+                "ADDRESS.PARAMETERS.INVALID": "[RU] The parameters passed to create an Address were missing or invalid.",
+                "ADDRESS.COUNTRY.INVALID": "[RU] Invalid 'country', please provide a 2 character ISO country code.",
+                "ADDRESS.VERIFICATION.NOT_FOUND": "[RU] Address Not Found.",
+                "ADDRESS.VERIFICATION.FAILURE": "[RU] The address was unable to be verified.",
+                "ADDRESS.VERIFY.UNAVAILABLE": "[RU] Address verification is not available. Please try again.",
+                "ADDRESS.VERIFICATION.INVALID": "[RU] One of the verifications selected is invalid.",
+                "ADDRESS.VERIFY.FAILURE": "[RU] Unable to verify address.",
+                "ADDRESS.VERIFY.CARRIER_INVALID": "[RU] Unable to verify address using provided carrier.",
+                "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "[RU] Address verification is not available due to an upstream service not responding. Please try again.",
+                "ADDRESS.VERIFY.ONLY_US": "[RU] USPS can only validate US addresses.",
+                "ADDRESS.VERIFY.INTL_NOT_ENABLED": "[RU] International Verification not enabled on this account. Please contact support@easypost.com.",
+                "ADDRESS.VERIFY.MISSING_STREET": "[RU] Insufficient address data provided. A street must be provided.",
+                "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "[RU] Insufficient address data provided. A city and state or a zip must be provided.",
+                "E.COUNTRY.UNSUPPORTED": "[RU] This country is not supported in this mode. Try in production mode.",
+                "E.ENGINE.UNAVAILABLE": "[RU] No verification engine is available to service this country. Please try again later.",
+                "E.QUERY.UNANSWERABLE": "[RU] We can not provide enough data in this country to satisfy this request. Please try again later.",
+                "E.ADDRESS.NOT_FOUND": "[RU] We could not find the entered address.",
+                "E.SECONDARY_INFORMATION.INVALID": "[RU] Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+                "E.SECONDARY_INFORMATION.MISSING": "[RU] Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+                "E.HOUSE_NUMBER.MISSING": "[RU] House number is missing.",
+                "E.HOUSE_NUMBER.INVALID": "[RU] We could not find the street number provided.",
+                "E.STREET.MISSING": "[RU] Street is missing.",
+                "E.STREET.INVALID": "[RU] Street is invalid.",
+                "E.BOX_NUMBER.MISSING": "[RU] Box number is missing.",
+                "E.BOX_NUMBER.INVALID": "[RU] Box number is invalid.",
+                "E.ADDRESS.INVALID": "[RU] Invalid city/state/ZIP.",
+                "E.ZIP.NOT_FOUND": "[RU] Zip not found.",
+                "E.ZIP.INVALID": "[RU] Zip invalid.",
+                "E.ZIP.PLUS4.NOT_FOUND": "[RU] Zip + 4 not found.",
+                "E.ADDRESS.MULTIPLE": "[RU] Multiple addresses were returned with the same zip.",
+                "E.ADDRESS.INSUFFICIENT": "[RU] Insufficient/incorrect address data.",
+                "E.ADDRESS.DUAL": "[RU] Dual address.",
+                "E.STREET.MAGNET": "[RU] Street address is ambiguous.",
+                "E.CITY_STATE.INVALID": "[RU] Unverifiable city / state.",
+                "E.STATE.INVALID": "[RU] Invalid State.",
+                "E.ADDRESS.DELIVERY.INVALID": "[RU] Invalid delivery address.",
+                "E.TIMED_OUT": "[RU] Exceeded max timeout.",
+                "E.TIME_ZONE.UNAVAILABLE": "[RU] The time zone service is currently unavailable.",
+                "E.PO_BOX.INTERNATIONAL": "[RU] Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+            },
+            "UseAsEntered": "[RU] We are unable to confirm that the address is valid. Please check this box to use the address as entered."
+        },
+        "TooltipAlt": "[RU] Information",
+        "SubjectPanel": {
+            "Link": "[RU] Return to subject look-up",
+            "InvitationCode": "[RU] Subject Invitation Code:",
+            "Email": "[RU] Email:",
+            "Name": "[RU] Name:",
+            "ShortId": "[RU] Subject Short ID/HRUID:"
+        },
+        "AdminActionPanel": {
+            "ActivityEdit": "[RU] Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+            "EditButton": "[RU] Edit"
+        },
+        "Validators": {
+            "DateNavyValidationRule": "[RU] Entered date is invalid",
+            "Autocomplete": "[RU] No {{control}} is found"
+        },
+        "FileUpload": {
+            "ConfirmReuploadTitle": "[RU] Are you sure you want \nto reupload the file?",
+            "ConfirmUndoUploadTitle": "[RU] Are you sure you want \nto remove uploaded file from server?",
+            "ConfirmCancelUploadTitle": "[RU] Are you sure you want \nto cancel upload?",
+            "ReuploadBtnText": "[RU] Reupload",
+            "UploadBtnText": "[RU] Upload",
+            "OkBtnText": "[RU] OK",
+            "CancelBtnText": "[RU] Cancel",
+            "MaxSize": "[RU] Max size: {{maxSize}}",
+            "AllowedFileTypes": "[RU] Allowed files: {{allowedFileTypes}}",
+            "ChooseFile": "[RU] Click and select \nor drag file to upload",
+            "Uploading": "[RU] Uploading {{filename}}",
+            "Size": "[RU] (size: {{size}})",
+            "MaxSizeErrorMessage": "[RU] Maximum file size exceeded",
+            "InvalidTypeErrorMessage": "[RU] Type of file selected is not valid",
+            "CancelUpload": "[RU] Cancel upload",
+            "RemoveUploadedFile": "[RU] Remove uploaded file"
+        }
+    }
+}

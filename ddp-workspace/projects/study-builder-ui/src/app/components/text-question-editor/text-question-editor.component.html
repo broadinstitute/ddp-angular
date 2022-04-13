@@ -30,8 +30,9 @@
             <mat-radio-button  value="SIGNATURE">Signature</mat-radio-button>
         </mat-radio-group>
     </div>
-    <div class="validations">
-        <label class="form-label">Validations</label>
-        <mat-checkbox formControlName="required">Required</mat-checkbox>
-    </div>
+
+    <app-validators-block
+        [validators]="initialValidators"
+        (validatorsChanged)="changeValidators($event)">
+    </app-validators-block>
 </form>

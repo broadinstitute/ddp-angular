@@ -60,13 +60,15 @@
         </tr>
         </thead>
         <tbody>
+        <h4 style="color: red" *ngIf="patternError">The variable name(s) should match the following pattern: variableName, variable_name</h4>
         <ng-container *ngFor="let setting of mf.data; let i = index">
           <tr class="settings_container">
             <td>
               <ng-container *ngIf="setting.addedNew">
                 <mat-form-field class="Input">
-                  <input matInput class="Width--100" maxlength="45" [(ngModel)]="setting.columnName"
-                         (change)="checkColName(i); onChange(i)" autocomplete="off">
+                  <input matInput class="Width--100" maxlength="45" placeholder="Variable Name" [(ngModel)]="setting.columnName"
+                         (change)="checkColName(i); onChange(i, mf.data);" autocomplete="off">
+
                   <mat-hint class="ErrorMessageForm" *ngIf="setting.notUniqueError">Name not unique</mat-hint>
                   <mat-hint class="ErrorMessageForm" *ngIf="setting.spaceError">No space allowed</mat-hint>
                 </mat-form-field>
@@ -83,7 +85,7 @@
             </td>
             <td>
               <mat-select class="Input--Min-WIDTH" maxlength="100" placeholder="Display Type" floatPlaceholder="never"
-                         [(ngModel)]="setting.displayType" (change)="onDisplayTypeChange(i)">
+                         [(ngModel)]="setting.displayType" (selectionChange)="onDisplayTypeChange(i)">
                 <mat-option value="CHECKBOX">
                   <mat-icon>
                     <i class="fas fa-check-square fa-sm"></i>
@@ -141,7 +143,7 @@
       </table>
       <br/>
       <button mat-raised-button (click)="saveFieldSettings()" color="primary"
-              [disabled]="saving">Save Settings
+              [disabled]="saving || patternError">Save Settings
       </button>
     </div>
   </div>

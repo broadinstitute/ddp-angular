@@ -1,6 +1,8 @@
+export type FuncType<T> = (...args) => T;
+
 declare const auth0;
 
-export const createAuth0 = config => {
+export const createAuth0: FuncType<any> = config => {
   if (Array.isArray(config)) {
     return new auth0.WebAuth({
       domain: config[0],

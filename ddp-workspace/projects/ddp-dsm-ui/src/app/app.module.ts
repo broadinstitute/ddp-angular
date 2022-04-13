@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, Injector, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LOCATION_INITIALIZED } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { DataTableModule } from '@pascalhonegger/ng-datatable';
@@ -13,6 +14,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AccordionModule } from 'ngx-bootstrap/accordion';
@@ -65,16 +67,10 @@ import { UploadComponent } from './upload/upload.component';
 import { ParticipantExitComponent } from './participant-exit/participant-exit.component';
 import { ParticipantExitSortPipe } from './pipe/participant-exit-sort.pipe';
 import { UserSettingComponent } from './user-setting/user-setting.component';
-import { EmailEventComponent } from './email-event/email-event.component';
-import { EelSettingComponent } from './eel-setting/eel-setting.component';
-import { EelSettingSortPipe } from './pipe/eel-setting-sort.pipe';
 import { Statics } from './utils/statics';
 import { ScanValueComponent } from './scan-value/scan-value.component';
 import { BannerComponent } from './banner/banner.component';
 import { FieldDatepickerComponent } from './field-datepicker/field-datepicker.component';
-import { EmailTemplateSortPipe } from './pipe/email-template-sort.pipe';
-import { EmailEventSortPipe } from './pipe/email-event-sort.pipe';
-import { EmailEmailSortPipe } from './pipe/email-email-sort.pipe';
 import { OncHistoryDetailComponent } from './onc-history-detail/onc-history-detail.component';
 import { TissuePageComponent } from './tissue-page/tissue-page.component';
 import { TissueComponent } from './tissue/tissue.component';
@@ -116,14 +112,19 @@ import { ParticipantUpdateResultDialogComponent } from './dialogs/participant-up
 import { FormDataComponent } from './form-data/form-data.component';
 import { AddFamilyMemberComponent } from './popups/add-family-member/add-family-member.component';
 import { FieldTableComponent } from './field-table/field-table.component';
-import { ConfigurationService, DdpModule } from 'ddp-sdk';
+import { ConfigurationService, DdpModule, LanguageService, LoggingService } from 'ddp-sdk';
+import {dynamicFormTypeAndStudyRGP} from './participant-page/pipes/dynamicFormTypeForRgp.pipe';
+import { TestDssComponent } from './test-dss/test-dss.component';
+import { DssErrorPageComponent } from './test-dss/dss-error-page/dss-error-page.component';
+
+import { TranslateService } from '@ngx-translate/core';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
 declare const DDP_ENV: any;
 
 export const sdkConfig = new ConfigurationService();
-sdkConfig.backendUrl = DDP_ENV.baseUrl;
+sdkConfig.backendUrl = 'https://pepper-dev.datadonationplatform.org'; // TODO: move the value below to DDP_ENV as an DSS API URL(main DSM config file), depending on environment
 sdkConfig.auth0Domain = DDP_ENV.auth0Domain;
 sdkConfig.auth0ClientId = DDP_ENV.auth0ClientKey;
 sdkConfig.adminClientId = DDP_ENV.adminClientId || DDP_ENV.auth0ClientKey;
@@ -137,6 +138,34 @@ sdkConfig.projectGcpId = DDP_ENV.projectGcpId;
 sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 sdkConfig.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl; // TODO: add the URL value in config file
 sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
+sdkConfig.auth0ClaimNameSpace = DDP_ENV.auth0ClaimNameSpace;
+sdkConfig.errorPageUrl = 'dss-error';
+
+export function translateFactory(translate: TranslateService,
+                                 injector: Injector,
+                                 logger: LoggingService,
+                                 // language: LanguageService // TODO: setup languages for DSM
+): () => Promise<any> {
+  return () => new Promise<any>((resolve: any) => {
+    const LOG_SOURCE = 'DSM AppModule';
+    const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
+    locationInitialized.then(() => {
+      const locale = 'en'; // language.getAppLanguageCode();
+      translate.setDefaultLang(locale);
+      translate.use(locale).subscribe({
+        next: () => {
+          logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
+        },
+        error: err => {
+          logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization:`, err);
+        },
+        complete: () => {
+          resolve(null);
+        }
+      });
+    });
+  });
+}
 
 @NgModule({
     declarations: [
@@ -158,8 +187,6 @@ sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
         UploadComponent,
         ParticipantExitComponent,
         UserSettingComponent,
-        EmailEventComponent,
-        EelSettingComponent,
         ScanValueComponent,
         BannerComponent,
         FieldDatepickerComponent,
@@ -177,10 +204,6 @@ sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
         KitRequestSortPipe,
         KitRequestFilterPipe,
         ParticipantExitSortPipe,
-        EelSettingSortPipe,
-        EmailEventSortPipe,
-        EmailEmailSortPipe,
-        EmailTemplateSortPipe,
         OncHistoryDetailSortPipe,
         ButtonSelectTitleCasePipe,
         OrdinalPipe,
@@ -214,7 +237,10 @@ sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
         ParticipantUpdateResultDialogComponent,
         FormDataComponent,
         AddFamilyMemberComponent,
-        FieldTableComponent
+        FieldTableComponent,
+        dynamicFormTypeAndStudyRGP,
+        TestDssComponent,
+        DssErrorPageComponent
     ],
     imports: [
         DdpModule,
@@ -228,6 +254,7 @@ sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
         MatInputModule,
         MatSelectModule,
         MatRadioModule,
+        MatExpansionModule,
         MatButtonToggleModule,
         MatAutocompleteModule,
         MatDialogModule,
@@ -264,7 +291,18 @@ sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
         Language,
         StackdriverErrorReporterDsmService,
         LoggingDsmService,
-        { provide: ErrorHandler, useClass: StackdriverErrorReporterDsmService }
+        { provide: ErrorHandler, useClass: StackdriverErrorReporterDsmService },
+        {
+          provide: APP_INITIALIZER,
+          useFactory: translateFactory,
+          deps: [
+            TranslateService,
+            Injector,
+            LoggingService,
+            LanguageService
+          ],
+          multi: true
+        }
     ],
     bootstrap: [AppComponent]
 })

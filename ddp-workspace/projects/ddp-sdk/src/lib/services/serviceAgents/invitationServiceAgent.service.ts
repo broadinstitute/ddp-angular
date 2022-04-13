@@ -32,6 +32,7 @@ export class InvitationServiceAgent extends NotAuthenticatedServiceAgent<any> {
         return this.postObservable(`/studies/${this.configuration.studyGuid}/invitation-check`, payload, {}, true)
             .pipe(
                 map(response => response ? response.body : null),
+                //eslint-disable-next-line arrow-body-style
                 catchError((err: HttpErrorResponse) => {
                     return throwError(this.buildErrorObject(err));
                 })

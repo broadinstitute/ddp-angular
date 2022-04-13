@@ -63,6 +63,7 @@ import { InstitutionServiceAgent } from './services/serviceAgents/institutionSer
 import { ResendEmailServiceAgent } from './services/serviceAgents/resendEmailServiceAgent.service';
 import { ParticipantsSearchServiceAgent } from './services/serviceAgents/participantsSearchServiceAgent.service';
 
+import { ActivityActionsAgent } from './services/serviceAgents/activityActionsAgent.service';
 import { ActivityConverter } from './services/activity/activityConverter.service';
 import { ActivityQuestionConverter } from './services/activity/activityQuestionConverter.service';
 import { ActivityComponentConverter } from './services/activity/activityComponentConverter.service';
@@ -84,9 +85,19 @@ import { ActivityAgreementAnswer } from './components/activityForm/answers/activ
 import { ActivityTextAnswer } from './components/activityForm/answers/activityTextAnswer.component';
 import { ActivityTextInput } from './components/activityForm/answers/activity-text-input/activityTextInput.component';
 import { ActivityFileAnswer } from './components/activityForm/answers/activity-file-answer/activityFileAnswer.component';
-import { ActivityFileAnswerSuccess } from './components/activityForm/answers/activity-file-answer-success/activityFileAnswerSuccess.component';
+import {
+    ActivityFileAnswerSuccess
+} from './components/activityForm/answers/activity-file-answer-success/activityFileAnswerSuccess.component';
 import { ActivityMatrixAnswer } from './components/activityForm/answers/activity-matrix-answer/activity-matrix-answer.component';
-import { ActivityInstanceSelectAnswer } from './components/activityForm/answers/activity-instance-select-answer/activity-instance-select-answer.component';
+import {
+    ActivityInstanceSelectAnswer
+} from './components/activityForm/answers/activity-instance-select-answer/activity-instance-select-answer.component';
+import {
+    ActivityMatrixAnswerDialogComponent
+} from './components/activityForm/answers/activity-matrix-answer/activity-matrix-answer-dialog/activity-matrix-answer-dialog.component';
+import {
+    ActivityMatrixAnswerTableComponent
+} from './components/activityForm/answers/activity-matrix-answer/activity-matrix-answer-table/activity-matrix-answer-table.component';
 import { ActivityEmailInput } from './components/activityForm/answers/activityEmailInput.component';
 import { ActivityNumericAnswer } from './components/activityForm/answers/activityNumericAnswer.component';
 import { ActivitySectionComponent } from './components/activityForm/activitySection.component';
@@ -100,7 +111,9 @@ import { ActivityCompositeAnswer } from './components/activityForm/answers/activ
 import { ActivityContentComponent } from './components/activityForm/activity-blocks/activityContent.component';
 import { GroupBlock } from './components/activityForm/activity-blocks/groupBlock.component';
 import { GroupBlockList } from './components/activityForm/activity-blocks/groupBlockList.component';
-import { EmbeddedActivityBlockComponent } from './components/activityForm/activity-blocks/embeddedActivityBlock/embeddedActivityBlock.component';
+import {
+    EmbeddedActivityBlockComponent
+} from './components/activityForm/activity-blocks/embeddedActivityBlock/embeddedActivityBlock.component';
 
 import { InstitutionComponent } from './components/activityForm/institutions/institution.component';
 import { InstitutionsFormComponent } from './components/activityForm/institutions/institutionsForm.component';
@@ -201,10 +214,13 @@ import { FileAnswerMapperService } from './services/fileAnswerMapper.service';
 import { StickyScrollDirective } from './directives/sticky-scroll.directive';
 import { AutocompleteActivityPicklistQuestion } from './components/activityForm/picklist/autocompleteActivityPicklistQuestion.component';
 import { SearchHighlightPipe } from './pipes/searchHighlight.pipe';
-import { PicklistSortingPolicy } from './services/picklistSortingPolicy.service';
+import { StudiesServiceAgentService } from './services/serviceAgents/studiesServiceAgent.service';
+import { FuncType } from './models/funcType';
+import { ActivityPicklistRemoteAutoCompleteOptionsComponent }
+    from './components/activityForm/picklist/activity-picklist-remote-auto-complete-options.component';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
-    const getter = () => sessionService.token;
+    const getter: FuncType<string> = () => sessionService.token;
     return {
         tokenGetter: getter
     };
@@ -290,6 +306,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         MailingListServiceAgent,
         ActivityValidatorBuilder,
         ActivitySuggestionBuilder,
+        ActivityActionsAgent,
         ActivityConverter,
         ActivityQuestionConverter,
         ActivityComponentConverter,
@@ -322,18 +339,13 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         DisplayLanguagePopupServiceAgent,
         ActivityInstanceSelectAnswerService,
         StudyDetailServiceAgent,
+        StudiesServiceAgentService,
         StatisticsServiceAgent,
         ModalDialogService,
         FileUploadService,
         InvitationPipe,
         FileAnswerMapperService,
         ParticipantsSearchServiceAgent,
-        // Angular Injection does not like that we have optional arguments in constructor
-        // Need to create our default instance ourselves
-        {
-            provide: PicklistSortingPolicy,
-            useValue: new PicklistSortingPolicy()
-        },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
@@ -369,6 +381,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityFileAnswer,
         ActivityFileAnswerSuccess,
         ActivityMatrixAnswer,
+        ActivityMatrixAnswerDialogComponent,
+        ActivityMatrixAnswerTableComponent,
         ActivityInstanceSelectAnswer,
         ActivityEmailInput,
         ActivityNumericAnswer,
@@ -421,7 +435,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ProgressIndicatorComponent,
         ActivityBlockComponent,
         ConfirmDialogComponent,
-        DropFileToUploadDirective
+        DropFileToUploadDirective,
+        ActivityPicklistRemoteAutoCompleteOptionsComponent
     ],
     exports: [
         NetworkSnifferComponent,
@@ -444,6 +459,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityTextAnswer,
         ActivityFileAnswer,
         ActivityMatrixAnswer,
+        ActivityMatrixAnswerDialogComponent,
+        ActivityMatrixAnswerTableComponent,
         ActivityInstanceSelectAnswer,
         ActivityEmailInput,
         ActivityNumericAnswer,

@@ -6,16 +6,21 @@ export class ActivityDefinition {
     public activityCode: string,
     public activityName: string,
     public activityVersion: string,
-    public questions: Array<QuestionDefinition>
+    public questions: Array<QuestionDefinition>,
+    public displayOrder: number = 1,
+    public showActivityStatus = false
   ) {
     this.activityCode = activityCode;
     this.activityName = activityName;
     this.activityVersion = activityVersion;
     this.questions = questions;
+    this.displayOrder = displayOrder;
+    this.showActivityStatus  = showActivityStatus;
   }
 
   static parse(json): ActivityDefinition {
-    return new ActivityDefinition(json.activityCode, json.activityName, json.activityVersion, json.questions);
+    return new ActivityDefinition(json.activityCode, json.activityName, json.activityVersion, json.questions
+      , json.displayOrder, json.showActivityStatus);
   }
 
   getQuestionDefinition(stableId: string): QuestionDefinition {

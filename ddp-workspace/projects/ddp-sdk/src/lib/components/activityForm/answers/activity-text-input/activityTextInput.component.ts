@@ -89,11 +89,11 @@ export class ActivityTextInput implements OnInit, OnChanges, OnDestroy {
         const adjustedOffset = tagsAddedLength + match.offset;
 
         taggedValue =
-          taggedValue.substr(0, adjustedOffset) +
+          taggedValue.substring(0, adjustedOffset) +
           openTag +
-          taggedValue.substr(adjustedOffset, match.length) +
+          taggedValue.substring(adjustedOffset, adjustedOffset + match.length) +
           closeTag +
-          taggedValue.substr(adjustedOffset + match.length);
+          taggedValue.substring(adjustedOffset + match.length);
 
         tagsAddedLength = tagsAddedLength + openTag.length + closeTag.length;
       });
@@ -104,12 +104,17 @@ export class ActivityTextInput implements OnInit, OnChanges, OnDestroy {
   private buildForm(): void {
     this.controlName = this.block.stableId;
 
-    const formGroup = new FormGroup({
-      [this.controlName]: new FormControl({
-        value: this.block.answer,
-        disabled: this.readonly,
-      }),
-    });
+    const formGroup = new FormGroup(
+      {
+        [this.controlName]: new FormControl({
+          value: this.block.answer,
+          disabled: this.readonly,
+        }),
+      },
+      {
+        updateOn: this.block.hasUniqueValueValidator ? 'blur' : 'change'
+      }
+    );
 
     if (this.block.confirmEntry) {
       this.confirmationControlName = `${this.confirmationControlNamePrefix}${this.block.stableId}`;
@@ -170,5 +175,11 @@ export class ActivityTextInput implements OnInit, OnChanges, OnDestroy {
        */
       this.filteredSuggestions$ = of([]);
     }
+  }
+
+  onEnter(event: KeyboardEvent): void {
+    // to prevent the form submit when Enter is pressed on any <input> in the form
+    // and the event is propagated up to the <form>
+    event.preventDefault();
   }
 }

@@ -3,6 +3,8 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { DateService } from '../services/dateService.service';
 import { DatePickerValue } from '../models/datePickerValue';
 import { DateRenderMode } from '../models/activity/dateRenderMode';
+import { FuncType } from '../models/funcType';
+import { InputRestriction } from '../models/InputRestriction';
 
 @Component({
     selector: 'ddp-date',
@@ -14,7 +16,7 @@ import { DateRenderMode } from '../models/activity/dateRenderMode';
             <mat-form-field class="two-char-input" *ngIf="dateField === 'MM'" [floatLabel]="floatLabelType()">
               <mat-label *ngIf="label" [innerHTML]="label && fieldIdx === 0 ? label : ('')"></mat-label>
               <input matInput
-                     appInputRestriction="integer"
+                     [appInputRestriction]="InputRestriction.Digits"
                      [placeholder]="placeholder && dateFields.length === 1 ? placeholder : ('SDK.DateLabel.MM' | translate)"
                      size="3"
                      maxlength="2"
@@ -30,7 +32,7 @@ import { DateRenderMode } from '../models/activity/dateRenderMode';
             <mat-form-field class="two-char-input" *ngIf="dateField === 'DD'" [floatLabel]="floatLabelType()">
               <mat-label *ngIf="label" [innerHTML]="label && fieldIdx === 0 ? label : ('')"></mat-label>
               <input matInput
-                     appInputRestriction="integer"
+                     [appInputRestriction]="InputRestriction.Digits"
                      [placeholder]="placeholder && dateFields.length === 1 ? placeholder : ('SDK.DateLabel.DD' | translate)"
                      size="3"
                      maxlength="2"
@@ -46,7 +48,7 @@ import { DateRenderMode } from '../models/activity/dateRenderMode';
             <mat-form-field class="four-char-input" *ngIf="dateField === 'YYYY'" [floatLabel]="floatLabelType()">
               <mat-label *ngIf="label" [innerHTML]="label && fieldIdx === 0 ? label : ('')"></mat-label>
               <input matInput
-                     appInputRestriction="integer"
+                     [appInputRestriction]="InputRestriction.Digits"
                      [placeholder]="(placeholder && dateFields.length === 1) ? placeholder : ('SDK.DateLabel.YYYY' | translate)"
                      size="5"
                      maxlength="4"
@@ -200,6 +202,7 @@ export class DatePickerComponent implements OnChanges {
     public selectedMonth: string;
     public selectedDay: string;
     public selectedYear: string;
+    InputRestriction = InputRestriction;
     @Input() label: string;
     @Input() readonly: boolean;
     @Input() placeholder: string;
@@ -370,9 +373,7 @@ export class DatePickerComponent implements OnChanges {
 
     public moveFocus(value: string, field: string): void {
         if (value.length === field.length) {
-            const index = this.dateFields.findIndex((item) => {
-                return field === item;
-            });
+            const index = this.dateFields.findIndex((item) => (field === item));
             const nextIndex = index + 1;
             if (this.dateFields[nextIndex]) {
                 const item = this.dateFields[nextIndex];
@@ -382,8 +383,8 @@ export class DatePickerComponent implements OnChanges {
     }
 
     public formatDate(): void {
-        const shouldAutoformat = (value: string) => parseInt(value, 10) >= 1 && parseInt(value, 10) <= 9;
-        const addZero = (value: string) => ('0' + value).slice(-2);
+        const shouldAutoformat: FuncType<boolean> = (value: string) => parseInt(value, 10) >= 1 && parseInt(value, 10) <= 9;
+        const addZero: FuncType<string> = (value: string) => ('0' + value).slice(-2);
         if (shouldAutoformat(this.selectedMonth)) {
             this.selectedMonth = addZero(this.selectedMonth);
         }

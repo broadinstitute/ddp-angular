@@ -80,6 +80,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   @HostListener('document:scroll')
   private onScroll(): void {
-    this.isSticky = window.pageYOffset > 0;
+    this.isSticky = window.scrollY > 0;
   }
 }

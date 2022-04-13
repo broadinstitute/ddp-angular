@@ -24,9 +24,12 @@ import * as _ from 'underscore';
 import { ActivityFileValidationRule } from './validators/activityFileValidationRule';
 import { ActivityFileQuestionBlock } from '../../models/activity/activityFileQuestionBlock';
 import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
-import { ActivityPicklistQuestionBlock } from 'ddp-sdk';
+import { ActivityPicklistQuestionBlock } from '../../models/activity/activityPicklistQuestionBlock';
 import { ActivityStrictMatchValidationRule } from './validators/activityStrictMatchValidationRule';
 import { ActivityUniqueValidationRule } from './validators/activityUniqueValidationRule';
+import { ValidationRuleType } from './validationRuleType';
+import { DecimalHelper } from '../../utility/decimalHelper';
+import { ActivityDecimalRangeValidationRule } from './validators/activityDecimalRangeValidationRule';
 
 @Injectable()
 export class ActivityValidatorBuilder {
@@ -37,20 +40,22 @@ export class ActivityValidatorBuilder {
         private dateService: DateService,
         private logger: LoggingService) {
         this.rules = [
-            { type: 'REQUIRED', factory: (x, y) => new ActivityRequiredValidationRule(y) },
-            { type: 'COMPLETE', factory: (x, y) => new ActivityCompleteValidationRule(y) },
-            { type: 'LENGTH', factory: (x, y) => this.buildLengthValidator(x, y) },
-            { type: 'REGEX', factory: (x, y) => new ActivityRegexValidationRule(y, x.regexPattern) },
-            { type: 'NUM_OPTIONS_SELECTED',
+            { type: ValidationRuleType.Required, factory: (x, y) => new ActivityRequiredValidationRule(y) },
+            { type: ValidationRuleType.Complete, factory: (x, y) => new ActivityCompleteValidationRule(y) },
+            { type: ValidationRuleType.Length, factory: (x, y) => this.buildLengthValidator(x, y) },
+            { type: ValidationRuleType.Regex, factory: (x, y) => new ActivityRegexValidationRule(y, x.regexPattern) },
+            { type: ValidationRuleType.NumOptionsSelected,
               factory: (x, y) => new ActivityOptionsAmountValidationRule(y, x.minSelections, x.maxSelections)
             },
-            { type: 'YEAR_REQUIRED', factory: (x, y) => new ActivityYearRequiredDateValidationRule(y) },
-            { type: 'MONTH_REQUIRED', factory: (x, y) => new ActivityMonthRequiredDateValidationRule(y) },
-            { type: 'DAY_REQUIRED', factory: (x, y) => new ActivityDayRequiredDateValidationRule(y) },
-            { type: 'DATE_RANGE', factory: (x, y) => this.buildDateRangeValidator(x, y) },
-            { type: 'AGE_RANGE', factory: (x, y) => this.buildAgeRangeValidator(x, y) },
-            { type: 'INT_RANGE', factory: (x, y) => this.buildNumericRangeValidator(x, y) },
-            { type: 'UNIQUE', factory: (x, y) => new ActivityUniqueValidationRule(y) },
+            { type: ValidationRuleType.YearRequired, factory: (x, y) => new ActivityYearRequiredDateValidationRule(y) },
+            { type: ValidationRuleType.MonthRequired, factory: (x, y) => new ActivityMonthRequiredDateValidationRule(y) },
+            { type: ValidationRuleType.DayRequired, factory: (x, y) => new ActivityDayRequiredDateValidationRule(y) },
+            { type: ValidationRuleType.DateRange, factory: (x, y) => this.buildDateRangeValidator(x, y) },
+            { type: ValidationRuleType.AgeRange, factory: (x, y) => this.buildAgeRangeValidator(x, y) },
+            { type: ValidationRuleType.IntRange, factory: (x, y) => this.buildNumericRangeValidator(x, y) },
+            { type: ValidationRuleType.DecimalRange, factory: (x, y) => this.buildDecimalRangeValidator(x, y) },
+            { type: ValidationRuleType.Unique, factory: (x, y) => new ActivityUniqueValidationRule(y) },
+            { type: ValidationRuleType.UniqueValue },
         ];
     }
 
@@ -60,6 +65,9 @@ export class ActivityValidatorBuilder {
         for (const validationJson of questionJson.validations) {
             const buildRule = this.rules.find(x => x.type === validationJson.rule);
             if (buildRule != null) {
+                if (!buildRule.factory) {
+                    continue;
+                }
                 const rule = buildRule.factory(validationJson, questionBlock);
                 rule.message = validationJson.message;
                 _.isBoolean(validationJson.allowSave) && (rule.allowSave = validationJson.allowSave);
@@ -73,8 +81,7 @@ export class ActivityValidatorBuilder {
         return rules.concat(additionalLocalRules);
     }
 
-    private buildQuestionLocalValidatorRules(questionBlock: ActivityQuestionBlock<any>)
-        : Array<ActivityAbstractValidationRule> {
+    private buildQuestionLocalValidatorRules(questionBlock: ActivityQuestionBlock<any>): Array<ActivityAbstractValidationRule> {
         const localRules = [];
 
         if (questionBlock.questionType === QuestionType.Date) {
@@ -145,5 +152,17 @@ export class ActivityValidatorBuilder {
             numericRangeRule.max = validationJson.max;
         }
         return numericRangeRule;
+    }
+
+    private buildDecimalRangeValidator(validationJson: any, questionBlock: ActivityQuestionBlock<any>):
+        ActivityDecimalRangeValidationRule {
+        const decimalRangeRule = new ActivityDecimalRangeValidationRule(questionBlock);
+        if (DecimalHelper.isDecimalAnswerType(validationJson.min)) {
+            decimalRangeRule.min = DecimalHelper.mapDecimalAnswerToNumber(validationJson.min);
+        }
+        if (DecimalHelper.isDecimalAnswerType(validationJson.max)) {
+            decimalRangeRule.max = DecimalHelper.mapDecimalAnswerToNumber(validationJson.max);
+        }
+        return decimalRangeRule;
     }
 }

@@ -2,8 +2,6 @@ import { LoggingService, MailAddressBlock } from 'ddp-sdk';
 import { ActivityComponentConverter } from './activityComponentConverter.service';
 import { ComponentType } from '../../models/activity/componentType';
 
-let service: ActivityComponentConverter;
-const loggerServiceSpy: jasmine.SpyObj<LoggingService> = jasmine.createSpyObj('LoggingService', ['logError']);
 const block = {
     component: {
         componentType: ComponentType.MailingAddress,
@@ -19,7 +17,11 @@ const block = {
 };
 
 describe('ActivityComponentConverter Test', () => {
+    let service: ActivityComponentConverter;
+    let loggerServiceSpy: jasmine.SpyObj<LoggingService>;
+
     beforeEach(() => {
+        loggerServiceSpy = jasmine.createSpyObj('LoggingService', ['logError']);
         service = new ActivityComponentConverter(loggerServiceSpy);
     });
 

@@ -32,8 +32,13 @@ import { NotificationsDialogComponent } from './components/notifications-dialog/
 import { SessionExpiredDialogComponent } from './components/session-expired-dialog/session-expired-dialog.component';
 import { ParticipantDeletionDialogComponent } from './components/participant-deletion-dialog/participant-deletion-dialog.component';
 import { ForResearchesComponent } from './components/pages/for-researches/for-researches.component';
+import { ForCliniciansComponent } from './components/pages/for-clinicians/for-clinicians.component';
 import { SuccessMessageComponent } from './components/success-message/success-message.component';
 import { SuccessMessageDialogComponent } from './components/success-message-dialog/success-message-dialog.component';
+import {NotificationsComponent} from './components/notifications/notifications.component';
+import {LoginComponent} from './components/login/login.component';
+import { ActivitySectionProgressBarComponent } from './components/activity-section-progress-bar/activity-section-progress-bar.component';
+import { ActivitySectionPageProgressComponent } from './components/activity-section-page-progress/activity-section-page-progress.component';
 
 
 @NgModule({
@@ -41,6 +46,7 @@ import { SuccessMessageDialogComponent } from './components/success-message-dial
     FaqComponent,
     AppComponent,
     HomeComponent,
+    LoginComponent,
     ErrorComponent,
     HeaderComponent,
     FooterComponent,
@@ -52,6 +58,7 @@ import { SuccessMessageDialogComponent } from './components/success-message-dial
     VerifyAgeUpComponent,
     ProgressBarComponent,
     PreScreeningComponent,
+    NotificationsComponent,
     SessionExpiredComponent,
     ActivitiesListComponent,
     RedirectToLoginComponent,
@@ -60,8 +67,11 @@ import { SuccessMessageDialogComponent } from './components/success-message-dial
     SessionExpiredDialogComponent,
     ParticipantDeletionDialogComponent,
     ForResearchesComponent,
+    ForCliniciansComponent,
     SuccessMessageComponent,
     SuccessMessageDialogComponent,
+    ActivitySectionProgressBarComponent,
+    ActivitySectionPageProgressComponent,
   ],
   imports: [
     DdpModule,

@@ -87,7 +87,7 @@ export class DashboardComponent implements OnInit {
     if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) == null
       || localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === undefined
     ) {
-      this.additionalMessage = 'Please select a realm';
+      this.additionalMessage = 'Please select a study';
     } else {
       if (this.auth.authenticated()) {
         this.getDashboardInformation(this.router.url);
@@ -101,16 +101,16 @@ export class DashboardComponent implements OnInit {
       this.loadingDDPData = true;
       if (version === Statics.MEDICALRECORD_DASHBOARD) {
         let jsonData: any[];
-        this.dsmService.getRealmsAllowed(Statics.MEDICALRECORD).subscribe(
-          data => {
+        this.dsmService.getRealmsAllowed(Statics.MEDICALRECORD).subscribe({
+          next: data => {
             this.ddp = null;
             jsonData = data;
             jsonData.forEach((val) => {
               if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
                 this.allowedToSeeInformation = true;
                 this.dsmService.getMedicalRecordDashboard(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), startDate, endDate)
-                  .subscribe(
-                    dataInfo => {
+                  .subscribe({
+                    next: dataInfo => {
                       const result = Result.parse(dataInfo);
                       if (result.code != null && result.code !== 200) {
                         this.errorMessage = 'Error - Getting all participant numbers\nPlease contact your DSM developer';
@@ -123,68 +123,64 @@ export class DashboardComponent implements OnInit {
                         this.loadSettings();
                       }
                     },
-                    err => {
+                    error: err => {
                       if (err._body === Auth.AUTHENTICATION_ERROR) {
                         this.auth.logout();
                       }
                       this.loadingDDPData = false;
                       this.errorMessage = 'Error - Loading ddp information\nPlease contact your DSM developer';
                     }
-                  );
+                  });
               }
             });
             if (!this.allowedToSeeInformation) {
-              this.additionalMessage = 'You are not allowed to see information of the selected realm at that category';
+              this.additionalMessage = 'You are not allowed to see information of the selected study at that category';
               this.loadingDDPData = false;
             } else {
               this.additionalMessage = null;
             }
           },
-          () => {
-            return null;
-          }
-        );
+          error: () => null
+        });
       } else if (version === Statics.SHIPPING_DASHBOARD) {
         let jsonData: any[];
-        this.dsmService.getRealmsAllowed(Statics.SHIPPING).subscribe(
-          data => {
+        this.dsmService.getRealmsAllowed(Statics.SHIPPING).subscribe({
+          next: data => {
             jsonData = data;
             jsonData.forEach((val) => {
               if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
                 this.allowedToSeeInformation = true;
                 this.dsmService.getShippingDashboard(localStorage.getItem(ComponentService.MENU_SELECTED_REALM))
-                  .subscribe(
-                    ddpData => {
+                  .subscribe({
+                    next: ddpData => {
                       this.ddp = DDPInformation.parse(ddpData);
                       this.loadingDDPData = false;
                     },
-                    err => {
+                    error: err => {
                       if (err._body === Auth.AUTHENTICATION_ERROR) {
                         this.auth.logout();
                       }
                       this.errorMessage = 'Error - Loading ddp information\nPlease contact your DSM developer';
                       this.loadingDDPData = false;
                     }
-                  );
+                  });
               }
             });
             if (!this.allowedToSeeInformation) {
-              this.additionalMessage = 'You are not allowed to see information of the selected realm at that category';
+              this.additionalMessage = 'You are not allowed to see information of the selected study at that category';
               this.loadingDDPData = false;
             } else {
               this.additionalMessage = null;
             }
             this.loadingDDPData = false;
           },
-          () => {
-            return null;
-          }
-        );
+          error: () => null
+        });
       } else {
         this.errorMessage = 'Error - Router has wrong url ';
       }
     } else {
-      this.additionalMessage = 'Please select a realm';
+      this.additionalMessage = 'Please select a study';
     }
   }
 
@@ -229,7 +225,7 @@ export class DashboardComponent implements OnInit {
       window.scrollTo(0, 0);
     } else {
       this.loadingDDPData = false;
-      this.additionalMessage = 'Please select a realm';
+      this.additionalMessage = 'Please select a study';
     }
   }
 
@@ -237,8 +233,8 @@ export class DashboardComponent implements OnInit {
     this.loadingDDPData = true;
     this.additionalMessage = '';
     this.allowedToSeeInformation = true;
-    this.dsmService.getShippingOverview().subscribe(
-      data => {
+    this.dsmService.getShippingOverview().subscribe({
+      next: data => {
         this.kitsNoLabel = false;
         this.ddp = DDPInformation.parse(data);
         for (const kit of this.ddp.kits) {
@@ -249,14 +245,14 @@ export class DashboardComponent implements OnInit {
         }
         this.loadingDDPData = false;
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
         this.loadingDDPData = false;
         this.errorMessage = 'Error - Loading ddp information ' + err;
       }
-    );
+    });
   }
 
   public reload(): void {
@@ -275,8 +271,8 @@ export class DashboardComponent implements OnInit {
   triggerLabelCreation(realm: string, kitType: string): void {
     this.loadingDDPData = true;
     this.allLabelTriggered = realm == null && kitType == null;
-    this.dsmService.kitLabel(realm, kitType).subscribe(
-      data => {
+    this.dsmService.kitLabel(realm, kitType).subscribe({
+      next: data => {
         const result = Result.parse(data);
         if (result.code === 200) {
           this.additionalMessage = 'Triggered label creation';
@@ -284,14 +280,14 @@ export class DashboardComponent implements OnInit {
         }
         this.loadingDDPData = false;
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
         this.loadingDDPData = false;
         this.errorMessage = 'Error - Loading ddp information ' + err;
       }
-    );
+    });
   }
 
   getRole(): RoleService {
@@ -337,13 +333,9 @@ export class DashboardComponent implements OnInit {
 
   getHighestFollowUp(): number {
     const allFollowUpSent = Object.keys(this.ddp.dashboardValues).filter(obj => obj.startsWith('followUpSent'));
-    const allFollowUpIndexes = allFollowUpSent.map(obj => {
-      return obj.split('.') [ 1 ];
-    });
+    const allFollowUpIndexes = allFollowUpSent.map(obj => obj.split('.')[1]);
     const uniqueIndexes = Array.from(new Set(allFollowUpIndexes));
-    return Math.max.apply(null, uniqueIndexes.map(o => {
-      return Number(o);
-    }));
+    return Math.max(...uniqueIndexes.map(o => Number(o)));
   }
 
   getActivityName(dashboardKey: string): string {
@@ -360,9 +352,7 @@ export class DashboardComponent implements OnInit {
 
   getUniqueKitTypes(): string[] {
     const allKits = Object.keys(this.ddp.dashboardValues).filter(obj => obj.startsWith('kit.'));
-    const kitTypes = allKits.map(obj => {
-      return obj.split('.') [ 1 ];
-    });
+    const kitTypes = allKits.map(obj => obj.split('.') [ 1 ]);
     return Array.from(new Set(kitTypes));
   }
 
@@ -396,8 +386,8 @@ export class DashboardComponent implements OnInit {
 
   loadSettings(): void {
     let jsonData: any;
-    this.dsmService.getSettings(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), 'participantList').subscribe(
-      data => {
+    this.dsmService.getSettings(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), 'participantList').subscribe({
+      next: data => {
         this.activityDefinitionList = [];
         jsonData = data;
         if (jsonData.fieldSettings != null) {
@@ -484,14 +474,14 @@ export class DashboardComponent implements OnInit {
         this.getParticipantData();
         this.loadingDDPData = false;
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
         }
         // eslint-disable-next-line no-throw-literal
         throw 'Error - Loading display settings' + err;
       }
-    );
+    });
   }
 
   dataExport(source: string): void {
@@ -518,7 +508,11 @@ export class DashboardComponent implements OnInit {
           );
           this.downloadDone();
         } else if (source === 'k') {
-          Utils.downloadCurrentData(this.participantList, [ [ 'data', 'data' ], [ 'participant', 'p' ], [ 'kits', 'k' ] ], columns, 'Participants-Sample-' + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION);
+          Utils.downloadCurrentData(this.participantList,
+            [ [ 'data', 'data' ], [ 'participant', 'p' ], [ 'kits', 'k' ] ],
+            columns,
+            'Participants-Sample-' + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION
+          );
           this.downloadDone();
         } else if (source === 'a') {
           // TODO add final abstraction values to download
@@ -539,23 +533,24 @@ export class DashboardComponent implements OnInit {
   }
 
   getParticipantData(): void {
-    this.dsmService.applyFilter(null, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), 'participantList', null).subscribe(
-      data => {
-        this.participantList = [];
-        const jsonData = data.participants;
-        jsonData.forEach((val) => {
-          const participant = Participant.parse(val);
-          this.participantList.push(participant);
-        });
-      },
-      err => {
-        if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+    this.dsmService.applyFilter(null, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), 'participantList', null)
+      .subscribe({
+        next: data => {
+          this.participantList = [];
+          const jsonData = data.participants;
+          jsonData.forEach((val) => {
+            const participant = Participant.parse(val);
+            this.participantList.push(participant);
+          });
+        },
+        error: err => {
+          if (err._body === Auth.AUTHENTICATION_ERROR) {
+            this.auth.logout();
+          }
+          this.loadingDDPData = false;
+          this.errorMessage = 'Error - Downloading Participant List, Please contact your DSM developer';
         }
-        this.loadingDDPData = false;
-        this.errorMessage = 'Error - Downloading Participant List, Please contact your DSM developer';
-      }
-    );
+      });
   }
 
   downloadDone(): void {

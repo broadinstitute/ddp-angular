@@ -106,8 +106,8 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
     protected getActivity(): void {
       const get = this.serviceAgent
         .getActivity(this.studyGuidObservable, this.activityGuidObservable)
-        .subscribe(
-            x => {
+        .subscribe({
+            next: x => {
                 // to prevent using `visitedSectionIndexes` from previous activity
                 this.resetVisitedSectionIndexes();
 
@@ -118,9 +118,9 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
                     this.stickySubtitle.emit(this.model.subtitle);
                     this.activityCode.emit(this.model.activityCode);
                     this.initSteps();
+                    this.isLoaded$.next(true);
                 }
                 this.submitAttempted.next(false);
-                this.isLoaded$.next(true);
 
                 // combine the latest status updates from the form model
                 // and from the embedded components into one observable
@@ -132,9 +132,9 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
                         // so trigger one when submit
                         this.submitAttempted.pipe(filter(attempted => attempted))
                     ).pipe(
-                        map(() => this.model.validate()),
+                        map(() => this.model.validate(this.config.validateOnlyVisibleSections)),
                         // let's start with whatever it is the initial state of the form
-                        startWith(this.model.validate())
+                        startWith(this.model.validate(this.config.validateOnlyVisibleSections))
                     ),
                     this.embeddedComponentsValidStatusChanged.asObservable().pipe(startWith(true))
                 ])
@@ -145,10 +145,10 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
 
               this.anchor.addNew(canSaveSub);
             },
-            () => {
+            error: () => {
                 this.navigateToErrorPage();
             }
-        );
+        });
       this.anchor.addNew(get);
     }
 

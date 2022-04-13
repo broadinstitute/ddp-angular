@@ -38,11 +38,13 @@ export class AbstractionSettingsComponent implements OnInit {
     if (!auth.authenticated()) {
       auth.logout();
     }
-    this.route.queryParams.subscribe(params => {
-      this.realm = params[DSMService.REALM] || null;
-      if (this.realm != null) {
-        //        this.compService.realmMenu = this.realm;
-        this.checkRight();
+    this.route.queryParams.subscribe({
+      next: params => {
+        this.realm = params[DSMService.REALM] || null;
+        if (this.realm != null) {
+          //        this.compService.realmMenu = this.realm;
+          this.checkRight();
+        }
       }
     });
   }
@@ -52,7 +54,7 @@ export class AbstractionSettingsComponent implements OnInit {
       this.realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       this.checkRight();
     } else {
-      this.additionalMessage = 'Please select a realm';
+      this.additionalMessage = 'Please select a study';
     }
     window.scrollTo(0, 0);
   }
@@ -61,8 +63,8 @@ export class AbstractionSettingsComponent implements OnInit {
     this.allowedToSeeInformation = false;
     this.additionalMessage = null;
     let jsonData: any[];
-    this.dsmService.getRealmsAllowed(Statics.MEDICALRECORD).subscribe(
-      data => {
+    this.dsmService.getRealmsAllowed(Statics.MEDICALRECORD).subscribe({
+      next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
           if (this.realm === val) {
@@ -71,20 +73,18 @@ export class AbstractionSettingsComponent implements OnInit {
           }
         });
         if (!this.allowedToSeeInformation) {
-          this.additionalMessage = 'You are not allowed to see information of the selected realm at that category';
+          this.additionalMessage = 'You are not allowed to see information of the selected study at that category';
         }
       },
-      () => {
-        return null;
-      }
-    );
+      error: () => null
+    });
   }
 
   loadAbstractionFormControls(): void {
     this.loading = true;
     let jsonData: any[];
-    this.dsmService.getMedicalRecordAbstractionFormControls(localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe(
-      data => {
+    this.dsmService.getMedicalRecordAbstractionFormControls(localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
+      next: data => {
         this.abstractionFormControls = [];
         jsonData = data;
         jsonData.forEach((val) => {
@@ -93,14 +93,14 @@ export class AbstractionSettingsComponent implements OnInit {
         });
         this.loading = false;
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.logout();
           this.loading = false;
         }
         this.errorMessage = 'Error - Loading medical record abstraction form controls\n ' + err;
       }
-    );
+    });
   }
 
   saveSettings(): void {
@@ -120,20 +120,22 @@ export class AbstractionSettingsComponent implements OnInit {
         this.dsmService.saveMedicalRecordAbstractionFormControls(
             localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
             JSON.stringify(cleanedSettings, (key, value) => {
-              if (value !== null) return value;
+              if (value !== null) {
+                return value;
+              }
             }))
-          .subscribe(
-            () => {
+          .subscribe({
+            next: () => {
               this.loadAbstractionFormControls();
             },
-            err => {
+            error: err => {
               if (err._body === Auth.AUTHENTICATION_ERROR) {
                 this.auth.logout();
                 this.loading = false;
               }
               this.errorMessage = 'Error - Loading medical record abstraction form controls\n ' + err;
             }
-          );
+          });
       }
       window.scrollTo(0, 0);
     }

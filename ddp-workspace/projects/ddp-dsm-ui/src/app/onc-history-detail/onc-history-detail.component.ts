@@ -13,7 +13,6 @@ import { Tissue } from '../tissue/tissue.model';
 import { NameValue } from '../utils/name-value.model';
 import { Statics } from '../utils/statics';
 import { Auth } from '../services/auth.service';
-import { Result } from '../utils/result.model';
 import { PatchUtil } from '../utils/patch.model';
 
 @Component({
@@ -132,22 +131,19 @@ export class OncHistoryDetailComponent implements OnInit {
   }
 
   patch(patch: any, index: number): void {
-    this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(// need to subscribe, otherwise it will not send!
-      data => {
-        const result = Result.parse(data);
-        if (result.code === 200 && result.body != null && result.body !== '') {
-          const jsonData: any | any[] = JSON.parse(result.body);
-          if (jsonData instanceof Array) {
-            jsonData.forEach((val) => {
+    this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
+      next: data => {
+        if (data instanceof Array) {
+        data.forEach( ( val ) => {
               const nameValue = NameValue.parse(val);
-              if (nameValue.name === 'createdOncHistory') {
-                this.participant.participant[ 'createdOncHistory' ] = nameValue.value;
+              if (nameValue.name === 'created') {
+                this.participant.participant[ 'created' ] = nameValue.value;
               } else {
                 this.oncHistory[ index ][ nameValue.name ] = nameValue.value;
               }
             });
           } else {
-            this.oncHistory[ index ].oncHistoryDetailId = jsonData.oncHistoryDetailId;
+            this.oncHistory[ index ].oncHistoryDetailId = data['oncHistoryDetailId'];
             if (!this.editable) {
               this.editable = true;
             }
@@ -156,13 +152,13 @@ export class OncHistoryDetailComponent implements OnInit {
               tissue.oncHistoryDetailId = this.oncHistory[ index ].oncHistoryDetailId;
             }
             // set other workflow fieldValue
-            if (jsonData.NameValue != null) {
-              const innerJson: any | any[] = JSON.parse(jsonData.NameValue);
+          if (data['NameValue'] != null) {
+            const innerJson: any | any[] = JSON.parse( data['NameValue'] );
               // should be only needed for setting oncHistoryDetails on pt level to created
               if (innerJson instanceof Array) {
                 innerJson.forEach((val) => {
                   const nameValue = NameValue.parse(val);
-                  if (nameValue.name === 'createdOncHistory') {
+                  if (nameValue.name === 'created') {
                     this.participant.participant[ nameValue.name ] = nameValue.value;
                   } else {
                     this.oncHistory[ index ][ nameValue.name ] = nameValue.value;
@@ -171,17 +167,16 @@ export class OncHistoryDetailComponent implements OnInit {
               }
             }
           }
-        }
         this.patchFinished = true;
         this.currentPatchField = null;
         this.currentPatchFieldRow = null;
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.router.navigate([ Statics.HOME_URL ]);
         }
       }
-    );
+    });
   }
 
   onRequestChange(index: number): void {
@@ -203,14 +198,14 @@ export class OncHistoryDetailComponent implements OnInit {
       }
     }
     if (v !== null) {
-      if (this.oncHistory[ index ].additionalValues != null) {
-        this.oncHistory[ index ].additionalValues[ colName ] = v;
+      if (this.oncHistory[ index ].additionalValuesJson != null) {
+        this.oncHistory[ index ].additionalValuesJson[ colName ] = v;
       } else {
         const addArray = {};
         addArray[ colName ] = v;
-        this.oncHistory[ index ].additionalValues = addArray;
+        this.oncHistory[ index ].additionalValuesJson = addArray;
       }
-      this.valueChanged(this.oncHistory[ index ].additionalValues, 'additionalValues', index);
+      this.valueChanged(this.oncHistory[ index ].additionalValuesJson, 'additionalValuesJson', index);
       if (index === this.oncHistory.length - 1) {
         this.addNewOncHistory(this.oncHistory[ index ].participantId);
       }
@@ -219,8 +214,9 @@ export class OncHistoryDetailComponent implements OnInit {
 
   // display additional value
   getAdditionalValue(index: number, colName: string): string {
-    if (this.oncHistory[ index ].additionalValues != null && this.oncHistory[ index ].additionalValues[ colName ] != null) {
-      return this.oncHistory[ index ].additionalValues[ colName ];
+    const camelCaseColumnName = Utils.convertUnderScoresToCamelCase(colName);
+    if (this.oncHistory[index].additionalValuesJson != null && this.oncHistory[index].additionalValuesJson[camelCaseColumnName] != null) {
+      return this.oncHistory[index].additionalValuesJson[camelCaseColumnName];
     }
     return null;
   }
@@ -230,7 +226,7 @@ export class OncHistoryDetailComponent implements OnInit {
     tissues.push(new Tissue(null, null, null, null, null, null,
       null, null, null, null, null, null, null, null,
       null, null, null, null, null, null, null,
-      null, null, null, null, null, null));
+      null, null, null, null, null, null, null, null, null));
     this.oncHistory.push(new OncHistoryDetail(participantId, null, null, null, null,
       null, null, null, null, null, null, null, null,
       null, null, null, null, null, null, null, null, null,
@@ -251,21 +247,18 @@ export class OncHistoryDetailComponent implements OnInit {
     );
     const patch = patch1.getPatch();
     this.patchFinished = false;
-    this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(// need to subscribe, otherwise it will not send!
-      data => {
-        const result = Result.parse(data);
-        if (result.code === 200) {
-          this.oncHistory.splice(index, 1);
-        }
+    this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
+      next: () => {
+        this.oncHistory.splice( index, 1 );
         this.patchFinished = true;
         this.currentPatchField = null;
       },
-      err => {
+      error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.router.navigate([ Statics.HOME_URL ]);
         }
       }
-    );
+    });
 
     this.triggerReload.next(true);
 
@@ -279,7 +272,7 @@ export class OncHistoryDetailComponent implements OnInit {
       this.oncHistoryDetail = oncHis;
       this.compService.editable = (
         (oncHis.request === 'sent') || (oncHis.request === 'received')
-        || (oncHis.request === 'returned') || (oncHis.request === 'unableToObtain')
+        || (oncHis.request === 'returned') || (oncHis.request === 'unableObtainTissue')
       );
       this.showTissue = true;
       this.openTissue.emit(oncHis);
@@ -292,12 +285,12 @@ export class OncHistoryDetailComponent implements OnInit {
 
   openNoteModal(index: number): void {
     this.indexForNote = index;
-    this.note = this.oncHistory[ this.indexForNote ].oncHisNotes;
+    this.note = this.oncHistory[ this.indexForNote ].notes;
   }
 
   saveNote(): void {
-    this.oncHistory[ this.indexForNote ].oncHisNotes = this.note;
-    this.valueChanged(this.note, 'oncHisNotes', this.indexForNote);
+    this.oncHistory[ this.indexForNote ].notes = this.note;
+    this.valueChanged(this.note, 'notes', this.indexForNote);
   }
 
   setFacility(contact: any, index: number): void {
@@ -306,20 +299,15 @@ export class OncHistoryDetailComponent implements OnInit {
       if (event instanceof MouseEvent) {
         this.oncHistory[ index ].facility = contact.field1.value;
         if (contact.field3 != null) {
-          this.oncHistory[ index ].fPhone = contact.field3.value;
+          this.oncHistory[ index ].phone = contact.field3.value;
         }
         if (contact.field4 != null) {
-          this.oncHistory[ index ].fFax = contact.field4.value;
+          this.oncHistory[ index ].fax = contact.field4.value;
         }
         if (contact.field5 != null) {
           this.oncHistory[ index ].destructionPolicy = contact.field5.value;
         }
-        const nameValues = [ {name: 'oD.facility', value: contact.field1.value}, {
-          name: 'oD.fPhone',
-          value: contact.field3.value
-        }, {
-          name: 'oD.fFax', value: contact.field4.value
-        }, {name: 'oD.destructionPolicy', value: contact.field5.value} ];
+        const nameValues = this.buildFacilityNameValues(contact);
         const patch1 = new PatchUtil(
           this.oncHistory[ index ].oncHistoryDetailId, this.role.userMail(),
           null, nameValues, 'participantId', this.oncHistory[ index ].participantId,
@@ -346,25 +334,42 @@ export class OncHistoryDetailComponent implements OnInit {
     }
   }
 
+  private buildFacilityNameValues(contact: any): Array<NameValue> {
+    const nameValues = [];
+    if (contact.field1.value) {
+      nameValues.push({ name: 'oD.facility', value: contact.field1.value });
+    }
+    if (contact.field3.value) {
+      nameValues.push({ name: 'oD.phone', value: contact.field3.value });
+    }
+    if (contact.field4.value) {
+      nameValues.push({ name: 'oD.fax', value: contact.field4.value });
+    }
+    if (contact.field5.value) {
+      nameValues.push({ name: 'oD.destructionPolicy', value: contact.field5.value });
+    }
+    return nameValues;
+  }
+
   public setTypePx(object: any, index: number): void {
     if (object != null) {
       if (event instanceof MouseEvent) {
         // slow save to make sure value is saved to right value
-        this.oncHistory[ index ].typePX = object.field1.value;
+        this.oncHistory[ index ].typePx = object.field1.value;
         const realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
         const patch1 = new PatchUtil(
           this.oncHistory[ index ].oncHistoryDetailId, this.role.userMail(),
           {
-            name: 'typePX',
+            name: 'typePx',
             value: object.field1.value
           }, null, 'participantId', this.oncHistory[ index ].participantId,
           Statics.ONCDETAIL_ALIAS, null, realm, this.participant.participant.ddpParticipantId
         );
         const patch = patch1.getPatch();
-        this.multipleValueChanged(patch, index, 'typePX');
+        this.multipleValueChanged(patch, index, 'typePx');
       } else {
-        this.oncHistory[ index ].typePX = object;
-        this.valueChanged(this.oncHistory[ index ].typePX, 'typePX', index);
+        this.oncHistory[ index ].typePx = object;
+        this.valueChanged(this.oncHistory[ index ].typePx, 'typePx', index);
       }
     }
   }

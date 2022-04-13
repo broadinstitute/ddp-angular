@@ -85,19 +85,18 @@ describe('CheckboxesActivityPicklistQuestion', () => {
     let component: CheckboxesActivityPicklistQuestion;
     let fixture: ComponentFixture<CheckboxesActivityPicklistQuestion>;
     let debugElement: DebugElement;
-    const ngxTranslateServiceSpy = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
-    ngxTranslateServiceSpy.getTranslation.and.callFake(() => {
-        return of({
-            'SDK.DetailsPlaceholder.PluralForm': 'characters remaining',
-            'SDK.DetailsPlaceholder.SingularForm': 'character remaining'
-        });
-    });
-    const configServiceSpy = jasmine.createSpyObj('ddp.config', ['tooltipIconUrl']);
-    configServiceSpy.tooltipIconUrl.and.callFake(() => {
-        return '/path/';
-    });
+    let ngxTranslateServiceSpy;
+    let configServiceSpy;
 
     beforeEach(() => {
+        ngxTranslateServiceSpy = jasmine.createSpyObj('NGXTranslateService', ['getTranslation']);
+        ngxTranslateServiceSpy.getTranslation.and.callFake(() => of({
+            'SDK.DetailsPlaceholder.PluralForm': 'characters remaining',
+            'SDK.DetailsPlaceholder.SingularForm': 'character remaining'
+        }));
+        configServiceSpy = jasmine.createSpyObj('ddp.config', ['tooltipIconUrl']);
+        configServiceSpy.tooltipIconUrl.and.callFake(() => '/path/');
+
         TestBed.configureTestingModule({
             imports: [
                 MatListModule,

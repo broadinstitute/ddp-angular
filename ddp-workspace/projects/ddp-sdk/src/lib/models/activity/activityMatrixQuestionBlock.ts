@@ -26,11 +26,21 @@ export enum SelectMode {
   Multiple = 'MULTIPLE',
 }
 
-export class ActivityMatrixQuestionBlock extends ActivityQuestionBlock<ActivityMatrixAnswerDto[]> {
+export enum RenderMode {
+  Inline = 'INLINE',
+  Modal = 'MODAL',
+}
+
+export class ActivityMatrixQuestionBlock extends ActivityQuestionBlock<
+  ActivityMatrixAnswerDto[]
+> {
   selectMode: SelectMode;
   questions: Question[] = [];
   options: Option[] = [];
   groups: Group[] = [];
+  renderMode = RenderMode.Inline;
+  openBtnText = 'Open Question'; // Take value from response when backend changes are implemented
+  modalTitle = '';
 
   public get questionType(): QuestionType {
     return QuestionType.Matrix;
@@ -39,7 +49,9 @@ export class ActivityMatrixQuestionBlock extends ActivityQuestionBlock<ActivityM
   hasAnswer(): boolean {
     const stableIdsMap = new Map<string, boolean>();
 
-    this.questions.forEach(question => stableIdsMap.set(question.stableId, false));
+    this.questions.forEach(question =>
+      stableIdsMap.set(question.stableId, false),
+    );
 
     this.answer?.forEach(answer => stableIdsMap.set(answer.rowStableId, true));
 
