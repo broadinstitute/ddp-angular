@@ -1,9 +1,12 @@
 import { ActivityQuestionBlock } from './activityQuestionBlock';
 import { QuestionType } from './questionType';
+import { BooleanRenderMode } from './booleanRenderMode';
+
 
 export class ActivityBooleanQuestionBlock extends ActivityQuestionBlock<boolean> {
     public trueContent: string;
     public falseContent: string;
+    public renderMode: BooleanRenderMode;
 
     constructor() {
         super();
