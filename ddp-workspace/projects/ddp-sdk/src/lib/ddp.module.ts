@@ -218,6 +218,7 @@ import { StudiesServiceAgentService } from './services/serviceAgents/studiesServ
 import { FuncType } from './models/funcType';
 import { ActivityPicklistRemoteAutoCompleteOptionsComponent }
     from './components/activityForm/picklist/activity-picklist-remote-auto-complete-options.component';
+import { PicklistSortingPolicy } from './services/picklistSortingPolicy.service';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter: FuncType<string> = () => sessionService.token;
@@ -346,6 +347,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         InvitationPipe,
         FileAnswerMapperService,
         ParticipantsSearchServiceAgent,
+        PicklistSortingPolicy,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
