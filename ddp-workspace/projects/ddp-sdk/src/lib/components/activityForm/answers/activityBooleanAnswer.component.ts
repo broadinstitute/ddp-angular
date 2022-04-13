@@ -38,7 +38,7 @@ import { BooleanRenderMode } from '../../../models/activity/booleanRenderMode';
                 [checked]="block.answer"
                 [disabled]="readonly"
                 [disableRipple]="true"
-                (change)="onValueChange()"
+                (change)="saveValue($event.checked)"
             >
             </mat-checkbox>
         </ng-container>
@@ -64,10 +64,5 @@ export class ActivityBooleanAnswer {
     public saveValue(value: boolean): void {
         this.block.answer = value;
         this.valueChanged.emit(value);
-    }
-
-    onValueChange(): void {
-        this.block.answer = !this.block.answer;
-        this.valueChanged.emit(this.block.answer);
     }
 }
