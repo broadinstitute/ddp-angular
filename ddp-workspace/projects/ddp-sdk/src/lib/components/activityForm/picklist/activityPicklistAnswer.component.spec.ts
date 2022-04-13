@@ -128,7 +128,7 @@ describe('ActivityPicklistAnswer', () => {
             ...questionBlock,
             question: 'Random question',
             renderMode: 'LIST',
-            selectMode: 'SINGLE'
+            selectMode: 'SINGLE',
         } as ActivityPicklistQuestionBlock;
         fixture.detectChanges();
         const question = debugElement.queryAll(By.css('ddp-activity-radiobuttons-picklist-question'));
