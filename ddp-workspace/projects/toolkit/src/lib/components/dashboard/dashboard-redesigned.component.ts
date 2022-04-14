@@ -16,7 +16,8 @@ import {
     WorkflowServiceAgent,
     UserManagementServiceAgent,
     LoggingService,
-    UserPreferencesComponent
+    UserPreferencesComponent,
+    Participant
 } from 'ddp-sdk';
 import { map, take, filter, switchMap, tap, mergeMap, finalize, catchError, mapTo } from 'rxjs/operators';
 import { combineLatest, forkJoin, Observable, of, Subject } from 'rxjs';
@@ -203,17 +204,19 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
     private getGovernedParticipants(): Observable<DashboardParticipant[]> {
         return this.governedParticipantsAgent.getGovernedStudyParticipants(this.studyGuid)
             .pipe(
-                map((participants) => participants.map(participant =>
+                map((participants: Participant[]) => participants.map(participant =>
                     this.getUserActivitiesForParticipant(participant.userGuid)
-                        .pipe(take(1), map((activities) => ({
-                            userGuid: participant.userGuid,
-                            label: (participant.userProfile.firstName || participant.userProfile.lastName)
-                                ? `${participant.userProfile.firstName} ${participant.userProfile.lastName}`
-                                : '',
-                            activities,
-                        }))))
+                        .pipe(
+                            take(1),
+                            map((activities: ActivityInstance[]) => ({
+                                userGuid: participant.userGuid,
+                                label: (participant.userProfile.firstName || participant.userProfile.lastName)
+                                    ? `${participant.userProfile.firstName} ${participant.userProfile.lastName}`
+                                    : '',
+                                activities,
+                            }))))
                 ),
-                switchMap(participants$ => participants$.length ? forkJoin(...participants$) : of([])),
+                switchMap(participants$ => participants$.length ? forkJoin(participants$) : of([])),
                 switchMap(participants => this.checkAndDeleteAccidentalParticipant(participants)),
                 // assign custom label after filtering out empty users in order to use the correct index
                 map(participants => participants.map((participant, i) => ({
@@ -290,7 +293,8 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
 
         const deleteUserObservableList: Observable<void>[] = accidentalParticipant
             .map((participant) => this.deleteUser(participant.userGuid));
-        return forkJoin(...deleteUserObservableList)
+
+        return forkJoin(deleteUserObservableList)
             // return filtered participants once all deleting requests were done
             .pipe(mapTo(participants.filter(({activities}) => activities.length)));
     }
