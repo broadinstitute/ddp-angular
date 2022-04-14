@@ -22,7 +22,7 @@ export class MailingListService {
 
     nodes.forEach(node => {
       const eventType = 'click';
-      const handler = (e: MouseEvent) => {
+      const handler = (e: MouseEvent): void => {
         e.preventDefault();
 
         this.openDialog();

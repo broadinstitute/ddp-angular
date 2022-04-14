@@ -7,7 +7,7 @@
                 "FAQ": "FAQ",
                 "Physicians": "For Physicians",
                 "MailingList": "Join Mailing List",
-                "Join": "Join the Brugada Project",
+                "Join": "Join",
                 "Login": "Log in",
                 "Dashboard": "Dashboard"
             },
@@ -86,7 +86,7 @@
             "JoinProject": {
                 "Title": "You can help make an impact on the future of research into Brugada syndrome",
                 "Subtitle": "By participating, you can make a critical impact on our understanding of Brugada syndrome.",
-                "Btn": "Join the Brugada Project"
+                "Btn": "Join"
             }
         },
         "About": {
