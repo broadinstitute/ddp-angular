@@ -1,5 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Pipe({
   name: 'extractTranslationPathsForArray',
@@ -13,12 +15,12 @@ import { TranslateService } from '@ngx-translate/core';
  * missing array elements will be shown in english.
  */
 export class ExtractTranslationPathsForArrayPipe implements PipeTransform {
-
   constructor(private _translateService: TranslateService) {
   }
-  async transform(key: string): Promise<any[]> {
-    return await this._translateService.getTranslation('en').toPromise()
-      .then(x => {
+
+  transform(key: string): Observable<string[]> {
+    return this._translateService.getTranslation('en').pipe(
+      map(x => {
         const translations = this.resolve(key, x);
         if (!!translations) {
           const count = translations.length;
@@ -26,7 +28,8 @@ export class ExtractTranslationPathsForArrayPipe implements PipeTransform {
         } else {
           return [];
         }
-      });
+      })
+    );
   }
 
   resolve(path: string, obj: any): any {
