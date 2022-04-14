@@ -44,6 +44,13 @@
     <div *ngIf="getRealm() != null && loadingParticipants === null && participantList != null">
       <div class="Width--15 Float--left">
         <div>
+          <mat-checkbox [checked]="selectAll"
+                        color="primary"
+                        (change)="toggleColumns($event.checked)">
+            {{selectAllColumnsLabel}}
+          </mat-checkbox>
+        </div>
+        <div>
           <button mat-mini-fab [color]="getButtonColorStyle(showFilters)"
                   (click)="showFiltersTable()">
             <!--<i class="fas fa-dataFilter"></i>-->
@@ -381,7 +388,7 @@
                               <ng-container
                                 *ngIf="getUtilStatic().getQuestionDefinition(activityDefinitionList, alias, questionAnswer.stableId, activityData.activityVersion) as qDef">
                                 <div *ngFor="let answer of getUtilStatic().getNiceTextForCSVCompositeType(questionAnswer, qDef ); let i = index">
-                                  {{ answer.includes('|') ? answer.split('|')[1] : answer }}
+                                  {{ answer?.includes('|') ? answer.split('|')[1] : answer }}
                                   <hr *ngIf="i !== questionAnswer.answer.length-1" style="border-color: lightgray">
                                 </div>
                               </ng-container>

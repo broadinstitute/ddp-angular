@@ -181,7 +181,6 @@ export class TissueComponent {
                 this.oncHistoryDetail[nameValue.name] = nameValue.value;
               });
             }
-
           // } else if (result.code === 500 && result.body != null) {
           //   this.dup = true;
           //   if (tAlias === 'sm') {
@@ -220,6 +219,9 @@ export class TissueComponent {
           //   this.patchFinished = true;
           //   this.currentPatchField = null;
           //   this.dup = false;
+          }
+          if (data['smIdPk']) {
+            smIdArray[index].smIdPk = data['smIdPk'];
           }
         },
         error: err => {
@@ -373,7 +375,7 @@ export class TissueComponent {
   deleteSMID( array: TissueSmId[], i: number ): void {
     array[ i ].deleted = true;
     if (array[ i ].smIdPk) {
-      this.changeSmId( '1', 'deleted', array[ i ].smIdPk, array[ i ].smIdType, array, i );
+      this.changeSmId('1', 'deleted', array[ i ].smIdPk, array[ i ].smIdType, array, i );
     }
     if (this.smIdDuplicate[ this.currentSMIDField ].has( this.createDuplicateIndex( i ) )) {
       this.smIdDuplicate[ this.currentSMIDField ].delete( this.createDuplicateIndex( i ) );

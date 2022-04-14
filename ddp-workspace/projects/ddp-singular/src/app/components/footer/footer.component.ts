@@ -10,7 +10,7 @@ import { SessionMementoService } from 'ddp-sdk';
 })
 export class FooterComponent {
   Route = Route;
-  readonly STUDY_PROGRESS_URL = 'https://www.additionalventures.org/project-singular-study-updates';
+  readonly STUDY_PROGRESS_URL = 'https://www.additionalventures.org/initiatives/biomedical-research/foundational-resources/project-singular/';
   readonly CURRENT_YEAR = new Date().getFullYear();
 
   constructor(

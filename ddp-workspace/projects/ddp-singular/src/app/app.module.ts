@@ -38,6 +38,7 @@ import { SuccessMessageDialogComponent } from './components/success-message-dial
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {LoginComponent} from './components/login/login.component';
 import { ActivitySectionProgressBarComponent } from './components/activity-section-progress-bar/activity-section-progress-bar.component';
+import { ActivitySectionPageProgressComponent } from './components/activity-section-page-progress/activity-section-page-progress.component';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import { ActivitySectionProgressBarComponent } from './components/activity-secti
     SuccessMessageComponent,
     SuccessMessageDialogComponent,
     ActivitySectionProgressBarComponent,
+    ActivitySectionPageProgressComponent,
   ],
   imports: [
     DdpModule,

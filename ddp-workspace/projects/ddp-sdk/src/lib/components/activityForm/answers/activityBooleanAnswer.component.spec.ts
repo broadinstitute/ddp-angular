@@ -10,17 +10,19 @@ import { ActivityBooleanAnswer } from './activityBooleanAnswer.component';
 import { QuestionPromptComponent } from './question-prompt/questionPrompt.component';
 import { TooltipComponent } from '../../tooltip.component';
 import { TranslateTestingModule } from '../../../testsupport/translateTestingModule';
+import { BooleanRenderMode } from '../../../models/activity/booleanRenderMode';
 
 describe('ActivityBooleanAnswer', () => {
+    const RENDER_MODE = BooleanRenderMode;
     const questionBlock = {
         answer: null,
         question: 'Are you agree?',
         stableId: 'BOOLEAN_ANSWER',
         trueContent: 'Yes',
-        falseContent: 'No'
+        falseContent: 'No',
+        renderMode: RENDER_MODE.RADIO_BUTTONS,
     } as ActivityBooleanQuestionBlock;
     const mode = false;
-
     @Component({
         template: `
         <ddp-activity-boolean-answer [block]="block"

@@ -188,13 +188,12 @@ export class BuildingFactoryService {
       for(const group of question.groups) {
         if(this.util.isGroupSelected(answer.answer, group)) {
           groupsObject['text'] = group.groupText;
-          if(answer.groupedOptions[group.groupStableId] !== null) {
+          if(answer.groupedOptions[group.groupStableId]) {
             groupsObject['details'] = [];
-            groupsObject['optionText'] = [];
             for(const gAnswer of answer.groupedOptions[group.groupStableId]) {
               if(this.util.getAnswerText(gAnswer, group.options)) {
                 groupsObject['details'].push(this.util.getAnswerText(gAnswer, group.options));
-                groupsObject['optionText'].push(Utils.getOptionDetails(answer.optionDetails, gAnswer));
+                groupsObject['optionText'] = Utils.getOptionDetails(answer.optionDetails, gAnswer);
               }
             }
           } else {

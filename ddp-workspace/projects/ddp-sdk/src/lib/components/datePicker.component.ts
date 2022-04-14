@@ -4,6 +4,7 @@ import { DateService } from '../services/dateService.service';
 import { DatePickerValue } from '../models/datePickerValue';
 import { DateRenderMode } from '../models/activity/dateRenderMode';
 import { FuncType } from '../models/funcType';
+import { InputRestriction } from '../models/InputRestriction';
 
 @Component({
     selector: 'ddp-date',
@@ -15,7 +16,7 @@ import { FuncType } from '../models/funcType';
             <mat-form-field class="two-char-input" *ngIf="dateField === 'MM'" [floatLabel]="floatLabelType()">
               <mat-label *ngIf="label" [innerHTML]="label && fieldIdx === 0 ? label : ('')"></mat-label>
               <input matInput
-                     appInputRestriction="integer"
+                     [appInputRestriction]="InputRestriction.Digits"
                      [placeholder]="placeholder && dateFields.length === 1 ? placeholder : ('SDK.DateLabel.MM' | translate)"
                      size="3"
                      maxlength="2"
@@ -31,7 +32,7 @@ import { FuncType } from '../models/funcType';
             <mat-form-field class="two-char-input" *ngIf="dateField === 'DD'" [floatLabel]="floatLabelType()">
               <mat-label *ngIf="label" [innerHTML]="label && fieldIdx === 0 ? label : ('')"></mat-label>
               <input matInput
-                     appInputRestriction="integer"
+                     [appInputRestriction]="InputRestriction.Digits"
                      [placeholder]="placeholder && dateFields.length === 1 ? placeholder : ('SDK.DateLabel.DD' | translate)"
                      size="3"
                      maxlength="2"
@@ -47,7 +48,7 @@ import { FuncType } from '../models/funcType';
             <mat-form-field class="four-char-input" *ngIf="dateField === 'YYYY'" [floatLabel]="floatLabelType()">
               <mat-label *ngIf="label" [innerHTML]="label && fieldIdx === 0 ? label : ('')"></mat-label>
               <input matInput
-                     appInputRestriction="integer"
+                     [appInputRestriction]="InputRestriction.Digits"
                      [placeholder]="(placeholder && dateFields.length === 1) ? placeholder : ('SDK.DateLabel.YYYY' | translate)"
                      size="5"
                      maxlength="4"
@@ -201,6 +202,7 @@ export class DatePickerComponent implements OnChanges {
     public selectedMonth: string;
     public selectedDay: string;
     public selectedYear: string;
+    InputRestriction = InputRestriction;
     @Input() label: string;
     @Input() readonly: boolean;
     @Input() placeholder: string;
