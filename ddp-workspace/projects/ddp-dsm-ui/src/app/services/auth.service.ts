@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
-  throwError as observableThrowError,
+  throwError,
   Subject,
   Subscription, Observable
 } from 'rxjs';
@@ -177,7 +177,7 @@ export class Auth {
     const errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     console.error(errMsg); // log to console instead
-    return observableThrowError(errMsg);
+    return throwError(() => new Error(errMsg));
   }
 
   private redirect(): void {
