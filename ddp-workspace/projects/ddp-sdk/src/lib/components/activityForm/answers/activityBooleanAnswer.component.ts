@@ -6,7 +6,8 @@ import { BooleanRenderMode } from '../../../models/activity/booleanRenderMode';
     selector: 'ddp-activity-boolean-answer',
     template: `
         <ddp-question-prompt [block]="block"></ddp-question-prompt>
-        <ng-container *ngIf="block.renderMode === RENDER_MODE.RADIO_BUTTONS">
+        <ng-container *ngIf="block.renderMode === RENDER_MODE.CHECKBOX; then checkbox else defaultRadio"></ng-container>
+        <ng-template #defaultRadio>
             <mat-radio-group
                 class="example-radio-group"
                 [(ngModel)]="block.answer"
@@ -32,8 +33,8 @@ import { BooleanRenderMode } from '../../../models/activity/booleanRenderMode';
                     <div [innerHTML]="block.falseContent"></div>
                 </mat-radio-button>
             </mat-radio-group>
-        </ng-container>
-        <ng-container *ngIf="block.renderMode === RENDER_MODE.CHECKBOX">
+        </ng-template>
+        <ng-template #checkbox>
             <mat-checkbox
                 [checked]="block.answer"
                 [disabled]="readonly"
@@ -41,7 +42,7 @@ import { BooleanRenderMode } from '../../../models/activity/booleanRenderMode';
                 (change)="saveValue($event.checked)"
             >
             </mat-checkbox>
-        </ng-container>
+        </ng-template>
     `,
     styles: [
         `

@@ -6,7 +6,7 @@ import { BooleanRenderMode } from './booleanRenderMode';
 export class ActivityBooleanQuestionBlock extends ActivityQuestionBlock<boolean> {
     public trueContent: string;
     public falseContent: string;
-    public renderMode: BooleanRenderMode;
+    public renderMode?: BooleanRenderMode;
 
     constructor() {
         super();
