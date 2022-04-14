@@ -10,8 +10,7 @@ import {
   ConfigurationService,
   AnalyticsEventsService,
   AnalyticsEvent,
-  LoggingService,
-  PicklistSortingPolicy
+  LoggingService
 } from 'ddp-sdk';
 
 import {
@@ -166,8 +165,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
         LoggingService
       ],
       multi: true
-    },
-    PicklistSortingPolicy
+    }
   ],
   bootstrap: [AppComponent]
 })
