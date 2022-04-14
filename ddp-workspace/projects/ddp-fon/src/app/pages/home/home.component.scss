@@ -1,6 +1,11 @@
 @import '../../../styles/colors';
 @import '../../../styles/breakpoints';
 
+
+:host {
+  flex: 1;
+}
+
 .cta {
   position: relative;
 
@@ -310,6 +315,11 @@
 }
 
 .join-project {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   padding: 14rem 0 16rem;
 
   background: map-get($colors, 'dark-grey');
