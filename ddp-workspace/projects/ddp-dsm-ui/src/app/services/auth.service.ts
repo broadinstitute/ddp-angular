@@ -180,7 +180,7 @@ export class Auth {
 
   private redirect(): void {
     if (this.role.allowedToViewMedicalRecords()) {
-      this.router.navigate([ Statics.MEDICALRECORD_DASHBOARD_URL ]);
+      // this.router.navigate([ Statics.MEDICALRECORD_DASHBOARD_URL ]);
     } else {
       if (this.role.allowedToHandleSamples() || this.role.allowToViewSampleLists()) {
         this.router.navigate([ Statics.SHIPPING_DASHBOARD_URL ], {queryParams: {target: Statics.UNSENT}});
