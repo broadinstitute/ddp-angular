@@ -23,4 +23,6 @@ export class FaqComponent implements OnInit {
     this.phoneHref = `tel:${this.toolkitConfiguration.phone}`;
     this.headerConfig.setupDefaultHeader();
   }
+
+
 }
