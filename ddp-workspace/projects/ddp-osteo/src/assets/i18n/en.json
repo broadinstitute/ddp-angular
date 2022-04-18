@@ -33,8 +33,10 @@
             "Home": "Home",
             "FAQ": "FAQs",
             "AboutUs": "About Us",
-            "ForPhysicians": "For Physicians",
-            "Dashboard": "Dashboard"
+            "ForPhysicians": "For Your Physician",
+            "Dashboard": "Dashboard",
+            "Participation": "Participation",
+            "ScientificImpact": "Scientific Impact"
         }
     },
     "Header": {
