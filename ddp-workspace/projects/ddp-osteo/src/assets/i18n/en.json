@@ -3,7 +3,8 @@
         "Buttons": {
             "CountMeIn": "Count Me In",
             "LearnMore": "Learn More",
-            "FAQ": "View more FAQs",
+            "LearnMoreAboutParticipating": "Learn More About Participating",
+            "FAQ": "View More FAQs",
             "VisitFAQ": "Visit FAQ",
             "ReturnHome": "Return home",
             "Submit": {
@@ -122,6 +123,10 @@
                 "Text": "This will accelerate the ability of researchers to make discoveries.",
                 "ImageAlt": "Heart"
             },
+            "Step4": {
+                "Text": "In some cases, we may be able to share learning from the genomic sequencing of your samples back with you.",
+                "ImageAlt": "People"
+            },
             "NextStepArrowAlt": "Next step arrow"
         },
         "HelpSection": {
@@ -145,7 +150,9 @@
             "Opt-inToList": {
                 "Title": "You may also opt-in to:",
                 "Option1": "sharing a blood sample",
-                "Option2": "allowing the team to request a portion of tumor tissue (if available)"
+                "Option2": "allowing the team to request a portion of tumor tissue (if available)",
+                "Option3": "receiving information about what we've learned from the genomic sequencing of your / your child's tumor sample (if we are able to send these to you)",
+                "Option4": "providing an additional saliva sample to learn more about your/your child's normal DNA with the help of a genetic counselor"
             },
             "ClosingText": {
                 "Part1": "We will do the rest",

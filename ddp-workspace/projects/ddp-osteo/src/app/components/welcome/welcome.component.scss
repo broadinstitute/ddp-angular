@@ -54,7 +54,7 @@
 
 .steps {
     display: grid;
-    grid-template-columns: 2fr 1fr 2fr 1fr 2fr;
+    grid-template-columns: 2fr 1fr 2fr 1fr 2fr 1fr 2fr;
 }
 
 .step {
@@ -67,18 +67,22 @@
 
 .step__img {
     background-color: white;
-    height: 210px;
-    width: 210px;
+    height: 170px;
+    width: 170px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
+
+    img {
+        max-width: 100%;
+    }
 }
 
 .arrow {
     display: flex;
     align-items: baseline;
     justify-content: center;
-    margin-top: 6.5625rem;
+    margin-top: 5rem;
 }
 
 .help-section {
@@ -93,6 +97,11 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 4rem;
+}
+
+.more-details-container {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .media-block {

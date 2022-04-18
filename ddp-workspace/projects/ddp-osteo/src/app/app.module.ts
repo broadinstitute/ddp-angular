@@ -72,9 +72,9 @@ tkCfg.familyHistoryThankYouUrl = 'family-history-thank-you';
 tkCfg.mailingListDialogUrl = 'updates';
 tkCfg.phone = '651-602-2020';
 tkCfg.infoEmail = 'info@osproject.org';
-tkCfg.twitterAccountId = 'the_osproject';
-tkCfg.facebookGroupId = 'osteosarcomaproject';
-tkCfg.instagramId = 'the_osproject';
+tkCfg.twitterAccountId = 'count_me_in';
+tkCfg.facebookGroupId = 'joincountmein';
+tkCfg.instagramId = 'countmein';
 // to configure feed, go to: https://lightwidget.com/widget-info/814feee04df55de38ec37791efea075e
 // need Instagram credentials for @osteosarcomaproject
 tkCfg.lightswitchInstagramWidgetId = '814feee04df55de38ec37791efea075e';
