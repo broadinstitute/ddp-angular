@@ -345,6 +345,7 @@
                         ]
                     },
                     {
+                        "Id": "participationBenefits",
                         "Question": "Are there any benefits that participants receive for participating?",
                         "Paragraphs": [
                             "<a id='Pbenefits'>While there are no explicit benefits that individuals receive for enrolling in the OSproject, the project offers some optional opportunities to become more involved that may be of interest to participants looking to learn more about the samples they provide.</a>",
@@ -440,7 +441,14 @@
                         "Paragraphs": [
                             "If you signed up for the OS project before 2022, there are new, optional opportunities to become more involved if you would like, including:<br><span>&#8226; <b>Responding to additional surveys  </b></span><br><span>&#8226; <b>Receiving information about what we learned from your/your child’s tumor sequencing,  </b></span><br><span>&#8226; <b>Learning more about your/your child’s normal DNA.  </b></span>",
                             "If your child remains in the study when they reach the age of consenting for themselves, the project team will contact them to re-consent to the study. We will contact you to get your child’s contact information. If your child consents, the project team will continue to request medical records and tissue samples from any point in your child’s osteosarcoma treatment.",
-                            "For more details on the new opportunities, see the FAQ <a  class=\"Link\" href=\"/more-details#Pbenefits\"> test1</a>",
+                            [
+                                "For more details on the new opportunities, see the FAQ",
+                                {
+                                    "itemIdToScrollTo": "participationBenefits",
+                                    "type": "link",
+                                    "content": "“Are there any benefits that participants receive for participating?“"
+                                }
+                            ],
                             "To take part in these activities, please log into your dashboard to sign additional consent forms and provide updates to your/your child’s participation. If you have any questions, please reach out to the study team at info@osproject.org or 651-602-2020."
                         ]
                     }
