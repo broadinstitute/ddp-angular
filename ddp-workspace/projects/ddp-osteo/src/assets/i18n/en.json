@@ -201,7 +201,8 @@
         },
         "CMISection": {
             "Paragraph1": "is stewarded by the Broad Institute of MIT and Harvard, the Dana-Farber Cancer Institute and Emerson Collective.",
-            "Paragraph2": "The Osteosarcoma Project has been designed and implemented collaboratively with osteosarcoma patients, advocates, caregivers, loved ones, cancer researchers, and clinicians."
+            "Paragraph2": "Count Me In's Osteosarcoma(OS) Project is supported by a grant from the National Cancer Institute's Cancer Moonshot program and is partS of the Participant Engagement and Cancer Genome Sequencing(PE-CGS)Network of research centers.",
+            "Paragraph3": "The Osteosarcoma Project has been designed and implemented collaboratively with osteosarcoma patients, advocates, caregivers, loved ones, cancer researchers, and clinicians."
         },
         "PACSection": {
             "Title": "Project Advisory Council",
@@ -249,15 +250,14 @@
             "Title": "Scientific Advisory Council",
             "Members": [
                 {
-                    "Name": "Katherine Janeway",
+                    "Name": "Megan Anderson",
                     "Affiliations": [
-                        "Dana-Farber Cancer Institute",
                         "Boston Children’s Hospital",
                         "Harvard Medical School"
                     ],
-                    "Url": "http://www.danafarberbostonchildrens.org/finddoctor/details.aspx?ID=29736",
-                    "Image": "assets/images/SAC-Katherine-Janeway.jpg",
-                    "Alt": "Katherine Janeway photo"
+                    "Url": "",
+                    "Image": "assets/images/Anderson.jpg",
+                    "Alt": "Megan Anderson photo"
                 },
                 {
                     "Name": "Brian Crompton",
@@ -272,42 +272,69 @@
                     "Alt": "Brian Crompton photo"
                 },
                 {
-                    "Name": "Alejandro Sweet-Cordero",
+                    "Name": "Suzanne George",
                     "Affiliations": [
-                        "UCSF",
-                        "Helen Diller Family Comprehensive Cancer Center"
-                    ],
-                    "Url": "https://cancer.ucsf.edu/people/profiles/sweetcordero_alejandro.8106",
-                    "Image": "assets/images/SAC-Alejandro-Sweet-Cordero.jpg",
-                    "Alt": "Alejandro Sweet-Cordero photo"
-                },
-                {
-                    "Name": "Richard Gorlick",
-                    "Affiliations": [
-                        "The University of Texas MD Anderson Cancer Center"
-                    ],
-                    "Url": "https://faculty.mdanderson.org/profiles/richard_gorlick.html",
-                    "Image": "assets/images/SAC-Richard-Gorlick.jpg",
-                    "Alt": "Richard Gorlick photo"
-                },
-                {
-                    "Name": "David Malkin",
-                    "Affiliations": [
-                        "The Hospital for Sick Children",
-                        "University of Toronto"
-                    ],
-                    "Url": "http://www.sickkids.ca/AboutSickKids/Directory/People/M/David-Malkin-staff-profile.html",
-                    "Image": "assets/images/SAC-David-Malkin.jpg",
-                    "Alt": "David Malkin photo"
-                },
-                {
-                    "Name": "Nathalie Gaspar",
-                    "Affiliations": [
-                        "Institut Gustave Roussy"
+                        "Dana-Farber Cancer Institute",
+                        "Harvard Medical School"
                     ],
                     "Url": "",
-                    "Image": "assets/images/SAC-Nathalie-Gaspar.jpg",
-                    "Alt": "Nathalie Gaspar photo"
+                    "Image": "assets/images/George.jpg",
+                    "Alt": "Suzanne George photo"
+                },
+                {
+                    "Name": "Candace Haddox",
+                    "Affiliations": [
+                        "Dana-Farber Cancer Institute"
+                    ],
+                    "Url": "",
+                    "Image": "assets/images/Haddox.jpg",
+                    "Alt": "Candace Haddox photo"
+                },
+                {
+                    "Name": "Priscilla Merriam",
+                    "Affiliations": [
+                        "Dana-Farber Cancer Institute",
+                        "Harvard Medical School"
+                    ],
+                    "Url": "",
+                    "Image": "assets/images/Merriam.jpg",
+                    "Alt": "Priscilla Merriam photo"
+                },
+                {
+                    "Name": "Michael Nathenson",
+                    "Affiliations": [
+                        "Brigham and Women’s Hospital",
+                        "Dana-Farber Cancer Institute",
+                        "Harvard Medical School"
+
+                    ],
+                    "Url": "",
+                    "Image": "assets/images/Nathenson.jpg",
+                    "Alt": "Michael Nathenson photo"
+                },
+                {
+                    "Name": "Jay Oza",
+                    "Affiliations": [
+                        "Dana-Farber Cancer Institute",
+                        "Harvard Medical School"
+
+                    ],
+                    "Url": "",
+                    "Image": "assets/images/Oza.jpg",
+                    "Alt": "Jay Oza photo"
+                },
+                {
+                    "Name": "Chandrajit Raut",
+                    "Affiliations": [
+                        "Brigham and Women’s Hospital",
+                        "Dana-Farber Cancer Institute",
+                        "Harvard Medical School"
+                        
+
+                    ],
+                    "Url": "",
+                    "Image": "assets/images/Raut.jpg",
+                    "Alt": "Chandrajit Raut photo"
                 }
             ]
         },
