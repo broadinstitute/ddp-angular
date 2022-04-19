@@ -347,7 +347,7 @@
         "IntroText": {
             "Paragraph1": "As part of the OSproject, patients contribute their experiences, clinical information, and samples to make data freely available for any OS researchers. By generating the most comprehensive dataset for OS, the entire cancer research community can make discoveries that can lead to a better understanding of the disease and changes for future treatments. The project is part of Count Me In, a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research. The project also works in collaboration with a growing coalition of nonprofit advocacy partners.",
             "Paragraph2": {
-                "Part1": "This project has been built with the guidance and input of many different members of the osteosarcoma community. Below we have answered some general questions about this project, as well as questions that are specific to different members of the community - please read any and all that may apply. If you have any questions, please feel free to reach out to us at",
+                "Part1": "This project has been built with the guidance and input of many different members of the OS community. Below we have answered some general questions about this project, as well as questions that are specific to different members of the community - please read any and all that may apply. If you have any questions, please feel free to reach out to us at",
                 "Part2": "or by phone at"
             }
         },
@@ -416,10 +416,17 @@
                     {
                         "Question": "Is this study a clinical trial?",
                         "Paragraphs": [
-                            "This study is not a clinical trial. A <a class=\"Link\" href=\"https://www.cancer.gov/publications/dictionaries/cancer-terms/def/clinical-trial\" target=\"_blank\"> clinical trial</a> is “a type of research study that tests how well new medical approaches work in people. These studies test new methods of screening, prevention, diagnosis, or treatment of a disease.",
+                            "This study is not a clinical trial. A <a class=\"Link\" href=\"https://www.cancer.gov/publications/dictionaries/cancer-terms/def/clinical-trial\" target=\"_blank\"> clinical trial</a> is “a type of research study that tests how well new medical approaches work in people. These studies test new methods of screening, prevention, diagnosis, or treatment of a disease“.",
                             "Participation in the OSproject will not have any impact on the participant’s course of care for osteosarcoma. We are not permitted to give any clinical advice as part of participation in this project. The testing we are performing is for research and may not provide information about a participant’s tumor that would lead to changes in their care and treatment plan.",
-                            "If participants elect to share tumor samples with the project and we are able to successfully sequence sample(s), we  will share what we’ve learned from tumor sequencing with participants. When a participant consents to the study, they will be able to choose whether or not to receive this information. An example of what this information could look like can be found here.",
-                            "In some cases, we may not be able to share what we’ve learned from tumor sequencing with participants. Because of regulatory restrictions, we are unable to share results with participants living in or samples from institutions in New York and Canada. More details on NY state restrictions can be <a class=\"Link\" href=\"https://www.wadsworth.org/regulatory/clep/clinical-labs\" target=\"_blank\"> found here</a>. "
+                            [
+                                "If participants elect to share tumor samples with the project and we are able to successfully sequence sample(s), we  will share what we’ve learned from tumor sequencing with participants. When a participant consents to the study, they will be able to choose whether or not to receive this information. An example of what this information could look like can be found",
+                                {
+                                    "type": "link",
+                                    "href": "./somatic_shared_learnings_letter.pdf",
+                                    "content": "here."
+                                }
+                            ],
+                            "In some cases, we may not be able to share what we’ve learned from tumor sequencing with participants. Because of regulatory restrictions, we are unable to share results with participants living in or samples from institutions in New York and Canada. More details on NY state restrictions can be found <a class='Link' href='https://www.wadsworth.org/regulatory/clep/clinical-labs' target='_blank'>here</a>."
                         ]
                     },
                     {
@@ -467,7 +474,6 @@
                         "Question": "What if I or my child signed up for the OS project before 2022?",
                         "Paragraphs": [
                             "If you signed up for the OS project before 2022, there are new, optional opportunities to become more involved if you would like, including:<br><span>&#8226; <b>Responding to additional surveys  </b></span><br><span>&#8226; <b>Receiving information about what we learned from your/your child’s tumor sequencing,  </b></span><br><span>&#8226; <b>Learning more about your/your child’s normal DNA.  </b></span>",
-                            "If your child remains in the study when they reach the age of consenting for themselves, the project team will contact them to re-consent to the study. We will contact you to get your child’s contact information. If your child consents, the project team will continue to request medical records and tissue samples from any point in your child’s osteosarcoma treatment.",
                             [
                                 "For more details on the new opportunities, see the FAQ",
                                 {
@@ -494,7 +500,7 @@
                     {
                         "Question": "Can I provide access to medical records and tissue on behalf of someone who passed away? ",
                         "Paragraphs": [
-                            "The OSProject cannot currently obtain medical records or tissue samples for individuals who have passed away. We are exploring future plans for next-of-kin process, but this will take time to develop. Through the Loved Ones survey, you may choose to opt-in to be re-contacted by the study if a process is developed to enable this."
+                            "The OSProject cannot currently obtain medical records or tissue samples for individuals who have passed away. We are exploring future plans for a next-of-kin process, but this will take time to develop. Through the Loved Ones survey, you may choose to opt-in to be re-contacted by the study if a process is developed to enable this."
                         ]
                     }
                 ]

@@ -42,11 +42,20 @@
                                                 <span *ngIf="isText(item); else objectItem">{{item}}</span>
 
                                                 <ng-template #objectItem>
-                                                    <a *ngIf="isLinkItem(item.type)"
-                                                        (click)="!!item.itemIdToScrollTo && expandAndScrollTo(item.itemIdToScrollTo)"
-                                                        class="Link">
-                                                        {{item.content}}
-                                                    </a>
+                                                    <ng-container *ngIf="isLinkItem(item.type) && item.itemIdToScrollTo; then scrollLink else regularLink"></ng-container>
+
+                                                    <ng-template #scrollLink>
+                                                        <a (click)="expandAndScrollTo(item.itemIdToScrollTo)"
+                                                            class="Link">
+                                                            {{item.content}}
+                                                        </a>
+                                                    </ng-template>
+
+                                                    <ng-template #regularLink>
+                                                        <a class="Link" [href]="item.href" target='_blank'>
+                                                            {{item.content}}
+                                                        </a>
+                                                    </ng-template>
                                                 </ng-template>
                                             </ng-container>
                                         </p>
