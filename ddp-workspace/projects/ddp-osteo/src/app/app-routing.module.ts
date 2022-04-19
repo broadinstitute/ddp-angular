@@ -31,6 +31,8 @@ import {
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { FaqComponent } from './components/faq/faq.component';
+import { ParticipationComponent } from './components/participation/participation.component';
+import { ScientificImpactComponent } from './components/scientific-impact/scientific-impact.component';
 
 const routes: Routes = [
     {
@@ -184,6 +186,16 @@ const routes: Routes = [
         component: AboutUsComponent,
         canActivate: [IrbGuard]
     },
+    {
+        path: 'participation',
+        component: ParticipationComponent,
+        canActivate: [IrbGuard]
+    },
+    {
+        path: 'scientific-impact',
+        component: ScientificImpactComponent,
+        canActivate: [IrbGuard]
+    },    
     {
         path: 'error',
         component: ErrorRedesignedComponent
