@@ -194,7 +194,8 @@
         },
         "CMISection": {
             "Paragraph1": "is stewarded by the Broad Institute of MIT and Harvard, the Dana-Farber Cancer Institute and Emerson Collective.",
-            "Paragraph2": "The Osteosarcoma Project has been designed and implemented collaboratively with osteosarcoma patients, advocates, caregivers, loved ones, cancer researchers, and clinicians."
+            "Paragraph2": "Count Me In's Osteosarcoma(OS) Project is supported by a grant from the National Cancer Institute's Cancer Moonshot program and is partS of the Participant Engagement and Cancer Genome Sequencing(PE-CGS)Network of research centers.",
+            "Paragraph3": "The Osteosarcoma Project has been designed and implemented collaboratively with osteosarcoma patients, advocates, caregivers, loved ones, cancer researchers, and clinicians."
         },
         "PACSection": {
             "Title": "Project Advisory Council",
@@ -302,6 +303,96 @@
                     "Image": "assets/images/SAC-Nathalie-Gaspar.jpg",
                     "Alt": "Nathalie Gaspar photo"
                 }
+            ]
+        },
+        "CCSection": {
+            "Title": "Clinical Champions",
+            "Members": [
+                {
+                    "Name": "Megan Anderson",
+                    "Affiliations": [
+                        "Boston Children’s Hospital",
+                        "Harvard Medical School"
+                    ],
+                    "Url": "",
+                    "Image": "assets/images/Anderson.jpg",
+                    "Alt": "Megan Anderson photo"
+                },
+                {
+                    "Name": "Brian Crompton",
+                    "Affiliations": [
+                        "Dana-Farber Cancer Institute",
+                        "Boston Children’s Hospital",
+                        "Harvard Medical School",
+                        "Broad Institute of MIT and Harvard"
+                    ],
+                    "Url": "http://research.danafarberbostonchildrens.org/crompton/people/",
+                    "Image": "assets/images/SAC-Brian-Crompton.jpg",
+                    "Alt": "Brian Crompton photo"
+                },
+                {
+                    "Name": "Suzanne George",
+                    "Affiliations": [
+                        "Dana-Farber Cancer Institute",
+                        "Harvard Medical School"
+                    ],
+                    "Url": "",
+                    "Image": "assets/images/George.jpg",
+                    "Alt": "Suzanne George photo"
+                },
+                {
+                    "Name": "Candace Haddox",
+                    "Affiliations": [
+                        "Dana-Farber Cancer Institute"
+                    ],
+                    "Url": "",
+                    "Image": "assets/images/Haddox.jpg",
+                    "Alt": "Candace Haddox photo"
+                },
+                {
+                    "Name": "Priscilla Merriam",
+                    "Affiliations": [
+                        "Dana-Farber Cancer Institute",
+                        "Harvard Medical School"
+                    ],
+                    "Url": "",
+                    "Image": "assets/images/Merriam.jpg",
+                    "Alt": "Priscilla Merriam photo"
+                },
+                {
+                    "Name": "Michael Nathenson",
+                    "Affiliations": [
+                        "Brigham and Women’s Hospital",
+                        "Dana-Farber Cancer Institute",
+                        "Harvard Medical School"
+                    ],
+                    "Url": "",
+                    "Image": "assets/images/Nathenson.jpg",
+                    "Alt": "Michael Nathenson photo"
+                },
+                {
+                    "Name": "Jay Oza",
+                    "Affiliations": [
+                        "Dana-Farber Cancer Institute",
+                        "Harvard Medical School"
+
+                    ],
+                    "Url": "",
+                    "Image": "assets/images/Oza.jpg",
+                    "Alt": "Jay Oza photo"
+                },
+                {
+                    "Name": "Chandrajit Raut",
+                    "Affiliations": [
+                        "Brigham and Women’s Hospital",
+                        "Dana-Farber Cancer Institute",
+                        "Harvard Medical School"
+                    ],
+                    "Url": "",
+                    "Image": "assets/images/Raut.jpg",
+                    "Alt": "Chandrajit Raut photo"
+                }
+                
             ]
         },
         "LearnMoreSection": {
