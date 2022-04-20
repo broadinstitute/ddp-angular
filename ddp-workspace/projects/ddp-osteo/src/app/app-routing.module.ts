@@ -9,7 +9,6 @@ import {
 } from 'ddp-sdk';
 
 import {
-    ActivityRedesignedComponent,
     ActivityPageRedesignedComponent,
     DashboardRedesignedComponent,
     LoginLandingRedesignedComponent,
@@ -31,6 +30,7 @@ import {
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { FaqComponent } from './components/faq/faq.component';
+import { ActivityPageComponent } from './components/activity-page/activity-page.component';
 
 const routes: Routes = [
     {
@@ -145,7 +145,7 @@ const routes: Routes = [
     },
     {
         path: 'activity/:id',
-        component: ActivityRedesignedComponent,
+        component: ActivityPageComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
@@ -154,7 +154,7 @@ const routes: Routes = [
     },
     {
         path: 'activity-link/:id',
-        component: ActivityRedesignedComponent,
+        component: ActivityPageComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,
