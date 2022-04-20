@@ -21,5 +21,25 @@
                  [src]="'assets/images/step' + (i+1) + '_big.png'"
                  [alt]="step.ImageAlt">
         </div>
-    </section>
-</main>
+    </section> 
+
+    <h2 class="title static-page-title" translate>BenefitsParticipation.Title</h2>
+    <section *ngFor="let step of 'BenefitsParticipation.Participations' | translate; let i = index;" class="step">
+        <div class="step__data">
+
+            <h2 class="step__step">{{step.step}}</h2>
+            <p class="step__text">{{step.Text}}</p>
+
+            <a mat-stroked-button *ngIf="step.Button && stepsHref[i]"
+               target="_blank"
+               [href]="stepsHref[i]"
+               class="step__btn button button_small small-letter-spacing button_secondary">
+                {{step.Button}}
+            </a>
+        </div>
+        <div class="step__image">
+            <img class="image"
+                 [src]="'assets/images/pic' + (i+1) + '_big.png'"
+                 [alt]="step.ImageAlt">
+        </div>
+   
