@@ -138,18 +138,16 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     }
 
     onValueSelect(value: ActivityPicklistOption): void {
-        this.block.answer = value
-            ? [
-                  {
-                      stableId: value.stableId,
-                      detail:
-                          value.allowDetails === true
-                              ? value.optionLabel
-                              : null,
-                  },
-              ]
-            : [];
-        this.valueChanged.emit([...this.block.answer]);
+        if (value.stableId) {
+            this.block.answer = [
+                {
+                    stableId: value.stableId,
+                    detail:
+                        value.allowDetails === true ? value.optionLabel : null,
+                },
+            ];
+            this.valueChanged.emit([...this.block.answer]);
+        }
     }
 
     getInitialAnswerOptionLabel(): string {

@@ -14,6 +14,7 @@ import { NameValue } from '../utils/name-value.model';
 import { Statics } from '../utils/statics';
 import { Auth } from '../services/auth.service';
 import { PatchUtil } from '../utils/patch.model';
+import { Lookup } from '../lookup/lookup.model';
 
 @Component({
   selector: 'app-onc-history-detail',
@@ -293,10 +294,10 @@ export class OncHistoryDetailComponent implements OnInit {
     this.valueChanged(this.note, 'notes', this.indexForNote);
   }
 
-  setFacility(contact: any, index: number): void {
+  setFacility(contact: Lookup | string, index: number): void {
     const realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     if (contact != null) {
-      if (event instanceof MouseEvent) {
+      if (contact instanceof Lookup) {
         this.oncHistory[ index ].facility = contact.field1.value;
         if (contact.field3 != null) {
           this.oncHistory[ index ].phone = contact.field3.value;
@@ -307,12 +308,7 @@ export class OncHistoryDetailComponent implements OnInit {
         if (contact.field5 != null) {
           this.oncHistory[ index ].destructionPolicy = contact.field5.value;
         }
-        const nameValues = [ {name: 'oD.facility', value: contact.field1.value}, {
-          name: 'oD.phone',
-          value: contact.field3.value
-        }, {
-          name: 'oD.fax', value: contact.field4.value
-        }, {name: 'oD.destructionPolicy', value: contact.field5.value} ];
+        const nameValues = this.buildFacilityNameValues(contact);
         const patch1 = new PatchUtil(
           this.oncHistory[ index ].oncHistoryDetailId, this.role.userMail(),
           null, nameValues, 'participantId', this.oncHistory[ index ].participantId,
@@ -339,9 +335,26 @@ export class OncHistoryDetailComponent implements OnInit {
     }
   }
 
-  public setTypePx(object: any, index: number): void {
+  private buildFacilityNameValues(contact: any): Array<NameValue> {
+    const nameValues = [];
+    if (contact.field1.value) {
+      nameValues.push({ name: 'oD.facility', value: contact.field1.value });
+    }
+    if (contact.field3.value) {
+      nameValues.push({ name: 'oD.phone', value: contact.field3.value });
+    }
+    if (contact.field4.value) {
+      nameValues.push({ name: 'oD.fax', value: contact.field4.value });
+    }
+    if (contact.field5.value) {
+      nameValues.push({ name: 'oD.destructionPolicy', value: contact.field5.value });
+    }
+    return nameValues;
+  }
+
+  public setTypePx(object: Lookup | string, index: number): void {
     if (object != null) {
-      if (event instanceof MouseEvent) {
+      if (object instanceof Lookup) {
         // slow save to make sure value is saved to right value
         this.oncHistory[ index ].typePx = object.field1.value;
         const realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
@@ -362,9 +375,9 @@ export class OncHistoryDetailComponent implements OnInit {
     }
   }
 
-  public setHistology(object: any, index: number): void {
+  public setHistology(object: Lookup | string, index: number): void {
     if (object != null) {
-      if (event instanceof MouseEvent) {
+      if (object instanceof Lookup) {
         // slow save to make sure value is saved to right value
         this.oncHistory[ index ].histology = object.field1.value;
         const realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);

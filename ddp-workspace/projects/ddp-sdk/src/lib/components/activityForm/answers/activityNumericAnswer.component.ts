@@ -10,6 +10,7 @@ import { NumericAnswerType } from '../../../models/activity/numericAnswerType';
 import { DecimalAnswer } from '../../../models/activity/decimalAnswer';
 import { AbstractActivityQuestionBlock } from '../../../models/activity/abstractActivityQuestionBlock';
 import { DecimalHelper } from '../../../utility/decimalHelper';
+import { InputRestriction } from '../../../models/InputRestriction';
 
 @Component({
     selector: 'ddp-activity-numeric-answer',
@@ -19,6 +20,7 @@ import { DecimalHelper } from '../../../utility/decimalHelper';
         <mat-label *ngIf="block.label" [innerHTML]="block.label"></mat-label>
         <input matInput
                type="number"
+               [appInputRestriction]="isIntegerQuestion ? InputRestriction.Integer : ''"
                [formControl]="numericField"
                [min]="block.min"
                [max]="block.max"
@@ -39,6 +41,7 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
     @Input() readonly: boolean;
     @Output() valueChanged: EventEmitter<NumericAnswerType> = new EventEmitter();
     public numericField: FormControl;
+    InputRestriction = InputRestriction;
     private subs: Subscription;
 
     public ngOnInit(): void {
@@ -73,15 +76,15 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
         return this.isDecimalQuestion(this.block) ? Math.pow(10, -((this.block as ActivityDecimalQuestionBlock).scale)) : 1;
     }
 
+    get isIntegerQuestion(): boolean {
+        return this.block.questionType === QuestionType.Numeric; // otherwise Question.Decimal
+    }
+
     private initForm(): void {
         this.numericField = new FormControl({
             value: this.mapAnswerToDisplay(this.block.answer),
             disabled: this.readonly
         }, {updateOn: 'blur'});
-    }
-
-    private get isIntegerQuestion(): boolean {
-        return this.block.questionType === QuestionType.Numeric; // otherwise Question.Decimal
     }
 
     // e.g. for decimal: 0.71 => '0.710' (scale = 3)

@@ -61,9 +61,9 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
             mergeMap((guidsObj: GuidsObject) => getActivity$(guidsObj)),
             catchError(e => {
                 if (e.error && e.error.code && e.error.code === 'ACTIVITY_NOT_FOUND') {
-                    return throwError('ACTIVITY_NOT_FOUND');
+                    throw new Error('ACTIVITY_NOT_FOUND');
                 }
-                return throwError(e);
+                return throwError(() => e);
             }),
             map(x => {
                 if (x == null) {

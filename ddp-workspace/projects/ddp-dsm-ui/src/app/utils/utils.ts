@@ -662,7 +662,7 @@ export class Utils {
     }
     let text = answer;
     let ans;
-    if (qdef.groups?.length > 0) {
+    if (qdef?.groups?.length > 0) {
       loop1: for (const group of qdef.groups) {
         if(group.groupStableId === answer){
           ans = group.groupText;
@@ -679,7 +679,7 @@ export class Utils {
         text = ans;
       }
     }
-    if (!ans && qdef.options?.length > 0) {
+    if (!ans && qdef?.options?.length > 0) {
       // TODO: check is it correct ? shadow variable 'ans'
       // eslint-disable-next-line @typescript-eslint/no-shadow
       const ans = qdef.options.find( option => option.optionStableId === answer );
@@ -696,7 +696,7 @@ export class Utils {
     }
     const text = answer;
     let ans;
-    if (qdef.options) {
+    if (qdef?.options) {
       const option = qdef.options.find( opt => opt.optionStableId === answer );
       if (option) {
         const ne = option.nestedOptions.find( o => o.optionStableId === nestedOption );
@@ -720,7 +720,7 @@ export class Utils {
 
   static getQuestionDefinition(activities: Array<ActivityDefinition>, activity: string,
                                stableId: string, version: string): QuestionDefinition {
-    const questions = activities.find(x => x.activityCode === activity && x.activityVersion === version).questions;
+    const questions = activities?.find(x => x.activityCode === activity && x.activityVersion === version).questions;
     if (questions != null) {
       return questions.find(x => x.stableId === stableId);
     }
@@ -728,7 +728,7 @@ export class Utils {
   }
 
   static getActivityDefinition( activities: ActivityDefinition[], activityCode: string, version: string ): ActivityDefinition{
-    return  activities.find( x => x.activityCode === activityCode && x.activityVersion === version );
+    return  activities?.find( x => x.activityCode === activityCode && x.activityVersion === version );
   }
 
   getAbstractionGroup(groups: Array<AbstractionGroup>, groupId: string): AbstractionGroup | undefined {
@@ -866,7 +866,7 @@ export class Utils {
       }
       let text = answer;
       let ans;
-      if (qdef.childQuestions) {
+      if (qdef?.childQuestions) {
         loop1: for (const childq of qdef.childQuestions) {
           if (childq.groups) {
             for (const g of childq.groups) {

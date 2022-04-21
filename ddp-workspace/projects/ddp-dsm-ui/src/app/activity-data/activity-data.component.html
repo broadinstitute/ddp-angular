@@ -78,10 +78,8 @@
         <li *ngFor="let group of picklist.multiple.groups">
           <p *ngIf="group.text"><b>{{ group.text }}</b></p>
           <ul>
-            <li *ngFor="let gd of group.details"><b>{{ gd }}</b> </li>
-          </ul>
-          <ul>
-            <li *ngFor="let optText of group.optionText"><b>{{ optText }}</b> </li>
+            <li *ngFor="let gd of group.details"><b>{{ gd.optionText }}</b></li>
+            <p *ngIf="group.optionText">{{ group.optionText.details }}</p>
           </ul>
         </li>
       </ul>
@@ -92,7 +90,7 @@
       <ul>
         <ul *ngFor="let single of picklist.single">
           <li *ngIf="single.text"><b>{{ single.text }}</b> </li>
-          <p *ngIf="single.details"><b>{{ single.details }}</b> </p>
+          <p *ngIf="single.details"><b>{{ single.details.details }}</b> </p>
         </ul>
       </ul>
 

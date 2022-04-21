@@ -292,7 +292,7 @@ describe('DashboardRedesignedComponent', () => {
     it('should delete created user if workflow request was failed', () => {
         const newParticipantGuid = '6549';
         governedParticipantsSpy.addParticipant.and.returnValue(of(newParticipantGuid));
-        workflowServiceSpy.fromParticipantList.and.returnValue(throwError('error'));
+        workflowServiceSpy.fromParticipantList.and.returnValue(throwError(() => new Error('error')));
         toolkitConfigMock.useMultiParticipantDashboard = true;
         const navigateSpy = spyOn(router, 'navigate');
 

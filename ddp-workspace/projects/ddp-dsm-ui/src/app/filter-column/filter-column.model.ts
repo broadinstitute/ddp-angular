@@ -248,7 +248,7 @@ export class Filter {
       activityDataArray.sort( ( ac1, ac2 ) => {
           const acDef1 = Utils.getActivityDefinition( activityDefinitionList, ac1.activityCode, ac1.activityVersion );
           const acDef2 = Utils.getActivityDefinition( activityDefinitionList, ac2.activityCode, ac2.activityVersion );
-          return acDef1.displayOrder - acDef2.displayOrder;
+          return acDef1?.displayOrder - acDef2?.displayOrder;
         }
       );
       const niceText = {
@@ -260,7 +260,7 @@ export class Filter {
       for (let i = 0; i < activityDataArray.length; i++) {
         const activityData = activityDataArray[ i ];
         const acDef = Utils.getActivityDefinition( activityDefinitionList, activityData.activityCode, activityData.activityVersion );
-        str += acDef.activityName + ' : ' + niceText[ activityData.status ] + ', ';
+        str += acDef?.activityName + ' : ' + niceText[ activityData.status ] + ', ';
       }
       return str;
     }, false );

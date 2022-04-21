@@ -42,7 +42,7 @@ export class ServiceAgent<TEntity> {
                         catchError((error: any) => {
                             if (error && error.status) {
                                 if (unrecoverableStatuses.indexOf(error.status) > -1) {
-                                    return throwError(error);
+                                    return throwError(() => error);
                                 }
                             }
                             this.logger.logError(this.LOG_SOURCE, `HTTP GET: ${url}. Error:`, error);
@@ -89,7 +89,7 @@ export class ServiceAgent<TEntity> {
                         catchError((error: any) => {
                             this.logger.logError(this.LOG_SOURCE, `HTTP POST: ${url}. Error:`, error);
                             if (throwErrorObject) {
-                                return throwError(error);
+                                return throwError(() => error);
                             } else {
                                 return of(null);
                             }
@@ -111,7 +111,7 @@ export class ServiceAgent<TEntity> {
                 if (x == null) {
                     this.logger.logError(`${this.LOG_SOURCE}.patch::${path}`, 'Authorization required');
                     if (throwErrorObject) {
-                        return throwError(new Error('No user session available'));
+                        throw new Error('No user session available');
                     } else {
                         return of(null);
                     }
@@ -128,7 +128,7 @@ export class ServiceAgent<TEntity> {
                         catchError((error: any) => {
                             this.logger.logError(this.LOG_SOURCE, `HTTP PATCH: ${url}. Error:`, error);
                             if (throwErrorObject) {
-                                return throwError(error);
+                                return throwError(() => error);
                             } else {
                                 return of(null);
                             }
@@ -163,7 +163,7 @@ export class ServiceAgent<TEntity> {
                         catchError((error: any) => {
                             this.logger.logError(this.LOG_SOURCE, `HTTP PUT: ${url}. Error:`,  error);
                             if (throwErrorObject) {
-                                return throwError(error);
+                                return throwError(() => error);
                             } else {
                                 return of(null);
                             }
@@ -197,7 +197,7 @@ export class ServiceAgent<TEntity> {
                         catchError((error: any) => {
                             this.logger.logError(this.LOG_SOURCE, `HTTP DELETE: ${url}. Error:`, error);
                             if (throwErrorObject) {
-                                return throwError(error);
+                                return throwError(() => error);
                             } else {
                                 return of(null);
                             }

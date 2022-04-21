@@ -11,7 +11,9 @@ import {
   AnalyticsEventsService,
   AnalyticsEvent,
   LoggingService,
-  PicklistSortingPolicy
+  PicklistSortingPolicy,
+  SubmitAnnouncementService,
+  SubmissionManager
 } from 'ddp-sdk';
 
 import {
@@ -30,6 +32,8 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { HeaderComponent } from './components/header/header.component';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress.component';
+import { ActivityComponent } from './components/activity/activity.component';
+import { ActivityPageComponent } from './components/activity-page/activity-page.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -72,9 +76,9 @@ tkCfg.familyHistoryThankYouUrl = 'family-history-thank-you';
 tkCfg.mailingListDialogUrl = 'updates';
 tkCfg.phone = '651-602-2020';
 tkCfg.infoEmail = 'info@osproject.org';
-tkCfg.twitterAccountId = 'the_osproject';
-tkCfg.facebookGroupId = 'osteosarcomaproject';
-tkCfg.instagramId = 'the_osproject';
+tkCfg.twitterAccountId = 'count_me_in';
+tkCfg.facebookGroupId = 'joincountmein';
+tkCfg.instagramId = 'countmein';
 // to configure feed, go to: https://lightwidget.com/widget-info/814feee04df55de38ec37791efea075e
 // need Instagram credentials for @osteosarcomaproject
 tkCfg.lightswitchInstagramWidgetId = '814feee04df55de38ec37791efea075e';
@@ -146,7 +150,9 @@ export function translateFactory(translate: TranslateService, injector: Injector
     AboutUsComponent,
     FaqComponent,
     HeaderComponent,
-    WorkflowProgressComponent
+    WorkflowProgressComponent,
+    ActivityComponent,
+    ActivityPageComponent
   ],
   providers: [
     {
@@ -167,7 +173,9 @@ export function translateFactory(translate: TranslateService, injector: Injector
       ],
       multi: true
     },
-    PicklistSortingPolicy
+    PicklistSortingPolicy,
+    SubmitAnnouncementService,
+    SubmissionManager,
   ],
   bootstrap: [AppComponent]
 })

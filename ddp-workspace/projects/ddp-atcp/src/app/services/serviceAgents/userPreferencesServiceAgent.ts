@@ -43,7 +43,7 @@ export class UserPreferencesServiceAgent extends UserServiceAgent<UserProfile> {
         if (e.error && e.error.errorCode && e.error.errorCode === 'MISSING_PROFILE') {
           return of(new UserProfileDecorator());
         }
-        return throwError(e);
+        return throwError(() => e);
       })
     );
   }
@@ -54,14 +54,14 @@ export class UserPreferencesServiceAgent extends UserServiceAgent<UserProfile> {
       return this.postObservable('/profile', JSON.stringify(profile), {}, true)
         .pipe(catchError(e => {
           this.log.logError(this.LOGGER_SOURCE, `Error occurred on user profile creation:`, e);
-          return throwError(e);
+          return throwError(() => e);
         }));
     } else {
       return this.patchObservable('/profile', JSON.stringify(profile), {}, true)
         .pipe(
           // eslint-disable-next-line  arrow-body-style
           catchError(e => {
-            return throwError(e);
+            return throwError(() => e);
           }),
           map(x => {
             if (x.body === null) {

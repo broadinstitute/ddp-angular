@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { throwError as observableThrowError, Observable } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { Filter } from '../filter-column/filter-column.model';
@@ -233,7 +233,7 @@ export class DSMService {
       map.push({name: 'filters', value: JSON.stringify(viewFilterCopy.filters)});
     }
     const body = {columnNames: columns};
-    return this.http.post(url, JSON.stringify(body), this.buildQueryBlobHeader(map)).pipe(
+    return this.http.post(url, JSON.stringify(body), this.buildQueryCsvBlobHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );
   }
@@ -929,7 +929,7 @@ export class DSMService {
 
   private handleError(error: any): Observable<any> {
     this.logger.logError('ERROR: ' + JSON.stringify(error));
-    return observableThrowError(error);
+    return throwError(() => error);
   }
 
   private buildHeader(): any {
@@ -948,11 +948,22 @@ export class DSMService {
       headers: this.buildJsonAuthHeader(),
       withCredentials: true,
       responseType: 'blob',
+      params
+    };
+  }
+  private buildQueryCsvBlobHeader(map: any[]): any {
+    let params: HttpParams = new HttpParams();
+    for (const param of map) {
+      params = params.append(param.name, param.value);
+    }
+    return {
+      headers: this.buildJsonAuthHeader(),
+      withCredentials: true,
+      responseType: 'blob',
       observe: 'response',
       params
     };
   }
-
   private buildQueryHeader(map: any[]): any {
     let params: HttpParams = new HttpParams();
     for (const param of map) {

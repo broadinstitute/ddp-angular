@@ -20,7 +20,7 @@ export class LookupComponent {
   @Input() multiLineInput = false;
   @Input() colorDuringPatch = false;
 
-  @Output() lookupResponse = new EventEmitter();
+  @Output() lookupResponse = new EventEmitter<Lookup | string>();
 
   lookups: Array<Lookup> = [];
   currentPatchField: string;

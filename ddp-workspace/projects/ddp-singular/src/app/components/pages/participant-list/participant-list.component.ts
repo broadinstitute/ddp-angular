@@ -3,7 +3,7 @@ import { forkJoin, Observable, of } from 'rxjs';
 import { Route } from '../../../constants/route';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { catchError, filter, map, mergeMap, take, tap } from 'rxjs/operators';
 import { CurrentActivityService } from '../../../services/current-activity.service';
 import { ParticipantDeletionDialogComponent } from '../../participant-deletion-dialog/participant-deletion-dialog.component';
@@ -37,6 +37,7 @@ interface Participant {
 })
 export class ParticipantsListComponent implements OnInit {
   isAddParticipantBtnDisabled = false;
+  isAddDependentBtnDisabled = false;
   isAddMyselfBtnDisabled = false;
   isOperatorEnrolled = false;
   loading = false;
@@ -44,6 +45,7 @@ export class ParticipantsListComponent implements OnInit {
   participants: Participant[] = [];
   private expandedMap: Record<string, boolean> = {};
   errorMessage: string | null = null;
+  @Input() allowParticipantRemoval = false;
 
   constructor(
     private router: Router,
@@ -169,6 +171,31 @@ export class ParticipantsListComponent implements OnInit {
         },
         error: () => {
           this.isAddParticipantBtnDisabled = false;
+        },
+      });
+  }
+
+  onAddDependentClick(): void {
+    this.isAddDependentBtnDisabled = true;
+
+    this.governedParticipantsService
+      .addParticipant(this.config.studyGuid)
+      .pipe(
+        take(1),
+        tap(participantGuid => this.sessionService.setParticipant(participantGuid))
+      )
+      .subscribe({
+        next: response => {
+          this.isAddDependentBtnDisabled = false;
+          this.activityService.createInstance(this.config.studyGuid, 'ADD_PARTICIPANT_DEPENDENT')
+                      .pipe(take(1))
+                      .subscribe(activity => {
+                        this.setCurrentActivity(activity as ActivityInstance);
+                        this.redirectToSurvey(activity.instanceGuid);
+                      });
+        },
+        error: () => {
+          this.isAddDependentBtnDisabled = false;
         },
       });
   }

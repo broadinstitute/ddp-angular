@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
-  throwError as observableThrowError,
+  throwError,
   Subject,
   Subscription, Observable
 } from 'rxjs';
@@ -14,6 +14,7 @@ import { RoleService } from './role.service';
 import { DSMService } from './dsm.service';
 import { ComponentService } from './component.service';
 import { Statics } from '../utils/statics';
+import { SessionMementoService } from 'ddp-sdk';
 
 // Avoid name not found warnings
 declare var Auth0Lock: any;
@@ -79,7 +80,7 @@ export class Auth {
   });
 
   constructor(private router: Router, private http: HttpClient, private sessionService: SessionService, private role: RoleService,
-               private compService: ComponentService, private dsmService: DSMService) {
+               private compService: ComponentService, private dsmService: DSMService, private dssSessionService: SessionMementoService ) {
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', (authResult: any) => {
       localStorage.setItem(Auth.AUTH0_TOKEN_NAME, authResult.idToken);
@@ -129,9 +130,10 @@ export class Auth {
       next: response => dsmResponse = response,
       complete: () => {
         const dsmToken = dsmResponse.dsmToken;
-        localStorage.setItem(SessionService.DSM_TOKEN_NAME, dsmToken);
+
         this.sessionService.setDSMToken(dsmToken);
         this.role.setRoles(dsmToken);
+        this.setDssSession(dsmToken);
 
         this.realmList = [];
         this.getRealmList();
@@ -175,7 +177,7 @@ export class Auth {
     const errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     console.error(errMsg); // log to console instead
-    return observableThrowError(errMsg);
+    return throwError(() => new Error(errMsg));
   }
 
   private redirect(): void {
@@ -226,5 +228,14 @@ export class Auth {
       localStorage.removeItem(ComponentService.MENU_SELECTED_REALM);
       this.router.navigate([ Statics.HOME_URL ]);
     }
+  }
+
+  private setDssSession(dsmToken: string): void {
+    const accessToken = null;
+    const userGuid = null;
+    const locale = 'en';
+    const expiresAtInSeconds: number = +this.sessionService.getTokenExpiration();
+    // set DSS Session partially
+    this.dssSessionService.setSession(accessToken, dsmToken, userGuid, locale, expiresAtInSeconds);
   }
 }

@@ -188,13 +188,12 @@ export class BuildingFactoryService {
       for(const group of question.groups) {
         if(this.util.isGroupSelected(answer.answer, group)) {
           groupsObject['text'] = group.groupText;
-          if(answer.groupedOptions[group.groupStableId] !== null) {
+          if(answer.groupedOptions[group.groupStableId]) {
             groupsObject['details'] = [];
-            groupsObject['optionText'] = [];
             for(const gAnswer of answer.groupedOptions[group.groupStableId]) {
               if(this.util.getAnswerText(gAnswer, group.options)) {
                 groupsObject['details'].push(this.util.getAnswerText(gAnswer, group.options));
-                groupsObject['optionText'].push(Utils.getOptionDetails(answer.optionDetails, gAnswer));
+                groupsObject['optionText'] = Utils.getOptionDetails(answer.optionDetails, gAnswer);
               }
             }
           } else {
@@ -247,10 +246,11 @@ export class BuildingFactoryService {
   }
 
   private getOptionOrGroupText(questionDefinition: QuestionDefinition, stableId: string): string {
+    const composedStableId = stableId?.includes('|') ? stableId?.split('|')[0] : stableId;
     if (questionDefinition.options) {
-      const option = questionDefinition.options.find(x => x.optionStableId === stableId);
+      const option = questionDefinition.options.find(x => x.optionStableId === composedStableId);
       if (option != null) {
-        return option.optionText;
+        return stableId?.includes('|') ? stableId?.split('|')[1] : option.optionText;
       }
     }
     if (questionDefinition.groups) {

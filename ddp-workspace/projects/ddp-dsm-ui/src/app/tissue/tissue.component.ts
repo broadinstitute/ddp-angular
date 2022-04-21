@@ -8,7 +8,6 @@ import { DSMService } from '../services/dsm.service';
 import { ComponentService } from '../services/component.service';
 import { Lookup } from '../lookup/lookup.model';
 import { Statics } from '../utils/statics';
-import { Result } from '../utils/result.model';
 import { Auth } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { NameValue } from '../utils/name-value.model';
@@ -54,13 +53,9 @@ export class TissueComponent {
     return this.compService;
   }
 
-  public setTissueSite(object: any): void {
+  public setTissueSite(object: Lookup | string): void {
     if (object != null) {
-      if (event instanceof MouseEvent) {
-        this.tissue.tissueSite = object.field1.value;
-      } else {
-        this.tissue.tissueSite = object;
-      }
+      this.tissue.tissueSite = object instanceof Lookup ? object.field1.value : object;
       this.valueChanged(this.tissue.tissueSite, 'tissueSite');
     }
   }
@@ -181,7 +176,6 @@ export class TissueComponent {
                 this.oncHistoryDetail[nameValue.name] = nameValue.value;
               });
             }
-
           // } else if (result.code === 500 && result.body != null) {
           //   this.dup = true;
           //   if (tAlias === 'sm') {
@@ -220,6 +214,9 @@ export class TissueComponent {
           //   this.patchFinished = true;
           //   this.currentPatchField = null;
           //   this.dup = false;
+          }
+          if (data['smIdPk']) {
+            smIdArray[index].smIdPk = data['smIdPk'];
           }
         },
         error: err => {
@@ -373,7 +370,7 @@ export class TissueComponent {
   deleteSMID( array: TissueSmId[], i: number ): void {
     array[ i ].deleted = true;
     if (array[ i ].smIdPk) {
-      this.changeSmId( '1', 'deleted', array[ i ].smIdPk, array[ i ].smIdType, array, i );
+      this.changeSmId('1', 'deleted', array[ i ].smIdPk, array[ i ].smIdType, array, i );
     }
     if (this.smIdDuplicate[ this.currentSMIDField ].has( this.createDuplicateIndex( i ) )) {
       this.smIdDuplicate[ this.currentSMIDField ].delete( this.createDuplicateIndex( i ) );

@@ -117,6 +117,8 @@ export class ParticipantListComponent implements OnInit {
   jsonPatch: any;
   viewFilter: any;
   private start: number;
+  selectAll = false;
+  selectAllColumnsLabel = 'Select all';
 
   constructor(private role: RoleService, private dsmService: DSMService, private compService: ComponentService,
                private router: Router, private auth: Auth, private route: ActivatedRoute, private util: Utils) {
@@ -2215,5 +2217,20 @@ export class ParticipantListComponent implements OnInit {
   private sendAnalyticsMetric(): void {
     const passed = new Date().getTime() - this.start;
     this.dsmService.sendAnalyticsMetric(this.getRealm(), passed).subscribe({});
+  }
+
+  private displayCheckbox(pt: Participant): boolean {
+    if (pt.data.status === 'ENROLLED'
+      && pt.data.medicalProviders != null && pt.medicalRecords != null
+      && pt.data.medicalProviders.length > 0 && pt.medicalRecords.length > 0) {
+      return true;
+    }
+    return false;
+  }
+
+  private toggleColumns(checked: boolean): void {
+    if (checked) {
+      this.selectedColumns = Object.assign({}, this.sourceColumns);
+    }
   }
 }

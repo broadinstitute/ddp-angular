@@ -1,4 +1,5 @@
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { InputRestriction } from '../models/InputRestriction';
 
 @Directive({
     selector: '[appInputRestriction]'
@@ -13,22 +14,23 @@ export class InputRestrictionDirective {
 
     @HostListener('keypress', ['$event'])
     onKeyPress(e: KeyboardEvent): void {
-        if (this.appInputRestriction === 'integer') {
-            this.integerOnly(e);
-        } else if (this.appInputRestriction === 'noSpecialChars') {
+        if (this.appInputRestriction === InputRestriction.Digits) {
+            this.integerOnly(e, true);
+        } else if (this.appInputRestriction === InputRestriction.Integer) {
+            this.integerOnly(e, false);
+        } else if (this.appInputRestriction === InputRestriction.NoSpecialChars) {
             this.noSpecialChars(e);
         }
     }
 
     @HostListener('paste', ['$event'])
     onPaste(e: ClipboardEvent): void {
-        let regex;
-        if (this.appInputRestriction === 'integer') {
-            regex = /[0-9]/g;
-        } else if (this.appInputRestriction === 'noSpecialChars') {
-            regex = /[a-zA-Z0-9\u0600-\u06FF]/g;
-        }
-
+        const regexMap = {
+            [InputRestriction.Digits]: '[0-9]',
+            [InputRestriction.Integer]: '[-0-9]', // digits and a minus sign
+            [InputRestriction.NoSpecialChars]: '[a-zA-Z0-9\u0600-\u06FF]'
+        };
+        const regex = new RegExp(regexMap[this.appInputRestriction], 'g');
         const pasteData = e.clipboardData.getData('text/plain');
         let m;
         let matches = 0;
@@ -82,9 +84,13 @@ export class InputRestrictionDirective {
         return (event.ctrlKey === true || event.metaKey === true);
     }
 
-    private integerOnly(e: KeyboardEvent): void {
+    private integerOnly(e: KeyboardEvent, onlyPositiveNumbers: boolean): void {
         if (this.isTab(e.key) || this.isKeyEventForEditing(e)) {
             // let it happen, don't do anything
+            return;
+        }
+        if (!onlyPositiveNumbers && e.key === '-') {
+            // allow to use a minus sign
             return;
         }
         if (!this.isDigit(e.key)) {

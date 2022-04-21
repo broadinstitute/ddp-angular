@@ -172,7 +172,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       this.scrolled = true;
     }
     this.validateEmailInput(this.participant.data.profile['email']);
-    this.isOncHistoryVisible = this.participant.data.status === 'ENROLLED';
+    this.isOncHistoryVisible = (this.participant.data.status === 'ENROLLED'
+      && this.participant.data.medicalProviders != null && this.participant.medicalRecords != null
+      && this.participant.data.medicalProviders.length > 0 && this.participant.medicalRecords.length > 0);
 
     this.displayActivityOrder();
     this.addMedicalProviderInformation();
@@ -180,22 +182,21 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   addMedicalProviderInformation(): void {
     if (this.participant != null && this.participant.data != null
-      && this.participant.data.profile != null && this.participant.data.medicalProviders != null && this.participant.medicalRecords) {
-      if (this.participant.medicalRecords.length > 0) {
-        this.participant.medicalRecords.forEach(medicalRecord => {
-          const medicalProvider = this.participant.data.medicalProviders.find(medProvider => {
-            const tmpId = medProvider.legacyGuid != null && medProvider.legacyGuid !== 0 ?
-              medProvider.legacyGuid : medProvider.guid;
-            return tmpId === medicalRecord.ddpInstitutionId;
-          });
-          medicalRecord.type = medicalProvider.type;
-          medicalRecord.nameDDP = medicalProvider.physicianName;
-          medicalRecord.institutionDDP = medicalProvider.institutionName;
-          medicalRecord.streetAddressDDP = medicalProvider.street;
-          medicalRecord.cityDDP = medicalProvider.city;
-          medicalRecord.stateDDP = medicalProvider.state;
+      && this.participant.data.profile != null && this.participant.data.medicalProviders != null
+      && this.participant.medicalRecords != null && this.participant.medicalRecords.length > 0) {
+      this.participant.medicalRecords.forEach(medicalRecord => {
+        const medicalProvider = this.participant.data.medicalProviders.find(medProvider => {
+          const tmpId = medProvider.legacyGuid != null && medProvider.legacyGuid !== 0 ?
+            medProvider.legacyGuid : medProvider.guid;
+          return tmpId === medicalRecord.ddpInstitutionId;
         });
-      }
+        medicalRecord.type = medicalProvider.type;
+        medicalRecord.nameDDP = medicalProvider.physicianName;
+        medicalRecord.institutionDDP = medicalProvider.institutionName;
+        medicalRecord.streetAddressDDP = medicalProvider.street;
+        medicalRecord.cityDDP = medicalProvider.city;
+        medicalRecord.stateDDP = medicalProvider.state;
+      });
     }
   }
 
@@ -504,7 +505,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         participantId, this.role.userMail(),
         {name: parameterName, value: v}, null, 'ddpParticipantId',
         ddpParticipantId, tableAlias, null, localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
-        this.participant.participant.ddpParticipantId
+        ddpParticipantId
       );
       patch1.realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       const patch = patch1.getPatch();
@@ -1416,12 +1417,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   }
   //TODO remove before final merge, for testing only
   testGetActivity(participantId: string): void {
-    this.dsmService.testDSSGetActivity(participantId).subscribe(
-      data => {
-        console.log(data);
-      },
-      err =>{}
-    );
-
+    this.dsmService.testDSSGetActivity(participantId).subscribe(data => {
+      console.log(data);
+    });
   }
 }

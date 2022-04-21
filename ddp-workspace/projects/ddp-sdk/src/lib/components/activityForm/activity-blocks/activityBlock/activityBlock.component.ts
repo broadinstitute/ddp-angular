@@ -86,7 +86,7 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
                 ),
                 catchError(err => {
                     this.logger.logError(this.LOG_SOURCE, 'An error during a new instance creation', err);
-                    return throwError(err);
+                    return throwError(() => err);
                 }),
                 takeUntil(this.ngUnsubscribe)
             )

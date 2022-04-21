@@ -51,7 +51,7 @@ export class AddressService extends UserServiceAgent<Address> {
         return this.putObservable(`${this.BASE_URL}/temp/${activityInstanceGuid}`, address, {}, true).pipe(
             // eslint-disable-next-line arrow-body-style
             catchError((error) => {
-                return throwError(error.error);
+                return throwError(() => error.error);
             })
         );
     }
@@ -67,7 +67,7 @@ export class AddressService extends UserServiceAgent<Address> {
             }),
             // eslint-disable-next-line arrow-body-style
             catchError((error) => {
-                return throwError(error.error);
+                return throwError(() => error.error);
             })
         );
     }
@@ -90,7 +90,7 @@ export class AddressService extends UserServiceAgent<Address> {
                     }),
                 // eslint-disable-next-line arrow-body-style
                 catchError((error) => {
-                    return throwError(error.error);
+                    return throwError(() => error.error);
                 })
             );
         } else {
@@ -99,7 +99,7 @@ export class AddressService extends UserServiceAgent<Address> {
                 map(() => address),
                 // eslint-disable-next-line arrow-body-style
                 catchError((error) => {
-                    return throwError(error.error);
+                    return throwError(() => error.error);
                 })
             );
         }
@@ -116,7 +116,7 @@ export class AddressService extends UserServiceAgent<Address> {
             }),
             // eslint-disable-next-line arrow-body-style
             catchError((error) => {
-                return throwError(error.error);
+                return throwError(() => error.error);
             })
         );
     }
@@ -132,7 +132,7 @@ export class AddressService extends UserServiceAgent<Address> {
             }),
             // eslint-disable-next-line arrow-body-style
             catchError((error) => {
-                return throwError(error.error);
+                return throwError(() => error.error);
             })
         );
     }
