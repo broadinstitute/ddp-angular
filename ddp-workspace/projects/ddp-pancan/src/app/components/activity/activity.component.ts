@@ -53,6 +53,8 @@ export class ActivityComponent extends ActivityRedesignedComponent implements On
     }
 
     public ngOnDestroy(): void {
+        super.ngOnDestroy();
+
         this.dialogsClosedSubscription.unsubscribe();
         this.activityInstanceDeletedSubscription.unsubscribe();
     }
