@@ -7,16 +7,22 @@
             <div class="content content_tight intro-faq-block">
                 <div class="intro-faq-block__content">
                     <p [innerHTML]="'SIPage.PASection.Paragraph1' | translate"></p>
-                    
                         <p [innerHTML]="'SIPage.PASection.Text' | translate"></p>
-                        <!-- <span translate>FaqPage.IntroText.Paragraph2.Part2</span> -->
                     
                     
                     <p [innerHTML]="'SIPage.DASection.Paragraph2' | translate"></p>
-                    <!-- <p [innerHTML]="'SIPage.DASection.Desc' | translate"></p> -->
                     <ng-container *ngFor="let desc of 'SIPage.DASection.Desc'| translate">
                             <p [innerHTML]="desc"></p>
                     </ng-container>
+
+                    <p [innerHTML]="'SIPage.ELSection.Paragraph3' | translate"></p>
+                        <p [innerHTML]="'SIPage.ELSection.Text' | translate"></p>
+                    <ng-container *ngFor="let desc of 'SIPage.ELSection.Desc'| translate">
+                            <p [innerHTML]="desc"></p>
+                    </ng-container>
+
+                    <p [innerHTML]="'SIPage.WDSection.Paragraph4' | translate"></p>
+                    <p [innerHTML]="'SIPage.WDSection.Text' | translate"></p>
 
                 </div>
             </div>

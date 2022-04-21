@@ -9,6 +9,19 @@
         padding: 3.2rem 0;
         background-color: $accent-color-orange;
     }
+
+    &:nth-of-type(odd) {
+        padding-bottom: 7.94rem;
+        flex-direction: row;
+    }
+
+    &__section-title {
+        margin: 1rem 0 1.13rem 0;
+        font-family: $primary-font-medium;
+        font-size: 2rem;
+        line-height: 3.625rem;
+        font-weight: normal;
+    }
 }
 
 
