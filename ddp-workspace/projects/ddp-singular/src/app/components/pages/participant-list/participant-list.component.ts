@@ -174,6 +174,31 @@ export class ParticipantsListComponent implements OnInit {
       });
   }
 
+  onAddDependentClick(): void {
+    this.isAddParticipantBtnDisabled = true;
+
+    this.governedParticipantsService
+      .addParticipant(this.config.studyGuid)
+      .pipe(
+        take(1),
+        tap(participantGuid => this.sessionService.setParticipant(participantGuid))
+      )
+      .subscribe({
+        next: response => {
+          this.isAddParticipantBtnDisabled = false;
+          this.activityService.createInstance(this.config.studyGuid, 'ADD_PARTICIPANT_DEPENDENT')
+                      .pipe(take(1))
+                      .subscribe(activity => {
+                        this.setCurrentActivity(activity as ActivityInstance);
+                        this.redirectToSurvey(activity.instanceGuid);
+                      });
+        },
+        error: () => {
+          this.isAddParticipantBtnDisabled = false;
+        },
+      });
+  }
+
   onAddMyselfClick(): void {
     this.isAddMyselfBtnDisabled = true;
 
