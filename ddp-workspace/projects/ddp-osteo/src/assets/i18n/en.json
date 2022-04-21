@@ -201,7 +201,7 @@
         },
         "CMISection": {
             "Paragraph1": "is stewarded by the Broad Institute of MIT and Harvard, the Dana-Farber Cancer Institute and Emerson Collective.",
-            "Paragraph2": "Count Me In's Osteosarcoma(OS) Project is supported by a grant from the National Cancer Institute's Cancer Moonshot program and is partS of the Participant Engagement and Cancer Genome Sequencing(PE-CGS)Network of research centers.",
+            "Paragraph2": "Count Me In's Osteosarcoma (OS) Project is supported by a grant from the National Cancer Institute's Cancer Moonshot program and is part of the Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers.",
             "Paragraph3": "The Osteosarcoma Project has been designed and implemented collaboratively with osteosarcoma patients, advocates, caregivers, loved ones, cancer researchers, and clinicians."
         },
         "PACSection": {
@@ -403,7 +403,7 @@
             ]
         },
         "LearnMoreSection": {
-            "Text": "Learn more about participating in the Osteosarcoma Project"
+            "Text": "Learn more about the Osteosarcoma Project"
         }
     },
     "FaqPage": {
