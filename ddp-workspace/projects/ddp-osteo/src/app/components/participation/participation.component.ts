@@ -10,6 +10,14 @@ export class ParticipationComponent {
         'consent.pdf',
         'medical_release.pdf',
         'surveys.pdf',
-        'Kit_Instructions.pdf'
+        'Kit_Instructions.pdf',
+        'tumor_samples.pdf'
+    ];
+
+    readonly stepsHrf = [
+        '',
+        'tumor_samples.pdf',
+
+
     ];
 }

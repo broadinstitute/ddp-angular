@@ -1,0 +1,24 @@
+@import '../../../../../ddp-pancan/src/styles/variables.scss';
+
+.section {
+    text-align: left;
+
+    .section-title {
+        margin: 0 auto 5.625rem;
+        text-align: center;
+        padding: 3.2rem 0;
+        background-color: $accent-color-orange;
+    }
+}
+
+
+@media screen and (max-width: $tablet-breakpoint) {
+        .section-title {
+            align-items: center;
+            gap: 3rem;
+
+            &:nth-of-type(n) {
+                flex-direction: column-reverse;
+            }
+        }
+}

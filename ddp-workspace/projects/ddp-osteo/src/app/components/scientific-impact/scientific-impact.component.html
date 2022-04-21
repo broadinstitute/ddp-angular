@@ -1,1 +1,25 @@
-<p>scientific-impact works!</p>
+<section class="section">
+    <div class="content content_medium sac-block">
+        <h1 class="section-title" translate>
+            SIPage.introduction.Title
+        </h1>
+   <section class="section">
+            <div class="content content_tight intro-faq-block">
+                <div class="intro-faq-block__content">
+                    <p [innerHTML]="'SIPage.PASection.Paragraph1' | translate"></p>
+                    
+                        <p [innerHTML]="'SIPage.PASection.Text' | translate"></p>
+                        <!-- <span translate>FaqPage.IntroText.Paragraph2.Part2</span> -->
+                    
+                    
+                    <p [innerHTML]="'SIPage.DASection.Paragraph2' | translate"></p>
+                    <!-- <p [innerHTML]="'SIPage.DASection.Desc' | translate"></p> -->
+                    <ng-container *ngFor="let desc of 'SIPage.DASection.Desc'| translate">
+                            <p [innerHTML]="desc"></p>
+                    </ng-container>
+
+                </div>
+            </div>
+    </section>
+
+
