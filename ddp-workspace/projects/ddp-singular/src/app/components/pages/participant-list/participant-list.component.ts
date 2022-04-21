@@ -37,6 +37,7 @@ interface Participant {
 })
 export class ParticipantsListComponent implements OnInit {
   isAddParticipantBtnDisabled = false;
+  isAddDependentBtnDisabled = false;
   isAddMyselfBtnDisabled = false;
   isOperatorEnrolled = false;
   loading = false;
@@ -169,6 +170,31 @@ export class ParticipantsListComponent implements OnInit {
         },
         error: () => {
           this.isAddParticipantBtnDisabled = false;
+        },
+      });
+  }
+
+  onAddDependentClick(): void {
+    this.isAddDependentBtnDisabled = true;
+
+    this.governedParticipantsService
+      .addParticipant(this.config.studyGuid)
+      .pipe(
+        take(1),
+        tap(participantGuid => this.sessionService.setParticipant(participantGuid))
+      )
+      .subscribe({
+        next: response => {
+          this.isAddDependentBtnDisabled = false;
+          this.activityService.createInstance(this.config.studyGuid, 'ADD_PARTICIPANT_DEPENDENT')
+                      .pipe(take(1))
+                      .subscribe(activity => {
+                        this.setCurrentActivity(activity as ActivityInstance);
+                        this.redirectToSurvey(activity.instanceGuid);
+                      });
+        },
+        error: () => {
+          this.isAddDependentBtnDisabled = false;
         },
       });
   }
