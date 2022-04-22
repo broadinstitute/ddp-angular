@@ -13,12 +13,7 @@ import { Subscription } from 'rxjs';
 import { ActivitySection } from '../../models/activity/activitySection';
 import { ActivityBlock } from '../../models/activity/activityBlock';
 import { BlockType } from '../../models/activity/blockType';
-import { ActivityContentBlock } from '../../models/activity/activityContentBlock';
-import { ActivityGroupBlock } from '../../models/activity/activityGroupBlock';
-import { ActivityInstitutionBlock } from '../../models/activity/activityInstitutionBlock';
-import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
 import { BlockVisibility } from '../../models/activity/blockVisibility';
-import { ConditionalBlock } from '../../models/activity/conditionalBlock';
 import { ConfigurationService } from '../../services/configuration.service';
 import { ActivityActivityBlock } from '../../models/activity/activityActivityBlock';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
@@ -39,6 +34,7 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
     private subscription: Subscription;
     private embeddedValidationStatus = new Map();
 
+    readonly BlockType= BlockType;
     // Block guids and instance guids are generated separately,
     // there is a small possibility that they can have the same ids.
     // Prepended an unique `idPrefix` as to prevent a case with the same blockId & instanceId.
@@ -96,33 +92,8 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
         this.embeddedComponentsValidationStatus.next(reducedValidationStatus);
     }
 
-    public isContent(block: ActivityBlock): block is ActivityContentBlock {
-        // BlockType import stripped by compiler if used directly in template
-        return block.blockType === BlockType.Content && block.shown;
-    }
-
-    public isGroup(block: ActivityBlock): block is ActivityGroupBlock {
-        return block.blockType === BlockType.Group && block.shown;
-    }
-
-    public isQuestion(block: ActivityBlock): block is AbstractActivityQuestionBlock {
-        return block.blockType === BlockType.Question && block.shown;
-    }
-
-    public isInstitution(block: ActivityBlock): block is ActivityInstitutionBlock {
-        return block.blockType === BlockType.Institution && block.shown;
-    }
-
-    public isMailAddress(block: ActivityBlock): block is ActivityInstitutionBlock {
-        return block.blockType === BlockType.MailAddress && block.shown;
-    }
-
-    public isConditional(block: ActivityBlock): block is ConditionalBlock {
-        return block.blockType === BlockType.Conditional && block.shown;
-    }
-
-    public isActivityBlock(block: ActivityBlock): block is ActivityActivityBlock {
-        return block.blockType === BlockType.Activity && block.shown;
+    public isCertainTypeOfBlock(block: ActivityBlock, type: BlockType): boolean {
+        return block.blockType === type && block.shown;
     }
 
     private updateValidationForHiddenEmbeddedActivity(block: ActivityActivityBlock): void {
