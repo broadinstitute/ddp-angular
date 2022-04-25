@@ -22,6 +22,7 @@ export class ActivityEquationAnswerComponent {
         // align the answer decimal part
         const fullValue = `${DecimalHelper.mapDecimalAnswerToNumber(answer)}`;
         const [integerPart, decimalPart] = fullValue.split('.');
-        return integerPart + (decimalPart ? `.${decimalPart.slice(0, this.block.maximumDecimalPlaces)}` : '');
+        const formattedDecimalPart = decimalPart ? `.${decimalPart.slice(0, this.block.maximumDecimalPlaces?? undefined)}` : '';
+        return integerPart + formattedDecimalPart;
     }
 }
