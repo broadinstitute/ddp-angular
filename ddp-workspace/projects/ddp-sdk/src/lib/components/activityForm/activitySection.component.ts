@@ -18,6 +18,8 @@ import { ConfigurationService } from '../../services/configuration.service';
 import { ActivityActivityBlock } from '../../models/activity/activityActivityBlock';
 import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
 import { ActivityInstance } from '../../models/activityInstance';
+import { AnswerResponseEquation } from '../../models/activity/answerResponseEquation';
+import { ActivityEquationQuestionBlock } from '../../models/activity/activityEquationQuestionBlock';
 
 @Component({
     selector: 'ddp-activity-section',
@@ -49,9 +51,12 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.subscription = this.submissionManager.answerSubmissionResponse$.subscribe(response =>
-            this.updateVisibilityAndValidation(response.blockVisibility)
-        );
+        this.subscription = this.submissionManager.answerSubmissionResponse$.subscribe(response => {
+            this.updateVisibilityAndValidation(response.blockVisibility);
+            if (response.equations) {
+                this.updateEquationQuestions(response.equations);
+            }
+        });
     }
 
     ngOnDestroy(): void {
@@ -62,7 +67,17 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
         this.updateVisibilityAndValidation(blockVisibility);
     }
 
-    public updateVisibilityAndValidation(visibility: BlockVisibility[]): void {
+    public updateValidationStatusInSection(id: string, isValid: boolean): void {
+        this.embeddedValidationStatus.set(id, isValid);
+        const reducedValidationStatus = Array.from(this.embeddedValidationStatus.values()).every(value => value);
+        this.embeddedComponentsValidationStatus.next(reducedValidationStatus);
+    }
+
+    public isCertainTypeOfBlock(block: ActivityBlock, type: BlockType): boolean {
+        return block.blockType === type && block.shown;
+    }
+
+    private updateVisibilityAndValidation(visibility: BlockVisibility[]): void {
         let blockStateChanged = false;
         visibility.forEach(element => {
             this.section.allChildBlocks().forEach(block => {
@@ -86,19 +101,22 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
         }
     }
 
-    public updateValidationStatusInSection(id: string, isValid: boolean): void {
-        this.embeddedValidationStatus.set(id, isValid);
-        const reducedValidationStatus = Array.from(this.embeddedValidationStatus.values()).every(value => value);
-        this.embeddedComponentsValidationStatus.next(reducedValidationStatus);
-    }
-
-    public isCertainTypeOfBlock(block: ActivityBlock, type: BlockType): boolean {
-        return block.blockType === type && block.shown;
-    }
-
     private updateValidationForHiddenEmbeddedActivity(block: ActivityActivityBlock): void {
         block.instances.forEach((instance: ActivityInstance) => {
             this.updateValidationStatusInSection(this.idPrefix.instance + instance.instanceGuid, true);
         });
+    }
+
+    private updateEquationQuestions(equations: AnswerResponseEquation[]): void {
+        const equationQuestionBlocks = this.section.allChildBlocks()
+            .filter(block => block instanceof ActivityEquationQuestionBlock) as ActivityEquationQuestionBlock[];
+
+        for (const equation of equations) {
+            for (const block of equationQuestionBlocks) {
+                if (block.stableId === equation.stableId) {
+                    block.setAnswer(equation.values[0], false);
+                }
+            }
+        }
     }
 }

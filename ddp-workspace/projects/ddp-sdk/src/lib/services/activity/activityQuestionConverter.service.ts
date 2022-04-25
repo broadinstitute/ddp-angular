@@ -26,6 +26,7 @@ import { ActivityInstanceSelectQuestionBlock } from '../../models/activity/activ
 import { ActivityDecimalQuestionBlock } from '../../models/activity/activityDecimalQuestionBlock';
 import { ValidationRuleType } from './validationRuleType';
 import { DecimalHelper } from '../../utility/decimalHelper';
+import { ActivityEquationQuestionBlock } from '../../models/activity/activityEquationQuestionBlock';
 
 const DETAIL_MAXLENGTH = 500;
 
@@ -173,7 +174,7 @@ export class ActivityQuestionConverter {
             },
             {
                 type: QuestionType.Agreement,
-                func: () => new ActivityAgreementQuestionBlock()
+                func: () => this.getAgreementBlock()
             },
             {
                 type: QuestionType.File,
@@ -186,6 +187,10 @@ export class ActivityQuestionConverter {
             {
                 type: QuestionType.ActivityInstanceSelect,
                 func: (questionJson) => this.getActivityInstanceSelectBlock(questionJson)
+            },
+            {
+                type: QuestionType.Equation,
+                func: (questionJson) => this.getEquationBlock(questionJson)
             }
         ];
     }
@@ -198,7 +203,7 @@ export class ActivityQuestionConverter {
     }
 
     private getTextBlock(questionJson: any): ActivityTextQuestionBlock {
-        // let's capture some of the validation into the textblock object itself
+        // let's capture some of the validation into the textBlock object itself
         // make's it easier to apply validations in the widget
         const textBlock = new ActivityTextQuestionBlock();
         textBlock.placeholder = questionJson.placeholderText;
@@ -289,6 +294,10 @@ export class ActivityQuestionConverter {
         return newBlock;
     }
 
+    private getAgreementBlock(): ActivityAgreementQuestionBlock {
+        return new ActivityAgreementQuestionBlock();
+    }
+
     private getFileBlock(questionJson: any): ActivityFileQuestionBlock {
         const fileBlock = new ActivityFileQuestionBlock();
         fileBlock.maxFileSize = questionJson.maxFileSize;
@@ -314,5 +323,11 @@ export class ActivityQuestionConverter {
         const activityInstanceSelectBlock = new ActivityInstanceSelectQuestionBlock();
 
         return activityInstanceSelectBlock;
+    }
+
+    private getEquationBlock(questionJson: any): ActivityEquationQuestionBlock {
+        const equationBlock = new ActivityEquationQuestionBlock();
+        equationBlock.maximumDecimalPlaces = questionJson.maximumDecimalPlaces;
+        return equationBlock;
     }
 }

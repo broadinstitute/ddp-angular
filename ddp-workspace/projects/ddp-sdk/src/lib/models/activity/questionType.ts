@@ -11,4 +11,5 @@ export enum QuestionType {
     File = 'FILE',
     Matrix = 'MATRIX',
     ActivityInstanceSelect = 'ACTIVITY_INSTANCE_SELECT',
+    Equation = 'EQUATION'
 }
