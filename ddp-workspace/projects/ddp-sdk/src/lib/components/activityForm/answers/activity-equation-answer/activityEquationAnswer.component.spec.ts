@@ -56,4 +56,28 @@ describe('ActivityEquationAnswerComponent', () => {
         const equationValueElement: HTMLElement = fixture.debugElement.query(By.css('.equation-value')).nativeElement;
         expect(equationValueElement.innerText).toBe('1.23');
     });
+
+    it('should have a formatted equation value', () => {
+        component.block = {
+            ...questionBlock,
+            maximumDecimalPlaces: 3,
+            answer: {value: 12345, scale: 4}
+        } as ActivityEquationQuestionBlock;
+        fixture.detectChanges();
+
+        const equationValueElement: HTMLElement = fixture.debugElement.query(By.css('.equation-value')).nativeElement;
+        expect(equationValueElement.innerText).toBe('1.234');
+    });
+
+    it('should have a formatted equation value when maximumDecimalPlaces field is not set', () => {
+        component.block = {
+            answer: {value: 12345, scale: 4},
+            question: 'Equation question title',
+            questionType: QuestionType.Equation
+        } as ActivityEquationQuestionBlock;
+        fixture.detectChanges();
+
+        const equationValueElement: HTMLElement = fixture.debugElement.query(By.css('.equation-value')).nativeElement;
+        expect(equationValueElement.innerText).toBe('1.2345');
+    });
 });
