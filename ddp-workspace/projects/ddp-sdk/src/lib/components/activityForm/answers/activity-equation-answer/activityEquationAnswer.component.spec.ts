@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ActivityEquationAnswerComponent } from './activity-equation-answer.component';
+import { ActivityEquationAnswerComponent } from './activityEquationAnswer.component';
 
 describe('ActivityEquationAnswerComponent', () => {
   let component: ActivityEquationAnswerComponent;

@@ -221,7 +221,8 @@ import { ActivityPicklistRemoteAutoCompleteOptionsComponent }
 import { PicklistSortingPolicy } from './services/picklistSortingPolicy.service';
 import {
     ActivityEquationAnswerComponent
-} from './components/activityForm/answers/activity-equation-answer/activity-equation-answer.component';
+} from './components/activityForm/answers/activity-equation-answer/activityEquationAnswer.component';
+
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter: FuncType<string> = () => sessionService.token;
