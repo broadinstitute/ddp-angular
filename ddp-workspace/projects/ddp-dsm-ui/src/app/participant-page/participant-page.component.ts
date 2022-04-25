@@ -190,12 +190,14 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
             medProvider.legacyGuid : medProvider.guid;
           return tmpId === medicalRecord.ddpInstitutionId;
         });
-        medicalRecord.type = medicalProvider.type;
-        medicalRecord.nameDDP = medicalProvider.physicianName;
-        medicalRecord.institutionDDP = medicalProvider.institutionName;
-        medicalRecord.streetAddressDDP = medicalProvider.street;
-        medicalRecord.cityDDP = medicalProvider.city;
-        medicalRecord.stateDDP = medicalProvider.state;
+        if (medicalProvider) {
+          medicalRecord.type = medicalProvider.type;
+          medicalRecord.nameDDP = medicalProvider.physicianName;
+          medicalRecord.institutionDDP = medicalProvider.institutionName;
+          medicalRecord.streetAddressDDP = medicalProvider.street;
+          medicalRecord.cityDDP = medicalProvider.city;
+          medicalRecord.stateDDP = medicalProvider.state;
+        }
       });
     }
   }
@@ -888,6 +890,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   lockParticipant(abstractionData: Abstraction): void {
     this.loadingParticipantPage = true;
     const ddpParticipantId = this.participant.participant.ddpParticipantId;
+    debugger;
     this.dsmService.changeMedicalRecordAbstractionStatus(
         localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
         ddpParticipantId,
