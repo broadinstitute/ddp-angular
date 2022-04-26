@@ -417,10 +417,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         if (mr.mrReceived) {
           this.counterReceived = this.counterReceived + 1;
         }
-        if (this.counterReceived > 0) {
-          if (this.hasRole().isAbstracter() || this.hasRole().isQC()) {
-            this.loadAbstractionValues();
-          }
+      }
+      if (this.counterReceived > 0) {
+        if (this.hasRole().isAbstracter() || this.hasRole().isQC()) {
+          this.loadAbstractionValues();
         }
       }
       if (this.participant.participant != null) {
@@ -838,7 +838,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   private loadAbstractionValues(): void {
     if (this.participant.participant != null && this.participant.participant.ddpParticipantId != null) {
-      // this.summaryFields = [];
       this.loadingParticipantPage = true;
       const ddpParticipantId = this.participant.participant.ddpParticipantId;
       this.dsmService.getAbstractionValues(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), ddpParticipantId).subscribe({
@@ -874,6 +873,20 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
                   this.qcFields.push(abstractionFieldValue);
                 });
               }
+              if (jsonData.abstractionActivities != null) {
+                jsonData.abstractionActivities.forEach((val) => {
+                  const a = Abstraction.parse(val);
+                  if (a.activity === 'abstraction') {
+                    this.participant.abstraction = a;
+                  } else if (a.activity === 'review') {
+                    this.participant.review = a;
+                  } else if (a.activity === 'qc') {
+                    this.participant.qc = a;
+                  } else if (a.activity === 'final') {
+                    this.participant.finalA = a;
+                  }
+                });
+              }
             }
           }
           this.loadingParticipantPage = false;
@@ -890,7 +903,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   lockParticipant(abstractionData: Abstraction): void {
     this.loadingParticipantPage = true;
     const ddpParticipantId = this.participant.participant.ddpParticipantId;
-    debugger;
     this.dsmService.changeMedicalRecordAbstractionStatus(
         localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
         ddpParticipantId,

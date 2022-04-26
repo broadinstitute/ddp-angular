@@ -90,22 +90,6 @@ export class Participant {
     let qc: Abstraction = new Abstraction(null, null, null, 'qc', 'not_started', null, null, null);
     let finalA: Abstraction = new Abstraction(null, null, null, 'final', 'not_started', null, null, null);
 
-    jsonData = json.abstractionActivities;
-    if (jsonData != null) {
-      jsonData.forEach((val) => {
-        const a = Abstraction.parse(val);
-        if (a.activity === 'abstraction') {
-          abstraction = a;
-        } else if (a.activity === 'review') {
-          review = a;
-        } else if (a.activity === 'qc') {
-          qc = a;
-        } else if (a.activity === 'final') {
-          finalA = a;
-        }
-      });
-    }
-
     let participant: ParticipantDSMInformation = null;
     jsonData = json.participant;
     if (jsonData != null) {
