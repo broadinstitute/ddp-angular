@@ -32,7 +32,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress.component';
 import { ParticipationComponent } from './components/participation/participation.component';
 import { ScientificImpactComponent } from './components/scientific-impact/scientific-impact.component';
-import { PhysicianComponent } from './components/physician/physician.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -152,8 +151,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
     HeaderComponent,
     WorkflowProgressComponent,
     ParticipationComponent,
-    ScientificImpactComponent,
-    PhysicianComponent
+    // ScientificImpactComponent,
   ],
   providers: [
     {
