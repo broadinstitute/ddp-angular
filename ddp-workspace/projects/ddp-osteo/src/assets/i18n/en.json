@@ -302,11 +302,11 @@
                 "Desc": [
                     
                     "<span>&#8226;</span> <strong>Surveys:</strong> All participants in the OSproject will be able to provide patient-reported data through a series of surveys during enrollment and over time.",
-                    "<span>&#8226;</span> <strong>Saliva and Blood samples:</strong> Participants will also be able to provide saliva and blood samples, which provide us with information about their DNA.",
+                    "<span>&#8226;</span> <strong>Saliva and Blood samples:</strong> Participants will also be able to provide <a class=\"Link italic\" href=\"./Kit_Instructions.pdf\" target=\"_blank\">Saliva</a> and <a class=\"Link italic\" href=\"./Blood_Instructions.pdf\" target=\"_blank\">Blood</a> samples, which provide us with information about their DNA.",
                     "<span>&#8226;</span> <strong>Medical Records:</strong>  The project team requests copies of medical records from all institutions where participants have received care. This allows the project to understand a participant's history of treatments, procedures, and other clinical details.",
                     "<span>&#8226;</span> <strong>Tumor Samples:</strong> Participants may give us permission to request stored tumor samples from institutions where they have been treated. These are used together with saliva and blood samples to generate genomic and molecular data for analysis.",
                     "<span>&#8226;</span> <strong>Interviews or focus groups:</strong> Some participants will also be contacted to participate in focus groups or provide additional feedback related to the overall project experience and their perspectives on participating in genomic research.",
-                    "Examples of important documents such as the consent form, surveys, and kit instructions can be found on our Participation page." 
+                    "Examples of important documents such as the consent form, surveys, and kit instructions can be found on our <a class=\"Link italic\" href='/participation'>Participation page.</a>" 
                 ]
 
             },
@@ -318,13 +318,24 @@
                     "<span>&#8226;</span> <strong>Genomic Information: </strong> Whole Exome Sequencing (WES) information will be included for tumor samples, including mutations, small insertions/deletions, amplifications, and deletions.",
                     "<span>&#8226;</span> <strong>Medical Record Information:</strong> Information about diagnosis and treatment will be abstracted from patients’ medical records. These responses will be modified and formatted to prevent individual identification without altering scientific utility.",
                     "<span>&#8226;</span> <strong>Pathology Report Information:</strong>  Detailed histologic information about each sample will be abstracted from pathology reports associated with each sample.",
-                    "<span>&#8226;</span><strong>Patient-reported Data (PRD): </strong> Every patient that registers for the study has the option of completing multiple surveys about their experiences with osteosarcoma. Select questions from these surveys will be abstracted for inclusion. These responses will be modified and formatted to prevent individual identification without altering scientific utility. <ul type='circle'> <li>Specific types of questions include those about:</li> <ul type='square'> <li>Demographic and diagnostic information</li> <li>Demographic and diagnostic information</li> <li>The current location(s) / status of the participant’s osteosarcoma</li> <li>A place for participants to share any additional information that they’d like about their osteosarcoma</li> <li>A participant’s family history of cancer</li> <li>A participant’s current treatments for osteosarcoma</li> <li>A participant’s current quality of life</li></ul></ul>"
+                    "<span>&#8226;</span><strong>Patient-reported Data (PRD): </strong> Every patient that registers for the study has the option of completing multiple surveys about their experiences with osteosarcoma. Select questions from <a class=\"Link italic\" href=\"./surveys.pdf\" target=\"_blank\">these surveys</a> will be abstracted for inclusion. These responses will be modified and formatted to prevent individual identification without altering scientific utility. <ul type='circle'> <li>Specific types of questions include those about:</li> <ul type='square'> <li>Demographic and diagnostic information</li> <li>Demographic and diagnostic information</li> <li>The current location(s) / status of the participant’s osteosarcoma</li> <li>A place for participants to share any additional information that they’d like about their osteosarcoma</li> <li>A participant’s family history of cancer</li> <li>A participant’s current treatments for osteosarcoma</li> <li>A participant’s current quality of life</li></ul></ul>"
                     
                 ]
             },
             "WDSection": {
                 "Paragraph4" : "<h4>What does a data release look like?</h4>",
                 "Text": "Below are links out to publicly available datasets from other Count Me In projects. This is what we’re working towards for the Osteosarcoma Project. If you have questions about our data release process, please email us at info@OSproject.org."
+            },
+
+            "IMGSection": {
+                "Text1": "<strong>The Angiosarcoma Project</strong>",
+                "Text2": "<strong>The Angiosarcoma Project</strong>",
+                "Text3": "<strong>The Angiosarcoma Project</strong>"
+            },
+
+            "TermSection": {
+                "Paragraph5" : "<h4>Understanding Terms Used in Cancer Research</h4>",
+                "Text": "<span>&#8226;</span> For reference to common terms used in cancer care and research, the National Cancer Institute has developed a Dictionary of Cancer Terms, found <a class=\"Link italic\" href=\"https://www.cancer.gov/publications/dictionaries/cancer-terms/\" target=\"_blank\">here.</a>"
             }
 
         },

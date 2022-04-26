@@ -12,6 +12,19 @@
         background-color: $accent-color-orange;
     }
 
+    .static-page-title {
+        margin: 0 auto 5.625rem;
+        text-align: center;
+        padding: 3.2rem 0;
+        background-color: $accent-color-orange;
+    }
+
+    &:nth-of-type(odd) {
+        padding-bottom: 7.94rem;
+        flex-direction: row;
+    }
+}
+
     .step {
         padding: 0 1.5rem 9.94rem 1.5rem;
         display: flex;
@@ -72,7 +85,7 @@
             }
         }
     }
-}
+
 
 @media screen and (max-width: $tablet-breakpoint) {
     .participation {
