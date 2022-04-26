@@ -1,0 +1,57 @@
+<main class="main">
+    <div class="title-block">
+        <h1 class="section-title" translate>
+            PhysiciansPage.IntroSection.Title
+        </h1>
+            <p translate>PhysiciansPage.IntroSection.Text</p>
+        <section *ngFor="let step of 'PhysiciansPage.step' | translate; let i = index;" class="step">
+            <a mat-stroked-button *ngIf="Button && stepsHrf[i]"
+                target="_blank"
+                [href]="stepsHrf[i]"
+                class="step__btn button button_small small-letter-spacing button_secondary">
+                {{Button}}
+            </a>
+        </section>
+
+
+        <section class="section">
+            <div class="content content_tight intro-faq-block">
+                <div class="intro-faq-block__content">
+                    <p [innerHTML]="'PhysiciansPage.introduction.Text' | translate"></p>
+
+                    <p [innerHTML]="'PhysiciansPage.WISection.Title1' | translate"></p>
+                    <p [innerHTML]="'PhysiciansPage.WISection.Text1' | translate"></p>
+
+                    <p [innerHTML]="'PhysiciansPage.WISection.Title2' | translate"></p>
+                    <p [innerHTML]="'PhysiciansPage.WISection.Text2' | translate"></p>
+
+                    <p [innerHTML]="'PhysiciansPage.WISection.Title3' | translate"></p>
+                    <p [innerHTML]="'PhysiciansPage.WISection.Text3' | translate"></p>
+
+                    <p [innerHTML]="'PhysiciansPage.WISection.Title4' | translate"></p>
+                    <p [innerHTML]="'PhysiciansPage.WISection.Text4' | translate"></p>
+                    <p [innerHTML]="'PhysiciansPage.WISection.Text5' | translate"></p>
+
+                    <p [innerHTML]="'PhysiciansPage.WISection.Title5' | translate"></p>
+                    <p [innerHTML]="'PhysiciansPage.WISection.Text6' | translate"></p>
+
+                    <p [innerHTML]="'PhysiciansPage.WISection.Title6' | translate"></p>
+                    <p [innerHTML]="'PhysiciansPage.WISection.Text7' | translate"></p>
+
+                    <p [innerHTML]="'PhysiciansPage.WISection.Title7' | translate"></p>
+                    <p [innerHTML]="'PhysiciansPage.WISection.Text8' | translate"></p>
+
+                    <p [innerHTML]="'PhysiciansPage.WISection.Text9' | translate"></p>
+                    <p [innerHTML]="'PhysiciansPage.WISection.Text10' | translate"></p>
+                    <p [innerHTML]="'PhysiciansPage.WISection.Text11' | translate"></p>
+                    <p [innerHTML]="'PhysiciansPage.WISection.Text12' | translate"></p>
+                    <p [innerHTML]="'PhysiciansPage.WISection.Text13' | translate"></p>
+                    <p [innerHTML]="'PhysiciansPage.WISection.Text14' | translate"></p>
+                    <p [innerHTML]="'PhysiciansPage.WISection.Text15' | translate"></p>
+
+                </div>
+            </div>
+        </section>
+            
+    </div>
+</main>
