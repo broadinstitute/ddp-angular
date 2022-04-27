@@ -70,7 +70,7 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
         } else if (dateString.includes('T')) {
             this._dateString = Utils.getDateFormatted(Utils.getDate(dateString.split('T')[0]), this.dateFormat);
         } else if (dateString === 'N/A') {
-            this._dateString = '01-01-1000';
+            this._dateString = '1000-01-01';
         }
         else {
           this._dateString = Utils.getDateFormatted(this.datePicker, this.dateFormat);
@@ -138,7 +138,7 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
 
   public setNA(): void {
     this.isNA = true;
-    this._dateString = '01-01-1000';
+    this._dateString = '1000-01-01';
     this.emitDate(this._dateString);
   }
 
