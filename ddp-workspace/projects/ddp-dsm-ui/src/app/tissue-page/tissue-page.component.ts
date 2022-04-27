@@ -151,7 +151,7 @@ export class TissuePageComponent implements OnInit {
           if (data instanceof Array) {
             data.forEach( ( val ) => {
               const nameValue = NameValue.parse( val );
-              this.oncHistoryDetail[ nameValue.name.substr( nameValue.name.indexOf( '.' ) + 1 ) ] = nameValue.value;
+              this.oncHistoryDetail[ nameValue.name.slice( nameValue.name.indexOf( '.' ) + 1 ) ] = nameValue.value;
             } );
             }
           }

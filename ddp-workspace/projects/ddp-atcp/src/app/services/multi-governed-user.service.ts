@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map, filter, pluck, switchMap, take } from 'rxjs/operators';
 
 import {
@@ -53,7 +53,7 @@ export class MultiGovernedUserService {
         pluck('sections'),
         map(sections => {
           if (!sections.length) {
-            return throwError(`Prequalifier doesn't have any sections`);
+            throw new Error(`Prequalifier doesn't have any sections`);
           }
 
           return sections[0];

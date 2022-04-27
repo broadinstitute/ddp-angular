@@ -1,12 +1,13 @@
 import { Inject, Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+
 import { CookieService } from 'ngx-cookie';
 import { ConfigurationService } from './configuration.service';
 import { NotAuthenticatedServiceAgent } from './serviceAgents/notAuthenticatedServiceAgent.service';
 import { LoggingService } from './logging.service';
 import { PasswordCheckResult } from './../models/passwordCheckResult';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class IrbPasswordService extends NotAuthenticatedServiceAgent<boolean> {
@@ -43,15 +44,13 @@ export class IrbPasswordService extends NotAuthenticatedServiceAgent<boolean> {
     }
 
     public handleError(error: HttpErrorResponse): Observable<HttpErrorResponse> {
-        if (error.error instanceof ErrorEvent) {
-            // A client-side or network error occurred. Handle it accordingly.
-            this.log.logError(this.LOGGER_SOURCE, `An error occurred: ${error.error.message}`);
-        } else {
-            // The backend returned an unsuccessful response code.
-            // The response body may contain clues as to what went wrong,
-            this.log.logError(this.LOGGER_SOURCE, `Backend returned code ${error.status}, body was: ${error.error}`);
-        }
-        return throwError(error);
+      const errMsg = (error.error instanceof ErrorEvent) ?
+        // A client-side or network error occurred. Handle it accordingly.
+        `An error occurred: ${error.error.message}` :
+        // The backend returned an unsuccessful response code. The response body may contain clues as to what went wrong.
+        `Backend returned code ${error.status}, body was: ${error.error}`;
+      this.log.logError(this.LOGGER_SOURCE, errMsg);
+      return throwError(() => error);
     }
 
     public isIrbAuthenticated(): boolean {

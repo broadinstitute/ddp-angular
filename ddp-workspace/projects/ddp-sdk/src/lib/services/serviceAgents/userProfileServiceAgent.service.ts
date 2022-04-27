@@ -33,7 +33,7 @@ export class UserProfileServiceAgent extends UserServiceAgent<UserProfile> {
                 if (e.error && e.error.code && e.error.code === 'MISSING_PROFILE') {
                     return of(new UserProfileDecorator());
                 }
-                return throwError(e);
+                return throwError(() => e);
             })
         );
     }
