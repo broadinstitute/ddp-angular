@@ -1,7 +1,5 @@
 export class NameValue {
   constructor(public name: string, public value: string) {
-    this.name = name;
-    this.value = value;
   }
 
   static parse(json): NameValue {

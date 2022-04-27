@@ -44,6 +44,13 @@
     <div *ngIf="getRealm() != null && loadingParticipants === null && participantList != null">
       <div class="Width--15 Float--left">
         <div>
+          <mat-checkbox [checked]="selectAll"
+                        color="primary"
+                        (change)="toggleColumns($event.checked)">
+            {{selectAllColumnsLabel}}
+          </mat-checkbox>
+        </div>
+        <div>
           <button mat-mini-fab [color]="getButtonColorStyle(showFilters)"
                   (click)="showFiltersTable()">
             <!--<i class="fas fa-dataFilter"></i>-->
@@ -609,7 +616,14 @@
                             </ng-container>
                           </ng-container>
                           <ng-container
-                            *ngIf="col.type === 'DATE'">{{getUtil().getDateFormatted(onc[col.participantColumn.name])}}
+                            *ngIf="col.type === 'DATE'">
+                            {{
+                            onc[col.participantColumn.name]?.split('-').length > 2 ?
+                              (onc[col.participantColumn.name]  | date: 'MM/dd/yyyy') :
+                            onc[col.participantColumn.name]?.split('-').length === 2 ?
+                              (onc[col.participantColumn.name] | date: 'MM/yyyy') :
+                              (onc[col.participantColumn.name] | date: 'yyyy')
+                            }}
                           </ng-container>
                           <ng-container
                             *ngIf="col.type === 'OPTIONS'">{{getOptionDisplay(col.options, onc[col.participantColumn.name])}}

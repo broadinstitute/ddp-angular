@@ -301,9 +301,9 @@ export class MedicalRecordComponent implements OnInit {
     return false;
   }
 
-  public setContact(contact: any): void {
+  public setContact(contact: Lookup | string): void {
     if (contact != null) {
-      if (event instanceof MouseEvent) {
+      if (contact instanceof Lookup) {
         this.medicalRecord.name = contact.field1.value;
         this.valueChanged(contact.field1.value, 'name');
         if (contact.field2.value != null) {

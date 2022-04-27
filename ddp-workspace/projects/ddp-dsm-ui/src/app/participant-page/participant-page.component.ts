@@ -190,12 +190,14 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
             medProvider.legacyGuid : medProvider.guid;
           return tmpId === medicalRecord.ddpInstitutionId;
         });
-        medicalRecord.type = medicalProvider.type;
-        medicalRecord.nameDDP = medicalProvider.physicianName;
-        medicalRecord.institutionDDP = medicalProvider.institutionName;
-        medicalRecord.streetAddressDDP = medicalProvider.street;
-        medicalRecord.cityDDP = medicalProvider.city;
-        medicalRecord.stateDDP = medicalProvider.state;
+        if (medicalProvider) {
+          medicalRecord.type = medicalProvider.type;
+          medicalRecord.nameDDP = medicalProvider.physicianName;
+          medicalRecord.institutionDDP = medicalProvider.institutionName;
+          medicalRecord.streetAddressDDP = medicalProvider.street;
+          medicalRecord.cityDDP = medicalProvider.city;
+          medicalRecord.stateDDP = medicalProvider.state;
+        }
       });
     }
   }
@@ -415,10 +417,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         if (mr.mrReceived) {
           this.counterReceived = this.counterReceived + 1;
         }
-        if (this.counterReceived > 0) {
-          if (this.hasRole().isAbstracter() || this.hasRole().isQC()) {
-            this.loadAbstractionValues();
-          }
+      }
+      if (this.counterReceived > 0) {
+        if (this.hasRole().isAbstracter() || this.hasRole().isQC()) {
+          this.loadAbstractionValues();
         }
       }
       if (this.participant.participant != null) {
@@ -870,6 +872,20 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
                 jsonData.qc.forEach((val) => {
                   const abstractionFieldValue = AbstractionGroup.parse(val);
                   this.qcFields.push(abstractionFieldValue);
+                });
+              }
+              if (jsonData.abstractionActivities != null) {
+                jsonData.abstractionActivities.forEach((val) => {
+                  const a = Abstraction.parse(val);
+                  if (a.activity === 'abstraction') {
+                    this.participant.abstraction = a;
+                  } else if (a.activity === 'review') {
+                    this.participant.review = a;
+                  } else if (a.activity === 'qc') {
+                    this.participant.qc = a;
+                  } else if (a.activity === 'final') {
+                    this.participant.finalA = a;
+                  }
                 });
               }
             }

@@ -117,6 +117,8 @@ export class ParticipantListComponent implements OnInit {
   jsonPatch: any;
   viewFilter: any;
   private start: number;
+  selectAll = false;
+  selectAllColumnsLabel = 'Select all';
 
   constructor(private role: RoleService, private dsmService: DSMService, private compService: ComponentService,
                private router: Router, private auth: Auth, private route: ActivatedRoute, private util: Utils) {
@@ -1619,6 +1621,7 @@ export class ParticipantListComponent implements OnInit {
     }
     this.dsmService.downloadParticipantData(
       localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+      this.jsonPatch,
       this.parent,
       columns,
       this.viewFilter,
@@ -2224,5 +2227,11 @@ export class ParticipantListComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  private toggleColumns(checked: boolean): void {
+    if (checked) {
+      this.selectedColumns = Object.assign({}, this.sourceColumns);
+    }
   }
 }
