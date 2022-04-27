@@ -890,6 +890,7 @@ export class DSMService {
   public getAbstractionValues(realm: string, ddpParticipantId: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'abstraction';
     const json = {
+      userId: this.role.userID(),
       ddpParticipantId,
       realm
     };
