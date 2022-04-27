@@ -15,7 +15,7 @@ export class ActivityEquationAnswerComponent {
     @Input() block: ActivityEquationQuestionBlock;
 
     get displayValue(): string {
-        return this.block.answer ? this.formatValue(this.block.answer) : null;
+        return this.block.answer && this.block.answer[0] ? this.formatValue(this.block.answer[0]) : null;
     }
 
     private formatValue(answer: DecimalAnswer): string {

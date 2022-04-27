@@ -114,7 +114,7 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
         for (const equation of equations) {
             for (const block of equationQuestionBlocks) {
                 if (block.stableId === equation.stableId) {
-                    block.setAnswer(equation.values[0], false);
+                    block.setAnswer([equation.values[0]], false);
                 }
             }
         }

@@ -90,8 +90,13 @@ export class ActivityQuestionConverter {
                     const [answers] = questionJson.answers;
                     file.answer = answers.value;
                 }
-            }
-            else {
+            } else if (questionJson.questionType === QuestionType.Equation) {
+                const equation = questionBlock as ActivityEquationQuestionBlock;
+                if(equation) {
+                    const [answers] = questionJson.answers;
+                    equation.answer = answers.value;
+                }
+            } else {
                 questionBlock.answerId = questionJson.answers[0].answerGuid;
                 const valueForQuestion = questionJson.answers[0].value;
                 // case where we are getting answer for composite
