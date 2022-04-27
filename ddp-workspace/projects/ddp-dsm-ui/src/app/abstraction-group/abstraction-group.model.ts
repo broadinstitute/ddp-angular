@@ -1,5 +1,5 @@
 import { AbstractionField } from '../medical-record-abstraction/medical-record-abstraction-field.model';
-import {Abstraction} from "../medical-record-abstraction/medical-record-abstraction.model";
+import {Abstraction} from '../medical-record-abstraction/medical-record-abstraction.model';
 
 export class AbstractionGroup {
   constructor(

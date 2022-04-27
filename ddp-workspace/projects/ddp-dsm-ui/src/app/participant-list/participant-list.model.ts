@@ -85,10 +85,10 @@ export class Participant {
       });
     }
 
-    let abstraction: Abstraction = new Abstraction(null, null, null, 'abstraction', 'not_started', null, null, null);
-    let review: Abstraction = new Abstraction(null, null, null, 'review', 'not_started', null, null, null);
-    let qc: Abstraction = new Abstraction(null, null, null, 'qc', 'not_started', null, null, null);
-    let finalA: Abstraction = new Abstraction(null, null, null, 'final', 'not_started', null, null, null);
+    const abstraction: Abstraction = new Abstraction(null, null, null, 'abstraction', 'not_started', null, null, null);
+    const review: Abstraction = new Abstraction(null, null, null, 'review', 'not_started', null, null, null);
+    const qc: Abstraction = new Abstraction(null, null, null, 'qc', 'not_started', null, null, null);
+    const finalA: Abstraction = new Abstraction(null, null, null, 'final', 'not_started', null, null, null);
 
     let participant: ParticipantDSMInformation = null;
     jsonData = json.participant;

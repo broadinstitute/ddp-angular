@@ -213,7 +213,8 @@ export class DSMService {
     );
   }
 
-  public downloadParticipantData(realm: string, jsonPatch: string, parent: string, columns: {}, json: ViewFilter, filterQuery: string, sortBy?: Sort):
+  public downloadParticipantData(realm: string, jsonPatch: string, parent: string, columns: {}, json: ViewFilter,
+                                 filterQuery: string, sortBy?: Sort):
     Observable<any> {
     const viewFilterCopy = this.getFilter(json);
     const url = this.baseUrl + DSMService.UI + 'participantList';
