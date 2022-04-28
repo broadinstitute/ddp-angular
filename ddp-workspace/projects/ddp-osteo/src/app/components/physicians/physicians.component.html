@@ -1,22 +1,43 @@
-<main class="main">
-    <div class="title-block">
-        <h1 class="section-title" translate>
+<main class="scientific">
+    <h1 class="title scientific-title" translate>
+        PhysiciansPage.IntroSection.Title
+    </h1>
+        <!-- <h1 class="section-title" translate> 
             PhysiciansPage.IntroSection.Title
         </h1>
-            <p translate>PhysiciansPage.IntroSection.Text</p>
+            <span translate>PhysiciansPage.IntroSection.Text</span>
         <section *ngFor="let step of 'PhysiciansPage.step' | translate; let i = index;" class="step">
-            <a mat-stroked-button *ngIf="Button && stepsHrf[i]"
+            <a mat-stroked-button *ngIf="step.Button && stepsHrf[i]"
                 target="_blank"
                 [href]="stepsHrf[i]"
                 class="step__btn button button_small small-letter-spacing button_secondary">
                 {{Button}}
             </a>
-        </section>
+        </section> -->
 
 
         <section class="section">
             <div class="content content_tight intro-faq-block">
                 <div class="intro-faq-block__content">
+                    <p [innerHTML]="'PhysiciansPage.IntroSection.Text' | translate"></p>
+                    <section *ngFor="let step of 'BenefitsParticipation.Participations' | translate; let i = index;" class="step">
+                        <div class="step__data">
+                            <a mat-stroked-button *ngIf="step.Button && stepsHrf[i]"
+                                target="_blank"
+                                [href]="stepsHrf[i]"
+                                class="step__btn button button_small small-letter-spacing button_secondary">
+                                    {{step.Button1}}
+                            </a>
+                        </div>
+
+                    </section>
+                        <!-- <a mat-stroked-button 
+                            target="_blank"
+                            [href]="stepsHrf[i]"
+                            class="step__btn button button_small small-letter-spacing button_secondary">
+                            {{PhysiciansPage.Button}}
+                        </a> -->
+
                     <p [innerHTML]="'PhysiciansPage.introduction.Text' | translate"></p>
 
                     <p [innerHTML]="'PhysiciansPage.WISection.Title1' | translate"></p>
@@ -53,5 +74,5 @@
             </div>
         </section>
             
-    </div>
+    
 </main>

@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PhysiciansComponent implements OnInit {
 
-      readonly stepsHref = [
+      readonly stepsHrf = [
         'consent.pdf',
-        'medical_release.pdf',
+        'For_physic.pdf',
         'surveys.pdf',
         'Kit_Instructions.pdf',
         'tumor_samples.pdf'
