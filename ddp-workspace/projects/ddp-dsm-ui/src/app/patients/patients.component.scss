@@ -1,0 +1,49 @@
+.search-row {
+  display: flex;
+  justify-content: space-between;
+
+  .patients-count {
+    font-size: 20px;
+    font-weight: 800;
+    color: #232528;
+  }
+  .search-bar {
+    width: 70vh;
+    input {
+      width: 100%;
+      border: none;
+      border: solid 1px #ccc;
+      border-radius: 20px;
+      padding: 5px;
+    }
+  }
+  .buttons-row {
+    display: flex;
+    gap: 10px;
+    .button {
+      background-color: #344055;
+      color: white;
+      font-size: 16px;
+    }
+  }
+}
+
+.patients-table {
+    padding: 20px;
+    .header-row, .body {
+        display: grid;
+        grid-template-columns: 20vh 20vh 20vh 20vh 20vh 40vh;
+        padding: 10px;
+    }
+
+    .header-row {
+        color: #5278b0;
+        font-weight:  800;
+    }
+
+    .body {
+        border: 1px solid #dfdfe0;
+        border-radius: 5px;
+        border-left: 5px solid #3ebd67;
+    }
+}

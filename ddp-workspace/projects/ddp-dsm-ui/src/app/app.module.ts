@@ -118,6 +118,8 @@ import { TestDssComponent } from './test-dss/test-dss.component';
 import { DssErrorPageComponent } from './test-dss/dss-error-page/dss-error-page.component';
 
 import { TranslateService } from '@ngx-translate/core';
+import { PatientsComponent } from './patients/patients.component';
+import { AddPatientsModalComponent } from './add-patients-modal/add-patients-modal.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -240,7 +242,9 @@ export function translateFactory(translate: TranslateService,
         FieldTableComponent,
         dynamicFormTypeAndStudyRGP,
         TestDssComponent,
-        DssErrorPageComponent
+        DssErrorPageComponent,
+        PatientsComponent,
+        AddPatientsModalComponent
     ],
     imports: [
         DdpModule,

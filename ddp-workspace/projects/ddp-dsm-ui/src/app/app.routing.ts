@@ -30,6 +30,7 @@ import { ParticipantPageComponent } from './participant-page/participant-page.co
 import { FieldSettingsComponent } from './field-settings/field-settings.component';
 import { TestDssComponent } from './test-dss/test-dss.component';
 import { DssErrorPageComponent } from './test-dss/dss-error-page/dss-error-page.component';
+import { PatientsComponent } from './patients/patients.component';
 
 export const AppRoutes = [
 
@@ -94,6 +95,10 @@ export const AppRoutes = [
 
   {path: 'test-dss', component: TestDssComponent},
   {path: 'dss-error', component: DssErrorPageComponent},
+
+  //new features
+  
+  {path: 'patients', component: PatientsComponent},
 
   {path: '**', redirectTo: '/home'}
 ];
