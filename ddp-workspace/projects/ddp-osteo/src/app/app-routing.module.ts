@@ -201,7 +201,7 @@ const routes: Routes = [
         path: 'scientific-impact',
         component: ScientificImpactComponent,
         canActivate: [IrbGuard]
-    },    
+    },
     {
         path: 'error',
         component: ErrorRedesignedComponent

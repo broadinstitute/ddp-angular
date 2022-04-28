@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-physicians',
   templateUrl: './physicians.component.html',
   styleUrls: ['./physicians.component.scss']
 })
-export class PhysiciansComponent implements OnInit {
+export class PhysiciansComponent {
 
       readonly stepsHrf = [
         'consent.pdf',
@@ -16,8 +16,5 @@ export class PhysiciansComponent implements OnInit {
     ];
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }
