@@ -2233,7 +2233,7 @@ export class ParticipantListComponent implements OnInit {
     if (checked) {
       this.selectedColumns = Object.assign({}, this.sourceColumns);
     } else {
-      this.loadSettings()
+      this.loadSettings();
     }
   }
 }
