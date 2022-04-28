@@ -69,8 +69,8 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
           this._dateString = dateString;
         } else if (dateString.includes('T')) {
             this._dateString = Utils.getDateFormatted(Utils.getDate(dateString.split('T')[0]), this.dateFormat);
-        } else if (dateString === 'N/A') {
-            this._dateString = '1000-01-01';
+        } else if (dateString === '1000-01-01') {
+            this._dateString = !this.colorDuringPatch ? 'N/A' : '1000-01-01';
         }
         else {
           this._dateString = Utils.getDateFormatted(this.datePicker, this.dateFormat);
