@@ -153,7 +153,6 @@ export function translateFactory(translate: TranslateService, injector: Injector
     WorkflowProgressComponent,
     ParticipationComponent,
     PhysiciansComponent,
-    // ScientificImpactComponent,
     PhysiciansComponent
   ],
   providers: [

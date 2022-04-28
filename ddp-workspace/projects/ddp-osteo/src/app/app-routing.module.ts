@@ -34,7 +34,6 @@ import { FaqComponent } from './components/faq/faq.component';
 import { ParticipationComponent } from './components/participation/participation.component';
 import { ScientificImpactComponent } from './components/scientific-impact/scientific-impact.component';
 import { PhysiciansComponent } from './components/physicians/physicians.component';
-// import { PhysicianComponent } from './components/physician/physician.component';
 
 const routes: Routes = [
     {

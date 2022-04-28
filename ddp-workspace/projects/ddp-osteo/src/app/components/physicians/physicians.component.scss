@@ -22,26 +22,6 @@
         padding: 3.2rem 0;
         background-color: $accent-color-orange;
     }
-    // .Mtitle {
-    //     max-width: 700px;
-    // // }
-    // p {
-    //     display: flex;
-    //     max-width: 700px;
-    // }
-
-
-
-    // .column {
-    //     margin: 0 auto 5.625rem;
-    //     text-align: center;
-    //     padding: 3.2rem 0;
-    // }
-
-    // &:nth-of-type(odd) {
-    //     padding-bottom: 7.94rem;
-    //     flex-direction: row;
-    // }
 
 }
 
@@ -76,7 +56,7 @@
     color: mat.get-color-from-palette($app-theme, 700);
 }
 
-// accordion
+
 .mat-expansion-panel {
     border-radius: unset !important;
     box-shadow: unset !important;
