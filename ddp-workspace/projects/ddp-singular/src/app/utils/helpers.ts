@@ -67,7 +67,7 @@ export const getRenderActivities = (instanceGuid: string, activities: ActivityIn
     },
   };
 
-  const isChild = activities.some(a => a.activityCode === ActivityCode.AddParticipantParental);
+  const isChild = activities.some(a => a.activityCode === ActivityCode.ConsentParental);
 
   renderActivitiesMap[RenderActivityKey.About] = {
     i18nKey: isChild ? 'AboutMyChild' : 'AboutMe',
