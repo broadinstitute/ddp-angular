@@ -1621,6 +1621,7 @@ export class ParticipantListComponent implements OnInit {
     }
     this.dsmService.downloadParticipantData(
       localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+      this.jsonPatch,
       this.parent,
       columns,
       this.viewFilter,
