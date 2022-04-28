@@ -213,7 +213,8 @@ export class DSMService {
     );
   }
 
-  public downloadParticipantData(realm: string, parent: string, columns: {}, json: ViewFilter, filterQuery: string, sortBy?: Sort):
+  public downloadParticipantData(realm: string, jsonPatch: string, parent: string, columns: {}, json: ViewFilter,
+                                 filterQuery: string, sortBy?: Sort):
     Observable<any> {
     const viewFilterCopy = this.getFilter(json);
     const url = this.baseUrl + DSMService.UI + 'participantList';
@@ -232,7 +233,8 @@ export class DSMService {
     } else if (viewFilterCopy != null) {
       map.push({name: 'filters', value: JSON.stringify(viewFilterCopy.filters)});
     }
-    const body = {columnNames: columns};
+    const filters = JSON.parse(jsonPatch);
+    const body = {columnNames: columns, ...filters};
     return this.http.post(url, JSON.stringify(body), this.buildQueryCsvBlobHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );
@@ -889,6 +891,7 @@ export class DSMService {
   public getAbstractionValues(realm: string, ddpParticipantId: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'abstraction';
     const json = {
+      userId: this.role.userID(),
       ddpParticipantId,
       realm
     };

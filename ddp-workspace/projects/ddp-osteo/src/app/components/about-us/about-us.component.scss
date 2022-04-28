@@ -7,6 +7,12 @@
     color: mat.get-color-from-palette($app-theme, 250);
 }
 
+@mixin cc-member-name {
+    font-size: 1.375rem;
+    line-height: 1.625rem;
+    color: mat.get-color-from-palette($app-theme, 250);
+}
+
 .intro-section {
     background-color: mat.get-color-from-palette($app-theme, 350);
 }
@@ -173,6 +179,10 @@
         padding: 0;
     }
 
+    .cc-member {
+        padding: 0;
+    }
+
     .pac-member__image {
         height: 150px;
         width: 150px;
@@ -194,5 +204,52 @@
 @media screen and (max-width: 1250px) {
     .pac-member__image {
         position: unset;
+    }
+
+    .cc-member__image {
+        position: unset;
+    }
+}
+
+
+
+// comeent
+
+.cc-block {
+    margin-bottom: 3rem;
+}
+
+.cc-members {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cc-member {
+    flex: 50%;
+    display: flex;
+    margin: 0 0 3rem 0;
+    padding: 0 1rem 0 0;
+    box-sizing: border-box;
+
+    &__image {
+        max-width: 100%;
+        max-height: 100%;
+        width: 115px;
+        height: 115px;
+        margin: 0 2rem 0 0;
+        border-radius: 50%;
+    }
+
+    &__link {
+        @include cc-member-name;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &__text {
+        @include cc-member-name;
+        margin: 0;
     }
 }
