@@ -15,6 +15,7 @@ import { Filter } from '../filter-column/filter-column.model';
 import { AbstractionField } from '../medical-record-abstraction/medical-record-abstraction-field.model';
 import { Participant } from '../participant-list/participant-list.model';
 import { NameValue } from './name-value.model';
+import {AnswerValue} from "../../../../ddp-sdk/src/lib/models/activity/answerValue";
 
 const fileSaver = require('file-saver');
 const Json2csvParser = require('json2csv').Parser;
@@ -857,41 +858,52 @@ export class Utils {
     return answers;
   }
 
-
-  public static getNiceTextForCSVCompositeType( questionAnswer: QuestionAnswer, qdef: QuestionDefinition ): string[] {
-    const answers = [];
-    for (let answer of questionAnswer.answer) {
-      if (answer instanceof Array) {
-        answer = answer[ 0 ];
-      }
-      let text = answer;
-      let ans;
-      if (qdef?.childQuestions) {
-        loop1: for (const childq of qdef.childQuestions) {
-          if (childq.groups) {
-            for (const g of childq.groups) {
-              for (const option of g.options) {
-                if (option.optionStableId === answer) {
-                  ans = option.optionText;
-                  break loop1;
-                }
-              }
-            }
-          }
-          if (!ans && childq.options) {
-            for (const g of childq.options) {
-              if (g.optionStableId === answer) {
-                ans = g.optionText;
+  private static getAnswer( answer: AnswerValue, qdef: QuestionDefinition ) {
+    let text = answer;
+    let ans;
+    if (qdef?.childQuestions) {
+      loop1: for (const childq of qdef.childQuestions) {
+        if (childq.groups) {
+          for (const g of childq.groups) {
+            for (const option of g.options) {
+              if (option.optionStableId === answer) {
+                ans = option.optionText;
                 break loop1;
               }
             }
           }
         }
-        if (ans) {
-          text = ans;
+        if (!ans && childq.options) {
+          for (const g of childq.options) {
+            if (g.optionStableId === answer) {
+              ans = g.optionText;
+              break loop1;
+            }
+          }
         }
       }
-      answers.push( text );
+    }
+    return text;
+  }
+
+  public static getNiceTextForCSVCompositeType( questionAnswer: QuestionAnswer, qdef: QuestionDefinition ): string[] {
+    const answers = [];
+    for (let answer of questionAnswer.answer) {
+      if (answer instanceof Array) {
+        let answerText = '';
+        for (let childAnswer of answer) {
+          let text = this.getAnswer(childAnswer, qdef);
+          if (text) {
+            answerText += text + ' ';
+          }
+        }
+        answers.push(answerText)
+      } else {
+        let text = this.getAnswer(answer, qdef);
+        if (text) {
+          answers.push(text);
+        }
+      }
     }
 
     return answers;
