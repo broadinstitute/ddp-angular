@@ -199,10 +199,7 @@
     <tfoot>
     <tr>
       <td [attr.colspan]="10 + (settings['oD'] == undefined? 0: settings['oD'].length)">
-        <ng-container *ngIf="getRole().getUserSetting().getDateFormat() === 'yyyy-MM-dd'">
-          * unknown dates are allowed. Just enter date as YYYY-MM or YYYY
-        </ng-container>
-        <ng-container *ngIf="getRole().getUserSetting().getDateFormat() === 'MM/dd/yyyy'">
+        <ng-container>
           * unknown dates are allowed. Just enter date as MM/YYYY or YYYY
         </ng-container>
       </td>

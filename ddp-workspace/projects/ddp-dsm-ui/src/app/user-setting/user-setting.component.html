@@ -34,44 +34,13 @@
           <td>Default rows on page</td>
           <td>
             <mat-form-field class="Input">
-              <input matInput type="number" [(ngModel)]="userSetting.rowsOnPage" min="0" max="1000" i18n>
+              <input matInput type="number" [(ngModel)]="userSetting.rowsPerPage" min="0" max="1000" i18n>
             </mat-form-field>
           </td>
           <td></td>
           <td></td>
         </tr>
-        <tr>
-          <td>Row count buttons</td>
-          <td>
-            <mat-form-field class="Input">
-              <input matInput type="number" [(ngModel)]="userSetting.rowSet0" min="0" max="1000" i18n>
-            </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field class="Input">
-              <input matInput type="number" [(ngModel)]="userSetting.rowSet1" min="0" max="1000" i18n>
-            </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field class="Input">
-              <input matInput type="number" [(ngModel)]="userSetting.rowSet2" min="0" max="1000" i18n>
-            </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="4"><b>Date format</b></td>
-        </tr>
-        <tr>
-          <td>Enter date format</td>
-          <td>
-            <mat-select [(ngModel)]="userSetting.dateFormat">
-              <mat-option value="yyyy-MM-dd">yyyy-MM-dd</mat-option>
-              <mat-option value="MM/dd/yyyy">MM/dd/yyyy</mat-option>
-            </mat-select>
-          </td>
-          <td></td>
-          <td></td>
-        </tr>
+
         <ng-container *ngIf="realm !== null&& realm !== undefined">
           <tr>
             <td colspan="4"><b>Default Filters</b></td>
