@@ -2229,9 +2229,11 @@ export class ParticipantListComponent implements OnInit {
     return false;
   }
 
-  private toggleColumns(checked: boolean): void {
+  toggleColumns(checked: boolean): void {
     if (checked) {
       this.selectedColumns = Object.assign({}, this.sourceColumns);
+    } else {
+      this.loadSettings();
     }
   }
 }
