@@ -732,6 +732,10 @@ export class Utils {
     return  activities?.find( x => x.activityCode === activityCode && x.activityVersion === version );
   }
 
+  static getFilteredActivityDefinitions( activities: ActivityDefinition[], activityCode: string, version: string ): ActivityDefinition[] {
+    return  activities?.filter( x => x.activityCode === activityCode && x.activityVersion === version );
+  }
+
   getAbstractionGroup(groups: Array<AbstractionGroup>, groupId: string): AbstractionGroup | undefined {
     return groups.find(x => x.abstractionGroupId.toString() === groupId);
   }
@@ -886,7 +890,7 @@ export class Utils {
     if (ans) {
       return ans;
     }
-    return typeof text === "string" ? text : null;
+    return typeof text === 'string' ? text : null;
   }
 
   public static getNiceTextForCSVCompositeType( questionAnswer: QuestionAnswer, qdef: QuestionDefinition ): string[] {
