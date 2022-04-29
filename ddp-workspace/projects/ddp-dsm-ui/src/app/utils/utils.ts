@@ -15,7 +15,7 @@ import { Filter } from '../filter-column/filter-column.model';
 import { AbstractionField } from '../medical-record-abstraction/medical-record-abstraction-field.model';
 import { Participant } from '../participant-list/participant-list.model';
 import { NameValue } from './name-value.model';
-import {AnswerValue} from "../../../../ddp-sdk/src/lib/models/activity/answerValue";
+import { AnswerValue } from '../../../../ddp-sdk/src/lib/models/activity/answerValue';
 
 const fileSaver = require('file-saver');
 const Json2csvParser = require('json2csv').Parser;
@@ -858,8 +858,8 @@ export class Utils {
     return answers;
   }
 
-  private static getAnswer( answer: AnswerValue, qdef: QuestionDefinition ) {
-    let text = answer;
+  private static getAnswer( answer: AnswerValue, qdef: QuestionDefinition ): string {
+    const text = answer;
     let ans;
     if (qdef?.childQuestions) {
       loop1: for (const childq of qdef.childQuestions) {
@@ -883,23 +883,26 @@ export class Utils {
         }
       }
     }
-    return text;
+    if (ans) {
+      return ans;
+    }
+    return typeof text === "string" ? text : null;
   }
 
   public static getNiceTextForCSVCompositeType( questionAnswer: QuestionAnswer, qdef: QuestionDefinition ): string[] {
     const answers = [];
-    for (let answer of questionAnswer.answer) {
+    for (const answer of questionAnswer.answer) {
       if (answer instanceof Array) {
         let answerText = '';
-        for (let childAnswer of answer) {
-          let text = this.getAnswer(childAnswer, qdef);
+        for (const childAnswer of answer) {
+          const text = this.getAnswer(childAnswer, qdef);
           if (text) {
             answerText += text + ' ';
           }
         }
-        answers.push(answerText)
+        answers.push(answerText);
       } else {
-        let text = this.getAnswer(answer, qdef);
+        const text = this.getAnswer(answer, qdef);
         if (text) {
           answers.push(text);
         }
