@@ -134,7 +134,7 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
         for (const equation of equations) {
             for (const block of equationQuestionBlocks) {
                 if (block.stableId === equation.stableId) {
-                    block.setAnswer(equation.values, false);
+                    block.setAnswer(equation.values[0], false);
                     this.triggerChanges = !this.triggerChanges;
                 }
             }
@@ -159,7 +159,7 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
                         answerRow.map((answer: AnswerContainer) => {
                             return (answer.stableId === innerEquationToUpdate.stableId) ? {
                                 ...answer,
-                                value: [equation.values[index]]
+                                value: equation.values[index]
                             } : answer;
                         })
                     );
