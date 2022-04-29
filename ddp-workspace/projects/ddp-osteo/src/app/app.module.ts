@@ -3,7 +3,7 @@ import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 
-import { TranslateService } from '@ngx-translate/core';
+import {TranslateService } from '@ngx-translate/core';
 
 import {
   DdpModule,
@@ -32,8 +32,14 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { HeaderComponent } from './components/header/header.component';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress.component';
+
+import { ParticipationComponent } from './components/participation/participation.component';
+import { ScientificImpactComponent } from './components/scientific-impact/scientific-impact.component';
+import { PhysiciansComponent } from './components/physicians/physicians.component';
+
 import { ActivityComponent } from './components/activity/activity.component';
 import { ActivityPageComponent } from './components/activity-page/activity-page.component';
+
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -149,10 +155,16 @@ export function translateFactory(translate: TranslateService, injector: Injector
     GalleryComponent,
     AboutUsComponent,
     FaqComponent,
+    ScientificImpactComponent,
     HeaderComponent,
     WorkflowProgressComponent,
+
+    ParticipationComponent,
+    PhysiciansComponent,
+
     ActivityComponent,
     ActivityPageComponent
+
   ],
   providers: [
     {

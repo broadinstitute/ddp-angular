@@ -152,7 +152,7 @@
     <section class="section gallery-section">
         <div class="content content_medium gallery-block">
             <div class="gallery-header">
-                <h2 class="gallery-header__title" translate>HomePage.GallerySection.Title</h2>
+                <h2 class="gallery-header__title" [innerHTML]="'HomePage.GallerySection.Title' | translate" >HomePage.GallerySection.Title</h2>
                 <img lazy-resource class="gallery-header__image" src="assets/images/molecule.svg"
                     [alt]="'HomePage.GallerySection.TitleImageAlt' | translate">
             </div>
