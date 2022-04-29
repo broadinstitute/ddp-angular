@@ -20,7 +20,7 @@ export class AddFamilyMemberComponent {
   chosenRelation: string;
   isCopyProbandInfo = false;
   probandDataId: number = this.getProbandDataId(this.data.participant.participantData);
-  isParticipantProbandEmpty: boolean = this.probandDataId == null;
+  isParticipantProbandEmpty: boolean = this.getProbandDataId(this.data.participant.participantData) == null;
   staticRelations = Statics.RELATIONS;
   isDataLoading = false;
 
