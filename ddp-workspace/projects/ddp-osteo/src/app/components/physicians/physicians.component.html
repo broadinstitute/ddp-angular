@@ -20,40 +20,15 @@
                         </div>
 
                     </section>
-
+                    
 
                     <p [innerHTML]="'PhysiciansPage.introduction.Text' | translate"></p>
+                    <div *ngFor="let PTinfo of 'PhysiciansPage.WISection' | translate">
+                        <p [innerHTML]="PTinfo.Title"></p>
+                        <p [innerHTML]="PTinfo.Text"></p>
+                    </div>
 
-                    <p [innerHTML]="'PhysiciansPage.WISection.Title1' | translate"></p>
-                    <p [innerHTML]="'PhysiciansPage.WISection.Text1' | translate"></p>
-
-                    <p [innerHTML]="'PhysiciansPage.WISection.Title2' | translate"></p>
-                    <p [innerHTML]="'PhysiciansPage.WISection.Text2' | translate"></p>
-
-                    <p [innerHTML]="'PhysiciansPage.WISection.Title3' | translate"></p>
-                    <p [innerHTML]="'PhysiciansPage.WISection.Text3' | translate"></p>
-
-                    <p [innerHTML]="'PhysiciansPage.WISection.Title4' | translate"></p>
-                    <p [innerHTML]="'PhysiciansPage.WISection.Text4' | translate"></p>
-                    <p [innerHTML]="'PhysiciansPage.WISection.Text5' | translate"></p>
-
-                    <p [innerHTML]="'PhysiciansPage.WISection.Title5' | translate"></p>
-                    <p [innerHTML]="'PhysiciansPage.WISection.Text6' | translate"></p>
-
-                    <p [innerHTML]="'PhysiciansPage.WISection.Title6' | translate"></p>
-                    <p [innerHTML]="'PhysiciansPage.WISection.Text7' | translate"></p>
-
-                    <p [innerHTML]="'PhysiciansPage.WISection.Title7' | translate"></p>
-                    <p [innerHTML]="'PhysiciansPage.WISection.Text8' | translate"></p>
-
-                    <p [innerHTML]="'PhysiciansPage.WISection.Text9' | translate"></p>
-                    <p [innerHTML]="'PhysiciansPage.WISection.Text10' | translate"></p>
-                    <p [innerHTML]="'PhysiciansPage.WISection.Text11' | translate"></p>
-                    <p [innerHTML]="'PhysiciansPage.WISection.Text12' | translate"></p>
-                    <p [innerHTML]="'PhysiciansPage.WISection.Text13' | translate"></p>
-                    <p [innerHTML]="'PhysiciansPage.WISection.Text14' | translate"></p>
-                    <p [innerHTML]="'PhysiciansPage.WISection.Text15' | translate"></p>
-
+                    
                 </div>
             </div>
         </section>
