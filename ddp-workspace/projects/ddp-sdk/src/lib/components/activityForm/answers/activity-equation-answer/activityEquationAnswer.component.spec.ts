@@ -49,7 +49,7 @@ describe('ActivityEquationAnswerComponent', () => {
     it('should have an initial equation value', () => {
         component.block = {
            ...questionBlock,
-           answer: [{value: 12345, scale: 4}]
+           answer: {value: 12345, scale: 4}
         } as ActivityEquationQuestionBlock;
         fixture.detectChanges();
 
@@ -61,7 +61,7 @@ describe('ActivityEquationAnswerComponent', () => {
         component.block = {
             ...questionBlock,
             maximumDecimalPlaces: 3,
-            answer: [{value: 12345, scale: 4}]
+            answer: {value: 12345, scale: 4}
         } as ActivityEquationQuestionBlock;
         fixture.detectChanges();
 
@@ -71,7 +71,7 @@ describe('ActivityEquationAnswerComponent', () => {
 
     it('should have a formatted equation value when maximumDecimalPlaces field is not set', () => {
         component.block = {
-            answer: [{value: 12345, scale: 4}],
+            answer: {value: 12345, scale: 4},
             question: 'Equation question title',
             questionType: QuestionType.Equation
         } as ActivityEquationQuestionBlock;
