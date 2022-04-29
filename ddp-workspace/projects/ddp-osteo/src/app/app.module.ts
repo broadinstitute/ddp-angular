@@ -162,7 +162,6 @@ export function translateFactory(translate: TranslateService, injector: Injector
 
     ParticipationComponent,
     PhysiciansComponent,
-    PhysiciansComponent,
 
     ActivityComponent,
     ActivityPageComponent
