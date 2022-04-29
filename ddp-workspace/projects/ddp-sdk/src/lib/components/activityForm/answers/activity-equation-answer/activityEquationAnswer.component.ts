@@ -8,8 +8,7 @@ import { DecimalAnswer } from '../../../../models/activity/decimalAnswer';
   template: `
       <ddp-question-prompt [block]="block"></ddp-question-prompt>
       <div class="equation-value">{{displayValue}}</div>
-  `,
-  styles: []
+  `
 })
 export class ActivityEquationAnswerComponent {
     @Input() block: ActivityEquationQuestionBlock;

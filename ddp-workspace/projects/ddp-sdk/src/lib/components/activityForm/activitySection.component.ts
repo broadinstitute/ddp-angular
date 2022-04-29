@@ -20,6 +20,8 @@ import { SubmissionManager } from '../../services/serviceAgents/submissionManage
 import { ActivityInstance } from '../../models/activityInstance';
 import { AnswerResponseEquation } from '../../models/activity/answerResponseEquation';
 import { ActivityEquationQuestionBlock } from '../../models/activity/activityEquationQuestionBlock';
+import { ActivityCompositeQuestionBlock, AnswerContainer } from '../../models/activity/activityCompositeQuestionBlock';
+import { ActivityQuestionBlock } from '../../models/activity/activityQuestionBlock';
 
 @Component({
     selector: 'ddp-activity-section',
@@ -33,6 +35,13 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
     @Input() public activityGuid: string;
     @Output() embeddedComponentsValidationStatus: EventEmitter<boolean> = new EventEmitter();
     @Output() componentBusy: EventEmitter<boolean> = new EventEmitter(true);
+
+    // triggerChanges is a flag to pass through child components
+    // in order to update a composite question in the section
+    // that has equations (derived) questions
+    // Any value of triggerChanges will trigger the composite question update/re-rendering
+    triggerChanges: boolean;
+
     private subscription: Subscription;
     private embeddedValidationStatus = new Map();
 
@@ -110,13 +119,57 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
     private updateEquationQuestions(equations: AnswerResponseEquation[]): void {
         const equationQuestionBlocks = this.section.allChildBlocks()
             .filter(block => block instanceof ActivityEquationQuestionBlock) as ActivityEquationQuestionBlock[];
+        this.updateSingleEquations(equations, equationQuestionBlocks);
 
+        const compositesWithEquations = this.section.allChildBlocks()
+            .filter(block => {
+              return block instanceof ActivityCompositeQuestionBlock &&
+                  block.children.some(child => child instanceof ActivityEquationQuestionBlock);
+            }) as ActivityCompositeQuestionBlock[];
+        this.updateEquationsInComposites(equations, compositesWithEquations);
+    }
+
+    private updateSingleEquations(equations: AnswerResponseEquation[],
+                                         equationQuestionBlocks: ActivityEquationQuestionBlock[]): void {
         for (const equation of equations) {
             for (const block of equationQuestionBlocks) {
                 if (block.stableId === equation.stableId) {
-                    block.setAnswer([equation.values[0]], false);
+                    block.setAnswer(equation.values, false);
+                    this.triggerChanges = !this.triggerChanges;
                 }
             }
+        }
+    }
+
+    private updateEquationsInComposites(equations: AnswerResponseEquation[],
+                                        compositesWithEquations: ActivityCompositeQuestionBlock[]): void {
+        let shouldTriggerChanges = false;
+
+        for (const equation of equations) {
+            for (const composite of compositesWithEquations) {
+                const innerEquationToUpdate = composite.children
+                    .find((child: ActivityQuestionBlock<any>) => child.stableId === equation.stableId);
+
+                if (innerEquationToUpdate) {
+                    innerEquationToUpdate.setAnswer(equation.values, false);
+
+                    const prevAnswer: AnswerContainer[][] = composite.answer;
+                    const newAnswer: AnswerContainer[][] = prevAnswer.map((answerRow: AnswerContainer[], index) =>
+                        answerRow.map((answer: AnswerContainer) => {
+                            return (answer.stableId === innerEquationToUpdate.stableId) ? {
+                                ...answer,
+                                value: [equation.values[index]]
+                            } : answer;
+                        })
+                    );
+                    composite.setAnswer(newAnswer, false);
+                    shouldTriggerChanges = true;
+                }
+            }
+        }
+
+        if (shouldTriggerChanges) {
+            this.triggerChanges = !this.triggerChanges;
         }
     }
 }

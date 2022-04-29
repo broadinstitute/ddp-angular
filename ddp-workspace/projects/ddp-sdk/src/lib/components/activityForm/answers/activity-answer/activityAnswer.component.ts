@@ -45,6 +45,7 @@ import { BlockType } from '../../../../models/activity/blockType';
                                            [block]="block"
                                            [readonly]="readonly"
                                            [validationRequested]="validationRequested"
+                                           [triggerChanges]="triggerChanges"
                                            (valueChanged)="onChange($event)"
                                            (componentBusy)="componentBusy.next($event)">
             </ddp-activity-composite-answer>
@@ -78,6 +79,7 @@ import { BlockType } from '../../../../models/activity/blockType';
             <ddp-activity-equation-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.Equation)"
                                           [class]="'equation-answer-' + block.stableId"
                                           [block]="block"
+                                          [triggerChanges]="triggerChanges"
                                           [readonly]="readonly">
             </ddp-activity-equation-answer>
             <span *ngIf="block.additionalInfoFooter"
@@ -94,6 +96,7 @@ export class ActivityAnswerComponent {
     @Input() validationRequested: boolean;
     @Input() studyGuid: string;
     @Input() activityGuid: string;
+    @Input() triggerChanges: boolean;
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
     @Output() componentBusy = new EventEmitter<boolean>();
     readonly QuestionType = QuestionType;

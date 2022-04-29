@@ -99,20 +99,10 @@ export class ActivityQuestionConverter {
             } else {
                 questionBlock.answerId = questionJson.answers[0].answerGuid;
                 const valueForQuestion = questionJson.answers[0].value;
+
                 // case where we are getting answer for composite
                 if (_.isArray(valueForQuestion)) {
-                    const answer = (valueForQuestion as any[][]).map(rowOfValues => {
-                        if (_.isArray(rowOfValues)) {
-                            // eslint-disable-next-line arrow-body-style
-                            return (rowOfValues as any[]).map(eachValue => {
-                                // todo this object signature ought to have its own interface
-                                return eachValue !== null ? {value: eachValue.value, stableId: questionJson.stableId} : null;
-                            });
-                        } else {
-                            return null;
-                        }
-                    });
-                    questionBlock.setAnswer(answer, false);
+                   this.buildCompositeAnswers(questionJson, questionBlock as ActivityCompositeQuestionBlock);
                 } else {
                     questionBlock.answer = valueForQuestion;
                     if (questionJson.questionType === 'TEXT' && questionJson.confirmEntry) {
@@ -123,6 +113,52 @@ export class ActivityQuestionConverter {
             }
         }
         return questionBlock;
+    }
+
+    private buildCompositeAnswers(questionJson, questionBlock: ActivityCompositeQuestionBlock): void {
+        const valueForQuestion: any[][] = questionJson.answers[0].value;
+        let answerWithEquations;
+
+        const defaultAnswer = valueForQuestion.map(rowOfValues => {
+            if (!_.isArray(rowOfValues)) {
+                return null;
+            }
+            return rowOfValues.map(eachValue => eachValue !== null ?
+                {value: eachValue.value, stableId: questionJson.stableId}
+                : null
+            );
+        });
+
+        // back-end does not add a child Equation question answer to composite question answers
+        // but keep the Equation answer in the Equation question answer itself
+        const compositeQuestionHasEquations = questionJson.children.length > valueForQuestion[0].length;
+
+        if (compositeQuestionHasEquations) {
+            // mix defaultAnswers with equation answers
+            answerWithEquations = defaultAnswer.map((rowOfValues, rowIndex: number) => {
+                if (rowOfValues === null) {
+                    return null;
+                }
+
+                const resultRow = [];
+                questionJson.children.forEach((childQuestion, valueIndex: number) => {
+                    if (childQuestion.questionType === QuestionType.Equation) {
+                        // value from child Equation question answer
+                        resultRow.push({
+                            value: [childQuestion.answers[0].value[rowIndex]],
+                            stableId: childQuestion.stableId
+                        });
+                    }
+                    if (rowOfValues[valueIndex]) {
+                        // current value from defaultAnswers
+                        resultRow.push(rowOfValues[valueIndex]);
+                    }
+                });
+
+                return resultRow;
+            });
+        }
+        questionBlock.setAnswer(answerWithEquations || defaultAnswer, false);
     }
 
     private isQuestionRequired(questionValidators: Array<ActivityAbstractValidationRule>): boolean {
