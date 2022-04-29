@@ -88,6 +88,7 @@ export class ParticipantListComponent implements OnInit {
   activityDefinitions = new Map();
 
   selectedColumns = {};
+  prevSelectedColumns = {};
   defaultColumns = [];
 
   selectedFilter: Filter = null;
@@ -2231,9 +2232,10 @@ export class ParticipantListComponent implements OnInit {
 
   toggleColumns(checked: boolean): void {
     if (checked) {
+      this.prevSelectedColumns = this.selectedColumns;
       this.selectedColumns = Object.assign({}, this.sourceColumns);
     } else {
-      this.loadSettings();
+      this.selectedColumns = this.prevSelectedColumns;
     }
   }
 }
