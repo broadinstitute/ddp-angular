@@ -83,7 +83,6 @@ export class ActivityCompositeAnswer implements OnChanges {
             }
             return currentRow;
         });
-
     }
 
     // Use original child question blocks as the prototypes to make real working ones

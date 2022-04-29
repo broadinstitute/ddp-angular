@@ -122,10 +122,10 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
         this.updateSingleEquations(equations, equationQuestionBlocks);
 
         const compositesWithEquations = this.section.allChildBlocks()
-            .filter(block => {
-              return block instanceof ActivityCompositeQuestionBlock &&
-                  block.children.some(child => child instanceof ActivityEquationQuestionBlock);
-            }) as ActivityCompositeQuestionBlock[];
+            .filter(block =>
+                block instanceof ActivityCompositeQuestionBlock &&
+                block.children.some(child => child instanceof ActivityEquationQuestionBlock)
+            ) as ActivityCompositeQuestionBlock[];
         this.updateEquationsInComposites(equations, compositesWithEquations);
     }
 
@@ -155,6 +155,7 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
 
                     const prevAnswer: AnswerContainer[][] = composite.answer;
                     const newAnswer: AnswerContainer[][] = prevAnswer.map((answerRow: AnswerContainer[], index) =>
+                        // eslint-disable-next-line arrow-body-style
                         answerRow.map((answer: AnswerContainer) => {
                             return (answer.stableId === innerEquationToUpdate.stableId) ? {
                                 ...answer,
