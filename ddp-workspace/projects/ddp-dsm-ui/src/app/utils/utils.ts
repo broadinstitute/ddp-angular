@@ -449,7 +449,7 @@ export class Utils {
           return this.changePartialYearTo2000(dateParts[ 2 ], dateParts[ 0 ], dateParts[ 1 ]);
         } else if (allowUnknownDay && dateParts.length === 2) {
           if (dateParts[ 1 ].length === 4 && dateParts[ 0 ].length < 3) {
-            if (Number(dateParts[ 0 ]) > -1 && Number(dateParts[ 0 ]) < 12) {
+            if (Number(dateParts[ 0 ]) > -1 && Number(dateParts[ 0 ]) <= 12) {
               return Utils.DATE_PARTIAL;
             }
           }
@@ -464,7 +464,7 @@ export class Utils {
           return this.changePartialYearTo2000(dateParts[ 0 ], dateParts[ 1 ], dateParts[ 2 ]);
         } else if (allowUnknownDay && dateParts.length === 2) {
           if (dateParts[ 0 ].length === 4 && dateParts[ 1 ].length < 3) {
-            if (Number(dateParts[ 1 ]) > -1 && Number(dateParts[ 1 ]) < 12) {
+            if (Number(dateParts[ 1 ]) > -1 && Number(dateParts[ 1 ]) <= 12) {
               return Utils.DATE_PARTIAL;
             }
           }
@@ -497,7 +497,7 @@ export class Utils {
         dateParts = dateString.split('/');
         if (dateParts.length === 2) {
           if (dateParts[ 1 ].length === 4 && dateParts[ 0 ].length < 3) {
-            if (Number(dateParts[ 0 ]) > -1 && Number(dateParts[ 0 ]) < 12) {
+            if (Number(dateParts[ 0 ]) > -1 && Number(dateParts[ 0 ]) <= 12) {
               return dateParts[ 1 ] + '-' + dateParts[ 0 ];
             }
           }
@@ -510,7 +510,7 @@ export class Utils {
         dateParts = dateString.split('-');
         if (dateParts.length === 2) {
           if (dateParts[ 0 ].length === 4 && dateParts[ 1 ].length < 3) {
-            if (Number(dateParts[ 1 ]) > -1 && Number(dateParts[ 1 ]) < 12) {
+            if (Number(dateParts[ 1 ]) > -1 && Number(dateParts[ 1 ]) <= 12) {
               return dateString;
             }
           }
