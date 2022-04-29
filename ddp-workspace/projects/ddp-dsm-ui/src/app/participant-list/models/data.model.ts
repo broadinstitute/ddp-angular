@@ -77,7 +77,7 @@ export class Data {
 
 
   getActivityDataByCode(code: string): any {
-    return this.activities.find(x => x.activityCode === code);
+    return this.activities.filter(x => x.activityCode === code);
   }
 
   getMultipleAnswersForPickList(activityData: ActivityData, name: string): QuestionAnswer[] {
