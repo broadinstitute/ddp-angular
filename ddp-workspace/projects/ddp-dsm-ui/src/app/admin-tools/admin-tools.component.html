@@ -1,0 +1,33 @@
+<ng-container>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+      <th>
+        Emails
+      </th>
+      <th>
+        Roles
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users; let i = index;">
+      <td>{{names[i]}}</td>
+      <td>
+        {{user}}
+      </td>
+      <td>
+        <select class="form-select" aria-label="Default select example" (change)="addRole(this, i)">
+          <option *ngFor="let role of roles" value="{{role}}" (select)="addRole(role, i)">{{role}}</option>
+        </select>
+      </td>
+      <td>
+        {{selectedRoles[i]}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</ng-container>
