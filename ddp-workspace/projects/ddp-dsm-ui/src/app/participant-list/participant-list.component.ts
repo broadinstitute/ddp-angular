@@ -88,6 +88,7 @@ export class ParticipantListComponent implements OnInit {
   activityDefinitions = new Map();
 
   selectedColumns = {};
+  prevSelectedColumns = {};
   defaultColumns = [];
 
   selectedFilter: Filter = null;
@@ -1621,6 +1622,7 @@ export class ParticipantListComponent implements OnInit {
     }
     this.dsmService.downloadParticipantData(
       localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+      this.jsonPatch,
       this.parent,
       columns,
       this.viewFilter,
@@ -2228,9 +2230,12 @@ export class ParticipantListComponent implements OnInit {
     return false;
   }
 
-  private toggleColumns(checked: boolean): void {
+  toggleColumns(checked: boolean): void {
     if (checked) {
+      this.prevSelectedColumns = this.selectedColumns;
       this.selectedColumns = Object.assign({}, this.sourceColumns);
+    } else {
+      this.selectedColumns = this.prevSelectedColumns;
     }
   }
 }

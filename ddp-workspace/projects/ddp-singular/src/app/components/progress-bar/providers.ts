@@ -8,11 +8,31 @@ import { ActivityInstance, ActivityStatusCodes, ConfigurationService, UserActivi
 
 
 const getUpdatedActivityMap = (activities: ActivityInstance[], activeActivityId: string): Map<string, ActivityListItem> => {
-  const isConsentSelf = !!activities.find(
-    (activity: ActivityInstance) => activity.activityCode === ActivityCode.ConsentSelf
+  const consentActivityCodes = [ActivityCode.ConsentSelf, ActivityCode.ConsentParental, ActivityCode.ConsentDependent];
+  const consentActivity = activities.find(
+    (activity: ActivityInstance) => consentActivityCodes.includes(activity.activityCode)
   );
-  const consentKey: ActivityCode = isConsentSelf ? ActivityCode.ConsentSelf : ActivityCode.ConsentParental;
-  const aboutDisplayName: string = isConsentSelf ? 'ProgressBar.Titles.AboutMe' : 'ProgressBar.Titles.AboutMyChild';
+
+  const consentKey: ActivityCode = consentActivity.activityCode;
+  let aboutDisplayName: string = null;
+
+  switch (consentKey) {
+    case ActivityCode.ConsentSelf: {
+        aboutDisplayName = 'ProgressBar.Titles.AboutMe';
+        break;
+    }
+    case ActivityCode.ConsentParental: {
+        aboutDisplayName = 'ProgressBar.Titles.AboutMyChild';
+        break;
+    }
+    case ActivityCode.ConsentDependent: {
+        aboutDisplayName = 'ProgressBar.Titles.AboutMyDependent';
+        break;
+    }
+    default: {
+        aboutDisplayName = 'UNKNOWN';
+    }
+  }
 
   const activitiesDictionary: Map<string, ActivityListItem> = new Map(
     Object.entries({

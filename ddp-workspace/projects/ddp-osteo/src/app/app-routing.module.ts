@@ -30,7 +30,13 @@ import {
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { FaqComponent } from './components/faq/faq.component';
+
+import { ParticipationComponent } from './components/participation/participation.component';
+import { ScientificImpactComponent } from './components/scientific-impact/scientific-impact.component';
+import { PhysiciansComponent } from './components/physicians/physicians.component';
+
 import { ActivityPageComponent } from './components/activity-page/activity-page.component';
+
 
 const routes: Routes = [
     {
@@ -182,6 +188,21 @@ const routes: Routes = [
     {
         path: 'about-us',
         component: AboutUsComponent,
+        canActivate: [IrbGuard]
+    },
+    {
+        path: 'participation',
+        component: ParticipationComponent,
+        canActivate: [IrbGuard]
+    },
+    {
+        path: 'physicians',
+        component: PhysiciansComponent,
+        canActivate: [IrbGuard]
+    },
+    {
+        path: 'scientific-impact',
+        component: ScientificImpactComponent,
         canActivate: [IrbGuard]
     },
     {
