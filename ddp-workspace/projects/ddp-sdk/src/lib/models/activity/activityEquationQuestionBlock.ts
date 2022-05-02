@@ -2,7 +2,7 @@ import { ActivityQuestionBlock } from './activityQuestionBlock';
 import { QuestionType } from './questionType';
 import { DecimalAnswer } from './decimalAnswer';
 
-export class ActivityEquationQuestionBlock extends ActivityQuestionBlock<DecimalAnswer> {
+export class ActivityEquationQuestionBlock extends ActivityQuestionBlock<DecimalAnswer[]> {
     public maximumDecimalPlaces: number;
 
     constructor() {
