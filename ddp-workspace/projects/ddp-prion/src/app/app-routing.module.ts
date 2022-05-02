@@ -47,6 +47,19 @@ const routes: Routes = [
     }
   },
   {
+    path: 'request',
+    component: PrionActivityPageComponent,
+    canActivate: [
+      IrbGuard,
+      CookiesConsentGuard,
+      BrowserGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: 'PRIONREQUEST'
+    }
+  },
+  {
     path: 'medical',
     component: PrionActivityPageComponent,
     canActivate: [
