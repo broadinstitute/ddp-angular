@@ -245,135 +245,135 @@ participant.data.dsm['diagnosisYear'] != null">
         </ng-container>
 
         <!--Abstraction start buttons-->
-<!--        <div *ngIf="counterReceived > 0 && parentList === 'participantList'">-->
-<!--          <div class="Float&#45;&#45;left TD&#45;&#45;Padding">-->
-<!--            <div class="Float&#45;&#45;left Width&#45;&#45;100">-->
-<!--              <b>First Abstraction</b> <b *ngIf="participant.abstraction.aStatus === 'not_started'"> not started yet</b>-->
-<!--            </div>-->
-<!--            <div class="Float&#45;&#45;left" *ngIf="participant.abstraction.aStatus !== 'in_progress' && participant.abstraction.aStatus !== 'done' && participant.abstraction.aStatus !== 'clear'-->
-<!--                  && hasRole().isAbstracter()">-->
-<!--              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"-->
-<!--                      (click)="lockParticipant(participant.abstraction)">Start First MR Abstraction-->
-<!--              </button>-->
-<!--            </div>-->
-<!--            <div class="Float&#45;&#45;left" *ngIf="participant.abstraction.aStatus === 'clear' && hasRole().isAbstracter()-->
-<!--                  && ((participant.review != null && participant.review.user !== hasRole().getUserName()) || participant.review == null || participant.review.aStatus === 'clear')">-->
-<!--              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"-->
-<!--                      (click)="lockParticipant(participant.abstraction)">Continue First MR Abstraction-->
-<!--              </button>-->
-<!--            </div>-->
-<!--            <div class="Float&#45;&#45;left Width&#45;&#45;100"-->
-<!--                 *ngIf="participant.abstraction.aStatus !== 'not_started' && participant.abstraction.aStatus !== 'clear' && participant.abstraction.lastChanged === 0">-->
-<!--              <b>{{participant.abstraction.user}}</b>-->
-<!--              <b>started: {{participant.abstraction.startDate | date:'medium'}}</b>-->
-<!--            </div>-->
-<!--            <div class="Float&#45;&#45;left Width&#45;&#45;100"-->
-<!--                 *ngIf="participant.abstraction.aStatus !== 'not_started' && participant.abstraction.aStatus !== 'clear' && participant.abstraction.lastChanged !== 0">-->
-<!--              <b>{{participant.abstraction.user}}</b>-->
-<!--              <b>continued: {{participant.abstraction.lastChanged | date:'medium'}}</b>-->
-<!--            </div>-->
-<!--            <div class="Float&#45;&#45;left Width&#45;&#45;100" *ngIf="participant.abstraction.aStatus === 'clear'">-->
-<!--              <b>{{participant.abstraction.user}}</b>-->
-<!--              <b>broke lock on: {{participant.abstraction.lastChanged | date:'medium'}}</b>-->
-<!--            </div>-->
-<!--            <div class="Float&#45;&#45;left Width&#45;&#45;100"-->
-<!--                 *ngIf="participant.abstraction.aStatus === 'in_progress' && hasRole().isAbstractionAdmin()">-->
-<!--              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"-->
-<!--                      (click)="breakLockParticipant(participant.abstraction)">Un-lock First MR Abstraction-->
-<!--              </button>-->
-<!--            </div>-->
-<!--            <div class="Float&#45;&#45;left Width&#45;&#45;100" *ngIf="participant.abstraction.aStatus === 'done'">-->
-<!--              <b>Finished: {{participant.abstraction.lastChanged | date:'medium'}}</b>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
+        <div *ngIf="counterReceived > 0 && parentList === 'participantList'">
+          <div class="Float--left TD--Padding">
+            <div class="Float--left Width--100">
+              <b>First Abstraction</b> <b *ngIf="participant.abstraction.aStatus === 'not_started'"> not started yet</b>
+            </div>
+            <div class="Float--left" *ngIf="participant.abstraction.aStatus !== 'in_progress' && participant.abstraction.aStatus !== 'done' && participant.abstraction.aStatus !== 'clear'
+                  && hasRole().isAbstracter()">
+              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"
+                      (click)="lockParticipant(participant.abstraction)">Start First MR Abstraction
+              </button>
+            </div>
+            <div class="Float--left" *ngIf="participant.abstraction.aStatus === 'clear' && hasRole().isAbstracter()
+                  && ((participant.review != null && participant.review.user !== hasRole().getUserName()) || participant.review == null || participant.review.aStatus === 'clear')">
+              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"
+                      (click)="lockParticipant(participant.abstraction)">Continue First MR Abstraction
+              </button>
+            </div>
+            <div class="Float--left Width--100"
+                 *ngIf="participant.abstraction.aStatus !== 'not_started' && participant.abstraction.aStatus !== 'clear' && participant.abstraction.lastChanged === 0">
+              <b>{{participant.abstraction.user}}</b>
+              <b>started: {{participant.abstraction.startDate | date:'medium'}}</b>
+            </div>
+            <div class="Float--left Width--100"
+                 *ngIf="participant.abstraction.aStatus !== 'not_started' && participant.abstraction.aStatus !== 'clear' && participant.abstraction.lastChanged !== 0">
+              <b>{{participant.abstraction.user}}</b>
+              <b>continued: {{participant.abstraction.lastChanged | date:'medium'}}</b>
+            </div>
+            <div class="Float--left Width--100" *ngIf="participant.abstraction.aStatus === 'clear'">
+              <b>{{participant.abstraction.user}}</b>
+              <b>broke lock on: {{participant.abstraction.lastChanged | date:'medium'}}</b>
+            </div>
+            <div class="Float--left Width--100"
+                 *ngIf="participant.abstraction.aStatus === 'in_progress' && hasRole().isAbstractionAdmin()">
+              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"
+                      (click)="breakLockParticipant(participant.abstraction)">Un-lock First MR Abstraction
+              </button>
+            </div>
+            <div class="Float--left Width--100" *ngIf="participant.abstraction.aStatus === 'done'">
+              <b>Finished: {{participant.abstraction.lastChanged | date:'medium'}}</b>
+            </div>
+          </div>
+        </div>
 
-<!--        <div-->
-<!--          *ngIf="participant.abstraction != null && (participant.abstraction.aStatus === 'in_progress' || participant.abstraction.aStatus === 'done' || participant.abstraction.aStatus === 'clear')-->
-<!--             && parentList === 'participantList'">-->
-<!--          <div class="Float&#45;&#45;left TD&#45;&#45;Padding">-->
-<!--            <div class="Float&#45;&#45;left Width&#45;&#45;100">-->
-<!--              <b>Second Abstraction</b> <b *ngIf="participant.review.aStatus === 'not_started'"> not started yet</b>-->
-<!--            </div>-->
-<!--            <div class="Float&#45;&#45;left" *ngIf="participant.review.aStatus !== 'in_progress' && participant.review.aStatus !== 'done' && participant.review.aStatus !== 'clear'-->
-<!--                   && participant.abstraction.user !== hasRole().getUserName() && hasRole().isAbstracter()">-->
-<!--              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"-->
-<!--                      (click)="lockParticipant(participant.review)">Start Second MR Abstraction-->
-<!--              </button>-->
-<!--            </div>-->
-<!--            <div class="Float&#45;&#45;left" *ngIf="participant.review.aStatus === 'clear' && hasRole().isAbstracter()-->
-<!--                   && (participant.abstraction.user !== hasRole().getUserName() || participant.abstraction.aStatus === 'clear')">-->
-<!--              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"-->
-<!--                      (click)="lockParticipant(participant.review)">Continue Second MR Abstraction-->
-<!--              </button>-->
-<!--            </div>-->
-<!--            <div class="Float&#45;&#45;left Width&#45;&#45;100"-->
-<!--                 *ngIf="participant.review.aStatus !== 'not_started' && participant.review.aStatus !== 'clear' && participant.review.lastChanged === 0">-->
-<!--              <b>{{participant.review.user}}</b>-->
-<!--              <b>started: {{participant.review.startDate | date:'medium'}}</b>-->
-<!--            </div>-->
-<!--            <div class="Float&#45;&#45;left Width&#45;&#45;100"-->
-<!--                 *ngIf="participant.review.aStatus !== 'not_started' && participant.review.aStatus !== 'clear' && participant.review.lastChanged !== 0">-->
-<!--              <b>{{participant.review.user}}</b>-->
-<!--              <b>continued: {{participant.review.lastChanged | date:'medium'}}</b>-->
-<!--            </div>-->
-<!--            <div class="Float&#45;&#45;left Width&#45;&#45;100" *ngIf="participant.review.aStatus === 'clear'">-->
-<!--              <b>{{participant.review.user}}</b>-->
-<!--              <b>broke lock on: {{participant.review.lastChanged | date:'medium'}}</b>-->
-<!--            </div>-->
-<!--            <div class="Float&#45;&#45;left Width&#45;&#45;100"-->
-<!--                 *ngIf="participant.review.aStatus === 'in_progress' && hasRole().isAbstractionAdmin()">-->
-<!--              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"-->
-<!--                      (click)="breakLockParticipant(participant.review)">Un-lock Second MR Abstraction-->
-<!--              </button>-->
-<!--            </div>-->
-<!--            <div class="Float&#45;&#45;left Width&#45;&#45;100" *ngIf="participant.review.aStatus === 'done'">-->
-<!--              <b>Finished: {{participant.review.lastChanged | date:'medium'}}</b>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
+        <div
+          *ngIf="participant.abstraction != null && (participant.abstraction.aStatus === 'in_progress' || participant.abstraction.aStatus === 'done' || participant.abstraction.aStatus === 'clear')
+             && parentList === 'participantList'">
+          <div class="Float--left TD--Padding">
+            <div class="Float--left Width--100">
+              <b>Second Abstraction</b> <b *ngIf="participant.review.aStatus === 'not_started'"> not started yet</b>
+            </div>
+            <div class="Float--left" *ngIf="participant.review.aStatus !== 'in_progress' && participant.review.aStatus !== 'done' && participant.review.aStatus !== 'clear'
+                   && participant.abstraction.user !== hasRole().getUserName() && hasRole().isAbstracter()">
+              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"
+                      (click)="lockParticipant(participant.review)">Start Second MR Abstraction
+              </button>
+            </div>
+            <div class="Float--left" *ngIf="participant.review.aStatus === 'clear' && hasRole().isAbstracter()
+                   && (participant.abstraction.user !== hasRole().getUserName() || participant.abstraction.aStatus === 'clear')">
+              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"
+                      (click)="lockParticipant(participant.review)">Continue Second MR Abstraction
+              </button>
+            </div>
+            <div class="Float--left Width--100"
+                 *ngIf="participant.review.aStatus !== 'not_started' && participant.review.aStatus !== 'clear' && participant.review.lastChanged === 0">
+              <b>{{participant.review.user}}</b>
+              <b>started: {{participant.review.startDate | date:'medium'}}</b>
+            </div>
+            <div class="Float--left Width--100"
+                 *ngIf="participant.review.aStatus !== 'not_started' && participant.review.aStatus !== 'clear' && participant.review.lastChanged !== 0">
+              <b>{{participant.review.user}}</b>
+              <b>continued: {{participant.review.lastChanged | date:'medium'}}</b>
+            </div>
+            <div class="Float--left Width--100" *ngIf="participant.review.aStatus === 'clear'">
+              <b>{{participant.review.user}}</b>
+              <b>broke lock on: {{participant.review.lastChanged | date:'medium'}}</b>
+            </div>
+            <div class="Float--left Width--100"
+                 *ngIf="participant.review.aStatus === 'in_progress' && hasRole().isAbstractionAdmin()">
+              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"
+                      (click)="breakLockParticipant(participant.review)">Un-lock Second MR Abstraction
+              </button>
+            </div>
+            <div class="Float--left Width--100" *ngIf="participant.review.aStatus === 'done'">
+              <b>Finished: {{participant.review.lastChanged | date:'medium'}}</b>
+            </div>
+          </div>
+        </div>
 
         <!--tie breaker is only able to start when abstraction and review are done-->
-<!--        <div-->
-<!--          *ngIf="participant.abstraction != null && participant.abstraction.aStatus === 'done' && participant.review != null && participant.review.aStatus === 'done'-->
-<!--           && parentList === 'participantList'">-->
-<!--          <div class="Float&#45;&#45;left TD&#45;&#45;Padding">-->
-<!--            <div class="Float&#45;&#45;left Width&#45;&#45;100">-->
-<!--              <b>QC</b> <b *ngIf="participant.qc.aStatus === 'not_started'"> not started yet</b>-->
-<!--            </div>-->
-<!--            <div class="Float&#45;&#45;left" *ngIf="participant.qc.aStatus !== 'in_progress' && participant.qc.aStatus !== 'done' && participant.qc.aStatus !== 'clear'-->
-<!--                    && participant.abstraction.user !== hasRole().getUserName() && participant.review.user !== hasRole().getUserName()-->
-<!--                    && hasRole().isQC()">-->
-<!--              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"-->
-<!--                      (click)="lockParticipant(participant.qc)">Start QC-->
-<!--              </button>-->
-<!--            </div>-->
-<!--            <div class="Float&#45;&#45;left" *ngIf="participant.qc.aStatus === 'clear'-->
-<!--                  && hasRole().isAbstracter()">-->
-<!--              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"-->
-<!--                      (click)="lockParticipant(participant.qc)">Continue QC-->
-<!--              </button>-->
-<!--            </div>-->
-<!--            <div class="Float&#45;&#45;left Width&#45;&#45;100"-->
-<!--                 *ngIf="participant.qc.aStatus !== 'not_started' && participant.qc.aStatus !== 'clear'">-->
-<!--              <b>{{participant.qc.user}}</b>-->
-<!--              <b>started: {{participant.qc.startDate | date:'medium'}}</b>-->
-<!--            </div>-->
-<!--            <div class="Float&#45;&#45;left Width&#45;&#45;100" *ngIf="participant.qc.aStatus === 'clear'">-->
-<!--              <b>{{participant.qc.user}}</b>-->
-<!--              <b>broke lock on: {{participant.qc.lastChanged | date:'medium'}}</b>-->
-<!--            </div>-->
-<!--            <div class="Float&#45;&#45;left Width&#45;&#45;100"-->
-<!--                 *ngIf="participant.qc.aStatus === 'in_progress' && hasRole().isAbstractionAdmin()">-->
-<!--              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"-->
-<!--                      (click)="breakLockParticipant(participant.qc)">Un-lock QC-->
-<!--              </button>-->
-<!--            </div>-->
-<!--            <div class="Float&#45;&#45;left Width&#45;&#45;100" *ngIf="participant.qc.aStatus === 'done'">-->
-<!--              <b>Finished: {{participant.qc.lastChanged | date:'medium'}}</b>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
+        <div
+          *ngIf="participant.abstraction != null && participant.abstraction.aStatus === 'done' && participant.review != null && participant.review.aStatus === 'done'
+           && parentList === 'participantList'">
+          <div class="Float--left TD--Padding">
+            <div class="Float--left Width--100">
+              <b>QC</b> <b *ngIf="participant.qc.aStatus === 'not_started'"> not started yet</b>
+            </div>
+            <div class="Float--left" *ngIf="participant.qc.aStatus !== 'in_progress' && participant.qc.aStatus !== 'done' && participant.qc.aStatus !== 'clear'
+                    && participant.abstraction.user !== hasRole().getUserName() && participant.review.user !== hasRole().getUserName()
+                    && hasRole().isQC()">
+              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"
+                      (click)="lockParticipant(participant.qc)">Start QC
+              </button>
+            </div>
+            <div class="Float--left" *ngIf="participant.qc.aStatus === 'clear'
+                  && hasRole().isAbstracter()">
+              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"
+                      (click)="lockParticipant(participant.qc)">Continue QC
+              </button>
+            </div>
+            <div class="Float--left Width--100"
+                 *ngIf="participant.qc.aStatus !== 'not_started' && participant.qc.aStatus !== 'clear'">
+              <b>{{participant.qc.user}}</b>
+              <b>started: {{participant.qc.startDate | date:'medium'}}</b>
+            </div>
+            <div class="Float--left Width--100" *ngIf="participant.qc.aStatus === 'clear'">
+              <b>{{participant.qc.user}}</b>
+              <b>broke lock on: {{participant.qc.lastChanged | date:'medium'}}</b>
+            </div>
+            <div class="Float--left Width--100"
+                 *ngIf="participant.qc.aStatus === 'in_progress' && hasRole().isAbstractionAdmin()">
+              <button mat-raised-button type="button" color="primary" [disabled]="participantExited"
+                      (click)="breakLockParticipant(participant.qc)">Un-lock QC
+              </button>
+            </div>
+            <div class="Float--left Width--100" *ngIf="participant.qc.aStatus === 'done'">
+              <b>Finished: {{participant.qc.lastChanged | date:'medium'}}</b>
+            </div>
+          </div>
+        </div>
       </div>
       <br/>
       <div class="Float--left Width--100" *ngIf="participant.participant != null">
@@ -831,151 +831,151 @@ participant.data.dsm['diagnosisYear'] != null">
               </ng-container>
             </tab>
 
-<!--            <tab heading="First Medical Record Abstraction" [active]="tabActive('abstraction')"-->
-<!--                 (selectTab)="onSelect($event, 'abstraction'); getFileList(participant.abstraction)"-->
-<!--                 *ngIf="(participant.abstraction != null && abstractionFields != null-->
-<!--                 && (participant.abstraction.aStatus === 'in_progress' || participant.abstraction.aStatus === 'done'))-->
-<!--                 && participant.finalA != null && participant.finalA.aStatus !== 'done'-->
-<!--                 && (hasRole().isAbstractionAdmin() || hasRole().isAbstracter() || hasRole().isQC())"-->
-<!--                 [disabled]="participant.abstraction.user !== hasRole().getUserName()">-->
-<!--              <br/>-->
-<!--              <div class="Float&#45;&#45;left Width&#45;&#45;100">-->
-<!--                <mat-form-field class="Input&#45;&#45;Bigger-WIDTH">-->
-<!--                  <input matInput maxlength="500" placeholder="Files used in the abstraction" type="text"-->
-<!--                         [disabled]="participantExited"-->
-<!--                         [ngClass]="{'Input': true, 'Input&#45;&#45;Bigger-WIDTH': true, 'Color&#45;&#45;Field&#45;&#45;Patched': isPatchedCurrently('filesUsed')}"-->
-<!--                         [(ngModel)]="participant.abstraction.filesUsed"-->
-<!--                         (change)="abstractionFilesUsedChanged(participant.abstraction)"-->
-<!--                         (blur)="currentField(null)" (focus)="currentField('filesUsed')">-->
-<!--                </mat-form-field>-->
-<!--              </div>-->
-<!--              <div class="Float&#45;&#45;left Width&#45;&#45;100">-->
-<!--                <b class="Group&#45;&#45;Title">Jump to:</b>-->
-<!--              </div>-->
-<!--              <div class="Float&#45;&#45;left Width&#45;&#45;100">-->
-<!--                <ng-container *ngFor="let groups of abstractionFields; let i = index">-->
-<!--                  <div class="Float&#45;&#45;left">-->
-<!--                    <a class="Abstraction&#45;&#45;Jump&#45;&#45;Group" pageScroll-->
-<!--                       href="{{getGroupHref(groups.getDisplayNameWithoutSpace('abstraction'))}}">{{groups.displayName}}</a>-->
-<!--                  </div>-->
-<!--                  <ng-container *ngIf="i < abstractionFields.length - 1">-->
-<!--                    <div class="Float&#45;&#45;left Vertical&#45;&#45;line"></div>-->
-<!--                  </ng-container>-->
-<!--                </ng-container>-->
-<!--              </div>-->
+            <tab heading="First Medical Record Abstraction" [active]="tabActive('abstraction')"
+                 (selectTab)="onSelect($event, 'abstraction'); getFileList(participant.abstraction)"
+                 *ngIf="(participant.abstraction != null && abstractionFields != null
+                 && (participant.abstraction.aStatus === 'in_progress' || participant.abstraction.aStatus === 'done'))
+                 && participant.finalA != null && participant.finalA.aStatus !== 'done'
+                 && (hasRole().isAbstractionAdmin() || hasRole().isAbstracter() || hasRole().isQC())"
+                 [disabled]="participant.abstraction.user !== hasRole().getUserName()">
+              <br/>
+              <div class="Float--left Width--100">
+                <mat-form-field class="Input--Bigger-WIDTH">
+                  <input matInput maxlength="500" placeholder="Files used in the abstraction" type="text"
+                         [disabled]="participantExited"
+                         [ngClass]="{'Input': true, 'Input--Bigger-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('filesUsed')}"
+                         [(ngModel)]="participant.abstraction.filesUsed"
+                         (change)="abstractionFilesUsedChanged(participant.abstraction)"
+                         (blur)="currentField(null)" (focus)="currentField('filesUsed')">
+                </mat-form-field>
+              </div>
+              <div class="Float--left Width--100">
+                <b class="Group--Title">Jump to:</b>
+              </div>
+              <div class="Float--left Width--100">
+                <ng-container *ngFor="let groups of abstractionFields; let i = index">
+                  <div class="Float--left">
+                    <a class="Abstraction--Jump--Group" pageScroll
+                       href="{{getGroupHref(groups.getDisplayNameWithoutSpace('abstraction'))}}">{{groups.displayName}}</a>
+                  </div>
+                  <ng-container *ngIf="i < abstractionFields.length - 1">
+                    <div class="Float--left Vertical--line"></div>
+                  </ng-container>
+                </ng-container>
+              </div>
 
-<!--              <div class="Float&#45;&#45;left Width&#45;&#45;100">-->
-<!--                <hr style="border-color: black">-->
-<!--                <app-medical-record-abstraction [abstractionFormControls]="abstractionFields"-->
-<!--                                                [abstractionActivity]="'abstraction'"-->
-<!--                                                [status]="participant.abstraction.aStatus" [participant]="participant"-->
-<!--                                                [fileList]="fileListUsed" [drugList]="drugs" [cancerList]="cancers"-->
-<!--                                                (emitFileName)="addFileToParticipant($event, participant.abstraction)">-->
-<!--                </app-medical-record-abstraction>-->
-<!--              </div>-->
+              <div class="Float--left Width--100">
+                <hr style="border-color: black">
+                <app-medical-record-abstraction [abstractionFormControls]="abstractionFields"
+                                                [abstractionActivity]="'abstraction'"
+                                                [status]="participant.abstraction.aStatus" [participant]="participant"
+                                                [fileList]="fileListUsed" [drugList]="drugs" [cancerList]="cancers"
+                                                (emitFileName)="addFileToParticipant($event, participant.abstraction)">
+                </app-medical-record-abstraction>
+              </div>
 
-<!--              <div class="Float&#45;&#45;left Width&#45;&#45;100" *ngIf="participant.abstraction.aStatus !== 'done'">-->
-<!--                <hr style="border-color: black">-->
-<!--                <button mat-raised-button type="button" color="primary"-->
-<!--                        (click)="submitParticipant(participant.abstraction)">Submit MR Abstraction-->
-<!--                </button>-->
-<!--              </div>-->
-<!--            </tab>-->
+              <div class="Float--left Width--100" *ngIf="participant.abstraction.aStatus !== 'done'">
+                <hr style="border-color: black">
+                <button mat-raised-button type="button" color="primary"
+                        (click)="submitParticipant(participant.abstraction)">Submit MR Abstraction
+                </button>
+              </div>
+            </tab>
 
-<!--            <tab heading="Second Medical Record Abstraction" [active]="tabActive('review')"-->
-<!--                 (selectTab)="onSelect($event, 'review'); getFileList(participant.review)"-->
-<!--                 *ngIf="(participant.review != null && reviewFields != null && (participant.review.aStatus === 'in_progress' || participant.review.aStatus === 'done')) && participant.finalA != null && participant.finalA.aStatus !== 'done' &&-->
-<!--                    (hasRole().isAbstractionAdmin() || hasRole().isAbstracter() || hasRole().isQC())"-->
-<!--                 [disabled]="participant.review.user !== hasRole().getUserName()">-->
-<!--              <br/>-->
-<!--              <div class="Float&#45;&#45;left Width&#45;&#45;100">-->
-<!--                <mat-form-field-->
-<!--                  [ngClass]="{'Input': true, 'Input&#45;&#45;Bigger-WIDTH': true, 'Color&#45;&#45;Field&#45;&#45;Patched': isPatchedCurrently('filesUsed')}">-->
-<!--                  <input matInput maxlength="500" placeholder="Files used in the abstraction" type="text"-->
-<!--                         [disabled]="participantExited"-->
-<!--                         [(ngModel)]="participant.review.filesUsed"-->
-<!--                         (change)="abstractionFilesUsedChanged(participant.review)"-->
-<!--                         (blur)="currentField(null)" (focus)="currentField('filesUsed')">-->
-<!--                </mat-form-field>-->
-<!--              </div>-->
-<!--              <div class="Float&#45;&#45;left Width&#45;&#45;100">-->
-<!--                <b class="Group&#45;&#45;Title">Jump to:</b>-->
-<!--              </div>-->
-<!--              <div class="Float&#45;&#45;left Width&#45;&#45;100">-->
-<!--                <ng-container *ngFor="let groups of reviewFields; let i = index">-->
-<!--                  <div class="Float&#45;&#45;left">-->
-<!--                    <a class="Abstraction&#45;&#45;Jump&#45;&#45;Group" pageScroll-->
-<!--                       href="{{getGroupHref(groups.getDisplayNameWithoutSpace('review'))}}">{{groups.displayName}}</a>-->
-<!--                  </div>-->
-<!--                  <ng-container *ngIf="i < reviewFields.length - 1">-->
-<!--                    <div class="Float&#45;&#45;left Vertical&#45;&#45;line"></div>-->
-<!--                  </ng-container>-->
-<!--                </ng-container>-->
-<!--              </div>-->
+            <tab heading="Second Medical Record Abstraction" [active]="tabActive('review')"
+                 (selectTab)="onSelect($event, 'review'); getFileList(participant.review)"
+                 *ngIf="(participant.review != null && reviewFields != null && (participant.review.aStatus === 'in_progress' || participant.review.aStatus === 'done')) && participant.finalA != null && participant.finalA.aStatus !== 'done' &&
+                    (hasRole().isAbstractionAdmin() || hasRole().isAbstracter() || hasRole().isQC())"
+                 [disabled]="participant.review.user !== hasRole().getUserName()">
+              <br/>
+              <div class="Float--left Width--100">
+                <mat-form-field
+                  [ngClass]="{'Input': true, 'Input--Bigger-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('filesUsed')}">
+                  <input matInput maxlength="500" placeholder="Files used in the abstraction" type="text"
+                         [disabled]="participantExited"
+                         [(ngModel)]="participant.review.filesUsed"
+                         (change)="abstractionFilesUsedChanged(participant.review)"
+                         (blur)="currentField(null)" (focus)="currentField('filesUsed')">
+                </mat-form-field>
+              </div>
+              <div class="Float--left Width--100">
+                <b class="Group--Title">Jump to:</b>
+              </div>
+              <div class="Float--left Width--100">
+                <ng-container *ngFor="let groups of reviewFields; let i = index">
+                  <div class="Float--left">
+                    <a class="Abstraction--Jump--Group" pageScroll
+                       href="{{getGroupHref(groups.getDisplayNameWithoutSpace('review'))}}">{{groups.displayName}}</a>
+                  </div>
+                  <ng-container *ngIf="i < reviewFields.length - 1">
+                    <div class="Float--left Vertical--line"></div>
+                  </ng-container>
+                </ng-container>
+              </div>
 
-<!--              <div class="Float&#45;&#45;left Width&#45;&#45;100">-->
-<!--                <hr style="border-color: black">-->
-<!--                <app-medical-record-abstraction [abstractionFormControls]="reviewFields"-->
-<!--                                                [abstractionActivity]="'review'" [status]="participant.review.aStatus"-->
-<!--                                                [fileList]="fileListUsed" [drugList]="drugs" [cancerList]="cancers" [participant]="participant"-->
-<!--                                                (emitFileName)="addFileToParticipant($event, participant.review)">-->
-<!--                </app-medical-record-abstraction>-->
-<!--              </div>-->
+              <div class="Float--left Width--100">
+                <hr style="border-color: black">
+                <app-medical-record-abstraction [abstractionFormControls]="reviewFields"
+                                                [abstractionActivity]="'review'" [status]="participant.review.aStatus"
+                                                [fileList]="fileListUsed" [drugList]="drugs" [cancerList]="cancers" [participant]="participant"
+                                                (emitFileName)="addFileToParticipant($event, participant.review)">
+                </app-medical-record-abstraction>
+              </div>
 
-<!--              <div class="Float&#45;&#45;left Width&#45;&#45;100" *ngIf="participant.review.aStatus !== 'done'">-->
-<!--                <hr style="border-color: black">-->
-<!--                <button mat-raised-button type="button" color="primary"-->
-<!--                        (click)="submitParticipant(participant.review)">Submit MR Abstraction-->
-<!--                </button>-->
-<!--              </div>-->
-<!--            </tab>-->
+              <div class="Float--left Width--100" *ngIf="participant.review.aStatus !== 'done'">
+                <hr style="border-color: black">
+                <button mat-raised-button type="button" color="primary"
+                        (click)="submitParticipant(participant.review)">Submit MR Abstraction
+                </button>
+              </div>
+            </tab>
 
-<!--            <tab heading="QC" [active]="tabActive('qc')" (selectTab)="onSelect($event, 'qc'); getFileList(participant.qc)"-->
-<!--                 *ngIf="(participant.qc != null && qcFields != null && (participant.qc.aStatus === 'in_progress' || participant.qc.aStatus === 'done')) && participant.finalA != null && participant.finalA.aStatus !== 'done' &&-->
-<!--                    (hasRole().isAbstractionAdmin() || hasRole().isAbstracter() || hasRole().isQC())"-->
-<!--                 [disabled]="participant.qc.user !== hasRole().getUserName()">-->
-<!--              <br/>-->
-<!--              <div class="Float&#45;&#45;left Width&#45;&#45;100">-->
-<!--                <mat-form-field-->
-<!--                  [ngClass]="{'Input': true, 'Input&#45;&#45;Bigger-WIDTH': true, 'Color&#45;&#45;Field&#45;&#45;Patched': isPatchedCurrently('filesUsed')}">-->
-<!--                  <input matInput maxlength="500" placeholder="Files used in the abstraction" type="text"-->
-<!--                         [disabled]="participantExited"-->
-<!--                         [(ngModel)]="participant.finalA.filesUsed"-->
-<!--                         (change)="abstractionFilesUsedChanged(participant.finalA)"-->
-<!--                         (blur)="currentField(null)" (focus)="currentField('filesUsed')">-->
-<!--                </mat-form-field>-->
-<!--              </div>-->
-<!--              <div class="Float&#45;&#45;left Width&#45;&#45;100">-->
-<!--                <b class="Group&#45;&#45;Title">Jump to:</b>-->
-<!--              </div>-->
-<!--              <div class="Float&#45;&#45;left Width&#45;&#45;100">-->
-<!--                <ng-container *ngFor="let groups of qcFields; let i = index">-->
-<!--                  <div class="Float&#45;&#45;left">-->
-<!--                    <a class="Abstraction&#45;&#45;Jump&#45;&#45;Group" pageScroll-->
-<!--                       href="{{getGroupHref(groups.getDisplayNameWithoutSpace('qc'))}}">{{groups.displayName}}</a>-->
-<!--                  </div>-->
-<!--                  <ng-container *ngIf="i < qcFields.length - 1">-->
-<!--                    <div class="Float&#45;&#45;left Vertical&#45;&#45;line"></div>-->
-<!--                  </ng-container>-->
-<!--                </ng-container>-->
-<!--              </div>-->
+            <tab heading="QC" [active]="tabActive('qc')" (selectTab)="onSelect($event, 'qc'); getFileList(participant.qc)"
+                 *ngIf="(participant.qc != null && qcFields != null && (participant.qc.aStatus === 'in_progress' || participant.qc.aStatus === 'done')) && participant.finalA != null && participant.finalA.aStatus !== 'done' &&
+                    (hasRole().isAbstractionAdmin() || hasRole().isAbstracter() || hasRole().isQC())"
+                 [disabled]="participant.qc.user !== hasRole().getUserName()">
+              <br/>
+              <div class="Float--left Width--100">
+                <mat-form-field
+                  [ngClass]="{'Input': true, 'Input--Bigger-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('filesUsed')}">
+                  <input matInput maxlength="500" placeholder="Files used in the abstraction" type="text"
+                         [disabled]="participantExited"
+                         [(ngModel)]="participant.finalA.filesUsed"
+                         (change)="abstractionFilesUsedChanged(participant.finalA)"
+                         (blur)="currentField(null)" (focus)="currentField('filesUsed')">
+                </mat-form-field>
+              </div>
+              <div class="Float--left Width--100">
+                <b class="Group--Title">Jump to:</b>
+              </div>
+              <div class="Float--left Width--100">
+                <ng-container *ngFor="let groups of qcFields; let i = index">
+                  <div class="Float--left">
+                    <a class="Abstraction--Jump--Group" pageScroll
+                       href="{{getGroupHref(groups.getDisplayNameWithoutSpace('qc'))}}">{{groups.displayName}}</a>
+                  </div>
+                  <ng-container *ngIf="i < qcFields.length - 1">
+                    <div class="Float--left Vertical--line"></div>
+                  </ng-container>
+                </ng-container>
+              </div>
 
-<!--              <div class="Float&#45;&#45;left Width&#45;&#45;100">-->
-<!--                <hr style="border-color: black">-->
-<!--                <app-medical-record-abstraction [abstractionFormControls]="qcFields" [abstractionActivity]="'qc'"-->
-<!--                                                [status]="participant.qc.aStatus" [participant]="participant"-->
-<!--                                                [fileList]="fileListUsed" [drugList]="drugs" [cancerList]="cancers"-->
-<!--                                                (emitFileName)="addFileToParticipant($event, participant.qc)">-->
-<!--                </app-medical-record-abstraction>-->
-<!--              </div>-->
+              <div class="Float--left Width--100">
+                <hr style="border-color: black">
+                <app-medical-record-abstraction [abstractionFormControls]="qcFields" [abstractionActivity]="'qc'"
+                                                [status]="participant.qc.aStatus" [participant]="participant"
+                                                [fileList]="fileListUsed" [drugList]="drugs" [cancerList]="cancers"
+                                                (emitFileName)="addFileToParticipant($event, participant.qc)">
+                </app-medical-record-abstraction>
+              </div>
 
-<!--              <div class="Float&#45;&#45;left Width&#45;&#45;100" *ngIf="participant.qc.aStatus !== 'done'">-->
-<!--                <hr style="border-color: black">-->
-<!--                <button mat-raised-button type="button" color="primary"-->
-<!--                        (click)="submitParticipant(participant.qc)">Submit QC-->
-<!--                </button>-->
-<!--              </div>-->
-<!--            </tab>-->
+              <div class="Float--left Width--100" *ngIf="participant.qc.aStatus !== 'done'">
+                <hr style="border-color: black">
+                <button mat-raised-button type="button" color="primary"
+                        (click)="submitParticipant(participant.qc)">Submit QC
+                </button>
+              </div>
+            </tab>
 
             <tab heading="Final Abstraction Values" [active]="tabActive('final')" (selectTab)="onSelect($event, 'final')"
                  *ngIf="participant.finalA != null && finalFields != null && participant.finalA.aStatus === 'done'">
