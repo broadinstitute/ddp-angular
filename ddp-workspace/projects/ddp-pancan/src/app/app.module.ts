@@ -17,7 +17,6 @@ import {
     LanguageService,
     LoggingService,
     SortOrder,
-    PicklistSortingPolicy,
     AnalyticsEventsService,
     AnalyticsEvent,
     PICKLIST_SORTING_POLICY_LAST_STABLE_ID,
@@ -200,8 +199,7 @@ export function translateFactory(translate: TranslateService,
         {
             provide: PICKLIST_SORTING_POLICY_LAST_STABLE_ID,
             useValue: 'UNSURE'
-        },
-        PicklistSortingPolicy
+        }
     ],
     bootstrap: [AppComponent]
 })

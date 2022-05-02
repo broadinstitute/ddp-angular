@@ -3,7 +3,7 @@ import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 
-import {TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 
 import {
   DdpModule,
@@ -11,7 +11,6 @@ import {
   AnalyticsEventsService,
   AnalyticsEvent,
   LoggingService,
-  PicklistSortingPolicy,
   SubmitAnnouncementService,
   SubmissionManager
 } from 'ddp-sdk';
@@ -185,9 +184,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
       ],
       multi: true
     },
-    PicklistSortingPolicy,
     SubmitAnnouncementService,
-    SubmissionManager,
+    SubmissionManager
   ],
   bootstrap: [AppComponent]
 })
