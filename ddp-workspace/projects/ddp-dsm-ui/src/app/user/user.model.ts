@@ -6,7 +6,7 @@ export class User {
     this.lastName = lastName;
   }
 
-  public parse(json):User{
-    return new User(json.email, json.firstName, json.lastName, json.phoneNumber);
+  public parse( json ): User {
+    return new User( json.email, json.firstName, json.lastName, json.phoneNumber );
   }
 }
