@@ -34,8 +34,6 @@ export class ActivityCompositeAnswer implements OnChanges {
     public ngOnChanges(changes: SimpleChanges): void {
         for (const propName in changes) {
             if (propName === 'triggerChanges') {
-                console.log('trigger composite', this.block);
-
                 this.childQuestionBlocks = this.rebuildChildQuestions(this.block, this.block.answer);
             }
             if (propName === 'block') {
