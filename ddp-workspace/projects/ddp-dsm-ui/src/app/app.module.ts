@@ -28,6 +28,7 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 import { CookieModule } from 'ngx-cookie';
 import { NgxPaginationModule } from 'ngx-pagination';
+import {AssignRolesComponent} from "./assign-roles/assign-roles.component";
 
 import { AppComponent } from './app.component';
 import { FieldMultiTypeArrayComponent } from './field-multi-type-array/field-multi-type-array.component';
@@ -118,6 +119,7 @@ import { TestDssComponent } from './test-dss/test-dss.component';
 import { DssErrorPageComponent } from './test-dss/dss-error-page/dss-error-page.component';
 
 import { TranslateService } from '@ngx-translate/core';
+import { AddEditDeleteUserComponent } from './add-edit-delete-user/add-edit-delete-user.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -240,7 +242,9 @@ export function translateFactory(translate: TranslateService,
         FieldTableComponent,
         dynamicFormTypeAndStudyRGP,
         TestDssComponent,
-        DssErrorPageComponent
+        DssErrorPageComponent,
+      AssignRolesComponent,
+      AddEditDeleteUserComponent
     ],
     imports: [
         DdpModule,

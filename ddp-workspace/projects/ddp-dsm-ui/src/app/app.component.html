@@ -74,6 +74,14 @@
           <li ><a href="#" [routerLink]="['/drugList']"> Drug List </a></li>
         </ul>
       </li>
+      <li class="dropdown" *ngIf="getAuth().authenticated()">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" (click)="doNothing()"><b> Administrative Tools </b>
+          <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#" [routerLink]="['/editUsers']"> add / edit roles </a></li>
+          <li><a href="#" [routerLink]="['/assignRoles']"> assign roles </a></li>
+        </ul>
+      </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li class="Float--left" *ngIf="getAuth().authenticated() && (hasRole().allowToViewSampleLists() || hasRole().allowedToHandleSamples() || hasRole().allowedToViewMedicalRecords() || hasRole().allowedParticipantListView())">

@@ -1,3 +1,5 @@
+import {AddEditDeleteUserComponent} from "./add-edit-delete-user/add-edit-delete-user.component";
+import {AssignRolesComponent} from "./assign-roles/assign-roles.component";
 import { HomeComponent } from './home/home.component';
 import { NDIUploadComponent } from './ndiupload/ndiupload.component';
 import { ParticipantListComponent } from './participant-list/participant-list.component';
@@ -82,6 +84,9 @@ export const AppRoutes = [
   {path: 'ndi', component: NDIUploadComponent, canActivate: [ AuthGuard ]},
 
   {path: 'userSettings', component: UserSettingComponent, canActivate: [ AuthGuard ]},
+
+  {path: 'assignRoles', component: AssignRolesComponent, canActivate: [ AuthGuard ]},
+  {path: 'editUsers', component: AddEditDeleteUserComponent, canActivate: [ AuthGuard ]},
 
   // Permalink
   {

@@ -1,0 +1,95 @@
+<ng-container>
+  <head>Add A New User</head>
+  <div>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>
+          Email*
+        </th>
+        <th>
+          First Name
+        </th>
+        <th>
+          Last Name
+        </th>
+        <th colspan="2">
+          Phone Number
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <mat-form-field class="Input">
+            <input matInput class="Input--Min-WIDTH" maxlength="200"
+                   [(ngModel)]="newUser.email">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="Input">
+            <input matInput class="Input--Min-WIDTH" maxlength="200"
+                   [(ngModel)]="newUser.firstName">
+
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="Input">
+            <input matInput class="Input--Min-WIDTH" maxlength="200"
+                   [(ngModel)]="newUser.lastName">
+
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="Input">
+            <input matInput class="Input--Min-WIDTH" maxlength="200"
+                   [(ngModel)]="newUser.phoneNumber">
+
+          </mat-form-field>
+        </td>
+        <td>
+          <button type="button" class="btn btn-primary" (click)="addNewUser()"
+                  [disabled]="!newUser.email || notUniqueError || !validateEmail(newUser.email)">Add New User
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <table class="table">
+      <tbody>
+      <tr *ngFor="let user of currentUsers">
+        <td>
+          {{user.email}}
+        </td>
+        <td>
+          <mat-form-field class="Input">
+            <input matInput class="Input--Min-WIDTH" maxlength="200"
+                   [(ngModel)]="user.firstName">
+
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="Input">
+            <input matInput class="Input--Min-WIDTH" maxlength="200"
+                   [(ngModel)]="user.lastName">
+
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="Input">
+            <input matInput class="Input--Min-WIDTH" maxlength="200"
+                   [(ngModel)]="user.phoneNumber">
+
+          </mat-form-field>
+        </td>
+        <td>
+          <button type="button" class="btn btn-primary">Delete User
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-container>
