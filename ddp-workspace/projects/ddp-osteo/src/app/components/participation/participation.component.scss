@@ -5,6 +5,12 @@
 .participation {
     text-align: left;
 
+    .button_secondary:hover:enabled {
+        background: #fbfbfb!important;
+        color: inherit!important;
+
+    }
+
     .title {
         margin: 0 auto 5.625rem;
         text-align: center;
@@ -77,8 +83,10 @@
             font-size: 1.13rem;
             padding: 1rem 2rem;
             line-height: 22px;
+            // font-family: $primary-font-medium;
             font-family: $primary-font-medium;
             white-space: normal;
+            border: 2px solid #000000!important;
         }
 
         &__image {
@@ -91,6 +99,7 @@
             }
         }
     }
+
 
 
 @media screen and (max-width: $tablet-breakpoint) {
