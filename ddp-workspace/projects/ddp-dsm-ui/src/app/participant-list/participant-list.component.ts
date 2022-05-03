@@ -1196,8 +1196,8 @@ export class ParticipantListComponent implements OnInit {
           proband = participant.participantData
             .find(p => p.data[ 'COLLABORATOR_PARTICIPANT_ID' ] && p.data[ 'COLLABORATOR_PARTICIPANT_ID' ].slice(-2) === '_3');
         }
-        if (proband && proband.dataId) {
-          tabAnchor = proband.dataId;
+        if (proband && proband.participantDataId) {
+          tabAnchor = proband.participantDataId;
         }
       }
       if(tabAnchor === 'Survey Data') {
