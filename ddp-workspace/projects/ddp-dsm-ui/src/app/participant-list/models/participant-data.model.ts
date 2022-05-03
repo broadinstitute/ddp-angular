@@ -1,6 +1,6 @@
 export class ParticipantData {
-  constructor(public dataId: string, public fieldTypeId: string, public data: {}) {
-    this.dataId = dataId;
+  constructor(public participantDataId: string, public fieldTypeId: string, public data: {}) {
+    this.participantDataId = participantDataId;
     this.fieldTypeId = fieldTypeId;
     this.data = data;
   }

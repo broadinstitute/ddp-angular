@@ -13,6 +13,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -113,6 +114,7 @@ import { AddFamilyMemberComponent } from './popups/add-family-member/add-family-
 import { FieldTableComponent } from './field-table/field-table.component';
 import { ConfigurationService, DdpModule } from 'ddp-sdk';
 import {dynamicFormTypeAndStudyRGP} from './participant-page/pipes/dynamicFormTypeForRgp.pipe';
+import { LoadingModalComponent } from './modals/loading-modal.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -205,7 +207,8 @@ sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
         FormDataComponent,
         AddFamilyMemberComponent,
         FieldTableComponent,
-        dynamicFormTypeAndStudyRGP
+        dynamicFormTypeAndStudyRGP,
+        LoadingModalComponent
     ],
     imports: [
         DdpModule,
@@ -228,6 +231,7 @@ sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
         NgxPageScrollModule,
         DataTableModule,
         NgxPaginationModule,
+        MatProgressBarModule,
         TabsModule.forRoot(),
         DatepickerModule.forRoot(),
         TooltipModule.forRoot(),

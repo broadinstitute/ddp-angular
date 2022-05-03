@@ -1304,7 +1304,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       this.participant != null && this.participant.participantData != null
       && fieldTypeId != null && fieldSetting.columnName != null && dataId != null
     ) {
-      let participantData: ParticipantData = this.participant.participantData.find(pData => pData.dataId === dataId);
+      let participantData: ParticipantData = this.participant.participantData.find(pData => pData.participantDataId === dataId);
       if (participantData == null) {
         const data: { [ k: string ]: any } = {};
         data[fieldSetting.columnName] = value;
@@ -1351,7 +1351,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           participantId = this.participant.data.profile[ 'legacyAltPid' ];
         }
         const patch = {
-          id: participantData.dataId,
+          id: participantData.participantDataId,
           parent: 'participantDataId',
           parentId: participantId,
           user: this.role.userMail(),
@@ -1368,7 +1368,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
             if (data) {
             if (data['participantDataId']) {
               if (participantData != null) {
-                participantData.dataId = data['participantDataId'];
+                participantData.participantDataId = data['participantDataId'];
                 }
               }
             }
@@ -1420,7 +1420,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       const participantDataOfFieldSetting = this.participant.participantData
         .find(participantData => participantData.fieldTypeId === fieldSetting.fieldType);
       if (participantDataOfFieldSetting) {
-        return participantDataOfFieldSetting.dataId;
+        return participantDataOfFieldSetting.participantDataId;
       }
     }
     return '';
