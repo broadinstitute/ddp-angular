@@ -31,6 +31,8 @@ import { FieldSettings } from '../field-settings/field-settings.model';
 import { ParticipantData } from './models/participant-data.model';
 import { Sort } from '../sort/sort.model';
 import { saveAs } from 'file-saver';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { LoadingModalComponent } from '../modals/loading-modal.component';
 
 @Component({
   selector: 'app-participant-list',
@@ -122,7 +124,8 @@ export class ParticipantListComponent implements OnInit {
   selectAllColumnsLabel = 'Select all';
 
   constructor(private role: RoleService, private dsmService: DSMService, private compService: ComponentService,
-               private router: Router, private auth: Auth, private route: ActivatedRoute, private util: Utils) {
+               private router: Router, private auth: Auth, private route: ActivatedRoute, private util: Utils,
+              private dialog: MatDialog) {
     if (!auth.authenticated()) {
       auth.logout();
     }
@@ -1613,7 +1616,12 @@ export class ParticipantListComponent implements OnInit {
     return col.object != null ? col.object : col.tableAlias;
   }
 
+  openDialog(message: string): MatDialogRef<LoadingModalComponent> {
+    return this.dialog.open(LoadingModalComponent, {data: {message: message}, disableClose: true});
+  }
+
   downloadCurrentData(): void {
+    const dialogRef = this.openDialog('Exporting participants list...');
     const columns = [];
     for(const col in this.selectedColumns) {
       for (const key in this.selectedColumns[col]) {
@@ -1642,6 +1650,7 @@ export class ParticipantListComponent implements OnInit {
         const fileContent = response.body;
         const blob = new Blob([fileContent], { type: 'application/octet-stream' });
         saveAs(blob, fileName);
+        dialogRef.close();
       }}
     );
   }
