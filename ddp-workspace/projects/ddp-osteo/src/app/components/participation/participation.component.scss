@@ -12,6 +12,12 @@
         background-color: $accent-color-orange;
     }
 
+    .step__title {
+        font-weight: bold;
+        font-family: "Source Serif Pro", serif;
+        font-size: 2.625rem;    
+    }
+
     .static-page-title {
         margin: 0 auto 5.625rem;
         text-align: center;

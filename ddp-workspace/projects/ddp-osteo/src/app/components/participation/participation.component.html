@@ -9,6 +9,13 @@
             <h2 class="step__title">{{step.Title}}</h2>
             <p class="step__text">{{step.Text}}</p>
 
+            <a mat-stroked-button *ngIf="step.Button && stepsHref[i]"
+            target="_blank"
+            [href]="stepsHref[i]"
+            class="step__btn button button_small small-letter-spacing button_secondary">
+             {{step.Button}}
+            </a>
+
 
         </div>
         <div class="step__image">
@@ -18,7 +25,7 @@
         </div>
     </section> 
 
-    <h2 class="title static-page-title" translate>BenefitsParticipation.Title</h2>
+    <h2 class="title" translate>BenefitsParticipation.Title</h2>
     <section *ngFor="let step of 'BenefitsParticipation.Participations' | translate; let i = index;" class="step">
         <div class="step__data">
 
@@ -37,4 +44,6 @@
                  [src]="'assets/images/pic' + (i+1) + '_big.png'"
                  [alt]="step.ImageAlt">
         </div>
+    </section>
+</main>
    
