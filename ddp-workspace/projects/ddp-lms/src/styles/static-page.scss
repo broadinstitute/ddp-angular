@@ -1,0 +1,19 @@
+@import '../styles/variables';
+
+.static-page-title {
+    font-family: $primary-font-light;
+    font-size: 3rem;
+    font-weight: 300;
+    letter-spacing: 0;
+    line-height: 58px;
+}
+
+.static-page-paragraph-text {
+    font-size: 1.25rem;
+    letter-spacing: 0;
+    line-height: 30px;
+}
+
+.static-page-content-section {
+    margin: 0 0 4rem 0;
+}

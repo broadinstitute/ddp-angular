@@ -1,0 +1,345 @@
+{
+  "Common": {
+    "Buttons": {
+      "Login": {
+        "Title": "Log In",
+        "AriaLabel": "Log In"
+      },
+      "Submit": {
+        "Title": "Submit",
+        "AriaLabel": "Submit"
+      },
+      "HeaderMenu": {
+        "AriaLabel": "Header menu button"
+      }
+    },
+    "Alts": {
+      "Twitter": "Twitter logo",
+      "Facebook": "Facebook logo",
+      "Instagram": "Instagram logo",
+      "JoinCMI": "Join Count Me In logo"
+    }
+  },
+  "Header": {
+    "Links": {
+      "About": "About us",
+      "Participation": "Participation",
+      "ScientificImpact": "Scientific Impact",
+      "FAQ": "FAQs",
+      "MailingList": "Join Mailing List",
+      "ForYourPhysician": "For Your Physician",
+      "CountMeIn": "Count Me In"
+    }
+  },
+  "Toolkit": {
+    "AgeUpThankYou": {
+      "Title": "Thank you!",
+      "EmailVerified": "Your email address has been verified. We will be sending an email with more information on re-consent shortly after your birthday.",
+      "EmailCollected": {
+        "TextPt1": "An email will be sent to your child to confirm their address and tell them about the upcoming re-consent process. If you need to change the email you provided for your child, please contact the project team at",
+        "TextPt2": "or",
+        "Button": "Go to Dashboard"
+      },
+      "ImageAlt": "Email sent"
+    },
+    "StayInformed": {
+      "Title": "Stay Informed!",
+      "Text": "Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email ",
+      "ReturnButton": "RETURN HOME"
+    },
+    "Dashboard": {
+      "Title": "Dashboard",
+      "ParticipantsTitle": "Participant Dashboard",
+      "AddParticipant": "Add Participant",
+      "ShowPanel": "Show",
+      "HidePanel": "Hide",
+      "UserLabel": "You",
+      "ChildLabel": "Your child{{suffix}}",
+      "EditUser": "Edit profile"
+    },
+    "Password": {
+      "Title": "Please enter the password",
+      "Text": "Please enter your password *",
+      "InputPlaceholder": "Password",
+      "PasswordWrongError": "Incorrect password. Please try again.",
+      "OtherError": "We're sorry, but an error has occurred. Please try again.",
+      "PasswordRequiredError": "Password is required"
+    },
+    "ErrorPage": {
+      "Title": "We've encountered an error",
+      "Text": "We're sorry, but an error has occurred.",
+      "DefaultText": {
+        "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
+        "TextPt2": "or call us at"
+      }
+    },
+    "ErrorCodes": {
+      "PASSWORD_RESET_LINK_EXPIRED": "Your password reset link has expired."
+    },
+    "SessionExpired": {
+      "Text": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
+    },
+    "LoginLanding": {
+      "Text": "Please wait. You will be redirected to a destination soon..."
+    },
+    "Dialogs": {
+      "JoinMailingList": {
+        "Title": "Stay informed!",
+        "Text": "Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
+        "Fields": {
+          "FirstName": {
+            "Placeholder": "First Name *",
+            "Error": "First Name is required"
+          },
+          "LastName": {
+            "Placeholder": "Last Name *",
+            "Error": "Last Name is required"
+          },
+          "Email": {
+            "Placeholder": "Email Address *",
+            "Error": "Please enter a valid Email Address"
+          },
+          "ConfirmEmail": {
+            "Placeholder": "Email Confirmation (Reenter Email) *",
+            "Error": "Please enter a valid Email Address"
+          }
+        },
+        "CancelButton": "Cancel",
+        "SubmitButton": "Join",
+        "Required": "* Required field",
+        "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
+        "LoadingError": "We're sorry, but an error has occurred."
+      },
+      "SessionWillExpire": {
+        "Title": "Your session will time-out soon",
+        "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
+        "SignOut": "Sign Out",
+        "Continue": "Continue",
+        "RenewalFailed": "Session renewal failed. Please log out and log back in again."
+      },
+      "StudyRedirect": {
+        "Title": "Your participation",
+        "Content": "<p>Count Me In has an open project specific to your cancer type.</p><p>Use the button below to join the {{study}} and learn more about this existing work.</p>",
+        "GoToProject": "Go to project",
+        "Cancel": "Cancel"
+      }
+    },
+    "Warning": {
+      "Title": "Download Chrome or Safari to Continue",
+      "Text1": "This project is designed for use with the internet's safest and most popular browsers -- Chrome and Safari.",
+      "Text2": "It looks like you are using Internet Explorer. You will need to use another browser in order to join the project. We suggest you use Chrome or Safari to ensure that your experience with the website is smooth and secure.",
+      "Text3": {
+        "Pt1": "Click the following links to download",
+        "Pt2": "or",
+        "Pt3": "Chrome and Safari are always free.",
+        "Chrome": "Chrome (for Mac & PC)",
+        "Safari": "Safari (for Mac)"
+      },
+      "SubmitButton": "OK"
+    }
+  },
+  "SDK": {
+    "FinishButton": "Finish",
+    "SubmitButton": "Submit",
+    "CloseButton": "Close",
+    "AddButton": "Add",
+    "CancelButton": "Cancel",
+    "NextButton": "Next",
+    "PreviousButton": "Prev",
+    "SavingButton": "Saving",
+    "EditButton": "Edit",
+    "SaveButton": "Save",
+    "CompleteButton": "Edit",
+    "ReviewButton": "View",
+    "OpenButton": "Open",
+    "StartButton": "Start",
+    "AgreeButton": "I agree",
+    "ReportButton": "Report",
+    "NotAgreeButton": "I'm not ready to agree",
+    "ValidateError": "Please complete all required fields.",
+    "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting.",
+    "SignInOut": {
+      "SignIn": "Log In",
+      "SignOut": "Log Out"
+    },
+    "LanguageSelector": {
+      "LanguageSelection": "language selection"
+    },
+    "UserActivities": {
+      "ActivityName": "Form",
+      "Summary": "Summary",
+      "ActivityStatus": "Status",
+      "ActivityDate": "Created",
+      "ActivityActions": "Actions"
+    },
+    "UserPreferences": {
+      "UserPreferencesTitle": "User preferences",
+      "MailingAddress": "Mailing Address"
+    },
+    "DatePicker": {
+      "Day": "Choose day...",
+      "Month": "Choose month...",
+      "Year": "Choose year...",
+      "January": "January",
+      "February": "February",
+      "March": "March",
+      "April": "April",
+      "May": "May",
+      "June": "June",
+      "July": "July",
+      "August": "August",
+      "September": "September",
+      "October": "October",
+      "November": "November",
+      "December": "December"
+    },
+    "DateLabel": {
+      "YYYY": "YYYY",
+      "MM": "MM",
+      "DD": "DD"
+    },
+    "UserMenu": {
+      "DashboardButton": "Dashboard",
+      "SignOutButton": "Sign Out",
+      "PrismButton": "Prism"
+    },
+    "DetailsPlaceholder": {
+      "PluralForm": "characters remaining",
+      "SingularForm": "character remaining"
+    },
+    "Title": {
+      "Default": "Leiomyosarcoma Project",
+      "Alert": "Your session will time-out soon"
+    },
+    "EmailEntry": {
+      "InvalidEmail": "Please enter a valid email"
+    },
+    "Institutions": {
+      "Fields": {
+        "Name": "Physician Name (if applicable)",
+        "Institution": "Institution",
+        "InstitutionAny": "Hospital/Institution (if any)",
+        "City": "City",
+        "State": "State"
+      },
+      "Form": {
+        "OtherPhysician": "Other hospital/institution",
+        "OtherInstitution": "Other institution"
+      },
+      "PhysicianValidation": "Please fill out all required fields"
+    },
+    "ModalActivityBlock": {
+      "SaveButton": "Save",
+      "NumQuestionsAnswered": "{{number}} questions answered",
+      "Complete": "Complete",
+      "EditButton": "Edit",
+      "DeleteButton": "Delete",
+      "CancelButton": "Cancel"
+    },
+    "MailAddress": {
+      "Fields": {
+        "Name": "Full Name",
+        "Country": "Country/Territory",
+        "Street1": "Street Address",
+        "Street2": "Apt/Floor #",
+        "State": {
+          "State": "State",
+          "Province": "Province",
+          "State/Province/Region": "State/Province/Region"
+        },
+        "City": "City",
+        "Phone": "Phone",
+        "Zip": {
+          "Zip Code": "Zip Code",
+          "Postal Code": "Postal Code",
+          "Zip/Postal Code": "Zip/Postal Code"
+        },
+        "Choose": "Choose {{field}} ..."
+      },
+      "Suggestion": {
+        "Title": "We have checked your address entry and have suggested changes that could help ensure delivery.",
+        "Subtitle": "Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
+        "Suggested": "Suggested:",
+        "AsEntered": "As Entered:"
+      },
+      "Error": {
+        "InvalidAddress": "Invalid address.",
+        "CannotVerify": "Could not verify address, please double-check your address.",
+        "UnknownVerifyError": "An unknown error occurred while verifying address.",
+        "FieldIsRequired": "{{field}} is required",
+        "FieldIsInvalid": "{{field}} has an invalid value",
+        "InvalidHouseNumber": "Street number could not be found",
+        "INTERNAL_SERVER_ERROR": "We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
+        "NOT_ACCEPTABLE": "The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
+        "NOT_FOUND": "The requested resource could not be found.",
+        "FORBIDDEN": "Unable to access the requested resource.",
+        "PAYMENT_REQUIRED": "Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
+        "UNAUTHORIZED": "Unable to access the requested resource, authorization failed.",
+        "BAD_REQUEST": "Malformed request. Please check the contents and retry.",
+        "PAYMENT_GATEWAY.ERROR": "The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
+        "MODE.UNAUTHORIZED": "This resource requires a production API Key to access.",
+        "MODE.CONFLICT": "API Key mode conflicted with parameter mode.",
+        "DATE.PARSE.FAILURE": "At least one date was formatted incorrectly and could not be parsed.",
+        "PARAMETER.FORBIDDEN": "The request could not be completed due to forbidden properties present in the parameters.",
+        "PARAMETER.REQUIRED": "Missing required parameter.",
+        "ADDRESS.PARAMETERS.INVALID_CHARACTER": "The parameters passed contained an invalid character.",
+        "ADDRESS.PARAMETERS.INVALID": "The parameters passed to create an Address were missing or invalid.",
+        "ADDRESS.COUNTRY.INVALID": "Invalid 'country', please provide a 2 character ISO country code.",
+        "ADDRESS.VERIFICATION.NOT_FOUND": "Address Not Found.",
+        "ADDRESS.VERIFICATION.FAILURE": "The address was unable to be verified.",
+        "ADDRESS.VERIFY.UNAVAILABLE": "Address verification is not available. Please try again.",
+        "ADDRESS.VERIFICATION.INVALID": "One of the verifications selected is invalid.",
+        "ADDRESS.VERIFY.FAILURE": "Unable to verify address.",
+        "ADDRESS.VERIFY.CARRIER_INVALID": "Unable to verify address using provided carrier.",
+        "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "Address verification is not available due to an upstream service not responding. Please try again.",
+        "ADDRESS.VERIFY.ONLY_US": "USPS can only validate US addresses.",
+        "ADDRESS.VERIFY.INTL_NOT_ENABLED": "International Verification not enabled on this account. Please contact support@easypost.com.",
+        "ADDRESS.VERIFY.MISSING_STREET": "Insufficient address data provided. A street must be provided.",
+        "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Insufficient address data provided. A city and state or a zip must be provided.",
+        "E.COUNTRY.UNSUPPORTED": "This country is not supported in this mode. Try in production mode.",
+        "E.ENGINE.UNAVAILABLE": "No verification engine is available to service this country. Please try again later.",
+        "E.QUERY.UNANSWERABLE": "We can not provide enough data in this country to satisfy this request. Please try again later.",
+        "E.ADDRESS.NOT_FOUND": "We could not find the entered address.",
+        "E.SECONDARY_INFORMATION.INVALID": "Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+        "E.SECONDARY_INFORMATION.MISSING": "Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
+        "E.HOUSE_NUMBER.MISSING": "House number is missing.",
+        "E.HOUSE_NUMBER.INVALID": "We could not find the street number provided.",
+        "E.STREET.MISSING": "Street is missing.",
+        "E.STREET.INVALID": "Street is invalid.",
+        "E.BOX_NUMBER.MISSING": "Box number is missing.",
+        "E.BOX_NUMBER.INVALID": "Box number is invalid.",
+        "E.ADDRESS.INVALID": "Invalid city/state/ZIP.",
+        "E.ZIP.NOT_FOUND": "Zip not found.",
+        "E.ZIP.INVALID": "Zip invalid.",
+        "E.ZIP.PLUS4.NOT_FOUND": "Zip + 4 not found.",
+        "E.ADDRESS.MULTIPLE": "Multiple addresses were returned with the same zip.",
+        "E.ADDRESS.INSUFFICIENT": "Insufficient/incorrect address data.",
+        "E.ADDRESS.DUAL": "Dual address.",
+        "E.STREET.MAGNET": "Street address is ambiguous.",
+        "E.CITY_STATE.INVALID": "Unverifiable city / state.",
+        "E.STATE.INVALID": "Invalid State.",
+        "E.ADDRESS.DELIVERY.INVALID": "Invalid delivery address.",
+        "E.TIMED_OUT": "Exceeded max timeout.",
+        "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
+        "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+      },
+      "UseAsEntered": "We are unable to confirm that the address is valid. Please check this box to use the address as entered."
+    },
+    "TooltipAlt": "Information",
+    "Validators": {
+      "DateNavyValidationRule": "Entered date is invalid",
+      "Autocomplete": "No {{control}} is found"
+    },
+    "SubjectPanel": {
+      "Link": "Return to subject look-up",
+      "InvitationCode": "Subject Invitation Code:",
+      "Email": "Email:",
+      "Name": "Name:",
+      "ShortId": "Subject Short ID/HRUID:"
+    },
+    "AdminActionPanel": {
+      "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+      "EditButton": "Edit"
+    }
+  }
+}
