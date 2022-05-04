@@ -9,13 +9,13 @@
             <h2 class="step__title">{{step.Title}}</h2>
             <p class="step__text">{{step.Text}}</p>
 
-            <button *ngIf="step.Button && stepsHref[i]"
+            <a *ngIf="step.Button && stepsHref[i]"
                 mat-stroked-button
                 target="_blank"
                 [href]="stepsHref[i]"
                 class="step__btn button button_small small-letter-spacing button_secondary">
                 {{step.Button}}
-            </button>
+            </a>
 
 
         </div>
