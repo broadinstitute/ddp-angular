@@ -288,7 +288,7 @@
                 "Step": "STEP 1",
                 "Time": "10-15 minutes",
                 "Title": "Provide consent for the study",
-                "Text": "This section consists of several pages, but feel free to take your time. Your progress will be automatically saved so you can come back to it later. If you are signing up for / with your child, depending on their age, we may also ask them to “assent” or agree that they would also like to participate in the study.",
+                "Text": "The consent form is how participants give researchers their permission to take part in the study. This section consists of several pages, but feel free to take your time. Your progress will be automatically saved so you can come back to it later. If you are signing up for / with your child, depending on their age, we may also ask them to “assent” or agree that they would also like to participate in the study.",
                 "Button": "View Consent Document",
                 "ImageAlt": "Computer screen displaying online consent form"
             },
@@ -296,7 +296,7 @@
                 "Step": "STEP 2",
                 "Time": "5 minutes",
                 "Title": "Tell us where you’ve been treated",
-                "Text": "Tell us where you’ve been treated for your cancer. We ask where patients have been treated, so that we can request medical records, and if applicable, archived tumor tissue.",
+                "Text": "We ask where patients have been treated for their cancer, so that we can request medical records, and if applicable, archived tumor tissue.",
                 "Button": "View Medical Release",
                 "ImageAlt": "Computer screen displaying medical center"
             },
@@ -304,7 +304,7 @@
                 "Step": "STEP 3",
                 "Time": "Time varies by survey",
                 "Title": "Respond to surveys about you and your experience with cancer",
-                "Text": "In these surveys, we ask questions about your experience with cancer, like what type of cancer you were diagnosed with, when you were diagnosed, and the types of treatments you’ve had.",
+                "Text": "In these surveys we ask questions about a participant’s experience with osteosarcoma, like when they were diagnosed and the types of treatments they've had.",
                 "Button": "View Surveys",
                 "ImageAlt": "Computer screen displaying online survey"
             },
@@ -312,7 +312,7 @@
                 "Step": "STEP 4",
                 "Time": "10 minutes",
                 "Title": "Provide a saliva and/or blood sample",
-                "Text": "We will send you a kit to collect a sample of your saliva and/or blood. We will study these samples to help improve our understanding of cancer.",
+                "Text": "We will send participants a kit to collect a sample of their saliva and/or blood, along with easy to follow instructions. We will study these samples to help improve our understanding of cancer by comparing the normal DNA in a participant's saliva or blood to their tumor DNA from any tumor samples we may collect.",
                 "Button": "View Kit Instructions",
                 "ImageAlt": "Sample collection kit"
             }
