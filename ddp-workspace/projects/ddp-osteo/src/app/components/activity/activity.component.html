@@ -91,6 +91,8 @@
                     <span class="last-updated">{{model.lastUpdatedText}} </span>
                 </ng-container>
 
+                <div *ngIf="showEmptyNestedActivityError" class="ErrorMessage" translate>SDK.CompletionError</div>
+
                 <ng-container *ngIf="submitButtonPlacement === SubmitButtonPlacement.AfterClosingSection">
                     <ng-container *ngTemplateOutlet="activityButtons"></ng-container>
                 </ng-container>

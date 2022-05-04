@@ -391,18 +391,22 @@ export class ParticipantsListComponent implements OnInit {
   private hasOnlyAddParticipantActivity(activities: ActivityInstance[]): boolean {
     return (
       activities.length === 1 &&
-      [ActivityCode.AddParticipantSelf, ActivityCode.AddParticipantParental].includes(
-        activities[0].activityCode as ActivityCode,
-      )
+      [
+        ActivityCode.AddParticipantSelf,
+        ActivityCode.AddParticipantParental,
+        ActivityCode.AddParticipantDependent,
+      ].includes(activities[0].activityCode as ActivityCode)
     );
   }
 
   private filterOutAddParticipant(activities: ActivityInstance[]): ActivityInstance[] {
     return activities.filter(
       activity =>
-        ![ActivityCode.AddParticipantSelf, ActivityCode.AddParticipantParental].includes(
-          activity.activityCode as ActivityCode,
-        ),
+        ![
+          ActivityCode.AddParticipantSelf,
+          ActivityCode.AddParticipantParental,
+          ActivityCode.AddParticipantDependent,
+        ].includes(activity.activityCode as ActivityCode),
     );
   }
 }

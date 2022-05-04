@@ -11,7 +11,6 @@ import {
   AnalyticsEventsService,
   AnalyticsEvent,
   LoggingService,
-  PicklistSortingPolicy,
   SubmitAnnouncementService,
   SubmissionManager
 } from 'ddp-sdk';
@@ -23,6 +22,7 @@ import {
 
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AppComponent } from './components/app/app.component';
@@ -32,8 +32,14 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { HeaderComponent } from './components/header/header.component';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress.component';
+
+import { ParticipationComponent } from './components/participation/participation.component';
+import { ScientificImpactComponent } from './components/scientific-impact/scientific-impact.component';
+import { PhysiciansComponent } from './components/physicians/physicians.component';
+
 import { ActivityComponent } from './components/activity/activity.component';
 import { ActivityPageComponent } from './components/activity-page/activity-page.component';
+
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -140,6 +146,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ToolkitModule,
     MatExpansionModule,
     MatIconModule,
+    MatButtonModule,
     HammerModule
   ],
   declarations: [
@@ -149,10 +156,16 @@ export function translateFactory(translate: TranslateService, injector: Injector
     GalleryComponent,
     AboutUsComponent,
     FaqComponent,
+    ScientificImpactComponent,
     HeaderComponent,
     WorkflowProgressComponent,
+
+    ParticipationComponent,
+    PhysiciansComponent,
+
     ActivityComponent,
     ActivityPageComponent
+
   ],
   providers: [
     {
@@ -173,9 +186,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
       ],
       multi: true
     },
-    PicklistSortingPolicy,
     SubmitAnnouncementService,
-    SubmissionManager,
+    SubmissionManager
   ],
   bootstrap: [AppComponent]
 })

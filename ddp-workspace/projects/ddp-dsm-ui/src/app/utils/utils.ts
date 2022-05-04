@@ -15,6 +15,7 @@ import { Filter } from '../filter-column/filter-column.model';
 import { AbstractionField } from '../medical-record-abstraction/medical-record-abstraction-field.model';
 import { Participant } from '../participant-list/participant-list.model';
 import { NameValue } from './name-value.model';
+import { AnswerValue } from '../../../../ddp-sdk/src/lib/models/activity/answerValue';
 
 const fileSaver = require('file-saver');
 const Json2csvParser = require('json2csv').Parser;
@@ -448,7 +449,7 @@ export class Utils {
           return this.changePartialYearTo2000(dateParts[ 2 ], dateParts[ 0 ], dateParts[ 1 ]);
         } else if (allowUnknownDay && dateParts.length === 2) {
           if (dateParts[ 1 ].length === 4 && dateParts[ 0 ].length < 3) {
-            if (Number(dateParts[ 0 ]) > -1 && Number(dateParts[ 0 ]) < 12) {
+            if (Number(dateParts[ 0 ]) > -1 && Number(dateParts[ 0 ]) <= 12) {
               return Utils.DATE_PARTIAL;
             }
           }
@@ -463,7 +464,7 @@ export class Utils {
           return this.changePartialYearTo2000(dateParts[ 0 ], dateParts[ 1 ], dateParts[ 2 ]);
         } else if (allowUnknownDay && dateParts.length === 2) {
           if (dateParts[ 0 ].length === 4 && dateParts[ 1 ].length < 3) {
-            if (Number(dateParts[ 1 ]) > -1 && Number(dateParts[ 1 ]) < 12) {
+            if (Number(dateParts[ 1 ]) > -1 && Number(dateParts[ 1 ]) <= 12) {
               return Utils.DATE_PARTIAL;
             }
           }
@@ -496,7 +497,7 @@ export class Utils {
         dateParts = dateString.split('/');
         if (dateParts.length === 2) {
           if (dateParts[ 1 ].length === 4 && dateParts[ 0 ].length < 3) {
-            if (Number(dateParts[ 0 ]) > -1 && Number(dateParts[ 0 ]) < 12) {
+            if (Number(dateParts[ 0 ]) > -1 && Number(dateParts[ 0 ]) <= 12) {
               return dateParts[ 1 ] + '-' + dateParts[ 0 ];
             }
           }
@@ -509,7 +510,7 @@ export class Utils {
         dateParts = dateString.split('-');
         if (dateParts.length === 2) {
           if (dateParts[ 0 ].length === 4 && dateParts[ 1 ].length < 3) {
-            if (Number(dateParts[ 1 ]) > -1 && Number(dateParts[ 1 ]) < 12) {
+            if (Number(dateParts[ 1 ]) > -1 && Number(dateParts[ 1 ]) <= 12) {
               return dateString;
             }
           }
@@ -731,6 +732,10 @@ export class Utils {
     return  activities?.find( x => x.activityCode === activityCode && x.activityVersion === version );
   }
 
+  static getFilteredActivityDefinitions( activities: ActivityDefinition[], activityCode: string, version: string ): ActivityDefinition[] {
+    return  activities?.filter( x => x.activityCode === activityCode && x.activityVersion === version );
+  }
+
   getAbstractionGroup(groups: Array<AbstractionGroup>, groupId: string): AbstractionGroup | undefined {
     return groups.find(x => x.abstractionGroupId.toString() === groupId);
   }
@@ -857,41 +862,55 @@ export class Utils {
     return answers;
   }
 
-
-  public static getNiceTextForCSVCompositeType( questionAnswer: QuestionAnswer, qdef: QuestionDefinition ): string[] {
-    const answers = [];
-    for (let answer of questionAnswer.answer) {
-      if (answer instanceof Array) {
-        answer = answer[ 0 ];
-      }
-      let text = answer;
-      let ans;
-      if (qdef?.childQuestions) {
-        loop1: for (const childq of qdef.childQuestions) {
-          if (childq.groups) {
-            for (const g of childq.groups) {
-              for (const option of g.options) {
-                if (option.optionStableId === answer) {
-                  ans = option.optionText;
-                  break loop1;
-                }
-              }
-            }
-          }
-          if (!ans && childq.options) {
-            for (const g of childq.options) {
-              if (g.optionStableId === answer) {
-                ans = g.optionText;
+  private static getAnswer( answer: AnswerValue, qdef: QuestionDefinition ): string {
+    const text = answer;
+    let ans;
+    if (qdef?.childQuestions) {
+      loop1: for (const childq of qdef.childQuestions) {
+        if (childq.groups) {
+          for (const g of childq.groups) {
+            for (const option of g.options) {
+              if (option.optionStableId === answer) {
+                ans = option.optionText;
                 break loop1;
               }
             }
           }
         }
-        if (ans) {
-          text = ans;
+        if (!ans && childq.options) {
+          for (const g of childq.options) {
+            if (g.optionStableId === answer) {
+              ans = g.optionText;
+              break loop1;
+            }
+          }
         }
       }
-      answers.push( text );
+    }
+    if (ans) {
+      return ans;
+    }
+    return typeof text === 'string' ? text : null;
+  }
+
+  public static getNiceTextForCSVCompositeType( questionAnswer: QuestionAnswer, qdef: QuestionDefinition ): string[] {
+    const answers = [];
+    for (const answer of questionAnswer.answer) {
+      if (answer instanceof Array) {
+        let answerText = '';
+        for (const childAnswer of answer) {
+          const text = this.getAnswer(childAnswer, qdef);
+          if (text) {
+            answerText += text + ' ';
+          }
+        }
+        answers.push(answerText);
+      } else {
+        const text = this.getAnswer(answer, qdef);
+        if (text) {
+          answers.push(text);
+        }
+      }
     }
 
     return answers;

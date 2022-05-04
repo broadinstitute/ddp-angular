@@ -14,6 +14,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -118,6 +119,7 @@ import { TestDssComponent } from './test-dss/test-dss.component';
 import { DssErrorPageComponent } from './test-dss/dss-error-page/dss-error-page.component';
 
 import { TranslateService } from '@ngx-translate/core';
+import { LoadingModalComponent } from './modals/loading-modal.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -240,7 +242,8 @@ export function translateFactory(translate: TranslateService,
         FieldTableComponent,
         dynamicFormTypeAndStudyRGP,
         TestDssComponent,
-        DssErrorPageComponent
+        DssErrorPageComponent,
+        LoadingModalComponent
     ],
     imports: [
         DdpModule,
@@ -263,6 +266,7 @@ export function translateFactory(translate: TranslateService,
         NgxPageScrollModule,
         DataTableModule,
         NgxPaginationModule,
+        MatProgressBarModule,
         TabsModule.forRoot(),
         DatepickerModule.forRoot(),
         TooltipModule.forRoot(),
