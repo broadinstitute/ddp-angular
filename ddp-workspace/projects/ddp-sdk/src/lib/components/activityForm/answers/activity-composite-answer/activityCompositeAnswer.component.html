@@ -14,7 +14,6 @@
                 [block]="childBlock"
                 [readonly]="readonly"
                 [validationRequested]="validationRequested"
-                [triggerChanges]="triggerChanges"
                 (valueChanged)="updateValue(row, column, $event)"
                 (componentBusy)="componentBusy.next($event)">
             </ddp-activity-answer>

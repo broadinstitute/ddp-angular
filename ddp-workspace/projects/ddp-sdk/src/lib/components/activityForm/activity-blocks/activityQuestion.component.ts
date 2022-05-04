@@ -19,7 +19,6 @@ import { ActivityValidationResult } from '../../../models/activity/activityValid
                 [validationRequested]="validationRequested$ | async"
                 [studyGuid]="studyGuid"
                 [activityGuid]="activityGuid"
-                [triggerChanges]="triggerChanges"
                 (valueChanged)="enteredValue$.next($event)"
                 (componentBusy)="componentBusy.next($event)">
             </ddp-activity-answer>
@@ -34,7 +33,6 @@ import { ActivityValidationResult } from '../../../models/activity/activityValid
 export class ActivityQuestionComponent implements OnInit, OnDestroy {
     @Input() block: ActivityQuestionBlock<any>;
     @Input() readonly: boolean;
-    @Input() triggerChanges: boolean;
     public enteredValue$ = new Subject<AnswerValue>();
     public validationRequested$ = new BehaviorSubject<boolean>(false);
 

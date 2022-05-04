@@ -1,5 +1,8 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, Inject } from '@angular/core';
-import { ActivityCompositeQuestionBlock } from '../../../../models/activity/activityCompositeQuestionBlock';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, Inject, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import * as _ from 'underscore';
+
+import { ActivityCompositeQuestionBlock, AnswerContainer } from '../../../../models/activity/activityCompositeQuestionBlock';
 import { AnswerValue } from '../../../../models/activity/answerValue';
 import { ActivityQuestionBlock } from '../../../../models/activity/activityQuestionBlock';
 import { ChildOrientation } from '../../../../models/activity/childOrientation';
@@ -8,7 +11,9 @@ import { ActivityDateQuestionBlock } from '../../../../models/activity/activityD
 import { ActivityEquationQuestionBlock } from '../../../../models/activity/activityEquationQuestionBlock';
 import { DateRenderMode } from '../../../../models/activity/dateRenderMode';
 import { ConfigurationService } from '../../../../services/configuration.service';
-import * as _ from 'underscore';
+import { SubmissionManager } from '../../../../services/serviceAgents/submissionManager.service';
+import { AnswerResponseEquation } from '../../../../models/activity/answerResponseEquation';
+
 
 // todo see if style in here can be moved to shared resource, like external CSS
 
@@ -19,23 +24,33 @@ import * as _ from 'underscore';
 })
 
 // todo can we make some of these styles be common? button styles copied from physician form
-export class ActivityCompositeAnswer implements OnChanges {
+export class ActivityCompositeAnswer implements OnChanges, OnInit, OnDestroy {
     @Input() block: ActivityCompositeQuestionBlock;
     @Input() readonly: boolean;
     @Input() validationRequested: boolean;
-    @Input() triggerChanges: boolean;
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
     @Output() componentBusy = new EventEmitter<boolean>();
     public childQuestionBlocks: ActivityQuestionBlock<any>[][] = [];
     private convertQuestionToLabels: boolean;
+    private subscription: Subscription;
 
-    constructor(@Inject('ddp.config') public config: ConfigurationService) { }
+    constructor(
+        @Inject('ddp.config') public config: ConfigurationService,
+        private submissionManager: SubmissionManager
+    ) {}
+
+    ngOnInit(): void {
+        this.subscription = this.submissionManager.answerSubmissionResponse$.subscribe(response => {
+            this.updateEquationQuestions(response.equations);
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
+    }
 
     public ngOnChanges(changes: SimpleChanges): void {
         for (const propName in changes) {
-            if (propName === 'triggerChanges') {
-                this.childQuestionBlocks = this.rebuildChildQuestions(this.block, this.block.answer);
-            }
             if (propName === 'block') {
                 const newBlock: ActivityCompositeQuestionBlock = changes['block'].currentValue;
                 if (changes[propName].isFirstChange()) {
@@ -48,6 +63,29 @@ export class ActivityCompositeAnswer implements OnChanges {
                     this.addBlankRow();
                 } else {
                     this.childQuestionBlocks = this.rebuildChildQuestions(newBlock, newAnswers);
+                }
+            }
+        }
+    }
+
+    private updateEquationQuestions(equations: AnswerResponseEquation[] = []): void {
+        for (const equation of equations) {
+            for (const question of this.block.children) {
+                if (question.stableId === equation.stableId) {
+                    question.setAnswer(equation.values, false);
+
+                    const prevAnswer: AnswerContainer[][] = this.block.answer;
+                    const newAnswer: AnswerContainer[][] = prevAnswer.map((answerRow: AnswerContainer[], index) =>
+                        // eslint-disable-next-line arrow-body-style
+                        answerRow.map((answer: AnswerContainer) => {
+                            return (answer.stableId === question.stableId) ? {
+                                ...answer,
+                                value: [equation.values[index]]
+                            } : answer;
+                        })
+                    );
+                    this.block.setAnswer(newAnswer, false);
+                    this.childQuestionBlocks = this.rebuildChildQuestions(this.block, newAnswer);
                 }
             }
         }

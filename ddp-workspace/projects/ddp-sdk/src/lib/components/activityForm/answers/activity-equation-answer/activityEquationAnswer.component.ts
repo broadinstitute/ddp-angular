@@ -1,7 +1,11 @@
-import { Component, Input } from '@angular/core';
-import { ActivityEquationQuestionBlock } from '../../../../models/activity/activityEquationQuestionBlock';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+
 import { DecimalHelper } from '../../../../utility/decimalHelper';
+import { SubmissionManager } from '../../../../services/serviceAgents/submissionManager.service';
 import { DecimalAnswer } from '../../../../models/activity/decimalAnswer';
+import { ActivityEquationQuestionBlock } from '../../../../models/activity/activityEquationQuestionBlock';
+import { AnswerResponseEquation } from '../../../../models/activity/answerResponseEquation';
 
 @Component({
   selector: 'ddp-activity-equation-answer',
@@ -10,11 +14,33 @@ import { DecimalAnswer } from '../../../../models/activity/decimalAnswer';
       <div class="equation-value">{{displayValue}}</div>
   `
 })
-export class ActivityEquationAnswerComponent {
+export class ActivityEquationAnswerComponent implements OnInit, OnDestroy {
     @Input() block: ActivityEquationQuestionBlock;
+    private subscription: Subscription;
+
+    constructor(private submissionManager: SubmissionManager) {
+    }
+
+    ngOnInit(): void {
+        this.subscription = this.submissionManager.answerSubmissionResponse$.subscribe(response => {
+            this.updateEquationQuestions(response.equations);
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
+    }
 
     get displayValue(): string {
         return this.block.answer && this.block.answer[0] ? this.formatValue(this.block.answer[0]) : null;
+    }
+
+    private updateEquationQuestions(equations: AnswerResponseEquation[] = []): void {
+        for (const equation of equations) {
+            if (this.block.stableId === equation.stableId) {
+                this.block.setAnswer(equation.values, false);
+            }
+        }
     }
 
     private formatValue(answer: DecimalAnswer): string {
