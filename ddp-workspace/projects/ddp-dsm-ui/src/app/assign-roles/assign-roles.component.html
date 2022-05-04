@@ -1,0 +1,47 @@
+<ng-container>
+
+  <div *ngIf="errorMessage != null">
+    <h3 class="Color--warn Line--Break">{{errorMessage}}</h3>
+    <br/>
+  </div>
+
+  <div *ngIf="additionalMessage != null">
+    <h3 class="Color--primary Line--Break">{{additionalMessage}}</h3>
+    <br/>
+  </div>
+  <div *ngIf="!errorMessage && !additionalMessage">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Roles
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of currentUsers;">
+        <td>{{user.user.firstName}} {{user.user.lastName}}</td>
+        <td>
+          {{user.user.email}}
+        </td>
+        <td>
+          <mat-form-field appearance="fill">
+            <mat-label>Select a role</mat-label>
+            <mat-select [(value)]="user.role.roleId">
+              <mat-option (click)="assignRole(role, user.user.userId)" *ngFor="let role of roles"
+                          [value]="role.roleId">
+                {{role.name}}: {{role.description}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-container>

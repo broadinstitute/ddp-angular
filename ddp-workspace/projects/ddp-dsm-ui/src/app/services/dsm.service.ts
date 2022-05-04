@@ -947,6 +947,33 @@ export class DSMService {
     );
   }
 
+  assignRoleToUser( json: string, realm: string ): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'modifyUser';
+    const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: realm} );
+    return this.http.post( url, json, this.buildQueryHeader( map ) ).pipe(
+      catchError( this.handleError )
+    );
+  }
+
+  getAllUsers( realm: string ) {
+    const url = this.baseUrl + DSMService.UI + 'getUsers';
+    const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: realm} );
+    return this.http.get( url, this.buildQueryHeader( map ) ).pipe(
+      catchError( this.handleError.bind( this ) )
+    );
+  }
+
+  getAllRoles( realm: string ) {
+    const url = this.baseUrl + DSMService.UI + 'getRoles';
+    const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: realm} );
+    return this.http.get( url, this.buildQueryHeader( map ) ).pipe(
+      catchError( this.handleError.bind( this ) )
+    );
+  }
+
   private handleError( error: any ): Observable<any> {
     this.logger.logError( 'ERROR: ' + JSON.stringify( error ) );
     return throwError( () => error );

@@ -1,29 +1,28 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {User} from '../access-models/user.model';
+import {Role} from '../access-models/role.model';
+import {UserWithRole} from '../access-models/user-with-role.model';
 import {Auth} from '../services/auth.service';
 import {ComponentService} from '../services/component.service';
 import {DSMService} from '../services/dsm.service';
 import {RoleService} from '../services/role.service';
-import {Result} from '../utils/result.model';
 import {Statics} from '../utils/statics';
 
 @Component( {
-  selector: 'app-add-edit-delete-user',
-  templateUrl: './add-edit-delete-user.component.html',
-  styleUrls: [ './add-edit-delete-user.component.scss' ]
+  selector: 'app-assign-roles',
+  templateUrl: './assign-roles.component.html',
+  styleUrls: [ './assign-roles.component.scss' ]
 } )
-export class AddEditDeleteUserComponent implements OnInit {
-
+export class AssignRolesComponent implements OnInit {
   realm: string;
+
   loading = false;
+
   errorMessage: string;
   additionalMessage: string;
-  allowedToSeeInformation: boolean;
-  newUser: User = new User( '', '', '', '', -1 );
   currentUsers = [];
-  notUniqueError: any;
-  mailFormat = /^\w+([.\-+]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
+  roles = [];
+  private allowedToSeeInformation: boolean;
 
   constructor( private dsmService: DSMService, private auth: Auth, private role: RoleService, private compService: ComponentService,
                private route: ActivatedRoute ) {
@@ -54,19 +53,20 @@ export class AddEditDeleteUserComponent implements OnInit {
 
   }
 
-  addNewUser(): void {
-    const json = JSON.stringify( this.newUser );
-    this.dsmService.addNewUser( json, this.realm ).subscribe(
-      data => {
-        const result = Result.parse( data );
-        if (result.code === 200) {
-          this.currentUsers.push( this.newUser );
-          this.newUser = new User( '', '', '', '', -1 );
+  public onclickDropDown( e ): void {
+    e.stopPropagation();
+  }
 
-        }
+  assignRole( role: Role, userId: any ): void {
+    let map = {};
+    map[ 'userId' ] = userId;
+    map[ 'roleId' ] = role.roleId;
+    map[ 'umbrellaId' ] = role.umbrellaId;
+    this.dsmService.assignRoleToUser( JSON.stringify( map ), this.realm ).subscribe(
+      data => {
       },
       err => {
-        this.errorMessage = 'error inserting new user';
+        this.errorMessage = 'Error assigning new role!';
       }
     );
   }
@@ -82,6 +82,7 @@ export class AddEditDeleteUserComponent implements OnInit {
           if (this.realm === val) {
             this.allowedToSeeInformation = true;
             this.getUsers();
+            this.getRoles();
           }
         } );
         if (!this.allowedToSeeInformation) {
@@ -92,26 +93,29 @@ export class AddEditDeleteUserComponent implements OnInit {
     } );
   }
 
-  validateEmail( email ): boolean {
-    if (!email) {
-      return false;
-    }
-    if (email.match( this.mailFormat )) {
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
-
   private getUsers() {
+    this.currentUsers = [];
     this.dsmService.getAllUsers( this.realm ).subscribe(
       data => {
         let jsonData = data;
         jsonData.forEach( ( val ) => {
-          console.log( jsonData );
-          const user = User.parse( val.user );
+          const user = UserWithRole.parse( val );
           this.currentUsers.push( user );
+        } );
+      },
+      err => {
+      }
+    );
+  }
+
+  private getRoles() {
+    this.roles = [];
+    this.dsmService.getAllRoles( this.realm ).subscribe(
+      data => {
+        let jsonData = data;
+        jsonData.forEach( ( val ) => {
+          const role = Role.parse( val );
+          this.roles.push( role );
         } );
       },
       err => {
