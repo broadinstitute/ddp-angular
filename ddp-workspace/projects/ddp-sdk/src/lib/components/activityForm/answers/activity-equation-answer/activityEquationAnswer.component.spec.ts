@@ -1,10 +1,12 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { of } from 'rxjs';
 
 import { QuestionType } from '../../../../models/activity/questionType';
 import { ActivityEquationQuestionBlock } from '../../../../models/activity/activityEquationQuestionBlock';
 import { ActivityEquationAnswerComponent } from './activityEquationAnswer.component';
 import { QuestionPromptComponent } from '../question-prompt/questionPrompt.component';
-import { By } from '@angular/platform-browser';
+import { SubmissionManager } from '../../../../services/serviceAgents/submissionManager.service';
 
 describe('ActivityEquationAnswerComponent', () => {
     const questionBlock = {
@@ -22,6 +24,10 @@ describe('ActivityEquationAnswerComponent', () => {
                 declarations: [
                     ActivityEquationAnswerComponent,
                     QuestionPromptComponent
+                ],
+                providers: [
+                    // TODO: add more tests for updating equations from answerSubmission
+                    { provide: SubmissionManager, useValue: {answerSubmissionResponse$: of([])  } }
                 ]
             })
             .compileComponents();
