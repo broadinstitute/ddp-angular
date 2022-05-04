@@ -82,7 +82,7 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
         this.embeddedComponentsValidationStatus.next(reducedValidationStatus);
     }
 
-    public isCertainTypeOfBlock(block: ActivityBlock, type: BlockType): boolean {
+    public shouldBlockBeShown(block: ActivityBlock, type: BlockType): boolean {
         return block.blockType === type && block.shown;
     }
 
