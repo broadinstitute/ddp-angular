@@ -89,8 +89,8 @@ export class AddFamilyMemberComponent {
     const probandData = pData
           .filter(p => p.data['MEMBER_TYPE'] === Statics.PARTICIPANT_PROBAND)
           .shift();
-    if (probandData != null && probandData.hasOwnProperty('dataId')) {
-      ddpParticipantDataId = probandData['dataId'];
+    if (probandData != null && probandData.hasOwnProperty('participantDataId')) {
+      ddpParticipantDataId = probandData['participantDataId'];
     }
     return ddpParticipantDataId;
   }

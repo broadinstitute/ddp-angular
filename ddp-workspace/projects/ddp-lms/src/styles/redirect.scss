@@ -1,0 +1,30 @@
+@import './variables';
+
+.study-redirect-dialog {
+    .confirm-dialog {
+        &-title {
+            border-bottom: 1px solid grey;
+            font-size: 1.3rem !important;
+            margin-bottom: 0 !important;
+            padding-bottom: 10px;
+        }
+
+        &-content {
+            line-height: 1.5rem;
+            text-align: center;
+            margin: 1rem;
+        }
+    }
+}
+
+@media screen and (max-width: $tablet-breakpoint) {
+    .study-redirect-dialog {
+        max-width: 360px !important;
+    }
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+    .study-redirect-dialog {
+        max-width: 270px !important;
+    }
+}

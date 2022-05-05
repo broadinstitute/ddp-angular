@@ -16,6 +16,12 @@
         margin-left: 120px;
     }
 
+
+    .step__btn{
+        background: #fbfbfb!important;
+        color: inherit!important;
+    }
+    
     .scientific-title {
         margin: 0 auto 5.625rem;
         text-align: center;
@@ -31,6 +37,10 @@
 
 .intro-faq-block__content {
     padding: 2rem 0 0 0;
+}
+
+.button_secondary {
+    font-size: 18px!important;
 }
 
 .faq-block {
