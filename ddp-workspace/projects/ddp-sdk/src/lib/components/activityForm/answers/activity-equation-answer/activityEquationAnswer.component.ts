@@ -37,7 +37,8 @@ export class ActivityEquationAnswerComponent implements OnInit, OnDestroy {
 
     private updateEquationQuestions(equations: AnswerResponseEquation[] = []): void {
         for (const equation of equations) {
-            if (this.block.stableId === equation.stableId) {
+            // update only single equations (not equations which are children of a composite question)
+            if (this.block.stableId === equation.stableId && equation.values.length === 1) {
                 this.block.setAnswer(equation.values, false);
             }
         }

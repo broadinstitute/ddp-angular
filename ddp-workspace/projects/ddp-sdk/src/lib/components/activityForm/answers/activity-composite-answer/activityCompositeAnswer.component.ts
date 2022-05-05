@@ -1,4 +1,16 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, Inject, OnInit, OnDestroy } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Inject,
+    Input,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    Output,
+    QueryList,
+    SimpleChanges,
+    ViewChildren
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import * as _ from 'underscore';
 
@@ -13,6 +25,9 @@ import { DateRenderMode } from '../../../../models/activity/dateRenderMode';
 import { ConfigurationService } from '../../../../services/configuration.service';
 import { SubmissionManager } from '../../../../services/serviceAgents/submissionManager.service';
 import { AnswerResponseEquation } from '../../../../models/activity/answerResponseEquation';
+import { DecimalAnswer } from '../../../../models/activity/decimalAnswer';
+import { ActivityEquationAnswerComponent } from '../activity-equation-answer/activityEquationAnswer.component';
+import { ActivityAnswerComponent } from '../activity-answer/activityAnswer.component';
 
 
 // todo see if style in here can be moved to shared resource, like external CSS
@@ -30,6 +45,7 @@ export class ActivityCompositeAnswer implements OnChanges, OnInit, OnDestroy {
     @Input() validationRequested: boolean;
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
     @Output() componentBusy = new EventEmitter<boolean>();
+    @ViewChildren(ActivityAnswerComponent) private childAnswerComponents: QueryList<ActivityAnswerComponent>;
     public childQuestionBlocks: ActivityQuestionBlock<any>[][] = [];
     private convertQuestionToLabels: boolean;
     private subscription: Subscription;
@@ -49,7 +65,7 @@ export class ActivityCompositeAnswer implements OnChanges, OnInit, OnDestroy {
         this.subscription.unsubscribe();
     }
 
-    public ngOnChanges(changes: SimpleChanges): void {
+    ngOnChanges(changes: SimpleChanges): void {
         for (const propName in changes) {
             if (propName === 'block') {
                 const newBlock: ActivityCompositeQuestionBlock = changes['block'].currentValue;
@@ -69,26 +85,43 @@ export class ActivityCompositeAnswer implements OnChanges, OnInit, OnDestroy {
     }
 
     private updateEquationQuestions(equations: AnswerResponseEquation[] = []): void {
+        // will keep here equations values which were updated
+        const equationsToUpdate: {[stableId: string]: DecimalAnswer[]} = {};
+
+        const childEquations = this.block.children
+            .filter(question => question.questionType === QuestionType.Equation) as  ActivityEquationQuestionBlock[];
+
+        // add equations answers to the parent composite question answer
         for (const equation of equations) {
-            for (const question of this.block.children) {
-                if (question.stableId === equation.stableId) {
-                    question.setAnswer(equation.values, false);
+            for (const childEquation of childEquations) {
+                if (childEquation.stableId === equation.stableId) {
+                    equationsToUpdate[childEquation.stableId] = equation.values;
 
                     const prevAnswer: AnswerContainer[][] = this.block.answer;
                     const newAnswer: AnswerContainer[][] = prevAnswer.map((answerRow: AnswerContainer[], index) =>
                         // eslint-disable-next-line arrow-body-style
                         answerRow.map((answer: AnswerContainer) => {
-                            return (answer.stableId === question.stableId) ? {
+                            return (answer.stableId === childEquation.stableId) ? {
                                 ...answer,
                                 value: [equation.values[index]]
                             } : answer;
                         })
                     );
                     this.block.setAnswer(newAnswer, false);
-                    this.childQuestionBlocks = this.rebuildChildQuestions(this.block, newAnswer);
                 }
             }
         }
+
+        // update equation questions answers (inside of the parent composite question)
+        // which values were changed (get them from `equationsToUpdate`)
+        // in order to re-render them only
+        this.childAnswerComponents.toArray()
+            .filter((answer: ActivityAnswerComponent) => Object.keys(equationsToUpdate).includes(answer.block.stableId))
+            .map((answer: ActivityAnswerComponent) => answer.equationAnswerComponent)
+            .forEach((equationAnswerComponent: ActivityEquationAnswerComponent, index: number) => {
+                const newValue = [equationsToUpdate[equationAnswerComponent.block.stableId][index]];
+                equationAnswerComponent.block.setAnswer(newValue);
+            });
     }
 
     private rebuildChildQuestions(newBlock, newAnswers): ActivityQuestionBlock<any>[][] {
