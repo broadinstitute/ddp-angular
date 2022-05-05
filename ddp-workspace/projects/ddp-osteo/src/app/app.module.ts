@@ -111,7 +111,7 @@ config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 config.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl;
 config.doCloudLogging = DDP_ENV.doCloudLogging;
 config.tooltipIconUrl = 'assets/images/info.png';
-config.usesVerticalStepper = ['FAMILY_HISTORY', 'FAMILY_HISTORY_V2'];
+config.usesVerticalStepper = ['FAMILY_HISTORY', 'FAMILY_HISTORY_SELF', 'FAMILY_HISTORY_PARENTAL'];
 config.alwaysShowQuestionsCountInModalNestedActivity = true;
 config.validateOnlyVisibleSections = true;
 
