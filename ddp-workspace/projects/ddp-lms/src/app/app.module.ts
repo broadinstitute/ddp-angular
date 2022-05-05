@@ -17,6 +17,11 @@ import { AppComponent } from './components/app/app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { Route } from './constants/Route';
 import { AppRoutingModule } from './app-routing.module';
+import { FaqSectionComponent } from './pages/faq-section/faq-section.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 
 declare const DDP_ENV: Record<string, any>;
 
@@ -106,8 +111,18 @@ const translateFactory =
     ScientificImpactComponent,
     AppComponent,
     HeaderComponent,
+    FaqSectionComponent
   ],
-  imports: [BrowserModule, DdpModule, ToolkitModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    DdpModule,
+    ToolkitModule,
+    AppRoutingModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDividerModule
+  ],
   providers: [
     {
       provide: 'ddp.config',
