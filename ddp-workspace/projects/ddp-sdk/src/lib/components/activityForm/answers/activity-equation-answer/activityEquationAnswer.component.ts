@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { DecimalHelper } from '../../../../utility/decimalHelper';
 import { SubmissionManager } from '../../../../services/serviceAgents/submissionManager.service';
@@ -22,8 +23,15 @@ export class ActivityEquationAnswerComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.subscription = this.submissionManager.answerSubmissionResponse$.subscribe(response => {
-            this.updateEquationQuestions(response.equations);
+        this.subscription = this.submissionManager.answerSubmissionResponse$.pipe(
+            map(response => (response.equations || []).filter(equation =>
+                    this.block.stableId === equation.stableId &&
+                    // update only single equations (not equations which are children of a composite question)
+                    (equation.values.length === 1)
+                )[0]
+            )
+        ).subscribe((equationToUpdate: AnswerResponseEquation) => {
+            equationToUpdate && this.block.setAnswer(equationToUpdate.values, false);
         });
     }
 
@@ -33,15 +41,6 @@ export class ActivityEquationAnswerComponent implements OnInit, OnDestroy {
 
     get displayValue(): string {
         return this.block.answer && this.block.answer[0] ? this.formatValue(this.block.answer[0]) : null;
-    }
-
-    private updateEquationQuestions(equations: AnswerResponseEquation[] = []): void {
-        for (const equation of equations) {
-            // update only single equations (not equations which are children of a composite question)
-            if (this.block.stableId === equation.stableId && equation.values.length === 1) {
-                this.block.setAnswer(equation.values, false);
-            }
-        }
     }
 
     private formatValue(answer: DecimalAnswer): string {
