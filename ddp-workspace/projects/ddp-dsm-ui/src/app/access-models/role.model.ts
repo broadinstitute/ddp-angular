@@ -7,6 +7,7 @@ export class Role {
   }
 
   static parse( json ): Role {
+    console.log( json );
     return new Role( json.roleId, json.name, json.description, json.umbrellaId );
   }
 }

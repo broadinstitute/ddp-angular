@@ -9,8 +9,7 @@ export class UserWithRole {
 
   static parse( json ): UserWithRole {
     const user = User.parse( json.user );
-    const role = Role.parse( json );
-    console.log( role );
+    const role = Role.parse( json.role );
     return new UserWithRole( user, role );
   }
 }

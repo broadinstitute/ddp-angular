@@ -1,95 +1,138 @@
 <ng-container>
-  <head>Add A New User</head>
+  <h2>Users ({{currentUsers.length}})</h2>
+  <div>
+    <span class="Float--right">
+            <button (click)="openAddUserModal()" class="btn btn-default" color="Color--primary" type="button">
+              + Add User
+            </button>
+    </span>
+  </div>
   <div>
     <table class="table Width--100">
       <thead>
       <tr>
         <th>
-          Email*
+          FON ID#
         </th>
         <th>
-          First Name
+          FIRST NAME
         </th>
         <th>
-          Last Name
+          LAST NAME
         </th>
-        <th colspan="2">
-          Phone Number
+        <th>
+          EMAIL
         </th>
+        <th>ROLE</th>
+        <th>CENTER</th>
       </tr>
       </thead>
       <tbody>
-      <tr>
+      <tr (click)="openModifyUserModal(userWithRole)" *ngFor="let userWithRole of currentUsers">
+        <td></td>
         <td>
-          <mat-form-field class="Input">
-            <input matInput class="Input--Min-WIDTH" maxlength="200"
-                   [(ngModel)]="newUser.email">
-          </mat-form-field>
+          {{userWithRole.user.firstName}}
         </td>
         <td>
-          <mat-form-field class="Input">
-            <input matInput class="Input--Min-WIDTH" maxlength="200"
-                   [(ngModel)]="newUser.firstName">
+          {{userWithRole.user.lastName}}
+        </td>
+        <td>
+          {{userWithRole.user.email}}
+        </td>
+        <td>
+          {{userWithRole.role.name}}
+        </td>
+        <td>
 
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field class="Input">
-            <input matInput class="Input--Min-WIDTH" maxlength="200"
-                   [(ngModel)]="newUser.lastName">
-
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field class="Input">
-            <input matInput class="Input--Min-WIDTH" maxlength="200"
-                   [(ngModel)]="newUser.phoneNumber">
-
-          </mat-form-field>
-        </td>
-        <td>
-          <button type="button" class="btn btn-primary" (click)="addNewUser()"
-                  [disabled]="!newUser.email || notUniqueError || !validateEmail(newUser.email)">Add New User
-          </button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-  <div>
-    <table class="table table-striped Width--100">
-      <tbody>
-      <tr *ngFor="let user of currentUsers">
-        <td>
-          {{user.email}}
-        </td>
-        <td>
-          <mat-form-field class="Input">
-            <input matInput class="Input--Min-WIDTH" maxlength="200"
-                   [(ngModel)]="user.firstName">
-
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field class="Input">
-            <input matInput class="Input--Min-WIDTH" maxlength="200"
-                   [(ngModel)]="user.lastName">
-
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field class="Input">
-            <input matInput class="Input--Min-WIDTH" maxlength="200"
-                   [(ngModel)]="user.phoneNumber">
-
-          </mat-form-field>
-        </td>
-        <td>
-          <button type="button" class="btn btn-primary">Delete User
-          </button>
         </td>
       </tr>
       </tbody>
     </table>
   </div>
 </ng-container>
+<app-modal>
+  <div class="app-modal-header">
+    <ng-container>
+      <h3>Add User</h3>
+    </ng-container>
+  </div>
+  <div class="app-modal-body">
+    <table class="table table-borderless Width--100">
+      <tbody style="border-collapse:collapse;">
+      <tr>
+        <td colspan="2">
+          <mat-form-field appearance="fill">
+            <mat-label>Select a center</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let center of roles" [value]="center">
+                {{center}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="firstName">First Name</label>
+          <input [(ngModel)]="newUser.user.firstName" class="form-control" id="firstName" type="email">
+        </td>
+        <td>
+          <label for="lastName">Last Name</label>
+          <input [(ngModel)]="newUser.user.lastName" class="form-control" id="lastName" type="email">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <label for="email">Email</label>
+          <input [(ngModel)]="newUser.user.email" [disabled]="this.isModify" class="form-control" id="email"
+                 type="email">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <label>Roles (Permissions)
+            <a href="https://docs.google.com/spreadsheets/d/1-nLsUc2tWX_cNO6Rbh_-IX4iyXOncNbAtwU-D_vPrdo/edit#gid=0"
+               target="_blank">
+              Role Matrix</a>
+          </label>
+          <div>
+            <mat-form-field appearance="fill" id="rolesDropdown">
+              <mat-label>Select a role</mat-label>
+              <mat-select [(ngModel)]="newUser.role.name">
+                <mat-option *ngFor="let role of roles" [value]="role.name">
+                  {{role.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="app-modal-footer">
+    <ng-container *ngIf="isModify">
+      <button (click)="removeThisUser(newUser)" class="btn btn-default" color="Color--primary" type="button">
+        Remove this user
+      </button>
+      <button (click)="modifyUser(this.isModify)" [disabled]="!validateEmail(newUser.user.email) || !newUser.role.name"
+              class="btn btn-default" color="Color--primary"
+              type="button">
+        SUBMIT
+      </button>
+    </ng-container>
+    <ng-container *ngIf="!isModify">
+      <button (click)="closeAddUserModal()" class="btn btn-default" color="Color--primary" type="button">
+        + Add Another User
+      </button>
+      <button (click)="addNewUser(this.isModify)" [disabled]="!validateEmail(newUser.user.email) || !newUser.role.name"
+              class="btn btn-default" color="Color--primary"
+              type="button">
+        SUBMIT
+      </button>
+    </ng-container>
+    <button (click)="closeAddUserModal()" class="btn btn-default" color="Color--primary" type="button">
+      Cancel
+    </button>
+  </div>
+</app-modal>
