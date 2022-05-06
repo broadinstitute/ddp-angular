@@ -4,12 +4,17 @@ import {
     Inject,
     Input,
     OnChanges,
+    OnDestroy,
+    OnInit,
     Output,
-    SimpleChanges
+    QueryList,
+    SimpleChanges,
+    ViewChildren
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 import * as _ from 'underscore';
 
-import { ActivityCompositeQuestionBlock } from '../../../../models/activity/activityCompositeQuestionBlock';
+import { ActivityCompositeQuestionBlock, AnswerContainer } from '../../../../models/activity/activityCompositeQuestionBlock';
 import { AnswerValue } from '../../../../models/activity/answerValue';
 import { ActivityQuestionBlock } from '../../../../models/activity/activityQuestionBlock';
 import { ChildOrientation } from '../../../../models/activity/childOrientation';
@@ -18,6 +23,11 @@ import { ActivityDateQuestionBlock } from '../../../../models/activity/activityD
 import { ActivityEquationQuestionBlock } from '../../../../models/activity/activityEquationQuestionBlock';
 import { DateRenderMode } from '../../../../models/activity/dateRenderMode';
 import { ConfigurationService } from '../../../../services/configuration.service';
+import { SubmissionManager } from '../../../../services/serviceAgents/submissionManager.service';
+import { AnswerResponseEquation } from '../../../../models/activity/answerResponseEquation';
+import { DecimalAnswer } from '../../../../models/activity/decimalAnswer';
+import { ActivityAnswerComponent } from '../activity-answer/activityAnswer.component';
+
 
 // todo see if style in here can be moved to shared resource, like external CSS
 
@@ -28,18 +38,33 @@ import { ConfigurationService } from '../../../../services/configuration.service
 })
 
 // todo can we make some of these styles be common? button styles copied from physician form
-export class ActivityCompositeAnswer implements OnChanges {
+export class ActivityCompositeAnswer implements OnChanges, OnInit, OnDestroy {
     @Input() block: ActivityCompositeQuestionBlock;
     @Input() readonly: boolean;
     @Input() validationRequested: boolean;
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
     @Output() componentBusy = new EventEmitter<boolean>();
+    @ViewChildren(ActivityAnswerComponent) private childAnswerComponents: QueryList<ActivityAnswerComponent>;
     public childQuestionBlocks: ActivityQuestionBlock<any>[][] = [];
     private convertQuestionToLabels: boolean;
+    private subscription: Subscription;
 
-    constructor(@Inject('ddp.config') public config: ConfigurationService) { }
+    constructor(
+        @Inject('ddp.config') public config: ConfigurationService,
+        private submissionManager: SubmissionManager
+    ) {}
 
-    public ngOnChanges(changes: SimpleChanges): void {
+    ngOnInit(): void {
+        this.subscription = this.submissionManager.answerSubmissionResponse$.subscribe(response => {
+            this.updateEquationQuestions(response.equations);
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
         for (const propName in changes) {
             if (propName === 'block') {
                 const newBlock: ActivityCompositeQuestionBlock = changes['block'].currentValue;
@@ -53,6 +78,35 @@ export class ActivityCompositeAnswer implements OnChanges {
                     this.addBlankRow();
                 } else {
                     this.childQuestionBlocks = this.rebuildChildQuestions(newBlock, newAnswers);
+                }
+            }
+        }
+    }
+
+    private updateEquationQuestions(equations: AnswerResponseEquation[] = []): void {
+        // will keep here equations values which were updated
+        const equationsToUpdate: {[stableId: string]: DecimalAnswer[]} = {};
+
+        const childEquations = this.block.children
+            .filter(question => question.questionType === QuestionType.Equation) as  ActivityEquationQuestionBlock[];
+
+        // add equations answers to the parent composite question answer
+        for (const equation of equations) {
+            for (const childEquation of childEquations) {
+                if (childEquation.stableId === equation.stableId) {
+                    equationsToUpdate[childEquation.stableId] = equation.values;
+
+                    const prevAnswer: AnswerContainer[][] = this.block.answer;
+                    const newAnswer: AnswerContainer[][] = prevAnswer.map((answerRow: AnswerContainer[], index) =>
+                        // eslint-disable-next-line arrow-body-style
+                        answerRow.map((answer: AnswerContainer) => {
+                            return (answer.stableId === childEquation.stableId) ? {
+                                ...answer,
+                                value: [equation.values[index]]
+                            } : answer;
+                        })
+                    );
+                    this.block.setAnswer(newAnswer, false);
                 }
             }
         }
@@ -138,6 +192,8 @@ export class ActivityCompositeAnswer implements OnChanges {
         if (currentBlock.validate()) {
             const compositeAnswerValue: any[][] = this.childQuestionBlocks.map(childQuestionBlockRow =>
                 childQuestionBlockRow
+                    // we don't patch an equation question answer because it is read-only
+                    .filter(childQuestionBlock => !(childQuestionBlock instanceof ActivityEquationQuestionBlock))
                     .map((childQuestionBlock: ActivityQuestionBlock<any>) => {
                         if (childQuestionBlock.validate()) {
                             return this.buildChildAnswer(childQuestionBlock);
@@ -153,11 +209,15 @@ export class ActivityCompositeAnswer implements OnChanges {
         return Object.values(ChildOrientation).includes(orientation) ? orientation.toLowerCase() : '';
     }
 
-    private buildComponentAnswers(): any[][] {
+    private buildComponentAnswers(excludeEquationQuestionBlocks?: boolean): any[][] {
         return this.childQuestionBlocks.map(childQuestionBlockRow =>
-            childQuestionBlockRow.map((childQuestionBlock) =>
-                this.buildChildAnswer(childQuestionBlock)
-            )
+            childQuestionBlockRow
+                .filter(childQuestionBlock =>
+                    excludeEquationQuestionBlocks ? !(childQuestionBlock instanceof ActivityEquationQuestionBlock) : true
+                )
+                .map((childQuestionBlock) =>
+                    this.buildChildAnswer(childQuestionBlock)
+                )
         );
     }
 
@@ -181,7 +241,9 @@ export class ActivityCompositeAnswer implements OnChanges {
 
         const childAnswers = this.buildComponentAnswers();
         this.block.setAnswer(childAnswers, false);
-        this.valueChanged.emit(childAnswers);
+
+        const childAnswersWithoutEquations = this.buildComponentAnswers(true);
+        this.valueChanged.emit(childAnswersWithoutEquations);
     }
 
     // We need this method because we want to include the prototype in the clone.

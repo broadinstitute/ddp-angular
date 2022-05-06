@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { AbstractActivityQuestionBlock } from '../../../../models/activity/abstractActivityQuestionBlock';
 import { AnswerValue } from '../../../../models/activity/answerValue';
 import { QuestionType } from '../../../../models/activity/questionType';
 import { BlockType } from '../../../../models/activity/blockType';
+import { ActivityEquationAnswerComponent } from '../activity-equation-answer/activityEquationAnswer.component';
 
 @Component({
     selector: 'ddp-activity-answer',
@@ -95,6 +96,7 @@ export class ActivityAnswerComponent {
     @Input() activityGuid: string;
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
     @Output() componentBusy = new EventEmitter<boolean>();
+    @ViewChild(ActivityEquationAnswerComponent) equationAnswerComponent: ActivityEquationAnswerComponent;
     readonly QuestionType = QuestionType;
 
     public onChange(value: AnswerValue): void {
