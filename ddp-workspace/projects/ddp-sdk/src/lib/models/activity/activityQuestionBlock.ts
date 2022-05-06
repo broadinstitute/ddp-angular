@@ -24,6 +24,15 @@ export abstract class ActivityQuestionBlock<T> extends AbstractActivityQuestionB
     }
 
     /**
+     *  Whether the question is able to change (and emit) its answer value
+     *  Most of questions generate answers
+     *  except ActivityEquationQuestionBlock that has a special behavior
+     */
+    public generatesAnswers(): boolean {
+        return true;
+    }
+
+    /**
      *  Whether the question has a valid answer
      *  in case when the question validators include ActivityRequiredValidationRule
      */

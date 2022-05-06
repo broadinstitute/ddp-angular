@@ -19,4 +19,9 @@ export class ActivityEquationQuestionBlock extends ActivityQuestionBlock<Decimal
         // no need to validate because equation question is read-only
         return true;
     }
+
+    // equation answer is read-only, can not be changed on client-side
+    public generatesAnswers(): boolean {
+        return false;
+    }
 }

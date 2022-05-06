@@ -144,7 +144,7 @@ export class ActivityCompositeAnswer implements OnChanges {
             const compositeAnswerValue: any[][] = this.childQuestionBlocks.map(childQuestionBlockRow =>
                 childQuestionBlockRow
                     // we don't patch an equation question answer because it is read-only
-                    .filter(childQuestionBlock => !(childQuestionBlock instanceof ActivityEquationQuestionBlock))
+                    .filter((childQuestionBlock: ActivityQuestionBlock<any>) => childQuestionBlock.generatesAnswers())
                     .map((childQuestionBlock: ActivityQuestionBlock<any>) => {
                         if (childQuestionBlock.validate()) {
                             return this.buildChildAnswer(childQuestionBlock);
@@ -163,7 +163,7 @@ export class ActivityCompositeAnswer implements OnChanges {
     private buildComponentAnswers(): any[][] {
         return this.childQuestionBlocks.map(childQuestionBlockRow =>
             childQuestionBlockRow
-                .filter(childQuestionBlock => !(childQuestionBlock instanceof ActivityEquationQuestionBlock))
+                .filter((childQuestionBlock: ActivityQuestionBlock<any>) => childQuestionBlock.generatesAnswers())
                 .map((childQuestionBlock) =>
                     this.buildChildAnswer(childQuestionBlock)
                 )
@@ -215,8 +215,8 @@ export class ActivityCompositeAnswer implements OnChanges {
     private resetEquationsRowIndexes(compositeChildQuestionBlocks: ActivityQuestionBlock<any>[][]): void {
         compositeChildQuestionBlocks.forEach((row: ActivityQuestionBlock<any>[], rowIndex: number) => {
             for (const questionBlock of row) {
-                if (questionBlock instanceof ActivityEquationQuestionBlock) {
-                    questionBlock.compositeRowIndex = rowIndex;
+                if (!(questionBlock.generatesAnswers())) {
+                    (questionBlock as ActivityEquationQuestionBlock).compositeRowIndex = rowIndex;
                 }
             }
         });
