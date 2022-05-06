@@ -4,7 +4,6 @@ import { map } from 'rxjs/operators';
 
 import { DecimalHelper } from '../../../../utility/decimalHelper';
 import { SubmissionManager } from '../../../../services/serviceAgents/submissionManager.service';
-import { DecimalAnswer } from '../../../../models/activity/decimalAnswer';
 import { ActivityEquationQuestionBlock } from '../../../../models/activity/activityEquationQuestionBlock';
 import { AnswerResponseEquation } from '../../../../models/activity/answerResponseEquation';
 
@@ -37,21 +36,8 @@ export class ActivityEquationAnswerComponent implements OnInit, OnDestroy {
     }
 
     get displayValue(): string {
-        return this.block.answer && this.block.answer[0] ? this.formatValue(this.block.answer[0]) : null;
-    }
-
-    private formatValue(answer: DecimalAnswer): string {
-        // align the answer decimal part
-        const fullValue = `${DecimalHelper.mapDecimalAnswerToNumber(answer)}`;
-        const [integerPart, decimalPart] = fullValue.split('.');
-        return integerPart + this.getFormattedDecimalPart(decimalPart);
-    }
-
-    private getFormattedDecimalPart(decimalPart): string {
-        const res = decimalPart ?
-            decimalPart.slice(0, this.block.maximumDecimalPlaces?? undefined) :
-            '0'.repeat(this.block.maximumDecimalPlaces);
-
-        return res ? `.${res}` : '';
+        return this.block.answer && this.block.answer[0] ?
+            DecimalHelper.formatDecimalAnswer(this.block.answer[0], this.block.maximumDecimalPlaces, true)
+            : null;
     }
 }
