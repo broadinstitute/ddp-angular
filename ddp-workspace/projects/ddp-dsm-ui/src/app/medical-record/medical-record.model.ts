@@ -16,54 +16,7 @@ export class MedicalRecord {
               public isDeleted?: boolean, public oncHistoryDetail?: Array<OncHistoryDetail>, public followUps?: FollowUp[],
               public followupRequired?: boolean, public followupRequiredText?: string, public additionalValuesJson?: {},
               public unableObtainText?: string) {
-    this.medicalRecordId = medicalRecordId;
-    this.participantId = participantId;
-    this.institutionId = institutionId;
-    this.ddpInstitutionId = ddpInstitutionId;
-    this.name = name;
-    this.contact = contact;
-    this.phone = phone;
-    this.fax = fax;
-    this.faxSent = faxSent;
-    this.faxSentBy = faxSentBy;
-    this.faxConfirmed = faxConfirmed;
-    this.faxSent2 = faxSent2;
-    this.faxSent2By = faxSent2By;
-    this.faxConfirmed2 = faxConfirmed2;
-    this.faxSent3 = faxSent3;
-    this.faxSent3By = faxSent3By;
-    this.faxConfirmed3 = faxConfirmed3;
-    this.mrReceived = mrReceived;
-    this.mrDocument = mrDocument;
-    this.mrDocumentFileNames = mrDocumentFileNames;
-    this.mrProblem = mrProblem;
-    this.mrProblemText = mrProblemText;
-    this.unableObtain = unableObtain;
-    this.duplicate = duplicate;
-    this.international = international;
-    this.crRequired = crRequired;
-    this.pathologyPresent = pathologyPresent;
-    this.notes = notes;
-    this.reviewMedicalRecord = reviewMedicalRecord;
-    this.type = type;
-
-    this.nameDDP = nameDDP;
-    this.institutionDDP = institutionDDP;
-    this.streetAddressDDP = streetAddressDDP;
-    this.cityDDP = cityDDP;
-    this.stateDDP = stateDDP;
-
-    this.isDeleted = isDeleted;
-
-    this.oncHistoryDetail = oncHistoryDetail;
-
     this.followUps = followUps == null ? [] : followUps;
-
-    this.followupRequired = followupRequired;
-    this.followupRequiredText = followupRequiredText;
-    this.additionalValuesJson = additionalValuesJson;
-
-    this.unableObtainText = unableObtainText;
   }
 
   get mrStatus(): string {
