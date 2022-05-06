@@ -4,17 +4,14 @@ import {
     Inject,
     Input,
     OnChanges,
-    OnDestroy,
-    OnInit,
     Output,
     QueryList,
     SimpleChanges,
     ViewChildren
 } from '@angular/core';
-import { Subscription } from 'rxjs';
 import * as _ from 'underscore';
 
-import { ActivityCompositeQuestionBlock, AnswerContainer } from '../../../../models/activity/activityCompositeQuestionBlock';
+import { ActivityCompositeQuestionBlock } from '../../../../models/activity/activityCompositeQuestionBlock';
 import { AnswerValue } from '../../../../models/activity/answerValue';
 import { ActivityQuestionBlock } from '../../../../models/activity/activityQuestionBlock';
 import { ChildOrientation } from '../../../../models/activity/childOrientation';
@@ -23,9 +20,6 @@ import { ActivityDateQuestionBlock } from '../../../../models/activity/activityD
 import { ActivityEquationQuestionBlock } from '../../../../models/activity/activityEquationQuestionBlock';
 import { DateRenderMode } from '../../../../models/activity/dateRenderMode';
 import { ConfigurationService } from '../../../../services/configuration.service';
-import { SubmissionManager } from '../../../../services/serviceAgents/submissionManager.service';
-import { AnswerResponseEquation } from '../../../../models/activity/answerResponseEquation';
-import { DecimalAnswer } from '../../../../models/activity/decimalAnswer';
 import { ActivityAnswerComponent } from '../activity-answer/activityAnswer.component';
 
 
@@ -38,7 +32,7 @@ import { ActivityAnswerComponent } from '../activity-answer/activityAnswer.compo
 })
 
 // todo can we make some of these styles be common? button styles copied from physician form
-export class ActivityCompositeAnswer implements OnChanges, OnInit, OnDestroy {
+export class ActivityCompositeAnswer implements OnChanges {
     @Input() block: ActivityCompositeQuestionBlock;
     @Input() readonly: boolean;
     @Input() validationRequested: boolean;
@@ -47,22 +41,8 @@ export class ActivityCompositeAnswer implements OnChanges, OnInit, OnDestroy {
     @ViewChildren(ActivityAnswerComponent) private childAnswerComponents: QueryList<ActivityAnswerComponent>;
     public childQuestionBlocks: ActivityQuestionBlock<any>[][] = [];
     private convertQuestionToLabels: boolean;
-    private subscription: Subscription;
 
-    constructor(
-        @Inject('ddp.config') public config: ConfigurationService,
-        private submissionManager: SubmissionManager
-    ) {}
-
-    ngOnInit(): void {
-        this.subscription = this.submissionManager.answerSubmissionResponse$.subscribe(response => {
-            this.updateEquationQuestions(response.equations);
-        });
-    }
-
-    ngOnDestroy(): void {
-        this.subscription.unsubscribe();
-    }
+    constructor(@Inject('ddp.config') public config: ConfigurationService) {}
 
     ngOnChanges(changes: SimpleChanges): void {
         for (const propName in changes) {
@@ -78,35 +58,6 @@ export class ActivityCompositeAnswer implements OnChanges, OnInit, OnDestroy {
                     this.addBlankRow();
                 } else {
                     this.childQuestionBlocks = this.rebuildChildQuestions(newBlock, newAnswers);
-                }
-            }
-        }
-    }
-
-    private updateEquationQuestions(equations: AnswerResponseEquation[] = []): void {
-        // will keep here equations values which were updated
-        const equationsToUpdate: {[stableId: string]: DecimalAnswer[]} = {};
-
-        const childEquations = this.block.children
-            .filter(question => question.questionType === QuestionType.Equation) as  ActivityEquationQuestionBlock[];
-
-        // add equations answers to the parent composite question answer
-        for (const equation of equations) {
-            for (const childEquation of childEquations) {
-                if (childEquation.stableId === equation.stableId) {
-                    equationsToUpdate[childEquation.stableId] = equation.values;
-
-                    const prevAnswer: AnswerContainer[][] = this.block.answer;
-                    const newAnswer: AnswerContainer[][] = prevAnswer.map((answerRow: AnswerContainer[], index) =>
-                        // eslint-disable-next-line arrow-body-style
-                        answerRow.map((answer: AnswerContainer) => {
-                            return (answer.stableId === childEquation.stableId) ? {
-                                ...answer,
-                                value: [equation.values[index]]
-                            } : answer;
-                        })
-                    );
-                    this.block.setAnswer(newAnswer, false);
                 }
             }
         }
