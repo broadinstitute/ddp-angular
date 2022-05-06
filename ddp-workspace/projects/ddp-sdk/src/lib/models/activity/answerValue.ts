@@ -6,6 +6,7 @@ import { NumericAnswerType } from './numericAnswerType';
 export type AnswerValue =
   | boolean
   | string
+  | string[]
   | Array<ActivityPicklistAnswerDto>
   | DatePickerValue
   | NumericAnswerType

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import * as _ from 'underscore';
+
 import { ActivityNumericQuestionBlock } from '../../../models/activity/activityNumericQuestionBlock';
 import { QuestionType } from '../../../models/activity/questionType';
 import { ActivityDecimalQuestionBlock } from '../../../models/activity/activityDecimalQuestionBlock';
@@ -95,7 +95,7 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
 
         return this.isIntegerQuestion ?
             patchAnswer.toString() :
-            this.formatDecimalAnswerToDisplay(patchAnswer);
+            DecimalHelper.formatDecimalAnswer(patchAnswer, (this.block as ActivityDecimalQuestionBlock).scale,false);
     }
 
     // e.g. for decimal: '0.710' => {  // a decimal floating-point value represented by (value * 10^-scale)
@@ -118,22 +118,6 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
             value: +integerPart.concat(decimalPart),
             scale: decimalPart.length
         };
-    }
-
-    private formatDecimalAnswerToDisplay(answer: NumericAnswerType): string {
-        const scale: number = (this.block as ActivityDecimalQuestionBlock).scale;
-        const numberAnswer = _.isNumber(answer) ? answer : DecimalHelper.mapDecimalAnswerToNumber(answer as DecimalAnswer);
-        let [
-            // eslint-disable-next-line prefer-const
-            integerPart = '0',
-            decimalPart = '0'.repeat(scale)
-        ] = String(numberAnswer).split('.');
-
-        if (decimalPart.length < scale) {
-            decimalPart += '0'.repeat(scale - decimalPart.length);
-        }
-
-        return integerPart + (scale ? `.${decimalPart.slice(0, scale)}` : '');
     }
 
     private isDecimalQuestion(block: AbstractActivityQuestionBlock): boolean {
