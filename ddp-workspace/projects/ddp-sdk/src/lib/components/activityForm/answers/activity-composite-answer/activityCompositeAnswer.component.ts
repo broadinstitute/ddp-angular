@@ -26,7 +26,6 @@ import { ConfigurationService } from '../../../../services/configuration.service
 import { SubmissionManager } from '../../../../services/serviceAgents/submissionManager.service';
 import { AnswerResponseEquation } from '../../../../models/activity/answerResponseEquation';
 import { DecimalAnswer } from '../../../../models/activity/decimalAnswer';
-import { ActivityEquationAnswerComponent } from '../activity-equation-answer/activityEquationAnswer.component';
 import { ActivityAnswerComponent } from '../activity-answer/activityAnswer.component';
 
 
@@ -111,17 +110,6 @@ export class ActivityCompositeAnswer implements OnChanges, OnInit, OnDestroy {
                 }
             }
         }
-
-        // update equation questions answers (inside of the parent composite question)
-        // which values were changed (get them from `equationsToUpdate`)
-        // in order to re-render them only
-        this.childAnswerComponents.toArray()
-            .filter((answer: ActivityAnswerComponent) => Object.keys(equationsToUpdate).includes(answer.block.stableId))
-            .map((answer: ActivityAnswerComponent) => answer.equationAnswerComponent)
-            .forEach((equationAnswerComponent: ActivityEquationAnswerComponent, index: number) => {
-                const newValue = [equationsToUpdate[equationAnswerComponent.block.stableId][index]];
-                equationAnswerComponent.block.setAnswer(newValue);
-            });
     }
 
     private rebuildChildQuestions(newBlock, newAnswers): ActivityQuestionBlock<any>[][] {
@@ -132,7 +120,8 @@ export class ActivityCompositeAnswer implements OnChanges, OnInit, OnDestroy {
             // Breaks when running the compiled version of SDK  but OK when including library via symlink
             // TODO investigate what is going on. Perhaps differences in TypeScript compiler target Javascript config?
             return rowOfAnswers.map((answerContainer: ActivityQuestionBlock<any>, index: number) =>
-                this.buildBlockForChildQuestion(newBlock.children[index], answerContainer, newBlock.shown));
+                this.buildBlockForChildQuestion(newBlock.children[index], answerContainer, newBlock.shown)
+            );
         });
 
         const blankRow: ActivityQuestionBlock<any>[] = this.block.children.map((questionBlock: ActivityQuestionBlock<any>) =>
@@ -145,13 +134,16 @@ export class ActivityCompositeAnswer implements OnChanges, OnInit, OnDestroy {
         // example: https://broadinstitute.atlassian.net/browse/DDP-4536;
         // method below looks which blocks were missed and add them
         // Important: if a user answered only on the last question, backend returns the correct array of answers
-        return questionsRows.map((currentRow: ActivityQuestionBlock<any>[]) => {
+        const childQuestionBlocks = questionsRows.map((currentRow: ActivityQuestionBlock<any>[]) => {
             if (currentRow.length !== blankRow.length) {
                 const missedQuestions = blankRow.slice(currentRow.length);
                 currentRow.push(...missedQuestions);
             }
             return currentRow;
         });
+        this.resetEquationsRowIndexes(childQuestionBlocks);
+
+        return childQuestionBlocks;
     }
 
     // Use original child question blocks as the prototypes to make real working ones
@@ -239,10 +231,14 @@ export class ActivityCompositeAnswer implements OnChanges, OnInit, OnDestroy {
     public addBlankRow(): void {
         this.childQuestionBlocks.push(this.block.children.map(questionBlock =>
             this.buildBlockForChildQuestion(questionBlock, null, this.block.shown)));
+
+        this.resetEquationsRowIndexes(this.childQuestionBlocks);
     }
 
     public removeRow(index: number): void {
         this.childQuestionBlocks.splice(index, 1);
+        this.resetEquationsRowIndexes(this.childQuestionBlocks);
+
         const childAnswers = this.buildComponentAnswers();
         this.block.setAnswer(childAnswers, false);
 
@@ -267,5 +263,15 @@ export class ActivityCompositeAnswer implements OnChanges, OnInit, OnDestroy {
 
     private showAsterisk(questionType: QuestionType): boolean {
         return !this.config.compositeRequiredFieldExceptions.includes(questionType);
+    }
+
+    private resetEquationsRowIndexes(compositeChildQuestionBlocks: ActivityQuestionBlock<any>[][]): void {
+        compositeChildQuestionBlocks.forEach((row: ActivityQuestionBlock<any>[], rowIndex: number) => {
+            for (const questionBlock of row) {
+                if (questionBlock instanceof ActivityEquationQuestionBlock) {
+                    questionBlock.compositeRowIndex = rowIndex;
+                }
+            }
+        });
     }
 }

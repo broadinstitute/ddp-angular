@@ -24,14 +24,11 @@ export class ActivityEquationAnswerComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.subscription = this.submissionManager.answerSubmissionResponse$.pipe(
-            map(response => (response.equations || []).filter(equation =>
-                    this.block.stableId === equation.stableId &&
-                    // update only single equations (not equations which are children of a composite question)
-                    (equation.values.length === 1)
-                )[0]
+            map(response =>
+                (response.equations || []).filter(equation => this.block.stableId === equation.stableId)[0]
             )
         ).subscribe((equationToUpdate: AnswerResponseEquation) => {
-            equationToUpdate && this.block.setAnswer(equationToUpdate.values, false);
+            equationToUpdate && this.block.setAnswer([equationToUpdate.values[this.block.compositeRowIndex]], false);
         });
     }
 

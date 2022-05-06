@@ -4,6 +4,8 @@ import { DecimalAnswer } from './decimalAnswer';
 
 export class ActivityEquationQuestionBlock extends ActivityQuestionBlock<DecimalAnswer[]> {
     public maximumDecimalPlaces: number;
+    // if the equation is a composite question child, keep row index in order to future update the equation value
+    public compositeRowIndex = 0;
 
     constructor() {
         super();
