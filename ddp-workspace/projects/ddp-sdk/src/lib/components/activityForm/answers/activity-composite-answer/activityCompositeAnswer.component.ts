@@ -160,10 +160,12 @@ export class ActivityCompositeAnswer implements OnChanges {
         return Object.values(ChildOrientation).includes(orientation) ? orientation.toLowerCase() : '';
     }
 
-    private buildComponentAnswers(): any[][] {
+    private buildComponentAnswers(excludeReadOnlyBlocks?: boolean): any[][] {
         return this.childQuestionBlocks.map(childQuestionBlockRow =>
             childQuestionBlockRow
-                .filter((childQuestionBlock: ActivityQuestionBlock<any>) => childQuestionBlock.generatesAnswers())
+                .filter((childQuestionBlock: ActivityQuestionBlock<any>) =>
+                    excludeReadOnlyBlocks? childQuestionBlock.generatesAnswers() : true
+                )
                 .map((childQuestionBlock) =>
                     this.buildChildAnswer(childQuestionBlock)
                 )
@@ -190,7 +192,9 @@ export class ActivityCompositeAnswer implements OnChanges {
 
         const childAnswers = this.buildComponentAnswers();
         this.block.setAnswer(childAnswers, false);
-        this.valueChanged.emit(childAnswers);
+
+        const childAnswersWithoutEquations = this.buildComponentAnswers(true);
+        this.valueChanged.emit(childAnswersWithoutEquations);
     }
 
     // We need this method because we want to include the prototype in the clone.
