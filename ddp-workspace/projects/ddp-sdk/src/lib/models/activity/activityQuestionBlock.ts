@@ -4,6 +4,8 @@ export abstract class ActivityQuestionBlock<T> extends AbstractActivityQuestionB
     protected _answer: T | null = null;
     public isRequired: boolean;
     public displayNumber: number | null;
+    // row number if the question is a composite question child
+    public compositeRowIndex: number;
 
     public get answer(): T | null {
         return this._answer;

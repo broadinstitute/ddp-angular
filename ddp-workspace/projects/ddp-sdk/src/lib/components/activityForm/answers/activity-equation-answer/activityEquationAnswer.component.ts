@@ -27,7 +27,7 @@ export class ActivityEquationAnswerComponent implements OnInit, OnDestroy {
                 (response.equations || []).filter(equation => this.block.stableId === equation.stableId)[0]
             )
         ).subscribe((equationToUpdate: AnswerResponseEquation) => {
-            equationToUpdate && this.block.setAnswer([equationToUpdate.values[this.block.compositeRowIndex]], false);
+            equationToUpdate && this.block.setAnswer([equationToUpdate.values[this.block.compositeRowIndex || 0]], false);
         });
     }
 

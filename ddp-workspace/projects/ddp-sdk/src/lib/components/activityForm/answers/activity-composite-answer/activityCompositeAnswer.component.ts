@@ -17,7 +17,6 @@ import { ActivityQuestionBlock } from '../../../../models/activity/activityQuest
 import { ChildOrientation } from '../../../../models/activity/childOrientation';
 import { QuestionType } from '../../../../models/activity/questionType';
 import { ActivityDateQuestionBlock } from '../../../../models/activity/activityDateQuestionBlock';
-import { ActivityEquationQuestionBlock } from '../../../../models/activity/activityEquationQuestionBlock';
 import { DateRenderMode } from '../../../../models/activity/dateRenderMode';
 import { ConfigurationService } from '../../../../services/configuration.service';
 import { ActivityAnswerComponent } from '../activity-answer/activityAnswer.component';
@@ -92,7 +91,7 @@ export class ActivityCompositeAnswer implements OnChanges {
             }
             return currentRow;
         });
-        this.resetEquationsRowIndexes(childQuestionBlocks);
+        this.resetChildrenRowIndexes(childQuestionBlocks);
 
         return childQuestionBlocks;
     }
@@ -164,7 +163,7 @@ export class ActivityCompositeAnswer implements OnChanges {
         return this.childQuestionBlocks.map(childQuestionBlockRow =>
             childQuestionBlockRow
                 .filter((childQuestionBlock: ActivityQuestionBlock<any>) =>
-                    excludeReadOnlyBlocks? childQuestionBlock.generatesAnswers() : true
+                    excludeReadOnlyBlocks ? childQuestionBlock.generatesAnswers() : true
                 )
                 .map((childQuestionBlock) =>
                     this.buildChildAnswer(childQuestionBlock)
@@ -183,12 +182,12 @@ export class ActivityCompositeAnswer implements OnChanges {
         this.childQuestionBlocks.push(this.block.children.map(questionBlock =>
             this.buildBlockForChildQuestion(questionBlock, null, this.block.shown)));
 
-        this.resetEquationsRowIndexes(this.childQuestionBlocks);
+        this.resetChildrenRowIndexes(this.childQuestionBlocks);
     }
 
     public removeRow(index: number): void {
         this.childQuestionBlocks.splice(index, 1);
-        this.resetEquationsRowIndexes(this.childQuestionBlocks);
+        this.resetChildrenRowIndexes(this.childQuestionBlocks);
 
         const childAnswers = this.buildComponentAnswers();
         this.block.setAnswer(childAnswers, false);
@@ -216,12 +215,10 @@ export class ActivityCompositeAnswer implements OnChanges {
         return !this.config.compositeRequiredFieldExceptions.includes(questionType);
     }
 
-    private resetEquationsRowIndexes(compositeChildQuestionBlocks: ActivityQuestionBlock<any>[][]): void {
+    private resetChildrenRowIndexes(compositeChildQuestionBlocks: ActivityQuestionBlock<any>[][]): void {
         compositeChildQuestionBlocks.forEach((row: ActivityQuestionBlock<any>[], rowIndex: number) => {
             for (const questionBlock of row) {
-                if (!(questionBlock.generatesAnswers())) {
-                    (questionBlock as ActivityEquationQuestionBlock).compositeRowIndex = rowIndex;
-                }
+                questionBlock.compositeRowIndex = rowIndex;
             }
         });
     }
