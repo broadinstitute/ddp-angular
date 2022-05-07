@@ -42,7 +42,6 @@ import {AddressComponent} from './address/address.component';
 
 import {AppComponent} from './app.component';
 import {AppRoutes} from './app.routing';
-import {AssignRolesComponent} from './assign-roles/assign-roles.component';
 import {AssigneesComponent} from './assignee/assignee.component';
 import {AuthGuard} from './auth0/auth.guard';
 import {BannerComponent} from './banner/banner.component';
@@ -243,7 +242,6 @@ export function translateFactory(translate: TranslateService,
         dynamicFormTypeAndStudyRGP,
         TestDssComponent,
         DssErrorPageComponent,
-      AssignRolesComponent,
       AddEditDeleteUserComponent
     ],
     imports: [

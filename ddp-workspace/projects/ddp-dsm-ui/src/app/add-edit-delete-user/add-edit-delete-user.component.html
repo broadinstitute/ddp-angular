@@ -1,6 +1,6 @@
-<ng-container>
+<ng-container *ngIf="this.getRoleService().hasAdminRights()">
   <h2>Users ({{currentUsers.length}})</h2>
-  <div>
+  <div *ngIf="this.getRoleService().allowedToAddUsers()">
     <span class="Float--right">
             <button (click)="openAddUserModal()" class="btn btn-default" color="Color--primary" type="button">
               + Add User
@@ -12,7 +12,7 @@
       <thead>
       <tr>
         <th>
-          FON ID#
+          {{realm}} ID#
         </th>
         <th>
           FIRST NAME
@@ -29,7 +29,7 @@
       </thead>
       <tbody>
       <tr (click)="openModifyUserModal(userWithRole)" *ngFor="let userWithRole of currentUsers">
-        <td></td>
+        <td>{{userWithRole.user.shortId}}</td>
         <td>
           {{userWithRole.user.firstName}}
         </td>
@@ -112,10 +112,13 @@
   </div>
   <div class="app-modal-footer">
     <ng-container *ngIf="isModify">
-      <button (click)="removeThisUser(newUser)" class="btn btn-default" color="Color--primary" type="button">
+      <button (click)="removeThisUser(newUser)" *ngIf="this.getRoleService().allowedToDeleteUsers()"
+              [disabled]="newUser.user.userId === this.roleService.userID()" class="btn btn-default"
+              color="Color--primary"
+              type="button">
         Remove this user
       </button>
-      <button (click)="modifyUser(this.isModify)" [disabled]="!validateEmail(newUser.user.email) || !newUser.role.name"
+      <button (click)="modifyUser(newUser)" [disabled]="!validateEmail(newUser.user.email) || !newUser.role.name"
               class="btn btn-default" color="Color--primary"
               type="button">
         SUBMIT

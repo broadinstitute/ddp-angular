@@ -74,13 +74,12 @@
           <li ><a href="#" [routerLink]="['/drugList']"> Drug List </a></li>
         </ul>
       </li>
-      <li class="dropdown" *ngIf="getAuth().authenticated()">
+      <li *ngIf="getAuth().authenticated() && hasRole().hasAdminRights()" class="dropdown">
         <a (click)="doNothing()" class="dropdown-toggle" data-toggle="dropdown" href="#"><b>
           Administration </b>
           <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a [routerLink]="['/editUsers']" href="#"> Manage Users </a></li>
-          <li><a href="#" [routerLink]="['/assignRoles']"> assign roles </a></li>
         </ul>
       </li>
     </ul>

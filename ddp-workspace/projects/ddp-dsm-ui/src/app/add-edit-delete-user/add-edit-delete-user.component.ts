@@ -26,7 +26,7 @@ export class AddEditDeleteUserComponent implements OnInit {
   errorMessage: string;
   additionalMessage: string;
   allowedToSeeInformation: boolean;
-  newUser: UserWithRole = new UserWithRole( new User( '', '', '', '', -1 ),
+  newUser: UserWithRole = new UserWithRole( new User( '', '', '', '', -1, '' ),
     new Role( -1, '', '', -1 ) );
   currentUsers = [];
   roles = [];
@@ -35,7 +35,7 @@ export class AddEditDeleteUserComponent implements OnInit {
   mailFormat = /^\w+([.\-+]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
   isModify: boolean = false;
 
-  constructor( private dsmService: DSMService, private auth: Auth, private role: RoleService, private compService: ComponentService,
+  constructor( private dsmService: DSMService, private auth: Auth, private roleService: RoleService, private compService: ComponentService,
                private route: ActivatedRoute ) {
     if (!auth.authenticated()) {
       auth.logout();
@@ -72,7 +72,7 @@ export class AddEditDeleteUserComponent implements OnInit {
           const result = Result.parse( data );
           if (result.code === 200) {
             this.currentUsers.push( this.newUser );
-            this.newUser = new UserWithRole( new User( '', '', '', '', -1 ),
+            this.newUser = new UserWithRole( new User( '', '', '', '', -1, '' ),
               new Role( -1, '', '', -1 ) );
             this.newUserModal.hide();
           }
@@ -87,20 +87,6 @@ export class AddEditDeleteUserComponent implements OnInit {
     }
     this.closeAddUserModal();
 
-  }
-
-  assignRole( role: Role, userId: any ): void {
-    let map = {};
-    map[ 'userId' ] = userId;
-    map[ 'roleId' ] = role.roleId;
-    map[ 'umbrellaId' ] = role.umbrellaId;
-    this.dsmService.assignRoleToUser( JSON.stringify( map ), this.realm ).subscribe(
-      data => {
-      },
-      err => {
-        this.errorMessage = 'Error assigning new role!';
-      }
-    );
   }
 
   validateEmail( email ): boolean {
@@ -125,18 +111,77 @@ export class AddEditDeleteUserComponent implements OnInit {
   }
 
   openModifyUserModal( user: UserWithRole ) {
+    if (!this.roleService.hasAdminRights()) {
+      return;
+    }
     this.newUser = user;
     this.isModify = true;
     this.openAddUserModal();
-
-  }
-
-  modifyUser( isModify: boolean ) {
-
   }
 
   removeThisUser( newUser: UserWithRole ) {
+    const conf = confirm( 'Are you sure you want to remove this user?' );
+    if (conf) {
+      let map = {};
+      map[ 'userId' ] = newUser.user.userId;
+      this.dsmService.removeUser( JSON.stringify( map ), this.realm ).subscribe(
+        data => {
+          this.closeAddUserModal();
+          this.checkRight();
+        },
+        err => {
+        }
+      );
+    }
+  }
 
+  modifyUser( user: UserWithRole ): void {
+    this.dsmService.modifyUser( JSON.stringify( user ), this.realm ).subscribe(
+      data => {
+        this.newUser = new UserWithRole( new User( '', '', '', '', -1, '' ),
+          new Role( -1, '', '', -1 ) );
+        this.closeAddUserModal();
+        this.isModify = false;
+      },
+      err => {
+        this.errorMessage = 'Error assigning new role!';
+      }
+    );
+  }
+
+  private getUsers() {
+    this.dsmService.getAllUsers( this.realm ).subscribe(
+      data => {
+        this.currentUsers = [];
+        let jsonData = data;
+        jsonData.forEach( ( val ) => {
+          const user = UserWithRole.parse( val );
+          this.currentUsers.push( user );
+        } );
+      },
+      err => {
+      }
+    );
+  }
+
+  public getRoleService(): RoleService {
+    return this.roleService;
+  }
+
+  private getRoles() {
+    this.roles = [];
+    this.dsmService.getAllRoles( this.realm ).subscribe(
+      data => {
+        this.roles = [];
+        let jsonData = data;
+        jsonData.forEach( ( val ) => {
+          const role = Role.parse( val );
+          this.roles.push( role );
+        } );
+      },
+      err => {
+      }
+    );
   }
 
   private checkRight(): void {
@@ -145,7 +190,7 @@ export class AddEditDeleteUserComponent implements OnInit {
     this.currentUsers = [];
     this.roles = [];
     this.isModify = false;
-    this.newUser = new UserWithRole( new User( '', '', '', '', -1 ),
+    this.newUser = new UserWithRole( new User( '', '', '', '', -1, '' ),
       new Role( -1, '', '', -1 ) );
     let jsonData: any[];
     this.dsmService.getRealmsAllowed( Statics.MEDICALRECORD ).subscribe( {
@@ -164,36 +209,5 @@ export class AddEditDeleteUserComponent implements OnInit {
       },
       error: () => null
     } );
-  }
-
-  private getUsers() {
-    this.dsmService.getAllUsers( this.realm ).subscribe(
-      data => {
-        this.currentUsers = [];
-        let jsonData = data;
-        jsonData.forEach( ( val ) => {
-          const user = UserWithRole.parse( val );
-          this.currentUsers.push( user );
-        } );
-      },
-      err => {
-      }
-    );
-  }
-
-  private getRoles() {
-    this.roles = [];
-    this.dsmService.getAllRoles( this.realm ).subscribe(
-      data => {
-        this.roles = [];
-        let jsonData = data;
-        jsonData.forEach( ( val ) => {
-          const role = Role.parse( val );
-          this.roles.push( role );
-        } );
-      },
-      err => {
-      }
-    );
   }
 }

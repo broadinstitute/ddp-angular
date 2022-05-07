@@ -1,6 +1,5 @@
 import {AbstractionSettingsComponent} from './abstraction-settings/abstraction-settings.component';
 import {AddEditDeleteUserComponent} from './add-edit-delete-user/add-edit-delete-user.component';
-import {AssignRolesComponent} from './assign-roles/assign-roles.component';
 import {AuthGuard} from './auth0/auth.guard';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {DataReleaseComponent} from './data-release/data-release.component';
@@ -84,7 +83,6 @@ export const AppRoutes = [
 
   {path: 'userSettings', component: UserSettingComponent, canActivate: [ AuthGuard ]},
 
-  {path: 'assignRoles', component: AssignRolesComponent, canActivate: [ AuthGuard ]},
   {path: 'editUsers', component: AddEditDeleteUserComponent, canActivate: [ AuthGuard ]},
 
   // Permalink

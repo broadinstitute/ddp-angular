@@ -31,6 +31,9 @@ export class RoleService {
   private _isParticipantEdit = false;
   private _isDSSTesting = true; //TODO remove before final merge, for testing only
   private _isKitUploadInvalidAddress = false;
+  private _canAddUser = false;
+  private _canAccessUser = false;
+  private _canDeleteUser = false;
 
   private _userId: string;
   private _user: string;
@@ -126,6 +129,18 @@ export class RoleService {
           }
           else if (entry === 'kit_upload_invalid_address') {
             this._isKitUploadInvalidAddress = true;
+          }
+          else if (entry === 'kit_upload_invalid_address') {
+            this._isKitUploadInvalidAddress = true;
+          }
+          else if (entry === 'user_add') {
+            this._canAddUser = true;
+          }
+          else if (entry === 'user_access') {
+            this._canAccessUser = true;
+          }
+          else if (entry === 'user_delete') {
+            this._canAccessUser = true;
           }
         }
       }
@@ -262,5 +277,21 @@ export class RoleService {
 
   public allowedToUploadKitInvalidAddress(): boolean {
     return this._isKitUploadInvalidAddress;
+  }
+
+  allowedToAccessUsers(): boolean {
+    return this._canAccessUser;
+  }
+
+  allowedToAddUsers(): boolean {
+    return this._canAddUser;
+  }
+
+  allowedToDeleteUsers(): boolean {
+    return this._canAddUser;
+  }
+
+  hasAdminRights() {
+    return this.allowedToDeleteUsers() || this.allowedToAccessUsers() || this.allowedToAddUsers();
   }
 }
