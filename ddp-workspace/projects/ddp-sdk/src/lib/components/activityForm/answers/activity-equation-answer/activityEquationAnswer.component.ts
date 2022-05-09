@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -6,6 +6,7 @@ import { DecimalHelper } from '../../../../utility/decimalHelper';
 import { SubmissionManager } from '../../../../services/serviceAgents/submissionManager.service';
 import { ActivityEquationQuestionBlock } from '../../../../models/activity/activityEquationQuestionBlock';
 import { AnswerResponseEquation } from '../../../../models/activity/answerResponseEquation';
+import { DecimalAnswer } from '../../../../models/activity/decimalAnswer';
 
 @Component({
   selector: 'ddp-activity-equation-answer',
@@ -16,6 +17,7 @@ import { AnswerResponseEquation } from '../../../../models/activity/answerRespon
 })
 export class ActivityEquationAnswerComponent implements OnInit, OnDestroy {
     @Input() block: ActivityEquationQuestionBlock;
+    @Output() valueChanged: EventEmitter<DecimalAnswer[]> = new EventEmitter();
     private subscription: Subscription;
 
     constructor(private submissionManager: SubmissionManager) {
@@ -27,7 +29,15 @@ export class ActivityEquationAnswerComponent implements OnInit, OnDestroy {
                 (response.equations || []).filter(equation => this.block.stableId === equation.stableId)[0]
             )
         ).subscribe((equationToUpdate: AnswerResponseEquation) => {
-            equationToUpdate && this.block.setAnswer([equationToUpdate.values[this.block.compositeRowIndex || 0]], false);
+            if (equationToUpdate) {
+                const newValue = [equationToUpdate.values[this.block.compositeRowIndex || 0]];
+                this.block.setAnswer(newValue, false);
+
+                if (this.block.compositeRowIndex != null) {
+                    // if the equation is a child of a composite - update the composite answers state
+                    this.valueChanged.emit(newValue);
+                }
+            }
         });
     }
 
