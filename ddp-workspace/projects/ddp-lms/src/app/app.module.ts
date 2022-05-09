@@ -79,20 +79,19 @@ const translateFactory =
 
       locationInitialized.then(() => {
         const locale = languageService.getAppLanguageCode();
-
         translateService.setDefaultLang(locale);
 
-        translateService.use(locale).subscribe(
-          () => {
+        translateService.use(locale).subscribe({
+          next: () => {
             loggingService.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
           },
-          err => {
+          error: err => {
             loggingService.logError(LOG_SOURCE, `Problem with '${locale}' language initialization:`, err);
           },
-          () => {
+          complete: () => {
             resolve(null);
           },
-        );
+        });
       });
     });
 
