@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractionGroup } from '../abstraction-group/abstraction-group.model';
 import { Participant } from '../participant-list/participant-list.model';
-import { AbstractionField } from './medical-record-abstraction-field.model';
+import { AbstractionField } from './model/medical-record-abstraction-field.model';
 
 @Component({
   selector: 'app-medical-record-abstraction',
