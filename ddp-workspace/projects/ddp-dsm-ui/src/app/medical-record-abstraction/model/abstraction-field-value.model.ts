@@ -4,17 +4,6 @@ export class AbstractionFieldValue {
               public doubleCheck: boolean, public filePage: string, public fileName: string, public matchPhrase: string) {
   }
 
-  // isEmptyValue(): boolean {
-  //   if (this.value === '' || this.value === [] || this.value === null || this.value == undefined) {
-  //     debugger;
-  //     return true;
-  //   }
-  //   if (this.value instanceof Array) {
-  //     debugger;
-  //   }
-  //   return false;
-  // }
-
   static parse(json): AbstractionFieldValue {
     return new AbstractionFieldValue(
       json.medicalRecordAbstractionFieldId, json.primaryKeyId, json.value, json.valueCounter, json.note, json.question,
