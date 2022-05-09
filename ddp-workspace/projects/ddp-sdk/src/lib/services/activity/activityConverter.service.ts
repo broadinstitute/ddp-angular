@@ -14,6 +14,11 @@ import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
 import { ActivityActivityBlock } from '../../models/activity/activityActivityBlock';
 import * as _ from 'underscore';
+import {
+    mockTabularData1,
+    mockTabularData2
+} from '../../components/activityForm/activity-blocks/tabularBlock/mock-tabular-data';
+import { ActivityTabularBlock } from '../../models/activity/activityTabularBlock';
 
 @Injectable()
 export class ActivityConverter {
@@ -136,6 +141,17 @@ export class ActivityConverter {
         return activityBlock;
     }
 
+    private convertTabularBlock(blockJson: any): ActivityTabularBlock {
+        const activityBlock = new ActivityTabularBlock();
+        activityBlock.title = blockJson.title;
+        activityBlock.headers = blockJson.headers;
+        activityBlock.numberOfColumns = blockJson.numberOfColumns;
+        activityBlock.content = blockJson.content.map(row =>
+            row.map(question => this.questionConverter.buildQuestionBlock(question, null))
+        );
+        return activityBlock;
+    }
+
     private convertActivitySection(jsonSection: any): ActivitySection {
         const section = new ActivitySection();
         if (!_.isUndefined(jsonSection) && jsonSection) {
@@ -148,7 +164,11 @@ export class ActivityConverter {
                 };
                 section.icons.push(icon);
             }
-            for (const inputBlock of jsonSection.blocks) {
+
+            // add mockTabular data for debug
+            const sectionBlocks = jsonSection.blocks.concat([mockTabularData1, mockTabularData2]);
+
+            for (const inputBlock of sectionBlocks) {
                 const blockBuilder = this.blockBuilders.find(x => x.type === inputBlock.blockType);
                 if (blockBuilder) {
                     const block = blockBuilder.func(inputBlock);
@@ -203,6 +223,9 @@ export class ActivityConverter {
           {
               type: BlockType.Activity,
               func: (input) => this.convertActivityBlock(input)
+          },{
+              type: BlockType.Tabular,
+              func: (input) => this.convertTabularBlock(input)
           }
       ];
   }

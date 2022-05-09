@@ -222,7 +222,8 @@ import { PicklistSortingPolicy } from './services/picklistSortingPolicy.service'
 import {
     ActivityEquationAnswerComponent
 } from './components/activityForm/answers/activity-equation-answer/activityEquationAnswer.component';
-
+import { TabularBlockComponent } from './components/activityForm/activity-blocks/tabularBlock/tabularBlock.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter: FuncType<string> = () => sessionService.token;
@@ -286,7 +287,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
             }
         }),
         RouterModule,
-        A11yModule
+        A11yModule,
+        FlexLayoutModule
     ],
     providers: [
         AuthGuard,
@@ -443,7 +445,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ConfirmDialogComponent,
         DropFileToUploadDirective,
         ActivityPicklistRemoteAutoCompleteOptionsComponent,
-        ActivityEquationAnswerComponent
+        ActivityEquationAnswerComponent,
+        TabularBlockComponent
     ],
     exports: [
         NetworkSnifferComponent,
@@ -519,7 +522,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         AdminActionPanelComponent,
         ProgressIndicatorComponent,
         ActivityBlockComponent,
-        ConfirmDialogComponent
+        ConfirmDialogComponent,
+        TabularBlockComponent
     ]
 })
 export class DdpModule {

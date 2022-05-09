@@ -7,7 +7,7 @@ import { BlockType } from '../../../../models/activity/blockType';
 @Component({
     selector: 'ddp-activity-answer',
     template: `
-        <ng-container *ngIf="block.shown">
+        <ng-container *ngIf="true|| block.shown"> <!-- TODO: where a question 'shown' filed comes from ? (for tabular block)-->
             <ddp-activity-boolean-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.Boolean)"
                                          [class]="'boolean-answer-' + block.stableId"
                                          [block]="block"
