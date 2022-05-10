@@ -1,12 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {tap} from 'rxjs/operators';
+import {filter} from 'rxjs/operators';
 import {ComponentService} from '../services/component.service';
 import {RoleService} from '../services/role.service';
 import {Auth} from '../services/auth.service';
-import {ActivatedRoute, NavigationStart, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {DomSanitizer, Title} from '@angular/platform-browser';
-import {Location} from '@angular/common';
-import {Observable} from 'rxjs';
+import {NameValue} from '../utils/name-value.model';
 
 @Component({
   selector: 'app-navigation',
@@ -15,42 +14,30 @@ import {Observable} from 'rxjs';
 
 export class NavigationComponent implements OnInit {
 
-  selectedStudy: Observable<string>;
+  realmFromUrl: string;
 
 
-  constructor(private router: Router, private auth: Auth, private location: Location, sanitizer: DomSanitizer,
-              private role: RoleService, private activatedRoute: ActivatedRoute, private title: Title) {
+  constructor(private router: Router, private auth: Auth, private sanitizer: DomSanitizer,
+              private role: RoleService, private route: ActivatedRoute, private title: Title) {
   }
 
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-
-    this.selectedStudy = this.auth.getSelectedStudy().pipe(tap(study => this.title.setTitle(study)));
-
-    this.auth.getRealmList();
-
-
-    this.router.events
-      .subscribe((event: NavigationStart) => {
-        if (event.navigationTrigger === 'popstate') {
-          const [,study,page] = event.url.split('/');
-          this.auth.selectRealm(study, page);
-          localStorage.setItem(ComponentService.MENU_SELECTED_REALM, study);
-          this.auth.setSelectedStudy = this.auth.realmList.find(realm => realm.name === study)?.value;
-        }
+    this.route.params
+      .subscribe(params => {
+        this.realmFromUrl = params.study;
+        this.title.setTitle(this.realmFromUrl);
       });
-
+    this.auth.getRealmList();
   }
 
-  selectRealm(realmName, realmValue): void {
-    const [,study,page] = this.location.path().split('/');
-    this.auth.setSelectedStudy = realmValue;
-    study !== realmName && this.auth.selectRealm(realmName, page);
+  selectRealm(newValue): void {
+    this.auth.selectRealm(newValue);
   }
 
   isRealmChosen(realm): boolean {
-    return this.activatedRoute.snapshot.params.study === realm;
+    return this.realmFromUrl === realm;
   }
 
   doLogin(): void {

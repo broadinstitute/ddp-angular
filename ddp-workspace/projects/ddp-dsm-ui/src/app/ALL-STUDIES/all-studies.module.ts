@@ -1,5 +1,5 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {APP_INITIALIZER, ErrorHandler, Injector, NgModule} from '@angular/core';
+import {CommonModule, LOCATION_INITIALIZED} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {AllStudiesRoutingModule} from './all-studies.routing.module';
 import {HomeComponent} from '../home/home.component';
@@ -74,6 +74,8 @@ import {dynamicFormTypeAndStudyRGP} from '../participant-page/pipes/dynamicFormT
 import {TestDssComponent} from '../test-dss/test-dss.component';
 import {DssErrorPageComponent} from '../test-dss/dss-error-page/dss-error-page.component';
 import {LoadingModalComponent} from '../modals/loading-modal.component';
+import {TranslateService} from '@ngx-translate/core';
+import {LoggingService} from '../../../../ddp-sdk/src/lib/services/logging.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
@@ -103,14 +105,37 @@ import {AuthGuard} from '../auth0/auth.guard';
 import {Utils} from '../utils/utils';
 import {Statics} from '../utils/statics';
 import {Language} from '../utils/language';
+import {LanguageService} from '../../../../ddp-sdk/src/lib/services/internationalization/languageService.service';
 import {NavigationComponent} from '../navigation/navigation.component';
 import {AllStudiesComponent} from './all-studies.component';
 import {BuildingFactoryService} from '../activity-data/services/buildingFactory.service';
-import { CohortTagComponent } from '../tags/cohort-tag/cohort-tag.component';
-import {MatChipsModule} from '@angular/material/chips';
 
 
-
+export function translateFactory(translate: TranslateService,
+                                 injector: Injector,
+                                 logger: LoggingService,
+                                 // language: LanguageService // TODO: setup languages for DSM
+): () => Promise<any> {
+  return () => new Promise<any>((resolve: any) => {
+    const LOG_SOURCE = 'DSM AppModule';
+    const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
+    locationInitialized.then(() => {
+      const locale = 'en'; // language.getAppLanguageCode();
+      translate.setDefaultLang(locale);
+      translate.use(locale).subscribe({
+        next: () => {
+          logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
+        },
+        error: err => {
+          logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization:`, err);
+        },
+        complete: () => {
+          resolve(null);
+        }
+      });
+    });
+  });
+}
 
 @NgModule({
   declarations: [
@@ -187,8 +212,7 @@ import {MatChipsModule} from '@angular/material/chips';
     dynamicFormTypeAndStudyRGP,
     TestDssComponent,
     DssErrorPageComponent,
-    LoadingModalComponent,
-    CohortTagComponent
+    LoadingModalComponent
   ],
   imports: [
     CommonModule,
@@ -209,7 +233,6 @@ import {MatChipsModule} from '@angular/material/chips';
     DataTableModule,
     NgxPaginationModule,
     MatProgressBarModule,
-    MatChipsModule,
     TabsModule.forRoot(),
     DatepickerModule.forRoot(),
     TooltipModule.forRoot(),
@@ -228,6 +251,17 @@ import {MatChipsModule} from '@angular/material/chips';
     AuthGuard,
     Statics,
     Language,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: translateFactory,
+      deps: [
+        TranslateService,
+        Injector,
+        LoggingService,
+        LanguageService
+      ],
+      multi: true
+    }
   ],
   exports: [RouterModule]
 })

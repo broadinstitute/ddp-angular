@@ -1,22 +1,25 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Auth } from '../services/auth.service';
-import {Observable, Subject} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  selectedRealm: Observable<string>;
+  notAllowedToLogin = false;
+  selectedRealm: string;
   destroy = new Subject();
 
-  constructor(public auth: Auth) {}
+  constructor(public auth: Auth, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.selectedRealm = this.auth.getSelectedStudy();
-  }
+    this.auth.events.pipe(takeUntil(this.destroy)).subscribe(e => e === Auth.AUTHENTICATION_ERROR && (this.notAllowedToLogin = true));
 
+    this.route.params.subscribe(param => this.selectedRealm = param.study);
+  }
 
   ngOnDestroy(): void {
     this.destroy.next(null);

@@ -4,14 +4,14 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <ul class="nav navbar-nav">
-      <li class="dropdown" *ngIf="getAuth().authenticated() && shouldSeeRealmSelection()">
+      <li class="dropdown" *ngIf="getAuth().authenticated() && shouldSeeRealmSelection() && getAuth().realmList.length > 1">
         <a class="dropdown-toggle" data-toggle="dropdown" style="cursor: context-menu">
-          <b>Selected study</b>
-          <i>{{ selectedStudy | async }}</i>
+          <b>{{ realmFromUrl ? 'Selected study' : 'Select study'}}</b>
+          <i>{{ realmFromUrl }}</i>
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li *ngFor="let realms of getAuth().realmList" [ngClass]="{'active': isRealmChosen(realms.name)}"> <a (click)="selectRealm(realms.name, realms.value)"> {{realms.value}} </a> </li>
+          <li *ngFor="let realms of getAuth().realmList" [ngClass]="{'active': isRealmChosen(realms.name)}"> <a (click)="selectRealm(realms.name)"> {{realms.value}} </a> </li>
         </ul>
       </li>
       <li class="dropdown" *ngIf="getAuth().authenticated()

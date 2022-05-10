@@ -3,7 +3,7 @@ import {ConfigurationService} from 'ddp-sdk';
 import {UserSetting} from '../user-setting/user-setting.model';
 import {SessionService} from './session.service';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class RoleService {
   private _isShipping = false;
   private _isMRRequesting = false;
@@ -29,6 +29,7 @@ export class RoleService {
   private _canEditDrugList = false;
   private _isParticipantListView = false;
   private _isParticipantEdit = false;
+  private _isDSSTesting = true; //TODO remove before final merge, for testing only
   private _isKitUploadInvalidAddress = false;
 
   private _userId: string;
@@ -45,11 +46,10 @@ export class RoleService {
 
   public setRoles( token: string ): void {
     if (token != null) {
-      const obj: any = this.sessionService.getDSMClaims(token);
-      const accessRoles: string = obj.USER_ACCESS_ROLE;
+      const accessRoles: string = this.getClaimByKeyName( token, 'USER_ACCESS_ROLE' );
       if (accessRoles != null) {
-        console.log(accessRoles);
-        const roles: string[] = JSON.parse(accessRoles);
+        // console.log( accessRoles );
+        const roles: string[] = JSON.parse( accessRoles );
         for (const entry of roles) {
           // only special kit_shipping_xxx rights should get added here, not the overall only kit_shipping_view
           if (entry.startsWith( 'kit_shipping' ) && entry !== 'kit_shipping_view') {
@@ -129,13 +129,13 @@ export class RoleService {
           }
         }
       }
-      const userSettings: any = obj.USER_SETTINGS;
+      const userSettings: any = this.getClaimByKeyName( token, 'USER_SETTINGS' );
       if (userSettings != null && userSettings !== 'null') {
-        this._userSetting = UserSetting.parse(JSON.parse(userSettings));
+        this._userSetting = UserSetting.parse( JSON.parse( userSettings ) );
       }
-      this._userId = obj.USER_ID;
-      this._user = obj.USER_NAME;
-      this._userEmail = obj.USER_MAIL;
+      this._userId = this.getClaimByKeyName( token, 'USER_ID' );
+      this._user = this.getClaimByKeyName( token, 'USER_NAME' );
+      this._userEmail = this.getClaimByKeyName( token, 'USER_MAIL' );
     }
   }
 
@@ -250,6 +250,14 @@ export class RoleService {
 
   public allowedToEditParticipant(): boolean {
     return this._isParticipantEdit;
+  }
+
+  public allowedToTestDSSActivity(): boolean {
+    return this._isDSSTesting;//TODO pegah remove before final merge, for testing only
+  }
+
+  private getClaimByKeyName( token: any, key: string ): any {
+    return this.sessionService.getDSMClaims( token )[ this.config.auth0ClaimNameSpace + key ];
   }
 
   public allowedToUploadKitInvalidAddress(): boolean {

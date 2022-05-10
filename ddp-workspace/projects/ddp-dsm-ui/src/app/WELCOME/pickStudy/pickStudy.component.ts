@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Auth} from '../../services/auth.service';
 import {NameValue} from '../../utils/name-value.model';
@@ -15,7 +15,7 @@ import {Title} from '@angular/platform-browser';
       <mat-form-field appearance="fill">
         <mat-label>Select study</mat-label>
         <mat-select [formControl]="pickedStudy">
-          <mat-option *ngFor="let realm of realms" [value]="{name: realm.name, value: realm.value}">{{ realm.value }}</mat-option>
+          <mat-option *ngFor="let realm of realms" [value]="realm.name">{{ realm.value }}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -31,7 +31,7 @@ import {Title} from '@angular/platform-browser';
 })
 
 export class PickStudyComponent implements OnInit, OnDestroy {
-  @Input('pickList') realms: Array<NameValue>;
+  realms: Array<NameValue>;
   pickedStudy = new FormControl('');
   unsubscribeVar = new Subject();
 
@@ -39,14 +39,15 @@ export class PickStudyComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.realms = this.auth.realmList;
+
     this.title.setTitle('Select study');
 
     this.pickedStudy.valueChanges
       .pipe(takeUntil(this.unsubscribeVar))
-      .subscribe(({name, value}) => {
-        this.router.navigate([name]);
-        localStorage.setItem(ComponentService.MENU_SELECTED_REALM, name);
-        this.auth.setSelectedStudy = value;
+      .subscribe(realm => {
+        this.router.navigate([realm]);
+        localStorage.setItem(ComponentService.MENU_SELECTED_REALM, realm);
       });
   }
 

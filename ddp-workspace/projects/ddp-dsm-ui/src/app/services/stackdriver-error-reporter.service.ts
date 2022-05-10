@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { RoleService } from './role.service';
 import { ConfigurationService, SessionMementoService, StackdriverErrorReporterService } from 'ddp-sdk';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class StackdriverErrorReporterDsmService extends StackdriverErrorReporterService {
 
   constructor(
