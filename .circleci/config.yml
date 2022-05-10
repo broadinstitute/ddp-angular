@@ -57,8 +57,9 @@ commands:
           condition: << parameters.skip_build >>
           steps:
             - set-deployment-environment
-            - run-linter-check
-            - run-tests
+# disabling for now: remove when done!
+#            - run-linter-check
+#            - run-tests
             - build-app:
                 study_key: << parameters.study_key >>
             - deploy-exploded-build:
