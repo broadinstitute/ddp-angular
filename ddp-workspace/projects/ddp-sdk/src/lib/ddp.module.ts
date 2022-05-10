@@ -219,6 +219,10 @@ import { FuncType } from './models/funcType';
 import { ActivityPicklistRemoteAutoCompleteOptionsComponent }
     from './components/activityForm/picklist/activity-picklist-remote-auto-complete-options.component';
 import { PicklistSortingPolicy } from './services/picklistSortingPolicy.service';
+import {
+    ActivityEquationAnswerComponent
+} from './components/activityForm/answers/activity-equation-answer/activityEquationAnswer.component';
+
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter: FuncType<string> = () => sessionService.token;
@@ -438,7 +442,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ActivityBlockComponent,
         ConfirmDialogComponent,
         DropFileToUploadDirective,
-        ActivityPicklistRemoteAutoCompleteOptionsComponent
+        ActivityPicklistRemoteAutoCompleteOptionsComponent,
+        ActivityEquationAnswerComponent
     ],
     exports: [
         NetworkSnifferComponent,

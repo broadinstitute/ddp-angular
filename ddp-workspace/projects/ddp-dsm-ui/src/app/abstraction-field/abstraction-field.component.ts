@@ -1,12 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Questions } from '../field-question-array/field-question-array.model';
-import {
-  AbstractionField,
-  AbstractionFieldValue
-} from '../medical-record-abstraction/medical-record-abstraction-field.model';
+import { AbstractionField } from '../medical-record-abstraction/model/medical-record-abstraction-field.model';
 import { Participant } from '../participant-list/participant-list.model';
 import { NameValue } from '../utils/name-value.model';
-import { Result } from '../utils/result.model';
 import { Auth } from '../services/auth.service';
 import { Statics } from '../utils/statics';
 import { DSMService } from '../services/dsm.service';
@@ -14,6 +10,7 @@ import { Router } from '@angular/router';
 import { ComponentService } from '../services/component.service';
 import { RoleService } from '../services/role.service';
 import { ModalComponent } from '../modal/modal.component';
+import { AbstractionFieldValue } from '../medical-record-abstraction/model/abstraction-field-value.model';
 
 @Component({
   selector: 'app-abstraction-field',

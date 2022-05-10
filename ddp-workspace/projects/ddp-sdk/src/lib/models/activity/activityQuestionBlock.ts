@@ -4,6 +4,8 @@ export abstract class ActivityQuestionBlock<T> extends AbstractActivityQuestionB
     protected _answer: T | null = null;
     public isRequired: boolean;
     public displayNumber: number | null;
+    // row number if the question is a composite question child
+    public compositeRowIndex: number;
 
     public get answer(): T | null {
         return this._answer;
@@ -21,6 +23,15 @@ export abstract class ActivityQuestionBlock<T> extends AbstractActivityQuestionB
 
     public convertToString(value: T): string {
         return String(value);
+    }
+
+    /**
+     *  Whether the question is able to change (and emit) its answer value
+     *  Most of questions generate answers
+     *  except ActivityEquationQuestionBlock that has a special behavior
+     */
+    public generatesAnswers(): boolean {
+        return true;
     }
 
     /**

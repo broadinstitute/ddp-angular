@@ -5,13 +5,14 @@ import { DragulaService } from 'ng2-dragula';
 import { Group } from 'ng2-dragula/dist/Group';
 
 import { AbstractionFieldComponent } from '../abstraction-field/abstraction-field.component';
-import { AbstractionField, AbstractionFieldValue } from '../medical-record-abstraction/medical-record-abstraction-field.model';
+import { AbstractionField } from '../medical-record-abstraction/model/medical-record-abstraction-field.model';
 import { ModalComponent } from '../modal/modal.component';
 import { Participant } from '../participant-list/participant-list.model';
 import { Value } from '../utils/value.model';
 import { ComponentService } from '../services/component.service';
 import { RoleService } from '../services/role.service';
 import { DSMService } from '../services/dsm.service';
+import { AbstractionFieldValue } from '../medical-record-abstraction/model/abstraction-field-value.model';
 
 @Component({
   selector: 'app-abstraction-group',
