@@ -77,7 +77,8 @@ import { BlockType } from '../../../../models/activity/blockType';
             </ddp-activity-instance-select-answer>
             <ddp-activity-equation-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.Equation)"
                                           [class]="'equation-answer-' + block.stableId"
-                                          [block]="block">
+                                          [block]="block"
+                                          (valueChanged)="onChange($event)">
             </ddp-activity-equation-answer>
             <span *ngIf="block.additionalInfoFooter"
                   [innerHTML]="block.additionalInfoFooter"

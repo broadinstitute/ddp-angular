@@ -139,7 +139,8 @@ export class ActivityCompositeAnswer implements OnChanges {
         this.block.setAnswer(childAnswers, false);
 
         // No point in emitting if the value is not valid. Not gonna patch it anyways
-        if (currentBlock.validate()) {
+        // Also don't emit values from questions that have read-only answers (e.g. Equation question)
+        if (currentBlock.validate() && currentBlock.generatesAnswers()) {
             const compositeAnswerValue: any[][] = this.childQuestionBlocks.map(childQuestionBlockRow =>
                 childQuestionBlockRow
                     // we don't patch an equation question answer because it is read-only
