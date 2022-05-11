@@ -15,7 +15,7 @@ export class StudyGuard implements CanActivate {
 
     if(this.allowAccessToStudy(selectedRealm, state)) {return true;}
 
-    this.router.navigate([selectedRealm ? selectedRealm : '']);
+    this.router.navigate([selectedRealm || '']);
 
     return false;
   }

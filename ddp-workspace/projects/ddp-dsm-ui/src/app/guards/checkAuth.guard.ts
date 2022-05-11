@@ -9,8 +9,7 @@ export class CheckAuthGuard implements CanActivate {
   constructor(private auth: Auth, private router: Router) {
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
-    Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const selectedRealm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     if (!this.auth.authenticated() && !selectedRealm) {return true;}
     else if (this.auth.authenticated() && !selectedRealm) {this.auth.logout();}
