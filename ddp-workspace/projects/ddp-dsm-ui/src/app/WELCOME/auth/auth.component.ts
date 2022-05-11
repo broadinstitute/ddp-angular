@@ -30,6 +30,7 @@ import {ComponentService} from '../../services/component.service';
     }
     h2  {
       color: red;
+      font-size: 1.5em;
     }
     ::ng-deep.auth0-lock-close-button {
       display: none !important;

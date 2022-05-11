@@ -173,7 +173,7 @@ export class Auth {
     let errMsg: string | null = null;
 
     if(error.status === 500) {
-      errMsg = 'User is not registered in DSM';
+      errMsg = 'User is not registered in DSM. Please make sure you selected the correct account.';
     } else {
       errMsg = (error.message) ? error.message :
         error.status ? `${error.status} - ${error.statusText}` : 'Server error';
