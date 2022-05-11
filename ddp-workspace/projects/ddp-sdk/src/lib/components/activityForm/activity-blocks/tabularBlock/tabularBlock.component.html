@@ -13,7 +13,7 @@
     <div class="questions">
         <div *ngFor="let row of block.content; let rowIndex=index; let even=even"
              [gdColumns]="gridSettings.gridTemplateColumns"
-             class="questions--row"
+             class="questions-row"
              [class.isEven]="even">
 
             <ng-container *ngFor="let questionBlock of row; let cellIndex=index">
@@ -49,7 +49,7 @@
 <ng-template #question let-questionBlock="questionBlock" let-rowIndex="rowIndex" let-cellIndex="cellIndex">
     <!-- If a composite question - every its child should take a separate cell -->
     <ng-container *ngFor="let childBlock of (questionBlock.children || [questionBlock]) ; let i=index; let last=last">
-        <div [gdColumn]="increaseCounter(rowIndex)" class="questions--cell cell">
+        <div [gdColumn]="increaseCounter(rowIndex)" class="questions-cell cell">
 
                     <!-- Add [class.specialBoolean]="childBlock.stableId === 'SPECIAL_STABLE_ID'" for handling a boolean which switch other questions enabling ?? -->
             <ddp-activity-question [block]="childBlock"

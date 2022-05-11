@@ -17,7 +17,7 @@ $border-color: #1d1d1d;
     }
 
     .questions {
-        &--row {
+        &-row {
             grid-gap: $grid-gap;
 
             .question-title {
@@ -25,7 +25,7 @@ $border-color: #1d1d1d;
             }
         }
 
-        &--cell {
+        &-cell {
             position: relative;
 
             .separator {
@@ -56,7 +56,7 @@ $border-color: #1d1d1d;
         border: none;
     }
 
-    .questions--row {
+    .questions-row {
         grid-template-columns: 110px 1fr 1fr 1fr !important;
         align-items: center;
 
