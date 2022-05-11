@@ -41,7 +41,7 @@ export class Auth {
 
   loadRealmsSubscription: Subscription;
 
-  authError = new BehaviorSubject<boolean>(false);
+  authError = new BehaviorSubject<string | null>(null);
 
   // Configure Auth0
   lock = new Auth0Lock(DDP_ENV.auth0ClientKey, DDP_ENV.auth0Domain, {
@@ -94,8 +94,7 @@ export class Auth {
       this.doLogin(payload);
     });
     this.lock.on('authorization_error', () => {
-      // console.log("user is not allowed to login ");
-      this.eventsSource.next('authorization_error');
+      this.authError.next('You are not allowed to login');
     });
 
     this.lockForDiscard.on('authenticated', (authResult: any) => {
@@ -142,7 +141,7 @@ export class Auth {
         this.realmList = [];
         this.getRealmList();
 
-        this.authError.next(false);
+        this.authError.next(null);
       }
     });
   }
@@ -159,9 +158,17 @@ export class Auth {
   private handleError(error: any): Observable<any> {
     // In a real world app, we might use a remote logging infrastructure
     // We'd also dig deeper into the error to get a better message
-    const errMsg = (error.message) ? error.message :
-      error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-    this.authError.next(true);
+    let errMsg: string | null = null;
+
+    if(error.status === 500) {
+      errMsg = 'User is not registered in DSM';
+    } else {
+      errMsg = (error.message) ? error.message :
+        error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+    }
+
+    this.authError.next(errMsg);
+
     console.error(errMsg); // log to console instead
     return throwError(() => new Error(errMsg));
   }

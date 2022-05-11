@@ -10,8 +10,8 @@ import {Observable, tap} from 'rxjs';
   template: `
     <div class="container">
       <mat-spinner *ngIf="loading" mode="indeterminate"></mat-spinner>
-      <div *ngIf="authError | async">
-        <h2>Error occurred</h2>
+      <div *ngIf="(authError | async) as errorMessage">
+        <h2>{{ errorMessage }}</h2>
         <button mat-raised-button color="primary" (click)="showAuthPopUp()">Try again</button>
       </div>
     </div>
@@ -34,7 +34,7 @@ import {Observable, tap} from 'rxjs';
 
 export class AuthComponent implements OnInit {
   loading = false;
-  authError: Observable<boolean>;
+  authError: Observable<string | null>;
 
   constructor(private auth: Auth, private title: Title) {}
 
@@ -60,7 +60,7 @@ export class AuthComponent implements OnInit {
 
   private popUpShown(): void {
     this.loading = false;
-    this.auth.authError.next(false);
+    this.auth.authError.next(null);
     this.title.setTitle('DDP Study Management');
   }
 
@@ -70,7 +70,7 @@ export class AuthComponent implements OnInit {
     this.authError = this.auth.authError.pipe(tap(error => {
       if(error) {
         this.loading = false;
-        this.title.setTitle('Error occurred');
+        this.title.setTitle(error);
       }
     }));
   }
