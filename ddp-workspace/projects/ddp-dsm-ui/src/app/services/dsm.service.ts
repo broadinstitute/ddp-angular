@@ -20,7 +20,7 @@ import { SessionService } from './session.service';
 
 declare var DDP_ENV: any;
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class DSMService {
   public static UI = 'ui/';
   public static REALM = 'realm';

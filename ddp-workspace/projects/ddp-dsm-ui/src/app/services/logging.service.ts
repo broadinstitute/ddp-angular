@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ConfigurationService, LoggingService, SessionMementoService } from 'ddp-sdk';
 import { StackdriverErrorReporterDsmService } from './stackdriver-error-reporter.service';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class LoggingDsmService extends LoggingService {
   constructor(
     @Inject('ddp.config') private _config: ConfigurationService,
