@@ -26,6 +26,8 @@ export class Auth {
 
   public static AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
 
+  private readonly PICK_STUDY_CONST: string = 'pickStudy'
+
   private baseUrl = DDP_ENV.baseUrl;
   private authUrl = this.baseUrl + DSMService.UI + 'auth0';
 
@@ -187,11 +189,10 @@ export class Auth {
           jsonData.forEach((val) => {
             this.realmList.push(NameValue.parse(val));
           });
+          
+          const navigateUri = this.realmList.length > 1 ? this.PICK_STUDY_CONST : this.realmList[0].name;
 
-          // this.realmList = [{name: 'Singular', value: 'Singular'}];
-          const navigateUri = this.realmList.length > 1 ? 'pickStudy' : this.realmList[0].name;
-
-          navigateUri !== 'pickStudy' &&
+          navigateUri !== this.PICK_STUDY_CONST &&
           localStorage.setItem(ComponentService.MENU_SELECTED_REALM, this.realmList[0].name);
 
           this.router.navigate([navigateUri]);
