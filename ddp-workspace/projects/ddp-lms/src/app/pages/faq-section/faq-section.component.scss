@@ -1,0 +1,51 @@
+@import '../../../styles/variables.scss';
+
+:host {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.faq-section {
+    margin: auto;
+    margin-bottom: 20px;
+
+    .expand-btn {
+        color: #282828;
+        font-family: $primary-font-medium;
+        font-size: 1rem;
+        line-height: 20px;
+        padding: 0.5rem 1rem;
+        text-transform: uppercase;
+        border: 1px solid #000000;
+        border-radius: 10px;
+        background-color: transparent;
+        display: block;
+        position: absolute;
+        transform: translateX(calc(-100% - 30px));
+
+        ::ng-deep.mat-button-wrapper {
+            position: relative;
+            left: -5px;
+        }
+    }
+    
+    .faq-section-header {
+        display: flex;
+        align-items: center;
+        position: relative;
+        margin-bottom: 10px;
+    }
+    
+    .faq-block__icon {
+        margin-right: 30px;
+    }
+
+    .faq-section-expansion-panel {
+        margin: 5px 0;
+    }
+    
+    ::ng-deep .mat-content {
+        display: flex;
+        align-items: center;
+    }
+}
