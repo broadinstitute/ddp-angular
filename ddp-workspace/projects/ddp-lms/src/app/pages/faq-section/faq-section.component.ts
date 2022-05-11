@@ -5,8 +5,7 @@ type Question = { Question: string; Paragraphs: string[] };
 
 @Component({
   selector: 'app-faq-section',
-  // templateUrl: './faq-section.component.html',
-  
+  templateUrl: './faq-section.component.html',
   styleUrls: ['./faq-section.component.scss'],
 })
 export class FaqSectionComponent {
