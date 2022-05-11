@@ -56,9 +56,8 @@
   <br/>
   <div *ngIf="hasRole().allowedToUploadKitInvalidAddress()">
     <div>
-      <mat-checkbox [(ngModel)]="skipAddressValidation" color="primary"
-                    disableRipple>Skip address validation on upload
-      </mat-checkbox>
+      <mat-checkbox disableRipple color="primary"
+                   [(ngModel)]="skipAddressValidation">Skip address validation on upload</mat-checkbox>
     </div>
   </div>
   <br/>
