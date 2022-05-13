@@ -1625,7 +1625,7 @@ export class ParticipantListComponent implements OnInit {
     const columns = [];
     for(const col in this.selectedColumns) {
       for (const key in this.selectedColumns[col]) {
-        columns.push(this.selectedColumns[col][key]['participantColumn']);
+        columns.push(this.selectedColumns[col][key]);
       }
     }
     this.dsmService.downloadParticipantData(
