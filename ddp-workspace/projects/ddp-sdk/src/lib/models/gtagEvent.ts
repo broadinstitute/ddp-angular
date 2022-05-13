@@ -4,5 +4,5 @@ export interface GTagEvent {
         page_location: string;
         click_text?: string;
         click_url?: string;
-    }
+    };
 }

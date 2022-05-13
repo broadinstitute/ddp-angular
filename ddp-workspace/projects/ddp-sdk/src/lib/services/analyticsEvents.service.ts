@@ -31,9 +31,10 @@ export class AnalyticsEventsService {
     this.events.next(this.buildGTagEvent(eventCategory, eventAction));
   }
 
-  public emitCustomGtagEvent(eventName: string, clickText?: string, clickUrl?: string) {
+  public emitCustomGtagEvent(eventName: string, clickText?: string, clickUrl?: string): void {
     const newEvent = this.buildGTagEvent(eventName, clickText, clickUrl);
     this.events.next(newEvent);
+    return;
   }
 
   public emitNavigationEvent(): void {
@@ -63,7 +64,7 @@ export class AnalyticsEventsService {
 
   // Build gtag.js events that correspond to https://developers.google.com/tag-platform/gtagjs/reference#event
   // click_text and click_url are optional custom parameters
-  private buildGTagEvent(eventName: string, clickText?: string, clickUrl?: string) {
+  private buildGTagEvent(eventName: string, clickText?: string, clickUrl?: string): GTagEvent {
     const newEvent: GTagEvent = {
       event_name: eventName,
       parameters: {
