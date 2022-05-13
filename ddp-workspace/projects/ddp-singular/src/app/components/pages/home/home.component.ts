@@ -15,18 +15,18 @@ export class HomeComponent {
   readonly BOSTON_HOSPITAL_URL = 'https://www.childrenshospital.org';
   readonly GENOME_MEDICAL_URL = 'https://www.genomemedical.com';
   readonly CONSENT_PDF_URL = 'https://storage.googleapis.com/singular-dev-assets/consent_self.pdf';
-  readonly SALIVA_KIT_PDF_URL = 'https://storage.googleapis.com/singular-dev-assets/saliva_kit.pdf'
+  readonly SALIVA_KIT_PDF_URL = 'https://storage.googleapis.com/singular-dev-assets/saliva_kit.pdf';
   readonly SALIVA_KIT_PDF_NAME = 'Preview Kit Instructions';
   readonly CONSENT_PDF_NAME = 'Preview Consent Form';
   readonly PRESCREEN_BUTTON_LABEL = 'Sign me up!';
 
 
-  constructor(private analytics: AnalyticsEventsService){};
+  constructor(private analytics: AnalyticsEventsService){}
 
   public clickPreScreening(): void {
-    this.analytics.emitCustomGtagEvent("sign_me_up_button_link", this.PRESCREEN_BUTTON_LABEL);
+    this.analytics.emitCustomGtagEvent('sign_me_up_button_link', this.PRESCREEN_BUTTON_LABEL);
   }
   public clickDownload(clickText: string, clickUrl: string): void {
-    this.analytics.emitCustomGtagEvent("pdf_download", clickText, clickUrl);
+    this.analytics.emitCustomGtagEvent('pdf_download', clickText, clickUrl);
   }
 }
