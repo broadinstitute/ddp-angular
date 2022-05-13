@@ -4,7 +4,7 @@ import { DiscardSample } from '../discard-sample/discard-sample.model';
 import { FieldSettings } from '../field-settings/field-settings.model';
 
 // Service to send information to a childComponent, which is called per router!
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class ComponentService {
   static MENU_SELECTED_REALM = 'selectedRealm';
 

@@ -7,8 +7,7 @@ import {SectionModeEnum} from '../enums/sectionMode.enum';
 import {Utils} from '../../utils/utils';
 import {ActivityRule} from '../models/activity-rule';
 
-@Injectable({providedIn: 'root'})
-
+@Injectable()
 export class BuildingFactoryService {
 
   public buildBlocks: Array<ActivityRule>;
