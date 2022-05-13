@@ -11,17 +11,17 @@
 
       <div class="footer-social">
         <div class="footer-social-item twitter">
-          <a href="https://twitter.com/proj_singular" target="_blank">
+          <a (click)="goToTwitter($event)" href="https://twitter.com/proj_singular" target="_blank">
             <img src="assets/images/twitter.svg" alt="twitter">
           </a>
         </div>
         <div class="footer-social-item instagram">
-          <a href="https://www.instagram.com/project_singular/" target="_blank">
+          <a (click)="goToInstagram($event)" href="https://www.instagram.com/project_singular/" target="_blank">
             <img src="assets/images/inst.svg" alt="instagram">
           </a>
         </div>
         <div class="footer-social-item facebook">
-          <a href="https://www.facebook.com/project.singular.study" target="_blank">
+          <a (click)="goToFacebook($event)" href="https://www.facebook.com/project.singular.study" target="_blank">
             <img src="assets/images/f.svg" alt="facebook">
           </a>
         </div>
@@ -62,10 +62,10 @@
             </a>
           </li>
           <li class="link-list__item link-list__item_highlight-stroke_invert" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active">
-            <ddp-sign-in-out [signOutReturnToUrl]="Route.Home"></ddp-sign-in-out>
+            <ddp-sign-in-out (signIn)="signIn()" [signOutReturnToUrl]="Route.Home"></ddp-sign-in-out>
           </li>
           <li class="link-list__item link-list__item_highlight link-list__item_highlight_invert" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active" *ngIf="!isAuthenticated">
-            <a class="button button--white" [routerLink]="Route.PreScreening">
+            <a (click)="signUp($event)" class="button button--white" [routerLink]="Route.PreScreening">
               {{ 'Footer.Links.SignUp' | translate }}
             </a>
           </li>

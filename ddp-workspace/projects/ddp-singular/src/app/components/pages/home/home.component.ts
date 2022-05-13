@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Route } from '../../../constants/route';
 import { AnalyticsEventsService } from 'ddp-sdk';
 
+import { Route } from '../../../constants/route';
+import { GTagEvent } from '../../../constants/gtag-event';
 
 @Component({
   selector: 'app-home',
@@ -24,9 +25,9 @@ export class HomeComponent {
   constructor(private analytics: AnalyticsEventsService){}
 
   public clickPreScreening(): void {
-    this.analytics.emitCustomGtagEvent('sign_me_up_button_link', this.PRESCREEN_BUTTON_LABEL);
+    this.analytics.emitCustomGtagEvent(GTagEvent.SIGN_UP_CLICK, this.PRESCREEN_BUTTON_LABEL);
   }
   public clickDownload(clickText: string, clickUrl: string): void {
-    this.analytics.emitCustomGtagEvent('pdf_download', clickText, clickUrl);
+    this.analytics.emitCustomGtagEvent(GTagEvent.PDF_DOWNLOAD, clickText, clickUrl);
   }
 }
