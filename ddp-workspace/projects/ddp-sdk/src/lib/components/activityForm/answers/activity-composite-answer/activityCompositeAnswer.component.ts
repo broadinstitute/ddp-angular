@@ -1,4 +1,16 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, Inject } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Inject,
+    Input,
+    OnChanges,
+    Output,
+    QueryList,
+    SimpleChanges,
+    ViewChildren
+} from '@angular/core';
+import * as _ from 'underscore';
+
 import { ActivityCompositeQuestionBlock } from '../../../../models/activity/activityCompositeQuestionBlock';
 import { AnswerValue } from '../../../../models/activity/answerValue';
 import { ActivityQuestionBlock } from '../../../../models/activity/activityQuestionBlock';
@@ -7,7 +19,8 @@ import { QuestionType } from '../../../../models/activity/questionType';
 import { ActivityDateQuestionBlock } from '../../../../models/activity/activityDateQuestionBlock';
 import { DateRenderMode } from '../../../../models/activity/dateRenderMode';
 import { ConfigurationService } from '../../../../services/configuration.service';
-import * as _ from 'underscore';
+import { ActivityAnswerComponent } from '../activity-answer/activityAnswer.component';
+
 
 // todo see if style in here can be moved to shared resource, like external CSS
 
@@ -24,12 +37,13 @@ export class ActivityCompositeAnswer implements OnChanges {
     @Input() validationRequested: boolean;
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
     @Output() componentBusy = new EventEmitter<boolean>();
+    @ViewChildren(ActivityAnswerComponent) private childAnswerComponents: QueryList<ActivityAnswerComponent>;
     public childQuestionBlocks: ActivityQuestionBlock<any>[][] = [];
     private convertQuestionToLabels: boolean;
 
-    constructor(@Inject('ddp.config') public config: ConfigurationService) { }
+    constructor(@Inject('ddp.config') public config: ConfigurationService) {}
 
-    public ngOnChanges(changes: SimpleChanges): void {
+    ngOnChanges(changes: SimpleChanges): void {
         for (const propName in changes) {
             if (propName === 'block') {
                 const newBlock: ActivityCompositeQuestionBlock = changes['block'].currentValue;
@@ -42,36 +56,44 @@ export class ActivityCompositeAnswer implements OnChanges {
                     this.childQuestionBlocks = [];
                     this.addBlankRow();
                 } else {
-                    // eslint-disable-next-line arrow-body-style
-                    const questionsRows: ActivityQuestionBlock<any>[][] = newAnswers.map((rowOfAnswers: ActivityQuestionBlock<any>[]) => {
-                        // assuming order of answers same as order of questions here.
-                        // And adding braces and a return statement here fixes a bug that should not be happening
-                        // Breaks when running the compiled version of SDK  but OK when including library via symlink
-                        // TODO investigate what is going on. Perhaps differences in TypeScript compiler target Javascript config?
-                        return rowOfAnswers.map((answerContainer: ActivityQuestionBlock<any>, index: number) =>
-                            this.buildBlockForChildQuestion(newBlock.children[index], answerContainer, newBlock.shown));
-                    });
-
-                    const blankRow: ActivityQuestionBlock<any>[] = this.block.children.map((questionBlock: ActivityQuestionBlock<any>) =>
-                        this.buildBlockForChildQuestion(questionBlock, null, this.block.shown));
-
-                    // If a row in Composite block has 2 and more questions,
-                    // and a user answered only on the first question and reloaded the page
-                    // the backend returns an array of answers only with 1 item,
-                    // so when the component will build rows, we will miss some blocks
-                    // example: https://broadinstitute.atlassian.net/browse/DDP-4536;
-                    // method below looks which blocks were missed and add them
-                    // Important: if a user answered only on the last question, backend returns the correct array of answers
-                    this.childQuestionBlocks = questionsRows.map((currentRow: ActivityQuestionBlock<any>[]) => {
-                        if (currentRow.length !== blankRow.length) {
-                            const missedQuestions = blankRow.slice(currentRow.length);
-                            currentRow.push(...missedQuestions);
-                        }
-                        return currentRow;
-                    });
+                    this.childQuestionBlocks = this.rebuildChildQuestions(newBlock, newAnswers);
                 }
             }
         }
+    }
+
+    private rebuildChildQuestions(newBlock, newAnswers): ActivityQuestionBlock<any>[][] {
+        // eslint-disable-next-line arrow-body-style
+        const questionsRows: ActivityQuestionBlock<any>[][] = newAnswers.map((rowOfAnswers: ActivityQuestionBlock<any>[]) => {
+            // assuming order of answers same as order of questions here.
+            // And adding braces and a return statement here fixes a bug that should not be happening
+            // Breaks when running the compiled version of SDK  but OK when including library via symlink
+            // TODO investigate what is going on. Perhaps differences in TypeScript compiler target Javascript config?
+            return rowOfAnswers.map((answerContainer: ActivityQuestionBlock<any>, index: number) =>
+                this.buildBlockForChildQuestion(newBlock.children[index], answerContainer, newBlock.shown)
+            );
+        });
+
+        const blankRow: ActivityQuestionBlock<any>[] = this.block.children.map((questionBlock: ActivityQuestionBlock<any>) =>
+            this.buildBlockForChildQuestion(questionBlock, null, this.block.shown));
+
+        // If a row in Composite block has 2 and more questions,
+        // and a user answered only on the first question and reloaded the page
+        // the backend returns an array of answers only with 1 item,
+        // so when the component will build rows, we will miss some blocks
+        // example: https://broadinstitute.atlassian.net/browse/DDP-4536;
+        // method below looks which blocks were missed and add them
+        // Important: if a user answered only on the last question, backend returns the correct array of answers
+        const childQuestionBlocks = questionsRows.map((currentRow: ActivityQuestionBlock<any>[]) => {
+            if (currentRow.length !== blankRow.length) {
+                const missedQuestions = blankRow.slice(currentRow.length);
+                currentRow.push(...missedQuestions);
+            }
+            return currentRow;
+        });
+        this.resetChildrenRowIndexes(childQuestionBlocks);
+
+        return childQuestionBlocks;
     }
 
     // Use original child question blocks as the prototypes to make real working ones
@@ -110,19 +132,26 @@ export class ActivityCompositeAnswer implements OnChanges {
     }
 
     public updateValue(row: number, column: number, value: AnswerValue): void {
-        this.childQuestionBlocks[row][column].answer = value;
+        const currentBlock = this.childQuestionBlocks[row][column];
+
+        currentBlock.answer = value;
         const childAnswers = this.buildComponentAnswers();
         this.block.setAnswer(childAnswers, false);
+
         // No point in emitting if the value is not valid. Not gonna patch it anyways
-        if (this.childQuestionBlocks[row][column].validate()) {
+        // Also don't emit values from questions that have read-only answers (e.g. Equation question)
+        if (currentBlock.validate() && currentBlock.generatesAnswers()) {
             const compositeAnswerValue: any[][] = this.childQuestionBlocks.map(childQuestionBlockRow =>
-                childQuestionBlockRow.map((childQuestionBlock) => {
-                    if (childQuestionBlock.validate()) {
-                        return this.buildChildAnswer(childQuestionBlock);
-                    } else {
-                        return this.buildChildAnswer(childQuestionBlock, null);
-                    }
-                }));
+                childQuestionBlockRow
+                    // we don't patch an equation question answer because it is read-only
+                    .filter((childQuestionBlock: ActivityQuestionBlock<any>) => childQuestionBlock.generatesAnswers())
+                    .map((childQuestionBlock: ActivityQuestionBlock<any>) => {
+                        if (childQuestionBlock.validate()) {
+                            return this.buildChildAnswer(childQuestionBlock);
+                        } else {
+                            return this.buildChildAnswer(childQuestionBlock, null);
+                        }
+                    }));
             this.valueChanged.emit(compositeAnswerValue);
         }
     }
@@ -131,11 +160,15 @@ export class ActivityCompositeAnswer implements OnChanges {
         return Object.values(ChildOrientation).includes(orientation) ? orientation.toLowerCase() : '';
     }
 
-    private buildComponentAnswers(): any[][] {
+    private buildComponentAnswers(excludeReadOnlyBlocks?: boolean): any[][] {
         return this.childQuestionBlocks.map(childQuestionBlockRow =>
-            childQuestionBlockRow.map((childQuestionBlock) =>
-                this.buildChildAnswer(childQuestionBlock)
-            )
+            childQuestionBlockRow
+                .filter((childQuestionBlock: ActivityQuestionBlock<any>) =>
+                    excludeReadOnlyBlocks ? childQuestionBlock.generatesAnswers() : true
+                )
+                .map((childQuestionBlock) =>
+                    this.buildChildAnswer(childQuestionBlock)
+                )
         );
     }
 
@@ -149,13 +182,19 @@ export class ActivityCompositeAnswer implements OnChanges {
     public addBlankRow(): void {
         this.childQuestionBlocks.push(this.block.children.map(questionBlock =>
             this.buildBlockForChildQuestion(questionBlock, null, this.block.shown)));
+
+        this.resetChildrenRowIndexes(this.childQuestionBlocks);
     }
 
     public removeRow(index: number): void {
         this.childQuestionBlocks.splice(index, 1);
+        this.resetChildrenRowIndexes(this.childQuestionBlocks);
+
         const childAnswers = this.buildComponentAnswers();
         this.block.setAnswer(childAnswers, false);
-        this.valueChanged.emit(childAnswers);
+
+        const childAnswersWithoutEquations = this.buildComponentAnswers(true);
+        this.valueChanged.emit(childAnswersWithoutEquations);
     }
 
     // We need this method because we want to include the prototype in the clone.
@@ -175,5 +214,13 @@ export class ActivityCompositeAnswer implements OnChanges {
 
     private showAsterisk(questionType: QuestionType): boolean {
         return !this.config.compositeRequiredFieldExceptions.includes(questionType);
+    }
+
+    private resetChildrenRowIndexes(compositeChildQuestionBlocks: ActivityQuestionBlock<any>[][]): void {
+        compositeChildQuestionBlocks.forEach((row: ActivityQuestionBlock<any>[], rowIndex: number) => {
+            for (const questionBlock of row) {
+                questionBlock.compositeRowIndex = rowIndex;
+            }
+        });
     }
 }

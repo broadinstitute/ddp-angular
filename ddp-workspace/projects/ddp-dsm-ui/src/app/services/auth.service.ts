@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   throwError,
   Subject,
-  Subscription, Observable
+  Subscription, Observable, BehaviorSubject
 } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -20,11 +20,13 @@ import { SessionMementoService } from 'ddp-sdk';
 declare var Auth0Lock: any;
 declare var DDP_ENV: any;
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class Auth {
   static AUTH0_TOKEN_NAME = 'auth_token';
 
   public static AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
+
+  private readonly PICK_STUDY_CONST: string = 'pickStudy';
 
   private baseUrl = DDP_ENV.baseUrl;
   private authUrl = this.baseUrl + DSMService.UI + 'auth0';
@@ -41,12 +43,15 @@ export class Auth {
 
   loadRealmsSubscription: Subscription;
 
+  authError = new BehaviorSubject<string | null>(null);
+
   // Configure Auth0
   lock = new Auth0Lock(DDP_ENV.auth0ClientKey, DDP_ENV.auth0Domain, {
     auth: {
-      redirectUrl: window.location.origin + Statics.HOME_URL,
+      redirect: false,
       responseType: 'token'
     },
+    popupOptions: { width: 300, height: 400, left: 200, top: 300 },
     languageDictionary: {
       title: 'DDP Study Management'
     },
@@ -54,7 +59,8 @@ export class Auth {
       logo: '/assets/images/logo-broad-institute.svg',
       primaryColor: '#5e7da4'
     },
-    autoclose: true
+    autoclose: true,
+    // container: 'auth'
     // rememberLastLogin: false,
   });
 
@@ -90,8 +96,7 @@ export class Auth {
       this.doLogin(payload);
     });
     this.lock.on('authorization_error', () => {
-      // console.log("user is not allowed to login ");
-      this.eventsSource.next('authorization_error');
+      this.authError.next('You are not allowed to login');
     });
 
     this.lockForDiscard.on('authenticated', (authResult: any) => {
@@ -116,12 +121,12 @@ export class Auth {
     localStorage.clear();
     this.sessionService.logout();
     this.selectedRealm = null;
-    this.router.navigate([ Statics.HOME_URL ]);
+    this.router.navigate(['']);
   }
 
   public doLogin(authPayload: any): void {
     const dsmObservable = this.http.post(this.authUrl, authPayload, this.buildHeaders()).pipe(
-      catchError(this.handleError)
+      catchError(this.handleError.bind(this))
     );
 
     let dsmResponse: any;
@@ -138,26 +143,7 @@ export class Auth {
         this.realmList = [];
         this.getRealmList();
 
-        const link: any = JSON.parse(localStorage.getItem(Statics.PERMALINK));
-        // get rid of localStorage of url
-        // navigate to original url
-        if (link != null && link.link != null) {
-          if (link.link.indexOf('participantList') > -1) {
-            const realmName: string = link.realm;
-            this.router.navigate([ Statics.PERMALINK + '/participantList' ], {queryParams: {realm: realmName}});
-          } else if (link.link.indexOf(Statics.SHIPPING) > -1) {
-            const target: string = link.target;
-            this.router.navigate([ Statics.PERMALINK + Statics.SHIPPING_URL ], {queryParams: {target}});
-          } else if (link.link.indexOf(Statics.MEDICALRECORD) > -1) {
-            const realmName: string = link.realm;
-            this.router.navigate([ link.link ], {queryParams: {realm: realmName}});
-          } else {
-            this.router.navigate([ link.link ]);
-          }
-          localStorage.removeItem(Statics.PERMALINK);
-        } else {
-          this.redirect();
-        }
+        this.authError.next(null);
       }
     });
   }
@@ -174,26 +160,19 @@ export class Auth {
   private handleError(error: any): Observable<any> {
     // In a real world app, we might use a remote logging infrastructure
     // We'd also dig deeper into the error to get a better message
-    const errMsg = (error.message) ? error.message :
-      error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+    let errMsg: string | null = null;
+
+    if(error.status === 500) {
+      errMsg = 'User is not registered in DSM. Please make sure you selected the correct account.';
+    } else {
+      errMsg = (error.message) ? error.message :
+        error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+    }
+
+    this.authError.next(errMsg);
+
     console.error(errMsg); // log to console instead
     return throwError(() => new Error(errMsg));
-  }
-
-  private redirect(): void {
-    if (this.role.allowedToViewMedicalRecords()) {
-      this.router.navigate([ Statics.MEDICALRECORD_DASHBOARD_URL ]);
-    } else {
-      if (this.role.allowedToHandleSamples() || this.role.allowToViewSampleLists()) {
-        this.router.navigate([ Statics.SHIPPING_DASHBOARD_URL ], {queryParams: {target: Statics.UNSENT}});
-      } else {
-        if (this.role.allowedToViewReceivingPage()) {
-          this.router.navigate([ Statics.SCAN_URL ], {queryParams: {scanReceived: true}});
-        } else {
-          this.router.navigate([ Statics.HOME_URL ]);
-        }
-      }
-    }
   }
 
   getRealmList(): void {
@@ -210,24 +189,21 @@ export class Auth {
           jsonData.forEach((val) => {
             this.realmList.push(NameValue.parse(val));
           });
+
+          const navigateUri = this.realmList.length > 1 ? this.PICK_STUDY_CONST : this.realmList[0].name;
+
+          navigateUri !== this.PICK_STUDY_CONST &&
+          localStorage.setItem(ComponentService.MENU_SELECTED_REALM, this.realmList[0].name);
+
+          this.router.navigate([navigateUri]);
         }
       );
     }
   }
 
   selectRealm(newValue): void {
-    if (newValue !== '') {
-      this.selectedRealm = newValue;
-      localStorage.setItem(ComponentService.MENU_SELECTED_REALM, this.selectedRealm);
-      let nav = this.router.url;
-      if (this.router.url.indexOf('?') > -1) {
-        nav = this.router.url.slice(0, this.router.url.indexOf('?'));
-      }
-      this.router.navigate([ nav ], {queryParams: {realm: this.selectedRealm}});
-    } else {
-      localStorage.removeItem(ComponentService.MENU_SELECTED_REALM);
-      this.router.navigate([ Statics.HOME_URL ]);
-    }
+    this.router.navigate([newValue]);
+    localStorage.setItem(ComponentService.MENU_SELECTED_REALM, newValue);
   }
 
   private setDssSession(dsmToken: string): void {

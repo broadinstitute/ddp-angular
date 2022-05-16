@@ -17,8 +17,12 @@ import { AppComponent } from './components/app/app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { Route } from './constants/Route';
 import { AppRoutingModule } from './app-routing.module';
-import {MatIconModule} from "@angular/material/icon";
 import {FooterComponent} from "./components/footer/footer.component";
+import { FaqSectionComponent } from './pages/faq-section/faq-section.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 
 declare const DDP_ENV: Record<string, any>;
 
@@ -81,20 +85,19 @@ const translateFactory =
 
       locationInitialized.then(() => {
         const locale = languageService.getAppLanguageCode();
-
         translateService.setDefaultLang(locale);
 
-        translateService.use(locale).subscribe(
-          () => {
+        translateService.use(locale).subscribe({
+          next: () => {
             loggingService.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
           },
-          err => {
+          error: err => {
             loggingService.logError(LOG_SOURCE, `Problem with '${locale}' language initialization:`, err);
           },
-          () => {
+          complete: () => {
             resolve(null);
           },
-        );
+        });
       });
     });
 
@@ -109,8 +112,18 @@ const translateFactory =
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    FaqSectionComponent,
   ],
-    imports: [BrowserModule, DdpModule, ToolkitModule, AppRoutingModule, MatIconModule],
+  imports: [
+    BrowserModule,
+    DdpModule,
+    ToolkitModule,
+    AppRoutingModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDividerModule
+  ],
   providers: [
     {
       provide: 'ddp.config',

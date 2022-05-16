@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 import { Filter } from '../filter-column/filter-column.model';
 import {Sort} from '../sort/sort.model';
 import { ViewFilter } from '../filter-column/models/view-filter.model';
-import { Abstraction } from '../medical-record-abstraction/medical-record-abstraction.model';
+import { Abstraction } from '../medical-record-abstraction/model/medical-record-abstraction.model';
 import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
 import { PDFModel } from '../pdf-download/pdf-download.model';
 import { Statics } from '../utils/statics';
@@ -20,7 +20,7 @@ import { SessionService } from './session.service';
 
 declare var DDP_ENV: any;
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class DSMService {
   public static UI = 'ui/';
   public static REALM = 'realm';

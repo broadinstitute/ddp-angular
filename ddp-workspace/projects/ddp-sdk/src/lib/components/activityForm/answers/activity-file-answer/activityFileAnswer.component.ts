@@ -55,9 +55,22 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         this.initUploadedFiles();
     }
 
-    onFilesSelected(files: Event): void {
+    onFilesSelected(event: Event): void {
+        const input = event.target as HTMLInputElement;
+
+        const files: File[] = Array.from(input.files);
+
+        this.uploadFiles(files);
+    }
+
+    onFilesDropped(fileList: FileList): void {
+        const files = Array.from(fileList);
+
+        this.uploadFiles(files);
+    }
+
+    uploadFiles(filesGroup: File[]): void {
         this.errorMessage = '';
-        const filesGroup: File[] = Array.from((files.target as HTMLInputElement).files);
         if (filesGroup && filesGroup.length > 0) {
             this.componentBusy.emit(true);
             this.fileUploadService.getUploadUrl(this.studyGuid, this.activityGuid, this.block.stableId, filesGroup)
