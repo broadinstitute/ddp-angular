@@ -17,7 +17,7 @@ import { AppComponent } from './components/app/app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { Route } from './constants/Route';
 import { AppRoutingModule } from './app-routing.module';
-import {FooterComponent} from "./components/footer/footer.component";
+import {FooterComponent} from './components/footer/footer.component';
 import { FaqSectionComponent } from './pages/faq-section/faq-section.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
