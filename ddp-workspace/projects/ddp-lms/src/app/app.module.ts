@@ -17,6 +17,8 @@ import { AppComponent } from './components/app/app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { Route } from './constants/Route';
 import { AppRoutingModule } from './app-routing.module';
+import {MatIconModule} from "@angular/material/icon";
+import {FooterComponent} from "./components/footer/footer.component";
 
 declare const DDP_ENV: Record<string, any>;
 
@@ -106,8 +108,9 @@ const translateFactory =
     ScientificImpactComponent,
     AppComponent,
     HeaderComponent,
+    FooterComponent,
   ],
-  imports: [BrowserModule, DdpModule, ToolkitModule, AppRoutingModule],
+    imports: [BrowserModule, DdpModule, ToolkitModule, AppRoutingModule, MatIconModule],
   providers: [
     {
       provide: 'ddp.config',
