@@ -22,4 +22,15 @@ describe('DecimalHelper', () => {
         expect(DecimalHelper.isDecimalAnswerType({value: 457, scale: 5})).toBeTrue();
         expect(DecimalHelper.isDecimalAnswerType({value: 0, scale: 0})).toBeTrue();
     });
+
+    it('should format decimal answer to display value (equation question cases)', () => {
+        expect(DecimalHelper.formatDecimalAnswer({value: 12345, scale: 4 }, 2, true)).toBe('1.23');
+        expect(DecimalHelper.formatDecimalAnswer({value: 56789, scale: 4 }, undefined, true)).toBe('5.6789');
+    });
+
+    it('should format decimal answer to display value (decimal question cases)', () => {
+        expect(DecimalHelper.formatDecimalAnswer({value: 12345, scale: 4 }, 2, false)).toBe('1.23');
+        expect(DecimalHelper.formatDecimalAnswer(56.789, 2, false)).toBe('56.78');
+        expect(DecimalHelper.formatDecimalAnswer({value: 12345, scale: 2 }, undefined, false)).toBe('123');
+    });
 });

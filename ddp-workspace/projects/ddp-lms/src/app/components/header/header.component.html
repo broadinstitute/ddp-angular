@@ -1,0 +1,66 @@
+<header class="header">
+  <nav class="header__nav">
+    <ul class="links-list">
+      <li class="links-list__item">
+        <a class="link" queryParamsHandling="merge" routerLinkActive="link--active" [routerLink]="Route.About">
+          {{ 'Header.Links.About' | translate }}
+        </a>
+      </li>
+
+      <li class="links-list__item">
+        <a
+          class="link"
+          queryParamsHandling="merge"
+          routerLinkActive="link--active"
+          [routerLink]="Route.HowToParticipate"
+        >
+          {{ 'Header.Links.Participation' | translate }}
+        </a>
+      </li>
+
+      <li class="links-list__item">
+        <a
+          class="link"
+          queryParamsHandling="merge"
+          routerLinkActive="link--active"
+          [routerLink]="Route.ScientificImpact"
+        >
+          {{ 'Header.Links.ScientificImpact' | translate }}
+        </a>
+      </li>
+
+      <li class="links-list__item">
+        <a class="link" queryParamsHandling="merge" routerLinkActive="link--active" [routerLink]="Route.FAQ">
+          {{ 'Header.Links.FAQ' | translate }}
+        </a>
+      </li>
+
+      <li class="links-list__item">
+        <button type="button" class="link">
+          {{ 'Header.Links.MailingList' | translate }}
+        </button>
+      </li>
+
+      <li class="links-list__item">
+        <a
+          class="link"
+          queryParamsHandling="merge"
+          routerLinkActive="link--active"
+          [routerLink]="Route.ForYourPhysician"
+        >
+          {{ 'Header.Links.ForYourPhysician' | translate }}
+        </a>
+      </li>
+
+      <li class="links-list__item ml-auto">
+        <ddp-sign-in-out></ddp-sign-in-out>
+      </li>
+
+      <li class="links-list__item">
+        <a class="button button_primary" queryParamsHandling="merge" [routerLink]="Route.CountMeIn">
+          {{ 'Header.Links.CountMeIn' | translate }}
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>

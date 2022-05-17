@@ -1,4 +1,5 @@
-import { AbstractionField } from '../medical-record-abstraction/medical-record-abstraction-field.model';
+import { AbstractionField } from '../medical-record-abstraction/model/medical-record-abstraction-field.model';
+import {Abstraction} from '../medical-record-abstraction/model/medical-record-abstraction.model';
 
 export class AbstractionGroup {
   constructor(
@@ -59,15 +60,17 @@ export class AbstractionWrapper {
     public abstraction: AbstractionGroup[],
     public review: AbstractionGroup[],
     public qc: AbstractionGroup[],
-    public finalFields: AbstractionGroup[]
+    public finalFields: AbstractionGroup[],
+    public abstractionActivities: Abstraction[]
   ) {
     this.abstraction = abstraction;
     this.review = review;
     this.qc = qc;
     this.finalFields = finalFields;
+    this.abstractionActivities = abstractionActivities;
   }
 
   static parse(json): AbstractionWrapper {
-    return new AbstractionWrapper(json.abstraction, json.review, json.qc, json.finalFields);
+    return new AbstractionWrapper(json.abstraction, json.review, json.qc, json.finalFields, json.abstractionActivities);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { ParticipantUpdateResultDialogComponent } from '../../dialogs/participant-update-result-dialog.component';
@@ -13,34 +13,20 @@ import { Statics } from '../../utils/statics';
   templateUrl: './add-family-member.component.html',
   styleUrls: ['./add-family-member.component.css']
 })
-export class AddFamilyMemberComponent implements OnInit {
+export class AddFamilyMemberComponent {
   familyMemberFirstName: string;
   familyMemberLastName: string;
   familyMemberSubjectId: string;
   chosenRelation: string;
   isCopyProbandInfo = false;
   probandDataId: number = this.getProbandDataId(this.data.participant.participantData);
-  isParticipantProbandEmpty: boolean = this.getProbandDataId(this.data.participant.participantData) == null;
+  isParticipantProbandEmpty: boolean = this.probandDataId == null;
   staticRelations = Statics.RELATIONS;
   isDataLoading = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {participant: any}, private dsmService: DSMService,
               private compService: ComponentService, private role: RoleService, public dialog: MatDialog,
               private dialogRef: MatDialogRef<AddFamilyMemberComponent>) { }
-
-  ngOnInit(): void {
-    this.dsmService.getParticipantDsmData(this.compService.getRealm(), this.getAltPidElseGuid()).subscribe(
-      data => {
-        if (data != null) {
-          const participantData = data;
-          this.isParticipantProbandEmpty = this.getProbandDataId(participantData) == null;
-          if (!this.isParticipantProbandEmpty) {
-            this.probandDataId = this.getProbandDataId(participantData);
-          }
-        }
-      }
-    );
-  }
 
   isFamilyMemberFieldsEmpty(): boolean {
     return !this.familyMemberFirstName || !this.familyMemberLastName || !this.familyMemberSubjectId || !this.chosenRelation;
@@ -103,8 +89,8 @@ export class AddFamilyMemberComponent implements OnInit {
     const probandData = pData
           .filter(p => p.data['MEMBER_TYPE'] === Statics.PARTICIPANT_PROBAND)
           .shift();
-    if (probandData != null && probandData.hasOwnProperty('dataId')) {
-      ddpParticipantDataId = probandData['dataId'];
+    if (probandData != null && probandData.hasOwnProperty('participantDataId')) {
+      ddpParticipantDataId = probandData['participantDataId'];
     }
     return ddpParticipantDataId;
   }

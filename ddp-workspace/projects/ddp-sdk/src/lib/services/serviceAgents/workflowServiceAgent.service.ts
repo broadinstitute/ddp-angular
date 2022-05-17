@@ -37,9 +37,9 @@ export class WorkflowServiceAgent extends UserServiceAgent<ActivityResponse> {
         return this.getObservable(`${baseUrl}?from=START`, null);
     }
 
-    public fromParticipantList(): Observable<ActivityResponse | null> {
+    public fromParticipantList(unrecoverableStatuses?: Array<number>): Observable<ActivityResponse | null> {
         const baseUrl = this.getBaseUrl();
-        return this.getObservable(`${baseUrl}?from=PARTICIPANT_LIST`, null);
+        return this.getObservable(`${baseUrl}?from=PARTICIPANT_LIST`, null, unrecoverableStatuses);
     }
 
     private getBaseUrl(): string {

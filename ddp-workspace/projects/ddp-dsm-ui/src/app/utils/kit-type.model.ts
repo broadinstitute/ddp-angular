@@ -3,14 +3,7 @@ export class KitType {
 
   constructor(public kitId: number, public name: string, public displayName: string,
               public manualSentTrack: boolean, public externalShipper: boolean, public uploadReasons: Array<string>
-  ) {
-    this.kitId = kitId;
-    this.name = name;
-    this.displayName = displayName;
-    this.manualSentTrack = manualSentTrack;
-    this.externalShipper = externalShipper;
-    this.uploadReasons = uploadReasons;
-  }
+  ) {}
 
   static parse(json): KitType {
     let jsonData: any[];

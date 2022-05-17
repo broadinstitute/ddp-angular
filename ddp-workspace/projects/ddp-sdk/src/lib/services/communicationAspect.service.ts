@@ -31,11 +31,7 @@ export class CommunicationAspect {
                     meta.result = of(null);
                 } else {
                     const responseData = JSON.parse(feedInfo.mock);
-                    if (feedInfo.mockedCode !== 200) {
-                        meta.result = throwError(responseData);
-                    } else {
-                        meta.result = of(JSON.parse(feedInfo.mock));
-                    }
+                    meta.result = (feedInfo.mockedCode !== 200) ? throwError(() => responseData) : of(responseData);
                 }
                 meta.prevent();
             }

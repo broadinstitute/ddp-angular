@@ -22,7 +22,7 @@ import { Tissue } from '../tissue/tissue.model';
 import { Value } from '../utils/value.model';
 import { Result } from '../utils/result.model';
 import { NameValue } from '../utils/name-value.model';
-import { Abstraction } from '../medical-record-abstraction/medical-record-abstraction.model';
+import { Abstraction } from '../medical-record-abstraction/model/medical-record-abstraction.model';
 import { AbstractionGroup, AbstractionWrapper } from '../abstraction-group/abstraction-group.model';
 import { PatchUtil } from '../utils/patch.model';
 import { ParticipantUpdateResultDialogComponent } from '../dialogs/participant-update-result-dialog.component';
@@ -190,12 +190,14 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
             medProvider.legacyGuid : medProvider.guid;
           return tmpId === medicalRecord.ddpInstitutionId;
         });
-        medicalRecord.type = medicalProvider.type;
-        medicalRecord.nameDDP = medicalProvider.physicianName;
-        medicalRecord.institutionDDP = medicalProvider.institutionName;
-        medicalRecord.streetAddressDDP = medicalProvider.street;
-        medicalRecord.cityDDP = medicalProvider.city;
-        medicalRecord.stateDDP = medicalProvider.state;
+        if (medicalProvider) {
+          medicalRecord.type = medicalProvider.type;
+          medicalRecord.nameDDP = medicalProvider.physicianName;
+          medicalRecord.institutionDDP = medicalProvider.institutionName;
+          medicalRecord.streetAddressDDP = medicalProvider.street;
+          medicalRecord.cityDDP = medicalProvider.city;
+          medicalRecord.stateDDP = medicalProvider.state;
+        }
       });
     }
   }
@@ -415,10 +417,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         if (mr.mrReceived) {
           this.counterReceived = this.counterReceived + 1;
         }
-        if (this.counterReceived > 0) {
-          if (this.hasRole().isAbstracter() || this.hasRole().isQC()) {
-            this.loadAbstractionValues();
-          }
+      }
+      if (this.counterReceived > 0) {
+        if (this.hasRole().isAbstracter() || this.hasRole().isQC()) {
+          this.loadAbstractionValues();
         }
       }
       if (this.participant.participant != null) {
@@ -836,7 +838,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   private loadAbstractionValues(): void {
     if (this.participant.participant != null && this.participant.participant.ddpParticipantId != null) {
-      // this.summaryFields = [];
       this.loadingParticipantPage = true;
       const ddpParticipantId = this.participant.participant.ddpParticipantId;
       this.dsmService.getAbstractionValues(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), ddpParticipantId).subscribe({
@@ -872,6 +873,20 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
                   this.qcFields.push(abstractionFieldValue);
                 });
               }
+              if (jsonData.abstractionActivities != null) {
+                jsonData.abstractionActivities.forEach((val) => {
+                  const a = Abstraction.parse(val);
+                  if (a.activity === 'abstraction') {
+                    this.participant.abstraction = a;
+                  } else if (a.activity === 'review') {
+                    this.participant.review = a;
+                  } else if (a.activity === 'qc') {
+                    this.participant.qc = a;
+                  } else if (a.activity === 'final') {
+                    this.participant.finalA = a;
+                  }
+                });
+              }
             }
           }
           this.loadingParticipantPage = false;
@@ -903,6 +918,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
             if (result.code === 200 && result.body != null) {
               const jsonData: any | any[] = JSON.parse(result.body);
               const abstraction: Abstraction = Abstraction.parse(jsonData);
+              if (abstraction.lastChanged === null) {
+                abstraction.lastChanged = 0;
+              }
               this.participant[abstraction.activity] = abstraction;
               this.activeTab = abstraction.activity;
               if (this.participant.abstractionActivities != null) {
@@ -1288,7 +1306,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       this.participant != null && this.participant.participantData != null
       && fieldTypeId != null && fieldSetting.columnName != null && dataId != null
     ) {
-      let participantData: ParticipantData = this.participant.participantData.find(pData => pData.dataId === dataId);
+      let participantData: ParticipantData = this.participant.participantData.find(pData => pData.participantDataId === dataId);
       if (participantData == null) {
         const data: { [ k: string ]: any } = {};
         data[fieldSetting.columnName] = value;
@@ -1335,7 +1353,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           participantId = this.participant.data.profile[ 'legacyAltPid' ];
         }
         const patch = {
-          id: participantData.dataId,
+          id: participantData.participantDataId,
           parent: 'participantDataId',
           parentId: participantId,
           user: this.role.userMail(),
@@ -1352,7 +1370,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
             if (data) {
             if (data['participantDataId']) {
               if (participantData != null) {
-                participantData.dataId = data['participantDataId'];
+                participantData.participantDataId = data['participantDataId'];
                 }
               }
             }
@@ -1404,7 +1422,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       const participantDataOfFieldSetting = this.participant.participantData
         .find(participantData => participantData.fieldTypeId === fieldSetting.fieldType);
       if (participantDataOfFieldSetting) {
-        return participantDataOfFieldSetting.dataId;
+        return participantDataOfFieldSetting.participantDataId;
       }
     }
     return '';
@@ -1417,12 +1435,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   }
   //TODO remove before final merge, for testing only
   testGetActivity(participantId: string): void {
-    this.dsmService.testDSSGetActivity(participantId).subscribe(
-      data => {
-        console.log(data);
-      },
-      err =>{}
-    );
-
+    this.dsmService.testDSSGetActivity(participantId).subscribe(data => {
+      console.log(data);
+    });
   }
 }

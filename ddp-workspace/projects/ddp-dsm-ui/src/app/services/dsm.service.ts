@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { throwError as observableThrowError, Observable } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { Filter } from '../filter-column/filter-column.model';
 import {Sort} from '../sort/sort.model';
 import { ViewFilter } from '../filter-column/models/view-filter.model';
-import { Abstraction } from '../medical-record-abstraction/medical-record-abstraction.model';
+import { Abstraction } from '../medical-record-abstraction/model/medical-record-abstraction.model';
 import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
 import { PDFModel } from '../pdf-download/pdf-download.model';
 import { Statics } from '../utils/statics';
@@ -20,7 +20,7 @@ import { SessionService } from './session.service';
 
 declare var DDP_ENV: any;
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class DSMService {
   public static UI = 'ui/';
   public static REALM = 'realm';
@@ -213,7 +213,8 @@ export class DSMService {
     );
   }
 
-  public downloadParticipantData(realm: string, parent: string, columns: {}, json: ViewFilter, filterQuery: string, sortBy?: Sort):
+  public downloadParticipantData(realm: string, jsonPatch: string, parent: string, columns: {}, json: ViewFilter,
+                                 filterQuery: string, sortBy?: Sort):
     Observable<any> {
     const viewFilterCopy = this.getFilter(json);
     const url = this.baseUrl + DSMService.UI + 'participantList';
@@ -232,7 +233,8 @@ export class DSMService {
     } else if (viewFilterCopy != null) {
       map.push({name: 'filters', value: JSON.stringify(viewFilterCopy.filters)});
     }
-    const body = {columnNames: columns};
+    const filters = JSON.parse(jsonPatch);
+    const body = {columnNames: columns, ...filters};
     return this.http.post(url, JSON.stringify(body), this.buildQueryCsvBlobHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );
@@ -889,6 +891,7 @@ export class DSMService {
   public getAbstractionValues(realm: string, ddpParticipantId: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'abstraction';
     const json = {
+      userId: this.role.userID(),
       ddpParticipantId,
       realm
     };
@@ -929,7 +932,7 @@ export class DSMService {
 
   private handleError(error: any): Observable<any> {
     this.logger.logError('ERROR: ' + JSON.stringify(error));
-    return observableThrowError(error);
+    return throwError(() => error);
   }
 
   private buildHeader(): any {

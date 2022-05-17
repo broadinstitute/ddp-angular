@@ -125,7 +125,7 @@ export class ActivityPicklistRemoteAutoCompleteOptionsComponent
     ): ActivityPicklistOption {
         return {
             ...otherOption,
-            optionLabel: this.searchValue$.value.toLocaleUpperCase(),
+            optionLabel: this.searchValue$.value.trim(),
         };
     }
 

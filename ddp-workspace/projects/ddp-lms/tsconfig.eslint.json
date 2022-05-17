@@ -1,0 +1,7 @@
+{
+  "extends": "../../base.json",
+  "include": [
+    "src/**/*.ts",
+    "e2e/**/*.ts"
+  ]
+}

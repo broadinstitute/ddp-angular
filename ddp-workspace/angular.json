@@ -3206,6 +3206,150 @@
         }
       }
     },
+    "ddp-lms": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/ddp-lms",
+      "sourceRoot": "projects/ddp-lms/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ddp-lms",
+            "index": "projects/ddp-lms/src/index.html",
+            "main": "projects/ddp-lms/src/main.ts",
+            "polyfills": "projects/ddp-lms/src/polyfills.ts",
+            "tsConfig": "projects/ddp-lms/tsconfig.app.json",
+            "assets": [
+              "projects/ddp-lms/src/favicon.ico",
+              "projects/ddp-lms/src/favicon-alert.ico",
+              "projects/ddp-lms/src/assets",
+              {
+                "glob": "pepperConfig.js",
+                "input": "projects/ddp-lms/output-config/",
+                "output": "assets/config"
+              }
+            ],
+            "styles": [
+              "projects/ddp-lms/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/stackdriver-errors-js/dist/stackdriver-errors-concat.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "stackdriver-errors-js"
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ddp-lms/src/environments/environment.ts",
+                  "with": "projects/ddp-lms/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "25kb"
+                }
+              ]
+            },
+            "es5": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "25kb"
+                }
+              ],
+              "tsConfig": "projects/ddp-lms/tsconfig.es5.json"
+            }
+          },
+          "defaultConfiguration": ""
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ddp-lms:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ddp-lms:build:production"
+            },
+            "es5": {
+              "browserTarget": "ddp-lms:build:es5"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ddp-lms:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ddp-lms/src/test.ts",
+            "polyfills": "projects/ddp-lms/src/polyfills.ts",
+            "tsConfig": "projects/ddp-lms/tsconfig.spec.json",
+            "karmaConfig": "projects/ddp-lms/karma.conf.js",
+            "assets": [
+              "projects/ddp-lms/src/favicon.ico",
+              "projects/ddp-lms/src/assets"
+            ],
+            "styles": [
+              "projects/ddp-lms/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ddp-lms/**/*.ts",
+              "projects/ddp-lms/**/*.html"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ddp-lms/e2e/protractor.conf.js",
+            "devServerTarget": "ddp-lms:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ddp-lms:serve:production"
+            }
+          }
+        }
+      }
+    },
     "ddp-fon": {
       "projectType": "application",
       "schematics": {},

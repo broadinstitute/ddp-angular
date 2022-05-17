@@ -12,9 +12,9 @@ references:
       - *npm_cache_key
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-    "basil dsm-ui osteo brain angio mbc testboston mpc prion atcp rarex rgp esc cgc circadia pancan singular brugada fon"
+    "basil dsm-ui osteo brain angio mbc testboston mpc prion atcp rarex rgp esc cgc circadia pancan singular brugada lms fon"
   study_guids: &study_guids
-    "basil NA CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc circadia cmi-pancan singular brugada fon"
+    "basil NA CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc circadia cmi-pancan singular brugada cmi-lms fon"
 
 # Container for all the builds
 executors:
@@ -519,6 +519,8 @@ jobs:
       - conditionally-launch-build-and-store:
           study_key: brugada
       - conditionally-launch-build-and-store:
+          study_key: lms
+      - conditionally-launch-build-and-store:
           study_key: fon
 
   app-build-and-store-job:
@@ -713,6 +715,9 @@ workflows:
           study_key: brugada
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
+          study_key: lms
+      - deploy-stored-build-job:
+          <<: *deploy_branch_filters
           study_key: fon
 
   nightly:
@@ -775,6 +780,9 @@ workflows:
       - build-and-deploy-job:
           name: brugada-nightly
           study_key: brugada
+      - build-and-deploy-job:
+          name: lms-nightly
+          study_key: lms
       - build-and-deploy-job:
           name: fon-nightly
           study_key: fon

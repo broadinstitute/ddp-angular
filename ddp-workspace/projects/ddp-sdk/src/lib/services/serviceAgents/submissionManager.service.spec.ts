@@ -223,7 +223,7 @@ describe('SubmissionManagerTest', () => {
                 // this is where we generate the throwError for our test case
                 if (activityGuid === activityGuidThatWillThrow && errorCount++ < numberOfErrorsToGenerate) {
                     console.log('Boom!!!');
-                    return throwError(new HttpErrorResponse({status: 500}));
+                    return throwError(() => new HttpErrorResponse({status: 500}));
                 } else {
                     console.log(`activityGuid ${activityGuid} is executing now`);
                     return timer(100);

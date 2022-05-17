@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { forkJoin, Observable, of } from 'rxjs';
+import { EMPTY, forkJoin, Observable, of } from 'rxjs';
 import { Route } from '../../../constants/route';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
@@ -36,8 +36,7 @@ interface Participant {
   styleUrls: ['./participant-list.component.scss'],
 })
 export class ParticipantsListComponent implements OnInit {
-  isAddParticipantBtnDisabled = false;
-  isAddMyselfBtnDisabled = false;
+  isEnrollBtnDisabled = false;
   isOperatorEnrolled = false;
   loading = false;
   messages: AnnouncementMessage[] = [];
@@ -150,32 +149,67 @@ export class ParticipantsListComponent implements OnInit {
   }
 
   onAddParticipantClick(): void {
-    this.isAddParticipantBtnDisabled = true;
+    this.isEnrollBtnDisabled = true;
+    let userGuid;
 
     this.governedParticipantsService
       .addParticipant(this.config.studyGuid)
       .pipe(
         take(1),
+        tap(participantGuid => userGuid = participantGuid),
         tap(participantGuid => this.sessionService.setParticipant(participantGuid)),
-        mergeMap(() => this.workflowService.fromParticipantList()),
+        mergeMap(() => this.workflowService.fromParticipantList([401, 404, 500])),
+        catchError(() => {
+          if (userGuid) {
+            this.deleteParticipant(userGuid).subscribe(() => this.isEnrollBtnDisabled = false);
+          } else {
+            this.isEnrollBtnDisabled = false;
+          }
+
+          return EMPTY;
+        })
+      )
+      .subscribe(response => {
+        this.isEnrollBtnDisabled = false;
+        this.setCurrentActivity({ instanceGuid: response.instanceGuid } as ActivityInstance);
+        this.redirectToSurvey(response.instanceGuid);
+      });
+  }
+
+  onAddDependentClick(): void {
+    this.isEnrollBtnDisabled = true;
+
+    this.governedParticipantsService
+      .addParticipant(this.config.studyGuid)
+      .pipe(
+        take(1),
+        tap(participantGuid => this.sessionService.setParticipant(participantGuid))
       )
       .subscribe({
-        next: response => {
-          this.isAddParticipantBtnDisabled = false;
-
-          this.setCurrentActivity({
-            instanceGuid: response.instanceGuid,
-          } as ActivityInstance);
-          this.redirectToSurvey(response.instanceGuid);
+        next: participantGuid => {
+          this.activityService
+            .createInstance(this.config.studyGuid, 'ADD_PARTICIPANT_DEPENDENT', null, { throwError: true })
+            .pipe(
+              take(1),
+              catchError(() => {
+                this.deleteParticipant(participantGuid).subscribe(() => this.isEnrollBtnDisabled = false);
+                return EMPTY;
+              })
+            )
+            .subscribe(activity => {
+              this.isEnrollBtnDisabled = false;
+              this.setCurrentActivity(activity as ActivityInstance);
+              this.redirectToSurvey(activity.instanceGuid);
+            });
         },
         error: () => {
-          this.isAddParticipantBtnDisabled = false;
+          this.isEnrollBtnDisabled = false;
         },
       });
   }
 
   onAddMyselfClick(): void {
-    this.isAddMyselfBtnDisabled = true;
+    this.isEnrollBtnDisabled = true;
 
     this.sessionService.setParticipant(null);
 
@@ -184,7 +218,7 @@ export class ParticipantsListComponent implements OnInit {
       .pipe(filter(res => !!res))
       .subscribe({
         next: res => {
-          this.isAddMyselfBtnDisabled = false;
+          this.isEnrollBtnDisabled = false;
 
           if (res.instanceGuid) {
             this.setCurrentActivity({
@@ -194,7 +228,7 @@ export class ParticipantsListComponent implements OnInit {
           }
         },
         error: () => {
-          this.isAddMyselfBtnDisabled = false;
+          this.isEnrollBtnDisabled = false;
         },
       });
   }
@@ -365,18 +399,22 @@ export class ParticipantsListComponent implements OnInit {
   private hasOnlyAddParticipantActivity(activities: ActivityInstance[]): boolean {
     return (
       activities.length === 1 &&
-      [ActivityCode.AddParticipantSelf, ActivityCode.AddParticipantParental].includes(
-        activities[0].activityCode as ActivityCode,
-      )
+      [
+        ActivityCode.AddParticipantSelf,
+        ActivityCode.AddParticipantParental,
+        ActivityCode.AddParticipantDependent,
+      ].includes(activities[0].activityCode as ActivityCode)
     );
   }
 
   private filterOutAddParticipant(activities: ActivityInstance[]): ActivityInstance[] {
     return activities.filter(
       activity =>
-        ![ActivityCode.AddParticipantSelf, ActivityCode.AddParticipantParental].includes(
-          activity.activityCode as ActivityCode,
-        ),
+        ![
+          ActivityCode.AddParticipantSelf,
+          ActivityCode.AddParticipantParental,
+          ActivityCode.AddParticipantDependent,
+        ].includes(activity.activityCode as ActivityCode),
     );
   }
 }

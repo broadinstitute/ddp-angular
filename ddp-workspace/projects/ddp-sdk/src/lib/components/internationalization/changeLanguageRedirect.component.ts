@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { Observable, switchMap, zip } from 'rxjs';
+import { catchError, finalize, map, take, tap } from 'rxjs/operators';
+
 import { StudyLanguage } from '../../models/studyLanguage';
 import { ConfigurationService } from '../../services/configuration.service';
 import { LanguageService } from '../../services/internationalization/languageService.service';
@@ -16,12 +17,7 @@ export const DESTINATION_QUERY_PARAM = 'destination';
   template: `<ng-container></ng-container>`
 })
 export class ChangeLanguageRedirectComponent implements OnInit {
-  private lang: string = null;
-  private supportedLanguages: StudyLanguage[] = null;
   private readonly LOG_SOURCE = 'ChangeLanguageRedirectComponent';
-
-  // The destination to redirect to, relative to the main site
-  private dest: string = null;
 
   constructor(
     private languageService: LanguageService,
@@ -32,61 +28,57 @@ export class ChangeLanguageRedirectComponent implements OnInit {
     @Inject('ddp.config') private config: ConfigurationService) {
   }
 
-  // TODO: get rid of Promises in the component (replace with Observables)
   public ngOnInit(): void {
     // Get the specified language and specified destination and store for later
-    const queryParamPromise: Promise<void> = this.getQueryParamInfo();
+    const queryParams$: Observable<any> = this.route.queryParamMap.pipe(
+      map((queryParams) => ({
+        language: queryParams.get(LANGUAGE_QUERY_PARAM),
+        destination: queryParams.get(DESTINATION_QUERY_PARAM)
+      })),
+      tap(({language, destination}) => {
+        if (!language) {
+          this.logger.logError(this.LOG_SOURCE, 'Missing language query parameter!');
+        }
+        if (!destination) {
+          this.logger.logError(this.LOG_SOURCE, 'Missing destination query parameter!');
+        }
+      })
+    );
 
-    // Get the study's configured languages and store for later
-    const supportedLanguagesPromise: Promise<void> = this.getSupportedLanguagesPromise();
+    // Get the study's configured languages codes and store for later
+    const supportedLanguagesCodes$: Observable<string[]> = this.languageServiceAgent.getConfiguredLanguages(this.config.studyGuid)
+      .pipe(
+        map((supportedLanguages: StudyLanguage[]) => supportedLanguages.map(lang => lang.languageCode))
+      );
+
+    let destinationFromQuery: string;
 
     // Attempt to change language and redirect
-    Promise.all([queryParamPromise, supportedLanguagesPromise])
-      .then(() => {
+    zip(queryParams$, supportedLanguagesCodes$).pipe(
+      tap(([queryParams, supportedLanguagesCodes]) => {
         // Add the configured languages
-        this.languageService.addLanguages(this.supportedLanguages.map(x => x.languageCode));
-
-        // Try to switch to the specified language
-        const langChangeObservable: Observable<any> = this.languageService.changeLanguageObservable(this.lang);
-        langChangeObservable.subscribe({
-          next: () => {
-            this.logger.logEvent(this.LOG_SOURCE, `Changed language to ${this.languageService.getCurrentLanguage()}`);
-          },
-          error: (err) => {
-            this.logger.logError(this.LOG_SOURCE, `Could not change language to ${this.lang}:`, err);
-          },
-          complete: () => {
-            // Do the redirect
-            this.router.navigate([this.dest], {relativeTo: this.route.root});
-          }
-        });
-      });
-  }
-
-  private getSupportedLanguagesPromise(): Promise<void> {
-    return this.getPromiseFromObservable(this.languageServiceAgent.getConfiguredLanguages(this.config.studyGuid),
-      (languages => { this.supportedLanguages = languages; }));
-  }
-
-  private getQueryParamInfo(): Promise<void> {
-    return this.getPromiseFromObservable(this.route.queryParamMap, (queryParams => {
-      if (queryParams.has(LANGUAGE_QUERY_PARAM)) {
-        this.lang = queryParams.get(LANGUAGE_QUERY_PARAM);
-      } else {
-        this.logger.logError(this.LOG_SOURCE, 'Missing language query parameter!');
+        this.languageService.addLanguages(supportedLanguagesCodes);
+      }),
+      switchMap(([{language, destination}, supportedLanguagesCodes]) => {
+        destinationFromQuery = destination;
+        return this.languageService.changeLanguageObservable(language).pipe(
+          catchError(err => {
+            throw new Error(`Could not change language to ${language}: ` + JSON.stringify(err));
+          })
+        );
+      }),
+      take(1),
+      finalize(() => {
+        // Do the redirect
+        this.router.navigate([destinationFromQuery], {relativeTo: this.route.root});
+      })
+    ).subscribe({
+      next: () => {
+        this.logger.logEvent(this.LOG_SOURCE, `Changed language to ${this.languageService.getCurrentLanguage()}`);
+      },
+      error: err => {
+        this.logger.logError(this.LOG_SOURCE, err);
       }
-
-      if (queryParams.has(DESTINATION_QUERY_PARAM)) {
-        this.dest = queryParams.get(DESTINATION_QUERY_PARAM);
-      } else {
-        this.logger.logError(this.LOG_SOURCE, 'Missing destination query parameter!');
-      }
-    }));
-  }
-
-  private getPromiseFromObservable(obs: Observable<any>, callback: (obsResult: any) => any): Promise<void> {
-    // Return a promise that calls the provided callback with the first value returned from the observable
-    return obs.pipe(take(1))
-      .pipe(map(x => callback(x))).toPromise();
+    });
   }
 }

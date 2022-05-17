@@ -1,6 +1,6 @@
 import { AbstractionGroup } from '../abstraction-group/abstraction-group.model';
 import {ActivityDefinition} from '../activity-data/models/activity-definition.model';
-import { Abstraction } from '../medical-record-abstraction/medical-record-abstraction.model';
+import { Abstraction } from '../medical-record-abstraction/model/medical-record-abstraction.model';
 import { MedicalRecord } from '../medical-record/medical-record.model';
 import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
 import {Utils} from '../utils/utils';
@@ -85,26 +85,10 @@ export class Participant {
       });
     }
 
-    let abstraction: Abstraction = new Abstraction(null, null, null, 'abstraction', 'not_started', null, null, null);
-    let review: Abstraction = new Abstraction(null, null, null, 'review', 'not_started', null, null, null);
-    let qc: Abstraction = new Abstraction(null, null, null, 'qc', 'not_started', null, null, null);
-    let finalA: Abstraction = new Abstraction(null, null, null, 'final', 'not_started', null, null, null);
-
-    jsonData = json.abstractionActivities;
-    if (jsonData != null) {
-      jsonData.forEach((val) => {
-        const a = Abstraction.parse(val);
-        if (a.activity === 'abstraction') {
-          abstraction = a;
-        } else if (a.activity === 'review') {
-          review = a;
-        } else if (a.activity === 'qc') {
-          qc = a;
-        } else if (a.activity === 'final') {
-          finalA = a;
-        }
-      });
-    }
+    const abstraction: Abstraction = new Abstraction(null, null, null, 'abstraction', 'not_started', null, null, null);
+    const review: Abstraction = new Abstraction(null, null, null, 'review', 'not_started', null, null, null);
+    const qc: Abstraction = new Abstraction(null, null, null, 'qc', 'not_started', null, null, null);
+    const finalA: Abstraction = new Abstraction(null, null, null, 'final', 'not_started', null, null, null);
 
     let participant: ParticipantDSMInformation = null;
     jsonData = json.participant;

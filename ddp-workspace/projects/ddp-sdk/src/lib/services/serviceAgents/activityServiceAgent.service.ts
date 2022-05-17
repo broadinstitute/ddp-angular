@@ -61,9 +61,9 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
             mergeMap((guidsObj: GuidsObject) => getActivity$(guidsObj)),
             catchError(e => {
                 if (e.error && e.error.code && e.error.code === 'ACTIVITY_NOT_FOUND') {
-                    return throwError('ACTIVITY_NOT_FOUND');
+                    throw new Error('ACTIVITY_NOT_FOUND');
                 }
-                return throwError(e);
+                return throwError(() => e);
             }),
             map(x => {
                 if (x == null) {
@@ -112,7 +112,8 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
     public createInstance(
       studyGuid: string,
       activityCode: string,
-      parentInstanceGuid?: string
+      parentInstanceGuid?: string,
+      options?: { headerOptions?: any; throwError?: boolean }
     ): Observable<CreateActivityInstanceResponse | null> {
         const baseUrl = this.getBaseUrl(studyGuid);
         let body: any = {activityCode};
@@ -120,7 +121,7 @@ export class ActivityServiceAgent extends UserServiceAgent<any> {
             body = {...body, parentInstanceGuid};
         }
 
-        return this.postObservable(baseUrl, body).pipe(
+        return this.postObservable(baseUrl, body, options?.headerOptions, options?.throwError).pipe(
             map(x => !!x ? x.body as CreateActivityInstanceResponse : null)
         );
     }

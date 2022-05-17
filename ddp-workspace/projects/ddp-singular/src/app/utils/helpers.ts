@@ -8,7 +8,8 @@ import { RenderActivity, RenderActivityKey } from './types';
 export const isConsentActivity = (activityCode: string): boolean => (
     activityCode === ActivityCode.ConsentSelf ||
     activityCode === ActivityCode.ConsentAssent ||
-    activityCode === ActivityCode.ConsentParental
+    activityCode === ActivityCode.ConsentParental ||
+    activityCode === ActivityCode.ConsentDependent
   );
 
 export const isMedicalRecordReleaseActivity = (activityCode: string): boolean =>
@@ -16,7 +17,10 @@ export const isMedicalRecordReleaseActivity = (activityCode: string): boolean =>
 
 
 const getRenderActivityKeyByActivityCode = (activityCode: ActivityCode): RenderActivityKey => {
-  if ([ActivityCode.ConsentSelf, ActivityCode.ConsentParental, ActivityCode.ConsentAssent].includes(activityCode)) {
+  if ([ActivityCode.ConsentSelf,
+       ActivityCode.ConsentParental,
+       ActivityCode.ConsentAssent,
+       ActivityCode.ConsentDependent].includes(activityCode)) {
     return RenderActivityKey.Consent;
   }
 
@@ -63,10 +67,10 @@ export const getRenderActivities = (instanceGuid: string, activities: ActivityIn
     },
   };
 
-  const isSelf = activities.some(a => a.activityCode === ActivityCode.AddParticipantSelf);
+  const isChild = activities.some(a => a.activityCode === ActivityCode.ConsentParental);
 
   renderActivitiesMap[RenderActivityKey.About] = {
-    i18nKey: isSelf ? 'AboutMe' : 'AboutMyChild',
+    i18nKey: isChild ? 'AboutMyChild' : 'AboutMe',
   };
 
   /**
@@ -108,7 +112,9 @@ export const getRenderActivities = (instanceGuid: string, activities: ActivityIn
      * Skip "Add Participant" activity
      */
     if (
-      [ActivityCode.AddParticipantSelf, ActivityCode.AddParticipantParental].includes(a.activityCode as ActivityCode)
+      [ActivityCode.AddParticipantSelf,
+       ActivityCode.AddParticipantParental,
+       ActivityCode.AddParticipantDependent].includes(a.activityCode as ActivityCode)
     ) {
       return;
     }

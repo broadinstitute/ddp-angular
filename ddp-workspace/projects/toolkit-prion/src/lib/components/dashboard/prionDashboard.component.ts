@@ -47,6 +47,7 @@ const STATIC_ACTIVITIES: StaticActivity[] = [
                 </ng-container>
                 <section class="PageContent-section">
                   <ddp-dashboard [studyGuid]="studyGuid"
+                                 [activities]="userActivities$ | async"
                                  (open)="navigate($event)"
                                  (loadedEvent)="loadStaticActivities($event)">
                   </ddp-dashboard>

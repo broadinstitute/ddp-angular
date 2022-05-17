@@ -8,7 +8,6 @@ import { DSMService } from '../services/dsm.service';
 import { ComponentService } from '../services/component.service';
 import { Lookup } from '../lookup/lookup.model';
 import { Statics } from '../utils/statics';
-import { Result } from '../utils/result.model';
 import { Auth } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { NameValue } from '../utils/name-value.model';
@@ -54,13 +53,9 @@ export class TissueComponent {
     return this.compService;
   }
 
-  public setTissueSite(object: any): void {
+  public setTissueSite(object: Lookup | string): void {
     if (object != null) {
-      if (event instanceof MouseEvent) {
-        this.tissue.tissueSite = object.field1.value;
-      } else {
-        this.tissue.tissueSite = object;
-      }
+      this.tissue.tissueSite = object instanceof Lookup ? object.field1.value : object;
       this.valueChanged(this.tissue.tissueSite, 'tissueSite');
     }
   }

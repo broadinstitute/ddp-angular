@@ -1,0 +1,122 @@
+@import '../../../../../ddp-pancan/src/styles/variables.scss';
+
+.scientific {
+    text-align: left;
+
+    .title {
+        margin: 0 auto 5.625rem;
+        text-align: center;
+        padding: 3.2rem 0;
+        background-color: $accent-color-orange;
+    }
+
+    .scientific-title {
+        margin: 0 auto 5.625rem;
+        text-align: center;
+        padding: 3.2rem 0;
+        background-color: $accent-color-orange;
+    }
+
+    .column {
+        margin: 0 auto 5.625rem;
+        text-align: center;
+        padding: 3.2rem 0;
+    }
+
+    &:nth-of-type(odd) {
+        padding-bottom: 7.94rem;
+        flex-direction: row;
+    }
+
+}
+
+.image_title {
+    margin: auto;
+    margin-left: 20px;
+    margin-right: 20px;
+    display: flex;
+}
+
+.section {
+    padding: 0 1.5rem 9.94rem 1.5rem;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    gap: 8rem;
+
+    &:nth-of-type(odd) {
+        padding-bottom: 7.94rem;
+        flex-direction: row;
+    }
+
+    &__data {
+        max-width: 700px;
+    }
+
+    &__label {
+        font-size: 1.13rem;
+        margin-right: 1rem;
+    }
+
+    &__time {
+        mat-icon {
+            vertical-align: top;
+            margin-right: 8px;
+        }
+    }
+
+    &__title {
+        margin: 1rem 0 1.13rem 0;
+        font-family: $primary-font-medium;
+        font-size: 2rem;
+        line-height: 3.625rem;
+        font-weight: normal;
+        overflow: scroll;
+        white-space:nowrap;
+    }
+
+    &__text {
+        margin: 0.5rem 0 2.13rem;
+        font-size: 1.5rem;
+        line-height: 2.125rem;
+    }
+
+    &__btn {
+        font-size: 1.13rem;
+        padding: 1rem 2rem;
+        line-height: 22px;
+        font-family: $primary-font-medium;
+        white-space: normal;
+    }
+
+    &__image {
+        display: flex;
+        align-items: center;
+
+        .image {
+            width: 21.25rem;
+            height: 18.75rem;
+        }
+    }
+}
+
+.column {
+	overflow: scroll;
+	white-space:nowrap;
+  }
+
+.image_item {
+    width:300px;
+  }
+
+
+@media screen and (max-width: $tablet-breakpoint) {
+        .scientific-title {
+            align-items: center;
+            gap: 3rem;
+
+            &:nth-of-type(n) {
+                flex-direction: column-reverse;
+            }
+        }
+}

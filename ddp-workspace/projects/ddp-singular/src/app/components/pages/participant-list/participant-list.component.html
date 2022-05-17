@@ -22,7 +22,7 @@
               *ngIf="!isOperatorEnrolled"
               class="button button--primary"
               (click)="onAddMyselfClick()"
-              [disabled]="isAddMyselfBtnDisabled"
+              [disabled]="isEnrollBtnDisabled"
           >
               <div class="user-container">
                   <img class="user" src="/assets/images/user.png" alt="user icon">
@@ -36,12 +36,24 @@
 
           </button>
 
-          <button class="button button--primary" (click)="onAddParticipantClick()" [disabled]="isAddParticipantBtnDisabled">
+          <button class="button button--primary" (click)="onAddParticipantClick()" [disabled]="isEnrollBtnDisabled">
               <div class="users-container">
                   <img class="user" src="/assets/images/user-friends.png" alt="users icon">
               </div>
               <div class="text-container">
-                  <p class="bolder">Enroll my child/dependent</p>
+                  <p class="bolder">Enroll my child</p>
+              </div>
+              <div class="next-container">
+                  <ng-container *ngTemplateOutlet="chevronRightSvg"></ng-container>
+              </div>
+          </button>
+
+          <button class="button button--primary" (click)="onAddDependentClick()" [disabled]="isEnrollBtnDisabled">
+              <div class="users-container">
+                  <img class="user" src="/assets/images/user-friends.png" alt="users icon">
+              </div>
+              <div class="text-container">
+                  <p class="bolder">Enroll my adult dependent</p>
               </div>
               <div class="next-container">
                   <ng-container *ngTemplateOutlet="chevronRightSvg"></ng-container>
