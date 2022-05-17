@@ -14,14 +14,10 @@ import { DSMService } from '../../services/dsm.service';
 export class CohortTagComponent implements OnInit {
 
   @Input() ddpParticipantId: string;
+  @Input() tags: CohortTag[];
 
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  tags: CohortTag[] = [
-    new CohortTag('Lemon', 'GUID1', 1),
-    new CohortTag('Apple', 'GUID2', 2),
-    new CohortTag('Banana', 'GUID3', 3)
-  ];
 
   
   constructor(private compService: ComponentService, private dsmService: DSMService) { }
@@ -34,16 +30,16 @@ export class CohortTagComponent implements OnInit {
 
     if (value) {
       const newTag = new CohortTag(value, this.ddpParticipantId);
-      this.tags.push(newTag);
-      this.dsmService.createCohortTag(JSON.stringify(newTag), this.compService.getRealm()).subscribe(data => {
-
+      this.dsmService.createCohortTag(JSON.stringify(newTag), this.compService.getRealm()).subscribe(cohortTagId => {
+        newTag.cohortTagId = parseInt(cohortTagId);
+        this.tags.push(newTag);
+        // Clear the input value
+        event.chipInput!.clear();
       }, err => {
-
+        
       });
     }
 
-    // Clear the input value
-    event.chipInput!.clear();
   }
 
   remove(tagToRemove: CohortTag): void {
@@ -56,6 +52,6 @@ export class CohortTagComponent implements OnInit {
 
 
   private isTheSameTag(tagToRemove: CohortTag, tag: CohortTag): unknown {
-    return tagToRemove.tagName === tag.tagName;
+    return tagToRemove.cohortTagName === tag.cohortTagName;
   }
 }

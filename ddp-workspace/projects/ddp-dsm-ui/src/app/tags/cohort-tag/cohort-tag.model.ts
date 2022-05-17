@@ -1,6 +1,6 @@
 export class CohortTag {
     
-    constructor(public tagName: string, public ddpParticipantId: string, public id?: number) {
+    constructor(public cohortTagName: string, public ddpParticipantId: string, public cohortTagId?: number) {
 
     }
 
