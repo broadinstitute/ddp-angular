@@ -1,0 +1,63 @@
+<div class="mailing-list-modal">
+  <h1 class="title">
+    {{ 'App.MailingList.Title' | translate }}
+  </h1>
+
+  <button mat-icon-button class="close-btn" (click)="onClose()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <div mat-dialog-content>
+    <p class="paragraph">
+      {{ 'App.MailingList.Paragraph' | translate }}
+    </p>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <fieldset class="form__fieldset">
+      <mat-form-field>
+        <mat-label>{{ 'App.MailingList.Form.Fields.Email.Label' | translate }}</mat-label>
+
+        <input matInput type="email" formControlName="email" />
+
+        <mat-error *ngIf="form.get('email').hasError('required')">
+          {{ 'App.MailingList.Form.Errors.Required' | translate }}
+        </mat-error>
+
+        <mat-error *ngIf="form.get('email').hasError('email')">
+          {{ 'App.MailingList.Form.Errors.EmailNotValid' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>{{ 'App.MailingList.Form.Fields.EmailConfirmation.Label' | translate }}</mat-label>
+
+        <input matInput type="email" formControlName="emailConfirmation" />
+
+        <mat-error *ngIf="form.get('emailConfirmation').hasError('required')">
+          {{ 'App.MailingList.Form.Errors.Required' | translate }}
+        </mat-error>
+
+        <mat-error *ngIf="form.get('emailConfirmation').hasError('email')">
+          {{ 'App.MailingList.Form.Errors.EmailNotValid' | translate }}
+        </mat-error>
+
+        <mat-error *ngIf="form.get('emailConfirmation').hasError('emailsDoNotMatch')">
+          {{ 'App.MailingList.Form.Errors.FieldsDoNotMatch' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </fieldset>
+
+    <p class="paragraph">{{ 'App.MailingList.Thanking' | translate }}</p>
+
+    <div class="btn-container">
+      <button type="button" class="btn btn--white" [disabled]="loading" (click)="onClose()">
+        {{ 'App.MailingList.Form.Buttons.Cancel' | translate }}
+      </button>
+
+      <button type="submit" class="btn btn--scarlet" [disabled]="loading">
+        {{ 'App.MailingList.Form.Buttons.Join' | translate }}
+      </button>
+    </div>
+  </form>
+</div>
