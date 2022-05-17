@@ -298,6 +298,17 @@ export class DSMService {
     );
   }
 
+  public deleteCohortTag(cohortTagId: number, realm: string): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'deleteCohortTag';
+    const map: { name: string; value: any }[] = [];
+    map.push({name: 'userId', value: this.role.userID()});
+    map.push({name: 'cohortTagId', value: cohortTagId});
+    map.push({name: 'realm', value: realm});
+    return this.http.delete(url, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError.bind(this))
+    );
+  }
+
   public getMedicalRecordData(realm: string, ddpParticipantId: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'institutions';
     const json = {

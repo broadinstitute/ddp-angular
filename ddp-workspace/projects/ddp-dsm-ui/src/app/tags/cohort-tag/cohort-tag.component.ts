@@ -23,6 +23,9 @@ export class CohortTagComponent implements OnInit {
   constructor(private compService: ComponentService, private dsmService: DSMService) { }
   
   ngOnInit(): void {
+    if (!this.tags) {
+      this.tags = [];
+    }
   }
 
   add(event: MatChipInputEvent): void {
@@ -46,12 +49,20 @@ export class CohortTagComponent implements OnInit {
     const foundTagIndex = this.tags.findIndex(tag => this.isTheSameTag(tagToRemove, tag));
 
     if (foundTagIndex >= 0) {
+      if (tagToRemove.cohortTagId) {
+        this.dsmService.deleteCohortTag(tagToRemove.cohortTagId, this.compService.getRealm()).subscribe(data => {
+          
+        }, err => {})
+      }
       this.tags.splice(foundTagIndex, 1);
     }
   }
 
 
   private isTheSameTag(tagToRemove: CohortTag, tag: CohortTag): unknown {
+    if (tagToRemove.cohortTagId && tag.cohortTagId) {
+      return tagToRemove.cohortTagId === tag.cohortTagId;
+    }
     return tagToRemove.cohortTagName === tag.cohortTagName;
   }
 }
