@@ -240,6 +240,7 @@ export class ActivityQuestionConverter {
         const booleanBlock = new ActivityBooleanQuestionBlock();
         booleanBlock.trueContent = questionJson.trueContent;
         booleanBlock.falseContent = questionJson.falseContent;
+        booleanBlock.renderMode = questionJson.renderMode;
         return booleanBlock;
     }
 
