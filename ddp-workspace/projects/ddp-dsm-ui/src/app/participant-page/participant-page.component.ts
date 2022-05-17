@@ -8,6 +8,8 @@ import { ParticipantData } from '../participant-list/models/participant-data.mod
 import { PreferredLanguage } from '../participant-list/models/preferred-languages.model';
 import { Participant } from '../participant-list/participant-list.model';
 import { PDFModel } from '../pdf-download/pdf-download.model';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 import { ComponentService } from '../services/component.service';
 import { Auth } from '../services/auth.service';
@@ -123,6 +125,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   message: string = null;
   bundle = false;
   private scrolled: boolean;
+
+
   constructor(private auth: Auth, private compService: ComponentService, private dsmService: DSMService, private router: Router,
                private role: RoleService, private util: Utils, private route: ActivatedRoute, public dialog: MatDialog) {
     if (!auth.authenticated()) {

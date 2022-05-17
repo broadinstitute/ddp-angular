@@ -129,7 +129,7 @@
               [disabled]="updatedEmail === participant.data.profile['email'] || updatedEmail.length === 0 || !isEmailValid"
               (click)="updateEmail()">Update
             </button>
-          </td>
+          </td>          
           <td *ngIf="!hasRole().allowedToEditParticipant()">
             {{participant.data.profile['email']}}
           </td>
@@ -188,6 +188,11 @@ participant.data.dsm['diagnosisYear'] != null">
           <tr *ngIf="participant.data.profile['preferredLanguage'] != null && participant.data.profile['preferredLanguage'] !== ''">
             <td>Preferred Language</td>
             <td>{{getLanguageName(participant.data.profile['preferredLanguage'])}}</td>
+          </tr>
+          <tr>
+            <td>
+              <app-cohort-tag [ddpParticipantId]="participant.participant.ddpParticipantId"></app-cohort-tag>
+            </td>
           </tr>
           </tbody>
         </table>

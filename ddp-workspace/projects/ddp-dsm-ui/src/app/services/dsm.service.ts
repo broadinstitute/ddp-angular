@@ -288,6 +288,16 @@ export class DSMService {
     );
   }
 
+  public createCohortTag(body: string, realm: string): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'createCohortTag';
+    const map: { name: string; value: any }[] = [];
+    map.push({name: 'userId', value: this.role.userID()});
+    map.push({name: 'realm', value: realm});
+    return this.http.post(url, body, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError.bind(this))
+    );
+  }
+
   public getMedicalRecordData(realm: string, ddpParticipantId: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'institutions';
     const json = {
