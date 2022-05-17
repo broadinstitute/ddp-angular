@@ -3,7 +3,7 @@
     <div class="page-name"> {{ 'About.About.Title' | translate }}</div>
     <div class="text-place">
       <div class="text">{{ 'About.About.TitleText' | translate }}</div>
-      <button class="visit-button" queryParamsHandling="merge" [routerLink]="Route.CountMeIn">
+      <button class="visit-button" onclick="window.location.href='count-me-in'">
         <div class="button-text">{{ 'About.About.button1' | translate }}</div>
         <mat-icon>launch</mat-icon>
       </button>
@@ -191,7 +191,7 @@
   </div>
   <div class="learnMoreBlank">
     <div class="learnMoreHeadline">{{ 'About.About.LearnMoreHeadline' | translate }}</div>
-    <button class="learnMore" routerLinkActive="link--active" [routerLink]="Route.FAQ">
+    <button class="learnMore" onclick="window.location.href='faq'">
       <div class="visitFaq">{{ 'About.About.VisitFaq' | translate }}</div>
     </button>
   </div>
