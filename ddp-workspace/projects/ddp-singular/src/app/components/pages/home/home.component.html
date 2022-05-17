@@ -79,7 +79,7 @@
         <div class="participating-steps-step-name">Enroll Participant(s)</div>
         <div class="participating-steps-step-text">
           <p>To enroll, each participant will need to agree to a research consent form that explains the study.</p>
-          <a (click)="clickDownload(CONSENT_PDF_NAME, CONSENT_PDF_URL)" [href]="CONSENT_PDF_URL" target="_blank">{{ CONSENT_PDF_NAME }}</a>
+          <a [ngClass]="IGNORE_ANALYTICS_CLASS" (click)="clickDownload(CONSENT_PDF_NAME, CONSENT_PDF_URL)" [href]="CONSENT_PDF_URL" target="_blank">{{ CONSENT_PDF_NAME }}</a>
         </div>
       </div>
       <div class="participating-steps-step">
@@ -98,7 +98,7 @@
           <p>Once enrolled, we will send each participant a returnable spit kit to learn about their DNA.</p>
         </div>
         <div class="participating-steps-step-link">
-          <a (click)="clickDownload(SALIVA_KIT_PDF_NAME, SALIVA_KIT_PDF_URL)" [href]="SALIVA_KIT_PDF_URL" target="_blank">{{ SALIVA_KIT_PDF_NAME }}</a>
+          <a [ngClass]="IGNORE_ANALYTICS_CLASS" (click)="clickDownload(SALIVA_KIT_PDF_NAME, SALIVA_KIT_PDF_URL)" [href]="SALIVA_KIT_PDF_URL" target="_blank">{{ SALIVA_KIT_PDF_NAME }}</a>
         </div>
       </div>
     </div>

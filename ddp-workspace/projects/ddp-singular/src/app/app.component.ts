@@ -2,6 +2,8 @@ import { Component, ElementRef, HostListener } from '@angular/core';
 import { AnalyticsEventsService } from 'ddp-sdk';
 
 import { GTagEvent } from './constants/gtag-event';
+import { Route } from './constants/route';
+import { IGNORE_ANALYTICS_CLASS } from './constants/analytics';
 
 
 @Component({
@@ -27,7 +29,7 @@ export class AppComponent {
     const link = this.findNearestAnchorElement(event.target);
 
     // stop if it's the same origin navigation
-    if (!link || !link.href || !link.host || link.host === location.host) {
+    if (!link || !link.href || !link.host || link.host === location.host || link.classList.contains(IGNORE_ANALYTICS_CLASS)) {
       return;
     }
 
@@ -37,6 +39,13 @@ export class AppComponent {
     if (!link.target || link.target.match(/^_(self|parent|top)$/i)) {
       setTimeout(function() { location.href = link.href; }, 100);
       event.preventDefault();
+    }
+  }
+
+  @HostListener('window:beforeunload')
+  beforeUnload(): void {
+    if (window.location.pathname.endsWith(Route.PreScreening)) {
+      this.analytics.emitCustomGtagEvent(GTagEvent.SURVEY_CLOSE);
     }
   }
 

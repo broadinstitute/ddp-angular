@@ -3,6 +3,7 @@ import { AnalyticsEventsService } from 'ddp-sdk';
 
 import { Route } from '../../../constants/route';
 import { GTagEvent } from '../../../constants/gtag-event';
+import { IGNORE_ANALYTICS_CLASS } from '../../../constants/analytics';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,7 @@ import { GTagEvent } from '../../../constants/gtag-event';
 })
 export class HomeComponent {
   Route = Route;
+  readonly IGNORE_ANALYTICS_CLASS = IGNORE_ANALYTICS_CLASS;
   readonly ADDITIONAL_VENTURES_URL = 'https://www.additionalventures.org';
   readonly BROAD_INSTITUTE_URL = 'https://www.broadinstitute.org';
   readonly BOSTON_HOSPITAL_URL = 'https://www.childrenshospital.org';

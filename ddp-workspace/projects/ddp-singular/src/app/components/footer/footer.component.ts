@@ -3,6 +3,7 @@ import { SessionMementoService, AnalyticsEventsService } from 'ddp-sdk';
 
 import { Route } from '../../constants/route';
 import { GTagEvent } from '../../constants/gtag-event';
+import { IGNORE_ANALYTICS_CLASS } from '../../constants/analytics';
 
 
 @Component({
@@ -12,6 +13,7 @@ import { GTagEvent } from '../../constants/gtag-event';
 })
 export class FooterComponent {
   Route = Route;
+  readonly IGNORE_ANALYTICS_CLASS = IGNORE_ANALYTICS_CLASS;
   readonly STUDY_PROGRESS_URL = 'https://www.additionalventures.org/initiatives/biomedical-research/foundational-resources/project-singular/';
   readonly CURRENT_YEAR = new Date().getFullYear();
 

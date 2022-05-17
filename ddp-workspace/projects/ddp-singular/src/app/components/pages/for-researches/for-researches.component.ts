@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AnalyticsEventsService } from 'ddp-sdk';
 
 import { GTagEvent } from '../../../constants/gtag-event';
+import { IGNORE_ANALYTICS_CLASS } from '../../../constants/analytics';
 
 @Component({
   selector: 'app-for-researches',
@@ -9,6 +10,7 @@ import { GTagEvent } from '../../../constants/gtag-event';
   styleUrls: ['./for-researches.component.scss']
 })
 export class ForResearchesComponent {
+  readonly IGNORE_ANALYTICS_CLASS = IGNORE_ANALYTICS_CLASS;
   readonly TERRA_BIO_URL = 'https://terra.bio/';
 
   constructor(private analytics: AnalyticsEventsService){}
