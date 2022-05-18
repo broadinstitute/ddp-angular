@@ -26,10 +26,10 @@ export class CohortTagComponent implements OnInit {
     if (this.hasNotCohortTag()) {
       this.dsm['cohortTag'] = [];
     }
-    this.tags = this.getTags(); 
+    this.tags = this.getTags();
   }
 
-  private hasNotCohortTag() {
+  private hasNotCohortTag(): boolean {
     return !this.dsm['cohortTag'];
   }
 
