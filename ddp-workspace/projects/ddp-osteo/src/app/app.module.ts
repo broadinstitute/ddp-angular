@@ -39,6 +39,9 @@ import { PhysiciansComponent } from './components/physicians/physicians.componen
 
 import { ActivityComponent } from './components/activity/activity.component';
 import { ActivityPageComponent } from './components/activity-page/activity-page.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
+import { MatTableModule } from '@angular/material/table';
 
 
 const baseElt = document.getElementsByTagName('base');
@@ -149,7 +152,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     MatExpansionModule,
     MatIconModule,
     MatButtonModule,
-    HammerModule
+    HammerModule,
+    MatTableModule,
   ],
   declarations: [
     WelcomeComponent,
@@ -166,7 +170,9 @@ export function translateFactory(translate: TranslateService, injector: Injector
     PhysiciansComponent,
 
     ActivityComponent,
-    ActivityPageComponent
+    ActivityPageComponent,
+    DashboardComponent,
+    UserActivitiesComponent
 
   ],
   providers: [
