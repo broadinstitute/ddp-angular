@@ -32,9 +32,7 @@ export class SessionService {
   }
 
   public logout(): void {
-    localStorage.removeItem(SessionService.DSM_TOKEN_NAME);
     this.isLoggedIn = false;
-    localStorage.clear();
   }
 
   public getDSMClaims(value: string): any {

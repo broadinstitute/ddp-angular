@@ -1,0 +1,12 @@
+:host-context(app-participantsLit) {
+  grid-area: otherPage
+}
+
+  td, th {
+    border: 2px solid black;
+    padding: 5px;
+  }
+
+  tr:hover {
+    background: grey;
+  }

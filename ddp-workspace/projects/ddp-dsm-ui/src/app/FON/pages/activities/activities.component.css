@@ -1,0 +1,23 @@
+:host-context(app-activities) {
+  grid-area: otherPage
+}
+
+.activitiesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 100%;
+}
+ul {
+  width: 30%;
+  height: 100%;
+}
+
+li {
+  list-style-type: none;
+}
+
+li:hover {
+  color: cornflowerblue;
+  cursor: pointer;
+}
