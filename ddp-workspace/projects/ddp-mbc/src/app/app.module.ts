@@ -58,7 +58,7 @@ tkCfg.phone = '617-800-1622';
 tkCfg.infoEmail = 'info@mbcproject.org';
 tkCfg.dataEmail = 'data@mbcproject.org';
 tkCfg.twitterAccountId = 'count_me_in';
-tkCfg.facebookGroupId = 'https://www.facebook.com/joincountmein';
+tkCfg.facebookGroupId = 'joincountmein';
 tkCfg.instagramId = 'countmein';
 tkCfg.cBioPortalLink = 'http://www.cbioportal.org/study?id=brca_mbcproject_wagle_2017#summary';
 tkCfg.countMeInUrl = 'https://joincountmein.org/';
