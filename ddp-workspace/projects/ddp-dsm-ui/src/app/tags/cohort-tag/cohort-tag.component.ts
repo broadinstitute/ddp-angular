@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CohortTag } from './cohort-tag.model';
 import {MatChipInputEvent} from '@angular/material/chips';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {COMMA, ENTER, P} from '@angular/cdk/keycodes';
 
 import { ComponentService } from '../../services/component.service';
 import { DSMService } from '../../services/dsm.service';
@@ -14,17 +14,27 @@ import { DSMService } from '../../services/dsm.service';
 export class CohortTagComponent implements OnInit {
 
   @Input() ddpParticipantId: string;
-  @Input() tags: CohortTag[];
+  @Input() dsm: Object;
 
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  tags: CohortTag[];
 
   constructor(private compService: ComponentService, private dsmService: DSMService) { }
 
   ngOnInit(): void {
-    if (!this.tags) {
-      this.tags = [];
+    if (this.hasNotCohortTag()) {
+      this.dsm['cohortTag'] = [];
     }
+    this.tags = this.getTags(); 
+  }
+
+  private hasNotCohortTag() {
+    return !this.dsm['cohortTag'];
+  }
+
+  private getTags(): CohortTag[] {
+    return this.dsm['cohortTag'];
   }
 
   add(event: MatChipInputEvent): void {
@@ -37,7 +47,7 @@ export class CohortTagComponent implements OnInit {
       }, err => {
         this.remove(newTag);
       });
-      this.tags.push(newTag);
+      this.getTags().push(newTag);
       // Clear the input value
       event.chipInput!.clear();
     }
@@ -45,7 +55,7 @@ export class CohortTagComponent implements OnInit {
   }
 
   remove(tagToRemove: CohortTag): void {
-    const foundTagIndex = this.tags.findIndex(tag => this.isTheSameTag(tagToRemove, tag));
+    const foundTagIndex = this.getTags().findIndex(tag => this.isTheSameTag(tagToRemove, tag));
 
     if (foundTagIndex >= 0) {
       if (tagToRemove.cohortTagId) {
@@ -53,7 +63,7 @@ export class CohortTagComponent implements OnInit {
 
         }, err => {});
       }
-      this.tags.splice(foundTagIndex, 1);
+      this.getTags().splice(foundTagIndex, 1);
     }
   }
 

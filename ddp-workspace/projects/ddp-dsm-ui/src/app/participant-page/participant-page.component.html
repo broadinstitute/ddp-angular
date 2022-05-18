@@ -192,8 +192,8 @@ participant.data.dsm['diagnosisYear'] != null">
           <tr>
             <td>
               <app-cohort-tag 
-                [ddpParticipantId]="participant.participant.ddpParticipantId"
-                [tags]="participant.data.dsm.cohortTag"
+                [ddpParticipantId]="participant.data.profile.guid"
+                [dsm]="participant.data.dsm"
               ></app-cohort-tag>
             </td>
           </tr>

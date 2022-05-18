@@ -734,6 +734,29 @@
                       </li>
                     </ul>
                   </div>
+                  <div *ngIf="alias === 'c'">
+                    <ul class="NO-PADDING-START">
+                      <li class="LIST-SEPARATOR" *ngFor="let tag of pt.data.dsm.cohortTag">
+                        <p class="BIT-OF-MARGIN">
+                          <ng-container *ngIf="col.participantColumn.object !== 'testResult'">
+                            <ng-container
+                              *ngIf="col.type !== 'DATE' && col.type !== 'BOOLEAN' && col.type !== 'OPTIONS' && col.type !== 'CHECKBOX'">{{tag[col.participantColumn.name]}}
+                            </ng-container>
+                            <ng-container
+                              *ngIf="col.type === 'BOOLEAN' || col.type === 'CHECKBOX'">{{getUtil().getYesNo(tag[col.participantColumn.name])}}
+                            </ng-container>
+                            <ng-container
+                              *ngIf="col.type === 'DATE' && tag[col.participantColumn.name] !== 0">{{tag[col.participantColumn.name] |
+                              date:'medium'}}
+                            </ng-container>
+                            <ng-container
+                              *ngIf="col.type === 'OPTIONS'">{{getOptionDisplay(col.options, tag[col.participantColumn.name])}}
+                            </ng-container>
+                          </ng-container>                        
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
                   <div *ngIf="alias === 'a'">
                     <!--final abstraction values-->
                     <ng-container *ngIf="col.participantColumn.object === 'final'">
