@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   throwError,
@@ -32,6 +32,8 @@ export class Auth {
   private authUrl = this.baseUrl + DSMService.UI + 'auth0';
 
   private eventsSource = new Subject<string>();
+
+  private realmListForPicklist = new BehaviorSubject<NameValue[]>([]);
 
   events = this.eventsSource.asObservable();
 
@@ -111,17 +113,15 @@ export class Auth {
     return this.sessionService.isAuthenticated();
   }
 
+  public getRealmListObs(): Observable<NameValue[]> {
+    return this.realmListForPicklist.asObservable()
+  }
+
   public logout(): void {
     // Remove token from localStorage
-    // console.log("log out user and remove all items from local storage");
-    localStorage.removeItem(Auth.AUTH0_TOKEN_NAME);
-    localStorage.removeItem(SessionService.DSM_TOKEN_NAME);
-    localStorage.removeItem(Statics.PERMALINK);
-    localStorage.removeItem(ComponentService.MENU_SELECTED_REALM);
     localStorage.clear();
     this.sessionService.logout();
     this.selectedRealm = null;
-    this.router.navigate(['']);
   }
 
   public doLogin(authPayload: any): void {
@@ -190,12 +190,7 @@ export class Auth {
             this.realmList.push(NameValue.parse(val));
           });
 
-          const navigateUri = this.realmList.length > 1 ? this.PICK_STUDY_CONST : this.realmList[0].name;
-
-          navigateUri !== this.PICK_STUDY_CONST &&
-          localStorage.setItem(ComponentService.MENU_SELECTED_REALM, this.realmList[0].name);
-
-          this.router.navigate([navigateUri]);
+          this.realmListForPicklist.next(this.realmList);
         }
       );
     }

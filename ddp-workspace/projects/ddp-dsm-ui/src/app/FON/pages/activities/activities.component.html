@@ -1,0 +1,10 @@
+<div>
+
+</div>
+<div class="activitiesContainer">
+  <ul>
+    <li *ngFor="let actGuid of activityGuides | async" routerLink="{{actGuid.guid}}" >{{ actGuid.name }}</li>
+  </ul>
+  <router-outlet></router-outlet>
+</div>
+

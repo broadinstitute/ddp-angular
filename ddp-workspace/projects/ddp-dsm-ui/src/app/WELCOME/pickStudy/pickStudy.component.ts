@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Auth} from '../../services/auth.service';
 import {NameValue} from '../../utils/name-value.model';
@@ -31,7 +31,7 @@ import {Title} from '@angular/platform-browser';
 })
 
 export class PickStudyComponent implements OnInit, OnDestroy {
-  realms: Array<NameValue>;
+  @Input('pickList') realms: Array<NameValue>;
   pickedStudy = new FormControl('');
   unsubscribeVar = new Subject();
 
@@ -39,8 +39,6 @@ export class PickStudyComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.realms = this.auth.realmList;
-
     this.title.setTitle('Select study');
 
     this.pickedStudy.valueChanges

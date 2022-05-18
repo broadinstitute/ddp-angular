@@ -1,0 +1,21 @@
+<aside class="sidebar">
+  <div class="head">
+  </div>
+
+  <div class="navigation">
+    <ul class="topNavigation">
+      <li *ngFor="let item of topNavigation" [routerLink]="[item.route]">
+        {{ item.name }}
+      </li>
+    </ul>
+
+    <hr>
+
+    <ul class="botNavigation">
+      <li *ngFor="let item of botNavigation" [routerLink]="[item.route]" (click)="signOut(item.signOut)">
+        {{ item.name }}
+      </li>
+    </ul>
+  </div>
+</aside>
+

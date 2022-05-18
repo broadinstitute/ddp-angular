@@ -1,0 +1,32 @@
+:host-context(app-navigation) {
+  grid-area: sidebarNavigation
+}
+
+.sidebar {
+  height: 100%;
+}
+
+.head {
+  height: 10%;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 90%;
+}
+
+.topNavigation, .botNavigation {
+ margin: 0;
+ padding: 0;
+}
+
+.topNavigation li, .botNavigation li {
+  list-style-type: none;
+}
+.topNavigation li:hover, .botNavigation li:hover {
+  color: blue;
+  cursor: pointer;
+}

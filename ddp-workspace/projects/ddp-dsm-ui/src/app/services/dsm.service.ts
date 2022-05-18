@@ -171,9 +171,10 @@ export class DSMService {
     );
   }
 
-  public applyFilter(json: ViewFilter, realm: string, parent: string, filterQuery: string,
+  public applyFilter(json: ViewFilter = null, realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM), parent: string, filterQuery: string = null,
                      from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage(), sortBy?: Sort
   ): Observable<any> {
+    console.log(json, realm,parent,filterQuery, 'testing to see')
     const viewFilterCopy = this.getFilter(json);
     const url = this.baseUrl + DSMService.UI + 'applyFilter';
     const userId = this.role.userID();
@@ -252,7 +253,8 @@ export class DSMService {
     );
   }
 
-  public getSettings(realm: string, parent: string): Observable<any> {
+  public getSettings(realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM), parent: string): Observable<any> {
+    console.log(realm, parent, 'settings')
     const url = this.baseUrl + DSMService.UI + 'displaySettings/' + realm;
     const map: { name: string; value: any }[] = [];
     map.push({name: 'userId', value: this.role.userID()});

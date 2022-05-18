@@ -1,0 +1,23 @@
+<table>
+  <thead>
+  <tr>
+    <th>FON ID#</th>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Birthdate</th>
+    <th>Registered</th>
+    <th>Last updated</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let pt of patients$ | async" (click)="openActivities(pt.guid)">
+    <td>{{ pt.ID }}</td>
+    <td>{{ pt.firstName }}</td>
+    <td>{{ pt.lastName }}</td>
+    <td>{{ pt.birthdate }}</td>
+    <td>{{ pt.registered }}</td>
+    <td>{{ pt.lastUpdated }}</td>
+  </tr>
+  </tbody>
+</table>
+
