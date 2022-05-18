@@ -23,6 +23,7 @@ import {
   DashboardColumns,
   LoggingService,
 } from 'ddp-sdk';
+import { activityStatusCodeToNameMap } from '../../utils';
 
 @Component({
   selector: 'app-user-activities',
@@ -52,7 +53,7 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
   public ngOnInit(): void {
       this.statusesLoadingAnchor = this.statusesServiceAgent.getStatuses()
           .subscribe((x) => {
-              this.states = x;
+              this.states = x.map(({ code, name }) => ({ code, name: activityStatusCodeToNameMap[code] ?? name }));
               this.statusesLoaded = true;
               this.loadedEvent.emit(true);
           });
