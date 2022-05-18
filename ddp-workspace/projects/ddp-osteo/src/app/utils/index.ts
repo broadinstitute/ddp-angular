@@ -12,3 +12,9 @@ export const isEnabledModalActivityBlock = (block: ActivityBlockType): boolean =
 
 export const blockInstancesHaveAnswers = (block: ActivityActivityBlock): boolean =>
     block.instances.every(inst => inst.numQuestionsAnswered > 0);
+
+export const activityStatusCodeToNameMap = {
+    CREATED: 'Not Started',
+    IN_PROGRESS: 'Incomplete',
+    COMPLETE: 'Submitted',
+};

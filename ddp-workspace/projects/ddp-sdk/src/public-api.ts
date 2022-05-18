@@ -31,6 +31,7 @@ export * from './lib/models/activity/activityDateQuestionBlock';
 export * from './lib/models/activity/activityInstitutionBlock';
 export * from './lib/models/activity/activityGroupBlock';
 export * from './lib/models/activity/activityContentBlock';
+export * from './lib/models/activity/activityInstanceState';
 export * from './lib/models/activity/conditionalBlock';
 export * from './lib/models/activity/MailAddressBlock';
 export * from './lib/models/activity/textSuggestion';
