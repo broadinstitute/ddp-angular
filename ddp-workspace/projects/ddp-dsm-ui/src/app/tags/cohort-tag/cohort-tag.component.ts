@@ -19,9 +19,8 @@ export class CohortTagComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
-  
   constructor(private compService: ComponentService, private dsmService: DSMService) { }
-  
+
   ngOnInit(): void {
     if (!this.tags) {
       this.tags = [];
@@ -51,8 +50,8 @@ export class CohortTagComponent implements OnInit {
     if (foundTagIndex >= 0) {
       if (tagToRemove.cohortTagId) {
         this.dsmService.deleteCohortTag(tagToRemove.cohortTagId, this.compService.getRealm()).subscribe(data => {
-          
-        }, err => {})
+
+        }, err => {});
       }
       this.tags.splice(foundTagIndex, 1);
     }
