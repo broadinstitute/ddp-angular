@@ -896,6 +896,7 @@
         "NextButton": "Next",
         "PreviousButton": "Back",
         "SavingButton": "Saving",
+        "CompleteButton": "View Completed",
         "EditButton": "Continue Editing",
         "StartButton": "Edit",
         "SaveButton": "Save",
