@@ -35,12 +35,12 @@ export class CohortTagComponent implements OnInit {
       const newTag = new CohortTag(value, this.ddpParticipantId);
       this.dsmService.createCohortTag(JSON.stringify(newTag), this.compService.getRealm()).subscribe(cohortTagId => {
         newTag.cohortTagId = parseInt(cohortTagId);
-        this.tags.push(newTag);
-        // Clear the input value
-        event.chipInput!.clear();
       }, err => {
-        
+        this.remove(newTag);
       });
+      this.tags.push(newTag);
+      // Clear the input value
+      event.chipInput!.clear();
     }
 
   }
