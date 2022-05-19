@@ -9,15 +9,31 @@
     <th>Last updated</th>
   </tr>
   </thead>
-  <tbody>
-  <tr *ngFor="let pt of patients$ | async" (click)="openActivities(pt.guid)">
-    <td>{{ pt.ID }}</td>
-    <td>{{ pt.firstName }}</td>
-    <td>{{ pt.lastName }}</td>
-    <td>{{ pt.birthdate }}</td>
-    <td>{{ pt.registered }}</td>
-    <td>{{ pt.lastUpdated }}</td>
-  </tr>
-  </tbody>
+
+  <ng-container *ngIf="!(loading$ | async) else loadingSpinner">
+    <tbody *ngIf="(patients$ | async) as pts">
+    <tr *ngFor="let pt of pts" (click)="openActivities(pt.guid)">
+      <td>{{ pt.ID }}</td>
+      <td>{{ pt.firstName }}</td>
+      <td>{{ pt.lastName }}</td>
+      <td>{{ pt.birthdate }}</td>
+      <td>{{ pt.registered }}</td>
+      <td>{{ pt.lastUpdated }}</td>
+    </tr>
+    </tbody>
+  </ng-container>
+
+  <ng-template #loadingSpinner>
+    <mat-spinner></mat-spinner>
+  </ng-template>
 </table>
+
+<div class="pagination">
+  <mat-paginator
+    [length]="totalCount$ | async"
+    [pageSize]="10"
+    (page)="setPage($event)"
+    [pageSizeOptions]="[10, 50, 100]" aria-label="Select page">
+  </mat-paginator>
+</div>
 

@@ -2,9 +2,28 @@
 
 </div>
 <div class="activitiesContainer">
-  <ul>
-    <li *ngFor="let actGuid of activityGuides | async" routerLink="{{actGuid.guid}}" >{{ actGuid.name }}</li>
-  </ul>
-  <router-outlet></router-outlet>
+
+  <mat-accordion class="activityNames">
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          ENROLLMENT FORMS
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list>
+        <mat-list-item *ngFor="let actGuid of activityGuides | async">
+          <h4 mat-line routerLink="{{actGuid.guid}}">{{ actGuid.name }}</h4>
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+
+  <div class="activities">
+    <router-outlet></router-outlet>
+  </div>
 </div>
 

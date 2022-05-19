@@ -14,7 +14,7 @@ import {Component} from "@angular/core";
       display: grid;
       grid-template-columns: 17% 80%;
       height: 100vh;
-      column-gap: 3%;
+      column-gap: 1%;
       width: 100%;
       margin: 0;
       padding: 0;
