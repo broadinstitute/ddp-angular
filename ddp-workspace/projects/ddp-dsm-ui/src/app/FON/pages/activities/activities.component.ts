@@ -11,7 +11,7 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 
 export class ActivitiesComponent implements OnInit {
   activityGuides: Observable<any>;
-  panelOpenState: boolean = false;
+  panelOpenState: boolean = true;
 
     constructor(private agent: AgentService, private activatedRoute: ActivatedRoute) {
     }
