@@ -1,0 +1,40 @@
+$hoverColor: #7154FF;
+
+.sidebar {
+  height: calc(100vh - 60px); // 60px - main header height
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px 0;
+}
+
+.topNavigation {
+  padding: 120px 0 0;
+}
+
+.botNavigation {
+  padding: 0;
+}
+
+.topNavigation, .botNavigation {
+  margin: 0;
+
+  li {
+    list-style-type: none;
+    font-size: 18px;
+    margin: 0 50px 16px;
+    border-bottom: 2px solid transparent;
+
+    &:hover, &:focus {
+      color: $hoverColor;
+      border-bottom-color: $hoverColor;
+      cursor: pointer;
+      outline: none;
+    }
+  }
+}

@@ -1,0 +1,69 @@
+$hoverColor: #7154FF;
+
+:host-context(app-activities) {
+  grid-area: otherPage
+}
+
+.activities {
+
+  &-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1%;
+    height: 100%;
+  }
+
+  &-names {
+    width: 20%;
+    max-width: 300px;
+  }
+}
+
+.activity {
+  min-width: 80%;
+  padding: 10px;
+}
+
+.selected-participant {
+  padding: 12px;
+  margin: 12px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: 16px;
+  color: dimgray;
+  box-shadow: 0.5px 0.5px 2px 0.5px lightgrey;
+
+  > span {
+    font-size: larger;
+  }
+}
+
+mat-panel-title {
+  justify-content: center;
+  padding: 8px 0;
+  color: dimgray;
+  font-size: larger;
+
+  .mat-expanded & {
+    border-bottom: 1px solid grey;
+  }
+}
+
+mat-list-item {
+  h4 {
+    text-align: center;
+
+    &:hover, &:focus {
+      color: $hoverColor;
+      border: 0;
+      outline: none;
+      border-bottom: 2px solid $hoverColor;
+      cursor: pointer;
+      font-weight: bolder;
+    }
+  }
+}
+
+
