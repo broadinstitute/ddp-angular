@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
   styles: [`
     .mainHolder {
       display: grid;
-      grid-template-columns: 250px auto;
+      grid-template-columns: 230px auto;
       height: 100vh;
       column-gap: 1%;
       width: 100%;

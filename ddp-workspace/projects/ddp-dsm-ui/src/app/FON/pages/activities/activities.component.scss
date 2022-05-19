@@ -9,7 +9,7 @@ $hoverColor: #7154FF;
   &-container {
     display: flex;
     justify-content: space-between;
-    gap: 1%;
+    gap: 50px;
     height: 100%;
   }
 
@@ -21,7 +21,8 @@ $hoverColor: #7154FF;
 
 .activity {
   min-width: 80%;
-  padding: 10px;
+  padding: 20px;
+  flex-grow: 1;
 }
 
 .selected-participant {
