@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-fon',
@@ -37,8 +37,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     router-outlet {
       grid-area: otherPage;
     }
-  `],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  `]
 })
 
 export class FonComponent {
