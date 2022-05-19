@@ -32,7 +32,7 @@
       <div class="about-left">
         <p class="intro__description" [innerHTML]="'FAQ.VentricleHeartDefects.P1' | translate"></p>
         <p class="intro__description">
-          <a target="_blank" [href]="VIDEO_URL">{{ 'FAQ.VentricleHeartDefects.Link' | translate }}</a>
+          <a [ngClass]="IGNORE_ANALYTICS_CLASS" (click)="videoClick($event)" target="_blank" [href]="VIDEO_URL">{{ 'FAQ.VentricleHeartDefects.Link' | translate }}</a>
         </p>
         <p class="intro__description" [innerHTML]="'FAQ.VentricleHeartDefects.P2' | translate"></p>
         <p class="intro__description" [innerHTML]="'FAQ.VentricleHeartDefects.P3' | translate"></p>
