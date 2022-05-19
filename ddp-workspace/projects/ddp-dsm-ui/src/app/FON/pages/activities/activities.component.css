@@ -2,15 +2,20 @@
   grid-area: otherPage
 }
 
+
 .activitiesContainer {
   display: flex;
   flex-wrap: wrap;
+  overflow: auto;
   flex-direction: column;
+  justify-content: space-between;
   height: 100%;
 }
-ul {
-  width: 30%;
+
+.activityNames {
+  width: 20%;
   height: 100%;
+  top: 0;
 }
 
 li {
@@ -21,3 +26,24 @@ li:hover {
   color: cornflowerblue;
   cursor: pointer;
 }
+
+.activities {
+  height: 100%;
+  width: 70%;
+  overflow: auto;
+  padding-right: 10px;
+}
+mat-list-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+mat-list-item h4 {
+  text-align: center;
+}
+mat-list-item:hover h4 {
+  color: #b2f7ff!important;
+}
+

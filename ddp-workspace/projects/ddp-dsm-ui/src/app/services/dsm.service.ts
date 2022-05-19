@@ -174,7 +174,7 @@ export class DSMService {
   public applyFilter(json: ViewFilter = null, realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM), parent: string, filterQuery: string = null,
                      from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage(), sortBy?: Sort
   ): Observable<any> {
-    console.log(json, realm,parent,filterQuery, 'testing to see')
+    // console.log(json, realm,parent, filterQuery, from, to, 'testing to see')
     const viewFilterCopy = this.getFilter(json);
     const url = this.baseUrl + DSMService.UI + 'applyFilter';
     const userId = this.role.userID();

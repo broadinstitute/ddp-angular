@@ -13,11 +13,7 @@ import {ComponentService} from "../../../../services/component.service";
     >
     </ddp-activity-redesigned>
   `,
-  styles: [`
-
-
-
-  `]
+  styles: [``]
 })
 
 export class ActivityComponent implements OnInit {
