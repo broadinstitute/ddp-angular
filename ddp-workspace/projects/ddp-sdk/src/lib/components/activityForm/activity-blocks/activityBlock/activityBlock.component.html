@@ -2,8 +2,12 @@
     <div *ngIf="block.title" [innerHTML]="block.title"></div>
 
     <div *ngIf="childInstances?.length" class="child-instances">
-        <div *ngFor="let instance of childInstances; trackBy: getInstanceId"
-             class="instance" [ngClass]="isModal ? 'modal' : 'embedded'">
+        <!-- changed `modal` class below to `modal-block` because it conflicts with the same class name
+         from bootstrap library in DSM-UI study
+         -->
+        <div *ngFor="let instance of childInstances; trackBy: getInstanceId;"
+             class="instance"
+             [ngClass]="isModal ? 'modal-block' : 'embedded'">
             <ng-container *ngIf="isModal; else embedded">
                 <ddp-modal-activity-block [instance]="instance"
                                           [readonly]="readonly"
