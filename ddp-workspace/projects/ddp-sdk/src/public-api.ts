@@ -47,6 +47,7 @@ export * from './lib/models/userProfile';
 export * from './lib/models/participant';
 export * from './lib/models/announcementMessage';
 export * from './lib/models/analyticsEvent';
+export * from './lib/models/googleAnalyticsEvent';
 export * from './lib/models/analyticsEventCategories';
 export * from './lib/models/analyticsEventActions';
 export * from './lib/models/address';
