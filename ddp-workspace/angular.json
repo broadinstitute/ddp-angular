@@ -2940,7 +2940,12 @@
             "tsConfig": "projects/ddp-dsm-ui/tsconfig.app.json",
             "assets": [
               "projects/ddp-dsm-ui/src/favicon.ico",
-              "projects/ddp-dsm-ui/src/assets"
+              "projects/ddp-dsm-ui/src/assets",
+              {
+                "glob": "*.*",
+                "input": "projects/ddp-sdk/src/assets/",
+                "output": "assets/shared"
+              }
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
