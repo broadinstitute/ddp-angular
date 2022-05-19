@@ -62,4 +62,13 @@ $warn-color: #f44336;
     line-height: 2.875rem;
   }
 
+  .modal-activity-block {
+    &__edit-dialog-content {
+      padding-top: 40px !important;
+    }
+
+    &__delete-dialog > mat-dialog-container {
+      padding-top: 12px !important;
+    }
+  }
 }
