@@ -1,0 +1,35 @@
+$warn-color: #f44336;
+
+::ng-deep {
+
+  // steps
+  .activity-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 3rem 0;
+  }
+
+  .activity-step {
+    font-size: 1.4rem;
+    font-style: italic;
+    font-weight: bolder;
+
+    &.active {
+       text-decoration: underline;
+    }
+
+    &.completed {
+      cursor: pointer;
+      color: #7154FF;
+    }
+  }
+
+  .ErrorMessage.ErrorMessage {
+    border-top: 2px solid $warn-color;
+    margin-top: 20px;
+    font-size: 13px;
+    color: $warn-color;
+    padding: 15px 0;
+  }
+}
