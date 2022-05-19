@@ -9,11 +9,10 @@ import {ComponentService} from '../../../../services/component.service';
     <ddp-activity-redesigned studyGuid='fon'
                              [activityGuid]='activityGuid'
                              (submit)='navigate($event)'
-                             (activityCode)='activityCodeChanged($event)'
-    >
+                             (activityCode)='activityCodeChanged($event)'>
     </ddp-activity-redesigned>
   `,
-  styles: [``]
+  styleUrls: ['./activity.component.scss']
 })
 
 export class ActivityComponent implements OnInit {
