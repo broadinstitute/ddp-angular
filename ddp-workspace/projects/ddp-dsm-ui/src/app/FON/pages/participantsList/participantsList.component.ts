@@ -1,16 +1,14 @@
-import {Component, OnInit} from "@angular/core";
-import {map, take, tap} from "rxjs/operators";
-import {DSMService} from "../../../services/dsm.service";
-import {patientListModel} from "./models/participantList.model";
-import {ActivatedRoute, ActivatedRouteSnapshot, Params, Router} from "@angular/router";
-import {Observable} from "rxjs";
-import {AgentService, Patients} from "../../services/agent.service";
-import {PageEvent} from "@angular/material/paginator";
+import { Component, OnInit } from '@angular/core';
+import { patientListModel } from './models/participantList.model';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AgentService } from '../../services/agent.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-participantsLit',
+  selector: 'app-participants-list',
   templateUrl: './participantsList.component.html',
-  styleUrls: ['./participantsList.component.css']
+  styleUrls: ['./participantsList.component.scss']
 })
 
 export class ParticipantsListComponent implements OnInit {
@@ -18,27 +16,29 @@ export class ParticipantsListComponent implements OnInit {
   totalCount$: Observable<number>;
   loading$: Observable<boolean>;
 
-  constructor(private agent: AgentService, private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(private agent: AgentService, private router: Router, private activatedRoute: ActivatedRoute) {
+  }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.patients$ = this.agent.getPatients();
     this.totalCount$ = this.agent.getPatientsTotalCount();
     this.loading$ = this.agent.isLoading();
 
-    this.router.navigate([], {queryParams: {from: 0, to: 10}})
+    this.router.navigate([], {queryParams: {from: 0, to: 10}});
 
-    this.activatedRoute.queryParams.subscribe(({from, to}:Params) => this.agent.setPage(from, to))
+    this.activatedRoute.queryParams.subscribe(({from, to}: Params) => this.agent.setPage(from, to));
   }
 
-  setPage(event: PageEvent) {
-    const from = ((event.pageIndex + 1) * event.pageSize) - event.pageSize ;
+  setPage(event: PageEvent): void {
+    const from = ((event.pageIndex + 1) * event.pageSize) - event.pageSize;
     const to = from + event.pageSize;
-    this.router.navigate([], {queryParams: {from, to}})
+    this.router.navigate([], {queryParams: {from, to}});
   }
 
-
-  openActivities(id: string) {
-    this.router.navigate(['../patient', id], {relativeTo: this.activatedRoute})
+  openActivities(participant: patientListModel): void {
+    this.router.navigate(['../patient', participant.guid], {
+      relativeTo: this.activatedRoute,
+      state: { participant }
+    });
   }
-
 }

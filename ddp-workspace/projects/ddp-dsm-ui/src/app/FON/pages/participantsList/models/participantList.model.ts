@@ -3,7 +3,7 @@ export interface patientListModel {
   guid: string;
   firstName: string;
   lastName: string;
-  birthdate: string,
+  birthdate: string;
   registered: string;
   lastUpdated: string;
 }

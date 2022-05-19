@@ -1,24 +1,22 @@
-import {Component, OnInit} from "@angular/core";
-import {botNavItems, topNavItems} from "./navItems";
-import {Auth} from "../../../services/auth.service";
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { bottomNavItems, topNavItems } from './navItems';
+import { Auth } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.css']
+  styleUrls: ['./navigation.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class NavigationComponent implements OnInit {
-  topNavigation = topNavItems;
-  botNavigation = botNavItems('Giorgi Charkviani')
+export class NavigationComponent {
+  readonly topNavigation = topNavItems;
+  readonly botNavigation = bottomNavItems('Giorgi Charkviani');
 
   constructor(private auth: Auth) {
   }
 
-  signOut(allow: boolean) {
+  signOut(allow: boolean): void {
     allow && this.auth.logout();
-  }
-
-  ngOnInit() {
   }
 }
