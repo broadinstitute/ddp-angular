@@ -1,15 +1,15 @@
-import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute, Params} from "@angular/router";
-import {SessionMementoService} from "ddp-sdk";
-import {ComponentService} from "../../../../services/component.service";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Params} from '@angular/router';
+import {SessionMementoService} from 'ddp-sdk';
+import {ComponentService} from '../../../../services/component.service';
 
 @Component({
   selector: 'app-activity',
   template: `
-    <ddp-activity-redesigned [studyGuid]="'fon'"
-                             [activityGuid]="activityGuid"
-                             (submit)="navigate($event)"
-                             (activityCode)="activityCodeChanged($event)"
+    <ddp-activity-redesigned studyGuid='fon'
+                             [activityGuid]='activityGuid'
+                             (submit)='navigate($event)'
+                             (activityCode)='activityCodeChanged($event)'
     >
     </ddp-activity-redesigned>
   `,
@@ -23,20 +23,18 @@ export class ActivityComponent implements OnInit {
   constructor(private router: ActivatedRoute, private sessionService: SessionMementoService) {
   }
 
-  ngOnInit() {
-
+  ngOnInit(): void {
     this.router.params.subscribe((param: Params) => {
       this.activityGuid = param.activity;
-    })
+    });
 
     this.router.parent.params.subscribe((param: Params) => {
-      this.sessionService.setParticipant(param.guid)
-    })
-
+      this.sessionService.setParticipant(param.guid);
+    });
   }
 
-  navigate(event: any) {
-    console.log(event)
+  navigate(event: any): void {
+    console.log(event);
   }
 
   activityCodeChanged(code: string): void {

@@ -1,15 +1,12 @@
 import {Injectable} from '@angular/core';
 import {
   ActivatedRoute,
-  ActivatedRouteSnapshot,
-  CanActivate, CanLoad,
+  CanLoad,
   Route,
   Router,
-  RouterStateSnapshot,
   UrlSegment,
   UrlTree
 } from '@angular/router';
-import {Observable} from 'rxjs';
 import {Auth} from '../services/auth.service';
 import {ComponentService} from '../services/component.service';
 
@@ -29,7 +26,7 @@ export class CheckAuthGuard implements CanLoad {
       return this.router.createUrlTree(['']);
     }
     else {
-      return this.router.createUrlTree([selectedRealm])
+      return this.router.createUrlTree([selectedRealm]);
     }
   }
 }

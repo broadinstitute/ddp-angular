@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Router} from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   throwError,
@@ -13,7 +13,6 @@ import { SessionService } from './session.service';
 import { RoleService } from './role.service';
 import { DSMService } from './dsm.service';
 import { ComponentService } from './component.service';
-import { Statics } from '../utils/statics';
 import { SessionMementoService } from 'ddp-sdk';
 
 // Avoid name not found warnings
@@ -114,7 +113,7 @@ export class Auth {
   }
 
   public getRealmListObs(): Observable<NameValue[]> {
-    return this.realmListForPicklist.asObservable()
+    return this.realmListForPicklist.asObservable();
   }
 
   public logout(): void {
