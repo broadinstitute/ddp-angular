@@ -29,7 +29,7 @@ export class AppComponent {
     const link = this.findNearestAnchorElement(event.target);
 
     // stop if it's the same origin navigation
-    if (!link || !link.href || !link.host || link.host === location.host || link.classList.contains(IGNORE_ANALYTICS_CLASS)) {
+    if (this.shouldNotSendAnalytics(link)) {
       return;
     }
 
@@ -40,6 +40,10 @@ export class AppComponent {
       setTimeout(function() { location.href = link.href; }, 100);
       event.preventDefault();
     }
+  }
+
+  private shouldNotSendAnalytics(link: HTMLAnchorElement): boolean {
+    return !link || !link.href || !link.host || link.host === location.host || link.classList.contains(IGNORE_ANALYTICS_CLASS);
   }
 
   @HostListener('window:beforeunload')
