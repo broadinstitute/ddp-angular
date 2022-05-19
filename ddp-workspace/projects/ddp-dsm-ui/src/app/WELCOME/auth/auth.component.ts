@@ -1,24 +1,24 @@
 import {Component, OnInit} from '@angular/core';
-import {Auth} from '../../services/auth.service';
+import {Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 import {Observable, tap} from 'rxjs';
-import {ComponentService} from "../../services/component.service";
-import {Router} from "@angular/router";
+import {Auth} from '../../services/auth.service';
+import {ComponentService} from '../../services/component.service';
 
 
 @Component({
   selector: 'app-auth',
   template: `
-    <div class="container" *ngIf="!(pickList$ | async)?.length else pickStudy">
-      <mat-spinner *ngIf="loading" mode="indeterminate"></mat-spinner>
-      <div *ngIf="(authError | async) as errorMessage">
+    <div class='container' *ngIf='!(pickList$ | async)?.length else pickStudy'>
+      <mat-spinner *ngIf='loading' mode='indeterminate'></mat-spinner>
+      <div *ngIf='(authError | async) as errorMessage'>
         <h2>{{ errorMessage }}</h2>
-        <button mat-raised-button color="primary" (click)="showAuthPopUp()">Try again</button>
+        <button mat-raised-button color='primary' (click)='showAuthPopUp()'>Try again</button>
       </div>
     </div>
 
     <ng-template #pickStudy>
-      <app-pick-study [pickList]="pickList$ | async"></app-pick-study>
+      <app-pick-study [pickList]='pickList$ | async'></app-pick-study>
     </ng-template>
   `,
   styles: [`
@@ -45,9 +45,9 @@ export class AuthComponent implements OnInit {
   constructor(private auth: Auth, private title: Title, private router: Router) {}
 
   ngOnInit(): void {
-    if(this.auth.authenticated()) {
+    if (this.auth.authenticated()) {
       const selectedRealm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
-      this.router.navigate([selectedRealm])
+      this.router.navigate([selectedRealm]);
     } else {
       this.startAppAuth();
       this.pickList$ = this.auth.getRealmListObs();
@@ -86,5 +86,4 @@ export class AuthComponent implements OnInit {
       }
     }));
   }
-
 }

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Router, RouterStateSnapshot, CanLoad, Route, UrlSegment, UrlTree} from '@angular/router';
+import {Router, CanLoad, Route, UrlSegment, UrlTree} from '@angular/router';
 import {Auth} from '../services/auth.service';
 import {ComponentService} from '../services/component.service';
 import {SessionService} from '../services/session.service';
@@ -14,7 +14,7 @@ export class StudyGuard implements CanLoad {
     const selectedRealm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     const allowed = this.allowAccessToStudy(selectedRealm, segments[0].path);
 
-    console.log('guarding')
+    console.log('guarding');
 
     return allowed ? allowed : this.router.createUrlTree(['']);
   }

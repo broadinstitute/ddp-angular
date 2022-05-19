@@ -1,13 +1,13 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   Router,
   CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot
 } from '@angular/router';
-import {Auth} from '../services/auth.service';
-import {ComponentService} from '../services/component.service';
-import {SessionService} from '../services/session.service';
+import { Auth } from '../services/auth.service';
+import { ComponentService } from '../services/component.service';
+import { SessionService } from '../services/session.service';
 
 @Injectable({providedIn: 'root'})
 export class StudyActGuard implements CanActivate {
@@ -18,8 +18,10 @@ export class StudyActGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const selectedRealm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     const allowed = this.allowAccessToStudy(selectedRealm, route);
-    if(allowed) return true;
-    this.router.navigate([selectedRealm ? state.url : ''])
+    if (allowed) {
+      return true;
+    }
+    this.router.navigate([selectedRealm ? state.url : '']);
     return false;
   }
 

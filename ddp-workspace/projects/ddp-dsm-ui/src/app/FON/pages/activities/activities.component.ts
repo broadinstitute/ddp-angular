@@ -12,7 +12,7 @@ import { patientListModel } from '../participantsList/models/participantList.mod
 
 export class ActivitiesComponent implements OnInit {
   activityGuides: Observable<any>;
-  panelOpenState: boolean = true;
+  panelOpenState = true;
   currentParticipant: patientListModel;
 
   constructor(private agent: AgentService, private activatedRoute: ActivatedRoute) {

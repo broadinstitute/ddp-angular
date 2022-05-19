@@ -8,22 +8,22 @@ import {ConfigurationService, DdpModule, LanguageService, LoggingService} from '
 import {StackdriverErrorReporterDsmService} from './services/stackdriver-error-reporter.service';
 import {CheckAuthGuard} from './guards/checkAuth.guard';
 import {StudyGuard} from './guards/study.guard';
-import {NavigationComponent} from "./FON/layout/navigation/navigation.component";
-import {HomeComponent} from "./FON/pages/home/home.component";
-import {ParticipantsListComponent} from "./FON/pages/participantsList/participantsList.component";
-import {ActivitiesComponent} from "./FON/pages/activities/activities.component";
-import {FonComponent} from "./FON/fon.component";
-import {ActivityComponent} from "./FON/pages/activities/activity/activity.component";
-import {StudyActGuard} from "./guards/studyAct.guard";
-import {AgentService} from "./FON/services/agent.service";
+import {NavigationComponent} from './FON/layout/navigation/navigation.component';
+import {HomeComponent} from './FON/pages/home/home.component';
+import {ParticipantsListComponent} from './FON/pages/participantsList/participantsList.component';
+import {ActivitiesComponent} from './FON/pages/activities/activities.component';
+import {FonComponent} from './FON/fon.component';
+import {ActivityComponent} from './FON/pages/activities/activity/activity.component';
+import {StudyActGuard} from './guards/studyAct.guard';
+import {AgentService} from './FON/services/agent.service';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {TranslateService} from "@ngx-translate/core";
-import {LOCATION_INITIALIZED} from "@angular/common";
+import {TranslateService} from '@ngx-translate/core';
+import {LOCATION_INITIALIZED} from '@angular/common';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -84,7 +84,7 @@ const material = [
   MatIconModule,
   MatPaginatorModule,
   MatProgressSpinnerModule
-]
+];
 
 @NgModule({
   declarations: [
