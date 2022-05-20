@@ -14,10 +14,13 @@ export class ActivityYearRequiredDateValidationRule extends ActivityAbstractVali
             if (!this.isBlank(value) && value.year === null) {
                 this.result = this.message;
                 return false;
+            } else {
+                this.result = null;
+                return true;
             }
         }
-        this.result = null;
-        return true;
+        this.result = this.message;
+        return false;
     }
 
     private isBlank(value: DatePickerValue): boolean {

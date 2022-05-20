@@ -14,10 +14,13 @@ export class ActivityDayRequiredDateValidationRule extends ActivityAbstractValid
             if (!this.isBlank(value) && value.day === null) {
                 this.result = this.message;
                 return false;
+            } else {
+                this.result = null;
+                return true;
             }
         }
-        this.result = null;
-        return true;
+        this.result = this.message;
+        return false;
     }
 
     private isBlank(value: DatePickerValue): boolean {

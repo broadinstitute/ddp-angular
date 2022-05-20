@@ -21,8 +21,8 @@ export class ActivityDateRangeValidationRule extends ActivityAbstractValidationR
                 return valid;
             }
         }
-        this.result = null;
-        return true;
+        this.result = this.message;
+        return false;
     }
 
     private isWithinRange(value: DatePickerValue): boolean {
