@@ -63,7 +63,7 @@ export class GovernedUserService {
             block =>
               (block as ActivityPicklistQuestionBlock).stableId ===
               this.SELF_DESCRIBE_STABLE_ID,
-          )
+          );
         }
       ),
       pluck('answer'),
