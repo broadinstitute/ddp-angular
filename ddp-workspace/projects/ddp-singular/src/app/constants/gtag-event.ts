@@ -1,0 +1,15 @@
+export enum GTagEvent {
+  SIGN_UP_CLICK = 'sign_me_up_button_click',
+  PDF_DOWNLOAD = 'pdf_download',
+  LOG_IN_CLICK = 'login_click',
+  OUTBOUND_LINK_CLICK = 'outbound_link_click',
+  TWITTER_OUTBOUND_CLICK = 'twitter_outbound_click',
+  FACEBOOK_OUTBOUND_CLICK = 'facebook_outbound_click',
+  INSTAGRAM_OUTBOUND_CLICK = 'instagram_outbound_click',
+  VIDEO_CLICK = 'video_click',
+  APPLY_HERE_CLICK = 'apply_here_button_click',
+  EMAIL_CONTACT = 'email_contact',
+  PHONE_CONTACT = 'phone_contact',
+  SURVEY_SUBMIT = 'survey_submit',
+  SURVEY_CLOSE = 'survey_close',
+}

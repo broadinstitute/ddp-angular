@@ -54,8 +54,10 @@ export class ViewFilter {
 
   public copy(): ViewFilter {
     const f: Filter[] = [];
-    for (const filter of this.filters) {
-      f.push(filter.copy());
+    if (this.filters) {
+      for (const filter of this.filters) {
+        f.push(filter.copy());
+      }
     }
     const c = {};
     for (const key of Object.keys(this.columns)) {

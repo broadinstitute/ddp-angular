@@ -47,10 +47,10 @@
           </a>
         </li>
         <li class="link-list__item auth-item" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active">
-          <ddp-sign-in-out [signOutReturnToUrl]="Route.Home"></ddp-sign-in-out>
+          <ddp-sign-in-out (signIn)="signIn()" [signOutReturnToUrl]="Route.Home"></ddp-sign-in-out>
         </li>
         <li class="link-list__item" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active" *ngIf="!isAuthenticated">
-          <a class="button button--primary button--wide" [routerLink]="Route.PreScreening">
+          <a (click)="signUp($event)" class="button button--primary button--wide" [routerLink]="Route.PreScreening">
             {{ 'Header.Links.SignMeUp' | translate }}
           </a>
         </li>
