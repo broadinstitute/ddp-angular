@@ -16,6 +16,7 @@ export class AgentService {
 
   private patients$ = new BehaviorSubject<any>(null);
   private loadingData$ = new BehaviorSubject<boolean>(false);
+  private totalCount$ = new BehaviorSubject<number>(0);
 
 
   constructor(private dsmService: DSMService) {
@@ -23,19 +24,20 @@ export class AgentService {
 
   getPatients(): Observable<patientListModel[]> {
     this.loadingData$.next(true);
-    return this.patients$.asObservable().pipe(map(data => data && this.collectParticipantData(data?.participants)));
+    return this.patients$.asObservable().pipe(map(data => data && this.collectParticipantData(data)));
   }
 
   getPatientsTotalCount(): Observable<number> {
-    return this.patients$.asObservable().pipe(map(data => data && data?.totalCount));
+    return this.totalCount$.asObservable()
   }
 
   getActivityInstances(guid: string): any {
-    return this.patients$.asObservable().pipe(map(data => data && this.collectActivityGuids(data?.participants, guid)));
+    return this.patients$.asObservable().pipe(map(data => data && this.collectActivityGuids(data, guid)));
   }
 
   setPage(from: number, to: number): void {
     this.loadingData$.next(true);
+    this.patients$.next(null);
     this.getPatientsRequest(from, to);
   }
 
@@ -48,7 +50,8 @@ export class AgentService {
       .applyFilter(null, this.STUDY, this.PARENT, null, from, to)
       .subscribe(data => {
         this.loadingData$.next(false);
-        this.patients$.next(data);
+        this.patients$.next(data.participants);
+        this.totalCount$.next(data.totalCount)
       });
   }
 
