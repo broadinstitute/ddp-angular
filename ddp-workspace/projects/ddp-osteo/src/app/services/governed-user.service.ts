@@ -58,7 +58,7 @@ export class GovernedUserService {
       pluck('blocks'),
       map(blocks =>
         {
-          console.log(blocks, "block logs")
+          console.log(blocks, "block logs");
           return         blocks.find(
             block =>
               (block as ActivityPicklistQuestionBlock).stableId ===
