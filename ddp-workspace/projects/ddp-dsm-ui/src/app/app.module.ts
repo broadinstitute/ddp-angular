@@ -47,6 +47,11 @@ sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
 sdkConfig.auth0ClaimNameSpace = DDP_ENV.auth0ClaimNameSpace;
 sdkConfig.errorPageUrl = 'dss-error';
 
+// temporary for DSM FON
+// for using when click on `Close` activity button (displaying DSS activities inside of DSM FON)
+// it should navigate/return to dashboard usually, but DSM FON part does not have any dashboard
+sdkConfig.dashboardPageUrl = '/fon/patients';
+
 
 
 export function translateFactory(translate: TranslateService,
