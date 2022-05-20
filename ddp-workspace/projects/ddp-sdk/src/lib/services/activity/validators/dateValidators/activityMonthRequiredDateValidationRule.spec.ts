@@ -18,6 +18,7 @@ describe('ActivityMonthRequiredDateValidationRule', () => {
         question.fields = [DateField.Day, DateField.Month, DateField.Year];
         question.answer = null;
         validator = new ActivityMonthRequiredDateValidationRule(question);
+        validator.message = MESSAGE;
         expect(validator.recalculate()).toBeFalsy();
         expect(validator.result).toBe(MESSAGE);
     });

@@ -22,11 +22,12 @@ describe('ActivityDateRangeValidationRule', () => {
         question.fields = [DateField.Day, DateField.Month, DateField.Year];
         question.answer = null;
         validator = new ActivityDateRangeValidationRule(question);
+        validator.message = MESSAGE;
         expect(validator.recalculate()).toBeFalsy();
         expect(validator.result).toBe(MESSAGE);
     });
 
-    it('should return true if all fields are empty', () => {
+    it('should return false if all fields are empty', () => {
         const question = new ActivityDateQuestionBlock();
         question.fields = [DateField.Day, DateField.Month, DateField.Year];
         question.answer = {
@@ -35,6 +36,7 @@ describe('ActivityDateRangeValidationRule', () => {
             year: null
         };
         validator = new ActivityDateRangeValidationRule(question);
+        validator.message = MESSAGE;
         expect(validator.recalculate()).toBeFalsy();
         expect(validator.result).toBe(MESSAGE);
     });
