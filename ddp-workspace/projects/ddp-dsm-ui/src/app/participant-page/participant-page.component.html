@@ -495,7 +495,7 @@ participant.data.dsm['diagnosisYear'] != null">
                            (selectionChange)="onAdditionalValueChange($event, fieldSetting.columnName)"
                            [disabled]="participantExited"
                            [ngClass]="{'Color--Field--Patched': isPatchedCurrently(fieldSetting.columnName)}">
-                  <mat-option *ngFor="let op of fieldSetting.possibleValues" [value]="op.value">{{op.value}}</mat-option>
+                  <mat-option *ngFor="let op of fieldSetting.possibleValues" [value]="op.value">{{op.name}}</mat-option>
                 </mat-select>
                 <mat-checkbox *ngIf="fieldSetting.displayType === 'CHECKBOX'" color="primary" disableRipple
                              [ngModel]="getAdditionalValue(fieldSetting.columnName)"
@@ -511,6 +511,7 @@ participant.data.dsm['diagnosisYear'] != null">
             </tr>
         </table>
       </div>
+      <br/><br/>
 
       <div class="Float--left Width--100">
           <!--tab order is not working when tabs have ngIf, will just put them at the end of static tabs. therefore ngIf=true is added to static tabs-->
