@@ -42,6 +42,7 @@ import { ActivityPageComponent } from './components/activity-page/activity-page.
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
 import { MatTableModule } from '@angular/material/table';
+import { GovernedUserService } from './services/governed-user.service';
 
 
 const baseElt = document.getElementsByTagName('base');
@@ -176,6 +177,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
 
   ],
   providers: [
+    GovernedUserService,
+    
     {
       provide: 'ddp.config',
       useValue: config
@@ -190,7 +193,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
       deps: [
         TranslateService,
         Injector,
-        LoggingService
+        LoggingService,
       ],
       multi: true
     },

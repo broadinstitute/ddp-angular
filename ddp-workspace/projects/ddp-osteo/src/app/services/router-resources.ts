@@ -1,0 +1,16 @@
+export enum RoutePaths {
+  Index = '',
+  Password = 'password',
+  Auth = 'auth',
+  LoginLanding = 'login-landing',
+  LoginLandingWithMode = 'login-landing/:mode',
+  Dashboard = 'dashboard',
+  ParticipantsList = 'participants',
+  Activity = 'activity',
+  Activities = 'activity/:instanceGuid',
+  Error = 'error',
+  TermsOfUse = 'terms-of-use',
+  PrivacyPolicy = 'privacy-policy',
+  Survey = 'survey',
+  LoginRedirect = 'login-redirect',
+}

@@ -31,6 +31,9 @@
             </p>
         </div>
     </section>
+    <div >
+        <p class="intro__text" [innerHTML]="'SDK.DashboardIntro.Text' | translate"></p>
+    </div>
     <section *ngIf="isAdmin && !subjectInfoExists; else dashboard" class="section">
         <div class="content content_medium">
             <div class="dashboard-message">

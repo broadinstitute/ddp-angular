@@ -968,6 +968,9 @@
             "November": "November",
             "December": "December"
         },
+        "DashboardIntro": {
+            "Text": "Thank you for being part of the Osteosarcoma project. This page contains links to your child’s forms and surveys that are part of the study. Over time, we may add additional surveys for your consideration. The information you provide will help drive our understanding of cancer. <br><br> If at any time you have questions or would like to share updated information, please contact the study team at info@OSproject.org or call 651-602-2020."
+        },
         "DateLabel": {
             "YYYY": "YYYY",
             "MM": "MM",

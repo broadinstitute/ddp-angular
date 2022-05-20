@@ -16,5 +16,8 @@ export class AboutUsComponent implements OnInit {
   public ngOnInit(): void {
     this.countMeInUrl = this.toolkitConfiguration.countMeInUrl;
     this.headerConfig.setupDefaultHeader();
+
   }
+
+
 }
