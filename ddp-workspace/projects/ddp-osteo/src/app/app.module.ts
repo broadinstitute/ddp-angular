@@ -178,7 +178,6 @@ export function translateFactory(translate: TranslateService, injector: Injector
   ],
   providers: [
     GovernedUserService,
-    
     {
       provide: 'ddp.config',
       useValue: config
