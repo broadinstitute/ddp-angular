@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import {Observable, tap} from 'rxjs';
+import {Observable, Subject, tap} from 'rxjs';
 import { AgentService } from '../../services/agent.service';
 import { patientListModel } from '../participantsList/models/participantList.model';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-activities',
@@ -10,10 +11,12 @@ import { patientListModel } from '../participantsList/models/participantList.mod
   styleUrls: ['./activities.component.scss']
 })
 
-export class ActivitiesComponent implements OnInit {
+export class ActivitiesComponent implements OnInit, OnDestroy {
   patientWithActivities: Observable<any>;
   panelOpenState = true;
   loading$: Observable<boolean>;
+
+  getAllObs = new Subject();
 
 
   constructor(private agent: AgentService, private activatedRoute: ActivatedRoute) {
@@ -22,10 +25,14 @@ export class ActivitiesComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.patientWithActivities = this.agent.getActivityInstances(params.guid).pipe(tap(data => {
-        !data && this.agent.getAll().subscribe();
+        !data && this.agent.getAll().pipe(takeUntil(this.getAllObs)).subscribe();
       }));
     });
     this.loading$ = this.agent.isLoading();
+  }
+
+  ngOnDestroy(): void {
+    this.getAllObs.next(null);
   }
 
   navigate($event: any): void {
