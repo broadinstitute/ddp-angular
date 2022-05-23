@@ -72,7 +72,9 @@
             },
             {
               "Question": "Are there any costs for participants to participate?",
-              "Paragraphs": ["No, there are no costs for the participant associated with any step in the project."]
+              "Paragraphs": [
+                "No, there are no costs for the participant associated with any step in the project."
+              ]
             },
             {
               "Question": "Is this research being conducted for profit?",
@@ -161,7 +163,9 @@
             },
             {
               "Question": "How can I receive updates on the LMSproject?",
-              "Paragraphs": ["If you would like updates on the project, please sign up for our mailing list."]
+              "Paragraphs": [
+                "If you would like updates on the project, please sign up for our mailing list."
+              ]
             }
           ]
         }
@@ -540,7 +544,7 @@
   },
   "FYP": {
     "FYP": {
-      "headerText": "For Your Physician",
+      "HeaderText": "For Your Physician",
       "Purpose": "The purpose of this page is to provide details about the Leiomyosarcoma Project to your physician and care team so they can learn more about the project. You can show them this website, or print out a PDF below with the same information to discuss at your next appointment",
       "downloadTitle": "Download printable PDF to share with your care team",
       "paragraphTitle1": "The Leiomyosarcoma Project (LMSproject) ",
@@ -571,7 +575,125 @@
       "paragraphText5part4": "If you have any questions about this study, please reach out to us at ",
       "paragraphText5part5": "or 651-403-5556.",
       "paragraphText5part6": "The Leiomyosarcoma project is part of Count Me In."
-
     }
+  },
+  "ParticipatingSection": {
+    "Title": "Participating is easy",
+    "AllowList": {
+      "Title": "You can choose to allow the study team to:",
+      "Option1": "send you a simple kit to collect a saliva sample",
+      "Option2": "request copies of your medical records"
+    },
+    "Opt-inToList": {
+      "Title": "You may also opt-in to:",
+      "Option1": "sharing a blood sample",
+      "Option2": "allowing the team to request a portion of tumor tissue (if available)",
+      "Option3": "receiving information about what we've learned from the genomic sequencing of your / your child's tumor sample (if we are able to send these to you)",
+      "Option4": "providing an additional saliva sample to learn more about your/your child's normal DNA with the help of a genetic counselor"
+    },
+    "ClosingText": {
+      "Part1": "We will do the rest",
+      "Part2": " — with your permission, we’ll obtain copies of your medical records and send you a saliva kit."
+    },
+    "IframeTitle": "YouTube video about participating"
+  },
+  "ParticipateSection": {
+    "Title": "Here’s how to participate",
+    "Steps": [
+      {
+        "Title": "STEP 1",
+        "Time": "10-15 minutes",
+        "Description": "Provide consent and tell us where you’ve been treated",
+        "ImageAlt": "Computer screen displaying online consent form"
+      },
+      {
+        "Title": "STEP 2",
+        "Time": "5 minutes",
+        "Description": "Answer questions about your cancer",
+        "ImageAlt": "Computer screen displaying online survey"
+      },
+      {
+        "Title": "STEP 3",
+        "Time": "10 minutes",
+        "Description": "Provide samples (we’ll send a kit)",
+        "ImageAlt": "Sample collection kit"
+      },
+      {
+        "Title": "STEP 4",
+        "Time": "Ongoing",
+        "Description": "Learn with us along the way",
+        "ImageAlt": "Speech bubbles sharing hearts and data visualizations"
+      }
+    ],
+    "LearnMoreAboutParticipationButton": "Learn more about participation"
+  },
+  "StayInformedSection": {
+    "Title": "Stay informed",
+    "Text": "Sign up for our mailing list or follow us on social media",
+    "JoinMailingListButton": "Join Mailing List"
+  },
+  "CountMeInSection": {
+    "Title": "Join the movement and say Count Me In",
+    "Text": "With your help, patients can be the driving force behind transformative cancer research.",
+    "ImageAlt": "Hands raised to volunteer"
+  },
+  "ParticipationPage": {
+    "Title": "Here’s how to participate",
+    "Steps": [
+      {
+        "Step": "STEP 1",
+        "Time": "10-15 minutes",
+        "Title": "Provide consent for the study",
+        "Text": "The consent form is how participants give researchers their permission to take part in the study. This section consists of several pages, we encourage participants to take their time. Any progress will be automatically saved and can be re-accessed later. For participants who are signing up for / with their child, depending on their age, we may also ask the child to “assent” or agree that they would also like to participate in the study.",
+        "Button": "View Consent Document",
+        "ImageAlt": "Computer screen displaying online consent form"
+      },
+      {
+        "Step": "STEP 2",
+        "Time": "5 minutes",
+        "Title": "Tell us where you’ve been treated",
+        "Text": "We ask where patients have been treated for their cancer, so that we can request medical records, and if applicable, archived tumor tissue.",
+        "Button": "View Medical Release",
+        "ImageAlt": "Computer screen displaying medical center"
+      },
+      {
+        "Step": "STEP 3",
+        "Time": "Time varies by survey",
+        "Title": "Respond to surveys about you and your experience with cancer",
+        "Text": "In these surveys we ask questions about a participant’s experience with osteosarcoma, like when they were diagnosed and the types of treatments they've had.",
+        "Button": "View Surveys",
+        "ImageAlt": "Computer screen displaying online survey"
+      },
+      {
+        "Step": "STEP 4",
+        "Time": "10 minutes",
+        "Title": "Provide a saliva and/or blood sample",
+        "Text": "We will send participants a kit to collect a sample of their saliva and/or blood, along with easy to follow instructions. We will study these samples to help improve our understanding of cancer by comparing the normal DNA in a participant's saliva or blood to their tumor DNA from any tumor samples we may collect.",
+        "Button": "View Kit Instructions",
+        "ImageAlt": "Sample collection kit"
+      }
+    ]
+  },
+  "BenefitsParticipation": {
+    "Title": "Benefits of Participation",
+    "Participations": [
+      {
+        "step": "Stay involved",
+        "Text": "Over time, we will provide participants with regular updates about the status of the research and share any discoveries that they have enabled us to make. We may also contact participants to participate in focus groups or provide additional feedback related to the overall project experience — we want to hear what’s important to you.",
+        "ImageAlt": "Speech bubbles sharing hearts and data visualizations"
+      },
+      {
+        "step": "Receive information about what we've learned from your tumor sample, if you choose",
+        "Text": "If participants choose to share archive tissue samples with the project, we may be able to share information about what we've learned from the genomic sequencing of a participant's tumor sample back with them. This information is intended to highlight how participants are contributing to research and will not have implications for their treatment or prognosis. Because of regulatory restrictions, we are unable to share results with participants in New York and Canada.",
+        "Button": "What types of information is shared about tumor samples?",
+        "Button1": "Download printable PDF to share with your care team",
+        "ImageAlt": "Computer screen displaying medical center"
+      },
+      {
+        "step": "Learn more about your normal DNA, if you choose",
+        "Text": "The OSproject is also partnering with Invitae in order to sequence and share information on germline DNA (or “normal” DNA) from saliva samples. During the project, participants will be able to decide if they’d like to provide an additional saliva sample to learn more about their/their child’s normal DNA and speak with a genetic counselor to understand these results. If a participant chooses not to participate in this process, their data will not be shared with Invitae. This process is not available for participants in Canada, as Invitae is not licensed to provide genetic counseling services there.",
+        "ImageAlt": "Computer screen displaying online survey"
+      }
+    ]
   }
 }
