@@ -31,6 +31,21 @@
             </p>
         </div>
     </section>
+
+    <div *ngIf="isParent | async; else childOrLovedOne">
+        PARENT INTRO
+    </div>
+
+    <ng-template #childOrLovedOne>
+        <div *ngIf="isChild | async; else lovedOne">
+            CHILD INTRO
+        </div>
+
+        <ng-template #lovedOne>
+            <div>LOVED ONE INTRO</div>
+        </ng-template>
+    </ng-template>
+
     <section *ngIf="isAdmin && !subjectInfoExists; else dashboard" class="section">
         <div class="content content_medium">
             <div class="dashboard-message">

@@ -5,4 +5,7 @@ export enum SubmitButtonPlacement {
 
 export enum ActivityCode {
     AboutYouOrChild = 'ABOUT_YOU_ACTIVITY',
+    Consent = 'CONSENT',
+    ConsentAssent = 'CONSENT_ASSENT',
+    LovedOne = 'LOVEDONE',
 }
