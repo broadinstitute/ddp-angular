@@ -1,10 +1,10 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { CohortTag } from './cohort-tag.model';
+import { Component, Input, OnInit } from '@angular/core';
 import {MatChipInputEvent} from '@angular/material/chips';
-import {COMMA, ENTER, P} from '@angular/cdk/keycodes';
+import {COMMA, ENTER } from '@angular/cdk/keycodes';
 
 import { ComponentService } from '../../services/component.service';
 import { DSMService } from '../../services/dsm.service';
+import { CohortTag } from './cohort-tag.model';
 
 @Component({
   selector: 'app-cohort-tag',
@@ -12,7 +12,6 @@ import { DSMService } from '../../services/dsm.service';
   styleUrls: ['./cohort-tag.component.scss']
 })
 export class CohortTagComponent implements OnInit {
-
   @Input() ddpParticipantId: string;
   @Input() dsm: Object;
 
@@ -44,16 +43,20 @@ export class CohortTagComponent implements OnInit {
 
     if (value) {
       const newTag = new CohortTag(value, this.ddpParticipantId);
-      this.dsmService.createCohortTag(JSON.stringify(newTag), this.compService.getRealm()).subscribe(cohortTagId => {
-        newTag.cohortTagId = parseInt(cohortTagId);
-      }, err => {
-        this.remove(newTag);
-      });
+      this.dsmService.createCohortTag(JSON.stringify(newTag), this.compService.getRealm())
+        .subscribe({
+          next: cohortTagId => {
+            newTag.cohortTagId = parseInt(cohortTagId);
+          },
+          error: () => {
+            this.remove(newTag);
+          }
+        });
       this.getTags().push(newTag);
-      // Clear the input value
-      event.chipInput!.clear();
-    }
 
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      event.chipInput!.clear();  // Clear the input value
+    }
   }
 
   remove(tagToRemove: CohortTag): void {
@@ -61,9 +64,7 @@ export class CohortTagComponent implements OnInit {
 
     if (foundTagIndex >= 0) {
       if (tagToRemove.cohortTagId) {
-        this.dsmService.deleteCohortTag(tagToRemove.cohortTagId, this.compService.getRealm()).subscribe(data => {
-
-        }, err => {});
+        this.dsmService.deleteCohortTag(tagToRemove.cohortTagId, this.compService.getRealm()).subscribe();
       }
       this.getTags().splice(foundTagIndex, 1);
     }
