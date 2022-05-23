@@ -9,7 +9,6 @@ import {StackdriverErrorReporterDsmService} from './services/stackdriver-error-r
 import {CheckAuthGuard} from './guards/checkAuth.guard';
 import {StudyGuard} from './guards/study.guard';
 import {NavigationComponent} from './FON/layout/navigation/navigation.component';
-import {HomeComponent} from './FON/pages/home/home.component';
 import {ParticipantsListComponent} from './FON/pages/participantsList/participantsList.component';
 import {ActivitiesComponent} from './FON/pages/activities/activities.component';
 import {FonComponent} from './FON/fon.component';
@@ -24,6 +23,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {TranslateService} from '@ngx-translate/core';
 import {LOCATION_INITIALIZED} from '@angular/common';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -88,7 +88,8 @@ const material = [
   MatListModule,
   MatIconModule,
   MatPaginatorModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatProgressBarModule
 ];
 
 @NgModule({
@@ -96,7 +97,6 @@ const material = [
     AppComponent,
     NavigationComponent,
     FonComponent,
-    HomeComponent,
     ActivityComponent,
     ParticipantsListComponent,
     ActivitiesComponent
