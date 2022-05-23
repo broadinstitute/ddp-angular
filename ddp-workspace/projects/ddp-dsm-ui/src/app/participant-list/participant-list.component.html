@@ -740,7 +740,7 @@
                         <p class="BIT-OF-MARGIN">
                           <ng-container *ngIf="col.participantColumn.object !== 'testResult'">
                             <ng-container
-                              *ngIf="col.type !== 'DATE' && col.type !== 'BOOLEAN' && col.type !== 'OPTIONS' && col.type !== 'CHECKBOX'">{{tag[col.participantColumn.name]}}
+                              *ngIf="!['DATE', 'BOOLEAN', 'OPTIONS', 'CHECKBOX'].includes(col.type)">{{tag[col.participantColumn.name]}}
                             </ng-container>
                             <ng-container
                               *ngIf="col.type === 'BOOLEAN' || col.type === 'CHECKBOX'">{{getUtil().getYesNo(tag[col.participantColumn.name])}}

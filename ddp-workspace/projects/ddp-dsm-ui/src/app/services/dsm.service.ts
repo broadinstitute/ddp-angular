@@ -290,9 +290,10 @@ export class DSMService {
 
   public createCohortTag(body: string, realm: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'createCohortTag';
-    const map: { name: string; value: any }[] = [];
-    map.push({name: 'userId', value: this.role.userID()});
-    map.push({name: 'realm', value: realm});
+    const map = [
+      { name: 'userId', value: this.role.userID() },
+      { name: 'realm', value: realm }
+    ];
     return this.http.post(url, body, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );
@@ -300,10 +301,11 @@ export class DSMService {
 
   public deleteCohortTag(cohortTagId: number, realm: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'deleteCohortTag';
-    const map: { name: string; value: any }[] = [];
-    map.push({name: 'userId', value: this.role.userID()});
-    map.push({name: 'cohortTagId', value: cohortTagId});
-    map.push({name: 'realm', value: realm});
+    const map = [
+      { name: 'userId', value: this.role.userID() },
+      { name: 'realm', value: realm },
+      { name: 'cohortTagId', value: cohortTagId }
+    ];
     return this.http.delete(url, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );

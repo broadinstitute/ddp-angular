@@ -20,21 +20,23 @@ export class CohortTagComponent implements OnInit {
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   tags: CohortTag[];
 
+  public readonly COHORT_TAG = 'cohortTag';
+
   constructor(private compService: ComponentService, private dsmService: DSMService) { }
 
   ngOnInit(): void {
     if (this.hasNotCohortTag()) {
-      this.dsm['cohortTag'] = [];
+      this.dsm[this.COHORT_TAG] = [];
     }
     this.tags = this.getTags();
   }
 
   private hasNotCohortTag(): boolean {
-    return !this.dsm['cohortTag'];
+    return !this.dsm[this.COHORT_TAG];
   }
 
   private getTags(): CohortTag[] {
-    return this.dsm['cohortTag'];
+    return this.dsm[this.COHORT_TAG];
   }
 
   add(event: MatChipInputEvent): void {
@@ -68,7 +70,7 @@ export class CohortTagComponent implements OnInit {
   }
 
 
-  private isTheSameTag(tagToRemove: CohortTag, tag: CohortTag): unknown {
+  private isTheSameTag(tagToRemove: CohortTag, tag: CohortTag): boolean {
     if (tagToRemove.cohortTagId && tag.cohortTagId) {
       return tagToRemove.cohortTagId === tag.cohortTagId;
     }
