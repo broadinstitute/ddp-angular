@@ -33,16 +33,16 @@
     </section>
 
     <div *ngIf="isParent | async; else childOrLovedOne">
-        PARENT INTRO
+        <p [innerHTML]="'DashboardIntro.isParent' | translate"></p>
     </div>
 
     <ng-template #childOrLovedOne>
         <div *ngIf="isChild | async; else lovedOne">
-            CHILD INTRO
+            <p [innerHTML]="'DashboardIntro.isChild' | translate"></p>
         </div>
 
         <ng-template #lovedOne>
-            <div>LOVED ONE INTRO</div>
+            <p [innerHTML]="'DashboardIntro.isLovedOne' | translate"></p>
         </ng-template>
     </ng-template>
 
