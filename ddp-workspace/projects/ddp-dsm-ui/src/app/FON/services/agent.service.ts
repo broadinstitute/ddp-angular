@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {exhaustMap, finalize, map, mergeMap, shareReplay, tap, withLatestFrom} from 'rxjs/operators';
-import {BehaviorSubject, forkJoin, Observable, ObservableInput, of} from 'rxjs';
+import { finalize, map, shareReplay, tap} from 'rxjs/operators';
+import {BehaviorSubject, forkJoin, Observable, ObservableInput} from 'rxjs';
 import { DSMService } from '../../services/dsm.service';
 import { patientListModel } from '../pages/participantsList/models/participantList.model';
 

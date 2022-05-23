@@ -18,7 +18,7 @@ import {ComponentService} from '../../services/component.service';
     </div>
 
     <ng-template #pickStudy>
-      <app-pick-study [pickList]='pickList$ | async'></app-pick-study>
+      <app-pick-study *ngIf="!popUpIsShown" [pickList]='pickList$ | async'></app-pick-study>
     </ng-template>
   `,
   styles: [`
@@ -39,6 +39,7 @@ import {ComponentService} from '../../services/component.service';
 
 export class AuthComponent implements OnInit {
   loading = false;
+  popUpIsShown = true;
   authError: Observable<string | null>;
   pickList$: Observable<any>;
 
@@ -72,12 +73,14 @@ export class AuthComponent implements OnInit {
 
   private popUpShown(): void {
     this.loading = false;
+    this.popUpIsShown = true;
     this.auth.authError.next(null);
     this.title.setTitle('DDP Study Management');
   }
 
   private popUpHidden(): void {
     this.loading = true;
+    this.popUpIsShown = false;
     this.title.setTitle('Logging in...');
     this.authError = this.auth.authError.pipe(tap(error => {
       if(error) {
