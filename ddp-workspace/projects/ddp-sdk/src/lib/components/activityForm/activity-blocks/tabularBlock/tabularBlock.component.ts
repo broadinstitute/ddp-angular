@@ -44,14 +44,14 @@ export class TabularBlockComponent implements OnInit {
 
     // The index of the child is zero-based, but to calculate "even" we consider first row of table/grid "1"
     private isEven(gridChildZeroBasedIndex: number): boolean {
-       return (Math.floor(gridChildZeroBasedIndex / this.block.numberOfColumns) + 1) % 2 == 0;
+       return (Math.floor(gridChildZeroBasedIndex / this.block.numberOfColumns) + 1) % 2 === 0;
     }
 
     // grid layout child element zero-based index for question with given index
     private numberOfGridCellsBefore(questionIndex: number): number {
         const total =  this.block.content.slice(0, questionIndex) // all the questions before this one
             .map(question => question.columnSpan) // columnSpan for them
-            .reduce((previousTotal, columnsThisQuestion) => previousTotal + columnsThisQuestion, 0) //total them
+            .reduce((previousTotal, columnsThisQuestion) => previousTotal + columnsThisQuestion, 0); //total them
         return total;
     }
 
