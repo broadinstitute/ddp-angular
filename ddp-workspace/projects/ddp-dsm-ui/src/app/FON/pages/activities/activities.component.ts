@@ -22,7 +22,7 @@ export class ActivitiesComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.patientWithActivities = this.agent.getActivityInstances(params.guid).pipe(tap(data => {
-        !data && this.agent.getAll().subscribe()
+        !data && this.agent.getAll().subscribe();
       }));
     });
     this.loading$ = this.agent.isLoading();

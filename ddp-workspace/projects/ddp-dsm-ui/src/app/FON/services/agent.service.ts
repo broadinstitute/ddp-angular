@@ -29,7 +29,7 @@ export class AgentService {
   }
 
   getPatientsTotalCount(): Observable<number> {
-    return this.totalCount$.asObservable()
+    return this.totalCount$.asObservable();
   }
 
   getActivityInstances(guid: string): any {
@@ -40,7 +40,7 @@ export class AgentService {
         map(data => data?.find(pt => pt.guid === guid)
         ),
         finalize(() => this.loadingData$.next(false))
-      )
+      );
   }
 
   setPage(from: number, to: number): ObservableInput<any> {
@@ -53,7 +53,7 @@ export class AgentService {
     return this.loadingData$.asObservable();
   }
 
-  public getAll(fromPage?: number, toPage?: number) {
+  public getAll(fromPage?: number, toPage?: number): Observable<any> {
     const {from, to} = JSON.parse(localStorage.getItem('pListQueryParams'));
 
    return forkJoin([this.getPatientsRequest(fromPage || from || 0, toPage || to || 10), this.getSettings() ])
@@ -66,16 +66,16 @@ export class AgentService {
         },
           shareReplay()
         )
-      )
+      );
   }
 
   private getPatientsRequest(from?: number, to?: number): Observable<any> {
     return this.dsmService
-      .applyFilter(null, this.STUDY, this.PARENT, null, from, to)
+      .applyFilter(null, this.STUDY, this.PARENT, null, from, to);
   }
 
-  private getSettings() {
-    return this.dsmService.getSettings(this.STUDY, this.PARENT).pipe(tap(data => this.settings$.next(data)))
+  private getSettings(): Observable<any> {
+    return this.dsmService.getSettings(this.STUDY, this.PARENT).pipe(tap(data => this.settings$.next(data)));
   }
 
   private collectActivityGuids(patients: any[], actDefs: any, guid: string): any {
