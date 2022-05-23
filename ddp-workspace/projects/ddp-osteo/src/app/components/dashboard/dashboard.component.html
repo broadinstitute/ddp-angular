@@ -31,6 +31,21 @@
             </p>
         </div>
     </section>
+
+    <div *ngIf="isParent | async; else childOrLovedOne">
+        <p class="intro__dash" [innerHTML]="'DashboardIntro.isParent' | translate"></p>
+    </div>
+
+    <ng-template #childOrLovedOne>
+        <div *ngIf="isChild | async; else lovedOne">
+            <p class="intro__dash" [innerHTML]="'DashboardIntro.isChild' | translate"></p>
+        </div>
+
+        <ng-template #lovedOne>
+            <p class="intro__dash" [innerHTML]="'DashboardIntro.isLovedOne' | translate"></p>
+        </ng-template>
+    </ng-template>
+
     <section *ngIf="isAdmin && !subjectInfoExists; else dashboard" class="section">
         <div class="content content_medium">
             <div class="dashboard-message">
