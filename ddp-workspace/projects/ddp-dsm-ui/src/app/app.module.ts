@@ -37,7 +37,7 @@ const guards = [StudyGuard, CheckAuthGuard];
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
