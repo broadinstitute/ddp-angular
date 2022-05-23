@@ -17,8 +17,12 @@ export class DashboardComponent extends DashboardRedesignedComponent {
 
   get isChild(): Observable<boolean> {
     return this.userActivities$.pipe(
-      map(activities => activities.some(({ activityCode }) => 
-      activityCode === ActivityCode.ConsentAssent || activityCode === ActivityCode.ParentalConsent))
+      map(activities =>
+        activities.some(({ activityCode }) =>
+          activityCode === ActivityCode.ConsentAssent ||
+          activityCode === ActivityCode.ParentalConsent
+        )
+      )
     );
   }
 
