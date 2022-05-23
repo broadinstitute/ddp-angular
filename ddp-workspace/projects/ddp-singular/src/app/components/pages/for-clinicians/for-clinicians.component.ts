@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AnalyticsEventsService } from 'ddp-sdk';
+
+import { GTagEvent } from '../../../constants/gtag-event';
 
 @Component({
   selector: 'app-for-clinicians',
@@ -16,8 +19,8 @@ import { Component } from '@angular/core';
             </p>
             <p>
               Please contact us by email at
-              <a href="mailto:contact@projectsingular.org">contact@projectsingular.org</a> or by phone at
-              <a href="tel:+(650)7616486">(650) 561-6750</a> to let us know you are interested and the quantities of
+              <a (click)="contactEmail($event)" href="mailto:contact@projectsingular.org">contact@projectsingular.org</a> or by phone at
+              <a (click)="contactPhone($event)" href="tel:+(650)7616486">(650) 561-6750</a> to let us know you are interested and the quantities of
               each you would like to receive.
             </p>
             <p>
@@ -32,4 +35,16 @@ import { Component } from '@angular/core';
     </div>
   `,
 })
-export class ForCliniciansComponent {}
+export class ForCliniciansComponent {
+  constructor(private analytics: AnalyticsEventsService){}
+
+  public contactEmail(event: Event): void {
+    const link = event.currentTarget as HTMLAnchorElement;
+    this.analytics.emitCustomGtagEvent(GTagEvent.EMAIL_CONTACT, link.innerText, link.href);
+  }
+
+  public contactPhone(event: Event): void {
+    const link = event.currentTarget as HTMLAnchorElement;
+    this.analytics.emitCustomGtagEvent(GTagEvent.PHONE_CONTACT, link.innerText, link.href);
+  }
+}

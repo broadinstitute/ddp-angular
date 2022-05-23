@@ -1,4 +1,4 @@
-import { DdpModule } from 'ddp-sdk';
+import { AnalyticsEventCategories, AnalyticsEventsService, DdpModule } from 'ddp-sdk';
 import { ToolkitModule } from 'toolkit';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
@@ -35,55 +35,62 @@ import { ForResearchesComponent } from './components/pages/for-researches/for-re
 import { ForCliniciansComponent } from './components/pages/for-clinicians/for-clinicians.component';
 import { SuccessMessageComponent } from './components/success-message/success-message.component';
 import { SuccessMessageDialogComponent } from './components/success-message-dialog/success-message-dialog.component';
-import {NotificationsComponent} from './components/notifications/notifications.component';
-import {LoginComponent} from './components/login/login.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { LoginComponent } from './components/login/login.component';
 import { ActivitySectionProgressBarComponent } from './components/activity-section-progress-bar/activity-section-progress-bar.component';
 import { ActivitySectionPageProgressComponent } from './components/activity-section-page-progress/activity-section-page-progress.component';
 
+declare const gtag: (...args: any[]) => void;
 
 @NgModule({
-  declarations: [
-    FaqComponent,
-    AppComponent,
-    HomeComponent,
-    LoginComponent,
-    ErrorComponent,
-    HeaderComponent,
-    FooterComponent,
-    SurveyComponent,
-    AboutUsComponent,
-    PasswordComponent,
-    ActivityComponent,
-    AcceptAgeUpComponent,
-    VerifyAgeUpComponent,
-    ProgressBarComponent,
-    PreScreeningComponent,
-    NotificationsComponent,
-    SessionExpiredComponent,
-    ActivitiesListComponent,
-    RedirectToLoginComponent,
-    ParticipantsListComponent,
-    NotificationsDialogComponent,
-    SessionExpiredDialogComponent,
-    ParticipantDeletionDialogComponent,
-    ForResearchesComponent,
-    ForCliniciansComponent,
-    SuccessMessageComponent,
-    SuccessMessageDialogComponent,
-    ActivitySectionProgressBarComponent,
-    ActivitySectionPageProgressComponent,
-  ],
-  imports: [
-    DdpModule,
-    BrowserModule,
-    ToolkitModule,
-    MaterialModule,
-    RecaptchaModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-  ],
-  providers: [SDKConfigProvider, toolkitConfigProvider, translateProvider],
-  bootstrap: [AppComponent],
+    declarations: [
+        FaqComponent,
+        AppComponent,
+        HomeComponent,
+        LoginComponent,
+        ErrorComponent,
+        HeaderComponent,
+        FooterComponent,
+        SurveyComponent,
+        AboutUsComponent,
+        PasswordComponent,
+        ActivityComponent,
+        AcceptAgeUpComponent,
+        VerifyAgeUpComponent,
+        ProgressBarComponent,
+        PreScreeningComponent,
+        NotificationsComponent,
+        SessionExpiredComponent,
+        ActivitiesListComponent,
+        RedirectToLoginComponent,
+        ParticipantsListComponent,
+        NotificationsDialogComponent,
+        SessionExpiredDialogComponent,
+        ParticipantDeletionDialogComponent,
+        ForResearchesComponent,
+        ForCliniciansComponent,
+        SuccessMessageComponent,
+        SuccessMessageDialogComponent,
+        ActivitySectionProgressBarComponent,
+        ActivitySectionPageProgressComponent,
+    ],
+    imports: [
+        DdpModule,
+        BrowserModule,
+        ToolkitModule,
+        MaterialModule,
+        RecaptchaModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+    ],
+    providers: [SDKConfigProvider, toolkitConfigProvider, translateProvider],
+    bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+    constructor(private analytics: AnalyticsEventsService) {
+        // https://developers.google.com/tag-platform/gtagjs/reference#event
+        this.analytics.gTagEvents
+            .subscribe(event => gtag('event', event.event_name, event.parameters));
+    }
+}
