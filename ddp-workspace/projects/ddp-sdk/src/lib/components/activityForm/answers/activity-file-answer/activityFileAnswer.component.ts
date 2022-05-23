@@ -22,6 +22,7 @@ import { ModalDialogService } from '../../../../services/modal-dialog.service';
 import { ConfirmDialogComponent } from '../../../confirmDialog/confirmDialog.component';
 import { ActivityFileValidationRule } from '../../../../services/activity/validators/activityFileValidationRule';
 import { FileAnswerMapperService } from '../../../../services/fileAnswerMapper.service';
+import { LayoutType } from '../../../../models/layout/layoutType';
 
 @Component({
     selector: 'ddp-activity-file-answer',
@@ -33,6 +34,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     @Input() readonly: boolean;
     @Input() studyGuid: string;
     @Input() activityGuid: string;
+    @Input() layoutType: LayoutType = LayoutType.DEFAULT;
     @Output() valueChanged: EventEmitter<string[] | null> = new EventEmitter();
     @Output() componentBusy = new EventEmitter<boolean>();
     @ViewChild('uploaded', {read: ElementRef}) private uploadedFileRef: ElementRef;
@@ -53,6 +55,10 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.initUploadedFiles();
+    }
+
+    public isGridLayout(): boolean {
+        return this.layoutType === LayoutType.GRID;
     }
 
     onFilesSelected(files: Event): void {

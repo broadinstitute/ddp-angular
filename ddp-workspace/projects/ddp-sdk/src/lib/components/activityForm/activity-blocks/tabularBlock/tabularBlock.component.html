@@ -1,65 +1,24 @@
 <h3>{{block.title}}</h3>
 
-                                <!-- to have different styles for composites, in reality will check something else -->
-<div class="tabular-container" [class.composite]="block.id === 'TABULAR_ID_2'">
-    <div class="headers" [gdColumns]="gridSettings.gridTemplateColumns">
-        <div *ngFor="let header of headers"
-             class="header cell"
-             [gdColumn]="header.gridColumn">
-            {{header.label}}
+<div class="tabular-container" [gdColumns]="gridSettings.gridTemplateColumns">
+    <div *ngFor="let header of headers" class="header cell" [gdColumn]="header.gridColumn" style="border: 1px solid grey;">
+        {{header.label}}
+    </div>
+
+    <ng-container *ngFor="let questionBlock of block.content; let questionIndex=index;">
+        <div *ngIf="questionBlock.question" class="question-title cell" [class.even]="isEvenRow(questionIndex)">
+            {{questionBlock.question}}
         </div>
-    </div>
-
-    <div class="questions">
-        <div *ngFor="let row of block.content; let rowIndex=index; let even=even"
-             [gdColumns]="gridSettings.gridTemplateColumns"
-             class="questions-row"
-             [class.isEven]="even">
-
-            <ng-container *ngFor="let questionBlock of row; let cellIndex=index">
-                <ng-container
-                    [ngTemplateOutlet]="questionBlock.question ? withSeparateTitleCell : justQuestionCell"
-                    [ngTemplateOutletContext]="{ rowIndex: rowIndex, cellIndex: cellIndex, questionBlock: questionBlock}">
-                </ng-container>
-            </ng-container>
-        </div>
-    </div>
-</div>
-
-                        <!--Templates-->
-
-<ng-template #withSeparateTitleCell let-questionBlock="questionBlock" let-rowIndex="rowIndex" let-cellIndex="cellIndex">
-    <div
-        [gdColumn]="increaseCounter(rowIndex)"
-        class="question-title cell">{{questionBlock.question}}  <!-- the question title if any-->
-    </div>
-    <ng-container
-        [ngTemplateOutlet]="question"
-        [ngTemplateOutletContext]="{ rowIndex: rowIndex, cellIndex: cellIndex, questionBlock: questionBlock}">
-    </ng-container>
-</ng-template>
-
-<ng-template #justQuestionCell let-questionBlock="questionBlock" let-rowIndex="rowIndex" let-cellIndex="cellIndex">
-    <ng-container
-        [ngTemplateOutlet]="question"
-        [ngTemplateOutletContext]="{ rowIndex: rowIndex, cellIndex: cellIndex, questionBlock: questionBlock}">
-    </ng-container>
-</ng-template>
-
-<ng-template #question let-questionBlock="questionBlock" let-rowIndex="rowIndex" let-cellIndex="cellIndex">
-    <!-- If a composite question - every its child should take a separate cell -->
-    <ng-container *ngFor="let childBlock of (questionBlock.children || [questionBlock]) ; let i=index; let last=last">
-        <div [gdColumn]="increaseCounter(rowIndex)" class="questions-cell cell">
-
-                    <!-- Add [class.specialBoolean]="childBlock.stableId === 'SPECIAL_STABLE_ID'" for handling a boolean which switch other questions enabling ?? -->
-            <ddp-activity-question [block]="childBlock"
+        <div class="questions-cell cell" [class.even]="isEvenRow(questionIndex)"
+             [gdColumn]="questionFieldsSpan(questionBlock)">
+            <ddp-activity-question [block]="questionBlock"
                                    [readonly]="readonly"
                                    [validationRequested]="validationRequested"
                                    [studyGuid]="studyGuid"
                                    [activityGuid]="activityGuid"
-                                   (valueChanged)="handleChange($event)">
+                                   [layoutType]="LayoutType.GRID">
             </ddp-activity-question>
-            <span *ngIf="!last && questionBlock.tabularSeparator" class="separator">{{questionBlock.tabularSeparator}}</span>
         </div>
     </ng-container>
-</ng-template>
+</div>
+

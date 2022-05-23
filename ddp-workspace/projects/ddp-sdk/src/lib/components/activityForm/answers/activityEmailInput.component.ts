@@ -29,6 +29,7 @@ export const EMAIL_REGEXP = /^\S+@\S+\.\S+$/;
         </mat-form-field>
         <ng-container *ngIf="block.confirmEntry">
             <p class="ddp-question-prompt"
+                *ngIf="!isGridLayout()"
                 [ngClass]="{'ddp-required-question-prompt': this.block.isRequired}"
                 [innerHTML]="block.confirmPrompt">
             </p>
