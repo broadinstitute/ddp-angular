@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { BehaviorSubject, Observable } from 'rxjs';
+import {exhaustMap, finalize, map, mergeMap, shareReplay, tap, withLatestFrom} from 'rxjs/operators';
+import {BehaviorSubject, forkJoin, Observable, ObservableInput, of} from 'rxjs';
 import { DSMService } from '../../services/dsm.service';
 import { patientListModel } from '../pages/participantsList/models/participantList.model';
 
@@ -15,6 +15,7 @@ export class AgentService {
   readonly PARENT = 'participantList';
 
   private patients$ = new BehaviorSubject<any>(null);
+  private settings$ =  new BehaviorSubject<any>(null);
   private loadingData$ = new BehaviorSubject<boolean>(false);
   private totalCount$ = new BehaviorSubject<number>(0);
 
@@ -24,7 +25,7 @@ export class AgentService {
 
   getPatients(): Observable<patientListModel[]> {
     this.loadingData$.next(true);
-    return this.patients$.asObservable().pipe(map(data => data && this.collectParticipantData(data)));
+    return this.patients$.asObservable();
   }
 
   getPatientsTotalCount(): Observable<number> {
@@ -32,38 +33,57 @@ export class AgentService {
   }
 
   getActivityInstances(guid: string): any {
-    return this.patients$.asObservable().pipe(map(data => data && this.collectActivityGuids(data, guid)));
+    this.loadingData$.next(true);
+
+    return this.patients$
+      .pipe(
+        map(data => data?.find(pt => pt.guid === guid)
+        ),
+        finalize(() => this.loadingData$.next(false))
+      )
   }
 
-  setPage(from: number, to: number): void {
+  setPage(from: number, to: number): ObservableInput<any> {
     this.loadingData$.next(true);
     this.patients$.next(null);
-    this.getPatientsRequest(from, to);
+    return this.getAll(from, to);
   }
 
   isLoading(): Observable<boolean> {
     return this.loadingData$.asObservable();
   }
 
-  private getPatientsRequest(from?: number, to?: number): void {
-    this.dsmService
+  public getAll(fromPage?: number, toPage?: number) {
+    const {from, to} = JSON.parse(localStorage.getItem('pListQueryParams'));
+
+   return forkJoin([this.getPatientsRequest(fromPage || from || 0, toPage || to || 10), this.getSettings() ])
+      .pipe(
+        tap(([patients, settings]) => {
+          this.totalCount$.next(patients.totalCount);
+          this.patients$.next(this.collectParticipantData(patients.participants, settings.activityDefinitions));
+          this.settings$.next(settings);
+          this.loadingData$.next(false);
+        },
+          shareReplay()
+        )
+      )
+  }
+
+  private getPatientsRequest(from?: number, to?: number): Observable<any> {
+    return this.dsmService
       .applyFilter(null, this.STUDY, this.PARENT, null, from, to)
-      .subscribe(data => {
-        this.loadingData$.next(false);
-        this.patients$.next(data.participants);
-        this.totalCount$.next(data.totalCount)
-      });
   }
 
-  private collectActivityGuids(participants: any[], guid: string): any {
-    return participants?.find(pt => pt?.esData.profile.guid === guid)?.esData.activities.map(pt => ({
-      name: pt.activityCode,
-      guid: pt.guid
-    }));
+  private getSettings() {
+    return this.dsmService.getSettings(this.STUDY, this.PARENT).pipe(tap(data => this.settings$.next(data)))
   }
 
-  private collectParticipantData(participants: any[]): patientListModel[] {
-    return participants.map(pt => ({
+  private collectActivityGuids(patients: any[], actDefs: any, guid: string): any {
+    return patients.find(pt => pt?.esData.profile.guid === guid).esData;
+  }
+
+  private collectParticipantData(patients: any[], actDefs: any): patientListModel[] {
+    return patients.map(pt => ({
       ID: pt.esData.profile.hruid,
       guid: pt.esData.profile.guid,
       firstName: pt.esData.profile.firstName,
@@ -71,6 +91,10 @@ export class AgentService {
       birthdate: '01/01/2022',
       registered: '02/02/2002',
       lastUpdated: '01/01/2022',
+      activities: pt.esData.activities.map(activity => ({
+        activityName: Object.values(actDefs).find(actDef => actDef['activityCode'] === activity.activityCode)['activityName'],
+        activityGuid: activity.guid
+      }))
     }));
   }
 }

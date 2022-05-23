@@ -24,6 +24,9 @@ export class CheckAuthGuard implements CanLoad {
     else if (this.auth.authenticated() && !selectedRealm) {
       this.auth.logout();
       return this.router.createUrlTree(['']);
+    } else if (!this.auth.authenticated() && selectedRealm) {
+      this.auth.logout();
+      return this.router.createUrlTree(['']);
     }
     else {
       return this.router.createUrlTree([selectedRealm]);

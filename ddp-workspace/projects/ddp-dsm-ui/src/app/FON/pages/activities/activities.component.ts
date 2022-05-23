@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Observable } from 'rxjs';
+import {Observable, tap} from 'rxjs';
 import { AgentService } from '../../services/agent.service';
 import { patientListModel } from '../participantsList/models/participantList.model';
 
@@ -11,19 +11,21 @@ import { patientListModel } from '../participantsList/models/participantList.mod
 })
 
 export class ActivitiesComponent implements OnInit {
-  activityGuides: Observable<any>;
+  patientWithActivities: Observable<any>;
   panelOpenState = true;
-  currentParticipant: patientListModel;
+  loading$: Observable<boolean>;
+
 
   constructor(private agent: AgentService, private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
-      this.activityGuides = this.agent.getActivityInstances(params.guid);
+      this.patientWithActivities = this.agent.getActivityInstances(params.guid).pipe(tap(data => {
+        !data && this.agent.getAll().subscribe()
+      }));
     });
-
-    this.currentParticipant = window.history.state.participant;
+    this.loading$ = this.agent.isLoading();
   }
 
   navigate($event: any): void {

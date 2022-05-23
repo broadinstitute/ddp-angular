@@ -6,4 +6,5 @@ export interface patientListModel {
   birthdate: string;
   registered: string;
   lastUpdated: string;
+  activities: any[];
 }

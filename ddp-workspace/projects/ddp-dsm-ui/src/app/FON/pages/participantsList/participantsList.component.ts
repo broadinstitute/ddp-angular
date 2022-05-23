@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { patientListModel } from './models/participantList.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import {Observable, switchMap, tap} from 'rxjs';
 import { AgentService } from '../../services/agent.service';
 import { PageEvent } from '@angular/material/paginator';
 
@@ -24,9 +24,17 @@ export class ParticipantsListComponent implements OnInit {
     this.totalCount$ = this.agent.getPatientsTotalCount();
     this.loading$ = this.agent.isLoading();
 
-    this.router.navigate([], {queryParams: {from: 0, to: 10}});
+    const qParams = JSON.parse(localStorage.getItem('pListQueryParams'));
 
-    this.activatedRoute.queryParams.subscribe(({from, to}: Params) => this.agent.setPage(from, to));
+    this.router.navigate([], {queryParams: {from: qParams | 0, to: qParams | 10}});
+
+    this.activatedRoute.queryParams
+      .pipe(
+        tap(params => localStorage.setItem('pListQueryParams', JSON.stringify({from: params.from, to: params.to}))),
+        switchMap((params: Params) =>
+          this.agent.setPage(params.from, params.to))
+      )
+      .subscribe();
   }
 
   setPage(event: PageEvent): void {

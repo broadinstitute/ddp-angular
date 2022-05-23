@@ -20,7 +20,6 @@ $hoverColor: #7154FF;
 }
 
 .activity {
-  min-width: 80%;
   padding: 20px;
   flex-grow: 1;
 }
@@ -54,8 +53,6 @@ mat-panel-title {
 
 mat-list-item {
   h4 {
-    text-align: center;
-
     &:hover, &:focus {
       color: $hoverColor;
       border: 0;

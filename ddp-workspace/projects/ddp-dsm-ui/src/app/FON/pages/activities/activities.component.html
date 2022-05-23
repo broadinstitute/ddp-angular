@@ -1,29 +1,35 @@
 <div class="activities-container">
-  <div class="activities-names">
-    <div *ngIf="currentParticipant" class="selected-participant">
+  <ng-container *ngIf="(patientWithActivities | async) as Patient else loadingSpinner">
+    <div class="activities-names" >
+      <div class="selected-participant">
         Selected patient:
-      <span>{{currentParticipant.firstName}} {{currentParticipant.lastName}}
+        <span>{{Patient.firstName}} {{Patient.lastName}}
       </span>
+      </div>
+
+      <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false"
+                             [expanded]="panelOpenState">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              ENROLLMENT FORMS
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <mat-list>
+            <mat-list-item *ngFor="let activity of Patient.activities">
+              <h4 mat-line routerLink="{{activity.activityGuid}}">{{ activity.activityName }}</h4>
+            </mat-list-item>
+          </mat-list>
+        </mat-expansion-panel>
+      </mat-accordion>
     </div>
+  </ng-container>
 
-    <mat-accordion>
-      <mat-expansion-panel (opened)="panelOpenState = true"
-                           (closed)="panelOpenState = false"
-                           [expanded]="panelOpenState">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            ENROLLMENT FORMS
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <mat-list>
-          <mat-list-item *ngFor="let actGuid of activityGuides | async">
-            <h4 mat-line routerLink="{{actGuid.guid}}">{{ actGuid.name }}</h4>
-          </mat-list-item>
-        </mat-list>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </div>
+  <ng-template #loadingSpinner>
+    <mat-spinner *ngIf="loading$ | async"></mat-spinner>
+  </ng-template>
 
   <div class="activity">
     <router-outlet></router-outlet>

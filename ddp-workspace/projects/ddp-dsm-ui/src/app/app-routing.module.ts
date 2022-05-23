@@ -5,7 +5,6 @@ import {CheckAuthGuard} from './guards/checkAuth.guard';
 import {ParticipantsListComponent} from './FON/pages/participantsList/participantsList.component';
 import {ActivitiesComponent} from './FON/pages/activities/activities.component';
 import {FonComponent} from './FON/fon.component';
-// import {HomeComponent} from './FON/pages/home/home.component';
 import {ActivityComponent} from './FON/pages/activities/activity/activity.component';
 import {StudyActGuard} from './guards/studyAct.guard';
 
@@ -14,7 +13,6 @@ export const AppRoutes: Routes = [
     canLoad: [CheckAuthGuard], pathMatch: 'full'},
 
   {path: 'fon', component: FonComponent, canActivate: [StudyActGuard], children: [
-      // {path: '', component: HomeComponent}, // TODO: Do we need it ?
       {path: 'patients', component: ParticipantsListComponent},
       {path: 'patient/:guid', component: ActivitiesComponent, children: [
           {path: ':activity', component: ActivityComponent}
