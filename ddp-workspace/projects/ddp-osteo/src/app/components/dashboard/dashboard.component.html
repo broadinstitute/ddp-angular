@@ -42,7 +42,7 @@
         </div>
 
         <ng-template #lovedOne>
-            <p class="intro__dash" [innerHTML]="'DashboardIntro.isLovedOne' | translate"></p>
+            <p *ngIf="isLovedOne | async;" class="intro__dash" [innerHTML]="'DashboardIntro.isLovedOne' | translate"></p>
         </ng-template>
     </ng-template>
 
