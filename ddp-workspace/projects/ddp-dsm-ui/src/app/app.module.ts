@@ -49,7 +49,7 @@ sdkConfig.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 sdkConfig.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl; // TODO: add the URL value in config file
 sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
 sdkConfig.auth0ClaimNameSpace = DDP_ENV.auth0ClaimNameSpace;
-sdkConfig.errorPageUrl = 'dss-error';
+sdkConfig.errorPageUrl = '';
 
 // temporary for DSM FON
 // for using when click on `Close` activity button (displaying DSS activities inside of DSM FON)
