@@ -24,6 +24,13 @@ $hoverColor: #7154FF;
 .topNavigation, .botNavigation {
   margin: 0;
 
+  .activeNav {
+    color: $hoverColor;
+    border-bottom-color: $hoverColor!important;
+    cursor: pointer;
+    outline: none;
+  }
+
   li {
     list-style-type: none;
     font-size: 18px;
