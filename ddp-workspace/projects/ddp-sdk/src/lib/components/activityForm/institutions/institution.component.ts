@@ -183,7 +183,7 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
             this.city ? this.city : '',
             this.state ? this.state : '',
             this.guid ? this.guid : '',
-            this.country ? this.country : ''
+            this.country ?? ''
         );
         this.answerSubject.next(answer);
     }
@@ -252,7 +252,7 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
                         form.city ? form.city : '',
                         form.state ? form.state : '',
                         response.medicalProviderGuid,
-                        form.country ? form.country : ''
+                        form.country ?? ''
                     );
                     this.guid = response.medicalProviderGuid;
                     this.valueChanged.emit(newAnswer);
