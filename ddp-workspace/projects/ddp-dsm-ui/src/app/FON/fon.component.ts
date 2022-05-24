@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {Title} from '@angular/platform-browser';
-import {RouterEvent} from "@angular/router";
 
 @Component({
   selector: 'app-fon',
