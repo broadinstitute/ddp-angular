@@ -8,4 +8,5 @@ export enum ActivityCode {
     Consent = 'CONSENT',
     ConsentAssent = 'CONSENT_ASSENT',
     LovedOne = 'LOVEDONE',
+    ParentalConsent = 'PARENTAL_CONSENT'
 }
