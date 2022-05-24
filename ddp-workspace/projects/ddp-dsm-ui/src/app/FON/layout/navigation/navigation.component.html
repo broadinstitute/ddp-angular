@@ -1,7 +1,11 @@
 <aside class="sidebar">
   <div class="navigation">
     <ul class="topNavigation">
-      <li *ngFor="let item of topNavigation" [routerLink]="[item.route]">
+      <li *ngFor="let item of topNavigation"
+          [routerLinkActiveOptions]="{exact: true}"
+          routerLinkActive="activeNav"
+          [queryParams]="{from: qParams.from, to: qParams.to}"
+          [routerLink]="[item.route]">
         {{ item.name }}
       </li>
     </ul>

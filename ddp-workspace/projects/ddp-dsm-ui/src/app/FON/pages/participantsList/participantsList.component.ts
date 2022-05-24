@@ -28,15 +28,6 @@ export class ParticipantsListComponent implements OnInit {
     this.totalCount$ = this.agent.getPatientsTotalCount();
     this.loading$ = this.agent.isLoading();
 
-    const qParams = JSON.parse(localStorage.getItem(this.LSParams));
-
-    localStorage.setItem(this.LSParams,
-      JSON.stringify({from: qParams?.from || 0, to: qParams?.to || 10}));
-
-    this.router.navigate([],
-      {queryParams: {from: qParams?.from || 0, to: qParams?.to || 10}}
-    );
-
     this.activatedRoute.queryParams
       .pipe(
         tap((params: Params) => {
