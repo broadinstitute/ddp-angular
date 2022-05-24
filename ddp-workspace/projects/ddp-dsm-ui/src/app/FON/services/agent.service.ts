@@ -91,7 +91,6 @@ export class AgentService {
       );
   }
 
-
   private collectParticipantData(patients: any[], actDefs: any): patientListModel[] {
     return patients.map(pt => ({
       ID: pt.esData.profile.hruid,
