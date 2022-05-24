@@ -3,6 +3,7 @@ import { LogLevel } from '../models/logLevel';
 import { QuestionType } from '../models/activity/questionType';
 import { UserProfileField } from '../models/userProfileFieldType';
 import { MailAddressFormErrorFormatter } from '../models/mailAddressFormErrorFormatter';
+import { InstitutionAdditionalFields, InstitutionType } from '../models/activity/institutionType';
 
 @Injectable()
 export class ConfigurationService {
@@ -119,4 +120,8 @@ export class ConfigurationService {
      */
     alwaysShowQuestionsCountInModalNestedActivity = false;
     auth0ClaimNameSpace: string;
+    /**
+     * Configure additional fields to show for institutions
+     */
+    institutionsAdditionalFields: Partial<Record<InstitutionType, InstitutionAdditionalFields[]>> = {};
 }

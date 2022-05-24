@@ -89,11 +89,14 @@ export class InstitutionsFormComponent implements OnInit, OnDestroy {
             ).subscribe(providers => {
                 if (providers.length > 0) {
                     providers.forEach((provider) => {
-                        const answer = new ActivityInstitutionInfo(provider.physicianName,
+                        const answer = new ActivityInstitutionInfo(
+                            provider.physicianName,
                             provider.institutionName,
                             provider.city,
                             provider.state,
-                            provider.medicalProviderGuid);
+                            provider.medicalProviderGuid,
+                            provider.country
+                        );
                         this.addAnswer(answer);
                     });
                 } else if (providers.length === 0 && this.block.showFieldsInitially) {
@@ -177,6 +180,6 @@ export class InstitutionsFormComponent implements OnInit, OnDestroy {
     }
 
     private isPhysicianFormFull(answer: ActivityInstitutionInfo): boolean {
-        return !!(answer.city.trim() && answer.physicianName.trim() && answer.state.trim());
+        return !!(answer.city.trim() && answer.physicianName.trim() && answer.state.trim() && answer.country.trim());
     }
 }
