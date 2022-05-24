@@ -5,7 +5,7 @@ import {Title} from '@angular/platform-browser';
   selector: 'app-fon',
   template: `
     <div class="mainHolder">
-      <h1 class="header">FON study</h1>
+      <h1 class="header">Fontan Outcomes Network</h1>
       <app-navigation></app-navigation>
       <router-outlet></router-outlet>
     </div>
@@ -15,7 +15,7 @@ import {Title} from '@angular/platform-browser';
       display: grid;
       grid-template-columns: 230px auto;
       height: 100vh;
-      column-gap: 1%;
+      column-gap: 50px;
       width: 100%;
       margin: 0;
       padding: 0;
@@ -24,10 +24,8 @@ import {Title} from '@angular/platform-browser';
 
     .header {
       grid-area: header;
-      text-align: center;
-      border-bottom: 1px solid grey;
-      height: 60px;
-      line-height: 60px;
+      height: 100px;
+      line-height: 100px;
       margin: 0;
     }
 

@@ -7,12 +7,14 @@ import {ActivitiesComponent} from './FON/pages/activities/activities.component';
 import {FonComponent} from './FON/fon.component';
 import {ActivityComponent} from './FON/pages/activities/activity/activity.component';
 import {StudyActGuard} from './guards/studyAct.guard';
+import { HomeComponent } from './FON/pages/home/home.component';
 
 export const AppRoutes: Routes = [
   {path: '', loadChildren: () => import('./WELCOME/welcome.module').then(m => m.WelcomeModule),
     canLoad: [CheckAuthGuard], pathMatch: 'full'},
 
   {path: 'fon', component: FonComponent, canActivate: [StudyActGuard], children: [
+      {path: '', component: HomeComponent},
       {path: 'patients', component: ParticipantsListComponent},
       {path: 'patient/:guid', component: ActivitiesComponent, children: [
           {path: ':activity', component: ActivityComponent}

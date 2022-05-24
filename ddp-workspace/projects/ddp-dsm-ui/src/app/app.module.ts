@@ -1,10 +1,21 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {APP_INITIALIZER, ErrorHandler, Injector, NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {LOCATION_INITIALIZED} from '@angular/common';
+import {HttpClientModule} from '@angular/common/http';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatButtonModule } from '@angular/material/button';
+import {TranslateService} from '@ngx-translate/core';
+
+import {ConfigurationService, DdpModule, LanguageService, LoggingService} from 'ddp-sdk';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule} from '@angular/common/http';
-import {ConfigurationService, DdpModule, LanguageService, LoggingService} from 'ddp-sdk';
 import {StackdriverErrorReporterDsmService} from './services/stackdriver-error-reporter.service';
 import {CheckAuthGuard} from './guards/checkAuth.guard';
 import {StudyGuard} from './guards/study.guard';
@@ -13,17 +24,10 @@ import {ParticipantsListComponent} from './FON/pages/participantsList/participan
 import {ActivitiesComponent} from './FON/pages/activities/activities.component';
 import {FonComponent} from './FON/fon.component';
 import {ActivityComponent} from './FON/pages/activities/activity/activity.component';
+import {HomeComponent} from './FON/pages/home/home.component';
 import {StudyActGuard} from './guards/studyAct.guard';
 import {AgentService} from './FON/services/agent.service';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatListModule} from '@angular/material/list';
-import {MatIconModule} from '@angular/material/icon';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {TranslateService} from '@ngx-translate/core';
-import {LOCATION_INITIALIZED} from '@angular/common';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -89,7 +93,8 @@ const material = [
   MatIconModule,
   MatPaginatorModule,
   MatProgressSpinnerModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatButtonModule
 ];
 
 @NgModule({
@@ -99,7 +104,8 @@ const material = [
     FonComponent,
     ActivityComponent,
     ParticipantsListComponent,
-    ActivitiesComponent
+    ActivitiesComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
