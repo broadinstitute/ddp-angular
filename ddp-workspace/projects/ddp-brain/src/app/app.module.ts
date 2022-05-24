@@ -35,6 +35,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ModalImageComponent } from './components/modal-image/modal-image.component';
 import { PrismComponent } from './components/prism/prism.component';
+import {tkCfg} from "../../../ddp-angio/src/app/app.module";
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -67,6 +68,7 @@ toolkitConfig.infoEmail = 'info@braintumorproject.org';
 toolkitConfig.dataEmail = 'data@braintumorproject.org';
 toolkitConfig.twitterAccountId = 'count_me_in';
 toolkitConfig.facebookGroupId = 'joincountmein';
+tkCfg.instagramId = 'countmein';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org/';
 
 export const sdkConfig = new ConfigurationService();

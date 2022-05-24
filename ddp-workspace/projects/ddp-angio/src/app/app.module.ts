@@ -62,6 +62,7 @@ tkCfg.infoEmail = 'info@ascproject.org';
 tkCfg.dataEmail = 'data@ascproject.org';
 tkCfg.twitterAccountId = 'count_me_in';
 tkCfg.facebookGroupId = 'joincountmein';
+tkCfg.instagramId = 'countmein';
 tkCfg.cBioPortalLink = 'https://www.cbioportal.org/study/summary?id=angs_painter_2020';
 tkCfg.countMeInUrl = 'https://joincountmein.org/';
 tkCfg.showDataRelease = true;

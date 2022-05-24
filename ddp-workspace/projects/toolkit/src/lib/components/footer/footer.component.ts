@@ -60,6 +60,9 @@ import { map, mergeMap } from 'rxjs/operators';
                       <a target="_blank" [href]="twitterUrl" (click)="doAnalytics('twitter')">
                           <img lazy-resource class="Footer-contactLogos" src="assets/images/twitter.svg" alt="Twitter">
                       </a>
+                      <a target="_blank" [href]="instagramUrl" (click)="doAnalytics('instagram')">
+                          <img lazy-resource class="Footer-contactLogos" src="assets/images/instagram.png" alt="instagram">
+                      </a>
                   </li>
               </ul>
           </div>
@@ -90,6 +93,7 @@ export class FooterComponent implements OnInit {
     public twitterUrl: string;
     public countMeInUrl: string;
     public blogUrl: string;
+    public instagramUrl: string
 
     constructor(
         private dialog: MatDialog,
@@ -111,6 +115,7 @@ export class FooterComponent implements OnInit {
             map(transVal => transVal === fbLinkKey ?
                 `https://www.facebook.com/${this.toolkitConfiguration.facebookGroupId}` : transVal)
         );
+        this.instagramUrl = `https://www.instagram.com/${this.toolkitConfiguration.instagramId}`;
     }
 
     public goToTop(): void {
