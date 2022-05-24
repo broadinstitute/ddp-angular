@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { finalize, map, shareReplay, tap} from 'rxjs/operators';
+import { finalize, map, tap} from 'rxjs/operators';
 import {BehaviorSubject, forkJoin, Observable, ObservableInput} from 'rxjs';
 import { DSMService } from '../../services/dsm.service';
 import { patientListModel } from '../pages/participantsList/models/participantList.model';
@@ -63,9 +63,8 @@ export class AgentService {
           this.patients$.next(this.collectParticipantData(patients.participants, settings.activityDefinitions));
           this.settings$.next(settings);
           this.loadingData$.next(false);
-        },
-          shareReplay()
-        )
+        }
+        ),
       );
   }
 
