@@ -76,10 +76,7 @@ export class AgentService {
   private getSettings(): Observable<any> {
     return this.dsmService.getSettings(this.STUDY, this.PARENT).pipe(tap(data => this.settings$.next(data)));
   }
-
-  private collectActivityGuids(patients: any[], actDefs: any, guid: string): any {
-    return patients.find(pt => pt?.esData.profile.guid === guid).esData;
-  }
+  
 
   private collectParticipantData(patients: any[], actDefs: any): patientListModel[] {
     return patients.map(pt => ({
