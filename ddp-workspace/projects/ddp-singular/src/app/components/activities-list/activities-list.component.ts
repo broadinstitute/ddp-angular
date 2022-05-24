@@ -11,6 +11,7 @@ import { ActivityIcons } from '../../constants/activity-icons';
 })
 export class ActivitiesListComponent {
   @Input() activities: ActivityInstance[];
+  @Input() disableButtons = false;
   @Output() startActivity = new EventEmitter<ActivityInstance>();
   @Output() continueActivity = new EventEmitter<ActivityInstance>();
   @Output() editActivity = new EventEmitter<ActivityInstance>();
