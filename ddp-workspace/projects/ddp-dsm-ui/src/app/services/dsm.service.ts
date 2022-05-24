@@ -254,7 +254,6 @@ export class DSMService {
   }
 
   public getSettings(realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM), parent: string): Observable<any> {
-    console.log(realm, parent, 'settings');
     const url = this.baseUrl + DSMService.UI + 'displaySettings/' + realm;
     const map: { name: string; value: any }[] = [];
     map.push({name: 'userId', value: this.role.userID()});

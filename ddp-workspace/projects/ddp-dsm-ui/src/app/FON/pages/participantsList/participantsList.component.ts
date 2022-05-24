@@ -15,6 +15,10 @@ export class ParticipantsListComponent implements OnInit {
   patients$: Observable<patientListModel[]>;
   totalCount$: Observable<number>;
   loading$: Observable<boolean>;
+  pageIndex: number;
+  pageSize: number;
+
+  private readonly LSParams: string = 'pListQueryParams';
 
   constructor(private agent: AgentService, private router: Router, private activatedRoute: ActivatedRoute) {
   }
@@ -24,15 +28,22 @@ export class ParticipantsListComponent implements OnInit {
     this.totalCount$ = this.agent.getPatientsTotalCount();
     this.loading$ = this.agent.isLoading();
 
-    const qParams = JSON.parse(localStorage.getItem('pListQueryParams'));
+    const qParams = JSON.parse(localStorage.getItem(this.LSParams));
 
-    this.router.navigate([], {queryParams: {from: qParams | 0, to: qParams | 10}});
+    localStorage.setItem(this.LSParams,
+      JSON.stringify({from: qParams?.from || 0, to: qParams?.to || 10}));
+
+    this.router.navigate([],
+      {queryParams: {from: qParams?.from || 0, to: qParams?.to || 10}}
+    );
 
     this.activatedRoute.queryParams
       .pipe(
-        tap(params => localStorage.setItem('pListQueryParams', JSON.stringify({from: params.from, to: params.to}))),
-        switchMap((params: Params) =>
-          this.agent.setPage(params.from, params.to))
+        tap((params: Params) => {
+          this.pageSize = params.to - params.from;
+          this.pageIndex = (params.to/this.pageSize) - 1;
+        }),
+        switchMap((params: Params) => this.agent.setPage(params.from, params.to))
       )
       .subscribe();
   }
@@ -40,13 +51,16 @@ export class ParticipantsListComponent implements OnInit {
   setPage(event: PageEvent): void {
     const from = ((event.pageIndex + 1) * event.pageSize) - event.pageSize;
     const to = from + event.pageSize;
+
+    localStorage.setItem(this.LSParams,
+      JSON.stringify({from, to}));
+
     this.router.navigate([], {queryParams: {from, to}});
   }
 
   openActivities(participant: patientListModel): void {
     this.router.navigate(['../patient', participant.guid], {
-      relativeTo: this.activatedRoute,
-      state: { participant }
+      relativeTo: this.activatedRoute
     });
   }
 }

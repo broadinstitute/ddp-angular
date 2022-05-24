@@ -14,7 +14,6 @@ export class StudyGuard implements CanLoad {
     const selectedRealm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     const allowed = this.allowAccessToStudy(selectedRealm, segments[0].path);
 
-    console.log('guarding');
 
     return allowed ? allowed : this.router.createUrlTree(['']);
   }
