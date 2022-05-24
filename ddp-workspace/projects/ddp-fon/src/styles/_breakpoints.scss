@@ -1,0 +1,36 @@
+@use "sass:math";
+
+@function createBreakpoint($px) {
+  @return math.div($px, 16) * 1em;
+}
+
+$breakpoints: (
+  'lg': createBreakpoint(1080),
+  'md': createBreakpoint(980),
+  'sm': createBreakpoint(600),
+  'xs': createBreakpoint(450),
+);
+
+@mixin media-lg {
+  @media (max-width: map-get($breakpoints, 'lg')) {
+    @content;
+  }
+}
+
+@mixin media-md {
+  @media (max-width: map-get($breakpoints, 'md')) {
+    @content;
+  }
+}
+
+@mixin media-sm {
+  @media (max-width: map-get($breakpoints, 'sm')) {
+    @content;
+  }
+}
+
+@mixin media-xs {
+  @media (max-width: map-get($breakpoints, 'xs')) {
+    @content;
+  }
+}

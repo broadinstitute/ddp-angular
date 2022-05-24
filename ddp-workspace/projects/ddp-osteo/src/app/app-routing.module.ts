@@ -10,7 +10,6 @@ import {
 
 import {
     ActivityPageRedesignedComponent,
-    DashboardRedesignedComponent,
     LoginLandingRedesignedComponent,
     ErrorRedesignedComponent,
     StayInformedRedesignedComponent,
@@ -36,6 +35,7 @@ import { ScientificImpactComponent } from './components/scientific-impact/scient
 import { PhysiciansComponent } from './components/physicians/physicians.component';
 
 import { ActivityPageComponent } from './components/activity-page/activity-page.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 const routes: Routes = [
@@ -137,7 +137,7 @@ const routes: Routes = [
     },
     {
         path: 'dashboard',
-        component: DashboardRedesignedComponent,
+        component: DashboardComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard,

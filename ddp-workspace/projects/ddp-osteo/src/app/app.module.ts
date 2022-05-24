@@ -39,6 +39,9 @@ import { PhysiciansComponent } from './components/physicians/physicians.componen
 
 import { ActivityComponent } from './components/activity/activity.component';
 import { ActivityPageComponent } from './components/activity-page/activity-page.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
+import { MatTableModule } from '@angular/material/table';
 
 
 const baseElt = document.getElementsByTagName('base');
@@ -110,6 +113,7 @@ config.projectGcpId = DDP_ENV.projectGcpId;
 config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 config.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl;
 config.dashboardActivitiesStartedStatuses = ['CREATED'];
+config.dashboardActivitiesCompletedStatuses = ['COMPLETE'];
 config.doCloudLogging = DDP_ENV.doCloudLogging;
 config.tooltipIconUrl = 'assets/images/info.png';
 config.usesVerticalStepper = ['FAMILY_HISTORY', 'FAMILY_HISTORY_SELF', 'FAMILY_HISTORY_PARENTAL'];
@@ -148,7 +152,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     MatExpansionModule,
     MatIconModule,
     MatButtonModule,
-    HammerModule
+    HammerModule,
+    MatTableModule,
   ],
   declarations: [
     WelcomeComponent,
@@ -165,7 +170,9 @@ export function translateFactory(translate: TranslateService, injector: Injector
     PhysiciansComponent,
 
     ActivityComponent,
-    ActivityPageComponent
+    ActivityPageComponent,
+    DashboardComponent,
+    UserActivitiesComponent
 
   ],
   providers: [

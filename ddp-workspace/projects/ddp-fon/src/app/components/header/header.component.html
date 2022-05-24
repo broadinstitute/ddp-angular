@@ -1,0 +1,19 @@
+<header class="header">
+  <div class="header__container">
+    <button class="toggle" [class.toggle--shown]="isNavigationShown" (click)="onToggleClick()">
+      <span class="toggle__bar"></span>
+      <span class="toggle__bar"></span>
+      <span class="toggle__bar"></span>
+    </button>
+    
+    <nav class="header__nav" [class.header__nav--shown]="isNavigationShown" (click)="onNavClick($event)">
+      <a class="header__logo" [routerLink]="Route.Home">
+        <h1>FON Development Environment</h1>
+      </a>
+
+      <div class="pull-right">
+        <app-sign-in-out></app-sign-in-out>
+      </div>
+    </nav>
+  </div>
+</header>

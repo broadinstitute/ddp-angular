@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { SessionMementoService } from 'ddp-sdk';
+import { SessionMementoService, AnalyticsEventsService } from 'ddp-sdk';
+
 import { Route } from '../../constants/route';
+import { GTagEvent } from '../../constants/gtag-event';
 
 
 @Component({
@@ -14,7 +16,8 @@ export class HeaderComponent {
   private _isNavigationShown = false;
 
   constructor(
-    private readonly sessionService: SessionMementoService
+    private readonly sessionService: SessionMementoService,
+    private readonly analytics: AnalyticsEventsService
   ) {}
 
   get isAuthenticated(): boolean {
@@ -47,5 +50,14 @@ export class HeaderComponent {
     if (['a', 'button'].includes(tagName)) {
       this.isNavigationShown = false;
     }
+  }
+
+  signIn(): void {
+    this.analytics.emitCustomGtagEvent(GTagEvent.LOG_IN_CLICK);
+  }
+
+  signUp(event: Event): void {
+    const link = event.currentTarget as HTMLAnchorElement;
+    this.analytics.emitCustomGtagEvent(GTagEvent.SIGN_UP_CLICK, link.innerText, link.href);
   }
 }

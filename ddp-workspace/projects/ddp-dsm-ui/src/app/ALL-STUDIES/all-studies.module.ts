@@ -109,6 +109,8 @@ import {LanguageService} from '../../../../ddp-sdk/src/lib/services/internationa
 import {NavigationComponent} from '../navigation/navigation.component';
 import {AllStudiesComponent} from './all-studies.component';
 import {BuildingFactoryService} from '../activity-data/services/buildingFactory.service';
+import { CohortTagComponent } from '../tags/cohort-tag/cohort-tag.component';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 
@@ -188,7 +190,8 @@ import {BuildingFactoryService} from '../activity-data/services/buildingFactory.
     dynamicFormTypeAndStudyRGP,
     TestDssComponent,
     DssErrorPageComponent,
-    LoadingModalComponent
+    LoadingModalComponent,
+    CohortTagComponent
   ],
   imports: [
     CommonModule,
@@ -209,6 +212,7 @@ import {BuildingFactoryService} from '../activity-data/services/buildingFactory.
     DataTableModule,
     NgxPaginationModule,
     MatProgressBarModule,
+    MatChipsModule,
     TabsModule.forRoot(),
     DatepickerModule.forRoot(),
     TooltipModule.forRoot(),

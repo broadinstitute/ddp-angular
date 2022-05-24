@@ -289,6 +289,29 @@ export class DSMService {
     );
   }
 
+  public createCohortTag(body: string, realm: string): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'createCohortTag';
+    const map = [
+      { name: 'userId', value: this.role.userID() },
+      { name: 'realm', value: realm }
+    ];
+    return this.http.post(url, body, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError.bind(this))
+    );
+  }
+
+  public deleteCohortTag(cohortTagId: number, realm: string): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'deleteCohortTag';
+    const map = [
+      { name: 'userId', value: this.role.userID() },
+      { name: 'realm', value: realm },
+      { name: 'cohortTagId', value: cohortTagId }
+    ];
+    return this.http.delete(url, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError.bind(this))
+    );
+  }
+
   public getMedicalRecordData(realm: string, ddpParticipantId: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'institutions';
     const json = {
