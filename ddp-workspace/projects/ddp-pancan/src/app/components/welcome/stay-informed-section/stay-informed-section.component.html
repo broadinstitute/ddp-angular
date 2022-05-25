@@ -14,6 +14,13 @@
             <img class="social-media__logo" lazy-resource src="assets/images/facebook.svg"
                  [alt]="'Common.Alts.Facebook' | translate">
         </a>
+        <a class="social-media__link"
+           [href]="instagramUrl"
+           target="_blank"
+           (click)="sendSocialMediaAnalytics('instagram')">
+            <img class="social-media__logo" lazy-resource src="assets/images/instagram.png"
+                 [alt]="'Common.Alts.Instagram' | translate">
+        </a>
     </div>
     <h2 class="title static-page-title" translate>App.HomePage.StayInformedSection.Title</h2>
     <div class="text static-page-paragraph-text" translate>App.HomePage.StayInformedSection.Text</div>

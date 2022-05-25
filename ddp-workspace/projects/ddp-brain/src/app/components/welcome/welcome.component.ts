@@ -14,6 +14,7 @@ export class WelcomeComponent implements OnInit {
   public infoEmail: string;
   public twitterAccount: string;
   public facebookAccount: string;
+  public instagramAccount: string;
 
   constructor(
     private analytics: AnalyticsEventsService,
@@ -27,6 +28,7 @@ export class WelcomeComponent implements OnInit {
     this.infoEmail = this.config.infoEmail;
     this.twitterAccount = this.config.twitterAccountId;
     this.facebookAccount = this.config.facebookGroupId;
+    this.instagramAccount = this.config.instagramId;
   }
 
   public joinMailingList(): void {

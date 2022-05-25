@@ -56,6 +56,7 @@ toolkitConfig.phone = '651-293-5029';
 toolkitConfig.infoEmail = 'info@mpcproject.org';
 toolkitConfig.dataEmail = 'data@mpcproject.org';
 toolkitConfig.twitterAccountId = 'count_me_in';
+toolkitConfig.instagramId = 'countmein';
 toolkitConfig.facebookGroupId = 'joincountmein';
 toolkitConfig.cBioPortalLink = 'https://www.cbioportal.org/study/summary?id=mpcproject_broad_2021';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org/';

@@ -67,6 +67,7 @@ toolkitConfig.infoEmail = 'info@braintumorproject.org';
 toolkitConfig.dataEmail = 'data@braintumorproject.org';
 toolkitConfig.twitterAccountId = 'count_me_in';
 toolkitConfig.facebookGroupId = 'joincountmein';
+toolkitConfig.instagramId = 'countmein';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org/';
 
 export const sdkConfig = new ConfigurationService();

@@ -137,6 +137,7 @@
     &__facebook,
     &__twitter {
         @include footer-link-text;
+        margin-right: 1rem;
     }
 }
 

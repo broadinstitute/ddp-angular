@@ -63,6 +63,7 @@ toolkitConfig.phone = '651-403-5315';
 toolkitConfig.infoEmail = 'info@joincountmein.org';
 toolkitConfig.twitterAccountId = 'count_me_in';
 toolkitConfig.facebookGroupId = 'joincountmein';
+toolkitConfig.instagramId = 'countmein';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org';
 toolkitConfig.colorectalPagePhone = '651-403-5315';
 toolkitConfig.colorectalPageEmail = 'info@colorectalcancerproject.org';
