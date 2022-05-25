@@ -1,4 +1,6 @@
+@use '@angular/material' as mat;
 @import "../../../styles/variables.scss";
+
 
 .main {
   width: 100%;
@@ -158,7 +160,6 @@
 }
 
 .advisorBio {
-  height: 240px;
   width: 634px;
   color: #000000;
   font-family: "Untitled Sans", sans-serif;
