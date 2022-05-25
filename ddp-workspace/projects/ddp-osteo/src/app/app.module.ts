@@ -119,7 +119,7 @@ config.tooltipIconUrl = 'assets/images/info.png';
 config.usesVerticalStepper = ['FAMILY_HISTORY', 'FAMILY_HISTORY_SELF', 'FAMILY_HISTORY_PARENTAL'];
 config.alwaysShowQuestionsCountInModalNestedActivity = true;
 config.validateOnlyVisibleSections = true;
-config.institutionsAdditionalFields = { INITIAL_BIOPSY: ['COUNTRY'] };
+config.institutionsAdditionalFields = { PHYSICIAN: ['COUNTRY'] };
 
 export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {
