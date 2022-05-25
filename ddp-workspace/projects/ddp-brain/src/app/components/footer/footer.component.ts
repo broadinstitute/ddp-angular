@@ -27,7 +27,7 @@ export class FooterComponent implements OnInit {
     this.infoEmail = this.config.infoEmail;
     this.twitterAccount = this.config.twitterAccountId;
     this.facebookAccount = this.config.facebookGroupId;
-    this.instagramAccount = this.config.instagramId
+    this.instagramAccount = this.config.instagramId;
     this.phone = this.config.phone;
   }
 
