@@ -123,6 +123,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   message: string = null;
   bundle = false;
   private scrolled: boolean;
+
+
   constructor(private auth: Auth, private compService: ComponentService, private dsmService: DSMService, private router: Router,
                private role: RoleService, private util: Utils, private route: ActivatedRoute, public dialog: MatDialog) {
     if (!auth.authenticated()) {

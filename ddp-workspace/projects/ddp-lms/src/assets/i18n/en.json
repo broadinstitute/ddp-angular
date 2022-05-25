@@ -59,7 +59,7 @@
             {
               "Question": "Who is conducting this research?",
               "Paragraphs": [
-                "This project is being conducted by the Broad Institute of MIT and Harvard, Dana-Farber Cancer Institute, and Count Me In, a non-profit research initiative that conducts patient-partnered studies of cancer. Count Me In's Osteosarcoma (OS) Project and Leiomyosarcoma (LMS) Project are supported by a grant from the National Cancer Institute's Cancer Moonshot program and are part of the <a href='https://www.cancer.gov/research/key-initiatives/moonshot-cancer-initiative/implementation/patient-engagement'>Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers</a>."
+                "This project is being conducted by the Broad Institute of MIT and Harvard, Dana-Farber Cancer Institute, and Count Me In, a non-profit research initiative that conducts patient-partnered studies of cancer. Count Me In's Leiomyosarcoma (OS) Project and Leiomyosarcoma (LMS) Project are supported by a grant from the National Cancer Institute's Cancer Moonshot program and are part of the <a href='https://www.cancer.gov/research/key-initiatives/moonshot-cancer-initiative/implementation/patient-engagement'>Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers</a>."
               ]
             },
             {
@@ -72,7 +72,9 @@
             },
             {
               "Question": "Are there any costs for participants to participate?",
-              "Paragraphs": ["No, there are no costs for the participant associated with any step in the project."]
+              "Paragraphs": [
+                "No, there are no costs for the participant associated with any step in the project."
+              ]
             },
             {
               "Question": "Is this research being conducted for profit?",
@@ -161,7 +163,9 @@
             },
             {
               "Question": "How can I receive updates on the LMSproject?",
-              "Paragraphs": ["If you would like updates on the project, please sign up for our mailing list."]
+              "Paragraphs": [
+                "If you would like updates on the project, please sign up for our mailing list."
+              ]
             }
           ]
         }
@@ -489,5 +493,201 @@
       "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
       "EditButton": "Edit"
     }
+  },
+  "About": {
+    "About": {
+      "Title": "About Us",
+      "TitleText": "The Leiomyosarcoma Project is part of <span class=\"Italic\">Count Me In</span>, a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in a cancer research.",
+      "button1": "Visit Count Me in Website",
+      "countMeInTopText": " Count Me In is stewarded by the Broad Institute of MIT and Harvard, the Dana-Farber Cancer Institute and Emerson Collective.",
+      "countMeInBottomText": "The Leiomyosarcoma Project has been designed and implemented collaboratively with leiomyosarcoma patients, advocates, caregivers, loved ones, cancer researchers, and clinicians.",
+      "AdvisoryHeadline": "Project Advisory Council",
+      "AdvisoryProjectSummary": "The Leiomyosarcoma Project Advisory Council (PAC) is made up of patients, advocates, caregivers,and loved ones who have been impacted by leiomyosarcoma. The PAC meets regularly with the project operations team via video calls to develop all aspects of the project, including survey questions, the project website, the project name and logo, and sample kits.",
+      "Advisor10": "Blake Tomkinson",
+      "AdvisorBio10": "Blake Tomkinson, PhD, MBA, currently a pharmaceutical consultant in oncology, has over 25 years of experience in the biotechnology and pharmaceutical industry.  Blake has extensive research and clinical development experience in virology, immunology and oncology with expertise as a project leader, business development search and evaluation and clinical development design and strategy of small molecules, monoclonal antibodies, and peptide compounds at OSI/Gilead, Sanofi, EMD Serono/Merck KGaA and Kura Oncology. Blake also recently established the Diana’s Fibroid Foundation (DFF) with his daughters in honor of his wife, Diana Leigh Tomkinson, who passed in Feb 2020 following a four-year battle with uterine PEcoma, a rare sarcoma.  The DFF’s mission is to educate women about the potential risk of malignancy, research the underlying causes of fibroid-associated malignancies, and support early detection of malignant cells. Blake received his PhD in Immunology from the University of Massachusetts Medical School and did his post-doctoral research in molecular biology at Brigham and Women’s Hospital and Harvard Medical School.  Blake received his MBA from the University of Colorado, Denver.",
+      "Advisor6": "Cherry Kim Headshot",
+      "AdvisorBio6": "Cherry Kim is a Marketing Project Manager and lives in Oakland, CA with her teenage son. Her wife of 24 years, Rhonda, passed away in the fall of 2021 after battling stage 4 Uterine Leiomyosarcoma. She was Rhonda’s caretaker, cheerleader and advocate for all things, whether it was medical, insurance or home life needs. Cherry took a year off work and dedicated that time to take Rhonda on daily walks and drives around the Bay Area to bask in nature’s beauty. After seeing the successes as well as long term side effects of the various chemotherapy treatments Rhonda underwent for 2 years, Cherry was motivated to help get the LMS Project get launched to help other individuals have a stronger and longer chance of survival.",
+      "Advisor11": "Jeff Wade",
+      "AdvisorBio11": "Jeff was diagnosed with Leiomyosarcoma in April 2017. The initial tumor was addressed with surgery, chemotherapy, and radiation. In the Fall of 2021 he was diagnosed with a recurrence which was addressed with chemotherapy and major surgery. Jeff is eager to do whatever he can to help researchers figure out how to best help those afflicted with this disease, and perhaps one day cure it. These activities include: <ul> <li> captain of Team Sarcoma for the Dolphins Challenge Cancer fundraising event that supports Sylvester Comprehensive Cancer Center in Miami where he has received most of his care </li> <li> actively supports activities of the National Leiomyosarcoma Foundation </li><li>contributed live tumor tissue to pattern.org, part of the Rare Cancer Research Foundation</li><li>contributed paraffin block tumor tissue to the LMS Tissue Bank at Stanford University</li><li>participates in the MyPart rare tumor study</li></ul> Jeff’s very excited to participate on this Project Advisory Council for the leiomyosarcoma Count Me In project.",
+      "Advisor8": "Mary Anne Oldford",
+      "AdvisorBio8": "When Mary Anne was a child she contracted Polio during the last epidemic before the vaccine. She learned about advocacy by her parents who got her the best medical care at Boston Children’s Hospital. Thankfully she survived.\n\nThis cancer diagnosis shocked her, but she knew she had to educate herself about this Leiomyosarcoma. Her search led her to Dana Farber Cancer Institute where her top notch Medical Team has guided her to understand this rare cancer. ULMS now stage IV with lung and bone metastasis has taught her to maneuver the battle of a lifetime.\n\nEarly on in 2014-2015 she founded the Sarcoma Sunflower Brigade, a Facebook Support Group with four members. Now with over 2300 members the group is Stronger and Dedicated to support and knowledge sharing. Mary Anne knows Knowledge is Power! She shares a tool kit of survival skills and options like using cognitive abilities to cope, reminding ourselves to stay grounded and be grateful.\n\nIt’s hard to believe that she just recently survived a bout with covid making this her second epidemic in my 73 years! It’s more important to stay connected during this troublesome lonely time. Her two amazing sons and five precious grandchildren are her world. She stays in treatment and believes that through her resilience she is surviving and able to share hope. We are Stronger Together.\n",
+      "Advisor4": "Matthew Haist",
+      "AdvisorBio4": "Matthew Haist was diagnosed with LMS in April 2019. After a major resection of his collarbone and removal of other infected areas he had clear margins. 3 months later he had mets in my lungs. I have been doing chemo and radiation ever since. Last nodule was radiated june 2021 No evidence of new disease.\n",
+      "Advisor1": "Mitch Achee",
+      "AdvisorBio1": "Mitch is a recently retired diagnostic radiologist living in Denver.  He is a survivor of Leiomyosarcoma, diagnosed in 2011.  Since 2012 he has been an active patient advocate for all sarcomas, but especially leiomyosarcoma.  Since 2013 he has been on the Board of Directors of the National Leiomyosarcoma Foundation that is committed to patient education and support and the funding of Leiomyosarcoma specific research.  With his wife Annie in 2018, he helped to establish the NLMSF-SPAEN International LMS Research Roundtable composed of basic science sarcoma researchers, research medical and surgical sarcomas oncologists from Canada, Europe, Japan and the United States whose mission is to do research to better understand the basic science of LMS with the aim of developing novel more effective treatments for this rare cancer.  Currently, there are 120 Roundtable members.  Mitch is a member of several cancer and sarcoma organizations including the American Society of Clinical Oncology), the American Association of Cancer Research, the Connective Tissue Oncology Society, and the European Society for Medical Oncology and is a patient advocate for the ECOG-ACRIN Cancer Research Group and its Sarcoma Working Group. He has also been an active participant in the SARC Research Advocacy Council and the Sarcoma Coalition.",
+      "Advisor2": "Stacey Simpson Duke",
+      "AdvisorBio2": "Stacey Simpson Duke is a pastor, a writer, a mom of twin teenage boys, and a research advocate on the SARC Research Advocacy Council. She has been living with stage 4 leiomyosarcoma for five years. Since her diagnosis, she has been on an odyssey of self-education, becoming a voracious reader of medical research, a ferocious self-advocate, and a passionate, vocal proponent of patient empowerment. She believes that patient-researcher collaboration is key to accelerating rare cancer research and improving patient experiences and outcomes. She has found support, education, and hope through her participation in online communities and conversations, especially as a member of Leiomyosarcoma Support & Direct Research Foundation (LMSDR), and also as a learner in conversation on social media with doctors, researchers, and advanced cancer patients. Stacey is the daughter of a father who lived just 11 weeks beyond a diagnosis of angiosarcoma of the small bowel and a mother who lived 19 years beyond a stage 4 melanoma diagnosis. As such, she has witnessed the devastating limits of current medical knowledge–and the possibilities that exist beyond those limits. She is counting on the power of patient-physician-researcher partnership to propel us towards a hopeful future.\n",
+      "Advisor5": "Nikky Hughes",
+      "Advisor7": "Miyoung Kim",
+      "Advisor9": "Bella Pesina",
+      "Advisor3": "Yemi Getachew",
+      "ClinicalChampions": "Clinical Champions",
+      "Champion1": "Megan Anderson",
+      "Champion2": "Brian Crompton",
+      "Champion3": "Suzanne George",
+      "Champion4": "Candace Haddox",
+      "Champion5": "Priscilla Merriam",
+      "Champion8": "Chandrajit Raut",
+      "Champion6": "Michael Nathenson",
+      "Champion7": "Jay Oza",
+      "ChampionBio1": "Boston Children’s Hospital <br> Harvard Medical School",
+      "ChampionBio2": "Dana-Farber Cancer Institute <br> Boston Children’s Hospital<br> Harvard Medical School<br>Broad Institute of MIT and Harvard \n",
+      "ChampionBio3": "Dana-Farber Cancer Institute <br> Harvard Medical School \n",
+      "ChampionBio4": "Dana-Farber Cancer Institute\n",
+      "ChampionBio5": "Dana-Farber Cancer Institute <br> Harvard Medical School <br>",
+      "ChampionBio8": "Brigham and Women’s Hospital <br> Dana-Farber Cancer Institute <br> Harvard Medical School\n",
+      "ChampionBio6": "Brigham and Women’s Hospital <br> Dana-Farber Cancer Institute <br> Harvard Medical School\n",
+      "ChampionBio7": "Dana-Farber Cancer Institute <br> Harvard Medical School \n",
+      "LearnMoreHeadline": "Learn more about the Leiomyosarcoma Project",
+      "VisitFaq": "Visit FAQ"
+    }
+  },
+  "FYP": {
+    "FYP": {
+      "HeaderText": "For Your Physician",
+      "Purpose": "The purpose of this page is to provide details about the Leiomyosarcoma Project to your physician and care team so they can learn more about the project. You can show them this website, or print out a PDF below with the same information to discuss at your next appointment",
+      "downloadTitle": "Download printable PDF to share with your care team",
+      "paragraphTitle1": "The Leiomyosarcoma Project (LMSproject) ",
+      "paragraphTextPart1": "is part of Count Me In, a nonprofit organization\nthat brings together patients and researchers as partners to accelerate discoveries in cancer\nresearch. Count Me In is stewarded by the Broad Institute of MIT and Harvard, a leading\nnonprofit biomedical research institution; the Dana-Farber Cancer Institute, a leading cancer\nhospital; and Emerson Collective, a California-based social change organization. Count Me In's\nLeiomyosarcoma (LMS) Project is supported by a grant from the National Cancer Institute's\nCancer Moonshot program and is part of the",
+      "paragraphTextPart2": "Participant Engagement and Cancer Genome\nSequencing (PE-CGS) Network",
+      "paragraphTextPart3": "of research centers. By partnering directly with patients, we can\naccelerate discoveries in leiomyosarcoma, leading to the development of new therapies and\ntreatment strategies.",
+      "paragraphTitle2": "Do participants receive individual results back from this study?",
+      "paragraphText2": "If a participant elects to\nshare archive tissue samples with the project, we may be able to share information about what\nwe learned from the genomic sequencing of the tumor sample back with the participant. This\ninformation is intended to highlight how participant sample(s) are contributing to research and\nwill not have implications for their treatment or prognosis. Because of regulatory restrictions, we\nare unable to share results with participants in New York and Canada.",
+      "paragraphText2part2": "The project is also partnering with Invitae in order to sequence and share information on\ngermline DNA (or “normal” DNA) from saliva samples. During the project, participants will be\nable to decide if they would like to provide an additional saliva sample to learn more about their\nnormal DNA and speak with a genetic counselor to understand these results. If a participant\nchooses not to participate in this process, their data will not be shared with Invitae. This process\nis not available for participants in Canada, as Invitae is not licensed to provide genetic\ncounseling services there.",
+      "paragraphTitle3": "What makes this project different from existing studies?",
+      "paragraphText3": "The Leiomyosarcoma Project seeks to empower patients and families to accelerate cancer\nresearch by sharing their samples, clinical information, and experiences with the research\ncommunity. Most patients are cared for in community settings where genomic studies are not\ntypically conducted, so this study connects leiomyosarcoma patients around the country with\ngenomics research performed at the Broad Institute, allowing them to participate regardless of\nwhere they live. The study was designed in partnership with leiomyosarcoma patients, families,\nadvocates, and advocacy groups, who continue to provide input on future directions.",
+      "paragraphTitle4": "How is the genomic and clinical data shared with the research community?",
+      "paragraphText4": "Next generation sequencing (whole exome and transcriptome sequencing) is performed on\ntumor and germline DNA. Sequencing data are linked to de-identified clinical information, and\nthe resulting data are used to identify drivers of tumorigenesis, mechanisms of response and\nresistance to therapies, and diagnostic, prognostic, and therapeutic biomarkers. The database\nof clinically annotated genomic information is shared on publicly available platforms such as\ncBioPortal and the NIH.",
+      "paragraphTitle5": "What kinds of questions is this project aiming to address?",
+      "paragraphText5": "Over the past decade, genomic characterization of tumors has shed enormous light on the\nmolecular underpinnings of cancer. These discoveries have led to the development of novel\ntherapies and preventive measures that have already revolutionized cancer care. Despite this\nprogress, the genomics of leiomyosarcoma remains poorly understood.",
+      "paragraphText5part2": "The types of questions we strive to answer include:",
+      "paragraphText5list1": "What are all the genes and mutations that can lead to leiomyosarcoma?",
+      "paragraphText5list2": "What explains why some patients show extraordinary responses to a particular\ntreatment?",
+      "paragraphText5list3": "What explains why some tumors never respond to a particular treatment?",
+      "paragraphText5list4": "How can we develop better treatments for leiomyosarcoma?",
+      "paragraphText5part3": "Despite the progress that has been made to begin to answer these questions, we remain far\nfrom the goal. To get there, the detailed genomic characterization of many thousands of\nclinically annotated cancer samples will be required.",
+      "paragraphText5part4": "If you have any questions about this study, please reach out to us at ",
+      "paragraphText5part5": "or 651-403-5556.",
+      "paragraphText5part6": "The Leiomyosarcoma project is part of Count Me In."
+    }
+  },
+  "ParticipatingSection": {
+    "Title": "Participating is easy",
+    "AllowList": {
+      "Title": "You can choose to allow the study team to:",
+      "Option1": "send you a simple kit to collect a saliva sample",
+      "Option2": "request copies of your medical records"
+    },
+    "Opt-inToList": {
+      "Title": "You may also opt-in to:",
+      "Option1": "sharing a blood sample",
+      "Option2": "allowing the team to request a portion of tumor tissue (if available)",
+      "Option3": "receiving information about what we've learned from the genomic sequencing of your / your child's tumor sample (if we are able to send these to you)",
+      "Option4": "providing an additional saliva sample to learn more about your/your child's normal DNA with the help of a genetic counselor"
+    },
+    "ClosingText": {
+      "Part1": "We will do the rest",
+      "Part2": " — with your permission, we’ll obtain copies of your medical records and send you a saliva kit."
+    },
+    "IframeTitle": "YouTube video about participating"
+  },
+  "ParticipateSection": {
+    "Title": "Here’s how to participate",
+    "Steps": [
+      {
+        "Title": "STEP 1",
+        "Time": "10-15 minutes",
+        "Description": "Provide consent and tell us where you’ve been treated",
+        "ImageAlt": "Computer screen displaying online consent form"
+      },
+      {
+        "Title": "STEP 2",
+        "Time": "5 minutes",
+        "Description": "Answer questions about your cancer",
+        "ImageAlt": "Computer screen displaying online survey"
+      },
+      {
+        "Title": "STEP 3",
+        "Time": "10 minutes",
+        "Description": "Provide samples (we’ll send a kit)",
+        "ImageAlt": "Sample collection kit"
+      },
+      {
+        "Title": "STEP 4",
+        "Time": "Ongoing",
+        "Description": "Learn with us along the way",
+        "ImageAlt": "Speech bubbles sharing hearts and data visualizations"
+      }
+    ],
+    "LearnMoreAboutParticipationButton": "Learn more about participation"
+  },
+  "StayInformedSection": {
+    "Title": "Stay informed",
+    "Text": "Sign up for our mailing list or follow us on social media",
+    "JoinMailingListButton": "Join Mailing List"
+  },
+  "CountMeInSection": {
+    "Title": "Join the movement and say Count Me In",
+    "Text": "With your help, patients can be the driving force behind transformative cancer research.",
+    "ImageAlt": "Hands raised to volunteer"
+  },
+  "ParticipationPage": {
+    "Title": "Here’s how to participate",
+    "Steps": [
+      {
+        "Step": "STEP 1",
+        "Time": "10-15 minutes",
+        "Title": "Provide consent for the study",
+        "Text": "The consent form is how participants give researchers their permission to take part in the study. This section consists of several pages, we encourage participants to take their time. Any progress will be automatically saved and can be re-accessed later. For participants who are signing up for / with their child, depending on their age, we may also ask the child to “assent” or agree that they would also like to participate in the study.",
+        "Button": "View Consent Document",
+        "ImageAlt": "Computer screen displaying online consent form"
+      },
+      {
+        "Step": "STEP 2",
+        "Time": "5 minutes",
+        "Title": "Tell us where you’ve been treated",
+        "Text": "We ask where patients have been treated for their cancer, so that we can request medical records, and if applicable, archived tumor tissue.",
+        "Button": "View Medical Release",
+        "ImageAlt": "Computer screen displaying medical center"
+      },
+      {
+        "Step": "STEP 3",
+        "Time": "Time varies by survey",
+        "Title": "Respond to surveys about you and your experience with cancer",
+        "Text": "In these surveys we ask questions about a participant’s experience with leiomyosarcoma, like when they were diagnosed and the types of treatments they've had.",
+        "Button": "View Surveys",
+        "ImageAlt": "Computer screen displaying online survey"
+      },
+      {
+        "Step": "STEP 4",
+        "Time": "10 minutes",
+        "Title": "Provide a saliva and/or blood sample",
+        "Text": "We will send participants a kit to collect a sample of their saliva and/or blood, along with easy to follow instructions. We will study these samples to help improve our understanding of cancer by comparing the normal DNA in a participant's saliva or blood to their tumor DNA from any tumor samples we may collect.",
+        "Button": "View Kit Instructions",
+        "ImageAlt": "Sample collection kit"
+      }
+    ]
+  },
+  "BenefitsParticipation": {
+    "Title": "Benefits of Participation",
+    "Participations": [
+      {
+        "step": "Stay involved",
+        "Text": "Over time, we will provide participants with regular updates about the status of the research and share any discoveries that they have enabled us to make. We may also contact participants to participate in focus groups or provide additional feedback related to the overall project experience — we want to hear what’s important to you.",
+        "ImageAlt": "Speech bubbles sharing hearts and data visualizations"
+      },
+      {
+        "step": "Receive information about what we've learned from your tumor sample, if you choose",
+        "Text": "If participants choose to share archive tissue samples with the project, we may be able to share information about what we've learned from the genomic sequencing of a participant's tumor sample back with them. This information is intended to highlight how participants are contributing to research and will not have implications for their treatment or prognosis. Because of regulatory restrictions, we are unable to share results with participants in New York and Canada.",
+        "Button": "What types of information is shared about tumor samples?",
+        "Button1": "Download printable PDF to share with your care team",
+        "ImageAlt": "Computer screen displaying medical center"
+      },
+      {
+        "step": "Learn more about your normal DNA, if you choose",
+        "Text": "The OSproject is also partnering with Invitae in order to sequence and share information on germline DNA (or “normal” DNA) from saliva samples. During the project, participants will be able to decide if they’d like to provide an additional saliva sample to learn more about their/their child’s normal DNA and speak with a genetic counselor to understand these results. If a participant chooses not to participate in this process, their data will not be shared with Invitae. This process is not available for participants in Canada, as Invitae is not licensed to provide genetic counseling services there.",
+        "ImageAlt": "Computer screen displaying online survey"
+      }
+    ]
   }
 }

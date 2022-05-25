@@ -132,6 +132,9 @@ export class ParticipantColumn {
   public static CORRECTED_TEST = new ParticipantColumn('Test Corrected', 'isCorrected', 'k', 'testResult');
   public static TIME_TEST = new ParticipantColumn('Test Time Completed', 'timeCompleted', 'k', 'testResult');
 
+  //Cohort tags
+  public static COHORT_TAG_NAME = new ParticipantColumn('Cohort Tag Name', 'cohortTagName', 'c', 'dsm');
+
   //FON
   public static ACTIVITY_STATUS = new ParticipantColumn('Enrollmentt Status', 'activityStatus', 'data');
 
