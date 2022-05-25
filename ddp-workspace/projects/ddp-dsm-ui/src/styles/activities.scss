@@ -1,0 +1,529 @@
+// COPIED from PANCAN study
+
+@keyframes open {
+    0% { opacity: 0; max-height: 1px}
+    100% { opacity: 1; max-height: 100vh}
+}
+
+// common activity styles
+.main_activity {
+    padding-bottom: 6.25rem;
+    padding-top: 1rem;
+    box-sizing: border-box;
+
+    .content_tight,
+    .subject-panel-container,
+    .ddp-admin-action-panel {
+        max-width: 750px;
+    }
+}
+
+.main_sticky {
+    padding-top: 5rem;
+}
+
+// TODO: temporary commented the styles, for debug DSS in DSM, fix it
+/* .sticky-section {
+    z-index: 2;
+    position: fixed;
+    top: $header-height;
+    background-color: $primary-color;
+    transition: all 200ms linear;
+}
+
+.sticky-section_shadow {
+    box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.2);
+} */
+
+.sticky-block {
+    margin: 0.8rem 0;
+
+    .sticky__text {
+        font-size: 1.0625rem;
+        line-height: 1.375rem;
+        color: white;
+    }
+
+    .Link {
+        color: white;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .sticky-section {
+        display: none;
+    }
+
+    .main_sticky {
+        padding-top: 1rem;
+    }
+}
+
+// steps
+.activity-steps {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 3rem 0;
+
+    &__divider {
+        flex: 1;
+        border-top: 2px solid $activity-step-default;
+        margin: 0.75rem 1rem 0;
+    }
+}
+
+.activity-step {
+    display: flex;
+    font-size: 1.125rem;
+    cursor: initial;
+
+    &__number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.625rem;
+        height: 1.625rem;
+        background-color: $activity-step-default;
+        border-radius: 50%;
+        color: white;
+    }
+
+    &__text {
+        white-space: nowrap;
+        color: $grey-text-color;
+        padding-left: 8px;
+    }
+
+    &.completed {
+        cursor: pointer;
+
+        .activity-step {
+            &__number {
+                background-color: $activity-step-inactive;
+                color: white;
+            }
+
+            &__text {
+                color: $text-color;
+            }
+        }
+        &.active {
+            .activity-step__number {
+                background-color: $primary-color;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .activity-steps {
+        padding: 1rem 0;
+    }
+
+    .activity-step {
+        &__text {
+            display: none;
+        }
+    }
+}
+
+.with-vertical-progress-indicator {
+    .header-section {
+        text-align: center;
+    }
+
+    .article-content {
+        display: flex;
+        width: auto;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5625rem;
+
+        .content {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    .activity-steps {
+        flex-direction: column;
+        justify-content: flex-start;
+        margin: 24px 24px 0 0;
+        padding: 0;
+
+        @media (max-width: $tablet-breakpoint) {
+            margin: 16px 24px 0 0 !important;
+        }
+
+        &__divider {
+            flex: 0 0 24px;
+            margin: 0 0 0 12px;
+            border: none;
+            width: 2px;
+            background: $activity-step-default;
+
+            @media (max-width: $tablet-breakpoint) {
+                flex: 0 0 12px;
+                margin: 0 0 0 9px;
+            }
+        }
+    }
+
+    .activity-step {
+        &__text {
+            @media (max-width: $tablet-breakpoint) {
+                display: none;
+            }
+        }
+    }
+}
+
+// activity lists
+.ddp-list {
+    padding: 0 0 0 1.5rem;
+    font-size: 1.5rem;
+    line-height: 2.875rem;
+}
+
+.ddp-li {
+    font-size: 1.25rem;
+    line-height: 2.875rem;
+}
+
+.ddp-block-title-bold {
+    font-weight: 600;
+}
+
+.ddp-block-body {
+    font-size: 1.125rem;
+    line-height: 2rem;
+    color: $text-color;
+    margin: 1rem 0 1rem -1.5625rem;
+}
+
+.ddp-simple-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+
+    .ddp-question-prompt {
+        font-size: 1.375rem;
+        line-height: 2.25rem;
+        font-family: inherit;
+    }
+}
+
+.ul-flat-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+
+    li::before {
+        content: "— ";
+    }
+}
+
+.inner-ul-flat-list {
+    list-style-type: none;
+    padding: 0;
+
+    p::before {
+        content: "— ";
+    }
+}
+
+.ol-flat-list {
+    font-weight: 600;
+    color: $text-color;
+
+    p {
+        color: $text-color;
+    }
+}
+
+.ddp-content {
+    font-size: 1.5rem;
+    line-height: 2.875rem;
+}
+
+// citation block
+details {
+    margin-top: 2rem;
+    padding: 4px 0 18px 30px;
+    border-width: 1px 0;
+    border-style: solid;
+    border-color: #E2E2E2;
+
+    > summary {
+        list-style-type: none;
+        outline: none;
+        cursor: pointer;
+        margin-left: -16px;
+    }
+
+    > summary::-webkit-details-marker {
+        display: none;
+    }
+
+    > summary::before {
+        content: '+';
+        font-size: 30px;
+        position: relative;
+        top: 4px;
+        left: -10px;
+    }
+
+    &[open] > summary {
+        &::before {
+            display: inline-block;
+            transform: rotate(45deg);
+        }
+
+        ~ p, ~ ul > li {
+            animation: open 0.5s ease-in-out;
+        }
+
+        @media (max-width:$mobile-breakpoint) {
+            ~ ul {
+                padding-left: 20px;
+            }
+        }
+    }
+}
+
+// required question
+.ddp-required-question-prompt:after {
+    content: ' *';
+}
+
+// buttons layout
+.activity-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0 0 0;
+}
+
+.button_right {
+    margin-left: auto;
+}
+
+// question text
+.ddp-question-prompt {
+    font-size: 1.5rem;
+    line-height: 2.875rem;
+    margin: 1.5rem 0 0.5rem 0;
+
+    small {
+        line-height: normal;
+    }
+}
+
+// questions
+.ddp-activity-question {
+    .mat-radio-label {
+        align-items: normal !important;
+        width: inherit !important;
+    }
+
+    .mat-list-text {
+        width: inherit !important;
+    }
+}
+
+// consent agree question
+.consent-agree {
+    margin: 0 0 -1.2rem 0;
+}
+
+// agreement question
+.ddp-agreement-text {
+    white-space: normal;
+    margin: 0;
+}
+
+.ddp-agreement {
+    .mat-checkbox-inner-container {
+        top: 4px;
+    }
+}
+
+.ddp-content__agreement {
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+}
+
+.mat-checkbox-label,
+.mat-radio-label-content {
+    font-size: 1.125rem;
+    line-height: 1.6rem !important;
+}
+
+.mat-checkbox-inner-container {
+    height: 1.6875rem !important;
+    width: 1.6875rem !important;
+    margin-top: 0 !important;
+    margin-right: 0.875rem !important;
+}
+
+.mat-radio-label {
+    margin: 0.5rem 0;
+    align-items: unset !important;
+}
+
+.picklist .ddp-date-field-margin {
+  margin: 0 1.5rem 0 0;
+}
+
+.picklist .ddp-date-field-margin:last-child {
+  margin: 0;
+}
+
+.ddp-picklist-option-list-item {
+    height: auto !important;
+    margin-bottom: 1rem;
+}
+
+.mat-list .mat-list-item .mat-list-item-content {
+    display: block !important;
+    padding: 0 4px !important;
+}
+
+.ddp-helper {
+    margin: 0;
+    font-size: 1.125rem;
+    line-height: 1.4375rem;
+    color: $grey-text-color;
+}
+
+.ddp-counter-color {
+    color: $primary-color;
+}
+
+// native dropdown
+select {
+    font-size: 1.2rem;
+    color: $grey-text-color;
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 100%;
+    padding: 0;
+    margin-top: 1rem;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, .42);
+    border-radius: 0;
+    height: 2.65rem;
+    transition: all .3s;
+    cursor: pointer;
+}
+
+select:disabled {
+    color: rgba(0, 0, 0, 0.38);
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.38);
+    cursor: auto;
+}
+
+// material dropdown
+.mat-form-field-label {
+    font-size: 1.0rem !important;
+}
+
+// input
+.mat-form-field-infix {
+    font-size: 1.2rem;
+
+    ddp-date & {
+        .date-text {
+            text-align: center !important;
+        }
+
+        .mat-form-field-label-wrapper {
+            top: -9px;
+            text-align: center!important;
+        }
+    }
+}
+
+// error message list
+.ddp-activity-validation {
+    .ErrorMessageList {
+        list-style-type: square;
+    }
+
+    .ErrorMessageItem {
+        font-size: 1.2rem;
+        margin: .3rem 0;
+    }
+}
+
+// info box
+.infobox {
+    border: 2px solid $primary-color;
+    border-radius: 8px;
+    background-color: $section-grey-background-color;
+    padding: 1rem;
+}
+
+// institutions
+.ddp-institutions-form {
+    margin: 2rem 0;
+}
+
+.ddp-address-embedded__title,
+.ddp-institutions-form__title {
+    font-size: 1.5rem;
+    line-height: 2.875rem;
+    margin: 0;
+}
+
+.ddp-address-embedded__subtitle,
+.ddp-institutions-form__subtitle {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin: 0 0 0.5rem 0;
+    color: $grey-text-color;
+}
+
+.boolean-answer-CONSENT_BLOOD,
+.boolean-answer-CONSENT_TISSUE {
+    .ddp-question-prompt {
+        font-size: 18px;
+        line-height: 32px;
+    }
+}
+
+.ddp-textarea {
+    max-height: 10rem !important;
+}
+
+// nested picklist
+.ddp-nested-picklist {
+    margin-left: 3rem;
+
+    &__title {
+        margin: 1rem 0 0.5rem 0;
+        font-size: 1.2rem;
+        line-height: 2rem;
+    }
+}
+
+.mat-checkbox-frame {
+    border-color: $checkbox-color !important;
+}
+
+// autocomplete-picklist-question
+.autoCompletePanel {
+    .mat-option {
+        white-space: normal;
+        height: auto;
+        border-top: 1px solid #d2d2d2;
+
+        &:last-of-type {
+            border-bottom: 1px solid #d2d2d2;
+        }
+    }
+}
+
+.matrix-answer-table {
+    font-size: 16px;
+    line-height: 1.45;
+}
