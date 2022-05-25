@@ -371,14 +371,12 @@ details {
     align-items: unset !important;
 }
 
-.picklist {
-    .ddp-date-field-margin:first-child {
-        margin: 0 1.5rem 0 0;
-    }
+.picklist .ddp-date-field-margin {
+  margin: 0 1.5rem 0 0;
+}
 
-    .ddp-date-field-margin:last-child {
-        margin: 0;
-    }
+.picklist .ddp-date-field-margin:last-child {
+  margin: 0;
 }
 
 .ddp-picklist-option-list-item {
