@@ -104,6 +104,7 @@
         <div class="participant__content" *ngIf="isParticipantContentExpanded(participant)">
           <app-activities-list
             [activities]="participant.activities"
+            [disableButtons]="isPageBusy || isEnrollBtnDisabled || loading"
             (editActivity)="onEditActivity(participant.guid, $event)"
             (viewActivity)="onViewActivity(participant.guid, $event)"
             (startActivity)="onStartActivity(participant.guid, $event)"

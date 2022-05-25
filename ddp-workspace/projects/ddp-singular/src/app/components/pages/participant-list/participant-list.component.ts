@@ -43,6 +43,7 @@ export class ParticipantsListComponent implements OnInit {
   participants: Participant[] = [];
   private expandedMap: Record<string, boolean> = {};
   errorMessage: string | null = null;
+  isPageBusy = false;
   @Input() allowParticipantRemoval = false;
 
   constructor(
@@ -131,21 +132,19 @@ export class ParticipantsListComponent implements OnInit {
   }
 
   onEditActivity(participantGuid: string, activityToEdit: ActivityInstance): void {
+    this.isPageBusy = true;
     this.setParticipant(participantGuid);
-
-    this.activityService
-      .createInstance(this.config.studyGuid, activityToEdit.activityCode)
-      .pipe(take(1))
-      .subscribe(activity => {
-        this.setCurrentActivity(activity as ActivityInstance);
-        this.redirectToSurvey(activity.instanceGuid);
-      });
+    this.setCurrentActivity(activityToEdit, false);
+    this.redirectToSurvey(activityToEdit.instanceGuid);
+    this.isPageBusy = false;
   }
 
   onViewActivity(participantGuid: string, activity: ActivityInstance): void {
+    this.isPageBusy = true;
     this.setParticipant(participantGuid);
     this.setCurrentActivity(activity, true);
     this.redirectToSurvey(activity.instanceGuid);
+    this.isPageBusy = false;
   }
 
   onAddParticipantClick(): void {

@@ -56,20 +56,20 @@
           <ng-container *ngTemplateOutlet="hasPreviousInstance(activity) ? continue : start"></ng-container>
 
           <ng-template #start>
-            <button type="button" class="button button--primary button--sm" (click)="onStartClick(activity)">
+            <button type="button" class="button button--primary button--sm" (click)="onStartClick(activity)" [disabled]="disableButtons">
               {{ (isMedicalRecordFileUpload(activity) ? 'SDK.UploadButton' : 'SDK.StartButton') | translate }}
             </button>
           </ng-template>
 
           <ng-template #continue>
-            <button type="button" class="button button--primary button--sm" (click)="onContinueClick(activity)">
+            <button type="button" class="button button--primary button--sm" (click)="onContinueClick(activity)"  [disabled]="disableButtons">
               {{ (isMedicalRecordFileUpload(activity) ? 'SDK.UploadButton' : 'SDK.ContinueButton') | translate }}
             </button>
           </ng-template>
         </ng-container>
 
         <ng-container *ngSwitchCase="ActivityStatusCodes.IN_PROGRESS">
-          <button type="button" class="button button--primary button--sm" (click)="onContinueClick(activity)">
+          <button type="button" class="button button--primary button--sm" (click)="onContinueClick(activity)"  [disabled]="disableButtons">
             {{ (isMedicalRecordFileUpload(activity) ? 'SDK.UploadButton' : 'SDK.ContinueButton') | translate }}
           </button>
         </ng-container>
@@ -78,13 +78,13 @@
           <ng-container *ngTemplateOutlet="isActivityEditable(activity) ? update : view"></ng-container>
 
           <ng-template #update>
-            <button type="button" class="button button--outline button--sm fixed-button" (click)="onEditClick(activity)">
+            <button type="button" class="button button--outline button--sm fixed-button" (click)="onEditClick(activity)"  [disabled]="disableButtons">
               {{ (isMedicalRecordFileUpload(activity) ? 'SDK.UploadButton' : 'SDK.EditButton') | translate }}
             </button>
           </ng-template>
 
           <ng-template #view>
-            <button type="button" class="button button--outline button--sm fixed-button" (click)="onViewClick(activity)">
+            <button type="button" class="button button--outline button--sm fixed-button" (click)="onViewClick(activity)"  [disabled]="disableButtons">
               {{ 'SDK.ReviewButton' | translate }}
             </button>
           </ng-template>
