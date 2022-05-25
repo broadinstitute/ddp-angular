@@ -3,3 +3,5 @@ export enum InstitutionType {
     Institution = 'INSTITUTION',
     Physician = 'PHYSICIAN'
 }
+
+export type InstitutionAdditionalFields = 'COUNTRY'
