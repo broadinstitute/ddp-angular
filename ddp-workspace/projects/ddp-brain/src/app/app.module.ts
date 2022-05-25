@@ -35,7 +35,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ModalImageComponent } from './components/modal-image/modal-image.component';
 import { PrismComponent } from './components/prism/prism.component';
-import {tkCfg} from "../../../ddp-angio/src/app/app.module";
 
 const baseElt = document.getElementsByTagName('base');
 

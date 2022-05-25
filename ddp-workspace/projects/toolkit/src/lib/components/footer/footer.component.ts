@@ -93,7 +93,7 @@ export class FooterComponent implements OnInit {
     public twitterUrl: string;
     public countMeInUrl: string;
     public blogUrl: string;
-    public instagramUrl: string
+    public instagramUrl: string;
 
     constructor(
         private dialog: MatDialog,
