@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { AnswerValue } from '../../../../models/activity/answerValue';
 import { ActivityTabularBlock } from '../../../../models/activity/activityTabularBlock';
 import { LayoutType } from '../../../../models/layout/layoutType';
 import { ActivityQuestionBlock } from 'ddp-sdk';
