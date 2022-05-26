@@ -68,19 +68,8 @@
                         <img lazy-resource src="assets/images/heart.svg"
                             [alt]="'HomePage.StepsSection.Step3.ImageAlt' | translate">
                     </div>
-                    <p translate>HomePage.StepsSection.Step3.Text</p>
-                </div>
-                <div class="arrow">
-                    <img lazy-resource src="assets/images/step-arrow.svg"
-                        [alt]="'HomePage.StepsSection.NextStepArrowAlt' | translate">
-                </div>
-                <div class="step">
-                    <div class="step__img">
-                        <img lazy-resource src="assets/images/woman-scientist.png"
-                            [alt]="'HomePage.StepsSection.Step4.ImageAlt' | translate">
-                    </div>
                     <div>
-                        <p translate>HomePage.StepsSection.Step4.Text</p>
+                        <p translate>HomePage.StepsSection.Step3.Text</p>
                         <a routerLink="more-details" class="button button_medium button_secondary" translate>
                             Common.Buttons.LearnMore
                         </a>
@@ -91,6 +80,7 @@
     </section>
     <section class="section help-section">
         <div class="content content_medium help-block">
+            <h2 class="section-title" translate>HomePage.HelpSection.Title</h2>
             <div class="help-block__text">
                 <div>
                     <p class="big bold" translate>HomePage.HelpSection.Diagnosed.Title</p>
@@ -99,11 +89,9 @@
                 <div>
                     <p class="big bold" translate>HomePage.HelpSection.PassedAway.Title</p>
                     <p translate>HomePage.HelpSection.PassedAway.Text</p>
-                    <div class="more-details-container">
-                        <a routerLink="more-details" class="button button_medium button_secondary" translate>
-                            Common.Buttons.FAQ
-                        </a>
-                    </div>
+                    <a routerLink="more-details" class="button button_medium button_secondary" translate>
+                        Common.Buttons.FAQ
+                    </a>
                 </div>
             </div>
         </div>
@@ -127,17 +115,15 @@
                 <ul>
                     <li translate>HomePage.ParticipatingSection.Opt-inToList.Option1</li>
                     <li translate>HomePage.ParticipatingSection.Opt-inToList.Option2</li>
-                    <li translate>HomePage.ParticipatingSection.Opt-inToList.Option3</li>
-                    <li translate>HomePage.ParticipatingSection.Opt-inToList.Option4</li>
                 </ul>
                 <p>
                     <span class="bold" translate>HomePage.ParticipatingSection.ClosingText.Part1</span>
                     <span translate>HomePage.ParticipatingSection.ClosingText.Part2</span>
                 </p>
                 <div>
-                    <a routerLink="more-details" (click)="sendCountMeInAnalytics()"
+                    <a routerLink="count-me-in" (click)="sendCountMeInAnalytics()"
                         class="button button_medium button_primary" translate>
-                        Common.Buttons.LearnMoreAboutParticipating
+                        Common.Buttons.CountMeIn
                     </a>
                 </div>
             </div>
@@ -152,7 +138,7 @@
     <section class="section gallery-section">
         <div class="content content_medium gallery-block">
             <div class="gallery-header">
-                <h2 class="gallery-header__title" [innerHTML]="'HomePage.GallerySection.Title' | translate" >HomePage.GallerySection.Title</h2>
+                <h2 class="gallery-header__title" translate>HomePage.GallerySection.Title</h2>
                 <img lazy-resource class="gallery-header__image" src="assets/images/molecule.svg"
                     [alt]="'HomePage.GallerySection.TitleImageAlt' | translate">
             </div>

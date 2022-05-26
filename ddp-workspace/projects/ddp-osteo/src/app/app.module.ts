@@ -11,8 +11,7 @@ import {
   AnalyticsEventsService,
   AnalyticsEvent,
   LoggingService,
-  SubmitAnnouncementService,
-  SubmissionManager
+  PicklistSortingPolicy
 } from 'ddp-sdk';
 
 import {
@@ -22,7 +21,6 @@ import {
 
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AppComponent } from './components/app/app.component';
@@ -32,14 +30,6 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { HeaderComponent } from './components/header/header.component';
 import { WorkflowProgressComponent } from './components/workflow-progress/workflow-progress.component';
-
-import { ParticipationComponent } from './components/participation/participation.component';
-import { ScientificImpactComponent } from './components/scientific-impact/scientific-impact.component';
-import { PhysiciansComponent } from './components/physicians/physicians.component';
-
-import { ActivityComponent } from './components/activity/activity.component';
-import { ActivityPageComponent } from './components/activity-page/activity-page.component';
-
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -82,9 +72,9 @@ tkCfg.familyHistoryThankYouUrl = 'family-history-thank-you';
 tkCfg.mailingListDialogUrl = 'updates';
 tkCfg.phone = '651-602-2020';
 tkCfg.infoEmail = 'info@osproject.org';
-tkCfg.twitterAccountId = 'count_me_in';
-tkCfg.facebookGroupId = 'joincountmein';
-tkCfg.instagramId = 'countmein';
+tkCfg.twitterAccountId = 'the_osproject';
+tkCfg.facebookGroupId = 'osteosarcomaproject';
+tkCfg.instagramId = 'the_osproject';
 // to configure feed, go to: https://lightwidget.com/widget-info/814feee04df55de38ec37791efea075e
 // need Instagram credentials for @osteosarcomaproject
 tkCfg.lightswitchInstagramWidgetId = '814feee04df55de38ec37791efea075e';
@@ -109,12 +99,9 @@ config.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 config.projectGcpId = DDP_ENV.projectGcpId;
 config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 config.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl;
-config.dashboardActivitiesStartedStatuses = ['CREATED'];
 config.doCloudLogging = DDP_ENV.doCloudLogging;
-config.tooltipIconUrl = 'assets/images/info.png';
-config.usesVerticalStepper = ['FAMILY_HISTORY', 'FAMILY_HISTORY_SELF', 'FAMILY_HISTORY_PARENTAL'];
+config.usesVerticalStepper = ['FAMILY_HISTORY'];
 config.alwaysShowQuestionsCountInModalNestedActivity = true;
-config.validateOnlyVisibleSections = true;
 
 export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {
@@ -147,7 +134,6 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ToolkitModule,
     MatExpansionModule,
     MatIconModule,
-    MatButtonModule,
     HammerModule
   ],
   declarations: [
@@ -157,16 +143,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     GalleryComponent,
     AboutUsComponent,
     FaqComponent,
-    ScientificImpactComponent,
     HeaderComponent,
-    WorkflowProgressComponent,
-
-    ParticipationComponent,
-    PhysiciansComponent,
-
-    ActivityComponent,
-    ActivityPageComponent
-
+    WorkflowProgressComponent
   ],
   providers: [
     {
@@ -187,8 +165,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
       ],
       multi: true
     },
-    SubmitAnnouncementService,
-    SubmissionManager
+    PicklistSortingPolicy
   ],
   bootstrap: [AppComponent]
 })
