@@ -56,7 +56,7 @@ export class TabularBlockComponent implements OnInit {
     }
 
     questionFieldsSpan(questionBlock: ActivityQuestionBlock<any>): string {
-        // we substract the column for the question prompt if there is one
+        // we subtract the column for the question prompt if there is one
         return 'span ' + (questionBlock.columnSpan - (questionBlock.question ? 1 : 0));
     }
 
