@@ -222,20 +222,3 @@ h4 {
 .close:hover {
     color: mat.get-color-from-palette($app-theme, 650);
 }
-
-$tooltip-icon-size: 24px;
-.tooltip {
-    display: inline-block;
-    vertical-align: middle;
-    height: $tooltip-icon-size;
-    margin-left: 3px;
-
-    &__icon {
-        height: $tooltip-icon-size;
-        width: $tooltip-icon-size;
-    }
-
-    &__box {
-        font-size: 1rem;
-    }
-}

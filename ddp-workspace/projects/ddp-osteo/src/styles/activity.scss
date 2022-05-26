@@ -394,17 +394,6 @@ select:disabled {
     margin-bottom: 1rem;
 }
 
-// nested picklist
-.ddp-nested-picklist {
-    margin-left: 3rem;
-
-    &__title {
-        margin: 1rem 0 0.5rem 0;
-        font-size: 1.2rem;
-        line-height: 2rem;
-    }
-}
-
 .mat-list .mat-list-item .mat-list-item-content {
     display: block !important;
     padding: 0 4px !important;

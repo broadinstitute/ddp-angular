@@ -25,8 +25,7 @@
 .desktop-contacts {
     width: 50%;
     display: flex;
-    justify-content: flex-start;
-    margin-left: 350px;
+    justify-content: flex-end;
 }
 
 .nav {
@@ -51,8 +50,6 @@
     font-size: 20px;
     line-height: 25px;
 }
-
-
 
 .footer-secondary-text {
     font-size: 15px;
@@ -96,7 +93,6 @@
 .contacts {
     display: flex;
     flex-direction: column;
-    margin-right: -50px;
 }
 
 .project-contacts {
