@@ -1,7 +1,7 @@
 <h3>{{block.title}}</h3>
 
 <div class="tabular-container" [gdColumns]="gridSettings.gridTemplateColumns">
-    <div *ngFor="let header of headers" class="header cell" [gdColumn]="header.gridColumn" style="border: 1px solid grey;">
+    <div *ngFor="let header of headers" class="header cell" [gdColumn]="header.gridColumn">
         {{header.label}}
     </div>
 

@@ -13,6 +13,8 @@ $border-color: #1d1d1d;
 
         .header {
             grid-row: 1;
+            border: 1px solid $border-color;
+            border-top: none;
         }
     }
 
