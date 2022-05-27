@@ -28,6 +28,13 @@
         "Collapse": "Collapse all",
         "MoreFAQs": "More FAQs"
       },
+      "Header": {
+        "P1": "As part of the LMS project, patients contribute their experiences, clinical information, and samples to make data freely available for any LMS researchers. By generating the most comprehensive dataset for LMS, the entire cancer research community can make discoveries that can lead to a better understanding of the disease and changes for future treatments. The project is part of Count Me In, a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research. The project also works in collaboration with a growing coalition of nonprofit advocacy partners.",
+        "P2": "This project has been built with the guidance and input of many different members of the LMS community. Below we have answered some general questions about this project, as well as questions that are specific to different members of the community - please read any and all that may apply. If you have any questions, please feel free to reach out to us at <a href='mailto:info@LMSproject.org'>info@LMSproject.org</a> or by phone at <a href='tel:651-403-5556'>651-403-5556</a>."
+      },
+      "Footer": {
+        "P1": "<b>Still have more questions? Feel free to reach out to us at <br/> <a href='mailto:info@LMSproject.org'>info@LMSproject.org</a> or by phone at <a href='tel:651-403-5556'>651-403-5556</a>.</b>"
+      },
       "Sections": [
         {
           "Title": "General FAQ",
