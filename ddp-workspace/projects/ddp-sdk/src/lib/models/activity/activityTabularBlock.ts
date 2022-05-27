@@ -13,8 +13,6 @@ export class ActivityTabularBlock extends ActivityBlock {
     }
 
     get blocks(): ActivityBlock[] {
-        return [this];
-             // TODO: fix the response
-            //.concat(this.content.flatMap(row => row.map(question => question.block)));
+        return [this as ActivityBlock].concat(this.content);
     }
 }
