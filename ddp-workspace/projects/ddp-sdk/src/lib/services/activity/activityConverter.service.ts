@@ -14,10 +14,6 @@ import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
 import { ActivityActivityBlock } from '../../models/activity/activityActivityBlock';
 import * as _ from 'underscore';
-import {
-    mockTabularData1,
-    mockTabularData2
-} from '../../components/activityForm/activity-blocks/tabularBlock/mock-tabular-data';
 import { ActivityTabularBlock } from '../../models/activity/activityTabularBlock';
 
 @Injectable()
@@ -162,12 +158,7 @@ export class ActivityConverter {
                 };
                 section.icons.push(icon);
             }
-
-            // add mockTabular data for debug
-            // const sectionBlocks = jsonSection.blocks;
-            const sectionBlocks = jsonSection.blocks.concat([mockTabularData1, mockTabularData2]);
-
-            for (const inputBlock of sectionBlocks) {
+            for (const inputBlock of jsonSection.blocks) {
                 const blockBuilder = this.blockBuilders.find(x => x.type === inputBlock.blockType);
                 if (blockBuilder) {
                     const block = blockBuilder.func(inputBlock);
