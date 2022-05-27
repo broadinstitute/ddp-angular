@@ -1,10 +1,11 @@
-$grid-gap: 0; //10px;
+$grid-gap: 0;
 $border-color: #1d1d1d;
 
 .tabular-container {
     border: 1px solid $border-color;
     border-bottom: none;
     width: 50%;
+    min-width: fit-content;
 
     .headers {
         grid-gap: $grid-gap;
