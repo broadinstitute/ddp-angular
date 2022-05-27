@@ -1,19 +1,22 @@
 <div class="main">
+  <div class="text-place">
+    <div class="text" [innerHTML]="'About.About.TitleText' | translate"></div>
+    <button class="visit-button" onclick="window.location.href='count-me-in'">
+      <div class="button-text">{{ 'About.About.button1' | translate }}</div>
+      <mat-icon>launch</mat-icon>
+    </button>
+  </div>
   <div class="about-block">
     <div class="page-name"> {{ 'About.About.Title' | translate }}</div>
-    <div class="text-place">
-      <div class="text" [innerHTML]="'About.About.TitleText' | translate"></div>
-      <button class="visit-button" onclick="window.location.href='count-me-in'">
-        <div class="button-text">{{ 'About.About.button1' | translate }}</div>
-        <mat-icon>launch</mat-icon>
-      </button>
-    </div>
   </div>
   <div class="count me in">
     <img class="countMeInImg" src="/assets/images/logo-count-me-in.png" alt="count me in">
     <div class="countMeInText">
       <div class="countMeinTopText">
         {{ 'About.About.countMeInTopText' | translate }}
+      </div>
+      <div class="countMeinTopText">
+        {{ 'About.About.countMeInMiddleText' | translate }}
       </div>
       <div class="countMeInBottomText">
         {{ 'About.About.countMeInBottomText' | translate }}
@@ -76,7 +79,7 @@
       <img class="advisorPhoto" src="/assets/images/Mary Anne Oldford.jpg" alt="advisorPhoto">
       <div class="info">
         <div class="advisorName">{{ 'About.About.Advisor8' | translate }}</div>
-        <div class="advisorBio">{{ 'About.About.AdvisorBio8' | translate }}
+        <div class="advisorBio" [innerHTML]="'About.About.AdvisorBio8' | translate">
         </div>
       </div>
     </div>
@@ -88,8 +91,8 @@
     <div class="advisorsInfo">
       <img class="advisorPhoto" src="/assets/images/Blake Tomkinson.jpg" alt="advisorPhoto">
       <div class="info">
-        <div class="advisorName">{{ 'About.About.Advisor10' | translate }}</div>
-        <div class="advisorBio">{{ 'About.About.AdvisorBio10' | translate }}
+        <div class="advisorName" [innerHTML]="'About.About.Advisor10' | translate"></div>
+        <div class="advisorBio" [innerHTML]="'About.About.AdvisorBio10' | translate">
         </div>
       </div>
     </div>
@@ -135,7 +138,7 @@
         <img class="championsPhoto" src="/assets/images/Haddox.jpg" alt="championPhoto">
         <div class="championInfo">
           <div class="championName">{{ 'About.About.Champion4' | translate }}</div>
-          <div class="championBio"[innerHTML]="'About.About.ChampionBio4' | translate">
+          <div class="championBio" [innerHTML]="'About.About.ChampionBio4' | translate">
           </div>
         </div>
       </div>
@@ -145,7 +148,7 @@
         <img class="championsPhoto" src="/assets/images/Merriam.jpg" alt="championPhoto">
         <div class="championInfo">
           <div class="championName">{{ 'About.About.Champion5' | translate }}</div>
-          <div class="championBio"[innerHTML]="'About.About.ChampionBio5' | translate">
+          <div class="championBio" [innerHTML]="'About.About.ChampionBio5' | translate">
           </div>
         </div>
       </div>
@@ -153,7 +156,7 @@
         <img class="championsPhoto" src="/assets/images/Nathenson.jpg" alt="championPhoto">
         <div class="championInfo">
           <div class="championName">{{ 'About.About.Champion6' | translate }}</div>
-          <div class="championBio"[innerHTML]="'About.About.ChampionBio6' | translate">
+          <div class="championBio" [innerHTML]="'About.About.ChampionBio6' | translate">
           </div>
         </div>
       </div>
