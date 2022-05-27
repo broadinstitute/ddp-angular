@@ -145,7 +145,7 @@ export abstract class BaseActivityComponent implements OnChanges, OnDestroy {
 
               this.anchor.addNew(canSaveSub);
             },
-            error: () => {
+            error: (error) => {
                 this.navigateToErrorPage();
             }
         });

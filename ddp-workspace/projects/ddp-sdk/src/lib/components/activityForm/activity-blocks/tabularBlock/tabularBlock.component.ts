@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { AnswerValue } from '../../../../models/activity/answerValue';
 import { ActivityTabularBlock } from '../../../../models/activity/activityTabularBlock';
+import { LayoutType } from '../../../../models/layout/layoutType';
+import { ActivityQuestionBlock } from 'ddp-sdk';
 
 interface TabularHeader {
     label: string;
@@ -14,6 +15,7 @@ interface TabularHeader {
     styleUrls: ['./tabularBlock.component.scss']
 })
 export class TabularBlockComponent implements OnInit {
+    readonly LayoutType = LayoutType;
     @Input() block: ActivityTabularBlock;
     @Input() readonly: boolean;
     @Input() validationRequested: boolean;
@@ -22,36 +24,39 @@ export class TabularBlockComponent implements OnInit {
     headers: TabularHeader[] = [];
     gridSettings: { [setting: string]: string } = {};
 
-    // local counter to set correct gridColumn value for tabular questions
-    private counterInRow = 0;
-    private currentRowNumber: number;
-
     ngOnInit(): void {
         console.log('Tabular init', this.block);
 
         this.gridSettings = {
-            gridTemplateColumns: '1fr '.repeat(this.block.numberOfColumns).trim(),
+            gridTemplateColumns: 'auto '.repeat(this.block.numberOfColumns).trim(),
         };
-
-        // this.columnIndexes = Array(this.block.numberOfColumns).fill('').map((value, index) => index);
 
         this.headers = this.block.headers.map(header => ({
             label: header.label,
-            gridColumn: `${header.startColumn} / ${header.endColumn}`
+            gridColumn: `span ${header.columnSpan}`
         }));
     }
 
-    handleChange(value: AnswerValue): void {
-        console.log('Tabular value changed', value);
+    isEvenRow(questionIndex: number): boolean {
+        return this.isEven(this.numberOfGridCellsBefore(questionIndex));
     }
 
-    increaseCounter(row): any {
-        if (row !== this.currentRowNumber) {
-            this.currentRowNumber = row;
-            this.counterInRow = 0;
-        }
-        this.counterInRow++;
-
-        return this.counterInRow;
+    // The index of the child is zero-based, but to calculate "even" we consider first row of table/grid "1"
+    private isEven(gridChildZeroBasedIndex: number): boolean {
+       return (Math.floor(gridChildZeroBasedIndex / this.block.numberOfColumns) + 1) % 2 === 0;
     }
+
+    // grid layout child element zero-based index for question with given index
+    private numberOfGridCellsBefore(questionIndex: number): number {
+        const total =  this.block.content.slice(0, questionIndex) // all the questions before this one
+            .map(question => question.columnSpan) // columnSpan for them
+            .reduce((previousTotal, columnsThisQuestion) => previousTotal + columnsThisQuestion, 0); //total them
+        return total;
+    }
+
+    questionFieldsSpan(questionBlock: ActivityQuestionBlock<any>): string {
+        // we subtract the column for the question prompt if there is one
+        return 'span ' + (questionBlock.columnSpan - (questionBlock.question ? 1 : 0));
+    }
+
 }

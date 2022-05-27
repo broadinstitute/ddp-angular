@@ -146,9 +146,7 @@ export class ActivityConverter {
         activityBlock.title = blockJson.title;
         activityBlock.headers = blockJson.headers;
         activityBlock.numberOfColumns = blockJson.numberOfColumns;
-        activityBlock.content = blockJson.content.map(row =>
-            row.map(question => this.questionConverter.buildQuestionBlock(question, null))
-        );
+        activityBlock.content = blockJson.content.map(question => this.questionConverter.buildQuestionBlock(question, null));
         return activityBlock;
     }
 
@@ -166,6 +164,7 @@ export class ActivityConverter {
             }
 
             // add mockTabular data for debug
+            // const sectionBlocks = jsonSection.blocks;
             const sectionBlocks = jsonSection.blocks.concat([mockTabularData1, mockTabularData2]);
 
             for (const inputBlock of sectionBlocks) {

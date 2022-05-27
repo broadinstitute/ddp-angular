@@ -1,14 +1,4 @@
-import {
-    Component,
-    EventEmitter,
-    Inject,
-    Input,
-    OnChanges,
-    Output,
-    QueryList,
-    SimpleChanges,
-    ViewChildren
-} from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
 import * as _ from 'underscore';
 
 import { ActivityCompositeQuestionBlock } from '../../../../models/activity/activityCompositeQuestionBlock';
@@ -20,6 +10,7 @@ import { ActivityDateQuestionBlock } from '../../../../models/activity/activityD
 import { DateRenderMode } from '../../../../models/activity/dateRenderMode';
 import { ConfigurationService } from '../../../../services/configuration.service';
 import { ActivityAnswerComponent } from '../activity-answer/activityAnswer.component';
+import { LayoutType } from '../../../../models/layout/layoutType';
 
 
 // todo see if style in here can be moved to shared resource, like external CSS
@@ -33,6 +24,7 @@ import { ActivityAnswerComponent } from '../activity-answer/activityAnswer.compo
 // todo can we make some of these styles be common? button styles copied from physician form
 export class ActivityCompositeAnswer implements OnChanges {
     @Input() block: ActivityCompositeQuestionBlock;
+    @Input() layoutType: LayoutType = LayoutType.DEFAULT;
     @Input() readonly: boolean;
     @Input() validationRequested: boolean;
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
@@ -156,7 +148,7 @@ export class ActivityCompositeAnswer implements OnChanges {
     }
 
     public setOrientationClass(orientation: ChildOrientation | null): string {
-        return Object.values(ChildOrientation).includes(orientation) ? orientation.toLowerCase() : '';
+        return !this.isGridLayout() && Object.values(ChildOrientation).includes(orientation) ? orientation.toLowerCase() : '';
     }
 
     private buildComponentAnswers(excludeReadOnlyBlocks?: boolean): any[][] {
@@ -194,6 +186,14 @@ export class ActivityCompositeAnswer implements OnChanges {
 
         const childAnswersWithoutEquations = this.buildComponentAnswers(true);
         this.valueChanged.emit(childAnswersWithoutEquations);
+    }
+
+    public isGridLayout(): boolean {
+        return this.layoutType === LayoutType.GRID;
+    }
+
+    public gridLayoutColumnConfig(): string | null {
+       return this.isGridLayout() ? 'auto '.repeat(this.block.columnSpan ?? this.block.children.length + 1).trim() : null;
     }
 
     // We need this method because we want to include the prototype in the clone.

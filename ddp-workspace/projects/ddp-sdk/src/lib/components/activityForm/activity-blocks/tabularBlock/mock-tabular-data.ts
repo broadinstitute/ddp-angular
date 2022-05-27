@@ -32,6 +32,7 @@ const compositeQuestion = {
     validationFailures: null,
     shown: true,
     enabled: true,
+    columnSpan: 3, // 1 for question text, 2 for the child questions
 
     tabularSeparator: 'Or' // new field !
 };
@@ -43,22 +44,22 @@ export const mockTabularData2 = {
     headers: [
         {
             label: 'Type',
-            startColumn: 1,
-            endColumn: 3
+            columnSpan: 2
         },
         {
             label: 'First onset or event',
-            startColumn: 3,
-            endColumn: 5
+            columnSpan: 2
         }
     ],
 
     content: [
-        [booleanQuestion, compositeQuestion],
-        [booleanQuestion, compositeQuestion],
-        [booleanQuestion, compositeQuestion],
-        [booleanQuestion, compositeQuestion],
-        [booleanQuestion, compositeQuestion]
+        booleanQuestion,
+        compositeQuestion,
+        booleanQuestion,
+        compositeQuestion,
+        booleanQuestion, compositeQuestion,
+        booleanQuestion, compositeQuestion,
+        booleanQuestion, compositeQuestion
     ],
 
     displayNumber: null,
@@ -75,20 +76,18 @@ export const mockTabularData1 = {
     headers: [
         {
             label: 'Question',
-            startColumn: 1,
-            endColumn: 2
+            columnSpan: 1
         },
         {
             label: 'Answer',
-            startColumn: 2,
-            endColumn: 3
+            columnSpan: 1
         }
     ],
 
     content: [
-        [textQuestion1],
-        [textQuestion2],
-        [dateQuestion]
+        textQuestion1,
+        textQuestion2,
+        dateQuestion
     ],
 
     displayNumber: null,

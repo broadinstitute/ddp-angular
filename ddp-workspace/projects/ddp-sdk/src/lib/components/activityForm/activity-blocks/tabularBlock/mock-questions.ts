@@ -76,6 +76,7 @@ export const picklistAutocomplete = {
 export const booleanQuestion = {
     trueContent: 'Yes',
     falseContent: 'No',
+    renderMode: 'CHECKBOX',
     questionType: 'BOOLEAN',
     stableId: 'CONSENT_BLOOD',
     prompt: null, //'Boolean question title',
@@ -94,7 +95,8 @@ export const booleanQuestion = {
     ],
     validationFailures: null,
     shown: true,
-    enabled: true
+    enabled: true,
+    columnSpan: 1
 };
 
 export const specialBbooleanQuestion = {
@@ -134,7 +136,8 @@ export const textQuestion1 = {
         }
     ],
     shown: true,
-    enabled: true
+    enabled: true,
+    columnSpan: 2
 };
 
 export const textQuestion2 = {
@@ -156,7 +159,8 @@ export const textQuestion2 = {
         }
     ],
     shown: true,
-    enabled: true
+    enabled: true,
+    columnSpan: 2
 };
 
 export const textQuestion3 = {
@@ -172,7 +176,8 @@ export const textQuestion3 = {
     answers: [],
     validations: [],
     shown: true,
-    enabled: true
+    enabled: true,
+    columnSpan: 2
 };
 
 

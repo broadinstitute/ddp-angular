@@ -6,16 +6,18 @@ import { DecimalHelper } from '../../../../utility/decimalHelper';
 import { SubmissionManager } from '../../../../services/serviceAgents/submissionManager.service';
 import { ActivityEquationQuestionBlock } from '../../../../models/activity/activityEquationQuestionBlock';
 import { AnswerResponseEquation } from '../../../../models/activity/answerResponseEquation';
+import { LayoutType } from '../../../../models/layout/layoutType';
 
 @Component({
   selector: 'ddp-activity-equation-answer',
   template: `
-      <ddp-question-prompt [block]="block"></ddp-question-prompt>
+      <ddp-question-prompt *ngIf="!isGridLayout()" [block]="block"></ddp-question-prompt>
       <div class="equation-value">{{displayValue}}</div>
   `
 })
 export class ActivityEquationAnswerComponent implements OnInit, OnDestroy {
     @Input() block: ActivityEquationQuestionBlock;
+    @Input() layoutType: LayoutType = LayoutType.DEFAULT;
     private subscription: Subscription;
 
     constructor(private submissionManager: SubmissionManager) {
@@ -39,5 +41,9 @@ export class ActivityEquationAnswerComponent implements OnInit, OnDestroy {
         return this.block.answer && this.block.answer[0] ?
             DecimalHelper.formatDecimalAnswer(this.block.answer[0], this.block.maximumDecimalPlaces, true)
             : null;
+    }
+
+    public isGridLayout(): boolean {
+        return this.layoutType === LayoutType.GRID;
     }
 }

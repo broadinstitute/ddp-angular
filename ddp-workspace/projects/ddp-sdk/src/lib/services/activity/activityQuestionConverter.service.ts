@@ -63,6 +63,7 @@ export class ActivityQuestionConverter {
         questionBlock.tooltip = questionJson.tooltip;
         questionBlock.readonly = questionJson.readonly;
         questionBlock.displayNumber = displayNumber;
+        questionBlock.columnSpan = questionJson.columnSpan ?? 1;
         questionBlock.serverValidationMessages = questionJson.validationFailures ?
             questionJson.validationFailures.map(validationFailure => validationFailure.message) : [];
 
@@ -242,6 +243,7 @@ export class ActivityQuestionConverter {
         const booleanBlock = new ActivityBooleanQuestionBlock();
         booleanBlock.trueContent = questionJson.trueContent;
         booleanBlock.falseContent = questionJson.falseContent;
+        booleanBlock.renderMode = questionJson.renderMode;
         return booleanBlock;
     }
 
