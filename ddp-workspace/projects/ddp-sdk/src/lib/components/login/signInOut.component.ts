@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
+
 import { SessionMementoService } from '../../services/sessionMemento.service';
 import { NGXTranslateService } from '../../services/internationalization/ngxTranslate.service';
 import { Auth0AdapterService } from '../../services/authentication/auth0Adapter.service';
@@ -27,6 +28,8 @@ export class SignInOutComponent implements OnInit, OnDestroy {
     @Input() signInCaption: string;
     @Input() signOutCaption: string;
     @Input() isScrolled: boolean;
+    @Output() signIn = new EventEmitter<void>();
+    @Output() signOut = new EventEmitter<void>();
     public buttonText: string;
     public signInText: string;
     public signOutText: string;
@@ -57,10 +60,12 @@ export class SignInOutComponent implements OnInit, OnDestroy {
     }
 
     public doSignIn(): void {
+        this.signIn.emit();
         this.auth0.login();
     }
 
     public doSignOut(): void {
+        this.signOut.emit();
         this.auth0.logout(this.signOutReturnToUrl);
     }
 }

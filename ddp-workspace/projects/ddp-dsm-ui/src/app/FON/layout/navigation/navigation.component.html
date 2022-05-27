@@ -1,0 +1,21 @@
+<aside class="sidebar">
+  <div class="navigation">
+    <ul class="topNavigation">
+      <li *ngFor="let item of topNavigation"
+          [routerLinkActiveOptions]="{exact: true}"
+          routerLinkActive="activeNav"
+          [routerLink]="[item.route]">
+        <mat-icon *ngIf="item.img">{{item.img}}</mat-icon>
+        {{ item.name }}
+      </li>
+    </ul>
+
+    <ul class="botNavigation">
+      <li *ngFor="let item of botNavigation" [routerLink]="[item.route]" (click)="signOut(item.signOut)">
+        <mat-icon *ngIf="item.img">{{item.img}}</mat-icon>
+        {{ item.name }}
+      </li>
+    </ul>
+  </div>
+</aside>
+

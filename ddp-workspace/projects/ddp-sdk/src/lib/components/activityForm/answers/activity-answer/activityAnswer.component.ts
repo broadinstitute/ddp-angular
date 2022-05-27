@@ -8,7 +8,7 @@ import { LayoutType } from '../../../../models/layout/layoutType';
 @Component({
     selector: 'ddp-activity-answer',
     template: `
-        <ng-container *ngIf="true|| block.shown"> <!-- TODO: where a question 'shown' filed comes from ? (for tabular block)-->
+        <ng-container *ngIf="block.shown">
             <ddp-activity-boolean-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.Boolean)"
                                          [class]="'boolean-answer-' + block.stableId"
                                          [block]="block"
@@ -89,7 +89,8 @@ import { LayoutType } from '../../../../models/layout/layoutType';
             <ddp-activity-equation-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.Equation)"
                                           [class]="'equation-answer-' + block.stableId"
                                           [layoutType]="layoutType"
-                                          [block]="block">
+                                          [block]="block"
+                                          (valueChanged)="onChange($event)">
             </ddp-activity-equation-answer>
             <span *ngIf="block.additionalInfoFooter"
                   [innerHTML]="block.additionalInfoFooter"

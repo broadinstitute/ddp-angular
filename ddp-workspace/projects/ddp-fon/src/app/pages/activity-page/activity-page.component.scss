@@ -1,0 +1,16 @@
+@import '../../../styles/breakpoints';
+
+.activity-page {
+  padding: 7.2rem 0 6.4rem;
+
+  @include media-md {
+    padding: 5.2rem 0 6rem;
+  }
+
+  &__container {
+    max-width: 72rem;
+
+    margin: 0 auto;
+    padding: 0 2.4rem;
+  }
+}

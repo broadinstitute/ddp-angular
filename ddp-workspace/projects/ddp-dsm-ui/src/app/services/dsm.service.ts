@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 import { Filter } from '../filter-column/filter-column.model';
 import {Sort} from '../sort/sort.model';
 import { ViewFilter } from '../filter-column/models/view-filter.model';
-import { Abstraction } from '../medical-record-abstraction/medical-record-abstraction.model';
+import { Abstraction } from '../medical-record-abstraction/model/medical-record-abstraction.model';
 import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
 import { PDFModel } from '../pdf-download/pdf-download.model';
 import { Statics } from '../utils/statics';
@@ -20,7 +20,7 @@ import { SessionService } from './session.service';
 
 declare var DDP_ENV: any;
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class DSMService {
   public static UI = 'ui/';
   public static REALM = 'realm';
@@ -171,9 +171,10 @@ export class DSMService {
     );
   }
 
-  public applyFilter(json: ViewFilter, realm: string, parent: string, filterQuery: string,
-                     from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage(), sortBy?: Sort
+  public applyFilter(json: ViewFilter = null, realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM), parent: string,
+                     filterQuery: string = null, from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage(), sortBy?: Sort
   ): Observable<any> {
+    // console.log(json, realm,parent, filterQuery, from, to, 'testing to see')
     const viewFilterCopy = this.getFilter(json);
     const url = this.baseUrl + DSMService.UI + 'applyFilter';
     const userId = this.role.userID();
@@ -252,7 +253,7 @@ export class DSMService {
     );
   }
 
-  public getSettings(realm: string, parent: string): Observable<any> {
+  public getSettings(realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM), parent: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'displaySettings/' + realm;
     const map: { name: string; value: any }[] = [];
     map.push({name: 'userId', value: this.role.userID()});
@@ -284,6 +285,29 @@ export class DSMService {
     const map: { name: string; value: any }[] = [];
     map.push({name: 'userId', value: this.role.userID()});
     return this.http.patch(url, json, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError.bind(this))
+    );
+  }
+
+  public createCohortTag(body: string, realm: string): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'createCohortTag';
+    const map = [
+      { name: 'userId', value: this.role.userID() },
+      { name: 'realm', value: realm }
+    ];
+    return this.http.post(url, body, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError.bind(this))
+    );
+  }
+
+  public deleteCohortTag(cohortTagId: number, realm: string): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'deleteCohortTag';
+    const map = [
+      { name: 'userId', value: this.role.userID() },
+      { name: 'realm', value: realm },
+      { name: 'cohortTagId', value: cohortTagId }
+    ];
+    return this.http.delete(url, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );
   }

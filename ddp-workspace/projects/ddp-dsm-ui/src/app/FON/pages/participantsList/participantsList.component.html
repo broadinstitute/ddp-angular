@@ -1,0 +1,43 @@
+<div class="participants">
+  <h3>Patients list</h3>
+
+  <table class="participants-table">
+    <thead>
+      <tr class="header">
+        <th>FON ID#</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Birthdate</th>
+        <th>Registered</th>
+        <th>Last updated</th>
+      </tr>
+    </thead>
+
+    <ng-container *ngIf="!(loading$ | async) else loadingSpinner">
+      <tbody *ngIf="(patients$ | async) as pts">
+      <tr *ngFor="let pt of pts" (click)="openActivities(pt)">
+        <td>{{ pt.ID }}</td>
+        <td>{{ pt.firstName }}</td>
+        <td>{{ pt.lastName }}</td>
+        <td>{{ pt.birthdate }}</td>
+        <td>{{ pt.registered }}</td>
+        <td>{{ pt.lastUpdated }}</td>
+      </tr>
+      </tbody>
+    </ng-container>
+
+    <ng-template #loadingSpinner>
+      <mat-spinner></mat-spinner>
+    </ng-template>
+  </table>
+
+  <div class="pagination">
+    <mat-paginator
+      [pageIndex]="pageIndex"
+      [length]="totalCount$ | async"
+      [pageSize]="pageSize"
+      (page)="setPage($event)"
+      [pageSizeOptions]="[10, 50, 100]" aria-label="Select page">
+    </mat-paginator>
+  </div>
+</div>

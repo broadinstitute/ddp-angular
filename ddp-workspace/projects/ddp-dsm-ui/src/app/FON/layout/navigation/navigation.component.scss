@@ -1,0 +1,57 @@
+$hoverColor: #7154FF;
+
+.sidebar {
+  height: calc(100vh - 100px); // 100px - main header height
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px 0;
+}
+
+.topNavigation {
+  padding: 60px 0 0;
+}
+
+.botNavigation {
+  padding: 0;
+}
+
+.topNavigation, .botNavigation {
+  margin: 0;
+
+  .activeNav {
+    color: $hoverColor;
+    border-bottom-color: $hoverColor!important;
+    cursor: pointer;
+    outline: none;
+  }
+
+  li {
+    list-style-type: none;
+    font-size: 18px;
+    margin: 0 50px 16px;
+    border-bottom: 2px solid transparent;
+    display: flex;
+
+    &:hover, &:focus {
+      color: $hoverColor;
+      border-bottom-color: $hoverColor;
+      cursor: pointer;
+      outline: none;
+
+      > mat-icon {
+        color: $hoverColor;
+      }
+    }
+
+    > mat-icon {
+      margin-right: 10px;
+      color: #333333;
+    }
+  }
+}

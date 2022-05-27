@@ -1,6 +1,6 @@
 import { AbstractionGroup } from '../abstraction-group/abstraction-group.model';
 import {ActivityDefinition} from '../activity-data/models/activity-definition.model';
-import { Abstraction } from '../medical-record-abstraction/medical-record-abstraction.model';
+import { Abstraction } from '../medical-record-abstraction/model/medical-record-abstraction.model';
 import { MedicalRecord } from '../medical-record/medical-record.model';
 import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
 import {Utils} from '../utils/utils';

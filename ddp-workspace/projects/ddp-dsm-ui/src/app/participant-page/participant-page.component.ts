@@ -22,7 +22,7 @@ import { Tissue } from '../tissue/tissue.model';
 import { Value } from '../utils/value.model';
 import { Result } from '../utils/result.model';
 import { NameValue } from '../utils/name-value.model';
-import { Abstraction } from '../medical-record-abstraction/medical-record-abstraction.model';
+import { Abstraction } from '../medical-record-abstraction/model/medical-record-abstraction.model';
 import { AbstractionGroup, AbstractionWrapper } from '../abstraction-group/abstraction-group.model';
 import { PatchUtil } from '../utils/patch.model';
 import { ParticipantUpdateResultDialogComponent } from '../dialogs/participant-update-result-dialog.component';
@@ -123,6 +123,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   message: string = null;
   bundle = false;
   private scrolled: boolean;
+
+
   constructor(private auth: Auth, private compService: ComponentService, private dsmService: DSMService, private router: Router,
                private role: RoleService, private util: Utils, private route: ActivatedRoute, public dialog: MatDialog) {
     if (!auth.authenticated()) {
@@ -918,6 +920,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
             if (result.code === 200 && result.body != null) {
               const jsonData: any | any[] = JSON.parse(result.body);
               const abstraction: Abstraction = Abstraction.parse(jsonData);
+              if (abstraction.lastChanged === null) {
+                abstraction.lastChanged = 0;
+              }
               this.participant[abstraction.activity] = abstraction;
               this.activeTab = abstraction.activity;
               if (this.participant.abstractionActivities != null) {
