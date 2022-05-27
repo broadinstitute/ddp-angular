@@ -234,7 +234,7 @@ export class DSMService {
     } else if (viewFilterCopy != null) {
       map.push({name: 'filters', value: JSON.stringify(viewFilterCopy.filters)});
     }
-    const filters = JSON.parse(jsonPatch);
+    const filters = jsonPatch ? JSON.parse(jsonPatch) : undefined;
     const body = {columnNames: columns, ...filters};
     return this.http.post(url, JSON.stringify(body), this.buildQueryCsvBlobHeader(map)).pipe(
       catchError(this.handleError.bind(this))
