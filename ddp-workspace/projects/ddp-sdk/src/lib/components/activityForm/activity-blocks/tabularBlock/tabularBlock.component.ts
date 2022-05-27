@@ -28,7 +28,7 @@ export class TabularBlockComponent implements OnInit {
         console.log('Tabular init', this.block);
 
         this.gridSettings = {
-            gridTemplateColumns: 'auto '.repeat(this.block.numberOfColumns).trim(),
+            gridTemplateColumns: 'auto '.repeat(this.block.columnsCount).trim(),
         };
 
         this.headers = this.block.headers.map(header => ({
@@ -43,7 +43,7 @@ export class TabularBlockComponent implements OnInit {
 
     // The index of the child is zero-based, but to calculate "even" we consider first row of table/grid "1"
     private isEven(gridChildZeroBasedIndex: number): boolean {
-       return (Math.floor(gridChildZeroBasedIndex / this.block.numberOfColumns) + 1) % 2 === 0;
+       return (Math.floor(gridChildZeroBasedIndex / this.block.columnsCount) + 1) % 2 === 0;
     }
 
     // grid layout child element zero-based index for question with given index
@@ -58,5 +58,4 @@ export class TabularBlockComponent implements OnInit {
         // we subtract the column for the question prompt if there is one
         return 'span ' + (questionBlock.columnSpan - (questionBlock.question ? 1 : 0));
     }
-
 }

@@ -6,7 +6,7 @@ export class ActivityTabularBlock extends ActivityBlock {
     title: string;
     content: ActivityQuestionBlock<any>[];
     headers: any[];
-    numberOfColumns = 1;
+    columnsCount = 1;
 
     get blockType(): BlockType {
         return BlockType.Tabular;

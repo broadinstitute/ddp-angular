@@ -141,7 +141,7 @@ export class ActivityConverter {
         const activityBlock = new ActivityTabularBlock();
         activityBlock.title = blockJson.title;
         activityBlock.headers = blockJson.headers;
-        activityBlock.numberOfColumns = blockJson.numberOfColumns;
+        activityBlock.columnsCount = blockJson.columnsCount;
         activityBlock.content = blockJson.content.map(question => this.questionConverter.buildQuestionBlock(question, null));
         return activityBlock;
     }
