@@ -25,8 +25,6 @@ export class TabularBlockComponent implements OnInit {
     gridSettings: { [setting: string]: string } = {};
 
     ngOnInit(): void {
-        console.log('Tabular init', this.block);
-
         this.gridSettings = {
             gridTemplateColumns: 'auto '.repeat(this.block.columnsCount).trim(),
         };
