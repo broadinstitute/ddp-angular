@@ -1,189 +1,65 @@
-<div class="main">
-  <div class="text-place">
-    <div class="text" [innerHTML]="'About.About.TitleText' | translate"></div>
-    <button class="visit-button" onclick="window.location.href='count-me-in'">
-      <div class="button-text">{{ 'About.About.button1' | translate }}</div>
-      <mat-icon>launch</mat-icon>
+<main class="main-holder">
+
+  <header>
+    <div class="about-block">
+      <h1> {{ 'About.Title' | translate }}</h1>
+    </div>
+
+    <div class="cmiBlock">
+      <div class="cmiBlock-text">
+        <p [innerHTML]="'About.TitleText' | translate"></p>
+      </div>
+      <button class="cmiBlock-visit-button" onclick="window.location.href='count-me-in'">
+        <p class="cmiBlock-visit-button-text">{{ 'About.button1' | translate }}</p>
+        <mat-icon>launch</mat-icon>
+      </button>
+    </div>
+
+    <div class="countMeIn">
+      <img class="countMeIn-img" src="/assets/images/logo-count-me-in.png" alt="count me in">
+      <p class="countMeIn-text" [innerHTML]="'About.countMeInText' | translate"></p>
+    </div>
+  </header>
+
+
+  <section class="advisory">
+    <div class="advisory-headLine">
+      <p>{{ 'About.AdvisorsBlock.Headline' | translate }}</p>
+    </div>
+
+    <div class="advisory-summary">
+      <p [innerHTML]="'About.AdvisorsBlock.ProjectSummary' | translate"></p>
+    </div>
+
+    <div class="advisory-advisorsInfo" *ngFor="let advisor of 'About.AdvisorsBlock.Advisors' | translate">
+      <img class="advisory-advisorsInfo-image" [src]="advisor.image" [alt]="advisor.name">
+      <div class="advisory-advisorsInfo-about">
+        <h1 class="advisory-advisorsInfo-about-name">{{ advisor.name }}</h1>
+        <p class="advisory-advisorsInfo-about-name-bio" [innerHTML]="advisor.bio"></p>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="champions">
+    <h1 class="champions-headline">{{ 'About.ChampionsBlock.Title' | translate }}</h1>
+
+    <div class="champions-list">
+      <div class="champions-list-item" *ngFor="let champion of 'About.ChampionsBlock.Champions' | translate">
+        <img [src]="champion.image">
+        <aside>
+          <h2>{{ champion.name }}</h2>
+          <p [innerHTML]="champion.bio"></p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <footer class="learnMoreBlank" >
+    <p class="learnMoreHeadline">{{ 'About.LearnMoreHeadline' | translate }}</p>
+    <button class="learnMore" [routerLink]="['/faq']">
+      <p class="visitFaq">{{ 'About.VisitFaq' | translate }}</p>
     </button>
-  </div>
-  <div class="about-block">
-    <div class="page-name"> {{ 'About.About.Title' | translate }}</div>
-  </div>
-  <div class="count me in">
-    <img class="countMeInImg" src="/assets/images/logo-count-me-in.png" alt="count me in">
-    <div class="countMeInText">
-      <div class="countMeinTopText">
-        {{ 'About.About.countMeInTopText' | translate }}
-      </div>
-      <div class="countMeinTopText">
-        {{ 'About.About.countMeInMiddleText' | translate }}
-      </div>
-      <div class="countMeInBottomText">
-        {{ 'About.About.countMeInBottomText' | translate }}
-      </div>
-    </div>
-  </div>
-  <div class="projectAdvisory">
-    <div class="headLine">{{ 'About.About.AdvisoryHeadline' | translate }}</div>
-    <div class="projectSummary">
-      {{ 'About.About.AdvisoryProjectSummary' | translate }}
-    </div>
-    <div class="advisorsInfo">
-      <img class="advisorPhoto" src="/assets/images/Mitch Achee.jpg" alt="advisorPhoto">
-      <div class="info">
-        <div class="advisorName"> {{ 'About.About.Advisor1' | translate }}</div>
-        <div class="advisorBio"> {{ 'About.About.AdvisorBio1' | translate }}
-        </div>
-      </div>
-    </div>
-    <div class="advisorsInfo">
-      <img class="advisorPhoto" src="/assets/images/Stacey Simpson Duke.jpg" alt="advisorPhoto">
-      <div class="info">
-        <div class="advisorName">{{ 'About.About.Advisor2' | translate }}</div>
-        <div class="advisorBio">{{ 'About.About.AdvisorBio2' | translate }}
-        </div>
-      </div>
-    </div>
-    <div class="advisorsInfo">
-      <div class="info">
-        <div class="advisorName onlyName">{{ 'About.About.Advisor3' | translate }}</div>
-      </div>
-    </div>
-    <div class="advisorsInfo">
-      <img class="advisorPhoto" src="/assets/images/Matthew Haist.jpg" alt="advisorPhoto">
-      <div class="info">
-        <div class="advisorName">{{ 'About.About.Advisor4' | translate }}</div>
-        <div class="advisorBio">{{ 'About.About.AdvisorBio4' | translate }}
-        </div>
-      </div>
-    </div>
-    <div class="advisorsInfo">
-      <div class="info">
-        <div class="advisorName onlyName">{{ 'About.About.Advisor5' | translate }}</div>
-      </div>
-    </div>
-    <div class="advisorsInfo">
-      <img class="advisorPhoto" src="/assets/images/Cherry Kim Headshot.jpg" alt="advisorPhoto">
-      <div class="info">
-        <div class="advisorName">{{ 'About.About.Advisor6' | translate }}</div>
-        <div class="advisorBio">{{ 'About.About.AdvisorBio6' | translate }}
-        </div>
-      </div>
-    </div>
-    <div class="advisorsInfo">
-      <div class="info">
-        <div class="advisorName onlyName">{{ 'About.About.Advisor7' | translate }}</div>
-      </div>
-    </div>
-    <div class="advisorsInfo">
-      <img class="advisorPhoto" src="/assets/images/Mary Anne Oldford.jpg" alt="advisorPhoto">
-      <div class="info">
-        <div class="advisorName">{{ 'About.About.Advisor8' | translate }}</div>
-        <div class="advisorBio" [innerHTML]="'About.About.AdvisorBio8' | translate">
-        </div>
-      </div>
-    </div>
-    <div class="advisorsInfo">
-      <div class="info">
-        <div class="advisorName onlyName">{{ 'About.About.Advisor9' | translate }}</div>
-      </div>
-    </div>
-    <div class="advisorsInfo">
-      <img class="advisorPhoto" src="/assets/images/Blake Tomkinson.jpg" alt="advisorPhoto">
-      <div class="info">
-        <div class="advisorName" [innerHTML]="'About.About.Advisor10' | translate"></div>
-        <div class="advisorBio" [innerHTML]="'About.About.AdvisorBio10' | translate">
-        </div>
-      </div>
-    </div>
-    <div class="advisorsInfo">
-      <img class="advisorPhoto" src="/assets/images/Jeff Wade.jpg" alt="advisorPhoto">
-      <div class="info">
-        <div class="advisorName">{{ 'About.About.Advisor11' | translate }}</div>
-        <div class="advisorBio" [innerHTML]="'About.About.AdvisorBio11' | translate">
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="clinical-champion">
-    <div class="championsHeadline">{{ 'About.About.ClinicalChampions' | translate }}</div>
-    <div class="championsList">
-      <div class="leftSide champInfo">
-        <img class="championsPhoto" src="/assets/images/Anderson.jpg" alt="championPhoto">
-        <div class="championInfo">
-          <div class="championName">{{ 'About.About.Champion1' | translate }}</div>
-          <div class="championBio" [innerHTML]="'About.About.ChampionBio1' | translate">
-          </div>
-        </div>
-      </div>
-      <div class="rightSide champInfo">
-        <img class="championsPhoto" src="/assets/images/Crompton.jpg" alt="championPhoto">
-        <div class="championInfo">
-          <div class="championName">{{ 'About.About.Champion2' | translate }}</div>
-          <div class="championBio" [innerHTML]="'About.About.ChampionBio2' | translate">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="championsList">
-      <div class="leftSide champInfo">
-        <img class="championsPhoto" src="/assets/images/George.jpg" alt="championPhoto">
-        <div class="championInfo">
-          <div class="championName">{{ 'About.About.Champion3' | translate }}</div>
-          <div class="championBio" [innerHTML]="'About.About.ChampionBio3' | translate">
-          </div>
-        </div>
-      </div>
-      <div class="rightSide champInfo">
-        <img class="championsPhoto" src="/assets/images/Haddox.jpg" alt="championPhoto">
-        <div class="championInfo">
-          <div class="championName">{{ 'About.About.Champion4' | translate }}</div>
-          <div class="championBio" [innerHTML]="'About.About.ChampionBio4' | translate">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="championsList">
-      <div class="leftSide champInfo">
-        <img class="championsPhoto" src="/assets/images/Merriam.jpg" alt="championPhoto">
-        <div class="championInfo">
-          <div class="championName">{{ 'About.About.Champion5' | translate }}</div>
-          <div class="championBio" [innerHTML]="'About.About.ChampionBio5' | translate">
-          </div>
-        </div>
-      </div>
-      <div class="rightSide champInfo">
-        <img class="championsPhoto" src="/assets/images/Nathenson.jpg" alt="championPhoto">
-        <div class="championInfo">
-          <div class="championName">{{ 'About.About.Champion6' | translate }}</div>
-          <div class="championBio" [innerHTML]="'About.About.ChampionBio6' | translate">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="championsList">
-      <div class="leftSide champInfo">
-        <img class="championsPhoto" src="/assets/images/Oza.jpg" alt="championPhoto">
-        <div class="championInfo">
-          <div class="championName">{{ 'About.About.Champion7' | translate }}</div>
-          <div class="championBio" [innerHTML]="'About.About.ChampionBio7' | translate">
-          </div>
-        </div>
-      </div>
-      <div class="rightSide champInfo">
-        <img class="championsPhoto" src="/assets/images/Raut.jpg" alt="championPhoto">
-        <div class="championInfo">
-          <div class="championName">{{ 'About.About.Champion8' | translate }}</div>
-          <div class="championBio" [innerHTML]="'About.About.ChampionBio8' | translate">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="learnMoreBlank">
-    <div class="learnMoreHeadline">{{ 'About.About.LearnMoreHeadline' | translate }}</div>
-    <button class="learnMore" onclick="window.location.href='faq'">
-      <div class="visitFaq">{{ 'About.About.VisitFaq' | translate }}</div>
-    </button>
-  </div>
-</div>
+  </footer>
+
+</main>

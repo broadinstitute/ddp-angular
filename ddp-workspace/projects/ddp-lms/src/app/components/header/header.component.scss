@@ -1,42 +1,42 @@
+@import "../../../styles/fonts.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+}
 .header {
   height: 100px;
-
   padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   &__nav {
     height: 100%;
   }
-}
 
-.links-list {
-  display: flex;
-  align-items: center;
+  aside:not(.loginOutButtons) {
+    display: flex;
+    margin-right: 50px;
 
-  height: 100%;
+    img {
+      margin-right: 14.86px;
+    }
 
-  list-style: none;
-
-  &__item {
-    &:not(:first-of-type) {
-      margin-left: 24px;
+    p {
+      line-height: 20px;
+      margin-top: 5.72px;
     }
   }
-}
 
-.link {
-  display: inline-block;
-
-  background: transparent;
-  border: none;
-
-  font: inherit;
-  line-height: 1;
-  text-decoration: none;
-  color: currentColor;
-
-  cursor: pointer;
-
-  &:hover {
-    text-decoration: underline;
+  .loginOutButtons {
+    display: flex;
+    justify-content: flex-end;
   }
 }
+
+
+
+
+
+
