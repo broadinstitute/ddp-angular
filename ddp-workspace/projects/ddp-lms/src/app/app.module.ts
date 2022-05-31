@@ -23,6 +23,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import {NavComponent} from './components/nav/nav.component';
+import {loginOutComponent} from './components/nav/loginOut/loginOut.component';
 
 declare const DDP_ENV: Record<string, any>;
 
@@ -113,6 +115,8 @@ const translateFactory =
     HeaderComponent,
     FooterComponent,
     FaqSectionComponent,
+    NavComponent,
+    loginOutComponent
   ],
   imports: [
     BrowserModule,
