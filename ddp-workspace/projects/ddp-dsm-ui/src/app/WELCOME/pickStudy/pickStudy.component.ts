@@ -15,7 +15,7 @@ import {Title} from '@angular/platform-browser';
       <mat-form-field appearance="fill">
         <mat-label>Select study</mat-label>
         <mat-select [formControl]="pickedStudy">
-          <mat-option *ngFor="let realm of realms" [value]="realm.name">{{ realm.value }}</mat-option>
+          <mat-option *ngFor="let realm of realms" [value]="{name: realm.name, value: realm.value}">{{ realm.value }}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -43,9 +43,10 @@ export class PickStudyComponent implements OnInit, OnDestroy {
 
     this.pickedStudy.valueChanges
       .pipe(takeUntil(this.unsubscribeVar))
-      .subscribe(realm => {
-        this.router.navigate([realm]);
-        localStorage.setItem(ComponentService.MENU_SELECTED_REALM, realm);
+      .subscribe(({name, value}) => {
+        this.router.navigate([name]);
+        localStorage.setItem(ComponentService.MENU_SELECTED_REALM, name);
+        this.auth.setSelectedStudy = value;
       });
   }
 
