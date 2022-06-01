@@ -189,6 +189,14 @@ participant.data.dsm['diagnosisYear'] != null">
             <td>Preferred Language</td>
             <td>{{getLanguageName(participant.data.profile['preferredLanguage'])}}</td>
           </tr>
+          <tr>
+            <td>
+              <app-cohort-tag
+                [ddpParticipantId]="participant.data.profile.guid"
+                [dsm]="participant.data.dsm"
+              ></app-cohort-tag>
+            </td>
+          </tr>
           </tbody>
         </table>
 
@@ -504,7 +512,7 @@ participant.data.dsm['diagnosisYear'] != null">
         </table>
       </div>
       <br/><br/>
-      
+
       <div class="Float--left Width--100">
           <!--tab order is not working when tabs have ngIf, will just put them at the end of static tabs. therefore ngIf=true is added to static tabs-->
           <tabset>
