@@ -336,9 +336,9 @@
       "MailingAddress": "Mailing Address"
     },
     "DatePicker": {
-      "Day": "Choose day...",
-      "Month": "Choose month...",
-      "Year": "Choose year...",
+      "Day": "Select day...",
+      "Month": "Select month...",
+      "Year": "Select year...",
       "January": "January",
       "February": "February",
       "March": "March",
