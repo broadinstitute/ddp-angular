@@ -36,6 +36,8 @@ export class NavigationComponent implements OnInit {
         if (event.navigationTrigger === 'popstate') {
           const [,study,page] = event.url.split('/');
           this.auth.selectRealm(study, page);
+          localStorage.setItem(ComponentService.MENU_SELECTED_REALM, study);
+          this.auth.setSelectedStudy = this.auth.realmList.find(realm => realm.name === study)?.value;
         }
       });
 
