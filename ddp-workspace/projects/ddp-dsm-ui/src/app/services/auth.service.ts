@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   throwError,
@@ -25,8 +25,6 @@ export class Auth {
 
   public static AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
 
-  private readonly PICK_STUDY_CONST: string = 'pickStudy';
-
   private baseUrl = DDP_ENV.baseUrl;
   private authUrl = this.baseUrl + DSMService.UI + 'auth0';
 
@@ -45,6 +43,8 @@ export class Auth {
   loadRealmsSubscription: Subscription;
 
   authError = new BehaviorSubject<string | null>(null);
+
+  selectedStudy = new BehaviorSubject<string>('');
 
   // Configure Auth0
   lock = new Auth0Lock(DDP_ENV.auth0ClientKey, DDP_ENV.auth0Domain, {
@@ -86,8 +86,10 @@ export class Auth {
     allowedConnections: [ 'google-oauth2' ]
   });
 
-  constructor(private router: Router, private http: HttpClient, private sessionService: SessionService, private role: RoleService,
-               private compService: ComponentService, private dsmService: DSMService, private dssSessionService: SessionMementoService ) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private http: HttpClient,
+              private sessionService: SessionService, private role: RoleService,
+              private compService: ComponentService, private dsmService: DSMService,
+              private dssSessionService: SessionMementoService ) {
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', (authResult: any) => {
       localStorage.setItem(Auth.AUTH0_TOKEN_NAME, authResult.idToken);
@@ -103,6 +105,15 @@ export class Auth {
     this.lockForDiscard.on('authenticated', (authResult: any) => {
       this.kitDiscard.next(authResult.idToken);
     });
+
+  }
+
+  public getSelectedStudy(): Observable<string> {
+    return this.selectedStudy.asObservable();
+  }
+
+  public set setSelectedStudy(study: string) {
+    this.selectedStudy.next(study);
   }
 
   public authenticated(): boolean {
@@ -190,14 +201,28 @@ export class Auth {
           });
 
           this.realmListForPicklist.next(this.realmList);
+
+          const selectedRealm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+
+          this.setSelectedStudy = this.realmList.find(realm => realm.name === selectedRealm)?.value;
         }
       );
     }
   }
 
-  selectRealm(newValue): void {
-    this.router.navigate([newValue]);
-    localStorage.setItem(ComponentService.MENU_SELECTED_REALM, newValue);
+  selectRealm(realm: string, page?: string): void {
+    const navigateUrl = `${realm}/${page || ''}`;
+
+    localStorage.setItem(ComponentService.MENU_SELECTED_REALM, realm);
+
+    page ? this.navigateWithParam(navigateUrl) : this.router.navigate([navigateUrl]);
+  }
+
+  private navigateWithParam(navigateUrl: string): void {
+    this.router.navigateByUrl('/', {skipLocationChange: true})
+      .then(() => {
+        this.router.navigate([navigateUrl]);
+      });
   }
 
   private setDssSession(dsmToken: string): void {

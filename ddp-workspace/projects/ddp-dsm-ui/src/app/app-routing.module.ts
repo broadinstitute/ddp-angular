@@ -16,10 +16,12 @@ export const AppRoutes: Routes = [
   {path: 'fon', component: FonComponent, canActivate: [StudyActGuard], children: [
       {path: '', component: HomeComponent},
       {path: 'patients', component: ParticipantsListComponent},
+      {path: 'participantList', component: ParticipantsListComponent},
       {path: 'patient/:guid', component: ActivitiesComponent, children: [
           {path: ':activity', component: ActivityComponent}
         ]}
-    ]},
+    ]
+  },
 
   {path: ':study', loadChildren: () => import('./ALL-STUDIES/all-studies.module').then(m => m.AllStudiesModule),
     canLoad: [StudyGuard]},
