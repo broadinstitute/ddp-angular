@@ -115,6 +115,8 @@ import { FieldTableComponent } from './field-table/field-table.component';
 import { ConfigurationService, DdpModule } from 'ddp-sdk';
 import {dynamicFormTypeAndStudyRGP} from './participant-page/pipes/dynamicFormTypeForRgp.pipe';
 import { LoadingModalComponent } from './modals/loading-modal.component';
+import { CohortTagComponent } from './tags/cohort-tag/cohort-tag.component';
+import {MatChipsModule} from '@angular/material/chips';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -208,7 +210,8 @@ sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
         AddFamilyMemberComponent,
         FieldTableComponent,
         dynamicFormTypeAndStudyRGP,
-        LoadingModalComponent
+        LoadingModalComponent,
+        CohortTagComponent
     ],
     imports: [
         DdpModule,
@@ -225,6 +228,7 @@ sdkConfig.doCloudLogging = DDP_ENV.doGcpErrorReporting;
         MatExpansionModule,
         MatButtonToggleModule,
         MatAutocompleteModule,
+        MatChipsModule,
         MatDialogModule,
         MatIconModule,
         BrowserAnimationsModule,
