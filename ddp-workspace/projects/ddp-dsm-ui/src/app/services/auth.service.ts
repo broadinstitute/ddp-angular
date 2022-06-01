@@ -106,7 +106,6 @@ export class Auth {
       this.kitDiscard.next(authResult.idToken);
     });
 
-    this.setSelectedStudy = localStorage.getItem(ComponentService.MENU_SELECTED_REALM) || '';
   }
 
   public getSelectedStudy(): Observable<string> {
@@ -202,6 +201,10 @@ export class Auth {
           });
 
           this.realmListForPicklist.next(this.realmList);
+
+          const selectedRealm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+
+          this.setSelectedStudy = this.realmList.find(realm => realm.name === selectedRealm)?.value;
         }
       );
     }
