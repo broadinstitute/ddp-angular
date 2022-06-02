@@ -1,0 +1,86 @@
+<ng-container *ngIf="response$ | async as response">
+  <div class="filters-row">
+    <span>Filter by</span>
+    <div class="filter-group">
+      <span>Operator</span>
+      <input
+        placeholder="Search Name or ID"
+        [value]="operatorSearchText$ | async"
+        (keyup)="operatorSearchText$.next($event.target.value)"
+      />
+    </div>
+    <div class="filter-group">
+      <span>Subject</span>
+      <input
+        placeholder="Search Name or ID"
+        [value]="subjectSearchText$ | async"
+        (keyup)="subjectSearchText$.next($event.target.value)"
+      />
+    </div>
+    <div class="filter-group">
+      <span>Center</span>
+      <ng-container *ngFor="let item of centers$ | async">
+        <label>
+          {{ item.centerName }}
+          <input
+            type="checkbox"
+            [checked]="item.checked"
+            (click)="onFilterSelect(item.centerName)"
+          />
+        </label>
+      </ng-container>
+    </div>
+    <div class="filter-group">
+      <span>Activity</span>
+      <ng-container *ngFor="let item of activities$ | async">
+        <label>
+          {{ item.activity }}
+          <input type="checkbox" [checked]="item.checked" 
+          (click)="onActivitySelect(item.activity)"/>
+        </label>
+      </ng-container>
+    </div>
+    <div class="filter-group">
+      <span>Date Range</span>
+      <input placeholder="From" />
+      <input placeholder="To" />
+    </div>
+    <div class="filter-group">
+      <span>Time Range</span>
+      <input placeholder="From" />
+      <input placeholder="To" />
+    </div>
+  </div>
+  <div class="audit-table">
+    <div class="header-row">
+      <div class="cell">Date & time</div>
+      <div class="cell">Operator Name</div>
+      <div class="cell">Operator ID#</div>
+      <div class="cell">Center</div>
+      <div class="cell">Activity</div>
+      <div class="cell">Action</div>
+      <div class="cell">Subject Name</div>
+      <div class="cell">Subject ID#</div>
+      <div class="cell">Details</div>
+    </div>
+
+    <div class="body">
+      <div class="body-row" *ngFor="let row of response">
+        <div class="cell">{{ row.date }}</div>
+        <div class="cell">{{ row.name }}</div>
+        <div class="cell">{{ row.operatorId }}</div>
+        <div class="cell">{{ row.centerName }}</div>
+        <div class="cell">{{ row.activity }}</div>
+        <div class="cell">{{ row.action }}</div>
+        <div class="cell">{{ row.subjectName }}</div>
+        <div class="cell">{{ row.subjectId }}</div>
+        <div class="cell details">
+          <ng-container *ngFor="let detail of row.details">
+            <span>{{ detail.Question }}</span>
+            <span>{{ detail.Answer }}</span>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

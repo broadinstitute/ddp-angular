@@ -1,0 +1,65 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f7f7;
+  height: 100%;
+}
+
+.filters-row {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+
+  .filter-group {
+      display: flex;
+      flex-direction: column;
+    input {
+      border: none;
+      border: 1px solid gray;
+      border-radius: 4.5px;
+    }
+
+    ::placeholder {
+      color: black;
+      opacity: 1;
+    }
+  }
+}
+
+.audit-table {
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  .body-row,
+  .header-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  .header-row {
+    font-weight: 700;
+
+  }
+
+  .cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      &.details {
+        align-items: start;
+      }
+  }
+  .body {
+      .body-row {
+          background-color: white;
+          border: 1px solid gray;
+          border-bottom: none;
+          &:last-child {
+          border: 1px solid gray;
+
+          }
+      }
+  }
+  
+}
