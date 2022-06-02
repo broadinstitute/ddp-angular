@@ -1,0 +1,23 @@
+section {
+  padding: 25px;
+  border-top: 1px solid grey;
+}
+
+.controls {
+  mat-form-field {
+    margin: 10px;
+
+    mat-icon {
+      margin-left: 10px;
+    }
+  }
+
+  .buttons {
+    text-align: center;
+
+    button {
+      margin-right: 25px;
+    }
+  }
+}
+
