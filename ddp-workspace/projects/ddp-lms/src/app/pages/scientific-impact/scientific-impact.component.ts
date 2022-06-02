@@ -23,6 +23,6 @@ export class ScientificImpactComponent {
       alt: 'test3',
       text: 'SIPage.IMGSection.Text3',
       link: 'https://www.cbioportal.org/study/summary?id=brca_mbcproject_wagle_2017'
-    }]
+    }];
 
 }
