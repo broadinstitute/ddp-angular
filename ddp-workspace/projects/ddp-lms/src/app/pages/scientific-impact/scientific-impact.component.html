@@ -1,52 +1,86 @@
 <main class="scientific">
-  <h1 class="title scientific-title" translate>
+  <div class="title scientific-title" translate>
     SIPage.introduction.Title
-  </h1>
+  </div>
+  <div class="goalSection">
+    <div class="content content_tight intro-faq-block">
+      <div class="intro-faq-block__content">
+        <div class="goalSectionTitle" [innerHTML]="'SIPage.PASection.Paragraph1' | translate"></div>
+        <div class="goalSectionText" [innerHTML]="'SIPage.PASection.Text' | translate"></div>
+      </div>
+    </div>
+  </div>
 
   <section class="section">
     <div class="content content_tight intro-faq-block">
       <div class="intro-faq-block__content">
-        <p [innerHTML]="'SIPage.PASection.Paragraph1' | translate"></p>
-        <p [innerHTML]="'SIPage.PASection.Text' | translate"></p>
-
-
-        <p [innerHTML]="'SIPage.DASection.Paragraph2' | translate"></p>
+        <div class="paragraph2Title" style="text-align: center" [innerHTML]="'SIPage.DASection.Paragraph2' | translate"></div>
         <ng-container *ngFor="let desc of 'SIPage.DASection.Desc'| translate">
-          <p [innerHTML]="desc"></p>
+          <div class="paragraph2Text" [innerHTML]="desc"></div>
         </ng-container>
+      </div>
+    </div>
+  </section>
 
-        <p [innerHTML]="'SIPage.ELSection.Paragraph3' | translate"></p>
-        <p [innerHTML]="'SIPage.ELSection.Text' | translate"></p>
-        <ng-container *ngFor="let desc of 'SIPage.ELSection.Desc'| translate">
-          <p [innerHTML]="desc"></p>
-        </ng-container>
+  <div class="elementsOfData">
+    <section class="section">
+      <div class="content content_tight intro-faq-block">
+        <div class="intro-faq-block__content">
+          <div class="elementsOfDataTitle" style="text-align: center" [innerHTML]="'SIPage.ELSection.Paragraph3' | translate"></div>
+          <div class="elementsOfDataText" [innerHTML]="'SIPage.ELSection.Text' | translate"></div>
+          <ng-container *ngFor="let desc of 'SIPage.ELSection.Desc'| translate">
+            <p [innerHTML]="desc"></p>
+          </ng-container>
+        </div>
+      </div>
+    </section>
+  </div>
 
-        <p [innerHTML]="'SIPage.WDSection.Paragraph4' | translate"></p>
+  <section class="section">
+    <div class="content content_tight intro-faq-block">
+      <div class="intro-faq-block__content">
+
+        <div class="paragraph4Title" style="text-align: center" [innerHTML]="'SIPage.WDSection.Paragraph4' | translate"></div>
         <p [innerHTML]="'SIPage.WDSection.Text' | translate"></p>
 
 
         <div class="image_title">
           <div>
-            <img src="assets/images/Angio.png" style="max-width: 200px;" alt="test1" class="img_item">
-            <p [innerHTML]="'SIPage.IMGSection.Text1' | translate"></p>
+            <img src="assets/images/Angio.png" style="max-width: 245px; height: 175px; margin-right: 10px" alt="test1"
+                 class="img_item">
+            <a class="imgText" [innerHTML]="'SIPage.IMGSection.Text1' | translate"
+               href="https://www.cbioportal.org/study/summary?id=angs_painter_2020" target="_blank"></a>
           </div>
           <div>
-            <img src="assets/images/meta.png" style="max-width: 195px; margin-left: 18px;" alt="test2" class="img_item">
-            <p [innerHTML]="'SIPage.IMGSection.Text2' | translate"></p>
+            <img src="assets/images/meta.png" style="max-width: 245px; height: 175px; margin-right: 10px" alt="test2"
+                 class="img_item">
+            <a class="imgText" [innerHTML]="'SIPage.IMGSection.Text2' | translate"
+               href="https://www.cbioportal.org/study/summary?id=mpcproject_broad_2021" target="_blank"></a>
           </div>
           <div>
-            <img src="assets/images/breast.png" style="max-width: 200px;" alt="test3" class="img_item">
-            <p [innerHTML]="'SIPage.IMGSection.Text3' | translate"></p>
+            <img src="assets/images/breast.png" style="max-width: 245px; height: 175px; margin-right: 10px" alt="test3"
+                 class="img_item">
+            <a class="imgText" [innerHTML]="'SIPage.IMGSection.Text3' | translate"
+               href="https://www.cbioportal.org/study/summary?id=brca_mbcproject_wagle_2017" target="_blank"></a>
           </div>
         </div>
-
-
-        <p [innerHTML]="'SIPage.TermSection.Paragraph5' | translate"></p>
-        <p [innerHTML]="'SIPage.TermSection.Text' | translate"></p>
-
       </div>
     </div>
   </section>
+
+  <div class="terms">
+    <section class="section">
+      <div class="intro-faq-block__content">
+        <div class="bulbIcon">
+          <img src="assets/images/idea (2).png" alt="bulb">
+        </div>
+        <div class="termsHeader" [innerHTML]="'SIPage.TermSection.Paragraph5' | translate"></div>
+        <div class="content content_tight intro-faq-block">
+          <div class="termsText" [innerHTML]="'SIPage.TermSection.Text' | translate"></div>
+        </div>
+      </div>
+    </section>
+  </div>
 
 
 
