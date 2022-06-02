@@ -1,8 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Auth } from '../services/auth.service';
-import {ActivatedRoute} from '@angular/router';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -10,14 +8,15 @@ import {Subject} from 'rxjs';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  selectedRealm: string;
+  selectedRealm: Observable<string>;
   destroy = new Subject();
 
-  constructor(public auth: Auth, private route: ActivatedRoute) {}
+  constructor(public auth: Auth) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(param => this.selectedRealm = param.study);
+    this.selectedRealm = this.auth.getSelectedStudy();
   }
+
 
   ngOnDestroy(): void {
     this.destroy.next(null);
