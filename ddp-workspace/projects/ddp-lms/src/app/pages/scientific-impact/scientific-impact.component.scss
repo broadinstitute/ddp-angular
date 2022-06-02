@@ -116,14 +116,14 @@
 
 .section {
   padding: 0 1.5rem 0 1.5rem;
-  display: flex;
   flex-direction: row-reverse;
   justify-content: space-around;
   gap: 8rem;
+  display: flex;
 
   &:nth-of-type(odd) {
-    padding-bottom: 7.94rem;
     flex-direction: row;
+    padding-bottom: 7.94rem;
   }
 
   &__data {
