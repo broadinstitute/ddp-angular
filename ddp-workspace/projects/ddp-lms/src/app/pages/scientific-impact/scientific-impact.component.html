@@ -47,25 +47,12 @@
              [innerHTML]="'SIPage.WDSection.Paragraph4' | translate"></div>
         <p [innerHTML]="'SIPage.WDSection.Text' | translate"></p>
 
-
         <div class="image_title">
-          <div>
-            <img src="assets/images/Angio.png" alt="test1"
+          <div *ngFor="let imgArray of imageArray">
+            <img [src]="imgArray.src" [alt]="imgArray.alt"
                  class="images">
-            <a class="imgText" [innerHTML]="'SIPage.IMGSection.Text1' | translate"
-               href="https://www.cbioportal.org/study/summary?id=angs_painter_2020" target="_blank"></a>
-          </div>
-          <div>
-            <img src="assets/images/meta.png" alt="test2"
-                 class="images">
-            <a class="imgText" [innerHTML]="'SIPage.IMGSection.Text2' | translate"
-               href="https://www.cbioportal.org/study/summary?id=mpcproject_broad_2021" target="_blank"></a>
-          </div>
-          <div>
-            <img src="assets/images/breast.png" alt="test3"
-                 class="images">
-            <a class="imgText" [innerHTML]="'SIPage.IMGSection.Text3' | translate"
-               href="https://www.cbioportal.org/study/summary?id=brca_mbcproject_wagle_2017" target="_blank"></a>
+            <a class="imgText" [innerHTML]="imgArray.text | translate"
+               [href]="imgArray.link" target="_blank"></a>
           </div>
         </div>
       </div>
