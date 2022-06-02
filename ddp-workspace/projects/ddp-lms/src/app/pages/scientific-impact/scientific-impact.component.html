@@ -15,7 +15,8 @@
   <section class="section">
     <div class="content content_tight intro-faq-block">
       <div class="intro-faq-block__content">
-        <div class="paragraph2Title" style="text-align: center" [innerHTML]="'SIPage.DASection.Paragraph2' | translate"></div>
+        <div class="paragraph2Title" style="text-align: center"
+             [innerHTML]="'SIPage.DASection.Paragraph2' | translate"></div>
         <ng-container *ngFor="let desc of 'SIPage.DASection.Desc'| translate">
           <div class="paragraph2Text" [innerHTML]="desc"></div>
         </ng-container>
@@ -27,7 +28,8 @@
     <section class="section">
       <div class="content content_tight intro-faq-block">
         <div class="intro-faq-block__content">
-          <div class="elementsOfDataTitle" style="text-align: center" [innerHTML]="'SIPage.ELSection.Paragraph3' | translate"></div>
+          <div class="elementsOfDataTitle" style="text-align: center"
+               [innerHTML]="'SIPage.ELSection.Paragraph3' | translate"></div>
           <div class="elementsOfDataText" [innerHTML]="'SIPage.ELSection.Text' | translate"></div>
           <ng-container *ngFor="let desc of 'SIPage.ELSection.Desc'| translate">
             <p [innerHTML]="desc"></p>
@@ -41,26 +43,27 @@
     <div class="content content_tight intro-faq-block">
       <div class="intro-faq-block__content">
 
-        <div class="paragraph4Title" style="text-align: center" [innerHTML]="'SIPage.WDSection.Paragraph4' | translate"></div>
+        <div class="paragraph4Title" style="text-align: center"
+             [innerHTML]="'SIPage.WDSection.Paragraph4' | translate"></div>
         <p [innerHTML]="'SIPage.WDSection.Text' | translate"></p>
 
 
         <div class="image_title">
           <div>
-            <img src="assets/images/Angio.png" style="width: 270px; height: 175px; margin-right: 10px" alt="test1"
-                 class="img_item">
+            <img src="assets/images/Angio.png" alt="test1"
+                 class="images">
             <a class="imgText" [innerHTML]="'SIPage.IMGSection.Text1' | translate"
                href="https://www.cbioportal.org/study/summary?id=angs_painter_2020" target="_blank"></a>
           </div>
           <div>
-            <img src="assets/images/meta.png" style="width: 270px; height: 175px; margin-right: 10px" alt="test2"
-                 class="img_item">
+            <img src="assets/images/meta.png" alt="test2"
+                 class="images">
             <a class="imgText" [innerHTML]="'SIPage.IMGSection.Text2' | translate"
                href="https://www.cbioportal.org/study/summary?id=mpcproject_broad_2021" target="_blank"></a>
           </div>
           <div>
-            <img src="assets/images/breast.png" style="width: 270px; height: 175px; margin-right: 10px" alt="test3"
-                 class="img_item">
+            <img src="assets/images/breast.png" alt="test3"
+                 class="images">
             <a class="imgText" [innerHTML]="'SIPage.IMGSection.Text3' | translate"
                href="https://www.cbioportal.org/study/summary?id=brca_mbcproject_wagle_2017" target="_blank"></a>
           </div>

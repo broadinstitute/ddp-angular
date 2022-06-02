@@ -219,6 +219,7 @@
   letter-spacing: 0;
   line-height: 30px;
   text-align: left;
+  display: flex;
 }
 
 .paragraph2Title {
@@ -230,6 +231,12 @@
   letter-spacing: 0;
   line-height: 58px;
   text-align: center;
+}
+
+.images {
+  width: 270px;
+  height: 175px;
+  margin-right: 10px
 }
 
 .paragraph2Text {
