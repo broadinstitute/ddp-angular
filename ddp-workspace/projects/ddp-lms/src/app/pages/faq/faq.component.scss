@@ -31,6 +31,18 @@
         }
     }
 
+    .static-page-title {
+        margin: 0 auto 5.625rem;
+        text-align: center;
+        padding: 3.2rem 0;
+        background-color: $accent-lms-color !important;
+        font-family: "Untitled-Sans-Light";
+        font-size: 3rem;
+        font-weight: 300;
+        letter-spacing: 0;
+        line-height: 58px;
+    }
+
     .container {
         max-width: 48.75rem;
         margin: 0 auto;
