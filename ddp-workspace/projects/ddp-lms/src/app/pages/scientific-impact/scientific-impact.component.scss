@@ -40,11 +40,8 @@
 }
 
 .image_title {
-  margin: auto;
-  margin-left: 20px;
-  margin-right: 20px;
   display: flex;
-  margin-bottom: 9.45rem;
+  padding-bottom: 50px;
 }
 
 .goalSection {
@@ -215,7 +212,6 @@
 }
 
 .imgText {
-  height: 34px;
   color: #9953CE;
   font-family: $primary-font;
   font-size: 20px;
@@ -223,7 +219,6 @@
   letter-spacing: 0;
   line-height: 30px;
   text-align: left;
-  width: 353px;
 }
 
 .paragraph2Title {
@@ -255,5 +250,11 @@
     &:nth-of-type(n) {
       flex-direction: column-reverse;
     }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .image_title {
+    flex-wrap: wrap;
   }
 }
