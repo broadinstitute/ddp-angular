@@ -1,27 +1,27 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
-import { Participant } from '../participant-list/participant-list.model';
-import { Auth } from '../services/auth.service';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ModalComponent} from '../modal/modal.component';
+import {OncHistoryDetail} from '../onc-history-detail/onc-history-detail.model';
+import {Participant} from '../participant-list/participant-list.model';
+import {Auth} from '../services/auth.service';
 
-import { ComponentService } from '../services/component.service';
-import { Statics } from '../utils/statics';
-import { DSMService } from '../services/dsm.service';
-import { RoleService } from '../services/role.service';
-import { Tissue } from '../tissue/tissue.model';
-import { Result } from '../utils/result.model';
-import { NameValue } from '../utils/name-value.model';
-import { ModalComponent } from '../modal/modal.component';
-import { Utils } from '../utils/utils';
-import { PatchUtil } from '../utils/patch.model';
+import {ComponentService} from '../services/component.service';
+import {DSMService} from '../services/dsm.service';
+import {RoleService} from '../services/role.service';
+import {Tissue} from '../tissue/tissue.model';
+import {NameValue} from '../utils/name-value.model';
+import {PatchUtil} from '../utils/patch.model';
+import {Result} from '../utils/result.model';
+import {Statics} from '../utils/statics';
+import {Utils} from '../utils/utils';
 
-@Component({
+@Component( {
   selector: 'app-tissue-page',
   templateUrl: './tissue-page.component.html',
-  styleUrls: [ './tissue-page.component.css' ],
-})
+  styleUrls: [ './tissue-page.component.css' ]
+} )
 export class TissuePageComponent implements OnInit {
-  @ViewChild(ModalComponent)
+  @ViewChild( ModalComponent )
   public applyToAllModal: ModalComponent;
 
   @Input() participant: Participant;
@@ -92,9 +92,9 @@ export class TissuePageComponent implements OnInit {
   }
 
   addTissue(): void {
-    this.oncHistoryDetail.tissues.push(new Tissue(null, this.oncHistoryDetail.oncHistoryDetailId, null, null, null, null,
-      null, null, null, null, null, null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null, null, null, null, null, null));
+    this.oncHistoryDetail.tissues.push( new Tissue( null, this.oncHistoryDetail.oncHistoryDetailId, null, null, null, null,
+            null, null, null, null, null, null, null, null, null, null, null, null,
+            null, null, null, null, null, null, null, null, null, null, null, null, false ) );
   }
 
   isPatchedCurrently(field: string): boolean {

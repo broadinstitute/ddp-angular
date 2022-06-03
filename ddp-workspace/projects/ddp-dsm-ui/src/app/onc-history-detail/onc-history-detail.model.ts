@@ -65,7 +65,7 @@ export class OncHistoryDetail {
       data = '{' + data.substring(1, data.length - 1) + '}';
       additionalValuesJson = JSON.parse(data);
     }
-    console.log( json );
+
     return new OncHistoryDetail(
       json.participantId, json.oncHistoryDetailId, json.medicalRecordId, json.datePx, json.typePx, json.locationPx,
       json.histology, json.accessionNumber, json.facility, json.phone, json.fax, json.notes, json.request,
