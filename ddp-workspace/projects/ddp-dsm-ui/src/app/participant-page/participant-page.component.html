@@ -121,15 +121,15 @@
             <td *ngIf="hasRole().allowedToEditParticipant()">
               <span *ngIf="!isEmailValid" class="invalid-email">E-Mail is not valid</span>
               <input matInput type="email" maxlength="200" autocomplete="off" placeholder="Email"
-              [ngModel]="updatedEmail"
-              (ngModelChange)="validateEmailInput($event)"
-              email
-              class="update-participant-input">
+                     [ngModel]="updatedEmail"
+                     (ngModelChange)="validateEmailInput($event)"
+                     email
+                     class="update-participant-input">
               <button mat-raised-button color="primary"
-              [disabled]="updatedEmail === participant.data.profile['email'] || updatedEmail.length === 0 || !isEmailValid"
-              (click)="updateEmail()">Update
-            </button>
-          </td>          
+                      [disabled]="updatedEmail === participant.data.profile['email'] || updatedEmail.length === 0 || !isEmailValid"
+                      (click)="updateEmail()">Update
+              </button>
+            </td>
           <td *ngIf="!hasRole().allowedToEditParticipant()">
             {{participant.data.profile['email']}}
           </td>
@@ -191,7 +191,7 @@ participant.data.dsm['diagnosisYear'] != null">
           </tr>
           <tr>
             <td>
-              <app-cohort-tag 
+              <app-cohort-tag
                 [ddpParticipantId]="participant.data.profile.guid"
                 [dsm]="participant.data.dsm"
               ></app-cohort-tag>
@@ -842,12 +842,42 @@ participant.data.dsm['diagnosisYear'] != null">
                             [disabled]="downloading"
                             (click)="requestTissue(true)">Download PDF Bundle
                     </button>
-                    <a href="#" (click)="doNothing('bundle')" *ngIf="!downloading" class="Router--Outlet"><b> Change order/files in Bundle</b></a>
+                    <a href="#" (click)="doNothing('bundle')" *ngIf="!downloading" class="Router--Outlet"><b> Change
+                      order/files in Bundle</b></a>
                   </div>
                 </div>
               </ng-container>
             </tab>
-
+            <tab
+              *ngIf="participant.data.files.length > 0 || participant.data.files !== undefined || participant.data.files !== null"
+              heading="Participant Uploaded Files">
+              <ng-container *ngFor="let file of participant.data.files">
+                <ng-container>
+                  <table>
+                    <tr>
+                      <td>file name</td>
+                      <td>{{file.fileName}}</td>
+                    </tr>
+                    <tr>
+                      <td>uploadedAt</td>
+                      <td>{{file.uploadedAt}}</td>
+                    </tr>
+                    <tr>
+                      <td>Type:</td>
+                      <td>{{file.mimeType}}</td>
+                    </tr>
+                    <tr>
+                      <td>status:</td>
+                      <td>{{file.scanResult}}</td>
+                    </tr>
+                  </table>
+                  <button (click)="downloadParticipantFile(file)" [disabled]="file.scanResult !== 'CLEAN'"
+                          color="primary" md-raised-button
+                          type="button">Download This File
+                  </button>
+                </ng-container>
+              </ng-container>
+            </tab>
             <tab heading="First Medical Record Abstraction" [active]="tabActive('abstraction')"
                  (selectTab)="onSelect($event, 'abstraction'); getFileList(participant.abstraction)"
                  *ngIf="(participant.abstraction != null && abstractionFields != null
