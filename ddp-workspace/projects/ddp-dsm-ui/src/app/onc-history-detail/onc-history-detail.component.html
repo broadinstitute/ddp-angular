@@ -50,10 +50,11 @@
     <tbody>
     <ng-container *ngFor="let oncHis of oncHistory | oncHistoryDetailSort:triggerSort; let i = index">
 
-      <tr [id]="oncHis.oncHistoryDetailId" [ngClass]="{'Green-background': oncHis.oncHistoryDetailId === oncHistoryId}">
+      <tr *ngIf="!oncHis.deleted" [id]="oncHis.oncHistoryDetailId"
+          [ngClass]="{'Green-background': oncHis.oncHistoryDetailId === oncHistoryId}">
         <td>
           <mat-checkbox *ngIf="oncHis.request === 'request' || oncHis.request === 'sent'" color="primary" disableRipple
-                       [(ngModel)]="oncHis.selected" (change)="selected()" [disabled]="!editable || participantExited">
+                        [(ngModel)]="oncHis.selected" (change)="selected()" [disabled]="!editable || participantExited">
           </mat-checkbox>
           <button
 

@@ -1,44 +1,44 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy, AfterViewChecked} from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { TabDirective } from 'ngx-bootstrap/tabs';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ActivityDefinition } from '../activity-data/models/activity-definition.model';
-import { FieldSettings } from '../field-settings/field-settings.model';
-import { ParticipantData } from '../participant-list/models/participant-data.model';
-import { PreferredLanguage } from '../participant-list/models/preferred-languages.model';
-import { Participant } from '../participant-list/participant-list.model';
-import { PDFModel } from '../pdf-download/pdf-download.model';
+import {AfterViewChecked, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {ActivatedRoute, Router} from '@angular/router';
+import {TabDirective} from 'ngx-bootstrap/tabs';
+import {AbstractionGroup, AbstractionWrapper} from '../abstraction-group/abstraction-group.model';
+import {ActivityDefinition} from '../activity-data/models/activity-definition.model';
+import {ParticipantUpdateResultDialogComponent} from '../dialogs/participant-update-result-dialog.component';
+import {FieldSettings} from '../field-settings/field-settings.model';
+import {Abstraction} from '../medical-record-abstraction/model/medical-record-abstraction.model';
+import {MedicalRecord} from '../medical-record/medical-record.model';
+import {ModalComponent} from '../modal/modal.component';
+import {OncHistoryDetail} from '../onc-history-detail/onc-history-detail.model';
+import {ParticipantData} from '../participant-list/models/participant-data.model';
+import {ParticipantDSMInformation} from '../participant-list/models/participant.model';
+import {PreferredLanguage} from '../participant-list/models/preferred-languages.model';
+import {Sample} from '../participant-list/models/sample.model';
+import {Participant} from '../participant-list/participant-list.model';
+import {PDFModel} from '../pdf-download/pdf-download.model';
+import {AddFamilyMemberComponent} from '../popups/add-family-member/add-family-member.component';
+import {Auth} from '../services/auth.service';
 
-import { ComponentService } from '../services/component.service';
-import { Auth } from '../services/auth.service';
-import { DSMService } from '../services/dsm.service';
-import { MedicalRecord } from '../medical-record/medical-record.model';
-import { RoleService } from '../services/role.service';
-import { Statics } from '../utils/statics';
-import { Utils } from '../utils/utils';
-import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
-import { ModalComponent } from '../modal/modal.component';
-import { Tissue } from '../tissue/tissue.model';
-import { Value } from '../utils/value.model';
-import { Result } from '../utils/result.model';
-import { NameValue } from '../utils/name-value.model';
-import { Abstraction } from '../medical-record-abstraction/model/medical-record-abstraction.model';
-import { AbstractionGroup, AbstractionWrapper } from '../abstraction-group/abstraction-group.model';
-import { PatchUtil } from '../utils/patch.model';
-import { ParticipantUpdateResultDialogComponent } from '../dialogs/participant-update-result-dialog.component';
-import { AddFamilyMemberComponent } from '../popups/add-family-member/add-family-member.component';
-import { Sample } from '../participant-list/models/sample.model';
-import { ParticipantDSMInformation } from '../participant-list/models/participant.model';
+import {ComponentService} from '../services/component.service';
+import {DSMService} from '../services/dsm.service';
+import {RoleService} from '../services/role.service';
+import {Tissue} from '../tissue/tissue.model';
+import {NameValue} from '../utils/name-value.model';
+import {PatchUtil} from '../utils/patch.model';
+import {Result} from '../utils/result.model';
+import {Statics} from '../utils/statics';
+import {Utils} from '../utils/utils';
+import {Value} from '../utils/value.model';
 
-const fileSaver = require('file-saver');
+const fileSaver = require( 'file-saver' );
 
-@Component({
+@Component( {
   selector: 'app-participant-page',
   templateUrl: './participant-page.component.html',
   styleUrls: [ './participant-page.component.css' ]
-})
+} )
 export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChecked {
-  @ViewChild(ModalComponent)
+  @ViewChild( ModalComponent )
   public universalModal: ModalComponent;
 
   @Input() parentList: string;
@@ -466,11 +466,11 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           null, null, null, null, null, null, null,
           null, null, null, null, null, null, null));
 
-        const oncHis = new OncHistoryDetail(this.participant.participant.participantId,
+        const oncHis = new OncHistoryDetail( this.participant.participant.participantId,
           null, null, null, null, null, null, null, null, null, null,
           null, null, null, null, null, null, null, null,
           null, null, null, null, null, null, tissues, null, null, null,
-          null);
+          null, false );
         this.participant.oncHistoryDetails.push(oncHis);
       }
     }

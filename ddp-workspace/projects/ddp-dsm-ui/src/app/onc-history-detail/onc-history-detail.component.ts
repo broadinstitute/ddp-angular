@@ -1,28 +1,28 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { interval } from 'rxjs';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
+import {interval} from 'rxjs';
+import {Lookup} from '../lookup/lookup.model';
+import {ModalComponent} from '../modal/modal.component';
 
-import { Participant } from '../participant-list/participant-list.model';
-import { OncHistoryDetail } from './onc-history-detail.model';
-import { DSMService } from '../services/dsm.service';
-import { ComponentService } from '../services/component.service';
-import { RoleService } from '../services/role.service';
-import { Utils } from '../utils/utils';
-import { ModalComponent } from '../modal/modal.component';
-import { Tissue } from '../tissue/tissue.model';
-import { NameValue } from '../utils/name-value.model';
-import { Statics } from '../utils/statics';
-import { Auth } from '../services/auth.service';
-import { PatchUtil } from '../utils/patch.model';
-import { Lookup } from '../lookup/lookup.model';
+import {Participant} from '../participant-list/participant-list.model';
+import {Auth} from '../services/auth.service';
+import {ComponentService} from '../services/component.service';
+import {DSMService} from '../services/dsm.service';
+import {RoleService} from '../services/role.service';
+import {Tissue} from '../tissue/tissue.model';
+import {NameValue} from '../utils/name-value.model';
+import {PatchUtil} from '../utils/patch.model';
+import {Statics} from '../utils/statics';
+import {Utils} from '../utils/utils';
+import {OncHistoryDetail} from './onc-history-detail.model';
 
-@Component({
+@Component( {
   selector: 'app-onc-history-detail',
   templateUrl: './onc-history-detail.component.html',
   styleUrls: [ './onc-history-detail.component.css' ]
-})
+} )
 export class OncHistoryDetailComponent implements OnInit {
-  @ViewChild(ModalComponent)
+  @ViewChild( ModalComponent )
   public oncHisNoteModal: ModalComponent;
 
   @Input() participant: Participant;
@@ -224,15 +224,15 @@ export class OncHistoryDetailComponent implements OnInit {
 
   addNewOncHistory(participantId: string): void {
     const tissues: Array<Tissue> = [];
-    tissues.push(new Tissue(null, null, null, null, null, null,
+    tissues.push( new Tissue( null, null, null, null, null, null,
       null, null, null, null, null, null, null, null,
       null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null, null, null));
-    this.oncHistory.push(new OncHistoryDetail(participantId, null, null, null, null,
+      null, null, null, null, null, null, null, null, null ) );
+    this.oncHistory.push( new OncHistoryDetail( participantId, null, null, null, null,
       null, null, null, null, null, null, null, null,
       null, null, null, null, null, null, null, null, null,
       null, null, null, tissues,
-      null, null, null, null));
+      null, null, null, null, false ) );
   }
 
   deleteOncHistory(index: number): void {
