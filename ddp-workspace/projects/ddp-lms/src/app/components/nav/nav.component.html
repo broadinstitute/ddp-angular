@@ -4,6 +4,7 @@
     <ng-content select="[backToTop]"></ng-content>
   </li>
 
+
   <li class="links-list__item">
     <a class="link" queryParamsHandling="merge" routerLinkActive="link--active" [routerLink]="Route.About">
       {{ 'Header.Links.About' | translate }}
@@ -54,4 +55,12 @@
       {{ 'Header.Links.ForYourPhysician' | translate }}
     </a>
   </li>
+  <li class="links-list__item" 
+    [routerLinkActiveOptions]="{exact: true}" 
+    routerLinkActive="link-list__item_active" 
+    *ngIf="isAuthenticated">
+      <a class="link" [routerLink]="Route.Dashboard">
+        {{ 'Toolkit.Dashboard.Title' | translate }}
+      </a>
+  </li> 
 </ul>
