@@ -90,7 +90,7 @@ declare const gtag: (...args: any[]) => void;
 export class AppModule {
     constructor(private analytics: AnalyticsEventsService) {
         // https://developers.google.com/tag-platform/gtagjs/reference#event
-        this.analytics.gTagEvents
+        this.analytics.gTagEventsExcludingPageViews
             .subscribe(event => gtag('event', event.event_name, event.parameters));
     }
 }
