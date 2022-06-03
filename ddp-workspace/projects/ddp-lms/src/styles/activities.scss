@@ -1,5 +1,7 @@
 // copied from ddp-brain study
+@use '@angular/material' as mat;
 @import '../theme.scss';
+@import "./variables.scss";
 
 @keyframes open {
     0% { opacity: 0; max-height: 1px}
@@ -65,72 +67,98 @@
 
 // steps
 .activity-steps {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 3rem 0;
-
-    &__divider {
-        flex: 1;
-        border-top: 2px solid $activity-step-default;
-        margin: 0.75rem 1rem 0;
-    }
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  grid-gap: 1rem;
+  margin: 3rem 0;
 }
 
-.activity-step {
+.vertical {
+  &.activity-steps {
+    grid-gap: 0.5rem;
     display: flex;
-    font-size: 1.125rem;
-    cursor: initial;
+    flex-direction: column;
+    margin: 10px auto;
+    padding-left: 1rem;
+    min-width: 130px;
+
+    @media only screen and (max-width: 480px) {
+      min-width: $step-circle-size;
+    }
+
+    @media only screen and (min-width: 1024px) {
+      margin: 10px 6vw;
+
+      + .content {
+        margin-left: 0;
+      }
+    }
+
+    @media only screen and (min-width: 1500px) {
+      margin: 10px 10vw;
+    }
+
+    .activity-steps__divider {
+      height: 1.3rem;
+      width: 1px;
+      border-left: 2px solid #D2D2D2;
+      margin-left: 16px;
+    }
+  }
+
+  .activity-step {
+    height: $step-circle-size;
+    display: flex;
+    align-items: center;
+
+    &.cdk-mouse-focused, &.cdk-touch-focused {
+      outline: none;
+    }
+
+      .activity-step__text {
+        color: #282828;
+        font-weight: 600;
+      }
+    }
+
+    &.active.completed {
+      .activity-step__number {
+        background-color: #7154FF;
+      }
+
+    &.completed {
+      .activity-step__number {
+        background-color: #00D39D;
+      }
+
+      .activity-step__text {
+        color: mat.get-color-from-palette(mat.define-palette($app-primary), 200);
+      }
+    }
 
     &__number {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 1.625rem;
-        height: 1.625rem;
-        background-color: $activity-step-default;
-        border-radius: 50%;
-        color: white;
+      display: inline-flex;
+      background-color: #757575;
+      color: white;
+      border-radius: calc(#{$step-circle-size} / 2);
+      min-width: $step-circle-size;
+      width: $step-circle-size;
+      height: $step-circle-size;
+      line-height: $step-circle-size;
+      justify-content: center;
     }
 
     &__text {
-        white-space: nowrap;
-        color: $grey-text-color;
-        padding-left: 8px;
-    }
-
-    &.completed {
-        cursor: pointer;
-
-        .activity-step {
-            &__number {
-                background-color: $activity-step-inactive;
-                color: white;
-            }
-
-            &__text {
-                color: $text-color;
-            }
-        }
-        &.active {
-            .activity-step__number {
-                background-color: $primary-color;
-            }
-        }
+      margin-left: 0.5rem;
     }
 }
 
-@media only screen and (max-width: 600px) {
-    .activity-steps {
-        padding: 1rem 0;
+    @media only screen and (max-width: 480px) {
+      &__text {
+        display: none;
+      }
     }
-
-    .activity-step {
-        &__text {
-            display: none;
-        }
-    }
-}
 
 .with-vertical-progress-indicator {
     .header-section {
@@ -181,7 +209,28 @@
             }
         }
     }
+  }
 }
+
+.activity-step {
+  cursor: pointer;
+  color: mat.get-color-from-palette($app-primary, 650);
+}
+
+.activity-step.completed {
+  color: mat.get-color-from-palette($app-primary, 700);
+}
+
+.activity-step.active.completed {
+  color: mat.get-color-from-palette($app-primary, 200);
+}
+
+@media only screen and (max-width: 600px) {
+  .activity-steps {
+    grid-auto-flow: row;
+  }
+}
+
 
 // activity lists
 .ddp-list {
