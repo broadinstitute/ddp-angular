@@ -1,6 +1,6 @@
-import {Component, Inject, Input} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {AnalyticsEventCategories, AnalyticsEventsService} from "ddp-sdk";
+import {Component, Input} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {AnalyticsEventCategories, AnalyticsEventsService} from 'ddp-sdk';
 
 
 @Component({
@@ -55,7 +55,7 @@ export class HomeComponent {
     src: 'assets/images/pic3_big.png',
     alt: 'benefit1',
     text: 'home.benefit.text3',
-  },]
+  },];
 
   questions = [{
     question: 'home.questions.question1',
@@ -74,7 +74,7 @@ export class HomeComponent {
     }, {
       question: 'home.questions.question5',
       paragraph: 'home.questions.paragraph5'
-    }]
+    }];
 
   constructor(
     private dialog: MatDialog,
