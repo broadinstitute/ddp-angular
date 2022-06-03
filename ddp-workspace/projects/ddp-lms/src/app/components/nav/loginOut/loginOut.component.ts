@@ -23,8 +23,6 @@ import { Route } from '../../../constants/Route';
       </li>
     </ul>
   </div>
-
-  
   `,
   styles: [`
 
