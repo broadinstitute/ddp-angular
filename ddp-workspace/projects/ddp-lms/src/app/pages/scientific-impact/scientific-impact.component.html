@@ -48,10 +48,10 @@
         <p [innerHTML]="'SIPage.WDSection.Text' | translate"></p>
 
         <div class="image_title">
-          <div *ngFor="let imgArray of imageArray">
+          <div *ngFor="let imgArray of 'SIPage.IMGSection' | translate">
             <img [src]="imgArray.src" [alt]="imgArray.alt"
                  class="images">
-            <a class="imgText" [innerHTML]="imgArray.text | translate"
+            <a class="imgText" [innerHTML]="imgArray.Text | translate"
                [href]="imgArray.link" target="_blank"></a>
           </div>
         </div>
