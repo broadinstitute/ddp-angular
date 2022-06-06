@@ -32,16 +32,16 @@
     <div class="paragraph3">
       <div class="paragraph3Title" [innerHTML]="'home.paragraph3Title' | translate"></div>
       <div class="paragraph3Images">
-        <div *ngFor="let imgArray of imagesArray">
+        <div *ngFor="let step of 'home.steps' | translate">
           <div class="imgBackground">
-            <img class="stepImages" [src]="imgArray.src" [alt]="imgArray.alt">
+            <img class="stepImages" [src]="step.src" [alt]="step.alt">
             <div class="stepTexts">
-              <div class="imgText1" [innerHTML]="imgArray.text1 | translate"></div>
+              <div class="imgText1" [innerHTML]="step.Text1 | translate"></div>
               <div class="clockImgAndText">
                 <img class="clockIcon" src="assets/images/clock.png" alt="clock">
-                <div class="imgText2" [innerHTML]="imgArray.text2 | translate"></div>
+                <div class="imgText2" [innerHTML]="step.Text2 | translate"></div>
               </div>
-              <div class="imgText3" [innerHTML]="imgArray.text3 | translate"></div>
+              <div class="imgText3" [innerHTML]="step.Text3 | translate"></div>
             </div>
           </div>
         </div>
@@ -55,7 +55,7 @@
     <div class="paragraph4">
       <div class="paragraph4Title" [innerHTML]="'home.paragraph4Title' | translate"></div>
       <div class="paragraph4Images">
-        <div *ngFor="let imgArray of par4imagesArray">
+        <div *ngFor="let imgArray of 'home.benefit' | translate">
           <div class="imgBackground">
             <img class="stepImages" [src]="imgArray.src" [alt]="imgArray.alt">
             <div class="benefitTexts">
@@ -74,7 +74,7 @@
       <h2 class="paragraph5Title" translate>App.FAQ.Title</h2>
       <div class="paragraph5">
         <mat-accordion #a="matAccordion" hideToggle="true" multi="true" displayMode="flat">
-          <ng-container *ngFor="let item of questions">
+          <ng-container *ngFor="let item of 'home.questions' | translate">
             <mat-expansion-panel #panel class="faq-section-expansion-panel">
               <mat-expansion-panel-header collapsedHeight="100%" expandedHeight="100%">
                 <mat-icon *ngIf="!panel.expanded" class="expandIcon">add</mat-icon>
@@ -112,7 +112,7 @@
             <img class="partnersPhoto" src="assets/images/nophoto.png" alt="">
           </div>
         </div>
-      <div class="partnersPhotos">
+        <div class="partnersPhotos">
           <div>
             <img class="partnersPhoto" src="assets/images/nophoto.png" alt="">
           </div>
