@@ -1,8 +1,8 @@
 import {Component, Inject, Input} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {AnalyticsEventCategories, AnalyticsEventsService} from 'ddp-sdk';
-import {CommunicationService, ToolkitConfigurationService} from "toolkit";
-import { Route } from '../../constants/Route'
+import {CommunicationService, ToolkitConfigurationService} from 'toolkit';
+import { Route } from '../../constants/Route';
 
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Route } from '../../constants/Route';
-import { CommunicationService } from "toolkit";
+import { CommunicationService } from 'toolkit';
 
 @Component({
   selector: 'app-nav',

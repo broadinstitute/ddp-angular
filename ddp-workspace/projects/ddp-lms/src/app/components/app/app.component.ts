@@ -1,8 +1,8 @@
 import {Component, Inject} from '@angular/core';
-import {AppRedesignedBaseComponent, CommunicationService, ToolkitConfigurationService} from "toolkit";
-import {MatDialog} from "@angular/material/dialog";
-import {RenewSessionNotifier} from "ddp-sdk";
-import {Router} from "@angular/router";
+import {AppRedesignedBaseComponent, CommunicationService, ToolkitConfigurationService} from 'toolkit';
+import {MatDialog} from '@angular/material/dialog';
+import {RenewSessionNotifier} from 'ddp-sdk';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
