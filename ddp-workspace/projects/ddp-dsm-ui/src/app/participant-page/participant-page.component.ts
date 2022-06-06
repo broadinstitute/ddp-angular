@@ -123,6 +123,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   message: string = null;
   bundle = false;
   private scrolled: boolean;
+
+
   constructor(private auth: Auth, private compService: ComponentService, private dsmService: DSMService, private router: Router,
                private role: RoleService, private util: Utils, private route: ActivatedRoute, public dialog: MatDialog) {
     if (!auth.authenticated()) {
@@ -216,8 +218,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   displayActivityOrder(): void {
     const orderedActivities = [];
-
-    [...this.activityDefinitions].sort(({displayOrder: A},{displayOrder: B}) => A - B)
+    this.activityDefinitions instanceof Array &&
+    [...this.activityDefinitions]
+      .sort(({displayOrder: A},{displayOrder: B}) => A - B)
       .forEach(activity => {
       const foundActivity = this.participant.data.activities
         .find(a => activity.activityCode === a.activityCode && activity.activityVersion === a.activityVersion);

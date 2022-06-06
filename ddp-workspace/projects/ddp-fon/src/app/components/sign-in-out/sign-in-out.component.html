@@ -1,0 +1,18 @@
+<ul class="link-list">
+  <li class="link-list__item" *ngIf="!isAuthenticated">
+    <a class="btn btn--scarlet" [routerLink]="Route.Join">
+      {{ 'App.Header.Links.Join' | translate }}
+    </a>
+  </li>
+
+  <li class="link-list__item" *ngIf="isAuthenticated">
+    <a [routerLink]="Route.Dashboard">
+      {{ 'App.Header.Links.Dashboard' | translate }}
+    </a>
+  </li>
+  <li class="link-list__item">
+    <ddp-sign-in-out
+      [signOutReturnToUrl]="Route.Home"
+    ></ddp-sign-in-out>
+  </li>
+</ul>

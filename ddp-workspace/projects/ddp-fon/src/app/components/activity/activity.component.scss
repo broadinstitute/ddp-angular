@@ -1,0 +1,159 @@
+@import '../../../styles/breakpoints';
+@import '../../../styles/colors';
+
+.activity {
+  &__title {
+    margin-bottom: 0.75em;
+
+    font-size: 4rem;
+    text-align: center;
+
+    @include media-sm {
+      font-size: 3.2rem;
+    }
+  }
+}
+
+.section--spinner {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 2.4rem;
+}
+
+.section--stepper {
+  margin: 3.2rem 0;
+
+  padding: 0 1.6rem;
+}
+
+.stepper-list {
+  display: flex;
+  align-items: center;
+
+  list-style: none;
+
+  &__divider {
+    flex: 1;
+    height: 3px;
+
+    background: map-get($colors, 'progress_bar-inactive-border');
+
+    transition: background-color 0.3s ease;
+
+    &--complete {
+      background: map-get($colors, 'scarlet');
+    }
+  }
+}
+
+.step-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 50px;
+  height: 50px;
+
+  background: map-get($colors, 'progress_bar-inactive-bg');
+  border: 3px solid map-get($colors, 'progress_bar-inactive-border');
+  border-radius: 100px;
+
+  font: inherit;
+  font-size: 1.8rem;
+  line-height: 1;
+  font-weight: bold;
+  color: map-get($colors, 'progress_bar-inactive-color');
+
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+
+  &:disabled {
+    opacity: 0.9;
+
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
+    opacity: 0.8;
+  }
+
+  &--complete {
+    background: map-get($colors, 'scarlet');
+    border-color: map-get($colors, 'scarlet');
+
+    color: map-get($colors, 'white');
+  }
+
+  &--active {
+    background: map-get($colors, 'white');
+    border-color: map-get($colors, 'scarlet');
+
+    color: map-get($colors, 'scarlet');
+  }
+
+  .mat-icon {
+    font-size: 24px;
+  }
+}
+
+.section--buttons {
+  display: flex;
+  align-items: flex-start;
+  flex-flow: row wrap;
+
+  margin: 1.5em 0;
+  padding-top: 1.5em;
+
+  border-top: 1px solid map-get($colors, 'light-grey');
+
+  @include media-sm {
+    flex-flow: column nowrap;
+  }
+}
+
+.section--error {
+  margin: 1em 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 1.2rem 3.6rem;
+
+  @include media-sm {
+    width: 100%;
+
+    justify-content: center;
+
+    & + & {
+      margin-top: 1.2rem;
+    }
+  }
+
+  &--agree {
+    margin-left: 1.2rem;
+
+    @include media-sm {
+      margin-left: 0;
+    }
+  }
+
+  .mat-icon {
+    width: 2rem;
+    height: 2rem;
+
+    margin-right: 0.8rem;
+
+    font-size: 2rem;
+  }
+}
+
+.pull-left {
+  margin-right: auto;
+}
+
+.pull-right {
+  margin-left: auto;
+}

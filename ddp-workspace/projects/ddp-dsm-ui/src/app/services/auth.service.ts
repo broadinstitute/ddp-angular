@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   throwError,
@@ -13,7 +13,6 @@ import { SessionService } from './session.service';
 import { RoleService } from './role.service';
 import { DSMService } from './dsm.service';
 import { ComponentService } from './component.service';
-import { Statics } from '../utils/statics';
 import { SessionMementoService } from 'ddp-sdk';
 
 // Avoid name not found warnings
@@ -26,12 +25,12 @@ export class Auth {
 
   public static AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
 
-  private readonly PICK_STUDY_CONST: string = 'pickStudy';
-
   private baseUrl = DDP_ENV.baseUrl;
   private authUrl = this.baseUrl + DSMService.UI + 'auth0';
 
   private eventsSource = new Subject<string>();
+
+  private realmListForPicklist = new BehaviorSubject<NameValue[]>([]);
 
   events = this.eventsSource.asObservable();
 
@@ -44,6 +43,8 @@ export class Auth {
   loadRealmsSubscription: Subscription;
 
   authError = new BehaviorSubject<string | null>(null);
+
+  selectedStudy = new BehaviorSubject<string>('');
 
   // Configure Auth0
   lock = new Auth0Lock(DDP_ENV.auth0ClientKey, DDP_ENV.auth0Domain, {
@@ -85,8 +86,10 @@ export class Auth {
     allowedConnections: [ 'google-oauth2' ]
   });
 
-  constructor(private router: Router, private http: HttpClient, private sessionService: SessionService, private role: RoleService,
-               private compService: ComponentService, private dsmService: DSMService, private dssSessionService: SessionMementoService ) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private http: HttpClient,
+              private sessionService: SessionService, private role: RoleService,
+              private compService: ComponentService, private dsmService: DSMService,
+              private dssSessionService: SessionMementoService ) {
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', (authResult: any) => {
       localStorage.setItem(Auth.AUTH0_TOKEN_NAME, authResult.idToken);
@@ -102,6 +105,15 @@ export class Auth {
     this.lockForDiscard.on('authenticated', (authResult: any) => {
       this.kitDiscard.next(authResult.idToken);
     });
+
+  }
+
+  public getSelectedStudy(): Observable<string> {
+    return this.selectedStudy.asObservable();
+  }
+
+  public set setSelectedStudy(study: string) {
+    this.selectedStudy.next(study);
   }
 
   public authenticated(): boolean {
@@ -111,17 +123,15 @@ export class Auth {
     return this.sessionService.isAuthenticated();
   }
 
+  public getRealmListObs(): Observable<NameValue[]> {
+    return this.realmListForPicklist.asObservable();
+  }
+
   public logout(): void {
     // Remove token from localStorage
-    // console.log("log out user and remove all items from local storage");
-    localStorage.removeItem(Auth.AUTH0_TOKEN_NAME);
-    localStorage.removeItem(SessionService.DSM_TOKEN_NAME);
-    localStorage.removeItem(Statics.PERMALINK);
-    localStorage.removeItem(ComponentService.MENU_SELECTED_REALM);
     localStorage.clear();
     this.sessionService.logout();
     this.selectedRealm = null;
-    this.router.navigate(['']);
   }
 
   public doLogin(authPayload: any): void {
@@ -190,20 +200,29 @@ export class Auth {
             this.realmList.push(NameValue.parse(val));
           });
 
-          const navigateUri = this.realmList.length > 1 ? this.PICK_STUDY_CONST : this.realmList[0].name;
+          this.realmListForPicklist.next(this.realmList);
 
-          navigateUri !== this.PICK_STUDY_CONST &&
-          localStorage.setItem(ComponentService.MENU_SELECTED_REALM, this.realmList[0].name);
+          const selectedRealm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
 
-          this.router.navigate([navigateUri]);
+          this.setSelectedStudy = this.realmList.find(realm => realm.name === selectedRealm)?.value;
         }
       );
     }
   }
 
-  selectRealm(newValue): void {
-    this.router.navigate([newValue]);
-    localStorage.setItem(ComponentService.MENU_SELECTED_REALM, newValue);
+  selectRealm(realm: string, page?: string): void {
+    const navigateUrl = `${realm}/${page || ''}`;
+
+    localStorage.setItem(ComponentService.MENU_SELECTED_REALM, realm);
+
+    page ? this.navigateWithParam(navigateUrl) : this.router.navigate([navigateUrl]);
+  }
+
+  private navigateWithParam(navigateUrl: string): void {
+    this.router.navigateByUrl('/', {skipLocationChange: true})
+      .then(() => {
+        this.router.navigate([navigateUrl]);
+      });
   }
 
   private setDssSession(dsmToken: string): void {

@@ -1,0 +1,26 @@
+<footer class="footer-container">
+  <section class="footer-container-nav">
+
+    <app-nav>
+      <span backToTop>
+        <mat-icon (click)="scrollTop()">arrow_upward</mat-icon>
+        <p (click)="scrollTop()">Back to top</p>
+      </span>
+    </app-nav>
+
+    <app-login-out></app-login-out>
+  </section>
+
+  <section class="footer-container-contact">
+    <section class="footer-container-contact-copyright">
+      <p>Copyright © {{currentYear}} Count Me In. All rights reserved.</p>
+    </section>
+    <section class="footer-container-contact-contactUs">
+        <ul>
+          <li>Contact Us</li>
+          <li>info@LMSproject.org</li>
+          <li>651-403-5556</li>
+        </ul>
+    </section>
+  </section>
+</footer>

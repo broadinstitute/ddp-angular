@@ -286,7 +286,9 @@ export class ParticipantListComponent implements OnInit {
           ['oD', 'Onc History'],
           ['t', 'Tissue'],
           ['k', 'Sample'],
-          ['a', 'Abstraction']]);
+          ['a', 'Abstraction'],
+          ['c', 'Cohort Tags']
+        ]);
         this.sourceColumns = {};
         this.selectedColumns = {};
         this.settings = {};

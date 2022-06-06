@@ -1,22 +1,11 @@
-import { Filter } from '../filter-column.model';
+import {Filter} from '../filter-column.model';
 
 export class ViewFilter {
   selected = false;
 
   constructor(public filters: Filter[], public filterName: string, public columns: {}, public shared: boolean,
                public deleted: string, public userId: string, public id: string, public parent: string, public icon: string,
-               public quickFilterName: string, public queryItems: string) {
-    this.filters = filters;
-    this.filterName = filterName;
-    this.columns = columns;
-    this.deleted = deleted;
-    this.shared = shared;
-    this.userId = userId;
-    this.id = id;
-    this.parent = parent;
-    this.quickFilterName = quickFilterName;
-    this.queryItems = queryItems;
-  }
+               public quickFilterName: string, public queryItems: string) {}
 
   public static parseFilter(json, allColumns: {}): ViewFilter {
     const columns = json.columns;
@@ -53,26 +42,33 @@ export class ViewFilter {
   }
 
   public copy(): ViewFilter {
-    const f: Filter[] = [];
-    for (const filter of this.filters) {
-      f.push(filter.copy());
-    }
-    const c = {};
-    for (const key of Object.keys(this.columns)) {
-      c[ key ] = [];
-      for (const column of this.columns[ key ]) {
-        c[ key ].push(column.copy());
+    const filtersProp: Filter[] = [];
+    if (this.filters?.length > 0) {
+      for (const filter of this.filters) {
+        filtersProp.push(filter.copy());
       }
     }
-    const v = new ViewFilter(
-      f, Object.assign('', this.filterName), c,
-      // TODO: check is it correct ? - new Boolean() ?
-      // eslint-disable-next-line
-      Object.assign(new Boolean(), this.shared), Object.assign(new Boolean(), this.deleted),
-      Object.assign('', this.userId), Object.assign('', this.id), Object.assign('', this.parent),
-      Object.assign('', this.icon), Object.assign('', this.quickFilterName),
-      Object.assign('', this.queryItems)
+    const columnsProp = {};
+    for (const key of Object.keys(this.columns)) {
+      columnsProp[ key ] = [];
+      for (const column of this.columns[ key ]) {
+        columnsProp[ key ].push(column.copy());
+      }
+    }
+    const copiedProps: ViewFilter = Object.assign({}, this);
+
+    return new ViewFilter(
+      filtersProp.length > 0 ? filtersProp : null,
+      copiedProps.filterName,
+      columnsProp,
+      copiedProps.shared,
+      copiedProps.deleted,
+      copiedProps.userId,
+      copiedProps.id,
+      copiedProps.parent,
+      copiedProps.icon,
+      copiedProps.quickFilterName,
+      copiedProps.queryItems
     );
-    return v;
   }
 }

@@ -65,8 +65,9 @@ toolkitConfig.mailingListDialogUrl = AppRoutes.MailingList;
 toolkitConfig.phone = '651-229-3480';
 toolkitConfig.infoEmail = 'info@braintumorproject.org';
 toolkitConfig.dataEmail = 'data@braintumorproject.org';
-toolkitConfig.twitterAccountId = 'BrainTumorProj';
-toolkitConfig.facebookGroupId = 'braintumorproject';
+toolkitConfig.twitterAccountId = 'count_me_in';
+toolkitConfig.facebookGroupId = 'joincountmein';
+toolkitConfig.instagramId = 'countmein';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org/';
 
 export const sdkConfig = new ConfigurationService();

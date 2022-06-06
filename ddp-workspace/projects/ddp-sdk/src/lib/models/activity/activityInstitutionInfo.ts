@@ -4,5 +4,7 @@ export class ActivityInstitutionInfo {
         public institutionName: string = '',
         public city: string = '',
         public state: string = '',
-        public guid: string = '') { }
+        public guid: string = '',
+        public country: string = ''
+    ) {}
 }

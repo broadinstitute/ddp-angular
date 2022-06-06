@@ -1,0 +1,114 @@
+@import '../../../../../ddp-pancan/src/styles/variables.scss';
+
+.main {
+  width: 100%;
+}
+
+.headerPlace {
+  height: 160px;
+  background-color: #C59CE4;
+  width: 100%;
+}
+
+.headerText {
+  height: 58px;
+  color: #000000;
+  font-family: "Untitled Sans", sans-serif;
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 58px;
+  text-align: center;
+  padding-top: 54px;
+  cursor: default;
+  margin: 0 auto 5.625rem;
+  text-align: center;
+  padding: 3.2rem 0;
+  background-color: $accent-lms-color !important;
+  font-family: "Untitled-Sans-Light";
+  font-size: 3rem;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 58px;
+}
+
+.purposePlace {
+  height: 324px;
+  background-color: #F1E4FB;
+  width: 100%;
+  text-align: -webkit-center;
+  margin-bottom: 44px;
+}
+
+.the-purpose-of-this {
+  height: 120px;
+  width: 720px;
+  color: #000000;
+  font-family: "Untitled Sans", sans-serif;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 30px;
+  text-align: left;
+  margin: 48px 0 40px 0;
+}
+
+.downloadPdf {
+  cursor: pointer;
+  height: 56px;
+  width: 600px;
+  border-radius: 4px;
+  background-color: #9953CE;
+  border: none;
+}
+
+
+.downloadPdf:active {
+  background-color: #9953ce96;
+}
+
+.downloadTitle {
+  color: #FFFFFF;
+  font-family: "Untitled Sans", sans-serif;
+  font-size: 22px;
+  letter-spacing: -0.01px;
+  line-height: 24px;
+}
+
+.paragraphsList {
+  width: 720px;
+  color: #000000;
+  font-family: "Untitled Sans", sans-serif;
+  letter-spacing: 0;
+  line-height: 30px;
+  padding-bottom: 30px;
+}
+
+.paragraph {
+  margin-bottom: 20px;
+
+  .paragraphTitle {
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  .paragraphText {
+    color: #000000;
+    font-family: "Untitled Sans", sans-serif;
+    letter-spacing: 0;
+    line-height: 30px;
+    font-weight: normal;
+    font-size: 19px;
+  }
+
+  .paragraphText1Highlighted {
+    color: #C59CE4;
+    font-size: 19px;
+    text-decoration: underline;
+  }
+
+  .partOne {
+    margin-bottom: 20px;
+  }
+}
+
+
