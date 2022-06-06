@@ -1,27 +1,27 @@
-import { Component, Input, ViewChild } from '@angular/core';
-import { FieldSettings } from '../field-settings/field-settings.model';
-import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
-import { Participant } from '../participant-list/participant-list.model';
-import { Tissue } from './tissue.model';
-import { RoleService } from '../services/role.service';
-import { DSMService } from '../services/dsm.service';
-import { ComponentService } from '../services/component.service';
-import { Lookup } from '../lookup/lookup.model';
-import { Statics } from '../utils/statics';
-import { Auth } from '../services/auth.service';
-import { Router } from '@angular/router';
-import { NameValue } from '../utils/name-value.model';
-import { PatchUtil } from '../utils/patch.model';
-import { ModalComponent } from '../modal/modal.component';
+import {Component, Input, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
+import {FieldSettings} from '../field-settings/field-settings.model';
+import {Lookup} from '../lookup/lookup.model';
+import {ModalComponent} from '../modal/modal.component';
+import {OncHistoryDetail} from '../onc-history-detail/onc-history-detail.model';
+import {Participant} from '../participant-list/participant-list.model';
+import {Auth} from '../services/auth.service';
+import {ComponentService} from '../services/component.service';
+import {DSMService} from '../services/dsm.service';
+import {RoleService} from '../services/role.service';
+import {NameValue} from '../utils/name-value.model';
+import {PatchUtil} from '../utils/patch.model';
+import {Statics} from '../utils/statics';
 import {TissueSmId} from './sm-id.model';
+import {Tissue} from './tissue.model';
 
-@Component({
+@Component( {
   selector: 'app-tissue',
   templateUrl: './tissue.component.html',
-  styleUrls: [ './tissue.component.css' ],
-})
+  styleUrls: [ './tissue.component.css' ]
+} )
 export class TissueComponent {
-  @ViewChild('collaboratorSampleId') collaboratorSampleIdInputField;
+  @ViewChild( 'collaboratorSampleId' ) collaboratorSampleIdInputField;
   @ViewChild( ModalComponent )
   public SMIDModal: ModalComponent;
 
@@ -43,7 +43,7 @@ export class TissueComponent {
   selectedSmIds = 0;
   smIdDuplicate = {};
 
-  constructor(private role: RoleService, private dsmService: DSMService, private compService: ComponentService, private router: Router) {
+  constructor( private role: RoleService, private dsmService: DSMService, private compService: ComponentService, private router: Router ) {
     this.smIdDuplicate[ this.uss ] = new Set();
     this.smIdDuplicate[ this.he ] = new Set();
     this.smIdDuplicate[ this.scrolls ] = new Set();
@@ -53,49 +53,53 @@ export class TissueComponent {
     return this.compService;
   }
 
-  public setTissueSite(object: Lookup | string): void {
+  public setTissueSite( object: Lookup | string ): void {
     if (object != null) {
       this.tissue.tissueSite = object instanceof Lookup ? object.field1.value : object;
-      this.valueChanged(this.tissue.tissueSite, 'tissueSite');
+      this.valueChanged( this.tissue.tissueSite, 'tissueSite' );
     }
   }
 
-  onAdditionalColChange(evt: any, colName: string): void {
+  onAdditionalColChange( evt: any, colName: string ): void {
     let v;
     if (typeof evt === 'string') {
       v = evt;
-    } else {
+    }
+    else {
       if (evt.srcElement != null && typeof evt.srcElement.value === 'string') {
         v = evt.srcElement.value;
-      } else if (evt.value != null) {
+      }
+      else if (evt.value != null) {
         v = evt.value;
-      } else if (evt.checked != null) {
+      }
+      else if (evt.checked != null) {
         v = evt.checked;
       }
     }
     if (v !== null) {
       if (this.tissue.additionalValuesJson != null) {
-        this.tissue.additionalValuesJson[colName] = v;
-      } else {
+        this.tissue.additionalValuesJson[ colName ] = v;
+      }
+      else {
         const addArray = {};
-        addArray[colName] = v;
+        addArray[ colName ] = v;
         this.tissue.additionalValuesJson = addArray;
       }
-      this.valueChanged(this.tissue.additionalValuesJson, 'additionalValuesJson');
+      this.valueChanged( this.tissue.additionalValuesJson, 'additionalValuesJson' );
     }
   }
 
   // display additional value
-  getAdditionalValue(colName: string): string {
+  getAdditionalValue( colName: string ): string {
     if (this.tissue.additionalValuesJson != null) {
-      if (this.tissue.additionalValuesJson[colName] != null) {
-        return this.tissue.additionalValuesJson[colName];
+      if (this.tissue.additionalValuesJson[ colName ] != null) {
+        return this.tissue.additionalValuesJson[ colName ];
       }
     }
     return null;
   }
 
-  valueChanged(value: any, parameterName: string, pName?: string, pId?, alias?, smId?, smIdArray?, index?, value2?, parameter2?): void {
+  valueChanged( value: any, parameterName: string, pName?: string, pId?, alias?, smId?, smIdArray?, index?, value2?, parameter2? ): void {
     let v;
     let parentName = 'oncHistoryDetailId';
     if (pName) {
@@ -117,15 +121,19 @@ export class TissueComponent {
       id = null;
     }
     if (parameterName === 'additionalValuesJson') {
-      v = JSON.stringify(value);
-    } else if (typeof value === 'string') {
+      v = JSON.stringify( value );
+    }
+    else if (typeof value === 'string') {
       v = value;
-    } else {
+    }
+    else {
       if (value.srcElement != null && typeof value.srcElement.value === 'string') {
         v = value.srcElement.value;
-      } else if (value.value != null) {
+      }
+      else if (value.value != null) {
         v = value.value;
-      } else if (value.checked != null) {
+      }
+      else if (value.checked != null) {
         v = value.checked;
       }
     }
@@ -154,83 +162,105 @@ export class TissueComponent {
         nameValues.push( nameValueForType );
         nameValues.push( nameValueForValue );
       }
-      const patch1 = new PatchUtil(id, this.role.userMail(),
+      const patch1 = new PatchUtil( id, this.role.userMail(),
         {
           name: parameterName,
-          value: v,
+          value: v
         }, nameValues, parentName, parentId, tAlias, null,
-        localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.participant.participant.ddpParticipantId
+        localStorage.getItem( ComponentService.MENU_SELECTED_REALM ), this.participant.participant.ddpParticipantId
       );
       const patch = patch1.getPatch();
       this.patchFinished = false;
-      this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
+      this.dsmService.patchParticipantRecord( JSON.stringify( patch ) ).subscribe( { // need to subscribe, otherwise it will not send!
         next: data => {
-          if ( data && this.tissue.tissueId == null ) {
-            this.tissue.tissueId = data['tissueId'];
+          if (data && this.tissue.tissueId == null) {
+            this.tissue.tissueId = data[ 'tissueId' ];
             this.patchFinished = true;
             this.currentPatchField = null;
             this.dup = false;
-            if ( data instanceof Array ) {
-              data.forEach((val) => {
-                const nameValue = NameValue.parse(val);
-                this.oncHistoryDetail[nameValue.name] = nameValue.value;
-              });
+            if (data instanceof Array) {
+              data.forEach( ( val ) => {
+                const nameValue = NameValue.parse( val );
+                this.oncHistoryDetail[ nameValue.name ] = nameValue.value;
+              } );
             }
-          // } else if (result.code === 500 && result.body != null) {
-          //   this.dup = true;
-          //   if (tAlias === 'sm') {
-          //     if (smIdArray && index && smId) {
-          //       smIdArray[ index ].smIdPk = smId;//for new sm ids
-          //     }
-          //     this.smIdDuplicate[ this.currentSMIDField ].add(this.createDuplicateIndex( index ) );
-          //   }
-          // } else if (result.code === 200) {
-          //   if (result.body != null && result.body !== '') {
-          //     const jsonData: any | any[] = JSON.parse( result.body );
-          //     if (tAlias === 'sm') {
-          //       if (jsonData.smId) {
-          //         smId = jsonData.smId;
-          //         if (smIdArray && index) {
-          //           smIdArray[ index ].smIdPk = smId;
-          //         }
-          //
-          //       }
-          //       this.smIdDuplicate[ this.currentSMIDField ].delete( this.createDuplicateIndex (index));
-          //       this.patchFinished = true;
-          //       this.currentPatchField = null;
-          //       this.dup = false;
-          //       return smId;
-          //     }
-          //     if (jsonData instanceof Array) {
-          //       jsonData.forEach( ( val ) => {
-          //         const nameValue = NameValue.parse( val );
-          //         if (nameValue.name && nameValue.name.indexOf( '.' ) !== -1) {
-          //           nameValue.name = nameValue.name.substring( nameValue.name.indexOf( '.' ) + 1 );
-          //         }
-          //         this.oncHistoryDetail[ nameValue.name ] = nameValue.value;
-          //       } );
-          //     }
-          //   }
-          //   this.patchFinished = true;
-          //   this.currentPatchField = null;
-          //   this.dup = false;
+            // } else if (result.code === 500 && result.body != null) {
+            //   this.dup = true;
+            //   if (tAlias === 'sm') {
+            //     if (smIdArray && index && smId) {
+            //       smIdArray[ index ].smIdPk = smId;//for new sm ids
+            //     }
+            //     this.smIdDuplicate[ this.currentSMIDField ].add(this.createDuplicateIndex( index ) );
+            //   }
+            // } else if (result.code === 200) {
+            //   if (result.body != null && result.body !== '') {
+            //     const jsonData: any | any[] = JSON.parse( result.body );
+            //     if (tAlias === 'sm') {
+            //       if (jsonData.smId) {
+            //         smId = jsonData.smId;
+            //         if (smIdArray && index) {
+            //           smIdArray[ index ].smIdPk = smId;
+            //         }
+            //
+            //       }
+            //       this.smIdDuplicate[ this.currentSMIDField ].delete( this.createDuplicateIndex (index));
+            //       this.patchFinished = true;
+            //       this.currentPatchField = null;
+            //       this.dup = false;
+            //       return smId;
+            //     }
+            //     if (jsonData instanceof Array) {
+            //       jsonData.forEach( ( val ) => {
+            //         const nameValue = NameValue.parse( val );
+            //         if (nameValue.name && nameValue.name.indexOf( '.' ) !== -1) {
+            //           nameValue.name = nameValue.name.substring( nameValue.name.indexOf( '.' ) + 1 );
+            //         }
+            //         this.oncHistoryDetail[ nameValue.name ] = nameValue.value;
+            //       } );
+            //     }
+            //   }
+            //   this.patchFinished = true;
+            //   this.currentPatchField = null;
+            //   this.dup = false;
           }
-          if (data['smIdPk']) {
-            smIdArray[index].smIdPk = data['smIdPk'];
+          if (data[ 'smIdPk' ]) {
+            smIdArray[ index ].smIdPk = data[ 'smIdPk' ];
           }
         },
         error: err => {
           this.dup = true;
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.router.navigate([ Statics.HOME_URL ]);
+            this.router.navigate( [ Statics.HOME_URL ] );
           }
-        },
-      });
+        }
+      } );
     }
   }
 
   deleteTissue(): void {
-    this.tissue.deleted = true;
+//    this.tissue.deleted = true;
+    const realm: string = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
+    const patch1 = new PatchUtil( this.tissue.tissueId, this.role.userMail(),
+      {
+        name: 'deleted',
+        value: true
+      }, null, 'oncHistoryDetailId', this.tissue.oncHistoryDetailId, Statics.TISSUE_ALIAS,
+      null, realm, this.participant.participant.ddpParticipantId );
+    const patch = patch1.getPatch();
+    this.patchFinished = false;
+    this.dsmService.patchParticipantRecord( JSON.stringify( patch ) ).subscribe( {// need to subscribe, otherwise it will not send!
+        next: () => {
+          this.tissue.deleted = true;
+          this.patchFinished = true;
+          this.currentPatchField = null;
+        },
+        error: err => {
+          if (err._body === Auth.AUTHENTICATION_ERROR) {
+            this.router.navigate( [ Statics.HOME_URL ] );
+          }
+        }
+      }
+    );
   }
 
   public getStyleDisplay(): string {
@@ -239,25 +269,25 @@ export class TissueComponent {
 
   public checkCollaboratorId(): void {
     let jsonData: any[];
-    if (this.collaboratorS == null && (this.tissue.collaboratorSampleId == null || this.tissue.collaboratorSampleId === '')) {
+    if (this.collaboratorS == null && ( this.tissue.collaboratorSampleId == null || this.tissue.collaboratorSampleId === '' )) {
       this.dsmService.lookupCollaboratorId(
         'tCollab', this.participant.participant.ddpParticipantId,
-          this.participant.data.profile['hruid'], localStorage.getItem(ComponentService.MENU_SELECTED_REALM)
-        )
-        .subscribe({// need to subscribe, otherwise it will not send!
+        this.participant.data.profile[ 'hruid' ], localStorage.getItem( ComponentService.MENU_SELECTED_REALM )
+      )
+        .subscribe( {// need to subscribe, otherwise it will not send!
           next: data => {
             jsonData = data;
-            jsonData.forEach((val) => {
-              const con = Lookup.parse(val);
+            jsonData.forEach( ( val ) => {
+              const con = Lookup.parse( val );
               this.collaboratorS = con.field1.value + '_';
-            });
+            } );
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.router.navigate([Statics.HOME_URL]);
+              this.router.navigate( [ Statics.HOME_URL ] );
             }
-          },
-        });
+          }
+        } );
     }
   }
 
@@ -267,12 +297,12 @@ export class TissueComponent {
     this.collaboratorSampleIdInputField.nativeElement.focus();
   }
 
-  isPatchedCurrently(field: string): boolean {
+  isPatchedCurrently( field: string ): boolean {
     return this.currentPatchField === field;
   }
 
-  currentField(field: string): void {
-    if (field != null || (field == null && this.patchFinished)) {
+  currentField( field: string ): void {
+    if (field != null || ( field == null && this.patchFinished )) {
       this.currentPatchField = field;
     }
   }
@@ -370,7 +400,7 @@ export class TissueComponent {
   deleteSMID( array: TissueSmId[], i: number ): void {
     array[ i ].deleted = true;
     if (array[ i ].smIdPk) {
-      this.changeSmId('1', 'deleted', array[ i ].smIdPk, array[ i ].smIdType, array, i );
+      this.changeSmId( '1', 'deleted', array[ i ].smIdPk, array[ i ].smIdType, array, i );
     }
     if (this.smIdDuplicate[ this.currentSMIDField ].has( this.createDuplicateIndex( i ) )) {
       this.smIdDuplicate[ this.currentSMIDField ].delete( this.createDuplicateIndex( i ) );
@@ -429,7 +459,7 @@ export class TissueComponent {
         this.tissue.ussSMId = new Array<TissueSmId>();
       }
       return ( this.tissue.ussCount < this.tissue.ussSMId.length &&
-        !this.smIdDuplicate[ this.uss ].has( this.createDuplicateIndex(index, name) )
+        !this.smIdDuplicate[ this.uss ].has( this.createDuplicateIndex( index, name ) )
       );
     }
     else if (name === this.scrolls) {
@@ -437,7 +467,7 @@ export class TissueComponent {
         this.tissue.scrollSMId = new Array<TissueSmId>();
       }
       return ( this.tissue.scrollsCount < this.tissue.scrollSMId.length &&
-        !this.smIdDuplicate[ this.scrolls ].has( this.createDuplicateIndex(index, name)  )
+        !this.smIdDuplicate[ this.scrolls ].has( this.createDuplicateIndex( index, name ) )
       );
     }
     else if (name === this.he) {
@@ -445,24 +475,24 @@ export class TissueComponent {
         this.tissue.HESMId = new Array<TissueSmId>();
       }
       return ( this.tissue.hECount < this.tissue.HESMId.length &&
-        !this.smIdDuplicate[ this.he ].has( this.createDuplicateIndex(index, name)  )
+        !this.smIdDuplicate[ this.he ].has( this.createDuplicateIndex( index, name ) )
       );
     }
   }
 
-  isDuplicate( currentSMIDField: string,  index: number ): boolean {
+  isDuplicate( currentSMIDField: string, index: number ): boolean {
     return ( this.smIdDuplicate[ currentSMIDField ].has( this.createDuplicateIndex( index, currentSMIDField ) ) );
   }
 
   createDuplicateIndex( i: number, name?: string ): string {
-    if(!name) {
+    if (!name) {
       name = this.currentSMIDField;
     }
     return name + i;
   }
 
-  canChangeThis(i: number, name: string): boolean {
-    const index = this.createDuplicateIndex(i, name);
-    return this.editable && (this.smIdDuplicate[name].size === 0 || this.smIdDuplicate[name].has(index));
+  canChangeThis( i: number, name: string ): boolean {
+    const index = this.createDuplicateIndex( i, name );
+    return this.editable && ( this.smIdDuplicate[ name ].size === 0 || this.smIdDuplicate[ name ].has( index ) );
   }
 }
