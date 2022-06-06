@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import { SessionMementoService } from 'ddp-sdk';
 import { Route } from '../../constants/Route';
 import { CommunicationService } from 'toolkit';
 
@@ -10,13 +11,19 @@ import { CommunicationService } from 'toolkit';
 
 export class NavComponent {
 
-  constructor(private communicationService: CommunicationService,) {
+  constructor(private communicationService: CommunicationService,
+              private session: SessionMementoService,) {
   }
 
 
   readonly Route = Route;
 
+
   public openJoinMailingList(): void {
     this.communicationService.openJoinDialog();
+  }
+
+  public get isAuthenticated(): boolean {
+    return this.session.isAuthenticatedSession();
   }
 }
