@@ -103,24 +103,10 @@
       <div class="partners">
         <div class="partnersPhotos">
           <div>
-            <img class="partnersPhoto" src="assets/images/nophoto.png" alt="">
+            <img class="partnersPhoto" src="assets/images/LMSDR.png" alt="">
           </div>
           <div>
-            <img class="partnersPhoto" src="assets/images/nophoto.png" alt="">
-          </div>
-          <div>
-            <img class="partnersPhoto" src="assets/images/nophoto.png" alt="">
-          </div>
-        </div>
-        <div class="partnersPhotos">
-          <div>
-            <img class="partnersPhoto" src="assets/images/nophoto.png" alt="">
-          </div>
-          <div>
-            <img class="partnersPhoto" src="assets/images/nophoto.png" alt="">
-          </div>
-          <div>
-            <img class="partnersPhoto" src="assets/images/nophoto.png" alt="">
+            <img class="partnersPhoto" src="assets/images/NLMSF.png" alt="">
           </div>
         </div>
       </div>
@@ -155,7 +141,7 @@
       <div class="socialMediaTitle" [innerHTML]="'home.stayInformed.socialMediaTitles' | translate"></div>
       <div class="signUpText" [innerHTML]="'home.stayInformed.signUpText' | translate"></div>
       <div style="display: flex ; padding: 75px 0">
-        <button class="stayInformedButton">
+        <button class="stayInformedButton" (click)="openJoinMailingList()">
           <div class="stayInformedButtonText" [innerHTML]="'home.stayInformed.buttonText' | translate"></div>
         </button>
       </div>

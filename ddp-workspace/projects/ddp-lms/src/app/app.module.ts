@@ -66,12 +66,14 @@ toolkitConfig.dashboardUrl = Route.Dashboard;
 toolkitConfig.doneUrl = Route.AgeUpThankYouProxy;
 toolkitConfig.errorUrl = Route.Error;
 toolkitConfig.phone = 'TBD';
-toolkitConfig.infoEmail = 'TBD';
-toolkitConfig.twitterAccountId = 'TBD';
-toolkitConfig.facebookGroupId = 'TBD';
+toolkitConfig.infoEmail = 'info@lmsproject.org';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org';
 toolkitConfig.useMultiParticipantDashboard = true;
 toolkitConfig.dashboardDisplayedColumns = ['name', 'summary', 'status', 'actions'];
+toolkitConfig.mailingListDialogUrl = 'updates';
+toolkitConfig.twitterAccountId = 'count_me_in';
+toolkitConfig.facebookGroupId = 'joincountmein';
+toolkitConfig.instagramId = 'countmein';
 
 const translateFactory =
   (

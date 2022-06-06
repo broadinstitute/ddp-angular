@@ -1,6 +1,8 @@
-import {Component, Input} from '@angular/core';
+import {Component, Inject, Input} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {AnalyticsEventCategories, AnalyticsEventsService} from 'ddp-sdk';
+import {CommunicationService, ToolkitConfigurationService} from "toolkit";
+import { Route } from '../../constants/Route'
 
 
 @Component({
@@ -18,13 +20,21 @@ export class HomeComponent {
   constructor(
     private dialog: MatDialog,
     private analytics: AnalyticsEventsService,
+    @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService,
+    private communicationService: CommunicationService,
   ) {
-    this.twitterUrl = `https://twitter.com/count_me_in`;
-    this.facebookUrl = `https://www.facebook.com/joincountmein`;
-    this.instagramUrl = `https://www.instagram.com/countmein`;
+    this.twitterUrl = `https://twitter.com/${this.toolkitConfiguration.twitterAccountId}`;
+    this.facebookUrl = `https://www.facebook.com/${this.toolkitConfiguration.facebookGroupId}`;
+    this.instagramUrl = `https://www.instagram.com/${this.toolkitConfiguration.instagramId}`;
   }
 
   public sendSocialMediaAnalytics(event: string): void {
     this.analytics.emitCustomEvent(AnalyticsEventCategories.Social, event);
+  }
+
+  readonly Route = Route;
+
+  public openJoinMailingList(): void {
+    this.communicationService.openJoinDialog();
   }
 }
