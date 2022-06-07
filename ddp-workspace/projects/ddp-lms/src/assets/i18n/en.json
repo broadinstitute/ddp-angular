@@ -247,19 +247,19 @@
         "Text": "Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
         "Fields": {
           "FirstName": {
-            "Placeholder": "First Name *",
+            "Placeholder": "First Name",
             "Error": "First Name is required"
           },
           "LastName": {
-            "Placeholder": "Last Name *",
+            "Placeholder": "Last Name",
             "Error": "Last Name is required"
           },
           "Email": {
-            "Placeholder": "Email Address *",
+            "Placeholder": "Email Address",
             "Error": "Please enter a valid Email Address"
           },
           "ConfirmEmail": {
-            "Placeholder": "Email Confirmation (Reenter Email) *",
+            "Placeholder": "Email Confirmation (Reenter Email)",
             "Error": "Please enter a valid Email Address"
           }
         },
@@ -905,14 +905,14 @@
       }
     ],
     "paragraph6Title": "Partners",
-    "paragraph6BottomText": "For more information on how to become a partner for the Leiomyosarcoma Project, contact the team at <u><a>info@LMSproject.org.</a><u>",
+    "paragraph6BottomText": "For more information on how to become a partner for the Leiomyosarcoma Project, contact the team at  <a href='mailto:info@LMSproject.org'>info@LMSproject.org</a>",
     "stayInformed": {
       "socialMediaTitles": "Stay informed",
       "signUpText": "Sign up for our mailing list or follow us on social media.",
       "buttonText": "Join Mailing List"
     },
     "participation": {
-      "participationSectionTitle": "Please join us in saying<br>Count Me In!\"\n",
+      "participationSectionTitle": "Please join us in saying<br>\"\nCount Me In!\"\n",
       "text": "With your help, the leiomyosarcoma community can be the driving force behind transformative research.",
       "btntext": "Count Me In"
     }
