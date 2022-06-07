@@ -62,6 +62,8 @@
 
     ::ng-deep iframe[title="reCAPTCHA"] {
         margin-top: 35px!important;
+        @media (max-width: 600px) {
+            margin-top: 0!important;
+        }
     }
-;
 }

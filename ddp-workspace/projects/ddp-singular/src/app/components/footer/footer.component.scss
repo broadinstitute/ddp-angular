@@ -17,6 +17,7 @@
   &-contacts {
     font-size: 16px;
     margin-top: 30px;
+    width: 100vw;
   }
 
   & .container {
@@ -57,6 +58,11 @@
   &-social {
     margin: 40px 0;
     display: flex;
+    width: 100vw;
+    word-break: break-all;
+      @media (max-width: 700px) {
+          flex-wrap: wrap;
+      }
     &-item {
       width: 50px;
       height: 50px;
@@ -64,6 +70,11 @@
       position: relative;
       border-radius: 100px;
       border: 2px solid map-get($colors, 'footer-social-border');
+
+      @media (max-width: 700px) {
+          margin-top: 10px;
+      }
+
       & img {
         filter: invert(1);
         position: absolute;
@@ -88,6 +99,8 @@
   &-copyright {
     font-size: 16px;
     opacity: .7;
+    width: 100vw;
+    word-break: break-all;
     @include media-md {
       margin-bottom: 30px;
     }
