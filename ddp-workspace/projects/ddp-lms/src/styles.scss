@@ -167,6 +167,14 @@ ddp-language-selector {
     margin-right: 20px;
 }
 
+.button_primary {
+  background-color: #9953CE;
+  border: 4px #9953CE;
+  &:hover {
+    background-color: rgba(153, 83, 206, 0.89) !important;
+  }
+}
+
 .NoMargin {
     margin: 0!important;
 }
