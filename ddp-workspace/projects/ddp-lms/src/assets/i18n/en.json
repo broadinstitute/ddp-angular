@@ -810,14 +810,14 @@
         "alt": "test2",
         "Text": "The Metastatic Prostate Cancer Project",
         "link": "https://www.cbioportal.org/study/summary?id=mpcproject_broad_2021"
-      },
-      {
-        "src": "assets/images/breast.png",
-        "alt": "test3",
-        "Text": "The Metastatic Breast Cancer Project",
-        "link": "https://www.cbioportal.org/study/summary?id=brca_mbcproject_wagle_2017"
       }
     ],
+    "ImageSection": [{
+      "src": "assets/images/breast.png",
+      "alt": "test3",
+      "Text": "The Metastatic Breast Cancer Project",
+      "link": "https://www.cbioportal.org/study/summary?id=brca_mbcproject_wagle_2017"
+    }],
     "TermSection": {
       "Paragraph5": "Understanding Terms Used in Cancer Research",
       "Text": "<span>&#8226;</span> For reference to common terms used in cancer care and research, the National Cancer Institute has developed a Dictionary of Cancer Terms, found <a href=\"https://www.cancer.gov/publications/dictionaries/cancer-terms/\" target=\"_blank\">here.</a>"
