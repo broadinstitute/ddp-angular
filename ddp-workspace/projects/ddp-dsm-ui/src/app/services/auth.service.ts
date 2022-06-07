@@ -13,7 +13,6 @@ import { SessionService } from './session.service';
 import { RoleService } from './role.service';
 import { DSMService } from './dsm.service';
 import { ComponentService } from './component.service';
-import { SessionMementoService } from 'ddp-sdk';
 
 // Avoid name not found warnings
 declare var Auth0Lock: any;
@@ -45,6 +44,8 @@ export class Auth {
   authError = new BehaviorSubject<string | null>(null);
 
   selectedStudy = new BehaviorSubject<string>('');
+
+  dsmToken = new BehaviorSubject(null);
 
   // Configure Auth0
   lock = new Auth0Lock(DDP_ENV.auth0ClientKey, DDP_ENV.auth0Domain, {
@@ -89,7 +90,7 @@ export class Auth {
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private http: HttpClient,
               private sessionService: SessionService, private role: RoleService,
               private compService: ComponentService, private dsmService: DSMService,
-              private dssSessionService: SessionMementoService ) {
+               ) {
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', (authResult: any) => {
       localStorage.setItem(Auth.AUTH0_TOKEN_NAME, authResult.idToken);
@@ -148,7 +149,7 @@ export class Auth {
 
         this.sessionService.setDSMToken(dsmToken);
         this.role.setRoles(dsmToken);
-        this.setDssSession(dsmToken);
+        this.dsmToken.next(dsmToken);
 
         this.realmList = [];
         this.getRealmList();
@@ -225,12 +226,4 @@ export class Auth {
       });
   }
 
-  private setDssSession(dsmToken: string): void {
-    const accessToken = null;
-    const userGuid = null;
-    const locale = 'en';
-    const expiresAtInSeconds: number = +this.sessionService.getTokenExpiration();
-    // set DSS Session partially
-    this.dssSessionService.setSession(accessToken, dsmToken, userGuid, locale, expiresAtInSeconds);
-  }
 }
