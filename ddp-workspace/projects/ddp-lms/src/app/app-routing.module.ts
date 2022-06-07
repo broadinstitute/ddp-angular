@@ -8,7 +8,7 @@ import {
   ActivityRedesignedComponent,
   AgeUpThankYouComponent,
   DashboardRedesignedComponent,
-  ErrorRedesignedComponent,
+  ErrorRedesignedComponent, HeaderActionGuard,
   LoginLandingRedesignedComponent,
   PasswordRedesignedComponent,
   RedirectToAuth0LoginRedesignedComponent,
@@ -132,6 +132,12 @@ const routes: Routes = [
     path: Route.SessionExpired,
     component: SessionExpiredRedesignedComponent,
     canActivate: [IrbGuard, BrowserGuard],
+  },
+  {
+    path: 'join-list',
+    component: HomeComponent,
+    canActivate: [HeaderActionGuard],
+    data: { openJoinDialog: true }
   },
   {
     path: '**',

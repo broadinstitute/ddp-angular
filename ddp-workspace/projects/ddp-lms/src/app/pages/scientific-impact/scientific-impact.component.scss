@@ -4,19 +4,24 @@
   text-align: left;
 
   .title {
-    margin: 0 auto 5.625rem;
     text-align: center;
     padding: 3.2rem 0;
     background-color: $accent-lms-color;
+    height: 58px;
+    color: #000000;
+    font-size: 48px;
+    font-weight: 300;
+    letter-spacing: 0;
+    line-height: 58px;
   }
 
   .scientific-title {
-    margin: 0 auto 5.625rem;
     text-align: center;
     padding: 3.2rem 0;
     background-color: $accent-lms-color;
-    font-family: "Untitled-Sans-Light";
-    font-size: 3rem;
+    height: 58px;
+    color: #000000;
+    font-size: 48px;
     font-weight: 300;
     letter-spacing: 0;
     line-height: 58px;
@@ -29,29 +34,96 @@
   }
 
   &:nth-of-type(odd) {
-    padding-bottom: 7.94rem;
     flex-direction: row;
   }
 
 }
 
 .image_title {
-  margin: auto;
-  margin-left: 20px;
-  margin-right: 20px;
   display: flex;
+  padding-bottom: 50px;
+}
+
+.goalSection {
+    height: 528px;
+    width: 100%;
+    background-color: #4D345F;
+}
+
+.goalSectionTitle {
+  padding-top: 64px;
+  height: 58px;
+  color: #FFFFFF;
+  font-family: $primary-font-light;
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 58px;
+  text-align: center;
+}
+
+.goalSectionText {
+  padding-top: 40px;
+  height: 281px;
+  color: #FFFFFF;
+  font-family: $primary-font-light;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 30px;
+}
+
+.elementsOfData {
+  background-color: #DCC1F0;
+}
+
+.elementsOfDataTitle {
+  margin-top: 64px;
+  margin-bottom: 40px;
+  color: #000000;
+  font-family: $primary-font-light;
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 58px;
+  text-align: center;
+}
+
+.elementsOfDataText {
+  color: #000000;
+  font-family: $primary-font-light;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 30px;
+}
+
+.bulbIcon {
+  text-align: center;
+  margin-top: 64px;
+  margin-bottom: 40px;
+}
+
+.paragraph4Title{
+  margin-top: 64px;
+  margin-bottom: 40px;
+  color: #000000;
+  font-family: $primary-font-light;
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 58px;
+  text-align: center;
 }
 
 .section {
-  padding: 0 1.5rem 9.94rem 1.5rem;
-  display: flex;
+  padding: 0 1.5rem 0 1.5rem;
   flex-direction: row-reverse;
   justify-content: space-around;
   gap: 8rem;
+  display: flex;
 
   &:nth-of-type(odd) {
-    padding-bottom: 7.94rem;
     flex-direction: row;
+    padding-bottom: 7.94rem;
   }
 
   &__data {
@@ -114,6 +186,68 @@
   width:300px;
 }
 
+.terms {
+  background-color: #9953CE;
+}
+
+.termsHeader {
+  margin-top: 20px;
+
+  color: #FFFFFF;
+  font-family: $primary-font-light;
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 58px;
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+.termsText{
+  color: #FFFFFF;
+  font-family: $primary-font;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 30px;
+}
+
+.imgText {
+  color: #9953CE;
+  font-family: $primary-font;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 30px;
+  text-align: left;
+  display: flex;
+}
+
+.paragraph2Title {
+  margin-top: 64px;
+  color: #000000;
+  font-family: $primary-font;
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 58px;
+  text-align: center;
+}
+
+.images {
+  width: 270px;
+  height: 175px;
+  margin-right: 10px
+}
+
+.paragraph2Text {
+  margin-top: 40px;
+  color: #000000;
+  font-family: $primary-font;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 30px;
+}
+
 
 @media screen and (max-width: $tablet-breakpoint) {
   .scientific-title {
@@ -123,5 +257,11 @@
     &:nth-of-type(n) {
       flex-direction: column-reverse;
     }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .image_title {
+    flex-wrap: wrap;
   }
 }

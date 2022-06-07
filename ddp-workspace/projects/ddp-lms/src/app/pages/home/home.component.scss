@@ -1,0 +1,547 @@
+@import '../../../../../ddp-pancan/src/styles/variables.scss';
+
+.homePage {
+  display: flex;
+}
+
+.section {
+  width: 100%;
+}
+
+.paragraph1 {
+  display: flex;
+  width: 85%;
+  margin: 54px auto;
+}
+
+.paragraph1Header {
+  color: #000000;
+  font-family: $primary-font-light;
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 58px;
+  margin-bottom: 32px;
+}
+
+.paragraph1Text {
+  color: #000000;
+  font-family: $primary-font-light;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 30px;
+}
+
+.paragraph1Photo {
+  height: 385px;
+  width: 390px;
+}
+
+.buttons {
+  display: flex;
+  margin-top: 32px;
+}
+
+.countMeinBtn {
+  height: 56px;
+  width: 188px;
+  border-radius: 4px;
+  background-color: #a268ce;
+  border: none;
+  cursor: pointer;
+}
+
+.countMeinBtn:active {
+  background-color: #9953ce96;
+}
+
+.countMeinBtnText {
+  height: 27px;
+  width: 123px;
+  color: #FFFFFF;
+  font-family: $primary-font-light;
+  font-size: 22px;
+  letter-spacing: -0.01px;
+  line-height: 27px;
+  margin: auto;
+}
+
+.learMoreBtn {
+  height: 56px;
+  width: 188px;
+  border-radius: 4px;
+  margin-left: 16px;
+  cursor: pointer;
+}
+
+.learMoreBtn:active {
+  background-color: #ffffff;
+}
+
+.learMoreBtnText {
+  height: 27px;
+  width: 117px;
+  color: #000000;
+  font-family: $primary-font-light;
+  font-size: 22px;
+  letter-spacing: -0.01px;
+  line-height: 27px;
+  margin: auto;
+}
+
+.companyLogo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.logo {
+  height: 32.78px;
+  width: 129.25px;
+  margin: 0 40px;
+}
+
+.paragraph2 {
+  background-color: #402C4F;
+  text-align: center;
+}
+
+.paragraph2Headline {
+  padding-top: 104px;
+  color: #FFFFFF;
+  font-family: $primary-font-light;
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 58px;
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.paragraph2Text {
+  text-align: left;
+  margin: auto auto 38px auto;
+  width: 55%;
+  font-family: $primary-font-light;
+  color: #FFFFFF;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 30px;
+}
+
+.paragraph2button {
+  margin: auto auto 83px auto;
+  box-sizing: border-box;
+  height: 58px;
+  width: 274px;
+  border: 2px solid #9953CE;
+  border-radius: 4px;
+  background-color: #9953CE;
+  cursor: pointer;
+
+  &:active {
+    background-color: #9953ce96;
+  }
+}
+
+.paragraph2buttonText {
+  height: 27px;
+  width: 218px;
+  color: #FFFFFF;
+  font-family: $primary-font-light;
+  font-size: 22px;
+  letter-spacing: -0.01px;
+  line-height: 27px;
+  margin: auto;
+}
+
+.paragraph3 {
+  background-color: #C59CE4;
+}
+
+.paragraph3Title {
+  color: #000000;
+  font-family: $primary-font-light;
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 58px;
+  text-align: center;
+  margin: 0 auto 48px auto;
+  padding-top: 75px;
+}
+
+.paragraph3Images {
+  display: flex;
+  margin: auto;
+  width: 78%;
+  place-content: center;
+  justify-content: space-between;
+  padding-bottom: 54px;
+}
+
+
+.imgBackground {
+  height: 390px;
+  width: 234px;
+  opacity: 0.8;
+  border-radius: 10px;;
+  box-shadow: 0 2px 36px 3px rgba(0, 0, 0, 0.11);
+  background: linear-gradient(180deg, white 50%, #cacccb 50%);
+  margin-right: 15px;
+}
+
+.stepImages {
+  margin: 20px 0 60px 40px;
+  height: 123px;
+  width: 145.98px;
+}
+
+.stepTexts {
+  margin-left: 10px;
+}
+
+.clockImgAndText {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.imgText1 {
+  color: #000000;
+  font-family: $primary-font-light;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.07px;
+  line-height: 24px;
+  margin-bottom: 10px;
+}
+
+.clockIcon {
+  margin-right: 10px;
+  height: 22px;
+  width: 22px;
+}
+
+.imgText2 {
+  color: #000000;
+  font-family: $primary-font-light;
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: -0.1px;
+  line-height: 24px;
+}
+
+.imgText3 {
+  font-family: $primary-font-light;
+  color: #000000;
+  font-size: 24px;
+  letter-spacing: 0;
+  line-height: 28px;
+  font-weight: bold;
+}
+
+.paragraph3ButtonPlace {
+  text-align: center;
+  padding-bottom: 70px;
+}
+
+.paragraph3Button {
+  height: 70px;
+  width: 397px;
+  border-radius: 4px;
+  background-color: #4D345F;
+  cursor: pointer;
+
+  &:active {
+    background-color: #503a62;
+  }
+}
+
+.paragraph3ButtonText {
+  color: #FFFFFF;
+  font-family: $primary-font-light;
+  font-size: 24px;
+  letter-spacing: -0.01px;
+  line-height: 30px;
+}
+
+.paragraph4 {
+  background-color: #DCC1F0;
+}
+
+.paragraph4Title {
+  color: #000000;
+  font-family: $primary-font-light;
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 58px;
+  text-align: center;
+  margin: 0 auto 48px auto;
+  padding-top: 75px;
+}
+
+.paragraph4Images {
+  display: flex;
+  margin: auto;
+  width: 78%;
+  place-content: center;
+  justify-content: space-between;
+  padding-bottom: 54px;
+}
+
+.benefitTexts {
+  margin: 0 15px;
+}
+
+.paragraph5Title {
+  color: #000000;
+  font-family: $primary-font-light;
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 58px;
+  text-align: center;
+}
+
+.paragraph5Button {
+  width: 276px;
+  border: 2px solid #000000;
+  border-radius: 4px;
+  box-sizing: border-box;
+  height: 72px;
+  cursor: pointer;
+
+  &:active {
+    background-color: #ffffff;
+  }
+}
+
+.paragraph5ButtonText {
+  color: black;
+  height: 27px;
+  width: 218px;
+  font-family: $primary-font-light;
+  font-size: 22px;
+  letter-spacing: -0.01px;
+  line-height: 27px;
+  margin: auto;
+}
+
+.expandIcon {
+  align-self: center;
+  padding-right: 25px;
+}
+
+.paragraph5 {
+  margin: auto;
+  width: 70%;
+  padding-bottom: 46px;
+}
+
+.paragraph6Title {
+  color: #000000;
+  font-family: $primary-font-light;
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 58px;
+  text-align: center;
+  padding-bottom: 64px;
+}
+
+.partnersPhotos {
+  display: flex;
+  margin: auto;
+  max-width: 44%;
+}
+
+.partnersPhoto {
+  box-sizing: border-box;
+  height: 130px;
+  max-width: 255.84px;
+  border: 1px solid #979797;
+  background-color: #D8D8D8;
+  margin: 0 10px 15.5px 10px;
+}
+
+.paragraph6BottomText {
+  margin: 70px auto;
+  color: #000000;
+  font-family: $primary-font-light;
+  font-size: 24px;
+  letter-spacing: -0.1px;
+  line-height: 34px;
+  text-align: center;
+  width: 60%;
+}
+
+.stayInformed {
+  background-color: #9953CE;
+}
+
+.social-media {
+  &__links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 150px;
+    margin: 0 auto 0.8rem;
+  }
+
+  &__link {
+    flex: 0 1 50px;
+    text-align: center;
+  }
+}
+
+.title {
+  margin: 0;
+  padding-bottom: 1.13rem;
+}
+
+.join-btn {
+  margin-top: 2.5rem;
+}
+
+.icons {
+  padding-top: 65px;
+}
+
+.socialMediaTitle {
+  color: #FFFFFF;
+  font-family: $primary-font-light;
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 58px;
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.signUpText {
+  color: #FFFFFF;
+  font-family: $primary-font-light;
+  font-size: 24px;
+  letter-spacing: -0.1px;
+  line-height: 34px;
+  text-align: center;
+}
+
+.stayInformedButton {
+  height: 60px;
+  width: 220px;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  border: none;
+  margin: auto;
+  cursor: pointer;
+
+  &:active {
+    background-color: rgba(255, 255, 255, 0.91);
+  }
+}
+
+.stayInformedButtonText {
+  color: #000000;
+  font-family: $primary-font-light;
+  font-size: 24px;
+  letter-spacing: -0.01px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.join-cmi-logo {
+  height: 274px;
+  max-width: 502px;
+  margin: 100px auto 24px auto;
+  display: flex;
+}
+
+.participationSectionTitle {
+  color: #000000;
+  font-family: $primary-font-light;
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 58px;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.participationSectionText {
+  color: #000000;
+  font-family: $primary-font-light;
+  font-size: 24px;
+  letter-spacing: 0;
+  line-height: 36px;
+  text-align: center;
+  max-width: 670px;
+  margin: 0 auto 23px auto;
+  padding-bottom: 23px;
+}
+
+.participationButtonPlace {
+  height: 56px;
+  width: 252px;
+  margin: auto;
+  padding-bottom: 75px;
+}
+
+.participationButton {
+  box-sizing: border-box;
+  height: 58px;
+  width: 274px;
+  border: 2px solid #9953CE;
+  border-radius: 4px;
+  background-color: #9953CE;
+  cursor: pointer;
+
+  &:active {
+    background-color: #9953ce96;
+  }
+}
+
+.participationButtonText {
+  color: #FFFFFF;
+  font-family: $primary-font-light;
+  font-size: 22px;
+  letter-spacing: -0.01px;
+  line-height: 27px;
+  text-align: center;
+}
+
+
+@media screen and (max-width: $tablet-breakpoint) {
+  .social-media {
+    flex-direction: column;
+    gap: 3rem;
+    align-items: start;
+
+    &__links {
+      flex-basis: 50px;
+      gap: 3rem;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .paragraph3Images {
+    flex-wrap: wrap;
+  }
+  .partnersPhotos {
+    display: block;
+    margin: auto;
+    text-align: center;
+  }
+  .imgBackground {
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .paragraph4Images {
+    flex-wrap: wrap;
+  }
+}
+
