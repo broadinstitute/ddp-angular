@@ -40,14 +40,13 @@
 }
 
 .image_title {
-  display: flex;
   padding-bottom: 50px;
 }
 
 .goalSection {
-    height: 528px;
-    width: 100%;
-    background-color: #4D345F;
+  height: 528px;
+  width: 100%;
+  background-color: #4D345F;
 }
 
 .goalSectionTitle {
@@ -102,7 +101,7 @@
   margin-bottom: 40px;
 }
 
-.paragraph4Title{
+.paragraph4Title {
   margin-top: 64px;
   margin-bottom: 40px;
   color: #000000;
@@ -149,7 +148,7 @@
     line-height: 3.625rem;
     font-weight: normal;
     overflow: scroll;
-    white-space:nowrap;
+    white-space: nowrap;
   }
 
   &__text {
@@ -179,11 +178,11 @@
 
 .column {
   overflow: scroll;
-  white-space:nowrap;
+  white-space: nowrap;
 }
 
 .image_item {
-  width:300px;
+  width: 300px;
 }
 
 .terms {
@@ -203,7 +202,7 @@
   padding-bottom: 40px;
 }
 
-.termsText{
+.termsText {
   color: #FFFFFF;
   font-family: $primary-font;
   font-size: 20px;
@@ -233,9 +232,13 @@
   text-align: center;
 }
 
+.imgPlace {
+  display: flex;
+}
+
 .images {
-  width: 270px;
-  height: 175px;
+  height: 280px;
+  width: 400px;
   margin-right: 10px
 }
 
@@ -262,6 +265,9 @@
 
 @media screen and (max-width: 800px) {
   .image_title {
+    flex-wrap: wrap;
+  }
+  .imgPlace {
     flex-wrap: wrap;
   }
 }
