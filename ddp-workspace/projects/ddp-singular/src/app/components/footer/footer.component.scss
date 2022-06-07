@@ -17,7 +17,6 @@
   &-contacts {
     font-size: 16px;
     margin-top: 30px;
-    width: 100vw;
   }
 
   & .container {
@@ -42,6 +41,9 @@
 
   &-meta {
     max-width: 30%;
+      @media (max-width: 700px) {
+          max-width: 80%;
+      }
   }
 
   &-menu {
@@ -58,10 +60,9 @@
   &-social {
     margin: 40px 0;
     display: flex;
-    width: 100vw;
-    word-break: break-all;
       @media (max-width: 700px) {
           flex-wrap: wrap;
+          word-break: break-all;
       }
     &-item {
       width: 50px;
@@ -99,10 +100,9 @@
   &-copyright {
     font-size: 16px;
     opacity: .7;
-    width: 100vw;
-    word-break: break-all;
     @include media-md {
       margin-bottom: 30px;
+      word-break: break-all;
     }
   }
 
