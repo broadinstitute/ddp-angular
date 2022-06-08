@@ -259,13 +259,13 @@
             "Error": "Please enter a valid Email Address"
           },
           "ConfirmEmail": {
-            "Placeholder": "Email Confirmation (Reenter Email)",
+            "Placeholder": "Email Confirmation",
             "Error": "Please enter a valid Email Address"
           }
         },
         "CancelButton": "Cancel",
         "SubmitButton": "Join",
-        "Required": "* Required field",
+        "Required": "",
         "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
         "LoadingError": "We're sorry, but an error has occurred."
       },
