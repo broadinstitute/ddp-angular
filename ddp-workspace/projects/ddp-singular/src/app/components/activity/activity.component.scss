@@ -121,7 +121,7 @@
   box-shadow: 0 1px 10px 1px rgb(0 0 0 / 20%);
   padding: 40px 50px;
   position: relative;
-  word-break: break-all;
+  overflow-wrap: break-word;
 }
 
 .sticky-hint-text {
