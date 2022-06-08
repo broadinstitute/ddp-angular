@@ -12,7 +12,7 @@ references:
       - *npm_cache_key
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-    "basil dsm-ui osteo brain angio mbc testboston mpc prion atcp rarex rgp esc cgc circadia pancan singular brugada lms fon"
+    "basil dsm-ui osteo brain angio mbc testboston mpc prion atcp rarex rgp esc cgc circadia pancan singular brugada lms fon study-builder-ui"
   study_guids: &study_guids
     "basil NA CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc circadia cmi-pancan singular brugada cmi-lms fon"
 
@@ -154,7 +154,14 @@ commands:
           name: <<parameters.study_key>> generate config files and copy pepperConfig.js
           command: |
             set -u
-            if [[ "<<parameters.study_key>>" != "dsm-ui" ]]; then
+            if [[ "<<parameters.study_key>>" == "dsm-ui" ]]; then
+              cd ddp-workspace
+              CONFIG_DIR="${OUTPUT_DIR}/assets/js"
+              mkdir -p $CONFIG_DIR
+              gcloud --project="broad-ddp-${ENVIRONMENT}" secrets versions access latest --secret="study-manager-ui-config" > "${CONFIG_DIR}/ddp_config.js"
+            elif [[ "<<parameters.study_key>>" == "study-builder-ui" ]]; then
+             echo "no need to create a config file for 'study-builder-ui'"
+            else
               ./build-study.sh v1 $ENVIRONMENT . <<parameters.study_key>> "$STUDY_GUID" --config
               cd ddp-workspace
               CONFIG_DIR="${OUTPUT_DIR}/assets/config"
@@ -166,11 +173,6 @@ commands:
               if [[ "<<parameters.study_key>>" == "atcp" ]]; then
                 cp "${ANGULAR_PROJECT_DIR_PATH}/output-config/app.yaml" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
               fi
-            else
-              cd ddp-workspace
-              CONFIG_DIR="${OUTPUT_DIR}/assets/js"
-              mkdir -p $CONFIG_DIR
-              gcloud --project="broad-ddp-${ENVIRONMENT}" secrets versions access latest --secret="study-manager-ui-config" > "${CONFIG_DIR}/ddp_config.js"
             fi
           environment: #Setting this ENV variable prevents launching a new Docker within build-study-sh script
             USE_DOCKER: false
