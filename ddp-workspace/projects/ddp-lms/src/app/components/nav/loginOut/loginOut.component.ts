@@ -26,7 +26,7 @@ import { Route } from '../../../constants/Route';
         <a class="link" [routerLink]="Route.Dashboard">
           {{ 'Toolkit.Dashboard.Title' | translate }}
         </a>
-    </li>
+      </li>
     </ul>
   </div>
   `,
@@ -55,8 +55,7 @@ import { Route } from '../../../constants/Route';
     .cmiBtn:hover {
       background-color: #7f30b8;
       border-color: #7f30b8;
-    }
-    
+    } 
     a { color: white; }
   `]
 })
