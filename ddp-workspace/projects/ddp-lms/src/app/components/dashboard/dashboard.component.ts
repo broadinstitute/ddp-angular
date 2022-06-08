@@ -26,9 +26,4 @@ export class DashboardComponent extends DashboardRedesignedComponent {
     );
   }
 
-  get isLovedOne(): Observable<boolean> {
-    return this.userActivities$.pipe(
-      map(activities => activities.some(({ activityCode }) => activityCode === ActivityCode.LovedOne))
-    );
-  }
 }

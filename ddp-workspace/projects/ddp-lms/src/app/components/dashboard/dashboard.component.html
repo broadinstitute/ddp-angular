@@ -12,15 +12,6 @@
                     </ng-container>
                     <ng-template #regularDashboard><span translate>Toolkit.Dashboard.Title</span></ng-template>
                 </h1>
-                <div *ngIf="toolkitConfig.useMultiParticipantDashboard">
-                    <button mat-stroked-button
-                            class="add-participant-button button_small"
-                            [disabled]="addParticipantButtonDisabled"
-                            (click)="addParticipant()">
-                        <mat-icon>add</mat-icon>
-                        {{'Toolkit.Dashboard.AddParticipant' | translate}}
-                    </button>
-                </div>
                 <ng-container *ngIf="!toolkitConfig.useMultiParticipantDashboard && toolkitConfig.allowEditUserProfile">
                     <ng-container *ngTemplateOutlet="editUserButton"></ng-container>
                 </ng-container>
@@ -32,18 +23,15 @@
         </div>
     </section>
 
-    <div *ngIf="isParent | async; else childOrLovedOne">
+    <div *ngIf="isParent | async; else child">
         <p class="intro__dash" [innerHTML]="'DashboardIntro.isParent' | translate"></p>
     </div>
 
-    <ng-template #childOrLovedOne>
-        <div *ngIf="isChild | async; else lovedOne">
+    <ng-template #child>
+        <div *ngIf="isChild | async;">
             <p class="intro__dash" [innerHTML]="'DashboardIntro.isChild' | translate"></p>
         </div>
 
-        <ng-template #lovedOne>
-            <p *ngIf="isLovedOne | async;" class="intro__dash" [innerHTML]="'DashboardIntro.isLovedOne' | translate"></p>
-        </ng-template>
     </ng-template>
 
     <section *ngIf="isAdmin && !subjectInfoExists; else dashboard" class="section">
