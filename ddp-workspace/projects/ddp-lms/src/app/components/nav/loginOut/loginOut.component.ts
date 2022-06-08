@@ -21,11 +21,19 @@ import { Route } from '../../../constants/Route';
           {{ 'Header.Links.CountMeIn' | translate }}
         </a>
       </li>
+      <li class="button button_primary cmiBtn" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active"
+      *ngIf="isAuthenticated">
+        <a class="link" [routerLink]="Route.Dashboard">
+          {{ 'Toolkit.Dashboard.Title' | translate }}
+        </a>
+      </li>
     </ul>
   </div>
   `,
   styles: [`
-
+    a {
+      color: white;
+    }
     li {
       list-style-type: none;
     }

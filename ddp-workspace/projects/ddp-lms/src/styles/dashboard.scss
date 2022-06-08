@@ -1,134 +1,97 @@
-@import 'variables';
+@use '@angular/material' as mat;
+@import "../theme.scss";
 
-$border-color: #E2E2E2;
+.dashboard-title-section {
+  padding: 2rem 0 0 0;
+  background-color: mat.get-color-from-palette($app-primary, 350);
+}
 
-toolkit-dashboard-redesigned .main {
-    background-color: $section-grey-background-color;
+.dashboard-section {
+  margin-bottom: 10rem;
+}
 
-    .dashboard-title-section {
-        padding: 2rem 0 0;
-    }
+.dashboard-content {
+  margin: 2rem 0 0 0;
+}
 
-    .dashboard-section {
-        margin: 1rem 0 7rem;
-    }
-
-    .dashboard-panel-header {
-        background-color: #D9DDE5;
-        height: 75px !important;
-        border-radius: 0;
-
-        &:hover,
-        &:focus {
-            background-color: #c8ccd7 !important;
-        }
-    }
-
-    .dashboard-panel-header,
-    .dashboard-panel-header .mat-button {
-        font-family: $primary-font-medium;
-        font-size: 1.125rem;
-    }
-
-    .dashboard-panel-description {
-        color: black;
-    }
-
-    .dashboard-panel {
-        border-radius: 0 !important;
-        margin: 5px 0;
-        box-shadow: none;
-    }
-
-    .mat-expansion-panel-body {
-        padding-bottom: 0;
-        border: 1px solid $border-color;
-    }
-
-    .dashboard-activity-button {
-        font-size: 1rem;
-        line-height: 1.5rem;
-        font-family: inherit;
-        background: none;
-        border: none;
-        padding: 0;
-        cursor: pointer;
-        text-decoration: none;
-        text-align: left;
-        color: inherit;
-    }
-
-    .dashboard-status-container__img {
-        height: 18px;
-        width: 18px;
-        padding-right: 7px;
-    }
-
-    .ddp-dashboard {
-        .mat-header-cell,
-        .mat-cell {
-            font-size: 1rem !important;
-            font-family: $primary-font;
-            padding-right: 40px;
-        }
-
-        .mat-cell {
-            padding-top: 20px;
-            padding-bottom: 20px;
-        }
-
-        .mat-header-cell {
-            color: #46454D;
-        }
-
-        .mat-header-row,
-        .mat-row {
-            border-color: $border-color;
-        }
-
-        .mat-column-name {
-            padding-left: 30px;
-        }
-
-        .mat-row:last-of-type {
-            border-bottom: 0;
-        }
-    }
-
-    .Button--cell {
-        width: 7rem;
-        padding: 0.625rem 1rem;
-    }
-
-    .add-participant-button {
-        color: $primary-color;
-        border-color: $primary-color;
-        border-radius: 18px;
-        font-family: $primary-font-medium;
-    }
-
-    .edit-user-button {
-        margin-right: 10px;
-    }
+.dashboard-content_table {
+  margin: 2rem 0;
 }
 
 .infobox_dashboard {
-    padding: 1.5rem 2rem;
-    position: relative;
+  padding: 1.5rem 2rem;
+  position: relative;
 
-    .close-button {
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
+  .close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }
 
-.ddp-user-preferences-subgroup-title {
-    font-size: 1.2rem;
+.infobox-text_small {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: mat.get-color-from-palette($app-primary, 200);
 }
 
-@media only screen and(max-width: 650px) {
-    .mat-cell:first-of-type {
-        padding-left: initial !important;
+.ddp-dashboard {
+
+  .mat-cell,
+  .mat-header-cell,
+  .dashboard-mobile-label {
+    font-size: 1.125rem !important;
+    line-height: 1.75rem !important;
+  }
+
+  .mat-column-name {
+    flex: 0 0 20%;
+  }
+
+  .mat-column-status {
+    flex: 0 0 15%;
+  }
+
+  .dashboard-mobile-label {
+    color: rgba(0, 0, 0, 0.54);
+  }
+
+  .mat-row {
+    align-items: flex-start !important;
+  }
+
+  .dashboard-status-container__img {
+    height: 25px !important;
+    width: 25px !important;
+    padding: 0 8px 0 0;
+  }
+
+  .Link {
+    color: mat.get-color-from-palette($app-primary, 200);
+    white-space: normal;
+  }
+
+  @media(max-width: 650px) {
+    .mat-column-actions {
+      .dashboard-mobile-label {
+        line-height: 1.125rem !important;
+      }
     }
+  }
+}
+
+.dashboard-activity-button {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-family: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: left;
+}
+
+.dashboard-activity-button:hover {
+  color: mat.get-color-from-palette($app-primary, 650) !important;
 }

@@ -25,6 +25,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import {NavComponent} from './components/nav/nav.component';
 import {loginOutComponent} from './components/nav/loginOut/loginOut.component';
+import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {UserActivitiesComponent} from './components/user-activities/user-activities.component';
+import {MatTableModule} from '@angular/material/table';
+import {FlexModule} from '@angular/flex-layout';
 
 declare const DDP_ENV: Record<string, any>;
 
@@ -118,7 +122,9 @@ const translateFactory =
     FooterComponent,
     FaqSectionComponent,
     NavComponent,
-    loginOutComponent
+    loginOutComponent,
+    DashboardComponent,
+    UserActivitiesComponent
   ],
   imports: [
     BrowserModule,
@@ -128,7 +134,9 @@ const translateFactory =
     MatExpansionModule,
     MatIconModule,
     MatButtonModule,
-    MatDividerModule
+    MatDividerModule,
+    MatTableModule,
+    FlexModule,
   ],
   providers: [
     {

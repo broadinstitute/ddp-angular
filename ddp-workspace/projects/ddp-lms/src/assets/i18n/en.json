@@ -11,14 +11,32 @@
       },
       "HeaderMenu": {
         "AriaLabel": "Header menu button"
-      }
+      },
+      "MailingList": {
+        "Title": "Join Mailing List",
+        "AriaLabel": "Join Mailing List button"
+      },
+      "CountMeIn": "Count Me In"
     },
     "Alts": {
       "Twitter": "Twitter logo",
       "Facebook": "Facebook logo",
       "Instagram": "Instagram logo",
       "JoinCMI": "Join Count Me In logo"
+    },
+    "Navigation": {
+      "Home": "Home",
+      "FAQ": "FAQs",
+      "AboutUs": "About Us",
+      "Physicians": "For Your Physician",
+      "Dashboard": "Dashboard",
+      "Participation": "Participation",
+      "ScientificImpact": "Scientific Impact"
     }
+  },
+  "DashboardIntro" : {
+    "isParent": "Thank you for being part of the Leiomyosarcoma project. This page contains links to your forms and surveys that are part of the study. Over time, we may add additional surveys for your consideration. The information you provide will help drive our understanding of cancer.<br><br>If at any time you have questions or would like to share updated information, please contact the study team at <a class=\"Link\" href=\"mailto:info@LMSproject.org\">info@LMSproject.org</a> or call <a class=\"Link\" href='tel:651-403-5556'>651-403-5556. </a>",
+    "isChild" : "Thank you for being part of the Leiomyosarcoma project. This page contains links to your child’s forms and surveys that are part of the study. Over time, we may add additional surveys for your consideration. The information you provide will help drive our understanding of cancer.<br><br>If at any time you have questions or would like to share updated information, please contact the study team at <a class=\"Link\" href=\"mailto:info@LMSproject.org\">info@LMSproject.org</a> or call <a class=\"Link\" href='tel:651-403-5556'>651-403-5556</a>."
   },
   "App": {
     "FAQ": {
@@ -247,25 +265,25 @@
         "Text": "Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
         "Fields": {
           "FirstName": {
-            "Placeholder": "First Name *",
+            "Placeholder": "First Name",
             "Error": "First Name is required"
           },
           "LastName": {
-            "Placeholder": "Last Name *",
+            "Placeholder": "Last Name",
             "Error": "Last Name is required"
           },
           "Email": {
-            "Placeholder": "Email Address *",
+            "Placeholder": "Email Address",
             "Error": "Please enter a valid Email Address"
           },
           "ConfirmEmail": {
-            "Placeholder": "Email Confirmation (Reenter Email) *",
+            "Placeholder": "Email Confirmation",
             "Error": "Please enter a valid Email Address"
           }
         },
         "CancelButton": "Cancel",
         "SubmitButton": "Join",
-        "Required": "* Required field",
+        "Required": "",
         "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
         "LoadingError": "We're sorry, but an error has occurred."
       },
@@ -642,7 +660,7 @@
       "paragraphText8list4": "How can we develop better treatments for leiomyosarcoma?",
       "paragraphText8part3": "Despite the progress that has been made to begin to answer these questions, we remain far\nfrom the goal. To get there, the detailed genomic characterization of many thousands of\nclinically annotated cancer samples will be required.",
       "paragraphText8part4": "If you have any questions about this study, please reach out to us at ",
-      "paragraphText8part5": "or 651-403-5556.",
+      "paragraphText8part5": "<u><a href='mailto:info@LMSproject.org'>info@lmsproject.org</a></u> or <u><a href='tel:651-403-5556'>651-403-5556.</a></u>",
       "paragraphText8part6": "The Leiomyosarcoma project is part of Count Me In."
     }
   },
@@ -760,7 +778,7 @@
       },
       {
         "step": "Learn more about your normal DNA, if you choose",
-        "Text": "The OSproject is also partnering with Invitae in order to sequence and share information on germline DNA (or “normal” DNA) from saliva samples. During the project, participants will be able to decide if they’d like to provide an additional saliva sample to learn more about their/their child’s normal DNA and speak with a genetic counselor to understand these results. If a participant chooses not to participate in this process, their data will not be shared with Invitae. This process is not available for participants in Canada, as Invitae is not licensed to provide genetic counseling services there.",
+        "Text": "The LMS project is also partnering with Invitae in order to sequence and share information on germline DNA (or “normal” DNA) from saliva samples. During the project, participants will be able to decide if they’d like to provide an additional saliva sample to learn more about their/their child’s normal DNA and speak with a genetic counselor to understand these results. If a participant chooses not to participate in this process, their data will not be shared with Invitae. This process is not available for participants in Canada, as Invitae is not licensed to provide genetic counseling services there.",
         "ImageAlt": "Computer screen displaying online survey"
       }
     ]
@@ -796,7 +814,7 @@
     },
     "WDSection": {
       "Paragraph4": "What does a data release look like?",
-      "Text": "Below are links out to publicly available datasets from other Count Me In projects. This is what we’re working towards for the Leiomyosarcoma Project. If you have questions about our data release process, please email us at info@LMSproject.org"
+      "Text": "Below are links out to publicly available datasets from other Count Me In projects. This is what we’re working towards for the Leiomyosarcoma Project. If you have questions about our data release process, please email us at <u><a href='mailto:info@LMSproject.org'>info@LMSproject.org</a></u>"
     },
     "IMGSection": [
       {
@@ -905,16 +923,23 @@
       }
     ],
     "paragraph6Title": "Partners",
-    "paragraph6BottomText": "For more information on how to become a partner for the Leiomyosarcoma Project, contact the team at <u><a>info@LMSproject.org.</a><u>",
+    "paragraph6BottomText": "For more information on how to become a partner for the Leiomyosarcoma Project, contact the team at  <a href='mailto:info@LMSproject.org'>info@LMSproject.org</a>",
     "stayInformed": {
       "socialMediaTitles": "Stay informed",
       "signUpText": "Sign up for our mailing list or follow us on social media.",
       "buttonText": "Join Mailing List"
     },
     "participation": {
-      "participationSectionTitle": "Please join us in saying<br>Count Me In!\"\n",
+      "participationSectionTitle": "Please join us in saying<br>\"Count Me In!\"",
       "text": "With your help, the leiomyosarcoma community can be the driving force behind transformative research.",
       "btntext": "Count Me In"
     }
+  },
+  "WorkflowProgress": {
+    "AboutYou": "About You",
+    "Consent": "Consent Form",
+    "MedicalRelease": "Medical Release",
+    "Questionnaire": "Surveys",
+    "FamilyHistory": "Family History"
   }
 }
