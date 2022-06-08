@@ -24,7 +24,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { HowToParticipateComponent } from './pages/how-to-participate/how-to-participate.component';
 import { ScientificImpactComponent } from './pages/scientific-impact/scientific-impact.component';
 import { Route } from './constants/Route';
-import {DashboardComponent} from "./components/dashboard/dashboard.component";
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
