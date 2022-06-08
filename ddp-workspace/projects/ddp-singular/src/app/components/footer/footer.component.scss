@@ -17,7 +17,9 @@
   &-contacts {
     font-size: 16px;
     margin-top: 30px;
-    word-break: break-all;
+      @include media-sm {
+          overflow-wrap: break-word;
+      }
   }
 
   & .container {
@@ -49,6 +51,11 @@
 
   &-menu {
     flex: 1;
+    display: flex;
+    justify-content: flex-end;
+      @include media-md {
+          justify-content: flex-start;
+      }
 
     & a {
       font-family: Spartan-Bold, sans-serif;
@@ -63,7 +70,7 @@
     display: flex;
       @media (max-width: 700px) {
           flex-wrap: wrap;
-          word-break: break-all;
+          overflow-wrap: break-word;
       }
     &-item {
       width: 50px;
@@ -103,7 +110,9 @@
     opacity: .7;
     @include media-md {
       margin-bottom: 30px;
-      word-break: break-all;
+    }
+    @include media-sm {
+        overflow-wrap: break-word;
     }
   }
 
