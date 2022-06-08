@@ -136,7 +136,7 @@ export class ParticipantColumn {
   public static COHORT_TAG_NAME = new ParticipantColumn('Cohort Tag Name', 'cohortTagName', 'c', 'dsm');
 
   //FON
-  public static ACTIVITY_STATUS = new ParticipantColumn('Enrollmentt Status', 'activityStatus', 'data');
+  public static ACTIVITY_STATUS = new ParticipantColumn('Enrollment Status', 'activityStatus', 'data');
 
   constructor(public display: string, public name: string, public tableAlias?: string, public object?: string, public esData?: boolean) {
     this.display = display;

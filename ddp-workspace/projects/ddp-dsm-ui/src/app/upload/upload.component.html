@@ -129,14 +129,14 @@
         Participant already has a kit.
         <mat-checkbox color="primary" [checked]="duplicateParticipant.selected"
                      (change)="duplicateParticipant.selected = $event.checked" disableRipple>
-          {{duplicateParticipant.participantId}} {{duplicateParticipant.shortId}} {{duplicateParticipant.firstName}} {{duplicateParticipant.lastName}}
+          {{duplicateParticipant.shortId}} {{duplicateParticipant.firstName}} {{duplicateParticipant.lastName}}
         </mat-checkbox>
       </div>
       <div *ngFor="let duplicateParticipant of specialKits">
         {{specialMessage}}
         <mat-checkbox color="primary" [checked]="duplicateParticipant.selected"
                      (change)="duplicateParticipant.selected = $event.checked" disableRipple>
-          {{duplicateParticipant.participantId}} {{duplicateParticipant.shortId}} {{duplicateParticipant.firstName}} {{duplicateParticipant.lastName}}
+          {{duplicateParticipant.shortId}} {{duplicateParticipant.firstName}} {{duplicateParticipant.lastName}}
         </mat-checkbox>
       </div>
     </div>
