@@ -1,6 +1,7 @@
-import { AnalyticsEventCategories, AnalyticsEventsService, DdpModule } from 'ddp-sdk';
+import { AnalyticsEventsService, DdpModule } from 'ddp-sdk';
 import { ToolkitModule } from 'toolkit';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -40,6 +41,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ActivitySectionProgressBarComponent } from './components/activity-section-progress-bar/activity-section-progress-bar.component';
 import { ActivitySectionPageProgressComponent } from './components/activity-section-page-progress/activity-section-page-progress.component';
 
+
 declare const gtag: (...args: any[]) => void;
 
 @NgModule({
@@ -77,6 +79,7 @@ declare const gtag: (...args: any[]) => void;
     imports: [
         DdpModule,
         BrowserModule,
+        BrowserAnimationsModule,
         ToolkitModule,
         MaterialModule,
         RecaptchaModule,
