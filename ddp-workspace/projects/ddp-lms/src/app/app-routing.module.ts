@@ -7,7 +7,6 @@ import {
   AcceptAgeUpPageComponent,
   ActivityRedesignedComponent,
   AgeUpThankYouComponent,
-  DashboardRedesignedComponent,
   ErrorRedesignedComponent, HeaderActionGuard,
   LoginLandingRedesignedComponent,
   PasswordRedesignedComponent,
@@ -25,6 +24,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { HowToParticipateComponent } from './pages/how-to-participate/how-to-participate.component';
 import { ScientificImpactComponent } from './pages/scientific-impact/scientific-impact.component';
 import { Route } from './constants/Route';
+import {DashboardComponent} from "./components/dashboard/dashboard.component";
 
 const routes: Routes = [
   {
@@ -97,8 +97,12 @@ const routes: Routes = [
   },
   {
     path: Route.Dashboard,
-    component: DashboardRedesignedComponent,
-    canActivate: [IrbGuard, AuthGuard],
+    component: DashboardComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard
+    ]
   },
   {
     path: Route.Error,
