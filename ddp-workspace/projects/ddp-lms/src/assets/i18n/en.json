@@ -11,14 +11,32 @@
       },
       "HeaderMenu": {
         "AriaLabel": "Header menu button"
-      }
+      },
+      "MailingList": {
+        "Title": "Join Mailing List",
+        "AriaLabel": "Join Mailing List button"
+      },
+      "CountMeIn": "Count Me In"
     },
     "Alts": {
       "Twitter": "Twitter logo",
       "Facebook": "Facebook logo",
       "Instagram": "Instagram logo",
       "JoinCMI": "Join Count Me In logo"
+    },
+    "Navigation": {
+      "Home": "Home",
+      "FAQ": "FAQs",
+      "AboutUs": "About Us",
+      "Physicians": "For Your Physician",
+      "Dashboard": "Dashboard",
+      "Participation": "Participation",
+      "ScientificImpact": "Scientific Impact"
     }
+  },
+  "DashboardIntro" : {
+    "isParent": "Thank you for being part of the Leiomyosarcoma project. This page contains links to your forms and surveys that are part of the study. Over time, we may add additional surveys for your consideration. The information you provide will help drive our understanding of cancer.<br><br>If at any time you have questions or would like to share updated information, please contact the study team at <a class=\"Link\" href=\"mailto:info@LMSproject.org\">info@LMSproject.org</a> or call <a class=\"Link\" href='tel:651-403-5556'>651-403-5556. </a>",
+    "isChild" : "Thank you for being part of the Leiomyosarcoma project. This page contains links to your child’s forms and surveys that are part of the study. Over time, we may add additional surveys for your consideration. The information you provide will help drive our understanding of cancer.<br><br>If at any time you have questions or would like to share updated information, please contact the study team at <a class=\"Link\" href=\"mailto:info@LMSproject.org\">info@LMSproject.org</a> or call <a class=\"Link\" href='tel:651-403-5556'>651-403-5556</a>."
   },
   "App": {
     "FAQ": {
@@ -760,7 +778,7 @@
       },
       {
         "step": "Learn more about your normal DNA, if you choose",
-        "Text": "The OSproject is also partnering with Invitae in order to sequence and share information on germline DNA (or “normal” DNA) from saliva samples. During the project, participants will be able to decide if they’d like to provide an additional saliva sample to learn more about their/their child’s normal DNA and speak with a genetic counselor to understand these results. If a participant chooses not to participate in this process, their data will not be shared with Invitae. This process is not available for participants in Canada, as Invitae is not licensed to provide genetic counseling services there.",
+        "Text": "The LMS project is also partnering with Invitae in order to sequence and share information on germline DNA (or “normal” DNA) from saliva samples. During the project, participants will be able to decide if they’d like to provide an additional saliva sample to learn more about their/their child’s normal DNA and speak with a genetic counselor to understand these results. If a participant chooses not to participate in this process, their data will not be shared with Invitae. This process is not available for participants in Canada, as Invitae is not licensed to provide genetic counseling services there.",
         "ImageAlt": "Computer screen displaying online survey"
       }
     ]
@@ -916,5 +934,12 @@
       "text": "With your help, the leiomyosarcoma community can be the driving force behind transformative research.",
       "btntext": "Count Me In"
     }
+  },
+  "WorkflowProgress": {
+    "AboutYou": "About You",
+    "Consent": "Consent Form",
+    "MedicalRelease": "Medical Release",
+    "Questionnaire": "Surveys",
+    "FamilyHistory": "Family History"
   }
 }
