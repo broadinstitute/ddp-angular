@@ -21,7 +21,7 @@ import { Route } from '../../../constants/Route';
           {{ 'Header.Links.CountMeIn' | translate }}
         </a>
       </li>
-      <li class="button button_primary cmiBtn" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active" 
+      <li class="button button_primary cmiBtn" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active"
       *ngIf="isAuthenticated">
         <a class="link" [routerLink]="Route.Dashboard">
           {{ 'Toolkit.Dashboard.Title' | translate }}
@@ -31,8 +31,8 @@ import { Route } from '../../../constants/Route';
   </div>
   `,
   styles: [`
-    a { 
-      color: white; 
+    a {
+      color: white;
     }
     li {
       list-style-type: none;
@@ -57,7 +57,7 @@ import { Route } from '../../../constants/Route';
     .cmiBtn:hover {
       background-color: #7f30b8;
       border-color: #7f30b8;
-    } 
+    }
   `]
 })
 
