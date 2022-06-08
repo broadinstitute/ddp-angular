@@ -14,7 +14,7 @@ references:
   study_keys: &study_keys
     "basil dsm-ui osteo brain angio mbc testboston mpc prion atcp rarex rgp esc cgc circadia pancan singular brugada lms fon study-builder-ui"
   study_guids: &study_guids
-    "basil NA CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc circadia cmi-pancan singular brugada cmi-lms fon"
+    "basil NA CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc circadia cmi-pancan singular brugada cmi-lms fon NA"
 
 # Container for all the builds
 executors:
