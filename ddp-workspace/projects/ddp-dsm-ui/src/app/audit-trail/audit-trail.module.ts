@@ -1,17 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
-import { AuditTrailRoutingModule } from './audit-trail-routing.module';
-import { AuditTrailComponent } from './pages/audit-trail.component';
-
+import { AuditTrailRoutingModule } from "./audit-trail-routing.module";
+import { AuditTrailComponent } from "./pages/audit-trail.component";
+import { DropdownSelectComponent } from "./components/dropdown-select/dropdown-select.component";
+import { MatIconModule } from "@angular/material/icon";
 
 @NgModule({
-  declarations: [
-    AuditTrailComponent
-  ],
-  imports: [
-    CommonModule,
-    AuditTrailRoutingModule
-  ]
+  declarations: [AuditTrailComponent, DropdownSelectComponent],
+  imports: [CommonModule, AuditTrailRoutingModule, MatIconModule],
 })
-export class AuditTrailModule { }
+export class AuditTrailModule {}

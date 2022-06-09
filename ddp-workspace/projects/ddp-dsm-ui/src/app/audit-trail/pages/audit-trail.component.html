@@ -17,44 +17,60 @@
         (keyup)="subjectSearchText$.next($event.target.value)"
       />
     </div>
-    <div class="filter-group">
+    <div class="select-container">
       <span>Center</span>
-      <ng-container *ngFor="let item of centers$ | async">
-        <label>
-          {{ item.centerName }}
-          <input
-            type="checkbox"
-            [checked]="item.checked"
-            (click)="onFilterSelect(item.centerName)"
-          />
-        </label>
-      </ng-container>
+      <app-dropdown-select
+        [group]="centers$ | async"
+        dropdownTittle="Center"
+        (updatedGroups)="centers$.next($event)"
+      >
+      </app-dropdown-select>
     </div>
-    <div class="filter-group">
+    <div class="select-container">
       <span>Activity</span>
-      <ng-container *ngFor="let item of activities$ | async">
-        <label>
-          {{ item.activity }}
-          <input type="checkbox" [checked]="item.checked" 
-          (click)="onActivitySelect(item.activity)"/>
-        </label>
-      </ng-container>
+      <app-dropdown-select
+        [group]="activities$ | async"
+        dropdownTittle="Activities"
+        (updatedGroups)="activities$.next($event)"
+      >
+      </app-dropdown-select>
     </div>
     <div class="filter-group">
       <span>Date Range</span>
-      <input placeholder="From" />
-      <input placeholder="To" />
+      <div class="time-container">
+        <label>from</label>
+        <input
+          type="date"
+          [value]="fromDateSearch$ | async"
+          (change)="fromDateSearch$.next($event.target.value)"
+        />
+      </div>
+      <div class="time-container">
+        <label>to</label>
+        <input type="date" />
+      </div>
     </div>
     <div class="filter-group">
       <span>Time Range</span>
-      <input placeholder="From" />
-      <input placeholder="To" />
+      <div class="time-container">
+        <label>from</label>
+        <input type="time" 
+        [value]="fromTimeSearch$ | async"
+        (change)="fromTimeSearch$.next($event.target.value)"
+        />
+      </div>
+      <div class="time-container">
+        <label>to</label>
+        <input type="time" />
+      </div>
     </div>
   </div>
   <div class="audit-table">
     <div class="header-row">
       <div class="cell">Date & time</div>
-      <div class="cell">Operator Name</div>
+      <div class="cell sort" (click)="sortByOperator(response)">
+        Operator Name <mat-icon>south</mat-icon>
+      </div>
       <div class="cell">Operator ID#</div>
       <div class="cell">Center</div>
       <div class="cell">Activity</div>

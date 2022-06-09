@@ -1,0 +1,16 @@
+<div class="group-header" (click)="toggle()">
+  {{ dropdownTittle }}
+  <mat-icon aria-hidden="false"  >{{isToggled ?  "expand_less" : "expand_more" }}</mat-icon>
+
+</div>
+
+<div class="group-body" @inOut *ngIf="isToggled">
+  <ng-container *ngFor="let item of group">
+    <span (click)="onItemSelect(item.label)">
+      {{ item.label  }}
+      <mat-icon color="accent" aria-hidden="false">
+        {{ item.isChecked ? "check_box" : "check_box_outline_blank" }}
+      </mat-icon>
+    </span>
+  </ng-container>
+</div>
