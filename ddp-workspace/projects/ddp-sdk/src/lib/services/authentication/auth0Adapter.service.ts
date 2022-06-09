@@ -191,7 +191,7 @@ export class Auth0AdapterService implements OnDestroy {
             if (authResult && authResult.accessToken && authResult.idToken) {
                 this.windowRef.nativeWindow.location.hash = '';
                 this.setSession(authResult);
-                this.log.logEvent(`${this.LOG_SOURCE}.handleAuthentication`, authResult);
+                this.log.logEvent(`${this.LOG_SOURCE}.handleAuthentication succeeded`);
                 this.log.logToCloud(`${this.LOG_SOURCE}.handleAuthentication, authResult: ${JSON.stringify(authResult)}`)
                     .pipe(take(1)).subscribe();
                 this.analytics.emitCustomEvent(AnalyticsEventCategories.Authentication, AnalyticsEventActions.Login);
@@ -236,7 +236,7 @@ export class Auth0AdapterService implements OnDestroy {
             if (authResult && authResult.accessToken && authResult.idToken) {
                 this.windowRef.nativeWindow.location.hash = '';
                 this.setSession(authResult, true);
-                this.log.logEvent(`${this.LOG_SOURCE}.handleAdminAuthentication`, authResult);
+                this.log.logEvent(`${this.LOG_SOURCE}.handleAdminAuthentication succeeded`);
                 this.analytics.emitCustomEvent(AnalyticsEventCategories.Authentication, AnalyticsEventActions.Login);
             } else if (err) {
                 this.log.logError(`${this.LOG_SOURCE}.handleAdminAuthentication`, err);
@@ -250,7 +250,6 @@ export class Auth0AdapterService implements OnDestroy {
 
     public setSession(authResult, isAdmin: boolean = false): void {
         const decodedJwt = this.jwtHelper.decodeToken(authResult.idToken);
-        this.log.logEvent(this.LOG_SOURCE, `authResult: ${decodedJwt}`);
         this.log.logToCloud(`${this.LOG_SOURCE} authResult: ${JSON.stringify(decodedJwt)}`).pipe(take(1)).subscribe();
         const userGuid = decodedJwt['https://datadonationplatform.org/uid'];
 
@@ -274,8 +273,7 @@ export class Auth0AdapterService implements OnDestroy {
             authResult.participantGuid,
             isAdmin);
         this.isAdminSession = isAdmin;
-        this.log.logEvent(this.LOG_SOURCE,
-            `Successfully updated session token: ${JSON.stringify(decodedJwt)}`);
+        this.log.logEvent(this.LOG_SOURCE, `Successfully updated session token`);
         this.log.logToCloud(`${this.LOG_SOURCE} Successfully updated session token: ${JSON.stringify(decodedJwt)}`)
             .pipe(take(1)).subscribe();
     }
