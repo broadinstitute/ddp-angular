@@ -78,14 +78,6 @@
                                     <ng-container *ngTemplateOutlet="editUserButton; context: { participant: participant }">
                                     </ng-container>
                                 </ng-container>
-                                <ng-container *ngIf="participantUserGuidToPanelIsOpen.get(participant.userGuid); else show">
-                                    {{'Toolkit.Dashboard.HidePanel' | translate}}
-                                    <mat-icon>expand_less</mat-icon>
-                                </ng-container>
-                                <ng-template #show>
-                                    {{'Toolkit.Dashboard.ShowPanel' | translate}}
-                                    <mat-icon>expand_more</mat-icon>
-                                </ng-template>
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <ng-container *ngTemplateOutlet="activitiesTable; context: {
