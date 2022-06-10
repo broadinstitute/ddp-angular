@@ -86,56 +86,32 @@ export function translateFactory(translate: TranslateService,
 
 // FON
 const guards = [StudyGuard, CheckAuthGuard, StudyActGuard];
-const material = [
-  MatExpansionModule,
-  MatDividerModule,
-  MatListModule,
-  MatIconModule,
-  MatPaginatorModule,
-  MatProgressSpinnerModule,
-  MatProgressBarModule,
-  MatButtonModule
-];
+
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavigationComponent,
-    FonComponent,
-    ActivityComponent,
-    ParticipantsListComponent,
-    ActivitiesComponent,
-    HomeComponent
-  ],
+  declarations: [AppComponent, ActivityComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     DdpModule,
     HttpClientModule,
     AppRoutingModule,
-    ...material
   ],
   providers: [
     ...guards,
     AgentService,
-    {provide: ErrorHandler, useClass: StackdriverErrorReporterDsmService},
+    { provide: ErrorHandler, useClass: StackdriverErrorReporterDsmService },
     {
       provide: 'ddp.config',
-      useValue: sdkConfig
+      useValue: sdkConfig,
     },
     {
       provide: APP_INITIALIZER,
       useFactory: translateFactory,
-      deps: [
-        TranslateService,
-        Injector,
-        LoggingService,
-        LanguageService
-      ],
-      multi: true
-    }
+      deps: [TranslateService, Injector, LoggingService, LanguageService],
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
