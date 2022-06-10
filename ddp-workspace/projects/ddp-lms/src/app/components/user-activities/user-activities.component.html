@@ -21,10 +21,10 @@
 
         <!-- Summary Column -->
         <ng-container matColumnDef="summary">
-            <mat-header-cell class="padding-5" *matHeaderCellDef [innerHTML]="'SDK.UserActivities.Summary' | translate">
+            <mat-header-cell class="padding-10" *matHeaderCellDef [innerHTML]="'SDK.UserActivities.Summary' | translate">
             </mat-header-cell>
             <mat-cell *matCellDef="let element"
-                      class="padding-5"
+                      class="padding-10"
                       [attr.data-ddp-test]="'activitySummary::' + element.instanceGuid" >
                 <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.Summary' | translate"></span>
                 {{ element.activitySummary }}
