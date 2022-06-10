@@ -1,7 +1,6 @@
-:host-context(app-home) {
-  grid-area: otherPage
+:host {
+  max-height: calc(100vh - 50px);
 }
-
 section {
   padding: 20px 0;
 }
@@ -28,8 +27,7 @@ section {
 
 .dashboard {
   .placeholder {
-    width: 1200px;
-    height: 300px;
+    width: 100%;
     margin: 20px 0;
     box-shadow: 0.5px 0.5px 2px 0.5px lightgrey;
     display: flex;

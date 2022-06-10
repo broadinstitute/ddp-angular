@@ -1,7 +1,7 @@
 $hoverColor: #7154FF;
 
 .sidebar {
-  height: calc(100vh - 100px); // 100px - main header height
+  height: 100vh; // 100px - main header height
 }
 
 .navigation {
@@ -12,18 +12,14 @@ $hoverColor: #7154FF;
   height: 100%;
   padding: 20px 0;
 }
-
+.botNavigation,
 .topNavigation {
-  padding: 60px 0 0;
-}
-
-.botNavigation {
-  padding: 0;
+  padding: 0px;
 }
 
 .topNavigation, .botNavigation {
   margin: 0;
-
+  
   .activeNav {
     color: $hoverColor;
     border-bottom-color: $hoverColor!important;
@@ -34,7 +30,7 @@ $hoverColor: #7154FF;
   li {
     list-style-type: none;
     font-size: 18px;
-    margin: 0 50px 16px;
+    padding: 10px;
     border-bottom: 2px solid transparent;
     display: flex;
 
