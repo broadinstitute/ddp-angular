@@ -12,6 +12,7 @@ const routes: Routes = [
     path: '',
     component: FonComponent,
     children: [
+      { path: '', redirectTo: 'home' },
       { path: 'home', component: HomeComponent },
       { path: 'patients', component: ParticipantsListComponent },
       { path: 'participantList', component: ParticipantsListComponent },

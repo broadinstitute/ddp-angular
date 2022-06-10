@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { bottomNavItems, topNavItems } from './navItems';
 import { Auth } from '../../../services/auth.service';
@@ -13,27 +8,16 @@ import { SessionService } from '../../../services/session.service';
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavigationComponent implements OnInit {
+export class NavigationComponent {
   readonly topNavigation = topNavItems;
   readonly botNavigation = bottomNavItems(this.getUserName());
 
-  constructor(
-    private auth: Auth,
-    private sessionService: SessionService,
-    private changeDetectorRef: ChangeDetectorRef
-  ) {}
-
-  ngOnInit(): void {
-    this.changeDetectorRef.detectChanges();
-  }
+  constructor(private auth: Auth, private sessionService: SessionService) {}
 
   signOut(allow: boolean): void {
     allow && this.auth.logout();
-  }
-
-  navigateTo(route: string) {
-    console.log(route);
   }
 
   private getUserName(): string {
