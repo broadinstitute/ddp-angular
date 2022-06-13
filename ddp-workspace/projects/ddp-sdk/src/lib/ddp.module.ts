@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Title } from '@angular/platform-browser';
 import { A11yModule } from '@angular/cdk/a11y';
 // ngx-translate
@@ -238,7 +237,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 @NgModule({
     imports: [
         CommonModule,
-        BrowserAnimationsModule,
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,

@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { translateFactory } from './util/translateFactory';
 import { MaterialModule } from './modules/material/material.module';
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
@@ -97,6 +98,7 @@ tkCfg.activityUrl = Route.Activity;
   imports: [
     DdpModule,
     BrowserModule,
+    BrowserAnimationsModule,
     ToolkitModule,
     MaterialModule,
     AppRoutingModule,

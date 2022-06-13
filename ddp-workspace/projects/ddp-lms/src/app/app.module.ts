@@ -1,6 +1,7 @@
 import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateService } from '@ngx-translate/core';
 
 import { DdpModule, ConfigurationService, LanguageService, LoggingService } from 'ddp-sdk';
@@ -130,6 +131,7 @@ const translateFactory =
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     DdpModule,
     ToolkitModule,
     AppRoutingModule,
