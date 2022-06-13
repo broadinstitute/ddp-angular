@@ -142,7 +142,14 @@ export class ActivityConverter {
         activityBlock.title = blockJson.title;
         activityBlock.headers = blockJson.headers;
         activityBlock.columnsCount = blockJson.columnsCount;
-        activityBlock.content = blockJson.content.map(question => this.questionConverter.buildQuestionBlock(question, null));
+        activityBlock.content = [];
+        for (const inputBlock of blockJson.content) {
+            const block = this.questionConverter.buildQuestionBlock(inputBlock.question, null);
+            this.buildShownField(block, inputBlock);
+            this.buildEnabledField(block, inputBlock);
+            block.id = inputBlock.blockGuid;
+            activityBlock.content.push(block);
+        }
         return activityBlock;
     }
 
