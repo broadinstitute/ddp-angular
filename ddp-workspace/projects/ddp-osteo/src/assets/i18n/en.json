@@ -128,7 +128,7 @@
                 "Title": "<strong>What kinds of questions is this project aiming to address?</strong>",
                 "Text": "Over the past decade, genomic characterization of tumors has shed enormous light on the molecular underpinnings of cancer. These discoveries have led to the development of novel therapies and preventive measures that have already revolutionized cancer care. Despite this progress, the genomics of osteosarcoma remains poorly understood.<br><br>The types of questions we strive to answer include:<br><br><span>&#8226;</span> What are all the genes and mutations that can lead to osteosarcoma?<br><span>&#8226;</span> What explains why some patients show extraordinary responses to a particular treatment?<br> <span>&#8226;</span> What explains why some tumors never respond to a particular treatment?<br><span>&#8226;</span> How can we develop better treatments for osteosarcoma?<br><br>Despite the progress that has been made to begin to answer these questions, we remain far from the goal. To get there, the detailed genomic characterization of many thousands of clinically annotated cancer samples will be required.<br><br>If you have any questions about this study, please reach out to us at info@OSproject.org or 651-602-2020.<br><br>The Osteosarcoma project is part of Count Me In"
             }
-           
+
 
 
         ],
@@ -286,7 +286,7 @@
             "ImageAlt": "Hands raised to volunteer"
         }
     },
-    
+
     "ParticipationPage": {
         "Title": "Here’s how to participate",
         "Steps": [
@@ -347,9 +347,9 @@
         ]
     },
 
-    
-    
-    
+
+
+
 
     "SIPage": {
         "introduction": {
@@ -377,7 +377,7 @@
                 "<span>&#8226;</span> <strong>Genomic Information: </strong> Whole Exome Sequencing (WES) information will be included for tumor samples, including mutations, small insertions/deletions, amplifications, and deletions.",
                 "<span>&#8226;</span> <strong>Medical Record Information:</strong> Information about diagnosis and treatment will be abstracted from patients’ medical records. These responses will be modified and formatted to prevent individual identification without altering scientific utility.",
                 "<span>&#8226;</span> <strong>Pathology Report Information:</strong>  Detailed histologic information about each sample will be abstracted from pathology reports associated with each sample.",
-                "<span>&#8226;</span><strong>Patient-reported Data (PRD): </strong> Every patient that registers for the study has the option of completing multiple surveys about their experiences with osteosarcoma. Select questions from <a class=\"Link italic\" href=\"./surveys.pdf\" target=\"_blank\">these surveys</a> will be abstracted for inclusion. These responses will be modified and formatted to prevent individual identification without altering scientific utility. <ul type='circle'> <li>Specific types of questions include those about:</li> <ul type='square'> <li>Demographic and diagnostic information</li> <li>Demographic and diagnostic information</li> <li>The current location(s) / status of the participant’s osteosarcoma</li> <li>A place for participants to share any additional information that they’d like about their osteosarcoma</li> <li>A participant’s family history of cancer</li> <li>A participant’s current treatments for osteosarcoma</li> <li>A participant’s current quality of life</li></ul></ul>"
+                "<span>&#8226;</span><strong>Patient-reported Data (PRD): </strong> Every patient that registers for the study has the option of completing multiple surveys about their experiences with osteosarcoma. Select questions from <a class=\"Link italic\" href=\"./surveys.pdf\" target=\"_blank\">these surveys</a> will be abstracted for inclusion. These responses will be modified and formatted to prevent individual identification without altering scientific utility. <ul type='circle'> <li>Specific types of questions include those about:</li> <ul type='square'> <li>Demographic and diagnostic information</li> <li>Information about any treatments and surgeries received</li> <li>The current location(s) / status of the participant’s osteosarcoma</li> <li>A place for participants to share any additional information that they’d like about their osteosarcoma</li> <li>A participant’s family history of cancer</li> <li>A participant’s current treatments for osteosarcoma</li> <li>A participant’s current quality of life</li></ul></ul>"
             ]
         },
         "WDSection": {
@@ -603,7 +603,7 @@
                     "Image": "assets/images/Raut.jpg",
                     "Alt": "Chandrajit Raut photo"
                 }
-                
+
             ]
         },
         "LearnMoreSection": {
