@@ -372,7 +372,7 @@
         },
         "ELSection": {
             "Paragraph3": "<h4>Elements of Data that we Release</h4>",
-            "Text": "Thanks to the participation and contributions of patients enrolled in the OSproject, we will be able to release several types of data to the research community, allowing researchers to analyze many different aspects of how leiomyosarcoma works. The types of data we collect includes:",
+            "Text": "Thanks to the participation and contributions of patients enrolled in the OSproject, we will be able to release several types of data to the research community, allowing researchers to analyze many different aspects of how osteosarcoma works. The types of data we collect includes:",
             "Desc": [
                 "<span>&#8226;</span> <strong>Genomic Information: </strong> Whole Exome Sequencing (WES) information will be included for tumor samples, including mutations, small insertions/deletions, amplifications, and deletions.",
                 "<span>&#8226;</span> <strong>Medical Record Information:</strong> Information about diagnosis and treatment will be abstracted from patients’ medical records. These responses will be modified and formatted to prevent individual identification without altering scientific utility.",
