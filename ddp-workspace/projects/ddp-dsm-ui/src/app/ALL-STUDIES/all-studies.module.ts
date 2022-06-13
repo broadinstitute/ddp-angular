@@ -1,5 +1,5 @@
-import {APP_INITIALIZER, ErrorHandler, Injector, NgModule} from '@angular/core';
-import {CommonModule, LOCATION_INITIALIZED} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {AllStudiesRoutingModule} from './all-studies.routing.module';
 import {HomeComponent} from '../home/home.component';
@@ -74,8 +74,6 @@ import {dynamicFormTypeAndStudyRGP} from '../participant-page/pipes/dynamicFormT
 import {TestDssComponent} from '../test-dss/test-dss.component';
 import {DssErrorPageComponent} from '../test-dss/dss-error-page/dss-error-page.component';
 import {LoadingModalComponent} from '../modals/loading-modal.component';
-import {TranslateService} from '@ngx-translate/core';
-import {LoggingService} from '../../../../ddp-sdk/src/lib/services/logging.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
@@ -105,7 +103,6 @@ import {AuthGuard} from '../auth0/auth.guard';
 import {Utils} from '../utils/utils';
 import {Statics} from '../utils/statics';
 import {Language} from '../utils/language';
-import {LanguageService} from '../../../../ddp-sdk/src/lib/services/internationalization/languageService.service';
 import {NavigationComponent} from '../navigation/navigation.component';
 import {AllStudiesComponent} from './all-studies.component';
 import {BuildingFactoryService} from '../activity-data/services/buildingFactory.service';

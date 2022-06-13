@@ -23,6 +23,12 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import {NavComponent} from './components/nav/nav.component';
+import {loginOutComponent} from './components/nav/loginOut/loginOut.component';
+import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {UserActivitiesComponent} from './components/user-activities/user-activities.component';
+import {MatTableModule} from '@angular/material/table';
+import {FlexModule} from '@angular/flex-layout';
 
 declare const DDP_ENV: Record<string, any>;
 
@@ -53,6 +59,8 @@ sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
 sdkConfig.localRegistrationUrl = sdkConfig.backendUrl + '/pepper/v1/register';
 sdkConfig.loginLandingUrl = DDP_ENV.loginLandingUrl;
 sdkConfig.usesVerticalStepper = ['FAMILY_HISTORY'];
+sdkConfig.dashboardActivitiesStartedStatuses = ['CREATED'];
+sdkConfig.dashboardActivitiesCompletedStatuses = ['COMPLETE'];
 
 /**
  * Toolkit Config
@@ -64,12 +72,14 @@ toolkitConfig.dashboardUrl = Route.Dashboard;
 toolkitConfig.doneUrl = Route.AgeUpThankYouProxy;
 toolkitConfig.errorUrl = Route.Error;
 toolkitConfig.phone = 'TBD';
-toolkitConfig.infoEmail = 'TBD';
-toolkitConfig.twitterAccountId = 'TBD';
-toolkitConfig.facebookGroupId = 'TBD';
+toolkitConfig.infoEmail = 'info@lmsproject.org';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org';
-toolkitConfig.useMultiParticipantDashboard = true;
+toolkitConfig.useMultiParticipantDashboard = false;
 toolkitConfig.dashboardDisplayedColumns = ['name', 'summary', 'status', 'actions'];
+toolkitConfig.mailingListDialogUrl = 'updates';
+toolkitConfig.twitterAccountId = 'count_me_in';
+toolkitConfig.facebookGroupId = 'joincountmein';
+toolkitConfig.instagramId = 'countmein';
 
 const translateFactory =
   (
@@ -113,6 +123,10 @@ const translateFactory =
     HeaderComponent,
     FooterComponent,
     FaqSectionComponent,
+    NavComponent,
+    loginOutComponent,
+    DashboardComponent,
+    UserActivitiesComponent
   ],
   imports: [
     BrowserModule,
@@ -122,7 +136,9 @@ const translateFactory =
     MatExpansionModule,
     MatIconModule,
     MatButtonModule,
-    MatDividerModule
+    MatDividerModule,
+    MatTableModule,
+    FlexModule,
   ],
   providers: [
     {

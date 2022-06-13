@@ -218,8 +218,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   displayActivityOrder(): void {
     const orderedActivities = [];
-
-    [...this.activityDefinitions].sort(({displayOrder: A},{displayOrder: B}) => A - B)
+    this.activityDefinitions instanceof Array &&
+    [...this.activityDefinitions]
+      .sort(({displayOrder: A},{displayOrder: B}) => A - B)
       .forEach(activity => {
       const foundActivity = this.participant.data.activities
         .find(a => activity.activityCode === a.activityCode && activity.activityVersion === a.activityVersion);

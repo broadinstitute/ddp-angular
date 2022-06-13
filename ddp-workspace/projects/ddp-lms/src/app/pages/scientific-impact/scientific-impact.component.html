@@ -1,1 +1,85 @@
-Scientific Impact
+<main class="scientific">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <div class="title scientific-title" translate>
+    SIPage.introduction.Title
+  </div>
+  <div class="goalSection">
+    <div class="content content_tight intro-faq-block">
+      <div class="intro-faq-block__content">
+        <div class="goalSectionTitle" [innerHTML]="'SIPage.PASection.Paragraph1' | translate"></div>
+        <div class="goalSectionText" [innerHTML]="'SIPage.PASection.Text' | translate"></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="content content_tight intro-faq-block">
+      <div class="intro-faq-block__content">
+        <div class="paragraph2Title" style="text-align: center"
+             [innerHTML]="'SIPage.DASection.Paragraph2' | translate"></div>
+        <ng-container *ngFor="let desc of 'SIPage.DASection.Desc'| translate">
+          <div class="paragraph2Text" [innerHTML]="desc"></div>
+        </ng-container>
+      </div>
+    </div>
+  </section>
+
+  <div class="elementsOfData">
+    <section class="section">
+      <div class="content content_tight intro-faq-block">
+        <div class="intro-faq-block__content">
+          <div class="elementsOfDataTitle" style="text-align: center"
+               [innerHTML]="'SIPage.ELSection.Paragraph3' | translate"></div>
+          <div class="elementsOfDataText" [innerHTML]="'SIPage.ELSection.Text' | translate"></div>
+          <ng-container *ngFor="let desc of 'SIPage.ELSection.Desc'| translate">
+            <p [innerHTML]="desc"></p>
+          </ng-container>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="section">
+    <div class="content content_tight intro-faq-block">
+      <div class="intro-faq-block__content">
+
+        <div class="paragraph4Title" style="text-align: center"
+             [innerHTML]="'SIPage.WDSection.Paragraph4' | translate"></div>
+        <p [innerHTML]="'SIPage.WDSection.Text' | translate"></p>
+
+        <div class="image_title">
+          <div class="imgPlace">
+            <div *ngFor="let imgArray of 'SIPage.IMGSection' | translate">
+              <img [src]="imgArray.src" [alt]="imgArray.alt"
+                   class="images">
+              <a class="imgText" [innerHTML]="imgArray.Text | translate"
+                 [href]="imgArray.link" target="_blank"></a>
+            </div>
+          </div>
+          <div *ngFor="let imgArray of 'SIPage.ImageSection' | translate">
+            <img [src]="imgArray.src" [alt]="imgArray.alt"
+                 class="images">
+            <a class="imgText" [innerHTML]="imgArray.Text | translate"
+               [href]="imgArray.link" target="_blank"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="terms">
+    <section class="section">
+      <div class="intro-faq-block__content">
+        <div class="bulbIcon">
+          <img src="assets/images/idea (2).png" alt="bulb">
+        </div>
+        <div class="termsHeader" [innerHTML]="'SIPage.TermSection.Paragraph5' | translate"></div>
+        <div class="content content_tight intro-faq-block">
+          <div class="termsText" [innerHTML]="'SIPage.TermSection.Text' | translate"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+
