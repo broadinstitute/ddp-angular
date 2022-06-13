@@ -324,6 +324,9 @@
         font-family: Spartan-Bold, serif;
         color: $__black;
         margin-top: 10px;
+          @include media-sm {
+              overflow-wrap: break-word;
+          }
       }
       &-text {
         margin-top: 25px;
@@ -360,7 +363,9 @@
                 padding: 0!important;
                 color: $__black!important;
                 @include media-sm {
-                    font-size: .5em;
+                    font-size: .5em!important;
+                    overflow-wrap: break-word;
+                    line-height: 2;
                 }
                 @include media-md {
                     font-size: .7em;
