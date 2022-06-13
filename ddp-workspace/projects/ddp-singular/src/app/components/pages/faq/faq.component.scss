@@ -38,6 +38,21 @@ h1 {
   }
 }
 
+.video {
+  width: 70%;
+  height: 70%;
+  margin: auto;
+
+
+  @media (max-width: 945px) {
+    width: 40%;
+    height: 40%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 .intro {
   margin: 0px 0 60px;
 

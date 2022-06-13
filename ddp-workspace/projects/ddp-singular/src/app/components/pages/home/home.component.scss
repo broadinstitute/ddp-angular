@@ -284,6 +284,23 @@
   }
 }
 
+
+.video {
+  width: 70%;
+  height: 70%;
+  margin: auto;
+  padding-top: 10px;
+
+
+  @media (max-width: 945px) {
+    width: 60%;
+    height: 60%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 .participating {
   margin-top: 100px;
   padding: 40px 40px 60px;
