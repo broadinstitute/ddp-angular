@@ -5,7 +5,7 @@ import { ActivityQuestionBlock } from './activityQuestionBlock';
 export class ActivityTabularBlock extends ActivityBlock {
     title: string;
     content: ActivityQuestionBlock<any>[];
-    headers: any[];
+    headers: Array<{label: string; columnSpan: number}>;
     columnsCount = 1;
 
     get blockType(): BlockType {
