@@ -39,6 +39,7 @@ import { NotificationsComponent } from './components/notifications/notifications
 import { LoginComponent } from './components/login/login.component';
 import { ActivitySectionProgressBarComponent } from './components/activity-section-progress-bar/activity-section-progress-bar.component';
 import { ActivitySectionPageProgressComponent } from './components/activity-section-page-progress/activity-section-page-progress.component';
+import { ConsentHeaderComponent } from './components/consent-header/consent-header.component';
 
 declare const gtag: (...args: any[]) => void;
 
@@ -73,6 +74,7 @@ declare const gtag: (...args: any[]) => void;
         SuccessMessageDialogComponent,
         ActivitySectionProgressBarComponent,
         ActivitySectionPageProgressComponent,
+        ConsentHeaderComponent
     ],
     imports: [
         DdpModule,
