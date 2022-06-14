@@ -4,8 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { Auth0CodeCallbackComponent, AuthGuard, BrowserGuard, IrbGuard } from 'ddp-sdk';
 
 import {
-  AcceptAgeUpPageComponent,
-  ActivityRedesignedComponent,
+  AcceptAgeUpPageComponent, ActivityPageRedesignedComponent,
   AgeUpThankYouComponent,
   DashboardRedesignedComponent,
   ErrorRedesignedComponent, HeaderActionGuard,
@@ -25,8 +24,157 @@ import { HomeComponent } from './pages/home/home.component';
 import { HowToParticipateComponent } from './pages/how-to-participate/how-to-participate.component';
 import { ScientificImpactComponent } from './pages/scientific-impact/scientific-impact.component';
 import { Route } from './constants/Route';
+import {ActivityComponent} from './activity/activity.component';
+import {ActivityPageComponent} from './activity-page/activity-page.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
 
 const routes: Routes = [
+  {
+    path: 'about-you',
+    component: ActivityPageRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: 'ABOUTYOU'
+    }
+  },
+  {
+    path: 'about-your-child',
+    component: ActivityPageRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: 'ABOUTCHILD'
+    }
+  },
+  {
+    path: 'loved-one',
+    component: ActivityPageRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: 'LOVEDONE'
+    }
+  },
+  {
+    path: 'consent',
+    component: ActivityPageRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: 'CONSENT'
+    }
+  },
+  {
+    path: 'consent-assent',
+    component: ActivityPageRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: 'CONSENT_ASSENT'
+    }
+  },
+  {
+    path: 'parental-consent',
+    component: ActivityPageRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: 'PARENTAL_CONSENT'
+    }
+  },
+  {
+    path: 'release-survey',
+    component: ActivityPageRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: 'RELEASE_SELF'
+    }
+  },
+  {
+    path: 'release-minor-survey',
+    component: ActivityPageRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard
+    ],
+    data: {
+      activityGuid: 'RELEASE_MINOR'
+    }
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard
+    ]
+  },
+  {
+    path: 'auth',
+    component: Auth0CodeCallbackComponent,
+    canActivate: [IrbGuard]
+  },
+  {
+    path: 'activity/:id',
+    component: ActivityPageComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard
+    ]
+  },
+  {
+    path: 'activity-link/:id',
+    component: ActivityPageComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard,
+      AuthGuard
+    ]
+  },
+  {
+    path: 'login-landing',
+    component: LoginLandingRedesignedComponent,
+    canActivate: [IrbGuard]
+  },
+  {
+    path: 'login-landing/:mode',
+    component: RedirectToAuth0LoginRedesignedComponent,
+    canActivate: [IrbGuard]
+  },
+  {
+    path: 'count-me-in',
+    component: WorkflowStartActivityRedesignedComponent,
+    canActivate: [
+      IrbGuard,
+      BrowserGuard
+    ]
+  },
   {
     path: Route.Home,
     component: HomeComponent,
@@ -65,12 +213,12 @@ const routes: Routes = [
   },
   {
     path: Route.ActivityId,
-    component: ActivityRedesignedComponent,
+    component: ActivityComponent,
     canActivate: [IrbGuard, BrowserGuard, AuthGuard],
   },
   {
     path: Route.ActivityLinkId,
-    component: ActivityRedesignedComponent,
+    component: ActivityComponent,
     canActivate: [IrbGuard, BrowserGuard, AuthGuard],
   },
   {
