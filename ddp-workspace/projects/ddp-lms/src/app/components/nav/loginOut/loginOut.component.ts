@@ -21,9 +21,9 @@ import { Route } from '../../../constants/Route';
           {{ 'Header.Links.CountMeIn' | translate }}
         </a>
       </li>
-      <li class="button button_primary cmiBtn" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-list__item_active"
-      *ngIf="isAuthenticated">
-        <a class="link" [routerLink]="Route.Dashboard">
+      <li>
+        <a class="button button_primary" [routerLink]="Route.Dashboard" class="button button_primary cmiBtn"
+        *ngIf="isAuthenticated">
           {{ 'Toolkit.Dashboard.Title' | translate }}
         </a>
       </li>
