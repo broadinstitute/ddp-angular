@@ -1,6 +1,7 @@
 import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateService } from '@ngx-translate/core';
 
 import {
@@ -34,10 +35,10 @@ import {NavComponent} from './components/nav/nav.component';
 import {loginOutComponent} from './components/nav/loginOut/loginOut.component';
 import {ActivityComponent} from './activity/activity.component';
 import {ActivityPageComponent} from './activity-page/activity-page.component';
-import {DashboardComponent} from './dashboard/dashboard.component';
-import {UserActivitiesComponent} from './user-activities/user-activities.component';
+import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {UserActivitiesComponent} from './components/user-activities/user-activities.component';
 import {MatTableModule} from '@angular/material/table';
-
+import {FlexModule} from '@angular/flex-layout';
 
 
 declare const DDP_ENV: Record<string, any>;
@@ -85,7 +86,7 @@ toolkitConfig.errorUrl = Route.Error;
 toolkitConfig.phone = 'TBD';
 toolkitConfig.infoEmail = 'info@lmsproject.org';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org';
-toolkitConfig.useMultiParticipantDashboard = true;
+toolkitConfig.useMultiParticipantDashboard = false;
 toolkitConfig.dashboardDisplayedColumns = ['name', 'summary', 'status', 'actions'];
 toolkitConfig.mailingListDialogUrl = 'updates';
 toolkitConfig.twitterAccountId = 'count_me_in';
@@ -144,6 +145,7 @@ const translateFactory =
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     DdpModule,
     ToolkitModule,
     AppRoutingModule,
@@ -151,7 +153,8 @@ const translateFactory =
     MatIconModule,
     MatButtonModule,
     MatDividerModule,
-    MatTableModule
+    MatTableModule,
+    FlexModule,
   ],
   providers: [
     {

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Modules
 import { DdpModule, AnalyticsEventsService } from 'ddp-sdk';
@@ -100,6 +101,7 @@ import { AppRedesignedBaseComponent } from './components/app/app-redesigned-base
 @NgModule({
     imports: [
         CommonModule,
+        BrowserAnimationsModule,
         MatToolbarModule,
         MatIconModule,
         FlexLayoutModule,

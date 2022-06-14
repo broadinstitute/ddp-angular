@@ -26,7 +26,7 @@ export class WelcomeComponent implements OnInit {
     this.headerConfig.setupDefaultHeader();
     this.twitterUrl = `https://twitter.com/${this.toolkitConfiguration.twitterAccountId}`;
     this.facebookUrl = `https://www.facebook.com/${this.toolkitConfiguration.facebookGroupId}`;
-    this.instagramUrl = `https://www.instagram.com/${this.toolkitConfiguration.instagramId}`;
+    this.instagramUrl = `https://www.instagram.com/countmein/`;
     this.lightswitchWidgetId = this.toolkitConfiguration.lightswitchInstagramWidgetId;
   }
 

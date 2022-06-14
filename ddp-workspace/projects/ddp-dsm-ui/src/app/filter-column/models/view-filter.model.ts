@@ -58,7 +58,7 @@ export class ViewFilter {
     const copiedProps: ViewFilter = Object.assign({}, this);
 
     return new ViewFilter(
-      filtersProp.length > 0 ? filtersProp : null,
+      filtersProp.length > 0 ? filtersProp : [],
       copiedProps.filterName,
       columnsProp,
       copiedProps.shared,

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-for-your-physician',
@@ -7,5 +7,7 @@ import { Component } from '@angular/core';
 })
 export class ForYourPhysicianComponent {
 
-  FYP = 'https://storage.googleapis.com/cmi-study-dev-assets/lms/pdf/For%20Your%20Physician%20PDF%20-%20Linked%20on%20For%20Your%20Physician%20Page.pdf';
+  FYP = 'https://storage.googleapis.com/cmi-study-dev-assets/lms/pdf/48.%20ForYourPhysician_LMS_PE-CGS%20updated%20June%2022.pdf';
+
+
 }
