@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { patientListModel } from './models/participantList.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import {Observable, switchMap, tap} from 'rxjs';
-import { AgentService } from '../../services/agent.service';
+import {Observable, tap} from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
+import {MainConstants} from '../../constants/main-constants';
+import {StoreService} from "../../../STORE/store.service";
+import {DSMService} from "../../../services/dsm.service";
 
 @Component({
   selector: 'app-participants-list',
@@ -15,18 +17,23 @@ export class ParticipantsListComponent implements OnInit {
   patients$: Observable<patientListModel[]>;
   totalCount$: Observable<number>;
   loading$: Observable<boolean>;
+  error$: Observable<string>;
+
   pageIndex: number;
   pageSize: number;
+  readonly PARENT = MainConstants.participantsListParent;
 
   private readonly LSParams: string = 'pListQueryParams';
 
-  constructor(private agent: AgentService, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private storeService: StoreService) {
   }
 
   ngOnInit(): void {
-    this.patients$ = this.agent.getPatients();
-    this.totalCount$ = this.agent.getPatientsTotalCount();
-    this.loading$ = this.agent.isLoading();
+    this.totalCount$ = this.storeService.getParticipantsTotalCount;
+    this.loading$ = this.storeService.getParticipantsLoadingStatus;
+    this.error$ = this.storeService.getErrorState;
+
+
 
     const qParams = JSON.parse(localStorage.getItem(this.LSParams));
 
@@ -42,8 +49,8 @@ export class ParticipantsListComponent implements OnInit {
         tap((params: Params) => {
           this.pageSize = params.to - params.from;
           this.pageIndex = (params.to/this.pageSize) - 1;
-        }),
-        switchMap((params: Params) => this.agent.setPage(params.from, params.to))
+          this.patients$ = this.storeService.getParticipants(params.from, params.to, this.PARENT);
+        })
       )
       .subscribe();
   }

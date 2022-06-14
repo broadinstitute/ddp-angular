@@ -15,6 +15,10 @@ export class SessionService {
 
   public setDSMToken(token: string): void {
     localStorage.setItem(SessionService.DSM_TOKEN_NAME, token);
+    this.setLoginCredentials(token);
+  }
+
+  public setLoginCredentials(token: string): void {
     this.authExpiration = this.jwtHelper.getTokenExpirationDate(token);
     this.isLoggedIn = true;
   }

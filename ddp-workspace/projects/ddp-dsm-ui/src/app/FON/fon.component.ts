@@ -5,7 +5,6 @@ import {SessionMementoService} from "ddp-sdk";
 import {Auth} from "../services/auth.service";
 import {takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
-import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-fon',
@@ -47,22 +46,22 @@ import {TranslateService} from "@ngx-translate/core";
 
 export class FonComponent implements OnInit, OnDestroy {
   unsubscribe = new Subject();
-  private readonly SESSION_KEY: string = 'session_key';
 
   constructor(private title: Title,
               private sessionService: SessionService,
               private dssSessionService: SessionMementoService,
-              private authService: Auth,
-              private translateService: TranslateService) {
+              private authService: Auth) {
     title.setTitle('Fon');
   }
 
   ngOnInit() {
     this.authService.dsmToken.pipe(takeUntil(this.unsubscribe))
-      .subscribe(token => token && this.setDssSession(token))
+      .subscribe(token => this.setTokenCredentials = token)
+  }
 
-    this.translateService.setDefaultLang('en');
-    this.translateService.use('en')
+  private set setTokenCredentials(dsmToken: string | null) {
+    !dsmToken && this.sessionService.setLoginCredentials(this.sessionService.getDSMToken());
+    this.setDssSession(dsmToken ?? this.sessionService.getDSMToken())
   }
 
   ngOnDestroy() {

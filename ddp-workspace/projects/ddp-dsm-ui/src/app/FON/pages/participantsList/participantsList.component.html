@@ -1,5 +1,6 @@
 <div class="participants">
   <h3>Patients list</h3>
+  <h2 style="color: red">{{ error$ | async }}</h2>
 
   <table class="participants-table">
     <thead>
@@ -12,7 +13,6 @@
         <th>Last updated</th>
       </tr>
     </thead>
-
     <ng-container *ngIf="!(loading$ | async) else loadingSpinner">
       <tbody *ngIf="(patients$ | async) as pts">
       <tr *ngFor="let pt of pts" (click)="openActivities(pt)">
