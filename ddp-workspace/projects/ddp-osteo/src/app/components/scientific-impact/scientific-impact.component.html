@@ -8,8 +8,8 @@
                 <div class="intro-faq-block__content">
                     <p [innerHTML]="'SIPage.PASection.Paragraph1' | translate"></p>
                         <p [innerHTML]="'SIPage.PASection.Text' | translate"></p>
-                    
-                    
+
+
                     <p [innerHTML]="'SIPage.DASection.Paragraph2' | translate"></p>
                     <ng-container *ngFor="let desc of 'SIPage.DASection.Desc'| translate">
                             <p [innerHTML]="desc"></p>
@@ -26,18 +26,24 @@
 
 
                         <div class="image_title">
-                            <div> 
-                                <img src="assets/images/Angio.png" style="max-width: 200px;" alt="test1" class="img_item">
-                                <p [innerHTML]="'SIPage.IMGSection.Text1' | translate"></p>
-                            </div>
-                            <div> 
-                                <img src="assets/images/meta.png" style="max-width: 195px; margin-left: 18px;" alt="test2" class="img_item">
-                                <p [innerHTML]="'SIPage.IMGSection.Text2' | translate"></p>
-                            </div>
-                            <div>    
-                                <img src="assets/images/breast.png" style="max-width: 200px;" alt="test3" class="img_item">
-                                <p [innerHTML]="'SIPage.IMGSection.Text3' | translate"></p>
-                            </div>    
+                            <a href="https://www.cbioportal.org/study/summary?id=angs_painter_2020">
+                                <div>
+                                    <img src="assets/images/Angio.png" style="max-width: 200px;" alt="test1" class="img_item">
+                                    <p [innerHTML]="'SIPage.IMGSection.Text1' | translate"></p>
+                                </div>
+                            </a>
+                            <a href="https://www.cbioportal.org/study/summary?id=mpcproject_broad_2021">
+                                <div>
+                                    <img src="assets/images/meta.png" style="max-width: 195px; margin-left: 18px;" alt="test2" class="img_item">
+                                    <p [innerHTML]="'SIPage.IMGSection.Text2' | translate"></p>
+                                </div>
+                            </a>
+                            <a href="https://www.cbioportal.org/study/summary?id=brca_mbcproject_wagle_2017">
+                                <div>
+                                    <img src="assets/images/breast.png" style="max-width: 200px;" alt="test3" class="img_item">
+                                    <p [innerHTML]="'SIPage.IMGSection.Text3' | translate"></p>
+                                </div>
+                            </a>
                         </div>
 
 
