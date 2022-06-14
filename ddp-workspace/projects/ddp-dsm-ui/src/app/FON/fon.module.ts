@@ -60,20 +60,22 @@ export class fonModule {
               private dssSessionService: SessionMementoService,
               private title: Title) {
 
+    const LOCALE = 'en';
+
     // Title
     this.title.setTitle('Fon');
 
     // Token
     const DSMToken = this.sessionService.getDSMToken();
     this.sessionService.setExpirationTime(DSMToken);
-    this.dssSessionService.setSession(null, DSMToken, null, 'en', +this.sessionService.getTokenExpiration());
+    this.dssSessionService.setSession(null, DSMToken, null, LOCALE, +this.sessionService.getTokenExpiration());
 
     // Store
     this.storeService.setStudy = MainConstants.study;
     this.storeService.dispatchGetSettings(MainConstants.participantsListParent);
 
     // Translation
-    this.translateService.setDefaultLang('en');
-    this.translateService.use('en');
+    this.translateService.setDefaultLang(LOCALE);
+    this.translateService.use(LOCALE);
   }
 }

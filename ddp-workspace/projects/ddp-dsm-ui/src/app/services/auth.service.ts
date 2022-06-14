@@ -45,7 +45,6 @@ export class Auth {
 
   selectedStudy = new BehaviorSubject<string>('');
 
-  dsmToken = new BehaviorSubject(null);
 
   // Configure Auth0
   lock = new Auth0Lock(DDP_ENV.auth0ClientKey, DDP_ENV.auth0Domain, {
@@ -149,7 +148,6 @@ export class Auth {
 
         this.sessionService.setDSMToken(dsmToken);
         this.role.setRoles(dsmToken);
-        this.dsmToken.next(dsmToken);
 
         this.realmList = [];
         this.getRealmList();
