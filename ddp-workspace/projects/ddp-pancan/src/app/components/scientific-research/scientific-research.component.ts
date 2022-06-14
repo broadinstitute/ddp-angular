@@ -12,7 +12,7 @@ export class ScientificResearchComponent {
         Brain: 'https://braintumorproject.org/',
         CRC: '/colorectal',
         ESC: 'https://escproject.org/',
-        LMS: '/lms',
+        LMS: 'http://www.lmsproject.org',
         MBC: 'https://www.mbcproject.org/',
         MBCSpanish: 'http://mbcprojectenespanol.org/',
         MPC: 'https://mpcproject.org/',
