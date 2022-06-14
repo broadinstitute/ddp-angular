@@ -1,23 +1,22 @@
 <main class="participation">
 
   <header>
- <h2 class="title static-page-title" translate>About.Title</h2>
-
-    <div class="cmiBlock">
-      <div class="cmiBlock-text">
-        <p [innerHTML]="'About.TitleText' | translate"></p>
-      </div>
-      <button class="cmiBlock-visit-button" onclick="window.open('https://joincountmein.org/', '_blank')">
-        <p class="cmiBlock-visit-button-text">{{ 'About.button1' | translate }}</p>
-        <mat-icon>launch</mat-icon>
-      </button>
-    </div>
+    <h2 class="title static-page-title" translate>About.Title</h2>
 
     <div class="countMeIn">
       <img class="countMeIn-img" src="/assets/images/logo-count-me-in.png" alt="count me in">
+      <p class="countMeIn-text" [innerHTML]="'About.TitleText' | translate"></p>
+
+        <button class="cmiBlock-visit-button" onclick="window.open('https://joincountmein.org/', '_blank')">
+          <p class="cmiBlock-visit-button-text">{{ 'About.button1' | translate }}</p>
+          <mat-icon>launch</mat-icon>
+        </button>
+
       <p class="countMeIn-text" [innerHTML]="'About.countMeInText' | translate"></p>
     </div>
   </header>
+
+
 
 
   <section class="advisory">
@@ -53,7 +52,7 @@
     </div>
   </section>
 
-  <footer class="learnMoreBlank" >
+  <footer class="learnMoreBlank">
     <p class="learnMoreHeadline">{{ 'About.LearnMoreHeadline' | translate }}</p>
     <button class="learnMore" [routerLink]="['/faq']">
       <p class="visitFaq">{{ 'About.VisitFaq' | translate }}</p>

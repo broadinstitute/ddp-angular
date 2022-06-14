@@ -100,7 +100,7 @@
 
 
 .countMeIn {
-  margin-top: 147px;
+  margin-top: -50px;
   padding: 0 22.5%;
   display: flex;
   justify-content: center;
@@ -133,7 +133,7 @@
     text-align: center;
     margin-bottom: 37px;
 
-    p {
+    p,a {
       color: #000000;
       font-family: Untitled-Sans-Light, sans-serif;
       font-size: 48px;
@@ -222,7 +222,7 @@
             letter-spacing: 0;
             line-height: 24px;
           }
-          p {
+          p, a {
             font-size: 16px;
             line-height: 24px;
             letter-spacing: 0;
