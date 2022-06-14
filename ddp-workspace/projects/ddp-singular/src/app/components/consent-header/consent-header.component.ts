@@ -3,7 +3,7 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { ProgressSteps } from '../../../../../ddp-sdk/src/lib/models/progressSteps';
 
 @Component({
-    selector: 'ddp-consent-header',
+    selector: 'app-consent-header',
     templateUrl: './consent-header.component.html',
     styleUrls: ['./consent-header.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

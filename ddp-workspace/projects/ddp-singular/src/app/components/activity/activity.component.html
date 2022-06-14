@@ -10,7 +10,7 @@
       <ddp-admin-action-panel [activityReadonly]="isReadonly()" (requestActivityEdit)="updateIsAdminEditing($event)">
       </ddp-admin-action-panel>
     </section>
-      <ddp-consent-header *ngIf="isConsent"></ddp-consent-header>
+      <app-consent-header *ngIf="isConsent"></app-consent-header>
       <section *ngIf="model.title" class="section section--title">
       <h1 class="activity-header" [innerHTML]="model.title"></h1>
     </section>
