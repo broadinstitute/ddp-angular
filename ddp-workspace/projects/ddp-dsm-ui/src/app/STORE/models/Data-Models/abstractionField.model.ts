@@ -1,6 +1,6 @@
-import {ValueModel} from "./value.model";
-import {AbstractionFieldValueModel} from "./abstractionFieldValue.model";
-import {QCWrapperModel} from "./QCWrapper.model";
+import {ValueModel} from './value.model';
+import {AbstractionFieldValueModel} from './abstractionFieldValue.model';
+import {QCWrapperModel} from './QCWrapper.model';
 
 export interface AbstractionFieldModel {
   medicalRecordAbstractionFieldId: number;

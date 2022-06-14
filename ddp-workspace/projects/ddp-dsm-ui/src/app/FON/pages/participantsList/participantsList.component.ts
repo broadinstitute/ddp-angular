@@ -4,8 +4,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import {Observable, tap} from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
 import {MainConstants} from '../../constants/main-constants';
-import {StoreService} from "../../../STORE/store.service";
-import {DSMService} from "../../../services/dsm.service";
+import {StoreService} from '../../../STORE/store.service';
+import {DSMService} from '../../../services/dsm.service';
 
 @Component({
   selector: 'app-participants-list',

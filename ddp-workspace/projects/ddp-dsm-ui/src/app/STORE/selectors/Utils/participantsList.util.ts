@@ -1,4 +1,6 @@
-export const generateParticipantsList = (participants, settings) => {
+import {ParticipantModel} from '../../models/participant.model';
+
+export const generateParticipantsList = (participants: ParticipantModel[], settings: any): Array<any> => {
   const actDefs = settings?.activityDefinitions;
 
   return participants instanceof Array && actDefs ? participants.map(pt => ({
@@ -13,5 +15,5 @@ export const generateParticipantsList = (participants, settings) => {
       activityName: Object.values(actDefs).find(actDef => actDef['activityCode'] === activity.activityCode)['activityName'],
       activityGuid: activity.guid
     }))
-  })) : undefined
-}
+  })) : [];
+};

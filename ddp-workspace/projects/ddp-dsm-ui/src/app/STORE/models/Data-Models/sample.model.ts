@@ -1,4 +1,4 @@
-import {TestResultModel} from "./testResult.model";
+import {TestResultModel} from './testResult.model';
 
 export interface SampleModel {
   bspCollaboratorSampleId: string;

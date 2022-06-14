@@ -1,4 +1,4 @@
-import {TissueSmIdModel} from "./tissueSmId.model";
+import {TissueSmIdModel} from './tissueSmId.model';
 
 export interface TissueModel {
   tissueId: string;

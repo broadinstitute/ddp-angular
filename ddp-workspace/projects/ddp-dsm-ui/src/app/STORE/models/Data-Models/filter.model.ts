@@ -1,4 +1,4 @@
-import {FiltersModel} from "./filters.model";
+import {FiltersModel} from './filters.model';
 
 export interface FilterModel {
   columns: { [index: string]: string[] };

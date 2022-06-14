@@ -6,5 +6,5 @@ export interface AbstractionActivitiesModel {
   aStatus: string;
   startDate: number;
   lastChanged: number;
-  filesUsed: string
+  filesUsed: string;
 }

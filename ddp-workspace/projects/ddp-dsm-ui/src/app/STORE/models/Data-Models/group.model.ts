@@ -1,4 +1,4 @@
-import {OptionModel} from "./option.model";
+import {OptionModel} from './option.model';
 
 export interface GroupModel {
   groupStableId: string;

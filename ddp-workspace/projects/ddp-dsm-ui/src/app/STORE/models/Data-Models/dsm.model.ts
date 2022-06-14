@@ -1,4 +1,4 @@
-import {PdfsModel} from "./pdfs.model";
+import {PdfsModel} from './pdfs.model';
 
 export interface DsmModel {
   dateOfBirth: string;

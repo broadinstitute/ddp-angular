@@ -1,4 +1,4 @@
-import {ValueModel} from "./value.model";
+import {ValueModel} from './value.model';
 
 export interface FieldSettingsModel {
   fieldSettingId: string;

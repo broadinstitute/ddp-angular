@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Observable, tap} from 'rxjs';
-import {StoreService} from "../../../STORE/store.service";
-import {MainConstants} from "../../constants/main-constants";
+import {StoreService} from '../../../STORE/store.service';
+import {MainConstants} from '../../constants/main-constants';
 
 @Component({
   selector: 'app-activities',

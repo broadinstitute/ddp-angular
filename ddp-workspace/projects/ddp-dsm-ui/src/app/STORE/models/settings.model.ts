@@ -7,11 +7,11 @@ import {
   KitTypeModel,
   PreferredLanguageModel
 }
-  from "./";
+  from './';
 
 export interface SettingsModel {
-  abstractionFields: AbstractionFieldModel,
-  activityDefinitions: {[index: string]: ActivityDefinitionModel},
+  abstractionFields: AbstractionFieldModel;
+  activityDefinitions: {[index: string]: ActivityDefinitionModel};
   assignees: AssigneeModel[];
   cancers: string[];
   ddpInstanceId: number;

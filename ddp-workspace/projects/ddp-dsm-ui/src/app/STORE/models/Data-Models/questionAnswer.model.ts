@@ -1,5 +1,5 @@
-import {DateFieldModel} from "./dateField.model";
-import {OptionDetailModel} from "./optionDetail.model";
+import {DateFieldModel} from './dateField.model';
+import {OptionDetailModel} from './optionDetail.model';
 
 export interface QuestionAnswerModel {
   stableId: string;

@@ -1,5 +1,5 @@
-import {OncHistoryDetailModel} from "./oncHistoryDetail.model";
-import {FollowUpModel} from "./followUp.model";
+import {OncHistoryDetailModel} from './oncHistoryDetail.model';
+import {FollowUpModel} from './followUp.model';
 
 export interface MedicalRecordModel {
   medicalRecordId: string;

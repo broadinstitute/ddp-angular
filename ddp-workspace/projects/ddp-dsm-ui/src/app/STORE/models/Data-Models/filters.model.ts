@@ -1,4 +1,4 @@
-import {ParticipantColumnModel} from "./participantColumn.model";
+import {ParticipantColumnModel} from './participantColumn.model';
 
 export interface FiltersModel {
   empty: boolean;

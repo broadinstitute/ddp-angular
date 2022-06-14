@@ -7,13 +7,13 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {CheckAuthGuard} from './guards/checkAuth.guard';
 import {StudyGuard} from './guards/study.guard';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {StoreModule} from "@ngrx/store";
-import {storeReducer} from "./STORE/store.reducer";
-import {EffectsModule} from "@ngrx/effects";
-import {StoreDevtoolsModule} from "@ngrx/store-devtools";
-import {ParticipantsEffects, SettingsEffects} from "./STORE/effects";
-import {environment} from "../environments/environment";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {StoreModule} from '@ngrx/store';
+import {storeReducer} from './STORE/store.reducer';
+import {EffectsModule} from '@ngrx/effects';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {ParticipantsEffects, SettingsEffects} from './STORE/effects';
+import {environment} from '../environments/environment';
 
 
 const base = document.querySelector('base')?.getAttribute('href') || '';

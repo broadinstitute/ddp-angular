@@ -6,7 +6,7 @@ import {
   OncHistoryDetailModel,
   ParticipantDataModel
 }
-  from "./";
+  from './';
 
 export interface ParticipantModel {
   abstractionActivities: AbstractionActivitiesModel[];

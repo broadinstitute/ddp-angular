@@ -1,15 +1,15 @@
-import {Injectable} from "@angular/core";
-import {Store} from "@ngrx/store";
-import {StoreStateModel} from "./store.reducer";
+import {Injectable} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {StoreStateModel} from './store.reducer';
 import * as ParticipantsActions from './actions/participants.actions';
 import * as SettingsActions from './actions/settings.actions';
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
 import {
   getErrorStatus,
   getPtsLoadingStatus, getParticipantActivities,
   getParticipantsList
-} from "./selectors/combinedData.selectors";
-import {getParticipantsTotalCount} from "./selectors/participants.selectors";
+} from './selectors/combinedData.selectors';
+import {getParticipantsTotalCount} from './selectors/participants.selectors';
 
 @Injectable({providedIn: 'root'})
 export class StoreService {
@@ -40,7 +40,7 @@ export class StoreService {
   }
 
   public getParticipantActivities(guid: string): Observable<any> {
-    return this.store.select(getParticipantActivities(guid))
+    return this.store.select(getParticipantActivities(guid));
   }
 
   public dispatchGetSettings(parent: string): void {
@@ -48,7 +48,7 @@ export class StoreService {
   }
 
   public get getErrorState(): Observable<string> {
-    return this.store.select(getErrorStatus)
+    return this.store.select(getErrorStatus);
   }
 
   public dispatchGetParticipants(from: number, to: number, parent: string): void {

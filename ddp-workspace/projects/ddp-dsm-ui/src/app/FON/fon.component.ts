@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
-import {SessionService} from "../services/session.service";
-import {SessionMementoService} from "ddp-sdk";
-import {Auth} from "../services/auth.service";
-import {takeUntil} from "rxjs/operators";
-import {Subject} from "rxjs";
+import {SessionService} from '../services/session.service';
+import {SessionMementoService} from 'ddp-sdk';
+import {Auth} from '../services/auth.service';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-fon',
@@ -54,17 +54,17 @@ export class FonComponent implements OnInit, OnDestroy {
     title.setTitle('Fon');
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.authService.dsmToken.pipe(takeUntil(this.unsubscribe))
-      .subscribe(token => this.setTokenCredentials = token)
+      .subscribe(token => this.setTokenCredentials = token);
   }
 
   private set setTokenCredentials(dsmToken: string | null) {
     !dsmToken && this.sessionService.setLoginCredentials(this.sessionService.getDSMToken());
-    this.setDssSession(dsmToken ?? this.sessionService.getDSMToken())
+    this.setDssSession(dsmToken ?? this.sessionService.getDSMToken());
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unsubscribe.next(null);
   }
 

@@ -1,52 +1,35 @@
-import {Injectable} from "@angular/core";
-import {Actions, concatLatestFrom, createEffect, ofType} from "@ngrx/effects";
-import {map, exhaustMap, catchError, combineLatestWith, withLatestFrom} from "rxjs/operators";
+import {Injectable} from '@angular/core';
+import {Actions, createEffect, ofType} from '@ngrx/effects';
+import {map, exhaustMap, catchError} from 'rxjs/operators';
 import * as ParticipantActions from '../actions/participants.actions';
-import {DSMService} from "../../services/dsm.service";
-import {of} from "rxjs";
-import {Store} from "@ngrx/store";
-import {StoreStateModel} from "../store.reducer";
-import {getPtsLoadingStatus} from "../selectors/combinedData.selectors";
+import {DSMService} from '../../services/dsm.service';
+import {of} from 'rxjs';
 
 @Injectable()
 export class ParticipantsEffects {
   constructor(
     private actions$: Actions,
-    private DSMService: DSMService,
+    private dsmService: DSMService,
   ) {
   }
 
-  getParticipants$ = createEffect(() => {
-    return this.actions$.pipe(
+  getParticipants$ = createEffect(() => this.actions$.pipe(
       ofType(ParticipantActions.getParticipantsRequest),
-      exhaustMap(({viewFilter, realm, parent, filterQuery, from, to, sort}) => {
-        return this.DSMService.applyFilter(viewFilter, realm, parent, filterQuery, from, to, sort)
+      exhaustMap(({viewFilter, realm, parent, filterQuery, from, to, sort}) =>
+        this.dsmService.applyFilter(viewFilter, realm, parent, filterQuery, from, to, sort)
           .pipe(
-          map(({participants, totalCount}) => {
-            return ParticipantActions.getParticipantsSuccess(participants, totalCount);
-          }),
-          catchError(({message}) => {
-            return of(ParticipantActions.getParticipantsFailure(message))
-          })
-        )
-      })
-    )
-  })
+          map(({participants, totalCount}) =>
+            ParticipantActions.getParticipantsSuccess(participants, totalCount)),
+          catchError(({message}) => of(ParticipantActions.getParticipantsFailure(message)))
+        ))
+    ));
 
-  getParticipant$ = createEffect(() => {
-    return this.actions$.pipe(
+  getParticipant$ = createEffect(() => this.actions$.pipe(
       ofType(ParticipantActions.getParticipantRequest),
-      exhaustMap(({realm, participantId, parent}) => {
-        return this.DSMService.getParticipantData(realm, participantId, parent)
+      exhaustMap(({realm, participantId, parent}) => this.dsmService.getParticipantData(realm, participantId, parent)
           .pipe(
-            map(([participant]) => {
-              return ParticipantActions.getParticipantSuccess(participant);
-            }),
-            catchError(({message}) => {
-              return of(ParticipantActions.getParticipantFailure(message))
-            })
-          )
-      })
-    )
-  })
+            map(([participant]) => ParticipantActions.getParticipantSuccess(participant)),
+            catchError(({message}) => of(ParticipantActions.getParticipantFailure(message)))
+          ))
+    ));
 }

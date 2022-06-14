@@ -1,4 +1,4 @@
-import {TissueModel} from "./tissue.model";
+import {TissueModel} from './tissue.model';
 
 export interface OncHistoryDetailModel {
   participantId: string;

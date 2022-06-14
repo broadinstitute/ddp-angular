@@ -1,4 +1,4 @@
-import {QuestionDefinitionModel} from "./questionDefinition.model";
+import {QuestionDefinitionModel} from './questionDefinition.model';
 
 export interface ActivityDefinitionModel {
   activityCode: string;

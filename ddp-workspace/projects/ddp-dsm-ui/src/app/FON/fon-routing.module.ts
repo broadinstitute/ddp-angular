@@ -1,10 +1,10 @@
-import {NgModule} from "@angular/core";
-import {HomeComponent} from "./pages/home/home.component";
-import {ParticipantsListComponent} from "./pages/participantsList/participantsList.component";
-import {ActivitiesComponent} from "./pages/activities/activities.component";
-import {ActivityComponent} from "./pages/activities/activity/activity.component";
-import {RouterModule, Routes} from "@angular/router";
-import {FonComponent} from "./fon.component";
+import {NgModule} from '@angular/core';
+import {HomeComponent} from './pages/home/home.component';
+import {ParticipantsListComponent} from './pages/participantsList/participantsList.component';
+import {ActivitiesComponent} from './pages/activities/activities.component';
+import {ActivityComponent} from './pages/activities/activity/activity.component';
+import {RouterModule, Routes} from '@angular/router';
+import {FonComponent} from './fon.component';
 
 const routes: Routes = [
   {path: '', component: FonComponent, children: [
@@ -16,7 +16,7 @@ const routes: Routes = [
         ]}
     ]},
 
-]
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -1,4 +1,4 @@
-import {QuestionAnswerModel} from "./questionAnswer.model";
+import {QuestionAnswerModel} from './questionAnswer.model';
 
 export interface ActivityDataModel {
   activityCode: string;
