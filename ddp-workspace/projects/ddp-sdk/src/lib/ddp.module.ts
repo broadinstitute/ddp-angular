@@ -531,6 +531,6 @@ export class DdpModule {
                 StackdriverErrorReporterService,
                 TranslateService
             ]
-        }
+        };
     }
 }
