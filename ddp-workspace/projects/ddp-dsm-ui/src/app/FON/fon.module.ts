@@ -19,8 +19,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {StoreService} from '../STORE/store.service';
 import {MainConstants} from './constants/main-constants';
 import {TranslateService} from '@ngx-translate/core';
-import {SessionService} from "../services/session.service";
-import {Title} from "@angular/platform-browser";
+import {SessionService} from '../services/session.service';
+import {Title} from '@angular/platform-browser';
 
 
 const material = [
