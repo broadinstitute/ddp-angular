@@ -7,7 +7,7 @@ import {ActivitiesComponent} from './pages/activities/activities.component';
 import {HomeComponent} from './pages/home/home.component';
 import {fonRoutingModule} from './fon-routing.module';
 import {CommonModule} from '@angular/common';
-import {DdpModule} from 'ddp-sdk';
+import {DdpModule, SessionMementoService} from 'ddp-sdk';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
@@ -19,6 +19,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {StoreService} from '../STORE/store.service';
 import {MainConstants} from './constants/main-constants';
 import {TranslateService} from '@ngx-translate/core';
+import {SessionService} from "../services/session.service";
+import {Title} from "@angular/platform-browser";
 
 
 const material = [
@@ -52,7 +54,19 @@ const material = [
 })
 
 export class fonModule {
-  constructor(private storeService: StoreService,  private translateService: TranslateService) {
+  constructor(private storeService: StoreService,
+              private translateService: TranslateService,
+              private sessionService: SessionService,
+              private dssSessionService: SessionMementoService,
+              private title: Title) {
+
+    // Title
+    this.title.setTitle('Fon');
+
+    // Token
+    const DSMToken = this.sessionService.getDSMToken();
+    this.sessionService.setExpirationTime(DSMToken);
+    this.dssSessionService.setSession(null, DSMToken, null, 'en', +this.sessionService.getTokenExpiration());
 
     // Store
     this.storeService.setStudy = MainConstants.study;

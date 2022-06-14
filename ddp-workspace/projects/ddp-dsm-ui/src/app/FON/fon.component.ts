@@ -1,10 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Title} from '@angular/platform-browser';
-import {SessionService} from '../services/session.service';
-import {SessionMementoService} from 'ddp-sdk';
-import {Auth} from '../services/auth.service';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
+import {Component} from '@angular/core';
+
 
 @Component({
   selector: 'app-fon',
@@ -44,36 +39,6 @@ import {Subject} from 'rxjs';
   `]
 })
 
-export class FonComponent implements OnInit, OnDestroy {
-  unsubscribe = new Subject();
-
-  constructor(private title: Title,
-              private sessionService: SessionService,
-              private dssSessionService: SessionMementoService,
-              private authService: Auth) {
-    title.setTitle('Fon');
-  }
-
-  ngOnInit(): void {
-    this.authService.dsmToken.pipe(takeUntil(this.unsubscribe))
-      .subscribe(token => this.setTokenCredentials = token);
-  }
-
-  private set setTokenCredentials(dsmToken: string | null) {
-    !dsmToken && this.sessionService.setLoginCredentials(this.sessionService.getDSMToken());
-    this.setDssSession(dsmToken ?? this.sessionService.getDSMToken());
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe.next(null);
-  }
-
-  private setDssSession(dsmToken: string): void {
-    const accessToken = null;
-    const userGuid = null;
-    const locale = 'en';
-    const expiresAtInSeconds: number = +this.sessionService.getTokenExpiration();
-    // set DSS Session partially
-    this.dssSessionService.setSession(accessToken, dsmToken, userGuid, locale, expiresAtInSeconds);
-  }
+export class FonComponent{
+  constructor() {}
 }
