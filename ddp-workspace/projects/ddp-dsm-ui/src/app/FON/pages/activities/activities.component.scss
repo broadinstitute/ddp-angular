@@ -1,4 +1,6 @@
 $hoverColor: #7154FF;
+$activity-background-color: #F8F8F8;
+$border-color: #979797;
 
 :host-context(app-activities) {
   grid-area: otherPage
@@ -11,17 +13,21 @@ $hoverColor: #7154FF;
     justify-content: space-between;
     gap: 50px;
     height: 100%;
+    border-top: 1px solid $border-color;
   }
 
   &-names {
     width: 20%;
     max-width: 300px;
+    padding: 0 16px;
   }
 }
 
 .activity {
   padding: 20px;
   flex-grow: 1;
+  background-color: $activity-background-color;
+  border-left: 1px solid $border-color;
 }
 
 .selected-participant {
