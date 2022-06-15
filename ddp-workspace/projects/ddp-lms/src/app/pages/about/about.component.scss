@@ -8,7 +8,9 @@
   margin: 0;
 }
 
-
+.participation {
+  padding-bottom: 0 !important;
+}
 
 .about-block {
   background-color: $primary-lms-backGround-color;
@@ -232,6 +234,18 @@
 
       }
   }
+}
+
+.chemptext {
+  color: #F1E4FB;
+  background: #F1E4FB;
+}
+
+.champions-list-item {
+    h2 {
+      font-family: Untitled-Sans-Medium, sans-serif;
+    }
+  
 }
 
 
