@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { FonComponent } from './pages/fon.component';
-import { ActivityComponent } from '../pages/activities/activity/activity.component';
-import { ParticipantsListComponent } from '../pages/participantsList/participantsList.component';
-import { ActivitiesComponent } from '../pages/activities/activities.component';
 import { HomeComponent } from './components/home/home.component';
 import { fonRoutingModule } from './fon-routing.module';
 import { CommonModule } from '@angular/common';
@@ -15,18 +12,20 @@ import { SessionService } from '../../services/session.service';
 import { Title } from '@angular/platform-browser';
 import { MaterialModule } from './../../../../src/material.module';
 
+import { ActivitiesComponent } from './components/activities/activities.component';
+import { ActivityComponent } from './components/activities/activity/activity.component';
+
 @NgModule({
   declarations: [
     NavigationComponent,
     FonComponent,
-    ActivityComponent,
-    ParticipantsListComponent,
-    ActivitiesComponent,
     HomeComponent,
+    ActivitiesComponent,
+    ActivityComponent,
   ],
   imports: [CommonModule, fonRoutingModule, DdpModule.forDSM(), MaterialModule],
   providers: [],
-  exports: [],
+  exports: [ActivitiesComponent, ActivityComponent],
 })
 export class fonModule {
   constructor(
