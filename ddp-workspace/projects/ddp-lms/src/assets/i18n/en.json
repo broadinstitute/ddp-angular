@@ -84,7 +84,7 @@
             {
               "Question": "Who is conducting this research?",
               "Paragraphs": [
-                "This project is being conducted by the Broad Institute of MIT and Harvard, Dana-Farber Cancer Institute, and Count Me In, a non-profit research initiative that conducts patient-partnered studies of cancer. Count Me In's Leiomyosarcoma (LMS) Project and Leiomyosarcoma (LMS) Project are supported by a grant from the National Cancer Institute's Cancer Moonshot program and are part of the <a href='https://www.cancer.gov/research/key-initiatives/moonshot-cancer-initiative/implementation/patient-engagement'>Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers</a>."
+                "This project is being conducted by the Broad Institute of MIT and Harvard, Dana-Farber Cancer Institute, and Count Me In, a non-profit research initiative that conducts patient-partnered studies of cancer. Count Me In's Leiomyosarcoma (LMS) Project and Leiomyosarcoma (LMS) Project are supported by a grant from the National Cancer Institute's Cancer Moonshot program and are part of the <a href='https://www.cancer.gov/research/key-initiatives/moonshot-cancer-initiative/implementation/patient-engagement' target='_blank'>Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers</a>."
               ]
             },
             {
@@ -915,7 +915,7 @@
       },
       {
         "question": "Who is conducting this research?",
-        "paragraph": "This project is being conducted by the Broad Institute of MIT and Harvard, Dana-Farber Cancer Institute, and Count Me In, a non-profit research initiative that conducts patient-partnered studies of cancer. Count Me In's Leiomyosarcoma (LMS) Project and Leiomyosarcoma (LMS) Project are supported by a grant from the National Cancer Institute's Cancer Moonshot program and are part of the <a target='blank' href='https://www.cancer.gov/research/key-initiatives/moonshot-cancer-initiative/implementation/patient-engagement'>Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers</a>."
+        "paragraph": "This project is being conducted by the Broad Institute of MIT and Harvard, Dana-Farber Cancer Institute, and Count Me In, a non-profit research initiative that conducts patient-partnered studies of cancer. Count Me In's Leiomyosarcoma (LMS) Project and Leiomyosarcoma (LMS) Project are supported by a grant from the National Cancer Institute's Cancer Moonshot program and are part of the <a target='_blank' href='https://www.cancer.gov/research/key-initiatives/moonshot-cancer-initiative/implementation/patient-engagement'>Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers</a>."
       },
       {
         "question": "What does participation look like?",
