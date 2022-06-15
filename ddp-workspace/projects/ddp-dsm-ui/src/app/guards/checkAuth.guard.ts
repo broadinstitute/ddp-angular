@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {
-  ActivatedRoute,
   CanLoad,
   Route,
   Router,
@@ -12,7 +11,7 @@ import {ComponentService} from '../services/component.service';
 
 @Injectable()
 export class CheckAuthGuard implements CanLoad {
-  constructor(private auth: Auth, private router: Router, private route: ActivatedRoute) {
+  constructor(private auth: Auth, private router: Router) {
   }
 
   canLoad(route: Route, segments: UrlSegment[]): boolean | UrlTree {

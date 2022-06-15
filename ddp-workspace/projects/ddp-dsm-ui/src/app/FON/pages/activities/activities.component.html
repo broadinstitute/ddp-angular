@@ -1,5 +1,5 @@
 <div class="activities-container">
-  <ng-container *ngIf="(patientWithActivities | async) as Patient else loadingSpinner">
+  <ng-container *ngIf="(patientWithActivities | async) as Patient">
     <div class="activities-names" >
       <div class="selected-participant">
         Selected patient:
@@ -26,10 +26,6 @@
       </mat-accordion>
     </div>
   </ng-container>
-
-  <ng-template #loadingSpinner>
-    <mat-spinner *ngIf="loading$ | async"></mat-spinner>
-  </ng-template>
 
   <div class="activity">
     <router-outlet></router-outlet>

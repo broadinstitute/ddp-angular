@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Title} from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-fon',
@@ -39,8 +39,6 @@ import {Title} from '@angular/platform-browser';
   `]
 })
 
-export class FonComponent {
-  constructor(private title: Title) {
-    title.setTitle('Fon');
-  }
+export class FonComponent{
+  constructor() {}
 }

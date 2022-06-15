@@ -1,4 +1,4 @@
-import { ErrorHandler, NgModule } from '@angular/core';
+import {ErrorHandler, ModuleWithProviders, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -6,7 +6,7 @@ import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common
 import { Title } from '@angular/platform-browser';
 import { A11yModule } from '@angular/cdk/a11y';
 // ngx-translate
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NGXTranslateService } from './services/internationalization/ngxTranslate.service';
 // CookieService
@@ -521,4 +521,14 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ]
 })
 export class DdpModule {
+    static forDSM(): ModuleWithProviders<DdpModule> {
+        return {
+            ngModule: DdpModule,
+            providers: [
+                SessionMementoService,
+                StackdriverErrorReporterService,
+                TranslateService
+            ]
+        };
+    }
 }
