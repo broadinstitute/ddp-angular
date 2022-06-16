@@ -9,7 +9,7 @@ export class PhysiciansComponent {
 
       readonly stepsHrf = [
         'consent.pdf',
-        'For_physic.pdf',
+        'https://storage.googleapis.com/cmi-study-dev-assets/osteo/pdf/For%20Your%20Physician%20PDF%20-%20Linked%20on%20For%20Your%20Physician%20Page.pdf',
         'surveys.pdf',
         'Kit_Instructions.pdf',
         'tumor_samples.pdf'
