@@ -7,22 +7,20 @@
 .headerPlace {
   height: 160px;
   background-color: #C59CE4;
-  width: 100%;
+  width: 100%; 
 }
 
 .headerText {
+  text-align: center;
+  padding: 3.2rem 0;
+  background-color: $accent-lms-color;
   height: 58px;
+  font-family: Untitled-Sans-Light;
   color: #000000;
-  font-family: "Untitled Sans", sans-serif;
   font-size: 48px;
   font-weight: 300;
   letter-spacing: 0;
   line-height: 58px;
-  text-align: center;
-  cursor: default;
-  margin: 0 auto 5.625rem;
-  padding: 3.2rem 0;
-  background-color: $accent-lms-color !important;
 }
 
 .purposePlace {
