@@ -5,10 +5,10 @@ import {
   AnalyticsEventsService,
   SessionMementoService,
   WindowRef
-} from "ddp-sdk";
-import {NavigationEnd, Router} from "@angular/router";
-import {CommunicationService, HeaderConfigurationService} from "toolkit";
-import {DOCUMENT} from "@angular/common";
+} from 'ddp-sdk';
+import {NavigationEnd, Router} from '@angular/router';
+import {CommunicationService, HeaderConfigurationService} from 'toolkit';
+import {DOCUMENT} from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -34,7 +34,6 @@ export class HeaderComponent implements OnInit {
         this.isPanelOpened = false;
       }
     });
-    console.log(this.headerConfig.currentActivityCode, this.headerConfig.workflowStartSectionsVisibility, 'asdasd')
   }
 
   public openCloseMenu(): void {
@@ -53,6 +52,10 @@ export class HeaderComponent implements OnInit {
     this.analytics.emitCustomEvent(AnalyticsEventCategories.ClickedCountMeIn, AnalyticsEventActions.FromHeader);
   }
 
+  onLogoClick(): void {
+    this.headerConfig.setupDefaultHeader();
+  }
+
   @HostListener('window: scroll') public onWindowScroll(): void {
     const scrolledPixels = this.window.nativeWindow.pageYOffset
       || this.document.documentElement.scrollTop
@@ -62,10 +65,6 @@ export class HeaderComponent implements OnInit {
 
   @HostListener('window: resize') public onWindowResize(): void {
     this.isPanelOpened = false;
-  }
-
-  onLogoClick() {
-    this.headerConfig.setupDefaultHeader();
   }
 
 }

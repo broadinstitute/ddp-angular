@@ -39,7 +39,7 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {UserActivitiesComponent} from './components/user-activities/user-activities.component';
 import {MatTableModule} from '@angular/material/table';
 import {FlexModule} from '@angular/flex-layout';
-import {WorkflowProgressComponent} from "./components/workflow-progress/workflow-progress.component";
+import {WorkflowProgressComponent} from './components/workflow-progress/workflow-progress.component';
 
 
 declare const DDP_ENV: Record<string, any>;

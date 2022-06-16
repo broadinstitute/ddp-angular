@@ -36,7 +36,6 @@ export class WorkflowProgressComponent implements OnChanges {
         if (this.currentActivityCode) {
             this.setupSteps();
         }
-      console.log(this.steps, 'asdasd')
     }
 
     public isCurrentStep(activities: Array<string>): boolean {
