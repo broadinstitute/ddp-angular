@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+@import '../../../theme.scss';
 @import "../../../styles/fonts.scss";
 
 * {
@@ -5,11 +7,14 @@
   padding: 0;
 }
 .header {
-  height: 100px;
-  padding: 0 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  height: 6.25rem;
+  transition: all 200ms linear;
+  background-color: white;
 
   &__nav {
     height: 100%;
@@ -36,6 +41,228 @@
     justify-content: flex-end;
   }
 }
+
+
+.sticky {
+  display: none;
+}
+
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 6.25rem;
+  max-width: 1300px;
+  margin: auto;
+  padding: 0 1.5625rem;
+}
+
+.panel-opened {
+  height: 100vh;
+  z-index: 3;
+
+  .panel-controls {
+    display: flex;
+    flex-direction: column;
+    margin: 1.5625rem 2.5rem;
+    transition: opacity 100ms 200ms ease;
+    opacity: 1;
+    visibility: visible;
+    height: 100%;
+
+    .nav,
+    .auth {
+      display: flex;
+    }
+
+    .navigation {
+      flex-direction: column;
+      padding: 0;
+    }
+
+    .auth {
+      flex-direction: column;
+      align-items: start;
+    }
+
+    .simple-button,
+    .SimpleButton,
+    .auth__login,
+    a {
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+    }
+
+    .navigation__item,
+    .auth__login,
+    .auth__dashboard {
+      margin-bottom: 3rem;
+    }
+
+    .dashboard-icon {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
+
+.header-link__dashboard,
+.header-link {
+  display: flex;
+  align-items: center;
+}
+
+.header-link:link,
+.header-link:visited {
+  color: mat.get-color-from-palette($app-theme, 200);
+  font-size: 1.0625rem;
+  line-height: 1.375rem;
+
+  .dashboard-icon_color {
+    stroke: mat.get-color-from-palette($app-theme, 200);
+  }
+}
+
+.header-link:hover {
+  color: mat.get-color-from-palette($app-theme, 650);
+  text-decoration: underline;
+
+  .dashboard-icon_color {
+    stroke: mat.get-color-from-palette($app-theme, 650);
+  }
+}
+
+.header-link:active {
+  color: mat.get-color-from-palette($app-theme, 200);
+  text-decoration: underline;
+
+  .dashboard-icon_color {
+    stroke: mat.get-color-from-palette($app-theme, 200);
+  }
+}
+
+.header-link__dashboard {
+  margin: 0 0.2rem 0 0;
+}
+
+.header-link_active {
+  text-decoration: underline;
+}
+
+
+.activity-heading {
+  width: 700px;
+  margin: 0 1.5rem;
+}
+
+.header_shadow {
+  box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.auth {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+
+.auth__login {
+  font-size: 1.0625rem;
+  line-height: 1.375rem;
+  cursor: pointer;
+}
+
+.header-link__dashboard,
+.header-link {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.header-link:link,
+.header-link:visited {
+  color: mat.get-color-from-palette($app-theme, 200);
+  font-size: 1.0625rem;
+  line-height: 1.375rem;
+
+  .dashboard-icon_color {
+    stroke: mat.get-color-from-palette($app-theme, 200);
+  }
+}
+
+.header-link:hover {
+  color: mat.get-color-from-palette($app-theme, 650);
+  text-decoration: underline;
+
+  .dashboard-icon_color {
+    stroke: mat.get-color-from-palette($app-theme, 650);
+  }
+}
+
+.header-link:active {
+  color: mat.get-color-from-palette($app-theme, 200);
+  text-decoration: underline;
+}
+
+.header-link__dashboard {
+  margin: 0 0.2rem 0 0;
+}
+
+.header-link_active {
+  text-decoration: underline;
+}
+
+.header-button {
+  margin-left: 1.875rem;
+}
+
+
+@media only screen and (max-width: 650px) {
+  .activity-heading {
+    margin: 0 1rem;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .breadcrumbs {
+    display: none;
+  }
+
+  .sticky {
+    display: unset;
+  }
+}
+
+.header-content_sticky {
+  @media only screen and (max-width: 450px) {
+    .project-logo__text {
+      display: none;
+    }
+
+    .project-logo__img {
+      margin-right: 0.5rem;
+    }
+  }
+
+  @media only screen and (max-width: 350px) {
+    .project-logo {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .header-content {
+    padding: 0 5px;
+  }
+}
+
+@media screen and (max-width: 945px) {
+  .auth {
+    display: none;
+  }
+}
+
 
 
 
