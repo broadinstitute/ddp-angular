@@ -21,6 +21,12 @@ import {MainConstants} from './constants/main-constants';
 import {TranslateService} from '@ngx-translate/core';
 import {SessionService} from '../services/session.service';
 import {Title} from '@angular/platform-browser';
+import {AddPatientsModalComponent} from "./components/add-patients-modal/add-patients-modal.component";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 const material = [
@@ -31,7 +37,11 @@ const material = [
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatProgressBarModule,
-  MatButtonModule
+  MatButtonModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatDatepickerModule,
+  MatDialogModule
 ];
 
 @NgModule({
@@ -41,11 +51,13 @@ const material = [
     ActivityComponent,
     ParticipantsListComponent,
     ActivitiesComponent,
-    HomeComponent
+    HomeComponent,
+    AddPatientsModalComponent
   ],
   imports: [
     CommonModule,
     fonRoutingModule,
+    ReactiveFormsModule,
     DdpModule.forDSM(),
     ...material,
   ],

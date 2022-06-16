@@ -5,7 +5,8 @@ import {Observable, tap} from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
 import {MainConstants} from '../../constants/main-constants';
 import {StoreService} from '../../../STORE/store.service';
-import {DSMService} from '../../../services/dsm.service';
+import {AddPatientsModalComponent} from "../../components/add-patients-modal/add-patients-modal.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-participants-list',
@@ -25,7 +26,12 @@ export class ParticipantsListComponent implements OnInit {
 
   private readonly LSParams: string = 'pListQueryParams';
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private storeService: StoreService) {
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private storeService: StoreService,
+    private matDialog: MatDialog
+  ) {
   }
 
   ngOnInit(): void {
@@ -68,6 +74,16 @@ export class ParticipantsListComponent implements OnInit {
   openActivities(participant: patientListModel): void {
     this.router.navigate(['../patient', participant.guid], {
       relativeTo: this.activatedRoute
+    });
+  }
+
+  openAddPatientsModal() {
+    const dialogRef = this.matDialog.open(AddPatientsModalComponent, {
+      panelClass: 'matDialog'
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result, 'from dialog close observer');
     });
   }
 }

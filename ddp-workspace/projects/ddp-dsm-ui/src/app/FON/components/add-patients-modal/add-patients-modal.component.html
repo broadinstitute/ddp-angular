@@ -1,0 +1,112 @@
+<div class="dialogContainer">
+  <header>
+    <p>Register Patients</p>
+  </header>
+  <main>
+    <section>
+      <form [formGroup]="addPatientForm">
+        <ng-container formArrayName="patients">
+          <ng-container *ngFor="let patient of patients.controls; let i = index">
+            <div [formGroup]="patient" [ngClass]="{'hr': i > 0}" class="addPatientForm">
+              <div class="patientNav">
+                <p class="patientNav-number">Patient {{i+1}}</p>
+                <span *ngIf="i > 0" class="patientNav-remove" (click)="removePatient(i)">X</span>
+              </div>
+
+              <div class="row">
+                <div class="email">
+                  <mat-label>Email*</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input
+                      matInput
+                      formControlName="firstName"
+                      placeholder="Enter email address">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row firstLastName">
+                <div class="firstName">
+                  <mat-label>First Name*</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input
+                      matInput
+                      formControlName="firstName"
+                      placeholder="First name">
+                  </mat-form-field>
+                </div>
+                <div class="lastName">
+                  <mat-label>Last Name*</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input
+                      matInput
+                      formControlName="lastName"
+                      placeholder="Last Name">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="dateOfBirth">
+                  <mat-label>Date of birth*</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input
+                      matInput
+                      [matDatepicker]="picker1"
+                      formControlName="dateOfBirth"
+                      placeholder="MM/DD/YY">
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="picker1">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row consentAssentDate">
+                <div class="consentDate">
+                  <mat-label>Informed consent date*</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input
+                      matInput
+                      [matDatepicker]="picker2"
+                      formControlName="informedConsentDate"
+                      placeholder="MM/DD/YY">
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="picker2">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="assentDate">
+                  <mat-label>Assent date (if applicable)</mat-label>
+                  <mat-form-field appearance="outline">
+                    <input
+                      matInput
+                      [matDatepicker]="picker3"
+                      formControlName="assentDate"
+                      placeholder="MM/DD/YY">
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="picker3">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker3></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+        <button class="btn-addPt" (click)="addPatient()">
+          + Add another patient
+        </button>
+      </form>
+    </section>
+    <aside>
+      <p>File upload</p>
+    </aside>
+  </main>
+  <footer>
+    <button class="btn-cancel" (click)="closeDialog()">Cancel</button>
+    <button class="btn-register" (click)="registerPatient()">Register</button>
+  </footer>
+</div>

@@ -1,7 +1,10 @@
 <div class="participants">
   <h3>Patients list</h3>
   <h2 style="color: red">{{ error$ | async }}</h2>
-
+  <button class="addPatientModalBtn" (click)="openAddPatientsModal()">
+    <mat-icon>people</mat-icon>
+    Register
+  </button>
   <table class="participants-table">
     <thead>
       <tr class="header">

@@ -1,0 +1,191 @@
+::ng-deep.mat-dialog-container {
+  padding: 0;
+}
+
+::ng-deep.matDialog {
+  width: 60%;
+  height: 65%;
+}
+
+::ng-deep.mat-form-field-infix {
+  border-top: 0.5rem!important;
+}
+
+::ng-deep.mat-form-field {
+  font-size: 15px;
+}
+
+.dialogContainer {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 8.8% 79.2% 12%;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+
+  header {
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    border-bottom: 0.5px solid #979797;
+    padding: 6px 14.5px;
+
+    p {
+      padding: 0;
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 22px;
+    }
+  }
+
+  main {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: 75% 25%;
+    grid-template-areas: "section aside";
+
+    section {
+      grid-area: section;
+      border-right: 0.5px solid #979797;
+      overflow: auto;
+      padding: 25px;
+
+      form {
+
+        .btn-addPt {
+          height: 40px;
+          width: 177px;
+          color: #546989;
+          padding: 2px 10px;
+          background-color: rgba(0, 0, 0, 0);
+          border: 1px solid #546989;
+          border-radius: 2px;
+        }
+
+        .addPatientForm {
+
+          .patientNav {
+            display: flex;
+            justify-content: space-between;
+
+            &-number {
+              font-size: 15px;
+              letter-spacing: 0;
+              line-height: 20px;
+            }
+            
+            &-remove {
+              cursor: pointer;
+            }
+          }
+
+          .row {
+            width: 100%;
+            overflow: auto;
+            margin-left: 15px;
+
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+
+            .email, .dateOfBirth {
+              display: flex;
+              flex-direction: column;
+              width: 45%;
+            }
+
+            input::placeholder {
+              font-style: italic!important;
+            }
+
+          }
+
+          .firstLastName {
+            flex-direction: row;
+
+            .firstName, .lastName {
+              display: flex;
+              flex-direction: column;
+              width: 45%;
+            }
+            .lastName {
+              margin-left: 16px;
+            }
+          }
+
+          .consentAssentDate {
+            flex-direction: row;
+            width: 100%;
+            .consentDate, .assentDate {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              width: 45%;
+            }
+            .assentDate {
+              margin-left: 16px;
+            }
+          }
+
+
+
+          //input {
+          //  height: 48px;
+          //  width: 266px;
+          //  margin-top: 10px;
+          //  border: 1px solid #737E8E;
+          //  border-radius: 3px;
+          //  background-color: #FFFFFF;
+          //}
+        }
+
+
+
+        }
+
+        .hr {
+          border-top: 0.5px solid #BBC3CA;
+          margin-top: 25px;
+          padding-top: 25px;
+        }
+
+    }
+
+    aside {
+      grid-area: aside;
+    }
+  }
+
+  footer {
+    grid-area: footer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #E6E6E6;
+    padding: 6px 15px;
+
+    .btn-cancel {
+      height: 70%;
+      width: 16%;
+      color: #546989;
+      padding: 2px 10px;
+      background-color: rgba(0, 0, 0, 0);
+      border: 1px solid #546989;
+      border-radius: 2px;
+    }
+
+    .btn-register {
+      height: 70%;
+      width: 16%;
+      color: #FFFFFF;
+      padding: 2px 10px;
+      background-color: #546989;
+      border: none;
+      border-radius: 2px;
+    }
+  }
+}
