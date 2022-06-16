@@ -1,0 +1,72 @@
+<p>Add Patient(s)</p>
+<p>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo itaque vel
+  labore quasi numquam sapiente quidem a corporis, nobis inventore veritatis
+  minus rem similique praesentium. Consequuntur, ab tenetur! Quis, ab.
+</p>
+
+<div class="patient-form">
+  <div class="row">
+    <div class="field">
+      <label>First Name</label>
+      <input
+        [value]="firstName$ | async"
+        (keyup)="firstName$.next($event.target.value)"
+        placeholder="Please specify"
+      />
+    </div>
+    <div class="field">
+      <label>Last Name</label>
+      <input
+        [value]="lastName$ | async"
+        (keyup)="lastName$.next($event.target.value)"
+        placeholder="Please specify"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="field">
+      <label>Date of birth</label>
+      <input
+        [value]="dateOfBirth$ | async"
+        (keyup)="dateOfBirth$.next($event.target.value)"
+        placeholder="MM/DD/YY"
+      />
+    </div>
+    <div class="field">
+      <label>Email</label>
+      <input
+        [value]="email$ | async"
+        (keyup)="email$.next($event.target.value)"
+        placeholder="name@email.com"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="field">
+      <label>Informed consent date</label>
+      <input
+        type="date"
+        [value]="consentDate$ | async"
+        (keyup)="consentDate$.next($event.target.value)"
+      />
+    </div>
+    <div class="field">
+      <label>Assent date (if applicable)</label>
+      <input
+        type="date"
+        [value]="assentDate$ | async"
+        (change)="assentDate$.next($event.target.value)"
+      />
+    </div>
+  </div>
+</div>
+
+<div class="add-patient-row">
+  <span class="outlined-button"> + add another patient</span>
+</div>
+
+<div class="bottom-buttons">
+  <span class="outlined-button">Cancel</span>
+  <span class="filled-button" (click)="addNow()">Add now</span>
+</div>

@@ -1,5 +1,12 @@
 <div class="participants">
   <h3>Patients list</h3>
+  <div class="buttons-row">
+    <p class="button" (click)="openAddPatientsModal()"><mat-icon class="material-symbols-outlined">
+      person_add
+    </mat-icon>
+      Register</p>
+  </div>
+
   <h2 style="color: red">{{ error$ | async }}</h2>
 
   <table class="participants-table">

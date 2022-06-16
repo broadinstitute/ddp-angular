@@ -1,0 +1,66 @@
+.patient-form {
+    display: flex;
+    flex-direction: column;
+    .row {
+      display: flex;
+      justify-content: space-between;
+      .field {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        width: 50%;
+        input {
+          border: none;
+          border: 1px solid rgba(73,86,106,0.4);
+          border-radius: 3px;
+          padding: 10px;
+        }
+        .date {
+            box-sizing: border-box;
+            border: 1px solid rgba(73,86,106,0.4);
+            border-radius: 3px;
+            background-color: #FFFFFF;
+            display: flex;
+            justify-content: space-around;
+            input {
+                border: none;
+
+                &:focus, :focus-visible {
+                    outline: none;
+                    border: none;
+                    background-color: transparent;
+                }
+            }
+
+        }
+      }
+    }
+  }
+  
+  .bottom-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .add-patient-row {
+      margin-top: 10px;
+  }
+  .outlined-button {
+    border: 1px solid #8593aa;
+    padding: 8px;
+    border-radius: 5px;
+    color: #546989;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  
+  .filled-button {
+    background-color: #344055;
+    color: white;
+    padding: 8px;
+    border-radius: 5px;
+    font-weight: 700;
+    cursor: pointer;
+  }

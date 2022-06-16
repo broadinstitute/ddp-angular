@@ -25,3 +25,23 @@ tr {
   }
 }
 
+.buttons-row {
+  display: flex;
+  justify-content: flex-end;
+
+  .button {
+    margin: 10px;
+    padding: 8px 15px;
+    box-sizing: border-box;
+    border: 1px solid #546989;
+    border-radius: 2px;
+    color: #546989;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+    line-height: 24px;
+    text-align: center;
+    display: flex;
+    gap: 12.33px
+  }
+}
