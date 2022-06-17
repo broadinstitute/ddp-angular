@@ -612,6 +612,11 @@
     },
     "FaqPage": {
         "Title": "Frequently Asked Questions",
+        "Button": {
+            "Expand": "Expand all",
+            "Collapse": "Collapse all",
+            "MoreFAQs": "More FAQs"
+        },
         "IntroText": {
             "Paragraph1": "As part of the OSproject, patients contribute their experiences, clinical information, and samples to make data freely available for any OS researchers. By generating the most comprehensive dataset for OS, the entire cancer research community can make discoveries that can lead to a better understanding of the disease and changes for future treatments. The project is part of Count Me In, a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research. The project also works in collaboration with a growing coalition of nonprofit advocacy partners.",
             "Paragraph2": {
