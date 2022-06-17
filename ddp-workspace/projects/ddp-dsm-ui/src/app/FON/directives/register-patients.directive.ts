@@ -1,18 +1,18 @@
 import {Directive, HostListener} from "@angular/core";
-import {AddPatientsModalComponent} from "../components/add-patients-modal/add-patients-modal.component";
+import {RegisterPatientsModalComponent} from "../components/register-patients-modal/register-patients-modal.component";
 import {MatDialog} from "@angular/material/dialog";
 
 @Directive({
-  selector: '[enrollPatient]'
+  selector: '[registerPatient]'
 })
 
-export class enrollPatientDirective {
+export class registerPatientsDirective {
 
   constructor(private matDialog: MatDialog) {
   }
 
   @HostListener('click') openAddPatientsModal() {
-    const dialogRef = this.matDialog.open(AddPatientsModalComponent, {
+    const dialogRef = this.matDialog.open(RegisterPatientsModalComponent, {
       panelClass: 'matDialog'
     });
 

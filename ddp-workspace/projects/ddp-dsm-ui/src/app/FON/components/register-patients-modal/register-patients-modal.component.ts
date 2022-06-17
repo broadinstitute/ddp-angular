@@ -4,17 +4,17 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angul
 
 @Component({
   selector: 'app-add-patients-modal',
-  templateUrl: './add-patients-modal.component.html',
-  styleUrls: ['./add-patients-modal.component.scss'],
+  templateUrl: './register-patients-modal.component.html',
+  styleUrls: ['./register-patients-modal.component.scss'],
 })
-export class AddPatientsModalComponent implements OnInit {
+export class RegisterPatientsModalComponent implements OnInit {
 
 
   readonly addPatientForm: FormGroup = this.fromBuilder.group({
     patients: this.fromBuilder.array([])
   })
 
-  constructor(public dialogRef: MatDialogRef<AddPatientsModalComponent>,
+  constructor(public dialogRef: MatDialogRef<RegisterPatientsModalComponent>,
               private fromBuilder: FormBuilder) {
   }
 
