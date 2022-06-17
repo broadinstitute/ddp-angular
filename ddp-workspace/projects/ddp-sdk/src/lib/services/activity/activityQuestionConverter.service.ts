@@ -63,6 +63,7 @@ export class ActivityQuestionConverter {
         questionBlock.tooltip = questionJson.tooltip;
         questionBlock.readonly = questionJson.readonly;
         questionBlock.displayNumber = displayNumber;
+        questionBlock.columnSpan = questionJson.columnSpan ?? 1;
         questionBlock.serverValidationMessages = questionJson.validationFailures ?
             questionJson.validationFailures.map(validationFailure => validationFailure.message) : [];
 
@@ -70,6 +71,8 @@ export class ActivityQuestionConverter {
             questionBlock.validators.push(newValidator);
         }
         questionBlock.isRequired = this.isQuestionRequired(questionBlock.validators);
+        // for display between composite children in tabular block
+        (questionBlock as any).tabularSeparator = questionJson.tabularSeparator;
 
         if (questionJson.answers && questionJson.answers.length > 0) {
             if (questionJson.questionType === 'PICKLIST') {

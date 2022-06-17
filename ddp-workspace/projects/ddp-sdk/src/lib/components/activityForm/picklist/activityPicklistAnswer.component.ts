@@ -3,11 +3,12 @@ import { ActivityPicklistQuestionBlock } from '../../../models/activity/activity
 import { ActivityPicklistAnswerDto } from '../../../models/activity/activityPicklistAnswerDto';
 import { PicklistSelectMode } from './../../../models/activity/picklistSelectMode';
 import { PicklistRenderMode } from './../../../models/activity/picklistRenderMode';
+import { LayoutType } from '../../../models/layout/layoutType';
 
 @Component({
     selector: 'ddp-activity-picklist-answer',
     template: `
-    <ddp-question-prompt [block]="block"></ddp-question-prompt>
+    <ddp-question-prompt *ngIf="!isGridLayout()" [block]="block"></ddp-question-prompt>
     <div>
         <ddp-activity-radiobuttons-picklist-question
             *ngIf="block.selectMode === SELECT_MODE.SINGLE && block.renderMode === RENDER_MODE.LIST"
@@ -49,9 +50,13 @@ export class ActivityPicklistAnswer {
     @Input() readonly: boolean;
     @Input() studyGuid: string;
     @Input() activityGuid: string;
-
+    @Input() layoutType: LayoutType = LayoutType.DEFAULT;
     @Output() valueChanged: EventEmitter<Array<ActivityPicklistAnswerDto>> = new EventEmitter();
 
     public readonly SELECT_MODE = PicklistSelectMode;
     public readonly RENDER_MODE = PicklistRenderMode;
+
+    public isGridLayout(): boolean {
+        return this.layoutType === LayoutType.GRID;
+    }
 }
