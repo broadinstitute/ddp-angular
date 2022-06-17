@@ -2,18 +2,58 @@
   padding: 0;
 }
 
+// dialog popup
 ::ng-deep.matDialog {
   width: 60%;
   height: 65%;
 }
 
+// adjusting items inside input field
+::ng-deep.mat-form-field-flex {
+  align-items: center!important;
+  padding: 0 0 0 .75em!important;
+}
+
+// adjusting input field size
+::ng-deep.mat-form-field {
+  font-size: 15px;
+}
+
+// adjusting input field border color after touched
+::ng-deep.mat-form-field.ng-touched .mat-form-field-outline  {
+  color: #737E8E!important;
+}
+
+// adjusting input field border color
+::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: rgba(73,86,106,0.4)!important;
+}
+
+// adjusting input field shapes
 ::ng-deep.mat-form-field-infix {
   border-top: 0.5rem!important;
 }
 
-::ng-deep.mat-form-field {
-  font-size: 15px;
+::ng-deep .mat-form-field-outline-start {
+  border-radius: 3px 0 0 3px!important;
+  border-width: 1px!important;
 }
+
+::ng-deep .mat-form-field-outline-end {
+  border-radius: 0 3px 3px 0 !important;
+  border-width: 1px!important;
+}
+
+// error message
+::ng-deep mat-error {
+  color: red!important;
+}
+::ng-deep.mat-form-field-subscript-wrapper {
+  padding: 0!important;
+  margin-top: 3px;
+}
+
+
 
 .dialogContainer {
   height: 100%;
@@ -29,12 +69,13 @@
     grid-area: header;
     display: flex;
     align-items: center;
-    border-bottom: 0.5px solid #979797;
+    border-bottom: 0.5px inset rgba(148, 147, 147, 0.63);
     padding: 6px 14.5px;
 
     p {
       padding: 0;
       margin: 0;
+      color: #2D333E;
       font-size: 20px;
       font-weight: 600;
       letter-spacing: 0;
@@ -45,25 +86,21 @@
   main {
     grid-area: main;
     display: grid;
-    grid-template-columns: 75% 25%;
+    grid-template-columns: 73% 27%;
     grid-template-areas: "section aside";
 
     section {
       grid-area: section;
-      border-right: 0.5px solid #979797;
+      border-right: 0.5px inset rgba(148, 147, 147, 0.63);
       overflow: auto;
       padding: 25px;
 
       form {
 
-        .btn-addPt {
-          height: 40px;
-          width: 177px;
-          color: #546989;
-          padding: 2px 10px;
-          background-color: rgba(0, 0, 0, 0);
-          border: 1px solid #546989;
-          border-radius: 2px;
+        .hr {
+          border-top: 0.5px solid #BBC3CA;
+          margin-top: 25px;
+          padding-top: 25px;
         }
 
         .addPatientForm {
@@ -73,11 +110,12 @@
             justify-content: space-between;
 
             &-number {
+              color: #2D333E;
               font-size: 15px;
               letter-spacing: 0;
               line-height: 20px;
             }
-            
+
             &-remove {
               cursor: pointer;
             }
@@ -86,11 +124,20 @@
           .row {
             width: 100%;
             overflow: auto;
-            margin-left: 15px;
+            margin-left: 20px;
 
             display: flex;
             flex-wrap: wrap;
             flex-direction: column;
+
+            mat-label {
+              margin-bottom: 7px;
+              color: #33373B;
+              font-size: 15px;
+              font-weight: 600;
+              letter-spacing: 0;
+              line-height: 17px;
+            }
 
             .email, .dateOfBirth {
               display: flex;
@@ -130,33 +177,63 @@
               margin-left: 16px;
             }
           }
-
-
-
-          //input {
-          //  height: 48px;
-          //  width: 266px;
-          //  margin-top: 10px;
-          //  border: 1px solid #737E8E;
-          //  border-radius: 3px;
-          //  background-color: #FFFFFF;
-          //}
         }
-
-
 
         }
 
-        .hr {
-          border-top: 0.5px solid #BBC3CA;
-          margin-top: 25px;
-          padding-top: 25px;
-        }
+      .btn-addPt {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        width: 177px;
+        color: #546989;
+        padding: 2px 10px;
+        background-color: rgba(0, 0, 0, 0);
+        border: 1px solid #546989;
+        border-radius: 2px;
+      }
 
     }
 
     aside {
       grid-area: aside;
+      display: flex;
+      justify-content: center;
+
+      .fileUpload {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 10px 0;
+        height: 100%;
+        width: 80%;
+
+        p {
+          align-self: flex-start;
+
+          mat-icon {
+            font-size: 18px;
+          }
+        }
+
+        &-dragAndDrop {
+          width: 100%;
+          height: 40%;
+          display: flex;
+          justify-content: center;
+          border: 1px dashed #BBC3CA;
+          border-radius: 4px;
+          background-color: #F9F9FB;
+          p {
+            margin: auto 0;
+            a {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+
     }
   }
 
@@ -166,7 +243,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: #E6E6E6;
-    padding: 6px 15px;
+    padding: 6px 25px;
 
     .btn-cancel {
       height: 70%;
@@ -186,6 +263,10 @@
       background-color: #546989;
       border: none;
       border-radius: 2px;
+
+      &:disabled {
+        filter: grayscale(100%);
+      }
     }
   }
 }

@@ -5,8 +5,6 @@ import {Observable, tap} from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
 import {MainConstants} from '../../constants/main-constants';
 import {StoreService} from '../../../STORE/store.service';
-import {AddPatientsModalComponent} from "../../components/add-patients-modal/add-patients-modal.component";
-import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-participants-list',
@@ -29,8 +27,7 @@ export class ParticipantsListComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private storeService: StoreService,
-    private matDialog: MatDialog
+    private storeService: StoreService
   ) {
   }
 
@@ -77,13 +74,4 @@ export class ParticipantsListComponent implements OnInit {
     });
   }
 
-  openAddPatientsModal() {
-    const dialogRef = this.matDialog.open(AddPatientsModalComponent, {
-      panelClass: 'matDialog'
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(result, 'from dialog close observer');
-    });
-  }
 }

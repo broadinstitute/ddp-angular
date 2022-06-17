@@ -27,6 +27,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatDialogModule} from '@angular/material/dialog';
+import {enrollPatientDirective} from "./directives/enroll-patient.directive";
 
 
 const material = [
@@ -52,7 +53,8 @@ const material = [
     ParticipantsListComponent,
     ActivitiesComponent,
     HomeComponent,
-    AddPatientsModalComponent
+    AddPatientsModalComponent,
+    enrollPatientDirective
   ],
   imports: [
     CommonModule,

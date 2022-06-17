@@ -19,8 +19,10 @@
                   <mat-form-field appearance="outline">
                     <input
                       matInput
-                      formControlName="firstName"
+                      type="email"
+                      formControlName="email"
                       placeholder="Enter email address">
+                    <mat-error *ngIf="patient.get('email').invalid">{{getErrorMessage(i, 'email')}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -32,6 +34,7 @@
                       matInput
                       formControlName="firstName"
                       placeholder="First name">
+                    <mat-error *ngIf="patient.get('firstName').invalid">{{getErrorMessage(i, 'firstName')}}</mat-error>
                   </mat-form-field>
                 </div>
                 <div class="lastName">
@@ -41,6 +44,7 @@
                       matInput
                       formControlName="lastName"
                       placeholder="Last Name">
+                    <mat-error *ngIf="patient.get('lastName').invalid">{{getErrorMessage(i, 'lastName')}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -53,6 +57,7 @@
                       [matDatepicker]="picker1"
                       formControlName="dateOfBirth"
                       placeholder="MM/DD/YY">
+                    <mat-error *ngIf="patient.get('dateOfBirth').invalid">{{getErrorMessage(i, 'dateOfBirth')}}</mat-error>
                     <mat-datepicker-toggle
                       matSuffix
                       [for]="picker1">
@@ -70,6 +75,7 @@
                       [matDatepicker]="picker2"
                       formControlName="informedConsentDate"
                       placeholder="MM/DD/YY">
+                    <mat-error *ngIf="patient.get('informedConsentDate').invalid">{{getErrorMessage(i, 'informedConsentDate')}}</mat-error>
                     <mat-datepicker-toggle
                       matSuffix
                       [for]="picker2">
@@ -85,6 +91,7 @@
                       [matDatepicker]="picker3"
                       formControlName="assentDate"
                       placeholder="MM/DD/YY">
+                    <mat-error *ngIf="patient.get('assentDate').invalid">{{getErrorMessage(i, 'assentDate')}}</mat-error>
                     <mat-datepicker-toggle
                       matSuffix
                       [for]="picker3">
@@ -97,16 +104,22 @@
           </ng-container>
         </ng-container>
         <button class="btn-addPt" (click)="addPatient()">
-          + Add another patient
+          <mat-icon>add</mat-icon> Add another patient
         </button>
       </form>
     </section>
     <aside>
-      <p>File upload</p>
+      <div class="fileUpload">
+        <p>File upload  <mat-icon>info</mat-icon></p>
+        <div class="fileUpload-dragAndDrop">
+          <p>Drag and drop or <br/> <a (click)="file.click()">browse your files</a></p>
+          <input type="file" #file style="display: none">
+        </div>
+      </div>
     </aside>
   </main>
   <footer>
     <button class="btn-cancel" (click)="closeDialog()">Cancel</button>
-    <button class="btn-register" (click)="registerPatient()">Register</button>
+    <button class="btn-register" [disabled]="addPatientForm.invalid" (click)="registerPatient()">Register</button>
   </footer>
 </div>
