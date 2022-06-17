@@ -33,6 +33,7 @@ import { Sort } from '../sort/sort.model';
 import { saveAs } from 'file-saver';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { LoadingModalComponent } from '../modals/loading-modal.component';
+import { BulkCohortTagModalComponent } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-modal.component';
 
 @Component({
   selector: 'app-participant-list',
@@ -1620,6 +1621,10 @@ export class ParticipantListComponent implements OnInit {
 
   openDialog(message: string): MatDialogRef<LoadingModalComponent> {
     return this.dialog.open(LoadingModalComponent, {data: {message: message}, disableClose: true});
+  }
+
+  openBulkCohort(): MatDialogRef<BulkCohortTagModalComponent> {
+    return this.dialog.open(BulkCohortTagModalComponent);
   }
 
   downloadCurrentData(): void {

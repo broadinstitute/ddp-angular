@@ -108,6 +108,7 @@ import {AllStudiesComponent} from './all-studies.component';
 import {BuildingFactoryService} from '../activity-data/services/buildingFactory.service';
 import { CohortTagComponent } from '../tags/cohort-tag/cohort-tag.component';
 import {MatChipsModule} from '@angular/material/chips';
+import { BulkCohortTagModalComponent } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-modal.component';
 
 
 
@@ -188,7 +189,8 @@ import {MatChipsModule} from '@angular/material/chips';
     TestDssComponent,
     DssErrorPageComponent,
     LoadingModalComponent,
-    CohortTagComponent
+    CohortTagComponent,
+    BulkCohortTagModalComponent
   ],
   imports: [
     CommonModule,
