@@ -1,57 +1,111 @@
 $hoverColor: #7154FF;
 
-.sidebar {
-  height: calc(100vh - 100px); // 100px - main header height
+:host-context(app-navigation) {
+  grid-area: asideNavigation
 }
 
-.navigation {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  flex-direction: column;
+aside {
   height: 100%;
-  padding: 20px 0;
-}
+  background-color: #333F52;
 
-.topNavigation {
-  padding: 60px 0 0;
-}
+  .titles {
+    height: 17%;
 
-.botNavigation {
-  padding: 0;
-}
+    .topTitle {
+      width: 100%;
+      margin-bottom: 16px;
+      padding: 16px 8px;
+      display: flex;
+      justify-content: space-between;
 
-.topNavigation, .botNavigation {
-  margin: 0;
+      mat-icon {
+        color: #BCC3C9;
+        transform: rotate(0.5turn);
+      }
 
-  .activeNav {
-    color: $hoverColor;
-    border-bottom-color: $hoverColor!important;
-    cursor: pointer;
-    outline: none;
-  }
-
-  li {
-    list-style-type: none;
-    font-size: 18px;
-    margin: 0 50px 16px;
-    border-bottom: 2px solid transparent;
-    display: flex;
-
-    &:hover, &:focus {
-      color: $hoverColor;
-      border-bottom-color: $hoverColor;
-      cursor: pointer;
-      outline: none;
-
-      > mat-icon {
-        color: $hoverColor;
+      p {
+        color: #FFFFFF;
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: 0;
+        line-height: 20px;
       }
     }
 
-    > mat-icon {
-      margin-right: 10px;
-      color: #333333;
+    .topSubTitle {
+      width: 100%;
+      padding-left: 16px;
+
+      p {
+        color: #FFFFFF;
+        font-size: 15px;
+        font-weight: bold;
+        letter-spacing: 0;
+        line-height: 18px;
+      }
     }
   }
+
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: 75%;
+    width: 100%;
+    color: #D0D3D9;
+    font-size: 15px;
+
+    .botNavigation {
+      border-top: 1px solid #878A9F;
+       li:first-of-type {
+         margin-top: 16px;
+       }
+    }
+
+    .topNavigation, .botNavigation {
+      margin: 0;
+      padding: 0;
+
+
+      .activeNav {
+        color: white!important;
+        background-color: #749DC5 !important;
+        cursor: pointer;
+        outline: none;
+        mat-icon {
+          color: white!important;
+        }
+      }
+
+      li {
+        list-style-type: none;
+        font-size: inherit;
+        display: flex;
+        align-items: center;
+        height: 40px;
+        width: 100%;
+        padding-left: 15px;
+
+        &:hover {
+          color: $hoverColor;
+          cursor: pointer;
+          outline: none;
+
+          > mat-icon {
+            color: $hoverColor;
+          }
+        }
+
+        > mat-icon {
+          margin-right: 10px;
+          color: #D0D3D9;
+        }
+      }
+    }
+  }
+
 }
+
+
+

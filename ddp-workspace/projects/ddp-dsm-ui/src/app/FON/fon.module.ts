@@ -93,12 +93,7 @@ export class fonModule {
     // Token
     const DSMToken = this.sessionService.getDSMToken();
     this.sessionService.setExpirationTime(DSMToken);
-    this.dssSessionService.setSession(
-      null,
-      DSMToken,
-      null,
-      LOCALE,
-      +this.sessionService.getTokenExpiration());
+    this.dssSessionService.setSession(null, DSMToken, null, LOCALE, +this.sessionService.getTokenExpiration());
 
     // Store
     this.storeService.setStudy = MainConstants.study;
