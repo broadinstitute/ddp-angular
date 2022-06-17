@@ -32,8 +32,8 @@
                             <ng-template matExpansionPanelContent>
                                 <ng-container *ngFor="let paragraph of item.Paragraphs">
                                     <p *ngIf="isText(paragraph); else paragraphArray"
-                                        class="faq-block__text"
-                                        [innerHTML]="paragraph">
+                                       class="faq-block__text"
+                                       [innerHTML]="paragraph">
                                     </p>
 
                                     <ng-template #paragraphArray>
@@ -42,11 +42,12 @@
                                                 <span *ngIf="isText(item); else objectItem">{{item}}</span>
 
                                                 <ng-template #objectItem>
-                                                    <ng-container *ngIf="isLinkItem(item.type) && item.itemIdToScrollTo; then scrollLink else regularLink"></ng-container>
+                                                    <ng-container
+                                                        *ngIf="isLinkItem(item.type) && item.itemIdToScrollTo; then scrollLink else regularLink"></ng-container>
 
                                                     <ng-template #scrollLink>
                                                         <a (click)="expandAndScrollTo(item.itemIdToScrollTo)"
-                                                            class="Link">
+                                                           class="Link">
                                                             {{item.content}}
                                                         </a>
                                                     </ng-template>
