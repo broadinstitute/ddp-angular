@@ -51,6 +51,11 @@ mat-panel-title {
   }
 }
 
+::ng-deep.ng-trigger-bodyExpansion {
+  height: 400px!important;
+  overflow: auto!important;
+}
+
 mat-list-item {
   h4 {
     &:hover, &:focus {

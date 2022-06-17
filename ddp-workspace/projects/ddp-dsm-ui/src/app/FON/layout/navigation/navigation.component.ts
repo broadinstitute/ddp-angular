@@ -12,7 +12,7 @@ import {ActivatedRoute} from "@angular/router";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class NavigationComponent{
+export class NavigationComponent {
   readonly topNavigation = topNavItems;
   readonly botNavigation = bottomNavItems(this.getUserName());
 
