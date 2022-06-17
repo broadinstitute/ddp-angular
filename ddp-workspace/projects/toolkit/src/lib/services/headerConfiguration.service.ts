@@ -25,8 +25,8 @@ export class HeaderConfigurationService {
     }
 
     public setupPasswordHeader(): void {
-        this.setupDefaultHeader();
         this.showLoginButton = false;
+        this.setupDefaultHeader();
     }
 
     public setupDefaultHeader(): void {
