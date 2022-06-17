@@ -9,15 +9,15 @@ export class VideoIntroComponent {
     @Input()
     pageRendered: string;
 
-    isFaq() {
-        return this.pageRendered === "FAQ";
+    isFaq(): boolean {
+        return this.pageRendered === 'FAQ';
     }
 
-    isHome() {
-        return this.pageRendered === "HOME";
+    isHome() :boolean {
+        return this.pageRendered === 'HOME';
     }
 
-    isConsent() {
-        return this.pageRendered === "CONSENT"
+    isConsent() :boolean {
+        return this.pageRendered === 'CONSENT';
     }
 }
