@@ -9,6 +9,9 @@ export class VideoIntroComponent {
     @Input()
     pageRendered: string;
 
+    homePageText = 'Learn about Project Singular by watching this short video overview.';
+    faqText = 'Learn about Project Singular by watching this short video overview';
+
     isFaq(): boolean {
         return this.pageRendered === 'FAQ';
     }
