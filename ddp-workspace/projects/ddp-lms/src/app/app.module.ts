@@ -40,6 +40,7 @@ import {UserActivitiesComponent} from './components/user-activities/user-activit
 import {MatTableModule} from '@angular/material/table';
 import {FlexModule} from '@angular/flex-layout';
 import {WorkflowProgressComponent} from './components/workflow-progress/workflow-progress.component';
+import { MobileNavComponent } from './components/nav/loginOut/mobile-nav/mobile-nav.component';
 
 
 declare const DDP_ENV: Record<string, any>;
@@ -144,6 +145,7 @@ const translateFactory =
     DashboardComponent,
     UserActivitiesComponent,
     WorkflowProgressComponent,
+    MobileNavComponent,
   ],
   imports: [
     BrowserModule,
