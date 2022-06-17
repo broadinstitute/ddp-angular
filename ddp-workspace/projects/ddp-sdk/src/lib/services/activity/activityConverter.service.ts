@@ -145,6 +145,7 @@ export class ActivityConverter {
         activityBlock.content = [];
         for (const inputBlock of blockJson.content) {
             const block = this.questionConverter.buildQuestionBlock(inputBlock.question, null);
+            block.columnSpan = inputBlock.columnSpan || 1;
             this.buildShownField(block, inputBlock);
             this.buildEnabledField(block, inputBlock);
             block.id = inputBlock.blockGuid;

@@ -63,7 +63,6 @@ export class ActivityQuestionConverter {
         questionBlock.tooltip = questionJson.tooltip;
         questionBlock.readonly = questionJson.readonly;
         questionBlock.displayNumber = displayNumber;
-        questionBlock.columnSpan = questionJson.columnSpan ?? 1;
         questionBlock.serverValidationMessages = questionJson.validationFailures ?
             questionJson.validationFailures.map(validationFailure => validationFailure.message) : [];
 
