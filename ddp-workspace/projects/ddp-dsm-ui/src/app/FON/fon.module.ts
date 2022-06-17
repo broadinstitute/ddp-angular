@@ -30,7 +30,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {enrollPatientDirective} from "./directives/enroll-patient.directive";
 
 
-const material = [
+const AngularMaterialModules = [
   MatExpansionModule,
   MatDividerModule,
   MatListModule,
@@ -45,23 +45,34 @@ const material = [
   MatDialogModule
 ];
 
+const directives = [enrollPatientDirective]
+
+const components = [AddPatientsModalComponent];
+
+const pageComponents = [
+  FonComponent,
+  ActivityComponent,
+  ParticipantsListComponent,
+  ActivitiesComponent,
+  HomeComponent
+];
+
+const layoutComponents = [NavigationComponent];
+
+
 @NgModule({
   declarations: [
-    NavigationComponent,
-    FonComponent,
-    ActivityComponent,
-    ParticipantsListComponent,
-    ActivitiesComponent,
-    HomeComponent,
-    AddPatientsModalComponent,
-    enrollPatientDirective
+    ...pageComponents,
+    ...layoutComponents,
+    ...components,
+    ...directives
   ],
   imports: [
     CommonModule,
     fonRoutingModule,
     ReactiveFormsModule,
     DdpModule.forDSM(),
-    ...material,
+    ...AngularMaterialModules,
   ],
   providers: [],
   exports: []
@@ -82,7 +93,12 @@ export class fonModule {
     // Token
     const DSMToken = this.sessionService.getDSMToken();
     this.sessionService.setExpirationTime(DSMToken);
-    this.dssSessionService.setSession(null, DSMToken, null, LOCALE, +this.sessionService.getTokenExpiration());
+    this.dssSessionService.setSession(
+      null,
+      DSMToken,
+      null,
+      LOCALE,
+      +this.sessionService.getTokenExpiration());
 
     // Store
     this.storeService.setStudy = MainConstants.study;
