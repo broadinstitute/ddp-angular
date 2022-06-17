@@ -1,6 +1,6 @@
 @use '@angular/material' as mat;
 @import '../../../theme.scss';
-@import "../../../styles/fonts.scss";
+@import '../../../styles/fonts.scss';
 
 * {
   margin: 0;
@@ -20,9 +20,11 @@
     height: 100%;
   }
 
-  aside:not(.loginOutButtons) {
+  .main-link:not(.loginOutButtons) {
     display: flex;
-    margin-right: 50px;
+    margin-right: 3.125rem;
+    text-decoration: none;
+    color: black;
 
     img {
       margin-right: 14.86px;
@@ -42,11 +44,9 @@
   }
 }
 
-
 .sticky {
   display: none;
 }
-
 
 .header-content {
   display: flex;
@@ -166,11 +166,10 @@
   cursor: pointer;
 }
 
-
 .cmiBtn {
   padding: 0.7rem 1.75rem !important;
-  background-color: #9953CE;
-  border-color: #9953CE;
+  background-color: #9953ce;
+  border-color: #9953ce;
   border-radius: 4px;
   color: white;
   font-size: 1.0625rem;
@@ -180,7 +179,6 @@
   background-color: #7f30b8;
   border-color: #7f30b8;
 }
-
 
 @media only screen and (max-width: 650px) {
   .activity-heading {
@@ -227,10 +225,3 @@
     display: none;
   }
 }
-
-
-
-
-
-
-

@@ -1,9 +1,9 @@
 <header class="header" [ngClass]="{'panel-opened': isPanelOpened, 'header_shadow': isPageScrolled}" >
   <div class="header-content sticky" [ngClass]="{'header-content_sticky': headerConfig.stickySubtitle}">
-    <aside [routerLink]="['/']" (click)="onLogoClick()">
+    <a [routerLink]="['/']" (click)="onLogoClick()" class="main-link">
       <img class="project-logo" src="../../../assets/images/nav-logo.svg" alt="">
       <p>Leiomyosarcoma <br> Project</p>
-    </aside>
+    </a>
     <nav *ngIf="headerConfig.showMainButtons" class="header__nav">
       <app-nav></app-nav>
     </nav>
