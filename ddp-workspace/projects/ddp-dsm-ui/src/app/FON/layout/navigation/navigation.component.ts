@@ -3,7 +3,7 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 import { bottomNavItems, topNavItems } from './navItems';
 import { Auth } from '../../../services/auth.service';
 import { SessionService } from '../../../services/session.service';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-navigation',

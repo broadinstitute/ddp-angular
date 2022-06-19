@@ -1,9 +1,9 @@
-import {Component, Directive, HostListener, Input, OnDestroy} from "@angular/core";
-import {MatDialog} from "@angular/material/dialog";
-import {ComponentType} from "@angular/cdk/overlay";
-import {Subscription} from "rxjs";
+import {Component, Directive, HostListener, Input, OnDestroy} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {ComponentType} from '@angular/cdk/overlay';
+import {Subscription} from 'rxjs';
 
-const DIRECTIVE_NAME: string = 'inModal';
+const DIRECTIVE_NAME = 'openInModal';
 
 @Directive({
   selector: `[${DIRECTIVE_NAME}]`

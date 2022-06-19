@@ -21,14 +21,14 @@ import {MainConstants} from './constants/main-constants';
 import {TranslateService} from '@ngx-translate/core';
 import {SessionService} from '../services/session.service';
 import {Title} from '@angular/platform-browser';
-import {RegisterPatientsModalComponent} from "./components/register-patients-modal/register-patients-modal.component";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {RegisterPatientsModalComponent} from './components/register-patients-modal/register-patients-modal.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatDialogModule} from '@angular/material/dialog';
-import {openInModalDirective} from "./directives/open-in-modal.directive";
-import {InputFieldComponent} from "./components/input-field/input-field.component";
+import {openInModalDirective} from './directives/open-in-modal.directive';
+import {InputFieldComponent} from './components/input-field/input-field.component';
 
 
 const AngularMaterialModules = [
@@ -46,7 +46,7 @@ const AngularMaterialModules = [
   MatDialogModule
 ];
 
-const directives = [openInModalDirective]
+const directives = [openInModalDirective];
 
 const components = [RegisterPatientsModalComponent, InputFieldComponent];
 

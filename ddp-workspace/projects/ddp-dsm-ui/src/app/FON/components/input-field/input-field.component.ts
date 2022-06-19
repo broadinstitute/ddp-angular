@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Injector, Input, OnInit} from "@angular/core";
+import {ChangeDetectionStrategy, Component, Injector, Input, OnInit} from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
@@ -7,11 +7,11 @@ import {
   FormGroupDirective,
   NG_VALUE_ACCESSOR,
   NgControl
-} from "@angular/forms";
+} from '@angular/forms';
 
 
 @Component({
-  selector: "ddp-input-field",
+  selector: 'app-input-field',
   template: `
 
     <ng-container *ngIf="type === TEXT">
@@ -80,7 +80,7 @@ export class InputFieldComponent implements OnInit, ControlValueAccessor {
 
   constructor(private injector: Injector) {}
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     const ngControl = this.injector.get(NgControl);
     if (ngControl instanceof FormControlName) {
       this.formControl = this.injector.get(FormGroupDirective).getControl(ngControl);
@@ -109,7 +109,7 @@ export class InputFieldComponent implements OnInit, ControlValueAccessor {
   }
 
   public get getErrorMessage(): string {
-    if (this.formControl.hasError('required')) return 'You must enter a value';
+    if (this.formControl.hasError('required')) {return 'You must enter a value';}
     return this.formControl.hasError('email') ? 'Not a valid email' : '';
   }
 

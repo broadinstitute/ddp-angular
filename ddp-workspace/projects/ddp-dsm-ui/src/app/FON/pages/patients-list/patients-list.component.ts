@@ -7,7 +7,7 @@ import {MainConstants} from '../../constants/main-constants';
 import {StoreService} from '../../../STORE/store.service';
 import {
   RegisterPatientsModalComponent
-} from "../../components/register-patients-modal/register-patients-modal.component";
+} from '../../components/register-patients-modal/register-patients-modal.component';
 
 @Component({
   selector: 'app-patients-list',
