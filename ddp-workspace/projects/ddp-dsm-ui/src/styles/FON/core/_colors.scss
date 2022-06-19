@@ -1,0 +1,100 @@
+$__White: #FFFFFF;
+$__transparent: rgba(0, 0, 0, 0);
+
+$__Pickled_bluewood: #333F52;
+$__Marble_blue: #546989;
+$__Marble_blue_transparent: rgb(84, 105, 137, 0.7);
+$__Slate_grey: #737E8E;
+$__Mulled_wine_transparent: rgba(73,86,106,0.4);
+$__Heather: #BBC3CA;
+$__Heather2: #BCC3C9;
+$__Charcoal: #33373B;
+$__Charcoal_transparent: rgba(51, 55, 59, 0.7);
+$__Alabaster: #F9F9FB;
+$__Gunmetal: #2D333E;
+$__Medium_gea_green: #34B579;
+$__Valentine_red: #EF4E56;
+$__Valentine_red2: #EF4F57;
+$__iron: #D0D3D9;
+$__Dark_pastel_blue: #749DC5;
+$__Bluish_grey: #7687A1;
+$__Dawn_pink: #E8ECF0;
+$__Mercury: #E6E6E6;
+$__Gunmetal: #2D333E;
+
+
+// Colors for specific sections or elements - For developing purposes
+$element_colors: (
+  "background": $__Dawn_pink,
+  "patient_add_modal_footer": $__Mercury,
+  "bg_tooltip": $__Gunmetal,
+
+  "side_nav": (
+    "bg": $__Pickled_bluewood,
+
+    "item_bg_activated": $__Dark_pastel_blue,
+
+    "txt": $__iron,
+    // states
+    "txt_hovered": $__White,
+    "txt_activated": $__White,
+    "txt_headers": $__White,
+
+    "/icon": $__Heather2,
+    // states
+    "/icon_hovered": $__White,
+    "/icon_activated": $__White,
+    "/icon_headers": $__White,
+  ),
+
+  "btn": (
+    "txt": $__Marble_blue,
+    //states
+    "txt_hovered": $__Marble_blue_transparent,
+    "txt_activated": $__Marble_blue_transparent,
+
+    "b_dark": $__Marble_blue,
+    //states
+    "b_hovered": $__Marble_blue_transparent,
+    "b_activated": $__Marble_blue_transparent,
+
+    "bg_dark": $__Marble_blue,
+    // states
+    "bg_dark_hovered": $__Bluish_grey,
+    "bg_dark_activated": $__Bluish_grey,
+
+    "bg_trans": $__transparent,
+
+    "/icon_dark": $__Marble_blue,
+    // states
+    "/icon_dark_hovered": $__Marble_blue_transparent,
+    "/icon_dark_activated": $__Marble_blue_transparent,
+
+    "/icon_trans": $__White
+  ),
+
+  "input": (
+    "txt_error": $__Valentine_red,
+    "ph_txt": $__Charcoal_transparent,
+
+    "b": $__Mulled_wine_transparent,
+    "b_filled": $__Slate_grey,
+    "b_error": $__Valentine_red2,
+
+    "/label_txt": $__Charcoal,
+
+    "/icon": $__Slate_grey,
+    "/icon_filled": $__Heather,
+  ),
+
+  "file_upload": (
+    "txt": $__Gunmetal,
+    "txt_success":$__Medium_gea_green ,
+    "txt_fail": $__Valentine_red,
+
+    "/box_txt": $__Gunmetal,
+    "/box_bg": $__Alabaster,
+    "/box_b": $__Heather,
+  )
+);
+

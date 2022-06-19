@@ -1,6 +1,9 @@
-@import "../../../../styles/material-form-fields.scss";
+@use "../../../../styles/FON/material/dialog" as angMatDialog;
+@use "../../../../styles/FON/classes/buttons";
+@import "../../../../styles/FON/core";
 
 
+@include angMatDialog.mainSet(RegisterPatientsModalComponent);
 
 .dialogContainer {
   height: 100%;
@@ -20,8 +23,6 @@
     padding: 6px 14.5px;
 
     p {
-      padding: 0;
-      margin: 0;
       color: #2D333E;
       font-size: 20px;
       font-weight: 600;
@@ -61,6 +62,7 @@
               font-size: 15px;
               letter-spacing: 0;
               line-height: 20px;
+              margin-bottom: 15px;
             }
 
             &-remove {
@@ -68,78 +70,37 @@
             }
           }
 
-          .row {
+          .input_field {
+            @include flexContainer;
             width: 100%;
             overflow: auto;
             margin-left: 20px;
 
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: column;
-
-            mat-label {
-              margin-bottom: 7px;
-              color: #33373B;
-              font-size: 15px;
-              font-weight: 600;
-              letter-spacing: 0;
-              line-height: 17px;
-            }
-
-            .email, .dateOfBirth {
-              display: flex;
+            @include media-smd {
               flex-direction: column;
+              margin-left: 0;
+            }
+
+            ddp-input-field {
               width: 45%;
-            }
-
-            input::placeholder {
-              font-style: italic!important;
-            }
-
-          }
-
-          .firstLastName {
-            flex-direction: row;
-
-            .firstName, .lastName {
-              display: flex;
-              flex-direction: column;
-              width: 45%;
-            }
-            .lastName {
-              margin-left: 16px;
-            }
-          }
-
-          .consentAssentDate {
-            flex-direction: row;
-            width: 100%;
-            .consentDate, .assentDate {
-              display: flex;
-              flex-direction: column;
-              justify-content: space-between;
-              width: 45%;
-            }
-            .assentDate {
-              margin-left: 16px;
+              @include media-smd {
+                width: 100%;
+              }
+              &:not(:first-of-type) {
+                margin-left: 16px;
+                @include media-smd {
+                  margin-left: 0;
+                  width: 100%;
+                }
+              }
             }
           }
         }
-
+        .btn_secondary {
+          width: 177px;
+          font-size: getFontSize('xsm');
         }
-
-      .btn-addPt {
-        display: flex;
-        align-items: center;
-        height: 40px;
-        width: 177px;
-        color: #546989;
-        padding: 2px 10px;
-        background-color: rgba(0, 0, 0, 0);
-        border: 1px solid #546989;
-        border-radius: 2px;
       }
-
     }
 
     aside {
@@ -191,29 +152,5 @@
     align-items: center;
     background-color: #E6E6E6;
     padding: 6px 25px;
-
-    .btn-cancel {
-      height: 70%;
-      width: 16%;
-      color: #546989;
-      padding: 2px 10px;
-      background-color: rgba(0, 0, 0, 0);
-      border: 1px solid #546989;
-      border-radius: 2px;
-    }
-
-    .btn-register {
-      height: 70%;
-      width: 16%;
-      color: #FFFFFF;
-      padding: 2px 10px;
-      background-color: #546989;
-      border: none;
-      border-radius: 2px;
-
-      &:disabled {
-        filter: grayscale(100%);
-      }
-    }
   }
 }

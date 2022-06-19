@@ -1,3 +1,5 @@
+@import "../../../../styles/FON/core";
+
 $hoverColor: #7154FF;
 
 :host-context(app-navigation) {
@@ -47,10 +49,7 @@ aside {
   }
 
   .navigation {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    flex-direction: column;
+    @include flexContainer(normal, space-between, column);
     height: 77%;
     width: 100%;
     color: #D0D3D9;
@@ -66,11 +65,11 @@ aside {
     .topNavigation, .botNavigation {
       margin: 0;
       padding: 0;
-
+      font-family: Montserrat-Regular, sans-serif;
 
       .activeNav {
         color: white!important;
-        background-color: #749DC5 !important;
+        background-color: $__Dark_pastel_blue !important;
         cursor: pointer;
         outline: none;
         mat-icon {
@@ -88,12 +87,12 @@ aside {
         padding-left: 15px;
 
         &:hover {
-          color: $hoverColor;
+          color: $__White;
           cursor: pointer;
           outline: none;
 
           > mat-icon {
-            color: $hoverColor;
+            color: $__White;
           }
         }
 

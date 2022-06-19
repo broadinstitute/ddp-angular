@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {
+  RegisterPatientsModalComponent
+} from "../../components/register-patients-modal/register-patients-modal.component";
 
 @Component({
   selector: 'app-home',
@@ -6,4 +9,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  // Modal section
+  registerPatientsModalComponent = RegisterPatientsModalComponent;
 }

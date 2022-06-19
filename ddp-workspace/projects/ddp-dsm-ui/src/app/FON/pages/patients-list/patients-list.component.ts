@@ -1,22 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { patientListModel } from './models/participantList.model';
+import { patientListModel } from './models/patient-list.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import {Observable, tap} from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
 import {MainConstants} from '../../constants/main-constants';
 import {StoreService} from '../../../STORE/store.service';
+import {
+  RegisterPatientsModalComponent
+} from "../../components/register-patients-modal/register-patients-modal.component";
 
 @Component({
-  selector: 'app-participants-list',
-  templateUrl: './participantsList.component.html',
-  styleUrls: ['./participantsList.component.scss']
+  selector: 'app-patients-list',
+  templateUrl: './patients-list.component.html',
+  styleUrls: ['./patients-list.component.scss']
 })
 
-export class ParticipantsListComponent implements OnInit {
+export class PatientsListComponent implements OnInit {
   patients$: Observable<patientListModel[]>;
   totalCount$: Observable<number>;
   loading$: Observable<boolean>;
   error$: Observable<string>;
+
+  // Modal section
+  registerPatientsModalComponent = RegisterPatientsModalComponent;
 
   pageIndex: number;
   pageSize: number;

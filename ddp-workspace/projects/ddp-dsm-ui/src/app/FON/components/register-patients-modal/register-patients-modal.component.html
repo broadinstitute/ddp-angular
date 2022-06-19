@@ -8,110 +8,74 @@
         <ng-container formArrayName="patients">
           <ng-container *ngFor="let patient of patients.controls; let i = index">
             <div [formGroup]="patient" [ngClass]="{'hr': i > 0}" class="addPatientForm">
+
               <div class="patientNav">
-                <p class="patientNav-number">Patient {{i+1}}</p>
+                <p class="patientNav-number">Patient {{i + 1}}</p>
                 <span *ngIf="i > 0" class="patientNav-remove" (click)="removePatient(i)">X</span>
               </div>
 
-              <div class="row">
-                <div class="email">
-                  <mat-label>Email*</mat-label>
-                  <mat-form-field appearance="outline">
-                    <input
-                      matInput
-                      type="email"
-                      formControlName="email"
-                      placeholder="Enter email address">
-                    <mat-error *ngIf="patient.get('email').invalid">{{getErrorMessage(i, 'email')}}</mat-error>
-                  </mat-form-field>
-                </div>
+              <div class="input_field">
+                <ddp-input-field
+                  label="Email*"
+                  placeholder="Enter email address"
+                  inputType="text"
+                  formControlName="email">
+                </ddp-input-field>
               </div>
-              <div class="row firstLastName">
-                <div class="firstName">
-                  <mat-label>First Name*</mat-label>
-                  <mat-form-field appearance="outline">
-                    <input
-                      matInput
-                      formControlName="firstName"
-                      placeholder="First name">
-                    <mat-error *ngIf="patient.get('firstName').invalid">{{getErrorMessage(i, 'firstName')}}</mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="lastName">
-                  <mat-label>Last Name*</mat-label>
-                  <mat-form-field appearance="outline">
-                    <input
-                      matInput
-                      formControlName="lastName"
-                      placeholder="Last Name">
-                    <mat-error *ngIf="patient.get('lastName').invalid">{{getErrorMessage(i, 'lastName')}}</mat-error>
-                  </mat-form-field>
-                </div>
+
+              <div class="input_field">
+                <ddp-input-field
+                  label="First Name*"
+                  placeholder="First name"
+                  inputType="text"
+                  formControlName="firstName">
+                </ddp-input-field>
+                <ddp-input-field
+                  label="Last Name*"
+                  placeholder="Last Name"
+                  inputType="text"
+                  formControlName="lastName">
+                </ddp-input-field>
               </div>
-              <div class="row">
-                <div class="dateOfBirth">
-                  <mat-label>Date of birth*</mat-label>
-                  <mat-form-field appearance="outline">
-                    <input
-                      matInput
-                      [matDatepicker]="picker1"
-                      formControlName="dateOfBirth"
-                      placeholder="MM/DD/YY">
-                    <mat-error *ngIf="patient.get('dateOfBirth').invalid">{{getErrorMessage(i, 'dateOfBirth')}}</mat-error>
-                    <mat-datepicker-toggle
-                      matSuffix
-                      [for]="picker1">
-                    </mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-                  </mat-form-field>
-                </div>
+
+              <div class="input_field">
+                <ddp-input-field
+                  label="Date of birth*"
+                  placeholder="MM/DD/YY"
+                  inputType="date"
+                  formControlName="dateOfBirth">
+                </ddp-input-field>
               </div>
-              <div class="row consentAssentDate">
-                <div class="consentDate">
-                  <mat-label>Informed consent date*</mat-label>
-                  <mat-form-field appearance="outline">
-                    <input
-                      matInput
-                      [matDatepicker]="picker2"
-                      formControlName="informedConsentDate"
-                      placeholder="MM/DD/YY">
-                    <mat-error *ngIf="patient.get('informedConsentDate').invalid">{{getErrorMessage(i, 'informedConsentDate')}}</mat-error>
-                    <mat-datepicker-toggle
-                      matSuffix
-                      [for]="picker2">
-                    </mat-datepicker-toggle>
-                    <mat-datepicker #picker2></mat-datepicker>
-                  </mat-form-field>
-                </div>
-                <div class="assentDate">
-                  <mat-label>Assent date (if applicable)</mat-label>
-                  <mat-form-field appearance="outline">
-                    <input
-                      matInput
-                      [matDatepicker]="picker3"
-                      formControlName="assentDate"
-                      placeholder="MM/DD/YY">
-                    <mat-error *ngIf="patient.get('assentDate').invalid">{{getErrorMessage(i, 'assentDate')}}</mat-error>
-                    <mat-datepicker-toggle
-                      matSuffix
-                      [for]="picker3">
-                    </mat-datepicker-toggle>
-                    <mat-datepicker #picker3></mat-datepicker>
-                  </mat-form-field>
-                </div>
+
+              <div class="input_field">
+                <ddp-input-field
+                  label="Informed consent date*"
+                  placeholder="MM/DD/YY"
+                  inputType="date"
+                  formControlName="informedConsentDate">
+                </ddp-input-field>
+                <ddp-input-field
+                  label="Assent date (if applicable)"
+                  placeholder="MM/DD/YY"
+                  inputType="date"
+                  formControlName="assentDate">
+                </ddp-input-field>
               </div>
 
             </div>
           </ng-container>
         </ng-container>
-        <button class="btn-addPt" (click)="addPatient()">
-          <mat-icon>add</mat-icon> Add another patient
+        <button class="btn_secondary" (click)="addPatient()" [disabled]="addPatientForm.invalid">
+          <mat-icon>add</mat-icon>
+          Add another patient
         </button>
       </form>
     </section>
     <aside>
       <div class="fileUpload">
-        <p>File upload  <mat-icon>info</mat-icon></p>
+        <p>File upload
+          <mat-icon>info</mat-icon>
+        </p>
         <div class="fileUpload-dragAndDrop">
           <p>Drag and drop or <br/> <a (click)="file.click()">browse your files</a></p>
           <input type="file" #file style="display: none">
@@ -120,7 +84,7 @@
     </aside>
   </main>
   <footer>
-    <button class="btn-cancel" (click)="closeDialog()">Cancel</button>
-    <button class="btn-register" [disabled]="addPatientForm.invalid" (click)="registerPatient()">Register</button>
+    <button class="btn_secondary" (click)="closeDialog()">Cancel</button>
+    <button class="btn_primary" [disabled]="addPatientForm.invalid" (click)="registerPatient()">Register</button>
   </footer>
 </div>
