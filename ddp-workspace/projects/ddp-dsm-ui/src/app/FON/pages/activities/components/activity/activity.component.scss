@@ -143,7 +143,7 @@ $field-disabled-border: $__Mulled_wine_transparent;
 
     .mat-form-field-label {
       font-family: Montserrat, sans-serif !important;
-      font-size: 15px;
+      font-size: 15px !important;
       color: $__Gunmetal !important;
     }
 
@@ -155,7 +155,8 @@ $field-disabled-border: $__Mulled_wine_transparent;
     }
 
     .mat-form-field.mat-focused,
-    .mat-form-field.mat-form-field-should-float {
+    .mat-form-field.mat-form-field-should-float,
+    .mat-form-field-disabled {
       .mat-form-field-label {
         display: none;
       }
