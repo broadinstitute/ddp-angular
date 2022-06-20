@@ -1,4 +1,4 @@
-@import "../../../../../../styles/FON/core/colors";
+@import "../../../../../../styles/FON/core";
 
 $text-color: #000000;
 $warn-color: #f44336;
@@ -45,19 +45,6 @@ $field-disabled-border: $__Mulled_wine_transparent;
     display: flex;
     justify-content: space-between;
     margin: 2rem;
-  }
-
-  .button_secondary {
-    background-color: transparent;
-    color: $text-color;
-    border: 2px solid $text-color !important;
-
-    &:hover:not([disabled]),
-    &:hover:enabled,
-    &:focus:not([disabled]),
-    &:focus:enabled,{
-      background-color: rgba(0,0,0,0.04);
-    }
   }
 
   .ErrorMessage.ErrorMessage {
@@ -295,6 +282,12 @@ $field-disabled-border: $__Mulled_wine_transparent;
         border-bottom: none;
         background-image: url('/assets/images/arrow_down_disabled.svg');
       }
+    }
+  }
+
+  .ddp-required-question-prompt {
+    span > .activity-question-title {
+      display: inline;
     }
   }
 
