@@ -42,11 +42,6 @@
   </ul>
 
   <div *ngIf="isAuthenticated">
-    <div>
-      <button routerLink="dashboard" routerLinkActive="header-link_active">
-        <span translate>Common.Navigation.Dashboard</span>
-      </button>
-    </div>
     <div *ngIf="headerConfig.showLoginButton" [ngClass]="{ 'header-button': !headerConfig.showMainButtons }">
       <app-login-out></app-login-out>
     </div>
