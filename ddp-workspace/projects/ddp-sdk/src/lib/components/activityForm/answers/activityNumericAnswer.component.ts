@@ -25,6 +25,7 @@ import { LayoutType } from '../../../models/layout/layoutType';
                [formControl]="numericField"
                [min]="block.min"
                [max]="block.max"
+               autocomplete="off"
                [step]="valueChangeStep"
                [placeholder]="placeholder || block.placeholder"
                [attr.data-ddp-test]="'answer:' + block.stableId">
