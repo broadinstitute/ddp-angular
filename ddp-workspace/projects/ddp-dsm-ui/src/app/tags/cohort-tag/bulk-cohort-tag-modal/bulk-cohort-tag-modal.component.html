@@ -1,1 +1,25 @@
-<app-cohort-tag></app-cohort-tag>
+<mat-form-field class="example-chip-list" appearance="fill">
+    <mat-label>Tags</mat-label>
+    <mat-chip-list #chipList aria-label="Tag selection">
+      <mat-chip *ngFor="let tag of tags" (removed)="remove(tag)">
+        {{tag}}
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+      <input placeholder="New tag..."
+             [matChipInputFor]="chipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             [matChipInputAddOnBlur]="addOnBlur"
+             (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+  </mat-form-field>
+<mat-radio-group aria-label="Select an option"
+    [(ngModel)]="selectedOption">
+    <br/>
+    <mat-radio-button value="{{OPTIONS.selectedPatients}}" checked>Apply tag to selected patient(s)</mat-radio-button>
+    <br/>
+    <mat-radio-button value="{{OPTIONS.allPatients}}">Apply tag to ALL patients</mat-radio-button>
+</mat-radio-group>
+<br/>
+<button mat-raised-button color="primary" (click)="bulkCreateCohorts()" [disabled]="isTagsEmpty()">Submit</button>
