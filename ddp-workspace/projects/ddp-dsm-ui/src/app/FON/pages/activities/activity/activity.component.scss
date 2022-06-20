@@ -1,7 +1,16 @@
 $text-color: #000000;
 $warn-color: #f44336;
+$field-enabled-border: #737E8E;
+$field-disabled-border: rgba(73,86,106,0.4);
+
 
 ::ng-deep {
+
+  .activity-header {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 28px;
+  }
 
   // steps
   .activity-steps {
@@ -70,5 +79,172 @@ $warn-color: #f44336;
     &__delete-dialog > mat-dialog-container {
       padding-top: 12px !important;
     }
+  }
+
+
+  .activity {
+    .section.article-content {
+      font-family: Montserrat, sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0;
+      line-height: 17px;
+    }
+  }
+
+  .ddp-question-prompt {
+    color: #2D333E;
+    font-size: 15px!important;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 17px;
+    margin-top: 32px;
+  }
+
+  ddp-activity-dropdown-picklist-question {
+    select {
+      &.mat-input-element {
+        /* reset native arrow down */
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+
+        /* new arrow icon*/
+        background-image: url('/assets/images/arrow_down.svg');
+        background-repeat: no-repeat;
+        background-position-x: 100%;
+        background-position-y: 55%;
+      }
+
+      &:disabled {
+        border-bottom: none;
+        background-image: url('/assets/images/arrow_down_disabled.svg');
+      }
+    }
+
+    /* hide Angular Material select arrow */
+    .mat-form-field-type-mat-native-select .mat-form-field-infix::after {
+      display: none;
+    }
+  }
+
+  ddp-activity-text-input, ddp-activity-email-input {
+    .mat-form-field-infix {
+      border-top: none;
+    }
+    .mat-form-field-label-wrapper {
+      display: none;
+    }
+  }
+
+  ddp-activity-email-input {
+    .mat-form-field {
+      max-width: 50%;
+    }
+
+    .mat-form-field-infix {
+      width: auto;
+    }
+  }
+
+  ddp-activity-dropdown-picklist-question,
+  ddp-activity-text-input,
+  ddp-activity-email-input {
+    .mat-form-field-wrapper, .mat-form-field-infix {
+      padding: 0 !important;
+    }
+
+    .mat-form-field {
+      width: max-content !important;
+      border: 1px solid $field-enabled-border;
+      border-radius: 3px;
+      background-color: #FFFFFF;
+
+      &.mat-form-field-disabled {
+        background-color: rgba(0,0,0,0.03);
+        border-color: $field-disabled-border;
+      }
+    }
+
+    .mat-input-element {
+      padding: 14px 24px 14px 8px !important;
+      color: #2D333E !important;
+      font-family: Montserrat, sans-serif;
+
+      &:disabled {
+        color: #33373B !important;
+        opacity: 0.7;
+      }
+    }
+
+    .mat-form-field-underline {
+      display: none;
+    }
+  }
+
+  .mat-checkbox-label {
+    font-family: Montserrat, sans-serif;
+    color: #2D333E !important;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 17px;
+  }
+
+  .mat-checkbox-frame {
+    border-width: 1px !important;
+    border-color: #2D333E !important; ;
+  }
+
+  .mat-checkbox-disabled {
+    .mat-checkbox-label, .mat-checkbox-frame {
+      color: #33373B !important;
+      opacity: 0.7;
+    }
+  }
+
+  ddp-date {
+    .ddp-answer-container {
+      @media screen and (min-width: 1200px) {
+        width: 50%;
+      }
+    }
+
+    select {
+      width: max-content !important;
+      border: 1px solid $field-enabled-border !important;
+      border-radius: 3px;
+      background-color: #FFFFFF;
+      padding: 14px 16px 14px 8px;
+      color: #2D333E !important;
+
+      /* reset native arrow down */
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+
+      /* new arrow icon*/
+      background-image: url('/assets/images/arrow_down.svg');
+      background-repeat: no-repeat;
+      background-position-x: 100%;
+      background-position-y: 55%;
+
+      &:disabled {
+        border-color: $field-disabled-border;
+        background-color: rgba(0,0,0,0.03);
+        color: #33373B !important;
+        opacity: 0.7;
+
+        border-bottom: none;
+        background-image: url('/assets/images/arrow_down_disabled.svg');
+      }
+    }
+  }
+
+  .activity-buttons {
+    margin: 0 -40px;
+    padding: 16px 40px;
+    height: 72px;
+    background-color: #E5E5E5;
   }
 }

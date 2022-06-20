@@ -3,7 +3,7 @@
 .button,
 .SimpleButton {
     padding: 0.625rem 2rem;
-    border-radius: 4px;
+    border-radius: 2px;
     border: none;
     box-sizing: border-box;
     text-align: center;
@@ -11,6 +11,7 @@
     font-weight: 500;
     transition: 0.3s;
     white-space: nowrap;
+    letter-spacing: -0.3px;
 }
 
 .button,
@@ -27,7 +28,7 @@
 
 .button_medium,
 .SimpleButton {
-    font-size: 1.25rem;
+    font-size: 14px;
     line-height: 2rem;
 }
 
@@ -39,16 +40,16 @@
 
 .button_primary,
 .mat-flat-button.mat-primary {
-    background-color: #7154FF;
-    border: 2px solid #7154FF;
+    background-color: #546989;
+    border: 2px solid #546989;
     color: white;
-
-    &:hover:not([disabled]),
-    &:hover:enabled {
-        background-color: darken(#7154FF, 35%);
-        border-color: darken(#7154FF, 35%);
-    }
 }
+
+.button_primary:hover {
+    background-color: #749DC5;
+    border-color: #749DC5;
+}
+
 
 .mat-flat-button {
     &:hover:not([disabled]),
