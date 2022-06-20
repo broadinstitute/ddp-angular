@@ -8,7 +8,7 @@ export class HeaderService extends HeaderConfigurationService {
   constructor() {
     super();}
 
-  setupPasswordHeader() {
+  public setupPasswordHeader(): void {
     this.showLoginButton = false;
     this.setupDefaultHeader();
   }

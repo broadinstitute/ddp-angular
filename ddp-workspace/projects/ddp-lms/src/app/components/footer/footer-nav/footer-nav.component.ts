@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Route } from '../../../constants/Route';
 import { CommunicationService } from 'toolkit';
 import { SessionMementoService } from 'ddp-sdk';
@@ -9,7 +9,7 @@ import { HeaderService } from '../../../services/header.service';
   templateUrl: './footer-nav.component.html',
   styleUrls: ['footer-nav.component.scss'],
 })
-export class FooterNavComponent implements OnInit {
+export class FooterNavComponent {
   readonly Route = Route;
 
   constructor(
@@ -17,8 +17,6 @@ export class FooterNavComponent implements OnInit {
     private session: SessionMementoService,
     public headerConfig: HeaderService
   ) {}
-
-  ngOnInit(): void {}
 
   public scrollTop(): void {
     window.scroll({

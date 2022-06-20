@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommunicationService } from 'toolkit';
 import { SessionMementoService } from 'ddp-sdk';
 import { Route } from '../../../constants/Route';
@@ -9,7 +9,7 @@ import { HeaderService } from '../../../services/header.service';
   templateUrl: './mobile-nav.component.html',
   styleUrls: ['./mobile-nav.component.scss'],
 })
-export class MobileNavComponent implements OnInit {
+export class MobileNavComponent {
   constructor(
     private communicationService: CommunicationService,
     private session: SessionMementoService,
@@ -25,6 +25,4 @@ export class MobileNavComponent implements OnInit {
   public get isAuthenticated(): boolean {
     return this.session.isAuthenticatedSession();
   }
-
-  ngOnInit(): void {}
 }
