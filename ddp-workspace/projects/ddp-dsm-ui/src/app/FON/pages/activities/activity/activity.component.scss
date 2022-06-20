@@ -6,7 +6,7 @@ $field-disabled-border: rgba(73,86,106,0.4);
 
 ::ng-deep {
 
-  .activity-header {
+  .content h1 {
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 28px;
@@ -92,7 +92,7 @@ $field-disabled-border: rgba(73,86,106,0.4);
     }
   }
 
-  .ddp-question-prompt {
+  .ddp-question-prompt, .activity-question-title {
     color: #2D333E;
     font-size: 15px!important;
     font-weight: 600;
