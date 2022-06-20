@@ -10,7 +10,6 @@ const DIRECTIVE_NAME = 'openInModal';
 })
 export class openInModalDirective implements OnDestroy {
   private modalComponent:  ComponentType<any>;
-  private className: string;
 
   private dialogRef: Subscription;
 
@@ -20,7 +19,6 @@ export class openInModalDirective implements OnDestroy {
   @Input(DIRECTIVE_NAME) set setModalComponent(component: ComponentType<any>) {
     if(this.validateComponent(component)) {
       this.modalComponent = component;
-      this.className = component.name;
     } else {
       console.error(new Error('Please provide a valid component'));
     }
@@ -29,9 +27,7 @@ export class openInModalDirective implements OnDestroy {
   @HostListener('click') openAddPatientsModal(): void {
     const component = this.modalComponent;
     if(component) {
-      const dialogRef = this.matDialog.open(this.modalComponent, {
-        panelClass: this.className
-      });
+      const dialogRef = this.matDialog.open(this.modalComponent);
 
       this.dialogRef = dialogRef.afterClosed()
         .subscribe((result) => {
