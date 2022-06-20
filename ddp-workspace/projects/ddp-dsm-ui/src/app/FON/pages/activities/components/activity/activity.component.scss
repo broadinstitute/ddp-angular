@@ -128,10 +128,26 @@ $field-disabled-border: $__Mulled_wine_transparent;
   ddp-activity-numeric-answer {
     .mat-form-field-infix {
       border-top: none;
-      width: unset !important;
     }
+
+    .mat-form-field-label {
+      font-family: Montserrat, sans-serif !important;
+      font-style: italic;
+      font-size: 15px !important;
+      color: $__Charcoal !important;
+      opacity: 0.7;
+    }
+
+    .mat-form-field.mat-focused,
+    .mat-form-field.mat-form-field-should-float {
+      .mat-form-field-label {
+        display: none;
+      }
+    }
+
     .mat-form-field-label-wrapper {
-      display: none;
+      left: 15px;
+      top: -5px;
     }
 
     .mat-input-element {
@@ -142,31 +158,6 @@ $field-disabled-border: $__Mulled_wine_transparent;
   ddp-activity-numeric-answer {
     .mat-form-field-infix {
       border-top: none;
-    }
-    .mat-form-field-label-wrapper {
-      left: 15px;
-      top: -5px;
-    }
-
-    .mat-form-field-label {
-      font-family: Montserrat, sans-serif !important;
-      font-size: 15px !important;
-      color: $__Gunmetal !important;
-    }
-
-    .mat-form-field-disabled {
-      .mat-form-field-label {
-        color: $__Charcoal !important;
-        opacity: 0.7;
-      }
-    }
-
-    .mat-form-field.mat-focused,
-    .mat-form-field.mat-form-field-should-float,
-    .mat-form-field-disabled {
-      .mat-form-field-label {
-        display: none;
-      }
     }
   }
 
