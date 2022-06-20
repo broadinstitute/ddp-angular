@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Route } from '../../../constants/Route';
 import { CommunicationService } from 'toolkit';
+import { SessionMementoService } from 'ddp-sdk';
+import { HeaderService } from '../../../services/header.service';
 
 @Component({
   selector: 'app-footer-nav',
@@ -10,7 +12,11 @@ import { CommunicationService } from 'toolkit';
 export class FooterNavComponent implements OnInit {
   readonly Route = Route;
 
-  constructor(private communicationService: CommunicationService) {}
+  constructor(
+    private communicationService: CommunicationService,
+    private session: SessionMementoService,
+    public headerConfig: HeaderService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -23,5 +29,9 @@ export class FooterNavComponent implements OnInit {
 
   public openJoinMailingList(): void {
     this.communicationService.openJoinDialog();
+  }
+
+  public get isAuthenticated(): boolean {
+    return this.session.isAuthenticatedSession();
   }
 }
