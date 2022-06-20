@@ -8,6 +8,10 @@ $field-disabled-border: $__Mulled_wine_transparent;
 
 ::ng-deep {
 
+  .main_activity {
+    padding: 32px 40px 0;
+  }
+
   .content h1 {
     font-size: 20px;
     font-weight: 600;
@@ -152,6 +156,7 @@ $field-disabled-border: $__Mulled_wine_transparent;
 
     .mat-form-field-label {
       font-family: Montserrat, sans-serif !important;
+      font-size: 15px;
       color: $__Gunmetal !important;
     }
 
@@ -184,7 +189,11 @@ $field-disabled-border: $__Mulled_wine_transparent;
   ddp-activity-text-input,
   ddp-activity-email-input,
   ddp-activity-numeric-answer {
-    .mat-form-field-wrapper, .mat-form-field-infix {
+    .mat-form-field-wrapper {
+      padding: 0 !important;
+    }
+
+    .mat-form-field-infix {
       padding: 0 !important;
     }
 
@@ -201,9 +210,11 @@ $field-disabled-border: $__Mulled_wine_transparent;
     }
 
     .mat-input-element {
+      height: auto;
       padding: 14px 24px 14px 8px !important;
       color: #2D333E !important;
       font-family: Montserrat, sans-serif;
+      font-size: 15px;
 
       &:disabled {
         color: $__Charcoal !important;
@@ -255,12 +266,14 @@ $field-disabled-border: $__Mulled_wine_transparent;
     }
 
     select {
+      height: auto;
       width: max-content !important;
       border: 1px solid $__Slate_grey !important;
       border-radius: 3px;
       background-color: #FFFFFF;
       padding: 14px 16px 14px 8px;
       color: #2D333E !important;
+      font-size: 15px;
 
       /* reset native arrow down */
       appearance: none;
