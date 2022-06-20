@@ -84,7 +84,7 @@ $field-disabled-border: rgba(73,86,106,0.4);
 
   .activity {
     .section.article-content {
-      font-family: Montserrat, sans-serif;
+      font-family: Montserrat, sans-serif !important;
       font-size: 15px;
       font-weight: 500;
       letter-spacing: 0;
@@ -92,7 +92,8 @@ $field-disabled-border: rgba(73,86,106,0.4);
     }
   }
 
-  .ddp-question-prompt, .activity-question-title {
+  .ddp-question-prompt,
+  .activity-question-title {
     color: #2D333E;
     font-size: 15px!important;
     font-weight: 600;
@@ -128,12 +129,35 @@ $field-disabled-border: rgba(73,86,106,0.4);
     }
   }
 
-  ddp-activity-text-input, ddp-activity-email-input {
+  ddp-activity-text-input,
+  ddp-activity-email-input {
     .mat-form-field-infix {
       border-top: none;
     }
     .mat-form-field-label-wrapper {
       display: none;
+    }
+  }
+
+  ddp-activity-numeric-answer {
+    .mat-form-field-infix {
+      border-top: none;
+    }
+    .mat-form-field-label-wrapper {
+      left: 15px;
+      top: -5px;
+    }
+
+    .mat-form-field-label {
+      font-family: Montserrat, sans-serif !important;
+      color: #2D333E !important;
+    }
+
+    .mat-form-field-disabled {
+      .mat-form-field-label {
+        color: #33373B !important;
+        opacity: 0.7;
+      }
     }
   }
 
@@ -149,7 +173,8 @@ $field-disabled-border: rgba(73,86,106,0.4);
 
   ddp-activity-dropdown-picklist-question,
   ddp-activity-text-input,
-  ddp-activity-email-input {
+  ddp-activity-email-input,
+  ddp-activity-numeric-answer {
     .mat-form-field-wrapper, .mat-form-field-infix {
       padding: 0 !important;
     }
@@ -182,7 +207,8 @@ $field-disabled-border: rgba(73,86,106,0.4);
     }
   }
 
-  .mat-checkbox-label {
+  .mat-checkbox-label,
+  .mat-radio-label .mat-radio-label-content {
     font-family: Montserrat, sans-serif;
     color: #2D333E !important;
     font-size: 15px;
@@ -191,13 +217,22 @@ $field-disabled-border: rgba(73,86,106,0.4);
     line-height: 17px;
   }
 
-  .mat-checkbox-frame {
+  .mat-checkbox-frame,
+  .mat-radio-outer-circle {
     border-width: 1px !important;
-    border-color: #2D333E !important; ;
+    border-color: #2D333E !important;
   }
 
   .mat-checkbox-disabled {
     .mat-checkbox-label, .mat-checkbox-frame {
+      color: #33373B !important;
+      opacity: 0.7;
+    }
+  }
+
+  .mat-radio-button.mat-radio-disabled {
+    .mat-radio-label-content,
+    .mat-radio-outer-circle {
       color: #33373B !important;
       opacity: 0.7;
     }
