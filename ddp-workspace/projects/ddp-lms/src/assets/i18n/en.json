@@ -84,7 +84,7 @@
             {
               "Question": "Who is conducting this research?",
               "Paragraphs": [
-                "This project is being conducted by the Broad Institute of MIT and Harvard, Dana-Farber Cancer Institute, and Count Me In, a non-profit research initiative that conducts patient-partnered studies of cancer. Count Me In's Leiomyosarcoma (LMS) Project and Leiomyosarcoma (LMS) Project are supported by a grant from the National Cancer Institute's Cancer Moonshot program and are part of the <a href='https://www.cancer.gov/research/key-initiatives/moonshot-cancer-initiative/implementation/patient-engagement'>Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers</a>."
+                "This project is being conducted by the Broad Institute of MIT and Harvard, Dana-Farber Cancer Institute, and Count Me In, a non-profit research initiative that conducts patient-partnered studies of cancer. Count Me In's Leiomyosarcoma (LMS) Project and Leiomyosarcoma (LMS) Project are supported by a grant from the National Cancer Institute's Cancer Moonshot program and are part of the <a href='https://www.cancer.gov/research/key-initiatives/moonshot-cancer-initiative/implementation/patient-engagement' target='_blank'>Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers</a>."
               ]
             },
             {
@@ -117,10 +117,10 @@
             {
               "Question": "Is this study a clinical trial?",
               "Paragraphs": [
-                "This study is not a clinical trial. A <a href='https://www.cancer.gov/publications/dictionaries/cancer-terms/def/clinical-trial'>clinical trial</a> is “a type of research study that tests how well new medical approaches work in people. These studies test new methods of screening, prevention, diagnosis, or treatment of a disease.”",
+                "This study is not a clinical trial. A <a href='https://www.cancer.gov/publications/dictionaries/cancer-terms/def/clinical-trial' target='_blank' >clinical trial</a> is “a type of research study that tests how well new medical approaches work in people. These studies test new methods of screening, prevention, diagnosis, or treatment of a disease.”",
                 "Participation in the LMSproject will not have any impact on the participant’s course of care for leiomyosarcoma. We are not permitted to give any clinical advice as part of participation in this project. The testing we are performing is for research and may not provide information about a participant’s tumor that would lead to changes in their care and treatment plan.",
-                "If participants elect to share tumor samples with the project and we are able to successfully sequence sample(s), we  will share what we’ve learned from tumor sequencing with participants. When a participant consents to the study, they will be able to choose whether or not to receive this information. An example of what this information could look like can be found <a target='blank' class='Link ng-star-inserted' href='assets/somatic_shared_learnings_letter_new.pdf'> here. </a>",
-                "In some cases, we may not be able to share what we’ve learned from tumor sequencing with participants. Because of regulatory restrictions, we are unable to share results with participants living in or samples from institutions in New York and Canada. More details on NY state restrictions can be <a href='https://www.wadsworth.org/regulatory/clep/clinical-labs'>found here</a>."
+                "If participants elect to share tumor samples with the project and we are able to successfully sequence sample(s), we  will share what we’ve learned from tumor sequencing with participants. When a participant consents to the study, they will be able to choose whether or not to receive this information. An example of what this information could look like can be found <a class='Link ng-star-inserted' target='_blank' href='assets/somatic_shared_learnings_letter_new.pdf'> here. </a>",
+                "In some cases, we may not be able to share what we’ve learned from tumor sequencing with participants. Because of regulatory restrictions, we are unable to share results with participants living in or samples from institutions in New York and Canada. More details on NY state restrictions can be <a href='https://www.wadsworth.org/regulatory/clep/clinical-labs' target='_blank'>found here</a>."
               ]
             },
             {
@@ -526,7 +526,7 @@
     "countMeInText": "Count Me In is stewarded by the Broad Institute of MIT and Harvard, the Dana-Farber Cancer Institute and Emerson Collective.</br></br>Count Me In's Leiomyosarcoma (LMS) Project is supported by a grant from the National Cancer Institute's Cancer Moonshot program and is part of the Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers.</br></br>The Leiomyosarcoma Project has been designed and implemented collaboratively with leiomyosarcoma patients, advocates, caregivers, loved ones, cancer researchers, and clinicians.",
     "AdvisorsBlock": {
       "Headline": "Project Advisory Council",
-      "ProjectSummary": "The Leiomyosarcoma Project Advisory Council (PAC) is made up of patients,</br>advocates, caregivers, and loved ones who have been impacted by</br>leiomyosarcoma. The PAC meets regularly with the project operations team via</br>video calls to develop all aspects of the project, including survey questions, the</br>project website, the project name and logo, and sample kits.",
+      "ProjectSummary": "The Leiomyosarcoma Project Advisory Council (PAC) is made up of patients, advocates, caregivers, and loved ones who have been impacted by leiomyosarcoma. The PAC meets regularly with the project operations team via video calls to develop all aspects of the project, including survey questions, the project website, the project name and logo, and sample kits.",
       "Advisors": [
         {
           "name": "Mitch Achee",
@@ -540,7 +540,8 @@
         },
         {
           "name": "Yemi Getachew",
-          "image": "/assets/images/advisors/adimage.jpg"
+          "image": "/assets/images/advisors/adimage.jpg",
+          "bio": "<div class=\"herotext\">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n</div>"
         },
         {
           "name": "Matthew Haist",
@@ -549,7 +550,8 @@
         },
         {
           "name": "Nikky Hughes",
-          "image": "/assets/images/advisors/adimage.jpg"
+          "image": "/assets/images/advisors/adimage.jpg",
+          "bio": "<div class=\"herotext\">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n</div>"
         },
         {
           "name": "Cherry Kim",
@@ -558,7 +560,8 @@
         },
         {
           "name": "Miyoung Kim",
-          "image": "/assets/images/advisors/adimage.jpg"
+          "image": "/assets/images/advisors/adimage.jpg",
+          "bio": "<div class=\"herotext\">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n</div>"
         },
         {
           "name": "Mary Anne Oldford",
@@ -567,7 +570,8 @@
         },
         {
           "name": "Bella Pesina",
-          "image": "/assets/images/advisors/adimage.jpg"
+          "image": "/assets/images/advisors/adimage.jpg",
+          "bio": "<div class=\"herotext\">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n</div>"
         },
         {
           "name": "Blake Tomkinson",
@@ -911,7 +915,7 @@
       },
       {
         "question": "Who is conducting this research?",
-        "paragraph": "This project is being conducted by the Broad Institute of MIT and Harvard, Dana-Farber Cancer Institute, and Count Me In, a non-profit research initiative that conducts patient-partnered studies of cancer. Count Me In's Leiomyosarcoma (LMS) Project and Leiomyosarcoma (LMS) Project are supported by a grant from the National Cancer Institute's Cancer Moonshot program and are part of the <a target='blank' href='https://www.cancer.gov/research/key-initiatives/moonshot-cancer-initiative/implementation/patient-engagement'>Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers</a>."
+        "paragraph": "This project is being conducted by the Broad Institute of MIT and Harvard, Dana-Farber Cancer Institute, and Count Me In, a non-profit research initiative that conducts patient-partnered studies of cancer. Count Me In's Leiomyosarcoma (LMS) Project and Leiomyosarcoma (LMS) Project are supported by a grant from the National Cancer Institute's Cancer Moonshot program and are part of the <a target='_blank' href='https://www.cancer.gov/research/key-initiatives/moonshot-cancer-initiative/implementation/patient-engagement'>Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers</a>."
       },
       {
         "question": "What does participation look like?",

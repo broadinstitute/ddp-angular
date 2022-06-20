@@ -14,7 +14,6 @@ import { PDFModel } from '../pdf-download/pdf-download.model';
 import { Statics } from '../utils/statics';
 import { Value } from '../utils/value.model';
 import { ComponentService } from './component.service';
-import { LoggingDsmService } from './logging.service';
 import { RoleService } from './role.service';
 import { SessionService } from './session.service';
 
@@ -33,8 +32,7 @@ export class DSMService {
   constructor(private http: HttpClient,
                private sessionService: SessionService,
                private role: RoleService,
-               private router: Router,
-               private logger: LoggingDsmService) {
+               private router: Router) {
   }
 
   sendAnalyticsMetric( realm: string, passed: number ): Observable<any> {
@@ -955,7 +953,6 @@ export class DSMService {
   }
 
   private handleError(error: any): Observable<any> {
-    this.logger.logError('ERROR: ' + JSON.stringify(error));
     return throwError(() => error);
   }
 

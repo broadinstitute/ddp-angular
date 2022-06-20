@@ -3,6 +3,7 @@ import { AbstractActivityQuestionBlock } from '../../../../models/activity/abstr
 import { AnswerValue } from '../../../../models/activity/answerValue';
 import { QuestionType } from '../../../../models/activity/questionType';
 import { BlockType } from '../../../../models/activity/blockType';
+import { LayoutType } from '../../../../models/layout/layoutType';
 
 @Component({
     selector: 'ddp-activity-answer',
@@ -12,17 +13,20 @@ import { BlockType } from '../../../../models/activity/blockType';
                                          [class]="'boolean-answer-' + block.stableId"
                                          [block]="block"
                                          [readonly]="readonly"
+                                         [layoutType]="layoutType"
                                          (valueChanged)="onChange($event)">
             </ddp-activity-boolean-answer>
             <ddp-activity-text-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.Text)"
                                       [block]="block"
                                       [readonly]="readonly"
+                                      [layoutType]="layoutType"
                                       (valueChanged)="onChange($event)">
             </ddp-activity-text-answer>
             <ddp-activity-numeric-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.Numeric) || isCertainTypeOfQuestion(block, QuestionType.Decimal)"
                                          [class]="'numeric-answer-' + block.stableId"
                                          [block]="block"
                                          [readonly]="readonly"
+                                         [layoutType]="layoutType"
                                          (valueChanged)="onChange($event)">
             </ddp-activity-numeric-answer>
             <ddp-activity-picklist-answer  *ngIf="isCertainTypeOfQuestion(block, QuestionType.Picklist)"
@@ -31,6 +35,7 @@ import { BlockType } from '../../../../models/activity/blockType';
                                             [readonly]="readonly"
                                             [studyGuid]="studyGuid"
                                             [activityGuid]="activityGuid"
+                                           [layoutType]="layoutType"
                                             (valueChanged)="onChange($event)">
             </ddp-activity-picklist-answer>
             <ddp-activity-date-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.Date)"
@@ -38,6 +43,7 @@ import { BlockType } from '../../../../models/activity/blockType';
                                       [block]="block"
                                       [readonly]="readonly"
                                       [validationRequested]="validationRequested"
+                                      [layoutType]="layoutType"
                                       (valueChanged)="onChange($event)">
             </ddp-activity-date-answer>
             <ddp-activity-composite-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.Composite)"
@@ -45,12 +51,14 @@ import { BlockType } from '../../../../models/activity/blockType';
                                            [block]="block"
                                            [readonly]="readonly"
                                            [validationRequested]="validationRequested"
+                                           [layoutType]="layoutType"
                                            (valueChanged)="onChange($event)"
                                            (componentBusy)="componentBusy.next($event)">
             </ddp-activity-composite-answer>
             <ddp-activity-agreement-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.Agreement)"
                                            [block]="block"
                                            [readonly]="readonly"
+                                           [layoutType]="layoutType"
                                            (valueChanged)="onChange($event)">
             </ddp-activity-agreement-answer>
             <ddp-activity-file-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.File)"
@@ -60,12 +68,14 @@ import { BlockType } from '../../../../models/activity/blockType';
                                       [studyGuid]="studyGuid"
                                       [activityGuid]="activityGuid"
                                       (valueChanged)="onChange($event)"
+                                      [layoutType]="layoutType"
                                       (componentBusy)="componentBusy.next($event)">
             </ddp-activity-file-answer>
             <ddp-activity-matrix-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.Matrix)"
                                         [class]="'matrix-answer-' + block.stableId"
                                         [block]="block"
                                         [readonly]="readonly"
+                                        [layoutType]="layoutType"
                                         (valueChanged)="onChange($event)">
             </ddp-activity-matrix-answer>
             <ddp-activity-instance-select-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.ActivityInstanceSelect)"
@@ -73,10 +83,12 @@ import { BlockType } from '../../../../models/activity/blockType';
                                                  [block]="block"
                                                  [readonly]="readonly"
                                                  (valueChanged)="onChange($event)"
+                                                 [layoutType]="layoutType"
                                                  (componentBusy)="componentBusy.next($event)">
             </ddp-activity-instance-select-answer>
             <ddp-activity-equation-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.Equation)"
                                           [class]="'equation-answer-' + block.stableId"
+                                          [layoutType]="layoutType"
                                           [block]="block"
                                           (valueChanged)="onChange($event)">
             </ddp-activity-equation-answer>
@@ -94,6 +106,7 @@ export class ActivityAnswerComponent {
     @Input() validationRequested: boolean;
     @Input() studyGuid: string;
     @Input() activityGuid: string;
+    @Input() layoutType: LayoutType = LayoutType.DEFAULT;
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
     @Output() componentBusy = new EventEmitter<boolean>();
     readonly QuestionType = QuestionType;

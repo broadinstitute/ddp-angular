@@ -10,8 +10,8 @@
       <ddp-admin-action-panel [activityReadonly]="isReadonly()" (requestActivityEdit)="updateIsAdminEditing($event)">
       </ddp-admin-action-panel>
     </section>
-
-    <section *ngIf="model.title" class="section section--title">
+      <app-video-intro *ngIf="isConsent" pageRendered="CONSENT"></app-video-intro>
+      <section *ngIf="model.title" class="section section--title">
       <h1 class="activity-header" [innerHTML]="model.title"></h1>
     </section>
 
@@ -24,7 +24,7 @@
     <section *ngIf="shouldShowReadonlyHint" class="section section--readonly-hint">
       <div class="infobox" [innerHTML]="model.readonlyHint"></div>
     </section>
-    
+
     <app-activity-section-page-progress *ngIf="shouldShowSectionsProgress"
       [current]="currentSectionIndex + 1"
       [total]="model.sections.length">
@@ -41,7 +41,7 @@
         [class.consent-separator]="isConsent"
         class="section section--introduction"
       >
-        <ddp-activity-section
+          <ddp-activity-section
           [section]="model.introduction"
           [readonly]="isReadonly() || dataEntryDisabled"
           [validationRequested]="validationRequested"

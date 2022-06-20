@@ -4,7 +4,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateService } from '@ngx-translate/core';
 
-import { DdpModule, ConfigurationService, LanguageService, LoggingService } from 'ddp-sdk';
+import {
+  DdpModule,
+  ConfigurationService,
+  LanguageService,
+  LoggingService,
+  SubmitAnnouncementService,
+  SubmissionManager
+} from 'ddp-sdk';
 
 import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
 
@@ -26,10 +33,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import {NavComponent} from './components/nav/nav.component';
 import {loginOutComponent} from './components/nav/loginOut/loginOut.component';
+import {ActivityComponent} from './activity/activity.component';
+import {ActivityPageComponent} from './activity-page/activity-page.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {UserActivitiesComponent} from './components/user-activities/user-activities.component';
 import {MatTableModule} from '@angular/material/table';
 import {FlexModule} from '@angular/flex-layout';
+import {WorkflowProgressComponent} from './components/workflow-progress/workflow-progress.component';
+
 
 declare const DDP_ENV: Record<string, any>;
 
@@ -60,6 +71,7 @@ sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
 sdkConfig.localRegistrationUrl = sdkConfig.backendUrl + '/pepper/v1/register';
 sdkConfig.loginLandingUrl = DDP_ENV.loginLandingUrl;
 sdkConfig.usesVerticalStepper = ['FAMILY_HISTORY'];
+sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.dashboardActivitiesStartedStatuses = ['CREATED'];
 sdkConfig.dashboardActivitiesCompletedStatuses = ['COMPLETE'];
 
@@ -81,6 +93,7 @@ toolkitConfig.mailingListDialogUrl = 'updates';
 toolkitConfig.twitterAccountId = 'count_me_in';
 toolkitConfig.facebookGroupId = 'joincountmein';
 toolkitConfig.instagramId = 'countmein';
+toolkitConfig.lightswitchInstagramWidgetId = '814feee04df55de38ec37791efea075e';
 
 const translateFactory =
   (
@@ -126,8 +139,11 @@ const translateFactory =
     FaqSectionComponent,
     NavComponent,
     loginOutComponent,
+    ActivityComponent,
+    ActivityPageComponent,
     DashboardComponent,
-    UserActivitiesComponent
+    UserActivitiesComponent,
+    WorkflowProgressComponent,
   ],
   imports: [
     BrowserModule,
@@ -157,6 +173,8 @@ const translateFactory =
       deps: [Injector, LanguageService, TranslateService, LoggingService],
       multi: true,
     },
+    SubmitAnnouncementService,
+    SubmissionManager
   ],
   bootstrap: [AppComponent],
 })

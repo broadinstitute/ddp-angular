@@ -1,0 +1,36 @@
+@use "../../../../styles/FON/classes/buttons";
+
+:host-context(app-patients-list) {
+  grid-area: otherPage
+}
+
+.participants {
+  margin-left: 30px;
+
+
+}
+
+.participants-table {
+  margin-top: 20px;
+  button {
+    float: right;
+  }
+  thead {
+    color: #0000008a;
+  }
+
+  td, th {
+    padding: 12px;
+  }
+}
+
+tr {
+  border-bottom: 1px solid #0000001f;
+
+  &:not(.header) {
+    &:hover {
+      background: whitesmoke;
+    }
+  }
+}
+

@@ -11,7 +11,7 @@ export class HowToParticipateComponent {
   medical_release = 'https://storage.googleapis.com/cmi-study-dev-assets/lms/pdf/16.%20Medical%20Release%20Form%20-%20Adult.docx.pdf';
   kit = 'https://storage.googleapis.com/cmi-study-dev-assets/lms/pdf/Kit%20Instructions%20-%20Linked%20on%20Participation%20Page.pdf';
   survey = 'https://storage.googleapis.com/cmi-study-dev-assets/lms/pdf/surveys.pdf';
-  tumorSamples = 'https://storage.googleapis.com/cmi-study-dev-assets/lms/pdf/Somatic%20Shared%20Learnings%20Letter%20-%20Linked%20on%20Participation%20Page.pdf';
+  tumorSamples = 'https://storage.googleapis.com/cmi-study-dev-assets/lms/pdf/Shared%20Learnings%20Letter.pdf';
 
     readonly stepsHref = [
       this.consent,
