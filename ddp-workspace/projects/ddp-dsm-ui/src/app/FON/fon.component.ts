@@ -10,6 +10,10 @@ import {Component} from '@angular/core';
     </div>
   `,
   styles: [`
+    * {
+      font-family: 'Montserrat', sans-serif;
+    }
+
     .mainHolder {
       display: grid;
       grid-template-columns: 200px auto;

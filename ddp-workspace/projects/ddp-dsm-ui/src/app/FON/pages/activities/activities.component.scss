@@ -1,5 +1,8 @@
 @import "../../../../styles/FON/core";
 
+$activity-background-color: #F8F8F8;
+$border-color: #979797;
+
 $hoverColor: #7154FF;
 
 :host-context(app-activities) {
@@ -88,12 +91,19 @@ $hoverColor: #7154FF;
     @include flexContainer(normal, space-between);
 
     .activities-nav {
-      width: 25%;
+      width: 300px;
+      flex-shrink: 1;
       height: 100%;
-      overflow: auto;
+      overflow: hidden;
+
+      &:hover {
+        overflow: auto;
+      }
+
       ::ng-deep.ng-trigger-bodyExpansion {
         height: 100% !important;
       }
+
       mat-list-item {
         h4 {
           &:hover, &:focus {
@@ -107,11 +117,15 @@ $hoverColor: #7154FF;
         }
       }
     }
+
     .activity {
-      width: 75%;
+      width: auto;
+      flex-grow: 1;
       height: 100%;
-      margin-left: 20px;
       overflow: auto;
+      padding: 32px 40px 0;
+      background-color: $activity-background-color;
+      border-left: 1px solid $border-color;
     }
   }
 }
