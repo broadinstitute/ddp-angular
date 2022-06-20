@@ -3,6 +3,7 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 import { bottomNavItems, topNavItems } from './navItems';
 import { Auth } from '../../../services/auth.service';
 import { SessionService } from '../../../services/session.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -17,7 +18,8 @@ export class NavigationComponent {
 
   constructor(
     private auth: Auth,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   signOut(allow: boolean): void {
@@ -27,5 +29,9 @@ export class NavigationComponent {
   private getUserName(): string {
     const authToken = localStorage.getItem(Auth.AUTH0_TOKEN_NAME);
     return this.sessionService.getDSMClaims(authToken).name || 'Administrator name';
+  }
+
+  isActive(route: string): boolean {
+    return route === this.activatedRoute.snapshot.firstChild.routeConfig.path;
   }
 }

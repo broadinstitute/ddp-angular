@@ -365,3 +365,16 @@ h4 {
   font-size: 2rem;
   line-height: 2.375rem;
 }
+
+.wrapper {
+  height: 100vh;
+  margin-bottom: -20rem; // footer's height
+  padding-bottom: 20rem; // footer's height
+  padding-top: 6.25rem; // header's height
+  box-sizing: border-box;
+}
+
+.button_small {
+  font-size: 1.0625rem;
+  line-height: 1.375rem;
+}

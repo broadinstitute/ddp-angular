@@ -6,5 +6,6 @@ export enum BlockType {
     Group = 'GROUP',
     Conditional = 'CONDITIONAL',
     Activity = 'ACTIVITY',
-    Component = 'COMPONENT'
+    Component = 'COMPONENT',
+    Tabular = 'TABULAR'
 }

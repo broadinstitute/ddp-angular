@@ -14,6 +14,7 @@ export class ActivitiesComponent implements OnInit {
   patientWithActivities: Observable<any>;
   panelOpenState = true;
 
+  activeRoute = this.activatedRoute.snapshot.url[0].path;
   readonly PARENT = MainConstants.participantsListParent;
 
   constructor(private activatedRoute: ActivatedRoute, private storeService: StoreService) {

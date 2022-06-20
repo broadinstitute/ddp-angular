@@ -1,8 +1,8 @@
 export const topNavItems = [
-  {name: 'Home', route: 'home', img: 'home'},
+  {name: 'Home', route: '', img: 'home'},
   {name: 'Patients', route: 'patients', img: 'group'},
-  {name: 'Reporting', route: '', img: 'show_chart'},
-  {name: 'Administration', route: '', img: 'settings'}
+  {name: 'Reporting', route: 'reporting', img: 'show_chart'},
+  {name: 'Administration', route: 'administration', img: 'settings'}
 ];
 
 export const bottomNavItems = (userName: string): any[] =>

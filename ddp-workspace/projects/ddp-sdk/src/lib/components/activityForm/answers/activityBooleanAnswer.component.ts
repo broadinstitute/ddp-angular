@@ -1,11 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ActivityBooleanQuestionBlock } from '../../../models/activity/activityBooleanQuestionBlock';
 import { BooleanRenderMode } from '../../../models/activity/booleanRenderMode';
+import { LayoutType } from '../../../models/layout/layoutType';
 
 @Component({
     selector: 'ddp-activity-boolean-answer',
     template: `
-        <ddp-question-prompt [block]="block"></ddp-question-prompt>
+        <ddp-question-prompt [block]="block" *ngIf="!isGridLayout()"></ddp-question-prompt>
         <ng-container *ngIf="block.renderMode === RENDER_MODE.CHECKBOX; then checkbox else defaultRadio"></ng-container>
         <ng-template #defaultRadio>
             <mat-radio-group
@@ -60,10 +61,15 @@ export class ActivityBooleanAnswer {
 
     @Input() block: ActivityBooleanQuestionBlock;
     @Input() readonly: boolean;
+    @Input() layoutType: LayoutType = LayoutType.DEFAULT;
     @Output() valueChanged: EventEmitter<boolean> = new EventEmitter();
 
     public saveValue(value: boolean): void {
         this.block.answer = value;
         this.valueChanged.emit(value);
+    }
+
+    public isGridLayout(): boolean {
+        return this.layoutType === LayoutType.GRID;
     }
 }

@@ -78,4 +78,11 @@
                             (blockVisibilityChanged)="onBlockVisibilityChanged($event)">
         </ddp-activity-block>
     </div>
+    <ddp-tabular-block *ngIf="shouldBlockBeShown(block, BlockType.Tabular)"
+                       [block]="block"
+                       [readonly]="readonly"
+                       [validationRequested]="validationRequested"
+                       [studyGuid]="studyGuid"
+                       [activityGuid]="activityGuid">
+    </ddp-tabular-block>
 </div>

@@ -1,0 +1,14 @@
+/* lazy loaded */
+$font-sizes: (
+  'xxlg': 24px,
+  'xlg': 20px,
+  'lg': 18px,
+  'md': 15px,
+  'bmd': 14px,
+  'sm': 13px,
+  'xsm': 12px,
+);
+
+@function getFontSize($font_name) {
+  @return map-get($font-sizes, $font_name);
+}
