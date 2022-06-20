@@ -57,10 +57,10 @@ import { map, mergeMap } from 'rxjs/operators';
                       <a target="_blank" [href]="facebookUrl$ | async" (click)="doAnalytics('facebook')">
                           <img lazy-resource class="Footer-contactLogos" src="assets/images/facebook.svg" alt="Facebook">
                       </a>
-                      <a target="_blank" [href]="twitterUrl" (click)="doAnalytics('twitter')">
+                      <a target="_blank" [href]="twitterUrl$ | async" (click)="doAnalytics('twitter')">
                           <img lazy-resource class="Footer-contactLogos" src="assets/images/twitter.svg" alt="Twitter">
                       </a>
-                      <a target="_blank" [href]="instagramUrl" (click)="doAnalytics('instagram')">
+                      <a target="_blank" [href]="instagramUrl$ | async" (click)="doAnalytics('instagram')">
                           <img lazy-resource class="Footer-contactLogos" src="assets/images/instagram.png" alt="instagram">
                       </a>
                   </li>
@@ -90,6 +90,8 @@ export class FooterComponent implements OnInit {
     public phoneHref: string;
     public emailHref: string;
     public facebookUrl$: Observable<string>;
+    public twitterUrl$: Observable<string>;
+    public instagramUrl$: Observable<string>;
     public twitterUrl: string;
     public countMeInUrl: string;
     public blogUrl: string;
@@ -111,9 +113,19 @@ export class FooterComponent implements OnInit {
         this.countMeInUrl = this.toolkitConfiguration.countMeInUrl;
         this.blogUrl = this.toolkitConfiguration.blogUrl;
         const fbLinkKey = 'Toolkit.Footer.FacebookLink';
+        const twitterLinkKey = 'Toolkit.Footer.TwitterLink';
+        const igLinkKey = 'Toolkit.Footer.InstagramLink';
         this.facebookUrl$ = this.ngxTranslate.getTranslation(fbLinkKey).pipe(
             map(transVal => transVal === fbLinkKey ?
                 `https://www.facebook.com/${this.toolkitConfiguration.facebookGroupId}` : transVal)
+        );
+        this.twitterUrl$ = this.ngxTranslate.getTranslation(twitterLinkKey).pipe(
+            map(transVal => transVal === twitterLinkKey ?
+                `https://www.twitter.com/${this.toolkitConfiguration.twitterAccountId}` : transVal)
+        );
+        this.instagramUrl$ = this.ngxTranslate.getTranslation(igLinkKey).pipe(
+            map(transVal => transVal === igLinkKey ?
+                `https://www.instagram.com/${this.toolkitConfiguration.instagramId}` : transVal)
         );
         this.instagramUrl = `https://www.instagram.com/${this.toolkitConfiguration.instagramId}`;
     }
