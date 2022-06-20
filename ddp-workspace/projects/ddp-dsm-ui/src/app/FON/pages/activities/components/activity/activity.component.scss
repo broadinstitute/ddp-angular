@@ -1,7 +1,9 @@
+@import "../../../../../../styles/FON/core/colors";
+
 $text-color: #000000;
 $warn-color: #f44336;
-$field-enabled-border: #737E8E;
-$field-disabled-border: rgba(73,86,106,0.4);
+$field-enabled-border: $__Slate_grey;
+$field-disabled-border: $__Mulled_wine_transparent;
 
 
 ::ng-deep {
@@ -31,7 +33,7 @@ $field-disabled-border: rgba(73,86,106,0.4);
 
     &.completed {
       cursor: pointer;
-      color: #749DC5;
+      color: $__Dark_pastel_blue;
     }
   }
 
@@ -94,7 +96,7 @@ $field-disabled-border: rgba(73,86,106,0.4);
 
   .ddp-question-prompt,
   .activity-question-title {
-    color: #2D333E;
+    color: $__Gunmetal;
     font-size: 15px!important;
     font-weight: 600;
     letter-spacing: 0;
@@ -150,12 +152,12 @@ $field-disabled-border: rgba(73,86,106,0.4);
 
     .mat-form-field-label {
       font-family: Montserrat, sans-serif !important;
-      color: #2D333E !important;
+      color: $__Gunmetal !important;
     }
 
     .mat-form-field-disabled {
       .mat-form-field-label {
-        color: #33373B !important;
+        color: $__Charcoal !important;
         opacity: 0.7;
       }
     }
@@ -188,7 +190,7 @@ $field-disabled-border: rgba(73,86,106,0.4);
 
     .mat-form-field {
       width: max-content !important;
-      border: 1px solid $field-enabled-border;
+      border: 1px solid $__Slate_grey;
       border-radius: 3px;
       background-color: #FFFFFF;
 
@@ -204,7 +206,7 @@ $field-disabled-border: rgba(73,86,106,0.4);
       font-family: Montserrat, sans-serif;
 
       &:disabled {
-        color: #33373B !important;
+        color: $__Charcoal !important;
         opacity: 0.7;
       }
     }
@@ -217,7 +219,7 @@ $field-disabled-border: rgba(73,86,106,0.4);
   .mat-checkbox-label,
   .mat-radio-label .mat-radio-label-content {
     font-family: Montserrat, sans-serif;
-    color: #2D333E !important;
+    color: $__Gunmetal !important;
     font-size: 15px;
     font-weight: 500;
     letter-spacing: 0;
@@ -227,12 +229,12 @@ $field-disabled-border: rgba(73,86,106,0.4);
   .mat-checkbox-frame,
   .mat-radio-outer-circle {
     border-width: 1px !important;
-    border-color: #2D333E !important;
+    border-color: $__Gunmetal !important;
   }
 
   .mat-checkbox-disabled {
     .mat-checkbox-label, .mat-checkbox-frame {
-      color: #33373B !important;
+      color: $__Charcoal !important;
       opacity: 0.7;
     }
   }
@@ -240,7 +242,7 @@ $field-disabled-border: rgba(73,86,106,0.4);
   .mat-radio-button.mat-radio-disabled {
     .mat-radio-label-content,
     .mat-radio-outer-circle {
-      color: #33373B !important;
+      color: $__Charcoal !important;
       opacity: 0.7;
     }
   }
@@ -254,7 +256,7 @@ $field-disabled-border: rgba(73,86,106,0.4);
 
     select {
       width: max-content !important;
-      border: 1px solid $field-enabled-border !important;
+      border: 1px solid $__Slate_grey !important;
       border-radius: 3px;
       background-color: #FFFFFF;
       padding: 14px 16px 14px 8px;
@@ -274,7 +276,7 @@ $field-disabled-border: rgba(73,86,106,0.4);
       &:disabled {
         border-color: $field-disabled-border;
         background-color: rgba(0,0,0,0.03);
-        color: #33373B !important;
+        color: $__Charcoal !important;
         opacity: 0.7;
 
         border-bottom: none;
@@ -287,6 +289,6 @@ $field-disabled-border: rgba(73,86,106,0.4);
     margin: 0 -40px;
     padding: 16px 40px;
     height: 72px;
-    background-color: #E5E5E5;
+    background-color: $__Mercury;
   }
 }
