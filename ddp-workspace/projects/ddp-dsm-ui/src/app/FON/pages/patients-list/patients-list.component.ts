@@ -75,7 +75,7 @@ export class PatientsListComponent implements OnInit {
   }
 
   openActivities(participant: patientListModel): void {
-    this.router.navigate(['../patient', participant.guid], {
+    this.router.navigate([participant.guid], {
       relativeTo: this.activatedRoute
     });
   }

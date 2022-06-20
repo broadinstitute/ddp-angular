@@ -1,10 +1,12 @@
 <div class="participants">
-  <h3>Patients list</h3>
-  <h2 style="color: red">{{ error$ | async }}</h2>
-  <button class="addPatientModalBtn" [openInModal]="registerPatientsModalComponent">
-    <mat-icon>people</mat-icon>
-    Register
-  </button>
+  <h3>Patients</h3>
+  <div>
+    <h1>Patients ({{totalCount$ | async}})</h1>
+    <button class="btn_secondary" [openInModal]="registerPatientsModalComponent">
+      <mat-icon>people</mat-icon>
+      Register
+    </button>
+  </div>
   <table class="participants-table">
     <thead>
       <tr class="header">

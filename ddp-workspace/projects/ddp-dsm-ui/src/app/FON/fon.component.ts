@@ -13,19 +13,11 @@ import {Component} from '@angular/core';
     .mainHolder {
       display: grid;
       grid-template-columns: 200px auto;
-      column-gap:30px;
       height: 100vh;
       width: 100%;
       margin: 0;
       padding: 0;
       grid-template-areas: "asideNavigation otherPage";
-    }
-
-    .header {
-      grid-area: header;
-      height: 100px;
-      line-height: 100px;
-      margin: 0;
     }
 
     app-navigation {

@@ -32,7 +32,6 @@ export class NavigationComponent {
   }
 
   isActive(route: string): boolean {
-    const [first,,third] = this.activatedRoute.snapshot['_routerState']['url'].split('/');
-    return third ? route === third : route === first;
+    return route === this.activatedRoute.snapshot.firstChild.routeConfig.path;
   }
 }
