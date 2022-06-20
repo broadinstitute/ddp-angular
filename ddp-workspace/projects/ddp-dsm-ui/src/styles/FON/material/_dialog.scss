@@ -2,14 +2,8 @@
  in $class argument must be provided name of the Component Class,
  which is supposed to be rendered in modal component
 */
-@mixin mainSet($class, $width: 60%, $height: 65%, $padding: 0) {
-  ::ng-deep.#{$class} {
-    width: $width;
-    height: $height;
-
-    & .mat-dialog-container {
-      padding: $padding;
-    }
-
+@mixin mainSet {
+  ::ng-deep.mat-dialog-container {
+    padding: 0;
   }
 }

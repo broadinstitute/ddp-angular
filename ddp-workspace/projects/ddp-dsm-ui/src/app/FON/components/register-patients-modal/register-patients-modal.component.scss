@@ -3,7 +3,7 @@
 @import "../../../../styles/FON/core";
 
 
-@include angMatDialog.mainSet(RegisterPatientsModalComponent);
+@include angMatDialog.mainSet;
 
 .dialogContainer {
   height: 100%;
