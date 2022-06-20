@@ -123,12 +123,18 @@ $field-disabled-border: $__Mulled_wine_transparent;
   }
 
   ddp-activity-text-input,
-  ddp-activity-email-input {
+  ddp-activity-email-input,
+  ddp-activity-numeric-answer {
     .mat-form-field-infix {
       border-top: none;
+      width: unset !important;
     }
     .mat-form-field-label-wrapper {
       display: none;
+    }
+
+    .mat-input-element {
+      width: unset !important;
     }
   }
 
