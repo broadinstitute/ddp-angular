@@ -1,16 +1,16 @@
-import { Address } from '../address/address.model';
+import {Address} from '../address/address.model';
 
 export class KitRequest {
-  constructor(public participantId: string, public collaboratorParticipantId: string, public bspCollaboratorSampleId: string,
-              public realm: string, public kitTypeName: string, public dsmKitRequestId: string, public dsmKitId: string,
-              public ddpLabel: string, public labelUrlTo: string, public labelUrlReturn: string,
-              public trackingNumberTo: string, public trackingReturnId: string, public trackingUrlTo: string,
-              public trackingUrlReturn: string, public scanDate: number, public error: boolean, public message: string,
-              public receiveDate: number, public deactivatedDate: number, public deactivationReason: string, public participant: Address,
-              public easypostAddressId: string, public nameLabel: string, public kitLabel: string, public express: boolean,
-              public labelDate: number, public noReturn: boolean, public externalOrderNumber: string,
-              public externalOrderStatus: string, public preferredLanguage: string,
-              public receiveDateString: string, public hruid: string, public gender: string) {
+  constructor( public participantId: string, public collaboratorParticipantId: string, public bspCollaboratorSampleId: string,
+               public realm: string, public kitTypeName: string, public dsmKitRequestId: string, public dsmKitId: string,
+               public ddpLabel: string, public labelUrlTo: string, public labelUrlReturn: string,
+               public trackingNumberTo: string, public trackingReturnId: string, public trackingUrlTo: string,
+               public trackingUrlReturn: string, public scanDate: number, public error: boolean, public message: string,
+               public receiveDate: number, public deactivatedDate: number, public deactivationReason: string, public participant: Address,
+               public easypostAddressId: string, public nameLabel: string, public kitLabel: string, public express: boolean,
+               public labelDate: number, public noReturn: boolean, public externalOrderNumber: string,
+               public externalOrderStatus: string, public preferredLanguage: string,
+               public receiveDateString: string, public hruid: string, public gender: string, public collectionDate: string ) {
   }
 
   public TRACKING_LINK = 'https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber=';
@@ -18,7 +18,7 @@ export class KitRequest {
   public isSelected = false;
   public setSent = false;
 
-  static parse(json): KitRequest {
+  static parse( json ): KitRequest {
     return new KitRequest(
       json.participantId, json.collaboratorParticipantId, json.bspCollaboratorSampleId, json.realm, json.kitTypeName,
       json.dsmKitRequestId, json.dsmKitId,
@@ -27,7 +27,7 @@ export class KitRequest {
       json.trackingUrlReturn, json.scanDate, json.error, json.message,
       json.receiveDate, json.deactivatedDate, json.deactivationReason, json.participant, json.easypostAddressId, json.nameLabel,
       json.kitLabel, json.express, json.labelDate, json.noReturn, json.externalOrderNumber, json.externalOrderStatus,
-      json.preferredLanguage, json.receiveDateString, json.hruid, json.gender
+      json.preferredLanguage, json.receiveDateString, json.hruid, json.gender, json.collectionDate
     );
   }
 

@@ -98,7 +98,10 @@
           </th>
           <th *ngIf="!showColumn('receiveDate')">
           </th>
-      </tr>
+          <th>
+            Collection Date
+          </th>
+        </tr>
       </thead>
       <tbody>
       <tr *ngFor="let kitRequest of mf.data">
@@ -130,15 +133,26 @@
           <ng-container *ngIf="kitRequest.receiveDate !== 0">{{kitRequest.receiveDate | date:'medium'}}</ng-container>
         </td>
         <td *ngIf="showColumn('deactivatedDate')">
-          <ng-container *ngIf="kitRequest.deactivatedDate === 0"> - </ng-container>
-          <ng-container *ngIf="kitRequest.deactivatedDate !== 0">{{kitRequest.deactivatedDate | date:'medium'}}</ng-container>
+          <ng-container *ngIf="kitRequest.deactivatedDate === 0"> -</ng-container>
+          <ng-container
+            *ngIf="kitRequest.deactivatedDate !== 0">{{kitRequest.deactivatedDate | date:'medium'}}</ng-container>
         </td>
         <td *ngIf="showColumn('deactivationReason')">{{kitRequest.deactivationReason}}</td>
         <td *ngIf="showColumn('receiveDateString')">{{kitRequest.receiveDateString}}</td>
         <td *ngIf="showColumn('gender')">{{kitRequest.gender}}</td>
         <td *ngIf="!showColumn('receiveDateString')">
-          <button mat-raised-button type="button" color="primary" *ngIf="(kitRequest.receiveDateString === '' || kitRequest.receiveDateString === null || kitRequest.receiveDateString === undefined) && kitRequest.realm === 'AT'"
-                  (click)="receiveATKit(kitRequest)">Mark Received</button>
+          <button (click)="receiveATKit(kitRequest)"
+                  *ngIf="(kitRequest.receiveDateString === '' || kitRequest.receiveDateString === null || kitRequest.receiveDateString === undefined) && kitRequest.realm === 'AT'"
+                  color="primary"
+                  mat-raised-button
+                  type="button">Mark Received
+          </button>
+        </td>
+        <td>
+          <app-field-datepicker (dateChanged)="valueChanged($event, 'collectionDate', kitRequest)"
+                                [allowUnknownDay]="false" [colorDuringPatch]="isPatchedCurrently('collectionDate')"
+                                [dateString]="kitRequest.collectionDate"
+                                [showTodayButton]="true"></app-field-datepicker>
         </td>
       </tr>
       <tbody>

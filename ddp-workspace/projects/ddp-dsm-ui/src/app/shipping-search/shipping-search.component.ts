@@ -1,16 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {ScanValue} from '../scan/scan.model';
 import {Auth} from '../services/auth.service';
-import {Statics} from '../utils/statics';
+import {ComponentService} from '../services/component.service';
 import {DSMService} from '../services/dsm.service';
-import {KitRequest} from '../shipping/shipping.model';
 import {RoleService} from '../services/role.service';
+import {KitRequest} from '../shipping/shipping.model';
+import {PatchUtil} from '../utils/patch.model';
+import {Statics} from '../utils/statics';
 
-@Component({
+@Component( {
   selector: 'app-shipping-search',
   templateUrl: './shipping-search.component.html',
-  styleUrls: ['./shipping-search.component.css']
-})
+  styleUrls: [ './shipping-search.component.css' ]
+} )
 export class ShippingSearchComponent implements OnInit {
   errorMessage: string;
   additionalMessage: string;
@@ -19,6 +21,7 @@ export class ShippingSearchComponent implements OnInit {
   searching = false;
   allowedRealms: string[] = [];
   kit: KitRequest[] = [];
+  private currentPatchField: string;
 
   constructor(private dsmService: DSMService, private auth: Auth, private role: RoleService) {
     if (!auth.authenticated()) {
@@ -55,7 +58,8 @@ export class ShippingSearchComponent implements OnInit {
         next: data => {
           jsonData = data;
           jsonData.forEach((val) => {
-            this.kit.push(KitRequest.parse(val));
+            console.log( jsonData );
+            this.kit.push( KitRequest.parse( val ) );
           });
           if (this.kit == null || this.kit.length < 1) {
             this.additionalMessage = 'Kit was not found.';
@@ -114,5 +118,45 @@ export class ShippingSearchComponent implements OnInit {
           }
         }
       ); // need to subscribe, otherwise it will not send!
+  }
+
+  valueChanged( value: any, parameterName: string, kitRequest: KitRequest ): void {
+    let v;
+
+    if (typeof value === 'string') {
+      kitRequest[ parameterName ] = value;
+      v = value;
+    }
+    if (v != null) {
+      const realm: string = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
+      const patch1 = new PatchUtil(
+        kitRequest.dsmKitRequestId, this.role.userMail(),
+        {
+          name: parameterName,
+          value: v
+        }, null, 'dsmKitRequestId', kitRequest.dsmKitRequestId,
+        'kit', null, realm, null
+      );
+      const patch = patch1.getPatch();
+      this.currentPatchField = parameterName;
+      this.patch( patch );
+    }
+  }
+
+  patch( patch: any ): void {
+    this.dsmService.patchParticipantRecord( JSON.stringify( patch ) ).subscribe( { // need to subscribe, otherwise it will not send!
+      next: data => {
+        this.currentPatchField = null;
+      },
+      error: err => {
+        if (err._body === Auth.AUTHENTICATION_ERROR) {
+          this.auth.logout();
+        }
+      }
+    } );
+  }
+
+  isPatchedCurrently( field: string ) {
+    return this.currentPatchField === field;
   }
 }

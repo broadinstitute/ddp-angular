@@ -121,15 +121,16 @@
             <td *ngIf="hasRole().allowedToEditParticipant()">
               <span *ngIf="!isEmailValid" class="invalid-email">E-Mail is not valid</span>
               <input matInput type="email" maxlength="200" autocomplete="off" placeholder="Email"
-              [ngModel]="updatedEmail"
-              (ngModelChange)="validateEmailInput($event)"
-              email
-              class="update-participant-input">
+                     (ngModelChange)="validateEmailInput($event)"
+                     [ngModel]="updatedEmail"
+                     class="update-participant-input"
+                     email>
               <button mat-raised-button color="primary"
-              [disabled]="updatedEmail === participant.data.profile['email'] || updatedEmail.length === 0 || !isEmailValid"
-              (click)="updateEmail()">Update
-            </button>
-          </td>          
+                      (click)="updateEmail()"
+                      [disabled]="updatedEmail === participant.data.profile['email'] || updatedEmail.length === 0 || !isEmailValid">
+                Update
+              </button>
+            </td>
           <td *ngIf="!hasRole().allowedToEditParticipant()">
             {{participant.data.profile['email']}}
           </td>
@@ -191,7 +192,7 @@ participant.data.dsm['diagnosisYear'] != null">
           </tr>
           <tr>
             <td>
-              <app-cohort-tag 
+              <app-cohort-tag
                 [ddpParticipantId]="participant.data.profile.guid"
                 [dsm]="participant.data.dsm"
               ></app-cohort-tag>
@@ -835,19 +836,27 @@ participant.data.dsm['diagnosisYear'] != null">
 
                   <div
                     *ngIf="participant != null && participant.oncHistoryDetails.length > 0 && getTissueConsent() == null || getTissueConsent()">
-                    <button mat-raised-button (click)="requestTissue(false)" color="primary" [disabled]="participantExited"
-                            [disabled]="disableTissueRequestButton || hasRole().prohibitedToRequestTissue()"> Download Request Documents
+                    <button mat-raised-button (click)="requestTissue(false)" color="primary"
+                            [disabled]="participantExited"
+                            [disabled]="disableTissueRequestButton || hasRole().prohibitedToRequestTissue()"> Download
+                      Request Documents
                     </button>
                     <button mat-raised-button color="primary"
                             [disabled]="downloading"
                             (click)="requestTissue(true)">Download PDF Bundle
                     </button>
-                    <a href="#" (click)="doNothing('bundle')" *ngIf="!downloading" class="Router--Outlet"><b> Change order/files in Bundle</b></a>
+                    <a (click)="doNothing('bundle')" *ngIf="!downloading" class="Router--Outlet" href="#"><b> Change
+                      order/files in Bundle</b></a>
                   </div>
                 </div>
               </ng-container>
             </tab>
-
+            <tab (selectTab)="onSelect($event, 'sequencing');" [active]="tabActive('sequencing')"
+                 heading="Sequencing Order">
+              <app-sequencing-order *ngIf="canHaveSequencing(participant)" [participant]="participant"
+                                    [samples]="sequencingOrdersArray">
+              </app-sequencing-order>
+            </tab>
             <tab heading="First Medical Record Abstraction" [active]="tabActive('abstraction')"
                  (selectTab)="onSelect($event, 'abstraction'); getFileList(participant.abstraction)"
                  *ngIf="(participant.abstraction != null && abstractionFields != null
