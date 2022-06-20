@@ -296,4 +296,53 @@ $field-disabled-border: $__Mulled_wine_transparent;
     height: 72px;
     background-color: $__Mercury;
   }
+
+  /* ------------- Tabular blocks custom styles --------------------- */
+
+  /* tabular block for Enrollment form */
+  .main_activity.ENROLLMENT {
+    .tabular-container {
+      grid-template-columns: 70px auto 1fr 1fr !important;
+
+      .header {
+        text-align: center;
+      }
+
+      ddp-activity-composite-answer {
+        .ddp-answer-container {
+          grid-template-columns: 1fr 1fr !important;
+          place-items: center;
+          gap: 30px;
+
+          .ddp-answer-field {
+            padding: 0;
+
+            &:nth-child(2) {
+              width: 125px !important;
+
+              .mat-form-field {
+                width: 100% !important;
+              }
+            }
+          }
+        }
+
+        ddp-date {
+          .ddp-answer-container {
+            width: auto;
+          }
+
+          .ddp-answer-field {
+            padding: unset !important;
+
+            select {
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+
 }
