@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CommunicationService, HeaderConfigurationService } from 'toolkit';
+import { CommunicationService } from 'toolkit';
 import { SessionMementoService } from 'ddp-sdk';
-import { Route } from '../../../../constants/Route';
+import { Route } from '../../../constants/Route';
+import { HeaderService } from '../../../services/header.service';
 
 @Component({
   selector: 'app-mobile-nav',
@@ -12,7 +13,7 @@ export class MobileNavComponent implements OnInit {
   constructor(
     private communicationService: CommunicationService,
     private session: SessionMementoService,
-    public headerConfig: HeaderConfigurationService
+    public headerConfig: HeaderService
   ) {}
 
   readonly Route = Route;

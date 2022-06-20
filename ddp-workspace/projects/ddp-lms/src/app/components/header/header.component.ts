@@ -11,6 +11,7 @@ import { CommunicationService, HeaderConfigurationService } from 'toolkit';
 import { DOCUMENT } from '@angular/common';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { map, Observable } from 'rxjs';
+import { HeaderService } from '../../services/header.service';
 
 @Component({
   selector: 'app-header',
@@ -29,9 +30,9 @@ export class HeaderComponent implements OnInit {
     private window: WindowRef,
     private router: Router,
     private communicationService: CommunicationService,
-    public headerConfig: HeaderConfigurationService,
     private analytics: AnalyticsEventsService,
     private breakPointObserver: BreakpointObserver,
+    public headerConfig: HeaderService,
     @Inject(DOCUMENT) private document: any
   ) {}
 

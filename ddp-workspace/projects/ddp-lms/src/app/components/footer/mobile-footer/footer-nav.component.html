@@ -1,0 +1,18 @@
+<div class="main-section">
+  <ul>
+    <li (click)="scrollTop()">
+      <mat-icon>arrow_upward</mat-icon>
+      Back to top
+    </li>
+    <li routerLinkActive="active" [routerLink]="Route.About">About us</li>
+    <li routerLinkActive="active" [routerLink]="Route.HowToParticipate">Participation</li>
+    <li routerLinkActive="active" [routerLink]="Route.ScientificImpact">Scientific Impact</li>
+    <li routerLinkActive="active" [routerLink]="Route.FAQ">FAQs</li>
+    <li routerLinkActive="active" (click)="openJoinMailingList()">Join Mailing List</li>
+    <li routerLinkActive="active" [routerLink]="Route.ForYourPhysician">For your Physician</li>
+  </ul>
+
+  <div class="buttons">
+    <app-login-out></app-login-out>
+  </div>
+</div>
