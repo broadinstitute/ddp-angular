@@ -30,10 +30,7 @@
 
   <!-- article content -->
   <section *ngIf="isLoaded; else spinner" class="section article-content">
-    <ng-container *ngIf="isVerticalProgress && isStepped && showStepper; then verticalProgressIndicator">
-    </ng-container>
-
-    <div class="content content_tight" [ngClass]="{'vertical-mode': isVerticalProgress}">
+    <div class="content content_tight" [ngClass]="{ 'vertical-mode': isVerticalProgress }">
       <ng-container *ngIf="shouldShowReadonlyHint">
         <div class="infobox" [innerHTML]="model.readonlyHint"></div>
       </ng-container>
@@ -52,7 +49,13 @@
         </ddp-activity-section>
       </ng-container>
 
-      <ng-container *ngIf="!isVerticalProgress && isStepped && showStepper; then horizontalProgressIndicator">
+      <ng-container
+        *ngIf="
+          !isVerticalProgress && isStepped && showStepper;
+          then horizontalProgressIndicator;
+          else verticalProgressIndicator
+        "
+      >
       </ng-container>
 
       <ng-container *ngIf="model">
