@@ -35,7 +35,6 @@ export const generateGroupedActivities = (patient: any): any => {
       foundActivity && groupedActivities[foundActivity.sectionGuid].activities.push({name,activityGuid,...foundActivity});
     });
     patient.activities = groupedActivities;
-    console.log(patient);
     return patient;
   }
   return;
