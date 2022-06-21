@@ -1,7 +1,82 @@
-@import '../../../../ddp-pancan/src/styles/variables.scss';
-
+//@import '../../../../ddp-pancan/src/styles/variables.scss';
 
 .activity-buttons-middle {
   margin: 2rem 0 4rem;
 }
 
+.stepper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .step {
+    cursor: pointer;
+  }
+
+  .activity-step-number {
+    display: inline-flex;
+    background-color: #9953ce;
+    color: #fff;
+    border-radius: 16px;
+    min-width: 32px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    justify-content: center;
+    position: relative;
+
+    &.completed {
+      background-color: #00d39d;
+    }
+
+    &.active {
+      background-color: #7154ff;
+    }
+
+    &:not(.last)::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -1.5625rem;
+      transform: translateX(-50%);
+      height: 1.3rem;
+      width: 1px;
+      background: #d2d2d2;
+    }
+  }
+
+  .activity-step-text {
+    color: #000;
+
+    &.active {
+      font-weight: bold;
+      color: #000;
+    }
+  }
+
+  .activity-step-divider {
+    height: 1.3rem;
+    width: 1px;
+    border-left: 2px solid #d2d2d2;
+  }
+}
+
+//<div class="stepper" [ngClass]="{ vertical: isVerticalProgress }">
+//<ng-container *ngFor="let section of model.sections; index as i; last as isLastStep">
+//<ng-container *ngIf="section.visible">
+//<div
+// class="step"
+//cdkMonitorElementFocus
+//[attr.tabindex]="isVerticalProgress && (isActive(i) || isCompleted(i)) ? 1 : null"
+//(click)="jumpStep(i)"
+//>
+//<span
+// class="activity-step-number"
+//[ngClass]="{ active: isActive(i), completed: isCompleted(i), last: isLastStep }"
+//>{{ i + 1 }}</span
+//              >
+//<span class="activity-step-text" [ngClass]="{ active: isActive(i) }">{{ section.name }}</span>
+//</div>
+//</ng-container>
+//</ng-container>
+//</div>
