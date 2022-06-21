@@ -1,17 +1,22 @@
-import {Component, Directive, HostListener, Input, OnDestroy} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import {Directive, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {ComponentType} from '@angular/cdk/overlay';
-import {Subscription} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 const DIRECTIVE_NAME = 'openInModal';
+
+interface matDialogSizes {
+  height: string;
+  width: string;
+  top: string;
+}
 
 @Directive({
   selector: `[${DIRECTIVE_NAME}]`
 })
-export class openInModalDirective implements OnDestroy {
+export class openInModalDirective {
   private modalComponent:  ComponentType<any>;
-
-  private dialogRef: Subscription;
 
   constructor(private matDialog: MatDialog) {
   }
@@ -23,21 +28,17 @@ export class openInModalDirective implements OnDestroy {
       console.error(new Error('Please provide a valid component'));
     }
   }
+  @Input() modalSizes: Partial<matDialogSizes>;
 
   @HostListener('click') openAddPatientsModal(): void {
-    const component = this.modalComponent;
-    if(component) {
-      const dialogRef = this.matDialog.open(this.modalComponent);
-
-      this.dialogRef = dialogRef.afterClosed()
-        .subscribe((result) => {
-          console.log(result, 'from dialog close observer');
-        });
-    }
+    this.validateComponent(this.modalComponent) && this.openMatDialog();
   }
 
-  ngOnDestroy(): void {
-    this.dialogRef?.unsubscribe();
+  private openMatDialog(): void {
+    const modalSizes = this.modalSizes;
+    this.matDialog.open(this.modalComponent, {maxWidth: '870px'})
+      .updatePosition({ top: modalSizes?.top || '24px'})
+      .updateSize( modalSizes?.width || '60%' , modalSizes?.height || '623px');
   }
 
   private validateComponent(component: ComponentType<any>): boolean {
