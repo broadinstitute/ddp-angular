@@ -24,8 +24,14 @@ export const generateParticipantsList = (participants: ParticipantModel[], setti
 
 export const generateGroupedActivities = (patient: any): any => {
   if(patient?.activities) {
+    const groupedActivities = {
+      'ENROLLMENT_FORMS': {name: 'ENROLLMENT FORMS', activities: []},
+      'TESTING_LOGS_EVENTS': {name: 'TESTING, LOGS & EVENTS', activities: []},
+      'PROMISE_QUESTIONNAIRE': {name: 'PROMISE QUESTIONNAIRE', activities: []},
+      'PATIENT_STATUS': {name: 'PATIENT STATUS', activities: []}
+    }
     patient?.activities?.forEach(({activityCode, activityGuid, name}) => {
-      const foundActivity = ActivitiesGrouped.find(actItem => actItem.activityCode === activityCode);
+      const foundActivity = groupedActivitiesMap.find(actItem => actItem.activityCode === activityCode);
       foundActivity && groupedActivities[foundActivity.sectionGuid].activities.push({name,activityGuid,...foundActivity})
     });
     patient.activities = groupedActivities;
@@ -35,14 +41,7 @@ export const generateGroupedActivities = (patient: any): any => {
   return;
 }
 
-const groupedActivities = {
-  'ENROLLMENT_FORMS': {name: 'ENROLLMENT FORMS', activities: []},
-  'TESTING_LOGS_EVENTS': {name: 'TESTING, LOGS & EVENTS', activities: []},
-  'PROMISE_QUESTIONNAIRE': {name: 'PROMISE QUESTIONNAIRE', activities: []},
-  'PATIENT_STATUS': {name: 'PATIENT STATUS', activities: []}
-}
-
-const ActivitiesGrouped = [
+const groupedActivitiesMap = [
   {name: 'Patient Information', sectionGuid: 'ENROLLMENT_FORMS', activityCode: "PATIENT_PROFILE"},
   {name: 'Enrollment', sectionGuid: 'ENROLLMENT_FORMS', activityCode: "ENROLLMENT"},
   {name: 'Clinic Visits', sectionGuid: 'TESTING_LOGS_EVENTS', activityCode: "CLINIC_VISIT"},

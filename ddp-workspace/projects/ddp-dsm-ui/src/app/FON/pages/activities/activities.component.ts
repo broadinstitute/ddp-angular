@@ -26,7 +26,8 @@ export class ActivitiesComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
 
-      this.patientWithActivities = this.storeService.getParticipantActivities(params.guid).pipe(tap(data => !data && this.storeService.dispatchGetParticipant(params.guid, this.PARENT)));
+      this.patientWithActivities = this.storeService.getParticipantActivities(params.guid)
+        .pipe(tap(data => !data && this.storeService.dispatchGetParticipant(params.guid, this.PARENT)));
     });
 
   }
