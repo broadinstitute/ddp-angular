@@ -24,14 +24,16 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 1.5625rem;
+    gap: 3rem;
+    $padding-top: 1.5rem;
 
     .header__nav {
       width: 100%;
+      padding-top: $padding-top;
     }
 
     .main-link {
       display: flex;
-      margin-right: 3.125rem;
       text-decoration: none;
       color: black;
 
@@ -51,6 +53,7 @@
     .loginOutButtons {
       display: flex;
       justify-content: flex-end;
+      padding-top: $padding-top;
     }
 
     &.hamburger-version {
