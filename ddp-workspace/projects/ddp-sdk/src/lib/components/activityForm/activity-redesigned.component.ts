@@ -59,10 +59,6 @@ export class ActivityRedesignedComponent
         this.subscription = this.getIsLoaded$().subscribe((loaded) => {
             const activitiesWithVerticalProgress: string[] =
                 this.config.usesVerticalStepper;
-            console.log(
-                this.model,
-                activitiesWithVerticalProgress
-            );
             this.isVerticalProgress =
                 this.model &&
                 activitiesWithVerticalProgress.includes(
