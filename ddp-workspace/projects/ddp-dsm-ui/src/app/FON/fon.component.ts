@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {SessionMementoService} from "../../../../ddp-sdk/src/lib/services/sessionMemento.service";
-import {Title} from "@angular/platform-browser";
-import {JwtHelperService} from "@auth0/angular-jwt";
-import {SessionService} from "../services/session.service";
-import {MainConstants} from "./constants/main-constants";
-import {StoreService} from "../STORE/store.service";
-import {TranslateService} from "@ngx-translate/core";
+import {SessionMementoService} from '../../../../ddp-sdk/src/lib/services/sessionMemento.service';
+import {Title} from '@angular/platform-browser';
+import {JwtHelperService} from '@auth0/angular-jwt';
+import {SessionService} from '../services/session.service';
+import {MainConstants} from './constants/main-constants';
+import {StoreService} from '../STORE/store.service';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -49,12 +49,11 @@ export class FonComponent implements OnInit {
               private title: Title,
               private jwtHelper: JwtHelperService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     const LOCALE = 'en';
 
     // Title
     this.title.setTitle('Fon');
-
 
     // Store
     this.storeService.setStudy = MainConstants.study;
