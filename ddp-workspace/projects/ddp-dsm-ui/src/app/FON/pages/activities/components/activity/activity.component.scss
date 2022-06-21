@@ -303,7 +303,7 @@ $field-disabled-border: $__Mulled_wine_transparent;
   /* tabular block for Enrollment form */
   .main_activity.ENROLLMENT {
     .tabular-container {
-      grid-template-columns: 70px auto 1fr 1fr !important;
+      grid-template-columns: 28px auto 1fr 1fr !important;
       border: none !important;
 
       .header {
@@ -327,7 +327,6 @@ $field-disabled-border: $__Mulled_wine_transparent;
         .ddp-answer-container {
           grid-template-columns: 1fr 1fr !important;
           place-items: center;
-          gap: 30px;
 
           .ddp-answer-field {
             padding: 0;
@@ -349,6 +348,13 @@ $field-disabled-border: $__Mulled_wine_transparent;
 
           .ddp-answer-field {
             padding: unset !important;
+
+            /* TODO: remove this temp FIX!! just to fix the wrong config form back-end */
+            &::after {
+              content: 'OR';
+              padding-left: 16px;
+            }
+            /* end of the TODO */
 
             select {
               margin: 0;
