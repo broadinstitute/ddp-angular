@@ -6,9 +6,9 @@
         <span class="patient-route-arrow"><mat-icon>keyboard_arrow_right</mat-icon></span>
       </p>
       <p class="patient-name">{{Patient.firstName}} {{Patient.lastName}}</p>
-      <p class="patient-credentials">FON ID#: 0100011  <span>Status: Active</span></p>
+      <p class="patient-credentials">FON ID#: 0100011 <span>Status: Active</span></p>
     </section>
-    <section class="information" >
+    <section class="information">
       <p>
         <span>Last saved</span>
         <span>01/02/2022</span>
@@ -20,23 +20,25 @@
 
   <main>
     <section class="activities-nav">
+
       <mat-accordion>
-        <mat-expansion-panel (opened)="panelOpenState = true"
-                             (closed)="panelOpenState = false"
-                             [expanded]="panelOpenState">
+        <mat-expansion-panel *ngFor="let section of sectionsArray; let i = index"
+                             [expanded]="i===0">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              ENROLLMENT FORMS
+              {{Patient.activities[section].name}}
             </mat-panel-title>
           </mat-expansion-panel-header>
 
           <mat-list>
-            <mat-list-item *ngFor="let activity of Patient.activities">
-              <h4 mat-line routerLink="{{activity.activityGuid}}">{{ activity.activityName }}</h4>
+            <mat-list-item  *ngFor="let activity of Patient.activities[section].activities">
+              <p mat-line [routerLinkActive]="'activeActivity'" routerLink="{{activity.activityGuid}}">{{ activity.name }}</p>
             </mat-list-item>
           </mat-list>
         </mat-expansion-panel>
       </mat-accordion>
+
+
     </section>
 
     <section class="activity">

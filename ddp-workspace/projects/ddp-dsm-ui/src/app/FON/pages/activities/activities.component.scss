@@ -1,10 +1,5 @@
 @import "../../../../styles/FON/core";
 
-$activity-background-color: #F8F8F8;
-$border-color: #979797;
-
-$hoverColor: #7154FF;
-
 :host-context(app-activities) {
   grid-area: otherPage
 }
@@ -95,26 +90,67 @@ $hoverColor: #7154FF;
       flex-shrink: 0;
       height: 100%;
       overflow: hidden;
+      margin-top: 8px;
 
-      &:hover {
-        overflow: auto;
+      ::ng-deep.mat-expansion-panel-content {
+        .mat-expansion-panel-body {
+          padding: 0!important;
+        }
+      }
+      ::ng-deep.mat-list .mat-list-item .mat-list-item-content {
+        padding: 0 0!important;
       }
 
-      ::ng-deep.ng-trigger-bodyExpansion {
-        height: 100% !important;
+      .mat-expansion-panel-spacing {
+        margin: 0!important;
+      }
+      .mat-expansion-panel:last-of-type {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+      .mat-expansion-panel:not([class*=mat-elevation-z]) {
+        box-shadow: none;
       }
 
-      mat-list-item {
-        h4 {
-          &:hover, &:focus {
-            color: $__Mulled_wine_transparent;
-            border: 0;
-            outline: none;
-            border-bottom: 2px solid $__Mulled_wine_transparent;
-            cursor: pointer;
-            font-weight: bolder;
+      mat-expansion-panel {
+        padding: 0 16px;
+        mat-expansion-panel-header {
+          height: 40px;
+          border-bottom: 2px solid $__Mercury;
+          mat-panel-title {
+            font-family: Montserrat-SemiBold, sans-serif;
+            font-size: getFontSize('sm');
+          }
+          &.mat-expanded{
+            margin: 0;
           }
         }
+
+        mat-list {
+          padding: 0;
+          mat-list-item {
+            font-family: Montserrat-Regular, sans-serif;
+            font-size: getFontSize('md');
+            height: 40px!important;
+            &:last-of-type {
+              margin-bottom: 10px;
+            }
+
+            p {
+              padding: 10px 24px;
+              &:hover, &:focus {
+                background-color: $__activity_background_hover;
+                cursor: pointer;
+              }
+            }
+            .activeActivity {
+              background-color: $__activity_background_hover;
+              font-family: Montserrat-SemiBold, sans-serif;
+              font-size: getFontSize('md');
+            }
+          }
+        }
+
       }
     }
 
@@ -123,8 +159,8 @@ $hoverColor: #7154FF;
       flex-grow: 1;
       height: 100%;
       overflow: auto;
-      background-color: $activity-background-color;
-      border-left: 1px solid $border-color;
+      background-color: $__background_color_transparent;
+      border-left: 2px solid $__Mercury;
     }
   }
 }
