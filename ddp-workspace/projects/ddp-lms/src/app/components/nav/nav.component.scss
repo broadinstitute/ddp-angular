@@ -3,42 +3,31 @@
   padding: 0;
 }
 
-
 .links-list {
   display: flex;
   align-items: center;
-
   height: 100%;
-
   list-style: none;
+  justify-content: center;
+  gap: 1.5rem;
 
   &__item {
     font-family: Untitled-Sans, sans-serif;
-
-    &:not(:first-of-type) {
-      margin-left: 24px;
-    }
   }
 }
 
 .link {
   display: inline-block;
-
   background: transparent;
   border: none;
-
   font: inherit;
   text-decoration: none;
   color: currentColor;
-
   cursor: pointer;
-
   font-size: 18px;
   letter-spacing: -0.23px;
   line-height: 17px;
-
   font-weight: 500;
-
 
   &:hover {
     text-decoration: underline;
@@ -49,7 +38,3 @@
   text-decoration: underline;
   font-weight: bold;
 }
-
-
-
-

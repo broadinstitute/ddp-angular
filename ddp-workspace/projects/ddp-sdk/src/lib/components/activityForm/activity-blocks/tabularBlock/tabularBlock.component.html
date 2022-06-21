@@ -12,7 +12,7 @@
         <div class="questions-cell cell" [class.even]="isEvenRow(questionIndex)"
              [gdColumn]="questionFieldsSpan(questionBlock)">
             <ddp-activity-question [block]="questionBlock"
-                                   [readonly]="readonly"
+                                   [readonly]="readonly || !questionBlock.enabled"
                                    [validationRequested]="validationRequested"
                                    [studyGuid]="studyGuid"
                                    [activityGuid]="activityGuid"

@@ -1,0 +1,69 @@
+<div class="patients">
+  <header class="patients-header">
+    <p>Patients</p>
+  </header>
+  <section class="patients-info">
+    <p>Patients ({{totalCount$ | async}})</p>
+    <div class="patients-info-buttons">
+      <button class="btn_secondary">
+        <mat-icon>filter_list</mat-icon>
+        Add Filter
+      </button>
+      <button class="btn_secondary">
+        <mat-icon>edit</mat-icon>
+        Edit
+      </button>
+      <button class="btn_secondary" [openInModal]="registerPatientsModalComponent">
+        <mat-icon>people</mat-icon>
+        Register
+      </button>
+      <button class="btn_secondary">
+        <mat-icon>cloud_upload</mat-icon>
+        Upload Data
+      </button>
+    </div>
+  </section>
+  <section class="patients-table">
+    <table>
+      <thead>
+      <tr class="header">
+        <th>FON ID#</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Birthdate</th>
+        <th>Registered</th>
+        <th>Last updated</th>
+      </tr>
+      </thead>
+      <ng-container *ngIf="!(loading$ | async) else loadingSpinner">
+        <tbody *ngIf="(patients$ | async) as pts">
+        <tr *ngFor="let pt of pts" (click)="openActivities(pt)">
+          <td>{{ pt.ID }}</td>
+          <td>{{ pt.firstName }}</td>
+          <td>{{ pt.lastName }}</td>
+          <td>{{ pt.birthdate }}</td>
+          <td>{{ pt.registered }}</td>
+          <td>{{ pt.lastUpdated }}</td>
+        </tr>
+        </tbody>
+      </ng-container>
+
+      <ng-template #loadingSpinner>
+        <mat-spinner></mat-spinner>
+      </ng-template>
+    </table>
+
+    <footer>
+      <mat-paginator
+        [pageIndex]="pageIndex"
+        [length]="totalCount$ | async"
+        [pageSize]="pageSize"
+        (page)="setPage($event)"
+        [pageSizeOptions]="[10, 50, 100]" aria-label="Select page">
+      </mat-paginator>
+    </footer>
+  </section>
+
+
+
+</div>

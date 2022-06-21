@@ -1,110 +1,124 @@
 @use '@angular/material' as mat;
 @import '../../../theme.scss';
-@import "../../../styles/fonts.scss";
+@import '../../../styles/fonts.scss';
 
 * {
   margin: 0;
   padding: 0;
 }
 .header {
+  $height: 6.25rem;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1;
-  height: 6.25rem;
   transition: all 200ms linear;
   background-color: white;
+  height: $height;
+  display: flex;
+  justify-content: center;
 
-  &__nav {
-    height: 100%;
-  }
-
-  aside:not(.loginOutButtons) {
+  .header-content {
     display: flex;
-    margin-right: 50px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5625rem;
 
-    img {
-      margin-right: 14.86px;
+    .header__nav {
+      width: 100%;
     }
 
-    p {
-      line-height: 23px;
-      margin-top: 5.72px;
-      font-family: Untitled-Sans, sans-serif;
-      font-weight: 500;
+    .main-link {
+      display: flex;
+      margin-right: 3.125rem;
+      text-decoration: none;
+      color: black;
+
+      img {
+        margin-right: 1rem;
+      }
+
+      p {
+        line-height: 1.4375rem;
+        display: flex;
+        align-items: center;
+        font-family: Untitled-Sans, sans-serif;
+        font-weight: 500;
+      }
+    }
+
+    .loginOutButtons {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    &.hamburger-version {
+      justify-content: space-between;
+      width: 90%;
+      position: fixed;
+    }
+
+    .mobile-nav {
+      position: absolute;
+      top: $height;
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
 
-  .loginOutButtons {
-    display: flex;
-    justify-content: flex-end;
+  &.panel-opened {
+    height: 100vh;
+    z-index: 3;
+
+    .panel-controls {
+      display: flex;
+      flex-direction: column;
+      margin: 1.5625rem 2.5rem;
+      transition: opacity 100ms 200ms ease;
+      opacity: 1;
+      visibility: visible;
+      height: 100%;
+
+      .nav,
+      .auth {
+        display: flex;
+      }
+
+      .navigation {
+        flex-direction: column;
+        padding: 0;
+      }
+
+      .auth {
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .simple-button,
+      .SimpleButton,
+      .auth__login,
+      a {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+      }
+
+      .navigation__item,
+      .auth__login,
+      .auth__dashboard {
+        margin-bottom: 3rem;
+      }
+
+      .dashboard-icon {
+        width: 28px;
+        height: 28px;
+      }
+    }
   }
 }
-
 
 .sticky {
   display: none;
-}
-
-
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 6.25rem;
-  max-width: 1300px;
-  margin: auto;
-  padding: 0 1.5625rem;
-}
-
-.panel-opened {
-  height: 100vh;
-  z-index: 3;
-
-  .panel-controls {
-    display: flex;
-    flex-direction: column;
-    margin: 1.5625rem 2.5rem;
-    transition: opacity 100ms 200ms ease;
-    opacity: 1;
-    visibility: visible;
-    height: 100%;
-
-    .nav,
-    .auth {
-      display: flex;
-    }
-
-    .navigation {
-      flex-direction: column;
-      padding: 0;
-    }
-
-    .auth {
-      flex-direction: column;
-      align-items: start;
-    }
-
-    .simple-button,
-    .SimpleButton,
-    .auth__login,
-    a {
-      font-size: 1.875rem;
-      line-height: 2.25rem;
-    }
-
-    .navigation__item,
-    .auth__login,
-    .auth__dashboard {
-      margin-bottom: 3rem;
-    }
-
-    .dashboard-icon {
-      width: 28px;
-      height: 28px;
-    }
-  }
 }
 
 .header-link__dashboard,
@@ -166,11 +180,10 @@
   cursor: pointer;
 }
 
-
 .cmiBtn {
   padding: 0.7rem 1.75rem !important;
-  background-color: #9953CE;
-  border-color: #9953CE;
+  background-color: #9953ce;
+  border-color: #9953ce;
   border-radius: 4px;
   color: white;
   font-size: 1.0625rem;
@@ -180,7 +193,6 @@
   background-color: #7f30b8;
   border-color: #7f30b8;
 }
-
 
 @media only screen and (max-width: 650px) {
   .activity-heading {
@@ -228,9 +240,72 @@
   }
 }
 
+.hamburger {
+  padding: 2rem;
+  cursor: pointer;
+  transition-property: opacity, filter;
+  transition-duration: 0.15s;
+  transition-timing-function: linear;
+  background-color: transparent;
+  border: 0;
+}
 
+.hamburger-box {
+  width: 1.875rem;
+  height: 1.25rem;
+  display: inline-block;
+  position: relative;
+}
 
+.hamburger-inner {
+  display: block;
+  top: 50%;
+  margin-top: -2px;
+}
 
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+  width: 1.875rem;
+  height: 2px;
+  background-color: mat.get-color-from-palette($app-theme, 200);
+  border-radius: 2px;
+  position: absolute;
+  transition-property: transform;
+  transition-duration: 0.15s;
+  transition-timing-function: ease;
+}
 
+.hamburger-inner::before,
+.hamburger-inner::after {
+  content: '';
+  display: block;
+}
 
+.hamburger--slider .hamburger-inner {
+  top: 2px;
+}
 
+.hamburger--slider .hamburger-inner::before {
+  top: 8px;
+  transition-property: transform, opacity;
+  transition-timing-function: ease;
+  transition-duration: 0.15s;
+}
+
+.hamburger--slider .hamburger-inner::after {
+  top: 16px;
+}
+
+.hamburger--slider.is-active .hamburger-inner {
+  transform: translate3d(0, 8px, 0) rotate(45deg);
+}
+
+.hamburger--slider.is-active .hamburger-inner::before {
+  transform: rotate(-45deg) translate3d(0, -6px, 0);
+  opacity: 0;
+}
+
+.hamburger--slider.is-active .hamburger-inner::after {
+  transform: translate3d(0, -16px, 0) rotate(-90deg);
+}

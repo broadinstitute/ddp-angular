@@ -1,0 +1,87 @@
+@use "../../../../styles/FON/classes/buttons";
+@import "../../../../styles/FON/core";
+
+:host-context(app-patients-list) {
+  grid-area: otherPage;
+  background-color: $__background_color_transparent;
+}
+
+.patients {
+  margin: 0 30px;
+
+  &-header {
+    width: 100%;
+    padding: 32px 0;
+    font-family: Montserrat-Regular, sans-serif;
+    font-size: getFontSize('xxlg');
+  }
+
+  &-info {
+    @include flexContainer(center, space-between);
+    margin-bottom: 15px;
+
+    p {
+      font-family: Montserrat-SemiBold, sans-serif;
+      font-size: getFontSize('xlg');
+    }
+
+    &-buttons {
+      @extend .patients-info;
+      margin: 0;
+      justify-content: center;
+
+      button:not(:first-of-type) {
+        margin-left: 12px;
+      }
+
+      button:nth-child(2) {
+        margin-right: 40px;
+      }
+
+      .btn_secondary {
+        height: auto;
+        width: auto;
+
+        mat-icon {
+          margin-right: 4.5px;
+        }
+      }
+    }
+  }
+
+  &-table {
+    @include flexContainer(normal, normal, column);
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    padding: 10px;
+
+    footer {
+      ::ng-deep .mat-paginator-container {
+        justify-content: flex-start!important;
+      }
+    }
+
+    thead {
+      color: #0000008a;
+    }
+
+    td, th {
+      padding: 12px;
+    }
+
+    tr {
+      border-bottom: 1px solid #0000001f;
+
+      &:not(.header) {
+        &:hover {
+          background: whitesmoke;
+        }
+      }
+    }
+  }
+
+}
+
+
+
+

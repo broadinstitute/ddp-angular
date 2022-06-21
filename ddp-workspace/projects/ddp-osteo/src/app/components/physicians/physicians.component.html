@@ -2,36 +2,45 @@
     <h1 class="title scientific-title" translate>
         PhysiciansPage.IntroSection.Title
     </h1>
-
-
-
-        <section class="section">
-            <div class="content content_tight intro-faq-block">
-                <div class="intro-faq-block__content">
-                    <p [innerHTML]="'PhysiciansPage.IntroSection.Text' | translate"></p>
-                    <section *ngFor="let step of 'BenefitsParticipation.Participations' | translate; let i = index;" class="step">
-                        <div class="step__data">
-                            <a mat-stroked-button *ngIf="step.Button && stepsHrf[i]"
-                                target="_blank"
-                                [href]="stepsHrf[i]"
-                                class="step__btn button button_small small-letter-spacing button_secondary">
-                                    {{step.Button1}}
-                            </a>
-                        </div>
-
-                    </section>
-                    
-
-                    <p [innerHTML]="'PhysiciansPage.introduction.Text' | translate"></p>
-                    <div *ngFor="let PTinfo of 'PhysiciansPage.WISection' | translate">
-                        <p [innerHTML]="PTinfo.Title"></p>
-                        <p [innerHTML]="PTinfo.Text"></p>
+    <section class="section">
+        <div class="content content_tight intro-faq-block">
+            <div class="intro-faq-block__content">
+                <p
+                    [innerHTML]="'PhysiciansPage.IntroSection.Text' | translate"
+                ></p>
+                <section
+                    *ngFor="
+                        let step of 'BenefitsParticipation.Participations'
+                            | translate;
+                        let i = index
+                    "
+                    class="step"
+                >
+                    <div class="step__data">
+                        <a
+                            mat-stroked-button
+                            *ngIf="step.Button && stepsHrf[i]"
+                            target="_blank"
+                            [href]="stepsHrf[i]"
+                            class="button button_small small-letter-spacing"
+                        >
+                            {{ step.Button1 }}
+                        </a>
                     </div>
+                </section>
 
-                    
+                <p
+                    [innerHTML]="'PhysiciansPage.introduction.Text' | translate"
+                ></p>
+                <div
+                    *ngFor="
+                        let PTinfo of 'PhysiciansPage.WISection' | translate
+                    "
+                >
+                    <p [innerHTML]="PTinfo.Title"></p>
+                    <p [innerHTML]="PTinfo.Text"></p>
                 </div>
             </div>
-        </section>
-            
-    
+        </div>
+    </section>
 </main>

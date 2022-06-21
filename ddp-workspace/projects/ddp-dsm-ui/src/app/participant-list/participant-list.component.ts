@@ -1624,7 +1624,12 @@ export class ParticipantListComponent implements OnInit {
   }
 
   openBulkCohort(): MatDialogRef<BulkCohortTagModalComponent> {
-    return this.dialog.open(BulkCohortTagModalComponent);
+    const selectedPatients = this.participantList.filter(pt => pt.isSelected).map(pt => pt.data.profile['guid']);
+    return this.dialog.open(BulkCohortTagModalComponent, {data: {
+      manualFilter: this.jsonPatch, 
+      savedFilter: this.viewFilter,
+      selectedPatients: selectedPatients
+    }});
   }
 
   downloadCurrentData(): void {
@@ -1679,11 +1684,17 @@ export class ParticipantListComponent implements OnInit {
   checkboxChecked(): void {
     this.isAssignButtonDisabled = true;
     for (const pt of this.participantList) {
-      if (pt.isSelected) {
+      if (pt.isSelected && this.isAssignable(pt)) {
         this.isAssignButtonDisabled = false;
         break;
       }
     }
+  }
+
+  private isAssignable(participant: Participant): boolean {
+    return participant.data.status === 'ENROLLED'
+      && participant.data.medicalProviders != null && participant.medicalRecords != null
+      && participant.data.medicalProviders.length > 0 && participant.medicalRecords.length > 0;
   }
 
   assign(): void { // arg[0] = selectedAssignee: Assignee
@@ -1691,7 +1702,7 @@ export class ParticipantListComponent implements OnInit {
     if (this.assignee != null && this.participantList.length > 0) {
       const assignParticipants: Array<AssigneeParticipant> = [];
       for (const pt of this.participantList) {
-        if (pt.isSelected) {
+        if (pt.isSelected && this.isAssignable(pt)) {
           if (this.assignMR) {
             if (this.assignee.assigneeId === '-1') {
               pt.participant.assigneeIdMr = null;

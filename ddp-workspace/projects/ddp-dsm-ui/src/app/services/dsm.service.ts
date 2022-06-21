@@ -298,6 +298,18 @@ export class DSMService {
     );
   }
 
+  public bulkCreateCohortTags(body: string, realm: string): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'bulkCreateCohortTags';
+    const map = [
+      { name: 'userId', value: this.role.userID() },
+      { name: 'realm', value: realm },
+      { name: 'parent', value: 'participantList' },
+    ];
+    return this.http.post(url, body, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError.bind(this))
+    );
+  }
+
   public deleteCohortTag(cohortTagId: number, realm: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'deleteCohortTag';
     const map = [

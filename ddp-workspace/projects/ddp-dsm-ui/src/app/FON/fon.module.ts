@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {NavigationComponent} from './layout/navigation/navigation.component';
 import {FonComponent} from './fon.component';
-import {ActivityComponent} from './pages/activities/activity/activity.component';
-import {ParticipantsListComponent} from './pages/participantsList/participantsList.component';
+import {ActivityComponent} from './pages/activities/components/activity/activity.component';
+import {PatientsListComponent} from './pages/patients-list/patients-list.component';
 import {ActivitiesComponent} from './pages/activities/activities.component';
 import {HomeComponent} from './pages/home/home.component';
 import {fonRoutingModule} from './fon-routing.module';
@@ -21,9 +21,18 @@ import {MainConstants} from './constants/main-constants';
 import {TranslateService} from '@ngx-translate/core';
 import {SessionService} from '../services/session.service';
 import {Title} from '@angular/platform-browser';
+import {RegisterPatientsModalComponent} from './components/register-patients-modal/register-patients-modal.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatDialogModule} from '@angular/material/dialog';
+import {openInModalDirective} from './directives/open-in-modal.directive';
+import {InputFieldComponent} from './components/input-field/input-field.component';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 
-const material = [
+const AngularMaterialModules = [
   MatExpansionModule,
   MatDividerModule,
   MatListModule,
@@ -31,23 +40,42 @@ const material = [
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatProgressBarModule,
-  MatButtonModule
+  MatButtonModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatDatepickerModule,
+  MatDialogModule
 ];
+
+const directives = [openInModalDirective];
+
+const components = [RegisterPatientsModalComponent, InputFieldComponent];
+
+const pageComponents = [
+  FonComponent,
+  ActivityComponent,
+  PatientsListComponent,
+  ActivitiesComponent,
+  HomeComponent
+];
+
+const layoutComponents = [NavigationComponent];
+
 
 @NgModule({
   declarations: [
-    NavigationComponent,
-    FonComponent,
-    ActivityComponent,
-    ParticipantsListComponent,
-    ActivitiesComponent,
-    HomeComponent
+    ...pageComponents,
+    ...layoutComponents,
+    ...components,
+    ...directives
   ],
   imports: [
     CommonModule,
     fonRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
     DdpModule.forDSM(),
-    ...material,
+    ...AngularMaterialModules,
   ],
   providers: [],
   exports: []
@@ -58,7 +86,9 @@ export class fonModule {
               private translateService: TranslateService,
               private sessionService: SessionService,
               private dssSessionService: SessionMementoService,
-              private title: Title) {
+              private title: Title,
+              private jwtHelper: JwtHelperService
+              ) {
 
     const LOCALE = 'en';
 
@@ -67,8 +97,9 @@ export class fonModule {
 
     // Token
     const DSMToken = this.sessionService.getDSMToken();
+    const userGuid = this.jwtHelper.decodeToken(DSMToken)['https://datadonationplatform.org/cid'];
     this.sessionService.setExpirationTime(DSMToken);
-    this.dssSessionService.setSession(null, DSMToken, null, LOCALE, +this.sessionService.getTokenExpiration());
+    this.dssSessionService.setSession(null, DSMToken, userGuid, LOCALE, +this.sessionService.getTokenExpiration());
 
     // Store
     this.storeService.setStudy = MainConstants.study;

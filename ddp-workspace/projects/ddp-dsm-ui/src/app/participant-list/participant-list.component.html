@@ -185,7 +185,7 @@
                 <td>
                   <button mat-icon-button [color]="getFilterButtonColorStyle(isSelectedFilter(savedFilter.filterName))"
                           (click)="selectFilter(savedFilter)">
-                    <mat-icon>
+                    <mat-icon>  
                       <i class="fas fa-filter fa-sm"></i>
                     </mat-icon>
                   </button>
@@ -261,7 +261,7 @@
                         currentPage: activePage, totalItems: getPaginationParticipantListSize() }">
             <!--checkbox to assign or trigger blood kits-->
             <td *ngIf="hasAssignees()">
-              <mat-checkbox color="primary" disableRipple *ngIf="displayCheckbox(pt)"
+              <mat-checkbox color="primary" disableRipple
                            [checked]="pt.isSelected"
                            (change)="pt.isSelected = $event.checked; checkboxChecked()"></mat-checkbox>
             </td>

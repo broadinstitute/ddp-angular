@@ -20,4 +20,9 @@
     <ng-container *ngFor="let faqSection of 'FaqPage.FaqSections' | translate">
         <app-faq-section [faqSection]="faqSection"></app-faq-section>
     </ng-container>
+    <section class="section">
+        <div class="content content_tight">
+            <p [innerHTML]="'FaqPage.NeedInfo.Paragraph' | translate"></p>
+        </div>
+    </section>
 </main>
