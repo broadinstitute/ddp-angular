@@ -73,6 +73,17 @@ export class DSMService {
     );
   }
 
+  placeSeqOrder( orders: any[], realm: string, ddpParticipantId: string ): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'submitMercuryOrder';
+    const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: realm} );
+    map.push( {name: 'ddpParticipantId', value: ddpParticipantId} );
+    map.push( {name: 'userId', value: this.role.userID()} );
+    return this.http.post( url, orders, this.buildQueryHeader( map ) ).pipe(
+      catchError( this.handleError.bind( this ) )
+    );
+  }
+
   public updateParticipant( json: string ): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'editParticipant';
     return this.http.put( url, json, this.buildHeader() ).pipe(
@@ -1094,5 +1105,6 @@ export class DSMService {
     }
     return viewFilterCopy;
   }
+
 
 }

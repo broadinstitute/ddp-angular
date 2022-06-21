@@ -76,6 +76,7 @@ export class SequencingOrderComponent implements OnInit {
         orders.push( sample );
       }
     } );
-    console.log( orders );
+    const realm: string = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
+    this.dsmService.placeSeqOrder( orders, realm, this.participant.participant.ddpParticipantId ).subscribe();
   }
 }

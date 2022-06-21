@@ -12,7 +12,6 @@ export class SequencingOrder {
   }
 
   public static parse( json ): SequencingOrder {
-    console.log( json );
     return new SequencingOrder( json.sampleType, json.sample, json.sampleStatus, json.collectionDate, json.sequencingOrderDate, json.sampleId );
   }
 }

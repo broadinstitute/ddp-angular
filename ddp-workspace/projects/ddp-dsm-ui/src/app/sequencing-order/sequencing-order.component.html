@@ -16,7 +16,7 @@
     <tbody>
     <tr *ngFor="let sample of samples">
       <td>
-        <mat-checkbox *ngIf="shouldHaveCheckbox(sample)" [ngModel]="sample.isSelected" color="primary" disableRipple>
+        <mat-checkbox *ngIf="shouldHaveCheckbox(sample)" [(ngModel)]="sample.isSelected" color="primary" disableRipple>
         </mat-checkbox>
       </td>
       <td>
@@ -48,9 +48,8 @@
     </tbody>
   </table>
   <ng-container>
-    <button (click)="submitOrders()" color="primary"
-            mat-mini-fab>
-      <i class="fas fa-plus fa-lg"></i>
+    <button (click)="submitOrders()" color="primary">
+      Place order
     </button>
   </ng-container>
 </ng-container>
