@@ -3,6 +3,8 @@
 .home {
   .paragraph-1 {
     display: flex;
+    gap: 4rem;
+    align-items: center;
     width: 85%;
     margin: 6.255rem auto;
 
@@ -23,8 +25,8 @@
     }
 
     .paragraph-photo-1 {
-      height: 385px;
-      width: 390px;
+      height: 24.0625rem;
+      width: 24.375rem;
     }
 
     .buttons {
@@ -77,6 +79,11 @@
           background-color: #ffffff;
         }
       }
+    }
+
+    @media (max-width: 835px) {
+      flex-wrap: wrap;
+      justify-content: center;
     }
   }
   .company-logo {
@@ -143,9 +150,10 @@
   }
   .paragraph-3 {
     background-color: #c59ce4;
+    color: #000000;
+    font-family: $primary-font-light;
+
     .paragraph-title-3 {
-      color: #000000;
-      font-family: $primary-font-light;
       font-size: 3rem;
       font-weight: 300;
       letter-spacing: 0;
@@ -154,24 +162,26 @@
       margin: 0 auto 3rem auto;
       padding-top: 4.6875rem;
     }
+
     .paragraph-images-3 {
       display: flex;
+      flex-wrap: wrap;
       margin: auto;
-      width: 78%;
-      place-content: center;
-      justify-content: space-between;
+      width: 80%;
+      justify-content: center;
       padding-bottom: 3.375rem;
+      column-gap: 5%;
+      row-gap: 2rem;
 
       .image-background {
         height: 24.375rem;
-        width: 14.625rem;
+        width: 16.625rem;
         opacity: 0.8;
         border-radius: 0.625rem;
         box-shadow: 0 0.125rem 2.25rem 0.1875rem rgba(0, 0, 0, 0.11);
         background: linear-gradient(180deg, white 50%, #cacccb 50%);
-        margin-right: 0.9375rem;
 
-        .step-images {
+        .step-image {
           margin: 1.25rem 0 3.75rem 2.5rem;
           height: 7.6875rem;
           width: 9.12375rem;
@@ -181,11 +191,8 @@
           margin: 0 1.25rem;
 
           .image-text-1 {
-            color: #000000;
-            font-family: $primary-font-light;
             font-size: 1rem;
             font-weight: 500;
-            letter-spacing: -0.07px;
             line-height: 1.5rem;
             margin-bottom: 0.625rem;
           }
@@ -201,23 +208,22 @@
             }
 
             .image-text-2 {
-              color: #000000;
-              font-family: $primary-font-light;
               font-size: 1.25rem;
               font-weight: 300;
-              letter-spacing: -0.1px;
               line-height: 1.5rem;
             }
           }
 
           .image-text-3 {
-            font-family: $primary-font-light;
-            color: #000000;
             font-size: 1.25rem;
             letter-spacing: 0;
             line-height: 1.5rem;
             font-weight: bold;
           }
+        }
+
+        @media (max-width: 554px) {
+          width: 25rem;
         }
       }
     }
@@ -248,34 +254,35 @@
   }
   .paragraph-4 {
     background-color: #dcc1f0;
+    font-family: $primary-font-light;
+    color: #000;
 
     .paragraph-title-4 {
-      color: #000;
-      font-family: $primary-font-light;
       font-size: 3rem;
       font-weight: 300;
       letter-spacing: 0;
-      line-height: 3.625rem;
       text-align: center;
       margin: 0 auto 3rem auto;
       padding-top: 4.6875rem;
     }
+
     .paragraph-images-4 {
       display: flex;
+      flex-wrap: wrap;
       margin: auto;
-      width: 78%;
-      place-content: center;
-      justify-content: space-between;
+      width: 80%;
+      justify-content: center;
       padding-bottom: 3.375rem;
+      column-gap: 5%;
+      row-gap: 2rem;
 
       .image-background {
         height: 24.375rem;
-        width: 14.625rem;
+        width: 16.625rem;
         opacity: 0.8;
         border-radius: 0.625rem;
         box-shadow: 0 0.125rem 2.25rem 0.1875rem rgba(0, 0, 0, 0.11);
         background: linear-gradient(180deg, white 50%, #cacccb 50%);
-        margin-right: 0.9375rem;
 
         .step-images {
           margin: 1.25rem 0 3.75rem 2.5rem;
@@ -287,14 +294,17 @@
           margin: 0 1.25rem;
 
           .image-text-4 {
-            font-family: $primary-font-light;
-            color: #000000;
             font-size: 1.25rem;
             letter-spacing: 0;
             line-height: 1.5rem;
             font-weight: bold;
           }
         }
+
+        @media (max-width: 554px) {
+          width: 25rem;
+        }
+
       }
     }
     .paragraph-button-place-4 {
@@ -310,7 +320,6 @@
 
         .paragraph-button-text-4 {
           color: #ffffff;
-          font-family: $primary-font-light;
           font-size: 1.5rem;
           letter-spacing: -0.01px;
           line-height: 1.875rem;
@@ -528,14 +537,4 @@
       }
     }
   }
-
 }
-
-
-
-
-
-
-
-
-
