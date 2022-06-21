@@ -36,7 +36,7 @@ export class openInModalDirective {
 
   private openMatDialog(): void {
     const modalSizes = this.modalSizes;
-    this.matDialog.open(this.modalComponent)
+    this.matDialog.open(this.modalComponent, {maxWidth: '870px'})
       .updatePosition({ top: modalSizes?.top || '24px'})
       .updateSize( modalSizes?.width || '60%' , modalSizes?.height || '623px');
   }
