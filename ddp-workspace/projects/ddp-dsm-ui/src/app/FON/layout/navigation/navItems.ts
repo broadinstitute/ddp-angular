@@ -1,5 +1,5 @@
 export const topNavItems = [
-  {name: 'Home', route: '', img: 'home'},
+  {name: 'Home', route: '/fon', img: 'home'},
   {name: 'Patients', route: 'patients', img: 'group'},
   {name: 'Reporting', route: 'reporting', img: 'show_chart'},
   {name: 'Administration', route: 'administration', img: 'settings'}
