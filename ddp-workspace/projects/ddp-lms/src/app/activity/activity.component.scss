@@ -24,7 +24,7 @@
 
       .activity-step-number {
         display: inline-flex;
-        background-color: #9953ce;
+        background-color: #757575;
         color: #fff;
         border-radius: 16px;
         min-width: 2rem;
@@ -35,7 +35,7 @@
         position: relative;
 
         &.completed {
-          background-color: #00d39d;
+          background-color: #9953ce;
         }
 
         &.active {
@@ -55,12 +55,17 @@
       }
 
       .activity-step-text {
-        color: #000;
+        color: #bbbbbe;
 
         &.active {
           font-weight: bold;
           color: #000;
         }
+
+        &.completed {
+          color: #000;
+        }
+
         @media(max-width: 576px){
           display: none;
         }
