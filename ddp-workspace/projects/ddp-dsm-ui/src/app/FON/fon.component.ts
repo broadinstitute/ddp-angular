@@ -1,4 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {SessionMementoService} from "../../../../ddp-sdk/src/lib/services/sessionMemento.service";
+import {Title} from "@angular/platform-browser";
+import {JwtHelperService} from "@auth0/angular-jwt";
+import {SessionService} from "../services/session.service";
+import {MainConstants} from "./constants/main-constants";
+import {StoreService} from "../STORE/store.service";
+import {TranslateService} from "@ngx-translate/core";
 
 
 @Component({
@@ -34,6 +41,33 @@ import {Component} from '@angular/core';
   `]
 })
 
-export class FonComponent{
-  constructor() {}
+export class FonComponent implements OnInit {
+  constructor(private storeService: StoreService,
+              private translateService: TranslateService,
+              private sessionService: SessionService,
+              private dssSessionService: SessionMementoService,
+              private title: Title,
+              private jwtHelper: JwtHelperService) {}
+
+  ngOnInit() {
+    const LOCALE = 'en';
+
+    // Title
+    this.title.setTitle('Fon');
+
+
+    // Store
+    this.storeService.setStudy = MainConstants.study;
+    this.storeService.dispatchGetSettings(MainConstants.participantsListParent);
+
+    // Translation
+    this.translateService.setDefaultLang(LOCALE);
+    this.translateService.use(LOCALE);
+
+    // Token
+    const DSMToken = this.sessionService.getDSMToken();
+    const userGuid = this.jwtHelper.decodeToken(DSMToken)['https://datadonationplatform.org/cid'];
+    this.sessionService.setExpirationTime(DSMToken);
+    this.dssSessionService.setSession(null, DSMToken, userGuid, LOCALE, +this.sessionService.getTokenExpiration());
+  }
 }
