@@ -228,24 +228,24 @@
                     "Title": "Leadership",
                     "Members": [
                         {
-                            "Name": "Steven A. Lubitz",
-                            "Degree": "MD, MPH",
+                            "Name": "Patrick Ellinor",
+                            "Degree": "MD, PhD",
                             "Institution": "Massachusetts General Hospital and Broad Institute",
-                            "Bio": "Dr. Lubitz is an Associate Professor of Medicine at Harvard Medical School (HMS), Associate Physician in the Massachusetts General Hospital (MGH) Cardiac Arrhythmia Service, and Associate Member in Medical and Population Genetics at the Broad Institute. His research expertise includes human genetics, risk assessment, and clinical implementation science. Dr. Lubitz is responsible for leading and coordinating all aspects of this project.",
-                            "Image": "steven-lubitz.jpeg"
+                            "Bio": "Dr. Ellinor is an Institute Member at the Broad Institute, and directs the Cardiovascular Disease Initiative. He is also a Professor of Medicine at Harvard Medical School and Director of the Cardiac Arrhythmia Service at MGH. Dr. Ellinor is responsible for leading and coordinating all aspects of this project.",
+                            "Image": "patrick-ellinor.png"
                         },
                         {
-                            "Name": "Patrick Ellinor",
-                            "Degree": "",
-                            "Institution": "Massachusetts General Hospital and Broad Institute",
-                            "Bio": "Dr. Ellinor is an Institute Member at the Broad Institute, and directs the Cardiovascular Disease Initiative. He is also a Professor of Medicine at Harvard Medical School and Director of the Cardiac Arrhythmia Service at MGH. He serves on the Scientific Advisory Council of this project and collaborates with Dr. Lubitz to oversee the development of patient surveys, recruitment, and project execution.",
-                            "Image": "patrick-ellinor.png"
+                            "Name": "Pat Rattanawong",
+                            "Degree": "MD",
+                            "Institution": "Massachusetts General Hospital",
+                            "Bio": "Dr. Rattanawong is currently a clinical cardiac electrophysiology fellow at Massachusetts General Hospital (MGH). Before joining MGH, he was an assistant professor of medicine at Mayo Clinic, where he had his cardiovascular disease fellowship training. His interests are sudden cardiac death and its electrophysiology-related conditions. His research focuses on the epidemiology and risk stratification of Brugada syndrome and other inherited arrhythmic diseases. He serves on the Scientific Advisory Council of this project and collaborates with Dr. Ellinor to oversee the development of patient surveys, recruitment and project execution.",
+                            "Image": "pat_rattanawong.jpg"
                         },
                         {
                             "Name": "Anthony Philippakis",
                             "Degree": "",
                             "Institution": "Broad Institute",
-                            "Bio": "Dr. Philippakis is the Chief Data Officer at the Broad Institute and directs the Data Sciences Platform. Dr. Philippakis serves on the Scientific Advisory Council of this project and collaborates with Dr. Lubitz to oversee project development and execution.",
+                            "Bio": "Dr. Philippakis is the Chief Data Officer at the Broad Institute and directs the Data Sciences Platform. Dr. Philippakis serves on the Scientific Advisory Council of this project and collaborates with Dr. Ellinor to oversee project development and execution.",
                             "Image": "anthony-philippakis.jpeg"
                         }
                     ]
@@ -257,7 +257,7 @@
                             "Name": "Lee L. Eckhardt",
                             "Degree": "MD, MS",
                             "Institution": "University of Wisconsin-Madison",
-                            "Bio": "Dr. Eckhardt is an Associate Professor of Medicine at the University of Wisconsin-Madison and is the co-director of the Inherited Arrhythmia Clinic. She is a physician scientist with a focus on functional genomics centered around inherited arrhythmia syndromes and unexplained sudden cardiac death. Dr. Eckhardt serves on the Scientific Advisory Council for this project and collaborates with Dr. Lubitz on the research direction, project development, and recruitment initiatives.",
+                            "Bio": "Dr. Eckhardt is an Associate Professor of Medicine at the University of Wisconsin-Madison and is the co-director of the Inherited Arrhythmia Clinic. She is a physician scientist with a focus on functional genomics centered around inherited arrhythmia syndromes and unexplained sudden cardiac death. Dr. Eckhardt serves on the Scientific Advisory Council for this project and collaborates with Dr. Ellinor on the research direction, project development, and recruitment initiatives.",
                             "Image": "lee-eckhardt.jpg"
                         },
                         {
@@ -271,15 +271,22 @@
                             "Name": "M. Ben Shoemaker",
                             "Degree": "MD, MSCI",
                             "Institution": "Vanderbilt University",
-                            "Bio": "Dr. Shoemaker is an Assistant Professor of Medicine at Vanderbilt University Medical Center and Staff Physician at the Nashville VA Medical Center. He is a physician scientist and clinical cardiac electrophysiologist with a research program focused on improving the care of patients with inherited arrhythmia and cardiomyopathy syndromes. He serves on the Scientific Advisory Council for this project and collaborates with Dr. Lubitz on the research direction, project development, and recruitment initiatives.",
+                            "Bio": "Dr. Shoemaker is an Assistant Professor of Medicine at Vanderbilt University Medical Center and Staff Physician at the Nashville VA Medical Center. He is a physician scientist and clinical cardiac electrophysiologist with a research program focused on improving the care of patients with inherited arrhythmia and cardiomyopathy syndromes. He serves on the Scientific Advisory Council for this project and collaborates with Dr. Ellinor on the research direction, project development, and recruitment initiatives.",
                             "Image": "ben-shoemaker.jpg"
+                        },
+                        {
+                            "Name": "Michael J. Cutler",
+                            "Degree": "DO, PhD",
+                            "Institution": "Intermountain Medical Center",
+                            "Bio": "Dr. Cutler is an Associate Professor of Clinical Investigation and Associate Medical Director of Cardiac Electrophysiology at Intermountain Healthcare.  He is a clinical electrophysiologist and manages the Inherited Arrhythmic Clinic at Intermountain Medical Center.  The overriding objective of his research efforts has been to identify cellular and molecular (genetic) mechanisms of cardiac arrhythmias with a goal of translating these findings to improve arrhythmia management for patients.  Dr. Cutler serves on the Scientific Advisory Council for this project and collaborates with Dr. Ellinor on the research direction, project development, and recruitment initiatives",
+                            "Image": "michael-cutler.jpg"
                         }
                     ]
                 }
             ],
             "Council": {
                 "Title": "Project Advisory Council",
-                "Members": ["Kathleen Lewis", "Ana T. Lipsanopoulos", "Stephanie Harris", "Eugene Wong", "Victor Nauffal"]
+                "Members": ["Sarah Winnicki", "Rebecca Reichel", "Stephanie Harris", "Eugene Wong", "Victor Nauffal", "Sarah Wang"]
             },
             "Collaboration": {
                 "Title": "Collaborating Partners",
