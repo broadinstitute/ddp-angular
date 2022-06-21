@@ -146,12 +146,8 @@ $field-disabled-border: $__Mulled_wine_transparent;
     }
 
     .mat-form-field-label-wrapper {
-      left: 15px;
+      left: 8px;
       top: -5px;
-    }
-
-    .mat-input-element {
-      width: unset !important;
     }
   }
 
@@ -196,6 +192,7 @@ $field-disabled-border: $__Mulled_wine_transparent;
     }
 
     .mat-input-element {
+      box-sizing: border-box;
       height: auto;
       padding: 14px 24px 14px 8px !important;
       color: #2D333E !important;
@@ -290,6 +287,10 @@ $field-disabled-border: $__Mulled_wine_transparent;
     }
   }
 
+  .equation-value {
+    margin: 12px 8px;
+  }
+
   .activity-buttons {
     margin: 0 -40px;
     padding: 16px 40px;
@@ -357,14 +358,21 @@ $field-disabled-border: $__Mulled_wine_transparent;
 
       .header, .question-title {
         padding-left: 20px !important;
+        font-weight: 600;
       }
 
       .question-title {
         display: flex;
-        align-items: center;
+        align-items: start;
+        margin-top: 10px;
       }
 
       .cell {
+        &:nth-child(12),
+        &:nth-child(20) {
+          height: 48px;
+        }
+
         &:nth-child(10),
         &:nth-child(18) {
           grid-column: span 2 !important;
@@ -395,8 +403,17 @@ $field-disabled-border: $__Mulled_wine_transparent;
         &-CQ_LV_END_EJECTION_FRACTION
         {
           .ddp-answer-container {
-            grid-template-columns: auto!important;
+            grid-template-columns: auto !important;
             justify-content: left;
+          }
+        }
+
+        &-CQ_RV_CARDIAC_OUTPUT,
+        &-CQ_LV_CARDIAC_OUTPUT
+        {
+          .ddp-answer-container {
+            grid-template-columns: auto auto !important;
+            justify-content: space-around;
           }
         }
       }
@@ -416,5 +433,4 @@ $field-disabled-border: $__Mulled_wine_transparent;
       }
     }
   }
-
 }
