@@ -1,11 +1,20 @@
-:host-context(app-participants-list) {
+@use "../../../../styles/FON/classes/buttons";
+
+:host-context(app-patients-list) {
   grid-area: otherPage
 }
 
-.participants-table {
-  width: 50%;
-  margin-top: 20px;
+.participants {
+  margin-left: 30px;
 
+
+}
+
+.participants-table {
+  margin-top: 20px;
+  button {
+    float: right;
+  }
   thead {
     color: #0000008a;
   }

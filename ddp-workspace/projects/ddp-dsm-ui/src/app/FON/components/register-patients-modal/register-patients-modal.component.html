@@ -1,0 +1,90 @@
+<div class="dialogContainer">
+  <header>
+    <p>Register Patients</p>
+  </header>
+  <main>
+    <section>
+      <form [formGroup]="addPatientForm">
+        <ng-container formArrayName="patients">
+          <ng-container *ngFor="let patient of patients.controls; let i = index">
+            <div [formGroup]="patient" [ngClass]="{'hr': i > 0}" class="addPatientForm">
+
+              <div class="patientNav">
+                <p class="patientNav-number">Patient {{i + 1}}</p>
+                <span *ngIf="i > 0" class="patientNav-remove" (click)="removePatient(i)">X</span>
+              </div>
+
+              <div class="input_field">
+                <app-input-field
+                  label="Email*"
+                  placeholder="Enter email address"
+                  inputType="text"
+                  formControlName="email">
+                </app-input-field>
+              </div>
+
+              <div class="input_field">
+                <app-input-field
+                  label="First Name*"
+                  placeholder="First name"
+                  inputType="text"
+                  formControlName="firstName">
+                </app-input-field>
+                <app-input-field
+                  label="Last Name*"
+                  placeholder="Last Name"
+                  inputType="text"
+                  formControlName="lastName">
+                </app-input-field>
+              </div>
+
+              <div class="input_field">
+                <app-input-field
+                  label="Date of birth*"
+                  placeholder="MM/DD/YY"
+                  inputType="date"
+                  formControlName="dateOfBirth">
+                </app-input-field>
+              </div>
+
+              <div class="input_field">
+                <app-input-field
+                  label="Informed consent date*"
+                  placeholder="MM/DD/YY"
+                  inputType="date"
+                  formControlName="informedConsentDate">
+                </app-input-field>
+                <app-input-field
+                  label="Assent date (if applicable)"
+                  placeholder="MM/DD/YY"
+                  inputType="date"
+                  formControlName="assentDate">
+                </app-input-field>
+              </div>
+
+            </div>
+          </ng-container>
+        </ng-container>
+        <button class="btn_secondary" (click)="addPatient()" [disabled]="addPatientForm.invalid">
+          <mat-icon>add</mat-icon>
+          Add another patient
+        </button>
+      </form>
+    </section>
+    <aside>
+      <div class="fileUpload">
+        <p>File upload
+          <mat-icon>info</mat-icon>
+        </p>
+        <div class="fileUpload-dragAndDrop">
+          <p>Drag and drop or <br/> <a (click)="file.click()">browse your files</a></p>
+          <input type="file" #file style="display: none">
+        </div>
+      </div>
+    </aside>
+  </main>
+  <footer>
+    <button class="btn_secondary" (click)="closeDialog()">Cancel</button>
+    <button class="btn_primary" [disabled]="addPatientForm.invalid" (click)="registerPatient()">Register</button>
+  </footer>
+</div>

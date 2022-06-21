@@ -1,12 +1,25 @@
-<div class="activities-container">
-  <ng-container *ngIf="(patientWithActivities | async) as Patient">
-    <div class="activities-names" >
-      <div class="selected-participant">
-        Selected patient:
-        <span>{{Patient.firstName}} {{Patient.lastName}}
-      </span>
-      </div>
+<div class="activities-container" *ngIf="(patientWithActivities | async) as Patient; else loadingSpinner">
+  <header>
+    <section class="patient">
+      <p class="patient-route">
+        <span class="patient-route-name" [routerLink]="'../'">{{activeRoute | titlecase}}</span>
+        <span class="patient-route-arrow"><mat-icon>keyboard_arrow_right</mat-icon></span>
+      </p>
+      <p class="patient-name">{{Patient.firstName}} {{Patient.lastName}}</p>
+      <p class="patient-credentials">FON ID#: 0100011  <span>Status: Active</span></p>
+    </section>
+    <section class="information" >
+      <p>
+        <span>Last saved</span>
+        <span>01/02/2022</span>
+        <span>3:04:50</span>
+      </p>
+      <a href="#">Audit Trail</a>
+    </section>
+  </header>
 
+  <main>
+    <section class="activities-nav">
       <mat-accordion>
         <mat-expansion-panel (opened)="panelOpenState = true"
                              (closed)="panelOpenState = false"
@@ -24,11 +37,15 @@
           </mat-list>
         </mat-expansion-panel>
       </mat-accordion>
-    </div>
-  </ng-container>
+    </section>
 
-  <div class="activity">
-    <router-outlet></router-outlet>
-  </div>
+    <section class="activity">
+      <router-outlet></router-outlet>
+    </section>
+  </main>
+
 </div>
 
+<ng-template #loadingSpinner>
+  <mat-spinner></mat-spinner>
+</ng-template>

@@ -5,28 +5,23 @@ import {Component} from '@angular/core';
   selector: 'app-fon',
   template: `
     <div class="mainHolder">
-      <h1 class="header">Fontan Outcomes Network</h1>
       <app-navigation></app-navigation>
       <router-outlet></router-outlet>
     </div>
   `,
   styles: [`
+    * {
+      font-family: 'Montserrat', sans-serif;
+    }
+
     .mainHolder {
       display: grid;
-      grid-template-columns: 230px auto;
+      grid-template-columns: 200px auto;
       height: 100vh;
-      column-gap: 50px;
       width: 100%;
       margin: 0;
       padding: 0;
-      grid-template-areas: ". header" "sidebarNavigation otherPage";
-    }
-
-    .header {
-      grid-area: header;
-      height: 100px;
-      line-height: 100px;
-      margin: 0;
+      grid-template-areas: "asideNavigation otherPage";
     }
 
     app-navigation {
