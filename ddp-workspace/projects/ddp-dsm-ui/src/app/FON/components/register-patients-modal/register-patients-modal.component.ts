@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Subscription, tap} from "rxjs";
+import {Subscription, tap} from 'rxjs';
 
 @Component({
   selector: 'app-add-patients-modal',
@@ -9,7 +9,7 @@ import {Subscription, tap} from "rxjs";
   styleUrls: ['./register-patients-modal.component.scss'],
 })
 export class RegisterPatientsModalComponent implements OnInit {
-  uploading: boolean = false;
+  uploading = false;
 
   readonly addPatientForm: FormGroup = this.formBuilder.group({
     patients: this.formBuilder.array([])
@@ -45,12 +45,12 @@ export class RegisterPatientsModalComponent implements OnInit {
   }
 
   public registerPatient(): void {
-    console.log(this.addPatientForm.getRawValue())
+    console.log(this.addPatientForm.getRawValue());
     this.uploading = true;
     setTimeout(() => {
       this.closeDialog();
       this.uploading = false;
-    }, 2000)
+    }, 2000);
 
   }
 
