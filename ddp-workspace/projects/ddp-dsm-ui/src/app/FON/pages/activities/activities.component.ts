@@ -3,7 +3,7 @@ import {ActivatedRoute, Params} from '@angular/router';
 import {Observable, tap} from 'rxjs';
 import {StoreService} from '../../../STORE/store.service';
 import {MainConstants} from '../../constants/main-constants';
-import {sectionGuids} from "./utils/sections_guids";
+import {sectionGuids} from './utils/sections_guids';
 
 @Component({
   selector: 'app-activities',
@@ -33,7 +33,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   isActive(actGuid: string): boolean {
-    console.log(this.activatedRoute.snapshot.firstChild.params.activity)
+    console.log(this.activatedRoute.snapshot.firstChild.params.activity);
     return this.activatedRoute.snapshot.firstChild.params.activity === actGuid;
   }
 

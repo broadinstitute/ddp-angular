@@ -3,4 +3,4 @@ export const sectionGuids = [
   'TESTING_LOGS_EVENTS',
   'PROMISE_QUESTIONNAIRE',
   'PATIENT_STATUS'
-]
+];
