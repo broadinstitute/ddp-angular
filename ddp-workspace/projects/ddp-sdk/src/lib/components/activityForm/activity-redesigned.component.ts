@@ -7,7 +7,7 @@ import {
     OnDestroy,
     OnInit,
     Renderer2,
-    Input
+    Input,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
@@ -23,9 +23,12 @@ import { ParticipantsSearchServiceAgent } from '../../services/serviceAgents/par
 @Component({
     selector: 'ddp-activity-redesigned',
     templateUrl: './activity-redesigned.component.html',
-    providers: [SubmitAnnouncementService, SubmissionManager]
+    providers: [SubmitAnnouncementService, SubmissionManager],
 })
-export class ActivityRedesignedComponent extends ActivityComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ActivityRedesignedComponent
+    extends ActivityComponent
+    implements OnInit, OnDestroy, AfterViewInit
+{
     @Input() agreeConsent = false;
 
     public isVerticalProgress: boolean;
@@ -42,10 +45,29 @@ export class ActivityRedesignedComponent extends ActivityComponent implements On
         @Inject(DOCUMENT) document: any,
         injector: Injector
     ) {
-        super(logger, windowRef, renderer, submitService, analytics, participantsSearch, changeRef, document, injector);
-        this.subscription = this.getIsLoaded$().subscribe(() => {
-            const activitiesWithVerticalProgress: string[] = this.config.usesVerticalStepper;
-            this.isVerticalProgress = this.model && activitiesWithVerticalProgress.includes(this.model.activityCode);
+        super(
+            logger,
+            windowRef,
+            renderer,
+            submitService,
+            analytics,
+            participantsSearch,
+            changeRef,
+            document,
+            injector
+        );
+        this.subscription = this.getIsLoaded$().subscribe((loaded) => {
+            const activitiesWithVerticalProgress: string[] =
+                this.config.usesVerticalStepper;
+            console.log(
+                this.model,
+                activitiesWithVerticalProgress
+            );
+            this.isVerticalProgress =
+                this.model &&
+                activitiesWithVerticalProgress.includes(
+                    this.model.activityCode
+                );
         });
     }
 
