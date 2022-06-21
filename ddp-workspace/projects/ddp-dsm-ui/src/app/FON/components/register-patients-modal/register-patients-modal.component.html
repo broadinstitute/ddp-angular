@@ -84,7 +84,7 @@
     </aside>
   </main>
   <footer>
-    <button class="btn_secondary" (click)="closeDialog()">Cancel</button>
-    <button class="btn_primary" [disabled]="addPatientForm.invalid" (click)="registerPatient()">Register</button>
+    <button class="btn_secondary" [ngClass]="{'disappear': uploading}" (click)="closeDialog()">Cancel</button>
+    <button class="btn_primary" [disabled]="addPatientForm.invalid || uploading" (click)="registerPatient()">Register</button>
   </footer>
 </div>

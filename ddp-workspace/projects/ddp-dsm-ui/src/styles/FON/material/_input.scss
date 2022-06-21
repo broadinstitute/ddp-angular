@@ -51,6 +51,11 @@
     font-family: Montserrat-Regular-Italic, sans-serif;
     color: $__Charcoal;
 
+    & .mat-input-element::placeholder {
+      font-family: Montserrat-Regular-Italic, sans-serif;
+      font-size: getFontSize('md');
+    }
+
     &-appearance-outlinec &-invalid &-invalid &-outline-thick {
       color: blue!important;
     }
