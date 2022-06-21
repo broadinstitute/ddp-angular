@@ -797,7 +797,7 @@
             }
         ],
         "NeedInfo": {
-            "Paragraph": "Still have more questions? Feel free to reach out to us at info@osproject.org or by phone at 651-602-2020"
+            "Paragraph": "Still have more questions? Feel free to reach out to us at <a class=\"Link\" href=\"mailto:info@osproject.org\">info@osproject.org</a> or by phone at <a class=\"Link\" href='tel:651-602-2020'>651-602-2020.</a>"
         }
     },
     "WorkflowProgress": {

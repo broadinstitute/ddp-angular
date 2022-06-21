@@ -90,7 +90,7 @@
     padding: 0 1rem 1rem calc(2rem + 24px) !important;
 }
 
-.section {
+.PHYSection {
     padding: 0 1.5rem 9.94rem 1.5rem;
     display: flex;
     flex-direction: row-reverse;
@@ -166,6 +166,11 @@
 
 .image_item {
     width: 300px;
+}
+
+.titleSection {
+    background-color: mat.get-color-from-palette($app-theme, 350);
+    margin: 0 auto 5.625rem;
 }
 
 @media screen and (max-width: $tablet-breakpoint) {
