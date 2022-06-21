@@ -29,6 +29,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatDialogModule} from '@angular/material/dialog';
 import {openInModalDirective} from './directives/open-in-modal.directive';
 import {InputFieldComponent} from './components/input-field/input-field.component';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 
 const AngularMaterialModules = [
@@ -85,7 +86,9 @@ export class fonModule {
               private translateService: TranslateService,
               private sessionService: SessionService,
               private dssSessionService: SessionMementoService,
-              private title: Title) {
+              private title: Title,
+              private jwtHelper: JwtHelperService
+              ) {
 
     const LOCALE = 'en';
 
@@ -94,8 +97,9 @@ export class fonModule {
 
     // Token
     const DSMToken = this.sessionService.getDSMToken();
+    const userGuid = this.jwtHelper.decodeToken(DSMToken)['https://datadonationplatform.org/cid'];
     this.sessionService.setExpirationTime(DSMToken);
-    this.dssSessionService.setSession(null, DSMToken, null, LOCALE, +this.sessionService.getTokenExpiration());
+    this.dssSessionService.setSession(null, DSMToken, userGuid, LOCALE, +this.sessionService.getTokenExpiration());
 
     // Store
     this.storeService.setStudy = MainConstants.study;
