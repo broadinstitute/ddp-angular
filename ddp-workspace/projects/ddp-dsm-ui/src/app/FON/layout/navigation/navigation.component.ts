@@ -32,6 +32,7 @@ export class NavigationComponent {
   }
 
   isActive(route: string): boolean {
-    return route === this.activatedRoute.snapshot.firstChild.routeConfig.path;
+    const passedRoute = route === '/fon' ? '' : route;
+    return passedRoute === this.activatedRoute.firstChild.snapshot.routeConfig.path;
   }
 }
