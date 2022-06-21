@@ -358,14 +358,21 @@ $field-disabled-border: $__Mulled_wine_transparent;
 
       .header, .question-title {
         padding-left: 20px !important;
+        font-weight: 600;
       }
 
       .question-title {
         display: flex;
-        align-items: center;
+        align-items: start;
+        margin-top: 10px;
       }
 
       .cell {
+        &:nth-child(12),
+        &:nth-child(20) {
+          height: 48px;
+        }
+
         &:nth-child(10),
         &:nth-child(18) {
           grid-column: span 2 !important;
