@@ -45,10 +45,11 @@
 
         <!-- Status Column -->
         <ng-container matColumnDef="status">
-            <mat-header-cell class="padding-5" *matHeaderCellDef [innerHTML]="'SDK.UserActivities.ActivityStatus' | translate">
+            <mat-header-cell class="padding-5 status-header" *matHeaderCellDef
+                             [innerHTML]="'SDK.UserActivities.ActivityStatus' | translate">
             </mat-header-cell>
             <mat-cell *matCellDef="let element"
-                      class="padding-5"
+                      class="padding-5 status-row"
                       [attr.data-ddp-test]="'activityStatus::' + element.instanceGuid">
                 <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.ActivityStatus' | translate"></span>
                 <div class="dashboard-status-container" [ngClass]="{'dashboard-status-container_summary': showSummary(element)}">

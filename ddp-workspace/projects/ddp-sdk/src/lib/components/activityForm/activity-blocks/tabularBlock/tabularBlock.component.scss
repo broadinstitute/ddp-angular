@@ -40,35 +40,13 @@ $border-color: #1d1d1d;
     }
 
     .cell {
-        padding: 15px;
+        padding: 10px;
         border-right: 1px solid $border-color;
         border-bottom: 1px solid $border-color;
 
         + .cell {
             border-right: none;
         }
-
     }
 }
 
-.tabular-container.composite {
-    border: none;
-    width: 70%;
-
-    * {
-        border: none;
-    }
-
-    .questions-row {
-        grid-template-columns: 110px 1fr 1fr 1fr !important;
-        align-items: center;
-
-        &.isEven {
-            background-color: #EDEDEE;
-        }
-    }
-
-    .cell {
-        padding: 15px 25px;
-    }
-}

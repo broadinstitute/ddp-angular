@@ -1,9 +1,18 @@
-<aside class="sidebar">
+<aside>
+  <div class="titles">
+    <div class="topTitle">
+      <p>Study Manager</p>
+      <mat-icon>keyboard_tab</mat-icon>
+    </div>
+    <div class="topSubTitle">
+      <p>Fontan Outcomes Network</p>
+    </div>
+  </div>
+
   <div class="navigation">
     <ul class="topNavigation">
       <li *ngFor="let item of topNavigation"
-          [routerLinkActiveOptions]="{exact: true}"
-          routerLinkActive="activeNav"
+          [class.activeNav]="isActive(item.route)"
           [routerLink]="[item.route]">
         <mat-icon *ngIf="item.img">{{item.img}}</mat-icon>
         {{ item.name }}
