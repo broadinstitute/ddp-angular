@@ -1,4 +1,4 @@
-@import "../../../../../../styles/FON/core/colors";
+@import "../../../../../../styles/FON/core";
 
 $text-color: #000000;
 $warn-color: #f44336;
@@ -8,9 +8,14 @@ $field-disabled-border: $__Mulled_wine_transparent;
 
 ::ng-deep {
 
+  .main_activity {
+    padding: 32px 40px 0;
+  }
+
   .content h1 {
     font-size: 20px;
     font-weight: 600;
+    margin-top: 0;
     margin-bottom: 28px;
   }
 
@@ -41,19 +46,6 @@ $field-disabled-border: $__Mulled_wine_transparent;
     display: flex;
     justify-content: space-between;
     margin: 2rem;
-  }
-
-  .button_secondary {
-    background-color: transparent;
-    color: $text-color;
-    border: 2px solid $text-color !important;
-
-    &:hover:not([disabled]),
-    &:hover:enabled,
-    &:focus:not([disabled]),
-    &:focus:enabled,{
-      background-color: rgba(0,0,0,0.04);
-    }
   }
 
   .ErrorMessage.ErrorMessage {
@@ -132,34 +124,18 @@ $field-disabled-border: $__Mulled_wine_transparent;
   }
 
   ddp-activity-text-input,
-  ddp-activity-email-input {
-    .mat-form-field-infix {
-      border-top: none;
-    }
-    .mat-form-field-label-wrapper {
-      display: none;
-    }
-  }
-
+  ddp-activity-email-input,
   ddp-activity-numeric-answer {
     .mat-form-field-infix {
       border-top: none;
     }
-    .mat-form-field-label-wrapper {
-      left: 15px;
-      top: -5px;
-    }
 
     .mat-form-field-label {
       font-family: Montserrat, sans-serif !important;
-      color: $__Gunmetal !important;
-    }
-
-    .mat-form-field-disabled {
-      .mat-form-field-label {
-        color: $__Charcoal !important;
-        opacity: 0.7;
-      }
+      font-style: italic;
+      font-size: 15px !important;
+      color: $__Charcoal !important;
+      opacity: 0.7;
     }
 
     .mat-form-field.mat-focused,
@@ -167,6 +143,21 @@ $field-disabled-border: $__Mulled_wine_transparent;
       .mat-form-field-label {
         display: none;
       }
+    }
+
+    .mat-form-field-label-wrapper {
+      left: 15px;
+      top: -5px;
+    }
+
+    .mat-input-element {
+      width: unset !important;
+    }
+  }
+
+  ddp-activity-numeric-answer {
+    .mat-form-field-infix {
+      border-top: none;
     }
   }
 
@@ -184,7 +175,11 @@ $field-disabled-border: $__Mulled_wine_transparent;
   ddp-activity-text-input,
   ddp-activity-email-input,
   ddp-activity-numeric-answer {
-    .mat-form-field-wrapper, .mat-form-field-infix {
+    .mat-form-field-wrapper {
+      padding: 0 !important;
+    }
+
+    .mat-form-field-infix {
       padding: 0 !important;
     }
 
@@ -201,9 +196,11 @@ $field-disabled-border: $__Mulled_wine_transparent;
     }
 
     .mat-input-element {
+      height: auto;
       padding: 14px 24px 14px 8px !important;
       color: #2D333E !important;
       font-family: Montserrat, sans-serif;
+      font-size: 15px;
 
       &:disabled {
         color: $__Charcoal !important;
@@ -255,12 +252,14 @@ $field-disabled-border: $__Mulled_wine_transparent;
     }
 
     select {
+      height: auto;
       width: max-content !important;
       border: 1px solid $__Slate_grey !important;
       border-radius: 3px;
       background-color: #FFFFFF;
       padding: 14px 16px 14px 8px;
       color: #2D333E !important;
+      font-size: 15px;
 
       /* reset native arrow down */
       appearance: none;
@@ -285,10 +284,137 @@ $field-disabled-border: $__Mulled_wine_transparent;
     }
   }
 
+  .ddp-required-question-prompt {
+    span > .activity-question-title {
+      display: inline;
+    }
+  }
+
   .activity-buttons {
     margin: 0 -40px;
     padding: 16px 40px;
     height: 72px;
     background-color: $__Mercury;
   }
+
+  /* ------------- Tabular blocks custom styles --------------------- */
+
+  /* tabular block for Enrollment form */
+  .main_activity.ENROLLMENT {
+    .tabular-container {
+      grid-template-columns: 70px auto 1fr 1fr !important;
+
+      .header {
+        text-align: center;
+      }
+
+      ddp-activity-composite-answer {
+        .ddp-answer-container {
+          grid-template-columns: 1fr 1fr !important;
+          place-items: center;
+          gap: 30px;
+
+          .ddp-answer-field {
+            padding: 0;
+
+            &:nth-child(2) {
+              width: 125px !important;
+
+              .mat-form-field {
+                width: 100% !important;
+              }
+            }
+          }
+        }
+
+        ddp-date {
+          .ddp-answer-container {
+            width: auto;
+          }
+
+          .ddp-answer-field {
+            padding: unset !important;
+
+            select {
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* tabular block for CARDIAC_CT form */
+  .main_activity.CARDIAC_CT {
+    .tabular-container {
+      grid-template-columns: auto 150px 150px !important;
+
+      /* TODO: remove this temp FIX!! just to fix the wrong config form back-end */
+      .header:nth-of-type(3) {
+        display: none;
+      }
+      /* end of the TODO */
+
+      .header, .question-title {
+        padding-left: 20px !important;
+      }
+
+      .question-title {
+        display: flex;
+        align-items: center;
+      }
+
+      .cell {
+        &:nth-child(10),
+        &:nth-child(18) {
+          grid-column: span 2 !important;
+        }
+      }
+
+      .composite-answer {
+        &-CQ_RV_END_DIASTOLIC_VOLUME,
+        &-CQ_RV_END_SYSTOLIC_VOLUME,
+        &-CQ_LV_END_DIASTOLIC_VOLUME,
+        &-CQ_LV_END_SYSTOLIC_VOLUME
+        {
+          .ddp-answer-container {
+            grid-template-columns: auto auto !important;
+          }
+
+          /* TODO: remove this temp FIX!! just to fix the wrong config form back-end */
+          .ddp-answer-field:first-of-type::after {
+            content: 'Or';
+            top: -12px;
+            position: relative;
+            left: 4px;
+          }
+          /* end of the TODO */
+        }
+
+        &-CQ_RV_EJECTION_FRACTION,
+        &-CQ_LV_END_EJECTION_FRACTION
+        {
+          .ddp-answer-container {
+            grid-template-columns: auto!important;
+            justify-content: left;
+          }
+        }
+      }
+
+      ddp-activity-composite-answer {
+        .ddp-answer-container {
+          justify-content: space-between;
+
+          .ddp-answer-field {
+            padding: 0;
+          }
+
+          .mat-form-field {
+            max-width: 120px;
+          }
+        }
+      }
+    }
+  }
+
 }
