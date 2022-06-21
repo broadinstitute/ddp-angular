@@ -349,10 +349,12 @@ $field-disabled-border: $__Mulled_wine_transparent;
           .ddp-answer-field {
             padding: unset !important;
 
+            /* TODO: remove this temp FIX!! just to fix the wrong config form back-end */
             &::after {
               content: 'OR';
               padding-left: 16px;
             }
+            /* end of the TODO */
 
             select {
               margin: 0;
