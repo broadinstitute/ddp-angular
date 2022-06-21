@@ -2951,7 +2951,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/bootstrap/dist/css/bootstrap-theme.min.css",
               "projects/ddp-dsm-ui/src/assets/dsm-theme.scss",
-              "projects/ddp-dsm-ui/src/styles.css"
+              "projects/ddp-dsm-ui/src/styles.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
@@ -3044,7 +3044,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/bootstrap/dist/css/bootstrap-theme.min.css",
               "projects/ddp-dsm-ui/src/assets/dsm-theme.scss",
-              "projects/ddp-dsm-ui/src/styles.css"
+              "projects/ddp-dsm-ui/src/styles.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

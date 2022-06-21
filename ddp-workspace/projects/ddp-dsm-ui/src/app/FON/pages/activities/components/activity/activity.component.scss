@@ -1,0 +1,294 @@
+@import "../../../../../../styles/FON/core/colors";
+
+$text-color: #000000;
+$warn-color: #f44336;
+$field-enabled-border: $__Slate_grey;
+$field-disabled-border: $__Mulled_wine_transparent;
+
+
+::ng-deep {
+
+  .content h1 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 28px;
+  }
+
+  // steps
+  .activity-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 3rem 0;
+  }
+
+  .activity-step {
+    font-size: 1.4rem;
+    font-style: italic;
+    font-weight: bolder;
+
+    &.active {
+       text-decoration: underline;
+    }
+
+    &.completed {
+      cursor: pointer;
+      color: $__Dark_pastel_blue;
+    }
+  }
+
+  .activity-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem;
+  }
+
+  .button_secondary {
+    background-color: transparent;
+    color: $text-color;
+    border: 2px solid $text-color !important;
+
+    &:hover:not([disabled]),
+    &:hover:enabled,
+    &:focus:not([disabled]),
+    &:focus:enabled,{
+      background-color: rgba(0,0,0,0.04);
+    }
+  }
+
+  .ErrorMessage.ErrorMessage {
+    border-top: 2px solid $warn-color;
+    margin-top: 20px;
+    font-size: 13px;
+    color: $warn-color;
+    padding: 15px 0;
+  }
+
+  .margin-bottom {
+    margin-bottom: 1.5rem;
+  }
+
+  .ddp-content {
+    font-size: 1.5rem;
+    line-height: 2.875rem;
+  }
+
+  .modal-activity-block {
+    &__edit-dialog-content {
+      padding-top: 40px !important;
+    }
+
+    &__delete-dialog > mat-dialog-container {
+      padding-top: 12px !important;
+    }
+  }
+
+
+  .activity {
+    .section.article-content {
+      font-family: Montserrat, sans-serif !important;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0;
+      line-height: 17px;
+    }
+  }
+
+  .ddp-question-prompt,
+  .activity-question-title {
+    color: $__Gunmetal;
+    font-size: 15px!important;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 17px;
+    margin-top: 32px;
+  }
+
+  ddp-activity-dropdown-picklist-question {
+    select {
+      &.mat-input-element {
+        /* reset native arrow down */
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+
+        /* new arrow icon*/
+        background-image: url('/assets/images/arrow_down.svg');
+        background-repeat: no-repeat;
+        background-position-x: 100%;
+        background-position-y: 55%;
+      }
+
+      &:disabled {
+        border-bottom: none;
+        background-image: url('/assets/images/arrow_down_disabled.svg');
+      }
+    }
+
+    /* hide Angular Material select arrow */
+    .mat-form-field-type-mat-native-select .mat-form-field-infix::after {
+      display: none;
+    }
+  }
+
+  ddp-activity-text-input,
+  ddp-activity-email-input {
+    .mat-form-field-infix {
+      border-top: none;
+    }
+    .mat-form-field-label-wrapper {
+      display: none;
+    }
+  }
+
+  ddp-activity-numeric-answer {
+    .mat-form-field-infix {
+      border-top: none;
+    }
+    .mat-form-field-label-wrapper {
+      left: 15px;
+      top: -5px;
+    }
+
+    .mat-form-field-label {
+      font-family: Montserrat, sans-serif !important;
+      color: $__Gunmetal !important;
+    }
+
+    .mat-form-field-disabled {
+      .mat-form-field-label {
+        color: $__Charcoal !important;
+        opacity: 0.7;
+      }
+    }
+
+    .mat-form-field.mat-focused,
+    .mat-form-field.mat-form-field-should-float {
+      .mat-form-field-label {
+        display: none;
+      }
+    }
+  }
+
+  ddp-activity-email-input {
+    .mat-form-field {
+      max-width: 50%;
+    }
+
+    .mat-form-field-infix {
+      width: auto;
+    }
+  }
+
+  ddp-activity-dropdown-picklist-question,
+  ddp-activity-text-input,
+  ddp-activity-email-input,
+  ddp-activity-numeric-answer {
+    .mat-form-field-wrapper, .mat-form-field-infix {
+      padding: 0 !important;
+    }
+
+    .mat-form-field {
+      width: max-content !important;
+      border: 1px solid $__Slate_grey;
+      border-radius: 3px;
+      background-color: #FFFFFF;
+
+      &.mat-form-field-disabled {
+        background-color: rgba(0,0,0,0.03);
+        border-color: $field-disabled-border;
+      }
+    }
+
+    .mat-input-element {
+      padding: 14px 24px 14px 8px !important;
+      color: #2D333E !important;
+      font-family: Montserrat, sans-serif;
+
+      &:disabled {
+        color: $__Charcoal !important;
+        opacity: 0.7;
+      }
+    }
+
+    .mat-form-field-underline {
+      display: none;
+    }
+  }
+
+  .mat-checkbox-label,
+  .mat-radio-label .mat-radio-label-content {
+    font-family: Montserrat, sans-serif;
+    color: $__Gunmetal !important;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 17px;
+  }
+
+  .mat-checkbox-frame,
+  .mat-radio-outer-circle {
+    border-width: 1px !important;
+    border-color: $__Gunmetal !important;
+  }
+
+  .mat-checkbox-disabled {
+    .mat-checkbox-label, .mat-checkbox-frame {
+      color: $__Charcoal !important;
+      opacity: 0.7;
+    }
+  }
+
+  .mat-radio-button.mat-radio-disabled {
+    .mat-radio-label-content,
+    .mat-radio-outer-circle {
+      color: $__Charcoal !important;
+      opacity: 0.7;
+    }
+  }
+
+  ddp-date {
+    .ddp-answer-container {
+      @media screen and (min-width: 1200px) {
+        width: 50%;
+      }
+    }
+
+    select {
+      width: max-content !important;
+      border: 1px solid $__Slate_grey !important;
+      border-radius: 3px;
+      background-color: #FFFFFF;
+      padding: 14px 16px 14px 8px;
+      color: #2D333E !important;
+
+      /* reset native arrow down */
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+
+      /* new arrow icon*/
+      background-image: url('/assets/images/arrow_down.svg');
+      background-repeat: no-repeat;
+      background-position-x: 100%;
+      background-position-y: 55%;
+
+      &:disabled {
+        border-color: $field-disabled-border;
+        background-color: rgba(0,0,0,0.03);
+        color: $__Charcoal !important;
+        opacity: 0.7;
+
+        border-bottom: none;
+        background-image: url('/assets/images/arrow_down_disabled.svg');
+      }
+    }
+  }
+
+  .activity-buttons {
+    margin: 0 -40px;
+    padding: 16px 40px;
+    height: 72px;
+    background-color: $__Mercury;
+  }
+}
