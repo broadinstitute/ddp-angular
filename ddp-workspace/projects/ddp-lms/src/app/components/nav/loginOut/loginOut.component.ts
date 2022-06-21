@@ -45,6 +45,7 @@ import { Route } from '../../../constants/Route';
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 0;
     }
 
     .cmiBtn {
