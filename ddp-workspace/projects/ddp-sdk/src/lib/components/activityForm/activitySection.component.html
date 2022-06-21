@@ -80,7 +80,7 @@
     </div>
     <ddp-tabular-block *ngIf="shouldBlockBeShown(block, BlockType.Tabular)"
                        [block]="block"
-                       [readonly]="readonly"
+                       [readonly]="readonly || !block.enabled"
                        [validationRequested]="validationRequested"
                        [studyGuid]="studyGuid"
                        [activityGuid]="activityGuid">
