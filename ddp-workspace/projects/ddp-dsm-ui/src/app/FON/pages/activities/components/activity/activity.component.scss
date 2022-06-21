@@ -304,9 +304,23 @@ $field-disabled-border: $__Mulled_wine_transparent;
   .main_activity.ENROLLMENT {
     .tabular-container {
       grid-template-columns: 70px auto 1fr 1fr !important;
+      border: none !important;
 
       .header {
-        text-align: center;
+        text-align: left;
+        font-weight: 600;
+
+        &:nth-child(2) {
+          padding-left: 12px;
+        }
+      }
+
+      .cell {
+        border: none !important;
+
+        .Question--COMPOSITE {
+          min-width: 280px;
+        }
       }
 
       ddp-activity-composite-answer {
@@ -349,6 +363,7 @@ $field-disabled-border: $__Mulled_wine_transparent;
   .main_activity.CARDIAC_CT {
     .tabular-container {
       grid-template-columns: auto 150px 150px !important;
+      border: none !important;
 
       /* TODO: remove this temp FIX!! just to fix the wrong config form back-end */
       .header:nth-of-type(3) {
@@ -368,6 +383,8 @@ $field-disabled-border: $__Mulled_wine_transparent;
       }
 
       .cell {
+        border: none !important;
+
         &:nth-child(12),
         &:nth-child(20) {
           height: 48px;
