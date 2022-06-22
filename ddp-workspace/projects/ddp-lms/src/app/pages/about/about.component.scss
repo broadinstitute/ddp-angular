@@ -113,8 +113,8 @@
 }
 
 .advisory {
-  padding: 3.75rem 20%;
   background-color: #f1e4fb;
+  padding: 3rem 0;
 
   &-headLine {
     text-align: center;
@@ -139,12 +139,19 @@
     justify-content: center;
     letter-spacing: 0;
     line-height: 1.875rem;
+    width: 50%;
+    margin: auto;
+
+    @media (max-width: 776px) {
+      width: 70%;
+    }
   }
 
   &-advisorsInfo {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 5rem;
+    margin: 5rem auto;
+    width: 70%;
 
     &-image {
       height: 16.818125rem;
@@ -165,6 +172,13 @@
         line-height: 1.875rem;
         font-family: Untitled-Sans, sans-serif;
       }
+    }
+
+    @media (max-width: 992px) {
+      width: 80%;
+    }
+    @media (max-width: 776px) {
+      flex-wrap: wrap;
     }
   }
 }
