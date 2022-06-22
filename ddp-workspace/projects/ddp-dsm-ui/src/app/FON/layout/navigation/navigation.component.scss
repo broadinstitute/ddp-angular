@@ -2,13 +2,13 @@
 
 $hoverColor: #7154FF;
 
-:host-context(app-navigation) {
-  grid-area: asideNavigation
-}
-
 aside {
   height: 100%;
   background-color: #333F52;
+
+  &.hidden-menu {
+    visibility: hidden;
+  }
 
   .titles {
     height: 145px;
@@ -20,9 +20,27 @@ aside {
       display: flex;
       justify-content: space-between;
 
-      mat-icon {
+      mat-icon:hover {
+        color: $__White;
+        cursor: pointer;
+      }
+
+      .toggleMenuBtn {
         color: #BCC3C9;
         transform: rotate(0.5turn);
+
+        &-hidden {
+          width: 30px;
+          height: 100%;
+          color: #BCC3C9;
+          background-color: #333F52;
+          visibility: visible;
+          position: absolute;
+          top: 0;
+          left: 0;
+          padding: 18px 0 0 3px;
+          transform: unset !important;
+        }
       }
 
       p {
@@ -99,8 +117,8 @@ aside {
       }
     }
   }
-
 }
+
 
 
 

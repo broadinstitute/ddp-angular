@@ -6,13 +6,12 @@
         <span class="patient-route-arrow"><mat-icon>keyboard_arrow_right</mat-icon></span>
       </p>
       <p class="patient-name">{{Patient.firstName}} {{Patient.lastName}}</p>
-      <p class="patient-credentials">FON ID#: 0100011 <span>Status: Active</span></p>
+      <p class="patient-credentials">FON ID#: {{Patient.ID}} <span>Status: Active</span></p>
     </section>
     <section class="information">
       <p>
         <span>Last saved</span>
-        <span>01/02/2022</span>
-        <span>3:04:50</span>
+        <span>{{Patient.lastUpdated | date: 'M/d/yy, h:mm:ss'}}</span>
       </p>
       <a href="#">Audit Trail</a>
     </section>
@@ -22,8 +21,8 @@
     <section class="activities-nav">
 
       <mat-accordion>
-        <mat-expansion-panel *ngFor="let section of sectionsArray; let i = index"
-                             [expanded]="isOpen(Patient.activities[section].activities) || !i">
+        <mat-expansion-panel *ngFor="let section of sectionsArray"
+                             [expanded]="isOpen(Patient.activities[section].activities)">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{Patient.activities[section].name}}

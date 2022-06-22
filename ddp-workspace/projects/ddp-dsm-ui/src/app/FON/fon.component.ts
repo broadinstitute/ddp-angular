@@ -11,8 +11,8 @@ import {TranslateService} from '@ngx-translate/core';
 @Component({
   selector: 'app-fon',
   template: `
-    <div class="mainHolder">
-      <app-navigation></app-navigation>
+    <div class="mainHolder" [gdColumns]="asideNavVisible? '200px auto' : '30px auto'">
+      <app-navigation (toggleNav)="toggleAsideNav()"></app-navigation>
       <router-outlet></router-outlet>
     </div>
   `,
@@ -23,7 +23,6 @@ import {TranslateService} from '@ngx-translate/core';
 
     .mainHolder {
       display: grid;
-      grid-template-columns: 200px auto;
       height: 100vh;
       width: 100%;
       margin: 0;
@@ -32,7 +31,7 @@ import {TranslateService} from '@ngx-translate/core';
     }
 
     app-navigation {
-      grid-area: sidebarNavigation
+      grid-area: asideNavigation
     }
 
     router-outlet {
@@ -42,6 +41,8 @@ import {TranslateService} from '@ngx-translate/core';
 })
 
 export class FonComponent implements OnInit {
+  asideNavVisible = true;
+
   constructor(private storeService: StoreService,
               private translateService: TranslateService,
               private sessionService: SessionService,
@@ -68,5 +69,9 @@ export class FonComponent implements OnInit {
     const userGuid = this.jwtHelper.decodeToken(DSMToken)['https://datadonationplatform.org/cid'];
     this.sessionService.setExpirationTime(DSMToken);
     this.dssSessionService.setSession(null, DSMToken, userGuid, LOCALE, +this.sessionService.getTokenExpiration());
+  }
+
+  toggleAsideNav(): void {
+    this.asideNavVisible = !this.asideNavVisible;
   }
 }
