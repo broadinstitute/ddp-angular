@@ -22,8 +22,8 @@
     <section class="activities-nav">
 
       <mat-accordion>
-        <mat-expansion-panel *ngFor="let section of sectionsArray; let i = index"
-                             [expanded]="isOpen(Patient.activities[section].activities) || !i">
+        <mat-expansion-panel *ngFor="let section of sectionsArray"
+                             [expanded]="isOpen(Patient.activities[section].activities)">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{Patient.activities[section].name}}
