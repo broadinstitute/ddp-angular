@@ -12,11 +12,11 @@ export const generateParticipantsList = (participants: ParticipantModel[], setti
     registered: '02/02/2002',
     lastUpdated: '01/01/2022',
     activities: pt.esData.activities.map(activity => {
-      const activityGot = Object.values(actDefs).find(actDef => actDef['activityCode'] === activity.activityCode);
+      const activityDefinition = Object.values(actDefs).find(actDef => actDef['activityCode'] === activity.activityCode);
       return {
-        name: activityGot['activityName'],
+        name: activityDefinition['activityName'],
         activityGuid: activity.guid,
-        activityCode: activityGot['activityCode']
+        activityCode: activityDefinition['activityCode']
       };
     })
   })) : [];
