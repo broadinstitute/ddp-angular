@@ -1,4 +1,4 @@
-<div class="activities-container" *ngIf="(patientWithActivities | async) as Patient; else loadingSpinner">
+<div class="activities-container" *ngIf="(patientWithActivities$ | async) as Patient; else loadingSpinner">
   <header>
     <section class="patient">
       <p class="patient-route">
@@ -23,7 +23,7 @@
 
       <mat-accordion>
         <mat-expansion-panel *ngFor="let section of sectionsArray; let i = index"
-                             [expanded]="i===0">
+                             [expanded]="isOpen(Patient.activities[section].activities) || !i">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{Patient.activities[section].name}}
