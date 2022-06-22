@@ -87,13 +87,9 @@ aside {
         padding: 0 10px;
 
         &:hover {
-          color: $__White;
+          background-color: $__nav_item_background_hover;
           cursor: pointer;
           outline: none;
-
-          > mat-icon {
-            color: $__White;
-          }
         }
 
         > mat-icon {

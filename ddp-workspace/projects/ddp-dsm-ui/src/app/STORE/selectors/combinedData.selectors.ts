@@ -2,7 +2,7 @@ import {createSelector, MemoizedSelector} from '@ngrx/store';
 import {getParticipants} from './participants.selectors';
 import {getSettings} from './settings.selectors';
 import {SettingsModel} from '../models/settings.model';
-import {generateParticipantsList} from './Utils/participantsList.util';
+import {generateGroupedActivities, generateParticipantsList} from './Utils/participantsList.util';
 import {ParticipantObject, StoreStateModel} from '../store.reducer';
 import {MainStoreFeatureSelector} from './mainStoreFeature.selector';
 
@@ -13,10 +13,12 @@ export const getParticipantsList = createSelector(
     generateParticipantsList(participants.pts, settings)
 );
 
-export const getParticipantActivities = (guid: string): MemoizedSelector<any, any> => createSelector(
+export const getParticipantActivities = (patientGuid: string): MemoizedSelector<any, any> => createSelector(
     getParticipantsList,
-    participants => participants?.find(pt => pt.guid === guid)
+    participants => generateGroupedActivities(participants?.find(pt => pt.guid === patientGuid))
   );
+
+export const getSections = (): MemoizedSelector<any, any> => createSelector(getSections);
 
 export const getPtsLoadingStatus = createSelector(
   MainStoreFeatureSelector,
