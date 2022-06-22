@@ -41,9 +41,9 @@
           <td>{{ pt.ID }}</td>
           <td>{{ pt.firstName }}</td>
           <td>{{ pt.lastName }}</td>
-          <td>{{ pt.birthdate }}</td>
-          <td>{{ pt.registered }}</td>
-          <td>{{ pt.lastUpdated }}</td>
+          <td>{{ pt.birthdate | date }}</td>
+          <td>{{ pt.registered | date }}</td>
+          <td>{{ pt.lastUpdated | date }}</td>
         </tr>
         </tbody>
       </ng-container>

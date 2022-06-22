@@ -8,8 +8,8 @@ export const generateParticipantsList = (participants: ParticipantModel[], setti
     guid: pt.esData.profile.guid,
     firstName: pt.esData.profile.firstName,
     lastName: pt.esData.profile.lastName,
-    birthdate: '01/01/2022',
-    registered: '02/02/2002',
+    birthdate: pt.esData.dsm.dateOfBirth,
+    registered: pt.esData.profile.createdAt,
     lastUpdated: pt.esData.statusTimestamp,
     activities: pt.esData.activities.map(activity => {
       const activityDefinition = Object.values(actDefs).find(actDef => actDef['activityCode'] === activity.activityCode);
