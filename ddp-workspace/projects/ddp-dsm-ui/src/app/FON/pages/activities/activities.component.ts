@@ -33,8 +33,7 @@ export class ActivitiesComponent implements OnInit {
   isOpen(activities: any): boolean {
     const openActivityGuid = this.activatedRoute.snapshot.firstChild?.params.activity;
     if(openActivityGuid) {
-      return !!activities
-        .find(activity => activity.activityGuid === openActivityGuid);
+      return activities.some(activity => activity.activityGuid === openActivityGuid)
     }
     return;
   }
