@@ -2,10 +2,6 @@
 
 $hoverColor: #7154FF;
 
-:host-context(app-navigation) {
-  grid-area: asideNavigation
-}
-
 aside {
   height: 100%;
   background-color: #333F52;
