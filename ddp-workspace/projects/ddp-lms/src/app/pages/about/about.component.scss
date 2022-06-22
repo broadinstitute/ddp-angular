@@ -1,6 +1,6 @@
 @use '@angular/material' as mat;
-@import "../../../styles/variables.scss";
-@import "../../../styles/fonts.scss";
+@import '../../../styles/variables.scss';
+@import '../../../styles/fonts.scss';
 @import '../../../../../ddp-pancan/src/styles/variables.scss';
 
 * {
@@ -10,135 +10,121 @@
 
 .participation {
   padding-bottom: 0 !important;
-}
 
-.about-block {
-  background-color: $primary-lms-backGround-color;
-  width: 100%;
-  height: 336px;
-  display: flex;
-  justify-content: center;
-
-  h1 {
-    margin-top: 66px;
-    font-family: Untitled-Sans-Light, sans-serif;
-    height: 58px;
-    width: 205px;
-    color: #FFFFFF;
-    font-size: 48px;
-    letter-spacing: 0;
-    font-weight: 100;
-    line-height: 58px;
+  .static-page-title {
+    margin-bottom: 2rem !important;
   }
 }
 
-.page-name {
-  margin-top: 50px;
-  color: #FFFFFF;
-  font-family: Untitled-Sans-Light, sans-serif;
-  width: 205px;
-  height: 58px;
-  font-size: 40px;
-  cursor: default;
-}
-
 .cmiBlock {
-  background-color: #F1E4FB;
+  background-color: #f1e4fb;
   width: 55%;
-  height: 249px;
+  height: 15.5625rem;
   position: absolute;
-  top: 285px;
+  top: 17.8125rem;
   left: 22.5%;
   display: flex;
   justify-content: center;
   align-self: center;
   flex-direction: column;
-  border-radius: 4px;
-  box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 0.25rem;
+  box-shadow: 0 0.125rem 0.625rem 0.125rem rgba(0, 0, 0, 0.2);
 
   &-text {
-    padding: 10px 45px 20px 45px;
+    padding: 0.625rem 2.8125rem 1.25rem 2.8125rem;
 
     p {
       margin: 0;
       padding: 0;
       font-family: Untitled-Sans, sans-serif;
       text-align: center;
-      font-size: 24px;
+      font-size: 1.5rem;
     }
   }
 
   &-visit-button {
-    width: 334px;
-    height: 56px;
-    background-color: #9953CE;
+    width: 20.875rem;
+    height: 3.5rem;
+    background-color: #9953ce;
     border: none;
     display: flex;
     justify-content: center;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     cursor: pointer;
     margin: 0 auto;
 
     &-text {
-      height: 30px;
-      width: 269px;
-      color: #FFFFFF;
+      height: 1.875rem;
+      width: 16.8125rem;
+      color: #ffffff;
       font-family: Untitled-Sans-Light, sans-serif;
-      font-size: 22px;
-      letter-spacing: -0.01px;
-      line-height: 24px;
-      margin-top: 15px;
+      font-size: 1.375rem;
+      letter-spacing: -6.25e-4rem;
+      line-height: 1.5rem;
+      margin-top: 0.9375rem;
     }
 
     .mat-icon {
-      height: 24px;
-      width: 22px;
-      color: #FFFFFF;
-      font-size: 22px;
-      margin-top: 15px;
+      height: 1.5rem;
+      width: 1.375rem;
+      color: #ffffff;
+      font-size: 1.375rem;
+      margin-top: 0.9375rem;
     }
   }
 }
 
-
 .countMeIn {
-  margin-top: -50px;
-  padding: 0 22.5%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 50%;
+  margin: auto;
 
   &-img {
-    height: 67px;
-    width: 151px;
-    margin: 0 317px;
+    height: 4.1875rem;
+    width: 9.4375rem;
+    margin: 0 19.8125rem;
   }
 
   &-text {
-    color: #1D1B25;
+    color: #1d1b25;
     font-family: Untitled-Sans, sans-serif;
-    font-size: 20px;
+    font-size: 1.25rem;
     letter-spacing: 0;
-    line-height: 30px;
+    line-height: 1.875rem;
     text-align: left;
-    margin: 45px 33px 0;
-    padding-bottom: 40px;
+    margin: 2.8125rem 2.0625rem 0;
+    padding-bottom: 2.5rem;
+  }
+
+  @media (max-width: 992px) {
+    width: 60%;
+  }
+
+  @media (max-width: 776px) {
+    width: 70%;
+  }
+
+  @media (max-width: 576px) {
+    width: 90%;
   }
 }
 
 .advisory {
-  padding: 60px 20%;
-  background-color: #F1E4FB;
+  padding: 3.75rem 20%;
+  background-color: #f1e4fb;
 
   &-headLine {
     text-align: center;
-    margin-bottom: 37px;
+    margin-bottom: 2.3125rem;
 
-    p,a {
+    p,
+    a {
       color: #000000;
       font-family: Untitled-Sans-Light, sans-serif;
-      font-size: 48px;
+      font-size: 3rem;
       font-weight: 100;
       margin: 0;
       padding: 0;
@@ -146,39 +132,37 @@
   }
 
   &-summary {
-    padding: 0 81px 60px;
-    font-size: 20px;
+    padding: 0 5.0625rem 3.75rem;
+    font-size: 1.25rem;
     display: flex;
     font-family: Untitled-Sans, sans-serif;
     justify-content: center;
     letter-spacing: 0;
-    line-height: 30px;
+    line-height: 1.875rem;
   }
 
   &-advisorsInfo {
-
     display: flex;
     justify-content: space-between;
-    margin-bottom: 80px;
+    margin-bottom: 5rem;
 
     &-image {
-      height: 269.09px;
-      width: 200px;
-      margin-right: 48px;
+      height: 16.818125rem;
+      width: 12.5rem;
+      margin-right: 3rem;
     }
 
     &-about {
-
       &-name {
-        font-size: 30px;
+        font-size: 1.875rem;
         font-weight: 500;
-        margin-bottom: 10px;
+        margin-bottom: 0.625rem;
         font-family: Untitled-Sans-Medium, sans-serif;
       }
       &-bio {
-        font-size: 20px;
+        font-size: 1.25rem;
         letter-spacing: 0;
-        line-height: 30px;
+        line-height: 1.875rem;
         font-family: Untitled-Sans, sans-serif;
       }
     }
@@ -186,13 +170,13 @@
 }
 
 .champions {
-  padding: 80px 18% 85px;
+  padding: 5rem 18% 5.3125rem;
 
   h1 {
-    margin-bottom: 80px;
-    font-size: 48px;
+    margin-bottom: 5rem;
+    font-size: 3rem;
     letter-spacing: 0;
-    line-height: 58px;
+    line-height: 3.625rem;
   }
 
   &-headline {
@@ -205,77 +189,72 @@
     justify-content: space-around;
     flex-wrap: wrap;
 
-      &-item {
-        display: flex;
-        width: 460px;
-        height: 174.91px;
-        margin-bottom: 60.09px;
+    &-item {
+      display: flex;
+      width: 28.75rem;
+      height: 10.931875rem;
+      margin-bottom: 3.755625rem;
 
-        img {
-          height: 174.91px;
-          width: 130px;
-          margin-right: 30px;
-        }
-
-        aside {
-          h2 {
-            margin-bottom: 16px;
-            font-size: 20px;
-            letter-spacing: 0;
-            line-height: 24px;
-          }
-          p, a {
-            font-size: 16px;
-            line-height: 24px;
-            letter-spacing: 0;
-          }
-        }
-
-
+      img {
+        height: 10.931875rem;
+        width: 8.125rem;
+        margin-right: 1.875rem;
       }
+
+      aside {
+        h2 {
+          margin-bottom: 1rem;
+          font-size: 1.25rem;
+          letter-spacing: 0;
+          line-height: 1.5rem;
+        }
+        p,
+        a {
+          font-size: 1rem;
+          line-height: 1.5rem;
+          letter-spacing: 0;
+        }
+      }
+    }
   }
 }
 
 .chemptext {
-  color: #F1E4FB;
-  background: #F1E4FB;
+  color: #f1e4fb;
+  background: #f1e4fb;
 }
 
 .champions-list-item {
-    h2 {
-      font-family: Untitled-Sans-Medium, sans-serif;
-    }
-  
+  h2 {
+    font-family: Untitled-Sans-Medium, sans-serif;
+  }
 }
-
 
 .learnMoreBlank {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  padding: 82px 121px;
-  height: 352px;
-  background-color: #9953CE;
+  padding: 5.125rem 7.5625rem;
+  background-color: #9953ce;
 }
 
 .learnMoreHeadline {
-  height: 58px;
-  color: #FFFFFF;
+  color: #ffffff;
   font-family: Untitled-Sans-Light, sans-serif;
-  font-size: 48px;
+  font-size: 3rem;
   font-weight: 100;
   letter-spacing: 0;
-  line-height: 58px;
-  margin-bottom: 51px;
+  line-height: 3.625rem;
+  margin-bottom: 3.1875rem;
 }
 
 .learnMore {
-  height: 70px;
-  width: 289px;
+  height: 4.375rem;
+  width: 18.0625rem;
   border: none;
-  background-color: #FFFFFF;
-  border-radius: 4px;
+  background-color: #ffffff;
+  border-radius: 0.25rem;
   &:hover {
     cursor: pointer;
   }
@@ -284,9 +263,9 @@
 .visitFaq {
   color: #000000;
   font-family: Untitled-Sans, sans-serif;
-  font-size: 24px;
-  letter-spacing: -0.01px;
-  line-height: 26px;
+  font-size: 1.5rem;
+  letter-spacing: -6.25e-4rem;
+  line-height: 1.625rem;
   text-align: center;
   cursor: pointer;
 }
@@ -295,13 +274,12 @@
   text-align: left;
 
   .button_secondary:hover:enabled {
-    background: #fbfbfb!important;
-    color: inherit!important;
-
+    background: #fbfbfb !important;
+    color: inherit !important;
   }
   .step__btn {
-    background: #fbfbfb!important;
-    color: inherit!important;
+    background: #fbfbfb !important;
+    color: inherit !important;
   }
 
   .title {
@@ -313,7 +291,7 @@
 
   .step__title {
     font-weight: bold;
-    font-family: "Source Serif Pro", serif;
+    font-family: 'Source Serif Pro', serif;
     font-size: 2.625rem;
   }
 
@@ -343,7 +321,7 @@
   }
 
   &__data {
-    max-width: 700px;
+    max-width: 43.75rem;
   }
 
   &__label {
@@ -354,7 +332,7 @@
   &__time {
     mat-icon {
       vertical-align: top;
-      margin-right: 8px;
+      margin-right: 0.5rem;
     }
   }
 
@@ -375,11 +353,11 @@
   &__btn {
     font-size: 1.13rem;
     padding: 1rem 2rem;
-    line-height: 22px;
+    line-height: 1.375rem;
     // font-family: $primary-font-medium;
     font-family: $primary-font-medium;
     white-space: normal;
-    border: 2px solid #000000!important;
+    border: 0.125rem solid #000000 !important;
   }
 
   &__image {
@@ -393,8 +371,6 @@
   }
 }
 
-
-
 @media screen and (max-width: $tablet-breakpoint) {
   .participation {
     .step {
@@ -407,6 +383,3 @@
     }
   }
 }
-
-
-

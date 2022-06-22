@@ -16,19 +16,21 @@
   </header>
 
   <section class="advisory">
-    <div class="advisory-headLine">
-      <p>{{ 'About.AdvisorsBlock.Headline' | translate }}</p>
-    </div>
+    <div class="content">
+      <div class="advisory-headLine">
+        <p>{{ 'About.AdvisorsBlock.Headline' | translate }}</p>
+      </div>
 
-    <div class="advisory-summary">
-      <p [innerHTML]="'About.AdvisorsBlock.ProjectSummary' | translate"></p>
-    </div>
+      <div class="advisory-summary">
+        <p [innerHTML]="'About.AdvisorsBlock.ProjectSummary' | translate"></p>
+      </div>
 
-    <div class="advisory-advisorsInfo" *ngFor="let advisor of 'About.AdvisorsBlock.Advisors' | translate">
-      <img class="advisory-advisorsInfo-image" [src]="advisor.image" [alt]="advisor.name" />
-      <div class="advisory-advisorsInfo-about">
-        <h1 class="advisory-advisorsInfo-about-name">{{ advisor.name }}</h1>
-        <p class="advisory-advisorsInfo-about-name-bio" [innerHTML]="advisor.bio"></p>
+      <div class="advisory-advisorsInfo" *ngFor="let advisor of 'About.AdvisorsBlock.Advisors' | translate">
+        <img class="advisory-advisorsInfo-image" [src]="advisor.image" [alt]="advisor.name" />
+        <div class="advisory-advisorsInfo-about">
+          <h1 class="advisory-advisorsInfo-about-name">{{ advisor.name }}</h1>
+          <p class="advisory-advisorsInfo-about-name-bio" [innerHTML]="advisor.bio"></p>
+        </div>
       </div>
     </div>
   </section>
