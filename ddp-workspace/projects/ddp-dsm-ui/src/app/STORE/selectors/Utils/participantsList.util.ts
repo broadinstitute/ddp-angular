@@ -10,7 +10,7 @@ export const generateParticipantsList = (participants: ParticipantModel[], setti
     lastName: pt.esData.profile.lastName,
     birthdate: '01/01/2022',
     registered: '02/02/2002',
-    lastUpdated: '01/01/2022',
+    lastUpdated: pt.esData.statusTimestamp,
     activities: pt.esData.activities.map(activity => {
       const activityDefinition = Object.values(actDefs).find(actDef => actDef['activityCode'] === activity.activityCode);
       return {
