@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {NavigationComponent} from './layout/navigation/navigation.component';
 import {FonComponent} from './fon.component';
 import {ActivityComponent} from './pages/activities/components/activity/activity.component';
@@ -68,6 +69,7 @@ const layoutComponents = [NavigationComponent];
     fonRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    FlexLayoutModule,
     DdpModule.forDSM(),
     ...AngularMaterialModules,
   ],
