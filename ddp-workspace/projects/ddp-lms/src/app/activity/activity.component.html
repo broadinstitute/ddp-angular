@@ -30,6 +30,7 @@
 
   <!-- article content -->
   <section *ngIf="isLoaded; else spinner" class="section article-content">
+
     <div class="content content_tight" [ngClass]="{ 'vertical-mode': isVerticalProgress }">
       <ng-container *ngIf="shouldShowReadonlyHint">
         <div class="infobox" [innerHTML]="model.readonlyHint"></div>

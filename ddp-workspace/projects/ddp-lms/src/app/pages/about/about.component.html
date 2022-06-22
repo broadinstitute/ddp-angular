@@ -1,49 +1,46 @@
 <main class="participation">
-
   <header>
     <h2 class="title static-page-title" translate>About.Title</h2>
 
     <div class="countMeIn">
-      <img class="countMeIn-img" src="/assets/images/logo-count-me-in.png" alt="count me in">
+      <img class="countMeIn-img" src="/assets/images/logo-count-me-in.png" alt="count me in" />
       <p class="countMeIn-text" [innerHTML]="'About.TitleText' | translate"></p>
 
-        <button class="cmiBlock-visit-button" onclick="window.open('https://joincountmein.org/', '_blank')">
-          <p class="cmiBlock-visit-button-text">{{ 'About.button1' | translate }}</p>
-          <mat-icon>launch</mat-icon>
-        </button>
+      <button class="cmiBlock-visit-button" onclick="window.open('https://joincountmein.org/', '_blank')">
+        <p class="cmiBlock-visit-button-text">{{ 'About.button1' | translate }}</p>
+        <mat-icon>launch</mat-icon>
+      </button>
 
       <p class="countMeIn-text" [innerHTML]="'About.countMeInText' | translate"></p>
     </div>
   </header>
 
-
-
-
   <section class="advisory">
-    <div class="advisory-headLine">
-      <p>{{ 'About.AdvisorsBlock.Headline' | translate }}</p>
-    </div>
+    <div class="content">
+      <div class="advisory-headLine">
+        <p>{{ 'About.AdvisorsBlock.Headline' | translate }}</p>
+      </div>
 
-    <div class="advisory-summary">
-      <p [innerHTML]="'About.AdvisorsBlock.ProjectSummary' | translate"></p>
-    </div>
+      <div class="advisory-summary">
+        <p [innerHTML]="'About.AdvisorsBlock.ProjectSummary' | translate"></p>
+      </div>
 
-    <div class="advisory-advisorsInfo" *ngFor="let advisor of 'About.AdvisorsBlock.Advisors' | translate">
-      <img class="advisory-advisorsInfo-image" [src]="advisor.image" [alt]="advisor.name">
-      <div class="advisory-advisorsInfo-about">
-        <h1 class="advisory-advisorsInfo-about-name">{{ advisor.name }}</h1>
-        <p class="advisory-advisorsInfo-about-name-bio" [innerHTML]="advisor.bio"></p>
+      <div class="advisory-advisorsInfo" *ngFor="let advisor of 'About.AdvisorsBlock.Advisors' | translate">
+        <img class="advisory-advisorsInfo-image" [src]="advisor.image" [alt]="advisor.name" />
+        <div class="advisory-advisorsInfo-about">
+          <h1 class="advisory-advisorsInfo-about-name">{{ advisor.name }}</h1>
+          <p class="advisory-advisorsInfo-about-name-bio" [innerHTML]="advisor.bio"></p>
+        </div>
       </div>
     </div>
   </section>
-
 
   <section class="champions">
     <h1 class="champions-headline">{{ 'About.ChampionsBlock.Title' | translate }}</h1>
 
     <div class="champions-list">
       <div class="champions-list-item" *ngFor="let champion of 'About.ChampionsBlock.Champions' | translate">
-        <img [src]="champion.image">
+        <img [src]="champion.image" />
         <aside>
           <h2>{{ champion.name }}</h2>
           <p [innerHTML]="champion.bio"></p>
@@ -58,5 +55,4 @@
       <p class="visitFaq">{{ 'About.VisitFaq' | translate }}</p>
     </button>
   </footer>
-
 </main>
