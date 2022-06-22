@@ -6,19 +6,21 @@
     </div>
 
     <ng-container *ngFor="let questionBlock of block.content; let questionIndex=index;">
-        <div *ngIf="questionBlock.question" class="question-title cell" [class.even]="isEvenRow(questionIndex)">
-            {{questionBlock.question}}
-        </div>
-        <div class="questions-cell cell" [class.even]="isEvenRow(questionIndex)"
-             [gdColumn]="questionFieldsSpan(questionBlock)">
-            <ddp-activity-question [block]="questionBlock"
-                                   [readonly]="readonly || !questionBlock.enabled"
-                                   [validationRequested]="validationRequested"
-                                   [studyGuid]="studyGuid"
-                                   [activityGuid]="activityGuid"
-                                   [layoutType]="LayoutType.GRID">
-            </ddp-activity-question>
-        </div>
+        <ng-container *ngIf="questionBlock.shown">
+            <div *ngIf="questionBlock.question" class="question-title cell" [class.even]="isEvenRow(questionIndex)">
+                {{questionBlock.question}}
+            </div>
+            <div class="questions-cell cell" [class.even]="isEvenRow(questionIndex)"
+                 [gdColumn]="questionFieldsSpan(questionBlock)">
+                <ddp-activity-question [block]="questionBlock"
+                                       [readonly]="readonly || !questionBlock.enabled"
+                                       [validationRequested]="validationRequested"
+                                       [studyGuid]="studyGuid"
+                                       [activityGuid]="activityGuid"
+                                       [layoutType]="LayoutType.GRID">
+                </ddp-activity-question>
+            </div>
+        </ng-container>
     </ng-container>
 </div>
 
