@@ -8,7 +8,6 @@ import {Observable, tap} from 'rxjs';
 import {StoreService} from '../../../STORE/store.service';
 import {MainConstants} from '../../constants/main-constants';
 import {sectionGuids} from './utils/sections_guids';
-import {MatExpansionPanel} from "@angular/material/expansion";
 
 @Component({
   selector: 'app-activities',
