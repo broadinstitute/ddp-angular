@@ -54,6 +54,10 @@
       display: flex;
       justify-content: flex-end;
       padding-top: $padding-top;
+
+      ::ng-deep .SimpleButton:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
     }
 
     .auth__dashboard {
@@ -182,6 +186,10 @@
   display: flex;
   align-items: center;
   margin-left: 15px;
+
+  ::ng-deep .SimpleButton:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
 }
 
 .auth__login {
