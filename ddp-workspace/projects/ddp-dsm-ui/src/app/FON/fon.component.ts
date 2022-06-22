@@ -32,7 +32,7 @@ import {TranslateService} from '@ngx-translate/core';
     }
 
     app-navigation {
-      grid-area: sidebarNavigation
+      grid-area: asideNavigation
     }
 
     router-outlet {
