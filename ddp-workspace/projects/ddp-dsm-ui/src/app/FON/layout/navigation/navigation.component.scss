@@ -20,6 +20,11 @@ aside {
       display: flex;
       justify-content: space-between;
 
+      mat-icon:hover {
+        color: $__White;
+        cursor: pointer;
+      }
+
       .toggleMenuBtn {
         color: #BCC3C9;
         transform: rotate(0.5turn);
