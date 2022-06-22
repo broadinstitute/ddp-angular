@@ -5,11 +5,11 @@
       <div class="paragraph-header-1" [innerHTML]="'home.paragraph1Header' | translate"></div>
       <div class="paragraph-description-1" [innerHTML]="'home.paragraph1Text' | translate"></div>
       <div class="buttons">
-        <button class="count-me-in-button" [routerLink]="['/count-me-in']">
+        <button class="count-me-in-button btn" [routerLink]="['/count-me-in']">
           <div class="count-me-in-button-text" [innerHTML]="'home.countMeInBtn' | translate"></div>
         </button>
-        <button class="learn-more-button" [routerLink]="['/faq']">
-          <div class="learn-more-button-text" [innerHTML]="'home.learMoreBtn' | translate"></div>
+        <button class="learn-more-button btn" [routerLink]="['/faq']">
+          <span class="learn-more-button-text" [innerHTML]="'home.learMoreBtn' | translate"></span>
         </button>
       </div>
     </div>
@@ -85,7 +85,7 @@
     </div>
     <div class="paragraph-button-place-5">
       <button class="paragraph-button-5" [routerLink]="['/faq']">
-        <div class="paragraph-button-text-5" [innerHTML]="'App.FAQ.Button.MoreFAQs' | translate"></div>
+        <span class="paragraph-button-text-5" [innerHTML]="'App.FAQ.Button.MoreFAQs' | translate"></span>
       </button>
     </div>
   </section>
@@ -105,42 +105,35 @@
   </div>
   <div class="stay-informed">
     <div class="icons">
-      <div class="social-media__links">
-        <a class="social-media__link" [href]="twitterUrl" target="_blank" (click)="sendSocialMediaAnalytics('twitter')">
-          <img
-            class="social-media__logo"
-            lazy-resource
-            src="assets/images/twitter.svg"
-            [alt]="'Common.Alts.Twitter' | translate"
-          />
-        </a>
-        <a
-          class="social-media__link"
-          [href]="facebookUrl"
-          target="_blank"
-          (click)="sendSocialMediaAnalytics('facebook')"
-        >
-          <img
-            class="social-media__logo"
-            lazy-resource
-            src="assets/images/facebook.svg"
-            [alt]="'Common.Alts.Facebook' | translate"
-          />
-        </a>
-        <a
-          class="social-media__link"
-          [href]="instagramUrl"
-          target="_blank"
-          (click)="sendSocialMediaAnalytics('facebook')"
-        >
-          <img
-            class="social-media__logo"
-            lazy-resource
-            src="assets/images/instagram.png"
-            [alt]="'Common.Alts.Instagram' | translate"
-          />
-        </a>
-      </div>
+      <a class="social-media__link" [href]="twitterUrl" target="_blank" (click)="sendSocialMediaAnalytics('twitter')">
+        <img
+          class="social-media__logo"
+          lazy-resource
+          src="assets/images/twitter.svg"
+          [alt]="'Common.Alts.Twitter' | translate"
+        />
+      </a>
+      <a class="social-media__link" [href]="facebookUrl" target="_blank" (click)="sendSocialMediaAnalytics('facebook')">
+        <img
+          class="social-media__logo"
+          lazy-resource
+          src="assets/images/facebook.svg"
+          [alt]="'Common.Alts.Facebook' | translate"
+        />
+      </a>
+      <a
+        class="social-media__link"
+        [href]="instagramUrl"
+        target="_blank"
+        (click)="sendSocialMediaAnalytics('facebook')"
+      >
+        <img
+          class="social-media__logo"
+          lazy-resource
+          src="assets/images/instagram.png"
+          [alt]="'Common.Alts.Instagram' | translate"
+        />
+      </a>
     </div>
     <div class="social-media-title" [innerHTML]="'home.stayInformed.socialMediaTitles' | translate"></div>
     <div class="sign-up-text" [innerHTML]="'home.stayInformed.signUpText' | translate"></div>

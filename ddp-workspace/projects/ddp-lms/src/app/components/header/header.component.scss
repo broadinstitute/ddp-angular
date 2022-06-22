@@ -68,6 +68,10 @@
       left: 50%;
       transform: translateX(-50%);
     }
+
+    @media (max-width: 340px) {
+      gap: 0;
+    }
   }
 
   &.panel-opened {
