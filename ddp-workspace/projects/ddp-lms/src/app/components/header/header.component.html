@@ -43,7 +43,7 @@
     </div>
 
     <aside
-      *ngIf="!isAuthenticated && headerConfig.showLoginButton && !(showHamburgerVersion$ | async)"
+      *ngIf="!isAuthenticated && customService.showLoginButton && !(showHamburgerVersion$ | async)"
       class="loginOutButtons"
     >
       <app-login-out></app-login-out>

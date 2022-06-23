@@ -32,7 +32,8 @@ export class HeaderComponent implements OnInit {
     private communicationService: CommunicationService,
     private analytics: AnalyticsEventsService,
     private breakPointObserver: BreakpointObserver,
-    public headerConfig: HeaderService,
+    public headerConfig: HeaderConfigurationService,
+    public customService: HeaderService,
     @Inject(DOCUMENT) private document: any
   ) {}
 

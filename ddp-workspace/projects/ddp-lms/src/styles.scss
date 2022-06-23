@@ -9,315 +9,320 @@
 
 html,
 body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    font-size: 16px;
-    font-weight: 400;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    font-family: $primary-font, sans-serif;
-    color: $text-color;
-    overflow-y: scroll;
+  font-family: $primary-font, sans-serif;
+  color: $text-color;
+  overflow-y: scroll;
 }
 
 @media only screen and (max-width: $desktop-breakpoint) {
-    html {
-        font-size: 14px;
-    }
+  html {
+    font-size: 14px;
+  }
 }
 
 @media only screen and (max-width: $tablet-breakpoint) {
-    html {
-        font-size: 12px;
-    }
+  html {
+    font-size: 12px;
+  }
 }
 
 .herotext {
-    color: #F1E4FB;
+  color: #f1e4fb;
 }
 
 .main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100%;
 }
 
 a {
-    cursor: pointer;
-    text-decoration: none;
-    color: $primary-color;
+  cursor: pointer;
+  text-decoration: none;
+  color: $primary-color;
 
-    &:focus, &:hover {
-        text-decoration: underline;
-    }
+  &:focus,
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
-ol li, p, ul li {
-    font-size: 1.125rem;
-    line-height: 2rem;
+ol li,
+p,
+ul li {
+  font-size: 1.125rem;
+  line-height: 2rem;
 }
 
 h1 {
-    font-family: $primary-font-medium;
-    font-size: 1.5rem;
-    font-weight: normal;
+  font-family: $primary-font-medium;
+  font-size: 1.5rem;
+  font-weight: normal;
 }
 
 // language selector
 ddp-language-selector {
-    .ddp-globe {
-        stroke: $text-color;
-        fill: transparent;
-        vertical-align: middle;
-        margin-right: 0.2rem;
-    }
+  .ddp-globe {
+    stroke: $text-color;
+    fill: transparent;
+    vertical-align: middle;
+    margin-right: 0.2rem;
+  }
 }
 
 .footer {
-    .ddp-globe {
-        stroke: white;
-    }
+  .ddp-globe {
+    stroke: white;
+  }
 }
 
 .wrapper {
-    height: 100vh;
-    margin-bottom: $footer-height;
-    padding-bottom: $footer-height;
-    padding-top: $header-height;
-    box-sizing: border-box;
+  height: 100vh;
+  margin-bottom: $footer-height;
+  padding-bottom: $footer-height;
+  padding-top: $header-height;
+  box-sizing: border-box;
 
-    &.lms-page {
-        padding-top: 0;
-    }
+  &.lms-page {
+    padding-top: 0;
+  }
 }
 
 .Italic {
-    font-style: italic;
+  font-style: italic;
 }
 
 .Link {
-    color: $primary-color;
+  color: $primary-color;
 }
 
 .Modal-title {
-    @extend .static-page-title;
+  @extend .static-page-title;
 
-    margin: 10px 0 12px 0;
-    display: flex;
-    justify-content: space-between;
-    position: relative;
+  margin: 10px 0 12px 0;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
 
-    .mat-icon-button {
-        top: -20px;
-        right: -15px;
-    }
+  .mat-icon-button {
+    top: -20px;
+    right: -15px;
+  }
 }
 
 .Modal-text {
-    font-size: 1.2rem;
-    line-height: 1.8rem;
-    margin-bottom: 15px;
-    margin-top: 0;
+  font-size: 1.2rem;
+  line-height: 1.8rem;
+  margin-bottom: 15px;
+  margin-top: 0;
 }
 
 .Modal-progress {
-    margin: 5px 0;
+  margin: 5px 0;
 }
 
 .JoinDialogFiled {
-    width: 100%;
+  width: 100%;
 }
 
 .JoinDialogNameField {
-    width: 50%;
-    margin: 0 30px 0 0;
+  width: 50%;
+  margin: 0 30px 0 0;
 }
 
 .JoinDialogLastnameField {
-    width: 50%;
+  width: 50%;
 }
 
 .JoinDialogGroupFields {
-    display: flex;
+  display: flex;
 }
 
 .JoinField--margin {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 @media only screen and (max-width: $tablet-breakpoint) {
-    .JoinDialogGroupFields {
-        flex-direction: column;
-    }
+  .JoinDialogGroupFields {
+    flex-direction: column;
+  }
 
-    .JoinDialogNameField {
-        width: 100%;
-        margin: 0;
-    }
+  .JoinDialogNameField {
+    width: 100%;
+    margin: 0;
+  }
 
-    .JoinDialogLastnameField {
-        width: 100%;
-    }
+  .JoinDialogLastnameField {
+    width: 100%;
+  }
 }
 
 .ButtonFilled--neutral--margin {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 .button_primary {
-  background-color: #9953CE;
-  border: 4px #9953CE;
+  background-color: #9953ce;
+  border: 4px #9953ce;
+  color: white;
   &:hover {
     background-color: rgba(153, 83, 206, 0.89) !important;
   }
 }
 
 .NoMargin {
-    margin: 0!important;
+  margin: 0 !important;
 }
 
 .ErrorMessage {
-    border-top: 2px solid $warn-color;
-    margin-top: 30px;
-    font-size: 0.9rem;
-    color: $warn-color;
-    font-weight: 300;
-    padding: 15px 0;
+  border-top: 2px solid $warn-color;
+  margin-top: 30px;
+  font-size: 0.9rem;
+  color: $warn-color;
+  font-weight: 300;
+  padding: 15px 0;
 
-    a {
-        text-decoration: underline !important;
-    }
+  a {
+    text-decoration: underline !important;
+  }
 }
 
 .mat-error {
-    font-size: 0.9rem;
-    color: $warn-color;
+  font-size: 0.9rem;
+  color: $warn-color;
 }
 
 .normal {
-    font-family: $primary-font;
-    font-weight: 400;
-    font-size: 1.125rem;
-    line-height: 2rem;
+  font-family: $primary-font;
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 2rem;
 }
 
-.bold, .medium {
-    font-family: $primary-font-medium;
+.bold,
+.medium {
+  font-family: $primary-font-medium;
 }
 
 .content {
-    margin: 0 auto;
-    padding: 0 1.5625rem;
+  margin: 0 auto;
+  padding: 0 1.5625rem;
 }
 
 .content_medium {
-    max-width: 1100px;
+  max-width: 1100px;
 }
 
 .content_tight {
-    max-width: 800px;
+  max-width: 800px;
 }
 
 .section {
-    width: 100%;
+  width: 100%;
 }
 
 $tooltip-icon-size: 24px;
 .tooltip {
-    display: inline-block;
-    vertical-align: middle;
+  display: inline-block;
+  vertical-align: middle;
+  height: $tooltip-icon-size;
+  margin-left: 3px;
+
+  &__icon {
     height: $tooltip-icon-size;
-    margin-left: 3px;
+    width: $tooltip-icon-size;
+  }
 
-    &__icon {
-        height: $tooltip-icon-size;
-        width: $tooltip-icon-size;
-    }
-
-    &__box {
-        font-size: 1rem;
-    }
+  &__box {
+    font-size: 1rem;
+  }
 }
 
 .section-spinner {
-    display: flex;
-    align-items: center;
-    flex: 1;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
 }
 
 .static-spinner {
-    padding-bottom: 8rem;
+  padding-bottom: 8rem;
 }
 
 // password page
 .password-section__question {
-    margin: 1.5rem 0 0.5rem 0;
+  margin: 1.5rem 0 0.5rem 0;
 }
 
 .password-section__button {
-    margin: 3rem 0 0 0;
+  margin: 3rem 0 0 0;
 }
 
 // participation section
 .participate-step-label {
-    font-size: 1rem;
-    font-family: $primary-font-medium;
-    letter-spacing: -0.07px;
-    line-height: 24px;
-    margin-right: 0.5rem;
+  font-size: 1rem;
+  font-family: $primary-font-medium;
+  letter-spacing: -0.07px;
+  line-height: 24px;
+  margin-right: 0.5rem;
 }
 
 .participate-step-time {
-    font-size: 1.5rem;
-    letter-spacing: -0.07px;
-    line-height: 24px;
-    margin-top: 1rem;
+  font-size: 1.5rem;
+  letter-spacing: -0.07px;
+  line-height: 24px;
+  margin-top: 1rem;
 }
 
 // for Welcome page / Colorectal page mostly
 section {
-    width: 100%;
-    box-sizing: border-box;
+  width: 100%;
+  box-sizing: border-box;
 
-    &.introduction {
-        max-width: 1440px;
+  &.introduction {
+    max-width: 1440px;
 
-        .logos {
-            img:first-child {
-                margin-right: 5rem;
-            }
-        }
+    .logos {
+      img:first-child {
+        margin-right: 5rem;
+      }
     }
+  }
 
-    &.stay-informed {
-        padding-top: 5.375rem;
-        padding-bottom: 4.5rem;
-    }
+  &.stay-informed {
+    padding-top: 5.375rem;
+    padding-bottom: 4.5rem;
+  }
 
-    &.join-cmi {
-        padding-top: 4.75rem;
-        padding-bottom: 6.19rem;
-    }
+  &.join-cmi {
+    padding-top: 4.75rem;
+    padding-bottom: 6.19rem;
+  }
 
-    .btn {
-        font-size: 1.5rem;
-        padding: 1.5rem 2.3rem;
-        line-height: 22px;
-        white-space: normal;
-    }
+  .btn {
+    font-size: 1.5rem;
+    padding: 1.5rem 2.3rem;
+    line-height: 22px;
+    white-space: normal;
+  }
 }
 
 .mat-colorectal {
-    background-color: $primary-colorectal-color !important;
-    color: #fff !important;
+  background-color: $primary-colorectal-color !important;
+  color: #fff !important;
 }
 
 .listText {

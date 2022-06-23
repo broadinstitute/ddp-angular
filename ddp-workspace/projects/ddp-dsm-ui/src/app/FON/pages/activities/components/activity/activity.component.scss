@@ -146,12 +146,8 @@ $field-disabled-border: $__Mulled_wine_transparent;
     }
 
     .mat-form-field-label-wrapper {
-      left: 15px;
+      left: 8px;
       top: -5px;
-    }
-
-    .mat-input-element {
-      width: unset !important;
     }
   }
 
@@ -168,6 +164,10 @@ $field-disabled-border: $__Mulled_wine_transparent;
 
     .mat-form-field-infix {
       width: auto;
+    }
+
+    .mat-error {
+      margin-top: 16px;
     }
   }
 
@@ -196,6 +196,7 @@ $field-disabled-border: $__Mulled_wine_transparent;
     }
 
     .mat-input-element {
+      box-sizing: border-box;
       height: auto;
       padding: 14px 24px 14px 8px !important;
       color: #2D333E !important;
@@ -290,6 +291,25 @@ $field-disabled-border: $__Mulled_wine_transparent;
     }
   }
 
+  .equation-value {
+    margin: 12px 8px;
+  }
+
+  .Question--PICKLIST {
+    .ddp-option-details-field {
+      display: block;
+      min-width: 50%;
+      border: none;
+      background-color: unset;
+      border-bottom: 1px solid #737E8E;
+      border-radius: 0;
+
+      .mat-form-field-label {
+        display: none !important;
+      }
+    }
+  }
+
   .activity-buttons {
     margin: 0 -40px;
     padding: 16px 40px;
@@ -302,17 +322,30 @@ $field-disabled-border: $__Mulled_wine_transparent;
   /* tabular block for Enrollment form */
   .main_activity.ENROLLMENT {
     .tabular-container {
-      grid-template-columns: 70px auto 1fr 1fr !important;
+      grid-template-columns: 28px auto 1fr 1fr !important;
+      border: none !important;
 
       .header {
-        text-align: center;
+        text-align: left;
+        font-weight: 600;
+
+        &:nth-child(2) {
+          padding-left: 12px;
+        }
+      }
+
+      .cell {
+        border: none !important;
+
+        .Question--COMPOSITE {
+          min-width: 280px;
+        }
       }
 
       ddp-activity-composite-answer {
         .ddp-answer-container {
           grid-template-columns: 1fr 1fr !important;
           place-items: center;
-          gap: 30px;
 
           .ddp-answer-field {
             padding: 0;
@@ -335,6 +368,13 @@ $field-disabled-border: $__Mulled_wine_transparent;
           .ddp-answer-field {
             padding: unset !important;
 
+            /* TODO: remove this temp FIX!! just to fix the wrong config form back-end */
+            &::after {
+              content: 'OR';
+              padding-left: 16px;
+            }
+            /* end of the TODO */
+
             select {
               margin: 0;
             }
@@ -348,6 +388,7 @@ $field-disabled-border: $__Mulled_wine_transparent;
   .main_activity.CARDIAC_CT {
     .tabular-container {
       grid-template-columns: auto 150px 150px !important;
+      border: none !important;
 
       /* TODO: remove this temp FIX!! just to fix the wrong config form back-end */
       .header:nth-of-type(3) {
@@ -357,14 +398,23 @@ $field-disabled-border: $__Mulled_wine_transparent;
 
       .header, .question-title {
         padding-left: 20px !important;
+        font-weight: 600;
       }
 
       .question-title {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
+        margin-top: 10px;
       }
 
       .cell {
+        border: none !important;
+
+        &:nth-child(12),
+        &:nth-child(20) {
+          height: 48px;
+        }
+
         &:nth-child(10),
         &:nth-child(18) {
           grid-column: span 2 !important;
@@ -395,8 +445,17 @@ $field-disabled-border: $__Mulled_wine_transparent;
         &-CQ_LV_END_EJECTION_FRACTION
         {
           .ddp-answer-container {
-            grid-template-columns: auto!important;
+            grid-template-columns: auto !important;
             justify-content: left;
+          }
+        }
+
+        &-CQ_RV_CARDIAC_OUTPUT,
+        &-CQ_LV_CARDIAC_OUTPUT
+        {
+          .ddp-answer-container {
+            grid-template-columns: auto auto !important;
+            justify-content: space-around;
           }
         }
       }
@@ -416,5 +475,4 @@ $field-disabled-border: $__Mulled_wine_transparent;
       }
     }
   }
-
 }

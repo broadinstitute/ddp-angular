@@ -1,14 +1,30 @@
-<div class="participants">
-  <h3>Patients</h3>
-  <div>
-    <h1>Patients ({{totalCount$ | async}})</h1>
+<div class="patients">
+  <header class="patients-header">
+    <p>Patients</p>
+  </header>
+
+  <section class="patients-buttons">
+    <button class="btn_secondary">
+      <mat-icon>search</mat-icon>
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </button>
     <button class="btn_secondary" [openInModal]="registerPatientsModalComponent">
       <mat-icon>people</mat-icon>
-      Register
+      Register patients
     </button>
-  </div>
-  <table class="participants-table">
-    <thead>
+    <button class="btn_secondary">
+      <mat-icon>cloud_upload</mat-icon>
+      Upload patient data
+    </button>
+  </section>
+
+  <section class="patients-info">
+    <p>All patients ({{totalCount$ | async}})</p>
+  </section>
+
+  <section class="patients-table">
+    <table>
+      <thead>
       <tr class="header">
         <th>FON ID#</th>
         <th>First name</th>
@@ -17,32 +33,35 @@
         <th>Registered</th>
         <th>Last updated</th>
       </tr>
-    </thead>
-    <ng-container *ngIf="!(loading$ | async) else loadingSpinner">
-      <tbody *ngIf="(patients$ | async) as pts">
-      <tr *ngFor="let pt of pts" (click)="openActivities(pt)">
-        <td>{{ pt.ID }}</td>
-        <td>{{ pt.firstName }}</td>
-        <td>{{ pt.lastName }}</td>
-        <td>{{ pt.birthdate }}</td>
-        <td>{{ pt.registered }}</td>
-        <td>{{ pt.lastUpdated }}</td>
-      </tr>
-      </tbody>
-    </ng-container>
+      </thead>
+      <ng-container *ngIf="!(loading$ | async) else loadingSpinner">
+        <tbody *ngIf="(patients$ | async) as pts">
+        <tr *ngFor="let pt of pts" (click)="openActivities(pt)">
+          <td>{{ pt.ID }}</td>
+          <td>{{ pt.firstName }}</td>
+          <td>{{ pt.lastName }}</td>
+          <td>{{ pt.birthdate | date }}</td>
+          <td>{{ pt.registered | date }}</td>
+          <td>{{ pt.lastUpdated | date }}</td>
+        </tr>
+        </tbody>
+      </ng-container>
 
-    <ng-template #loadingSpinner>
-      <mat-spinner></mat-spinner>
-    </ng-template>
-  </table>
+      <ng-template #loadingSpinner>
+        <mat-spinner></mat-spinner>
+      </ng-template>
+    </table>
 
-  <div class="pagination">
-    <mat-paginator
-      [pageIndex]="pageIndex"
-      [length]="totalCount$ | async"
-      [pageSize]="pageSize"
-      (page)="setPage($event)"
-      [pageSizeOptions]="[10, 50, 100]" aria-label="Select page">
-    </mat-paginator>
-  </div>
+    <footer>
+      <mat-paginator
+        [pageIndex]="pageIndex"
+        [length]="totalCount$ | async"
+        [pageSize]="pageSize"
+        (page)="setPage($event)"
+        [pageSizeOptions]="[10, 50, 100]" aria-label="Select page">
+      </mat-paginator>
+    </footer>
+  </section>
+
+
 </div>

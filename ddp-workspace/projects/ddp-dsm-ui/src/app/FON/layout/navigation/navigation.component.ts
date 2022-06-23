@@ -1,9 +1,10 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 import { bottomNavItems, topNavItems } from './navItems';
 import { Auth } from '../../../services/auth.service';
 import { SessionService } from '../../../services/session.service';
-import {ActivatedRoute} from '@angular/router';
+
 
 @Component({
   selector: 'app-navigation',
@@ -11,10 +12,11 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./navigation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-
 export class NavigationComponent {
   readonly topNavigation = topNavItems;
   readonly botNavigation = bottomNavItems(this.getUserName());
+  @Output() toggleNav = new EventEmitter<void>();
+  isHidden: boolean;
 
   constructor(
     private auth: Auth,
@@ -32,6 +34,12 @@ export class NavigationComponent {
   }
 
   isActive(route: string): boolean {
-    return route === this.activatedRoute.snapshot.firstChild.routeConfig.path;
+    const passedRoute = route === '/fon' ? '' : route;
+    return passedRoute === this.activatedRoute.firstChild.snapshot.routeConfig.path;
+  }
+
+  toggleNavMenu(): void {
+    this.isHidden = !this.isHidden;
+    this.toggleNav.emit();
   }
 }

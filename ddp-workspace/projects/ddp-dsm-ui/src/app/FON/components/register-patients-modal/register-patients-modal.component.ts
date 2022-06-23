@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Subscription, tap} from 'rxjs';
 
 @Component({
   selector: 'app-add-patients-modal',
@@ -8,18 +9,18 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angul
   styleUrls: ['./register-patients-modal.component.scss'],
 })
 export class RegisterPatientsModalComponent implements OnInit {
+  uploading = false;
 
   readonly addPatientForm: FormGroup = this.formBuilder.group({
     patients: this.formBuilder.array([])
   });
 
-  constructor(public dialogRef: MatDialogRef<RegisterPatientsModalComponent>,
+  constructor(private dialogRef: MatDialogRef<RegisterPatientsModalComponent>,
               private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
     this.addPatient();
-    this.dialogRef.updatePosition({ top: '24px'});
   }
 
   public get patients(): FormArray {
@@ -44,11 +45,16 @@ export class RegisterPatientsModalComponent implements OnInit {
   }
 
   public registerPatient(): void {
-    const {patients} = this.addPatientForm.getRawValue();
-    this.closeDialog(patients);
+    console.log(this.addPatientForm.getRawValue());
+    this.uploading = true;
+    setTimeout(() => {
+      this.closeDialog();
+      this.uploading = false;
+    }, 2000);
+
   }
 
-  public closeDialog(patients?: any[]): void {
-    this.dialogRef.close(patients);
+  public closeDialog(): void {
+    this.dialogRef.close();
   }
 }
