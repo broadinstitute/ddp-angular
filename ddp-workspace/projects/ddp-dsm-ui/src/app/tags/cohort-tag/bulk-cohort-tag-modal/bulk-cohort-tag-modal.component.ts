@@ -56,7 +56,7 @@ export class BulkCohortTagModalComponent implements OnInit  {
         new BulkCohortTag(this.tags, this.data.manualFilter, this.data.savedFilter, this.data.selectedPatients, this.selectedOption);
     this.dsmService.bulkCreateCohortTags(JSON.stringify(bulkCohortTag), this.compService.getRealm()).subscribe({
       next: data => {
-        this.dialogRef.close();
+        this.dialogRef.close(data);
         this.matDialog.open(ParticipantUpdateResultDialogComponent, {data: {message: "Cohort tags successfully created"}});
       }, error: () => {
         this.dialogRef.close();

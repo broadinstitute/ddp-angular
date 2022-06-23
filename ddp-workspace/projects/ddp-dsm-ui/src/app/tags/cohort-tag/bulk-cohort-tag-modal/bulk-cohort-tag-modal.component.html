@@ -17,7 +17,7 @@
 <mat-radio-group aria-label="Select an option"
     [(ngModel)]="selectedOption">
     <br/>
-    <mat-radio-button value="{{OPTIONS.selectedPatients}}" checked>Apply tag to selected patient(s)</mat-radio-button>
+    <mat-radio-button value="{{OPTIONS.selectedPatients}}" checked disabled="{{data.selectedPatients.length === 0}}">Apply tag to selected patient(s)</mat-radio-button>
     <br/>
     <mat-radio-button value="{{OPTIONS.allPatients}}">Apply tag to ALL patients</mat-radio-button>
 </mat-radio-group>
