@@ -21,6 +21,11 @@
         }
     },
     "App": {
+        "social": {
+            "twitter": "https://twitter.com/count_me_in",
+            "facebook": "https://www.facebook.com/joincountmein",
+            "instagram": "https://www.instagram.com/countmein"
+        },
         "HomePage": {
             "JoinCountMeInButton": "Join Count Me In",
             "LearnMoreSection": {

@@ -18,4 +18,20 @@
       {{ 'Header.Links.CountMeIn' | translate }}
     </a>
   </div>
+
+  <div class="buttons" *ngIf="isAuthenticated">
+    <div
+      *ngIf="headerConfig.showLoginButton"
+      class="auth__login header-link"
+      [ngClass]="{ 'header-button': !headerConfig.showMainButtons }"
+    >
+      <ddp-sign-in-out></ddp-sign-in-out>
+    </div>
+    <div class="auth__dashboard">
+      <button class="header-link simple-button cmiBtn" routerLink="dashboard" routerLinkActive="header-link_active">
+        <div></div>
+        <span translate>Common.Navigation.Dashboard</span>
+      </button>
+    </div>
+  </div>
 </div>

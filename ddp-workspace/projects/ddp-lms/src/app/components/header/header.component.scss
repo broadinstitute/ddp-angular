@@ -54,6 +54,14 @@
       display: flex;
       justify-content: flex-end;
       padding-top: $padding-top;
+
+      ::ng-deep .SimpleButton:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+    }
+
+    .auth__dashboard {
+      cursor: pointer;
     }
 
     &.hamburger-version {
@@ -64,9 +72,8 @@
 
     .mobile-nav {
       position: absolute;
-      top: $height;
-      left: 50%;
-      transform: translateX(-50%);
+      top: 4.25rem;
+      left: 10%;
     }
 
     @media (max-width: 340px) {
@@ -179,6 +186,10 @@
   display: flex;
   align-items: center;
   margin-left: 15px;
+
+  ::ng-deep .SimpleButton:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
 }
 
 .auth__login {
@@ -194,11 +205,13 @@
   border-radius: 4px;
   color: white;
   font-size: 1.0625rem;
-}
+  transition: color 0.3s;
 
-.cmiBtn:hover {
-  background-color: #7f30b8;
-  border-color: #7f30b8;
+  &:hover {
+    background-color: #7f30b8;
+    border-color: #7f30b8;
+    cursor: pointer;
+  }
 }
 
 @media only screen and (max-width: 650px) {
@@ -210,10 +223,6 @@
 @media only screen and (max-width: 850px) {
   .breadcrumbs {
     display: none;
-  }
-
-  .sticky {
-    display: unset;
   }
 }
 
