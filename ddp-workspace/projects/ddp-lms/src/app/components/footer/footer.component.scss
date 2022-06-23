@@ -20,19 +20,21 @@
     .copy-right {
       color: white;
       justify-content: space-between;
+      padding: 2.125rem $padding-right 2.75rem $padding-left;
       display: flex;
       flex-wrap: wrap;
       gap: 2rem;
-      padding: 2.125rem $padding-right 2.75rem $padding-left;
 
       p {
         font-size: 1rem;
+        display: flex;
+        gap: 1rem;
       }
 
       ul {
         list-style: none;
         display: flex;
-        gap: 1rem;
+        gap: 3rem;
         align-items: center;
         flex-wrap: wrap;
         padding: 0;
