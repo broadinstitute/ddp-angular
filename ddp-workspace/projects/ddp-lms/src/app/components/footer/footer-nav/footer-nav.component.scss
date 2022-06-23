@@ -47,6 +47,23 @@
     .button {
       padding: 0.91rem 2rem;
     }
+
+    .cmiBtn {
+      padding: 0.7rem 1.75rem !important;
+      background-color: #9953ce;
+      border-color: #9953ce;
+      border-radius: 4px;
+      color: white;
+      font-size: 1.0625rem;
+      transition: color .3s;
+
+      &:hover {
+        background-color: #7f30b8;
+        border-color: #7f30b8;
+        cursor: pointer;
+      }
+    }
+
   }
 
   @media (max-width: 576px) {
