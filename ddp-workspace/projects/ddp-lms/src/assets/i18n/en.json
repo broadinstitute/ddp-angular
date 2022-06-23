@@ -316,7 +316,7 @@
     "SubmitButton": "Submit",
     "CloseButton": "Close",
     "AddButton": "ADD",
-    "CancelBtn": "CANCEL",
+    "CancelBtn": "Cancel",
     "NextButton": "Next",
     "PreviousButton": "Back",
     "SavingButton": "Saving",
@@ -539,7 +539,7 @@
         {
           "name": "Yemi Getachew",
           "image": "/assets/images/advisors/adimage.jpg",
-          "bio": "<div class=\"herotext\">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n</div>"
+          "bio": ""
         },
         {
           "name": "Matthew Haist",
@@ -549,7 +549,7 @@
         {
           "name": "Nikky Hughes",
           "image": "/assets/images/advisors/adimage.jpg",
-          "bio": "<div class=\"herotext\">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n</div>"
+          "bio": ""
         },
         {
           "name": "Cherry Kim",
@@ -559,7 +559,7 @@
         {
           "name": "Miyoung Kim",
           "image": "/assets/images/advisors/adimage.jpg",
-          "bio": "<div class=\"herotext\">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n</div>"
+          "bio": ""
         },
         {
           "name": "Mary Anne Oldford",
@@ -569,7 +569,7 @@
         {
           "name": "Bella Pesina",
           "image": "/assets/images/advisors/adimage.jpg",
-          "bio": "<div class=\"herotext\">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n</div>"
+          "bio": ""
         },
         {
           "name": "Blake Tomkinson",

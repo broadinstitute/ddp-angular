@@ -1,8 +1,11 @@
-<aside>
+<aside [ngClass]="{'hidden-menu': isHidden}">
   <div class="titles">
     <div class="topTitle">
       <p>Study Manager</p>
-      <mat-icon>keyboard_tab</mat-icon>
+      <mat-icon
+        (click)="toggleNavMenu()"
+        [ngClass]="isHidden? 'toggleMenuBtn-hidden' : 'toggleMenuBtn'">keyboard_tab
+      </mat-icon>
     </div>
     <div class="topSubTitle">
       <p>Fontan Outcomes Network</p>

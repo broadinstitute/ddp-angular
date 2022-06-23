@@ -1,13 +1,13 @@
 <div class="content_tight faq-section">
-    <div class="faq-section-header">
-      <button mat-flat-button class="expand-btn" (click)="toggleAll()">
-        <mat-icon class="icon">{{ isAllOpened ? 'clear' : 'add' }}</mat-icon>
-        <span>{{ (isAllOpened ? 'App.FAQ.Button.Collapse' : 'App.FAQ.Button.Expand') | translate }}</span>
-      </button>
+  <button mat-flat-button class="expand-btn" (click)="toggleAll()">
+    <mat-icon class="icon">{{ isAllOpened ? 'clear' : 'add' }}</mat-icon>
+    <span>{{ (isAllOpened ? 'App.FAQ.Button.Collapse' : 'App.FAQ.Button.Expand') | translate }}</span>
+  </button>
 
+  <div class="accordion-section">
+    <div class="faq-section-header">
       <h3 class="no-margin">{{ title }}</h3>
     </div>
-
     <mat-accordion #a="matAccordion" hideToggle="true" multi="true" displayMode="flat">
       <ng-container *ngFor="let item of questions">
         <mat-expansion-panel #panel class="faq-section-expansion-panel">
@@ -28,5 +28,6 @@
       </ng-container>
     </mat-accordion>
   </div>
+</div>
 
-  <mat-divider></mat-divider>
+<mat-divider></mat-divider>

@@ -5,19 +5,19 @@
 }
 
 .headerPlace {
-  height: 160px;
-  background-color: #C59CE4;
+  height: 10rem;
+  background-color: #c59ce4;
   width: 100%;
 }
 
 .headerText {
-  height: 58px;
+  height: 3.625rem;
   color: #000000;
-  font-family: "Untitled Sans", sans-serif;
-  font-size: 48px;
+  font-family: 'Untitled Sans', sans-serif;
+  font-size: 3rem;
   font-weight: 300;
   letter-spacing: 0;
-  line-height: 58px;
+  line-height: 3.625rem;
   text-align: center;
   cursor: default;
   margin: 0 auto 5.625rem;
@@ -26,82 +26,96 @@
 }
 
 .purposePlace {
-  height: 324px;
-  background-color: #F1E4FB;
-  width: 100%;
+  background-color: #f1e4fb;
   text-align: -webkit-center;
-  margin-bottom: 44px;
-}
+  margin-bottom: 2.75rem;
+  width: 100%;
 
-.the-purpose-of-this {
-  height: 120px;
-  width: 720px;
-  color: #000000;
-  font-family: "Untitled Sans", sans-serif;
-  font-size: 20px;
-  letter-spacing: 0;
-  line-height: 30px;
-  text-align: left;
-  margin: 48px 0 40px 0;
-}
+  .inner-container {
+    padding: 3rem;
 
-.downloadPdf {
-  cursor: pointer;
-  height: 56px;
-  width: 600px;
-  border-radius: 4px;
-  background-color: #9953CE;
-  border: none;
-}
+    .the-purpose-of-this {
+      color: #000000;
+      font-family: 'Untitled Sans', sans-serif;
+      font-size: 1.25rem;
+      letter-spacing: 0;
+      line-height: 1.875rem;
+      text-align: left;
+      margin: 3rem 0 !important;
+      width: 60%;
 
+      @media(max-width: 776px){
+        width: 80%;
+      }
 
-.downloadPdf:active {
-  background-color: #9953ce96;
-}
+      @media(max-width: 576px){
+        width: 100%;
+      }
+    }
 
-.downloadTitle {
-  color: #FFFFFF;
-  font-family: "Untitled Sans", sans-serif;
-  font-size: 22px;
-  letter-spacing: -0.01px;
-  line-height: 24px;
+    .downloadPdf {
+      cursor: pointer;
+      padding: 1.25rem 3rem;
+      border-radius: 0.25rem;
+      background-color: #9953ce;
+      border: none;
+
+      .downloadTitle {
+        color: #ffffff;
+        font-family: 'Untitled Sans', sans-serif;
+        font-size: 1.375rem;
+        letter-spacing: -6.25e-4rem;
+        line-height: 1.5rem;
+      }
+
+      &:active {
+        background-color: #9953ce96;
+      }
+    }
+  }
 }
 
 .paragraphsList {
-  width: 720px;
+  width: 50%;
   color: #000000;
-  font-family: "Untitled Sans", sans-serif;
+  font-family: 'Untitled Sans', sans-serif;
   letter-spacing: 0;
-  line-height: 30px;
-  padding-bottom: 30px;
+  line-height: 1.875rem;
+  padding-bottom: 1.875rem;
+
+  @media (max-width: 776px) {
+    width: 70%;
+  }
+
+  @media (max-width: 576px) {
+    width: 80%;
+  }
 }
 
 .paragraph {
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 
   .paragraphTitle {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 1.25rem;
   }
 
   .paragraphText {
     color: #000000;
-    font-family: "Untitled Sans", sans-serif;
+    font-family: 'Untitled Sans', sans-serif;
     letter-spacing: 0;
-    line-height: 30px;
+    line-height: 1.875rem;
     font-weight: normal;
-    font-size: 19px;
+    font-size: 1.1875rem;
   }
 
   .paragraphText1Highlighted {
-    color: #C59CE4;
-    font-size: 19px;
+    color: #c59ce4;
+    font-size: 1.1875rem;
     text-decoration: underline;
   }
 
   .partOne {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
   }
 }
-
-

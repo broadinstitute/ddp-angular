@@ -10,11 +10,11 @@
     justify-content: center;
     flex-direction: column;
 
-    $padding-left: 3rem;
-    $padding-right: 1rem;
+    $padding-left: 3.375rem;
+    $padding-right: 2rem;
 
     .footer-nav {
-      padding: 0 $padding-right 0 $padding-left;
+      padding: 3.375rem $padding-right 4rem $padding-left;
     }
 
     .copy-right {
@@ -23,7 +23,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 2rem;
-      padding: 2rem $padding-right 2rem $padding-left;
+      padding: 2.125rem $padding-right 2.75rem $padding-left;
 
       p {
         font-size: 1rem;

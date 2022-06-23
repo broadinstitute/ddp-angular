@@ -1,56 +1,58 @@
 <table class="dashboard-table" mat-table [dataSource]="activities">
   <!-- Activity Name Column -->
   <ng-container matColumnDef="activityName">
-    <th mat-header-cell *matHeaderCellDef>
+
+    <mat-header-cell *matHeaderCellDef>
       {{ 'SDK.UserActivities.ActivityName' | translate }}
-    </th>
-    <td
-      mat-cell
+    </mat-header-cell>
+    <mat-cell
+      
       class="activity-name"
       *matCellDef="let activity"
       [attr.data-label]="'SDK.UserActivities.ActivityName' | translate"
     >
-      {{ activity.activityName }}
-    </td>
+
+      <span>{{ activity.activityName }}</span>
+    </mat-cell>
   </ng-container>
 
   <!-- Activity Summary Column -->
   <ng-container matColumnDef="activitySummary">
-    <th mat-header-cell *matHeaderCellDef>
+    <mat-header-cell  *matHeaderCellDef>
       {{ 'SDK.UserActivities.Summary' | translate }}
-    </th>
-    <td mat-cell *matCellDef="let activity" [attr.data-label]="'SDK.UserActivities.Summary' | translate">
+    </mat-header-cell>
+    <mat-cell  *matCellDef="let activity" [attr.data-label]="'SDK.UserActivities.Summary' | translate">
       {{ activity.activitySummary }}
-    </td>
+    </mat-cell>
   </ng-container>
 
   <!-- Activity Created At Column -->
   <ng-container matColumnDef="activityCreatedAt">
-    <th mat-header-cell *matHeaderCellDef>
+    <mat-header-cell  *matHeaderCellDef>
       {{ 'SDK.UserActivities.ActivityDate' | translate }}
-    </th>
-    <td mat-cell *matCellDef="let activity" [attr.data-label]="'SDK.UserActivities.ActivityDate' | translate">
+    </mat-header-cell>
+    <mat-cell  *matCellDef="let activity" [attr.data-label]="'SDK.UserActivities.ActivityDate' | translate">
       {{ activity.createdAt | date: 'MM/dd/yyyy' }}
-    </td>
+    </mat-cell>
   </ng-container>
 
   <!-- Activity Status Column -->
   <ng-container matColumnDef="activityStatus">
-    <th mat-header-cell *matHeaderCellDef>
+    <mat-header-cell  *matHeaderCellDef>
       {{ 'SDK.UserActivities.ActivityStatus' | translate }}
-    </th>
-    <td mat-cell *matCellDef="let activity" [attr.data-label]="'SDK.UserActivities.ActivityStatus' | translate">
+    </mat-header-cell>
+    <mat-cell  *matCellDef="let activity" [attr.data-label]="'SDK.UserActivities.ActivityStatus' | translate">
         <ng-container *ngTemplateOutlet="statusIconTemplate; context: {statusIcon: getStatusIcon(activity)}" ></ng-container>
         {{'Activities.StatusCodes.' + getActivityStatusCode(activity) | translate}}
-    </td>
+    </mat-cell>
   </ng-container>
 
   <!-- Activity Actions Column -->
   <ng-container matColumnDef="activityActions">
-    <th mat-header-cell *matHeaderCellDef>
+    <mat-header-cell  *matHeaderCellDef>
       {{ 'SDK.UserActivities.ActivityActions' | translate }}
-    </th>
-    <td mat-cell *matCellDef="let activity" [attr.data-label]="'SDK.UserActivities.ActivityActions' | translate">
+    </mat-header-cell>
+    <mat-cell  *matCellDef="let activity" [attr.data-label]="'SDK.UserActivities.ActivityActions' | translate">
       <ng-container [ngSwitch]="activity.statusCode">
         <ng-container *ngSwitchCase="ActivityStatusCodes.CREATED">
           <ng-container *ngTemplateOutlet="hasPreviousInstance(activity) ? continue : start"></ng-container>
@@ -90,11 +92,11 @@
           </ng-template>
         </ng-container>
       </ng-container>
-    </td>
+    </mat-cell>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 </table>
 
 <!--status icon template-->

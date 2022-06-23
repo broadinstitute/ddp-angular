@@ -30,6 +30,7 @@
 
   <!-- article content -->
   <section *ngIf="isLoaded; else spinner" class="section article-content">
+
     <div class="content content_tight" [ngClass]="{ 'vertical-mode': isVerticalProgress }">
       <ng-container *ngIf="shouldShowReadonlyHint">
         <div class="infobox" [innerHTML]="model.readonlyHint"></div>
@@ -61,6 +62,7 @@
       <ng-container *ngIf="model">
         <div class="article-and-buttons">
           <ddp-activity-section
+            class="ddp-section"
             [section]="currentSection"
             [readonly]="isReadonly() || dataEntryDisabled"
             [validationRequested]="validationRequested"
@@ -152,7 +154,9 @@
             [ngClass]="{ active: isActive(i), completed: isCompleted(i), last: isLastStep }"
             >{{ i + 1 }}</span
           >
-          <span class="activity-step-text" [ngClass]="{ active: isActive(i) }">{{ section.name }}</span>
+          <span class="activity-step-text" [ngClass]="{ active: isActive(i), completed: isCompleted(i) }">{{
+            section.name
+          }}</span>
         </div>
       </ng-container>
     </ng-container>

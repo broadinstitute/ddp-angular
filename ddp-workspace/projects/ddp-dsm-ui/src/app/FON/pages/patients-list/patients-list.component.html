@@ -2,27 +2,26 @@
   <header class="patients-header">
     <p>Patients</p>
   </header>
-  <section class="patients-info">
-    <p>Patients ({{totalCount$ | async}})</p>
-    <div class="patients-info-buttons">
-      <button class="btn_secondary">
-        <mat-icon>filter_list</mat-icon>
-        Add Filter
-      </button>
-      <button class="btn_secondary">
-        <mat-icon>edit</mat-icon>
-        Edit
-      </button>
-      <button class="btn_secondary" [openInModal]="registerPatientsModalComponent">
-        <mat-icon>people</mat-icon>
-        Register
-      </button>
-      <button class="btn_secondary">
-        <mat-icon>cloud_upload</mat-icon>
-        Upload Data
-      </button>
-    </div>
+
+  <section class="patients-buttons">
+    <button class="btn_secondary">
+      <mat-icon>search</mat-icon>
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </button>
+    <button class="btn_secondary" [openInModal]="registerPatientsModalComponent">
+      <mat-icon>people</mat-icon>
+      Register patients
+    </button>
+    <button class="btn_secondary">
+      <mat-icon>cloud_upload</mat-icon>
+      Upload patient data
+    </button>
   </section>
+
+  <section class="patients-info">
+    <p>All patients ({{totalCount$ | async}})</p>
+  </section>
+
   <section class="patients-table">
     <table>
       <thead>
@@ -41,9 +40,9 @@
           <td>{{ pt.ID }}</td>
           <td>{{ pt.firstName }}</td>
           <td>{{ pt.lastName }}</td>
-          <td>{{ pt.birthdate }}</td>
-          <td>{{ pt.registered }}</td>
-          <td>{{ pt.lastUpdated }}</td>
+          <td>{{ pt.birthdate | date }}</td>
+          <td>{{ pt.registered | date }}</td>
+          <td>{{ pt.lastUpdated | date }}</td>
         </tr>
         </tbody>
       </ng-container>
@@ -63,7 +62,6 @@
       </mat-paginator>
     </footer>
   </section>
-
 
 
 </div>
