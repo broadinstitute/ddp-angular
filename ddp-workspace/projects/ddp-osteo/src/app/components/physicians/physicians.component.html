@@ -18,13 +18,13 @@
                 >
                     <div class="step__data">
                         <a
-                            mat-stroked-button
                             *ngIf="step.Button && stepsHrf[i]"
                             target="_blank"
                             [href]="stepsHrf[i]"
-                            class="button button_small small-letter-spacing"
                         >
-                            {{ step.Button1 }}
+                            <button>
+                                {{ step.Button1 | translate }}
+                            </button>
                         </a>
                     </div>
                 </section>
