@@ -263,7 +263,7 @@
             <td *ngIf="hasAssignees()">
               <mat-checkbox color="primary" disableRipple
                            [checked]="pt.isSelected"
-                           (change)="pt.isSelected = $event.checked; checkboxChecked()"></mat-checkbox>
+                           (change)="pt.isSelected = $event.checked; checkboxChecked(pt)"></mat-checkbox>
             </td>
 
             <!--profile values or dsm values-->

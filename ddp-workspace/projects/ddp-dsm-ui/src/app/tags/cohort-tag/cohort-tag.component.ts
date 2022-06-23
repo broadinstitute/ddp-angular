@@ -19,23 +19,23 @@ export class CohortTagComponent implements OnInit {
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   tags: CohortTag[];
 
-  public readonly COHORT_TAG = 'cohortTag';
+  public static readonly COHORT_TAG = 'cohortTag';
 
   constructor(private compService: ComponentService, private dsmService: DSMService) { }
 
   ngOnInit(): void {
     if (this.hasNotCohortTag()) {
-      this.dsm[this.COHORT_TAG] = [];
+      this.dsm[CohortTagComponent.COHORT_TAG] = [];
     }
     this.tags = this.getTags();
   }
 
   private hasNotCohortTag(): boolean {
-    return !this.dsm[this.COHORT_TAG];
+    return !this.dsm[CohortTagComponent.COHORT_TAG];
   }
 
   private getTags(): CohortTag[] {
-    return this.dsm[this.COHORT_TAG];
+    return this.dsm[CohortTagComponent.COHORT_TAG];
   }
 
   add(event: MatChipInputEvent): void {
