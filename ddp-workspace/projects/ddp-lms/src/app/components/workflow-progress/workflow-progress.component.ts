@@ -114,7 +114,7 @@ export class WorkflowProgressComponent implements OnChanges {
                 isCompleted: false,
                 activityCodes: ['CONSENT', 'CONSENT_ADDENDUM', 'CONSENT_ASSENT', 'CONSENT_ADDENDUM_PEDIATRIC', 'PARENTAL_CONSENT']
             },
-            {number: 3, name: 'WorkflowProgress.MedicalRelease', isCompleted: false, activityCodes: ['MEDICAL_RELEASE']},
+            {number: 3, name: 'WorkflowProgress.MedicalRelease', isCompleted: false, activityCodes: ['MEDICAL_RELEASE', 'MINOR_RELEASE']},
             {
                 number: 4,
                 name: 'WorkflowProgress.Questionnaire',
