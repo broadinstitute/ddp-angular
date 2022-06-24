@@ -1,257 +1,137 @@
 @use '@angular/material' as mat;
-@import '../../../app-theme.scss';
+@import "../../../app-theme.scss";
 
 .footer {
     background-color: mat.get-color-from-palette($app-theme, 900);
-    min-height: 20rem;
-}
+    width: 100%;
+    padding: 3rem 0;
 
-.content {
-    max-width: 1200px;
-    margin: auto;
-    padding: 3.25rem 1.5625rem 4rem 1.5625rem;
-    display: flex;
-}
-
-.column {
-    width: 50%;
-    min-width: 570px;
-}
-
-.mobile-contacts {
-    display: none;
-}
-
-.desktop-contacts {
-    width: 50%;
-    display: flex;
-    justify-content: flex-start;
-    margin-left: 350px;
-}
-
-.nav {
-    padding: 0 3.25rem 3.25rem 0;
-    border-bottom: 1px solid mat.get-color-from-palette($app-theme, 700);
-}
-
-.navigation,
-.project-contacts,
-.social-media {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-    display: flex;
-}
-
-.navigation__item {
-    margin-right: 2rem;
-}
-
-.footer-main-text {
-    font-size: 20px;
-    line-height: 25px;
-}
-
-
-
-.footer-secondary-text {
-    font-size: 15px;
-    line-height: 22px;
-}
-
-.footer-link {
-    white-space: nowrap;
-}
-
-.footer-link:link,
-.footer-link:visited {
-    color: mat.get-color-from-palette($app-theme, 200);
-}
-
-.footer-link:hover {
-    color: mat.get-color-from-palette($app-theme, 650);
-    text-decoration: underline;
-}
-
-.footer-link:active {
-    color: mat.get-color-from-palette($app-theme, 200);
-    text-decoration: underline;
-}
-
-.footer-link_active {
-    text-decoration: underline;
-}
-
-.cmi-info {
-    margin: 3.5rem 0 0 0;
-    display: flex;
-    align-items: center;
-}
-
-.contact-links,
-.cmi-info__logo {
-    margin-right: 2.5rem;
-}
-
-.contacts {
-    display: flex;
-    flex-direction: column;
-    margin-right: -50px;
-}
-
-.project-contacts {
-    flex-direction: column;
-    margin-bottom: 0.9rem;
-}
-
-.social-media__item {
-    margin-right: 1rem;
-}
-
-.social-media__logo {
-    width: 25px;
-    height: 25px;
-}
-
-.contacts-container,
-.cmi-info__logo,
-.social-media__link {
-    display: flex;
-}
-
-@media screen and (max-width: 1025px) {
     .content {
+        margin: auto;
         padding: 3.25rem 1.5625rem 4rem 1.5625rem;
-    }
-
-    .navigation {
-        flex-direction: column;
-    }
-
-    .navigation__item {
-        margin-bottom: 1rem;
-    }
-
-    .cmi-info {
+        display: flex;
         flex-direction: column;
         align-items: flex-start;
+        width: 80%;
+
+        .nav .navigation {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            padding: 0;
+            position: relative;
+
+            .navigation-item {
+                position: relative;
+                text-align: center;
+
+                &:last-of-type {
+                    text-align: left;
+                }
+
+                .footer-link {
+                    font-size: 1.25rem;
+                    line-height: 1.5625rem;
+
+                    &:hover {
+                        color: mat.get-color-from-palette($app-theme, 650);
+                        text-decoration: underline;
+                    }
+
+                    &.active {
+                        text-decoration: underline;
+                    }
+                }
+
+                .contacts {
+                    display: flex;
+                    flex-direction: column;
+
+                    .contacts-container {
+                        display: flex;
+                        top: 100%;
+                        left: 0;
+                        gap: 2rem;
+
+                        .contact-links-and-icons .footer-link,
+                        .address {
+                            font-size: 0.9375rem !important;
+                        }
+
+                        .contact-links-and-icons {
+                            .links {
+                                display: flex;
+                                flex-direction: column;
+                            }
+                        }
+
+                        .address {
+                            line-height: 1.2rem;
+                            width: 10rem;
+                        }
+                    }
+
+                    .social-media__logo {
+                        width: 1.5625rem;
+                        height: 1.5625rem;
+                    }
+                }
+            }
+
+            @media (max-width: 66.875rem) {
+                flex-wrap: wrap;
+                margin-bottom: 2rem;
+            }
+
+            @media (max-width: 42.5rem) {
+                flex-direction: column;
+
+                .navigation-item {
+                    text-align: left;
+                }
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: 1.5rem;
+                left: 0;
+                width: 40%;
+                height: 0.0625rem;
+                background: mat.get-color-from-palette($app-theme, 700);
+
+                @media (max-width: 66.875rem) {
+                    bottom: -1rem;
+                }
+
+                @media (max-width: 42.5rem) {
+                    width: 100%;
+                }
+            }
+        }
+
+        .cmi-info {
+            display: flex;
+            align-items: center;
+            width: 50%;
+
+            .cmi-info-logo {
+                margin-right: 2.5rem;
+            }
+
+            .cmi-info-text {
+                font-size: 0.9375rem;
+                line-height: 1.375rem;
+            }
+
+            @media (max-width: 45rem) {
+                width: 70%;
+            }
+        }
+
+        @media (max-width: 70.625rem) {
+            width: 90%;
+        }
+
     }
-
-    .cmi-info__logo {
-        margin-bottom: 1.5rem;
-    }
-
-    .footer-main-text {
-        font-size: 18px;
-        line-height: 23px;
-    }
-
-    .footer-secondary-text {
-        font-size: 14px;
-        line-height: 22px;
-    }
-
-
-    .mobile-contacts {
-        display: unset;
-    }
-
-    .desktop-contacts {
-        display: none;
-    }
-
-    .contact-links {
-        width: 117px;
-    }
-}
-
-@media screen and (max-width: 975px) {
-    .content {
-        padding: 3.25rem 4rem 4rem 4rem;
-    }
-
-    .nav {
-        border: unset;
-    }
-
-    .mobile-contacts {
-        display: unset;
-    }
-
-    .desktop-contacts {
-        display: none;
-    }
-
-    .column {
-        width: 100%;
-        min-width: unset;
-    }
-
-    .contact-links {
-        width: 117px;
-    }
-}
-
-@media screen and (max-width: 770px) {
-    .content {
-        padding: 3.25rem 1.5625rem 4rem 1.5625rem;
-    }
-
-    .navigation {
-        flex-direction: column;
-    }
-
-    .navigation__item {
-        margin-bottom: 1rem;
-    }
-
-    .cmi-info {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .cmi-info__logo {
-        margin-bottom: 1.5rem;
-    }
-
-    .footer-main-text {
-        font-size: 18px;
-        line-height: 23px;
-    }
-
-    .footer-secondary-text {
-        font-size: 14px;
-        line-height: 22px;
-    }
-}
-
-@media screen and (max-width: 550px) {
-    .navigation {
-        flex-direction: column;
-    }
-
-    .navigation__item {
-        margin-bottom: 1rem;
-    }
-
-    .cmi-info {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .cmi-info__logo {
-        margin-bottom: 1.5rem;
-    }
-
-    .footer-main-text {
-        font-size: 18px;
-        line-height: 23px;
-    }
-
-    .footer-secondary-text {
-        font-size: 14px;
-        line-height: 22px;
-        margin-right: 32px;
-    }
-
 }

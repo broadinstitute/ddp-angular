@@ -16,15 +16,19 @@
         text-align: center;
         margin: 2.5rem 0;
 
-        a {
-            cursor: pointer;
-            border-radius: 0.25rem;
+        button {
+            font-family: Untitled Sans, sans-serif;
             background-color: #7154ff;
             color: white;
+            border-radius: 0.25rem;
+            font-size: 1.325rem;
             border: none;
-            padding: 0.7rem;
-            width: 85%;
-            font-size: 1.375rem;
+            cursor: pointer;
+            padding: 1rem 2rem;
+
+            @media (max-width: 576px) {
+                font-size: 1rem;
+            }
         }
     }
 
@@ -90,12 +94,20 @@
     padding: 0 1rem 1rem calc(2rem + 24px) !important;
 }
 
-.PHYSection {
-    padding: 0 1.5rem 9.94rem 1.5rem;
+.section {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-around;
     gap: 8rem;
+
+    .content {
+        width: 60%;
+        margin: auto;
+
+        @media (max-width: 776px) {
+            width: 80%;
+        }
+    }
 
     &:nth-of-type(odd) {
         padding-bottom: 7.94rem;
