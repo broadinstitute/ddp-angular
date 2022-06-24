@@ -1,11 +1,11 @@
-import { Component, OnInit, Inject } from "@angular/core";
-import { AnalyticsEventsService, AnalyticsEventCategories } from "ddp-sdk";
-import { CommunicationService, ToolkitConfigurationService } from "toolkit";
+import { Component, Inject, OnInit } from '@angular/core';
+import { AnalyticsEventCategories, AnalyticsEventsService } from 'ddp-sdk';
+import { CommunicationService, ToolkitConfigurationService } from 'toolkit';
 
 @Component({
-    selector: "app-footer",
-    templateUrl: "./footer.component.html",
-    styleUrls: ["./footer.component.scss"],
+    selector: 'app-footer',
+    templateUrl: './footer.component.html',
+    styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
     public phone: string;
@@ -17,7 +17,7 @@ export class FooterComponent implements OnInit {
     public instagramUrl: string;
     public countMeInUrl: string;
 
-    public title = "Common.Buttons.MailingList.Title";
+    public title = 'Common.Buttons.MailingList.Title';
 
     public footerNavElements: {
         text: string;
@@ -25,39 +25,39 @@ export class FooterComponent implements OnInit {
         isMailingListButton?: boolean;
         arialLabel?: string;
     }[] = [
-        { text: "Common.Navigation.Home", routerLink: "/" },
+        { text: 'Common.Navigation.Home', routerLink: '/' },
         {
-            text: "Common.Navigation.AboutUs",
-            routerLink: "about-us",
+            text: 'Common.Navigation.AboutUs',
+            routerLink: 'about-us',
         },
         {
-            text: "Common.Navigation.FAQ",
-            routerLink: "more-details",
+            text: 'Common.Navigation.FAQ',
+            routerLink: 'more-details',
         },
         {
-            text: "Common.Navigation.Participation",
-            routerLink: "participation",
+            text: 'Common.Navigation.Participation',
+            routerLink: 'participation',
         },
         {
-            text: "Common.Navigation.ScientificImpact",
-            routerLink: "scientific-impact",
+            text: 'Common.Navigation.ScientificImpact',
+            routerLink: 'scientific-impact',
         },
         {
-            text: "Common.Buttons.MailingList.Title",
-            routerLink: "",
-            arialLabel: "Common.Buttons.MailingList.AriaLabel",
+            text: 'Common.Buttons.MailingList.Title',
+            routerLink: '',
+            arialLabel: 'Common.Buttons.MailingList.AriaLabel',
             isMailingListButton: true,
         },
         {
-            text: "Common.Navigation.Physicians",
-            routerLink: "physicians",
+            text: 'Common.Navigation.Physicians',
+            routerLink: 'physicians',
         },
     ];
 
     constructor(
         private communicationService: CommunicationService,
         private analytics: AnalyticsEventsService,
-        @Inject("toolkit.toolkitConfig")
+        @Inject('toolkit.toolkitConfig')
         private toolkitConfiguration: ToolkitConfigurationService
     ) {}
 
@@ -73,7 +73,7 @@ export class FooterComponent implements OnInit {
     }
 
     public openJoinMailingList(shouldProceed: boolean): void {
-        if (!shouldProceed) return;
+        if (!shouldProceed) {return;}
         this.communicationService.openJoinDialog();
     }
 
