@@ -17,8 +17,6 @@ export class FooterComponent implements OnInit {
     public instagramUrl: string;
     public countMeInUrl: string;
 
-    public title = 'Common.Buttons.MailingList.Title';
-
     public footerNavElements: {
         text: string;
         routerLink: string;
