@@ -162,17 +162,18 @@
       row-gap: 2rem;
 
       .image-background {
-        height: 24.375rem;
-        width: 16.625rem;
+        height: 23.5rem;
+        width: 13.3rem;
         opacity: 0.8;
         border-radius: 0.625rem;
         box-shadow: 0 0.125rem 2.25rem 0.1875rem rgba(0, 0, 0, 0.11);
         background: linear-gradient(180deg, white 50%, #cacccb 50%);
 
         .step-image {
-          margin: 1.25rem 0 3.75rem 2.5rem;
-          height: 7.6875rem;
-          width: 9.12375rem;
+          margin: 1.25rem 0 3.75rem 2rem;
+          height: 6.6875rem;
+          width: 8.12375rem;
+
         }
 
         .step-texts {
@@ -181,8 +182,8 @@
           .image-text-1 {
             font-size: 1rem;
             font-weight: 500;
-            line-height: 1.5rem;
-            margin-bottom: 0.625rem;
+            line-height: 1.2rem;
+            margin: 0.625rem 0;
           }
 
           .clock-and-text {
@@ -196,17 +197,17 @@
             }
 
             .image-text-2 {
-              font-size: 1.25rem;
-              font-weight: 300;
+              letter-spacing: 0;
               line-height: 1.5rem;
+              font-weight: 700;
             }
           }
 
           .image-text-3 {
             font-size: 1.25rem;
             letter-spacing: 0;
-            line-height: 1.5rem;
-            font-weight: bold;
+            line-height: 1.35rem;
+            font-weight: 700;
           }
         }
 
@@ -265,15 +266,15 @@
       row-gap: 2rem;
 
       .image-background {
-        height: 24.375rem;
-        width: 16.625rem;
+        height: 23.5rem;
+        width: 13.3rem;
         opacity: 0.8;
         border-radius: 0.625rem;
         box-shadow: 0 0.125rem 2.25rem 0.1875rem rgba(0, 0, 0, 0.11);
         background: linear-gradient(180deg, white 50%, #cacccb 50%);
 
         .step-images {
-          margin: 1.25rem 0 3.75rem 2.5rem;
+          margin: 1.25rem 0 3.75rem 2rem;
           height: 7.6875rem;
           width: 9.12375rem;
         }
