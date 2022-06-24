@@ -119,7 +119,7 @@ export class WorkflowProgressComponent implements OnChanges {
                 number: 4,
                 name: 'WorkflowProgress.Questionnaire',
                 isCompleted: false,
-                activityCodes: ['ABOUT_YOU', 'ABOUT_YOUR_CANCER', 'ABOUTCHILD', 'ABOUT_CHILD_ACTIVITY'],
+                activityCodes: ['ABOUT_YOU', 'ABOUT_CHILD_CANCER', 'ABOUT_YOUR_CANCER', 'ABOUTCHILD', 'ABOUT_CHILD_CANCER'],
             },
         ];
     }
