@@ -1649,6 +1649,7 @@ export class ParticipantListComponent implements OnInit {
         }
       }
     }
+    this.selectedPatients = [];
   }
 
   downloadCurrentData(): void {

@@ -22,4 +22,4 @@
     <mat-radio-button value="{{OPTIONS.allPatients}}">Apply tag to ALL patients</mat-radio-button>
 </mat-radio-group>
 <br/>
-<button mat-raised-button color="primary" (click)="bulkCreateCohorts()" [disabled]="isTagsEmpty()">Submit</button>
+<button mat-raised-button color="primary" (click)="bulkCreateCohorts()" [disabled]="isTagsEmpty()" [openLoading]="loadingDialogState">Submit</button>

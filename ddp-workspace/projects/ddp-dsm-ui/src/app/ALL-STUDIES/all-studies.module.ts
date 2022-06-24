@@ -109,6 +109,7 @@ import {BuildingFactoryService} from '../activity-data/services/buildingFactory.
 import { CohortTagComponent } from '../tags/cohort-tag/cohort-tag.component';
 import {MatChipsModule} from '@angular/material/chips';
 import { BulkCohortTagModalComponent } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-modal.component';
+import { OpenDialog } from '../directive/open-loading-modal.directive';
 
 
 
@@ -190,7 +191,8 @@ import { BulkCohortTagModalComponent } from '../tags/cohort-tag/bulk-cohort-tag-
     DssErrorPageComponent,
     LoadingModalComponent,
     CohortTagComponent,
-    BulkCohortTagModalComponent
+    BulkCohortTagModalComponent,
+    OpenDialog
   ],
   imports: [
     CommonModule,

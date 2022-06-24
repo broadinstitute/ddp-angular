@@ -6,6 +6,8 @@ import { BulkCohortTag } from './bulk-cohort-tag-model';
 import { DSMService } from '../../../services/dsm.service';
 import { ComponentService } from '../../../services/component.service';
 import { ParticipantUpdateResultDialogComponent } from '../../../dialogs/participant-update-result-dialog.component';
+import { ViewFilter } from '../../../filter-column/models/view-filter.model';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-bulk-cohort-tag-modal',
@@ -16,7 +18,7 @@ export class BulkCohortTagModalComponent implements OnInit  {
 
   readonly OPTIONS = OPTIONS;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { manualFilter: string, savedFilter: any, selectedPatients: [] }, 
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { manualFilter: string, savedFilter: ViewFilter, selectedPatients: [] }, 
     private matDialog: MatDialog, private dsmService: DSMService, private compService: ComponentService, 
     public dialogRef: MatDialogRef<BulkCohortTagModalComponent>
   ) 
@@ -27,6 +29,7 @@ export class BulkCohortTagModalComponent implements OnInit  {
   public tags: string[] = [];
 
   selectedOption: string;
+  loadingDialogState: Subject<any> = new Subject();
 
   ngOnInit(): void {
     this.selectedOption = OPTIONS.selectedPatients;
@@ -54,12 +57,15 @@ export class BulkCohortTagModalComponent implements OnInit  {
   bulkCreateCohorts(): void {
     const bulkCohortTag = 
         new BulkCohortTag(this.tags, this.data.manualFilter, this.data.savedFilter, this.data.selectedPatients, this.selectedOption);
-    this.dsmService.bulkCreateCohortTags(JSON.stringify(bulkCohortTag), this.compService.getRealm()).subscribe({
+    const dialogRef = this.matDialog;
+    this.dsmService.bulkCreateCohortTags(bulkCohortTag, this.compService.getRealm()).subscribe({
       next: data => {
         this.dialogRef.close(data);
+        this.loadingDialogState.next(true);
         this.matDialog.open(ParticipantUpdateResultDialogComponent, {data: {message: "Cohort tags successfully created"}});
       }, error: () => {
         this.dialogRef.close();
+        this.loadingDialogState.next(true);
         this.matDialog.open(ParticipantUpdateResultDialogComponent, {data: {message: "Bulk creation of cohort tags was unsuccessful"}});
       }
     })    
