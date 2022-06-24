@@ -2,70 +2,33 @@
     <div class="content">
         <nav class="nav">
             <ul class="navigation">
+                <ng-container *ngFor="let listItem of footerNavElements">
+                    <li class="navigation-item">
+                        <a
+                            class="footer-link"
+                            translate
+                            [routerLink]="listItem.routerLink"
+                            [routerLinkActive]="
+                                listItem.isMailingListButton ? null : 'active'
+                            "
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            [attr.aria-label]="
+                                listItem.arialLabel
+                                    ? (listItem.arialLabel | translate)
+                                    : null
+                            "
+                            (click)="
+                                openJoinMailingList(
+                                    listItem.isMailingListButton
+                                )
+                            "
+                            >{{ listItem.text }}</a
+                        >
+                    </li>
+                </ng-container>
                 <li class="navigation-item">
-                    <a class="footer-link" routerLink="/" translate
-                        >Common.Navigation.Home</a
-                    >
-                </li>
-                <li class="navigation-item">
-                    <a
-                        class="footer-link"
-                        routerLink="about-us"
-                        routerLinkActive="active"
-                        translate
-                        >Common.Navigation.AboutUs</a
-                    >
-                </li>
-                <li class="navigation-item">
-                    <a
-                        class="footer-link"
-                        routerLink="more-details"
-                        routerLinkActive="active"
-                        translate
-                        >Common.Navigation.FAQ</a
-                    >
-                </li>
-                <li class="navigation-item">
-                    <a
-                        class="footer-link"
-                        routerLink="participation"
-                        routerLinkActive="active"
-                        translate
-                        >Common.Navigation.Participation</a
-                    >
-                </li>
-                <li class="navigation-item">
-                    <a
-                        class="footer-link"
-                        routerLink="scientific-impact"
-                        routerLinkActive="active"
-                        translate
-                        >Common.Navigation.ScientificImpact</a
-                    >
-                </li>
-                <li class="navigation-item">
-                    <button
-                        class="simple-button"
-                        [attr.aria-label]="
-                            'Common.Buttons.MailingList.AriaLabel' | translate
-                        "
-                        (click)="openJoinMailingList()"
-                        translate
-                    >
-                        Common.Buttons.MailingList.Title
-                    </button>
-                </li>
-                <li class="navigation-item">
-                    <a
-                        class="footer-link"
-                        routerLink="physicians"
-                        routerLinkActive="header-link_active"
-                        translate
-                        >Common.Navigation.Physicians</a
-                    >
-                </li>
-                <li class="navigation-item">
-                    <div class="contacts" ><span translate>Footer.Contacts.Title</span>
+                    <div class="contacts">
+                        <span translate>Footer.Contacts.Title</span>
                         <div class="contacts-container">
                             <div class="contact-links-and-icons">
                                 <div class="links">
@@ -73,18 +36,20 @@
                                         class="footer-link"
                                         [href]="emailHref"
                                         target="_blank"
-                                    >{{ email }}</a
+                                        >{{ email }}</a
                                     >
                                     <a
                                         class="footer-link"
                                         [href]="phoneHref"
                                         target="_blank"
-                                    >{{ phone }}</a
+                                        >{{ phone }}</a
                                     >
                                 </div>
                                 <div>
                                     <a
-                                        (click)="sendSocialMediaAnalytics('twitter')"
+                                        (click)="
+                                            sendSocialMediaAnalytics('twitter')
+                                        "
                                         class="social-media__link"
                                         [href]="twitterUrl"
                                         target="_blank"
@@ -93,11 +58,16 @@
                                             class="social-media__logo"
                                             lazy-resource
                                             src="assets/images/twitter-small.png"
-                                            [alt]="'Common.Alts.Twitter' | translate"
+                                            [alt]="
+                                                'Common.Alts.Twitter'
+                                                    | translate
+                                            "
                                         />
                                     </a>
                                     <a
-                                        (click)="sendSocialMediaAnalytics('facebook')"
+                                        (click)="
+                                            sendSocialMediaAnalytics('facebook')
+                                        "
                                         class="social-media__link"
                                         [href]="facebookUrl"
                                         target="_blank"
@@ -106,11 +76,18 @@
                                             class="social-media__logo"
                                             lazy-resource
                                             src="assets/images/facebook-small.png"
-                                            [alt]="'Common.Alts.Facebook' | translate"
+                                            [alt]="
+                                                'Common.Alts.Facebook'
+                                                    | translate
+                                            "
                                         />
                                     </a>
                                     <a
-                                        (click)="sendSocialMediaAnalytics('instagram')"
+                                        (click)="
+                                            sendSocialMediaAnalytics(
+                                                'instagram'
+                                            )
+                                        "
                                         class="social-media__link"
                                         [href]="instagramUrl"
                                         target="_blank"
@@ -119,14 +96,19 @@
                                             class="social-media__logo"
                                             lazy-resource
                                             src="assets/images/instagram-small.png"
-                                            [alt]="'Common.Alts.Instagram' | translate"
+                                            [alt]="
+                                                'Common.Alts.Instagram'
+                                                    | translate
+                                            "
                                         />
                                     </a>
                                 </div>
                             </div>
                             <p
                                 class="no-margin address"
-                                [innerHTML]="'Footer.Contacts.Address' | translate"
+                                [innerHTML]="
+                                    'Footer.Contacts.Address' | translate
+                                "
                                 translate
                             ></p>
                         </div>

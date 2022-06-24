@@ -12,12 +12,12 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        width: 70%;
+        width: 80%;
 
         .nav .navigation {
             list-style: none;
             display: flex;
-            gap: 1rem;
+            gap: 2rem;
             padding: 0;
             position: relative;
 
@@ -29,8 +29,7 @@
                     text-align: left;
                 }
 
-                .footer-link,
-                .simple-button {
+                .footer-link {
                     font-size: 1.25rem;
                     line-height: 1.5625rem;
 
@@ -79,7 +78,7 @@
                 }
             }
 
-            @media (max-width: 56.875rem) {
+            @media (max-width: 66.875rem) {
                 flex-wrap: wrap;
                 margin-bottom: 2rem;
             }
@@ -97,15 +96,15 @@
                 position: absolute;
                 bottom: 1.5rem;
                 left: 0;
-                width: 50%;
+                width: 40%;
                 height: 0.0625rem;
                 background: mat.get-color-from-palette($app-theme, 700);
 
-                @media (max-width: 56.875rem) {
+                @media (max-width: 66.875rem) {
                     bottom: -1rem;
                 }
 
-                @media (max-width: 680px) {
+                @media (max-width: 42.5rem) {
                     width: 100%;
                 }
             }
@@ -130,16 +129,9 @@
             }
         }
 
-        @media (max-width: 71.875rem) {
-            width: 80%;
-        }
-
-        @media (min-width: 55rem) and(max-width: 68.125rem) {
-            width: 95%;
-        }
-
-        @media (max-width: 55rem) {
+        @media (max-width: 70.625rem) {
             width: 90%;
         }
+
     }
 }
