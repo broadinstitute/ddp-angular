@@ -35,7 +35,7 @@
     }
   },
   "DashboardIntro": {
-    "isParent": "Thank you for being part of the Leiomyosarcoma project. This page contains links to your forms and surveys that are part of the study. Over time, we may add additional surveys for your consideration. The information you provide will help drive our understanding of cancer.<br><br>If at any time you have questions or would like to share updated information, please contact the study team at <a class=\"Link\" href=\"mailto:info@LMSproject.org\">info@LMSproject.org</a> or call <a class=\"Link\" href='tel:651-403-5556'>651-403-5556. </a>",
+    "isParent": "Thank you for being part of the Leiomyosarcoma project. This page contains links to your forms and surveys that are part of the study. Over time, we may add additional surveys for your consideration. The information you provide will help drive our understanding of cancer.<br><br>If at any time you have questions or would like to share updated information, please contact the study team at <a class=\"Link\" href=\"mailto:info@LMSproject.org\">info@LMSproject.org</a> or call <a class=\"Link\" href='tel:651-403-5556'>651-403-5556.</a>",
     "isChild": "Thank you for being part of the Leiomyosarcoma project. This page contains links to your child’s forms and surveys that are part of the study. Over time, we may add additional surveys for your consideration. The information you provide will help drive our understanding of cancer.<br><br>If at any time you have questions or would like to share updated information, please contact the study team at <a class=\"Link\" href=\"mailto:info@LMSproject.org\">info@LMSproject.org</a> or call <a class=\"Link\" href='tel:651-403-5556'>651-403-5556</a>."
   },
   "App": {
@@ -539,7 +539,7 @@
         {
           "name": "Yemi Getachew",
           "image": "/assets/images/advisors/adimage.jpg",
-          "bio": ""
+          "bio": "<a class='hidetext'>Stacey Simpson Duke is a pastor, a writer, a mom of twin teenage boys, and a research advocate on</a>"
         },
         {
           "name": "Matthew Haist",
@@ -549,7 +549,7 @@
         {
           "name": "Nikky Hughes",
           "image": "/assets/images/advisors/adimage.jpg",
-          "bio": ""
+          "bio": "<a class='hidetext'>Stacey Simpson Duke is a pastor, a writer, a mom of twin teenage boys, and a research advocate on</a>"
         },
         {
           "name": "Cherry Kim",
@@ -559,7 +559,7 @@
         {
           "name": "Miyoung Kim",
           "image": "/assets/images/advisors/adimage.jpg",
-          "bio": ""
+          "bio": "<a class='hidetext'>Stacey Simpson Duke is a pastor, a writer, a mom of twin teenage boys, and a research advocate on</a>"
         },
         {
           "name": "Mary Anne Oldford",
@@ -569,7 +569,7 @@
         {
           "name": "Bella Pesina",
           "image": "/assets/images/advisors/adimage.jpg",
-          "bio": ""
+          "bio": "<a class='hidetext'>Stacey Simpson Duke is a pastor, a writer, a mom of twin teenage boys, and a research advocate on</a>"
         },
         {
           "name": "Blake Tomkinson",
