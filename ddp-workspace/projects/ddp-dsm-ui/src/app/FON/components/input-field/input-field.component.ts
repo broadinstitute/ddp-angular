@@ -25,7 +25,7 @@ import {
             [formControl]="formControl"
             [placeholder]="placeholder"
           >
-          <mat-error *ngIf="formControl.invalid">{{getErrorMessage}}</mat-error>
+          <mat-error>{{getErrorMessage}}</mat-error>
         </mat-form-field>
       </div>
     </ng-container>
@@ -42,12 +42,12 @@ import {
             [matDatepicker]="picker"
             [placeholder]="placeholder"
           >
-          <mat-error *ngIf="formControl.invalid">{{getErrorMessage}}</mat-error>
+          <mat-error>{{getErrorMessage}}</mat-error>
           <mat-datepicker-toggle
             matSuffix
             [for]="picker">
           </mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <mat-datepicker touchUi #picker></mat-datepicker>
         </mat-form-field>
       </div>
     </ng-container>
@@ -68,8 +68,7 @@ export class InputFieldComponent implements OnInit, ControlValueAccessor {
   public formControl: FormControl;
 
   public onTouched: () => void;
-  public onChange: (value: any) => void = () => {
-  };
+  public onChange: (value: any) => void = () => {};
 
   @Input('inputType') type: string;
   @Input() label: string;
@@ -110,7 +109,7 @@ export class InputFieldComponent implements OnInit, ControlValueAccessor {
 
   public get getErrorMessage(): string {
     if (this.formControl.hasError('required')) {return 'You must enter a value';}
-    return this.formControl.hasError('email') ? 'Not a valid email' : '';
+    return this.formControl.hasError('pattern') ? 'Not a valid email' : '';
   }
 
 }

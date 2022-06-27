@@ -1,6 +1,7 @@
 import {createAction} from '@ngrx/store';
 import {getSettings} from './enums/settings-enums';
 import {SettingsModel} from '../models/settings.model';
+import {HttpErrorResponse} from "@angular/common/http";
 
 export const getSettingsRequest = createAction(
   getSettings.REQUEST,
@@ -12,5 +13,5 @@ export const getSettingsSuccess = createAction(
 );
 export const getSettingsFailure = createAction(
   getSettings.FAILURE,
-  (errorMessage: string) => ({errorMessage})
+  (errorResponse: HttpErrorResponse) => ({errorResponse})
 );

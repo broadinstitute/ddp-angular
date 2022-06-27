@@ -40,7 +40,6 @@ export class PatientsListComponent implements OnInit {
   ngOnInit(): void {
     this.totalCount$ = this.storeService.getParticipantsTotalCount;
     this.loading$ = this.storeService.getParticipantsLoadingStatus;
-    this.error$ = this.storeService.getErrorState;
 
 
 

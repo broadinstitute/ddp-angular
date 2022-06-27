@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import {FlexLayoutModule} from '@angular/flex-layout';
 import {NavigationComponent} from './layout/navigation/navigation.component';
 import {FonComponent} from './fon.component';
 import {ActivityComponent} from './pages/activities/components/activity/activity.component';
@@ -7,7 +7,7 @@ import {PatientsListComponent} from './pages/patients-list/patients-list.compone
 import {ActivitiesComponent} from './pages/activities/activities.component';
 import {HomeComponent} from './pages/home/home.component';
 import {fonRoutingModule} from './fon-routing.module';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import {DdpModule} from 'ddp-sdk';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
@@ -25,6 +25,11 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatDialogModule} from '@angular/material/dialog';
 import {openInModalDirective} from './directives/open-in-modal.directive';
 import {InputFieldComponent} from './components/input-field/input-field.component';
+import {PatientsService} from "./services/patients.service";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {HttpService} from "./services/http.service";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {FONHttpInterceptor} from "./interceptors/http.interceptor";
 
 
 const AngularMaterialModules = [
@@ -39,7 +44,8 @@ const AngularMaterialModules = [
   MatFormFieldModule,
   MatInputModule,
   MatDatepickerModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSnackBarModule
 ];
 
 const directives = [openInModalDirective];
@@ -73,10 +79,11 @@ const layoutComponents = [NavigationComponent];
     DdpModule.forDSM(),
     ...AngularMaterialModules,
   ],
-  providers: [],
+  providers: [PatientsService, HttpService, DatePipe, {provide: HTTP_INTERCEPTORS, useClass: FONHttpInterceptor, multi: true}],
   exports: []
 })
 
 export class fonModule {
-  constructor() {}
+  constructor() {
+  }
 }
