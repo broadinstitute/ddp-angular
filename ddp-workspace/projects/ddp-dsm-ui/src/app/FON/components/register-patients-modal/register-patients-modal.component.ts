@@ -42,7 +42,7 @@ export class RegisterPatientsModalComponent implements OnInit, OnDestroy {
     this.addPatient();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unsubSubject.next();
   }
 
