@@ -1,14 +1,14 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {DatePipe} from "@angular/common";
-import {PatientsService} from "../../services/patients.service";
-import {forkJoin, Observable, of} from "rxjs";
-import {HttpService} from "../../services/http.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {AddPatientModel} from "../../models/addPatient.model";
-import {catchError} from "rxjs/operators";
-import {HttpErrorResponse} from "@angular/common/http";
+import {DatePipe} from '@angular/common';
+import {PatientsService} from '../../services/patients.service';
+import {forkJoin, Observable, of} from 'rxjs';
+import {HttpService} from '../../services/http.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {AddPatientModel} from '../../models/addPatient.model';
+import {catchError} from 'rxjs/operators';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-add-patients-modal',
@@ -82,14 +82,14 @@ export class RegisterPatientsModalComponent implements OnInit {
   }
 
   private addPatientHttp(patient: AddPatientModel): Observable<any> {
-    return this.httpService.addPatient(patient).pipe(catchError(error => of(error)))
+    return this.httpService.addPatient(patient).pipe(catchError(error => of(error)));
   }
 
   private get patientFormGroup(): FormGroup {
     return this.formBuilder.group({
       email: new FormControl(null, [
         Validators.required,
-        Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
+        Validators.pattern(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)
       ]),
       firstName: new FormControl(null, Validators.required),
       lastName: new FormControl(null, Validators.required),

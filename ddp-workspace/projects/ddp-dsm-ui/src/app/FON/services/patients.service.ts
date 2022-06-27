@@ -1,7 +1,7 @@
-import {Injectable} from "@angular/core";
-import {DatePipe} from "@angular/common";
-import {ISO8601DateFormat} from "../constants/date-formats";
-import {AddPatientModel} from "../models/addPatient.model";
+import {Injectable} from '@angular/core';
+import {DatePipe} from '@angular/common';
+import {ISO8601DateFormat} from '../constants/date-formats';
+import {AddPatientModel} from '../models/addPatient.model';
 
 @Injectable()
 export class PatientsService {
@@ -29,7 +29,7 @@ export class PatientsService {
       birthDate: this.formatToISO8601date(birthDate),
       informedConsentDate: this.formatToISO8601date(informedConsentDate),
       assentDate: this.formatToISO8601date(assentDate),
-    }
+    };
   }
 
   public formatToISO8601date(value: Date | string): string {

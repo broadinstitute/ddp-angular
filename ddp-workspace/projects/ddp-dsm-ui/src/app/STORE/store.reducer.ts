@@ -3,14 +3,14 @@ import {ParticipantModel} from './models/participant.model';
 import {createReducer, on} from '@ngrx/store';
 import * as SettingsActions from './actions/settings.actions';
 import * as ParticipantsActions from './actions/participants.actions';
-import {HttpErrorResponse} from "@angular/common/http";
+import {HttpErrorResponse} from '@angular/common/http';
 
 // Store State Models
 
 export type StorePropsType = {
   data: SettingsModel | ParticipantObject | {};
   isLoaded: boolean;
-  error: HttpErrorResponse | undefined,
+  error: HttpErrorResponse | undefined;
 };
 
 export type ParticipantObject = {pts: ParticipantModel[]; totalCount: number};

@@ -1,7 +1,7 @@
 import {createAction} from '@ngrx/store';
 import {getSettings} from './enums/settings-enums';
 import {SettingsModel} from '../models/settings.model';
-import {HttpErrorResponse} from "@angular/common/http";
+import {HttpErrorResponse} from '@angular/common/http';
 
 export const getSettingsRequest = createAction(
   getSettings.REQUEST,

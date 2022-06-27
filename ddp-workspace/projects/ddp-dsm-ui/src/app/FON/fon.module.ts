@@ -25,11 +25,11 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatDialogModule} from '@angular/material/dialog';
 import {openInModalDirective} from './directives/open-in-modal.directive';
 import {InputFieldComponent} from './components/input-field/input-field.component';
-import {PatientsService} from "./services/patients.service";
+import {PatientsService} from './services/patients.service';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {HttpService} from "./services/http.service";
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
-import {FONHttpInterceptor} from "./interceptors/http.interceptor";
+import {HttpService} from './services/http.service';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {FONHttpInterceptor} from './interceptors/http.interceptor';
 
 
 const AngularMaterialModules = [

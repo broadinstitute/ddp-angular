@@ -1,6 +1,6 @@
 export interface AddPatientModel {
   email: string;
-  studyGuid:string;
+  studyGuid: string;
   firstName: string;
   lastName: string;
   birthDate: Date | string;

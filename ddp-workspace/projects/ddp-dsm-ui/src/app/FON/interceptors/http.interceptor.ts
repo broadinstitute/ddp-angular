@@ -1,5 +1,5 @@
-import {HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 export class FONHttpInterceptor implements HttpInterceptor {
   readonly DSM_TOKEN_NAME = 'dsm_token';
@@ -11,7 +11,7 @@ export class FONHttpInterceptor implements HttpInterceptor {
         Accept: 'application/json',
         Authorization: this.getDSMToken
       })
-    })
+    });
     return next.handle(modifiedRequest);
   }
 

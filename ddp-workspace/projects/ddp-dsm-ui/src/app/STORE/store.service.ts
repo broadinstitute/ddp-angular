@@ -12,7 +12,7 @@ import {
   getParticipantsErrorState,
   getParticipantsTotalCount
 } from './selectors/participants.selectors';
-import {HttpErrorResponse} from "@angular/common/http";
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Injectable({providedIn: 'root'})
 export class StoreService {

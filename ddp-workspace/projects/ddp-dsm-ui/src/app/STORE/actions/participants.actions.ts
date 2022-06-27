@@ -3,7 +3,7 @@ import {getParticipant, getParticipants} from './enums/participants-enums';
 import {ViewFilter} from '../../filter-column/models/view-filter.model';
 import {Sort} from '../../sort/sort.model';
 import {ParticipantModel} from '../models/participant.model';
-import {HttpErrorResponse} from "@angular/common/http";
+import {HttpErrorResponse} from '@angular/common/http';
 
 export const getParticipantsRequest = createAction(
   getParticipants.REQUEST,
