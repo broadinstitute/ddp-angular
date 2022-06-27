@@ -18,14 +18,12 @@ import {HttpErrorResponse} from '@angular/common/http';
 })
 export class RegisterPatientsModalComponent implements OnInit {
   isAddingPatient: boolean;
-
   readonly patientsHttpArray: Observable<any>[] = [];
-
   successfullyAddedPatients: number;
 
   @ViewChild('successMessage') successMessageTemplate: TemplateRef<any>;
 
-  readonly addPatientForm: FormGroup = this.formBuilder.group({
+  readonly patientsAddingForm: FormGroup = this.formBuilder.group({
     patients: this.formBuilder.array([])
   });
 
@@ -43,7 +41,7 @@ export class RegisterPatientsModalComponent implements OnInit {
   }
 
   public get patients(): FormArray {
-    return this.addPatientForm.controls.patients as FormArray;
+    return this.patientsAddingForm.controls.patients as FormArray;
   }
 
   public addPatient(): void {
@@ -56,11 +54,11 @@ export class RegisterPatientsModalComponent implements OnInit {
 
   public registerPatient(): void {
     this.isAddingPatient = true;
-    this.addPatientForm.getRawValue()
+    this.patientsAddingForm.getRawValue()
       .patients
       .forEach(patient => {
           const generatedPatientInfo = this.patientsService.generatePatientInfo(patient);
-          this.patientsHttpArray.push(this.addPatientHttp(generatedPatientInfo));
+          this.patientsHttpArray.push(this.getPatientHttp(generatedPatientInfo));
         }
       );
     this.uploadPatients();
@@ -81,7 +79,7 @@ export class RegisterPatientsModalComponent implements OnInit {
       });
   }
 
-  private addPatientHttp(patient: AddPatientModel): Observable<any> {
+  private getPatientHttp(patient: AddPatientModel): Observable<any> {
     return this.httpService.addPatient(patient).pipe(catchError(error => of(error)));
   }
 
