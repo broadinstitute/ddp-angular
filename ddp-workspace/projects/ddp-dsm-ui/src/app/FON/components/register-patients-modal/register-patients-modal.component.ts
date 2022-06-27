@@ -18,14 +18,14 @@ import {HttpErrorResponse} from '@angular/common/http';
 })
 export class RegisterPatientsModalComponent implements OnInit {
   isAddingPatient: boolean;
-  readonly patientsHttpArray: Observable<any>[] = [];
   successfullyAddedPatients: number;
 
-  @ViewChild('successMessage') successMessageTemplate: TemplateRef<any>;
-
+  readonly patientsHttpArray: Observable<any>[] = [];
   readonly patientsAddingForm: FormGroup = this.formBuilder.group({
     patients: this.formBuilder.array([])
   });
+
+  @ViewChild('successMessage') successMessageTemplate: TemplateRef<any>;
 
   constructor(
     private dialogRef: MatDialogRef<RegisterPatientsModalComponent>,
