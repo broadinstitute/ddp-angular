@@ -1,48 +1,90 @@
 <section class="section">
-    <div class="content content_tight faq-block">
+    <button #btn mat-flat-button class="expand-btn" (click)="toggleAll()">
+        <mat-icon class="icon">{{ isAllOpened ? "clear" : "add" }}</mat-icon>
+        <span>{{
+            (isAllOpened ? "FaqPage.Button.Collapse" : "FaqPage.Button.Expand")
+                | translate
+        }}</span>
+    </button>
+    <div class="accordion-section">
         <div class="faq-section-header">
-            <button #btn mat-flat-button class="expand-btn" (click)="toggleAll()">
-                <mat-icon class="icon">{{ isAllOpened ? 'clear' : 'add' }}</mat-icon>
-                <span>{{ (isAllOpened ? 'FaqPage.Button.Collapse' : 'FaqPage.Button.Expand') | translate }}</span>
-            </button>
-
-            <h3 class="no-margin">{{faqSection.Title}}</h3>
+            <h3 class="no-margin">{{ faqSection.Title }}</h3>
         </div>
-
-        <mat-accordion #a="matAccordion" hideToggle="true" multi="true" displayMode="flat">
+        <mat-accordion
+            #a="matAccordion"
+            hideToggle="true"
+            multi="true"
+            displayMode="flat"
+        >
             <ng-container *ngFor="let item of faqSection.Items">
                 <mat-expansion-panel [id]="item.Id ?? ''" #panel>
-                    <mat-expansion-panel-header collapsedHeight="100%" expandedHeight="100%">
-                        <mat-icon *ngIf="!panel.expanded" class="faq-block__icon">add</mat-icon>
-                        <mat-icon *ngIf="panel.expanded" class="faq-block__icon">clear</mat-icon>
-                        <p class="faq-block__question no-margin">{{item.Question}}</p>
+                    <mat-expansion-panel-header
+                        collapsedHeight="100%"
+                        expandedHeight="100%"
+                    >
+                        <mat-icon
+                            *ngIf="!panel.expanded"
+                            class="faq-block__icon"
+                            >add</mat-icon
+                        >
+                        <mat-icon *ngIf="panel.expanded" class="faq-block__icon"
+                            >clear</mat-icon
+                        >
+                        <p class="faq-block__question no-margin">
+                            {{ item.Question }}
+                        </p>
                     </mat-expansion-panel-header>
                     <ng-template matExpansionPanelContent>
                         <ng-container *ngFor="let paragraph of item.Paragraphs">
-                            <p *ngIf="isText(paragraph); else paragraphArray"
-                               class="faq-block__text"
-                               [innerHTML]="paragraph">
-                            </p>
+                            <p
+                                *ngIf="isText(paragraph); else paragraphArray"
+                                class="faq-block__text"
+                                [innerHTML]="paragraph"
+                            ></p>
 
                             <ng-template #paragraphArray>
                                 <p class="faq-block__text">
-                                    <ng-container *ngFor="let item of paragraph">
-                                        <span *ngIf="isText(item); else objectItem">{{item}}</span>
+                                    <ng-container
+                                        *ngFor="let item of paragraph"
+                                    >
+                                        <span
+                                            *ngIf="
+                                                isText(item);
+                                                else objectItem
+                                            "
+                                            >{{ item }}</span
+                                        >
 
                                         <ng-template #objectItem>
                                             <ng-container
-                                                *ngIf="isLinkItem(item.type) && item.itemIdToScrollTo; then scrollLink else regularLink"></ng-container>
+                                                *ngIf="
+                                                    isLinkItem(item.type) &&
+                                                        item.itemIdToScrollTo;
+                                                    then scrollLink;
+                                                    else regularLink
+                                                "
+                                            ></ng-container>
 
                                             <ng-template #scrollLink>
-                                                <a (click)="expandAndScrollTo(item.itemIdToScrollTo)"
-                                                   class="Link">
-                                                    {{item.content}}
+                                                <a
+                                                    (click)="
+                                                        expandAndScrollTo(
+                                                            item.itemIdToScrollTo
+                                                        )
+                                                    "
+                                                    class="Link"
+                                                >
+                                                    {{ item.content }}
                                                 </a>
                                             </ng-template>
 
                                             <ng-template #regularLink>
-                                                <a class="Link" [href]="item.href" target='_blank'>
-                                                    {{item.content}}
+                                                <a
+                                                    class="Link"
+                                                    [href]="item.href"
+                                                    target="_blank"
+                                                >
+                                                    {{ item.content }}
                                                 </a>
                                             </ng-template>
                                         </ng-template>
