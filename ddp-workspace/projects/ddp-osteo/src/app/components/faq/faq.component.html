@@ -1,4 +1,4 @@
-<main class="main" routeTransformer>
+<main routeTransformer>
     <section class="section faq-section">
         <div class="content content_medium">
             <h1 class="section-title" translate>FaqPage.Title</h1>
@@ -17,9 +17,11 @@
             </div>
         </div>
     </section>
-    <ng-container *ngFor="let faqSection of 'FaqPage.FaqSections' | translate">
-        <app-faq-section [faqSection]="faqSection"></app-faq-section>
-    </ng-container>
+    <div class="faqs">
+        <ng-container *ngFor="let faqSection of 'FaqPage.FaqSections' | translate">
+            <app-faq-section [faqSection]="faqSection"></app-faq-section>
+        </ng-container>
+    </div>
     <section class="section">
         <div class="content content_tight">
             <p [innerHTML]="'FaqPage.NeedInfo.Paragraph' | translate"></p>
