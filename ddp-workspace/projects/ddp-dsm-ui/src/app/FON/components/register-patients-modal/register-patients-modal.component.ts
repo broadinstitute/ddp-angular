@@ -1,13 +1,13 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {PatientsService} from '../../services/patients.service';
-import {forkJoin, Observable, of} from 'rxjs';
+import {forkJoin, Observable, of, Subject} from 'rxjs';
 import {HttpService} from '../../services/http.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {AddPatientModel} from '../../models/addPatient.model';
-import {catchError} from 'rxjs/operators';
+import {catchError, takeUntil} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
@@ -16,7 +16,7 @@ import {HttpErrorResponse} from '@angular/common/http';
   styleUrls: ['./register-patients-modal.component.scss'],
   providers: [DatePipe]
 })
-export class RegisterPatientsModalComponent implements OnInit {
+export class RegisterPatientsModalComponent implements OnInit, OnDestroy {
   isAddingPatient: boolean;
   successfullyAddedPatients: number;
 
@@ -24,6 +24,8 @@ export class RegisterPatientsModalComponent implements OnInit {
   readonly patientsAddingForm: FormGroup = this.formBuilder.group({
     patients: this.formBuilder.array([])
   });
+
+  unsubSubject = new Subject<void>();
 
   @ViewChild('successMessage') successMessageTemplate: TemplateRef<any>;
 
@@ -38,6 +40,10 @@ export class RegisterPatientsModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.addPatient();
+  }
+
+  ngOnDestroy() {
+    this.unsubSubject.next();
   }
 
   public get patients(): FormArray {
@@ -70,6 +76,7 @@ export class RegisterPatientsModalComponent implements OnInit {
 
   private uploadPatients(): void {
     forkJoin(this.patientsHttpArray)
+      .pipe(takeUntil(this.unsubSubject))
       .subscribe((resultPatients) => {
         this.successfullyAddedPatients = resultPatients
           .filter(patient => !(patient instanceof HttpErrorResponse))
