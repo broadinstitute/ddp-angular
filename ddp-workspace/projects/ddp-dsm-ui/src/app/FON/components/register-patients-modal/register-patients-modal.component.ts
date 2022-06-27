@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {DatePipe} from '@angular/common';
 import {PatientsService} from '../../services/patients.service';
 import {forkJoin, Observable, of, Subject} from 'rxjs';
 import {HttpService} from '../../services/http.service';
@@ -14,7 +13,6 @@ import {HttpErrorResponse} from '@angular/common/http';
   selector: 'app-add-patients-modal',
   templateUrl: './register-patients-modal.component.html',
   styleUrls: ['./register-patients-modal.component.scss'],
-  providers: [DatePipe]
 })
 export class RegisterPatientsModalComponent implements OnInit, OnDestroy {
   isAddingPatient: boolean;
