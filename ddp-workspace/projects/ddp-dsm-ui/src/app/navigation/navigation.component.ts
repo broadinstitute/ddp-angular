@@ -1,25 +1,25 @@
+import {Location} from '@angular/common';
 import {Component, OnInit} from '@angular/core';
+import {DomSanitizer, Title} from '@angular/platform-browser';
+import {ActivatedRoute, NavigationStart, Router} from '@angular/router';
+import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
+import {Auth} from '../services/auth.service';
 import {ComponentService} from '../services/component.service';
 import {RoleService} from '../services/role.service';
-import {Auth} from '../services/auth.service';
-import {ActivatedRoute, NavigationStart, Router} from '@angular/router';
-import {DomSanitizer, Title} from '@angular/platform-browser';
-import {Location} from '@angular/common';
-import {Observable} from 'rxjs';
 
-@Component({
+@Component( {
   selector: 'app-navigation',
-  templateUrl: './navigation.component.html',
-})
+  templateUrl: './navigation.component.html'
+} )
 
 export class NavigationComponent implements OnInit {
 
   selectedStudy: Observable<string>;
 
 
-  constructor(private router: Router, private auth: Auth, private location: Location, sanitizer: DomSanitizer,
-              private role: RoleService, private activatedRoute: ActivatedRoute, private title: Title) {
+  constructor( private router: Router, private auth: Auth, private location: Location, sanitizer: DomSanitizer,
+               private role: RoleService, private activatedRoute: ActivatedRoute, private title: Title) {
   }
 
 
@@ -72,5 +72,9 @@ export class NavigationComponent implements OnInit {
       this.role.allowedToExitParticipant() || this.role.allowedToSkipParticipantEvents() ||
       this.role.allowedToDiscardSamples() || this.role.allowToViewSampleLists() ||
       this.role.allowedParticipantListView();
+  }
+
+  doNothing(): boolean { // needed for the menu, otherwise page will refresh!
+    return false;
   }
 }

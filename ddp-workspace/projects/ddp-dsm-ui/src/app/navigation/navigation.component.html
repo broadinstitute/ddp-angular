@@ -67,13 +67,42 @@
         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><b> Miscellaneous </b>
           <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li *ngIf="hasRole().allowedToViewMailingList()"><a href="#" [routerLink]="['mailingList']"> Mailing List </a></li>
-          <li *ngIf="hasRole().allowedToExitParticipant()"><a href="#" [routerLink]="['participantExit']"> Participant Withdrawal </a></li>
-          <li *ngIf="hasRole().allowedToSkipParticipantEvents()"><a href="#" [routerLink]="['participantEvent']"> Participant Event </a></li>
-          <li *ngIf="hasRole().allowedToCreateSurveys()"><a href="#" [routerLink]="['survey']"> Follow-Up Survey </a></li>
-          <li *ngIf="hasRole().allowedToDownloadPDF()"><a href="#" [routerLink]="['downloadPDF']"> Download PDF </a></li>
-          <li *ngIf="hasRole().allowedToDownloadNDI()"><a href="#" [routerLink]="['ndi']"> NDI Download </a></li>
-          <li ><a href="#" [routerLink]="['drugList']"> Drug List </a></li>
+          <li *ngIf="hasRole().allowedToViewMailingList()">
+            <a href="#" [routerLink]="['mailingList']">Mailing List</a>
+          </li>
+          <li *ngIf="hasRole().allowedToExitParticipant()">
+            <a href="#" [routerLink]="['participantExit']">Participant Withdrawal</a>
+          </li>
+          <li *ngIf="hasRole().allowedToSkipParticipantEvents()">
+            <a href="#" [routerLink]="['participantEvent']">Participant Event</a>
+          </li>
+          <li *ngIf="hasRole().allowedToCreateSurveys()">
+            <a href="#" [routerLink]="['survey']">Follow-Up Survey</a>
+          </li>
+          <li *ngIf="hasRole().allowedToDownloadPDF()">
+            <a href="#" [routerLink]="['downloadPDF']">Download PDF</a>
+          </li>
+          <li *ngIf="hasRole().allowedToDownloadNDI()">
+            <a href="#" [routerLink]="['ndi']">NDI Download</a>
+          </li>
+          <li>
+            <a href="#" [routerLink]="['drugList']">Drug List</a>
+          </li>
+        </ul>
+      </li>
+      <li *ngIf="getAuth().authenticated() && hasRole().hasAdminRights()" class="dropdown">
+        <a (click)="doNothing()" class="dropdown-toggle" data-toggle="dropdown" href="#">
+          <b>
+            Administration
+          </b>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <a [routerLink]="['editUsers']" href="#">
+              Manage Users
+            </a>
+          </li>
         </ul>
       </li>
     </ul>
