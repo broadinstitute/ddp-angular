@@ -1,5 +1,5 @@
 export class ClinicalOrder {
-  isSelected: boolean = false;
+  isSelected = false;
 
   constructor( public shortId: string, public sample: string, public orderId: string,
                public orderDate: string, public statusDetail: string, public sampleType: string ) {

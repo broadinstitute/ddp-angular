@@ -125,7 +125,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   bundle = false;
   private scrolled: boolean;
 
-  sequencingOrdersArray = new Array();
+  sequencingOrdersArray = [];
 
 
   constructor( private auth: Auth, private compService: ComponentService, private dsmService: DSMService, private router: Router,
@@ -1361,7 +1361,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     } );
   }
 
-  getMercuryEligibleSamples() {
+  public getMercuryEligibleSamples(): void {
     if (!this.canHaveSequencing( this.participant )) {
       return;
     }
@@ -1385,19 +1385,19 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     } );
   }
 
-  canHaveSequencing( participant: Participant ) {
+  canHaveSequencing( participant: Participant ): boolean {
     if (!this.role.allowedToDoOrderSequencing()) {
       return false;
     }
     const enrolled: boolean = participant.data.status === 'ENROLLED';
-    let hasGender: boolean = false;
+    let hasGender = false;
     if (participant.oncHistoryDetails.find( onc => onc.gender !== '' && onc.gender !== undefined && onc.gender !== null )) {
       hasGender = true;
     }
     else {
-      let aboutYouActivity = participant.data.activities.find( activity => activity.activityCode === 'ABOUT_YOU' );
+      const aboutYouActivity = participant.data.activities.find( activity => activity.activityCode === 'ABOUT_YOU' );
       if (aboutYouActivity) {
-        let genderQuestion = aboutYouActivity.questionsAnswers.find( questionAnswer => questionAnswer.stableId === 'ASSIGNED_SEX' );
+        const genderQuestion = aboutYouActivity.questionsAnswers.find( questionAnswer => questionAnswer.stableId === 'ASSIGNED_SEX' );
         if (genderQuestion && genderQuestion.answer) {
           hasGender = true;
         }

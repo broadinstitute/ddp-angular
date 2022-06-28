@@ -156,7 +156,7 @@ export class ShippingSearchComponent implements OnInit {
     } );
   }
 
-  isPatchedCurrently( field: string ) {
+  isPatchedCurrently( field: string ): boolean {
     return this.currentPatchField === field;
   }
 }

@@ -23,7 +23,7 @@ export class ClinicalPageComponent implements OnInit {
     this.getMercuryOrders();
   }
 
-  getMercuryOrders() {
+  getMercuryOrders(): void {
     this.loading = true;
     const realm = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
     this.dsmService.getMercuryOrders( realm ).subscribe( {
@@ -56,10 +56,10 @@ export class ClinicalPageComponent implements OnInit {
   }
 
   public downloadList(): void {
-    const map: { shortId: string; sampleType: string; sample: string; orderDate: string; status: string, orderId: string }[] = [];
+    const map: { shortId: string; sampleType: string; sample: string; orderDate: string; status: string; orderId: string }[] = [];
     console.log( this.clinicalOrdersArray );
     for (const order of this.clinicalOrdersArray) {
-      let dateCreated = this.getDateFormatted( order.orderDate );
+      const dateCreated = this.getDateFormatted( order.orderDate );
 
       map.push( {
         shortId: order.shortId,
@@ -86,7 +86,7 @@ export class ClinicalPageComponent implements OnInit {
     );
   }
 
-  reloadList() {
+  reloadList(): void {
     this.getMercuryOrders();
   }
 }

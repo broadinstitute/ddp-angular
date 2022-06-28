@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, ViewChild} from '@angular/core';
 import {ModalComponent} from '../modal/modal.component';
 import {Participant} from '../participant-list/participant-list.model';
 import {Auth} from '../services/auth.service';
@@ -14,7 +14,7 @@ import {SequencingOrder} from './sequencing-order.model';
   templateUrl: './sequencing-order.component.html',
   styleUrls: [ './sequencing-order.component.scss' ]
 } )
-export class SequencingOrderComponent implements OnInit {
+export class SequencingOrderComponent {
   @Input() participant: Participant;
   @Input() samples: SequencingOrder[];
 
@@ -32,8 +32,6 @@ export class SequencingOrderComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-  }
 
   valueChanged( value: any, parameterName: string, sample: SequencingOrder ): void {
     let v;
@@ -70,22 +68,22 @@ export class SequencingOrderComponent implements OnInit {
     } );
   }
 
-  isPatchedCurrently( field: string ) {
+  isPatchedCurrently( field: string ): boolean {
     return this.currentPatchField === field;
   }
 
-  shouldHaveCheckbox( sample: SequencingOrder ) {
+  shouldHaveCheckbox( sample: SequencingOrder ): boolean {
     return ( sample.sampleStatus === 'Received' && sample.sampleType === 'Normal' )
       || ( sample.sampleStatus.toLowerCase() === 'sent to gp' && sample.sampleType === 'Tumor' );
   }
 
-  preSubmitOrder() {
+  preSubmitOrder(): void {
     this.errorModal = false;
     this.modal.show();
     return;
   }
 
-  submitOrders() {
+  submitOrders(): void {
     const orders = [];
     this.samples.forEach( sample => {
       if (sample.isSelected) {
@@ -130,21 +128,21 @@ export class SequencingOrderComponent implements OnInit {
     return this.errorMessage;
   }
 
-  getDateFormatted( sequencingOrderDate: any ) {
+  getDateFormatted( sequencingOrderDate: any ): string {
     return Utils.getLongDateFormatted( sequencingOrderDate );
   }
 
-  checkErrorInSurveys( surveyName: string ): Boolean {
-    let releaseActivity = this.participant.data.activities.find( activity => activity.activityCode === surveyName );
+  checkErrorInSurveys( surveyName: string ): boolean {
+    const releaseActivity = this.participant.data.activities.find( activity => activity.activityCode === surveyName );
     if (releaseActivity) {
-      let stateQuestion = releaseActivity.questionsAnswers.find( questionAnswer => questionAnswer.stableId === 'ADDRESS_STATE' );
+      const stateQuestion = releaseActivity.questionsAnswers.find( questionAnswer => questionAnswer.stableId === 'ADDRESS_STATE' );
       if (stateQuestion && stateQuestion.answer) {
         const answer = stateQuestion.answer;
         if (answer === 'NY') {
           return true;
         }
       }
-      let countryQuestion = releaseActivity.questionsAnswers.find( questionAnswer => questionAnswer.stableId === 'ADDRESS_COUNTRY' );
+      const countryQuestion = releaseActivity.questionsAnswers.find( questionAnswer => questionAnswer.stableId === 'ADDRESS_COUNTRY' );
       if (countryQuestion && stateQuestion.answer) {
         const answer = stateQuestion.answer;
         if (answer === 'Canada') {
@@ -155,7 +153,7 @@ export class SequencingOrderComponent implements OnInit {
     return false;
   }
 
-  closeModal() {
+  closeModal(): void {
     this.modal.hide();
   }
 }
