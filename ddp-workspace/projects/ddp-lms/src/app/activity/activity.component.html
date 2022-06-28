@@ -52,6 +52,11 @@
       <ng-container *ngIf="isVerticalProgress && isStepped && showStepper; then verticalProgressIndicator">
       </ng-container>
 
+      <ng-container *ngIf="isStepped && showStepper">
+        <ng-container *ngIf="!isVerticalProgress; then horizontalProgressIndicator">
+        </ng-container>
+      </ng-container>
+
       <ng-container *ngIf="model">
         <div class="article-and-buttons">
           <ddp-activity-section
