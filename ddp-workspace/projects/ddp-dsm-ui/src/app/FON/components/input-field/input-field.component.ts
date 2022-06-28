@@ -102,7 +102,7 @@ export class InputFieldComponent implements OnInit, ControlValueAccessor {
   }
 
   public setValue(inputElement: HTMLInputElement): void {
-    this.value = inputElement.value;
+    this.value = inputElement.value.trim();
     this.onChange(this.value);
     this.onTouched();
   }
