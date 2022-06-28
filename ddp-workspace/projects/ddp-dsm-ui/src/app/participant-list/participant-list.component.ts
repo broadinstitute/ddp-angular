@@ -1628,7 +1628,7 @@ export class ParticipantListComponent implements OnInit {
 
   openBulkCohort(): void {
     const openedDialog = this.dialog.open(BulkCohortTagModalComponent, {data: {
-      manualFilter: this.jsonPatch, 
+      manualFilter: this.jsonPatch,
       savedFilter: this.viewFilter,
       selectedPatients: this.selectedPatients
     }});
@@ -1707,7 +1707,7 @@ export class ParticipantListComponent implements OnInit {
       if (this.isAssignable(participant)) {
         this.isAssignButtonDisabled = false;
       }
-      this.selectedPatients.push(participant.data.profile['guid'])
+      this.selectedPatients.push(participant.data.profile['guid']);
     }
   }
 

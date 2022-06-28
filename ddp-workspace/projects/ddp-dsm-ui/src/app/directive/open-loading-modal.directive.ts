@@ -1,13 +1,13 @@
-import { Directive, HostListener, Input, OnDestroy, OnInit } from "@angular/core";
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { Observable, Subscription } from "rxjs";
-import { LoadingModalComponent } from "../modals/loading-modal.component";
+import { Directive, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Observable, Subscription } from 'rxjs';
+import { LoadingModalComponent } from '../modals/loading-modal.component';
 
 @Directive({
-    selector: "[openLoading]"
+    selector: '[openLoading]'
 })
 
-export class OpenDialog implements OnInit, OnDestroy {
+export class OpenDialogDirective implements OnInit, OnDestroy {
 
     state$: Observable<any>;
     unsubscribe: Subscription;
@@ -25,12 +25,12 @@ export class OpenDialog implements OnInit, OnDestroy {
         this.unsubscribe.unsubscribe();
     }
 
-    @Input("openLoading") set setState(state: any) {
+    @Input('openLoading') set setState(state: any) {
         this.state$ = state;
-    } 
+    }
 
-    @HostListener("click") openDialog(): void {
-        this.dialog = this.matDialog.open(LoadingModalComponent, {data: {message: "Inserting cohort tags..."}, disableClose: true});
+    @HostListener('click') openDialog(): void {
+        this.dialog = this.matDialog.open(LoadingModalComponent, {data: {message: 'Inserting cohort tags...'}, disableClose: true});
     }
 
 }
