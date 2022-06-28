@@ -735,6 +735,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     }
 
     countOfFieldsWithData(address: Address): boolean {
+        if(!address) return;
         return Object.entries(address).every(([key, value]) =>
             !['street2', 'phone', 'guid'].includes(key)
                 ? value.toString().trim().length > 0
