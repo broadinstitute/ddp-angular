@@ -5,18 +5,17 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
-import {Filter} from '../filter-column/filter-column.model';
-import {ViewFilter} from '../filter-column/models/view-filter.model';
-import {Abstraction} from '../medical-record-abstraction/model/medical-record-abstraction.model';
-import {OncHistoryDetail} from '../onc-history-detail/onc-history-detail.model';
-import {PDFModel} from '../pdf-download/pdf-download.model';
+import { Filter } from '../filter-column/filter-column.model';
 import {Sort} from '../sort/sort.model';
-import {Statics} from '../utils/statics';
-import {Value} from '../utils/value.model';
-import {ComponentService} from './component.service';
-import {LoggingDsmService} from './logging.service';
-import {RoleService} from './role.service';
-import {SessionService} from './session.service';
+import { ViewFilter } from '../filter-column/models/view-filter.model';
+import { Abstraction } from '../medical-record-abstraction/model/medical-record-abstraction.model';
+import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
+import { PDFModel } from '../pdf-download/pdf-download.model';
+import { Statics } from '../utils/statics';
+import { Value } from '../utils/value.model';
+import { ComponentService } from './component.service';
+import { RoleService } from './role.service';
+import { SessionService } from './session.service';
 
 declare var DDP_ENV: any;
 
@@ -33,8 +32,7 @@ export class DSMService {
   constructor( private http: HttpClient,
                private sessionService: SessionService,
                private role: RoleService,
-               private router: Router,
-               private logger: LoggingDsmService ) {
+               private router: Router) {
   }
 
   sendAnalyticsMetric( realm: string, passed: number ): Observable<any> {
@@ -993,9 +991,8 @@ export class DSMService {
     );
   }
 
-  private handleError( error: any ): Observable<any> {
-    this.logger.logError( 'ERROR: ' + JSON.stringify( error ) );
-    return throwError( () => error );
+  private handleError(error: any): Observable<any> {
+    return throwError(() => error);
   }
 
   private buildHeader(): any {

@@ -4,6 +4,7 @@ import { ActivityTextQuestionBlock } from '../../../models/activity/activityText
 import { distinctUntilChanged, map, skip, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { InstantErrorStateMatcher } from '../../../utility/ui/instantErrorStateMatcher';
+import { LayoutType } from '../../../models/layout/layoutType';
 
 // Need to hold off on this expression for now until https://broadinstitute.atlassian.net/browse/DDP-4311 is fixed
 // const EMAIL_REGEXP =
@@ -29,6 +30,7 @@ export const EMAIL_REGEXP = /^\S+@\S+\.\S+$/;
         </mat-form-field>
         <ng-container *ngIf="block.confirmEntry">
             <p class="ddp-question-prompt"
+                *ngIf="!isGridLayout()"
                 [ngClass]="{'ddp-required-question-prompt': this.block.isRequired}"
                 [innerHTML]="block.confirmPrompt">
             </p>
@@ -62,6 +64,7 @@ export class ActivityEmailInput implements OnInit, OnChanges, OnDestroy {
     @Input() block: ActivityTextQuestionBlock;
     @Input() readonly: boolean;
     @Input() placeholder: string;
+    @Input() layoutType: LayoutType = LayoutType.DEFAULT;
     @Output() valueChanged: EventEmitter<string | null> = new EventEmitter();
     public emailForm: FormGroup;
     // enable confirm input field to start showing errors without being touched first
@@ -93,6 +96,10 @@ export class ActivityEmailInput implements OnInit, OnChanges, OnDestroy {
     public fieldHasError(field: string, error: string): boolean {
         return this.emailForm && this.emailForm.touched && this.emailForm.controls[field].errors
             && this.emailForm.controls[field].errors[error];
+    }
+
+    public isGridLayout(): boolean {
+        return this.layoutType === LayoutType.GRID;
     }
 
     private initEmailForm(): void {

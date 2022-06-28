@@ -1,5 +1,6 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -122,6 +123,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         AppRoutingModule,
         DdpModule,
         ToolkitModule

@@ -45,11 +45,44 @@
   width: calc(100% - 17px);
 
   @media (max-width: 1280px) {
-    top: 6.3rem;
+    top: 6rem;
   }
+
+    @media (max-width: 1025px){
+      top: 18% !important
+    }
+
+    @media (max-width: 913px) {
+      top: 8% !important
+    }
+
+    @media (max-width: 821px) {
+      top: 9.5% !important
+    }
+
+    @media (max-width: 769px) {
+      top: 10.5% !important
+    }
+
+    @media (max-width: 541px) {
+      top: 12% !important
+    }
+
     @media (max-width: 500px) {
-        top: 11%!important;
+        top: 8.7%!important;
         width: 100%;
+    }
+
+    @media (max-width: 415px) {
+      top: 7.8% !important;
+    }
+
+    @media (max-width: 376px) {
+      top: 10% !important;
+    }
+
+    @media (max-width: 361px) {
+      top: 9.5% !important;
     }
 }
 

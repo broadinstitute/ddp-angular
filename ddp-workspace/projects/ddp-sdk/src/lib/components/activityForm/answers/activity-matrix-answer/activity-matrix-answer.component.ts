@@ -18,6 +18,7 @@ import {
 } from '../../../../models/activity/activityMatrixQuestionBlock';
 import { ActivityMatrixAnswerDto } from '../../../../models/activity/activityMatrixAnswerDto';
 import { ActivityMatrixAnswerDialogComponent } from './activity-matrix-answer-dialog/activity-matrix-answer-dialog.component';
+import { LayoutType } from '../../../../models/layout/layoutType';
 
 interface RenderGroup extends Group {
   colSpan: number;
@@ -40,7 +41,9 @@ export interface DialogData {
 export class ActivityMatrixAnswer implements OnChanges {
   @Input() block: ActivityMatrixQuestionBlock;
   @Input() readonly: boolean;
+  @Input() layoutType: LayoutType = LayoutType.DEFAULT;
   @Output() valueChanged = new EventEmitter<ActivityMatrixAnswerDto[]>();
+
 
   RenderMode = RenderMode;
   renderGroups: RenderGroup[] = [];
@@ -99,5 +102,9 @@ export class ActivityMatrixAnswer implements OnChanges {
     });
 
     return renderGroups;
+  }
+
+  public isGridLayout(): boolean {
+    return this.layoutType === LayoutType.GRID;
   }
 }

@@ -1,5 +1,6 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -42,6 +43,7 @@ import { ActivityPageComponent } from './components/activity-page/activity-page.
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
 import { MatTableModule } from '@angular/material/table';
+import { FaqSectionComponent } from './components/faq-section/faq-section.component';
 
 
 const baseElt = document.getElementsByTagName('base');
@@ -146,6 +148,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     CommonModule,
     AppRoutingModule,
     DdpModule,
@@ -173,7 +176,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ActivityComponent,
     ActivityPageComponent,
     DashboardComponent,
-    UserActivitiesComponent
+    UserActivitiesComponent,
+    FaqSectionComponent
 
   ],
   providers: [

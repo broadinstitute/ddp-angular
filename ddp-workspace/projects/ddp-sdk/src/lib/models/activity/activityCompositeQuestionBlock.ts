@@ -14,6 +14,8 @@ export class ActivityCompositeQuestionBlock extends ActivityQuestionBlock<Answer
     public addButtonText = '';
     public additionalItemText: string | null;
     public childOrientation: ChildOrientation | null = null;
+    // a symbol/word that should separate a composite children when it is in a tabular block view
+    public tabularSeparator: string;
 
     constructor() {
         super();

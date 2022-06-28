@@ -1,32 +1,19 @@
-import {LOCATION_INITIALIZED} from '@angular/common';
-import {HttpClientModule} from '@angular/common/http';
-import {APP_INITIALIZER, ErrorHandler, Injector, NgModule} from '@angular/core';
-import {MatButtonModule} from '@angular/material/button';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatIconModule} from '@angular/material/icon';
-import {MatListModule} from '@angular/material/list';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {TranslateService} from '@ngx-translate/core';
+import {HttpClientModule} from '@angular/common/http';
 
-import {ConfigurationService, DdpModule, LanguageService, LoggingService} from 'ddp-sdk';
-import {AppRoutingModule} from './app-routing.module';
+import {ConfigurationService} from 'ddp-sdk';
 import {AppComponent} from './app.component';
-import {FonComponent} from './FON/fon.component';
-import {NavigationComponent} from './FON/layout/navigation/navigation.component';
-import {ActivitiesComponent} from './FON/pages/activities/activities.component';
-import {ActivityComponent} from './FON/pages/activities/activity/activity.component';
-import {HomeComponent} from './FON/pages/home/home.component';
-import {ParticipantsListComponent} from './FON/pages/participantsList/participantsList.component';
-import {AgentService} from './FON/services/agent.service';
+import {AppRoutingModule} from './app-routing.module';
 import {CheckAuthGuard} from './guards/checkAuth.guard';
 import {StudyGuard} from './guards/study.guard';
-import {StudyActGuard} from './guards/studyAct.guard';
-import {StackdriverErrorReporterDsmService} from './services/stackdriver-error-reporter.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {StoreModule} from '@ngrx/store';
+import {storeReducer} from './STORE/store.reducer';
+import {EffectsModule} from '@ngrx/effects';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {ParticipantsEffects, SettingsEffects} from './STORE/effects';
+import {environment} from '../environments/environment';
 
 
 const base = document.querySelector( 'base' )?.getAttribute( 'href' ) || '';
@@ -58,81 +45,32 @@ sdkConfig.dashboardPageUrl = '/fon/patients';
 
 
 
-export function translateFactory(translate: TranslateService,
-                                 injector: Injector,
-                                 logger: LoggingService,
-                                 // language: LanguageService // TODO: setup languages for DSM
-): () => Promise<any> {
-  return () => new Promise<any>((resolve: any) => {
-    const LOG_SOURCE = 'DSM AppModule';
-    const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
-    locationInitialized.then(() => {
-      const locale = 'en'; // language.getAppLanguageCode();
-      translate.setDefaultLang(locale);
-      translate.use(locale).subscribe({
-        next: () => {
-          logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
-        },
-        error: err => {
-          logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization:`, err);
-        },
-        complete: () => {
-          resolve(null);
-        }
-      });
-    });
-  });
-}
 
 // FON
-const guards = [StudyGuard, CheckAuthGuard, StudyActGuard];
-const material = [
-  MatExpansionModule,
-  MatDividerModule,
-  MatListModule,
-  MatIconModule,
-  MatPaginatorModule,
-  MatProgressSpinnerModule,
-  MatProgressBarModule,
-  MatButtonModule
-];
+const guards = [StudyGuard, CheckAuthGuard];
+
 
 @NgModule( {
   declarations: [
     AppComponent,
-    NavigationComponent,
-    FonComponent,
-    ActivityComponent,
-    ParticipantsListComponent,
-    ActivitiesComponent,
-    HomeComponent
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
-    DdpModule,
-    HttpClientModule,
     AppRoutingModule,
-    ...material
+    BrowserAnimationsModule,
+    HttpClientModule,
+    StoreModule.forRoot({MainStore: storeReducer}),
+    EffectsModule.forRoot([ParticipantsEffects, SettingsEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production
+    })
   ],
   providers: [
     ...guards,
-    AgentService,
-    {provide: ErrorHandler, useClass: StackdriverErrorReporterDsmService},
     {
       provide: 'ddp.config',
       useValue: sdkConfig
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: translateFactory,
-      deps: [
-        TranslateService,
-        Injector,
-        LoggingService,
-        LanguageService
-      ],
-      multi: true
     }
   ],
   bootstrap: [ AppComponent ]

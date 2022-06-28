@@ -1,13 +1,12 @@
-import { ErrorHandler, NgModule } from '@angular/core';
+import {ErrorHandler, ModuleWithProviders, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Title } from '@angular/platform-browser';
 import { A11yModule } from '@angular/cdk/a11y';
 // ngx-translate
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NGXTranslateService } from './services/internationalization/ngxTranslate.service';
 // CookieService
@@ -222,7 +221,8 @@ import { PicklistSortingPolicy } from './services/picklistSortingPolicy.service'
 import {
     ActivityEquationAnswerComponent
 } from './components/activityForm/answers/activity-equation-answer/activityEquationAnswer.component';
-
+import { TabularBlockComponent } from './components/activityForm/activity-blocks/tabularBlock/tabularBlock.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter: FuncType<string> = () => sessionService.token;
@@ -238,7 +238,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 @NgModule({
     imports: [
         CommonModule,
-        BrowserAnimationsModule,
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
@@ -286,7 +285,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
             }
         }),
         RouterModule,
-        A11yModule
+        A11yModule,
+        FlexLayoutModule
     ],
     providers: [
         AuthGuard,
@@ -443,7 +443,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         ConfirmDialogComponent,
         DropFileToUploadDirective,
         ActivityPicklistRemoteAutoCompleteOptionsComponent,
-        ActivityEquationAnswerComponent
+        ActivityEquationAnswerComponent,
+        TabularBlockComponent
     ],
     exports: [
         NetworkSnifferComponent,
@@ -519,8 +520,19 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         AdminActionPanelComponent,
         ProgressIndicatorComponent,
         ActivityBlockComponent,
-        ConfirmDialogComponent
+        ConfirmDialogComponent,
+        TabularBlockComponent
     ]
 })
 export class DdpModule {
+    static forDSM(): ModuleWithProviders<DdpModule> {
+        return {
+            ngModule: DdpModule,
+            providers: [
+                SessionMementoService,
+                StackdriverErrorReporterService,
+                TranslateService
+            ]
+        };
+    }
 }

@@ -273,7 +273,7 @@
     list-style-type: none;
 
     li::before {
-        content: "— ";
+        content: "• ";
     }
 }
 
@@ -282,7 +282,7 @@
     padding: 0;
 
     p::before {
-        content: "— ";
+        content: "• ";
     }
 }
 
@@ -580,4 +580,9 @@ select:disabled {
 .matrix-answer-table {
     font-size: 16px;
     line-height: 1.45;
+}
+
+.under-line {
+  border-bottom: 1px solid black;
+  padding-left: 50px;
 }

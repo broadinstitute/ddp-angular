@@ -11,11 +11,12 @@ import { DecimalAnswer } from '../../../models/activity/decimalAnswer';
 import { AbstractActivityQuestionBlock } from '../../../models/activity/abstractActivityQuestionBlock';
 import { DecimalHelper } from '../../../utility/decimalHelper';
 import { InputRestriction } from '../../../models/InputRestriction';
+import { LayoutType } from '../../../models/layout/layoutType';
 
 @Component({
     selector: 'ddp-activity-numeric-answer',
     template: `
-    <ddp-question-prompt [block]="block"></ddp-question-prompt>
+    <ddp-question-prompt [block]="block" *ngIf="!isGridLayout()"></ddp-question-prompt>
     <mat-form-field  class="input-field" [floatLabel]="block.label ? 'always' : null">
         <mat-label *ngIf="block.label" [innerHTML]="block.label"></mat-label>
         <input matInput
@@ -24,6 +25,7 @@ import { InputRestriction } from '../../../models/InputRestriction';
                [formControl]="numericField"
                [min]="block.min"
                [max]="block.max"
+               autocomplete="off"
                [step]="valueChangeStep"
                [placeholder]="placeholder || block.placeholder"
                [attr.data-ddp-test]="'answer:' + block.stableId">
@@ -39,6 +41,7 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
     @Input() block: ActivityNumericQuestionBlock | ActivityDecimalQuestionBlock;
     @Input() placeholder: string;
     @Input() readonly: boolean;
+    @Input() layoutType: LayoutType = LayoutType.DEFAULT;
     @Output() valueChanged: EventEmitter<NumericAnswerType> = new EventEmitter();
     public numericField: FormControl;
     InputRestriction = InputRestriction;
@@ -78,6 +81,10 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
 
     get isIntegerQuestion(): boolean {
         return this.block.questionType === QuestionType.Numeric; // otherwise Question.Decimal
+    }
+
+    public isGridLayout(): boolean {
+        return this.layoutType === LayoutType.GRID;
     }
 
     private initForm(): void {

@@ -1,9 +1,8 @@
 @import '../../../styles/variables.scss';
 
-
 .faq {
     padding-bottom: 6.12rem;
-    
+
     .title {
         margin-top: 0;
         margin-bottom: 2rem;
@@ -41,6 +40,7 @@
         font-weight: 300;
         letter-spacing: 0;
         line-height: 58px;
+        cursor: default;
     }
 
     .container {
@@ -55,7 +55,7 @@
     }
 
     .intro-faq-block {
-      text-align: center;  
+      text-align: center;
     }
 
     .faq-closing-section {

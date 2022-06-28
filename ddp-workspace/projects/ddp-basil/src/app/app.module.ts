@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
 import { RECAPTCHA_LANGUAGE, RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
@@ -114,6 +115,7 @@ export function languageFactory(language: LanguageService): string {
     imports: [
         AppRoutingModule,
         BrowserModule,
+        BrowserAnimationsModule,
         CommonModule,
         DdpModule,
         RecaptchaModule,

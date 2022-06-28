@@ -17,7 +17,7 @@ describe('QuestionPromptComponent', () => {
 
     @Component({
         template: `
-        <ddp-question-prompt [block]="block"></ddp-question-prompt>`
+        <ddp-question-prompt [block]="block" *ngIf="!isGridLayout()"></ddp-question-prompt>`
     })
     class TestHostComponent {
         block = questionBlock;
