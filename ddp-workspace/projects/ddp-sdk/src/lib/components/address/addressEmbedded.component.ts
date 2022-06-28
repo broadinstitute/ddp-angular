@@ -705,10 +705,15 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
 
     private meetsActivityRequirements(currentAddress: Address | null): boolean {
+        if (!currentAddress) return;
         if (this.block.requireVerified && !currentAddress) {
             return false;
         }
-        return !(this.block.requirePhone && currentAddress && !(currentAddress.phone));
+        if (this.block.requirePhone) {
+            return currentAddress && !currentAddress.phone;
+        } else {
+            return this.countOfFieldsWithData(currentAddress);
+        }
     }
 
     private computeValidityForSparseAddress(address: Address | null): boolean {
@@ -727,17 +732,19 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     }
 
     addressIsBlank(address: Address): boolean {
-        return !address || this.countOfFieldsWithData(address) === 0;
+        return !address || !this.countOfFieldsWithData(address);
     }
 
     enoughDataToSave(address: Address | null): boolean {
-        return address && this.countOfFieldsWithData(address) >= 1;
+        return address && this.countOfFieldsWithData(address);
     }
 
-    countOfFieldsWithData(address: Address): number {
-        const isNonBlankString: FuncType<boolean> = (val) => util.isString(val) && val.trim().length > 0;
-        const propsToCheck: (keyof Address)[] = ['name', 'country', 'street1', 'street2', 'state', 'city', 'zip', 'phone'];
-        return propsToCheck.map(prop => address[prop]).filter((value) => isNonBlankString(value)).length;
+    countOfFieldsWithData(address: Address): boolean {
+        return Object.entries(address).every(([key, value]) =>
+            !['street2', 'phone', 'guid'].includes(key)
+                ? value.toString().trim().length > 0
+                : true
+        );
     }
 
     saveAddress(): void {
