@@ -1362,16 +1362,21 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   }
 
   getMercuryEligibleSamples() {
+    if (!this.canHaveSequencing( this.participant )) {
+      return;
+    }
     const realm = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
     this.dsmService.getMercuryEligibleSamples( this.participant.participant.ddpParticipantId, realm ).subscribe( {
       next: data => {
         const jsonData = data;
         this.sequencingOrdersArray = [];
-        jsonData.forEach( ( json ) => {
-            const order = SequencingOrder.parse( json );
-            this.sequencingOrdersArray.push( order );
-          }
-        );
+        if (jsonData) {
+          jsonData.forEach( ( json ) => {
+              const order = SequencingOrder.parse( json );
+              this.sequencingOrdersArray.push( order );
+            }
+          );
+        }
 
       },
       error: () => {
@@ -1381,10 +1386,15 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   }
 
   canHaveSequencing( participant: Participant ) {
+    if (!this.role.allowedToDoOrderSequencing()) {
+      return false;
+    }
     const enrolled: boolean = participant.data.status === 'ENROLLED';
     let hasGender: boolean = false;
-    participant.oncHistoryDetails.find( onc => onc.gender !== '' && onc.gender !== undefined ) ? hasGender = true : hasGender = false;
-    if (!hasGender) {
+    if (participant.oncHistoryDetails.find( onc => onc.gender !== '' && onc.gender !== undefined && onc.gender !== null )) {
+      hasGender = true;
+    }
+    else {
       let aboutYouActivity = participant.data.activities.find( activity => activity.activityCode === 'ABOUT_YOU' );
       if (aboutYouActivity) {
         let genderQuestion = aboutYouActivity.questionsAnswers.find( questionAnswer => questionAnswer.stableId === 'ASSIGNED_SEX' );
@@ -1392,12 +1402,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           hasGender = true;
         }
       }
+      else {
+        hasGender = false;
+      }
     }
-    let smIdsMatch: boolean = true;
-    let wrongSmIdTissue = participant.oncHistoryDetails.find( onc => {
-      onc.tissues.find( tissue => ( ( tissue.ussSMId && tissue.ussSMId.length != tissue.ussCount )
-        || ( tissue.scrollSMId && tissue.scrollSMId.length != tissue.scrollsCount ) ) );
-    } );
     return hasGender && enrolled;
   }
 

@@ -101,6 +101,16 @@ export class DSMService {
     );
   }
 
+
+  getMercuryOrders( realm: string ): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'getMercuryOrders';
+    const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: realm} );
+    return this.http.get( url, this.buildQueryHeader( map ) ).pipe(
+      catchError( this.handleError.bind( this ) )
+    );
+  }
+
   public checkUpdatingParticipantStatus(): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'editParticipantMessageStatus';
     return this.http.get( url, this.buildHeader() ).pipe(
@@ -1105,6 +1115,5 @@ export class DSMService {
     }
     return viewFilterCopy;
   }
-
 
 }

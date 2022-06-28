@@ -200,15 +200,6 @@ participant.data.dsm['diagnosisYear'] != null">
           </tr>
           </tbody>
         </table>
-        <!--TODO remove before final merge, for testing only -->
-        <div *ngIf="hasRole().allowedToTestDSSActivity() && participant.data != null">
-          <button mat-mini-fab color="primary" class="mat-fab-bottom-left" (click)="testGetActivity(participant.data.profile['guid'])">
-            <i class="fa-thin fa-badge-check"></i>
-          </button>
-          <span>Test GET Activity</span>
-
-        </div>
-
         <div *ngIf="isAddFamilyMember" class="Float--right Width--100">
           <div class="family-member-button">
             <button mat-mini-fab color="primary" class="mat-fab-bottom-left" (click)="showFamilyMemberPopUpOnClick()">
@@ -852,8 +843,8 @@ participant.data.dsm['diagnosisYear'] != null">
               </ng-container>
             </tab>
             <tab (selectTab)="onSelect($event, 'sequencing');" [active]="tabActive('sequencing')"
-                 heading="Sequencing Order">
-              <app-sequencing-order *ngIf="canHaveSequencing(participant)" [participant]="participant"
+                 *ngIf="canHaveSequencing(participant)" heading="Sequencing Order">
+              <app-sequencing-order [participant]="participant"
                                     [samples]="sequencingOrdersArray">
               </app-sequencing-order>
             </tab>

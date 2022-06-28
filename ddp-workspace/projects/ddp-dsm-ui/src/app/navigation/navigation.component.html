@@ -39,16 +39,28 @@
           <li *ngIf="hasRole().allowToViewSampleLists() || hasRole().allowedToHandleSamples()"><a [routerLink]="['shippingSent']"> Sent </a></li>
           <li *ngIf="hasRole().allowToViewSampleLists() || hasRole().allowedToHandleSamples()"><a [routerLink]="['shippingReceived']"> Received </a></li>
           <li *ngIf="hasRole().allowToViewSampleLists() || hasRole().allowedToHandleSamples()"><a [routerLink]="['shippingOverview']"> Sent/Received Overview </a></li>
-          <li *ngIf="hasRole().allowedToDeactivateKits()"><a [routerLink]="['shippingDeactivated']"> Deactivated </a></li>
+          <li *ngIf="hasRole().allowedToDeactivateKits()">
+            <a [routerLink]="['shippingDeactivated']">Deactivated</a>
+          </li>
           <!-- Search for a kit, only if you have right to handle samples -->
           <hr *ngIf="hasRole().allowedToHandleSamples()">
-          <li *ngIf="hasRole().allowedToHandleSamples()"><a [routerLink]="['shippingSearch']"> Search </a></li>
+          <li *ngIf="hasRole().allowedToHandleSamples()">
+            <a [routerLink]="['shippingSearch']">Search</a>
+          </li>
           <!-- Upload of kits, only if you have right to upload -->
           <hr *ngIf="hasRole().allowedToUploadKits()">
-          <li *ngIf="hasRole().allowedToUploadKits()"><a href="#" [routerLink]="['upload']"> Kit Upload </a></li>
+          <li *ngIf="hasRole().allowedToUploadKits()">
+            <a href="#" [routerLink]="['upload']">Kit Upload</a>
+          </li>
           <!-- Setup label dimensions, only if you have the right to handle samples -->
           <hr *ngIf="hasRole().allowedToHandleSamples()">
-          <li *ngIf="hasRole().allowedToHandleSamples()"><a [routerLink]="['labelSettings']"> Label Settings </a></li>
+          <li *ngIf="hasRole().allowedToHandleSamples()">
+            <a [routerLink]="['labelSettings']">Label Settings</a>
+          </li>
+          <hr *ngIf="hasRole().allowedToHandleSamples()">
+          <li *ngIf="hasRole().allowedToHandleSamples() || hasRole().allowedToDoOrderSequencing()">
+            <a [routerLink]="['clinicalOrders']">Clinical Orders</a>
+          </li>
         </ul>
       </li>
       <li class="dropdown" *ngIf="(getAuth().authenticated() && (hasRole().allowedToViewMedicalRecords() || hasRole().allowedParticipantListView()))">

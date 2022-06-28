@@ -36,6 +36,7 @@ import {AddressComponent} from '../address/address.component';
 import {AssigneesComponent} from '../assignee/assignee.component';
 import {AuthGuard} from '../auth0/auth.guard';
 import {BannerComponent} from '../banner/banner.component';
+import {ClinicalPageComponent} from '../clinical-page/clinical-page.component';
 import {DashboardComponent} from '../dashboard/dashboard.component';
 import {DataReleaseComponent} from '../data-release/data-release.component';
 import {ParticipantUpdateResultDialogComponent} from '../dialogs/participant-update-result-dialog.component';
@@ -188,7 +189,8 @@ import {AllStudiesRoutingModule} from './all-studies.routing.module';
     DssErrorPageComponent,
     LoadingModalComponent,
     CohortTagComponent,
-    SequencingOrderComponent
+    SequencingOrderComponent,
+    ClinicalPageComponent
   ],
   imports: [
     CommonModule,

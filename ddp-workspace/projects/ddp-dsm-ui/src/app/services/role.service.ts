@@ -29,8 +29,8 @@ export class RoleService {
   private _canEditDrugList = false;
   private _isParticipantListView = false;
   private _isParticipantEdit = false;
-  private _isDSSTesting = true; //TODO remove before final merge, for testing only
   private _isKitUploadInvalidAddress = false;
+  private _hasMercuryOrderSequencing = false;
 
   private _userId: string;
   private _user: string;
@@ -126,6 +126,9 @@ export class RoleService {
           }
           else if (entry === 'kit_upload_invalid_address') {
             this._isKitUploadInvalidAddress = true;
+          }
+          else if (entry === 'mercury_order_sequencing') {
+            this._hasMercuryOrderSequencing = true;
           }
         }
       }
@@ -252,15 +255,15 @@ export class RoleService {
     return this._isParticipantEdit;
   }
 
-  public allowedToTestDSSActivity(): boolean {
-    return this._isDSSTesting;//TODO pegah remove before final merge, for testing only
-  }
-
   private getClaimByKeyName( token: any, key: string ): any {
     return this.sessionService.getDSMClaims( token )[ this.config.auth0ClaimNameSpace + key ];
   }
 
   public allowedToUploadKitInvalidAddress(): boolean {
     return this._isKitUploadInvalidAddress;
+  }
+
+  public allowedToDoOrderSequencing(): boolean {
+    return this._hasMercuryOrderSequencing;
   }
 }

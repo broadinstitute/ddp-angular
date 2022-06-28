@@ -1,47 +1,47 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AbstractionGroup } from '../abstraction-group/abstraction-group.model';
-import { ActivityDefinition } from '../activity-data/models/activity-definition.model';
-import { Group } from '../activity-data/models/group.model';
-import { Option } from '../activity-data/models/option.model';
-import { QuestionAnswer } from '../activity-data/models/question-answer.model';
-import { QuestionDefinition } from '../activity-data/models/question-definition.model';
-import { Assignee } from '../assignee/assignee.model';
-import { Filter } from '../filter-column/filter-column.model';
-import { ModalComponent } from '../modal/modal.component';
-import { ParticipantColumn } from '../filter-column/models/column.model';
-import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
-import { Auth } from '../services/auth.service';
-import { ComponentService } from '../services/component.service';
-import { DSMService } from '../services/dsm.service';
-import { RoleService } from '../services/role.service';
-import { KitType } from '../utils/kit-type.model';
-import { NameValue } from '../utils/name-value.model';
-import { PatchUtil } from '../utils/patch.model';
-import { Result } from '../utils/result.model';
-import { Statics } from '../utils/statics';
-import { Utils } from '../utils/utils';
-import { ViewFilter } from '../filter-column/models/view-filter.model';
-import { Value } from '../utils/value.model';
-import { AssigneeParticipant } from './models/assignee-participant.model';
-import { PreferredLanguage } from './models/preferred-languages.model';
-import { Sample } from './models/sample.model';
-import { Participant } from './participant-list.model';
-import { FieldSettings } from '../field-settings/field-settings.model';
-import { ParticipantData } from './models/participant-data.model';
-import { Sort } from '../sort/sort.model';
-import { saveAs } from 'file-saver';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import { LoadingModalComponent } from '../modals/loading-modal.component';
+import {ActivatedRoute, Router} from '@angular/router';
+import {saveAs} from 'file-saver';
+import {AbstractionGroup} from '../abstraction-group/abstraction-group.model';
+import {ActivityDefinition} from '../activity-data/models/activity-definition.model';
+import {Group} from '../activity-data/models/group.model';
+import {Option} from '../activity-data/models/option.model';
+import {QuestionAnswer} from '../activity-data/models/question-answer.model';
+import {QuestionDefinition} from '../activity-data/models/question-definition.model';
+import {Assignee} from '../assignee/assignee.model';
+import {FieldSettings} from '../field-settings/field-settings.model';
+import {Filter} from '../filter-column/filter-column.model';
+import {ParticipantColumn} from '../filter-column/models/column.model';
+import {ViewFilter} from '../filter-column/models/view-filter.model';
+import {ModalComponent} from '../modal/modal.component';
+import {LoadingModalComponent} from '../modals/loading-modal.component';
+import {OncHistoryDetail} from '../onc-history-detail/onc-history-detail.model';
+import {Auth} from '../services/auth.service';
+import {ComponentService} from '../services/component.service';
+import {DSMService} from '../services/dsm.service';
+import {RoleService} from '../services/role.service';
+import {Sort} from '../sort/sort.model';
+import {KitType} from '../utils/kit-type.model';
+import {NameValue} from '../utils/name-value.model';
+import {PatchUtil} from '../utils/patch.model';
+import {Result} from '../utils/result.model';
+import {Statics} from '../utils/statics';
+import {Utils} from '../utils/utils';
+import {Value} from '../utils/value.model';
+import {AssigneeParticipant} from './models/assignee-participant.model';
+import {ParticipantData} from './models/participant-data.model';
+import {PreferredLanguage} from './models/preferred-languages.model';
+import {Sample} from './models/sample.model';
+import {Participant} from './participant-list.model';
 
-@Component({
+@Component( {
   selector: 'app-participant-list',
   templateUrl: './participant-list.component.html',
-  styleUrls: ['./participant-list.component.css']
-})
+  styleUrls: [ './participant-list.component.css' ]
+} )
 export class ParticipantListComponent implements OnInit {
 
-  @ViewChild(ModalComponent)
+  @ViewChild( ModalComponent )
   public modal: ModalComponent;
 
   modalAnchor: string;
@@ -112,6 +112,7 @@ export class ParticipantListComponent implements OnInit {
   preferredLanguages: PreferredLanguage[] = [];
   savedSelectedColumns = {};
   isAddFamilyMember = false;
+  hasSequencingOrders = false;
   showGroupFields = false;
   hideSamplesTab = false;
   showContactInformation = false;
@@ -659,6 +660,7 @@ export class ParticipantListComponent implements OnInit {
         this.updateStudySpecificStatuses(jsonData.studySpecificStatuses);
         this.isAddFamilyMember = jsonData.addFamilyMember === true;
         this.showGroupFields = jsonData.showGroupFields === true;
+        this.hasSequencingOrders = jsonData.hasSequencingOrders === true;
 
         if (jsonData.hideSamplesTab === true) {
           this.hideSamplesTab = true;
