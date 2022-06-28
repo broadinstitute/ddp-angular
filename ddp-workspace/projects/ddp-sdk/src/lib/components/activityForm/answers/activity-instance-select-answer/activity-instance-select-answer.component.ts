@@ -6,6 +6,7 @@ import { ActivityInstanceSelectQuestionBlock } from '../../../../models/activity
 import { ActivityInstanceSelectOptionDto } from '../../../../models/activity/activityInstanceSelectOptionDto';
 import { ActivityInstanceSelectAnswerService } from '../../../../services/serviceAgents/activityInstanceSelectAnswer.service';
 import { CompositeDisposable } from '../../../../compositeDisposable';
+import { LayoutType } from '../../../../models/layout/layoutType';
 
 @Component({
   selector: 'ddp-activity-instance-select-answer',
@@ -16,6 +17,7 @@ export class ActivityInstanceSelectAnswer implements OnInit, OnDestroy {
   @Input() block: ActivityInstanceSelectQuestionBlock;
   @Input() placeholder: string;
   @Input() readonly: boolean;
+  @Input() layoutType: LayoutType = LayoutType.DEFAULT;
   @Output() valueChanged = new EventEmitter<string | null>();
   @Output() componentBusy = new EventEmitter<boolean>();
   public options$ = new BehaviorSubject<ActivityInstanceSelectOptionDto[]>([]);
@@ -56,6 +58,10 @@ export class ActivityInstanceSelectAnswer implements OnInit, OnDestroy {
     const sub = this.panelOpen$.pipe(switchMap(() => this.getOptions())).subscribe();
 
     this.subs.addNew(sub);
+  }
+
+  public isGridLayout(): boolean {
+    return this.layoutType === LayoutType.GRID;
   }
 
   private getOptions(): Observable<ActivityInstanceSelectOptionDto[]> {

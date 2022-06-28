@@ -1,0 +1,49 @@
+<main class="participation">
+  <h2 class="title static-page-title" translate>ParticipationPage.Title</h2>
+  <section *ngFor="let step of 'ParticipationPage.Steps' | translate; let i = index;" class="step">
+    <div class="step__data">
+      <div class="step__label participate-step-label">{{step.Step}}</div>
+      <div class="step__time participate-step-time" *ngIf="step.Time">
+        <mat-icon>access_time</mat-icon>{{step.Time}}
+      </div>
+      <h2 class="step__title">{{step.Title}}</h2>
+      <p class="step__text">{{step.Text}}</p>
+
+      <a *ngIf="step.Button && stepsHref[i]"
+         mat-stroked-button
+         target="_blank"
+         [href]="stepsHref[i]"
+         class="step__btn button button_small small-letter-spacing button_secondary">
+        {{step.Button}}
+      </a>
+
+
+    </div>
+    <div class="step__image">
+      <img class="image"
+           [src]="'assets/images/step' + (i+1) + '_big.png'"
+           [alt]="step.ImageAlt">
+    </div>
+  </section>
+
+  <h2 class="title" translate>BenefitsParticipation.Title</h2>
+  <section *ngFor="let step of 'BenefitsParticipation.Participations' | translate; let i = index;" class="step">
+    <div class="step__data">
+
+      <h2 class="step__step">{{step.step}}</h2>
+      <p class="step__text">{{step.Text}}</p>
+
+      <a mat-stroked-button *ngIf="step.Button && stepsHrf[i]"
+         target="_blank"
+         [href]="stepsHrf[i]"
+         class="step__btn button button_small small-letter-spacing button_secondary">
+        {{step.Button}}
+      </a>
+    </div>
+    <div class="step__image">
+      <img class="image"
+           [src]="'assets/images/pic' + (i+1) + '_big.png'"
+           [alt]="step.ImageAlt">
+    </div>
+  </section>
+</main>

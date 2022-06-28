@@ -1,13 +1,6 @@
 <section class="intro">
-  <div class="intro__container">
-    <!--    <h2 class="intro__title" [innerHTML]="'FAQ.Title' | translate"></h2>-->
-    <!--    <p class="intro__description" [innerHTML]="'FAQ.P1' | translate"></p>-->
-    <!--    <p class="intro__description" [innerHTML]="'FAQ.P2' | translate"></p>-->
-
-    <!--    <h2 class="intro__title" [innerHTML]="'FAQ.Title2' | translate"></h2>-->
-    <!--    <p class="intro__description" [innerHTML]="'FAQ.P3' | translate"></p>-->
-    <!--    <p class="intro__description" [innerHTML]="'FAQ.P4' | translate"></p>-->
-    <!--    <p class="intro__description" [innerHTML]="'FAQ.P5' | translate"></p>-->
+  <div class="container">
+    <app-video-intro pageRendered="FAQ">></app-video-intro>
   </div>
 </section>
 
@@ -32,7 +25,7 @@
       <div class="about-left">
         <p class="intro__description" [innerHTML]="'FAQ.VentricleHeartDefects.P1' | translate"></p>
         <p class="intro__description">
-          <a target="_blank" [href]="VIDEO_URL">{{ 'FAQ.VentricleHeartDefects.Link' | translate }}</a>
+          <a [ngClass]="IGNORE_ANALYTICS_CLASS" (click)="videoClick($event)" target="_blank" [href]="VIDEO_URL">{{ 'FAQ.VentricleHeartDefects.Link' | translate }}</a>
         </p>
         <p class="intro__description" [innerHTML]="'FAQ.VentricleHeartDefects.P2' | translate"></p>
         <p class="intro__description" [innerHTML]="'FAQ.VentricleHeartDefects.P3' | translate"></p>

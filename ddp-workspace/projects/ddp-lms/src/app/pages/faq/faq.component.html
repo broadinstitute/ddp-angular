@@ -1,0 +1,24 @@
+<main class="faq">
+  <h2 class="title static-page-title" translate>App.FAQ.Title</h2>
+
+  <section class="section">
+    <div class="content content_tight intro-faq-block">
+      <div class="intro-faq-block__content">
+        <p [innerHTML]="'App.FAQ.Header.P1' | translate"></p>
+        <p [innerHTML]="'App.FAQ.Header.P2' | translate"></p>
+      </div>
+    </div>
+  </section>
+
+  <mat-divider class="faq-into-divider"></mat-divider>
+
+  <ng-container *ngFor="let faqSection of 'App.FAQ.Sections' | translate">
+    <app-faq-section [title]="faqSection.Title" [questions]="faqSection.Questions"></app-faq-section>
+  </ng-container>
+
+  <section>
+    <div class="content_tight faq-closing-section">
+      <p [innerHTML]="'App.FAQ.Footer.P1' | translate"></p>
+    </div>
+  </section>
+</main>

@@ -3,6 +3,7 @@ export class ActivityInstitutionForm {
         public physicianName: string,
         public institutionName: string,
         public city: string,
-        public state: string
+        public state: string,
+        public country?: string
     ) { }
 }

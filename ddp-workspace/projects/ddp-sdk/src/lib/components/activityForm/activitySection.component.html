@@ -17,7 +17,7 @@
     </ng-template>
 
     <ng-template #content>
-        <div *ngIf="isConditional(block)">
+        <div *ngIf="shouldBlockBeShown(block, BlockType.Conditional)">
             <ddp-conditional-block [block]="block"
                                    [readonly]="readonly || !block.enabled"
                                    [validationRequested]="validationRequested"
@@ -25,7 +25,7 @@
                                    [activityGuid]="activityGuid">
             </ddp-conditional-block>
         </div>
-        <div *ngIf="isQuestion(block)">
+        <div *ngIf="shouldBlockBeShown(block, BlockType.Question)">
             <ddp-activity-question [block]="block"
                                    [readonly]="readonly || !block.enabled"
                                    [validationRequested]="validationRequested"
@@ -34,7 +34,7 @@
                                    (componentBusy)="componentBusy.emit($event)">
             </ddp-activity-question>
         </div>
-        <div *ngIf="isInstitution(block)">
+        <div *ngIf="shouldBlockBeShown(block, BlockType.Institution)">
             <ddp-institutions-form [block]="block"
                                    [studyGuid]="studyGuid"
                                    [readonly]="readonly || !block.enabled"
@@ -43,7 +43,7 @@
                                    (componentBusy)="componentBusy.emit($event)">
             </ddp-institutions-form>
         </div>
-        <div *ngIf="isMailAddress(block)">
+        <div *ngIf="shouldBlockBeShown(block, BlockType.MailAddress)">
             <ddp-address-embedded [block]="block"
                                   [country]="config.supportedCountry"
                                   [readonly]="readonly || !block.enabled"
@@ -55,10 +55,10 @@
         </div>
     </ng-template>
 
-    <div *ngIf="isContent(block)">
+    <div *ngIf="shouldBlockBeShown(block, BlockType.Content)">
         <ddp-activity-content [block]="block"></ddp-activity-content>
     </div>
-    <div *ngIf="isGroup(block)">
+    <div *ngIf="shouldBlockBeShown(block, BlockType.Group)">
         <ddp-group-block [block]="block"
                          [readonly]="readonly || !block.enabled"
                          [validationRequested]="validationRequested"
@@ -66,7 +66,7 @@
                          [activityGuid]="activityGuid">
         </ddp-group-block>
     </div>
-    <div *ngIf="isActivityBlock(block)">
+    <div *ngIf="shouldBlockBeShown(block, BlockType.Activity)">
         <ddp-activity-block [block]="block"
                             [enabled]="block.enabled"
                             [readonly]="readonly"
@@ -78,4 +78,11 @@
                             (blockVisibilityChanged)="onBlockVisibilityChanged($event)">
         </ddp-activity-block>
     </div>
+    <ddp-tabular-block *ngIf="shouldBlockBeShown(block, BlockType.Tabular)"
+                       [block]="block"
+                       [readonly]="readonly || !block.enabled"
+                       [validationRequested]="validationRequested"
+                       [studyGuid]="studyGuid"
+                       [activityGuid]="activityGuid">
+    </ddp-tabular-block>
 </div>

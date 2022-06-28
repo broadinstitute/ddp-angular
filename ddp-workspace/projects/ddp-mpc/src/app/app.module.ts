@@ -1,5 +1,6 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -55,9 +56,10 @@ toolkitConfig.mailingListDialogUrl = 'updates';
 toolkitConfig.phone = '651-293-5029';
 toolkitConfig.infoEmail = 'info@mpcproject.org';
 toolkitConfig.dataEmail = 'data@mpcproject.org';
-toolkitConfig.twitterAccountId = 'PrCaProject';
-toolkitConfig.facebookGroupId = 'Prostate-Cancer-Project-1828647940721720';
-toolkitConfig.cBioPortalLink = 'http://www.cbioportal.org/study/summary?id=prad_mpcproject_2018';
+toolkitConfig.twitterAccountId = 'count_me_in';
+toolkitConfig.instagramId = 'countmein';
+toolkitConfig.facebookGroupId = 'joincountmein';
+toolkitConfig.cBioPortalLink = 'https://www.cbioportal.org/study/summary?id=mpcproject_broad_2021';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org/';
 toolkitConfig.showDataRelease = true;
 toolkitConfig.showInfoForPhysicians = true;
@@ -109,6 +111,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     DdpModule,
     ToolkitModule

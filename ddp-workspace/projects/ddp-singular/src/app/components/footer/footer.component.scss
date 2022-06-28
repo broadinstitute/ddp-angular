@@ -17,6 +17,9 @@
   &-contacts {
     font-size: 16px;
     margin-top: 30px;
+      @include media-sm {
+          overflow-wrap: break-word;
+      }
   }
 
   & .container {
@@ -41,10 +44,18 @@
 
   &-meta {
     max-width: 30%;
+      @media (max-width: 700px) {
+          max-width: 80%;
+      }
   }
 
   &-menu {
     flex: 1;
+    display: flex;
+    justify-content: flex-end;
+      @include media-md {
+          justify-content: flex-start;
+      }
 
     & a {
       font-family: Spartan-Bold, sans-serif;
@@ -57,6 +68,10 @@
   &-social {
     margin: 40px 0;
     display: flex;
+      @media (max-width: 700px) {
+          flex-wrap: wrap;
+          overflow-wrap: break-word;
+      }
     &-item {
       width: 50px;
       height: 50px;
@@ -64,6 +79,11 @@
       position: relative;
       border-radius: 100px;
       border: 2px solid map-get($colors, 'footer-social-border');
+
+      @media (max-width: 700px) {
+          margin-top: 10px;
+      }
+
       & img {
         filter: invert(1);
         position: absolute;
@@ -90,6 +110,9 @@
     opacity: .7;
     @include media-md {
       margin-bottom: 30px;
+    }
+    @include media-sm {
+        overflow-wrap: break-word;
     }
   }
 

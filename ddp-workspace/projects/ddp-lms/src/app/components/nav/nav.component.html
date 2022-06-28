@@ -1,0 +1,37 @@
+<ul class="links-list">
+  <li class="links-list__item">
+    <a class="link" queryParamsHandling="merge" routerLinkActive="link--active" [routerLink]="Route.About">
+      {{ 'Header.Links.About' | translate }}
+    </a>
+  </li>
+
+  <li class="links-list__item">
+    <a class="link" queryParamsHandling="merge" routerLinkActive="link--active" [routerLink]="Route.HowToParticipate">
+      {{ 'Header.Links.Participation' | translate }}
+    </a>
+  </li>
+
+  <li class="links-list__item">
+    <a class="link" queryParamsHandling="merge" routerLinkActive="link--active" [routerLink]="Route.ScientificImpact">
+      {{ 'Header.Links.ScientificImpact' | translate }}
+    </a>
+  </li>
+
+  <li class="links-list__item">
+    <a class="link" queryParamsHandling="merge" routerLinkActive="link--active" [routerLink]="Route.FAQ">
+      {{ 'Header.Links.FAQ' | translate }}
+    </a>
+  </li>
+
+  <li class="links-list__item">
+    <a type="button" class="link" (click)="openJoinMailingList()">
+      {{ 'Header.Links.MailingList' | translate }}
+    </a>
+  </li>
+
+  <li class="links-list__item">
+    <a class="link" queryParamsHandling="merge" routerLinkActive="link--active" [routerLink]="Route.ForYourPhysician">
+      {{ 'Header.Links.ForYourPhysician' | translate }}
+    </a>
+  </li>
+</ul>

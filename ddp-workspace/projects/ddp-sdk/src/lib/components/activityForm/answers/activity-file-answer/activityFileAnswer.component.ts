@@ -22,6 +22,7 @@ import { ModalDialogService } from '../../../../services/modal-dialog.service';
 import { ConfirmDialogComponent } from '../../../confirmDialog/confirmDialog.component';
 import { ActivityFileValidationRule } from '../../../../services/activity/validators/activityFileValidationRule';
 import { FileAnswerMapperService } from '../../../../services/fileAnswerMapper.service';
+import { LayoutType } from '../../../../models/layout/layoutType';
 
 @Component({
     selector: 'ddp-activity-file-answer',
@@ -33,6 +34,7 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
     @Input() readonly: boolean;
     @Input() studyGuid: string;
     @Input() activityGuid: string;
+    @Input() layoutType: LayoutType = LayoutType.DEFAULT;
     @Output() valueChanged: EventEmitter<string[] | null> = new EventEmitter();
     @Output() componentBusy = new EventEmitter<boolean>();
     @ViewChild('uploaded', {read: ElementRef}) private uploadedFileRef: ElementRef;
@@ -55,9 +57,26 @@ export class ActivityFileAnswer implements OnInit, OnDestroy {
         this.initUploadedFiles();
     }
 
-    onFilesSelected(files: Event): void {
+    isGridLayout(): boolean {
+        return this.layoutType === LayoutType.GRID;
+    }
+
+    onFilesSelected(event: Event): void {
+        const input = event.target as HTMLInputElement;
+
+        const files: File[] = Array.from(input.files);
+
+        this.uploadFiles(files);
+    }
+
+    onFilesDropped(fileList: FileList): void {
+        const files = Array.from(fileList);
+
+        this.uploadFiles(files);
+    }
+
+    uploadFiles(filesGroup: File[]): void {
         this.errorMessage = '';
-        const filesGroup: File[] = Array.from((files.target as HTMLInputElement).files);
         if (filesGroup && filesGroup.length > 0) {
             this.componentBusy.emit(true);
             this.fileUploadService.getUploadUrl(this.studyGuid, this.activityGuid, this.block.stableId, filesGroup)

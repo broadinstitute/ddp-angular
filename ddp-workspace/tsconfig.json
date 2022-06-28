@@ -133,10 +133,22 @@
       "path": "./projects/ddp-brugada/tsconfig.spec.json"
     },
     {
+      "path": "./projects/ddp-lms/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ddp-lms/tsconfig.spec.json"
+    },
+    {
       "path": "./projects/study-builder-ui/tsconfig.app.json"
     },
     {
       "path": "./projects/study-builder-ui/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ddp-fon/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ddp-fon/tsconfig.spec.json"
     }
   ]
 }

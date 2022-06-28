@@ -21,6 +21,11 @@
         }
     },
     "App": {
+        "social": {
+            "twitter": "https://twitter.com/CMI_Espanol",
+            "facebook": "https://www.facebook.com/CMIespanol",
+            "instagram": "https://www.instagram.com/countmein"
+        },
         "HomePage": {
             "JoinCountMeInButton": "Únase a Count Me In",
             "LearnMoreSection": {

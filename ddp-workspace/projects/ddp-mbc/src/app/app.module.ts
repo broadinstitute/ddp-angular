@@ -1,5 +1,6 @@
 import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -57,9 +58,9 @@ tkCfg.mailingListDialogUrl = 'updates';
 tkCfg.phone = '617-800-1622';
 tkCfg.infoEmail = 'info@mbcproject.org';
 tkCfg.dataEmail = 'data@mbcproject.org';
-tkCfg.twitterAccountId = 'mbc_project';
-tkCfg.facebookGroupId = 'The-Metastatic-Breast-Cancer-Project-852059048224675';
-tkCfg.instagramId = 'mbc_project';
+tkCfg.twitterAccountId = 'count_me_in';
+tkCfg.facebookGroupId = 'joincountmein';
+tkCfg.instagramId = 'countmein';
 tkCfg.cBioPortalLink = 'http://www.cbioportal.org/study?id=brca_mbcproject_wagle_2017#summary';
 tkCfg.countMeInUrl = 'https://joincountmein.org/';
 tkCfg.showDataRelease = true;
@@ -125,6 +126,7 @@ function translateFactory(translate: TranslateService,
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         AppRoutingModule,
         DdpModule,
         ToolkitModule

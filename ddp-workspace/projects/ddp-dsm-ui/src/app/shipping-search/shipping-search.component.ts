@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ScanValue } from '../scan/scan.model';
-import { Auth } from '../services/auth.service';
-import { Statics } from '../utils/statics';
-import { DSMService } from '../services/dsm.service';
-import { KitRequest } from '../shipping/shipping.model';
-import { RoleService } from '../services/role.service';
+import {Component, OnInit} from '@angular/core';
+import {ScanValue} from '../scan/scan.model';
+import {Auth} from '../services/auth.service';
+import {Statics} from '../utils/statics';
+import {DSMService} from '../services/dsm.service';
+import {KitRequest} from '../shipping/shipping.model';
+import {RoleService} from '../services/role.service';
 
 @Component({
   selector: 'app-shipping-search',
@@ -53,7 +53,6 @@ export class ShippingSearchComponent implements OnInit {
       let jsonData: any[];
       this.dsmService.getKit(this.searchField, this.searchValue, this.allowedRealms).subscribe({
         next: data => {
-          // console.log(`received: ${JSON.stringify(data, null, 2)}`);
           jsonData = data;
           jsonData.forEach((val) => {
             this.kit.push(KitRequest.parse(val));
@@ -61,9 +60,7 @@ export class ShippingSearchComponent implements OnInit {
           if (this.kit == null || this.kit.length < 1) {
             this.additionalMessage = 'Kit was not found.';
           }
-          console.log(this.kit);
           this.searching = false;
-          // console.log(this.ddp);
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
@@ -84,7 +81,7 @@ export class ShippingSearchComponent implements OnInit {
 
   showColumn(name: string): boolean {
     if (this.kit != null) {
-      const foundColumn = this.kit.find(kit => (kit[ name ] != null && kit[ name ] !== '' && kit[ name ] !== 0));
+      const foundColumn = this.kit.find(kit => (kit[name] != null && kit[name] !== '' && kit[name] !== 0));
       if (foundColumn != null) {
         return true;
       }
@@ -93,9 +90,29 @@ export class ShippingSearchComponent implements OnInit {
   }
 
   receiveATKit(kitRequest: KitRequest): void {
+    let jsonData: any[];
     const singleScanValues: Array<ScanValue> = [];
     singleScanValues.push(new ScanValue(kitRequest.kitLabel));
     this.dsmService.setKitReceivedRequest(JSON.stringify(singleScanValues))
-      .subscribe(); // need to subscribe, otherwise it will not send!
+      .subscribe({
+          next: data => {
+            let failedSending = false;
+            jsonData = data;
+            jsonData.forEach((val) => {
+              failedSending = true;
+            });
+            if (!failedSending) {
+              this.searchKit();
+            }
+          },
+          error: err => {
+            if (err._body === Auth.AUTHENTICATION_ERROR) {
+              this.auth.logout();
+            }
+            this.errorMessage = 'Error - Loading ddp information\nPlease contact your DSM developer';
+            this.searching = false;
+          }
+        }
+      ); // need to subscribe, otherwise it will not send!
   }
 }

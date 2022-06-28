@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { LOCATION_INITIALIZED } from '@angular/common';
 
@@ -65,8 +66,9 @@ toolkitConfig.mailingListDialogUrl = AppRoutes.MailingList;
 toolkitConfig.phone = '651-229-3480';
 toolkitConfig.infoEmail = 'info@braintumorproject.org';
 toolkitConfig.dataEmail = 'data@braintumorproject.org';
-toolkitConfig.twitterAccountId = 'BrainTumorProj';
-toolkitConfig.facebookGroupId = 'braintumorproject';
+toolkitConfig.twitterAccountId = 'count_me_in';
+toolkitConfig.facebookGroupId = 'joincountmein';
+toolkitConfig.instagramId = 'countmein';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org/';
 
 export const sdkConfig = new ConfigurationService();
@@ -137,6 +139,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         AppRoutingModule,
         DdpModule,
         ToolkitModule,

@@ -1,4 +1,4 @@
-<ddp-question-prompt [block]="block"></ddp-question-prompt>
+<ddp-question-prompt *ngIf="!isGridLayout()" [block]="block"></ddp-question-prompt>
 <ng-container *ngFor="let childBlockRow of childQuestionBlocks; let row = index">
     <p *ngIf="row > 0" class="Title-text PageContent-subtitle Normal">
         <span>{{ block.additionalItemText }}</span>
@@ -6,13 +6,19 @@
             <mat-icon class="ddp-close-button">close</mat-icon>
         </button>
     </p>
-    <div [ngClass]="['ddp-answer-container', setOrientationClass(block.childOrientation)]">
+    <div class="ddp-answer-container"
+         [ngClass]="setOrientationClass(block.childOrientation)"
+         [gdColumns]="gridLayoutColumnConfig()">
         <ng-container *ngFor="let childBlock of childBlockRow; let column = index">
+            <div *ngIf="block.tabularSeparator && column === 1" class="tabular-separator">
+                <span>{{block.tabularSeparator}}</span>
+            </div>
             <ddp-activity-answer
                 class="ddp-answer-field"
                 [class.ddp-composite-text]="childBlock.questionType === 'text' && block.childOrientation !== 'VERTICAL'"
                 [block]="childBlock"
                 [readonly]="readonly"
+                [layoutType]="layoutType"
                 [validationRequested]="validationRequested"
                 (valueChanged)="updateValue(row, column, $event)"
                 (componentBusy)="componentBusy.next($event)">

@@ -1,5 +1,11 @@
 <main class="participation">
-    <h2 class="title static-page-title" translate>ParticipationPage.Title</h2>
+    <div class="main">
+    <section class="section titleSection">
+        <div class="content content_medium">
+            <h1 class="section-title" translate>ParticipationPage.Title</h1>
+        </div>
+    </section>
+    </div>
     <section *ngFor="let step of 'ParticipationPage.Steps' | translate; let i = index;" class="step">
         <div class="step__data">
             <div class="step__label participate-step-label">{{step.Step}}</div>
@@ -9,6 +15,14 @@
             <h2 class="step__title">{{step.Title}}</h2>
             <p class="step__text">{{step.Text}}</p>
 
+            <a *ngIf="step.Button && stepsHref[i]"
+                mat-stroked-button
+                target="_blank"
+                [href]="stepsHref[i]"
+                class="step__btn button button_small small-letter-spacing button_secondary">
+                {{step.Button}}
+            </a>
+
 
         </div>
         <div class="step__image">
@@ -16,9 +30,9 @@
                  [src]="'assets/images/step' + (i+1) + '_big.png'"
                  [alt]="step.ImageAlt">
         </div>
-    </section> 
+    </section>
 
-    <h2 class="title static-page-title" translate>BenefitsParticipation.Title</h2>
+    <h2 class="title" translate>BenefitsParticipation.Title</h2>
     <section *ngFor="let step of 'BenefitsParticipation.Participations' | translate; let i = index;" class="step">
         <div class="step__data">
 
@@ -37,4 +51,5 @@
                  [src]="'assets/images/pic' + (i+1) + '_big.png'"
                  [alt]="step.ImageAlt">
         </div>
-   
+    </section>
+</main>

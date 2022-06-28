@@ -6,7 +6,7 @@
         <p>We are on a mission to find out what causes single ventricle heart disease and find better ways to treat it.</p>
         <p>By sharing your health information,<br>you can help us make it happen.</p>
         <p>Join our community of patients and families<br>who are committed to making discoveries!</p>
-        <button class="button button--primary button--lg" [routerLink]="Route.PreScreening">Sign me up!</button>
+        <button (click)="clickPreScreening()" class="button button--primary button--lg" [routerLink]="Route.PreScreening">{{ PRESCREEN_BUTTON_LABEL }}</button>
       </div>
       <div class="header-photo">
         <img src="assets/images/about-header.png" alt="">
@@ -41,11 +41,15 @@
       <p>We don't know what causes single ventricle heart defects<br>or many of the associated health problems. If we understand the causes, researchers may be able to develop new and better treatments.</p>
       <p>We hope that by looking at the genes of at least 5,000 patients and their immediate family members, we can make life-saving discoveries.</p>
       <p>In order to reach our goal, <b>we need your help.</b></p>
-      <button class="button button--primary button--lg" [routerLink]="Route.PreScreening">Sign me up!</button>
+      <button (click)="clickPreScreening()" class="button button--primary button--lg" [routerLink]="Route.PreScreening">{{ PRESCREEN_BUTTON_LABEL }}</button>
     </div>
   </div>
 </section>
-
+<section>
+    <div class="container">
+        <app-video-intro pageRendered="HOME">></app-video-intro>
+    </div>
+</section>
 <section class="join">
   <div class="container">
     <div class="join-wrapper">
@@ -64,7 +68,7 @@
     </div>
     <div class="join-sign_up">
       <div class="join-sign_up-text">Living with single ventricle heart disease can feel powerless—but you have the power to fuel research and a brighter tomorrow. <span class="text-semibold">Let’s get started today.</span></div>
-      <button class="button button--primary button--lg" [routerLink]="Route.PreScreening">Sign me up!</button>
+      <button (click)="clickPreScreening()"  class="button button--primary button--lg" [routerLink]="Route.PreScreening">{{ PRESCREEN_BUTTON_LABEL }}</button>
     </div>
   </div>
 </section>
@@ -79,7 +83,7 @@
         <div class="participating-steps-step-name">Enroll Participant(s)</div>
         <div class="participating-steps-step-text">
           <p>To enroll, each participant will need to agree to a research consent form that explains the study.</p>
-          <a href="https://storage.googleapis.com/singular-dev-assets/consent_self.pdf" target="_blank">Preview Consent Form</a>
+          <a [ngClass]="IGNORE_ANALYTICS_CLASS" (click)="clickDownload(CONSENT_PDF_NAME, CONSENT_PDF_URL)" [href]="CONSENT_PDF_URL" target="_blank">{{ CONSENT_PDF_NAME }}</a>
         </div>
       </div>
       <div class="participating-steps-step">
@@ -98,7 +102,7 @@
           <p>Once enrolled, we will send each participant a returnable spit kit to learn about their DNA.</p>
         </div>
         <div class="participating-steps-step-link">
-          <a href="https://storage.googleapis.com/singular-dev-assets/saliva_kit.pdf" target="_blank">Preview Kit Instructions</a>
+          <a [ngClass]="IGNORE_ANALYTICS_CLASS" (click)="clickDownload(SALIVA_KIT_PDF_NAME, SALIVA_KIT_PDF_URL)" [href]="SALIVA_KIT_PDF_URL" target="_blank">{{ SALIVA_KIT_PDF_NAME }}</a>
         </div>
       </div>
     </div>

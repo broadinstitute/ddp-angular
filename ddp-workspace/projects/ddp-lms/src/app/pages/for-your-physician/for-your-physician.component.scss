@@ -1,0 +1,121 @@
+@import '../../../../../ddp-pancan/src/styles/variables.scss';
+
+.main {
+  width: 100%;
+}
+
+.headerPlace {
+  height: 10rem;
+  background-color: #c59ce4;
+  width: 100%;
+}
+
+.headerText {
+  height: 3.625rem;
+  color: #000000;
+  font-family: Untitled-Sans-Light, sans-serif;
+  font-size: 3rem;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 3.625rem;
+  text-align: center;
+  cursor: default;
+  margin: 0 auto 5.625rem;
+  padding: 3.2rem 0;
+  background-color: $accent-lms-color !important;
+}
+
+.purposePlace {
+  background-color: #f1e4fb;
+  text-align: -webkit-center;
+  margin-bottom: 2.75rem;
+  width: 100%;
+
+  .inner-container {
+    padding: 3rem;
+
+    .the-purpose-of-this {
+      color: #000000;
+      font-family: 'Untitled Sans', sans-serif;
+      font-size: 1.25rem;
+      letter-spacing: 0;
+      line-height: 1.875rem;
+      text-align: left;
+      margin: 3rem 0 !important;
+      width: 60%;
+
+      @media(max-width: 776px){
+        width: 80%;
+      }
+
+      @media(max-width: 576px){
+        width: 100%;
+      }
+    }
+
+    .downloadPdf {
+      cursor: pointer;
+      padding: 1.25rem 3rem;
+      border-radius: 0.25rem;
+      background-color: #9953ce;
+      border: none;
+
+      .downloadTitle {
+        color: #ffffff;
+        font-family: 'Untitled Sans', sans-serif;
+        font-size: 1.375rem;
+        letter-spacing: -6.25e-4rem;
+        line-height: 1.5rem;
+      }
+
+      &:active {
+        background-color: #9953ce96;
+      }
+    }
+  }
+}
+
+.paragraphsList {
+  width: 50%;
+  color: #000000;
+  font-family: 'Untitled Sans', sans-serif;
+  letter-spacing: 0;
+  line-height: 1.875rem;
+  padding-bottom: 1.875rem;
+
+  @media (max-width: 776px) {
+    width: 70%;
+  }
+
+  @media (max-width: 576px) {
+    width: 80%;
+  }
+}
+
+.paragraph {
+  margin-bottom: 1.25rem;
+
+  .paragraphTitle {
+    font-weight: bold;
+    font-size: 1.25rem;
+  }
+
+  .paragraphText {
+    color: #000000;
+    font-family: 'Untitled Sans', sans-serif;
+    letter-spacing: 0;
+    line-height: 1.875rem;
+    font-weight: normal;
+    font-size: 1.1875rem;
+  }
+
+  .paragraphText1Highlighted {
+    color: #c59ce4;
+    font-size: 1.1875rem;
+    text-decoration: underline;
+  }
+
+  .partOne {
+    margin-bottom: 1.25rem;
+  }
+}

@@ -1,20 +1,15 @@
+@use '@angular/material' as mat;
+@import "../../../app-theme.scss";
 @import '../../../../../ddp-pancan/src/styles/variables.scss';
 
 .scientific {
     text-align: left;
 
-    .title {
-        margin: 0 auto 5.625rem;
-        text-align: center;
-        padding: 3.2rem 0;
-        background-color: $accent-color-orange;
-    }
-
     .scientific-title {
         margin: 0 auto 5.625rem;
         text-align: center;
-        padding: 3.2rem 0;
-        background-color: $accent-color-orange;
+        padding: 4.375rem 0;
+        background-color: mat.get-color-from-palette($app-theme, 350);
     }
 
     .column {
@@ -27,18 +22,17 @@
         padding-bottom: 7.94rem;
         flex-direction: row;
     }
-
 }
 
 .image_title {
-    margin: auto;
     margin-left: 20px;
     margin-right: 20px;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .section {
-    padding: 0 1.5rem 9.94rem 1.5rem;
+    padding: 0;
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-around;
@@ -47,6 +41,15 @@
     &:nth-of-type(odd) {
         padding-bottom: 7.94rem;
         flex-direction: row;
+    }
+
+    .content {
+        width: 60%;
+        margin: auto;
+
+        @media(max-width: 776px){
+            width: 80%;
+        }
     }
 
     &__data {
@@ -72,7 +75,7 @@
         line-height: 3.625rem;
         font-weight: normal;
         overflow: scroll;
-        white-space:nowrap;
+        white-space: nowrap;
     }
 
     &__text {
@@ -101,22 +104,21 @@
 }
 
 .column {
-	overflow: scroll;
-	white-space:nowrap;
-  }
+    overflow: scroll;
+    white-space: nowrap;
+}
 
 .image_item {
-    width:300px;
-  }
-
+    width: 300px;
+}
 
 @media screen and (max-width: $tablet-breakpoint) {
-        .scientific-title {
-            align-items: center;
-            gap: 3rem;
+    .scientific-title {
+        align-items: center;
+        gap: 3rem;
 
-            &:nth-of-type(n) {
-                flex-direction: column-reverse;
-            }
+        &:nth-of-type(n) {
+            flex-direction: column-reverse;
         }
+    }
 }

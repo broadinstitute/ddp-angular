@@ -60,6 +60,7 @@ import { UserActivitiesComponent } from './components/user-activities/user-activ
 import { StudyMessagesComponent } from './components/study-messages/study-messages.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -170,6 +171,7 @@ export function translateFactory(
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         AppRoutingModule,
         DdpModule,
         ToolkitModule,

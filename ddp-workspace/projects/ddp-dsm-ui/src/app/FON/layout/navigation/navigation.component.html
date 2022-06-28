@@ -1,0 +1,33 @@
+<aside [ngClass]="{'hidden-menu': isHidden}">
+  <div class="titles">
+    <div class="topTitle">
+      <p>Study Manager</p>
+      <mat-icon
+        (click)="toggleNavMenu()"
+        [ngClass]="isHidden? 'toggleMenuBtn-hidden' : 'toggleMenuBtn'">keyboard_tab
+      </mat-icon>
+    </div>
+    <div class="topSubTitle">
+      <p>Fontan Outcomes Network</p>
+    </div>
+  </div>
+
+  <div class="navigation">
+    <ul class="topNavigation">
+      <li *ngFor="let item of topNavigation"
+          [class.activeNav]="isActive(item.route)"
+          [routerLink]="[item.route]">
+        <mat-icon *ngIf="item.img">{{item.img}}</mat-icon>
+        {{ item.name }}
+      </li>
+    </ul>
+
+    <ul class="botNavigation">
+      <li *ngFor="let item of botNavigation" [routerLink]="[item.route]" (click)="signOut(item.signOut)">
+        <mat-icon *ngIf="item.img">{{item.img}}</mat-icon>
+        {{ item.name }}
+      </li>
+    </ul>
+  </div>
+</aside>
+
