@@ -18,10 +18,11 @@ export class BulkCohortTagModalComponent implements OnInit  {
 
   readonly OPTIONS = OPTIONS;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { manualFilter: string, savedFilter: ViewFilter, selectedPatients: [] }, 
-    private matDialog: MatDialog, private dsmService: DSMService, private compService: ComponentService, 
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { manualFilter: string; savedFilter: ViewFilter; selectedPatients: [] },
+    private matDialog: MatDialog, private dsmService: DSMService, private compService: ComponentService,
     public dialogRef: MatDialogRef<BulkCohortTagModalComponent>
-  ) 
+  )
   { }
 
   addOnBlur = true;
@@ -55,30 +56,30 @@ export class BulkCohortTagModalComponent implements OnInit  {
   }
 
   bulkCreateCohorts(): void {
-    const bulkCohortTag = 
+    const bulkCohortTag =
         new BulkCohortTag(this.tags, this.data.manualFilter, this.data.savedFilter, this.data.selectedPatients, this.selectedOption);
     const dialogRef = this.matDialog;
     this.dsmService.bulkCreateCohortTags(bulkCohortTag, this.compService.getRealm()).subscribe({
       next: data => {
         this.dialogRef.close(data);
         this.loadingDialogState.next(true);
-        this.matDialog.open(ParticipantUpdateResultDialogComponent, {data: {message: "Cohort tags successfully created"}});
+        this.matDialog.open(ParticipantUpdateResultDialogComponent, {data: {message: 'Cohort tags successfully created'}});
       }, error: () => {
         this.dialogRef.close();
         this.loadingDialogState.next(true);
-        this.matDialog.open(ParticipantUpdateResultDialogComponent, {data: {message: "Bulk creation of cohort tags was unsuccessful"}});
+        this.matDialog.open(ParticipantUpdateResultDialogComponent, {data: {message: 'Bulk creation of cohort tags was unsuccessful'}});
       }
-    })    
+    });
   }
 
   isTagsEmpty(): boolean {
-    return this.tags.length == 0;
+    return this.tags.length === 0;
   }
 
 
 }
 
 export const OPTIONS = {
-  'selectedPatients': 'SELECTED_PATIENTS',
-  'allPatients': 'ALL_PATIENTS'
-}
+  selectedPatients: 'SELECTED_PATIENTS',
+  allPatients: 'ALL_PATIENTS'
+};
