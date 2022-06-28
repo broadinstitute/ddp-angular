@@ -33,6 +33,9 @@ import { Sort } from '../sort/sort.model';
 import { saveAs } from 'file-saver';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { LoadingModalComponent } from '../modals/loading-modal.component';
+import { BulkCohortTagModalComponent } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-modal.component';
+import { CohortTagComponent } from '../tags/cohort-tag/cohort-tag.component';
+import { CohortTag } from '../tags/cohort-tag/cohort-tag.model';
 
 @Component({
   selector: 'app-participant-list',
@@ -122,6 +125,7 @@ export class ParticipantListComponent implements OnInit {
   private start: number;
   selectAll = false;
   selectAllColumnsLabel = 'Select all';
+  selectedPatients: string[] = [];
 
   constructor(private role: RoleService, private dsmService: DSMService, private compService: ComponentService,
                private router: Router, private auth: Auth, private route: ActivatedRoute, private util: Utils,
@@ -1622,6 +1626,32 @@ export class ParticipantListComponent implements OnInit {
     return this.dialog.open(LoadingModalComponent, {data: {message: message}, disableClose: true});
   }
 
+  openBulkCohort(): void {
+    const openedDialog = this.dialog.open(BulkCohortTagModalComponent, {data: {
+      manualFilter: this.jsonPatch, 
+      savedFilter: this.viewFilter,
+      selectedPatients: this.selectedPatients
+    }});
+    openedDialog.afterClosed().subscribe(data => this.setBulkCreatedTagsToParticipants(data));
+  }
+
+  private setBulkCreatedTagsToParticipants(data: any): void {
+    const cohortTags = data as CohortTag[];
+    for (const cohortTag of cohortTags) {
+      const maybeParticipant = this.participantList
+          .find(participant => participant.data.profile['guid'] === cohortTag['ddpParticipantId']);
+      if (maybeParticipant) {
+        const existingCohortTags = maybeParticipant.data.dsm[CohortTagComponent.COHORT_TAG] as CohortTag[];
+        if (existingCohortTags) {
+          existingCohortTags.push(cohortTag);
+        } else {
+          maybeParticipant.data.dsm[CohortTagComponent.COHORT_TAG] = [cohortTag];
+        }
+      }
+    }
+    this.selectedPatients = [];
+  }
+
   downloadCurrentData(): void {
     const dialogRef = this.openDialog('Exporting participants list...');
     const columns = [];
@@ -1671,14 +1701,20 @@ export class ParticipantListComponent implements OnInit {
     return key;
   }
 
-  checkboxChecked(): void {
+  checkboxChecked(participant: Participant): void {
     this.isAssignButtonDisabled = true;
-    for (const pt of this.participantList) {
-      if (pt.isSelected) {
+    if (participant.isSelected) {
+      if (this.isAssignable(participant)) {
         this.isAssignButtonDisabled = false;
-        break;
       }
+      this.selectedPatients.push(participant.data.profile['guid'])
     }
+  }
+
+  private isAssignable(participant: Participant): boolean {
+    return participant.data.status === 'ENROLLED'
+      && participant.data.medicalProviders != null && participant.medicalRecords != null
+      && participant.data.medicalProviders.length > 0 && participant.medicalRecords.length > 0;
   }
 
   assign(): void { // arg[0] = selectedAssignee: Assignee
@@ -1686,7 +1722,7 @@ export class ParticipantListComponent implements OnInit {
     if (this.assignee != null && this.participantList.length > 0) {
       const assignParticipants: Array<AssigneeParticipant> = [];
       for (const pt of this.participantList) {
-        if (pt.isSelected) {
+        if (pt.isSelected && this.isAssignable(pt)) {
           if (this.assignMR) {
             if (this.assignee.assigneeId === '-1') {
               pt.participant.assigneeIdMr = null;
