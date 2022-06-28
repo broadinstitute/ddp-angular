@@ -705,15 +705,10 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
 
     private meetsActivityRequirements(currentAddress: Address | null): boolean {
-        if (!currentAddress) return;
         if (this.block.requireVerified && !currentAddress) {
             return false;
         }
-        if (this.block.requirePhone) {
-            return currentAddress && !currentAddress.phone;
-        } else {
-            return this.countOfFieldsWithData(currentAddress);
-        }
+        return this.block.requirePhone ? !currentAddress.phone : this.countOfFieldsWithData(currentAddress);
     }
 
     private computeValidityForSparseAddress(address: Address | null): boolean {
