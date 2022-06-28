@@ -1,0 +1,77 @@
+<ng-container>
+  <table class="table table-striped Width--100">
+    <thead>
+    <tr>
+      <th>
+        Select
+      </th>
+      <th>Sample Type</th>
+      <th>Sample</th>
+      <th>Sample Status</th>
+      <th>Collection Date</th>
+      <th>Latest Sequencing Order Date</th>
+      <th>Latest Order Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let sample of samples">
+      <td>
+        <mat-checkbox *ngIf="shouldHaveCheckbox(sample)" [(ngModel)]="sample.isSelected" color="primary" disableRipple>
+        </mat-checkbox>
+      </td>
+      <td>
+        {{sample.sampleType}}
+      </td>
+      <td>
+        {{sample.sample}}
+      </td>
+      <td>
+        {{sample.sampleStatus}}
+      </td>
+      <td>
+        <ng-container *ngIf="sample.sampleType === 'Normal'">
+          <app-field-datepicker (dateChanged)="valueChanged($event, 'collectionDate', sample)" [allowUnknownDay]="false"
+                                [colorDuringPatch]="isPatchedCurrently('collectionDate')"
+                                [dateString]="sample.collectionDate"
+                                [showTodayButton]="true"></app-field-datepicker>
+        </ng-container>
+        <ng-container *ngIf="sample.sampleType === 'Tumor'">
+          {{sample.collectionDate}}
+        </ng-container>
+
+      </td>
+      <td>
+        {{getDateFormatted(sample.sequencingOrderDate)}}
+      </td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+  <ng-container>
+    <button (click)="preSubmitOrder()" color="primary">
+      Place order
+    </button>
+  </ng-container>
+
+
+  <app-modal>
+    <div *ngIf="checkError()" class="app-modal-header">
+      The selected set of samples has one or more errors: <br>
+    </div>
+    <div class="app-modal-body">
+      <ng-container *ngIf="checkError()">{{errorMessage}}</ng-container>
+      <ng-container *ngIf="!checkError()">
+        <p>
+          Are you sure you want to place a clinical sequencing order for the following samples:<br>
+          Participant short ID: {{participant.data.profile['hruid']}} <br>
+          Normal: {{this.selectedNormal.sample}} <br>
+          Tumor: {{this.selectedTissue.sample}}
+        </p>
+      </ng-container>
+    </div>
+    <div class="app-modal-footer">
+      <button (click)="closeModal()" class="btn btn-default" type="button">Close</button>
+      <button (click)="submitOrders()" *ngIf="!this.checkError()" class="btn btn-default" type="button">Submit</button>
+    </div>
+  </app-modal>
+</ng-container>

@@ -8,6 +8,7 @@ import { ParticipantData } from '../participant-list/models/participant-data.mod
 import { PreferredLanguage } from '../participant-list/models/preferred-languages.model';
 import { Participant } from '../participant-list/participant-list.model';
 import { PDFModel } from '../pdf-download/pdf-download.model';
+import {SequencingOrder} from '../sequencing-order/sequencing-order.model';
 
 import { ComponentService } from '../services/component.service';
 import { Auth } from '../services/auth.service';
@@ -124,6 +125,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   bundle = false;
   private scrolled: boolean;
 
+  sequencingOrdersArray = [];
 
   constructor(private auth: Auth, private compService: ComponentService, private dsmService: DSMService, private router: Router,
                private role: RoleService, private util: Utils, private route: ActivatedRoute, public dialog: MatDialog) {
@@ -180,6 +182,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
     this.displayActivityOrder();
     this.addMedicalProviderInformation();
+    this.getMercuryEligibleSamples();
   }
 
   addMedicalProviderInformation(): void {
@@ -791,6 +794,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     if (data instanceof TabDirective) {
       // this.selectedTabTitle = data.heading;
       this.activeTab = tabName;
+    }
+    if (tabName === 'sequencing') {
+      this.getMercuryEligibleSamples();
     }
   }
 
@@ -1436,10 +1442,52 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     this.universalModal.show();
     return false;
   }
-  //TODO remove before final merge, for testing only
-  testGetActivity(participantId: string): void {
-    this.dsmService.testDSSGetActivity(participantId).subscribe(data => {
-      console.log(data);
-    });
+
+  public getMercuryEligibleSamples(): void {
+    if (!this.canHaveSequencing( this.participant )) {
+      return;
+    }
+    const realm = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
+    this.dsmService.getMercuryEligibleSamples( this.participant.participant.ddpParticipantId, realm ).subscribe( {
+      next: data => {
+        const jsonData = data;
+        this.sequencingOrdersArray = [];
+        if (jsonData) {
+          jsonData.forEach( ( json ) => {
+              const order = SequencingOrder.parse( json );
+              this.sequencingOrdersArray.push( order );
+            }
+          );
+        }
+
+      },
+      error: () => {
+
+      }
+    } );
+  }
+
+  canHaveSequencing( participant: Participant ): boolean {
+    if (!this.role.allowedToDoOrderSequencing()) {
+      return false;
+    }
+    const enrolled: boolean = participant.data.status === 'ENROLLED';
+    let hasGender = false;
+    if (participant.oncHistoryDetails.find( onc => onc.gender !== '' && onc.gender !== undefined && onc.gender !== null )) {
+      hasGender = true;
+    }
+    else {
+      const aboutYouActivity = participant.data.activities.find( activity => activity.activityCode === 'ABOUT_YOU' );
+      if (aboutYouActivity) {
+        const genderQuestion = aboutYouActivity.questionsAnswers.find( questionAnswer => questionAnswer.stableId === 'ASSIGNED_SEX' );
+        if (genderQuestion && genderQuestion.answer) {
+          hasGender = true;
+        }
+      }
+      else {
+        hasGender = false;
+      }
+    }
+    return hasGender && enrolled;
   }
 }

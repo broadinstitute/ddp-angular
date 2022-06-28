@@ -1,0 +1,33 @@
+<ng-container *ngIf="!loading">
+  <h1> Clinical Orders </h1>
+  <div align="right" style="width: 100%; height: 100%;">
+    <button (click)="downloadList()" color="primary" mat-raised-button>Download list</button>
+    <button (click)="reloadList()" color="primary" mat-raised-button>Reload list</button>
+  </div>
+  <table class="table table-striped Width--100">
+    <thead>
+    <tr>
+      <th>
+        Short ID
+      </th>
+      <th>Sample Type</th>
+      <th>Sample</th>
+      <th>Order Date</th>
+      <th>Status</th>
+      <th>Order Number</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let order of clinicalOrdersArray">
+      <td>{{order.shortId}}</td>
+      <td>
+        {{order.sampleType}}
+      </td>
+      <td>{{order.sample}}</td>
+      <td>{{getDateFormatted(order.orderDate)}}</td>
+      <td>{{getOrderStatus(order.statusDetail)}}</td>
+      <td>{{order.orderId}}</td>
+    </tr>
+    </tbody>
+  </table>
+</ng-container>

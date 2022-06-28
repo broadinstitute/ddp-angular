@@ -129,7 +129,7 @@
               [disabled]="updatedEmail === participant.data.profile['email'] || updatedEmail.length === 0 || !isEmailValid"
               (click)="updateEmail()">Update
             </button>
-          </td>          
+          </td>
           <td *ngIf="!hasRole().allowedToEditParticipant()">
             {{participant.data.profile['email']}}
           </td>
@@ -191,7 +191,7 @@ participant.data.dsm['diagnosisYear'] != null">
           </tr>
           <tr>
             <td>
-              <app-cohort-tag 
+              <app-cohort-tag
                 [ddpParticipantId]="participant.data.profile.guid"
                 [dsm]="participant.data.dsm"
               ></app-cohort-tag>
@@ -847,7 +847,12 @@ participant.data.dsm['diagnosisYear'] != null">
                 </div>
               </ng-container>
             </tab>
-
+            <tab (selectTab)="onSelect($event, 'sequencing');" *ngIf="canHaveSequencing(participant)"
+                 [active]="tabActive('sequencing')" heading="Sequencing Order">
+              <app-sequencing-order [participant]="participant"
+                                    [samples]="sequencingOrdersArray">
+              </app-sequencing-order>
+            </tab>
             <tab heading="First Medical Record Abstraction" [active]="tabActive('abstraction')"
                  (selectTab)="onSelect($event, 'abstraction'); getFileList(participant.abstraction)"
                  *ngIf="(participant.abstraction != null && abstractionFields != null

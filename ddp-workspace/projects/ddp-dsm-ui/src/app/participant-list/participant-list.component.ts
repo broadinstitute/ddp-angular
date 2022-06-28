@@ -115,6 +115,7 @@ export class ParticipantListComponent implements OnInit {
   preferredLanguages: PreferredLanguage[] = [];
   savedSelectedColumns = {};
   isAddFamilyMember = false;
+  hasSequencingOrders = false;
   showGroupFields = false;
   hideSamplesTab = false;
   showContactInformation = false;
@@ -663,6 +664,7 @@ export class ParticipantListComponent implements OnInit {
         this.updateStudySpecificStatuses(jsonData.studySpecificStatuses);
         this.isAddFamilyMember = jsonData.addFamilyMember === true;
         this.showGroupFields = jsonData.showGroupFields === true;
+        this.hasSequencingOrders = jsonData.hasSequencingOrders === true;
 
         if (jsonData.hideSamplesTab === true) {
           this.hideSamplesTab = true;

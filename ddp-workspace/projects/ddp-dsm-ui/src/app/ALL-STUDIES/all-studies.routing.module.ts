@@ -1,3 +1,4 @@
+import {ClinicalPageComponent} from '../clinical-page/clinical-page.component';
 import {Statics} from '../utils/statics';
 import {DashboardComponent} from '../dashboard/dashboard.component';
 import {ShippingReportComponent} from '../shipping-report/shipping-report.component';
@@ -59,6 +60,7 @@ export const AppRoutes: Routes = [
       {path: 'discardSample', component: DiscardSamplePageComponent, canActivate: [AuthGuard]},
       {path: 'labelSettings', component: LabelSettingsComponent, canActivate: [AuthGuard]},
       {path: 'drugList', component: DrugListComponent, canActivate: [AuthGuard]},
+      {path: 'clinicalOrders', component: ClinicalPageComponent, canActivate: [ AuthGuard ]},
 
       // Study
       {path: Statics.MEDICALRECORD_DASHBOARD, component: DashboardComponent, canActivate: [AuthGuard]},
