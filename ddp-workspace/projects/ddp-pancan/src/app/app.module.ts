@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { CommonModule, LOCATION_INITIALIZED } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,7 +18,6 @@ import {
     LanguageService,
     LoggingService,
     SortOrder,
-    PicklistSortingPolicy,
     AnalyticsEventsService,
     AnalyticsEvent,
     PICKLIST_SORTING_POLICY_LAST_STABLE_ID,
@@ -64,6 +64,7 @@ toolkitConfig.phone = '651-403-5315';
 toolkitConfig.infoEmail = 'info@joincountmein.org';
 toolkitConfig.twitterAccountId = 'count_me_in';
 toolkitConfig.facebookGroupId = 'joincountmein';
+toolkitConfig.instagramId = 'countmein';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org';
 toolkitConfig.colorectalPagePhone = '651-403-5315';
 toolkitConfig.colorectalPageEmail = 'info@colorectalcancerproject.org';
@@ -161,6 +162,7 @@ export function translateFactory(translate: TranslateService,
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         AppRoutingModule,
         CommonModule,
         DdpModule,
@@ -200,8 +202,7 @@ export function translateFactory(translate: TranslateService,
         {
             provide: PICKLIST_SORTING_POLICY_LAST_STABLE_ID,
             useValue: 'UNSURE'
-        },
-        PicklistSortingPolicy
+        }
     ],
     bootstrap: [AppComponent]
 })

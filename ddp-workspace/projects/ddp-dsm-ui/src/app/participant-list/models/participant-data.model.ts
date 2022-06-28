@@ -1,8 +1,5 @@
 export class ParticipantData {
-  constructor(public dataId: string, public fieldTypeId: string, public data: {}) {
-    this.dataId = dataId;
-    this.fieldTypeId = fieldTypeId;
-    this.data = data;
+  constructor(public participantDataId: string, public fieldTypeId: string, public data: {}) {
   }
 
   static parse(json): ParticipantData {

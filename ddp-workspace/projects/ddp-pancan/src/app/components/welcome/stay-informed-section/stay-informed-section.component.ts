@@ -16,6 +16,7 @@ export class StayInformedSectionComponent {
     readonly AppRoutes = AppRoutes;
     readonly twitterUrl: string;
     readonly facebookUrl: string;
+    readonly instagramUrl: string;
 
     constructor(
         private dialog: MatDialog,
@@ -24,6 +25,7 @@ export class StayInformedSectionComponent {
     ) {
         this.twitterUrl = `https://twitter.com/${this.toolkitConfiguration.twitterAccountId}`;
         this.facebookUrl = `https://www.facebook.com/${this.toolkitConfiguration.facebookGroupId}`;
+        this.instagramUrl = `https://www.instagram.com/${this.toolkitConfiguration.instagramId}`;
     }
 
     public openJoinMailingList(): void {

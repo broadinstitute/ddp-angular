@@ -3,83 +3,99 @@ import { AbstractActivityQuestionBlock } from '../../../../models/activity/abstr
 import { AnswerValue } from '../../../../models/activity/answerValue';
 import { QuestionType } from '../../../../models/activity/questionType';
 import { BlockType } from '../../../../models/activity/blockType';
+import { LayoutType } from '../../../../models/layout/layoutType';
 
 @Component({
     selector: 'ddp-activity-answer',
     template: `
         <ng-container *ngIf="block.shown">
-            <ddp-activity-boolean-answer *ngIf="isBooleanQuestion(block)"
+            <ddp-activity-boolean-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.Boolean)"
                                          [class]="'boolean-answer-' + block.stableId"
                                          [block]="block"
                                          [readonly]="readonly"
+                                         [layoutType]="layoutType"
                                          (valueChanged)="onChange($event)">
             </ddp-activity-boolean-answer>
-            <ddp-activity-text-answer *ngIf="isTextQuestion(block)"
+            <ddp-activity-text-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.Text)"
                                       [block]="block"
                                       [readonly]="readonly"
+                                      [layoutType]="layoutType"
                                       (valueChanged)="onChange($event)">
             </ddp-activity-text-answer>
-            <ddp-activity-numeric-answer *ngIf="isNumericQuestion(block) || isDecimalQuestion(block)"
+            <ddp-activity-numeric-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.Numeric) || isCertainTypeOfQuestion(block, QuestionType.Decimal)"
                                          [class]="'numeric-answer-' + block.stableId"
                                          [block]="block"
                                          [readonly]="readonly"
+                                         [layoutType]="layoutType"
                                          (valueChanged)="onChange($event)">
             </ddp-activity-numeric-answer>
-            <ddp-activity-picklist-answer  *ngIf="isPicklistQuestion(block)"
+            <ddp-activity-picklist-answer  *ngIf="isCertainTypeOfQuestion(block, QuestionType.Picklist)"
                                             [class]="'picklist-answer-' + block.stableId"
                                             [block]="block"
                                             [readonly]="readonly"
                                             [studyGuid]="studyGuid"
                                             [activityGuid]="activityGuid"
-                                            (valueChanged)="onChange($event)"
-        >
-        </ddp-activity-picklist-answer>
-            <ddp-activity-date-answer *ngIf="isDateQuestion(block)"
+                                           [layoutType]="layoutType"
+                                            (valueChanged)="onChange($event)">
+            </ddp-activity-picklist-answer>
+            <ddp-activity-date-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.Date)"
                                       [class]="'date-answer-' + block.stableId"
                                       [block]="block"
                                       [readonly]="readonly"
                                       [validationRequested]="validationRequested"
+                                      [layoutType]="layoutType"
                                       (valueChanged)="onChange($event)">
             </ddp-activity-date-answer>
-            <ddp-activity-composite-answer *ngIf="isCompositeQuestion(block)"
+            <ddp-activity-composite-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.Composite)"
                                            [class]="'composite-answer-' + block.stableId"
                                            [block]="block"
                                            [readonly]="readonly"
                                            [validationRequested]="validationRequested"
+                                           [layoutType]="layoutType"
                                            (valueChanged)="onChange($event)"
                                            (componentBusy)="componentBusy.next($event)">
             </ddp-activity-composite-answer>
-            <ddp-activity-agreement-answer *ngIf="isAgreementQuestion(block)"
+            <ddp-activity-agreement-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.Agreement)"
                                            [block]="block"
                                            [readonly]="readonly"
+                                           [layoutType]="layoutType"
                                            (valueChanged)="onChange($event)">
             </ddp-activity-agreement-answer>
-            <ddp-activity-file-answer *ngIf="isFileQuestion(block)"
+            <ddp-activity-file-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.File)"
                                       [class]="'file-answer-' + block.stableId"
                                       [block]="block"
                                       [readonly]="readonly"
                                       [studyGuid]="studyGuid"
                                       [activityGuid]="activityGuid"
                                       (valueChanged)="onChange($event)"
+                                      [layoutType]="layoutType"
                                       (componentBusy)="componentBusy.next($event)">
             </ddp-activity-file-answer>
-            <ddp-activity-matrix-answer *ngIf="isMatrixQuestion(block)"
+            <ddp-activity-matrix-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.Matrix)"
                                         [class]="'matrix-answer-' + block.stableId"
                                         [block]="block"
                                         [readonly]="readonly"
+                                        [layoutType]="layoutType"
                                         (valueChanged)="onChange($event)">
             </ddp-activity-matrix-answer>
-            <ddp-activity-instance-select-answer *ngIf="isActivityInstanceSelectQuestion(block)"
+            <ddp-activity-instance-select-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.ActivityInstanceSelect)"
                                                  [class]="'activity-instance-select-answer-' + block.stableId"
                                                  [block]="block"
                                                  [readonly]="readonly"
                                                  (valueChanged)="onChange($event)"
-                                                 (componentBusy)="componentBusy.next($event)"
-            ></ddp-activity-instance-select-answer>
+                                                 [layoutType]="layoutType"
+                                                 (componentBusy)="componentBusy.next($event)">
+            </ddp-activity-instance-select-answer>
+            <ddp-activity-equation-answer *ngIf="isCertainTypeOfQuestion(block, QuestionType.Equation)"
+                                          [class]="'equation-answer-' + block.stableId"
+                                          [layoutType]="layoutType"
+                                          [block]="block"
+                                          (valueChanged)="onChange($event)">
+            </ddp-activity-equation-answer>
             <span *ngIf="block.additionalInfoFooter"
                   [innerHTML]="block.additionalInfoFooter"
                   class="ddp-activity-answer__info-footer">
-      </span>
+            </span>
         </ng-container>`,
     styleUrls: ['activityAnswer.component.scss']
 })
@@ -90,58 +106,16 @@ export class ActivityAnswerComponent {
     @Input() validationRequested: boolean;
     @Input() studyGuid: string;
     @Input() activityGuid: string;
+    @Input() layoutType: LayoutType = LayoutType.DEFAULT;
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
     @Output() componentBusy = new EventEmitter<boolean>();
+    readonly QuestionType = QuestionType;
 
     public onChange(value: AnswerValue): void {
         this.valueChanged.emit(value);
     }
 
-    public isBooleanQuestion(block: AbstractActivityQuestionBlock): boolean {
-        return this.isQuestion(block) && block.questionType === QuestionType.Boolean;
-    }
-
-    public isTextQuestion(block: AbstractActivityQuestionBlock): boolean {
-        return this.isQuestion(block) && block.questionType === QuestionType.Text;
-    }
-
-    public isNumericQuestion(block: AbstractActivityQuestionBlock): boolean {
-        return this.isQuestion(block) && block.questionType === QuestionType.Numeric;
-    }
-
-    public isDecimalQuestion(block: AbstractActivityQuestionBlock): boolean {
-        return this.isQuestion(block) && block.questionType === QuestionType.Decimal;
-    }
-
-    public isPicklistQuestion(block: AbstractActivityQuestionBlock): boolean {
-        return this.isQuestion(block) && block.questionType === QuestionType.Picklist;
-    }
-
-    public isDateQuestion(block: AbstractActivityQuestionBlock): boolean {
-        return this.isQuestion(block) && block.questionType === QuestionType.Date;
-    }
-
-    public isCompositeQuestion(block: AbstractActivityQuestionBlock): boolean {
-        return this.isQuestion(block) && block.questionType === QuestionType.Composite;
-    }
-
-    public isAgreementQuestion(block: AbstractActivityQuestionBlock): boolean {
-        return this.isQuestion(block) && block.questionType === QuestionType.Agreement;
-    }
-
-    public isFileQuestion(block: AbstractActivityQuestionBlock): boolean {
-        return this.isQuestion(block) && block.questionType === QuestionType.File;
-    }
-
-    public isMatrixQuestion(block: AbstractActivityQuestionBlock): boolean {
-        return this.isQuestion(block) && block.questionType === QuestionType.Matrix;
-    }
-
-    public isActivityInstanceSelectQuestion(block: AbstractActivityQuestionBlock): boolean {
-        return this.isQuestion(block) && block.questionType === QuestionType.ActivityInstanceSelect;
-    }
-
-    private isQuestion(block: AbstractActivityQuestionBlock): boolean {
-        return block.blockType === BlockType.Question;
+    public isCertainTypeOfQuestion(block: AbstractActivityQuestionBlock, type: QuestionType): boolean {
+        return block.blockType === BlockType.Question && block.questionType === type;
     }
 }

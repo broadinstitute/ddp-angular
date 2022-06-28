@@ -1,0 +1,166 @@
+@import "../../../../styles/FON/core";
+
+:host-context(app-activities) {
+  grid-area: otherPage
+}
+
+// @TODO remove it after fixing this issue about overflowing HTML from activity section
+::ng-deep html {
+  overflow: hidden;
+}
+
+.activities-container {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: 10% 90%;
+  grid-template-areas:
+    "patientInfo"
+    "activities"
+  ;
+  header {
+    @include flexContainer(center, space-between);
+    grid-area: patientInfo;
+    padding: 32px 32px 19px 32px;
+    border-bottom: 2px solid $__Mercury;
+
+    .patient {
+      @include flexContainer(center, center);
+
+      &-route {
+        @include flexContainer(center, center);
+        height: 100%;
+        color: $__Celestial_blue;
+        font-family: Montserrat-Medium, sans-serif;
+        font-size: getFontSize('xxlg');
+
+        &-name {
+          text-decoration: underline;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        &-arrow {
+          @include flexContainer(center, center);
+          font-size: 30px;
+        }
+      }
+
+      &-name {
+        @extend .patient-route;
+        color: $__Charcoal;
+        margin-left: 12px;
+      }
+
+      &-credentials {
+        @extend .patient-route;
+        color: $__Charcoal;
+        font-size: getFontSize('md');
+        margin-left: 22px;
+
+        :last-child {
+          margin-left: 8px;
+        }
+      }
+    }
+
+    .information {
+      @extend .patient;
+
+      p > span:not(:first-of-type) {
+        margin-left: 7px;
+      }
+
+      a {
+        margin-left: 23px;
+        text-decoration: underline;
+        color: $__Celestial_blue;
+      }
+    }
+  }
+
+  main {
+    grid-area: activities;
+    height: 100%;
+    @include flexContainer(normal, space-between);
+
+    .activities-nav {
+      width: 300px;
+      flex-shrink: 0;
+      height: 100%;
+      overflow: hidden;
+      margin-top: 8px;
+
+      ::ng-deep.mat-expansion-panel-content {
+        .mat-expansion-panel-body {
+          padding: 0!important;
+        }
+      }
+      ::ng-deep.mat-list .mat-list-item .mat-list-item-content {
+        padding: 0 0!important;
+      }
+
+      .mat-expansion-panel-spacing {
+        margin: 0!important;
+      }
+      .mat-expansion-panel:last-of-type {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+      .mat-expansion-panel:not([class*=mat-elevation-z]) {
+        box-shadow: none;
+      }
+
+      mat-expansion-panel {
+        padding: 0 16px;
+        mat-expansion-panel-header {
+          height: 40px;
+          border-bottom: 2px solid $__Mercury;
+          mat-panel-title {
+            font-family: Montserrat-SemiBold, sans-serif;
+            font-size: getFontSize('sm');
+          }
+          &.mat-expanded{
+            margin: 0;
+          }
+        }
+
+        mat-list {
+          padding: 0;
+          mat-list-item {
+            font-family: Montserrat-Regular, sans-serif;
+            font-size: getFontSize('md');
+            height: 40px!important;
+            &:last-of-type {
+              margin-bottom: 10px;
+            }
+
+            p {
+              padding: 10px 24px;
+              &:hover, &:focus {
+                background-color: $__activity_background_hover;
+                cursor: pointer;
+              }
+            }
+            .activeActivity {
+              background-color: $__activity_background_hover;
+              font-family: Montserrat-SemiBold, sans-serif;
+              font-size: getFontSize('md');
+            }
+          }
+        }
+
+      }
+    }
+
+    .activity {
+      width: auto;
+      flex-grow: 1;
+      height: 100%;
+      overflow: auto;
+      background-color: $__background_color_transparent;
+      border-left: 2px solid $__Mercury;
+    }
+  }
+}

@@ -4,4 +4,5 @@ export interface ActivityInstitution {
     institutionName: string;
     city: string;
     state: string;
+    country?: string;
 }

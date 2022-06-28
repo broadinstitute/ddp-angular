@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="27px" height="51px" viewBox="0 0 27 51" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title> Icons / Social / Twitter Copy@1x</title>
+    <defs>
+        <path d="M37.3592793,58.1818182 L37.3592793,35.6249299 L45.0754715,35.6249299 L46.2331278,26.8315018 L37.3592793,26.8315018 L37.3592793,21.2181803 C37.3592793,18.673075 38.0768832,16.9386163 41.8020536,16.9386163 L46.5454545,16.9367037 L46.5454545,9.0715505 C45.7251501,8.96699206 42.9093347,8.72727273 39.6320167,8.72727273 C32.7884543,8.72727273 28.1032287,12.824497 28.1032287,20.347285 L28.1032287,26.8315018 L20.3636364,26.8315018 L20.3636364,35.6249299 L28.1032287,35.6249299 L28.1032287,58.1818182 L37.3592793,58.1818182 Z" id="path-1"></path>
+    </defs>
+    <g id="Main-Pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Homepage" transform="translate(-1055.000000, -3368.000000)">
+            <g id="-Icons-/-Social-/-Twitter-Copy" transform="translate(1035.000000, 3360.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="f_1_" fill="#FFFFFF" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>

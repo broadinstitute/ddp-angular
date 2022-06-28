@@ -1,4 +1,4 @@
-<ddp-question-prompt [block]="block"></ddp-question-prompt>
+<ddp-question-prompt *ngIf="!isGridLayout()" [block]="block"></ddp-question-prompt>
 
 <div class="file-requirements" *ngIf="block.maxFileSize || block.mimeTypes?.length">
     <div class="file-max-size" *ngIf="block.maxFileSize">
@@ -19,7 +19,7 @@
     <div class="file-select">
         <div class="drop-block"
              dropFileToUpload
-             (filesDropped)="!readonly && onFilesSelected($event)"
+             (filesDropped)="!readonly && onFilesDropped($event)"
              (click)="!readonly && fileUpload.click()">
             <mat-icon class="upload-icon" color="primary">file_upload</mat-icon>
             <div class="drop-block-text" translate>SDK.FileUpload.ChooseFile</div>

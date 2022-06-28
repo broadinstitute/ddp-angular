@@ -1,0 +1,52 @@
+@import '../../../styles/fonts.scss';
+
+.footer {
+  font-family: Untitled-Sans, sans-serif;
+
+  .container {
+    background-color: #131314;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    $padding-left: 3.375rem;
+    $padding-right: 2rem;
+
+    .footer-nav {
+      padding: 3.375rem $padding-right 4rem $padding-left;
+    }
+
+    .copy-right {
+      color: white;
+      justify-content: space-between;
+      padding: 2.125rem $padding-right 2.75rem $padding-left;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+
+      p {
+        font-size: 1rem;
+        display: flex;
+        gap: 1rem;
+      }
+
+      ul {
+        list-style: none;
+        display: flex;
+        gap: 3rem;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 0;
+
+        li {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    hr {
+      margin: 0;
+      opacity: 0.3;
+    }
+  }
+}

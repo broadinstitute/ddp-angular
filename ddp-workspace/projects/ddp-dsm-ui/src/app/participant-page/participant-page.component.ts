@@ -22,7 +22,7 @@ import { Tissue } from '../tissue/tissue.model';
 import { Value } from '../utils/value.model';
 import { Result } from '../utils/result.model';
 import { NameValue } from '../utils/name-value.model';
-import { Abstraction } from '../medical-record-abstraction/medical-record-abstraction.model';
+import { Abstraction } from '../medical-record-abstraction/model/medical-record-abstraction.model';
 import { AbstractionGroup, AbstractionWrapper } from '../abstraction-group/abstraction-group.model';
 import { PatchUtil } from '../utils/patch.model';
 import { ParticipantUpdateResultDialogComponent } from '../dialogs/participant-update-result-dialog.component';
@@ -123,6 +123,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   message: string = null;
   bundle = false;
   private scrolled: boolean;
+
+
   constructor(private auth: Auth, private compService: ComponentService, private dsmService: DSMService, private router: Router,
                private role: RoleService, private util: Utils, private route: ActivatedRoute, public dialog: MatDialog) {
     if (!auth.authenticated()) {
@@ -216,8 +218,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   displayActivityOrder(): void {
     const orderedActivities = [];
-
-    [...this.activityDefinitions].sort(({displayOrder: A},{displayOrder: B}) => A - B)
+    this.activityDefinitions instanceof Array &&
+    [...this.activityDefinitions]
+      .sort(({displayOrder: A},{displayOrder: B}) => A - B)
       .forEach(activity => {
       const foundActivity = this.participant.data.activities
         .find(a => activity.activityCode === a.activityCode && activity.activityVersion === a.activityVersion);
@@ -918,6 +921,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
             if (result.code === 200 && result.body != null) {
               const jsonData: any | any[] = JSON.parse(result.body);
               const abstraction: Abstraction = Abstraction.parse(jsonData);
+              if (abstraction.lastChanged === null) {
+                abstraction.lastChanged = 0;
+              }
               this.participant[abstraction.activity] = abstraction;
               this.activeTab = abstraction.activity;
               if (this.participant.abstractionActivities != null) {
@@ -1303,7 +1309,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       this.participant != null && this.participant.participantData != null
       && fieldTypeId != null && fieldSetting.columnName != null && dataId != null
     ) {
-      let participantData: ParticipantData = this.participant.participantData.find(pData => pData.dataId === dataId);
+      let participantData: ParticipantData = this.participant.participantData.find(pData => pData.participantDataId === dataId);
       if (participantData == null) {
         const data: { [ k: string ]: any } = {};
         data[fieldSetting.columnName] = value;
@@ -1350,7 +1356,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           participantId = this.participant.data.profile[ 'legacyAltPid' ];
         }
         const patch = {
-          id: participantData.dataId,
+          id: participantData.participantDataId,
           parent: 'participantDataId',
           parentId: participantId,
           user: this.role.userMail(),
@@ -1367,7 +1373,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
             if (data) {
             if (data['participantDataId']) {
               if (participantData != null) {
-                participantData.dataId = data['participantDataId'];
+                participantData.participantDataId = data['participantDataId'];
                 }
               }
             }
@@ -1419,7 +1425,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       const participantDataOfFieldSetting = this.participant.participantData
         .find(participantData => participantData.fieldTypeId === fieldSetting.fieldType);
       if (participantDataOfFieldSetting) {
-        return participantDataOfFieldSetting.dataId;
+        return participantDataOfFieldSetting.participantDataId;
       }
     }
     return '';

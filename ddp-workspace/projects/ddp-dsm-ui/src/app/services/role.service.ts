@@ -3,7 +3,7 @@ import {ConfigurationService} from 'ddp-sdk';
 import {UserSetting} from '../user-setting/user-setting.model';
 import {SessionService} from './session.service';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class RoleService {
   private _isShipping = false;
   private _isMRRequesting = false;
@@ -51,7 +51,7 @@ export class RoleService {
     if (token != null) {
       const accessRoles: string = this.getClaimByKeyName( token, 'USER_ACCESS_ROLE' );
       if (accessRoles != null) {
-        console.log( accessRoles );
+        // console.log( accessRoles );
         const roles: string[] = JSON.parse( accessRoles );
         for (const entry of roles) {
           // only special kit_shipping_xxx rights should get added here, not the overall only kit_shipping_view

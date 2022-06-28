@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class SessionService {
   static DSM_TOKEN_NAME = 'dsm_token';
 
@@ -15,8 +15,12 @@ export class SessionService {
 
   public setDSMToken(token: string): void {
     localStorage.setItem(SessionService.DSM_TOKEN_NAME, token);
-    this.authExpiration = this.jwtHelper.getTokenExpirationDate(token);
     this.isLoggedIn = true;
+    this.setExpirationTime(token);
+  }
+
+  public setExpirationTime(token: string): void {
+    this.authExpiration = this.jwtHelper.getTokenExpirationDate(token);
   }
 
   public getDSMToken(): string {
@@ -32,9 +36,7 @@ export class SessionService {
   }
 
   public logout(): void {
-    localStorage.removeItem(SessionService.DSM_TOKEN_NAME);
     this.isLoggedIn = false;
-    localStorage.clear();
   }
 
   public getDSMClaims(value: string): any {

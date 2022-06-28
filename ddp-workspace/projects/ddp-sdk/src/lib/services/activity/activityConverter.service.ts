@@ -14,6 +14,7 @@ import { BlockType } from '../../models/activity/blockType';
 import { AbstractActivityQuestionBlock } from '../../models/activity/abstractActivityQuestionBlock';
 import { ActivityActivityBlock } from '../../models/activity/activityActivityBlock';
 import * as _ from 'underscore';
+import { ActivityTabularBlock } from '../../models/activity/activityTabularBlock';
 
 @Injectable()
 export class ActivityConverter {
@@ -136,6 +137,23 @@ export class ActivityConverter {
         return activityBlock;
     }
 
+    private convertTabularBlock(blockJson: any): ActivityTabularBlock {
+        const activityBlock = new ActivityTabularBlock();
+        activityBlock.title = blockJson.title;
+        activityBlock.headers = blockJson.headers;
+        activityBlock.columnsCount = blockJson.columnsCount;
+        activityBlock.content = [];
+        for (const inputBlock of blockJson.content) {
+            const block = this.questionConverter.buildQuestionBlock(inputBlock.question, null);
+            block.columnSpan = inputBlock.columnSpan || 1;
+            this.buildShownField(block, inputBlock);
+            this.buildEnabledField(block, inputBlock);
+            block.id = inputBlock.blockGuid;
+            activityBlock.content.push(block);
+        }
+        return activityBlock;
+    }
+
     private convertActivitySection(jsonSection: any): ActivitySection {
         const section = new ActivitySection();
         if (!_.isUndefined(jsonSection) && jsonSection) {
@@ -203,6 +221,9 @@ export class ActivityConverter {
           {
               type: BlockType.Activity,
               func: (input) => this.convertActivityBlock(input)
+          },{
+              type: BlockType.Tabular,
+              func: (input) => this.convertTabularBlock(input)
           }
       ];
   }

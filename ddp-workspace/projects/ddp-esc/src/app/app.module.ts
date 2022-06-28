@@ -1,5 +1,6 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -55,8 +56,9 @@ toolkitConfig.mailingListDialogUrl = 'updates';
 toolkitConfig.phone = '651-229-6991';
 toolkitConfig.infoEmail = 'info@escproject.org';
 toolkitConfig.dataEmail = 'data@escproject.org';
-toolkitConfig.twitterAccountId = 'ecscproject';
-toolkitConfig.facebookGroupId = 'ecscproject';
+toolkitConfig.twitterAccountId = 'count_me_in';
+toolkitConfig.facebookGroupId = 'joincountmein';
+toolkitConfig.instagramId = 'countmein';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org/';
 toolkitConfig.showDataRelease = true;
 toolkitConfig.showInfoForPhysicians = true;
@@ -108,6 +110,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     DdpModule,
     ToolkitModule

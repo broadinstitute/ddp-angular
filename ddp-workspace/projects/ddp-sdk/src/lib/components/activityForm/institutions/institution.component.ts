@@ -1,8 +1,9 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChange, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChange, OnDestroy, OnInit, ViewChild, Inject } from '@angular/core';
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { NgForm } from '@angular/forms';
 import { InstitutionServiceAgent } from '../../../services/serviceAgents/institutionServiceAgent.service';
 import { MedicalProvidersServiceAgent } from '../../../services/serviceAgents/medicalProvidersServiceAgent.service';
+import { ConfigurationService } from '../../../services/configuration.service';
 import { Institution } from '../../../models/institution';
 import { ActivityInstitutionInfo } from '../../../models/activity/activityInstitutionInfo';
 import { ActivityInstitutionForm } from '../../../models/activity/activityInstitutionForm';
@@ -67,6 +68,16 @@ import * as _ from 'underscore';
                    (change)="saveValue()"
                    [required]="required">
         </mat-form-field>
+        <mat-form-field *ngIf="hasCountryField" class="width">
+            <input matInput
+                   [(ngModel)]="country"
+                   name="country"
+                   [placeholder]="'SDK.Institutions.Fields.Country' | translate"
+                   [autocomplete]="AUTOCOMPLETE_VALUE"
+                   [readonly]="readonly"
+                   (change)="saveValue()"
+                   [required]="required">
+        </mat-form-field>
     </form>
     <div class="ddp-activity-validation" *ngIf="showPhysicianValidationError()">
         <ddp-validation-message [message]="'SDK.Institutions.PhysicianValidation' | translate">
@@ -83,6 +94,7 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
     public physicianName: string;
     public city: string;
     public state: string;
+    public country: string;
     public readonly AUTOCOMPLETE_VALUE: string = 'nothing';
     @Input() readonly: boolean;
     @Input() value: ActivityInstitutionInfo | null;
@@ -104,8 +116,9 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
 
     constructor(
         private institutionServiceAgent: InstitutionServiceAgent,
-        private providersServiceAgent: MedicalProvidersServiceAgent) {
-    }
+        private providersServiceAgent: MedicalProvidersServiceAgent,
+        @Inject('ddp.config') private config: ConfigurationService
+    ) {}
 
     public ngOnInit(): void {
         const get = this.institutionServiceAgent
@@ -138,6 +151,7 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
                 this.physicianName = this.value.physicianName ? this.value.physicianName : '';
                 this.city = this.value.city ? this.value.city : '';
                 this.state = this.value.state ? this.value.state : '';
+                this.country = this.value.country ? this.value.country : '';
                 this.guid = this.value.guid ? this.value.guid : '';
             }
             if (propName === 'validationRequested') {
@@ -163,11 +177,13 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     public saveValue(): void {
-        const answer = new ActivityInstitutionInfo(this.physicianName ? this.physicianName : '',
+        const answer = new ActivityInstitutionInfo(
+            this.physicianName ? this.physicianName : '',
             this.institutionName ? this.institutionName : '',
             this.city ? this.city : '',
             this.state ? this.state : '',
-            this.guid ? this.guid : ''
+            this.guid ? this.guid : '',
+            this.country ?? ''
         );
         this.answerSubject.next(answer);
     }
@@ -200,17 +216,21 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
         return this.institutionType === InstitutionType.Physician;
     }
 
+    public get hasCountryField(): boolean {
+        return this.config.institutionsAdditionalFields[this.institutionType as InstitutionType]?.includes('COUNTRY');
+    }
+
     public showPhysicianValidationError(): boolean {
         return this.required && this.validationRequested && this.institutionForm.invalid && this.isRequiredFormTouched();
     }
 
     private isRequiredFormTouched(): boolean {
         const controls = this.institutionForm.controls;
-        return controls.city.touched && controls.physician.touched && controls.state.touched;
+        return controls.city.touched && controls.physician.touched && controls.state.touched && controls.country.touched;
     }
 
     private getAnswerForm(answer: ActivityInstitutionInfo): ActivityInstitutionForm {
-        return new ActivityInstitutionForm(answer.physicianName, answer.institutionName, answer.city, answer.state);
+        return new ActivityInstitutionForm(answer.physicianName, answer.institutionName, answer.city, answer.state, answer.country);
     }
 
     private updateForm(answer: ActivityInstitutionInfo): Observable<void> {
@@ -226,11 +246,13 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
         return this.providersServiceAgent.createMedicalProvider(this.studyGuid,
             this.normalizedInstitutionType, form).pipe(
                 tap(response => {
-                    const newAnswer = new ActivityInstitutionInfo(form.physicianName ? form.physicianName : '',
+                    const newAnswer = new ActivityInstitutionInfo(
+                        form.physicianName ? form.physicianName : '',
                         form.physicianName ? form.physicianName : '',
                         form.city ? form.city : '',
                         form.state ? form.state : '',
-                        response.medicalProviderGuid
+                        response.medicalProviderGuid,
+                        form.country ?? ''
                     );
                     this.guid = response.medicalProviderGuid;
                     this.valueChanged.emit(newAnswer);

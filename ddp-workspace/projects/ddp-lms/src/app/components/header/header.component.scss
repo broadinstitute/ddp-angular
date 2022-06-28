@@ -1,0 +1,328 @@
+@use '@angular/material' as mat;
+@import '../../../theme.scss';
+@import '../../../styles/fonts.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+}
+.header {
+  $height: 6.25rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  transition: all 200ms linear;
+  background-color: white;
+  height: $height;
+  display: flex;
+  justify-content: center;
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5625rem;
+    gap: 3rem;
+    $padding-top: 1.5rem;
+
+    .header__nav {
+      width: 100%;
+    }
+
+    .main-link {
+      display: flex;
+      text-decoration: none;
+      color: black;
+
+      img {
+        margin-right: 1rem;
+      }
+
+      p {
+        line-height: 1.4375rem;
+        display: flex;
+        align-items: center;
+        font-family: Untitled-Sans, sans-serif;
+        font-weight: 500;
+      }
+    }
+
+    .loginOutButtons {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1.2rem;
+
+      ::ng-deep .SimpleButton:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+    }
+
+    .auth__dashboard {
+      cursor: pointer;
+    }
+
+    &.hamburger-version {
+      justify-content: space-between;
+      width: 90%;
+      position: fixed;
+
+      .header__nav {
+        position: absolute;
+        top: 5.25rem;
+        left: 10%;
+      }
+    }
+
+    @media (max-width: 21.25rem) {
+      gap: 0;
+    }
+  }
+
+  &.panel-opened {
+    height: 100vh;
+    z-index: 3;
+
+    .panel-controls {
+      display: flex;
+      flex-direction: column;
+      margin: 1.5625rem 2.5rem;
+      transition: opacity 100ms 200ms ease;
+      opacity: 1;
+      visibility: visible;
+      height: 100%;
+
+      .nav,
+      .auth {
+        display: flex;
+      }
+
+      .navigation {
+        flex-direction: column;
+        padding: 0;
+      }
+
+      .auth {
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .simple-button,
+      .SimpleButton,
+      .auth__login,
+      a {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+      }
+
+      .navigation__item,
+      .auth__login,
+      .auth__dashboard {
+        margin-bottom: 3rem;
+      }
+
+      .dashboard-icon {
+        width: 1.75rem;
+        height: 1.75rem;
+      }
+    }
+  }
+}
+
+.sticky {
+  display: none;
+}
+
+.header-link__dashboard,
+.header-link {
+  margin-right: 0.625rem;
+  display: flex;
+  align-items: center;
+}
+
+.header-link:link,
+.header-link:visited {
+  color: mat.get-color-from-palette($app-theme, 200);
+  font-size: 1.0625rem;
+  line-height: 1.375rem;
+
+  .dashboard-icon_color {
+    stroke: mat.get-color-from-palette($app-theme, 200);
+  }
+}
+
+.header-link:hover {
+  color: mat.get-color-from-palette($app-theme, 650);
+
+  .dashboard-icon_color {
+    stroke: mat.get-color-from-palette($app-theme, 650);
+  }
+}
+
+.header-link:active {
+  color: mat.get-color-from-palette($app-theme, 200);
+
+  .dashboard-icon_color {
+    stroke: mat.get-color-from-palette($app-theme, 200);
+  }
+}
+
+.header-link__dashboard {
+  margin: 0 0.2rem 0 0;
+}
+
+.activity-heading {
+  width: 43.75rem;
+  margin: 0 1.5rem;
+}
+
+.header_shadow {
+  box-shadow: 0 0.125rem 1.25rem 0 rgba(0, 0, 0, 0.2);
+}
+
+.auth {
+  display: flex;
+  align-items: center;
+  margin-left: 0.9375rem;
+  margin-top: 1.2rem;
+
+  ::ng-deep .SimpleButton:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}
+
+.auth__login {
+  font-size: 1.0625rem;
+  line-height: 1.375rem;
+  cursor: pointer;
+}
+
+.cmiBtn {
+  padding: 0.7rem 1.75rem !important;
+  background-color: #9953ce;
+  border-color: #9953ce;
+  border-radius: 0.25rem;
+  color: white;
+  font-size: 1.0625rem;
+  transition: color 0.3s;
+
+  &:hover {
+    background-color: #7f30b8;
+    border-color: #7f30b8;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (max-width: 40.625rem) {
+  .activity-heading {
+    margin: 0 1rem;
+  }
+}
+
+@media only screen and (max-width: 53.125rem) {
+  .breadcrumbs {
+    display: none;
+  }
+}
+
+.header-content_sticky {
+  @media only screen and (max-width: 28.125rem) {
+    .project-logo__text {
+      display: none;
+    }
+
+    .project-logo__img {
+      margin-right: 0.5rem;
+    }
+  }
+
+  @media only screen and (max-width: 21.875rem) {
+    .project-logo {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .header-content {
+    padding: 0 5px;
+  }
+}
+
+@media screen and (max-width: 945px) {
+  .auth {
+    display: none;
+  }
+}
+
+.hamburger {
+  transform: translateY(10px);
+  padding: 2rem;
+  cursor: pointer;
+  transition-property: opacity, filter;
+  transition-duration: 0.15s;
+  transition-timing-function: linear;
+  background-color: transparent;
+  border: 0;
+}
+
+.hamburger-box {
+  width: 1.875rem;
+  height: 1.25rem;
+  display: inline-block;
+  position: relative;
+}
+
+.hamburger-inner {
+  display: block;
+  top: 50%;
+  margin-top: -2px;
+}
+
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+  width: 1.875rem;
+  height: 2px;
+  background-color: mat.get-color-from-palette($app-theme, 200);
+  border-radius: 2px;
+  position: absolute;
+  transition-property: transform;
+  transition-duration: 0.15s;
+  transition-timing-function: ease;
+}
+
+.hamburger-inner::before,
+.hamburger-inner::after {
+  content: '';
+  display: block;
+}
+
+.hamburger--slider .hamburger-inner {
+  top: 2px;
+}
+
+.hamburger--slider .hamburger-inner::before {
+  top: 8px;
+  transition-property: transform, opacity;
+  transition-timing-function: ease;
+  transition-duration: 0.15s;
+}
+
+.hamburger--slider .hamburger-inner::after {
+  top: 16px;
+}
+
+.hamburger--slider.is-active .hamburger-inner {
+  transform: translate3d(0, 8px, 0) rotate(45deg);
+}
+
+.hamburger--slider.is-active .hamburger-inner::before {
+  transform: rotate(-45deg) translate3d(0, -6px, 0);
+  opacity: 0;
+}
+
+.hamburger--slider.is-active .hamburger-inner::after {
+  transform: translate3d(0, -16px, 0) rotate(-90deg);
+}

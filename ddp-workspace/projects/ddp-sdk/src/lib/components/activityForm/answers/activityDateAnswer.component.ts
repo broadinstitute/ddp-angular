@@ -3,11 +3,12 @@ import { ActivityDateQuestionBlock } from '../../../models/activity/activityDate
 import { DateField } from '../../../models/activity/dateField';
 import { DatePickerValue } from '../../../models/datePickerValue';
 import { LoggingService } from '../../../services/logging.service';
+import { LayoutType } from '../../../models/layout/layoutType';
 
 @Component({
     selector: 'ddp-activity-date-answer',
     template: `
-    <ddp-question-prompt [block]="block"></ddp-question-prompt>
+    <ddp-question-prompt [block]="block" *ngIf="!isGridLayout()"></ddp-question-prompt>
     <div>
         <ddp-date [dateFields]="fields"
                   [readonly]="readonly"
@@ -27,6 +28,7 @@ export class ActivityDateAnswer {
     @Input() block: ActivityDateQuestionBlock;
     @Input() readonly: boolean;
     @Input() validationRequested: boolean;
+    @Input() layoutType: LayoutType = LayoutType.DEFAULT;
     @Output() valueChanged: EventEmitter<DatePickerValue> = new EventEmitter();
     private readonly LOG_SOURCE = 'ActivityDateAnswer';
 
@@ -66,5 +68,9 @@ export class ActivityDateAnswer {
             }
         });
         return result;
+    }
+
+    public isGridLayout(): boolean {
+        return this.layoutType === LayoutType.GRID;
     }
 }

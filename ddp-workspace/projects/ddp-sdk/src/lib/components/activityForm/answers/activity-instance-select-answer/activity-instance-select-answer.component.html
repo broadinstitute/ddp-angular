@@ -1,4 +1,4 @@
-<ddp-question-prompt [block]="block"></ddp-question-prompt>
+<ddp-question-prompt *ngIf="!isGridLayout()" [block]="block"></ddp-question-prompt>
 
 <mat-form-field>
   <mat-label *ngIf="block.label" [innerHTML]="block.label"></mat-label>

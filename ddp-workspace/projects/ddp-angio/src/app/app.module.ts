@@ -1,5 +1,6 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -60,8 +61,9 @@ tkCfg.mailingListDialogUrl = 'updates';
 tkCfg.phone = '857-500-6264';
 tkCfg.infoEmail = 'info@ascproject.org';
 tkCfg.dataEmail = 'data@ascproject.org';
-tkCfg.twitterAccountId = 'ASCaProject';
-tkCfg.facebookGroupId = 'groups/1556795987968214';
+tkCfg.twitterAccountId = 'count_me_in';
+tkCfg.facebookGroupId = 'joincountmein';
+tkCfg.instagramId = 'countmein';
 tkCfg.cBioPortalLink = 'https://www.cbioportal.org/study/summary?id=angs_painter_2020';
 tkCfg.countMeInUrl = 'https://joincountmein.org/';
 tkCfg.showDataRelease = true;
@@ -121,6 +123,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         AppRoutingModule,
         DdpModule,
         ToolkitModule

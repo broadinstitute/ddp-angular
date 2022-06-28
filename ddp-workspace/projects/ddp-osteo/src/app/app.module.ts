@@ -1,9 +1,10 @@
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 
-import {TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 
 import {
   DdpModule,
@@ -11,7 +12,6 @@ import {
   AnalyticsEventsService,
   AnalyticsEvent,
   LoggingService,
-  PicklistSortingPolicy,
   SubmitAnnouncementService,
   SubmissionManager
 } from 'ddp-sdk';
@@ -23,6 +23,7 @@ import {
 
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AppComponent } from './components/app/app.component';
@@ -39,6 +40,10 @@ import { PhysiciansComponent } from './components/physicians/physicians.componen
 
 import { ActivityComponent } from './components/activity/activity.component';
 import { ActivityPageComponent } from './components/activity-page/activity-page.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
+import { MatTableModule } from '@angular/material/table';
+import { FaqSectionComponent } from './components/faq-section/faq-section.component';
 
 
 const baseElt = document.getElementsByTagName('base');
@@ -109,11 +114,14 @@ config.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 config.projectGcpId = DDP_ENV.projectGcpId;
 config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 config.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl;
+config.dashboardActivitiesStartedStatuses = ['CREATED'];
+config.dashboardActivitiesCompletedStatuses = ['COMPLETE'];
 config.doCloudLogging = DDP_ENV.doCloudLogging;
 config.tooltipIconUrl = 'assets/images/info.png';
-config.usesVerticalStepper = ['FAMILY_HISTORY', 'FAMILY_HISTORY_V2'];
+config.usesVerticalStepper = ['FAMILY_HISTORY', 'FAMILY_HISTORY_SELF', 'FAMILY_HISTORY_PARENTAL'];
 config.alwaysShowQuestionsCountInModalNestedActivity = true;
 config.validateOnlyVisibleSections = true;
+config.institutionsAdditionalFields = { PHYSICIAN: ['COUNTRY'] };
 
 export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService): () => Promise<any> {
   return () => new Promise<any>((resolve: any) => {
@@ -140,13 +148,16 @@ export function translateFactory(translate: TranslateService, injector: Injector
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     CommonModule,
     AppRoutingModule,
     DdpModule,
     ToolkitModule,
     MatExpansionModule,
     MatIconModule,
-    HammerModule
+    MatButtonModule,
+    HammerModule,
+    MatTableModule,
   ],
   declarations: [
     WelcomeComponent,
@@ -163,7 +174,10 @@ export function translateFactory(translate: TranslateService, injector: Injector
     PhysiciansComponent,
 
     ActivityComponent,
-    ActivityPageComponent
+    ActivityPageComponent,
+    DashboardComponent,
+    UserActivitiesComponent,
+    FaqSectionComponent
 
   ],
   providers: [
@@ -185,9 +199,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
       ],
       multi: true
     },
-    PicklistSortingPolicy,
     SubmitAnnouncementService,
-    SubmissionManager,
+    SubmissionManager
   ],
   bootstrap: [AppComponent]
 })

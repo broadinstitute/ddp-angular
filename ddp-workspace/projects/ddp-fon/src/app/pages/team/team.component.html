@@ -1,0 +1,81 @@
+<section class="intro">
+  <div class="intro__container">
+    <h2 class="intro__title">
+      {{ 'App.Team.Title' | translate }}
+    </h2>
+  </div>
+</section>
+
+<div class="team">
+  <div class="team__container">
+    <section class="section">
+      <h3 class="section__title">
+        {{ 'App.Team.WhoWeAre.Title' | translate }}
+      </h3>
+
+      <p class="section__description">
+        {{ 'App.Team.WhoWeAre.Description' | translate }}
+      </p>
+    </section>
+
+    <ng-container *ngFor="let Section of 'App.Team.Sections' | translate">
+      <section class="section">
+        <h3 class="section__title">
+          {{ Section.Title }}
+        </h3>
+
+        <ul class="members-list">
+          <li *ngFor="let Member of Section.Members" class="members-list__item">
+            <article class="member">
+              <picture class="member__pic">
+                <img [src]="'/assets/images/team/' + Member.Image" [alt]="Member.Name" />
+              </picture>
+
+              <div class="member__info">
+                <h5 class="member__name">
+                  {{ getMemberName(Member) }}
+                </h5>
+
+                <h6 class="member__institution">
+                  {{ Member.Institution }}
+                </h6>
+
+                <p class="member__bio">
+                  {{ Member.Bio }}
+                </p>
+              </div>
+            </article>
+          </li>
+        </ul>
+      </section>
+    </ng-container>
+
+    <section class="section">
+      <h3 class="section__title">
+        {{ 'App.Team.Council.Title' | translate }}
+      </h3>
+
+      <ul class="council-list">
+        <li *ngFor="let Member of 'App.Team.Council.Members' | translate" class="council-list__item">
+          {{ Member }}
+        </li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h3 class="section__title">
+        {{ 'App.Team.Collaboration.Title' | translate }}
+      </h3>
+
+      <ng-container *ngFor="let Partner of 'App.Team.Collaboration.Partners' | translate">
+        <h4 class="section__subtitle">
+          {{ Partner.Name }}
+        </h4>
+
+        <p class="section__description">
+          {{ Partner.Description }}
+        </p>
+      </ng-container>
+    </section>
+  </div>
+</div>

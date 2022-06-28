@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import * as _ from 'underscore';
+
 import { ActivityNumericQuestionBlock } from '../../../models/activity/activityNumericQuestionBlock';
 import { QuestionType } from '../../../models/activity/questionType';
 import { ActivityDecimalQuestionBlock } from '../../../models/activity/activityDecimalQuestionBlock';
@@ -11,11 +11,12 @@ import { DecimalAnswer } from '../../../models/activity/decimalAnswer';
 import { AbstractActivityQuestionBlock } from '../../../models/activity/abstractActivityQuestionBlock';
 import { DecimalHelper } from '../../../utility/decimalHelper';
 import { InputRestriction } from '../../../models/InputRestriction';
+import { LayoutType } from '../../../models/layout/layoutType';
 
 @Component({
     selector: 'ddp-activity-numeric-answer',
     template: `
-    <ddp-question-prompt [block]="block"></ddp-question-prompt>
+    <ddp-question-prompt [block]="block" *ngIf="!isGridLayout()"></ddp-question-prompt>
     <mat-form-field  class="input-field" [floatLabel]="block.label ? 'always' : null">
         <mat-label *ngIf="block.label" [innerHTML]="block.label"></mat-label>
         <input matInput
@@ -24,6 +25,7 @@ import { InputRestriction } from '../../../models/InputRestriction';
                [formControl]="numericField"
                [min]="block.min"
                [max]="block.max"
+               autocomplete="off"
                [step]="valueChangeStep"
                [placeholder]="placeholder || block.placeholder"
                [attr.data-ddp-test]="'answer:' + block.stableId">
@@ -39,6 +41,7 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
     @Input() block: ActivityNumericQuestionBlock | ActivityDecimalQuestionBlock;
     @Input() placeholder: string;
     @Input() readonly: boolean;
+    @Input() layoutType: LayoutType = LayoutType.DEFAULT;
     @Output() valueChanged: EventEmitter<NumericAnswerType> = new EventEmitter();
     public numericField: FormControl;
     InputRestriction = InputRestriction;
@@ -80,6 +83,10 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
         return this.block.questionType === QuestionType.Numeric; // otherwise Question.Decimal
     }
 
+    public isGridLayout(): boolean {
+        return this.layoutType === LayoutType.GRID;
+    }
+
     private initForm(): void {
         this.numericField = new FormControl({
             value: this.mapAnswerToDisplay(this.block.answer),
@@ -95,7 +102,7 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
 
         return this.isIntegerQuestion ?
             patchAnswer.toString() :
-            this.formatDecimalAnswerToDisplay(patchAnswer);
+            DecimalHelper.formatDecimalAnswer(patchAnswer, (this.block as ActivityDecimalQuestionBlock).scale,false);
     }
 
     // e.g. for decimal: '0.710' => {  // a decimal floating-point value represented by (value * 10^-scale)
@@ -118,22 +125,6 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
             value: +integerPart.concat(decimalPart),
             scale: decimalPart.length
         };
-    }
-
-    private formatDecimalAnswerToDisplay(answer: NumericAnswerType): string {
-        const scale: number = (this.block as ActivityDecimalQuestionBlock).scale;
-        const numberAnswer = _.isNumber(answer) ? answer : DecimalHelper.mapDecimalAnswerToNumber(answer as DecimalAnswer);
-        let [
-            // eslint-disable-next-line prefer-const
-            integerPart = '0',
-            decimalPart = '0'.repeat(scale)
-        ] = String(numberAnswer).split('.');
-
-        if (decimalPart.length < scale) {
-            decimalPart += '0'.repeat(scale - decimalPart.length);
-        }
-
-        return integerPart + (scale ? `.${decimalPart.slice(0, scale)}` : '');
     }
 
     private isDecimalQuestion(block: AbstractActivityQuestionBlock): boolean {
