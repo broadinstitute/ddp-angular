@@ -211,8 +211,6 @@
     }
 }
 
-
-
 // comeent
 
 .cc-block {
@@ -222,6 +220,10 @@
 .cc-members {
     display: flex;
     flex-wrap: wrap;
+
+    @media (max-width: 700px) {
+        flex-direction: column;
+    }
 }
 
 .cc-member {

@@ -19,6 +19,9 @@ body {
 html {
   scroll-behavior: smooth;
 }
+.hidetext {
+  visibility: hidden;
+}
 
 body {
   font-family: $primary-font, sans-serif;

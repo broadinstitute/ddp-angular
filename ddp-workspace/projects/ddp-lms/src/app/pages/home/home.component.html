@@ -29,17 +29,19 @@
     </button>
   </div>
   <div class="paragraph-3">
-    <div class="paragraph-title-3" [innerHTML]="'home.paragraph3Title' | translate"></div>
-    <div class="paragraph-images-3">
-      <div class="image-background" *ngFor="let step of 'home.steps' | translate">
-        <img class="step-image" [src]="step.src" [alt]="step.alt" />
-        <div class="step-texts">
-          <div class="image-text-1" [innerHTML]="step.Text1 | translate"></div>
+    <div class="paragraph-title" [innerHTML]="'home.paragraph3Title' | translate"></div>
+    <div class="cards">
+      <div class="card" *ngFor="let step of 'home.steps' | translate">
+        <div class="card-image">
+          <img [src]="step.src" [alt]="step.alt" />
+        </div>
+        <div class="card-texts">
+          <div class="card-text" [innerHTML]="step.Text1 | translate"></div>
           <div class="clock-and-text">
             <img class="clock-icon" src="assets/images/clock.png" alt="clock" />
-            <div class="image-text-2" [innerHTML]="step.Text2 | translate"></div>
+            <div class="clock-text" [innerHTML]="step.Text2 | translate"></div>
           </div>
-          <div class="image-text-3" [innerHTML]="step.Text3 | translate"></div>
+          <div class="card-description" [innerHTML]="step.Text3 | translate"></div>
         </div>
       </div>
     </div>
@@ -50,12 +52,14 @@
     </div>
   </div>
   <div class="paragraph-4">
-    <div class="paragraph-title-4" [innerHTML]="'home.paragraph4Title' | translate"></div>
-    <div class="paragraph-images-4">
-      <div class="image-background" *ngFor="let imgArray of 'home.benefit' | translate">
-        <img class="step-images" [src]="imgArray.src" [alt]="imgArray.alt" />
-        <div class="benefit-texts">
-          <div class="image-text-4" [innerHTML]="imgArray.text | translate"></div>
+    <div class="paragraph-title" [innerHTML]="'home.paragraph4Title' | translate"></div>
+    <div class="cards">
+      <div class="card" *ngFor="let imgArray of 'home.benefit' | translate">
+        <div class="card-image">
+          <img [src]="imgArray.src" [alt]="imgArray.alt" />
+        </div>
+        <div class="card-texts">
+          <div class="card-description" [innerHTML]="imgArray.text | translate"></div>
         </div>
       </div>
     </div>

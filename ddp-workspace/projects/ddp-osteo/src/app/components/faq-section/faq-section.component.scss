@@ -1,39 +1,71 @@
 @use '@angular/material' as mat;
 @import "../../../app-theme.scss";
 
+.section {
+    margin: auto auto 1.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 62.5rem;
 
-.faq-section {
-    background-color: mat.get-color-from-palette($app-theme, 350);
+    .faq-block__icon {
+        margin: 0 1rem 0 0;
+        line-height: 2.25rem;
+    }
+
+    .faq-block__question {
+        font-family: "Source Sans Pro", sans-serif;
+        font-size: 1.375rem;
+        line-height: 2.25rem;
+    }
+
+    .faq-block__text {
+        font-family: "Source Sans Pro", sans-serif;
+        font-size: 1.25rem;
+        line-height: 2.25rem;
+        color: mat.get-color-from-palette($app-theme, 700);
+    }
+
+    .expand-btn {
+        color: #282828;
+        font-family: "Source Sans Pro", sans-serif;
+        font-size: 1rem;
+        text-transform: uppercase;
+        border: 1px solid #000000;
+        border-radius: 0.625rem;
+        background-color: transparent;
+        min-width: 11rem;
+        margin-right: 2rem;
+        padding: 0;
+        margin-top: .4rem;
+
+
+        @media (max-width: 576px) {
+            width: 15rem;
+        }
+    }
+
+    .faq-section-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.625rem;
+    }
+
+    @media (max-width: 576px) {
+        flex-wrap: wrap;
+        gap: 3rem;
+    }
+
+    ::ng-deep .mat-content {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .accordion-section {
+        width: 100%;
+    }
 }
-
-.intro-faq-block__content {
-    padding: 2rem 0 0 0;
-}
-
-.faq-block {
-    padding-top: 1rem;
-    padding-bottom: 3rem;
-}
-
-.faq-block__icon {
-    margin: 0 1rem 0 0;
-    line-height: 2.25rem;
-}
-
-.faq-block__question {
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 1.375rem;
-    line-height: 2.25rem;
-}
-
-.faq-block__text {
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 1.25rem;
-    line-height: 2.25rem;
-    color: mat.get-color-from-palette($app-theme, 700);
-}
-
-
 
 .mat-expansion-panel {
     border-radius: unset !important;
@@ -62,24 +94,4 @@
     color: #3300ff !important;
     font-family: sans-serif;
     white-space: normal;
-}
-
-.expand-btn {
-    color: #282828;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 1rem;
-    line-height: 20px;
-    padding: 0.5rem 1rem;
-    text-transform: uppercase;
-    border: 1px solid #000000;
-    border-radius: 10px;
-    background-color: transparent;
-    display: block;
-    position: absolute;
-    transform: translateX(calc(-100% - 30px));
-
-    ::ng-deep.mat-button-wrapper {
-        position: relative;
-        left: -5px;
-    }
 }
