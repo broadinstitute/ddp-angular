@@ -33,7 +33,7 @@ export class AddEditDeleteUserComponent implements OnInit {
   center = [];
   notUniqueError: any;
   mailFormat = /^\w+([.\-+]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
-  isModify: boolean = false;
+  isModify = false;
 
   constructor( private dsmService: DSMService, private auth: Auth, private roleService: RoleService, private compService: ComponentService,
                private route: ActivatedRoute ) {
@@ -82,9 +82,6 @@ export class AddEditDeleteUserComponent implements OnInit {
         }
       );
     }
-    else {
-
-    }
     this.closeAddUserModal();
 
   }
@@ -101,16 +98,16 @@ export class AddEditDeleteUserComponent implements OnInit {
     }
   }
 
-  openAddUserModal() {
+  openAddUserModal(): void {
     this.newUserModal.show();
   }
 
-  closeAddUserModal() {
+  closeAddUserModal(): void {
     this.isModify = false;
     this.newUserModal.hide();
   }
 
-  openModifyUserModal( user: UserWithRole ) {
+  openModifyUserModal( user: UserWithRole ): void {
     if (!this.roleService.hasAdminRights()) {
       return;
     }
@@ -119,10 +116,10 @@ export class AddEditDeleteUserComponent implements OnInit {
     this.openAddUserModal();
   }
 
-  removeThisUser( newUser: UserWithRole ) {
+  removeThisUser( newUser: UserWithRole ): void {
     const conf = confirm( 'Are you sure you want to remove this user?' );
     if (conf) {
-      let map = {};
+      const map = {};
       map[ 'userId' ] = newUser.user.userId;
       this.dsmService.removeUser( JSON.stringify( map ), this.realm ).subscribe(
         data => {
@@ -149,11 +146,11 @@ export class AddEditDeleteUserComponent implements OnInit {
     );
   }
 
-  private getUsers() {
+  private getUsers(): void {
     this.dsmService.getAllUsers( this.realm ).subscribe(
       data => {
         this.currentUsers = [];
-        let jsonData = data;
+        const jsonData = data;
         jsonData.forEach( ( val ) => {
           const user = UserWithRole.parse( val );
           this.currentUsers.push( user );
@@ -168,12 +165,12 @@ export class AddEditDeleteUserComponent implements OnInit {
     return this.roleService;
   }
 
-  private getRoles() {
+  private getRoles(): void {
     this.roles = [];
     this.dsmService.getAllRoles( this.realm ).subscribe(
       data => {
         this.roles = [];
-        let jsonData = data;
+        const jsonData = data;
         jsonData.forEach( ( val ) => {
           const role = Role.parse( val );
           this.roles.push( role );

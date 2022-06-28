@@ -130,9 +130,6 @@ export class RoleService {
           else if (entry === 'kit_upload_invalid_address') {
             this._isKitUploadInvalidAddress = true;
           }
-          else if (entry === 'kit_upload_invalid_address') {
-            this._isKitUploadInvalidAddress = true;
-          }
           else if (entry === 'user_add') {
             this._canAddUser = true;
           }
@@ -291,7 +288,7 @@ export class RoleService {
     return this._canAddUser;
   }
 
-  hasAdminRights() {
+  hasAdminRights(): boolean {
     return this.allowedToDeleteUsers() || this.allowedToAccessUsers() || this.allowedToAddUsers();
   }
 }

@@ -1,25 +1,25 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { throwError, Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {JwtHelperService} from '@auth0/angular-jwt';
+import {Observable, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 
-import { Filter } from '../filter-column/filter-column.model';
+import {Filter} from '../filter-column/filter-column.model';
+import {ViewFilter} from '../filter-column/models/view-filter.model';
+import {Abstraction} from '../medical-record-abstraction/model/medical-record-abstraction.model';
+import {OncHistoryDetail} from '../onc-history-detail/onc-history-detail.model';
+import {PDFModel} from '../pdf-download/pdf-download.model';
 import {Sort} from '../sort/sort.model';
-import { ViewFilter } from '../filter-column/models/view-filter.model';
-import { Abstraction } from '../medical-record-abstraction/model/medical-record-abstraction.model';
-import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
-import { PDFModel } from '../pdf-download/pdf-download.model';
-import { Statics } from '../utils/statics';
-import { Value } from '../utils/value.model';
-import { ComponentService } from './component.service';
-import { RoleService } from './role.service';
-import { SessionService } from './session.service';
+import {Statics} from '../utils/statics';
+import {Value} from '../utils/value.model';
+import {ComponentService} from './component.service';
+import {RoleService} from './role.service';
+import {SessionService} from './session.service';
 
 declare var DDP_ENV: any;
 
-@Injectable({providedIn: 'root'})
+@Injectable( {providedIn: 'root'} )
 export class DSMService {
   public static UI = 'ui/';
   public static REALM = 'realm';
@@ -979,7 +979,7 @@ export class DSMService {
     );
   }
 
-  getAllUsers( realm: string ) {
+  getAllUsers( realm: string ): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'getUsers';
     const map: { name: string; value: any }[] = [];
     map.push( {name: DSMService.REALM, value: realm} );
@@ -988,7 +988,7 @@ export class DSMService {
     );
   }
 
-  getAllRoles( realm: string ) {
+  getAllRoles( realm: string ): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'getRoles';
     const map: { name: string; value: any }[] = [];
     map.push( {name: DSMService.REALM, value: realm} );

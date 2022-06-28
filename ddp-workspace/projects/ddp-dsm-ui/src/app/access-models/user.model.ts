@@ -1,5 +1,6 @@
 export class User {
-  constructor( public email: string, public firstName: string, public lastName: string, public phoneNumber: string, public userId: number, public shortId: string ) {
+  constructor( public email: string, public firstName: string, public lastName: string, public phoneNumber: string, public userId: number,
+               public shortId: string ) {
     this.phoneNumber = phoneNumber;
     this.email = email;
     this.firstName = firstName;
