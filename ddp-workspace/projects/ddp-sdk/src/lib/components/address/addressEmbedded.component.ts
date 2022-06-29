@@ -556,8 +556,9 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             tap((errorMessage) => this.stateUpdates$.next({formErrorMessages: [{ message: errorMessage, isEasyPostError: false }]}))
         );
 
-        const canSaveRealAddress: FuncType<boolean> = (address: Address | null) =>
-            this.enoughDataToSave(address) && this.meetsActivityRequirements(address);
+        const canSaveRealAddress: FuncType<boolean> = (
+            address: Address | null
+        ) => this.meetsActivityRequirements(address);
 
         // "Real" as opposed to "Temp". Important we return the saved address as properties are added on server
         const saveRealAddressAction$ = this.saveTrigger$.pipe(
@@ -708,7 +709,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         if (this.block.requireVerified && !currentAddress) {
             return false;
         }
-        return this.block.requirePhone ? !currentAddress.phone : this.countOfFieldsWithData(currentAddress);
+        return this.validateRequiredFields(currentAddress);
     }
 
     private computeValidityForSparseAddress(address: Address | null): boolean {
@@ -727,18 +728,18 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     }
 
     addressIsBlank(address: Address): boolean {
-        return !address || !this.countOfFieldsWithData(address);
+        return !this.validateRequiredFields(address);
     }
 
-    enoughDataToSave(address: Address | null): boolean {
-        return address && this.countOfFieldsWithData(address);
-    }
-
-    countOfFieldsWithData(address: Address): boolean {
-        if(!address) return;
+    validateRequiredFields(address: Address): boolean {
+        if (!address) return;
+        const nonRequiredFields = ['street2', 'guid', 'isDefault']; // for studies that do not require phone
+        if (!this.block.requirePhone) {
+            nonRequiredFields.push('phone'); // for studies that do require phone
+        }
         return Object.entries(address).every(([key, value]) =>
-            !['street2', 'phone', 'guid'].includes(key)
-                ? value.toString().trim().length > 0
+            !nonRequiredFields.includes(key)
+                ? value.trim().length > 0
                 : true
         );
     }
