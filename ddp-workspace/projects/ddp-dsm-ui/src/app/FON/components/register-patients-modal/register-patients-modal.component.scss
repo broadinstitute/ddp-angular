@@ -19,13 +19,9 @@
     aside {
       @include flexContainer(center, center);
       background-color: $__Medium_gea_green;
-      width: 48px;
-      height: 100%;
     }
     main {
       @include flexContainer(normal, center, column);
-      width: 304px;
-      height: 100%;
       padding-left: 16.54px;
       font-size: getFontSize('sm');
       .status {
