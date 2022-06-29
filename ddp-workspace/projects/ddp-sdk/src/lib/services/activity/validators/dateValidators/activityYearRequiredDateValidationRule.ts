@@ -11,7 +11,7 @@ export class ActivityYearRequiredDateValidationRule extends ActivityAbstractVali
     public recalculate(): boolean {
         if (this.question.answer != null) {
             const value = this.question.answer;
-            if (!this.isBlank(value) && value.year === null) {
+            if (value.year === null) {
                 this.result = this.message;
                 return false;
             }

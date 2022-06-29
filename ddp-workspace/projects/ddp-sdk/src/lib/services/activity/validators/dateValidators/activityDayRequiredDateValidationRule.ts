@@ -11,7 +11,7 @@ export class ActivityDayRequiredDateValidationRule extends ActivityAbstractValid
     public recalculate(): boolean {
         if (this.question.answer != null) {
             const value = this.question.answer;
-            if (!this.isBlank(value) && value.day === null) {
+            if (value.day === null) {
                 this.result = this.message;
                 return false;
             }
