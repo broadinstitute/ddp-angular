@@ -16,7 +16,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 })
 export class RegisterPatientsModalComponent implements OnInit, OnDestroy {
   isAddingPatient: boolean;
-  successfullyAddedPatients: number;
+  addedPatients: number;
 
   readonly patientsHttpArray: Observable<any>[] = [];
   readonly patientsAddingForm: FormGroup = this.formBuilder.group({
@@ -76,7 +76,7 @@ export class RegisterPatientsModalComponent implements OnInit, OnDestroy {
     forkJoin(this.patientsHttpArray)
       .pipe(takeUntil(this.unsubSubject))
       .subscribe((resultPatients) => {
-        this.successfullyAddedPatients = resultPatients
+        this.addedPatients = resultPatients
           .filter(patient => !(patient instanceof HttpErrorResponse))
           .length;
         this.closeDialog();

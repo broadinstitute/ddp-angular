@@ -97,7 +97,7 @@
     </aside>
     <main>
       <p class="status">Success</p>
-      <p class="text" *ngIf="successfullyAddedPatients as SAP">{{SAP + ' new ' + (SAP > 1 ? 'patients' : 'patient') + (SAP > 1 ? ' have' : ' has')}} been registered.</p>
+      <p class="text">{{addedPatients + ' new ' + (addedPatients > 1 ? 'patients' : 'patient') + (addedPatients > 1 ? ' have' : ' has')}} been registered.</p>
     </main>
   </div>
 </ng-template>
