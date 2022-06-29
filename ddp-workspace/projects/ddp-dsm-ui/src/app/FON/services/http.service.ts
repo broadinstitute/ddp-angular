@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AddPatientModel} from '../models/addPatient.model';
 import {Observable} from 'rxjs';
-import {sdkConfig} from "../../app.module";
+import {sdkConfig} from '../../app.module';
 
 @Injectable()
 export class HttpService {
