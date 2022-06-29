@@ -14,9 +14,9 @@ import { PDFModel } from '../pdf-download/pdf-download.model';
 import { Statics } from '../utils/statics';
 import { Value } from '../utils/value.model';
 import { ComponentService } from './component.service';
-import { LoggingDsmService } from './logging.service';
 import { RoleService } from './role.service';
 import { SessionService } from './session.service';
+import { BulkCohortTag } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-model';
 
 declare var DDP_ENV: any;
 
@@ -33,8 +33,7 @@ export class DSMService {
   constructor(private http: HttpClient,
                private sessionService: SessionService,
                private role: RoleService,
-               private router: Router,
-               private logger: LoggingDsmService) {
+               private router: Router) {
   }
 
   sendAnalyticsMetric( realm: string, passed: number ): Observable<any> {
@@ -296,6 +295,22 @@ export class DSMService {
       { name: 'realm', value: realm }
     ];
     return this.http.post(url, body, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError.bind(this))
+    );
+  }
+
+  public bulkCreateCohortTags(bulkCohortTag: BulkCohortTag, realm: string): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'bulkCreateCohortTags';
+    const map = [
+      { name: 'userId', value: this.role.userID() },
+      { name: 'realm', value: realm },
+      { name: 'parent', value: 'participantList' },
+    ];
+    if (bulkCohortTag.savedFilter) {
+      map.push({ name: 'filters', value: JSON.stringify(bulkCohortTag.savedFilter.filters)});
+      map.push({ name: 'filterName', value: bulkCohortTag.savedFilter.filterName});
+    }
+    return this.http.post(url, JSON.stringify(bulkCohortTag), this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );
   }
@@ -955,7 +970,6 @@ export class DSMService {
   }
 
   private handleError(error: any): Observable<any> {
-    this.logger.logError('ERROR: ' + JSON.stringify(error));
     return throwError(() => error);
   }
 

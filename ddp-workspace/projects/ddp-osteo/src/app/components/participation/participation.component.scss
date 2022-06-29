@@ -1,38 +1,35 @@
+@use '@angular/material' as mat;
+@import "../../../app-theme.scss";
 @import '../../../../../ddp-pancan/src/styles/variables.scss';
-
 
 
 .participation {
     text-align: left;
+    align-items: center;
+    min-height: 100%;
+
 
     .button_secondary:hover:enabled {
-        background: #fbfbfb!important;
-        color: inherit!important;
+        background: #fbfbfb !important;
+        color: inherit !important;
 
     }
-    .step__btn { 
-        background: #fbfbfb!important;
-        color: inherit!important; 
+
+    .step__btn {
+        background: #fbfbfb !important;
+        color: inherit !important;
     }
 
     .title {
         margin: 0 auto 5.625rem;
         text-align: center;
         padding: 3.2rem 0;
-        background-color: $accent-color-orange;
     }
 
     .step__title {
         font-weight: bold;
         font-family: "Source Serif Pro", serif;
-        font-size: 2.625rem;    
-    }
-
-    .static-page-title {
-        margin: 0 auto 5.625rem;
-        text-align: center;
-        padding: 3.2rem 0;
-        background-color: $accent-color-orange;
+        font-size: 2.625rem;
     }
 
     &:nth-of-type(odd) {
@@ -41,70 +38,74 @@
     }
 }
 
-    .step {
-        padding: 0 1.5rem 9.94rem 1.5rem;
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-around;
-        gap: 8rem;
+.step {
+    padding: 0 1.5rem 9.94rem 1.5rem;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    gap: 8rem;
 
-        &:nth-of-type(odd) {
-            padding-bottom: 7.94rem;
-            flex-direction: row;
-        }
+    &:nth-of-type(odd) {
+        padding-bottom: 7.94rem;
+        flex-direction: row;
+    }
 
-        &__data {
-            max-width: 700px;
-        }
+    &__data {
+        max-width: 43.75rem;
+    }
 
-        &__label {
-            font-size: 1.13rem;
-            margin-right: 1rem;
-        }
+    &__label {
+        font-size: 1.13rem;
+        margin-right: 1rem;
+    }
 
-        &__time {
-            mat-icon {
-                vertical-align: top;
-                margin-right: 8px;
-            }
-        }
-
-        &__title {
-            margin: 1rem 0 1.13rem 0;
-            font-family: $primary-font-medium;
-            font-size: 2rem;
-            line-height: 3.625rem;
-            font-weight: normal;
-        }
-
-        &__text {
-            margin: 0.5rem 0 2.13rem;
-            font-size: 1.5rem;
-            line-height: 2.125rem;
-        }
-
-        &__btn {
-            font-size: 1.13rem;
-            padding: 1rem 2rem;
-            line-height: 22px;
-            // font-family: $primary-font-medium;
-            font-family: $primary-font-medium;
-            white-space: normal;
-            border: 2px solid #000000!important;
-        }
-
-        &__image {
-            display: flex;
-            align-items: center;
-
-            .image {
-                width: 21.25rem;
-                height: 18.75rem;
-            }
+    &__time {
+        mat-icon {
+            vertical-align: top;
+            margin-right: 0.5rem;
         }
     }
 
+    &__title {
+        margin: 1rem 0 1.13rem 0;
+        font-family: $primary-font-medium;
+        font-size: 2rem;
+        line-height: 3.625rem;
+        font-weight: normal;
+    }
 
+    &__text {
+        margin: 0.5rem 0 2.13rem;
+        font-size: 1.5rem;
+        line-height: 2.125rem;
+    }
+
+    &__btn {
+        font-size: 1.13rem;
+        padding: 1rem 2rem;
+        line-height: 1.375rem;
+        // font-family: $primary-font-medium;
+        font-family: $primary-font-medium;
+        white-space: normal;
+        border: 0.125rem solid #000000 !important;
+    }
+
+    &__image {
+        display: flex;
+        align-items: center;
+        min-width: 21rem;
+
+        .image {
+            width: 21.25rem;
+            height: 18.75rem;
+        }
+    }
+}
+
+.titleSection {
+    background-color: mat.get-color-from-palette($app-theme, 350);
+    margin: 0 auto 5.625rem;
+}
 
 @media screen and (max-width: $tablet-breakpoint) {
     .participation {

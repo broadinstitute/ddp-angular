@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
 import { LOCATION_INITIALIZED, CommonModule, ViewportScroller } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
@@ -166,6 +167,7 @@ export function languageFactory(language: LanguageService): string {
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         AppRoutingModule,
         CommonModule,
         DdpModule,

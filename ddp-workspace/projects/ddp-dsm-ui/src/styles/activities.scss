@@ -5,19 +5,6 @@
     100% { opacity: 1; max-height: 100vh}
 }
 
-// common activity styles
-.main_activity {
-    padding-bottom: 6.25rem;
-    padding-top: 1rem;
-    box-sizing: border-box;
-
-    .content_tight,
-    .subject-panel-container,
-    .ddp-admin-action-panel {
-        max-width: 750px;
-    }
-}
-
 .main_sticky {
     padding-top: 5rem;
 }
@@ -220,7 +207,7 @@
     list-style-type: none;
 
     li::before {
-        content: "— ";
+        content: "•";
     }
 }
 
@@ -425,22 +412,6 @@ select:disabled {
 // material dropdown
 .mat-form-field-label {
     font-size: 1.0rem !important;
-}
-
-// input
-.mat-form-field-infix {
-    font-size: 1.2rem;
-
-    ddp-date & {
-        .date-text {
-            text-align: center !important;
-        }
-
-        .mat-form-field-label-wrapper {
-            top: -9px;
-            text-align: center!important;
-        }
-    }
 }
 
 // error message list

@@ -14,6 +14,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // SDK imports
 import { AnalyticsEventsService, DdpModule } from 'ddp-sdk';
@@ -48,6 +49,7 @@ import { PrionCommonLandingComponent } from './components/common-landing/prionCo
 import { PrionRedirectToLoginLandingComponent } from './components/redirect-to-login-landing/prionRedirectToLoginLanding.component';
 import { PrionRedirectToAuth0LoginComponent } from './components/redirect-to-auth0-login/prionRedirectToAuth0Login.component';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -66,6 +68,7 @@ import { PrionRedirectToAuth0LoginComponent } from './components/redirect-to-aut
     DdpModule,
     ToolkitModule,
     MatButtonModule,
+    BrowserAnimationsModule
   ],
   providers: [
     CommunicationService,

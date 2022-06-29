@@ -1,156 +1,163 @@
-<main class="homePage">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <div class="section">
-    <div class="paragraph1">
-      <div class="paragraph1Txt">
-        <div class="paragraph1Header" [innerHTML]="'home.paragraph1Header' | translate"></div>
-        <div class="paragraph1Text" [innerHTML]="'home.paragraph1Text' | translate"></div>
-        <div class="buttons">
-          <button class="countMeinBtn" [routerLink]="['/count-me-in']">
-            <div class="countMeinBtnText" [innerHTML]="'home.countMeInBtn' | translate"></div>
-          </button>
-          <button class="learMoreBtn" [routerLink]="['/faq']">
-            <div class="learMoreBtnText" [innerHTML]="'home.learMoreBtn' | translate"></div>
-          </button>
+<main class="home">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <div class="paragraph-1">
+    <div class="paragraph-text">
+      <div class="paragraph-header-1" [innerHTML]="'home.paragraph1Header' | translate"></div>
+      <div class="paragraph-description-1" [innerHTML]="'home.paragraph1Text' | translate"></div>
+      <div class="buttons">
+        <button class="count-me-in-button btn" [routerLink]="['/count-me-in']">
+          <div class="count-me-in-button-text" [innerHTML]="'home.countMeInBtn' | translate"></div>
+        </button>
+        <button class="learn-more-button btn" [routerLink]="['/faq']">
+          <span class="learn-more-button-text" [innerHTML]="'home.learMoreBtn' | translate"></span>
+        </button>
+      </div>
+    </div>
+    <div>
+      <img class="paragraph-photo-1" src="/assets/images/paragraph1Photo.png" alt="illustration-person-sitting" />
+    </div>
+  </div>
+  <div class="company-logo">
+    <img class="logo" src="/assets/images/Broad logo.png" alt="" />
+    <img class="logo" src="/assets/images/DFCI llogo.png" alt="" />
+  </div>
+  <div class="paragraph-2">
+    <div class="paragraph-headline-2" [innerHTML]="'home.paragraph2Headline' | translate"></div>
+    <div class="paragraph-text-2" [innerHTML]="'home.paragraph2Text' | translate"></div>
+    <button class="paragraph-button-2" [routerLink]="['/about']">
+      <div class="paragraph-button-2-text" [innerHTML]="'home.paragraph2Button' | translate"></div>
+    </button>
+  </div>
+  <div class="paragraph-3">
+    <div class="paragraph-title" [innerHTML]="'home.paragraph3Title' | translate"></div>
+    <div class="cards">
+      <div class="card" *ngFor="let step of 'home.steps' | translate">
+        <div class="card-image">
+          <img [src]="step.src" [alt]="step.alt" />
+        </div>
+        <div class="card-texts">
+          <div class="card-text" [innerHTML]="step.Text1 | translate"></div>
+          <div class="clock-and-text">
+            <img class="clock-icon" src="assets/images/clock.png" alt="clock" />
+            <div class="clock-text" [innerHTML]="step.Text2 | translate"></div>
+          </div>
+          <div class="card-description" [innerHTML]="step.Text3 | translate"></div>
         </div>
       </div>
-      <div>
-        <img class="paragraph1Photo" src="/assets/images/paragraph1Photo.png" alt="illustration-person-sitting">
-      </div>
     </div>
-    <div class="companyLogo">
-      <img class="logo" src="/assets/images/Broad logo.png" alt="">
-      <img class="logo" src="/assets/images/DFCI llogo.png" alt="">
-    </div>
-    <div class="paragraph2">
-      <div class="paragraph2Headline" [innerHTML]="'home.paragraph2Headline' | translate"></div>
-      <div class="paragraph2Text" [innerHTML]="'home.paragraph2Text' | translate"></div>
-      <button class="paragraph2button" [routerLink]="['/about']">
-        <div class="paragraph2buttonText" [innerHTML]="'home.paragraph2Button' | translate"></div>
+    <div class="paragraph-button-place-3">
+      <button class="paragraph-button-3" [routerLink]="['/how-to-participate']">
+        <div class="paragraph-button-text-3" [innerHTML]="'home.paragraph3ButtonText' | translate"></div>
       </button>
     </div>
-    <div class="paragraph3">
-      <div class="paragraph3Title" [innerHTML]="'home.paragraph3Title' | translate"></div>
-      <div class="paragraph3Images">
-        <div *ngFor="let step of 'home.steps' | translate">
-          <div class="imgBackground">
-            <img class="stepImages" [src]="step.src" [alt]="step.alt">
-            <div class="stepTexts">
-              <div class="imgText1" [innerHTML]="step.Text1 | translate"></div>
-              <div class="clockImgAndText">
-                <img class="clockIcon" src="assets/images/clock.png" alt="clock">
-                <div class="imgText2" [innerHTML]="step.Text2 | translate"></div>
-              </div>
-              <div class="imgText3" [innerHTML]="step.Text3 | translate"></div>
-            </div>
-          </div>
+  </div>
+  <div class="paragraph-4">
+    <div class="paragraph-title" [innerHTML]="'home.paragraph4Title' | translate"></div>
+    <div class="cards">
+      <div class="card" *ngFor="let imgArray of 'home.benefit' | translate">
+        <div class="card-image">
+          <img [src]="imgArray.src" [alt]="imgArray.alt" />
+        </div>
+        <div class="card-texts">
+          <div class="card-description" [innerHTML]="imgArray.text | translate"></div>
         </div>
       </div>
-      <div class="paragraph3ButtonPlace">
-        <button class="paragraph3Button" [routerLink]="['/how-to-participate']">
-          <div class="paragraph3ButtonText" [innerHTML]="'home.paragraph3ButtonText' | translate"></div>
-        </button>
-      </div>
     </div>
-    <div class="paragraph4">
-      <div class="paragraph4Title" [innerHTML]="'home.paragraph4Title' | translate"></div>
-      <div class="paragraph4Images">
-        <div *ngFor="let imgArray of 'home.benefit' | translate">
-          <div class="imgBackground">
-            <img class="stepImages" [src]="imgArray.src" [alt]="imgArray.alt">
-            <div class="benefitTexts">
-              <div class="imgText3" [innerHTML]="imgArray.text | translate"></div>
-            </div>
-          </div>
+    <div class="paragraph-button-place-4">
+      <button class="paragraph-button-4" [routerLink]="['/how-to-participate']">
+        <div class="paragraph-button-text-4" [innerHTML]="'home.paragraph4ButtonText' | translate"></div>
+      </button>
+    </div>
+  </div>
+  <section class="faq">
+    <h2 class="paragraph-title-5" translate>App.FAQ.Title</h2>
+    <div class="paragraph-5">
+      <mat-accordion #a="matAccordion" hideToggle="true" multi="true" displayMode="flat">
+        <ng-container *ngFor="let item of 'home.questions' | translate">
+          <mat-expansion-panel #panel class="faq-section-expansion-panel">
+            <mat-expansion-panel-header collapsedHeight="100%" expandedHeight="100%">
+              <mat-icon *ngIf="!panel.expanded" class="expand-icon">add</mat-icon>
+              <mat-icon *ngIf="panel.expanded" class="expand-icon">clear</mat-icon>
+              <p class="faq-block__question no-margin" [innerHTML]="item.question | translate"></p>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+              <p class="faq-block__text" [innerHTML]="item.paragraph | translate" routeTransformer></p>
+            </ng-template>
+          </mat-expansion-panel>
+        </ng-container>
+      </mat-accordion>
+    </div>
+    <div class="paragraph-button-place-5">
+      <button class="paragraph-button-5" [routerLink]="['/faq']">
+        <span class="paragraph-button-text-5" [innerHTML]="'App.FAQ.Button.MoreFAQs' | translate"></span>
+      </button>
+    </div>
+  </section>
+  <div class="paragraph-6">
+    <div class="paragraph-title-6" [innerHTML]="'home.paragraph6Title' | translate"></div>
+    <div class="partners">
+      <div class="partners-photos">
+        <div>
+          <img class="partners-photo" src="assets/images/LMSDR.png" alt="" />
+        </div>
+        <div>
+          <img class="partners-photo" src="assets/images/NLMSF.png" alt="" />
         </div>
       </div>
-      <div class="paragraph3ButtonPlace">
-        <button class="paragraph3Button" [routerLink]="['/how-to-participate']">
-          <div class="paragraph3ButtonText" [innerHTML]="'home.paragraph4ButtonText' | translate"></div>
-        </button>
-      </div>
     </div>
-    <section class="faq">
-      <h2 class="paragraph5Title" translate>App.FAQ.Title</h2>
-      <div class="paragraph5">
-        <mat-accordion #a="matAccordion" hideToggle="true" multi="true" displayMode="flat">
-          <ng-container *ngFor="let item of 'home.questions' | translate">
-            <mat-expansion-panel #panel class="faq-section-expansion-panel">
-              <mat-expansion-panel-header collapsedHeight="100%" expandedHeight="100%">
-                <mat-icon *ngIf="!panel.expanded" class="expandIcon">add</mat-icon>
-                <mat-icon *ngIf="panel.expanded" class="expandIcon">clear</mat-icon>
-                <p class="faq-block__question no-margin" [innerHTML]="item.question | translate"></p>
-              </mat-expansion-panel-header>
-              <ng-template matExpansionPanelContent>
-                <p
-                  class="faq-block__text"
-                  [innerHTML]="item.paragraph | translate"
-                  routeTransformer
-                ></p>
-              </ng-template>
-            </mat-expansion-panel>
-          </ng-container>
-        </mat-accordion>
-      </div>
-      <div class="paragraph3ButtonPlace">
-        <button class="paragraph5Button" [routerLink]="['/faq']">
-          <div class="paragraph5ButtonText" [innerHTML]="'App.FAQ.Button.MoreFAQs' | translate"></div>
-        </button>
-      </div>
-    </section>
-    <div class="paragraph6">
-      <div class="paragraph6Title" [innerHTML]="'home.paragraph6Title' | translate"></div>
-      <div class="partners">
-        <div class="partnersPhotos">
-          <div>
-            <img class="partnersPhoto" src="assets/images/LMSDR.png" alt="">
-          </div>
-          <div>
-            <img class="partnersPhoto" src="assets/images/NLMSF.png" alt="">
-          </div>
-        </div>
-      </div>
-      <div class="paragraph6BottomText" [innerHTML]="'home.paragraph6BottomText' | translate"></div>
+    <div class="paragraph-bottom-text-6" [innerHTML]="'home.paragraph6BottomText' | translate"></div>
+  </div>
+  <div class="stay-informed">
+    <div class="icons">
+      <a class="social-media__link" [href]="twitterUrl" target="_blank" (click)="sendSocialMediaAnalytics('twitter')">
+        <img
+          class="social-media__logo"
+          lazy-resource
+          src="assets/images/twitter.svg"
+          [alt]="'Common.Alts.Twitter' | translate"
+        />
+      </a>
+      <a class="social-media__link" [href]="facebookUrl" target="_blank" (click)="sendSocialMediaAnalytics('facebook')">
+        <img
+          class="social-media__logo"
+          lazy-resource
+          src="assets/images/facebook.svg"
+          [alt]="'Common.Alts.Facebook' | translate"
+        />
+      </a>
+      <a
+        class="social-media__link"
+        [href]="instagramUrl"
+        target="_blank"
+        (click)="sendSocialMediaAnalytics('facebook')"
+      >
+        <img
+          class="social-media__logo"
+          lazy-resource
+          src="assets/images/instagram.png"
+          [alt]="'Common.Alts.Instagram' | translate"
+        />
+      </a>
     </div>
-    <div class="stayInformed">
-      <div class="icons">
-        <div class="social-media__links">
-          <a class="social-media__link"
-             [href]="twitterUrl"
-             target="_blank"
-             (click)="sendSocialMediaAnalytics('twitter')">
-            <img class="social-media__logo" lazy-resource src="assets/images/twitter.svg"
-                 [alt]="'Common.Alts.Twitter' | translate">
-          </a>
-          <a class="social-media__link"
-             [href]="facebookUrl"
-             target="_blank"
-             (click)="sendSocialMediaAnalytics('facebook')">
-            <img class="social-media__logo" lazy-resource src="assets/images/facebook.svg"
-                 [alt]="'Common.Alts.Facebook' | translate">
-          </a>
-        </div>
-      </div>
-      <div class="socialMediaTitle" [innerHTML]="'home.stayInformed.socialMediaTitles' | translate"></div>
-      <div class="signUpText" [innerHTML]="'home.stayInformed.signUpText' | translate"></div>
-      <div style="display: flex ; padding: 75px 0">
-        <button class="stayInformedButton" (click)="openJoinMailingList()">
-          <div class="stayInformedButtonText" [innerHTML]="'home.stayInformed.buttonText' | translate"></div>
-        </button>
-      </div>
+    <div class="social-media-title" [innerHTML]="'home.stayInformed.socialMediaTitles' | translate"></div>
+    <div class="sign-up-text" [innerHTML]="'home.stayInformed.signUpText' | translate"></div>
+    <div class="paragraph-button">
+      <button class="stay-informed-button" (click)="openJoinMailingList()">
+        <div class="stay-informed-button-text" [innerHTML]="'home.stayInformed.buttonText' | translate"></div>
+      </button>
     </div>
-    <div class="joinCountMein">
-      <img class="join-cmi-logo"
-           src="assets/images/hands.png"
-           alt="hands">
-      <div class="participationSectionTitle"
-           [innerHTML]="'home.participation.participationSectionTitle' | translate"></div>
-      <div class="participationSectionText" [innerHTML]="'home.participation.text' | translate"></div>
-      <div class="participationButtonPlace">
-        <button class="participationButton" [routerLink]="['/count-me-in']">
-          <div class="participationButtonText" [innerHTML]="'home.participation.btntext' | translate"></div>
-        </button>
-      </div>
+  </div>
+  <div class="join-count-me-in">
+    <img class="join-cmi-logo" src="assets/images/hands.png" alt="hands" />
+    <div
+      class="participation-section-title"
+      [innerHTML]="'home.participation.participationSectionTitle' | translate"
+    ></div>
+    <div class="participation-section-text" [innerHTML]="'home.participation.text' | translate"></div>
+    <div class="participation-button-place">
+      <button class="participation-button" [routerLink]="['/count-me-in']">
+        <div class="participation-button-text" [innerHTML]="'home.participation.btntext' | translate"></div>
+      </button>
     </div>
   </div>
 </main>

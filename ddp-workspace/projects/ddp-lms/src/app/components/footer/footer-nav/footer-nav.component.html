@@ -1,0 +1,37 @@
+<div class="main-section">
+  <ul>
+    <li (click)="scrollTop()">
+      <mat-icon>arrow_upward</mat-icon>
+      <span class="back-to-top">Back to top</span>
+    </li>
+    <li routerLinkActive="active" [routerLink]="Route.About">About us</li>
+    <li routerLinkActive="active" [routerLink]="Route.HowToParticipate">Participation</li>
+    <li routerLinkActive="active" [routerLink]="Route.ScientificImpact">Scientific Impact</li>
+    <li routerLinkActive="active" [routerLink]="Route.FAQ">FAQs</li>
+    <li routerLinkActive="active" (click)="openJoinMailingList()">Join Mailing List</li>
+    <li routerLinkActive="active" [routerLink]="Route.ForYourPhysician">For your Physician</li>
+  </ul>
+
+  <div class="buttons" *ngIf="!isAuthenticated && headerConfig.showLoginButton">
+    <ddp-sign-in-out></ddp-sign-in-out>
+    <a class="button button_primary cmiBtn" *ngIf="!isAuthenticated" [routerLink]="Route.CountMeIn">
+      {{ 'Header.Links.CountMeIn' | translate }}
+    </a>
+  </div>
+
+  <div class="buttons" *ngIf="isAuthenticated">
+    <div
+      *ngIf="headerConfig.showLoginButton"
+      class="auth__login header-link"
+      [ngClass]="{ 'header-button': !headerConfig.showMainButtons }"
+    >
+      <ddp-sign-in-out></ddp-sign-in-out>
+    </div>
+    <div class="auth__dashboard">
+      <button class="header-link simple-button cmiBtn" routerLink="dashboard" routerLinkActive="header-link_active">
+        <div></div>
+        <span translate>Common.Navigation.Dashboard</span>
+      </button>
+    </div>
+  </div>
+</div>

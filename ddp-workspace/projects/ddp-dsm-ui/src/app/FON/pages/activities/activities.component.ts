@@ -1,41 +1,54 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import {Observable, Subject, tap} from 'rxjs';
-import { AgentService } from '../../services/agent.service';
-import { patientListModel } from '../participantsList/models/participantList.model';
-import {takeUntil} from 'rxjs/operators';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+} from '@angular/core';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {Observable, tap} from 'rxjs';
+import {StoreService} from '../../../STORE/store.service';
+import {MainConstants} from '../../constants/main-constants';
+import {sectionGuids} from './utils/sections_guids';
 
 @Component({
   selector: 'app-activities',
   templateUrl: './activities.component.html',
-  styleUrls: ['./activities.component.scss']
+  styleUrls: ['./activities.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ActivitiesComponent implements OnInit, OnDestroy {
-  patientWithActivities: Observable<any>;
+export class ActivitiesComponent implements OnInit {
+  patientWithActivities$: Observable<any>;
   panelOpenState = true;
-  loading$: Observable<boolean>;
+  sectionsArray = sectionGuids;
 
-  getAllObs = new Subject();
+  activeRoute = this.activatedRoute.snapshot.url[0].path;
+  readonly PARENT = MainConstants.participantsListParent;
 
-
-  constructor(private agent: AgentService, private activatedRoute: ActivatedRoute) {
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private storeService: StoreService) {
   }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
-      this.patientWithActivities = this.agent.getActivityInstances(params.guid).pipe(tap(data => {
-        !data && this.agent.getAll().pipe(takeUntil(this.getAllObs)).subscribe();
-      }));
+      this.patientWithActivities$ = this.storeService.getParticipantActivities(params.guid)
+        .pipe(
+          tap(data => !data && this.storeService.dispatchGetParticipant(params.guid, this.PARENT)),
+          tap(result => {
+            const openActivityGuid = this.activatedRoute.snapshot.firstChild?.params.activity;
+            if(!openActivityGuid && result) {
+              const activityGuid = result.activities['ENROLLMENT_FORMS'].activities[0].activityGuid;
+              this.router.navigate(['./', activityGuid], {relativeTo: this.activatedRoute});
+            }
+          })
+        );
     });
-    this.loading$ = this.agent.isLoading();
   }
 
-  ngOnDestroy(): void {
-    this.getAllObs.next(null);
+  isOpen(activities: any): boolean {
+    const openActivityGuid = this.activatedRoute.snapshot.firstChild?.params.activity;
+    if(openActivityGuid) {
+      return activities.some(activity => activity.activityGuid === openActivityGuid);
+    }
+    return;
   }
 
-  navigate($event: any): void {
-    console.log('navigate');
-  }
 }

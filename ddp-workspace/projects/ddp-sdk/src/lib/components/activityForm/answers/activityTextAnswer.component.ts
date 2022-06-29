@@ -11,11 +11,12 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { ActivityTextQuestionBlock } from '../../../models/activity/activityTextQuestionBlock';
 import { InputType } from '../../../models/activity/inputType';
+import { LayoutType } from '../../../models/layout/layoutType';
 
 @Component({
     selector: 'ddp-activity-text-answer',
     template: `
-        <ddp-question-prompt [block]="block"></ddp-question-prompt>
+        <ddp-question-prompt [block]="block" *ngIf="!isGridLayout()"></ddp-question-prompt>
         <ng-container *ngIf="isTextInputType(block)">
             <ddp-activity-text-input
               [block]="block"
@@ -59,6 +60,7 @@ export class ActivityTextAnswer implements OnInit, OnDestroy {
     @Input() block: ActivityTextQuestionBlock;
     @Input() placeholder: string;
     @Input() readonly: boolean;
+    @Input() layoutType: LayoutType = LayoutType.DEFAULT;
     @Output() valueChanged: EventEmitter<string | null> = new EventEmitter();
     public inputSubject = new Subject<string>();
     private subscription: Subscription;
@@ -84,6 +86,10 @@ export class ActivityTextAnswer implements OnInit, OnDestroy {
 
     public isEmailInputType(block: ActivityTextQuestionBlock): boolean {
         return block.inputType === InputType.Email;
+    }
+
+    public isGridLayout(): boolean {
+        return this.layoutType === LayoutType.GRID;
     }
 
     ngOnDestroy(): void {

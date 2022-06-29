@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { NavigationEnd, Router, RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -98,6 +99,7 @@ declare const ga: (...args: any[]) => void;
   imports: [
     RouterModule.forRoot(appRoutes, { enableTracing: false, relativeLinkResolution: 'legacy' }),
     BrowserModule,
+    BrowserAnimationsModule,
     DdpModule,
     MatButtonModule, MatToolbarModule, MatIconModule, MatMenuModule, MatCardModule,
     MatGridListModule, MatInputModule, MatRadioModule, MatSidenavModule, MatProgressSpinnerModule,

@@ -70,6 +70,8 @@ export class ActivityQuestionConverter {
             questionBlock.validators.push(newValidator);
         }
         questionBlock.isRequired = this.isQuestionRequired(questionBlock.validators);
+        // for display between composite children in tabular block
+        (questionBlock as any).tabularSeparator = questionJson.tabularSeparator;
 
         if (questionJson.answers && questionJson.answers.length > 0) {
             if (questionJson.questionType === 'PICKLIST') {

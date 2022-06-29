@@ -1,100 +1,52 @@
-@import "../../../styles/fonts.scss";
+@import '../../../styles/fonts.scss';
 
-section {
-  width: auto;
-}
+.footer {
+  font-family: Untitled-Sans, sans-serif;
 
-.footer-container {
-  height: 239px;
-  background-color: #131314;
-
-  &-nav {
-    height: 58%;
-    display: flex;
-    justify-content: space-between;
-    padding-left: 54px;
-    padding-right: 31px;
-    align-items: center;
-    border-bottom: 1px solid #444444;
-
-    span {
-      display: flex;
-      align-items: center;
-      font-family: Untitled-Sans, sans-serif;
-      color: white;
-      font-size: 16px;
-      font-weight: 500;
-      letter-spacing: -0.16px;
-      line-height: 38px;
-
-      mat-icon {
-        margin-right: 10px;
-      }
-
-      p:hover {
-        text-decoration: underline;
-        cursor: pointer;
-      }
-    }
-  }
-
-  &-contact {
-    height: 42%;
+  .container {
     background-color: #131314;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-left: 54px;
-    padding-right: 32px;
-    font-family: Untitled-Sans, sans-serif;
+    justify-content: center;
+    flex-direction: column;
 
-    &-copyright {
-      p {
-        color: white;
-        font-size: 16px;
-        letter-spacing: 0;
-        line-height: 22px;
-      }
+    $padding-left: 3.375rem;
+    $padding-right: 2rem;
+
+    .footer-nav {
+      padding: 3.375rem $padding-right 4rem $padding-left;
     }
-    &-contactUs {
+
+    .copy-right {
       color: white;
-      ul {
+      justify-content: space-between;
+      padding: 2.125rem $padding-right 2.75rem $padding-left;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+
+      p {
+        font-size: 1rem;
         display: flex;
-        justify-content: center;
+        gap: 1rem;
+      }
+
+      ul {
+        list-style: none;
+        display: flex;
+        gap: 3rem;
         align-items: center;
+        flex-wrap: wrap;
+        padding: 0;
+
         li {
-          list-style-type: none;
-          font-size: 16px;
-          font-weight: 500;
-          letter-spacing: 0;
-          line-height: 28px;
-
-          &:not(:first-of-type) {
-            margin-left: 24px;
-          }
-
-          &:first-child {
-            opacity: 0.7;
-            font-size: 16px;
-            letter-spacing: -0.1px;
-            line-height: 42px;
-          }
+          font-size: 1rem;
         }
       }
     }
+
+    hr {
+      margin: 0;
+      opacity: 0.3;
+    }
   }
 }
-
-:host ::ng-deep app-nav .link {
-  color: white;
-}
-
-:host ::ng-deep app-nav .links-list__item:not(:first-of-type) {
-  margin-left: 32px;
-}
-
-:host ::ng-deep app-login-out ul li button.SimpleButton {
-  color: white!important;
-  border-color: white!important;
-}
-

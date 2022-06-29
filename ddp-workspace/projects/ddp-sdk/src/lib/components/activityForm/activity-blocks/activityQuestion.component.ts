@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, Inject } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Inject, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { delay, filter, map, shareReplay, startWith, takeUntil, tap } from 'rxjs/operators';
 
@@ -8,6 +8,7 @@ import { AnswerValue } from '../../../models/activity/answerValue';
 import { SubmissionManager } from '../../../services/serviceAgents/submissionManager.service';
 import { ConfigurationService } from '../../../services/configuration.service';
 import { ActivityValidationResult } from '../../../models/activity/activityValidationResult';
+import { LayoutType } from '../../../models/layout/layoutType';
 
 @Component({
     selector: 'ddp-activity-question',
@@ -19,6 +20,7 @@ import { ActivityValidationResult } from '../../../models/activity/activityValid
                 [validationRequested]="validationRequested$ | async"
                 [studyGuid]="studyGuid"
                 [activityGuid]="activityGuid"
+                [layoutType]="layoutType"
                 (valueChanged)="enteredValue$.next($event)"
                 (componentBusy)="componentBusy.next($event)">
             </ddp-activity-answer>
@@ -33,6 +35,7 @@ import { ActivityValidationResult } from '../../../models/activity/activityValid
 export class ActivityQuestionComponent implements OnInit, OnDestroy {
     @Input() block: ActivityQuestionBlock<any>;
     @Input() readonly: boolean;
+    @Input() layoutType: LayoutType = LayoutType.DEFAULT;
     public enteredValue$ = new Subject<AnswerValue>();
     public validationRequested$ = new BehaviorSubject<boolean>(false);
 
