@@ -58,7 +58,7 @@ export class RegisterPatientsModalComponent implements OnInit, OnDestroy {
 
   public registerPatient(): void {
     this.isAddingPatient = true;
-    this.patientsAddingForm.getRawValue()
+    this.patientsGroup.getRawValue()
       .patients
       .forEach(patient => {
           const generatedPatientInfo = this.patientsService.generatePatientInfo(patient);
