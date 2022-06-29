@@ -752,7 +752,7 @@
                             <ng-container
                               *ngIf="col.type === 'OPTIONS'">{{getOptionDisplay(col.options, tag[col.participantColumn.name])}}
                             </ng-container>
-                          </ng-container>                        
+                          </ng-container>
                         </p>
                       </li>
                     </ul>
@@ -907,6 +907,9 @@
         </mat-checkbox>
         <app-assignee (selectedAssignee)="assigneeSelected($event)" [assignees]="assignees"></app-assignee>
       </ng-container>
+      <ng-container *ngIf="modalAnchor === 'downloadError'">
+        An error occurred processing the participant download, please contact your DSM developer<br/>
+      </ng-container>
     </div>
     <div class="app-modal-footer">
       <ng-container *ngIf="modalAnchor === 'saveFilter'">
@@ -924,6 +927,11 @@
         </button>
         <button type="button" class="btn btn-primary"
                 (click)="assign()" [disabled]="!assignMR && !assignTissue">Assign
+        </button>
+      </ng-container>
+      <ng-container *ngIf="modalAnchor === 'downloadError'">
+        <button type="button" class="btn btn-primary"
+                (click)="modal.hide()">Ok
         </button>
       </ng-container>
     </div>

@@ -1653,6 +1653,12 @@ export class ParticipantListComponent implements OnInit {
         const blob = new Blob([fileContent], { type: 'application/octet-stream' });
         saveAs(blob, fileName);
         dialogRef.close();
+      },
+      error: err => {
+        dialogRef.close();
+        // open a dialog to show the error so the user doesn't lose their current view
+        this.openModal('downloadError');
+        // do we have a way to log this error?
       }}
     );
   }
