@@ -5,6 +5,35 @@
 
 @include angMatDialog.mainSet;
 
+::ng-deep.snackBarRestyle {
+  max-width: none;
+  background-color: $__success_msg_bg_transparent;
+  box-shadow: 0 2px 4px 0 $__success_msg_shadow;
+  padding: 0!important;
+  .successMessageContainer {
+    @include flexContainer;
+    height: 68px;
+    width: 352px;
+    color: $__Gunmetal;
+
+    aside {
+      @include flexContainer(center, center);
+      background-color: $__Medium_gea_green;
+    }
+    main {
+      @include flexContainer(normal, center, column);
+      padding-left: 16.54px;
+      font-size: getFontSize('sm');
+      .status {
+        font-family: Montserrat-Bold, sans-serif;
+      }
+      .text {
+        font-family: Montserrat-Regular, sans-serif;
+      }
+    }
+  }
+}
+
 .dialogContainer {
   height: 100%;
   width: 100%;
