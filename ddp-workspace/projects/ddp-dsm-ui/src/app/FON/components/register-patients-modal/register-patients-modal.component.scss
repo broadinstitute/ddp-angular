@@ -27,13 +27,12 @@
       width: 304px;
       height: 100%;
       padding-left: 16.54px;
+      font-size: getFontSize('sm');
       .status {
         font-family: Montserrat-Bold, sans-serif;
-        font-size: getFontSize('sm');
       }
       .text {
         font-family: Montserrat-Regular, sans-serif;
-        font-size: getFontSize('sm');
       }
     }
   }
