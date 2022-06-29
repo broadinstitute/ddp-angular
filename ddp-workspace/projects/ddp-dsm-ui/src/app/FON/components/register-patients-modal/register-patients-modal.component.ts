@@ -19,7 +19,7 @@ export class RegisterPatientsModalComponent implements OnInit, OnDestroy {
   addedPatients: number;
 
   readonly patientsHttpArray: Observable<any>[] = [];
-  readonly patientsAddingForm: FormGroup = this.formBuilder.group({
+  readonly patientsGroup: FormGroup = this.formBuilder.group({
     patients: this.formBuilder.array([])
   });
 
@@ -45,7 +45,7 @@ export class RegisterPatientsModalComponent implements OnInit, OnDestroy {
   }
 
   public get patients(): FormArray {
-    return this.patientsAddingForm.controls.patients as FormArray;
+    return this.patientsGroup.controls.patients as FormArray;
   }
 
   public addPatient(): void {

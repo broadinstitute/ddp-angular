@@ -4,7 +4,7 @@
   </header>
   <main>
     <section>
-      <form [formGroup]="patientsAddingForm">
+      <form [formGroup]="patientsGroup">
         <ng-container formArrayName="patients">
           <ng-container *ngFor="let patient of patients.controls; let i = index">
             <div [formGroup]="patient" [ngClass]="{'hr': i > 0}" class="addPatientForm">
@@ -65,7 +65,7 @@
             </div>
           </ng-container>
         </ng-container>
-        <button class="btn_secondary" (click)="addPatient()" [disabled]="patientsAddingForm.invalid">
+        <button class="btn_secondary" (click)="addPatient()" [disabled]="patientsGroup.invalid">
           <mat-icon>add</mat-icon>
           Add another patient
         </button>
@@ -85,7 +85,7 @@
   </main>
   <footer>
     <button class="btn_secondary" [ngClass]="{'disappear': isAddingPatient}" (click)="closeDialog()">Cancel</button>
-    <button class="btn_primary" [disabled]="patientsAddingForm.invalid || isAddingPatient" (click)="registerPatient()">Register</button>
+    <button class="btn_primary" [disabled]="patientsGroup.invalid || isAddingPatient" (click)="registerPatient()">Register</button>
   </footer>
 </div>
 
