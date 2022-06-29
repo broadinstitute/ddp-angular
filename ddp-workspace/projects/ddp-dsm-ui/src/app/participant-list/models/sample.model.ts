@@ -12,7 +12,8 @@ export class Sample {
               public trackingReturnId: string, public kitLabel: string, public testResult: Array<TestResult>,
                public upsTrackingStatus: string, public upsReturnStatus: string, public externalOrderStatus: string,
               public externalOrderNumber: string, public externalOrderDate: number,
-               public careEvolve: boolean, public uploadReason: string
+               public careEvolve: boolean, public uploadReason: string, public collectionDate: string,
+              public sequencingRestriction: string, public dsmKitRequestId: string
   ) {
     this.bspCollaboratorSampleId = bspCollaboratorSampleId;
     this.kitTypeName = kitTypeName;
@@ -34,6 +35,9 @@ export class Sample {
     if (this.uploadReason === '' || this.uploadReason === null || this.uploadReason === undefined) {
       this.uploadReason = 'NORMAL';
     }
+    this.collectionDate = collectionDate;
+    this.sequencingRestriction = sequencingRestriction;
+    this.dsmKitRequestId = dsmKitRequestId;
   }
 
   get sampleQueue(): string {
@@ -71,7 +75,7 @@ export class Sample {
       json.bspCollaboratorSampleId, json.kitTypeName, json.scanDate, json.error, json.receiveDate, json.deactivatedDate,
       json.trackingNumberTo, json.trackingReturnId, json.kitLabel, testResults, json.upsTrackingStatus,
       json.upsReturnStatus, json.externalOrderStatus, json.externalOrderNumber, json.externalOrderDate,
-      json.careEvolve, json.uploadReason
+      json.careEvolve, json.uploadReason, json.collectionDate, json.sequencingRestrtiction, json.dsmKitRequestId
     );
   }
 }

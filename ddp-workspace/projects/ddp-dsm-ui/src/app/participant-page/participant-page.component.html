@@ -199,15 +199,6 @@ participant.data.dsm['diagnosisYear'] != null">
           </tr>
           </tbody>
         </table>
-        <!--TODO remove before final merge, for testing only -->
-        <div *ngIf="hasRole().allowedToTestDSSActivity() && participant.data != null">
-          <button mat-mini-fab color="primary" class="mat-fab-bottom-left" (click)="testGetActivity(participant.data.profile['guid'])">
-            <i class="fa-thin fa-badge-check"></i>
-          </button>
-          <span>Test GET Activity</span>
-
-        </div>
-
         <div *ngIf="isAddFamilyMember" class="Float--right Width--100">
           <div class="family-member-button">
             <button mat-mini-fab color="primary" class="mat-fab-bottom-left" (click)="showFamilyMemberPopUpOnClick()">
@@ -673,6 +664,38 @@ participant.data.dsm['diagnosisYear'] != null">
                             <hr *ngIf="j !== sample.testResult.length-1" style="border-color: lightgray">
                           </div>
                         </td>
+                      </tr>
+                      <tr>
+                        <td class="TD--Padding Width--50 Data-Display-Question">Collection Date</td>
+                      </tr>
+                      <tr>
+                        <td class="TD--Padding-Left Width--50">
+                          <app-field-datepicker (dateChanged)="kitValueChanged($event, 'collectionDate', sample)"
+                                                [allowUnknownDay]="false" [colorDuringPatch]="isPatchedCurrently('collectionDate')"
+                                                [dateString]="sample.collectionDate"
+                                                [showTodayButton]="true">
+                          </app-field-datepicker>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="TD--Padding Width--50 Data-Display-Question">Sequencing Restriction</td>
+                      </tr>
+                      <tr>
+                        <td style="padding-bottom: 15px;" class="TD--Padding-Left Width--50">
+                          <mat-select [ngClass]="{ 'Input--Abstraction': true,
+                                      'Color--Field--Patched': isPatchedCurrently('sequencingRestriction')}"
+                                      placeholder="Sequencing Restrictions" [(ngModel)]="sample.sequencingRestriction"
+                                      [disabled]="participantExited"
+                                      (selectionChange)="kitValueChanged($event, 'sequencingRestriction', sample)"
+                                      (blur)="currentField(null)" (focus)="currentField('sequencingRestriction')">
+                            <mat-option value="cannotSequence">Cannot Sequence</mat-option>
+                            <mat-option value="RUO">Research Use Only (RUO)</mat-option>
+                            <mat-option value="valid">Valid for Clinical Sequencing</mat-option>
+                            <mat-option value="successClinical">Success - clinical</mat-option>
+                            <mat-option value="successResearch">Success - research</mat-option>
+                            <mat-option value="abandoned">Abandoned</mat-option>
+                            <mat-option value="{{null}}"></mat-option>
+                          </mat-select>
                       </tr>
                     </table>
                   </div>

@@ -548,6 +548,37 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     }
   }
 
+  kitValueChanged( value: any, parameterName: string, sample: Sample ): void {
+    let v;
+    if (typeof value === 'string') {
+      sample[ parameterName ] = value;
+      v = value;
+    }
+    if (v != null) {
+      const realm: string = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
+      const patch1 = new PatchUtil(
+        sample.dsmKitRequestId, this.role.userMail(),
+        {
+          name: parameterName,
+          value: v
+        }, null, 'dsmKitRequestId', sample.dsmKitRequestId,
+        'kit', null, realm, null
+      );
+      const patch = patch1.getPatch();
+      this.currentPatchField = parameterName;
+      this.dsmService.patchParticipantRecord( JSON.stringify( patch ) ).subscribe( { // need to subscribe, otherwise it will not send!
+        next: data => {
+          this.currentPatchField = null;
+        },
+        error: err => {
+          if (err._body === Auth.AUTHENTICATION_ERROR) {
+            this.auth.logout();
+          }
+        }
+      } );
+    }
+  }
+
   oncHistoryValueChanged(value: any, parameterName: string, oncHis: OncHistoryDetail): void {
     let v;
     const realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
