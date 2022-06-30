@@ -64,14 +64,14 @@ class FakeAddressInputComponent {
     }
 }
 
-fdescribe('AddressEmbeddedComponent', () => {
+describe('AddressEmbeddedComponent', () => {
     let component: AddressEmbeddedComponent;
     let fixture: ComponentFixture<AddressEmbeddedComponent>;
     let childComponentFixture: DebugElement; // : ComponentFixture<FakeAddressInputComponent>;
     let childComponent: FakeAddressInputComponent;
     let addressServiceSpy: jasmine.SpyObj<AddressService>;
     const submitAnnounceService = new SubmitAnnouncementService();
-    let configService = new ConfigurationService();
+    const configService = new ConfigurationService();
 
 
     beforeEach(waitForAsync(() => {

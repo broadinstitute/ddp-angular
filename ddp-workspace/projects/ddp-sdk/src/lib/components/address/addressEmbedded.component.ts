@@ -576,9 +576,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
                 );
             }),
             tap(() => busyCounter$.next(1)),
-            concatMap(([_, addressToSave]) => {
-                return this.addressService.saveAddress(addressToSave, false)
-            }),
+            concatMap(([_, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
             catchError((error) => {
                 this.logger.logError(this.LOG_SOURCE, 'Saving address was failed', error.message);
                 const formErrorMessages = [{ message: error.message, isEasyPostError: false }];
@@ -654,8 +652,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
                 && reqsMet),
             distinctUntilChanged(),
             tap(status => {
-                debugger;
-                this.validStatusChanged.emit(status)
+                this.validStatusChanged.emit(status);
             })
         );
 
@@ -742,7 +739,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     }
 
     validateRequiredFields(address: Address): boolean {
-        if (!address) return;
+        if (!address) {return;}
         const nonRequiredFields = ['street2', 'guid', 'isDefault']; // for studies that do not require phone
         if (!this.block.requirePhone) {
             nonRequiredFields.push('phone'); // for studies that do require phone
