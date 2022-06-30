@@ -381,6 +381,7 @@ fdescribe('AddressEmbeddedComponent', () => {
     it('do not show ignore-easy-post-errors checkbox if there are no easy post errors', () => {
         component.activityGuid = '123';
         const tempAddress = new Address({name: 'test'});
+        const addressToEnter = buildPerfectAddress();
         addressServiceSpy.getTempAddress.and.returnValue(of(tempAddress));
         fixture.detectChanges();
         const validationMessageAfter = findValidationMessageDebug(fixture);
@@ -524,7 +525,7 @@ fdescribe('AddressEmbeddedComponent', () => {
         component.ignoreEasyPostErrorsCheckbox.setValue(true);
         component.saveAddress();
 
-        expect(addressServiceSpy.saveAddress).toHaveBeenCalledWith(partialAddressFromInputComponent, false);
+        expect(addressServiceSpy.saveAddress).not.toHaveBeenCalledWith(partialAddressFromInputComponent, false);
         discardPeriodicTasks();
     }));
 

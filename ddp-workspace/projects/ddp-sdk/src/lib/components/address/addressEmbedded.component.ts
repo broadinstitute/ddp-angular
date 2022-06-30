@@ -565,13 +565,14 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             withLatestFrom(currentAddress$, this.formErrorMessages$, this.verifyFieldErrors$, ignoreEasyPostErrorsObservable),
             // eslint-disable-next-line arrow-body-style
             filter(([_, addressToSave, formErrors, fieldErrors, ignoreEasyPost]) => {
-              //
                 return !formErrors?.filter(error => !(ignoreEasyPost && error.isEasyPostError)).length
                     && !fieldErrors?.filter(error => !(ignoreEasyPost && error.isEasyPostError)).length
                     && canSaveRealAddress(addressToSave);
             }),
             tap(() => busyCounter$.next(1)),
-            concatMap(([_, addressToSave]) => this.addressService.saveAddress(addressToSave, false)),
+            concatMap(([_, addressToSave]) => {
+                return this.addressService.saveAddress(addressToSave, false)
+            }),
             catchError((error) => {
                 this.logger.logError(this.LOG_SOURCE, 'Saving address was failed', error.message);
                 const formErrorMessages = [{ message: error.message, isEasyPostError: false }];
@@ -657,7 +658,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
                 (formErrors.length || fieldErrors.length)
                 && formErrors.every(error => error.isEasyPostError)
                 && fieldErrors.every(error => error.isEasyPostError)),
-        ).subscribe(this.isEasyPostInvalid$);
+        ).subscribe((errors) => this.isEasyPostInvalid$.next(errors));
 
         // At least for now, we'll report the status of mailing address through block too
         // (needed to limit status checks to blocks that are visible within a section
