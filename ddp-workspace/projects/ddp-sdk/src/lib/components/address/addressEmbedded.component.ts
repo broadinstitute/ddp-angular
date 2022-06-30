@@ -740,9 +740,9 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
     validateRequiredFields(address: Address): boolean {
         if (!address) {return;}
-        const nonRequiredFields = ['street2', 'guid', 'isDefault']; // for studies that do not require phone
+        const nonRequiredFields = ['street2', 'guid', 'isDefault']; // for studies that require phone
         if (!this.block.requirePhone) {
-            nonRequiredFields.push('phone'); // for studies that do require phone
+            nonRequiredFields.push('phone'); // for studies that do not require phone
         }
         return Object.entries(address).every(([key, value]) =>
             !nonRequiredFields.includes(key)
