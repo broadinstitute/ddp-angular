@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import { LoggingService } from '../logging.service';
 import { ActivitySuggestionBuilder } from './activitySuggestionBuilder.service';
 import { ActivityValidatorBuilder } from './activityValidatorBuilder.service';
@@ -27,8 +27,7 @@ import { ActivityDecimalQuestionBlock } from '../../models/activity/activityDeci
 import { ValidationRuleType } from './validationRuleType';
 import { DecimalHelper } from '../../utility/decimalHelper';
 import { ActivityEquationQuestionBlock } from '../../models/activity/activityEquationQuestionBlock';
-
-const DETAIL_MAXLENGTH = 500;
+import {ConfigurationService} from '../configuration.service';
 
 @Injectable()
 export class ActivityQuestionConverter {
@@ -38,7 +37,8 @@ export class ActivityQuestionConverter {
     constructor(
         private validatorBuilder: ActivityValidatorBuilder,
         private suggestionBuilder: ActivitySuggestionBuilder,
-        private logger: LoggingService
+        private logger: LoggingService,
+        @Inject('ddp.config') private configuration: ConfigurationService
     ) {
         this.initQuestionBuilders();
     }
@@ -305,7 +305,7 @@ export class ActivityQuestionConverter {
         picklistBlock.picklistLabel = questionJson.picklistLabel;
         picklistBlock.selectMode = questionJson.selectMode;
         picklistBlock.renderMode = questionJson.renderMode;
-        picklistBlock.detailMaxLength = DETAIL_MAXLENGTH;
+        picklistBlock.detailMaxLength = this.configuration.detail_MaxLength;
         picklistBlock.picklistGroups = this.convertPicklistGroups(questionJson.picklistOptions, questionJson.groups);
         return picklistBlock;
     }
