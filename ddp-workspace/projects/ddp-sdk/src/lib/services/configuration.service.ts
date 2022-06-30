@@ -124,5 +124,5 @@ export class ConfigurationService {
      * Configure additional fields to show for institutions
      */
     institutionsAdditionalFields: Partial<Record<InstitutionType, InstitutionAdditionalFields[]>> = {};
-    detail_MaxLength = 500;
+    detail_MaxLength: number = 500;
 }
