@@ -45,7 +45,7 @@ describe('ActivityQuestionConverter Test', () => {
             buildQuestionValidatorRule: []
         });
         suggestionBuilderSpy = jasmine.createSpyObj('ActivitySuggestionBuilder', ['getSuggestionProvider']);
-        configurationService = jasmine.createSpyObj('ConfigurationService', []);
+        configurationService = jasmine.createSpyObj('ConfigurationService', ['detail_MaxLength']);
 
         TestBed.configureTestingModule({
             imports: [HttpClientModule],
