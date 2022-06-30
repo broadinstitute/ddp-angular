@@ -27,7 +27,7 @@ import { ActivityDecimalQuestionBlock } from '../../models/activity/activityDeci
 import { ValidationRuleType } from './validationRuleType';
 import { DecimalHelper } from '../../utility/decimalHelper';
 import { ActivityEquationQuestionBlock } from '../../models/activity/activityEquationQuestionBlock';
-import {ConfigurationService} from "../configuration.service";
+import {ConfigurationService} from '../configuration.service';
 
 @Injectable()
 export class ActivityQuestionConverter {
