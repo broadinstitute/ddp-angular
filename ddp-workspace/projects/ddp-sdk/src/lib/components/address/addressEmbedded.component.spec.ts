@@ -385,7 +385,7 @@ fdescribe('AddressEmbeddedComponent', () => {
         addressServiceSpy.getTempAddress.and.returnValue(of(tempAddress));
         fixture.detectChanges();
         const validationMessageAfter = findValidationMessageDebug(fixture);
-        expect(validationMessageAfter).not.toBeNull();
+        expect(validationMessageAfter).toBeNull();
         const checkbox = fixture.debugElement.query(By.css('.ignore-easy-post-errors'));
         expect(checkbox).toBeFalsy();
     });

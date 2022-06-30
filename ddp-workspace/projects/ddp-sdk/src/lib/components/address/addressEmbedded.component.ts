@@ -565,9 +565,15 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             withLatestFrom(currentAddress$, this.formErrorMessages$, this.verifyFieldErrors$, ignoreEasyPostErrorsObservable),
             // eslint-disable-next-line arrow-body-style
             filter(([_, addressToSave, formErrors, fieldErrors, ignoreEasyPost]) => {
-                return !formErrors?.filter(error => !(ignoreEasyPost && error.isEasyPostError)).length
-                    && !fieldErrors?.filter(error => !(ignoreEasyPost && error.isEasyPostError)).length
-                    && canSaveRealAddress(addressToSave);
+                return (
+                    !formErrors?.filter(
+                        (error) => !(ignoreEasyPost && error.isEasyPostError)
+                    ).length &&
+                    !fieldErrors?.filter(
+                        (error) => !(ignoreEasyPost && error.isEasyPostError)
+                    ).length &&
+                    canSaveRealAddress(addressToSave)
+                );
             }),
             tap(() => busyCounter$.next(1)),
             concatMap(([_, addressToSave]) => {
@@ -647,7 +653,10 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
                 && !addressErrors.filter(error => !(ignoreEasyPost && error.isEasyPostError)).length
                 && reqsMet),
             distinctUntilChanged(),
-            tap(status => this.validStatusChanged.emit(status))
+            tap(status => {
+                debugger;
+                this.validStatusChanged.emit(status)
+            })
         );
 
         combineLatest([
