@@ -260,7 +260,7 @@
           <tr *ngFor="let pt of participantList | paginate: { id: 'participant_list', itemsPerPage: rowsPerPage,
                         currentPage: activePage, totalItems: getPaginationParticipantListSize() }">
             <!--checkbox to assign or trigger blood kits-->
-            <td *ngIf="hasAssignees()">
+            <td>
               <mat-checkbox color="primary" disableRipple
                            [checked]="pt.isSelected"
                            (change)="pt.isSelected = $event.checked; checkboxChecked(pt)"></mat-checkbox>
