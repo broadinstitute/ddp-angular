@@ -239,7 +239,7 @@
 
         <table class="table table-striped Table--Hover Table--Foot Width--100">
           <thead>
-          <th *ngIf="hasAssignees()"></th> <!-- needed for the first column with checkbox -->
+          <th></th> <!--needed for the first column with checkbox-->
           <ng-container *ngFor="let alias of getKeys()">
             <th *ngFor="let col of selectedColumns[alias]" (click)="sortByColumnName(col, alias)"
                 tooltip="{{getTableAlias(col.participantColumn)}}.{{col.participantColumn.name}}"
