@@ -1707,6 +1707,8 @@ export class ParticipantListComponent implements OnInit {
         this.isAssignButtonDisabled = false;
       }
       this.selectedPatients.push(participant.data.profile['guid']);
+    } else {
+      this.selectedPatients = this.selectedPatients.filter(guid => guid !== participant.data.profile['guid']);
     }
   }
 
