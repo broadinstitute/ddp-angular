@@ -31,10 +31,10 @@ import {HttpService} from './services/http.service';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {FONHttpInterceptor} from './interceptors/http.interceptor';
 import {MatTableModule} from '@angular/material/table';
-import {TableComponent} from "./pages/patients-list/components/table/table.component";
+import {TableComponent} from './pages/patients-list/components/table/table.component';
 import { MatSortModule } from '@angular/material/sort';
-import {CutStringPipe} from "./pipes/cutString.pipe";
-import {PaginatorComponent} from "./components/paginator/paginator.component";
+import {CutStringPipe} from './pipes/cutString.pipe';
+import {PaginatorComponent} from './components/paginator/paginator.component';
 
 const AngularMaterialModules = [
   MatExpansionModule,
@@ -56,7 +56,7 @@ const AngularMaterialModules = [
 
 const directives = [openInModalDirective];
 
-const pipes = [CutStringPipe]
+const pipes = [CutStringPipe];
 
 const sharedComponents = [RegisterPatientsModalComponent, InputFieldComponent, PaginatorComponent];
 

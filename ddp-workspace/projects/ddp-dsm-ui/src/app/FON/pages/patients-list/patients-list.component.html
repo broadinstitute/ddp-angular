@@ -27,7 +27,7 @@
       <ng-container *ngIf="pts.length else noPatients">
 
         <main class="patients-list-table">
-          <app-table [data]="pts" (onRowClick)="openPatientInfo($event)"></app-table>
+          <app-table [data]="pts" (rowClick)="openPatientInfo($event)"></app-table>
         </main>
 
         <footer class="patients-list-paginator">

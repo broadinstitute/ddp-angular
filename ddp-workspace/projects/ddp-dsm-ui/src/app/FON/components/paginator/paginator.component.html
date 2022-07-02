@@ -17,7 +17,7 @@
   </div>
 
   <div class="paginator-rows">
-    <p>Rows per page: </p><span *ngFor="let row of pageSizeOptions" (click)="setRows(row)" [ngClass]="{'active': rowsPerPage == row}">{{row}}</span>
+    <p>Rows per page: </p><span *ngFor="let row of pageSizeOptions" (click)="setRows(row)" [ngClass]="{'active': rowsPerPage === row}">{{row}}</span>
   </div>
 
 </div>

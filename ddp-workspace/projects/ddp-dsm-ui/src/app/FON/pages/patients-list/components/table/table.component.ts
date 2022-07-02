@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from "@angular/core";
-import {MatTableDataSource} from "@angular/material/table";
-import {MatSort} from "@angular/material/sort";
-import {patientListModel} from "../../models/patient-list.model";
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
+import {patientListModel} from '../../models/patient-list.model';
 
 @Component({
   selector: 'app-table',
@@ -9,11 +9,12 @@ import {patientListModel} from "../../models/patient-list.model";
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'birthdate', 'enrollingCenter', 'registered', 'lastUpdated', 'enrollmentStatus'];
+  displayedColumns: string[] =
+    ['id', 'firstName', 'lastName', 'birthdate', 'enrollingCenter', 'registered', 'lastUpdated', 'enrollmentStatus'];
   dataSource: MatTableDataSource<patientListModel>;
 
   @Input('data') tableData: patientListModel[];
-  @Output('onRowClick') clickedRowData = new EventEmitter();
+  @Output('rowClick') clickedRowData = new EventEmitter();
 
   @ViewChild(MatSort) sort: MatSort;
 

@@ -24,7 +24,7 @@ export class PatientsListComponent implements OnInit {
   totalCount$: Observable<number>;
   loading$: Observable<boolean>;
 
-  pageIndex: number = 1;
+  pageIndex = 1;
   pageSize: number;
 
 

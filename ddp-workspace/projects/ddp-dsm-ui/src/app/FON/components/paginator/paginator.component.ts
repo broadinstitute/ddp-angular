@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output} from "@angular/core";
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 
 
 interface pageProps {
@@ -21,7 +21,7 @@ enum SHIFT_PAGE {
 })
 export class PaginatorComponent implements OnChanges {
   @Input() totalCount: number;
-  @Input() rowsPerPage: number = 10;
+  @Input() rowsPerPage = 10;
   @Input() currentPageIndex: number;
   @Input() pageSizeOptions: number[] = [10, 25, 50];
 
@@ -30,7 +30,7 @@ export class PaginatorComponent implements OnChanges {
   constructor() {}
 
   ngOnChanges(_): void {
-    this.generatePagesArray;
+    this.generatePagesArray();
   }
 
   public get currentPageRange(): (string|number)[] {
@@ -52,14 +52,16 @@ export class PaginatorComponent implements OnChanges {
         this.currentPageIndex = 1;
         break;
       case SHIFT_PAGE.END:
-        this.currentPageIndex = this.generatePagesArray.length;
+        this.currentPageIndex = this.generatePagesArray().length;
         break;
       case SHIFT_PAGE.ONE_MORE:
-        this.currentPageIndex = Math.min(this.currentPageIndex + 1, this.generatePagesArray.length);
+        this.currentPageIndex = Math.min(this.currentPageIndex + 1, this.generatePagesArray().length);
         break;
       case SHIFT_PAGE.ONE_LESS:
         this.currentPageIndex = Math.max(this.currentPageIndex - 1, 1);
         break;
+      default:
+        return;
     }
     this.pageChanged.emit(this.pageProps);
   }
@@ -67,16 +69,16 @@ export class PaginatorComponent implements OnChanges {
   public setRows(rows: number): void {
     this.rowsPerPage = rows;
     this.changePage(1);
-    this.generatePagesArray;
+    this.generatePagesArray();
   }
 
   /* Paginator Engine */
 
   private get filteredCurrentPageRange(): any[] {
-    return this.generatePagesArray
+    return this.generatePagesArray()
       .filter(
         (page, _, array) => this.displayOrNot(page, array, 3, 3)
-      )
+      );
   }
 
   private fillWithDots(pagesArray: any[]): void {
@@ -85,7 +87,7 @@ export class PaginatorComponent implements OnChanges {
         (page, index, array) =>
           page - array[index + 1] < -1 &&
           array.splice(index + 1, 0, '...')
-      )
+      );
   }
 
   private displayOrNot(page: number, array: number[], left: number, right: number): boolean {
@@ -101,7 +103,7 @@ export class PaginatorComponent implements OnChanges {
     return {from, to};
   }
 
-  private get generatePagesArray(): any[] {
+  private generatePagesArray(): any[] {
     const numberOfPages = Math.ceil(this.totalCount / this.rowsPerPage) || 1;
     return this.arrayFromNumber(numberOfPages);
   }
