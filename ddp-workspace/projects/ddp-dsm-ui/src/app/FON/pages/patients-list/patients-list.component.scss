@@ -54,6 +54,10 @@
 
   &-list {
 
+    &-paginator {
+      margin-top: 16px;
+    }
+
     .noPatients {
       height: 600px;
       border-radius: 5px;
@@ -82,10 +86,6 @@
         margin-top: 24px;
       }
     }
-  }
-
-  &-paginator {
-    margin-top: 16px;
   }
 
 }
