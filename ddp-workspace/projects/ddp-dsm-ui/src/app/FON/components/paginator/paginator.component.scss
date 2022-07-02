@@ -1,0 +1,78 @@
+@import "../../../../styles/FON/core";
+
+@mixin digitContainer {
+  height: 24px;
+  width: 24px;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+@mixin iconHover {
+  & > i:hover {
+    color: $__Dark_pastel_blue;
+    cursor: pointer;
+  }
+}
+
+
+.paginator {
+  @include flexContainer(center, space-between);
+  font-family: Montserrat-Regular, sans-serif;
+  font-size: getFontSize('md');
+  color: $__Gunmetal;
+  padding: 0 15px;
+
+  &-pages {
+    @include flexContainer;
+
+    &-l-icons {
+      @include flexContainer(center);
+      margin-right: 15px;
+      @include iconHover;
+      & i:not(:last-of-type) {
+        margin-right: 8px;
+      }
+      & i {
+        margin-top: 3px;
+      }
+    }
+
+    &-r-icons {
+      @extend .paginator-pages-l-icons;
+      margin-left: 15px;
+    }
+
+    &-pages {
+      @include flexContainer(center);
+      p {
+        @include flexContainer(center, center);
+        @include digitContainer;
+        &:hover {
+          cursor: pointer;
+          color: $__Dark_pastel_blue;
+        }
+      }
+    }
+
+  }
+
+  &-rows {
+    @include flexContainer(center);
+    font-family: Montserrat-Medium, sans-serif;
+    span {
+      @include flexContainer(center, center);
+      @include digitContainer;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    p {
+      margin-right: 5px;
+    }
+  }
+}
+
+// active
+.active {
+  background: $__activity_background_hover;
+}

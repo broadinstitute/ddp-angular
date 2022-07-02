@@ -22,46 +22,42 @@
     <p>All patients ({{totalCount$ | async}})</p>
   </section>
 
-  <section class="patients-table">
-    <table>
-      <thead>
-      <tr class="header">
-        <th>FON ID#</th>
-        <th>First name</th>
-        <th>Last name</th>
-        <th>Birthdate</th>
-        <th>Registered</th>
-        <th>Last updated</th>
-      </tr>
-      </thead>
-      <ng-container *ngIf="!(loading$ | async) else loadingSpinner">
-        <tbody *ngIf="(patients$ | async) as pts">
-        <tr *ngFor="let pt of pts" (click)="openActivities(pt)">
-          <td>{{ pt.ID }}</td>
-          <td>{{ pt.firstName }}</td>
-          <td>{{ pt.lastName }}</td>
-          <td>{{ pt.birthdate | date }}</td>
-          <td>{{ pt.registered | date }}</td>
-          <td>{{ pt.lastUpdated | date }}</td>
-        </tr>
-        </tbody>
+  <main class="patients-list" *ngIf="!(loading$ | async) else loadingSpinner">
+    <ng-container *ngIf="(patients$ | async) as pts">
+      <ng-container *ngIf="pts.length else noPatients">
+
+        <main class="patients-list-table">
+          <app-table [data]="pts" (onRowClick)="openPatientInfo($event)"></app-table>
+        </main>
+
+        <footer class="patients-list-paginator">
+          <app-paginator
+            (pageChanged)="getPageList($event)"
+            [currentPageIndex]="pageIndex"
+            [rowsPerPage]="pageSize"
+            [totalCount]="totalCount$ | async"
+          ></app-paginator>
+        </footer>
+
       </ng-container>
+    </ng-container>
+  </main>
 
-      <ng-template #loadingSpinner>
-        <mat-spinner></mat-spinner>
-      </ng-template>
-    </table>
 
-    <footer>
-      <mat-paginator
-        [pageIndex]="pageIndex"
-        [length]="totalCount$ | async"
-        [pageSize]="pageSize"
-        (page)="setPage($event)"
-        [pageSizeOptions]="[10, 50, 100]" aria-label="Select page">
-      </mat-paginator>
-    </footer>
-  </section>
 
+  <!--  template refs-->
+  <ng-template #loadingSpinner>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+
+  <ng-template #noPatients>
+    <div class="noPatients">
+      <img class="noPatients-image" height="101" width="125" src="/assets/images/users.png" alt="users icon">
+      <p class="noPatients-firstTitle">Start building your patient list.</p>
+      <p class="noPatients-secondTitle">Start tracking your Fontan Patient’s data to help drive improvements in
+        care.</p>
+      <button class="btn_primary">Get Started</button>
+    </div>
+  </ng-template>
 
 </div>

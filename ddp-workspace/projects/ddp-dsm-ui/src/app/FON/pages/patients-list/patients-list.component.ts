@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { patientListModel } from './models/patient-list.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import {Observable, tap} from 'rxjs';
-import { PageEvent } from '@angular/material/paginator';
 import {MainConstants} from '../../constants/main-constants';
 import {StoreService} from '../../../STORE/store.service';
 import {
@@ -16,19 +15,18 @@ import {
 })
 
 export class PatientsListComponent implements OnInit {
+  private readonly LSParams: string = 'pListQueryParams';
+  readonly PARENT = MainConstants.participantsList;
+
+  registerPatientsModalComponent = RegisterPatientsModalComponent;
+
   patients$: Observable<patientListModel[]>;
   totalCount$: Observable<number>;
   loading$: Observable<boolean>;
-  error$: Observable<string>;
 
-  // Modal section
-  registerPatientsModalComponent = RegisterPatientsModalComponent;
-
-  pageIndex: number;
+  pageIndex: number = 1;
   pageSize: number;
-  readonly PARENT = MainConstants.participantsListParent;
 
-  private readonly LSParams: string = 'pListQueryParams';
 
   constructor(
     private router: Router,
@@ -41,12 +39,8 @@ export class PatientsListComponent implements OnInit {
     this.totalCount$ = this.storeService.getParticipantsTotalCount;
     this.loading$ = this.storeService.getParticipantsLoadingStatus;
 
-
-
     const qParams = JSON.parse(localStorage.getItem(this.LSParams));
-
-    localStorage.setItem(this.LSParams,
-      JSON.stringify({from: qParams?.from || 0, to: qParams?.to || 10}));
+    this.setToLocalStorage({from: qParams?.from || 0, to: qParams?.to || 10});
 
     this.router.navigate([],
       {queryParams: {from: qParams?.from || 0, to: qParams?.to || 10}}
@@ -56,27 +50,26 @@ export class PatientsListComponent implements OnInit {
       .pipe(
         tap((params: Params) => {
           this.pageSize = params.to - params.from;
-          this.pageIndex = (params.to/this.pageSize) - 1;
+          this.pageIndex = (params.to/this.pageSize);
           this.patients$ = this.storeService.getParticipants(params.from, params.to, this.PARENT);
         })
       )
       .subscribe();
   }
 
-  setPage(event: PageEvent): void {
-    const from = ((event.pageIndex + 1) * event.pageSize) - event.pageSize;
-    const to = from + event.pageSize;
+  public openPatientInfo({guid}: patientListModel): void {
+    this.router.navigate([guid], {
+      relativeTo: this.activatedRoute
+    });
+  }
 
-    localStorage.setItem(this.LSParams,
-      JSON.stringify({from, to}));
-
+  public getPageList({from, to}: any): void {
+    this.setToLocalStorage({from, to});
     this.router.navigate([], {queryParams: {from, to}});
   }
 
-  openActivities(participant: patientListModel): void {
-    this.router.navigate([participant.guid], {
-      relativeTo: this.activatedRoute
-    });
+  private setToLocalStorage(item: any): void {
+    localStorage.setItem(this.LSParams, JSON.stringify(item));
   }
 
 }
