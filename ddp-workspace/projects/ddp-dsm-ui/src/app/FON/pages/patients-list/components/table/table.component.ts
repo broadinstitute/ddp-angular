@@ -24,7 +24,7 @@ export class TableComponent implements OnChanges, AfterViewInit {
 
   @Input('data') tableData: patientListModel[];
   @Output('rowClick') clickedRowData = new EventEmitter();
-  @Input() loading: boolean = false;
+  @Input() loading = false;
 
   @ViewChild(MatSort) sort: MatSort;
 

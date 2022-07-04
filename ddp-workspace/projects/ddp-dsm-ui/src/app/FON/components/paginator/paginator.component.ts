@@ -92,14 +92,14 @@ export class PaginatorComponent implements OnChanges {
   /* Paginator Engine */
 
   private setDefaultParams(): void {
-    if(!this.rowsPerPage || typeof this.rowsPerPage !== "number")
-      this.rowsPerPage = ROWS_PER_PAGE;
+    if(!this.rowsPerPage || typeof this.rowsPerPage !== 'number')
+      {this.rowsPerPage = ROWS_PER_PAGE;}
     if(!(this.pageSizeOptions instanceof Array) || this.pageSizeOptions.length < 1)
-      this.pageSizeOptions = PAGE_SIZE_OPTIONS;
-    if(!this.currentPageIndex || typeof this.currentPageIndex !== "number")
-      this.currentPageIndex = CURRENT_PAGE_INDEX;
-    if(!this.visiblePages || typeof this.visiblePages !== "number")
-      this.visiblePages = VISIBLE_PAGES;
+      {this.pageSizeOptions = PAGE_SIZE_OPTIONS;}
+    if(!this.currentPageIndex || typeof this.currentPageIndex !== 'number')
+      {this.currentPageIndex = CURRENT_PAGE_INDEX;}
+    if(!this.visiblePages || typeof this.visiblePages !== 'number')
+      {this.visiblePages = VISIBLE_PAGES;}
   }
 
   private get filteredCurrentPageRange(): any[] {
