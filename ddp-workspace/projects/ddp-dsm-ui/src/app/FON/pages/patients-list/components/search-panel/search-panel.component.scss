@@ -39,7 +39,7 @@
   }
 }
 
-::ng-deep {
+:host ::ng-deep {
 
   .input_field_primary {
     height: 59px;
