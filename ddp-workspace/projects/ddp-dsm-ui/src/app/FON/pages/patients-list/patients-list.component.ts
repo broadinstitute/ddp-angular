@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { PageEvent } from '@angular/material/paginator';
 import {Observable, tap} from 'rxjs';
 import { patientListModel } from './models/patient-list.model';
 
