@@ -66,14 +66,6 @@
             ],
             "Rows": [
                 {
-                    "studyName": "Assessing Infectivity in Non-CNS Related Tissues in Prion Disease Patients",
-                    "description": "The goal of this study is to find diagnostic biomarkers and/or infectivity in several tissues outside of the spinal fluid and brain.  Subjects will be asked to give skin swab, hair, blood, and urine samples.",
-                    "nameOfPI": "<a target=\"_blank\" href=\"mailto:bsa35@case.edu\" ><strong>Brian Appleby</strong></a>",
-                    "site": "University Hospitals Cleveland Medical Center, Cleveland, Ohio, USA",
-                    "eligibilityRequirements": "Individuals who are suspected of having a prion disease and have at least one diagnostic study that is suggestive of the condition (e.g., cerebrospinal fluid, brain MRI, or electroencephalogram OR those who carry a prion disease causing mutation that are not demonstrating symptoms",
-                    "moreInfo": "Contact Fran Lissemore, 216-464-6203, fml2@case.edu for more info."
-                },
-                {
                     "studyName": "Biomarkers in pre-symptomatic mutation carriers",
                     "description": "Our goal is to lay the groundwork to test future prion disease therapeutics in people at risk for genetic prion disease -- before they ever experience symptoms. Potential volunteers first have a phone conversation with the study team to answer any questions, confirm eligibility, and collect some baseline information. For eligible individuals who decide to participate, the study involves two visits to Massachusetts General Hospital in Boston, MA, with an interval between visits of 8-16 weeks. The study visits would include the following components, performed over 1.5 days: routine physical exam, health questionnaires, lumbar puncture, blood draw, brain imaging scans, cognitive tests. Eligible participants will receive compensation and financial assistance with travel costs. All participation is strictly voluntary.",
                     "nameOfPI": "<a target=\"_blank\" href=\"mailto:searnold@mgh.harvard.edu\" ><strong>Steven Arnold</strong></a>",
@@ -96,14 +88,6 @@
                     "site": "University Hospitals Cleveland Medical Center, Cleveland, Ohio, USA",
                     "eligibilityRequirements": "Individuals who are suspected of having a prion disease and have at least one diagnostic study that is suggestive of the condition (e.g., cerebrospinal fluid, brain MRI, or electroencephalogram",
                     "moreInfo": "Contact CJD Foundation, 800-659-1991, lori@cjdfoundation.org for more info."
-                },
-                {
-                    "studyName": "Therapeutic Antibodies Against Prion Diseases From PRNP Mutation Carriers",
-                    "description": "Inherited forms of prion diseases usually manifest in higher age so there have to be factors preventing prion propagation in young mutation carriers. Antibodies against the flexible tail of prions have been shown to be protective in mice. The investigators intend to screen mutation carriers and genetically unaffected family members for the presence of prion autoantibodies to develop protective compounds from endogenously occurring autoantibodies.  ",
-                    "nameOfPI": "<a target=\"_blank\" href=\"mailto:adriano.aguzzi@usz.ch\"><strong>Adriano Aguzzi</strong></a>",
-                    "site": "University of Zurich, Institute of Neuropathology, Zurich, Switzerland",
-                    "eligibilityRequirements": "Confirmed PRNP mutation carriers (symptomatic+asymptomatic), individuals from families with PRNP mutations without known PRNP status, wild-type PRNP family members from patients with confirmed PRNP mutations",
-                    "moreInfo": "See <a target=\"_blank\" href=\"{{bucketUrl}}/studies/aguzzi-KEK-ZH-Nr-2015-0514-leaflet.pdf\">PDF</a>, contact Karl Frontzek  Karl.Frontzek@usz.ch to enroll"
                 },
                 {
                     "studyName": "Tracking Longitudinal Change in Presymptomatic Genetic Prion Disease",

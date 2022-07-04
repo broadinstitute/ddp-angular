@@ -20,7 +20,6 @@
   &-buttons {
     @include flexContainer(center, space-between);
     justify-content: normal;
-    margin-bottom: 48px;
 
     button:not(:first-of-type) {
       margin-left: 12px;
@@ -47,10 +46,16 @@
     &-info {
       @include flexContainer(center, space-between);
       margin-bottom: 20px;
+      
+      app-search-panel + & {
+        margin-top: 24px;
+      }
+      
       p {
         font-family: Montserrat-Medium, sans-serif;
         font-size: getFontSize('xlg');
       }
+      
     }
 
     &-paginator {

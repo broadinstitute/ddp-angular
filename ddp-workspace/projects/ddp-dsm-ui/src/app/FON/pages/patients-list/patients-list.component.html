@@ -4,9 +4,9 @@
   </header>
 
   <section class="patients-buttons">
-    <button class="btn_secondary">
+    <button class="btn_secondary" (click)="isSearchPanelShown = !isSearchPanelShown">
       <mat-icon>search</mat-icon>
-      <mat-icon>keyboard_arrow_down</mat-icon>
+      <mat-icon>{{isSearchPanelShown ? "keyboard_arrow_up" : "keyboard_arrow_down"}}</mat-icon>
     </button>
     <button class="btn_secondary" [openInModal]="registerPatientsModalComponent">
       <mat-icon>people</mat-icon>
@@ -17,6 +17,10 @@
       Upload patient data
     </button>
   </section>
+  
+   <app-search-panel *ngIf="isSearchPanelShown"
+                    (searchEmitter)="searchPatients($event)">
+  </app-search-panel>
 
   <main class="patients-list">
     <ng-container *ngTemplateOutlet="mainContent; context: {
@@ -25,7 +29,6 @@
     totalCount: totalCount$ | async
     }">
     </ng-container>
-
   </main>
 </div>
 

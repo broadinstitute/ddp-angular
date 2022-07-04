@@ -165,6 +165,10 @@ $field-disabled-border: $__Mulled_wine_transparent;
     .mat-form-field-infix {
       width: auto;
     }
+
+    .mat-error {
+      margin-top: 16px;
+    }
   }
 
   ddp-activity-dropdown-picklist-question,
@@ -289,6 +293,21 @@ $field-disabled-border: $__Mulled_wine_transparent;
 
   .equation-value {
     margin: 12px 8px;
+  }
+
+  .Question--PICKLIST {
+    .ddp-option-details-field {
+      display: block;
+      min-width: 50%;
+      border: none;
+      background-color: unset;
+      border-bottom: 1px solid #737E8E;
+      border-radius: 0;
+
+      .mat-form-field-label {
+        display: none !important;
+      }
+    }
   }
 
   .activity-buttons {

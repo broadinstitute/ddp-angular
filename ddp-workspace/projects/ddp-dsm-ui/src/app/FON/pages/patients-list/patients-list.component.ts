@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { patientListModel } from './models/patient-list.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { PageEvent } from '@angular/material/paginator';
 import {Observable, tap} from 'rxjs';
+import { patientListModel } from './models/patient-list.model';
+
 import {MainConstants} from '../../constants/main-constants';
 import {StoreService} from '../../../STORE/store.service';
 import {
   RegisterPatientsModalComponent
 } from '../../components/register-patients-modal/register-patients-modal.component';
+import { SearchPatientDataModel } from './models/search-patient-data.model';
 
 @Component({
   selector: 'app-patients-list',
@@ -17,15 +20,16 @@ import {
 export class PatientsListComponent implements OnInit {
   private readonly LSParams: string = 'pListQueryParams';
   readonly PARENT = MainConstants.participantsList;
-
+  
+  pageIndex = 1;
+  pageSize: number;
+  isSearchPanelShown: boolean;
   registerPatientsModalComponent = RegisterPatientsModalComponent;
 
   patients$: Observable<patientListModel[]>;
   totalCount$: Observable<number>;
   loading$: Observable<boolean>;
-
-  pageIndex = 1;
-  pageSize: number;
+  
 
 
   constructor(
@@ -72,4 +76,9 @@ export class PatientsListComponent implements OnInit {
     localStorage.setItem(this.LSParams, JSON.stringify(item));
   }
 
+  searchPatients(data: SearchPatientDataModel): void {
+    console.log('Search patients:', data);
+
+    // TODO: add table sorting logic by search data here
+  }
 }

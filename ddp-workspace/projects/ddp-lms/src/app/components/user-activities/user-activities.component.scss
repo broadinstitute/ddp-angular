@@ -78,5 +78,7 @@
 
 .status-header,
 .status-row {
-  margin-left: 3rem;
+  @media (min-width: 650px) {
+    margin-left: 3rem;
+  }
 }

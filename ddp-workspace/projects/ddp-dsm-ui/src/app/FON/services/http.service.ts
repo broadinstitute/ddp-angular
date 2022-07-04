@@ -2,15 +2,16 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AddPatientModel} from '../models/addPatient.model';
 import {Observable} from 'rxjs';
+import {sdkConfig} from '../../app.module';
 
 @Injectable()
 export class HttpService {
-  readonly BASE_URL = 'https://pepper-dev.datadonationplatform.org/pepper/v1/user';
+  readonly ADD_PATIENT_URL = `${sdkConfig.backendUrl}/pepper/v1/user`;
 
   constructor(private httpClient: HttpClient) {
   }
 
   addPatient(addPatientModel: AddPatientModel): Observable<any> {
-    return this.httpClient.post(this.BASE_URL, addPatientModel);
+    return this.httpClient.post(this.ADD_PATIENT_URL, addPatientModel);
   }
 }
