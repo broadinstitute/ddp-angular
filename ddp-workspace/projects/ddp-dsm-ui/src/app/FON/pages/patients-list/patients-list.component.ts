@@ -20,7 +20,7 @@ import { SearchPatientDataModel } from './models/search-patient-data.model';
 export class PatientsListComponent implements OnInit {
   private readonly LSParams: string = 'pListQueryParams';
   readonly PARENT = MainConstants.participantsList;
-  
+
   pageIndex = 1;
   pageSize: number;
   isSearchPanelShown: boolean;
@@ -29,8 +29,9 @@ export class PatientsListComponent implements OnInit {
   patients$: Observable<patientListModel[]>;
   totalCount$: Observable<number>;
   loading$: Observable<boolean>;
-  
 
+  DEFAULT_FROM_VALUE = 0;
+  DEFAULT_TO_VALUE = 10;
 
   constructor(
     private router: Router,
@@ -44,10 +45,12 @@ export class PatientsListComponent implements OnInit {
     this.loading$ = this.storeService.getParticipantsLoadingStatus;
 
     const qParams = JSON.parse(localStorage.getItem(this.LSParams));
-    this.setToLocalStorage({from: qParams?.from || 0, to: qParams?.to || 10});
+    const params = {from: qParams?.from || this.DEFAULT_FROM_VALUE, to: qParams?.to || this.DEFAULT_TO_VALUE};
+    
+    this.setToLocalStorage(params);
 
     this.router.navigate([],
-      {queryParams: {from: qParams?.from || 0, to: qParams?.to || 10}}
+      {queryParams: params}
     );
 
     this.activatedRoute.queryParams
