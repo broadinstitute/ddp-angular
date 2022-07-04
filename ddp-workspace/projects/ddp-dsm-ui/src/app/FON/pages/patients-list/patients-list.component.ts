@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { patientListModel } from './models/patient-list.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import {Observable, tap} from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
+import {Observable, tap} from 'rxjs';
+
+import { patientListModel } from './models/patient-list.model';
 import {MainConstants} from '../../constants/main-constants';
 import {StoreService} from '../../../STORE/store.service';
 import {
   RegisterPatientsModalComponent
 } from '../../components/register-patients-modal/register-patients-modal.component';
+import { SearchPatientDataModel } from './models/search-patient-data.model';
 
 @Component({
   selector: 'app-patients-list',
@@ -21,13 +23,13 @@ export class PatientsListComponent implements OnInit {
   loading$: Observable<boolean>;
   error$: Observable<string>;
 
+  isSearchPanelShown: boolean;
   // Modal section
   registerPatientsModalComponent = RegisterPatientsModalComponent;
-
   pageIndex: number;
   pageSize: number;
-  readonly PARENT = MainConstants.participantsListParent;
 
+  readonly PARENT = MainConstants.participantsListParent;
   private readonly LSParams: string = 'pListQueryParams';
 
   constructor(
@@ -40,8 +42,6 @@ export class PatientsListComponent implements OnInit {
   ngOnInit(): void {
     this.totalCount$ = this.storeService.getParticipantsTotalCount;
     this.loading$ = this.storeService.getParticipantsLoadingStatus;
-
-
 
     const qParams = JSON.parse(localStorage.getItem(this.LSParams));
 
@@ -79,4 +79,9 @@ export class PatientsListComponent implements OnInit {
     });
   }
 
+  searchPatients(data: SearchPatientDataModel): void {
+    console.log('Search patients:', data);
+
+    // TODO: add table sorting logic by search data here
+  }
 }

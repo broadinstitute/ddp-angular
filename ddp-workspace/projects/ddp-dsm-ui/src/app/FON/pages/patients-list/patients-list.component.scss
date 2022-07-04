@@ -16,10 +16,15 @@
     font-size: getFontSize('xxlg');
   }
 
-
   &-info {
     @include flexContainer(center, space-between);
+    margin-top: 48px;
     margin-bottom: 15px;
+
+    app-search-panel + & {
+      margin-top: 24px;
+    }
+
     p {
       font-family: Montserrat-Medium, sans-serif;
       font-size: getFontSize('xlg');
@@ -29,7 +34,6 @@
   &-buttons {
     @extend .patients-info;
     justify-content: normal;
-    margin-bottom: 48px;
 
     button:not(:first-of-type) {
       margin-left: 12px;
