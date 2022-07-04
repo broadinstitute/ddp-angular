@@ -46,7 +46,7 @@ export class PatientsListComponent implements OnInit {
 
     const qParams = JSON.parse(localStorage.getItem(this.LSParams));
     const params = {from: qParams?.from || this.DEFAULT_FROM_VALUE, to: qParams?.to || this.DEFAULT_TO_VALUE};
-    
+
     this.setToLocalStorage(params);
 
     this.router.navigate([],
