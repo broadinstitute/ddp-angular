@@ -44,7 +44,6 @@ export class PaginatorComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.setDefaultParams();
-    this.generatePagesArray();
   }
 
   public get currentPageRange(): (string|number)[] {
