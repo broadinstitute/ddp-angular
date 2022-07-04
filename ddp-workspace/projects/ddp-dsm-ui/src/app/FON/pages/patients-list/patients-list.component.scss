@@ -4,36 +4,25 @@
 :host-context(app-patients-list) {
   grid-area: otherPage;
   background-color: $__background_color_transparent;
+  overflow: auto;
 }
 
 .patients {
-  margin: 0 30px;
+  margin: 32px 30px 144px;
 
   &-header {
     width: 100%;
-    padding: 32px 0 16px;
+    padding: 0 0 16px;
     font-family: Montserrat-Medium, sans-serif;
     font-size: getFontSize('xxlg');
   }
 
-  &-info {
-    @include flexContainer(center, space-between);
-    margin-top: 48px;
-    margin-bottom: 15px;
-
-    app-search-panel + & {
-      margin-top: 24px;
-    }
-
-    p {
-      font-family: Montserrat-Medium, sans-serif;
-      font-size: getFontSize('xlg');
-    }
+  app-search-panel {
+    margin: 24px;
   }
 
   &-buttons {
-    @extend .patients-info;
-    justify-content: normal;
+    @include flexContainer(center, normal);
 
     button:not(:first-of-type) {
       margin-left: 12px;
@@ -55,33 +44,51 @@
     }
   }
 
-  &-table {
-    @include flexContainer(normal, normal, column);
-    border-radius: 5px;
-    background-color: #FFFFFF;
-    padding: 10px;
+  &-list {
 
-    footer {
-      ::ng-deep .mat-paginator-container {
-        justify-content: flex-start!important;
+    &-info {
+      @include flexContainer(center, space-between);
+      margin: 48px 0 20px;
+
+
+
+      p {
+        font-family: Montserrat-Medium, sans-serif;
+        font-size: getFontSize('xlg');
       }
+
     }
 
-    thead {
-      color: #0000008a;
+    &-paginator {
+      margin-top: 16px;
     }
 
-    td, th {
-      padding: 12px;
-    }
+    .noPatients {
+      height: 600px;
+      border-radius: 5px;
+      background-color: #FFFFFF;
+      box-shadow: 0 1px 3px 0 rgba(0,0,0,0.15);
+      @include flexContainer(center, normal, column);
 
-    tr {
-      border-bottom: 1px solid #0000001f;
+      &-image {
+        margin-top: 72px;
+      }
 
-      &:not(.header) {
-        &:hover {
-          background: whitesmoke;
-        }
+      &-firstTitle {
+        font-family: Montserrat-SemiBold, sans-serif;
+        font-size: getFontSize('xxlg');
+        margin-top: 32px;
+      }
+      &-secondTitle {
+        font-family: Montserrat-Regular, sans-serif;
+        font-size: getFontSize('md');
+        margin-top: 24px;
+      }
+
+      .btn_primary {
+        height: 40px;
+        width: 110px;
+        margin-top: 24px;
       }
     }
   }

@@ -33,6 +33,11 @@ import {InputFieldComponent} from './components/input-field/input-field.componen
 import {PatientsService} from './services/patients.service';
 import {HttpService} from './services/http.service';
 import {FONHttpInterceptor} from './interceptors/http.interceptor';
+import {MatTableModule} from '@angular/material/table';
+import {TableComponent} from './pages/patients-list/components/table/table.component';
+import { MatSortModule } from '@angular/material/sort';
+import {CutStringPipe} from './pipes/cutString.pipe';
+import {PaginatorComponent} from './components/paginator/paginator.component';
 import { SearchPanelComponent } from './pages/patients-list/components/search-panel/search-panel.component';
 
 
@@ -49,12 +54,16 @@ const AngularMaterialModules = [
   MatInputModule,
   MatDatepickerModule,
   MatDialogModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatTableModule,
+  MatSortModule
 ];
 
 const directives = [openInModalDirective];
 
-const components = [RegisterPatientsModalComponent, InputFieldComponent];
+const pipes = [CutStringPipe];
+
+const sharedComponents = [RegisterPatientsModalComponent, InputFieldComponent, PaginatorComponent];
 
 const pageComponents = [
   FonComponent,
@@ -62,6 +71,7 @@ const pageComponents = [
   PatientsListComponent,
   ActivitiesComponent,
   HomeComponent,
+  TableComponent,
   SearchPanelComponent
 ];
 
@@ -72,8 +82,9 @@ const layoutComponents = [NavigationComponent];
   declarations: [
     ...pageComponents,
     ...layoutComponents,
-    ...components,
-    ...directives
+    ...sharedComponents,
+    ...directives,
+    ...pipes
   ],
   imports: [
     CommonModule,
