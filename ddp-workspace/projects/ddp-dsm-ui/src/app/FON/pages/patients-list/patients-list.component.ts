@@ -21,8 +21,8 @@ export class PatientsListComponent implements OnInit {
   private readonly LSParams: string = 'pListQueryParams';
   readonly PARENT = MainConstants.participantsList;
 
-  pageIndex = 1;
-  pageSize: number;
+  currentPageIndex = 1;
+  rowsPerPage: number;
   isSearchPanelShown: boolean;
   registerPatientsModalComponent = RegisterPatientsModalComponent;
 
@@ -56,8 +56,8 @@ export class PatientsListComponent implements OnInit {
     this.activatedRoute.queryParams
       .pipe(
         tap((params: Params) => {
-          this.pageSize = params.to - params.from || 10;
-          this.pageIndex = (params.to/this.pageSize) || 1;
+          this.rowsPerPage = params.to - params.from || 10;
+          this.currentPageIndex = (params.to/this.rowsPerPage) || 1;
           this.patients$ = this.storeService.getParticipants(params.from, params.to, this.PARENT);
         })
       )

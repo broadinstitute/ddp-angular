@@ -53,9 +53,7 @@
     <footer class="patients-list-paginator">
       <app-paginator
         (pageChanged)="getPageList($event)"
-        [currentPageIndex]="pageIndex"
-        [rowsPerPage]="pageSize"
-        [totalCount]="totalCount"
+        [config]="{totalCount: 500, rowsPerPage, currentPageIndex}"
       ></app-paginator>
     </footer>
 

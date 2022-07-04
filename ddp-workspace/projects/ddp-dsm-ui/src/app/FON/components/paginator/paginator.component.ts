@@ -3,14 +3,21 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
   Output,
 } from '@angular/core';
 
 
-interface pageProps {
+interface PageProps {
   from: number;
   to: number;
+}
+
+interface Configuration {
+  totalCount: number;
+  rowsPerPage: number;
+  currentPageIndex: number;
+  pageSizeOptions?: number[];
+  visiblePages?: number;
 }
 
 enum SHIFT_PAGE {
@@ -33,23 +40,30 @@ const DEFAULT_VISIBLE_PAGES = 3;
   styleUrls: ['./paginator.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PaginatorComponent implements OnChanges {
-  @Input() totalCount: number;
-  @Input() rowsPerPage = 10;
-  @Input() currentPageIndex: number;
-  @Input() pageSizeOptions: number[];
-  @Input() visiblePages: number;
+export class PaginatorComponent {
+  public pageSizeOptions: number[];
 
-  @Output() pageChanged = new EventEmitter<pageProps>();
+  private totalCount: number;
+  private rowsPerPage = 10;
+  private currentPageIndex: number;
+  private visiblePages: number;
 
-  ngOnChanges(): void {
-    this.setDefaultParams();
+  @Output() pageChanged = new EventEmitter<PageProps>();
+
+  @Input('config') set setConfiguration(configuration: Configuration) {
+    const {totalCount, currentPageIndex, rowsPerPage, pageSizeOptions, visiblePages} = configuration;
+
+    this.rowsPerPage = this.isNumber(rowsPerPage) ? rowsPerPage : DEFAULT_ROWS_PER_PAGE;
+    this.currentPageIndex = this.isNumber(currentPageIndex) ? currentPageIndex : DEFAULT_CURRENT_PAGE_INDEX;
+    this.visiblePages = this.isNumber(visiblePages) ? visiblePages : DEFAULT_VISIBLE_PAGES
+    this.pageSizeOptions = this.isArray(pageSizeOptions) ? pageSizeOptions : DEFAULT_PAGE_SIZE_OPTIONS;
+
+    this.totalCount = totalCount;
   }
 
-  public get currentPageRange(): (string|number)[] {
+  public get currentPageRange(): (string | number)[] {
     const currentRange = this.filteredCurrentPageRange;
-    this.fillWithDots(currentRange);
-    return currentRange;
+    return this.fillWithDots(currentRange);
   }
 
   public changePage(page: number): void {
@@ -65,10 +79,10 @@ export class PaginatorComponent implements OnChanges {
         this.currentPageIndex = 1;
         break;
       case SHIFT_PAGE.END:
-        this.currentPageIndex = this.generatePagesArray().length;
+        this.currentPageIndex = this.generatePagesArray.length;
         break;
       case SHIFT_PAGE.ONE_MORE:
-        this.currentPageIndex = Math.min(this.currentPageIndex + 1, this.generatePagesArray().length);
+        this.currentPageIndex = Math.min(this.currentPageIndex + 1, this.generatePagesArray.length);
         break;
       case SHIFT_PAGE.ONE_LESS:
         this.currentPageIndex = Math.max(this.currentPageIndex - 1, 1);
@@ -82,58 +96,57 @@ export class PaginatorComponent implements OnChanges {
   public setRows(rows: number): void {
     this.rowsPerPage = rows;
     this.changePage(1);
-    this.generatePagesArray();
   }
 
   /* Paginator Engine */
 
-  private setDefaultParams(): void {
-    if(!this.rowsPerPage || typeof this.rowsPerPage !== 'number')
-      {this.rowsPerPage = DEFAULT_ROWS_PER_PAGE;}
-    if(!(this.pageSizeOptions instanceof Array) || this.pageSizeOptions.length < 1)
-      {this.pageSizeOptions = DEFAULT_PAGE_SIZE_OPTIONS;}
-    if(!this.currentPageIndex || typeof this.currentPageIndex !== 'number')
-      {this.currentPageIndex = DEFAULT_CURRENT_PAGE_INDEX;}
-    if(!this.visiblePages || typeof this.visiblePages !== 'number')
-      {this.visiblePages = DEFAULT_VISIBLE_PAGES;}
-  }
-
   private get filteredCurrentPageRange(): any[] {
-    return this.generatePagesArray()
+    return this.generatePagesArray
       .filter(
         (page, _, array) => this.shouldBeDisplayed(page, array)
       );
   }
 
-  private fillWithDots(pagesArray: any[]): void {
-    pagesArray
-      .forEach(
-        (page, index, array) =>
-          page - array[index + 1] < -1 &&
-          array.splice(index + 1, 0, '...')
-      );
+  private fillWithDots(pagesArray: any[]): [number | string] {
+    return pagesArray
+      .reduce((accumulator, currPage, currIndex, array) => {
+        accumulator.push(currPage);
+        currPage - array[currIndex + 1] < -1 && accumulator.splice(currIndex + 2, 0, '...');
+        return accumulator
+      }, [])
   }
 
   private shouldBeDisplayed(page: number, array: number[]): boolean {
-    return (page === 1 ||
+    return (page === array[0] ||
       page === array.length ||
       page === this.currentPageIndex ||
-      page > this.currentPageIndex - (this.visiblePages + 1) && page < this.currentPageIndex + (this.visiblePages + 1));
+      page > this.currentPageIndex - (this.visiblePages + 1)
+      && page < this.currentPageIndex + (this.visiblePages + 1));
   }
 
-  private get pageProps(): pageProps {
+  private get pageProps(): PageProps {
     const from = (this.currentPageIndex - 1) * this.rowsPerPage;
     const to = from + this.rowsPerPage;
     return {from, to};
   }
 
-  private generatePagesArray(): number[] {
+  private get generatePagesArray(): number[] {
     const numberOfPages = Math.ceil(this.totalCount / this.rowsPerPage) || 1;
     return this.arrayFromNumber(numberOfPages);
   }
 
   private arrayFromNumber(number: number): number[] {
     return Array.from({length: number}, (_, i) => i + 1);
+  }
+
+  /* conditional checking functions */
+
+  private isNumber(value: any): boolean {
+    return value && typeof value === "number";
+  }
+
+  private isArray(value: any): boolean {
+    return value?.length && value instanceof Array;
   }
 
 }
