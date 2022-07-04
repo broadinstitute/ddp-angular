@@ -5,7 +5,6 @@ import {
   Input,
   OnChanges,
   Output,
-  SimpleChanges
 } from '@angular/core';
 
 
@@ -45,7 +44,7 @@ export class PaginatorComponent implements OnChanges {
 
   constructor() {}
 
-  ngOnChanges(_): void {
+  ngOnChanges(): void {
     this.setDefaultParams();
     this.generatePagesArray();
   }
