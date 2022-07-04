@@ -1,4 +1,12 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 
 
 interface pageProps {
@@ -13,6 +21,13 @@ enum SHIFT_PAGE {
   ONE_LESS = 'ONE_LESS'
 }
 
+/* Defaults */
+const PAGE_SIZE_OPTIONS = [10, 25, 50];
+const ROWS_PER_PAGE = 10;
+const CURRENT_PAGE_INDEX = 1;
+const VISIBLE_PAGES = 3;
+
+
 @Component({
   selector: 'app-paginator',
   templateUrl: './paginator.component.html',
@@ -23,13 +38,15 @@ export class PaginatorComponent implements OnChanges {
   @Input() totalCount: number;
   @Input() rowsPerPage = 10;
   @Input() currentPageIndex: number;
-  @Input() pageSizeOptions: number[] = [10, 25, 50];
+  @Input() pageSizeOptions: number[];
+  @Input() visiblePages: number;
 
   @Output() pageChanged: EventEmitter<pageProps> = new EventEmitter();
 
   constructor() {}
 
-  ngOnChanges(_): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    this.setDefaultParams();
     this.generatePagesArray();
   }
 
@@ -74,10 +91,21 @@ export class PaginatorComponent implements OnChanges {
 
   /* Paginator Engine */
 
+  private setDefaultParams(): void {
+    if(!this.rowsPerPage || typeof this.rowsPerPage !== "number")
+      this.rowsPerPage = ROWS_PER_PAGE;
+    if(!(this.pageSizeOptions instanceof Array) || this.pageSizeOptions.length < 1)
+      this.pageSizeOptions = PAGE_SIZE_OPTIONS;
+    if(!this.currentPageIndex || typeof this.currentPageIndex !== "number")
+      this.currentPageIndex = CURRENT_PAGE_INDEX;
+    if(!this.visiblePages || typeof this.visiblePages !== "number")
+      this.visiblePages = VISIBLE_PAGES;
+  }
+
   private get filteredCurrentPageRange(): any[] {
     return this.generatePagesArray()
       .filter(
-        (page, _, array) => this.displayOrNot(page, array, 3, 3)
+        (page, _, array) => this.displayOrNot(page, array)
       );
   }
 
@@ -90,11 +118,11 @@ export class PaginatorComponent implements OnChanges {
       );
   }
 
-  private displayOrNot(page: number, array: number[], left: number, right: number): boolean {
+  private displayOrNot(page: number, array: number[]): boolean {
     return (page === 1 ||
       page === array.length ||
       page === this.currentPageIndex ||
-      page > this.currentPageIndex - (left + 1) && page < this.currentPageIndex + (right + 1));
+      page > this.currentPageIndex - (this.visiblePages + 1) && page < this.currentPageIndex + (this.visiblePages + 1));
   }
 
   private get pageProps(): pageProps {

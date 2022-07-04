@@ -1,4 +1,12 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input, OnChanges,
+  Output,
+  ViewChild
+} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {patientListModel} from '../../models/patient-list.model';
@@ -6,21 +14,23 @@ import {patientListModel} from '../../models/patient-list.model';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableComponent implements OnInit, AfterViewInit {
+export class TableComponent implements OnChanges, AfterViewInit {
   displayedColumns: string[] =
     ['id', 'firstName', 'lastName', 'birthdate', 'enrollingCenter', 'registered', 'lastUpdated', 'enrollmentStatus'];
   dataSource: MatTableDataSource<patientListModel>;
 
   @Input('data') tableData: patientListModel[];
   @Output('rowClick') clickedRowData = new EventEmitter();
+  @Input() loading: boolean = false;
 
   @ViewChild(MatSort) sort: MatSort;
 
   constructor() {}
 
-  ngOnInit(): void {
+  ngOnChanges(_): void {
     this.dataSource = new MatTableDataSource<patientListModel>(this.tableData);
   }
 

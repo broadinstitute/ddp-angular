@@ -17,18 +17,8 @@
     font-size: getFontSize('xxlg');
   }
 
-
-  &-info {
-    @include flexContainer(center, space-between);
-    margin-bottom: 20px;
-    p {
-      font-family: Montserrat-Medium, sans-serif;
-      font-size: getFontSize('xlg');
-    }
-  }
-
   &-buttons {
-    @extend .patients-info;
+    @include flexContainer(center, space-between);
     justify-content: normal;
     margin-bottom: 48px;
 
@@ -53,6 +43,15 @@
   }
 
   &-list {
+
+    &-info {
+      @include flexContainer(center, space-between);
+      margin-bottom: 20px;
+      p {
+        font-family: Montserrat-Medium, sans-serif;
+        font-size: getFontSize('xlg');
+      }
+    }
 
     &-paginator {
       margin-top: 16px;
