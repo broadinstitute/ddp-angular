@@ -28,8 +28,6 @@ export class TableComponent implements OnChanges, AfterViewInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {}
-
   ngOnChanges(_): void {
     this.dataSource = new MatTableDataSource<patientListModel>(this.tableData);
   }
