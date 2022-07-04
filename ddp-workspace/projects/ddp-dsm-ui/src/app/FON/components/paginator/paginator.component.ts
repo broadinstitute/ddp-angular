@@ -55,7 +55,7 @@ export class PaginatorComponent {
 
     this.rowsPerPage = this.isNumber(rowsPerPage) ? rowsPerPage : DEFAULT_ROWS_PER_PAGE;
     this.currentPageIndex = this.isNumber(currentPageIndex) ? currentPageIndex : DEFAULT_CURRENT_PAGE_INDEX;
-    this.visiblePages = this.isNumber(visiblePages) ? visiblePages : DEFAULT_VISIBLE_PAGES
+    this.visiblePages = this.isNumber(visiblePages) ? visiblePages : DEFAULT_VISIBLE_PAGES;
     this.pageSizeOptions = this.isArray(pageSizeOptions) ? pageSizeOptions : DEFAULT_PAGE_SIZE_OPTIONS;
 
     this.totalCount = totalCount;
@@ -112,8 +112,8 @@ export class PaginatorComponent {
       .reduce((accumulator, currPage, currIndex, array) => {
         accumulator.push(currPage);
         currPage - array[currIndex + 1] < -1 && accumulator.splice(currIndex + 2, 0, '...');
-        return accumulator
-      }, [])
+        return accumulator;
+      }, []);
   }
 
   private shouldBeDisplayed(page: number, array: number[]): boolean {
@@ -142,7 +142,7 @@ export class PaginatorComponent {
   /* conditional checking functions */
 
   private isNumber(value: any): boolean {
-    return value && typeof value === "number";
+    return value && typeof value === 'number';
   }
 
   private isArray(value: any): boolean {
