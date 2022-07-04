@@ -42,8 +42,6 @@ export class PaginatorComponent implements OnChanges {
 
   @Output() pageChanged = new EventEmitter<pageProps>();
 
-  constructor() {}
-
   ngOnChanges(): void {
     this.setDefaultParams();
     this.generatePagesArray();
