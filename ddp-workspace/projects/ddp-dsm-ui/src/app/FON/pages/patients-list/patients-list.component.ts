@@ -45,12 +45,12 @@ export class PatientsListComponent implements OnInit {
     this.loading$ = this.storeService.getParticipantsLoadingStatus;
 
     const qParams = JSON.parse(localStorage.getItem(this.LSParams));
-    const params = {from: qParams?.from || this.DEFAULT_FROM_VALUE, to: qParams?.to || this.DEFAULT_TO_VALUE};
+    const builtParams = {from: qParams?.from || this.DEFAULT_FROM_VALUE, to: qParams?.to || this.DEFAULT_TO_VALUE};
 
-    this.setToLocalStorage(params);
+    this.setToLocalStorage(builtParams);
 
     this.router.navigate([],
-      {queryParams: params}
+      {queryParams: builtParams}
     );
 
     this.activatedRoute.queryParams
