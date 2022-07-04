@@ -104,7 +104,7 @@ export class PaginatorComponent implements OnChanges {
   private get filteredCurrentPageRange(): any[] {
     return this.generatePagesArray()
       .filter(
-        (page, _, array) => this.displayOrNot(page, array)
+        (page, _, array) => this.shouldBeDisplayed(page, array)
       );
   }
 
@@ -117,7 +117,7 @@ export class PaginatorComponent implements OnChanges {
       );
   }
 
-  private displayOrNot(page: number, array: number[]): boolean {
+  private shouldBeDisplayed(page: number, array: number[]): boolean {
     return (page === 1 ||
       page === array.length ||
       page === this.currentPageIndex ||
