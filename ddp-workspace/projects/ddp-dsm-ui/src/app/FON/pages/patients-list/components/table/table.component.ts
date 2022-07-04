@@ -23,7 +23,7 @@ export class TableComponent implements OnChanges, AfterViewInit {
   dataSource: MatTableDataSource<patientListModel>;
 
   @Input('data') tableData: patientListModel[];
-  @Output('rowClick') clickedRowData = new EventEmitter();
+  @Output('rowClick') clickedRowData = new EventEmitter<patientListModel>();
   @Input() loading = false;
 
   @ViewChild(MatSort) sort: MatSort;
