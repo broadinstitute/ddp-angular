@@ -131,7 +131,7 @@ export class PaginatorComponent implements OnChanges {
     return {from, to};
   }
 
-  private generatePagesArray(): any[] {
+  private generatePagesArray(): number[] {
     const numberOfPages = Math.ceil(this.totalCount / this.rowsPerPage) || 1;
     return this.arrayFromNumber(numberOfPages);
   }
