@@ -17,9 +17,12 @@
     font-size: getFontSize('xxlg');
   }
 
+  app-search-panel {
+    margin: 24px;
+  }
+
   &-buttons {
-    @include flexContainer(center, space-between);
-    justify-content: normal;
+    @include flexContainer(center, normal);
 
     button:not(:first-of-type) {
       margin-left: 12px;
@@ -45,17 +48,15 @@
 
     &-info {
       @include flexContainer(center, space-between);
-      margin-bottom: 20px;
-      
-      app-search-panel + & {
-        margin-top: 24px;
-      }
-      
+      margin: 48px 0 20px;
+
+
+
       p {
         font-family: Montserrat-Medium, sans-serif;
         font-size: getFontSize('xlg');
       }
-      
+
     }
 
     &-paginator {
