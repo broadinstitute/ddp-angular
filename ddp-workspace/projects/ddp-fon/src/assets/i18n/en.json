@@ -480,8 +480,10 @@
         "SubmitButton": "Submit",
         "CloseButton": "Close",
         "AddButton": "Add",
-        "CancelButton": "Cancel",
+        "CancelBtn": "Cancel",
         "NextButton": "Next",
+        "DeleteButton": "Delete",
+        "ConfirmDeletion": "Are you sure you want to delete this information?",
         "PreviousButton": "Previous",
         "SavingButton": "Saving",
         "EditButton": "Edit",
@@ -663,6 +665,11 @@
         },
         "AdminActionPanel": {
             "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
+            "EditButton": "Edit"
+        },
+        "ModalActivityBlock": {
+            "SaveButton": "Save",
+            "DeleteButton": "Delete",
             "EditButton": "Edit"
         }
     }
