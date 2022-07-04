@@ -37,7 +37,7 @@
              let-loading="loading"
              let-totalCount="totalCount">
 
-  <ng-container *ngIf="patients.length || (!patients.length && loading) else noPatients">
+  <ng-container *ngIf="totalCount else noPatients">
 
     <section class="patients-list-info">
       <p>All patients ({{totalCount}})</p>
@@ -58,7 +58,7 @@
 
   </ng-container>
 
-  <ng-template #noPatients>
+  <ng-template *ngIf="!loading" #noPatients>
     <div class="noPatients">
       <img class="noPatients-image" height="101" width="125" src="/assets/images/users.png" alt="users icon">
       <p class="noPatients-firstTitle">Start building your patient list.</p>
