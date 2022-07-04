@@ -22,10 +22,10 @@ enum SHIFT_PAGE {
 }
 
 /* Defaults */
-const PAGE_SIZE_OPTIONS = [10, 25, 50];
-const ROWS_PER_PAGE = 10;
-const CURRENT_PAGE_INDEX = 1;
-const VISIBLE_PAGES = 3;
+const DEFAULT_PAGE_SIZE_OPTIONS = [10, 25, 50];
+const DEFAULT_ROWS_PER_PAGE = 10;
+const DEFAULT_CURRENT_PAGE_INDEX = 1;
+const DEFAULT_VISIBLE_PAGES = 3;
 
 
 @Component({
@@ -93,13 +93,13 @@ export class PaginatorComponent implements OnChanges {
 
   private setDefaultParams(): void {
     if(!this.rowsPerPage || typeof this.rowsPerPage !== 'number')
-      {this.rowsPerPage = ROWS_PER_PAGE;}
+      {this.rowsPerPage = DEFAULT_ROWS_PER_PAGE;}
     if(!(this.pageSizeOptions instanceof Array) || this.pageSizeOptions.length < 1)
-      {this.pageSizeOptions = PAGE_SIZE_OPTIONS;}
+      {this.pageSizeOptions = DEFAULT_PAGE_SIZE_OPTIONS;}
     if(!this.currentPageIndex || typeof this.currentPageIndex !== 'number')
-      {this.currentPageIndex = CURRENT_PAGE_INDEX;}
+      {this.currentPageIndex = DEFAULT_CURRENT_PAGE_INDEX;}
     if(!this.visiblePages || typeof this.visiblePages !== 'number')
-      {this.visiblePages = VISIBLE_PAGES;}
+      {this.visiblePages = DEFAULT_VISIBLE_PAGES;}
   }
 
   private get filteredCurrentPageRange(): any[] {

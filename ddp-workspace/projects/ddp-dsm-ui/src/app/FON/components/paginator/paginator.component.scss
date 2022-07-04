@@ -25,7 +25,7 @@
   &-pages {
     @include flexContainer;
 
-    &-l-icons {
+    &-left-icons {
       @include flexContainer(center);
       margin-right: 15px;
       @include iconHover;
@@ -37,8 +37,8 @@
       }
     }
 
-    &-r-icons {
-      @extend .paginator-pages-l-icons;
+    &-right-icons {
+      @extend .paginator-pages-left-icons;
       margin-right: 0;
       margin-left: 15px;
     }

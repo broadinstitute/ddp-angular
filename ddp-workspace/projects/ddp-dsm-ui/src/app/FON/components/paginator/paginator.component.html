@@ -1,7 +1,7 @@
 <div class="paginator">
 
   <div class="paginator-pages">
-    <div class="paginator-pages-l-icons">
+    <div class="paginator-pages-left-icons">
       <i (click)="shiftPage('START')" class="fa-regular fa-angles-left"></i>
       <i (click)="shiftPage('ONE_LESS')" class="fa-regular fa-angle-left"></i>
     </div>
@@ -10,7 +10,7 @@
         <p *ngFor="let page of currentPageRange" (click)="changePage(page)" [ngClass]="{'active': currentPageIndex === page}">{{page}}</p>
     </div>
 
-    <div class="paginator-pages-r-icons">
+    <div class="paginator-pages-right-icons">
       <i (click)="shiftPage('ONE_MORE')" class="fa-regular fa-angle-right"></i>
       <i (click)="shiftPage('END')" class="fa-regular fa-angles-right"></i>
     </div>
