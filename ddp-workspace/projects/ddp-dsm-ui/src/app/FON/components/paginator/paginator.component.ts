@@ -41,7 +41,7 @@ export class PaginatorComponent implements OnChanges {
   @Input() pageSizeOptions: number[];
   @Input() visiblePages: number;
 
-  @Output() pageChanged: EventEmitter<pageProps> = new EventEmitter();
+  @Output() pageChanged = new EventEmitter<pageProps>();
 
   constructor() {}
 
