@@ -44,7 +44,7 @@ export class PaginatorComponent {
   public pageSizeOptions: number[];
 
   private totalCount: number;
-  private rowsPerPage = 10;
+  private rowsPerPage: number;
   private currentPageIndex: number;
   private visiblePages: number;
 
