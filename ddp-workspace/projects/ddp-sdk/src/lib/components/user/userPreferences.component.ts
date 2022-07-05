@@ -119,7 +119,7 @@ export class UserPreferencesComponent implements OnDestroy {
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
     });
-    private readonly YEARS_BACK = 100;
+    private readonly YEARS_BACK = 120;
     public readonly endYear: number;
     public readonly startYear: number;
     public loaded = true;

@@ -138,7 +138,7 @@ describe('UserPreferencesComponent', () => {
         fixture.detectChanges();
 
         expect(component.endYear).toBe(2013);
-        expect(component.startYear).toBe(1913);
+        expect(component.startYear).toBe(1893);
     });
 
     it('calls for user profile when userProfileFieldsForEditing is not empty', () => {
