@@ -2269,15 +2269,7 @@ export class ParticipantListComponent implements OnInit {
     const passed = new Date().getTime() - this.start;
     this.dsmService.sendAnalyticsMetric(this.getRealm(), passed).subscribe({});
   }
-
-  private displayCheckbox(pt: Participant): boolean {
-    if (pt.data.status === 'ENROLLED'
-      && pt.data.medicalProviders != null && pt.medicalRecords != null
-      && pt.data.medicalProviders.length > 0 && pt.medicalRecords.length > 0) {
-      return true;
-    }
-    return false;
-  }
+  
 
   toggleColumns(checked: boolean): void {
     if (checked) {
