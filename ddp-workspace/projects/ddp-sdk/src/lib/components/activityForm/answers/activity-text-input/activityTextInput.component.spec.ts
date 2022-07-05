@@ -24,7 +24,7 @@ import { TranslateTestingModule } from '../../../../testsupport/translateTesting
 import { ActivityTextInput } from './activityTextInput.component';
 import { FuncType } from 'ddp-sdk';
 
-describe('ActivityTextInput', () => {
+fdescribe('ActivityTextInput', () => {
   let component: ActivityTextInput;
   let fixture: ComponentFixture<ActivityTextInput>;
   let block: ActivityTextQuestionBlock;
