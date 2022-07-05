@@ -2269,7 +2269,7 @@ export class ParticipantListComponent implements OnInit {
     const passed = new Date().getTime() - this.start;
     this.dsmService.sendAnalyticsMetric(this.getRealm(), passed).subscribe({});
   }
-  
+
 
   toggleColumns(checked: boolean): void {
     if (checked) {
