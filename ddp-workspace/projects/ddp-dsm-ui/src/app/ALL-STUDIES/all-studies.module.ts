@@ -108,7 +108,7 @@ import {AllStudiesComponent} from './all-studies.component';
 import {BuildingFactoryService} from '../activity-data/services/buildingFactory.service';
 import { CohortTagComponent } from '../tags/cohort-tag/cohort-tag.component';
 import {MatChipsModule} from '@angular/material/chips';
-import {StoolUploadComponent} from "../stool-upload/stool-upload.component";
+import {StoolUploadComponent} from '../stool-upload/stool-upload.component';
 
 
 

@@ -103,14 +103,14 @@ export class StoolUploadComponent implements OnInit {
           jsonData = data;
           jsonData.forEach((val) => {
             const kitType = KitType.parse(val);
-            if(kitType.kitId==15){
+            if(kitType.kitId===15){
               this.kitTypes.push(kitType);
             }
           });
           if (this.kitTypes.length === 1) {
             this.kitType = this.kitTypes[ 0 ];
           } else {
-            this.errorMessage = "Study does not have stool kit";
+            this.errorMessage = 'Study does not have stool kit';
           }
           // console.info(`${this.kitTypes.length} kit types received: ${JSON.stringify(data, null, 2)}`);
           this.loading = false;
