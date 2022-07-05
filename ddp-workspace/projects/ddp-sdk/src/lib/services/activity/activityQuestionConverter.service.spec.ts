@@ -3,7 +3,13 @@ import { TestBed } from '@angular/core/testing';
 import { ActivityQuestionConverter } from './activityQuestionConverter.service';
 import { ActivityValidatorBuilder } from './activityValidatorBuilder.service';
 import { ActivitySuggestionBuilder } from './activitySuggestionBuilder.service';
-import { ActivityPicklistQuestionBlock, QuestionType, LoggingService, ActivityPicklistOption } from 'ddp-sdk';
+import {
+    ActivityPicklistQuestionBlock,
+    QuestionType,
+    LoggingService,
+    ActivityPicklistOption,
+    ConfigurationService
+} from 'ddp-sdk';
 import { PicklistRenderMode } from '../../models/activity/picklistRenderMode';
 
 const question = {
@@ -31,6 +37,7 @@ describe('ActivityQuestionConverter Test', () => {
     let loggerServiceSpy: jasmine.SpyObj<LoggingService>;
     let validatorBuilderSpy: jasmine.SpyObj<ActivityValidatorBuilder>;
     let suggestionBuilderSpy: jasmine.SpyObj<ActivitySuggestionBuilder>;
+    let configurationService: jasmine.SpyObj<ConfigurationService>;
 
     beforeEach(() => {
         loggerServiceSpy = jasmine.createSpyObj('LoggingService', ['logError']);
@@ -38,6 +45,7 @@ describe('ActivityQuestionConverter Test', () => {
             buildQuestionValidatorRule: []
         });
         suggestionBuilderSpy = jasmine.createSpyObj('ActivitySuggestionBuilder', ['getSuggestionProvider']);
+        configurationService = jasmine.createSpyObj('ConfigurationService', ['detail_MaxLength']);
 
         TestBed.configureTestingModule({
             imports: [HttpClientModule],
@@ -45,11 +53,12 @@ describe('ActivityQuestionConverter Test', () => {
                 ActivityQuestionConverter,
                 LoggingService,
                 ActivityValidatorBuilder,
-                ActivitySuggestionBuilder
+                ActivitySuggestionBuilder,
+                ConfigurationService
             ]
         });
 
-        service = new ActivityQuestionConverter(validatorBuilderSpy, suggestionBuilderSpy, loggerServiceSpy);
+        service = new ActivityQuestionConverter(validatorBuilderSpy, suggestionBuilderSpy, loggerServiceSpy, configurationService);
     });
 
     it('should initialize service', () => {

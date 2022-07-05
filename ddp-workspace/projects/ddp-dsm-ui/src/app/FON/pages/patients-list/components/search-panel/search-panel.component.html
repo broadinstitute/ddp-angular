@@ -1,0 +1,41 @@
+<section class="search-panel">
+  <form [formGroup]="searchGroup" class="search-panel-form">
+    <app-input-field
+      label="FON ID#"
+      placeholder="FON ID"
+      inputType="text"
+      formControlName="fonId">
+    </app-input-field>
+
+    <app-input-field
+      label="First Name"
+      placeholder="First name"
+      inputType="text"
+      formControlName="firstName">
+    </app-input-field>
+
+    <app-input-field
+      label="Last Name"
+      placeholder="Last Name"
+      inputType="text"
+      formControlName="lastName">
+    </app-input-field>
+
+    <app-input-field
+      label="Email"
+      placeholder="Enter email address"
+      inputType="text"
+      formControlName="email">
+    </app-input-field>
+
+    <app-input-field
+      label="Date of birth"
+      placeholder="MM/DD/YY"
+      inputType="date"
+      formControlName="birthDate">
+    </app-input-field>
+
+    <button class="btn btn_primary btn_search" (click)="onSearch()">Search</button>
+    <button class="btn btn_secondary btn_clear" (click)="onClear()">Clear</button>
+  </form>
+</section>

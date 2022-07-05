@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { patientListModel } from './models/patient-list.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import {Observable, tap} from 'rxjs';
-import { PageEvent } from '@angular/material/paginator';
+import { patientListModel } from './models/patient-list.model';
+
 import {MainConstants} from '../../constants/main-constants';
 import {StoreService} from '../../../STORE/store.service';
 import {
   RegisterPatientsModalComponent
 } from '../../components/register-patients-modal/register-patients-modal.component';
+import { SearchPatientDataModel } from './models/search-patient-data.model';
 
 @Component({
   selector: 'app-patients-list',
@@ -16,19 +17,20 @@ import {
 })
 
 export class PatientsListComponent implements OnInit {
+  private readonly LSParams: string = 'pListQueryParams';
+  readonly PARENT = MainConstants.participantsList;
+
+  currentPageIndex = 1;
+  rowsPerPage: number;
+  isSearchPanelShown: boolean;
+  registerPatientsModalComponent = RegisterPatientsModalComponent;
+
   patients$: Observable<patientListModel[]>;
   totalCount$: Observable<number>;
   loading$: Observable<boolean>;
-  error$: Observable<string>;
 
-  // Modal section
-  registerPatientsModalComponent = RegisterPatientsModalComponent;
-
-  pageIndex: number;
-  pageSize: number;
-  readonly PARENT = MainConstants.participantsListParent;
-
-  private readonly LSParams: string = 'pListQueryParams';
+  DEFAULT_FROM_VALUE = 0;
+  DEFAULT_TO_VALUE = 10;
 
   constructor(
     private router: Router,
@@ -40,44 +42,45 @@ export class PatientsListComponent implements OnInit {
   ngOnInit(): void {
     this.totalCount$ = this.storeService.getParticipantsTotalCount;
     this.loading$ = this.storeService.getParticipantsLoadingStatus;
-    this.error$ = this.storeService.getErrorState;
-
-
 
     const qParams = JSON.parse(localStorage.getItem(this.LSParams));
+    const builtParams = {from: qParams?.from || this.DEFAULT_FROM_VALUE, to: qParams?.to || this.DEFAULT_TO_VALUE};
 
-    localStorage.setItem(this.LSParams,
-      JSON.stringify({from: qParams?.from || 0, to: qParams?.to || 10}));
+    this.setToLocalStorage(builtParams);
 
     this.router.navigate([],
-      {queryParams: {from: qParams?.from || 0, to: qParams?.to || 10}}
+      {queryParams: builtParams}
     );
 
     this.activatedRoute.queryParams
       .pipe(
         tap((params: Params) => {
-          this.pageSize = params.to - params.from;
-          this.pageIndex = (params.to/this.pageSize) - 1;
+          this.rowsPerPage = params.to - params.from || 10;
+          this.currentPageIndex = (params.to/this.rowsPerPage) || 1;
           this.patients$ = this.storeService.getParticipants(params.from, params.to, this.PARENT);
         })
       )
       .subscribe();
   }
 
-  setPage(event: PageEvent): void {
-    const from = ((event.pageIndex + 1) * event.pageSize) - event.pageSize;
-    const to = from + event.pageSize;
-
-    localStorage.setItem(this.LSParams,
-      JSON.stringify({from, to}));
-
-    this.router.navigate([], {queryParams: {from, to}});
-  }
-
-  openActivities(participant: patientListModel): void {
-    this.router.navigate([participant.guid], {
+  public openPatientInfo({guid}: patientListModel): void {
+    this.router.navigate([guid], {
       relativeTo: this.activatedRoute
     });
   }
 
+  public getPageList({from, to}: any): void {
+    this.setToLocalStorage({from, to});
+    this.router.navigate([], {queryParams: {from, to}});
+  }
+
+  private setToLocalStorage(item: any): void {
+    localStorage.setItem(this.LSParams, JSON.stringify(item));
+  }
+
+  searchPatients(data: SearchPatientDataModel): void {
+    console.log('Search patients:', data);
+
+    // TODO: add table sorting logic by search data here
+  }
 }

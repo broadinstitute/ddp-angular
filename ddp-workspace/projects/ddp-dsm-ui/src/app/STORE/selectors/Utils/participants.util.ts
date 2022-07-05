@@ -4,13 +4,15 @@ export const generateParticipantsList = (participants: ParticipantModel[], setti
   const actDefs = settings?.activityDefinitions;
 
   return participants instanceof Array && actDefs ? participants.map(pt => ({
-    ID: pt.esData.profile.hruid,
+    id: pt.esData.profile.hruid,
     guid: pt.esData.profile.guid,
     firstName: pt.esData.profile.firstName,
     lastName: pt.esData.profile.lastName,
     birthdate: pt.esData.dsm.dateOfBirth,
+    enrollingCenter: 'Boston Children\'s Hospital',
     registered: pt.esData.profile.createdAt,
     lastUpdated: pt.esData.statusTimestamp,
+    enrollmentStatus: '.',
     activities: pt.esData.activities.map(activity => {
       const activityDefinition = Object.values(actDefs).find(actDef => actDef['activityCode'] === activity.activityCode);
       return {
