@@ -32,6 +32,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AllStudiesComponent} from './all-studies.component';
 import {HomeComponent} from '../home/home.component';
+import {StoolUploadComponent} from "../stool-upload/stool-upload.component";
 
 
 
@@ -82,6 +83,8 @@ export const AppRoutes: Routes = [
       {path: 'downloadPDF', component: PdfDownloadComponent, canActivate: [AuthGuard]},
       {path: 'customizeView', component: ShippingSearchComponent, canActivate: [AuthGuard]},
       {path: 'ndi', component: NDIUploadComponent, canActivate: [AuthGuard]},
+      {path: 'stoolUpload', component: StoolUploadComponent, canActivate: [AuthGuard]},
+
 
       {path: 'userSettings', component: UserSettingComponent, canActivate: [AuthGuard]},
 
