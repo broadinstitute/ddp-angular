@@ -1276,6 +1276,7 @@ export class ParticipantListComponent implements OnInit {
   }
 
   public doFilter(): void {
+    this.selectAll = this.selectedColumns['allSelected'];
     this.resetPagination();
     const json = [];
     this.dataSources.forEach((value: string, key: string) => {
@@ -2281,7 +2282,7 @@ export class ParticipantListComponent implements OnInit {
   toggleColumns(checked: boolean): void {
     if (checked) {
       this.prevSelectedColumns = this.selectedColumns;
-      this.selectedColumns = Object.assign({}, this.sourceColumns);
+      this.selectedColumns = Object.assign({}, {...this.sourceColumns, allSelected: true});
     } else {
       this.selectedColumns = this.prevSelectedColumns;
     }
