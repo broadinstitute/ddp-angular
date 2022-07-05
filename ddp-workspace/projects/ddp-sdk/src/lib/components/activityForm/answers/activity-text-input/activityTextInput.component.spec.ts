@@ -23,8 +23,9 @@ import { TextSuggestion } from '../../../../models/activity/textSuggestion';
 import { TranslateTestingModule } from '../../../../testsupport/translateTestingModule';
 import { ActivityTextInput } from './activityTextInput.component';
 import { FuncType } from 'ddp-sdk';
+import {CharactersRemainingPipe} from '../../../../pipes/characters-remaining.pipe';
 
-fdescribe('ActivityTextInput', () => {
+describe('ActivityTextInput', () => {
   let component: ActivityTextInput;
   let fixture: ComponentFixture<ActivityTextInput>;
   let block: ActivityTextQuestionBlock;
@@ -32,7 +33,7 @@ fdescribe('ActivityTextInput', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [ActivityTextInput],
+        declarations: [ActivityTextInput, CharactersRemainingPipe],
         imports: [
           FormsModule,
           ReactiveFormsModule,
