@@ -142,8 +142,7 @@ export class ActivityTextInput implements OnInit, OnChanges, OnDestroy {
 
         this.sub = this.formGroup.valueChanges
             .pipe(
-                map((values) => {
-                    return {
+                map((values) => ({
                         [this.controlName]: values[this.controlName]
                             ? values[this.controlName].trim()
                             : null,
@@ -152,8 +151,7 @@ export class ActivityTextInput implements OnInit, OnChanges, OnDestroy {
                         ]
                             ? values[this.confirmationControlName].trim()
                             : null,
-                    };
-                }),
+                    })),
                 tap((values) => {
                     this.onChangeCounter(values[this.controlName]);
                 }),
