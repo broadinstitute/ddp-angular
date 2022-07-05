@@ -21,14 +21,15 @@ import { TextSuggestion } from '../../../../models/activity/textSuggestion';
     styleUrls: ['./activityTextInput.component.scss'],
 })
 export class ActivityTextInput implements OnInit, OnChanges, OnDestroy {
-    @Input() block: ActivityTextQuestionBlock;
-    @Input() placeholder: string;
-    @Input() readonly: boolean;
-    @Output() valueChanged = new EventEmitter<string | null>();
-    formGroup: FormGroup;
-    controlName: string;
-    confirmationControlName: string;
-    filteredSuggestions$: Observable<TextSuggestion[]>;
+    @Input() public block: ActivityTextQuestionBlock;
+    @Input() public placeholder: string;
+    @Input() public readonly: boolean;
+    @Output() public valueChanged = new EventEmitter<string | null>();
+    public formGroup: FormGroup;
+    public controlName: string;
+    public confirmationControlName: string;
+    public filteredSuggestions$: Observable<TextSuggestion[]>;
+    public charactersRemaining: string;
     private sub: Subscription;
     private input$ = new Subject<string>();
     private readonly confirmationControlNamePrefix = 'confirmation_';
@@ -195,9 +196,8 @@ export class ActivityTextInput implements OnInit, OnChanges, OnDestroy {
         event.preventDefault();
     }
 
-    public text: string;
 
     onChangeCounter(value: string): void {
-        this.text = value;
+        this.charactersRemaining = value;
     }
 }

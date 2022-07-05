@@ -65,7 +65,7 @@
     </ng-container>
     <p class="ddp-helper">
             <span class="ddp-counter-color">
-                {{ (text ? text : block.answer) | charactersRemaining : block.maxLength }}
+                {{ (charactersRemaining ? charactersRemaining : block.answer) | charactersRemaining : block.maxLength }}
             </span>
     </p>
 </form>
