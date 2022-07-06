@@ -48,6 +48,8 @@ export class PaginatorComponent {
   private currentPageIndex: number;
   private visiblePages: number;
 
+  private lastPage: number;
+
   @Output() pageChanged = new EventEmitter<PageProps>();
 
   @Input('config') set setConfiguration(configuration: Configuration) {
@@ -63,6 +65,7 @@ export class PaginatorComponent {
 
   public get currentPageRange(): (string | number)[] {
     const currentRange = this.filteredCurrentPageRange;
+    this.lastPage = (currentRange as any).at(-1);
     return this.fillWithDots(currentRange);
   }
 
@@ -96,6 +99,14 @@ export class PaginatorComponent {
   public setRows(rows: number): void {
     this.rowsPerPage = rows;
     this.changePage(1);
+  }
+
+  get isFirst(): boolean {
+    return this.currentPageIndex === 1;
+  }
+
+  get isLast(): boolean {
+    return this.currentPageIndex === this.lastPage;
   }
 
   /* Paginator Engine */
