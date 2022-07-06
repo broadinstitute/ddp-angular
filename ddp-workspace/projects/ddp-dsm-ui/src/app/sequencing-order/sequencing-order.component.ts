@@ -25,8 +25,8 @@ export class SequencingOrderComponent {
 
   currentPatchField: string;
   errorMessage: string;
-  selectedNormal: SequencingOrder = new SequencingOrder( '', '', '', '', '', '', '' );
-  selectedTissue: SequencingOrder = new SequencingOrder( '', '', '', '', '', '', '' );
+  selectedNormal: SequencingOrder = new SequencingOrder( '', '', '', '', '', '', '', '' );
+  selectedTissue: SequencingOrder = new SequencingOrder( '', '', '', '', '', '', '', '' );
 
   constructor( private dsmService: DSMService, private auth: Auth, private role: RoleService ) {
 
@@ -56,7 +56,7 @@ export class SequencingOrderComponent {
   }
 
   patch( patch: any ): void {
-    this.dsmService.patchParticipantRecord( JSON.stringify( patch ) ).subscribe( { // need to subscribe, otherwise it will not send!
+    this.dsmService.patchParticipantRecord( JSON.stringify( patch ) ).subscribe( {
       next: data => {
         this.currentPatchField = null;
       },
@@ -123,6 +123,10 @@ export class SequencingOrderComponent {
       }
     } );
     if (this.checkErrorInSurveys( 'RELEASE_SELF' ) || this.checkErrorInSurveys( 'RELEASE_MINOR' )) {
+      this.errorMessage += 'Participant lives in New York or Canada and is not eligible for clinical sequencing ';
+    }
+
+    if (!this.selectedNormal.sequencingRestriction || this.selectedNormal.sequencingRestriction === 'valid') {
       this.errorMessage += 'Participant lives in New York or Canada and is not eligible for clinical sequencing ';
     }
     return this.errorMessage;

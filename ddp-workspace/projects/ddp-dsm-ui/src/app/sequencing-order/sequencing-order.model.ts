@@ -2,7 +2,7 @@ export class SequencingOrder {
   isSelected = false;
 
   constructor( public sampleType: string, public sample: string, public sampleStatus: string, public collectionDate: string,
-               public sequencingOrderDate: string, public tissueId: string, public dsmKitRequestId: string ) {
+               public sequencingOrderDate: string, public tissueId: string, public dsmKitRequestId: string, public sequencingRestriction: string ) {
     this.sampleType = sampleType;
     this.sample = sample;
     this.sampleStatus = sampleStatus;
@@ -10,10 +10,11 @@ export class SequencingOrder {
     this.sequencingOrderDate = sequencingOrderDate;
     this.tissueId = tissueId;
     this.dsmKitRequestId = dsmKitRequestId;
+    this.sequencingRestriction = sequencingRestriction;
   }
 
   public static parse( json ): SequencingOrder {
     return new SequencingOrder( json.sampleType, json.sample, json.sampleStatus, json.collectionDate, json.sequencingOrderDate,
-      json.tissueId, json.dsmKitRequestId );
+      json.tissueId, json.dsmKitRequestId, json.sequencingRestriction );
   }
 }
