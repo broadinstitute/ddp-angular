@@ -8,7 +8,7 @@
 }
 
 @mixin iconHover {
-  & > i:hover {
+  & > :hover {
     color: $__Dark_pastel_blue;
     cursor: pointer;
   }
@@ -29,11 +29,24 @@
       @include flexContainer(center);
       margin-right: 15px;
       @include iconHover;
-      & i:not(:last-of-type) {
-        margin-right: 8px;
-      }
-      & i {
-        margin-top: 3px;
+      button {
+        border: none;
+        background-color: transparent;
+        &:disabled {
+          opacity: 0.6;
+
+          &:hover {
+            color: $__Gunmetal!important;
+            cursor: not-allowed!important;
+          }
+        }
+
+        &:not(:last-of-type) {
+          margin-right: 8px;
+        }
+        & i {
+          margin-top: 3px;
+        }
       }
     }
 
