@@ -2,11 +2,12 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AddPatientModel} from '../models/addPatient.model';
 import {Observable} from 'rxjs';
-import {sdkConfig} from '../../app.module';
+
+declare const DDP_ENV;
 
 @Injectable()
 export class HttpService {
-  readonly ADD_PATIENT_URL = `${sdkConfig.backendUrl}/pepper/v1/user`;
+  readonly ADD_PATIENT_URL = `${DDP_ENV.backendUrl}/pepper/v1/user`;
 
   constructor(private httpClient: HttpClient) {
   }
