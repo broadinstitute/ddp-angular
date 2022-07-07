@@ -1657,44 +1657,6 @@ export class ParticipantListComponent implements OnInit {
   }
 
   downloadCurrentData(): void {
-    if (!this.hasRole().isFeatureFlagExportNew()) {
-      return this.chooseExportOptions();
-    }
-    const dialogRef = this.openDialog('Exporting participants list...');
-    const columns = [];
-    for(const col in this.selectedColumns) {
-      for (const key in this.selectedColumns[col]) {
-        columns.push(this.selectedColumns[col][key]['participantColumn']);
-      }
-    }
-    this.dsmService.downloadParticipantData(
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
-      this.jsonPatch,
-      this.parent,
-      columns,
-      this.viewFilter,
-      null,
-      this.sortBy
-    ).subscribe({
-      next: response => {
-        let fileName = 'file';
-        const contentDisposition = response.headers.get('Content-Disposition');
-        if (contentDisposition) {
-          const fileNameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
-          const matches = fileNameRegex.exec(contentDisposition);
-          if (matches != null && matches[1]) {
-            fileName = matches[1].replace(/['"]/g, '');
-          }
-        }
-        const fileContent = response.body;
-        const blob = new Blob([fileContent], { type: 'application/octet-stream' });
-        saveAs(blob, fileName);
-        dialogRef.close();
-      }}
-    );
-  }
-
-  chooseExportOptions(): void {
     this.openModal('exportOptions');
   }
 
