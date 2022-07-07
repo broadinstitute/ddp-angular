@@ -14,7 +14,6 @@ import {EffectsModule} from '@ngrx/effects';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {ParticipantsEffects, SettingsEffects} from './STORE/effects';
 import {environment} from '../environments/environment';
-import { BulkCohortTagModalComponent } from './tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-modal.component';
 
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
@@ -22,7 +21,7 @@ const base = document.querySelector('base')?.getAttribute('href') || '';
 declare const DDP_ENV: any;
 
 export const sdkConfig = new ConfigurationService();
-sdkConfig.backendUrl = 'https://pepper-dev.datadonationplatform.org'; // TODO: move the value below to DDP_ENV as an DSS API URL(main DSM config file), depending on environment
+sdkConfig.backendUrl = DDP_ENV.backendUrl;
 sdkConfig.auth0Domain = DDP_ENV.auth0Domain;
 sdkConfig.auth0ClientId = DDP_ENV.auth0ClientKey;
 sdkConfig.adminClientId = DDP_ENV.adminClientId || DDP_ENV.auth0ClientKey;
