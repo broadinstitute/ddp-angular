@@ -21,7 +21,7 @@ const base = document.querySelector('base')?.getAttribute('href') || '';
 declare const DDP_ENV: any;
 
 export const sdkConfig = new ConfigurationService();
-sdkConfig.backendUrl = DDP_ENV.backendUrl;
+sdkConfig.backendUrl = DDP_ENV.dssBackendUrl;
 sdkConfig.auth0Domain = DDP_ENV.auth0Domain;
 sdkConfig.auth0ClientId = DDP_ENV.auth0ClientKey;
 sdkConfig.adminClientId = DDP_ENV.adminClientId || DDP_ENV.auth0ClientKey;
