@@ -859,7 +859,7 @@ export class ParticipantListComponent implements OnInit {
       .subscribe({
         next: data => {
           if (data != null) {
-            if (viewFilter != null && viewFilter.filters != null) {
+            if (viewFilter != null && viewFilter.filters?.length) {
               for (const filter of viewFilter.filters) {
                 let t = filter.participantColumn.tableAlias;
                 if (t === 'r' || t === 'o' || t === 'ex') {
@@ -902,7 +902,7 @@ export class ParticipantListComponent implements OnInit {
                   f.selected = false;
                 }
               }
-              if (viewFilter.filters != null) {
+              if (viewFilter.filters?.length) {
                 for (const filter of viewFilter.filters) {
                   if (filter.type === Filter.OPTION_TYPE) {
                     filter.selectedOptions = filter.getSelectedOptionsBoolean();

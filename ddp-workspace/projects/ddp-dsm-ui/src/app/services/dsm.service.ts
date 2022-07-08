@@ -189,7 +189,7 @@ export class DSMService {
 
     if (filterQuery != null) {
       map.push({name: 'filterQuery', value: filterQuery});
-    } else if (json == null || json.filters == null) {
+    } else if (json == null || !json.filters?.length) {
       json && map.push({name: 'filterName', value: json.filterName});
     } else if (viewFilterCopy != null) {
       map.push({name: 'filters', value: JSON.stringify(viewFilterCopy.filters)});
@@ -1067,7 +1067,7 @@ export class DSMService {
   private getFilter(json: ViewFilter): ViewFilter {
     let viewFilterCopy = null;
     if (json != null) {
-      if (json.filters != null) {
+      if (json.filters?.length) {
         viewFilterCopy = json.copy();
         for (const filter of json.filters) {
           if (filter.type === Filter.OPTION_TYPE && filter.participantColumn.tableAlias !== 'participantData') {
@@ -1075,7 +1075,7 @@ export class DSMService {
           }
         }
       }
-      if (viewFilterCopy != null && viewFilterCopy.filters != null) {
+      if (viewFilterCopy != null && viewFilterCopy.filters?.length) {
         for (const filter of viewFilterCopy.filters) {
           if (filter.type === Filter.OPTION_TYPE && filter.participantColumn.tableAlias !== 'participantData') {
             filter.selectedOptions = filter.getSelectedOptionsName();
