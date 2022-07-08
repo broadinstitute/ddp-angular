@@ -92,6 +92,10 @@ export class ParticipantListComponent implements OnInit {
   filterQuery: string = null;
   activityDefinitions = new Map();
 
+  exportFileFormat: string = "tsv";
+  exportSplitOptions: boolean = true;
+  exportOnlyMostRecent: boolean = false;
+
   selectedColumns = {};
   prevSelectedColumns = {};
   defaultColumns = [];
@@ -1653,11 +1657,17 @@ export class ParticipantListComponent implements OnInit {
   }
 
   downloadCurrentData(): void {
+    this.openModal('exportOptions');
+  }
+
+  executeDownload(): void {
+    this.modal.hide();
+
     const dialogRef = this.openDialog('Exporting participants list...');
     const columns = [];
     for(const col in this.selectedColumns) {
       for (const key in this.selectedColumns[col]) {
-        columns.push(this.selectedColumns[col][key]['participantColumn']);
+        columns.push(this.selectedColumns[col][key]);
       }
     }
     this.dsmService.downloadParticipantData(
@@ -1667,7 +1677,10 @@ export class ParticipantListComponent implements OnInit {
       columns,
       this.viewFilter,
       null,
-      this.sortBy
+      this.sortBy,
+      this.exportFileFormat,
+      this.exportSplitOptions,
+      this.exportOnlyMostRecent
     ).subscribe({
       next: response => {
         let fileName = 'file';
@@ -1683,6 +1696,11 @@ export class ParticipantListComponent implements OnInit {
         const blob = new Blob([fileContent], { type: 'application/octet-stream' });
         saveAs(blob, fileName);
         dialogRef.close();
+      },
+      error: err => {
+        dialogRef.close();
+        // open a dialog to show the error so the user doesn't lose their current view
+        this.openModal('downloadError');
       }}
     );
   }

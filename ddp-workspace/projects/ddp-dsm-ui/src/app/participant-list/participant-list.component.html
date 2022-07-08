@@ -185,7 +185,7 @@
                 <td>
                   <button mat-icon-button [color]="getFilterButtonColorStyle(isSelectedFilter(savedFilter.filterName))"
                           (click)="selectFilter(savedFilter)">
-                    <mat-icon>  
+                    <mat-icon>
                       <i class="fas fa-filter fa-sm"></i>
                     </mat-icon>
                   </button>
@@ -758,7 +758,7 @@
                             <ng-container
                               *ngIf="col.type === 'OPTIONS'">{{getOptionDisplay(col.options, tag[col.participantColumn.name])}}
                             </ng-container>
-                          </ng-container>                        
+                          </ng-container>
                         </p>
                       </li>
                     </ul>
@@ -893,6 +893,12 @@
       <ng-container *ngIf="modalAnchor === 'saveFilter'">Please enter a name for your filter</ng-container>
       <ng-container *ngIf="modalAnchor === 'assignParticipant'">Select the person you want to assign the participant
       </ng-container>
+      <ng-container *ngIf="modalAnchor === 'exportOptions'">
+        <h4>Configure export
+          <a [routerLink]="['../help']" target="_blank"><span class="fa fa-question-circle"></span></a>
+        </h4>
+      </ng-container>
+
     </div>
     <div class="app-modal-body">
       <ng-container *ngIf="modalAnchor === 'saveFilter'">
@@ -903,6 +909,45 @@
           <mat-hint class="ErrorMessageForm" *ngIf="plus">Name can't contain +</mat-hint>
         </mat-form-field>
       </ng-container>
+      <ng-container *ngIf="modalAnchor === 'exportOptions'">
+        <mat-radio-group [(ngModel)]="exportFileFormat">
+          File format:
+          <div>
+
+            <mat-radio-button color="primary" disableRipple value="tsv">
+              <span tooltip="tab-delimited values">.tsv</span>
+            </mat-radio-button>
+            <mat-radio-button color="primary" disableRipple value="xlsx">
+              <span tooltip="Microsoft Excel workbook">.xlsx</span>
+            </mat-radio-button>
+          </div>
+        </mat-radio-group>
+        <br/>
+        <mat-radio-group [(ngModel)]="exportSplitOptions">
+          Split multiselect choices into separate columns:
+          <div>
+
+             <mat-radio-button color="primary" disableRipple [value]="true">
+              <span tooltip="Each option of a multiselect will be displayed in a separate column, with 0/1 indicating selection">Yes</span>
+            </mat-radio-button>
+            <mat-radio-button color="primary" disableRipple [value]="false">
+              <span tooltip="Multiselects will be exported as a comma-delimited list of the selections">No</span>
+            </mat-radio-button>
+          </div>
+        </mat-radio-group>
+        <br/>
+        <mat-radio-group [(ngModel)]="exportOnlyMostRecent">
+          Include all completions of an activity:
+          <div>
+            <mat-radio-button color="primary" disableRipple [value]="false">
+              <span tooltip="Include all, with each activity completion in a separate column">Yes</span>
+            </mat-radio-button>
+            <mat-radio-button color="primary" disableRipple [value]="true">
+              <span tooltip="Only values from the participant's most recent completion of each activity will be included">No</span>
+            </mat-radio-button>
+          </div>
+        </mat-radio-group>
+      </ng-container>
       <ng-container *ngIf="modalAnchor === 'assignParticipant'">
         <mat-checkbox color="primary" disableRipple
                      [(ngModel)]="assignMR">Assign to request MR
@@ -912,6 +957,9 @@
                      [(ngModel)]="assignTissue">Assign to request Tissue
         </mat-checkbox>
         <app-assignee (selectedAssignee)="assigneeSelected($event)" [assignees]="assignees"></app-assignee>
+      </ng-container>
+      <ng-container *ngIf="modalAnchor === 'downloadError'">
+        An error occurred processing the participant download, please contact your DSM developer<br/>
       </ng-container>
     </div>
     <div class="app-modal-footer">
@@ -930,6 +978,19 @@
         </button>
         <button type="button" class="btn btn-primary"
                 (click)="assign()" [disabled]="!assignMR && !assignTissue">Assign
+        </button>
+      </ng-container>
+      <ng-container *ngIf="modalAnchor === 'exportOptions'">
+        <button type="button" class="btn btn-primary"
+                (click)="executeDownload()">Download
+        </button>
+        <button type="button" class="btn"
+                (click)="modal.hide()">Cancel
+        </button>
+      </ng-container>
+      <ng-container *ngIf="modalAnchor === 'downloadError'">
+        <button type="button" class="btn btn-primary"
+                (click)="modal.hide()">Ok
         </button>
       </ng-container>
     </div>
