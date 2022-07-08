@@ -160,9 +160,12 @@ export class ActivityEmailInput implements OnInit, OnChanges, OnDestroy {
                 return null;
             }
             // Set error on matchingControl if validation fails
-            if (control.value.toLowerCase !== matchingControl.value.toLowerCase) {
+            let emailequal = control.value;
+            let confemailequal = matchingControl.value;
+            if (emailequal?.toLowerCase() !== confemailequal?.toLowerCase()) {
                 matchingControl.setErrors({ mustMatch: true });
-            } else {
+            }
+            else {
                 matchingControl.setErrors(null);
             }
             return matchingControl.errors;
