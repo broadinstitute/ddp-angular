@@ -14,7 +14,7 @@ describe('CharactersRemainingPipe', () => {
 
     it('return "350 characters remaining" if value is falsy', () => {
         const value = null;
-        const expectedValue = '350 characters remaining'
+        const expectedValue = '350 characters remaining';
         expect(pipe.transform(value, maxLength)).toBe(expectedValue);
     });
 
@@ -23,5 +23,5 @@ describe('CharactersRemainingPipe', () => {
         const expectedValue = '340 characters remaining';
 
         expect(pipe.transform(value, maxLength)).toBe(expectedValue);
-    })
+    });
 });
