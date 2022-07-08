@@ -556,8 +556,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             tap((errorMessage) => this.stateUpdates$.next({formErrorMessages: [{ message: errorMessage, isEasyPostError: false }]}))
         );
 
-        const canSaveRealAddress: FuncType<boolean> = (address: Address | null) =>
-            this.enoughDataToSave(address) && this.meetsActivityRequirements(address);
+        const canSaveRealAddress: FuncType<boolean> = (address: Address | null) => this.meetsActivityRequirements(address);
 
         // "Real" as opposed to "Temp". Important we return the saved address as properties are added on server
         const saveRealAddressAction$ = this.saveTrigger$.pipe(
@@ -703,12 +702,14 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         ).subscribe();
     }
 
-
     private meetsActivityRequirements(currentAddress: Address | null): boolean {
         if (this.block.requireVerified && !currentAddress) {
             return false;
         }
-        return !(this.block.requirePhone && currentAddress && !(currentAddress.phone));
+        if (this.block.requirePhone && !(currentAddress?.phone)) {
+            return false;
+        }
+        return this.enoughDataToSave(currentAddress);
     }
 
     private computeValidityForSparseAddress(address: Address | null): boolean {
