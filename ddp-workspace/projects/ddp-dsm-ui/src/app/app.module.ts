@@ -14,7 +14,6 @@ import {EffectsModule} from '@ngrx/effects';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {ParticipantsEffects, SettingsEffects} from './STORE/effects';
 import {environment} from '../environments/environment';
-import { BulkCohortTagModalComponent } from './tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-modal.component';
 
 
 const base = document.querySelector('base')?.getAttribute('href') || '';

@@ -44,7 +44,11 @@ export const generateGroupedActivities = (patient: any): any => {
 
 const groupedActivitiesMap = [
   {name: 'Patient Information', sectionGuid: 'ENROLLMENT_FORMS', activityCode: 'PATIENT_PROFILE'},
-  {name: 'Enrollment', sectionGuid: 'ENROLLMENT_FORMS', activityCode: 'ENROLLMENT'},
+  {name: 'Demographics', sectionGuid: 'ENROLLMENT_FORMS', activityCode: 'DEMOGRAPHIC_INFORMATION'},
+  {name: 'Diagnosis', sectionGuid: 'ENROLLMENT_FORMS', activityCode: 'DIAGNOSIS_INFORMATION'},
+  {name: 'Medical History', sectionGuid: 'ENROLLMENT_FORMS', activityCode: 'MEDICAL_HISTORY'},
+  {name: 'Surgical History', sectionGuid: 'ENROLLMENT_FORMS', activityCode: 'SURGICAL_HISTORY'},
+  {name: 'Emotional/Neuro History', sectionGuid: 'ENROLLMENT_FORMS', activityCode: 'EMOTIONAL_HEALTH'},
   {name: 'Clinic Visits', sectionGuid: 'TESTING_LOGS_EVENTS', activityCode: 'CLINIC_VISIT'},
   {name: 'Labs', sectionGuid: 'TESTING_LOGS_EVENTS', activityCode: 'LABS'},
   {name: 'Medication Log', sectionGuid: 'TESTING_LOGS_EVENTS', activityCode: 'MEDICATION_LOG'},
