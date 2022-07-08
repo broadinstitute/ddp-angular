@@ -16,7 +16,8 @@
     <ul class="topNavigation">
       <li *ngFor="let item of topNavigation"
           [class.activeNav]="isActive(item.route)"
-          [routerLink]="[item.route]">
+          [routerLink]="[item.route]"
+          queryParamsHandling="preserve">
         <mat-icon *ngIf="item.img">{{item.img}}</mat-icon>
         {{ item.name }}
       </li>

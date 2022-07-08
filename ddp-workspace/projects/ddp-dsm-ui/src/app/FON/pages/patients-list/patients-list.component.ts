@@ -55,9 +55,12 @@ export class PatientsListComponent implements OnInit {
     this.activatedRoute.queryParams
       .pipe(
         tap((params: Params) => {
-          this.rowsPerPage = params.to - params.from || 10;
-          this.currentPageIndex = (params.to/this.rowsPerPage) || 1;
-          this.patients$ = this.storeService.getParticipants(params.from, params.to, this.PARENT);
+          const {from, to} = params;
+          if(from ?? to) {
+            this.rowsPerPage = to - from || 10;
+            this.currentPageIndex = (to/this.rowsPerPage) || 1;
+            this.patients$ = this.storeService.getParticipants(from, to, this.PARENT);
+          }
         })
       )
       .subscribe();
