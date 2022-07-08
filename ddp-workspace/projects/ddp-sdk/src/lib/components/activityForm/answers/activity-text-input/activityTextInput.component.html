@@ -1,7 +1,8 @@
-<form class="activity-text-input"
-      [ngClass]="formClass"
-      [formGroup]="formGroup"
-      (keydown.enter)="onEnter($event)"
+<form
+    class="activity-text-input"
+    [ngClass]="formClass"
+    [formGroup]="formGroup"
+    (keydown.enter)="onEnter($event)"
 >
     <mat-form-field
         class="example-input-field"
@@ -31,16 +32,16 @@
                 class="autoCompleteOption"
                 [value]="suggestion.value"
             >
-        <span
-            class="suggestion"
-            [innerHTML]="
-            generateSuggestionOptionInnerHtml(
-              suggestion,
-              'span',
-              'suggestion-match'
-            )
-          "
-        ></span>
+                <span
+                    class="suggestion"
+                    [innerHTML]="
+                        generateSuggestionOptionInnerHtml(
+                            suggestion,
+                            'span',
+                            'suggestion-match'
+                        )
+                    "
+                ></span>
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>
@@ -64,8 +65,11 @@
         </mat-form-field>
     </ng-container>
     <p class="ddp-helper">
-            <span class="ddp-counter-color">
-                {{ (charactersRemaining ? charactersRemaining : block.answer) | charactersRemaining : block.maxLength }}
-            </span>
+        <span class="ddp-counter-color">
+            {{
+                charactersRemaining ?? block.answer
+                    | charactersRemaining: block.maxLength
+            }}
+        </span>
     </p>
 </form>
