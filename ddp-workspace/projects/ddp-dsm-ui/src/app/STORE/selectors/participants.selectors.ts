@@ -11,3 +11,8 @@ export const getParticipantsTotalCount = createSelector(
   getParticipants,
   (participantsData: ParticipantObject) => participantsData?.totalCount
 );
+
+export const getParticipantsErrorState = createSelector(
+  MainStoreFeatureSelector,
+  ({participants}) => participants.error
+);

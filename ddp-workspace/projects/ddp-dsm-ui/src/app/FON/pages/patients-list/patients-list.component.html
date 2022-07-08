@@ -4,9 +4,9 @@
   </header>
 
   <section class="patients-buttons">
-    <button class="btn_secondary">
+    <button class="btn_secondary" (click)="isSearchPanelShown = !isSearchPanelShown">
       <mat-icon>search</mat-icon>
-      <mat-icon>keyboard_arrow_down</mat-icon>
+      <mat-icon>{{isSearchPanelShown ? "keyboard_arrow_up" : "keyboard_arrow_down"}}</mat-icon>
     </button>
     <button class="btn_secondary" [openInModal]="registerPatientsModalComponent">
       <mat-icon>people</mat-icon>
@@ -18,50 +18,55 @@
     </button>
   </section>
 
-  <section class="patients-info">
-    <p>All patients ({{totalCount$ | async}})</p>
-  </section>
+   <app-search-panel *ngIf="isSearchPanelShown"
+                    (searchEmitter)="searchPatients($event)">
+  </app-search-panel>
 
-  <section class="patients-table">
-    <table>
-      <thead>
-      <tr class="header">
-        <th>FON ID#</th>
-        <th>First name</th>
-        <th>Last name</th>
-        <th>Birthdate</th>
-        <th>Registered</th>
-        <th>Last updated</th>
-      </tr>
-      </thead>
-      <ng-container *ngIf="!(loading$ | async) else loadingSpinner">
-        <tbody *ngIf="(patients$ | async) as pts">
-        <tr *ngFor="let pt of pts" (click)="openActivities(pt)">
-          <td>{{ pt.ID }}</td>
-          <td>{{ pt.firstName }}</td>
-          <td>{{ pt.lastName }}</td>
-          <td>{{ pt.birthdate | date }}</td>
-          <td>{{ pt.registered | date }}</td>
-          <td>{{ pt.lastUpdated | date }}</td>
-        </tr>
-        </tbody>
-      </ng-container>
-
-      <ng-template #loadingSpinner>
-        <mat-spinner></mat-spinner>
-      </ng-template>
-    </table>
-
-    <footer>
-      <mat-paginator
-        [pageIndex]="pageIndex"
-        [length]="totalCount$ | async"
-        [pageSize]="pageSize"
-        (page)="setPage($event)"
-        [pageSizeOptions]="[10, 50, 100]" aria-label="Select page">
-      </mat-paginator>
-    </footer>
-  </section>
-
-
+  <main class="patients-list">
+    <ng-container *ngTemplateOutlet="mainContent; context: {
+    patients: patients$ | async,
+    loading: loading$ | async,
+    totalCount: totalCount$ | async
+    }">
+    </ng-container>
+  </main>
 </div>
+
+
+<!--  template refs-->
+
+<ng-template #mainContent
+             let-patients="patients"
+             let-loading="loading"
+             let-totalCount="totalCount">
+
+  <ng-container *ngIf="totalCount">
+
+    <section class="patients-list-info">
+      <p>All patients ({{totalCount}})</p>
+    </section>
+
+    <main class="patients-list-table">
+      <app-table [data]="patients" [loading]="loading" (rowClick)="openPatientInfo($event)"></app-table>
+    </main>
+
+    <footer class="patients-list-paginator">
+      <app-paginator
+        (pageChanged)="getPageList($event)"
+        [config]="{totalCount, rowsPerPage, currentPageIndex}"
+      ></app-paginator>
+    </footer>
+
+  </ng-container>
+
+  <ng-container *ngIf="!loading && !totalCount">
+    <div class="noPatients">
+      <img class="noPatients-image" height="101" width="125" src="/assets/images/users.png" alt="users icon">
+      <p class="noPatients-firstTitle">Start building your patient list.</p>
+      <p class="noPatients-secondTitle">Start tracking your Fontan Patient’s data to help drive improvements in
+        care.</p>
+      <button class="btn_primary">Get Started</button>
+    </div>
+  </ng-container>
+
+</ng-template>

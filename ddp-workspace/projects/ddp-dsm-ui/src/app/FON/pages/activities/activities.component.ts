@@ -22,7 +22,7 @@ export class ActivitiesComponent implements OnInit {
   sectionsArray = sectionGuids;
 
   activeRoute = this.activatedRoute.snapshot.url[0].path;
-  readonly PARENT = MainConstants.participantsListParent;
+  readonly PARENT = MainConstants.participantsList;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private storeService: StoreService) {
   }

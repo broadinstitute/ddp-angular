@@ -861,7 +861,7 @@ export class ParticipantListComponent implements OnInit {
       .subscribe({
         next: data => {
           if (data != null) {
-            if (viewFilter != null && viewFilter.filters != null) {
+            if (viewFilter != null && viewFilter.filters?.length) {
               for (const filter of viewFilter.filters) {
                 let t = filter.participantColumn.tableAlias;
                 if (t === 'r' || t === 'o' || t === 'ex') {
@@ -904,7 +904,7 @@ export class ParticipantListComponent implements OnInit {
                   f.selected = false;
                 }
               }
-              if (viewFilter.filters != null) {
+              if (viewFilter.filters?.length) {
                 for (const filter of viewFilter.filters) {
                   if (filter.type === Filter.OPTION_TYPE) {
                     filter.selectedOptions = filter.getSelectedOptionsBoolean();
@@ -1278,6 +1278,7 @@ export class ParticipantListComponent implements OnInit {
   }
 
   public doFilter(): void {
+    this.selectAll = this.selectedColumns['allSelected'];
     this.resetPagination();
     const json = [];
     this.dataSources.forEach((value: string, key: string) => {
@@ -1651,7 +1652,6 @@ export class ParticipantListComponent implements OnInit {
         }
       }
     }
-    this.selectedPatients = [];
   }
 
   downloadCurrentData(): void {
@@ -1710,6 +1710,8 @@ export class ParticipantListComponent implements OnInit {
         this.isAssignButtonDisabled = false;
       }
       this.selectedPatients.push(participant.data.profile['guid']);
+    } else {
+      this.selectedPatients = this.selectedPatients.filter(guid => guid !== participant.data.profile['guid']);
     }
   }
 
@@ -2270,19 +2272,11 @@ export class ParticipantListComponent implements OnInit {
     this.dsmService.sendAnalyticsMetric(this.getRealm(), passed).subscribe({});
   }
 
-  private displayCheckbox(pt: Participant): boolean {
-    if (pt.data.status === 'ENROLLED'
-      && pt.data.medicalProviders != null && pt.medicalRecords != null
-      && pt.data.medicalProviders.length > 0 && pt.medicalRecords.length > 0) {
-      return true;
-    }
-    return false;
-  }
 
   toggleColumns(checked: boolean): void {
     if (checked) {
       this.prevSelectedColumns = this.selectedColumns;
-      this.selectedColumns = Object.assign({}, this.sourceColumns);
+      this.selectedColumns = Object.assign({}, {...this.sourceColumns, allSelected: true});
     } else {
       this.selectedColumns = this.prevSelectedColumns;
     }

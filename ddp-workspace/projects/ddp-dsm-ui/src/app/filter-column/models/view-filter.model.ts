@@ -43,7 +43,7 @@ export class ViewFilter {
 
   public copy(): ViewFilter {
     const filtersProp: Filter[] = [];
-    if (this.filters?.length > 0) {
+    if (this.filters?.length) {
       for (const filter of this.filters) {
         filtersProp.push(filter.copy());
       }
@@ -58,7 +58,7 @@ export class ViewFilter {
     const copiedProps: ViewFilter = Object.assign({}, this);
 
     return new ViewFilter(
-      filtersProp.length > 0 ? filtersProp : [],
+      filtersProp || [],
       copiedProps.filterName,
       columnsProp,
       copiedProps.shared,

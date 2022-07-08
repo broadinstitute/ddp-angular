@@ -3,6 +3,7 @@ import {getParticipant, getParticipants} from './enums/participants-enums';
 import {ViewFilter} from '../../filter-column/models/view-filter.model';
 import {Sort} from '../../sort/sort.model';
 import {ParticipantModel} from '../models/participant.model';
+import {HttpErrorResponse} from '@angular/common/http';
 
 export const getParticipantsRequest = createAction(
   getParticipants.REQUEST,
@@ -15,7 +16,7 @@ export const getParticipantsSuccess = createAction(
 );
 export const getParticipantsFailure = createAction(
   getParticipants.FAILURE,
-  (errorMessage: string) => ({errorMessage})
+  (errorResponse: HttpErrorResponse) => ({errorResponse})
 );
 
 
@@ -29,5 +30,5 @@ export const getParticipantSuccess = createAction(
 );
 export const getParticipantFailure = createAction(
   getParticipant.FAILURE,
-  (errorMessage: string) => ({errorMessage})
+  (errorResponse: HttpErrorResponse) => ({errorResponse})
 );

@@ -56,6 +56,7 @@ export class ActivityValidatorBuilder {
             { type: ValidationRuleType.DecimalRange, factory: (x, y) => this.buildDecimalRangeValidator(x, y) },
             { type: ValidationRuleType.Unique, factory: (x, y) => new ActivityUniqueValidationRule(y) },
             { type: ValidationRuleType.UniqueValue },
+            { type: ValidationRuleType.Comparison },
         ];
     }
 
@@ -66,6 +67,7 @@ export class ActivityValidatorBuilder {
             const buildRule = this.rules.find(x => x.type === validationJson.rule);
             if (buildRule != null) {
                 if (!buildRule.factory) {
+                    console.log(`Question ${questionJson.stableId} has a back-end side validation "${validationJson.rule}"`);
                     continue;
                 }
                 const rule = buildRule.factory(validationJson, questionBlock);

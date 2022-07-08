@@ -33,6 +33,7 @@ configurationService.errorReportingApiKey = DDP_ENV.errorReportingApiKey;
 configurationService.localRegistrationUrl = configurationService.backendUrl + '/pepper/v1/register';
 configurationService.dashboardPageUrl = Route.Dashboard;
 configurationService.loginLandingUrl = DDP_ENV.loginLandingUrl;
+configurationService.detail_MaxLength = 350;
 
 export const SKDConfigProvider: Provider = {
   provide: 'ddp.config',
