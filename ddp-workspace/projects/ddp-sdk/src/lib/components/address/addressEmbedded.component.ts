@@ -703,13 +703,11 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     }
 
     private meetsActivityRequirements(currentAddress: Address | null): boolean {
-        if (this.block.requireVerified && !currentAddress) {
+        if (this.block.requireVerified && !this.enoughDataToSave(currentAddress)) {
             return false;
         }
-        if (this.block.requirePhone && !(currentAddress?.phone)) {
-            return false;
-        }
-        return this.enoughDataToSave(currentAddress);
+
+        return  !(this.block.requirePhone && !(currentAddress?.phone));
     }
 
     private computeValidityForSparseAddress(address: Address | null): boolean {
