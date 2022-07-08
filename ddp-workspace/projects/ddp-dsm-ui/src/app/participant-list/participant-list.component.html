@@ -893,7 +893,10 @@
       <ng-container *ngIf="modalAnchor === 'saveFilter'">Please enter a name for your filter</ng-container>
       <ng-container *ngIf="modalAnchor === 'assignParticipant'">Select the person you want to assign the participant
       </ng-container>
-      <ng-container *ngIf="modalAnchor === 'exportOptions'"><h4>Configure export</h4>
+      <ng-container *ngIf="modalAnchor === 'exportOptions'">
+        <h4>Configure export
+          <a [routerLink]="['../help']" target="_blank"><span class="fa fa-question-circle"></span></a>
+        </h4>
       </ng-container>
 
     </div>
