@@ -550,6 +550,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   kitValueChanged( value: any, parameterName: string, sample: Sample ): void {
     let v;
+    console.log(value);
     if (typeof value === 'string') {
       sample[ parameterName ] = value;
       v = value;
