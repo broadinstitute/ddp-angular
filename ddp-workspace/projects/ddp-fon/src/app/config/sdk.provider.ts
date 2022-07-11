@@ -34,6 +34,7 @@ configurationService.localRegistrationUrl = configurationService.backendUrl + '/
 configurationService.dashboardPageUrl = Route.Dashboard;
 configurationService.loginLandingUrl = DDP_ENV.loginLandingUrl;
 configurationService.detail_MaxLength = 350;
+configurationService.tooltipIconUrl = '../assets/images/info-circle.svg';
 
 export const SKDConfigProvider: Provider = {
   provide: 'ddp.config',

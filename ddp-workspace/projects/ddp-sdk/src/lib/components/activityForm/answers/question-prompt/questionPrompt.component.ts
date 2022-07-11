@@ -5,7 +5,6 @@ import { ActivityQuestionBlock } from '../../../../models/activity/activityQuest
 
 
 
-
 @Component({
     selector: 'ddp-question-prompt',
     template: `
@@ -17,7 +16,7 @@ import { ActivityQuestionBlock } from '../../../../models/activity/activityQuest
                  [innerHTML]="block.additionalInfoHeader"
                  class="ddp-question-prompt__info-header">
            </span>
-           <ddp-tooltip *ngIf="block.tooltip" class="tooltip" [text]="block.tooltip" [icon]="icon"></ddp-tooltip>
+           <ddp-tooltip *ngIf="block.tooltip" class="tooltip" [text]="block.tooltip"></ddp-tooltip>
         </p>
     </div>`,
     styleUrls: ['questionPrompt.component.scss']
@@ -27,8 +26,6 @@ export class QuestionPromptComponent {
      * Content is expected to be an HTML fragment
      */
     @Input() block: ActivityQuestionBlock<any>;
-
-    readonly icon: string = "../../../../../assets/info-circle.svg";
 
     public get displayAsRequired(): boolean {
         return this.block?.isRequired && this.block?.question && (this.block.question.trim().length > 0);
