@@ -1,17 +1,17 @@
 <main class="participation">
   <header>
-    <h2 class="title static-page-title" translate>About.Title</h2>
+    <h2 class="static-page-title" translate>About.Title</h2>
 
-    <div class="countMeIn">
-      <img class="countMeIn-img" src="/assets/images/logo-count-me-in.png" alt="count me in" />
-      <p class="countMeIn-text" [innerHTML]="'About.TitleText' | translate"></p>
+    <div class="count-me-in">
+      <img class="img" src="/assets/images/logo-count-me-in.png" alt="count me in" />
+      <p class="text" [innerHTML]="'About.TitleText' | translate"></p>
 
-      <button class="cmiBlock-visit-button" onclick="window.open('https://joincountmein.org/', '_blank')">
-        <p class="cmiBlock-visit-button-text">{{ 'About.button1' | translate }}</p>
+      <button class="cmi-visit-button" onclick="window.open('https://joincountmein.org/', '_blank')">
+        <span class="cmi-visit-button-text">{{ 'About.button1' | translate }}</span>
         <mat-icon>launch</mat-icon>
       </button>
 
-      <p class="countMeIn-text" [innerHTML]="'About.countMeInText' | translate"></p>
+      <p class="text" [innerHTML]="'About.countMeInText' | translate"></p>
     </div>
   </header>
 
