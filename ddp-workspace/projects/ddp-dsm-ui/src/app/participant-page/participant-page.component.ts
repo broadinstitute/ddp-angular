@@ -60,6 +60,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   @Input() showContactInformation: boolean;
   @Input() showComputedObject: boolean;
   @Input() selectedActivityCode: string;
+  @Input() hasSequencingOrders:boolean;
   @Output() leaveParticipant = new EventEmitter();
   @Output('ngModelChange') update = new EventEmitter();
 
@@ -1500,7 +1501,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   }
 
   canHaveSequencing( participant: Participant ): boolean {
-    if (!this.role.allowedToDoOrderSequencing()) {
+    if (!this.role.allowedToDoOrderSequencing() || !this.hasSequencingOrders) {
       return false;
     }
     const enrolled: boolean = participant.data.status === 'ENROLLED';
