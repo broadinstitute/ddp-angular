@@ -92,7 +92,7 @@ export class ParticipantListComponent implements OnInit {
   filterQuery: string = null;
   activityDefinitions = new Map();
 
-  exportFileFormat: string = "tsv";
+  exportFileFormat: string = 'tsv';
   exportSplitOptions: boolean = true;
   exportOnlyMostRecent: boolean = false;
 
