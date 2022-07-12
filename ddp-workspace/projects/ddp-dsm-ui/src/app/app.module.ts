@@ -22,7 +22,7 @@ declare const DDP_ENV: any;
 
 export const sdkConfig = new ConfigurationService();
 
-sdkConfig.backendUrl = 'https://pepper-dev.datadonationplatform.org';
+sdkConfig.backendUrl = 'https://pepper-staging.datadonationplatform.org';
 sdkConfig.auth0Domain = DDP_ENV.auth0Domain;
 sdkConfig.auth0ClientId = DDP_ENV.auth0ClientKey;
 sdkConfig.adminClientId = DDP_ENV.adminClientId || DDP_ENV.auth0ClientKey;
