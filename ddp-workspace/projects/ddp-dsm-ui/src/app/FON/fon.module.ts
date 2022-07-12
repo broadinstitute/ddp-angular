@@ -35,11 +35,16 @@ import {HttpService} from './services/http.service';
 import {FONHttpInterceptor} from './interceptors/http.interceptor';
 import {MatTableModule} from '@angular/material/table';
 import {TableComponent} from './pages/patients-list/components/table/table.component';
-import { MatSortModule } from '@angular/material/sort';
+import {MatSortModule} from '@angular/material/sort';
 import {CutStringPipe} from './pipes/cutString.pipe';
 import {PaginatorComponent} from './components/paginator/paginator.component';
-import { SearchPanelComponent } from './pages/patients-list/components/search-panel/search-panel.component';
+import {SearchPanelComponent} from './pages/patients-list/components/search-panel/search-panel.component';
+import * as PlotlyJS from 'plotly.js-dist-min';
+import { PlotlyModule } from 'angular-plotly.js';
+import {FonDashboardComponent} from "./pages/home/dashboard/dashboard.component";
+import {DashboardService} from "./services/dashboard.service";
 
+PlotlyModule.plotlyjs = PlotlyJS;
 
 const AngularMaterialModules = [
   MatExpansionModule,
@@ -72,7 +77,8 @@ const pageComponents = [
   ActivitiesComponent,
   HomeComponent,
   TableComponent,
-  SearchPanelComponent
+  SearchPanelComponent,
+  FonDashboardComponent
 ];
 
 const layoutComponents = [NavigationComponent];
@@ -93,9 +99,14 @@ const layoutComponents = [NavigationComponent];
     FormsModule,
     FlexLayoutModule,
     DdpModule.forDSM(),
+    PlotlyModule,
     ...AngularMaterialModules,
   ],
-  providers: [PatientsService, HttpService, DatePipe, {provide: HTTP_INTERCEPTORS, useClass: FONHttpInterceptor, multi: true}],
+  providers: [PatientsService, HttpService, DatePipe, DashboardService,{
+    provide: HTTP_INTERCEPTORS,
+    useClass: FONHttpInterceptor,
+    multi: true
+  }],
   exports: []
 })
 

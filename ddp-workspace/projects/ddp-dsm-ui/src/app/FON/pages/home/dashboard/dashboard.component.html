@@ -1,0 +1,8 @@
+<section *ngFor="let chart of (Data | async)">
+  <div [ngClass]="chart.size">
+    <plotly-plot
+      [data]="chart"
+      [layout]="{title: chart.title}"
+    ></plotly-plot>
+  </div>
+</section>

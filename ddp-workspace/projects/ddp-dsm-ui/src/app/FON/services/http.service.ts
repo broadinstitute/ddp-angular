@@ -14,4 +14,8 @@ export class HttpService {
   addPatient(addPatientModel: AddPatientModel): Observable<any> {
     return this.httpClient.post(this.ADD_PATIENT_URL, addPatientModel);
   }
+
+  get getDashboardData(): Observable<any> {
+    return this.httpClient.get('assets/tempJson.json');
+  }
 }
