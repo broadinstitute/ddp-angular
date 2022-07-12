@@ -214,7 +214,8 @@ export class DSMService {
   }
 
   public downloadParticipantData(realm: string, jsonPatch: string, parent: string, columns: {}, json: ViewFilter,
-                                 filterQuery: string, sortBy?: Sort):
+                                 filterQuery: string, sortBy?: Sort, fileFormat?: string, splitOptions?: boolean,
+                                 onlyMostRecent?: boolean):
     Observable<any> {
     const viewFilterCopy = this.getFilter(json);
     const url = this.baseUrl + DSMService.UI + 'participantList';
@@ -225,6 +226,15 @@ export class DSMService {
     map.push({name: 'parent', value: parent});
     if (sortBy) {
       map.push({name: 'sortBy', value: JSON.stringify(sortBy)});
+    }
+    if (fileFormat) {
+      map.push({name: 'fileFormat', value: fileFormat});
+    }
+    if (typeof splitOptions === "boolean") {
+      map.push({name: 'splitOptions', value: splitOptions});
+    }
+    if (typeof splitOptions === "boolean") {
+      map.push({name: 'onlyMostRecent', value: onlyMostRecent});
     }
     if (filterQuery != null) {
       map.push({name: 'filterQuery', value: filterQuery});
