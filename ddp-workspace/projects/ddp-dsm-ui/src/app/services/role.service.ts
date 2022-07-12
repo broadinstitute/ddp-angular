@@ -29,7 +29,6 @@ export class RoleService {
   private _canEditDrugList = false;
   private _isParticipantListView = false;
   private _isParticipantEdit = false;
-  private _isDSSTesting = true; //TODO remove before final merge, for testing only
   private _isKitUploadInvalidAddress = false;
 
   private _userId: string;
@@ -251,11 +250,7 @@ export class RoleService {
   public allowedToEditParticipant(): boolean {
     return this._isParticipantEdit;
   }
-
-  public allowedToTestDSSActivity(): boolean {
-    return this._isDSSTesting;//TODO pegah remove before final merge, for testing only
-  }
-
+  
   private getClaimByKeyName( token: any, key: string ): any {
     return this.sessionService.getDSMClaims( token )[ this.config.auth0ClaimNameSpace + key ];
   }
