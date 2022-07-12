@@ -190,6 +190,10 @@
             line-height: 1.6rem;
         }
 
+        .mat-radio-group {
+            flex-direction: column !important;
+        }
+
         .mat-radio-label-content {
             font-size: 1rem;
             margin-right: 5px;
