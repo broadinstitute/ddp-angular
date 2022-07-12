@@ -250,7 +250,7 @@ export class RoleService {
   public allowedToEditParticipant(): boolean {
     return this._isParticipantEdit;
   }
-  
+
   private getClaimByKeyName( token: any, key: string ): any {
     return this.sessionService.getDSMClaims( token )[ this.config.auth0ClaimNameSpace + key ];
   }
