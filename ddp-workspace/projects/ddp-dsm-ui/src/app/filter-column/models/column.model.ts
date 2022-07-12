@@ -131,7 +131,8 @@ export class ParticipantColumn {
   public static RESULT_TEST = new ParticipantColumn('Test Result', 'result', 'k', 'testResult');
   public static CORRECTED_TEST = new ParticipantColumn('Test Corrected', 'isCorrected', 'k', 'testResult');
   public static TIME_TEST = new ParticipantColumn('Test Time Completed', 'timeCompleted', 'k', 'testResult');
-
+  public static COLLECTION_DATE = new ParticipantColumn('Collection Date', 'collectionDate', 'k');
+  public static SEQUENCING_RESTRICTION = new ParticipantColumn('Sequencing Restriction', 'sequencingRestriction', 'k');
   //Cohort tags
   public static COHORT_TAG_NAME = new ParticipantColumn('Cohort Tag Name', 'cohortTagName', 'c', 'dsm');
 

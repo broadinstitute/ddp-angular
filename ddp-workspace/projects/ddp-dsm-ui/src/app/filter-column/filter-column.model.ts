@@ -228,6 +228,15 @@ export class Filter {
     false, true, null, null, null, null, false, false, false, false, Filter.CHECKBOX_TYPE);
   public static TIME_TEST = new Filter(ParticipantColumn.TIME_TEST, Filter.JSON_ARRAY_TYPE, null, new NameValue(ParticipantColumn.TIME_TEST.name, '\''),
     false, true, null, null, null, null, false, false, false, false, Filter.DATE_TYPE);
+  public static COLLECTION_DATE = new Filter(ParticipantColumn.COLLECTION_DATE, Filter.DATE_TYPE);
+  public static SEQUENCING_RESTRICTION = new Filter(ParticipantColumn.SEQUENCING_RESTRICTION, Filter.OPTION_TYPE, [
+    new NameValue('cannotSequence', 'Cannot Sequence'),
+    new NameValue('RUO', 'Research Use Only (RUO)'),
+    new NameValue('valid', 'Valid for Clinical Sequencing'),
+    new NameValue('successClinical', 'Success - clinical'),
+    new NameValue('successResearch', 'Success - research'),
+    new NameValue('abandoned', 'Abandoned')
+  ]);
 
   // abstraction
   public static ABSTRACTION_STATUS = new Filter( ParticipantColumn.ABSTRACTION_STATUS, Filter.OPTION_TYPE, [
@@ -294,7 +303,7 @@ export class Filter {
     Filter.USS_COUNT, Filter.H_E_COUNT, Filter.BLOCKS_COUNT,
     Filter.COLLABORATOR_SAMPLE, Filter.SAMPLE_SENT, Filter.SAMPLE_RECEIVED, Filter.SAMPLE_DEACTIVATION, Filter.SAMPLE_QUEUE,
     Filter.TRACKING_TO_PARTICIPANT, Filter.TRACKING_RETURN, Filter.MF_BARCODE, Filter.STATUS_OUT, Filter.STATUS_IN, Filter.RESULT_TEST, Filter.CORRECTED_TEST, Filter.TIME_TEST, Filter.CARE_EVOLVE,
-    Filter.ABSTRACTION_ACTIVITY, Filter.ABSTRACTION_STATUS, Filter.ABSTRACTION_USER, Filter.ACTIVITY_STATUS, Filter.COHORT_TAG_NAME];
+    Filter.ABSTRACTION_ACTIVITY, Filter.ABSTRACTION_STATUS, Filter.ABSTRACTION_USER, Filter.ACTIVITY_STATUS, Filter.COHORT_TAG_NAME, Filter.COLLECTION_DATE, Filter.SEQUENCING_RESTRICTION];
 
   public static parseToColumnArray(json, allColumns, surveyNames?, surveyColumns?): {} {
     const result = {};
