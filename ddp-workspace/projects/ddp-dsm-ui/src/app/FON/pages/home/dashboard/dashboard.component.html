@@ -1,8 +1,9 @@
-<section *ngFor="let chart of (Data | async)">
-  <div [ngClass]="chart.size">
-    <plotly-plot
-      [data]="chart"
-      [layout]="{title: chart.title}"
-    ></plotly-plot>
-  </div>
-</section>
+<div class="dashboard">
+  <section *ngFor="let chart of (Data | async)" class="dashboard-chart" [ngClass]="chart.size">
+      <plotly-plot
+        [data]="chart"
+        [layout]="{title: chart.title}"
+      ></plotly-plot>
+  </section>
+</div>
+

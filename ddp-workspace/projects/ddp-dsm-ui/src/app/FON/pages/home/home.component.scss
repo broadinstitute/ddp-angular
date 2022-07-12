@@ -1,5 +1,9 @@
+@import "../../../../styles/FON/core";
+
 :host-context(app-home) {
-  grid-area: otherPage
+  grid-area: otherPage;
+  background-color: $__background_color_transparent;
+  overflow: auto;
 }
 
 section {

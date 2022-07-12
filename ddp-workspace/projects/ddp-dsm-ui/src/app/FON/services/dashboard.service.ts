@@ -56,7 +56,6 @@ export class DashboardService {
       {
         type: "bar",
         name: 'Your center',
-        legendgroup: "yours",
         y: [chart.y[0]],
         width: -1,
         marker: {
@@ -74,7 +73,6 @@ export class DashboardService {
       {
         type: "bar",
         name: 'Other centers (deidentified)',
-        legendgroup: "others",
         y: chart.y.slice(1),
         marker: {
           color: "#CFD6DC",
@@ -181,7 +179,8 @@ export class DashboardService {
         },
         textposition: "outside",
         barmode: 'stack',
-        orientation: 'h'
+        orientation: 'h',
+        height: 800,
       }
     ];
 
@@ -198,7 +197,6 @@ export class DashboardService {
         y: 0.86
       },
 
-      height: 500,
       hovermode: false,
       bargap: 0.3,
       showlegend: false,
@@ -209,7 +207,7 @@ export class DashboardService {
         zeroline: false,
         position: 0,
         automargin: true,
-        domain: [0.32, 0.9],
+        domain: [0.4, 0.9],
         tickfont: {
           family: "Montserrat-Regular",
           size: 13,
@@ -256,6 +254,7 @@ export class DashboardService {
     ];
 
     chartObject.layout = {
+      width: 500,
       autosize: true,
       title: {
         font: {
@@ -275,19 +274,24 @@ export class DashboardService {
       showlegend: true,
 
       margin: {
-        l: 0
+        l: 50,
+        r: 50,
+        b: 100,
+        t: 100,
       },
 
 
       legend: {
         x: 0,
         valign: "bottom",
+        bgcolor: "transparent",
+        orientation: "h",
         font: {
           family: "Montserrat-Medium",
         },
         itemclick: false,
         itemdoubleclick: false,
-      },
+      }
     }
 
     chartObject.size = chart.size
