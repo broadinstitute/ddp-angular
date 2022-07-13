@@ -26,7 +26,7 @@
     "type": "HORIZONTAL_BAR_CHART",
     "title": "Age",
     "x": [500, 250, 350, 220, 333],
-    "y": ["Fontan - 4 Young Fontan", "5 - 10 Early Fontan", "11 - 21Adolescent", "22 - 39 Adult", "40+ Older adult"],
+    "y": ["Fontan - 4 Young Fontan", "5 - 10 Early Fontan", "11 - 21 Adolescent", "22 - 39 Adult", "40+ Older adult"],
     "size": "small"
   },
   {
@@ -40,7 +40,7 @@
     "type": "DONUT",
     "title": "Gender",
     "values": [200, 120, 23, 0, 35],
-    "labels": ["male", "Female", "Non-binary", "Other", "Not Reporter"],
+    "labels": ["Male", "Female", "Non-binary", "Other", "Not Reporter"],
     "colors": ["rgba(204,204,204,1)", "rgba(222,45,38,0.8)", "rgba(204,204,204,1)", "rgba(204,204,204,1)", "rgba(204,204,204,1)"],
     "size": "small"
   }
