@@ -31,7 +31,7 @@ import {TranslateService} from '@ngx-translate/core';
     }
 
     app-navigation {
-      grid-area: asideNavigation
+      grid-area: asideNavigation;
     }
 
     router-outlet {
@@ -58,7 +58,7 @@ export class FonComponent implements OnInit {
 
     // Store
     this.storeService.setStudy = MainConstants.study;
-    this.storeService.dispatchGetSettings(MainConstants.participantsListParent);
+    this.storeService.dispatchGetSettings(MainConstants.participantsList);
 
     // Translation
     this.translateService.setDefaultLang(LOCALE);
@@ -68,7 +68,7 @@ export class FonComponent implements OnInit {
     const DSMToken = this.sessionService.getDSMToken();
     const userGuid = this.jwtHelper.decodeToken(DSMToken)['https://datadonationplatform.org/cid'];
     this.sessionService.setExpirationTime(DSMToken);
-    this.dssSessionService.setSession(null, DSMToken, userGuid, LOCALE, +this.sessionService.getTokenExpiration());
+    this.dssSessionService.setSession(null, DSMToken, userGuid, LOCALE, +this.sessionService.getTokenExpiration()/1000);
   }
 
   toggleAsideNav(): void {
