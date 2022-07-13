@@ -90,10 +90,10 @@ export class RegisterPatientsModalComponent implements OnInit, OnDestroy {
 
   private get patientFormGroup(): FormGroup {
     return this.formBuilder.group({
-      email: new FormControl(null, [
-        Validators.required,
-        Validators.pattern(/^[\w- ()+-.]+@([\w-]+\.)+[\w-]{2,4}$/)
-      ]),
+      email: new FormControl(null, {
+        validators: [Validators.required, Validators.pattern(/^[\w- ()+-.]+@([\w-]+\.)+[\w-]{2,4}$/)],
+        updateOn: 'blur'
+      }),
       firstName: new FormControl(null, Validators.required),
       lastName: new FormControl(null, Validators.required),
       birthDate: new FormControl(null, Validators.required),
