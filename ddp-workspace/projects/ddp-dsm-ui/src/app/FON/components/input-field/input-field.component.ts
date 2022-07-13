@@ -21,7 +21,7 @@ import {
           <input
             matInput
             #inputTextElement
-            (input)="setValue(inputTextElement)"
+            (focusout)="setValue(inputTextElement)"
             [formControl]="formControl"
             [placeholder]="placeholder"
           >
@@ -37,7 +37,7 @@ import {
           <input
             #inputDateElement
             matInput
-            (input)="setValue(inputDateElement)"
+            (focusout)="setValue(inputDateElement)"
             [formControl]="formControl"
             [matDatepicker]="picker"
             [placeholder]="placeholder"
