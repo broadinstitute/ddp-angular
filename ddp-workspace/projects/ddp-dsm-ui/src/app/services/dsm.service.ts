@@ -230,10 +230,10 @@ export class DSMService {
     if (fileFormat) {
       map.push({name: 'fileFormat', value: fileFormat});
     }
-    if (typeof splitOptions === "boolean") {
+    if (typeof splitOptions === 'boolean') {
       map.push({name: 'splitOptions', value: splitOptions});
     }
-    if (typeof splitOptions === "boolean") {
+    if (typeof splitOptions === 'boolean') {
       map.push({name: 'onlyMostRecent', value: onlyMostRecent});
     }
     if (filterQuery != null) {

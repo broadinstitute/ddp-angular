@@ -60,7 +60,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   @Input() showContactInformation: boolean;
   @Input() showComputedObject: boolean;
   @Input() selectedActivityCode: string;
-  @Input() hasSequencingOrders:boolean;
+  @Input() hasSequencingOrders: boolean;
   @Output() leaveParticipant = new EventEmitter();
   @Output('ngModelChange') update = new EventEmitter();
 

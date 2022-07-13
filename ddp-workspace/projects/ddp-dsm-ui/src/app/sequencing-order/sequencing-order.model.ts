@@ -2,7 +2,8 @@ export class SequencingOrder {
   isSelected = false;
 
   constructor( public sampleType: string, public sample: string, public sampleStatus: string, public collectionDate: string,
-               public sequencingOrderDate: string, public tissueId: string, public dsmKitRequestId: string, public sequencingRestriction: string ) {
+               public sequencingOrderDate: string, public tissueId: string, public dsmKitRequestId: string,
+               public sequencingRestriction: string ) {
     this.sampleType = sampleType;
     this.sample = sample;
     this.sampleStatus = sampleStatus;

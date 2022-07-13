@@ -30,7 +30,7 @@ export class RoleService {
   private _isParticipantListView = false;
   private _isParticipantEdit = false;
   private _isKitUploadInvalidAddress = false;
-  private _hasMercuryOrderSequencing = false
+  private _hasMercuryOrderSequencing = false;
 
   private _userId: string;
   private _user: string;
