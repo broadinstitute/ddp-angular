@@ -32,7 +32,7 @@ export class PatientsService {
     };
   }
 
-  public formatToISO8601date(value: Date | string): string {
-    return value ? this.datePipe.transform(value, ISO8601DateFormat) : '';
+  public formatToISO8601date(value: Date | string): string | null {
+    return value ? this.datePipe.transform(value, ISO8601DateFormat) : null;
   }
 }
