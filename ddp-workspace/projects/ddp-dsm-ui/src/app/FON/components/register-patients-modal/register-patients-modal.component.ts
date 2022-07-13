@@ -92,7 +92,7 @@ export class RegisterPatientsModalComponent implements OnInit, OnDestroy {
     return this.formBuilder.group({
       email: new FormControl(null, [
         Validators.required,
-        Validators.pattern(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)
+        Validators.pattern(/^[\w- ()+-.]+@([\w-]+\.)+[\w-]{2,4}$/)
       ]),
       firstName: new FormControl(null, Validators.required),
       lastName: new FormControl(null, Validators.required),
