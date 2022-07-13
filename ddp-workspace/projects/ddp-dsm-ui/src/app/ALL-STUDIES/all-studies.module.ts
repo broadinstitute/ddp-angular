@@ -108,7 +108,13 @@ import {Language} from '../utils/language';
 import {Statics} from '../utils/statics';
 import {Utils} from '../utils/utils';
 import {AllStudiesComponent} from './all-studies.component';
+import {BuildingFactoryService} from '../activity-data/services/buildingFactory.service';
+import { CohortTagComponent } from '../tags/cohort-tag/cohort-tag.component';
+import {MatChipsModule} from '@angular/material/chips';
+import { BulkCohortTagModalComponent } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-modal.component';
+import { OpenDialogDirective } from '../directive/open-loading-modal.directive';
 import {AllStudiesRoutingModule} from './all-studies.routing.module';
+
 
 
 @NgModule( {
@@ -188,6 +194,8 @@ import {AllStudiesRoutingModule} from './all-studies.routing.module';
     DssErrorPageComponent,
     LoadingModalComponent,
     CohortTagComponent,
+    BulkCohortTagModalComponent,
+    OpenDialogDirective,
     AddEditDeleteUserComponent
   ],
   imports: [

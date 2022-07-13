@@ -33,6 +33,8 @@ import {UploadComponent} from '../upload/upload.component';
 import {UserSettingComponent} from '../user-setting/user-setting.component';
 import {Statics} from '../utils/statics';
 import {AllStudiesComponent} from './all-studies.component';
+import {HomeComponent} from '../home/home.component';
+
 
 
 export const AppRoutes: Routes = [
@@ -99,6 +101,7 @@ export const AppRoutes: Routes = [
 
       {path: 'test-dss', component: TestDssComponent},
       {path: 'dss-error', component: DssErrorPageComponent},
+      {path: 'help', component: ExportHelpComponent}
     ]},
 ];
 

@@ -21,7 +21,8 @@ const base = document.querySelector('base')?.getAttribute('href') || '';
 declare const DDP_ENV: any;
 
 export const sdkConfig = new ConfigurationService();
-sdkConfig.backendUrl = 'https://pepper-dev.datadonationplatform.org'; // TODO: move the value below to DDP_ENV as an DSS API URL(main DSM config file), depending on environment
+
+sdkConfig.backendUrl = 'https://pepper-dev.datadonationplatform.org';
 sdkConfig.auth0Domain = DDP_ENV.auth0Domain;
 sdkConfig.auth0ClientId = DDP_ENV.auth0ClientKey;
 sdkConfig.adminClientId = DDP_ENV.adminClientId || DDP_ENV.auth0ClientKey;
@@ -52,7 +53,7 @@ const guards = [StudyGuard, CheckAuthGuard];
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

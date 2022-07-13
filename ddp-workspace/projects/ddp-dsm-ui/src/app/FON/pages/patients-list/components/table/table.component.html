@@ -1,0 +1,47 @@
+<table *ngIf="!loading" mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>FON ID#</th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="firstName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
+    <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
+    <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="birthdate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Birthdate</th>
+    <td mat-cell *matCellDef="let element"> {{element.birthdate | date}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="enrollingCenter">
+    <th mat-header-cell *matHeaderCellDef >Enrolling Center</th>
+    <td mat-cell *matCellDef="let element"> {{element.enrollingCenter | cutString}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="registered">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Registered</th>
+    <td mat-cell *matCellDef="let element"> {{element.registered | date}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastUpdated">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Updated</th>
+    <td mat-cell *matCellDef="let element"> {{element.lastUpdated | date}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="enrollmentStatus">
+    <th mat-header-cell *matHeaderCellDef>Enrollment Status</th>
+    <td mat-cell *matCellDef="let element"> {{element.enrollmentStatus}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="clickedRowData.emit(row)"></tr>
+</table>
+
+<mat-spinner *ngIf="loading"></mat-spinner>

@@ -74,7 +74,7 @@ import { ActivatedRoute, Router } from '@angular/router';
             >
                 <title
                     id="title"
-                    [lang]="currentLanguage.languageCode"
+                    [lang]="currentLanguage?.languageCode"
                     translate
                 >
                     SDK.LanguageSelector.LanguageSelection
@@ -155,8 +155,9 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
     public get binaryDisplayedLanguage(): string {
         let lang = this.currentLanguage;
 
+
         if (this.reverseBinaryLanguageSelector) {
-            lang = this.studyLanguages.find(studyLang => studyLang.languageCode !== this.currentLanguage.languageCode);
+            lang = this.studyLanguages.find(studyLang => studyLang.languageCode !== this.currentLanguage?.languageCode);
         }
 
         return lang.displayName;

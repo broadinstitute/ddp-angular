@@ -49,7 +49,9 @@
         </ddp-activity-section>
       </ng-container>
 
-      <ng-container *ngIf="isVerticalProgress && isStepped && showStepper; then verticalProgressIndicator">
+      <ng-container *ngIf="isStepped && showStepper">
+        <ng-container *ngIf="isVerticalProgress; then verticalProgressIndicator; else horizontalProgressIndicator"  >
+        </ng-container>
       </ng-container>
 
       <ng-container *ngIf="model">

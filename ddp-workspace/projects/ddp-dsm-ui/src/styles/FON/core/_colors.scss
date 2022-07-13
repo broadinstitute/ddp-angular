@@ -26,8 +26,10 @@ $__Mercury: #E5E5E5;
 $__background_color_transparent: rgba(0,0,0,0.03);
 $__activity_background_hover: rgba(116,157,197,0.2);
 $__nav_item_background_hover: #5D697B;
+$__success_msg_bg_transparent: rgba(52,181,121,0.15);
+$__success_msg_shadow: rgba(0,0,0,0.15);
 
-// Colors for specific sections or elements - For developing purposes
+  // Colors for specific sections or elements - For developing purposes
 $element_colors: (
   "background": $__Dawn_pink,
   "patient_add_modal_footer": $__Mercury,

@@ -3,34 +3,42 @@ import {ParticipantModel} from './models/participant.model';
 import {createReducer, on} from '@ngrx/store';
 import * as SettingsActions from './actions/settings.actions';
 import * as ParticipantsActions from './actions/participants.actions';
+import {HttpErrorResponse} from '@angular/common/http';
 
 // Store State Models
 
-export type StorePropsType = {data: SettingsModel | ParticipantObject | {}; isLoaded: boolean};
+export type StorePropsType = {
+  data: SettingsModel | ParticipantObject | {};
+  isLoaded: boolean;
+  error: HttpErrorResponse | undefined;
+};
+
 export type ParticipantObject = {pts: ParticipantModel[]; totalCount: number};
 
 export interface StoreStateModel {
   settings: StorePropsType;
   participants: StorePropsType;
-  error: string | null;
 }
 
 // Initial State
 export const StoreInitialState: StoreStateModel = {
   settings: {
     data: {},
-    isLoaded: false
+    isLoaded: false,
+    error: undefined,
   },
   participants: {
     data: {},
-    isLoaded: false
+    isLoaded: false,
+    error: undefined,
   },
-  error: null
 };
 
 // Reducer implementation
 export const storeReducer = createReducer<StoreStateModel>(
   StoreInitialState,
+
+
   on(SettingsActions.getSettingsRequest, (state, _) => ({
       ...state,
       settings: {
@@ -41,6 +49,7 @@ export const storeReducer = createReducer<StoreStateModel>(
   on(SettingsActions.getSettingsSuccess, (state, action) => ({
       ...state,
       settings: {
+        ...state.settings,
         data: action.settings,
         isLoaded: true
       }
@@ -49,10 +58,12 @@ export const storeReducer = createReducer<StoreStateModel>(
       ...state,
       settings: {
         ...state.settings,
-        isLoaded: false
+        isLoaded: false,
+        error: action.errorResponse
       },
-      error: action.errorMessage,
     })),
+
+
   on(ParticipantsActions.getParticipantsRequest, (state, _) => ({
       ...state,
       participants: {
@@ -63,6 +74,7 @@ export const storeReducer = createReducer<StoreStateModel>(
   on(ParticipantsActions.getParticipantsSuccess, (state, action) => ({
       ...state,
       participants: {
+        ...state.participants,
         isLoaded: true,
         data: {
           pts: action.participants,
@@ -72,13 +84,15 @@ export const storeReducer = createReducer<StoreStateModel>(
     })),
   on(ParticipantsActions.getParticipantsFailure, (state, action) => ({
       ...state,
-      error: action.errorMessage,
       participants: {
         ...state.participants,
         isLoaded: false,
+        error: action.errorResponse
       }
     })),
-  on(ParticipantsActions.getParticipantRequest, (state, action) => ({
+
+
+  on(ParticipantsActions.getParticipantRequest, (state, _) => ({
       ...state,
       participants: {
         ...state.participants,
@@ -88,6 +102,7 @@ export const storeReducer = createReducer<StoreStateModel>(
   on(ParticipantsActions.getParticipantSuccess, (state, action) => ({
       ...state,
       participants: {
+        ...state.participants,
         isLoaded: true,
         data: {
           ...state.participants.data,
@@ -97,10 +112,10 @@ export const storeReducer = createReducer<StoreStateModel>(
     })),
   on(ParticipantsActions.getParticipantsFailure, (state, action) => ({
       ...state,
-      error: action.errorMessage,
       participants: {
         ...state.participants,
         isLoaded: false,
+        error: action.errorResponse
       }
     })),
 );

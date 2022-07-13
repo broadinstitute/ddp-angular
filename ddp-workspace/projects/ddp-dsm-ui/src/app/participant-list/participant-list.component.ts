@@ -33,6 +33,9 @@ import { Sort } from '../sort/sort.model';
 import { saveAs } from 'file-saver';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { LoadingModalComponent } from '../modals/loading-modal.component';
+import { BulkCohortTagModalComponent } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-modal.component';
+import { CohortTagComponent } from '../tags/cohort-tag/cohort-tag.component';
+import { CohortTag } from '../tags/cohort-tag/cohort-tag.model';
 
 @Component({
   selector: 'app-participant-list',
@@ -89,6 +92,10 @@ export class ParticipantListComponent implements OnInit {
   filterQuery: string = null;
   activityDefinitions = new Map();
 
+  exportFileFormat = 'tsv';
+  exportSplitOptions = true;
+  exportOnlyMostRecent = false;
+
   selectedColumns = {};
   prevSelectedColumns = {};
   defaultColumns = [];
@@ -122,6 +129,7 @@ export class ParticipantListComponent implements OnInit {
   private start: number;
   selectAll = false;
   selectAllColumnsLabel = 'Select all';
+  selectedPatients: string[] = [];
 
   constructor(private role: RoleService, private dsmService: DSMService, private compService: ComponentService,
                private router: Router, private auth: Auth, private route: ActivatedRoute, private util: Utils,
@@ -855,7 +863,7 @@ export class ParticipantListComponent implements OnInit {
       .subscribe({
         next: data => {
           if (data != null) {
-            if (viewFilter != null && viewFilter.filters != null) {
+            if (viewFilter != null && viewFilter.filters?.length) {
               for (const filter of viewFilter.filters) {
                 let t = filter.participantColumn.tableAlias;
                 if (t === 'r' || t === 'o' || t === 'ex') {
@@ -898,7 +906,7 @@ export class ParticipantListComponent implements OnInit {
                   f.selected = false;
                 }
               }
-              if (viewFilter.filters != null) {
+              if (viewFilter.filters?.length) {
                 for (const filter of viewFilter.filters) {
                   if (filter.type === Filter.OPTION_TYPE) {
                     filter.selectedOptions = filter.getSelectedOptionsBoolean();
@@ -1272,6 +1280,7 @@ export class ParticipantListComponent implements OnInit {
   }
 
   public doFilter(): void {
+    this.selectAll = this.selectedColumns['allSelected'];
     this.resetPagination();
     const json = [];
     this.dataSources.forEach((value: string, key: string) => {
@@ -1622,12 +1631,43 @@ export class ParticipantListComponent implements OnInit {
     return this.dialog.open(LoadingModalComponent, {data: {message: message}, disableClose: true});
   }
 
+  openBulkCohort(): void {
+    const openedDialog = this.dialog.open(BulkCohortTagModalComponent, {data: {
+      manualFilter: this.jsonPatch,
+      savedFilter: this.viewFilter,
+      selectedPatients: this.selectedPatients
+    }});
+    openedDialog.afterClosed().subscribe(data => this.setBulkCreatedTagsToParticipants(data));
+  }
+
+  private setBulkCreatedTagsToParticipants(data: any): void {
+    const cohortTags = data as CohortTag[];
+    for (const cohortTag of cohortTags) {
+      const maybeParticipant = this.participantList
+          .find(participant => participant.data.profile['guid'] === cohortTag['ddpParticipantId']);
+      if (maybeParticipant) {
+        const existingCohortTags = maybeParticipant.data.dsm[CohortTagComponent.COHORT_TAG] as CohortTag[];
+        if (existingCohortTags) {
+          existingCohortTags.push(cohortTag);
+        } else {
+          maybeParticipant.data.dsm[CohortTagComponent.COHORT_TAG] = [cohortTag];
+        }
+      }
+    }
+  }
+
   downloadCurrentData(): void {
+    this.openModal('exportOptions');
+  }
+
+  executeDownload(): void {
+    this.modal.hide();
+
     const dialogRef = this.openDialog('Exporting participants list...');
     const columns = [];
     for(const col in this.selectedColumns) {
       for (const key in this.selectedColumns[col]) {
-        columns.push(this.selectedColumns[col][key]['participantColumn']);
+        columns.push(this.selectedColumns[col][key]);
       }
     }
     this.dsmService.downloadParticipantData(
@@ -1637,7 +1677,10 @@ export class ParticipantListComponent implements OnInit {
       columns,
       this.viewFilter,
       null,
-      this.sortBy
+      this.sortBy,
+      this.exportFileFormat,
+      this.exportSplitOptions,
+      this.exportOnlyMostRecent
     ).subscribe({
       next: response => {
         let fileName = 'file';
@@ -1653,6 +1696,11 @@ export class ParticipantListComponent implements OnInit {
         const blob = new Blob([fileContent], { type: 'application/octet-stream' });
         saveAs(blob, fileName);
         dialogRef.close();
+      },
+      error: err => {
+        dialogRef.close();
+        // open a dialog to show the error so the user doesn't lose their current view
+        this.openModal('downloadError');
       }}
     );
   }
@@ -1671,14 +1719,22 @@ export class ParticipantListComponent implements OnInit {
     return key;
   }
 
-  checkboxChecked(): void {
+  checkboxChecked(participant: Participant): void {
     this.isAssignButtonDisabled = true;
-    for (const pt of this.participantList) {
-      if (pt.isSelected) {
+    if (participant.isSelected) {
+      if (this.isAssignable(participant)) {
         this.isAssignButtonDisabled = false;
-        break;
       }
+      this.selectedPatients.push(participant.data.profile['guid']);
+    } else {
+      this.selectedPatients = this.selectedPatients.filter(guid => guid !== participant.data.profile['guid']);
     }
+  }
+
+  private isAssignable(participant: Participant): boolean {
+    return participant.data.status === 'ENROLLED'
+      && participant.data.medicalProviders != null && participant.medicalRecords != null
+      && participant.data.medicalProviders.length > 0 && participant.medicalRecords.length > 0;
   }
 
   assign(): void { // arg[0] = selectedAssignee: Assignee
@@ -1686,7 +1742,7 @@ export class ParticipantListComponent implements OnInit {
     if (this.assignee != null && this.participantList.length > 0) {
       const assignParticipants: Array<AssigneeParticipant> = [];
       for (const pt of this.participantList) {
-        if (pt.isSelected) {
+        if (pt.isSelected && this.isAssignable(pt)) {
           if (this.assignMR) {
             if (this.assignee.assigneeId === '-1') {
               pt.participant.assigneeIdMr = null;
@@ -2232,19 +2288,11 @@ export class ParticipantListComponent implements OnInit {
     this.dsmService.sendAnalyticsMetric(this.getRealm(), passed).subscribe({});
   }
 
-  private displayCheckbox(pt: Participant): boolean {
-    if (pt.data.status === 'ENROLLED'
-      && pt.data.medicalProviders != null && pt.medicalRecords != null
-      && pt.data.medicalProviders.length > 0 && pt.medicalRecords.length > 0) {
-      return true;
-    }
-    return false;
-  }
 
   toggleColumns(checked: boolean): void {
     if (checked) {
       this.prevSelectedColumns = this.selectedColumns;
-      this.selectedColumns = Object.assign({}, this.sourceColumns);
+      this.selectedColumns = Object.assign({}, {...this.sourceColumns, allSelected: true});
     } else {
       this.selectedColumns = this.prevSelectedColumns;
     }

@@ -5,17 +5,18 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
-import {Filter} from '../filter-column/filter-column.model';
-import {ViewFilter} from '../filter-column/models/view-filter.model';
-import {Abstraction} from '../medical-record-abstraction/model/medical-record-abstraction.model';
-import {OncHistoryDetail} from '../onc-history-detail/onc-history-detail.model';
-import {PDFModel} from '../pdf-download/pdf-download.model';
+import { Filter } from '../filter-column/filter-column.model';
 import {Sort} from '../sort/sort.model';
-import {Statics} from '../utils/statics';
-import {Value} from '../utils/value.model';
-import {ComponentService} from './component.service';
-import {RoleService} from './role.service';
-import {SessionService} from './session.service';
+import { ViewFilter } from '../filter-column/models/view-filter.model';
+import { Abstraction } from '../medical-record-abstraction/model/medical-record-abstraction.model';
+import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
+import { PDFModel } from '../pdf-download/pdf-download.model';
+import { Statics } from '../utils/statics';
+import { Value } from '../utils/value.model';
+import { ComponentService } from './component.service';
+import { RoleService } from './role.service';
+import { SessionService } from './session.service';
+import { BulkCohortTag } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-model';
 
 declare var DDP_ENV: any;
 
@@ -188,7 +189,7 @@ export class DSMService {
 
     if (filterQuery != null) {
       map.push({name: 'filterQuery', value: filterQuery});
-    } else if (json == null || json.filters == null) {
+    } else if (json == null || !json.filters?.length) {
       json && map.push({name: 'filterName', value: json.filterName});
     } else if (viewFilterCopy != null) {
       map.push({name: 'filters', value: JSON.stringify(viewFilterCopy.filters)});
@@ -213,7 +214,8 @@ export class DSMService {
   }
 
   public downloadParticipantData(realm: string, jsonPatch: string, parent: string, columns: {}, json: ViewFilter,
-                                 filterQuery: string, sortBy?: Sort):
+                                 filterQuery: string, sortBy?: Sort, fileFormat?: string, splitOptions?: boolean,
+                                 onlyMostRecent?: boolean):
     Observable<any> {
     const viewFilterCopy = this.getFilter(json);
     const url = this.baseUrl + DSMService.UI + 'participantList';
@@ -224,6 +226,15 @@ export class DSMService {
     map.push({name: 'parent', value: parent});
     if (sortBy) {
       map.push({name: 'sortBy', value: JSON.stringify(sortBy)});
+    }
+    if (fileFormat) {
+      map.push({name: 'fileFormat', value: fileFormat});
+    }
+    if (typeof splitOptions === 'boolean') {
+      map.push({name: 'splitOptions', value: splitOptions});
+    }
+    if (typeof splitOptions === 'boolean') {
+      map.push({name: 'onlyMostRecent', value: onlyMostRecent});
     }
     if (filterQuery != null) {
       map.push({name: 'filterQuery', value: filterQuery});
@@ -294,6 +305,22 @@ export class DSMService {
       { name: 'realm', value: realm }
     ];
     return this.http.post(url, body, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError.bind(this))
+    );
+  }
+
+  public bulkCreateCohortTags(bulkCohortTag: BulkCohortTag, realm: string): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'bulkCreateCohortTags';
+    const map = [
+      { name: 'userId', value: this.role.userID() },
+      { name: 'realm', value: realm },
+      { name: 'parent', value: 'participantList' },
+    ];
+    if (bulkCohortTag.savedFilter) {
+      map.push({ name: 'filters', value: JSON.stringify(bulkCohortTag.savedFilter.filters)});
+      map.push({ name: 'filterName', value: bulkCohortTag.savedFilter.filterName});
+    }
+    return this.http.post(url, JSON.stringify(bulkCohortTag), this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );
   }
@@ -1096,7 +1123,7 @@ export class DSMService {
   private getFilter(json: ViewFilter): ViewFilter {
     let viewFilterCopy = null;
     if (json != null) {
-      if (json.filters != null) {
+      if (json.filters?.length) {
         viewFilterCopy = json.copy();
         for (const filter of json.filters) {
           if (filter.type === Filter.OPTION_TYPE && filter.participantColumn.tableAlias !== 'participantData') {
@@ -1104,7 +1131,7 @@ export class DSMService {
           }
         }
       }
-      if (viewFilterCopy != null && viewFilterCopy.filters != null) {
+      if (viewFilterCopy != null && viewFilterCopy.filters?.length) {
         for (const filter of viewFilterCopy.filters) {
           if (filter.type === Filter.OPTION_TYPE && filter.participantColumn.tableAlias !== 'participantData') {
             filter.selectedOptions = filter.getSelectedOptionsName();

@@ -842,7 +842,7 @@
     ],
     "TermSection": {
       "Paragraph5": "Understanding Terms Used in Cancer Research",
-      "Text": "<span>&#8226;</span> For reference to common terms used in cancer care and research, the National Cancer Institute has developed a Dictionary of Cancer Terms, found <a href=\"https://www.cancer.gov/publications/dictionaries/cancer-terms/\" target=\"_blank\">here.</a>"
+      "Text": "For reference to common terms used in cancer care and research, the National Cancer Institute has developed a Dictionary of Cancer Terms, found <a class=\"hereLink\" href=\"https://www.cancer.gov/publications/dictionaries/cancer-terms/\" target=\"_blank\"><u>here.</u></div>"
     }
   },
   "home": {
