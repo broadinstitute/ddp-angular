@@ -192,7 +192,6 @@ import { InputRestriction } from '../models/InputRestriction';
     }
 
     .picklist {
-        overflow: hidden;
         display: flex;
     }`]
 })
