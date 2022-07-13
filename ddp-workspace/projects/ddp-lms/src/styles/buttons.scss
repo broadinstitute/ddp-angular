@@ -78,6 +78,15 @@
     }
 }
 
+buttsubmit_button,
+ButtonFilled {
+  font-size: 1.25rem;
+  line-height: 2rem;
+}
+button_new-item {
+  font-size: 1.0625rem !important;
+}
+
 .ButtonFilled,
 .submit_button ,
 .button_new-item {
@@ -86,9 +95,7 @@
   border-color: #9953ce !important;
   border-radius: 4px;
   color: white;
-  font-size: 1.0625rem !important;
   transition: color .3s !important;
-
   &:hover {
     color: #bbbbbe;
     background-color: #7f30b8 !important;
