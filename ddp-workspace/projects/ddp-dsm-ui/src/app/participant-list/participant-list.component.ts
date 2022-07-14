@@ -1144,7 +1144,7 @@ export class ParticipantListComponent implements OnInit {
 
   private resetPagination(): void {
     this.viewFilter = null;
-    this.json = null;
+    this.jsonPatch = null;
     this.activePage = 1;
     this.rowsPerPage = this.role.getUserSetting().getRowsPerPage();
   }
