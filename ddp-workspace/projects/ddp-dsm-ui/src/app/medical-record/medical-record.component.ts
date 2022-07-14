@@ -151,7 +151,7 @@ export class MedicalRecordComponent implements OnInit {
       const patch1 = new PatchUtil(
         this.medicalRecord.medicalRecordId, this.role.userMail(),
         {name: parameterName, value: v}, null, null, participantId,
-        Statics.MR_ALIAS, null, realm, this.participant.participant.ddpParticipantId
+        Statics.MR_ALIAS, null, realm, this.participant.data.profile[ 'guid' ]
       );
       const patch = patch1.getPatch();
       this.patchFinished = false;

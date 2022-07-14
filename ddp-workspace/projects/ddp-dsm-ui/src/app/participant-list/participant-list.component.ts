@@ -846,6 +846,7 @@ export class ParticipantListComponent implements OnInit {
 
   public selectFilter(viewFilter: ViewFilter): void {
     this.resetPagination();
+    this.resetSelectedPatients();
     this.loadingParticipants = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     this.currentView = JSON.stringify(viewFilter);
     if (viewFilter != null) {
@@ -855,6 +856,10 @@ export class ParticipantListComponent implements OnInit {
       this.filtered = false;
     }
     this.applyFilter(viewFilter);
+  }
+
+  resetSelectedPatients(): void {
+    this.selectedPatients = [];
   }
 
   private applyFilter(viewFilter: ViewFilter, from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage()): void {
@@ -1044,6 +1049,7 @@ export class ParticipantListComponent implements OnInit {
   public clearFilter(): void {
     this.start = new Date().getTime();
     this.filterQuery = null;
+    this.resetSelectedPatients();
     this.clearManualFilters();
     this.getData();
     this.setDefaultColumns();
@@ -1138,7 +1144,7 @@ export class ParticipantListComponent implements OnInit {
 
   private resetPagination(): void {
     this.viewFilter = null;
-    this.jsonPatch = null;
+    this.json = null;
     this.activePage = 1;
     this.rowsPerPage = this.role.getUserSetting().getRowsPerPage();
   }
@@ -1282,6 +1288,7 @@ export class ParticipantListComponent implements OnInit {
   public doFilter(): void {
     this.selectAll = this.selectedColumns['allSelected'];
     this.resetPagination();
+    this.resetSelectedPatients();
     const json = [];
     this.dataSources.forEach((value: string, key: string) => {
         this.createFilterJson(json, key);
