@@ -1,6 +1,15 @@
 import { Component, ElementRef, EventEmitter, Inject, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { delay, filter, map, shareReplay, startWith, takeUntil, tap } from 'rxjs/operators';
+import {
+    debounceTime,
+    delay,
+    filter,
+    map,
+    shareReplay,
+    startWith,
+    takeUntil,
+    tap,
+} from 'rxjs/operators';
 
 import { ActivityQuestionBlock } from '../../../models/activity/activityQuestionBlock';
 import { WindowRef } from '../../../services/windowRef';
@@ -136,6 +145,7 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
     private setupScrollToErrorAction(): void {
         this.validationRequested$.pipe(
             filter(validationRequested => validationRequested && this.block.scrollTo),
+            debounceTime(300),
             tap(() => {
                 const headerOffset = this.config.scrollToErrorOffset;
                 const top = this.scrollAnchor.nativeElement.getBoundingClientRect().top
