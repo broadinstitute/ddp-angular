@@ -102,6 +102,19 @@ button_new-item {
     border-color: #7f30b8 !important;
     cursor: pointer !important;
   }
+
+  &:active {
+    color: black !important;
+
+    border-color: #7f30b8 !important;
+  }
+
+  &:hover:not([disabled]),
+  &:hover:enabled,
+  &:focus:not([disabled]),
+  &:focus:enabled,{
+    background-color: #7f30b8 !important;
+  }
 }
 
 .SimpleButton {
