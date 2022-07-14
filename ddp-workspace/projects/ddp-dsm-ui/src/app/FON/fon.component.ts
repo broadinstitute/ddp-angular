@@ -4,8 +4,9 @@ import {Title} from '@angular/platform-browser';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {SessionService} from '../services/session.service';
 import {MainConstants} from './constants/main-constants';
-import {StoreService} from '../STORE/store.service';
 import {TranslateService} from '@ngx-translate/core';
+import {ParticipantsStoreService} from "../STORE/Participants/participantsStore.service";
+import {DashboardStoreService} from "../STORE/Dashboard/dashboardStore.service";
 
 
 @Component({
@@ -43,12 +44,13 @@ import {TranslateService} from '@ngx-translate/core';
 export class FonComponent implements OnInit {
   asideNavVisible = true;
 
-  constructor(private storeService: StoreService,
+  constructor(private participantsStoreService: ParticipantsStoreService,
               private translateService: TranslateService,
               private sessionService: SessionService,
               private dssSessionService: SessionMementoService,
               private title: Title,
-              private jwtHelper: JwtHelperService) {}
+              private jwtHelper: JwtHelperService,
+              private dashboardStoreService: DashboardStoreService) {}
 
   ngOnInit(): void {
     const LOCALE = 'en';
@@ -57,8 +59,9 @@ export class FonComponent implements OnInit {
     this.title.setTitle('Fon');
 
     // Store
-    this.storeService.setStudy = MainConstants.study;
-    this.storeService.dispatchGetSettings(MainConstants.participantsList);
+    this.participantsStoreService.setStudy = MainConstants.study;
+    this.dashboardStoreService.setStudy = MainConstants.study;
+    this.participantsStoreService.dispatchGetSettings(MainConstants.participantsList);
 
     // Translation
     this.translateService.setDefaultLang(LOCALE);

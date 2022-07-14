@@ -4,11 +4,11 @@ import {Observable, tap} from 'rxjs';
 import { patientListModel } from './models/patient-list.model';
 
 import {MainConstants} from '../../constants/main-constants';
-import {StoreService} from '../../../STORE/store.service';
 import {
   RegisterPatientsModalComponent
 } from '../../components/register-patients-modal/register-patients-modal.component';
 import { SearchPatientDataModel } from './models/search-patient-data.model';
+import {ParticipantsStoreService} from "../../../STORE/Participants/participantsStore.service";
 
 @Component({
   selector: 'app-patients-list',
@@ -35,13 +35,13 @@ export class PatientsListComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private storeService: StoreService
+    private participantsStoreService: ParticipantsStoreService
   ) {
   }
 
   ngOnInit(): void {
-    this.totalCount$ = this.storeService.getParticipantsTotalCount;
-    this.loading$ = this.storeService.getParticipantsLoadingStatus;
+    this.totalCount$ = this.participantsStoreService.getParticipantsTotalCount;
+    this.loading$ = this.participantsStoreService.getParticipantsLoadingStatus;
 
     const qParams = JSON.parse(localStorage.getItem(this.LSParams));
     const builtParams = {from: qParams?.from || this.DEFAULT_FROM_VALUE, to: qParams?.to || this.DEFAULT_TO_VALUE};
@@ -57,7 +57,7 @@ export class PatientsListComponent implements OnInit {
         tap((params: Params) => {
           this.rowsPerPage = params.to - params.from || 10;
           this.currentPageIndex = (params.to/this.rowsPerPage) || 1;
-          this.patients$ = this.storeService.getParticipants(params.from, params.to, this.PARENT);
+          this.patients$ = this.participantsStoreService.getParticipants(params.from, params.to, this.PARENT);
         })
       )
       .subscribe();

@@ -1,9 +1,11 @@
 [
   {
-    "type": "VERTICAL_BAR_CHART",
+    "type": "VERTICAL_HIGHLIGHTED_BAR_CHART",
     "title": "Number of patients enrolled",
     "y": [275, 180, 51, 308, 268, 179, 126, 282, 291, 396],
-    "size": "big"
+    "size": "big",
+    "color": [],
+    "names": []
   },
   {
     "type": "HORIZONTAL_BAR_CHART",
@@ -37,7 +39,7 @@
     "size": "medium"
   },
   {
-    "type": "DONUT",
+    "type": "DONUT_CHART",
     "title": "Gender",
     "values": [200, 120, 23, 0, 35],
     "labels": ["Male", "Female", "Non-binary", "Other", "Not Reporter"],

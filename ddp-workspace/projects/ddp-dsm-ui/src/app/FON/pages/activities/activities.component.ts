@@ -5,9 +5,9 @@ import {
 } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Observable, tap} from 'rxjs';
-import {StoreService} from '../../../STORE/store.service';
 import {MainConstants} from '../../constants/main-constants';
 import {sectionGuids} from './utils/sections_guids';
+import {ParticipantsStoreService} from "../../../STORE/Participants/participantsStore.service";
 
 @Component({
   selector: 'app-activities',
@@ -24,14 +24,14 @@ export class ActivitiesComponent implements OnInit {
   activeRoute = this.activatedRoute.snapshot.url[0].path;
   readonly PARENT = MainConstants.participantsList;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private storeService: StoreService) {
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private participantsStoreService: ParticipantsStoreService) {
   }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
-      this.patientWithActivities$ = this.storeService.getParticipantActivities(params.guid)
+      this.patientWithActivities$ = this.participantsStoreService.getParticipantActivities(params.guid)
         .pipe(
-          tap(data => !data && this.storeService.dispatchGetParticipant(params.guid, this.PARENT)),
+          tap(data => !data && this.participantsStoreService.dispatchGetParticipant(params.guid, this.PARENT)),
           tap(result => {
             const openActivityGuid = this.activatedRoute.snapshot.firstChild?.params.activity;
             if(!openActivityGuid && result) {

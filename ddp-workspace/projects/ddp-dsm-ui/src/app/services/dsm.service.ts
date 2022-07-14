@@ -36,6 +36,15 @@ export class DSMService {
                private router: Router) {
   }
 
+  getDashboardData(realm: string): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'dashboard';
+    const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: realm} );
+    return this.http.get('assets/tempJson.json', this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError.bind(this))
+    );
+  }
+
   sendAnalyticsMetric( realm: string, passed: number ): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'googleAnalytics';
     const map: { name: string; value: any }[] = [];
