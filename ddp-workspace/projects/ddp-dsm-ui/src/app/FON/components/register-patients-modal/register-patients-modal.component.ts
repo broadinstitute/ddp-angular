@@ -91,14 +91,14 @@ export class RegisterPatientsModalComponent implements OnInit, OnDestroy {
   private get patientFormGroup(): FormGroup {
     return this.formBuilder.group({
       email: new FormControl(null, {
-        validators: [Validators.required, Validators.pattern(/^[\w- ()+-.]+@([\w-]+\.)+[\w-]{2,4}$/)],
+        validators: [Validators.required, this.customEmailValidator],
         updateOn: 'blur'
       }),
       firstName: new FormControl(null, Validators.required),
       lastName: new FormControl(null, Validators.required),
-      birthDate: new FormControl(null, Validators.required),
-      informedConsentDate: new FormControl(null, Validators.required),
-      assentDate: new FormControl(null)
+      birthDate: new FormControl(null, [Validators.required, this.isPast]),
+      consentDate: new FormControl(null, [Validators.required, this.isNotFuture]),
+      assentDate: new FormControl(null, [this.isNotFuture])
     });
   }
 
@@ -109,5 +109,21 @@ export class RegisterPatientsModalComponent implements OnInit, OnDestroy {
       verticalPosition: 'top',
       horizontalPosition: 'right'
     });
+  }
+
+  private isNotFuture(formControl: FormControl): {[s: string]: boolean} {
+    return new Date(formControl.value) > new Date() ? {isFuture: true} : null;
+  }
+
+  private isPast(formControl: FormControl): {[s: string]: boolean} {
+    return new Date(formControl.value)
+      .setHours(0, 0 ,0, 0) >=
+    new Date()
+      .setHours(0, 0 ,0, 0) ? {isPast: true} : null;
+  }
+
+  private customEmailValidator(formControl: FormControl): {[s: string]: boolean} {
+    const value = formControl.value;
+    return /^[\w- ()+-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value) ? null : {invalidEmail: true};
   }
 }

@@ -6,8 +6,9 @@ import {
   FormControlName,
   FormGroupDirective,
   NG_VALUE_ACCESSOR,
-  NgControl
+  NgControl, ValidationErrors
 } from '@angular/forms';
+import {RegisterPatientsError} from '../../constants/error messages/registerPatients.error';
 
 
 @Component({
@@ -25,7 +26,7 @@ import {
             [formControl]="formControl"
             [placeholder]="placeholder"
           >
-          <mat-error>{{getErrorMessage}}</mat-error>
+          <mat-error>{{getErrorMessage | inputError : reegisterPatientsError}}</mat-error>
         </mat-form-field>
       </div>
     </ng-container>
@@ -43,7 +44,7 @@ import {
             [matDatepicker]="picker"
             [placeholder]="placeholder"
           >
-          <mat-error>{{getErrorMessage}}</mat-error>
+          <mat-error>{{getErrorMessage | inputError : reegisterPatientsError}}</mat-error>
           <mat-datepicker-toggle
             matSuffix
             [for]="picker">
@@ -68,11 +69,13 @@ export class InputFieldComponent implements OnInit, ControlValueAccessor {
   public value: any;
   public formControl: FormControl;
 
+  public reegisterPatientsError = RegisterPatientsError;
+
   public onTouched: () => void;
   public onChange: (value: any) => void = () => {};
 
   // Only keeps date value from two-way binding
-  private DateFieldCurrentValue: any;
+  private DateFieldCurrentValue: any[] = [];
 
   private setDefaultDayYear = false;
   private setDefaultYear = false;
@@ -121,21 +124,20 @@ export class InputFieldComponent implements OnInit, ControlValueAccessor {
 
   public checkDate(inputElement: HTMLInputElement): void {
     const dateValue = inputElement.value;
-    this.DateFieldCurrentValue = dateValue.trim();
+    this.DateFieldCurrentValue = dateValue.trim().split('/');
     this.setDefaultYear = this.defaultYear(dateValue);
     this.setDefaultDayYear = this.defaultDayYear(dateValue);
   }
 
-  public get getErrorMessage(): string {
-    if (this.formControl.hasError('required')) {return 'You must enter a value';}
-    return this.formControl.hasError('pattern') ? 'Not a valid email' : '';
+  public get getErrorMessage(): ValidationErrors {
+    return this.formControl.errors;
   }
 
   /* Util Functions */
 
   private setDefaultDate(): void {
     const newDate = new Date();
-    const [month, day] = this.DateFieldCurrentValue.split('/');
+    const [month, day] = this.DateFieldCurrentValue;
 
     if(this.setDefaultYear) {
       newDate.setMonth(month - 1);
