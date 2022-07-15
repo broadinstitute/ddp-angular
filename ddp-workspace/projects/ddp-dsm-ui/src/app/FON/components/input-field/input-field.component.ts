@@ -74,8 +74,8 @@ export class InputFieldComponent implements OnInit, ControlValueAccessor {
   // Only keeps date value from two-way binding
   private DateFieldCurrentValue: any;
 
-  private setDefaultDayYear: boolean = false;
-  private setDefaultYear: boolean = false;
+  private setDefaultDayYear = false;
+  private setDefaultYear = false;
 
   @Input('inputType') type: string;
   @Input() label: string;
@@ -135,7 +135,7 @@ export class InputFieldComponent implements OnInit, ControlValueAccessor {
 
   private setDefaultDate(): void {
     const newDate = new Date();
-    const [month, day] = this.DateFieldCurrentValue?.split('/');
+    const [month, day] = this.DateFieldCurrentValue.split('/');
 
     if(this.setDefaultYear) {
       newDate.setMonth(month - 1);
