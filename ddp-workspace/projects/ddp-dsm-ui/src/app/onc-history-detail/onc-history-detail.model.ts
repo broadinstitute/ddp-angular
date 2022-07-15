@@ -3,7 +3,6 @@ import { Tissue } from '../tissue/tissue.model';
 export class OncHistoryDetail {
   changed = false;
   selected = false;
-  deleted = false;
 
   changedBy: string;
 
