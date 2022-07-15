@@ -38,6 +38,7 @@ import {
             #inputDateElement
             matInput
             (focusout)="setValue(inputDateElement)"
+            (dateInput)="checkDate(inputDateElement)"
             [formControl]="formControl"
             [matDatepicker]="picker"
             [placeholder]="placeholder"
@@ -70,12 +71,22 @@ export class InputFieldComponent implements OnInit, ControlValueAccessor {
   public onTouched: () => void;
   public onChange: (value: any) => void = () => {};
 
+  // Only keeps date value from two-way binding
+  private DateFieldCurrentValue: any;
+
+  private setDefaultDayYear = false;
+  private setDefaultYear = false;
+
   @Input('inputType') type: string;
   @Input() label: string;
   @Input() placeholder: string;
 
   readonly TEXT: string = 'text';
   readonly DATE: string = 'date';
+
+  readonly FullDatePatternRegexp =/^(0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d$/;
+  readonly MonthPatternRegexp =/^(0?[1-9]|1[012])[- /.]?$/;
+  readonly MonthDayPatternRegexp =/^(0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.]?$/;
 
   constructor(private injector: Injector) {}
 
@@ -102,14 +113,50 @@ export class InputFieldComponent implements OnInit, ControlValueAccessor {
   }
 
   public setValue(inputElement: HTMLInputElement): void {
+    this.type === this.DATE && this.setDefaultDate();
     this.value = inputElement.value.trim();
     this.onChange(this.value);
     this.onTouched();
   }
 
+  public checkDate(inputElement: HTMLInputElement): void {
+    const dateValue = inputElement.value;
+    this.DateFieldCurrentValue = dateValue.trim();
+    this.setDefaultYear = this.defaultYear(dateValue);
+    this.setDefaultDayYear = this.defaultDayYear(dateValue);
+  }
+
   public get getErrorMessage(): string {
     if (this.formControl.hasError('required')) {return 'You must enter a value';}
     return this.formControl.hasError('pattern') ? 'Not a valid email' : '';
+  }
+
+  /* Util Functions */
+
+  private setDefaultDate(): void {
+    const newDate = new Date();
+    const [month, day] = this.DateFieldCurrentValue.split('/');
+
+    if(this.setDefaultYear) {
+      newDate.setMonth(month - 1);
+      newDate.setDate(day);
+      this.formControl.patchValue(newDate);
+    }
+
+    if(this.setDefaultDayYear) {
+      newDate.setMonth(month - 1);
+      this.formControl.patchValue(newDate);
+    }
+  }
+
+  private defaultDayYear(dateValue: string): boolean {
+    return this.MonthPatternRegexp.test(dateValue) &&
+    !this.MonthDayPatternRegexp.test(dateValue) &&
+    !this.FullDatePatternRegexp.test(dateValue);
+  }
+
+  private defaultYear(dateValue: string): boolean {
+    return this.MonthDayPatternRegexp.test(dateValue) && !this.FullDatePatternRegexp.test(dateValue);
   }
 
 }
