@@ -453,7 +453,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           tissues.push(new Tissue(null, oncHis.oncHistoryDetailId, null, null, null, null,
             null, null, null, null, null, null, null, null
             , null, null, null, null, null, null, null, null, null,
-            null, null, null, null, null, null, null, falseF));
+            null, null, null, null, null, null, null, false));
           oncHis.tissues = tissues;
         } else if (oncHis.tissues.length < 1) {
           oncHis.tissues.push(new Tissue(null, oncHis.oncHistoryDetailId, null, null, null, null,
