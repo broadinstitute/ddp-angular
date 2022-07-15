@@ -39,7 +39,7 @@ import { MatSortModule } from '@angular/material/sort';
 import {CutStringPipe} from './pipes/cutString.pipe';
 import {PaginatorComponent} from './components/paginator/paginator.component';
 import { SearchPanelComponent } from './pages/patients-list/components/search-panel/search-panel.component';
-import {InputErrorPipe} from "./pipes/inputError.pipe";
+import {InputErrorPipe} from './pipes/inputError.pipe';
 
 
 const AngularMaterialModules = [

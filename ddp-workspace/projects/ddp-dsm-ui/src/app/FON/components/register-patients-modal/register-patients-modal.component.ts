@@ -111,19 +111,19 @@ export class RegisterPatientsModalComponent implements OnInit, OnDestroy {
     });
   }
 
-  private isNotFuture(formControl: FormControl): {[s:string]: boolean} {
-    return new Date(formControl.value) > new Date() ? {'isFuture': true} : null;
+  private isNotFuture(formControl: FormControl): {[s: string]: boolean} {
+    return new Date(formControl.value) > new Date() ? {isFuture: true} : null;
   }
 
-  private isPast(formControl: FormControl): {[s:string]: boolean} {
+  private isPast(formControl: FormControl): {[s: string]: boolean} {
     return new Date(formControl.value)
       .setHours(0, 0 ,0, 0) >=
     new Date()
-      .setHours(0, 0 ,0, 0) ? {'isPast': true} : null;
+      .setHours(0, 0 ,0, 0) ? {isPast: true} : null;
   }
 
-  private customEmailValidator(formControl: FormControl): {[s:string]: boolean} {
+  private customEmailValidator(formControl: FormControl): {[s: string]: boolean} {
     const value = formControl.value;
-    return /^[\w- ()+-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value) ? null : {'invalidEmail': true};
+    return /^[\w- ()+-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value) ? null : {invalidEmail: true};
   }
 }

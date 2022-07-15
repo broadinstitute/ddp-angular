@@ -8,7 +8,7 @@ import {
   NG_VALUE_ACCESSOR,
   NgControl, ValidationErrors
 } from '@angular/forms';
-import {RegisterPatientsError} from '../../constants/error messages/registerPatients.error'
+import {RegisterPatientsError} from '../../constants/error messages/registerPatients.error';
 
 
 @Component({
@@ -69,7 +69,7 @@ export class InputFieldComponent implements OnInit, ControlValueAccessor {
   public value: any;
   public formControl: FormControl;
 
-  public reegisterPatientsError = RegisterPatientsError
+  public reegisterPatientsError = RegisterPatientsError;
 
   public onTouched: () => void;
   public onChange: (value: any) => void = () => {};

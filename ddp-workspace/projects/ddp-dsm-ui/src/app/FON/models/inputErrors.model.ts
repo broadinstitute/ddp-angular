@@ -1,3 +1,3 @@
 export interface InputErrorsModel {
-  [name: string]: string
+  [name: string]: string;
 }
