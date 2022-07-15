@@ -1738,6 +1738,18 @@ export class ParticipantListComponent implements OnInit {
     }
   }
 
+  generateCheckboxColor(participant: Participant): string {
+    if (this.isAssignable(participant)) {
+      return 'accent';
+    } else {
+      return 'primary';
+    }
+  }
+
+  isAnySelectedAssignable(): boolean {
+    return this.participantList.find(participant => participant.isSelected && this.isAssignable(participant)) != null;
+  }
+
   private isAssignable(participant: Participant): boolean {
     return participant.data.status === 'ENROLLED'
       && participant.data.medicalProviders != null && participant.medicalRecords != null

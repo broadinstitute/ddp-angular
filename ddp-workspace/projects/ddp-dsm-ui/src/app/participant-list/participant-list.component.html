@@ -261,7 +261,7 @@
                         currentPage: activePage, totalItems: getPaginationParticipantListSize() }">
             <!--checkbox to assign or trigger blood kits-->
             <td>
-              <mat-checkbox color="primary" disableRipple
+              <mat-checkbox [color]="generateCheckboxColor(pt)" disableRipple
                            [checked]="pt.isSelected"
                            (change)="pt.isSelected = $event.checked; checkboxChecked(pt)"></mat-checkbox>
             </td>
@@ -877,7 +877,7 @@
           <tr *ngIf="hasAssignees()">
             <td [attr.colspan]="getColSpan()">
               <button mat-raised-button color="primary"
-                      (click)="openModal('assignParticipant')" [disabled]="isAssignButtonDisabled">Assign
+                      (click)="openModal('assignParticipant')" [disabled]="!isAnySelectedAssignable()">Assign
               </button>
             </td>
           </tr>
