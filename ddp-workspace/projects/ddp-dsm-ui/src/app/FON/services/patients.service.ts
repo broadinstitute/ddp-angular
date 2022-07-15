@@ -15,7 +15,7 @@ export class PatientsService {
                                firstName,
                                lastName,
                                birthDate,
-                               informedConsentDate,
+                               consentDate,
                                centerId,
                                assentDate
                              }: Partial<AddPatientModel>): AddPatientModel {
@@ -27,7 +27,7 @@ export class PatientsService {
       lastName,
       centerId,
       birthDate: this.formatToISO8601date(birthDate),
-      informedConsentDate: this.formatToISO8601date(informedConsentDate),
+      consentDate: this.formatToISO8601date(consentDate),
       assentDate: this.formatToISO8601date(assentDate),
     };
   }
