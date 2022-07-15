@@ -95,6 +95,14 @@
   }
 }
 
+@mixin paragraph-button {
+  color: #ffffff;
+  font-family: $primary-font-light;
+  font-size: 1.5rem;
+  letter-spacing: -0.01px;
+  line-height: 1.875rem;
+}
+
 .home {
   .paragraph-1 {
     display: flex;
@@ -270,11 +278,7 @@
         cursor: pointer;
 
         .paragraph-button-text-3 {
-          color: #ffffff;
-          font-family: $primary-font-light;
-          font-size: 1.5rem;
-          letter-spacing: -0.01px;
-          line-height: 1.875rem;
+          @include paragraph-button;
         }
 
         &:active {
@@ -323,10 +327,7 @@
         cursor: pointer;
 
         .paragraph-button-text-4 {
-          color: #ffffff;
-          font-size: 1.5rem;
-          letter-spacing: -0.01px;
-          line-height: 1.875rem;
+          @include paragraph-button
         }
 
         &:active {
