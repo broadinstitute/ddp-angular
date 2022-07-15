@@ -227,7 +227,7 @@
         </td>
       </tr>
       <ng-container *ngFor="let tis of oncHistoryDetail.tissues">
-        <tr>
+        <tr *ngIf="!tis.deleted">
           <td colspan="3">
             <app-tissue [participant]="participant" [oncHistoryDetail]="oncHistoryDetail" [tissueId]="tissueId"
                         [tissue]="tis" [editable]="editable && !participantExited" [additionalColumns]="settings['t']">
