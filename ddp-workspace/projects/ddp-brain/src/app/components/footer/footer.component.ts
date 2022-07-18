@@ -13,6 +13,7 @@ export class FooterComponent implements OnInit {
   public infoEmail: string;
   public twitterAccount: string;
   public facebookAccount: string;
+  public instagramAccount: string;
   public phone: string;
   public appRoutes = AppRoutes;
 
@@ -26,6 +27,7 @@ export class FooterComponent implements OnInit {
     this.infoEmail = this.config.infoEmail;
     this.twitterAccount = this.config.twitterAccountId;
     this.facebookAccount = this.config.facebookGroupId;
+    this.instagramAccount = this.config.instagramId;
     this.phone = this.config.phone;
   }
 

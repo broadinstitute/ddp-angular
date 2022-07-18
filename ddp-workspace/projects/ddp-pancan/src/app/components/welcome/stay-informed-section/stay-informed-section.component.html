@@ -1,18 +1,25 @@
 <div class="container">
     <div class="social-media__links">
         <a class="social-media__link"
-           [href]="twitterUrl"
+           [href]="'App.social.twitter' | translate"
            target="_blank"
            (click)="sendSocialMediaAnalytics('twitter')">
             <img class="social-media__logo" lazy-resource src="assets/images/twitter.svg"
                  [alt]="'Common.Alts.Twitter' | translate">
         </a>
         <a class="social-media__link"
-           [href]="facebookUrl"
+           [href]="'App.social.facebook' | translate"
            target="_blank"
            (click)="sendSocialMediaAnalytics('facebook')">
             <img class="social-media__logo" lazy-resource src="assets/images/facebook.svg"
                  [alt]="'Common.Alts.Facebook' | translate">
+        </a>
+        <a class="social-media__link"
+           [href]="'App.social.instagram' | translate"
+           target="_blank"
+           (click)="sendSocialMediaAnalytics('instagram')">
+            <img class="social-media__logo" lazy-resource src="assets/images/instagram.png"
+                 [alt]="'Common.Alts.Instagram' | translate">
         </a>
     </div>
     <h2 class="title static-page-title" translate>App.HomePage.StayInformedSection.Title</h2>
