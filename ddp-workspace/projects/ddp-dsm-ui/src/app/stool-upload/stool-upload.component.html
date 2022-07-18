@@ -20,12 +20,6 @@
 
 <div *ngIf="allowedToSeeInformation">
   <br/>
-  <div *ngIf="hasRole().allowedToUploadKitInvalidAddress()">
-    <div>
-      <mat-checkbox disableRipple color="primary"
-                    [(ngModel)]="skipAddressValidation">Skip address validation on upload</mat-checkbox>
-    </div>
-  </div>
   <br/>
   <div *ngIf="allOptionsSelected()" class="Width--80">
     <app-filepicker [id]="'kitUploadFile'" [fileFormat]="'txt'" (fileSelected)="fileSelected($event)"></app-filepicker>
@@ -38,18 +32,6 @@
 
   </div>
 
-  <div *ngIf="failedParticipants != null && failedParticipants.length > 0">
-    <div class="Float--left Width--80">
-      <br/>
-      <h4>The address of following participants was not valid:</h4>
-      <div *ngFor="let errorParticipant of failedParticipants">
-        <p>{{errorParticipant.participantId}}</p>
-      </div>
-    </div>
-    <div class="Float--left Width--20">
-      <button type="button" mat-raised-button (click)="downloadFailed()" color="primary">Download list of failed</button>
-    </div>
-  </div>
 
   <div class="Float--left Width--80">
     <b>
@@ -62,13 +44,9 @@
         <li>Following columns are required
           <table class="table table-bordered">
             <tr>
-              <ng-container *ngIf="getCompService().getRealm().toLowerCase() === 'rgp'">
-              </ng-container>
               <td>participantId</td>
               <td>receiveDate</td>
               <td>mfBarcode</td>
-              <ng-container *ngIf="getCompService().getRealm().toLowerCase() === 'testboston'">
-              </ng-container>
             </tr>
           </table>
         </li>
@@ -97,10 +75,6 @@
           {{duplicateParticipant.participantId}} {{duplicateParticipant.mfBarcode}} {{duplicateParticipant.receiveDate}}
         </mat-checkbox>
       </div>
-    </div>
-    <div class="app-modal-footer">
-      <button type="button" class="btn btn-default" (click)="forgetDuplicate()">Close</button>
-      <button type="button" class="btn btn-primary" (click)="uploadDuplicate()">Upload Stool Sample</button>
     </div>
   </app-modal>
 </div>

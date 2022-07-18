@@ -46,7 +46,6 @@ export class StoolUploadComponent implements OnInit {
   realmNameStoredForFile: string;
   allowedToSeeInformation = false;
   specialMessage: string;
-  skipAddressValidation = false;
 
   constructor( private dsmService: DSMService, private auth: Auth, private compService: ComponentService, private route: ActivatedRoute,
                private role: RoleService ) {
@@ -103,7 +102,7 @@ export class StoolUploadComponent implements OnInit {
           jsonData = data;
           jsonData.forEach((val) => {
             const kitType = KitType.parse(val);
-            if(kitType.kitId===15){
+            if(kitType.name =='STOOL'){
               this.kitTypes.push(kitType);
             }
           });
@@ -133,46 +132,13 @@ export class StoolUploadComponent implements OnInit {
     this.loading = true;
     this.dsmService.uploadStoolTxtFile(
       localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.kitType.name,
-      this.file, this.skipAddressValidation
+      this.file
     )
       .subscribe({
         next: data => {
           this.loading = false;
           if (typeof data === 'string') {
             this.errorMessage = 'Error - Uploading txt.\n' + data;
-          } else {
-
-            const result = Result.parse(data);
-            if (result.code === 500) {
-              this.additionalMessage = result.body;
-            } else {
-              const response: UploadResponse = UploadResponse.parse(data);
-              response.invalidKitAddressList.forEach((val) => {
-                this.failedParticipants.push(UploadParticipant.parse(val));
-              });
-              if (this.failedParticipants.length > 0) {
-                // eslint-disable-next-line max-len
-                this.errorMessage = 'Participants uploaded.\nCouldn\'t create kit requests for ' + this.failedParticipants.length + ' participant(s)';
-              }
-
-              response.duplicateKitList.forEach((val) => {
-                this.duplicateParticipants.push(UploadParticipant.parse(val));
-              });
-              response.specialKitList.forEach((val) => {
-                this.specialKits.push(UploadParticipant.parse(val));
-              });
-              this.specialMessage = response.specialMessage;
-
-              if (this.duplicateParticipants.length > 0 || this.specialKits.length > 0) {
-                this.modal.show();
-              }
-              if (this.failedParticipants.length === 0 && this.duplicateParticipants.length === 0) {
-                this.additionalMessage = 'All participants were uploaded.';
-                this.file = null;
-                this.filepicker.unselectFile();
-                this.realmNameStoredForFile = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
-              }
-            }
           }
         },
         error: err => {
@@ -200,60 +166,6 @@ export class StoolUploadComponent implements OnInit {
     } else {
       this.errorMessage = 'Error - Couldn\'t save failed participant list';
     }
-  }
-
-  uploadDuplicate(): void {
-    this.additionalMessage = null;
-    this.errorMessage = null;
-    this.loading = true;
-    const array: UploadParticipant[] = [];
-    for (let i = this.duplicateParticipants.length - 1; i >= 0; i--) {
-      if (this.duplicateParticipants[ i ].selected) {
-        array.push(this.duplicateParticipants[ i ]);
-      }
-    }
-    for (let i = this.specialKits.length - 1; i >= 0; i--) {
-      if (this.specialKits[ i ].selected) {
-        array.push(this.specialKits[ i ]);
-      }
-    }
-    const jsonParticipants = JSON.stringify(array);
-    this.dsmService.uploadStoolDuplicateParticipant(
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.kitType.name,
-      jsonParticipants, this.skipAddressValidation
-    )
-      .subscribe({
-        next: data => {
-          this.loading = false;
-          if (typeof data === 'string') {
-            this.errorMessage = 'Error - Uploading duplicate.\n' + data;
-          } else {
-            this.additionalMessage = 'All participants were uploaded.';
-          }
-        },
-        error: err => {
-          this.loading = false;
-          if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
-          }
-          this.errorMessage = 'Error - Uploading txt\n' + err;
-        }
-      });
-    this.emptyUpload();
-  }
-
-  forgetDuplicate(): void {
-    this.additionalMessage = 'No duplicate kits uploaded';
-    this.emptyUpload();
-  }
-
-  emptyUpload(): void {
-    this.modal.hide();
-    this.duplicateParticipants = [];
-    this.specialKits = [];
-    this.file = null;
-    this.filepicker.unselectFile();
-    this.realmNameStoredForFile = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
   }
 
   fileSelected(file: File): void {

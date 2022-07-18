@@ -601,13 +601,12 @@ export class DSMService {
     );
   }
 
-  public uploadStoolTxtFile(realm: string, kitType: string, file: File, skipAddressValidation: boolean): Observable<any> {
+  public uploadStoolTxtFile(realm: string, kitType: string, file: File): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'stoolUpload';
     const map: { name: string; value: any }[] = [];
     map.push({name: DSMService.REALM, value: realm});
     map.push({name: 'kitType', value: kitType});
     map.push({name: 'userId', value: this.role.userID()});
-    map.push( {name: 'skipAddressValidation', value: skipAddressValidation} );
     return this.http.post(url, file, this.buildQueryUploadHeader(map)).pipe(
       catchError(this.handleError)
     );
@@ -640,16 +639,14 @@ export class DSMService {
     );
   }
 
-  public uploadStoolDuplicateParticipant(realm: string, kitType: string, jsonParticipants: string, skipAddressValidation: boolean
+  public uploadStoolDuplicateParticipant(realm: string, kitType: string, jsonParticipants: string
   ): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'stoolUpload';
     const map: { name: string; value: any }[] = [];
     map.push({name: DSMService.REALM, value: realm});
     map.push({name: 'kitType', value: kitType});
     map.push({name: 'userId', value: this.role.userID()});
-    map.push({name: 'uploadAnyway', value: true});
     map.push({name: 'Content-Type', value: 'application/json; charset=utf-8'});
-    map.push( {name: 'skipAddressValidation', value: skipAddressValidation} );
     return this.http.post(url, jsonParticipants, this.buildQueryUploadHeader(map)).pipe(
       catchError(this.handleError)
     );
