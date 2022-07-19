@@ -378,7 +378,7 @@
           height: 1.6875rem;
           width: 13.625rem;
           font-family: $primary-font-light;
-          font-size: 1.375rem;
+          font-size: 1.5rem;
         }
 
         &:active {
@@ -471,8 +471,8 @@
       padding: 4.6875rem 0;
 
       .stay-informed-button {
-        height: 3.75rem;
-        width: 13.75rem;
+        height: 70px;
+        width: 289px;
         border-radius: 4px;
         background-color: #ffffff;
         border: none;
@@ -530,9 +530,10 @@
 
       .participation-button {
         box-sizing: border-box;
-        height: 3.625rem;
-        width: 17.125rem;
-        border: 2px solid #9953ce;
+        height: 56px;
+        width: 252px;
+        border: 0px;
+        padding: 0px;
         border-radius: 4px;
         background-color: #9953ce;
         cursor: pointer;
