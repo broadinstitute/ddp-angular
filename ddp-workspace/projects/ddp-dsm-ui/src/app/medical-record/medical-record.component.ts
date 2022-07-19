@@ -399,6 +399,8 @@ export class MedicalRecordComponent implements OnInit {
     }
     if (v !== null) {
       if (this.medicalRecord.additionalValuesJson != null) {
+        const camelCaseColumnName = Utils.convertUnderScoresToCamelCase(colName);
+        this.medicalRecord.additionalValuesJson[ camelCaseColumnName ] = v;
         this.medicalRecord.additionalValuesJson[ colName ] = v;
       } else {
         const addArray = {};
