@@ -163,19 +163,19 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
     private ngUnsubscribe = new Subject<void>();
 
     constructor(
-        private headerConfig: HeaderConfigurationService,
+        protected headerConfig: HeaderConfigurationService,
         protected session: SessionMementoService,
         protected router: Router,
-        private _announcements: AnnouncementsServiceAgent,
-        private userInvitation: UserInvitationServiceAgent,
+        protected _announcements: AnnouncementsServiceAgent,
+        protected userInvitation: UserInvitationServiceAgent,
         _participantsSearch: ParticipantsSearchServiceAgent,
-        private governedParticipantsAgent: GovernedParticipantsServiceAgent,
+        protected governedParticipantsAgent: GovernedParticipantsServiceAgent,
         protected userActivityServiceAgent: UserActivityServiceAgent,
-        private userProfileService: UserProfileServiceAgent,
-        private translate: TranslateService,
-        private workflowService: WorkflowServiceAgent,
-        private userManagementService: UserManagementServiceAgent,
-        private logger: LoggingService,
+        protected userProfileService: UserProfileServiceAgent,
+        protected translate: TranslateService,
+        protected workflowService: WorkflowServiceAgent,
+        protected userManagementService: UserManagementServiceAgent,
+        protected logger: LoggingService,
         public dialog: MatDialog,
         @Inject('toolkit.toolkitConfig') public toolkitConfig: ToolkitConfigurationService) {
         super(router, _announcements, _participantsSearch, session, userActivityServiceAgent, toolkitConfig);
