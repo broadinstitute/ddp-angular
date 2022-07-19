@@ -92,7 +92,7 @@ export class ParticipantListComponent implements OnInit {
   filterQuery: string = null;
   activityDefinitions = new Map();
 
-  exportFileFormat: string = 'tsv';
+  exportFileFormat: string = 'xlsx';
   exportSplitOptions: boolean = true;
   exportOnlyMostRecent: boolean = false;
 
@@ -1670,7 +1670,7 @@ export class ParticipantListComponent implements OnInit {
   executeDownload(): void {
     this.modal.hide();
 
-    const dialogRef = this.openDialog('Exporting participants list...');
+    const dialogRef = this.openDialog('Exporting participants list. This may take several minutes...');
     const columns = [];
     for(const col in this.selectedColumns) {
       for (const key in this.selectedColumns[col]) {
