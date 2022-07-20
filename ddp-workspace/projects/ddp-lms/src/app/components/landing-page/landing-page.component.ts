@@ -19,7 +19,9 @@ import { GovernedUserService } from '../../services/governed-user.service';
 
 @Component({
   selector: 'app-landing-page',
-  templateUrl: './landing-page.component.html',
+  template:  `
+    <toolkit-common-landing-redesigned></toolkit-common-landing-redesigned>
+  `,
   styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent extends LoginLandingRedesignedComponent implements OnInit {
