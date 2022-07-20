@@ -9,13 +9,11 @@ import {
   AgeUpThankYouComponent,
   ErrorRedesignedComponent,
   HeaderActionGuard,
-  LoginLandingRedesignedComponent,
   PasswordRedesignedComponent,
   RedirectToAuth0LoginRedesignedComponent,
   RedirectToLoginLandingRedesignedComponent,
   SessionExpiredRedesignedComponent,
   VerifyAgeUpPageComponent,
-  WorkflowStartActivityRedesignedComponent,
 } from 'toolkit';
 
 import {AboutComponent} from './pages/about/about.component';
@@ -30,6 +28,7 @@ import {ActivityComponent} from './activity/activity.component';
 import {ActivityPageComponent} from './activity-page/activity-page.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {LandingPageComponent} from './components/landing-page/landing-page.component';
+import {WorkflowStartComponent} from './components/workflow-start/workflow-start.component';
 
 
 const routes: Routes = [
@@ -162,14 +161,6 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'count-me-in',
-    component: WorkflowStartActivityRedesignedComponent,
-    canActivate: [
-      IrbGuard,
-      BrowserGuard
-    ]
-  },
-  {
     path: Route.Home,
     component: HomeComponent,
     pathMatch: 'full',
@@ -202,7 +193,7 @@ const routes: Routes = [
   },
   {
     path: Route.CountMeIn,
-    component: WorkflowStartActivityRedesignedComponent,
+    component: WorkflowStartComponent,
     canActivate: [IrbGuard, BrowserGuard],
   },
   {

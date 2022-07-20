@@ -43,6 +43,7 @@ import { WorkflowProgressComponent } from './components/workflow-progress/workfl
 import { MobileNavComponent } from './components/nav/mobile-nav/mobile-nav.component';
 import { FooterNavComponent } from './components/footer/footer-nav/footer-nav.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { WorkflowStartComponent } from './components/workflow-start/workflow-start.component';
 
 declare const DDP_ENV: Record<string, any>;
 
@@ -150,6 +151,7 @@ const translateFactory =
     MobileNavComponent,
     FooterNavComponent,
     LandingPageComponent,
+    WorkflowStartComponent,
   ],
   imports: [
     BrowserModule,
