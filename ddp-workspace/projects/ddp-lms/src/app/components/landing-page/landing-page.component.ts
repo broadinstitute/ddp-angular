@@ -1,20 +1,17 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { LoginLandingRedesignedComponent, ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
+import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 import { Router } from '@angular/router';
 import {
-  ActivityPicklistQuestionBlock,
-  ActivityServiceAgent,
   Auth0AdapterService,
   ConfigurationService,
   GovernedParticipantsServiceAgent,
   LoggingService,
   Participant,
-  PrequalifierServiceAgent,
   SessionMementoService,
   WorkflowServiceAgent,
 } from 'ddp-sdk';
-import { filter, mergeMap, pluck, take, tap, withLatestFrom } from 'rxjs/operators';
-import { iif, map, Observable, of } from 'rxjs';
+import { filter, mergeMap, take, tap, withLatestFrom } from 'rxjs/operators';
+import { iif, isObservable, map, Observable, of } from 'rxjs';
 import { GovernedUserService } from '../../services/governed-user.service';
 
 @Component({
@@ -22,45 +19,29 @@ import { GovernedUserService } from '../../services/governed-user.service';
   template: ` <toolkit-common-landing-redesigned></toolkit-common-landing-redesigned> `,
   styleUrls: ['./landing-page.component.scss'],
 })
-export class LandingPageComponent extends LoginLandingRedesignedComponent implements OnInit {
+export class LandingPageComponent implements OnInit {
   private operatorUserTemp: string;
   private governedUserTemp: string;
 
-  private readonly SELF_DESCRIBE_STABLE_ID = 'WHO_ENROLLING';
-  private readonly GOVERNED_USER_ANSWERS_STABLE_ID = 'DIAGNOSED';
+  private readonly SELF_DIAGNOSED = 'DIAGNOSED';
   private readonly CHILD_DIAGNOSED = 'CHILD_DIAGNOSED';
   private answers: [];
 
   constructor(
-    private __router: Router,
-    private __logger: LoggingService,
-    private __auth0: Auth0AdapterService,
-    private __sessionService: SessionMementoService,
-    private __participantService: GovernedParticipantsServiceAgent,
-    private __workflowService: WorkflowServiceAgent,
-    private __workflowBuilder: WorkflowBuilderService,
-    @Inject('ddp.config') private __config: ConfigurationService,
-    @Inject('toolkit.toolkitConfig') private __toolkitConfiguration: ToolkitConfigurationService,
+    private router: Router,
+    private logger: LoggingService,
+    private auth0: Auth0AdapterService,
+    private sessionService: SessionMementoService,
+    private participantService: GovernedParticipantsServiceAgent,
+    private workflowService: WorkflowServiceAgent,
+    private workflowBuilder: WorkflowBuilderService,
+    @Inject('ddp.config') private config: ConfigurationService,
+    @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService,
     private governedUserService: GovernedUserService,
-    private governedParticipantsAgent: GovernedParticipantsServiceAgent,
-    private prequalService: PrequalifierServiceAgent,
-    private activityService: ActivityServiceAgent
-  ) {
-    super(
-      __router,
-      __logger,
-      __auth0,
-      __sessionService,
-      __participantService,
-      __workflowService,
-      __workflowBuilder,
-      __config,
-      __toolkitConfiguration
-    );
-  }
+    private governedParticipantsAgent: GovernedParticipantsServiceAgent
+  ) {}
 
   ngOnInit(): void {
-    super.ngOnInit();
     this.load().subscribe();
   }
 
@@ -73,20 +54,24 @@ export class LandingPageComponent extends LoginLandingRedesignedComponent implem
       mergeMap(([answers, participants]) =>
         iif(
           () => !participants.length && answers.find(({ stableId }) => stableId === this.CHILD_DIAGNOSED),
-          this.governedParticipantsAgent.addParticipant(this.__config.studyGuid),
+          this.governedParticipantsAgent.addParticipant(this.config.studyGuid),
           of(false)
         )
       ),
       filter((addedParticipant) => !!addedParticipant),
       tap((governedParticipant: any) => {
-        this.operatorUserTemp = this.__sessionService.session.userGuid;
+        this.operatorUserTemp = this.sessionService.session.userGuid;
         this.governedUserTemp = governedParticipant;
-        governedParticipant && this.__sessionService.setParticipant(governedParticipant);
+        governedParticipant && this.sessionService.setParticipant(governedParticipant);
       }),
-      mergeMap(() => this.__workflowService.fromParticipantList()),
-      tap(() => {
-        const parent = this.answers.find((participant: any) => participant.stableId === this.CHILD_DIAGNOSED);
-        parent ? this.__sessionService.setParticipant(this.operatorUserTemp) : this.__workflowService.getNext();
+      mergeMap(() => this.workflowService.fromParticipantList()),
+      map(() => {
+        const parent = this.answers.find((participant: any) => participant.stableId === this.SELF_DIAGNOSED);
+        return parent
+          ? this.sessionService.setParticipant(this.operatorUserTemp)
+          : this.workflowService
+              .getNext()
+              .subscribe((response) => response && this.workflowBuilder.getCommand(response).execute());
       }),
       take(1)
     );
@@ -94,7 +79,7 @@ export class LandingPageComponent extends LoginLandingRedesignedComponent implem
 
   private loadParticipants(): Observable<Participant[]> {
     return this.governedParticipantsAgent
-      .getGovernedStudyParticipants(this.__toolkitConfiguration.studyGuid)
+      .getGovernedStudyParticipants(this.toolkitConfiguration.studyGuid)
       .pipe(take(1));
   }
 }
