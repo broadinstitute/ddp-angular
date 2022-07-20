@@ -19,9 +19,7 @@ import { GovernedUserService } from '../../services/governed-user.service';
 
 @Component({
   selector: 'app-landing-page',
-  template:  `
-    <toolkit-common-landing-redesigned></toolkit-common-landing-redesigned>
-  `,
+  template: ` <toolkit-common-landing-redesigned></toolkit-common-landing-redesigned> `,
   styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent extends LoginLandingRedesignedComponent implements OnInit {
@@ -30,6 +28,8 @@ export class LandingPageComponent extends LoginLandingRedesignedComponent implem
 
   private readonly SELF_DESCRIBE_STABLE_ID = 'WHO_ENROLLING';
   private readonly GOVERNED_USER_ANSWERS_STABLE_ID = 'DIAGNOSED';
+  private readonly CHILD_DIAGNOSED = 'CHILD_DIAGNOSED';
+  private answers: [];
 
   constructor(
     private __router: Router,
@@ -66,10 +66,13 @@ export class LandingPageComponent extends LoginLandingRedesignedComponent implem
 
   private load(): Observable<any> {
     return this.governedUserService.checkIfGoverned.pipe(
+      tap((answers) => {
+        this.answers = answers;
+      }),
       withLatestFrom(this.loadParticipants()),
-      mergeMap(([isGoverned, participants]) =>
+      mergeMap(([answers, participants]) =>
         iif(
-          () => !participants.length && isGoverned,
+          () => !participants.length && answers.find(({ stableId }) => stableId === this.CHILD_DIAGNOSED),
           this.governedParticipantsAgent.addParticipant(this.__config.studyGuid),
           of(false)
         )
@@ -78,28 +81,15 @@ export class LandingPageComponent extends LoginLandingRedesignedComponent implem
       tap((governedParticipant: any) => {
         this.operatorUserTemp = this.__sessionService.session.userGuid;
         this.governedUserTemp = governedParticipant;
-        governedParticipant && this.__sessionService.setParticipant(governedParticipant);
       }),
-      mergeMap((data) => data && this.__workflowService.fromParticipantList()),
-      tap(() => {
-        this.__sessionService.setParticipant(this.operatorUserTemp);
-      }),
-      mergeMap(() => this.prequalService.getPrequalifier(this.__config.studyGuid)),
-      mergeMap((instanceGuid) => this.activityService.getActivity(of(this.__config.studyGuid), of(instanceGuid))),
-      pluck('sections'),
-      map((sections) => sections[0]),
-      pluck('blocks'),
-      map((blocks) =>
-        blocks.find((block) => (block as ActivityPicklistQuestionBlock).stableId === this.SELF_DESCRIBE_STABLE_ID)
-      ),
-      pluck('answer'),
-      map((answers) => answers.find(({ stableId }) => stableId === this.GOVERNED_USER_ANSWERS_STABLE_ID)),
-      tap((participant: any) => {
-        if (participant) {
+      map(() => {
+        const parent = this.answers.find((participant: any) => participant.stableId === this.CHILD_DIAGNOSED);
+        if (parent) {
           this.__sessionService.setParticipant(this.operatorUserTemp);
-        } else {
-          this.__sessionService.setParticipant(this.governedUserTemp);
+          return false;
         }
+        this.__sessionService.setParticipant(this.governedUserTemp);
+        return true;
       }),
       mergeMap((data) => (data ? this.__workflowService.getNext() : this.__workflowService.fromParticipantList())),
       take(1)

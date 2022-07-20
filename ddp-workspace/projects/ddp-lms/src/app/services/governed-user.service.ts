@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { filter, map, mergeMap, pluck, take } from 'rxjs/operators';
+import { filter, map, mergeMap, pluck, take, tap } from 'rxjs/operators';
 
 import {
   ActivityPicklistQuestionBlock,
@@ -17,7 +17,6 @@ import {
 export class GovernedUserService {
 
   private readonly WHO_ENROLLING = 'WHO_ENROLLING';
-  private readonly CHILD_DIAGNOSED = 'CHILD_DIAGNOSED';
 
   constructor(
     private router: Router,
@@ -27,7 +26,7 @@ export class GovernedUserService {
     @Inject('ddp.config') private config: ConfigurationService
   ) {}
 
-  public get checkIfGoverned(): Observable<boolean> {
+  public get checkIfGoverned(): Observable<[]> {
     return this.sessionService.sessionObservable.pipe(
       filter((session) => !!session && this.sessionService.isAuthenticatedSession()),
       mergeMap(() => this.prequalService.getPrequalifier(this.config.studyGuid)),
@@ -39,9 +38,8 @@ export class GovernedUserService {
         blocks.find((block) => (block as ActivityPicklistQuestionBlock).stableId === this.WHO_ENROLLING)
       ),
       pluck('answer'),
-      map((answers: any) => answers.find(({ stableId }) => stableId === this.CHILD_DIAGNOSED)),
-      map((isGoverned: object | undefined) => isGoverned),
+      tap((d) => console.log('[MY DATA]', d)),
       take(1),
-    ) as Observable<boolean>;
+    ) as Observable<[]>;
   }
 }
