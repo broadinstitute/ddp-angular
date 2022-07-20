@@ -87,8 +87,8 @@
       margin-top: 5px;
       color: black;
       font-family: 'Spartan-Bold', sans-serif;
-      margin-right: 9.5rem;
-      width: 6rem;
+      width: 20rem;
+      white-space: nowrap;
   }
 
   &__expand-btn {
@@ -249,37 +249,31 @@
     }
 
     @media screen and (max-width: 1280px) {
-        .participant__name {
-            margin-right: 9rem;
-        }
-
         .enrollmentStatusIcon {
             width: 20px;
         }
     }
 
-    @media screen and (max-width: 1100px) {
+    @media screen and (max-width: 990px) {
         .participant__name {
-            margin-right: 7.8rem;
+            width: 19rem;
         }
 
     }
-    @media screen and (max-width: 910px) {
+
+    @media screen and (max-width: 880px) {
         .participant__name {
-            margin-right: 6rem;
+            width: 17rem;
         }
 
     }
+
     @media screen and (max-width: 750px) {
-        .participant__name {
-            margin-right: 5rem;
-        }
-
         .enrollmentStatusIcon {
             width: 20px;
         }
     }
-    @media screen and (max-width: 690px) {
+    @media screen and (max-width: 680px) {
         .participant__header {
             flex-wrap: wrap;
         }
