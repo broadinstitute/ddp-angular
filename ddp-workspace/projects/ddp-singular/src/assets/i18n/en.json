@@ -566,6 +566,12 @@
       "Disagree": "I am not ready to agree"
     }
   },
+    "ParticipantStatus": {
+        "status": {
+            "inComplete":"Enrollment in Progress",
+            "complete": "Fully Enrolled"
+        }
+    },
   "About": {
     "About": {
       "Title": "About Us",

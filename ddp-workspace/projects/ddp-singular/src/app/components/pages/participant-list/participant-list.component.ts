@@ -21,6 +21,7 @@ import {
   UserProfileServiceAgent,
 } from 'ddp-sdk';
 import { ActivityCode } from '../../../constants/activity-code';
+import {COMPLETE, IN_PROGRESS} from "../../../../../../ddp-atcp/src/app/components/workflow-progress/workflow-progress";
 
 interface Participant {
   firstName: string;
@@ -74,6 +75,11 @@ export class ParticipantsListComponent implements OnInit {
 
     return `${firstName} ${lastName}`;
   }
+
+    getParticipantStatus({ activities }: Participant): string {
+        return activities.filter(act => act.statusCode !== COMPLETE).length > 0 ? IN_PROGRESS : COMPLETE;
+    }
+
 
   isParticipantContentExpanded({ guid }: Participant): boolean {
     return !!this.expandedMap[guid];
