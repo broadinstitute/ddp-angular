@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 import { Router } from '@angular/router';
 import {
+  ActivityResponse,
   Auth0AdapterService,
   ConfigurationService,
   GovernedParticipantsServiceAgent,
@@ -65,17 +66,21 @@ export class LandingPageComponent implements OnInit {
         governedParticipant && this.sessionService.setParticipant(governedParticipant);
       }),
       mergeMap(() => this.workflowService.fromParticipantList()),
-      map(() => {
+      mergeMap(() => {
         const parent = this.answers.find((participant: any) => participant.stableId === this.SELF_DIAGNOSED);
-        return parent
-          ? this.sessionService.setParticipant(this.operatorUserTemp)
-          : this.workflowService
-              .getNext()
-              .subscribe((response) => response && this.workflowBuilder.getCommand(response).execute());
+        if(parent) {
+          this.sessionService.setParticipant(this.operatorUserTemp)
+          return of(false)
+        }
+        return this.workflowService.getNext()
       }),
+      filter(isActivityResponse => !!isActivityResponse),
+      tap((returnedValue: ActivityResponse) => this.workflowBuilder.getCommand(returnedValue).execute()),
       take(1)
     );
   }
+
+  // (response) => response && this.workflowBuilder.getCommand(response).execute()
 
   private loadParticipants(): Observable<Participant[]> {
     return this.governedParticipantsAgent
