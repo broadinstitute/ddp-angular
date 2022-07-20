@@ -12,8 +12,9 @@ import {
   WorkflowServiceAgent,
 } from 'ddp-sdk';
 import { filter, finalize, mergeMap, take, tap, withLatestFrom } from 'rxjs/operators';
-import { iif, Observable, of } from 'rxjs';
+import {iif, map, Observable, of} from 'rxjs';
 import { GovernedUserService } from '../../services/governed-user.service';
+import {add} from "ngx-bootstrap/chronos";
 
 @Component({
   selector: 'app-landing-page',
@@ -52,16 +53,19 @@ export class LandingPageComponent implements OnInit {
       tap((answers) => {
         this.answers = answers;
       }),
-      mergeMap(() => this.workflowService.getNext()),
-      tap((activityResponse: ActivityResponse) => this.activityResponse = activityResponse),
       withLatestFrom(this.loadParticipants()),
-      mergeMap(([_, participants]) =>
+      mergeMap(([answers, participants]) =>
         iif(
-          () => !participants.length && this.answers.find(({ stableId }) => stableId === this.CHILD_DIAGNOSED),
+          () => !participants.length && answers.find(({ stableId }) => stableId === this.CHILD_DIAGNOSED),
           this.governedParticipantsAgent.addParticipant(this.config.studyGuid),
           of(false)
         )
       ),
+      withLatestFrom(this.workflowService.getNext()),
+      map(([addedParticipant, activityResponse]) => {
+        this.activityResponse = activityResponse;
+        return addedParticipant;
+      }),
       filter((addedParticipant) => !!addedParticipant),
       tap((governedParticipant: any) => {
         this.operatorUserTemp = this.sessionService.session.userGuid;
