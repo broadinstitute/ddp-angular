@@ -45,7 +45,6 @@ export class LandingPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.load().subscribe();
-    this.workflowService.getNext().subscribe((response) => this.workflowBuilder.getCommand(response).execute());
   }
 
   private load(): Observable<any> {
