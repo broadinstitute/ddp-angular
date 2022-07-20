@@ -25,8 +25,9 @@ import { GovernedUserService } from '../../services/governed-user.service';
   styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent extends LoginLandingRedesignedComponent implements OnInit {
-  private operatorUser: string;
-  private governedUser: string;
+  private operatorUserTemp: string;
+  private governedUserTemp: string;
+
   private readonly SELF_DESCRIBE_STABLE_ID = 'WHO_ENROLLING';
   private readonly GOVERNED_USER_ANSWERS_STABLE_ID = 'DIAGNOSED';
 
@@ -60,15 +61,12 @@ export class LandingPageComponent extends LoginLandingRedesignedComponent implem
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.governedUserService.checkIfGoverned().subscribe();
     this.load().subscribe();
   }
 
   private load(): Observable<any> {
-    return this.governedUserService.isGoverned$.pipe(
-      take(1),
+    return this.governedUserService.checkIfGoverned.pipe(
       withLatestFrom(this.loadParticipants()),
-      tap((d) => console.log('my data', d)),
       mergeMap(([isGoverned, participants]) =>
         iif(
           () => !participants.length && isGoverned,
@@ -77,16 +75,16 @@ export class LandingPageComponent extends LoginLandingRedesignedComponent implem
         )
       ),
       filter((addedParticipant) => !!addedParticipant),
-      tap((participant: any) => {
-        this.operatorUser = this.__sessionService.session.userGuid;
-        this.governedUser = participant;
-        participant && this.__sessionService.setParticipant(participant);
+      tap((governedParticipant: any) => {
+        this.operatorUserTemp = this.__sessionService.session.userGuid;
+        this.governedUserTemp = governedParticipant;
+        governedParticipant && this.__sessionService.setParticipant(governedParticipant);
       }),
       mergeMap((data) => data && this.__workflowService.fromParticipantList()),
       tap(() => {
-        this.__sessionService.setParticipant(this.operatorUser);
+        this.__sessionService.setParticipant(this.operatorUserTemp);
       }),
-      mergeMap((d) => this.prequalService.getPrequalifier(this.__config.studyGuid)),
+      mergeMap(() => this.prequalService.getPrequalifier(this.__config.studyGuid)),
       mergeMap((instanceGuid) => this.activityService.getActivity(of(this.__config.studyGuid), of(instanceGuid))),
       pluck('sections'),
       map((sections) => sections[0]),
@@ -98,12 +96,13 @@ export class LandingPageComponent extends LoginLandingRedesignedComponent implem
       map((answers) => answers.find(({ stableId }) => stableId === this.GOVERNED_USER_ANSWERS_STABLE_ID)),
       tap((participant: any) => {
         if (participant) {
-          this.__sessionService.setParticipant(this.operatorUser);
+          this.__sessionService.setParticipant(this.operatorUserTemp);
         } else {
-          this.__sessionService.setParticipant(this.governedUser);
+          this.__sessionService.setParticipant(this.governedUserTemp);
         }
       }),
-      mergeMap((data) => (data ? this.__workflowService.getNext() : this.__workflowService.fromParticipantList()))
+      mergeMap((data) => (data ? this.__workflowService.getNext() : this.__workflowService.fromParticipantList())),
+      take(1)
     );
   }
 
