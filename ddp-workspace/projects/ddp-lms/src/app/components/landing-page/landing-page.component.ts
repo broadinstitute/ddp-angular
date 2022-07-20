@@ -81,17 +81,19 @@ export class LandingPageComponent extends LoginLandingRedesignedComponent implem
       tap((governedParticipant: any) => {
         this.operatorUserTemp = this.__sessionService.session.userGuid;
         this.governedUserTemp = governedParticipant;
+        governedParticipant && this.__sessionService.setParticipant(governedParticipant);
       }),
+      mergeMap(() => this.__workflowService.fromParticipantList()),
       map(() => {
         const parent = this.answers.find((participant: any) => participant.stableId === this.CHILD_DIAGNOSED);
         if (parent) {
           this.__sessionService.setParticipant(this.operatorUserTemp);
+          this.__workflowService.fromParticipantList()
           return false;
         }
-        this.__sessionService.setParticipant(this.governedUserTemp);
+        this.__workflowService.getNext()
         return true;
       }),
-      mergeMap((data) => (data ? this.__workflowService.getNext() : this.__workflowService.fromParticipantList())),
       take(1)
     );
   }
