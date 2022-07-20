@@ -88,12 +88,12 @@ export class DashboardComponent extends DashboardRedesignedComponent implements 
     );
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     super.ngOnInit();
     this.loadData();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     super.ngOnDestroy();
   }
 
