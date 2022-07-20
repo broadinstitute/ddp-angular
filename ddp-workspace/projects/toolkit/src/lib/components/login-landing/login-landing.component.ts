@@ -31,12 +31,12 @@ export class LoginLandingComponent implements OnInit, OnDestroy {
     private router: Router,
     private logger: LoggingService,
     private auth0: Auth0AdapterService,
-    private sessionService: SessionMementoService,
+    protected sessionService: SessionMementoService,
     private participantService: GovernedParticipantsServiceAgent,
-    private workflowService: WorkflowServiceAgent,
+    protected workflowService: WorkflowServiceAgent,
     private workflowBuilder: WorkflowBuilderService,
-    @Inject('ddp.config') private config: ConfigurationService,
-    @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService) { }
+    @Inject('ddp.config') protected config: ConfigurationService,
+    @Inject('toolkit.toolkitConfig') protected toolkitConfiguration: ToolkitConfigurationService) { }
 
   public ngOnInit(): void {
     if (!this.config.doLocalRegistration && location.hash) {

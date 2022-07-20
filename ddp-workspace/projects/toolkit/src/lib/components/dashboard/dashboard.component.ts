@@ -4,14 +4,14 @@ import { ToolkitConfigurationService } from '../../services/toolkitConfiguration
 import { AnnouncementDashboardMessage } from '../../models/announcementDashboardMessage';
 import {
     ActivityInstance,
-    AnnouncementsServiceAgent,
+    AnnouncementsServiceAgent, Participant,
     ParticipantsSearchServiceAgent,
     SearchParticipant,
     SessionMementoService,
     UserActivityServiceAgent
 } from 'ddp-sdk';
-import { Observable, of, Subscription } from 'rxjs';
-import { filter, map, shareReplay } from 'rxjs/operators';
+import {forkJoin, Observable, of, Subscription} from 'rxjs';
+import {filter, map, mergeMap, shareReplay, take, tap} from 'rxjs/operators';
 
 @Component({
     selector: 'toolkit-dashboard',
