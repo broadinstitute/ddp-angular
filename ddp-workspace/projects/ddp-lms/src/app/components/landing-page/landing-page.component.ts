@@ -12,7 +12,7 @@ import {
   WorkflowServiceAgent,
 } from 'ddp-sdk';
 import { filter, finalize, mergeMap, take, tap, withLatestFrom } from 'rxjs/operators';
-import { iif, isObservable, map, Observable, of } from 'rxjs';
+import {defer, iif, Observable, of} from 'rxjs';
 import { GovernedUserService } from '../../services/governed-user.service';
 
 @Component({
@@ -22,12 +22,10 @@ import { GovernedUserService } from '../../services/governed-user.service';
 })
 export class LandingPageComponent implements OnInit {
   private operatorUserTemp: string;
-  private governedUserTemp: string;
 
   private readonly SELF_DIAGNOSED = 'DIAGNOSED';
   private readonly CHILD_DIAGNOSED = 'CHILD_DIAGNOSED';
   private answers: [];
-  private returnedValue: ActivityResponse;
 
   constructor(
     private router: Router,
@@ -63,24 +61,32 @@ export class LandingPageComponent implements OnInit {
       filter((addedParticipant) => !!addedParticipant),
       tap((governedParticipant: any) => {
         this.operatorUserTemp = this.sessionService.session.userGuid;
-        this.governedUserTemp = governedParticipant;
-        governedParticipant && this.sessionService.setParticipant(governedParticipant);
+        this.sessionService.setParticipant(governedParticipant);
       }),
       mergeMap(() => this.workflowService.fromParticipantList()),
       tap(() => {
         const parent = this.answers.find((participant: any) => participant.stableId === this.SELF_DIAGNOSED);
-        if (parent) {
-          this.sessionService.setParticipant(this.operatorUserTemp);
-        }
+        parent && this.sessionService.setParticipant(this.operatorUserTemp);
       }),
       take(1),
-      finalize(() => {
-        this.workflowService.getNext().pipe(take(1)).subscribe(data => this.workflowBuilder.getCommand(data).execute())
+      this.finalizeWithValue(() => {
+        console.log('final')
       })
     );
   }
 
-  // (response) => response && this.workflowBuilder.getCommand(response).execute()
+   finalizeWithValue<T>(callback: (value: T) => void) {
+    return (source: Observable<T>) =>
+      defer(() => {
+        let lastValue: T;
+        return source.pipe(
+          mergeMap(() => this.workflowService.getNext()),
+          tap((value) => this.workflowBuilder.getCommand(value).execute()),
+          finalize(() => callback(lastValue))
+        );
+      });
+  }
+
 
   private loadParticipants(): Observable<Participant[]> {
     return this.governedParticipantsAgent
