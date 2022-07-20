@@ -31,31 +31,30 @@ export class LandingPageComponent extends LoginLandingRedesignedComponent implem
   private readonly GOVERNED_USER_ANSWERS_STABLE_ID = 'DIAGNOSED';
 
   constructor(
-    router: Router,
-    logger: LoggingService,
-    auth0: Auth0AdapterService,
-    protected sessionService: SessionMementoService,
-    participantService: GovernedParticipantsServiceAgent,
-    protected workflowService: WorkflowServiceAgent,
-    workflowBuilder: WorkflowBuilderService,
-    @Inject('ddp.config') config: ConfigurationService,
-    @Inject('toolkit.toolkitConfig')
-    toolkitConfiguration: ToolkitConfigurationService,
+    private __router: Router,
+    private __logger: LoggingService,
+    private __auth0: Auth0AdapterService,
+    private __sessionService: SessionMementoService,
+    private __participantService: GovernedParticipantsServiceAgent,
+    private __workflowService: WorkflowServiceAgent,
+    private __workflowBuilder: WorkflowBuilderService,
+    @Inject('ddp.config') private __config: ConfigurationService,
+    @Inject('toolkit.toolkitConfig') private __toolkitConfiguration: ToolkitConfigurationService,
     private governedUserService: GovernedUserService,
-    protected governedParticipantsAgent: GovernedParticipantsServiceAgent,
+    private governedParticipantsAgent: GovernedParticipantsServiceAgent,
     private prequalService: PrequalifierServiceAgent,
     private activityService: ActivityServiceAgent
   ) {
     super(
-      router,
-      logger,
-      auth0,
-      sessionService,
-      participantService,
-      workflowService,
-      workflowBuilder,
-      config,
-      toolkitConfiguration
+      __router,
+      __logger,
+      __auth0,
+      __sessionService,
+      __participantService,
+      __workflowService,
+      __workflowBuilder,
+      __config,
+      __toolkitConfiguration
     );
   }
 
@@ -73,22 +72,22 @@ export class LandingPageComponent extends LoginLandingRedesignedComponent implem
       mergeMap(([isGoverned, participants]) =>
         iif(
           () => !participants.length && isGoverned,
-          this.governedParticipantsAgent.addParticipant(this.config.studyGuid),
+          this.governedParticipantsAgent.addParticipant(this.__config.studyGuid),
           of(false)
         )
       ),
       filter((addedParticipant) => !!addedParticipant),
       tap((participant: any) => {
-        this.operatorUser = this.sessionService.session.userGuid;
+        this.operatorUser = this.__sessionService.session.userGuid;
         this.governedUser = participant;
-        participant && this.sessionService.setParticipant(participant);
+        participant && this.__sessionService.setParticipant(participant);
       }),
-      mergeMap((data) => data && this.workflowService.fromParticipantList()),
+      mergeMap((data) => data && this.__workflowService.fromParticipantList()),
       tap(() => {
-        this.sessionService.setParticipant(this.operatorUser);
+        this.__sessionService.setParticipant(this.operatorUser);
       }),
-      mergeMap((d) => this.prequalService.getPrequalifier(this.config.studyGuid)),
-      mergeMap((instanceGuid) => this.activityService.getActivity(of(this.config.studyGuid), of(instanceGuid))),
+      mergeMap((d) => this.prequalService.getPrequalifier(this.__config.studyGuid)),
+      mergeMap((instanceGuid) => this.activityService.getActivity(of(this.__config.studyGuid), of(instanceGuid))),
       pluck('sections'),
       map((sections) => sections[0]),
       pluck('blocks'),
@@ -99,18 +98,18 @@ export class LandingPageComponent extends LoginLandingRedesignedComponent implem
       map((answers) => answers.find(({ stableId }) => stableId === this.GOVERNED_USER_ANSWERS_STABLE_ID)),
       tap((participant: any) => {
         if (participant) {
-          this.sessionService.setParticipant(this.operatorUser);
+          this.__sessionService.setParticipant(this.operatorUser);
         } else {
-          this.sessionService.setParticipant(this.governedUser);
+          this.__sessionService.setParticipant(this.governedUser);
         }
       }),
-      mergeMap((data) => (data ? this.workflowService.getNext() : this.workflowService.fromParticipantList()))
+      mergeMap((data) => (data ? this.__workflowService.getNext() : this.__workflowService.fromParticipantList()))
     );
   }
 
   private loadParticipants(): Observable<Participant[]> {
     return this.governedParticipantsAgent
-      .getGovernedStudyParticipants(this.toolkitConfiguration.studyGuid)
+      .getGovernedStudyParticipants(this.__toolkitConfiguration.studyGuid)
       .pipe(take(1));
   }
 }
