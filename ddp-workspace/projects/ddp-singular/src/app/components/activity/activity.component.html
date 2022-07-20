@@ -93,7 +93,7 @@
         <button
           #submitButton
           class="button button--primary pull-right"
-          [disabled]="dataEntryDisabled || (isPageBusy | async) || !isCaptchaResolved"
+          [disabled]="dataEntryDisabled || (isPageBusy | async)"
           (click)="flush()"
           (mouseenter)="mouseEnterOnSubmit()"
         >

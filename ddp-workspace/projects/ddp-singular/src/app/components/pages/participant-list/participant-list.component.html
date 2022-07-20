@@ -76,21 +76,24 @@
       class="participants-list__item"
       [class.participants-list__item--no-border-bottom]="!isParticipantContentExpanded(participant)"
     >
+
       <div class="participant">
         <div class="participant__header" role="button" (click)="onExpandClick(participant)">
+            <div class="nameAndStatus">
           <span class="participant__name">
             {{ getParticipantName(participant) }}
           </span>
 
             <div class="enrollmentStatusContainer">
                 <div class="enrollmentStatusText" *ngIf="getParticipantStatus(participant) === 'IN_PROGRESS'">
-                    {{ 'ParticipantStatus.status.inComplete' | translate}}
                     <img class="enrollmentStatusIcon" src="assets/images/alert-circle-orange-512.png">
+                    {{ 'ParticipantStatus.status.inComplete' | translate}}
                 </div>
                 <div class="enrollmentStatusText" *ngIf="getParticipantStatus(participant) === 'COMPLETE'">
-                    {{ 'ParticipantStatus.status.complete' | translate}}
                     <img class="enrollmentStatusIcon" src="/assets/images/Check.png">
+                    {{ 'ParticipantStatus.status.complete' | translate}}
                 </div>
+            </div>
             </div>
 
           <div class="participant__icon-container">
