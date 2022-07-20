@@ -79,22 +79,22 @@
 
       <div class="participant">
         <div class="participant__header" role="button" (click)="onExpandClick(participant)">
-            <div class="nameAndStatus">
+
           <span class="participant__name">
             {{ getParticipantName(participant) }}
           </span>
-
+            <div class="nameAndStatus">
             <div class="enrollmentStatusContainer">
-                <div class="enrollmentStatusText" *ngIf="getParticipantStatus(participant) === 'IN_PROGRESS'">
+                <div class="enrollmentStatusIncompleteText" *ngIf="getParticipantStatus(participant) === 'IN_PROGRESS'">
                     <img class="enrollmentStatusIcon" src="assets/images/alert-circle-orange-512.png">
                     {{ 'ParticipantStatus.status.inComplete' | translate}}
                 </div>
-                <div class="enrollmentStatusText" *ngIf="getParticipantStatus(participant) === 'COMPLETE'">
+                <div class="enrollmentStatusCompleteText" *ngIf="getParticipantStatus(participant) === 'COMPLETE'">
                     <img class="enrollmentStatusIcon" src="/assets/images/Check.png">
                     {{ 'ParticipantStatus.status.complete' | translate}}
                 </div>
             </div>
-            </div>
+
 
           <div class="participant__icon-container">
             <button
@@ -111,10 +111,11 @@
               class="participant__expand-btn"
               [class.participant__expand-btn--rotate]="isParticipantContentExpanded(participant)"
             >
-                {{ isParticipantContentExpanded(participant) ? 'Hide' : 'Show' }}
+                <div class="hideWord">{{ isParticipantContentExpanded(participant) ? 'Hide' : 'Show' }}</div>
               <mat-icon>expand_more</mat-icon>
             </button>
           </div>
+            </div>
         </div>
         <div class="participant__content" *ngIf="isParticipantContentExpanded(participant)">
           <app-activities-list

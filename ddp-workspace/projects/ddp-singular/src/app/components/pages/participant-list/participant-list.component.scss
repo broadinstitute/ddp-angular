@@ -87,7 +87,8 @@
       margin-top: 5px;
       color: black;
       font-family: 'Spartan-Bold', sans-serif;
-      margin-right: 45%;
+      margin-right: 9.5rem;
+      width: 6rem;
   }
 
   &__expand-btn {
@@ -224,11 +225,17 @@
     margin-top: 15px;
 }
 
-.enrollmentStatusText {
-    margin-top: 5px;
+.enrollmentStatusCompleteText {
     color: black;
     font-family: 'Spartan-Bold', sans-serif;
+    white-space: nowrap;
 }
+
+    .enrollmentStatusIncompleteText {
+        color: black;
+        font-family: 'Spartan-Bold', sans-serif;
+        white-space: nowrap;
+    }
 
 .enrollmentStatusIcon {
     width: 25px;
@@ -237,24 +244,52 @@
 
     .nameAndStatus {
         display: flex;
-        width: 50%;
+        justify-content: space-between;
+        width: 100%;
     }
-    @media screen and (max-width: 720px) {
-        .nameAndStatus{
-            width: 52%;
-        }
+
+    @media screen and (max-width: 1280px) {
         .participant__name {
-            margin-right: 44%;
+            margin-right: 9rem;
+        }
+
+        .enrollmentStatusIcon {
+            width: 20px;
+        }
+    }
+
+    @media screen and (max-width: 1100px) {
+        .participant__name {
+            margin-right: 7.8rem;
         }
 
     }
-    @media screen and (max-width: 690px) {
-        .nameAndStatus{
-            width: auto;
-            display: block
-        }
+    @media screen and (max-width: 910px) {
         .participant__name {
-            margin-right: auto;
+            margin-right: 6rem;
         }
+
+    }
+    @media screen and (max-width: 750px) {
+        .participant__name {
+            margin-right: 5rem;
+        }
+
+        .enrollmentStatusIcon {
+            width: 20px;
+        }
+    }
+    @media screen and (max-width: 690px) {
+        .participant__header {
+            flex-wrap: wrap;
+        }
+        .hideWord {
+            display: none;
+        }
+
+        .nameAndStatus {
+            align-items: center;
+        }
+
     }
 }
