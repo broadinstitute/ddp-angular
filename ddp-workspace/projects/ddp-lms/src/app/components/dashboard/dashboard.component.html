@@ -12,17 +12,6 @@
           </ng-container>
           <ng-template #regularDashboard><span translate>Toolkit.Dashboard.Title</span></ng-template>
         </h1>
-        <div *ngIf="toolkitConfig.useMultiParticipantDashboard">
-          <button
-            mat-stroked-button
-            class="add-participant-button button_small"
-            [disabled]="addParticipantButtonDisabled"
-            (click)="addParticipant()"
-          >
-            <mat-icon>add</mat-icon>
-            {{ 'Toolkit.Dashboard.AddParticipant' | translate }}
-          </button>
-        </div>
         <ng-container *ngIf="!toolkitConfig.useMultiParticipantDashboard && toolkitConfig.allowEditUserProfile">
           <ng-container *ngTemplateOutlet="editUserButton"></ng-container>
         </ng-container>
@@ -64,9 +53,9 @@
       <div class="content content_medium">
         <mat-accordion *ngIf="useMultiParticipantDashboard; else activitiesTable" hideToggle multi>
           <mat-expansion-panel
-            *ngFor="let participant of dashboardParticipants$ | async; first as isFirst; trackBy: trackById"
+            *ngFor="let participant of dashboardParticipants$ | async; trackBy: trackById"
             class="dashboard-panel"
-            [expanded]="isFirst"
+            [expanded]="true"
             (opened)="openParticipantPanel(participant.userGuid)"
             (closed)="closeParticipantPanel(participant.userGuid)"
           >

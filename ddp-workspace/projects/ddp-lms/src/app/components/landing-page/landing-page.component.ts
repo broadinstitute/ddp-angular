@@ -13,8 +13,8 @@ import {
   SessionMementoService,
   WorkflowServiceAgent,
 } from 'ddp-sdk';
-import {filter, isEmpty, mergeMap, pluck, take, tap, withLatestFrom} from 'rxjs/operators';
-import { BehaviorSubject, EMPTY, iif, map, Observable, of, Subject } from 'rxjs';
+import { filter, mergeMap, pluck, take, tap, withLatestFrom } from 'rxjs/operators';
+import { iif, map, Observable, of } from 'rxjs';
 import { GovernedUserService } from '../../services/governed-user.service';
 
 @Component({
@@ -75,14 +75,14 @@ export class LandingPageComponent extends LoginLandingRedesignedComponent implem
           of(false)
         )
       ),
-      filter(addedParticipant => !!addedParticipant),
+      filter((addedParticipant) => !!addedParticipant),
       tap((participant: any) => {
         this.operatorUser = this.sessionService.session.userGuid;
         this.governedUser = participant;
         participant && this.sessionService.setParticipant(participant);
       }),
       mergeMap((data) => data && this.workflowService.fromParticipantList()),
-      tap((participant: any) => {
+      tap(() => {
         this.sessionService.setParticipant(this.operatorUser);
       }),
       mergeMap((d) => this.prequalService.getPrequalifier(this.config.studyGuid)),

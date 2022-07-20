@@ -57,7 +57,6 @@ export class WorkflowStartActivityComponent implements OnInit, OnDestroy {
     }
 
     public navigate(response: ActivityResponse): void {
-        console.log('[RESPONSE]', response)
         const convertedResponse = this.convertWorkflowResponse(response);
         const sub = this.workflowBuilder.getCommand(convertedResponse).execute().subscribe(() => {
             this.resetActivityComponent();
