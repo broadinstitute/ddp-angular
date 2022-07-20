@@ -12,7 +12,7 @@ import {
   WorkflowServiceAgent,
 } from 'ddp-sdk';
 import { filter, finalize, mergeMap, take, tap, withLatestFrom } from 'rxjs/operators';
-import {defer, iif, Observable, of} from 'rxjs';
+import { iif, Observable, of } from 'rxjs';
 import { GovernedUserService } from '../../services/governed-user.service';
 
 @Component({
@@ -22,6 +22,8 @@ import { GovernedUserService } from '../../services/governed-user.service';
 })
 export class LandingPageComponent implements OnInit {
   private operatorUserTemp: string;
+
+  private activityResponse: ActivityResponse;
 
   private readonly SELF_DIAGNOSED = 'DIAGNOSED';
   private readonly CHILD_DIAGNOSED = 'CHILD_DIAGNOSED';
@@ -50,10 +52,12 @@ export class LandingPageComponent implements OnInit {
       tap((answers) => {
         this.answers = answers;
       }),
+      mergeMap(() => this.workflowService.getNext()),
+      tap((activityResponse: ActivityResponse) => this.activityResponse = activityResponse),
       withLatestFrom(this.loadParticipants()),
-      mergeMap(([answers, participants]) =>
+      mergeMap(([_, participants]) =>
         iif(
-          () => !participants.length && answers.find(({ stableId }) => stableId === this.CHILD_DIAGNOSED),
+          () => !participants.length && this.answers.find(({ stableId }) => stableId === this.CHILD_DIAGNOSED),
           this.governedParticipantsAgent.addParticipant(this.config.studyGuid),
           of(false)
         )
@@ -69,22 +73,10 @@ export class LandingPageComponent implements OnInit {
         parent && this.sessionService.setParticipant(this.operatorUserTemp);
       }),
       take(1),
-      this.finalizeWithValue(() => {
-        console.log('final')
+      finalize(() => {
+        this.workflowBuilder.getCommand(this.activityResponse).execute()
       })
     );
-  }
-
-   finalizeWithValue<T>(callback: (value: T) => void) {
-    return (source: Observable<T>) =>
-      defer(() => {
-        let lastValue: T;
-        return source.pipe(
-          mergeMap(() => this.workflowService.getNext()),
-          tap((value) => this.workflowBuilder.getCommand(value).execute()),
-          finalize(() => callback(lastValue))
-        );
-      });
   }
 
 
