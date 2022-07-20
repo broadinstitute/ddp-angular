@@ -11,7 +11,7 @@ import {
   SessionMementoService,
   WorkflowServiceAgent,
 } from 'ddp-sdk';
-import { filter, mergeMap, take, tap, withLatestFrom } from 'rxjs/operators';
+import { filter, finalize, mergeMap, take, tap, withLatestFrom } from 'rxjs/operators';
 import { iif, isObservable, map, Observable, of } from 'rxjs';
 import { GovernedUserService } from '../../services/governed-user.service';
 
@@ -27,6 +27,7 @@ export class LandingPageComponent implements OnInit {
   private readonly SELF_DIAGNOSED = 'DIAGNOSED';
   private readonly CHILD_DIAGNOSED = 'CHILD_DIAGNOSED';
   private answers: [];
+  private returnedValue: ActivityResponse;
 
   constructor(
     private router: Router,
@@ -44,6 +45,7 @@ export class LandingPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.load().subscribe();
+    this.workflowService.getNext().subscribe((response) => this.workflowBuilder.getCommand(response).execute());
   }
 
   private load(): Observable<any> {
@@ -68,15 +70,16 @@ export class LandingPageComponent implements OnInit {
       mergeMap(() => this.workflowService.fromParticipantList()),
       mergeMap(() => {
         const parent = this.answers.find((participant: any) => participant.stableId === this.SELF_DIAGNOSED);
-        if(parent) {
-          this.sessionService.setParticipant(this.operatorUserTemp)
-          return of(false)
+        if (parent) {
+          this.sessionService.setParticipant(this.operatorUserTemp);
         }
-        return this.workflowService.getNext()
+        return this.workflowService.getNext();
       }),
-      filter(isActivityResponse => !!isActivityResponse),
-      tap((returnedValue: ActivityResponse) => this.workflowBuilder.getCommand(returnedValue).execute()),
-      take(1)
+      tap((returnedValue: ActivityResponse) => (this.returnedValue = returnedValue)),
+      take(1),
+      finalize(() => {
+        this.workflowBuilder.getCommand(this.returnedValue).execute();
+      })
     );
   }
 
