@@ -12,9 +12,8 @@ import {
   WorkflowServiceAgent,
 } from 'ddp-sdk';
 import { filter, finalize, mergeMap, take, tap, withLatestFrom } from 'rxjs/operators';
-import {iif, map, Observable, of} from 'rxjs';
+import { iif, Observable, of } from 'rxjs';
 import { GovernedUserService } from '../../services/governed-user.service';
-import {add} from "ngx-bootstrap/chronos";
 
 @Component({
   selector: 'app-landing-page',
@@ -23,8 +22,6 @@ import {add} from "ngx-bootstrap/chronos";
 })
 export class LandingPageComponent implements OnInit {
   private operatorUserTemp: string;
-
-  private activityResponse: ActivityResponse;
 
   private readonly SELF_DIAGNOSED = 'DIAGNOSED';
   private readonly CHILD_DIAGNOSED = 'CHILD_DIAGNOSED';
@@ -61,11 +58,6 @@ export class LandingPageComponent implements OnInit {
           of(false)
         )
       ),
-      withLatestFrom(this.workflowService.getNext()),
-      map(([addedParticipant, activityResponse]) => {
-        this.activityResponse = activityResponse;
-        return addedParticipant;
-      }),
       filter((addedParticipant) => !!addedParticipant),
       tap((governedParticipant: any) => {
         this.operatorUserTemp = this.sessionService.session.userGuid;
@@ -78,7 +70,7 @@ export class LandingPageComponent implements OnInit {
       }),
       take(1),
       finalize(() => {
-        this.workflowBuilder.getCommand(this.activityResponse).execute()
+        this.workflowService.getNext().pipe(take(1)).subscribe(data => this.workflowBuilder.getCommand(data).execute())
       })
     );
   }
