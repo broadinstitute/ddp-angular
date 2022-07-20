@@ -21,7 +21,7 @@ import {
   UserProfileServiceAgent,
 } from 'ddp-sdk';
 import { ActivityCode } from '../../../constants/activity-code';
-import {COMPLETE, IN_PROGRESS} from "../../../../../../ddp-atcp/src/app/components/workflow-progress/workflow-progress";
+import {COMPLETE, IN_PROGRESS} from '../../../../../../ddp-atcp/src/app/components/workflow-progress/workflow-progress';
 
 interface Participant {
   firstName: string;
