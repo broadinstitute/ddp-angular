@@ -17,8 +17,8 @@ import {
 export class GovernedUserService {
   isGoverned$ = new Subject<boolean>();
 
-  private readonly SELF_DESCRIBE_STABLE_ID = 'WHO_ENROLLING';
-  private readonly GOVERNED_USER_ANSWERS_STABLE_ID = 'CHILD_DIAGNOSED';
+  private readonly WHO_ENROLLING = 'WHO_ENROLLING';
+  private readonly CHILD_DIAGNOSED = 'CHILD_DIAGNOSED';
 
   constructor(
     private router: Router,
@@ -28,25 +28,21 @@ export class GovernedUserService {
     @Inject('ddp.config') private config: ConfigurationService
   ) {}
 
-  get isGoverned(): Observable<boolean> {
-    return this.isGoverned$;
-  }
-
   checkIfGoverned(): Observable<boolean> {
     return this.sessionService.sessionObservable.pipe(
       filter((session) => !!session && this.sessionService.isAuthenticatedSession()),
       take(1),
-      mergeMap((d) => this.prequalService.getPrequalifier(this.config.studyGuid)),
+      mergeMap(() => this.prequalService.getPrequalifier(this.config.studyGuid)),
       take(1),
       mergeMap((instanceGuid) => this.activityService.getActivity(of(this.config.studyGuid), of(instanceGuid))),
       pluck('sections'),
       map((sections) => sections[0]),
       pluck('blocks'),
       map((blocks) =>
-        blocks.find((block) => (block as ActivityPicklistQuestionBlock).stableId === this.SELF_DESCRIBE_STABLE_ID)
+        blocks.find((block) => (block as ActivityPicklistQuestionBlock).stableId === this.WHO_ENROLLING)
       ),
       pluck('answer'),
-      map((answers) => answers.find(({ stableId }) => stableId === this.GOVERNED_USER_ANSWERS_STABLE_ID)),
+      map((answers) => answers.find(({ stableId }) => stableId === this.CHILD_DIAGNOSED)),
       map((isGoverned: boolean) => {
         console.log('[isGOVERNED]', isGoverned);
         this.isGoverned$.next(isGoverned);
