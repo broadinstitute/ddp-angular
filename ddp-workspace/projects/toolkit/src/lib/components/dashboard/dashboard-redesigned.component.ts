@@ -162,23 +162,23 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
     public addParticipantButtonDisabled = false;
     private ngUnsubscribe = new Subject<void>();
 
-    constructor(
-        protected headerConfig: HeaderConfigurationService,
+    constructor (
+        private headerConfig: HeaderConfigurationService,
         protected session: SessionMementoService,
         protected router: Router,
-        protected _announcements: AnnouncementsServiceAgent,
-        protected userInvitation: UserInvitationServiceAgent,
+        private _announcements: AnnouncementsServiceAgent,
+        private userInvitation: UserInvitationServiceAgent,
         _participantsSearch: ParticipantsSearchServiceAgent,
-        protected governedParticipantsAgent: GovernedParticipantsServiceAgent,
+        private governedParticipantsAgent: GovernedParticipantsServiceAgent,
         protected userActivityServiceAgent: UserActivityServiceAgent,
-        protected userProfileService: UserProfileServiceAgent,
-        protected translate: TranslateService,
-        protected workflowService: WorkflowServiceAgent,
-        protected userManagementService: UserManagementServiceAgent,
-        protected logger: LoggingService,
+        private userProfileService: UserProfileServiceAgent,
+        private translate: TranslateService,
+        private workflowService: WorkflowServiceAgent,
+        private userManagementService: UserManagementServiceAgent,
+        private logger: LoggingService,
         public dialog: MatDialog,
         @Inject('toolkit.toolkitConfig') public toolkitConfig: ToolkitConfigurationService) {
-        super(router, _announcements, _participantsSearch, session, userActivityServiceAgent, toolkitConfig);
+            super(router, _announcements, _participantsSearch, session, userActivityServiceAgent, toolkitConfig)
     }
 
     public ngOnInit(): void {
