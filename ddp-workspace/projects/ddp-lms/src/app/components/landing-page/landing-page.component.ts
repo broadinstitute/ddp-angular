@@ -68,17 +68,15 @@ export class LandingPageComponent implements OnInit {
         governedParticipant && this.sessionService.setParticipant(governedParticipant);
       }),
       mergeMap(() => this.workflowService.fromParticipantList()),
-      mergeMap(() => {
+      tap(() => {
         const parent = this.answers.find((participant: any) => participant.stableId === this.SELF_DIAGNOSED);
         if (parent) {
           this.sessionService.setParticipant(this.operatorUserTemp);
         }
-        return this.workflowService.getNext();
       }),
-      tap((returnedValue: ActivityResponse) => (this.returnedValue = returnedValue)),
       take(1),
       finalize(() => {
-        this.workflowBuilder.getCommand(this.returnedValue).execute();
+        this.workflowService.getNext().pipe(take(1)).subscribe(data => this.workflowBuilder.getCommand(data).execute())
       })
     );
   }
