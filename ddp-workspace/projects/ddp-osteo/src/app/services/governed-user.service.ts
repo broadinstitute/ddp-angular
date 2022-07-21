@@ -29,7 +29,6 @@ export class GovernedUserService {
   public get checkIfGoverned(): Observable<[]> {
     return this.sessionService.sessionObservable.pipe(
         tap((data) => {
-            debugger;
             console.log(data);
         }),
         filter(

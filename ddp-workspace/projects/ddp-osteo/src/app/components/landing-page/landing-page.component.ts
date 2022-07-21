@@ -41,7 +41,6 @@ export class LandingPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-      debugger;
     this.load().subscribe();
   }
 
