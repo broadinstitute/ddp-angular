@@ -62,6 +62,7 @@ export class LandingPageComponent implements OnInit {
       tap((answers) => {
         this.answers = answers;
       }),
+      filter((answers) => !!answers),
       withLatestFrom(this.loadParticipants()),
       mergeMap(([answers, participants]) =>
         iif(
@@ -82,7 +83,6 @@ export class LandingPageComponent implements OnInit {
       }),
       take(1),
       finalize(() => {
-        console.log('[FINALIZE]');
         this.workflowService
           .getNext()
           .pipe(take(1))
