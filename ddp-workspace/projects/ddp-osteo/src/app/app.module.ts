@@ -44,6 +44,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
 import { MatTableModule } from '@angular/material/table';
 import { FaqSectionComponent } from './components/faq-section/faq-section.component';
+import {WorkflowStartComponent} from './components/workflow-start/workflow-start.component';
+import {LandingPageComponent} from './components/landing-page/landing-page.component';
 
 
 const baseElt = document.getElementsByTagName('base');
@@ -169,16 +171,15 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ScientificImpactComponent,
     HeaderComponent,
     WorkflowProgressComponent,
-
     ParticipationComponent,
     PhysiciansComponent,
-
     ActivityComponent,
     ActivityPageComponent,
     DashboardComponent,
     UserActivitiesComponent,
-    FaqSectionComponent
-
+    FaqSectionComponent,
+    WorkflowStartComponent,
+    LandingPageComponent
   ],
   providers: [
     {
