@@ -20,6 +20,7 @@ import { GovernedUserService } from '../../services/governed-user.service';
 })
 export class LandingPageComponent implements OnInit {
   private operatorUserTemp: string;
+  private readonly LOG_SOURCE = 'LoginLandingComponent';
 
   private readonly SELF_DIAGNOSED = 'DIAGNOSED';
   private readonly CHILD_DIAGNOSED = 'CHILD_DIAGNOSED';
@@ -40,7 +41,18 @@ export class LandingPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (!this.config.doLocalRegistration && location.hash) {
+      this.auth0.handleAuthentication(this.handleAuthError.bind(this));
+    }
+
     this.load().subscribe();
+  }
+
+  protected handleAuthError(error: any | null): void {
+    if (error) {
+      this.logger.logError(this.LOG_SOURCE, error);
+    }
+    this.router.navigateByUrl(this.toolkitConfiguration.errorUrl);
   }
 
   private load(): Observable<any> {
