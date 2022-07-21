@@ -212,11 +212,10 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
                         // delay needed for validationRequested to be processed
                         delay(0),
                         tap(() => {
+                            this.validationRequested = false;
                             this.sendSectionAnalytics();
                             if (this.currentSection.valid) {
                                 // reset scrolling signal and disable a local validation
-                                this.validationRequested = false;
-
                                 this.visitedSectionIndexes[nextIndex] = true;
                                 this.saveLastVisitedSectionIndex(nextIndex);
                                 this.currentSectionIndex = nextIndex;
