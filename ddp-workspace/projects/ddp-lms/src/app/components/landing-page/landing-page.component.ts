@@ -49,7 +49,7 @@ export class LandingPageComponent implements OnInit {
 
     setTimeout(() => {
       this.load().subscribe();
-    }, 5000)
+    }, 5000);
   }
 
   protected handleAuthError(error: any | null): void {
