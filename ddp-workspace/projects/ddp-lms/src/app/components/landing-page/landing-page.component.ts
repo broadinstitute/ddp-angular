@@ -41,9 +41,7 @@ export class LandingPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('[DEV ENV] 1', !this.config.doLocalRegistration, location.hash, );
     if (!this.config.doLocalRegistration && location.hash) {
-      console.log('[DEV ENV] 2');
       this.auth0.handleAuthentication(this.handleAuthError.bind(this));
     }
 
@@ -66,14 +64,11 @@ export class LandingPageComponent implements OnInit {
       }),
       withLatestFrom(this.loadParticipants()),
       mergeMap(([answers, participants]) =>
-        {
-          console.log(answers, participants, '[CHECKING IF PARTICIPANTS]');
-          return iif(
+        iif(
             () => !participants.length && answers.find(({ stableId }) => stableId === this.CHILD_DIAGNOSED),
             this.governedParticipantsAgent.addParticipant(this.config.studyGuid),
             of(false)
-          );
-        }
+          )
       ),
       filter((addedParticipant) => !!addedParticipant),
       tap((governedParticipant: any) => {
@@ -96,10 +91,7 @@ export class LandingPageComponent implements OnInit {
     );
   }
 
-  num = 0;
-
   private loadParticipants(): Observable<Participant[]> {
-    console.log('chekc num', ++this.num);
     return this.governedParticipantsAgent
       .getGovernedStudyParticipants(this.toolkitConfiguration.studyGuid)
       .pipe(take(1));

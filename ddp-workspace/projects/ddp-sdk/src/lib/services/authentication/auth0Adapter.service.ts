@@ -190,6 +190,7 @@ export class Auth0AdapterService implements OnDestroy {
         this.webAuth.parseHash((err, authResult) => {
             if (authResult && authResult.accessToken && authResult.idToken) {
                 this.windowRef.nativeWindow.location.hash = '';
+                console.log(authResult, 'AUTH RESULT')
                 this.setSession(authResult);
                 this.log.logEvent(`${this.LOG_SOURCE}.handleAuthentication succeeded`);
                 this.log.logToCloud(`${this.LOG_SOURCE}.handleAuthentication, authResult: ${JSON.stringify(authResult)}`)
