@@ -70,7 +70,7 @@ export class LandingPageComponent implements OnInit {
       }),
       take(1),
       finalize(() => {
-        this.workflowService.getNext().pipe(take(1)).subscribe(data => this.workflowBuilder.getCommand(data).execute())
+        this.workflowService.getNext().pipe(take(1)).subscribe(data => this.workflowBuilder.getCommand(data).execute());
       })
     );
   }

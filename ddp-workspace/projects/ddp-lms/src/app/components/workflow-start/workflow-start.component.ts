@@ -54,7 +54,7 @@ export class WorkflowStartComponent extends WorkflowStartActivityRedesignedCompo
     if(!('allowUnauthenticated' in response)){
       response.allowUnauthenticated = false;
     }
-    super.navigate(response)
+    super.navigate(response);
   }
 
 }
