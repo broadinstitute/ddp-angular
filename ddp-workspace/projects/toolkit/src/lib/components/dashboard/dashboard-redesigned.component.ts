@@ -304,7 +304,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
             catchError(() => {
             this.logger.logDebug(this.LOG_SOURCE, 'Temp delete failed. This is OK.');
             return of(null);
-            }));
+        }));
     }
 
     public getUserActivitiesForParticipant(participantGuid: string): Observable<Array<ActivityInstance>> {
