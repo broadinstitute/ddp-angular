@@ -62,6 +62,7 @@ export class LandingPageComponent implements OnInit {
       tap((answers) => {
         this.answers = answers;
       }),
+      filter((answers) => !!answers),
       withLatestFrom(this.loadParticipants()),
       mergeMap(([answers, participants]) =>
         iif(
