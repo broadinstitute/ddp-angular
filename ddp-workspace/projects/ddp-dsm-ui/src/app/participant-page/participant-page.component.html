@@ -900,7 +900,7 @@ participant.data.dsm['diagnosisYear'] != null">
             </tab>
 
             <tab
-              *ngIf="participant.data.files.length > 0 || participant.data.files !== undefined || participant.data.files !== null"
+              *ngIf="participant.data.files"
               heading="Participant Uploaded Files">
               <ng-container *ngFor="let file of participant.data.files">
                 <ng-container>

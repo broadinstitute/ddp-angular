@@ -55,7 +55,7 @@ export class Data {
     }
     return new Data(
       json.profile, json.status, json.statusTimestamp, json.dsm,
-      json.ddp, medicalProviders, this.activities(json.activities), json.address, json.invitations, json.computed
+      json.ddp, medicalProviders, this.activities( json.activities ), json.address, json.invitations, json.computed, json.files
     );
   }
 
