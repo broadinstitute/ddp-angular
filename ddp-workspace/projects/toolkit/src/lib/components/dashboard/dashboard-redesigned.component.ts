@@ -302,8 +302,8 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
     private deleteUser(userGuid: string): Observable<void> {
         return this.userManagementService.deleteUser(userGuid).pipe(
             catchError(() => {
-                this.logger.logDebug(this.LOG_SOURCE, 'Temp delete failed. This is OK.');
-                return of(null);
+            this.logger.logDebug(this.LOG_SOURCE, 'Temp delete failed. This is OK.');
+            return of(null);
             }));
     }
 
