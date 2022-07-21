@@ -38,7 +38,6 @@ export class GovernedUserService {
         blocks.find((block) => (block as ActivityPicklistQuestionBlock).stableId === this.WHO_ENROLLING)
       ),
       pluck('answer'),
-      tap((d) => console.log('[MY DATA]', d)),
       take(1),
     ) as Observable<[]>;
   }
