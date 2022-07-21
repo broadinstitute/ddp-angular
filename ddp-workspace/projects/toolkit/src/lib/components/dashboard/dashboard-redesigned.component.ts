@@ -162,7 +162,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
     public addParticipantButtonDisabled = false;
     private ngUnsubscribe = new Subject<void>();
 
-    constructor (
+    constructor(
         private headerConfig: HeaderConfigurationService,
         protected session: SessionMementoService,
         protected router: Router,
@@ -178,7 +178,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
         private logger: LoggingService,
         public dialog: MatDialog,
         @Inject('toolkit.toolkitConfig') public toolkitConfig: ToolkitConfigurationService) {
-            super(router, _announcements, _participantsSearch, session, userActivityServiceAgent, toolkitConfig)
+        super(router, _announcements, _participantsSearch, session, userActivityServiceAgent, toolkitConfig);
     }
 
     public ngOnInit(): void {
@@ -302,9 +302,9 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
     private deleteUser(userGuid: string): Observable<void> {
         return this.userManagementService.deleteUser(userGuid).pipe(
             catchError(() => {
-            this.logger.logDebug(this.LOG_SOURCE, 'Temp delete failed. This is OK.');
-            return of(null);
-        }));
+                this.logger.logDebug(this.LOG_SOURCE, 'Temp delete failed. This is OK.');
+                return of(null);
+            }));
     }
 
     public getUserActivitiesForParticipant(participantGuid: string): Observable<Array<ActivityInstance>> {
