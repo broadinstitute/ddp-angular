@@ -83,7 +83,6 @@ export class LandingPageComponent implements OnInit {
       }),
       take(1),
       finalize(() => {
-        console.log('[FINALIZE]');
         this.workflowService
           .getNext()
           .pipe(take(1))
