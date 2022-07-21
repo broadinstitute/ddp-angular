@@ -29,6 +29,7 @@ import { ParticipantUpdateResultDialogComponent } from '../dialogs/participant-u
 import { AddFamilyMemberComponent } from '../popups/add-family-member/add-family-member.component';
 import { Sample } from '../participant-list/models/sample.model';
 import { ParticipantDSMInformation } from '../participant-list/models/participant.model';
+import {File} from '../participant-list/models/file.model';
 
 const fileSaver = require('file-saver');
 
@@ -430,6 +431,41 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         this.addEmptyOncHistoryRow();
       }
     }
+  }
+
+  saveParticipantFile( data: any, type: string, fileName: string ): void {
+    const blob = new Blob( [ data ], {type: type} );
+    const url = window.URL.createObjectURL( blob );
+    window.open( url );
+
+    const shortId = this.participant.data.profile[ 'hruid' ];
+
+    fileSaver.saveAs( blob, shortId + fileName );
+  }
+
+  downloadParticipantFile( file: File ): void {
+    if (file.scanResult !== 'CLEAN') {
+      return;
+    }
+    console.log( 'download ' + file.fileName );
+    console.log( 'download ' + file.bucket );
+    console.log( 'download ' + file.blobName );
+    console.log( 'download ' + file.scanResult );
+    console.log( 'download ' + file.fileName );
+    console.log( 'download ' + file.mimeType );
+    const realm = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
+    this.dsmService.downloadParticipantFile( file.fileName, file.bucket, file.blobName, realm, file.mimeType ).subscribe(
+      data => {
+        console.log( data );
+        this.saveParticipantFile( data, file.mimeType, file.fileName );
+        this.downloading = false;
+        this.message = 'Download finished.';
+      },
+      err => {
+        console.log( err );
+        this.openResultDialog( 'Error - Failed to download file' );
+      }
+    );
   }
 
   addEmptyOncHistoryRow(): void {

@@ -4,12 +4,14 @@ import { InvitationData } from '../../invitation-data/invitation-data.model';
 import { Computed } from './computed.model';
 import { MedicalProvider } from './medical-providers.model';
 import { QuestionAnswer } from '../../activity-data/models/question-answer.model';
+import {File} from './file.model';
+
 
 export class Data {
   constructor(public profile: object, public status: string, public statusTimestamp: number,
               public dsm: object, public ddp: string, public medicalProviders: Array<MedicalProvider>,
                public activities: Array<ActivityData>, public address: Address, public invitations: Array<InvitationData>,
-              public computed?: Computed
+              public computed?: Computed, public files?: Array<File>
   ) {
     this.profile = profile;
     this.status = status;
@@ -21,6 +23,7 @@ export class Data {
     this.address = address;
     this.invitations = invitations;
     this.computed = computed;
+    this.files = files
   }
 
   getMultipleDatesForActivity( activityData: ActivityData, name: string ): QuestionAnswer[] {
