@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 import { Router } from '@angular/router';
 import {
-  ActivityResponse,
   Auth0AdapterService,
   ConfigurationService,
   GovernedParticipantsServiceAgent,
@@ -18,7 +17,6 @@ import { GovernedUserService } from '../../services/governed-user.service';
 @Component({
   selector: 'app-landing-page',
   template: ` <toolkit-common-landing-redesigned></toolkit-common-landing-redesigned> `,
-  styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent implements OnInit {
   private operatorUserTemp: string;
