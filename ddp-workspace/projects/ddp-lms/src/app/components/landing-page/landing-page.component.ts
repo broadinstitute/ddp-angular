@@ -64,11 +64,14 @@ export class LandingPageComponent implements OnInit {
       }),
       withLatestFrom(this.loadParticipants()),
       mergeMap(([answers, participants]) =>
-        iif(
-          () => !participants.length && answers.find(({ stableId }) => stableId === this.CHILD_DIAGNOSED),
-          this.governedParticipantsAgent.addParticipant(this.config.studyGuid),
-          of(false)
-        )
+        {
+          console.log(answers, participants, '[CHECKING IF PARTICIPANTS]');
+          return iif(
+            () => !participants.length && answers.find(({ stableId }) => stableId === this.CHILD_DIAGNOSED),
+            this.governedParticipantsAgent.addParticipant(this.config.studyGuid),
+            of(false)
+          );
+        }
       ),
       filter((addedParticipant) => !!addedParticipant),
       tap((governedParticipant: any) => {
@@ -82,6 +85,7 @@ export class LandingPageComponent implements OnInit {
       }),
       take(1),
       finalize(() => {
+        console.log('[FINALIZE]');
         this.workflowService
           .getNext()
           .pipe(take(1))
