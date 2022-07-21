@@ -93,7 +93,7 @@ export class LandingPageComponent implements OnInit {
   num = 0;
 
   private loadParticipants(): Observable<Participant[]> {
-    console.log('chekc num', ++this.num)
+    console.log('chekc num', ++this.num);
     return this.governedParticipantsAgent
       .getGovernedStudyParticipants(this.toolkitConfiguration.studyGuid)
       .pipe(take(1));
