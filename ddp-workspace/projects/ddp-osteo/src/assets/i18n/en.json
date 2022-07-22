@@ -816,7 +816,14 @@
     },
     "Toolkit": {
         "Dashboard": {
-            "Title": "My Dashboard"
+            "Title": "Dashboard",
+            "ParticipantsTitle": "Participant Dashboard",
+            "AddParticipant": "Add Participant",
+            "ShowPanel": "Show",
+            "HidePanel": "Hide",
+            "UserLabel": "You",
+            "ChildLabel": "Your child{{suffix}}",
+            "EditUser": "Edit profile"
         },
         "ErrorPage": {
             "Title": "We've encountered an error",
