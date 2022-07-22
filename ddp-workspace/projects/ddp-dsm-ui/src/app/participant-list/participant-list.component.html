@@ -603,7 +603,7 @@
                     <ul class="NO-PADDING-START">
                       <li class="LIST-SEPARATOR" *ngFor="let onc of pt.oncHistoryDetails">
                         <p class="BIT-OF-MARGIN"
-                           *ngIf="onc.oncHistoryDetailId != null && onc.oncHistoryDetailId !== ''">
+                           *ngIf="onc.oncHistoryDetailId != null && onc.oncHistoryDetailId !== '' && !onc.deleted">
                           <ng-container
                             *ngIf="col.type !== 'ADDITIONALVALUE' && col.type !== 'DATE' && col.type !== 'OPTIONS' && col.type !== 'CHECKBOX' && col.type !== 'BOOLEAN'">
                             {{onc[col.participantColumn.name]}}
@@ -644,9 +644,9 @@
                     <ul class="NO-PADDING-START">
                       <li class="LIST-SEPARATOR" *ngFor="let onc of pt.oncHistoryDetails">
                         <ul class="NO-PADDING-START"
-                            *ngIf="onc.oncHistoryDetailId != null && onc.oncHistoryDetailId !== ''">
+                            *ngIf="onc.oncHistoryDetailId != null && onc.oncHistoryDetailId !== '' && !onc.deleted">
                           <li class="LIST-SEPARATOR" *ngFor="let tissue of onc.tissues" (click)="openTissue(pt, onc)">
-                            <p class="BIT-OF-MARGIN" *ngIf="tissue.tissueId != null && tissue.tissueId !== ''">
+                            <p class="BIT-OF-MARGIN" *ngIf="tissue.tissueId != null && tissue.tissueId !== '' && !tissue.deleted">
                               <ng-container
                                 *ngIf="col.type !== 'ADDITIONALVALUE' && col.type !== 'DATE' && col.type !== 'OPTIONS' && col.type !== 'CHECKBOX' && col.type !== 'BOOLEAN'">
                                 <ng-container *ngIf="col.participantColumn.tableAlias === 'sm'">
@@ -913,12 +913,11 @@
         <mat-radio-group [(ngModel)]="exportFileFormat">
           File format:
           <div>
-
-            <mat-radio-button color="primary" disableRipple value="tsv">
-              <span tooltip="tab-delimited values">.tsv</span>
-            </mat-radio-button>
             <mat-radio-button color="primary" disableRipple value="xlsx">
-              <span tooltip="Microsoft Excel workbook">.xlsx</span>
+              <span tooltip="Microsoft Excel workbook">Excel (.xlsx)</span>
+            </mat-radio-button>
+            <mat-radio-button color="primary" disableRipple value="tsv">
+              <span tooltip="tab-delimited values">Tab-delimited (.tsv)</span>
             </mat-radio-button>
           </div>
         </mat-radio-group>
