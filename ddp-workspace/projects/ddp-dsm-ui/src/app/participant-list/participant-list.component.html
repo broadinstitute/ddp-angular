@@ -261,7 +261,7 @@
                         currentPage: activePage, totalItems: getPaginationParticipantListSize() }">
             <!--checkbox to assign or trigger blood kits-->
             <td>
-              <mat-checkbox color="primary" disableRipple
+              <mat-checkbox [color]="generateCheckboxColor(pt)" disableRipple
                            [checked]="pt.isSelected"
                            (change)="pt.isSelected = $event.checked; checkboxChecked(pt)"></mat-checkbox>
             </td>
@@ -603,7 +603,7 @@
                     <ul class="NO-PADDING-START">
                       <li class="LIST-SEPARATOR" *ngFor="let onc of pt.oncHistoryDetails">
                         <p class="BIT-OF-MARGIN"
-                           *ngIf="onc.oncHistoryDetailId != null && onc.oncHistoryDetailId !== ''">
+                           *ngIf="onc.oncHistoryDetailId != null && onc.oncHistoryDetailId !== '' && !onc.deleted">
                           <ng-container
                             *ngIf="col.type !== 'ADDITIONALVALUE' && col.type !== 'DATE' && col.type !== 'OPTIONS' && col.type !== 'CHECKBOX' && col.type !== 'BOOLEAN'">
                             {{onc[col.participantColumn.name]}}
@@ -644,9 +644,9 @@
                     <ul class="NO-PADDING-START">
                       <li class="LIST-SEPARATOR" *ngFor="let onc of pt.oncHistoryDetails">
                         <ul class="NO-PADDING-START"
-                            *ngIf="onc.oncHistoryDetailId != null && onc.oncHistoryDetailId !== ''">
+                            *ngIf="onc.oncHistoryDetailId != null && onc.oncHistoryDetailId !== '' && !onc.deleted">
                           <li class="LIST-SEPARATOR" *ngFor="let tissue of onc.tissues" (click)="openTissue(pt, onc)">
-                            <p class="BIT-OF-MARGIN" *ngIf="tissue.tissueId != null && tissue.tissueId !== ''">
+                            <p class="BIT-OF-MARGIN" *ngIf="tissue.tissueId != null && tissue.tissueId !== '' && !tissue.deleted">
                               <ng-container
                                 *ngIf="col.type !== 'ADDITIONALVALUE' && col.type !== 'DATE' && col.type !== 'OPTIONS' && col.type !== 'CHECKBOX' && col.type !== 'BOOLEAN'">
                                 <ng-container *ngIf="col.participantColumn.tableAlias === 'sm'">
@@ -877,7 +877,7 @@
           <tr *ngIf="hasAssignees()">
             <td [attr.colspan]="getColSpan()">
               <button mat-raised-button color="primary"
-                      (click)="openModal('assignParticipant')" [disabled]="isAssignButtonDisabled">Assign
+                      (click)="openModal('assignParticipant')" [disabled]="!isAnySelectedAssignable()">Assign
               </button>
             </td>
           </tr>
