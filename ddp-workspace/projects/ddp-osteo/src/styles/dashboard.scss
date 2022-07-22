@@ -32,16 +32,19 @@
 .infobox-text_small {
     font-size: 1rem;
     line-height: 1.5rem;
-    color: mat.get-color-from-palette($app-theme, 200);
+    color: mat.get-color-from-palette($app-theme, 900);
 }
 
 .ddp-dashboard {
-
     .mat-cell,
     .mat-header-cell,
     .dashboard-mobile-label {
         font-size: 1.125rem !important;
         line-height: 1.75rem !important;
+    }
+
+    .mat-cell:not(:last-of-type) {
+        padding-top: 0.3125rem !important;
     }
 
     .mat-column-name {
@@ -58,6 +61,7 @@
 
     .mat-row {
         align-items: flex-start !important;
+        padding: 1.2rem 0 !important;
     }
 
     .dashboard-status-container__img {
@@ -71,7 +75,7 @@
         white-space: normal;
     }
 
-    @media(max-width: 650px) {
+    @media (max-width: 650px) {
         .mat-column-actions {
             .dashboard-mobile-label {
                 line-height: 1.125rem !important;
@@ -94,4 +98,37 @@
 
 .dashboard-activity-button:hover {
     color: mat.get-color-from-palette($app-theme, 650) !important;
+}
+
+.dashboard-section {
+    margin-top: 3rem;
+
+    .dashboard-panel-header {
+        padding: 0.3rem 1.5rem;
+        $background-color: rgba(0, 0, 0, 0.04);
+
+        background-color: $background-color;
+
+        &.mat-expanded:focus,
+        &.mat-expanded:hover {
+            background-color: $background-color !important;
+        }
+
+        .dashboard-panel-title {
+            font-size: 1.375rem;
+        }
+
+        .dashboard-panel-description {
+            font-size: 1.125rem;
+        }
+    }
+
+    .dashboard-panel {
+        margin-top: 1rem;
+        box-shadow: 2px 2px 5px 1px rgb(0 0 0 / 20%) !important;
+    }
+}
+
+.main {
+    min-height: 57.4vh !important;
 }

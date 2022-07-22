@@ -16,7 +16,7 @@ import {
 })
 export class GovernedUserService {
 
-  private readonly WHO_ENROLLING = 'WHO_ENROLLING';
+  private readonly PREQUAL_SELF_DESCRIBE = 'PREQUAL_SELF_DESCRIBE';
 
   constructor(
     private router: Router,
@@ -51,7 +51,7 @@ export class GovernedUserService {
             blocks.find(
                 (block) =>
                     (block as ActivityPicklistQuestionBlock).stableId ===
-                    this.WHO_ENROLLING
+                    this.PREQUAL_SELF_DESCRIBE
             )
         ),
         pluck("answer"),
