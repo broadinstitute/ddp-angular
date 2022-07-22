@@ -63,10 +63,10 @@ export class LandingPageComponent implements OnInit {
         this.answers = answers;
       }),
       filter((answers) => !!answers),
-      withLatestFrom(this.loadParticipants()),
-      mergeMap(([answers, participants]) =>
+      mergeMap(() => this.loadParticipants()),
+      mergeMap((participants) =>
         iif(
-            () => !participants.length && answers.find(({ stableId }) => stableId === this.CHILD_DIAGNOSED),
+            () => !participants.length && this.answers.find(({ stableId }) => stableId === this.CHILD_DIAGNOSED),
             this.governedParticipantsAgent.addParticipant(this.config.studyGuid),
             of(false)
           )
