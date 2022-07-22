@@ -44,9 +44,9 @@ export class GovernedUserService {
                 of(instanceGuid)
             )
         ),
-        pluck("sections"),
+        pluck('sections'),
         map((sections) => sections[0]),
-        pluck("blocks"),
+        pluck('blocks'),
         map((blocks) =>
             blocks.find(
                 (block) =>
@@ -54,7 +54,7 @@ export class GovernedUserService {
                     this.PREQUAL_SELF_DESCRIBE
             )
         ),
-        pluck("answer"),
+        pluck('answer'),
         take(1)
     ) as Observable<[]>;
   }
