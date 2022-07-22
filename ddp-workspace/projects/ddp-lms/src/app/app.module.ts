@@ -97,7 +97,7 @@ toolkitConfig.twitterAccountId = 'count_me_in';
 toolkitConfig.facebookGroupId = 'joincountmein';
 toolkitConfig.instagramId = 'countmein';
 toolkitConfig.lightswitchInstagramWidgetId = '814feee04df55de38ec37791efea075e';
-toolkitConfig.allowEditUserProfile = false
+toolkitConfig.allowEditUserProfile = false;
 
 const translateFactory =
   (

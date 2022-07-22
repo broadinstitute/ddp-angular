@@ -20,6 +20,7 @@ import { GovernedUserService } from '../../services/governed-user.service';
 })
 export class LandingPageComponent implements OnInit {
   private operatorUserTemp: string;
+  private readonly LOG_SOURCE = 'LoginLandingComponent';
 
   private readonly SELF_DIAGNOSED = 'DIAGNOSED';
   private readonly CHILD_DIAGNOSED = 'CHILD_DIAGNOSED';
@@ -40,7 +41,18 @@ export class LandingPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (!this.config.doLocalRegistration && location.hash) {
+      this.auth0.handleAuthentication(this.handleAuthError.bind(this));
+    }
+
     this.load().subscribe();
+  }
+
+  protected handleAuthError(error: any | null): void {
+    if (error) {
+      this.logger.logError(this.LOG_SOURCE, error);
+    }
+    this.router.navigateByUrl(this.toolkitConfiguration.errorUrl);
   }
 
   private load(): Observable<any> {
@@ -48,13 +60,14 @@ export class LandingPageComponent implements OnInit {
       tap((answers) => {
         this.answers = answers;
       }),
-      withLatestFrom(this.loadParticipants()),
-      mergeMap(([answers, participants]) =>
+      filter((answers) => !!answers),
+      mergeMap(() => this.loadParticipants()),
+      mergeMap((participants) =>
         iif(
-          () => !participants.length && answers.find(({ stableId }) => stableId === this.CHILD_DIAGNOSED),
-          this.governedParticipantsAgent.addParticipant(this.config.studyGuid),
-          of(false)
-        )
+            () => !participants.length && this.answers.find(({ stableId }) => stableId === this.CHILD_DIAGNOSED),
+            this.governedParticipantsAgent.addParticipant(this.config.studyGuid),
+            of(false)
+          )
       ),
       filter((addedParticipant) => !!addedParticipant),
       tap((governedParticipant: any) => {
@@ -68,11 +81,13 @@ export class LandingPageComponent implements OnInit {
       }),
       take(1),
       finalize(() => {
-        this.workflowService.getNext().pipe(take(1)).subscribe(data => this.workflowBuilder.getCommand(data).execute())
+        this.workflowService
+          .getNext()
+          .pipe(take(1))
+          .subscribe((data) => this.workflowBuilder.getCommand(data).execute());
       })
     );
   }
-
 
   private loadParticipants(): Observable<Participant[]> {
     return this.governedParticipantsAgent
