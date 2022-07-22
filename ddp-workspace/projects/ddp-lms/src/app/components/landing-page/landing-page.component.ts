@@ -41,11 +41,19 @@ export class LandingPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const nextUrlFromStorage = sessionStorage.getItem("nextUrl");
+
     if (!this.config.doLocalRegistration && location.hash) {
       this.auth0.handleAuthentication(this.handleAuthError.bind(this));
     }
 
-    this.load().subscribe();
+    if (nextUrlFromStorage) {
+      // `nextUrl` is set before redirecting to auth0. If it exists, then pick up where we left off.
+      sessionStorage.removeItem("nextUrl");
+      this.router.navigateByUrl(nextUrlFromStorage);
+    } else {
+      this.load().subscribe();
+    }
   }
 
   protected handleAuthError(error: any | null): void {
