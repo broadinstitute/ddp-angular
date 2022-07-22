@@ -92,9 +92,9 @@ export class ParticipantListComponent implements OnInit {
   filterQuery: string = null;
   activityDefinitions = new Map();
 
-  exportFileFormat: string = 'tsv';
-  exportSplitOptions: boolean = true;
-  exportOnlyMostRecent: boolean = false;
+  exportFileFormat = 'tsv';
+  exportSplitOptions = true;
+  exportOnlyMostRecent = false;
 
   selectedColumns = {};
   prevSelectedColumns = {};
@@ -846,6 +846,7 @@ export class ParticipantListComponent implements OnInit {
 
   public selectFilter(viewFilter: ViewFilter): void {
     this.resetPagination();
+    this.resetSelectedPatients();
     this.loadingParticipants = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     this.currentView = JSON.stringify(viewFilter);
     if (viewFilter != null) {
@@ -855,6 +856,10 @@ export class ParticipantListComponent implements OnInit {
       this.filtered = false;
     }
     this.applyFilter(viewFilter);
+  }
+
+  resetSelectedPatients(): void {
+    this.selectedPatients = [];
   }
 
   private applyFilter(viewFilter: ViewFilter, from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage()): void {
@@ -1044,6 +1049,7 @@ export class ParticipantListComponent implements OnInit {
   public clearFilter(): void {
     this.start = new Date().getTime();
     this.filterQuery = null;
+    this.resetSelectedPatients();
     this.clearManualFilters();
     this.getData();
     this.setDefaultColumns();
@@ -1282,6 +1288,7 @@ export class ParticipantListComponent implements OnInit {
   public doFilter(): void {
     this.selectAll = this.selectedColumns['allSelected'];
     this.resetPagination();
+    this.resetSelectedPatients();
     const json = [];
     this.dataSources.forEach((value: string, key: string) => {
         this.createFilterJson(json, key);
@@ -1439,7 +1446,7 @@ export class ParticipantListComponent implements OnInit {
     } else {
       filterText = Filter.getFilterText(filter, tmp);
     }
-    if (filterText != null) {
+    if (filterText != null && Object.keys(filterText).length > 0) {
       json.push(filterText);
     }
   }
@@ -1729,6 +1736,18 @@ export class ParticipantListComponent implements OnInit {
     } else {
       this.selectedPatients = this.selectedPatients.filter(guid => guid !== participant.data.profile['guid']);
     }
+  }
+
+  generateCheckboxColor(participant: Participant): string {
+    if (this.isAssignable(participant)) {
+      return 'accent';
+    } else {
+      return 'primary';
+    }
+  }
+
+  isAnySelectedAssignable(): boolean {
+    return this.participantList.find(participant => participant.isSelected && this.isAssignable(participant)) != null;
   }
 
   private isAssignable(participant: Participant): boolean {
