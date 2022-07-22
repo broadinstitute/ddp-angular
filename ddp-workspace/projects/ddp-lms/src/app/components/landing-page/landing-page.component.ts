@@ -45,9 +45,7 @@ export class LandingPageComponent implements OnInit {
       this.auth0.handleAuthentication(this.handleAuthError.bind(this));
     }
 
-    setTimeout(() => {
-      this.load().subscribe();
-    }, 3000);
+    this.load().subscribe();
   }
 
   protected handleAuthError(error: any | null): void {
