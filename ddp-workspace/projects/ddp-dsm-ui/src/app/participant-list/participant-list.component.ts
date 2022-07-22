@@ -1446,7 +1446,7 @@ export class ParticipantListComponent implements OnInit {
     } else {
       filterText = Filter.getFilterText(filter, tmp);
     }
-    if (filterText != null) {
+    if (filterText != null && Object.keys(filterText).length > 0) {
       json.push(filterText);
     }
   }
@@ -1736,6 +1736,18 @@ export class ParticipantListComponent implements OnInit {
     } else {
       this.selectedPatients = this.selectedPatients.filter(guid => guid !== participant.data.profile['guid']);
     }
+  }
+
+  generateCheckboxColor(participant: Participant): string {
+    if (this.isAssignable(participant)) {
+      return 'accent';
+    } else {
+      return 'primary';
+    }
+  }
+
+  isAnySelectedAssignable(): boolean {
+    return this.participantList.find(participant => participant.isSelected && this.isAssignable(participant)) != null;
   }
 
   private isAssignable(participant: Participant): boolean {
