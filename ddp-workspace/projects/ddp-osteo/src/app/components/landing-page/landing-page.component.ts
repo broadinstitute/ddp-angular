@@ -56,14 +56,7 @@ export class LandingPageComponent implements OnInit {
         if (!this.config.doLocalRegistration && location.hash) {
             this.auth0.handleAuthentication(this.handleAuthError.bind(this));
         }
-
-        if (nextUrlFromStorage) {
-            // `nextUrl` is set before redirecting to auth0. If it exists, then pick up where we left off.
-            sessionStorage.removeItem("nextUrl");
-            this.router.navigateByUrl(nextUrlFromStorage);
-        } else {
-            this.load().subscribe();
-        }
+        this.load().subscribe();
     }
 
     protected handleAuthError(error: any | null): void {
@@ -109,12 +102,19 @@ export class LandingPageComponent implements OnInit {
             }),
             take(1),
             finalize(() => {
-                this.workflowService
-                    .getNext()
-                    .pipe(take(1))
-                    .subscribe((data) =>
-                        this.workflowBuilder.getCommand(data).execute()
-                    );
+                const nextUrlFromStorage = sessionStorage.getItem("nextUrl");
+                if (nextUrlFromStorage) {
+                    // `nextUrl` is set before redirecting to auth0. If it exists, then pick up where we left off.
+                    sessionStorage.removeItem("nextUrl");
+                    this.router.navigateByUrl(nextUrlFromStorage);
+                } else {
+                    this.workflowService
+                        .getNext()
+                        .pipe(take(1))
+                        .subscribe((data) =>
+                            this.workflowBuilder.getCommand(data).execute()
+                        );
+                }
             })
         );
     }
