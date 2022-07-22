@@ -913,12 +913,11 @@
         <mat-radio-group [(ngModel)]="exportFileFormat">
           File format:
           <div>
-
-            <mat-radio-button color="primary" disableRipple value="tsv">
-              <span tooltip="tab-delimited values">.tsv</span>
-            </mat-radio-button>
             <mat-radio-button color="primary" disableRipple value="xlsx">
-              <span tooltip="Microsoft Excel workbook">.xlsx</span>
+              <span tooltip="Microsoft Excel workbook">Excel (.xlsx)</span>
+            </mat-radio-button>
+            <mat-radio-button color="primary" disableRipple value="tsv">
+              <span tooltip="tab-delimited values">Tab-delimited (.tsv)</span>
             </mat-radio-button>
           </div>
         </mat-radio-group>
