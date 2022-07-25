@@ -33,7 +33,7 @@ export class GovernedUserService {
         .pipe(
           mergeMap(instanceGuid =>
             iif(() => instanceGuid,
-              this.activityService.getActivity(of(this.config.studyGuid), of(instanceGuid)),
+              this.activityService.getActivity(of(this.config.studyGuid), of(instanceGuid.guid)),
               throwError(() => 'NO_PREQUALIFIER'))))
       ),
       pluck('sections'),
