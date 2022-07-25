@@ -16,8 +16,8 @@ const fileSaver = require( 'file-saver' );
 } )
 export class FileDownloadComponent {
   @Input() participant: Participant;
-  downloadMessage: string = "";
-  downloading: boolean = false;
+  downloadMessage = '';
+  downloading = false;
 
   constructor( private role: RoleService, private dsmService: DSMService ) {
 
@@ -60,7 +60,7 @@ export class FileDownloadComponent {
   }
 
 
-  getNiceDateFormat( uploadedAt: any ) :string {
+  getNiceDateFormat( uploadedAt: any ): string {
     return new DatePipe('en-US').transform(uploadedAt, Utils.DATE_STRING_IN_CVS_WITH_TIME);
   }
 }

@@ -23,7 +23,7 @@ export class Data {
     this.address = address;
     this.invitations = invitations;
     this.computed = computed;
-    this.files = files
+    this.files = files;
   }
 
   getMultipleDatesForActivity( activityData: ActivityData, name: string ): QuestionAnswer[] {
