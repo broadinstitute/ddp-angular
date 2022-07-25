@@ -39,7 +39,7 @@ export class GovernedUserService {
           throwError(() => 'PREQUALIFIER_ERROR')
         )
       ),
-      mergeMap((instanceGuid) => 
+      mergeMap((instanceGuid) =>
         this.activityService.getActivity(of(this.config.studyGuid), of(instanceGuid.guid))),
       pluck('sections'),
       map((sections) => sections[0]),
