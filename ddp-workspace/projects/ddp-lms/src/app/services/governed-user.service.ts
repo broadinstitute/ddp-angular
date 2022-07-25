@@ -15,6 +15,7 @@ import {PrequalifierService} from './prequalifier.service';
 export class GovernedUserService {
 
   private readonly WHO_ENROLLING = 'WHO_ENROLLING';
+  private readonly PREQUAL = 'PREQUALIFIER';
 
   constructor(
     private router: Router,
@@ -45,7 +46,10 @@ export class GovernedUserService {
       map((blocks) => blocks.find((block) => (block as ActivityPicklistQuestionBlock).stableId === this.WHO_ENROLLING)),
       pluck('answer'),
       take(1),
-      catchError(() => of(null))
+      catchError(data => {
+        console.error(data, '[ERROR]');
+        return of(null);
+      })
     ) as Observable<[]>;
   }
 }

@@ -519,7 +519,7 @@
   },
   "About": {
     "Title": "About Us",
-    "TitleText": "The Leiomyosarcoma Project is part of <a class=\"Link italic\" href='https://joincountmein.org/' target=\"_blank\"><strong>Count me in</strong></a>, a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research.",
+    "TitleText": "The Leiomyosarcoma Project is part of <a class=\"Link italic\" href='https://joincountmein.org/' target=\"_blank\"><strong>Count Me In</strong></a>, a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research.",
     "button1": "Visit Count Me in Website",
     "countMeInText": "Count Me In is stewarded by the Broad Institute of MIT and Harvard, the Dana-Farber Cancer Institute and Emerson Collective.</br></br>Count Me In's Leiomyosarcoma (LMS) Project is supported by a grant from the National Cancer Institute's Cancer Moonshot program and is part of the Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers.</br></br>The Leiomyosarcoma Project has been designed and implemented collaboratively with leiomyosarcoma patients, advocates, caregivers, loved ones, cancer researchers, and clinicians.",
     "AdvisorsBlock": {
