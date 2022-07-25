@@ -29,7 +29,6 @@ import { ParticipantUpdateResultDialogComponent } from '../dialogs/participant-u
 import { AddFamilyMemberComponent } from '../popups/add-family-member/add-family-member.component';
 import { Sample } from '../participant-list/models/sample.model';
 import { ParticipantDSMInformation } from '../participant-list/models/participant.model';
-import {File} from '../participant-list/models/file.model';
 
 const fileSaver = require('file-saver');
 
