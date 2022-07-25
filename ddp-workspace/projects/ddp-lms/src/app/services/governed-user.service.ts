@@ -31,10 +31,9 @@ export class GovernedUserService {
     return this.sessionService.sessionObservable.pipe(
       filter((session) => !!session && this.sessionService.isAuthenticatedSession()),
       mergeMap(() => this.userActivityServiceAgent.getActivities(of(this.config.studyGuid))
-        .pipe(catchError(() => throwError(() => 'PREQUALIFIER_ERROR')))
-      ),
+        .pipe(catchError(() => throwError(() => 'PREQUALIFIER_ERROR')))),
       mergeMap((userActivities) => iif(() =>
-            !!userActivities.find(activity => activity.activityCode === this.PREQUAL),
+            !userActivities.length || !!userActivities.find(activity => activity.activityCode === this.PREQUAL),
           this.prequalService.getPrequalifier(this.config.studyGuid),
           throwError(() => 'PREQUALIFIER_ERROR')
         )
