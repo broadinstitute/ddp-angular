@@ -467,7 +467,7 @@ export class Filter {
               filter.participantColumn, filter.type, f.options, filter.filter2, filter.range, filter.exactMatch, filter.filter1,
               selectedOptions, filter.filter1 == null ? null : filter.filter1.value,
               filter.filter2 == null ? null : filter.filter2.value, null,
-              filter.empty, filter.notEmpty, f.singleOption, f.additionalType
+              filter.empty, filter.notEmpty, f.singleOption, f.additionalType, filter.parentName
             );
             filters.push(newFilter);
             break;

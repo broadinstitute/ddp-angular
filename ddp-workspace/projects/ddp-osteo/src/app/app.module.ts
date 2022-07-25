@@ -44,6 +44,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
 import { MatTableModule } from '@angular/material/table';
 import { FaqSectionComponent } from './components/faq-section/faq-section.component';
+import {WorkflowStartComponent} from './components/workflow-start/workflow-start.component';
+import {LandingPageComponent} from './components/landing-page/landing-page.component';
 
 
 const baseElt = document.getElementsByTagName('base');
@@ -90,6 +92,7 @@ tkCfg.infoEmail = 'info@osproject.org';
 tkCfg.twitterAccountId = 'count_me_in';
 tkCfg.facebookGroupId = 'joincountmein';
 tkCfg.instagramId = 'countmein';
+tkCfg.useMultiParticipantDashboard = true;
 // to configure feed, go to: https://lightwidget.com/widget-info/814feee04df55de38ec37791efea075e
 // need Instagram credentials for @osteosarcomaproject
 tkCfg.lightswitchInstagramWidgetId = '006168756c7f5d4a8a831488c63ea48c';
@@ -169,16 +172,15 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ScientificImpactComponent,
     HeaderComponent,
     WorkflowProgressComponent,
-
     ParticipationComponent,
     PhysiciansComponent,
-
     ActivityComponent,
     ActivityPageComponent,
     DashboardComponent,
     UserActivitiesComponent,
-    FaqSectionComponent
-
+    FaqSectionComponent,
+    WorkflowStartComponent,
+    LandingPageComponent
   ],
   providers: [
     {

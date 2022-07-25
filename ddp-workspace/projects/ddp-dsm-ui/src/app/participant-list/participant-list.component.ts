@@ -1446,7 +1446,7 @@ export class ParticipantListComponent implements OnInit {
     } else {
       filterText = Filter.getFilterText(filter, tmp);
     }
-    if (filterText != null) {
+    if (filterText != null && Object.keys(filterText).length > 0) {
       json.push(filterText);
     }
   }
