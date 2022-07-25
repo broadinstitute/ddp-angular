@@ -424,6 +424,7 @@ export class MedicalRecordComponent implements OnInit {
 
   onAdditionalValueChange(evt: any, colName: string): void {
     let v;
+    colName = Utils.convertUnderScoresToCamelCase(colName);
     if (typeof evt === 'string') {
       v = evt;
     } else {
