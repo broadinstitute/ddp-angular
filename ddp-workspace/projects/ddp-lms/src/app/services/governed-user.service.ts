@@ -30,16 +30,16 @@ export class GovernedUserService {
   public get checkIfGoverned(): Observable<[]> {
     return this.sessionService.sessionObservable.pipe(
       filter((session) => !!session && this.sessionService.isAuthenticatedSession()),
-      mergeMap(() => this.userActivityServiceAgent.getActivities(of(this.config.studyGuid))
-        .pipe(catchError(() => throwError(() => 'PREQUALIFIER_ERROR')))),
-      mergeMap((userActivities) => iif(() =>
-            !userActivities.length || !!userActivities.find(activity => activity.activityCode === this.PREQUAL),
-          this.prequalService.getPrequalifier(this.config.studyGuid),
-          throwError(() => 'PREQUALIFIER_ERROR')
+      mergeMap(() => this.userActivityServiceAgent.getActivities(of(this.config.studyGuid)).pipe(
+          mergeMap((userActivities) => iif(() =>
+                  !!userActivities,
+                this.prequalService.getPrequalifier(this.config.studyGuid),
+                throwError(() => 'NO_PREQUALIFIER')
+              )
+          ),
         )
       ),
-      mergeMap((instanceGuid) =>
-        this.activityService.getActivity(of(this.config.studyGuid), of(instanceGuid.guid))),
+      mergeMap((instanceGuid) => this.activityService.getActivity(of(this.config.studyGuid), of(instanceGuid.guid))),
       pluck('sections'),
       map((sections) => sections[0]),
       pluck('blocks'),
