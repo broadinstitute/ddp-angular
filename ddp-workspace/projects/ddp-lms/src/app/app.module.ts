@@ -44,6 +44,8 @@ import { MobileNavComponent } from './components/nav/mobile-nav/mobile-nav.compo
 import { FooterNavComponent } from './components/footer/footer-nav/footer-nav.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { WorkflowStartComponent } from './components/workflow-start/workflow-start.component';
+import {GovernedUserService} from "./services/governed-user.service";
+import {PrequalifierService} from "./services/prequalifier.service";
 
 declare const DDP_ENV: Record<string, any>;
 
@@ -183,6 +185,8 @@ const translateFactory =
     },
     SubmitAnnouncementService,
     SubmissionManager,
+    GovernedUserService,
+    PrequalifierService
   ],
   bootstrap: [AppComponent],
 })

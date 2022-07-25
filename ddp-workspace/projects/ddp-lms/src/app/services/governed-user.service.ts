@@ -1,19 +1,17 @@
 import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { filter, map, mergeMap, pluck, take, tap } from 'rxjs/operators';
+import {catchError, iif, Observable, of, tap, throwError} from 'rxjs';
+import { filter, map, mergeMap, pluck, take } from 'rxjs/operators';
 
 import {
   ActivityPicklistQuestionBlock,
   ActivityServiceAgent,
   ConfigurationService,
-  PrequalifierServiceAgent,
   SessionMementoService,
 } from 'ddp-sdk';
+import {PrequalifierService} from "./prequalifier.service";
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class GovernedUserService {
 
   private readonly WHO_ENROLLING = 'WHO_ENROLLING';
@@ -21,7 +19,7 @@ export class GovernedUserService {
   constructor(
     private router: Router,
     private sessionService: SessionMementoService,
-    private prequalService: PrequalifierServiceAgent,
+    private prequalService: PrequalifierService,
     private activityService: ActivityServiceAgent,
     @Inject('ddp.config') private config: ConfigurationService
   ) {}
@@ -29,8 +27,14 @@ export class GovernedUserService {
   public get checkIfGoverned(): Observable<[]> {
     return this.sessionService.sessionObservable.pipe(
       filter((session) => !!session && this.sessionService.isAuthenticatedSession()),
-      mergeMap(() => this.prequalService.getPrequalifier(this.config.studyGuid)),
-      mergeMap((instanceGuid) => this.activityService.getActivity(of(this.config.studyGuid), of(instanceGuid))),
+      tap((data) => console.log(data, '[AUTHENTICATED]')),
+      mergeMap(() => this.prequalService.getPrequalifier(this.config.studyGuid)
+        .pipe(
+          mergeMap(instanceGuid =>
+            iif(() => instanceGuid,
+              this.activityService.getActivity(of(this.config.studyGuid), of(instanceGuid)),
+              throwError(() => 'NO_PREQUALIFIER'))))
+      ),
       pluck('sections'),
       map((sections) => sections[0]),
       pluck('blocks'),
@@ -39,6 +43,7 @@ export class GovernedUserService {
       ),
       pluck('answer'),
       take(1),
+      catchError(() => of(null))
     ) as Observable<[]>;
   }
 }
