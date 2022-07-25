@@ -900,34 +900,11 @@ participant.data.dsm['diagnosisYear'] != null">
             </tab>
 
             <tab
-              *ngIf="participant.data.files"
+              *ngIf="participant.data.files && participant.data.files.length > 0 && this.role.allowedToDownloadParticipantFiles()"
               heading="Participant Uploaded Files">
-              <ng-container *ngFor="let file of participant.data.files">
-                <ng-container>
-                  <table>
-                    <tr>
-                      <td>file name</td>
-                      <td>{{file.fileName}}</td>
-                    </tr>
-                    <tr>
-                      <td>uploadedAt</td>
-                      <td>{{file.uploadedAt}}</td>
-                    </tr>
-                    <tr>
-                      <td>Type:</td>
-                      <td>{{file.mimeType}}</td>
-                    </tr>
-                    <tr>
-                      <td>status:</td>
-                      <td>{{file.scanResult}}</td>
-                    </tr>
-                  </table>
-                  <button (click)="downloadParticipantFile(file)" [disabled]="file.scanResult !== 'CLEAN'"
-                          color="primary" md-raised-button
-                          type="button">Download This File
-                  </button>
-                </ng-container>
-              </ng-container>
+                <app-file-download
+                [participant]="participant">
+                </app-file-download>
             </tab>
 
             <tab heading="Second Medical Record Abstraction" [active]="tabActive('review')"

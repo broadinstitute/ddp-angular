@@ -440,26 +440,21 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
     const shortId = this.participant.data.profile[ 'hruid' ];
 
-    fileSaver.saveAs( blob, shortId + fileName );
+    fileSaver.saveAs( blob, shortId + '_' + fileName );
   }
 
   downloadParticipantFile( file: File ): void {
+    console.log(file);
     if (file.scanResult !== 'CLEAN') {
+      this.openResultDialog( 'Error - file has not passed scanning' );
       return;
     }
-    console.log( 'download ' + file.fileName );
-    console.log( 'download ' + file.bucket );
-    console.log( 'download ' + file.blobName );
-    console.log( 'download ' + file.scanResult );
-    console.log( 'download ' + file.fileName );
-    console.log( 'download ' + file.mimeType );
     const realm = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
     this.dsmService.downloadParticipantFile( file.fileName, file.bucket, file.blobName, realm, file.mimeType ).subscribe(
       data => {
-        console.log( data );
         this.saveParticipantFile( data, file.mimeType, file.fileName );
         this.downloading = false;
-        this.message = 'Download finished.';
+        this.message = 'File download finished.';
       },
       err => {
         console.log( err );

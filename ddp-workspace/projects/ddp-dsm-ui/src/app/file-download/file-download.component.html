@@ -1,0 +1,38 @@
+<ng-container>
+  <ng-container *ngIf="downloading">
+    <div align="center">
+      <i class="fas fa-spinner fa-spin fa-2x"></i>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="downloadMessage">
+    {{downloadMessage}}
+  </ng-container>
+  <ng-container>
+    <table class="table table-striped Width--100">
+      <thead>
+      <tr>
+        <th>
+          File Name
+        </th>
+        <th>
+          Time of Upload
+        </th>
+        <th colspan="2">
+          Scan Result
+        </th>
+      </tr>
+      </thead>
+      <tr *ngFor="let file of participant.data.files">
+        <td>{{file.fileName}}</td>
+        <td>{{getNiceDateFormat(file.uploadedAt)}}</td>
+        <td>{{file.scanResult}}</td>
+        <td>
+          <button (click)="downloadParticipantFile(file)" [disabled]="file.scanResult !== 'CLEAN'"
+                  color="primary" mat-raised-button
+                  type="button">Download File
+          </button>
+        </td>
+      </tr>
+    </table>
+  </ng-container>
+</ng-container>

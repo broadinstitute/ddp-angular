@@ -31,6 +31,7 @@ export class RoleService {
   private _isParticipantEdit = false;
   private _isDSSTesting = true; //TODO remove before final merge, for testing only
   private _isKitUploadInvalidAddress = false;
+  private _isDownloadParticipantFile = false;
 
   private _userId: string;
   private _user: string;
@@ -126,6 +127,9 @@ export class RoleService {
           }
           else if (entry === 'kit_upload_invalid_address') {
             this._isKitUploadInvalidAddress = true;
+          }
+          else if (entry === 'file_download'){
+            this._isDownloadParticipantFile = true;
           }
         }
       }
@@ -262,5 +266,9 @@ export class RoleService {
 
   public allowedToUploadKitInvalidAddress(): boolean {
     return this._isKitUploadInvalidAddress;
+  }
+
+  public allowedToDownloadParticipantFiles(): boolean {
+    return this._isDownloadParticipantFile;
   }
 }

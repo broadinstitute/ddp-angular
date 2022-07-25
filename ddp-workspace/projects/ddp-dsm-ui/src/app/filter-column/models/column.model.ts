@@ -21,6 +21,10 @@ export class ParticipantColumn {
   public static DIAGNOSIS_MONTH = new ParticipantColumn('Diagnosis Month', 'diagnosisMonth', 'data', 'dsm');
   public static DIAGNOSIS_YEAR = new ParticipantColumn('Diagnosis Year', 'diagnosisYear', 'data', 'dsm');
 
+  //files
+  public static PARTICIPANT_FILE_NAMES = new ParticipantColumn('Uploaded File Name', 'fileName', 'data', 'files');
+  public static PARTICIPANT_FILE_UPLOAD_TIME = new ParticipantColumn('File Upload Time', 'uploadedAt', 'data', 'files');
+
   public static ONC_HISTORY_CREATED = new ParticipantColumn('Onc History Created', 'created', 'o');
   public static ONC_HISTORY_REVIEWED = new ParticipantColumn('Onc History Reviewed', 'reviewed', 'o');
   public static PAPER_CR_SENT = new ParticipantColumn('Paper C/R Sent', 'crSent', 'r');

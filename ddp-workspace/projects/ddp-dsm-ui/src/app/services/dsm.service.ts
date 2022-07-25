@@ -619,8 +619,7 @@ export class DSMService {
     map.push( {name: 'bucket', value: bucketName} );
     map.push( {name: 'blob', value: blob} );
     map.push( {name: 'responseType', value: 'blob'} );
-//    { responseType: ResponseContentType.Blob }
-    return this.http.get( url, this.buildQueryHeader( map ) ).pipe( catchError( this.handleError ) );
+    return this.http.get( url, this.buildQueryBlobHeader( map )).pipe( catchError( this.handleError ) );
   }
 
   public uploadNdiFile(file: File): Observable<any> {
