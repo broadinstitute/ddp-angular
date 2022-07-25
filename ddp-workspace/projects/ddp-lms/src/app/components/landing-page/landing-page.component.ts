@@ -56,7 +56,6 @@ export class LandingPageComponent implements OnInit {
   private load(): Observable<any> {
     return this.governedUserService.checkIfGoverned.pipe(
       tap((answers) => {
-        console.log(answers, '[END ANSWER]');
         this.answers = answers;
       }),
       filter((answers) => !!answers),
@@ -82,7 +81,6 @@ export class LandingPageComponent implements OnInit {
       finalize(() => {
         const nextUrlFromStorage = sessionStorage.getItem('nextUrl');
         if (nextUrlFromStorage) {
-          // `nextUrl` is set before redirecting to auth0. If it exists, then pick up where we left off.
           sessionStorage.removeItem('nextUrl');
           this.router.navigateByUrl(nextUrlFromStorage);
         } else {
@@ -90,7 +88,6 @@ export class LandingPageComponent implements OnInit {
             .getNext()
             .pipe(take(1))
             .subscribe((data) => {
-              console.log(data, '[REDIRECT DATA]');
               this.workflowBuilder.getCommand(data).execute();
             });
         }
