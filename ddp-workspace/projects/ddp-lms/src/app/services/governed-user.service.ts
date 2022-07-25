@@ -9,7 +9,7 @@ import {
   ConfigurationService,
   SessionMementoService,
 } from 'ddp-sdk';
-import {PrequalifierService} from "./prequalifier.service";
+import {PrequalifierService} from './prequalifier.service';
 
 @Injectable()
 export class GovernedUserService {
