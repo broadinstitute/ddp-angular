@@ -27,7 +27,6 @@ export class GovernedUserService {
   public get checkIfGoverned(): Observable<[]> {
     return this.sessionService.sessionObservable.pipe(
       filter((session) => !!session && this.sessionService.isAuthenticatedSession()),
-      tap((data) => console.log(data, '[AUTHENTICATED]')),
       mergeMap(() => this.prequalService.getPrequalifier(this.config.studyGuid)
         .pipe(
           mergeMap(instanceGuid =>

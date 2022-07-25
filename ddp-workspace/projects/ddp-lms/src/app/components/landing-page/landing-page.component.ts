@@ -56,7 +56,6 @@ export class LandingPageComponent implements OnInit {
   private load(): Observable<any> {
     return this.governedUserService.checkIfGoverned.pipe(
       tap((answers) => {
-        console.log(answers, '[END ANSWER]');
         this.answers = answers;
       }),
       filter((answers) => !!answers),
@@ -90,7 +89,6 @@ export class LandingPageComponent implements OnInit {
             .getNext()
             .pipe(take(1))
             .subscribe((data) => {
-              console.log(data, '[REDIRECT DATA]');
               this.workflowBuilder.getCommand(data).execute();
             });
         }
