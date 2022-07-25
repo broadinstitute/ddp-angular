@@ -81,7 +81,6 @@ export class LandingPageComponent implements OnInit {
       finalize(() => {
         const nextUrlFromStorage = sessionStorage.getItem('nextUrl');
         if (nextUrlFromStorage) {
-          // `nextUrl` is set before redirecting to auth0. If it exists, then pick up where we left off.
           sessionStorage.removeItem('nextUrl');
           this.router.navigateByUrl(nextUrlFromStorage);
         } else {

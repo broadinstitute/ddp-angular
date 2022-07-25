@@ -187,6 +187,7 @@ export class OncHistoryDetailComponent implements OnInit {
   // add additional value to oncHistoryDetails
   onAdditionalColChange(evt: any, index: number, colName: string): void {
     let v;
+    colName = Utils.convertUnderScoresToCamelCase(colName);
     if (typeof evt === 'string') {
       v = evt;
     } else {
