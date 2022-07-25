@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 import {
   Auth0AdapterService,
   ConfigurationService,
@@ -10,7 +10,7 @@ import {
   SessionMementoService,
   WorkflowServiceAgent,
 } from 'ddp-sdk';
-import { filter, finalize, mergeMap, take, tap, withLatestFrom } from 'rxjs/operators';
+import { filter, finalize, mergeMap, take, tap } from 'rxjs/operators';
 import { iif, Observable, of } from 'rxjs';
 import { GovernedUserService } from '../../services/governed-user.service';
 
@@ -31,7 +31,6 @@ export class LandingPageComponent implements OnInit {
     private logger: LoggingService,
     private auth0: Auth0AdapterService,
     private sessionService: SessionMementoService,
-    private participantService: GovernedParticipantsServiceAgent,
     private workflowService: WorkflowServiceAgent,
     private workflowBuilder: WorkflowBuilderService,
     @Inject('ddp.config') private config: ConfigurationService,
@@ -57,6 +56,7 @@ export class LandingPageComponent implements OnInit {
   private load(): Observable<any> {
     return this.governedUserService.checkIfGoverned.pipe(
       tap((answers) => {
+        console.log(answers, '[END ANSWER]')
         this.answers = answers;
       }),
       filter((answers) => !!answers),
@@ -89,7 +89,10 @@ export class LandingPageComponent implements OnInit {
           this.workflowService
             .getNext()
             .pipe(take(1))
-            .subscribe((data) => this.workflowBuilder.getCommand(data).execute());
+            .subscribe((data) => {
+              console.log(data, '[REDIRECT DATA]')
+              this.workflowBuilder.getCommand(data).execute()
+            });
         }
       })
     );
