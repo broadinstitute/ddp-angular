@@ -75,7 +75,7 @@ a:not(.button) {
     height: 100px;
     margin-bottom: 13px;
       display: flex;
-      align-items: start;
+      align-items: flex-start;
     @media (max-width: 1280px) {
       height: 80px;
     }
