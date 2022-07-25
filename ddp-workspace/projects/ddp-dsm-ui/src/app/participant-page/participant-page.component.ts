@@ -433,36 +433,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     }
   }
 
-  saveParticipantFile( data: any, type: string, fileName: string ): void {
-    const blob = new Blob( [ data ], {type: type} );
-    const url = window.URL.createObjectURL( blob );
-    window.open( url );
-
-    const shortId = this.participant.data.profile[ 'hruid' ];
-
-    fileSaver.saveAs( blob, shortId + '_' + fileName );
-  }
-
-  downloadParticipantFile( file: File ): void {
-    console.log(file);
-    if (file.scanResult !== 'CLEAN') {
-      this.openResultDialog( 'Error - file has not passed scanning' );
-      return;
-    }
-    const realm = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
-    this.dsmService.downloadParticipantFile( file.fileName, file.bucket, file.blobName, realm, file.mimeType ).subscribe(
-      data => {
-        this.saveParticipantFile( data, file.mimeType, file.fileName );
-        this.downloading = false;
-        this.message = 'File download finished.';
-      },
-      err => {
-        console.log( err );
-        this.openResultDialog( 'Error - Failed to download file' );
-      }
-    );
-  }
-
   addEmptyOncHistoryRow(): void {
     if (this.participant.data.dsm[ 'hasConsentedToTissueSample' ]) {
       let hasEmptyOncHis = false;
