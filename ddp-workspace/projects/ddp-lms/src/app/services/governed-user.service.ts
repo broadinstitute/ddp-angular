@@ -15,6 +15,7 @@ import {PrequalifierService} from './prequalifier.service';
 export class GovernedUserService {
 
   private readonly WHO_ENROLLING = 'WHO_ENROLLING';
+  private readonly PREQUAL = 'PREQUALIFIER';
 
   constructor(
     private router: Router,
@@ -29,13 +30,11 @@ export class GovernedUserService {
   public get checkIfGoverned(): Observable<[]> {
     return this.sessionService.sessionObservable.pipe(
       filter((session) => !!session && this.sessionService.isAuthenticatedSession()),
-      mergeMap(() => this.userActivityServiceAgent.getActivities(of(this.config.studyGuid)).pipe(
-          mergeMap((userActivities) => iif(() =>
-                  !!userActivities,
-                this.prequalService.getPrequalifier(this.config.studyGuid),
-                throwError(() => 'NO_PREQUALIFIER')
-              )
-          ),
+      mergeMap(() => this.userActivityServiceAgent.getActivities(of(this.config.studyGuid))),
+      mergeMap((userActivities) => iif(() =>
+            !!userActivities.find(activity => activity.activityCode === this.PREQUAL),
+          this.prequalService.getPrequalifier(this.config.studyGuid),
+          throwError(() => null)
         )
       ),
       mergeMap((instanceGuid) => this.activityService.getActivity(of(this.config.studyGuid), of(instanceGuid.guid))),
@@ -45,7 +44,10 @@ export class GovernedUserService {
       map((blocks) => blocks.find((block) => (block as ActivityPicklistQuestionBlock).stableId === this.WHO_ENROLLING)),
       pluck('answer'),
       take(1),
-      catchError(() => of(null))
+      catchError(data => {
+        console.log(data, '[ERROR]')
+        return of(data)
+      })
     ) as Observable<[]>;
   }
 }
