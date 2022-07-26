@@ -129,7 +129,7 @@
               [disabled]="updatedEmail === participant.data.profile['email'] || updatedEmail.length === 0 || !isEmailValid"
               (click)="updateEmail()">Update
             </button>
-          </td>          
+          </td>
           <td *ngIf="!hasRole().allowedToEditParticipant()">
             {{participant.data.profile['email']}}
           </td>
@@ -191,7 +191,7 @@ participant.data.dsm['diagnosisYear'] != null">
           </tr>
           <tr>
             <td>
-              <app-cohort-tag 
+              <app-cohort-tag
                 [ddpParticipantId]="participant.data.profile.guid"
                 [dsm]="participant.data.dsm"
               ></app-cohort-tag>
