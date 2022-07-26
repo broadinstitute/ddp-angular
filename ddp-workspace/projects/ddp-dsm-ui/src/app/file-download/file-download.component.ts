@@ -1,5 +1,5 @@
 import {DatePipe} from '@angular/common';
-import {Component, Input, Output} from '@angular/core';
+import {Component, Input, OnDestroy, Output} from '@angular/core';
 import {File} from '../participant-list/models/file.model';
 import {Participant} from '../participant-list/participant-list.model';
 import {ComponentService} from '../services/component.service';
@@ -15,7 +15,7 @@ const fileSaver = require( 'file-saver' );
   styleUrls: [ './file-download.component.scss' ]
 } )
 
-export class FileDownloadComponent {
+export class FileDownloadComponent implements OnDestroy {
   @Input() participant: Participant;
   downloadMessage = '';
   downloading = false;
@@ -26,7 +26,7 @@ export class FileDownloadComponent {
 
   }
 
-  ngOnDestroy(){
+  ngOnDestroy(): void {
     if (this.subscription != null) {
       this.subscription.unsubscribe();
     }
@@ -40,17 +40,18 @@ export class FileDownloadComponent {
       return;
     }
     const realm = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
-    this.subscription = this.dsmService.downloadParticipantFile( file.fileName, file.bucket, file.blobName, realm, file.mimeType ).subscribe(
-      data => {
-        this.saveParticipantFile( data, file.mimeType, file.fileName );
-        this.downloading = false;
-        this.downloadMessage = 'File download finished.';
-      },
-      err => {
-        console.log( err );
-        this.downloadMessage = err;
-        this.downloading = false;
-      }
+    this.subscription = this.dsmService.downloadParticipantFile( file.fileName, file.bucket, file.blobName, realm, file.mimeType )
+      .subscribe( {
+        next: data => {
+          this.saveParticipantFile( data, file.mimeType, file.fileName );
+          this.downloading = false;
+          this.downloadMessage = 'File download finished.';
+        },
+       error: err => {
+      this.downloadMessage = err;
+      this.downloading = false;
+    }
+  }
     );
   }
 
