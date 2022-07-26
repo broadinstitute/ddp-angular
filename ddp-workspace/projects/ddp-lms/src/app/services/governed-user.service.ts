@@ -1,19 +1,19 @@
-import {Inject, Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import {catchError, iif, Observable, of, tap, throwError} from 'rxjs';
-import {filter, map, mergeMap, pluck, take} from 'rxjs/operators';
+import { Inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { catchError, iif, Observable, of, tap, throwError } from 'rxjs';
+import { filter, map, mergeMap, pluck, take } from 'rxjs/operators';
 
 import {
   ActivityPicklistQuestionBlock,
   ActivityServiceAgent,
   ConfigurationService,
-  SessionMementoService, UserActivityServiceAgent,
+  SessionMementoService,
+  UserActivityServiceAgent,
 } from 'ddp-sdk';
-import {PrequalifierService} from './prequalifier.service';
+import { PrequalifierService } from './prequalifier.service';
 
 @Injectable()
 export class GovernedUserService {
-
   private readonly WHO_ENROLLING = 'WHO_ENROLLING';
 
   constructor(
@@ -23,18 +23,21 @@ export class GovernedUserService {
     private activityService: ActivityServiceAgent,
     private userActivityServiceAgent: UserActivityServiceAgent,
     @Inject('ddp.config') private config: ConfigurationService
-  ) {
-  }
+  ) {}
 
   public get checkIfGoverned(): Observable<[]> {
     return this.sessionService.sessionObservable.pipe(
       filter((session) => !!session && this.sessionService.isAuthenticatedSession()),
-      mergeMap(() => this.prequalService.getPrequalifier(this.config.studyGuid)
-        .pipe(
-          mergeMap(instanceGuid =>
-            iif(() => instanceGuid,
-              this.activityService.getActivity(of(this.config.studyGuid), of(instanceGuid.guid)),
-              throwError(() => 'NO_PREQUALIFIER'))))
+      mergeMap(() =>
+        this.prequalService.getPrequalifier(this.config.studyGuid).pipe(
+          mergeMap((instanceGuid) =>
+            iif(
+              () => instanceGuid,
+              this.activityService.getActivity(of(this.config.studyGuid), of(instanceGuid?.guid)),
+              throwError(() => null)
+            )
+          )
+        )
       ),
       pluck('sections'),
       map((sections) => sections[0]),
@@ -42,10 +45,7 @@ export class GovernedUserService {
       map((blocks) => blocks.find((block) => (block as ActivityPicklistQuestionBlock).stableId === this.WHO_ENROLLING)),
       pluck('answer'),
       take(1),
-      catchError(data => {
-        console.error(data, '[ERROR]');
-        return of(null);
-      })
+      catchError((errorMessage) => of(errorMessage))
     ) as Observable<[]>;
   }
 }

@@ -69,6 +69,7 @@ export class LandingPageComponent implements OnInit {
     private load(): Observable<any> {
         return this.governedUserService.checkIfGoverned.pipe(
             tap((answers) => {
+                console.log(answers, '[ANSWERS]');
                 this.answers = answers;
             }),
             filter((answers) => !!answers),
