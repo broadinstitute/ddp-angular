@@ -13,17 +13,6 @@ export class Data {
                public activities: Array<ActivityData>, public address: Address, public invitations: Array<InvitationData>,
               public computed?: Computed, public files?: Array<File>
   ) {
-    this.profile = profile;
-    this.status = status;
-    this.statusTimestamp = statusTimestamp;
-    this.dsm = dsm;
-    this.ddp = ddp;
-    this.medicalProviders = medicalProviders;
-    this.activities = activities;
-    this.address = address;
-    this.invitations = invitations;
-    this.computed = computed;
-    this.files = files;
   }
 
   getMultipleDatesForActivity( activityData: ActivityData, name: string ): QuestionAnswer[] {

@@ -618,7 +618,6 @@ export class DSMService {
     map.push( {name: 'fileName', value: fileName} );
     map.push( {name: 'bucket', value: bucketName} );
     map.push( {name: 'blob', value: blob} );
-    map.push( {name: 'responseType', value: 'blob'} );
     return this.http.get( url, this.buildQueryBlobHeader( map )).pipe( catchError( this.handleError ) );
   }
 

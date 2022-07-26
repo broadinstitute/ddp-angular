@@ -900,8 +900,8 @@ participant.data.dsm['diagnosisYear'] != null">
             </tab>
 
             <tab
-              *ngIf="participant.data.files && participant.data.files.length > 0 && this.role.allowedToDownloadParticipantFiles()"
-              heading="Participant Uploaded Files">
+              *ngIf="participant?.data?.files && participant.data.files.length > 0 && this.role.allowedToDownloadParticipantFiles()"
+              heading="Participant Files">
                 <app-file-download
                 [participant]="participant">
                 </app-file-download>
