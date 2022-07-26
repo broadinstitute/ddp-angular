@@ -173,7 +173,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       window.scrollTo( 0, 0 );
       this.scrolled = true;
     }
-    this.validateEmailInput(this.participant.data.profile['email']);
+    this.validateEmailInput(this.participant.data.profile['email'] ? this.participant.data.profile['email'] : '');
     this.isOncHistoryVisible = (this.participant.data.status === 'ENROLLED'
       && this.participant.data.medicalProviders != null && this.participant.medicalRecords != null
       && this.participant.data.medicalProviders.length > 0 && this.participant.medicalRecords.length > 0);
@@ -326,7 +326,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   }
 
   validateEmailInput(changedValue): void {
-    const regexToValidateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const regexToValidateEmail = /^$|^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isValid = regexToValidateEmail.test(changedValue);
     if (isValid) {
       this.isEmailValid = true;
