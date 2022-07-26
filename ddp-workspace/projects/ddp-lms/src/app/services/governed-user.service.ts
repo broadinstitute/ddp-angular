@@ -34,7 +34,7 @@ export class GovernedUserService {
           mergeMap(instanceGuid =>
             iif(() => instanceGuid,
               this.activityService.getActivity(of(this.config.studyGuid), of(instanceGuid?.guid)),
-              throwError(() => 'NO_PREQUALIFIER'))))
+              throwError(() => null))))
       ),
       pluck('sections'),
       map((sections) => sections[0]),
@@ -42,10 +42,7 @@ export class GovernedUserService {
       map((blocks) => blocks.find((block) => (block as ActivityPicklistQuestionBlock).stableId === this.WHO_ENROLLING)),
       pluck('answer'),
       take(1),
-      catchError(data => {
-        console.error(data, '[ERROR]');
-        return of(null);
-      })
+      catchError((errorMessage) => of(errorMessage))
     ) as Observable<[]>;
   }
 }
