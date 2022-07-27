@@ -1,6 +1,7 @@
 @import '../../../styles/breakpoints';
 @import '../../../styles/link-list';
 @import '../../../styles/colors';
+@import '../../../styles/variables';
 
 $headerHeight: (
   'default': 110px,
@@ -21,14 +22,25 @@ a:not(.button) {
     .header {
         padding-top: 20px;
         background-color: white;
-        box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
-
+        box-shadow: rgba(33, 35, 38, 0.1) 0 10px 10px -10px;
     }
 }
 
 .header {
   font-family: Spartan-Bold, sans-serif;
   color: map-get($colors, 'header-color');
+  height: $header-height;
+
+  @include media-lg {
+    height: $header-lg-height;
+  }
+  @include media-sm {
+    height: $header-sm-height;
+  }
+  @include media-xs {
+    height: $header-xs-height;
+  }
+
   ::ng-deep {
     button {
       font-family: Spartan-Bold, sans-serif;
@@ -63,7 +75,7 @@ a:not(.button) {
     height: 100px;
     margin-bottom: 13px;
       display: flex;
-      align-items: start;
+      align-items: flex-start;
     @media (max-width: 1280px) {
       height: 80px;
     }
