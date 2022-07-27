@@ -17,10 +17,6 @@ h1 {
 .wrapper {
   max-width: 830px;
 
-  @include media-md {
-    max-width: unset;
-  }
-
   .question__header {
     font-size: 18px;
     margin-bottom: 0;
@@ -43,7 +39,7 @@ h1 {
 }
 
 .intro {
-  margin: 0 0 60px;
+  margin: 0px 0 60px;
 
   &__container {
     //max-width: 640px;
