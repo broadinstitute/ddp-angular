@@ -165,6 +165,7 @@ export class ParticipantListComponent implements OnInit {
 
   public pageChanged(pageNumber: number, rPerPage?: number): void {
     this.loadingParticipants = true;
+    this.role.getUserSetting().setRowsPerPage = rPerPage;
     const rowsPerPage = rPerPage ? rPerPage : this.role.getUserSetting().getRowsPerPage();
     const from = (pageNumber - 1) * rowsPerPage;
     const to = pageNumber * rowsPerPage;
