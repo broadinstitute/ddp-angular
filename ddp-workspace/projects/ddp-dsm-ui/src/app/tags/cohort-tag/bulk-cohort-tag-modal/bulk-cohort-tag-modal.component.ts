@@ -44,7 +44,7 @@ export class BulkCohortTagModalComponent implements OnInit  {
     }
 
     // Clear the input value
-    event.chipInput!.clear();
+    event.chipInput.clear();
   }
 
   remove(tag: string): void {

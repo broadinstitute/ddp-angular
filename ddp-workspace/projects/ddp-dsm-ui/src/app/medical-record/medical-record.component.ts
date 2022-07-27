@@ -323,7 +323,7 @@ export class MedicalRecordComponent implements OnInit {
         const participantId = this.getParticipantId();
         const realm         = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
         const patch         = new PatchUtil(
-          this.medicalRecord.medicalRecordId, 
+          this.medicalRecord.medicalRecordId,
           this.role.userMail(),
           null,
           nameValues,
