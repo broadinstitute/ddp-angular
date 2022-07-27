@@ -1,32 +1,34 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
-import { Auth0CodeCallbackComponent, AuthGuard, BrowserGuard, IrbGuard } from 'ddp-sdk';
+import {Auth0CodeCallbackComponent, AuthGuard, BrowserGuard, IrbGuard} from 'ddp-sdk';
 
 import {
-  AcceptAgeUpPageComponent, ActivityPageRedesignedComponent,
+  AcceptAgeUpPageComponent,
+  ActivityPageRedesignedComponent,
   AgeUpThankYouComponent,
-  ErrorRedesignedComponent, HeaderActionGuard,
-  LoginLandingRedesignedComponent,
+  ErrorRedesignedComponent,
+  HeaderActionGuard,
   PasswordRedesignedComponent,
   RedirectToAuth0LoginRedesignedComponent,
   RedirectToLoginLandingRedesignedComponent,
   SessionExpiredRedesignedComponent,
   VerifyAgeUpPageComponent,
-  WorkflowStartActivityRedesignedComponent,
 } from 'toolkit';
 
-import { AboutComponent } from './pages/about/about.component';
-import { FaqComponent } from './pages/faq/faq.component';
-import { ForYourPhysicianComponent } from './pages/for-your-physician/for-your-physician.component';
-import { HomeComponent } from './pages/home/home.component';
-import { HowToParticipateComponent } from './pages/how-to-participate/how-to-participate.component';
-import { ScientificImpactComponent } from './pages/scientific-impact/scientific-impact.component';
-import { Route } from './constants/Route';
+import {AboutComponent} from './pages/about/about.component';
+import {FaqComponent} from './pages/faq/faq.component';
+import {ForYourPhysicianComponent} from './pages/for-your-physician/for-your-physician.component';
+import {HomeComponent} from './pages/home/home.component';
+import {HowToParticipateComponent} from './pages/how-to-participate/how-to-participate.component';
+import {ScientificImpactComponent} from './pages/scientific-impact/scientific-impact.component';
+import {Route} from './constants/Route';
 
 import {ActivityComponent} from './activity/activity.component';
 import {ActivityPageComponent} from './activity-page/activity-page.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {LandingPageComponent} from './components/landing-page/landing-page.component';
+import {WorkflowStartComponent} from './components/workflow-start/workflow-start.component';
 
 
 const routes: Routes = [
@@ -159,24 +161,6 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'login-landing',
-    component: LoginLandingRedesignedComponent,
-    canActivate: [IrbGuard]
-  },
-  {
-    path: 'login-landing/:mode',
-    component: RedirectToAuth0LoginRedesignedComponent,
-    canActivate: [IrbGuard]
-  },
-  {
-    path: 'count-me-in',
-    component: WorkflowStartActivityRedesignedComponent,
-    canActivate: [
-      IrbGuard,
-      BrowserGuard
-    ]
-  },
-  {
     path: Route.Home,
     component: HomeComponent,
     pathMatch: 'full',
@@ -209,7 +193,7 @@ const routes: Routes = [
   },
   {
     path: Route.CountMeIn,
-    component: WorkflowStartActivityRedesignedComponent,
+    component: WorkflowStartComponent,
     canActivate: [IrbGuard, BrowserGuard],
   },
   {
@@ -236,13 +220,13 @@ const routes: Routes = [
     path: Route.AgeUpThankYouProxy,
     component: AgeUpThankYouComponent,
     canActivate: [IrbGuard],
-    data: { collect: true },
+    data: {collect: true},
   },
   {
     path: Route.AgeUpThankYouVerify,
     component: AgeUpThankYouComponent,
     canActivate: [IrbGuard],
-    data: { collect: true },
+    data: {collect: true},
   },
   {
     path: Route.Dashboard,
@@ -259,7 +243,7 @@ const routes: Routes = [
   },
   {
     path: Route.LoginLanding,
-    component: LoginLandingRedesignedComponent,
+    component: LandingPageComponent,
     canActivate: [IrbGuard],
   },
   {
@@ -290,7 +274,7 @@ const routes: Routes = [
     path: 'join-list',
     component: HomeComponent,
     canActivate: [HeaderActionGuard],
-    data: { openJoinDialog: true }
+    data: {openJoinDialog: true}
   },
   {
     path: '**',
@@ -307,4 +291,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

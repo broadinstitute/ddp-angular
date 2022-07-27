@@ -304,26 +304,64 @@ export class MedicalRecordComponent implements OnInit {
   public setContact(contact: Lookup | string): void {
     if (contact != null) {
       if (contact instanceof Lookup) {
+        const nameValues = [];
         this.medicalRecord.name = contact.field1.value;
-        this.valueChanged(contact.field1.value, 'name');
+        nameValues.push({name: 'm.name', value: this.medicalRecord.name});
         if (contact.field2.value != null) {
           this.medicalRecord.contact = contact.field2.value;
-          this.valueChanged(contact.field2.value, 'contact');
+          nameValues.push({name: 'm.contact', value: this.medicalRecord.contact});
         }
         if (contact.field3.value != null) {
           this.medicalRecord.phone = contact.field3.value;
-          this.valueChanged(contact.field3.value, 'phone');
+          nameValues.push({name: 'm.phone', value: this.medicalRecord.phone});
         }
         if (contact.field4.value != null) {
           this.medicalRecord.fax = contact.field4.value;
-          this.valueChanged(contact.field4.value, 'fax');
+          nameValues.push({name: 'm.fax', value: this.medicalRecord.fax});
         }
-        this.lookups = [];
+        this.lookups        = [];
+        const participantId = this.getParticipantId();
+        const realm         = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+        const patch         = new PatchUtil(
+          this.medicalRecord.medicalRecordId, 
+          this.role.userMail(),
+          null,
+          nameValues,
+          null,
+          participantId,
+          Statics.MR_ALIAS,
+          null,
+          realm,
+          this.participant.data.profile['guid']);
+        this.patchMultipleNameValues(patch);
       } else {
         this.medicalRecord.name = contact;
         this.valueChanged(contact, 'name');
       }
     }
+  }
+
+  patchMultipleNameValues(patch: PatchUtil): void {
+    this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({
+      next: data => {
+        if (data) {
+        if (data instanceof Array) {
+          data.forEach( ( val ) => {
+                const nameValue = NameValue.parse(val);
+                this.medicalRecord[ nameValue.name ] = nameValue.value;
+              });
+          }
+        }
+        this.patchFinished = true;
+        this.currentPatchField = null;
+      },
+      error: err => {
+        if (err._body === Auth.AUTHENTICATION_ERROR) {
+          this.router.navigate([ Statics.HOME_URL ]);
+        }
+        this.additionalMessage = 'Error - Saving changes \n' + err;
+      }
+    });
   }
 
   getUtil(): Utils {
@@ -386,6 +424,7 @@ export class MedicalRecordComponent implements OnInit {
 
   onAdditionalValueChange(evt: any, colName: string): void {
     let v;
+    colName = Utils.convertUnderScoresToCamelCase(colName);
     if (typeof evt === 'string') {
       v = evt;
     } else {

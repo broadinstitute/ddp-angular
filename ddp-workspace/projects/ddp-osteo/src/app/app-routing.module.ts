@@ -10,12 +10,10 @@ import {
 
 import {
     ActivityPageRedesignedComponent,
-    LoginLandingRedesignedComponent,
     ErrorRedesignedComponent,
     StayInformedRedesignedComponent,
     PasswordRedesignedComponent,
     RedirectToLoginLandingRedesignedComponent,
-    WorkflowStartActivityRedesignedComponent,
     SessionExpiredRedesignedComponent,
     LovedOneThankYouRedesignedComponent,
     RedirectToAuth0LoginRedesignedComponent,
@@ -36,6 +34,8 @@ import { PhysiciansComponent } from './components/physicians/physicians.componen
 
 import { ActivityPageComponent } from './components/activity-page/activity-page.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import {WorkflowStartComponent} from './components/workflow-start/workflow-start.component';
+import {LandingPageComponent} from './components/landing-page/landing-page.component';
 
 
 const routes: Routes = [
@@ -169,7 +169,7 @@ const routes: Routes = [
     },
     {
         path: 'login-landing',
-        component: LoginLandingRedesignedComponent,
+        component: LandingPageComponent,
         canActivate: [IrbGuard]
     },
     {
@@ -179,7 +179,7 @@ const routes: Routes = [
     },
     {
         path: 'count-me-in',
-        component: WorkflowStartActivityRedesignedComponent,
+        component: WorkflowStartComponent,
         canActivate: [
             IrbGuard,
             BrowserGuard

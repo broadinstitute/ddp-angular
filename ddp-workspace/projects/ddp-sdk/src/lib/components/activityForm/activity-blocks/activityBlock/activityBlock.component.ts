@@ -95,13 +95,8 @@ export class ActivityBlockComponent implements OnInit, OnDestroy {
 
                 if (blockVisibility) {
                     this.blockVisibilityChanged.emit(blockVisibility);
-                } else {
-                    /**
-                     * Emitting a `blockVisibilityChanged` event will call `detectChanges`
-                     * so we call this here only if there were no changes in block visibility
-                     */
-                    this.cdr.detectChanges();
                 }
+                this.cdr.detectChanges();
 
                 this.openCreatedInstanceDialog(instance.instanceGuid);
             });

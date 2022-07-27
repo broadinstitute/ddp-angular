@@ -59,6 +59,7 @@
                   <ng-container *ngTemplateOutlet="chevronRightSvg"></ng-container>
               </div>
           </button>
+          <p class="share-project" [innerHTML]="'ParticipantsList.ShareProject' | translate"></p>
       </div>
   </div>
 
@@ -75,11 +76,25 @@
       class="participants-list__item"
       [class.participants-list__item--no-border-bottom]="!isParticipantContentExpanded(participant)"
     >
+
       <div class="participant">
         <div class="participant__header" role="button" (click)="onExpandClick(participant)">
+
           <span class="participant__name">
             {{ getParticipantName(participant) }}
           </span>
+            <div class="StatusAndExpandBtn">
+            <div class="enrollmentStatusContainer">
+                <div class="enrollmentStatusIncompleteText" *ngIf="getParticipantStatus(participant) === 'IN_PROGRESS'">
+                    <img class="enrollmentStatusIcon" src="assets/images/alert-circle-orange-512.png">
+                    {{ 'ParticipantStatus.status.inComplete' | translate}}
+                </div>
+                <div class="enrollmentStatusCompleteText" *ngIf="getParticipantStatus(participant) === 'COMPLETE'">
+                    <img class="enrollmentStatusIcon" src="/assets/images/Check.png">
+                    {{ 'ParticipantStatus.status.complete' | translate}}
+                </div>
+            </div>
+
 
           <div class="participant__icon-container">
             <button
@@ -96,10 +111,11 @@
               class="participant__expand-btn"
               [class.participant__expand-btn--rotate]="isParticipantContentExpanded(participant)"
             >
-                {{ isParticipantContentExpanded(participant) ? 'Hide' : 'Show' }}
+                <div class="hideWord">{{ isParticipantContentExpanded(participant) ? 'Hide' : 'Show' }}</div>
               <mat-icon>expand_more</mat-icon>
             </button>
           </div>
+            </div>
         </div>
         <div class="participant__content" *ngIf="isParticipantContentExpanded(participant)">
           <app-activities-list
