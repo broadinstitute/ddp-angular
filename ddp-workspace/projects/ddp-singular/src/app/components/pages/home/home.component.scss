@@ -364,6 +364,9 @@
             justify-content: flex-start;
             align-items: center;
             width: 18%;
+            @include media-md {
+              min-width: 170px;
+            }
             @include media-sm {
                 flex-direction: column;
                 justify-content: center;
