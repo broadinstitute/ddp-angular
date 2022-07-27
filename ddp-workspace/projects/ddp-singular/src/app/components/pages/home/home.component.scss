@@ -221,6 +221,9 @@
   }
   &-wrapper {
     display: flex;
+    @include media-md {
+      column-gap: 24px;
+    }
     @include media-sm {
       flex-direction: column-reverse;
     }
@@ -228,18 +231,19 @@
   &-left {
     padding-right: 30px;
     @include media-md {
-      padding-right: 0px;
+      padding-right: 0;
     }
      &-heading {
-         margin-left: 25px;
+       margin-left: 25px;
+       @include media-md {
+         margin-left: 0;
+       }
      }
   }
   &-right {
     max-width: 600px;
     margin-top: 90px;
-    @include media-md {
-      margin-top: unset;
-    }
+
     & img {
       width: 100%;
     }
@@ -248,6 +252,10 @@
     font-size: 1.2em;
     line-height: 30px;
     padding-left: 70px;
+    @include media-md {
+      padding-left: 56px;
+    }
+
     li {
       position: relative;
       margin-bottom: 30px;
