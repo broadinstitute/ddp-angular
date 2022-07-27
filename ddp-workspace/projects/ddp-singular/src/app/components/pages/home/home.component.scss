@@ -362,6 +362,12 @@
         padding: 60px 40px 40px!important;
         justify-content: space-between;
         border-bottom: 1px inset $__gainsboro;
+        @include media-xs {
+            padding-left: 24px!important;
+            padding-right: 24px!important;
+            flex-direction: column;
+        }
+
         .title {
             display: flex;
             justify-content: flex-start;
@@ -374,6 +380,10 @@
                 flex-direction: column;
                 justify-content: center;
                 margin-right: 10px;
+            }
+            @include media-xs {
+              flex-direction: row;
+              justify-content: left;
             }
 
             h1 {
@@ -402,6 +412,10 @@
         }
         .text {
             width: 82%;
+            @include media-xs {
+              width: unset;
+            }
+
             p {
                 margin: 0!important;
             }
