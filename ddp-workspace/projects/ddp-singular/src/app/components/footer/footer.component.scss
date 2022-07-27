@@ -22,16 +22,9 @@
       }
   }
 
-  & .container {
+  .container {
     display: flex;
     justify-content: space-between;
-
-    @media (max-width: 1024px) {
-      display: block;
-      width: auto;
-      padding-left: 20px;
-      padding-right: 20px;
-    }
   }
 
   & a:not(.button) {
@@ -44,18 +37,19 @@
 
   &-meta {
     max-width: 30%;
-      @media (max-width: 700px) {
-          max-width: 80%;
-      }
+
+    @include media-md {
+        max-width: unset;
+    }
+    @media (max-width: 700px) {
+      max-width: 80%;
+    }
   }
 
   &-menu {
     flex: 1;
     display: flex;
     justify-content: flex-end;
-      @include media-md {
-          justify-content: flex-start;
-      }
 
     & a {
       font-family: Spartan-Bold, sans-serif;
