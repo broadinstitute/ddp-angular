@@ -165,6 +165,7 @@ export class ParticipantListComponent implements OnInit {
 
   public pageChanged(pageNumber: number, rPerPage?: number): void {
     this.loadingParticipants = true;
+    this.role.getUserSetting().setRowsPerPage = rPerPage;
     const rowsPerPage = rPerPage ? rPerPage : this.role.getUserSetting().getRowsPerPage();
     const from = (pageNumber - 1) * rowsPerPage;
     const to = pageNumber * rowsPerPage;
@@ -1446,7 +1447,7 @@ export class ParticipantListComponent implements OnInit {
     } else {
       filterText = Filter.getFilterText(filter, tmp);
     }
-    if (filterText != null) {
+    if (filterText != null && Object.keys(filterText).length > 0) {
       json.push(filterText);
     }
   }
@@ -1649,15 +1650,17 @@ export class ParticipantListComponent implements OnInit {
 
   private setBulkCreatedTagsToParticipants(data: any): void {
     const cohortTags = data as CohortTag[];
-    for (const cohortTag of cohortTags) {
-      const maybeParticipant = this.participantList
+    if(cohortTags instanceof Array && cohortTags.length) {
+      for (const cohortTag of cohortTags) {
+        const maybeParticipant = this.participantList
           .find(participant => participant.data.profile['guid'] === cohortTag['ddpParticipantId']);
-      if (maybeParticipant) {
-        const existingCohortTags = maybeParticipant.data.dsm[CohortTagComponent.COHORT_TAG] as CohortTag[];
-        if (existingCohortTags) {
-          existingCohortTags.push(cohortTag);
-        } else {
-          maybeParticipant.data.dsm[CohortTagComponent.COHORT_TAG] = [cohortTag];
+        if (maybeParticipant) {
+          const existingCohortTags = maybeParticipant.data.dsm[CohortTagComponent.COHORT_TAG] as CohortTag[];
+          if (existingCohortTags) {
+            existingCohortTags.push(cohortTag);
+          } else {
+            maybeParticipant.data.dsm[CohortTagComponent.COHORT_TAG] = [cohortTag];
+          }
         }
       }
     }
