@@ -891,6 +891,14 @@ participant.data.dsm['diagnosisYear'] != null">
               </div>
             </tab>
 
+            <tab
+              *ngIf="participant?.data?.files && participant.data.files.length > 0 && this.role.allowedToDownloadParticipantFiles()"
+              heading="Participant Files">
+                <app-file-download
+                [participant]="participant">
+                </app-file-download>
+            </tab>
+
             <tab heading="Second Medical Record Abstraction" [active]="tabActive('review')"
                  (selectTab)="onSelect($event, 'review'); getFileList(participant.review)"
                  *ngIf="(participant.review != null && reviewFields != null && (participant.review.aStatus === 'in_progress' || participant.review.aStatus === 'done')) && participant.finalA != null && participant.finalA.aStatus !== 'done' &&

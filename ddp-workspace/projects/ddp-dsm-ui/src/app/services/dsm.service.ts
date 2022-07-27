@@ -602,6 +602,16 @@ export class DSMService {
     );
   }
 
+  public downloadParticipantFile( fileName: string, bucketName: string, blob: string, realm: string, mimeType: string ): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'downloadFile';
+    const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: realm} );
+    map.push( {name: 'fileName', value: fileName} );
+    map.push( {name: 'bucket', value: bucketName} );
+    map.push( {name: 'blob', value: blob} );
+    return this.http.get( url, this.buildQueryBlobHeader( map )).pipe( catchError( this.handleError ) );
+  }
+
   public uploadNdiFile(file: File): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'ndiRequest';
     const map: { name: string; value: any }[] = [];

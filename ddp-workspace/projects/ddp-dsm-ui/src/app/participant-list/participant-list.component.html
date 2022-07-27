@@ -541,6 +541,16 @@
                     </ng-container>
                   </div>
 
+                  <div *ngIf="col.participantColumn.tableAlias==='data' && col.participantColumn.object==='files'">
+                    <ul class="NO-PADDING-START">
+                      <li class="LIST-SEPARATOR" *ngFor="let file of pt.data.files">
+                        <p class="BIT-OF-MARGIN">
+                            {{file[col.participantColumn.name]}}
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+
                   <div *ngIf="alias === 'p' && pt.participant != null">
                     <ng-container
                       *ngIf="pt.participant[col.participantColumn.name] != null && col.type !== 'ADDITIONALVALUE' && col.type !== 'DATE' && col.type !== 'CHECKBOX'">
