@@ -1,5 +1,23 @@
 @import '../../../styles/variables';
 @import '../../../styles/colors';
+@import '../../../styles/breakpoints';
+
+.activity {
+  &.consent.has-sticky-section {
+
+    @media (max-width: 750px) {
+      padding-top: 24px;
+    }
+
+    @include media-sm {
+      padding-top: 42px;
+    }
+
+    @media (max-width: 400px) {
+      padding-top: 88px;
+    }
+  }
+}
 
 .section--spinner {
   display: flex;
@@ -37,53 +55,25 @@
 .sticky-section {
   z-index: 10;
   position: fixed;
-  top: 7.4rem;
+  top: $header-height;
   left: 0;
   background-color: $__purple;
   color: $__white;
   transition: all 200ms linear;
-  width: calc(100% - 17px);
+  width: calc(100% - 17px); // 17px is right vertical scrollbar
+  padding: 14px;
 
-  @media (max-width: 1280px) {
-    top: 6rem;
+  @include media-lg {
+    top: $header-lg-height;
+    padding: 14px 24px;
   }
-
-    @media (max-width: 1025px){
-      top: 18% !important
-    }
-
-    @media (max-width: 913px) {
-      top: 8% !important
-    }
-
-    @media (max-width: 821px) {
-      top: 9.5% !important
-    }
-
-    @media (max-width: 769px) {
-      top: 10.5% !important
-    }
-
-    @media (max-width: 541px) {
-      top: 12% !important
-    }
-
-    @media (max-width: 500px) {
-        top: 8.7%!important;
-        width: 100%;
-    }
-
-    @media (max-width: 415px) {
-      top: 7.8% !important;
-    }
-
-    @media (max-width: 376px) {
-      top: 10% !important;
-    }
-
-    @media (max-width: 361px) {
-      top: 9.5% !important;
-    }
+  @include media-sm {
+    top: $header-sm-height;
+    width: 100%;
+  }
+  @include media-xs {
+    top: $header-xs-height;
+  }
 }
 
 .sticky-section_shadow {
@@ -91,7 +81,6 @@
 }
 
 .sticky-block {
-  margin: 0.8rem 0;
 
   .sticky__text {
       font-size: 1.0625rem;

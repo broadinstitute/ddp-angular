@@ -44,6 +44,7 @@ export class BulkCohortTagModalComponent implements OnInit  {
     }
 
     // Clear the input value
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     event.chipInput.clear();
   }
 

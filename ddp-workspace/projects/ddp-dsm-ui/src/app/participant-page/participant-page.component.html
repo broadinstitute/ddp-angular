@@ -199,14 +199,6 @@ participant.data.dsm['diagnosisYear'] != null">
           </tr>
           </tbody>
         </table>
-        <!--TODO remove before final merge, for testing only -->
-        <div *ngIf="hasRole().allowedToTestDSSActivity() && participant.data != null">
-          <button mat-mini-fab color="primary" class="mat-fab-bottom-left" (click)="testGetActivity(participant.data.profile['guid'])">
-            <i class="fa-thin fa-badge-check"></i>
-          </button>
-          <span>Test GET Activity</span>
-
-        </div>
 
         <div *ngIf="isAddFamilyMember" class="Float--right Width--100">
           <div class="family-member-button">
