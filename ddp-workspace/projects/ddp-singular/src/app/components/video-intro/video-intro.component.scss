@@ -1,3 +1,5 @@
+@import '../../../styles/breakpoints';
+
 .intro_container {
     padding: 56.25% 0 0 0;
     position: relative;
@@ -7,4 +9,8 @@
     margin: 1rem 0;
     font-size: 18px;
     line-height: 26px;
+
+    @include media-md {
+        margin-top: 52px;
+    }
 }
