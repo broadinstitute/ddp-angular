@@ -412,15 +412,6 @@ $field-disabled-border: $__Mulled_wine_transparent;
     .ddp-answer-container {
       grid-template-columns: auto auto !important;
     }
-
-    /* TODO: remove this temp FIX!! just to fix the wrong config form back-end */
-    .ddp-answer-field:first-of-type::after {
-      content: 'Or';
-      top: -12px;
-      position: relative;
-      left: 4px;
-    }
-    /* end of the TODO */
   }
 
   @mixin ejection-fraction {
