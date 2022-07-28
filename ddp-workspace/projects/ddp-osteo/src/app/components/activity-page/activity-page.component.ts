@@ -5,11 +5,14 @@ import {
     ToolkitConfigurationService,
     WorkflowBuilderService,
 } from 'toolkit';
-import { ACTUAL_PARTICIPANT_ID_TOKEN } from '../../../../../ddp-lms/src/app/activity-page/localProviders';
 import { Observable } from 'rxjs';
 import { SessionMementoService } from 'ddp-sdk';
 import { ActivatedRoute } from '@angular/router';
 import { first, tap } from 'rxjs/operators';
+import {
+    ACTUAL_PARTICIPANT_ID_TOKEN,
+    actualParticipantIdProvider,
+} from './osteo-providers';
 
 @Component({
     selector: 'app-activity-page',
@@ -24,14 +27,14 @@ import { first, tap } from 'rxjs/operators';
         >
         </app-activity>
     `,
+    providers: [actualParticipantIdProvider],
 })
 export class ActivityPageComponent
     extends ActivityRedesignedComponent
     implements OnInit
 {
     constructor(
-        @Inject(ACTUAL_PARTICIPANT_ID_TOKEN)
-        private readonly participantId$: Observable<string>,
+        @Inject(ACTUAL_PARTICIPANT_ID_TOKEN) private readonly participantId$: Observable<string>,
         private readonly sessionService: SessionMementoService,
         headerConfig: HeaderConfigurationService,
         _activatedRoute: ActivatedRoute,
