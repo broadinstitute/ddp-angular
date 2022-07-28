@@ -1,5 +1,18 @@
-import { Component } from '@angular/core';
-import { ActivityRedesignedComponent } from 'toolkit';
+import {Component, Inject, OnInit} from '@angular/core';
+import {
+  ActivityRedesignedComponent,
+  HeaderConfigurationService,
+  ToolkitConfigurationService,
+  WorkflowBuilderService
+} from 'toolkit';
+import {ActivatedRoute} from "@angular/router";
+import {
+  ACTUAL_PARTICIPANT_ID_TOKEN,
+  actualParticipantIdProvider
+} from "./localProviders";
+import {Observable} from "rxjs";
+import {first, tap} from "rxjs/operators";
+import {SessionMementoService} from "ddp-sdk";
 
 @Component({
   selector: 'app-activity-page',
@@ -13,5 +26,31 @@ import { ActivityRedesignedComponent } from 'toolkit';
       (activityCode)="activityCodeChanged($event)">
     </app-activity>
   `,
+  providers: [actualParticipantIdProvider]
 })
-export class ActivityPageComponent extends ActivityRedesignedComponent {}
+export class ActivityPageComponent extends ActivityRedesignedComponent implements OnInit {
+  constructor(
+    @Inject(ACTUAL_PARTICIPANT_ID_TOKEN) private readonly participantId$: Observable<string>,
+    private readonly sessionService: SessionMementoService,
+     headerConfig: HeaderConfigurationService,
+     _activatedRoute: ActivatedRoute,
+     _workflowBuilder: WorkflowBuilderService,
+    @Inject('toolkit.toolkitConfig') config: ToolkitConfigurationService
+  ) {
+    super(headerConfig, _activatedRoute, _workflowBuilder, config);
+  }
+
+  ngOnInit() {
+    super.ngOnInit();
+    this.setParticipantGuid();
+  }
+
+  private setParticipantGuid(): void {
+    this.participantId$
+      .pipe(
+        first(),
+        tap((participantGuid: string) => this.sessionService.setParticipant(participantGuid)),
+      )
+      .subscribe();
+  }
+}
