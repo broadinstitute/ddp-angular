@@ -109,10 +109,14 @@
     }
 
     &-items {
+
       &-item {
         display: flex;
-
         padding-left: 42px;
+
+        @include media-md {
+            padding-left: 24px;
+        }
 
         @media (max-width: 960px) {
           align-items: center !important;
@@ -186,11 +190,10 @@
         }
         &-text {
           padding-right: 32px;
-
           font-size: 20px;
           line-height: 28px;
 
-          @media (max-width: 960px) {
+          @include media-md {
             padding-right: 0;
           }
         }
@@ -221,6 +224,9 @@
   }
   &-wrapper {
     display: flex;
+    @include media-md {
+      column-gap: 24px;
+    }
     @include media-sm {
       flex-direction: column-reverse;
     }
@@ -228,18 +234,19 @@
   &-left {
     padding-right: 30px;
     @include media-md {
-      padding-right: 0px;
+      padding-right: 0;
     }
      &-heading {
-         margin-left: 25px;
+       margin-left: 25px;
+       @include media-md {
+         margin-left: 0;
+       }
      }
   }
   &-right {
     max-width: 600px;
     margin-top: 90px;
-    @include media-md {
-      margin-top: unset;
-    }
+
     & img {
       width: 100%;
     }
@@ -248,6 +255,10 @@
     font-size: 1.2em;
     line-height: 30px;
     padding-left: 70px;
+    @include media-md {
+      padding-left: 56px;
+    }
+
     li {
       position: relative;
       margin-bottom: 30px;
@@ -288,6 +299,11 @@
   margin-top: 100px;
   padding: 40px 40px 60px;
   background: rgba(162, 244, 233, 0.5);
+  @include media-md {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   &-steps {
     display: flex;
     justify-content: space-between;
@@ -351,6 +367,9 @@
             justify-content: flex-start;
             align-items: center;
             width: 18%;
+            @include media-md {
+              min-width: 170px;
+            }
             @include media-sm {
                 flex-direction: column;
                 justify-content: center;
