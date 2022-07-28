@@ -10,7 +10,7 @@
          [ngClass]="setOrientationClass(block.childOrientation)"
          [gdColumns]="gridLayoutColumnConfig()">
         <ng-container *ngFor="let childBlock of childBlockRow; let column = index">
-            <div *ngIf="block.tabularSeparator && column === 1" class="tabular-separator">
+            <div *ngIf="block.tabularSeparator && column >= 1" class="tabular-separator">
                 <span>{{block.tabularSeparator}}</span>
             </div>
             <ddp-activity-answer
