@@ -5,14 +5,14 @@ import {
   ToolkitConfigurationService,
   WorkflowBuilderService
 } from 'toolkit';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute} from '@angular/router';
 import {
   ACTUAL_PARTICIPANT_ID_TOKEN,
   actualParticipantIdProvider
-} from "./localProviders";
-import {Observable} from "rxjs";
-import {first, tap} from "rxjs/operators";
-import {SessionMementoService} from "ddp-sdk";
+} from './localProviders';
+import {Observable} from 'rxjs';
+import {first, tap} from 'rxjs/operators';
+import {SessionMementoService} from 'ddp-sdk';
 
 @Component({
   selector: 'app-activity-page',
@@ -40,7 +40,7 @@ export class ActivityPageComponent extends ActivityRedesignedComponent implement
     super(headerConfig, _activatedRoute, _workflowBuilder, config);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     super.ngOnInit();
     this.setParticipantGuid();
   }
