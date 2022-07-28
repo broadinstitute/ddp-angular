@@ -1,21 +1,21 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from '@angular/core';
 import {
     ActivityRedesignedComponent,
     HeaderConfigurationService,
     ToolkitConfigurationService,
     WorkflowBuilderService,
-} from "toolkit";
-import { Observable } from "rxjs";
-import { SessionMementoService } from "ddp-sdk";
-import { ActivatedRoute } from "@angular/router";
-import { first, tap } from "rxjs/operators";
+} from 'toolkit';
+import { Observable } from 'rxjs';
+import { SessionMementoService } from 'ddp-sdk';
+import { ActivatedRoute } from '@angular/router';
+import { first, tap } from 'rxjs/operators';
 import {
     ACTUAL_PARTICIPANT_ID_TOKEN,
     actualParticipantIdProvider,
-} from "./osteo-providers";
+} from './osteo-providers';
 
 @Component({
-    selector: "app-activity-page",
+    selector: 'app-activity-page',
     template: `
         <app-activity
             [studyGuid]="studyGuid"
@@ -39,7 +39,7 @@ export class ActivityPageComponent
         headerConfig: HeaderConfigurationService,
         _activatedRoute: ActivatedRoute,
         _workflowBuilder: WorkflowBuilderService,
-        @Inject("toolkit.toolkitConfig") config: ToolkitConfigurationService
+        @Inject('toolkit.toolkitConfig') config: ToolkitConfigurationService
     ) {
         super(headerConfig, _activatedRoute, _workflowBuilder, config);
     }
