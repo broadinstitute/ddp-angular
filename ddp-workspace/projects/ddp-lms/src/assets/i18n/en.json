@@ -35,8 +35,8 @@
     }
   },
   "DashboardIntro": {
-    "isParent": "Thank you for being part of the Leiomyosarcoma project. This page contains links to your forms and surveys that are part of the study. Over time, we may add additional surveys for your consideration. The information you provide will help drive our understanding of cancer.<br><br>If at any time you have questions or would like to share updated information, please contact the study team at <a class=\"Link\" href=\"mailto:info@LMSproject.org\">info@LMSproject.org</a> or call <a class=\"Link\" href='tel:651-403-5556'>651-403-5556.</a>",
-    "isChild": "Thank you for being part of the Leiomyosarcoma project. This page contains links to your child’s forms and surveys that are part of the study. Over time, we may add additional surveys for your consideration. The information you provide will help drive our understanding of cancer.<br><br>If at any time you have questions or would like to share updated information, please contact the study team at <a class=\"Link\" href=\"mailto:info@LMSproject.org\">info@LMSproject.org</a> or call <a class=\"Link\" href='tel:651-403-5556'>651-403-5556</a>."
+    "isParent": "Thank you for being part of the Leiomyosarcoma project. This page contains links to your forms and surveys that are part of the study. Over time, we may add additional surveys for your consideration. The information you provide will help drive our understanding of cancer.<br><br>If at any time you have questions or would like to share updated information, please contact the study team at <a class=\"Link\" href=\"mailto:info@lmsproject.org\">info@lmsproject.org</a> or call <a class=\"Link\" href='tel:651-403-5556'>651-403-5556.</a>",
+    "isChild": "Thank you for being part of the Leiomyosarcoma project. This page contains links to your child’s forms and surveys that are part of the study. Over time, we may add additional surveys for your consideration. The information you provide will help drive our understanding of cancer.<br><br>If at any time you have questions or would like to share updated information, please contact the study team at <a class=\"Link\" href=\"mailto:info@lmsproject.org\">info@lmsproject.org</a> or call <a class=\"Link\" href='tel:651-403-5556'>651-403-5556</a>."
   },
   "App": {
     "FAQ": {
@@ -48,10 +48,10 @@
       },
       "Header": {
         "P1": "As part of the LMS project, patients contribute their experiences, clinical information, and samples to make data freely available for any LMS researchers. By generating the most comprehensive dataset for LMS, the entire cancer research community can make discoveries that can lead to a better understanding of the disease and changes for future treatments. The project is part of Count Me In, a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research. The project also works in collaboration with a growing coalition of nonprofit advocacy partners.",
-        "P2": "This project has been built with the guidance and input of many different members of the LMS community. Below we have answered some general questions about this project, as well as questions that are specific to different members of the community - please read any and all that may apply. If you have any questions, please feel free to reach out to us at <a href='mailto:info@LMSproject.org'>info@LMSproject.org</a> or by phone at <a href='tel:651-403-5556'>651-403-5556</a>."
+        "P2": "This project has been built with the guidance and input of many different members of the LMS community. Below we have answered some general questions about this project, as well as questions that are specific to different members of the community - please read any and all that may apply. If you have any questions, please feel free to reach out to us at <a href='mailto:info@lmsproject.org'>info@lmsproject.org</a> or by phone at <a href='tel:651-403-5556'>651-403-5556</a>."
       },
       "Footer": {
-        "P1": "<b>Still have more questions? Feel free to reach out to us at <br/> <a href='mailto:info@LMSproject.org'>info@LMSproject.org</a> or by phone at <a href='tel:651-403-5556'>651-403-5556</a>.</b>"
+        "P1": "<b>Still have more questions? Feel free to reach out to us at <br/> <a href='mailto:info@lmsproject.org'>info@lmsproject.org</a> or by phone at <a href='tel:651-403-5556'>651-403-5556</a>.</b>"
       },
       "Sections": [
         {
@@ -181,7 +181,7 @@
             {
               "Question": "How can I spread the word about the LMSproject?",
               "Paragraphs": [
-                "If you would like to learn more about how to spread the word about the project, or if you have any suggestions or questions about the project, please email us at <a href='mailto:info@LMSproject.org'>info@LMSproject.org</a>."
+                "If you would like to learn more about how to spread the word about the project, or if you have any suggestions or questions about the project, please email us at <a href='mailto:info@lmsproject.org'>info@lmsproject.org</a>."
               ]
             },
             {
@@ -662,7 +662,7 @@
       "paragraphText8list4": "How can we develop better treatments for leiomyosarcoma?",
       "paragraphText8part3": "Despite the progress that has been made to begin to answer these questions, we remain far\nfrom the goal. To get there, the detailed genomic characterization of many thousands of\nclinically annotated cancer samples will be required.",
       "paragraphText8part4": "If you have any questions about this study, please reach out to us at ",
-      "paragraphText8part5": "<u><a href='mailto:info@LMSproject.org'>info@lmsproject.org</a></u> or <u><a href='tel:651-403-5556'>651-403-5556.</a></u>",
+      "paragraphText8part5": "<u><a href='mailto:info@lmsproject.org'>info@lmsproject.org</a></u> or <u><a href='tel:651-403-5556'>651-403-5556.</a></u>",
       "paragraphText8part6": "The Leiomyosarcoma project is part of Count Me In."
     }
   },
@@ -816,7 +816,7 @@
     },
     "WDSection": {
       "Paragraph4": "What does a data release look like?",
-      "Text": "Below are links out to publicly available datasets from other Count Me In projects. This is what we’re working towards for the Leiomyosarcoma Project. If you have questions about our data release process, please email us at <u><a href='mailto:info@LMSproject.org'>info@LMSproject.org</a></u>"
+      "Text": "Below are links out to publicly available datasets from other Count Me In projects. This is what we’re working towards for the Leiomyosarcoma Project. If you have questions about our data release process, please email us at <u><a href='mailto:info@lmsproject.org'>info@lmsproject.org</a></u>"
     },
     "IMGSection": [
       {
@@ -927,7 +927,7 @@
       }
     ],
     "paragraph6Title": "Partners",
-    "paragraph6BottomText": "For more information on how to become a partner for the Leiomyosarcoma Project, contact the team at  <a href='mailto:info@LMSproject.org'>info@LMSproject.org</a>",
+    "paragraph6BottomText": "For more information on how to become a partner for the Leiomyosarcoma Project, contact the team at  <a href='mailto:info@lmsproject.org'>info@lmsproject.org</a>",
     "stayInformed": {
       "socialMediaTitles": "Stay informed",
       "signUpText": "Sign up for our mailing list or follow us on social media.",
