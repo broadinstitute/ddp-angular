@@ -424,7 +424,6 @@ export class MedicalRecordComponent implements OnInit {
 
   onAdditionalValueChange(evt: any, colName: string): void {
     let v;
-    colName = Utils.convertUnderScoresToCamelCase(colName);
     if (typeof evt === 'string') {
       v = evt;
     } else {
@@ -438,6 +437,8 @@ export class MedicalRecordComponent implements OnInit {
     }
     if (v !== null) {
       if (this.medicalRecord.additionalValuesJson != null) {
+        const camelCaseColumnName = Utils.convertUnderScoresToCamelCase(colName);
+        this.medicalRecord.additionalValuesJson[ camelCaseColumnName ] = v;
         this.medicalRecord.additionalValuesJson[ colName ] = v;
       } else {
         const addArray = {};
