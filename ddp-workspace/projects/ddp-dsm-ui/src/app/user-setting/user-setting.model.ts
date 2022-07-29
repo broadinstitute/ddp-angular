@@ -66,4 +66,8 @@ export class UserSetting {
   public getDateFormat(): string {
     return this.dateFormat;
   }
+
+  public set setRowsPerPage(rowsOnPage: number) {
+    this.rowsOnPage = rowsOnPage;
+  }
 }
