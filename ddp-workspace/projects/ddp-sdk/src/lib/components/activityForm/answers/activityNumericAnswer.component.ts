@@ -23,8 +23,8 @@ import { LayoutType } from '../../../models/layout/layoutType';
                type="number"
                [appInputRestriction]="isIntegerQuestion ? InputRestriction.Integer : ''"
                [formControl]="numericField"
-               [min]="minValue"
-               [max]="maxValue"
+               [min]="block.min"
+               [max]="block.max"
                autocomplete="off"
                [step]="valueChangeStep"
                [placeholder]="placeholder || block.placeholder"
@@ -46,20 +46,9 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
     public numericField: FormControl;
     InputRestriction = InputRestriction;
     private subs: Subscription;
-    public minValue: Number;
-    public maxValue: Number;
 
     public ngOnInit(): void {
         this.initForm();
-        const validatorItem=this.block.validators.find((item) => !!item);
-        if(!!validatorItem){
-            this.minValue=validatorItem['min'];
-            this.maxValue=validatorItem['max'];
-        }
-        else{
-            this.minValue=this.block.min;
-            this.maxValue=this.block.max;
-        }
         this.subs = this.numericField.valueChanges.subscribe((enteredValue: number) => {
             const answerToDisplay: string = this.mapAnswerToDisplay(enteredValue);
             const answerToPatch: NumericAnswerType = this.mapAnswerToPatchToServer(answerToDisplay);
