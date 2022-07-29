@@ -16,7 +16,7 @@ export class OncHistoryDetail {
               public tissueReceived: string, public gender: string,
               public additionalValuesJson: {}, public tissues: Array<Tissue>,
               public tissueProblemOption: string, public destructionPolicy: string, public unableObtainTissue: boolean,
-              public numberOfRequests, public deleted: boolean) {
+              public numberOfRequests, public deleted: boolean = false) {
     this.participantId = participantId;
     this.oncHistoryDetailId = oncHistoryDetailId;
     this.medicalRecordId = medicalRecordId;
