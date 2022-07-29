@@ -187,7 +187,6 @@ export class OncHistoryDetailComponent implements OnInit {
   // add additional value to oncHistoryDetails
   onAdditionalColChange(evt: any, index: number, colName: string): void {
     let v;
-    colName = Utils.convertUnderScoresToCamelCase(colName);
     if (typeof evt === 'string') {
       v = evt;
     } else {
@@ -201,6 +200,8 @@ export class OncHistoryDetailComponent implements OnInit {
     }
     if (v !== null) {
       if (this.oncHistory[ index ].additionalValuesJson != null) {
+        const camelCaseColumnName = Utils.convertUnderScoresToCamelCase(colName);
+        this.oncHistory[ index ].additionalValuesJson[ camelCaseColumnName ] = v;
         this.oncHistory[ index ].additionalValuesJson[ colName ] = v;
       } else {
         const addArray = {};
