@@ -8,7 +8,8 @@
     </p>
     <div class="ddp-answer-container"
          [ngClass]="setOrientationClass(block.childOrientation)"
-         [gdColumns]="gridLayoutColumnConfig()">
+         [style.display]="isGridLayout() ? 'grid' : ''"
+         [ngStyle]="{'grid-template-columns': gridLayoutColumnConfig()}">
         <ng-container *ngFor="let childBlock of childBlockRow; let column = index">
             <div *ngIf="block.tabularSeparator && column >= 1" class="tabular-separator">
                 <span>{{block.tabularSeparator}}</span>
