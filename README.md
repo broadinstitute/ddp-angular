@@ -46,6 +46,9 @@ javascript config files (make sure Ruby and Docker are installed in order to run
 ./build-study.sh [version] [env] . testboston testboston --config
 ./build-study.sh [version] [env] . pancan cmi-pancan --config
 ```
+There is another way to get the pepperConfig.js file from the development environment: 
+You can go to the project that you require, then open dev-tools and navigate to the network tab. The file can then be copied and pasted into your local environment.
+
 
 **Do not commit rendered `ddpConfig.js` and `pepperConfig.js` files**.
 Once rendered, you can hand-edit the `pepper-angular/ddp-workspace/projects/[ddp-angio | ddp-brain | ddp-mbc]/src/assets/config/pepperConfig.js` on-the-fly during front-end development via `ng serve` to alter your auth0 client and enable local registration for local development, editing it like so:
@@ -60,7 +63,7 @@ Once rendered, you can hand-edit the `pepper-angular/ddp-workspace/projects/[ddp
 * `npm install -g @angular/cli@10.2.0` (if you're working on different angular projects, you may first need a `npm uninstall -g @angular/cli`)
 * `cd ddp-workspace`
 * `npm cache clean`, `rm -fr node_modules` and `rm -fr dist` (can often be skipped)
-* `npm install` (this can often be skipped but must be done at least once)
+* `npm install` (this can often be skipped, but must be done at least once. If you get an error similar to "code: ERESOLVE - ERESOLVE    could not resolve", you can try by executing `npm install --legacy-peer-deps`)
 * `ng serve [your app]` (sandbox-app, basil-app, ddp-angio, ddp-brain, ddp-mbc)
 
 Finally...Point your local browser to [localhost](http://localhost:4200)
