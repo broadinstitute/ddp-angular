@@ -17,7 +17,7 @@ import { ComponentService } from './component.service';
 import { RoleService } from './role.service';
 import { SessionService } from './session.service';
 import { BulkCohortTag } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-model';
-import {LocalStorageService} from "./localStorage.service";
+import {LocalStorageService} from './localStorage.service';
 
 declare var DDP_ENV: any;
 

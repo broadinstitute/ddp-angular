@@ -13,7 +13,7 @@ import { SessionService } from './session.service';
 import { RoleService } from './role.service';
 import { DSMService } from './dsm.service';
 import { ComponentService } from './component.service';
-import {LocalStorageService} from "./localStorage.service";
+import {LocalStorageService} from './localStorage.service';
 
 // Avoid name not found warnings
 declare var Auth0Lock: any;

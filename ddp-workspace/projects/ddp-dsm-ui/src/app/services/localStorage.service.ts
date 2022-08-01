@@ -1,7 +1,7 @@
-import {Injectable} from "@angular/core";
-import {SessionService} from "./session.service";
-import {Statics} from "../utils/statics";
-import {ComponentService} from "./component.service";
+import {Injectable} from '@angular/core';
+import {SessionService} from './session.service';
+import {Statics} from '../utils/statics';
+import {ComponentService} from './component.service';
 
 @Injectable({providedIn: 'root'})
 
