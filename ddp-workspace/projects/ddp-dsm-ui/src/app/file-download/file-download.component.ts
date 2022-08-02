@@ -9,6 +9,7 @@ import {Utils} from '../utils/utils';
 
 const fileSaver = require( 'file-saver' );
 
+
 @Component( {
   selector: 'app-file-download',
   templateUrl: './file-download.component.html',
@@ -22,6 +23,7 @@ export class FileDownloadComponent implements OnDestroy {
   QUARANTINE = 'quarantine';
   CLEAN = 'CLEAN';
   subscription: Subscription;
+  subscription2: Subscription;
 
   constructor( private dsmService: DSMService ) {
 
@@ -31,39 +33,67 @@ export class FileDownloadComponent implements OnDestroy {
     if (this.subscription != null) {
       this.subscription.unsubscribe();
     }
+    if (this.subscription2 != null) {
+      this.subscription2.unsubscribe();
+    }
   }
 
   downloadParticipantFile( file: File ): void {
     this.downloading = true;
+    console.log( file );
     if (!this.isFileClean( file )) {
       this.downloadMessage = 'Error - file has not passed scanning';
       this.downloading = false;
       return;
     }
-    if (file.bucket.includes( this.QUARANTINE )) {
-      this.downloadMessage = 'Error - file is in quarantine and should not be downloaded!';
-      this.downloading = false;
-      return;
-    }
     const realm = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
-    this.subscription = this.dsmService.downloadParticipantFile( file.fileName, file.bucket, file.blobName, realm, file.mimeType )
-      .subscribe( {
-          next: data => {
-            this.saveParticipantFile( data, file.mimeType, file.fileName );
-            this.downloading = false;
-            this.downloadMessage = 'File download finished.';
-          },
-          error: err => {
-            this.downloadMessage = err;
-            this.downloading = false;
-          }
+    this.subscription = this.dsmService.getSignedUrl( this.participant.data.profile[ 'guid' ], file.fileName, file.bucket,
+      file.blobName, file.guid, realm ).subscribe( {
+        next: data => {
+          console.log( data );
+          console.log( file );
+          this.saveParticipantFile( data.url, file.mimeType, data.fileName );
+        },
+        error: err => {
+          console.log( err );
+          this.downloadMessage = err;
+          this.downloading = false;
         }
-      );
+      }
+    );
   }
 
-  saveParticipantFile( data: any, type: string, fileName: string ): void {
-    const blob = new Blob( [ data ], {type: type} );
-    fileSaver.saveAs( blob, fileName );
+  saveParticipantFile( url: any, type: string, fileName: string ): void {
+//    todo pegah this has to change to download from the signedUrl
+    this.subscription2 = this.dsmService.downloadFromSignedUrl( url ).subscribe(
+      {
+        next: data => {
+          console.log(data);
+          const blob = new Blob( [ data ], {type: type} );
+          fileSaver.saveAs( blob, fileName );
+          this.downloading = false;
+          this.downloadMessage = 'File download finished.';
+        },
+        error: err => {
+          console.log( err );
+          this.downloadMessage = err;
+          this.downloading = false;
+        }
+      }
+    );
+//    const downloadURI = (uri, name) => {
+//      const link = document.createElement("a");
+//      link.download = name;
+//      link.href = uri;
+//      document.body.appendChild(link);
+//      link.click();
+//      document.body.removeChild(link);
+//    }
+//    downloadURI(url, fileName);
+
+
+
+
   }
 
 
@@ -72,6 +102,6 @@ export class FileDownloadComponent implements OnDestroy {
   }
 
   public isFileClean( file: File ): boolean {
-    return file.scannedAt && file.bucket && file.scanResult === this.CLEAN;
+    return file.scanResult === this.CLEAN;
   }
 }

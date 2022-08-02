@@ -42,9 +42,15 @@ export class Data {
         });
       }
     }
+    let parsedFiles = [];
+    if(json.files){
+      for(let f of json.files){
+        parsedFiles.push(File.parse(f));
+      }
+    }
     return new Data(
       json.profile, json.status, json.statusTimestamp, json.dsm,
-      json.ddp, medicalProviders, this.activities( json.activities ), json.address, json.invitations, json.computed, json.files
+      json.ddp, medicalProviders, this.activities( json.activities ), json.address, json.invitations, json.computed, parsedFiles
     );
   }
 

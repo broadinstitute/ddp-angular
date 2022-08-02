@@ -602,14 +602,20 @@ export class DSMService {
     );
   }
 
-  public downloadParticipantFile( fileName: string, bucketName: string, blob: string, realm: string, mimeType: string ): Observable<any> {
+  public getSignedUrl( ddpParticipantId: string, fileName: string, bucketName: string, blob: string, fileGuid:string, realm: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'downloadFile';
     const map: { name: string; value: any }[] = [];
     map.push( {name: DSMService.REALM, value: realm} );
+    map.push( {name: 'ddpParticipantId', value: ddpParticipantId} );
     map.push( {name: 'fileName', value: fileName} );
     map.push( {name: 'bucket', value: bucketName} );
-    map.push( {name: 'blob', value: blob} );
-    return this.http.get( url, this.buildQueryBlobHeader( map )).pipe( catchError( this.handleError ) );
+    map.push( {name: 'blobName', value: blob} );
+    map.push( {name: 'fileGuid', value: fileGuid} );
+    return this.http.get( url, this.buildQueryHeader( map )).pipe( catchError( this.handleError ) );
+  }
+
+  public downloadFromSignedUrl( url: string): Observable<any> {
+    return this.http.get( url, this.buildQueryBlobHeaderForGCP(  )).pipe( catchError( this.handleError ) );
   }
 
   public uploadNdiFile(file: File): Observable<any> {
@@ -1003,6 +1009,14 @@ export class DSMService {
       params
     };
   }
+
+  private buildQueryBlobHeaderForGCP(): any {
+    return {
+      headers: this.buildJsonHeader(),
+      withCredentials: true,
+      responseType: 'blob'
+    };
+  }
   private buildQueryCsvBlobHeader(map: any[]): any {
     let params: HttpParams = new HttpParams();
     for (const param of map) {
@@ -1038,6 +1052,17 @@ export class DSMService {
         'Content-Type': 'application/json',
         Accept: 'application/json',
         Authorization: this.sessionService.getAuthBearerHeaderValue()
+      });
+    }
+  }
+
+  private buildJsonHeader(): HttpHeaders {
+    if (this.checkCookieBeforeCall()) {
+      return new HttpHeaders({
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true'
       });
     }
   }
