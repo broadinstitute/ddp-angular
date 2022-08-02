@@ -9,9 +9,9 @@ import {
 import { Lookup } from './lookup.model';
 import { DSMService } from '../services/dsm.service';
 import { ComponentService } from '../services/component.service';
-import {debounceTime, distinctUntilChanged, exhaustMap, tap} from "rxjs/operators";
-import {Observable, Subject, Subscription} from "rxjs";
-import {Statics} from "../utils/statics";
+import {debounceTime, distinctUntilChanged, exhaustMap, tap} from 'rxjs/operators';
+import {Observable, Subject, Subscription} from 'rxjs';
+import {Statics} from '../utils/statics';
 
 @Component({
   selector: 'app-lookup',
@@ -38,7 +38,7 @@ export class LookupComponent implements OnInit, OnDestroy {
 
   constructor(private dsmService: DSMService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.lookedUpValueUnsubscribe = this.lookedUpValue
       .pipe(
         debounceTime(1000),
@@ -46,15 +46,15 @@ export class LookupComponent implements OnInit, OnDestroy {
         exhaustMap(this.fetchLookedUpValue.bind(this)),
         tap(this.setValues.bind(this))
       )
-      .subscribe()
+      .subscribe();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.lookedUpValueUnsubscribe.unsubscribe();
   }
 
   public checkForLookup(): Array<Lookup> {
-    this.lookupValue.trim() !== '' && this.lookedUpValue.next(this.lookupValue)
+    this.lookupValue.trim() !== '' && this.lookedUpValue.next(this.lookupValue);
     return this.lookups;
   }
 
@@ -91,7 +91,7 @@ export class LookupComponent implements OnInit, OnDestroy {
   private setValues(data: object[]): void {
     this.lookups = [];
     this.changeValue();
-    data.forEach((data_value: object) => this.lookups.push(Lookup.parse(data_value)))
+    data.forEach((data_value: object) => this.lookups.push(Lookup.parse(data_value)));
   }
 
 }

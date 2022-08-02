@@ -302,7 +302,7 @@ export class MedicalRecordComponent implements OnInit {
   }
 
   public setContact(contact: Lookup | string): void {
-    console.log(contact, 'CONTACT')
+    console.log(contact, 'CONTACT');
     if (contact != null) {
       if (contact instanceof Lookup) {
         const nameValues = [];
