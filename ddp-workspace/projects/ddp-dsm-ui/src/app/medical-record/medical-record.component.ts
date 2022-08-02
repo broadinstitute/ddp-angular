@@ -302,20 +302,21 @@ export class MedicalRecordComponent implements OnInit {
   }
 
   public setContact(contact: Lookup | string): void {
+    console.log(contact, 'CONTACT')
     if (contact != null) {
       if (contact instanceof Lookup) {
         const nameValues = [];
         this.medicalRecord.name = contact.field1.value;
         nameValues.push({name: 'm.name', value: this.medicalRecord.name});
-        if (contact.field2.value != null) {
+        if (contact?.field2?.value != null) {
           this.medicalRecord.contact = contact.field2.value;
           nameValues.push({name: 'm.contact', value: this.medicalRecord.contact});
         }
-        if (contact.field3.value != null) {
+        if (contact?.field3?.value != null) {
           this.medicalRecord.phone = contact.field3.value;
           nameValues.push({name: 'm.phone', value: this.medicalRecord.phone});
         }
-        if (contact.field4.value != null) {
+        if (contact?.field4?.value != null) {
           this.medicalRecord.fax = contact.field4.value;
           nameValues.push({name: 'm.fax', value: this.medicalRecord.fax});
         }

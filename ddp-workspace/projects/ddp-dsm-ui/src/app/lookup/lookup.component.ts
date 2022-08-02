@@ -1,16 +1,24 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy, OnInit,
+  Output,
+} from '@angular/core';
 
 import { Lookup } from './lookup.model';
 import { DSMService } from '../services/dsm.service';
 import { ComponentService } from '../services/component.service';
-import { Statics } from '../utils/statics';
+import {debounceTime, distinctUntilChanged, exhaustMap, tap} from "rxjs/operators";
+import {Observable, Subject, Subscription} from "rxjs";
+import {Statics} from "../utils/statics";
 
 @Component({
   selector: 'app-lookup',
   templateUrl: './lookup.component.html',
   styleUrls: ['./lookup.component.css']
 })
-export class LookupComponent {
+export class LookupComponent implements OnInit, OnDestroy {
   @Input() lookupValue: string;
   @Input() lookupType: string;
   @Input() disabled = false;
@@ -22,29 +30,31 @@ export class LookupComponent {
 
   @Output() lookupResponse = new EventEmitter<Lookup | string>();
 
+  lookedUpValue = new Subject<string>();
+  lookedUpValueUnsubscribe: Subscription;
+
   lookups: Array<Lookup> = [];
   currentPatchField: string;
 
-  constructor(private dsmService: DSMService) {
+  constructor(private dsmService: DSMService) {}
+
+  ngOnInit() {
+    this.lookedUpValueUnsubscribe = this.lookedUpValue
+      .pipe(
+        debounceTime(1000),
+        distinctUntilChanged((prev, curr) => !!this.lookups.find(data => data.field1.value === curr) || curr === prev),
+        exhaustMap(this.fetchLookedUpValue.bind(this)),
+        tap(this.setValues.bind(this))
+      )
+      .subscribe()
+  }
+
+  ngOnDestroy() {
+    this.lookedUpValueUnsubscribe.unsubscribe();
   }
 
   public checkForLookup(): Array<Lookup> {
-    let jsonData: any[];
-    if (this.lookupValue.trim() !== '') {
-      if (!(this.lookupValue.length > 1 && this.lookups.length === 0)) {
-        this.dsmService.lookupValue(this.lookupType, this.lookupValue, localStorage.getItem(ComponentService.MENU_SELECTED_REALM))
-          .subscribe(// need to subscribe, otherwise it will not send!
-            data => {
-              this.lookups = [];
-              jsonData = data;
-              jsonData.forEach((val) => {
-                const value = Lookup.parse(val);
-                this.lookups.push(value);
-              });
-            }
-          );
-      }
-    }
+    this.lookupValue.trim() !== '' && this.lookedUpValue.next(this.lookupValue)
     return this.lookups;
   }
 
@@ -73,4 +83,15 @@ export class LookupComponent {
   isPatchedCurrently(field: string): boolean {
     return this.currentPatchField === field;
   }
+
+  private fetchLookedUpValue(value: string): Observable<any> {
+   return this.dsmService.lookupValue(this.lookupType, value, localStorage.getItem(ComponentService.MENU_SELECTED_REALM));
+  }
+
+  private setValues(data: object[]): void {
+    this.lookups = [];
+    this.changeValue();
+    data.forEach((data_value: object) => this.lookups.push(Lookup.parse(data_value)))
+  }
+
 }
