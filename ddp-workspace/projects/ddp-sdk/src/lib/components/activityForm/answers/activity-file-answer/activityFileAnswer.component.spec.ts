@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { By } from '@angular/platform-browser';
 import { Observable, of } from 'rxjs';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { TranslateTestingModule } from '../../../../testsupport/translateTestingModule';
 import { ActivityFileAnswer } from './activityFileAnswer.component';
@@ -18,7 +19,7 @@ import { QuestionPromptComponent } from '../question-prompt/questionPrompt.compo
 import { ValidationMessageComponent } from '../../../validationMessage.component';
 import { ActivityFileValidationRule } from '../../../../services/activity/validators/activityFileValidationRule';
 import { FileSizeFormatterPipe } from '../../../../pipes/fileSizeFormatter.pipe';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ActivityFileAnswerSuccess } from '../activity-file-answer-success/activityFileAnswerSuccess.component';
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
@@ -53,6 +54,7 @@ describe('ActivityFileAnswer', () => {
         await TestBed.configureTestingModule({
             declarations: [
                 ActivityFileAnswer,
+                ActivityFileAnswerSuccess,
                 QuestionPromptComponent,
                 ValidationMessageComponent,
                 FileSizeFormatterPipe
@@ -112,7 +114,7 @@ describe('ActivityFileAnswer', () => {
 
         it('should display an uploaded file data', () => {
             const uploadedFile = fixture.debugElement.query(By.css('.uploaded-file-chip')).nativeElement;
-            expect(uploadedFile.textContent.trim()).toContain('1.png (size: 4.77 MB)');
+            expect(uploadedFile.textContent.trim()).toContain('1.png(size: 4.77 MB)');
         });
 
         it('should call undoUploadedFile by click on remove uploaded file button', () => {

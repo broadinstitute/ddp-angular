@@ -48,9 +48,10 @@
                     color="primary" selected
                     (removed)="undoUploadedFile(i)"
                     #uploaded>
-                    {{ uploadedFile?.fileName }}
+                    <span class="file-name">{{ uploadedFile?.fileName }}</span>
                     <span class="file-size">{{'SDK.FileUpload.Size' | translate : { size: uploadedFile?.fileSize | fileSize} }}</span>
                     <button matChipRemove *ngIf="!readonly"
+                            class="cancel-btn"
                             mat-icon-button
                             [attr.aria-label]="'SDK.FileUpload.RemoveUploadedFile' | translate"
                             #undoUploadBtn>

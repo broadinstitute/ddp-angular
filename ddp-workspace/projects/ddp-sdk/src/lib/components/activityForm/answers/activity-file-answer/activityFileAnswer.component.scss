@@ -1,5 +1,6 @@
 $drop-block-color: whitesmoke;
 $drop-block-active-color: lightyellow;
+$tablet-screen-width: 680px;
 
 .file-requirements {
     margin-bottom: 10px;
@@ -7,6 +8,12 @@ $drop-block-active-color: lightyellow;
 
 .file-upload-content {
     display: flex;
+    padding: 16px 0;
+
+    @media (max-width: $tablet-screen-width) {
+        flex-direction: column;
+        gap: 12px;
+    }
 }
 
 .file-upload-content.readonly {
@@ -38,6 +45,10 @@ $drop-block-active-color: lightyellow;
     justify-content: center;
     cursor: pointer;
 
+    @media (max-width: $tablet-screen-width) {
+        margin: 0 auto;
+    }
+
     &.file-over {
         background-color: $drop-block-active-color
     }
@@ -56,6 +67,7 @@ $drop-block-active-color: lightyellow;
 .uploaded-file {
     display: flex;
     flex-direction: column;
+
     .title {
         float: left;
     }
@@ -72,13 +84,32 @@ $drop-block-active-color: lightyellow;
         clear: both;
     }
 
-    .uploaded-file-chip {
-        .file-size {
-            margin-left: 5px;
+    &-chip {
+        height: auto;
+        min-width: 180px;
+        flex-wrap: wrap;
+        flex-basis: auto;
+        column-gap: 5px;
+        padding-right: 30px!important;
+
+        @media (max-width: 470px) {
+            flex-basis: min-content;
+        }
+        @media (max-width: 350px) {
+            flex-shrink: 0;
+        }
+
+        .cancel-btn {
+            position: absolute;
+            right: 6px;
         }
 
         .mat-icon-button {
             height: initial;
+
+            .mat-icon {
+                line-height: 16px;
+            }
         }
     }
 }
