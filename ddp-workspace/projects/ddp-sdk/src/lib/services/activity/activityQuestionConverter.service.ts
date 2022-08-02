@@ -278,8 +278,8 @@ export class ActivityQuestionConverter {
         numericBlock.placeholder = questionJson.placeholderText;
         const intRangeValidation = questionJson.validations.find(validation => validation.rule === ValidationRuleType.IntRange);
         if (intRangeValidation) {
-            numericBlock.min = intRangeValidation.min || null;
-            numericBlock.max = intRangeValidation.max || null;
+            numericBlock.min = intRangeValidation.min == null ? null : intRangeValidation.min;
+            numericBlock.max = intRangeValidation.max == null ? null : intRangeValidation.max;
         }
         return numericBlock;
     }
