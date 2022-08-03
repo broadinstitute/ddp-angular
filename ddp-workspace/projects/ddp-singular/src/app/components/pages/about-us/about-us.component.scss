@@ -8,7 +8,6 @@
 .about {
   display: flex;
   justify-content: space-between;
-    margin-top: 50px;
   @include media-sm {
     flex-direction: column-reverse;
   }
