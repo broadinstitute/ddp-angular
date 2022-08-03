@@ -32,17 +32,18 @@
   width: 100%;
 
   .inner-container {
-    padding: 3rem;
+    padding: 3rem 0;
+    width: 50%;
 
     .the-purpose-of-this {
       color: #000000;
-      font-family: 'Untitled Sans', sans-serif;
+      font-family: 'Untitled-Sans-Regular', sans-serif;
       font-size: 1.25rem;
       letter-spacing: 0;
       line-height: 1.875rem;
       text-align: left;
       margin: 3rem 0 !important;
-      width: 60%;
+
 
       @media (max-width: 776px) {
         width: 80%;
