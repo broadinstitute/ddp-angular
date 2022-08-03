@@ -8,9 +8,9 @@ import { Component } from '@angular/core';
 export class HowToParticipateComponent {
 
   consent = 'https://storage.googleapis.com/cmi-study-dev-assets/lms/pdf/7.%20Adult%20Reseach%20Consent%20Form%20V5%20TRACKED%20LMS%20April%202022.docx.pdf';
-  medical_release = 'https://storage.googleapis.com/cmi-study-dev-assets/lms/pdf/16.%20Medical%20Release%20Form%20-%20Adult.docx.pdf';
+  medical_release = 'https://storage.googleapis.com/cmi-study-dev-assets/lms/pdf/_16.%20Medical%20Release%20Form%20-%20Adult%20LMS%20-%20Updated%20July.docx.pdf';
   kit = 'https://storage.googleapis.com/cmi-study-dev-assets/lms/pdf/Kit%20Instructions%20-%20Linked%20on%20Participation%20Page.pdf';
-  survey = 'https://storage.googleapis.com/cmi-study-dev-assets/lms/pdf/LMS%20About%20You%20Survey.pdf';
+  survey = 'https://storage.googleapis.com/cmi-study-dev-assets/lms/pdf/LMS%20About%20You_Your%20LMS%20Survey.pdf';
   tumorSamples = 'https://storage.googleapis.com/cmi-study-dev-assets/lms/pdf/Shared%20Learnings%20Letter.pdf';
 
     readonly stepsHref = [
