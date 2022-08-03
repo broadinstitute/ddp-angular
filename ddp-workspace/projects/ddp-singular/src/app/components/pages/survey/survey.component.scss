@@ -91,32 +91,6 @@
         min-width: 25%;
       }
     }
-
-    app-atcp-activity {
-      padding: 0;
-      flex-grow: 1;
-
-      @media (min-width: 590px) {
-        padding: 0 30px;
-      }
-    }
-
-    &.is-assent {
-      app-atcp-activity {
-        ::ng-deep {
-          //@include font-McLaren();
-
-          .assent-subtitle {
-            padding-bottom: 5px;
-            font-size: 18px;
-          }
-
-          .content.content_tight h1 {
-            font-size: 23px;
-          }
-        }
-      }
-    }
   }
 }
 
