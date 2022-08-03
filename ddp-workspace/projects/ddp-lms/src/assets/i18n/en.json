@@ -84,8 +84,8 @@
             {
               "Question": "Who is conducting this research?",
               "Paragraphs": [
-                "This project is being conducted by the Broad Institute of MIT and Harvard, Dana-Farber Cancer Institute, and Count Me In, a non-profit research initiative that conducts patient-partnered studies of cancer. Count Me In's Leiomyosarcoma (LMS) Project and Leiomyosarcoma (LMS) Project are supported by a grant from the National Cancer Institute's Cancer Moonshot program and are part of the <a href='https://www.cancer.gov/research/key-initiatives/moonshot-cancer-initiative/implementation/patient-engagement' target='_blank'>Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers</a>."
-              ]
+                "This project is being conducted by the Broad Institute of MIT and Harvard, Dana-Farber Cancer Institute, and Count Me In, a non-profit research initiative that conducts patient-partnered studies of cancer. Count Me In's <strong>Osteosarcoma (OS)</strong> Project and Leiomyosarcoma (LMS) Project are supported by a grant from the National Cancer Institute's Cancer Moonshot program and are part of the <a href='https://www.cancer.gov/research/key-initiatives/moonshot-cancer-initiative/implementation/patient-engagement' target='_blank'>Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers</a>."
+            ]
             },
             {
               "Question": "Who is eligible to participate?",
@@ -109,7 +109,7 @@
               "Question": "How has the LMS community been involved in the design of this project?",
               "Paragraphs": [
                 "We have worked closely with patients, parents, and patient advocates within the LMS community from the beginning of this project through its design and implementation. The community has been involved in all aspects including concept, goals, messaging, surveys, and the design of this website. The project also partners with leading researchers working in LMS.",
-                "We’re proud to have our Advocacy Partners Leiomyosarcoma Support & Direct Research Foundation,National Leiomyosarcoma Foundation, and Sarcoma Sunflower Brigade to partner with and support this project. "
+                "We’re proud to have our Advocacy Partners Leiomyosarcoma Support & Direct Research Foundation, National Leiomyosarcoma Foundation, and Sarcoma Sunflower Brigade to partner with and support this project. "
               ]
             },
             {
@@ -170,7 +170,7 @@
             {
               "Question": "Can I provide access to medical records and tissue on behalf of someone who passed away?",
               "Paragraphs": [
-                "The LMSproject cannot currently obtain medical records or tissue samples for individuals who have passed away. We are exploring future plans for a next-of-kin process, but this will take time to develop. Through the Loved Ones survey, you may choose to opt-in to be re-contacted by the study if a process is developed to enable this."
+                "The LMSproject cannot currently obtain medical records or tissue samples for individuals who have passed away. We are exploring future plans for a next-of-kin process, but this will take time to develop."
               ]
             }
           ]
