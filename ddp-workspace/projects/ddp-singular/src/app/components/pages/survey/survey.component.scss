@@ -1,4 +1,5 @@
-
+@import '../../../../styles/variables';
+@import '../../../../styles/breakpoints';
 
 .survey {
   ::ng-deep {
@@ -120,9 +121,20 @@
 }
 
 .container {
+  $base-margin-top: 50px;
   max-width: 960px !important;
-    margin-top: 50px!important;
+  margin-top: calc($base-margin-top + $header-height)!important;
   margin-bottom: 42px !important;
+
+  @include media-lg {
+    margin-top: calc($base-margin-top + $header-lg-height)!important;
+  }
+  @include media-sm {
+    margin-top: calc($base-margin-top + $header-sm-height)!important;
+  }
+  @include media-xs {
+    margin-top: calc($base-margin-top + $header-xs-height)!important;
+  }
 }
 
 .content__tight {
