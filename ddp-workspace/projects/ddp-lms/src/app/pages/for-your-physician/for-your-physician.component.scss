@@ -44,11 +44,11 @@
       margin: 3rem 0 !important;
       width: 60%;
 
-      @media(max-width: 776px){
+      @media (max-width: 776px) {
         width: 80%;
       }
 
-      @media(max-width: 576px){
+      @media (max-width: 576px) {
         width: 100%;
       }
     }
@@ -108,10 +108,9 @@
     line-height: 1.875rem;
     font-weight: normal;
     font-size: 1.25rem;
-
   }
 
-  .paragraphText1Highlighted {
+  .paragraphText1Highlighted ::ng-deep a {
     color: #c59ce4;
     font-size: 1.1875rem;
     text-decoration: underline;
