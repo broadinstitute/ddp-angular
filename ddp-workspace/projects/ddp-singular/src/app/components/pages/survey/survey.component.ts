@@ -57,8 +57,6 @@ export class SurveyComponent implements OnInit, OnDestroy {
       }
       this.workflowBuilder.getCommand(activityResponse).execute();
     });
-
-      this.scrollToTop();
   }
 
   get isConsent(): boolean {
@@ -78,10 +76,6 @@ export class SurveyComponent implements OnInit, OnDestroy {
     const lastRenderedActivity = renderedActivities[renderedActivities.length - 1];
 
     return RenderActivityKey[lastRenderedActivity.i18nKey] === currentActivity.activityCode;
-  }
-
-  private scrollToTop(): void {
-      document.body.firstElementChild.scrollTo(0,0);
   }
 
   private getActivities(): Observable<ActivityInstance[]> {
