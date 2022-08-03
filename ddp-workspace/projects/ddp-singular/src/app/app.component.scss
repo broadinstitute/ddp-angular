@@ -1,7 +1,24 @@
+@import '../styles/variables';
+@import '../styles/breakpoints';
+
 :host {
   display: flex;
   flex-flow: column nowrap;
   height: 100%;
   overflow: auto;
+}
+
+main {
+    margin-top: $header-height;
+
+    @include media-lg {
+        margin-top: $header-lg-height;
+    }
+    @include media-sm {
+        margin-top: $header-sm-height;
+    }
+    @include media-xs {
+        margin-top: $header-xs-height;
+    }
 }
 
