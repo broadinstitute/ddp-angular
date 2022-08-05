@@ -11,6 +11,7 @@ import { MailingListService } from '../../services/mailing-list.service';
 })
 export class FooterComponent {
   Route = Route;
+  public pdfUrl = 'https://storage.googleapis.com/cmi-study-dev-assets/brugada/pdf/for-physicians.pdf';
 
   constructor(private mailingListService: MailingListService) {}
 
