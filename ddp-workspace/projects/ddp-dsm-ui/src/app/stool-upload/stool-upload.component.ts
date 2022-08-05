@@ -3,15 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 
 import { DSMService } from '../services/dsm.service';
 import { Auth } from '../services/auth.service';
-import { Utils } from '../utils/utils';
-import { UploadParticipant, UploadResponse } from './stool-upload.model';
+import { UploadParticipant } from './stool-upload.model';
 import { KitType } from '../utils/kit-type.model';
 import { ModalComponent } from '../modal/modal.component';
 import { ComponentService } from '../services/component.service';
 import { Statics } from '../utils/statics';
 import { FieldFilepickerComponent } from '../field-filepicker/field-filepicker.component';
-import { Result } from '../utils/result.model';
 import { RoleService } from '../services/role.service';
+import {finalize} from "rxjs/operators";
 
 @Component({
   selector: 'app-stool-upload',
@@ -30,35 +29,23 @@ export class StoolUploadComponent implements OnInit {
   additionalMessage: string;
 
   loading = false;
-  uploadPossible = false;
 
   kitTypes: Array<KitType> = [];
-  uploadReasons: Array<string> = [];
-  carriers: Array<string> = [];
   kitType: KitType;
 
   file: File = null;
 
   failedParticipants: Array<UploadParticipant> = [];
-  duplicateParticipants: Array<UploadParticipant> = [];
-  specialKits: Array<UploadParticipant> = [];
 
   realmNameStoredForFile: string;
   allowedToSeeInformation = false;
-  specialMessage: string;
 
-  constructor( private dsmService: DSMService, private auth: Auth, private compService: ComponentService, private route: ActivatedRoute,
-               private role: RoleService ) {
-    if (!auth.authenticated()) {
-      auth.logout();
-    }
+  constructor( private dsmService: DSMService, private auth: Auth, private compService: ComponentService, private route: ActivatedRoute) {
+    !auth.authenticated() && auth.logout();
     this.realmNameStoredForFile = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     this.route.queryParams.subscribe(params => {
       const realm = params[ DSMService.REALM ] || null;
-      if (realm != null && realm !== '') {
-        //        this.compService.realmMenu = realm;
-        this.checkRight();
-      }
+      !!realm && this.checkRight()
     });
   }
 
@@ -70,7 +57,7 @@ export class StoolUploadComponent implements OnInit {
       next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
-          if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
+          if (this.realmNameStoredForFile === val) {
             this.allowedToSeeInformation = true;
             this.getPossibleKitType();
           }
@@ -84,7 +71,7 @@ export class StoolUploadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
+    if (this.realmNameStoredForFile != null) {
       this.checkRight();
     } else {
       this.additionalMessage = 'Please select a study';
@@ -96,7 +83,7 @@ export class StoolUploadComponent implements OnInit {
     if (this.isSelectedRealm()) {
       this.loading = true;
       let jsonData: any[];
-      this.dsmService.getKitTypes(localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
+      this.dsmService.getKitTypes(this.realmNameStoredForFile).subscribe({
         next: data => {
           this.kitTypes = [];
           jsonData = data;
@@ -109,9 +96,8 @@ export class StoolUploadComponent implements OnInit {
           if (this.kitTypes.length === 1) {
             this.kitType = this.kitTypes[ 0 ];
           } else {
-            this.errorMessage = 'Study does not have stool kit';
+            this.errorMessage = 'Study does not support stool samples';
           }
-          // console.info(`${this.kitTypes.length} kit types received: ${JSON.stringify(data, null, 2)}`);
           this.loading = false;
         },
         error: err => {
@@ -131,62 +117,33 @@ export class StoolUploadComponent implements OnInit {
     this.failedParticipants = [];
     this.loading = true;
     this.dsmService.uploadStoolTxtFile(
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.kitType.name,
+      this.realmNameStoredForFile, this.kitType.name,
       this.file
+    ).pipe(
+      finalize(() => this.loading = false)
     )
       .subscribe({
         next: data => {
-          this.loading = false;
           if (typeof data === 'string') {
             this.errorMessage = 'Error - Uploading txt.\n' + data;
           }
         },
         error: err => {
-          this.loading = false;
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
           this.errorMessage = 'Error - Uploading txt\n';
-        }
+        },
       });
-  }
-
-  downloadFailed(): void {
-    if (this.failedParticipants != null && this.failedParticipants.length > 0 && this.realmNameStoredForFile != null &&
-      this.kitType != null && this.kitType.name != null) {
-      const fields = [ 'mfBarcode', 'participantId', 'receiveDate'];
-      const date = new Date();
-      Utils.createCSV(
-        fields,
-        this.failedParticipants,
-        'Upload ' + this.realmNameStoredForFile + ' ' + this.kitType.name + ' Failed '
-        + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION
-      );
-      this.realmNameStoredForFile = null;
-    } else {
-      this.errorMessage = 'Error - Couldn\'t save failed participant list';
-    }
   }
 
   fileSelected(file: File): void {
     this.file = file;
   }
 
-  getCompService(): ComponentService {
-    return this.compService;
-  }
-
-  allOptionsSelected(): boolean {
-    this.uploadPossible = this.kitType != null && (this.uploadReasons.length === 0) && (this.carriers.length === 0);
-    return this.uploadPossible;
-  }
 
   private isSelectedRealm(): boolean {
-    return localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null &&
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== '';
+    return !!this.realmNameStoredForFile;
   }
 
-  hasRole(): RoleService {
-    return this.role;
-  }
 }

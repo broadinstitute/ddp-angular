@@ -21,11 +21,11 @@
 <div *ngIf="allowedToSeeInformation">
   <br/>
   <br/>
-  <div *ngIf="allOptionsSelected()" class="Width--80">
+  <div class="Width--80">
     <app-filepicker [id]="'kitUploadFile'" [fileFormat]="'txt'" (fileSelected)="fileSelected($event)"></app-filepicker>
     <button type="button" mat-raised-button color="primary"
             (click)="upload()"
-            [disabled]="!(uploadPossible && file != null) || loading">Upload Stool Samples
+            [disabled]="!(file != null) || loading">Upload Stool Samples
     </button>
   </div>
   <div>
@@ -50,31 +50,8 @@
             </tr>
           </table>
         </li>
-        <li>Afterwards kits can be found under <u>'Kits without Labels'</u>. GP will trigger label creation.</li>
       </ul>
     </b>
   </div>
 
-
-  <app-modal>
-    <div class="app-modal-header">
-      Please select the participant for which you want to upload a new one.<br>
-    </div>
-    <div class="app-modal-body">
-      <div *ngFor="let duplicateParticipant of duplicateParticipants">
-        Participant already has a kit.
-        <mat-checkbox color="primary" [checked]="duplicateParticipant.selected"
-                      (change)="duplicateParticipant.selected = $event.checked" disableRipple>
-          {{duplicateParticipant.participantId}} {{duplicateParticipant.mfBarcode}} {{duplicateParticipant.receiveDate}}
-        </mat-checkbox>
-      </div>
-      <div *ngFor="let duplicateParticipant of specialKits">
-        {{specialMessage}}
-        <mat-checkbox color="primary" [checked]="duplicateParticipant.selected"
-                      (change)="duplicateParticipant.selected = $event.checked" disableRipple>
-          {{duplicateParticipant.participantId}} {{duplicateParticipant.mfBarcode}} {{duplicateParticipant.receiveDate}}
-        </mat-checkbox>
-      </div>
-    </div>
-  </app-modal>
 </div>

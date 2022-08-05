@@ -194,7 +194,6 @@ import {StoolUploadComponent} from '../stool-upload/stool-upload.component';
     LoadingModalComponent,
     CohortTagComponent,
     StoolUploadComponent,
-    CohortTagComponent,
     BulkCohortTagModalComponent,
     OpenDialogDirective,
     FileDownloadComponent
