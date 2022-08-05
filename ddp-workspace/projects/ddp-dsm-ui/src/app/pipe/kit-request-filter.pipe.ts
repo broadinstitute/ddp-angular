@@ -17,7 +17,7 @@ export class KitRequestFilterPipe implements PipeTransform {
       return array.filter(row => row.deactivationReason != null && row.deactivationReason.indexOf(filterReason) > -1);
     }
     if (filterTrackingTo !== '') {
-      return array.filter(row => row.trackingNumberTo != null && row.trackingNumberTo.indexOf(filterTrackingTo) > -1);
+      return array.filter(row => row.trackingToId != null && row.trackingToId.indexOf(filterTrackingTo) > -1);
     }
     if (filterTrackingReturn !== '') {
       return array.filter(row => (row.trackingReturnId != null && row.trackingReturnId.indexOf(filterTrackingReturn) > -1));

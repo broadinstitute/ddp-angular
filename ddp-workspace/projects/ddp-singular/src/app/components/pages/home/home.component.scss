@@ -102,22 +102,33 @@
       font-size: 28px;
       line-height: 28px;
 
-      @media (max-width: 600px) {
+      @include media-sm {
         font-size: 24px;
         line-height: 32px;
+      }
+      @include media-xs {
+        text-align: center;
       }
     }
 
     &-items {
+
       &-item {
         display: flex;
-
         padding-left: 42px;
+
+        @include media-md {
+            padding-left: 24px;
+        }
 
         @media (max-width: 960px) {
           align-items: center !important;
-
           padding-left: 0;
+        }
+
+        @include media-xs {
+          flex-direction: column;
+          gap: 12px;
         }
 
         &:nth-of-type(1) {
@@ -134,6 +145,9 @@
 
         &:not(:last-of-type) {
           margin-bottom: 54px;
+          @include media-xs {
+            margin-bottom: 36px;
+          }
         }
 
         &:nth-child(1) {
@@ -175,23 +189,28 @@
 
         &-img {
           flex: 0 0 83px;
-
           margin-right: 42px;
 
           @media (max-width: 600px) {
             flex: 0 0 64px;
-
             margin-right: 24px;
+          }
+
+          @include media-xs {
+            flex-basis: 52px;
+            width: 52px;
           }
         }
         &-text {
           padding-right: 32px;
-
           font-size: 20px;
           line-height: 28px;
 
-          @media (max-width: 960px) {
+          @include media-md {
             padding-right: 0;
+          }
+          @include media-xs {
+            text-align: center;
           }
         }
       }
@@ -221,6 +240,9 @@
   }
   &-wrapper {
     display: flex;
+    @include media-md {
+      column-gap: 24px;
+    }
     @include media-sm {
       flex-direction: column-reverse;
     }
@@ -228,18 +250,19 @@
   &-left {
     padding-right: 30px;
     @include media-md {
-      padding-right: 0px;
+      padding-right: 0;
     }
      &-heading {
-         margin-left: 25px;
+       margin-left: 25px;
+       @include media-md {
+         margin-left: 0;
+       }
      }
   }
   &-right {
     max-width: 600px;
     margin-top: 90px;
-    @include media-md {
-      margin-top: unset;
-    }
+
     & img {
       width: 100%;
     }
@@ -248,6 +271,10 @@
     font-size: 1.2em;
     line-height: 30px;
     padding-left: 70px;
+    @include media-md {
+      padding-left: 56px;
+    }
+
     li {
       position: relative;
       margin-bottom: 30px;
@@ -288,6 +315,11 @@
   margin-top: 100px;
   padding: 40px 40px 60px;
   background: rgba(162, 244, 233, 0.5);
+  @include media-md {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   &-steps {
     display: flex;
     justify-content: space-between;
@@ -346,15 +378,28 @@
         padding: 60px 40px 40px!important;
         justify-content: space-between;
         border-bottom: 1px inset $__gainsboro;
+        @include media-xs {
+            padding-left: 24px!important;
+            padding-right: 24px!important;
+            flex-direction: column;
+        }
+
         .title {
             display: flex;
             justify-content: flex-start;
             align-items: center;
             width: 18%;
+            @include media-md {
+              min-width: 170px;
+            }
             @include media-sm {
                 flex-direction: column;
                 justify-content: center;
                 margin-right: 10px;
+            }
+            @include media-xs {
+              flex-direction: row;
+              justify-content: left;
             }
 
             h1 {
@@ -383,6 +428,10 @@
         }
         .text {
             width: 82%;
+            @include media-xs {
+              width: unset;
+            }
+
             p {
                 margin: 0!important;
             }

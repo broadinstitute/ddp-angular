@@ -129,7 +129,7 @@
               [disabled]="updatedEmail === participant.data.profile['email'] || updatedEmail.length === 0 || !isEmailValid"
               (click)="updateEmail()">Update
             </button>
-          </td>          
+          </td>
           <td *ngIf="!hasRole().allowedToEditParticipant()">
             {{participant.data.profile['email']}}
           </td>
@@ -191,7 +191,7 @@ participant.data.dsm['diagnosisYear'] != null">
           </tr>
           <tr>
             <td>
-              <app-cohort-tag 
+              <app-cohort-tag
                 [ddpParticipantId]="participant.data.profile.guid"
                 [dsm]="participant.data.dsm"
               ></app-cohort-tag>
@@ -199,14 +199,6 @@ participant.data.dsm['diagnosisYear'] != null">
           </tr>
           </tbody>
         </table>
-        <!--TODO remove before final merge, for testing only -->
-        <div *ngIf="hasRole().allowedToTestDSSActivity() && participant.data != null">
-          <button mat-mini-fab color="primary" class="mat-fab-bottom-left" (click)="testGetActivity(participant.data.profile['guid'])">
-            <i class="fa-thin fa-badge-check"></i>
-          </button>
-          <span>Test GET Activity</span>
-
-        </div>
 
         <div *ngIf="isAddFamilyMember" class="Float--right Width--100">
           <div class="family-member-button">
@@ -897,6 +889,14 @@ participant.data.dsm['diagnosisYear'] != null">
                         (click)="submitParticipant(participant.abstraction)">Submit MR Abstraction
                 </button>
               </div>
+            </tab>
+
+            <tab
+              *ngIf="participant?.data?.files && participant.data.files.length > 0 && this.role.allowedToDownloadParticipantFiles()"
+              heading="Participant Files">
+                <app-file-download
+                [participant]="participant">
+                </app-file-download>
             </tab>
 
             <tab heading="Second Medical Record Abstraction" [active]="tabActive('review')"

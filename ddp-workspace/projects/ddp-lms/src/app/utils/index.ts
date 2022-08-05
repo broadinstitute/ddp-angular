@@ -2,7 +2,7 @@ import { ActivityActivityBlock, ActivityBlockType, ActivityRenderHintType } from
 import { ActivityCode } from '../types';
 
 export const isAboutYouOrChildActivity = (activityCode: string): boolean =>
-    activityCode === ActivityCode.AboutYouOrChild;
+  activityCode === ActivityCode.AboutYouOrChild || activityCode ===  ActivityCode.AboutChild;
 
 export const isActivityBlock = (block: ActivityBlockType): block is ActivityActivityBlock =>
     'activityCode' in block && typeof block.activityCode === 'string';

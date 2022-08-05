@@ -183,6 +183,11 @@ import { InputRestriction } from '../models/InputRestriction';
         width: 2.4em;
         padding: 0 2px 0 0;
     }
+    @media only screen and (max-width: 1024px) {
+        ::ng-deep .two-char-input .mat-form-field-label-wrapper label{
+            line-height: 17px;
+        }
+    }
     .four-char-input {
         width: 3.5em;
         padding: 0 2px 0 0;

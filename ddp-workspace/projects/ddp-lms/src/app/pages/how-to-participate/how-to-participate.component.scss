@@ -22,12 +22,14 @@
     padding: 3.2rem 0;
     background-color: $accent-lms-color;
     cursor: default;
+    font-family: Untitled-Sans-Light, serif !important;
+    font-weight: 300;
   }
 
   .step__title {
     font-weight: bold;
-    font-family: "Source Serif Pro", serif;
-    font-size: 2.625rem;
+    font-family: Untitled-Sans-Medium, serif;
+    font-size: 2rem;
   }
 
   .static-page-title {

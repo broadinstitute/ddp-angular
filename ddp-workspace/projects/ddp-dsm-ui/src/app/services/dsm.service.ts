@@ -17,6 +17,7 @@ import { ComponentService } from './component.service';
 import { RoleService } from './role.service';
 import { SessionService } from './session.service';
 import { BulkCohortTag } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-model';
+import {LocalStorageService} from './localStorage.service';
 
 declare var DDP_ENV: any;
 
@@ -33,7 +34,8 @@ export class DSMService {
   constructor(private http: HttpClient,
                private sessionService: SessionService,
                private role: RoleService,
-               private router: Router) {
+               private router: Router,
+              private localStorageService: LocalStorageService) {
   }
 
   sendAnalyticsMetric( realm: string, passed: number ): Observable<any> {
@@ -189,7 +191,7 @@ export class DSMService {
 
     if (filterQuery != null) {
       map.push({name: 'filterQuery', value: filterQuery});
-    } else if (json == null || json.filters == null) {
+    } else if (json == null || !json.filters?.length) {
       json && map.push({name: 'filterName', value: json.filterName});
     } else if (viewFilterCopy != null) {
       map.push({name: 'filters', value: JSON.stringify(viewFilterCopy.filters)});
@@ -214,7 +216,8 @@ export class DSMService {
   }
 
   public downloadParticipantData(realm: string, jsonPatch: string, parent: string, columns: {}, json: ViewFilter,
-                                 filterQuery: string, sortBy?: Sort):
+                                 filterQuery: string, sortBy?: Sort, fileFormat?: string, splitOptions?: boolean,
+                                 onlyMostRecent?: boolean):
     Observable<any> {
     const viewFilterCopy = this.getFilter(json);
     const url = this.baseUrl + DSMService.UI + 'participantList';
@@ -225,6 +228,15 @@ export class DSMService {
     map.push({name: 'parent', value: parent});
     if (sortBy) {
       map.push({name: 'sortBy', value: JSON.stringify(sortBy)});
+    }
+    if (fileFormat) {
+      map.push({name: 'fileFormat', value: fileFormat});
+    }
+    if (typeof splitOptions === 'boolean') {
+      map.push({name: 'splitOptions', value: splitOptions});
+    }
+    if (typeof splitOptions === 'boolean') {
+      map.push({name: 'onlyMostRecent', value: onlyMostRecent});
     }
     if (filterQuery != null) {
       map.push({name: 'filterQuery', value: filterQuery});
@@ -427,15 +439,6 @@ export class DSMService {
     );
   }
 
-
-//TODO remove before final merge, for testing only
-  testDSSGetActivity( participantId: string ): Observable<any> {
-    const url = this.baseUrl + DSMService.UI + 'dsstest/' + participantId;
-    return this.http.get(url, this.buildHeader()).pipe(
-      catchError(this.handleError)
-    );
-  }
-
   public saveMedicalRecordLog(medicalRecordId: string, json: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'medicalRecord/' + medicalRecordId + '/log';
     return this.http.patch(url, json, this.buildHeader()).pipe(
@@ -601,6 +604,7 @@ export class DSMService {
     );
   }
 
+
   public uploadStoolTxtFile(realm: string, kitType: string, file: File): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'stoolUpload';
     const map: { name: string; value: any }[] = [];
@@ -610,6 +614,16 @@ export class DSMService {
     return this.http.post(url, file, this.buildQueryUploadHeader(map)).pipe(
       catchError(this.handleError)
     );
+
+  public downloadParticipantFile( fileName: string, bucketName: string, blob: string, realm: string, mimeType: string ): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'downloadFile';
+    const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: realm} );
+    map.push( {name: 'fileName', value: fileName} );
+    map.push( {name: 'bucket', value: bucketName} );
+    map.push( {name: 'blob', value: blob} );
+    return this.http.get( url, this.buildQueryBlobHeader( map )).pipe( catchError( this.handleError ) );
+
   }
 
   public uploadNdiFile(file: File): Observable<any> {
@@ -1077,12 +1091,9 @@ export class DSMService {
       if (expirationDate <= myDate) {
         // Remove token from localStorage
         // console.log("log out user and remove all items from local storage");
-        localStorage.removeItem('auth_token');
-        localStorage.removeItem(SessionService.DSM_TOKEN_NAME);
-        localStorage.removeItem(Statics.PERMALINK);
-        localStorage.removeItem(ComponentService.MENU_SELECTED_REALM);
+        this.localStorageService.clear();
         this.sessionService.logout();
-        this.router.navigate([ Statics.HOME_URL ]);
+        this.router.navigate(['']);
         return false;
       }
       return true;
@@ -1091,7 +1102,7 @@ export class DSMService {
   private getFilter(json: ViewFilter): ViewFilter {
     let viewFilterCopy = null;
     if (json != null) {
-      if (json.filters != null) {
+      if (json.filters?.length) {
         viewFilterCopy = json.copy();
         for (const filter of json.filters) {
           if (filter.type === Filter.OPTION_TYPE && filter.participantColumn.tableAlias !== 'participantData') {
@@ -1099,7 +1110,7 @@ export class DSMService {
           }
         }
       }
-      if (viewFilterCopy != null && viewFilterCopy.filters != null) {
+      if (viewFilterCopy != null && viewFilterCopy.filters?.length) {
         for (const filter of viewFilterCopy.filters) {
           if (filter.type === Filter.OPTION_TYPE && filter.participantColumn.tableAlias !== 'participantData') {
             filter.selectedOptions = filter.getSelectedOptionsName();

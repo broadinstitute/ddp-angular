@@ -173,7 +173,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       window.scrollTo( 0, 0 );
       this.scrolled = true;
     }
-    this.validateEmailInput(this.participant.data.profile['email']);
+    this.validateEmailInput(this.participant.data.profile['email'] || '');
     this.isOncHistoryVisible = (this.participant.data.status === 'ENROLLED'
       && this.participant.data.medicalProviders != null && this.participant.medicalRecords != null
       && this.participant.data.medicalProviders.length > 0 && this.participant.medicalRecords.length > 0);
@@ -326,7 +326,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   }
 
   validateEmailInput(changedValue): void {
-    const regexToValidateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const regexToValidateEmail = /^$|^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isValid = regexToValidateEmail.test(changedValue);
     if (isValid) {
       this.isEmailValid = true;
@@ -453,13 +453,13 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           tissues.push(new Tissue(null, oncHis.oncHistoryDetailId, null, null, null, null,
             null, null, null, null, null, null, null, null
             , null, null, null, null, null, null, null, null, null,
-            null, null, null, null, null, null, null));
+            null, null, null, null, null, null, null, false));
           oncHis.tissues = tissues;
         } else if (oncHis.tissues.length < 1) {
           oncHis.tissues.push(new Tissue(null, oncHis.oncHistoryDetailId, null, null, null, null,
             null, null, null, null, null, null, null, null, null, null
             , null, null, null, null, null, null, null,
-            null, null, null, null, null, null, null));
+            null, null, null, null, null, null, null, false));
         }
       }
       if (!hasEmptyOncHis) {
@@ -467,13 +467,13 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         tissues.push(new Tissue(null, null, null, null, null, null, null,
           null, null, null, null, null, null, null, null, null,
           null, null, null, null, null, null, null,
-          null, null, null, null, null, null, null));
+          null, null, null, null, null, null, null, false));
 
         const oncHis = new OncHistoryDetail(this.participant.participant.participantId,
           null, null, null, null, null, null, null, null, null, null,
           null, null, null, null, null, null, null, null,
           null, null, null, null, null, null, tissues, null, null, null,
-          null);
+          null, false);
         this.participant.oncHistoryDetails.push(oncHis);
       }
     }
@@ -1150,6 +1150,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     }
     if (v !== null) {
       if (this.participant.participant != null && this.participant.participant.additionalValuesJson != null) {
+        const camelCaseColumnName = Utils.convertUnderScoresToCamelCase(colName);
+        this.participant.participant.additionalValuesJson[ camelCaseColumnName ] = v;
         this.participant.participant.additionalValuesJson[ colName ] = v;
       } else {
         let participantId = this.participant.data.profile[ 'guid' ];
@@ -1435,11 +1437,5 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     this.source = source;
     this.universalModal.show();
     return false;
-  }
-  //TODO remove before final merge, for testing only
-  testGetActivity(participantId: string): void {
-    this.dsmService.testDSSGetActivity(participantId).subscribe(data => {
-      console.log(data);
-    });
   }
 }

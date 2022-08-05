@@ -1,5 +1,6 @@
 import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
 import { FollowUp } from '../follow-up/follow-up.model';
+import {MedicalProviderModel} from '../STORE/models';
 
 export class MedicalRecord {
   constructor(public medicalRecordId?: string, public participantId?: string, public institutionId?: string,
@@ -37,7 +38,7 @@ export class MedicalRecord {
 
   public changedBy: string;
 
-  static parse(json): MedicalRecord {
+  static parse(json, medicalProvider?: MedicalProviderModel): MedicalRecord {
     const result: FollowUp[] = [];
     const jsonArray = json.followUps;
     if (jsonArray !== undefined) {
@@ -64,7 +65,7 @@ export class MedicalRecord {
       json.mrReceived, json.mrDocument, json.mrDocumentFileNames,
       json.mrProblem, json.mrProblemText, json.unableObtain, json.duplicate, json.international, json.crRequired,
       json.pathologyPresent,
-      json.notes, json.reviewMedicalRecord, json.type, json.nameDDP,
+      json.notes, json.reviewMedicalRecord, medicalProvider?.type, json.nameDDP,
       json.institutionDDP, json.streetAddressDDP, json.cityDDP, json.stateDDP,
       json.isDeleted, json.oncHistoryDetails, result,
       json.followupRequired, json.followupRequiredText, additionalValuesJson, json.unableObtainText);

@@ -13,6 +13,7 @@ import { SessionService } from './session.service';
 import { RoleService } from './role.service';
 import { DSMService } from './dsm.service';
 import { ComponentService } from './component.service';
+import {LocalStorageService} from './localStorage.service';
 
 // Avoid name not found warnings
 declare var Auth0Lock: any;
@@ -88,7 +89,7 @@ export class Auth {
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private http: HttpClient,
               private sessionService: SessionService, private role: RoleService,
-              private compService: ComponentService, private dsmService: DSMService,
+              private compService: ComponentService, private dsmService: DSMService, private localStorageService: LocalStorageService
                ) {
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', (authResult: any) => {
@@ -129,7 +130,7 @@ export class Auth {
 
   public logout(): void {
     // Remove token from localStorage
-    localStorage.clear();
+    this.localStorageService.clear();
     this.sessionService.logout();
     this.selectedRealm = null;
   }
@@ -172,7 +173,7 @@ export class Auth {
     let errMsg: string | null = null;
 
     if(error.status === 500) {
-      errMsg = 'User is not registered in DSM. Please make sure you selected the correct account.';
+      errMsg = 'Incorrect user name or password.';
     } else {
       errMsg = (error.message) ? error.message :
         error.status ? `${error.status} - ${error.statusText}` : 'Server error';

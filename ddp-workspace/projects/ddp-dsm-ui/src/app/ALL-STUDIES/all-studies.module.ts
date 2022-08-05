@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
+import {FileDownloadComponent} from '../file-download/file-download.component';
 import {AllStudiesRoutingModule} from './all-studies.routing.module';
 import {HomeComponent} from '../home/home.component';
 import {KitLabelComponent} from '../kit-label/kit-label.component';
@@ -195,7 +196,8 @@ import {StoolUploadComponent} from '../stool-upload/stool-upload.component';
     StoolUploadComponent,
     CohortTagComponent,
     BulkCohortTagModalComponent,
-    OpenDialogDirective
+    OpenDialogDirective,
+    FileDownloadComponent
   ],
   imports: [
     CommonModule,

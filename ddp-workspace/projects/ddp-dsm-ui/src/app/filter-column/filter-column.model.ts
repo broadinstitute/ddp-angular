@@ -78,6 +78,9 @@ export class Filter {
   public static DIAGNOSIS_MONTH = new Filter(ParticipantColumn.DIAGNOSIS_MONTH, Filter.NUMBER_TYPE);
   public static DIAGNOSIS_YEAR = new Filter(ParticipantColumn.DIAGNOSIS_YEAR, Filter.NUMBER_TYPE);
 
+  public static PARTICIPANT_FILE_NAMES = new Filter(ParticipantColumn.PARTICIPANT_FILE_NAMES, Filter.TEXT_TYPE);
+  public static PARTICIPANT_FILE_UPLOAD_TIME = new Filter(ParticipantColumn.PARTICIPANT_FILE_UPLOAD_TIME, Filter.DATE_TYPE);
+
   // participant columns
   public static ONC_HISTORY_CREATED = new Filter(ParticipantColumn.ONC_HISTORY_CREATED, Filter.DATE_TYPE);
   public static ONC_HISTORY_REVIEWED = new Filter(ParticipantColumn.ONC_HISTORY_REVIEWED, Filter.DATE_TYPE);
@@ -294,7 +297,7 @@ export class Filter {
     Filter.USS_COUNT, Filter.H_E_COUNT, Filter.BLOCKS_COUNT,
     Filter.COLLABORATOR_SAMPLE, Filter.SAMPLE_SENT, Filter.SAMPLE_RECEIVED, Filter.SAMPLE_DEACTIVATION, Filter.SAMPLE_QUEUE,
     Filter.TRACKING_TO_PARTICIPANT, Filter.TRACKING_RETURN, Filter.MF_BARCODE, Filter.STATUS_OUT, Filter.STATUS_IN, Filter.RESULT_TEST, Filter.CORRECTED_TEST, Filter.TIME_TEST, Filter.CARE_EVOLVE,
-    Filter.ABSTRACTION_ACTIVITY, Filter.ABSTRACTION_STATUS, Filter.ABSTRACTION_USER, Filter.ACTIVITY_STATUS, Filter.COHORT_TAG_NAME];
+    Filter.ABSTRACTION_ACTIVITY, Filter.ABSTRACTION_STATUS, Filter.ABSTRACTION_USER, Filter.ACTIVITY_STATUS, Filter.COHORT_TAG_NAME, Filter.PARTICIPANT_FILE_NAMES, Filter.PARTICIPANT_FILE_UPLOAD_TIME];
 
   public static parseToColumnArray(json, allColumns, surveyNames?, surveyColumns?): {} {
     const result = {};
@@ -464,7 +467,7 @@ export class Filter {
               filter.participantColumn, filter.type, f.options, filter.filter2, filter.range, filter.exactMatch, filter.filter1,
               selectedOptions, filter.filter1 == null ? null : filter.filter1.value,
               filter.filter2 == null ? null : filter.filter2.value, null,
-              filter.empty, filter.notEmpty, f.singleOption, f.additionalType
+              filter.empty, filter.notEmpty, f.singleOption, f.additionalType, filter.parentName
             );
             filters.push(newFilter);
             break;

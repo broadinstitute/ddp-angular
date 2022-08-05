@@ -21,6 +21,10 @@ export class ParticipantColumn {
   public static DIAGNOSIS_MONTH = new ParticipantColumn('Diagnosis Month', 'diagnosisMonth', 'data', 'dsm');
   public static DIAGNOSIS_YEAR = new ParticipantColumn('Diagnosis Year', 'diagnosisYear', 'data', 'dsm');
 
+  //files
+  public static PARTICIPANT_FILE_NAMES = new ParticipantColumn('Uploaded File Name', 'fileName', 'data', 'files');
+  public static PARTICIPANT_FILE_UPLOAD_TIME = new ParticipantColumn('File Upload Time', 'uploadedAt', 'data', 'files');
+
   public static ONC_HISTORY_CREATED = new ParticipantColumn('Onc History Created', 'created', 'o');
   public static ONC_HISTORY_REVIEWED = new ParticipantColumn('Onc History Reviewed', 'reviewed', 'o');
   public static PAPER_CR_SENT = new ParticipantColumn('Paper C/R Sent', 'crSent', 'r');
@@ -136,7 +140,7 @@ export class ParticipantColumn {
   public static COHORT_TAG_NAME = new ParticipantColumn('Cohort Tag Name', 'cohortTagName', 'c', 'dsm');
 
   //FON
-  public static ACTIVITY_STATUS = new ParticipantColumn('Enrollmentt Status', 'activityStatus', 'data');
+  public static ACTIVITY_STATUS = new ParticipantColumn('Enrollment Status', 'activityStatus', 'data');
 
   constructor(public display: string, public name: string, public tableAlias?: string, public object?: string, public esData?: boolean) {
     this.display = display;

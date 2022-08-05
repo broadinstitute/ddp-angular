@@ -320,7 +320,7 @@ $field-disabled-border: $__Mulled_wine_transparent;
   /* ------------- Tabular blocks custom styles --------------------- */
 
   /* tabular block for Enrollment form */
-  .main_activity.ENROLLMENT {
+  .main_activity.MEDICAL_HISTORY {
     .tabular-container {
       grid-template-columns: 28px auto 1fr 1fr !important;
       border: none !important;
@@ -328,10 +328,6 @@ $field-disabled-border: $__Mulled_wine_transparent;
       .header {
         text-align: left;
         font-weight: 600;
-
-        &:nth-child(2) {
-          padding-left: 12px;
-        }
       }
 
       .cell {
@@ -350,7 +346,7 @@ $field-disabled-border: $__Mulled_wine_transparent;
           .ddp-answer-field {
             padding: 0;
 
-            &:nth-child(2) {
+            + .ddp-answer-field {
               width: 125px !important;
 
               .mat-form-field {
@@ -368,13 +364,6 @@ $field-disabled-border: $__Mulled_wine_transparent;
           .ddp-answer-field {
             padding: unset !important;
 
-            /* TODO: remove this temp FIX!! just to fix the wrong config form back-end */
-            &::after {
-              content: 'OR';
-              padding-left: 16px;
-            }
-            /* end of the TODO */
-
             select {
               margin: 0;
             }
@@ -384,42 +373,67 @@ $field-disabled-border: $__Mulled_wine_transparent;
     }
   }
 
+  /* common mixins for CARDIAC_CT and cMRI forms */
+  @mixin tabular-container {
+    grid-template-columns: auto 150px 150px !important;
+    border: none !important;
+
+    .header, .question-title {
+      padding-left: 20px !important;
+      font-weight: 600;
+    }
+
+    .question-title {
+      display: flex;
+      align-items: flex-start;
+      margin-top: 10px;
+    }
+
+    .cell {
+      border: none !important;
+    }
+
+    ddp-activity-composite-answer {
+      .ddp-answer-container {
+        justify-content: space-between;
+
+        .ddp-answer-field {
+          padding: 0;
+        }
+
+        .mat-form-field {
+          max-width: 120px;
+        }
+      }
+    }
+  }
+
+  @mixin diastolic-systolic-volume {
+    .ddp-answer-container {
+      grid-template-columns: auto auto !important;
+    }
+  }
+
+  @mixin ejection-fraction {
+    .ddp-answer-container {
+      grid-template-columns: auto !important;
+      justify-content: left;
+    }
+  }
+
+  @mixin cardiac-output {
+    .ddp-answer-container {
+      grid-template-columns: auto auto !important;
+      justify-content: space-around;
+      height: 41px;
+      margin-bottom: 12px;
+    }
+  }
+
   /* tabular block for CARDIAC_CT form */
   .main_activity.CARDIAC_CT {
     .tabular-container {
-      grid-template-columns: auto 150px 150px !important;
-      border: none !important;
-
-      /* TODO: remove this temp FIX!! just to fix the wrong config form back-end */
-      .header:nth-of-type(3) {
-        display: none;
-      }
-      /* end of the TODO */
-
-      .header, .question-title {
-        padding-left: 20px !important;
-        font-weight: 600;
-      }
-
-      .question-title {
-        display: flex;
-        align-items: flex-start;
-        margin-top: 10px;
-      }
-
-      .cell {
-        border: none !important;
-
-        &:nth-child(12),
-        &:nth-child(20) {
-          height: 48px;
-        }
-
-        &:nth-child(10),
-        &:nth-child(18) {
-          grid-column: span 2 !important;
-        }
-      }
+      @include tabular-container;
 
       .composite-answer {
         &-CQ_RV_END_DIASTOLIC_VOLUME,
@@ -427,50 +441,48 @@ $field-disabled-border: $__Mulled_wine_transparent;
         &-CQ_LV_END_DIASTOLIC_VOLUME,
         &-CQ_LV_END_SYSTOLIC_VOLUME
         {
-          .ddp-answer-container {
-            grid-template-columns: auto auto !important;
-          }
-
-          /* TODO: remove this temp FIX!! just to fix the wrong config form back-end */
-          .ddp-answer-field:first-of-type::after {
-            content: 'Or';
-            top: -12px;
-            position: relative;
-            left: 4px;
-          }
-          /* end of the TODO */
+          @include diastolic-systolic-volume;
         }
 
         &-CQ_RV_EJECTION_FRACTION,
         &-CQ_LV_END_EJECTION_FRACTION
         {
-          .ddp-answer-container {
-            grid-template-columns: auto !important;
-            justify-content: left;
-          }
+          @include ejection-fraction;
         }
 
         &-CQ_RV_CARDIAC_OUTPUT,
         &-CQ_LV_CARDIAC_OUTPUT
         {
-          .ddp-answer-container {
-            grid-template-columns: auto auto !important;
-            justify-content: space-around;
-          }
+          @include cardiac-output;
         }
       }
+    }
+  }
 
-      ddp-activity-composite-answer {
-        .ddp-answer-container {
-          justify-content: space-between;
+  /* tabular block for cMRI form (pretty the same like for CARDIAC_CT) */
+  .main_activity.CMRI {
+    .tabular-container {
+      @include tabular-container;
 
-          .ddp-answer-field {
-            padding: 0;
-          }
+      .composite-answer {
+        &-CQ_CMRI_RV_END_DIASTOLIC_VOLUME,
+        &-CQ_CMRI_END_SYSTOLIC_VOLUME,
+        &-CQ_CMRI_LV_END_DIASTOLIC_VOLUME,
+        &-CQ_CMRI_LV_END_SYSTOLIC_VOLUME
+        {
+          @include diastolic-systolic-volume;
+        }
 
-          .mat-form-field {
-            max-width: 120px;
-          }
+        &-CQ_CMRI_RV_EJECTION_FRACTION,
+        &-CQ_CMRI_LV_EJECTION_FRACTION
+        {
+          @include ejection-fraction;
+        }
+
+        &-CQ_CMRI_RV_CARDIAC_OUTPUT,
+        &-CQ_CMRI_LV_CARDIAC_OUTPUT
+        {
+          @include cardiac-output;
         }
       }
     }

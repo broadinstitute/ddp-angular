@@ -37,9 +37,10 @@ export class Participant {
     let jsonData: any[];
     const medicalRecords: Array<MedicalRecord> = [];
     jsonData = json.medicalRecords;
+    const medicalProviders: any[] = json?.esData?.medicalProviders;
     if (jsonData != null) {
-      jsonData.forEach((val) => {
-        const medicalRecord = MedicalRecord.parse(val);
+      jsonData.forEach((val, index) => {
+        const medicalRecord = MedicalRecord.parse(val, medicalProviders && medicalProviders[index]);
         medicalRecords.push(medicalRecord);
       });
     }

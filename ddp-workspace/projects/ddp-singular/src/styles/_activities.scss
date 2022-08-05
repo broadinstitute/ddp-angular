@@ -113,6 +113,25 @@
 
   .Question--COMPOSITE {
     margin: 1.5rem 0;
+
+      .composite-answer {
+          &-WHAT_IS_YOUR_HEIGHT {
+
+              .ddp-answer-container {
+                  column-gap: 25px;
+
+                  @media (max-width: 450px) {
+                      flex-direction: column;
+                  }
+              }
+
+              .ddp-answer-field {
+                  padding-left: 0;
+                  padding-right: 0;
+                  flex-grow: 1;
+              }
+          }
+      }
   }
 
   ddp-activity-picklist-answer {

@@ -1,69 +1,87 @@
 <main class="main">
     <section class="section">
-        <ddp-subject-panel *ngIf="selectedUser$ | async as selectedUser" [subject]="selectedUser"></ddp-subject-panel>
+        <ddp-subject-panel
+            *ngIf="selectedUser$ | async as selectedUser"
+            [subject]="selectedUser"
+        ></ddp-subject-panel>
     </section>
     <section class="section dashboard-title-section">
         <div class="content content_medium content_wide content_dashboard">
             <div fxLayout="row" fxLayoutAlign="space-between center">
-                <h1 class="dashboard-title-section__title" fxLayoutAlign="center center">
-                    <ng-container *ngIf="useMultiParticipantDashboard; else regularDashboard">
+                <h1
+                    class="dashboard-title-section__title"
+                    fxLayoutAlign="center center"
+                >
+                    <ng-container
+                        *ngIf="
+                            useMultiParticipantDashboard;
+                            else regularDashboard
+                        "
+                    >
                         <mat-icon>perm_identity</mat-icon>
-                        <span translate>Toolkit.Dashboard.ParticipantsTitle</span>
+                        <span translate
+                            >Toolkit.Dashboard.ParticipantsTitle</span
+                        >
                     </ng-container>
-                    <ng-template #regularDashboard><span translate>Toolkit.Dashboard.Title</span></ng-template>
+                    <ng-template #regularDashboard
+                        ><span translate
+                            >Toolkit.Dashboard.Title</span
+                        ></ng-template
+                    >
                 </h1>
-                <div *ngIf="toolkitConfig.useMultiParticipantDashboard">
-                    <button mat-stroked-button
-                            class="add-participant-button button_small"
-                            [disabled]="addParticipantButtonDisabled"
-                            (click)="addParticipant()">
-                        <mat-icon>add</mat-icon>
-                        {{'Toolkit.Dashboard.AddParticipant' | translate}}
-                    </button>
-                </div>
-                <ng-container *ngIf="!toolkitConfig.useMultiParticipantDashboard && toolkitConfig.allowEditUserProfile">
-                    <ng-container *ngTemplateOutlet="editUserButton"></ng-container>
+                <ng-container
+                    *ngIf="
+                        !toolkitConfig.useMultiParticipantDashboard &&
+                        toolkitConfig.allowEditUserProfile
+                    "
+                >
+                    <ng-container
+                        *ngTemplateOutlet="editUserButton"
+                    ></ng-container>
                 </ng-container>
             </div>
             <p *ngIf="invitationId" class="invitation-code">
-                <span class="invitation-code__text" translate>Toolkit.Dashboard.Invitation.InvitationCode</span>
-                <span>{{invitationId | invitation}}</span>
+                <span class="invitation-code__text" translate
+                    >Toolkit.Dashboard.Invitation.InvitationCode</span
+                >
+                <span>{{ invitationId | invitation }}</span>
             </p>
         </div>
     </section>
-
-    <div *ngIf="isParent | async; else childOrLovedOne">
-        <p class="intro__dash" [innerHTML]="'DashboardIntro.isParent' | translate"></p>
-    </div>
-
-    <ng-template #childOrLovedOne>
-        <div *ngIf="isChild | async; else lovedOne">
-            <p class="intro__dash" [innerHTML]="'DashboardIntro.isChild' | translate"></p>
-        </div>
-
-        <ng-template #lovedOne>
-            <p *ngIf="isLovedOne | async;" class="intro__dash" [innerHTML]="'DashboardIntro.isLovedOne' | translate"></p>
-        </ng-template>
-    </ng-template>
-
-    <section *ngIf="isAdmin && !subjectInfoExists; else dashboard" class="section">
+    <section
+        *ngIf="isAdmin && !subjectInfoExists; else dashboard"
+        class="section"
+    >
         <div class="content content_medium">
             <div class="dashboard-message">
-                <p class="dashboard-message__text" translate>Toolkit.Dashboard.Invitation.Message</p>
-                <a class="button button_primary" [routerLink]="'/' + toolkitConfig.adminDashboardUrl" translate>
+                <p class="dashboard-message__text" translate>
+                    Toolkit.Dashboard.Invitation.Message
+                </p>
+                <a
+                    class="button button_primary"
+                    [routerLink]="'/' + toolkitConfig.adminDashboardUrl"
+                    translate
+                >
                     Toolkit.Dashboard.Invitation.Button
                 </a>
             </div>
         </div>
     </section>
     <ng-template #dashboard>
-        <ng-container *ngFor="let announcement of announcementMessages; let i = index">
+        <ng-container
+            *ngFor="let announcement of announcementMessages; let i = index"
+        >
             <ng-container *ngIf="announcement.shown">
                 <section class="section">
                     <div class="content content_tight">
                         <div class="dashboard-content">
                             <div class="infobox infobox_dashboard">
-                                <button *ngIf="!announcement.permanent" mat-icon-button (click)="closeMessage(i)" class="close-button">
+                                <button
+                                    *ngIf="!announcement.permanent"
+                                    mat-icon-button
+                                    (click)="closeMessage(i)"
+                                    class="close-button"
+                                >
                                     <mat-icon class="close">clear</mat-icon>
                                 </button>
                                 <div [innerHTML]="announcement.message"></div>
@@ -73,56 +91,113 @@
                 </section>
             </ng-container>
         </ng-container>
-        <section class="section dashboard-section" [class.full-width]="useMultiParticipantDashboard">
+        <section
+            class="section dashboard-section"
+            [class.full-width]="useMultiParticipantDashboard"
+        >
             <div class="content content_medium">
-                <mat-accordion *ngIf="useMultiParticipantDashboard; else activitiesTable" hideToggle multi>
-                    <mat-expansion-panel *ngFor="let participant of dashboardParticipants$ | async; first as isFirst; trackBy: trackById"
-                                         class="dashboard-panel"
-                                         [expanded]="isFirst"
-                                         (opened)="openParticipantPanel(participant.userGuid);"
-                                         (closed)="closeParticipantPanel(participant.userGuid);">
-                        <mat-expansion-panel-header class="dashboard-panel-header">
+                <mat-accordion
+                    *ngIf="useMultiParticipantDashboard; else activitiesTable"
+                    hideToggle
+                    multi
+                >
+                    <mat-expansion-panel
+                        *ngFor="
+                            let participant of dashboardParticipants$ | async;
+                            trackBy: trackById
+                        "
+                        class="dashboard-panel"
+                        [expanded]="true"
+                        (opened)="openParticipantPanel(participant.userGuid)"
+                        (closed)="closeParticipantPanel(participant.userGuid)"
+                    >
+                        <mat-expansion-panel-header
+                            class="dashboard-panel-header"
+                        >
                             <mat-panel-title class="dashboard-panel-title">
-                                {{participant.label}}
+                                {{ participant.label }}
                             </mat-panel-title>
-                            <mat-panel-description fxLayoutAlign="end center" class="dashboard-panel-description">
-                                <ng-container *ngIf="toolkitConfig.allowEditUserProfile">
-                                    <ng-container *ngTemplateOutlet="editUserButton; context: { participant: participant }">
+                            <mat-panel-description
+                                fxLayoutAlign="end center"
+                                class="dashboard-panel-description"
+                            >
+                                <ng-container
+                                    *ngIf="toolkitConfig.allowEditUserProfile"
+                                >
+                                    <ng-container
+                                        *ngTemplateOutlet="
+                                            editUserButton;
+                                            context: {
+                                                participant: participant
+                                            }
+                                        "
+                                    >
                                     </ng-container>
                                 </ng-container>
-                                <ng-container *ngIf="participantUserGuidToPanelIsOpen.get(participant.userGuid); else show">
-                                    {{'Toolkit.Dashboard.HidePanel' | translate}}
+                                <ng-container
+                                    *ngIf="
+                                        participantUserGuidToPanelIsOpen.get(
+                                            participant.userGuid
+                                        );
+                                        else show
+                                    "
+                                >
+                                    {{
+                                        "Toolkit.Dashboard.HidePanel"
+                                            | translate
+                                    }}
                                     <mat-icon>expand_less</mat-icon>
                                 </ng-container>
                                 <ng-template #show>
-                                    {{'Toolkit.Dashboard.ShowPanel' | translate}}
+                                    {{
+                                        "Toolkit.Dashboard.ShowPanel"
+                                            | translate
+                                    }}
                                     <mat-icon>expand_more</mat-icon>
                                 </ng-template>
                             </mat-panel-description>
                         </mat-expansion-panel-header>
-                        <ng-container *ngTemplateOutlet="activitiesTable; context: {
-                            participantGuid: participant.userGuid,
-                            activities: participant.activities }">
+                        <ng-container
+                            *ngTemplateOutlet="
+                                activitiesTable;
+                                context: {
+                                    participantGuid: participant.userGuid,
+                                    activities: participant.activities
+                                }
+                            "
+                        >
                         </ng-container>
                     </mat-expansion-panel>
                 </mat-accordion>
-                <ng-template #activitiesTable let-participantGuid="participantGuid" let-activities="activities">
+                <ng-template
+                    #activitiesTable
+                    let-participantGuid="participantGuid"
+                    let-activities="activities"
+                >
                     <div class="dashboard-content dashboard-content_table">
-                        <app-user-activities [studyGuid]="studyGuid"
-                                             [displayedColumns]="toolkitConfig.dashboardDisplayedColumns"
-                                             [dataSource]="activities || (userActivities$ | async)"
-                                             (open)="navigate($event, participantGuid)">
-                        </app-user-activities>
+                        <ddp-user-activities
+                            [studyGuid]="studyGuid"
+                            [displayedColumns]="
+                                toolkitConfig.dashboardDisplayedColumns
+                            "
+                            [dataSource]="
+                                activities || (userActivities$ | async)
+                            "
+                            (open)="navigate($event, participantGuid)"
+                        >
+                        </ddp-user-activities>
                     </div>
                 </ng-template>
             </div>
         </section>
     </ng-template>
     <ng-template #editUserButton let-participant="participant">
-        <button mat-button
-                class="edit-user-button"
-                (click)="$event.stopPropagation(); openUserEditDialog(participant)">
-            {{'Toolkit.Dashboard.EditUser' | translate}}
+        <button
+            mat-button
+            class="edit-user-button"
+            (click)="$event.stopPropagation(); openUserEditDialog(participant)"
+        >
+            {{ "Toolkit.Dashboard.EditUser" | translate }}
         </button>
     </ng-template>
 </main>

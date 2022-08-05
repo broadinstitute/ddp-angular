@@ -7,19 +7,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { TranslateService } from '@ngx-translate/core';
 
 import {
-  DdpModule,
-  ConfigurationService,
-  AnalyticsEventsService,
-  AnalyticsEvent,
-  LoggingService,
-  SubmitAnnouncementService,
-  SubmissionManager
+    DdpModule,
+    ConfigurationService,
+    AnalyticsEventsService,
+    AnalyticsEvent,
+    LoggingService,
+    SubmitAnnouncementService,
+    SubmissionManager,
 } from 'ddp-sdk';
 
-import {
-  ToolkitModule,
-  ToolkitConfigurationService
-} from 'toolkit';
+import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
 
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
@@ -44,13 +41,16 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
 import { MatTableModule } from '@angular/material/table';
 import { FaqSectionComponent } from './components/faq-section/faq-section.component';
-
+import { WorkflowStartComponent } from './components/workflow-start/workflow-start.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { PrequalifierService } from './services/prequalifier.service';
+import { GovernedUserService } from './services/governed-user.service';
 
 const baseElt = document.getElementsByTagName('base');
 
 let base = '';
 if (baseElt) {
-  base = baseElt[0].getAttribute('href');
+    base = baseElt[0].getAttribute('href');
 }
 
 declare const DDP_ENV: any;
@@ -90,6 +90,7 @@ tkCfg.infoEmail = 'info@osproject.org';
 tkCfg.twitterAccountId = 'count_me_in';
 tkCfg.facebookGroupId = 'joincountmein';
 tkCfg.instagramId = 'countmein';
+tkCfg.useMultiParticipantDashboard = true;
 // to configure feed, go to: https://lightwidget.com/widget-info/814feee04df55de38ec37791efea075e
 // need Instagram credentials for @osteosarcomaproject
 tkCfg.lightswitchInstagramWidgetId = '006168756c7f5d4a8a831488c63ea48c';
@@ -118,97 +119,113 @@ config.dashboardActivitiesStartedStatuses = ['CREATED'];
 config.dashboardActivitiesCompletedStatuses = ['COMPLETE'];
 config.doCloudLogging = DDP_ENV.doCloudLogging;
 config.tooltipIconUrl = 'assets/images/info.png';
-config.usesVerticalStepper = ['FAMILY_HISTORY', 'FAMILY_HISTORY_SELF', 'FAMILY_HISTORY_PARENTAL'];
+config.usesVerticalStepper = [
+    'FAMILY_HISTORY',
+    'FAMILY_HISTORY_SELF',
+    'FAMILY_HISTORY_PARENTAL',
+];
 config.alwaysShowQuestionsCountInModalNestedActivity = true;
 config.validateOnlyVisibleSections = true;
 config.institutionsAdditionalFields = { PHYSICIAN: ['COUNTRY'] };
 
-export function translateFactory(translate: TranslateService, injector: Injector, logger: LoggingService): () => Promise<any> {
-  return () => new Promise<any>((resolve: any) => {
-    const LOG_SOURCE = 'AppModule';
-    const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
-    locationInitialized.then(() => {
-      const locale = 'en';
-      translate.setDefaultLang(locale);
-      translate.use(locale).subscribe({
-        next: () => {
-          logger.logEvent(LOG_SOURCE, `Successfully initialized '${locale}' language as default.`);
-        },
-        error: err => {
-          logger.logError(LOG_SOURCE, `Problem with '${locale}' language initialization:`, err);
-        },
-        complete: () => {
-          resolve(null);
-        }
-      });
-    });
-  });
+export function translateFactory(
+    translate: TranslateService,
+    injector: Injector,
+    logger: LoggingService
+): () => Promise<any> {
+    return () =>
+        new Promise<any>((resolve: any) => {
+            const LOG_SOURCE = 'AppModule';
+            const locationInitialized = injector.get(
+                LOCATION_INITIALIZED,
+                Promise.resolve(null)
+            );
+            locationInitialized.then(() => {
+                const locale = 'en';
+                translate.setDefaultLang(locale);
+                translate.use(locale).subscribe({
+                    next: () => {
+                        logger.logEvent(
+                            LOG_SOURCE,
+                            `Successfully initialized '${locale}' language as default.`
+                        );
+                    },
+                    error: (err) => {
+                        logger.logError(
+                            LOG_SOURCE,
+                            `Problem with '${locale}' language initialization:`,
+                            err
+                        );
+                    },
+                    complete: () => {
+                        resolve(null);
+                    },
+                });
+            });
+        });
 }
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    CommonModule,
-    AppRoutingModule,
-    DdpModule,
-    ToolkitModule,
-    MatExpansionModule,
-    MatIconModule,
-    MatButtonModule,
-    HammerModule,
-    MatTableModule,
-  ],
-  declarations: [
-    WelcomeComponent,
-    AppComponent,
-    FooterComponent,
-    GalleryComponent,
-    AboutUsComponent,
-    FaqComponent,
-    ScientificImpactComponent,
-    HeaderComponent,
-    WorkflowProgressComponent,
-
-    ParticipationComponent,
-    PhysiciansComponent,
-
-    ActivityComponent,
-    ActivityPageComponent,
-    DashboardComponent,
-    UserActivitiesComponent,
-    FaqSectionComponent
-
-  ],
-  providers: [
-    {
-      provide: 'ddp.config',
-      useValue: config
-    },
-    {
-      provide: 'toolkit.toolkitConfig',
-      useValue: tkCfg
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: translateFactory,
-      deps: [
-        TranslateService,
-        Injector,
-        LoggingService
-      ],
-      multi: true
-    },
-    SubmitAnnouncementService,
-    SubmissionManager
-  ],
-  bootstrap: [AppComponent]
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        CommonModule,
+        AppRoutingModule,
+        DdpModule,
+        ToolkitModule,
+        MatExpansionModule,
+        MatIconModule,
+        MatButtonModule,
+        HammerModule,
+        MatTableModule,
+    ],
+    declarations: [
+        WelcomeComponent,
+        AppComponent,
+        FooterComponent,
+        GalleryComponent,
+        AboutUsComponent,
+        FaqComponent,
+        ScientificImpactComponent,
+        HeaderComponent,
+        WorkflowProgressComponent,
+        ParticipationComponent,
+        PhysiciansComponent,
+        ActivityComponent,
+        ActivityPageComponent,
+        DashboardComponent,
+        UserActivitiesComponent,
+        FaqSectionComponent,
+        WorkflowStartComponent,
+        LandingPageComponent,
+    ],
+    providers: [
+        {
+            provide: 'ddp.config',
+            useValue: config,
+        },
+        {
+            provide: 'toolkit.toolkitConfig',
+            useValue: tkCfg,
+        },
+        {
+            provide: APP_INITIALIZER,
+            useFactory: translateFactory,
+            deps: [TranslateService, Injector, LoggingService],
+            multi: true,
+        },
+        SubmitAnnouncementService,
+        SubmissionManager,
+        PrequalifierService,
+        GovernedUserService,
+    ],
+    bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor(private analytics: AnalyticsEventsService) {
-    this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
-      ga('send', event);
-      ga('platform.send', event);
-    });
-  }
+    constructor(private analytics: AnalyticsEventsService) {
+        this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
+            ga('send', event);
+            ga('platform.send', event);
+        });
+    }
 }
