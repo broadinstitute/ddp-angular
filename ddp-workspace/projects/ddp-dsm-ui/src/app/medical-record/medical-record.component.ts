@@ -249,7 +249,7 @@ export class MedicalRecordComponent implements OnInit {
     } else {
       this.downloading = true;
       this.message = 'Downloading... This might take a while';
-      this.dsmService.downloadPDF(this.participant.participant.ddpParticipantId, this.medicalRecord.medicalRecordId,
+      this.dsmService.downloadPDF(this.participant.data.profile['guid'], this.medicalRecord.medicalRecordId,
         this.startDate, this.endDate, this.mrCoverPdfSettings, localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
         configName, this.pdfs, null
       )
