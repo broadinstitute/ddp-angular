@@ -27,6 +27,7 @@ export class StoolUploadComponent implements OnInit {
 
   errorMessage: string;
   additionalMessage: string;
+  resultMessage: string;
 
   loading = false;
 
@@ -124,9 +125,7 @@ export class StoolUploadComponent implements OnInit {
     )
       .subscribe({
         next: data => {
-          if (typeof data === 'string') {
-            this.errorMessage = 'Error - Uploading txt.\n' + data;
-          }
+          this.resultMessage = data;
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
