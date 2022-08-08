@@ -20,7 +20,6 @@ export class FileDownloadComponent implements OnDestroy {
   @Input() participant: Participant;
   downloadMessage = '';
   downloading = false;
-  QUARANTINE = 'quarantine';
   CLEAN = 'CLEAN';
   subscription: Subscription;
   subscription2: Subscription;
