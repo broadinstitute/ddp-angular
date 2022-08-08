@@ -131,7 +131,7 @@ export class StoolUploadComponent implements OnInit {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.logout();
           }
-          this.errorMessage = 'Error - Uploading txt\n';
+          this.errorMessage = err.error;
         },
       });
   }
