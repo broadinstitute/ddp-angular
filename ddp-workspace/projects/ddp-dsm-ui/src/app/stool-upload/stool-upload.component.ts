@@ -9,7 +9,7 @@ import { ModalComponent } from '../modal/modal.component';
 import { ComponentService } from '../services/component.service';
 import { Statics } from '../utils/statics';
 import { FieldFilepickerComponent } from '../field-filepicker/field-filepicker.component';
-import {finalize} from "rxjs/operators";
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-stool-upload',
@@ -25,8 +25,8 @@ export class StoolUploadComponent implements OnInit {
   public filepicker: FieldFilepickerComponent;
 
   errorMessage: string;
-  notAllowed: boolean = false;
-  isLoading: boolean = true;
+  notAllowed = false;
+  isLoading = true;
   additionalMessage: string;
   resultMessage: string;
 
@@ -47,7 +47,7 @@ export class StoolUploadComponent implements OnInit {
     this.realmNameStoredForFile = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     this.route.queryParams.subscribe(params => {
       const realm = params[ DSMService.REALM ] || null;
-      !!realm && this.checkRight()
+      !!realm && this.checkRight();
     });
   }
 
@@ -91,7 +91,7 @@ export class StoolUploadComponent implements OnInit {
           jsonData = data;
           jsonData.forEach((val) => {
             const kitType = KitType.parse(val);
-            if(kitType.name =='STOOL'){
+            if(kitType.name ==='STOOL'){
               this.kitTypes.push(kitType);
             }
           });
