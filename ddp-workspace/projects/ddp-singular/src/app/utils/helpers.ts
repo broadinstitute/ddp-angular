@@ -35,6 +35,8 @@ const getRenderActivityKeyByActivityCode = (activityCode: ActivityCode): RenderA
       return RenderActivityKey.MedicalRecordUpload;
     case ActivityCode.PatientSurvey:
       return RenderActivityKey.PatientSurvey;
+    case ActivityCode.ChildContact:
+      return RenderActivityKey.About;
     default:
       throw new Error(`Unknown "${activityCode} activity code"`);
   }
