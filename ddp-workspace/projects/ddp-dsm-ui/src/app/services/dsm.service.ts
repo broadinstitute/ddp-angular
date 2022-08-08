@@ -614,8 +614,8 @@ export class DSMService {
     return this.http.get( url, this.buildQueryHeader( map )).pipe( catchError( this.handleError ) );
   }
 
-  public downloadFromSignedUrl( url: string): Observable<any> {
-    return this.http.get( url, this.buildQueryBlobHeaderForGCP(  )).pipe( catchError( this.handleError ) );
+  public downloadFromSignedUrl( url: string ): Observable<any> {
+    return this.http.get( url, this.buildQueryBlobHeaderForGCP() ).pipe( catchError( this.handleError ) );
   }
 
   public uploadNdiFile(file: File): Observable<any> {
@@ -1013,7 +1013,6 @@ export class DSMService {
   private buildQueryBlobHeaderForGCP(): any {
     return {
       headers: this.buildJsonHeader(),
-      withCredentials: true,
       responseType: 'blob'
     };
   }
@@ -1060,10 +1059,8 @@ export class DSMService {
     if (this.checkCookieBeforeCall()) {
       return new HttpHeaders({
         'Content-Type': 'application/json',
-        Accept: 'application/json',
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': 'true'
-      });
+      } );
     }
   }
 

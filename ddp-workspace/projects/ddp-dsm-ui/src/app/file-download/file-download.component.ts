@@ -40,7 +40,6 @@ export class FileDownloadComponent implements OnDestroy {
 
   downloadParticipantFile( file: File ): void {
     this.downloading = true;
-    console.log( file );
     if (!this.isFileClean( file )) {
       this.downloadMessage = 'Error - file has not passed scanning';
       this.downloading = false;
@@ -50,12 +49,9 @@ export class FileDownloadComponent implements OnDestroy {
     this.subscription = this.dsmService.getSignedUrl( this.participant.data.profile[ 'guid' ], file.fileName, file.bucket,
       file.blobName, file.guid, realm ).subscribe( {
         next: data => {
-          console.log( data );
-          console.log( file );
           this.saveParticipantFile( data.url, file.mimeType, data.fileName );
         },
         error: err => {
-          console.log( err );
           this.downloadMessage = err;
           this.downloading = false;
         }
@@ -64,11 +60,9 @@ export class FileDownloadComponent implements OnDestroy {
   }
 
   saveParticipantFile( url: any, type: string, fileName: string ): void {
-//    todo pegah this has to change to download from the signedUrl
     this.subscription2 = this.dsmService.downloadFromSignedUrl( url ).subscribe(
       {
         next: data => {
-          console.log(data);
           const blob = new Blob( [ data ], {type: type} );
           fileSaver.saveAs( blob, fileName );
           this.downloading = false;
