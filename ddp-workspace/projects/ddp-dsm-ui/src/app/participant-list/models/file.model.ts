@@ -1,7 +1,7 @@
 export class File {
 
   constructor( public bucket: string, public uploadedAt: string, public fileName: string, public mimeType: string,
-               public scanResult: string, public fileSize: number, public blobName: string, public scannedAt: string, public guid:string) {
+               public scanResult: string, public fileSize: number, public blobName: string, public scannedAt: string, public guid: string) {
   }
 
 

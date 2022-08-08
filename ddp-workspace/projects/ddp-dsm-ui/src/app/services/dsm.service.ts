@@ -602,7 +602,8 @@ export class DSMService {
     );
   }
 
-  public getSignedUrl( ddpParticipantId: string, fileName: string, bucketName: string, blob: string, fileGuid:string, realm: string): Observable<any> {
+  public getSignedUrl( ddpParticipantId: string, fileName: string, bucketName: string, blob: string, fileGuid: string, realm: string):
+    Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'downloadFile';
     const map: { name: string; value: any }[] = [];
     map.push( {name: DSMService.REALM, value: realm} );

@@ -42,9 +42,9 @@ export class Data {
         });
       }
     }
-    let parsedFiles = [];
+    const parsedFiles = [];
     if(json.files){
-      for(let f of json.files){
+      for(const f of json.files){
         parsedFiles.push(File.parse(f));
       }
     }
