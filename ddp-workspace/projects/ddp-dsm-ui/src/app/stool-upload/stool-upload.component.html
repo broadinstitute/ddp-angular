@@ -4,6 +4,12 @@
   <br/>
 </div>
 
+<div *ngIf="notAllowed">
+  <h3 class="Color--warn Line--Break">Study does not support stool samples</h3>
+  <br/>
+</div>
+
+
 
 <div *ngIf="additionalMessage != null">
   <h3 class="Color--primary Line--Break">{{additionalMessage}}</h3>
@@ -23,7 +29,7 @@
     </div>
   </span>
 
-<div *ngIf="allowedToSeeInformation">
+<div *ngIf="allowedToSeeInformation && !notAllowed && !isLoading">
   <br/>
   <br/>
   <div class="Width--80">

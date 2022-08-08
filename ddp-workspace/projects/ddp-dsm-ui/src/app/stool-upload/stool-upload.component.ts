@@ -25,6 +25,8 @@ export class StoolUploadComponent implements OnInit {
   public filepicker: FieldFilepickerComponent;
 
   errorMessage: string;
+  notAllowed: boolean = false;
+  isLoading: boolean = true;
   additionalMessage: string;
   resultMessage: string;
 
@@ -83,7 +85,7 @@ export class StoolUploadComponent implements OnInit {
     if (this.isSelectedRealm()) {
       this.loading = true;
       let jsonData: any[];
-      this.dsmService.getKitTypes(this.selectedRealm).subscribe({
+      this.dsmService.getKitTypes(this.selectedRealm).pipe(finalize(() => this.isLoading = false)).subscribe({
         next: data => {
           this.kitTypes = [];
           jsonData = data;
@@ -96,7 +98,7 @@ export class StoolUploadComponent implements OnInit {
           if (this.kitTypes.length === 1) {
             this.kitType = this.kitTypes[ 0 ];
           } else {
-            this.errorMessage = 'Study does not support stool samples';
+            this.notAllowed = true;
           }
           this.loading = false;
         },
