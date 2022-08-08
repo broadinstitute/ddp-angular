@@ -816,7 +816,14 @@
     },
     "Toolkit": {
         "Dashboard": {
-            "Title": "My Dashboard"
+            "Title": "Dashboard",
+            "ParticipantsTitle": "Participant Dashboard",
+            "AddParticipant": "Add Participant",
+            "ShowPanel": "Show",
+            "HidePanel": "Hide",
+            "UserLabel": "You",
+            "ChildLabel": "Your child{{suffix}}",
+            "EditUser": "Edit profile"
         },
         "ErrorPage": {
             "Title": "We've encountered an error",
@@ -870,19 +877,19 @@
                 "Text": "Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
                 "Fields": {
                     "FirstName": {
-                        "Placeholder": "First Name *",
+                        "Placeholder": "First Name",
                         "Error": "First Name is required"
                     },
                     "LastName": {
-                        "Placeholder": "Last Name *",
+                        "Placeholder": "Last Name",
                         "Error": "Last Name is required"
                     },
                     "Email": {
-                        "Placeholder": "Email address *",
+                        "Placeholder": "Email address",
                         "Error": "Please enter a valid email address"
                     },
                     "ConfirmEmail": {
-                        "Placeholder": "Email confirmation *",
+                        "Placeholder": "Email confirmation",
                         "Error": "Please enter a valid email address"
                     }
                 },

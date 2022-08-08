@@ -68,7 +68,7 @@ export class FonComponent implements OnInit {
     const DSMToken = this.sessionService.getDSMToken();
     const userGuid = this.jwtHelper.decodeToken(DSMToken)['https://datadonationplatform.org/cid'];
     this.sessionService.setExpirationTime(DSMToken);
-    this.dssSessionService.setSession(null, DSMToken, userGuid, LOCALE, +this.sessionService.getTokenExpiration());
+    this.dssSessionService.setSession(null, DSMToken, userGuid, LOCALE, +this.sessionService.getTokenExpiration()/1000);
   }
 
   toggleAsideNav(): void {

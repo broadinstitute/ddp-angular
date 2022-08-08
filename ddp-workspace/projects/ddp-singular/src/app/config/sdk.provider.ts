@@ -38,6 +38,7 @@ configurationService.mailAddressFormErrorFormatter = (formControlName, fieldLabe
 
   return `SDK.MailAddress.FormError.${formControlName}.${error}`;
 };
+configurationService.scrollToErrorOffset = 220; // header + sticky section height
 
 export const SDKConfigProvider: Provider = {
   provide: 'ddp.config',

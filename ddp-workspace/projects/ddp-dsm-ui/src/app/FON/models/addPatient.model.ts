@@ -4,7 +4,7 @@ export interface AddPatientModel {
   firstName: string;
   lastName: string;
   birthDate: Date | string;
-  informedConsentDate: Date | string;
+  consentDate: Date | string;
   centerId?: string;
   assentDate?: Date |string;
 }

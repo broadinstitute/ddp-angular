@@ -6,8 +6,9 @@ import {
   FormControlName,
   FormGroupDirective,
   NG_VALUE_ACCESSOR,
-  NgControl
+  NgControl, ValidationErrors
 } from '@angular/forms';
+import {RegisterPatientsError} from '../../constants/error messages/registerPatients.error';
 
 
 @Component({
@@ -21,11 +22,11 @@ import {
           <input
             matInput
             #inputTextElement
-            (input)="setValue(inputTextElement)"
+            (focusout)="setValue(inputTextElement)"
             [formControl]="formControl"
             [placeholder]="placeholder"
           >
-          <mat-error>{{getErrorMessage}}</mat-error>
+          <mat-error>{{getErrorMessage | inputError : reegisterPatientsError}}</mat-error>
         </mat-form-field>
       </div>
     </ng-container>
@@ -37,12 +38,13 @@ import {
           <input
             #inputDateElement
             matInput
-            (input)="setValue(inputDateElement)"
+            (focusout)="setValue(inputDateElement)"
+            (dateInput)="checkDate(inputDateElement)"
             [formControl]="formControl"
             [matDatepicker]="picker"
             [placeholder]="placeholder"
           >
-          <mat-error>{{getErrorMessage}}</mat-error>
+          <mat-error>{{getErrorMessage | inputError : reegisterPatientsError}}</mat-error>
           <mat-datepicker-toggle
             matSuffix
             [for]="picker">
@@ -67,8 +69,16 @@ export class InputFieldComponent implements OnInit, ControlValueAccessor {
   public value: any;
   public formControl: FormControl;
 
+  public reegisterPatientsError = RegisterPatientsError;
+
   public onTouched: () => void;
   public onChange: (value: any) => void = () => {};
+
+  // Only keeps date value from two-way binding
+  private DateFieldCurrentValue: any[] = [];
+
+  private setDefaultDayYear = false;
+  private setDefaultYear = false;
 
   @Input('inputType') type: string;
   @Input() label: string;
@@ -76,6 +86,10 @@ export class InputFieldComponent implements OnInit, ControlValueAccessor {
 
   readonly TEXT: string = 'text';
   readonly DATE: string = 'date';
+
+  readonly FullDatePatternRegexp =/^(0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d$/;
+  readonly MonthPatternRegexp =/^(0?[1-9]|1[012])[- /.]?$/;
+  readonly MonthDayPatternRegexp =/^(0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.]?$/;
 
   constructor(private injector: Injector) {}
 
@@ -102,14 +116,49 @@ export class InputFieldComponent implements OnInit, ControlValueAccessor {
   }
 
   public setValue(inputElement: HTMLInputElement): void {
+    this.type === this.DATE && this.setDefaultDate();
     this.value = inputElement.value.trim();
     this.onChange(this.value);
     this.onTouched();
   }
 
-  public get getErrorMessage(): string {
-    if (this.formControl.hasError('required')) {return 'You must enter a value';}
-    return this.formControl.hasError('pattern') ? 'Not a valid email' : '';
+  public checkDate(inputElement: HTMLInputElement): void {
+    const dateValue = inputElement.value;
+    this.DateFieldCurrentValue = dateValue.trim().split('/');
+    this.setDefaultYear = this.defaultYear(dateValue);
+    this.setDefaultDayYear = this.defaultDayYear(dateValue);
+  }
+
+  public get getErrorMessage(): ValidationErrors {
+    return this.formControl.errors;
+  }
+
+  /* Util Functions */
+
+  private setDefaultDate(): void {
+    const newDate = new Date();
+    const [month, day] = this.DateFieldCurrentValue;
+
+    if(this.setDefaultYear) {
+      newDate.setMonth(month - 1);
+      newDate.setDate(day);
+      this.formControl.patchValue(newDate);
+    }
+
+    if(this.setDefaultDayYear) {
+      newDate.setMonth(month - 1);
+      this.formControl.patchValue(newDate);
+    }
+  }
+
+  private defaultDayYear(dateValue: string): boolean {
+    return this.MonthPatternRegexp.test(dateValue) &&
+    !this.MonthDayPatternRegexp.test(dateValue) &&
+    !this.FullDatePatternRegexp.test(dateValue);
+  }
+
+  private defaultYear(dateValue: string): boolean {
+    return this.MonthDayPatternRegexp.test(dateValue) && !this.FullDatePatternRegexp.test(dateValue);
   }
 
 }

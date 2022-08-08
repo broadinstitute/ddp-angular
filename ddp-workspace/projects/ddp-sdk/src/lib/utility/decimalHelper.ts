@@ -4,7 +4,7 @@ import { NumericAnswerType } from '../models/activity/numericAnswerType';
 
 export class DecimalHelper {
     static mapDecimalAnswerToNumber(answer: DecimalAnswer): number {
-        return answer.value * Math.pow(10, -(answer.scale));
+        return answer.value/ Math.pow(10, answer.scale);
     }
 
     static isDecimalAnswerType(obj: any): boolean {

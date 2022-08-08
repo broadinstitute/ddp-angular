@@ -30,6 +30,7 @@ export class RoleService {
   private _isParticipantListView = false;
   private _isParticipantEdit = false;
   private _isKitUploadInvalidAddress = false;
+  private _isDownloadParticipantFile = false;
   private _hasMercuryOrderSequencing = false;
 
   private _userId: string;
@@ -129,6 +130,9 @@ export class RoleService {
           }
           else if (entry === 'mercury_order_sequencing') {
             this._hasMercuryOrderSequencing = true;
+          }
+          else if (entry === 'file_download'){
+            this._isDownloadParticipantFile = true;
           }
         }
       }
@@ -261,6 +265,10 @@ export class RoleService {
 
   public allowedToUploadKitInvalidAddress(): boolean {
     return this._isKitUploadInvalidAddress;
+  }
+
+  public allowedToDownloadParticipantFiles(): boolean {
+    return this._isDownloadParticipantFile;
   }
 
   public allowedToDoOrderSequencing(): boolean {

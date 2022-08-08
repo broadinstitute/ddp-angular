@@ -1,6 +1,12 @@
 ::ng-deep .suggestion-match {
   text-decoration: underline;
 }
+@media only screen and (max-width: 1024px) {
+  ::ng-deep .example-input-field .mat-form-field-label-wrapper label{
+    line-height: 17px;
+  }
+}
+
 
 .example-input-field,
 .example-input-field-confirmation {

@@ -193,8 +193,12 @@ export class ActivityCompositeAnswer implements OnChanges {
         return this.layoutType === LayoutType.GRID;
     }
 
-    public gridLayoutColumnConfig(): string | null {
-       return this.isGridLayout() ? 'auto '.repeat(this.block.columnSpan ?? this.block.children.length + 1).trim() : null;
+    public gridLayoutColumnConfig(): string | undefined {
+        if (!this.isGridLayout()) {
+            return;
+        }
+
+        return 'auto '.repeat(this.block.columnSpan ?? this.block.children.length + 1).trim();
     }
 
     // We need this method because we want to include the prototype in the clone.

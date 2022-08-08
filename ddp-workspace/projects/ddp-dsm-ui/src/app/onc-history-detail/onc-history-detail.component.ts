@@ -93,7 +93,7 @@ export class OncHistoryDetailComponent implements OnInit {
           name: parameterName,
           value: v
         }, null, 'participantId', this.participant.participant.participantId,
-        Statics.ONCDETAIL_ALIAS, null, realm, this.participant.participant.ddpParticipantId
+        Statics.ONCDETAIL_ALIAS, null, realm, this.participant.data.profile['guid']
       );
       const patch = patch1.getPatch();
       this.patchFinished = false;
@@ -200,6 +200,8 @@ export class OncHistoryDetailComponent implements OnInit {
     }
     if (v !== null) {
       if (this.oncHistory[ index ].additionalValuesJson != null) {
+        const camelCaseColumnName = Utils.convertUnderScoresToCamelCase(colName);
+        this.oncHistory[ index ].additionalValuesJson[ camelCaseColumnName ] = v;
         this.oncHistory[ index ].additionalValuesJson[ colName ] = v;
       } else {
         const addArray = {};
@@ -227,12 +229,12 @@ export class OncHistoryDetailComponent implements OnInit {
     tissues.push(new Tissue(null, null, null, null, null, null,
       null, null, null, null, null, null, null, null,
       null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null, null, null));
+      null, null, null, null, null, null, null, null, null, false));
     this.oncHistory.push(new OncHistoryDetail(participantId, null, null, null, null,
       null, null, null, null, null, null, null, null,
       null, null, null, null, null, null, null, null, null,
       null, null, null, tissues,
-      null, null, null, null));
+      null, null, null, null, false));
   }
 
   deleteOncHistory(index: number): void {

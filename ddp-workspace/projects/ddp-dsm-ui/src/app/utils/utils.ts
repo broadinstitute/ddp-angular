@@ -28,6 +28,7 @@ export class Utils {
   static DATE_STRING = 'yyyy-MM-dd';
   static DATE_STRING_CVS = 'MMddyy';
   static DATE_STRING_IN_CVS = 'MM/dd/yyyy';
+  static DATE_STRING_IN_CVS_WITH_TIME = 'MM/dd/yyyy hh:mm:ss a';
   static DATE_STRING_IN_EVENT_CVS = 'MMM dd, yyyy, hh:mm:ss a';
   static DATE_PARTIAL = 'partial date';
   static COMMA = ',';

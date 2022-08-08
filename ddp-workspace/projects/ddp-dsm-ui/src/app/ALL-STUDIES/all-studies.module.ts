@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
+import {FileDownloadComponent} from '../file-download/file-download.component';
 import {AllStudiesRoutingModule} from './all-studies.routing.module';
 import {HomeComponent} from '../home/home.component';
 import {KitLabelComponent} from '../kit-label/kit-label.component';
@@ -112,6 +113,9 @@ import { BulkCohortTagModalComponent } from '../tags/cohort-tag/bulk-cohort-tag-
 import { OpenDialogDirective } from '../directive/open-loading-modal.directive';
 import {SequencingOrderComponent} from '../sequencing-order/sequencing-order.component';
 import {ClinicalPageComponent} from '../clinical-page/clinical-page.component';
+import {StoolUploadComponent} from '../stool-upload/stool-upload.component';
+
+
 
 
 @NgModule({
@@ -191,10 +195,12 @@ import {ClinicalPageComponent} from '../clinical-page/clinical-page.component';
     DssErrorPageComponent,
     LoadingModalComponent,
     CohortTagComponent,
+    StoolUploadComponent,
     BulkCohortTagModalComponent,
     OpenDialogDirective,
     SequencingOrderComponent,
-    ClinicalPageComponent
+    ClinicalPageComponent,
+    FileDownloadComponent
   ],
   imports: [
     CommonModule,
