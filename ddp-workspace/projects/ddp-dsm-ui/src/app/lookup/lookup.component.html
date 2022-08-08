@@ -3,13 +3,13 @@
          matInput maxlength="200"
          placeholder="{{placeholder}}"
          [(ngModel)]="lookupValue" [disabled]="disabled"
-         (ngModelChange)="checkForLookup()" (change)="changeValue()"
+         (ngModelChange)="checkForLookup()"
          (blur)="currentField(null)" (focus)="currentField(fieldName)">
   <textarea *ngIf="multiLineInput"
             matInput maxlength="200"
             placeholder="{{placeholder}}"
             [(ngModel)]="lookupValue" [disabled]="disabled"
-            (ngModelChange)="checkForLookup()" (change)="changeValue()"
+            (ngModelChange)="checkForLookup()"
             (blur)="currentField(null)" (focus)="currentField(fieldName)"></textarea>
 </mat-form-field>
 <div>
