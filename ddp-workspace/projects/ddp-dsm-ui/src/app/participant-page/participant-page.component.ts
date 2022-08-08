@@ -1137,7 +1137,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   onAdditionalValueChange(evt: any, colName: string): void {
     let v;
-    colName = Utils.convertUnderScoresToCamelCase(colName);
     if (typeof evt === 'string') {
       v = evt;
     } else {
@@ -1151,6 +1150,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     }
     if (v !== null) {
       if (this.participant.participant != null && this.participant.participant.additionalValuesJson != null) {
+        const camelCaseColumnName = Utils.convertUnderScoresToCamelCase(colName);
+        this.participant.participant.additionalValuesJson[ camelCaseColumnName ] = v;
         this.participant.participant.additionalValuesJson[ colName ] = v;
       } else {
         let participantId = this.participant.data.profile[ 'guid' ];

@@ -32,23 +32,24 @@
   width: 100%;
 
   .inner-container {
-    padding: 3rem;
+    padding: 3rem 0;
+    width: 50%;
 
     .the-purpose-of-this {
       color: #000000;
-      font-family: 'Untitled Sans', sans-serif;
+      font-family: 'Untitled-Sans-Regular', sans-serif;
       font-size: 1.25rem;
       letter-spacing: 0;
       line-height: 1.875rem;
       text-align: left;
       margin: 3rem 0 !important;
-      width: 60%;
 
-      @media(max-width: 776px){
+
+      @media (max-width: 776px) {
         width: 80%;
       }
 
-      @media(max-width: 576px){
+      @media (max-width: 576px) {
         width: 100%;
       }
     }
@@ -98,18 +99,19 @@
   .paragraphTitle {
     font-weight: bold;
     font-size: 1.25rem;
+    font-family: 'Untitled-Sans-Regular', sans-serif;
   }
 
   .paragraphText {
     color: #000000;
-    font-family: 'Untitled Sans', sans-serif;
+    font-family: 'Untitled-Sans-Regular', sans-serif;
     letter-spacing: 0;
     line-height: 1.875rem;
     font-weight: normal;
-    font-size: 1.1875rem;
+    font-size: 1.25rem;
   }
 
-  .paragraphText1Highlighted {
+  .paragraphText1Highlighted ::ng-deep a {
     color: #c59ce4;
     font-size: 1.1875rem;
     text-decoration: underline;

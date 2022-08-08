@@ -17,6 +17,7 @@ import { ComponentService } from './component.service';
 import { RoleService } from './role.service';
 import { SessionService } from './session.service';
 import { BulkCohortTag } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-model';
+import {LocalStorageService} from './localStorage.service';
 
 declare var DDP_ENV: any;
 
@@ -33,7 +34,8 @@ export class DSMService {
   constructor(private http: HttpClient,
                private sessionService: SessionService,
                private role: RoleService,
-               private router: Router) {
+               private router: Router,
+              private localStorageService: LocalStorageService) {
   }
 
   sendAnalyticsMetric( realm: string, passed: number ): Observable<any> {
@@ -602,6 +604,17 @@ export class DSMService {
     );
   }
 
+
+  public uploadStoolTxtFile(realm: string, kitType: string, file: File): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'stoolUpload';
+    const map: { name: string; value: any }[] = [];
+    map.push({name: DSMService.REALM, value: realm});
+    map.push({name: 'userId', value: this.role.userID()});
+    return this.http.post(url, file, this.buildQueryUploadHeader(map)).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   public getSignedUrl( ddpParticipantId: string, fileName: string, bucketName: string, blob: string, fileGuid: string, realm: string):
     Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'downloadFile';
@@ -645,6 +658,7 @@ export class DSMService {
       catchError(this.handleError)
     );
   }
+
 
   public kitLabel(realm: string, kitType: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'kitLabel';
@@ -1087,12 +1101,9 @@ export class DSMService {
       if (expirationDate <= myDate) {
         // Remove token from localStorage
         // console.log("log out user and remove all items from local storage");
-        localStorage.removeItem('auth_token');
-        localStorage.removeItem(SessionService.DSM_TOKEN_NAME);
-        localStorage.removeItem(Statics.PERMALINK);
-        localStorage.removeItem(ComponentService.MENU_SELECTED_REALM);
+        this.localStorageService.clear();
         this.sessionService.logout();
-        this.router.navigate([ Statics.HOME_URL ]);
+        this.router.navigate(['']);
         return false;
       }
       return true;

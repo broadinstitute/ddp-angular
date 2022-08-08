@@ -10,9 +10,12 @@
 
 .footer {
   padding: 48px 0 60px;
-
   background: map-get($colors, 'footer-bg');
   color: map-get($colors, 'footer-color');
+
+  @include media-xs {
+    padding-bottom: 12px!important;
+  }
 
   &-contacts {
     font-size: 16px;
@@ -25,6 +28,11 @@
   .container {
     display: flex;
     justify-content: space-between;
+
+    @include media-xs {
+      flex-direction: column-reverse;
+      gap: 24px;
+    }
   }
 
   & a:not(.button) {
@@ -44,6 +52,10 @@
     @media (max-width: 700px) {
       max-width: 80%;
     }
+    @include media-xs {
+      max-width: 100%;
+      text-align: center;
+    }
   }
 
   &-menu {
@@ -51,21 +63,34 @@
     display: flex;
     justify-content: flex-end;
 
-    & a {
+    a {
       font-family: Spartan-Bold, sans-serif;
     }
-    & .link-list {
+
+    .link-list {
       margin-top: 0;
+
+      @include media-xs {
+        width: 100%;
+        flex-direction: row!important;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+      }
     }
   }
 
   &-social {
     margin: 40px 0;
     display: flex;
-      @media (max-width: 700px) {
-          flex-wrap: wrap;
-          overflow-wrap: break-word;
-      }
+    @media (max-width: 700px) {
+      flex-wrap: wrap;
+      overflow-wrap: break-word;
+    }
+    @include media-xs {
+      justify-content: center;
+    }
+
     &-item {
       width: 50px;
       height: 50px;

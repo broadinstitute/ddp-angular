@@ -49,7 +49,6 @@ export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
 
     public ngOnInit(): void {
         this.initForm();
-
         this.subs = this.numericField.valueChanges.subscribe((enteredValue: number) => {
             const answerToDisplay: string = this.mapAnswerToDisplay(enteredValue);
             const answerToPatch: NumericAnswerType = this.mapAnswerToPatchToServer(answerToDisplay);

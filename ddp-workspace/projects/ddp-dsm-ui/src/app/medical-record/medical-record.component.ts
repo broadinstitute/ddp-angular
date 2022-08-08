@@ -249,7 +249,7 @@ export class MedicalRecordComponent implements OnInit {
     } else {
       this.downloading = true;
       this.message = 'Downloading... This might take a while';
-      this.dsmService.downloadPDF(this.participant.participant.ddpParticipantId, this.medicalRecord.medicalRecordId,
+      this.dsmService.downloadPDF(this.participant.data.profile['guid'], this.medicalRecord.medicalRecordId,
         this.startDate, this.endDate, this.mrCoverPdfSettings, localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
         configName, this.pdfs, null
       )
@@ -307,15 +307,15 @@ export class MedicalRecordComponent implements OnInit {
         const nameValues = [];
         this.medicalRecord.name = contact.field1.value;
         nameValues.push({name: 'm.name', value: this.medicalRecord.name});
-        if (contact.field2.value != null) {
+        if (contact?.field2?.value != null) {
           this.medicalRecord.contact = contact.field2.value;
           nameValues.push({name: 'm.contact', value: this.medicalRecord.contact});
         }
-        if (contact.field3.value != null) {
+        if (contact?.field3?.value != null) {
           this.medicalRecord.phone = contact.field3.value;
           nameValues.push({name: 'm.phone', value: this.medicalRecord.phone});
         }
-        if (contact.field4.value != null) {
+        if (contact?.field4?.value != null) {
           this.medicalRecord.fax = contact.field4.value;
           nameValues.push({name: 'm.fax', value: this.medicalRecord.fax});
         }
@@ -424,7 +424,6 @@ export class MedicalRecordComponent implements OnInit {
 
   onAdditionalValueChange(evt: any, colName: string): void {
     let v;
-    colName = Utils.convertUnderScoresToCamelCase(colName);
     if (typeof evt === 'string') {
       v = evt;
     } else {
@@ -438,6 +437,8 @@ export class MedicalRecordComponent implements OnInit {
     }
     if (v !== null) {
       if (this.medicalRecord.additionalValuesJson != null) {
+        const camelCaseColumnName = Utils.convertUnderScoresToCamelCase(colName);
+        this.medicalRecord.additionalValuesJson[ camelCaseColumnName ] = v;
         this.medicalRecord.additionalValuesJson[ colName ] = v;
       } else {
         const addArray = {};

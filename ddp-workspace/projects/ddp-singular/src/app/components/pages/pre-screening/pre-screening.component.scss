@@ -1,9 +1,8 @@
 @import '../../../../styles/colors';
 
 .container {
-  max-width: 720px !important;
-    margin-top: 50px!important;
-  margin-bottom: 42px !important;
+    max-width: 720px !important;
+    margin-bottom: 42px !important;
 }
 
 :host-context(app-pre-screening) {
@@ -20,13 +19,6 @@
         padding: 13px 23px;
         height: 53px;
         width: 200px;
-    }
-    ::ng-deep.ng-tns-c90-0 {
-        width: 138px;
-    }
-
-    ::ng-deep.ng-tns-c90-1 {
-        width: 300px;
     }
 
     ::ng-deep.ddp-required-question-prompt {

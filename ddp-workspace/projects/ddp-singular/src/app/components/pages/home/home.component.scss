@@ -3,7 +3,6 @@
 
 :host {
   color: $__font;
-    margin-top: 50px;
 
   h1, h2 {
     font-family: Spartan-Bold, serif;
@@ -102,9 +101,12 @@
       font-size: 28px;
       line-height: 28px;
 
-      @media (max-width: 600px) {
+      @include media-sm {
         font-size: 24px;
         line-height: 32px;
+      }
+      @include media-xs {
+        text-align: center;
       }
     }
 
@@ -120,8 +122,12 @@
 
         @media (max-width: 960px) {
           align-items: center !important;
-
           padding-left: 0;
+        }
+
+        @include media-xs {
+          flex-direction: column;
+          gap: 12px;
         }
 
         &:nth-of-type(1) {
@@ -138,6 +144,9 @@
 
         &:not(:last-of-type) {
           margin-bottom: 54px;
+          @include media-xs {
+            margin-bottom: 36px;
+          }
         }
 
         &:nth-child(1) {
@@ -179,13 +188,16 @@
 
         &-img {
           flex: 0 0 83px;
-
           margin-right: 42px;
 
           @media (max-width: 600px) {
             flex: 0 0 64px;
-
             margin-right: 24px;
+          }
+
+          @include media-xs {
+            flex-basis: 52px;
+            width: 52px;
           }
         }
         &-text {
@@ -195,6 +207,9 @@
 
           @include media-md {
             padding-right: 0;
+          }
+          @include media-xs {
+            text-align: center;
           }
         }
       }
@@ -362,6 +377,12 @@
         padding: 60px 40px 40px!important;
         justify-content: space-between;
         border-bottom: 1px inset $__gainsboro;
+        @include media-xs {
+            padding-left: 24px!important;
+            padding-right: 24px!important;
+            flex-direction: column;
+        }
+
         .title {
             display: flex;
             justify-content: flex-start;
@@ -374,6 +395,10 @@
                 flex-direction: column;
                 justify-content: center;
                 margin-right: 10px;
+            }
+            @include media-xs {
+              flex-direction: row;
+              justify-content: left;
             }
 
             h1 {
@@ -402,6 +427,10 @@
         }
         .text {
             width: 82%;
+            @include media-xs {
+              width: unset;
+            }
+
             p {
                 margin: 0!important;
             }

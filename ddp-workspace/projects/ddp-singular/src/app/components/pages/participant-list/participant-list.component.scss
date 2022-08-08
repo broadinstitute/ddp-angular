@@ -10,16 +10,12 @@
 }
 
 :host-context(app-participant-list) {
-    background-color: $__cultured;
-}
-
-.container {
-  margin: 50px auto!important;
+  background-color: $__cultured;
 }
 
 .grouper {
-    width: 90%;
-    margin: 0 auto 370px auto;
+  width: 90%;
+  margin: 0 auto 370px auto;
 
 .title {
   margin: .7rem 0;
@@ -35,7 +31,7 @@
 }
 
 .no-participants {
-        font-size: .9rem;
+  font-size: .9rem;
 }
 .participants-list {
   list-style: none;
@@ -208,15 +204,12 @@
 
 .help-tip {
   margin: 1rem 0;
-
   font-family: 'Spartan-Medium', sans-serif;
 }
 
 .logout-reminder {
   padding: 12px 24px;
-
   border-width: 1px;
-
   text-align: center;
 }
 
@@ -230,11 +223,11 @@
     white-space: nowrap;
 }
 
-    .enrollmentStatusIncompleteText {
-        color: black;
-        font-family: 'Spartan-Bold', sans-serif;
-        white-space: nowrap;
-    }
+.enrollmentStatusIncompleteText {
+    color: black;
+    font-family: 'Spartan-Bold', sans-serif;
+    white-space: nowrap;
+}
 
 .enrollmentStatusIcon {
     width: 25px;
@@ -283,6 +276,5 @@
         .StatusAndExpandBtn {
             align-items: center;
         }
-
     }
 }
