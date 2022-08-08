@@ -125,8 +125,7 @@ export class SequencingOrderComponent {
     if (this.checkErrorInSurveys( 'RELEASE_SELF' ) || this.checkErrorInSurveys( 'RELEASE_MINOR' )) {
       this.errorMessage += 'Participant lives in New York or Canada and is not eligible for clinical sequencing ';
     }
-
-    if (this.selectedNormal.sequencingRestriction || this.selectedNormal.sequencingRestriction === 'RUO') {
+    if (this.selectedNormal && this.selectedNormal.sequencingRestriction && this.selectedNormal.sequencingRestriction === 'RUO') {
       this.errorMessage += 'Error: The normal sample selected for the order cannot be used for clinical sequencing. ';
     }
     return this.errorMessage;

@@ -61,12 +61,16 @@
     <div class="app-modal-body">
       <ng-container *ngIf="checkError()">{{errorMessage}}</ng-container>
       <ng-container *ngIf="!checkError()">
-        <p>
+        <div align="center">
           Are you sure you want to place a clinical sequencing order for the following samples:<br>
           Participant short ID: {{participant.data.profile['hruid']}} <br>
-          Normal: {{this.selectedNormal.sample}} <br>
-          Tumor: {{this.selectedTissue.sample}}
-        </p>
+          <div *ngIf="selectedNormal.sample" align="center">
+            Normal: {{this.selectedNormal.sample}}
+          </div>
+          <div *ngIf="selectedTissue.sample" align="center">
+            Tumor: {{this.selectedTissue.sample}}
+          </div>
+        </div>
       </ng-container>
     </div>
     <div class="app-modal-footer">

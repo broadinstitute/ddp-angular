@@ -75,7 +75,7 @@ export class Sample {
       json.bspCollaboratorSampleId, json.kitTypeName, json.scanDate, json.error, json.receiveDate, json.deactivatedDate,
       json.trackingNumberTo, json.trackingReturnId, json.kitLabel, testResults, json.upsTrackingStatus,
       json.upsReturnStatus, json.externalOrderStatus, json.externalOrderNumber, json.externalOrderDate,
-      json.careEvolve, json.uploadReason, json.collectionDate, json.sequencingRestrtiction, json.dsmKitRequestId
+      json.careEvolve, json.uploadReason, json.collectionDate, json.sequencingRestriction, json.dsmKitRequestId
     );
   }
 }

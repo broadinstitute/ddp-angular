@@ -555,6 +555,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     if (typeof value === 'string') {
       sample[ parameterName ] = value;
       v = value;
+    } else {
+      v = value.value;
     }
     if (v != null) {
       const realm: string = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );

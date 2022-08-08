@@ -78,7 +78,6 @@ export class ClinicalPageComponent implements OnInit {
     fields.push( 'status' );
     fields.push( 'orderId' );
     const date = new Date();
-    console.log( map );
     Utils.createCSV(
       fields,
       map,
