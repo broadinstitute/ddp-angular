@@ -111,6 +111,7 @@ import { CohortTagComponent } from '../tags/cohort-tag/cohort-tag.component';
 import {MatChipsModule} from '@angular/material/chips';
 import { BulkCohortTagModalComponent } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-modal.component';
 import { OpenDialogDirective } from '../directive/open-loading-modal.directive';
+import {StoolUploadComponent} from '../stool-upload/stool-upload.component';
 
 
 
@@ -192,6 +193,7 @@ import { OpenDialogDirective } from '../directive/open-loading-modal.directive';
     DssErrorPageComponent,
     LoadingModalComponent,
     CohortTagComponent,
+    StoolUploadComponent,
     BulkCohortTagModalComponent,
     OpenDialogDirective,
     FileDownloadComponent

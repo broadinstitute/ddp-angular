@@ -1,0 +1,68 @@
+
+<div *ngIf="errorMessage != null">
+  <h3 class="Color--warn Line--Break">{{errorMessage}}</h3>
+  <br/>
+</div>
+
+<div *ngIf="notAllowed">
+  <h3 class="Color--warn Line--Break">Study does not support stool samples</h3>
+  <br/>
+</div>
+
+
+
+<div *ngIf="additionalMessage != null">
+  <h3 class="Color--primary Line--Break">{{additionalMessage}}</h3>
+  <br/>
+</div>
+
+<div *ngIf="resultMessage != null">
+  <h3 class="Color--primary Line--Break">{{resultMessage}}</h3>
+  <br/>
+</div>
+
+<span [hidden]="!loading" class="Width--100">
+    <div align="center" class="Width--100 Height--100">
+      <i class="fas fa-spinner fa-spin fa-5x Color--primary"></i>
+      <br/>
+      <br/>
+    </div>
+  </span>
+
+<div *ngIf="allowedToSeeInformation && !notAllowed && !isLoading">
+  <br/>
+  <br/>
+  <div class="Width--80">
+    <app-filepicker [id]="'kitUploadFile'" [fileFormat]="'txt'" (fileSelected)="fileSelected($event)"></app-filepicker>
+    <button type="button" mat-raised-button color="primary"
+            (click)="upload()"
+            [disabled]="!(file != null) || loading">Upload Stool Samples
+    </button>
+  </div>
+  <div>
+
+  </div>
+
+
+  <div class="Float--left Width--80">
+    <b>
+      <br/>
+      <br/>
+      <br/>
+      Upload instructions:
+      <ul>
+        <li>Tab delimited ".txt" file</li>
+        <li>Following columns are required
+          <table class="table table-bordered">
+            <tr>
+              <td>participantId</td>
+              <td>receiveDate</td>
+              <td>mfBarcode</td>
+            </tr>
+          </table>
+        </li>
+      </ul>
+    </b>
+  </div>
+
+</div>

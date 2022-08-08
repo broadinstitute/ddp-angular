@@ -604,6 +604,17 @@ export class DSMService {
     );
   }
 
+
+  public uploadStoolTxtFile(realm: string, kitType: string, file: File): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'stoolUpload';
+    const map: { name: string; value: any }[] = [];
+    map.push({name: DSMService.REALM, value: realm});
+    map.push({name: 'userId', value: this.role.userID()});
+    return this.http.post(url, file, this.buildQueryUploadHeader(map)).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   public downloadParticipantFile( fileName: string, bucketName: string, blob: string, realm: string, mimeType: string ): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'downloadFile';
     const map: { name: string; value: any }[] = [];
@@ -640,6 +651,7 @@ export class DSMService {
       catchError(this.handleError)
     );
   }
+
 
   public kitLabel(realm: string, kitType: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'kitLabel';
