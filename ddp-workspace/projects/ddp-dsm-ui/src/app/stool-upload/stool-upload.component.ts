@@ -9,7 +9,6 @@ import { ModalComponent } from '../modal/modal.component';
 import { ComponentService } from '../services/component.service';
 import { Statics } from '../utils/statics';
 import { FieldFilepickerComponent } from '../field-filepicker/field-filepicker.component';
-import { RoleService } from '../services/role.service';
 import {finalize} from "rxjs/operators";
 
 @Component({
@@ -58,7 +57,7 @@ export class StoolUploadComponent implements OnInit {
       next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
-          if (this.realmNameStoredForFile === val) {
+          if (this.selectedRealm === val) {
             this.allowedToSeeInformation = true;
             this.getPossibleKitType();
           }
@@ -72,7 +71,7 @@ export class StoolUploadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.realmNameStoredForFile != null) {
+    if (this.selectedRealm != null) {
       this.checkRight();
     } else {
       this.additionalMessage = 'Please select a study';
@@ -84,7 +83,7 @@ export class StoolUploadComponent implements OnInit {
     if (this.isSelectedRealm()) {
       this.loading = true;
       let jsonData: any[];
-      this.dsmService.getKitTypes(this.realmNameStoredForFile).subscribe({
+      this.dsmService.getKitTypes(this.selectedRealm).subscribe({
         next: data => {
           this.kitTypes = [];
           jsonData = data;
@@ -118,7 +117,7 @@ export class StoolUploadComponent implements OnInit {
     this.failedParticipants = [];
     this.loading = true;
     this.dsmService.uploadStoolTxtFile(
-      this.realmNameStoredForFile, this.kitType.name,
+      this.selectedRealm, this.kitType.name,
       this.file
     ).pipe(
       finalize(() => this.loading = false)
@@ -142,7 +141,11 @@ export class StoolUploadComponent implements OnInit {
 
 
   private isSelectedRealm(): boolean {
-    return !!this.realmNameStoredForFile;
+    return !!this.selectedRealm;
+  }
+
+  private get selectedRealm(): string {
+    return localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
   }
 
 }
