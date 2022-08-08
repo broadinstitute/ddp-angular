@@ -6,6 +6,7 @@ import { throwError, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { Filter } from '../filter-column/filter-column.model';
+import {File} from '../participant-list/models/file.model';
 import {Sort} from '../sort/sort.model';
 import { ViewFilter } from '../filter-column/models/view-filter.model';
 import { Abstraction } from '../medical-record-abstraction/model/medical-record-abstraction.model';
@@ -615,16 +616,16 @@ export class DSMService {
     );
   }
 
-  public getSignedUrl( ddpParticipantId: string, fileName: string, bucketName: string, blob: string, fileGuid: string, realm: string):
+  public getSignedUrl( ddpParticipantId: string, {fileName, bucket, blobName, guid}, realm: string):
     Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'downloadFile';
-    const map: { name: string; value: any }[] = [];
-    map.push( {name: DSMService.REALM, value: realm} );
-    map.push( {name: 'ddpParticipantId', value: ddpParticipantId} );
-    map.push( {name: 'fileName', value: fileName} );
-    map.push( {name: 'bucket', value: bucketName} );
-    map.push( {name: 'blobName', value: blob} );
-    map.push( {name: 'fileGuid', value: fileGuid} );
+    const map: { name: string; value: any }[] = [
+      {name: DSMService.REALM, value: realm} ,
+      {name: 'ddpParticipantId', value: ddpParticipantId} ,
+      {name: 'fileName', value: fileName} ,
+      {name: 'bucket', value: bucket},
+      {name: 'blobName', value: blobName},
+      {name: 'fileGuid', value: guid} ];
     return this.http.get( url, this.buildQueryHeader( map )).pipe( catchError( this.handleError ) );
   }
 

@@ -42,12 +42,7 @@ export class Data {
         });
       }
     }
-    const parsedFiles = [];
-    if(json.files){
-      for(const f of json.files){
-        parsedFiles.push(File.parse(f));
-      }
-    }
+    const parsedFiles = (json.files || []).map(file => File.parse(file));
     return new Data(
       json.profile, json.status, json.statusTimestamp, json.dsm,
       json.ddp, medicalProviders, this.activities( json.activities ), json.address, json.invitations, json.computed, parsedFiles

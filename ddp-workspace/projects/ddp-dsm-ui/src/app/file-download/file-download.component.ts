@@ -21,41 +21,37 @@ export class FileDownloadComponent implements OnDestroy {
   downloadMessage = '';
   downloading = false;
   CLEAN = 'CLEAN';
-  subscription: Subscription;
+  subscription1: Subscription;
   subscription2: Subscription;
+  subscriptions = new Subscription();
+  private SUCCESSFUL_DOWNLOAD_MESSAGE = 'File download finished.';
+  private NOT_SCANNED_FILE_MESSAGE = 'Error - file has not passed scanning';
 
   constructor( private dsmService: DSMService ) {
 
   }
 
   ngOnDestroy(): void {
-    if (this.subscription != null) {
-      this.subscription.unsubscribe();
-    }
-    if (this.subscription2 != null) {
-      this.subscription2.unsubscribe();
-    }
+    this.subscriptions.unsubscribe();
   }
 
   downloadParticipantFile( file: File ): void {
     this.downloading = true;
     if (!this.isFileClean( file )) {
-      this.downloadMessage = 'Error - file has not passed scanning';
-      this.downloading = false;
+      this.setDownloadMessageAndStatus( this.NOT_SCANNED_FILE_MESSAGE, false );
       return;
     }
     const realm = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
-    this.subscription = this.dsmService.getSignedUrl( this.participant.data.profile[ 'guid' ], file.fileName, file.bucket,
-      file.blobName, file.guid, realm ).subscribe( {
+    this.subscription1 = this.dsmService.getSignedUrl( this.participant.data.profile[ 'guid' ], file, realm ).subscribe( {
         next: data => {
           this.saveParticipantFile( data.url, file.mimeType, data.fileName );
         },
         error: err => {
-          this.downloadMessage = err;
-          this.downloading = false;
+          this.setDownloadMessageAndStatus( err, false );
         }
       }
     );
+    this.subscriptions.add( this.subscription1 );
   }
 
   saveParticipantFile( url: any, type: string, fileName: string ): void {
@@ -64,31 +60,16 @@ export class FileDownloadComponent implements OnDestroy {
         next: data => {
           const blob = new Blob( [ data ], {type: type} );
           fileSaver.saveAs( blob, fileName );
-          this.downloading = false;
-          this.downloadMessage = 'File download finished.';
+          this.setDownloadMessageAndStatus( this.SUCCESSFUL_DOWNLOAD_MESSAGE, false );
         },
         error: err => {
-          console.log( err );
-          this.downloadMessage = err;
-          this.downloading = false;
+          this.setDownloadMessageAndStatus( err, false );
         }
       }
     );
-//    const downloadURI = (uri, name) => {
-//      const link = document.createElement("a");
-//      link.download = name;
-//      link.href = uri;
-//      document.body.appendChild(link);
-//      link.click();
-//      document.body.removeChild(link);
-//    }
-//    downloadURI(url, fileName);
-
-
-
+    this.subscriptions.add( this.subscription2 );
 
   }
-
 
   getNiceDateFormat( uploadedAt: string ): string {
     return new DatePipe( 'en-US' ).transform( uploadedAt, Utils.DATE_STRING_IN_CVS_WITH_TIME );
@@ -96,5 +77,11 @@ export class FileDownloadComponent implements OnDestroy {
 
   public isFileClean( file: File ): boolean {
     return file.scanResult === this.CLEAN;
+  }
+
+  private setDownloadMessageAndStatus( message: string, downloading: boolean ): void {
+    this.downloadMessage = message;
+    this.downloading = downloading;
+
   }
 }
