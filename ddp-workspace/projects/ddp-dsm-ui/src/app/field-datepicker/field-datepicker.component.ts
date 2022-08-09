@@ -59,7 +59,7 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
   }
 
   private handleInput(dateString: string): void {
-    if (!['N/A', 'Not Found', this.defaultNaDate].includes(dateString)) {
+    if (this.isDateNotFound(dateString)) {
       if (dateString != null) {
         let tmpDate: string = dateString;
         if (dateString.length === 7) {
@@ -80,6 +80,10 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
     } else {
       this._dateString = dateString;
     }
+  }
+
+  isDateNotFound(dateString: string) {
+    return !['N/A', 'Not Found', this.defaultNaDate].includes(dateString);
   }
 
   public check(): void {
