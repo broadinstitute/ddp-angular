@@ -23,7 +23,7 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
   @Output() dateChanged = new EventEmitter();
 
   _dateString: string;
-  defaultDate: string = '1000-01-01';
+  defaultNaDate: string = '1000-01-01';
   error: string = null;
   estimated = false;
   datePicker: Date;
@@ -59,7 +59,7 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
   }
 
   private handleInput(dateString: string): void {
-    if (dateString !== 'N/A' && dateString !== 'Not Found' && dateString !== this.defaultDate) {
+    if (!['N/A', 'Not Found', this.defaultNaDate].includes(dateString)) {
       if (dateString != null) {
         let tmpDate: string = dateString;
         if (dateString.length === 7) {
@@ -75,7 +75,7 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
         }
         this.datePicker = Utils.getDate(tmpDate);
       }
-    } else if (dateString === this.defaultDate) {
+    } else if (dateString === this.defaultNaDate) {
       this._dateString = 'N/A';
     } else {
       this._dateString = dateString;
@@ -139,7 +139,7 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
   public setNA(): void {
     this.isNA = true;
     this._dateString = 'N/A';
-    this.emitDate(this.defaultDate);
+    this.emitDate(this.defaultNaDate);
   }
 
   public setNotFound(): void {
