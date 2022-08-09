@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { throwError, Observable } from 'rxjs';
+import { throwError, Observable} from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
 import { Filter } from '../filter-column/filter-column.model';
-import {File} from '../participant-list/models/file.model';
 import {Sort} from '../sort/sort.model';
 import { ViewFilter } from '../filter-column/models/view-filter.model';
 import { Abstraction } from '../medical-record-abstraction/model/medical-record-abstraction.model';
@@ -630,7 +628,9 @@ export class DSMService {
   }
 
   public downloadFromSignedUrl( url: string ): Observable<any> {
-    return this.http.get( url, this.buildQueryBlobHeaderForGCP() ).pipe( catchError( this.handleError ) );
+    return this.http.get( url, this.buildQueryBlobHeaderForGCP() ).pipe(
+      catchError(this.handleError)
+    );;
   }
 
   public uploadNdiFile(file: File): Observable<any> {
@@ -1026,7 +1026,7 @@ export class DSMService {
     };
   }
 
-  private buildQueryBlobHeaderForGCP(): any {
+  public buildQueryBlobHeaderForGCP(): any {
     return {
       headers: this.buildJsonHeader(),
       responseType: 'blob'

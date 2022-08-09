@@ -4,14 +4,14 @@ import { InvitationData } from '../../invitation-data/invitation-data.model';
 import { Computed } from './computed.model';
 import { MedicalProvider } from './medical-providers.model';
 import { QuestionAnswer } from '../../activity-data/models/question-answer.model';
-import {File} from './file.model';
+import {ESFile} from './file.model';
 
 
 export class Data {
   constructor(public profile: object, public status: string, public statusTimestamp: number,
               public dsm: object, public ddp: string, public medicalProviders: Array<MedicalProvider>,
                public activities: Array<ActivityData>, public address: Address, public invitations: Array<InvitationData>,
-              public computed?: Computed, public files?: Array<File>
+              public computed?: Computed, public files?: Array<ESFile>
   ) {
   }
 
@@ -42,7 +42,7 @@ export class Data {
         });
       }
     }
-    const parsedFiles = (json.files || []).map(file => File.parse(file));
+    const parsedFiles = (json.files || []).map(file => ESFile.parse(file));
     return new Data(
       json.profile, json.status, json.statusTimestamp, json.dsm,
       json.ddp, medicalProviders, this.activities( json.activities ), json.address, json.invitations, json.computed, parsedFiles
