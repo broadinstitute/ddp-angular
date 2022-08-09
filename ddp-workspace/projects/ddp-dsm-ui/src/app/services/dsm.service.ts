@@ -630,7 +630,7 @@ export class DSMService {
   public downloadFromSignedUrl( url: string ): Observable<any> {
     return this.http.get( url, this.buildQueryBlobHeaderForGCP() ).pipe(
       catchError(this.handleError)
-    );;
+    );
   }
 
   public uploadNdiFile(file: File): Observable<any> {
