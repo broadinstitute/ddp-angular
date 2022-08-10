@@ -48,27 +48,13 @@ export class ClinicalPageComponent implements OnInit {
   }
 
   getOrderStatus( statusDetail: string ): string {
-    if (!statusDetail) {
-      return 'Sent';
-    }
-    return statusDetail;
-
+    return statusDetail || 'Sent';
   }
 
   public downloadList(): void {
     const map: { shortId: string; sampleType: string; sample: string; orderDate: string; status: string; orderId: string }[] = [];
-    console.log( this.clinicalOrdersArray );
     for (const order of this.clinicalOrdersArray) {
-      const dateCreated = this.getDateFormatted( order.orderDate );
-
-      map.push( {
-        shortId: order.shortId,
-        sampleType: order.sampleType,
-        sample: order.sample,
-        orderDate: dateCreated,
-        status: this.getOrderStatus( order.statusDetail ),
-        orderId: order.orderId
-      } );
+      map.push( this.getOrderJson( order ) );
     }
     const fields = [];
     fields.push( 'shortId' );
@@ -87,5 +73,17 @@ export class ClinicalPageComponent implements OnInit {
 
   reloadList(): void {
     this.getMercuryOrders();
+  }
+
+  private getOrderJson( order: ClinicalOrder ) {
+    const dateCreated = this.getDateFormatted( order.orderDate );
+    return {
+      shortId: order.shortId,
+      sampleType: order.sampleType,
+      sample: order.sample,
+      orderDate: dateCreated,
+      status: this.getOrderStatus( order.statusDetail ),
+      orderId: order.orderId
+    };
   }
 }

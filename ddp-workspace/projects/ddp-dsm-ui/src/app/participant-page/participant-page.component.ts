@@ -128,6 +128,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   sequencingOrdersArray = [];
 
+  private ENROLLED = 'ENROLLED';
+  private ABOUT_YOU = 'ABOUT_YOU';
+  private ASSIGNED_SEX = 'ASSIGNED_SEX';
+
   constructor(private auth: Auth, private compService: ComponentService, private dsmService: DSMService, private router: Router,
                private role: RoleService, private util: Utils, private route: ActivatedRoute, public dialog: MatDialog) {
     if (!auth.authenticated()) {
@@ -551,7 +555,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   kitValueChanged( value: any, parameterName: string, sample: Sample ): void {
     let v;
-    console.log(value);
     if (typeof value === 'string') {
       sample[ parameterName ] = value;
       v = value;
@@ -1497,9 +1500,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           );
         }
 
-      },
-      error: () => {
-
       }
     } );
   }
@@ -1508,15 +1508,15 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     if (!this.role.allowedToDoOrderSequencing() || !this.hasSequencingOrders) {
       return false;
     }
-    const enrolled: boolean = participant.data.status === 'ENROLLED';
+    const enrolled: boolean = participant.data.status === this.ENROLLED;
     let hasGender = false;
-    if (participant.oncHistoryDetails.find( onc => onc.gender !== '' && onc.gender !== undefined && onc.gender !== null )) {
+    if (this.hasOncHistoryGender(participant)) {
       hasGender = true;
     }
     else {
-      const aboutYouActivity = participant.data.activities.find( activity => activity.activityCode === 'ABOUT_YOU' );
+      const aboutYouActivity = participant.data.activities.find( activity => activity.activityCode === this.ABOUT_YOU );
       if (aboutYouActivity) {
-        const genderQuestion = aboutYouActivity.questionsAnswers.find( questionAnswer => questionAnswer.stableId === 'ASSIGNED_SEX' );
+        const genderQuestion = aboutYouActivity.questionsAnswers.find( questionAnswer => questionAnswer.stableId === this.ASSIGNED_SEX );
         if (genderQuestion && genderQuestion.answer) {
           hasGender = true;
         }
@@ -1526,5 +1526,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       }
     }
     return hasGender && enrolled;
+  }
+
+  private hasOncHistoryGender(participant: Participant): boolean {
+    return participant.oncHistoryDetails.find( onc => onc.gender !== '' && onc.gender !== undefined && onc.gender !== null ) !== undefined;
   }
 }

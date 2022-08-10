@@ -11,4 +11,9 @@ export class SequencingOrder {
     return new SequencingOrder( json.sampleType, json.sample, json.sampleStatus, json.collectionDate, json.sequencingOrderDate,
       json.tissueId, json.dsmKitRequestId, json.sequencingRestriction );
   }
+
+  public static getEmptyInstance(): SequencingOrder{
+    return new SequencingOrder( '', '', '', '', '', '', '', '' );
+  }
+
 }
