@@ -157,13 +157,13 @@ import { ConfigurationService } from '../../services/configuration.service';
             margin:0;
         }
         @media only screen and (max-width: 1024px) {
-            ::ng-deep .mat-form-field .mat-form-field-label-wrapper label{
+            ::ng-deep .ddp-address-input .mat-form-field .mat-form-field-label-wrapper label{
             line-height: 17px;
             }
-            ::ng-deep .mat-form-field .mat-form-field-infix input{
+            ::ng-deep .ddp-address-input .mat-form-field .mat-form-field-infix input{
             line-height: 17px;
             }
-            ::ng-deep .mat-form-field .mat-select span{
+            ::ng-deep .ddp-address-input .mat-form-field .mat-select span{
             line-height: 17px;
             }
         }`],

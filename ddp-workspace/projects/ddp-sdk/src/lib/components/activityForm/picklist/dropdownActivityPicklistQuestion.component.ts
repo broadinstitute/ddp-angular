@@ -68,13 +68,13 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
           width: auto;
         }
         @media only screen and (max-width: 1024px) {
-          ::ng-deep .mat-form-field .mat-select-native-control{
+          ::ng-deep .width .mat-select-native-control{
           line-height: 17px;
             }
-          ::ng-deep .mat-form-field .mat-select{
+          ::ng-deep .width .mat-select{
             line-height: 17px;
             }
-          ::ng-deep .mat-form-field .mat-form-field-infix input{
+          ::ng-deep .width .mat-form-field-infix input{
             line-height: 17px;
             }
         }
