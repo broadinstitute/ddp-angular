@@ -1,13 +1,15 @@
 import {DatePipe} from '@angular/common';
-import {Component, Input, OnDestroy, Output} from '@angular/core';
-import {File} from '../participant-list/models/file.model';
+import {Component, Input} from '@angular/core';
+import {mergeMap} from 'rxjs';
+import {take} from 'rxjs/operators';
+import {ESFile} from '../participant-list/models/file.model';
 import {Participant} from '../participant-list/participant-list.model';
 import {ComponentService} from '../services/component.service';
 import {DSMService} from '../services/dsm.service';
 import {Utils} from '../utils/utils';
-import { Subscription } from 'rxjs';
 
 const fileSaver = require( 'file-saver' );
+
 
 @Component( {
   selector: 'app-file-download',
@@ -15,53 +17,52 @@ const fileSaver = require( 'file-saver' );
   styleUrls: [ './file-download.component.scss' ]
 } )
 
-export class FileDownloadComponent implements OnDestroy {
+export class FileDownloadComponent {
   @Input() participant: Participant;
   downloadMessage = '';
   downloading = false;
   CLEAN = 'CLEAN';
-  subscription: Subscription;
+  private SUCCESSFUL_DOWNLOAD_MESSAGE = 'File download finished.';
+  private NOT_SCANNED_FILE_MESSAGE = 'Error - file has not passed scanning';
 
-  constructor(private dsmService: DSMService ) {
+  constructor( private dsmService: DSMService ) {
 
   }
 
-  ngOnDestroy(): void {
-    if (this.subscription != null) {
-      this.subscription.unsubscribe();
-    }
-  }
 
-  downloadParticipantFile( file: File ): void {
+  downloadParticipantFile( file: ESFile ): void {
     this.downloading = true;
-    if (file.scanResult !== this.CLEAN) {
-      this.downloadMessage = 'Error - file has not passed scanning';
-      this.downloading = false;
+    if (!this.isFileClean( file )) {
+      this.setDownloadMessageAndStatus( this.NOT_SCANNED_FILE_MESSAGE, false );
       return;
     }
+
     const realm = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
-    this.subscription = this.dsmService.downloadParticipantFile( file.fileName, file.bucket, file.blobName, realm, file.mimeType )
-      .subscribe( {
+    this.dsmService.getSignedUrl( this.participant.data.profile[ 'guid' ], file, realm ).pipe(
+      mergeMap(data => this.dsmService.downloadFromSignedUrl(data['url']).pipe(take(1)))).subscribe( {
         next: data => {
-          this.saveParticipantFile( data, file.mimeType, file.fileName );
-          this.downloading = false;
-          this.downloadMessage = 'File download finished.';
+            const blob = new Blob( [ data ], {type: file.mimeType} );
+            fileSaver.saveAs( blob, file.fileName );
+            this.setDownloadMessageAndStatus( this.SUCCESSFUL_DOWNLOAD_MESSAGE, false );
         },
-       error: err => {
-      this.downloadMessage = err;
-      this.downloading = false;
-    }
-  }
-    );
-  }
+        error: err => {
+          this.setDownloadMessageAndStatus( err, false );
+        }
+      } );
 
-  saveParticipantFile( data: any, type: string, fileName: string ): void {
-    const blob = new Blob( [ data ], {type: type} );
-    fileSaver.saveAs( blob, fileName );
   }
-
 
   getNiceDateFormat( uploadedAt: string ): string {
-    return new DatePipe('en-US').transform(uploadedAt, Utils.DATE_STRING_IN_CVS_WITH_TIME);
+    return new DatePipe( 'en-US' ).transform( uploadedAt, Utils.DATE_STRING_IN_CVS_WITH_TIME );
+  }
+
+  public isFileClean( file: ESFile ): boolean {
+    return file.scanResult === this.CLEAN;
+  }
+
+  private setDownloadMessageAndStatus( message: string, downloading: boolean ): void {
+    this.downloadMessage = message;
+    this.downloading = downloading;
+
   }
 }
