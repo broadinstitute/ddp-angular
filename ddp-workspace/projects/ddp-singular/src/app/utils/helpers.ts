@@ -24,7 +24,7 @@ const getRenderActivityKeyByActivityCode = (activityCode: ActivityCode): RenderA
     return RenderActivityKey.Consent;
   }
 
-  if ([ActivityCode.AboutPatient, ActivityCode.AboutHealthy].includes(activityCode)) {
+  if ([ActivityCode.AboutPatient, ActivityCode.AboutHealthy, ActivityCode.ChildContact].includes(activityCode)) {
     return RenderActivityKey.About;
   }
 

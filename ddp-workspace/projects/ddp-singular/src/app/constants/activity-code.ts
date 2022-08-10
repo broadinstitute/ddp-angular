@@ -12,4 +12,5 @@ export enum ActivityCode {
   AddParticipantParental = 'ADD_PARTICIPANT_PARENTAL',
   AddParticipantDependent = 'ADD_PARTICIPANT_DEPENDENT',
   MedicalRecordFileUpload = 'MEDICAL_RECORD_FILE_UPLOAD',
+  ChildContact = 'CHILD_CONTACT'
 }

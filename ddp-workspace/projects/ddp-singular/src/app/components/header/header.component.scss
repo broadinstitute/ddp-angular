@@ -73,9 +73,8 @@ a:not(.button) {
 
   &__logo {
     height: 100px;
-    margin-bottom: 13px;
-      display: flex;
-      align-items: flex-start;
+    align-self: flex-start;
+
     @media (max-width: 1280px) {
       height: 80px;
     }
