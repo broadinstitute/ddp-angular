@@ -1026,7 +1026,7 @@ export class DSMService {
     };
   }
 
-  public buildQueryBlobHeaderForGCP(): any {
+  private buildQueryBlobHeaderForGCP(): any {
     return {
       headers: this.buildJsonHeader(),
       responseType: 'blob'
