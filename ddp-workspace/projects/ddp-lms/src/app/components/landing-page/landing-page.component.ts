@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import {
   Auth0AdapterService,
   ConfigurationService,
@@ -25,6 +25,7 @@ export class LandingPageComponent implements OnInit {
   private readonly SELF_DIAGNOSED = 'DIAGNOSED';
   private readonly CHILD_DIAGNOSED = 'CHILD_DIAGNOSED';
   private answers: [];
+  private isRegistering: boolean;
 
   constructor(
     private router: Router,
@@ -44,6 +45,7 @@ export class LandingPageComponent implements OnInit {
       this.auth0.handleAuthentication(this.handleAuthError.bind(this));
     }
     this.load().subscribe();
+    this.isRegistering = !!localStorage.getItem('isRegistering');
   }
 
   protected handleAuthError(error: any | null): void {
@@ -62,7 +64,10 @@ export class LandingPageComponent implements OnInit {
       mergeMap(() => this.loadParticipants()),
       mergeMap((participants) =>
         iif(
-          () => !participants.length && this.answers.find(({ stableId }) => stableId === this.CHILD_DIAGNOSED),
+          () =>
+            !participants.length &&
+            this.answers.find(({ stableId }) => stableId === this.CHILD_DIAGNOSED) &&
+            this.isRegistering,
           this.governedParticipantsAgent.addParticipant(this.config.studyGuid),
           of(false)
         )
@@ -79,6 +84,7 @@ export class LandingPageComponent implements OnInit {
       }),
       take(1),
       finalize(() => {
+        localStorage.removeItem('isRegistering');
         const nextUrlFromStorage = sessionStorage.getItem('nextUrl');
         if (nextUrlFromStorage) {
           sessionStorage.removeItem('nextUrl');

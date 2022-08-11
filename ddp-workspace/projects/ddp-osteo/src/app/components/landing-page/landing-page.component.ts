@@ -16,7 +16,6 @@ import {
     mergeMap,
     take,
     tap,
-    withLatestFrom,
 } from 'rxjs/operators';
 import { iif, Observable, of } from 'rxjs';
 import { GovernedUserService } from '../../services/governed-user.service';
@@ -34,6 +33,7 @@ export class LandingPageComponent implements OnInit {
     private readonly SELF_DIAGNOSED = 'DIAGNOSED';
     private readonly CHILD_DIAGNOSED = 'CHILD_DIAGNOSED';
     private answers: [];
+    private isRegistering: boolean;
 
     constructor(
         private router: Router,
@@ -57,6 +57,7 @@ export class LandingPageComponent implements OnInit {
             this.auth0.handleAuthentication(this.handleAuthError.bind(this));
         }
         this.load().subscribe();
+        this.isRegistering = !!localStorage.getItem('isRegistering');
     }
 
     protected handleAuthError(error: any | null): void {
@@ -103,6 +104,7 @@ export class LandingPageComponent implements OnInit {
             }),
             take(1),
             finalize(() => {
+                localStorage.removeItem('isRegistering');
                 const nextUrlFromStorage = sessionStorage.getItem('nextUrl');
                 if (nextUrlFromStorage) {
                     // `nextUrl` is set before redirecting to auth0. If it exists, then pick up where we left off.
