@@ -75,7 +75,7 @@ export class ClinicalPageComponent implements OnInit {
     this.getMercuryOrders();
   }
 
-  private getOrderJson( order: ClinicalOrder ) {
+  private getOrderJson( order: ClinicalOrder ): any {
     const dateCreated = this.getDateFormatted( order.orderDate );
     return {
       shortId: order.shortId,
