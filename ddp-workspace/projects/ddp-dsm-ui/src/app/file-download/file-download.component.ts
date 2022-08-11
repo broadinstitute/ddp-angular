@@ -39,8 +39,8 @@ export class FileDownloadComponent {
 
     const realm = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
     this.dsmService.getSignedUrl( this.participant.data.profile[ 'guid' ], file, realm ).pipe(
-      mergeMap(data => this.dsmService.downloadFromSignedUrl(data['url']).pipe(take(1)))).subscribe( {
-        next: data => {
+      mergeMap(data => this.dsmService.downloadFromSignedUrl(data['url']), take(1))).subscribe( {
+      next: (data: any) => {
             const blob = new Blob( [ data ], {type: file.mimeType} );
             fileSaver.saveAs( blob, file.fileName );
             this.setDownloadMessageAndStatus( this.SUCCESSFUL_DOWNLOAD_MESSAGE, false );
