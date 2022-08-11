@@ -30,6 +30,7 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
 
       <ng-template #nativeSelect>
           <select matNativeControl
+                  class="mat-select-native-control"
                   [(ngModel)]="nativeSelectedValue"
                   [disabled]="readonly"
                   (change)="handleNativeSelect($event.target.value); details.show ? updateCharactersLeftIndicator(details.stableId) : null">
@@ -65,6 +66,17 @@ import { NGXTranslateService } from '../../../services/internationalization/ngxT
 
         .ddp-dropdown-field ::ng-deep .mat-form-field-infix {
           width: auto;
+        }
+        @media only screen and (max-width: 1024px) {
+          ::ng-deep .width .mat-select-native-control{
+          line-height: 17px;
+            }
+          ::ng-deep .width .mat-select{
+            line-height: 17px;
+            }
+          ::ng-deep .width .mat-form-field-infix input{
+            line-height: 17px;
+            }
         }
     `]
 })

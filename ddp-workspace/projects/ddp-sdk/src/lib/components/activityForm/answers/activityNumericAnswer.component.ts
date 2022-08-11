@@ -35,6 +35,14 @@ import { LayoutType } from '../../../models/layout/layoutType';
         .input-field {
             width: 100%;
         }
+        @media only screen and (max-width: 1024px) {
+            ::ng-deep .input-field .mat-form-field-label-wrapper label{
+            line-height: 17px;
+            }
+            ::ng-deep .input-field .mat-form-field-infix input{
+            line-height: 17px;
+            }
+        }
     `]
 })
 export class ActivityNumericAnswer implements OnInit, OnChanges, OnDestroy {
