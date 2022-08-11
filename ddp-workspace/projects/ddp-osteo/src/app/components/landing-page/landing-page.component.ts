@@ -1,6 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
-import { Router } from '@angular/router';
+import { Component, Inject, OnInit } from "@angular/core";
+import { ToolkitConfigurationService, WorkflowBuilderService } from "toolkit";
+import { Router } from "@angular/router";
 import {
     Auth0AdapterService,
     ConfigurationService,
@@ -9,29 +9,23 @@ import {
     Participant,
     SessionMementoService,
     WorkflowServiceAgent,
-} from 'ddp-sdk';
-import {
-    filter,
-    finalize,
-    mergeMap,
-    take,
-    tap,
-} from 'rxjs/operators';
-import { iif, Observable, of } from 'rxjs';
-import { GovernedUserService } from '../../services/governed-user.service';
+} from "ddp-sdk";
+import { filter, finalize, mergeMap, take, tap } from "rxjs/operators";
+import { iif, Observable, of } from "rxjs";
+import { GovernedUserService } from "../../services/governed-user.service";
 
 @Component({
-    selector: 'app-landing-page',
+    selector: "app-landing-page",
     template: `
         <toolkit-common-landing-redesigned></toolkit-common-landing-redesigned>
     `,
 })
 export class LandingPageComponent implements OnInit {
     private operatorUserTemp: string;
-    private readonly LOG_SOURCE = 'LoginLandingComponent';
+    private readonly LOG_SOURCE = "LoginLandingComponent";
 
-    private readonly SELF_DIAGNOSED = 'DIAGNOSED';
-    private readonly CHILD_DIAGNOSED = 'CHILD_DIAGNOSED';
+    private readonly SELF_DIAGNOSED = "DIAGNOSED";
+    private readonly CHILD_DIAGNOSED = "CHILD_DIAGNOSED";
     private answers: [];
     private isRegistering: boolean;
 
@@ -43,21 +37,21 @@ export class LandingPageComponent implements OnInit {
         private participantService: GovernedParticipantsServiceAgent,
         private workflowService: WorkflowServiceAgent,
         private workflowBuilder: WorkflowBuilderService,
-        @Inject('ddp.config') private config: ConfigurationService,
-        @Inject('toolkit.toolkitConfig')
+        @Inject("ddp.config") private config: ConfigurationService,
+        @Inject("toolkit.toolkitConfig")
         private toolkitConfiguration: ToolkitConfigurationService,
         private governedUserService: GovernedUserService,
         private governedParticipantsAgent: GovernedParticipantsServiceAgent
     ) {}
 
     ngOnInit(): void {
-        const nextUrlFromStorage = sessionStorage.getItem('nextUrl');
+        const nextUrlFromStorage = sessionStorage.getItem("nextUrl");
 
         if (!this.config.doLocalRegistration && location.hash) {
             this.auth0.handleAuthentication(this.handleAuthError.bind(this));
         }
         this.load().subscribe();
-        this.isRegistering = !!localStorage.getItem('isRegistering');
+        this.isRegistering = !!localStorage.getItem("isRegistering");
     }
 
     protected handleAuthError(error: any | null): void {
@@ -70,7 +64,7 @@ export class LandingPageComponent implements OnInit {
     private load(): Observable<any> {
         return this.governedUserService.checkIfGoverned.pipe(
             tap((answers) => {
-                console.log(answers, '[ANSWERS]');
+                console.log(answers, "[ANSWERS]");
                 this.answers = answers;
             }),
             filter((answers) => !!answers),
@@ -80,7 +74,9 @@ export class LandingPageComponent implements OnInit {
                     () =>
                         !participants.length &&
                         this.answers.find(
-                            ({ stableId }) => stableId === this.CHILD_DIAGNOSED
+                            ({ stableId }) =>
+                                stableId === this.CHILD_DIAGNOSED &&
+                                this.isRegistering
                         ),
                     this.governedParticipantsAgent.addParticipant(
                         this.config.studyGuid
@@ -104,11 +100,11 @@ export class LandingPageComponent implements OnInit {
             }),
             take(1),
             finalize(() => {
-                localStorage.removeItem('isRegistering');
-                const nextUrlFromStorage = sessionStorage.getItem('nextUrl');
+                localStorage.removeItem("isRegistering");
+                const nextUrlFromStorage = sessionStorage.getItem("nextUrl");
                 if (nextUrlFromStorage) {
                     // `nextUrl` is set before redirecting to auth0. If it exists, then pick up where we left off.
-                    sessionStorage.removeItem('nextUrl');
+                    sessionStorage.removeItem("nextUrl");
                     this.router.navigateByUrl(nextUrlFromStorage);
                 } else {
                     this.workflowService
