@@ -14,6 +14,7 @@ import {
   WindowRef,
   WorkflowServiceAgent
 } from 'ddp-sdk';
+import { IS_REGISTERING } from "../../types";
 
 @Component({
   selector: 'app-workflow-start',
@@ -53,6 +54,12 @@ export class WorkflowStartComponent extends WorkflowStartActivityRedesignedCompo
   onSubmit(response: ActivityResponse): void {
     if(!('allowUnauthenticated' in response)){
       response.allowUnauthenticated = false;
+    }
+    if (
+        this.__session.isTemporarySession() &&
+        response.allowUnauthenticated === false
+    ) {
+        localStorage.setItem(IS_REGISTERING, "true");
     }
     super.navigate(response);
   }
