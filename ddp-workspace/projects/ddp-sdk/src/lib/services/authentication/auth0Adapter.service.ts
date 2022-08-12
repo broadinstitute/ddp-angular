@@ -154,9 +154,6 @@ export class Auth0AdapterService implements OnDestroy {
      * Shows the auth0 modal with the ability to signup, but not login
      */
     public signup(additionalParams?: Record<string, string>): void {
-        if(this.configuration.studyGuid === 'cmi-lms' || this.configuration.studyGuid === 'CMI-OSTEO') {
-            localStorage.setItem('isRegistering', 'true');
-        }
         const temporarySession = this.session.isTemporarySession() ? this.session.session : null;
         if (!temporarySession || !temporarySession.userGuid) {
             this.log.logError(`${this.LOG_SOURCE}.signup.No temporal user guid`);

@@ -54,6 +54,12 @@ export class WorkflowStartComponent extends WorkflowStartActivityRedesignedCompo
     if(!('allowUnauthenticated' in response)){
       response.allowUnauthenticated = false;
     }
+    if (
+        this.__session.isTemporarySession() &&
+        response.allowUnauthenticated === false
+    ) {
+        localStorage.setItem("isRegistering", "true");
+    }
     super.navigate(response);
   }
 
