@@ -46,7 +46,6 @@ export class LandingPageComponent implements OnInit {
     }
     this.load().subscribe();
     this.isRegistering = !!localStorage.getItem('isRegistering');
-    console.log(this.isRegistering);
   }
 
   protected handleAuthError(error: any | null): void {
