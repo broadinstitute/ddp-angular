@@ -11,3 +11,5 @@ export enum ActivityCode {
     LovedOne = 'LOVEDONE',
     ParentalConsent = 'PARENTAL_CONSENT'
 }
+
+export const IS_REGISTERING = 'isRegistering';

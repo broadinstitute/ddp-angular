@@ -13,6 +13,7 @@ import {
 import { filter, finalize, mergeMap, take, tap } from 'rxjs/operators';
 import { iif, Observable, of } from 'rxjs';
 import { GovernedUserService } from '../../services/governed-user.service';
+import { IS_REGISTERING } from '../../types';
 
 @Component({
   selector: 'app-landing-page',
@@ -45,7 +46,7 @@ export class LandingPageComponent implements OnInit {
       this.auth0.handleAuthentication(this.handleAuthError.bind(this));
     }
     this.load().subscribe();
-    this.isRegistering = !!localStorage.getItem('isRegistering');
+    this.isRegistering = !!localStorage.getItem(IS_REGISTERING);
   }
 
   protected handleAuthError(error: any | null): void {
