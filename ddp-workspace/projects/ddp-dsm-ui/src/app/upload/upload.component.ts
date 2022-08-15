@@ -12,6 +12,7 @@ import { Statics } from '../utils/statics';
 import { FieldFilepickerComponent } from '../field-filepicker/field-filepicker.component';
 import { Result } from '../utils/result.model';
 import { RoleService } from '../services/role.service';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-upload',
@@ -140,13 +141,22 @@ export class UploadComponent implements OnInit {
           this.loading = false;
         },
         error: err => {
-          if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
-          }
+          this.checkErrorMessage(err);
           this.loading = false;
-          this.errorMessage = 'Error - Loading kit upload reasons\n' + err;
+          this.errorMessage = err.error;
         }
       });
+    }
+  }
+
+  private checkErrorMessage(err: HttpErrorResponse) {
+    switch (err.status) {
+      case 401:
+        this.auth.logout();
+        break;
+      case 403:
+        this.allowedToSeeInformation = false;
+        break;
     }
   }
 
@@ -238,12 +248,10 @@ export class UploadComponent implements OnInit {
             }
           }
         },
-        error: err => {
+        error: (err: HttpErrorResponse) => {
           this.loading = false;
-          if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
-          }
-          this.errorMessage = 'Error - Uploading txt\n' + err;
+          err.status === 401 && this.auth.logout();
+          this.errorMessage = err.error;
         }
       });
   }
