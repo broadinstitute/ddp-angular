@@ -12,7 +12,7 @@ import { Statics } from '../utils/statics';
 import { FieldFilepickerComponent } from '../field-filepicker/field-filepicker.component';
 import { Result } from '../utils/result.model';
 import { RoleService } from '../services/role.service';
-import {HttpErrorResponse} from "@angular/common/http";
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-upload',
@@ -149,7 +149,7 @@ export class UploadComponent implements OnInit {
     }
   }
 
-  private checkErrorMessage(err: HttpErrorResponse) {
+  private checkErrorMessage(err: HttpErrorResponse): void {
     switch (err.status) {
       case 401:
         this.auth.logout();
@@ -157,6 +157,8 @@ export class UploadComponent implements OnInit {
       case 403:
         this.allowedToSeeInformation = false;
         break;
+      default:
+        this.allowedToSeeInformation = true;
     }
   }
 
