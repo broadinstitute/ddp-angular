@@ -379,6 +379,23 @@
       }
     }
   }
+
+  &-about {
+    margin-top: 60px;
+
+    p {
+      font-size: 24px;
+      line-height: 34px;
+      margin-bottom: 28px;
+    }
+    .purple {
+      color: $__purple;
+    }
+    .underline {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
 }
 
 .privacy {
