@@ -251,12 +251,21 @@
     @include media-md {
       padding-right: 0;
     }
-     &-heading {
-       margin-left: 25px;
-       @include media-md {
-         margin-left: 0;
-       }
-     }
+
+    &-sub-heading {
+      margin-bottom: 22px;
+      font-size: 24px;
+      letter-spacing: 0;
+      line-height: 34px;
+    }
+    .welcome-people-of {
+      color: $__purple;
+      //font-family: ".SF NS Display";
+      font-size: 20px;
+      line-height: 28px;
+      margin-top: 36px;
+      margin-left: 38px;
+    }
   }
   &-right {
     max-width: 600px;
@@ -269,10 +278,7 @@
   &-list {
     font-size: 1.2em;
     line-height: 30px;
-    padding-left: 70px;
-    @include media-md {
-      padding-left: 56px;
-    }
+    padding-left: 36px;
 
     li {
       position: relative;
@@ -284,12 +290,12 @@
       &:before {
         position: absolute;
         content: '';
-        width: 10px;
-        height: 10px;
+        width: 5px;
+        height: 5px;
         border-radius: 50%;
-        left: -25px;
+        left: -36px;
         flex-shrink: 0;
-        top: 10%;
+        top: 12px;
         background: $__black;
       }
     }
@@ -304,8 +310,13 @@
     &-text {
       margin-top: 70px;
       margin-bottom: 50px;
-      font-size: 24px;
-      line-height: 34px;
+
+      p {
+        font-size: 24px;
+        line-height: 34px;
+        text-align: left;
+        margin-top: 22px;
+      }
     }
   }
 }
