@@ -14,7 +14,7 @@ import {
   WindowRef,
   WorkflowServiceAgent
 } from 'ddp-sdk';
-import { IS_REGISTERING } from "../../types";
+import { IS_REGISTERING } from '../../types';
 
 @Component({
   selector: 'app-workflow-start',
@@ -59,7 +59,7 @@ export class WorkflowStartComponent extends WorkflowStartActivityRedesignedCompo
         this.__session.isTemporarySession() &&
         response.allowUnauthenticated === false
     ) {
-        localStorage.setItem(IS_REGISTERING, "true");
+        localStorage.setItem(IS_REGISTERING, 'true');
     }
     super.navigate(response);
   }
