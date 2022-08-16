@@ -142,9 +142,6 @@
             <ng-container *ngFor="let savedFilter of savedFilters; let i=index">
               <tr *ngIf="hasRole().userID() === savedFilter.userId">
                 <td>
-                  {{savedFilter.filterName}}
-                </td>
-                <td>
                   <button mat-icon-button [color]="getFilterButtonColorStyle(isSelectedFilter(savedFilter.filterName))"
                           (click)="selectFilter(savedFilter)">
                     <mat-icon>
@@ -168,6 +165,9 @@
                     </mat-icon>
                   </button>
                 </td>
+                <td>
+                  {{savedFilter.filterName}}
+                </td>
               </tr>
             </ng-container>
           </table>
@@ -180,15 +180,15 @@
             <ng-container *ngFor="let savedFilter of savedFilters">
               <tr *ngIf="hasRole().userID() !== savedFilter.userId">
                 <td>
-                  {{savedFilter.filterName}}
-                </td>
-                <td>
                   <button mat-icon-button [color]="getFilterButtonColorStyle(isSelectedFilter(savedFilter.filterName))"
                           (click)="selectFilter(savedFilter)">
                     <mat-icon>
                       <i class="fas fa-filter fa-sm"></i>
                     </mat-icon>
                   </button>
+                </td>
+                <td>
+                   {{ savedFilter.filterName}}
                 </td>
               </tr>
             </ng-container>
