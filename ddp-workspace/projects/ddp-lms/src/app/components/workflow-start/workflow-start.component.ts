@@ -1,9 +1,9 @@
-import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import {
   HeaderConfigurationService,
   ToolkitConfigurationService,
   WorkflowBuilderService,
-  WorkflowStartActivityRedesignedComponent
+  WorkflowStartActivityRedesignedComponent,
 } from 'toolkit';
 import {
   ActivityResponse,
@@ -12,15 +12,15 @@ import {
   SessionStorageService,
   TemporaryUserServiceAgent,
   WindowRef,
-  WorkflowServiceAgent
+  WorkflowServiceAgent,
 } from 'ddp-sdk';
+import { IS_REGISTERING } from '../../types';
 
 @Component({
   selector: 'app-workflow-start',
-  templateUrl: './workflow-start.component.html'
+  templateUrl: './workflow-start.component.html',
 })
 export class WorkflowStartComponent extends WorkflowStartActivityRedesignedComponent implements OnInit {
-
   constructor(
     private _headerConfig: HeaderConfigurationService,
     private __workflowBuilder: WorkflowBuilderService,
@@ -31,7 +31,8 @@ export class WorkflowStartComponent extends WorkflowStartActivityRedesignedCompo
     private __cdr: ChangeDetectorRef,
     _sessionStorageService: SessionStorageService,
     @Inject('ddp.config') private __configuration: ConfigurationService,
-    @Inject('toolkit.toolkitConfig') public __toolkitConfiguration: ToolkitConfigurationService) {
+    @Inject('toolkit.toolkitConfig') public __toolkitConfiguration: ToolkitConfigurationService
+  ) {
     super(
       _headerConfig,
       __workflowBuilder,
@@ -51,10 +52,12 @@ export class WorkflowStartComponent extends WorkflowStartActivityRedesignedCompo
   }
 
   onSubmit(response: ActivityResponse): void {
-    if(!('allowUnauthenticated' in response)){
+    if (!('allowUnauthenticated' in response)) {
       response.allowUnauthenticated = false;
+    }
+    if (this.__session.isTemporarySession() && response.allowUnauthenticated === false) {
+      localStorage.setItem(IS_REGISTERING, 'true');
     }
     super.navigate(response);
   }
-
 }
