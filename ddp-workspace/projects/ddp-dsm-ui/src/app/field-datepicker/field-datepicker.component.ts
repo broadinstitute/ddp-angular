@@ -23,7 +23,7 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
   @Output() dateChanged = new EventEmitter();
 
   _dateString: string;
-  defaultDate: string = '1000-01-01';
+  defaultDate = '1000-01-01';
   error: string = null;
   estimated = false;
   datePicker: Date;

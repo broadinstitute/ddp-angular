@@ -15,7 +15,7 @@ import { Statics } from '../utils/statics';
 import { EasypostLabelRate } from '../utils/easypost-label-rate.model';
 import { LabelSetting } from '../label-settings/label-settings.model';
 import { Result } from '../utils/result.model';
-import {LocalStorageService} from "../services/localStorage.service";
+import {LocalStorageService} from '../services/localStorage.service';
 
 @Component({
   selector: 'app-shipping',
