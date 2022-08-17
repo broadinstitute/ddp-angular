@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewChecked } from '@angular/core';
+import {Component, Input, AfterViewChecked, OnInit} from '@angular/core';
 import { Address } from '../address/address.model';
 import { LabelSetting } from '../label-settings/label-settings.model';
 
@@ -9,13 +9,42 @@ declare var JsBarcode: any;
   templateUrl: './error-label.component.html',
   styleUrls: ['./error-label.component.css']
 })
-export class ErrorLabelComponent implements AfterViewChecked {
+export class ErrorLabelComponent implements AfterViewChecked, OnInit {
   @Input() address: Address;
   @Input() shippingId: string;
   @Input() labelSetting: LabelSetting;
 
+  @Input() firstName;
+  @Input() lastName;
+  @Input() dateOfBirth;
+
+  @Input() isPHI!: boolean;
+
+  public patientFullInfoId;
+
+  ngOnInit() {
+    this.patientFullInfoId = this.isUserInfo() && this.concatWithUnderscore();
+  }
+
   ngAfterViewChecked(): void {
-    JsBarcode('#' + this.shippingId).init();
+    const callableElementId = this.isPHI ? this.patientFullInfoId : this.shippingId;
+    this.initByIdJsBarcode(callableElementId);
+  }
+
+  private initByIdJsBarcode(id: string): void {
+    JsBarcode('#' + id).init();
+  }
+
+  private isUserInfo(): boolean {
+    return this.firstName && this.lastName && this.dateOfBirth;
+  }
+
+  private concatWithUnderscore(): string {
+    return [this.firstName, this.lastName, this.dateOfBirth].join("_");
+  }
+
+  get buildBarCodeValue(): string {
+    return this.patientFullInfoId.split("_").join(" ");
   }
 
   public getLabelHeight(): string {

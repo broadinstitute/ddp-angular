@@ -71,6 +71,8 @@ export class ShippingComponent implements OnInit {
 
   selectedStudy$!: Observable<string>;
 
+  public isPHI: boolean;
+
   public shortId: any = '';
   public shippingId: any = '';
   public externalOrderNumber: any = '';
@@ -313,10 +315,20 @@ export class ShippingComponent implements OnInit {
     }
   }
 
-  getSelectedList(target: string): void {
+  onPrintLabelsClick() {
+    this.isPHI = false;
+    this.getSelectedList();
+  }
+
+  onPrintPHIClick() {
+    this.isPHI = true;
+    this.getSelectedList();
+  }
+
+  getSelectedList(): void {
     this.selectedKitRequests = KitRequest.removeUnselectedKitRequests(this.kitRequests);
     this._changeDetectionRef.detectChanges();
-    this.printLabels(target);
+    this.printLabels(this.shippingPage);
   }
 
   public printLabels(target: string): any {

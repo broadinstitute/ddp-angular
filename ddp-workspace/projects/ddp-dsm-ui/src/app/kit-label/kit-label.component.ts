@@ -1,4 +1,4 @@
-import {Component, Input, AfterViewChecked, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, Input, AfterViewChecked, OnChanges, SimpleChanges, OnInit} from '@angular/core';
 import { LabelSetting } from '../label-settings/label-settings.model';
 import {KitRequest} from "../shipping/shipping.model";
 
@@ -10,30 +10,43 @@ declare var JsBarcode: any;
   styleUrls: ['./kit-label.component.css']
 })
 
-export class KitLabelComponent implements AfterViewChecked, OnChanges {
+export class KitLabelComponent implements AfterViewChecked, OnInit {
   @Input() urlTo: string;
   @Input() shippingId: string;
   @Input() urlReturn: string;
   @Input() labelSetting: LabelSetting;
 
-  @Input() patientNameDOB: any;
+  @Input() firstName;
+  @Input() lastName;
+  @Input() dateOfBirth;
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes, "data here")
+  @Input() isPHI!: boolean;
+
+  public patientFullInfoId;
+
+  ngOnInit(): void {
+    this.patientFullInfoId = this.isUserInfo() && this.concatWithUnderscore();
   }
 
   ngAfterViewChecked(): void {
-    console.log(this.patientNameDOB);
-    // const patientInfo = this.patientNameDOB.firstLastName + "_" + this.patientNameDOB.dateOfBirth;
-    this.initByIdJsBarcode(this.shippingId);
+    const callableElementId = this.isPHI ? this.patientFullInfoId : this.shippingId;
+    this.initByIdJsBarcode(callableElementId);
   }
 
   private initByIdJsBarcode(id: string): void {
     JsBarcode('#' + id).init();
   }
 
+  private isUserInfo(): boolean {
+    return this.firstName && this.lastName && this.dateOfBirth;
+  }
+
+  private concatWithUnderscore(): string {
+    return [this.firstName, this.lastName, this.dateOfBirth].join("_");
+  }
+
   get buildBarCodeValue(): string {
-    return this.patientNameDOB.split("_").join(" ");
+    return this.patientFullInfoId.split("_").join(" ");
   }
 
   public getLabelHeight(): string {
