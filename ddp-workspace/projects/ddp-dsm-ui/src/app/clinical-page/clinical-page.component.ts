@@ -15,6 +15,7 @@ import {ClinicalOrder} from './clinical-order.model';
 export class ClinicalPageComponent implements OnInit {
   clinicalOrdersArray: ClinicalOrder[];
   loading: boolean;
+  errorMessage: string;
 
   constructor( private dsmService: DSMService, private auth: Auth, private role: RoleService ) {
   }
@@ -38,7 +39,8 @@ export class ClinicalPageComponent implements OnInit {
         this.loading = false;
       },
       error: () => {
-
+        this.errorMessage = 'Error - Loading Clinical Page, Please contact your DSM developer';
+        this.loading = false;
       }
     } );
   }

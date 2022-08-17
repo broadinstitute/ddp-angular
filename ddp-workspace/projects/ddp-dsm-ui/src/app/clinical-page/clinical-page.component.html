@@ -1,6 +1,10 @@
-<div align="center" class="Width--100 Height--100">
+<div align="center" class="Width--100 Height--100" *ngIf="loading">
   <i class="fas fa-spinner fa-spin fa-5x Color--primary"></i>
 </div>
+<div *ngIf="errorMessage != null">
+  <h3 class="Color--warn Line--Break">{{errorMessage}}</h3>
+  <br/>
+</div>s
 <ng-container *ngIf="!loading">
   <h1> Clinical Orders </h1>
   <div align="right" style="width: 100%; height: 100%;">
