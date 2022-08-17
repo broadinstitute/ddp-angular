@@ -82,7 +82,7 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
     }
   }
 
-  isDateNotFound(dateString: string) {
+  isDateNotFound(dateString: string): boolean {
     return !['N/A', 'Not Found', this.defaultNaDate].includes(dateString);
   }
 
