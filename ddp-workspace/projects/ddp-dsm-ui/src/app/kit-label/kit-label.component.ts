@@ -1,5 +1,6 @@
-import { Component, Input, AfterViewChecked } from '@angular/core';
+import {Component, Input, AfterViewChecked, OnChanges, SimpleChanges} from '@angular/core';
 import { LabelSetting } from '../label-settings/label-settings.model';
+import {KitRequest} from "../shipping/shipping.model";
 
 declare var JsBarcode: any;
 
@@ -9,14 +10,30 @@ declare var JsBarcode: any;
   styleUrls: ['./kit-label.component.css']
 })
 
-export class KitLabelComponent implements AfterViewChecked {
+export class KitLabelComponent implements AfterViewChecked, OnChanges {
   @Input() urlTo: string;
   @Input() shippingId: string;
   @Input() urlReturn: string;
   @Input() labelSetting: LabelSetting;
 
+  @Input() patientNameDOB: any;
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes, "data here")
+  }
+
   ngAfterViewChecked(): void {
-    JsBarcode('#' + this.shippingId).init();
+    console.log(this.patientNameDOB);
+    // const patientInfo = this.patientNameDOB.firstLastName + "_" + this.patientNameDOB.dateOfBirth;
+    this.initByIdJsBarcode(this.shippingId);
+  }
+
+  private initByIdJsBarcode(id: string): void {
+    JsBarcode('#' + id).init();
+  }
+
+  get buildBarCodeValue(): string {
+    return this.patientNameDOB.split("_").join(" ");
   }
 
   public getLabelHeight(): string {
