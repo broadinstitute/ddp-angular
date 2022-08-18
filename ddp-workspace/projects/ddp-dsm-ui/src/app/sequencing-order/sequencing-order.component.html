@@ -11,6 +11,7 @@
       <th>Collection Date</th>
       <th>Latest Sequencing Order Date</th>
       <th>Latest Order Status</th>
+      <th>Latest Order Number</th>
     </tr>
     </thead>
     <tbody>
@@ -43,7 +44,8 @@
       <td>
         {{getDateFormatted(sample.sequencingOrderDate)}}
       </td>
-      <td></td>
+      <td>{{sample.lastStatus}}</td>
+      <td>{{sample.lastOrderNumber}}</td>
     </tr>
     </tbody>
   </table>

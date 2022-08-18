@@ -870,7 +870,7 @@ participant.data.dsm['diagnosisYear'] != null">
                 </div>
               </ng-container>
             </tab>
-            <tab (selectTab)="onSelect($event, 'sequencing');" *ngIf="canHaveSequencing(participant)"
+            <tab (selectTab)="onSelect($event, 'sequencing');" *ngIf="canSequence"
                  [active]="tabActive('sequencing')" heading="Sequencing Order">
               <app-sequencing-order [participant]="participant"
                                     [samples]="sequencingOrdersArray">

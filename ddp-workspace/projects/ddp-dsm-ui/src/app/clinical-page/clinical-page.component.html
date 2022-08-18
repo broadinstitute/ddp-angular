@@ -5,7 +5,7 @@
   <h3 class="Color--warn Line--Break">{{errorMessage}}</h3>
   <br/>
 </div>s
-<ng-container *ngIf="!loading">
+<ng-container *ngIf="!loading && clinicalOrdersArray?.length>0">
   <h1> Clinical Orders </h1>
   <div align="right" style="width: 100%; height: 100%;">
     <button (click)="downloadList()" color="primary" mat-raised-button>Download list</button>
@@ -32,7 +32,7 @@
       </td>
       <td>{{order.sample}}</td>
       <td>{{getDateFormatted(order.orderDate)}}</td>
-      <td>{{getOrderStatus(order.statusDetail)}}</td>
+      <td>{{getOrderStatus(order.orderStatus)}}</td>
       <td>{{order.orderId}}</td>
     </tr>
     </tbody>

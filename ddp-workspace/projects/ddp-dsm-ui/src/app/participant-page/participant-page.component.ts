@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy, Af
 import { MatDialog } from '@angular/material/dialog';
 import { TabDirective } from 'ngx-bootstrap/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ActivityDefinition } from '../activity-data/models/activity-definition.model';
 import { FieldSettings } from '../field-settings/field-settings.model';
 import { ParticipantData } from '../participant-list/models/participant-data.model';
@@ -125,12 +126,15 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   message: string = null;
   bundle = false;
   private scrolled: boolean;
+  private canSequence: boolean;
 
   sequencingOrdersArray = [];
 
   private ENROLLED = 'ENROLLED';
   private ABOUT_YOU = 'ABOUT_YOU';
   private ASSIGNED_SEX = 'ASSIGNED_SEX';
+
+  subscriptions: Subscription = new Subscription();
 
   constructor(private auth: Auth, private compService: ComponentService, private dsmService: DSMService, private router: Router,
                private role: RoleService, private util: Utils, private route: ActivatedRoute, public dialog: MatDialog) {
@@ -188,6 +192,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     this.displayActivityOrder();
     this.addMedicalProviderInformation();
     this.getMercuryEligibleSamples();
+    this.canSequence = this.canHaveSequencing(this.participant);
   }
 
   addMedicalProviderInformation(): void {
@@ -222,6 +227,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   ngOnDestroy(): void {
     clearInterval(this.checkParticipantStatusInterval);
+    this.subscriptions.unsubscribe();
   }
 
   displayActivityOrder(): void {
@@ -1488,7 +1494,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       return;
     }
     const realm = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
-    this.dsmService.getMercuryEligibleSamples( this.participant.participant.ddpParticipantId, realm ).subscribe( {
+    const sub1 = this.dsmService.getMercuryEligibleSamples( this.participant.participant.ddpParticipantId, realm ).subscribe( {
       next: data => {
         const jsonData = data;
         this.sequencingOrdersArray = [];
@@ -1502,6 +1508,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
       }
     } );
+    this.subscriptions.add(sub1);
   }
 
   canHaveSequencing( participant: Participant ): boolean {
