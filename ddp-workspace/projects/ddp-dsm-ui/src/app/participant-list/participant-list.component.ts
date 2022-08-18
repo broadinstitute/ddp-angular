@@ -297,7 +297,8 @@ export class ParticipantListComponent implements OnInit {
           ['t', 'Tissue'],
           ['k', 'Sample'],
           ['a', 'Abstraction'],
-          ['c', 'Cohort Tags']
+          ['c', 'Cohort Tags'],
+          ['cl', 'Clinical Orders']
         ]);
         this.sourceColumns = {};
         this.selectedColumns = {};
@@ -736,6 +737,8 @@ export class ParticipantListComponent implements OnInit {
         this.sourceColumns[ 'm' ].push(filter);
       }  else if (filter.participantColumn.tableAlias === 'sm') {
         this.sourceColumns[ 't' ].push( filter );
+      } else if (filter.participantColumn.tableAlias === 'clinical') {
+        this.sourceColumns[ 'clinical' ].push( filter );
       } else if (this.sourceColumns[ filter.participantColumn.tableAlias ] != null) {
         // TODO - can be changed to add all after all DDPs are migrated
         if (this.hasESData) {

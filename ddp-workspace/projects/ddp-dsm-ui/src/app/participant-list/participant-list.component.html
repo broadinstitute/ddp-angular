@@ -108,8 +108,8 @@
                   (click)="onclickDropDown($event)">
                 <li *ngFor="let column of sourceColumns[key]">
                   <mat-checkbox color="primary" disableRipple
-                               (change)="addOrRemoveColumn(column, key)"
-                               [checked]="selectedColumns[key] != null && hasThisColumnSelected(selectedColumns[key],column)">
+                                (change)="addOrRemoveColumn(column, key)"
+                                [checked]="selectedColumns[key] != null && hasThisColumnSelected(selectedColumns[key],column)">
                     {{column.participantColumn.display}}
                   </mat-checkbox>
                 </li>
@@ -189,7 +189,7 @@
                   </button>
                 </td>
                 <td>
-                   {{ savedFilter.filterName}}
+                  {{ savedFilter.filterName}}
                 </td>
               </tr>
             </ng-container>
@@ -212,11 +212,11 @@
           </span>
             <span class="Float--right">
 <!--            <button mat-mini-fab color="Color&#45;&#45;primary"-->
-<!--                    (click)="showHelp = !showHelp" [color]="getButtonColorStyle(showHelp)">-->
-<!--              <span tooltip="Search Help">-->
-<!--                <i class="fas fa-info"></i>-->
-<!--              </span>-->
-<!--            </button>-->
+              <!--                    (click)="showHelp = !showHelp" [color]="getButtonColorStyle(showHelp)">-->
+              <!--              <span tooltip="Search Help">-->
+              <!--                <i class="fas fa-info"></i>-->
+              <!--              </span>-->
+              <!--            </button>-->
             <button mat-mini-fab color="Color--primary"
                     (click)="downloadCurrentData()">
               <span tooltip="Download List">
@@ -234,9 +234,9 @@
           <br/>
         </div>
 
-<!--        <app-search-bar [textQuery]="filterQuery" [allFieldNames]="allFieldNames" (queryText)="doFilterByQuery($event)"-->
-<!--                        [showHelp]="showHelp" [filters]="sourceColumns">-->
-<!--        </app-search-bar>-->
+        <!--        <app-search-bar [textQuery]="filterQuery" [allFieldNames]="allFieldNames" (queryText)="doFilterByQuery($event)"-->
+        <!--                        [showHelp]="showHelp" [filters]="sourceColumns">-->
+        <!--        </app-search-bar>-->
 
         <table class="table table-striped Table--Hover Table--Foot Width--100">
           <thead>
@@ -263,8 +263,8 @@
             <!--checkbox to assign or trigger blood kits-->
             <td>
               <mat-checkbox [color]="generateCheckboxColor(pt)" disableRipple
-                           [checked]="pt.isSelected"
-                           (change)="pt.isSelected = $event.checked; checkboxChecked(pt)"></mat-checkbox>
+                            [checked]="pt.isSelected"
+                            (change)="pt.isSelected = $event.checked; checkboxChecked(pt)"></mat-checkbox>
             </td>
 
             <!--profile values or dsm values-->
@@ -308,7 +308,7 @@
                 <ng-container *ngIf="col.participantColumn.esData && pt.data.address != null">
                   <ng-container *ngIf="col.participantColumn.tableAlias === 'address'">
                     <ul class="NO-PADDING-START">
-                        <p class="BIT-OF-MARGIN">
+                      <p class="BIT-OF-MARGIN">
                         <ng-container *ngIf="col.type === 'DATE'">
                           {{ parseMillisToDateString(pt.data.address[col.participantColumn.name]) }}
                         </ng-container>
@@ -329,7 +329,7 @@
                 <ng-container *ngIf="col.participantColumn.esData && pt.data.computed != null">
                   <ng-container *ngIf="col.participantColumn.tableAlias === 'computed'">
                     <ul class="NO-PADDING-START">
-                        <p class="BIT-OF-MARGIN">
+                      <p class="BIT-OF-MARGIN">
                         <ng-container>
                           {{ pt.data.computed[col.participantColumn.name] }}
                         </ng-container>
@@ -357,7 +357,8 @@
                     </ng-container>
                     <ng-container *ngIf="col.participantColumn.name !== 'createdAt' && col.participantColumn.name !== 'completedAt'
           && col.participantColumn.name !== 'lastUpdatedAt' && col.participantColumn.name !== 'status' && activityData.questionsAnswers != null">
-                      <ng-container *ngIf="getQuestionAnswerByName(activityData.questionsAnswers, col.participantColumn.name) as questionAnswer">
+                      <ng-container
+                        *ngIf="getQuestionAnswerByName(activityData.questionsAnswers, col.participantColumn.name) as questionAnswer">
 
                         <ng-container *ngIf="questionAnswer != null">
                           <ng-container
@@ -370,18 +371,23 @@
                           </ng-container>
                           <ng-container
                             *ngIf="questionAnswer.questionType === 'DATE' && questionAnswer.dateFields != null">
-                            <ng-container *ngIf="pt.data.getMultipleDatesForActivity(activityData, col.participantColumn.name) as answers">
-                              <div  class="NO-PADDING-START" *ngFor="let date of answers; let i = index;">
-                                <ng-container *ngIf="date.dateFields.day != null && date.dateFields.day !== '' && date.dateFields.month != null && date.dateFields.month !== ''">
+                            <ng-container
+                              *ngIf="pt.data.getMultipleDatesForActivity(activityData, col.participantColumn.name) as answers">
+                              <div class="NO-PADDING-START" *ngFor="let date of answers; let i = index;">
+                                <ng-container
+                                  *ngIf="date.dateFields.day != null && date.dateFields.day !== '' && date.dateFields.month != null && date.dateFields.month !== ''">
                                   {{date.dateFields.month}}/{{date.dateFields.day}}/{{date.dateFields.year}}
                                 </ng-container>
-                                <ng-container *ngIf="(date.dateFields.day == null || date.dateFields.day === '') && date.dateFields.month != null && date.dateFields.month !== '' && date.dateFields.year != null && date.dateFields.year !== ''">
+                                <ng-container
+                                  *ngIf="(date.dateFields.day == null || date.dateFields.day === '') && date.dateFields.month != null && date.dateFields.month !== '' && date.dateFields.year != null && date.dateFields.year !== ''">
                                   {{date.dateFields.month}}/{{date.dateFields.year}}
                                 </ng-container>
-                                <ng-container *ngIf="(date.dateFields.day == null || date.dateFields.day === '') && date.dateFields.month == null || date.dateFields.month === ''">
+                                <ng-container
+                                  *ngIf="(date.dateFields.day == null || date.dateFields.day === '') && date.dateFields.month == null || date.dateFields.month === ''">
                                   {{date.dateFields.year}}
                                 </ng-container>
-                                <ng-container *ngIf="(date.dateFields.year == null || date.dateFields.year === '') && date.dateFields.month != null && date.dateFields.month !== ''">
+                                <ng-container
+                                  *ngIf="(date.dateFields.year == null || date.dateFields.year === '') && date.dateFields.month != null && date.dateFields.month !== ''">
                                   {{date.dateFields.month}}/null
                                 </ng-container>
                                 <hr *ngIf="i !== answers.length-1" style="border-color: lightgray">
@@ -392,7 +398,8 @@
                             *ngIf="questionAnswer.questionType === 'COMPOSITE' && questionAnswer.answer != null">
                             <ng-container
                               *ngIf="getUtilStatic().getQuestionDefinition(activityDefinitionList, alias, questionAnswer.stableId, activityData.activityVersion) as qDef">
-                              <div *ngFor="let answer of getUtilStatic().getNiceTextForCSVCompositeType(questionAnswer, qDef ); let i = index">
+                              <div
+                                *ngFor="let answer of getUtilStatic().getNiceTextForCSVCompositeType(questionAnswer, qDef ); let i = index">
                                 {{ answer?.includes('|') ? answer.split('|')[1] : answer }}
                                 <hr *ngIf="i !== questionAnswer.answer.length-1" style="border-color: lightgray">
                               </div>
@@ -405,14 +412,18 @@
                               <ng-container *ngIf="qDef.selectMode === 'MULTIPLE'">
                                 <ng-container *ngIf="qDef.options !== null">
                                   <ul *ngFor="let o of qDef.options">
-                                    <li *ngIf="getUtil().isOptionSelected(questionAnswer.answer, o.optionStableId)"><b>{{o.optionText}}</b>
-                                      <ng-container *ngIf="getUtilStatic().getOptionDetails(questionAnswer.optionDetails, o.optionStableId) as oDetail">
+                                    <li *ngIf="getUtil().isOptionSelected(questionAnswer.answer, o.optionStableId)">
+                                      <b>{{o.optionText}}</b>
+                                      <ng-container
+                                        *ngIf="getUtilStatic().getOptionDetails(questionAnswer.optionDetails, o.optionStableId) as oDetail">
                                         <div>{{oDetail.details}}
                                         </div>
                                       </ng-container>
-                                      <ng-container *ngIf="questionAnswer.nestedOptions[o.optionStableId] !== null && o.nestedOptions !== null">
+                                      <ng-container
+                                        *ngIf="questionAnswer.nestedOptions[o.optionStableId] !== null && o.nestedOptions !== null">
                                         <ul *ngFor="let nOption of questionAnswer.nestedOptions[o.optionStableId]">
-                                          <li *ngIf="getUtil().getAnswerText(nOption, o.nestedOptions) as option"><b>{{option.optionText}}</b>
+                                          <li *ngIf="getUtil().getAnswerText(nOption, o.nestedOptions) as option">
+                                            <b>{{option.optionText}}</b>
                                           </li>
                                         </ul>
                                       </ng-container>
@@ -421,11 +432,14 @@
                                 </ng-container>
                                 <ng-container *ngIf="qDef.groups !== null && questionAnswer.answer !== null">
                                   <ul *ngFor="let group of qDef.groups">
-                                    <li *ngIf="getUtil().isGroupSelected(questionAnswer.answer, group)"><b>{{group.groupText}}</b>
+                                    <li *ngIf="getUtil().isGroupSelected(questionAnswer.answer, group)">
+                                      <b>{{group.groupText}}</b>
                                       <ng-container *ngIf="questionAnswer.groupedOptions[group.groupStableId] !== null">
                                         <ul *ngFor="let gAnswer of questionAnswer.groupedOptions[group.groupStableId]">
-                                          <li *ngIf="getUtil().getAnswerText(gAnswer, group.options) as option"><b>{{option.optionText}}</b>
-                                            <ng-container *ngIf="getUtilStatic().getOptionDetails(questionAnswer.optionDetails, gAnswer) as oDetail">
+                                          <li *ngIf="getUtil().getAnswerText(gAnswer, group.options) as option">
+                                            <b>{{option.optionText}}</b>
+                                            <ng-container
+                                              *ngIf="getUtilStatic().getOptionDetails(questionAnswer.optionDetails, gAnswer) as oDetail">
                                               <div>{{oDetail.details}}
                                               </div>
                                             </ng-container>
@@ -437,15 +451,17 @@
                                 </ng-container>
                               </ng-container>
                               <ng-container *ngIf="qDef.selectMode === 'SINGLE'">
-                                <ng-container *ngIf="pt.data.getMultipleAnswersForPickList(activityData, col.participantColumn.name) as answers">
-                                  <div class="NO-PADDING-START" >
-                                    <div *ngFor="let questionAnswer of answers; let i=index;" >
+                                <ng-container
+                                  *ngIf="pt.data.getMultipleAnswersForPickList(activityData, col.participantColumn.name) as answers">
+                                  <div class="NO-PADDING-START">
+                                    <div *ngFor="let questionAnswer of answers; let i=index;">
                                       <ng-container *ngFor="let answer of questionAnswer.answer">
                                         <div *ngIf="getUtilStatic().getAnswerGroupOrOptionText(answer, qDef) as txt">
                                           {{txt}}
                                           <ul *ngIf="pt.data.getGroupedOptionsForAnswer( questionAnswer) as groups">
                                             <li *ngFor="let group of groups">
-                                              <div *ngIf="getUtilStatic().getAnswerGroupOrOptionText(group, qDef) as groupText">
+                                              <div
+                                                *ngIf="getUtilStatic().getAnswerGroupOrOptionText(group, qDef) as groupText">
                                                 {{groupText}}
                                               </div>
                                             </li>
@@ -453,7 +469,8 @@
                                           <hr *ngIf="i !== answers.length-1" style="border-color: lightgray">
                                         </div>
                                       </ng-container>
-                                      <div *ngIf="getUtilStatic().getOptionDetails(questionAnswer.optionDetails, answer) as oDetail">
+                                      <div
+                                        *ngIf="getUtilStatic().getOptionDetails(questionAnswer.optionDetails, answer) as oDetail">
                                         {{oDetail.details}}
                                         <hr *ngIf="i !== answers.length-1" style="border-color: lightgray">
                                       </div>
@@ -477,24 +494,28 @@
                           <ng-container *ngFor="let activityData of activities; let i = index;">
                             <ng-container
                               *ngIf="getUtilStatic().getActivityDefinition(activityDefinitionList,  activityData.activityCode, activityData.activityVersion) as acDef">
-                              <ng-container *ngIf="acDef.showActivityStatus"  >
+                              <ng-container *ngIf="acDef.showActivityStatus">
                                 <ng-container *ngIf="activityData.status === 'COMPLETE'">
-                                <span tooltip="{{activityData.activityCode}}"  (click)="openParticipant(pt, col, activityData.activityCode)">
+                                <span tooltip="{{activityData.activityCode}}"
+                                      (click)="openParticipant(pt, col, activityData.activityCode)">
                                 <i class="fas fa-circle"></i>
                                   </span>
                                 </ng-container>
                                 <ng-container *ngIf="activityData.status === 'CREATED'">
-                                <span tooltip="{{activityData.activityCode}}"  (click)="openParticipant(pt, col, activityData.activityCode)">
+                                <span tooltip="{{activityData.activityCode}}"
+                                      (click)="openParticipant(pt, col, activityData.activityCode)">
                                 <i class="far fa-circle"></i>
                                 </span>
                                 </ng-container>
                                 <ng-container *ngIf="activityData.status === 'IN_PROGRESS'">
-                                <span tooltip="{{activityData.activityCode}}" (click)="openParticipant(pt, col, activityData.activityCode)">
+                                <span tooltip="{{activityData.activityCode}}"
+                                      (click)="openParticipant(pt, col, activityData.activityCode)">
                                 <i class="fas fa-adjust"></i>
                                 </span>
                                 </ng-container>
                                 <ng-container *ngIf="activityData.status === 'ERROR'">
-                                <span tooltip="{{activityData.activityCode}}"  (click)="openParticipant(pt, col, activityData.activityCode)" style="color: red">
+                                <span tooltip="{{activityData.activityCode}}"
+                                      (click)="openParticipant(pt, col, activityData.activityCode)" style="color: red">
                                 <i class="fas fa-circle"></i>
                                 </span>
                                 </ng-container>
@@ -505,30 +526,37 @@
                       </ng-container>
                     </ng-container>
                     <ng-container *ngIf="col.type === 'DATE'">
-                      <ng-container *ngIf="col.participantColumn.object != null && pt.data[col.participantColumn.object] != null">
+                      <ng-container
+                        *ngIf="col.participantColumn.object != null && pt.data[col.participantColumn.object] != null">
                         {{pt.data[col.participantColumn.object][col.participantColumn.name] | date:'medium'}}
                       </ng-container>
-                      <ng-container *ngIf="col.participantColumn.object == null && pt.data[col.participantColumn.name] != null">
+                      <ng-container
+                        *ngIf="col.participantColumn.object == null && pt.data[col.participantColumn.name] != null">
                         {{pt.data[col.participantColumn.name] | date:'medium'}}
                       </ng-container>
                     </ng-container>
                     <ng-container *ngIf="col.type === 'DATE_SHORT'">
-                      <ng-container *ngIf="col.participantColumn.object != null && pt.data[col.participantColumn.object] != null">
+                      <ng-container
+                        *ngIf="col.participantColumn.object != null && pt.data[col.participantColumn.object] != null">
                         {{pt.data[col.participantColumn.object][col.participantColumn.name] | date:'shortDate'}}
                       </ng-container>
-                      <ng-container *ngIf="col.participantColumn.object == null && pt.data[col.participantColumn.name] != null">
+                      <ng-container
+                        *ngIf="col.participantColumn.object == null && pt.data[col.participantColumn.name] != null">
                         {{pt.data[col.participantColumn.name] | date:'shortDate'}}
                       </ng-container>
                     </ng-container>
-                    <ng-container *ngIf="col.type === 'OPTIONS' && col.participantColumn.object == null && pt.data[col.participantColumn.name] != null && col.participantColumn.name !== 'preferredLanguage'">
+                    <ng-container
+                      *ngIf="col.type === 'OPTIONS' && col.participantColumn.object == null && pt.data[col.participantColumn.name] != null && col.participantColumn.name !== 'preferredLanguage'">
                       {{getUtil().getNameValue(col.options, pt.data[col.participantColumn.name])}}
                     </ng-container>
                     <ng-container *ngIf="col.type === 'BOOLEAN' && col.participantColumn.object != null && pt.data[col.participantColumn.object] != null
                     && pt.data[col.participantColumn.object][col.participantColumn.name]!= null">
                       {{getUtil().getYesNo(pt.data[col.participantColumn.object][col.participantColumn.name])}}
                     </ng-container>
-                    <ng-container *ngIf="col.type !== 'OPTIONS' && col.type !== 'BOOLEAN' && col.type !== 'DATE' && col.type !== 'DATE_SHORT'">
-                      <ng-container *ngIf="col.participantColumn.object == null && pt.data[col.participantColumn.name] != null">
+                    <ng-container
+                      *ngIf="col.type !== 'OPTIONS' && col.type !== 'BOOLEAN' && col.type !== 'DATE' && col.type !== 'DATE_SHORT'">
+                      <ng-container
+                        *ngIf="col.participantColumn.object == null && pt.data[col.participantColumn.name] != null">
                         {{pt.data[col.participantColumn.name]}}
                       </ng-container>
                       <ng-container
@@ -546,7 +574,23 @@
                     <ul class="NO-PADDING-START">
                       <li class="LIST-SEPARATOR" *ngFor="let file of pt.data.files">
                         <p class="BIT-OF-MARGIN">
-                            {{file[col.participantColumn.name]}}
+                          {{file[col.participantColumn.name]}}
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div
+                    *ngIf="col.participantColumn.tableAlias==='cl' && col.participantColumn.object==='dsm'">
+                    <ul class="NO-PADDING-START">
+                      <li class="LIST-SEPARATOR" *ngFor="let order of pt.clinicalOrders">
+                        <p class="BIT-OF-MARGIN">
+                          <ng-container *ngIf="col.type === 'DATE'">
+                            {{getUtilStatic().getLongDateFormatted(order[col.participantColumn.name])}}
+                          </ng-container>
+                          <ng-container *ngIf="col.type !== 'DATE'">
+                            {{order[col.participantColumn.name]}}
+                          </ng-container>
                         </p>
                       </li>
                     </ul>
@@ -636,9 +680,9 @@
                             {{
                             onc[col.participantColumn.name]?.split('-').length > 2 ?
                               (onc[col.participantColumn.name]  | date: 'MM/dd/yyyy') :
-                            onc[col.participantColumn.name]?.split('-').length === 2 ?
-                              (onc[col.participantColumn.name] | date: 'MM/yyyy') :
-                              (onc[col.participantColumn.name] | date: 'yyyy')
+                              onc[col.participantColumn.name]?.split('-').length === 2 ?
+                                (onc[col.participantColumn.name] | date: 'MM/yyyy') :
+                                (onc[col.participantColumn.name] | date: 'yyyy')
                             }}
                           </ng-container>
                           <ng-container
@@ -657,7 +701,8 @@
                         <ul class="NO-PADDING-START"
                             *ngIf="onc.oncHistoryDetailId != null && onc.oncHistoryDetailId !== '' && !onc.deleted">
                           <li class="LIST-SEPARATOR" *ngFor="let tissue of onc.tissues" (click)="openTissue(pt, onc)">
-                            <p class="BIT-OF-MARGIN" *ngIf="tissue.tissueId != null && tissue.tissueId !== '' && !tissue.deleted">
+                            <p class="BIT-OF-MARGIN"
+                               *ngIf="tissue.tissueId != null && tissue.tissueId !== '' && !tissue.deleted">
                               <ng-container
                                 *ngIf="col.type !== 'ADDITIONALVALUE' && col.type !== 'DATE' && col.type !== 'OPTIONS' && col.type !== 'CHECKBOX' && col.type !== 'BOOLEAN'">
                                 <ng-container *ngIf="col.participantColumn.tableAlias === 'sm'">
@@ -729,21 +774,21 @@
                             </ng-container>
                           </ng-container>
                           <ng-container *ngIf="col.participantColumn.object === 'testResult'">
-                              <ul class="NO-PADDING-START">
-                                <li class="LIST-SEPARATOR" *ngFor="let r of sample.testResult; let j = index">
-                                  <ng-container
-                                    *ngIf="col.type === 'OPTIONS'">{{getOptionDisplay(col.options, r[col.participantColumn.name])}}
-                                  </ng-container>
-                                  <ng-container
-                                    *ngIf="col.type === 'DATE' && r[col.participantColumn.name] !== 0">{{r[col.participantColumn.name] |
-                                    date:'medium'}}
-                                  </ng-container>
-                                  <ng-container
-                                    *ngIf="col.type !== 'DATE' && col.type !== 'BOOLEAN' && col.type !== 'CHECKBOX' && col.type !== 'OPTIONS'">{{r[col.participantColumn.name]}}
-                                  </ng-container>
-                                  <ng-container
-                                    *ngIf="col.type === 'BOOLEAN' || col.type === 'CHECKBOX'">{{getUtil().getYesNo(r[col.participantColumn.name])}}
-                                  </ng-container>
+                            <ul class="NO-PADDING-START">
+                              <li class="LIST-SEPARATOR" *ngFor="let r of sample.testResult; let j = index">
+                                <ng-container
+                                  *ngIf="col.type === 'OPTIONS'">{{getOptionDisplay(col.options, r[col.participantColumn.name])}}
+                                </ng-container>
+                                <ng-container
+                                  *ngIf="col.type === 'DATE' && r[col.participantColumn.name] !== 0">{{r[col.participantColumn.name] |
+                                  date:'medium'}}
+                                </ng-container>
+                                <ng-container
+                                  *ngIf="col.type !== 'DATE' && col.type !== 'BOOLEAN' && col.type !== 'CHECKBOX' && col.type !== 'OPTIONS'">{{r[col.participantColumn.name]}}
+                                </ng-container>
+                                <ng-container
+                                  *ngIf="col.type === 'BOOLEAN' || col.type === 'CHECKBOX'">{{getUtil().getYesNo(r[col.participantColumn.name])}}
+                                </ng-container>
                               </li>
                             </ul>
                           </ng-container>
@@ -777,7 +822,8 @@
                   <div *ngIf="alias === 'a'">
                     <!--final abstraction values-->
                     <ng-container *ngIf="col.participantColumn.object === 'final'">
-                      <ng-container *ngIf="getUtil().getAbstractionGroup(pt.abstractionSummary, col.participantColumn.tableAlias) as group">
+                      <ng-container
+                        *ngIf="getUtil().getAbstractionGroup(pt.abstractionSummary, col.participantColumn.tableAlias) as group">
                         <div *ngIf="getUtil().getAbstractionField(group.fields, col.participantColumn.name) as field">
                           <ng-container *ngIf="col.type === 'multi_type_array'">
                             <div *ngFor="let object of getMultiObjects(field.fieldValue.value); let i = index">
@@ -796,12 +842,15 @@
                                   {{key}}: {{object[key]}}
                                 </ng-container>
                               </div>
-                              <hr *ngIf="i !== getMultiObjects(field.fieldValue.value).length-1" style="border-color: lightgray">
+                              <hr *ngIf="i !== getMultiObjects(field.fieldValue.value).length-1"
+                                  style="border-color: lightgray">
                             </div>
                           </ng-container>
                           <ng-container *ngIf="col.type === 'TEXT'">TEXT: {{field.fieldValue.value}}</ng-container>
-                          <ng-container *ngIf="col.type === 'multi_type'">multi_type: {{field.fieldValue.value}}</ng-container>
-                          <ng-container *ngIf="col.type === 'OPTIONS'">Options: {{field.fieldValue.value}}</ng-container>
+                          <ng-container *ngIf="col.type === 'multi_type'">
+                            multi_type: {{field.fieldValue.value}}</ng-container>
+                          <ng-container *ngIf="col.type === 'OPTIONS'">
+                            Options: {{field.fieldValue.value}}</ng-container>
                         </div>
                       </ng-container>
                     </ng-container>
@@ -832,10 +881,12 @@
                     <ul class="NO-PADDING-START">
                       <li class="LIST-SEPARATOR">
                         <ng-container *ngFor="let personData of pt.participantData; let i = index">
-                          <div *ngIf="this.getPersonField(personData, col, pt) !== null && this.getPersonField(personData, col, pt) !== undefined">
-                              <ng-container *ngIf="getPersonType(personData)">
-                                {{getPersonType(personData)}}:
-                              </ng-container>{{getPersonField(personData, col, pt)}}
+                          <div
+                            *ngIf="this.getPersonField(personData, col, pt) !== null && this.getPersonField(personData, col, pt) !== undefined">
+                            <ng-container *ngIf="getPersonType(personData)">
+                              {{getPersonType(personData)}}:
+                            </ng-container>
+                            {{getPersonField(personData, col, pt)}}
                             <hr *ngIf="i !== pt.participantData.length - 1" style="border-color: lightgray">
                           </div>
                         </ng-container>
@@ -851,19 +902,19 @@
           <tr>
             <td [attr.colspan]="getColSpan()-3">
               <pagination-controls
-                    class="custom-pagination"
-                    id="participant_list"
-                    (pageChange)="pageChanged($event, rowsPerPage)"
-                    (pageBoundsCorrection)="pageChanged($event)"
-                    maxSize="9"
-                    directionLinks="true"
-                    autoHide="true"
-                    responsive="true"
-                    previousLabel="Previous"
-                    nextLabel="Next"
-                    screenReaderPaginationLabel="Pagination"
-                    screenReaderPageLabel="page"
-                    screenReaderCurrentLabel="You're on page">
+                class="custom-pagination"
+                id="participant_list"
+                (pageChange)="pageChanged($event, rowsPerPage)"
+                (pageBoundsCorrection)="pageChanged($event)"
+                maxSize="9"
+                directionLinks="true"
+                autoHide="true"
+                responsive="true"
+                previousLabel="Previous"
+                nextLabel="Next"
+                screenReaderPaginationLabel="Pagination"
+                screenReaderPageLabel="page"
+                screenReaderCurrentLabel="You're on page">
               </pagination-controls>
             </td>
             <td colspan="3">
@@ -938,8 +989,9 @@
           Split multiselect choices into separate columns:
           <div>
 
-             <mat-radio-button color="primary" disableRipple [value]="true">
-              <span tooltip="Each option of a multiselect will be displayed in a separate column, with 0/1 indicating selection">Yes</span>
+            <mat-radio-button color="primary" disableRipple [value]="true">
+              <span
+                tooltip="Each option of a multiselect will be displayed in a separate column, with 0/1 indicating selection">Yes</span>
             </mat-radio-button>
             <mat-radio-button color="primary" disableRipple [value]="false">
               <span tooltip="Multiselects will be exported as a comma-delimited list of the selections">No</span>
@@ -954,18 +1006,19 @@
               <span tooltip="Include all, with each activity completion in a separate column">Yes</span>
             </mat-radio-button>
             <mat-radio-button color="primary" disableRipple [value]="true">
-              <span tooltip="Only values from the participant's most recent completion of each activity will be included">No</span>
+              <span
+                tooltip="Only values from the participant's most recent completion of each activity will be included">No</span>
             </mat-radio-button>
           </div>
         </mat-radio-group>
       </ng-container>
       <ng-container *ngIf="modalAnchor === 'assignParticipant'">
         <mat-checkbox color="primary" disableRipple
-                     [(ngModel)]="assignMR">Assign to request MR
+                      [(ngModel)]="assignMR">Assign to request MR
         </mat-checkbox>
         <br/>
         <mat-checkbox color="primary" disableRipple
-                     [(ngModel)]="assignTissue">Assign to request Tissue
+                      [(ngModel)]="assignTissue">Assign to request Tissue
         </mat-checkbox>
         <app-assignee (selectedAssignee)="assigneeSelected($event)" [assignees]="assignees"></app-assignee>
       </ng-container>

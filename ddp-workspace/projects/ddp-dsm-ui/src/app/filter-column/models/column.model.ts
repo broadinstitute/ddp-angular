@@ -140,6 +140,13 @@ export class ParticipantColumn {
   //Cohort tags
   public static COHORT_TAG_NAME = new ParticipantColumn('Cohort Tag Name', 'cohortTagName', 'c', 'dsm');
 
+  //Clinical Orders
+  public static CLINICAL_ORDER_STATUS = new ParticipantColumn('Clinical Order Status', 'orderStatus', 'cl', 'dsm');
+  public static CLINICAL_ORDER_ID = new ParticipantColumn('Clinical Order Id', 'orderId', 'cl', 'dsm');
+  public static CLINICAL_ORDER_PDO = new ParticipantColumn('Clinical Order PDO #', 'mercuryPdoId', 'cl', 'dsm');
+  public static CLINICAL_ORDER_DATE = new ParticipantColumn('Clinical Order Date', 'orderDate', 'cl', 'dsm');
+  public static CLINICAL_STATUS_DATE = new ParticipantColumn('Clinical Order Status Date', 'statusDate', 'cl', 'dsm');
+
   //FON
   public static ACTIVITY_STATUS = new ParticipantColumn('Enrollment Status', 'activityStatus', 'data');
 

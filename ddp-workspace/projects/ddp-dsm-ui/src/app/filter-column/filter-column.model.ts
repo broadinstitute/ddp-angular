@@ -280,6 +280,13 @@ export class Filter {
   //Cohort tags
   public static COHORT_TAG_NAME = new Filter(ParticipantColumn.COHORT_TAG_NAME, Filter.TEXT_TYPE);
 
+  //clinical
+  public static CLINICAL_ORDER_STATUS = new Filter(ParticipantColumn.CLINICAL_ORDER_STATUS, Filter.TEXT_TYPE);
+  public static CLINICAL_ORDER_ID = new Filter(ParticipantColumn.CLINICAL_ORDER_ID, Filter.TEXT_TYPE);
+  public static CLINICAL_ORDER_PDO = new Filter(ParticipantColumn.CLINICAL_ORDER_PDO, Filter.TEXT_TYPE);
+  public static CLINICAL_ORDER_DATE = new Filter(ParticipantColumn.CLINICAL_ORDER_DATE, Filter.DATE_TYPE);
+  public static CLINICAL_STATUS_DATE = new Filter(ParticipantColumn.CLINICAL_STATUS_DATE, Filter.DATE_TYPE);
+
   public static ALL_COLUMNS = [
     Filter.REALM, Filter.SHORT_ID, Filter.LEGACY_SHORT_ID, Filter.LEGACY_PARTICIPANT_ID, Filter.PARTICIPANT_ID, Filter.FIRST_NAME, Filter.LAST_NAME,
     Filter.COUNTRY, Filter.ENROLLMENT_STATUS, Filter.EMAIL, Filter.REGISTRATION_DATE, Filter.DO_NOT_CONTACT,
@@ -307,7 +314,7 @@ export class Filter {
     Filter.COLLABORATOR_SAMPLE, Filter.SAMPLE_SENT, Filter.SAMPLE_RECEIVED, Filter.SAMPLE_DEACTIVATION, Filter.SAMPLE_QUEUE,
     Filter.TRACKING_TO_PARTICIPANT, Filter.TRACKING_RETURN, Filter.MF_BARCODE, Filter.STATUS_OUT, Filter.STATUS_IN, Filter.RESULT_TEST, Filter.CORRECTED_TEST, Filter.TIME_TEST, Filter.CARE_EVOLVE,
     Filter.ABSTRACTION_ACTIVITY, Filter.ABSTRACTION_STATUS, Filter.ABSTRACTION_USER, Filter.ACTIVITY_STATUS, Filter.COHORT_TAG_NAME, Filter.PARTICIPANT_FILE_NAMES, Filter.PARTICIPANT_FILE_UPLOAD_TIME,
-    Filter.COLLECTION_DATE, Filter.SEQUENCING_RESTRICTION];
+    Filter.COLLECTION_DATE, Filter.SEQUENCING_RESTRICTION, Filter.CLINICAL_ORDER_DATE, Filter.CLINICAL_ORDER_STATUS, Filter.CLINICAL_ORDER_ID, Filter.CLINICAL_ORDER_PDO, Filter.CLINICAL_STATUS_DATE];
 
   public static parseToColumnArray(json, allColumns, surveyNames?, surveyColumns?): {} {
     const result = {};
