@@ -368,21 +368,26 @@
   <!--DON'T REMOVE - START-->
   <!--Hidden, but needs to be here for the label printing-->
   <span [hidden]="true">
+    <div class="app-modal-body Display--Inline-Block" id="labelNameDOBDiv">
+        <ng-container *ngFor="let label of selectedKitRequests">
+          <div [ngStyle]="{'height': getLabelHeight()}" class="DIV--Without-Border">
+            <p style="font-weight: bold; font-size: 20px;">{{label.firstName}} {{label.lastName}} {{label.dateOfBirth}}</p>
+          </div>
+          <div class="pagebreak"> </div>
+        </ng-container>
+    </div>
+
   <div class="app-modal-body Display--Inline-Block" id="labelDiv" style="width: 100%; height: 100%">
     <ng-container *ngFor="let label of selectedKitRequests; let e = even; let i = index;">
       <div *ngIf="e" [ngStyle]="{'height': getTopMargin()}" class="DIV--Without-Border"></div>
       <div [ngStyle]="{'height': getLabelHeight()}" class="DIV--Without-Border">
         <app-kit-label class="DIV--Without-Border Display--Inline-Block"
-                       [isPHI]="isPHI"
-                       [firstName]="label.firstName"
-                       [lastName]="label.lastName"
-                       [dateOfBirth]="label.dateOfBirth"
-
                        [urlTo]="label.labelUrlTo" [shippingId]="label.ddpLabel"
                        [urlReturn]="label.labelUrlReturn" [labelSetting]="selectedSetting"></app-kit-label>
       </div>
       <div *ngIf="e" [ngStyle]="{'height': getMarginBetweenTopBottom()}" class="DIV--Without-Border"></div>
       <div *ngIf="!e && selectedKitRequests.length-1 > i" [ngStyle]="{'height': getBottomMargin()}" class="DIV--Without-Border"></div>
+      <div class="pagebreak"> </div>
     </ng-container>
   </div>
 
@@ -391,16 +396,12 @@
       <div *ngIf="e" [ngStyle]="{'height': getTopMargin()}" class="DIV--Without-Border"></div>
       <div [ngStyle]="{'height': getLabelHeight()}" class="DIV--Without-Border">
         <app-error-label class="DIV--Without-Border Display--Inline-Block"
-                         [isPHI]="isPHI"
-                         [firstName]="label.firstName"
-                         [lastName]="label.lastName"
-                         [dateOfBirth]="label.dateOfBirth"
-
                          [address]="label.participant" [shippingId]="label.ddpLabel"
                          [labelSetting]="selectedSetting"></app-error-label>
       </div>
       <div *ngIf="e" [ngStyle]="{'height': getMarginBetweenTopBottom()}" class="DIV--Without-Border"></div>
       <div *ngIf="!e && selectedKitRequests.length-1 > i" [ngStyle]="{'height': getBottomMargin()}" class="DIV--Without-Border"></div>
+      <div class="pagebreak"> </div>
     </ng-container>
   </div>
 </span>

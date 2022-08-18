@@ -9,42 +9,18 @@ declare var JsBarcode: any;
   templateUrl: './error-label.component.html',
   styleUrls: ['./error-label.component.css']
 })
-export class ErrorLabelComponent implements AfterViewChecked, OnInit {
+export class ErrorLabelComponent implements AfterViewChecked {
   @Input() address: Address;
   @Input() shippingId: string;
   @Input() labelSetting: LabelSetting;
 
-  @Input() firstName;
-  @Input() lastName;
-  @Input() dateOfBirth;
-
-  @Input() isPHI!: boolean;
-
-  public patientFullInfoId;
-
-  ngOnInit() {
-    this.patientFullInfoId = this.isUserInfo() && this.concatWithUnderscore();
-  }
 
   ngAfterViewChecked(): void {
-    const callableElementId = this.isPHI ? this.patientFullInfoId : this.shippingId;
-    this.initByIdJsBarcode(callableElementId);
+    this.initByIdJsBarcode();
   }
 
-  private initByIdJsBarcode(id: string): void {
-    JsBarcode('#' + id).init();
-  }
-
-  private isUserInfo(): boolean {
-    return this.firstName && this.lastName && this.dateOfBirth;
-  }
-
-  private concatWithUnderscore(): string {
-    return [this.firstName, this.lastName, this.dateOfBirth].join("_");
-  }
-
-  get buildBarCodeValue(): string {
-    return this.patientFullInfoId.split("_").join(" ");
+  private initByIdJsBarcode(): void {
+    JsBarcode('#' + this.shippingId).init();
   }
 
   public getLabelHeight(): string {
