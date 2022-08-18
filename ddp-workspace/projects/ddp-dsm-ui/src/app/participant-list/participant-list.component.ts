@@ -93,7 +93,7 @@ export class ParticipantListComponent implements OnInit {
   activityDefinitions = new Map();
 
   exportFileFormat: string = 'xlsx';
-  exportSplitOptions: boolean = true;
+  exportHumanReadable: boolean = false;
   exportOnlyMostRecent: boolean = false;
 
   selectedColumns = {};
@@ -1689,7 +1689,7 @@ export class ParticipantListComponent implements OnInit {
       null,
       this.sortBy,
       this.exportFileFormat,
-      this.exportSplitOptions,
+      this.exportHumanReadable,
       this.exportOnlyMostRecent
     ).subscribe({
       next: response => {
