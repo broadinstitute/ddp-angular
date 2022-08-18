@@ -134,7 +134,7 @@ export class ShippingSearchComponent implements OnInit {
           name: parameterName,
           value: v
         }, null, 'dsmKitRequestId', kitRequest.dsmKitRequestId,
-        'kit', null, realm, null
+        'kit', null, realm, kitRequest.participantId
       );
       const patch = patch1.getPatch();
       this.currentPatchField = parameterName;

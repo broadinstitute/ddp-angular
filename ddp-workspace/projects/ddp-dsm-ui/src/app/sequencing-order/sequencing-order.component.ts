@@ -48,7 +48,7 @@ export class SequencingOrderComponent {
           name: parameterName,
           value: v
         }, null, 'dsmKitRequestId', sample.dsmKitRequestId,
-        'kit', null, realm, null
+        'kit', null, realm, this.participant?.participant?.ddpParticipantId
       );
       const patch = patch1.getPatch();
       this.patch( patch );

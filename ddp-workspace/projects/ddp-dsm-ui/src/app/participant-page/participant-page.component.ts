@@ -575,7 +575,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           name: parameterName,
           value: v
         }, null, 'dsmKitRequestId', sample.dsmKitRequestId,
-        'kit', null, realm, null
+        'kit', null, realm, this.participant?.participant?.ddpParticipantId
       );
       const patch = patch1.getPatch();
       this.currentPatchField = parameterName;
