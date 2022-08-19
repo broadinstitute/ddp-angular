@@ -911,7 +911,7 @@
       </ng-container>
       <ng-container *ngIf="modalAnchor === 'exportOptions'">
         <mat-radio-group [(ngModel)]="exportFileFormat">
-          File format:
+          File format: <a [routerLink]="['../help']" target="_blank"><span class="fa fa-question-circle"></span></a>
           <div>
             <mat-radio-button color="primary" disableRipple value="xlsx">
               <span tooltip="Microsoft Excel workbook">Excel (.xlsx)</span>
@@ -922,21 +922,20 @@
           </div>
         </mat-radio-group>
         <br/>
-        <mat-radio-group [(ngModel)]="exportSplitOptions">
-          Split multiselect choices into separate columns:
+        <mat-radio-group [(ngModel)]="exportHumanReadable">
+          Option text format: <a [routerLink]="['../help']" target="_blank"><span class="fa fa-question-circle"></span></a>
           <div>
-
-             <mat-radio-button color="primary" disableRipple [value]="true">
-              <span tooltip="Each option of a multiselect will be displayed in a separate column, with 0/1 indicating selection">Yes</span>
+             <mat-radio-button color="primary" disableRipple [value]="false">
+              <span tooltip="Each option of a multiselect will be displayed in a separate column, with 0/1 indicating selection">Analysis-friendly</span>
             </mat-radio-button>
-            <mat-radio-button color="primary" disableRipple [value]="false">
-              <span tooltip="Multiselects will be exported as a comma-delimited list of the selections">No</span>
+            <mat-radio-button color="primary" disableRipple [value]="true">
+              <span tooltip="Multiselects will be exported as a comma-delimited list of the selections">Human-readable</span>
             </mat-radio-button>
           </div>
         </mat-radio-group>
         <br/>
         <mat-radio-group [(ngModel)]="exportOnlyMostRecent">
-          Include all completions of an activity:
+          Include all completions of an activity: <a [routerLink]="['../help']" target="_blank"><span class="fa fa-question-circle"></span></a>
           <div>
             <mat-radio-button color="primary" disableRipple [value]="false">
               <span tooltip="Include all, with each activity completion in a separate column">Yes</span>
