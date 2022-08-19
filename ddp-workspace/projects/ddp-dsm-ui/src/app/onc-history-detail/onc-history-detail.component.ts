@@ -87,12 +87,20 @@ export class OncHistoryDetailComponent implements OnInit {
     }
     if (v != null) {
       const realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+      let parent; let parentId; 
+      if (this.participant.participant && this.participant.participant.participantId) {
+        parent   = "participantId";
+        parentId = this.participant.participant.participantId;
+      } else {
+        parent   = "ddpParticipantId";
+        parentId = this.participant.data.profile['guid'];
+      }
       const patch1 = new PatchUtil(
         this.oncHistory[index].oncHistoryDetailId, this.role.userMail(),
         {
           name: parameterName,
           value: v
-        }, null, 'participantId', this.participant.participant.participantId,
+        }, null, parent, parentId,
         Statics.ONCDETAIL_ALIAS, null, realm, this.participant.data.profile['guid']
       );
       const patch = patch1.getPatch();

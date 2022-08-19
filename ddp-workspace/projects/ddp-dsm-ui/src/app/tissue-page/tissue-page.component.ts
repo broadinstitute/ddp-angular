@@ -132,14 +132,22 @@ export class TissuePageComponent implements OnInit {
       }
     }
     if (v !== null) {
+      let parent; let parentId; 
+      if (this.participant.participant && this.participant.participant.participantId) {
+        parent   = "participantId";
+        parentId = this.participant.participant.participantId;
+      } else {
+        parent   = "ddpParticipantId";
+        parentId = this.participant.data.profile['guid'];
+      }
       const patch1 = new PatchUtil(
         this.oncHistoryDetail.oncHistoryDetailId, this.role.userMail(),
         {
           name: parameterName,
           value: v,
-        }, null, 'participantId',
-        this.participant.participant.ddpParticipantId, Statics.ONCDETAIL_ALIAS,  null,
-        localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.participant.participant.ddpParticipantId
+        }, null, parent,
+        parentId, Statics.ONCDETAIL_ALIAS,  null,
+        localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.participant.data.profile['guid']
       );
       const patch = patch1.getPatch();
       this.patchFinished = false;
