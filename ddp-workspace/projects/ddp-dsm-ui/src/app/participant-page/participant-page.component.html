@@ -199,7 +199,6 @@ participant.data.dsm['diagnosisYear'] != null">
           </tr>
           </tbody>
         </table>
-
         <div *ngIf="isAddFamilyMember" class="Float--right Width--100">
           <div class="family-member-button">
             <button mat-mini-fab color="primary" class="mat-fab-bottom-left" (click)="showFamilyMemberPopUpOnClick()">
@@ -666,6 +665,38 @@ participant.data.dsm['diagnosisYear'] != null">
                           </div>
                         </td>
                       </tr>
+                      <tr *ngIf="hasSequencingOrders">
+                        <td class="TD--Padding Width--50 Data-Display-Question">Collection Date</td>
+                      </tr>
+                      <tr *ngIf="hasSequencingOrders">
+                        <td class="TD--Padding-Left Width--50">
+                          <app-field-datepicker (dateChanged)="kitValueChanged($event, 'collectionDate', sample)"
+                                                [allowUnknownDay]="false" [colorDuringPatch]="isPatchedCurrently('collectionDate')"
+                                                [dateString]="sample.collectionDate"
+                                                [showTodayButton]="true">
+                          </app-field-datepicker>
+                        </td>
+                      </tr>
+                      <tr *ngIf="hasSequencingOrders">
+                        <td class="TD--Padding Width--50 Data-Display-Question">Sequencing Restriction</td>
+                      </tr>
+                      <tr *ngIf="hasSequencingOrders">
+                        <td style="padding-bottom: 15px;" class="TD--Padding-Left Width--50">
+                          <mat-select [ngClass]="{
+                                      'Color--Field--Patched': isPatchedCurrently('sequencingRestriction')}"
+                                      placeholder="Sequencing Restrictions" [(ngModel)]="sample.sequencingRestriction"
+                                      [disabled]="participantExited"
+                                      (selectionChange)="kitValueChanged($event, 'sequencingRestriction', sample)"
+                                      (blur)="currentField(null)" (focus)="currentField('sequencingRestriction')">
+                            <mat-option value="cannotSequence">Cannot Sequence</mat-option>
+                            <mat-option value="RUO">Research Use Only (RUO)</mat-option>
+                            <mat-option value="valid">Valid for Clinical Sequencing</mat-option>
+                            <mat-option value="successClinical">Success - clinical</mat-option>
+                            <mat-option value="successResearch">Success - research</mat-option>
+                            <mat-option value="abandoned">Abandoned</mat-option>
+                            <mat-option value="{{null}}"></mat-option>
+                          </mat-select>
+                      </tr>
                     </table>
                   </div>
                 </fieldset>
@@ -839,7 +870,12 @@ participant.data.dsm['diagnosisYear'] != null">
                 </div>
               </ng-container>
             </tab>
-
+            <tab (selectTab)="onSelect($event, 'sequencing');" *ngIf="canSequence"
+                 [active]="tabActive('sequencing')" heading="Sequencing Order">
+              <app-sequencing-order [participant]="participant"
+                                    [samples]="sequencingOrdersArray">
+              </app-sequencing-order>
+            </tab>
             <tab heading="First Medical Record Abstraction" [active]="tabActive('abstraction')"
                  (selectTab)="onSelect($event, 'abstraction'); getFileList(participant.abstraction)"
                  *ngIf="(participant.abstraction != null && abstractionFields != null

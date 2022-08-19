@@ -935,6 +935,37 @@ export class DSMService {
     );
   }
 
+  getMercuryEligibleSamples( ddpParticipantId: string, realm: any ): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'mercurySamples';
+    const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: realm} );
+    map.push( {name: 'ddpParticipantId', value: ddpParticipantId} );
+    return this.http.get( url, this.buildQueryHeader( map ) ).pipe(
+      catchError( this.handleError.bind( this ) )
+    );
+  }
+
+
+  getMercuryOrders( realm: string ): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'getMercuryOrders';
+    const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: realm} );
+    return this.http.get( url, this.buildQueryHeader( map ) ).pipe(
+      catchError( this.handleError.bind( this ) )
+    );
+  }
+
+  placeSeqOrder( orders: any[], realm: string, ddpParticipantId: string ): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'submitMercuryOrder';
+    const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: realm} );
+    map.push( {name: 'ddpParticipantId', value: ddpParticipantId} );
+    map.push( {name: 'userId', value: this.role.userID()} );
+    return this.http.post( url, orders, this.buildQueryHeader( map ) ).pipe(
+      catchError( this.handleError.bind( this ) )
+    );
+  }
+
   public applyDestructionPolicyToAll(source: string, json: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'institutions';
     return this.http.patch(url, json, this.buildHeader()).pipe(

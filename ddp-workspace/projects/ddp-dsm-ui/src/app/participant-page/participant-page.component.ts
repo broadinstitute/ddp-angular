@@ -2,12 +2,14 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy, Af
 import { MatDialog } from '@angular/material/dialog';
 import { TabDirective } from 'ngx-bootstrap/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ActivityDefinition } from '../activity-data/models/activity-definition.model';
 import { FieldSettings } from '../field-settings/field-settings.model';
 import { ParticipantData } from '../participant-list/models/participant-data.model';
 import { PreferredLanguage } from '../participant-list/models/preferred-languages.model';
 import { Participant } from '../participant-list/participant-list.model';
 import { PDFModel } from '../pdf-download/pdf-download.model';
+import {SequencingOrder} from '../sequencing-order/sequencing-order.model';
 
 import { ComponentService } from '../services/component.service';
 import { Auth } from '../services/auth.service';
@@ -59,6 +61,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   @Input() showContactInformation: boolean;
   @Input() showComputedObject: boolean;
   @Input() selectedActivityCode: string;
+  @Input() hasSequencingOrders: boolean;
   @Output() leaveParticipant = new EventEmitter();
   @Output('ngModelChange') update = new EventEmitter();
 
@@ -123,7 +126,15 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   message: string = null;
   bundle = false;
   private scrolled: boolean;
+  private canSequence: boolean;
 
+  sequencingOrdersArray = [];
+
+  private ENROLLED = 'ENROLLED';
+  private ABOUT_YOU = 'ABOUT_YOU';
+  private ASSIGNED_SEX = 'ASSIGNED_SEX';
+
+  subscriptions: Subscription = new Subscription();
 
   constructor(private auth: Auth, private compService: ComponentService, private dsmService: DSMService, private router: Router,
                private role: RoleService, private util: Utils, private route: ActivatedRoute, public dialog: MatDialog) {
@@ -180,6 +191,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
     this.displayActivityOrder();
     this.addMedicalProviderInformation();
+    this.getMercuryEligibleSamples();
+    this.canSequence = this.canHaveSequencing(this.participant);
   }
 
   addMedicalProviderInformation(): void {
@@ -214,6 +227,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   ngOnDestroy(): void {
     clearInterval(this.checkParticipantStatusInterval);
+    this.subscriptions.unsubscribe();
   }
 
   displayActivityOrder(): void {
@@ -545,6 +559,39 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     }
   }
 
+  kitValueChanged( value: any, parameterName: string, sample: Sample ): void {
+    let v;
+    if (typeof value === 'string') {
+      sample[ parameterName ] = value;
+      v = value;
+    } else {
+      v = value.value;
+    }
+    if (v != null) {
+      const realm: string = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
+      const patch1 = new PatchUtil(
+        sample.dsmKitRequestId, this.role.userMail(),
+        {
+          name: parameterName,
+          value: v
+        }, null, 'dsmKitRequestId', sample.dsmKitRequestId,
+        'kit', null, realm, this.participant?.participant?.ddpParticipantId
+      );
+      const patch = patch1.getPatch();
+      this.currentPatchField = parameterName;
+      this.dsmService.patchParticipantRecord( JSON.stringify( patch ) ).subscribe( { // need to subscribe, otherwise it will not send!
+        next: data => {
+          this.currentPatchField = null;
+        },
+        error: err => {
+          if (err._body === Auth.AUTHENTICATION_ERROR) {
+            this.auth.logout();
+          }
+        }
+      } );
+    }
+  }
+
   oncHistoryValueChanged(value: any, parameterName: string, oncHis: OncHistoryDetail): void {
     let v;
     const realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
@@ -791,6 +838,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     if (data instanceof TabDirective) {
       // this.selectedTabTitle = data.heading;
       this.activeTab = tabName;
+    }
+    if (tabName === 'sequencing') {
+      this.getMercuryEligibleSamples();
     }
   }
 
@@ -1437,5 +1487,55 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     this.source = source;
     this.universalModal.show();
     return false;
+  }
+
+  public getMercuryEligibleSamples(): void {
+    if (!this.canHaveSequencing( this.participant )) {
+      return;
+    }
+    const realm = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
+    const sub1 = this.dsmService.getMercuryEligibleSamples( this.participant.participant.ddpParticipantId, realm ).subscribe( {
+      next: data => {
+        const jsonData = data;
+        this.sequencingOrdersArray = [];
+        if (jsonData) {
+          jsonData.forEach( ( json ) => {
+              const order = SequencingOrder.parse( json );
+              this.sequencingOrdersArray.push( order );
+            }
+          );
+        }
+
+      }
+    } );
+    this.subscriptions.add(sub1);
+  }
+
+  canHaveSequencing( participant: Participant ): boolean {
+    if (!this.role.allowedToDoOrderSequencing() || !this.hasSequencingOrders) {
+      return false;
+    }
+    const enrolled: boolean = participant.data.status === this.ENROLLED;
+    let hasGender = false;
+    if (this.hasOncHistoryGender(participant)) {
+      hasGender = true;
+    }
+    else {
+      const aboutYouActivity = participant.data.activities.find( activity => activity.activityCode === this.ABOUT_YOU );
+      if (aboutYouActivity) {
+        const genderQuestion = aboutYouActivity.questionsAnswers.find( questionAnswer => questionAnswer.stableId === this.ASSIGNED_SEX );
+        if (genderQuestion && genderQuestion.answer) {
+          hasGender = true;
+        }
+      }
+      else {
+        hasGender = false;
+      }
+    }
+    return hasGender && enrolled;
+  }
+
+  private hasOncHistoryGender(participant: Participant): boolean {
+    return participant.oncHistoryDetails.find( onc => onc.gender !== '' && onc.gender !== undefined && onc.gender !== null ) !== undefined;
   }
 }

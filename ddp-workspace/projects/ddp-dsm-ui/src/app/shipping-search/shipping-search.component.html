@@ -98,6 +98,9 @@
           </th>
           <th *ngIf="!showColumn('receiveDate')">
           </th>
+          <th>
+            Collection Date
+          </th>
       </tr>
       </thead>
       <tbody>
@@ -139,6 +142,12 @@
         <td *ngIf="!showColumn('receiveDateString')">
           <button mat-raised-button type="button" color="primary" *ngIf="(kitRequest.receiveDateString === '' || kitRequest.receiveDateString === null || kitRequest.receiveDateString === undefined) && kitRequest.realm === 'AT'"
                   (click)="receiveATKit(kitRequest)">Mark Received</button>
+        </td>
+        <td>
+          <app-field-datepicker (dateChanged)="valueChanged($event, 'collectionDate', kitRequest)"
+                                [allowUnknownDay]="false" [colorDuringPatch]="isPatchedCurrently('collectionDate')"
+                                [dateString]="kitRequest.collectionDate"
+                                [showTodayButton]="true"></app-field-datepicker>
         </td>
       </tr>
       <tbody>
