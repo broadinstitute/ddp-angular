@@ -10,7 +10,7 @@ export class KitRequest {
               public easypostAddressId: string, public nameLabel: string, public kitLabel: string, public express: boolean,
               public labelDate: number, public noReturn: boolean, public externalOrderNumber: string,
               public externalOrderStatus: string, public preferredLanguage: string,
-              public receiveDateString: string, public hruid: string, public gender: string, firstName?: string, lastName?: string, dateOfBirth?: string) {
+              public receiveDateString: string, public hruid: string, public gender: string, public firstName?: string, public lastName?: string, public dateOfBirth?: string) {
   }
 
   public TRACKING_LINK = 'https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber=';
