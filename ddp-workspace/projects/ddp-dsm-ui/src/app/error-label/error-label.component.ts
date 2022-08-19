@@ -1,4 +1,4 @@
-import {Component, Input, AfterViewChecked, OnInit} from '@angular/core';
+import {Component, Input, AfterViewChecked} from '@angular/core';
 import { Address } from '../address/address.model';
 import { LabelSetting } from '../label-settings/label-settings.model';
 

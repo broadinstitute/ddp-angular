@@ -1,4 +1,4 @@
-import {Component, Input, AfterViewChecked, OnChanges, SimpleChanges, OnInit} from '@angular/core';
+import {Component, Input, AfterViewChecked} from '@angular/core';
 import { LabelSetting } from '../label-settings/label-settings.model';
 import {KitRequest} from "../shipping/shipping.model";
 
