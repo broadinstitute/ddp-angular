@@ -308,7 +308,7 @@ export class ShippingComponent implements OnInit {
 
   showPHIButton(study: string): boolean {
     switch(study) {
-      case 'osteo2':
+      case 'Angio':
         return true;
       default:
         return false;
