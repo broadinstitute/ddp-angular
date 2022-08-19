@@ -133,7 +133,7 @@ export class TissuePageComponent implements OnInit {
     }
     if (v !== null) {
       let parent; let parentId; 
-      if (this.participant.participant && this.participant.participant.participantId) {
+      if (this.isParticipantIdAvailable()) {
         parent   = "participantId";
         parentId = this.participant.participant.participantId;
       } else {
@@ -170,6 +170,10 @@ export class TissuePageComponent implements OnInit {
         }
       );
     }
+  }
+
+  private isParticipantIdAvailable() {
+    return this.participant.participant && this.participant.participant.participantId;
   }
 
   isCheckboxPatchedCurrently(field: string): string {

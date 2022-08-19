@@ -88,7 +88,7 @@ export class OncHistoryDetailComponent implements OnInit {
     if (v != null) {
       const realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       let parent; let parentId; 
-      if (this.participant.participant && this.participant.participant.participantId) {
+      if (this.isParticipantIdAvailable()) {
         parent   = "participantId";
         parentId = this.participant.participant.participantId;
       } else {
@@ -115,6 +115,10 @@ export class OncHistoryDetailComponent implements OnInit {
     if (index === this.oncHistory.length - 1) {
       this.addNewOncHistory(this.participant.participant.participantId);
     }
+  }
+
+  private isParticipantIdAvailable() {
+    return this.participant.participant && this.participant.participant.participantId;
   }
 
   multipleValueChanged(patch: any, index: number, parameterName: string): void {
