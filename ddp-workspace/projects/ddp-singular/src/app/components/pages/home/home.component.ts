@@ -6,6 +6,7 @@ import { Route } from '../../../constants/route';
 import { GTagEvent } from '../../../constants/gtag-event';
 import { IGNORE_ANALYTICS_CLASS } from '../../../constants/analytics';
 import { FamilyEnrollmentMessageComponent } from '../../family-enrollment-message/family-enrollment-message.component';
+import { featureFlags } from '../../../config/feature-flags';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,8 @@ export class HomeComponent {
   readonly SALIVA_KIT_PDF_NAME = 'Preview Kit Instructions';
   readonly CONSENT_PDF_NAME = 'Preview Consent Form';
   readonly PRESCREEN_BUTTON_LABEL = 'Sign me up!';
+
+  readonly featureFlag_DDP_8404 = featureFlags.DDP_8404_Home_page_update;
 
   constructor(
     private analytics: AnalyticsEventsService,

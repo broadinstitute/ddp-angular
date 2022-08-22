@@ -1,6 +1,91 @@
 @import '../../../../styles/colors';
 @import "../../../../styles/breakpoints";
 
+@mixin DDP-8404-feature {
+  &.DDP-8404-feature {
+
+    .join-left {
+      &-heading{
+        margin-left: unset;
+      }
+      &-sub-heading {
+        margin-bottom: 22px;
+        font-size: 24px;
+        letter-spacing: 0;
+        line-height: 34px;
+      }
+      .welcome-people-of {
+        color: $__purple;
+        font-size: 20px;
+        line-height: 28px;
+        margin-top: 36px;
+        margin-left: 38px;
+      }
+    }
+
+    .join-list {
+      padding-left: 36px;
+
+      li {
+        &:before {
+          width: 5px;
+          height: 5px;
+          left: -36px;
+          top: 12px;
+        }
+      }
+    }
+
+    .join-sign_up-text {
+      p {
+        font-size: 24px;
+        line-height: 34px;
+        text-align: left;
+        margin-top: 22px;
+      }
+    }
+
+    .participating-steps {
+      &-step {
+        padding: 32px 40px 60px;
+
+        &-img {
+          height: 261px;
+          margin: 0 0 20px;
+        }
+
+        &-title {
+          font-size: 1rem;
+        }
+
+        &-text {
+          > * {
+            font-size: 1.11rem;
+          }
+        }
+      }
+    }
+
+    .participating-about {
+      margin-top: 60px;
+
+      p {
+        font-size: 1.33rem;
+        line-height: 34px;
+        margin-bottom: 28px;
+      }
+      .purple {
+        color: $__purple;
+      }
+      .underline {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+
+  }
+}
+
 :host {
   color: $__font;
 
@@ -222,6 +307,8 @@
 }
 
 .join {
+  @include DDP-8404-feature;
+
   margin-top: 100px;
   h1 {
     margin-bottom: 35px;
@@ -251,21 +338,14 @@
     @include media-md {
       padding-right: 0;
     }
-
-    &-sub-heading {
-      margin-bottom: 22px;
-      font-size: 24px;
-      letter-spacing: 0;
-      line-height: 34px;
-    }
-    .welcome-people-of {
-      color: $__purple;
-      font-size: 20px;
-      line-height: 28px;
-      margin-top: 36px;
-      margin-left: 38px;
+    &-heading {
+      margin-left: 25px;
+      @include media-md {
+        margin-left: 0;
+      }
     }
   }
+
   &-right {
     max-width: 600px;
     margin-top: 90px;
@@ -274,10 +354,14 @@
       width: 100%;
     }
   }
+
   &-list {
     font-size: 1.2em;
     line-height: 30px;
-    padding-left: 36px;
+    padding-left: 70px;
+    @include media-md {
+      padding-left: 56px;
+    }
 
     li {
       position: relative;
@@ -289,16 +373,17 @@
       &:before {
         position: absolute;
         content: '';
-        width: 5px;
-        height: 5px;
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
-        left: -36px;
+        left: -25px;
         flex-shrink: 0;
-        top: 12px;
+        top: 10%;
         background: $__black;
       }
     }
   }
+
   &-sign_up {
     width: 85%;
     margin: 0 auto;
@@ -309,18 +394,15 @@
     &-text {
       margin-top: 70px;
       margin-bottom: 50px;
-
-      p {
-        font-size: 24px;
-        line-height: 34px;
-        text-align: left;
-        margin-top: 22px;
-      }
+      font-size: 24px;
+      line-height: 34px;
     }
   }
 }
 
 .participating {
+  @include DDP-8404-feature;
+
   margin-top: 100px;
   padding: 40px 40px 60px;
   background: rgba(162, 244, 233, 0.5);
@@ -343,7 +425,7 @@
         width: unset;
         margin-bottom: 30px;
       }
-      padding: 32px 40px 60px;
+      padding: 17px 40px 50px 40px;
       background: $__white;
       border-radius: 8px;
       p {
@@ -351,12 +433,12 @@
       }
       &-img {
         width: auto;
-        height: 261px;
+        height: 156px;
         object-fit: contain;
-        margin: 0 0 20px;
+        margin: 30px 0;
       }
       &-title {
-        font-size: 1rem;
+        font-size: .85em;
         font-family: Spartan-Bold, serif;
         color: $__black;
       }
@@ -373,30 +455,10 @@
         margin-top: 25px;
         height: 40%;
 
-          > * {
-            font-size: 1.11rem;
-          }
           p {
             margin-bottom: 10px!important;
           }
       }
-    }
-  }
-
-  &-about {
-    margin-top: 60px;
-
-    p {
-      font-size: 1.33rem;
-      line-height: 34px;
-      margin-bottom: 28px;
-    }
-    .purple {
-      color: $__purple;
-    }
-    .underline {
-      text-decoration: underline;
-      cursor: pointer;
     }
   }
 }
