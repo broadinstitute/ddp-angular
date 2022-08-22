@@ -34,7 +34,7 @@ export class ParticipantColumn {
   public static ABSTRACTION_READY = new ParticipantColumn('Ready for Abstraction', 'abstractionReady', 'r');
   public static ASSIGNEE_MR = new ParticipantColumn('MR Assignee', 'assigneeIdMr', 'p');
   public static ASSIGNEE_TISSUE = new ParticipantColumn('Tissue Assignee', 'assigneeIdTissue', 'p');
-  public static EXIT_DATE = new ParticipantColumn('Date Withdrawn', 'exitDate', 'ex');
+  public static EXIT_DATE = new ParticipantColumn('Date Withdrawn', 'exitDate', 'p');
 
   // mr columns
   public static MR_TYPE = new ParticipantColumn('Type', 'type', 'm');
