@@ -7,6 +7,7 @@ import {ActivatedRoute, NavigationStart, Router} from '@angular/router';
 import {DomSanitizer, Title} from '@angular/platform-browser';
 import {Location} from '@angular/common';
 import {Observable} from 'rxjs';
+import {LocalStorageService} from '../services/localStorage.service';
 
 @Component({
   selector: 'app-navigation',
@@ -19,7 +20,8 @@ export class NavigationComponent implements OnInit {
 
 
   constructor(private router: Router, private auth: Auth, private location: Location, sanitizer: DomSanitizer,
-              private role: RoleService, private activatedRoute: ActivatedRoute, private title: Title) {
+              private role: RoleService, private activatedRoute: ActivatedRoute, private title: Title,
+              private localStorageService: LocalStorageService) {
   }
 
 
@@ -47,6 +49,7 @@ export class NavigationComponent implements OnInit {
     const [,study,page] = this.location.path().split('/');
     this.auth.setSelectedStudy = realmValue;
     study !== realmName && this.auth.selectRealm(realmName, page);
+    this.localStorageService.emitStudyChange(realmName);
   }
 
   isRealmChosen(realm): boolean {

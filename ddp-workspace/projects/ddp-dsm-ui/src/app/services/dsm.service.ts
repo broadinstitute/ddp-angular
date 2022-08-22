@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { throwError, Observable } from 'rxjs';
+import { throwError, Observable} from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
 import { Filter } from '../filter-column/filter-column.model';
 import {Sort} from '../sort/sort.model';
 import { ViewFilter } from '../filter-column/models/view-filter.model';
@@ -230,7 +229,7 @@ export class DSMService {
   }
 
   public downloadParticipantData(realm: string, jsonPatch: string, parent: string, columns: {}, json: ViewFilter,
-                                 filterQuery: string, sortBy?: Sort, fileFormat?: string, splitOptions?: boolean,
+                                 filterQuery: string, sortBy?: Sort, fileFormat?: string, humanReadable?: boolean,
                                  onlyMostRecent?: boolean):
     Observable<any> {
     const viewFilterCopy = this.getFilter(json);
@@ -246,10 +245,10 @@ export class DSMService {
     if (fileFormat) {
       map.push({name: 'fileFormat', value: fileFormat});
     }
-    if (typeof splitOptions === 'boolean') {
-      map.push({name: 'splitOptions', value: splitOptions});
+    if (typeof humanReadable === 'boolean') {
+      map.push({name: 'humanReadable', value: humanReadable});
     }
-    if (typeof splitOptions === 'boolean') {
+    if (typeof onlyMostRecent === 'boolean') {
       map.push({name: 'onlyMostRecent', value: onlyMostRecent});
     }
     if (filterQuery != null) {
@@ -629,14 +628,23 @@ export class DSMService {
     );
   }
 
-  public downloadParticipantFile( fileName: string, bucketName: string, blob: string, realm: string, mimeType: string ): Observable<any> {
+  public getSignedUrl( ddpParticipantId: string, {fileName, bucket, blobName, guid}, realm: string):
+    Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'downloadFile';
-    const map: { name: string; value: any }[] = [];
-    map.push( {name: DSMService.REALM, value: realm} );
-    map.push( {name: 'fileName', value: fileName} );
-    map.push( {name: 'bucket', value: bucketName} );
-    map.push( {name: 'blob', value: blob} );
-    return this.http.get( url, this.buildQueryBlobHeader( map )).pipe( catchError( this.handleError ) );
+    const map: { name: string; value: any }[] = [
+      {name: DSMService.REALM, value: realm} ,
+      {name: 'ddpParticipantId', value: ddpParticipantId} ,
+      {name: 'fileName', value: fileName} ,
+      {name: 'bucket', value: bucket},
+      {name: 'blobName', value: blobName},
+      {name: 'fileGuid', value: guid} ];
+    return this.http.get( url, this.buildQueryHeader( map )).pipe( catchError( this.handleError ) );
+  }
+
+  public downloadFromSignedUrl( url: string ): Observable<any> {
+    return this.http.get( url, this.buildQueryBlobHeaderForGCP() ).pipe(
+      catchError(this.handleError)
+    );
   }
 
   public uploadNdiFile(file: File): Observable<any> {
@@ -941,6 +949,37 @@ export class DSMService {
     );
   }
 
+  getMercuryEligibleSamples( ddpParticipantId: string, realm: any ): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'mercurySamples';
+    const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: realm} );
+    map.push( {name: 'ddpParticipantId', value: ddpParticipantId} );
+    return this.http.get( url, this.buildQueryHeader( map ) ).pipe(
+      catchError( this.handleError.bind( this ) )
+    );
+  }
+
+
+  getMercuryOrders( realm: string ): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'getMercuryOrders';
+    const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: realm} );
+    return this.http.get( url, this.buildQueryHeader( map ) ).pipe(
+      catchError( this.handleError.bind( this ) )
+    );
+  }
+
+  placeSeqOrder( orders: any[], realm: string, ddpParticipantId: string ): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'submitMercuryOrder';
+    const map: { name: string; value: any }[] = [];
+    map.push( {name: DSMService.REALM, value: realm} );
+    map.push( {name: 'ddpParticipantId', value: ddpParticipantId} );
+    map.push( {name: 'userId', value: this.role.userID()} );
+    return this.http.post( url, orders, this.buildQueryHeader( map ) ).pipe(
+      catchError( this.handleError.bind( this ) )
+    );
+  }
+
   public applyDestructionPolicyToAll(source: string, json: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'institutions';
     return this.http.patch(url, json, this.buildHeader()).pipe(
@@ -1031,6 +1070,13 @@ export class DSMService {
       params
     };
   }
+
+  private buildQueryBlobHeaderForGCP(): any {
+    return {
+      headers: this.buildJsonHeader(),
+      responseType: 'blob'
+    };
+  }
   private buildQueryCsvBlobHeader(map: any[]): any {
     let params: HttpParams = new HttpParams();
     for (const param of map) {
@@ -1067,6 +1113,15 @@ export class DSMService {
         Accept: 'application/json',
         Authorization: this.sessionService.getAuthBearerHeaderValue()
       });
+    }
+  }
+
+  private buildJsonHeader(): HttpHeaders {
+    if (this.checkCookieBeforeCall()) {
+      return new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      } );
     }
   }
 

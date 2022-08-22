@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { interval } from 'rxjs';
+import {interval, Observable} from 'rxjs';
 
 import { Auth } from '../services/auth.service';
 import { DSMService } from '../services/dsm.service';
@@ -15,6 +15,7 @@ import { Statics } from '../utils/statics';
 import { EasypostLabelRate } from '../utils/easypost-label-rate.model';
 import { LabelSetting } from '../label-settings/label-settings.model';
 import { Result } from '../utils/result.model';
+import {LocalStorageService} from '../services/localStorage.service';
 
 @Component({
   selector: 'app-shipping',
@@ -68,6 +69,8 @@ export class ShippingComponent implements OnInit {
   isSentButtonDisabled = true;
   allowedToSeeInformation = false;
 
+  selectedStudy$!: Observable<string>;
+
   public shortId: any = '';
   public shippingId: any = '';
   public externalOrderNumber: any = '';
@@ -94,7 +97,7 @@ export class ShippingComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private dsmService: DSMService, private auth: Auth,
                private role: RoleService, private compService: ComponentService, private _changeDetectionRef: ChangeDetectorRef,
-               private util: Utils, private language: Language) {
+               private util: Utils, private language: Language, private localStorageService: LocalStorageService) {
     if (!auth.authenticated()) {
       auth.logout();
     }
@@ -116,6 +119,8 @@ export class ShippingComponent implements OnInit {
     } else {
       this.additionalMessage = 'Please select a study';
     }
+
+    this.selectedStudy$ = this.localStorageService.studyChange$;
     window.scrollTo(0, 0);
   }
 
@@ -296,6 +301,15 @@ export class ShippingComponent implements OnInit {
         this.selectedSetting = setting;
         break;
       }
+    }
+  }
+
+  showPHIButton(study: string): boolean {
+    switch(study) {
+      case 'osteo2':
+        return true;
+      default:
+        return false;
     }
   }
 

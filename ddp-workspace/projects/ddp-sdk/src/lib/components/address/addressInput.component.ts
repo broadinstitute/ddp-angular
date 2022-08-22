@@ -155,6 +155,17 @@ import { ConfigurationService } from '../../services/configuration.service';
             flex-direction: column;
             padding: 0;
             margin:0;
+        }
+        @media only screen and (max-width: 1024px) {
+            ::ng-deep .ddp-address-input .mat-form-field .mat-form-field-label-wrapper label{
+            line-height: 17px;
+            }
+            ::ng-deep .ddp-address-input .mat-form-field .mat-form-field-infix input{
+            line-height: 17px;
+            }
+            ::ng-deep .ddp-address-input .mat-form-field .mat-select span{
+            line-height: 17px;
+            }
         }`],
     changeDetection: ChangeDetectionStrategy.OnPush
 })

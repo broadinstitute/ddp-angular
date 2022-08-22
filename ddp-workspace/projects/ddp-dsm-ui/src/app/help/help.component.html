@@ -18,10 +18,10 @@ One row will be generated per participant.
 
   </div>
 
-<h4>Split multiselect choices into separate columns</h4>
+<h4>Human readable / Analysis friendly</h4>
 <ul>
   <li>
-    <b>Yes</b> Each multiselect question will have a column for each answer option.  For example, the question "Which symptoms have you had?"
+    <b>Analysis friendly</b> Each picklist answers will be displayed as a stable id, rather than the displayed text.  For multiselects, each answer option will appear in a separate column.  For example, the question "Which symptoms have you had?"
     with options "fever", "nausea", and "persisent cough", will be exported into 3 columns.
     <table class="table table-striped">
       <thead>
@@ -47,7 +47,7 @@ One row will be generated per participant.
 
   </li>
   <li>
-    <b>No</b> will store multi-select questions as a single column, with a comma-delimited string of the answers given. For example, the question "Which symptoms have you had?"
+    <b>Human readable</b> will use display text where possible, and will show multi-select questions as a single column, with a comma-delimited string of the answers given. For example, the question "Which symptoms have you had?"
     with options "fever", "nausea", and "persisent cough", will be exported into 1 column.
     <table class="table table-striped">
       <thead>

@@ -273,6 +273,9 @@
                 (click)="getSelectedList(shippingPage)" [disabled]="isPrintButtonDisabled">Print Labels
         </button>
 
+        <button mat-raised-button color="primary" *ngIf="showPHIButton(selectedStudy$ | async)" [disabled]="isPrintButtonDisabled">PHI Label
+        </button>
+
         <button mat-raised-button color="primary"
                 *ngIf="kitType.manualSentTrack"
                 (click)="setKitSent()" [disabled]="isSentButtonDisabled">Set Kit Sent

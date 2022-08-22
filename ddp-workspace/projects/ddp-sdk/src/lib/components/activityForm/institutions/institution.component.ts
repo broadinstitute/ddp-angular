@@ -208,6 +208,7 @@ export class InstitutionComponent implements OnInit, OnChanges, OnDestroy {
             this.institutionName = institution.name;
             this.city = institution.city;
             this.state = institution.state;
+            this.country = institution.country;
             this.saveValue();
         }
     }

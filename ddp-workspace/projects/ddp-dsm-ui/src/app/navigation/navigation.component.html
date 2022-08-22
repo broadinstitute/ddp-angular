@@ -51,6 +51,10 @@
           <!-- Setup label dimensions, only if you have the right to handle samples -->
           <hr *ngIf="hasRole().allowedToHandleSamples()">
           <li *ngIf="hasRole().allowedToHandleSamples()"><a [routerLink]="['labelSettings']"> Label Settings </a></li>
+          <hr *ngIf="hasRole().allowedToHandleSamples()">
+          <li *ngIf="hasRole().allowedToHandleSamples() || hasRole().allowedToDoOrderSequencing()">
+            <a [routerLink]="['clinicalOrders']">Clinical Orders</a>
+          </li>
         </ul>
       </li>
       <li class="dropdown" *ngIf="(getAuth().authenticated() && (hasRole().allowedToViewMedicalRecords() || hasRole().allowedParticipantListView()))">
