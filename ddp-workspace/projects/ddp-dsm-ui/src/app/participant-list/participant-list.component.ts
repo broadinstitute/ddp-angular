@@ -777,6 +777,7 @@ export class ParticipantListComponent implements OnInit {
         defaultFilter = this.quickFilters.find(filter => filter.filterName === this.role.getUserSetting().defaultParticipantFilter);
       }
       if (defaultFilter != null) {
+        defaultFilter.selected=true;
         this.selectFilter(defaultFilter);
       } else if (this.role.getUserSetting().defaultParticipantFilter !== ''
         && this.role.getUserSetting().defaultParticipantFilter != null
