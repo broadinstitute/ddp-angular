@@ -1057,7 +1057,7 @@ export class ParticipantListComponent implements OnInit {
     this.start = new Date().getTime();
     this.filterQuery = null;
     this.resetSelectedPatients();
-    this.clearManualFilters();
+    this.clearAllFilters();
     this.getData();
     this.setDefaultColumns();
   }
@@ -1136,6 +1136,11 @@ export class ParticipantListComponent implements OnInit {
     return date.toLocaleString('en-US', options);
   }
 
+  public clearAllFilters(): void {
+    this.clearManualFilters();
+    this.deselectQuickFilters();
+    this.deselectSavedFilters();
+  }
   public clearManualFilters(): void {
     this.dataSources.forEach((value: string, key: string) => {
       if (this.selectedColumns[ key ] != null) {
@@ -1835,6 +1840,10 @@ export class ParticipantListComponent implements OnInit {
 
   deselectQuickFilters(): void {
     this.deselectFilters(this.quickFilters);
+  }
+
+  deselectSavedFilters(): void {
+    this.deselectFilters(this.savedFilters);
   }
 
   deselectFilters(filterArray: ViewFilter[]): void {
