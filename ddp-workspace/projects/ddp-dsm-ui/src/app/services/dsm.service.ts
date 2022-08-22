@@ -55,9 +55,23 @@ export class DSMService {
     } else {
       url += 'finalScan';
     }
-    const map: { name: string; value: any }[] = [];
-    map.push( {name: DSMService.REALM, value: localStorage.getItem(ComponentService.MENU_SELECTED_REALM)} );
-    map.push({name: 'userId', value: this.role.userID()});
+    return this.baseKitScan(url, json);
+  }
+
+  public finalScan(json: string): Observable<any> {
+    let url = this.baseUrl + DSMService.UI + 'finalScan';
+    return this.baseKitScan(url, json);
+  }
+
+  public trackingScan(json: string): Observable<any> {
+    let url = this.baseUrl + DSMService.UI + 'trackingScan';
+    return this.baseKitScan(url, json);
+  }
+
+  private baseKitScan(url: string, json: string) {
+    const map: { name: string; value: any; }[] = [];
+    map.push({ name: DSMService.REALM, value: localStorage.getItem(ComponentService.MENU_SELECTED_REALM) });
+    map.push({ name: 'userId', value: this.role.userID() });
     return this.http.post(url, json, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );
