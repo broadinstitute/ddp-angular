@@ -52,6 +52,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   @Input() activeTab: string;
   @Input() activityDefinitions: Array<ActivityDefinition>;
   @Input() settings: {};
+  @Input() checkBoxGroups: {};
   @Input() mrCoverPdfSettings: Value[];
   @Input() oncHistoryId: string;
   @Input() mrId: string;
