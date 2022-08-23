@@ -27,7 +27,7 @@ export class FeatureFlagsToggleComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const controls = Object.entries(this.featureFlags)
       // sort alphabetically
-      .sort(([flagName1, flagValue1], [flagName2, flagValue2]) => flagName2.localeCompare(flagName1))
+      .sort(([flagName1, flagValue1], [flagName2, flagValue2]) => flagName1.localeCompare(flagName2))
       .reduce((acc, [flagName, flagValue]) => {
         acc[flagName] = new FormControl(flagValue);
         return acc;
