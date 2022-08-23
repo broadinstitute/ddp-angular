@@ -50,7 +50,7 @@ export class FormDataComponent {
   }
 
   clearRadioSelection(): void {
-    this.valueChanged("");
+    this.valueChanged('');
   }
 
   valueChanged(value: any): void {
