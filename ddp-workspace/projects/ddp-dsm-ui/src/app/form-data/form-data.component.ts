@@ -49,6 +49,10 @@ export class FormDataComponent {
     }
   }
 
+  clearRadioSelection(): void {
+    this.valueChanged("");
+  }
+
   valueChanged(value: any): void {
     this.patchFinished = false;
     let v;
