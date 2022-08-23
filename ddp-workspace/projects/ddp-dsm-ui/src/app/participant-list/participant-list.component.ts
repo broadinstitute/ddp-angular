@@ -92,9 +92,9 @@ export class ParticipantListComponent implements OnInit {
   filterQuery: string = null;
   activityDefinitions = new Map();
 
-  exportFileFormat: string = 'xlsx';
-  exportHumanReadable: boolean = false;
-  exportOnlyMostRecent: boolean = false;
+  exportFileFormat = 'xlsx';
+  exportHumanReadable = false;
+  exportOnlyMostRecent = false;
 
   selectedColumns = {};
   prevSelectedColumns = {};
