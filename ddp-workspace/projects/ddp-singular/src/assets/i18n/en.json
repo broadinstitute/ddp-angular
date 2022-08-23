@@ -566,7 +566,7 @@
       "Disagree": "I am not ready to agree"
     }
   },
-    "ParticipantStatus": {
+  "ParticipantStatus": {
         "status": {
             "inComplete":"Enrollment in Progress",
             "complete": "Fully Enrolled"
@@ -647,5 +647,25 @@
         }
       ]
     }
+  },
+  "FamilyEnrollmentMessage" : {
+    "Title": "Family Enrollment Message",
+    "CopyBtn": "Copy this message",
+    "CloseBtnAriaLabel": "Close dialog button",
+    "Content": [
+      {
+          "text": "I just signed up to participate in a research study called Project Singular. I wanted to share it with you because you are also eligible to join.\nThe goal is to learn what genes cause single ventricle heart defects in order to develop better treatments and cures.\n"
+      },
+      {
+        "text": "You can join by:\n"
+      },
+      {
+        "text": "1) Going to www.projectsingular.org and creating an account;\n2) Answering a short survey; and\n3) Providing a spit sample.\n",
+        "template": "1) Going to <a target='_blank' href='https://www.projectsingular.org/'>www.projectsingular.org</a> and creating an account;<br> 2) Answering a short survey; and<br> 3) Providing a spit sample."
+      },
+      {
+        "text": "It’s easy and free!"
+      }
+    ]
   }
 }
