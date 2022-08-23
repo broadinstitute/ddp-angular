@@ -1,9 +1,11 @@
-import { Component, ElementRef, HostListener } from '@angular/core';
-import { AnalyticsEventsService } from 'ddp-sdk';
+import { Component, ElementRef, HostListener, Inject } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
+import { AnalyticsEventsService, ConfigurationService } from 'ddp-sdk';
 import { GTagEvent } from './constants/gtag-event';
 import { Route } from './constants/route';
 import { IGNORE_ANALYTICS_CLASS } from './constants/analytics';
+import { FeatureFlagsToggleComponent } from './components/feature-flags-toggle/feature-flags-toggle.component';
 
 
 @Component({
@@ -13,11 +15,16 @@ import { IGNORE_ANALYTICS_CLASS } from './constants/analytics';
 })
 export class AppComponent {
   title = 'ddp-singular';
+  isProdMode: boolean;
 
   constructor(
     private elRef: ElementRef,
-    private analytics: AnalyticsEventsService
-  ) {}
+    private analytics: AnalyticsEventsService,
+    private dialog: MatDialog,
+    @Inject('ddp.config') private config: ConfigurationService
+  ) {
+    this.isProdMode = this.config.logLevel.toString() === '2';
+  }
 
   onActivate(): void {
     this.elRef.nativeElement.scrollTo(0,0);
@@ -53,6 +60,16 @@ export class AppComponent {
     }
   }
 
+  // Opens a dialog by 'Ctrl+Alt+Home' to setup/toggle feature flags
+  // it is used for feature flags testing only.
+  // should not be available on production
+  @HostListener('window:keydown.control.alt.home', ['$event'])
+  handleKeyDown(event: KeyboardEvent): void {
+    if (!this.isProdMode) {
+      this.openFeatureFlagsSetupDialog();
+    }
+  }
+
   private findNearestAnchorElement(target: EventTarget): HTMLAnchorElement {
     let link = target as HTMLAnchorElement;
 
@@ -61,5 +78,15 @@ export class AppComponent {
     }
 
     return link;
+  }
+
+  private openFeatureFlagsSetupDialog(): void {
+    this.dialog.closeAll();
+
+    this.dialog.open(FeatureFlagsToggleComponent, {
+      width: '95%',
+      maxWidth: 'max-content',
+      autoFocus: false,
+    });
   }
 }
