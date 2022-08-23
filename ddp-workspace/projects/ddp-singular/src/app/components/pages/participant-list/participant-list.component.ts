@@ -3,7 +3,7 @@ import { EMPTY, forkJoin, Observable, of } from 'rxjs';
 import { Route } from '../../../constants/route';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { catchError, filter, map, mergeMap, take, tap } from 'rxjs/operators';
 import { CurrentActivityService } from '../../../services/current-activity.service';
 import { ParticipantDeletionDialogComponent } from '../../participant-deletion-dialog/participant-deletion-dialog.component';
@@ -22,6 +22,9 @@ import {
 } from 'ddp-sdk';
 import { ActivityCode } from '../../../constants/activity-code';
 import {COMPLETE, IN_PROGRESS} from '../../../../../../ddp-atcp/src/app/components/workflow-progress/workflow-progress';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { FamilyEnrollmentMessageComponent } from '../../family-enrollment-message/family-enrollment-message.component';
+import { featureFlags } from '../../../config/feature-flags';
 
 interface Participant {
   firstName: string;
@@ -46,6 +49,7 @@ export class ParticipantsListComponent implements OnInit {
   errorMessage: string | null = null;
   isPageBusy = false;
   @Input() allowParticipantRemoval = false;
+  readonly featureFlag_DDP_8506 = featureFlags.DDP_8560_Dashboard_page_update;
 
   constructor(
     private router: Router,
@@ -66,6 +70,7 @@ export class ParticipantsListComponent implements OnInit {
   ngOnInit(): void {
     this.clearParticipant();
     this.loadData();
+    console.log("#flag",this.featureFlag_DDP_8506);
   }
 
   getParticipantName({ firstName, lastName, isOperator }: Participant): string {
@@ -326,6 +331,7 @@ export class ParticipantsListComponent implements OnInit {
       )
       .subscribe({
         next: participants => {
+          console.log('#participantsSubscribe',participants);
           this.participants = participants;
 
           if (this.participants.length === 1) {
@@ -370,6 +376,7 @@ export class ParticipantsListComponent implements OnInit {
       governedParticipants: governedParticipants$,
     }).pipe(
       map(({ operator, governedParticipants }) => {
+        console.log('#participantsBeforeSubs',governedParticipants);
         const participants: Participant[] = governedParticipants.map(p => ({
           firstName: p.userProfile.firstName,
           lastName: p.userProfile.lastName,
@@ -403,7 +410,7 @@ export class ParticipantsListComponent implements OnInit {
 
   private hasOnlyAddParticipantActivity(activities: ActivityInstance[]): boolean {
     return (
-      activities.length === 1 &&
+      !!activities && activities.length === 1 &&
       [
         ActivityCode.AddParticipantSelf,
         ActivityCode.AddParticipantParental,
@@ -413,13 +420,23 @@ export class ParticipantsListComponent implements OnInit {
   }
 
   private filterOutAddParticipant(activities: ActivityInstance[]): ActivityInstance[] {
-    return activities.filter(
+    return !!activities ? activities.filter(
       activity =>
         ![
           ActivityCode.AddParticipantSelf,
           ActivityCode.AddParticipantParental,
           ActivityCode.AddParticipantDependent,
         ].includes(activity.activityCode as ActivityCode),
-    );
+    ): [];
   }
+
+  public openDisclaimerDialog(): void {
+    this.dialog.open(FamilyEnrollmentMessageComponent, {
+        width: '740px',
+        position: { top: '30px' },
+        data: {},
+        autoFocus: false,
+        scrollStrategy: new NoopScrollStrategy()
+    });
+}
 }

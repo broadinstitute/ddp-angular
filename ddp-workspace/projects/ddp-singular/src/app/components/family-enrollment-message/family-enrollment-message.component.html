@@ -1,0 +1,21 @@
+<h3 mat-dialog-title translate>FamilyEnrollmentMessage.Title</h3>
+
+<button mat-icon-button mat-dialog-close
+  class="close-btn"
+  [attr.aria-label]="'FamilyEnrollmentMessage.CloseBtnAriaLabel' | translate">
+  <mat-icon>close</mat-icon>
+</button>
+
+<div class="content-wrapper">
+  <button class="copy-btn" (click)="copyContent()">
+    {{"FamilyEnrollmentMessage.CopyBtn" | translate}}
+    <mat-icon *ngIf="!copied">content_copy</mat-icon>
+    <mat-icon *ngIf="copied" class="copied">check</mat-icon>
+  </button>
+
+  <div class="content">
+    <ng-container *ngFor="let block of CONTENT | translate">
+      <p [innerHTML]="block.template || block.text"></p>
+    </ng-container>
+  </div>
+</div>

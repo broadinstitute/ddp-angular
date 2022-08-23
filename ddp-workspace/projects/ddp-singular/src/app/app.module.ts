@@ -41,6 +41,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ActivitySectionProgressBarComponent } from './components/activity-section-progress-bar/activity-section-progress-bar.component';
 import { ActivitySectionPageProgressComponent } from './components/activity-section-page-progress/activity-section-page-progress.component';
 import { VideoIntroComponent } from './components/video-intro/video-intro.component';
+import { FamilyEnrollmentMessageComponent } from './components/family-enrollment-message/family-enrollment-message.component';
 
 
 declare const gtag: (...args: any[]) => void;
@@ -76,7 +77,8 @@ declare const gtag: (...args: any[]) => void;
         SuccessMessageDialogComponent,
         ActivitySectionProgressBarComponent,
         ActivitySectionPageProgressComponent,
-        VideoIntroComponent
+        VideoIntroComponent,
+        FamilyEnrollmentMessageComponent
     ],
     imports: [
         DdpModule,

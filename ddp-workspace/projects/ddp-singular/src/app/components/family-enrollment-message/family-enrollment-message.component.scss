@@ -1,0 +1,60 @@
+@import '../../../styles/colors';
+@import '../../../styles/breakpoints';
+
+:host {
+  position: relative;
+}
+
+.content-wrapper {
+  padding: 24px 30px;
+  background-color: #f9f9f9;
+  color: #2d333e;
+
+  @include media-xs {
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 26px;
+  }
+}
+
+.mat-dialog-title {
+  font-weight: 700;
+  color: #2d333e;
+  margin-bottom: 20px;
+}
+
+.close-btn {
+  position: absolute;
+  top: -18px;
+  right: -18px;
+}
+
+.copy-btn {
+  background: none;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  padding: 8px;
+  display: flex;
+  align-items: flex-start;
+  font-family: "Spartan-Bold", sans-serif;
+  font-size: 16px;
+  color: $__purple;
+
+  &:hover {
+    border-color: $__purple;
+  }
+
+  mat-icon {
+    font-size: 26px;
+    margin-left: 10px;
+
+    &.copied {
+      color: green;
+    }
+  }
+}
