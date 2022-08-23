@@ -92,9 +92,9 @@ export class ParticipantListComponent implements OnInit {
   filterQuery: string = null;
   activityDefinitions = new Map();
 
-  exportFileFormat = 'tsv';
-  exportSplitOptions = true;
-  exportOnlyMostRecent = false;
+  exportFileFormat: string = 'xlsx';
+  exportHumanReadable: boolean = false;
+  exportOnlyMostRecent: boolean = false;
 
   selectedColumns = {};
   prevSelectedColumns = {};
@@ -119,6 +119,7 @@ export class ParticipantListComponent implements OnInit {
   preferredLanguages: PreferredLanguage[] = [];
   savedSelectedColumns = {};
   isAddFamilyMember = false;
+  hasSequencingOrders = false;
   showGroupFields = false;
   hideSamplesTab = false;
   showContactInformation = false;
@@ -296,7 +297,8 @@ export class ParticipantListComponent implements OnInit {
           ['t', 'Tissue'],
           ['k', 'Sample'],
           ['a', 'Abstraction'],
-          ['c', 'Cohort Tags']
+          ['c', 'Cohort Tags'],
+          ['cl', 'Clinical Orders']
         ]);
         this.sourceColumns = {};
         this.selectedColumns = {};
@@ -668,6 +670,7 @@ export class ParticipantListComponent implements OnInit {
         this.updateStudySpecificStatuses(jsonData.studySpecificStatuses);
         this.isAddFamilyMember = jsonData.addFamilyMember === true;
         this.showGroupFields = jsonData.showGroupFields === true;
+        this.hasSequencingOrders = jsonData.hasSequencingOrders === true;
 
         if (jsonData.hideSamplesTab === true) {
           this.hideSamplesTab = true;
@@ -734,6 +737,8 @@ export class ParticipantListComponent implements OnInit {
         this.sourceColumns[ 'm' ].push(filter);
       }  else if (filter.participantColumn.tableAlias === 'sm') {
         this.sourceColumns[ 't' ].push( filter );
+      } else if (filter.participantColumn.tableAlias === 'clinical') {
+        this.sourceColumns[ 'clinical' ].push( filter );
       } else if (this.sourceColumns[ filter.participantColumn.tableAlias ] != null) {
         // TODO - can be changed to add all after all DDPs are migrated
         if (this.hasESData) {
@@ -1673,7 +1678,7 @@ export class ParticipantListComponent implements OnInit {
   executeDownload(): void {
     this.modal.hide();
 
-    const dialogRef = this.openDialog('Exporting participants list...');
+    const dialogRef = this.openDialog('Exporting participants list. This may take several minutes...');
     const columns = [];
     for(const col in this.selectedColumns) {
       for (const key in this.selectedColumns[col]) {
@@ -1689,7 +1694,7 @@ export class ParticipantListComponent implements OnInit {
       null,
       this.sortBy,
       this.exportFileFormat,
-      this.exportSplitOptions,
+      this.exportHumanReadable,
       this.exportOnlyMostRecent
     ).subscribe({
       next: response => {
