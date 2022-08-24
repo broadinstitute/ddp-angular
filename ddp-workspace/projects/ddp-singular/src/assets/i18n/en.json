@@ -63,7 +63,12 @@
     "NoParticipants": "Get started by first enrolling yourself or your child/dependent. If you have multiple <br/> children or dependents, you will be able to enroll them later.",
     "HelpTip": "Please select Participant by clicking his/her name in the list below.",
     "DeleteError": "This participant has already consented and can’t be deleted here. If you wish to withdraw consent, please contact Project Singular study personnel directly.",
-    "ShareProject": "Know other eligible adults (single ventricle patients or immediate family members), including your child's other biological parent, who are interested in joining Project Singular? Direct them to <a href=\"http://www.projectsingular.org\">Project Singular</a> so they can create their own account to enroll."
+    "ShareProject": "Know other eligible adults (single ventricle patients or immediate family members), including your child's other biological parent, who are interested in joining Project Singular? Direct them to <a href=\"http://www.projectsingular.org\">Project Singular</a> so they can create their own account to enroll.",
+    "FamilyEnrollmentDescription": "Data from those living with these heart defects is most needed for research, but we will be able to learn more and learn it faster if we can also study their biological parents and siblings.  <span class='highlight'>Encourage other eligible adult family members to join by sharing this message via text or email.</span>",
+    "FamilyEnrollmentMessage": "View Family Enrollment Message",
+    "FamilyEnrollmentTitle": "Family Enrollment Message",
+    "FamilyEnrollmentAlt": "enrollment image",
+    "FamilyEnrollmentNextButton": "next button"
   },
   "ParticipantDeletionDialog": {
     "Text": "Are you sure you want to delete this participant? All data entered for this participant will be cleared."
