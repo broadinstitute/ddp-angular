@@ -71,6 +71,8 @@ export class ShippingComponent implements OnInit {
 
   selectedStudy$!: Observable<string>;
 
+  public isPHI: boolean;
+
   public shortId: any = '';
   public shippingId: any = '';
   public externalOrderNumber: any = '';
@@ -313,19 +315,28 @@ export class ShippingComponent implements OnInit {
     }
   }
 
-  getSelectedList(target: string): void {
+  onPrintLabelsClick(): void {
+    this.getSelectedList();
+  }
+
+  onPrintPHIClick(): void {
+    this.isPHI = true;
+    this.getSelectedList();
+  }
+
+  getSelectedList(): void {
     this.selectedKitRequests = KitRequest.removeUnselectedKitRequests(this.kitRequests);
     this._changeDetectionRef.detectChanges();
-    this.printLabels(target);
+    this.printLabels(this.shippingPage);
+  }
+
+  private changedHtml(elementID: string): string {
+    return document.getElementById(this.isPHI ? 'labelNameDOBDiv' : elementID).innerHTML;
   }
 
   public printLabels(target: string): any {
-    let printContents;
-    if ('error' === target) {
-      printContents = document.getElementById('errorLabelDiv').innerHTML;
-    } else {
-      printContents = document.getElementById('labelDiv').innerHTML;
-    }
+    const printContents = this.changedHtml('error' === target ? 'errorLabelDiv' : 'labelDiv');
+
     if (window) {
       if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
         const popup = window.open('', '_blank',
@@ -341,6 +352,13 @@ export class ShippingComponent implements OnInit {
             <link rel="stylesheet" href="style.css" media="screen,print">
             <style type="text/css">
               body { margin:0; }
+              @page { size: auto;  margin: 0mm; }
+              @media print {
+                .pagebreak {
+                    clear: both;
+                    page-break-after: always;
+                 }
+              }
             </style>
           </head>
           <body onload="window.print()">
@@ -364,10 +382,9 @@ export class ShippingComponent implements OnInit {
 
   private closedWindow(): void {
     this.selectedKitRequests = [];
-    if (!this.kitType.manualSentTrack) {
-      this.router.navigate([ Statics.SCAN_URL ]);
-    }
+    !this.kitType.manualSentTrack && !this.isPHI && this.router.navigate([Statics.SCAN_URL], {relativeTo: this.route});
     this.allSelected = false;
+    this.isPHI = false;
     this.setAllCheckboxes(false);
   }
 
