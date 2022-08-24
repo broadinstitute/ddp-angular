@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { SDKConfigProvider } from './config/sdk.provider';
 import { BrowserModule } from '@angular/platform-browser';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+
 import { translateProvider } from './config/translate.provider';
 import { toolkitConfigProvider } from './config/toolkit.provider';
 import { FaqComponent } from './components/pages/faq/faq.component';
@@ -41,6 +43,8 @@ import { LoginComponent } from './components/login/login.component';
 import { ActivitySectionProgressBarComponent } from './components/activity-section-progress-bar/activity-section-progress-bar.component';
 import { ActivitySectionPageProgressComponent } from './components/activity-section-page-progress/activity-section-page-progress.component';
 import { VideoIntroComponent } from './components/video-intro/video-intro.component';
+import { FamilyEnrollmentMessageComponent } from './components/family-enrollment-message/family-enrollment-message.component';
+
 
 
 declare const gtag: (...args: any[]) => void;
@@ -76,7 +80,8 @@ declare const gtag: (...args: any[]) => void;
         SuccessMessageDialogComponent,
         ActivitySectionProgressBarComponent,
         ActivitySectionPageProgressComponent,
-        VideoIntroComponent
+        VideoIntroComponent,
+        FamilyEnrollmentMessageComponent
     ],
     imports: [
         DdpModule,
@@ -88,6 +93,7 @@ declare const gtag: (...args: any[]) => void;
         AppRoutingModule,
         HttpClientModule,
         ReactiveFormsModule,
+        ClipboardModule
     ],
     providers: [SDKConfigProvider, toolkitConfigProvider, translateProvider],
     bootstrap: [AppComponent],

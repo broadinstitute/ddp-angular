@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { AnalyticsEventsService } from 'ddp-sdk';
+import { MatDialog } from '@angular/material/dialog';
 
+import { AnalyticsEventsService } from 'ddp-sdk';
 import { Route } from '../../../constants/route';
 import { GTagEvent } from '../../../constants/gtag-event';
 import { IGNORE_ANALYTICS_CLASS } from '../../../constants/analytics';
+import { FamilyEnrollmentMessageComponent } from '../../family-enrollment-message/family-enrollment-message.component';
+import { featureFlags } from '../../../config/feature-flags';
 
 @Component({
   selector: 'app-home',
@@ -23,13 +26,26 @@ export class HomeComponent {
   readonly CONSENT_PDF_NAME = 'Preview Consent Form';
   readonly PRESCREEN_BUTTON_LABEL = 'Sign me up!';
 
+  readonly featureFlag_DDP_8404 = featureFlags.DDP_8404_Home_page_update;
 
-  constructor(private analytics: AnalyticsEventsService){}
+  constructor(
+    private analytics: AnalyticsEventsService,
+    private dialog: MatDialog
+  ) {
+  }
 
   public clickPreScreening(): void {
     this.analytics.emitCustomGtagEvent(GTagEvent.SIGN_UP_CLICK, this.PRESCREEN_BUTTON_LABEL);
   }
   public clickDownload(clickText: string, clickUrl: string): void {
     this.analytics.emitCustomGtagEvent(GTagEvent.PDF_DOWNLOAD, clickText, clickUrl);
+  }
+
+  openDialog(): void {
+    this.dialog.open(FamilyEnrollmentMessageComponent, {
+      width: '95%',
+      maxWidth: '640px',
+      autoFocus: false,
+    });
   }
 }
