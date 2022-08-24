@@ -70,7 +70,6 @@ export class ParticipantsListComponent implements OnInit {
   ngOnInit(): void {
     this.clearParticipant();
     this.loadData();
-    console.log("#flag",this.featureFlag_DDP_8506);
   }
 
   getParticipantName({ firstName, lastName, isOperator }: Participant): string {
@@ -331,7 +330,6 @@ export class ParticipantsListComponent implements OnInit {
       )
       .subscribe({
         next: participants => {
-          console.log('#participantsSubscribe',participants);
           this.participants = participants;
 
           if (this.participants.length === 1) {
@@ -410,7 +408,7 @@ export class ParticipantsListComponent implements OnInit {
 
   private hasOnlyAddParticipantActivity(activities: ActivityInstance[]): boolean {
     return (
-      !!activities && activities.length === 1 &&
+      activities?.length === 1 &&
       [
         ActivityCode.AddParticipantSelf,
         ActivityCode.AddParticipantParental,
@@ -420,21 +418,20 @@ export class ParticipantsListComponent implements OnInit {
   }
 
   private filterOutAddParticipant(activities: ActivityInstance[]): ActivityInstance[] {
-    return !!activities ? activities.filter(
+    return (activities || []).filter(
       activity =>
         ![
           ActivityCode.AddParticipantSelf,
           ActivityCode.AddParticipantParental,
           ActivityCode.AddParticipantDependent,
         ].includes(activity.activityCode as ActivityCode),
-    ): [];
+    );
   }
 
   public openDisclaimerDialog(): void {
     this.dialog.open(FamilyEnrollmentMessageComponent, {
-        width: '740px',
-        position: { top: '30px' },
-        data: {},
+        width: '95%',
+        maxWidth: '640px',
         autoFocus: false,
         scrollStrategy: new NoopScrollStrategy()
     });
