@@ -55,6 +55,7 @@ export class Filter {
   public static TEXTAREA_TYPE = 'TEXTAREA';
   public static ACTIVITY_STAFF_TYPE = 'ACTIVITY_STAFF';
   public static AGREEMENT = 'AGREEMENT';
+  public static ADDITIONAL_VALUES_JSON = 'additionalValuesJson';
 
   // ES data
   public static REALM = new Filter(ParticipantColumn.REALM, Filter.TEXT_TYPE);
@@ -431,7 +432,8 @@ export class Filter {
         // eslint-disable-next-line @typescript-eslint/no-shadow
         const f = allColumns[filter.participantColumn.tableAlias].find(item =>
           item.participantColumn.tableAlias === filter.participantColumn.tableAlias
-          && item.participantColumn.name === filter.participantColumn.name
+          && (item.participantColumn.name === filter.participantColumn.name 
+            || this.isDynamicFieldFilter(item, filter))
         );
         if (f != null) {
           filter.type = f.type;
@@ -459,6 +461,8 @@ export class Filter {
             newFilter.filter1 = new NameValue(f.participantColumn.object, filter.filter1.value);
             newFilter.parentName = f.participantColumn.tableAlias;
             newFilter.filter2 = f.filter2;
+          } else if (filter.type === Filter.ADDITIONAL_VALUE_TYPE) {
+            newFilter.filter1.name = this.ADDITIONAL_VALUES_JSON;
           }
           filters.push(newFilter);
         }
@@ -493,6 +497,10 @@ export class Filter {
       }
     }
     return filters;
+  }
+
+  private static isDynamicFieldFilter(item: any, filter: Filter): boolean {
+    return item.participantColumn.name === filter.filter1?.name ||  item.participantColumn.name === filter.filter2?.name;
   }
 
   private static createFilterFromJsonFilter(filter: any, jsonFilter: any): Filter {
