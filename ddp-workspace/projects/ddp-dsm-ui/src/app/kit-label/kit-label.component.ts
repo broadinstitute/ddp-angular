@@ -1,6 +1,6 @@
 import {Component, Input, AfterViewChecked} from '@angular/core';
 import { LabelSetting } from '../label-settings/label-settings.model';
-import {KitRequest} from "../shipping/shipping.model";
+import {KitRequest} from '../shipping/shipping.model';
 
 declare var JsBarcode: any;
 

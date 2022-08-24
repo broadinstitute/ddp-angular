@@ -315,11 +315,11 @@ export class ShippingComponent implements OnInit {
     }
   }
 
-  onPrintLabelsClick() {
+  onPrintLabelsClick(): void {
     this.getSelectedList();
   }
 
-  onPrintPHIClick() {
+  onPrintPHIClick(): void {
     this.isPHI = true;
     this.getSelectedList();
   }
@@ -335,7 +335,7 @@ export class ShippingComponent implements OnInit {
   }
 
   public printLabels(target: string): any {
-    let printContents = this.changedHtml('error' === target ? 'errorLabelDiv' : 'labelDiv');
+    const printContents = this.changedHtml('error' === target ? 'errorLabelDiv' : 'labelDiv');
 
     if (window) {
       if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
