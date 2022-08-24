@@ -34,7 +34,7 @@ export class ParticipantColumn {
   public static ABSTRACTION_READY = new ParticipantColumn('Ready for Abstraction', 'abstractionReady', 'r');
   public static ASSIGNEE_MR = new ParticipantColumn('MR Assignee', 'assigneeIdMr', 'p');
   public static ASSIGNEE_TISSUE = new ParticipantColumn('Tissue Assignee', 'assigneeIdTissue', 'p');
-  public static EXIT_DATE = new ParticipantColumn('Date Withdrawn', 'exitDate', 'ex');
+  public static EXIT_DATE = new ParticipantColumn('Date Withdrawn', 'exitDate', 'p');
 
   // mr columns
   public static MR_TYPE = new ParticipantColumn('Type', 'type', 'm');
@@ -135,9 +135,17 @@ export class ParticipantColumn {
   public static RESULT_TEST = new ParticipantColumn('Test Result', 'result', 'k', 'testResult');
   public static CORRECTED_TEST = new ParticipantColumn('Test Corrected', 'isCorrected', 'k', 'testResult');
   public static TIME_TEST = new ParticipantColumn('Test Time Completed', 'timeCompleted', 'k', 'testResult');
-
+  public static COLLECTION_DATE = new ParticipantColumn('Collection Date', 'collectionDate', 'k');
+  public static SEQUENCING_RESTRICTION = new ParticipantColumn('Sequencing Restriction', 'sequencingRestriction', 'k');
   //Cohort tags
   public static COHORT_TAG_NAME = new ParticipantColumn('Cohort Tag Name', 'cohortTagName', 'c', 'dsm');
+
+  //Clinical Orders
+  public static CLINICAL_ORDER_STATUS = new ParticipantColumn('Clinical Order Status', 'orderStatus', 'cl', 'dsm');
+  public static CLINICAL_ORDER_ID = new ParticipantColumn('Clinical Order Id', 'orderId', 'cl', 'dsm');
+  public static CLINICAL_ORDER_PDO = new ParticipantColumn('Clinical Order PDO #', 'mercuryPdoId', 'cl', 'dsm');
+  public static CLINICAL_ORDER_DATE = new ParticipantColumn('Clinical Order Date', 'orderDate', 'cl', 'dsm');
+  public static CLINICAL_STATUS_DATE = new ParticipantColumn('Clinical Order Status Date', 'statusDate', 'cl', 'dsm');
 
   //FON
   public static ACTIVITY_STATUS = new ParticipantColumn('Enrollment Status', 'activityStatus', 'data');

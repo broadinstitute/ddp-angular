@@ -19,7 +19,7 @@ import {
 } from 'rxjs/operators';
 import { iif, Observable, of } from 'rxjs';
 import { GovernedUserService } from '../../services/governed-user.service';
-import { IS_REGISTERING } from "../../types";
+import { IS_REGISTERING } from '../../types';
 
 @Component({
     selector: 'app-landing-page',
@@ -106,10 +106,10 @@ export class LandingPageComponent implements OnInit {
             take(1),
             finalize(() => {
                 localStorage.removeItem('isRegistering');
-                const nextUrlFromStorage = sessionStorage.getItem("nextUrl");
+                const nextUrlFromStorage = sessionStorage.getItem('nextUrl');
                 if (nextUrlFromStorage) {
                     // `nextUrl` is set before redirecting to auth0. If it exists, then pick up where we left off.
-                    sessionStorage.removeItem("nextUrl");
+                    sessionStorage.removeItem('nextUrl');
                     this.router.navigateByUrl(nextUrlFromStorage);
                 } else {
                     this.workflowService

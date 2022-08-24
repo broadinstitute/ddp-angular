@@ -79,6 +79,7 @@ sdkConfig.usesVerticalStepper = ['FAMILY_HISTORY', 'FAMILY_HISTORY_SELF', 'FAMIL
 sdkConfig.tooltipIconUrl = 'assets/images/info.png';
 sdkConfig.dashboardActivitiesStartedStatuses = ['CREATED'];
 sdkConfig.dashboardActivitiesCompletedStatuses = ['COMPLETE'];
+sdkConfig.institutionsAdditionalFields = { PHYSICIAN: ['COUNTRY'] };
 
 /**
  * Toolkit Config
