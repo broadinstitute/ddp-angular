@@ -316,7 +316,6 @@ export class ShippingComponent implements OnInit {
   }
 
   onPrintLabelsClick() {
-    this.isPHI = false;
     this.getSelectedList();
   }
 
@@ -383,10 +382,9 @@ export class ShippingComponent implements OnInit {
 
   private closedWindow(): void {
     this.selectedKitRequests = [];
-    if (!this.kitType.manualSentTrack) {
-      this.router.navigate([ Statics.SCAN_URL ]);
-    }
+    !this.kitType.manualSentTrack && !this.isPHI && this.router.navigate([Statics.SCAN_URL], {relativeTo: this.route});
     this.allSelected = false;
+    this.isPHI = false;
     this.setAllCheckboxes(false);
   }
 

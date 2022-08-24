@@ -370,10 +370,19 @@
   <span [hidden]="true">
     <div class="app-modal-body Display--Inline-Block" id="labelNameDOBDiv">
         <ng-container *ngFor="let label of selectedKitRequests">
-          <div [ngStyle]="{'height': getLabelHeight()}" class="DIV--Without-Border">
-            <p style="font-weight: bold; font-size: 20px;">{{label.firstName}} {{label.lastName}} {{label.dateOfBirth}}</p>
-          </div>
-          <div class="pagebreak"> </div>
+          <ng-container *ngIf="label.shortId">
+            <div [ngStyle]="{'height': getLabelHeight()}" class="DIV--Without-Border">
+              <p style="font-weight: bold; font-size: 20px; margin-left: 20px;">{{label.firstName}} {{label.lastName}} {{label.dateOfBirth}}</p>
+            </div>
+
+            <div class="pagebreak"> </div>
+
+            <div style="transform: rotate(90deg); font-size: 2rem; width: fit-content; height: fit-content; margin-left: 20%">
+              <app-kit-label class="DIV--Without-Border Display--Inline-Block" [urlTo]="null" [shortId]="label.shortId"
+                             [urlReturn]="null" [labelSetting]="selectedSetting"></app-kit-label>
+            </div>
+            <div class="pagebreak"> </div>
+          </ng-container>
         </ng-container>
     </div>
 
@@ -387,7 +396,6 @@
       </div>
       <div *ngIf="e" [ngStyle]="{'height': getMarginBetweenTopBottom()}" class="DIV--Without-Border"></div>
       <div *ngIf="!e && selectedKitRequests.length-1 > i" [ngStyle]="{'height': getBottomMargin()}" class="DIV--Without-Border"></div>
-      <div class="pagebreak"> </div>
     </ng-container>
   </div>
 
@@ -401,7 +409,6 @@
       </div>
       <div *ngIf="e" [ngStyle]="{'height': getMarginBetweenTopBottom()}" class="DIV--Without-Border"></div>
       <div *ngIf="!e && selectedKitRequests.length-1 > i" [ngStyle]="{'height': getBottomMargin()}" class="DIV--Without-Border"></div>
-      <div class="pagebreak"> </div>
     </ng-container>
   </div>
 </span>

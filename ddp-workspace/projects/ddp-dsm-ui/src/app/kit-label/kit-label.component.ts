@@ -15,13 +15,14 @@ export class KitLabelComponent implements AfterViewChecked {
   @Input() shippingId: string;
   @Input() urlReturn: string;
   @Input() labelSetting: LabelSetting;
+  @Input() shortId: string;
 
   ngAfterViewChecked(): void {
     this.initByIdJsBarcode();
   }
 
   private initByIdJsBarcode(): void {
-    JsBarcode('#' + this.shippingId).init();
+    this.shippingId ? JsBarcode('#' + this.shippingId).init() : JsBarcode('#' + this.shortId).init();
   }
 
   public getLabelHeight(): string {
