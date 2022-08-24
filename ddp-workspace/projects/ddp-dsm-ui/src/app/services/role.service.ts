@@ -31,6 +31,7 @@ export class RoleService {
   private _isParticipantEdit = false;
   private _isKitUploadInvalidAddress = false;
   private _isDownloadParticipantFile = false;
+  private _hasKitSequencingOrder = false;
 
   private _userId: string;
   private _user: string;
@@ -126,6 +127,9 @@ export class RoleService {
           }
           else if (entry === 'kit_upload_invalid_address') {
             this._isKitUploadInvalidAddress = true;
+          }
+          else if (entry === 'kit_sequencing_order') {
+            this._hasKitSequencingOrder = true;
           }
           else if (entry === 'file_download'){
             this._isDownloadParticipantFile = true;
@@ -265,5 +269,9 @@ export class RoleService {
 
   public allowedToDownloadParticipantFiles(): boolean {
     return this._isDownloadParticipantFile;
+  }
+
+  public allowedToDoOrderSequencing(): boolean {
+    return this._hasKitSequencingOrder;
   }
 }

@@ -957,4 +957,12 @@ export class Utils {
     }
     return camelCaseColumnName;
   }
+
+  public static getLongDateFormatted( value: number ): string {
+    if (!value || value === 0) {
+      return '';
+    }
+    const date = new Date( value );
+    return new DatePipe( 'en-US' ).transform( date, Utils.DATE_STRING_IN_CVS );
+  }
 }

@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { SDKConfigProvider } from './config/sdk.provider';
 import { BrowserModule } from '@angular/platform-browser';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+
 import { translateProvider } from './config/translate.provider';
 import { toolkitConfigProvider } from './config/toolkit.provider';
 import { FaqComponent } from './components/pages/faq/faq.component';
@@ -90,6 +92,7 @@ declare const gtag: (...args: any[]) => void;
         AppRoutingModule,
         HttpClientModule,
         ReactiveFormsModule,
+        ClipboardModule
     ],
     providers: [SDKConfigProvider, toolkitConfigProvider, translateProvider],
     bootstrap: [AppComponent],

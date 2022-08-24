@@ -394,7 +394,8 @@
         "Institution": "Institution",
         "InstitutionAny": "Hospital/Institution (if any)",
         "City": "City",
-        "State": "State"
+        "State": "State",
+        "Country": "Country"
       },
       "Form": {
         "OtherPhysician": "Other hospital/institution",

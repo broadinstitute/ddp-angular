@@ -54,3 +54,4 @@ describe('FamilyEnrollmentMessageComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

@@ -1,5 +1,6 @@
 import { AbstractionGroup } from '../abstraction-group/abstraction-group.model';
 import {ActivityDefinition} from '../activity-data/models/activity-definition.model';
+import {ClinicalOrder} from '../clinical-page/clinical-order.model';
 import { Abstraction } from '../medical-record-abstraction/model/medical-record-abstraction.model';
 import { MedicalRecord } from '../medical-record/medical-record.model';
 import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
@@ -15,20 +16,8 @@ export class Participant {
                public abstractionActivities: Array<Abstraction>,
                public abstractionSummary: Array<AbstractionGroup>, public participantData: Array<ParticipantData>,
                public abstraction?: Abstraction, public review?: Abstraction, public qc?: Abstraction, public finalA?: Abstraction,
-               public proxyData?: Array<Data>) {
-    this.data = data;
-    this.participant = participant;
-    this.medicalRecords = medicalRecords;
-    this.kits = kits;
-    this.oncHistoryDetails = oncHistoryDetails;
-    this.abstractionActivities = abstractionActivities;
-    this.abstractionSummary = abstractionSummary;
-    this.participantData = participantData;
-    this.abstraction = abstraction;
-    this.review = review;
-    this.qc = qc;
-    this.finalA = finalA;
-    this.proxyData = proxyData;
+               public proxyData?: Array<Data>, public clinicalOrders?: Array<ClinicalOrder>) {
+
   }
 
   isSelected = false;
@@ -86,6 +75,15 @@ export class Participant {
       });
     }
 
+    const clinicalOrders: Array<ClinicalOrder> = [];
+    jsonData = json.clinicalOrder;
+    if (jsonData != null) {
+      jsonData.forEach((val) => {
+        const order = ClinicalOrder.parse(val);
+        clinicalOrders.push(order);
+      });
+    }
+
     const abstraction: Abstraction = new Abstraction(null, null, null, 'abstraction', 'not_started', null, null, null);
     const review: Abstraction = new Abstraction(null, null, null, 'review', 'not_started', null, null, null);
     const qc: Abstraction = new Abstraction(null, null, null, 'qc', 'not_started', null, null, null);
@@ -108,7 +106,7 @@ export class Participant {
 
     return new Participant(
       esData, participant, medicalRecords, samples, oncHistoryDetails, json.abstractionActivities,
-      abstractionSummary, participantData, abstraction, review, qc, finalA, proxyData
+      abstractionSummary, participantData, abstraction, review, qc, finalA, proxyData, clinicalOrders
     );
   }
 
