@@ -432,7 +432,7 @@ export class Filter {
         // eslint-disable-next-line @typescript-eslint/no-shadow
         const f = allColumns[filter.participantColumn.tableAlias].find(item =>
           item.participantColumn.tableAlias === filter.participantColumn.tableAlias
-          && (item.participantColumn.name === filter.participantColumn.name 
+          && (item.participantColumn.name === filter.participantColumn.name
             || this.isDynamicFieldFilter(item, filter))
         );
         if (f != null) {
