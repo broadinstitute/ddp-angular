@@ -55,4 +55,3 @@ export class FamilyEnrollmentMessageComponent implements OnInit, OnDestroy {
   }
 }
 
-

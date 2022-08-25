@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewChecked } from '@angular/core';
+import {Component, Input, AfterViewChecked} from '@angular/core';
 import { Address } from '../address/address.model';
 import { LabelSetting } from '../label-settings/label-settings.model';
 
@@ -14,7 +14,12 @@ export class ErrorLabelComponent implements AfterViewChecked {
   @Input() shippingId: string;
   @Input() labelSetting: LabelSetting;
 
+
   ngAfterViewChecked(): void {
+    this.initByIdJsBarcode();
+  }
+
+  private initByIdJsBarcode(): void {
     JsBarcode('#' + this.shippingId).init();
   }
 

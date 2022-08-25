@@ -59,7 +59,19 @@
                   <ng-container *ngTemplateOutlet="chevronRightSvg"></ng-container>
               </div>
           </button>
-          <p class="share-project" [innerHTML]="'ParticipantsList.ShareProject' | translate"></p>
+          <div class="family-enrollment-section" *ngIf="featureFlag_DDP_8506">
+            <img class="enrollment-image" src="/assets/images/step-1_DDP-8404.png" [alt]="'ParticipantsList.FamilyEnrollmentAlt' | translate">
+            <div class="family-enrollment-description">
+              <h3 class="title-enrollment-message">{{'ParticipantsList.FamilyEnrollmentTitle' | translate}}</h3>
+              <p class="family-enrollment-description-message" [innerHTML]="'ParticipantsList.FamilyEnrollmentDescription' | translate"></p>
+              <button class="button button--primary enrollment-message" (click)="openDisclaimerDialog()">
+                <div class="text-container">
+                  <p class="bolder family-enrollment-message" [innerHTML]="'ParticipantsList.FamilyEnrollmentMessage' | translate"></p>
+              </div>
+              </button>
+            </div>            
+          </div>
+          <p *ngIf="!featureFlag_DDP_8506"  class="share-project" [innerHTML]="'ParticipantsList.ShareProject' | translate"></p>          
       </div>
   </div>
 
@@ -138,5 +150,5 @@
 
 <!--svg image container-->
 <ng-template #chevronRightSvg>
-    <img src="/assets/images/next.svg" alt="next button">
+  <img src="/assets/images/next.svg" [alt]="'ParticipantsList.FamilyEnrollmentNextButton' | translate">
 </ng-template>
