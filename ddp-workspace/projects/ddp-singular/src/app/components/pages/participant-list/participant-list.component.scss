@@ -223,6 +223,9 @@
           align-items: center;
           margin-top: 3px;
           justify-content: flex-start;
+          &.enrollment-text-button{
+            width: 100%;
+          }
           p {
               text-align: start;
               font-size: 20px!important;
@@ -231,6 +234,7 @@
               &.family-enrollment-message{
                 @include media-sm {
                   font-size: 16px !important;
+                  margin: 0 !important;
               }
               }
           }
