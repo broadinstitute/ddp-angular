@@ -372,12 +372,12 @@
         <ng-container *ngFor="let label of selectedKitRequests">
           <ng-container *ngIf="label.shortId">
             <div [ngStyle]="{'height': getLabelHeight()}" class="DIV--Without-Border">
-              <p style="font-weight: bold; font-size: 20px; margin-left: 20px;">{{label.firstName}} {{label.lastName}} {{label.dateOfBirth}}</p>
+              <p style="margin-left: 10px">{{label.firstName}} {{label.lastName}} {{label.dateOfBirth}}</p>
             </div>
 
             <div class="pagebreak"> </div>
 
-            <div style="transform: rotate(90deg); font-size: 2rem; width: fit-content; height: fit-content; margin-left: 20%">
+            <div style="transform: rotate(90deg); width: fit-content; height: fit-content; margin-left: 20%">
               <app-kit-label class="DIV--Without-Border Display--Inline-Block" [urlTo]="null" [shortId]="label.shortId"
                              [urlReturn]="null" [labelSetting]="selectedSetting"></app-kit-label>
             </div>
