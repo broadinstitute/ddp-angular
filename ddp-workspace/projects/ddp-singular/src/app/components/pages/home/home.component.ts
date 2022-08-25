@@ -30,7 +30,7 @@ export class HomeComponent {
   readonly PRESCREEN_BUTTON_LABEL = 'Sign me up!';
 
   readonly featureFlag_DDP_8404 = getFeatureFlags$().pipe(
-    map((flags: FeatureFlags) => flags[FeatureFlagsEnum.DDP_8404_Home_page_update])
+    map((flags: FeatureFlags) => flags[FeatureFlagsEnum.ShowDDP8404HomePageUpdate])
   );
 
   constructor(

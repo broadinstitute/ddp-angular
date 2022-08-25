@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import { AnalyticsEventsService, ConfigurationService } from 'ddp-sdk';
+import { AnalyticsEventsService, ConfigurationService, RuntimeEnvironment } from 'ddp-sdk';
 import { GTagEvent } from './constants/gtag-event';
 import { Route } from './constants/route';
 import { IGNORE_ANALYTICS_CLASS } from './constants/analytics';
@@ -23,7 +23,7 @@ export class AppComponent {
     private dialog: MatDialog,
     @Inject('ddp.config') private config: ConfigurationService
   ) {
-    this.isProdMode = this.config.logLevel.toString() === '2';
+    this.isProdMode = this.config.runtimeEnvironment === RuntimeEnvironment.Prod;
   }
 
   onActivate(): void {

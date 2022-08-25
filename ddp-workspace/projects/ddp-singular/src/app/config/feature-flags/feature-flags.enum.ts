@@ -1,4 +1,4 @@
 export enum FeatureFlagsEnum {
-  DDP_8404_Home_page_update = 'feature DDP_8404_Home_page_update',
-  DDP_8560_Dashboard_page_update = 'feature DDP_8560_Dashboard_page_update'
+  ShowDDP8404HomePageUpdate = 'feature DDP-8404 Home Page update',
+  ShowDDP8560DashboardPageUpdate = 'feature DDP-8560 Dashboard Page update'
 }

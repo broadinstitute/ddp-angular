@@ -4,8 +4,8 @@ import { FeatureFlagsEnum} from './feature-flags.enum';
 
 
 const initialFlags: FeatureFlags = {
-  [FeatureFlagsEnum.DDP_8404_Home_page_update] : false,
-  [FeatureFlagsEnum.DDP_8560_Dashboard_page_update] : false
+  [FeatureFlagsEnum.ShowDDP8404HomePageUpdate] : false,
+  [FeatureFlagsEnum.ShowDDP8560DashboardPageUpdate] : false
 };
 
 const featureFlags: BehaviorSubject<FeatureFlags> = new BehaviorSubject(initialFlags);

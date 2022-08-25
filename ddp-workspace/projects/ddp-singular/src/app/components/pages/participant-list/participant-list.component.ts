@@ -53,7 +53,7 @@ export class ParticipantsListComponent implements OnInit {
   @Input() allowParticipantRemoval = false;
 
   readonly featureFlag_DDP_8506 = getFeatureFlags$().pipe(
-    map((flags: FeatureFlags) => flags[FeatureFlagsEnum.DDP_8560_Dashboard_page_update])
+    map((flags: FeatureFlags) => flags[FeatureFlagsEnum.ShowDDP8560DashboardPageUpdate])
   );
 
   constructor(
