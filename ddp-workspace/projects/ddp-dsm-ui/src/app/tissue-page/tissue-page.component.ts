@@ -139,7 +139,7 @@ export class TissuePageComponent implements OnInit {
           value: v,
         }, null, 'participantId',
         this.participant.participant.ddpParticipantId, Statics.ONCDETAIL_ALIAS,  null,
-        localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.participant.participant.ddpParticipantId
+        localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.participant.data.profile['guid']
       );
       const patch = patch1.getPatch();
       this.patchFinished = false;
