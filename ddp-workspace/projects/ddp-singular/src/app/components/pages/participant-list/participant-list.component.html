@@ -59,7 +59,7 @@
                   <ng-container *ngTemplateOutlet="chevronRightSvg"></ng-container>
               </div>
           </button>
-          <div class="family-enrollment-section" *ngIf="featureFlag_DDP_8506">
+          <div class="family-enrollment-section" *ngIf="featureFlag_DDP_8506 | async">
             <img class="enrollment-image" src="/assets/images/step-1_DDP-8404.png" [alt]="'ParticipantsList.FamilyEnrollmentAlt' | translate">
             <div class="family-enrollment-description">
               <h3 class="title-enrollment-message">{{'ParticipantsList.FamilyEnrollmentTitle' | translate}}</h3>
@@ -71,7 +71,7 @@
               </button>
             </div>
           </div>
-          <p *ngIf="!featureFlag_DDP_8506"  class="share-project" [innerHTML]="'ParticipantsList.ShareProject' | translate"></p>
+          <p *ngIf="!(featureFlag_DDP_8506 | async)"  class="share-project" [innerHTML]="'ParticipantsList.ShareProject' | translate"></p>
       </div>
   </div>
 

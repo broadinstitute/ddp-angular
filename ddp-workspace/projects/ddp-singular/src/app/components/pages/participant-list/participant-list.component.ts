@@ -3,7 +3,7 @@ import { EMPTY, forkJoin, Observable, of } from 'rxjs';
 import { Route } from '../../../constants/route';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
-import { Component, Inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { catchError, filter, map, mergeMap, take, tap } from 'rxjs/operators';
 import { CurrentActivityService } from '../../../services/current-activity.service';
 import { ParticipantDeletionDialogComponent } from '../../participant-deletion-dialog/participant-deletion-dialog.component';
@@ -24,7 +24,9 @@ import { ActivityCode } from '../../../constants/activity-code';
 import {COMPLETE, IN_PROGRESS} from '../../../../../../ddp-atcp/src/app/components/workflow-progress/workflow-progress';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { FamilyEnrollmentMessageComponent } from '../../family-enrollment-message/family-enrollment-message.component';
-import { featureFlags } from '../../../config/feature-flags';
+import { getFeatureFlags$ } from '../../../config/feature-flags/feature-flags-setup';
+import { FeatureFlags } from '../../../config/feature-flags/feature-flags';
+import { FeatureFlagsEnum } from '../../../config/feature-flags/feature-flags.enum';
 
 interface Participant {
   firstName: string;
@@ -49,7 +51,10 @@ export class ParticipantsListComponent implements OnInit {
   errorMessage: string | null = null;
   isPageBusy = false;
   @Input() allowParticipantRemoval = false;
-  readonly featureFlag_DDP_8506 = featureFlags.DDP_8560_Dashboard_page_update;
+
+  readonly featureFlag_DDP_8506 = getFeatureFlags$().pipe(
+    map((flags: FeatureFlags) => flags[FeatureFlagsEnum.ShowDDP8560DashboardPageUpdate])
+  );
 
   constructor(
     private router: Router,
@@ -435,5 +440,5 @@ export class ParticipantsListComponent implements OnInit {
         autoFocus: false,
         scrollStrategy: new NoopScrollStrategy()
     });
-}
+  }
 }

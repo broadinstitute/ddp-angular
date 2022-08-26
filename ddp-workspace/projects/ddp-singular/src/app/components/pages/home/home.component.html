@@ -50,26 +50,26 @@
         <app-video-intro pageRendered="HOME">></app-video-intro>
     </div>
 </section>
-<section class="join" [ngClass]="{'DDP-8404-feature': featureFlag_DDP_8404}">
+<section class="join" [ngClass]="{'DDP-8404-feature': (featureFlag_DDP_8404 | async)}">
   <div class="container">
     <div class="join-wrapper">
       <div class="join-left">
         <h1 class="join-left-heading">Who can join?</h1>
-        <div *ngIf="featureFlag_DDP_8404" class="join-left-sub-heading">The following people are eligible to join</div>
+        <div *ngIf="(featureFlag_DDP_8404 | async)" class="join-left-sub-heading">The following people are eligible to join</div>
         <ul class="join-list">
-          <ng-container *ngIf="!featureFlag_DDP_8404"> <!-- current version -->
+          <ng-container *ngIf="!(featureFlag_DDP_8404 | async)"> <!-- current version -->
             <li>People who have been diagnosed with a single ventricle heart defect, including transplant recipients.</li>
             <li>Biological parents, siblings, or children of a person with a single ventricle heart defect.</li>
             <li>Must live in the United States or Canada.</li>
             <li>We welcome people of all ages, genders, races, ethnicities, and abilities</li>
           </ng-container>
-          <ng-container *ngIf="featureFlag_DDP_8404">
+          <ng-container *ngIf="(featureFlag_DDP_8404 | async)">
             <li>People who have been diagnosed with a single ventricle heart defect at any stage of treatment, including transplant recipients.</li>
             <li>Biological parents, siblings, or children of a person with a single ventricle heart defect*.</li>
             <li>Those living in the United States or Canada.</li>
           </ng-container>
         </ul>
-        <div *ngIf="featureFlag_DDP_8404"
+        <div *ngIf="(featureFlag_DDP_8404 | async)"
              class="welcome-people-of">We welcome people of all ages, genders, races, ethnicities, and abilities.
         </div>
       </div>
@@ -79,10 +79,10 @@
     </div>
     <div class="join-sign_up">
         <div class="join-sign_up-text">
-          <ng-container *ngIf="!featureFlag_DDP_8404"> <!-- current version -->
+          <ng-container *ngIf="!(featureFlag_DDP_8404 | async)"> <!-- current version -->
             Living with single ventricle heart disease can feel powerless—but you have the power to fuel research and a brighter tomorrow. <span class="text-semibold">Let’s get started today.</span>
           </ng-container>
-          <ng-container *ngIf="featureFlag_DDP_8404">
+          <ng-container *ngIf="(featureFlag_DDP_8404 | async)">
             <p>* Project Singular hopes to recruit patients and their biological family members to this study, because <span class="text-semibold">we can learn more and learn faster if we can study entire families.</span></p>
             <p>Living with single ventricle heart disease can feel powerless—but you have the power to fuel research and a brighter tomorrow. <span class="text-semibold">Let’s get started today.</span></p>
           </ng-container>
@@ -92,12 +92,12 @@
   </div>
 </section>
 
-<section class="participating" [ngClass]="{'DDP-8404-feature': featureFlag_DDP_8404}">
+<section class="participating" [ngClass]="{'DDP-8404-feature': (featureFlag_DDP_8404 | async)}">
   <div class="container">
     <h1>Participating is Easy</h1>
     <div class="participating-steps">
       <div class="participating-steps-step">
-        <img [src]="'assets/images/' + (featureFlag_DDP_8404? 'step-1_DDP-8404.png' : 'step-1_dev.png')" alt="participating steps image" class="participating-steps-step-img">
+        <img [src]="'assets/images/' + ((featureFlag_DDP_8404 | async) ? 'step-1_DDP-8404.png' : 'step-1_dev.png')" alt="participating steps image" class="participating-steps-step-img">
         <div class="participating-steps-step-title">STEP 1</div>
         <div class="participating-steps-step-name">Enroll Participant(s)</div>
         <div class="participating-steps-step-text">
@@ -106,7 +106,7 @@
         </div>
       </div>
       <div class="participating-steps-step">
-        <img [src]="'assets/images/' + (featureFlag_DDP_8404? 'step-2_DDP-8404.png' : 'step-2_dev.png')" alt="participating steps image" class="participating-steps-step-img">
+        <img [src]="'assets/images/' + ((featureFlag_DDP_8404 | async) ? 'step-2_DDP-8404.png' : 'step-2_dev.png')" alt="participating steps image" class="participating-steps-step-img">
         <div class="participating-steps-step-title">STEP 2</div>
         <div class="participating-steps-step-name">Answer Short Surveys</div>
         <div class="participating-steps-step-text">
@@ -114,7 +114,7 @@
         </div>
       </div>
       <div class="participating-steps-step">
-        <img [src]="'assets/images/' + (featureFlag_DDP_8404? 'step-3_DDP-8404.png' : 'step-3_dev.png')" alt="participating steps image" class="participating-steps-step-img">
+        <img [src]="'assets/images/' + ((featureFlag_DDP_8404 | async) ? 'step-3_DDP-8404.png' : 'step-3_dev.png')" alt="participating steps image" class="participating-steps-step-img">
         <div class="participating-steps-step-title">STEP 3</div>
         <div class="participating-steps-step-name">Provide Spit Sample(s)</div>
         <div class="participating-steps-step-text">
@@ -125,7 +125,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="featureFlag_DDP_8404" class="participating-about">
+    <div *ngIf="(featureFlag_DDP_8404 | async)" class="participating-about">
         <p class="text-semibold">About Participation:</p>
         <p><span class="text-semibold">Adults:</span> Each eligible adult that is able to consent must enroll themselves.</p>
         <p class="purple text-semibold">Encourage your eligible adult family members to participate by <span class="underline text-semibold" (click)="openDialog()">sharing this message via text or email!</span></p>
