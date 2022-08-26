@@ -69,9 +69,9 @@
                   <p class="bolder family-enrollment-message" [innerHTML]="'ParticipantsList.FamilyEnrollmentMessage' | translate"></p>
               </div>
               </button>
-            </div>            
+            </div>
           </div>
-          <p *ngIf="!featureFlag_DDP_8506"  class="share-project" [innerHTML]="'ParticipantsList.ShareProject' | translate"></p>          
+          <p *ngIf="!featureFlag_DDP_8506"  class="share-project" [innerHTML]="'ParticipantsList.ShareProject' | translate"></p>
       </div>
   </div>
 
@@ -95,39 +95,36 @@
           <span class="participant__name">
             {{ getParticipantName(participant) }}
           </span>
-            <div class="StatusAndExpandBtn">
+          <div class="StatusAndExpandBtn">
             <div class="enrollmentStatusContainer">
-                <div class="enrollmentStatusIncompleteText" *ngIf="getParticipantStatus(participant) === 'IN_PROGRESS'">
-                    <img class="enrollmentStatusIcon" src="assets/images/alert-circle-orange-512.png">
-                    {{ 'ParticipantStatus.status.inComplete' | translate}}
-                </div>
-                <div class="enrollmentStatusCompleteText" *ngIf="getParticipantStatus(participant) === 'COMPLETE'">
-                    <img class="enrollmentStatusIcon" src="/assets/images/Check.png">
-                    {{ 'ParticipantStatus.status.complete' | translate}}
-                </div>
+              <div class="enrollmentStatusIncompleteText" *ngIf="getParticipantStatus(participant) === 'IN_PROGRESS'">
+                <img class="enrollmentStatusIcon" src="assets/images/alert-circle-orange-512.png">
+                {{ 'ParticipantStatus.status.inComplete' | translate}}
+              </div>
+              <div class="enrollmentStatusCompleteText" *ngIf="getParticipantStatus(participant) === 'COMPLETE'">
+                <img class="enrollmentStatusIcon" src="/assets/images/Check.png">
+                {{ 'ParticipantStatus.status.complete' | translate}}
+              </div>
             </div>
 
+            <div class="participant__icon-container">
+              <button
+                *ngIf="allowParticipantRemoval && !participant.isOperator"
+                mat-icon-button
+                class="participant__delete-btn"
+                (click)="$event.stopPropagation(); onDeleteClick(participant)">
+                <mat-icon>delete</mat-icon>
+              </button>
 
-          <div class="participant__icon-container">
-            <button
-              *ngIf="allowParticipantRemoval && !participant.isOperator"
-              mat-icon-button
-              class="participant__delete-btn"
-              (click)="$event.stopPropagation(); onDeleteClick(participant)"
-            >
-              <mat-icon>delete</mat-icon>
-            </button>
-
-            <button
-              mat-icon-button
-              class="participant__expand-btn"
-              [class.participant__expand-btn--rotate]="isParticipantContentExpanded(participant)"
-            >
-                <div class="hideWord">{{ isParticipantContentExpanded(participant) ? 'Hide' : 'Show' }}</div>
-              <mat-icon>expand_more</mat-icon>
-            </button>
+              <button
+                mat-icon-button
+                class="participant__expand-btn"
+                [class.participant__expand-btn--rotate]="isParticipantContentExpanded(participant)">
+                <span class="hideWord">{{ isParticipantContentExpanded(participant) ? 'Hide' : 'Show' }}</span>
+                <mat-icon>expand_more</mat-icon>
+              </button>
+            </div>
           </div>
-            </div>
         </div>
         <div class="participant__content" *ngIf="isParticipantContentExpanded(participant)">
           <app-activities-list
