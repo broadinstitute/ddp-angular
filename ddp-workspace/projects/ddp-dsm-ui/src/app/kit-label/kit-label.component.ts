@@ -1,5 +1,6 @@
-import { Component, Input, AfterViewChecked } from '@angular/core';
+import {Component, Input, AfterViewChecked} from '@angular/core';
 import { LabelSetting } from '../label-settings/label-settings.model';
+import {KitRequest} from '../shipping/shipping.model';
 
 declare var JsBarcode: any;
 
@@ -14,9 +15,14 @@ export class KitLabelComponent implements AfterViewChecked {
   @Input() shippingId: string;
   @Input() urlReturn: string;
   @Input() labelSetting: LabelSetting;
+  @Input() shortId: string;
 
   ngAfterViewChecked(): void {
-    JsBarcode('#' + this.shippingId).init();
+    this.initByIdJsBarcode();
+  }
+
+  private initByIdJsBarcode(): void {
+    this.shippingId ? JsBarcode('#' + this.shippingId).init() : JsBarcode('#' + this.shortId).init();
   }
 
   public getLabelHeight(): string {

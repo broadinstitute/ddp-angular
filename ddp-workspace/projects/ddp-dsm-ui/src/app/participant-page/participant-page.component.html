@@ -483,7 +483,7 @@ participant.data.dsm['diagnosisYear'] != null">
                          (change)="onAdditionalValueChange($event, fieldSetting.columnName)"
                          (blur)="currentField(null)" (focus)="currentField(fieldSetting.columnName)">
                 </mat-form-field>
-                <textarea maxlength="50000" *ngIf="fieldSetting.displayType === 'TEXTAREA'"
+                <textarea rows="10" maxlength="50000" *ngIf="fieldSetting.displayType === 'TEXTAREA'"
                           [ngClass]="{'Width--100': true, 'Color--Field--Patched': isPatchedCurrently(fieldSetting.columnName)}"
                           (blur)="currentField(null)" (focus)="currentField(fieldSetting.columnName)"
                           [disabled]="participantExited"
