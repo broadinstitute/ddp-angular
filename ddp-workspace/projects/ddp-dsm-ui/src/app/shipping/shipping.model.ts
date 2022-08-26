@@ -12,7 +12,7 @@ export class KitRequest {
               public externalOrderStatus: string, public preferredLanguage: string,
               public receiveDateString: string, public hruid: string, public gender: string,
               public collectionDate: string, public firstName?: string, public lastName?: string,
-              public dateOfBirth?: string, public shortId?: string) {
+              public dateOfBirth?: string, public shortId?: string, public receivedBy?: string) {
   }
 
   public TRACKING_LINK = 'https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber=';
@@ -30,7 +30,7 @@ export class KitRequest {
       json.receiveDate, json.deactivatedDate, json.deactivationReason, json.participant, json.easypostAddressId, json.nameLabel,
       json.kitLabel, json.express, json.labelDate, json.noReturn, json.externalOrderNumber, json.externalOrderStatus,
       json.preferredLanguage, json.receiveDateString, json.hruid, json.gender, json.collectionDate, json.firstName,
-      json.lastName, json.dateOfBirth, json.shortId
+      json.lastName, json.dateOfBirth, json.shortId, json.receivedBy
     );
   }
 
