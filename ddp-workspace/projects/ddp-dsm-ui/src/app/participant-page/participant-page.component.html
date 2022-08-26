@@ -1100,15 +1100,14 @@ participant.data.dsm['diagnosisYear'] != null">
                               <fieldset style="border: 1px black solid">
                                 <legend class="Group--Title" id="{{setting.columnName}}"></legend>
                                 <ng-container
-                                  *ngFor="let field of settings[setting.columnName]; let fieldIndex = index">
+                                  *ngFor="let field of settings[setting.columnName]; let last = last">
                                   <app-form-data [fieldSetting]="field"
                                                  [participantData]="getParticipantData(field, relative)"
                                                  [activityData]="getActivityData(field)"
                                                  [activityOptions]="getActivityOptions(field)"
                                                  [checkBoxGroups]="checkBoxGroups"
                                                  (patchData)="formPatch($event, field, setting, relative.participantDataId)"></app-form-data>
-                                  <hr *ngIf="fieldIndex !== settings[setting.columnName].length-1"
-                                      style="border-color: lightgray">
+                                  <hr *ngIf="!last" class="border-grey">
                                 </ng-container>
                               </fieldset>
                             </div>
@@ -1138,7 +1137,7 @@ participant.data.dsm['diagnosisYear'] != null">
                             <td class="TD--Padding Width--30">
                             </td>
                             <td>
-                              <ng-container *ngFor="let field of checkBoxGroups[setting.columnName]; let fieldIndex = index">
+                              <ng-container *ngFor="let field of checkBoxGroups[setting.columnName];">
                                 <app-form-data [fieldSetting]="field" [participantData]="getParticipantForDynamicField(field)"
                                                [activityData]="getActivityData(field)"
                                                [activityOptions]="getActivityOptions(field)"
