@@ -6,12 +6,10 @@
       {{ 'SDK.UserActivities.ActivityName' | translate }}
     </mat-header-cell>
     <mat-cell
-      
       class="activity-name"
       *matCellDef="let activity"
       [attr.data-label]="'SDK.UserActivities.ActivityName' | translate"
     >
-
       <span>{{ activity.activityName }}</span>
     </mat-cell>
   </ng-container>
@@ -58,7 +56,7 @@
           <ng-container *ngTemplateOutlet="hasPreviousInstance(activity) ? continue : start"></ng-container>
 
           <ng-template #start>
-            <button type="button" class="button button--primary button--sm" (click)="onStartClick(activity)" [disabled]="disableButtons">
+            <button type="button" class="button button--primary button--sm fixed-button" (click)="onStartClick(activity)" [disabled]="disableButtons">
               {{ (isMedicalRecordFileUpload(activity) ? 'SDK.UploadButton' : 'SDK.StartButton') | translate }}
             </button>
           </ng-template>

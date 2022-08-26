@@ -5,7 +5,6 @@
 .spinner-container {
   display: flex;
   justify-content: center;
-
   margin: 8.39rem;
 }
 
@@ -80,17 +79,17 @@
         background-color: white;
     }
   &__name {
-      margin-top: 5px;
       color: black;
       font-family: 'Spartan-Bold', sans-serif;
       width: 20rem;
   }
 
   &__expand-btn {
-      color:black;
-      font-weight: bold;
+    width: auto;
+    color: black;
+    font-weight: bold;
+
     mat-icon {
-        margin-top: 1px;
       transition: transform 0.2s ease;
     }
 
@@ -146,8 +145,6 @@
     font-weight: bold;
     letter-spacing: 0;
     line-height: 1.22rem;
-  
-    
   }
   .family-enrollment-description{
     display: flex;
@@ -155,7 +152,6 @@
     align-items: flex-start;
     margin-bottom: 3.61rem;
   }
-  
 
   .button {
     width: 433px;
@@ -184,7 +180,7 @@
     @include media-xs {
         width: 100% !important;
     }
-    
+
     .family-enrollment-message{
       white-space: nowrap;
       text-align: center !important;
@@ -249,7 +245,7 @@
           }
       }
   }
-  
+
   .button + .button {
     margin-top: 1.2rem;
   }
@@ -268,8 +264,8 @@
 
 .share-project {
   margin-top: 15px;
-    
 }
+
 .family-enrollment-description-message{
     margin: 0.88rem 1.44rem 0 0;
     font-weight: 600;
@@ -291,12 +287,13 @@
 
 .enrollmentStatusIcon {
     width: 25px;
-    margin-bottom: 2px;
+    margin-bottom: 5px;
 }
 
     .StatusAndExpandBtn {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         width: 100%;
     }
 
@@ -318,8 +315,6 @@
             height: 4.11rem !important;
           }
         }
-        
-
     }
 
     @media screen and (max-width: 880px) {
@@ -329,7 +324,6 @@
         .family-enrollment-section{
           flex-direction: column;
         }
-
     }
 
     @media screen and (max-width: 750px) {
@@ -337,6 +331,7 @@
             width: 20px;
         }
     }
+
     @media screen and (max-width: 680px) {
         .participant__header {
             flex-wrap: wrap;
@@ -345,14 +340,9 @@
             display: none;
         }
 
-        .StatusAndExpandBtn {
-            align-items: center;
-        }
         .title-enrollment-message{
           margin: 1.2rem 0;
-  
           font-size: 1.2rem;
         }
-       
     }
 }
