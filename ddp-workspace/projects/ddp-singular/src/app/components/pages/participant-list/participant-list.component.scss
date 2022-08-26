@@ -13,6 +13,10 @@
   background-color: $__cultured;
 }
 
+.container{
+  background-color: $__cultured;
+}
+
 .grouper {
   width: 90%;
   margin: 0 auto 370px auto;
@@ -132,7 +136,7 @@
     align-items: flex-start;
     border-radius: 3px;
     background-color: #FFFFFF;
-    margin-top: 1.11rem;
+    margin: 1.11rem 0 1.11rem 0;
   }
   .enrollment-image{
     height: 289.17px;
