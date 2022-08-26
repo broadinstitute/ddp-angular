@@ -60,10 +60,10 @@ export class AppComponent {
     }
   }
 
-  // Opens a dialog by 'Ctrl+Alt+Home' to setup/toggle feature flags
+  // Opens a dialog by 'Ctrl+Alt+7' to setup/toggle feature flags
   // it is used for feature flags testing only.
   // should not be available on production
-  @HostListener('window:keydown.control.alt.home', ['$event'])
+  @HostListener('window:keydown.control.alt.7', ['$event'])
   handleKeyDown(event: KeyboardEvent): void {
     if (!this.isProdMode) {
       this.openFeatureFlagsSetupDialog();
