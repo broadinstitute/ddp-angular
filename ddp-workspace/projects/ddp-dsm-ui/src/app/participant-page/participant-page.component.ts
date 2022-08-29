@@ -182,7 +182,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       if (this.updatingParticipant) {
         if (checkUpdateStatusCounter >= 5) {
           this.updatingParticipant = false;
-          this.openResultDialog('DSM triggered DSS to change it but system is not responding.');
+          this.openResultDialog('Your update has been saved, but the system is unable to display it at the moment. \nPlease try refreshing this page or come back to it later to see the update. Sorry for any inconvenience.');
           checkUpdateStatusCounter = 0;
           return;
         }
