@@ -1,5 +1,7 @@
 import { Component, ElementRef, HostListener, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter, map, Observable } from 'rxjs';
 
 import { AnalyticsEventsService, ConfigurationService, RuntimeEnvironment } from 'ddp-sdk';
 import { GTagEvent } from './constants/gtag-event';
@@ -14,16 +16,22 @@ import { FeatureFlagsToggleComponent } from './components/feature-flags-toggle/f
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ddp-singular';
   isProdMode: boolean;
+  readonly participantsPath = '/participants';
+  routerPath: Observable<string>;
 
   constructor(
     private elRef: ElementRef,
     private analytics: AnalyticsEventsService,
     private dialog: MatDialog,
-    @Inject('ddp.config') private config: ConfigurationService
+    @Inject('ddp.config') private config: ConfigurationService,
+    private router: Router
   ) {
     this.isProdMode = this.config.runtimeEnvironment === RuntimeEnvironment.Prod;
+    this.routerPath = router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      map(event => event['url'])
+    );
   }
 
   onActivate(): void {
