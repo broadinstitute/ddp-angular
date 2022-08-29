@@ -587,7 +587,7 @@ export class ParticipantListComponent implements OnInit {
           this.sourceColumns['data'].push(new Filter(ParticipantColumn.PREFERRED_LANGUAGE, Filter.OPTION_TYPE, options));
         }
 
-        if (jsonData.hideMRTissueWorkflow != null) {
+        if (jsonData.hideMRTissueWorkflow != null || !this.role.allowedToViewMedicalRecords()) {
           this.dataSources.delete('m');
           this.dataSources.delete('oD');
           this.dataSources.delete('t');
