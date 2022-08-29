@@ -314,7 +314,7 @@ export class MedicalRecordComponent implements OnInit {
         this.medicalRecord.phone = contact.field3.value || "";
         nameValues.push({name: 'm.phone', value: this.medicalRecord.phone});
 
-        this.medicalRecord.fax = contact.field4.value = "";
+        this.medicalRecord.fax = contact.field4.value || "";
         nameValues.push({name: 'm.fax', value: this.medicalRecord.fax});
 
         this.lookups        = [];
