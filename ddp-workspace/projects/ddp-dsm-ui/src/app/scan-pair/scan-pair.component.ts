@@ -29,7 +29,7 @@ export class ScanPairComponent implements OnInit {
   }
 
   moveFocus(leftValue: string): void {
-    if(leftValue.length < 14 && this.selectedScan == "Final Scan") {
+    if(leftValue.length < 14 && this.selectedScan === 'Final Scan') {
       this.lengthError = 'Error: Barcode contains less than 14 digits. You can manually enter any missing digits above.';
     } else {
       this.lengthError = null;
