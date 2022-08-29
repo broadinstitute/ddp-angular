@@ -105,6 +105,7 @@ export class ParticipantListComponent implements OnInit {
   quickFilters: ViewFilter[] = [];
 
   settings = {};
+  checkBoxGroups = {};
   drugs: string[] = [];
   cancers: string[] = [];
   mrCoverPdfSettings: Value[] = [];
@@ -369,6 +370,12 @@ export class ParticipantListComponent implements OnInit {
               this.settings[key].push(fieldSetting);
               if (fieldSetting.displayType == null || fieldSetting.displayType !== 'GROUP') {
                 this.allFieldNames.add(filter.participantColumn.tableAlias + '.' + filter.participantColumn.name);
+                if (fieldSetting.displayType === 'CHECKBOX') {
+                  if (!this.checkBoxGroups[key]) {
+                    this.checkBoxGroups[key] = [];
+                  }
+                  this.checkBoxGroups[key].push(fieldSetting);
+                }
               }
             });
           });

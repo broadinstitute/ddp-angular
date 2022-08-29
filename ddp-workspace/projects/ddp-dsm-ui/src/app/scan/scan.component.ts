@@ -8,6 +8,7 @@ import { Auth } from '../services/auth.service';
 import { Statics } from '../utils/statics';
 import { ScanValueComponent } from '../scan-value/scan-value.component';
 import { ComponentService } from '../services/component.service';
+import { scan } from 'rxjs';
 
 @Component({
   selector: 'app-scan',
@@ -72,6 +73,15 @@ export class ScanComponent implements OnInit {
         this._changeDetectionRef.detectChanges();
       }
     }
+  }
+
+  public get displayScanText(): string {
+    if(!this.scanTracking && !this.scanReceived)
+      {return 'Final Scan';}
+    else if(this.scanTracking)
+      {return 'Tracking Scan';}
+    else if(this.scanReceived)
+      {return 'Receiving Scan';}
   }
 
   private checkIfKitLabelChanged(left: string, right: string, position: number): boolean {
@@ -179,34 +189,62 @@ export class ScanComponent implements OnInit {
       if (!this.duplicateDetected) {
         let jsonData: any[];
         this.scanErrors = [];
-        this.dsmService.transferScan(this.scanTracking, JSON.stringify(this.scanPairsValue))
-          .subscribe({ // need to subscribe, otherwise it will not send!
-            next: data => {
-              let failedSending = false;
-              jsonData = data;
-              jsonData.forEach((val) => {
-                this.scanErrors.push(ScanError.parse(val));
-                failedSending = true;
-              });
-              if (failedSending) {
-                this.removeSuccessfulScans();
-                this.additionalMessage = 'Error - Failed to save all changes';
-              } else {
-                this.scanPairsValue = [];
-                this.scanPairs = [];
-                this.addNewScanPair();
-                this.additionalMessage = 'Data saved';
-              }
-            },
-            error: err => {
-              if (err._body === Auth.AUTHENTICATION_ERROR) {
-                this.router.navigate([Statics.HOME_URL]);
-              }
-              this.additionalMessage = 'Error - Failed to save data';
-            }
+        const json = JSON.stringify(this.scanPairsValue);
+        if (this.scanTracking) {
+          const scanPayloads = [];
+          this.scanPairsValue.forEach(element => {
+            scanPayloads.push({
+              kitLabel: element.rightValue,
+              trackingReturnId: element.leftValue
+            });
           });
+          this.dsmService.trackingScan(JSON.stringify(scanPayloads))
+            .subscribe({
+              next: data => { jsonData = this.onSuccess(jsonData, data); },
+              error: err => { this.onError(err); }
+            });
+        } else {
+          const scanPayloads = [];
+          this.scanPairsValue.forEach(element => {
+            scanPayloads.push({
+              kitLabel: element.leftValue,
+              ddpLabel: element.rightValue
+            });
+          });
+          this.dsmService.finalScan(JSON.stringify(scanPayloads))
+            .subscribe({
+              next: data => { jsonData = this.onSuccess(jsonData, data); },
+              error: err => { this.onError(err); }
+            });
+        }
       }
     }
+  }
+
+  private onError(err: any): void {
+    if (err._body === Auth.AUTHENTICATION_ERROR) {
+      this.router.navigate([Statics.HOME_URL]);
+    }
+    this.additionalMessage = 'Error - Failed to save data';
+  }
+
+  private onSuccess(jsonData: any[], data: any): any {
+    let failedSending = false;
+    jsonData = data;
+    jsonData.forEach((val) => {
+      this.scanErrors.push(ScanError.parse(val));
+      failedSending = true;
+    });
+    if (failedSending) {
+      this.removeSuccessfulScans();
+      this.additionalMessage = 'Error - Failed to save all changes';
+    } else {
+      this.scanPairsValue = [];
+      this.scanPairs = [];
+      this.addNewScanPair();
+      this.additionalMessage = 'Data saved';
+    }
+    return jsonData;
   }
 
   private removeSuccessfulScans(): void {

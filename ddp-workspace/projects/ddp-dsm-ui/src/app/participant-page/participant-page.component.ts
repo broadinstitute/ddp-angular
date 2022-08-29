@@ -52,6 +52,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   @Input() activeTab: string;
   @Input() activityDefinitions: Array<ActivityDefinition>;
   @Input() settings: {};
+  @Input() checkBoxGroups: {};
   @Input() mrCoverPdfSettings: Value[];
   @Input() oncHistoryId: string;
   @Input() mrId: string;
@@ -158,26 +159,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       instanceName: this.compService.getRealm(),
       data: {}
     };
-    this.checkParticipantStatusInterval = setInterval(() => {
-      if (this.updatingParticipant) {
-        this.dsmService.checkUpdatingParticipantStatus().subscribe({
-          next: data => {
-            const parsedData = JSON.parse(data.body);
-            if (parsedData[ 'resultType' ] === 'SUCCESS'
-                && this.isReturnedUserAndParticipantTheSame(parsedData)) {
-              this.updateParticipantObjectOnSuccess();
-              this.openResultDialog('Participant successfully updated');
-            } else if (parsedData[ 'resultType' ] === 'ERROR'
-                && this.isReturnedUserAndParticipantTheSame(parsedData)) {
-              this.openResultDialog(parsedData[ 'errorMessage' ]);
-            }
-         },
-          error: () => {
-            this.openResultDialog('Error - Failed to update participant');
-         }
-        });
-      }
-    }, 5000);
+    this.handleParticipantProfileUpdate();
     this.loadInstitutions();
     this.scrolled = false;
     if(!this.selectedActivityCode) {
@@ -193,6 +175,39 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     this.addMedicalProviderInformation();
     this.getMercuryEligibleSamples();
     this.canSequence = this.canHaveSequencing(this.participant);
+  }
+
+  private handleParticipantProfileUpdate(): void {
+    let checkUpdateStatusCounter = 0;
+    this.checkParticipantStatusInterval = setInterval(() => {
+      if (this.updatingParticipant) {
+        if (checkUpdateStatusCounter >= 5) {
+          this.updatingParticipant = false;
+          this.openResultDialog('Your update has been saved, but the system is unable to display it at the moment. \nPlease try refreshing this page or come back to it later to see the update. Sorry for any inconvenience.');
+          checkUpdateStatusCounter = 0;
+          return;
+        }
+        checkUpdateStatusCounter += 1;
+        this.dsmService.checkUpdatingParticipantStatus().subscribe({
+          next: data => {
+            const parsedData = JSON.parse(data.body);
+            if (parsedData['resultType'] === 'SUCCESS'
+              && this.isReturnedUserAndParticipantTheSame(parsedData)) {
+              this.updateParticipantObjectOnSuccess();
+              this.openResultDialog('Participant successfully updated');
+            } else if (parsedData['resultType'] === 'ERROR'
+              && this.isReturnedUserAndParticipantTheSame(parsedData)) {
+              this.openResultDialog(parsedData['errorMessage']);
+            }
+            checkUpdateStatusCounter = 0;
+          },
+          error: () => {
+            this.openResultDialog('Error - Failed to update participant');
+            checkUpdateStatusCounter = 0;
+          }
+        });
+      }
+    }, 5000);
   }
 
   addMedicalProviderInformation(): void {
