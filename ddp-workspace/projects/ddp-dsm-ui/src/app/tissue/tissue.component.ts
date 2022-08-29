@@ -159,7 +159,7 @@ export class TissueComponent {
           name: parameterName,
           value: v,
         }, nameValues, parentName, parentId, tAlias, null,
-        localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.participant.participant.ddpParticipantId
+        localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.participant.data.profile['guid']
       );
       const patch = patch1.getPatch();
       this.patchFinished = false;
