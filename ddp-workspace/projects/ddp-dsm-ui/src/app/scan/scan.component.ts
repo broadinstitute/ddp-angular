@@ -191,11 +191,11 @@ export class ScanComponent implements OnInit {
         this.scanErrors = [];
         const json = JSON.stringify(this.scanPairsValue);
         if (this.scanTracking) {
-          let scanPayloads = []
+          const scanPayloads = [];
           this.scanPairsValue.forEach(element => {
             scanPayloads.push({
-              "kitLabel": element.rightValue,
-              "trackingReturnId": element.leftValue  
+              kitLabel: element.rightValue,
+              trackingReturnId: element.leftValue
             });
           });
           this.dsmService.trackingScan(JSON.stringify(scanPayloads))
@@ -204,11 +204,11 @@ export class ScanComponent implements OnInit {
               error: err => { this.onError(err); }
             });
         } else {
-          let scanPayloads = []
+          const scanPayloads = [];
           this.scanPairsValue.forEach(element => {
             scanPayloads.push({
-              "kitLabel": element.leftValue,
-              "ddpLabel": element.rightValue  
+              kitLabel: element.leftValue,
+              ddpLabel: element.rightValue
             });
           });
           this.dsmService.finalScan(JSON.stringify(scanPayloads))
@@ -221,14 +221,14 @@ export class ScanComponent implements OnInit {
     }
   }
 
-  private onError(err: any) {
+  private onError(err: any): void {
     if (err._body === Auth.AUTHENTICATION_ERROR) {
       this.router.navigate([Statics.HOME_URL]);
     }
     this.additionalMessage = 'Error - Failed to save data';
   }
 
-  private onSuccess(jsonData: any[], data: any) {
+  private onSuccess(jsonData: any[], data: any): any {
     let failedSending = false;
     jsonData = data;
     jsonData.forEach((val) => {
