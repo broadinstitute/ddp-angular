@@ -1,5 +1,7 @@
 @import '../styles/variables';
 @import '../styles/breakpoints';
+@import '../styles/colors';
+
 
 :host {
   display: flex;
@@ -21,6 +23,9 @@ main {
     }
     @include media-xs {
         margin-top: $header-xs-height;
+    }
+    &.dashboard-participant{
+        background-color: $__cultured;
     }
 }
 
