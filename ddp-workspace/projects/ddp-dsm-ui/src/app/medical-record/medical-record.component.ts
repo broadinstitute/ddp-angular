@@ -306,15 +306,15 @@ export class MedicalRecordComponent implements OnInit {
       if (contact instanceof Lookup) {
         const nameValues = [];
         this.medicalRecord.name = contact.field1.value;
-        nameValues.push({name: 'm.name', value: this.medicalRecord.name || ""});
+        nameValues.push({name: 'm.name', value: this.medicalRecord.name || ''});
 
-        this.medicalRecord.contact = contact.field2.value || "";
+        this.medicalRecord.contact = contact.field2.value || '';
         nameValues.push({name: 'm.contact', value: this.medicalRecord.contact});
 
-        this.medicalRecord.phone = contact.field3.value || "";
+        this.medicalRecord.phone = contact.field3.value || '';
         nameValues.push({name: 'm.phone', value: this.medicalRecord.phone});
 
-        this.medicalRecord.fax = contact.field4.value || "";
+        this.medicalRecord.fax = contact.field4.value || '';
         nameValues.push({name: 'm.fax', value: this.medicalRecord.fax});
 
         this.lookups        = [];
