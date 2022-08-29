@@ -4,6 +4,8 @@ import { AnalyticsEventsService } from 'ddp-sdk';
 import { GTagEvent } from './constants/gtag-event';
 import { Route } from './constants/route';
 import { IGNORE_ANALYTICS_CLASS } from './constants/analytics';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter, map, Observable } from 'rxjs';
 
 
 @Component({
@@ -13,11 +15,20 @@ import { IGNORE_ANALYTICS_CLASS } from './constants/analytics';
 })
 export class AppComponent {
   title = 'ddp-singular';
+  participantsPath='/participants';
+  routerPath:Observable<any>;
 
   constructor(
     private elRef: ElementRef,
-    private analytics: AnalyticsEventsService
-  ) {}
+    private analytics: AnalyticsEventsService,
+    private router:Router
+  ) {
+   this.routerPath= router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      map(event => event['url'])
+  );
+      
+  }
 
   onActivate(): void {
     this.elRef.nativeElement.scrollTo(0,0);
