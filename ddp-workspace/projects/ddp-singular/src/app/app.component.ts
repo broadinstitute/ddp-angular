@@ -14,7 +14,6 @@ import { IGNORE_ANALYTICS_CLASS } from './constants/analytics';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ddp-singular';
   readonly participantsPath = '/participants';
   routerPath: Observable<string>;
 
