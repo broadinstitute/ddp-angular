@@ -63,7 +63,6 @@ export class DashboardComponent implements OnInit {
     [ 'k', 'Sample' ],
     [ 'a', 'Abstraction' ] ]);
   sourceColumns = {};
-  downloadSource;
   hasESData = false;
   activityDefinitionList: ActivityDefinition[] = [];
   participantList: Participant[] = [];
@@ -484,54 +483,6 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  dataExport(source: string): void {
-    this.loadingDDPData = true;
-    if (source != null) {
-      const date = new Date();
-      const columns = {};
-      this.dataSources.forEach((value: string, key: string) => {
-        if (this.sourceColumns[ key ] != null && this.sourceColumns[ key ].length !== 0) {
-          columns[ key ] = this.sourceColumns[ key ];
-        }
-      });
-      if (this.participantList.length !== 0) {
-        if (source === 'm') {
-          Utils.downloadCurrentData(
-            this.participantList, [ [ 'data', 'data' ], [ 'participant', 'p' ], [ 'medicalRecords', 'm' ] ],
-            columns, 'Participants-MR-' + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION
-          );
-          this.downloadDone();
-        } else if (source === 'oD') {
-          Utils.downloadCurrentData(
-            this.participantList, [ [ 'data', 'data' ], [ 'participant', 'p' ], [ 'oncHistoryDetails', 'oD', 'tissues', 't' ] ],
-            columns, 'Participants-OncHistory-' + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION
-          );
-          this.downloadDone();
-        } else if (source === 'k') {
-          Utils.downloadCurrentData(this.participantList,
-            [ [ 'data', 'data' ], [ 'participant', 'p' ], [ 'kits', 'k' ] ],
-            columns,
-            'Participants-Sample-' + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION
-          );
-          this.downloadDone();
-        } else if (source === 'a') {
-          // TODO add final abstraction values to download
-          Utils.downloadCurrentData(
-            this.participantList, [ [ 'data', 'data' ], [ 'participant', 'p' ], [ 'abstractionActivities', 'a' ] ],
-            columns, 'Participants-Abstraction-' + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION
-          );
-          this.downloadDone();
-        } else {
-          Utils.downloadCurrentData(
-            this.participantList, [ [ 'data', 'data' ], [ source, source ] ], columns,
-            'Participants-' + source + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION, true
-          );
-          this.downloadDone();
-        }
-      }
-    }
-  }
-
   getParticipantData(): void {
     this.dsmService.applyFilter(null, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), 'participantList', null)
       .subscribe({
@@ -551,21 +502,6 @@ export class DashboardComponent implements OnInit {
           this.errorMessage = 'Error - Downloading Participant List, Please contact your DSM developer';
         }
       });
-  }
-
-  downloadDone(): void {
-    this.loadingDDPData = false;
-    this.errorMessage = null;
-  }
-
-  getSourceKeys(): string[] {
-    const keys = [];
-    this.dataSources.forEach((value: string, key: string) => {
-      if (key !== 'data' && key !== 'p' && key !== 't') {
-        keys.push(key);
-      }
-    });
-    return keys;
   }
 
 }

@@ -1128,18 +1128,6 @@
             </ng-container>
           </ng-container>
         </ng-container>
-        <tr>
-          <td colspan="4">
-            <br/>
-            <mat-select placeholder="Select source" [(ngModel)]="downloadSource" class="Input--Bigger-WIDTH">
-              <mat-option *ngFor="let key of getSourceKeys()" [value]="key">{{dataSources.get(key)}}</mat-option>
-            </mat-select>
-            <button type="button" mat-raised-button color="primary"
-                    (click)="dataExport(downloadSource)"
-                    [disabled]="participantList.length === 0 || downloadSource == null">Export Data
-            </button>
-          </td>
-        </tr>
         </tbody>
       </table>
     </div>
