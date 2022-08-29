@@ -16,6 +16,7 @@ export class ScanPairComponent implements OnInit {
   @Input() leftInputPlaceholder = 'Kit Label';
   @Input() rightInputPlaceholder = 'DSM Label';
   @Input() errorMessage: string;
+  @Input() selectedScan: string;
 
   @Output() pairScanned = new EventEmitter();
   @Output() removeScanPair = new EventEmitter();
@@ -28,7 +29,7 @@ export class ScanPairComponent implements OnInit {
   }
 
   moveFocus(leftValue: string): void {
-    if(leftValue.length < 14) {
+    if(leftValue.length < 14 && this.selectedScan == "Final Scan") {
       this.lengthError = 'Error: Barcode contains less than 14 digits. You can manually enter any missing digits above.';
     } else {
       this.lengthError = null;
