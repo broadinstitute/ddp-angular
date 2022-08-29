@@ -1,4 +1,11 @@
-<table class="Width--100">
+<div *ngIf="fieldSetting.displayType === 'CHECKBOX'">
+  <mat-checkbox [color]="isCheckboxPatchedCurrently(fieldSetting.columnName)" [disabled]="fieldSetting.readonly"
+                disableRipple
+                (change)="valueChanged($event)" [checked]="isChecked()">
+    {{fieldSetting.columnDisplay}}
+  </mat-checkbox>
+</div>
+<table class="Width--100" *ngIf="fieldSetting.displayType !== 'CHECKBOX'">
   <tr>
     <td class="TD--Padding Width--30">
       {{fieldSetting.columnDisplay}}
@@ -12,14 +19,6 @@
                  [readonly] = "fieldSetting.readonly">
         </mat-form-field>
       </ng-container>
-
-      <ng-container *ngIf="fieldSetting.displayType === 'CHECKBOX'">
-        <mat-checkbox [color]="isCheckboxPatchedCurrently(fieldSetting.columnName)" [disabled]="fieldSetting.readonly"
-                      disableRipple
-                      (change)="valueChanged($event)" [checked]="isChecked()">
-        </mat-checkbox>
-      </ng-container>
-
       <ng-container *ngIf="fieldSetting.displayType === 'OPTIONS'">
         <mat-select [ngClass]="{'Input--Abstraction': true, 'Color--Field--Patched': isPatchedCurrently(fieldSetting.columnName)}" placeholder="{{fieldSetting.columnDisplay}}"
                   [ngModel]="getActivityAnswer()"

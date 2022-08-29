@@ -13,6 +13,7 @@ export class FormDataComponent {
   @Input() participantData: string;
   @Input() activityData: string;
   @Input() activityOptions: string[];
+  @Input() checkBoxGroups: {};
   @Input() patchFinished: boolean;
   @Output() patchData = new EventEmitter();
 
