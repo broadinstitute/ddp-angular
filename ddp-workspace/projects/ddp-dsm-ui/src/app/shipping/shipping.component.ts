@@ -97,6 +97,8 @@ export class ShippingComponent implements OnInit {
   tmpKitRequest: KitRequest;
   alertText: string;
 
+  isClinicalStudy: Boolean = false;
+
   constructor(private route: ActivatedRoute, private router: Router, private dsmService: DSMService, private auth: Auth,
                private role: RoleService, private compService: ComponentService, private _changeDetectionRef: ChangeDetectorRef,
                private util: Utils, private language: Language, private localStorageService: LocalStorageService) {
@@ -260,6 +262,7 @@ export class ShippingComponent implements OnInit {
     this.errorMessage = null;
     this.needsNameLabels = false;
     this.kitsWithNoReturn = false;
+    this.isClinicalStudy = false;
     this.loading = true;
 
     let jsonData: any[];
@@ -275,6 +278,9 @@ export class ShippingComponent implements OnInit {
               const kit = KitRequest.parse(val);
               if (kit.noReturn) {
                 this.kitsWithNoReturn = true;
+              }
+              if(kit.receivedBy === 'MERCURY') {
+                this.isClinicalStudy = true;
               }
               this.kitRequests.push(kit);
             });
