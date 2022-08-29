@@ -21,13 +21,21 @@ export class ScanPairComponent implements OnInit {
   @Output() removeScanPair = new EventEmitter();
   @Output() leftLabelAdded = new EventEmitter();
 
+  lengthError: string;
+
   ngOnInit(): void {
     this.leftInput.nativeElement.focus();
   }
 
   moveFocus(leftValue: string): void {
-    this.rightInput.nativeElement.focus();
-    this.leftLabelAdded.next([leftValue, this.positionScanPair]);
+    if(leftValue.length < 14) {
+      this.lengthError = "Error: Barcode contains less than 14 digits. You can manually enter any missing digits above.";
+    } else {
+      this.lengthError = null;
+      this.rightInput.nativeElement.focus();
+      this.leftLabelAdded.next([leftValue, this.positionScanPair]);
+    }
+
   }
 
   nextPair(leftValue: string, rightValue: string): void {
