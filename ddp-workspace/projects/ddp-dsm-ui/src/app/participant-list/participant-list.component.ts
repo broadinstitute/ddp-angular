@@ -95,7 +95,7 @@ export class ParticipantListComponent implements OnInit {
   exportFileFormat = 'xlsx';
   exportHumanReadable = false;
   exportOnlyMostRecent = false;
-
+  EXPORT_SIZE_LIMIT = 10000; // limit due to ElasticSearch paging range limit
   selectedColumns = {};
   prevSelectedColumns = {};
   defaultColumns = [];
