@@ -18,7 +18,7 @@ var DDP_ENV = {
     doGcpErrorReporting: true,
     studyGuid: "{{$study_guid}}",
     tcellbaseurl: "https://us.agent.tcell.insight.rapid7.com/api/v1",
-
+    runtimeEnvironment: "{{$environment}}"
 };
 
 // Log levels: 1 - debug; 2 - info; 3 - warning; 4 - error. E.g. 1 includes debug level and higher, 2 includes info and higher, etc.

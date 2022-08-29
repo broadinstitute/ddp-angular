@@ -92,9 +92,9 @@ export class ParticipantListComponent implements OnInit {
   filterQuery: string = null;
   activityDefinitions = new Map();
 
-  exportFileFormat: string = 'xlsx';
-  exportHumanReadable: boolean = false;
-  exportOnlyMostRecent: boolean = false;
+  exportFileFormat = 'xlsx';
+  exportHumanReadable = false;
+  exportOnlyMostRecent = false;
 
   selectedColumns = {};
   prevSelectedColumns = {};
@@ -587,7 +587,7 @@ export class ParticipantListComponent implements OnInit {
           this.sourceColumns['data'].push(new Filter(ParticipantColumn.PREFERRED_LANGUAGE, Filter.OPTION_TYPE, options));
         }
 
-        if (jsonData.hideMRTissueWorkflow != null) {
+        if (jsonData.hideMRTissueWorkflow != null || !this.role.allowedToViewMedicalRecords()) {
           this.dataSources.delete('m');
           this.dataSources.delete('oD');
           this.dataSources.delete('t');
@@ -777,6 +777,7 @@ export class ParticipantListComponent implements OnInit {
         defaultFilter = this.quickFilters.find(filter => filter.filterName === this.role.getUserSetting().defaultParticipantFilter);
       }
       if (defaultFilter != null) {
+        defaultFilter.selected=true;
         this.selectFilter(defaultFilter);
       } else if (this.role.getUserSetting().defaultParticipantFilter !== ''
         && this.role.getUserSetting().defaultParticipantFilter != null
@@ -1056,7 +1057,7 @@ export class ParticipantListComponent implements OnInit {
     this.start = new Date().getTime();
     this.filterQuery = null;
     this.resetSelectedPatients();
-    this.clearManualFilters();
+    this.clearAllFilters();
     this.getData();
     this.setDefaultColumns();
   }
@@ -1135,6 +1136,11 @@ export class ParticipantListComponent implements OnInit {
     return date.toLocaleString('en-US', options);
   }
 
+  public clearAllFilters(): void {
+    this.clearManualFilters();
+    this.deselectQuickFilters();
+    this.deselectSavedFilters();
+  }
   public clearManualFilters(): void {
     this.dataSources.forEach((value: string, key: string) => {
       if (this.selectedColumns[ key ] != null) {
@@ -1834,6 +1840,10 @@ export class ParticipantListComponent implements OnInit {
 
   deselectQuickFilters(): void {
     this.deselectFilters(this.quickFilters);
+  }
+
+  deselectSavedFilters(): void {
+    this.deselectFilters(this.savedFilters);
   }
 
   deselectFilters(filterArray: ViewFilter[]): void {

@@ -270,10 +270,10 @@
         </select>
 
         <button mat-raised-button color="primary"
-                (click)="getSelectedList(shippingPage)" [disabled]="isPrintButtonDisabled">Print Labels
+                (click)="onPrintLabelsClick()" [disabled]="isPrintButtonDisabled">Print Labels
         </button>
 
-        <button mat-raised-button color="primary" *ngIf="showPHIButton(selectedStudy$ | async)" [disabled]="isPrintButtonDisabled">PHI Label
+        <button (click)="onPrintPHIClick()" mat-raised-button color="primary" *ngIf="showPHIButton(selectedStudy$ | async)" [disabled]="isPrintButtonDisabled">PHI Label
         </button>
 
         <button mat-raised-button color="primary"
@@ -368,11 +368,30 @@
   <!--DON'T REMOVE - START-->
   <!--Hidden, but needs to be here for the label printing-->
   <span [hidden]="true">
+    <div class="app-modal-body Display--Inline-Block" id="labelNameDOBDiv">
+        <ng-container *ngFor="let label of selectedKitRequests">
+          <ng-container *ngIf="label.shortId">
+            <div [ngStyle]="{'height': getLabelHeight()}" class="DIV--Without-Border">
+              <p>{{label.firstName}} {{label.lastName}} {{label.dateOfBirth}}</p>
+            </div>
+
+            <div class="pagebreak"> </div>
+
+            <div style="transform: rotate(90deg) translate(-130px, -40px); width: fit-content; height: 100px;">
+              <app-kit-label class="DIV--Without-Border Display--Inline-Block" [urlTo]="null" [shortId]="label.shortId"
+                             [urlReturn]="null" [labelSetting]="selectedSetting"></app-kit-label>
+            </div>
+            <div class="pagebreak"> </div>
+          </ng-container>
+        </ng-container>
+    </div>
+
   <div class="app-modal-body Display--Inline-Block" id="labelDiv" style="width: 100%; height: 100%">
     <ng-container *ngFor="let label of selectedKitRequests; let e = even; let i = index;">
       <div *ngIf="e" [ngStyle]="{'height': getTopMargin()}" class="DIV--Without-Border"></div>
       <div [ngStyle]="{'height': getLabelHeight()}" class="DIV--Without-Border">
-        <app-kit-label class="DIV--Without-Border Display--Inline-Block" [urlTo]="label.labelUrlTo" [shippingId]="label.ddpLabel"
+        <app-kit-label class="DIV--Without-Border Display--Inline-Block"
+                       [urlTo]="label.labelUrlTo" [shippingId]="label.ddpLabel"
                        [urlReturn]="label.labelUrlReturn" [labelSetting]="selectedSetting"></app-kit-label>
       </div>
       <div *ngIf="e" [ngStyle]="{'height': getMarginBetweenTopBottom()}" class="DIV--Without-Border"></div>
@@ -384,7 +403,8 @@
     <ng-container *ngFor="let label of selectedKitRequests; let e = even; let i = index;">
       <div *ngIf="e" [ngStyle]="{'height': getTopMargin()}" class="DIV--Without-Border"></div>
       <div [ngStyle]="{'height': getLabelHeight()}" class="DIV--Without-Border">
-        <app-error-label class="DIV--Without-Border Display--Inline-Block" [address]="label.participant" [shippingId]="label.ddpLabel"
+        <app-error-label class="DIV--Without-Border Display--Inline-Block"
+                         [address]="label.participant" [shippingId]="label.ddpLabel"
                          [labelSetting]="selectedSetting"></app-error-label>
       </div>
       <div *ngIf="e" [ngStyle]="{'height': getMarginBetweenTopBottom()}" class="DIV--Without-Border"></div>

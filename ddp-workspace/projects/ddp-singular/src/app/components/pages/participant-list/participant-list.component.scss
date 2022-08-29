@@ -5,7 +5,6 @@
 .spinner-container {
   display: flex;
   justify-content: center;
-
   margin: 8.39rem;
 }
 
@@ -13,10 +12,14 @@
   background-color: $__cultured;
 }
 
+.container{
+  background-color: $__cultured;
+}
+
 .grouper {
   width: 90%;
   margin: 0 auto 370px auto;
-
+.title-enrollment-message,
 .title {
   margin: .7rem 0;
   font-size: 1.3rem;
@@ -80,17 +83,17 @@
         background-color: white;
     }
   &__name {
-      margin-top: 5px;
       color: black;
       font-family: 'Spartan-Bold', sans-serif;
       width: 20rem;
   }
 
   &__expand-btn {
-      color:black;
-      font-weight: bold;
+    width: auto;
+    color: black;
+    font-weight: bold;
+
     mat-icon {
-        margin-top: 1px;
       transition: transform 0.2s ease;
     }
 
@@ -127,6 +130,33 @@
 
   margin-top: 1.6rem;
 
+  .family-enrollment-section{
+    display: flex;
+    align-items: flex-start;
+    border-radius: 3px;
+    background-color: #FFFFFF;
+    margin: 1.11rem 0 1.11rem 0;
+  }
+  .enrollment-image{
+    height: 289.17px;
+    width: 196.85px;
+    margin: 25.83px 69.15px 0 59px;
+  }
+  .title-enrollment-message{
+    margin: 2.1rem 0 0;
+    font-size: 1.11rem;
+    color: $_title;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 1.22rem;
+  }
+  .family-enrollment-description{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 3.61rem;
+  }
+
   .button {
     width: 433px;
     height: 67px;
@@ -135,14 +165,32 @@
     padding: 14.5px 5.5px 14.5px 11.5px;
     align-items: center;
     justify-content: space-between;
+    &.enrollment-message{
+      background-color: $_enrollment-message-button !important;
+      border-color: unset !important;
+      width: 22.72rem;
+      height: 3.11rem;
+      margin-top: 1.66rem;
+      @include media-lg{
+        width: 24.72rem;
+      }
+    }
     @include media-md {
-        width: 80%;
+        width: 80% !important;
     }
     @include media-sm {
-        width: 100%;
+        width: 100% !important;
     }
     @include media-xs {
-        width: 100%;
+        width: 100% !important;
+    }
+
+    .family-enrollment-message{
+      white-space: nowrap;
+      text-align: center !important;
+      letter-spacing: 0;
+      line-height: 2.11rem;
+      color: $_enrollment-message-text-color;
     }
 
       .user-container {
@@ -175,11 +223,20 @@
           align-items: center;
           margin-top: 3px;
           justify-content: flex-start;
+          &.enrollment-text-button{
+            width: 100%;
+          }
           p {
               text-align: start;
               font-size: 20px!important;
               margin:  0 0 0 8px!important;
               font-family: Spartan-Semibold, sans-serif!important;
+              &.family-enrollment-message{
+                @include media-sm {
+                  font-size: 16px !important;
+                  margin: 0 !important;
+              }
+              }
           }
       }
       .next-container {
@@ -214,7 +271,14 @@
 }
 
 .share-project {
-    margin-top: 15px;
+  margin-top: 15px;
+}
+
+.family-enrollment-description-message{
+    margin: 0.88rem 1.44rem 0 0;
+    font-weight: 600;
+    line-height: 26px;
+    letter-spacing: 0;
 }
 
 .enrollmentStatusCompleteText {
@@ -231,12 +295,13 @@
 
 .enrollmentStatusIcon {
     width: 25px;
-    margin-bottom: 2px;
+    margin-bottom: 5px;
 }
 
     .StatusAndExpandBtn {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         width: 100%;
     }
 
@@ -250,14 +315,23 @@
         .participant__name {
             width: 19rem;
         }
-
+        .button {
+          .family-enrollment-message{
+            white-space: initial !important;
+          }
+          &.enrollment-message{
+            height: 4.11rem !important;
+          }
+        }
     }
 
     @media screen and (max-width: 880px) {
         .participant__name {
             width: 17rem;
         }
-
+        .family-enrollment-section{
+          flex-direction: column;
+        }
     }
 
     @media screen and (max-width: 750px) {
@@ -265,6 +339,7 @@
             width: 20px;
         }
     }
+
     @media screen and (max-width: 680px) {
         .participant__header {
             flex-wrap: wrap;
@@ -273,8 +348,9 @@
             display: none;
         }
 
-        .StatusAndExpandBtn {
-            align-items: center;
+        .title-enrollment-message{
+          margin: 1.2rem 0;
+          font-size: 1.2rem;
         }
     }
 }

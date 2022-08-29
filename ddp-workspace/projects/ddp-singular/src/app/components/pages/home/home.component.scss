@@ -1,6 +1,91 @@
 @import '../../../../styles/colors';
 @import "../../../../styles/breakpoints";
 
+@mixin DDP-8404-feature {
+  &.DDP-8404-feature {
+
+    .join-left {
+      &-heading{
+        margin-left: unset;
+      }
+      &-sub-heading {
+        margin-bottom: 22px;
+        font-size: 24px;
+        letter-spacing: 0;
+        line-height: 34px;
+      }
+      .welcome-people-of {
+        color: $__purple;
+        font-size: 20px;
+        line-height: 28px;
+        margin-top: 36px;
+        margin-left: 38px;
+      }
+    }
+
+    .join-list {
+      padding-left: 36px;
+
+      li {
+        &:before {
+          width: 5px;
+          height: 5px;
+          left: -36px;
+          top: 12px;
+        }
+      }
+    }
+
+    .join-sign_up-text {
+      p {
+        font-size: 24px;
+        line-height: 34px;
+        text-align: left;
+        margin-top: 22px;
+      }
+    }
+
+    .participating-steps {
+      &-step {
+        padding: 32px 40px 60px;
+
+        &-img {
+          height: 261px;
+          margin: 0 0 20px;
+        }
+
+        &-title {
+          font-size: 1rem;
+        }
+
+        &-text {
+          > * {
+            font-size: 1.11rem;
+          }
+        }
+      }
+    }
+
+    .participating-about {
+      margin-top: 60px;
+
+      p {
+        font-size: 1.33rem;
+        line-height: 34px;
+        margin-bottom: 28px;
+      }
+      .purple {
+        color: $__purple;
+      }
+      .underline {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+
+  }
+}
+
 :host {
   color: $__font;
 
@@ -222,6 +307,8 @@
 }
 
 .join {
+  @include DDP-8404-feature;
+
   margin-top: 100px;
   h1 {
     margin-bottom: 35px;
@@ -251,13 +338,14 @@
     @include media-md {
       padding-right: 0;
     }
-     &-heading {
-       margin-left: 25px;
-       @include media-md {
-         margin-left: 0;
-       }
-     }
+    &-heading {
+      margin-left: 25px;
+      @include media-md {
+        margin-left: 0;
+      }
+    }
   }
+
   &-right {
     max-width: 600px;
     margin-top: 90px;
@@ -266,6 +354,7 @@
       width: 100%;
     }
   }
+
   &-list {
     font-size: 1.2em;
     line-height: 30px;
@@ -294,6 +383,7 @@
       }
     }
   }
+
   &-sign_up {
     width: 85%;
     margin: 0 auto;
@@ -311,6 +401,8 @@
 }
 
 .participating {
+  @include DDP-8404-feature;
+
   margin-top: 100px;
   padding: 40px 40px 60px;
   background: rgba(162, 244, 233, 0.5);
@@ -356,14 +448,15 @@
         color: $__black;
         margin-top: 10px;
           @include media-sm {
-              overflow-wrap: break-word;
+            overflow-wrap: break-word;
           }
       }
       &-text {
         margin-top: 25px;
         height: 40%;
+
           p {
-              margin-bottom: 10px!important;
+            margin-bottom: 10px!important;
           }
       }
     }

@@ -1,9 +1,13 @@
-import { Component, ElementRef, HostListener } from '@angular/core';
-import { AnalyticsEventsService } from 'ddp-sdk';
+import { Component, ElementRef, HostListener, Inject } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter, map, Observable } from 'rxjs';
 
+import { AnalyticsEventsService, ConfigurationService, RuntimeEnvironment } from 'ddp-sdk';
 import { GTagEvent } from './constants/gtag-event';
 import { Route } from './constants/route';
 import { IGNORE_ANALYTICS_CLASS } from './constants/analytics';
+import { FeatureFlagsToggleComponent } from './components/feature-flags-toggle/feature-flags-toggle.component';
 
 
 @Component({
@@ -12,12 +16,23 @@ import { IGNORE_ANALYTICS_CLASS } from './constants/analytics';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ddp-singular';
+  isProdMode: boolean;
+  readonly participantsPath = '/participants';
+  routerPath: Observable<string>;
 
   constructor(
     private elRef: ElementRef,
-    private analytics: AnalyticsEventsService
-  ) {}
+    private analytics: AnalyticsEventsService,
+    private dialog: MatDialog,
+    @Inject('ddp.config') private config: ConfigurationService,
+    private router: Router
+  ) {
+    this.isProdMode = this.config.runtimeEnvironment === RuntimeEnvironment.Prod;
+    this.routerPath = router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      map(event => event['url'])
+    );
+  }
 
   onActivate(): void {
     this.elRef.nativeElement.scrollTo(0,0);
@@ -53,6 +68,16 @@ export class AppComponent {
     }
   }
 
+  // Opens a dialog by 'Ctrl+Alt+7' to setup/toggle feature flags
+  // it is used for feature flags testing only.
+  // should not be available on production
+  @HostListener('window:keydown.control.alt.7', ['$event'])
+  handleKeyDown(event: KeyboardEvent): void {
+    if (!this.isProdMode) {
+      this.openFeatureFlagsSetupDialog();
+    }
+  }
+
   private findNearestAnchorElement(target: EventTarget): HTMLAnchorElement {
     let link = target as HTMLAnchorElement;
 
@@ -61,5 +86,15 @@ export class AppComponent {
     }
 
     return link;
+  }
+
+  private openFeatureFlagsSetupDialog(): void {
+    this.dialog.closeAll();
+
+    this.dialog.open(FeatureFlagsToggleComponent, {
+      width: '95%',
+      maxWidth: 'max-content',
+      autoFocus: false,
+    });
   }
 }

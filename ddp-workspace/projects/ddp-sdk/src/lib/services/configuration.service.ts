@@ -4,9 +4,11 @@ import { QuestionType } from '../models/activity/questionType';
 import { UserProfileField } from '../models/userProfileFieldType';
 import { MailAddressFormErrorFormatter } from '../models/mailAddressFormErrorFormatter';
 import { InstitutionAdditionalFields, InstitutionType } from '../models/activity/institutionType';
+import { RuntimeEnvironment } from '../models/runtimeEnvironment';
 
 @Injectable()
 export class ConfigurationService {
+    runtimeEnvironment: RuntimeEnvironment;
     backendUrl: string;
     backendUrlDSS: string;
     baseUrl: string;

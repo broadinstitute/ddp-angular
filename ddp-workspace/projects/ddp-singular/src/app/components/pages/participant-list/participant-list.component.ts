@@ -22,6 +22,11 @@ import {
 } from 'ddp-sdk';
 import { ActivityCode } from '../../../constants/activity-code';
 import {COMPLETE, IN_PROGRESS} from '../../../../../../ddp-atcp/src/app/components/workflow-progress/workflow-progress';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { FamilyEnrollmentMessageComponent } from '../../family-enrollment-message/family-enrollment-message.component';
+import { getFeatureFlags$ } from '../../../config/feature-flags/feature-flags-setup';
+import { FeatureFlags } from '../../../config/feature-flags/feature-flags';
+import { FeatureFlagsEnum } from '../../../config/feature-flags/feature-flags.enum';
 
 interface Participant {
   firstName: string;
@@ -46,6 +51,10 @@ export class ParticipantsListComponent implements OnInit {
   errorMessage: string | null = null;
   isPageBusy = false;
   @Input() allowParticipantRemoval = false;
+
+  readonly featureFlag_DDP_8506 = getFeatureFlags$().pipe(
+    map((flags: FeatureFlags) => flags[FeatureFlagsEnum.ShowDDP8560DashboardPageUpdate])
+  );
 
   constructor(
     private router: Router,
@@ -370,6 +379,7 @@ export class ParticipantsListComponent implements OnInit {
       governedParticipants: governedParticipants$,
     }).pipe(
       map(({ operator, governedParticipants }) => {
+        console.log('#participantsBeforeSubs',governedParticipants);
         const participants: Participant[] = governedParticipants.map(p => ({
           firstName: p.userProfile.firstName,
           lastName: p.userProfile.lastName,
@@ -403,7 +413,7 @@ export class ParticipantsListComponent implements OnInit {
 
   private hasOnlyAddParticipantActivity(activities: ActivityInstance[]): boolean {
     return (
-      activities.length === 1 &&
+      activities?.length === 1 &&
       [
         ActivityCode.AddParticipantSelf,
         ActivityCode.AddParticipantParental,
@@ -413,7 +423,7 @@ export class ParticipantsListComponent implements OnInit {
   }
 
   private filterOutAddParticipant(activities: ActivityInstance[]): ActivityInstance[] {
-    return activities.filter(
+    return (activities || []).filter(
       activity =>
         ![
           ActivityCode.AddParticipantSelf,
@@ -421,5 +431,14 @@ export class ParticipantsListComponent implements OnInit {
           ActivityCode.AddParticipantDependent,
         ].includes(activity.activityCode as ActivityCode),
     );
+  }
+
+  public openDisclaimerDialog(): void {
+    this.dialog.open(FamilyEnrollmentMessageComponent, {
+        width: '95%',
+        maxWidth: '640px',
+        autoFocus: false,
+        scrollStrategy: new NoopScrollStrategy()
+    });
   }
 }

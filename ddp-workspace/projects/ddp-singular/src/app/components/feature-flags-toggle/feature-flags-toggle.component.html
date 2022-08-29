@@ -1,0 +1,9 @@
+<form [formGroup]="featureFlagsGroup">
+  <p class="title-text">Feature flags</p>
+
+  <ng-container *ngFor="let control of (featureFlagsGroup.controls | keyvalue)">
+    <mat-slide-toggle color="primary" class="toggle"
+                      [formControlName]="control.key">{{control.key}}
+    </mat-slide-toggle>
+  </ng-container>
+</form>

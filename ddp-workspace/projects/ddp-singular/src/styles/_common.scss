@@ -131,3 +131,6 @@ a:not(.button) {
 .text-semibold {
   font-family: 'Spartan-Semibold', sans-serif;
 }
+span.highlight{
+  color: $__highlighted-font;
+}
