@@ -8,6 +8,8 @@ const base: string = document.querySelector('base')?.getAttribute('href') || '';
 
 const configurationService: ConfigurationService = new ConfigurationService();
 
+
+configurationService.runtimeEnvironment = DDP_ENV.runtimeEnvironment;
 configurationService.defaultLanguageCode = 'en';
 configurationService.errorPageUrl = Route.Error;
 configurationService.logLevel = DDP_ENV.logLevel;

@@ -395,7 +395,7 @@ participant.data.dsm['diagnosisYear'] != null">
                       (change)="valueChanged($event, 'notes', 'r')"></textarea>
             </td>
           </tr>
-          <ng-container *ngIf="showParticipantRecord">
+          <ng-container *ngIf="showParticipantRecord && hasRole().allowedToViewMedicalRecords()">
             <tr *ngIf="participant.medicalRecords != null && participant.medicalRecords.length > 0">
               <td>Paper C/R Sent</td>
               <td>
@@ -415,7 +415,7 @@ participant.data.dsm['diagnosisYear'] != null">
               </td>
             </tr>
           </ng-container>
-          <tr *ngIf="participant.medicalRecords != null && participant.medicalRecords.length > 0">
+          <tr *ngIf="participant.medicalRecords != null && participant.medicalRecords.length > 0 && hasRole().allowedToViewMedicalRecords()">
             <td>Onc History Created</td>
             <td>
               <div class="Float--left">
@@ -433,7 +433,7 @@ participant.data.dsm['diagnosisYear'] != null">
               </div>
             </td>
           </tr>
-          <tr *ngIf="participant.medicalRecords != null && participant.medicalRecords.length > 0">
+          <tr *ngIf="participant.medicalRecords != null && participant.medicalRecords.length > 0 && hasRole().allowedToViewMedicalRecords()">
             <td>
               Incomplete/Minimal Medical Records
             </td>
@@ -446,7 +446,7 @@ participant.data.dsm['diagnosisYear'] != null">
               </mat-checkbox>
             </td>
           </tr>
-          <tr *ngIf="participant.medicalRecords != null && participant.medicalRecords.length > 0">
+          <tr *ngIf="participant.medicalRecords != null && participant.medicalRecords.length > 0 && hasRole().allowedToViewMedicalRecords()">
             <td>
               Ready for Abstraction
             </td>
@@ -461,7 +461,7 @@ participant.data.dsm['diagnosisYear'] != null">
           </tr>
         </table>
       </div>
-      <div class="Float--left Width--100" *ngIf="settings['r'] != null">
+      <div class="Float--left Width--100" *ngIf="settings['r'] != null && hasRole().allowedToViewMedicalRecords()">
         <table class="Width--100">
             <tr *ngFor="let fieldSetting of settings['r']">
               <td>{{fieldSetting.columnDisplay}}</td>
@@ -760,7 +760,7 @@ participant.data.dsm['diagnosisYear'] != null">
           </tab>
 
             <tab heading="Medical Records"
-                 *ngIf="participant.medicalRecords != null && participant.medicalRecords.length > 0"
+                 *ngIf="participant.medicalRecords != null && participant.medicalRecords.length > 0 && hasRole().allowedToViewMedicalRecords()"
                  [active]="tabActive('Medical Records')" (selectTab)="onSelect($event, 'Medical Records')">
               <br/><br/><br/>
 
@@ -833,7 +833,7 @@ participant.data.dsm['diagnosisYear'] != null">
             </tab>
 
             <tab heading="Onc History"
-                 *ngIf="isOncHistoryVisible"
+                 *ngIf="isOncHistoryVisible && hasRole().allowedToViewMedicalRecords()"
                  [active]="tabActive('Onc History')" (selectTab)="onSelect($event, 'Onc History')">
               <br/><br/><br/>
 

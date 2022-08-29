@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { map } from 'rxjs/operators';
 
 import { AnalyticsEventsService } from 'ddp-sdk';
 import { Route } from '../../../constants/route';
 import { GTagEvent } from '../../../constants/gtag-event';
 import { IGNORE_ANALYTICS_CLASS } from '../../../constants/analytics';
 import { FamilyEnrollmentMessageComponent } from '../../family-enrollment-message/family-enrollment-message.component';
-import { featureFlags } from '../../../config/feature-flags';
+import { getFeatureFlags$ } from '../../../config/feature-flags/feature-flags-setup';
+import { FeatureFlags } from '../../../config/feature-flags/feature-flags';
+import { FeatureFlagsEnum } from '../../../config/feature-flags/feature-flags.enum';
 
 @Component({
   selector: 'app-home',
@@ -26,7 +29,9 @@ export class HomeComponent {
   readonly CONSENT_PDF_NAME = 'Preview Consent Form';
   readonly PRESCREEN_BUTTON_LABEL = 'Sign me up!';
 
-  readonly featureFlag_DDP_8404 = featureFlags.DDP_8404_Home_page_update;
+  readonly featureFlag_DDP_8404 = getFeatureFlags$().pipe(
+    map((flags: FeatureFlags) => flags[FeatureFlagsEnum.ShowDDP8404HomePageUpdate])
+  );
 
   constructor(
     private analytics: AnalyticsEventsService,

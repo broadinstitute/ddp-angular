@@ -65,6 +65,7 @@ export * from './lib/models/userProfileFieldType';
 export * from './lib/models/session';
 export * from './lib/models/mailAddressFormErrorFormatter';
 export * from './lib/models/funcType';
+export * from './lib/models/runtimeEnvironment';
 
 export * from './lib/services/logging.service';
 export * from './lib/services/serviceAgents/activityActionsAgent.service';

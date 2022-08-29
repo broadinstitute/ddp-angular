@@ -74,6 +74,15 @@ export class ScanComponent implements OnInit {
     }
   }
 
+  public get displayScanText(): string {
+    if(!this.scanTracking && !this.scanReceived)
+      {return 'Final Scan';}
+    else if(this.scanTracking)
+      {return 'Tracking Scan';}
+    else if(this.scanReceived)
+      {return 'Receiving Scan';}
+  }
+
   private checkIfKitLabelChanged(left: string, right: string, position: number): boolean {
     for (let i = 0; i < this.scanPairsValue.length; i++) {
       if (this.scanPairsValue[i].leftValue === left && i === position) {
