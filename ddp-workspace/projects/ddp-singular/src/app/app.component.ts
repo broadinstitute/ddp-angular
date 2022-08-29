@@ -1,11 +1,11 @@
 import { Component, ElementRef, HostListener } from '@angular/core';
-import { AnalyticsEventsService } from 'ddp-sdk';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter, map, Observable } from 'rxjs';
 
+import { AnalyticsEventsService } from 'ddp-sdk';
 import { GTagEvent } from './constants/gtag-event';
 import { Route } from './constants/route';
 import { IGNORE_ANALYTICS_CLASS } from './constants/analytics';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter, map, Observable } from 'rxjs';
 
 
 @Component({
@@ -15,19 +15,18 @@ import { filter, map, Observable } from 'rxjs';
 })
 export class AppComponent {
   title = 'ddp-singular';
-  participantsPath='/participants';
-  routerPath:Observable<any>;
+  readonly participantsPath = '/participants';
+  routerPath: Observable<string>;
 
   constructor(
     private elRef: ElementRef,
     private analytics: AnalyticsEventsService,
-    private router:Router
+    private router: Router
   ) {
-   this.routerPath= router.events.pipe(
+    this.routerPath = router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       map(event => event['url'])
-  );
-      
+    );
   }
 
   onActivate(): void {
