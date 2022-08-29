@@ -342,7 +342,7 @@ export class OncHistoryDetailComponent implements OnInit {
       nameValues.push({ name: 'oD.facility', value: contact.field1.value });
       nameValues.push({ name: 'oD.phone', value: contact.field3.value });
       nameValues.push({ name: 'oD.fax', value: contact.field4.value });
-      nameValues.push({ name: 'oD.destructionPolicy', value: contact.field5.value });
+      nameValues.push({ name: 'oD.destructionPolicy', value: contact.field5.value || ''  });
 
     return nameValues;
   }
