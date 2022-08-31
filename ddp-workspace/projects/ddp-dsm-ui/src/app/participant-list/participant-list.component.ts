@@ -1120,18 +1120,19 @@ export class ParticipantListComponent implements OnInit {
 
   private getDefaultColumns(): {} {
     const filteredColumns = {};
-
-    for (const [key, value] of Object.entries(this.sourceColumns)) {
-      const val = value as Filter[];
-      const newVal = [];
-      val.forEach(el => {
-        const defaultColumn = this.defaultColumns.find(col =>
-          el['participantColumn']['name'] === col['participantColumn']['name']);
-        if (defaultColumn) {
-          newVal.push(el);
-        }
-      });
-      filteredColumns[key] = newVal;
+    for (const defaultColumn of this.defaultColumns){
+      Object.entries(this.sourceColumns).forEach( entry => {
+        const [key, value] = entry;
+        const val = value as Filter[];
+        val.forEach(col => {
+            if (defaultColumn['participantColumn']['name'] === col['participantColumn']['name']
+              && defaultColumn['participantColumn']['tableAlias'] === col['participantColumn']['tableAlias']) {
+              const newVal = filteredColumns[key]? filteredColumns[key]: [];
+              newVal.push(col);
+              filteredColumns[key] = newVal;
+            }
+        });
+      })
     }
     return filteredColumns;
   }
