@@ -359,12 +359,12 @@ export class ShippingComponent implements OnInit {
             <link rel="stylesheet" href="style.css" media="screen,print">
             <style type="text/css">
 
-          @page { size: 100mm 100mm }
+        @page { size: 100mm 100mm }
 
-          body.receipt .reward-body { width: 58mm; height: 50mm }
+        body.parent-body .reward-body { width: 58mm; height: 50mm }
 
         @media print {
-            body.receipt {
+            body.parent-body {
                width: 58mm
             }
         }
@@ -416,8 +416,8 @@ export class ShippingComponent implements OnInit {
         }
 </style>
           </head>
-          <body class="receipt" onload="window.print()">
-            <div class="reward-body">${printContents}</div>
+          <body class="parent-body" onload="window.print()">
+            <div class="reward-body padding-10mm">${printContents}</div>
           </html>
         `);
         popup.document.close();
