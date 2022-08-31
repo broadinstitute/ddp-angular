@@ -1125,9 +1125,8 @@ export class ParticipantListComponent implements OnInit {
       const val = value as Filter[];
       const newVal = [];
       val.forEach(el => {
-        let defaultColumn = this.defaultColumns.find(col => {
-          el['participantColumn']['name'] === col['participantColumn']['name']
-        });
+        const defaultColumn = this.defaultColumns.find(col =>
+          el['participantColumn']['name'] === col['participantColumn']['name']);
         if (defaultColumn) {
           newVal.push(el);
         }
