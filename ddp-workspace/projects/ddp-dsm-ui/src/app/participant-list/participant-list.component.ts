@@ -1132,7 +1132,7 @@ export class ParticipantListComponent implements OnInit {
               filteredColumns[key] = newVal;
             }
         });
-      })
+      });
     }
     return filteredColumns;
   }
