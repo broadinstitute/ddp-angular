@@ -468,7 +468,8 @@
         <ng-container *ngFor="let label of selectedKitRequests">
           <ng-container *ngIf="label.shortId">
             <div [ngStyle]="{'height': getLabelHeight()}" class="DIV--Without-Border">
-              <p>{{label.firstName}} {{label.lastName}} {{label.dateOfBirth}}</p>
+              <p>{{label.firstName}} {{label.lastName}}</p>
+              <p>{{label.dateOfBirth}}</p>
             </div>
 
             <div class="pagebreak"> </div>
