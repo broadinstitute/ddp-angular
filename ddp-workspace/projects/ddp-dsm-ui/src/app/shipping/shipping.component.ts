@@ -358,10 +358,18 @@ export class ShippingComponent implements OnInit {
             <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" media="screen,print">
             <link rel="stylesheet" href="style.css" media="screen,print">
             <style type="text/css">
-         body { margin:0; }
-         @page { margin: 0 }
-        body { margin: 0 }
-        .sheet {
+
+          @page { size: 100mm 100mm }
+
+          body.receipt .reward-body { width: 58mm; height: 50mm }
+
+        @media print {
+            body.receipt {
+               width: 58mm
+            }
+        }
+
+        .reward-body {
           margin: 0;
           overflow: hidden;
           position: relative;
@@ -370,27 +378,27 @@ export class ShippingComponent implements OnInit {
         }
 
         /** Paper sizes **/
-        body.A3               .sheet { width: 297mm; height: 419mm }
-        body.A3.landscape     .sheet { width: 420mm; height: 296mm }
-        body.A4               .sheet { width: 210mm; height: 296mm }
-        body.A4.landscape     .sheet { width: 297mm; height: 209mm }
-        body.A5               .sheet { width: 148mm; height: 209mm }
-        body.A5.landscape     .sheet { width: 210mm; height: 147mm }
-        body.letter           .sheet { width: 216mm; height: 279mm }
-        body.letter.landscape .sheet { width: 280mm; height: 215mm }
-        body.legal            .sheet { width: 216mm; height: 356mm }
-        body.legal.landscape  .sheet { width: 357mm; height: 215mm }
+        body.A3               .reward-body { width: 297mm; height: 419mm }
+        body.A3.landscape     .reward-body { width: 420mm; height: 296mm }
+        body.A4               .reward-body { width: 210mm; height: 296mm }
+        body.A4.landscape     .reward-body { width: 297mm; height: 209mm }
+        body.A5               .reward-body { width: 148mm; height: 209mm }
+        body.A5.landscape     .reward-body { width: 210mm; height: 147mm }
+        body.letter           .reward-body { width: 216mm; height: 279mm }
+        body.letter.landscape .reward-body { width: 280mm; height: 215mm }
+        body.legal            .reward-body { width: 216mm; height: 356mm }
+        body.legal.landscape  .reward-body { width: 357mm; height: 215mm }
 
         /** Padding area **/
-        .sheet.padding-10mm { padding: 10mm }
-        .sheet.padding-15mm { padding: 15mm }
-        .sheet.padding-20mm { padding: 20mm }
-        .sheet.padding-25mm { padding: 25mm }
+        .reward-body.padding-10mm { padding: 10mm }
+        .reward-body.padding-15mm { padding: 15mm }
+        .reward-body.padding-20mm { padding: 20mm }
+        .reward-body.padding-25mm { padding: 25mm }
 
         /** For screen preview **/
         @media screen {
           body { background: #e0e0e0 }
-          .sheet {
+          .reward-body {
             background: white;
             box-shadow: 0 .5mm 2mm rgba(0,0,0,.3);
             margin: 5mm auto;
@@ -408,7 +416,7 @@ export class ShippingComponent implements OnInit {
         }
 </style>
           </head>
-          <body onload="window.print()">
+          <body class="receipt" onload="window.print()">
             <div class="reward-body">${printContents}</div>
           </html>
         `);
