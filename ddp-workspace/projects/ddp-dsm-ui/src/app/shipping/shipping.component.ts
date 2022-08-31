@@ -358,15 +358,12 @@ export class ShippingComponent implements OnInit {
             <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" media="screen,print">
             <link rel="stylesheet" href="style.css" media="screen,print">
             <style type="text/css">
-
-        @page { size: 100mm 100mm }
-
-        body.parent-body .reward-body { width: 58mm; height: 50mm }
-
-</style>
+              @page { size: 100mm 100mm }
+              body.main-print .print { width: 58mm; height: 50mm }
+            </style>
           </head>
-          <body class="parent-body" onload="window.print()">
-            <div class="reward-body padding-10mm">${printContents}</div>
+          <body class="main-print" onload="window.print()">
+            <div class=".print">${printContents}</div>
           </html>
         `);
         popup.document.close();

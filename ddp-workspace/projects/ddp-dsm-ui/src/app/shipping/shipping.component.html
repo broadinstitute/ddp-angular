@@ -470,14 +470,10 @@
             <div [ngStyle]="{'height': getLabelHeight()}" class="DIV--Without-Border">
               <p>{{label.firstName}} {{label.lastName}} {{label.dateOfBirth}}</p>
             </div>
-
-            <div class="pagebreak"> </div>
-
             <div style="transform: rotate(90deg) translate(-20px, -80px); width: fit-content;">
               <app-kit-label class="DIV--Without-Border Display--Inline-Block" [urlTo]="null" [shortId]="label.shortId"
                              [urlReturn]="null" [labelSetting]="selectedSetting"></app-kit-label>
             </div>
-            <div class="pagebreak"> </div>
           </ng-container>
         </ng-container>
     </div>
