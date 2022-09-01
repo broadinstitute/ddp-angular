@@ -64,10 +64,8 @@
             <div class="family-enrollment-description">
               <h3 class="title-enrollment-message">{{'ParticipantsList.FamilyEnrollmentTitle' | translate}}</h3>
               <p class="family-enrollment-description-message" [innerHTML]="'ParticipantsList.FamilyEnrollmentDescription' | translate"></p>
-              <button class="button button--primary enrollment-message" (click)="openDisclaimerDialog()">
-                <div class="text-container enrollment-text-button">
-                  <p class="bolder family-enrollment-message" [innerHTML]="'ParticipantsList.FamilyEnrollmentMessage' | translate"></p>
-              </div>
+              <button class="button button--primary enrollment-message-btn"
+                (click)="openDisclaimerDialog()">{{'ParticipantsList.FamilyEnrollmentMessage' | translate}}
               </button>
             </div>
           </div>
@@ -98,11 +96,11 @@
           <div class="StatusAndExpandBtn">
             <div class="enrollmentStatusContainer">
               <div class="enrollmentStatusIncompleteText" *ngIf="getParticipantStatus(participant) === 'IN_PROGRESS'">
-                <img class="enrollmentStatusIcon" src="assets/images/alert-circle-orange-512.png">
+                <img class="enrollmentStatusIcon" src="assets/images/alert-circle-orange-512.png" [alt]="'ParticipantStatus.Alts.Incomplete' | translate">
                 {{ 'ParticipantStatus.status.inComplete' | translate}}
               </div>
               <div class="enrollmentStatusCompleteText" *ngIf="getParticipantStatus(participant) === 'COMPLETE'">
-                <img class="enrollmentStatusIcon" src="/assets/images/Check.png">
+                <img class="enrollmentStatusIcon" src="/assets/images/Check.png" [alt]="'ParticipantStatus.Alts.Complete' | translate">
                 {{ 'ParticipantStatus.status.complete' | translate}}
               </div>
             </div>
