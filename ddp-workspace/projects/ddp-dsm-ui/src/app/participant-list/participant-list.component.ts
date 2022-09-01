@@ -654,9 +654,7 @@ export class ParticipantListComponent implements OnInit {
           });
           this.orderColumns();
         }
-        debugger;
         if (jsonData.hideESFields != null) {
-          debugger;
           const hideESFields: Value[] = [];
           jsonData.hideESFields.forEach((val) => {
             const value: Value = Value.parse(val);
