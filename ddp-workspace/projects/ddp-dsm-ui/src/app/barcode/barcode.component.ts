@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, Input} from "@angular/core";
+import {AfterViewChecked, Component, Input} from '@angular/core';
 
 declare var JsBarcode: any;
 
@@ -10,7 +10,7 @@ export class BarcodeComponent implements AfterViewChecked {
 
   @Input() barcodeValue: string;
 
-  ngAfterViewChecked() {
+  ngAfterViewChecked(): void {
     this.initByIdJsBarcode();
   }
 
