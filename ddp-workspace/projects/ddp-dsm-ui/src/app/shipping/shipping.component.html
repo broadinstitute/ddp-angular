@@ -236,7 +236,7 @@
             </ng-container>
           </td>
           <td
-            [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP'}">
+            [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP' && isClinicalStudy && (shippingPage === RECEIVED || shippingPage === OVERVIEW)}">
             <!--            pt shortID-->
             {{kitRequest.getID()}}
             <div *ngIf="kitRequest.express && shippingPage === QUEUE" class="Float--right Router--Outlet">
@@ -249,7 +249,7 @@
             <!--            preferred Language-->
             <ng-container *ngIf="kitRequest.preferredLanguage != null && kitRequest.preferredLanguage !== ''">{{getLanguage().getLanguageName(kitRequest.preferredLanguage)}}</ng-container>
           </td>
-          <td *ngIf="shippingPage !== DEACTIVATED && !kitType.externalShipper" [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP'}">
+          <td *ngIf="shippingPage !== DEACTIVATED && !kitType.externalShipper" [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP' && isClinicalStudy && (shippingPage === RECEIVED || shippingPage === OVERVIEW)}">
             <!--            shipping ID-->
             {{kitRequest.ddpLabel}}
           </td>
@@ -266,51 +266,51 @@
             {{kitRequest.getError()}}
           </td>
           <td *ngIf="shippingPage === DEACTIVATED || shippingPage === OVERVIEW && !kitType.externalShipper"
-              [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP' && shippingPage === OVERVIEW}">
+              [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP' && isClinicalStudy && (shippingPage === RECEIVED || shippingPage === OVERVIEW)}">
             <!--            deactivation reason-->
             {{kitRequest.deactivationReason}}
           </td>
           <td *ngIf="shippingPage === DEACTIVATED || shippingPage === OVERVIEW && !kitType.externalShipper"
-              [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP' && shippingPage === OVERVIEW}">
+              [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP' && isClinicalStudy && (shippingPage === RECEIVED || shippingPage === OVERVIEW)}">
             <!--            deactivation date-->
             <ng-container *ngIf="kitRequest.deactivatedDate === 0"> -</ng-container>
             <ng-container *ngIf="kitRequest.deactivatedDate !== 0">{{kitRequest.deactivatedDate | date:'medium'}}</ng-container>
           </td>
-          <td *ngIf="shippingPage === SENT" [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP' && shippingPage === OVERVIEW}">
+          <td *ngIf="shippingPage === SENT" [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP' && isClinicalStudy && (shippingPage === RECEIVED || shippingPage === OVERVIEW)}">
             <!--            tracking to number-->
             <ng-container *ngIf="kitRequest.easypostTrackingToUrl != null"><a href="{{kitRequest.easypostTrackingToUrl}}" target="_blank">{{kitRequest.trackingToId}}</a>
             </ng-container>
             <ng-container *ngIf="kitRequest.easypostTrackingToUrl == null">{{kitRequest.trackingToId}}</ng-container>
           </td>
-          <td *ngIf="shippingPage === SENT" [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP' && shippingPage === OVERVIEW}">
+          <td *ngIf="shippingPage === SENT" [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP' && isClinicalStudy && (shippingPage === RECEIVED || shippingPage === OVERVIEW)}">
             <!--            tracking return number-->
             <ng-container *ngIf="kitRequest.easypostTrackingReturnUrl != null"><a href="{{kitRequest.easypostTrackingReturnUrl}}" target="_blank">{{kitRequest.trackingReturnId}}</a>
             </ng-container>
             <ng-container *ngIf="kitRequest.easypostTrackingReturnUrl == null">{{kitRequest.trackingReturnId}}</ng-container>
           </td>
-          <td *ngIf="shippingPage === SENT || shippingPage === OVERVIEW" [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP' && shippingPage === OVERVIEW}">
+          <td *ngIf="shippingPage === SENT || shippingPage === OVERVIEW" [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP' && isClinicalStudy && (shippingPage === RECEIVED || shippingPage === OVERVIEW)}">
             <!--            sent date-->
             <ng-container *ngIf="kitRequest.scanDate === 0"> -</ng-container>
             <ng-container *ngIf="kitRequest.scanDate !== 0">{{kitRequest.scanDate | date:'medium'}}</ng-container>
           </td>
-          <td *ngIf="shippingPage === RECEIVED || shippingPage === OVERVIEW" [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP'}">
+          <td *ngIf="shippingPage === RECEIVED || shippingPage === OVERVIEW" [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP' && isClinicalStudy && (shippingPage === RECEIVED || shippingPage === OVERVIEW)}">
             <!--            received date-->
             <ng-container *ngIf="kitRequest.receiveDate === 0"> -</ng-container>
             <ng-container *ngIf="kitRequest.receiveDate !== 0">{{kitRequest.receiveDate | date:'medium'}}</ng-container>
           </td>
-          <td *ngIf="shippingPage === SENT || shippingPage === RECEIVED || shippingPage === OVERVIEW" [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP'}">
+          <td *ngIf="shippingPage === SENT || shippingPage === RECEIVED || shippingPage === OVERVIEW" [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP' && isClinicalStudy && (shippingPage === RECEIVED || shippingPage === OVERVIEW)}">
             <!--            mf barcode-->
             {{kitRequest.kitLabel}}
           </td>
-          <td [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP'}">
+          <td [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP' && isClinicalStudy && (shippingPage === RECEIVED || shippingPage === OVERVIEW)}">
             <!--            study-->
             {{kitRequest.realm}}
           </td>
-          <td [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP'}">
+          <td [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP' && isClinicalStudy && (shippingPage === RECEIVED || shippingPage === OVERVIEW)}">
             <!--            kit type-->
             {{kitRequest.kitTypeName}}
           </td>
-          <td *ngIf="isClinicalStudy && (shippingPage === RECEIVED || shippingPage === OVERVIEW)" [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP'}">
+          <td *ngIf="isClinicalStudy && (shippingPage === RECEIVED || shippingPage === OVERVIEW)" [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP' && isClinicalStudy && (shippingPage === RECEIVED || shippingPage === OVERVIEW)}">
             <!--            sample type-->
             <ng-container *ngIf="kitRequest.receivedBy === 'MERCURY'">Clinical Sample</ng-container>
             <ng-container *ngIf="kitRequest.receivedBy === 'BSP'">Research Sample</ng-container>
