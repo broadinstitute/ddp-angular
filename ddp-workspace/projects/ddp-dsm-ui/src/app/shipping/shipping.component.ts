@@ -385,7 +385,6 @@ export class ShippingComponent implements OnInit {
 
             .nameDob {
                 margin: 0;
-                background-color: red;
                 width: fit-content;
                 height: fit-content;
             }
