@@ -1,5 +1,7 @@
+import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { first, take, tap } from 'rxjs/operators';
+
 import { ToolkitConfigurationService, WorkflowBuilderService } from 'toolkit';
 import {
   CURRENT_ACTIVITY_ID_TOKEN,
@@ -7,7 +9,6 @@ import {
   currentActivityIdProvider,
   currentParticipantIdProvider,
 } from './providers';
-import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivityInstance, ActivityResponse, UserActivityServiceAgent, SessionMementoService } from 'ddp-sdk';
 import { getRenderActivities, isConsentActivity, RenderActivityKey } from '../../../utils';
 
@@ -43,6 +44,10 @@ export class SurveyComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.session.setParticipant(null);
+  }
+
+  preventSubmitByShiftEnter(event: KeyboardEvent): void {
+    event.preventDefault();
   }
 
   onSubmit(activityResponse: ActivityResponse): void {

@@ -5,6 +5,7 @@
       <app-activity
         [studyGuid]="studyGuid"
         (submit)="onSubmit($event)"
+        (keydown.shift.enter)="preventSubmitByShiftEnter($event)"
         [activityGuid]="instanceGuid"
         [isLastOfMultipleActivities]="isLastOfMultipleActivities"
         *ngIf="!isFetchingActivities"
