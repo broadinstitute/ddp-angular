@@ -47,7 +47,7 @@
           <hr *ngIf="hasRole().allowedToUploadKits()">
           <li *ngIf="hasRole().allowedToUploadKits()"><a href="#" [routerLink]="['upload']"> Kit Upload </a></li>
           <!-- Upload of stool, only if you have right to upload -->
-          <li *ngIf="hasRole().allowedToUploadKits()"><a href="#" [routerLink]="['stoolUpload']"> Stool Sample Upload </a></li>
+          <li *ngIf="hasRole().allowedToUploadKits() && hasRole().allowedToViewMedicalRecords()"><a href="#" [routerLink]="['stoolUpload']"> Stool Sample Upload </a></li>
           <!-- Setup label dimensions, only if you have the right to handle samples -->
           <hr *ngIf="hasRole().allowedToHandleSamples()">
           <li *ngIf="hasRole().allowedToHandleSamples()"><a [routerLink]="['labelSettings']"> Label Settings </a></li>
