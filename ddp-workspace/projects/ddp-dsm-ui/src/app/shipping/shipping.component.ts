@@ -358,58 +358,58 @@ export class ShippingComponent implements OnInit {
             <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" media="screen,print">
             <link rel="stylesheet" href="style.css" media="screen,print">
             <style type="text/css">
-         body { margin:0; }
-         @page { margin: 0 }
-        body { margin: 0 }
-        .sheet {
-          margin: 0;
-          overflow: hidden;
-          position: relative;
-          box-sizing: border-box;
-          page-break-after: always;
-        }
 
-        /** Paper sizes **/
-        body.A3               .sheet { width: 297mm; height: 419mm }
-        body.A3.landscape     .sheet { width: 420mm; height: 296mm }
-        body.A4               .sheet { width: 210mm; height: 296mm }
-        body.A4.landscape     .sheet { width: 297mm; height: 209mm }
-        body.A5               .sheet { width: 148mm; height: 209mm }
-        body.A5.landscape     .sheet { width: 210mm; height: 147mm }
-        body.letter           .sheet { width: 216mm; height: 279mm }
-        body.letter.landscape .sheet { width: 280mm; height: 215mm }
-        body.legal            .sheet { width: 216mm; height: 356mm }
-        body.legal.landscape  .sheet { width: 357mm; height: 215mm }
+            html, body {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
 
-        /** Padding area **/
-        .sheet.padding-10mm { padding: 10mm }
-        .sheet.padding-15mm { padding: 15mm }
-        .sheet.padding-20mm { padding: 20mm }
-        .sheet.padding-25mm { padding: 25mm }
+            * {
+                margin: 0;
+                padding: 0;
+            }
 
-        /** For screen preview **/
-        @media screen {
-          body { background: #e0e0e0 }
-          .sheet {
-            background: white;
-            box-shadow: 0 .5mm 2mm rgba(0,0,0,.3);
-            margin: 5mm auto;
-          }
-        }
+            .print-body {
+                height: 100vh;
+                padding-left: 26px;
+            }
 
+            .wrapper {
+                height: 100%;
+                display: flex;
+                align-content: space-around;
+                justify-content: space-around;
+                flex-direction: column;
+            }
 
-        /** Fix for Chrome issue #273306 **/
-        @media print {
-           html, body {
-            width: 80mm;
-            height:100%;
-            position:absolute;
-           }
-        }
-</style>
+            .nameDob {
+                margin: 0;
+                width: fit-content;
+                height: fit-content;
+            }
+
+            p {
+                font-size: 4px;
+                margin-left: 5px;
+            }
+
+            .barcode {
+                width: fit-content
+            }
+
+            @page { margin: 0 }
+
+            @media print {
+                .pagebreak {
+                    page-break-after: always;
+                }
+            }
+            </style>
           </head>
           <body onload="window.print()">
-            <div class="reward-body">${printContents}</div>
+            <div class="print-body">${printContents}</div>
+          </body>
           </html>
         `);
         popup.document.close();
