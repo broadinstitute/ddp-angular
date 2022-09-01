@@ -464,21 +464,25 @@
   <!--DON'T REMOVE - START-->
   <!--Hidden, but needs to be here for the label printing-->
   <span [hidden]="true">
-    <div class="app-modal-body Display--Inline-Block" id="labelNameDOBDiv">
+    <div id="labelNameDOBDiv">
         <ng-container *ngFor="let label of selectedKitRequests">
           <ng-container *ngIf="label.shortId">
-            <div [ngStyle]="{'height': getLabelHeight()}" class="DIV--Without-Border">
-              <p>{{label.firstName}} {{label.lastName}}</p>
-              <p>{{label.dateOfBirth}}</p>
+            <div class="wrapper">
+
+              <div class="nameDob">
+                <p>{{label.firstName}}</p>
+                <p>{{label.lastName}}</p>
+                <p>{{label.dateOfBirth}}</p>
+              </div>
+
+              <div class="barcode">
+                <app-barcode [barcodeValue]="label.shortId"></app-barcode>
+              </div>
+
             </div>
 
-            <div class="pagebreak"> </div>
 
-            <div style="transform: rotate(90deg) translate(-20px, -80px); width: fit-content;">
-              <app-kit-label class="DIV--Without-Border Display--Inline-Block" [urlTo]="null" [shortId]="label.shortId"
-                             [urlReturn]="null" [labelSetting]="selectedSetting"></app-kit-label>
-            </div>
-            <div class="pagebreak"> </div>
+            <div class="pagebreak"></div>
           </ng-container>
         </ng-container>
     </div>
