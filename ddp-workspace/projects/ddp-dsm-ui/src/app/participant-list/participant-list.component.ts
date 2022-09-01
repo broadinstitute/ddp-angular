@@ -541,8 +541,8 @@ export class ParticipantListComponent implements OnInit {
           this.savedFilters.sort((a, b) => a.filterName.localeCompare(b.filterName));
           // console.log(this.savedFilters);
         }
-        if (jsonData.mrCoverPDF != null) {
-          jsonData.mrCoverPDF.forEach((val) => {
+        if (jsonData.mrCoverPdf != null) {
+          jsonData.mrCoverPdf.forEach((val) => {
             const value: Value = Value.parse(val);
             this.mrCoverPdfSettings.push(value);
           });
@@ -654,7 +654,9 @@ export class ParticipantListComponent implements OnInit {
           });
           this.orderColumns();
         }
+        debugger;
         if (jsonData.hideESFields != null) {
+          debugger;
           const hideESFields: Value[] = [];
           jsonData.hideESFields.forEach((val) => {
             const value: Value = Value.parse(val);
