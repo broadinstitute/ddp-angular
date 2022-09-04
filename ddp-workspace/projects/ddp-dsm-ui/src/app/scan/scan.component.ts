@@ -1,14 +1,12 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ScanPairComponent } from '../scan-pair/scan-pair.component';
-import { ScanPair, ScanValue } from './scan.model';
-import { DSMService } from '../services/dsm.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ScanError } from './error.model';
-import { Auth } from '../services/auth.service';
-import { Statics } from '../utils/statics';
-import { ScanValueComponent } from '../scan-value/scan-value.component';
-import { ComponentService } from '../services/component.service';
-import { scan } from 'rxjs';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ScanPairComponent} from '../scan-pair/scan-pair.component';
+import {ScanPair, ScanValue} from './scan.model';
+import {DSMService} from '../services/dsm.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ScanError} from './error.model';
+import {Auth} from '../services/auth.service';
+import {Statics} from '../utils/statics';
+import {ScanValueComponent} from '../scan-value/scan-value.component';
 
 @Component({
   selector: 'app-scan',
@@ -29,27 +27,22 @@ export class ScanComponent implements OnInit {
   rightPlaceholder = 'DSM Label';
 
   scanReceived = false;
+  initialScan = false;
   scanValues: Array<ScanValueComponent> = [];
   private singleScanValues: Array<ScanValue> = [];
 
-  // TODO: check is it correct ? - unused `compService`
   constructor(private _changeDetectionRef: ChangeDetectorRef, private dsmService: DSMService, private router: Router,
-              private auth: Auth, private route: ActivatedRoute, private compService: ComponentService) {
+              private auth: Auth, private route: ActivatedRoute) {
     if (!auth.authenticated()) {
       auth.logout();
     }
     this.route.queryParams.subscribe(params => {
       this.scanTracking = params[DSMService.SCAN_TRACKING] || false;
       this.scanReceived = params[DSMService.SCAN_RECEIVED] || false;
+      this.initialScan = params[DSMService.INITIAL_SCAN] || false;
       this.changePlaceholder();
       this.createNewComponents();
       this.additionalMessage = null;
-      const realm = params[DSMService.REALM] || null;
-
-      // TODO: check is it correct ? - is it needed ?
-      if (realm != null && realm !== '') {
-        //        this.compService.realmMenu = realm;
-      }
     });
   }
 
@@ -62,6 +55,9 @@ export class ScanComponent implements OnInit {
     } else {
       this.leftPlaceholder = 'Kit Label';
       this.rightPlaceholder = 'DSM Label';
+      if (this.initialScan) {
+        this.rightPlaceholder = 'Short ID';
+      }
     }
   }
 
@@ -76,12 +72,16 @@ export class ScanComponent implements OnInit {
   }
 
   public get displayScanText(): string {
-    if(!this.scanTracking && !this.scanReceived)
-      {return 'Final Scan';}
-    else if(this.scanTracking)
-      {return 'Tracking Scan';}
-    else if(this.scanReceived)
-      {return 'Receiving Scan';}
+    if (!this.scanTracking && !this.scanReceived) {
+      if (this.initialScan) {
+        return 'Initial Scan';
+      }
+      return 'Final Scan';
+    } else if (this.scanTracking) {
+      return 'Tracking Scan';
+    } else if (this.scanReceived) {
+      return 'Receiving Scan';
+    }
   }
 
   private checkIfKitLabelChanged(left: string, right: string, position: number): boolean {
@@ -200,8 +200,29 @@ export class ScanComponent implements OnInit {
           });
           this.dsmService.trackingScan(JSON.stringify(scanPayloads))
             .subscribe({
-              next: data => { jsonData = this.onSuccess(jsonData, data); },
-              error: err => { this.onError(err); }
+              next: data => {
+                jsonData = this.onSuccess(jsonData, data);
+              },
+              error: err => {
+                this.onError(err);
+              }
+            });
+        } else if (this.initialScan) {
+          const scanPayloads = [];
+          this.scanPairsValue.forEach(element => {
+            scanPayloads.push({
+              kitLabel: element.leftValue,
+              hruid: element.rightValue
+            });
+          });
+          this.dsmService.initialScan(JSON.stringify(scanPayloads))
+            .subscribe({
+              next: data => {
+                jsonData = this.onSuccess(jsonData, data);
+              },
+              error: err => {
+                this.onError(err);
+              }
             });
         } else {
           const scanPayloads = [];
@@ -213,8 +234,12 @@ export class ScanComponent implements OnInit {
           });
           this.dsmService.finalScan(JSON.stringify(scanPayloads))
             .subscribe({
-              next: data => { jsonData = this.onSuccess(jsonData, data); },
-              error: err => { this.onError(err); }
+              next: data => {
+                jsonData = this.onSuccess(jsonData, data);
+              },
+              error: err => {
+                this.onError(err);
+              }
             });
         }
       }
@@ -278,18 +303,18 @@ export class ScanComponent implements OnInit {
   }
 
   public checkSendStatus(position: number): boolean {
-      if (
-        this.scanPairsValue.length > 0 && this.scanPairsValue[position] != null
-        && this.scanPairsValue[position].rightValue != null
-        && this.scanErrors.length > 0
-      ) {
-        for (const scanError of this.scanErrors) {
-          if (this.scanPairsValue[position].rightValue === scanError.kit) {
-            return true;
-          }
+    if (
+      this.scanPairsValue.length > 0 && this.scanPairsValue[position] != null
+      && this.scanPairsValue[position].rightValue != null
+      && this.scanErrors.length > 0
+    ) {
+      for (const scanError of this.scanErrors) {
+        if (this.scanPairsValue[position].rightValue === scanError.kit) {
+          return true;
         }
-        return false;
       }
+      return false;
+    }
     return false;
   }
 
@@ -419,4 +444,3 @@ export class ScanComponent implements OnInit {
     return null;
   }
 }
-

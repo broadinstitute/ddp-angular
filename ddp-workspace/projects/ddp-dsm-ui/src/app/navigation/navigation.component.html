@@ -28,6 +28,7 @@
           <li *ngIf="hasRole().allowToViewSampleLists() || hasRole().allowedToHandleSamples()"><a [routerLink]="['shippingQueue']"> Queue </a></li>
           <li *ngIf="hasRole().allowToViewSampleLists() || hasRole().allowedToHandleSamples()"><a [routerLink]="['shippingError']"> Error </a></li>
           <!-- Scan pages, only if you have right to handle samples or to receive samples -->
+          <li *ngIf="hasRole().allowedToHandleSamples()"><a [routerLink]="['scan']" [queryParams]="{initialScan: true}"> Initial Scan </a></li>
           <li *ngIf="hasRole().allowedToHandleSamples()"><a [routerLink]="['scan']" [queryParams]="{scanTracking: true}"> Tracking Scan </a></li>
           <li *ngIf="hasRole().allowedToHandleSamples()"><a [routerLink]="['scan']"> Final Scan </a></li>
           <li *ngIf="hasRole().allowedToViewReceivingPage()"><a [routerLink]="['scan']" [queryParams]="{scanReceived: true}"> Receiving Scan </a></li>
