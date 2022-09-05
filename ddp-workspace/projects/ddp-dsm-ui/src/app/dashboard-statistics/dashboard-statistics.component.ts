@@ -15,5 +15,6 @@ export class DashboardStatisticsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.Charts = this.dashboardStatisticsService.ChartFactory()
   }
 }

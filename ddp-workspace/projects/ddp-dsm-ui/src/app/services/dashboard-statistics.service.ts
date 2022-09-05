@@ -1,16 +1,29 @@
 import {Injectable} from "@angular/core";
 import {dashboardType} from "../enums/dashboard.enums";
+import {DSMService} from "./dsm.service";
+import {LocalStorageService} from "./localStorage.service";
+import {map} from "rxjs/operators";
+import {Observable} from "rxjs";
 
 @Injectable()
 export class DashboardStatisticsService {
 
-  public ChartFactory(data: any) {
-    const generatedCharts = [];
-    data.forEach(chart => {
-      const generatedChart = this.CHART_TYPES.find(ch => ch.type === chart.type)?.func(chart);
-      generatedCharts.push(generatedChart);
-    });
-    return generatedCharts;
+  constructor(private dsmService: DSMService, private localStorageService: LocalStorageService) {
+  }
+
+
+  public ChartFactory(): Observable<any> {
+    return this.dsmService.getDashboardData(this.localStorageService.selectedRealm)
+      .pipe(
+        map(data => {
+          const generatedCharts = [];
+          data.forEach(chart => {
+            const generatedChart = this.CHART_TYPES.find(ch => ch.type === chart.type)?.func(chart);
+            generatedCharts.push(generatedChart);
+          });
+          return generatedCharts;
+        })
+      )
   }
 
 
