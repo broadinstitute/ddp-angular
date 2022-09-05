@@ -1,0 +1,23 @@
+$fonts_directory: '../assets/fonts/Montserrat-';
+
+/* Eagerly loaded */
+@font-face {
+  font-family: Montserrat-Regular;
+  src: url($fonts_directory + 'Regular.ttf');
+}
+@font-face {
+  font-family: Montserrat-Regular-Italic;
+  src: url($fonts_directory + 'Italic.ttf');
+}
+@font-face {
+  font-family: Montserrat-Medium;
+  src: url($fonts_directory + 'Medium.ttf');
+}
+@font-face {
+  font-family: Montserrat-SemiBold;
+  src: url($fonts_directory + 'SemiBold.ttf');
+}
+@font-face {
+  font-family: Montserrat-Bold;
+  src: url($fonts_directory + 'Bold.ttf');
+}
