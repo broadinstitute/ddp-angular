@@ -1,0 +1,49 @@
+[
+  {
+    "type": "VERTICAL_HIGHLIGHTED_BAR_CHART",
+    "title": "Number of patients enrolled",
+    "y": [275, 180, 51, 308, 268, 179, 126, 282, 291, 396],
+    "size": "big",
+    "color": [],
+    "names": []
+  },
+  {
+    "type": "HORIZONTAL_BAR_CHART",
+    "title": "Diagnosis",
+    "x": [115, 74, 24, 30, 15, 10, 17, 37, 6],
+    "y": [
+      "Balanced AV Canal (Atrioventricular S",
+      "Double inlet left ventricle (DILV)",
+      "Ebstein anomaly",
+      "Hypoplastic Left Heart Syndrome (HLHS)",
+      "Mitral Atresia (including Mitral Atresia w",
+      "Pulmonary atresia with intact ventric",
+      "Tricuspid atresia",
+      "Unbalanced AV Canal (Atrioventricular S",
+      "Other"
+    ],
+    "size": "medium"
+  },
+  {
+    "type": "HORIZONTAL_BAR_CHART",
+    "title": "Age",
+    "x": [500, 250, 350, 220, 333],
+    "y": ["Fontan - 4 Young Fontan", "5 - 10 Early Fontan", "11 - 21 Adolescent", "22 - 39 Adult", "40+ Older adult"],
+    "size": "small"
+  },
+  {
+    "type": "HORIZONTAL_BAR_CHART",
+    "title": "Race",
+    "x": [500, 200, 150, 250, 600, 150, 220],
+    "y": ["White", "Black/African American ", "Native Hawaiian or Other Pacific Is…", "Asian", "American Indian or Alaska Native", "Other", "Not Reported / Unknown"],
+    "size": "medium"
+  },
+  {
+    "type": "DONUT_CHART",
+    "title": "Gender",
+    "values": [200, 120, 23, 0, 35],
+    "labels": ["Male", "Female", "Non-binary", "Other", "Not Reporter"],
+    "colors": ["rgba(204,204,204,1)", "rgba(222,45,38,0.8)", "rgba(204,204,204,1)", "rgba(204,204,204,1)", "rgba(204,204,204,1)"],
+    "size": "small"
+  }
+]
