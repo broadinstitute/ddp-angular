@@ -4,12 +4,6 @@ import {dashboardType} from "../enums/dashboard.enums";
 @Injectable()
 export class DashboardStatisticsService {
 
-  private readonly CHART_TYPES = [
-    {type: dashboardType.VERTICAL_HIGHLIGHTED_BAR_CHART, func: this.generate_verticalBarChart},
-    {type: dashboardType.HORIZONTAL_BAR_CHART, func: this.generate_horizontalBarChart},
-    {type: dashboardType.DONUT_CHART, func: this.generate_donutChart}
-  ]
-
   public ChartFactory(data: any) {
     const generatedCharts = [];
     data.forEach(chart => {
@@ -19,6 +13,12 @@ export class DashboardStatisticsService {
     return generatedCharts;
   }
 
+
+  private readonly CHART_TYPES = [
+    {type: dashboardType.VERTICAL_HIGHLIGHTED_BAR_CHART, func: this.generate_verticalBarChart},
+    {type: dashboardType.HORIZONTAL_BAR_CHART, func: this.generate_horizontalBarChart},
+    {type: dashboardType.DONUT_CHART, func: this.generate_donutChart}
+  ]
 
   private generate_verticalBarChart(chart: any) {
     const chartObject: any = {};
