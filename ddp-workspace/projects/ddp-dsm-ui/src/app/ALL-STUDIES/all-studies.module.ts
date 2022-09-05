@@ -118,7 +118,10 @@ import {BarcodeComponent} from '../barcode/barcode.component';
 import {DashboardStatisticsComponent} from "../dashboard-statistics/dashboard-statistics.component";
 import {DashboardStatisticsService} from "../services/dashboard-statistics.service";
 
+import * as PlotlyJS from 'plotly.js-dist-min';
+import { PlotlyModule } from 'angular-plotly.js';
 
+PlotlyModule.plotlyjs = PlotlyJS;
 
 
 @NgModule({
@@ -237,7 +240,8 @@ import {DashboardStatisticsService} from "../services/dashboard-statistics.servi
     CookieModule.forRoot(),
     AccordionModule.forRoot(),
     TypeaheadModule.forRoot(),
-    DragulaModule.forRoot()
+    DragulaModule.forRoot(),
+    PlotlyModule
   ],
   providers: [
     Utils,
