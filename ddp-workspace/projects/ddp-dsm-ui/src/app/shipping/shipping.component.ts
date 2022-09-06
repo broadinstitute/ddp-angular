@@ -372,7 +372,6 @@ export class ShippingComponent implements OnInit {
 
             .print-body {
                 height: 100vh;
-                padding-left: 26px;
             }
 
             .wrapper {
@@ -390,8 +389,8 @@ export class ShippingComponent implements OnInit {
             }
 
             p {
-                font-size: 4px;
-                margin-left: 5px;
+                font-size: 8px;
+                margin-left: 25px;
             }
 
             .barcode {
