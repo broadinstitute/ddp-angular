@@ -358,18 +358,58 @@ export class ShippingComponent implements OnInit {
             <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" media="screen,print">
             <link rel="stylesheet" href="style.css" media="screen,print">
             <style type="text/css">
-              body { margin:0; }
-              @page { size: auto;  margin: 0mm; }
-              @media print {
+
+            html, body {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            .print-body {
+                height: 100vh;
+            }
+
+            .wrapper {
+                height: 100%;
+                display: flex;
+                align-content: space-around;
+                justify-content: space-around;
+                flex-direction: column;
+            }
+
+            .nameDob {
+                margin: 0;
+                width: fit-content;
+                height: fit-content;
+            }
+
+            p {
+                font-size: 9px;
+                margin-left: 25px;
+            }
+
+            .barcode {
+                width: fit-content;
+                margin-top: 17px;
+            }
+
+            @page { margin: 0 }
+
+            @media print {
                 .pagebreak {
-                    clear: both;
                     page-break-after: always;
-                 }
-              }
+                }
+            }
             </style>
           </head>
           <body onload="window.print()">
-            <div class="reward-body">${printContents}</div>
+            <div class="print-body">${printContents}</div>
+          </body>
           </html>
         `);
         popup.document.close();

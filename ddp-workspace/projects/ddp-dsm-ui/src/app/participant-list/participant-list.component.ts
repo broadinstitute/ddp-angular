@@ -1077,10 +1077,10 @@ export class ParticipantListComponent implements OnInit {
       this.setSavedFilterColumnsIfSelected();
       return;
     }
-    const filteredColumns = this.extractDefaultColumns(this.selectedColumns);
-    Object.assign(this.selectedColumns, filteredColumns);
+    const filteredColumns = this.getDefaultColumns();
+    this.selectedColumns = filteredColumns;
     if (this.isDataOfViewFilterExists()) {
-      this.viewFilter.columns = this.extractDefaultColumns(this.viewFilter.columns);
+      this.viewFilter.columns = this.getDefaultColumns();
     }
   }
 
@@ -1118,19 +1118,21 @@ export class ParticipantListComponent implements OnInit {
     return isSavedFilterSelected;
   }
 
-  private extractDefaultColumns(selectedColumns: {}): {} {
+  private getDefaultColumns(): {} {
     const filteredColumns = {};
-    for (const [key, value] of Object.entries(selectedColumns)) {
-      const val = value as Filter[];
-      const newVal = [];
-      val.forEach(el => {
-        this.defaultColumns.forEach(col => {
-          if (el['participantColumn']['name'] === col['participantColumn']['name']) {
-            newVal.push(el);
-          }
+    for (const defaultColumn of this.defaultColumns){
+      Object.entries(this.sourceColumns).forEach( entry => {
+        const [key, value] = entry;
+        const val = value as Filter[];
+        val.forEach(col => {
+            if (defaultColumn['participantColumn']['name'] === col['participantColumn']['name']
+              && defaultColumn['participantColumn']['tableAlias'] === col['participantColumn']['tableAlias']) {
+              const newVal = filteredColumns[key]? filteredColumns[key]: [];
+              newVal.push(col);
+              filteredColumns[key] = newVal;
+            }
         });
       });
-      filteredColumns[key] = newVal;
     }
     return filteredColumns;
   }
