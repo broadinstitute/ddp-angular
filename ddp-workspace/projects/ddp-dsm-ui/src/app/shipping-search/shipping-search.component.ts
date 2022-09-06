@@ -94,9 +94,11 @@ export class ShippingSearchComponent implements OnInit {
 
   receiveATKit(kitRequest: KitRequest): void {
     let jsonData: any[];
-    const singleScanValues: Array<ScanValue> = [];
-    singleScanValues.push(new ScanValue(kitRequest.kitLabel));
-    this.dsmService.setKitReceivedRequest(JSON.stringify(singleScanValues))
+    const scanPayloads = [];
+    scanPayloads.push({
+      kitLabel: kitRequest.kitLabel
+    });
+    this.dsmService.setKitReceivedRequest(JSON.stringify(scanPayloads))
       .subscribe({
           next: data => {
             let failedSending = false;
