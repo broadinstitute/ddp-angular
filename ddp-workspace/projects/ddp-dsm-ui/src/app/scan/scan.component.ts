@@ -263,6 +263,13 @@ export class ScanComponent implements OnInit {
     if (failedSending) {
       this.removeSuccessfulScans();
       this.additionalMessage = 'Error - Failed to save all changes';
+      if (this.scanErrors.length == 1 && this.scanErrors[0].kit === this.scanErrors[0].error) {
+        //pe-cgs the error and kit would be the hruid and only 1 kit will be scanned at a time
+        this.scanPairsValue = [];
+        this.scanPairs = [];
+        this.addNewScanPair();
+        this.additionalMessage = 'Data saved for ' + this.scanErrors[0].kit;
+      }
     } else {
       this.scanPairsValue = [];
       this.scanPairs = [];
