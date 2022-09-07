@@ -114,7 +114,7 @@ import { OpenDialogDirective } from '../directive/open-loading-modal.directive';
 import {SequencingOrderComponent} from '../sequencing-order/sequencing-order.component';
 import {ClinicalPageComponent} from '../clinical-page/clinical-page.component';
 import {StoolUploadComponent} from '../stool-upload/stool-upload.component';
-import {BarcodeComponent} from '../barcode/barcode.component';
+import {QrCodeComponent} from '../qr-code/qr-code.component';
 
 
 
@@ -142,7 +142,7 @@ import {BarcodeComponent} from '../barcode/barcode.component';
     UserSettingComponent,
     ScanValueComponent,
     BannerComponent,
-    BarcodeComponent,
+    QrCodeComponent,
     FieldDatepickerComponent,
     OncHistoryDetailComponent,
     TissuePageComponent,
