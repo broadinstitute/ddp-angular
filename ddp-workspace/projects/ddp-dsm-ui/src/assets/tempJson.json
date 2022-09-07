@@ -1,9 +1,21 @@
 [
   {
-    "type": "VERTICAL_HIGHLIGHTED_BAR_CHART",
+    "type": "VERTICAL_BAR_CHART",
     "title": "Number of patients enrolled",
     "y": [275, 180, 51, 308, 268, 179, 126, 282, 291, 396],
-    "size": "big",
+    "x": [
+      "Balanced AV Canal (Atrioventricular S",
+      "Double inlet left ventricle (DILV)",
+      "Ebstein anomaly",
+      "Hypoplastic Left Heart Syndrome (HLHS)",
+      "Mitral Atresia (including Mitral Atresia w",
+      "Pulmonary atresia with intact ventric",
+      "Tricuspid atresia",
+      "Unbalanced AV Canal (Atrioventricular S",
+      "Atresia Pulmonary",
+      "Heart anomaly"
+    ],
+    "size": "large",
     "color": [],
     "names": []
   },
@@ -22,7 +34,7 @@
       "Unbalanced AV Canal (Atrioventricular S",
       "Other"
     ],
-    "size": "medium"
+    "size": "small"
   },
   {
     "type": "HORIZONTAL_BAR_CHART",
@@ -36,7 +48,7 @@
     "title": "Race",
     "x": [500, 200, 150, 250, 600, 150, 220],
     "y": ["White", "Black/African American ", "Native Hawaiian or Other Pacific Is…", "Asian", "American Indian or Alaska Native", "Other", "Not Reported / Unknown"],
-    "size": "medium"
+    "size": "small"
   },
   {
     "type": "DONUT_CHART",

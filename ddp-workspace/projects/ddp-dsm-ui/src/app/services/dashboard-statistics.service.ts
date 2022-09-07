@@ -28,12 +28,80 @@ export class DashboardStatisticsService {
 
 
   private readonly CHART_TYPES = [
-    {type: dashboardType.VERTICAL_HIGHLIGHTED_BAR_CHART, func: this.generate_verticalBarChart},
+    {type: dashboardType.VERTICAL_HIGHLIGHTED_BAR_CHART, func: this.generate_verticalHighlightedBarChart},
+    {type: dashboardType.VERTICAL_BAR_CHART, func: this.generate_verticalBarChart},
     {type: dashboardType.HORIZONTAL_BAR_CHART, func: this.generate_horizontalBarChart},
     {type: dashboardType.DONUT_CHART, func: this.generate_donutChart}
   ]
 
   private generate_verticalBarChart(chart: any) {
+    const chartObject: any = {};
+    chartObject.data = [
+      {
+        type: "bar",
+        y: chart.y,
+        x: chart.x,
+        width: -1,
+        marker: {
+          color: "#749DC5",
+        },
+        outsidetextfont: {
+          color: '#2D333E',
+          family: "Montserrat-Bold",
+          size: 13
+        },
+        text: chart.y,
+        textposition: "outside",
+        offset: 0.1,
+      },
+    ];
+    chartObject.layout = {
+      autosize: true,
+      title: {
+        font: {
+          color: "#2D333E",
+          family: "Montserrat-SemiBold",
+          size: 20
+        },
+        text: chart.title,
+        x: 0
+      },
+      height: 500,
+
+      hovermode: false,
+      bargap: 0.3,
+
+      margin: {
+        pad: 5,
+      },
+
+      xaxis: {
+        tickangle: 30,
+        ticklabelposition: "outside bottom",
+        ticklabelstep: 1,
+        position: 0,
+        linecolor: "#737E8E",
+        linewidth: 1,
+
+      },
+      yaxis: {
+        zeroline: false,
+        fixedrange: true,
+        dtick: 100,
+        tickfont: {
+          family: "Montserrat-Regular",
+          size: 13,
+          color: '#2D333E'
+        }
+      }
+    }
+
+    chartObject.size = chart.size
+
+    return chartObject;
+  }
+
+  private generate_verticalHighlightedBarChart(chart: any) {
     const chartObject: any = {};
     chartObject.data = [
       {
@@ -119,7 +187,6 @@ export class DashboardStatisticsService {
         position: 0,
         linecolor: "#737E8E",
         linewidth: 1,
-        categoryarray: ['ggaga', 'dasda']
       },
       yaxis: {
         zeroline: false,
