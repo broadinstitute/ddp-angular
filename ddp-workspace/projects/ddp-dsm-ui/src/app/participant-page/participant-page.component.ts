@@ -1578,7 +1578,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           this.setDownloadMessageAndStatus( err, false );
         }
       } );
-
+    window.scrollTo(0, 0);
   }
 
   public isFileClean( file: ESFile ): boolean {
