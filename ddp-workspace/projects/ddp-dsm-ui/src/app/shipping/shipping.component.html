@@ -116,7 +116,7 @@
             <mfDefaultSorter by="receiveDate">Received</mfDefaultSorter>
           </th>
           <th *ngIf="shippingPage === SENT || shippingPage === RECEIVED || shippingPage === OVERVIEW">
-            <!--            mf barcode-->
+            <!--            mf qr-code-->
             MF code
           </th>
           <th>
@@ -194,7 +194,7 @@
             <!--            received date-->
           </th>
           <th *ngIf="shippingPage === SENT || shippingPage === RECEIVED || shippingPage === OVERVIEW">
-            <!--            mf barcode-->
+            <!--            mf qr-code-->
             <input class="form-control" [(ngModel)]="mfCode"/>
           </th>
           <th>
@@ -299,7 +299,7 @@
             <ng-container *ngIf="kitRequest.receiveDate !== 0">{{kitRequest.receiveDate | date:'medium'}}</ng-container>
           </td>
           <td *ngIf="shippingPage === SENT || shippingPage === RECEIVED || shippingPage === OVERVIEW" [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP' && isClinicalStudy && (shippingPage === RECEIVED || shippingPage === OVERVIEW)}">
-            <!--            mf barcode-->
+            <!--            mf qr-code-->
             {{kitRequest.kitLabel}}
           </td>
           <td [ngClass]="{'highlight_sample': kitRequest.receivedBy === 'BSP' && isClinicalStudy && (shippingPage === RECEIVED || shippingPage === OVERVIEW)}">
@@ -476,7 +476,7 @@
               </div>
 
               <div class="barcode">
-                <app-barcode [barcodeValue]="label.shortId"></app-barcode>
+                <app-qr-code [qrCodeValue]="label.shortId"></app-qr-code>
               </div>
 
             </div>
