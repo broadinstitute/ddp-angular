@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy, Af
 import { MatDialog } from '@angular/material/dialog';
 import { TabDirective } from 'ngx-bootstrap/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, mergeMap } from 'rxjs';
 import { ActivityDefinition } from '../activity-data/models/activity-definition.model';
 import { FieldSettings } from '../field-settings/field-settings.model';
 import {ESFile} from '../participant-list/models/file.model';
@@ -11,7 +11,6 @@ import { PreferredLanguage } from '../participant-list/models/preferred-language
 import { Participant } from '../participant-list/participant-list.model';
 import { PDFModel } from '../pdf-download/pdf-download.model';
 import {SequencingOrder} from '../sequencing-order/sequencing-order.model';
-import {mergeMap} from 'rxjs';
 import {take} from 'rxjs/operators';
 
 import { ComponentService } from '../services/component.service';
