@@ -34,15 +34,15 @@
     <div align="center" class="Width--100 Height--100">
       <i class="fas fa-spinner fa-spin fa-5x Color--primary"></i>
     </div>
-  </span>
+    </span>
     <div class="Width--100">
       <h4>{{message}}</h4>
       <span [hidden]="!downloading" class="Width--100">
-    <div align="center" class="Width--100 Height--100">
-      <i class="fas fa-spinner fa-spin fa-5x Color--primary"></i>
-    </div>
-  </span>
-    </div>
+        <div align="center" class="Width--100 Height--100">
+          <i class="fas fa-spinner fa-spin fa-5x Color--primary"></i>
+        </div>
+      </span>
+  </div>
 
 
     <div *ngIf="!loadingParticipantPage && !updatingParticipant" class="Width--100">
@@ -931,7 +931,7 @@ participant.data.dsm['diagnosisYear'] != null">
               *ngIf="participant?.data?.files && participant.data.files.length > 0 && this.role.allowedToDownloadParticipantFiles()"
               heading="Participant Files">
                 <app-file-download
-                [participant]="participant">
+                [participant]="participant"  (downloadFileEvent)="downloadParticipantFile($event)">
                 </app-file-download>
             </tab>
 

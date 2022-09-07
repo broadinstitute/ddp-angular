@@ -5,11 +5,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ActivityDefinition } from '../activity-data/models/activity-definition.model';
 import { FieldSettings } from '../field-settings/field-settings.model';
+import {ESFile} from '../participant-list/models/file.model';
 import { ParticipantData } from '../participant-list/models/participant-data.model';
 import { PreferredLanguage } from '../participant-list/models/preferred-languages.model';
 import { Participant } from '../participant-list/participant-list.model';
 import { PDFModel } from '../pdf-download/pdf-download.model';
 import {SequencingOrder} from '../sequencing-order/sequencing-order.model';
+import {mergeMap} from 'rxjs';
+import {take} from 'rxjs/operators';
 
 import { ComponentService } from '../services/component.service';
 import { Auth } from '../services/auth.service';
@@ -134,6 +137,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   private ENROLLED = 'ENROLLED';
   private ABOUT_YOU = 'ABOUT_YOU';
   private ASSIGNED_SEX = 'ASSIGNED_SEX';
+
+  CLEAN = 'CLEAN';
+  private SUCCESSFUL_DOWNLOAD_MESSAGE = 'File download finished.';
+  private NOT_SCANNED_FILE_MESSAGE = 'Error - file has not passed scanning';
 
   subscriptions: Subscription = new Subscription();
 
@@ -1552,5 +1559,36 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   private hasOncHistoryGender(participant: Participant): boolean {
     return participant.oncHistoryDetails.find( onc => onc.gender !== '' && onc.gender !== undefined && onc.gender !== null ) !== undefined;
+  }
+
+  downloadParticipantFile( file: ESFile ): void {
+    if (!this.isFileClean( file )) {
+      this.setDownloadMessageAndStatus( this.NOT_SCANNED_FILE_MESSAGE, false );
+      return;
+    }
+    this.setDownloadMessageAndStatus( 'Downloading... This might take a while', true );
+    const realm = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
+    this.dsmService.getSignedUrl( this.participant.data.profile[ 'guid' ], file, realm ).pipe(
+      mergeMap(data => this.dsmService.downloadFromSignedUrl(data['url'])), take(1)).subscribe( {
+      next: data => {
+            const blob = new Blob( [ data ], {type: file.mimeType} );
+            fileSaver.saveAs( blob, file.fileName );
+            this.setDownloadMessageAndStatus( this.SUCCESSFUL_DOWNLOAD_MESSAGE, false );
+        },
+        error: err => {
+          this.setDownloadMessageAndStatus( err, false );
+        }
+      } );
+
+  }
+
+  public isFileClean( file: ESFile ): boolean {
+    return file.scanResult === this.CLEAN;
+  }
+
+  private setDownloadMessageAndStatus( message: string, downloading: boolean ): void {
+    this.message = message;
+    this.downloading = downloading;
+
   }
 }

@@ -1,11 +1,3 @@
-<ng-container *ngIf="downloading">
-  <div style="text-align: center">
-    <i class="fas fa-spinner fa-spin fa-2x"></i>
-  </div>
-</ng-container>
-<ng-container *ngIf="downloadMessage">
-  {{downloadMessage}}
-</ng-container>
 <table class="table table-striped Width--100">
   <thead>
   <tr>
@@ -30,7 +22,7 @@
     <td>{{getNiceDateFormat(file.scannedAt)}}</td>
     <td>{{file.scanResult}}</td>
     <td>
-      <button (click)="downloadParticipantFile(file)" [disabled]="file.scanResult !== CLEAN"
+      <button (click)="downloadParticipantFile($event, file)" [disabled]="file.scanResult !== CLEAN"
               color="primary" mat-raised-button>Download File
       </button>
     </td>
