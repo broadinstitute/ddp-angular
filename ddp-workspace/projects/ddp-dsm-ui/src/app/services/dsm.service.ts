@@ -41,7 +41,7 @@ export class DSMService {
     const url = this.baseUrl + DSMService.UI + 'dashboard';
     const map: { name: string; value: any }[] = [];
     map.push( {name: DSMService.REALM, value: realm} );
-    return this.http.get('assets/tempJson.json', this.buildQueryHeader(map)).pipe(
+    return this.http.get(url, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );
   }
