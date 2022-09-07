@@ -68,7 +68,7 @@ export class DashboardStatisticsService {
       },
       height: 500,
 
-      hovermode: false,
+      hovermode: true,
       bargap: 0.3,
 
       margin: {
@@ -152,7 +152,7 @@ export class DashboardStatisticsService {
       },
       height: 500,
 
-      hovermode: false,
+      hovermode: true,
       bargap: 0.3,
       showlegend: true,
       barmode: "group",
@@ -243,7 +243,7 @@ export class DashboardStatisticsService {
         y: 0.86
       },
 
-      hovermode: false,
+      hovermode: true,
       bargap: 0.3,
       showlegend: false,
 
@@ -286,7 +286,7 @@ export class DashboardStatisticsService {
         labels: chart.labels,
         hole: 0.55,
         marker: {
-          color: "#749DC5",
+          color: chart.color,
         },
         outsidetextfont: {
           color: '#2D333E',
@@ -314,7 +314,7 @@ export class DashboardStatisticsService {
 
 
       height: 500,
-      hovermode: false,
+      hovermode: true,
       showlegend: true,
 
       margin: {

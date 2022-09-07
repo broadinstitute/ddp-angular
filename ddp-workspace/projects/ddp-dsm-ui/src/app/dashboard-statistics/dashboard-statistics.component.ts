@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {Observable} from "rxjs";
 import {DashboardStatisticsService} from "../services/dashboard-statistics.service";
+import {RoleService} from "../services/role.service";
 
 @Component({
   selector: 'app-dashboard-statistics',
@@ -10,11 +11,13 @@ import {DashboardStatisticsService} from "../services/dashboard-statistics.servi
 
 export class DashboardStatisticsComponent implements OnInit {
   Charts: Observable<any>;
+  hasRequiredRole;
 
-  constructor(private dashboardStatisticsService: DashboardStatisticsService) {
+  constructor(private dashboardStatisticsService: DashboardStatisticsService, private roleService: RoleService) {
   }
 
   ngOnInit() {
-    this.Charts = this.dashboardStatisticsService.ChartFactory()
+    this.hasRequiredRole = this.roleService.allowedToViewEELData();
+    this.Charts = this.dashboardStatisticsService.ChartFactory();
   }
 }

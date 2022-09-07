@@ -1,4 +1,4 @@
-<div class="dashboard">
+<div class="dashboard" *ngIf="hasRequiredRole; else noRole">
   <section *ngFor="let chart of (Charts | async)" class="dashboard-chart" [ngClass]="chart.size">
     <plotly-plot
       [data]="chart.data"
@@ -6,4 +6,8 @@
     ></plotly-plot>
   </section>
 </div>
+
+<ng-template #noRole>
+  <p>User doesn't have required role</p>
+</ng-template>
 

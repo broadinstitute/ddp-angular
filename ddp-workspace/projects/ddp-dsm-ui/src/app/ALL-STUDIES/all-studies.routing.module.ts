@@ -35,6 +35,7 @@ import {AllStudiesComponent} from './all-studies.component';
 import {HomeComponent} from '../home/home.component';
 import {StoolUploadComponent} from '../stool-upload/stool-upload.component';
 import {ExportHelpComponent} from '../help/help.component';
+import {DashboardStatisticsComponent} from "../dashboard-statistics/dashboard-statistics.component";
 
 
 
@@ -100,6 +101,7 @@ export const AppRoutes: Routes = [
       },
       {path: Statics.PERMALINK + Statics.SHIPPING_URL, component: ShippingComponent, canActivate: [AuthGuard]},
       {path: Statics.PERMALINK + Statics.UNSENT_OVERVIEW_URL, component: DashboardComponent, canActivate: [AuthGuard]},
+      {path: 'statisticsDashboard', component: DashboardStatisticsComponent, canActivate: [AuthGuard]},
 
       {path: 'test-dss', component: TestDssComponent},
       {path: 'dss-error', component: DssErrorPageComponent},
