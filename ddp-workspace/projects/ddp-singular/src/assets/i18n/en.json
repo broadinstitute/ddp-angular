@@ -575,6 +575,10 @@
         "status": {
             "inComplete":"Enrollment in Progress",
             "complete": "Fully Enrolled"
+        },
+        "Alts": {
+            "Incomplete": "incomplete status icon",
+            "Complete": "complete status icon"
         }
     },
   "About": {
