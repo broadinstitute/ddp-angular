@@ -28,6 +28,7 @@
           <li *ngIf="hasRole().allowToViewSampleLists() || hasRole().allowedToHandleSamples()"><a [routerLink]="['shippingQueue']"> Queue </a></li>
           <li *ngIf="hasRole().allowToViewSampleLists() || hasRole().allowedToHandleSamples()"><a [routerLink]="['shippingError']"> Error </a></li>
           <!-- Scan pages, only if you have right to handle samples or to receive samples -->
+          <li *ngIf="hasRole().allowedToHandleSamples()"><a [routerLink]="['scan']" [queryParams]="{initialScan: true}"> Initial Scan </a></li>
           <li *ngIf="hasRole().allowedToHandleSamples()"><a [routerLink]="['scan']" [queryParams]="{scanTracking: true}"> Tracking Scan </a></li>
           <li *ngIf="hasRole().allowedToHandleSamples()"><a [routerLink]="['scan']"> Final Scan </a></li>
           <li *ngIf="hasRole().allowedToViewReceivingPage()"><a [routerLink]="['scan']" [queryParams]="{scanReceived: true}"> Receiving Scan </a></li>
@@ -47,7 +48,7 @@
           <hr *ngIf="hasRole().allowedToUploadKits()">
           <li *ngIf="hasRole().allowedToUploadKits()"><a href="#" [routerLink]="['upload']"> Kit Upload </a></li>
           <!-- Upload of stool, only if you have right to upload -->
-          <li *ngIf="hasRole().allowedToUploadKits()"><a href="#" [routerLink]="['stoolUpload']"> Stool Sample Upload </a></li>
+          <li *ngIf="hasRole().allowedToUploadKits() && hasRole().allowedToViewMedicalRecords()"><a href="#" [routerLink]="['stoolUpload']"> Stool Sample Upload </a></li>
           <!-- Setup label dimensions, only if you have the right to handle samples -->
           <hr *ngIf="hasRole().allowedToHandleSamples()">
           <li *ngIf="hasRole().allowedToHandleSamples()"><a [routerLink]="['labelSettings']"> Label Settings </a></li>
