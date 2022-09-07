@@ -1,9 +1,8 @@
 import {DatePipe} from '@angular/common';
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {ESFile} from '../participant-list/models/file.model';
 import {Participant} from '../participant-list/participant-list.model';
 import {Utils} from '../utils/utils';
-import { Output, EventEmitter } from '@angular/core';
 
 
 @Component( {
