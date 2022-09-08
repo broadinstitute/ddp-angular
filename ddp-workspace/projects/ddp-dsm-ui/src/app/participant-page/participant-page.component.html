@@ -461,7 +461,7 @@ participant.data.dsm['diagnosisYear'] != null">
           </tr>
         </table>
       </div>
-      <div class="Float--left Width--100" *ngIf="settings['r'] != null && hasRole().allowedToViewMedicalRecords()">
+      <div class="Float--left Width--100" *ngIf="settings['r'] != null">
         <table class="Width--100">
             <tr *ngFor="let fieldSetting of settings['r']">
               <td>{{fieldSetting.columnDisplay}}</td>
