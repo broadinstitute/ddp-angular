@@ -375,15 +375,16 @@ export class ShippingComponent implements OnInit {
             }
 
             .wrapper {
-                height: 100%;
                 display: flex;
-                align-content: space-around;
-                justify-content: space-around;
+                align-content: center;
+                justify-content: center;
                 flex-direction: column;
+
+                height: 100%;
             }
 
             .nameDob {
-                margin: 5px 0 0 0;
+                margin: 0;
                 width: fit-content;
                 height: fit-content;
             }
@@ -395,7 +396,7 @@ export class ShippingComponent implements OnInit {
 
             .barcode {
                 width: fit-content;
-                margin-top: 17px;
+                margin-top: 13px;
             }
 
             @page { margin: 0 }
