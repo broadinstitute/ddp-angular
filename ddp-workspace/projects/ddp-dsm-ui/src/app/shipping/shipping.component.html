@@ -468,7 +468,6 @@
         <ng-container *ngFor="let label of selectedKitRequests">
           <ng-container *ngIf="label.shortId">
             <div class="wrapper">
-
               <div class="nameDob">
                 <p>{{label.firstName}}</p>
                 <p>{{label.lastName}}</p>
@@ -478,7 +477,6 @@
               <div class="barcode">
                 <app-qr-code [qrCodeValue]="label.shortId"></app-qr-code>
               </div>
-
             </div>
 
 

@@ -1,6 +1,6 @@
 <!-- http://api.qrserver.com API Generates QR code. Documentation: https://goqr.me/api/doc/create-qr-code/ -->
-<div style="display: flex; flex-direction: column; width: 100vw; justify-content: space-between; align-items: center">
-  <img style="margin-bottom: 2px;" src="https://api.qrserver.com/v1/create-qr-code/?data={{qrCodeValue}}&size=50x50&format=svg" alt="shortId">
-  <span style="font-size: 5px; font-weight: normal">{{qrCodeValue}}</span>
+<div style="display: flex; width: 100vw; justify-content: center; align-items: center">
+  <span style="font-size: 8px; font-weight: normal; transform: rotate(-90deg)">{{qrCodeValue}}</span>
+  <img src="https://api.qrserver.com/v1/create-qr-code/?data={{qrCodeValue}}&size=50x50&format=svg" [alt]="qrCodeValue">
 </div>
 
