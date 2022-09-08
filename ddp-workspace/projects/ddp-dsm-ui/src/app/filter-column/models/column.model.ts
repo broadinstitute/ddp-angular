@@ -137,6 +137,7 @@ export class ParticipantColumn {
   public static TIME_TEST = new ParticipantColumn('Test Time Completed', 'timeCompleted', 'k', 'testResult');
   public static COLLECTION_DATE = new ParticipantColumn('Collection Date', 'collectionDate', 'k');
   public static SEQUENCING_RESTRICTION = new ParticipantColumn('Sequencing Restriction', 'sequencingRestriction', 'k');
+  public static SAMPLE_NOTES = new ParticipantColumn('Sample Notes', 'sampleNotes', 'k');
   //Cohort tags
   public static COHORT_TAG_NAME = new ParticipantColumn('Cohort Tag Name', 'cohortTagName', 'c', 'dsm');
 

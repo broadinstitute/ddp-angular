@@ -580,8 +580,12 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     if (typeof value === 'string') {
       sample[ parameterName ] = value;
       v = value;
-    } else {
-      v = value.value;
+    } else if (value != null) {
+      if (value.srcElement != null && typeof value.srcElement.value === 'string') {
+        v = value.srcElement.value;
+      } else if (value.value != null) {
+        v = value.value;
+      }
     }
     if (v != null) {
       const realm: string = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
@@ -591,7 +595,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           name: parameterName,
           value: v
         }, null, 'dsmKitRequestId', sample.dsmKitRequestId,
-        'kit', null, realm, this.participant?.participant?.ddpParticipantId
+        'kit', null, realm,  this.participant.data.profile['guid']
       );
       const patch = patch1.getPatch();
       this.currentPatchField = parameterName;

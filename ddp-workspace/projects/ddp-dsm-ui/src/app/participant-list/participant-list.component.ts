@@ -541,8 +541,8 @@ export class ParticipantListComponent implements OnInit {
           this.savedFilters.sort((a, b) => a.filterName.localeCompare(b.filterName));
           // console.log(this.savedFilters);
         }
-        if (jsonData.mrCoverPDF != null) {
-          jsonData.mrCoverPDF.forEach((val) => {
+        if (jsonData.mrCoverPdf != null) {
+          jsonData.mrCoverPdf.forEach((val) => {
             const value: Value = Value.parse(val);
             this.mrCoverPdfSettings.push(value);
           });

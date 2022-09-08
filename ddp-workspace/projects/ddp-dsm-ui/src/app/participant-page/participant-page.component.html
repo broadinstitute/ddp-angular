@@ -697,6 +697,18 @@ participant.data.dsm['diagnosisYear'] != null">
                             <mat-option value="{{null}}"></mat-option>
                           </mat-select>
                       </tr>
+                      <tr *ngIf="hasSequencingOrders">
+                        <td class="TD--Padding Width--50 Data-Display-Question">Sample Notes</td>
+                      </tr>
+                      <tr *ngIf="hasSequencingOrders">
+                        <td style="padding-bottom: 15px;" class="TD--Padding-Left Width--50">
+                          <input matInput maxlength="2000" placeholder="Sample Notes" type="text"
+                                 [disabled]="participantExited"
+                                 [ngClass]="{'Input': true, 'Input--Bigger-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('sampleNotes')}"
+                                 [(ngModel)]="sample.sampleNotes"
+                                 (change)="kitValueChanged($event, 'sampleNotes', sample)"
+                                 (blur)="currentField(null)" (focus)="currentField('sampleNotes')">
+                      </tr>
                     </table>
                   </div>
                 </fieldset>
