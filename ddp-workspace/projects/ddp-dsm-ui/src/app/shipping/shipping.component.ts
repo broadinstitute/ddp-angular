@@ -379,19 +379,19 @@ export class ShippingComponent implements OnInit {
                 height: 100%;
             }
             .nameDob {
-                margin: 0;
+                margin: 13px 0 0 0;
                 width: fit-content;
                 height: fit-content;
             }
             p {
-                font-size: 9px;
+                font-size: 8px;
                 margin-left: 25px;
             }
             .barcode {
                 width: fit-content;
-                margin-top: 13px;
             }
             @page { margin: 0 }
+
             @media print {
                 .pagebreak {
                     page-break-after: always;
