@@ -364,42 +364,34 @@ export class ShippingComponent implements OnInit {
                 padding: 0;
                 box-sizing: border-box;
             }
-
             * {
                 margin: 0;
                 padding: 0;
             }
-
             .print-body {
                 height: 100vh;
             }
-
             .wrapper {
-                height: 100%;
                 display: flex;
-                align-content: space-around;
-                justify-content: space-around;
+                align-content: center;
+                justify-content: center;
                 flex-direction: column;
+                height: 100%;
             }
-
             .nameDob {
                 margin: 0;
                 width: fit-content;
                 height: fit-content;
             }
-
             p {
                 font-size: 9px;
                 margin-left: 25px;
             }
-
             .barcode {
                 width: fit-content;
-                margin-top: 17px;
+                margin-top: 13px;
             }
-
             @page { margin: 0 }
-
             @media print {
                 .pagebreak {
                     page-break-after: always;
