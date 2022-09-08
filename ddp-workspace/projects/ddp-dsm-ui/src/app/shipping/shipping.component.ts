@@ -383,7 +383,7 @@ export class ShippingComponent implements OnInit {
             }
 
             .nameDob {
-                margin: 0;
+                margin: 5px 0 0 0;
                 width: fit-content;
                 height: fit-content;
             }
