@@ -314,6 +314,7 @@ export class ShippingComponent implements OnInit {
 
   showPHIButton(study: string): boolean {
     switch(study) {
+      case 'Angio':
       case 'osteo2':
       case 'cmi-lms':
         return true;
@@ -364,43 +365,34 @@ export class ShippingComponent implements OnInit {
                 padding: 0;
                 box-sizing: border-box;
             }
-
             * {
                 margin: 0;
                 padding: 0;
             }
-
             .print-body {
                 height: 100vh;
             }
-
             .wrapper {
                 display: flex;
                 align-content: center;
                 justify-content: center;
                 flex-direction: column;
-
                 height: 100%;
             }
-
             .nameDob {
-                margin: 0;
+                margin: 13px 0 0 0;
                 width: fit-content;
                 height: fit-content;
+                transform: translateY(-3px);
             }
-
             p {
-                font-size: 9px;
-                margin-left: 25px;
+                font-size: 8px;
+                margin-left: 13px;
             }
-
             .barcode {
                 width: fit-content;
-                margin-top: 13px;
             }
-
             @page { margin: 0 }
-
             @media print {
                 .pagebreak {
                     page-break-after: always;
