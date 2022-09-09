@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DashboardColumns } from 'ddp-sdk';
+import { CustomDashboardColumns, DashboardColumns } from 'ddp-sdk';
 import { Cookies } from '../models/cookies/cookies';
 
 @Injectable()
@@ -79,8 +79,40 @@ export class ToolkitConfigurationService {
     showInfoForPhysicians: boolean;
     showBlog: boolean;
     agreeConsent: boolean;
+    // Dashboard layout settings
+    showTitleIcon:boolean;
     dashboardDisplayedColumns: Array<DashboardColumns> = ['name', 'summary', 'date', 'status', 'actions'];
+    dashboardDisplayedCustomColumns: Array<CustomDashboardColumns> = [{
+        name: 'name',
+        key: 'SDK.UserActivities.ActivityName',
+        cellType: 'form'
+    },
+    {
+        name: 'summary',
+        key: 'SDK.UserActivities.Summary',
+        cellType: 'description'
 
+    },
+    {
+        name: 'date',
+        key: 'SDK.UserActivities.ActivityDate',
+        cellType: 'date'
+
+    },
+    {
+        name: 'status',
+        key: 'SDK.UserActivities.ActivityStatus',
+        cellType: 'status'
+
+    },
+    {
+        name: 'actions',
+        key: 'SDK.UserActivities.ActivityActions',
+        cellType: 'action'
+
+    }];
+    // Dashboard custom events
+    customOpenUserEditDialog:boolean;
     // Keys and tokens
     recaptchaSiteClientKey: string;
     lightswitchInstagramWidgetId: string;

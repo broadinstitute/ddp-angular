@@ -35,6 +35,7 @@ import { FaqComponent } from './components/faq/faq.component';
 import { DataComponent } from './components/data/data.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { PrismComponent } from './components/prism/prism.component';
+import { CommonDashboardComponent } from 'projects/ddp-sdk/src/lib/components/dashboard/dashboard.component';
 
 const routes: Routes = [
     {
@@ -137,7 +138,7 @@ const routes: Routes = [
     },
     {
         path: AppRoutes.Dashboard,
-        component: DashboardRedesignedComponent,
+        component: CommonDashboardComponent,
         canActivate: [
             IrbGuard,
             AuthGuard
