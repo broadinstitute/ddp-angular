@@ -468,14 +468,14 @@
         <ng-container *ngFor="let label of selectedKitRequests">
           <ng-container *ngIf="label.shortId">
             <div class="wrapper">
+              <div class="barcode">
+                <app-qr-code [qrCodeValue]="label.shortId"></app-qr-code>
+              </div>
+
               <div class="nameDob">
                 <p>{{label.firstName}}</p>
                 <p>{{label.lastName}}</p>
                 <p>{{label.dateOfBirth}}</p>
-              </div>
-
-              <div class="barcode">
-                <app-qr-code [qrCodeValue]="label.shortId"></app-qr-code>
               </div>
             </div>
 
