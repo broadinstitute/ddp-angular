@@ -30,7 +30,7 @@ import { LayoutType } from '../../../models/layout/layoutType';
                 [studyGuid]="studyGuid"
                 [activityGuid]="activityGuid"
                 [layoutType]="layoutType"
-                (valueChanged)="enteredValue$.next($event)"
+                (valueChanged)="changeValueAction($event)"
                 (componentBusy)="componentBusy.next($event)">
             </ddp-activity-answer>
             <ng-container *ngIf="block.shown && block.enabled">
@@ -79,6 +79,10 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
         this.setupErrorMessage();
         this.setupSavingData();
         this.setupScrollToErrorAction();
+    }
+    public changeValueAction(answerValueEvent:AnswerValue){
+        this.enteredValue$.next(answerValueEvent);
+        this.validationRequested$.next(!!answerValueEvent);
     }
 
     private setupErrorMessage(): void {
