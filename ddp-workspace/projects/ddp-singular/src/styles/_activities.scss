@@ -176,6 +176,17 @@
         }
       }
     }
+
+    // an exception for a long content string
+    &.picklist-answer-MRR_RECORD_SEND_OPTIONS {
+      .mat-list-text, .mat-checkbox {
+        width: 100%;
+      }
+      .mat-checkbox-label {
+        width: 100%;
+        overflow-wrap: break-word;
+      }
+    }
   }
 
   .mat-checkbox {
