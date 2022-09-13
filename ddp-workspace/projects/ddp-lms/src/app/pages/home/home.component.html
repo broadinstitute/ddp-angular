@@ -5,7 +5,7 @@
       <div class="paragraph-header-1" [innerHTML]="'home.paragraph1Header' | translate"></div>
       <div class="paragraph-description-1" [innerHTML]="'home.paragraph1Text' | translate"></div>
       <div class="buttons">
-        <button class="count-me-in-button btn" [routerLink]="['/count-me-in']">
+        <button *ngIf="!isAuthenticated" class="count-me-in-button btn" [routerLink]="['/count-me-in']">
           <div class="count-me-in-button-text" [innerHTML]="'home.countMeInBtn' | translate"></div>
         </button>
         <button class="learn-more-button btn" [routerLink]="['/faq']">
