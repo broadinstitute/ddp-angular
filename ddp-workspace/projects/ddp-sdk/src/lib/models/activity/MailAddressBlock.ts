@@ -31,7 +31,5 @@ export class MailAddressBlock extends ActivityBlock {
         return true;
     }
 
-    public shouldScrollToFirstInvalidQuestion(): boolean {
-        return false;
-    }
+    
 }

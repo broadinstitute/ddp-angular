@@ -1,6 +1,7 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    ElementRef,
     EventEmitter,
     Inject,
     Input,
@@ -17,6 +18,7 @@ import {
     catchError,
     concatMap,
     debounce,
+    debounceTime,
     distinctUntilChanged,
     filter,
     finalize,
@@ -49,6 +51,7 @@ import { NGXTranslateService } from '../../services/internationalization/ngxTran
 import { LoggingService } from '../../services/logging.service';
 import { ConfigurationService } from '../../services/configuration.service';
 import { FuncType } from '../../models/funcType';
+import { WindowRef } from '../../services/windowRef';
 
 interface IsEasyPostError {
     isEasyPostError: boolean;
@@ -84,7 +87,9 @@ interface AddressSuggestion {
     template: `
         <p *ngIf="block.titleText" class="ddp-address-embedded__title" [innerHTML]="block.titleText"></p>
         <p *ngIf="block.subtitleText" class="ddp-address-embedded__subtitle" [innerHTML]="block.subtitleText"></p>
+        <div #scrollAnchor>
         <ddp-address-input
+            
             (valueChanged)="inputComponentAddress$.next($event); dirtyStatusChanged.emit(true)"
             (formValidStatusChanged)="formValidStatusChanged$.next($event)"
             [address]="inputAddress$ | async"
@@ -93,6 +98,7 @@ interface AddressSuggestion {
             [country]="country"
             [phoneRequired]="block.requirePhone"
             (componentBusy)="isInputComponentBusy$.next($event)"></ddp-address-input>
+</div>
         <ddp-validation-message
             *ngIf="(errorMessagesToDisplay$ | async).length > 0"
             [message]="(errorMessagesToDisplay$ | async).join(' ')">
@@ -149,6 +155,7 @@ interface AddressSuggestion {
 })
 export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     @Input() block: MailAddressBlock;
+    @ViewChild('scrollAnchor', {static: true}) scrollAnchor: ElementRef;
 
     @Input()
     public set readonly(val: boolean) {
@@ -249,12 +256,33 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         private logger: LoggingService,
         private ngxTranslate: NGXTranslateService,
         @Inject('ddp.config') private configuration: ConfigurationService,
-        @Optional() private submitService: SubmitAnnouncementService
+        @Optional() private submitService: SubmitAnnouncementService,
+        private windowRef: WindowRef
     ) {
         this.suggestionForm = new FormGroup({
             suggestionRadioGroup: new FormControl('entered')
         });
         this.initializeComponentState();
+    }
+    
+    private setupScrollToErrorAction(): void {
+
+        this.validationRequested$.pipe(
+            tap((validationRequested)=>{console.log(this.block);console.log(validationRequested); debugger;}),
+            filter(validationRequested => validationRequested && this.block.scrollTo),
+            debounceTime(300),
+            tap(() => {
+                const headerOffset = this.configuration.scrollToErrorOffset;
+                const top = this.scrollAnchor.nativeElement.getBoundingClientRect().top
+                    + this.windowRef.nativeWindow.scrollY - headerOffset;
+                this.windowRef.nativeWindow.scrollTo({
+                    top,
+                    behavior: 'smooth'
+                });
+                this.block.scrollTo = false;
+            }),
+            takeUntil(this.ngUnsubscribe)
+        ).subscribe();
     }
 
     private initializeComponentState(): void {
@@ -283,6 +311,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
     ngOnInit(): void {
         this.setupActions();
+        
     }
 
     setupActions(): void {
@@ -294,6 +323,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             map(val => val > 0),
             distinctUntilChanged()
         );
+        this.setupScrollToErrorAction();
 
         const initializeStateAction$ = this.state$.pipe(
             take(1),
