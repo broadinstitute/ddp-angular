@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit {
 
   errorMessage: string;
   additionalMessage: string;
+  showBanner: string;
 
   Arr = Array;
 
@@ -185,9 +186,17 @@ export class DashboardComponent implements OnInit {
 
   getDashboardInformation(url: string): void {
     this.loadingDDPData = true;
+    this.showBanner = null;
     if (url.indexOf(Statics.MEDICALRECORD_DASHBOARD) > -1) {
       this.dashboardVersion = Statics.MEDICALRECORD_DASHBOARD;
-      this.loadDDPSummary();
+      if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null
+        && localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === 'osteo2' ) {
+        this.showBanner = 'Dashboard is not available at this time';
+        this.loadingDDPData = false;
+      }
+      else {
+        this.loadDDPSummary();
+      }
     } else if (url.indexOf(Statics.SHIPPING_DASHBOARD) > -1) {
       this.dashboardVersion = Statics.SHIPPING_DASHBOARD;
       this.loadDDPSummary();
