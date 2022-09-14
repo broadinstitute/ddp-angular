@@ -3,16 +3,16 @@ import {WindowRef, AnalyticsEventsService, AnalyticsEventCategories, AnalyticsEv
 import { HeaderConfigurationService, CommunicationService, ToolkitConfigurationService } from 'toolkit';
 
 @Component({
-    selector: "app-welcome",
-    templateUrl: "./welcome.component.html",
-    styleUrls: ["./welcome.component.scss"],
+    selector: 'app-welcome',
+    templateUrl: './welcome.component.html',
+    styleUrls: ['./welcome.component.scss'],
 })
 export class WelcomeComponent implements OnInit {
     public twitterUrl: string;
     public facebookUrl: string;
     public instagramUrl: string;
     public lightswitchWidgetId: string;
-    @ViewChild("scrollAnchor", { static: true }) scrollAnchor: ElementRef;
+    @ViewChild('scrollAnchor', { static: true }) scrollAnchor: ElementRef;
     private readonly HEADER_HEIGHT_REM = 7;
 
     constructor(
@@ -21,7 +21,7 @@ export class WelcomeComponent implements OnInit {
         private window: WindowRef,
         private communicationService: CommunicationService,
         private analytics: AnalyticsEventsService,
-        @Inject("toolkit.toolkitConfig")
+        @Inject('toolkit.toolkitConfig')
         private toolkitConfiguration: ToolkitConfigurationService
     ) {}
 
@@ -41,7 +41,7 @@ export class WelcomeComponent implements OnInit {
             this.getRealHeaderHeight;
         this.window.nativeWindow.scrollTo({
             top,
-            behavior: "smooth",
+            behavior: 'smooth',
         });
     }
 
