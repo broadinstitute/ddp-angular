@@ -190,7 +190,10 @@ export class DashboardComponent implements OnInit {
     if (url.indexOf(Statics.MEDICALRECORD_DASHBOARD) > -1) {
       this.dashboardVersion = Statics.MEDICALRECORD_DASHBOARD;
       if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null
-        && localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === 'osteo2' ) {
+        && (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === 'osteo2' )
+        || (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === 'testboston' )
+        || (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === 'colorectal' )
+        || (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === 'cmi-voices' )) {
         this.showBanner = 'Dashboard is not available at this time';
         this.loadingDDPData = false;
       }
