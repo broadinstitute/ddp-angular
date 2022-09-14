@@ -266,9 +266,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     }
     
     private setupScrollToErrorAction(): void {
-
         this.validationRequested$.pipe(
-            tap((validationRequested)=>{console.log(this.block);console.log(validationRequested); debugger;}),
             filter(validationRequested => validationRequested && this.block.scrollTo),
             debounceTime(300),
             tap(() => {
@@ -284,7 +282,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             takeUntil(this.ngUnsubscribe)
         ).subscribe();
     }
-
+    
     private initializeComponentState(): void {
         const initialState: ComponentState = {
             isReadOnly: false,
