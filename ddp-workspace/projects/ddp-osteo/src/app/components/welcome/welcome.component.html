@@ -9,7 +9,7 @@
                     HomePage.IntroductionSection.Text
                 </p>
                 <div class="intro-media-block__buttons">
-                    <a routerLink="count-me-in" (click)="sendCountMeInAnalytics()"
+                    <a *ngIf="!isAuthenticated" routerLink="count-me-in" (click)="sendCountMeInAnalytics()"
                         class="button button_medium button_primary" translate>
                         Common.Buttons.CountMeIn
                     </a>
