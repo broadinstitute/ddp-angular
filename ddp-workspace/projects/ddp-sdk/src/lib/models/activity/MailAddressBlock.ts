@@ -30,6 +30,4 @@ export class MailAddressBlock extends ActivityBlock {
 
         return true;
     }
-
-    
 }

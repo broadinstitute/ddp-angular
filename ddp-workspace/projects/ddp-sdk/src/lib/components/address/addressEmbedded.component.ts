@@ -88,17 +88,17 @@ interface AddressSuggestion {
         <p *ngIf="block.titleText" class="ddp-address-embedded__title" [innerHTML]="block.titleText"></p>
         <p *ngIf="block.subtitleText" class="ddp-address-embedded__subtitle" [innerHTML]="block.subtitleText"></p>
         <div #scrollAnchor>
-        <ddp-address-input
-            
-            (valueChanged)="inputComponentAddress$.next($event); dirtyStatusChanged.emit(true)"
-            (formValidStatusChanged)="formValidStatusChanged$.next($event)"
-            [address]="inputAddress$ | async"
-            [addressErrors]="verifyFieldErrors$ | async"
-            [readonly]="isReadOnly$ | async"
-            [country]="country"
-            [phoneRequired]="block.requirePhone"
-            (componentBusy)="isInputComponentBusy$.next($event)"></ddp-address-input>
-</div>
+            <ddp-address-input
+                (valueChanged)="inputComponentAddress$.next($event); dirtyStatusChanged.emit(true)"
+                (formValidStatusChanged)="formValidStatusChanged$.next($event)"
+                [address]="inputAddress$ | async"
+                [addressErrors]="verifyFieldErrors$ | async"
+                [readonly]="isReadOnly$ | async"
+                [country]="country"
+                [phoneRequired]="block.requirePhone"
+                (componentBusy)="isInputComponentBusy$.next($event)">
+            </ddp-address-input>
+        </div>
         <ddp-validation-message
             *ngIf="(errorMessagesToDisplay$ | async).length > 0"
             [message]="(errorMessagesToDisplay$ | async).join(' ')">
@@ -264,7 +264,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         });
         this.initializeComponentState();
     }
-    
+
     private setupScrollToErrorAction(): void {
         this.validationRequested$.pipe(
             filter(validationRequested => validationRequested && this.block.scrollTo),
@@ -282,7 +282,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             takeUntil(this.ngUnsubscribe)
         ).subscribe();
     }
-    
+
     private initializeComponentState(): void {
         const initialState: ComponentState = {
             isReadOnly: false,
@@ -309,7 +309,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
     ngOnInit(): void {
         this.setupActions();
-        
     }
 
     setupActions(): void {
