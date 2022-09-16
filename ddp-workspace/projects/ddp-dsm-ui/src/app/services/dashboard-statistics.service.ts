@@ -1,9 +1,9 @@
-import {Injectable} from "@angular/core";
-import {dashboardType} from "../enums/dashboard.enums";
-import {DSMService} from "./dsm.service";
-import {LocalStorageService} from "./localStorage.service";
-import {map} from "rxjs/operators";
-import {Observable} from "rxjs";
+import {Injectable} from '@angular/core';
+import {dashboardType} from '../enums/dashboard.enums';
+import {DSMService} from './dsm.service';
+import {LocalStorageService} from './localStorage.service';
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class DashboardStatisticsService {
@@ -23,7 +23,7 @@ export class DashboardStatisticsService {
           });
           return generatedCharts;
         })
-      )
+      );
   }
 
 
@@ -32,26 +32,26 @@ export class DashboardStatisticsService {
     {type: dashboardType.VERTICAL_BAR_CHART, func: this.generate_verticalBarChart},
     {type: dashboardType.HORIZONTAL_BAR_CHART, func: this.generate_horizontalBarChart},
     {type: dashboardType.DONUT_CHART, func: this.generate_donutChart}
-  ]
+  ];
 
-  private generate_verticalBarChart(chart: any) {
+  private generate_verticalBarChart(chart: any): {} {
     const chartObject: any = {};
     chartObject.data = [
       {
-        type: "bar",
+        type: 'bar',
         y: chart.y,
         x: chart.x,
         width: -1,
         marker: {
-          color: "#749DC5",
+          color: '#749DC5',
         },
         outsidetextfont: {
           color: '#2D333E',
-          family: "Montserrat-Bold",
+          family: 'Montserrat-Bold',
           size: 13
         },
         text: chart.y,
-        textposition: "outside",
+        textposition: 'outside',
         offset: 0.1,
       },
     ];
@@ -59,8 +59,8 @@ export class DashboardStatisticsService {
       autosize: true,
       title: {
         font: {
-          color: "#2D333E",
-          family: "Montserrat-SemiBold",
+          color: '#2D333E',
+          family: 'Montserrat-SemiBold',
           size: 20
         },
         text: chart.title,
@@ -77,10 +77,10 @@ export class DashboardStatisticsService {
 
       xaxis: {
         tickangle: 30,
-        ticklabelposition: "outside bottom",
+        ticklabelposition: 'outside bottom',
         ticklabelstep: 1,
         position: 0,
-        linecolor: "#737E8E",
+        linecolor: '#737E8E',
         linewidth: 1,
 
       },
@@ -89,52 +89,52 @@ export class DashboardStatisticsService {
         fixedrange: true,
         dtick: 100,
         tickfont: {
-          family: "Montserrat-Regular",
+          family: 'Montserrat-Regular',
           size: 13,
           color: '#2D333E'
         }
       }
-    }
+    };
 
-    chartObject.size = chart.size
+    chartObject.size = chart.size;
 
     return chartObject;
   }
 
-  private generate_verticalHighlightedBarChart(chart: any) {
+  private generate_verticalHighlightedBarChart(chart: any): {} {
     const chartObject: any = {};
     chartObject.data = [
       {
-        type: "bar",
+        type: 'bar',
         name: 'Your center',
         y: [chart.y[0]],
         width: -1,
         marker: {
-          color: "#749DC5",
+          color: '#749DC5',
         },
         outsidetextfont: {
           color: '#2D333E',
-          family: "Montserrat-Bold",
+          family: 'Montserrat-Bold',
           size: 13
         },
         text: [chart.y[0]],
-        textposition: "outside",
+        textposition: 'outside',
         offset: 0.1,
       },
       {
-        type: "bar",
+        type: 'bar',
         name: 'Other centers (deidentified)',
         y: chart.y.slice(1),
         marker: {
-          color: "#CFD6DC",
+          color: '#CFD6DC',
         },
-        textposition: "outside",
+        textposition: 'outside',
         text: chart.y.slice(1),
         offset: 2,
         base: 0,
         outsidetextfont: {
           color: '#2D333E',
-          family: "Montserrat-Bold",
+          family: 'Montserrat-Bold',
           size: 13
         },
       }
@@ -143,8 +143,8 @@ export class DashboardStatisticsService {
       autosize: true,
       title: {
         font: {
-          color: "#2D333E",
-          family: "Montserrat-SemiBold",
+          color: '#2D333E',
+          family: 'Montserrat-SemiBold',
           size: 20
         },
         text: chart.title,
@@ -155,21 +155,21 @@ export class DashboardStatisticsService {
       hovermode: true,
       bargap: 0.3,
       showlegend: true,
-      barmode: "group",
+      barmode: 'group',
 
       legend: {
         y: -0.01,
-        xanchor: "auto",
+        xanchor: 'auto',
         itemwidth: 100,
         grouptitlefont: {
-          family: "Montserrat-Medium",
+          family: 'Montserrat-Medium',
           size: 13,
           color: '#2D333E'
         },
-        orientation: "h",
-        traceorder: "grouped",
+        orientation: 'h',
+        traceorder: 'grouped',
         font: {
-          family: "Montserrat-Medium",
+          family: 'Montserrat-Medium',
         },
         itemclick: false,
         itemdoubleclick: false,
@@ -181,11 +181,11 @@ export class DashboardStatisticsService {
 
       xaxis: {
         tickangle: 0,
-        ticklabelposition: "outside bottom",
+        ticklabelposition: 'outside bottom',
         ticklabelstep: 1,
         showticklabels: false,
         position: 0,
-        linecolor: "#737E8E",
+        linecolor: '#737E8E',
         linewidth: 1,
       },
       yaxis: {
@@ -193,37 +193,37 @@ export class DashboardStatisticsService {
         fixedrange: true,
         dtick: 100,
         tickfont: {
-          family: "Montserrat-Regular",
+          family: 'Montserrat-Regular',
           size: 13,
           color: '#2D333E'
         }
       }
-    }
+    };
 
-    chartObject.size = chart.size
+    chartObject.size = chart.size;
 
     return chartObject;
   }
 
 
-  private generate_horizontalBarChart(chart: any) {
+  private generate_horizontalBarChart(chart: any): {} {
     const chartObject: any = {};
     chartObject.data = [
       {
-        type: "bar",
+        type: 'bar',
         y: chart.y,
         x: chart.x,
-        yaxis: "y2",
+        yaxis: 'y2',
         text: chart.x,
         marker: {
-          color: "#749DC5",
+          color: '#749DC5',
         },
         outsidetextfont: {
           color: '#2D333E',
-          family: "Montserrat-Bold",
+          family: 'Montserrat-Bold',
           size: 13
         },
-        textposition: "outside",
+        textposition: 'outside',
         barmode: 'stack',
         orientation: 'h',
         height: 800,
@@ -234,8 +234,8 @@ export class DashboardStatisticsService {
       autosize: true,
       title: {
         font: {
-          color: "#2D333E",
-          family: "Montserrat-SemiBold",
+          color: '#2D333E',
+          family: 'Montserrat-SemiBold',
           size: 20
         },
         text: chart.title,
@@ -255,33 +255,33 @@ export class DashboardStatisticsService {
         automargin: true,
         domain: [0.4, 0.9],
         tickfont: {
-          family: "Montserrat-Regular",
+          family: 'Montserrat-Regular',
           size: 13,
           color: '#2D333E'
         }
       },
 
       yaxis2: {
-        anchor: "free",
+        anchor: 'free',
         position: 0,
-        side: "right"
+        side: 'right'
       },
 
       margin: {
         l: 0
       }
-    }
-    chartObject.size = chart.size
+    };
+    chartObject.size = chart.size;
 
     return chartObject;
   }
 
 
-  private generate_donutChart(chart: any) {
+  private generate_donutChart(chart: any): {} {
     const chartObject: any = {};
     chartObject.data = [
       {
-        type: "pie",
+        type: 'pie',
         values: chart.values,
         labels: chart.labels,
         hole: 0.55,
@@ -290,11 +290,11 @@ export class DashboardStatisticsService {
         },
         outsidetextfont: {
           color: '#2D333E',
-          family: "Montserrat-Bold",
+          family: 'Montserrat-Bold',
           size: 13
         },
 
-        textposition: "outside",
+        textposition: 'outside',
       }
     ];
 
@@ -303,8 +303,8 @@ export class DashboardStatisticsService {
       autosize: true,
       title: {
         font: {
-          color: "#2D333E",
-          family: "Montserrat-SemiBold",
+          color: '#2D333E',
+          family: 'Montserrat-SemiBold',
           size: 20
         },
         text: chart.title,
@@ -327,18 +327,18 @@ export class DashboardStatisticsService {
 
       legend: {
         x: 0,
-        valign: "bottom",
-        bgcolor: "transparent",
-        orientation: "h",
+        valign: 'bottom',
+        bgcolor: 'transparent',
+        orientation: 'h',
         font: {
-          family: "Montserrat-Medium",
+          family: 'Montserrat-Medium',
         },
         itemclick: false,
         itemdoubleclick: false,
       }
-    }
+    };
 
-    chartObject.size = chart.size
+    chartObject.size = chart.size;
 
     return chartObject;
   }

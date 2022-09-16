@@ -35,7 +35,7 @@ import {AllStudiesComponent} from './all-studies.component';
 import {HomeComponent} from '../home/home.component';
 import {StoolUploadComponent} from '../stool-upload/stool-upload.component';
 import {ExportHelpComponent} from '../help/help.component';
-import {DashboardStatisticsComponent} from "../dashboard-statistics/dashboard-statistics.component";
+import {DashboardStatisticsComponent} from '../dashboard-statistics/dashboard-statistics.component';
 
 
 

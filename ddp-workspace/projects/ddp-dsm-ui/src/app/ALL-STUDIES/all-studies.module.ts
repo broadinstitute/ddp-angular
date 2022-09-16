@@ -115,8 +115,8 @@ import {SequencingOrderComponent} from '../sequencing-order/sequencing-order.com
 import {ClinicalPageComponent} from '../clinical-page/clinical-page.component';
 import {StoolUploadComponent} from '../stool-upload/stool-upload.component';
 import {BarcodeComponent} from '../barcode/barcode.component';
-import {DashboardStatisticsComponent} from "../dashboard-statistics/dashboard-statistics.component";
-import {DashboardStatisticsService} from "../services/dashboard-statistics.service";
+import {DashboardStatisticsComponent} from '../dashboard-statistics/dashboard-statistics.component';
+import {DashboardStatisticsService} from '../services/dashboard-statistics.service';
 
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';

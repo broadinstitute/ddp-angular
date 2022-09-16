@@ -26,7 +26,7 @@ export class LocalStorageService {
   }
 
   get selectedRealm(): string {
-    return localStorage.getItem(ComponentService.MENU_SELECTED_REALM)
+    return localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
   }
 
 
