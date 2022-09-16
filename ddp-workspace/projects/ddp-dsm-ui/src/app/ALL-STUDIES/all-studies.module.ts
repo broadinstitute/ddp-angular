@@ -114,7 +114,6 @@ import { OpenDialogDirective } from '../directive/open-loading-modal.directive';
 import {SequencingOrderComponent} from '../sequencing-order/sequencing-order.component';
 import {ClinicalPageComponent} from '../clinical-page/clinical-page.component';
 import {StoolUploadComponent} from '../stool-upload/stool-upload.component';
-import {BarcodeComponent} from '../barcode/barcode.component';
 import {DashboardStatisticsComponent} from '../dashboard-statistics/dashboard-statistics.component';
 import {DashboardStatisticsService} from '../services/dashboard-statistics.service';
 import {QrCodeComponent} from '../qr-code/qr-code.component';
