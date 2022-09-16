@@ -27,6 +27,7 @@ export class DSMService {
   public static TARGET = 'target';
   public static SCAN_TRACKING = 'scanTracking';
   public static SCAN_RECEIVED = 'scanReceived';
+  public static INITIAL_SCAN = 'initialScan';
 
   private baseUrl = DDP_ENV.baseUrl;
 
@@ -68,6 +69,11 @@ export class DSMService {
 
   public finalScan(json: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'finalScan';
+    return this.baseKitScan(url, json);
+  }
+
+  public initialScan(json: string): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'initialScan';
     return this.baseKitScan(url, json);
   }
 

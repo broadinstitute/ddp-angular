@@ -99,6 +99,8 @@ export class ShippingComponent implements OnInit {
 
   isClinicalStudy: Boolean = false;
 
+  RESEARCH_SAMPLE = 'RUO';
+
   constructor(private route: ActivatedRoute, private router: Router, private dsmService: DSMService, private auth: Auth,
                private role: RoleService, private compService: ComponentService, private _changeDetectionRef: ChangeDetectorRef,
                private util: Utils, private language: Language, private localStorageService: LocalStorageService) {
@@ -314,7 +316,7 @@ export class ShippingComponent implements OnInit {
 
   showPHIButton(study: string): boolean {
     switch(study) {
-      case 'Angio':
+      case 'osteo2':
       case 'cmi-lms':
         return true;
       default:
@@ -364,42 +366,34 @@ export class ShippingComponent implements OnInit {
                 padding: 0;
                 box-sizing: border-box;
             }
-
             * {
                 margin: 0;
                 padding: 0;
             }
-
             .print-body {
                 height: 100vh;
-                padding-left: 26px;
             }
-
             .wrapper {
-                height: 100%;
                 display: flex;
-                align-content: space-around;
-                justify-content: space-around;
+                align-content: center;
+                justify-content: center;
                 flex-direction: column;
+                height: 100%;
             }
-
             .nameDob {
-                margin: 0;
+                margin: 13px 0 0 0;
                 width: fit-content;
                 height: fit-content;
+                transform: translateY(-3px);
             }
-
             p {
-                font-size: 4px;
-                margin-left: 5px;
+                font-size: 8px;
+                margin-left: 13px;
             }
-
             .barcode {
-                width: fit-content
+                width: fit-content;
             }
-
             @page { margin: 0 }
-
             @media print {
                 .pagebreak {
                     page-break-after: always;
@@ -809,5 +803,10 @@ export class ShippingComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  isResearchSample(kitRequest: KitRequest): boolean {
+    return  kitRequest.sequencingRestriction && kitRequest.sequencingRestriction === this.RESEARCH_SAMPLE && this.isClinicalStudy
+      && (this.shippingPage === this.RECEIVED || this.shippingPage === this.OVERVIEW);
   }
 }

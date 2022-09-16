@@ -34,15 +34,15 @@
     <div align="center" class="Width--100 Height--100">
       <i class="fas fa-spinner fa-spin fa-5x Color--primary"></i>
     </div>
-  </span>
+    </span>
     <div class="Width--100">
       <h4>{{message}}</h4>
       <span [hidden]="!downloading" class="Width--100">
-    <div align="center" class="Width--100 Height--100">
-      <i class="fas fa-spinner fa-spin fa-5x Color--primary"></i>
-    </div>
-  </span>
-    </div>
+        <div align="center" class="Width--100 Height--100">
+          <i class="fas fa-spinner fa-spin fa-5x Color--primary"></i>
+        </div>
+      </span>
+  </div>
 
 
     <div *ngIf="!loadingParticipantPage && !updatingParticipant" class="Width--100">
@@ -461,7 +461,7 @@ participant.data.dsm['diagnosisYear'] != null">
           </tr>
         </table>
       </div>
-      <div class="Float--left Width--100" *ngIf="settings['r'] != null && hasRole().allowedToViewMedicalRecords()">
+      <div class="Float--left Width--100" *ngIf="settings['r'] != null">
         <table class="Width--100">
             <tr *ngFor="let fieldSetting of settings['r']">
               <td>{{fieldSetting.columnDisplay}}</td>
@@ -697,6 +697,18 @@ participant.data.dsm['diagnosisYear'] != null">
                             <mat-option value="{{null}}"></mat-option>
                           </mat-select>
                       </tr>
+                      <tr *ngIf="hasSequencingOrders">
+                        <td class="TD--Padding Width--50 Data-Display-Question">Sample Notes</td>
+                      </tr>
+                      <tr *ngIf="hasSequencingOrders">
+                        <td style="padding-bottom: 15px;" class="TD--Padding-Left Width--50">
+                          <input matInput maxlength="2000" placeholder="Sample Notes" type="text"
+                                 [disabled]="participantExited"
+                                 [ngClass]="{'Input': true, 'Input--Bigger-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('sampleNotes')}"
+                                 [(ngModel)]="sample.sampleNotes"
+                                 (change)="kitValueChanged($event, 'sampleNotes', sample)"
+                                 (blur)="currentField(null)" (focus)="currentField('sampleNotes')">
+                      </tr>
                     </table>
                   </div>
                 </fieldset>
@@ -931,7 +943,7 @@ participant.data.dsm['diagnosisYear'] != null">
               *ngIf="participant?.data?.files && participant.data.files.length > 0 && this.role.allowedToDownloadParticipantFiles()"
               heading="Participant Files">
                 <app-file-download
-                [participant]="participant">
+                [participant]="participant"  (downloadFileEvent)="downloadParticipantFile($event)">
                 </app-file-download>
             </tab>
 

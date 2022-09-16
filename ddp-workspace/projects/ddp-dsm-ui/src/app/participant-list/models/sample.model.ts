@@ -13,31 +13,11 @@ export class Sample {
                public upsTrackingStatus: string, public upsReturnStatus: string, public externalOrderStatus: string,
               public externalOrderNumber: string, public externalOrderDate: number,
                public careEvolve: boolean, public uploadReason: string, public collectionDate: string,
-              public sequencingRestriction: string, public dsmKitRequestId: string
+              public sequencingRestriction: string, public dsmKitRequestId: string, public sampleNotes: string
   ) {
-    this.bspCollaboratorSampleId = bspCollaboratorSampleId;
-    this.kitTypeName = kitTypeName;
-    this.scanDate = scanDate;
-    this.error = error;
-    this.receiveDate = receiveDate;
-    this.deactivatedDate = deactivatedDate;
-    this.trackingNumberTo = trackingNumberTo;
-    this.trackingReturnId = trackingReturnId;
-    this.kitLabel = kitLabel;
-    this.testResult = testResult;
-    this.upsTrackingStatus = upsTrackingStatus;
-    this.upsReturnStatus = upsReturnStatus;
-    this.externalOrderStatus = externalOrderStatus;
-    this.externalOrderNumber = externalOrderNumber;
-    this.externalOrderDate = externalOrderDate;
-    this.careEvolve = careEvolve;
-    this.uploadReason = uploadReason;
     if (this.uploadReason === '' || this.uploadReason === null || this.uploadReason === undefined) {
       this.uploadReason = 'NORMAL';
     }
-    this.collectionDate = collectionDate;
-    this.sequencingRestriction = sequencingRestriction;
-    this.dsmKitRequestId = dsmKitRequestId;
   }
 
   get sampleQueue(): string {
@@ -75,7 +55,7 @@ export class Sample {
       json.bspCollaboratorSampleId, json.kitTypeName, json.scanDate, json.error, json.receiveDate, json.deactivatedDate,
       json.trackingNumberTo, json.trackingReturnId, json.kitLabel, testResults, json.upsTrackingStatus,
       json.upsReturnStatus, json.externalOrderStatus, json.externalOrderNumber, json.externalOrderDate,
-      json.careEvolve, json.uploadReason, json.collectionDate, json.sequencingRestriction, json.dsmKitRequestId
+      json.careEvolve, json.uploadReason, json.collectionDate, json.sequencingRestriction, json.dsmKitRequestId, json.sampleNotes
     );
   }
 }

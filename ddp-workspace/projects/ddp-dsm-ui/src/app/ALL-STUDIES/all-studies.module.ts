@@ -117,6 +117,8 @@ import {StoolUploadComponent} from '../stool-upload/stool-upload.component';
 import {BarcodeComponent} from '../barcode/barcode.component';
 import {DashboardStatisticsComponent} from '../dashboard-statistics/dashboard-statistics.component';
 import {DashboardStatisticsService} from '../services/dashboard-statistics.service';
+import {QrCodeComponent} from '../qr-code/qr-code.component';
+
 
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
@@ -147,7 +149,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
     UserSettingComponent,
     ScanValueComponent,
     BannerComponent,
-    BarcodeComponent,
+    QrCodeComponent,
     FieldDatepickerComponent,
     OncHistoryDetailComponent,
     TissuePageComponent,
