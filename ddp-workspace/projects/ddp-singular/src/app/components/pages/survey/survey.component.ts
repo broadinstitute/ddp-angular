@@ -11,6 +11,7 @@ import {
 } from './providers';
 import { ActivityInstance, ActivityResponse, UserActivityServiceAgent, SessionMementoService } from 'ddp-sdk';
 import { getRenderActivities, isConsentActivity, RenderActivityKey } from '../../../utils';
+import { ActivityCode } from '../../../constants/activity-code';
 
 @Component({
   selector: 'app-survey',
@@ -64,10 +65,9 @@ export class SurveyComponent implements OnInit, OnDestroy {
     });
   }
 
-  get isConsent(): boolean {
+  get hideProgressBar(): boolean {
     const { activityCode } = this.getCurrentActivity() ?? {};
-
-    return isConsentActivity(activityCode);
+    return isConsentActivity(activityCode) || (activityCode === ActivityCode.ChildContact);
   }
 
   get isLastOfMultipleActivities(): boolean {
