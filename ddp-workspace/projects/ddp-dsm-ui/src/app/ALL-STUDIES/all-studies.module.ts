@@ -114,9 +114,16 @@ import { OpenDialogDirective } from '../directive/open-loading-modal.directive';
 import {SequencingOrderComponent} from '../sequencing-order/sequencing-order.component';
 import {ClinicalPageComponent} from '../clinical-page/clinical-page.component';
 import {StoolUploadComponent} from '../stool-upload/stool-upload.component';
+import {BarcodeComponent} from '../barcode/barcode.component';
+import {DashboardStatisticsComponent} from '../dashboard-statistics/dashboard-statistics.component';
+import {DashboardStatisticsService} from '../services/dashboard-statistics.service';
 import {QrCodeComponent} from '../qr-code/qr-code.component';
 
 
+import * as PlotlyJS from 'plotly.js-dist-min';
+import { PlotlyModule } from 'angular-plotly.js';
+
+PlotlyModule.plotlyjs = PlotlyJS;
 
 
 @NgModule({
@@ -202,7 +209,8 @@ import {QrCodeComponent} from '../qr-code/qr-code.component';
     OpenDialogDirective,
     SequencingOrderComponent,
     ClinicalPageComponent,
-    FileDownloadComponent
+    FileDownloadComponent,
+    DashboardStatisticsComponent
   ],
   imports: [
     CommonModule,
@@ -234,7 +242,8 @@ import {QrCodeComponent} from '../qr-code/qr-code.component';
     CookieModule.forRoot(),
     AccordionModule.forRoot(),
     TypeaheadModule.forRoot(),
-    DragulaModule.forRoot()
+    DragulaModule.forRoot(),
+    PlotlyModule
   ],
   providers: [
     Utils,
@@ -242,6 +251,7 @@ import {QrCodeComponent} from '../qr-code/qr-code.component';
     AuthGuard,
     Statics,
     Language,
+    DashboardStatisticsService
   ],
   exports: [RouterModule]
 })

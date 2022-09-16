@@ -25,6 +25,10 @@ export class LocalStorageService {
     return this.observeStudyChange.asObservable();
   }
 
+  get selectedRealm(): string {
+    return localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+  }
+
 
 
 }
