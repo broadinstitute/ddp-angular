@@ -183,7 +183,7 @@ export class RoleService {
   }
 
   public allowedToViewEELData(): boolean {
-    return this._isViewingEEL;
+    return true;
   }
 
   public allowedToViewReceivingPage(): boolean {
