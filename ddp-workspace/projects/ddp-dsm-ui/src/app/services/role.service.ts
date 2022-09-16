@@ -183,6 +183,7 @@ export class RoleService {
   }
 
   public allowedToViewEELData(): boolean {
+    // @TODO only for testing purposes
     return true;
   }
 
