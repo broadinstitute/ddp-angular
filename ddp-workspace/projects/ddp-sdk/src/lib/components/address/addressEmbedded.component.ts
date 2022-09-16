@@ -264,7 +264,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         });
         this.initializeComponentState();
     }
-    
+
     private setupScrollToErrorAction(): void {
         this.scroll_up$ = this.validationRequested$.pipe(
             map(validationRequested => validationRequested && this.block.scrollTo),
@@ -302,7 +302,6 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
     ngOnInit(): void {
         this.setupActions();
-        
     }
 
     setupActions(): void {
