@@ -87,7 +87,7 @@ interface AddressSuggestion {
     template: `
         <p *ngIf="block.titleText" class="ddp-address-embedded__title" [innerHTML]="block.titleText"></p>
         <p *ngIf="block.subtitleText" class="ddp-address-embedded__subtitle" [innerHTML]="block.subtitleText"></p>
-        <div #scrollAnchor>
+        <div scroll-up [triggerScrollUp]="(scroll_up$|async)" (scrollUpExecuted)="scrollUpExecutedAction($event)">
         <ddp-address-input
             
             (valueChanged)="inputComponentAddress$.next($event); dirtyStatusChanged.emit(true)"
@@ -156,6 +156,7 @@ interface AddressSuggestion {
 export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     @Input() block: MailAddressBlock;
     @ViewChild('scrollAnchor', {static: true}) scrollAnchor: ElementRef;
+    scroll_up$: Observable<boolean>;
 
     @Input()
     public set readonly(val: boolean) {
@@ -256,8 +257,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         private logger: LoggingService,
         private ngxTranslate: NGXTranslateService,
         @Inject('ddp.config') private configuration: ConfigurationService,
-        @Optional() private submitService: SubmitAnnouncementService,
-        private windowRef: WindowRef
+        @Optional() private submitService: SubmitAnnouncementService
     ) {
         this.suggestionForm = new FormGroup({
             suggestionRadioGroup: new FormControl('entered')
@@ -266,23 +266,16 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     }
     
     private setupScrollToErrorAction(): void {
-        this.validationRequested$.pipe(
-            filter(validationRequested => validationRequested && this.block.scrollTo),
-            debounceTime(300),
-            tap(() => {
-                const headerOffset = this.configuration.scrollToErrorOffset;
-                const top = this.scrollAnchor.nativeElement.getBoundingClientRect().top
-                    + this.windowRef.nativeWindow.scrollY - headerOffset;
-                this.windowRef.nativeWindow.scrollTo({
-                    top,
-                    behavior: 'smooth'
-                });
-                this.block.scrollTo = false;
-            }),
-            takeUntil(this.ngUnsubscribe)
-        ).subscribe();
+        this.scroll_up$ = this.validationRequested$.pipe(
+            map(validationRequested => validationRequested && this.block.scrollTo),
+            debounceTime(300)
+        );
     }
-    
+    scrollUpExecutedAction(executed:boolean){
+        this.block.scrollTo=!executed;
+        this.validationRequested$.next(!executed);
+    }
+
     private initializeComponentState(): void {
         const initialState: ComponentState = {
             isReadOnly: false,

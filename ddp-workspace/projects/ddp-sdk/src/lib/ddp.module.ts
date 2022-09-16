@@ -175,6 +175,7 @@ import { CountryService } from './services/addressCountry.service';
 import { MedicalProvidersServiceAgent } from './services/serviceAgents/medicalProvidersServiceAgent.service';
 import { WorkflowServiceAgent } from './services/serviceAgents/workflowServiceAgent.service';
 import { UpperCaseInputDirective } from './directives/upperCaseInputDirective.directive';
+import {ScrollUpDirective} from './directives/scroll-up.directive';
 import { AddressGoogleAutocompleteDirective } from './directives/addressGoogleAutocomplete.directive';
 import { ConditionalBlockComponent } from './components/activityForm/activity-blocks/conditionalBlock.component';
 import { QuestionPromptComponent } from './components/activityForm/answers/question-prompt/questionPrompt.component';
@@ -432,6 +433,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         RouteTransformerDirective,
         InvitationCodeFormatterDirective,
         StickyScrollDirective,
+        ScrollUpDirective,
         InvitationPipe,
         FileSizeFormatterPipe,
         SearchHighlightPipe,
