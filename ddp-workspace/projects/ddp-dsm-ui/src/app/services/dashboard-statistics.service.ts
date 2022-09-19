@@ -82,7 +82,7 @@ export class DashboardStatisticsService {
         position: 0,
         linecolor: '#737E8E',
         linewidth: 1,
-        automargin: "height+width+left"
+        automargin: 'height+width+left'
       },
       yaxis: {
         zeroline: false,
@@ -299,7 +299,7 @@ export class DashboardStatisticsService {
     ];
 
     chartObject.layout = {
-      width: "auto",
+      width: 'auto',
       autosize: true,
       title: {
         font: {
@@ -313,7 +313,7 @@ export class DashboardStatisticsService {
       },
 
 
-      height: "auto",
+      height: 'auto',
       hovermode: true,
       showlegend: true,
 
