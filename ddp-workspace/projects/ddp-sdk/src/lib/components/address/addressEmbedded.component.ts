@@ -89,7 +89,6 @@ interface AddressSuggestion {
         <p *ngIf="block.subtitleText" class="ddp-address-embedded__subtitle" [innerHTML]="block.subtitleText"></p>
         <div scroll-up [triggerScrollUp]="(scroll_up$|async)" (scrollUpExecuted)="scrollUpExecutedAction($event)">
         <ddp-address-input
-            
             (valueChanged)="inputComponentAddress$.next($event); dirtyStatusChanged.emit(true)"
             (formValidStatusChanged)="formValidStatusChanged$.next($event)"
             [address]="inputAddress$ | async"
@@ -271,7 +270,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             debounceTime(300)
         );
     }
-    scrollUpExecutedAction(executed:boolean){
+    scrollUpExecutedAction(executed:boolean): void {
         this.block.scrollTo=!executed;
         this.validationRequested$.next(!executed);
     }
