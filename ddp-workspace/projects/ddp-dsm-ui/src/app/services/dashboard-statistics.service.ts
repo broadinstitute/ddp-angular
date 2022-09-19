@@ -66,7 +66,7 @@ export class DashboardStatisticsService {
         text: chart.title,
         x: 0
       },
-      height: 500,
+      height: 600,
 
       hovermode: true,
       bargap: 0.3,
@@ -82,7 +82,7 @@ export class DashboardStatisticsService {
         position: 0,
         linecolor: '#737E8E',
         linewidth: 1,
-
+        automargin: 'height+width+left'
       },
       yaxis: {
         zeroline: false,
@@ -150,7 +150,7 @@ export class DashboardStatisticsService {
         text: chart.title,
         x: 0
       },
-      height: 500,
+      height: 600,
 
       hovermode: true,
       bargap: 0.3,
@@ -299,7 +299,7 @@ export class DashboardStatisticsService {
     ];
 
     chartObject.layout = {
-      width: 500,
+      width: 'auto',
       autosize: true,
       title: {
         font: {
@@ -313,7 +313,7 @@ export class DashboardStatisticsService {
       },
 
 
-      height: 500,
+      height: 'auto',
       hovermode: true,
       showlegend: true,
 
@@ -326,10 +326,10 @@ export class DashboardStatisticsService {
 
 
       legend: {
-        x: 0,
-        valign: 'bottom',
+        // x: 0,
+        // valign: 'bottom',
         bgcolor: 'transparent',
-        orientation: 'h',
+        orientation: 'v',
         font: {
           family: 'Montserrat-Medium',
         },
