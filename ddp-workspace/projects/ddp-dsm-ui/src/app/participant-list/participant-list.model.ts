@@ -76,7 +76,7 @@ export class Participant {
     }
 
     const clinicalOrders: Array<ClinicalOrder> = [];
-    jsonData = json.clinicalOrder;
+    jsonData = json.esData.dsm.clinicalOrder;
     if (jsonData != null) {
       jsonData.forEach((val) => {
         const order = ClinicalOrder.parse(val);

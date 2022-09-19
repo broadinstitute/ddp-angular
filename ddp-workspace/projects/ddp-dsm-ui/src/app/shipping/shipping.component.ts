@@ -99,6 +99,8 @@ export class ShippingComponent implements OnInit {
 
   isClinicalStudy: Boolean = false;
 
+  RESEARCH_SAMPLE = 'RUO';
+
   constructor(private route: ActivatedRoute, private router: Router, private dsmService: DSMService, private auth: Auth,
                private role: RoleService, private compService: ComponentService, private _changeDetectionRef: ChangeDetectorRef,
                private util: Utils, private language: Language, private localStorageService: LocalStorageService) {
@@ -801,5 +803,10 @@ export class ShippingComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  isResearchSample(kitRequest: KitRequest): boolean {
+    return  kitRequest.sequencingRestriction && kitRequest.sequencingRestriction === this.RESEARCH_SAMPLE && this.isClinicalStudy
+      && (this.shippingPage === this.RECEIVED || this.shippingPage === this.OVERVIEW);
   }
 }

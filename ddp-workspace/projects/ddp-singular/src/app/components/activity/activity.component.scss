@@ -144,6 +144,10 @@
   padding: 40px 50px;
   position: relative;
   overflow-wrap: break-word;
+
+  @include media-xs {
+    padding: 40px 18px;
+  }
 }
 
 .sticky-hint-text {
