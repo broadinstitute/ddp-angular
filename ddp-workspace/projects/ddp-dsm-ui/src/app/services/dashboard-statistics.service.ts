@@ -294,7 +294,7 @@ export class DashboardStatisticsService {
           size: 13
         },
 
-        textposition: 'outside',
+        textposition: 'inside',
       }
     ];
 
