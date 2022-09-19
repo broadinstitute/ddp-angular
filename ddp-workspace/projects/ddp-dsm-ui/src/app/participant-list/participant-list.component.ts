@@ -330,9 +330,9 @@ export class ParticipantListComponent implements OnInit {
               if (fieldSetting.displayType === 'OPTIONS') {
                 options = new Array<NameValue>();
                 if (fieldSetting.possibleValues != null) {
-                  const defaultOptionValue = {value: '', name: 'Not Selected'};
-                  fieldSetting.possibleValues.push(defaultOptionValue as Value);
-                  
+                  const defaultOptionValue = {value: '', name: ''};
+                  fieldSetting.possibleValues.unshift(defaultOptionValue as Value);
+
                   fieldSetting.possibleValues.forEach((value: Value) => {
                     options.push(new NameValue(value.value, value.value));
                   });
