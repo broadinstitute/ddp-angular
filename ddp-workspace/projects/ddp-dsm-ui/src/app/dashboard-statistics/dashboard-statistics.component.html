@@ -1,4 +1,4 @@
-<div class="dashboard" *ngIf="hasRequiredRole; else noRole">
+<div class="dashboard">
   <section *ngFor="let chart of (Charts | async)" class="dashboard-chart" [ngClass]="chart.size">
     <plotly-plot
       [data]="chart.data"
