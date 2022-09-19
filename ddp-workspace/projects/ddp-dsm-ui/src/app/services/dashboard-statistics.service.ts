@@ -19,7 +19,7 @@ export class DashboardStatisticsService {
           const generatedCharts = [];
           data.forEach(chart => {
             const generatedChart = this.CHART_TYPES.find(ch => ch.type === chart.type)?.func(chart);
-            generatedCharts.push(generatedChart);
+            generatedChart && generatedCharts.push(generatedChart);
           });
           return generatedCharts;
         })
