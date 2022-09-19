@@ -14,7 +14,7 @@ export class SequencingOrder {
   }
 
   public static getEmptyInstance(): SequencingOrder{
-    return new SequencingOrder( '', '', '', '', '', '', '', '', '', '', '' );
+    return new SequencingOrder( ...Array(11).fill('') );
   }
 
 }
