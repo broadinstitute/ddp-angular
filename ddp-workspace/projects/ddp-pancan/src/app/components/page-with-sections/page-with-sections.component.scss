@@ -35,7 +35,6 @@
 }
 
 .section {
-    padding: 4.69rem 0 4rem 2rem;
     display: flex;
     background-repeat: no-repeat;
     background-position-y: top;
@@ -74,6 +73,9 @@
     }
 
     &__content {
+        padding: 4.69rem 0 4rem 2rem;
+
+
         .section-0 & {
             padding-top: 2.2rem;
             margin-left: 27.31rem;
