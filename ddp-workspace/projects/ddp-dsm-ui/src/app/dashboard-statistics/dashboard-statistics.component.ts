@@ -26,6 +26,6 @@ export class DashboardStatisticsComponent implements OnInit {
       responsive: true,
       scrollZoom: true,
       displaylogo: false
-    }
+    };
   }
 }

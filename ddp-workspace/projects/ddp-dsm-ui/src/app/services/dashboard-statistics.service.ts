@@ -344,14 +344,14 @@ export class DashboardStatisticsService {
     return chartObject;
   }
 
-  private generate_countChart(chart: any) {
+  private generate_countChart(chart: any): {} {
     const chartObject: any = {};
     chartObject.data = [
       {
-        type: "indicator",
-        mode: "number",
+        type: 'indicator',
+        mode: 'number',
         value: chart.count,
-        delta: { position: "top"},
+        delta: { position: 'top'},
         title: {
           text: chart.title
         }
@@ -359,7 +359,7 @@ export class DashboardStatisticsService {
     ];
 
     chartObject.layout = {
-      paper_bgcolor: "transparent",
+      paper_bgcolor: 'transparent',
     };
 
     chartObject.size = chart.size;
