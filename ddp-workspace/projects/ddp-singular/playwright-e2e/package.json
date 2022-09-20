@@ -1,0 +1,38 @@
+{
+  "name": "playwright-e2e",
+  "description": "Web browser end-to-end tests",
+  "version": "1.0.0",
+  "keywords": [],
+  "author": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "clean": "rm -rf ./build ./node_modules ./package-lock.json",
+    "build": "yarn format && tsc",
+    "format": "prettier --config .prettierrc.js --write --ignore-unknown \"**/*.{ts,js}\"",
+    "test:e2e": "playwright test --grep-invert \"nightly/|examples/\"",
+    "lint": "eslint \"**/*.{js,ts}\""
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.25.2",
+    "@typescript-eslint/eslint-plugin": "^5.37.0",
+    "@typescript-eslint/parser": "^5.37.0",
+    "eslint": "^8.23.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "prettier": "^2.7.1"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.185",
+    "@types/node": "^18.7.18",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.2",
+    "lodash": "^4.17.21",
+    "typescript": "^4.8.3"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}

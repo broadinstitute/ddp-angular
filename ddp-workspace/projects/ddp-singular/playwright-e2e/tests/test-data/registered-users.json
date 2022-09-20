@@ -1,0 +1,10 @@
+{
+    "users": [
+        {
+            "email": "bweng+101@broadinstitute.org",
+            "age": 99,
+            "country": "United States",
+            "state": "Alaska"
+        }
+    ]
+}
