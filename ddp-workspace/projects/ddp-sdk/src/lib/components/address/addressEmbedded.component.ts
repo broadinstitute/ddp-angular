@@ -270,7 +270,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             debounceTime(300)
         );
     }
-    scrollUpExecutedAction(executed:boolean): void {
+    scrollUpExecutedAction(executed: boolean): void {
         this.block.scrollTo=!executed;
         this.validationRequested$.next(!executed);
     }
