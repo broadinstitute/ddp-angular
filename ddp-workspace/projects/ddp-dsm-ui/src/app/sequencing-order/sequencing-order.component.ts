@@ -48,7 +48,7 @@ export class SequencingOrderComponent {
           name: parameterName,
           value: v
         }, null, 'dsmKitRequestId', sample.dsmKitRequestId,
-        'kit', null, realm, this.participant?.participant?.ddpParticipantId
+        'kit', null, realm, this.participant.data.profile[ 'guid' ]
       );
       const patch = patch1.getPatch();
       this.patch( patch );
@@ -91,7 +91,7 @@ export class SequencingOrderComponent {
       }
     } );
     const realm: string = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
-    this.dsmService.placeSeqOrder( orders, realm, this.participant.participant.ddpParticipantId ).subscribe();
+    this.dsmService.placeSeqOrder( orders, realm, this.participant.data.profile[ 'guid' ] ).subscribe();
     this.closeModal();
   }
 
