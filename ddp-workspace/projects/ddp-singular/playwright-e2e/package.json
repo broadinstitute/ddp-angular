@@ -11,6 +11,7 @@
     "build": "yarn format && tsc",
     "format": "prettier --config .prettierrc.js --write --ignore-unknown \"**/*.{ts,js}\"",
     "test:e2e": "playwright test --grep-invert \"nightly/|examples/\"",
+    "test:e2e:nightly": "playwright test --grep \"nightly/\"",
     "lint": "eslint \"**/*.{js,ts}\""
   },
   "devDependencies": {

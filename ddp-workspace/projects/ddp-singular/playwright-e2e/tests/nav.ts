@@ -67,7 +67,11 @@ export async function login(
   if (expectErr) {
     await submitButton.click();
   } else {
-    await Promise.all([page.waitForNavigation(), loadingSpinner.first().waitFor({ state: 'visible' }), submitButton.click()]);
+    await Promise.all([
+      page.waitForNavigation(),
+      loadingSpinner.first().waitFor({ state: 'visible' }),
+      submitButton.click()
+    ]);
     await loadingSpinner.waitFor({ state: 'hidden' });
   }
 }

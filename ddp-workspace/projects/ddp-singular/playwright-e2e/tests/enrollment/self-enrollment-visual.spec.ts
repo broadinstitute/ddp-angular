@@ -71,9 +71,7 @@ test.describe('Self enroll', () => {
     // Click Yes radiobutton
     await aboutYourself.setVentricleHeartDefect(true);
     expect(
-      await aboutYourself.hasVentricleHeartDefectLocator
-        .locator('label', { hasText: 'Yes' })
-        .screenshot()
+      await aboutYourself.hasVentricleHeartDefectLocator.locator('label', { hasText: 'Yes' }).screenshot()
     ).toMatchSnapshot('radiobutton-yes.png');
   });
 });
