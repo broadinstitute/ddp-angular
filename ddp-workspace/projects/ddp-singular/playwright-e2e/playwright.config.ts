@@ -14,6 +14,7 @@ const config: PlaywrightTestConfig = {
   testDir: './tests',
   /* Maximum time one test can run for. */
   timeout: 90 * 1000,
+  /* For expect() calls */
   expect: {
     /**
      * Maximum time expect() should wait for the condition to be met.
@@ -40,7 +41,7 @@ const config: PlaywrightTestConfig = {
   maxFailures: process.env.CI ? 3 : 0, // Limits total failures to 3 in CI
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    ['html', { open: process.env.CI ? 'never' : 'on-failure' }],
+    ['html', { open: process.env.CI ? 'never' : 'never' }],
     ['list'],
     ['junit', { outputFile: 'test-results/junit/results.xml' }]
   ],
@@ -48,7 +49,7 @@ const config: PlaywrightTestConfig = {
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     headless: true,
-    /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
+    /* Maximum time each (browser) action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 5 * 1000,
     navigationTimeout: 30 * 1000,
 
@@ -79,7 +80,7 @@ const config: PlaywrightTestConfig = {
       use: {
         browserName: 'chromium',
         launchOptions: {
-          slowMo: 50,
+          slowMo: 100,
           // Account for minor difference in text rendering and resolution between headless and headed mode
           ignoreDefaultArgs: ['--hide-scrollbars']
         }

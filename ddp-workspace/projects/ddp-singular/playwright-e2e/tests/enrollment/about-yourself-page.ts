@@ -6,6 +6,7 @@ export default class AboutYourselfPage {
   private readonly country: Locator;
   private readonly state: Locator;
   private readonly hasVentricleHeartDefect: Locator;
+  private readonly signMeUp: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -15,6 +16,11 @@ export default class AboutYourselfPage {
     this.hasVentricleHeartDefect = page
       .locator('.ddp-activity-question')
       .filter({ hasText: 'Do you or your immediate family member have a single ventricle heart defect?' });
+    this.signMeUp = page.locator('button:text("Sign me up!")');
+  }
+
+  get signMeUpLocator(): Locator {
+    return this.signMeUp;
   }
 
   get ageLocator(): Locator {
@@ -31,6 +37,10 @@ export default class AboutYourselfPage {
 
   get hasVentricleHeartDefectLocator(): Locator {
     return this.hasVentricleHeartDefect;
+  }
+
+  async clickSignMeUpButton(): Promise<void> {
+    await this.signMeUp.click();
   }
 
   async fillAge(value: string): Promise<void> {
@@ -65,5 +75,14 @@ export default class AboutYourselfPage {
     //.locator('input[type="radio"]');
     //console.log(await radio.getAttribute('class'));
     return await radio.check();
+  }
+
+  async checkReCaptcha(): Promise<void> {
+    const iframe = this.page.frameLocator('css=iframe[title="reCAPTCHA"]');
+    // await iframe.locator('css=span[role="checkbox"]').click({force: true});
+    await iframe.locator('css=span[role="checkbox"]').dispatchEvent('click');
+    await iframe
+      .locator('.recaptcha-checkbox-spinner[style*="animation-play-state: running;"]')
+      .waitFor({ state: 'hidden' });
   }
 }

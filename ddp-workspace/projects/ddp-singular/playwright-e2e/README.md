@@ -34,20 +34,18 @@ A `.env` file requires following fields:
 - `userEmail`
 
 
-## Running Tests on Localhost
+## Run Tests Using `Yarn` from the Command-Line
 
-### Local Test Users
+**By default, all tests will run in headless mode.**
+
+**To see the list of available Yarn commands** <div class="text-blue">`yarn run`</div>
+
+### Running Tests on Localhost
 
 Fill out local test user credentials
 
 - Copy `.env.singular.sample`, save as `.env`.
 - Update `.env`
-
-## Run Tests Using `Yarn` from the Command-Line
-
-**To see the list of available Yarn commands** <div class="text-blue">`yarn run`</div>
-
-By default, all tests will run in headless mode.
 
 ### Examples
 
@@ -91,5 +89,11 @@ By default, all tests will run in headless mode.
 ### Test Development Tips
 - Use `yarn format` to format code
 - Use `yarn lint --fix` to fix eslint issues
-- 
+- Use flag `-u` to generate screenshots for a visual test on localhost.
+  - For example, `yarn test:e2e self-enrollment-visual.spec.ts -u`
+  - Save screenshots to GitHub
+- Generate screenshots for running tests on CircleCI by doing the following:
+  - In *playwright-e2e* dir, run docker with cmd `docker run -v $PWD:/e2e -w /e2e -it --rm --ipc=host mcr.microsoft.com/playwright:v1.25.0-focal /bin/bash`
+  - `yarn test:e2e self-enrollment-visual.spec.ts -u`
+  - Save screenshots to GitHub
 - [TODO]
