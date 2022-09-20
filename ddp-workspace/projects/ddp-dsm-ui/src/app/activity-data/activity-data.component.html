@@ -5,7 +5,7 @@
                        (opened)="generateActivity()">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <b>{{ activityDefinition.activityName }}</b>
+        <b [innerHTML]="activityDefinition.activityName"></b>
       </mat-panel-title>
       <mat-panel-description class="align-header">
         Survey Version: {{activity.activityVersion}}
