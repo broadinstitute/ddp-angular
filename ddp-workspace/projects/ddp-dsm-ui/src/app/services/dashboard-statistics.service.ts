@@ -31,7 +31,8 @@ export class DashboardStatisticsService {
     {type: dashboardType.VERTICAL_HIGHLIGHTED_BAR_CHART, func: this.generate_verticalHighlightedBarChart},
     {type: dashboardType.VERTICAL_BAR_CHART, func: this.generate_verticalBarChart},
     {type: dashboardType.HORIZONTAL_BAR_CHART, func: this.generate_horizontalBarChart},
-    {type: dashboardType.DONUT_CHART, func: this.generate_donutChart}
+    {type: dashboardType.DONUT_CHART, func: this.generate_donutChart},
+    {type: dashboardType.COUNT, func: this.generate_countChart}
   ];
 
   private generate_verticalBarChart(chart: any): {} {
@@ -336,6 +337,29 @@ export class DashboardStatisticsService {
         itemclick: false,
         itemdoubleclick: false,
       }
+    };
+
+    chartObject.size = chart.size;
+
+    return chartObject;
+  }
+
+  private generate_countChart(chart: any): {} {
+    const chartObject: any = {};
+    chartObject.data = [
+      {
+        type: 'indicator',
+        mode: 'number',
+        value: chart.count,
+        delta: { position: 'top'},
+        title: {
+          text: chart.title
+        }
+      }
+    ];
+
+    chartObject.layout = {
+      paper_bgcolor: 'transparent',
     };
 
     chartObject.size = chart.size;
