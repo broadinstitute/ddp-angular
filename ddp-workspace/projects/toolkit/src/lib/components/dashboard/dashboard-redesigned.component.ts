@@ -17,18 +17,13 @@ import {
     UserManagementServiceAgent,
     LoggingService,
     UserPreferencesComponent,
-    Participant
+    Participant,
+    DashboardParticipant
 } from 'ddp-sdk';
 import { map, take, filter, switchMap, tap, mergeMap, finalize, catchError, mapTo } from 'rxjs/operators';
 import { combineLatest, forkJoin, Observable, of, Subject } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
-
-interface DashboardParticipant {
-    userGuid: string;
-    label: string;
-    activities: ActivityInstance[];
-}
 
 @Component({
     selector: 'toolkit-dashboard-redesigned',
@@ -233,7 +228,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
             .pipe(
                 switchMap(userActivities => userActivities.length ? this.userProfileService.profile : of(null)),
                 switchMap(operatorParticipant => operatorParticipant ? this.userActivities$.pipe(take(1), map((activities) => ({
-                        userGuid: this.session.session.userGuid,
+                        guid: this.session.session.userGuid,
                         label: (operatorParticipant.profile.firstName || operatorParticipant.profile.lastName)
                             ? `${operatorParticipant.profile.firstName} ${operatorParticipant.profile.lastName}`
                             : this.translate.instant('Toolkit.Dashboard.UserLabel'),
@@ -292,7 +287,7 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
         }
 
         const deleteUserObservableList: Observable<void>[] = accidentalParticipant
-            .map((participant) => this.deleteUser(participant.userGuid));
+            .map((participant) => this.deleteUser(participant.guid));
 
         return forkJoin(deleteUserObservableList)
             // return filtered participants once all deleting requests were done
@@ -314,12 +309,12 @@ export class DashboardRedesignedComponent extends DashboardComponent implements 
     }
 
     public trackById(_, participant: DashboardParticipant): string {
-        return participant.userGuid;
+        return participant.guid;
     }
 
     public openUserEditDialog(participant?: DashboardParticipant): void {
         if (participant) {
-            this.session.setParticipant(participant.userGuid);
+            this.session.setParticipant(participant.guid);
         }
         const dialogRef = this.dialog.open(UserPreferencesComponent, {
             width: '650px',

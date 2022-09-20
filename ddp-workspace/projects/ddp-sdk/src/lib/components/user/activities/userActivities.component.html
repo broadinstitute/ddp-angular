@@ -1,0 +1,115 @@
+<div [hidden]="!statusesLoaded">
+    <mat-table [dataSource]="dataSource" data-ddp-test="activitiesTable" class="ddp-dashboard">
+        <!-- Dynamic Columns-->
+
+        <ng-container *ngFor="let dashboardColumn of toolkitConfig.dashboardDisplayedCustomColumns">
+            <ng-container [matColumnDef]="dashboardColumn.name">
+                <mat-header-cell class="padding-5" *matHeaderCellDef [innerHTML]="dashboardColumn.key | translate">
+                </mat-header-cell>
+                <ng-container [ngSwitch]="dashboardColumn.cellType">
+                    <ng-container *ngSwitchCase="'form'">
+                        <mat-cell *matCellDef="let element">
+                            <ng-container *ngTemplateOutlet="formCell;context: { element: element }">
+                            </ng-container>
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'date'">
+                        <mat-cell *matCellDef="let element" class="padding-5"
+                            [attr.data-ddp-test]="'activityDate::' + element.createdAt">
+                            <ng-container *ngTemplateOutlet="dateCell; context:{element:element}"></ng-container>
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'description'">
+                        <mat-cell *matCellDef="let element" class="padding-5"
+                            [attr.data-ddp-test]="'activitySummary::' + element.instanceGuid">
+                            <ng-container *ngTemplateOutlet="descriptionCell; context: {element:element}">
+                            </ng-container>
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'status'">
+                        <mat-cell *matCellDef="let element" class="padding-5"
+                            [attr.data-ddp-test]="'activityStatus::' + element.instanceGuid">
+                            <ng-container *ngTemplateOutlet="statusCell; context:{element:element}"></ng-container>
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'action'">
+                        <mat-cell *matCellDef="let element"
+                            [attr.data-ddp-test]="'activityActions::' + element.readonly">
+                           <ng-container *ngTemplateOutlet="actionCell; context:{element:element}"></ng-container>
+                        </mat-cell>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+
+
+        <!-- Name Cell -->
+        <ng-template #formCell let-element="element">
+            <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.ActivityName' | translate"></span>
+            <mat-icon *ngIf="element.isHidden" class="dashboard-hidden-icon"
+                matTooltip="{{ 'SDK.UserActivities.HiddenTooltip' | translate }}">
+                visibility_off
+            </mat-icon>
+            <button class="dashboard-activity-button Link"
+                [attr.data-ddp-test]="'activityName::' + element.instanceGuid"
+                (click)="openActivity(element.instanceGuid, element.activityCode)">
+                {{ element.activityName }}
+            </button>
+
+        </ng-template>
+
+        <!-- Summary Cell -->
+        <ng-template #descriptionCell let-element="element">
+            <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.Summary' | translate"></span>
+            {{ element.activitySummary }}
+        </ng-template>
+
+        <!-- Date Cell -->
+        <ng-template #dateCell let-element="element">
+            <span class="dashboard-mobile-label" [innerHTML]="'SDK.UserActivities.ActivityDate' | translate"></span>
+            {{ element.createdAt | date: 'MM/dd/yyyy' }}
+        </ng-template>
+
+        <!-- Status Cell -->
+        <ng-template #statusCell let-element="element">
+                <span class="dashboard-mobile-label"
+                    [innerHTML]="'SDK.UserActivities.ActivityStatus' | translate"></span>
+                <div class="dashboard-status-container"
+                    [ngClass]="{'dashboard-status-container_summary': showSummary(element)}">
+                    <ng-container *ngIf="element.icon">
+                        <img class="dashboard-status-container__img"
+                            [attr.src]="domSanitizationService.bypassSecurityTrustUrl('data:image/svg+xml;base64,' + element.icon)"
+                            alt="">
+                    </ng-container>
+                    <ng-container *ngIf="showQuestionCount(element)">
+                        {{ 'SDK.UserActivities.ActivityQuestionCount' | translate: { 'questionsAnswered':
+                        element.numQuestionsAnswered, 'questionTotal': element.numQuestions } }}
+                    </ng-container>
+                    <ng-container *ngIf="showSummary(element)">
+                        {{ element.activitySummary }}
+                    </ng-container>
+                    <ng-container *ngIf="!showQuestionCount(element) && !showSummary(element)">
+                        {{ getState(element.statusCode) }}
+                    </ng-container>
+                </div>
+        </ng-template>
+
+        <!-- Actions Cell -->
+        <ng-template #actionCell let-element="element">
+                <span class="dashboard-mobile-label"
+                    [innerHTML]="'SDK.UserActivities.ActivityActions' | translate"></span>
+                <button *ngIf="!element.readonly" class="ButtonFilled Button--cell button button_small button_primary"
+                    (click)="openActivity(element.instanceGuid, element.activityCode)"
+                    [innerHTML]="getButtonTranslate(element) | translate">
+                </button>
+                <button *ngIf="element.readonly"
+                    class="ButtonBordered ButtonBordered--orange Button--cell button button_small button_secondary"
+                    (click)="openActivity(element.instanceGuid, element.activityCode)"
+                    [innerHTML]="'SDK.ReviewButton' | translate">
+                </button>
+        </ng-template>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>

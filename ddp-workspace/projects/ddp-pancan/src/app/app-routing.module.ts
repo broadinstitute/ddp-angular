@@ -24,6 +24,8 @@ import { ScientificResearchComponent } from './components/scientific-research/sc
 import { ColorectalPageComponent } from './components/splash-pages/colorectal-page/colorectal-page.component';
 import { LmsPageComponent } from './components/splash-pages/lms-page/lms-page.component';
 import { ActivityPageComponent } from './components/activity-page/activity-page.component';
+import { CommonDashboardComponent } from 'projects/ddp-sdk/src/lib/components/dashboard/dashboard.component';
+
 
 const routes: Routes = [
     {
@@ -34,7 +36,7 @@ const routes: Routes = [
     },
     {
         path: AppRoutes.Dashboard,
-        component: DashboardRedesignedComponent,
+        component: CommonDashboardComponent,
         canActivate: [
             IrbGuard,
             AuthGuard
