@@ -5,7 +5,8 @@ import { FeatureFlagsEnum} from './feature-flags.enum';
 
 const initialFlags: FeatureFlags = {
   [FeatureFlagsEnum.ShowDDP8404HomePageUpdate] : true,
-  [FeatureFlagsEnum.ShowDDP8560DashboardPageUpdate] : true
+  [FeatureFlagsEnum.ShowDDP8560DashboardPageUpdate] : true,
+  [FeatureFlagsEnum.ShowDDP8828Captcha] : true
 };
 
 const featureFlags: BehaviorSubject<FeatureFlags> = new BehaviorSubject(initialFlags);

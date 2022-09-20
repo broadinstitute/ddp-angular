@@ -84,9 +84,12 @@
         <span class="last-updated">{{ model.lastUpdatedText }} </span>
       </section>
 
-      <section *ngIf="isPrequal" class="section section--captcha">
-        <re-captcha [siteKey]="captchaSiteKey" (resolved)="onCaptchaResolve()"></re-captcha>
-      </section>
+      <!-- we can hide captcha for testing purposes by the feature flag -->
+      <ng-container *ngIf="featureFlag_DDP_8828 | async">
+        <section *ngIf="isPrequal" class="section section--captcha">
+          <re-captcha [siteKey]="captchaSiteKey" (resolved)="onCaptchaResolve()"></re-captcha>
+        </section>
+      </ng-container>
     </div>
 
     <section class="section section--buttons">
@@ -94,7 +97,7 @@
         <button
           #submitButton
           class="button button--primary pull-right"
-          [disabled]="dataEntryDisabled || (isPageBusy | async) || !isCaptchaResolved"
+          [disabled]="dataEntryDisabled || (isPageBusy | async) || ( (featureFlag_DDP_8828 | async) && !isCaptchaResolved )"
           (click)="flush()"
           (mouseenter)="mouseEnterOnSubmit()"
         >
