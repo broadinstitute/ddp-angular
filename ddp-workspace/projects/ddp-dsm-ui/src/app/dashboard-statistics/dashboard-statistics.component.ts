@@ -20,4 +20,12 @@ export class DashboardStatisticsComponent implements OnInit {
     this.hasRequiredRole = this.roleService.allowedToViewEELData();
     this.Charts = this.dashboardStatisticsService.ChartFactory();
   }
+
+  get getConfiguration(): any {
+    return {
+      responsive: true,
+      scrollZoom: true,
+      displaylogo: false
+    }
+  }
 }
