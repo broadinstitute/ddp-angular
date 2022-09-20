@@ -1,5 +1,9 @@
 <div class="container content__tight">
-  <app-progress-bar [instanceGuid]="instanceGuid" [activities]="activities" [hidden]="isConsent"></app-progress-bar>
+  <app-progress-bar [instanceGuid]="instanceGuid"
+                    [activities]="activities"
+                    [hidden]="shouldHideProgressBar">
+  </app-progress-bar>
+
   <div class="activity-container">
     <div>
       <app-activity
