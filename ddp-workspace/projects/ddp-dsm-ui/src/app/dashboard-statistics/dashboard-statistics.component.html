@@ -8,7 +8,6 @@
   </section>
 </div>
 
-<ng-template #noRole>
-  <p>User doesn't have required role</p>
-</ng-template>
-
+<div class="spinner" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
