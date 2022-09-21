@@ -1,9 +1,0 @@
-/*
- in $class argument must be provided name of the Component Class,
- which is supposed to be rendered in modal component
-*/
-@mixin mainSet {
-  ::ng-deep.mat-dialog-container {
-    padding: 0;
-  }
-}

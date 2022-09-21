@@ -1,6 +1,0 @@
-@use "../../../../styles/FON/material/input" as angMatInput;
-
-
-.input_field_primary {
-  @include angMatInput.setStyles("primary");
-}
