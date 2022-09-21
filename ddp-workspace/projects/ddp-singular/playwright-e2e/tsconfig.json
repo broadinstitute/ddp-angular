@@ -2,15 +2,16 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
+    "moduleResolution": "node",
     "declaration": true,
     "rootDir": "./",
     "outDir": "./build",
     "baseUrl": ".",
-    "moduleResolution": "node",
     "strict": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
   },
-  "exclude": ["node_modules", "build", "test-results", "playwright-report"
-  ]
+  "exclude": ["node_modules", "build", "test-results", "playwright-report"],
+  "include": ["src", "tests"]
 }

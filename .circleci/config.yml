@@ -23,6 +23,16 @@ executors:
       - image: broadinstitute/study-website-build:12-08-2020A
     working_directory: *ng_workspace_path
     resource_class: medium+
+  playwright-e2e:
+    docker:
+      - image: mcr.microsoft.com/playwright:v1.25.0-focal
+    working_directory: *ng_workspace_path
+    environment:
+      NODE_ENV: development # Needed if playwright is in devDependencies
+
+orbs:
+  node: circleci/node@5.0.2
+  browser-tools: circleci/browser-tools@1.3.0
 
 commands:
   app-build-and-store:
@@ -631,7 +641,6 @@ workflows:
               ignore:
                 - /^rc.*/
                 - /^hotfix.*/
-
 
   launch-all-app-builds-workflow:
     # using do-builds param to select which of the two workflows using the build-on-tag-filters
