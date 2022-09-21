@@ -134,6 +134,15 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   sequencingOrdersArray = [];
 
   private ENROLLED = 'ENROLLED';
+  private PREQUAL = 'PREQUAL';
+  private SELF_COUNTRY = 'SELF_COUNTRY';
+  private SELF_STATE = 'SELF_STATE';
+  private ADD_PARTICIPANT = 'ADD_PARTICIPANT';
+  private CHILD_COUNTRY = 'CHILD_COUNTRY_COPY';
+  private CHILD_STATE = 'CHILD_STATE_COPY';
+  private SELF_COUNTRY_US = 'US';
+  private SELF_COUNTRY_CA = 'CA';
+  private SELF_STATE_NY = 'NY';
   private ABOUT_YOU = 'ABOUT_YOU';
   private ASSIGNED_SEX = 'ASSIGNED_SEX';
 
@@ -1540,6 +1549,29 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     if (!this.role.allowedToDoOrderSequencing() || !this.hasSequencingOrders) {
       return false;
     }
+
+    const prequalActivity = participant.data.activities.find( activity => activity.activityCode === this.PREQUAL );
+    if (prequalActivity) {
+      const countryQuestion = prequalActivity.questionsAnswers.find( questionAnswer => questionAnswer.stableId === this.SELF_COUNTRY );
+      if (countryQuestion && countryQuestion.answer) {
+        if (countryQuestion.answer instanceof Array) {
+          const test = countryQuestion.answer.indexOf(this.SELF_COUNTRY_US);
+          debugger;
+          if (countryQuestion.answer.indexOf(this.SELF_COUNTRY_US) > 0) {
+            const stateQuestion = prequalActivity.questionsAnswers.find( questionAnswer => questionAnswer.stableId === this.SELF_STATE );
+            if (stateQuestion.answer instanceof Array) {
+              if (stateQuestion.answer.indexOf(this.SELF_STATE_NY) > 0) {
+
+              }
+            }
+          }
+          else if (countryQuestion.answer.indexOf(this.SELF_COUNTRY_CA) > 0) {
+
+          }
+        }
+      }
+    }
+
     const enrolled: boolean = participant.data.status === this.ENROLLED;
     let hasGender = false;
     if (this.hasOncHistoryGender(participant)) {
