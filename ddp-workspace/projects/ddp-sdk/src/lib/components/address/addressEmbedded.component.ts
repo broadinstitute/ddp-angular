@@ -50,7 +50,6 @@ import { NGXTranslateService } from '../../services/internationalization/ngxTran
 import { LoggingService } from '../../services/logging.service';
 import { ConfigurationService } from '../../services/configuration.service';
 import { FuncType } from '../../models/funcType';
-import { WindowRef } from '../../services/windowRef';
 
 interface IsEasyPostError {
     isEasyPostError: boolean;
