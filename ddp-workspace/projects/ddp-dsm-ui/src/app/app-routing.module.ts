@@ -7,9 +7,6 @@ export const AppRoutes: Routes = [
   {path: '', loadChildren: () => import('./WELCOME/welcome.module').then(m => m.WelcomeModule),
     canLoad: [CheckAuthGuard], pathMatch: 'full'},
 
-  {path: 'fon', loadChildren: () => import('./FON/fon.module').then(m => m.fonModule),
-    canLoad: [StudyGuard]},
-
   {path: ':study', loadChildren: () => import('./ALL-STUDIES/all-studies.module').then(m => m.AllStudiesModule),
     canLoad: [StudyGuard]},
 
