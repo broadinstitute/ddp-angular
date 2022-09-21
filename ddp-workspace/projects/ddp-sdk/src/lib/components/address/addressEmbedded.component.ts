@@ -18,7 +18,6 @@ import {
     catchError,
     concatMap,
     debounce,
-    debounceTime,
     distinctUntilChanged,
     filter,
     finalize,
@@ -87,7 +86,7 @@ interface AddressSuggestion {
     template: `
         <p *ngIf="block.titleText" class="ddp-address-embedded__title" [innerHTML]="block.titleText"></p>
         <p *ngIf="block.subtitleText" class="ddp-address-embedded__subtitle" [innerHTML]="block.subtitleText"></p>
-        <div scroll-up [triggerScrollUp]="(scroll_up$|async)" (scrollUpExecuted)="scrollUpExecutedAction($event)">
+        <div scroll-up [triggerScrollUp]="(scroll_up$|async)" (scrollUpExecuted)="scrollUpExecutedAction()">
         <ddp-address-input
             (valueChanged)="inputComponentAddress$.next($event); dirtyStatusChanged.emit(true)"
             (formValidStatusChanged)="formValidStatusChanged$.next($event)"
@@ -154,7 +153,6 @@ interface AddressSuggestion {
 })
 export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     @Input() block: MailAddressBlock;
-    @ViewChild('scrollAnchor', {static: true}) scrollAnchor: ElementRef;
     scroll_up$: Observable<boolean>;
 
     @Input()
@@ -266,13 +264,11 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
 
     private setupScrollToErrorAction(): void {
         this.scroll_up$ = this.validationRequested$.pipe(
-            map(validationRequested => validationRequested && this.block.scrollTo),
-            debounceTime(300)
+            map(validationRequested => validationRequested && this.block.scrollTo)
         );
     }
-    scrollUpExecutedAction(executed:boolean): void {
-        this.block.scrollTo=!executed;
-        this.validationRequested$.next(!executed);
+    scrollUpExecutedAction(): void {
+        this.block.scrollTo=false;
     }
 
     private initializeComponentState(): void {

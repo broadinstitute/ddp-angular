@@ -7,7 +7,7 @@ import { WindowRef } from '../services/windowRef';
 })
 export class ScrollUpDirective implements OnChanges {
     @Input() triggerScrollUp: boolean;
-    @Output() scrollUpExecuted: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output() scrollUpExecuted: EventEmitter<void> = new EventEmitter<void>();
     constructor(
         private eleRef: ElementRef,
         @Inject('ddp.config') private configuration: ConfigurationService,
@@ -15,15 +15,16 @@ export class ScrollUpDirective implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.triggerScrollUp.currentValue) {
-            const headerOffset = this.configuration.scrollToErrorOffset;
-            const top = this.eleRef.nativeElement.getBoundingClientRect().top
-                + this.windowRef.nativeWindow.scrollY - headerOffset;
             this.windowRef.nativeWindow.scrollTo({
-                top,
+                top: this.getTop(),
                 behavior: 'smooth'
             });
-            this.scrollUpExecuted.emit(true);
+            this.scrollUpExecuted.emit();
         }
+    }
+    private getTop(): number{
+        const headerOffset = this.configuration.scrollToErrorOffset;
+        return this.eleRef.nativeElement.getBoundingClientRect().top + this.windowRef.nativeWindow.scrollY - headerOffset;
     }
 
 }
