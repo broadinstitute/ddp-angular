@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {DashboardStatisticsService} from '../services/dashboard-statistics.service';
 import {RoleService} from '../services/role.service';
-import {finalize} from "rxjs/operators";
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard-statistics',
@@ -13,7 +13,7 @@ import {finalize} from "rxjs/operators";
 export class DashboardStatisticsComponent implements OnInit {
   Charts: Observable<any>;
   hasRequiredRole;
-  loading: boolean = true;
+  loading = true;
 
   constructor(private dashboardStatisticsService: DashboardStatisticsService, private roleService: RoleService) {
   }
