@@ -730,59 +730,9 @@ workflows:
                 - develop
     jobs:
       - build-and-deploy-job:
-          name: basil-nightly
-          study_key: basil
-      - build-and-deploy-job:
-          name: osteo-nightly
-          study_key: osteo
-      - build-and-deploy-job:
-          name: angio-nightly
-          study_key: angio
-      - build-and-deploy-job:
-          name: brain-nightly
-          study_key: brain
-      - build-and-deploy-job:
-          name: mbc-nightly
-          study_key: mbc
-      - build-and-deploy-job:
-          name: testboston-nightly
-          study_key: testboston
-      - build-and-deploy-job:
-          name: mpc-nightly
-          study_key: mpc
-      - build-and-deploy-job:
-          name: atcp-nightly
-          study_key: atcp
-      - build-and-deploy-job:
-          name: rarex-nightly
-          study_key: rarex
-      - build-and-deploy-job:
-          name: rgp-nightly
-          study_key: rgp
-      - build-and-deploy-job:
-          name: esc-nightly
-          study_key: esc
-      - build-and-deploy-job:
-          name: prion-nightly
-          study_key: prion
-      - build-and-deploy-job:
-          name: cgc-nightly
-          study_key: cgc
-      - build-and-deploy-job:
-          name: circadia-nightly
-          study_key: circadia
-      - build-and-deploy-job:
-          name: pancan-nightly
-          study_key: pancan
-      - build-and-deploy-job:
-          name: singular-nightly
-          study_key: singular
-      - build-and-deploy-job:
-          name: brugada-nightly
-          study_key: brugada
-      - build-and-deploy-job:
-          name: lms-nightly
-          study_key: lms
-      - build-and-deploy-job:
-          name: fon-nightly
-          study_key: fon
+          name: << matrix.study_key >>-nightly-build-and-deploy
+          matrix:
+            alias: nightly-build-deploy
+            parameters:
+              study_key: [ basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rarex, rgp, esc, prion, cgc, circadia, pancan, singular, brugada, lms, fon ]
+
