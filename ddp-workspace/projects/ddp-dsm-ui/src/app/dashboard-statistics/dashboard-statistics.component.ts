@@ -26,7 +26,6 @@ export class DashboardStatisticsComponent implements OnInit {
   get getConfiguration(): any {
     return {
       responsive: true,
-      scrollZoom: true,
       displaylogo: false
     };
   }
