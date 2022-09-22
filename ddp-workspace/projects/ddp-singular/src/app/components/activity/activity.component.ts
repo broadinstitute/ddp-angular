@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Route } from '../../constants/route';
 import { ActivityCode } from '../../constants/activity-code';
 import { isConsentActivity, isMedicalRecordReleaseActivity } from '../../utils';
-import { ActivityRedesignedComponent, SubmissionManager, SubmitAnnouncementService } from 'ddp-sdk';
+import { ActivityRedesignedComponent, RuntimeEnvironment, SubmissionManager, SubmitAnnouncementService } from 'ddp-sdk';
 
 declare const DDP_ENV: Record<string, any>;
 
@@ -22,7 +22,9 @@ export class ActivityComponent extends ActivityRedesignedComponent {
   }
 
   get captchaSiteKey(): string {
-    return DDP_ENV.recaptchaSiteClientKey;
+    return (this.config.runtimeEnvironment === RuntimeEnvironment.Test) ?
+      DDP_ENV.recaptchaSiteClientKeyForAutoTests // disable captcha check for auto-tests on test env
+      : DDP_ENV.recaptchaSiteClientKey;
   }
 
   get submitText(): string {

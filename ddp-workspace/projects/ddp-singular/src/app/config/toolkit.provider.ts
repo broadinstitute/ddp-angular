@@ -13,6 +13,7 @@ toolkitConfig.dashboardUrl = Route.Dashboard;
 toolkitConfig.activityUrl = Route.Activity;
 toolkitConfig.participantListUrl = Route.ParticipantList;
 toolkitConfig.recaptchaSiteClientKey = DDP_ENV.recaptchaSiteClientKey;
+toolkitConfig.recaptchaSiteClientKeyForAutoTests = DDP_ENV.recaptchaSiteClientKeyForAutoTests;
 
 export const toolkitConfigProvider: Provider = {
   provide: 'toolkit.toolkitConfig',
