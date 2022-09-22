@@ -1,6 +1,7 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    ElementRef,
     EventEmitter,
     Inject,
     Input,
@@ -84,6 +85,7 @@ interface AddressSuggestion {
     template: `
         <p *ngIf="block.titleText" class="ddp-address-embedded__title" [innerHTML]="block.titleText"></p>
         <p *ngIf="block.subtitleText" class="ddp-address-embedded__subtitle" [innerHTML]="block.subtitleText"></p>
+        <div scroll-up [triggerScrollUp]="(scroll_up$|async)" (scrollUpExecuted)="scrollUpExecutedAction()">
         <ddp-address-input
             (valueChanged)="inputComponentAddress$.next($event); dirtyStatusChanged.emit(true)"
             (formValidStatusChanged)="formValidStatusChanged$.next($event)"
@@ -93,6 +95,7 @@ interface AddressSuggestion {
             [country]="country"
             [phoneRequired]="block.requirePhone"
             (componentBusy)="isInputComponentBusy$.next($event)"></ddp-address-input>
+</div>
         <ddp-validation-message
             *ngIf="(errorMessagesToDisplay$ | async).length > 0"
             [message]="(errorMessagesToDisplay$ | async).join(' ')">
@@ -149,6 +152,7 @@ interface AddressSuggestion {
 })
 export class AddressEmbeddedComponent implements OnDestroy, OnInit {
     @Input() block: MailAddressBlock;
+    scroll_up$: Observable<boolean>;
 
     @Input()
     public set readonly(val: boolean) {
@@ -257,6 +261,15 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
         this.initializeComponentState();
     }
 
+    private setupScrollToErrorAction(): void {
+        this.scroll_up$ = this.validationRequested$.pipe(
+            map(validationRequested => validationRequested && this.block.scrollTo)
+        );
+    }
+    scrollUpExecutedAction(): void {
+        this.block.scrollTo=false;
+    }
+
     private initializeComponentState(): void {
         const initialState: ComponentState = {
             isReadOnly: false,
@@ -294,6 +307,7 @@ export class AddressEmbeddedComponent implements OnDestroy, OnInit {
             map(val => val > 0),
             distinctUntilChanged()
         );
+        this.setupScrollToErrorAction();
 
         const initializeStateAction$ = this.state$.pipe(
             take(1),
