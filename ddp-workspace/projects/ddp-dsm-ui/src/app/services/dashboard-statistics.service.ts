@@ -70,7 +70,7 @@ export class DashboardStatisticsService {
       hovermode: true,
 
       yaxis: {
-        rangemode: "tozero"
+        rangemode: 'tozero'
       },
       xaxis: {
         automargin: 'height+width+left'
