@@ -117,6 +117,7 @@ import {StoolUploadComponent} from '../stool-upload/stool-upload.component';
 import {DashboardStatisticsComponent} from '../dashboard-statistics/dashboard-statistics.component';
 import {DashboardStatisticsService} from '../services/dashboard-statistics.service';
 import {QrCodeComponent} from '../qr-code/qr-code.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 import * as PlotlyJS from 'plotly.js-dist-min';
@@ -242,7 +243,9 @@ PlotlyModule.plotlyjs = PlotlyJS;
     AccordionModule.forRoot(),
     TypeaheadModule.forRoot(),
     DragulaModule.forRoot(),
-    PlotlyModule
+    PlotlyModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
     Utils,
@@ -252,7 +255,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
     Language,
     DashboardStatisticsService
   ],
-  exports: [RouterModule]
+  exports: [RouterModule, MatFormFieldModule, MatInputModule]
 })
 
 export class AllStudiesModule {
