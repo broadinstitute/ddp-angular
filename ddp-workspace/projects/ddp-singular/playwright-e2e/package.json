@@ -8,12 +8,12 @@
   "private": true,
   "scripts": {
     "clean": "rm -rf ./build ./node_modules ./package-lock.json",
-    "build": "yarn format && tsc",
+    "build": "npx tsc --build",
     "format": "prettier --config .prettierrc.js --write --ignore-unknown \"**/*.{ts,js}\"",
-    "test:e2e:all": "playwright test --grep-invert \"examples/\"",
-    "test:e2e:local": "playwright test --config=playwright-local.config.js --grep-invert \"nightly/|examples/\"",
-    "test:e2e:ci": "playwright test --config=playwright-ci.config.js --grep-invert \"nightly/\"",
-    "test:e2e:ci:nightly": "playwright test --config=playwright-ci.config.js --grep \"nightly/\"",
+    "test:e2e:all": "npx playwright test --grep-invert \"examples/\"",
+    "test:e2e:local": "npx playwright test --config=playwright-local.config.js --grep-invert \"nightly/|examples/\"",
+    "test:e2e:ci": "npx playwright test --config=playwright-ci.config.js --grep-invert \"nightly/\"",
+    "test:e2e:ci:nightly": "npx playwright test --config=playwright-ci.config.js --grep \"nightly/\"",
     "lint": "eslint \"**/*.{js,ts}\""
   },
   "devDependencies": {

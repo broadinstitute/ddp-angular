@@ -6,13 +6,12 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest', // Allows for the parsing of modern ECMAScript features
     sourceType: 'module', // Allows for the use of imports
-    project: ['./tsconfig.json']
   },
   env: {
     node: true,
     es6: true
   },
-  ignorePatterns: ['build', 'node_modules', 'tests-examples', '.eslintrc.js'],
+  ignorePatterns: ['build', 'node_modules', 'tests-examples', '.eslintrc.js', './*.js'],
   rules: {
     /* Code Quality */
     'curly': 'warn',
@@ -73,7 +72,6 @@ module.exports = {
     'vars-on-top': 'warn',
     'comma-dangle': 'off',
     '@typescript-eslint/comma-dangle': 'off',
-    '@typescript-eslint/await-thenable': 'warn',
     '@typescript-eslint/no-explicit-any': 'off',
 
     'simple-import-sort/imports': 'warn',

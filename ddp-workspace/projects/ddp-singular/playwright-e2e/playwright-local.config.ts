@@ -6,7 +6,6 @@ const config: PlaywrightTestConfig = {
   ...testConfig,
   workers: 5,
   maxFailures: 5,
-  reporter: [['html', { open: 'never' }], ['list']],
 
   use: {
     // baseURL: 'http://localhost:3000',

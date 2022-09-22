@@ -10,14 +10,14 @@ Playwright end-to-end (E2E) UI integration tests.
 ## Set up *playwright-e2e* project
 
 * Playwright [Node.js Requirement](https://playwright.dev/docs/troubleshooting#nodejs-requirements)
-* Install `node.js` and `yarn` if not already installed 
+* Install `node.js` if not already installed 
   * Install the latest version of `Node.js`. See [Node.js Install](https://nodejs.dev/en/learn/how-to-install-nodejs/)
-  * Install the latest version of `yarn`. See [Yarn Install](https://yarnpkg.com/getting-started/install)
-* Clone github ddp-angular project: 
+* Clone Github **ddp-angular** project: 
   * `git clone git@github.com:broadinstitute/ddp-angular.git`
 * Install dependencies:
   * `cd ddp-angular/ddp-workspace/projects/ddp-singular/playwright-e2e`
-  * `yarn install`
+  * `npm install`
+  * `npx playwright install`
 
 ## Test Users
 
@@ -32,13 +32,16 @@ A `.env` file requires following fields:
 - `baseURL`
 - `sitePassword`
 - `userEmail`
+- `userPasswd`
 
 
-## Run Tests Using `Yarn` from the Command-Line
+## Run Tests Using `npx` from the Command-Line
 
 **By default, all tests will run in headless mode.**
 
-**To see the list of available Yarn commands** <div class="text-blue">`yarn run`</div>
+**To see the list of available *npx* commands in package.json** <div class="text-blue">`npm run`</div>
+
+**To see the list of available *Playwright test* options** <div class="text-blue">`npx playwright test --help`</div>
 
 ### Running Tests on Localhost
 
@@ -49,29 +52,26 @@ Fill out local test user credentials
 
 ### Examples
 
-* Ask for help <div class="text-blue">`yarn test:e2e --help`</div>
+* Run all tests in parallel in **headless mode** <div class="text-blue">`npx playwright test --headless`</div>
 <div></div>
 
-* Run all tests in parallel in **headless mode** <div class="text-blue">`yarn test:e2e --headless`</div>
+* Run a single test in **headless mode** <div class="text-blue">`npx playwright test <TEST_FILE_NAME> --headless` </div>
 <div></div>
 
-* Run a single test in **headless mode** <div class="text-blue">`yarn test:e2e <TEST_FILE_NAME> --headless` </div>
+* Debug one test in **headed mode** <div class="text-blue">`npx playwright test <TEST_FILE_NAME> --debug` </div>
 <div></div>
 
-* Debug one test in **headed mode** <div class="text-blue">`yarn test:e2e <TEST_FILE_NAME> --debug` </div>
+* Run all visual tests in **headed mode** <div class="text-blue">`npx playwright test -g visual  --headed`</div>
 <div></div>
 
-* Run all visual tests in **headed mode** <div class="text-blue">`yarn test:e2e -g visual  --headed`</div>
-<div></div>
-
-* Run all tests in `nightly` directory <div class="text-blue">`yarn test:e2e nightly/`</div>
+* Run all tests in `nightly` directory <div class="text-blue">`npx playwright test nightly/` or `npm run-script test:e2e:ci:nightly`</div>
 <div></div>
 
 * Run one test on your local server (UI and API or just UI) <div class="text-blue">`[TODO]` </div>
 <div></div>
 
-* If you don't want to use the `.env` file, you can also specify `USER_NAME` and `PASSWORD` as environment
-  variables. <div class="text-blue">`USER_NAME=<YOUR_USERID> PASSWORD=<YOUR_USER_PASSWORD> [TODO]`</div>
+* If you don't want to use the `.env` file, you can also specify environment
+  variables in cmd. For example, to set `USER_NAME` and `PASSWORD` env variables and run `login-visual.spec.ts` test, do the following: <div class="text-blue">`USER_NAME=<YOUR_USERID> PASSWORD=<YOUR_USER_PASSWORD> npx playwright test login-visual.spec.ts`</div>
 <div></div>
 
 ### Debugging in Intellij
@@ -87,13 +87,13 @@ Fill out local test user credentials
 * `nav.ts`    -  page navigation functions
 
 ### Test Development Tips
-- Use `yarn format` to format code
-- Use `yarn lint --fix` to fix eslint issues
+- Use `npm run format` to format code
+- Use `npm run lint --fix` to fix eslint issues
 - Use flag `-u` to generate screenshots for a visual test on localhost.
-  - For example, `yarn test:e2e self-enrollment-visual.spec.ts -u`
+  - For example, `npx playwright test self-enrollment-visual.spec.ts -u`
   - Save screenshots to GitHub
 - Generate screenshots for running tests on CircleCI by doing the following:
   - In *playwright-e2e* dir, run docker with cmd `docker run -v $PWD:/e2e -w /e2e -it --rm --ipc=host mcr.microsoft.com/playwright:v1.25.0-focal /bin/bash`
-  - `yarn test:e2e self-enrollment-visual.spec.ts -u`
+  - `npx playwright test self-enrollment-visual.spec.ts -u`
   - Save screenshots to GitHub
 - [TODO]

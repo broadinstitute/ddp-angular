@@ -2,3 +2,5 @@
 node_modules/
 build/
 playwright-report/
+/test-results/
+/html-test-results/
