@@ -1,13 +1,31 @@
+<h1>
+  Statistics Dashboard
+</h1>
 <div class="dashboard">
-  <section *ngFor="let chart of (Charts | async)" class="dashboard-chart" [ngClass]="chart.size">
-    <plotly-plot
-      [data]="chart.data"
-      [layout]="chart.layout"
-    ></plotly-plot>
-  </section>
+  <ng-container  *ngTemplateOutlet="charts, context: {
+    charts: Charts | async
+  }">
+  </ng-container>
 </div>
 
-<ng-template #noRole>
-  <p>User doesn't have required role</p>
-</ng-template>
+<div class="spinner" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
 
+<ng-template let-Charts="charts" #charts>
+
+  <ng-container *ngIf="Charts?.length < 1 && !loading; else chartsDisplay">
+    <p class="dashboard-noCharts">There are not available charts for this study</p>
+  </ng-container>
+
+  <ng-template #chartsDisplay>
+    <section *ngFor="let chart of Charts" class="dashboard-chart" [ngClass]="chart.size">
+      <plotly-plot
+        [data]="chart.data"
+        [layout]="chart.layout"
+        [config]="getConfiguration"
+      ></plotly-plot>
+    </section>
+  </ng-template>
+
+</ng-template>

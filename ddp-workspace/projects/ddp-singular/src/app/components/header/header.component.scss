@@ -137,16 +137,13 @@ a:not(.button) {
         background: #fff;
         padding-left: 0;
         transform: translate3d(0, 0, 0);
-        & ul {
-          //padding-left: 0;
-        }
       }
 
       .link-list {
         height: 100%;
 
         .auth-item {
-          margin-top: auto;
+          margin-top: 100px;
         }
       }
     }

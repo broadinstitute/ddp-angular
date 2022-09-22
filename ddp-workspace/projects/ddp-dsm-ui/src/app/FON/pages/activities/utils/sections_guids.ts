@@ -1,6 +1,0 @@
-export const sectionGuids = [
-  'ENROLLMENT_FORMS',
-  'TESTING_LOGS_EVENTS',
-  'PROMISE_QUESTIONNAIRE',
-  'PATIENT_STATUS'
-];

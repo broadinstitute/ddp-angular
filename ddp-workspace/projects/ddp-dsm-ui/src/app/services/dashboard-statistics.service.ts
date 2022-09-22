@@ -31,7 +31,8 @@ export class DashboardStatisticsService {
     {type: dashboardType.VERTICAL_HIGHLIGHTED_BAR_CHART, func: this.generate_verticalHighlightedBarChart},
     {type: dashboardType.VERTICAL_BAR_CHART, func: this.generate_verticalBarChart},
     {type: dashboardType.HORIZONTAL_BAR_CHART, func: this.generate_horizontalBarChart},
-    {type: dashboardType.DONUT_CHART, func: this.generate_donutChart}
+    {type: dashboardType.DONUT_CHART, func: this.generate_donutChart},
+    {type: dashboardType.COUNT, func: this.generate_countChart}
   ];
 
   private generate_verticalBarChart(chart: any): {} {
@@ -41,7 +42,6 @@ export class DashboardStatisticsService {
         type: 'bar',
         y: chart.y,
         x: chart.x,
-        width: -1,
         marker: {
           color: '#749DC5',
         },
@@ -52,7 +52,6 @@ export class DashboardStatisticsService {
         },
         text: chart.y,
         textposition: 'outside',
-        offset: 0.1,
       },
     ];
     chartObject.layout = {
@@ -64,35 +63,17 @@ export class DashboardStatisticsService {
           size: 20
         },
         text: chart.title,
-        x: 0
+        x: 2
       },
       height: 600,
 
       hovermode: true,
-      bargap: 0.3,
 
-      margin: {
-        pad: 5,
-      },
-
-      xaxis: {
-        tickangle: 30,
-        ticklabelposition: 'outside bottom',
-        ticklabelstep: 1,
-        position: 0,
-        linecolor: '#737E8E',
-        linewidth: 1,
-        automargin: 'height+width+left'
-      },
       yaxis: {
-        zeroline: false,
-        fixedrange: true,
-        dtick: 100,
-        tickfont: {
-          family: 'Montserrat-Regular',
-          size: 13,
-          color: '#2D333E'
-        }
+        rangemode: 'tozero'
+      },
+      xaxis: {
+        automargin: 'height+width+left'
       }
     };
 
@@ -308,8 +289,7 @@ export class DashboardStatisticsService {
           size: 20
         },
         text: chart.title,
-        x: 0,
-        y: 0.86
+        x: 2,
       },
 
 
@@ -326,8 +306,6 @@ export class DashboardStatisticsService {
 
 
       legend: {
-        // x: 0,
-        // valign: 'bottom',
         bgcolor: 'transparent',
         orientation: 'v',
         font: {
@@ -336,6 +314,29 @@ export class DashboardStatisticsService {
         itemclick: false,
         itemdoubleclick: false,
       }
+    };
+
+    chartObject.size = chart.size;
+
+    return chartObject;
+  }
+
+  private generate_countChart(chart: any): {} {
+    const chartObject: any = {};
+    chartObject.data = [
+      {
+        type: 'indicator',
+        mode: 'number',
+        value: chart.count,
+        delta: { position: 'top'},
+        title: {
+          text: chart.title
+        }
+      }
+    ];
+
+    chartObject.layout = {
+      paper_bgcolor: 'transparent',
     };
 
     chartObject.size = chart.size;

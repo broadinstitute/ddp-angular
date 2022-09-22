@@ -117,8 +117,7 @@ import {StoolUploadComponent} from '../stool-upload/stool-upload.component';
 import {DashboardStatisticsComponent} from '../dashboard-statistics/dashboard-statistics.component';
 import {DashboardStatisticsService} from '../services/dashboard-statistics.service';
 import {QrCodeComponent} from '../qr-code/qr-code.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
@@ -244,8 +243,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
     TypeaheadModule.forRoot(),
     DragulaModule.forRoot(),
     PlotlyModule,
-    MatFormFieldModule,
-    MatInputModule
+    MatProgressSpinnerModule
   ],
   providers: [
     Utils,
@@ -255,7 +253,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
     Language,
     DashboardStatisticsService
   ],
-  exports: [RouterModule, MatFormFieldModule, MatInputModule]
+  exports: [RouterModule]
 })
 
 export class AllStudiesModule {

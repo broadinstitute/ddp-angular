@@ -8,12 +8,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {CheckAuthGuard} from './guards/checkAuth.guard';
 import {StudyGuard} from './guards/study.guard';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {StoreModule} from '@ngrx/store';
-import {storeReducer} from './STORE/store.reducer';
-import {EffectsModule} from '@ngrx/effects';
-import {StoreDevtoolsModule} from '@ngrx/store-devtools';
-import {ParticipantsEffects, SettingsEffects} from './STORE/effects';
-import {environment} from '../environments/environment';
 
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
@@ -60,12 +54,6 @@ const guards = [StudyGuard, CheckAuthGuard];
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    StoreModule.forRoot({MainStore: storeReducer}),
-    EffectsModule.forRoot([ParticipantsEffects, SettingsEffects]),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25,
-      logOnly: environment.production
-    })
   ],
   providers: [
     ...guards,
