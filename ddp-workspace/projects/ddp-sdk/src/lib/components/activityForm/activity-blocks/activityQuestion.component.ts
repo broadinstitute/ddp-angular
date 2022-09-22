@@ -1,7 +1,6 @@
 import { Component, ElementRef, EventEmitter, Inject, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import {
-    debounceTime,
     delay,
     filter,
     map,
@@ -22,7 +21,7 @@ import { LayoutType } from '../../../models/layout/layoutType';
 @Component({
     selector: 'ddp-activity-question',
     template: `
-        <div class="ddp-activity-question" #scrollAnchor [ngClass]="getQuestionClass(block)">
+        <div class="ddp-activity-question" [ngClass]="getQuestionClass(block)" scroll-up [triggerScrollUp]="(scroll_up$|async)" (scrollUpExecuted)="scrollUpExecutedAction()">
             <ddp-activity-answer
                 [block]="block"
                 [readonly]="isReadonly"
@@ -47,6 +46,8 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
     @Input() layoutType: LayoutType = LayoutType.DEFAULT;
     public enteredValue$ = new Subject<AnswerValue>();
     public validationRequested$ = new BehaviorSubject<boolean>(false);
+    scroll_up$: Observable<boolean>;
+
 
     @Input() set validationRequested(requested: boolean) {
         this.validationRequested$.next(requested);
@@ -58,7 +59,6 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
     @Output() componentBusy = new EventEmitter<boolean>();
     public errorMessage$: Observable<string | string[] | null>;
     public errorMessageTranslationParams$: Observable<{[key: string]: string} | null>;
-    @ViewChild('scrollAnchor', {static: true}) scrollAnchor: ElementRef;
     private ngUnsubscribe = new Subject<void>();
 
     static isActivityValidationResult(result: ActivityValidationResult | string | null): result is ActivityValidationResult {
@@ -143,21 +143,12 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
     }
 
     private setupScrollToErrorAction(): void {
-        this.validationRequested$.pipe(
-            filter(validationRequested => validationRequested && this.block.scrollTo),
-            debounceTime(300),
-            tap(() => {
-                const headerOffset = this.config.scrollToErrorOffset;
-                const top = this.scrollAnchor.nativeElement.getBoundingClientRect().top
-                    + this.windowRef.nativeWindow.scrollY - headerOffset;
-                this.windowRef.nativeWindow.scrollTo({
-                    top,
-                    behavior: 'smooth'
-                });
-                this.block.scrollTo = false;
-            }),
-            takeUntil(this.ngUnsubscribe)
-        ).subscribe();
+        this.scroll_up$ = this.validationRequested$.pipe(
+            map(validationRequested => validationRequested && this.block.scrollTo)
+        );
+    }
+    scrollUpExecutedAction(): void {
+        this.block.scrollTo=false;
     }
 
     public getQuestionClass(block: ActivityQuestionBlock<any>): string {

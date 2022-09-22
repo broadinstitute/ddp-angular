@@ -193,6 +193,8 @@ export class ActivityComponent extends BaseActivityComponent implements OnInit, 
     public incrementStep(scroll: boolean = true): void {
         const nextIndex = this.nextAvailableSectionIndex();
         if (nextIndex !== -1) {
+            //validationRequested needs to be reset before starting validation.
+            this.validationRequested=false;
             this.submitAnnouncementService.announceSubmit();
             // The announcement could make listener components busy, but not instantly
             // introduce a wait before we check whether we busy or not
