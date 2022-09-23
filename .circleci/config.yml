@@ -588,6 +588,7 @@ jobs:
     steps:
       - setup-build-workspace
       - steps: << parameters.optional_steps >>
+      - run: pwd
       - run:
           name: "Set .env and export env variables"
           command: |
