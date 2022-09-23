@@ -610,13 +610,12 @@ jobs:
             equal: [ "all", << parameters.test_suite >> ]
           steps:
             - run:
+                working_directory: projects/ddp-singular/playwright-e2e
+                name: Run all Playwright tests except nightly tests
                 command: |
                   pwd
                   ls -al
-            - run:
-                working_directory: projects/ddp-singular/playwright-e2e
-                name: Run all Playwright tests except nightly tests
-                command: npm run test:e2e:ci:all
+                  npm run test:e2e:ci:all
       - when:
           condition:
             equal: [ "nightly", << parameters.test_suite >> ]
