@@ -10,10 +10,10 @@
     "clean": "rm -rf ./build ./node_modules ./package-lock.json",
     "build": "npx tsc --build",
     "format": "prettier --config .prettierrc.js --write --ignore-unknown \"**/*.{ts,js}\"",
-    "test:e2e": "npx playwright test",
-    "test:e2e:local": "npx playwright test --config=playwright-local.config.js --grep-invert \"nightly/|examples/\"",
-    "test:e2e:ci:all": "npx playwright test --config=playwright-ci.config.js --grep-invert \"nightly/\"",
-    "test:e2e:ci:nightly": "npx playwright test --config=playwright-ci.config.js --grep \"nightly/\"",
+    "test:e2e": "npx playwright test --config=playwright.config.ts",
+    "test:e2e:local": "npx playwright test --config=playwright-local.config.ts --grep-invert \"nightly/|examples/\"",
+    "test:e2e:ci:all": "npx playwright test --config=playwright-ci.config.ts --grep-invert \"nightly/\"",
+    "test:e2e:ci:nightly": "npx playwright test --config=playwright-ci.config.ts --grep \"nightly/\"",
     "lint": "eslint tests --ext .js,.ts"
   },
   "devDependencies": {
