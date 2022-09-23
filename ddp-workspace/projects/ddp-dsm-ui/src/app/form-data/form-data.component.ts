@@ -1,4 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { FieldSettings } from '../field-settings/field-settings.model';
 import { Value } from '../utils/value.model';
 
@@ -10,7 +15,7 @@ import { Value } from '../utils/value.model';
 export class FormDataComponent {
 
   @Input() fieldSetting: FieldSettings;
-  @Input() participantData: string;
+  @Input() participantData: any;
   @Input() activityData: string;
   @Input() activityOptions: string[];
   @Input() checkBoxGroups: {};
@@ -18,6 +23,17 @@ export class FormDataComponent {
   @Output() patchData = new EventEmitter();
 
   currentPatchField: string;
+
+  constructor() {}
+
+  public get isConditionalDisplay(): boolean {
+    if(this.fieldSetting?.actions) {
+      const [obj] = this.fieldSetting?.actions;
+      return obj.type === "conditionalDisplay";
+    }
+    return false;
+  }
+
 
   getActivityAnswer(): string {
     if (this.fieldSetting.displayType !== 'ACTIVITY')  {
@@ -42,6 +58,13 @@ export class FormDataComponent {
     return false;
   }
 
+  public get getParticipantData() {
+    if((typeof this.participantData === 'boolean' || this.participantData === 'true' || this.participantData === 'false') && this.isConditionalDisplay) {
+      return ''
+    }
+    return this.participantData;
+  }
+
   getOptions(): Value[] | string[] {
     if (this.fieldSetting.displayType !== 'ACTIVITY' && this.fieldSetting.displayType !== 'ACTIVITY_STAFF') {
       return this.fieldSetting.possibleValues;
@@ -61,7 +84,12 @@ export class FormDataComponent {
       v = value;
     } else {
       if (value.srcElement != null && typeof value.srcElement.value === 'string') {
-        v = value.srcElement.value;
+        if(this.isConditionalDisplay)  {
+          v = value.srcElement.value || false;
+        } else {
+          v = value.srcElement.value;
+        }
+
       } else if (value.value != null) {
         v = value.value;
       } else if (value.checked != null) {

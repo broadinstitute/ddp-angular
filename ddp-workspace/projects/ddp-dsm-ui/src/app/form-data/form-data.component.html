@@ -4,6 +4,15 @@
                 (change)="valueChanged($event)" [checked]="isChecked()">
     {{fieldSetting.columnDisplay}}
   </mat-checkbox>
+
+  <div *ngIf="isConditionalDisplay && isChecked()">
+    <textarea  maxlength="50000" placeholder="{{fieldSetting.columnDisplay}}"
+              rows="10"
+              [ngClass]="{'Width--100': true, 'Color--Field--Patched': isPatchedCurrently(fieldSetting.columnName)}" [value]="getParticipantData"
+              [readonly] = "fieldSetting.readonly"
+              (change)="valueChanged($event)"></textarea>
+  </div>
+
 </div>
 <table class="Width--100" *ngIf="fieldSetting.displayType !== 'CHECKBOX'">
   <tr>

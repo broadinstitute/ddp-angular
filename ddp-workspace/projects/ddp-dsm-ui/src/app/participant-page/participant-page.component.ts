@@ -1378,6 +1378,15 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       this.errorMessage = 'Didn\'t save change';
       return;
     }
+    if(fieldSetting?.actions) {
+      const [obj] = fieldSetting.actions;
+      const conditional = "{\"type\":\"conditionalDisplay\", \"fieldSetting\":{\"columnName\":\"TEST_SPECIFY\"," +
+        "\"columnDisplay\":\"(test)Specify more:\",\"displayType\":\"TEXTAREA\",\"details\":{\"size\":100}, \"fieldSettingId\":1000000}}"
+       if(obj.type === "conditionalDisplay") {
+         const newFieldSettings = FieldSettings.parse(JSON.parse(conditional).fieldSetting);
+         fieldSetting = newFieldSettings;
+       }
+    }
     let fieldTypeId = fieldSetting.fieldType;
     if (groupSetting != null) {
       fieldTypeId = groupSetting.fieldType;
