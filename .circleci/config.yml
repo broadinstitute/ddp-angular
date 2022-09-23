@@ -624,12 +624,13 @@ jobs:
                 working_directory: projects/ddp-singular/playwright-e2e
                 name: Run all Playwright nightly tests
                 command: npm run test:e2e:ci:nightly
+      # Paths are defined in playwright.config.ts Reporter section
       - store_test_results:
-          path: test-results # JUnit xml
+          path: projects/ddp-singular/playwright-e2e/test-results # JUnit xml
       - store_artifacts:
-          path: test-results
+          path: projects/ddp-singular/playwright-e2e/test-results
       - store_artifacts:
-          path: html-test-results # Match Reporter html option in playwright.config.ts
+          path: projects/ddp-singular/playwright-e2e/html-test-results
 
 parameters:
   study_key:
