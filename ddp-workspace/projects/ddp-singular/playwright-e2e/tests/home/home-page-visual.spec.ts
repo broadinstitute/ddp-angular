@@ -12,13 +12,6 @@ test.describe('Home page', () => {
     await visitHomePage(page);
   });
 
-  test('match screenshot', async ({ page }) => {
-    const home = new HomePage(page);
-
-    await home.waitForReady();
-    expect(await page.screenshot()).toMatchSnapshot('Home.png');
-  });
-
   test('match header title and description', async ({ page }) => {
     const home = new HomePage(page);
 
