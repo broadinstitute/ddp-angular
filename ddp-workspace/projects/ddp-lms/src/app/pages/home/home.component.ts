@@ -1,6 +1,6 @@
 import {Component, Inject, Input} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {AnalyticsEventCategories, AnalyticsEventsService} from 'ddp-sdk';
+import {AnalyticsEventCategories, AnalyticsEventsService, SessionMementoService} from 'ddp-sdk';
 import {CommunicationService, ToolkitConfigurationService} from 'toolkit';
 import { Route } from '../../constants/Route';
 
@@ -18,6 +18,7 @@ export class HomeComponent {
   readonly instagramUrl: string;
 
   constructor(
+    private session: SessionMementoService,
     private dialog: MatDialog,
     private analytics: AnalyticsEventsService,
     @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService,
@@ -30,6 +31,10 @@ export class HomeComponent {
 
   public sendSocialMediaAnalytics(event: string): void {
     this.analytics.emitCustomEvent(AnalyticsEventCategories.Social, event);
+  }
+
+  public get isAuthenticated(): boolean {
+    return this.session.isAuthenticatedSession();
   }
 
   readonly Route = Route;
