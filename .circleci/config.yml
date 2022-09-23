@@ -587,8 +587,8 @@ jobs:
           path: *repo_path
       - run:
           command: |
-            pwd
-            ls
+            echo << pipeline.parameters.study_key >>
+            echo << parameters.env_name >>
       - run:
           name: "Set .env and export env variables"
           command: |
@@ -596,6 +596,7 @@ jobs:
             cp ".env.<< pipeline.parameters.study_key >>.<< parameters.env_name >>" .env
             cat .env | awk '{print "export " $0}' >> $BASH_ENV
             source $BASH_ENV
+            cat ".env.<< pipeline.parameters.study_key >>.<< parameters.env_name >>"
             cat .env
       - run:
           name: Install NPM packages
