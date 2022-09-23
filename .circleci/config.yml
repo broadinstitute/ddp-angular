@@ -600,7 +600,7 @@ jobs:
       - run:
           working_directory: projects/ddp-singular/playwright-e2e
           name: Install NPM packages
-          command: npm install --legacy-peer-deps
+          command: npm install --force
       - run:
           working_directory: projects/ddp-singular/playwright-e2e
           name: Install Playwright browsers and dependencies
@@ -612,10 +612,7 @@ jobs:
             - run:
                 working_directory: projects/ddp-singular/playwright-e2e
                 name: Run all Playwright tests except nightly tests
-                command: |
-                  pwd
-                  ls -al
-                  npm run test:e2e:ci:all
+                command: npm run test:e2e:ci:all
       - when:
           condition:
             equal: [ "nightly", << parameters.test_suite >> ]
@@ -626,7 +623,7 @@ jobs:
                 command: npm run test:e2e:ci:nightly
       # Paths are defined in playwright.config.ts Reporter section
       - store_test_results:
-          path: projects/ddp-singular/playwright-e2e/test-results # JUnit xml
+          path: projects/ddp-singular/playwright-e2e/test-results/junit
       - store_artifacts:
           path: projects/ddp-singular/playwright-e2e/test-results
       - store_artifacts:
@@ -686,8 +683,7 @@ workflows:
           - not:
               equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
       jobs:
-        # UNDO
-        # - app-run-tests-job
+        - app-run-tests-job
         - playwright-e2e-test
 
   build-and-deploy-all-apps-workflow:
