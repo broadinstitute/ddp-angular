@@ -88,7 +88,7 @@ Fill out local test user credentials
 
 ### Test Development Tips
 - Use `npm run format` to format code
-- Use `npm run lint --fix` to fix eslint issues
+- Use `npm run lint --fix` to fix eslint issues. Note: Not all eslint rules are fixable by `--fix`.
 - Use flag `-u` to generate screenshots for a visual test on localhost.
   - For example, `npx playwright test self-enrollment-visual.spec.ts -u`
   - Save screenshots to GitHub
