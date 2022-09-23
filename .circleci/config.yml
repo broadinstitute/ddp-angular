@@ -625,7 +625,7 @@ jobs:
                 name: Run all Playwright nightly tests
                 command: npm run test:e2e:ci:nightly
       - store_test_results:
-          path: test-results/results.xml # JUnit xml
+          path: test-results # JUnit xml
       - store_artifacts:
           path: test-results
       - store_artifacts:
