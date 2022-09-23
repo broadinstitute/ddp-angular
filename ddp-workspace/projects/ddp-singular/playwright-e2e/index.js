@@ -5,14 +5,7 @@ console.log('');
 
 // Note: If DOTENV_CONFIG environment variable is undefined, ".env" config file is used as default.
 [
-  'DOTENV_CONFIG',
-  'USER_NAME',
-  'READER_USER',
-  'WRITER_USER',
-  'ACCESS_TEST_USER',
-  'ADMIN_TEST_USER',
-  'EGRESS_TEST_USER',
-  'RAS_TEST_USER'
+  'DOTENV_CONFIG'
 ].forEach((k) => {
   console.log(`${k}: ${process.env[k]}`);
 });
