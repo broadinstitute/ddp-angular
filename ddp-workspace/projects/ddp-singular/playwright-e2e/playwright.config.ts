@@ -27,6 +27,7 @@ const testConfig: PlaywrightTestConfig = {
       // maxDiffPixels: 200,
     },
     toHaveScreenshot: {
+        scale: 'css',
       // Account for minor difference in text rendering and resolution between headless and headed mode
       threshold: 0.2
     }
