@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "keywords": [],
   "author": "",
-  "main": "index.js",
   "private": true,
   "scripts": {
     "clean": "rm -rf ./build ./node_modules ./package-lock.json",

@@ -5,10 +5,8 @@ import testConfig from './playwright.config';
 const config: PlaywrightTestConfig = {
   ...testConfig,
   workers: 5,
-  maxFailures: 5,
 
   use: {
-    // baseURL: 'http://localhost:3000',
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure'
