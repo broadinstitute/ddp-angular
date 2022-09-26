@@ -578,6 +578,7 @@ jobs:
         type: integer
         default: 1
     parallelism: << parameters.parallel_num >>
+    working_directory: playwright-e2e
     steps:
       - setup-build-workspace
       - setup-shared-env:
@@ -587,18 +588,15 @@ jobs:
             echo << pipeline.parameters.study_key >>
             echo << parameters.env_name >>
       - run:
-          working_directory: projects/ddp-singular/playwright-e2e
           name: "Set .env and export env variables"
           command: |
             cp ".env.<< pipeline.parameters.study_key >>.<< parameters.env_name >>" .env
             cat .env | awk '{print "export " $0}' >> $BASH_ENV
             source $BASH_ENV
       - run:
-          working_directory: projects/ddp-singular/playwright-e2e
           name: Install NPM packages
           command: npm install --force
       - run:
-          working_directory: projects/ddp-singular/playwright-e2e
           name: Install Playwright browsers and dependencies
           command: npx playwright install --with-deps "chromium"
       - when:
@@ -606,7 +604,6 @@ jobs:
             equal: [ "all", << parameters.test_suite >> ]
           steps:
             - run:
-                working_directory: projects/ddp-singular/playwright-e2e
                 name: Run all Playwright tests except nightly tests
                 command: npm run test:e2e:ci:all
       - when:
@@ -614,16 +611,15 @@ jobs:
             equal: [ "nightly", << parameters.test_suite >> ]
           steps:
             - run:
-                working_directory: projects/ddp-singular/playwright-e2e
                 name: Run all Playwright nightly tests
                 command: npm run test:e2e:ci:nightly
-      # Paths are defined in playwright.config.ts Reporter section
+      # Paths are relative and defined in playwright.config.ts Reporter section
       - store_test_results:
-          path: projects/ddp-singular/playwright-e2e/test-results/junit
+          path: playwright-e2e/test-results/junit
       - store_artifacts:
-          path: projects/ddp-singular/playwright-e2e/test-results
+          path: playwright-e2e/test-results
       - store_artifacts:
-          path: projects/ddp-singular/playwright-e2e/html-test-results
+          path: playwright-e2e/html-test-results
 
 parameters:
   study_key:
