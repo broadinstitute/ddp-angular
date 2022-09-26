@@ -5,12 +5,13 @@
     {{fieldSetting.columnDisplay}}
   </mat-checkbox>
 
-  <div *ngIf="isConditionalDisplay && isChecked()">
-    <textarea  maxlength="50000" placeholder="{{fieldSetting.columnDisplay}}"
-              rows="10"
-              [ngClass]="{'Width--100': true, 'Color--Field--Patched': isPatchedCurrently(fieldSetting.columnName)}" [value]="getParticipantData"
-              [readonly] = "fieldSetting.readonly"
-              (change)="valueChanged($event)"></textarea>
+  <div *ngIf="isConditionalDisplay() && isChecked() && getConditionalFieldSetting()">
+    <app-conditional-form-data [fieldSetting]="getConditionalFieldSetting()"
+                   [participantData]="conditionalData"
+                   [activityData]="activityData"
+                   [activityOptions]="activityOptions"
+                   [checkBoxGroups]="checkBoxGroups"
+                   (patchDataConditionalField)="conditionalValueChanged($event)"></app-conditional-form-data>
   </div>
 
 </div>
@@ -68,7 +69,8 @@
       <ng-container *ngIf="fieldSetting.displayType === 'TEXTAREA'">
         <textarea maxlength="50000" placeholder="{{fieldSetting.columnDisplay}}"
                   rows="10"
-                  [ngClass]="{'Width--100': true, 'Color--Field--Patched': isPatchedCurrently(fieldSetting.columnName)}" [value]="participantData"
+                  [ngClass]="{'Width--100': true, 'Color--Field--Patched': isPatchedCurrently(fieldSetting.columnName)}"
+                  [value]="participantData"
                   [readonly] = "fieldSetting.readonly"
                   (change)="valueChanged($event)"></textarea>
       </ng-container>

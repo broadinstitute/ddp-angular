@@ -16,20 +16,23 @@ export class FormDataComponent {
 
   @Input() fieldSetting: FieldSettings;
   @Input() participantData: any;
+  @Input() conditionalData: any;
   @Input() activityData: string;
   @Input() activityOptions: string[];
   @Input() checkBoxGroups: {};
   @Input() patchFinished: boolean;
   @Output() patchData = new EventEmitter();
+  @Output() patchDataConditionalField = new EventEmitter();
 
   currentPatchField: string;
+  CONDITIONAL_DISPLAY = 'conditionalDisplay';
 
   constructor() {}
 
-  public get isConditionalDisplay(): boolean {
-    if(this.fieldSetting?.actions) {
-      const [obj] = this.fieldSetting?.actions;
-      return obj.type === "conditionalDisplay";
+  public isConditionalDisplay(): boolean {
+    if (this.fieldSetting?.actions) {
+      const [obj] = this.fieldSetting.actions;
+      return obj.type === this.CONDITIONAL_DISPLAY;
     }
     return false;
   }
@@ -58,13 +61,6 @@ export class FormDataComponent {
     return false;
   }
 
-  public get getParticipantData() {
-    if((typeof this.participantData === 'boolean' || this.participantData === 'true' || this.participantData === 'false') && this.isConditionalDisplay) {
-      return ''
-    }
-    return this.participantData;
-  }
-
   getOptions(): Value[] | string[] {
     if (this.fieldSetting.displayType !== 'ACTIVITY' && this.fieldSetting.displayType !== 'ACTIVITY_STAFF') {
       return this.fieldSetting.possibleValues;
@@ -78,6 +74,35 @@ export class FormDataComponent {
   }
 
   valueChanged(value: any): void {
+    const v = this.createPatchValue(value);
+    this.patchData.emit(v);
+  }
+
+  isPatchedCurrently(field: string): boolean {
+    return this.currentPatchField === field;
+  }
+
+  isCheckboxPatchedCurrently(field: string): string {
+    if (this.currentPatchField === field) {
+      return 'warn';
+    }
+    return 'primary';
+  }
+
+  public getConditionalFieldSetting(): FieldSettings {
+    const conditionalAction = this.fieldSetting.actions.find(action => action.conditionalFieldSetting);
+    if (conditionalAction) {
+      return conditionalAction.conditionalFieldSetting;
+    }
+    return null;
+  }
+
+  conditionalValueChanged(value: any): void {
+    const v = this.createPatchValue(value);
+    this.patchDataConditionalField.emit(v);
+  }
+
+  createPatchValue(value: any): any {
     this.patchFinished = false;
     let v;
     if (typeof value === 'string') {
@@ -99,17 +124,7 @@ export class FormDataComponent {
       }
     }
     this.participantData = v;
-    this.patchData.emit(v);
+    return v;
   }
 
-  isPatchedCurrently(field: string): boolean {
-    return this.currentPatchField === field;
-  }
-
-  isCheckboxPatchedCurrently(field: string): string {
-    if (this.currentPatchField === field) {
-      return 'warn';
-    }
-    return 'primary';
-  }
 }

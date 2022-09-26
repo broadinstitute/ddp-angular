@@ -115,7 +115,7 @@ export class FieldSettingsComponent implements OnInit {
         this.settingsOfSelectedType.push(setting);
       }
     }
-    const newSetting: FieldSettings = new FieldSettings(null, null, null, this.selectedType.name,
+    const newSetting: FieldSettings = new FieldSettings( null, null, this.selectedType.name,
       null, null, 1, null, null);
     newSetting.addedNew = true;
     this.settingsOfSelectedType.push(newSetting);
@@ -145,7 +145,7 @@ export class FieldSettingsComponent implements OnInit {
               this.settingsOfSelectedType.push(setting);
             }
           }
-          const newSetting: FieldSettings = new FieldSettings(null, null, null, this.selectedType.name,
+          const newSetting: FieldSettings = new FieldSettings(null, null, this.selectedType.name,
             null, null, 1, null, null);
           newSetting.addedNew = true;
           this.settingsOfSelectedType.push(newSetting);
@@ -242,7 +242,7 @@ export class FieldSettingsComponent implements OnInit {
   }
 
   addNewFieldSetting(): void {
-    const fieldSetting: FieldSettings = new FieldSettings(null, null, null, this.selectedType.name, null, null, 1, null, null);
+    const fieldSetting: FieldSettings = new FieldSettings(null, null, this.selectedType.name, null, null, 1, null, null);
     fieldSetting.addedNew = true;
     this.settingsOfSelectedType.push(fieldSetting);
   }

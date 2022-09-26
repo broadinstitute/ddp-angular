@@ -136,6 +136,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   private ENROLLED = 'ENROLLED';
   private ABOUT_YOU = 'ABOUT_YOU';
   private ASSIGNED_SEX = 'ASSIGNED_SEX';
+  private CONDITIONAL_DISPLAY = 'conditionalDisplay';
 
   CLEAN = 'CLEAN';
   private SUCCESSFUL_DOWNLOAD_MESSAGE = 'File download finished.';
@@ -552,7 +553,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       const patch = patch1.getPatch();
       this.currentPatchField = parameterName;
       this.patchFinished = false;
-      // console.log( JSON.stringify( patch ) );
       this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
         next: data => {
           if (data) {
@@ -1296,6 +1296,14 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     return '';
   }
 
+  getConditionalData(fieldSetting: FieldSettings, personsParticipantData: ParticipantData): string {
+    const conditionalFieldSetting: FieldSettings = this.getConditionalFieldSetting(fieldSetting);
+    if (conditionalFieldSetting) {
+      return this.getParticipantData(conditionalFieldSetting, personsParticipantData);
+    }
+    return '';
+  }
+
   getParticipantForDynamicField(fieldSetting: FieldSettings): string {
     if (this.participant && this.participant.participantData && fieldSetting.columnName) {
       const participantDataFound = this.participant.participantData
@@ -1305,6 +1313,26 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       }
     }
     return '';
+  }
+
+  getConditionalParticipantForDynamicField(fieldSetting: FieldSettings): string {
+      const conditionalFieldSetting: FieldSettings = this.getConditionalFieldSetting(fieldSetting);
+      if (conditionalFieldSetting) {
+        return this.getParticipantForDynamicField(conditionalFieldSetting);
+      }
+    return '';
+  }
+
+  getConditionalFieldSetting(fieldSetting: FieldSettings): FieldSettings {
+    if (fieldSetting.actions) {
+      const actionWithConditionalDisplay = fieldSetting.actions.find(action => action.type === this.CONDITIONAL_DISPLAY);
+      if (actionWithConditionalDisplay) {
+        const conditionalFieldSetting = actionWithConditionalDisplay.conditionalFieldSetting;
+        return conditionalFieldSetting;
+      }
+    }
+
+    return null;
   }
 
   getDisplayName(displayName: string, columnName: string): string {
@@ -1373,20 +1401,24 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     return [];
   }
 
+  formConditionalPatch(value: any, fieldSetting: FieldSettings, groupSetting: FieldSettings, dataId?: string): void {
+    if(fieldSetting?.actions) {
+      const actionWithConditionalDisplay = fieldSetting.actions.find(action => action.conditionalFieldSetting);
+      if (actionWithConditionalDisplay){
+        const newFieldSetting = actionWithConditionalDisplay.conditionalFieldSetting;
+        this.formPatch(value, newFieldSetting, groupSetting, dataId);
+      }
+    }
+  }
+
+
+
   formPatch(value: any, fieldSetting: FieldSettings, groupSetting: FieldSettings, dataId?: string): void {
     if (fieldSetting == null || fieldSetting.fieldType == null) {
       this.errorMessage = 'Didn\'t save change';
       return;
     }
-    if(fieldSetting?.actions) {
-      const [obj] = fieldSetting.actions;
-      const conditional = "{\"type\":\"conditionalDisplay\", \"fieldSetting\":{\"columnName\":\"TEST_SPECIFY\"," +
-        "\"columnDisplay\":\"(test)Specify more:\",\"displayType\":\"TEXTAREA\",\"details\":{\"size\":100}, \"fieldSettingId\":1000000}}"
-       if(obj.type === "conditionalDisplay") {
-         const newFieldSettings = FieldSettings.parse(JSON.parse(conditional).fieldSetting);
-         fieldSetting = newFieldSettings;
-       }
-    }
+
     let fieldTypeId = fieldSetting.fieldType;
     if (groupSetting != null) {
       fieldTypeId = groupSetting.fieldType;

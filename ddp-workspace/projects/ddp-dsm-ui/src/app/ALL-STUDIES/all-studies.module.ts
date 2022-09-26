@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
+import {ConditionalFormDataComponent} from '../conditional-form-data/conditional-form-data.component';
 import {FileDownloadComponent} from '../file-download/file-download.component';
 import {AllStudiesRoutingModule} from './all-studies.routing.module';
 import {HomeComponent} from '../home/home.component';
@@ -209,7 +210,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     SequencingOrderComponent,
     ClinicalPageComponent,
     FileDownloadComponent,
-    DashboardStatisticsComponent
+    DashboardStatisticsComponent,
+    ConditionalFormDataComponent
   ],
   imports: [
     CommonModule,
