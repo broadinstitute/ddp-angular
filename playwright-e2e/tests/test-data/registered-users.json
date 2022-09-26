@@ -1,10 +1,20 @@
 {
     "users": [
-        {
-            "email": "bweng+101@broadinstitute.org",
-            "age": 99,
-            "country": "United States",
-            "state": "Alaska"
-        }
+      {
+        "email": "bweng+101@broadinstitute.org",
+        "app": "singular"
+      },
+      {
+        "email": "Zoey.Redwalker@test.firecloud.org",
+        "app": "google"
+      },
+      {
+        "email": "hunter.stormreaver@test.firecloud.org",
+        "app": "google"
+      },
+      {
+        "email": "hunter.stormreaver@test.firecloud.org",
+        "app": "dsm"
+      }
     ]
 }

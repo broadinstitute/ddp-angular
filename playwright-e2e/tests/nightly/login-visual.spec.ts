@@ -1,8 +1,8 @@
 import { expect, test } from '@playwright/test';
 import _ from 'lodash';
-import MyDashboardPage from '../dashboard/my-dashboard-page';
-import HomePage from '../home/home-page';
-import { clickLogin, fillSitePassword, goToAboutUs, login, NavSelectors, visitHomePage } from '../nav';
+import MyDashboardPage from 'tests/dashboard/my-dashboard-page';
+import HomePage from 'tests/home/home-page';
+import { clickLogin, fillSitePassword, goToAboutUs, login, NavSelectors, visitHomePage } from 'tests/nav';
 
 /**
  * Nightly tests run once per day by CircleCI schedule.

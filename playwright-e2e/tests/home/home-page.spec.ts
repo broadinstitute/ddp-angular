@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { fillSitePassword, goToAboutUs, goToPath, NavSelectors } from '../nav';
+import { fillSitePassword, goToAboutUs, goToPath, NavSelectors } from 'tests/nav';
 
 /**
  * Functional tests

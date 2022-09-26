@@ -2,7 +2,7 @@ module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
-  plugins: ['@typescript-eslint', 'simple-import-sort', 'import', 'prettier'],
+  plugins: ['@typescript-eslint', 'import', 'prettier'],
   parserOptions: {
     ecmaVersion: 'latest', // Allows for the parsing of modern ECMAScript features
     sourceType: 'module', // Allows for the use of imports
@@ -74,8 +74,6 @@ module.exports = {
     '@typescript-eslint/comma-dangle': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
 
-    'simple-import-sort/imports': 'warn',
-    'simple-import-sort/exports': 'warn',
     'import/first': 'warn',
     'import/no-anonymous-default-export': ['warn', { allowObject: true }],
 

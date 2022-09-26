@@ -1,6 +1,6 @@
 import { ElementHandle, expect, Locator, test } from '@playwright/test';
 import _ from 'lodash';
-import { visitHomePage } from '../nav';
+import { visitHomePage } from 'tests/nav';
 
 import HomePage from './home-page';
 
