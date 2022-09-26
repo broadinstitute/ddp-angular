@@ -52,7 +52,7 @@ Fill out local test user credentials
 
 ### Examples
 
-* Run all tests in parallel in **headless mode** <div class="text-blue">`npx playwright test`</div>
+* Run all tests in parallel in **headless mode** <div class="text-blue">`npx playwright test` or `npm run test:e2e`</div>
 <div></div>
 
 * Run a single test in **headless mode** <div class="text-blue">`npx playwright test <TEST_FILE_NAME>` </div>
