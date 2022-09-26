@@ -1,12 +1,16 @@
+@import '../../../styles/breakpoints';
 .announcement {
   padding: 1.2rem 2.4rem;
-  width: 90%;
+  width: 66%;
   margin: 15px auto 40px;
   border: 2.3px solid #b1d8d2;
   border-radius: 6px;
   background-color: #e4fbf8;
 
   position: relative;
+  @include media-sm{
+    width: 90%;
+  }
 
   .close-button {
     position: absolute;
