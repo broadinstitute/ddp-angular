@@ -27,7 +27,7 @@ executors:
     resource_class: medium+
     docker:
       - image: mcr.microsoft.com/playwright:v1.25.0-focal
-    working_directory: *ng_workspace_path
+    working_directory: *repo_path
     environment:
       NODE_ENV: development # Needed if playwright is in devDependencies
 
