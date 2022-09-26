@@ -1,0 +1,35 @@
+@import "../../../styles/fonts";
+@import "../../../styles/commonStyles";
+
+.card {
+  @include flexContainer(normal, normal, column);
+  max-width: inherit;
+  min-height: 20.75em;
+  padding: 2.75em 2.5em;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  border-radius: .5em;
+
+  &:hover {
+    background-color: #753BBD;
+    cursor: pointer;
+    h1, p {
+      color: white;
+    }
+
+    p {
+      border-color: white;
+    }
+  }
+
+  &-count {
+    font-family: Montserrat-Bold, sans-serif;
+    font-size: 3em;
+  }
+
+  &-title {
+    border-top: 3px solid #753BBD;
+    font-family: Montserrat-Regular, sans-serif;
+    font-size: 1.5em;
+  }
+
+}
