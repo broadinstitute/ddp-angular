@@ -83,7 +83,6 @@ export class ToolkitConfigurationService {
 
     // Keys and tokens
     recaptchaSiteClientKey: string;
-    recaptchaSiteClientKeyForAutoTests: string;
     lightswitchInstagramWidgetId: string;
 
     cookies: Cookies | null;

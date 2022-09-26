@@ -316,8 +316,12 @@ var DDP_ENV = {
         DDP_ENV['auth0Domain'] = "{{.Data.auth0.loginDomain}}";
         DDP_ENV['auth0Audience'] = "{{.Data.auth0.loginDomain}}";
         DDP_ENV['basePepperUrl'] = "{{.Data.serverBaseUrl}}";
-        DDP_ENV['recaptchaSiteClientKey'] = "{{.Data.recaptchaSiteClientKey}}";
-        DDP_ENV['recaptchaSiteClientKeyForAutoTests'] = "{{.Data.recaptchaSiteClientKeyForAutoTests}}";
+
+        {{if (eq $environment "prod" "staging")}}
+            DDP_ENV['recaptchaSiteClientKey'] = "{{.Data.recaptchaSiteClientKey}}";
+        {{else}}
+            DDP_ENV['recaptchaSiteClientKey'] = "{{.Data.recaptchaSiteClientKeyForAutoTests}}";
+        {{end}}
     {{end}}
 {{end}}
 
