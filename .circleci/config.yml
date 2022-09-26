@@ -684,7 +684,6 @@ workflows:
               equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
       jobs:
         - app-run-tests-job
-        - playwright-e2e-test
 
   build-and-deploy-all-apps-workflow:
     unless: << pipeline.parameters.do-builds >>
