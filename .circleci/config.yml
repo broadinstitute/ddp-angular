@@ -31,10 +31,6 @@ executors:
     environment:
       NODE_ENV: development # Needed if playwright is in devDependencies
 
-orbs:
-  node: circleci/node@5.0.2
-  browser-tools: circleci/browser-tools@1.3.0
-
 commands:
   app-build-and-store:
     description: Run build and store archive of it
@@ -684,6 +680,7 @@ workflows:
               equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
       jobs:
         - app-run-tests-job
+        - playwright-e2e-test # Test out new job. Remove before merge
 
   build-and-deploy-all-apps-workflow:
     unless: << pipeline.parameters.do-builds >>
