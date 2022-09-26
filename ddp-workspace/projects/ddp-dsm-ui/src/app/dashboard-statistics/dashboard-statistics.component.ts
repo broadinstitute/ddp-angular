@@ -3,7 +3,7 @@ import {Observable, tap} from 'rxjs';
 import {DashboardStatisticsService} from '../services/dashboard-statistics.service';
 import {RoleService} from '../services/role.service';
 import {finalize} from 'rxjs/operators';
-import {dashboardType} from "../enums/dashboard.enums";
+import {dashboardType} from '../enums/dashboard.enums';
 
 @Component({
   selector: 'app-dashboard-statistics',
@@ -35,9 +35,9 @@ export class DashboardStatisticsComponent implements OnInit {
 
   public scrollToVew(divElement: HTMLDivElement): void {
     divElement.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest"
-    })
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'nearest'
+    });
   }
 }

@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {cardData} from "./cardData.model";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {cardData} from './cardData.model';
 
 @Component({
   selector: 'app-card',

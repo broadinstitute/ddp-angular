@@ -121,7 +121,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
-import {CardComponent} from "../dashboard-statistics/components/card.component";
+import {CardComponent} from '../dashboard-statistics/components/card.component';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
