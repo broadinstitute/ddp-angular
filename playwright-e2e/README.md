@@ -52,10 +52,10 @@ Fill out local test user credentials
 
 ### Examples
 
-* Run all tests in parallel in **headless mode** <div class="text-blue">`npx playwright test --headless`</div>
+* Run all tests in parallel in **headless mode** <div class="text-blue">`npx playwright test`</div>
 <div></div>
 
-* Run a single test in **headless mode** <div class="text-blue">`npx playwright test <TEST_FILE_NAME> --headless` </div>
+* Run a single test in **headless mode** <div class="text-blue">`npx playwright test <TEST_FILE_NAME>` </div>
 <div></div>
 
 * Debug one test in **headed mode** <div class="text-blue">`npx playwright test <TEST_FILE_NAME> --debug` </div>
