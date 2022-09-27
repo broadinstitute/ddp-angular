@@ -1552,9 +1552,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     let canBeSequencedBasedOnLocation = false;
     //adult pt
     const prequalActivity = participant.data.activities.find(activity => activity.activityCode === this.PREQUAL);
-    if (prequalActivity) {
+    if (prequalActivity != null) {
       const countryQuestion = prequalActivity.questionsAnswers.find(questionAnswer => questionAnswer.stableId === this.SELF_COUNTRY);
-      if (countryQuestion && countryQuestion.answer) {
+      if (countryQuestion != null && countryQuestion.answer) {
         if (countryQuestion.answer instanceof Array) {
           if (countryQuestion.answer.indexOf(this.SELF_COUNTRY_US) > -1) {
             const stateQuestion = prequalActivity.questionsAnswers.find(questionAnswer => questionAnswer.stableId === this.SELF_STATE);
@@ -1570,20 +1570,22 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       }
     }
     //pediatric pt
-    const addParticipantActivity = participant.data.activities.find(activity => activity.activityCode === this.ADD_PARTICIPANT);
-    if (addParticipantActivity) {
-      const countryQuestion = prequalActivity.questionsAnswers.find(questionAnswer => questionAnswer.stableId === this.CHILD_COUNTRY);
-      if (countryQuestion && countryQuestion.answer) {
-        if (countryQuestion.answer instanceof Array) {
-          if (countryQuestion.answer.indexOf(this.SELF_COUNTRY_US) > -1) {
-            const stateQuestion = prequalActivity.questionsAnswers.find(questionAnswer => questionAnswer.stableId === this.CHILD_STATE);
-            if (stateQuestion.answer instanceof Array) {
-              if (stateQuestion.answer.indexOf(this.SELF_STATE_NY) === -1) {
-                canBeSequencedBasedOnLocation = true;
+    if (!canBeSequencedBasedOnLocation) {
+      const addParticipantActivity = participant.data.activities.find(activity => activity.activityCode === this.ADD_PARTICIPANT);
+      if (addParticipantActivity != null) {
+        const countryQuestion = prequalActivity.questionsAnswers.find(questionAnswer => questionAnswer.stableId === this.CHILD_COUNTRY);
+        if (countryQuestion != null && countryQuestion.answer) {
+          if (countryQuestion.answer instanceof Array) {
+            if (countryQuestion.answer.indexOf(this.SELF_COUNTRY_US) > -1) {
+              const stateQuestion = prequalActivity.questionsAnswers.find(questionAnswer => questionAnswer.stableId === this.CHILD_STATE);
+              if (stateQuestion.answer instanceof Array) {
+                if (stateQuestion.answer.indexOf(this.SELF_STATE_NY) === -1) {
+                  canBeSequencedBasedOnLocation = true;
+                }
               }
+            } else if (countryQuestion.answer.indexOf(this.SELF_COUNTRY_CA) > -1) {
+              canBeSequencedBasedOnLocation = true;
             }
-          } else if (countryQuestion.answer.indexOf(this.SELF_COUNTRY_CA) > -1) {
-            canBeSequencedBasedOnLocation = true;
           }
         }
       }
