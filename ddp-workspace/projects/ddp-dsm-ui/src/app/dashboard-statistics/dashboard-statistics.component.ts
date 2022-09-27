@@ -1,9 +1,8 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
-import {Observable, tap} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
 import {DashboardStatisticsService} from '../services/dashboard-statistics.service';
 import {RoleService} from '../services/role.service';
 import {finalize} from 'rxjs/operators';
-import {dashboardType} from '../enums/dashboard.enums';
 
 @Component({
   selector: 'app-dashboard-statistics',

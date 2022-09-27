@@ -41,8 +41,8 @@
 
     <hr>
     <h1 *ngIf="Counts.length > 1">Counts</h1>
-    <div class="dashboard-counts" #countsView>
-      <app-card *ngFor="let count of Counts" [data]="count"></app-card>
+    <div class="dashboard-counts" #countsView dragAndDrop>
+      <app-card id="drag" draggable="true" *ngFor="let count of Counts" [data]="count"></app-card>
     </div>
 
   </ng-template>
