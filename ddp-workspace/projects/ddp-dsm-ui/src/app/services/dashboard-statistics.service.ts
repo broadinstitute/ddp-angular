@@ -2,27 +2,33 @@ import {Injectable} from '@angular/core';
 import {dashboardType} from '../enums/dashboard.enums';
 import {DSMService} from './dsm.service';
 import {LocalStorageService} from './localStorage.service';
-import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {finalize, map} from 'rxjs/operators';
+import {Observable, Subject} from 'rxjs';
 
 @Injectable()
 export class DashboardStatisticsService {
+  public Counts: Subject<any> = new Subject<any>();
 
   constructor(private dsmService: DSMService, private localStorageService: LocalStorageService) {
   }
 
 
   public ChartFactory(): Observable<any> {
+    const onlyCounts = [];
     return this.dsmService.getDashboardData(this.localStorageService.selectedRealm)
       .pipe(
         map(data => {
           const generatedCharts = [];
           data.forEach(chart => {
+            if(chart.type === dashboardType.COUNT) {
+              onlyCounts.push(chart);
+            }
             const generatedChart = this.CHART_TYPES.find(ch => ch.type === chart.type)?.func(chart);
             generatedChart && generatedCharts.push(generatedChart);
           });
           return generatedCharts;
-        })
+        }),
+        finalize(() => this.Counts.next(onlyCounts))
       );
   }
 
@@ -31,8 +37,7 @@ export class DashboardStatisticsService {
     {type: dashboardType.VERTICAL_HIGHLIGHTED_BAR_CHART, func: this.generate_verticalHighlightedBarChart},
     {type: dashboardType.VERTICAL_BAR_CHART, func: this.generate_verticalBarChart},
     {type: dashboardType.HORIZONTAL_BAR_CHART, func: this.generate_horizontalBarChart},
-    {type: dashboardType.DONUT_CHART, func: this.generate_donutChart},
-    {type: dashboardType.COUNT, func: this.generate_countChart}
+    {type: dashboardType.DONUT_CHART, func: this.generate_donutChart}
   ];
 
   private generate_verticalBarChart(chart: any): {} {
@@ -78,6 +83,7 @@ export class DashboardStatisticsService {
     };
 
     chartObject.size = chart.size;
+    chartObject.type = chart.type;
 
     return chartObject;
   }
@@ -182,6 +188,7 @@ export class DashboardStatisticsService {
     };
 
     chartObject.size = chart.size;
+    chartObject.type = chart.type;
 
     return chartObject;
   }
@@ -253,6 +260,7 @@ export class DashboardStatisticsService {
       }
     };
     chartObject.size = chart.size;
+    chartObject.type = chart.type;
 
     return chartObject;
   }
@@ -317,29 +325,7 @@ export class DashboardStatisticsService {
     };
 
     chartObject.size = chart.size;
-
-    return chartObject;
-  }
-
-  private generate_countChart(chart: any): {} {
-    const chartObject: any = {};
-    chartObject.data = [
-      {
-        type: 'indicator',
-        mode: 'number',
-        value: chart.count,
-        delta: { position: 'top'},
-        title: {
-          text: chart.title
-        }
-      }
-    ];
-
-    chartObject.layout = {
-      paper_bgcolor: 'transparent',
-    };
-
-    chartObject.size = chart.size;
+    chartObject.type = chart.type;
 
     return chartObject;
   }

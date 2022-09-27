@@ -118,6 +118,14 @@
       }
     }
     &-description {
+      &-button{
+        @include media-sm{
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+      }
       padding-right: 60px;
       @include media-sm {
         padding-right: 0;
@@ -178,6 +186,13 @@
 
     &-right {
       width: 100%;
+      &-button{
+        @include media-sm{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+      }
     }
 
     &-title {

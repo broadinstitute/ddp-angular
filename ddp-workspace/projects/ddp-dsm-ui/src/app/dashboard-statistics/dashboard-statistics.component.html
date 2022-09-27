@@ -1,9 +1,11 @@
 <h1>
   Statistics Dashboard
 </h1>
+
 <div class="dashboard">
-  <ng-container  *ngTemplateOutlet="charts, context: {
-    charts: Charts | async
+  <ng-container *ngTemplateOutlet="charts, context: {
+    charts: Charts | async,
+    counts: Counts | async
   }">
   </ng-container>
 </div>
@@ -12,20 +14,38 @@
   <mat-spinner></mat-spinner>
 </div>
 
-<ng-template let-Charts="charts" #charts>
+<ng-template let-Charts="charts" let-Counts="counts" #charts>
 
-  <ng-container *ngIf="Charts?.length < 1 && !loading; else chartsDisplay">
-    <p class="dashboard-noCharts">There are not available charts for this study</p>
+  <ng-container *ngIf="Charts?.length < 1 && Counts?.length < 1; else statistics">
+    <p *ngIf="!loading" class="dashboard-noCharts">There are not available charts and counts for this study</p>
   </ng-container>
 
-  <ng-template #chartsDisplay>
-    <section *ngFor="let chart of Charts" class="dashboard-chart" [ngClass]="chart.size">
-      <plotly-plot
-        [data]="chart.data"
-        [layout]="chart.layout"
-        [config]="getConfiguration"
-      ></plotly-plot>
-    </section>
+  <ng-template #statistics>
+
+    <div *ngIf="Counts.length > 1" class="dashboard-navigation">
+      <p (click)="scrollToVew(chartsView)" class="dashboard-navigation-chart">Charts</p>
+      <span class="dashboard-navigation-border"></span>
+      <p (click)="scrollToVew(countsView)" class="dashboard-navigation-count">Counts</p>
+    </div>
+
+
+    <div class="dashboard-charts" #chartsView>
+      <section *ngFor="let chart of Charts" class="dashboard-charts-chart" [ngClass]="[chart.size, chart.type]">
+        <plotly-plot
+          [data]="chart.data"
+          [layout]="chart.layout"
+          [config]="getConfiguration"
+        ></plotly-plot>
+      </section>
+    </div>
+
+    <hr>
+    <h1 *ngIf="Counts.length > 1">Counts</h1>
+    <div class="dashboard-counts" #countsView dragAndDrop>
+      <app-card id="drag" draggable="true" *ngFor="let count of Counts" [data]="count"></app-card>
+    </div>
+
   </ng-template>
+
 
 </ng-template>
