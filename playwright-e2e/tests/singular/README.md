@@ -70,18 +70,27 @@ Worthy of note:
 
 ### Test Development Tips
 - Generate screenshots for a visual test on localhost with flag `-u`
-  - For example,
+  - For example, update `self-enrollment-visual.spec.ts` test screenshots on localhost
   > `npx playwright test self-enrollment-visual.spec.ts -u`
   - Save new screenshots and commit to GitHub
   
 
-- Generate screenshots for testing on CircleCI
+- Generate screenshots for visual testing on CircleCI
 
    Note: Update docker image version when upgrading Playwright version
   - For example,
-  >`docker run -v $PWD:/e2e -w /e2e -it --rm --ipc=host mcr.microsoft.com/playwright:v1.25.0-focal /bin/bash`
-    
+  In **playwright-e2e/** dir, run docker
+  > `docker run -v $PWD:/e2e -w /e2e -it --rm --ipc=host mcr.microsoft.com/playwright:v1.25.0-focal /bin/bash`
+  
+  - Install web browsers
+  > npx playwright install
+
+  - Change dir to `singular` sub-dir
+  > cd tests/singular
+  
+  - Run a Playwright test with flag `-u`
   > `npx playwright test self-enrollment-visual.spec.ts -u`
+  
   - Save new screenshots and commit to GitHub
 
 

@@ -15,7 +15,7 @@ Playwright end-to-end (E2E) UI integration tests.
   * Install the latest version of `Node.js`. See [Node.js Install](https://nodejs.dev/en/learn/how-to-install-nodejs/)
 * Clone Github **ddp-angular** project: 
   * `git clone git@github.com:broadinstitute/ddp-angular.git`
-* Install dependencies:
+* Install dependencies and web browsers:
   * `npm install`
   * `npx playwright install`
 
