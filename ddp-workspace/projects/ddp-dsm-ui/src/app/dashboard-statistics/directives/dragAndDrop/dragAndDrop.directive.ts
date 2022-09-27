@@ -44,13 +44,13 @@ export class DragAndDropDirective  {
   @HostListener('dragover', ['$event']) onDragOver(event): void {
     event.preventDefault();
     this.activeEvent = event;
-    this.noDropEffect()
+    this.noDropEffect();
   }
 
   /* local function generators */
   private noDropEffect(): void {
     if(this.isMainContainer) {
-      this.activeEvent.dataTransfer.dropEffect = "move"
+      this.activeEvent.dataTransfer.dropEffect = 'move';
     }
   }
 
@@ -66,7 +66,7 @@ export class DragAndDropDirective  {
         parentNode = parentNode.parentNode;
         count++;
         if(count > 200)
-          break;
+          {break;}
       }
 
       return parentNode;
