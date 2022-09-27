@@ -37,21 +37,11 @@
       display: block !important;
     }
 
-    .activity-steps {
-      //@include steps;
-
-      .activity-step {
-        //@include step;
-      }
-    }
-
     .activity-steps-kids {
-      //@include steps;
       &:after {
         background-color: #ccc;
       }
       .activity-step-kids {
-        //@include step;
         border-color: #ccc;
       }
     }
