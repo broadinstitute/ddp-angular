@@ -1,4 +1,4 @@
-import {Directive, ElementRef, HostListener, OnInit} from "@angular/core";
+import {Directive, ElementRef, HostListener, OnInit} from '@angular/core';
 
 @Directive({
   selector: '[dragAndDrop]'
@@ -9,12 +9,12 @@ export class DragAndDropDirective implements OnInit {
   constructor(private elRef: ElementRef) {
   }
 
-  ngOnInit() {
-    console.log(this.elRef)
-    this.elRef.nativeElement.setAttribute('id', 'dragArea')
+  ngOnInit(): void {
+    console.log(this.elRef);
+    this.elRef.nativeElement.setAttribute('id', 'dragArea');
   }
 
-  @HostListener('drop', ['$event']) onDrop(event) {
+  @HostListener('drop', ['$event']) onDrop(event): void {
     event.preventDefault();
     const data = event.dataTransfer.getData('text');
     if(event.target.id === 'dragArea') {
@@ -22,15 +22,15 @@ export class DragAndDropDirective implements OnInit {
     }
   }
 
-  @HostListener('dragstart', ['$event']) onDragStart(event) {
+  @HostListener('dragstart', ['$event']) onDragStart(event): void {
     event.dataTransfer.setData('text', event.target.id);
   }
 
-  @HostListener('dragenter', ['$event']) onDragEnter(event) {
+  @HostListener('dragenter', ['$event']) onDragEnter(event): void {
     event.preventDefault();
   }
 
-  @HostListener('dragover', ['$event']) onDragOver(event) {
+  @HostListener('dragover', ['$event']) onDragOver(event): void {
     event.preventDefault();
   }
 
