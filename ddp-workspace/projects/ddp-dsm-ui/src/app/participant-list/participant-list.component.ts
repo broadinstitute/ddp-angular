@@ -609,6 +609,7 @@ export class ParticipantListComponent implements OnInit {
           this.removeColumnFromSourceColumns('p', Filter.ABSTRACTION_READY);
           this.removeColumnFromSourceColumns('p', Filter.ASSIGNEE_MR);
           this.removeColumnFromSourceColumns('p', Filter.ASSIGNEE_TISSUE);
+          this.removeColumnFromSourceColumns('p', Filter.PARTICIPANT_NOTES);
           this.assignees = null;
         }
         if (jsonData.hasInvitations != null) {
