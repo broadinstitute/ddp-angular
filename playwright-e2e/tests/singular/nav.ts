@@ -84,6 +84,9 @@ export async function login(
 export async function fillSitePassword(page: Page, password?: string): Promise<void> {
   const passwd: string = typeof password === 'undefined' ? (process.env.sitePassword as string) : password;
 
+  if (!passwd) {
+    throw new Error(`Site password is required.`);
+  }
   await page.locator('input[type="password"]').fill(passwd);
   await Promise.all([page.waitForNavigation(), page.locator('button >> text=Submit').click()]);
 }
