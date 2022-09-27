@@ -12,6 +12,7 @@ import {finalize} from 'rxjs/operators';
 
 export class DashboardStatisticsComponent implements OnInit {
   Charts: Observable<any>;
+  Counts: Observable<any>;
   hasRequiredRole;
   loading = true;
 
@@ -21,6 +22,7 @@ export class DashboardStatisticsComponent implements OnInit {
   ngOnInit(): void {
     this.hasRequiredRole = this.roleService.allowedToViewEELData();
     this.Charts = this.dashboardStatisticsService.ChartFactory().pipe(finalize(() => this.loading = false));
+    this.Counts = this.dashboardStatisticsService.Counts;
   }
 
   get getConfiguration(): any {
@@ -28,5 +30,13 @@ export class DashboardStatisticsComponent implements OnInit {
       responsive: true,
       displaylogo: false
     };
+  }
+
+  public scrollToVew(divElement: HTMLDivElement): void {
+    divElement.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'nearest'
+    });
   }
 }
