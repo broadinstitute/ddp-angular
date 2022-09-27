@@ -586,6 +586,8 @@ jobs:
           working_directory: playwright-e2e/tests/<< pipeline.parameters.study_key >>
           name: "Set playwright-e2e .env and export environment variables"
           command: |
+            pwd
+            ls
             cp ".env.<< pipeline.parameters.study_key >>.<< parameters.env_name >>" .env
             cat .env | awk '{print "export " $0}' >> $BASH_ENV
             source $BASH_ENV
