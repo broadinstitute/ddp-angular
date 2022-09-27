@@ -122,6 +122,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
 import {CardComponent} from '../dashboard-statistics/components/card.component';
+import {DragAndDropDirective} from '../dashboard-statistics/directives/dragAndDrop/dragAndDrop.directive';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -211,7 +212,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     ClinicalPageComponent,
     FileDownloadComponent,
     DashboardStatisticsComponent,
-    CardComponent
+    CardComponent,
+    DragAndDropDirective
   ],
   imports: [
     CommonModule,
