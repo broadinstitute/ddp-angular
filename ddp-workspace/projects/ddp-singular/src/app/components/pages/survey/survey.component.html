@@ -4,16 +4,14 @@
                     [hidden]="shouldHideProgressBar">
   </app-progress-bar>
 
-  <div class="activity-container">
-    <div>
+  <div class="activity-container" [ngClass]="{'isConsent': isConsent}">
       <app-activity
         [studyGuid]="studyGuid"
         (submit)="onSubmit($event)"
         (keydown.shift.enter)="preventSubmitByShiftEnter($event)"
         [activityGuid]="instanceGuid"
         [isLastOfMultipleActivities]="isLastOfMultipleActivities"
-        *ngIf="!isFetchingActivities"
-      ></app-activity>
-    </div>
+        *ngIf="!isFetchingActivities">
+      </app-activity>
   </div>
 </div>

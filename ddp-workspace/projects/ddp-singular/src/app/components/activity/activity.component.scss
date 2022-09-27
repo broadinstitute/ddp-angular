@@ -2,23 +2,6 @@
 @import '../../../styles/colors';
 @import '../../../styles/breakpoints';
 
-.activity {
-  &.consent.has-sticky-section {
-
-    @media (max-width: 750px) {
-      padding-top: 24px;
-    }
-
-    @include media-sm {
-      padding-top: 42px;
-    }
-
-    @media (max-width: 400px) {
-      padding-top: 88px;
-    }
-  }
-}
-
 .section--spinner {
   display: flex;
   justify-content: center;
@@ -53,26 +36,12 @@
 }
 
 .sticky-section {
-  z-index: 10;
-  position: fixed;
-  top: $header-height;
-  left: 0;
   background-color: $__purple;
   color: $__white;
-  transition: all 200ms linear;
-  width: calc(100% - 17px); // 17px is right vertical scrollbar
   padding: 14px;
 
   @include media-lg {
-    top: $header-lg-height;
     padding: 14px 24px;
-  }
-  @include media-sm {
-    top: $header-sm-height;
-    width: 100%;
-  }
-  @include media-xs {
-    top: $header-xs-height;
   }
 }
 

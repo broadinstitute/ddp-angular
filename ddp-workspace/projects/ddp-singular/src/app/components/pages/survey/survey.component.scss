@@ -105,4 +105,12 @@
 
 .activity-container {
   padding-top: 3.2rem;
+
+  @include media-xs {
+    padding-top: 1rem;
+  }
+
+  &.isConsent {
+      padding-top: 0;
+  }
 }

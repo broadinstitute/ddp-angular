@@ -5,10 +5,13 @@
     <p *ngIf="isFaq()" class="paragraph">
         {{faqText}}
     </p>
-    <p *ngIf="isConsent()" class="paragraph">You can learn about Project Singular by watching a short video overview
+    <p *ngIf="isConsent()" class="paragraph consent">You can learn about Project Singular by watching a short video overview
         or reading Frequently Asked Questions
         <a href="/faq" class="Link">here</a>.</p>
     <div *ngIf="isHome() || isFaq()" class="intro_container">
-        <iframe src="https://player.vimeo.com/video/718760352?h=c782900633&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Project Singular Overview"></iframe>
+        <iframe
+            src="https://player.vimeo.com/video/718760352?h=c782900633&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+            frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+            style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Project Singular Overview"></iframe>
     </div>
 </ng-container>

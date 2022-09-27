@@ -65,6 +65,11 @@ export class SurveyComponent implements OnInit, OnDestroy {
     });
   }
 
+  get isConsent(): boolean {
+      const { activityCode } = this.getCurrentActivity() ?? {};
+      return isConsentActivity(activityCode);
+  }
+
   get shouldHideProgressBar(): boolean {
     const { activityCode } = this.getCurrentActivity() ?? {};
     return isConsentActivity(activityCode) || (activityCode === ActivityCode.ChildContact);

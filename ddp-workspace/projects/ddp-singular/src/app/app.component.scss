@@ -23,6 +23,7 @@ main {
     }
     @include media-xs {
         margin-top: $header-xs-height;
+        padding-top: 36px;
     }
     &.dashboard-participant{
         background-color: $__cultured;
