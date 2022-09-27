@@ -1,38 +1,84 @@
-import {Directive, ElementRef, HostListener, OnInit} from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  HostListener,
+} from '@angular/core';
+
+/**
+ * @TODO
+ * 1. add some styles while dragover event is triggering
+ * 2. improve code reusability
+ * 3. check for more edge cases
+ */
 
 @Directive({
   selector: '[dragAndDrop]'
 })
 
-export class DragAndDropDirective implements OnInit {
+export class DragAndDropDirective  {
+  private draggedElement: HTMLElement;
+  private activeEvent: any;
 
   constructor(private elRef: ElementRef) {
   }
 
-  ngOnInit(): void {
-    console.log(this.elRef);
-    this.elRef.nativeElement.setAttribute('id', 'dragArea');
-  }
 
   @HostListener('drop', ['$event']) onDrop(event): void {
     event.preventDefault();
-    const data = event.dataTransfer.getData('text');
-    if(event.target.id === 'dragArea') {
-      event.target.appendChild(document.getElementById(data));
+
+    if(!this.isMainContainer) {
+      this.swap(this.draggedElement, this.parentNode);
     }
+
   }
 
-  @HostListener('dragstart', ['$event']) onDragStart(event): void {
-    event.dataTransfer.setData('text', event.target.id);
+  @HostListener('dragstart', ['$event']) onDragStart(event: any): void {
+    this.draggedElement = event.target;
   }
 
-  @HostListener('dragenter', ['$event']) onDragEnter(event): void {
+  @HostListener('dragleave', ['$event']) onDragLeave(event): void {
     event.preventDefault();
+    this.activeEvent = event;
   }
 
   @HostListener('dragover', ['$event']) onDragOver(event): void {
     event.preventDefault();
+    this.activeEvent = event;
+    this.noDropEffect()
   }
+
+  /* local function generators */
+  private noDropEffect(): void {
+    if(this.isMainContainer) {
+      this.activeEvent.dataTransfer.dropEffect = "move"
+    }
+  }
+
+  private get isMainContainer(): boolean {
+    return this.activeEvent.target === this.elRef.nativeElement;
+  }
+
+
+  private get parentNode(): HTMLElement | null {
+      let parentNode: any = this.activeEvent.target.parentNode;
+      let count = 0;
+      while(parentNode.nodeName !== this.draggedElement.nodeName) {
+        parentNode = parentNode.parentNode;
+        count++;
+        if(count > 200)
+          break;
+      }
+
+      return parentNode;
+  }
+
+  private swap(nodeA, nodeB): void {
+    const parentA = nodeA.parentNode;
+    const siblingA = nodeA.nextSibling === nodeB ? nodeA : nodeA.nextSibling;
+    nodeB.parentNode.insertBefore(nodeA, nodeB);
+    parentA.insertBefore(nodeB, siblingA);
+  }
+
 
 
 }
