@@ -61,6 +61,14 @@ export class FormDataComponent {
     return false;
   }
 
+  showConditional(): boolean {
+    const conditionalAction = this.fieldSetting.actions.find(action => action.conditionalFieldSetting);
+    if (conditionalAction) {
+      return String(this.participantData) === conditionalAction.condition;
+    }
+    return false;
+  }
+
   getOptions(): Value[] | string[] {
     if (this.fieldSetting.displayType !== 'ACTIVITY' && this.fieldSetting.displayType !== 'ACTIVITY_STAFF') {
       return this.fieldSetting.possibleValues;

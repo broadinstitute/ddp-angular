@@ -5,7 +5,7 @@
     {{fieldSetting.columnDisplay}}
   </mat-checkbox>
 
-  <div *ngIf="isConditionalDisplay() && isChecked() && getConditionalFieldSetting()">
+  <div *ngIf="isConditionalDisplay() && showConditional() && getConditionalFieldSetting()">
     <app-conditional-form-data [fieldSetting]="getConditionalFieldSetting()"
                    [participantData]="conditionalData"
                    [activityData]="activityData"

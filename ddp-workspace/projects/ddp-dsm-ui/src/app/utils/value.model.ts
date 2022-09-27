@@ -6,7 +6,8 @@ export class Value {
 
   constructor(
     public value?: string, public type?: string,
-    public type2?: string, public name?: string, public values?: Value[], public conditionalFieldSetting?: FieldSettings) {
+    public type2?: string, public name?: string, public values?: Value[], public conditionalFieldSetting?: FieldSettings,
+    public condition?: string) {
   }
 
   static parse(json): Value {
@@ -14,6 +15,6 @@ export class Value {
     if (json.conditionalFieldSetting) {
        conditionalFieldSetting = FieldSettings.parse( json.conditionalFieldSetting );
     }
-    return new Value(json.value, json.type, json.type2, json.name, json.values, conditionalFieldSetting);
+    return new Value(json.value, json.type, json.type2, json.name, json.values, conditionalFieldSetting, json.condition);
   }
 }
