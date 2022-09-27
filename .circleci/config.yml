@@ -5,6 +5,8 @@ references:
       /home/circleci/repo
   ng_workspace_path: &ng_workspace_path
       /home/circleci/repo/ddp-workspace
+  playwright_path: &playwright_path
+      /home/circleci/repo/playwright-e2e/tests/<< pipeline.parameters.study_key >>
   npm_cache_key: &npm_cache_key
     v1-dependency-npm2-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
   npm_cache_restore_key: &npm_cache_restore_key
@@ -583,7 +585,7 @@ jobs:
       - setup-shared-env:
           study_key: << pipeline.parameters.study_key >>
       - run:
-          working_directory: playwright-e2e/tests/<< pipeline.parameters.study_key >>
+          working_directory: *playwright_path
           name: "Set playwright-e2e .env and export environment variables"
           command: |
             pwd
@@ -592,11 +594,11 @@ jobs:
             cat .env | awk '{print "export " $0}' >> $BASH_ENV
             source $BASH_ENV
       - run:
-          working_directory: playwright-e2e/tests/<< pipeline.parameters.study_key >>
+          working_directory: ../playwright-e2e/tests/<< pipeline.parameters.study_key >>
           name: Install NPM packages
           command: npm install --force --quiet
       - run:
-          working_directory: playwright-e2e/tests/<< pipeline.parameters.study_key >>
+          working_directory: ../playwright-e2e/tests/<< pipeline.parameters.study_key >>
           name: Install Playwright browsers and dependencies
           command: npx playwright install --with-deps "chromium"
       - when:
@@ -604,7 +606,7 @@ jobs:
             equal: [ "all", << parameters.test_suite >> ]
           steps:
             - run:
-                working_directory: playwright-e2e/tests/<< pipeline.parameters.study_key >>
+                working_directory: ../playwright-e2e/tests/<< pipeline.parameters.study_key >>
                 name: Run all Playwright tests except nightly tests
                 command: npx playwright test --config=playwright-ci.config.ts --grep-invert "/nightly/|/examples/"
       - when:
@@ -612,7 +614,7 @@ jobs:
             equal: [ "nightly", << parameters.test_suite >> ]
           steps:
             - run:
-                working_directory: playwright-e2e/tests/<< pipeline.parameters.study_key >>
+                working_directory: ../playwright-e2e/tests/<< pipeline.parameters.study_key >>
                 name: Run all Playwright nightly tests
                 command: npx playwright test --config=playwright-ci.config.ts --grep "nightly/"
       # Paths are relative and defined in playwright.config.ts Reporter section
