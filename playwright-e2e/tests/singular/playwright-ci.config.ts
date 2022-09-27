@@ -1,14 +1,10 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
+import singularConfig from './playwright.config';
 
-import testConfig from './playwright.config';
-
-const config: PlaywrightTestConfig = {
-  ...testConfig,
-  retries: 1,
+const ciConfig: PlaywrightTestConfig = {
+  ...singularConfig,
 
   use: {
-    trace: 'retain-on-failure',
-    screenshot: 'only-on-failure',
     video: 'retain-on-failure'
   }
 
@@ -19,4 +15,4 @@ const config: PlaywrightTestConfig = {
   // },
 };
 
-export default config;
+export default ciConfig;

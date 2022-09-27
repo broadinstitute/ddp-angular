@@ -1,11 +1,11 @@
 node_modules/
-/test-results/
-/html-test-results/
-/playwright-report/
-/playwright/.cache/
+**/test-results/
+**/html-test-results/
+**/playwright-report/
+**/playwright/.cache/
 build/
 
-.env
+tests/singular/.env
 
 **/.idea/
 **/*.iml

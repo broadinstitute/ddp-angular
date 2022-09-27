@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import AboutYourselfPage from './about-yourself-page';
-import HomePage from 'tests/home/home-page';
-import { fillSitePassword, goToPath, NavSelectors } from 'tests/nav';
+import HomePage from 'tests/singular/home/home-page';
+import { fillSitePassword, goToPath, NavSelectors } from 'tests/singular/nav';
 
 test.describe('Self enroll', () => {
   test.beforeEach(async ({ page }) => {

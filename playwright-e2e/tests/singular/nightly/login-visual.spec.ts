@@ -1,8 +1,8 @@
 import { expect, test } from '@playwright/test';
 import _ from 'lodash';
-import MyDashboardPage from 'tests/dashboard/my-dashboard-page';
-import HomePage from 'tests/home/home-page';
-import { clickLogin, fillSitePassword, goToAboutUs, login, NavSelectors, visitHomePage } from 'tests/nav';
+import MyDashboardPage from 'tests/singular/dashboard/my-dashboard-page';
+import HomePage from 'tests/singular/home/home-page';
+import { clickLogin, fillSitePassword, goToAboutUs, login, NavSelectors, visitHomePage } from 'tests/singular/nav';
 
 /**
  * Nightly tests run once per day by CircleCI schedule.
@@ -16,7 +16,7 @@ test.describe.parallel('Login', () => {
   });
 
   test('should works with valid credential', async ({ page }) => {
-    await login(page, { userEmail: process.env.userEmail, userPasswd: process.env.userPasswd });
+    await login(page, { userEmail: process.env.userEmail, userPasswd: process.env.userPassword });
 
     // On non-prod env, user must enter Site password to continue
     await fillSitePassword(page);

@@ -1,0 +1,19 @@
+{
+  "testUsers": [
+    {
+      "userName": "Zoey.Redwalker@test.firecloud.org",
+      "password": "Forthehorde",
+      "app": "google"
+    },
+    {
+      "userName": "Hunter.Stormreaver@test.firecloud.org",
+      "password": "Forthehorde",
+      "app": "google"
+    },
+    {
+      "userName": "Hunter.Stormreaver@test.firecloud.org",
+      "password": "test@123",
+      "app": "dsm"
+    }
+  ]
+}
