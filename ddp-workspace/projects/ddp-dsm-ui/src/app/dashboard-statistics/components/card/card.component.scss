@@ -1,5 +1,5 @@
-@import "../../../styles/fonts";
-@import "../../../styles/commonStyles";
+@import "../../../../styles/fonts";
+@import "../../../../styles/commonStyles";
 
 .card {
   @include flexContainer(normal, normal, column);
