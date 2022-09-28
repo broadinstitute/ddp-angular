@@ -125,8 +125,8 @@ import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
 import {CardComponent} from '../dashboard-statistics/components/card/card.component';
 import {DragAndDropDirective} from '../dashboard-statistics/directives/dragAndDrop/dragAndDrop.directive';
-import {PlotlyChartsComponent} from "../dashboard-statistics/components/plotly-charts/plotly-charts.component";
-import {CountsComponent} from "../dashboard-statistics/components/counts/counts.component";
+import {PlotlyChartsComponent} from '../dashboard-statistics/components/plotly-charts/plotly-charts.component';
+import {CountsComponent} from '../dashboard-statistics/components/counts/counts.component';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
