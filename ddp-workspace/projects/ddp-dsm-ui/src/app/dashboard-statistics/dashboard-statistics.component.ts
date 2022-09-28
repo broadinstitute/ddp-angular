@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {DashboardStatisticsService} from '../services/dashboard-statistics.service';
 import {RoleService} from '../services/role.service';
-import {finalize, map} from 'rxjs/operators';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard-statistics',
@@ -21,9 +21,7 @@ export class DashboardStatisticsComponent implements OnInit {
 
   ngOnInit(): void {
     this.hasRequiredRole = this.roleService.allowedToViewEELData();
-    // this.Charts = this.dashboardStatisticsService.ChartFactory().pipe(map((data) => []),finalize(() => this.loading = false));
     this.Charts = this.dashboardStatisticsService.ChartFactory().pipe(finalize(() => this.loading = false));
-
     this.Counts = this.dashboardStatisticsService.Counts;
   }
 
