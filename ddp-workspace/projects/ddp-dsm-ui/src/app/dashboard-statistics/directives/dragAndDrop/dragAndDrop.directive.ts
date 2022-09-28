@@ -23,7 +23,7 @@ export class DragAndDropDirective  {
   }
 
 
-  @HostListener('drop', ['$event']) onDrop(event): void {
+  @HostListener('drop', ['$event']) onDrop(event: any): void {
     event.preventDefault();
     this.activeEvent = event;
 
@@ -38,12 +38,12 @@ export class DragAndDropDirective  {
     this.draggedElement = event.target;
   }
 
-  @HostListener('dragleave', ['$event']) onDragLeave(event): void {
+  @HostListener('dragleave', ['$event']) onDragLeave(event: any): void {
     event.preventDefault();
     this.activeEvent = event;
   }
 
-  @HostListener('dragover', ['$event']) onDragOver(event): void {
+  @HostListener('dragover', ['$event']) onDragOver(event: any): void {
     event.preventDefault();
     this.activeEvent = event;
     this.noDropEffect();
