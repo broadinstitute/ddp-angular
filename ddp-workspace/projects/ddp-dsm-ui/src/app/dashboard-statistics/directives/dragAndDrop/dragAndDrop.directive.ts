@@ -25,6 +25,7 @@ export class DragAndDropDirective  {
 
   @HostListener('drop', ['$event']) onDrop(event): void {
     event.preventDefault();
+    this.activeEvent = event;
 
     if(!this.isMainContainer) {
       this.swap(this.draggedElement, this.parentNode);
@@ -33,6 +34,7 @@ export class DragAndDropDirective  {
   }
 
   @HostListener('dragstart', ['$event']) onDragStart(event: any): void {
+    this.activeEvent = event;
     this.draggedElement = event.target;
   }
 
