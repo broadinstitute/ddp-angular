@@ -1526,7 +1526,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   }
 
   public getMercuryEligibleSamples(): void {
-    this.canBeSequencedBasedOnLocation = this.participantLocatedCanadaOrNotNY(this.participant);
+    this.canBeSequencedBasedOnLocation = this.participantLocatedNotCAOrNY(this.participant);
     if (!this.canHaveSequencing(this.participant) && !this.canBeSequencedBasedOnLocation) {
       return;
     }
@@ -1548,7 +1548,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     this.subscriptions.add(sub1);
   }
 
-  participantLocatedCanadaOrNotNY(participant: Participant): boolean {
+  participantLocatedNotCAOrNY(participant: Participant): boolean {
     let canBeSequencedBasedOnLocation = false;
     //adult pt
     const prequalActivity = participant.data.activities.find(activity => activity.activityCode === this.PREQUAL);
@@ -1563,8 +1563,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
                 canBeSequencedBasedOnLocation = true;
               }
             }
-          } else if (countryQuestion.answer.indexOf(this.SELF_COUNTRY_CA) > -1) {
-            canBeSequencedBasedOnLocation = true;
           }
         }
       }
@@ -1583,8 +1581,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
                   canBeSequencedBasedOnLocation = true;
                 }
               }
-            } else if (countryQuestion.answer.indexOf(this.SELF_COUNTRY_CA) > -1) {
-              canBeSequencedBasedOnLocation = true;
             }
           }
         }
