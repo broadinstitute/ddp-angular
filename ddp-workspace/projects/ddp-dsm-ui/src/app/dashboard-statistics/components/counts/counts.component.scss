@@ -1,0 +1,18 @@
+@import "../../../../styles/fonts";
+@import "../../../../styles/commonStyles";
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700&display=swap');
+
+.noCharts {
+  text-align: center;
+  margin-top: 100px;
+  font-family: Montserrat-Regular, sans-serif;
+}
+.counts {
+  @include flexContainer(normal, space-between);
+  flex-wrap: wrap;
+  height: 100%;
+  padding: 10px 10px;
+  app-card {
+    width: 24%;
+  }
+}

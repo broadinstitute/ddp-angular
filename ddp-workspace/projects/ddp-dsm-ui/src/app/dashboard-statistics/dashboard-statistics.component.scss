@@ -15,98 +15,30 @@ h1 {
   padding: 6px;
   margin: 0 auto;
 }
+.noCharts {
+  text-align: center;
+  margin-top: 100px;
+  font-family: Montserrat-Regular, sans-serif;
+}
+
 .dashboard {
 
   margin-bottom: 50px;
-  &-noCharts {
-    text-align: center;
-    margin-top: 100px;
-    font-family: Montserrat-Regular, sans-serif;
-  }
-  &-charts {
-    @include flexContainer(normal, space-between);
-    width: 100%;
-    height: 100%;
-    flex-wrap: wrap;
-    &-chart {
-      background-color: #FFFFFF;
-      box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-      overflow: auto;
-      margin: 24px 0 0 0;
-      padding: 12px;
 
-      &.DONUT_CHART {
-        @include flexContainer(normal, center);
-      }
-      &.LARGE, &.MEDIUM {
-        width: 100%;
-      }
-      &.SMALL {
-        width: 49%;
-      }
+  &-chartsAndCounts {
+    margin-top: 50px;
+
+    mat-tab-group {
+      margin: 10px 0;
     }
   }
 
-  &-counts {
-    @include flexContainer(normal, space-between);
-    flex-wrap: wrap;
-    margin-top: 40px;
-    app-card {
-      width: 24%;
-    }
-  }
-
-  &-navigation {
-    @include flexContainer(center, space-evenly);
-    font-family: Montserrat-SemiBold, sans-serif;
-    font-size: 1.5em;
-    border-radius: .5em;
-    height: 3em;
-    width: 20em;
-    margin: 3em auto;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-    &:hover {
-      cursor: pointer;
-    }
-    &-chart {
-      @include flexContainer(center, center);
-      padding: 10px;
-      color: white;
-      background-color: #749DC5;
-      height: 100%;
-      width: 100%;
-      border-top-left-radius: .5em;
-      border-bottom-left-radius: .5em;
-      font-family: inherit;
-      font-size: inherit;
-      &:hover  {
-        background-color: white;
-        color: #749DC5;
-      }
-    }
-    &-count {
-      @include flexContainer(center, center);
-      color: #753BBD;
-      padding: 10px;
-      font-family: inherit;
-      font-size: inherit;
-      height: 100%;
-      width: 100%;
-      border-top-right-radius: .5em;
-      border-bottom-right-radius: .5em;
-
-      &:hover  {
-        background-color: #753BBD;
-        color: white;
-      }
-    }
 
     &-border {
       border: 2px solid white;
       width: 2px;
       height: 100%;
     }
-  }
 
 }
 
