@@ -276,7 +276,7 @@
                   <ng-container *ngIf="col.participantColumn.tableAlias === 'proxy'">
                     <ul class="NO-PADDING-START">
                       <li class="LIST-SEPARATOR" *ngFor="let proxy of pt.proxyData">
-                        <p class="BIT-OF-MARGIN" *ngIf="proxy != null">
+                        <p *ngIf="proxy != null">
                           <ng-container *ngIf="col.type === 'TEXT'">
                             {{proxy.profile[col.participantColumn.name]}}
                           </ng-container>
