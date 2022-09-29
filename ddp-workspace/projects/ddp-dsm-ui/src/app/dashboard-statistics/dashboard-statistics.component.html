@@ -18,24 +18,29 @@
 
   <div class="dashboard-chartsAndCounts" *ngIf="!loading">
 
-    <mat-tab-group mat-align-tabs="center">
-      <mat-tab>
-        <ng-template mat-tab-label>
-          <mat-icon class="example-tab-icon">bar_chart</mat-icon>
-          Charts
-        </ng-template>
-        <app-plotly-charts [chartData]="Charts" [config]="getConfiguration"></app-plotly-charts>
-      </mat-tab>
 
-      <mat-tab>
-        <ng-template mat-tab-label>
-          <mat-icon class="example-tab-icon">score</mat-icon>
-          Counts
-        </ng-template>
-      <app-counts [countsData]="Counts"></app-counts>
-      </mat-tab>
+      <mat-tab-group mat-align-tabs="center" *ngIf="Charts.length > 0 && Counts.length > 0; else noCharts">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">bar_chart</mat-icon>
+            Charts
+          </ng-template>
+          <app-plotly-charts [chartData]="Charts" [config]="getConfiguration"></app-plotly-charts>
+        </mat-tab>
 
-    </mat-tab-group>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">score</mat-icon>
+            Counts
+          </ng-template>
+          <app-counts [countsData]="Counts"></app-counts>
+        </mat-tab>
+
+      </mat-tab-group>
+
+    <ng-template #noCharts>
+      <p class="noCharts">There are not available charts and counts for this study</p>
+    </ng-template>
 
   </div>
 
