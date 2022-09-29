@@ -1,4 +1,4 @@
-<div class="charts" *ngIf="chartData?.length > 1; else noCharts">
+<div class="charts" *ngIf="chartData?.length > 0; else noCharts">
   <section *ngFor="let chart of chartData" class="charts-chart" [ngClass]="[chart.size, chart.type]">
     <plotly-plot
       [data]="chart.data"

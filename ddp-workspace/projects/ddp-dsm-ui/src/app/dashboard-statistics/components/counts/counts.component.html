@@ -1,3 +1,7 @@
-<div class="counts" dragAndDrop>
+<div class="counts" dragAndDrop *ngIf="countsData?.length > 0; else noCharts">
   <app-card draggable="true" *ngFor="let count of countsData" [data]="count"></app-card>
 </div>
+
+<ng-template #noCharts>
+  <p class="noCharts">There are not available counts for this study</p>
+</ng-template>
