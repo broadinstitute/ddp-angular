@@ -25,8 +25,8 @@ export class SequencingOrderComponent {
 
   currentPatchField: string;
   errorMessage: string;
-  selectedNormal: SequencingOrder = SequencingOrder.getEmptyInstance();
-  selectedTissue: SequencingOrder = SequencingOrder.getEmptyInstance();
+  selectedNormal: SequencingOrder = new SequencingOrder();
+  selectedTissue: SequencingOrder = new SequencingOrder();
 
   constructor( private dsmService: DSMService, private auth: Auth, private role: RoleService ) {
 
