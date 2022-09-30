@@ -224,6 +224,7 @@ import {
 } from './components/activityForm/answers/activity-equation-answer/activityEquationAnswer.component';
 import { TabularBlockComponent } from './components/activityForm/activity-blocks/tabularBlock/tabularBlock.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { LayoutModule } from '@angular/cdk/layout';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter: FuncType<string> = () => sessionService.token;
@@ -287,7 +288,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         }),
         RouterModule,
         A11yModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        LayoutModule
     ],
     providers: [
         AuthGuard,
