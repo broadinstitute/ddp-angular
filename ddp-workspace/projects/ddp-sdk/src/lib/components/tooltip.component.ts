@@ -2,7 +2,8 @@ import { Component, Input, Inject, OnInit, OnDestroy } from '@angular/core';
 import { ConfigurationService } from '../services/configuration.service';
 import {
     BreakpointObserver,
-    Breakpoints
+    Breakpoints,
+    BreakpointState
 } from '@angular/cdk/layout';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -26,16 +27,13 @@ export class TooltipComponent implements OnInit, OnDestroy {
 
     constructor(@Inject('ddp.config') private config: ConfigurationService, private breakpointObserver: BreakpointObserver) { }
     ngOnInit(): void {
-        const initialPosition = this.position;
         this.breakpointObserver.observe([
-            Breakpoints.XSmall,
-            Breakpoints.Small,
-            Breakpoints.Medium,
-            Breakpoints.Large,
-            Breakpoints.XLarge
+            Breakpoints.XSmall
         ]).pipe(takeUntil(this.destroyed))
-            .subscribe(() => {
-                this.position = this.breakpointObserver.isMatched(Breakpoints.XSmall) ? 'below' : initialPosition;
+            .subscribe((result: BreakpointState) => {
+                if(result.matches){
+                    this.position='below';
+                }
         });
     }
     ngOnDestroy(): void {
