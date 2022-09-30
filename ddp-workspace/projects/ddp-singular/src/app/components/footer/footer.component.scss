@@ -168,6 +168,11 @@
         border: 2px solid #fff;
         padding: 6px 14px 5px;
         border-radius: 8px;
+        &:hover{
+          background: $__white;
+          border-color:$__white;
+          color: $__purple !important;
+        }
       }
     }
   }
