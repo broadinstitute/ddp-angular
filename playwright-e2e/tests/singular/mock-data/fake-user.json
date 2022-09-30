@@ -1,0 +1,21 @@
+{
+  "patient": {
+    "firstName": "E2E",
+    "lastName": "Playwright",
+    "country": "UNITED STATES",
+    "state": {
+      "name": "MASSACHUSETTS",
+      "abbreviation": "MA"
+    },
+    "streetAddress": "415 Main Street",
+    "city": "Cambridge",
+    "zip": "02142",
+    "phone": "6782223333"
+  },
+  "doctor": {
+    "name": "John Strange",
+    "specialty": "PRIMARY_CARE",
+    "phone": "2345678910"
+  }
+
+}

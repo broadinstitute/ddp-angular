@@ -34,46 +34,43 @@ export async function visitHomePage(page: Page): Promise<Response | null> {
   return await goToPath(page);
 }
 
+export async function clickSignMeUp(page: Page): Promise<void> {
+  await page.locator(NavSelectors.SignMeUp).click();
+}
+
 export async function clickLogin(page: Page): Promise<void> {
   const loginLocator: Locator = page.locator(NavSelectors.Login);
 
   await loginLocator.click();
 }
 
+export async function enterEmailPassword(
+  page: Page,
+  email: string | undefined,
+  password: string | undefined
+): Promise<void> {
+  const emailInput = page.locator('input[type="email"]');
+  if (typeof email === 'string') {
+    await emailInput.fill(email);
+  }
+  const passwordInput = page.locator('input[type="password"]');
+  if (typeof password === 'string') {
+    await passwordInput.fill(password);
+  }
+  await Promise.all([
+    page.locator(NavSelectors.LoadingSpinner).first().waitFor({ state: 'visible' }),
+    page.locator('button[name="submit"]').click()
+  ]);
+}
+
 export async function login(
   page: Page,
-  opts: { userEmail?: string | null; userPasswd?: string | null; expectErr?: boolean } = {}
+  opts: { userEmail: string | undefined; userPasswd: string | undefined }
 ): Promise<void> {
   // If parameter expectErr == true, login is expected to fail.
-  const { userEmail, userPasswd, expectErr = false } = opts;
-
+  const { userEmail, userPasswd } = opts;
   await clickLogin(page);
-
-  const emailInput = page.locator('input[type="email"]');
-
-  if (typeof userEmail === 'string') {
-    await emailInput.fill(userEmail);
-  }
-
-  const passwordInput = page.locator('input[type="password"]');
-
-  if (typeof userPasswd === 'string') {
-    await passwordInput.fill(userPasswd);
-  }
-
-  const submitButton = page.locator('button[name="submit"]');
-  const loadingSpinner = page.locator(NavSelectors.LoadingSpinner);
-
-  if (expectErr) {
-    await submitButton.click();
-  } else {
-    await Promise.all([
-      page.waitForNavigation(),
-      loadingSpinner.first().waitFor({ state: 'visible' }),
-      submitButton.click()
-    ]);
-    await loadingSpinner.waitFor({ state: 'hidden' });
-  }
+  await enterEmailPassword(page, userEmail, userPasswd);
 }
 
 /**

@@ -8,7 +8,7 @@ import { clickLogin, fillSitePassword, goToAboutUs, login, NavSelectors, visitHo
  * Nightly tests run once per day by CircleCI schedule.
  * For example, to run this test: userEmail=bweng+101@broadinstitute.org userPasswd=NotAnyMora1 yarn test:e2e login-visual.spec.ts
  */
-test.describe.parallel('Login', () => {
+test.describe.skip('Login', () => {
   test.beforeEach(async ({ page }) => {
     await visitHomePage(page);
     const home = new HomePage(page);
@@ -82,7 +82,7 @@ test.describe.parallel('Login', () => {
   test('should fail with invalid credential', async ({ page }) => {
     await goToAboutUs(page);
     await fillSitePassword(page);
-    await login(page, { userEmail: process.env.userEmail, userPasswd: 'WrongPazzw0rd', expectErr: true });
+    await login(page, { userEmail: process.env.userEmail, userPasswd: 'WrongPazzw0rd' });
 
     const loginErrMessage = page.locator('form .auth0-global-message-error span:not([class])');
     await expect(loginErrMessage).toHaveText('Wrong email or password.');

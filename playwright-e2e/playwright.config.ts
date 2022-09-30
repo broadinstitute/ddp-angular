@@ -8,7 +8,6 @@ import path from 'path';
 import * as dotenv from 'dotenv';
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
-
 /**
  * Base Playwright TestConfig.
  * See https://playwright.dev/docs/test-configuration.
@@ -16,7 +15,7 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
 const testConfig: PlaywrightTestConfig = {
   testDir: './tests',
   /* Maximum time one test can run for. */
-  timeout: 90 * 1000,
+  timeout: 60 * 1000,
   /* For expect() calls */
   expect: {
     /**

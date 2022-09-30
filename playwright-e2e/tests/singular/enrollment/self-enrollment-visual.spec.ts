@@ -50,7 +50,7 @@ test.describe('Self enroll', () => {
     const ageQuestionLocator = aboutYourself.ageLocator;
     // No error before start entering age
     await expect(ageQuestionLocator.locator('.ErrorMessage')).toBeHidden();
-    await aboutYourself.fillAge('2');
+    await aboutYourself.fillAge(2);
 
     // No state before select country US
     await expect(aboutYourself.stateLocator).toBeHidden();
@@ -67,7 +67,7 @@ test.describe('Self enroll', () => {
     expect(screenshot).toMatchSnapshot('age-input-err-message.png');
 
     // Clear error message by entering an age > 18
-    await aboutYourself.fillAge('19');
+    await aboutYourself.fillAge(19);
     await page.keyboard.press('Tab');
 
     await expect(ageQuestionLocator.locator('.ErrorMessage')).toBeHidden();
@@ -82,7 +82,7 @@ test.describe('Self enroll', () => {
   test.fixme('should blocks workflow in US for a minor person', async ({ page }) => {
     const aboutYourself = new AboutYourselfPage(page);
 
-    await aboutYourself.fillAge('18');
+    await aboutYourself.fillAge(18);
 
     // Select Country: US, State: MA
     await aboutYourself.selectCountry('US');

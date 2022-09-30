@@ -6,6 +6,13 @@
 
 - **DO NOT** use these users for local development.
 
+HashiCorp’s Vault is used to manage test users secrets and sensitive data.
+  ```
+  vault read -format=json secret/pepper/test/v1/e2e 
+  ```
+
+## Local Test Users
+
 Supple credentials for pre-existing test users (rather than by generating new users) using an environment property file `.env`. See `.env.singular.test` for an
 example.
 

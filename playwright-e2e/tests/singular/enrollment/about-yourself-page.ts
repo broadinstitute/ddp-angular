@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 
 export default class AboutYourselfPage {
   private readonly page: Page;
@@ -17,6 +17,11 @@ export default class AboutYourselfPage {
       .locator('.ddp-activity-question')
       .filter({ hasText: 'Do you or your immediate family member have a single ventricle heart defect?' });
     this.signMeUp = page.locator('button:text("Sign me up!")');
+  }
+
+  async waitForReady() {
+    await expect(this.age).toBeVisible();
+    // Add additional checks here
   }
 
   get signMeUpLocator(): Locator {
@@ -43,8 +48,8 @@ export default class AboutYourselfPage {
     await this.signMeUp.click();
   }
 
-  async fillAge(value: string): Promise<void> {
-    await this.ageLocator.locator('input').fill(value);
+  async fillAge(value: number): Promise<void> {
+    await this.ageLocator.locator('input').fill(value.toString());
   }
 
   async selectCountry(value: string): Promise<Array<string>> {
