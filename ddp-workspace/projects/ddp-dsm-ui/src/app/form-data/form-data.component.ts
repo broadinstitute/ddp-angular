@@ -30,10 +30,16 @@ export class FormDataComponent {
   constructor() {}
 
   public isConditionalDisplay(): boolean {
-    if (this.fieldSetting?.actions) {
-      const [obj] = this.fieldSetting.actions;
-      return obj.type === this.CONDITIONAL_DISPLAY;
+    if(this.fieldSetting?.actions) {
+      const actionWithConditionalDisplay = this.fieldSetting.actions.find( action => action.conditionalFieldSetting );
+      if (actionWithConditionalDisplay) {
+        if(this.fieldSetting.columnName === 'DIAGNOSIS')
+        console.log(true);
+        return true;
+      }
     }
+    if(this.fieldSetting.columnName === 'DIAGNOSIS')
+    console.log(false);
     return false;
   }
 
@@ -64,8 +70,12 @@ export class FormDataComponent {
   showConditional(): boolean {
     const conditionalAction = this.fieldSetting.actions.find(action => action.conditionalFieldSetting);
     if (conditionalAction) {
+      if(this.fieldSetting.columnName === 'DIAGNOSIS')
+        console.log(true);
       return String(this.participantData) === conditionalAction.condition;
     }
+    if(this.fieldSetting.columnName === 'DIAGNOSIS')
+      console.log(false);
     return false;
   }
 
@@ -98,10 +108,16 @@ export class FormDataComponent {
   }
 
   public getConditionalFieldSetting(): FieldSettings {
-    const conditionalAction = this.fieldSetting.actions.find(action => action.conditionalFieldSetting);
+    const conditionalAction = this.fieldSetting.actions?.find(action => action.conditionalFieldSetting && action.condition === String(this.participantData));
+    if(this.fieldSetting.columnName === 'DIAGNOSIS')
+    console.log(conditionalAction);
     if (conditionalAction) {
+      if(this.fieldSetting.columnName === 'DIAGNOSIS')
+      console.log(true);
       return conditionalAction.conditionalFieldSetting;
     }
+    if(this.fieldSetting.columnName === 'DIAGNOSIS')
+    console.log(false);
     return null;
   }
 

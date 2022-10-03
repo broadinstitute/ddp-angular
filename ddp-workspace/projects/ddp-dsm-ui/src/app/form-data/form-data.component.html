@@ -4,16 +4,14 @@
                 (change)="valueChanged($event)" [checked]="isChecked()">
     {{fieldSetting.columnDisplay}}
   </mat-checkbox>
-
   <div *ngIf="isConditionalDisplay() && showConditional() && getConditionalFieldSetting()">
     <app-conditional-form-data [fieldSetting]="getConditionalFieldSetting()"
-                   [participantData]="conditionalData"
-                   [activityData]="activityData"
-                   [activityOptions]="activityOptions"
-                   [checkBoxGroups]="checkBoxGroups"
-                   (patchDataConditionalField)="conditionalValueChanged($event)"></app-conditional-form-data>
+                               [participantData]="conditionalData"
+                               [activityData]="activityData"
+                               [activityOptions]="activityOptions"
+                               [checkBoxGroups]="checkBoxGroups"
+                               (patchDataConditionalField)="conditionalValueChanged($event)"></app-conditional-form-data>
   </div>
-
 </div>
 <table class="Width--100" *ngIf="fieldSetting.displayType !== 'CHECKBOX'">
   <tr>
@@ -106,6 +104,14 @@
               </ng-container>
             </div>
           </mat-radio-group>
+          <div *ngIf=" getConditionalFieldSetting() && isConditionalDisplay() && showConditional()">
+            <app-conditional-form-data [fieldSetting]="getConditionalFieldSetting()"
+                                       [participantData]="conditionalData"
+                                       [activityData]="activityData"
+                                       [activityOptions]="activityOptions"
+                                       [checkBoxGroups]="checkBoxGroups"
+                                       (patchDataConditionalField)="conditionalValueChanged($event)"></app-conditional-form-data>
+          </div>
           <button (click)="clearRadioSelection()" color="primary" mat-raised-button>Clear Selection</button>
         </ng-container>
       </fieldset>

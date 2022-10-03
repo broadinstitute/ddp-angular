@@ -11,14 +11,14 @@ export class FieldSettings {
   notUniqueError = false;
   spaceError = false;
 
-  constructor( public columnName: string, public columnDisplay: string, public fieldType: string,
+  constructor(public fieldSettingId: string, public columnName: string, public columnDisplay: string, public fieldType: string,
               public displayType: string, public possibleValues: Value[], public orderNumber: number, public actions: Value[],
               public readonly: boolean) {
 
   }
 
   static parse(json): FieldSettings {
-    return new FieldSettings(json.columnName, json.columnDisplay, json.fieldType,
+    return new FieldSettings(json.fieldSettingId, json.columnName, json.columnDisplay, json.fieldType,
       json.displayType, json.hasOwnProperty('possibleValues') ? json.possibleValues : [], json.orderNumber,
       json.hasOwnProperty('actions') ? json.actions : [], json.readonly);
   }
