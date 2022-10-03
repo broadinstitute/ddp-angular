@@ -887,7 +887,7 @@ participant.data.dsm['diagnosisYear'] != null">
               <br/><br/><br/>
 
               <ng-container *ngIf="!canBeSequencedBasedOnLocation">
-                <b>Participant not located in US</b><br/>
+                <b>Error: Participant lives in New York or Canada and is not eligible for clinical sequencing</b><br/>
               </ng-container>
 
               <ng-container *ngIf="canBeSequencedBasedOnLocation && sequencingOrdersArray.length < 1">
