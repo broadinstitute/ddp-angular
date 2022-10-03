@@ -1,7 +1,7 @@
 import {
   Component,
   EventEmitter,
-  Input,
+  Input, OnInit,
   Output,
 } from '@angular/core';
 import { FieldSettings } from '../field-settings/field-settings.model';
@@ -12,7 +12,7 @@ import { Value } from '../utils/value.model';
   templateUrl: './form-data.component.html',
   styleUrls: ['./form-data.component.css']
 })
-export class FormDataComponent {
+export class FormDataComponent implements OnInit {
 
   @Input() fieldSetting: FieldSettings;
   @Input() participantData: any;
@@ -24,10 +24,15 @@ export class FormDataComponent {
   @Output() patchData = new EventEmitter();
   @Output() patchDataConditionalField = new EventEmitter();
 
+  public showOrNot = false;
   currentPatchField: string;
   CONDITIONAL_DISPLAY = 'conditionalDisplay';
 
   constructor() {}
+
+  ngOnInit() {
+    this.showConditional()
+  }
 
   public isConditionalDisplay(): boolean {
     if (this.fieldSetting?.actions) {
@@ -61,12 +66,11 @@ export class FormDataComponent {
     return false;
   }
 
-  showConditional(): boolean {
-    const conditionalAction = this.fieldSetting.actions.find(action => action.conditionalFieldSetting);
+  showConditional(): void {
+    const conditionalAction = this.fieldSetting.actions?.find(action => action.conditionalFieldSetting);
     if (conditionalAction) {
-      return String(this.participantData) === conditionalAction.condition;
+      this.showOrNot = String(this.participantData) === conditionalAction.condition;
     }
-    return false;
   }
 
   getOptions(): Value[] | string[] {
@@ -84,6 +88,7 @@ export class FormDataComponent {
   valueChanged(value: any): void {
     const v = this.createPatchValue(value);
     this.patchData.emit(v);
+    this.showConditional();
   }
 
   isPatchedCurrently(field: string): boolean {
