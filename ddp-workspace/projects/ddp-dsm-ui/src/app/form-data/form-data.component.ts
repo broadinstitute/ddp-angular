@@ -24,7 +24,10 @@ export class FormDataComponent implements OnInit {
   @Output() patchData = new EventEmitter();
   @Output() patchDataConditionalField = new EventEmitter();
 
+
   public showOrNot = false;
+  public showRadioOrNot = false;
+  radioButtonValue: string;
   currentPatchField: string;
   CONDITIONAL_DISPLAY = 'conditionalDisplay';
 
@@ -32,6 +35,7 @@ export class FormDataComponent implements OnInit {
 
   ngOnInit() {
     this.showConditional()
+    this.showConditionalRadio()
   }
 
   public isConditionalDisplay(): boolean {
@@ -89,6 +93,7 @@ export class FormDataComponent implements OnInit {
     const v = this.createPatchValue(value);
     this.patchData.emit(v);
     this.showConditional();
+    this.showConditionalRadio();
   }
 
   isPatchedCurrently(field: string): boolean {
@@ -104,6 +109,25 @@ export class FormDataComponent implements OnInit {
 
   public getConditionalFieldSetting(): FieldSettings {
     const conditionalAction = this.fieldSetting.actions.find(action => action.conditionalFieldSetting);
+    if (conditionalAction) {
+      return conditionalAction.conditionalFieldSetting;
+    }
+    return null;
+  }
+
+  showConditionalRadio(): void {
+    const conditionalAction = this.fieldSetting.actions?.filter(action => action.conditionalFieldSetting);
+    if (conditionalAction) {
+      conditionalAction.forEach(data => {
+        if(data.condition === String(this.participantData)) {
+          this.showRadioOrNot = true;
+        }
+      })
+    }
+  }
+
+  public getConditionalFieldSettingRadio(): FieldSettings {
+    const conditionalAction = this.fieldSetting.actions.find(action => action.condition === this.radioButtonValue);
     if (conditionalAction) {
       return conditionalAction.conditionalFieldSetting;
     }

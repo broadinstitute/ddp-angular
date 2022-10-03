@@ -90,7 +90,7 @@
         <ng-container *ngIf="fieldSetting.displayType === 'RADIO'
         || ((fieldSetting.displayType === 'ACTIVITY' || fieldSetting.displayType === 'ACTIVITY_STAFF') && fieldSetting.possibleValues != null && fieldSetting.possibleValues[0] != null && fieldSetting.possibleValues[0].type != null && fieldSetting.possibleValues[0].type === 'RADIO')">
           <mat-radio-group [disabled]="fieldSetting.displayType === 'ACTIVITY'"
-                          [value]="getActivityAnswer()" (change)="valueChanged($event)">
+                          [value]="getActivityAnswer()" [(ngModel)]="radioButtonValue" (change)="valueChanged($event)">
             <div *ngFor="let radio of getOptions()">
               <ng-container *ngIf="radio.name !== undefined">
                 <mat-radio-button color="primary" disableRipple
@@ -106,6 +106,14 @@
               </ng-container>
             </div>
           </mat-radio-group>
+          <div *ngIf="isConditionalDisplay() && showRadioOrNot && getConditionalFieldSettingRadio()">
+            <app-conditional-form-data [fieldSetting]="getConditionalFieldSettingRadio()"
+                                       [participantData]="conditionalData"
+                                       [activityData]="activityData"
+                                       [activityOptions]="activityOptions"
+                                       [checkBoxGroups]="checkBoxGroups"
+                                       (patchDataConditionalField)="conditionalValueChanged($event)"></app-conditional-form-data>
+          </div>
           <button (click)="clearRadioSelection()" color="primary" mat-raised-button>Clear Selection</button>
         </ng-container>
       </fieldset>
