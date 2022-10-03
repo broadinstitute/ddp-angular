@@ -1402,7 +1402,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   }
 
   formConditionalPatch(value: any, fieldSetting: FieldSettings, groupSetting: FieldSettings, dataId?: string): void {
-    if(fieldSetting?.actions) {
+    if (fieldSetting?.actions) {
       const actionWithConditionalDisplay = fieldSetting.actions.find(action => action.conditionalFieldSetting);
       if (actionWithConditionalDisplay){
         const newFieldSetting = actionWithConditionalDisplay.conditionalFieldSetting;
@@ -1443,7 +1443,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         let actionPatch: Value[] = null;
         if (fieldSetting.actions != null) {
           fieldSetting.actions.forEach((action) => {
-            if (action != null && action.name != null && action.type != null) {
+            if (action != null && action.name != null && action.type != null && action.type !== this.CONDITIONAL_DISPLAY) {
               participantDataSec = this.participant.participantData.find(pData => pData.fieldTypeId === action.type);
               if (participantDataSec == null) {
                 if (action.type !== 'ELASTIC_EXPORT.workflows' && action.type !== 'PARTICIPANT_EVENT') {
@@ -1505,6 +1505,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         });
       }
     }
+    console.log(fieldSetting);
   }
 
   createRelativeTabHeading(data: any): string {
