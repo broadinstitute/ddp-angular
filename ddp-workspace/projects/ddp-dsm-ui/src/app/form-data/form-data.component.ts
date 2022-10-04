@@ -76,17 +76,21 @@ export class FormDataComponent implements OnInit, OnChanges {
     // console.log(this.fieldSetting, 'field setting')
     // console.log(this.fieldSetting?.actions, 'isConditionalDisplay')
     if (this.fieldSetting?.actions) {
+      console.log(this.fieldSetting.actions.every(data => data.type === this.CONDITIONAL_DISPLAY), 'FIRST')
       return this.fieldSetting.actions.every(data => data.type === this.CONDITIONAL_DISPLAY);
     }
     return false;
   }
 
+  public checkedRadioBtn: string
 
   getActivityAnswer(): string {
+
     if (this.fieldSetting.displayType !== 'ACTIVITY')  {
       // get data from dsm db if it is not type activity
       if (this.fieldSetting.displayType !== 'ACTIVITY_STAFF') {
         // return savedAnswer if it is not type activity_staff
+        this.checkedRadioBtn = this.participantData.toString();
         return this.participantData ? this.participantData.toString() : this.participantData;
       } else {
         // if it is type activity_staff only return if it is not empty, otherwise return answer from the activity
@@ -180,16 +184,19 @@ export class FormDataComponent implements OnInit, OnChanges {
     const conditionalAction = this.fieldSetting.actions?.filter(action => action.conditionalFieldSetting);
     if (conditionalAction) {
       conditionalAction.forEach(data => {
+        console.log(data.condition, String(this.participantData) , 'SECOND')
         if(data.condition === String(this.participantData)) {
+
           this.showRadioOrNot = true;
         }
       })
     }
   }
 
-  public getConditionalFieldSettingRadio(): FieldSettings {
+  public getConditionalFieldSettingRadio(value?: string): FieldSettings {
     // console.log(this.checkedRadioBtnValue, 'get conditional field setting radio')
-    const conditionalAction = this.fieldSetting.actions.find(action => action.condition === this.checkedRadioBtnValue);
+    const conditionalAction = this.fieldSetting.actions.find(action => action.condition === (this.checkedRadioBtnValue || value));
+    // console.log(conditionalAction.conditionalFieldSetting, 'THIRD')
     if (conditionalAction) {
       return conditionalAction.conditionalFieldSetting;
     }

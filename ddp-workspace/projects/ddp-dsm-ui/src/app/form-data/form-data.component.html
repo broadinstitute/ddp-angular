@@ -92,7 +92,7 @@
           <mat-radio-group [disabled]="fieldSetting.displayType === 'ACTIVITY'"
                           [value]="getActivityAnswer()">
             <div *ngFor="let radio of getOptions()" >
-                <ng-container  *ddpRadioBtn="radio; FieldSetting fieldSetting; CurrentValue checkedRadioBtnValue; TextArea textAreaTemplate; let name = name; let value = value">
+                <ng-container  *ddpRadioBtn="radio; CheckedRadioBtn checkedRadioBtn; FieldSetting fieldSetting; CurrentValue checkedRadioBtnValue; TextArea textAreaTemplate; let name = name; let value = value">
                   <mat-radio-button  (change)="onRadioChange($event)" color="primary" disableRipple
                                      value="{{value}}">{{name}}</mat-radio-button>
                 </ng-container>
@@ -108,7 +108,7 @@
 <!--          </div>-->
 
           <ng-template #textAreaTemplate let-settings="settings">
-            <ng-container *ngIf="isConditionalDisplayRadio() && showRadioOrNot && getConditionalFieldSettingRadio()">
+            <ng-container *ngIf="isConditionalDisplayRadio() && showRadioOrNot && getConditionalFieldSettingRadio(settings.columnName)">
              <textarea maxlength="50000" placeholder="{{settings.columnDisplay}}"
                        rows="10"
                        [ngClass]="{'Width--100': true, 'Color--Field--Patched': isPatchedCurrently(fieldSetting.columnName)}"
