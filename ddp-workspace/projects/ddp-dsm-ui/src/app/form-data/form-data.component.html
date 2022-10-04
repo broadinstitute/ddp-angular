@@ -7,11 +7,11 @@
 
     <div *ngIf="isConditionalDisplay() && showOrNot && getConditionalFieldSetting()">
       <app-conditional-form-data [fieldSetting]="getConditionalFieldSetting()"
-                                 [participantData]="conditionalData"
+                                 [participantData]="getCheckbox"
                                  [activityData]="activityData"
                                  [activityOptions]="activityOptions"
                                  [checkBoxGroups]="checkBoxGroups"
-                                 (patchDataConditionalField)="conditionalValueChanged($event)"></app-conditional-form-data>
+                                 (patchDataConditionalField)="conditionalValueChanged($event, fieldSetting.actions[0].conditionalFieldSetting.columnName)"></app-conditional-form-data>
     </div>
 
 </div>
@@ -90,30 +90,33 @@
         <ng-container *ngIf="fieldSetting.displayType === 'RADIO'
         || ((fieldSetting.displayType === 'ACTIVITY' || fieldSetting.displayType === 'ACTIVITY_STAFF') && fieldSetting.possibleValues != null && fieldSetting.possibleValues[0] != null && fieldSetting.possibleValues[0].type != null && fieldSetting.possibleValues[0].type === 'RADIO')">
           <mat-radio-group [disabled]="fieldSetting.displayType === 'ACTIVITY'"
-                          [value]="getActivityAnswer()" [(ngModel)]="radioButtonValue" (change)="valueChanged($event)">
-            <div *ngFor="let radio of getOptions()">
-              <ng-container *ngIf="radio.name !== undefined">
-                <mat-radio-button color="primary" disableRipple
-                                value="{{radio.value}}">{{radio.name}}</mat-radio-button>
-              </ng-container>
-              <ng-container *ngIf="radio.name === undefined && radio.value !== undefined">
-                <mat-radio-button color="primary" disableRipple
-                                value="{{radio.value}}">{{radio.value}}</mat-radio-button>
-              </ng-container>
-              <ng-container *ngIf="radio.name === undefined && radio.value === undefined">
-                <mat-radio-button color="primary" disableRipple
-                                value="{{radio}}">{{radio}}</mat-radio-button>
-              </ng-container>
+                          [value]="getActivityAnswer()">
+            <div *ngFor="let radio of getOptions()" >
+                <ng-container  *ddpRadioBtn="radio; FieldSetting fieldSetting; CurrentValue checkedRadioBtnValue; TextArea textAreaTemplate; let name = name; let value = value">
+                  <mat-radio-button  (change)="onRadioChange($event)" color="primary" disableRipple
+                                     value="{{value}}">{{name}}</mat-radio-button>
+                </ng-container>
             </div>
           </mat-radio-group>
-          <div *ngIf="isConditionalDisplay() && showRadioOrNot && getConditionalFieldSettingRadio()">
-            <app-conditional-form-data [fieldSetting]="getConditionalFieldSettingRadio()"
-                                       [participantData]="conditionalData"
-                                       [activityData]="activityData"
-                                       [activityOptions]="activityOptions"
-                                       [checkBoxGroups]="checkBoxGroups"
-                                       (patchDataConditionalField)="conditionalValueChanged($event)"></app-conditional-form-data>
-          </div>
+<!--          <div  *ngIf="isConditionalDisplay() && showRadioOrNot && getConditionalFieldSettingRadio()">-->
+<!--            <app-conditional-form-data [fieldSetting]="getConditionalFieldSettingRadio()"-->
+<!--                                       [participantData]="conditionalData"-->
+<!--                                       [activityData]="activityData"-->
+<!--                                       [activityOptions]="activityOptions"-->
+<!--                                       [checkBoxGroups]="checkBoxGroups"-->
+<!--                                       (patchDataConditionalField)="conditionalValueChanged($event)"></app-conditional-form-data>-->
+<!--          </div>-->
+
+          <ng-template #textAreaTemplate let-settings="settings">
+            <ng-container *ngIf="isConditionalDisplayRadio() && showRadioOrNot && getConditionalFieldSettingRadio()">
+             <textarea maxlength="50000" placeholder="{{settings.columnDisplay}}"
+                       rows="10"
+                       [ngClass]="{'Width--100': true, 'Color--Field--Patched': isPatchedCurrently(fieldSetting.columnName)}"
+                       [value]="getRadio(settings.columnName)"
+                       (change)="conditionalValueChanged($event)"></textarea>
+            </ng-container>
+          </ng-template>
+
           <button (click)="clearRadioSelection()" color="primary" mat-raised-button>Clear Selection</button>
         </ng-container>
       </fieldset>

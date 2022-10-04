@@ -124,6 +124,7 @@ import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
 import {CardComponent} from '../dashboard-statistics/components/card.component';
 import {DragAndDropDirective} from '../dashboard-statistics/directives/dragAndDrop/dragAndDrop.directive';
+import {RadioButtonDirective} from "../form-data/directives/radio-button.directive";
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -216,7 +217,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     CardComponent,
     DragAndDropDirective,
     DashboardStatisticsComponent,
-    ConditionalFormDataComponent
+    ConditionalFormDataComponent,
+    RadioButtonDirective
   ],
   imports: [
     CommonModule,

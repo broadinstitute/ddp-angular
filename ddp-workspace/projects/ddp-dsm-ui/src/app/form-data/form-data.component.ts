@@ -1,18 +1,24 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Input, OnInit,
+  Input,
+  OnChanges,
+  OnInit,
   Output,
+  SimpleChanges,
 } from '@angular/core';
-import { FieldSettings } from '../field-settings/field-settings.model';
-import { Value } from '../utils/value.model';
+import {FieldSettings} from '../field-settings/field-settings.model';
+import {Value} from '../utils/value.model';
+import {MatRadioChange} from "@angular/material/radio";
 
 @Component({
   selector: 'app-form-data',
   templateUrl: './form-data.component.html',
-  styleUrls: ['./form-data.component.css']
+  styleUrls: ['./form-data.component.css'],
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormDataComponent implements OnInit {
+export class FormDataComponent implements OnInit, OnChanges {
 
   @Input() fieldSetting: FieldSettings;
   @Input() participantData: any;
@@ -27,21 +33,50 @@ export class FormDataComponent implements OnInit {
 
   public showOrNot = false;
   public showRadioOrNot = false;
-  radioButtonValue: string;
+  public checkedRadioBtnValue: string;
   currentPatchField: string;
   CONDITIONAL_DISPLAY = 'conditionalDisplay';
 
   constructor() {}
 
+  ngOnChanges(changes: SimpleChanges) {
+    // console.log(changes, 'ng on changes')
+  }
+
+
+  get getCheckbox() {
+    // console.log(this.conditionalData, 'CHECKBOX DATA')
+    const foundData = this.conditionalData[0]?.[this.fieldSetting.actions[0]?.conditionalFieldSetting?.columnName];
+    return foundData || "";
+  }
+
+  getRadio(type: string) {
+    // console.log(type, 'RADIO TYPE')
+    // console.log(this.conditionalData, 'RADIO DATA')
+    const foundData = this.conditionalData?.find(data => data[type])?.[type];
+    return foundData || "";
+  }
+
   ngOnInit() {
     this.showConditional()
     this.showConditionalRadio()
+    // console.log(this.participantData, '[INIT] participant data')
+    // console.log(this.getOptions())
   }
 
   public isConditionalDisplay(): boolean {
     if (this.fieldSetting?.actions) {
       const [obj] = this.fieldSetting.actions;
       return obj.type === this.CONDITIONAL_DISPLAY;
+    }
+    return false;
+  }
+
+  public isConditionalDisplayRadio() {
+    // console.log(this.fieldSetting, 'field setting')
+    // console.log(this.fieldSetting?.actions, 'isConditionalDisplay')
+    if (this.fieldSetting?.actions) {
+      return this.fieldSetting.actions.every(data => data.type === this.CONDITIONAL_DISPLAY);
     }
     return false;
   }
@@ -78,6 +113,8 @@ export class FormDataComponent implements OnInit {
   }
 
   getOptions(): Value[] | string[] {
+    // console.log(this.fieldSetting.possibleValues, 'POSSIBLE VALUES')
+    // console.log(this.activityOptions, 'ACTIVITY OPTIONS')
     if (this.fieldSetting.displayType !== 'ACTIVITY' && this.fieldSetting.displayType !== 'ACTIVITY_STAFF') {
       return this.fieldSetting.possibleValues;
     } else {
@@ -90,10 +127,33 @@ export class FormDataComponent implements OnInit {
   }
 
   valueChanged(value: any): void {
+    console.log(value, 'valueChanged')
     const v = this.createPatchValue(value);
+    console.log(v, 'valueChanged emit')
+
     this.patchData.emit(v);
     this.showConditional();
     this.showConditionalRadio();
+  }
+
+  onRadioChange(radioBtn: MatRadioChange) {
+    console.log(radioBtn, 'radio change')
+    this.checkedRadioBtnValue = radioBtn.value;
+    this.patchData.emit(radioBtn.value);
+    this.showConditionalRadio();
+  }
+
+  conditionalValueChanged(value: any, key?): void {
+    console.log(value, 'conditionalValueChanged')
+    const v = this.createPatchValue(value);
+    console.log(v, 'conditionalValueChanged emit')
+    console.log(this.checkedRadioBtnValue, 'checkedRadioBtnValue')
+
+    if(key) {
+      this.patchDataConditionalField.emit({key: key, value: v, checkbox: true});
+    } else {
+      this.patchDataConditionalField.emit({key: this.checkedRadioBtnValue, value: v, checkbox: false});
+    }
   }
 
   isPatchedCurrently(field: string): boolean {
@@ -116,6 +176,7 @@ export class FormDataComponent implements OnInit {
   }
 
   showConditionalRadio(): void {
+    // console.log(this.participantData, 'participant data')
     const conditionalAction = this.fieldSetting.actions?.filter(action => action.conditionalFieldSetting);
     if (conditionalAction) {
       conditionalAction.forEach(data => {
@@ -127,16 +188,12 @@ export class FormDataComponent implements OnInit {
   }
 
   public getConditionalFieldSettingRadio(): FieldSettings {
-    const conditionalAction = this.fieldSetting.actions.find(action => action.condition === this.radioButtonValue);
+    // console.log(this.checkedRadioBtnValue, 'get conditional field setting radio')
+    const conditionalAction = this.fieldSetting.actions.find(action => action.condition === this.checkedRadioBtnValue);
     if (conditionalAction) {
       return conditionalAction.conditionalFieldSetting;
     }
     return null;
-  }
-
-  conditionalValueChanged(value: any): void {
-    const v = this.createPatchValue(value);
-    this.patchDataConditionalField.emit(v);
   }
 
   createPatchValue(value: any): any {
@@ -146,7 +203,7 @@ export class FormDataComponent implements OnInit {
       v = value;
     } else {
       if (value.srcElement != null && typeof value.srcElement.value === 'string') {
-        if(this.isConditionalDisplay)  {
+        if(this.isConditionalDisplay())  {
           v = value.srcElement.value || false;
         } else {
           v = value.srcElement.value;

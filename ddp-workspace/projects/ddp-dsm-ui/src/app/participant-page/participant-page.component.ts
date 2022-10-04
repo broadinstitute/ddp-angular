@@ -1315,20 +1315,43 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     return '';
   }
 
-  getConditionalParticipantForDynamicField(fieldSetting: FieldSettings): string {
-      const conditionalFieldSetting: FieldSettings = this.getConditionalFieldSetting(fieldSetting);
-      if (conditionalFieldSetting) {
-        return this.getParticipantForDynamicField(conditionalFieldSetting);
-      }
-    return '';
+  getParticipantForDynamicField2(fieldSettings: any[]): any[] {
+    const answers = [];
+    if (this.participant && this.participant.participantData) {
+      fieldSettings?.forEach(data => {
+        const conditionalFieldSetting = data['conditionalFieldSetting'];
+        const participantDataFound = this.participant.participantData
+          .find(participantData => participantData.data
+            && participantData.data[conditionalFieldSetting.columnName] != null);
+        if (participantDataFound) {
+          const colName = conditionalFieldSetting.columnName
+          const tempObj = {}
+          tempObj[colName] = participantDataFound.data[colName]
+          answers.push(tempObj)
+        }
+      })
+    }
+    // console.log(this.participant.participantData, 'PARTICIPANT DATA')
+    // console.log(answers, 'ANSWERS FIRST')
+    return answers;
   }
 
-  getConditionalFieldSetting(fieldSetting: FieldSettings): FieldSettings {
+  getConditionalParticipantForDynamicField(fieldSetting: FieldSettings): any[] {
+      const conditionalFieldSetting: [] = this.getConditionalFieldSetting(fieldSetting);
+      // console.log(conditionalFieldSetting, 'conditionalFieldSetting')
+    if (conditionalFieldSetting?.length > 0) {
+      // console.log(this.getParticipantForDynamicField2(conditionalFieldSetting), 'END ANSWER')
+        return this.getParticipantForDynamicField2(conditionalFieldSetting)
+    }
+    return [];
+  }
+
+  getConditionalFieldSetting(fieldSetting: FieldSettings): any {
     if (fieldSetting.actions) {
-      const actionWithConditionalDisplay = fieldSetting.actions.find(action => action.type === this.CONDITIONAL_DISPLAY);
+      const actionWithConditionalDisplay = fieldSetting.actions.filter(action => action.type === this.CONDITIONAL_DISPLAY);
+      // console.log(actionWithConditionalDisplay, '2 part')
       if (actionWithConditionalDisplay) {
-        const conditionalFieldSetting = actionWithConditionalDisplay.conditionalFieldSetting;
-        return conditionalFieldSetting;
+        return actionWithConditionalDisplay
       }
     }
 
@@ -1403,10 +1426,21 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   formConditionalPatch(value: any, fieldSetting: FieldSettings, groupSetting: FieldSettings, dataId?: string): void {
     if (fieldSetting?.actions) {
-      const actionWithConditionalDisplay = fieldSetting.actions.find(action => action.conditionalFieldSetting);
+      console.log(fieldSetting, 'FIELD SETTING')
+      console.log(value, 'VALUE')
+
+      let actionWithConditionalDisplay;
+
+      if(value.checkbox) {
+        actionWithConditionalDisplay = fieldSetting.actions.find(action => action.conditionalFieldSetting.columnName === value.key);
+      } else {
+        actionWithConditionalDisplay = fieldSetting.actions.find(action => action.condition === value.key);
+      }
+
       if (actionWithConditionalDisplay){
         const newFieldSetting = actionWithConditionalDisplay.conditionalFieldSetting;
-        this.formPatch(value, newFieldSetting, groupSetting, dataId);
+        console.log(value.value, newFieldSetting, groupSetting, dataId, 'value; newFieldSetting; groupSetting, dataId')
+        this.formPatch(value.value, newFieldSetting, groupSetting, dataId);
       }
     }
   }
@@ -1505,7 +1539,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         });
       }
     }
-    console.log(fieldSetting);
   }
 
   createRelativeTabHeading(data: any): string {
