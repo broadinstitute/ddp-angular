@@ -23,6 +23,21 @@ describe('Singular utils helpers', () => {
     ]);
   });
 
+  it('getRenderActivities: should return render activities for an aged up case', () => {
+    const activities = [
+      {activityCode: ActivityCode.ConsentParental},
+      {activityCode: ActivityCode.ConsentSelf}
+    ] as ActivityInstance[];
+
+    expect(getRenderActivities(null, activities)).toEqual([
+      {i18nKey: 'Consent'},
+      {i18nKey: 'AboutMe'},
+      {i18nKey: 'MedicalReleaseForm'},
+      {i18nKey: 'MedicalRecordUpload'},
+      {i18nKey: 'PatientSurvey'}
+    ]);
+  });
+
   it('getRenderActivities: should return render activities for an adult', () => {
     const activities = [
       {activityCode: ActivityCode.ConsentSelf},
