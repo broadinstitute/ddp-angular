@@ -113,7 +113,7 @@
                        rows="10"
                        [ngClass]="{'Width--100': true, 'Color--Field--Patched': isPatchedCurrently(fieldSetting.columnName)}"
                        [value]="getRadio(settings.columnName)"
-                       (change)="conditionalValueChanged($event)"></textarea>
+                       (change)="conditionalValueChanged($event.target)"></textarea>
             </ng-container>
           </ng-template>
 

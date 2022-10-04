@@ -74,7 +74,6 @@ export class FormDataComponent implements OnInit {
       if (this.fieldSetting.displayType !== 'ACTIVITY_STAFF') {
         // return savedAnswer if it is not type activity_staff
         this.checkedRadioBtn = this.participantData.toString();
-        // console.log(this.participantData.toString(), 'CHECKING')
         return this.participantData ? this.participantData.toString() : this.participantData;
       } else {
         // if it is type activity_staff only return if it is not empty, otherwise return answer from the activity
@@ -126,12 +125,14 @@ export class FormDataComponent implements OnInit {
     this.showConditionalRadio();
   }
 
-  conditionalValueChanged(value: any, key?): void {
-    const v = this.createPatchValue(value);
+  conditionalValueChanged(htmlTextAreaElement: EventTarget, key?): void {
+    let v;
     if(key) {
+      v = this.createPatchValue(htmlTextAreaElement);
       this.patchDataConditionalField.emit({key: key, value: v, checkbox: true});
     } else {
-      this.patchDataConditionalField.emit({key: this.checkedRadioBtnValue, value: v, checkbox: false});
+      v = (htmlTextAreaElement as HTMLTextAreaElement).value;
+      this.patchDataConditionalField.emit({key: this.checkedRadioBtnValue || this.getActivityAnswer(), value: v, checkbox: false});
     }
   }
 
