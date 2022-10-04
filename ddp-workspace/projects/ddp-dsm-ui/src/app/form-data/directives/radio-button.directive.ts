@@ -29,7 +29,6 @@ export class RadioButtonDirective implements OnInit {
   private checkedRadioBtn: string;
 
   @Input('ddpRadioBtn') set setValue(radio: any) {
-    // console.log(radio, 'value')
     this.belongingValue = radio.value;
     this.setContextValues(radio);
   }
@@ -43,16 +42,10 @@ export class RadioButtonDirective implements OnInit {
   }
 
   @Input('ddpRadioBtnCurrentValue') set currentValue(value: string) {
-    // console.log(value, 'active value')
     this.activeValue = value;
-
-    // console.log(this.textAreaRef, 'text are ref')
-
     if(this.activeValue === "OTHER_HYPOPLASTIC" && this.activeValue === this.belongingValue) {
-      // console.log(this.embeddedViewRef)
       this.createEmbeddedView("OTHER_HYPOPLASTIC");
     } else if(this.activeValue === "OTHER" && this.activeValue === this.belongingValue) {
-      // console.log(this.embeddedViewRef)
       this.createEmbeddedView("OTHER");
     }
     else {
@@ -71,7 +64,6 @@ export class RadioButtonDirective implements OnInit {
     if(this.checkedRadioBtn === this.belongingValue
       && (this.checkedRadioBtn === "OTHER_HYPOPLASTIC" ||
         this.checkedRadioBtn === "OTHER")) {
-      console.log(this.checkedRadioBtn, 'CHECKED')
       this.createEmbeddedView(this.checkedRadioBtn);
     }
   }
@@ -81,17 +73,12 @@ export class RadioButtonDirective implements OnInit {
       this.embeddedViewRef.destroy();
       this.embeddedViewRef = null;
     } else {
-      console.log('CAME HERE')
-
       this.conditionalFieldSettings.settings = this.fieldSettings.actions.find(data => data.condition === value).conditionalFieldSetting;
-      console.log(this.conditionalFieldSettings.settings, 'settings')
       this.embeddedViewRef = this.viewContainerRef.createEmbeddedView(this.textAreaRef, this.conditionalFieldSettings);
-      // console.log(this.embeddedViewRef, 'embeded view')
     }
   }
 
   private setContextValues(radio: any) {
-    // console.log(radio, 'radio')
     this.btnContext.name = radio?.name || radio?.value || radio;
     this.btnContext.value = radio?.value || radio;
   }

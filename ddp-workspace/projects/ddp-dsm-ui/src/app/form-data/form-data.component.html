@@ -108,7 +108,7 @@
 <!--          </div>-->
 
           <ng-template #textAreaTemplate let-settings="settings">
-            <ng-container *ngIf="isConditionalDisplayRadio() && showRadioOrNot && getConditionalFieldSettingRadio(settings.columnName)">
+            <ng-container *ngIf="isConditionalDisplayRadio() && showConditionalRadio() && getConditionalFieldSettingRadio(settings.columnName)">
              <textarea maxlength="50000" placeholder="{{settings.columnDisplay}}"
                        rows="10"
                        [ngClass]="{'Width--100': true, 'Color--Field--Patched': isPatchedCurrently(fieldSetting.columnName)}"

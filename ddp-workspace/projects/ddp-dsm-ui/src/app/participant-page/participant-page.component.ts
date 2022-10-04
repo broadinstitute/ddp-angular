@@ -776,7 +776,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
     this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
       next: () => {
-        // console.info( `response saving data: ${JSON.stringify( data, null, 2 )}` );
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
@@ -1331,16 +1330,12 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         }
       })
     }
-    // console.log(this.participant.participantData, 'PARTICIPANT DATA')
-    // console.log(answers, 'ANSWERS FIRST')
     return answers;
   }
 
   getConditionalParticipantForDynamicField(fieldSetting: FieldSettings): any[] {
       const conditionalFieldSetting: [] = this.getConditionalFieldSetting(fieldSetting);
-      // console.log(conditionalFieldSetting, 'conditionalFieldSetting')
     if (conditionalFieldSetting?.length > 0) {
-      // console.log(this.getParticipantForDynamicField2(conditionalFieldSetting), 'END ANSWER')
         return this.getParticipantForDynamicField2(conditionalFieldSetting)
     }
     return [];
@@ -1349,7 +1344,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   getConditionalFieldSetting(fieldSetting: FieldSettings): any {
     if (fieldSetting.actions) {
       const actionWithConditionalDisplay = fieldSetting.actions.filter(action => action.type === this.CONDITIONAL_DISPLAY);
-      // console.log(actionWithConditionalDisplay, '2 part')
       if (actionWithConditionalDisplay) {
         return actionWithConditionalDisplay
       }
@@ -1426,8 +1420,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   formConditionalPatch(value: any, fieldSetting: FieldSettings, groupSetting: FieldSettings, dataId?: string): void {
     if (fieldSetting?.actions) {
-      console.log(fieldSetting, 'FIELD SETTING')
-      console.log(value, 'VALUE')
 
       let actionWithConditionalDisplay;
 
@@ -1439,7 +1431,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
       if (actionWithConditionalDisplay){
         const newFieldSetting = actionWithConditionalDisplay.conditionalFieldSetting;
-        console.log(value.value, newFieldSetting, groupSetting, dataId, 'value; newFieldSetting; groupSetting, dataId')
         this.formPatch(value.value, newFieldSetting, groupSetting, dataId);
       }
     }
