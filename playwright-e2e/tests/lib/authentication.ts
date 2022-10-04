@@ -40,10 +40,10 @@ export async function fillEmailPassword(
 
 export async function login(
   page: Page,
-  opts: { email: string | undefined; password: string | undefined }
+  opts: { email: string | undefined; password: string | undefined; waitForNavigation?: boolean }
 ): Promise<void> {
   // If parameter expectErr == true, login is expected to fail.
-  const { email, password } = opts;
+  const { email, password, waitForNavigation } = opts;
   await clickLogin(page);
-  await fillEmailPassword(page, { email, password, waitForNavigation: true });
+  await fillEmailPassword(page, { email, password, waitForNavigation });
 }

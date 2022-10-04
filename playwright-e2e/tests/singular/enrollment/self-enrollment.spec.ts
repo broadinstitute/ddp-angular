@@ -22,7 +22,7 @@ test.describe('Adult Self Enrollment', () => {
   /**
    * Test case: https://docs.google.com/document/d/1Ewsh4ULh5LVdZiUapvG-PyI2kL3XzVf4seeLq8Mt-B0/edit?usp=sharing
    */
-  test('can finish enrollment', async ({ page }) => {
+  test('can finish @enrollment', async ({ page }) => {
     // Assertion helper functions
     const assertActivityHeader = async (page: Page, expectedText: string) => {
       await expect(page.locator('h1.activity-header')).toHaveText(expectedText);

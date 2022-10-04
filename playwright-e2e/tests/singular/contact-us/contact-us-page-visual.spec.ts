@@ -12,7 +12,7 @@ test.describe('Home page', () => {
     await goToAboutUs(page);
   });
 
-  test('Our teams', async ({ page }) => {
+  test('Our teams @visual', async ({ page }) => {
     const headerText = page.locator('.our-team h1');
 
     expect(await headerText.screenshot()).toMatchSnapshot('our-team-text.png');
@@ -21,7 +21,7 @@ test.describe('Home page', () => {
     );
   });
 
-  test('Our scientific advisors', async ({ page }) => {
+  test('Our scientific advisors @visual', async ({ page }) => {
     const headerText = page.locator('.advisors h1');
     const cards = page.locator('.advisors .cards');
 
