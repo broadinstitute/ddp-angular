@@ -9,8 +9,8 @@
     "build": "npx tsc --build",
     "format": "prettier --config .prettierrc.js --write --ignore-unknown \"**/*.{ts,js}\"",
     "test:e2e:singular": "npx playwright test --config=tests/singular/playwright.config.ts --grep-invert \"/nightly/|/examples/\"",
-    "test:e2e:ci:singular:all": "npx playwright test --config=singular/playwright-ci.config.ts --grep-invert \"nightly/|examples/\"",
-    "test:e2e:ci:singuarl:nightly": "npx playwright test --config=singular/playwright-ci.config.ts --grep \"nightly/\"",
+    "test:e2e:ci:singular:all": "npx playwright test --config=tests/singular/playwright-ci.config.ts --grep-invert \"nightly/|examples/\"",
+    "test:e2e:ci:singuarl:nightly": "npx playwright test --config=tests/singular/playwright-ci.config.ts --grep \"nightly/\"",
     "lint:singular": "eslint \"tests/singular\" --ext .js,.ts"
   },
   "devDependencies": {

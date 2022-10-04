@@ -1,63 +1,72 @@
 import { Locator, Page } from '@playwright/test';
+import Question from 'tests/lib/widget/Question';
+import Card from 'tests/lib/widget/card';
+import Input from 'tests/lib/widget/input';
 
 export default class AboutMePage {
   private readonly page: Page;
-  private readonly firstNameInput: Locator;
-  private readonly lastNameInput: Locator;
-  private readonly fullName: Locator;
-  private readonly streetAddress: Locator;
-  private readonly city: Locator;
-  private readonly state: Locator;
-  private readonly country: Locator;
-  private readonly zipCode: Locator;
-  private readonly telephone: Locator;
-  private readonly nextButton: Locator;
+  readonly next: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    this.firstNameInput = page.locator('input[data-placeholder="First Name"]');
-    this.lastNameInput = page.locator('input[data-placeholder="Last Name"]');
-    this.fullName = page.locator('input[data-placeholder="Full Name"]');
-    this.streetAddress = page.locator('input[data-placeholder="Street Address"]');
-    this.city = page.locator('input[data-placeholder="City"]');
-    this.state = page.locator('mat-select[role="combobox"][formcontrolname="state"]');
-    this.country = page.locator('mat-select[role="combobox"][formcontrolname="country"]');
-    this.zipCode = page.locator('input[data-placeholder="Zip Code or Postal Code"]');
-    this.telephone = page.locator('input[data-placeholder="Telephone Contact Number"]');
-    this.nextButton = page.locator('button', { hasText: 'Next' });
+    this.next = page.locator('button', { hasText: 'Next' });
   }
 
-  async selectCountry(country = 'UNITED STATES'): Promise<void> {
-    await this.country.click();
+  async waitForReady() {
+    // Add additional checks to wait for page is ready
+    await this.fullName().locator.waitFor({ state: 'visible', timeout: 60 * 1000 });
+  }
+
+  firstName(): Question {
+    return new Question(this.page, 'Your Last Name');
+  }
+
+  lastName(): Question {
+    return new Question(this.page, 'Your Last Name');
+  }
+
+  fullName(): Input {
+    return new Input(this.page, 'Full Name');
+  }
+
+  private countrySelect(): Locator {
+    return this.page.locator('mat-form-field mat-select', { hasText: `Country` });
+  }
+
+  async country(country = 'UNITED STATES'): Promise<void> {
+    await this.countrySelect().click();
     await this.page.locator(`.mat-option-text >> text=${country}`).first().click();
   }
 
-  async selectState(state = 'MASSACHUSETTS'): Promise<void> {
-    await this.state.click();
+  private stateSelect(): Locator {
+    return this.page.locator('mat-form-field mat-select', { hasText: new RegExp('^State') });
+  }
+
+  async state(state = 'MASSACHUSETTS'): Promise<void> {
+    await this.stateSelect().click();
     await this.page.locator(`.mat-option-text >> text=${state}`).click();
   }
 
-  async fillFullName(name: string): Promise<void> {
-    await this.fullName.fill(name);
+  street(): Input {
+    return new Input(this.page, 'Street Address');
   }
 
-  async fillStreetAddress(address = '415 Main Street'): Promise<void> {
-    await this.streetAddress.fill(address);
+  city(): Input {
+    return new Input(this.page, 'City');
   }
 
-  async fillCity(city = 'Cambridge'): Promise<void> {
-    await this.city.fill(city);
+  zipCode(): Input {
+    return new Input(this.page, 'Zip Code');
   }
 
-  async fillZipCode(zip = '02142'): Promise<void> {
-    await this.zipCode.fill(zip);
+  telephone(): Input {
+    return new Input(this.page, 'Telephone');
   }
 
-  async fillTelephoneNumber(tele = '1112223333'): Promise<void> {
-    await this.telephone.fill(tele);
-  }
-
-  async clickNextButton(): Promise<void> {
-    await this.nextButton.click();
+  pickSuggestedAddressEntry(label: string): Locator {
+    return new Card(
+      this.page,
+      'We have checked your address entry and have suggested changes that could help ensure delivery'
+    ).radioButton(label);
   }
 }

@@ -1,30 +1,35 @@
-import {ElementHandle, Locator, Page} from '@playwright/test';
+import {ElementHandle, expect, Locator, Page} from '@playwright/test';
 import _ from 'lodash';
 
 export default class Table {
-  private readonly table: string;
   private readonly page: Page;
-  private readonly header: string;
-  private readonly row: string;
+  private readonly tableCssSelector: string;
+  private readonly headerCssSelector: string;
+  private readonly rowCssSelector: string;
 
-  constructor(page: Page, opts: { cssSelector?: string } = {}) {
-    const { cssSelector } = opts;
+  constructor(page: Page, opts: { classAttribute?: string } = {}) {
+    const { classAttribute } = opts;
     this.page = page;
-    this.table = cssSelector ? cssSelector : 'table';
-    this.header = `${this.table} thead [role="columnheader"]`;
-    this.row = `${this.table} tbody [role="row"]`;
+    this.tableCssSelector = classAttribute ? `table${classAttribute}` : 'table';
+    this.headerCssSelector = `${this.tableCssSelector} thead [role="columnheader"]`;
+    this.rowCssSelector = `${this.tableCssSelector} tbody [role="row"]`;
+  }
+
+  async waitForReady() {
+    await expect(this.page.locator(this.tableCssSelector)).toBeVisible();
+    // Add additional checks here
   }
 
   async getAllColumns(): Promise<Array<ElementHandle>> {
-    return await this.page.locator(this.header).elementHandles();
+    return await this.page.locator(this.headerCssSelector).elementHandles();
   }
 
   async getAllRows(): Promise<Array<ElementHandle>> {
-    return await this.page.locator(this.row).elementHandles();
+    return await this.page.locator(this.rowCssSelector).elementHandles();
   }
 
   getCellLocator(rowIndex: number, columnIndex: number): Locator {
-    return this.page.locator(`${this.row}:nth-child(${rowIndex})  [role="cell"]:nth-child(${columnIndex})`);
+    return this.page.locator(`${this.rowCssSelector}:nth-child(${rowIndex})  [role="cell"]:nth-child(${columnIndex})`);
   }
 
   /**

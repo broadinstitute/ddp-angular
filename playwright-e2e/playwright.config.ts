@@ -15,14 +15,14 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
 const testConfig: PlaywrightTestConfig = {
   testDir: './tests',
   /* Maximum time one test can run for. */
-  timeout: 60 * 1000,
+  timeout: 120 * 1000,
   /* For expect() calls */
   expect: {
     /**
      * Maximum time expect() should wait for the condition to be met.
      * For example in `await expect(locator).toHaveText();`
      */
-    timeout: 10 * 1000,
+    timeout: 30 * 1000,
     toMatchSnapshot: {
       // Account for minor difference in text rendering and resolution between headless and headed mode
       threshold: 0.3,
@@ -56,7 +56,7 @@ const testConfig: PlaywrightTestConfig = {
   use: {
     headless: true,
     /* Maximum time each (browser) action such as `click()` can take. Defaults to 0 (no limit). */
-    actionTimeout: 5 * 1000,
+    actionTimeout: 10 * 1000,
     navigationTimeout: 30 * 1000,
 
     /* Base URL to use in actions like `await page.goto('/')`. */

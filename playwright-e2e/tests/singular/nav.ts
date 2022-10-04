@@ -1,4 +1,4 @@
-import { Locator, Page, Response } from '@playwright/test';
+import { Page, Response } from '@playwright/test';
 // import dotenv from 'dotenv';
 // dotenv.config();
 
@@ -39,51 +39,5 @@ export async function clickSignMeUp(page: Page): Promise<void> {
 }
 
 export async function clickLogin(page: Page): Promise<void> {
-  const loginLocator: Locator = page.locator(NavSelectors.Login);
-
-  await loginLocator.click();
-}
-
-export async function enterEmailPassword(
-  page: Page,
-  email: string | undefined,
-  password: string | undefined
-): Promise<void> {
-  const emailInput = page.locator('input[type="email"]');
-  if (typeof email === 'string') {
-    await emailInput.fill(email);
-  }
-  const passwordInput = page.locator('input[type="password"]');
-  if (typeof password === 'string') {
-    await passwordInput.fill(password);
-  }
-  await Promise.all([
-    page.locator(NavSelectors.LoadingSpinner).first().waitFor({ state: 'visible' }),
-    page.locator('button[name="submit"]').click()
-  ]);
-}
-
-export async function login(
-  page: Page,
-  opts: { userEmail: string | undefined; userPasswd: string | undefined }
-): Promise<void> {
-  // If parameter expectErr == true, login is expected to fail.
-  const { userEmail, userPasswd } = opts;
-  await clickLogin(page);
-  await enterEmailPassword(page, userEmail, userPasswd);
-}
-
-/**
- * On non-prod env, user must first enter the Site password
- * @param page
- * @param password
- */
-export async function fillSitePassword(page: Page, password?: string): Promise<void> {
-  const passwd: string = typeof password === 'undefined' ? (process.env.sitePassword as string) : password;
-
-  if (!passwd) {
-    throw new Error(`Site password is required.`);
-  }
-  await page.locator('input[type="password"]').fill(passwd);
-  await Promise.all([page.waitForNavigation(), page.locator('button >> text=Submit').click()]);
+  await page.locator(NavSelectors.Login).click();
 }

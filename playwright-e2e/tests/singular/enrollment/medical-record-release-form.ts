@@ -1,51 +1,46 @@
-import { Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
+import Question from 'tests/lib/widget/Question';
+import Checkbox from 'tests/lib/widget/checkbox';
+
+import path from 'path';
 
 export default class MedicalRecordReleaseForm {
   private readonly page: Page;
-  private readonly nextButton: Locator;
-  private readonly physicianName: Locator;
-  private readonly hospital: Locator;
-  private readonly address: Locator;
-  private readonly phone: Locator;
-  private readonly doctorSpecialty: Locator;
-  private readonly submitButton: Locator;
+  readonly next: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    this.nextButton = page.locator('button', { hasText: 'Next' });
-    this.submitButton = page.locator('button', { hasText: 'Submit' });
-    this.physicianName = page.locator('input[data-placeholder="PHYSICIAN NAME: *"]');
-    this.hospital = page.locator('input[data-placeholder="HOSPITAL, CLINIC, OR PROVIDER NAME (if any):"]');
-    this.address = page.locator('input[data-placeholder="ADDRESS:"]');
-    this.phone = page.locator('input[data-placeholder="PHONE NUMBER: *"]');
-    this.doctorSpecialty = page.locator('.picklist-answer-PHYSICIAN_SPECIALITY select');
+    this.next = page.locator('button', { hasText: 'Next' });
   }
 
-  get submit(): Locator {
-    return this.submitButton;
+  physician(): Question {
+    return new Question(this.page, 'Physician');
   }
 
-  get next(): Locator {
-    return this.nextButton;
+  unableToProvideMedicalRecords(): Checkbox {
+    return new Checkbox(this.page, 'Check here if none of the above options work');
   }
 
-  async checkNoneOfOptionsWork(): Promise<void> {
-    const checkbox = this.page
-      .locator('.ddp-activity-question')
-      .filter({ hasText: 'Check here if none of the above options work' })
-      .filter({ has: this.page.locator('input[type="checkbox"]') });
-    await checkbox.click();
+  name(): Question {
+    return new Question(this.page, 'Name');
   }
 
-  async fillPhysicianName(name: string): Promise<void> {
-    await this.physicianName.fill(name);
+  signature(): Question {
+    return new Question(this.page, 'Signature:');
   }
 
-  async fillPhoneNumber(num = 1112223333): Promise<void> {
-    await this.phone.fill(num.toString());
+  async uploadFile(filePath: string): Promise<void> {
+    const fName = path.parse(filePath).name;
+    await this.page.setInputFiles('input[class="file-input"]', `${process.cwd()}/${filePath}`);
+    await expect(this.page.locator('.uploaded-file .file-name')).toHaveText(new RegExp(fName));
   }
 
-  async selectDoctorSpecialty(value: string): Promise<Array<string>> {
-    return await this.doctorSpecialty.selectOption(value);
+  async clickNext(): Promise<void> {
+    await Promise.all([this.page.waitForNavigation(), this.next.click()]);
+  }
+
+  async submit(): Promise<void> {
+    const submitButton = this.page.locator('button', { hasText: 'Submit' });
+    await Promise.all([this.page.waitForNavigation(), this.page.waitForLoadState('load'), submitButton.click()]);
   }
 }

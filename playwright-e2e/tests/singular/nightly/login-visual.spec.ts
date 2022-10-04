@@ -1,22 +1,25 @@
 import { expect, test } from '@playwright/test';
-import _ from 'lodash';
+
 import MyDashboardPage from 'tests/singular/dashboard/my-dashboard-page';
 import HomePage from 'tests/singular/home/home-page';
-import { clickLogin, fillSitePassword, goToAboutUs, login, NavSelectors, visitHomePage } from 'tests/singular/nav';
+import { clickLogin, goToAboutUs, NavSelectors, visitHomePage } from 'tests/singular/nav';
+import { fillSitePassword, login } from 'tests/lib/authentication';
+
+import _ from 'lodash';
 
 /**
  * Nightly tests run once per day by CircleCI schedule.
  * For example, to run this test: userEmail=bweng+101@broadinstitute.org userPasswd=NotAnyMora1 yarn test:e2e login-visual.spec.ts
  */
-test.describe.skip('Login', () => {
+test.describe('Login into Singular', () => {
   test.beforeEach(async ({ page }) => {
     await visitHomePage(page);
     const home = new HomePage(page);
     await home.waitForReady();
   });
 
-  test('should works with valid credential', async ({ page }) => {
-    await login(page, { userEmail: process.env.userEmail, userPasswd: process.env.userPassword });
+  test.skip('should works @visual', async ({ page }) => {
+    await login(page, { email: process.env.userEmail, password: process.env.userPassword });
 
     // On non-prod env, user must enter Site password to continue
     await fillSitePassword(page);
@@ -30,11 +33,11 @@ test.describe.skip('Login', () => {
     // Login button is NOT visible
     await expect(page.locator(NavSelectors.Login)).not.toBeVisible();
 
-    await expect(myDashboardPage.titleLocator).toContainText('My Dashboard');
-    expect(await myDashboardPage.titleLocator.screenshot()).toMatchSnapshot('dashboard-title.png');
+    await expect(myDashboardPage.title()).toContainText('My Dashboard');
+    expect(await myDashboardPage.title().screenshot()).toMatchSnapshot('dashboard-title.png');
 
-    await expect(myDashboardPage.statusTextLocator).toContainText('Fully Enrolled');
-    expect(await myDashboardPage.statusTextLocator.screenshot()).toMatchSnapshot('status-text.png');
+    await expect(myDashboardPage.status()).toContainText('Fully Enrolled');
+    expect(await myDashboardPage.status().screenshot()).toMatchSnapshot('status-text.png');
 
     // Table headers
     const orderedTableHeaders = ['Title', 'Summary', 'Status', 'Action'];
@@ -79,11 +82,10 @@ test.describe.skip('Login', () => {
     expect(await patientSurveyRow.screenshot()).toMatchSnapshot('patient-survey-row.png');
   });
 
-  test('should fail with invalid credential', async ({ page }) => {
+  test('should fail with invalid credential @visual', async ({ page }) => {
     await goToAboutUs(page);
     await fillSitePassword(page);
-    await login(page, { userEmail: process.env.userEmail, userPasswd: 'WrongPazzw0rd' });
-
+    await login(page, { email: process.env.userEmail, password: 'WrongPazzw0rd' });
     const loginErrMessage = page.locator('form .auth0-global-message-error span:not([class])');
     await expect(loginErrMessage).toHaveText('Wrong email or password.');
     expect(await page.locator('form .auth0-lock-widget-container').screenshot()).toMatchSnapshot('wrong-password.png');

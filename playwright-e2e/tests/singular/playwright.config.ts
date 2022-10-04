@@ -1,6 +1,6 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
 import path from 'path';
-import testConfig from '../../playwright.config';
+import testConfig from 'playwright.config';
 
 /**
  * Read environment variables from .env file.
@@ -11,7 +11,11 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 const singularConfig: PlaywrightTestConfig = {
   ...testConfig,
-  testDir: './'
+  testDir: './',
+  use: {
+    ...testConfig.use,
+    video: 'retain-on-failure'
+  }
 };
 
 export default singularConfig;

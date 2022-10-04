@@ -2,20 +2,25 @@
   "patient": {
     "firstName": "E2E",
     "lastName": "Playwright",
-    "country": "UNITED STATES",
+    "country": {
+      "name": "UNITED STATES",
+      "abbreviation": "US"
+    },
     "state": {
       "name": "MASSACHUSETTS",
       "abbreviation": "MA"
     },
     "streetAddress": "415 Main Street",
     "city": "Cambridge",
-    "zip": "02142",
-    "phone": "6782223333"
+    "zip": "02142-1027",
+    "phone": "6177147000"
   },
   "doctor": {
     "name": "John Strange",
     "specialty": "PRIMARY_CARE",
-    "phone": "2345678910"
+    "phone": "6187247123",
+    "hospital": "Mass General Hospital",
+    "address": "55 Fruit St, Boston, MA 02114"
   }
 
 }

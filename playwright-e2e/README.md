@@ -34,3 +34,11 @@ To see the list of available *Playwright test* options:<div class="text-blue">``
 
 ### Test Development Tips
 - Use `npm run lint:singular` to find eslint issues in *singular* dir. Note: Not all eslint rules are fixable by `--fix`.
+- For a click action that initiate page navigation, it's a good practice to wait for `navigation` and `load` events.
+  - For an example, below is a function that clicks the `submit` button and waits for events.
+  ```
+  async submit(): Promise<void> {
+      const submitButton = this.page.locator('button', { hasText: 'Submit' });
+      await Promise.all([this.page.waitForNavigation(), this.page.waitForLoadState('load'), submitButton.click()]);
+    }
+  ```

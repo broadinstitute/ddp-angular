@@ -41,20 +41,22 @@ Fill out local test user credentials
 
 ### Examples
 
+In `tests/singular` dir,
+
 * Run all tests (visual, functional, nightly) in parallel in **headless** mode
-  > npx playwright test
+  > npx playwright test --config=playwright.config.ts
   
 * Run a single test in **headless** mode
-  > npx playwright test <TEST_FILE_NAME>
+  > npx playwright test --config=playwright.config.ts <TEST_FILE_NAME>
 
 * Debug one test in **headed** mode
-  > npx playwright test <TEST_FILE_NAME> --debug
+  > npx playwright test --config=playwright.config.ts <TEST_FILE_NAME> --debug
 
 * Run all visual tests in **headed** mode
-  > npx playwright test -g visual  --headed
+  > npx playwright test --config=playwright.config.ts -g visual  --headed
 
 * Run all tests in `nightly` directory
-  > npx playwright test nightly/
+  > npx playwright test --config=playwright.config.ts nightly/
 
 * Run one test on your local server (UI and API or just UI)
   > [TODO]
@@ -62,7 +64,7 @@ Fill out local test user credentials
 * If you don't want to use the `.env` file, you can also specify environment
   variables in cmd.
   * For example, run `login-visual.spec.ts` test:
-  > npx cross-env sitePassword=<SITE_PASSWORD> userEmail=<YOUR_EMAIL> userPasswd=<YOUR_PASSWORD> baseURL=<HOME_URL> npx playwright test login-visual.spec.ts
+  > npx cross-env sitePassword=<SITE_PASSWORD> userEmail=<YOUR_EMAIL> userPasswd=<YOUR_PASSWORD> baseURL=<HOME_URL> npx playwright test --config=playwright.config.ts login-visual.spec.ts
 
 
 ## Project Structure
