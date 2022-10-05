@@ -19,7 +19,7 @@ test.describe.skip('Login into Singular', () => {
   });
 
   test('should works @visual @singular', async ({ page }) => {
-    await login(page, { email: process.env.userEmail, password: process.env.userPassword });
+    await login(page, { email: process.env.singularUserEmail, password: process.env.singularUserPassword });
 
     // On non-prod env, user must enter Site password to continue
     await fillSitePassword(page);
@@ -85,7 +85,7 @@ test.describe.skip('Login into Singular', () => {
   test('should fail with invalid credential @visual @singular', async ({ page }) => {
     await goToAboutUs(page);
     await fillSitePassword(page);
-    await login(page, { email: process.env.userEmail, password: 'WrongPazzw0rd' });
+    await login(page, { email: process.env.singularUserEmail, password: 'WrongPazzw0rd' });
     const loginErrMessage = page.locator('form .auth0-global-message-error span:not([class])');
     await expect(loginErrMessage).toHaveText('Wrong email or password.');
     expect(await page.locator('form .auth0-lock-widget-container').screenshot()).toMatchSnapshot('wrong-password.png');
