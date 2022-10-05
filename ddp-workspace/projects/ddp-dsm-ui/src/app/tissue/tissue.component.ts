@@ -349,7 +349,7 @@ export class TissueComponent {
     if (!array) {
       return num === 0;
     }
-    let count = array.filter(sm => !sm.deleted);
+    const count = array.filter(sm => !sm.deleted);
     return count.length === num;
   }
 
