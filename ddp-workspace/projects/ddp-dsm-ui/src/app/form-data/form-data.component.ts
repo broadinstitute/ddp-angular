@@ -29,6 +29,7 @@ export class FormDataComponent implements OnInit {
 
   public showOrNot = false;
   public checkedRadioBtnValue: string;
+  public checkedRadioBtn: string
   currentPatchField: string;
   CONDITIONAL_DISPLAY = 'conditionalDisplay';
 
@@ -64,8 +65,6 @@ export class FormDataComponent implements OnInit {
     }
     return false;
   }
-
-  public checkedRadioBtn: string
 
   getActivityAnswer(): string {
 

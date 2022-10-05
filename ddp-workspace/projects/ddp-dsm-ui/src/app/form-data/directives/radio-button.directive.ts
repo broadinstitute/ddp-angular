@@ -21,7 +21,7 @@ export class RadioButtonDirective implements OnInit {
   }
 
   private btnContext = new btnContext();
-  private conditionalFieldSettings = new conditionalFieldSettings();
+  private textAreaContext = new conditionalFieldSettings();
   private activeValue: string;
   private belongingValue: string;
   private embeddedViewRef: EmbeddedViewRef<any>;
@@ -43,17 +43,7 @@ export class RadioButtonDirective implements OnInit {
 
   @Input('ddpRadioBtnCurrentValue') set currentValue(value: string) {
     this.activeValue = value;
-    if(this.activeValue === "OTHER_HYPOPLASTIC" && this.activeValue === this.belongingValue) {
-      this.createEmbeddedView("OTHER_HYPOPLASTIC");
-    } else if(this.activeValue === "OTHER" && this.activeValue === this.belongingValue) {
-      this.createEmbeddedView("OTHER");
-    }
-    else {
-      if(this.embeddedViewRef) {
-        this.embeddedViewRef.destroy();
-        this.embeddedViewRef = null;
-      }
-    }
+    value && this.createEmbeddedView();
   }
 
 
@@ -61,25 +51,33 @@ export class RadioButtonDirective implements OnInit {
 
   ngOnInit() {
     this.viewContainerRef.createEmbeddedView(this.templateRef, this.btnContext)
-    if(this.checkedRadioBtn === this.belongingValue
-      && (this.checkedRadioBtn === "OTHER_HYPOPLASTIC" ||
-        this.checkedRadioBtn === "OTHER")) {
-      this.createEmbeddedView(this.checkedRadioBtn);
-    }
+    this.createEmbeddedView();
   }
 
-  private createEmbeddedView(value: string) {
+  private createEmbeddedView() {
     if(this.embeddedViewRef) {
       this.embeddedViewRef.destroy();
       this.embeddedViewRef = null;
-    } else {
-      this.conditionalFieldSettings.settings = this.fieldSettings.actions.find(data => data.condition === value).conditionalFieldSetting;
-      this.embeddedViewRef = this.viewContainerRef.createEmbeddedView(this.textAreaRef, this.conditionalFieldSettings);
+    }
+    const cfs = this.conditionalFieldSetting;
+    if(!!cfs) {
+      this.textAreaContext.settings = cfs;
+      this.embeddedViewRef = this.viewContainerRef.createEmbeddedView(this.textAreaRef, this.textAreaContext);
     }
   }
 
   private setContextValues(radio: any) {
     this.btnContext.name = radio?.name || radio?.value || radio;
     this.btnContext.value = radio?.value || radio;
+  }
+
+  private get conditionalFieldSetting(): FieldSettings | null {
+    const conditionalActions = this.fieldSettings.actions?.filter(action => action.conditionalFieldSetting);
+    const conditionalItemIndex = conditionalActions?.findIndex(data => data.condition === String(this.activeValue || this.checkedRadioBtn));
+    return conditionalItemIndex > -1 && this.isBelonging ? conditionalActions[conditionalItemIndex].conditionalFieldSetting : null;
+  }
+
+  private get isBelonging() : boolean {
+    return (this.activeValue || this.checkedRadioBtn) === this.belongingValue;
   }
 }
