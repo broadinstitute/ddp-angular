@@ -98,14 +98,6 @@
                 </ng-container>
             </div>
           </mat-radio-group>
-<!--          <div  *ngIf="isConditionalDisplay() && showRadioOrNot && getConditionalFieldSettingRadio()">-->
-<!--            <app-conditional-form-data [fieldSetting]="getConditionalFieldSettingRadio()"-->
-<!--                                       [participantData]="conditionalData"-->
-<!--                                       [activityData]="activityData"-->
-<!--                                       [activityOptions]="activityOptions"-->
-<!--                                       [checkBoxGroups]="checkBoxGroups"-->
-<!--                                       (patchDataConditionalField)="conditionalValueChanged($event)"></app-conditional-form-data>-->
-<!--          </div>-->
 
           <ng-template #textAreaTemplate let-settings="settings">
             <ng-container *ngIf="isConditionalDisplayRadio() && showConditionalRadio() && getConditionalFieldSettingRadio(settings.columnName)">

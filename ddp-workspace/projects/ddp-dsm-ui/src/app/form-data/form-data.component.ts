@@ -127,7 +127,7 @@ export class FormDataComponent implements OnInit {
   conditionalValueChanged(htmlTextAreaElement: EventTarget, key?): void {
     let v;
     if(key) {
-      v = this.createPatchValue(htmlTextAreaElement);
+      v = (htmlTextAreaElement as any).target.value;
       this.patchDataConditionalField.emit({key: key, value: v, checkbox: true});
     } else {
       v = (htmlTextAreaElement as HTMLTextAreaElement).value;
