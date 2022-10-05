@@ -22,13 +22,13 @@ test.describe('Check About Yourself page', () => {
 
     const country = aboutYourself.country();
     // No error before select a country
-    await expect(country.select().locator('.ErrorMessage')).toBeHidden();
+    await expect(country.errorMessage()).toBeHidden();
 
     // Select country France and press Tab should start triggering the error message
     await aboutYourself.country().select().selectOption('FR');
     //await page.keyboard.press('Tab');
 
-    await expect(country.locator.locator('.ErrorMessage')).toContainText(
+    await expect(country.errorMessage()).toContainText(
       'Project Singular is currently open only to participants in the United States and Territories or Canada.' +
         ' Thank you for your interest.'
     );
@@ -40,7 +40,7 @@ test.describe('Check About Yourself page', () => {
     await aboutYourself.country().select().selectOption('US');
     // await page.keyboard.press('Tab');
 
-    await expect(country.locator.locator('.ErrorMessage')).toBeHidden();
+    await expect(country.errorMessage()).toBeHidden();
     screenshot = await country.locator.screenshot();
     expect(screenshot).toMatchSnapshot('country-reset-value.png');
   });
@@ -51,7 +51,7 @@ test.describe('Check About Yourself page', () => {
 
     const age = aboutYourself.age();
     // No error before start entering age
-    await expect(age.locator.locator('.ErrorMessage')).toBeHidden();
+    await expect(age.errorMessage()).toBeHidden();
     // Enter a minor age
     await aboutYourself.age().textInput().fill('2');
 
@@ -62,7 +62,7 @@ test.describe('Check About Yourself page', () => {
     await aboutYourself.country().select().selectOption('US');
     await page.keyboard.press('Tab');
 
-    await expect(age.locator.locator('.ErrorMessage')).toContainText(
+    await expect(age.errorMessage()).toContainText(
       'In order to participate in Project Singular, a parent or guardian must register and consent for you.'
     );
 

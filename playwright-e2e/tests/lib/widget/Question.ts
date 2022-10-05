@@ -16,6 +16,10 @@ export default class Question {
     return this._locator;
   }
 
+  errorMessage(): Locator {
+    return this.locator.locator('.ErrorMessage');
+  }
+
   select(label?: string): Locator {
     if (label === undefined) {
       return this.locator.locator('select');
