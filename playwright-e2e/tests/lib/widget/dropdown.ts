@@ -22,8 +22,14 @@ export default class Dropdown {
     }
   }
 
-  async select(option: string): Promise<void> {
+  async select(option: string, opts: { waitForNav?: boolean } = {}): Promise<void> {
+    const { waitForNav = false } = opts;
+    const navigationPromise = waitForNav ? this.page.waitForNavigation() : Promise.resolve();
+
     await this.open();
-    await this._locator.locator('ul.dropdown-menu').locator('a[href]', { hasText: option }).click();
+    await Promise.all([
+      navigationPromise,
+      this._locator.locator('ul.dropdown-menu').locator('a[href]', { hasText: option }).click()
+    ]);
   }
 }

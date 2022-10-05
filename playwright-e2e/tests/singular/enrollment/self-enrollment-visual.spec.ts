@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 import AboutYourselfPage from './about-yourself-page';
 import HomePage from 'tests/singular/home/home-page';
 import { fillSitePassword } from 'tests/lib/auth-singular';
-import { goToPath, NavSelectors } from 'tests/singular/nav';
+import { goToPath, NavSelectors } from 'tests/singular/lib/nav';
 
 test.describe('Check About Yourself page', () => {
   test.beforeEach(async ({ page }) => {
@@ -17,7 +17,7 @@ test.describe('Check About Yourself page', () => {
   });
 
   // Country validation: Select a country which is not US and Canada should triggers an error message
-  test('select a country which is not US or Canada @visual @enrollment', async ({ page }) => {
+  test('select a country which is not US or Canada @visual @enrollment @singular', async ({ page }) => {
     const aboutYourself = new AboutYourselfPage(page);
 
     const country = aboutYourself.country();
@@ -46,7 +46,7 @@ test.describe('Check About Yourself page', () => {
   });
 
   // Age validation: 0 - 18 in country US should triggers an error message: requires parent or guardian to register in US
-  test('validate age requirement in US @visual @enrollment', async ({ page }) => {
+  test('validate age requirement in US @visual @enrollment @singular', async ({ page }) => {
     const aboutYourself = new AboutYourselfPage(page);
 
     const age = aboutYourself.age();
@@ -70,7 +70,7 @@ test.describe('Check About Yourself page', () => {
     expect(screenshot).toMatchSnapshot('age-input-err-message.png');
   });
 
-  test('should blocks workflow in US for a minor person @visual @enrollment', async ({ page }) => {
+  test('should blocks workflow in US for a minor person @visual @enrollment @singular', async ({ page }) => {
     const aboutYourself = new AboutYourselfPage(page);
 
     await aboutYourself.age().textInput().fill('17');

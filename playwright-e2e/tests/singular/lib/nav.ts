@@ -1,6 +1,8 @@
 import { Page, Response } from '@playwright/test';
+
 // import dotenv from 'dotenv';
-// dotenv.config();
+// import path from 'path';
+// dotenv.config({ path: path.resolve(__dirname, '../.env.singular') });
 
 export const NavSelectors = {
   Login: '.header button[data-ddp-test="signInButton"]:has-text("Log In")',
@@ -25,9 +27,11 @@ export async function goToAboutUs(page: Page): Promise<void> {
  * @param path URL path (appended to baseURL)
  */
 export async function goToPath(page: Page, path?: string): Promise<Response | null> {
+  if (process.env.singularBaseURL === undefined) {
+    throw Error('process.env.singularBaseURL is not valid. Check .env file in /playwright-e2e dir.');
+  }
   const urlPath = typeof path === 'undefined' ? '' : path;
-
-  return await page.goto(`${process.env.baseURL}/${urlPath}`, { waitUntil: 'networkidle' });
+  return await page.goto(`${process.env.singularBaseURL}/${urlPath}`, { waitUntil: 'networkidle' });
 }
 
 export async function visitHomePage(page: Page): Promise<Response | null> {

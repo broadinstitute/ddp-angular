@@ -8,8 +8,8 @@ import AboutMePage from 'tests/singular/enrollment/about-me-page';
 import ConsentFormPage from 'tests/singular/enrollment/consent-form-page';
 import MyDashboardPage, { WHO } from 'tests/singular/dashboard/my-dashboard-page';
 import * as user from 'tests/singular/mock-data/fake-user.json';
-import { clickSignMeUp, goToPath } from 'tests/singular/nav';
-import { makeEmailAlias, makeRandomNum } from 'tests/singular/utils';
+import { clickSignMeUp, goToPath } from 'tests/singular/lib/nav';
+import { makeEmailAlias, makeRandomNum } from 'tests/singular/lib/utils';
 import { fillEmailPassword, fillSitePassword } from 'tests/lib/auth-singular';
 
 test.describe('Adult Self Enrollment', () => {
@@ -22,7 +22,7 @@ test.describe('Adult Self Enrollment', () => {
   /**
    * Test case: https://docs.google.com/document/d/1Ewsh4ULh5LVdZiUapvG-PyI2kL3XzVf4seeLq8Mt-B0/edit?usp=sharing
    */
-  test('can finish @enrollment', async ({ page }) => {
+  test('can finish @enrollment @singular', async ({ page }) => {
     // Assertion helper functions
     const assertActivityHeader = async (page: Page, expectedText: string) => {
       await expect(page.locator('h1.activity-header')).toHaveText(expectedText);
@@ -49,8 +49,8 @@ test.describe('Adult Self Enrollment', () => {
 
     // Enter email alias and new password in Login popup
     await fillEmailPassword(page, {
-      email: makeEmailAlias(process.env.userEmail as string),
-      password: process.env.userPassword,
+      email: makeEmailAlias(process.env.singularUserEmail as string),
+      password: process.env.singularUserPassword,
       waitForNavigation: true
     });
 
@@ -151,14 +151,16 @@ test.describe('Adult Self Enrollment', () => {
     await myDashboardPage.waitForReady();
     const orderedHeaders = ['Title', 'Summary', 'Status', 'Action'];
     const table = myDashboardPage.getDashboardTable();
-    const headers = await table.getColumnHeaderNames();
+    const headers = await table.getColumnNames();
     expect(headers).toHaveLength(4); // Four columns in table
     expect(headers).toEqual(orderedHeaders);
 
-    const summaryCellLocator = await table.findCellByRowValue('Title', 'Consent', 'Summary');
-    console.log(await summaryCellLocator?.innerText());
+    const summaryCell = await table.findCellLocator('Title', 'Consent', 'Summary');
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    await expect(summaryCell!).toHaveText('Thank you for signing the consent form -- welcome to Project Singular!');
 
-    const statusCellLocator = await table.findCellByRowValue('Title', 'Consent', 'Status');
-    console.log(await statusCellLocator?.innerText());
+    const statusCell = await table.findCellLocator('Title', 'Consent', 'Status');
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    await expect(statusCell!).toHaveText('Complete');
   });
 });

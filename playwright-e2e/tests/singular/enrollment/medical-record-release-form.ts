@@ -31,7 +31,7 @@ export default class MedicalRecordReleaseForm {
 
   async uploadFile(filePath: string): Promise<void> {
     const fName = path.parse(filePath).name;
-    await this.page.setInputFiles('input[class="file-input"]', `${process.cwd()}/${filePath}`);
+    await this.page.setInputFiles('input[class="file-input"]', path.resolve(__dirname, `../${filePath}`));
     await expect(this.page.locator('.uploaded-file .file-name')).toHaveText(new RegExp(fName));
   }
 

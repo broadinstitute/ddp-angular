@@ -1,5 +1,9 @@
 import { Page } from '@playwright/test';
-import { clickLogin, NavSelectors } from 'tests/singular/nav';
+import { clickLogin, NavSelectors } from 'tests/singular/lib/nav';
+
+// import * as dotenv from 'dotenv';
+// import path from 'path';
+// dotenv.config({ path: path.resolve(__dirname, '../singular/.env.singular') });
 
 /**
  * On non-prod env, user must first enter the Site password
@@ -7,7 +11,7 @@ import { clickLogin, NavSelectors } from 'tests/singular/nav';
  * @param password
  */
 export async function fillSitePassword(page: Page, password?: string): Promise<void> {
-  const passwd: string = typeof password === 'undefined' ? (process.env.sitePassword as string) : password;
+  const passwd: string = typeof password === 'undefined' ? (process.env.singularSitePassword as string) : password;
 
   if (!passwd) {
     throw new Error(`Site password is required.`);
@@ -18,7 +22,7 @@ export async function fillSitePassword(page: Page, password?: string): Promise<v
 
 export async function fillEmailPassword(
   page: Page,
-  opts: { email: string | undefined; password: string | undefined; waitForNavigation?: boolean }
+  opts: { email?: string | undefined; password?: string | undefined; waitForNavigation?: boolean }
 ): Promise<void> {
   const { email, password, waitForNavigation = false } = opts;
   const emailInput = page.locator('input[type="email"]');
@@ -40,10 +44,13 @@ export async function fillEmailPassword(
 
 export async function login(
   page: Page,
-  opts: { email: string | undefined; password: string | undefined; waitForNavigation?: boolean }
+  opts: { email?: string | undefined; password?: string | undefined; waitForNavigation?: boolean }
 ): Promise<void> {
-  // If parameter expectErr == true, login is expected to fail.
-  const { email, password, waitForNavigation } = opts;
+  const {
+    email = process.env.singularUserEmail,
+    password = process.env.singularUserPassword,
+    waitForNavigation
+  } = opts;
   await clickLogin(page);
   await fillEmailPassword(page, { email, password, waitForNavigation });
 }

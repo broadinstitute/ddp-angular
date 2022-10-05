@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 import MyDashboardPage from 'tests/singular/dashboard/my-dashboard-page';
 import HomePage from 'tests/singular/home/home-page';
-import { clickLogin, goToAboutUs, NavSelectors, visitHomePage } from 'tests/singular/nav';
+import { clickLogin, goToAboutUs, NavSelectors, visitHomePage } from 'tests/singular/lib/nav';
 import { fillSitePassword, login } from 'tests/lib/auth-singular';
 
 import _ from 'lodash';
@@ -11,14 +11,14 @@ import _ from 'lodash';
  * Nightly tests run once per day by CircleCI schedule.
  * For example, to run this test: userEmail=bweng+101@broadinstitute.org userPasswd=NotAnyMora1 yarn test:e2e login-visual.spec.ts
  */
-test.describe('Login into Singular', () => {
+test.describe.skip('Login into Singular', () => {
   test.beforeEach(async ({ page }) => {
     await visitHomePage(page);
     const home = new HomePage(page);
     await home.waitForReady();
   });
 
-  test.skip('should works @visual', async ({ page }) => {
+  test('should works @visual @singular', async ({ page }) => {
     await login(page, { email: process.env.userEmail, password: process.env.userPassword });
 
     // On non-prod env, user must enter Site password to continue
@@ -82,7 +82,7 @@ test.describe('Login into Singular', () => {
     expect(await patientSurveyRow.screenshot()).toMatchSnapshot('patient-survey-row.png');
   });
 
-  test('should fail with invalid credential @visual', async ({ page }) => {
+  test('should fail with invalid credential @visual @singular', async ({ page }) => {
     await goToAboutUs(page);
     await fillSitePassword(page);
     await login(page, { email: process.env.userEmail, password: 'WrongPazzw0rd' });

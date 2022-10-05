@@ -1,5 +1,5 @@
 import { ElementHandle, expect, Locator, test } from '@playwright/test';
-import { visitHomePage } from 'tests/singular/nav';
+import { visitHomePage } from 'tests/singular/lib/nav';
 
 import _ from 'lodash';
 
@@ -11,7 +11,7 @@ test.describe('Home page', () => {
     await visitHomePage(page);
   });
 
-  test('match nav-links @visual', async ({ page }) => {
+  test('match nav-links @visual @singular', async ({ page }) => {
     const nav = page.locator('.header__nav');
     expect(await nav.screenshot({ omitBackground: true })).toMatchSnapshot('nav.png');
 
@@ -19,7 +19,7 @@ test.describe('Home page', () => {
     await expect(navLinks).toContainText(['About Us', 'Study Progress', 'FAQs', 'For Researchers', 'For Clinicians']);
   });
 
-  test('match partners links @visual', async ({ page }) => {
+  test('match partners links @visual @singular', async ({ page }) => {
     const orderedHrefs = [
       'https://www.additionalventures.org',
       'https://www.broadinstitute.org',
@@ -46,7 +46,7 @@ test.describe('Home page', () => {
     expect(actualHrefs).toEqual(orderedHrefs); // Ensure href match
   });
 
-  test('match participating steps @visual', async ({ page }) => {
+  test('match participating steps @visual @singular', async ({ page }) => {
     // participating steps are three steps
     const steps = page.locator('.participating-steps-step');
 

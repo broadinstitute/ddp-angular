@@ -9,7 +9,7 @@ export function makeEmailAlias(originalEmail: string): string {
   const splintedEmail = originalEmail.split('@');
   const name = splintedEmail[0];
   const domain = splintedEmail[1];
-  return `${name}+${Math.floor(Math.random() * 1000000)}@${domain}`;
+  return `${name}+${Math.floor(Math.random() * 100000000)}@${domain}`;
 }
 
 export async function getTextValue(locator: Locator): Promise<string | null> {

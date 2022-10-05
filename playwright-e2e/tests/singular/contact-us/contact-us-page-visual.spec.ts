@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { goToAboutUs, goToPath } from 'tests/singular/nav';
+import { goToAboutUs, goToPath } from 'tests/singular/lib/nav';
 import { fillSitePassword } from 'tests/lib/auth-singular';
 
 /**
@@ -12,7 +12,7 @@ test.describe('Home page', () => {
     await goToAboutUs(page);
   });
 
-  test('Our teams @visual', async ({ page }) => {
+  test('Our teams @visual @singular', async ({ page }) => {
     const headerText = page.locator('.our-team h1');
 
     expect(await headerText.screenshot()).toMatchSnapshot('our-team-text.png');

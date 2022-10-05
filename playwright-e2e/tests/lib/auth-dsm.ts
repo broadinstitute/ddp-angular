@@ -1,8 +1,8 @@
 import { Page } from '@playwright/test';
-import path from 'path';
-import * as dotenv from 'dotenv';
 
-dotenv.config({ path: path.resolve(__dirname, '.env') });
+// import path from 'path';
+// import * as dotenv from 'dotenv';
+// dotenv.config({ path: path.resolve(__dirname, '../dsm/.env.dsm') });
 
 export async function fillEmailPassword(
   page: Page,
@@ -23,9 +23,8 @@ export async function fillEmailPassword(
   await page.locator('button[type="submit"]').click();
 }
 
-export async function login(page: Page, opts: { email: string; password: string }): Promise<void> {
-  const { email, password } = opts;
-  await page.goto(process.env.baseURL as string);
-  // Login popup is automatically loaded
+export async function login(page: Page, opts: { email?: string; password?: string } = {}): Promise<void> {
+  const { email = process.env.dsmUserEmail, password = process.env.dsmUserPassword } = opts;
+  await page.goto(process.env.dsmBaseURL as string);
   await fillEmailPassword(page, { email, password });
 }

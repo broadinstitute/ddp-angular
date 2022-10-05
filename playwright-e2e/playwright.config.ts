@@ -2,7 +2,7 @@ import type { PlaywrightTestConfig } from '@playwright/test';
 import path from 'path';
 
 /**
- * Read environment variables from .env file.
+ * Read environment variables from .env.dsm.singular file.
  * https://github.com/motdotla/dotenv
  */
 import * as dotenv from 'dotenv';
@@ -40,8 +40,8 @@ const testConfig: PlaywrightTestConfig = {
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   retries: 0,
-  workers: 2,
-  maxFailures: 5, // Limits total test failures
+  workers: 3,
+  maxFailures: 3, // Limits total test failures
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
