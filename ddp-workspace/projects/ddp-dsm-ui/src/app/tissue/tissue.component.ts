@@ -349,7 +349,8 @@ export class TissueComponent {
     if (!array) {
       return num === 0;
     }
-    return array.length === num;
+    let count = array.filter(sm => !sm.deleted);
+    return count.length === num;
   }
 
   addSMId( name ): void {
