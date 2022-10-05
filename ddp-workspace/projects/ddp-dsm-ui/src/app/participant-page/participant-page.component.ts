@@ -1570,7 +1570,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     //pediatric pt
     if (!canBeSequencedBasedOnLocation) {
       const addParticipantActivity = participant.data.activities.find(activity => activity.activityCode === this.ADD_PARTICIPANT);
-      if (addParticipantActivity != null) {
+      if (addParticipantActivity != null && prequalActivity) {
         const countryQuestion = prequalActivity.questionsAnswers.find(questionAnswer => questionAnswer.stableId === this.CHILD_COUNTRY);
         if (countryQuestion != null && countryQuestion.answer) {
           if (countryQuestion.answer instanceof Array) {
