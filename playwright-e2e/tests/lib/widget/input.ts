@@ -4,9 +4,13 @@ export default class Input {
   private readonly page: Page;
   private readonly _locator: Locator;
 
-  constructor(page: Page, label: string) {
+  constructor(page: Page, label: string, opts: { parent?: string } = {}) {
     this.page = page;
-    this._locator = this.page.locator(`xpath=//input[@id=(//label[contains(normalize-space(.), "${label}")]/@for)]`);
+    if (opts.parent !== undefined) {
+      this._locator = this.page.locator(`xpath=${opts.parent}//input[@id=(//label[contains(normalize-space(.),"${label}")]/@for)]`);
+    } else {
+      this._locator = this.page.locator(`xpath=//input[@id=(//label[contains(normalize-space(.),"${label}")]/@for)]`);
+    }
   }
 
   get locator(): Locator {

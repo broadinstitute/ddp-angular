@@ -10,7 +10,7 @@ import MyDashboardPage, { WHO } from 'tests/singular/dashboard/my-dashboard-page
 import * as user from 'tests/singular/mock-data/fake-user.json';
 import { clickSignMeUp, goToPath } from 'tests/singular/nav';
 import { makeEmailAlias, makeRandomNum } from 'tests/singular/utils';
-import { fillEmailPassword, fillSitePassword } from 'tests/lib/authentication';
+import { fillEmailPassword, fillSitePassword } from 'tests/lib/auth-singular';
 
 test.describe('Adult Self Enrollment', () => {
   test.beforeEach(async ({ page }) => {

@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 import MyDashboardPage from 'tests/singular/dashboard/my-dashboard-page';
 import HomePage from 'tests/singular/home/home-page';
 import { clickLogin, goToAboutUs, NavSelectors, visitHomePage } from 'tests/singular/nav';
-import { fillSitePassword, login } from 'tests/lib/authentication';
+import { fillSitePassword, login } from 'tests/lib/auth-singular';
 
 import _ from 'lodash';
 

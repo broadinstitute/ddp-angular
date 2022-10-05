@@ -3,33 +3,38 @@ import _ from 'lodash';
 
 export default class Table {
   private readonly page: Page;
-  private readonly tableCssSelector: string;
-  private readonly headerCssSelector: string;
-  private readonly rowCssSelector: string;
+  private readonly tableCss: string;
+  private readonly headerCss: string;
+  private readonly rowCss: string;
+  private readonly footerCss: string;
 
-  constructor(page: Page, opts: { classAttribute?: string } = {}) {
-    const { classAttribute } = opts;
+  constructor(page: Page) {
     this.page = page;
-    this.tableCssSelector = classAttribute ? `table${classAttribute}` : 'table';
-    this.headerCssSelector = `${this.tableCssSelector} thead [role="columnheader"]`;
-    this.rowCssSelector = `${this.tableCssSelector} tbody [role="row"]`;
+    this.tableCss = 'table.table';
+    this.headerCss = `${this.tableCss} th[class]`;
+    this.rowCss = `${this.tableCss} tbody tr`;
+    this.footerCss = `${this.tableCss} tfoot tr`;
   }
 
   async waitForReady() {
-    await expect(this.page.locator(this.tableCssSelector)).toBeVisible();
+    await expect(this.page.locator(this.tableCss)).toBeVisible();
     // Add additional checks here
   }
 
   async getAllColumns(): Promise<Array<ElementHandle>> {
-    return await this.page.locator(this.headerCssSelector).elementHandles();
+    return await this.page.locator(this.headerCss).elementHandles();
+  }
+
+  getRows(): Locator {
+    return this.page.locator(this.rowCss);
   }
 
   async getAllRows(): Promise<Array<ElementHandle>> {
-    return await this.page.locator(this.rowCssSelector).elementHandles();
+    return await this.page.locator(this.rowCss).elementHandles();
   }
 
   getCellLocator(rowIndex: number, columnIndex: number): Locator {
-    return this.page.locator(`${this.rowCssSelector}:nth-child(${rowIndex}) [role="cell"]:nth-child(${columnIndex})`);
+    return this.page.locator(`${this.rowCss}:nth-child(${rowIndex}) td:nth-child(${columnIndex})`);
   }
 
   /**

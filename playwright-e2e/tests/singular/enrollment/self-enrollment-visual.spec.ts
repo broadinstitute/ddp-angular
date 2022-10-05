@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 import AboutYourselfPage from './about-yourself-page';
 import HomePage from 'tests/singular/home/home-page';
-import { fillSitePassword } from 'tests/lib/authentication';
+import { fillSitePassword } from 'tests/lib/auth-singular';
 import { goToPath, NavSelectors } from 'tests/singular/nav';
 
 test.describe('Check About Yourself page', () => {

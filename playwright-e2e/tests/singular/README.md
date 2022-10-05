@@ -11,12 +11,12 @@ HashiCorp’s Vault is used to manage test users secrets and sensitive data.
   vault read -format=json secret/pepper/test/v1/e2e 
   ```
 
-## Local Test Users
+## Set Up Local Test Users
 
 Supple credentials for pre-existing test users (rather than by generating new users) using an environment property file `.env`. See `.env.singular.test` for an
 example.
 
-A `.env` file requires following fields:
+A `.env` file contains following env variables:
 ```angular2html
 - baseURL
 - sitePassword
@@ -24,22 +24,18 @@ A `.env` file requires following fields:
 - userPassword
 ```
 
-If you don't want to use the `.env` file, you can also specify environment variables in cmd. See an example of this in **Examples**.
+If you don't want to use the `.env` file, you can also specify environment variables in cmd. See an example of this in **Examples** section.
 
 ## Run Tests Using `npx` from the Command-Line
 
-By default, all tests will run in headless mode.
-
-To see the list of available **Playwright** test options: <div class="text-blue">```npx playwright test --help```</div>
-
-### Running Tests on Localhost
+### Set up localhost
 
 Fill out local test user credentials
 
 - Copy `.env.singular.sample`, save as `.env`.
 - Update `.env`
 
-### Examples
+### Running tests on localhost examples
 
 In `tests/singular` dir,
 
@@ -82,25 +78,5 @@ Worthy of note:
   - For example, update `self-enrollment-visual.spec.ts` test screenshots on localhost
   > `npx playwright test self-enrollment-visual.spec.ts -u`
   - Save new screenshots and commit to GitHub
-  
-
-- Generate screenshots for visual testing on CircleCI
-
-   Note: Update docker image version when upgrading Playwright version
-  - For example,
-  In **playwright-e2e/** dir, run docker
-  > `docker run -v $PWD:/e2e -w /e2e -it --rm --ipc=host mcr.microsoft.com/playwright:v1.25.0-focal /bin/bash`
-  
-  - Install web browsers
-  > npx playwright install
-
-  - Change dir to `singular` sub-dir
-  > cd tests/singular
-  
-  - Run a Playwright test with flag `-u`
-  > `npx playwright test self-enrollment-visual.spec.ts -u`
-  
-  - Save new screenshots and commit to GitHub
-
 
 - [TODO]
