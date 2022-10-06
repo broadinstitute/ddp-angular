@@ -3,13 +3,16 @@ import {FieldSettings} from "../../field-settings/field-settings.model";
 
 
 class btnContext {
-  value: string;
-  name: string;
+  constructor(public value: string, public name: string) {
+  }
 }
 
 class conditionalFieldSettings {
-  settings: any;
+  constructor(public settings: FieldSettings) {
+  }
 }
+
+type NameValuePair = {name: string, value: string};
 
 @Directive({
   selector: '[ddpRadioBtn]'
@@ -20,17 +23,18 @@ export class RadioButtonDirective implements OnInit {
               private templateRef: TemplateRef<any>) {
   }
 
-  private btnContext = new btnContext();
-  private textAreaContext = new conditionalFieldSettings();
-  private activeValue: string;
-  private belongingValue: string;
+  private btnNameValuePair: NameValuePair;
   private embeddedViewRef: EmbeddedViewRef<any>;
   private fieldSettings: FieldSettings;
-  private checkedRadioBtn: string;
+
+  // dynamically changes
+  // on init - undefined
+  private afterClickCheckedRadioBtn: string;
+  // on init - defined
+  private initCheckedRadioBtn: string;
 
   @Input('ddpRadioBtn') set setValue(radio: any) {
-    this.belongingValue = radio.value;
-    this.setContextValues(radio);
+    this.btnNameValuePair = radio;
   }
 
   @Input('ddpRadioBtnFieldSetting') set setFieldSettings(fieldSettings: FieldSettings) {
@@ -38,45 +42,54 @@ export class RadioButtonDirective implements OnInit {
   }
 
   @Input('ddpRadioBtnCheckedRadioBtn') set setCheckedRadioBtn(value: string) {
-    this.checkedRadioBtn = value;
+    this.initCheckedRadioBtn = value;
   }
 
   @Input('ddpRadioBtnCurrentValue') set currentValue(value: string) {
-    this.activeValue = value;
+    this.afterClickCheckedRadioBtn = value;
     value && this.createEmbeddedView();
   }
 
   @Input('ddpRadioBtnTextArea') textAreaRef: TemplateRef<any> | null = null;
 
   ngOnInit() {
-    this.viewContainerRef.createEmbeddedView(this.templateRef, this.btnContext)
+    this.viewContainerRef.createEmbeddedView(this.templateRef, this.getBtnContextInstance)
     this.createEmbeddedView();
   }
 
-  private createEmbeddedView() {
+  private createEmbeddedView(): void {
     if(this.embeddedViewRef) {
       this.embeddedViewRef.destroy();
       this.embeddedViewRef = null;
     }
-    const cfs = this.conditionalFieldSetting;
+    const cfs: FieldSettings | null = this.conditionalFieldSetting;
     if(!!cfs) {
-      this.textAreaContext.settings = cfs;
-      this.embeddedViewRef = this.viewContainerRef.createEmbeddedView(this.textAreaRef, this.textAreaContext);
+      this.embeddedViewRef = this.viewContainerRef.createEmbeddedView(this.textAreaRef, new conditionalFieldSettings(cfs));
     }
   }
 
-  private setContextValues(radio: any) {
-    this.btnContext.name = radio?.name || radio?.value || radio;
-    this.btnContext.value = radio?.value || radio;
+  private get getBtnContextInstance(): btnContext {
+    const name = this.btnNameValuePair?.name || this.btnNameValuePair?.value || String(this.btnNameValuePair);
+    const value = this.btnNameValuePair?.value || String(this.btnNameValuePair);
+    return new btnContext(value, name);
   }
 
   private get conditionalFieldSetting(): FieldSettings | null {
     const conditionalActions = this.fieldSettings.actions?.filter(action => action.conditionalFieldSetting);
-    const conditionalItemIndex = conditionalActions?.findIndex(data => data.condition === String(this.activeValue || this.checkedRadioBtn));
+    const conditionalItemIndex = conditionalActions?.findIndex(data => data.condition === String(this.afterClickCheckedRadioBtn || this.initCheckedRadioBtn));
     return conditionalItemIndex > -1 && this.isBelonging ? conditionalActions[conditionalItemIndex].conditionalFieldSetting : null;
   }
 
-  private get isBelonging() : boolean {
-    return (this.activeValue || this.checkedRadioBtn) === this.belongingValue;
+  private get isBelonging(): boolean {
+    return (this.afterClickCheckedRadioBtn || this.initCheckedRadioBtn) === this.belongingValue;
+  }
+
+  private get belongingValue(): string {
+    return this.btnNameValuePair.value || String(this.btnNameValuePair);
+  }
+
+  // for types to catch
+  static ngTemplateContextGuard(dir: RadioButtonDirective, ctx: unknown): ctx is RadioButtonDirective {
+    return true;
   }
 }
