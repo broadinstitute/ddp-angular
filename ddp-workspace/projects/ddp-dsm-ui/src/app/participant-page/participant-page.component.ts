@@ -1296,7 +1296,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   }
 
   getConditionalData(fieldSetting: FieldSettings, personsParticipantData: ParticipantData): string {
-    const conditionalFieldSetting: FieldSettings = this.getConditionalFieldSetting(fieldSetting);
+    const conditionalFieldSetting: FieldSettings = this.getConditionalDisplayData(fieldSetting);
     if (conditionalFieldSetting) {
       return this.getParticipantData(conditionalFieldSetting, personsParticipantData);
     }
@@ -1314,7 +1314,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     return '';
   }
 
-  getParticipantForDynamicField2(fieldSettings: any[]): any[] {
+  getParticipantAnswersForConditionalDynamicField(fieldSettings: any[]): any[] {
     const answers = [];
     if (this.participant && this.participant.participantData) {
       fieldSettings?.forEach(data => {
@@ -1323,10 +1323,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           .find(participantData => participantData.data
             && participantData.data[conditionalFieldSetting.columnName] != null);
         if (participantDataFound) {
-          const colName = conditionalFieldSetting.columnName
-          const tempObj = {}
-          tempObj[colName] = participantDataFound.data[colName]
-          answers.push(tempObj)
+          const colName = conditionalFieldSetting.columnName;
+          const tempObj = {};
+          tempObj[colName] = participantDataFound.data[colName];
+          answers.push(tempObj);
         }
       })
     }
@@ -1334,14 +1334,14 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   }
 
   getConditionalParticipantForDynamicField(fieldSetting: FieldSettings): any[] {
-      const conditionalFieldSetting: [] = this.getConditionalFieldSetting(fieldSetting);
-    if (conditionalFieldSetting?.length > 0) {
-        return this.getParticipantForDynamicField2(conditionalFieldSetting)
+      const conditionalDisplayData: [] = this.getConditionalDisplayData(fieldSetting);
+    if (conditionalDisplayData?.length > 0) {
+        return this.getParticipantAnswersForConditionalDynamicField(conditionalDisplayData)
     }
     return [];
   }
 
-  getConditionalFieldSetting(fieldSetting: FieldSettings): any {
+  getConditionalDisplayData(fieldSetting: FieldSettings): any {
     if (fieldSetting.actions) {
       const actionWithConditionalDisplay = fieldSetting.actions.filter(action => action.type === this.CONDITIONAL_DISPLAY);
       if (actionWithConditionalDisplay) {
