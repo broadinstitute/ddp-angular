@@ -60,7 +60,7 @@ export class FormDataComponent implements OnInit {
 
   public isConditionalDisplayRadio() {
     if (this.fieldSetting?.actions) {
-      return this.fieldSetting.actions.every(data => data.type === this.CONDITIONAL_DISPLAY);
+      return this.fieldSetting.actions.some(data => data.type === this.CONDITIONAL_DISPLAY);
     }
     return false;
   }
@@ -117,7 +117,7 @@ export class FormDataComponent implements OnInit {
   }
 
   onRadioChange(radioBtn: MatRadioChange) {
-    this.checkedRadioBtnValue = radioBtn.value;
+    this.checkedRadioBtnValue = this.participantData = radioBtn.value;
     this.patchData.emit(radioBtn.value);
   }
 
