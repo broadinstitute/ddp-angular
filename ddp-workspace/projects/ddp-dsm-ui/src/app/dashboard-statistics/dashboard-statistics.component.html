@@ -16,36 +16,32 @@
 
 <ng-template let-Charts="charts" let-Counts="counts" #charts>
 
-  <ng-container *ngIf="Charts?.length < 1 && Counts?.length < 1; else statistics">
-    <p *ngIf="!loading" class="dashboard-noCharts">There are not available charts and counts for this study</p>
-  </ng-container>
-
-  <ng-template #statistics>
-
-    <div *ngIf="Counts.length > 1" class="dashboard-navigation">
-      <p (click)="scrollToVew(chartsView)" class="dashboard-navigation-chart">Charts</p>
-      <span class="dashboard-navigation-border"></span>
-      <p (click)="scrollToVew(countsView)" class="dashboard-navigation-count">Counts</p>
-    </div>
+  <div class="dashboard-chartsAndCounts" *ngIf="!loading">
 
 
-    <div class="dashboard-charts" #chartsView>
-      <section *ngFor="let chart of Charts" class="dashboard-charts-chart" [ngClass]="[chart.size, chart.type]">
-        <plotly-plot
-          [data]="chart.data"
-          [layout]="chart.layout"
-          [config]="getConfiguration"
-        ></plotly-plot>
-      </section>
-    </div>
+      <mat-tab-group mat-align-tabs="center" *ngIf="Charts.length > 0 || Counts.length > 0; else noCharts">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">bar_chart</mat-icon>
+            Charts
+          </ng-template>
+          <app-plotly-charts [chartData]="Charts" [config]="getConfiguration"></app-plotly-charts>
+        </mat-tab>
 
-    <hr>
-    <h1 *ngIf="Counts.length > 1">Counts</h1>
-    <div class="dashboard-counts" #countsView dragAndDrop>
-      <app-card id="drag" draggable="true" *ngFor="let count of Counts" [data]="count"></app-card>
-    </div>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">score</mat-icon>
+            Counts
+          </ng-template>
+          <app-counts [countsData]="Counts"></app-counts>
+        </mat-tab>
 
-  </ng-template>
+      </mat-tab-group>
 
+    <ng-template #noCharts>
+      <p class="noCharts">There are not available charts and counts for this study</p>
+    </ng-template>
+
+  </div>
 
 </ng-template>

@@ -119,12 +119,16 @@ import {DashboardStatisticsComponent} from '../dashboard-statistics/dashboard-st
 import {DashboardStatisticsService} from '../services/dashboard-statistics.service';
 import {QrCodeComponent} from '../qr-code/qr-code.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
-import {CardComponent} from '../dashboard-statistics/components/card.component';
+import {CardComponent} from '../dashboard-statistics/components/card/card.component';
 import {DragAndDropDirective} from '../dashboard-statistics/directives/dragAndDrop/dragAndDrop.directive';
 import {RadioButtonDirective} from "../form-data/directives/radio-button.directive";
+import {PlotlyChartsComponent} from '../dashboard-statistics/components/plotly-charts/plotly-charts.component';
+import {CountsComponent} from '../dashboard-statistics/components/counts/counts.component';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -216,7 +220,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     DashboardStatisticsComponent,
     CardComponent,
     DragAndDropDirective,
-    DashboardStatisticsComponent,
+    PlotlyChartsComponent,
+    CountsComponent,
     ConditionalFormDataComponent,
     RadioButtonDirective
   ],
@@ -252,7 +257,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     TypeaheadModule.forRoot(),
     DragulaModule.forRoot(),
     PlotlyModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTabsModule
   ],
   providers: [
     Utils,
