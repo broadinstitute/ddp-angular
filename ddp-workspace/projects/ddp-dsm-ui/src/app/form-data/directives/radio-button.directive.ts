@@ -1,5 +1,5 @@
-import {Directive, EmbeddedViewRef, Input, OnInit, TemplateRef, ViewContainerRef} from "@angular/core";
-import {FieldSettings} from "../../field-settings/field-settings.model";
+import {Directive, EmbeddedViewRef, Input, OnInit, TemplateRef, ViewContainerRef} from '@angular/core';
+import {FieldSettings} from '../../field-settings/field-settings.model';
 
 
 class btnContext {
@@ -12,7 +12,7 @@ class conditionalFieldSettings {
   }
 }
 
-type NameValuePair = {name: string, value: string};
+type NameValuePair = {name: string; value: string};
 
 @Directive({
   selector: '[ddpRadioBtn]'
@@ -52,8 +52,8 @@ export class RadioButtonDirective implements OnInit {
 
   @Input('ddpRadioBtnTextArea') textAreaRef: TemplateRef<any> | null = null;
 
-  ngOnInit() {
-    this.viewContainerRef.createEmbeddedView(this.templateRef, this.getBtnContextInstance)
+  ngOnInit(): void {
+    this.viewContainerRef.createEmbeddedView(this.templateRef, this.getBtnContextInstance);
     this.createEmbeddedView();
   }
 
@@ -76,7 +76,8 @@ export class RadioButtonDirective implements OnInit {
 
   private get conditionalFieldSetting(): FieldSettings | null {
     const conditionalActions = this.fieldSettings.actions?.filter(action => action.conditionalFieldSetting);
-    const conditionalItemIndex = conditionalActions?.findIndex(data => data.condition === String(this.afterClickCheckedRadioBtn || this.initCheckedRadioBtn));
+    const conditionalItemIndex = conditionalActions?.findIndex(
+      data => data.condition === String(this.afterClickCheckedRadioBtn || this.initCheckedRadioBtn));
     return conditionalItemIndex > -1 && this.isBelonging ? conditionalActions[conditionalItemIndex].conditionalFieldSetting : null;
   }
 

@@ -2287,7 +2287,7 @@ export class ParticipantListComponent implements OnInit {
           const [conditionalFilter] = this.createFilter(conditionalFieldSettings);
           conditionalFilters.push(conditionalFilter);
         }
-      })
+      });
     }
     return [filter, ...conditionalFilters];
   }

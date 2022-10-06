@@ -1339,7 +1339,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           tempObj[colName] = participantDataFound.data[colName];
           answers.push(tempObj);
         }
-      })
+      });
     }
     return answers;
   }
@@ -1347,7 +1347,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   getConditionalParticipantForDynamicField(fieldSetting: FieldSettings): any[] {
       const conditionalDisplayData: [] = this.getConditionalDisplayData(fieldSetting);
     if (conditionalDisplayData?.length > 0) {
-        return this.getParticipantAnswersForConditionalDynamicField(conditionalDisplayData)
+        return this.getParticipantAnswersForConditionalDynamicField(conditionalDisplayData);
     }
     return [];
   }
@@ -1356,7 +1356,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     if (fieldSetting.actions) {
       const actionWithConditionalDisplay = fieldSetting.actions.filter(action => action.type === this.CONDITIONAL_DISPLAY);
       if (actionWithConditionalDisplay) {
-        return actionWithConditionalDisplay
+        return actionWithConditionalDisplay;
       }
     }
 

@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import {FieldSettings} from '../field-settings/field-settings.model';
 import {Value} from '../utils/value.model';
-import {MatRadioChange} from "@angular/material/radio";
+import {MatRadioChange} from '@angular/material/radio';
 
 @Component({
   selector: 'app-form-data',
@@ -29,7 +29,7 @@ export class FormDataComponent implements OnInit {
 
   public showOrNot = false;
   public checkedRadioBtnValue: string;
-  public checkedRadioBtn: string
+  public checkedRadioBtn: string;
   currentPatchField: string;
   CONDITIONAL_DISPLAY = 'conditionalDisplay';
 
@@ -38,12 +38,12 @@ export class FormDataComponent implements OnInit {
 
   get getCheckbox(): string {
     const foundData = this.conditionalData[0]?.[this.fieldSetting.actions[0]?.conditionalFieldSetting?.columnName];
-    return foundData || "";
+    return foundData || '';
   }
 
   getRadio(type: string): string {
     const foundData = this.conditionalData?.find(data => data[type])?.[type];
-    return foundData || "";
+    return foundData || '';
   }
 
   ngOnInit(): void {
@@ -58,7 +58,7 @@ export class FormDataComponent implements OnInit {
     return false;
   }
 
-  public isConditionalDisplayRadio() {
+  public isConditionalDisplayRadio(): boolean {
     if (this.fieldSetting?.actions) {
       return this.fieldSetting.actions.some(data => data.type === this.CONDITIONAL_DISPLAY);
     }
@@ -116,7 +116,7 @@ export class FormDataComponent implements OnInit {
     this.showConditional();
   }
 
-  onRadioChange(radioBtn: MatRadioChange) {
+  onRadioChange(radioBtn: MatRadioChange): void {
     this.checkedRadioBtnValue = this.participantData = radioBtn.value;
     this.patchData.emit(radioBtn.value);
   }
@@ -153,7 +153,7 @@ export class FormDataComponent implements OnInit {
 
   showConditionalRadio(): boolean {
     const conditionalAction = this.fieldSetting.actions?.filter(action => action.conditionalFieldSetting);
-    return !!conditionalAction?.some(data => data.condition === String(this.participantData))
+    return !!conditionalAction?.some(data => data.condition === String(this.participantData));
   }
 
   public getConditionalFieldSettingRadio(value?: string): FieldSettings {
