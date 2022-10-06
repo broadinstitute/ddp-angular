@@ -36,19 +36,18 @@ export class FormDataComponent implements OnInit {
   constructor() {}
 
 
-  get getCheckbox() {
+  get getCheckbox(): string {
     const foundData = this.conditionalData[0]?.[this.fieldSetting.actions[0]?.conditionalFieldSetting?.columnName];
     return foundData || "";
   }
 
-  getRadio(type: string) {
+  getRadio(type: string): string {
     const foundData = this.conditionalData?.find(data => data[type])?.[type];
     return foundData || "";
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.showConditional();
-    this.showConditionalRadio();
   }
 
   public isConditionalDisplay(): boolean {
@@ -115,13 +114,11 @@ export class FormDataComponent implements OnInit {
 
     this.patchData.emit(v);
     this.showConditional();
-    this.showConditionalRadio();
   }
 
   onRadioChange(radioBtn: MatRadioChange) {
     this.checkedRadioBtnValue = radioBtn.value;
     this.patchData.emit(radioBtn.value);
-    this.showConditionalRadio();
   }
 
   conditionalValueChanged(htmlTextAreaElement: EventTarget, key?): void {
