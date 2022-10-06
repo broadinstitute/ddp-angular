@@ -2222,7 +2222,7 @@ export class ParticipantListComponent implements OnInit {
         this.dataSources.set(setting.columnName, setting.columnDisplay);
         for (const field of this.settings[setting.columnName]) {
           const filter = this.createFilter(field);
-          possibleColumns.push(filter);
+          possibleColumns.push(...filter);
         }
         this.sourceColumns[setting.columnName] = possibleColumns;
         possibleColumns = [];
@@ -2234,19 +2234,19 @@ export class ParticipantListComponent implements OnInit {
     return Array.isArray(this.assignees) && this.assignees.length > 0;
   }
 
-  private createFilter(field: any): Filter {
+  private createFilter(field: FieldSettings): Filter[] {
     let showType = field.displayType;
     let filter: Filter = new Filter(
       new ParticipantColumn(field.columnDisplay?.replace('*', ''), field.columnName, 'participantData', field.fieldType, false),
       showType,
-      field.possibleValues
+      (field.possibleValues as NameValue[])
     );
     if (showType === Filter.TEXTAREA_TYPE) {
       showType = Filter.TEXT_TYPE;
       filter = new Filter(
         new ParticipantColumn(field.columnDisplay.replace('*', ''), field.columnName, 'participantData', field.fieldType, false),
         showType,
-        field.possibleValues
+        (field.possibleValues as NameValue[])
       );
     } else if (showType === Filter.ACTIVITY_STAFF_TYPE) {
       if (field.possibleValues && field.possibleValues[0].type) {
@@ -2257,7 +2257,7 @@ export class ParticipantListComponent implements OnInit {
       filter = new Filter(
         new ParticipantColumn(field.columnDisplay.replace('*', ''), field.columnName, 'participantData', field.fieldType, false),
         showType,
-        field.possibleValues
+        (field.possibleValues as NameValue[])
       );
       if (showType === Filter.RADIO_TYPE) {
         const options: NameValue[] = [];
@@ -2272,11 +2272,23 @@ export class ParticipantListComponent implements OnInit {
     } else if (showType === Filter.RADIO_TYPE) {
       filter = new Filter(
         new ParticipantColumn(field.columnDisplay.replace('*', ''), field.columnName, 'participantData', field.fieldType, false),
-        showType, field.possibleValues, null, null, null, null, null, null, null, null,
+        showType, (field.possibleValues as NameValue[]), null, null, null, null, null, null, null, null,
         null, null, true
       );
     }
-    return filter;
+
+    const conditionalFilters = [];
+
+    if(field?.actions) {
+      field.actions.forEach(action => {
+        if(action?.conditionalFieldSetting) {
+          const conditionalFieldSettings = action.conditionalFieldSetting;
+          const [conditionalFilter] = this.createFilter(conditionalFieldSettings);
+          conditionalFilters.push(conditionalFilter);
+        }
+      })
+    }
+    return [filter, ...conditionalFilters];
   }
 
   addTabColumns(): void {
@@ -2285,7 +2297,7 @@ export class ParticipantListComponent implements OnInit {
       this.dataSources.set(tab.columnName, tab.columnDisplay);
       for (const setting of this.settings[tab.columnName]) {
         const filter = this.createFilter(setting);
-        possibleColumns.push(filter);
+        possibleColumns.push(...filter);
       }
       this.sourceColumns[tab.columnName] = possibleColumns;
       possibleColumns = [];
