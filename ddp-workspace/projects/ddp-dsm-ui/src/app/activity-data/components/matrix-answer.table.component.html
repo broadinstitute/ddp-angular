@@ -1,0 +1,22 @@
+<table>
+  <thead>
+    <tr class="mainRow">
+      <td></td>
+      <td class="spaceAround" *ngFor="let option of questionDefinition.options">
+        {{ option.optionText }}
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="spaceUnder" *ngFor="let row of questionDefinition.rows">
+      <td >
+        {{row.rowText}}
+      </td>
+      <td class="alignCenter" *ngFor="let option of questionDefinition.options">
+        <input class="radioButton" type="radio" disabled [checked]="isChecked(option.optionStableId, row.rowStableId)">
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+

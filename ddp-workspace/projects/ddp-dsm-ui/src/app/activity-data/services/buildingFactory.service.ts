@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {QuestionTypeEnum} from '../enums/questionType.enum';
 import {QuestionAnswer} from '../models/question-answer.model';
-import {QuestionDefinition} from '../models/question-definition.model';
-import {QuestionTypeModel} from '../models/question-type-models';
+import {QuestionDefinition, Row} from '../models/question-definition.model';
+import {MatrixAnswer, QuestionTypeModel} from '../models/question-type-models';
 import {SectionModeEnum} from '../enums/sectionMode.enum';
 import {Utils} from '../../utils/utils';
 import {ActivityRule} from '../models/activity-rule';
+import {Option} from "../models/option.model";
 
 @Injectable()
 export class BuildingFactoryService {
@@ -277,18 +278,18 @@ export class BuildingFactoryService {
     return answers;
   }
 
-  private getMatrix(selectedAnswers: Object, questDef: Object): any {
-    return Object.entries(selectedAnswers['matrixSelected']).map(([questionId, answerId]): Object => ({
-        question: this.getMatrixQuestion(questionId, questDef['rows']),
-        answer: this.getMatrixAnswer((answerId as string), questDef['options'])
+  private getMatrix(selectedAnswers: Object, questDef: Object): MatrixAnswer[] {
+    return Object.entries(selectedAnswers['matrixSelected']).map(([questionId, answerId]): MatrixAnswer => ({
+        verticalAnswer: this.getMatrixVerticalAnswer(questionId, questDef['rows']),
+        horizontalAnswer: this.getMatrixHorizontalAnswer((answerId as string), questDef['options']),
       }));
   }
 
-  private getMatrixQuestion(questionId: string, rows: Array<Object>): string {
-    return rows.find(question => question['rowStableId'] === questionId)['rowText'];
+  private getMatrixVerticalAnswer(questionId: string, rows: Row[]): Row {
+    return rows.find(question => question['rowStableId'] === questionId);
   }
 
-  private getMatrixAnswer(answerId: string, options: Array<Object>): string {
-    return options.find(answer => answer['optionStableId'] === answerId)['optionText'];
+  private getMatrixHorizontalAnswer(answerId: string, options: Option[]): Option {
+    return options.find(answer => answer['optionStableId'] === answerId);
   }
 }

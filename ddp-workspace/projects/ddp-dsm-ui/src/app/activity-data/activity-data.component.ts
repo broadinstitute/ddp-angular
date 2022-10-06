@@ -3,6 +3,7 @@ import {ActivityData} from './activity-data.model';
 import {ActivityDefinition} from './models/activity-definition.model';
 import {buildActivityDataService} from './services/buildActivityData.service';
 import {QuestionTypeModel} from './models/question-type-models';
+import {QuestionDefinition} from "./models/question-definition.model";
 
 @Component({
   selector: 'app-activity-data',
@@ -27,4 +28,9 @@ export class ActivityDataComponent {
         .buildActivity(this.activityDefinition, this.activity);
     }
   }
+
+  public matrixQuestionDefinition(stableId: string): QuestionDefinition {
+    return this.activityDefinition.questions.find((question) => question.stableId === stableId);
+  }
+
 }
