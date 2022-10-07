@@ -13,9 +13,8 @@ export class MatrixAnswerTableComponent {
   @Input() questionDefinition!: QuestionDefinition;
 
   public isChecked(optionId: string, rowId: string): boolean {
-    const checkedAnswerIndex = this.answers
-      .findIndex(answer => answer.horizontalAnswer?.optionStableId === optionId && answer.verticalAnswer?.rowStableId === rowId);
-    return checkedAnswerIndex > -1;
+    return this.answers
+      .some(answer => answer.horizontalAnswer?.optionStableId === optionId && answer.verticalAnswer?.rowStableId === rowId);
   }
 
   public get columns(): Option[]  {
