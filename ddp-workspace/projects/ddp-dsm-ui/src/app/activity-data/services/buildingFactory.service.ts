@@ -278,18 +278,18 @@ export class BuildingFactoryService {
     return answers;
   }
 
-  private getMatrix(selectedAnswers: Object, questDef: Object): MatrixAnswer[] {
+  private getMatrix(selectedAnswers: QuestionAnswer, questDef: QuestionDefinition): MatrixAnswer[] {
     return Object.entries(selectedAnswers['matrixSelected']).map(([questionId, answerId]): MatrixAnswer => ({
-        verticalAnswer: this.getMatrixVerticalAnswer(questionId, questDef['rows']),
-        horizontalAnswer: this.getMatrixHorizontalAnswer((answerId as string), questDef['options']),
+        verticalAnswer: this.getMatrixVerticalAnswer(questionId, questDef.rows),
+        horizontalAnswer: this.getMatrixHorizontalAnswer((answerId as string), questDef.options),
       }));
   }
 
   private getMatrixVerticalAnswer(questionId: string, rows: Row[]): Row {
-    return rows.find(question => question['rowStableId'] === questionId);
+    return rows.find(question => question.rowStableId === questionId);
   }
 
   private getMatrixHorizontalAnswer(answerId: string, options: Option[]): Option {
-    return options.find(answer => answer['optionStableId'] === answerId);
+    return options.find(answer => answer.optionStableId === answerId);
   }
 }

@@ -12,8 +12,8 @@
       <td >
         {{row.rowText}}
       </td>
-      <td class="alignCenter" *ngFor="let column of columns">
-        <input class="radioButton" type="radio" disabled [checked]="isChecked(column.optionStableId, row.rowStableId)">
+      <td class="alignCenter" *ngFor="let columnCheckbox of columns">
+        <input class="radioButton" type="radio" disabled [checked]="isChecked(columnCheckbox.optionStableId, row.rowStableId)">
       </td>
     </tr>
   </tbody>

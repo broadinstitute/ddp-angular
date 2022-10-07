@@ -44,15 +44,10 @@ export class buildActivityDataService {
     }
 
     private generateDefaultMatrixAnswers(question: QuestionDefinition): MatrixAnswer[] {
-      const matrixAnswer: MatrixAnswer[] = [];
-      question.rows.forEach(row => {
-        const mAnswer: MatrixAnswer = {
-          verticalAnswer: row,
-          horizontalAnswer: null
-        };
-        matrixAnswer.push(mAnswer);
-      });
-      return matrixAnswer;
+      return question.rows.map(row =>
+        ({verticalAnswer: row,
+        horizontalAnswer: null})
+      );
     }
 
 }
