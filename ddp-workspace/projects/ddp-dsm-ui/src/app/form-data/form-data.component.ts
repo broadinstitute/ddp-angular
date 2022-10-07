@@ -40,8 +40,7 @@ export class FormDataComponent implements OnInit {
       if (this.fieldSetting.displayType !== 'ACTIVITY_STAFF') {
         // return savedAnswer if it is not type activity_staff
         return this.participantData ? this.participantData.toString() : this.participantData;
-      }
-      else {
+      } else {
         // if it is type activity_staff only return if it is not empty, otherwise return answer from the activity
         if (this.participantData != null && this.participantData !== '') {
           return this.participantData ? this.participantData.toString() : this.participantData;
@@ -61,8 +60,7 @@ export class FormDataComponent implements OnInit {
   getOptions(): Value[] | string[] {
     if (this.fieldSetting.displayType !== 'ACTIVITY' && this.fieldSetting.displayType !== 'ACTIVITY_STAFF') {
       return this.fieldSetting.possibleValues;
-    }
-    else {
+    } else {
       return this.activityOptions;
     }
   }
@@ -76,18 +74,14 @@ export class FormDataComponent implements OnInit {
     let v;
     if (typeof value === 'string') {
       v = value;
-    }
-    else {
+    } else {
       if (value.srcElement != null && typeof value.srcElement.value === 'string') {
         v = value.srcElement.value;
-      }
-      else if (value.value != null) {
+      } else if (value.value != null) {
         v = value.value;
-      }
-      else if (value.checked != null) {
+      } else if (value.checked != null) {
         v = value.checked;
-      }
-      else if (value.source.value != null && value.source.selected) {
+      } else if (value.source.value != null && value.source.selected) {
         v = value.source.value;
       }
     }
