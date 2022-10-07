@@ -221,6 +221,12 @@ export class TissueComponent {
         },
         error: err => {
           this.dup = true;
+          if (tAlias === 'sm') {
+            if (smIdArray && index && smId) {
+              smIdArray[ index ].smIdPk = smId;//for new sm ids
+            }
+            this.smIdDuplicate[ this.currentSMIDField ].add(this.createDuplicateIndex( index ) );
+          }
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.router.navigate([ Statics.HOME_URL ]);
           }
