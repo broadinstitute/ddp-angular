@@ -2,18 +2,18 @@
   <thead>
     <tr class="mainRow">
       <td></td>
-      <td class="spaceAround" *ngFor="let option of questionDefinition.options">
-        {{ option.optionText }}
+      <td class="spaceAround" *ngFor="let column of columns">
+        {{ column.optionText }}
       </td>
     </tr>
   </thead>
   <tbody>
-    <tr class="spaceUnder" *ngFor="let row of questionDefinition.rows">
+    <tr class="spaceUnder" *ngFor="let row of rows">
       <td >
         {{row.rowText}}
       </td>
-      <td class="alignCenter" *ngFor="let option of questionDefinition.options">
-        <input class="radioButton" type="radio" disabled [checked]="isChecked(option.optionStableId, row.rowStableId)">
+      <td class="alignCenter" *ngFor="let column of columns">
+        <input class="radioButton" type="radio" disabled [checked]="isChecked(column.optionStableId, row.rowStableId)">
       </td>
     </tr>
   </tbody>
