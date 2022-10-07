@@ -1,5 +1,4 @@
 import { ActivityInstance, ActivityStatusCodes } from 'ddp-sdk';
-import { omit } from 'underscore';
 
 import { ActivityCode } from '../constants/activity-code';
 import { RenderActivity, RenderActivityKey } from './types';
@@ -49,13 +48,52 @@ export const getRenderActivities = (instanceGuid: string, activities: ActivityIn
     return null;
   }
 
-  let renderActivitiesMap: Record<string, RenderActivity> = {
+  const isChild = activities.some(a => a.activityCode === ActivityCode.ConsentParental)
+    && !activities.some(a => a.activityCode === ActivityCode.ConsentSelf);
+
+  const isHealthyBranch = activities.some(a => a.activityCode === ActivityCode.AboutHealthy);
+
+  const renderActivitiesMap: Record<string, RenderActivity> = getRenderActivitiesMap(isChild, isHealthyBranch);
+
+  const updatedRenderActivitiesMap =  activities.reduce((acc: {[key: string]: RenderActivity}, activity: ActivityInstance) => {
+    /** Find which activity is participant currently on */
+    if (activity.instanceGuid === instanceGuid) {
+      const renderKey = getRenderActivityKeyByActivityCode(activity.activityCode as ActivityCode);
+      acc[renderKey].isCurrent = true;
+    }
+
+    /** Mark other activities as complete */
+    const isAddParticipantActivity = [
+      ActivityCode.AddParticipantSelf,
+      ActivityCode.AddParticipantParental,
+      ActivityCode.AddParticipantDependent
+    ].includes(activity.activityCode as ActivityCode);
+
+    if (!isAddParticipantActivity
+      && (activity.statusCode === ActivityStatusCodes.COMPLETE || !!activity.previousInstanceGuid)
+    ) {
+      const renderKey = getRenderActivityKeyByActivityCode(activity.activityCode as ActivityCode);
+      acc[renderKey].isComplete = true;
+    }
+
+    return acc;
+  }, renderActivitiesMap);
+
+  return Object.values(updatedRenderActivitiesMap);
+};
+
+
+function getRenderActivitiesMap(isChild: boolean, isHealthyBranch: boolean): Record<string, RenderActivity> {
+  const basicActivitiesMap = {
     [RenderActivityKey.Consent]: {
       i18nKey: 'Consent',
     },
     [RenderActivityKey.About]: {
-      i18nKey: null,
-    },
+      i18nKey: isChild ? 'AboutMyChild' : 'AboutMe',
+    }
+  };
+
+  const additionalActivitiesMap: Record<string, RenderActivity> = {
     [RenderActivityKey.MedicalReleaseForm]: {
       i18nKey: 'MedicalReleaseForm',
     },
@@ -67,66 +105,7 @@ export const getRenderActivities = (instanceGuid: string, activities: ActivityIn
     },
   };
 
-  const isChild = activities.some(a => a.activityCode === ActivityCode.ConsentParental);
-
-  renderActivitiesMap[RenderActivityKey.About] = {
-    i18nKey: isChild ? 'AboutMyChild' : 'AboutMe',
-  };
-
-  /**
-   * Branching: "Healthy" & "Patient"
-   */
-  const aboutActivity = activities.find(a =>
-    [ActivityCode.AboutHealthy, ActivityCode.AboutPatient].includes(a.activityCode as ActivityCode),
-  );
-  const hasAboutActivity = !!aboutActivity;
-
-  if (hasAboutActivity) {
-    if (aboutActivity.activityCode === ActivityCode.AboutHealthy) {
-      /**
-       * On "Healthy" branch - omit any activities after "About" survey
-       */
-      renderActivitiesMap = omit(renderActivitiesMap, [
-        RenderActivityKey.MedicalReleaseForm,
-        RenderActivityKey.MedicalRecordUpload,
-        RenderActivityKey.PatientSurvey,
-      ]);
-    }
-  }
-
-  /**
-   * Find which activity is participant currently on
-   */
-  if (instanceGuid) {
-    const activity = activities.find(a => a.instanceGuid === instanceGuid);
-    const renderKey = getRenderActivityKeyByActivityCode(activity.activityCode as ActivityCode);
-
-    renderActivitiesMap[renderKey].isCurrent = true;
-  }
-
-  /**
-   * Mark other activities as complete
-   */
-  activities.forEach(a => {
-    /**
-     * Skip "Add Participant" activity
-     */
-    if (
-      [ActivityCode.AddParticipantSelf,
-       ActivityCode.AddParticipantParental,
-       ActivityCode.AddParticipantDependent].includes(a.activityCode as ActivityCode)
-    ) {
-      return;
-    }
-
-    if (a.statusCode === ActivityStatusCodes.COMPLETE || !!a.previousInstanceGuid) {
-      const renderKey = getRenderActivityKeyByActivityCode(a.activityCode as ActivityCode);
-
-      if (renderActivitiesMap[renderKey]) {
-        renderActivitiesMap[renderKey].isComplete = true;
-      }
-    }
-  });
-
-  return Object.values(renderActivitiesMap);
-};
+  return isHealthyBranch ?
+    basicActivitiesMap   /** On "Healthy" branch - omit any activities after "About" survey, only basic ones */
+    : {...basicActivitiesMap, ...additionalActivitiesMap};
+}

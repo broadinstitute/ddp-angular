@@ -6,7 +6,9 @@
         <p>We are on a mission to find out what causes single ventricle heart disease and find better ways to treat it.</p>
         <p>By sharing your health information,<br>you can help us make it happen.</p>
         <p>Join our community of patients and families<br>who are committed to making discoveries!</p>
-        <button (click)="clickPreScreening()" class="button button--primary button--lg" [routerLink]="Route.PreScreening">{{ PRESCREEN_BUTTON_LABEL }}</button>
+        <div class="header-description-button">
+          <button (click)="clickPreScreening()" class="button button--primary button--lg" [routerLink]="Route.PreScreening">{{ PRESCREEN_BUTTON_LABEL }}</button>
+        </div>
       </div>
       <div class="header-photo">
         <img src="assets/images/about-header.jpg" alt="">
@@ -41,7 +43,9 @@
       <p>We don't know what causes single ventricle heart defects<br>or many of the associated health problems. If we understand the causes, researchers may be able to develop new and better treatments.</p>
       <p>We hope that by looking at the genes of at least 5,000 patients and their immediate family members, we can make life-saving discoveries.</p>
       <p>In order to reach our goal, <b>we need your help.</b></p>
-      <button (click)="clickPreScreening()" class="button button--primary button--lg" [routerLink]="Route.PreScreening">{{ PRESCREEN_BUTTON_LABEL }}</button>
+      <div class="about-right-button">
+        <button (click)="clickPreScreening()" class="button button--primary button--lg" [routerLink]="Route.PreScreening">{{ PRESCREEN_BUTTON_LABEL }}</button>
+      </div>
     </div>
   </div>
 </section>

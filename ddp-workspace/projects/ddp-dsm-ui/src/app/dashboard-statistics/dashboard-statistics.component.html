@@ -1,9 +1,11 @@
 <h1>
   Statistics Dashboard
 </h1>
+
 <div class="dashboard">
-  <ng-container  *ngTemplateOutlet="charts, context: {
-    charts: Charts | async
+  <ng-container *ngTemplateOutlet="charts, context: {
+    charts: Charts | async,
+    counts: Counts | async
   }">
   </ng-container>
 </div>
@@ -12,20 +14,34 @@
   <mat-spinner></mat-spinner>
 </div>
 
-<ng-template let-Charts="charts" #charts>
+<ng-template let-Charts="charts" let-Counts="counts" #charts>
 
-  <ng-container *ngIf="Charts?.length < 1 && !loading; else chartsDisplay">
-    <p class="dashboard-noCharts">There are not available charts for this study</p>
-  </ng-container>
+  <div class="dashboard-chartsAndCounts" *ngIf="!loading">
 
-  <ng-template #chartsDisplay>
-    <section *ngFor="let chart of Charts" class="dashboard-chart" [ngClass]="chart.size">
-      <plotly-plot
-        [data]="chart.data"
-        [layout]="chart.layout"
-        [config]="getConfiguration"
-      ></plotly-plot>
-    </section>
-  </ng-template>
+
+      <mat-tab-group mat-align-tabs="center" *ngIf="Charts.length > 0 || Counts.length > 0; else noCharts">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">bar_chart</mat-icon>
+            Charts
+          </ng-template>
+          <app-plotly-charts [chartData]="Charts" [config]="getConfiguration"></app-plotly-charts>
+        </mat-tab>
+
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">score</mat-icon>
+            Counts
+          </ng-template>
+          <app-counts [countsData]="Counts"></app-counts>
+        </mat-tab>
+
+      </mat-tab-group>
+
+    <ng-template #noCharts>
+      <p class="noCharts">There are not available charts and counts for this study</p>
+    </ng-template>
+
+  </div>
 
 </ng-template>
