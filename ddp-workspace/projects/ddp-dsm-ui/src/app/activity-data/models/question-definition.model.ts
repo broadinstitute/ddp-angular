@@ -3,7 +3,7 @@ import { Option } from './option.model';
 
 export interface Row {
   rowStableId: string;
-  rowText: string
+  rowText: string;
 }
 
 export class QuestionDefinition {

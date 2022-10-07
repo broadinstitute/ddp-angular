@@ -3,7 +3,7 @@ import {ActivityData} from './activity-data.model';
 import {ActivityDefinition} from './models/activity-definition.model';
 import {buildActivityDataService} from './services/buildActivityData.service';
 import {QuestionTypeModel} from './models/question-type-models';
-import {QuestionDefinition} from "./models/question-definition.model";
+import {QuestionDefinition} from './models/question-definition.model';
 
 @Component({
   selector: 'app-activity-data',

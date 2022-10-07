@@ -6,7 +6,7 @@ import {MatrixAnswer, QuestionTypeModel} from '../models/question-type-models';
 import {SectionModeEnum} from '../enums/sectionMode.enum';
 import {Utils} from '../../utils/utils';
 import {ActivityRule} from '../models/activity-rule';
-import {Option} from "../models/option.model";
+import {Option} from '../models/option.model';
 
 @Injectable()
 export class BuildingFactoryService {

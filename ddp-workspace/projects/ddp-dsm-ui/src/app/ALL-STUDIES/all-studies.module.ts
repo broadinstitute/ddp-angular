@@ -130,7 +130,7 @@ import {PlotlyChartsComponent} from '../dashboard-statistics/components/plotly-c
 import {CountsComponent} from '../dashboard-statistics/components/counts/counts.component';
 import {
   MatrixAnswerTableComponent
-} from "../activity-data/components/matrix-answer-table.component";
+} from '../activity-data/components/matrix-answer-table.component';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 

@@ -1,10 +1,10 @@
 import {Component, Input} from '@angular/core';
-import {QuestionDefinition, Row} from "../models/question-definition.model";
-import {MatrixAnswer} from "../models/question-type-models";
-import {Option} from "../models/option.model";
+import {QuestionDefinition, Row} from '../models/question-definition.model';
+import {MatrixAnswer} from '../models/question-type-models';
+import {Option} from '../models/option.model';
 
 @Component({
-  selector: 'matrix-answer-table',
+  selector: 'app-matrix-answer-table',
   templateUrl: './matrix-answer.table.component.html',
   styleUrls: ['./matrix-answer.table.component.scss'],
 })

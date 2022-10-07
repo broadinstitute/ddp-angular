@@ -5,7 +5,7 @@ import {MatrixAnswer, QuestionTypeModel} from '../models/question-type-models';
 import { QuestionDefinition } from '../models/question-definition.model';
 import { QuestionAnswer } from '../models/question-answer.model';
 import { BuildingFactoryService } from './buildingFactory.service';
-import {QuestionTypeEnum} from "../enums/questionType.enum";
+import {QuestionTypeEnum} from '../enums/questionType.enum';
 
 @Injectable()
 
@@ -35,7 +35,7 @@ export class buildActivityDataService {
         type: '',
         stableId: question.stableId,
         question: question.questionText,
-      }
+      };
       if(question.questionType === QuestionTypeEnum.Matrix) {
         noAnswerObj.type = QuestionTypeEnum.Matrix;
         noAnswerObj.matrixAnswer = this.generateDefaultMatrixAnswers(question);
@@ -51,7 +51,7 @@ export class buildActivityDataService {
           horizontalAnswer: null
         };
         matrixAnswer.push(mAnswer);
-      })
+      });
       return matrixAnswer;
     }
 

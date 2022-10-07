@@ -121,7 +121,7 @@
   <ng-container *ngIf="type === 'MATRIX'">
     <div class="matrixSeparator">
       <h5 class="grey-color" ><b>{{ question }}</b></h5>
-      <matrix-answer-table [answers]="matrix" [questionDefinition]="matrixQuestionDefinition(stableId)"></matrix-answer-table>
+      <app-matrix-answer-table [answers]="matrix" [questionDefinition]="matrixQuestionDefinition(stableId)"></app-matrix-answer-table>
     </div>
   </ng-container>
 

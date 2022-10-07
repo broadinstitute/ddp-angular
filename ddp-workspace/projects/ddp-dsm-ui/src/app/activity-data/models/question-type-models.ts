@@ -1,6 +1,6 @@
 // Core interface
-import {Option} from "./option.model";
-import {Row} from "./question-definition.model";
+import {Option} from './option.model';
+import {Row} from './question-definition.model';
 
 export interface QuestionTypeModel {
   type: string;
