@@ -1571,11 +1571,11 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     if (!canBeSequencedBasedOnLocation) {
       const addParticipantActivity = participant.data.activities.find(activity => activity.activityCode === this.ADD_PARTICIPANT);
       if (addParticipantActivity != null && prequalActivity) {
-        const countryQuestion = prequalActivity?.questionsAnswers?.find(questionAnswer => questionAnswer.stableId === this.CHILD_COUNTRY);
+        const countryQuestion = addParticipantActivity?.questionsAnswers?.find(questionAnswer => questionAnswer.stableId === this.CHILD_COUNTRY);
         if (countryQuestion != null && countryQuestion.answer) {
           if (countryQuestion.answer instanceof Array) {
             if (countryQuestion.answer.indexOf(this.SELF_COUNTRY_US) > -1) {
-              const stateQuestion = prequalActivity?.questionsAnswers?.find(questionAnswer => questionAnswer.stableId === this.CHILD_STATE);
+              const stateQuestion = addParticipantActivity?.questionsAnswers?.find(questionAnswer => questionAnswer.stableId === this.CHILD_STATE);
               if (stateQuestion.answer instanceof Array) {
                 if (stateQuestion.answer.indexOf(this.SELF_STATE_NY) === -1) {
                   canBeSequencedBasedOnLocation = true;
