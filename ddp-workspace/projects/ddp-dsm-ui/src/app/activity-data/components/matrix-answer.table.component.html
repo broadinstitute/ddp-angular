@@ -1,20 +1,26 @@
 <table>
   <thead>
     <tr class="mainRow">
-      <td></td>
-      <td class="spaceAround" *ngFor="let column of columns">
+      <td class="headerData"></td>
+      <td class="headerData" *ngFor="let column of columns">
         {{ column.optionText }}
       </td>
     </tr>
   </thead>
   <tbody>
     <tr class="spaceUnder" *ngFor="let row of rows">
-      <td >
+
+      <td class="firstColumn">
         {{row.rowText}}
       </td>
-      <td class="alignCenter" *ngFor="let columnCheckbox of columns">
-        <input class="radioButton" type="radio" disabled [checked]="isChecked(columnCheckbox.optionStableId, row.rowStableId)">
+
+      <td class="alignCenter" *ngFor="let columnCheckbox of columns; let i = index" >
+        <mat-radio-group >
+            <mat-radio-button color="primary" disabled="true"  [value]="i"  [checked]="isChecked(columnCheckbox.optionStableId, row.rowStableId)">
+            </mat-radio-button>
+        </mat-radio-group >
       </td>
+
     </tr>
   </tbody>
 </table>

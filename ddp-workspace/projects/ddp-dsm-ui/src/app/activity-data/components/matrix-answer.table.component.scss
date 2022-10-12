@@ -3,36 +3,28 @@ tr.spaceUnder>td {
 }
 .mainRow {
   box-shadow: 0 2px 2px -2px gray;
+  td:first-of-type {
+    width: 250px;
+    word-break: break-word;
+    text-align: center;
+  }
+  td:not(:first-of-type) {
+    width: 176px;
+    word-break: break-word;
+    text-align: center;
+  }
 }
 
 .alignCenter {
   text-align: center;
 }
 
-input[type='radio']:disabled:checked:after {
-  width: 14px;
-  height: 14px;
-  border-radius: 15px;
-  position: relative;
-  background-color: #546989;
-  content: '';
-  display: inline-block;
-  visibility: visible;
-  border: 1px solid grey;
-}
-
-.spaceAround {
-  padding: 10px;
-  text-align: center;
+.firstColumn {
+  padding-right: 10px;
 }
 
 .marginTop {
   margin-top: 10px;
-}
-
-input[type="radio"][disabled]
-{
-  border-color: purple;
 }
 
 tbody:before {
