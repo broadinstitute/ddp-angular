@@ -1,17 +1,20 @@
+@mixin mainRowDefaults($width) {
+  width: $width;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 tr.spaceUnder>td {
   padding-bottom: 1em;
 }
 .mainRow {
   box-shadow: 0 2px 2px -2px gray;
   td:first-of-type {
-    width: 250px;
-    word-break: break-word;
-    text-align: center;
+    @include mainRowDefaults(250px);
   }
   td:not(:first-of-type) {
-    width: 176px;
-    word-break: break-word;
-    text-align: center;
+    @include mainRowDefaults(176px);
   }
 }
 
