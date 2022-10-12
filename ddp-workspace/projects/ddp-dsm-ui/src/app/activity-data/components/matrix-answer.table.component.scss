@@ -1,8 +1,8 @@
 @mixin mainRowDefaults($width) {
   width: $width;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  word-break: break-word;
+  text-align: center;
+  padding-bottom: 1em;
 }
 
 tr.spaceUnder>td {
