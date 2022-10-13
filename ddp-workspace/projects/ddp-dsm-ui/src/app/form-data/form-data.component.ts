@@ -4,7 +4,7 @@ import {
   Input,
   OnInit,
   Output,
-} from '@angular/core';import {FormControl} from '@angular/forms';
+} from '@angular/core';
 import {FieldSettings} from '../field-settings/field-settings.model';
 import {Value} from '../utils/value.model';
 import {MatRadioChange} from '@angular/material/radio';
@@ -15,9 +15,6 @@ import {FormControl} from '@angular/forms';
   templateUrl: './form-data.component.html',
   styleUrls: [ './form-data.component.css' ]
 } )
-export class FormDataComponent implements OnInit {
-  styleUrls: ['./form-data.component.css'],
-})
 export class FormDataComponent implements OnInit {
 
   @Input() fieldSetting: FieldSettings;
@@ -38,9 +35,11 @@ export class FormDataComponent implements OnInit {
   TEXT_AREA_DEFAULT_SIZE = 50000;
   TEXT_DEFAULT_SIZE = 200;
   dynamicMaxLength = 100;
+  conditionalMaxLength = 100;
   textareaField = new FormControl();
 
   ngOnInit(): void {
+    this.showConditional();
     if (this.fieldSetting.details && this.fieldSetting.details['size'] > 0) {
       this.dynamicMaxLength = this.fieldSetting.details['size'];
     } else if (this.fieldSetting.displayType === 'TEXT') {
@@ -62,10 +61,6 @@ export class FormDataComponent implements OnInit {
   getRadio(type: string): string {
     const foundData = this.conditionalData?.find(data => data[type])?.[type];
     return foundData || '';
-  }
-
-  ngOnInit(): void {
-    this.showConditional();
   }
 
   public isConditionalDisplay(): boolean {
@@ -153,13 +148,6 @@ export class FormDataComponent implements OnInit {
     return this.currentPatchField === field;
   }
 
-  isCheckboxPatchedCurrently(field: string): string {
-    if (this.currentPatchField === field) {
-      return 'warn';
-    }
-    return 'primary';
-  }
-
   public getConditionalFieldSetting(): FieldSettings {
     const conditionalAction = this.fieldSetting.actions.find(action => action.conditionalFieldSetting);
     if (conditionalAction) {
@@ -224,5 +212,12 @@ export class FormDataComponent implements OnInit {
       return fieldSettings.details['size']/100;
     }
     return 10;
+    if (fieldSettings.details && fieldSettings.details['size'] > 0) {
+      this.conditionalMaxLength = fieldSettings.details['size'];
+    } else if (fieldSettings.displayType === 'TEXT') {
+      this.conditionalMaxLength = this.TEXT_DEFAULT_SIZE;
+    } else {
+      this.conditionalMaxLength = this.TEXT_AREA_DEFAULT_SIZE;
+    }
   }
 }

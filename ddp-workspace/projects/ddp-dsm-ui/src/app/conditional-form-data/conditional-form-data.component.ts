@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormControl} from '@angular/forms';
 import {FieldSettings} from '../field-settings/field-settings.model';
 
 @Component({
@@ -6,7 +7,7 @@ import {FieldSettings} from '../field-settings/field-settings.model';
   templateUrl: './conditional-form-data.component.html',
   styleUrls: ['./conditional-form-data.component.css']
 })
-export class ConditionalFormDataComponent {
+export class ConditionalFormDataComponent implements OnInit{
   @Input() fieldSetting: FieldSettings;
   @Input() participantData: any;
   @Input() activityData: string;
@@ -14,8 +15,22 @@ export class ConditionalFormDataComponent {
   @Input() checkBoxGroups: {};
   @Input() patchFinished: boolean;
   @Output() patchDataConditionalField = new EventEmitter();
+  conditionalTextareaField = new FormControl();
+  TEXT_AREA_DEFAULT_SIZE = 50000;
+  TEXT_DEFAULT_SIZE = 200;
+  dynamicMaxLength = 100;
 
   currentPatchField: string;
+
+  ngOnInit(): void {
+    if (this.fieldSetting.details && this.fieldSetting.details['size'] > 0) {
+      this.dynamicMaxLength = this.fieldSetting.details['size'];
+    } else if (this.fieldSetting.displayType === 'TEXT') {
+      this.dynamicMaxLength = this.TEXT_DEFAULT_SIZE;
+    } else {
+      this.dynamicMaxLength = this.TEXT_AREA_DEFAULT_SIZE;
+    }
+  }
 
 
   valueChanged(value: any): void {
@@ -24,6 +39,13 @@ export class ConditionalFormDataComponent {
 
   isPatchedCurrently(field: string): boolean {
     return this.currentPatchField === field;
+  }
+
+  getTextAreaRows(fieldSettings: FieldSettings): number {
+    if (fieldSettings.details && fieldSettings.details['size'] > 0) {
+      return fieldSettings.details['size']/100;
+    }
+    return 10;
   }
 
 }
