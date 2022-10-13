@@ -1,0 +1,39 @@
+{
+  "name": "playwright-e2e",
+  "description": "Web browser end-to-end tests",
+  "version": "1.0.0",
+  "keywords": [],
+  "author": "",
+  "private": true,
+  "scripts": {
+    "build": "npx tsc --build",
+    "format": "prettier --config .prettierrc.js --write --ignore-unknown \"**/*.{ts,js}\"",
+    "test:e2e:singular": "npx playwright test --config=tests/singular/playwright.config.ts --grep-invert \"/nightly/|/examples/\"",
+    "test:e2e:ci:singular:all": "npx playwright test --config=tests/singular/playwright-ci.config.ts --grep-invert \"nightly/|examples/\"",
+    "test:e2e:ci:singuarl:nightly": "npx playwright test --config=tests/singular/playwright-ci.config.ts --grep \"nightly/\"",
+    "lint": "eslint . --ext .js,.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.25.2",
+    "@typescript-eslint/eslint-plugin": "^5.37.0",
+    "@typescript-eslint/parser": "^5.37.0",
+    "eslint": "^8.23.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.185",
+    "@types/node": "^18.7.18",
+    "axios": "^1.1.2",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.2",
+    "lodash": "^4.17.21",
+    "node-vault": "^0.9.22",
+    "typescript": "^4.8.3"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
