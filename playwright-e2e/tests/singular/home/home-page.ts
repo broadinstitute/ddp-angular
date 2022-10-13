@@ -5,10 +5,10 @@ import { expect, Locator, Page } from '@playwright/test';
  */
 export default class HomePage {
   private readonly page: Page;
-  readonly loginButton: Locator;
-  readonly pageLogo: Locator;
-  readonly title: Locator;
-  readonly description: Locator;
+  private readonly loginButton: Locator;
+  private readonly pageLogo: Locator;
+  private readonly title: Locator;
+  private readonly description: Locator;
 
   constructor(page: Page) {
     this.page = page;

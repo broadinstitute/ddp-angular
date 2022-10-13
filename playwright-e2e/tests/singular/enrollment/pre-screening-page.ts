@@ -81,7 +81,7 @@ export default class PreScreeningPage {
 
     await this.age().fill(age);
     await this.country().select().selectOption(country);
-    await this.state().locator.waitFor({ state: 'visible' });
+    await this.state().toLocator().waitFor({ state: 'visible' });
     await this.state().select().selectOption(state);
     await this.haveVentricleHeartDefect().check(hasHeartDefect ? 'Yes' : 'No');
     await this.checkReCaptcha();

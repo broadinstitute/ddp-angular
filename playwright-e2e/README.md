@@ -128,3 +128,8 @@ In **/tests/singular** dir, run Singular tests only:
   - For example, update `pre-screening-page-visual.spec.ts` test screenshots on localhost
   > `npx playwright test pre-screening-page-visual.spec.ts -u`
   - Save new screenshots and commit to GitHub
+
+- Before merging PRs, run `eslint` and `tsc build` to against changed code from project root dir, `/playwright-e2e`.
+  > npm run build
+  > 
+  > npm run lint

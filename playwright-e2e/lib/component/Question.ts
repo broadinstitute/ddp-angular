@@ -1,15 +1,13 @@
 import { Locator, Page } from '@playwright/test';
 
 export default class Question {
-  page: Page;
-  locator: Locator;
+  private readonly page: Page;
+  private readonly locator: Locator;
 
   constructor(page: Page, opts: { prompt: string | RegExp; parentSelector?: Locator }) {
     const { prompt, parentSelector } = opts;
     this.page = page;
-
     const rootLocator = parentSelector ? parentSelector : this.page.locator('ddp-activity-question');
-
     // Look for text somewhere inside element. Text matching is case-insensitive and searches for a substring or regex.
     // Caution: If text contains a punctuation colon or/and single quote, find is likely to fail.
     this.locator = rootLocator.filter({ hasText: prompt });
@@ -25,7 +23,7 @@ export default class Question {
 
   /**
    * A dropdown.
-   * <br> Tag name: mat-select
+   * <br> Tag name: mat-select or select
    * @param value
    */
   select(value?: string): Locator {

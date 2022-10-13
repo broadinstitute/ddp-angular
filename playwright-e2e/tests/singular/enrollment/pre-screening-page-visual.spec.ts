@@ -32,7 +32,7 @@ test.describe('About Yourself page', () => {
       'Project Singular is currently open only to participants in the United States and Territories or Canada.' +
         ' Thank you for your interest.'
     );
-    expect(await country.locator.screenshot()).toMatchSnapshot('country-france-err-message.png');
+    expect(await country.toLocator().screenshot()).toMatchSnapshot('country-france-err-message.png');
   });
 
   // Age validation: 0 - 18 in country US should triggers an error message: requires parent or guardian to register in US
@@ -46,7 +46,7 @@ test.describe('About Yourself page', () => {
     await preScreeningPage.age().fill('2');
 
     // No state before select country US
-    await expect(preScreeningPage.state().locator).toBeHidden();
+    await expect(preScreeningPage.state().toLocator()).toBeHidden();
 
     // Select a country and press Tab should start triggering the error message
     await preScreeningPage.country().select().selectOption('US');

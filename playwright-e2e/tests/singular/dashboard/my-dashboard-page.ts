@@ -21,6 +21,9 @@ export default class MyDashboardPage extends PageBase {
     await expect(this.page.locator('.family-enrollment-description-message')).toBeVisible();
   }
 
+  /**
+   * Returns locator to the enrollment status text
+   */
   status(): Locator {
     return this.page.locator('.enrollmentStatusCompleteText');
   }
@@ -33,10 +36,16 @@ export default class MyDashboardPage extends PageBase {
     await this.clickHelper(this.viewFamilyEnrollmentMessageButton, { waitForNav: true });
   }
 
+  /**
+   * Returns locator to the "Enroll myself" button
+   */
   enrollMyselfButton(): Locator {
     return this._enrollMyselfButton;
   }
 
+  /**
+   * Returns locator to the "Enroll my child" button
+   */
   enrollMyChildButton(): Locator {
     return this._enrollMyChildButton;
   }
