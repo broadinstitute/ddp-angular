@@ -392,7 +392,6 @@ export class ShippingComponent implements OnInit {
             }
             .barcode {
                 width: fit-content;
-                align-content: flex-start;
             }
             @page { margin: 0 }
             @media print {
