@@ -104,12 +104,11 @@
           <ng-template #textAreaTemplate let-settings="settings">
             <ng-container *ngIf="isConditionalDisplayRadio() && showConditionalRadio() && getConditionalFieldSettingRadio(settings.columnName)">
               <mat-form-field appearance="outline" [ngClass]="{'Width--100': true, 'Color--Field--Patched': isPatchedCurrently(fieldSetting.columnName)}">
-                <textarea matInput [formControl]="textareaField" [maxLength]="conditionalMaxLength"
-                          placeholder="{{settings.columnDisplay}}"
-                          [rows]="getTextAreaRows(settings)"
-                          [value]="getRadio(settings.columnName)"
-                          [readonly]="settings.readonly"
-                          (change)="conditionalValueChanged($event)"></textarea>
+             <textarea matInput placeholder="{{settings.columnDisplay}}"
+                       [value]="getRadio(settings.columnName)"
+                       [rows]="getTextAreaRows(settings)"
+                       [maxLength]="conditionalMaxLength"
+                       (change)="conditionalValueChanged($event.target)"></textarea>
               </mat-form-field>
             </ng-container>
           </ng-template>
