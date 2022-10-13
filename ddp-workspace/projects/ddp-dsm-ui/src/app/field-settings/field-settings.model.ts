@@ -13,14 +13,14 @@ export class FieldSettings {
 
   constructor(public fieldSettingId: string, public columnName: string, public columnDisplay: string, public fieldType: string,
               public displayType: string, public possibleValues: Value[], public orderNumber: number, public actions: Value[],
-              public readonly: boolean) {
+              public readonly: boolean, public details: {} ) {
 
   }
 
   static parse(json): FieldSettings {
     return new FieldSettings(json.fieldSettingId, json.columnName, json.columnDisplay, json.fieldType,
       json.displayType, json.hasOwnProperty('possibleValues') ? json.possibleValues : [], json.orderNumber,
-      json.hasOwnProperty('actions') ? json.actions : [], json.readonly);
+      json.hasOwnProperty('actions') ? json.actions : [], json.readonly, json.details);
   }
 
   static addSettingWithType(map: Map<string, Array<FieldSettings>>, setting: FieldSettings, type: FieldType): void {

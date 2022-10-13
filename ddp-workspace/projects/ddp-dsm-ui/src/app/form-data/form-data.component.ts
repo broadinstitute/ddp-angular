@@ -4,14 +4,18 @@ import {
   Input,
   OnInit,
   Output,
-} from '@angular/core';
+} from '@angular/core';import {FormControl} from '@angular/forms';
 import {FieldSettings} from '../field-settings/field-settings.model';
 import {Value} from '../utils/value.model';
 import {MatRadioChange} from '@angular/material/radio';
+import {FormControl} from '@angular/forms';
 
-@Component({
+@Component( {
   selector: 'app-form-data',
   templateUrl: './form-data.component.html',
+  styleUrls: [ './form-data.component.css' ]
+} )
+export class FormDataComponent implements OnInit {
   styleUrls: ['./form-data.component.css'],
 })
 export class FormDataComponent implements OnInit {
@@ -31,6 +35,20 @@ export class FormDataComponent implements OnInit {
   public checkedRadioBtnValue: string;
   public checkedRadioBtn: string;
   currentPatchField: string;
+  TEXT_AREA_DEFAULT_SIZE = 50000;
+  TEXT_DEFAULT_SIZE = 200;
+  dynamicMaxLength = 100;
+  textareaField = new FormControl();
+
+  ngOnInit(): void {
+    if (this.fieldSetting.details && this.fieldSetting.details['size'] > 0) {
+      this.dynamicMaxLength = this.fieldSetting.details['size'];
+    } else if (this.fieldSetting.displayType === 'TEXT') {
+      this.dynamicMaxLength = this.TEXT_DEFAULT_SIZE;
+    } else {
+      this.dynamicMaxLength = this.TEXT_AREA_DEFAULT_SIZE;
+    }
+  }
   CONDITIONAL_DISPLAY = 'conditionalDisplay';
 
   constructor() {}
@@ -66,8 +84,7 @@ export class FormDataComponent implements OnInit {
   }
 
   getActivityAnswer(): string {
-
-    if (this.fieldSetting.displayType !== 'ACTIVITY')  {
+    if (this.fieldSetting.displayType !== 'ACTIVITY') {
       // get data from dsm db if it is not type activity
       if (this.fieldSetting.displayType !== 'ACTIVITY_STAFF') {
         // return savedAnswer if it is not type activity_staff
@@ -106,7 +123,7 @@ export class FormDataComponent implements OnInit {
   }
 
   clearRadioSelection(): void {
-    this.valueChanged('');
+    this.valueChanged( '' );
   }
 
   valueChanged(value: any): void {
@@ -195,4 +212,17 @@ export class FormDataComponent implements OnInit {
     return v;
   }
 
+  isCheckboxPatchedCurrently( field: string ): string {
+    if (this.currentPatchField === field) {
+      return 'warn';
+    }
+    return 'primary';
+  }
+
+  getTextAreaRows(fieldSettings: FieldSettings): number {
+    if (fieldSettings.details && fieldSettings.details['size'] > 0) {
+      return fieldSettings.details['size']/100;
+    }
+    return 10;
+  }
 }
