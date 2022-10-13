@@ -1,4 +1,8 @@
 import { Locator, Page } from '@playwright/test';
+import Input from 'lib/widget/Input';
+import Checkbox from 'lib/widget/checkbox';
+import Radiobutton from 'lib/widget/radiobutton';
+import Select from 'lib/widget/select';
 
 export async function getTextValue(locator: Locator): Promise<string | null> {
   return await locator.evaluate<string, HTMLSelectElement>((node) => node.value);
@@ -56,3 +60,32 @@ export function findButton(dataDdpTest: string) {
 export function findIcon(dataDdpTest: string) {
   return `mat-icon[data-ddp-test="${dataDdpTest}"]`;
 }
+
+// Fill in input
+const fillIn = async (page: Page, stableID: string, value: string): Promise<void> => {
+  await new Input(page, { ddpTestID: stableID }).fill(value);
+};
+
+const check = async (page: Page, stableID: string): Promise<void> => {
+  await new Checkbox(page, { ddpTestID: stableID }).check();
+};
+
+const checkRadioButton = async (page: Page, stableID: string): Promise<void> => {
+  await new Radiobutton(page, { ddpTestID: stableID }).check();
+};
+
+const select = async (page: Page, stableID: string, option: string): Promise<void> => {
+  await new Select(page, { ddpTestID: stableID }).selectOption(option);
+};
+
+const click = async (page: Page, stableID: string, option: string): Promise<void> => {
+  await page.locator(`[data-ddp-test="${stableID}"]`).selectOption(option);
+};
+
+module.exports = {
+  fillIn,
+  check,
+  checkRadioButton,
+  select,
+  click
+};
