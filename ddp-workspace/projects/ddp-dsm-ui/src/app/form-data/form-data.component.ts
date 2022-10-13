@@ -1,13 +1,14 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FieldSettings } from '../field-settings/field-settings.model';
-import { Value } from '../utils/value.model';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {FieldSettings} from '../field-settings/field-settings.model';
+import {Value} from '../utils/value.model';
 
-@Component({
+@Component( {
   selector: 'app-form-data',
   templateUrl: './form-data.component.html',
-  styleUrls: ['./form-data.component.css']
-})
-export class FormDataComponent {
+  styleUrls: [ './form-data.component.css' ]
+} )
+export class FormDataComponent implements OnInit {
 
   @Input() fieldSetting: FieldSettings;
   @Input() participantData: string;
@@ -18,9 +19,23 @@ export class FormDataComponent {
   @Output() patchData = new EventEmitter();
 
   currentPatchField: string;
+  TEXT_AREA_DEFAULT_SIZE = 50000;
+  TEXT_DEFAULT_SIZE = 200;
+  dynamicMaxLength = 100;
+  textareaField = new FormControl();
+
+  ngOnInit(): void {
+    if (this.fieldSetting.details && this.fieldSetting.details['size'] > 0) {
+      this.dynamicMaxLength = this.fieldSetting.details['size'];
+    } else if (this.fieldSetting.displayType === 'TEXT') {
+      this.dynamicMaxLength = this.TEXT_DEFAULT_SIZE;
+    } else {
+      this.dynamicMaxLength = this.TEXT_AREA_DEFAULT_SIZE;
+    }
+  }
 
   getActivityAnswer(): string {
-    if (this.fieldSetting.displayType !== 'ACTIVITY')  {
+    if (this.fieldSetting.displayType !== 'ACTIVITY') {
       // get data from dsm db if it is not type activity
       if (this.fieldSetting.displayType !== 'ACTIVITY_STAFF') {
         // return savedAnswer if it is not type activity_staff
@@ -51,10 +66,10 @@ export class FormDataComponent {
   }
 
   clearRadioSelection(): void {
-    this.valueChanged('');
+    this.valueChanged( '' );
   }
 
-  valueChanged(value: any): void {
+  valueChanged( value: any ): void {
     this.patchFinished = false;
     let v;
     if (typeof value === 'string') {
@@ -71,17 +86,24 @@ export class FormDataComponent {
       }
     }
     this.participantData = v;
-    this.patchData.emit(v);
+    this.patchData.emit( v );
   }
 
-  isPatchedCurrently(field: string): boolean {
+  isPatchedCurrently( field: string ): boolean {
     return this.currentPatchField === field;
   }
 
-  isCheckboxPatchedCurrently(field: string): string {
+  isCheckboxPatchedCurrently( field: string ): string {
     if (this.currentPatchField === field) {
       return 'warn';
     }
     return 'primary';
+  }
+
+  getTextAreaRows(fieldSettings: FieldSettings): number {
+    if (fieldSettings.details && fieldSettings.details['size'] > 0) {
+      return fieldSettings.details['size']/100;
+    }
+    return 10;
   }
 }

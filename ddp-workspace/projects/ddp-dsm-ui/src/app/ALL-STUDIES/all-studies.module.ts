@@ -121,6 +121,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
@@ -260,7 +261,9 @@ PlotlyModule.plotlyjs = PlotlyJS;
     PlotlyModule,
     MatProgressSpinnerModule,
     MatTabsModule,
-    MatTableModule
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
     Utils,
@@ -270,7 +273,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
     Language,
     DashboardStatisticsService
   ],
-  exports: [RouterModule]
+  exports: [RouterModule, MatFormFieldModule, MatInputModule]
 })
 
 export class AllStudiesModule {
