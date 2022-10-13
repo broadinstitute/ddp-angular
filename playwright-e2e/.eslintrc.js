@@ -6,6 +6,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest', // Allows for the parsing of modern ECMAScript features
     sourceType: 'module', // Allows for the use of imports
+    project: './tsconfig.json'
   },
   env: {
     node: true,
@@ -21,7 +22,6 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '_' }],
 
     'no-multi-spaces': 'warn',
-    'require-await': 'warn',
 
     // Stylistic Issues
     'array-bracket-newline': ['warn', 'consistent'],
@@ -48,10 +48,9 @@ module.exports = {
     'nonblock-statement-body-position': 'warn',
     'object-curly-newline': ['warn', { multiline: true, consistent: true }],
     'one-var': ['warn', 'never'],
-    'operator-linebreak': ['warn', 'after'],
     'padded-blocks': ['warn', 'never'],
     'quote-props': ['warn', 'as-needed'],
-    'quotes': ['warn', 'single', { allowTemplateLiterals: true }],
+    'quotes': ['warn', 'single', { allowTemplateLiterals: true, avoidEscape: true }],
     'space-before-blocks': 'warn',
     'space-before-function-paren': ['warn', { anonymous: 'never', named: 'never', asyncArrow: 'always' }],
     'space-in-parens': 'warn',
@@ -73,6 +72,7 @@ module.exports = {
     'comma-dangle': 'off',
     '@typescript-eslint/comma-dangle': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-floating-promises': 'warn',
 
     'import/first': 'warn',
     'import/no-anonymous-default-export': ['warn', { allowObject: true }],

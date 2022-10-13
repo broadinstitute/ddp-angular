@@ -1,47 +1,100 @@
 import { Page } from '@playwright/test';
-import Question from 'tests/lib/widget/Question';
+import Input from 'lib/widget/Input';
+import Select from 'lib/widget/select';
+import Question from 'lib/component/Question';
+import PageBase from 'lib/page-base';
 
-export default class PatientSurveyPage {
-  private readonly page: Page;
-
+export default class PatientSurveyPage extends PageBase {
   constructor(page: Page) {
-    this.page = page;
+    super(page);
   }
 
-  cityBornIn(): Question {
-    return new Question(this.page, 'What city did you live in when you were born?');
+  /**
+   * <br> Question: What city did you live in when they were born?
+   * <br> Type: Input
+   */
+  cityBornIn(): Input {
+    return new Input(this.page, { ddpTestID: 'answer:CITY_BORN' });
   }
 
-  stateOrProvince(): Question {
-    return new Question(this.page, 'What state or province did you live in when you were born?');
+  /**
+   * <br> Question: What state or province did you live in when they were born?
+   * <br> Type: Select
+   */
+  stateBornIn(): Select {
+    return new Select(this.page, { label: 'Choose state' });
   }
 
-  oldZipCode(): Question {
-    return new Question(this.page, 'what was the zip code or postal code of the city you lived in when you were born?');
+  /**
+   * <br> Question: If you remember, what was the zip code or postal code of the city you lived in when you were born?
+   * <br> Type: Input
+   */
+  zipCodeCityBornIn(): Input {
+    return new Input(this.page, { ddpTestID: 'answer:ZIP_BORN_CITY' });
   }
 
-  currentZipCode(): Question {
-    return new Question(this.page, 'What is your current zip code?');
+  /**
+   * <br> Question: What is your current zip code?
+   * <br> Type: Input
+   */
+  currentZipCode(): Input {
+    return new Input(this.page, { ddpTestID: 'answer:CURRENT_ZIP' });
   }
 
-  setAtBirth(): Question {
-    return new Question(this.page, 'What was your recorded sex at birth?');
+  /**
+   * <br> Question: What was your recorded sex at birth?
+   * <br> Type: Radiobutton
+   */
+  sexAtBirth(): Question {
+    return new Question(this.page, { prompt: 'What was your recorded sex at birth?' });
   }
 
+  /**
+   * <br> Question: What is your race?
+   * <br> Type: Checkbox
+   */
   race(): Question {
-    return new Question(this.page, 'What is your race?');
+    return new Question(this.page, { prompt: 'What is your race?' });
   }
 
+  /**
+   * <br> Question: Are you of Hispanic or Latino ethnicity?
+   * <br> Type: Radiobutton
+   */
   isHispanic(): Question {
-    return new Question(this.page, 'Are you of Hispanic or Latino ethnicity?');
+    return new Question(this.page, { prompt: 'Are you of Hispanic or Latino ethnicity?' });
   }
 
-  ventricleDiagnosis(): Question {
-    return new Question(this.page, 'Select your single ventricle diagnosis from the list provided');
+  /**
+   * <br> Question: Select your single ventricle diagnosis from the list provided.*
+   *      If you are unsure, choose your best guess or select other.
+   * <br> Type: Radiobutton
+   */
+  selectVentricleDiagnosis(): Question {
+    return new Question(this.page, { prompt: 'Select your single ventricle diagnosis from the list provided' });
   }
 
-  async submit(): Promise<void> {
-    const submitButton = this.page.locator('button', { hasText: 'Submit' });
-    await Promise.all([this.page.waitForNavigation(), this.page.waitForLoadState('load'), submitButton.click()]);
+  /**
+   * <br> Question: What is your current height in feet and inches?
+   * <br> Type: Input
+   */
+  heightInFeet(): Input {
+    return new Input(this.page, { ddpTestID: 'answer:WHAT_IS_YOUR_HEIGHT_FEET' });
+  }
+
+  /**
+   * <br> Question: What is your current height in feet and inches?
+   * <br> Type: Input
+   */
+  heightInInches(): Input {
+    return new Input(this.page, { ddpTestID: 'answer:WHAT_IS_YOUR_HEIGHT_INCHES' });
+  }
+
+  /**
+   * <br> Question: What is your current weight in pounds?
+   * <br> Type: Input
+   */
+  weightInPounds(): Input {
+    return new Input(this.page, { ddpTestID: 'answer:WHAT_IS_YOUR_WEIGHT' });
   }
 }

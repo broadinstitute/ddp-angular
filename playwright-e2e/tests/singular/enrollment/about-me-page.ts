@@ -1,72 +1,38 @@
 import { Locator, Page } from '@playwright/test';
-import Question from 'tests/lib/widget/Question';
-import Card from 'tests/lib/widget/card';
-import Input from 'tests/lib/widget/input';
+import Question from 'lib/component/Question';
+import TextInput from 'lib/widget/Input';
+import PageBase from 'lib/page-base';
+import Checkbox from 'lib/widget/checkbox';
 
-export default class AboutMePage {
-  private readonly page: Page;
-  readonly next: Locator;
-
+export default class AboutMePage extends PageBase {
   constructor(page: Page) {
-    this.page = page;
-    this.next = page.locator('button', { hasText: 'Next' });
+    super(page);
   }
 
   async waitForReady() {
     // Add additional checks to wait for page is ready
-    await this.fullName().locator.waitFor({ state: 'visible', timeout: 60 * 1000 });
+    await this.fullName().waitFor({ state: 'visible', timeout: 60 * 1000 });
   }
 
   firstName(): Question {
-    return new Question(this.page, 'Your Last Name');
+    return new Question(this.page, { prompt: 'Your First Name' });
   }
 
   lastName(): Question {
-    return new Question(this.page, 'Your Last Name');
+    return new Question(this.page, { prompt: 'Your Last Name' });
   }
 
-  fullName(): Input {
-    return new Input(this.page, 'Full Name');
+  fullName(): Locator {
+    return new TextInput(this.page, { label: 'Full Name' }).toLocator();
   }
 
-  private countrySelect(): Locator {
-    return this.page.locator('mat-form-field mat-select', { hasText: `Country` });
-  }
-
-  async country(country = 'UNITED STATES'): Promise<void> {
-    await this.countrySelect().click();
-    await this.page.locator(`.mat-option-text >> text=${country}`).first().click();
-  }
-
-  private stateSelect(): Locator {
-    return this.page.locator('mat-form-field mat-select', { hasText: new RegExp('^State') });
-  }
-
-  async state(state = 'MASSACHUSETTS'): Promise<void> {
-    await this.stateSelect().click();
-    await this.page.locator(`.mat-option-text >> text=${state}`).click();
-  }
-
-  street(): Input {
-    return new Input(this.page, 'Street Address');
-  }
-
-  city(): Input {
-    return new Input(this.page, 'City');
-  }
-
-  zipCode(): Input {
-    return new Input(this.page, 'Zip Code');
-  }
-
-  telephone(): Input {
-    return new Input(this.page, 'Telephone');
-  }
-
-  pickSuggestedAddressEntry(label: string): Locator {
-    return new Card(
-      this.page,
-      'We have checked your address entry and have suggested changes that could help ensure delivery'
-    ).radioButton(label);
+  /**
+   * <br> Question: We are unable to confirm that the address is valid. Please check this box to use the address as entered.
+   * <br> Type: Checkbox
+   */
+  useAddressAsEntered(): Checkbox {
+    return new Checkbox(this.page, {
+      label: 'We are unable to confirm that the address is valid. Please check this box to use the address as entered.'
+    });
   }
 }

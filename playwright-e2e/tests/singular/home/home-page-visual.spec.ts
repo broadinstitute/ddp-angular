@@ -11,7 +11,7 @@ test.describe('Home page', () => {
     await visitHomePage(page);
   });
 
-  test('match nav-links @visual @singular', async ({ page }) => {
+  test('match navigation-links @visual @singular', async ({ page }) => {
     const nav = page.locator('.header__nav');
     expect(await nav.screenshot({ omitBackground: true })).toMatchSnapshot('nav.png');
 
@@ -19,16 +19,13 @@ test.describe('Home page', () => {
     await expect(navLinks).toContainText(['About Us', 'Study Progress', 'FAQs', 'For Researchers', 'For Clinicians']);
   });
 
-  test('match partners links @visual @singular', async ({ page }) => {
+  test('match partners links @home @visual @singular', async ({ page }) => {
     const orderedHrefs = [
       'https://www.additionalventures.org',
       'https://www.broadinstitute.org',
       'https://www.childrenshospital.org',
       'https://www.genomemedical.com'
     ];
-    const partnersHeader = page.locator('.partners h1');
-    await expect(partnersHeader).toContainText('Our Partners');
-    expect(await partnersHeader.screenshot()).toMatchSnapshot('our-partners-text.png');
 
     const partners: Locator = page.locator('.partners .partners-list-item a');
     const count = await partners.count();
@@ -46,7 +43,7 @@ test.describe('Home page', () => {
     expect(actualHrefs).toEqual(orderedHrefs); // Ensure href match
   });
 
-  test('match participating steps @visual @singular', async ({ page }) => {
+  test('match participating steps @home @visual @singular', async ({ page }) => {
     // participating steps are three steps
     const steps = page.locator('.participating-steps-step');
 

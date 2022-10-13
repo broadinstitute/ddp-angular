@@ -11,7 +11,7 @@ test.describe('Home page', () => {
     await fillSitePassword(page);
   });
 
-  test('go to Contact Us @singular', async ({ page }) => {
+  test('go to "Contact Us" @singular', async ({ page }) => {
     const aboutUs = page.locator(NavSelectors.AboutUs);
 
     await expect(aboutUs).toHaveAttribute('href', '/about');
@@ -36,7 +36,7 @@ test.describe('Home page', () => {
     // await expect(page).toHaveScreenshot('singular-about-us-page', {fullPage: true});
   });
 
-  test('go to Study Progress @singular', async ({ page, context }) => {
+  test('go to "Study Progress" @singular', async ({ page, context }) => {
     const studyProgress = page.locator(NavSelectors.StudyProgress);
 
     await expect(studyProgress).toHaveAttribute(
@@ -51,7 +51,7 @@ test.describe('Home page', () => {
     await expect(newPage).toHaveTitle('Project Singular - Additional Ventures');
   });
 
-  test('go to FAQs @singular', async ({ page }) => {
+  test('go to "FAQs" @singular', async ({ page }) => {
     const faq = page.locator(NavSelectors.FAQs);
 
     await expect(faq).toHaveAttribute('href', '/faq');
@@ -62,7 +62,7 @@ test.describe('Home page', () => {
     await expect(page.locator('h1')).toHaveText('Frequently Asked Questions');
   });
 
-  test('go to For Researchers @singular', async ({ page }) => {
+  test('go to "For Researchers" @singular', async ({ page }) => {
     const forResearchers = page.locator(NavSelectors.ForResearchers);
 
     await expect(forResearchers).toHaveAttribute('href', '/for-researchers');
@@ -73,7 +73,7 @@ test.describe('Home page', () => {
     await expect(page.locator('h1').first()).toHaveText('Uncovering Single Ventricle Etiology');
   });
 
-  test('go to For Clinicians @singular', async ({ page }) => {
+  test('go to "For Clinicians" @singular', async ({ page }) => {
     const forClinicians = page.locator(NavSelectors.ForClinicians);
 
     await expect(forClinicians).toHaveAttribute('href', '/for-clinicians');

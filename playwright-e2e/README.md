@@ -61,7 +61,7 @@ Note: Update docker image version when upgrading Playwright version
   - For example, to run Singular tests, change dir to **/singular** first
     > cd tests/singular
     > 
-    > npx playwright test self-enrollment-visual.spec.ts -u
+    > npx playwright test pre-screening-page-visual.spec.ts -u
 
 
 ## Run Tests Using `npx` from the Command-Line
@@ -95,7 +95,7 @@ In **/tests/singular** dir, run Singular tests only:
   > npx playwright test --config=playwright.config.ts <TEST_FILE_NAME> --debug
 
 * Run all visual tests in **headed** mode
-  > npx playwright test --config=playwright.config.ts -g visual  --headed
+  > npx playwright test --config=playwright.config.ts -g @visual  --headed
 
 * Run all tests in `nightly` directory
   > npx playwright test --config=playwright.config.ts nightly/
@@ -125,6 +125,6 @@ In **/tests/singular** dir, run Singular tests only:
    ```
 
 - Generate screenshots for a visual test on localhost with flag `--update-snapshots` or `-u`.
-  - For example, update `self-enrollment-visual.spec.ts` test screenshots on localhost
-  > `npx playwright test self-enrollment-visual.spec.ts -u`
+  - For example, update `pre-screening-page-visual.spec.ts` test screenshots on localhost
+  > `npx playwright test pre-screening-page-visual.spec.ts -u`
   - Save new screenshots and commit to GitHub

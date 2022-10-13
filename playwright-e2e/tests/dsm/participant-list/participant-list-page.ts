@@ -1,5 +1,5 @@
 import { Locator, Page } from '@playwright/test';
-import Input from 'tests/lib/widget/input';
+import Input from 'lib/widget/Input';
 
 export enum SearchFieldLabel {
   ShortId = 'Short ID'
@@ -37,8 +37,8 @@ export default class ParticipantListPage {
   }
 
   async search(searchField: SearchFieldLabel, searchString: string): Promise<void> {
-    const input = new Input(this.page, searchField, { parent: '//app-filter-column' });
-    await input.locator.type(searchString);
+    const input = new Input(this.page, { label: searchField, parent: this.page.locator('//app-filter-column') });
+    await input.toLocator().type(searchString);
     await Promise.all([this.page.locator('.fa-spinner').waitFor({ state: 'visible' }), this.searchButton().click()]);
   }
 }

@@ -38,8 +38,8 @@ export async function visitHomePage(page: Page): Promise<Response | null> {
   return await goToPath(page);
 }
 
-export async function clickSignMeUp(page: Page): Promise<void> {
-  await page.locator(NavSelectors.SignMeUp).click();
+export async function signMeUp(page: Page): Promise<void> {
+  return await page.locator(NavSelectors.SignMeUp).click();
 }
 
 export async function clickLogin(page: Page): Promise<void> {

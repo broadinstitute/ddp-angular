@@ -21,7 +21,7 @@ test.describe('Home page', () => {
     );
   });
 
-  test('Our scientific advisors @visual', async ({ page }) => {
+  test('Our scientific advisors @visual @singular', async ({ page }) => {
     const headerText = page.locator('.advisors h1');
     const cards = page.locator('.advisors .cards');
 

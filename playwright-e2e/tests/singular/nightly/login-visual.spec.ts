@@ -33,8 +33,8 @@ test.describe.skip('Login into Singular', () => {
     // Login button is NOT visible
     await expect(page.locator(NavSelectors.Login)).not.toBeVisible();
 
-    await expect(myDashboardPage.title()).toContainText('My Dashboard');
-    expect(await myDashboardPage.title().screenshot()).toMatchSnapshot('dashboard-title.png');
+    await expect(page.locator('h1.title')).toContainText('My Dashboard');
+    expect(await page.locator('h1.title').screenshot()).toMatchSnapshot('dashboard-title.png');
 
     await expect(myDashboardPage.status()).toContainText('Fully Enrolled');
     expect(await myDashboardPage.status().screenshot()).toMatchSnapshot('status-text.png');

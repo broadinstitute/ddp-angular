@@ -1,53 +1,79 @@
-import { expect, Locator, Page } from '@playwright/test';
-import Question from 'tests/lib/widget/Question';
+import { Page } from '@playwright/test';
+import Question from 'lib/component/Question';
+import Input from 'lib/widget/Input';
+import PageBase from 'lib/page-base';
 
-export default class ConsentFormPage {
-  private readonly page: Page;
-  readonly next: Locator;
-  readonly back: Locator;
-  readonly dob: Locator; // Date of Birth
-
+export default class ConsentFormPage extends PageBase {
   constructor(page: Page) {
-    this.page = page;
-    this.next = page.locator('button', { hasText: 'Next' });
-    this.back = page.locator('button', { hasText: 'Back' });
-    this.dob = page.locator('.ddp-activity-question').filter({ hasText: 'Your Date of Birth' });
+    super(page);
   }
 
-  async waitForReady() {
-    await this.next.waitFor({ state: 'visible' });
-    await expect(this.next).toBeEnabled();
-    // Add additional checks here
+  /**
+   * Your Name (Study Participant):
+   */
+  /**
+   * <br> Question: First Name
+   * <br> Type: Input
+   */
+  firstName(): Input {
+    return new Input(this.page, { ddpTestID: 'answer:CONSENT_SELF_FIRST_NAME' });
   }
 
-  firstName(): Locator {
-    return new Question(this.page, 'First Name').textInput();
+  /**
+   * <br> Question: Last Name
+   * <br> Type: Input
+   */
+  lastName(): Input {
+    return new Input(this.page, { ddpTestID: 'answer:CONSENT_SELF_LAST_NAME' });
   }
 
-  lastName(): Locator {
-    return new Question(this.page, 'Last Name').textInput();
+  /**
+   * <br> Question: Your Signature (Study Participant):
+   * <br> Type: Input
+   */
+  signature(): Input {
+    return new Input(this.page, { ddpTestID: 'answer:CONSENT_SELF_YOUR_SIGNATURE' });
   }
 
-  signature(): Locator {
-    return new Question(this.page, 'Your Signature (Study Participant)').textInput();
+  /**
+   * <br> Question: AUTHORIZATION SIGNATURE
+   * <br> Type: Input
+   */
+  authorizationSignature(): Input {
+    return new Input(this.page, { ddpTestID: 'answer:CONSENT_SELF_SIGNATURE_SUBJECT' });
   }
 
-  authorizationSignature(): Locator {
-    return new Question(this.page, 'AUTHORIZATION SIGNATURE').textInput();
+  /**
+   * <br> Question: Your Date of Birth
+   * <br> Type: Input
+   * @param month
+   * @param date
+   * @param year
+   */
+  async dateOfBirth(month: number | string, date: number | string, year: number | string): Promise<void> {
+    const dob = new Question(this.page, { prompt: 'Date of Birth' });
+    await dob.date().locator('input[data-placeholder="MM"]').fill(month.toString());
+    await dob.date().locator('input[data-placeholder="DD"]').fill(date.toString());
+    await dob.date().locator('input[data-placeholder="YYYY"]').fill(year.toString());
   }
 
-  async enterDateOfBirth(month: number, date: number, year: number): Promise<void> {
-    await this.dob.locator('input[data-placeholder="MM"]').fill(month.toString());
-    await this.dob.locator('input[data-placeholder="DD"]').fill(date.toString());
-    await this.dob.locator('input[data-placeholder="YYYY"]').fill(year.toString());
+  /**
+   * <br> Question: If a secondary finding is found in my genes:
+   * <br> Type: Checkbox
+   */
+  toKnowSecondaryFinding(): Question {
+    return new Question(this.page, { prompt: 'If a secondary finding is found in my genes:' });
   }
 
-  wantToKnowSecondaryFinding(answer: string): Locator {
-    return new Question(this.page, 'If a secondary finding is found in my genes').checkbox(answer);
-  }
-
+  /** Click "Agree" button */
   async agree(): Promise<void> {
     const agreeButton = this.page.locator('button', { hasText: 'I agree' });
-    await Promise.all([this.page.waitForNavigation(), agreeButton.click()]);
+    await this.clickHelper(agreeButton, { waitForNav: true });
+  }
+
+  /** Click "I am not ready to agree" button */
+  async notReadyToAgree(): Promise<void> {
+    const notAgreeButton = this.page.locator('button', { hasText: 'I am not ready to agree' });
+    await this.clickHelper(notAgreeButton, { waitForNav: true });
   }
 }

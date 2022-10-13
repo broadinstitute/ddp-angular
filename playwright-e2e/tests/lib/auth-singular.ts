@@ -44,7 +44,7 @@ export async function fillEmailPassword(
 
 export async function login(
   page: Page,
-  opts: { email?: string | undefined; password?: string | undefined; waitForNavigation?: boolean }
+  opts: { email?: string | undefined; password?: string | undefined; waitForNavigation?: boolean } = {}
 ): Promise<void> {
   const {
     email = process.env.singularUserEmail,

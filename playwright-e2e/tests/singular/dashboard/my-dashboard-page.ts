@@ -1,54 +1,28 @@
 import { expect, Locator, Page } from '@playwright/test';
-import Question from 'tests/lib/widget/Question';
-import Table from 'tests/lib/widget/table';
+import Table from 'lib/widget/table';
+import PageBase from 'lib/page-base';
 
-export enum WHO {
-  Me = 'Me',
-  MyBirthMother = 'My birth mother',
-  MyBirthFather = 'My birth father',
-  MyBirthSister = 'My birth sister',
-  MyBirthBrother = 'My birth brother',
-  MyBirthDaughter = 'My birth daughter',
-  MyBirthSon = 'My birth son',
-  SomeoneElse = 'Someone else'
-}
-
-export default class MyDashboardPage {
-  private readonly page: Page;
-  readonly enrollMyself: Locator;
-  readonly next: Locator;
-  readonly viewFamilyEnrollmentMessageButton: Locator;
+export default class MyDashboardPage extends PageBase {
+  private readonly _enrollMyselfButton: Locator;
+  private readonly _enrollMyChildButton: Locator;
+  private readonly viewFamilyEnrollmentMessageButton: Locator;
 
   constructor(page: Page) {
-    this.page = page;
-    this.enrollMyself = this.page.locator('button', { hasText: 'Enroll myself' });
-    this.next = this.page.locator('button', { hasText: 'Next' });
+    super(page);
+    this._enrollMyselfButton = this.page.locator('button', { hasText: 'Enroll myself' });
+    this._enrollMyChildButton = this.page.locator('button', { hasText: 'Enroll my child' });
     this.viewFamilyEnrollmentMessageButton = this.page.locator('button', { hasText: 'View Family Enrollment Message' });
   }
 
   async waitForReady() {
-    await expect(this.title()).toHaveText('My Dashboard');
+    await expect(this.page.locator('h1.title')).toHaveText('My Dashboard');
+    await expect(this.page.locator('h1.title')).toBeVisible();
     await expect(this.viewFamilyEnrollmentMessageButton).toBeVisible();
-  }
-
-  title(): Locator {
-    return this.page.locator('h1.title');
+    await expect(this.page.locator('.family-enrollment-description-message')).toBeVisible();
   }
 
   status(): Locator {
     return this.page.locator('.enrollmentStatusCompleteText');
-  }
-
-  whoHasVentricleHeartDefect(who: WHO): Locator {
-    return new Question(this.page, 'Who in your family has single ventricle heart defect?').checkbox(
-      new RegExp(`^${who}$`)
-    );
-    /*
-    const checkbox = this.whoHasVentricleHeartDefect.locator('label', {
-      has: this.page.locator('css=input[type="checkbox"]'),
-      hasText: who
-    });
-    await checkbox.check(); */
   }
 
   getDashboardTable(): Table {
@@ -56,6 +30,24 @@ export default class MyDashboardPage {
   }
 
   async viewFamilyEnrollmentMessage(): Promise<void> {
-    await Promise.all([this.page.waitForNavigation(), this.viewFamilyEnrollmentMessageButton.click()]);
+    await this.clickHelper(this.viewFamilyEnrollmentMessageButton, { waitForNav: true });
+  }
+
+  enrollMyselfButton(): Locator {
+    return this._enrollMyselfButton;
+  }
+
+  enrollMyChildButton(): Locator {
+    return this._enrollMyChildButton;
+  }
+
+  /** Click "Enroll myself" button */
+  async enrollMyself(): Promise<void> {
+    await this.enrollMyselfButton().click();
+  }
+
+  /** Click "Enroll my child" button */
+  async enrollMyChild(): Promise<void> {
+    await this.enrollMyChildButton().click();
   }
 }
