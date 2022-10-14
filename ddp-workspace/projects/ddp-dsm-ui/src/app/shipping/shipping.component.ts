@@ -375,8 +375,8 @@ export class ShippingComponent implements OnInit {
             }
             .wrapper {
                 display: flex;
-                align-content: center;
-                justify-content: center;
+                align-content: flex-start;
+                justify-content: flex-start;
                 flex-direction: column;
                 height: 100%;
             }
