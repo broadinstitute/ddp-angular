@@ -387,7 +387,7 @@
       <table>
         <tr *ngFor="let smid of this.tissue.HESMId; let i = index;">
           <td *ngIf="!smid.deleted">
-            <mat-checkbox color="primary" disableRipple *ngIf="checkBoxNeeded('HE', i)"
+            <mat-checkbox color="primary" disableRipple *ngIf="!smIdCountMatch(this.tissue.HESMId, this.tissue.hECount)"
                          [checked]="smid.isSelected" [disabled]="!canChangeThis(i, this.currentSMIDField)"
                          (change)="smid.isSelected = $event.checked; checkboxChecked($event, this.tissue.HESMId, i)"></mat-checkbox>
             <md-input-container [ngClass]="{'Input': true}">
@@ -414,7 +414,7 @@
       <table>
         <tr *ngFor="let smid of this.tissue.ussSMId; let i = index;">
           <td *ngIf="!smid.deleted">
-            <mat-checkbox color="primary" disableRipple *ngIf="checkBoxNeeded('USS', i)"
+            <mat-checkbox color="primary" disableRipple *ngIf="!smIdCountMatch(this.tissue.ussSMId, this.tissue.ussCount)
                          [checked]="smid.isSelected" [disabled]="!canChangeThis(i, this.currentSMIDField)"
                          (change)="smid.isSelected = $event.checked; checkboxChecked($event, this.tissue.ussSMId, i)"></mat-checkbox>
             <md-input-container [ngClass]="{'Input': true}">
@@ -441,7 +441,7 @@
       <table>
         <tr *ngFor="let smid of this.tissue.scrollSMId; let i = index;">
           <td  *ngIf="!smid.deleted">
-            <mat-checkbox color="primary" disableRipple *ngIf="checkBoxNeeded('scrolls', i)"
+            <mat-checkbox color="primary" disableRipple *ngIf="!smIdCountMatch(this.tissue.scrollSMId, this.tissue.scrollsCount)"
                          [checked]="smid.isSelected" [disabled]="!canChangeThis(i, this.currentSMIDField)"
                          (change)="smid.isSelected = $event.checked; checkboxChecked($event, this.tissue.scrollSMId, i)"></mat-checkbox>
             <md-input-container [ngClass]="{'Input': true}">
