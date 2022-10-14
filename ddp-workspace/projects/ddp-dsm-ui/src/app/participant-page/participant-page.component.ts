@@ -146,6 +146,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   private SELF_STATE_NY = 'NY';
   private ABOUT_YOU = 'ABOUT_YOU';
   private ASSIGNED_SEX = 'ASSIGNED_SEX';
+  private CONDITIONAL_DISPLAY = 'conditionalDisplay';
 
   CLEAN = 'CLEAN';
   private SUCCESSFUL_DOWNLOAD_MESSAGE = 'File download finished.';
@@ -563,7 +564,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       const patch = patch1.getPatch();
       this.currentPatchField = parameterName;
       this.patchFinished = false;
-      // console.log( JSON.stringify( patch ) );
       this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
         next: data => {
           if (data) {
@@ -787,7 +787,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
     this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
       next: () => {
-        // console.info( `response saving data: ${JSON.stringify( data, null, 2 )}` );
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
@@ -1307,6 +1306,14 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     return '';
   }
 
+  getConditionalData(fieldSetting: FieldSettings, personsParticipantData: ParticipantData): string {
+    const conditionalFieldSetting: FieldSettings = this.getConditionalDisplayData(fieldSetting);
+    if (conditionalFieldSetting) {
+      return this.getParticipantData(conditionalFieldSetting, personsParticipantData);
+    }
+    return '';
+  }
+
   getParticipantForDynamicField(fieldSetting: FieldSettings): string {
     if (this.participant && this.participant.participantData && fieldSetting.columnName) {
       const participantDataFound = this.participant.participantData
@@ -1316,6 +1323,44 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       }
     }
     return '';
+  }
+
+  getParticipantAnswersForConditionalDynamicField(fieldSettings: any[]): any[] {
+    const answers = [];
+    if (this.participant && this.participant.participantData) {
+      fieldSettings?.forEach(data => {
+        const conditionalFieldSetting = data['conditionalFieldSetting'];
+        const participantDataFound = this.participant.participantData
+          .find(participantData => participantData.data
+            && participantData.data[conditionalFieldSetting.columnName] != null);
+        if (participantDataFound) {
+          const colName = conditionalFieldSetting.columnName;
+          const tempObj = {};
+          tempObj[colName] = participantDataFound.data[colName];
+          answers.push(tempObj);
+        }
+      });
+    }
+    return answers;
+  }
+
+  getConditionalParticipantForDynamicField(fieldSetting: FieldSettings): any[] {
+      const conditionalDisplayData: [] = this.getConditionalDisplayData(fieldSetting);
+    if (conditionalDisplayData?.length > 0) {
+        return this.getParticipantAnswersForConditionalDynamicField(conditionalDisplayData);
+    }
+    return [];
+  }
+
+  getConditionalDisplayData(fieldSetting: FieldSettings): any {
+    if (fieldSetting.actions) {
+      const actionWithConditionalDisplay = fieldSetting.actions.filter(action => action.type === this.CONDITIONAL_DISPLAY);
+      if (actionWithConditionalDisplay) {
+        return actionWithConditionalDisplay;
+      }
+    }
+
+    return null;
   }
 
   getDisplayName(displayName: string, columnName: string): string {
@@ -1384,11 +1429,32 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     return [];
   }
 
+  formConditionalPatch(value: any, fieldSetting: FieldSettings, groupSetting: FieldSettings, dataId?: string): void {
+    if (fieldSetting?.actions) {
+
+      let actionWithConditionalDisplay;
+
+      if(value.checkbox) {
+        actionWithConditionalDisplay = fieldSetting.actions.find(action => action.conditionalFieldSetting.columnName === value.key);
+      } else {
+        actionWithConditionalDisplay = fieldSetting.actions.find(action => action.condition === value.key);
+      }
+
+      if (actionWithConditionalDisplay){
+        const newFieldSetting = actionWithConditionalDisplay.conditionalFieldSetting;
+        this.formPatch(value.value, newFieldSetting, groupSetting, dataId);
+      }
+    }
+  }
+
+
+
   formPatch(value: any, fieldSetting: FieldSettings, groupSetting: FieldSettings, dataId?: string): void {
     if (fieldSetting == null || fieldSetting.fieldType == null) {
       this.errorMessage = 'Didn\'t save change';
       return;
     }
+
     let fieldTypeId = fieldSetting.fieldType;
     if (groupSetting != null) {
       fieldTypeId = groupSetting.fieldType;
@@ -1413,7 +1479,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         let actionPatch: Value[] = null;
         if (fieldSetting.actions != null) {
           fieldSetting.actions.forEach((action) => {
-            if (action != null && action.name != null && action.type != null) {
+            if (action != null && action.name != null && action.type != null && action.type !== this.CONDITIONAL_DISPLAY) {
               participantDataSec = this.participant.participantData.find(pData => pData.fieldTypeId === action.type);
               if (participantDataSec == null) {
                 if (action.type !== 'ELASTIC_EXPORT.workflows' && action.type !== 'PARTICIPANT_EVENT') {
