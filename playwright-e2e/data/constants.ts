@@ -10,7 +10,8 @@ export enum WHO {
   MyBirthDaughter = 'My birth daughter',
   MyBirthSon = 'My birth son',
   SomeoneElse = 'Someone else',
-  TheChildBeingEnrolled = 'The child being enrolled'
+  TheChildBeingEnrolled = 'The child being enrolled',
+  TheDependantBeingEnrolled = 'The dependant being enrolled'
 }
 
 export const STATES = [
