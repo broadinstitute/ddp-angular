@@ -115,9 +115,15 @@ import {SequencingOrderComponent} from '../sequencing-order/sequencing-order.com
 import {ClinicalPageComponent} from '../clinical-page/clinical-page.component';
 import {StoolUploadComponent} from '../stool-upload/stool-upload.component';
 import {QrCodeComponent} from '../qr-code/qr-code.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatTableModule} from '@angular/material/table';
 
+import { MatFormFieldModule } from '@angular/material/form-field';
 
-
+import {
+  MatrixAnswerTableComponent
+} from '../activity-data/components/matrix-answer-table.component';
 
 @NgModule({
   declarations: [
@@ -202,7 +208,8 @@ import {QrCodeComponent} from '../qr-code/qr-code.component';
     OpenDialogDirective,
     SequencingOrderComponent,
     ClinicalPageComponent,
-    FileDownloadComponent
+    FileDownloadComponent,
+    MatrixAnswerTableComponent
   ],
   imports: [
     CommonModule,
@@ -234,7 +241,12 @@ import {QrCodeComponent} from '../qr-code/qr-code.component';
     CookieModule.forRoot(),
     AccordionModule.forRoot(),
     TypeaheadModule.forRoot(),
-    DragulaModule.forRoot()
+    DragulaModule.forRoot(),
+    MatProgressSpinnerModule,
+    MatTabsModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
     Utils,
@@ -243,7 +255,7 @@ import {QrCodeComponent} from '../qr-code/qr-code.component';
     Statics,
     Language,
   ],
-  exports: [RouterModule]
+  exports: [RouterModule, MatFormFieldModule, MatInputModule]
 })
 
 export class AllStudiesModule {

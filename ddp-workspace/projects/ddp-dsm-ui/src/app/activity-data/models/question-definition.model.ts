@@ -1,13 +1,18 @@
 import { Group } from './group.model';
 import { Option } from './option.model';
 
+export interface Row {
+  rowStableId: string;
+  rowText: string;
+}
+
 export class QuestionDefinition {
 
   constructor(
     public stableId: string, public questionType: string, public questionText: string,
     public options: Array<Option>, public groups: Array<Group>,
     public childQuestions: Array<QuestionDefinition>, public selectMode: string,
-    public allowMultiple: boolean
+    public allowMultiple: boolean, public rows: Row[] = []
   ) {
     this.stableId = stableId;
     this.questionType = questionType;

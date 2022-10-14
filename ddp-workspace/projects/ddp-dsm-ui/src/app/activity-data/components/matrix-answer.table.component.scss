@@ -1,0 +1,40 @@
+@mixin mainRowDefaults($width) {
+  width: $width;
+  word-break: break-word;
+  text-align: center;
+  padding-bottom: 1em;
+}
+
+tr.spaceUnder>td {
+  padding-bottom: 1em;
+}
+.mainRow {
+  box-shadow: 0 2px 2px -2px gray;
+  td:first-of-type {
+    @include mainRowDefaults(250px);
+  }
+  td:not(:first-of-type) {
+    @include mainRowDefaults(176px);
+  }
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.firstColumn {
+  padding-right: 10px;
+}
+
+.marginTop {
+  margin-top: 10px;
+}
+
+tbody:before {
+  content: "-";
+  display: block;
+  line-height: 1em;
+  color: transparent;
+}
+
+

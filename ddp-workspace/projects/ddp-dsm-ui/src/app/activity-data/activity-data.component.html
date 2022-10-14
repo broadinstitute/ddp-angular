@@ -5,7 +5,7 @@
                        (opened)="generateActivity()">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <b>{{ activityDefinition.activityName }}</b>
+        <b [innerHTML]="activityDefinition.activityName"></b>
       </mat-panel-title>
       <mat-panel-description class="align-header">
         Survey Version: {{activity.activityVersion}}
@@ -19,17 +19,22 @@
       <div>Last Updated: {{activity.lastUpdatedAt | date:'medium'}}</div>
     </div>
     <hr/>
-    <div *ngFor="let item of questionsAndAnswers;">
+    <div *ngFor="let item of questionsAndAnswers">
       <ng-container *ngTemplateOutlet="questionUI;
       context: {
-      type: item.type,
-      stableId: item.stableId,
-      question: item.question,
-      questionTypes: { answer: item.answer, picklist: item.picklistAnswer, composite: item.compositeAnswer, matrix: item.matrixAnswer }
+        type: item.type,
+        stableId: item.stableId,
+        question: item.question,
+        questionTypes: {
+          answer: item.answer,
+          picklist: item.picklistAnswer,
+          composite: item.compositeAnswer,
+          matrix: item.matrixAnswer
+          }
       }">
-      </ng-container>
-      <hr/>
-    </div>
+        </ng-container>
+        <hr/>
+      </div>
 
   </mat-expansion-panel>
 </mat-accordion>
@@ -47,7 +52,7 @@
              let-picklist="questionTypes.picklist"
              let-matrix="questionTypes.matrix"
 >
-  <h5 class="grey-color" innerHTML="{{question}} <b>({{stableId}})</b>"></h5>
+  <h5 *ngIf="type !== 'MATRIX'" class="grey-color" innerHTML="{{question}} <b>({{stableId}})</b>"></h5>
 
   <ng-container *ngIf="type === 'TEXT'">
     <div *ngIf="answer">
@@ -112,11 +117,14 @@
     <p><b>{{ answer }}</b></p>
   </ng-container>
 
+
   <ng-container *ngIf="type === 'MATRIX'">
-    <ul>
-      <li *ngFor="let mat of matrix"><b>{{mat.answer}}</b> ({{mat.question}})</li>
-    </ul>
+    <div class="matrixSeparator">
+      <h5 class="grey-color" ><b>{{ question }}</b></h5>
+      <app-matrix-answer-table [answers]="matrix" [questionDefinition]="matrixQuestionDefinition(stableId)"></app-matrix-answer-table>
+    </div>
   </ng-container>
+
 
   <ng-container *ngIf="type === 'DATE'">
     <p><b>{{ answer }}</b></p>

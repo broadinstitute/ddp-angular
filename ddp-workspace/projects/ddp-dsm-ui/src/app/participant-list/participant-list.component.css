@@ -10,6 +10,10 @@
   list-style-type:none;
 }
 
+.noData {
+  color: transparent;
+}
+
 button.mat-icon-button {
   width: auto;
 }

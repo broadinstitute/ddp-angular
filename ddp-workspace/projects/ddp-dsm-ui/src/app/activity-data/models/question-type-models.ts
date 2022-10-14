@@ -1,4 +1,7 @@
 // Core interface
+import {Option} from './option.model';
+import {Row} from './question-definition.model';
+
 export interface QuestionTypeModel {
   type: string;
   stableId: string;
@@ -7,10 +10,13 @@ export interface QuestionTypeModel {
   answer?: string | number;
   picklistAnswer?: Partial<PicklistAnswersModel>;
   compositeAnswer?: MutualModel[];
-  matrixAnswer?: MutualModel[];
+  matrixAnswer?: MatrixAnswer[];
 }
 
-
+export interface MatrixAnswer {
+  horizontalAnswer: Option;
+  verticalAnswer: Row;
+}
 
 /* Models will be added as necessary */
 
