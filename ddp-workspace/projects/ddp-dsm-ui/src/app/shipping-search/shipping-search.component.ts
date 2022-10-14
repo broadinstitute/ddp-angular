@@ -129,7 +129,7 @@ export class ShippingSearchComponent implements OnInit {
       v = value;
     }
     if (v != null) {
-      const realm: string = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
+      const realm: string = kitRequest.realm;
       const patch1 = new PatchUtil(
         kitRequest.dsmKitRequestId, this.role.userMail(),
         {
