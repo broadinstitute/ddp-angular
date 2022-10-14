@@ -1597,7 +1597,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       return;
     }
     const realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
-    const sub1 = this.dsmService.getMercuryEligibleSamples(this.participant.participant.ddpParticipantId, realm).subscribe({
+    const sub1 = this.dsmService.getMercuryEligibleSamples(this.participant.data.profile['guid'], realm).subscribe({
       next: data => {
         const jsonData = data;
         this.sequencingOrdersArray = [];
