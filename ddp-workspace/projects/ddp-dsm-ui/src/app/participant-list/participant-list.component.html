@@ -767,7 +767,7 @@
                         <p class="BIT-OF-MARGIN">
                           <ng-container *ngIf="col.participantColumn.object !== 'testResult'">
                             <ng-container *ngIf="col.type !== 'DATE' && col.type !== 'BOOLEAN' && col.type !== 'OPTIONS' && col.type !== 'CHECKBOX'">
-                              <span [innerHTML]="sample[col.participantColumn.name] || noData"></span>
+                              <span [innerHTML]="sample[col.participantColumn.name] || noDataHTML"></span>
                             </ng-container>
                             <ng-container *ngIf="col.type === 'BOOLEAN' || col.type === 'CHECKBOX'">
                               <ng-container *ngIf="getUtil().getYesNo(sample[col.participantColumn.name]); else noData">
