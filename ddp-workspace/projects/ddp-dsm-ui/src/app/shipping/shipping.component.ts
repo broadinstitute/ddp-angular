@@ -320,7 +320,7 @@ export class ShippingComponent implements OnInit {
       case 'cmi-lms':
         return true;
       default:
-        return false;
+        return true;
     }
   }
 
@@ -381,8 +381,8 @@ export class ShippingComponent implements OnInit {
                 height: 100%;
             }
             .nameDob {
-                margin: 13px 0 0 0;
-                width: fit-content;
+                margin: 11px 0 0 0;
+                width: 88px;
                 height: fit-content;
                 transform: translateY(-3px);
             }
