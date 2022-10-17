@@ -414,7 +414,7 @@
       <table>
         <tr *ngFor="let smid of this.tissue.ussSMId; let i = index;">
           <td *ngIf="!smid.deleted">
-            <mat-checkbox color="primary" disableRipple *ngIf="!smIdCountMatch(this.tissue.ussSMId, this.tissue.ussCount)
+            <mat-checkbox color="primary" disableRipple *ngIf="!smIdCountMatch(this.tissue.ussSMId, this.tissue.ussCount)"
                          [checked]="smid.isSelected" [disabled]="!canChangeThis(i, this.currentSMIDField)"
                          (change)="smid.isSelected = $event.checked; checkboxChecked($event, this.tissue.ussSMId, i)"></mat-checkbox>
             <md-input-container [ngClass]="{'Input': true}">
