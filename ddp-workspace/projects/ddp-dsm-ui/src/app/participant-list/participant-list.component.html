@@ -761,7 +761,9 @@
                         <p class="BIT-OF-MARGIN">
                           <ng-container *ngIf="col.participantColumn.object !== 'testResult'">
                             <ng-container *ngIf="col.type !== 'DATE' && col.type !== 'BOOLEAN' && col.type !== 'OPTIONS' && col.type !== 'CHECKBOX'">
-                              <span [innerHTML]="sample[col.participantColumn.name] || noDataHTML"></span>
+                              <ng-container *ngIf="sample[col.participantColumn.name]; else noData">
+                                <span [innerHTML]="sample[col.participantColumn.name]"></span>
+                              </ng-container>
                             </ng-container>
                             <ng-container *ngIf="col.type === 'BOOLEAN' || col.type === 'CHECKBOX'">
                               <ng-container *ngIf="getUtil().getYesNo(sample[col.participantColumn.name]); else noData">
@@ -775,7 +777,7 @@
                             </ng-container>
                             <ng-container *ngIf="col.type === 'OPTIONS'">
                               <ng-container *ngIf="getOptionDisplay(col.options, sample[col.participantColumn.name]); else noData">
-                                getOptionDisplay(col.options, sample[col.participantColumn.name])
+                                {{ getOptionDisplay(col.options, sample[col.participantColumn.name]) }}
                               </ng-container>
                             </ng-container>
 
