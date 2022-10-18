@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
+import {ConditionalFormDataComponent} from '../conditional-form-data/conditional-form-data.component';
 import {FileDownloadComponent} from '../file-download/file-download.component';
 import {AllStudiesRoutingModule} from './all-studies.routing.module';
 import {HomeComponent} from '../home/home.component';
@@ -118,6 +119,7 @@ import {QrCodeComponent} from '../qr-code/qr-code.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
+import {RadioButtonDirective} from '../form-data/directives/radio-button.directive';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 
@@ -209,7 +211,9 @@ import {
     SequencingOrderComponent,
     ClinicalPageComponent,
     FileDownloadComponent,
-    MatrixAnswerTableComponent
+    MatrixAnswerTableComponent,
+    ConditionalFormDataComponent,
+    RadioButtonDirective
   ],
   imports: [
     CommonModule,
