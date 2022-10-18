@@ -342,7 +342,7 @@
                 <ng-container *ngIf="col.participantColumn.esData && pt.data.activities != null">
                   <ng-container *ngFor="let activityData of pt.data.getActivityDataByCode(alias)">
                     <ng-container *ngIf="col.participantColumn.name === 'createdAt' || col.participantColumn.name === 'completedAt'
-          || col.participantColumn.name === 'lastUpdatedAt' || col.participantColumn.name === 'status'">
+                    || col.participantColumn.name === 'lastUpdatedAt' || col.participantColumn.name === 'status'">
                       <div
                         *ngIf="activityData[col.participantColumn.name] != null && col.participantColumn.name !== 'status'">
                         <ng-container *ngIf="activityData[col.participantColumn.name] !== 0">
@@ -357,7 +357,7 @@
                       </div>
                     </ng-container>
                     <ng-container *ngIf="col.participantColumn.name !== 'createdAt' && col.participantColumn.name !== 'completedAt'
-          && col.participantColumn.name !== 'lastUpdatedAt' && col.participantColumn.name !== 'status' && activityData.questionsAnswers != null">
+                      && col.participantColumn.name !== 'lastUpdatedAt' && col.participantColumn.name !== 'status' && activityData.questionsAnswers != null">
                       <ng-container
                         *ngIf="getQuestionAnswerByName(activityData.questionsAnswers, col.participantColumn.name) as questionAnswer">
 
