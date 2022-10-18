@@ -134,7 +134,7 @@ import {CountsComponent} from '../dashboard-statistics/components/counts/counts.
 import {
   MatrixAnswerTableComponent
 } from '../activity-data/components/matrix-answer-table.component';
-import {NoDataPipe} from "../participant-list/pipes/noData.pipe";
+import {NoDataPipe} from '../participant-list/pipes/noData.pipe';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
