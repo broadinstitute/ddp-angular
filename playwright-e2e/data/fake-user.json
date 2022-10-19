@@ -51,5 +51,51 @@
     "city": "Cambridge",
     "zip": "02142-1027",
     "phone": "6177147000"
+  },
+  "secondChild": {
+    "firstName": "E2E-second-Child",
+    "middleName": "Junior",
+    "lastName": "Playwright",
+    "birthDate": {
+      "MM": "07",
+      "DD": "20",
+      "YYYY": "2016"
+    },
+    "age": "06",
+    "country": {
+      "name": "UNITED STATES",
+      "abbreviation": "US"
+    },
+    "state": {
+      "name": "MASSACHUSETTS",
+      "abbreviation": "MA"
+    },
+    "streetAddress": "415 Main Street",
+    "city": "Cambridge",
+    "zip": "02142-1027",
+    "phone": "6177147000"
+  },
+  "thirdChild": {
+    "firstName": "E2E-Child",
+    "middleName": "Junior",
+    "lastName": "Playwright",
+    "birthDate": {
+      "MM": "07",
+      "DD": "20",
+      "YYYY": "2012"
+    },
+    "age": "10",
+    "country": {
+      "name": "UNITED STATES",
+      "abbreviation": "US"
+    },
+    "state": {
+      "name": "MASSACHUSETTS",
+      "abbreviation": "MA"
+    },
+    "streetAddress": "415 Main Street",
+    "city": "Cambridge",
+    "zip": "02142-1027",
+    "phone": "6177147000"
   }
 }
