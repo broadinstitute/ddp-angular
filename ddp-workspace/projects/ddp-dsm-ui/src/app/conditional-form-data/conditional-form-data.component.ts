@@ -15,7 +15,7 @@ export class ConditionalFormDataComponent implements OnInit{
   @Input() checkBoxGroups: {};
   @Input() patchFinished: boolean;
   @Output() patchDataConditionalField = new EventEmitter();
-  conditionalTextareaField = new FormControl();
+
   TEXT_AREA_DEFAULT_SIZE = 50000;
   TEXT_DEFAULT_SIZE = 200;
   dynamicMaxLength = 100;
