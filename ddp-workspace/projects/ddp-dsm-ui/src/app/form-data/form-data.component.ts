@@ -1,8 +1,14 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import {FieldSettings} from '../field-settings/field-settings.model';
 import {Value} from '../utils/value.model';
 import {MatRadioChange} from '@angular/material/radio';
+import {FormControl} from '@angular/forms';
 
 @Component( {
   selector: 'app-form-data',
@@ -25,7 +31,6 @@ export class FormDataComponent implements OnInit {
   public showOrNot = false;
   public checkedRadioBtnValue: string;
   public checkedRadioBtn: string;
-
   currentPatchField: string;
   TEXT_AREA_DEFAULT_SIZE = 50000;
   TEXT_DEFAULT_SIZE = 200;
@@ -43,7 +48,6 @@ export class FormDataComponent implements OnInit {
       this.dynamicMaxLength = this.TEXT_AREA_DEFAULT_SIZE;
     }
   }
-
   CONDITIONAL_DISPLAY = 'conditionalDisplay';
 
   constructor() {}
@@ -79,6 +83,7 @@ export class FormDataComponent implements OnInit {
       // get data from dsm db if it is not type activity
       if (this.fieldSetting.displayType !== 'ACTIVITY_STAFF') {
         // return savedAnswer if it is not type activity_staff
+        this.checkedRadioBtn = this.participantData.toString();
         return this.participantData ? this.participantData.toString() : this.participantData;
       } else {
         // if it is type activity_staff only return if it is not empty, otherwise return answer from the activity
@@ -182,6 +187,7 @@ export class FormDataComponent implements OnInit {
         } else {
           v = value.srcElement.value;
         }
+
       } else if (value.value != null) {
         v = value.value;
       } else if (value.checked != null) {

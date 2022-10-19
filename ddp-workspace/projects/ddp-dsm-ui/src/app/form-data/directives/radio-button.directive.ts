@@ -38,7 +38,7 @@ export class RadioButtonDirective implements OnInit {
   }
 
   @Input('ddpRadioBtnFieldSetting') set setFieldSettings(fieldSettings: FieldSettings) {
-    this.fieldSettings = fieldSettings;
+   this.fieldSettings = fieldSettings;
   }
 
   @Input('ddpRadioBtnCheckedRadioBtn') set setCheckedRadioBtn(value: string) {
