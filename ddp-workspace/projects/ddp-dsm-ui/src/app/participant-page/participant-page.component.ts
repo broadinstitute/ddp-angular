@@ -1723,7 +1723,4 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     return this.role.viewOnlyDSSData;
   }
 
-  public get noMrViewAndNotOnlyDSSData(): boolean {
-    return !this.role.allowedToViewMedicalRecords() && !this.role.viewOnlyDSSData;
-  }
 }
