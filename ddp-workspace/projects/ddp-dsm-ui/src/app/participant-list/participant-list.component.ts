@@ -168,7 +168,7 @@ export class ParticipantListComponent implements OnInit {
   public pageChanged(pageNumber: number, rPerPage?: number): void {
     this.loadingParticipants = true;
     this.role.getUserSetting().setRowsPerPage = rPerPage;
-    const rowsPerPage = rPerPage ? rPerPage : this.role.getUserSetting().getRowsPerPage();
+    const rowsPerPage = rPerPage ? rPerPage : this.role?.getUserSetting()?.getRowsPerPage();
     const from = (pageNumber - 1) * rowsPerPage;
     const to = pageNumber * rowsPerPage;
     if (this.viewFilter) {
@@ -276,7 +276,7 @@ export class ParticipantListComponent implements OnInit {
   }
 
   loadSettings(): void {
-    this.rowsPerPage = this.role.getUserSetting().getRowsPerPage();
+    this.rowsPerPage = this.role?.getUserSetting()?.getRowsPerPage();
     let jsonData: any;
     this.dsmService.getSettings(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe({
       next: data => {
@@ -880,7 +880,7 @@ export class ParticipantListComponent implements OnInit {
     this.selectedPatients = [];
   }
 
-  private applyFilter(viewFilter: ViewFilter, from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage()): void {
+  private applyFilter(viewFilter: ViewFilter, from: number = 0, to: number = this.role?.getUserSetting()?.getRowsPerPage()): void {
     this.dsmService.applyFilter(viewFilter, localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
       this.parent, null, from, to, this.sortBy)
       .subscribe({
@@ -1171,7 +1171,7 @@ export class ParticipantListComponent implements OnInit {
     this.viewFilter = null;
     this.jsonPatch = null;
     this.activePage = 1;
-    this.rowsPerPage = this.role.getUserSetting().getRowsPerPage();
+    this.rowsPerPage = this.role?.getUserSetting()?.getRowsPerPage();
   }
 
   getUtilStatic(): typeof Utils {
