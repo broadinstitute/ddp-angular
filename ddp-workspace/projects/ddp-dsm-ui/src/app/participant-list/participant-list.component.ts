@@ -323,7 +323,7 @@ export class ParticipantListComponent implements OnInit {
             this.cancers.push(val);
           });
         }
-        if (jsonData.fieldSettings != null) {
+        if (jsonData.fieldSettings != null && !this.role.viewOnlyDSSData) {
           Object.keys(jsonData.fieldSettings).forEach((key) => {
             jsonData.fieldSettings[key].forEach((fieldSetting: FieldSettings) => {
               let options: Array<NameValue> = null;
