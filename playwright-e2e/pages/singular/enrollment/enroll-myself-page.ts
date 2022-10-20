@@ -1,13 +1,18 @@
 import { Locator, Page } from '@playwright/test';
+import { SingularPage } from 'pages/singular/singular-page';
 import Question from 'lib/component/Question';
-import PageBase from 'lib/page-base';
 
-export default class EnrollMyselfPage extends PageBase {
+export default class EnrollMyselfPage extends SingularPage {
   readonly enrollMyself: Locator;
 
   constructor(page: Page) {
     super(page);
     this.enrollMyself = this.page.locator('button', { hasText: 'Enroll myself' });
+  }
+
+  async waitForReady() {
+    // Add additional checks to wait for page is ready
+    await this.whoHasVentricleHeartDefect().toLocator().waitFor({ state: 'visible' });
   }
 
   /**

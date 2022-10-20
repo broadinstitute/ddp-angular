@@ -1,9 +1,9 @@
 import { expect, test } from '@playwright/test';
 
-import HomePage from 'tests/singular/home/home-page';
-import { fillSitePassword } from 'tests/lib/auth-singular';
-import { goToPath, NavSelectors } from 'tests/singular/lib/nav';
-import PreScreeningPage from './pre-screening-page';
+import HomePage from 'pages/singular/home/home-page';
+import { fillSitePassword } from 'authentication/auth-singular';
+import { goToPath, NavSelectors } from 'pages/singular/navbar';
+import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
 
 test.describe('About Yourself page', () => {
   test.beforeEach(async ({ page }) => {

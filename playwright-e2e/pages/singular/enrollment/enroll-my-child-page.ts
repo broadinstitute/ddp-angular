@@ -1,11 +1,18 @@
 import { Page } from '@playwright/test';
+import { SingularPage } from 'pages/singular/singular-page';
 import Question from 'lib/component/Question';
 import Input from 'lib/widget/Input';
-import PageBase from 'lib/page-base';
 
-export default class EnrollMyChildPage extends PageBase {
+export default class EnrollMyChildPage extends SingularPage {
   constructor(page: Page) {
     super(page);
+  }
+
+  async waitForReady() {
+    // Add additional checks to wait for page is ready
+    await this.howOldIsYourChild()
+      .toLocator()
+      .waitFor({ state: 'visible', timeout: 60 * 1000 });
   }
 
   /**

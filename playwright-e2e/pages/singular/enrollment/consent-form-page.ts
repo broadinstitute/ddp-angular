@@ -1,11 +1,18 @@
 import { Page } from '@playwright/test';
+import { SingularPage } from 'pages/singular/singular-page';
 import Question from 'lib/component/Question';
 import Input from 'lib/widget/Input';
-import PageBase from 'lib/page-base';
 
-export default class ConsentFormPage extends PageBase {
+export default class ConsentFormPage extends SingularPage {
   constructor(page: Page) {
     super(page);
+  }
+
+  async waitForReady() {
+    // Add additional checks to wait for page is ready
+    await this.firstName()
+      .toLocator()
+      .waitFor({ state: 'visible', timeout: 60 * 1000 });
   }
 
   /**
@@ -63,17 +70,5 @@ export default class ConsentFormPage extends PageBase {
    */
   toKnowSecondaryFinding(): Question {
     return new Question(this.page, { prompt: 'If a secondary finding is found in my genes:' });
-  }
-
-  /** Click "Agree" button */
-  async agree(): Promise<void> {
-    const agreeButton = this.page.locator('button', { hasText: 'I agree' });
-    await this.clickHelper(agreeButton, { waitForNav: true });
-  }
-
-  /** Click "I am not ready to agree" button */
-  async notReadyToAgree(): Promise<void> {
-    const notAgreeButton = this.page.locator('button', { hasText: 'I am not ready to agree' });
-    await this.clickHelper(notAgreeButton, { waitForNav: true });
   }
 }

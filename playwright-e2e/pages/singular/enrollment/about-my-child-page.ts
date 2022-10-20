@@ -1,10 +1,10 @@
 import { Page } from '@playwright/test';
+import { SingularPage } from 'pages/singular/singular-page';
 import Question from 'lib/component/Question';
 import Card from 'lib/widget/card';
 import Input from 'lib/widget/Input';
-import PageBase from 'lib/page-base';
 
-export default class AboutMyChildPage extends PageBase {
+export default class AboutMyChildPage extends SingularPage {
   constructor(page: Page) {
     super(page);
   }

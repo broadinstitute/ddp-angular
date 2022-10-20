@@ -1,12 +1,19 @@
 import { Page } from '@playwright/test';
+import { SingularPage } from 'pages/singular/singular-page';
 import Question from 'lib/component/Question';
 import Input from 'lib/widget/Input';
 import Select from 'lib/widget/select';
-import PageBase from 'lib/page-base';
 
-export default class ChildSurveyPage extends PageBase {
+export default class ChildSurveyPage extends SingularPage {
   constructor(page: Page) {
     super(page);
+  }
+
+  async waitForReady() {
+    // Add additional checks to wait for page is ready
+    await this.cityBornIn()
+      .toLocator()
+      .waitFor({ state: 'visible', timeout: 60 * 1000 });
   }
 
   /**
@@ -247,13 +254,5 @@ export default class ChildSurveyPage extends PageBase {
         // eslint-disable-next-line max-len
         'Has your child ever received treatment or support for any form of emotional, behavioral, neurodevelopmental, or psychological problem?'
     });
-  }
-
-  /**
-   * Click Submit button
-   */
-  async submit(): Promise<void> {
-    const submitButton = this.page.locator('button', { hasText: 'Submit' });
-    await this.clickHelper(submitButton, { waitForNav: true });
   }
 }

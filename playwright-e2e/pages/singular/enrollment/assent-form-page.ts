@@ -1,11 +1,18 @@
 import { Page } from '@playwright/test';
-import PageBase from 'lib/page-base';
+import { SingularPage } from 'pages/singular/singular-page';
 import Input from 'lib/widget/Input';
 import Checkbox from 'lib/widget/checkbox';
 
-export default class AssentFormPage extends PageBase {
+export default class AssentFormPage extends SingularPage {
   constructor(page: Page) {
     super(page);
+  }
+
+  async waitForReady() {
+    // Add additional checks to wait for page is ready
+    await this.fullName()
+      .toLocator()
+      .waitFor({ state: 'visible', timeout: 60 * 1000 });
   }
 
   /**

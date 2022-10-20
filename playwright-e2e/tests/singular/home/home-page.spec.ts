@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
-import { goToAboutUs, goToPath, NavSelectors } from 'tests/singular/lib/nav';
-import { fillSitePassword } from 'tests/lib/auth-singular';
+import { goToAboutUs, goToPath, NavSelectors } from 'pages/singular/navbar';
+import { fillSitePassword } from 'authentication/auth-singular';
 
 /**
  * Functional tests

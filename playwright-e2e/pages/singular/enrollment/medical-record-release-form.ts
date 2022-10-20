@@ -1,15 +1,23 @@
 import { expect, Page } from '@playwright/test';
+import { SingularPage } from 'pages/singular/singular-page';
+
 import Checkbox from 'lib/widget/checkbox';
 
 import path from 'path';
 import Input from 'lib/widget/Input';
 import Select from 'lib/widget/select';
 import * as user from 'data/fake-user.json';
-import PageBase from 'lib/page-base';
 
-export default class MedicalRecordReleaseForm extends PageBase {
+export default class MedicalRecordReleaseForm extends SingularPage {
   constructor(page: Page) {
     super(page);
+  }
+
+  async waitForReady() {
+    // Add additional checks to wait for page is ready
+    await this.physicianName()
+      .toLocator()
+      .waitFor({ state: 'visible', timeout: 60 * 1000 });
   }
 
   physicianName(): Input {

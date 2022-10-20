@@ -1,10 +1,10 @@
 import { expect, test } from '@playwright/test';
 
-import HomePage from 'tests/singular/home/home-page';
+import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
+import HomePage from 'pages/singular/home/home-page';
 import * as user from 'data/fake-user.json';
-import * as nav from 'tests/singular/lib/nav';
-import { fillSitePassword } from 'tests/lib/auth-singular';
-import PreScreeningPage from './pre-screening-page';
+import * as nav from 'pages/singular/navbar';
+import { fillSitePassword } from 'authentication/auth-singular';
 
 test.describe('Child Enrollment', () => {
   test.beforeEach(async ({ page }) => {

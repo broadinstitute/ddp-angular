@@ -12,7 +12,7 @@ module.exports = {
     node: true,
     es6: true
   },
-  ignorePatterns: ['build', 'node_modules', 'tests-examples', '.eslintrc.js', './*.js'],
+  ignorePatterns: ['build', 'node_modules', 'tests-examples', '.eslintrc.js'],
   rules: {
     /* Code Quality */
     'curly': 'warn',

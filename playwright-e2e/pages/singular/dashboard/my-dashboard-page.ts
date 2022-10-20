@@ -1,8 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test';
 import Table from 'lib/widget/table';
-import PageBase from 'lib/page-base';
+import { SingularPage } from 'pages/singular/singular-page';
 
-export default class MyDashboardPage extends PageBase {
+export default class MyDashboardPage extends SingularPage {
   private readonly _enrollMyselfButton: Locator;
   private readonly _enrollMyChildButton: Locator;
   private readonly _enrollMyAdultDependentButton: Locator;
@@ -35,7 +35,7 @@ export default class MyDashboardPage extends PageBase {
   }
 
   async viewFamilyEnrollmentMessage(): Promise<void> {
-    await this.clickHelper(this.viewFamilyEnrollmentMessageButton, { waitForNav: true });
+    await this.clickAndWaitForNav(this.viewFamilyEnrollmentMessageButton, { waitForNav: true });
   }
 
   /**

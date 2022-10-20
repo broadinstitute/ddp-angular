@@ -1,19 +1,19 @@
 import { expect, Page, test } from '@playwright/test';
 
-import HomePage from 'tests/singular/home/home-page';
-import AboutMePage from 'tests/singular/enrollment/about-me-page';
-import ConsentFormPage from 'tests/singular/enrollment/consent-form-page';
-import MyDashboardPage from 'tests/singular/dashboard/my-dashboard-page';
+import HomePage from 'pages/singular/home/home-page';
+import AboutMePage from 'pages/singular/enrollment/about-me-page';
+import ConsentFormPage from 'pages/singular/enrollment/consent-form-page';
+import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
 import * as user from 'data/fake-user.json';
-import * as nav from 'tests/singular/lib/nav';
-import * as auth from 'tests/lib/auth-singular';
+import * as nav from 'pages/singular/navbar';
+import * as auth from 'authentication/auth-singular';
 import { makeEmailAlias } from 'utils/string-utils';
 import { WHO } from 'data/constants';
-import { downloadConsentPdf, enterMailingAddress } from 'tests/lib/test-steps';
-import PreScreeningPage from './pre-screening-page';
-import EnrollMyselfPage from './enroll-myself-page';
-import MedicalRecordReleaseForm from './medical-record-release-form';
-import PatientSurveyPage from './patient-survey-page';
+import { downloadConsentPdf, enterMailingAddress } from 'utils/test-utils';
+import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
+import EnrollMyselfPage from 'pages/singular/enrollment/enroll-myself-page';
+import MedicalRecordReleaseForm from 'pages/singular/enrollment/medical-record-release-form';
+import PatientSurveyPage from 'pages/singular/enrollment/patient-survey-page';
 
 test.describe('Enroll myself as adult', () => {
   test.beforeEach(async ({ page }) => {

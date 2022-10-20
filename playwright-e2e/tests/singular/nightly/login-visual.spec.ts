@@ -1,9 +1,9 @@
 import { expect, test } from '@playwright/test';
 
-import MyDashboardPage from 'tests/singular/dashboard/my-dashboard-page';
-import HomePage from 'tests/singular/home/home-page';
-import { clickLogin, goToAboutUs, NavSelectors, visitHomePage } from 'tests/singular/lib/nav';
-import { fillSitePassword, login } from 'tests/lib/auth-singular';
+import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
+import HomePage from 'pages/singular/home/home-page';
+import { clickLogin, goToAboutUs, NavSelectors, visitHomePage } from 'pages/singular/navbar';
+import { fillSitePassword, login } from 'authentication/auth-singular';
 
 import _ from 'lodash';
 
@@ -85,7 +85,7 @@ test.describe.skip('Login into Singular', () => {
   test('should fail with invalid credential @visual @singular', async ({ page }) => {
     await goToAboutUs(page);
     await fillSitePassword(page);
-    await login(page, { email: process.env.singularUserEmail, password: 'WrongPazzw0rd' });
+    await login(page, { email: 'fake-user@broadinstitute.org', password: 'WrongPazzw0rd' });
     const loginErrMessage = page.locator('form .auth0-global-message-error span:not([class])');
     await expect(loginErrMessage).toHaveText('Wrong email or password.');
     expect(await page.locator('form .auth0-lock-widget-container').screenshot()).toMatchSnapshot('wrong-password.png');

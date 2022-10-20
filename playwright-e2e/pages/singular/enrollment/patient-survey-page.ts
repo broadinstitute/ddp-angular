@@ -1,12 +1,19 @@
 import { Page } from '@playwright/test';
+import { SingularPage } from 'pages/singular/singular-page';
 import Input from 'lib/widget/Input';
 import Select from 'lib/widget/select';
 import Question from 'lib/component/Question';
-import PageBase from 'lib/page-base';
 
-export default class PatientSurveyPage extends PageBase {
+export default class PatientSurveyPage extends SingularPage {
   constructor(page: Page) {
     super(page);
+  }
+
+  async waitForReady() {
+    // Add additional checks to wait for page is ready
+    await this.cityBornIn()
+      .toLocator()
+      .waitFor({ state: 'visible', timeout: 60 * 1000 });
   }
 
   /**

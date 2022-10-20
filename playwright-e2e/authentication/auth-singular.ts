@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test';
-import { clickLogin, NavSelectors } from 'tests/singular/lib/nav';
+import { clickLogin, NavSelectors } from 'pages/singular/navbar';
 
 // import * as dotenv from 'dotenv';
 // import path from 'path';
