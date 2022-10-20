@@ -10,9 +10,7 @@ export default class ConsentFormPage extends SingularPage {
 
   async waitForReady(): Promise<void> {
     // Add additional checks to wait for page is ready
-    await this.firstName()
-      .toLocator()
-      .waitFor({ state: 'visible', timeout: 60 * 1000 });
+    await this.firstName().toLocator().waitFor({ state: 'visible' });
   }
 
   /**

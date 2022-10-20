@@ -9,9 +9,7 @@ export default class AboutMyAdultDependentPage extends SingularPage {
   }
 
   async waitForReady(): Promise<void> {
-    await this.firstName()
-      .toLocator()
-      .waitFor({ state: 'visible', timeout: 60 * 1000 });
+    await this.firstName().toLocator().waitFor({ state: 'visible' });
   }
 
   firstName(): Input {

@@ -15,9 +15,7 @@ export default class MedicalRecordReleaseForm extends SingularPage {
 
   async waitForReady(): Promise<void> {
     // Add additional checks to wait for page is ready
-    await this.physicianName()
-      .toLocator()
-      .waitFor({ state: 'visible', timeout: 60 * 1000 });
+    await this.physicianName().toLocator().waitFor({ state: 'visible' });
   }
 
   physicianName(): Input {

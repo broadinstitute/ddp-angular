@@ -9,9 +9,7 @@ export default class ConsentFormForAdultDependentPage extends SingularPage {
   }
 
   async waitForReady(): Promise<void> {
-    await this.dependentFirstName()
-      .toLocator()
-      .waitFor({ state: 'visible', timeout: 60 * 1000 });
+    await this.dependentFirstName().toLocator().waitFor({ state: 'visible' });
   }
 
   /**

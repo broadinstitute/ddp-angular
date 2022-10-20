@@ -6,17 +6,19 @@ import Question from 'lib/component/Question';
 
 export default class PreScreeningPage {
   page: Page;
-  _signMeUp: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    this._signMeUp = page.locator('button:text("Sign me up!")');
+  }
+
+  getSignUpButton(): Locator {
+    return this.page.locator('button:text("Sign me up!")');
   }
 
   async signMeUp(opts: { waitForNav?: boolean } = {}): Promise<void> {
     const { waitForNav = false } = opts;
     const navigationPromise = waitForNav ? this.page.waitForNavigation() : Promise.resolve();
-    await Promise.all([navigationPromise, await this._signMeUp.click()]);
+    await Promise.all([navigationPromise, await this.getSignUpButton().click()]);
   }
 
   /**

@@ -11,7 +11,7 @@ export default class AboutMePage extends SingularPage {
 
   async waitForReady(): Promise<void> {
     // Add additional checks to wait for page is ready
-    await this.fullName().waitFor({ state: 'visible', timeout: 60 * 1000 });
+    await this.fullName().waitFor({ state: 'visible' });
   }
 
   firstName(): Question {

@@ -11,9 +11,7 @@ export default class AboutMyChildPage extends SingularPage {
 
   async waitForReady(): Promise<void> {
     // Add additional checks to wait for page is ready
-    await this.childFirstName()
-      .toLocator()
-      .waitFor({ state: 'visible', timeout: 60 * 1000 });
+    await this.childFirstName().toLocator().waitFor({ state: 'visible' });
   }
 
   /**
