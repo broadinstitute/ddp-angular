@@ -38,7 +38,6 @@ test.describe('Adult Dependent visual tests', () => {
 
   // whoHasVentricleHeartDefect validation: Select `someone else` should trigger an error message
   test('select a "Someone else" option for adult dependent @visual @enrollment @singular', async ({ page }) => {
-
     // On "Enroll my adult dependent" page
     const enrollMyAdultDependentPage = new EnrollMyAdultDependentPage(page);
     const whoHasVentricleHeartDefect = enrollMyAdultDependentPage.whoHasVentricleHeartDefect();
@@ -87,16 +86,16 @@ test.describe('Adult Dependent visual tests', () => {
 
     await cognitiveImpairmentQuestion.check('No');
     await page.waitForTimeout(300);
-    let screenshotAgeOfMajorityError  = await age.toLocator().screenshot();
+    let screenshotAgeOfMajorityError = await age.toLocator().screenshot();
     expect(screenshotAgeOfMajorityError).toMatchSnapshot('age-of-majority-error-message.png');
-    let screenshotCognitiveImpairmentNoAnswer  = await cognitiveImpairmentQuestion.toLocator().screenshot();
+    let screenshotCognitiveImpairmentNoAnswer = await cognitiveImpairmentQuestion.toLocator().screenshot();
     expect(screenshotCognitiveImpairmentNoAnswer).toMatchSnapshot('cognitive-impairment-no-answer.png');
 
     await cognitiveImpairmentQuestion.check('Yes');
     await page.waitForTimeout(300);
-    let screenshotCognitiveImpairment  = await age.toLocator().screenshot();
+    let screenshotCognitiveImpairment = await age.toLocator().screenshot();
     expect(screenshotCognitiveImpairment).toMatchSnapshot('age-without-errors.png');
-    let screenshotCognitiveImpairmentYesAnswer  = await cognitiveImpairmentQuestion.toLocator().screenshot();
+    let screenshotCognitiveImpairmentYesAnswer = await cognitiveImpairmentQuestion.toLocator().screenshot();
     expect(screenshotCognitiveImpairmentYesAnswer).toMatchSnapshot('cognitive-impairment-yes-answer.png');
   });
 });
