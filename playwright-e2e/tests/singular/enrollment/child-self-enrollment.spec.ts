@@ -1,23 +1,14 @@
-import { expect, test } from '@playwright/test';
-
+import { expect } from '@playwright/test';
+import { test } from 'fixtures/singular-fixture';
 import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
-import HomePage from 'pages/singular/home/home-page';
 import * as user from 'data/fake-user.json';
-import * as nav from 'pages/singular/navbar';
-import { fillSitePassword } from 'authentication/auth-singular';
 
 test.describe('Child Enrollment', () => {
-  test.beforeEach(async ({ page }) => {
-    await nav.goToPath(page, '/password');
-    await fillSitePassword(page);
-    await new HomePage(page).waitForReady();
-  });
-
   /**
    * Child (age under 19) cannot complete self-enrollment
    */
-  test('self-enrollment cannot complete @enrollment @singular', async ({ page }) => {
-    await nav.signMeUp(page);
+  test('self-enrollment cannot complete @enrollment @singular', async ({ page, homePage }) => {
+    await homePage.signUp();
 
     // On “Create your account” page
     const preScreeningPage = new PreScreeningPage(page);

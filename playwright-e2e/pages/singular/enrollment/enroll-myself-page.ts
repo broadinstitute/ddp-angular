@@ -10,7 +10,7 @@ export default class EnrollMyselfPage extends SingularPage {
     this.enrollMyself = this.page.locator('button', { hasText: 'Enroll myself' });
   }
 
-  async waitForReady() {
+  async waitForReady(): Promise<void> {
     // Add additional checks to wait for page is ready
     await this.whoHasVentricleHeartDefect().toLocator().waitFor({ state: 'visible' });
   }

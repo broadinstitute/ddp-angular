@@ -8,7 +8,7 @@ export default class AssentFormPage extends SingularPage {
     super(page);
   }
 
-  async waitForReady() {
+  async waitForReady(): Promise<void> {
     // Add additional checks to wait for page is ready
     await this.fullName()
       .toLocator()

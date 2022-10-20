@@ -1,5 +1,6 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
 import testConfig from 'playwright.config';
+import path from 'path';
 
 /**
  * Read environment variables from .env.dsm.singular file.
@@ -11,7 +12,12 @@ import testConfig from 'playwright.config';
 
 const singularConfig: PlaywrightTestConfig = {
   ...testConfig,
-  testDir: './'
+  testDir: './',
+  globalSetup: require.resolve('../../../global-setup-singular'),
+  use: {
+    ...testConfig.use,
+    storageState: path.relative(__dirname, '../../storageState.json') // Short name is relative to config
+  }
 };
 
 export default singularConfig;

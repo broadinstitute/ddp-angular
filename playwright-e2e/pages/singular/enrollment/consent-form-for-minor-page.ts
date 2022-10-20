@@ -9,7 +9,7 @@ export default class ConsentFormForMinorPage extends SingularPage {
     super(page);
   }
 
-  async waitForReady() {
+  async waitForReady(): Promise<void> {
     // Add additional checks to wait for page is ready
     await this.authorizationSignature()
       .toLocator()

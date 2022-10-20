@@ -1,18 +1,12 @@
-import { expect, test } from '@playwright/test';
-import { goToAboutUs, goToPath } from 'pages/singular/navbar';
-import { fillSitePassword } from 'authentication/auth-singular';
+import { expect } from '@playwright/test';
+import { test } from 'fixtures/singular-fixture';
 
 /**
  * Functional tests for the Home page
  */
 test.describe('Home page', () => {
-  test.beforeEach(async ({ page }) => {
-    await goToPath(page, '/password');
-    await fillSitePassword(page);
-    await goToAboutUs(page);
-  });
-
-  test('Our teams @visual @singular', async ({ page }) => {
+  test('Our teams @visual @singular', async ({ page, homePage }) => {
+    await homePage.gotoURLPath('/about');
     const headerText = page.locator('.our-team h1');
 
     expect(await headerText.screenshot()).toMatchSnapshot('our-team-text.png');
@@ -21,7 +15,8 @@ test.describe('Home page', () => {
     );
   });
 
-  test('Our scientific advisors @visual @singular', async ({ page }) => {
+  test('Our scientific advisors @visual @singular', async ({ page, homePage }) => {
+    await homePage.gotoURLPath('/about');
     const headerText = page.locator('.advisors h1');
     const cards = page.locator('.advisors .cards');
 

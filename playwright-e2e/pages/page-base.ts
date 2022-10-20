@@ -20,7 +20,7 @@ export default abstract class PageBase implements PageInterface {
     if (urlPath.startsWith('https')) {
       throw Error('Parameter urlPath is not valid.');
     }
-    return this.page.goto(`${this.baseUrl}/${urlPath}`, { waitUntil: 'domcontentloaded' });
+    return this.page.goto(`${this.baseUrl}${urlPath}`, { waitUntil: 'domcontentloaded' });
   }
 
   protected async clickAndWaitForNav(locator: Locator, opts: { waitForNav?: boolean } = {}): Promise<void> {

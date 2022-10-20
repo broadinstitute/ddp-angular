@@ -1,23 +1,12 @@
-import { expect, test } from '@playwright/test';
-
-import HomePage from 'pages/singular/home/home-page';
-import { fillSitePassword } from 'authentication/auth-singular';
-import { goToPath, NavSelectors } from 'pages/singular/navbar';
+import { expect } from '@playwright/test';
+import { test } from 'fixtures/singular-fixture';
 import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
 
 test.describe('About Yourself page', () => {
-  test.beforeEach(async ({ page }) => {
-    await goToPath(page, '/password');
-    await fillSitePassword(page);
-    const home = new HomePage(page);
-    await home.waitForReady();
-
-    const signMeUp = page.locator(NavSelectors.SignMeUp);
-    await signMeUp.click();
-  });
-
   // Country validation: Select a country which is not US and Canada should triggers an error message
-  test('select country France @visual @enrollment @singular', async ({ page }) => {
+  test('select country France @visual @enrollment @singular', async ({ page, homePage }) => {
+    await homePage.signUp();
+
     const preScreeningPage = new PreScreeningPage(page);
 
     const country = preScreeningPage.country();
@@ -36,7 +25,9 @@ test.describe('About Yourself page', () => {
   });
 
   // Age validation: 0 - 18 in country US should triggers an error message: requires parent or guardian to register in US
-  test('Enter age 2 in US @visual @enrollment @singular', async ({ page }) => {
+  test('Enter age 2 in US @visual @enrollment @singular', async ({ page, homePage }) => {
+    await homePage.signUp();
+
     const preScreeningPage = new PreScreeningPage(page);
 
     const age = preScreeningPage.age();

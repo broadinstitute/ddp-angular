@@ -1,9 +1,7 @@
-import { expect, Page, test } from '@playwright/test';
-
-import HomePage from 'pages/singular/home/home-page';
+import { expect, Page } from '@playwright/test';
+import { test } from 'fixtures/singular-fixture';
 import * as user from 'data/fake-user.json';
-import * as nav from 'pages/singular/navbar';
-import { fillEmailPassword, fillSitePassword } from 'authentication/auth-singular';
+import { fillEmailPassword } from 'authentication/auth-singular';
 import { makeEmailAlias } from 'utils/string-utils';
 import { WHO } from 'data/constants';
 import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
@@ -17,18 +15,12 @@ import { enterMailingAddress } from 'utils/test-utils';
 import AssentFormPage from 'pages/singular/enrollment/assent-form-page';
 
 test.describe('Enroll my child', () => {
-  test.beforeEach(async ({ page }) => {
-    await nav.goToPath(page, '/password');
-    await fillSitePassword(page);
-    await new HomePage(page).waitForReady();
-  });
-
   /**
    * Assenting rules:
    * Ages 0-6: Need parental consent from parent
    * Ages 7-age of majority: child needs to give assent in addition to parent’s consent
    */
-  test('enrolling an assenting child @enrollment @singular', async ({ page }) => {
+  test('enrolling an assenting child @enrollment @singular', async ({ page, homePage }) => {
     // Assertion helper functions
     const assertActivityHeader = async (page: Page, expectedText: string | RegExp) => {
       await expect(page.locator('h1.activity-header')).toHaveText(expectedText);
@@ -38,7 +30,7 @@ test.describe('Enroll my child', () => {
       await expect(page.locator('h3.progress-title')).toHaveText(expectedText);
     };
 
-    await nav.signMeUp(page);
+    await homePage.signUp();
 
     // Step 1
     // On “pre-screening” page, answer all questions about yourself with fake values

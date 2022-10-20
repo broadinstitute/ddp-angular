@@ -3,23 +3,14 @@ import Table from 'lib/widget/table';
 import { SingularPage } from 'pages/singular/singular-page';
 
 export default class MyDashboardPage extends SingularPage {
-  private readonly _enrollMyselfButton: Locator;
-  private readonly _enrollMyChildButton: Locator;
-  private readonly _enrollMyAdultDependentButton: Locator;
-  private readonly viewFamilyEnrollmentMessageButton: Locator;
-
   constructor(page: Page) {
     super(page);
-    this._enrollMyselfButton = this.page.locator('button', { hasText: 'Enroll myself' });
-    this._enrollMyChildButton = this.page.locator('button', { hasText: 'Enroll my child' });
-    this._enrollMyAdultDependentButton = this.page.locator('button', { hasText: 'Enroll my adult dependent' });
-    this.viewFamilyEnrollmentMessageButton = this.page.locator('button', { hasText: 'View Family Enrollment Message' });
   }
 
-  async waitForReady() {
+  async waitForReady(): Promise<void> {
     await expect(this.page.locator('h1.title')).toHaveText('My Dashboard');
     await expect(this.page.locator('h1.title')).toBeVisible();
-    await expect(this.viewFamilyEnrollmentMessageButton).toBeVisible();
+    await expect(this.getViewFamilyEnrollmentMessageButton()).toBeVisible();
     await expect(this.page.locator('.family-enrollment-description-message')).toBeVisible();
   }
 
@@ -34,43 +25,47 @@ export default class MyDashboardPage extends SingularPage {
     return new Table(this.page, { classAttribute: '.dashboard-table' });
   }
 
+  getViewFamilyEnrollmentMessageButton(): Locator {
+    return this.page.locator('button', { hasText: 'View Family Enrollment Message' });
+  }
+
   async viewFamilyEnrollmentMessage(): Promise<void> {
-    await this.clickAndWaitForNav(this.viewFamilyEnrollmentMessageButton, { waitForNav: true });
+    await this.clickAndWaitForNav(this.getViewFamilyEnrollmentMessageButton(), { waitForNav: true });
   }
 
   /**
    * Returns locator to the "Enroll myself" button
    */
-  enrollMyselfButton(): Locator {
-    return this._enrollMyselfButton;
+  getEnrollMyselfButton(): Locator {
+    return this.page.locator('button', { hasText: 'Enroll myself' });
   }
 
   /**
    * Returns locator to the "Enroll my child" button
    */
-  enrollMyChildButton(): Locator {
-    return this._enrollMyChildButton;
+  getEnrollMyChildButton(): Locator {
+    return this.page.locator('button', { hasText: 'Enroll my child' });
   }
 
   /**
    * Returns locator to the "Enroll my adult dependent" button
    */
-  enrollMyAdultDependentButton(): Locator {
-    return this._enrollMyAdultDependentButton;
+  getEnrollMyAdultDependentButton(): Locator {
+    return this.page.locator('button', { hasText: 'Enroll my adult dependent' });
   }
 
   /** Click "Enroll myself" button */
   async enrollMyself(): Promise<void> {
-    await this.enrollMyselfButton().click();
+    await this.getEnrollMyselfButton().click();
   }
 
   /** Click "Enroll my child" button */
   async enrollMyChild(): Promise<void> {
-    await this.enrollMyChildButton().click();
+    await this.getEnrollMyChildButton().click();
   }
 
   /** Click "Enroll my adult dependent" button */
   async enrollMyAdultDependent(): Promise<void> {
-    await this.enrollMyAdultDependentButton().click();
+    await this.getEnrollMyAdultDependentButton().click();
   }
 }

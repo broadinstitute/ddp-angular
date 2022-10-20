@@ -19,7 +19,7 @@ module.exports = {
     'eqeqeq': ['warn', 'smart'],
 
     'no-unused-vars': 'off', // Needed for the below rule
-    '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '_' }],
+    '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '_', args: "none" }],
 
     'no-multi-spaces': 'warn',
 

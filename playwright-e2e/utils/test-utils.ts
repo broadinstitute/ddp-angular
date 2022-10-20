@@ -13,7 +13,7 @@ export async function waitUntilRemoved(locator: Locator): Promise<void> {
 }
 
 export async function getTextValue(locator: Locator): Promise<string | null> {
-  return await locator.evaluate<string, HTMLSelectElement>((node) => node.value);
+  return locator.evaluate<string, HTMLSelectElement>((node) => node.value);
 }
 
 /**
@@ -105,6 +105,21 @@ export async function enterMailingAddress(
 }
 
 /**
+ * On non-prod env, user must first enter the Site password
+ * @param page
+ * @param password
+ */
+export async function fillSitePassword(page: Page, password?: string): Promise<void> {
+  const passwd: string = typeof password === 'undefined' ? (process.env.singularSitePassword as string) : password;
+
+  if (!passwd) {
+    throw new Error(`Site password is required.`);
+  }
+  await page.locator('input[type="password"]').fill(passwd);
+  await Promise.all([page.waitForNavigation(), page.locator('button >> text=Submit').click()]);
+}
+
+/**
  * Find a web element by the value of "data-ddp-test". Currently, not all web elements have it.
  * @param page
  * @param opts
@@ -158,30 +173,22 @@ export function findIcon(dataDdpTest: string) {
 }
 
 // Fill in input
-const fillIn = async (page: Page, stableID: string, value: string): Promise<void> => {
+export async function fillIn(page: Page, stableID: string, value: string): Promise<void> {
   await new Input(page, { ddpTestID: stableID }).fill(value);
-};
+}
 
-const check = async (page: Page, stableID: string): Promise<void> => {
+export async function check(page: Page, stableID: string): Promise<void> {
   await new Checkbox(page, { ddpTestID: stableID }).check();
-};
+}
 
-const checkRadioButton = async (page: Page, stableID: string): Promise<void> => {
+export async function checkRadioButton(page: Page, stableID: string): Promise<void> {
   await new Radiobutton(page, { ddpTestID: stableID }).check();
-};
+}
 
-const select = async (page: Page, stableID: string, option: string): Promise<void> => {
+export async function select(page: Page, stableID: string, option: string): Promise<void> {
   await new Select(page, { ddpTestID: stableID }).selectOption(option);
-};
+}
 
-const click = async (page: Page, stableID: string, option: string): Promise<void> => {
+export async function click(page: Page, stableID: string, option: string): Promise<void> {
   await page.locator(`[data-ddp-test="${stableID}"]`).selectOption(option);
-};
-
-module.exports = {
-  fillIn,
-  check,
-  checkRadioButton,
-  select,
-  click
-};
+}
