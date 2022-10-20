@@ -44,6 +44,20 @@ export default class Question {
   }
 
   /**
+   * <br> Tag name: input (text or number) (get by its label)
+   * @param value
+   */
+  inputByLabel(value?: string | RegExp): Locator {
+    if (value === undefined) {
+      return this.input();
+    }
+    return this.toLocator()
+      .locator('mat-form-field')
+      .filter({ has: this.page.locator('label', { hasText: value }) })
+      .locator('input');
+  }
+
+  /**
    * <br> Tag name: mat-checkbox
    * @param value
    */
