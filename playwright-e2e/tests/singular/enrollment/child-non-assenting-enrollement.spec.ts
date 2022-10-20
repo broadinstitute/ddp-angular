@@ -14,6 +14,7 @@ import PreScreeningPage from './pre-screening-page';
 import EnrollMyChildPage from './enroll-my-child-page';
 import ConsentFormForMinorPage from './consent-form-for-minor-page';
 import { enterMailingAddress } from 'tests/lib/test-steps';
+import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
 
 test.describe('Enroll my child', () => {
   test.beforeEach(async ({ page }) => {
@@ -23,15 +24,6 @@ test.describe('Enroll my child', () => {
   });
 
 test('enrolling non assenting child < 7 @enrollment @singular', async ({ page }) => {
-    // Assertion helper functions
-    const assertActivityHeader = async (page: Page, expectedText: string | RegExp) => {
-      await expect(page.locator('h1.activity-header')).toHaveText(expectedText);
-    };
-
-    const assertActivityProgress = async (page: Page, expectedText: string) => {
-      await expect(page.locator('h3.progress-title')).toHaveText(expectedText);
-    };
-
     await nav.signMeUp(page);
 
     // Step 1
@@ -117,12 +109,10 @@ test('enrolling non assenting child < 7 @enrollment @singular', async ({ page })
     await assertActivityProgress(page, 'Page 3 of 3');
     await medicalRecordReleaseForm.parentName().fill(`${user.patient.firstName} ${user.patient.lastName}`);
     await medicalRecordReleaseForm.parentSignature().fill(`${user.patient.firstName} ${user.patient.lastName}`);
-    //await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
     await medicalRecordReleaseForm.submit();
 
     // Medical Record File Upload
     await assertActivityHeader(page, 'Medical Record File Upload');
-    //await medicalRecordReleaseForm.uploadFile(`../../../data/upload/fake-clinical-note.jpg`);
     await medicalRecordReleaseForm.next({ waitForNav: true });
 
     await assertActivityHeader(
@@ -187,14 +177,6 @@ test('enrolling non assenting child < 7 @enrollment @singular', async ({ page })
   });
 
   test('enrolling non assenting child > 7 not capable of consent @enrollment @singular', async ({ page }) => {
-    // Assertion helper functions
-    const assertActivityHeader = async (page: Page, expectedText: string | RegExp) => {
-      await expect(page.locator('h1.activity-header')).toHaveText(expectedText);
-    };
-
-    const assertActivityProgress = async (page: Page, expectedText: string) => {
-      await expect(page.locator('h3.progress-title')).toHaveText(expectedText);
-    };
 
     await nav.signMeUp(page);
 
@@ -287,7 +269,6 @@ test('enrolling non assenting child < 7 @enrollment @singular', async ({ page })
 
     // Medical Record File Upload
     await assertActivityHeader(page, 'Medical Record File Upload');
-    //await medicalRecordReleaseForm.uploadFile(`../../../data/upload/fake-clinical-note.jpg`);
     await medicalRecordReleaseForm.next({ waitForNav: true });
 
     await assertActivityHeader(
