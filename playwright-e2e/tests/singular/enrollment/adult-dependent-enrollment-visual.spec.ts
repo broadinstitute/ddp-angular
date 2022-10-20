@@ -1,13 +1,13 @@
 import { expect, Page, test } from '@playwright/test';
 import HomePage from 'tests/singular/home/home-page';
 import { fillEmailPassword } from 'tests/lib/auth-singular';
+import * as auth from 'tests/lib/auth-singular';
 import MyDashboardPage from '../dashboard/my-dashboard-page';
 import EnrollMyAdultDependentPage from './enroll-my-adult-dependent-page';
 import PreScreeningPage from './pre-screening-page';
 import * as nav from '../lib/nav';
-import * as auth from '../../lib/auth-singular';
-import { WHO } from '../../../data/constants';
-import { makeEmailAlias } from '../../../utils/string-utils';
+import { WHO } from 'data/constants';
+import { makeEmailAlias } from 'utils/string-utils';
 
 
 async function signUp(page: Page) {
@@ -85,14 +85,14 @@ test.describe('Adult Dependent visual tests', () => {
     const cognitiveImpairmentQuestion = enrollMyAdultDependentPage.doesDependentHaveCognitiveImpairment();
 
     await cognitiveImpairmentQuestion.check('No');
-    await page.waitForTimeout(300);
+    await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
     let screenshotAgeOfMajorityError = await age.toLocator().screenshot();
     expect(screenshotAgeOfMajorityError).toMatchSnapshot('age-of-majority-error-message.png');
     let screenshotCognitiveImpairmentNoAnswer = await cognitiveImpairmentQuestion.toLocator().screenshot();
     expect(screenshotCognitiveImpairmentNoAnswer).toMatchSnapshot('cognitive-impairment-no-answer.png');
 
     await cognitiveImpairmentQuestion.check('Yes');
-    await page.waitForTimeout(300);
+    await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
     let screenshotCognitiveImpairment = await age.toLocator().screenshot();
     expect(screenshotCognitiveImpairment).toMatchSnapshot('age-without-errors.png');
     let screenshotCognitiveImpairmentYesAnswer = await cognitiveImpairmentQuestion.toLocator().screenshot();

@@ -1,19 +1,19 @@
-import { expect, Page, test } from '@playwright/test';
-
+import { expect, test } from '@playwright/test';
 import HomePage from 'tests/singular/home/home-page';
 import AboutMePage from 'tests/singular/enrollment/about-me-page';
 import ConsentFormPage from 'tests/singular/enrollment/consent-form-page';
 import MyDashboardPage from 'tests/singular/dashboard/my-dashboard-page';
-import * as user from 'data/fake-user.json';
 import * as nav from 'tests/singular/lib/nav';
 import * as auth from 'tests/lib/auth-singular';
-import { makeEmailAlias } from 'utils/string-utils';
-import { WHO } from 'data/constants';
 import { downloadConsentPdf, enterMailingAddress } from 'tests/lib/test-steps';
+import { makeEmailAlias } from 'utils/string-utils';
+import * as user from 'data/fake-user.json';
+import { WHO } from 'data/constants';
 import PreScreeningPage from './pre-screening-page';
 import EnrollMyselfPage from './enroll-myself-page';
 import MedicalRecordReleaseForm from './medical-record-release-form';
 import PatientSurveyPage from './patient-survey-page';
+import { assertActivityHeader, assertActivityProgress } from '../../../utils/assertion-helper';
 
 test.describe('Enroll myself as adult', () => {
   test.beforeEach(async ({ page }) => {
@@ -26,15 +26,6 @@ test.describe('Enroll myself as adult', () => {
    * Test case: https://docs.google.com/document/d/1Ewsh4ULh5LVdZiUapvG-PyI2kL3XzVf4seeLq8Mt-B0/edit?usp=sharing
    */
   test('can complete self-enrollment @enrollment @singular', async ({ context, page }) => {
-    // Assertion helper functions
-    const assertActivityHeader = async (page: Page, expectedText: string) => {
-      await expect(page.locator('h1.activity-header')).toHaveText(expectedText);
-    };
-
-    const assertActivityProgress = async (page: Page, expectedText: string) => {
-      await expect(page.locator('h3.progress-title')).toHaveText(expectedText);
-    };
-
     await nav.signMeUp(page);
 
     // Step 1
