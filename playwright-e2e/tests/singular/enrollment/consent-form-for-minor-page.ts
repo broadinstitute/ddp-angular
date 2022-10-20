@@ -96,16 +96,4 @@ export default class ConsentFormForMinorPage extends PageBase {
   relationShipToSubject(): Question {
     return new Question(this.page, { prompt: 'Relationship to subject:' });
   }
-
-  /** Click "Agree" button */
-  async agree(): Promise<void> {
-    const agreeButton = this.page.locator('button', { hasText: 'I agree' });
-    await this.clickHelper(agreeButton, { waitForNav: true });
-  }
-
-  /** Click "I am not ready to agree" button */
-  async notReadyToAgree(): Promise<void> {
-    const notReadyButton = this.page.locator('button', { hasText: 'I am not ready to agree' });
-    await this.clickHelper(notReadyButton, { waitForNav: true });
-  }
 }

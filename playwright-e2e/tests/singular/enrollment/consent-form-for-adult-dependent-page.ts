@@ -60,18 +60,6 @@ export default class ConsentFormForAdultDependentPage extends PageBase {
     return new Input(this.page, { ddpTestID: 'answer:CONSENT_DEPENDENT_GUARDIAN_SIGNATURE' });
   }
 
-  /** Click "Agree" button */
-  async agree(): Promise<void> {
-    const agreeButton = this.page.locator('button', { hasText: 'I agree' });
-    await this.clickHelper(agreeButton, { waitForNav: true });
-  }
-
-  /** Click "I am not ready to agree" button */
-  async notReadyToAgree(): Promise<void> {
-    const notReadyButton = this.page.locator('button', { hasText: 'I am not ready to agree' });
-    await this.clickHelper(notReadyButton, { waitForNav: true });
-  }
-
   /**
    * Fill "Your Dependent Date of Birth"
    * @param month

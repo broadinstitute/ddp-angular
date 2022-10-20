@@ -64,16 +64,4 @@ export default class ConsentFormPage extends PageBase {
   toKnowSecondaryFinding(): Question {
     return new Question(this.page, { prompt: 'If a secondary finding is found in my genes:' });
   }
-
-  /** Click "Agree" button */
-  async agree(): Promise<void> {
-    const agreeButton = this.page.locator('button', { hasText: 'I agree' });
-    await this.clickHelper(agreeButton, { waitForNav: true });
-  }
-
-  /** Click "I am not ready to agree" button */
-  async notReadyToAgree(): Promise<void> {
-    const notAgreeButton = this.page.locator('button', { hasText: 'I am not ready to agree' });
-    await this.clickHelper(notAgreeButton, { waitForNav: true });
-  }
 }

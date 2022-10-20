@@ -35,4 +35,16 @@ export default abstract class PageBase {
     const submitButton = this.page.locator('button', { hasText: 'Submit' });
     await this.clickHelper(submitButton, { waitForNav: true });
   }
+
+  /** Click "Agree" button */
+  async agree(): Promise<void> {
+    const agreeButton = this.page.locator('button', { hasText: 'I agree' });
+    await this.clickHelper(agreeButton, { waitForNav: true });
+  }
+
+  /** Click "I am not ready to agree" button */
+  async notReadyToAgree(): Promise<void> {
+    const notReadyButton = this.page.locator('button', { hasText: 'I am not ready to agree' });
+    await this.clickHelper(notReadyButton, { waitForNav: true });
+  }
 }
