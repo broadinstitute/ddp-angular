@@ -57,6 +57,17 @@ export default class MedicalRecordReleaseForm extends PageBase {
     return new Input(this.page, { ddpTestID: 'answer:MRR_NAME' });
   }
 
+  /**
+   * Enroll My Adult Dependent workflow
+   */
+  patientName(): Input {
+    return new Input(this.page, { ddpTestID: 'answer:MRR_PATIENT_NAME' });
+  }
+
+  dependentParentName(): Input {
+    return new Input(this.page, { ddpTestID: 'answer:MRR_PARENT_NAME' });
+  }
+
   parentSignature(): Input {
     return new Input(this.page, { ddpTestID: 'answer:MRR_PARENT_SIGNATURE' });
   }
