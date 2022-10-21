@@ -6,8 +6,6 @@ import {Pipe, PipeTransform} from '@angular/core';
 
 export class NoDataPipe implements PipeTransform {
   transform(value: any): string {
-    const tempElement = document.createElement('div');
-    tempElement.innerHTML = (typeof value === 'number' ? String(value) : value) || String.fromCharCode(160);
-    return tempElement.innerText;
+    return (value === 0 ? String(value) : value) || String.fromCharCode(160)
   }
 }
