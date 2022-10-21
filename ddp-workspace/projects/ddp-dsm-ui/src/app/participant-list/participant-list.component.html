@@ -278,7 +278,7 @@
                       <li class="LIST-SEPARATOR" *ngFor="let proxy of pt.proxyData">
                         <p *ngIf="proxy != null">
                           <ng-container *ngIf="col.type === 'TEXT'">
-                            {{proxy.profile[col.participantColumn.name]}}
+                            {{proxy.profile[col.participantColumn.name] | noData}}
                           </ng-container>
                         </p>
                       </li>
@@ -292,13 +292,13 @@
                       <li class="LIST-SEPARATOR" *ngFor="let invite of pt.data.invitations">
                         <p class="BIT-OF-MARGIN" *ngIf="invite != null">
                           <ng-container *ngIf="col.type === 'DATE'">
-                            {{parseMillisToDateString(invite[col.participantColumn.name])}}
+                            {{parseMillisToDateString(invite[col.participantColumn.name]) | noData}}
                           </ng-container>
                           <ng-container *ngIf="col.type === 'TEXT' && col.participantColumn.name !== 'guid'">
-                            {{invite[col.participantColumn.name]}}
+                            {{invite[col.participantColumn.name] | noData}}
                           </ng-container>
                           <ng-container *ngIf="col.participantColumn.name === 'guid'">
-                            {{formatInvitation(invite[col.participantColumn.name])}}
+                            {{formatInvitation(invite[col.participantColumn.name]) | noData}}
                           </ng-container>
                         </p>
                       </li>
@@ -389,7 +389,7 @@
                                 </ng-container>
                                 <ng-container
                                   *ngIf="(date.dateFields.year == null || date.dateFields.year === '') && date.dateFields.month != null && date.dateFields.month !== ''">
-                                  {{date.dateFields.month}}/null
+                                  {{date.dateFields.month | noData}}
                                 </ng-container>
                                 <hr *ngIf="i !== answers.length-1" style="border-color: lightgray">
                               </div>
@@ -401,7 +401,7 @@
                               *ngIf="getUtilStatic().getQuestionDefinition(activityDefinitionList, alias, questionAnswer.stableId, activityData.activityVersion) as qDef">
                               <div
                                 *ngFor="let answer of getUtilStatic().getNiceTextForCSVCompositeType(questionAnswer, qDef ); let i = index">
-                                {{ answer?.includes('|') ? answer.split('|')[1] : answer }}
+                                {{ answer?.includes('|') ? answer.split('|')[1] : answer  | noData}}
                                 <hr *ngIf="i !== questionAnswer.answer.length-1" style="border-color: lightgray">
                               </div>
                             </ng-container>
@@ -529,45 +529,45 @@
                     <ng-container *ngIf="col.type === 'DATE'">
                       <ng-container
                         *ngIf="col.participantColumn.object != null && pt.data[col.participantColumn.object] != null">
-                        {{pt.data[col.participantColumn.object][col.participantColumn.name] | date:'medium'}}
+                        {{pt.data[col.participantColumn.object][col.participantColumn.name] | date:'medium' | noData}}
                       </ng-container>
                       <ng-container
                         *ngIf="col.participantColumn.object == null && pt.data[col.participantColumn.name] != null">
-                        {{pt.data[col.participantColumn.name] | date:'medium'}}
+                        {{pt.data[col.participantColumn.name] | date:'medium' | noData}}
                       </ng-container>
                     </ng-container>
                     <ng-container *ngIf="col.type === 'DATE_SHORT'">
                       <ng-container
                         *ngIf="col.participantColumn.object != null && pt.data[col.participantColumn.object] != null">
-                        {{pt.data[col.participantColumn.object][col.participantColumn.name] | date:'shortDate'}}
+                        {{pt.data[col.participantColumn.object][col.participantColumn.name] | date:'shortDate' | noData}}
                       </ng-container>
                       <ng-container
                         *ngIf="col.participantColumn.object == null && pt.data[col.participantColumn.name] != null">
-                        {{pt.data[col.participantColumn.name] | date:'shortDate'}}
+                        {{pt.data[col.participantColumn.name] | date:'shortDate' | noData}}
                       </ng-container>
                     </ng-container>
                     <ng-container
                       *ngIf="col.type === 'OPTIONS' && col.participantColumn.object == null && pt.data[col.participantColumn.name] != null && col.participantColumn.name !== 'preferredLanguage'">
-                      {{getUtil().getNameValue(col.options, pt.data[col.participantColumn.name])}}
+                      {{getUtil().getNameValue(col.options, pt.data[col.participantColumn.name]) | noData}}
                     </ng-container>
                     <ng-container *ngIf="col.type === 'BOOLEAN' && col.participantColumn.object != null && pt.data[col.participantColumn.object] != null
                     && pt.data[col.participantColumn.object][col.participantColumn.name]!= null">
-                      {{getUtil().getYesNo(pt.data[col.participantColumn.object][col.participantColumn.name])}}
+                      {{getUtil().getYesNo(pt.data[col.participantColumn.object][col.participantColumn.name]) | noData}}
                     </ng-container>
                     <ng-container
                       *ngIf="col.type !== 'OPTIONS' && col.type !== 'BOOLEAN' && col.type !== 'DATE' && col.type !== 'DATE_SHORT'">
                       <ng-container
                         *ngIf="col.participantColumn.object == null && pt.data[col.participantColumn.name] != null">
-                        {{pt.data[col.participantColumn.name]}}
+                        {{pt.data[col.participantColumn.name] | noData}}
                       </ng-container>
                       <ng-container
                         *ngIf="col.participantColumn.object != null && pt.data[col.participantColumn.object] != null && pt.data[col.participantColumn.object][col.participantColumn.name]!= null">
-                        {{pt.data[col.participantColumn.object][col.participantColumn.name]}}
+                        {{pt.data[col.participantColumn.object][col.participantColumn.name] | noData}}
                       </ng-container>
                     </ng-container>
                     <ng-container
                       *ngIf="col.participantColumn.name === 'preferredLanguage' && pt.data[col.participantColumn.object] != null && pt.data[col.participantColumn.object][col.participantColumn.name]!= null">
-                      {{getLanguageName(pt.data[col.participantColumn.object][col.participantColumn.name])}}
+                      {{getLanguageName(pt.data[col.participantColumn.object][col.participantColumn.name]) | noData}}
                     </ng-container>
                   </div>
 
@@ -575,7 +575,7 @@
                     <ul class="NO-PADDING-START">
                       <li class="LIST-SEPARATOR" *ngFor="let file of pt.data.files">
                         <p class="BIT-OF-MARGIN">
-                          {{file[col.participantColumn.name]}}
+                          {{file[col.participantColumn.name] | noData}}
                         </p>
                       </li>
                     </ul>
@@ -587,10 +587,10 @@
                       <li class="LIST-SEPARATOR" *ngFor="let order of pt.clinicalOrders">
                         <p class="BIT-OF-MARGIN">
                           <ng-container *ngIf="col.type === 'DATE'">
-                            {{getUtilStatic().getLongDateFormatted(order[col.participantColumn.name])}}
+                            {{getUtilStatic().getLongDateFormatted(order[col.participantColumn.name])  | noData}}
                           </ng-container>
                           <ng-container *ngIf="col.type !== 'DATE'">
-                            {{order[col.participantColumn.name]}}
+                            {{order[col.participantColumn.name] | noData}}
                           </ng-container>
                         </p>
                       </li>
@@ -605,21 +605,21 @@
                     <ng-container *ngIf="col.type === 'ADDITIONALVALUE' && pt.participant['additionalValuesJson'] != null
                           && pt.participant['additionalValuesJson'][col.participantColumn.name] != null">
                       <ng-container *ngIf="col.additionalType === 'DATE'">
-                        {{pt.participant['additionalValuesJson'][col.participantColumn.name] | date:'shortDate'}}
+                        {{pt.participant['additionalValuesJson'][col.participantColumn.name] | date:'shortDate' | noData}}
                       </ng-container>
                       <ng-container *ngIf="col.additionalType === 'CHECKBOX'">
-                        {{getUtil().getYesNo(pt.participant['additionalValuesJson'][col.participantColumn.name])}}
+                        {{getUtil().getYesNo(pt.participant['additionalValuesJson'][col.participantColumn.name]) | noData}}
                       </ng-container>
                       <ng-container *ngIf="col.additionalType !== 'DATE' && col.additionalType !== 'CHECKBOX'">
-                        {{pt.participant['additionalValuesJson'][col.participantColumn.name]}}
+                        {{pt.participant['additionalValuesJson'][col.participantColumn.name] | noData}}
                       </ng-container>
                     </ng-container>
                     <ng-container *ngIf="pt.participant[col.participantColumn.name] != null && col.type === 'CHECKBOX'">
-                      {{getUtil().getYesNo(pt.participant[col.participantColumn.name])}}
+                      {{getUtil().getYesNo(pt.participant[col.participantColumn.name]) | noData}}
                     </ng-container>
                     <ng-container *ngIf="pt.participant[col.participantColumn.name] != null && col.type === 'DATE'
                         && pt.participant[col.participantColumn.name] !== 0">
-                      {{pt.participant[col.participantColumn.name] | date:'shortDate'}}
+                      {{pt.participant[col.participantColumn.name] | date:'shortDate' | noData}}
                     </ng-container>
                   </div>
                   <div *ngIf="alias === 'm'">
@@ -628,28 +628,35 @@
                         <p class="BIT-OF-MARGIN" *ngIf="mr.showInstitution()">
                           <ng-container
                             *ngIf="col.type !== 'ADDITIONALVALUE' && col.type !== 'BOOLEAN' && col.type !== 'OPTIONS' && col.type !== 'CHECKBOX' && col.type !== 'DATE'">
-                            {{mr[col.participantColumn.name]}}
+                            {{mr[col.participantColumn.name] | noData}}
                           </ng-container>
                           <ng-container *ngIf="col.type === 'ADDITIONALVALUE' && mr['additionalValuesJson'] != null
-                          && mr['additionalValuesJson'][col.participantColumn.name] != null">
+                          && mr['additionalValuesJson'][col.participantColumn.name] != null; else noAdditionalValue">
+
                             <ng-container *ngIf="col.additionalType === 'DATE'">
-                              {{mr['additionalValuesJson'][col.participantColumn.name] | date:'shortDate'}}
+                              {{mr['additionalValuesJson'][col.participantColumn.name] | date:'shortDate' | noData}}
                             </ng-container>
                             <ng-container *ngIf="col.additionalType === 'CHECKBOX'">
-                              {{getUtil().getYesNo(mr['additionalValuesJson'][col.participantColumn.name])}}
+                              {{getUtil().getYesNo(mr['additionalValuesJson'][col.participantColumn.name]) | noData}}
                             </ng-container>
                             <ng-container *ngIf="col.additionalType !== 'DATE' && col.additionalType !== 'CHECKBOX'">
-                              {{mr['additionalValuesJson'][col.participantColumn.name]}}
+                              {{mr['additionalValuesJson'][col.participantColumn.name] | noData}}
                             </ng-container>
+
+                          </ng-container>
+
+                          <ng-template #noAdditionalValue>
+                            &nbsp;
+                          </ng-template>
+
+                          <ng-container
+                            *ngIf="col.type === 'BOOLEAN' || col.type === 'CHECKBOX'">{{getUtil().getYesNo(mr[col.participantColumn.name]) | noData}}
                           </ng-container>
                           <ng-container
-                            *ngIf="col.type === 'BOOLEAN' || col.type === 'CHECKBOX'">{{getUtil().getYesNo(mr[col.participantColumn.name])}}
+                            *ngIf="col.type === 'OPTIONS'">{{getOptionDisplay(col.options, mr[col.participantColumn.name]) | noData}}
                           </ng-container>
                           <ng-container
-                            *ngIf="col.type === 'OPTIONS'">{{getOptionDisplay(col.options, mr[col.participantColumn.name])}}
-                          </ng-container>
-                          <ng-container
-                            *ngIf="col.type === 'DATE'">{{getUtil().getDateFormatted(mr[col.participantColumn.name])}}
+                            *ngIf="col.type === 'DATE'">{{getUtil().getDateFormatted(mr[col.participantColumn.name]) | noData}}
                           </ng-container>
                         </p>
                       </li>
@@ -662,18 +669,18 @@
                            *ngIf="onc.oncHistoryDetailId != null && onc.oncHistoryDetailId !== '' && !onc.deleted">
                           <ng-container
                             *ngIf="col.type !== 'ADDITIONALVALUE' && col.type !== 'DATE' && col.type !== 'OPTIONS' && col.type !== 'CHECKBOX' && col.type !== 'BOOLEAN'">
-                            {{onc[col.participantColumn.name]}}
+                            {{onc[col.participantColumn.name] | noData}}
                           </ng-container>
                           <ng-container *ngIf="col.type === 'ADDITIONALVALUE' && onc['additionalValuesJson'] != null
                           && onc['additionalValuesJson'][col.participantColumn.name] != null">
                             <ng-container *ngIf="col.additionalType === 'DATE'">
-                              {{onc['additionalValuesJson'][col.participantColumn.name] | date:'shortDate'}}
+                              {{onc['additionalValuesJson'][col.participantColumn.name] | date:'shortDate' | noData}}
                             </ng-container>
                             <ng-container *ngIf="col.additionalType === 'CHECKBOX'">
-                              {{getUtil().getYesNo(onc['additionalValuesJson'][col.participantColumn.name])}}
+                              {{getUtil().getYesNo(onc['additionalValuesJson'][col.participantColumn.name]) | noData}}
                             </ng-container>
                             <ng-container *ngIf="col.additionalType !== 'DATE' && col.additionalType !== 'CHECKBOX'">
-                              {{onc['additionalValuesJson'][col.participantColumn.name]}}
+                              {{onc['additionalValuesJson'][col.participantColumn.name] | noData}}
                             </ng-container>
                           </ng-container>
                           <ng-container
@@ -683,14 +690,14 @@
                               (onc[col.participantColumn.name]  | date: 'MM/dd/yyyy') :
                               onc[col.participantColumn.name]?.split('-').length === 2 ?
                                 (onc[col.participantColumn.name] | date: 'MM/yyyy') :
-                                (onc[col.participantColumn.name] | date: 'yyyy')
+                                (onc[col.participantColumn.name] | date: 'yyyy') | noData
                             }}
                           </ng-container>
                           <ng-container
-                            *ngIf="col.type === 'OPTIONS'">{{getOptionDisplay(col.options, onc[col.participantColumn.name])}}
+                            *ngIf="col.type === 'OPTIONS'">{{getOptionDisplay(col.options, onc[col.participantColumn.name]) | noData}}
                           </ng-container>
                           <ng-container
-                            *ngIf="col.type === 'BOOLEAN' || col.type === 'CHECKBOX'">{{getUtil().getYesNo(onc[col.participantColumn.name])}}
+                            *ngIf="col.type === 'BOOLEAN' || col.type === 'CHECKBOX'">{{getUtil().getYesNo(onc[col.participantColumn.name]) | noData}}
                           </ng-container>
                         </p>
                       </li>
@@ -708,46 +715,46 @@
                                 *ngIf="col.type !== 'ADDITIONALVALUE' && col.type !== 'DATE' && col.type !== 'OPTIONS' && col.type !== 'CHECKBOX' && col.type !== 'BOOLEAN'">
                                 <ng-container *ngIf="col.participantColumn.tableAlias === 'sm'">
                                   <ng-container *ngFor="let smid of tissue.ussSMId">
-                                    {{smid.smIdValue}}
+                                    {{smid.smIdValue | noData}}
                                   </ng-container>
                                   <ng-container *ngFor="let smid of tissue.HESMId">
-                                    {{smid.smIdValue}}
+                                    {{smid.smIdValue | noData}}
                                   </ng-container>
                                   <ng-container *ngFor="let smid of tissue.scrollSMId">
-                                    {{smid.smIdValue}}
+                                    {{smid.smIdValue | noData}}
                                   </ng-container>
                                 </ng-container>
                                 <ng-container *ngIf="col.participantColumn.tableAlias !== 'sm'">
-                                  {{tissue[col.participantColumn.name]}}
+                                  {{tissue[col.participantColumn.name] | noData}}
                                 </ng-container>
                               </ng-container>
                               <ng-container *ngIf="col.type === 'ADDITIONALVALUE' && tissue['additionalValuesJson'] != null
                               && tissue['additionalValuesJson'][col.participantColumn.name] != null">
                                 <ng-container *ngIf="col.additionalType === 'DATE'">
-                                  {{tissue['additionalValuesJson'][col.participantColumn.name] | date:'shortDate'}}
+                                  {{tissue['additionalValuesJson'][col.participantColumn.name] | date:'shortDate' | noData}}
                                 </ng-container>
                                 <ng-container *ngIf="col.additionalType === 'CHECKBOX'">
-                                  {{getUtil().getYesNo(tissue['additionalValuesJson'][col.participantColumn.name])}}
+                                  {{getUtil().getYesNo(tissue['additionalValuesJson'][col.participantColumn.name]) | noData}}
                                 </ng-container>
                                 <ng-container
                                   *ngIf="col.additionalType !== 'DATE' && col.additionalType !== 'CHECKBOX'">
-                                  {{tissue['additionalValuesJson'][col.participantColumn.name]}}
+                                  {{tissue['additionalValuesJson'][col.participantColumn.name] | noData}}
                                 </ng-container>
                               </ng-container>
                               <ng-container
                                 *ngIf="col.type === 'DATE'">
                                 <ng-container *ngIf="tissue[col.participantColumn.name] === 'N/A'">
-                                  {{tissue[col.participantColumn.name]}}
+                                  {{tissue[col.participantColumn.name] | noData}}
                                 </ng-container>
                                 <ng-container *ngIf="tissue[col.participantColumn.name] !== 'N/A'">
-                                  {{getUtil().getDateFormatted(tissue[col.participantColumn.name])}}
+                                  {{getUtil().getDateFormatted(tissue[col.participantColumn.name]) | noData}}
                                 </ng-container>
                               </ng-container>
                               <ng-container
-                                *ngIf="col.type === 'OPTIONS'">{{getOptionDisplay(col.options, tissue[col.participantColumn.name])}}
+                                *ngIf="col.type === 'OPTIONS'">{{getOptionDisplay(col.options, tissue[col.participantColumn.name]) | noData}}
                               </ng-container>
                               <ng-container
-                                *ngIf="col.type === 'BOOLEAN' || col.type === 'CHECKBOX'">{{getUtil().getYesNo(onc[col.participantColumn.name])}}
+                                *ngIf="col.type === 'BOOLEAN' || col.type === 'CHECKBOX'">{{getUtil().getYesNo(onc[col.participantColumn.name]) | noData}}
                               </ng-container>
                             </p>
                           </li>
@@ -761,48 +768,46 @@
                         <p class="BIT-OF-MARGIN">
                           <ng-container *ngIf="col.participantColumn.object !== 'testResult'">
                             <ng-container *ngIf="col.type !== 'DATE' && col.type !== 'BOOLEAN' && col.type !== 'OPTIONS' && col.type !== 'CHECKBOX'">
-                              <ng-container *ngIf="sample[col.participantColumn.name]; else noData">
-                                <span [innerHTML]="sample[col.participantColumn.name]"></span>
-                              </ng-container>
+                                <span [innerHTML]="sample[col.participantColumn.name] | noData"></span>
                             </ng-container>
                             <ng-container *ngIf="col.type === 'BOOLEAN' || col.type === 'CHECKBOX'">
-                              <ng-container *ngIf="getUtil().getYesNo(sample[col.participantColumn.name]); else noData">
-                                {{ getUtil().getYesNo(sample[col.participantColumn.name]) }}
-                              </ng-container>
+                                {{ getUtil().getYesNo(sample[col.participantColumn.name]) | noData}}
                             </ng-container>
                             <ng-container *ngIf="col.type === 'DATE' && sample[col.participantColumn.name] !== 0">
-                              <ng-container *ngIf="(sample[col.participantColumn.name] | date:'medium'); else noData">
-                                {{ sample[col.participantColumn.name] | date:'medium' }}
-                              </ng-container>
+                                {{ sample[col.participantColumn.name] | date:'medium' | noData }}
                             </ng-container>
                             <ng-container *ngIf="col.type === 'OPTIONS'">
-                              <ng-container *ngIf="getOptionDisplay(col.options, sample[col.participantColumn.name]); else noData">
-                                {{ getOptionDisplay(col.options, sample[col.participantColumn.name]) }}
-                              </ng-container>
+                                {{ getOptionDisplay(col.options, sample[col.participantColumn.name]) | noData }}
                             </ng-container>
-
-                            <ng-template #noData>
-                              <span class="noData">No Data</span>
-                            </ng-template>
-
                           </ng-container>
+
                           <ng-container *ngIf="col.participantColumn.object === 'testResult'">
                             <ul class="NO-PADDING-START">
-                              <li class="LIST-SEPARATOR" *ngFor="let r of sample.testResult; let j = index">
-                                <ng-container
-                                  *ngIf="col.type === 'OPTIONS'">{{getOptionDisplay(col.options, r[col.participantColumn.name])}}
-                                </ng-container>
-                                <ng-container
-                                  *ngIf="col.type === 'DATE' && r[col.participantColumn.name] !== 0">{{r[col.participantColumn.name] |
-                                  date:'medium'}}
-                                </ng-container>
-                                <ng-container
-                                  *ngIf="col.type !== 'DATE' && col.type !== 'BOOLEAN' && col.type !== 'CHECKBOX' && col.type !== 'OPTIONS'">{{r[col.participantColumn.name]}}
-                                </ng-container>
-                                <ng-container
-                                  *ngIf="col.type === 'BOOLEAN' || col.type === 'CHECKBOX'">{{getUtil().getYesNo(r[col.participantColumn.name])}}
-                                </ng-container>
-                              </li>
+                              <ng-container *ngIf="sample?.testResult?.length > 0; else emptyTestResults">
+
+                                <li class="LIST-SEPARATOR" *ngFor="let r of sample.testResult; let j = index">
+
+                                    <ng-container *ngIf="col.type === 'OPTIONS'">
+                                        {{getOptionDisplay(col.options, r[col.participantColumn.name]) | noData}}
+                                    </ng-container>
+
+                                    <ng-container *ngIf="col.type === 'DATE' && r[col.participantColumn.name] !== 0">
+                                          {{r[col.participantColumn.name] | date:'medium' | noData}}
+                                    </ng-container>
+
+                                    <ng-container *ngIf="col.type !== 'DATE' && col.type !== 'BOOLEAN' && col.type !== 'CHECKBOX' && col.type !== 'OPTIONS'">
+                                        {{r[col.participantColumn.name] | noData}}
+                                    </ng-container>
+
+                                    <ng-container *ngIf="col.type === 'BOOLEAN' || col.type === 'CHECKBOX'">
+                                        {{getUtil().getYesNo(r[col.participantColumn.name]) | noData}}
+                                    </ng-container>
+
+                                </li>
+                              </ng-container>
+                              <ng-template #emptyTestResults>
+                                &nbsp;
+                              </ng-template>
                             </ul>
                           </ng-container>
                         </p>
@@ -815,17 +820,17 @@
                         <p class="BIT-OF-MARGIN">
                           <ng-container *ngIf="col.participantColumn.object !== 'testResult'">
                             <ng-container
-                              *ngIf="!['DATE', 'BOOLEAN', 'OPTIONS', 'CHECKBOX'].includes(col.type)">{{tag[col.participantColumn.name]}}
+                              *ngIf="!['DATE', 'BOOLEAN', 'OPTIONS', 'CHECKBOX'].includes(col.type)">{{tag[col.participantColumn.name] | noData}}
                             </ng-container>
                             <ng-container
-                              *ngIf="col.type === 'BOOLEAN' || col.type === 'CHECKBOX'">{{getUtil().getYesNo(tag[col.participantColumn.name])}}
+                              *ngIf="col.type === 'BOOLEAN' || col.type === 'CHECKBOX'">{{getUtil().getYesNo(tag[col.participantColumn.name]) | noData}}
                             </ng-container>
                             <ng-container
                               *ngIf="col.type === 'DATE' && tag[col.participantColumn.name] !== 0">{{tag[col.participantColumn.name] |
-                              date:'medium'}}
+                              date:'medium' | noData}}
                             </ng-container>
                             <ng-container
-                              *ngIf="col.type === 'OPTIONS'">{{getOptionDisplay(col.options, tag[col.participantColumn.name])}}
+                              *ngIf="col.type === 'OPTIONS'">{{getOptionDisplay(col.options, tag[col.participantColumn.name]) | noData}}
                             </ng-container>
                           </ng-container>
                         </p>
@@ -852,7 +857,7 @@
                                   </ng-container>
                                 </ng-container>
                                 <ng-container *ngIf="!isDateValue(object[key]) && key !== 'other'">
-                                  {{key}}: {{object[key]}}
+                                  {{key + ": " + object[key] | noData}}
                                 </ng-container>
                               </div>
                               <hr *ngIf="i !== getMultiObjects(field.fieldValue.value).length-1"
@@ -873,10 +878,10 @@
                         <li class="LIST-SEPARATOR" *ngFor="let abs of pt.abstractionActivities">
                           <p class="BIT-OF-MARGIN" *ngIf="abs.activity !== 'final'">
                             <ng-container *ngIf="col.type !== 'OPTIONS'">
-                              {{abs[col.participantColumn.name]}}
+                              {{abs[col.participantColumn.name] | noData}}
                             </ng-container>
                             <ng-container
-                              *ngIf="col.type === 'OPTIONS'">{{getOptionDisplay(col.options, abs[col.participantColumn.name])}}
+                              *ngIf="col.type === 'OPTIONS'">{{getOptionDisplay(col.options, abs[col.participantColumn.name]) | noData}}
                             </ng-container>
                           </p>
                         </li>
@@ -897,9 +902,9 @@
                           <div
                             *ngIf="this.getPersonField(personData, col, pt) !== null && this.getPersonField(personData, col, pt) !== undefined">
                             <ng-container *ngIf="getPersonType(personData)">
-                              {{getPersonType(personData)}}:
+                              {{getPersonType(personData) | noData}}:
                             </ng-container>
-                            {{getPersonField(personData, col, pt)}}
+                            {{getPersonField(personData, col, pt) | noData}}
                             <hr *ngIf="i !== pt.participantData.length - 1" style="border-color: lightgray">
                           </div>
                         </ng-container>

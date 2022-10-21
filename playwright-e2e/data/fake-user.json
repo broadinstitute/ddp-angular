@@ -51,5 +51,27 @@
     "city": "Cambridge",
     "zip": "02142-1027",
     "phone": "6177147000"
+  },
+  "adultDependent": {
+    "firstName": "E2E-Adult-Dependent",
+    "lastName": "Playwright",
+    "birthDate": {
+      "MM": "05",
+      "DD": "01",
+      "YYYY": "1970"
+    },
+    "age": "52",
+    "country": {
+      "name": "UNITED STATES",
+      "abbreviation": "US"
+    },
+    "state": {
+      "name": "MASSACHUSETTS",
+      "abbreviation": "MA"
+    },
+    "streetAddress": "415 Main Street",
+    "city": "Cambridge",
+    "zip": "02142-1027",
+    "phone": "6177147000"
   }
 }

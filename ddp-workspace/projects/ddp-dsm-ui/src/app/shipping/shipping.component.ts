@@ -381,9 +381,9 @@ export class ShippingComponent implements OnInit {
                 height: 100%;
             }
             .nameDob {
-                margin: 11px 0 0 0;
+                margin: 13px 0 0 0;
                 width: 88px;
-                height: fit-content;
+                height: 35px;
                 transform: translateY(-3px);
             }
             p {
@@ -392,6 +392,7 @@ export class ShippingComponent implements OnInit {
             }
             .barcode {
                 width: fit-content;
+                margin-top: 1.5px;
             }
             @page { margin: 0 }
             @media print {

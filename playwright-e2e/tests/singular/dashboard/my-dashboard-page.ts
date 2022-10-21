@@ -5,12 +5,14 @@ import PageBase from 'lib/page-base';
 export default class MyDashboardPage extends PageBase {
   private readonly _enrollMyselfButton: Locator;
   private readonly _enrollMyChildButton: Locator;
+  private readonly _enrollMyAdultDependentButton: Locator;
   private readonly viewFamilyEnrollmentMessageButton: Locator;
 
   constructor(page: Page) {
     super(page);
     this._enrollMyselfButton = this.page.locator('button', { hasText: 'Enroll myself' });
     this._enrollMyChildButton = this.page.locator('button', { hasText: 'Enroll my child' });
+    this._enrollMyAdultDependentButton = this.page.locator('button', { hasText: 'Enroll my adult dependent' });
     this.viewFamilyEnrollmentMessageButton = this.page.locator('button', { hasText: 'View Family Enrollment Message' });
   }
 
@@ -50,6 +52,13 @@ export default class MyDashboardPage extends PageBase {
     return this._enrollMyChildButton;
   }
 
+  /**
+   * Returns locator to the "Enroll my adult dependent" button
+   */
+  enrollMyAdultDependentButton(): Locator {
+    return this._enrollMyAdultDependentButton;
+  }
+
   /** Click "Enroll myself" button */
   async enrollMyself(): Promise<void> {
     await this.enrollMyselfButton().click();
@@ -58,5 +67,10 @@ export default class MyDashboardPage extends PageBase {
   /** Click "Enroll my child" button */
   async enrollMyChild(): Promise<void> {
     await this.enrollMyChildButton().click();
+  }
+
+  /** Click "Enroll my adult dependent" button */
+  async enrollMyAdultDependent(): Promise<void> {
+    await this.enrollMyAdultDependentButton().click();
   }
 }
