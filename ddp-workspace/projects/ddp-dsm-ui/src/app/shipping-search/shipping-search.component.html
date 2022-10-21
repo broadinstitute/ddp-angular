@@ -148,6 +148,7 @@
                                 [allowUnknownDay]="false" [colorDuringPatch]="isPatchedCurrently('collectionDate')"
                                 [dateString]="kitRequest.collectionDate"
                                 [showTodayButton]="true"></app-field-datepicker>
+          <p *ngIf="isSaved">Date Saved Successfully!</p>
         </td>
       </tr>
       <tbody>

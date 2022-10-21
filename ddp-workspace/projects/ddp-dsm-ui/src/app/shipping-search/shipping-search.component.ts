@@ -16,6 +16,7 @@ import {RoleService} from '../services/role.service';
 export class ShippingSearchComponent implements OnInit {
   errorMessage: string;
   additionalMessage: string;
+  isSaved: boolean = false;
   searchValue: string = null;
   searchField: string = null;
   searching = false;
@@ -127,6 +128,7 @@ export class ShippingSearchComponent implements OnInit {
     if (typeof value === 'string') {
       kitRequest[ parameterName ] = value;
       v = value;
+      this.isSaved = true;
     }
     if (v != null) {
       const realm: string = kitRequest.realm;
@@ -159,5 +161,10 @@ export class ShippingSearchComponent implements OnInit {
 
   isPatchedCurrently( field: string ): boolean {
     return this.currentPatchField === field;
+  }
+
+  saveDate()
+  {
+    this.isSaved = true;
   }
 }
