@@ -1,30 +1,22 @@
-import { expect, Page, test } from '@playwright/test';
-
-import HomePage from 'tests/singular/home/home-page';
+import { expect } from '@playwright/test';
+import { test } from 'fixtures/singular-fixture';
 import * as user from 'data/fake-user.json';
-import * as nav from 'tests/singular/lib/nav';
-import { fillEmailPassword, fillSitePassword } from 'tests/lib/auth-singular';
+import { fillEmailPassword } from 'authentication/auth-singular';
 import { makeEmailAlias } from 'utils/string-utils';
 import { WHO } from 'data/constants';
-import MyDashboardPage from '../dashboard/my-dashboard-page';
-import MedicalRecordReleaseForm from './medical-record-release-form';
-import AboutMyChildPage from './about-my-child-page';
-import ChildSurveyPage from './child-survey-page';
-import PreScreeningPage from './pre-screening-page';
-import EnrollMyChildPage from './enroll-my-child-page';
-import ConsentFormForMinorPage from './consent-form-for-minor-page';
-import { enterMailingAddress } from 'tests/lib/test-steps';
+import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
+import MedicalRecordReleaseForm from 'pages/singular/enrollment/medical-record-release-form';
+import AboutMyChildPage from 'pages/singular/enrollment/about-my-child-page';
+import ChildSurveyPage from 'pages/singular/enrollment/child-survey-page';
+import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
+import EnrollMyChildPage from 'pages/singular/enrollment/enroll-my-child-page';
+import ConsentFormForMinorPage from 'pages/singular/enrollment/consent-form-for-minor-page';
+import { enterMailingAddress } from 'utils/test-utils';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
 
 test.describe('Enroll my child', () => {
-  test.beforeEach(async ({ page }) => {
-    await nav.goToPath(page, '/password');
-    await fillSitePassword(page);
-    await new HomePage(page).waitForReady();
-  });
-
-test('enrolling non assenting child < 7 @enrollment @singular', async ({ page }) => {
-    await nav.signMeUp(page);
+  test('enrolling non assenting child < 7 @enrollment @singular', async ({ page, homePage }) => {
+    await homePage.signUp();
 
     // Step 1
     // On “pre-screening” page, answer all questions about yourself with fake values
@@ -65,7 +57,11 @@ test('enrolling non assenting child < 7 @enrollment @singular', async ({ page })
     await assertActivityProgress(page, 'Page 3 of 3');
     await consentForm.childFirstName().fill(user.secondChild.firstName);
     await consentForm.childLastName().fill(user.secondChild.lastName);
-    await consentForm.dateOfBirth(user.secondChild.birthDate.MM, user.secondChild.birthDate.DD, user.secondChild.birthDate.YYYY);
+    await consentForm.dateOfBirth(
+      user.secondChild.birthDate.MM,
+      user.secondChild.birthDate.DD,
+      user.secondChild.birthDate.YYYY
+    );
     await consentForm.iHaveExplainedToMyChild().check();
     await consentForm.toKnowSecondaryFinding().check('I want to know.');
     await consentForm.parentGuardianSignature().fill(`${user.patient.firstName} ${user.patient.lastName}`);
@@ -176,9 +172,8 @@ test('enrolling non assenting child < 7 @enrollment @singular', async ({ page })
     await expect(page.locator('.enrollmentStatusCompleteText')).toHaveText('Fully Enrolled');
   });
 
-  test('enrolling non assenting child > 7 not capable of consent @enrollment @singular', async ({ page }) => {
-
-    await nav.signMeUp(page);
+  test('enrolling non assenting child > 7 not capable of consent @enrollment @singular', async ({ page, homePage }) => {
+    await homePage.signUp();
 
     // Step 1
     // On “pre-screening” page, answer all questions about yourself with fake values
@@ -220,7 +215,11 @@ test('enrolling non assenting child < 7 @enrollment @singular', async ({ page })
     await assertActivityProgress(page, 'Page 3 of 3');
     await consentForm.childFirstName().fill(user.thirdChild.firstName);
     await consentForm.childLastName().fill(user.thirdChild.lastName);
-    await consentForm.dateOfBirth(user.thirdChild.birthDate.MM, user.thirdChild.birthDate.DD, user.thirdChild.birthDate.YYYY);
+    await consentForm.dateOfBirth(
+      user.thirdChild.birthDate.MM,
+      user.thirdChild.birthDate.DD,
+      user.thirdChild.birthDate.YYYY
+    );
     await consentForm.iHaveExplainedToMyChild().check();
     await consentForm.toKnowSecondaryFinding().check('I want to know.');
     await consentForm.parentGuardianSignature().fill(`${user.patient.firstName} ${user.patient.lastName}`);
@@ -331,4 +330,4 @@ test('enrolling non assenting child < 7 @enrollment @singular', async ({ page })
 
     await expect(page.locator('.enrollmentStatusCompleteText')).toHaveText('Fully Enrolled');
   });
-  });
+});

@@ -133,3 +133,15 @@ In **/tests/singular** dir, run Singular tests only:
   > npm run build
   > 
   > npm run lint
+- Test fixture
+  - To understand build-in support for fixture, see https://playwright.dev/docs/test-fixtures#creating-a-fixture
+  - `homePage` in `fixtures/singular-fixture.ts` is an example of custom user-defined fixture.
+  - To use above fixture in a test, for example,
+  ```
+    import { Page } from '@playwright/test';
+    import { test } from 'fixtures/singular-fixture';
+    test('an example', async ({ page, homePage }) => {
+      await homePage.signUp();
+      ...
+    }
+  ```
