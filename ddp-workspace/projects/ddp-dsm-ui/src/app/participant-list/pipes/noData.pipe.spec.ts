@@ -9,7 +9,7 @@ describe('noData Pipe', () => {
    */
   it('Should return value', () => {
     const diffData = [5, 'ddp', '5', 0, true];
-    diffData.forEach(value => expect(pipe.transform(value)).toEqual(value === 0 ? value.toString() : value));
+    diffData.forEach(value => expect(pipe.transform(value)).toEqual(value.toString()));
   });
 
   /*
