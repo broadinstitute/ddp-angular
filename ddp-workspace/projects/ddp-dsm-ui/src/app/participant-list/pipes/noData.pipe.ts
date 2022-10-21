@@ -6,6 +6,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 
 export class NoDataPipe implements PipeTransform {
   transform(value: any): string {
-    return (value === 0 ? value.toString() : value) || String.fromCharCode(160);
+    const nonBreakingSpace = String.fromCharCode(160);
+    return (value === 0 ? value.toString() : value) || nonBreakingSpace;
   }
 }
