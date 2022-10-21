@@ -5,7 +5,7 @@ describe('noData Pipe', () => {
   const pipe = new NoDataPipe();
 
   /*
-    Checking if in case of particular type of values, it returns exactly the same value (In string format)
+    Checking if in case of particular type of values, it returns exactly the same value (In case of 0, it returns "0")
    */
   it('Should return value', () => {
     const diffData = [5, 'ddp', '5', 0, true];
