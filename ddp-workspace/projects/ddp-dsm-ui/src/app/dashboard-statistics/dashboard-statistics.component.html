@@ -19,7 +19,7 @@
   <div class="dashboard-chartsAndCounts" *ngIf="!loading">
 
 
-      <mat-tab-group mat-align-tabs="center" *ngIf="Charts.length > 0 || Counts.length > 0; else noCharts">
+      <mat-tab-group mat-align-tabs="center" *ngIf="Charts?.length > 0 || Counts?.length > 0; else noCharts">
         <mat-tab>
           <ng-template mat-tab-label>
             <mat-icon class="example-tab-icon">bar_chart</mat-icon>

@@ -31,12 +31,4 @@ export class DashboardStatisticsComponent implements OnInit {
       displaylogo: false
     };
   }
-
-  public scrollToVew(divElement: HTMLDivElement): void {
-    divElement.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-      inline: 'nearest'
-    });
-  }
 }
