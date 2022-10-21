@@ -128,7 +128,9 @@ export class ShippingSearchComponent implements OnInit {
     if (typeof value === 'string') {
       kitRequest[ parameterName ] = value;
       v = value;
-      this.isSaved = true;
+      if(parameterName == "collectionDate"){
+        this.isSaved = true;
+      }
     }
     if (v != null) {
       const realm: string = kitRequest.realm;
