@@ -52,7 +52,7 @@ export default class MedicalRecordReleaseForm extends SingularPage {
 
   async uploadFile(filePath: string): Promise<void> {
     const fName = path.parse(filePath).name;
-    await this.page.setInputFiles('input[class="file-input"]', path.resolve(process.cwd(), filePath));
+    await this.page.setInputFiles('input[class="file-input"]', path.resolve(process.env.ROOT_DIR as string, filePath));
     await expect(this.page.locator('.uploaded-file .file-name')).toHaveText(new RegExp(fName));
   }
 
