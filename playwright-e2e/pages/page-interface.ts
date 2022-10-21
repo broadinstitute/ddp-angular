@@ -1,10 +1,14 @@
-import { Page, Response } from '@playwright/test';
+import { Locator, Response } from '@playwright/test';
 
 export interface PageInterface {
-  page: Page;
   gotoURL(url?: string): Promise<Response | null>;
   gotoURLPath(urlPath?: string): Promise<Response | null>;
   waitForReady(): Promise<void>;
+  getNextButton(): Locator;
+  getBackButton(): Locator;
+  getSubmitButton(): Locator;
+  getIAgreeButton(): Locator;
+  getIAmNotReadyToAgreeButton(): Locator;
 }
 
 export interface HomePageInterface extends PageInterface {
