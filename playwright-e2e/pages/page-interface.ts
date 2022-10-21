@@ -9,6 +9,7 @@ export interface PageInterface {
   getSubmitButton(): Locator;
   getIAgreeButton(): Locator;
   getIAmNotReadyToAgreeButton(): Locator;
+  logOut(): Promise<void>;
 }
 
 export interface HomePageInterface extends PageInterface {

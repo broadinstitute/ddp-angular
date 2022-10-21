@@ -25,13 +25,6 @@ export default class HomePage extends SingularPage implements HomePageInterface 
   }
 
   /**
-   * Returns "Log In" button locator
-   */
-  getLogInButton(): Locator {
-    return this.page.locator('.header button[data-ddp-test="signInButton"]:has-text("Log In")');
-  }
-
-  /**
    * Returns "Sign me up!" button locator
    */
   getSignMeUpButton(): Locator {

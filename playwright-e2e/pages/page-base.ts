@@ -14,6 +14,20 @@ export default abstract class PageBase implements PageInterface {
   abstract getBackButton(): Locator;
 
   /**
+   * Returns "Log In" button locator
+   */
+  getLogInButton(): Locator {
+    return this.page.locator('.header button[data-ddp-test="signInButton"]:has-text("Log In")');
+  }
+
+  /**
+   * Returns "Log Out" button locator
+   */
+  getLogOutButton(): Locator {
+    return this.page.locator('.header button[data-ddp-test="signOutButton"]:has-text("Log Out")');
+  }
+
+  /**
    * Return "Next" button locator
    */
   getNextButton(): Locator {
@@ -84,5 +98,10 @@ export default abstract class PageBase implements PageInterface {
   /** Click "I am not ready to agree" button */
   async notReadyToAgree(): Promise<void> {
     await this.clickAndWaitForNav(this.getIAmNotReadyToAgreeButton(), { waitForNav: true });
+  }
+
+  /** Click "Log Out" button */
+  async logOut(): Promise<void> {
+    await Promise.all([this.page.waitForNavigation({ waitUntil: 'domcontentloaded' }), this.getLogOutButton().click()]);
   }
 }
