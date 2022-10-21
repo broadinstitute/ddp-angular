@@ -1,7 +1,7 @@
 import {NoDataPipe} from './noData.pipe';
 import {expect} from '@angular/flex-layout/_private-utils/testing';
 
-fdescribe('noData Pipe', () => {
+describe('noData Pipe', () => {
   const pipe = new NoDataPipe();
 
   /*
