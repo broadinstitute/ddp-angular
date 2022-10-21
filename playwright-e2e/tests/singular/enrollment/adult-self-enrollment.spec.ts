@@ -1,4 +1,4 @@
-import { expect, Page } from '@playwright/test';
+import { expect } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
 import AboutMePage from 'pages/singular/enrollment/about-me-page';
 import ConsentFormPage from 'pages/singular/enrollment/consent-form-page';
@@ -12,21 +12,13 @@ import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
 import EnrollMyselfPage from 'pages/singular/enrollment/enroll-myself-page';
 import MedicalRecordReleaseForm from 'pages/singular/enrollment/medical-record-release-form';
 import PatientSurveyPage from 'pages/singular/enrollment/patient-survey-page';
+import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
 
 test.describe('Enroll myself as adult', () => {
   /**
    * Test case: https://docs.google.com/document/d/1Ewsh4ULh5LVdZiUapvG-PyI2kL3XzVf4seeLq8Mt-B0/edit?usp=sharing
    */
   test('can complete self-enrollment @enrollment @singular', async ({ context, page, homePage }) => {
-    // Assertion helper functions
-    const assertActivityHeader = async (page: Page, expectedText: string) => {
-      await expect(page.locator('h1.activity-header')).toHaveText(expectedText);
-    };
-
-    const assertActivityProgress = async (page: Page, expectedText: string) => {
-      await expect(page.locator('h3.progress-title')).toHaveText(expectedText);
-    };
-
     await homePage.signUp();
 
     // Step 1

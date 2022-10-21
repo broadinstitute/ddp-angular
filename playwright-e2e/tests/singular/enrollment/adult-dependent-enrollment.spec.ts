@@ -1,4 +1,4 @@
-import { expect, Page } from '@playwright/test';
+import { expect } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
 import * as auth from 'authentication/auth-singular';
 import MedicalRecordReleaseForm from 'pages/singular/enrollment/medical-record-release-form';
@@ -12,21 +12,13 @@ import { enterMailingAddress } from 'utils/test-utils';
 import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
 import { WHO } from 'data/constants';
 import * as user from 'data/fake-user.json';
+import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
 
 test.describe('Enrol an adult dependent', () => {
   /**
    * Test case: https://docs.google.com/document/d/1vaiSfsYeDzEHeK2XOVO3n_7I1W0Z94Kkqx_82w8-Vpc/edit#heading=h.6snot4x1e1uw
    */
   test('can finish adult-dependent-enrollment @enrollment @singular', async ({ page, homePage }) => {
-    // Assertion helper functions
-    const assertActivityHeader = async (page: Page, expectedText: string) => {
-      await expect(page.locator('h1.activity-header')).toHaveText(expectedText);
-    };
-
-    const assertActivityProgress = async (page: Page, expectedText: string) => {
-      await expect(page.locator('h3.progress-title')).toHaveText(expectedText);
-    };
-
     await homePage.signUp();
 
     // On “pre-screening” page, answer all questions about yourself with fake values

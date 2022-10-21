@@ -1,4 +1,4 @@
-import { expect, Page } from '@playwright/test';
+import { expect } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
 import * as user from 'data/fake-user.json';
 import { fillEmailPassword } from 'authentication/auth-singular';
@@ -13,6 +13,7 @@ import EnrollMyChildPage from 'pages/singular/enrollment/enroll-my-child-page';
 import ConsentFormForMinorPage from 'pages/singular/enrollment/consent-form-for-minor-page';
 import { enterMailingAddress } from 'utils/test-utils';
 import AssentFormPage from 'pages/singular/enrollment/assent-form-page';
+import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
 
 test.describe('Enroll my child', () => {
   /**
@@ -21,15 +22,6 @@ test.describe('Enroll my child', () => {
    * Ages 7-age of majority: child needs to give assent in addition to parent’s consent
    */
   test('enrolling an assenting child @enrollment @singular', async ({ page, homePage }) => {
-    // Assertion helper functions
-    const assertActivityHeader = async (page: Page, expectedText: string | RegExp) => {
-      await expect(page.locator('h1.activity-header')).toHaveText(expectedText);
-    };
-
-    const assertActivityProgress = async (page: Page, expectedText: string) => {
-      await expect(page.locator('h3.progress-title')).toHaveText(expectedText);
-    };
-
     await homePage.signUp();
 
     // Step 1
