@@ -691,6 +691,7 @@ export class ParticipantListComponent implements OnInit {
         }
         this.orderColumns();
         this.getData();
+        this.removeFieldAccordingToPermission();
       },
       // this.renewSelectedColumns(); commented out because if we have defaultColumns for all the studies we won't need it anymore
       error: err => {
@@ -701,6 +702,34 @@ export class ParticipantListComponent implements OnInit {
         throw 'Error - Loading display settings' + err;
       }
     });
+  }
+
+  private removeFieldAccordingToPermission(): void {
+    if(this.mrAndDssFalse) {
+      delete this.sourceColumns["k"];
+      delete this.sourceColumns["address"];
+      delete this.sourceColumns["m"];
+      delete this.sourceColumns["oD"];
+
+      this.dataSources.delete("k");
+      this.dataSources.delete("address");
+      this.dataSources.delete("m");
+      this.dataSources.delete("oD");
+    } else if(this.mrFalseDssTrue) {
+      delete this.sourceColumns["m"];
+      delete this.sourceColumns["oD"];
+
+      this.dataSources.delete("m");
+      this.dataSources.delete("oD");
+    }
+  }
+
+  private get mrFalseDssTrue(): boolean {
+    return !this.role.allowedToViewMedicalRecords() && this.role.viewOnlyDSSData;
+  }
+
+  private get mrAndDssFalse(): boolean {
+    return !this.role.allowedToViewMedicalRecords() && !this.role.viewOnlyDSSData;
   }
 
   private addDynamicFieldDefaultColumns(defaultColumn: any): void {
@@ -2294,14 +2323,17 @@ export class ParticipantListComponent implements OnInit {
 
   addTabColumns(): void {
     let possibleColumns: Array<Filter> = [];
-    for (const tab of this.settings['TAB']) {
-      this.dataSources.set(tab.columnName, tab.columnDisplay);
-      for (const setting of this.settings[tab.columnName]) {
-        const filter = this.createFilter(setting);
-        possibleColumns.push(...filter);
+    if((this.role.allowedToViewMedicalRecords && !this.role.viewOnlyDSSData)
+      || (!this.role.allowedToViewMedicalRecords && !this.role.viewOnlyDSSData) ) {
+      for (const tab of this.settings['TAB']) {
+        this.dataSources.set(tab.columnName, tab.columnDisplay);
+        for (const setting of this.settings[tab.columnName]) {
+          const filter = this.createFilter(setting);
+          possibleColumns.push(...filter);
+        }
+        this.sourceColumns[tab.columnName] = possibleColumns;
+        possibleColumns = [];
       }
-      this.sourceColumns[tab.columnName] = possibleColumns;
-      possibleColumns = [];
     }
   }
 
