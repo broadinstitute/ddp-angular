@@ -19,7 +19,7 @@ describe('noData Pipe', () => {
   });
 
   /*
-    Checking if in case of falsy value, it returns non-braking space, in order to display
+    Checking if in case of falsy value, it returns non-breaking space, in order to display
     empty space properly in HTML
    */
   it('Should return empty space', () => {
