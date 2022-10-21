@@ -18,7 +18,8 @@ describe('noData Pipe', () => {
    */
   it('Should return empty space', () => {
     const falsyValues = ['', false, undefined, null];
-    falsyValues.forEach(value => expect(pipe.transform(value)).toEqual(String.fromCharCode(160)));
+    const nonBrakingSpace = String.fromCharCode(160);
+    falsyValues.forEach(value => expect(pipe.transform(value)).toEqual(nonBrakingSpace));
   });
 
 });
