@@ -3,7 +3,7 @@ import {Observable, Subject} from 'rxjs';
 import {DashboardStatisticsService} from '../services/dashboard-statistics.service';
 import {RoleService} from '../services/role.service';
 import {catchError, finalize} from 'rxjs/operators';
-import {HttpErrorResponse} from "@angular/common/http";
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard-statistics',
