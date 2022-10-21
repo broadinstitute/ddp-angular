@@ -21,6 +21,15 @@ h1 {
   font-family: Montserrat-Regular, sans-serif;
 }
 
+.errorText {
+  @extend .noCharts;
+  color: red;
+  font-size: 2em;
+    span {
+      font-weight: bold;
+    }
+}
+
 .dashboard {
 
   margin-bottom: 50px;
