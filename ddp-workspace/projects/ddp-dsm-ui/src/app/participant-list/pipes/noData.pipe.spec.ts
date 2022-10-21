@@ -6,7 +6,7 @@ describe('noData Pipe', () => {
 
   const nonBreakingSpace = (): string => {
     const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = '&nbsp;';
+    tempDiv.innerHTML = String.fromCharCode(160);
     return tempDiv.innerText;
   };
 
