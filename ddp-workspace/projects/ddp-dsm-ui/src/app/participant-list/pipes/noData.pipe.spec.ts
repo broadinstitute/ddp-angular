@@ -4,7 +4,7 @@ import {expect} from '@angular/flex-layout/_private-utils/testing';
 describe('noData Pipe', () => {
   const pipe = new NoDataPipe();
 
-  const nonBrakingSpace = (): string => {
+  const nonBreakingSpace = (): string => {
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = '&nbsp;';
     return tempDiv.innerText;
@@ -24,7 +24,7 @@ describe('noData Pipe', () => {
    */
   it('Should return empty space', () => {
     const falsyValues = ['', false, undefined, null];
-    falsyValues.forEach(value => expect(pipe.transform(value)).toEqual(nonBrakingSpace()));
+    falsyValues.forEach(value => expect(pipe.transform(value)).toEqual(nonBreakingSpace()));
   });
 
 });
