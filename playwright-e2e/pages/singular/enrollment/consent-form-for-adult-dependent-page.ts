@@ -1,11 +1,15 @@
 import { Page } from '@playwright/test';
 import Question from 'lib/component/Question';
 import Input from 'lib/widget/Input';
-import PageBase from 'lib/page-base';
+import { SingularPage } from 'pages/singular/singular-page';
 
-export default class ConsentFormForAdultDependentPage extends PageBase {
+export default class ConsentFormForAdultDependentPage extends SingularPage {
   constructor(page: Page) {
     super(page);
+  }
+
+  async waitForReady(): Promise<void> {
+    await this.dependentFirstName().toLocator().waitFor({ state: 'visible' });
   }
 
   /**
@@ -58,18 +62,6 @@ export default class ConsentFormForAdultDependentPage extends PageBase {
    */
   dependentGuardianSignature(): Input {
     return new Input(this.page, { ddpTestID: 'answer:CONSENT_DEPENDENT_GUARDIAN_SIGNATURE' });
-  }
-
-  /** Click "Agree" button */
-  async agree(): Promise<void> {
-    const agreeButton = this.page.locator('button', { hasText: 'I agree' });
-    await this.clickHelper(agreeButton, { waitForNav: true });
-  }
-
-  /** Click "I am not ready to agree" button */
-  async notReadyToAgree(): Promise<void> {
-    const notReadyButton = this.page.locator('button', { hasText: 'I am not ready to agree' });
-    await this.clickHelper(notReadyButton, { waitForNav: true });
   }
 
   /**

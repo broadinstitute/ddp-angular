@@ -1,15 +1,20 @@
 import { expect, Page } from '@playwright/test';
+import { SingularPage } from 'pages/singular/singular-page';
+
 import Checkbox from 'lib/widget/checkbox';
 
 import path from 'path';
 import Input from 'lib/widget/Input';
 import Select from 'lib/widget/select';
 import * as user from 'data/fake-user.json';
-import PageBase from 'lib/page-base';
 
-export default class MedicalRecordReleaseForm extends PageBase {
+export default class MedicalRecordReleaseForm extends SingularPage {
   constructor(page: Page) {
     super(page);
+  }
+
+  async waitForReady(): Promise<void> {
+    await this.physicianName().toLocator().waitFor({ state: 'visible' });
   }
 
   physicianName(): Input {
@@ -46,7 +51,7 @@ export default class MedicalRecordReleaseForm extends PageBase {
 
   async uploadFile(filePath: string): Promise<void> {
     const fName = path.parse(filePath).name;
-    await this.page.setInputFiles('input[class="file-input"]', path.resolve(process.cwd(), filePath));
+    await this.page.setInputFiles('input[class="file-input"]', path.resolve(process.env.ROOT_DIR as string, filePath));
     await expect(this.page.locator('.uploaded-file .file-name')).toHaveText(new RegExp(fName));
   }
 

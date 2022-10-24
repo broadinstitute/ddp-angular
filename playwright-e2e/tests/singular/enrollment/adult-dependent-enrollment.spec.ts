@@ -1,48 +1,32 @@
-import { expect, Page, test } from '@playwright/test';
-import HomePage from 'tests/singular/home/home-page';
-import * as nav from 'tests/singular/lib/nav';
-import * as auth from 'tests/lib/auth-singular';
-import { fillEmailPassword } from 'tests/lib/auth-singular';
-import MedicalRecordReleaseForm from './medical-record-release-form';
-import PatientSurveyPage from './patient-survey-page';
-import PreScreeningPage from './pre-screening-page';
-import EnrollMyAdultDependentPage from './enroll-my-adult-dependent-page';
-import ConsentFormForAdultDependentPage from './consent-form-for-adult-dependent-page';
-import { makeEmailAlias } from '../../../utils/string-utils';
-import AboutMyAdultDependentPage from './about-my-adult-dependent-page';
-import { enterMailingAddress } from '../../lib/test-steps';
-import MyDashboardPage from '../dashboard/my-dashboard-page';
-import { WHO } from '../../../data/constants';
+import { expect } from '@playwright/test';
+import { test } from 'fixtures/singular-fixture';
+import * as auth from 'authentication/auth-singular';
+import MedicalRecordReleaseForm from 'pages/singular/enrollment/medical-record-release-form';
+import PatientSurveyPage from 'pages/singular/enrollment/patient-survey-page';
+import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
+import EnrollMyAdultDependentPage from 'pages/singular/enrollment/enroll-my-adult-dependent-page';
+import ConsentFormForAdultDependentPage from 'pages/singular/enrollment/consent-form-for-adult-dependent-page';
+import AboutMyAdultDependentPage from 'pages/singular/enrollment/about-my-adult-dependent-page';
+import { makeEmailAlias } from 'utils/string-utils';
+import { enterMailingAddress } from 'utils/test-utils';
+import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
+import { WHO } from 'data/constants';
 import * as user from 'data/fake-user.json';
+import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
 
 test.describe('Enrol an adult dependent', () => {
-  test.beforeEach(async ({ page }) => {
-    await nav.goToPath(page, '/password');
-    await auth.fillSitePassword(page);
-    await new HomePage(page).waitForReady();
-  });
-
   /**
    * Test case: https://docs.google.com/document/d/1vaiSfsYeDzEHeK2XOVO3n_7I1W0Z94Kkqx_82w8-Vpc/edit#heading=h.6snot4x1e1uw
    */
-  test('can finish adult-dependent-enrollment @enrollment @singular', async ({ page }) => {
-    // Assertion helper functions
-    const assertActivityHeader = async (page: Page, expectedText: string) => {
-      await expect(page.locator('h1.activity-header')).toHaveText(expectedText);
-    };
-
-    const assertActivityProgress = async (page: Page, expectedText: string) => {
-      await expect(page.locator('h3.progress-title')).toHaveText(expectedText);
-    };
-
-    await nav.signMeUp(page);
+  test('can finish adult-dependent-enrollment @enrollment @singular', async ({ page, homePage }) => {
+    await homePage.signUp();
 
     // On “pre-screening” page, answer all questions about yourself with fake values
     const preScreeningPage = new PreScreeningPage(page);
     await preScreeningPage.enterInformationAboutYourself();
 
     // Enter email alias and new password in Login popup
-    await fillEmailPassword(page, {
+    await auth.fillEmailPassword(page, {
       email: makeEmailAlias(process.env.singularUserEmail as string),
       password: process.env.singularUserPassword,
       waitForNavigation: true

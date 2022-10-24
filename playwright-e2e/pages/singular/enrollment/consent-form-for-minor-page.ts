@@ -1,12 +1,16 @@
 import { Page } from '@playwright/test';
+import { SingularPage } from 'pages/singular/singular-page';
 import Question from 'lib/component/Question';
 import Input from 'lib/widget/Input';
 import Checkbox from 'lib/widget/checkbox';
-import PageBase from 'lib/page-base';
 
-export default class ConsentFormForMinorPage extends PageBase {
+export default class ConsentFormForMinorPage extends SingularPage {
   constructor(page: Page) {
     super(page);
+  }
+
+  async waitForReady(): Promise<void> {
+    await this.authorizationSignature().toLocator().waitFor({ state: 'visible' });
   }
 
   /**
@@ -95,17 +99,5 @@ export default class ConsentFormForMinorPage extends PageBase {
    */
   relationShipToSubject(): Question {
     return new Question(this.page, { prompt: 'Relationship to subject:' });
-  }
-
-  /** Click "Agree" button */
-  async agree(): Promise<void> {
-    const agreeButton = this.page.locator('button', { hasText: 'I agree' });
-    await this.clickHelper(agreeButton, { waitForNav: true });
-  }
-
-  /** Click "I am not ready to agree" button */
-  async notReadyToAgree(): Promise<void> {
-    const notReadyButton = this.page.locator('button', { hasText: 'I am not ready to agree' });
-    await this.clickHelper(notReadyButton, { waitForNav: true });
   }
 }

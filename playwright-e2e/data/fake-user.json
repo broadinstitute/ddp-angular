@@ -61,6 +61,18 @@
       "YYYY": "1970"
     },
     "age": "52",
+    "country": {
+      "name": "UNITED STATES",
+      "abbreviation": "US"
+    },
+    "state": {
+      "name": "MASSACHUSETTS",
+      "abbreviation": "MA"
+    },
+    "streetAddress": "415 Main Street",
+    "city": "Cambridge",
+    "zip": "02142-1027",
+    "phone": "6177147000"
   },
   "secondChild": {
     "firstName": "E2E-second-Child",
