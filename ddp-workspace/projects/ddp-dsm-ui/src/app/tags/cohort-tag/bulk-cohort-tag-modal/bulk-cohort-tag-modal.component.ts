@@ -17,6 +17,7 @@ import { Subject } from 'rxjs';
 export class BulkCohortTagModalComponent implements OnInit  {
 
   readonly OPTIONS = OPTIONS;
+  public duplicateError: boolean;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { manualFilter: string; savedFilter: ViewFilter; selectedPatients: [] },
@@ -37,9 +38,14 @@ export class BulkCohortTagModalComponent implements OnInit  {
   }
 
   add(event: MatChipInputEvent): void {
+    this.duplicateError = false;
     const value = (event.value || '').trim();
 
     if (value) {
+      if (this.tags.find(tag => tag === value)){
+        this.duplicateError = true;
+        return;
+      }
       this.tags.push(value);
     }
 

@@ -20,7 +20,7 @@ export class CohortTagComponent implements OnInit {
   tags: CohortTag[];
 
   public static readonly COHORT_TAG = 'cohortTag';
-  public duplicateError: boolean = false;
+  public duplicateError = false;
 
   constructor(private compService: ComponentService, private dsmService: DSMService) { }
 
@@ -59,7 +59,7 @@ export class CohortTagComponent implements OnInit {
             event.chipInput!.clear();
           },
           error: (error) => {
-            if(error.status == 500){
+            if (error.status === 500){
               this.duplicateError = true;
             }
           }
