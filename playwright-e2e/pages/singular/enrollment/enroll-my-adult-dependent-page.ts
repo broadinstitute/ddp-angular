@@ -1,11 +1,15 @@
-import { Page } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 import Question from 'lib/component/Question';
-import PageBase from 'lib/page-base';
-import Input from '../../../lib/widget/Input';
+import Input from 'lib/widget/Input';
+import { SingularPage } from 'pages/singular/singular-page';
 
-export default class EnrollMyAdultDependentPage extends PageBase {
+export default class EnrollMyAdultDependentPage extends SingularPage {
   constructor(page: Page) {
     super(page);
+  }
+
+  async waitForReady(): Promise<void> {
+    await expect(this.howOldIsYourDependent().toLocator()).toBeVisible();
   }
 
   /**

@@ -1,11 +1,15 @@
 import { Page } from '@playwright/test';
 import Question from 'lib/component/Question';
 import Input from 'lib/widget/Input';
-import PageBase from 'lib/page-base';
+import { SingularPage } from 'pages/singular/singular-page';
 
-export default class ConsentFormForAdultDependentPage extends PageBase {
+export default class ConsentFormForAdultDependentPage extends SingularPage {
   constructor(page: Page) {
     super(page);
+  }
+
+  async waitForReady(): Promise<void> {
+    await this.dependentFirstName().toLocator().waitFor({ state: 'visible' });
   }
 
   /**

@@ -1,17 +1,15 @@
 import { Page } from '@playwright/test';
 import Card from 'lib/widget/card';
 import Input from 'lib/widget/Input';
-import PageBase from 'lib/page-base';
+import { SingularPage } from 'pages/singular/singular-page';
 
-export default class AboutMyAdultDependentPage extends PageBase {
+export default class AboutMyAdultDependentPage extends SingularPage {
   constructor(page: Page) {
     super(page);
   }
 
-  async waitForReady() {
-    await this.firstName()
-      .toLocator()
-      .waitFor({ state: 'visible', timeout: 60 * 1000 });
+  async waitForReady(): Promise<void> {
+    await this.firstName().toLocator().waitFor({ state: 'visible' });
   }
 
   firstName(): Input {

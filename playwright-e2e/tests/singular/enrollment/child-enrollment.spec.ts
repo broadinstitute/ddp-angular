@@ -1,36 +1,28 @@
-import { expect, test } from '@playwright/test';
-
-import HomePage from 'tests/singular/home/home-page';
+import { expect } from '@playwright/test';
+import { test } from 'fixtures/singular-fixture';
 import * as user from 'data/fake-user.json';
-import * as nav from 'tests/singular/lib/nav';
-import { fillEmailPassword, fillSitePassword } from 'tests/lib/auth-singular';
+import { fillEmailPassword } from 'authentication/auth-singular';
 import { makeEmailAlias } from 'utils/string-utils';
 import { WHO } from 'data/constants';
-import MyDashboardPage from '../dashboard/my-dashboard-page';
-import MedicalRecordReleaseForm from './medical-record-release-form';
-import AboutMyChildPage from './about-my-child-page';
-import ChildSurveyPage from './child-survey-page';
-import PreScreeningPage from './pre-screening-page';
-import EnrollMyChildPage from './enroll-my-child-page';
-import ConsentFormForMinorPage from './consent-form-for-minor-page';
-import { enterMailingAddress } from 'tests/lib/test-steps';
-import AssentFormPage from './assent-form-page';
+import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
+import MedicalRecordReleaseForm from 'pages/singular/enrollment/medical-record-release-form';
+import AboutMyChildPage from 'pages/singular/enrollment/about-my-child-page';
+import ChildSurveyPage from 'pages/singular/enrollment/child-survey-page';
+import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
+import EnrollMyChildPage from 'pages/singular/enrollment/enroll-my-child-page';
+import ConsentFormForMinorPage from 'pages/singular/enrollment/consent-form-for-minor-page';
+import { enterMailingAddress } from 'utils/test-utils';
+import AssentFormPage from 'pages/singular/enrollment/assent-form-page';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
 
 test.describe('Enroll my child', () => {
-  test.beforeEach(async ({ page }) => {
-    await nav.goToPath(page, '/password');
-    await fillSitePassword(page);
-    await new HomePage(page).waitForReady();
-  });
-
   /**
    * Assenting rules:
    * Ages 0-6: Need parental consent from parent
    * Ages 7-age of majority: child needs to give assent in addition to parent’s consent
    */
-  test('enrolling an assenting child @enrollment @singular', async ({ page }) => {
-    await nav.signMeUp(page);
+  test('enrolling an assenting child @enrollment @singular', async ({ page, homePage }) => {
+    await homePage.signUp();
 
     // Step 1
     // On “pre-screening” page, answer all questions about yourself with fake values
@@ -57,9 +49,9 @@ test.describe('Enroll my child', () => {
     await enrollMyChildPage.howOldIsYourChild().fill(user.child.age);
     await myDashboardPage.next();
     await assertActivityHeader(page, 'Enroll my child');
-    await expect(enrollMyChildPage.nextButton()).toBeDisabled();
+    await expect(enrollMyChildPage.getNextButton()).toBeDisabled();
     // Triggered one extra question
-    await expect(enrollMyChildPage.nextButton()).toBeEnabled();
+    await expect(enrollMyChildPage.getNextButton()).toBeEnabled();
     await assertActivityHeader(page, 'Enroll my child');
     await enrollMyChildPage.doesChildHaveCognitiveImpairment().check('No', { exactMatch: true });
     await myDashboardPage.next();

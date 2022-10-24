@@ -17,7 +17,6 @@ export const NavSelectors = {
 
 export async function goToAboutUs(page: Page): Promise<void> {
   const aboutUs = page.locator(NavSelectors.AboutUs);
-
   await Promise.all([page.waitForNavigation(), aboutUs.click()]);
 }
 
