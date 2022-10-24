@@ -26,6 +26,8 @@ async function signUp(page: Page) {
 
 
 test.describe('Adult Dependent visual tests', () => {
+  let enrollMyAdultDependentPage: EnrollMyAdultDependentPage;
+
   test.beforeEach(async ({ page }) => {
     await nav.goToPath(page, '/password');
     await auth.fillSitePassword(page);
@@ -34,12 +36,12 @@ test.describe('Adult Dependent visual tests', () => {
 
     const myDashboardPage = new MyDashboardPage(page);
     await myDashboardPage.enrollMyAdultDependent();
+    enrollMyAdultDependentPage = new EnrollMyAdultDependentPage(page);
   });
 
   // whoHasVentricleHeartDefect validation: Select `someone else` should trigger an error message
   test('select a "Someone else" option for adult dependent @visual @enrollment @singular', async ({ page }) => {
     // On "Enroll my adult dependent" page
-    const enrollMyAdultDependentPage = new EnrollMyAdultDependentPage(page);
     const whoHasVentricleHeartDefect = enrollMyAdultDependentPage.whoHasVentricleHeartDefect();
     // No error before select who has ventricle heart defect
     await expect(whoHasVentricleHeartDefect.errorMessage()).toBeHidden();
@@ -62,7 +64,6 @@ test.describe('Adult Dependent visual tests', () => {
 
   // Age validation: should be 18 y.o. or more
   test('should validate adult dependent age @visual @enrollment @singular', async ({ page }) => {
-    const enrollMyAdultDependentPage = new EnrollMyAdultDependentPage(page);
     const age = enrollMyAdultDependentPage.howOldIsYourDependent();
     // No error before start entering age
     await expect(age.errorMessage()).toBeHidden();
@@ -79,7 +80,6 @@ test.describe('Adult Dependent visual tests', () => {
   });
 
   test('should validate `Does your dependent have a cognitive impairment` question @visual @enrollment @singular', async ({ page }) => {
-    const enrollMyAdultDependentPage = new EnrollMyAdultDependentPage(page);
     const age = enrollMyAdultDependentPage.howOldIsYourDependent();
     await age.fill('50');
     const cognitiveImpairmentQuestion = enrollMyAdultDependentPage.doesDependentHaveCognitiveImpairment();
