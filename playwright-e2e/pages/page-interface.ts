@@ -1,7 +1,7 @@
 import { Locator, Response } from '@playwright/test';
 
 export interface PageInterface {
-  gotoURL(url?: string): Promise<Response | null>;
+  gotoURL(url: string): Promise<Response | null>;
   gotoURLPath(urlPath?: string): Promise<Response | null>;
   waitForReady(): Promise<void>;
   getNextButton(): Locator;

@@ -55,7 +55,7 @@ export default abstract class PageBase implements PageInterface {
     return this.page.locator('button', { hasText: 'I am not ready to agree' });
   }
 
-  async gotoURL(url: string): Promise<Response | null> {
+  async gotoURL(url = '/'): Promise<Response | null> {
     return this.page.goto(url, { waitUntil: 'domcontentloaded' });
   }
 

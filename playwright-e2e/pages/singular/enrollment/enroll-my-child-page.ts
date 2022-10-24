@@ -9,7 +9,6 @@ export default class EnrollMyChildPage extends SingularPage {
   }
 
   async waitForReady(): Promise<void> {
-    // Add additional checks to wait for page is ready
     await this.howOldIsYourChild().toLocator().waitFor({ state: 'visible' });
   }
 

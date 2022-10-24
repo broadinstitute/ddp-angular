@@ -11,7 +11,6 @@ export default class EnrollMyselfPage extends SingularPage {
   }
 
   async waitForReady(): Promise<void> {
-    // Add additional checks to wait for page is ready
     await this.whoHasVentricleHeartDefect().toLocator().waitFor({ state: 'visible' });
   }
 

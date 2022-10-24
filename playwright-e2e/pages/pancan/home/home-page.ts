@@ -8,7 +8,6 @@ export default class HomePage extends PancanPage implements HomePageInterface {
   }
 
   async waitForReady(): Promise<void> {
-    // Add additional waits here
     await expect(this.getLogInButton()).toBeVisible();
     await expect(this.getJoinCountMeInButton()).toBeVisible();
   }

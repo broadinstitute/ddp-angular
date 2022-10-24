@@ -109,13 +109,11 @@ export async function enterMailingAddress(
  * @param page
  * @param password
  */
-export async function fillSitePassword(page: Page, password?: string): Promise<void> {
-  const passwd: string = typeof password === 'undefined' ? (process.env.singularSitePassword as string) : password;
-
-  if (!passwd) {
-    throw new Error(`Site password is required.`);
-  }
-  await page.locator('input[type="password"]').fill(passwd);
+export async function fillSitePassword(
+  page: Page,
+  password: string = process.env.singularSitePassword as string
+): Promise<void> {
+  await page.locator('input[type="password"]').fill(password);
   await Promise.all([page.waitForNavigation(), page.locator('button >> text=Submit').click()]);
 }
 

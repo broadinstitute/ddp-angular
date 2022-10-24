@@ -1,10 +1,6 @@
 import { Page } from '@playwright/test';
 import { clickLogin, NavSelectors } from 'pages/singular/navbar';
 
-// import * as dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '../singular/.env.singular') });
-
 export async function fillEmailPassword(
   page: Page,
   opts: { email?: string | undefined; password?: string | undefined; waitForNavigation?: boolean }

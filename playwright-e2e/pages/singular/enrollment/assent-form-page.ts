@@ -9,7 +9,6 @@ export default class AssentFormPage extends SingularPage {
   }
 
   async waitForReady(): Promise<void> {
-    // Add additional checks to wait for page is ready
     await this.fullName().toLocator().waitFor({ state: 'visible' });
   }
 

@@ -19,7 +19,6 @@ export default class HomePage extends SingularPage implements HomePageInterface 
   }
 
   async waitForReady(): Promise<void> {
-    // Add additional waits here
     await this.page.waitForFunction(() => document.title === 'Project Singular');
     await expect(this.title).toContainText('Discoveries in single ventricle heart defects are on the horizon.');
   }
@@ -44,9 +43,7 @@ export default class HomePage extends SingularPage implements HomePageInterface 
    * Log into Singular application
    * @param opts
    */
-  async logIn(
-    opts: { email?: string | undefined; password?: string | undefined; waitForNavigation?: boolean } = {}
-  ): Promise<void> {
+  async logIn(opts: { email?: string; password?: string; waitForNavigation?: boolean } = {}): Promise<void> {
     const {
       email = process.env.singularUserEmail,
       password = process.env.singularUserPassword,

@@ -10,7 +10,6 @@ export default class PatientSurveyPage extends SingularPage {
   }
 
   async waitForReady(): Promise<void> {
-    // Add additional checks to wait for page is ready
     await this.cityBornIn().toLocator().waitFor({ state: 'visible' });
   }
 
