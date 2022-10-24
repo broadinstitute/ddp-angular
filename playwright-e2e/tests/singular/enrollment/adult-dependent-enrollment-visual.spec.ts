@@ -1,17 +1,16 @@
-import { expect, Page, test } from '@playwright/test';
-import HomePage from 'tests/singular/home/home-page';
-import { fillEmailPassword } from 'tests/lib/auth-singular';
-import * as auth from 'tests/lib/auth-singular';
-import MyDashboardPage from '../dashboard/my-dashboard-page';
-import EnrollMyAdultDependentPage from './enroll-my-adult-dependent-page';
-import PreScreeningPage from './pre-screening-page';
-import * as nav from '../lib/nav';
-import { WHO } from 'data/constants';
+import { expect, Page } from '@playwright/test';
+import { test } from 'fixtures/singular-fixture';
+import { fillEmailPassword } from 'authentication/auth-singular';
+import { signMeUp } from 'pages/singular/navbar';
+import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
+import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
+import EnrollMyAdultDependentPage from 'pages/singular/enrollment/enroll-my-adult-dependent-page';
 import { makeEmailAlias } from 'utils/string-utils';
+import { WHO } from 'data/constants';
 
 
 async function signUp(page: Page) {
-  await nav.signMeUp(page);
+  await signMeUp(page);
 
   const preScreeningPage = new PreScreeningPage(page);
   await preScreeningPage.enterInformationAboutYourself();
@@ -24,24 +23,20 @@ async function signUp(page: Page) {
   });
 }
 
+async function getEnrollMyAdultDependentPage(page: Page) {
+  const myDashboardPage = new MyDashboardPage(page);
+  await myDashboardPage.enrollMyAdultDependent();
+  return new EnrollMyAdultDependentPage(page);
+}
 
 test.describe('Adult Dependent visual tests', () => {
-  let enrollMyAdultDependentPage: EnrollMyAdultDependentPage;
-
-  test.beforeEach(async ({ page }) => {
-    await nav.goToPath(page, '/password');
-    await auth.fillSitePassword(page);
-    await new HomePage(page).waitForReady();
-    await signUp(page);
-
-    const myDashboardPage = new MyDashboardPage(page);
-    await myDashboardPage.enrollMyAdultDependent();
-    enrollMyAdultDependentPage = new EnrollMyAdultDependentPage(page);
-  });
 
   // whoHasVentricleHeartDefect validation: Select `someone else` should trigger an error message
-  test('select a "Someone else" option for adult dependent @visual @enrollment @singular', async ({ page }) => {
-    // On "Enroll my adult dependent" page
+  test('select a "Someone else" option for adult dependent @visual @enrollment @singular', async ({ page, homePage }) => {
+    await homePage.signUp();
+    await signUp(page);
+    const enrollMyAdultDependentPage = await getEnrollMyAdultDependentPage(page);
+
     const whoHasVentricleHeartDefect = enrollMyAdultDependentPage.whoHasVentricleHeartDefect();
     // No error before select who has ventricle heart defect
     await expect(whoHasVentricleHeartDefect.errorMessage()).toBeHidden();
@@ -63,7 +58,11 @@ test.describe('Adult Dependent visual tests', () => {
   });
 
   // Age validation: should be 18 y.o. or more
-  test('should validate adult dependent age @visual @enrollment @singular', async ({ page }) => {
+  test('should validate adult dependent age @visual @enrollment @singular', async ({ page, homePage }) => {
+    await homePage.signUp();
+    await signUp(page);
+    const enrollMyAdultDependentPage = await getEnrollMyAdultDependentPage(page);
+
     const age = enrollMyAdultDependentPage.howOldIsYourDependent();
     // No error before start entering age
     await expect(age.errorMessage()).toBeHidden();
@@ -79,7 +78,11 @@ test.describe('Adult Dependent visual tests', () => {
     expect(screenshotValidAge).toMatchSnapshot('age-valid.png');
   });
 
-  test('should validate `Does your dependent have a cognitive impairment` question @visual @enrollment @singular', async ({ page }) => {
+  test('should validate `Does your dependent have a cognitive impairment` question @visual @enrollment @singular', async ({ page, homePage }) => {
+    await homePage.signUp();
+    await signUp(page);
+    const enrollMyAdultDependentPage = await getEnrollMyAdultDependentPage(page);
+
     const age = enrollMyAdultDependentPage.howOldIsYourDependent();
     await age.fill('50');
     const cognitiveImpairmentQuestion = enrollMyAdultDependentPage.doesDependentHaveCognitiveImpairment();
