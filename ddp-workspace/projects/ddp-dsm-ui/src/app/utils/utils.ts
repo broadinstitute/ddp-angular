@@ -965,4 +965,8 @@ export class Utils {
     const date = new Date( value );
     return new DatePipe( 'en-US' ).transform( date, Utils.DATE_STRING_IN_CVS );
   }
+
+  public static getNiceDateFormat( uploadedAt: string ): string {
+    return new DatePipe( 'en-US' ).transform( uploadedAt, Utils.DATE_STRING_IN_CVS_WITH_TIME );
+  }
 }

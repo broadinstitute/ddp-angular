@@ -18,8 +18,8 @@
   <tbody>
   <tr *ngFor="let file of participant?.data?.files">
     <td>{{file.fileName}}</td>
-    <td>{{getNiceDateFormat(file.uploadedAt)}}</td>
-    <td>{{getNiceDateFormat(file.scannedAt)}}</td>
+    <td>{{getUtilStatic().getNiceDateFormat(file.uploadedAt)}}</td>
+    <td>{{getUtilStatic().getNiceDateFormat(file.scannedAt)}}</td>
     <td>{{file.scanResult}}</td>
     <td>
       <button (click)="downloadParticipantFile($event, file)" [disabled]="file.scanResult !== CLEAN"
