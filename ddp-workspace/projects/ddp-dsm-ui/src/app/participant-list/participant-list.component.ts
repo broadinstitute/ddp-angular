@@ -121,6 +121,7 @@ export class ParticipantListComponent implements OnInit {
   savedSelectedColumns = {};
   isAddFamilyMember = false;
   hasSequencingOrders = false;
+  hasExternalShipper = false;
   showGroupFields = false;
   hideSamplesTab = false;
   showContactInformation = false;
@@ -569,6 +570,7 @@ export class ParticipantListComponent implements OnInit {
             options.push(new NameValue(kitType.name, kitType.displayName));
             if (kitType.externalShipper) {
               hasExternalShipper = true;
+              this.hasExternalShipper = true;
             }
           });
           if (optionsUpload.length > 0) {
@@ -691,6 +693,7 @@ export class ParticipantListComponent implements OnInit {
         }
         this.orderColumns();
         this.getData();
+        this.removeUnnecessaryColumns();
       },
       // this.renewSelectedColumns(); commented out because if we have defaultColumns for all the studies we won't need it anymore
       error: err => {
@@ -701,6 +704,29 @@ export class ParticipantListComponent implements OnInit {
         throw 'Error - Loading display settings' + err;
       }
     });
+  }
+
+  private removeUnnecessaryColumns(): void {
+    if(!this.hasExternalShipper) {
+      let sampleColumnNamesToRemove = ['externalOrderNumber', 'externalOrderDate', 'isCorrected', 'result', 'timeCompleted', 'upsReturnStatus', 'upsTrackingStatus', 'careEvolve'];
+      this.removeColumns('k', sampleColumnNamesToRemove);
+    }
+
+    if(!this.hasSequencingOrders) {
+      let sampleColumnNamesToRemove = ['sequencingRestriction', 'sampleNotes'];
+      let clinicalColumnsNamesToRemove = ['orderStatus', 'orderId', 'mercuryPdoId', 'orderDate', 'statusDate'];
+      this.removeColumns('k', sampleColumnNamesToRemove);
+      this.removeColumns('cl', clinicalColumnsNamesToRemove);
+    }
+  }
+
+  private removeColumns(columnName: string, columnNames: string[]) {
+    columnNames.forEach((name: string) => {
+      const filterIndex = this.sourceColumns?.[columnName]?.findIndex((filter: Filter) => filter.participantColumn.name === name);
+      if(filterIndex ?? filterIndex > -1) {
+        this.sourceColumns['k'].splice(filterIndex, 1)
+      }
+    })
   }
 
   private addDynamicFieldDefaultColumns(defaultColumn: any): void {
