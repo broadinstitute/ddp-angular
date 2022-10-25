@@ -782,7 +782,7 @@ export class ParticipantListComponent implements OnInit {
   private getData(): void {
     // find viewFilter by filterName
     let defaultFilter: ViewFilter = null;
-    if (this.role.getUserSetting().defaultParticipantFilter) {
+    if (this.role.getUserSetting()?.defaultParticipantFilter) {
       defaultFilter = this.savedFilters.find(filter => filter.filterName === this.role.getUserSetting().defaultParticipantFilter);
       if (defaultFilter == null) {
         defaultFilter = this.quickFilters.find(filter => filter.filterName === this.role.getUserSetting().defaultParticipantFilter);
@@ -790,8 +790,8 @@ export class ParticipantListComponent implements OnInit {
       if (defaultFilter != null) {
         defaultFilter.selected=true;
         this.selectFilter(defaultFilter);
-      } else if (this.role.getUserSetting().defaultParticipantFilter !== ''
-        && this.role.getUserSetting().defaultParticipantFilter != null
+      } else if (this.role.getUserSetting()?.defaultParticipantFilter !== ''
+        && this.role.getUserSetting()?.defaultParticipantFilter != null
       ) {
         // eslint-disable-next-line max-len
         this.additionalMessage = 'The default filter seems to be deleted, however it is still the default filter as long as not changed in the user settings.';
