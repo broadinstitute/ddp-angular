@@ -721,7 +721,7 @@ export class ParticipantListComponent implements OnInit {
       columnNames.forEach((name: string) => {
         delete this.sourceColumns[name];
         this.dataSources.delete(name);
-      })
+      });
     }
   }
 

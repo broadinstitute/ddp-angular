@@ -134,7 +134,7 @@ export class RoleService {
           }
           else if (entry === 'file_download'){
             this._isDownloadParticipantFile = true;
-          } else if(entry === "view_only_dss_data") {
+          } else if(entry === 'view_only_dss_data') {
             this._viewOnlyDssData = true;
           }
         }
