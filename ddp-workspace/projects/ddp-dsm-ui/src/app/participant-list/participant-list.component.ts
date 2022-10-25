@@ -708,25 +708,26 @@ export class ParticipantListComponent implements OnInit {
 
   private removeUnnecessaryColumns(): void {
     if(!this.hasExternalShipper) {
-      let sampleColumnNamesToRemove = ['externalOrderNumber', 'externalOrderDate', 'isCorrected', 'result', 'timeCompleted', 'upsReturnStatus', 'upsTrackingStatus', 'careEvolve'];
+      const sampleColumnNamesToRemove = ['externalOrderNumber', 'externalOrderDate', 'isCorrected',
+        'result', 'timeCompleted', 'upsReturnStatus', 'upsTrackingStatus', 'careEvolve'];
       this.removeColumns('k', sampleColumnNamesToRemove);
     }
 
     if(!this.hasSequencingOrders) {
-      let sampleColumnNamesToRemove = ['sequencingRestriction', 'sampleNotes'];
-      let clinicalColumnsNamesToRemove = ['orderStatus', 'orderId', 'mercuryPdoId', 'orderDate', 'statusDate'];
+      const sampleColumnNamesToRemove = ['sequencingRestriction', 'sampleNotes'];
+      const clinicalColumnsNamesToRemove = ['orderStatus', 'orderId', 'mercuryPdoId', 'orderDate', 'statusDate'];
       this.removeColumns('k', sampleColumnNamesToRemove);
       this.removeColumns('cl', clinicalColumnsNamesToRemove);
     }
   }
 
-  private removeColumns(columnName: string, columnNames: string[]) {
+  private removeColumns(columnName: string, columnNames: string[]): void {
     columnNames.forEach((name: string) => {
       const filterIndex = this.sourceColumns?.[columnName]?.findIndex((filter: Filter) => filter.participantColumn.name === name);
       if(filterIndex ?? filterIndex > -1) {
-        this.sourceColumns['k'].splice(filterIndex, 1)
+        this.sourceColumns['k'].splice(filterIndex, 1);
       }
-    })
+    });
   }
 
   private addDynamicFieldDefaultColumns(defaultColumn: any): void {
