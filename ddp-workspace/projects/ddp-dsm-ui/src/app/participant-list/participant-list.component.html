@@ -625,7 +625,7 @@
                   <div *ngIf="alias === 'm'">
                     <ul class="NO-PADDING-START">
                       <li class="LIST-SEPARATOR" *ngFor="let mr of pt.medicalRecords">
-                        <p class="BIT-OF-MARGIN" *ngIf="mr.showInstitution()">
+                        <p class="BIT-OF-MARGIN" *ngIf="mr.showInstitution(); else noShowInstitution">
                           <ng-container
                             *ngIf="col.type !== 'ADDITIONALVALUE' && col.type !== 'BOOLEAN' && col.type !== 'OPTIONS' && col.type !== 'CHECKBOX' && col.type !== 'DATE'">
                             {{mr[col.participantColumn.name] | noData}}
@@ -659,6 +659,10 @@
                             *ngIf="col.type === 'DATE'">{{getUtil().getDateFormatted(mr[col.participantColumn.name]) | noData}}
                           </ng-container>
                         </p>
+
+                        <ng-template #noShowInstitution>
+                          <p>&nbsp;</p>
+                        </ng-template>
                       </li>
                     </ul>
                   </div>
