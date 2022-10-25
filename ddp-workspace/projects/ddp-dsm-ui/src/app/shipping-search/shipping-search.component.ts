@@ -122,15 +122,14 @@ export class ShippingSearchComponent implements OnInit {
       ); // need to subscribe, otherwise it will not send!
   }
 
+  //Triggers when user finishes typing
   valueChanged( value: any, parameterName: string, kitRequest: KitRequest ): void {
     let v;
 
+    
     if (typeof value === 'string') {
       kitRequest[ parameterName ] = value;
       v = value;
-      if(parameterName == "collectionDate"){
-        this.isSaved = true;
-      }
     }
     if (v != null) {
       const realm: string = kitRequest.realm;
@@ -155,8 +154,12 @@ export class ShippingSearchComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
+          
           this.auth.logout();
         }
+      },
+      complete: () =>{
+        this.isSaved = true;
       }
     } );
   }
@@ -165,8 +168,10 @@ export class ShippingSearchComponent implements OnInit {
     return this.currentPatchField === field;
   }
 
-  saveDate()
-  {
-    this.isSaved = true;
+
+  //This function only exists to hide the "Message Saved Successfully!"
+  //if someone changes the date more then once
+  changingDate(): void{
+    this.isSaved = false;
   }
 }
