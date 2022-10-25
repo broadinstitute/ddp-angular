@@ -15,8 +15,8 @@ export default class EnrollMyAdultDependentPage extends SingularPage {
   /**
    * Question: How old is your dependent?
    */
-  howOldIsYourDependent(): Question {
-    return new Question(this.page, { prompt: 'How old is your dependent?' });
+  howOldIsYourDependent(): Input {
+    return new Input(this.page, { ddpTestID: 'answer:ENROLLING_DEPENDENT_AGE' });
   }
 
   /**

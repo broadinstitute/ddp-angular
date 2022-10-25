@@ -69,12 +69,12 @@ test.describe('Adult Dependent visual tests', () => {
     // Enter an invalid age
     await age.fill('2');
     await enrollMyAdultDependentPage.next();
-    let screenshotInvalidAge = await age.toLocator().screenshot();
+    let screenshotInvalidAge = await age.toQuestion().screenshot();
     expect(screenshotInvalidAge).toMatchSnapshot('age-invalid-error-message.png');
     // Enter a valid age
     await age.fill('58');
     await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
-    let screenshotValidAge = await age.toLocator().screenshot();
+    let screenshotValidAge = await age.toQuestion().screenshot();
     expect(screenshotValidAge).toMatchSnapshot('age-valid.png');
   });
 
@@ -89,14 +89,14 @@ test.describe('Adult Dependent visual tests', () => {
 
     await cognitiveImpairmentQuestion.check('No');
     await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
-    let screenshotAgeOfMajorityError = await age.toLocator().screenshot();
+    let screenshotAgeOfMajorityError = await age.toQuestion().screenshot();
     expect(screenshotAgeOfMajorityError).toMatchSnapshot('age-of-majority-error-message.png');
     let screenshotCognitiveImpairmentNoAnswer = await cognitiveImpairmentQuestion.toLocator().screenshot();
     expect(screenshotCognitiveImpairmentNoAnswer).toMatchSnapshot('cognitive-impairment-no-answer.png');
 
     await cognitiveImpairmentQuestion.check('Yes');
     await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
-    let screenshotCognitiveImpairment = await age.toLocator().screenshot();
+    let screenshotCognitiveImpairment = await age.toQuestion().screenshot();
     expect(screenshotCognitiveImpairment).toMatchSnapshot('age-without-errors.png');
     let screenshotCognitiveImpairmentYesAnswer = await cognitiveImpairmentQuestion.toLocator().screenshot();
     expect(screenshotCognitiveImpairmentYesAnswer).toMatchSnapshot('cognitive-impairment-yes-answer.png');
