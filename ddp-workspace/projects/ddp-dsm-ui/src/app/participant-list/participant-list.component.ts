@@ -708,25 +708,25 @@ export class ParticipantListComponent implements OnInit {
 
   private removeUnnecessaryColumns(): void {
     if(!this.hasExternalShipper) {
-      const sampleColumnNamesToRemove = [Filter.CORRECTED_TEST,
+      const sampleColumnFiltersToRemove = [Filter.CORRECTED_TEST,
         Filter.RESULT_TEST, Filter.TIME_TEST, Filter.STATUS_IN,
         Filter.STATUS_OUT, Filter.CARE_EVOLVE];
 
-      this.removeColumns('k', sampleColumnNamesToRemove);
+      this.removeColumns('k', sampleColumnFiltersToRemove);
     }
 
     if(!this.hasSequencingOrders) {
-      const sampleColumnNamesToRemove = [Filter.SEQUENCING_RESTRICTION, Filter.SAMPLE_NOTES];
-      const clinicalColumnsNamesToRemove = [Filter.CLINICAL_ORDER_STATUS, Filter.CLINICAL_ORDER_ID,
+      const sampleColumnFiltersToRemove = [Filter.SEQUENCING_RESTRICTION, Filter.SAMPLE_NOTES];
+      const clinicalColumnsFiltersToRemove = [Filter.CLINICAL_ORDER_STATUS, Filter.CLINICAL_ORDER_ID,
         Filter.CLINICAL_ORDER_PDO ,Filter.CLINICAL_ORDER_DATE, Filter.CLINICAL_STATUS_DATE];
 
-      this.removeColumns('k', sampleColumnNamesToRemove);
-      this.removeColumns('cl', clinicalColumnsNamesToRemove);
+      this.removeColumns('k', sampleColumnFiltersToRemove);
+      this.removeColumns('cl', clinicalColumnsFiltersToRemove);
     }
   }
 
-  private removeColumns(columnName: string, filters: Filter[]): void {
-    filters.forEach((filter: Filter) => this.removeColumnFromSourceColumns(columnName, filter));
+  private removeColumns(tableAlias: string, filters: Filter[]): void {
+    filters.forEach((filter: Filter) => this.removeColumnFromSourceColumns(tableAlias, filter));
   }
 
   private removeColumnFromSourceColumns(source: string, filter: Filter): void {
