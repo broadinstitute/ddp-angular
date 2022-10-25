@@ -705,22 +705,23 @@ export class ParticipantListComponent implements OnInit {
   }
 
   private removeFieldAccordingToPermission(): void {
+    let columnNamesToDelete: string[];
+
     if(this.mrAndDssFalse) {
-      delete this.sourceColumns["k"];
-      delete this.sourceColumns["address"];
-      delete this.sourceColumns["m"];
-      delete this.sourceColumns["oD"];
-
-      this.dataSources.delete("k");
-      this.dataSources.delete("address");
-      this.dataSources.delete("m");
-      this.dataSources.delete("oD");
+      columnNamesToDelete = ['k', 'address', 'm', 'oD'];
     } else if(this.mrFalseDssTrue) {
-      delete this.sourceColumns["m"];
-      delete this.sourceColumns["oD"];
+      columnNamesToDelete = ['m', 'oD'];
+    }
 
-      this.dataSources.delete("m");
-      this.dataSources.delete("oD");
+    this.deleteColumns(columnNamesToDelete);
+  }
+
+  private deleteColumns(columnNames: string[]): void {
+    if(columnNames?.length > 0) {
+      columnNames.forEach((name: string) => {
+        delete this.sourceColumns[name];
+        this.dataSources.delete(name);
+      })
     }
   }
 
