@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {DashboardStatisticsService} from '../services/dashboard-statistics.service';
 import {RoleService} from '../services/role.service';
-import {finalize} from 'rxjs/operators';
+import {catchError, finalize} from 'rxjs/operators';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard-statistics',
@@ -13,6 +14,7 @@ import {finalize} from 'rxjs/operators';
 export class DashboardStatisticsComponent implements OnInit {
   Charts: Observable<any>;
   Counts: Observable<any>;
+  errorMessage = new Subject();
   hasRequiredRole;
   loading = true;
 
@@ -21,7 +23,8 @@ export class DashboardStatisticsComponent implements OnInit {
 
   ngOnInit(): void {
     this.hasRequiredRole = this.roleService.allowedToViewEELData();
-    this.Charts = this.dashboardStatisticsService.ChartFactory().pipe(finalize(() => this.loading = false));
+    this.Charts = this.dashboardStatisticsService.ChartFactory()
+      .pipe(catchError(this.catchErrorAndReturnArray.bind(this)), finalize(() => this.loading = false));
     this.Counts = this.dashboardStatisticsService.Counts;
   }
 
@@ -32,11 +35,8 @@ export class DashboardStatisticsComponent implements OnInit {
     };
   }
 
-  public scrollToVew(divElement: HTMLDivElement): void {
-    divElement.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-      inline: 'nearest'
-    });
+  private catchErrorAndReturnArray(error: HttpErrorResponse): [] {
+    this.errorMessage.next(error);
+    return [];
   }
 }

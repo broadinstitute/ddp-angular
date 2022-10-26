@@ -12,14 +12,14 @@ module.exports = {
     node: true,
     es6: true
   },
-  ignorePatterns: ['build', 'node_modules', 'tests-examples', '.eslintrc.js', './*.js'],
+  ignorePatterns: ['build', 'node_modules', 'tests-examples', '.eslintrc.js'],
   rules: {
     /* Code Quality */
     'curly': 'warn',
     'eqeqeq': ['warn', 'smart'],
 
     'no-unused-vars': 'off', // Needed for the below rule
-    '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '_' }],
+    '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '_', args: "none" }],
 
     'no-multi-spaces': 'warn',
 

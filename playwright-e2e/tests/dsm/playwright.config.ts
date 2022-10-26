@@ -1,17 +1,9 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
 import testConfig from 'playwright.config';
 
-/**
- * Read environment variables from .env.dsm.singular file.
- * https://github.com/motdotla/dotenv
- */
-// import path from 'path';
-// import * as dotenv from 'dotenv';
-// dotenv.config({ path: path.resolve(__dirname, '.env.dsm') });
-
-const singularConfig: PlaywrightTestConfig = {
+const dsmConfig: PlaywrightTestConfig = {
   ...testConfig,
   testDir: './'
 };
 
-export default singularConfig;
+export default dsmConfig;

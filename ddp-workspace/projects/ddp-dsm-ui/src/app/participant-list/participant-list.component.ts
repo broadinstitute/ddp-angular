@@ -121,6 +121,7 @@ export class ParticipantListComponent implements OnInit {
   savedSelectedColumns = {};
   isAddFamilyMember = false;
   hasSequencingOrders = false;
+  hasExternalShipper = false;
   showGroupFields = false;
   hideSamplesTab = false;
   showContactInformation = false;
@@ -168,7 +169,7 @@ export class ParticipantListComponent implements OnInit {
   public pageChanged(pageNumber: number, rPerPage?: number): void {
     this.loadingParticipants = true;
     this.role.getUserSetting().setRowsPerPage = rPerPage;
-    const rowsPerPage = rPerPage ? rPerPage : this.role.getUserSetting().getRowsPerPage();
+    const rowsPerPage = rPerPage ? rPerPage : this.role?.getUserSetting()?.getRowsPerPage();
     const from = (pageNumber - 1) * rowsPerPage;
     const to = pageNumber * rowsPerPage;
     if (this.viewFilter) {
@@ -276,7 +277,7 @@ export class ParticipantListComponent implements OnInit {
   }
 
   loadSettings(): void {
-    this.rowsPerPage = this.role.getUserSetting().getRowsPerPage();
+    this.rowsPerPage = this.role?.getUserSetting()?.getRowsPerPage();
     let jsonData: any;
     this.dsmService.getSettings(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe({
       next: data => {
@@ -569,6 +570,7 @@ export class ParticipantListComponent implements OnInit {
             options.push(new NameValue(kitType.name, kitType.displayName));
             if (kitType.externalShipper) {
               hasExternalShipper = true;
+              this.hasExternalShipper = true;
             }
           });
           if (optionsUpload.length > 0) {
@@ -692,6 +694,8 @@ export class ParticipantListComponent implements OnInit {
         this.orderColumns();
         this.getData();
         this.deleteFiltersAccordingToPermission();
+        this.removeUnnecessaryColumns();
+
       },
       // this.renewSelectedColumns(); commented out because if we have defaultColumns for all the studies we won't need it anymore
       error: err => {
@@ -703,6 +707,7 @@ export class ParticipantListComponent implements OnInit {
       }
     });
   }
+
 
   private deleteFiltersAccordingToPermission(): void {
     let columnNamesToDelete: string[];
@@ -731,6 +736,36 @@ export class ParticipantListComponent implements OnInit {
 
   private get mrAndDssFalse(): boolean {
     return !this.role.allowedToViewMedicalRecords() && !this.role.viewOnlyDSSData;
+
+  private removeUnnecessaryColumns(): void {
+    if(!this.hasExternalShipper) {
+      const sampleColumnFiltersToRemove = [Filter.CORRECTED_TEST,
+        Filter.RESULT_TEST, Filter.TIME_TEST, Filter.STATUS_IN,
+        Filter.STATUS_OUT, Filter.CARE_EVOLVE];
+
+      this.removeColumns('k', sampleColumnFiltersToRemove);
+    }
+
+    if(!this.hasSequencingOrders) {
+      const sampleColumnFiltersToRemove = [Filter.SEQUENCING_RESTRICTION, Filter.SAMPLE_NOTES];
+
+      delete this.sourceColumns['cl'];
+      this.dataSources.delete('cl');
+
+      this.removeColumns('k', sampleColumnFiltersToRemove);
+    }
+  }
+
+  private removeColumns(tableAlias: string, filters: Filter[]): void {
+    filters.forEach((filter: Filter) => this.removeColumnFromSourceColumns(tableAlias, filter));
+  }
+
+  private removeColumnFromSourceColumns(source: string, filter: Filter): void {
+    const index = this.sourceColumns[ source ].indexOf(filter);
+    if (index !== -1) {
+      this.sourceColumns[ source ].splice(index, 1);
+    }
+
   }
 
   private addDynamicFieldDefaultColumns(defaultColumn: any): void {
@@ -812,7 +847,7 @@ export class ParticipantListComponent implements OnInit {
   private getData(): void {
     // find viewFilter by filterName
     let defaultFilter: ViewFilter = null;
-    if (this.role.getUserSetting().defaultParticipantFilter) {
+    if (this.role.getUserSetting()?.defaultParticipantFilter) {
       defaultFilter = this.savedFilters.find(filter => filter.filterName === this.role.getUserSetting().defaultParticipantFilter);
       if (defaultFilter == null) {
         defaultFilter = this.quickFilters.find(filter => filter.filterName === this.role.getUserSetting().defaultParticipantFilter);
@@ -820,8 +855,8 @@ export class ParticipantListComponent implements OnInit {
       if (defaultFilter != null) {
         defaultFilter.selected=true;
         this.selectFilter(defaultFilter);
-      } else if (this.role.getUserSetting().defaultParticipantFilter !== ''
-        && this.role.getUserSetting().defaultParticipantFilter != null
+      } else if (this.role.getUserSetting()?.defaultParticipantFilter !== ''
+        && this.role.getUserSetting()?.defaultParticipantFilter != null
       ) {
         // eslint-disable-next-line max-len
         this.additionalMessage = 'The default filter seems to be deleted, however it is still the default filter as long as not changed in the user settings.';
@@ -885,12 +920,7 @@ export class ParticipantListComponent implements OnInit {
     }
   }
 
-  private removeColumnFromSourceColumns(source: string, filter: Filter): void {
-    const index = this.sourceColumns[ source ].indexOf(filter);
-    if (index !== -1) {
-      this.sourceColumns[ source ].splice(index, 1);
-    }
-  }
+
 
   public selectFilter(viewFilter: ViewFilter): void {
     this.resetPagination();
@@ -910,7 +940,7 @@ export class ParticipantListComponent implements OnInit {
     this.selectedPatients = [];
   }
 
-  private applyFilter(viewFilter: ViewFilter, from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage()): void {
+  private applyFilter(viewFilter: ViewFilter, from: number = 0, to: number = this.role?.getUserSetting()?.getRowsPerPage()): void {
     this.dsmService.applyFilter(viewFilter, localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
       this.parent, null, from, to, this.sortBy)
       .subscribe({
@@ -1201,7 +1231,7 @@ export class ParticipantListComponent implements OnInit {
     this.viewFilter = null;
     this.jsonPatch = null;
     this.activePage = 1;
-    this.rowsPerPage = this.role.getUserSetting().getRowsPerPage();
+    this.rowsPerPage = this.role?.getUserSetting()?.getRowsPerPage();
   }
 
   getUtilStatic(): typeof Utils {

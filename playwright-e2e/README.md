@@ -129,7 +129,19 @@ In **/tests/singular** dir, run Singular tests only:
   > `npx playwright test pre-screening-page-visual.spec.ts -u`
   - Save new screenshots and commit to GitHub
 
-- Before merging PRs, run `eslint` and `tsc build` to against changed code from project root dir, `/playwright-e2e`.
+- Before merging PR, from project root dir, `/playwright-e2e`, run `tsc build` to compile and build, then run `lint` to check formatting.
   > npm run build
   > 
   > npm run lint
+- Test fixture
+  - To understand build-in support for fixture, see https://playwright.dev/docs/test-fixtures#creating-a-fixture
+  - `homePage` in `fixtures/singular-fixture.ts` is an example of custom user-defined fixture.
+  - To use above fixture in a test, for example,
+  ```
+    import { Page } from '@playwright/test';
+    import { test } from 'fixtures/singular-fixture';
+    test('an example', async ({ page, homePage }) => {
+      await homePage.signUp();
+      ...
+    }
+  ```
