@@ -717,11 +717,11 @@ export class ParticipantListComponent implements OnInit {
 
     if(!this.hasSequencingOrders) {
       const sampleColumnFiltersToRemove = [Filter.SEQUENCING_RESTRICTION, Filter.SAMPLE_NOTES];
-      const clinicalColumnsFiltersToRemove = [Filter.CLINICAL_ORDER_STATUS, Filter.CLINICAL_ORDER_ID,
-        Filter.CLINICAL_ORDER_PDO ,Filter.CLINICAL_ORDER_DATE, Filter.CLINICAL_STATUS_DATE];
+
+      delete this.sourceColumns['cl'];
+      this.dataSources.delete('cl');
 
       this.removeColumns('k', sampleColumnFiltersToRemove);
-      this.removeColumns('cl', clinicalColumnsFiltersToRemove);
     }
   }
 
