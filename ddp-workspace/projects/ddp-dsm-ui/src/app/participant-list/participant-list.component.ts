@@ -121,6 +121,7 @@ export class ParticipantListComponent implements OnInit {
   savedSelectedColumns = {};
   isAddFamilyMember = false;
   hasSequencingOrders = false;
+  hasExternalShipper = false;
   showGroupFields = false;
   hideSamplesTab = false;
   showContactInformation = false;
@@ -569,6 +570,7 @@ export class ParticipantListComponent implements OnInit {
             options.push(new NameValue(kitType.name, kitType.displayName));
             if (kitType.externalShipper) {
               hasExternalShipper = true;
+              this.hasExternalShipper = true;
             }
           });
           if (optionsUpload.length > 0) {
@@ -691,6 +693,7 @@ export class ParticipantListComponent implements OnInit {
         }
         this.orderColumns();
         this.getData();
+        this.removeUnnecessaryColumns();
       },
       // this.renewSelectedColumns(); commented out because if we have defaultColumns for all the studies we won't need it anymore
       error: err => {
@@ -701,6 +704,36 @@ export class ParticipantListComponent implements OnInit {
         throw 'Error - Loading display settings' + err;
       }
     });
+  }
+
+  private removeUnnecessaryColumns(): void {
+    if(!this.hasExternalShipper) {
+      const sampleColumnFiltersToRemove = [Filter.CORRECTED_TEST,
+        Filter.RESULT_TEST, Filter.TIME_TEST, Filter.STATUS_IN,
+        Filter.STATUS_OUT, Filter.CARE_EVOLVE];
+
+      this.removeColumns('k', sampleColumnFiltersToRemove);
+    }
+
+    if(!this.hasSequencingOrders) {
+      const sampleColumnFiltersToRemove = [Filter.SEQUENCING_RESTRICTION, Filter.SAMPLE_NOTES];
+
+      delete this.sourceColumns['cl'];
+      this.dataSources.delete('cl');
+
+      this.removeColumns('k', sampleColumnFiltersToRemove);
+    }
+  }
+
+  private removeColumns(tableAlias: string, filters: Filter[]): void {
+    filters.forEach((filter: Filter) => this.removeColumnFromSourceColumns(tableAlias, filter));
+  }
+
+  private removeColumnFromSourceColumns(source: string, filter: Filter): void {
+    const index = this.sourceColumns[ source ].indexOf(filter);
+    if (index !== -1) {
+      this.sourceColumns[ source ].splice(index, 1);
+    }
   }
 
   private addDynamicFieldDefaultColumns(defaultColumn: any): void {
@@ -855,12 +888,7 @@ export class ParticipantListComponent implements OnInit {
     }
   }
 
-  private removeColumnFromSourceColumns(source: string, filter: Filter): void {
-    const index = this.sourceColumns[ source ].indexOf(filter);
-    if (index !== -1) {
-      this.sourceColumns[ source ].splice(index, 1);
-    }
-  }
+
 
   public selectFilter(viewFilter: ViewFilter): void {
     this.resetPagination();
