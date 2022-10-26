@@ -736,6 +736,7 @@ export class ParticipantListComponent implements OnInit {
 
   private get mrAndDssFalse(): boolean {
     return !this.role.allowedToViewMedicalRecords() && !this.role.viewOnlyDSSData;
+  }
 
   private removeUnnecessaryColumns(): void {
     if(!this.hasExternalShipper) {
