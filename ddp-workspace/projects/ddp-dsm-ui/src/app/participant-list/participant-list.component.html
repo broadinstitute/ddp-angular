@@ -168,7 +168,7 @@
                   </button>
                 </td>
                 <td>
-                  {{savedFilter.filterName}}
+                  <span (click)="selectFilter(savedFilter)" class="clickable">{{savedFilter.filterName}}</span>
                 </td>
               </tr>
             </ng-container>
@@ -190,7 +190,7 @@
                   </button>
                 </td>
                 <td>
-                  {{ savedFilter.filterName}}
+                  <span (click)="selectFilter(savedFilter)" class="clickable">{{savedFilter.filterName}}</span>
                 </td>
               </tr>
             </ng-container>

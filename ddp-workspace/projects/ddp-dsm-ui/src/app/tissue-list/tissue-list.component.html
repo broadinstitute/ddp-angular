@@ -129,31 +129,35 @@
             <ng-container *ngFor="let savedFilter of this.savedFilters; let i=index">
               <tr *ngIf="role.userID() === savedFilter.userId">
                 <td>
-          <span style="font-size: 15px; padding-right: 30px;">
-            {{savedFilter.filterName}}
-          </span>
-                  <button class="float-right" color="warn"
-                          mat-icon-button (click)="deleteView(savedFilter)">
-                    <mat-icon>
-                      <i class="fas fa-trash-alt fa-sm"></i>
-                    </mat-icon>
-                  </button>
-                  <button class="float-right"
-                          mat-icon-button [color]="savedFilter.shared ? 'accent' : 'black'"
-                          (click)="shareFilter(savedFilter, i)">
-                    <mat-icon>
-                      <i class="fas fa-share-square"></i>
-                    </mat-icon>
-                  </button>
                   <button class="float-right"
                           mat-icon-button [color]="selectedFilterName === savedFilter.filterName ? 'accent' :'black'"
                           (click)="selectFilter(savedFilter)">
-                    <mat-icon>
+                     <span style="font-size: 15px;">
                       <i class="fas fa-filter fa-sm"></i>
-                    </mat-icon>
+                     </span>
                   </button>
-
-
+                </td>
+                <td>
+                  <button class="float-right"
+                          mat-icon-button [color]="savedFilter.shared ? 'accent' : 'black'"
+                          (click)="shareFilter(savedFilter, i)">
+                    <span style="font-size: 15px;">
+                      <i class="fas fa-share-square"></i>
+                    </span>
+                  </button>
+                </td>
+                <td>
+                  <button  class="float-right" color="warn"
+                           mat-icon-button (click)="deleteView(savedFilter)">
+                    <span style="font-size: 15px;">
+                      <i class="fas fa-trash-alt fa-sm"></i>
+                    </span>
+                  </button>
+                </td>
+                <td>
+                  <span (click)="selectFilter(savedFilter)" class="clickable" style="font-size: 15px;">
+                    {{savedFilter.filterName}}
+                  </span>
                 </td>
               </tr>
             </ng-container>
@@ -167,16 +171,19 @@
             <ng-container *ngFor="let savedFilter of this.savedFilters">
               <tr *ngIf="role.userID() !== savedFilter.userId">
                 <td>
-            <span style="font-size: 15px; padding-right: 30px;">
-            {{savedFilter.filterName}}
-              </span>
                   <button class="float-right"
                           mat-icon-button [color]="selectedFilterName === savedFilter.filterName ? 'accent' :'black'"
                           (click)="selectFilter(savedFilter)">
-          <span style="font-size: 15px;">
-            <i class="fas fa-filter fa-sm"></i>
-          </span>
+                      <span style="font-size: 15px;">
+                        <i class="fas fa-filter fa-sm"></i>
+                      </span>
                   </button>
+                </td>
+                <td>
+                  <span (click)="selectFilter(savedFilter)" class="clickable" style="font-size: 15px; padding-right: 30px;">
+                    {{savedFilter.filterName}}
+                  </span>
+
                 </td>
               </tr>
             </ng-container>

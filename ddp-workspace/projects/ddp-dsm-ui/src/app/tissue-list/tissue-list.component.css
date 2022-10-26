@@ -62,4 +62,9 @@ tr {
   padding-bottom: 10px;
 }
 
+.clickable:hover {
+  color: blue;
+  cursor: pointer;
+}
+
 
