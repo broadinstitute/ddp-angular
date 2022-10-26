@@ -324,7 +324,7 @@ export class ParticipantListComponent implements OnInit {
             this.cancers.push(val);
           });
         }
-        if (jsonData.fieldSettings != null) {
+        if (jsonData.fieldSettings != null && !this.role.viewOnlyDSSData) {
           Object.keys(jsonData.fieldSettings).forEach((key) => {
             jsonData.fieldSettings[key].forEach((fieldSetting: FieldSettings) => {
               let options: Array<NameValue> = null;
@@ -693,7 +693,9 @@ export class ParticipantListComponent implements OnInit {
         }
         this.orderColumns();
         this.getData();
+        this.deleteFiltersAccordingToPermission();
         this.removeUnnecessaryColumns();
+
       },
       // this.renewSelectedColumns(); commented out because if we have defaultColumns for all the studies we won't need it anymore
       error: err => {
@@ -704,6 +706,36 @@ export class ParticipantListComponent implements OnInit {
         throw 'Error - Loading display settings' + err;
       }
     });
+  }
+
+
+  private deleteFiltersAccordingToPermission(): void {
+    let columnNamesToDelete: string[];
+
+    if(this.mrAndDssFalse) {
+      columnNamesToDelete = ['k', 'address', 'm', 'oD'];
+    } else if(this.mrFalseDssTrue) {
+      columnNamesToDelete = ['m', 'oD'];
+    }
+
+    this.deleteFilters(columnNamesToDelete);
+  }
+
+  private deleteFilters(columnNames: string[]): void {
+    if(columnNames?.length > 0) {
+      columnNames.forEach((name: string) => {
+        delete this.sourceColumns[name];
+        this.dataSources.delete(name);
+      });
+    }
+  }
+
+  private get mrFalseDssTrue(): boolean {
+    return !this.role.allowedToViewMedicalRecords() && this.role.viewOnlyDSSData;
+  }
+
+  private get mrAndDssFalse(): boolean {
+    return !this.role.allowedToViewMedicalRecords() && !this.role.viewOnlyDSSData;
   }
 
   private removeUnnecessaryColumns(): void {
@@ -734,6 +766,7 @@ export class ParticipantListComponent implements OnInit {
     if (index !== -1) {
       this.sourceColumns[ source ].splice(index, 1);
     }
+
   }
 
   private addDynamicFieldDefaultColumns(defaultColumn: any): void {
@@ -2322,14 +2355,17 @@ export class ParticipantListComponent implements OnInit {
 
   addTabColumns(): void {
     let possibleColumns: Array<Filter> = [];
-    for (const tab of this.settings['TAB']) {
-      this.dataSources.set(tab.columnName, tab.columnDisplay);
-      for (const setting of this.settings[tab.columnName]) {
-        const filter = this.createFilter(setting);
-        possibleColumns.push(...filter);
+    if((this.role.allowedToViewMedicalRecords && !this.role.viewOnlyDSSData)
+      || (!this.role.allowedToViewMedicalRecords && !this.role.viewOnlyDSSData) ) {
+      for (const tab of this.settings['TAB']) {
+        this.dataSources.set(tab.columnName, tab.columnDisplay);
+        for (const setting of this.settings[tab.columnName]) {
+          const filter = this.createFilter(setting);
+          possibleColumns.push(...filter);
+        }
+        this.sourceColumns[tab.columnName] = possibleColumns;
+        possibleColumns = [];
       }
-      this.sourceColumns[tab.columnName] = possibleColumns;
-      possibleColumns = [];
     }
   }
 

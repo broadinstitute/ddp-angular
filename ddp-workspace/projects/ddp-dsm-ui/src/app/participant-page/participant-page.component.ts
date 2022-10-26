@@ -1714,4 +1714,13 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     this.downloading = downloading;
 
   }
+
+  public get hasMrViewPermission(): boolean {
+    return this.role.allowedToViewMedicalRecords();
+  }
+
+  public get hasViewOnlyDSSDataPermission(): boolean {
+    return this.role.viewOnlyDSSData;
+  }
+
 }

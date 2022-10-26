@@ -32,6 +32,7 @@ export class RoleService {
   private _isKitUploadInvalidAddress = false;
   private _isDownloadParticipantFile = false;
   private _hasKitSequencingOrder = false;
+  private _viewOnlyDssData = false;
 
   private _userId: string;
   private _user: string;
@@ -133,6 +134,8 @@ export class RoleService {
           }
           else if (entry === 'file_download'){
             this._isDownloadParticipantFile = true;
+          } else if(entry === 'view_only_dss_data') {
+            this._viewOnlyDssData = true;
           }
         }
       }
@@ -160,10 +163,6 @@ export class RoleService {
 
   public allowedToHandleSamples(): boolean {
     return this._isShipping;
-  }
-
-  public allowedToViewMedicalRecords(): boolean {
-    return this._isMRView;
   }
 
   public allowedToViewMailingList(): boolean {
@@ -273,5 +272,13 @@ export class RoleService {
 
   public allowedToDoOrderSequencing(): boolean {
     return this._hasKitSequencingOrder;
+  }
+
+  public allowedToViewMedicalRecords(): boolean {
+    return this._isMRView;
+  }
+
+  public get viewOnlyDSSData(): boolean {
+    return this._viewOnlyDssData;
   }
 }
