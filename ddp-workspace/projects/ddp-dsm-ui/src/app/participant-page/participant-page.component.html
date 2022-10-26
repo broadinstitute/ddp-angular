@@ -715,7 +715,7 @@ participant.data.dsm['diagnosisYear'] != null">
               </ng-container>
             </tab>
 
-          <tab *ngIf="showContactInformation && (!hasMrViewPermission && hasViewOnlyDSSDataPermission)" heading="Contact Information">
+          <tab *ngIf="showContactInformation && ((hasMrViewPermission && !hasViewOnlyDSSDataPermission) || (!hasMrViewPermission && hasViewOnlyDSSDataPermission))" heading="Contact Information">
             <legend class="Group--Title">
               <div class="Float--left Width--100">
                 <ng-container *ngIf="participant && (!participant.data ||!participant.data.address)">
