@@ -16,7 +16,6 @@ import {RoleService} from '../services/role.service';
 export class ShippingSearchComponent implements OnInit {
   errorMessage: string;
   additionalMessage: string;
-  isSaved: boolean = false;
   searchValue: string = null;
   searchField: string = null;
   searching = false;
@@ -126,7 +125,6 @@ export class ShippingSearchComponent implements OnInit {
   valueChanged( value: any, parameterName: string, kitRequest: KitRequest ): void {
     let v;
 
-    
     if (typeof value === 'string') {
       kitRequest[ parameterName ] = value;
       v = value;
@@ -143,11 +141,11 @@ export class ShippingSearchComponent implements OnInit {
       );
       const patch = patch1.getPatch();
       this.currentPatchField = parameterName;
-      this.patch( patch );
+      this.patch(patch, kitRequest);
     }
   }
 
-  patch( patch: any ): void {
+  patch( patch: any, kitRequest: KitRequest): void {
     this.dsmService.patchParticipantRecord( JSON.stringify( patch ) ).subscribe( { // need to subscribe, otherwise it will not send!
       next: data => {
         this.currentPatchField = null;
@@ -157,10 +155,9 @@ export class ShippingSearchComponent implements OnInit {
           
           this.auth.logout();
         }
+      }, complete() {
+          kitRequest["saved"] = true;
       },
-      complete: () =>{
-        this.isSaved = true;
-      }
     } );
   }
 
@@ -168,10 +165,14 @@ export class ShippingSearchComponent implements OnInit {
     return this.currentPatchField === field;
   }
 
-
-  //This function only exists to hide the "Message Saved Successfully!"
-  //if someone changes the date more then once
-  changingDate(): void{
-    this.isSaved = false;
+  //Checks if a kit request has had its date saved by accessing the 
+  //field added on (input) triggers for the date-picker. 
+  isDateSaved(kitRequest: KitRequest): boolean{
+    //First check if the property has been added yet. 
+    if(kitRequest.hasOwnProperty("saved"))
+    {
+      return kitRequest["saved"];
+    }
+    return false;
   }
 }

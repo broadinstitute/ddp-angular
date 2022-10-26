@@ -144,13 +144,13 @@
                   (click)="receiveATKit(kitRequest)">Mark Received</button>
         </td>
         <td>
-          <app-field-datepicker (input)="changingDate()"
+          <app-field-datepicker (input)="kitRequest['saved'] = false"
                                 (dateChanged)="valueChanged($event, 'collectionDate', kitRequest)"
                                 [allowUnknownDay]="false" [colorDuringPatch]="isPatchedCurrently('collectionDate')"
                                 [dateString]="kitRequest.collectionDate"
                                 [showTodayButton]="true"
                                 ></app-field-datepicker>
-          <p *ngIf="isSaved">Date Saved Successfully!</p>
+          <p *ngIf="isDateSaved(kitRequest)">Date Saved Successfully!</p>
         </td>
       </tr>
       <tbody>
