@@ -18,6 +18,7 @@ references:
   study_guids: &study_guids
     "basil NA CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc circadia cmi-pancan singular brugada cmi-lms fon"
 
+anchors:
   # Job runs for PR branch only
  filter-pr-branch: &filter-pr-branch
    filters:
