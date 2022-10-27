@@ -11,7 +11,7 @@ import {ComponentHarness, HarnessLoader, HarnessQuery} from '@angular/cdk/testin
 import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
 import {MatInputHarness} from '@angular/material/input/testing';
 import {MatSortHarness, MatSortHeaderHarness} from '@angular/material/sort/testing';
-import {MatRowHarness, MatTableHarness} from '@angular/material/table/testing';
+import {MatCellHarness, MatRowHarness, MatTableHarness} from '@angular/material/table/testing';
 
 describe('CountsTableComponent',  () => {
   let fixture: ComponentFixture<CountsTableComponent>;
@@ -83,7 +83,7 @@ describe('CountsTableComponent',  () => {
 
     const matTableHarness: MatTableHarness = await getMatHarness<MatTableHarness>(MatTableHarness);
     const matRowHarnesses: MatRowHarness[] = await matTableHarness.getRows();
-    const [firstCell] = await matRowHarnesses[0].getCells();
+    const [firstCell]: MatCellHarness[] = await matRowHarnesses[0].getCells();
     const firstCellText: string = await firstCell.getText();
 
     expect(matRowHarnesses.length).toBe(1);
@@ -95,7 +95,7 @@ describe('CountsTableComponent',  () => {
    */
   it('should filter one item', async () => {
     const matRowHarnesses: MatRowHarness[] = await getTableRowsAfterFilter('mr');
-    const [firstCell] = await matRowHarnesses[0].getCells();
+    const [firstCell]: MatCellHarness[] = await matRowHarnesses[0].getCells();
     const firstCellText: string = await firstCell.getText();
 
     expect(matRowHarnesses.length).toBe(1);
@@ -108,7 +108,7 @@ describe('CountsTableComponent',  () => {
   it('should filter zero item', async () => {
     const NOT_FOUND = 'notFound';
     const matRowHarnesses: MatRowHarness[] = await getTableRowsAfterFilter(NOT_FOUND);
-    const [firstCell] = await matRowHarnesses[0].getCells();
+    const [firstCell]: MatCellHarness[] = await matRowHarnesses[0].getCells();
     const firstCellText: string = await firstCell.getText();
 
     expect(firstCellText).toBe('No data matching the filter ' + '"' + NOT_FOUND + '"');
