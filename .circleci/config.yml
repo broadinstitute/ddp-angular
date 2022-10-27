@@ -41,6 +41,7 @@ executors:
   playwright-test-executor:
     resource_class: medium+
     docker:
+      - image: broadinstitute/study-website-build:12-08-2020A
       - image: mcr.microsoft.com/playwright:v1.25.0-focal
     working_directory: *ng_workspace_path
     environment:
