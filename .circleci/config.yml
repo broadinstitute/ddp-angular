@@ -605,8 +605,12 @@ jobs:
           study_key: << parameters.study_key >>
       - run:
           working_directory: *repo_path
+          name: "Set env variable: sitePassword"
           command: |
-            echo "export sitePassword=$(./readvault.sh secret/pepper/test/v1/e2e .data.sitePassword)" >> $BASH_ENV
+            pwd
+            ls
+            echo "export sitePassword=`./readvault.sh secret/pepper/test/v1/e2e .data.sitePassword`" >> $BASH_ENV
+            # echo "export sitePassword=$(./readvault.sh secret/pepper/test/v1/e2e .data.sitePassword)" >> $BASH_ENV
       - steps: << parameters.optional_steps >>
       - run:
           working_directory: *playwright_path
@@ -617,7 +621,7 @@ jobs:
             else
               echo "export ENV=${ENVIRONMENT}" >> $BASH_ENV
             fi
-            
+
             cp "config/.env.${ENV}" .env
             cat .env | awk '{print "export " $0}' >> $BASH_ENV
             source $BASH_ENV

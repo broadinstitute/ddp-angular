@@ -8,6 +8,9 @@ export const makeRandomNum = (min = 1, max = 99): number => {
 };
 
 export const makeEmailAlias = (originalEmail: string): string => {
+  if (originalEmail.length === 0) {
+    throw Error('Email is not valid');
+  }
   const splintedEmail = originalEmail.split('@');
   const name = splintedEmail[0];
   const domain = splintedEmail[1];
