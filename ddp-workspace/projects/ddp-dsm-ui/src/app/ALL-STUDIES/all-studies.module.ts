@@ -133,7 +133,7 @@ import {
   MatrixAnswerTableComponent
 } from '../activity-data/components/matrix-answer-table.component';
 import {NoDataPipe} from '../participant-list/pipes/noData.pipe';
-import {CountsTableComponent} from '../dashboard-statistics/components/cards-table/counts-table.component';
+import {CountsTableComponent} from '../dashboard-statistics/components/counts-table/counts-table.component';
 import {MatSortModule} from '@angular/material/sort';
 
 

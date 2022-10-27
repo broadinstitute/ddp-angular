@@ -10,7 +10,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 
 @Component({
-  selector: 'app-cards-table',
+  selector: 'app-counts-table',
   templateUrl: 'counts-table.component.html',
   styleUrls: ['counts-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
