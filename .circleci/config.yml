@@ -18,6 +18,20 @@ references:
   study_guids: &study_guids
     "basil NA CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc circadia cmi-pancan singular brugada cmi-lms fon"
 
+  # Job runs for PR branch only
+ filter-pr-branch: &filter-pr-branch
+   filters:
+     tags:
+       ignore: /.*/
+     branches:
+       ignore: develop
+
+  filter-develop-branch: &filter-develop-branch
+    filters:
+      branches:
+        only:
+          - develop
+
 # Container for all the builds
 executors:
   build-executor:
@@ -566,6 +580,9 @@ jobs:
   playwright-e2e-test:
     executor: playwright-test-executor
     parameters:
+      study_key:
+        type: string
+        default: singular
       env_name:
         description: Must be one of "dev", "test", "staging"
         default: dev
@@ -576,6 +593,9 @@ jobs:
         default: all
         type: enum
         enum: [ all, nightly ]
+      optional_steps:
+        type: steps
+        default: [ ]
       parallel_num:
         type: integer
         default: 1
@@ -583,7 +603,9 @@ jobs:
     steps:
       - setup-build-workspace
       - setup-shared-env:
-          study_key: << pipeline.parameters.study_key >>
+          study_key: << parameters.study_key >>
+      - steps: << parameters.optional_steps >>
+      - set-deployment-environment
       - run:
           working_directory: *playwright_path
           name: "See playwright_path dir"
@@ -695,25 +717,30 @@ workflows:
         - app-run-tests-job
 
   playwright-e2e-test-workflow:
-    # Run Playwright tests for study specified in CircleCI api call
+    # PR branch only: Triggered manually by CircleCI API call.
+    # Run Playwright tests against Dev env to ensure tests are running without any failure.
     when:
       and:
         - equal: ["run-e2e-test", << pipeline.parameters.api_call >>]
-        - not:
-            equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
     jobs:
-      - playwright-e2e-test: # Test out new job. Remove before merge
-          env_name: test
+      - playwright-e2e-test:
+          <<: *filter-pr-branch
+          env_name: dev
           test_suite: all
 
   build-and-deploy-all-apps-workflow:
+    # Develop branch only: Triggered automatically when PR merge into develop branch
     unless: << pipeline.parameters.do-builds >>
     jobs:
       - conditionally-launch-build-and-deploy-all-job:
-          filters:
-            branches:
-              only:
-                - develop
+          <<: *filter-develop-branch
+      - playwright-e2e-test:
+          # Run Playwright tests against Dev env after deploy
+          <<: *filter-develop-branch
+          env_name: dev
+          test_suite: all
+          requires:
+            - conditionally-launch-build-and-deploy-all-job
 
   build-and-deploy-workflow:
     when:
@@ -817,8 +844,12 @@ workflows:
           <<: *deploy_branch_filters
           study_key: fon
       - playwright-e2e-test:
-          <<: *deploy_branch_filters
-          env_name: test
+          filters:
+            branches:
+              only:
+                - test
+                - staging
+          env_name: << pipeline.parameters.deploy_env >>
           test_suite: all
           requires:
             - deploy-singular-app
