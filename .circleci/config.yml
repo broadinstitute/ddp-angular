@@ -804,6 +804,7 @@ workflows:
           <<: *deploy_branch_filters
           study_key: pancan
       - deploy-stored-build-job:
+          name: deploy-singular-app
           <<: *deploy_branch_filters
           study_key: singular
       - deploy-stored-build-job:
@@ -815,6 +816,12 @@ workflows:
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: fon
+      - playwright-e2e-test:
+          <<: *deploy_branch_filters
+          env_name: test
+          test_suite: all
+          requires:
+            - deploy-singular-app
 
   nightly:
     triggers:
