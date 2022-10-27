@@ -8,6 +8,8 @@ import _ from 'lodash';
 import { STATES } from 'data/constants';
 import { makeRandomTelephone } from './string-utils';
 
+const { singularSitePassword, sitePassword } = process.env;
+
 export async function waitUntilRemoved(locator: Locator): Promise<void> {
   expect(await locator.count()).toHaveLength(0);
 }
@@ -111,8 +113,11 @@ export async function enterMailingAddress(
  */
 export async function fillSitePassword(
   page: Page,
-  password: string = process.env.singularSitePassword as string
+  password = singularSitePassword ? singularSitePassword : sitePassword
 ): Promise<void> {
+  if (password === undefined) {
+    throw Error('Require env variable for Site Password. It is not defined.');
+  }
   await page.locator('input[type="password"]').fill(password);
   await Promise.all([page.waitForNavigation(), page.locator('button >> text=Submit').click()]);
 }

@@ -603,17 +603,25 @@ jobs:
       - setup-build-workspace
       - setup-shared-env:
           study_key: << parameters.study_key >>
-      - steps: << parameters.optional_steps >>
+      - run:
+          command: |
+            echo "export ENV=<< parameters.env_name >>" >> $BASH_ENV
+      - steps:
+          - << parameters.optional_steps >>
+          # - echo "export ENV=${ENVIRONMENT}" >> $BASH_ENV
       - run:
           working_directory: *playwright_path
           name: "Set playwright-e2e .env and export environment variables"
           command: |
-            cp "config/.env.<< parameters.env_name >>" .env
+            if [[ ! "${ENVIRONMENT}" ]]; then
+              echo "export ENV=<< parameters.env_name >>" >> $BASH_ENV
+            elif
+              echo "export ENV=${ENVIRONMENT}" >> $BASH_ENV
+            fi
+            echo "ENV=${ENV}"
+            cp "config/.env.${ENV}" .env
             cat .env | awk '{print "export " $0}' >> $BASH_ENV
             source $BASH_ENV
-
-            # REMOVE
-            cat .env
       - run:
           working_directory: *playwright_path
           name: Install NPM packages
@@ -646,11 +654,11 @@ jobs:
                 command: npx playwright test --config=playwright-ci.config.ts --grep "nightly/"
       # File paths are relative and defined in playwright.config.ts Reporter section
       - store_test_results:
-          path: test-results/junit
+          path: ../test-results/junit
       - store_artifacts:
-          path: test-results
+          path: ../test-results
       - store_artifacts:
-          path: html-test-results
+          path: ../html-test-results
 
 parameters:
   study_key:
@@ -709,11 +717,14 @@ workflows:
         - app-run-tests-job
 
   playwright-e2e-test-workflow:
-    # PR branch only: Triggered manually by CircleCI API call.
-    # Run Playwright tests against Dev env to ensure tests are running without any failure.
+    # PR branch only:
+    # Trigger manually by CircleCI API call via run_ci.sh
+    # Run Playwright tests against Dev env to ensure tests are running without failure.
     when:
       and:
         - equal: ["run-e2e-test", << pipeline.parameters.api_call >>]
+        - not:
+            equal: [ "UNKNOWN", << pipeline.parameters.study_key >> ]
     jobs:
       - playwright-e2e-test:
           <<: *filter-pr-branch
@@ -721,18 +732,12 @@ workflows:
           test_suite: all
 
   build-and-deploy-all-apps-workflow:
-    # Develop branch only: Triggered automatically when PR merge into develop branch
+    # Develop branch only:
+    # Trigger automatically when PR merge into develop branch
     unless: << pipeline.parameters.do-builds >>
     jobs:
       - conditionally-launch-build-and-deploy-all-job:
           <<: *filter-develop-branch
-      - playwright-e2e-test:
-          # Run Playwright tests against Dev env after deploy
-          <<: *filter-develop-branch
-          env_name: dev
-          test_suite: all
-          requires:
-            - conditionally-launch-build-and-deploy-all-job
 
   build-and-deploy-workflow:
     when:
@@ -747,6 +752,17 @@ workflows:
               ignore:
                 - /^rc.*/
                 - /^hotfix.*/
+      - playwright-e2e-test:
+          # Run Playwright tests against Dev env after deploy changed apps (any study)
+          filters:
+            branches:
+              ignore:
+                - /^rc.*/
+                - /^hotfix.*/
+          env_name: dev
+          test_suite: all
+          requires:
+            - build-and-deploy-job
 
   launch-all-app-builds-workflow:
     # using do-builds param to select which of the two workflows using the build-on-tag-filters
