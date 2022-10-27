@@ -606,9 +606,7 @@ jobs:
       - run:
           command: |
             echo "export ENV=<< parameters.env_name >>" >> $BASH_ENV
-      - steps:
-          - << parameters.optional_steps >>
-          # - echo "export ENV=${ENVIRONMENT}" >> $BASH_ENV
+      - steps: << parameters.optional_steps >>
       - run:
           working_directory: *playwright_path
           name: "Set playwright-e2e .env and export environment variables"
