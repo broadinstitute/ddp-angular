@@ -680,9 +680,19 @@ workflows:
               equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
       jobs:
         - app-run-tests-job
-        - playwright-e2e-test: # Test out new job. Remove before merge
-            env_name: "test"
-            test_suite: "all"
+
+  playwright-test-workflow:
+    # Run Playwright tests for study specified in api call
+    when:
+      and:
+        - equal: ["run-tests", << pipeline.parameters.api_call >>]
+        - not:
+            equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
+    jobs:
+      - app-run-tests-job
+      - playwright-e2e-test: # Test out new job. Remove before merge
+          env_name: "test"
+          test_suite: "all"
 
   build-and-deploy-all-apps-workflow:
     unless: << pipeline.parameters.do-builds >>
