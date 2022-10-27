@@ -604,8 +604,9 @@ jobs:
       - setup-shared-env:
           study_key: << parameters.study_key >>
       - run:
+          working_directory: *repo_path
           command: |
-            echo "export ENV=<< parameters.env_name >>" >> $BASH_ENV
+            echo "export sitePassword=$(./readvault.sh secret/pepper/test/v1/e2e .data.sitePassword)" >> $BASH_ENV
       - steps: << parameters.optional_steps >>
       - run:
           working_directory: *playwright_path
@@ -616,7 +617,7 @@ jobs:
             else
               echo "export ENV=${ENVIRONMENT}" >> $BASH_ENV
             fi
-            echo "ENV=${ENV}"
+            
             cp "config/.env.${ENV}" .env
             cat .env | awk '{print "export " $0}' >> $BASH_ENV
             source $BASH_ENV
@@ -652,11 +653,11 @@ jobs:
                 command: npx playwright test --config=playwright-ci.config.ts --grep "nightly/"
       # File paths are relative and defined in playwright.config.ts Reporter section
       - store_test_results:
-          path: ../test-results/junit
+          path: ../playwright-e2e/test-results/junit
       - store_artifacts:
-          path: ../test-results
+          path: ../playwright-e2e/test-results
       - store_artifacts:
-          path: ../html-test-results
+          path: ../playwright-e2e/html-test-results
 
 parameters:
   study_key:
