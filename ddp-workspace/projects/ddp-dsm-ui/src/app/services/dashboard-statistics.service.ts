@@ -4,6 +4,7 @@ import {DSMService} from './dsm.service';
 import {LocalStorageService} from './localStorage.service';
 import {finalize, map} from 'rxjs/operators';
 import {Observable, Subject} from 'rxjs';
+import {CountsModel} from "../dashboard-statistics/models/Counts.model";
 
 @Injectable()
 export class DashboardStatisticsService {
@@ -14,7 +15,7 @@ export class DashboardStatisticsService {
 
 
   public ChartFactory(): Observable<any> {
-    const onlyCounts = [];
+    let onlyCounts: CountsModel[] = [];
     return this.dsmService.getDashboardData(this.localStorageService.selectedRealm)
       .pipe(
         map(data => {
