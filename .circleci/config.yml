@@ -613,7 +613,7 @@ jobs:
           command: |
             if [[ ! "${ENVIRONMENT}" ]]; then
               echo "export ENV=<< parameters.env_name >>" >> $BASH_ENV
-            elif
+            else
               echo "export ENV=${ENVIRONMENT}" >> $BASH_ENV
             fi
             echo "ENV=${ENV}"
