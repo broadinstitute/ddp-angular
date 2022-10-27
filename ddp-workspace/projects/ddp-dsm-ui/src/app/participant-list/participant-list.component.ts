@@ -1065,6 +1065,7 @@ export class ParticipantListComponent implements OnInit {
   }
 
   public clearFilter(): void {
+    this.setSelectedFilterName('');
     this.start = new Date().getTime();
     this.filterQuery = null;
     this.resetSelectedPatients();
