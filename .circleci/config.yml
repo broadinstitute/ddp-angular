@@ -628,8 +628,8 @@ jobs:
               echo "2"
               echo "export ENV=${ENVIRONMENT}" >> $BASH_ENV
             fi
-
-            cp config/.env.${ENV} .env
+            source $BASH_ENV
+            cp "config/.env.${ENV}" .env
             cat .env | awk '{print "export " $0}' >> $BASH_ENV
             source $BASH_ENV
       - run:
