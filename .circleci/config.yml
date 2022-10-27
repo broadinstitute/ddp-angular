@@ -41,8 +41,8 @@ executors:
   playwright-test-executor:
     resource_class: medium+
     docker:
-      - image: broadinstitute/study-website-build:12-08-2020A
       - image: mcr.microsoft.com/playwright:v1.25.0-focal
+      - image: broadinstitute/study-website-build:12-08-2020A
     working_directory: *ng_workspace_path
     environment:
       NODE_ENV: development # Needed if playwright is in devDependencies
@@ -645,7 +645,7 @@ jobs:
       - run:
           working_directory: *playwright_path
           name: Install Playwright browsers dependencies
-          command: npx playwright install --with-deps "chromium"
+          command: npx playwright install --with-deps chromium
       - when:
           condition:
             equal: [ all, << parameters.test_suite >> ]
