@@ -667,7 +667,7 @@ parameters:
     default: "UNKNOWN"
   api_call:
     type: enum
-    enum: ["build-and-store","deploy", "run-tests", "UNKNOWN"]
+    enum: ["build-and-store","deploy", "run-tests", "run-e2e-test", "UNKNOWN"]
     default: "UNKNOWN"
   deploy_env:
     type: enum
