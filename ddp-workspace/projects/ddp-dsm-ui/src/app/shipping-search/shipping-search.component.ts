@@ -1,12 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {ScanValue} from '../scan/scan.model';
-import {Auth} from '../services/auth.service';
-import {ComponentService} from '../services/component.service';
-import {PatchUtil} from '../utils/patch.model';
-import {Statics} from '../utils/statics';
-import {DSMService} from '../services/dsm.service';
-import {KitRequest} from '../shipping/shipping.model';
-import {RoleService} from '../services/role.service';
+import { Component, OnInit } from '@angular/core';
+import { ScanValue } from '../scan/scan.model';
+import { Auth } from '../services/auth.service';
+import { ComponentService } from '../services/component.service';
+import { PatchUtil } from '../utils/patch.model';
+import { Statics } from '../utils/statics';
+import { DSMService } from '../services/dsm.service';
+import { KitRequest } from '../shipping/shipping.model';
+import { RoleService } from '../services/role.service';
+import { range } from 'express/lib/request';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-shipping-search',
@@ -122,57 +124,47 @@ export class ShippingSearchComponent implements OnInit {
   }
 
   //Triggers when user finishes typing
-  valueChanged( value: any, parameterName: string, kitRequest: KitRequest ): void {
-    let v;
-
+  valueChanged(value: any, parameterName: string, kitRequest: KitRequest): void {
     if (typeof value === 'string') {
-      kitRequest[ parameterName ] = value;
-      v = value;
+      kitRequest[parameterName] = value;
     }
-    if (v != null) {
+  }
+
+  patch(patch: any, kitRequest: KitRequest): Observable<any> {
+    return this.dsmService.patchParticipantRecord(JSON.stringify(patch));
+  }
+
+  //Fires when user clicks "Save Date" button. Returns true
+  //if the promise succeeds and the server successfukky writes and
+  //returns and error if the server write fails.
+  saveDate(kitRequest: KitRequest): any {
+    return async () => {
       const realm: string = kitRequest.realm;
       const patch1 = new PatchUtil(
         kitRequest.dsmKitRequestId, this.role.userMail(),
         {
-          name: parameterName,
-          value: v
+          name: "collectionDate",
+          value: kitRequest.collectionDate
         }, null, 'dsmKitRequestId', kitRequest.dsmKitRequestId,
         'kit', null, realm, kitRequest.participantId
       );
       const patch = patch1.getPatch();
-      this.currentPatchField = parameterName;
-      this.patch(patch, kitRequest);
-    }
-  }
-
-  patch( patch: any, kitRequest: KitRequest): void {
-    this.dsmService.patchParticipantRecord( JSON.stringify( patch ) ).subscribe( { // need to subscribe, otherwise it will not send!
+      this.currentPatchField = "collectionDate";
+      return new Promise<boolean>((resolve, reject) => {
+        this.patch(patch, kitRequest).subscribe({ // need to subscribe, otherwise it will not send!
       next: data => {
         this.currentPatchField = null;
+            resolve(true);
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           
           this.auth.logout();
         }
-      }, complete() {
-          kitRequest["saved"] = true;
+            reject(err);
       },
-    } );
+        });
+    });
   }
-
-  isPatchedCurrently( field: string ): boolean {
-    return this.currentPatchField === field;
-  }
-
-  //Checks if a kit request has had its date saved by accessing the 
-  //field added on (input) triggers for the date-picker. 
-  isDateSaved(kitRequest: KitRequest): boolean{
-    //First check if the property has been added yet. 
-    if(kitRequest.hasOwnProperty("saved"))
-    {
-      return kitRequest["saved"];
-    }
-    return false;
   }
 }

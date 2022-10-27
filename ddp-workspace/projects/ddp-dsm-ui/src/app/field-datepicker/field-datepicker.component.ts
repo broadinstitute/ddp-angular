@@ -1,16 +1,16 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { timeout } from 'rxjs';
 import { Utils } from '../utils/utils';
 import { EstimatedDate } from './field-datepicker.model';
 
 @Component({
   selector: 'app-field-datepicker',
   templateUrl: './field-datepicker.component.html',
-  styleUrls: [ './field-datepicker.component.css' ]
+  styleUrls: ['./field-datepicker.component.css']
 })
 export class FieldDatepickerComponent implements OnInit, OnChanges {
   @Input() dateString: string;
   @Input() disabled = false;
-  @Input() colorDuringPatch = false;
   @Input() showTodayButton = true;
   @Input() showNAButton = false;
   @Input() showNotFoundButton = false;
@@ -20,7 +20,11 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
   @Input() addCheckboxEstimated = false;
   @Input() showCalendarButton = true;
   @Input() fieldName: string;
+  @Input() showSaveBtn: boolean = false;
+  @Input() saveSucceeded: boolean = false;
+  @Input() dateSaved: any;
   @Output() dateChanged = new EventEmitter();
+  
 
   _dateString: string;
   defaultDate = '1000-01-01';
@@ -28,7 +32,10 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
   estimated = false;
   datePicker: Date;
   showDatePicker = false;
+  hasDateChanged = false;
+  saveButtonText = 'Save Date';
   isNA = false;
+  isSaved = false;
 
   constructor(private util: Utils) {
   }
@@ -69,7 +76,7 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
           tmpDate = tmpDate + '-01-01';
           this._dateString = dateString;
         } else if (dateString.includes('T')) {
-            this._dateString = Utils.getDateFormatted(Utils.getDate(dateString.split('T')[0]), this.dateFormat);
+          this._dateString = Utils.getDateFormatted(Utils.getDate(dateString.split('T')[0]), this.dateFormat);
         } else {
           this._dateString = Utils.getDateFormatted(this.datePicker, this.dateFormat);
         }
@@ -83,43 +90,56 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
   }
 
   public check(): void {
-    this.colorDuringPatch = true;
-    if (this._dateString != null) {
-      if (this._dateString === '') {
-        this.emitDate('');
-      } else {
-        if (this._dateString !== 'N/A' && this._dateString !== 'Not Found') {
-          const tmp = Utils.parseDate(this._dateString, this.dateFormat, this.allowUnknownDay);
-          // console.log(tmp);
-          if (tmp instanceof Date) {
-            this.datePicker = tmp;
-            if (this.datePicker != null) {
-              this.emitDate(Utils.getDateFormatted(this.datePicker, Utils.DATE_STRING));
-              this.colorDuringPatch = false;
-              this.error = null;
-            } else {
-              this.error = this.dateFormat;
-            }
-          } else if (tmp === Utils.DATE_PARTIAL) {
+    if (this._dateString === '') {
+      this.emitDate('');
+    } else {
+      if (this._dateString !== 'N/A' && this._dateString !== 'Not Found') {
+        const tmp = Utils.parseDate(this._dateString, this.dateFormat, this.allowUnknownDay);
+        // console.log(tmp);
+        if (tmp instanceof Date) {
+          this.hasDateChanged = (this.datePicker !== tmp);
+          this.datePicker = tmp;
+          if (this.datePicker != null) {
+            this.emitDate(Utils.getDateFormatted(this.datePicker, Utils.DATE_STRING));
             this.error = null;
-            this.emitDate(Utils.getPartialDateFormatted(this._dateString, this.dateFormat));
-            this.colorDuringPatch = false;
-          } else if (tmp == null) {
+          } else {
             this.error = this.dateFormat;
           }
+        } else if (tmp === Utils.DATE_PARTIAL) {
+          this.error = null;
+          this.emitDate(Utils.getPartialDateFormatted(this._dateString, this.dateFormat));
+          this.hasDateChanged = false;
+        } else if (tmp == null) {
+          this.error = this.dateFormat;
         }
       }
-    } else {
-      this.colorDuringPatch = false;
-      this.error = null;
     }
+  }
+
+  private async saveDate(e: Event): Promise<void>{
+    this.saveButtonText = "Saving..."
+    try{
+      this.isSaved = await this.dateSaved();
+      this.saveButtonText = this.isSaved ? "Success!": "Failed";
+      this.hasDateChanged = false;
+    }
+    catch(e){
+        this.saveButtonText = "Failed";
+        console.log(e)
+    }
+    setTimeout(() => {
+      this.saveButtonText = "Save Date"
+    },5000);
   }
 
   public selectDate(event: any): void {
     this.showDatePicker = false;
     this.datePicker = event;
     if (this.datePicker instanceof Date) {
-      this._dateString = Utils.getDateFormatted(this.datePicker, this.dateFormat); // show user date in the format from the user settings
+      //Compare new Value to existing value for color changing
+      let newDate = Utils.getDateFormatted(this.datePicker, this.dateFormat);
+      this.hasDateChanged = (newDate !== this._dateString);
+      this._dateString = newDate; // show user date in the format from the user settings
       this.emitDate(Utils.getDateFormatted(this.datePicker, Utils.DATE_STRING));
     }
   }
