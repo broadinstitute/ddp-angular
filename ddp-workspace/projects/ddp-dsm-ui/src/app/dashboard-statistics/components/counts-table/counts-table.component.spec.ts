@@ -149,7 +149,7 @@ describe('CountsTableComponent',  () => {
 
   /**
    * @type T should specify the type of the material component harness, which you want to query
-   * @param component should specify which material component harness you want to query
+   * @param matHarnessComponent should specify which material component harness you want to query
    * @return material harness component that you have specified as a type and parameter
    */
   const getMatHarness = async <T extends ComponentHarness>(matHarnessComponent: HarnessQuery<T>): Promise<T> =>
