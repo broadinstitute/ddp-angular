@@ -4,6 +4,7 @@ import {DashboardStatisticsService} from '../services/dashboard-statistics.servi
 import {RoleService} from '../services/role.service';
 import {catchError, finalize} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
+import {CountsModel} from './models/Counts.model';
 
 @Component({
   selector: 'app-dashboard-statistics',
@@ -13,7 +14,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 
 export class DashboardStatisticsComponent implements OnInit {
   Charts: Observable<any>;
-  Counts: Observable<any>;
+  Counts: Observable<CountsModel[]>;
   errorMessage = new Subject();
   hasRequiredRole;
   loading = true;

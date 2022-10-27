@@ -121,6 +121,7 @@ export class ParticipantListComponent implements OnInit {
   savedSelectedColumns = {};
   isAddFamilyMember = false;
   hasSequencingOrders = false;
+  hasExternalShipper = false;
   showGroupFields = false;
   hideSamplesTab = false;
   showContactInformation = false;
@@ -323,7 +324,7 @@ export class ParticipantListComponent implements OnInit {
             this.cancers.push(val);
           });
         }
-        if (jsonData.fieldSettings != null) {
+        if (jsonData.fieldSettings != null && !this.role.viewOnlyDSSData) {
           Object.keys(jsonData.fieldSettings).forEach((key) => {
             jsonData.fieldSettings[key].forEach((fieldSetting: FieldSettings) => {
               let options: Array<NameValue> = null;
@@ -569,6 +570,7 @@ export class ParticipantListComponent implements OnInit {
             options.push(new NameValue(kitType.name, kitType.displayName));
             if (kitType.externalShipper) {
               hasExternalShipper = true;
+              this.hasExternalShipper = true;
             }
           });
           if (optionsUpload.length > 0) {
@@ -691,6 +693,9 @@ export class ParticipantListComponent implements OnInit {
         }
         this.orderColumns();
         this.getData();
+        this.deleteFiltersAccordingToPermission();
+        this.removeUnnecessaryColumns();
+
       },
       // this.renewSelectedColumns(); commented out because if we have defaultColumns for all the studies we won't need it anymore
       error: err => {
@@ -701,6 +706,67 @@ export class ParticipantListComponent implements OnInit {
         throw 'Error - Loading display settings' + err;
       }
     });
+  }
+
+
+  private deleteFiltersAccordingToPermission(): void {
+    let columnNamesToDelete: string[];
+
+    if(this.mrAndDssFalse) {
+      columnNamesToDelete = ['k', 'address', 'm', 'oD'];
+    } else if(this.mrFalseDssTrue) {
+      columnNamesToDelete = ['m', 'oD'];
+    }
+
+    this.deleteFilters(columnNamesToDelete);
+  }
+
+  private deleteFilters(columnNames: string[]): void {
+    if(columnNames?.length > 0) {
+      columnNames.forEach((name: string) => {
+        delete this.sourceColumns[name];
+        this.dataSources.delete(name);
+      });
+    }
+  }
+
+  private get mrFalseDssTrue(): boolean {
+    return !this.role.allowedToViewMedicalRecords() && this.role.viewOnlyDSSData;
+  }
+
+  private get mrAndDssFalse(): boolean {
+    return !this.role.allowedToViewMedicalRecords() && !this.role.viewOnlyDSSData;
+  }
+
+  private removeUnnecessaryColumns(): void {
+    if(!this.hasExternalShipper) {
+      const sampleColumnFiltersToRemove = [Filter.CORRECTED_TEST,
+        Filter.RESULT_TEST, Filter.TIME_TEST, Filter.STATUS_IN,
+        Filter.STATUS_OUT, Filter.CARE_EVOLVE];
+
+      this.removeColumns('k', sampleColumnFiltersToRemove);
+    }
+
+    if(!this.hasSequencingOrders) {
+      const sampleColumnFiltersToRemove = [Filter.SEQUENCING_RESTRICTION, Filter.SAMPLE_NOTES];
+
+      delete this.sourceColumns['cl'];
+      this.dataSources.delete('cl');
+
+      this.removeColumns('k', sampleColumnFiltersToRemove);
+    }
+  }
+
+  private removeColumns(tableAlias: string, filters: Filter[]): void {
+    filters.forEach((filter: Filter) => this.removeColumnFromSourceColumns(tableAlias, filter));
+  }
+
+  private removeColumnFromSourceColumns(source: string, filter: Filter): void {
+    const index = this.sourceColumns[ source ].indexOf(filter);
+    if (index !== -1) {
+      this.sourceColumns[ source ].splice(index, 1);
+    }
+
   }
 
   private addDynamicFieldDefaultColumns(defaultColumn: any): void {
@@ -855,12 +921,7 @@ export class ParticipantListComponent implements OnInit {
     }
   }
 
-  private removeColumnFromSourceColumns(source: string, filter: Filter): void {
-    const index = this.sourceColumns[ source ].indexOf(filter);
-    if (index !== -1) {
-      this.sourceColumns[ source ].splice(index, 1);
-    }
-  }
+
 
   public selectFilter(viewFilter: ViewFilter): void {
     this.resetPagination();
@@ -2295,14 +2356,17 @@ export class ParticipantListComponent implements OnInit {
 
   addTabColumns(): void {
     let possibleColumns: Array<Filter> = [];
-    for (const tab of this.settings['TAB']) {
-      this.dataSources.set(tab.columnName, tab.columnDisplay);
-      for (const setting of this.settings[tab.columnName]) {
-        const filter = this.createFilter(setting);
-        possibleColumns.push(...filter);
+    if((this.role.allowedToViewMedicalRecords && !this.role.viewOnlyDSSData)
+      || (!this.role.allowedToViewMedicalRecords && !this.role.viewOnlyDSSData) ) {
+      for (const tab of this.settings['TAB']) {
+        this.dataSources.set(tab.columnName, tab.columnDisplay);
+        for (const setting of this.settings[tab.columnName]) {
+          const filter = this.createFilter(setting);
+          possibleColumns.push(...filter);
+        }
+        this.sourceColumns[tab.columnName] = possibleColumns;
+        possibleColumns = [];
       }
-      this.sourceColumns[tab.columnName] = possibleColumns;
-      possibleColumns = [];
     }
   }
 

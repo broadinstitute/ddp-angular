@@ -8,7 +8,6 @@ import EnrollMyAdultDependentPage from 'pages/singular/enrollment/enroll-my-adul
 import { makeEmailAlias } from 'utils/string-utils';
 import { WHO } from 'data/constants';
 
-
 async function signUp(page: Page) {
   await signMeUp(page);
 
@@ -30,9 +29,11 @@ async function getEnrollMyAdultDependentPage(page: Page) {
 }
 
 test.describe('Adult Dependent visual tests', () => {
-
   // whoHasVentricleHeartDefect validation: Select `someone else` should trigger an error message
-  test('select a "Someone else" option for adult dependent @visual @enrollment @singular', async ({ page, homePage }) => {
+  test('select a "Someone else" option for adult dependent @visual @enrollment @singular', async ({
+    page,
+    homePage
+  }) => {
     await homePage.signUp();
     await signUp(page);
     const enrollMyAdultDependentPage = await getEnrollMyAdultDependentPage(page);
@@ -43,17 +44,18 @@ test.describe('Adult Dependent visual tests', () => {
 
     await whoHasVentricleHeartDefect.check(WHO.SomeoneElse);
     await expect(whoHasVentricleHeartDefect.errorMessage()).toContainText(
-      'Only an individual with single ventricle heart defect or immediate family members of an individual with single ventricle heart defect can be enrolled.'
+      'Only an individual with single ventricle heart defect or immediate family members of an individual with ' +
+        'single ventricle heart defect can be enrolled.'
     );
 
-    let screenshotError = await whoHasVentricleHeartDefect.toLocator().screenshot();
+    const screenshotError = await whoHasVentricleHeartDefect.toLocator().screenshot();
     expect(screenshotError).toMatchSnapshot('whoHasVentricleHeartDefect-error-message.png');
 
     // Clear the error message by select `The dependant being enrolled`
     await whoHasVentricleHeartDefect.uncheck(WHO.SomeoneElse);
     await whoHasVentricleHeartDefect.check(WHO.TheDependantBeingEnrolled);
     await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
-    let screenshotSuccess = await whoHasVentricleHeartDefect.toLocator().screenshot();
+    const screenshotSuccess = await whoHasVentricleHeartDefect.toLocator().screenshot();
     expect(screenshotSuccess).toMatchSnapshot('whoHasVentricleHeartDefect-no-errors.png');
   });
 
@@ -69,16 +71,20 @@ test.describe('Adult Dependent visual tests', () => {
     // Enter an invalid age
     await age.fill('2');
     await enrollMyAdultDependentPage.next();
-    let screenshotInvalidAge = await age.toQuestion().screenshot();
+    const screenshotInvalidAge = await age.toQuestion().screenshot();
     expect(screenshotInvalidAge).toMatchSnapshot('age-invalid-error-message.png');
     // Enter a valid age
     await age.fill('58');
     await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
-    let screenshotValidAge = await age.toQuestion().screenshot();
+    const screenshotValidAge = await age.toQuestion().screenshot();
     expect(screenshotValidAge).toMatchSnapshot('age-valid.png');
   });
 
-  test('should validate `Does your dependent have a cognitive impairment` question @visual @enrollment @singular', async ({ page, homePage }) => {
+  // eslint-disable-next-line max-len
+  test('should validate `Does your dependent have a cognitive impairment` question @visual @enrollment @singular', async ({
+    page,
+    homePage
+  }) => {
     await homePage.signUp();
     await signUp(page);
     const enrollMyAdultDependentPage = await getEnrollMyAdultDependentPage(page);
@@ -89,16 +95,16 @@ test.describe('Adult Dependent visual tests', () => {
 
     await cognitiveImpairmentQuestion.check('No');
     await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
-    let screenshotAgeOfMajorityError = await age.toQuestion().screenshot();
+    const screenshotAgeOfMajorityError = await age.toQuestion().screenshot();
     expect(screenshotAgeOfMajorityError).toMatchSnapshot('age-of-majority-error-message.png');
-    let screenshotCognitiveImpairmentNoAnswer = await cognitiveImpairmentQuestion.toLocator().screenshot();
+    const screenshotCognitiveImpairmentNoAnswer = await cognitiveImpairmentQuestion.toLocator().screenshot();
     expect(screenshotCognitiveImpairmentNoAnswer).toMatchSnapshot('cognitive-impairment-no-answer.png');
 
     await cognitiveImpairmentQuestion.check('Yes');
     await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
-    let screenshotCognitiveImpairment = await age.toQuestion().screenshot();
+    const screenshotCognitiveImpairment = await age.toQuestion().screenshot();
     expect(screenshotCognitiveImpairment).toMatchSnapshot('age-without-errors.png');
-    let screenshotCognitiveImpairmentYesAnswer = await cognitiveImpairmentQuestion.toLocator().screenshot();
+    const screenshotCognitiveImpairmentYesAnswer = await cognitiveImpairmentQuestion.toLocator().screenshot();
     expect(screenshotCognitiveImpairmentYesAnswer).toMatchSnapshot('cognitive-impairment-yes-answer.png');
   });
 });
