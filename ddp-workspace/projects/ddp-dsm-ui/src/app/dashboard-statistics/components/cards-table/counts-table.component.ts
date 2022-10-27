@@ -4,10 +4,10 @@ import {
   Component,
   Input,
   ViewChild
-} from "@angular/core";
-import {CountsModel} from "../../models/Counts.model";
-import {MatTableDataSource} from "@angular/material/table";
-import {MatSort} from "@angular/material/sort";
+} from '@angular/core';
+import {CountsModel} from '../../models/Counts.model';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-cards-table',
@@ -22,7 +22,7 @@ export class CountsTableComponent  implements AfterViewInit {
 
   @Input('counts') set setCounts(counts: CountsModel[]) {
     this.CountsArray = new MatTableDataSource<CountsModel>(counts);
-  };
+  }
 
   @ViewChild(MatSort) sort: MatSort;
 
