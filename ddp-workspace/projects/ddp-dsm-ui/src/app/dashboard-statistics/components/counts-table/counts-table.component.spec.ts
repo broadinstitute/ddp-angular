@@ -111,7 +111,7 @@ describe('CountsTableComponent',  () => {
     const [firstCell]: MatCellHarness[] = await matRowHarnesses[0].getCells();
     const firstCellText: string = await firstCell.getText();
 
-    expect(firstCellText).toBe('No data matching the filter ' + '"' + NOT_FOUND + '"');
+    expect(firstCellText).toBe(`No data matching the filter "${NOT_FOUND}"`);
   });
 
   /**
