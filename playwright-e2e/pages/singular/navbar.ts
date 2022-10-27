@@ -2,7 +2,7 @@ import { Page, Response } from '@playwright/test';
 
 // import dotenv from 'dotenv';
 // import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '../.env.singular') });
+// dotenv.config({ path: path.resolve(__dirname, '../.env.dev') });
 
 export const NavSelectors = {
   Login: '.header button[data-ddp-test="signInButton"]:has-text("Log In")',
