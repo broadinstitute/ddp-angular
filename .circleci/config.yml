@@ -617,9 +617,13 @@ jobs:
           working_directory: *playwright_path
           name: "Set playwright-e2e .env and export environment variables"
           command: |
+            echo "ENVIRONMENT=${ENVIRONMENT}"
+            
             if [[ ! "${ENVIRONMENT}" ]]; then
+              echo "1"
               echo "export ENV=<< parameters.env_name >>" >> $BASH_ENV
             else
+              echo "2"
               echo "export ENV=${ENVIRONMENT}" >> $BASH_ENV
             fi
 
