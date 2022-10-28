@@ -663,9 +663,11 @@ jobs:
                 at: .
             - run: pwd && ls * && cat playwright-env/envvars
             - run:
-                working_directory: *playwright_path
                 name: "Export environment variables to BASH_ENV"
                 command: |
+                  pwd
+                  ls
+                  
                   # File was created in build-playwright-job.
                   cat playwright-env/envvars | awk '{print "export " $0}' >> "$BASH_ENV"
                   cp "playwright-e2e/config/.env.<< parameters.env_name >>" .env
@@ -681,11 +683,11 @@ jobs:
                   echo "$SINGULAR_USER_PASSWORD"
                   echo "$BASH_ENV"
             - run:
-                # working_directory: *playwright_path
+                working_directory: *playwright_path
                 name: Install NPM packages
                 command: ls && npm install --quiet
             - run:
-                # working_directory: *playwright_path
+                working_directory: *playwright_path
                 name: Install Playwright browsers dependencies
                 command: npx playwright install --with-deps chromium
             - when:
@@ -693,7 +695,7 @@ jobs:
                   equal: [ all, << parameters.test_suite >> ]
                 steps:
                   - run:
-                      # working_directory: *playwright_path
+                      working_directory: *playwright_path
                       name: Run all Playwright tests except nightly tests
                       command: npx playwright test --config=playwright-ci.config.ts --grep-invert "/nightly/|/examples/"
             - when:
@@ -701,7 +703,7 @@ jobs:
                   equal: [ nightly, << parameters.test_suite >> ]
                 steps:
                   - run:
-                      # working_directory: *playwright_path
+                      working_directory: *playwright_path
                       name: Run all Playwright nightly tests
                       command: npx playwright test --config=playwright-ci.config.ts --grep "nightly/"
             # File paths are relative and defined in playwright.config.ts Reporter section
