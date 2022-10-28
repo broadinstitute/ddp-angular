@@ -23,6 +23,7 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
   @Input() showSaveBtn: boolean = false;
   @Input() saveSucceeded: boolean = false;
   @Input() dateSaved: any;
+  @Input() colorDuringPatch = false;
   @Output() dateChanged = new EventEmitter();
   
 
@@ -90,6 +91,7 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
   }
 
   public check(): void {
+    this.colorDuringPatch = true;
     if (this._dateString === '') {
       this.emitDate('');
     } else {
@@ -101,6 +103,7 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
           this.datePicker = tmp;
           if (this.datePicker != null) {
             this.emitDate(Utils.getDateFormatted(this.datePicker, Utils.DATE_STRING));
+            this.colorDuringPatch = false;
             this.error = null;
           } else {
             this.error = this.dateFormat;
@@ -108,6 +111,7 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
         } else if (tmp === Utils.DATE_PARTIAL) {
           this.error = null;
           this.emitDate(Utils.getPartialDateFormatted(this._dateString, this.dateFormat));
+          this.colorDuringPatch = false;
           this.hasDateChanged = false;
         } else if (tmp == null) {
           this.error = this.dateFormat;
