@@ -634,6 +634,14 @@ jobs:
             echo 'export dsmUserEmail=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")' >> "$BASH_ENV"
             echo 'export dsmUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")' >> "$BASH_ENV"
             source "$BASH_ENV"
+      - node/install:
+          # Playwright requires Node.js 14 or higher
+          node-version: '16.13'
+      - run:
+          working_directory: *playwright_path
+          command: |
+            node --version
+            npm --version
       - run:
           working_directory: *playwright_path
           name: Install NPM packages
@@ -644,10 +652,6 @@ jobs:
       - run:
           working_directory: *playwright_path
           command: npm run build
-      - node/install:
-          # Playwright requires Node.js 14 or higher
-          node-version: '16.13'
-      - run: node --version
       - run:
           working_directory: *playwright_path
           name: Install Playwright browsers dependencies
