@@ -42,7 +42,7 @@ executors:
     resource_class: medium+
     docker:
       - image: mcr.microsoft.com/playwright:v1.25.0-focal # Playwright version in your Docker image MUST match the version in project
-    working_directory: *ng_workspace_path
+    working_directory: *playwright_path
     environment:
       NODE_ENV: development # Needed if playwright is in devDependencies
 
@@ -597,7 +597,7 @@ jobs:
                 path: *repo_path
             - setup-shared-env
             - run:
-                name: Set environment variables from vault secrets
+                name: REMOVE THIS Set environment variables from vault secrets
                 command: |
                   echo 'export SITE_PASSWORD=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.sitePassword")' >> "$BASH_ENV"
                   echo 'export SINGULAR_USER_EMAIL=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[0] | select(.app==\"google\") | .userName")' >> "$BASH_ENV"
@@ -606,16 +606,14 @@ jobs:
                   echo 'export SINGULAR_USER_PASSWORD=$DSM_USER_PASSWORD' >> "$BASH_ENV"
                   source $BASH_ENV
             - run:
-                working_directory: *playwright_path
-                name: "Set environment variables from .env"
+                name: Save vault env variables to a file to persist across jobs
                 command: |
-                  pwd
-                  ls
-                  echo << parameters.env_name >>
-
-                  cp "config/.env.<< parameters.env_name >>" .env
-                  cat .env | awk '{print "export " $0}' >> "$BASH_ENV"
-                  source "$BASH_ENV"
+                  mkdir -p playwright-env
+                  echo 'export SITE_PASSWORD=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.sitePassword")' >> playwright-env/envvars
+                  echo 'export SINGULAR_USER_EMAIL=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[0] | select(.app==\"google\") | .userName")' >> playwright-env/envvars
+                  echo 'export DSM_USER_EMAIL=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")' >> playwright-env/envvars
+                  echo 'export DSM_USER_PASSWORD=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")' >> playwright-env/envvars
+                  echo 'export SINGULAR_USER_PASSWORD=$DSM_USER_PASSWORD' >> playwright-env/envvars
             - run:
                 working_directory: *playwright_path
                 name: Install NPM packages
@@ -627,7 +625,7 @@ jobs:
                 working_directory: *playwright_path
                 command: npm run build
             - persist_to_workspace:
-                root: *repo_path
+                root: *playwright_path
                 paths:
                   - .
 
@@ -662,8 +660,22 @@ jobs:
             - attach_workspace:
                 at: .
             - run:
-                working_directory: *repo_path
-                name: "REMOVE THIS: Read vault environment variables"
+                working_directory: *playwright_path
+                name: "Set environment variables from .env"
+                command: |
+                  pwd
+                  ls
+                  echo << parameters.env_name >>
+
+                  # File created in build-playwright-job
+                  cat playwright-env/envvars >> "$BASH_ENV"
+
+                  cp "config/.env.<< parameters.env_name >>" .env
+                  cat .env | awk '{print "export " $0}' >> "$BASH_ENV"
+
+                  source "$BASH_ENV"
+            - run:
+                name: "REMOVE THIS: Check vault environment variables"
                 command: |
                   echo "$SITE_PASSWORD"
                   echo "$SINGULAR_USER_EMAIL"
@@ -672,11 +684,11 @@ jobs:
                   echo "$SINGULAR_USER_PASSWORD"
                   echo "$BASH_ENV"
             - run:
-                working_directory: *playwright_path
+                # working_directory: *playwright_path
                 name: Install NPM packages
                 command: npm install --force --quiet
             - run:
-                working_directory: *playwright_path
+                # working_directory: *playwright_path
                 name: Install Playwright browsers dependencies
                 command: npx playwright install --with-deps chromium
             - when:
@@ -684,7 +696,7 @@ jobs:
                   equal: [ all, << parameters.test_suite >> ]
                 steps:
                   - run:
-                      working_directory: *playwright_path
+                      # working_directory: *playwright_path
                       name: Run all Playwright tests except nightly tests
                       command: npx playwright test --config=playwright-ci.config.ts --grep-invert "/nightly/|/examples/"
             - when:
@@ -692,16 +704,16 @@ jobs:
                   equal: [ nightly, << parameters.test_suite >> ]
                 steps:
                   - run:
-                      working_directory: *playwright_path
+                      # working_directory: *playwright_path
                       name: Run all Playwright nightly tests
                       command: npx playwright test --config=playwright-ci.config.ts --grep "nightly/"
             # File paths are relative and defined in playwright.config.ts Reporter section
             - store_test_results:
-                path: ../playwright-e2e/test-results/junit
+                path: test-results/junit
             - store_artifacts:
-                path: ../playwright-e2e/test-results
+                path: test-results
             - store_artifacts:
-                path: ../playwright-e2e/html-test-results
+                path: html-test-results
 
 parameters:
   study_key:
