@@ -617,7 +617,7 @@ jobs:
             - run:
                 working_directory: *playwright_path
                 name: Install NPM packages
-                command: npm install --force --quiet
+                command: npm install --quiet
             - run:
                 working_directory: *playwright_path
                 command: npm run lint -- --max-warnings 0
@@ -625,9 +625,9 @@ jobs:
                 working_directory: *playwright_path
                 command: npm run build
             - persist_to_workspace:
-                root: *playwright_path
+                root: playwright-env
                 paths:
-                  - .
+                  - envvars
 
   run-playwright-test-job:
     # Run Playwright tests if targeted env is dev, test or staging.
@@ -657,17 +657,17 @@ jobs:
               - equal: [ test, << parameters.env_name >> ]
               - equal: [ staging, << parameters.env_name >> ]
           steps:
+            - checkout:
+                path: *repo_path
             - attach_workspace:
-                at: .
+                at: /home/circleci/repo/playwright-env
+            - run: pwd
+            - run: ls
             - run:
                 working_directory: *playwright_path
                 name: "Set environment variables from .env"
                 command: |
-                  pwd
-                  ls
-                  echo << parameters.env_name >>
-
-                  # File created in build-playwright-job
+                  # File was created in build-playwright-job
                   cat playwright-env/envvars >> "$BASH_ENV"
 
                   cp "config/.env.<< parameters.env_name >>" .env
@@ -686,7 +686,7 @@ jobs:
             - run:
                 # working_directory: *playwright_path
                 name: Install NPM packages
-                command: npm install --force --quiet
+                command: npm install --quiet
             - run:
                 # working_directory: *playwright_path
                 name: Install Playwright browsers dependencies
