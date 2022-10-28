@@ -41,8 +41,7 @@ executors:
   playwright-test-executor:
     resource_class: medium+
     docker:
-      - image: mcr.microsoft.com/playwright:v1.25.0-focal
-      - image: broadinstitute/study-website-build:12-08-2020A
+      - image: mcr.microsoft.com/playwright:v1.25.0-focal # Playwright version in your Docker image MUST match the version in project
     working_directory: *ng_workspace_path
     environment:
       NODE_ENV: development # Needed if playwright is in devDependencies
@@ -279,8 +278,17 @@ commands:
               OUTPUT_DIR="${ANGULAR_PROJECT_DIR_PATH}/dist"
               echo "export OUTPUT_DIR=$OUTPUT_DIR" >> $BASH_ENV
             fi
+
             echo "export SHORT_GIT_SHA=`echo '<< pipeline.git.revision >>' | cut -c 1-7`" >> $BASH_ENV
             echo 'export BUILDS_BUCKET=ddp-build-artifacts' >> $BASH_ENV
+
+            # Set env variables for Playwright tests
+            echo 'export SITE_PASSWORD=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.sitePassword")' >> "$BASH_ENV"
+            echo 'export SINGULAR_USER_EMAIL=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[0] | select(.app==\"google\") | .userName")' >> "$BASH_ENV"
+            echo 'export DSM_USER_EMAIL=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")' >> "$BASH_ENV"
+            echo 'export DSM_USER_PASSWORD=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")' >> "$BASH_ENV"
+            echo 'export SINGULAR_USER_PASSWORD=$DSM_USER_PASSWORD' >> "$BASH_ENV"
+
             source $BASH_ENV
 
   setup-build-workspace:
@@ -578,13 +586,7 @@ jobs:
       - run-tests
 
   playwright-e2e-test:
-    resource_class: medium+
-    docker:
-      - image: mcr.microsoft.com/playwright:v1.25.0-focal
-      - image: broadinstitute/study-website-build:12-08-2020A
-    working_directory: *ng_workspace_path
-    environment:
-      NODE_ENV: development # Needed if playwright is in devDependencies
+    executor: playwright-test-executor
     parameters:
       study_key:
         type: string
@@ -630,14 +632,14 @@ jobs:
             source "$BASH_ENV"
       - run:
           working_directory: *repo_path
-          name: "Read from vault to set environment variables"
+          name: "Read vault environment variables"
           command: |
-            echo 'export SITE_PASSWORD=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.sitePassword")' >> "$BASH_ENV"
-            echo 'export SINGULAR_USER_EMAIL=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[0] | select(.app==\"google\") | .userName")' >> "$BASH_ENV"
-            echo 'export DSM_USER_EMAIL=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")' >> "$BASH_ENV"
-            echo 'export DSM_USER_PASSWORD=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")' >> "$BASH_ENV"
-            echo 'export SINGULAR_USER_PASSWORD=$DSM_USER_PASSWORD' >> "$BASH_ENV"
-            source "$BASH_ENV"
+            echo $SITE_PASSWORD
+            echo $SINGULAR_USER_EMAIL
+            echo $DSM_USER_EMAIL
+            echo $DSM_USER_PASSWORD
+            echo $SINGULAR_USER_PASSWORD
+
       - run:
           working_directory: *playwright_path
           name: Install NPM packages
