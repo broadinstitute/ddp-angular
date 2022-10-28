@@ -7,7 +7,6 @@ import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
 import EnrollMyAdultDependentPage from 'pages/singular/enrollment/enroll-my-adult-dependent-page';
 import ConsentFormForAdultDependentPage from 'pages/singular/enrollment/consent-form-for-adult-dependent-page';
 import AboutMyAdultDependentPage from 'pages/singular/enrollment/about-my-adult-dependent-page';
-import { makeEmailAlias } from 'utils/string-utils';
 import { enterMailingAddress } from 'utils/test-utils';
 import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
 import { WHO } from 'data/constants';
@@ -26,11 +25,7 @@ test.describe('Enrol an adult dependent', () => {
     await preScreeningPage.enterInformationAboutYourself();
 
     // Enter email alias and new password in Login popup
-    await auth.fillEmailPassword(page, {
-      email: makeEmailAlias(process.env.singularUserEmail as string),
-      password: process.env.singularUserPassword,
-      waitForNavigation: true
-    });
+    await auth.createAccountWithEmailAlias(page);
 
     // On "My Dashboard" page
     const myDashboardPage = new MyDashboardPage(page);

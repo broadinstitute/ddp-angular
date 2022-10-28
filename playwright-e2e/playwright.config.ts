@@ -42,7 +42,7 @@ const testConfig: PlaywrightTestConfig = {
   forbidOnly: !!process.env.CI,
   retries: 0,
   workers: 3,
-  maxFailures: 3, // Limits total test failures
+  maxFailures: process.env.CI ? 10 : 3, // Limits total test failures
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [

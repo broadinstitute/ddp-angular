@@ -5,7 +5,6 @@ import ConsentFormPage from 'pages/singular/enrollment/consent-form-page';
 import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
 import * as user from 'data/fake-user.json';
 import * as auth from 'authentication/auth-singular';
-import { makeEmailAlias } from 'utils/string-utils';
 import { WHO } from 'data/constants';
 import { downloadConsentPdf, enterMailingAddress } from 'utils/test-utils';
 import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
@@ -28,11 +27,7 @@ test.describe('Enroll myself as adult', () => {
 
     // Step 2
     // Enter email alias and password to create new account
-    await auth.fillEmailPassword(page, {
-      email: makeEmailAlias(process.env.singularUserEmail as string),
-      password: process.env.singularUserPassword,
-      waitForNavigation: true
-    });
+    await auth.createAccountWithEmailAlias(page);
 
     // Step 3
     // On "My Dashboard" page, click Enroll Myself button

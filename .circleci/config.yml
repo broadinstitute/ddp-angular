@@ -695,11 +695,11 @@ jobs:
                       command: npx playwright test --config=playwright-ci.config.ts --grep "nightly/"
             # File paths are relative and defined in playwright.config.ts Reporter section
             - store_test_results:
-                path: test-results/junit
+                path: playwright-e2e/test-results/junit
             - store_artifacts:
-                path: test-results
+                path: playwright-e2e/test-results
             - store_artifacts:
-                path: html-test-results
+                path: playwright-e2e/html-test-results
 
 parameters:
   study_key:
