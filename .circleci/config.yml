@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  node: circleci/node@5.0.3
+
 references:
   repo_path: &repo_path
       /home/circleci/repo
@@ -610,27 +613,27 @@ jobs:
           name: "Override env_name"
           command: |
             if [[ ! "${ENVIRONMENT}" ]]; then
-              echo "export ENV=<< parameters.env_name >>" >> $BASH_ENV
+              echo "export ENV=<< parameters.env_name >>" >> "$BASH_ENV"
             else
-              echo "export ENV=${ENVIRONMENT}" >> $BASH_ENV
+              echo "export ENV=${ENVIRONMENT}" >> "$BASH_ENV"
             fi
-            source $BASH_ENV
+            source "$BASH_ENV"
       - run:
           working_directory: *playwright_path
           name: "Export playwright-e2e .env"
           command: |
             cp "config/.env.${ENV}" .env
-            cat .env | awk '{print "export " $0}' >> $BASH_ENV
-            source $BASH_ENV
+            cat .env | awk '{print "export " $0}' >> "$BASH_ENV"
+            source "$BASH_ENV"
       - run:
           working_directory: *repo_path
           name: "Set environment variables for DSM from vault"
           command: |
-            echo 'export sitePassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.sitePassword")' >> $BASH_ENV
-            echo 'export singularUserEmail=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[0] | select(.app==\"google\") | .userName")' >> $BASH_ENV
-            echo 'export dsmUserEmail=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")' >> $BASH_ENV
-            echo 'export dsmUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")' >> $BASH_ENV
-            source $BASH_ENV
+            echo 'export sitePassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.sitePassword")' >> "$BASH_ENV"
+            echo 'export singularUserEmail=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[0] | select(.app==\"google\") | .userName")' >> "$BASH_ENV"
+            echo 'export dsmUserEmail=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")' >> "$BASH_ENV"
+            echo 'export dsmUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")' >> "$BASH_ENV"
+            source "$BASH_ENV"
       - run:
           working_directory: *playwright_path
           name: Install NPM packages
@@ -641,6 +644,10 @@ jobs:
       - run:
           working_directory: *playwright_path
           command: npm run build
+      - node/install:
+          # Playwright requires Node.js 14 or higher
+          node-version: '16.13'
+      - run: node --version
       - run:
           working_directory: *playwright_path
           name: Install Playwright browsers dependencies
