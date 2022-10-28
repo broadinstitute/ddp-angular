@@ -578,7 +578,13 @@ jobs:
       - run-tests
 
   playwright-e2e-test:
-    executor: playwright-test-executor
+    resource_class: medium+
+    docker:
+      - image: mcr.microsoft.com/playwright:v1.25.0-focal
+      - image: broadinstitute/study-website-build:12-08-2020A
+    working_directory: *ng_workspace_path
+    environment:
+      NODE_ENV: development # Needed if playwright is in devDependencies
     parameters:
       study_key:
         type: string
