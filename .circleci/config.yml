@@ -631,12 +631,6 @@ jobs:
             echo 'export dsmUserEmail=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")' >> $BASH_ENV
             echo 'export dsmUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")' >> $BASH_ENV
             source $BASH_ENV
-
-            echo "debug:"
-            echo $sitePassword
-            echo $singularUserEmail
-            echo $dsmUserEmail
-            echo $dsmUserPassword
       - run:
           working_directory: *playwright_path
           name: Install NPM packages
@@ -651,10 +645,10 @@ jobs:
           working_directory: *playwright_path
           name: Install Playwright browsers dependencies
           command: |
-            bash sudo npm cache clean -f
-            bash sudo npm install -g n
-            bash sudo n stable
-            bash npx playwright install --with-deps chromium
+            # sudo npm cache clean -f
+            # sudo npm install -g n
+            # sudo n stable
+            npx playwright install --with-deps chromium
       - when:
           condition:
             equal: [ all, << parameters.test_suite >> ]
