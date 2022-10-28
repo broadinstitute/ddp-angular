@@ -611,7 +611,9 @@ jobs:
                 command: |
                   pwd
                   ls
-                  cp "config/.env.${<< parameters.env_name >>}" .env
+                  echo << parameters.env_name >>
+
+                  cp "config/.env.<< parameters.env_name >>" .env
                   cat .env | awk '{print "export " $0}' >> "$BASH_ENV"
                   source "$BASH_ENV"
             - run:
