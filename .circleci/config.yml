@@ -595,6 +595,7 @@ jobs:
           steps:
             - checkout:
                 path: *repo_path
+            - setup-shared-env
             - run:
                 name: Set environment variables from vault secrets
                 command: |
