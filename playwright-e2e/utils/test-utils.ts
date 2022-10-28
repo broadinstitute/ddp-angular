@@ -6,7 +6,7 @@ import Select from 'lib/widget/select';
 import axios from 'axios';
 import _ from 'lodash';
 import { STATES } from 'data/constants';
-import { makeRandomTelephone } from './string-utils';
+import { getEnv, makeRandomTelephone } from 'utils/string-utils';
 
 // SITE_PASSWORD is set in circleci config.yml
 const { singularSitePassword, SITE_PASSWORD } = process.env;
@@ -114,7 +114,7 @@ export async function enterMailingAddress(
  */
 export async function fillSitePassword(
   page: Page,
-  password = singularSitePassword ? singularSitePassword : SITE_PASSWORD
+  password = getEnv(singularSitePassword, SITE_PASSWORD)
 ): Promise<void> {
   if (password === undefined) {
     throw Error('Require env variable for Site Password. It is not defined.');

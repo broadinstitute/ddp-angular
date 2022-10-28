@@ -1,4 +1,5 @@
 import { Page } from '@playwright/test';
+import { getEnv } from 'utils/string-utils';
 
 // DSM_USER_EMAIL and DSM_USER_PASSWORD are set in circleci config.yml
 const { dsmUserEmail, dsmUserPassword, DSM_USER_EMAIL, DSM_USER_PASSWORD } = process.env;
@@ -23,10 +24,7 @@ export async function fillEmailPassword(
 }
 
 export async function login(page: Page, opts: { email?: string; password?: string } = {}): Promise<void> {
-  const {
-    email = dsmUserEmail ? dsmUserEmail : DSM_USER_EMAIL,
-    password = dsmUserPassword ? dsmUserPassword : DSM_USER_PASSWORD
-  } = opts;
+  const { email = getEnv(dsmUserEmail, DSM_USER_EMAIL), password = getEnv(dsmUserPassword, DSM_USER_PASSWORD) } = opts;
   await page.goto(process.env.dsmBaseURL as string);
   await fillEmailPassword(page, { email, password });
 }

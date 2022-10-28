@@ -1,5 +1,6 @@
 import { Page } from '@playwright/test';
 import { clickLogin, NavSelectors } from 'pages/singular/navbar';
+import { getEnv } from 'utils/string-utils';
 
 // SINGULAR_USER_EMAIL and SINGULAR_USER_PASSWORD are set in circleci config.yml
 const { singularUserEmail, singularUserPassword, SINGULAR_USER_EMAIL, SINGULAR_USER_PASSWORD } = process.env;
@@ -31,8 +32,8 @@ export async function login(
   opts: { email?: string | undefined; password?: string | undefined; waitForNavigation?: boolean } = {}
 ): Promise<void> {
   const {
-    email = singularUserEmail ? singularUserEmail : SINGULAR_USER_EMAIL,
-    password = singularUserPassword ? singularUserPassword : SINGULAR_USER_PASSWORD,
+    email = getEnv(singularUserEmail, SINGULAR_USER_EMAIL),
+    password = getEnv(singularUserPassword, SINGULAR_USER_PASSWORD),
     waitForNavigation
   } = opts;
   await clickLogin(page);

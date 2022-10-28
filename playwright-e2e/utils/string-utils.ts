@@ -1,3 +1,5 @@
+import assert from 'assert';
+
 export const makeRandomTelephone = (): string => {
   return Math.random().toString().slice(2, 11);
 };
@@ -15,4 +17,17 @@ export const makeEmailAlias = (originalEmail: string): string => {
   const name = splintedEmail[0];
   const domain = splintedEmail[1];
   return `${name}+${Math.floor(Math.random() * 1000000000)}@${domain}`;
+};
+
+/**
+ * Returns the default value if value is empty or undefined.
+ * @param value
+ * @param defaultValue
+ */
+export const getEnv = (value: string | undefined, defaultValue: string | undefined): string => {
+  if (value === undefined || value.length === 0) {
+    assert(defaultValue, 'value and defaultValue are undefined');
+    return defaultValue;
+  }
+  return value;
 };

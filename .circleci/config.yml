@@ -601,12 +601,12 @@ jobs:
                 name: Save vault secrets to a file to persist across jobs
                 command: |
                   mkdir -p playwright-env
+
                   export sitePwd=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.sitePassword")
                   export googleUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[0] | select(.app==\"google\") | .userName")
                   export dsmUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")
                   export userPwd=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")
 
-                  echo $sitePwd
                   echo "export SITE_PASSWORD=$sitePwd" >> playwright-env/envvars
                   echo "export SINGULAR_USER_EMAIL=$googleUser" >> playwright-env/envvars
                   echo "export DSM_USER_EMAIL=$dsmUser" >> playwright-env/envvars
@@ -616,7 +616,7 @@ jobs:
                 working_directory: *playwright_path
                 name: Install NPM packages
                 command: |
-                  ls
+                  npm --version
                   npm install --quiet
             - run:
                 working_directory: *playwright_path
@@ -661,31 +661,18 @@ jobs:
           steps:
             - attach_workspace:
                 at: .
-            - run: pwd && ls * && cat playwright-env/envvars
             - run:
                 name: "Export environment variables to BASH_ENV"
                 command: |
-                  pwd
-                  ls
-                  
-                  # File was created in build-playwright-job.
+                  # File was created in build-playwright-job
                   cat playwright-env/envvars | awk '{print "export " $0}' >> "$BASH_ENV"
                   cp "playwright-e2e/config/.env.<< parameters.env_name >>" .env
                   cat .env | awk '{print "export " $0}' >> "$BASH_ENV"
                   source "$BASH_ENV"
             - run:
-                name: "REMOVE THIS: Check vault environment variables"
-                command: |
-                  echo "$SITE_PASSWORD"
-                  echo "$SINGULAR_USER_EMAIL"
-                  echo "$DSM_USER_EMAIL"
-                  echo "$DSM_USER_PASSWORD"
-                  echo "$SINGULAR_USER_PASSWORD"
-                  echo "$BASH_ENV"
-            - run:
                 working_directory: *playwright_path
                 name: Install NPM packages
-                command: ls && npm install --quiet
+                command: npm install --quiet
             - run:
                 working_directory: *playwright_path
                 name: Install Playwright browsers dependencies
