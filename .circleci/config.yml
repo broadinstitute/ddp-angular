@@ -1,8 +1,5 @@
 version: 2.1
 
-orbs:
-  node: circleci/node@5.0.3
-
 references:
   repo_path: &repo_path
       /home/circleci/repo
@@ -44,8 +41,8 @@ executors:
   playwright-test-executor:
     resource_class: medium+
     docker:
-      - image: broadinstitute/study-website-build:12-08-2020A
       - image: mcr.microsoft.com/playwright:v1.25.0-focal
+      - image: broadinstitute/study-website-build:12-08-2020A
     working_directory: *ng_workspace_path
     environment:
       NODE_ENV: development # Needed if playwright is in devDependencies
@@ -627,16 +624,14 @@ jobs:
             source "$BASH_ENV"
       - run:
           working_directory: *repo_path
-          name: "Set environment variables for DSM from vault"
+          name: "Read from vault to set environment variables"
           command: |
-            echo 'export sitePassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.sitePassword")' >> "$BASH_ENV"
-            echo 'export singularUserEmail=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[0] | select(.app==\"google\") | .userName")' >> "$BASH_ENV"
-            echo 'export dsmUserEmail=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")' >> "$BASH_ENV"
-            echo 'export dsmUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")' >> "$BASH_ENV"
+            echo 'export SITE_PASSWORD=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.sitePassword")' >> "$BASH_ENV"
+            echo 'export SINGULAR_USER_EMAIL=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[0] | select(.app==\"google\") | .userName")' >> "$BASH_ENV"
+            echo 'export DSM_USER_EMAIL=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")' >> "$BASH_ENV"
+            echo 'export DSM_USER_PASSWORD=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")' >> "$BASH_ENV"
+            echo 'export SINGULAR_USER_PASSWORD="$DSM_USER_PASSWORD" >> "$BASH_ENV"
             source "$BASH_ENV"
-      - node/install:
-          # Playwright requires Node.js 14 or higher
-          node-version: '16.13'
       - run:
           working_directory: *playwright_path
           name: Install NPM packages

@@ -8,7 +8,8 @@ import _ from 'lodash';
 import { STATES } from 'data/constants';
 import { makeRandomTelephone } from './string-utils';
 
-const { singularSitePassword, sitePassword } = process.env;
+// SITE_PASSWORD is set in circleci config.yml
+const { singularSitePassword, SITE_PASSWORD } = process.env;
 
 export async function waitUntilRemoved(locator: Locator): Promise<void> {
   expect(await locator.count()).toHaveLength(0);
@@ -113,7 +114,7 @@ export async function enterMailingAddress(
  */
 export async function fillSitePassword(
   page: Page,
-  password = singularSitePassword ? singularSitePassword : sitePassword
+  password = singularSitePassword ? singularSitePassword : SITE_PASSWORD
 ): Promise<void> {
   if (password === undefined) {
     throw Error('Require env variable for Site Password. It is not defined.');
