@@ -652,8 +652,7 @@ jobs:
           steps:
             - attach_workspace:
                 at: .
-            - run: pwd
-            - run: ls
+            - run: pwd && ls *
             - run:
                 working_directory: *playwright_path
                 name: "Set environment variables from .env"
@@ -661,7 +660,7 @@ jobs:
                   # File was created in build-playwright-job
                   cat playwright-env/envvars >> "$BASH_ENV"
 
-                  cp "config/.env.<< parameters.env_name >>" .env
+                  cp "playwright-e2e/config/.env.<< parameters.env_name >>" .env
                   cat .env | awk '{print "export " $0}' >> "$BASH_ENV"
 
                   source "$BASH_ENV"
@@ -674,6 +673,7 @@ jobs:
                   echo "$DSM_USER_PASSWORD"
                   echo "$SINGULAR_USER_PASSWORD"
                   echo "$BASH_ENV"
+            - run: pwd && ls *
             - run:
                 # working_directory: *playwright_path
                 name: Install NPM packages
