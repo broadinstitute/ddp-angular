@@ -580,6 +580,7 @@ jobs:
   build-playwright-job:
     # Set up Playwright test environment if targeted env is dev, test or staging.
     executor: build-executor
+    working_directory: *repo_path
     parameters:
       env_name:
         default: dev
@@ -597,16 +598,7 @@ jobs:
                 path: *repo_path
             - setup-shared-env
             - run:
-                name: REMOVE THIS Set environment variables from vault secrets
-                command: |
-                  echo 'export SITE_PASSWORD=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.sitePassword")' >> "$BASH_ENV"
-                  echo 'export SINGULAR_USER_EMAIL=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[0] | select(.app==\"google\") | .userName")' >> "$BASH_ENV"
-                  echo 'export DSM_USER_EMAIL=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")' >> "$BASH_ENV"
-                  echo 'export DSM_USER_PASSWORD=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")' >> "$BASH_ENV"
-                  echo 'export SINGULAR_USER_PASSWORD=$DSM_USER_PASSWORD' >> "$BASH_ENV"
-                  source $BASH_ENV
-            - run:
-                name: Save vault env variables to a file to persist across jobs
+                name: Save vault secrets to a file to persist across jobs
                 command: |
                   mkdir -p playwright-env
                   echo 'export SITE_PASSWORD=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.sitePassword")' >> playwright-env/envvars
@@ -625,12 +617,13 @@ jobs:
                 working_directory: *playwright_path
                 command: npm run build
             - persist_to_workspace:
-                root: playwright-env
+                root: .
                 paths:
-                  - envvars
+                  - playwright-env
+                  - playwright-e2e
 
   run-playwright-test-job:
-    # Run Playwright tests if targeted env is dev, test or staging.
+    # Run Playwright tests only if targeted env is dev, test or staging.
     executor: playwright-test-executor
     parameters:
       study_key:
@@ -657,10 +650,8 @@ jobs:
               - equal: [ test, << parameters.env_name >> ]
               - equal: [ staging, << parameters.env_name >> ]
           steps:
-            - checkout:
-                path: *repo_path
             - attach_workspace:
-                at: /home/circleci/repo/playwright-env
+                at: .
             - run: pwd
             - run: ls
             - run:
