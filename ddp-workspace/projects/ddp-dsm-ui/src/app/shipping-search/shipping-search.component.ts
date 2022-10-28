@@ -1,14 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ScanValue } from '../scan/scan.model';
-import { Auth } from '../services/auth.service';
-import { ComponentService } from '../services/component.service';
+import {Component, OnInit} from '@angular/core';
+import {Auth} from '../services/auth.service';
 import { PatchUtil } from '../utils/patch.model';
 import { Statics } from '../utils/statics';
 import { DSMService } from '../services/dsm.service';
 import { KitRequest } from '../shipping/shipping.model';
 import { RoleService } from '../services/role.service';
-import { range } from 'express/lib/request';
-import { Observable, Subscription } from 'rxjs';
+import { Observable} from 'rxjs';
 
 @Component({
   selector: 'app-shipping-search',
@@ -130,7 +127,7 @@ export class ShippingSearchComponent implements OnInit {
     }
   }
 
-  patch(patch: any, kitRequest: KitRequest): Observable<any> {
+  patch(patch: any): Observable<any> {
     return this.dsmService.patchParticipantRecord(JSON.stringify(patch));
   }
 
@@ -151,7 +148,7 @@ export class ShippingSearchComponent implements OnInit {
       const patch = patch1.getPatch();
       this.currentPatchField = "collectionDate";
       return new Promise<boolean>((resolve, reject) => {
-        this.patch(patch, kitRequest).subscribe({ // need to subscribe, otherwise it will not send!
+        this.patch(patch).subscribe({ // need to subscribe, otherwise it will not send!
       next: data => {
         this.currentPatchField = null;
             resolve(true);

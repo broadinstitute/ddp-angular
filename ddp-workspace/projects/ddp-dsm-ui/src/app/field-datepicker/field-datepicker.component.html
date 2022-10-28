@@ -30,7 +30,7 @@
           (click)="setToday()"
           [disabled]="disabled">Today</button>
   <button *ngIf="showSaveBtn" class="btn btn-xs Button--Background--Color ng-star-inserted"
-          (click)="saveDate($event)">{{saveButtonText}}</button>
+          (click)="saveDate()" [disabled]="currentlySaving">{{saveButtonText}}</button>
   <mat-checkbox color="primary" [checked]="estimated" [disabled]="disabled" *ngIf="addCheckboxEstimated"
                (change)="estimated = $event.checked; estimatedChanged()"
                disableRipple>Estimated

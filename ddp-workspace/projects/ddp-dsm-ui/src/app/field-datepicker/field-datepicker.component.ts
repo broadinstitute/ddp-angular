@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { timeout } from 'rxjs';
 import { Utils } from '../utils/utils';
 import { EstimatedDate } from './field-datepicker.model';
 
@@ -36,7 +35,7 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
   hasDateChanged = false;
   saveButtonText = 'Save Date';
   isNA = false;
-  isSaved = false;
+  currentlySaving = false;
 
   constructor(private util: Utils) {
   }
@@ -120,20 +119,24 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
     }
   }
 
-  private async saveDate(e: Event): Promise<void>{
+  public async saveDate(): Promise<void>{
     this.saveButtonText = "Saving..."
+    this.currentlySaving = true;
     try{
-      this.isSaved = await this.dateSaved();
-      this.saveButtonText = this.isSaved ? "Success!": "Failed";
+      await this.dateSaved();
+      this.saveButtonText = "Success!";
       this.hasDateChanged = false;
     }
     catch(e){
         this.saveButtonText = "Failed";
-        console.log(e)
     }
-    setTimeout(() => {
-      this.saveButtonText = "Save Date"
-    },5000);
+    finally{
+      setTimeout(() => {
+        this.saveButtonText = "Save Date";
+        this.currentlySaving = false;
+      },5000);
+    }
+  
   }
 
   public selectDate(event: any): void {
