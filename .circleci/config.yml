@@ -601,13 +601,17 @@ jobs:
                 name: Save vault secrets to a file to persist across jobs
                 command: |
                   mkdir -p playwright-env
-                  export pwd=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.sitePassword")
+                  export sitePwd=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.sitePassword")
+                  export googleUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[0] | select(.app==\"google\") | .userName")
+                  export dsmUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")
+                  export userPwd=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")
+
                   echo $pwd
-                  echo "export SITE_PASSWORD=$pwd" >> playwright-env/envvars
-                  echo 'export SINGULAR_USER_EMAIL=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[0] | select(.app==\"google\") | .userName")' >> playwright-env/envvars
-                  echo 'export DSM_USER_EMAIL=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")' >> playwright-env/envvars
-                  echo 'export DSM_USER_PASSWORD=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")' >> playwright-env/envvars
-                  echo 'export SINGULAR_USER_PASSWORD=$DSM_USER_PASSWORD' >> playwright-env/envvars
+                  echo "export SITE_PASSWORD=$sitePwd" >> playwright-env/envvars
+                  echo "export SINGULAR_USER_EMAIL=$googleUser" >> playwright-env/envvars
+                  echo "export DSM_USER_EMAIL=$dsmUser" >> playwright-env/envvars
+                  echo "export DSM_USER_PASSWORD=$userPwd" >> playwright-env/envvars
+                  echo "export SINGULAR_USER_PASSWORD=$DSM_USER_PASSWORD" >> playwright-env/envvars
             - run:
                 working_directory: *playwright_path
                 name: Install NPM packages
