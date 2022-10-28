@@ -21,7 +21,7 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
   @Input() fieldName: string;
   @Input() showSaveBtn: boolean = false;
   @Input() saveSucceeded: boolean = false;
-  @Input() dateSaved: any;
+  @Input() dateSaved: () => Promise<boolean>;
   @Input() colorDuringPatch = false;
   @Output() dateChanged = new EventEmitter();
   

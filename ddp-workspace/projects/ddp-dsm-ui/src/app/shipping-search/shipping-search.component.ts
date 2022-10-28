@@ -134,8 +134,8 @@ export class ShippingSearchComponent implements OnInit {
   //Fires when user clicks "Save Date" button. Returns true
   //if the promise succeeds and the server successfukky writes and
   //returns and error if the server write fails.
-  saveDate(kitRequest: KitRequest): any {
-    return async () => {
+  saveDate(kitRequest: KitRequest): () => Promise<boolean> { 
+    return async (): Promise<boolean> => {
       const realm: string = kitRequest.realm;
       const patch1 = new PatchUtil(
         kitRequest.dsmKitRequestId, this.role.userMail(),
