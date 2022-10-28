@@ -652,17 +652,15 @@ jobs:
           steps:
             - attach_workspace:
                 at: .
-            - run: pwd && ls *
+            - run: pwd && ls * && cat playwright-env/envvars
             - run:
                 working_directory: *playwright_path
-                name: "Set environment variables from .env"
+                name: "Export environment variables to BASH_ENV"
                 command: |
-                  # File was created in build-playwright-job
-                  cat playwright-env/envvars >> "$BASH_ENV"
-
+                  # File was created in build-playwright-job.
+                  cat playwright-env/envvars | awk '{print "export " $0}' >> "$BASH_ENV"
                   cp "playwright-e2e/config/.env.<< parameters.env_name >>" .env
                   cat .env | awk '{print "export " $0}' >> "$BASH_ENV"
-
                   source "$BASH_ENV"
             - run:
                 name: "REMOVE THIS: Check vault environment variables"
