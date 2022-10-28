@@ -626,7 +626,7 @@ jobs:
           working_directory: *repo_path
           name: "Set environment variables for DSM from vault"
           command: |
-            echo 'export sitePassword=$(./readvault.sh secret/pepper/test/v1/e2e .data.sitePassword)' >> $BASH_ENV
+            echo 'export sitePassword=`./readvault.sh secret/pepper/test/v1/e2e .data.sitePassword`' >> $BASH_ENV
             echo 'export singularUserEmail=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[0] | select(.app==\"google\") | .userName")' >> $BASH_ENV
             echo 'export dsmUserEmail=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")' >> $BASH_ENV
             echo 'export dsmUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")' >> $BASH_ENV
