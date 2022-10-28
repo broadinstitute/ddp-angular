@@ -601,7 +601,8 @@ jobs:
                 name: Save vault secrets to a file to persist across jobs
                 command: |
                   mkdir -p playwright-env
-                  echo 'export SITE_PASSWORD=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.sitePassword")' >> playwright-env/envvars
+                  export pwd=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.sitePassword")
+                  echo 'export SITE_PASSWORD="$pwd"' >> playwright-env/envvars
                   echo 'export SINGULAR_USER_EMAIL=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[0] | select(.app==\"google\") | .userName")' >> playwright-env/envvars
                   echo 'export DSM_USER_EMAIL=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")' >> playwright-env/envvars
                   echo 'export DSM_USER_PASSWORD=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")' >> playwright-env/envvars
