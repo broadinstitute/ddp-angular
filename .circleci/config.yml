@@ -281,14 +281,6 @@ commands:
 
             echo "export SHORT_GIT_SHA=`echo '<< pipeline.git.revision >>' | cut -c 1-7`" >> $BASH_ENV
             echo 'export BUILDS_BUCKET=ddp-build-artifacts' >> $BASH_ENV
-
-            # Set env variables for Playwright tests
-            echo 'export SITE_PASSWORD=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.sitePassword")' >> "$BASH_ENV"
-            echo 'export SINGULAR_USER_EMAIL=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[0] | select(.app==\"google\") | .userName")' >> "$BASH_ENV"
-            echo 'export DSM_USER_EMAIL=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")' >> "$BASH_ENV"
-            echo 'export DSM_USER_PASSWORD=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")' >> "$BASH_ENV"
-            echo 'export SINGULAR_USER_PASSWORD=$DSM_USER_PASSWORD' >> "$BASH_ENV"
-
             source $BASH_ENV
 
   setup-build-workspace:
@@ -585,102 +577,121 @@ jobs:
       - run-linter-check
       - run-tests
 
-  playwright-e2e-test:
+  build-playwright-job:
+    # Set up Playwright test environment if targeted env is dev, test or staging.
+    executor: build-executor
+    parameters:
+      env_name:
+        default: dev
+        type: enum
+        enum: [ dev, test, staging, prod, UNKNOWN ]
+    steps:
+      - when:
+          condition:
+            or:
+              - equal: [ dev, << parameters.env_name >> ]
+              - equal: [ test, << parameters.env_name >> ]
+              - equal: [ staging, << parameters.env_name >> ]
+          steps:
+            - checkout:
+                path: *repo_path
+            - run:
+                name: Set environment variables from vault secrets
+                command: |
+                  echo 'export SITE_PASSWORD=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.sitePassword")' >> "$BASH_ENV"
+                  echo 'export SINGULAR_USER_EMAIL=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[0] | select(.app==\"google\") | .userName")' >> "$BASH_ENV"
+                  echo 'export DSM_USER_EMAIL=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")' >> "$BASH_ENV"
+                  echo 'export DSM_USER_PASSWORD=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")' >> "$BASH_ENV"
+                  echo 'export SINGULAR_USER_PASSWORD=$DSM_USER_PASSWORD' >> "$BASH_ENV"
+                  source $BASH_ENV
+            - run:
+                working_directory: *playwright_path
+                name: "Set environment variables from .env"
+                command: |
+                  cp "config/.env.${<< parameters.env_name >>}" .env
+                  cat .env | awk '{print "export " $0}' >> "$BASH_ENV"
+                  source "$BASH_ENV"
+            - run:
+                working_directory: *playwright_path
+                name: Install NPM packages
+                command: npm install --force --quiet
+            - run:
+                working_directory: *playwright_path
+                command: npm run lint -- --max-warnings 0
+            - run:
+                working_directory: *playwright_path
+                command: npm run build
+            - persist_to_workspace:
+                root: *repo_path
+                paths:
+                  - .
+
+  run-playwright-test-job:
+    # Run Playwright tests if targeted env is dev, test or staging.
     executor: playwright-test-executor
     parameters:
       study_key:
         type: string
         default: singular
       env_name:
-        description: Must be one of "dev", "test", "staging"
         default: dev
         type: enum
-        enum: [ dev, test, staging ]
+        enum: [ dev, test, staging, prod, UNKNOWN ]
       test_suite:
         description: Must be one of "nightly", "all".
         default: all
         type: enum
         enum: [ all, nightly ]
-      optional_steps:
-        type: steps
-        default: [ ]
       parallel_num:
         type: integer
         default: 1
     parallelism: << parameters.parallel_num >>
     steps:
-      - setup-build-workspace
-      - setup-shared-env:
-          study_key: << parameters.study_key >>
-      - steps: << parameters.optional_steps >>
-      - run:
-          working_directory: *playwright_path
-          name: "Override env_name"
-          command: |
-            if [[ ! "${ENVIRONMENT}" ]]; then
-              echo "export ENV=<< parameters.env_name >>" >> "$BASH_ENV"
-            else
-              echo "export ENV=${ENVIRONMENT}" >> "$BASH_ENV"
-            fi
-            source "$BASH_ENV"
-      - run:
-          working_directory: *playwright_path
-          name: "Export playwright-e2e .env"
-          command: |
-            cp "config/.env.${ENV}" .env
-            cat .env | awk '{print "export " $0}' >> "$BASH_ENV"
-            source "$BASH_ENV"
-      - run:
-          working_directory: *repo_path
-          name: "Read vault environment variables"
-          command: |
-            echo $SITE_PASSWORD
-            echo $SINGULAR_USER_EMAIL
-            echo $DSM_USER_EMAIL
-            echo $DSM_USER_PASSWORD
-            echo $SINGULAR_USER_PASSWORD
-
-      - run:
-          working_directory: *playwright_path
-          name: Install NPM packages
-          command: npm install --force --quiet
-      - run:
-          working_directory: *playwright_path
-          command: npm run lint -- --max-warnings 0
-      - run:
-          working_directory: *playwright_path
-          command: npm run build
-      - run:
-          working_directory: *playwright_path
-          name: Install Playwright browsers dependencies
-          command: |
-            # sudo npm cache clean -f
-            # sudo npm install -g n
-            # sudo n stable
-            npx playwright install --with-deps chromium
       - when:
           condition:
-            equal: [ all, << parameters.test_suite >> ]
+            or:
+              - equal: [ dev, << parameters.env_name >> ]
+              - equal: [ test, << parameters.env_name >> ]
+              - equal: [ staging, << parameters.env_name >> ]
           steps:
+            - attach_workspace:
+                at: .
+            - run:
+                working_directory: *repo_path
+                name: "REMOVE THIS: Read vault environment variables"
+                command: |
+                  echo $SITE_PASSWORD
+                  echo $SINGULAR_USER_EMAIL
+                  echo $DSM_USER_EMAIL
+                  echo $DSM_USER_PASSWORD
+                  echo $SINGULAR_USER_PASSWORD
             - run:
                 working_directory: *playwright_path
-                name: Run all Playwright tests except nightly tests
-                command: npx playwright test --config=playwright-ci.config.ts --grep-invert "/nightly/|/examples/"
-      - when:
-          condition:
-            equal: [ nightly, << parameters.test_suite >> ]
-          steps:
-            - run:
-                working_directory: *playwright_path
-                name: Run all Playwright nightly tests
-                command: npx playwright test --config=playwright-ci.config.ts --grep "nightly/"
-      # File paths are relative and defined in playwright.config.ts Reporter section
-      - store_test_results:
-          path: ../playwright-e2e/test-results/junit
-      - store_artifacts:
-          path: ../playwright-e2e/test-results
-      - store_artifacts:
-          path: ../playwright-e2e/html-test-results
+                name: Install Playwright browsers dependencies
+                command: npx playwright install --with-deps chromium
+            - when:
+                condition:
+                  equal: [ all, << parameters.test_suite >> ]
+                steps:
+                  - run:
+                      working_directory: *playwright_path
+                      name: Run all Playwright tests except nightly tests
+                      command: npx playwright test --config=playwright-ci.config.ts --grep-invert "/nightly/|/examples/"
+            - when:
+                condition:
+                  equal: [ nightly, << parameters.test_suite >> ]
+                steps:
+                  - run:
+                      working_directory: *playwright_path
+                      name: Run all Playwright nightly tests
+                      command: npx playwright test --config=playwright-ci.config.ts --grep "nightly/"
+            # File paths are relative and defined in playwright.config.ts Reporter section
+            - store_test_results:
+                path: ../playwright-e2e/test-results/junit
+            - store_artifacts:
+                path: ../playwright-e2e/test-results
+            - store_artifacts:
+                path: ../playwright-e2e/html-test-results
 
 parameters:
   study_key:
@@ -744,18 +755,24 @@ workflows:
     # Run Playwright tests against Dev env to ensure tests are running without failure.
     when:
       and:
-        - equal: ["run-e2e-test", << pipeline.parameters.api_call >>]
-        - not:
-            equal: [ "UNKNOWN", << pipeline.parameters.study_key >> ]
+        - equal: [ "run-e2e-tests", << pipeline.parameters.api_call >> ]
+        - and:
+            - not:
+                equal: [ "UNKNOWN", << pipeline.parameters.deploy_env >> ]
+            - not:
+                equal: [ "prod", << pipeline.parameters.deploy_env >> ]
     jobs:
-      - playwright-e2e-test:
+      - build-playwright-job
+      - run-playwright-test-job:
           <<: *filter-pr-branch
-          env_name: dev
+          env_name: << pipeline.parameters.deploy_env >>
           test_suite: all
+          requires:
+            - build-playwright-job
 
   build-and-deploy-all-apps-workflow:
     # Develop branch only:
-    # Trigger automatically when PR merge into develop branch
+    # Trigger automatically when PR merge into develop branch. Only changed app(s) will be deployed to dev env.
     unless: << pipeline.parameters.do-builds >>
     jobs:
       - conditionally-launch-build-and-deploy-all-job:
@@ -774,17 +791,17 @@ workflows:
               ignore:
                 - /^rc.*/
                 - /^hotfix.*/
-      - playwright-e2e-test:
-          # Run Playwright tests against Dev env after deploy changed apps (any study)
-          filters:
-            branches:
-              ignore:
-                - /^rc.*/
-                - /^hotfix.*/
-          env_name: dev
-          test_suite: all
+      - build-playwright-job:
+          <<: *filter-develop-branch
           requires:
             - build-and-deploy-job
+      - run-playwright-test-job:
+          # Run Playwright tests after deploy changed apps (any study). Note: Changed app may not have any Playwright test coverage.
+          <<: *filter-develop-branch
+          env_name: << pipeline.parameters.deploy_env >>
+          test_suite: all
+          requires:
+            - build-playwright-job
 
   launch-all-app-builds-workflow:
     # using do-builds param to select which of the two workflows using the build-on-tag-filters
@@ -873,17 +890,6 @@ workflows:
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: fon
-      - playwright-e2e-test:
-          filters:
-            branches:
-              only:
-                - test
-                - staging
-          test_suite: all
-          optional_steps:
-            - set-deployment-environment
-          requires:
-            - deploy-singular-app
 
   nightly:
     triggers:
