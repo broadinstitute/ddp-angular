@@ -108,6 +108,19 @@ In **/tests/singular** dir, run Singular tests only:
   * For example, to run `login-visual.spec.ts` test:
   > npx cross-env SITE_PASSWORD=<SITE_PASSWORD> SINGULAR_USER_EMAIL=<EMAIL> SINGULAR_USER_PASSWORD=<YOUR_PASSWORD> SINGULAR_BASE_URL=<HOME_URL> npx playwright test --config=playwright.config.ts login-visual.spec.ts
 
+### Running tests on CI
+- Checking new or/and modified Playwright tests pass in CI.
+  - Trigger Playwright tests workflow by call to `build-utils/run_ci.sh`.
+    - If this is the first time, set personal CI token in `$HOME/.circleci-token` file. To see how to generate a personal token: https://app.circleci.com/settings/user/tokens
+    - `<STUDY_NAME>` Any study name. It's required parameter by the shell script `run_ci.sh` but it's not used to run Playwright tests for a study. All tests will run against the `dev` env to ensure all tests are working fine.
+    - `<GITHUB_BRANCH_NAME>` Your branch name
+    ```
+    cd build-utils
+    ./run_ci.sh run-e2e-tests <STUDY_NAME> <GITHUB_BRANCH_NAME>
+    ```
+
+- When PR is merged, Playwright tests will run automatically after deploy has finished successfully
+### Debugging in Intellij
 ### Debugging in Intellij
 
 - [TODO]

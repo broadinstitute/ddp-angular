@@ -22,6 +22,11 @@ if [[ -z $COMMAND || -z $STUDY_KEY || -z $BRANCH || ($COMMAND == "deploy" && -z 
   echo "        Deploy saved build of corresponding to given branch to specified TARGET_ENV"
   echo "    run-tests"
   echo "        Run tests for given study and given branch"
+  echo "    run-e2e-tests"
+  echo "        Run Playwright E2E tests for given branch against specified TARGET_ENV (dev, test or staging)"
+  echo "        Given study is ignored"
+  echo "        Example: ./run_ci.sh run-e2e-tests singular pepper-227-circleci-playwright-test dev"
+  echo ""
   exit 1
 fi
 
