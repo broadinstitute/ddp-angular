@@ -2,7 +2,7 @@
   <b *ngIf="fieldName != null">{{fieldName}}</b>
   <mat-form-field class="DatePicker--Input">
     <input matInput maxlength="10" [ngClass]="{'Input': true, 'Color--Field--Patched': hasDateChanged}"
-           placeholder="{{getDateFormatPlaceholder(dateFormat)}}"
+           placeholder="{{dateFormat | lowercase}}"
            [(ngModel)]="_dateString" (change)="check()"
            [disabled]="disabled" autocomplete="off"
            >

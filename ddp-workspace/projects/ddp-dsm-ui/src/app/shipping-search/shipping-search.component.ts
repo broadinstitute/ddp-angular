@@ -5,7 +5,7 @@ import { Statics } from '../utils/statics';
 import { DSMService } from '../services/dsm.service';
 import { KitRequest } from '../shipping/shipping.model';
 import { RoleService } from '../services/role.service';
-import { Observable} from 'rxjs';
+import { Observable, defer } from 'rxjs';
 
 @Component({
   selector: 'app-shipping-search',
@@ -15,12 +15,12 @@ import { Observable} from 'rxjs';
 export class ShippingSearchComponent implements OnInit {
   errorMessage: string;
   additionalMessage: string;
-  searchValue: string = null;
-  searchField: string = null;
+  searchValue: string | null = null;
+  searchField: string | null = null;
   searching = false;
   allowedRealms: string[] = [];
   kit: KitRequest[] = [];
-  private currentPatchField: string;
+  private currentPatchField: string | null;
 
   constructor(private dsmService: DSMService, private auth: Auth, private role: RoleService) {
     if (!auth.authenticated()) {
@@ -120,48 +120,31 @@ export class ShippingSearchComponent implements OnInit {
       ); // need to subscribe, otherwise it will not send!
   }
 
-  //Triggers when user finishes typing
-  valueChanged(value: any, parameterName: string, kitRequest: KitRequest): void {
-    if (typeof value === 'string') {
-      kitRequest[parameterName] = value;
-    }
-  }
-
   patch(patch: any): Observable<any> {
     return this.dsmService.patchParticipantRecord(JSON.stringify(patch));
+  }
+
+  saveCompleted(): void{
+    this.currentPatchField = null;
   }
 
   //Fires when user clicks "Save Date" button. Returns true
   //if the promise succeeds and the server successfukky writes and
   //returns and error if the server write fails.
-  saveDate(kitRequest: KitRequest): () => Promise<boolean> { 
-    return async (): Promise<boolean> => {
-      const realm: string = kitRequest.realm;
-      const patch1 = new PatchUtil(
-        kitRequest.dsmKitRequestId, this.role.userMail(),
-        {
-          name: "collectionDate",
-          value: kitRequest.collectionDate
-        }, null, 'dsmKitRequestId', kitRequest.dsmKitRequestId,
-        'kit', null, realm, kitRequest.participantId
-      );
-      const patch = patch1.getPatch();
-      this.currentPatchField = "collectionDate";
-      return new Promise<boolean>((resolve, reject) => {
-        this.patch(patch).subscribe({ // need to subscribe, otherwise it will not send!
-      next: data => {
-        this.currentPatchField = null;
-            resolve(true);
-      },
-      error: err => {
-        if (err._body === Auth.AUTHENTICATION_ERROR) {
-          
-          this.auth.logout();
-        }
-            reject(err);
-      },
-        });
-    });
-  }
-  }
+  saveDate(kitRequest: KitRequest): Observable<boolean> { 
+      return defer(() => {
+        const realm: string = kitRequest.realm;
+        const patch1 = new PatchUtil(
+          kitRequest.dsmKitRequestId, this.role.userMail(),
+          {
+            name: "collectionDate",
+            value: kitRequest.collectionDate
+          }, null, 'dsmKitRequestId', kitRequest.dsmKitRequestId,
+          'kit', null, realm, kitRequest.participantId
+        );
+        const patch = patch1.getPatch();
+        this.currentPatchField = "collectionDate";
+        return this.patch(patch);
+      });
+    }
 }

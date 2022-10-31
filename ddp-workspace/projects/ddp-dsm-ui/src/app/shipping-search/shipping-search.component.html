@@ -144,9 +144,9 @@
                   (click)="receiveATKit(kitRequest)">Mark Received</button>
         </td>
         <td>
-          <app-field-datepicker (dateChanged)="valueChanged($event, 'collectionDate', kitRequest)"
+          <app-field-datepicker (saveCompleted)="saveCompleted()"
                                 [allowUnknownDay]="false"
-                                [dateString]="kitRequest.collectionDate"
+                                [(dateString)]="kitRequest.collectionDate"
                                 [showTodayButton]="true"
                                 [showSaveBtn]="true"
                                 [dateSaved]="saveDate(kitRequest)"
