@@ -124,9 +124,16 @@ export class ShippingSearchComponent implements OnInit {
     return this.dsmService.patchParticipantRecord(JSON.stringify(patch));
   }
 
-  saveCompleted(): void{
-    this.currentPatchField = null;
+//Triggers when user finishes typing
+valueChanged(value: any, parameterName: string, kitRequest: KitRequest): void {
+  if (typeof value === 'string') {
+    kitRequest[parameterName] = value;
   }
+}
+
+saveCompleted(): void{
+  this.currentPatchField = null;
+}
 
   //Fires when user clicks "Save Date" button. Returns true
   //if the promise succeeds and the server successfukky writes and
@@ -145,6 +152,7 @@ export class ShippingSearchComponent implements OnInit {
         const patch = patch1.getPatch();
         this.currentPatchField = "collectionDate";
         return this.patch(patch);
+
       });
     }
 }
