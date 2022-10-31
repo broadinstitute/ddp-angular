@@ -1,9 +1,5 @@
 import { Page, Response } from '@playwright/test';
 
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '../.env.singular') });
-
 export const NavSelectors = {
   Login: '.header button[data-ddp-test="signInButton"]:has-text("Log In")',
   LoadingSpinner: '.auth0-loading',
@@ -38,7 +34,12 @@ export async function visitHomePage(page: Page): Promise<Response | null> {
 }
 
 export async function signMeUp(page: Page): Promise<void> {
-  return await page.locator(NavSelectors.SignMeUp).click();
+  const progressSpinner = 'mat-spinner[role="progressbar"]';
+  await Promise.all([
+    page.locator(NavSelectors.SignMeUp).click(),
+    page.locator(progressSpinner).waitFor({ state: 'visible' })
+  ]);
+  await page.locator(progressSpinner).waitFor({ state: 'detached', timeout: 30 * 1000 });
 }
 
 export async function clickLogin(page: Page): Promise<void> {

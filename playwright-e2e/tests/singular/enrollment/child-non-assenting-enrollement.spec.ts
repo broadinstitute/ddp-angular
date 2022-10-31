@@ -1,8 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
 import * as user from 'data/fake-user.json';
-import { fillEmailPassword } from 'authentication/auth-singular';
-import { makeEmailAlias } from 'utils/string-utils';
+import * as auth from 'authentication/auth-singular';
 import { WHO } from 'data/constants';
 import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
 import MedicalRecordReleaseForm from 'pages/singular/enrollment/medical-record-release-form';
@@ -25,11 +24,7 @@ test.describe('Enroll my child', () => {
 
     // Step 2
     // Enter email alias and password to create new account
-    await fillEmailPassword(page, {
-      email: makeEmailAlias(process.env.singularUserEmail as string),
-      password: process.env.singularUserPassword,
-      waitForNavigation: true
-    });
+    await auth.createAccountWithEmailAlias(page);
 
     // Step 3
     // On "My Dashboard" page, click Enroll Mys Child button
@@ -182,11 +177,7 @@ test.describe('Enroll my child', () => {
 
     // Step 2
     // Enter email alias and password to create new account
-    await fillEmailPassword(page, {
-      email: makeEmailAlias(process.env.singularUserEmail as string),
-      password: process.env.singularUserPassword,
-      waitForNavigation: true
-    });
+    await auth.createAccountWithEmailAlias(page);
 
     // Step 3
     // On "My Dashboard" page, click Enroll Mys Child button

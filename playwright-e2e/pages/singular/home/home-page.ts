@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { SingularPage } from 'pages/singular/singular-page';
-import { fillEmailPassword } from 'authentication/auth-singular';
+import * as auth from 'authentication/auth-singular';
 import { HomePageInterface } from 'pages/page-interface';
 
 /**
@@ -44,12 +44,6 @@ export default class HomePage extends SingularPage implements HomePageInterface 
    * @param opts
    */
   async logIn(opts: { email?: string; password?: string; waitForNavigation?: boolean } = {}): Promise<void> {
-    const {
-      email = process.env.singularUserEmail,
-      password = process.env.singularUserPassword,
-      waitForNavigation
-    } = opts;
-    await this.getLogInButton().click();
-    await this.waitForNavAfter(async () => fillEmailPassword(this.page, { email, password, waitForNavigation }));
+    await auth.login(this.page);
   }
 }
