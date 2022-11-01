@@ -12,7 +12,7 @@ import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
 import { WHO } from 'data/constants';
 import * as user from 'data/fake-user.json';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
-import { generateUserName } from 'data/fake-data-utils';
+import { generateUserName } from 'utils/faker-utils';
 
 test.describe('Enrol an adult dependent', () => {
   // Randomize last name

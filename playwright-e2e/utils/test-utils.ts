@@ -6,7 +6,7 @@ import Select from 'lib/widget/select';
 import axios from 'axios';
 import _ from 'lodash';
 import { STATES } from 'data/constants';
-import { makeRandomTelephone } from './string-utils';
+import { generateRandomPhoneNum } from './faker-utils';
 
 const { SITE_PASSWORD } = process.env;
 
@@ -65,7 +65,7 @@ export async function enterMailingAddress(
     street = 'Broadway Street',
     city = 'Cambridge',
     zipCode = '01876',
-    telephone = makeRandomTelephone()
+    telephone = generateRandomPhoneNum()
   } = opts;
 
   const getFullName = (): Locator => {
@@ -192,3 +192,15 @@ export async function select(page: Page, stableID: string, option: string): Prom
 export async function click(page: Page, stableID: string, option: string): Promise<void> {
   await page.locator(`[data-ddp-test="${stableID}"]`).selectOption(option);
 }
+
+/**
+ * Returns the default value if value is null, empty or undefined.
+ * @param value
+ * @param defaultValue
+ */
+export const getEnv = (value: string | undefined, defaultValue: string): string => {
+  if (value == null && defaultValue == null) {
+    throw Error('Invalid Parameters: Value and defaultValue are both undefined or null.');
+  }
+  return value == null ? defaultValue : value;
+};

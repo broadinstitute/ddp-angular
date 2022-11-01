@@ -13,7 +13,7 @@ import ConsentFormForMinorPage from 'pages/singular/enrollment/consent-form-for-
 import { enterMailingAddress } from 'utils/test-utils';
 import AssentFormPage from 'pages/singular/enrollment/assent-form-page';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
-import { generateUserName } from 'data/fake-data-utils';
+import { generateUserName } from 'utils/faker-utils';
 
 test.describe('Enroll my child', () => {
   // Randomize last name

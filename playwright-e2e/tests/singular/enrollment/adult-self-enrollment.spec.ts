@@ -12,7 +12,7 @@ import EnrollMyselfPage from 'pages/singular/enrollment/enroll-myself-page';
 import MedicalRecordReleaseForm from 'pages/singular/enrollment/medical-record-release-form';
 import PatientSurveyPage from 'pages/singular/enrollment/patient-survey-page';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
-import { generateUserName } from 'data/fake-data-utils';
+import { generateUserName } from 'utils/faker-utils';
 
 test.describe('Enroll myself as adult', () => {
   // Randomize last name
