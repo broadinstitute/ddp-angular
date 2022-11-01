@@ -10,7 +10,6 @@ export const generateRandomNum = (min = 1, max = 99): number => Math.floor(Math.
 
 export const generateEmailAlias = (email: string | undefined): string => {
   if (email == null || email.length === 0 || !email.includes('@')) {
-    // Evaluate to true if value is: null or undefined or does not contains @
     throw Error(`Invalid Parameter: Email "${email}"`);
   }
   const splintedEmail = email.split('@');
