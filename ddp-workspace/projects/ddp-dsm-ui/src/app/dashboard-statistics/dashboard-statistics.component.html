@@ -20,8 +20,10 @@
   <div class="dashboard-chartsAndCounts" *ngIf="!loading">
 
   <ng-container *ngIf="!Error; else errorText">
+    
+    <app-date-range></app-date-range>
+
     <mat-tab-group mat-align-tabs="center" *ngIf="Charts?.length > 0 || Counts?.length > 0; else noCharts">
-      <app-date-range></app-date-range>
 
       <mat-tab>
         <ng-template mat-tab-label>
