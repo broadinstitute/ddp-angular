@@ -26,3 +26,8 @@ button.mat-icon-button {
 td {
   white-space: nowrap;
 }
+
+.clickable:hover {
+  color: blue;
+  cursor: pointer;
+}

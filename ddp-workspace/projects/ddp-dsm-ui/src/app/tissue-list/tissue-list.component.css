@@ -62,4 +62,17 @@ tr {
   padding-bottom: 10px;
 }
 
+.clickable:hover {
+  color: blue;
+  cursor: pointer;
+}
+
+.FONT-15 {
+  font-size: 15px;
+}
+
+.PADDING-RIGHT-30 {
+  padding-right: 30px;
+}
+
 
