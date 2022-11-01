@@ -8,7 +8,7 @@ export const makeRandomNum = (min = 1, max = 99): number => {
 };
 
 export const makeEmailAlias = (originalEmail: string): string => {
-  if (originalEmail == null || originalEmail.length === 0 || originalEmail.indexOf('@') === -1) {
+  if (originalEmail == null || originalEmail.length === 0 || !originalEmail.includes('@')) {
     // Evaluate to true if value is: null or undefined or does not contains @
     throw Error(`Invalid Parameter: Email "${originalEmail}"`);
   }
@@ -27,8 +27,5 @@ export const getEnv = (value: string | undefined, defaultValue: string): string 
   if (value == null && defaultValue == null) {
     throw Error('Invalid Parameters: Value and defaultValue are both undefined or null.');
   }
-  if (value == null) {
-    return defaultValue;
-  }
-  return value;
+  return value == null ? defaultValue : value;
 };
