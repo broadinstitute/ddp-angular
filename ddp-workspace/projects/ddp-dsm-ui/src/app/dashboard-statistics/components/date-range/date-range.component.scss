@@ -1,0 +1,10 @@
+@import "fonts";
+
+.datePicker-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  mat-form-field {
+    @include MontserratFontFamily;
+  }
+}
