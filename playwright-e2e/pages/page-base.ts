@@ -72,7 +72,7 @@ export default abstract class PageBase implements PageInterface {
   }
 
   protected async waitForNavAfter(fn: () => Promise<void>): Promise<void> {
-    await Promise.all([this.page.waitForNavigation(), fn()]);
+    await Promise.all([this.page.waitForNavigation({ waitUntil: 'domcontentloaded' }), fn()]);
   }
 
   /** Click "Next" button */

@@ -2,7 +2,7 @@ import { Page } from '@playwright/test';
 import { clickLogin, NavSelectors } from 'pages/singular/navbar';
 import { makeEmailAlias } from 'utils/string-utils';
 
-const { singularUserEmail, singularUserPassword } = process.env;
+const { SINGULAR_USER_EMAIL, SINGULAR_USER_PASSWORD } = process.env;
 
 export async function fillEmailPassword(
   page: Page,
@@ -27,7 +27,7 @@ export async function login(
   page: Page,
   opts: { email?: string; password?: string; waitForNavigation?: boolean } = {}
 ): Promise<void> {
-  const { email = singularUserEmail, password = singularUserPassword, waitForNavigation } = opts;
+  const { email = SINGULAR_USER_EMAIL, password = SINGULAR_USER_PASSWORD, waitForNavigation } = opts;
   if (email == null || password == null) {
     throw Error('Invalid parameters: Email and Password are undefined or null.');
   }
@@ -40,8 +40,8 @@ export async function createAccountWithEmailAlias(
   opts: { email?: string; password?: string; waitForNavigation?: boolean } = {}
 ): Promise<string> {
   const {
-    email = makeEmailAlias(singularUserEmail as string),
-    password = singularUserPassword as string,
+    email = makeEmailAlias(SINGULAR_USER_EMAIL as string),
+    password = SINGULAR_USER_PASSWORD as string,
     waitForNavigation
   } = opts;
   await fillEmailPassword(page, { email, password, waitForNavigation });

@@ -53,6 +53,7 @@ export default class MedicalRecordReleaseForm extends SingularPage {
     const fName = path.parse(filePath).name;
     await this.page.setInputFiles('input[class="file-input"]', path.resolve(process.env.ROOT_DIR as string, filePath));
     await expect(this.page.locator('.uploaded-file .file-name')).toHaveText(new RegExp(fName));
+    await this.page.waitForTimeout(2000); // Short delay needed when uploading file
   }
 
   /**

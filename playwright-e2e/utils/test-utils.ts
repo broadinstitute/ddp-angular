@@ -8,7 +8,7 @@ import _ from 'lodash';
 import { STATES } from 'data/constants';
 import { makeRandomTelephone } from './string-utils';
 
-const { singularSitePassword } = process.env;
+const { SITE_PASSWORD } = process.env;
 
 export async function waitUntilRemoved(locator: Locator): Promise<void> {
   expect(await locator.count()).toHaveLength(0);
@@ -111,9 +111,9 @@ export async function enterMailingAddress(
  * @param page
  * @param password
  */
-export async function fillSitePassword(page: Page, password = singularSitePassword): Promise<void> {
+export async function fillSitePassword(page: Page, password = SITE_PASSWORD): Promise<void> {
   if (password == null) {
-    throw Error(`Invalid parameter: password is "${singularSitePassword}"`);
+    throw Error(`Invalid parameter: password is "${SITE_PASSWORD}"`);
   }
   await page.locator('input[type="password"]').fill(password);
   await Promise.all([page.waitForNavigation(), page.locator('button >> text=Submit').click()]);
