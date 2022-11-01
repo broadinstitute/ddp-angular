@@ -1743,6 +1743,9 @@ export class ParticipantListComponent implements OnInit {
         if (maybeParticipant) {
           const existingCohortTags = maybeParticipant.data.dsm[CohortTagComponent.COHORT_TAG] as CohortTag[];
           if (existingCohortTags) {
+            if (existingCohortTags.find(tag => tag.cohortTagName === cohortTag.cohortTagName)) {
+              continue;
+            }
             existingCohortTags.push(cohortTag);
           } else {
             maybeParticipant.data.dsm[CohortTagComponent.COHORT_TAG] = [cohortTag];
