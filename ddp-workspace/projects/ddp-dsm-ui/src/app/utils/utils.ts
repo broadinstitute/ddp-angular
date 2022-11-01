@@ -491,7 +491,7 @@ export class Utils {
     }
   }
 
-  public static getPartialDateFormatted(dateString: string | undefined, format: string): string {
+  public static getPartialDateFormatted(dateString: string , format: string): string {
     if (format != null) {
       let dateParts: string[] = null;
       if (Utils.DATE_STRING_IN_CVS === format) {

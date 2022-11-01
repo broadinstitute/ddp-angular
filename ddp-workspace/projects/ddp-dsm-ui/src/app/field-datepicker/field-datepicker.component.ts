@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Utils } from '../utils/utils';
 import { EstimatedDate } from './field-datepicker.model';
-import { defer, Observable, throwError} from 'rxjs';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-field-datepicker',
@@ -128,22 +129,21 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
   public saveDate(): void{
     this.saveButtonText = "Saving..."
     this.currentlySaving = true;
-      this.dateSaved.subscribe({
+      this.dateSaved.pipe(finalize(() => {
+        this.saveCompleted.emit();
+        setTimeout(() => {
+          this.saveButtonText = "Save Date";
+          this.currentlySaving = false;
+        },5000);
+      })).subscribe({
         next: data => {
           this.saveButtonText = "Success!";
           this.hasDateChanged = false;
         },
         error: err => {
           this.saveButtonText = "Failed";
-        },
-          }).add(() => {
-            this.saveCompleted.emit();
-            setTimeout(() => {
-              this.saveButtonText = "Save Date";
-              this.currentlySaving = false;
-            },5000);
+        }
           });
-      
     }
 
     public selectDate(event: any): void {

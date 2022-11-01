@@ -135,24 +135,20 @@ saveCompleted(): void{
   this.currentPatchField = null;
 }
 
-  //Fires when user clicks "Save Date" button. Returns true
-  //if the promise succeeds and the server successfukky writes and
-  //returns and error if the server write fails.
+  //Fires when user clicks "Save Date" button. Returns an
+  //observable that signals whether or not the request succeeded
   saveDate(kitRequest: KitRequest): Observable<boolean> { 
-      return defer(() => {
-        const realm: string = kitRequest.realm;
-        const patch1 = new PatchUtil(
-          kitRequest.dsmKitRequestId, this.role.userMail(),
-          {
-            name: "collectionDate",
-            value: kitRequest.collectionDate
-          }, null, 'dsmKitRequestId', kitRequest.dsmKitRequestId,
-          'kit', null, realm, kitRequest.participantId
-        );
-        const patch = patch1.getPatch();
-        this.currentPatchField = "collectionDate";
-        return this.patch(patch);
-
-      });
-    }
+    const realm: string = kitRequest.realm;
+    const patch1 = new PatchUtil(
+      kitRequest.dsmKitRequestId, this.role.userMail(),
+      {
+        name: "collectionDate",
+        value: kitRequest.collectionDate
+      }, null, 'dsmKitRequestId', kitRequest.dsmKitRequestId,
+      'kit', null, realm, kitRequest.participantId
+    );
+    const patch = patch1.getPatch();
+    this.currentPatchField = "collectionDate";
+    return this.patch(patch);
+  };
 }
