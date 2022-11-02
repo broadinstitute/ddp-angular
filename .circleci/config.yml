@@ -695,7 +695,7 @@ jobs:
           command: |
             set -e
 
-            TESTFILES=$(find $(pwd) -wholename "**/*.spec.ts" | circleci tests split --split-by=timings)
+            TESTFILES=$(circleci tests glob "tests/**/*.spec.ts" | circleci tests split --split-by=timings)
             echo $TESTFILES
             echo "/end"
 
@@ -707,12 +707,14 @@ jobs:
       # Fails to load traces in CircleCI. See https://github.com/microsoft/playwright/issues/18108
       - run:
           working_directory: *playwright_path
-          command: cp test-results/junit/results.xml ~/junit/
+          command: |
+            mkdir -p /tmp/junit
+            cp test-results/junit/results.xml /tmp/junit
           when: always
       - store_test_results:
-          path: ~/junit
+          path: /tmp/junit
       - store_artifacts:
-          path: ~/junit
+          path: /tmp/junit
       - store_artifacts:
           path: playwright-e2e/test-results
           destination: test-results
