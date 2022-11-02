@@ -694,7 +694,7 @@ jobs:
           command: |
             set -e
 
-            TESTFILES=$(circleci tests glob "**/*.spec.ts" | circleci tests split --split-by=timings)
+            TESTFILES=$(find $(pwd) -wholename "**/*.spec.ts" | circleci tests split --split-by=timings)
             echo $TESTFILES
             echo "/end"
 
