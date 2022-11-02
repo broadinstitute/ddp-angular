@@ -711,14 +711,16 @@ jobs:
       #- store_artifacts:
       #    path: /tmp/junit
       #    destination: junit
+      - store_test_results:
+          path: playwright-e2e/junit
       - store_artifacts:
-          path: ../junit
+          path: playwright-e2e/junit
           destination: junit
       - store_artifacts:
-          path: ../test-results
+          path: playwright-e2e/test-results
           destination: test-results
       - store_artifacts:
-          path: ../html-test-results
+          path: playwright-e2e/html-test-results
           destination: html-test-results
 
 
