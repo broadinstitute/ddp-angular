@@ -694,7 +694,7 @@ jobs:
           command: |
             set -e
             TESTFILES=$(circleci tests glob "tests/**/*.spec.ts")
-            npm test:ci $TESTFILES  --grep << parameters.test_suite >>
+            npm run test:ci $TESTFILES --grep << parameters.test_suite >>
             # npx playwright test --grep << parameters.test_suite >>
           no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       # File paths are relative and defined in playwright.config.ts Reporter section
