@@ -703,8 +703,9 @@ jobs:
           name: Run targeted test suites
           command: npx playwright test --grep << parameters.test_suite >>
       # File paths are relative and defined in playwright.config.ts Reporter section
+      # Fails to load traces in CircleCI. See https://github.com/microsoft/playwright/issues/18108
       - store_test_results:
-          path: playwright-e2e/test-results/junit
+          path: playwright-e2e/test-results
       - store_artifacts:
           path: playwright-e2e/test-results
       - store_artifacts:
