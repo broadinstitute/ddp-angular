@@ -693,6 +693,7 @@ jobs:
           working_directory: *playwright_path
           command: |
             TESTS=$(circleci tests glob "tests/*.spec.ts" | circleci tests split --split-by=timings)
+            echo $TESTS
             npx playwright test $TESTS
           no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       - run:
