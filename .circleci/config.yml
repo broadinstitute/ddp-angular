@@ -694,7 +694,7 @@ jobs:
           command: |
             set -e
             ls
-            TESTFILES=$(circleci tests glob "tests/*.spec.ts" | circleci tests split --split-by=timings)
+            TESTFILES=$(circleci tests glob "tests/*.spec.ts")
             echo $TESTFILES
             # npm test:ci $TESTFILES
           no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
