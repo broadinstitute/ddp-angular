@@ -493,7 +493,10 @@ commands:
               - equal: [ UNKNOWN, << parameters.env >> ]
               - equal: [ prod, << parameters.env >> ]
           steps:
-            - run: circleci-agent step halt
+            - run:
+                command: |
+                  echo "Stop run tests because ENV=<< parameters.env >>"
+                  circleci-agent step halt
 
 jobs:
   build-and-deploy-job:
