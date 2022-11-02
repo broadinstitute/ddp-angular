@@ -694,14 +694,11 @@ jobs:
           command: |
             set -e
             ls
-            TESTFILES=$(circleci tests glob "tests/*.spec.ts")
+            TESTFILES=$(circleci tests glob "tests/**/*.spec.ts")
             echo $TESTFILES
             # npm test:ci $TESTFILES
+            # npx playwright test --grep << parameters.test_suite >>
           no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
-      - run:
-          working_directory: *playwright_path
-          name: Run targeted test suites
-          command: npx playwright test --grep << parameters.test_suite >>
       # File paths are relative and defined in playwright.config.ts Reporter section
       # Fails to load traces in CircleCI. See https://github.com/microsoft/playwright/issues/18108
       - store_test_results:
