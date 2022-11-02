@@ -145,10 +145,13 @@
         </td>
         <td>
           <app-field-datepicker (dateChanged)="valueChanged($event, 'collectionDate', kitRequest)"
-                                [allowUnknownDay]="false" [colorDuringPatch]="isPatchedCurrently('collectionDate')"
+                                (saveCompleted)="saveCompleted()"
+                                [allowUnknownDay]="false"
                                 [dateString]="kitRequest.collectionDate"
-                                [showTodayButton]="true"></app-field-datepicker>
-        </td>
+                                [showTodayButton]="true"
+                                [showSaveBtn]="true"
+                                [dateSaved]="saveDate(kitRequest)"
+                                ></app-field-datepicker>
       </tr>
       <tbody>
       <tfoot>
