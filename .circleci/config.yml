@@ -493,7 +493,7 @@ commands:
               - equal: [ UNKNOWN, << parameters.env >> ]
               - equal: [ prod, << parameters.env >> ]
           steps:
-            - run: exit 0
+            - run: circleci-agent step halt
 
 jobs:
   build-and-deploy-job:
