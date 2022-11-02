@@ -893,10 +893,6 @@ workflows:
               only:
                 - develop
     jobs:
-      - playwright-e2e-test:
-          name: playwright-e2e-nightly-test
-          env_name: test
-          test_suite: nightly
       - build-and-deploy-job:
           name: basil-nightly
           study_key: basil
