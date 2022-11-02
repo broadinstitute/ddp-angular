@@ -763,10 +763,10 @@ workflows:
     jobs:
       - build-playwright-test-job:
           env: << pipeline.parameters.deploy_env >>
-      #- run-playwright-test-job:
-          #env: << pipeline.parameters.deploy_env >>
-          #requires:
-            #- build-playwright-test-job
+      - run-playwright-test-job:
+          env: << pipeline.parameters.deploy_env >>
+          requires:
+            - build-playwright-test-job
 
   build-and-deploy-all-apps-workflow:
     unless: << pipeline.parameters.do-builds >>
