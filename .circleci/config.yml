@@ -694,7 +694,7 @@ jobs:
           command: |
             set -e
 
-            TESTFILES=$(circleci tests glob "tests/**/*.spec.ts" | circleci tests split --split-by=timings)
+            TESTFILES=$(circleci tests glob "**/*.spec.ts" | circleci tests split --split-by=timings)
             echo $TESTFILES
             echo "/end"
 
@@ -703,12 +703,19 @@ jobs:
           no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       # File paths are relative and defined in playwright.config.ts Reporter section
       # Fails to load traces in CircleCI. See https://github.com/microsoft/playwright/issues/18108
+      - run:
+          command: cp playwright-e2e/test-results/junit.xml ~/junit/
+          when: always
       - store_test_results:
-          path: playwright-e2e/test-results/junit
+          path: ~/junit
+      - store_artifacts:
+          path: ~/junit
       - store_artifacts:
           path: playwright-e2e/test-results
+          destination: test-results
       - store_artifacts:
           path: playwright-e2e/html-test-results
+          destination: test-results
 
 
 parameters:
