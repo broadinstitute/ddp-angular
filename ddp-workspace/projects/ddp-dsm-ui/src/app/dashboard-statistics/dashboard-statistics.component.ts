@@ -5,8 +5,8 @@ import {RoleService} from '../services/role.service';
 import {catchError, finalize} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
 import {CountsModel} from './models/Counts.model';
-import {DateRangeModel} from "./models/DateRange.model";
 import {DatePipe} from "@angular/common";
+import {DateRangeModel} from "./models/DateRange.model";
 
 @Component({
   selector: 'app-dashboard-statistics',

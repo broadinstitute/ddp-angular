@@ -12,7 +12,6 @@ import {DateRangeModel} from "../../models/DateRange.model";
 import {Subject} from "rxjs";
 import {takeUntil, debounceTime} from 'rxjs/operators'
 import {DatePipe} from "@angular/common";
-import {DateRange} from "../../models/DateRange";
 
 @Component({
   selector: 'app-date-range',
@@ -29,7 +28,7 @@ export class DateRangeComponent implements OnInit, OnDestroy {
   constructor(private datePipe: DatePipe) {
   }
 
-  @Input('activeDates') set activeDates(dates: DateRange) {
+  @Input('activeDates') set activeDates(dates: DateRangeModel) {
     if(!this.dateRangeForm) {
       this.dateRangeForm = this.generateFormGroup(dates);
     }
@@ -38,9 +37,11 @@ export class DateRangeComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.dateRangeForm.valueChanges
-      .pipe(debounceTime(500), takeUntil(this.destroyed$))
-      .subscribe((dates: DateRangeModel) => this.emitDateChange(dates))
+    this.listenToValueChangesAndEmit();
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next();
   }
 
   public getEntries(object: object): [string, any][] {
@@ -52,26 +53,28 @@ export class DateRangeComponent implements OnInit, OnDestroy {
       .filter(([_, value]: [string, AbstractControl]) => value.errors);
   }
 
-  private emitDateChange(dates: DateRangeModel): void {
-    if(this.dateRangeForm.get('startDate').valid && this.dateRangeForm.get('endDate').valid) {
-      const formattedDate: DateRangeModel = new DateRange(
-        this.datePipe.transform(dates.startDate, this.DATE_FORMAT_TRANSFORMED),
-        this.datePipe.transform(dates.endDate, this.DATE_FORMAT_TRANSFORMED)
-      )
+  private listenToValueChangesAndEmit(): void {
+    this.dateRangeForm.valueChanges
+      .pipe(debounceTime(500), takeUntil(this.destroyed$))
+      .subscribe((dates: DateRangeModel) => this.emitDateChange(dates))
+  }
 
-      this.dateChanged.emit(formattedDate);
+  private emitDateChange(dates: DateRangeModel): void {
+    this.dateRangeForm.valid && this.dateChanged.emit(this.transformDates(dates));
+  }
+
+  private transformDates(dates: DateRangeModel): DateRangeModel {
+    return {
+      startDate: this.datePipe.transform(dates.startDate, this.DATE_FORMAT_TRANSFORMED),
+      endDate: this.datePipe.transform(dates.endDate, this.DATE_FORMAT_TRANSFORMED)
     }
   }
 
-  private generateFormGroup({startDate, endDate}: DateRange = {startDate: null, endDate: null}): FormGroup {
+  private generateFormGroup({startDate, endDate}: DateRangeModel = {startDate: null, endDate: null}): FormGroup {
     return new FormGroup({
       startDate: new FormControl(startDate || null, Validators.required),
       endDate: new FormControl(endDate || null, Validators.required),
     });
-  }
-
-  ngOnDestroy(): void {
-    this.destroyed$.next();
   }
 
 }
