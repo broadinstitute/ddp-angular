@@ -702,11 +702,11 @@ jobs:
       # File paths are relative and defined in playwright.config.ts Reporter section
       # Fails to load traces in CircleCI. See https://github.com/microsoft/playwright/issues/18108
       - store_test_results:
-          path: playwright-e2e/test-results
+          path: test-results
       - store_artifacts:
-          path: playwright-e2e/test-results
+          path: test-results
       - store_artifacts:
-          path: playwright-e2e/html-test-results
+          path: html-test-results
 
 
 parameters:
