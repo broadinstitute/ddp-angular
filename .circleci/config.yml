@@ -703,14 +703,11 @@ jobs:
       #    working_directory: *playwright_path
       #    name: Copy junit results.xml
       #    command: |
-      #      mkdir -p /tmp/log/junit
-      #      cp junit/results/results.xml /tmp/junit
+      #      mkdir -p /tmp/junit/results
+      #      cp junit/results/results.xml /tmp/junit/results
       #    when: always
       #- store_test_results:
       #    path: /tmp/junit
-      #- store_artifacts:
-      #    path: /tmp/junit
-      #    destination: junit
       - store_test_results:
           path: playwright-e2e/junit
       - store_artifacts:
