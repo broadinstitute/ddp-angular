@@ -51,7 +51,7 @@ const testConfig: PlaywrightTestConfig = {
     ['junit', { outputFile: 'test-results/junit/results.xml' }]
   ],
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
-  outputDir: 'test-results/',
+  outputDir: 'test-results',
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
