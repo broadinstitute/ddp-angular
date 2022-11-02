@@ -656,6 +656,7 @@ jobs:
         type: enum
         enum: [ dev, test, staging, prod, UNKNOWN ]
       test_suite:
+        # Not used currently
         description: Test group. For example, @singular
         type: string
         # Empty string is treated as a falsy value in evaluation of when clauses
@@ -698,13 +699,15 @@ jobs:
             echo $TESTFILES
             echo "/end"
 
-            npm run test:ci $TESTFILES --grep << parameters.test_suite >>
+            npm run test:ci $TESTFILES
+            # TODO: Can't use --grep when splitting tests
             # npx playwright test --grep << parameters.test_suite >>
           no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       # File paths are relative and defined in playwright.config.ts Reporter section
       # Fails to load traces in CircleCI. See https://github.com/microsoft/playwright/issues/18108
       - run:
-          command: cp playwright-e2e/test-results/junit.xml ~/junit/
+          working_directory: *playwright_path
+          command: cp test-results/junit.xml ~/junit/
           when: always
       - store_test_results:
           path: ~/junit
