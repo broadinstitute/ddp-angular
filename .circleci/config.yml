@@ -709,6 +709,9 @@ jobs:
       - store_test_results:
           path: /tmp/log
       - store_artifacts:
+          path: /tmp/log/junit
+          destination: junit
+      - store_artifacts:
           path: playwright-e2e/test-results
           destination: test-results
       - store_artifacts:
