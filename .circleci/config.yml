@@ -699,23 +699,26 @@ jobs:
           no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       # File paths are relative and defined in playwright.config.ts Reporter section
       # Fails to load traces in CircleCI. See https://github.com/microsoft/playwright/issues/18108
-      - run:
-          working_directory: *playwright_path
-          name: Copy junit results.xml
-          command: |
-            mkdir -p /tmp/log/junit
-            cp test-results/junit/results.xml /tmp/log/junit
-          when: always
-      - store_test_results:
-          path: /tmp/log
+      #- run:
+      #    working_directory: *playwright_path
+      #    name: Copy junit results.xml
+      #    command: |
+      #      mkdir -p /tmp/log/junit
+      #      cp junit/results/results.xml /tmp/junit
+      #    when: always
+      #- store_test_results:
+      #    path: /tmp/junit
+      #- store_artifacts:
+      #    path: /tmp/junit
+      #    destination: junit
       - store_artifacts:
-          path: /tmp/log/junit
+          path: ../junit
           destination: junit
       - store_artifacts:
-          path: playwright-e2e/test-results
+          path: ../test-results
           destination: test-results
       - store_artifacts:
-          path: playwright-e2e/html-test-results
+          path: ../html-test-results
           destination: html-test-results
 
 
