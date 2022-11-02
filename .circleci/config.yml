@@ -657,6 +657,7 @@ jobs:
         enum: [ dev, test, staging, prod, UNKNOWN ]
       test_suite:
         description: Test group. For example, @singular
+        type: string
         # Empty string is treated as a falsy value in evaluation of when clauses
         default: ""
       parallel_num:
