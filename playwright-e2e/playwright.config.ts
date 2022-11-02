@@ -48,7 +48,7 @@ const testConfig: PlaywrightTestConfig = {
   reporter: [
     ['html', { open: 'never', outputFolder: 'html-test-results' }],
     ['list'],
-    ['junit', { outputFile: 'test-results/junit/results.xml' }]
+    ['junit', { outputFile: 'junit/results.xml' }]
   ],
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
   outputDir: 'test-results',
