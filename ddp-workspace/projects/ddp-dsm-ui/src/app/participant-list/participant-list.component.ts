@@ -748,7 +748,7 @@ export class ParticipantListComponent implements OnInit {
     }
 
     if(!this.hasSequencingOrders) {
-      const sampleColumnFiltersToRemove = [Filter.SEQUENCING_RESTRICTION, Filter.SAMPLE_NOTES];
+      const sampleColumnFiltersToRemove = [Filter.SEQUENCING_RESTRICTION, Filter.SAMPLE_NOTES, Filter.COLLECTION_DATE];
 
       delete this.sourceColumns['cl'];
       this.dataSources.delete('cl');
