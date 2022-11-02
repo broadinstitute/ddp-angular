@@ -671,6 +671,10 @@ jobs:
       - attach_workspace:
           at: .
       - run:
+          name: Inspect previous test metadata
+          command: |
+            cat "${CIRCLE_INTERNAL_TASK_DATA}/circle-test-results/results.json" | jq .
+      - run:
           name: "Export environment variables to BASH_ENV"
           command: |
             cp "playwright-e2e/config/.env.<< parameters.env >>" .env
