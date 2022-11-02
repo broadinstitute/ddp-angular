@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  jq: circleci/jq@2.2.0
+
 references:
   repo_path: &repo_path
       /home/circleci/repo
@@ -628,13 +631,12 @@ jobs:
             echo "export SINGULAR_USER_PASSWORD=$userPwd" >> playwright-env/envvars
       - run:
           working_directory: *playwright_path
-          name: Install NPM packages
+          name: npm install
           command: |
             ls && npm --version
             npm install --quiet
       - run:
           working_directory: *playwright_path
-          name: Run eslint
           command: npm run lint -- --max-warnings 0
       - run:
           working_directory: *playwright_path
@@ -670,6 +672,7 @@ jobs:
           env: << parameters.env >>
       - attach_workspace:
           at: .
+      - jq/install
       - run:
           name: Inspect previous test metadata
           command: |
