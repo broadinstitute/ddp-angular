@@ -24,7 +24,7 @@ if [[ -z $COMMAND || -z $STUDY_KEY || -z $BRANCH || ($COMMAND == "deploy" && -z 
   echo "        Run tests for given study and given branch"
   echo "    run-e2e-tests"
   echo "        Run Playwright E2E tests for given branch against specified TARGET_ENV (dev, test or staging)"
-  echo "        Specified STUDY_KEY is unused. CI API call will run all tests"
+  echo "        STUDY_KEY is unused. CI API call will run all tests"
   echo "        Example: ./run_ci.sh run-e2e-tests singular pepper-227-test dev"
   echo ""
   exit 1
