@@ -21,13 +21,13 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
   @Input() addCheckboxEstimated = false;
   @Input() showCalendarButton = true;
   @Input() fieldName: string;
-  @Input() showSaveBtn: boolean = false;
-  @Input() saveSucceeded: boolean = false;
+  @Input() showSaveBtn = false;
+  @Input() saveSucceeded = false;
   @Input() dateSaved: Observable<boolean>;
   @Input() colorDuringPatch = false;
   @Output() dateChanged = new EventEmitter();
   @Output() saveCompleted = new EventEmitter();
-  
+
 
   _dateString: string;
   defaultDate = '1000-01-01';
@@ -48,8 +48,8 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    for(let propName in changes){
-      if("dateSaved" !== propName){
+    for(const propName in changes){
+      if('dateSaved' !== propName){
         this.setInput();
       }
     }
@@ -127,21 +127,21 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
   }
 
   public saveDate(): void{
-    this.saveButtonText = "Saving..."
+    this.saveButtonText = 'Saving...';
     this.currentlySaving = true;
       this.dateSaved.pipe(finalize(() => {
         this.saveCompleted.emit();
         setTimeout(() => {
-          this.saveButtonText = "Save Date";
+          this.saveButtonText = 'Save Date';
           this.currentlySaving = false;
         },5000);
       })).subscribe({
         next: data => {
-          this.saveButtonText = "Success!";
+          this.saveButtonText = 'Success!';
           this.hasDateChanged = false;
         },
         error: err => {
-          this.saveButtonText = "Failed";
+          this.saveButtonText = 'Failed';
         }
           });
     }
@@ -151,17 +151,17 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
       this.datePicker = event;
       if (this.datePicker instanceof Date) {
         //Compare new Value to existing value for color changing
-        let newDate = Utils.getDateFormatted(this.datePicker, this.dateFormat);
+        const newDate = Utils.getDateFormatted(this.datePicker, this.dateFormat);
         this.hasDateChanged = (newDate !== this._dateString);
         this._dateString = newDate; // show user date in the format from the user settings
         this.emitDate(Utils.getDateFormatted(this.datePicker, Utils.DATE_STRING));
       }
     }
-  
+
     getUtil(): Utils {
       return this.util;
     }
-  
+
     public setToday(): void {
       this.datePicker = new Date();
       this.showDatePicker = false;
@@ -169,23 +169,23 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
       this._dateString = Utils.getDateFormatted(this.datePicker, this.dateFormat); // show user date in the format from the user settings
       this.emitDate(Utils.getDateFormatted(this.datePicker, Utils.DATE_STRING));
     }
-  
+
     public setNA(): void {
       this.isNA = true;
       this._dateString = 'N/A';
       this.emitDate(this.defaultDate);
     }
-  
+
     public setNotFound(): void {
       this.isNA = true;
       this._dateString = 'Not Found';
       this.emitDate(this._dateString);
     }
-  
+
     public closeCalendar(): void {
       this.showDatePicker = !this.showDatePicker;
     }
-  
+
     private emitDate(dateString: string): void {
       if (this.addCheckboxEstimated) {
         this.dateChanged.emit(JSON.stringify(new EstimatedDate(dateString, this.estimated)));
@@ -193,12 +193,12 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
         this.dateChanged.emit(dateString);
       }
     }
-  
+
     estimatedChanged(): void {
       this._dateString = Utils.getDateFormatted(this.datePicker, this.dateFormat); // show user date in the format from the user settings
       this.emitDate(Utils.getDateFormatted(this.datePicker, Utils.DATE_STRING));
     }
-  
+
     getDateFormatPlaceholder(placeholder: string): string {
       return placeholder.toLowerCase();
     }

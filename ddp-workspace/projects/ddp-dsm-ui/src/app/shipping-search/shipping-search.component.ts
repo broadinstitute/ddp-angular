@@ -137,18 +137,18 @@ saveCompleted(): void{
 
   //Fires when user clicks "Save Date" button. Returns an
   //observable that signals whether or not the request succeeded
-  saveDate(kitRequest: KitRequest): Observable<boolean> { 
+  saveDate(kitRequest: KitRequest): Observable<boolean> {
     const realm: string = kitRequest.realm;
     const patch1 = new PatchUtil(
       kitRequest.dsmKitRequestId, this.role.userMail(),
       {
-        name: "collectionDate",
+        name: 'collectionDate',
         value: kitRequest.collectionDate
       }, null, 'dsmKitRequestId', kitRequest.dsmKitRequestId,
       'kit', null, realm, kitRequest.participantId
     );
     const patch = patch1.getPatch();
-    this.currentPatchField = "collectionDate";
+    this.currentPatchField = 'collectionDate';
     return this.patch(patch);
-  };
+  }
 }
