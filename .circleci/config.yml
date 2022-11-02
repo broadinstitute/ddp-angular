@@ -759,9 +759,6 @@ workflows:
               equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
       jobs:
         - app-run-tests-job
-        - playwright-e2e-test: # Test out new job. Remove before merge
-            env_name: "test"
-            test_suite: "all"
 
   playwright-e2e-test-workflow:
     # Triggered by CI API (for example, run_ci.sh)
@@ -775,7 +772,7 @@ workflows:
       - run-playwright-test-job:
           env: << pipeline.parameters.deploy_env >>
           requires:
-            - build-playwright-job
+            - build-playwright-test-job
 
   build-and-deploy-all-apps-workflow:
     unless: << pipeline.parameters.do-builds >>
