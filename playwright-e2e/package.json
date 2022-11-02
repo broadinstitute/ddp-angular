@@ -11,17 +11,21 @@
     "test:e2e:singular": "npx playwright test --config=tests/singular/playwright.config.ts --grep-invert \"/nightly/|/examples/\"",
     "test:e2e:ci:singular:all": "npx playwright test --config=tests/singular/playwright-ci.config.ts --grep-invert \"nightly/|examples/\"",
     "test:e2e:ci:singuarl:nightly": "npx playwright test --config=tests/singular/playwright-ci.config.ts --grep \"nightly/\"",
-    "lint": "npx eslint . --ext .js --ext .ts"
+    "lint": "eslint ./ --ext .js,.ts",
+    "lint:fix": "eslint --fix --ext .js,.ts ."
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@playwright/test": "^1.25.2",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
     "eslint": "^8.23.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "uuid": "^9.0.0"
   },
   "dependencies": {
     "@types/lodash": "^4.14.185",

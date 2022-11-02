@@ -1,30 +1,16 @@
 import { Page } from '@playwright/test';
+import { fillEmailPassword } from 'authentication/auth-singular';
 
-// import path from 'path';
-// import * as dotenv from 'dotenv';
-// dotenv.config({ path: path.resolve(__dirname, '../dsm/.env.dsm') });
-
-export async function fillEmailPassword(
-  page: Page,
-  opts: { email: string | undefined; password: string | undefined }
-): Promise<void> {
-  const { email, password } = opts;
-
-  const emailInput = page.locator('input[type="email"]');
-  if (typeof email === 'string') {
-    await emailInput.fill(email);
-  }
-
-  const passwordInput = page.locator('input[type="password"]');
-  if (typeof password === 'string') {
-    await passwordInput.fill(password);
-  }
-
-  await page.locator('button[type="submit"]').click();
-}
+const { DSM_USER_EMAIL, DSM_USER_PASSWORD, DSM_BASE_URL } = process.env;
 
 export async function login(page: Page, opts: { email?: string; password?: string } = {}): Promise<void> {
-  const { email = process.env.dsmUserEmail, password = process.env.dsmUserPassword } = opts;
-  await page.goto(process.env.dsmBaseURL as string);
-  await fillEmailPassword(page, { email, password });
+  const { email = DSM_USER_EMAIL, password = DSM_USER_PASSWORD } = opts;
+  if (email == null || password == null) {
+    throw Error('Invalid parameters: DSM user email and password are undefined or null.');
+  }
+  if (DSM_BASE_URL == null) {
+    throw Error('Invalid parameter: DSM base URL email is undefined or null.');
+  }
+  await page.goto(DSM_BASE_URL);
+  await fillEmailPassword(page, { email, password, waitForNavigation: false });
 }

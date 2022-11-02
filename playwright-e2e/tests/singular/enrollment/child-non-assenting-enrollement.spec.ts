@@ -1,8 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
 import * as user from 'data/fake-user.json';
-import { fillEmailPassword } from 'authentication/auth-singular';
-import { makeEmailAlias } from 'utils/string-utils';
+import * as auth from 'authentication/auth-singular';
 import { WHO } from 'data/constants';
 import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
 import MedicalRecordReleaseForm from 'pages/singular/enrollment/medical-record-release-form';
@@ -13,8 +12,13 @@ import EnrollMyChildPage from 'pages/singular/enrollment/enroll-my-child-page';
 import ConsentFormForMinorPage from 'pages/singular/enrollment/consent-form-for-minor-page';
 import { enterMailingAddress } from 'utils/test-utils';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
+import { generateUserName } from 'utils/faker-utils';
 
 test.describe('Enroll my child', () => {
+  // Randomize last name
+  const childLastName = generateUserName(user.secondChild.lastName);
+  const child2LastName = generateUserName(user.thirdChild.lastName);
+
   test('enrolling non assenting child < 7 @enrollment @singular', async ({ page, homePage }) => {
     await homePage.signUp();
 
@@ -25,11 +29,7 @@ test.describe('Enroll my child', () => {
 
     // Step 2
     // Enter email alias and password to create new account
-    await fillEmailPassword(page, {
-      email: makeEmailAlias(process.env.singularUserEmail as string),
-      password: process.env.singularUserPassword,
-      waitForNavigation: true
-    });
+    await auth.createAccountWithEmailAlias(page);
 
     // Step 3
     // On "My Dashboard" page, click Enroll Mys Child button
@@ -56,7 +56,7 @@ test.describe('Enroll my child', () => {
     await assertActivityHeader(page, 'Consent Form for Minor Dependent');
     await assertActivityProgress(page, 'Page 3 of 3');
     await consentForm.childFirstName().fill(user.secondChild.firstName);
-    await consentForm.childLastName().fill(user.secondChild.lastName);
+    await consentForm.childLastName().fill(childLastName);
     await consentForm.dateOfBirth(
       user.secondChild.birthDate.MM,
       user.secondChild.birthDate.DD,
@@ -76,7 +76,7 @@ test.describe('Enroll my child', () => {
     await aboutMyChildPage.waitForReady();
     await assertActivityHeader(page, 'About My Child');
     await enterMailingAddress(page, {
-      fullName: `${user.secondChild.firstName} Junior ${user.secondChild.lastName}`,
+      fullName: `${user.secondChild.firstName} ${childLastName}`,
       country: user.secondChild.country.name,
       state: user.secondChild.state.name,
       street: user.secondChild.streetAddress,
@@ -182,11 +182,7 @@ test.describe('Enroll my child', () => {
 
     // Step 2
     // Enter email alias and password to create new account
-    await fillEmailPassword(page, {
-      email: makeEmailAlias(process.env.singularUserEmail as string),
-      password: process.env.singularUserPassword,
-      waitForNavigation: true
-    });
+    await auth.createAccountWithEmailAlias(page);
 
     // Step 3
     // On "My Dashboard" page, click Enroll Mys Child button
@@ -214,7 +210,7 @@ test.describe('Enroll my child', () => {
     await assertActivityHeader(page, 'Consent Form for Minor Dependent');
     await assertActivityProgress(page, 'Page 3 of 3');
     await consentForm.childFirstName().fill(user.thirdChild.firstName);
-    await consentForm.childLastName().fill(user.thirdChild.lastName);
+    await consentForm.childLastName().fill(child2LastName);
     await consentForm.dateOfBirth(
       user.thirdChild.birthDate.MM,
       user.thirdChild.birthDate.DD,
@@ -234,7 +230,7 @@ test.describe('Enroll my child', () => {
     await aboutMyChildPage.waitForReady();
     await assertActivityHeader(page, 'About My Child');
     await enterMailingAddress(page, {
-      fullName: `${user.secondChild.firstName} Junior ${user.secondChild.lastName}`,
+      fullName: `${user.secondChild.firstName} ${childLastName}`,
       country: user.secondChild.country.name,
       state: user.secondChild.state.name,
       street: user.secondChild.streetAddress,

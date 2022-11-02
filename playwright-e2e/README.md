@@ -106,7 +106,7 @@ In **/tests/singular** dir, run Singular tests only:
 * If you don't set up `.env` file, you can also specify environment
   variables in cmd (Not recommended)
   * For example, to run `login-visual.spec.ts` test:
-  > npx cross-env singularSitePassword=<SITE_PASSWORD> singularUserEmail=<YOUR_EMAIL> singularUserPasswd=<YOUR_PASSWORD> singularBaseURL=<HOME_URL> npx playwright test --config=playwright.config.ts login-visual.spec.ts
+  > npx cross-env SITE_PASSWORD=<SITE_PASSWORD> SINGULAR_USER_EMAIL=<EMAIL> SINGULAR_USER_PASSWORD=<YOUR_PASSWORD> SINGULAR_BASE_URL=<HOME_URL> npx playwright test --config=playwright.config.ts login-visual.spec.ts
 
 ### Debugging in Intellij
 

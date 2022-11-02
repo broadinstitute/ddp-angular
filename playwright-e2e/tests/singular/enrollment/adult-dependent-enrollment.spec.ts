@@ -7,14 +7,17 @@ import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
 import EnrollMyAdultDependentPage from 'pages/singular/enrollment/enroll-my-adult-dependent-page';
 import ConsentFormForAdultDependentPage from 'pages/singular/enrollment/consent-form-for-adult-dependent-page';
 import AboutMyAdultDependentPage from 'pages/singular/enrollment/about-my-adult-dependent-page';
-import { makeEmailAlias } from 'utils/string-utils';
 import { enterMailingAddress } from 'utils/test-utils';
 import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
 import { WHO } from 'data/constants';
 import * as user from 'data/fake-user.json';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
+import { generateUserName } from 'utils/faker-utils';
 
 test.describe('Enrol an adult dependent', () => {
+  // Randomize last name
+  const dependentLastName = generateUserName(user.adultDependent.lastName);
+
   /**
    * Test case: https://docs.google.com/document/d/1vaiSfsYeDzEHeK2XOVO3n_7I1W0Z94Kkqx_82w8-Vpc/edit#heading=h.6snot4x1e1uw
    */
@@ -26,11 +29,7 @@ test.describe('Enrol an adult dependent', () => {
     await preScreeningPage.enterInformationAboutYourself();
 
     // Enter email alias and new password in Login popup
-    await auth.fillEmailPassword(page, {
-      email: makeEmailAlias(process.env.singularUserEmail as string),
-      password: process.env.singularUserPassword,
-      waitForNavigation: true
-    });
+    await auth.createAccountWithEmailAlias(page);
 
     // On "My Dashboard" page
     const myDashboardPage = new MyDashboardPage(page);
@@ -58,7 +57,7 @@ test.describe('Enrol an adult dependent', () => {
     await assertActivityProgress(page, 'Page 3 of 3');
 
     await consentForm.dependentFirstName().fill(user.adultDependent.firstName);
-    await consentForm.dependentLastName().fill(user.adultDependent.lastName);
+    await consentForm.dependentLastName().fill(dependentLastName);
     await consentForm.fillDateOfBirth(12, 20, 1950);
     await consentForm.toKnowSecondaryFinding().check('I want to know.');
     await consentForm.selectOneForAdultDependent().check('I have explained the study');
@@ -72,7 +71,7 @@ test.describe('Enrol an adult dependent', () => {
     await assertActivityHeader(page, 'About Me');
     // Fill out address with fake data
     await enterMailingAddress(page, {
-      fullName: `${user.adultDependent.firstName} ${user.adultDependent.lastName}`,
+      fullName: `${user.adultDependent.firstName} ${dependentLastName}`,
       country: user.adultDependent.country.name,
       state: user.adultDependent.state.name,
       street: user.adultDependent.streetAddress,
@@ -99,9 +98,7 @@ test.describe('Enrol an adult dependent', () => {
 
     await assertActivityHeader(page, 'Medical Record Release Form');
     await assertActivityProgress(page, 'Page 3 of 3');
-    await medicalRecordReleaseForm
-      .patientName()
-      .fill(`${user.adultDependent.firstName} ${user.adultDependent.lastName}`);
+    await medicalRecordReleaseForm.patientName().fill(`${user.adultDependent.firstName} ${dependentLastName}`);
     await medicalRecordReleaseForm.dependentParentName().fill(`${user.patient.firstName} ${user.patient.lastName}`);
     await medicalRecordReleaseForm.parentSignature().fill(`${user.patient.firstName} ${user.patient.lastName}`);
     await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
@@ -109,8 +106,7 @@ test.describe('Enrol an adult dependent', () => {
 
     // Medical Record File Upload
     await assertActivityHeader(page, 'Medical Record File Upload');
-
-    // await medicalRecordReleaseForm.uploadFile(`data/upload/BroadInstitute_Wikipedia.pdf`);
+    // Do not need to upload medical record file. Click Next button to continue without upload.
     await medicalRecordReleaseForm.next({ waitForNav: true });
 
     await assertActivityHeader(
