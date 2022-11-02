@@ -5,11 +5,14 @@ import {RoleService} from '../services/role.service';
 import {catchError, finalize} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
 import {CountsModel} from './models/Counts.model';
+import {DateRangeModel} from "./models/DateRange.model";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-dashboard-statistics',
   templateUrl: './dashboard-statistics.component.html',
-  styleUrls: ['./dashboard-statistics.component.scss']
+  styleUrls: ['./dashboard-statistics.component.scss'],
+  providers: [DatePipe]
 })
 
 export class DashboardStatisticsComponent implements OnInit {
@@ -19,7 +22,10 @@ export class DashboardStatisticsComponent implements OnInit {
   hasRequiredRole;
   loading = true;
 
-  constructor(private dashboardStatisticsService: DashboardStatisticsService, private roleService: RoleService) {
+  constructor(
+    private dashboardStatisticsService: DashboardStatisticsService,
+    private roleService: RoleService,
+  ) {
   }
 
   ngOnInit(): void {
@@ -34,7 +40,7 @@ export class DashboardStatisticsComponent implements OnInit {
     setTimeout(() => {
       console.log(date)
       this.loading = false
-    }, 1500)
+    }, )
   }
 
   get getConfiguration(): any {
@@ -42,6 +48,10 @@ export class DashboardStatisticsComponent implements OnInit {
       responsive: true,
       displaylogo: false
     };
+  }
+
+  public get activeDates(): DateRangeModel {
+    return {startDate: new Date(), endDate: new Date()}
   }
 
   private catchErrorAndReturnArray(error: HttpErrorResponse): [] {
