@@ -659,7 +659,7 @@ jobs:
         description: Test group. For example, @singular
         type: string
         # Empty string is treated as a falsy value in evaluation of when clauses
-        default: ""
+        default: ".*"
       parallel_num:
         type: integer
         default: 2
@@ -691,20 +691,10 @@ jobs:
                 working_directory: *playwright_path
                 name: Install Playwright browsers dependencies
                 command: npx playwright install --with-deps chromium # Only need Chrome browser
-            - when:
-                condition: [ << parameters.test_suite >> ]
-                steps:
-                  - run:
-                      working_directory: *playwright_path
-                      name: Run targeted test suites
-                      command: npx playwright test --grep << parameters.test_suite >>
-            - unless:
-                condition: [ << parameters.test_suite >> ]
-                steps:
-                  - run:
-                      working_directory: *playwright_path
-                      name: Run all tests
-                      command: npx playwright test
+            - run:
+                working_directory: *playwright_path
+                name: Run targeted test suites
+                command: npx playwright test --grep << parameters.test_suite >>
             # File paths are relative and defined in playwright.config.ts Reporter section
             - store_test_results:
                 path: playwright-e2e/test-results/junit
