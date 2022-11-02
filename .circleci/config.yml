@@ -692,9 +692,11 @@ jobs:
           name: "Running Playwright tests"
           working_directory: *playwright_path
           command: |
-            TESTS=$(circleci tests glob "tests/*.spec.ts" | circleci tests split --split-by=timings)
-            echo $TESTS
-            npx playwright test $TESTS
+            set -e
+            ls
+            TESTFILES=$(circleci tests glob "tests/*.spec.ts" | circleci tests split --split-by=timings)
+            echo $TESTFILES
+            # npm test:ci $TESTFILES
           no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       - run:
           working_directory: *playwright_path
