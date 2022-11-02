@@ -138,6 +138,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {DateRangeComponent} from '../dashboard-statistics/components/date-range/date-range.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import {DateErrorPipe} from "../dashboard-statistics/pipes/date-error.pipe";
 
 
 PlotlyModule.plotlyjs = PlotlyJS;
@@ -235,7 +236,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     RadioButtonDirective,
     NoDataPipe,
     CountsTableComponent,
-    DateRangeComponent
+    DateRangeComponent,
+    DateErrorPipe
   ],
   imports: [
     CommonModule,

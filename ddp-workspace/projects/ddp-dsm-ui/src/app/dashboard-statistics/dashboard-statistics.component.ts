@@ -29,6 +29,14 @@ export class DashboardStatisticsComponent implements OnInit {
     this.Counts = this.dashboardStatisticsService.Counts;
   }
 
+  public dateChanged(date: any): void {
+    // this.loading = true;
+    setTimeout(() => {
+      console.log(date)
+      this.loading = false
+    }, 1500)
+  }
+
   get getConfiguration(): any {
     return {
       responsive: true,
