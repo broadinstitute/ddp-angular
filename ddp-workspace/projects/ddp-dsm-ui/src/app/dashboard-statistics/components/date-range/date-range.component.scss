@@ -5,7 +5,6 @@
   display: flex;
   justify-content: center;
   mat-form-field {
-    @include fonts.MontserratFontFamily;
     margin-bottom: 40px;
   }
 }

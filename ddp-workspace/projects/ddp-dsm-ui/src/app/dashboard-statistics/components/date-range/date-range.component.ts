@@ -10,7 +10,7 @@ import {
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {DateRangeModel} from "../../models/DateRange.model";
 import {Subject} from "rxjs";
-import {takeUntil, debounceTime} from 'rxjs/operators'
+import {takeUntil, auditTime} from 'rxjs/operators'
 import {DatePipe} from "@angular/common";
 
 @Component({
@@ -22,21 +22,22 @@ import {DatePipe} from "@angular/common";
 export class DateRangeComponent implements OnInit, OnDestroy {
   public dateRangeForm: FormGroup;
 
-  private readonly DATE_FORMAT_TRANSFORMED = 'MM/d/YYYY';
-  private readonly destroyed$ = new Subject<void>();
+  private readonly DATE_FORMAT_TRANSFORMED: string = 'MM/d/YYYY';
+  private readonly INITIAL_DATE_RANGE: DateRangeModel = {startDate: null, endDate: null};
+
+  private readonly destroyed$: Subject<void> = new Subject<void>();
 
   constructor(private datePipe: DatePipe) {
   }
 
   @Input('activeDates') set activeDates(dates: DateRangeModel) {
-    if(!this.dateRangeForm) {
-      this.dateRangeForm = this.generateFormGroup(dates);
-    }
+    this.SetDateRangeForm = dates;
   }
   @Output() dateChanged = new EventEmitter<DateRangeModel>();
 
 
   ngOnInit(): void {
+    this.SetDateRangeForm = null;
     this.listenToValueChangesAndEmit();
   }
 
@@ -54,8 +55,12 @@ export class DateRangeComponent implements OnInit, OnDestroy {
   }
 
   private listenToValueChangesAndEmit(): void {
+    /**
+     * Here is used auditTime operator, due to known bug in Angular material:
+     * Discussion: https://github.com/angular/components/issues/19776
+     */
     this.dateRangeForm.valueChanges
-      .pipe(debounceTime(500), takeUntil(this.destroyed$))
+      .pipe(auditTime(0), takeUntil(this.destroyed$))
       .subscribe((dates: DateRangeModel) => this.emitDateChange(dates))
   }
 
@@ -70,11 +75,25 @@ export class DateRangeComponent implements OnInit, OnDestroy {
     }
   }
 
-  private generateFormGroup({startDate, endDate}: DateRangeModel = {startDate: null, endDate: null}): FormGroup {
+  private set SetDateRangeForm(dateRange: DateRangeModel) {
+    if(!this.dateRangeForm) {
+      const dateRangeObject: DateRangeModel = this.isDateRangeObject(dateRange) ? dateRange : this.INITIAL_DATE_RANGE;
+      this.dateRangeForm = this.generateFormGroup(dateRangeObject);
+    }
+  }
+
+  private generateFormGroup({startDate, endDate}: DateRangeModel): FormGroup {
     return new FormGroup({
       startDate: new FormControl(startDate || null, Validators.required),
       endDate: new FormControl(endDate || null, Validators.required),
     });
   }
 
+  private isDateRangeObject(dateRange: DateRangeModel): boolean {
+    const requiredProperties: string[] = ['startDate', 'endDate'];
+    /**
+     * Here we are using .some() method on purpose
+     */
+    return dateRange && dateRange instanceof Object && requiredProperties.some(prop => dateRange.hasOwnProperty(prop))
+  }
 }
