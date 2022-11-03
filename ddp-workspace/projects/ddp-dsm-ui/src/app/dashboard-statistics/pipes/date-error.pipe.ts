@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from "@angular/core";
-import {DateValidationErrorMessages} from "./date-error.messages";
+import {DateValidationErrorMessages} from "./utils/date-error.messages";
 
 @Pipe({
   name: 'dateError'
