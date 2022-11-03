@@ -695,16 +695,19 @@ jobs:
       - run:
           working_directory: *playwright_path
           command: npx playwright install --with-deps chromium # Only need Chrome browser
-      - run:
-          name: "Running Playwright tests"
-          working_directory: *playwright_path
-          command: |
-            shopt -s globstar
-            TESTFILES=$(circleci tests glob "tests/**/*.spec.ts" | circleci tests split --split-by=timings --show-counts)
-            npm run test:ci $TESTFILES
+      # Sharding allows you to run different parts of tests across different VM
+      - run: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npm run test:ci -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
+
+      #- run:
+      #    name: "Running Playwright tests"
+      #    working_directory: *playwright_path
+      #    command: |
+      #      shopt -s globstar
+      #      TESTFILES=$(circleci tests glob "tests/**/*.spec.ts" | circleci tests split --split-by=timings --show-counts)
+      #      npm run test:ci $TESTFILES
             # TODO: Can't use --grep when splitting tests
             # npx playwright test --grep << parameters.test_suite >>
-          no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
+      #    no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       # File paths are relative and defined in playwright.config.ts Reporter section
       # Fails to load traces in CircleCI. See https://github.com/microsoft/playwright/issues/18108
       #- run:
