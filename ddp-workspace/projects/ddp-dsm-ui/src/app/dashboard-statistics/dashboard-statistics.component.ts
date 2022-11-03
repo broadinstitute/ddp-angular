@@ -35,7 +35,7 @@ export class DashboardStatisticsComponent implements OnInit {
     this.Counts = this.dashboardStatisticsService.Counts;
   }
 
-  public dateChanged(date: any): void {
+  public dateChanged(date: DateRangeModel): void {
     // this.loading = true;
     setTimeout(() => {
       console.log(date)
