@@ -665,7 +665,7 @@ jobs:
         default: ".*"
       parallel_num:
         type: integer
-        default: 2
+        default: 3
     parallelism: << parameters.parallel_num >>
     steps:
       - halt-playwright-test-check:
