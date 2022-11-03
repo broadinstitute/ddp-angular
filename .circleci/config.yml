@@ -676,16 +676,16 @@ jobs:
       - run:
           name: Inspect previous test metadata
           command: |
-            # aut-detect timing does not work: CircleCI CLI expects both filenames and classnames to be present in the timing data (JUnit xml) produced by the test suite.
+            # aut-detect timing does not work because CircleCI CLI expects both filenames and classnames to be present in JUnit xml.
+            # See https://support.circleci.com/hc/en-us/articles/360000376788-How-to-troubleshoot-Test-Splitting
             cat "${CIRCLE_INTERNAL_TASK_DATA}/circle-test-results/results.json" | jq .
       - run:
           name: "Export environment variables to BASH_ENV"
           command: |
             cp "playwright-e2e/config/.env.<< parameters.env >>" .env
-            # cat .env | awk '{print "export " $0}' >> "$BASH_ENV"
             cat .env | awk '/^[^#]/ {print "export " $0}' >> "$BASH_ENV"
 
-            # File was created in build-playwright-job
+            # export env from file (created in build-playwright-job)
             cat playwright-env/envvars | awk '{print "export " $0}' >> "$BASH_ENV"
 
             source "$BASH_ENV"
@@ -699,29 +699,8 @@ jobs:
           name: "Running Playwright tests"
           working_directory: *playwright_path
           command: |
-            SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npm run test:ci -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
-
-      #      shopt -s globstar
-      #      TESTFILES=$(circleci tests glob "tests/**/*.spec.ts" | circleci tests split --split-by=timings --show-counts)
-      #      npm run test:ci $TESTFILES
-            # TODO: Can't use --grep when splitting tests
-            # npx playwright test --grep << parameters.test_suite >>
+            SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npm run test:ci -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL} --grep << parameters.test_suite >>
           no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
-      # File paths are relative and defined in playwright.config.ts Reporter section
-      # Fails to load traces in CircleCI. See https://github.com/microsoft/playwright/issues/18108
-      #- run:
-      #    working_directory: *playwright_path
-      #    name: Copy junit results.xml
-      #    command: |
-      #      mkdir -p /tmp/junit/results
-      #      cp junit/results/results.xml /tmp/junit/results
-      #    when: always
-      #- store_test_results:
-      #    path: /tmp/junit
-      #- store_artifacts:
-      #    path: /tmp/junit
-      #    destination: junit
-
       - store_test_results:
           path: playwright-e2e/junit
       - store_artifacts:
