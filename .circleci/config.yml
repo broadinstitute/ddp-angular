@@ -613,7 +613,7 @@ jobs:
           path: *repo_path
       - setup-shared-env
       - run:
-          # Reading Vault secrets because build-executor provides Vault set-up
+          # Reading Vault secrets here because build-executor provides Vault set-up
           name: Save Vault secrets to file to persist across jobs
           command: |
             mkdir -p playwright-env
@@ -645,7 +645,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - playwright-env # dir contains env-variables file
+            - playwright-env # dir which contains env-variables file
             - playwright-e2e
 
   run-playwright-test-job:
@@ -657,12 +657,6 @@ jobs:
         default: dev
         type: enum
         enum: [ dev, test, staging, prod, UNKNOWN ]
-      test_suite:
-        # Not used currently
-        description: Test group. For example, @singular
-        type: string
-        # Empty string is treated as a falsy value in evaluation of when clauses
-        default: ".*"
       parallel_num:
         type: integer
         default: 3
@@ -680,7 +674,7 @@ jobs:
             # See https://support.circleci.com/hc/en-us/articles/360000376788-How-to-troubleshoot-Test-Splitting
             cat "${CIRCLE_INTERNAL_TASK_DATA}/circle-test-results/results.json" | jq .
       - run:
-          name: "Export environment variables to BASH_ENV"
+          name: Export env variables to BASH_ENV
           command: |
             cp "playwright-e2e/config/.env.<< parameters.env >>" .env
             cat .env | awk '/^[^#]/ {print "export " $0}' >> "$BASH_ENV"
@@ -696,10 +690,10 @@ jobs:
           working_directory: *playwright_path
           command: npx playwright install --with-deps chromium # Only need Chrome browser
       - run:
-          name: "Running Playwright tests"
+          name: Running Playwright tests
           working_directory: *playwright_path
           command: |
-            SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npm run test:ci -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL} --grep << parameters.test_suite >>
+            SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npm run test:ci -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
           no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       - store_test_results:
           path: playwright-e2e/junit
@@ -897,7 +891,7 @@ workflows:
   nightly:
     triggers:
       - schedule:
-          cron: "0 22 * * *"
+          cron: "0 22 * * *" # daily around 6 PM EST
           filters:
             branches:
               only:
