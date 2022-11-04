@@ -7,7 +7,7 @@ import {
   OnInit,
   Output
 } from "@angular/core";
-import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {DateRangeModel} from "../../models/DateRange.model";
 import {Subject} from "rxjs";
 import {takeUntil, auditTime} from 'rxjs/operators'
@@ -23,7 +23,7 @@ export class DateRangeComponent implements OnInit, OnDestroy {
   public dateRangeForm: FormGroup;
 
   private readonly DATE_FORMAT_TRANSFORMED: string = 'MM/d/YYYY';
-  private readonly INITIAL_DATE_RANGE: DateRangeModel = {startDate: null, endDate: null};
+  private readonly DEFAULT_DATE_RANGE: DateRangeModel = {startDate: null, endDate: null};
 
   private readonly destroyed$: Subject<void> = new Subject<void>();
 
@@ -53,9 +53,10 @@ export class DateRangeComponent implements OnInit, OnDestroy {
     return Object.entries(object);
   }
 
-  public get erroredFormControlsEntries(): [string, AbstractControl][] {
-    return this.getEntries(this.dateRangeForm.controls)
-      .filter(([_, value]: [string, AbstractControl]) => value.errors);
+  public get erroredFormControlsEntries(): [string, ValidationErrors][] {
+    return this.getEntries(this.formControls)
+      .filter(([_, value]: [string, AbstractControl]) => value.errors)
+      .map(([key, value]) => [key, value.errors]);
   }
 
   private listenToValueChangesAndEmit(): void {
@@ -79,13 +80,6 @@ export class DateRangeComponent implements OnInit, OnDestroy {
     }
   }
 
-  private set SetDateRangeForm(dateRange: DateRangeModel) {
-    if(!this.dateRangeForm) {
-      const dateRangeObject: DateRangeModel = this.isDateRangeObject(dateRange) ? dateRange : this.INITIAL_DATE_RANGE;
-      this.dateRangeForm = this.generateFormGroup(dateRangeObject);
-    }
-  }
-
   private generateFormGroup({startDate, endDate}: DateRangeModel): FormGroup {
     return new FormGroup({
       startDate: new FormControl({value: startDate || null, disabled: true}, Validators.required),
@@ -98,7 +92,7 @@ export class DateRangeComponent implements OnInit, OnDestroy {
     /**
      * Here we are using .some() method on purpose
      */
-    return dateRange && dateRange instanceof Object && requiredProperties.some(prop => dateRange.hasOwnProperty(prop));
+    return dateRange && dateRange instanceof Object && requiredProperties.some((prop: string) => dateRange.hasOwnProperty(prop));
   }
 
   private disableOrEnable(disable: boolean): void {
@@ -117,11 +111,22 @@ export class DateRangeComponent implements OnInit, OnDestroy {
     this.startDate.disable({emitEvent: false});
   }
 
+  private get formControls(): {[key: string]: AbstractControl} {
+    return this.dateRangeForm.controls;
+  }
+
   private get startDate(): AbstractControl {
     return this.dateRangeForm.get('startDate');
   }
 
   private get endDate(): AbstractControl {
     return this.dateRangeForm.get('endDate');
+  }
+
+  private set SetDateRangeForm(dateRange: DateRangeModel) {
+    if(!this.dateRangeForm) {
+      const dateRangeObject: DateRangeModel = this.isDateRangeObject(dateRange) ? dateRange : this.DEFAULT_DATE_RANGE;
+      this.dateRangeForm = this.generateFormGroup(dateRangeObject);
+    }
   }
 }
