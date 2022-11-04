@@ -865,18 +865,32 @@ workflows:
           <<: *deploy_branch_filters
           study_key: fon
 
-  test-nightly:
+  nightly-deploy:
     triggers:
       - schedule:
-          cron: "0 22 * * *" # daily around 6 PM EST
+          cron: "0 22 * * *" # UTC time. daily around 6 PM EST
           filters:
             branches:
               only:
-                - pepper-247-nightly-run-playwright-test #  develop
+                - develop
     jobs:
       - build-and-deploy-job:
-          name: nightly-build-deploy-<< matrix.study_key >>
+          name: build-deploy-<< matrix.study_key >>
           matrix:
             alias: nightly-build-deploy
             parameters:
               study_key: [ basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rarex, rgp, esc, prion, cgc, circadia, pancan, singular, brugada, lms, fon ]
+
+  nightly-playwright-test:
+    # Triggered at 7 PM EST on every day-of-week from Sunday through Friday
+    when:
+      and:
+        - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
+        - equal: [ nightly-playwright-test, << pipeline.schedule.name >> ]
+    jobs:
+      - build-playwright-test-job:
+          env: << pipeline.parameters.env >>
+      - run-playwright-test-job:
+          env: << pipeline.parameters.env >>
+          requires:
+            - build-playwright-test-job
