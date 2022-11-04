@@ -43,8 +43,9 @@ export class DashboardStatisticsComponent implements OnInit {
   }
 
   public dateChanged(date: DateRangeModel): void {
+    console.log(date, 'DATE - dashboard.statistics')
     this.loading = true;
-    this.initData()
+    this.initData();
   }
 
   get getConfiguration(): any {

@@ -20,28 +20,31 @@ import {DatePipe} from "@angular/common";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DateRangeComponent implements OnInit, OnDestroy {
-  public dateRangeForm: FormGroup;
-
   private readonly DATE_FORMAT_TRANSFORMED: string = 'MM/d/YYYY';
-  private readonly DEFAULT_DATE_RANGE: DateRangeModel = {startDate: null, endDate: null};
+
+  /**
+   * @MAIN Main Date Range Object
+   */
+  public readonly dateRangeForm: FormGroup = this.generateFormGroup;
 
   private readonly destroyed$: Subject<void> = new Subject<void>();
 
   constructor(private datePipe: DatePipe) {
   }
 
-  @Input('activeDates') set activeDates(dates: DateRangeModel) {
-    this.SetDateRangeForm = dates;
-  }
-  @Input('disabled') set disabledState(disabled: boolean) {
-    this.disableOrEnable(disabled);
+  @Input('activeDates') activeDatesOnInit: DateRangeModel;
+
+  @Input('disabled') set disabledState(isDisabled: boolean) {
+    if(typeof isDisabled === "boolean") {
+      this.disableOrEnable = isDisabled;
+    }
   }
 
   @Output() dateChanged = new EventEmitter<DateRangeModel>();
 
 
   ngOnInit(): void {
-    this.SetDateRangeForm = null;
+    this.initDateRangeForm();
     this.listenToValueChangesAndEmit();
   }
 
@@ -80,24 +83,9 @@ export class DateRangeComponent implements OnInit, OnDestroy {
     }
   }
 
-  private generateFormGroup({startDate, endDate}: DateRangeModel): FormGroup {
-    return new FormGroup({
-      startDate: new FormControl({value: startDate || null, disabled: true}, Validators.required),
-      endDate: new FormControl({value: endDate || null, disabled: true} || null, Validators.required),
-    });
-  }
-
-  private isDateRangeObject(dateRange: DateRangeModel): boolean {
-    const requiredProperties: string[] = ['startDate', 'endDate'];
-    /**
-     * Here we are using .some() method on purpose
-     */
-    return dateRange && dateRange instanceof Object && requiredProperties.some((prop: string) => dateRange.hasOwnProperty(prop));
-  }
-
-  private disableOrEnable(disable: boolean): void {
-    if(this.dateRangeForm) {
-      !!disable ? this.disable() : this.enable();
+  private initDateRangeForm() {
+    if(this.isActiveDateOnInitRangeObject) {
+      this.dateRangeForm.patchValue(this.activeDatesOnInit, {emitEvent: false})
     }
   }
 
@@ -109,6 +97,23 @@ export class DateRangeComponent implements OnInit, OnDestroy {
   private disable(): void {
     this.endDate.disable({emitEvent: false});
     this.startDate.disable({emitEvent: false});
+  }
+
+  private get generateFormGroup(): FormGroup {
+    return new FormGroup({
+      startDate: new FormControl({value: null, disabled: true}, Validators.required),
+      endDate: new FormControl({value:  null, disabled: true} || null, Validators.required),
+    });
+  }
+
+  private get isActiveDateOnInitRangeObject(): boolean {
+    const requiredProperties: string[] = ['startDate', 'endDate'];
+    /**
+     * Here we are using .some() method on purpose
+     */
+    return this.activeDatesOnInit
+      && this.activeDatesOnInit instanceof Object
+      && requiredProperties.some((prop: string) => this.activeDatesOnInit.hasOwnProperty(prop));
   }
 
   private get formControls(): {[key: string]: AbstractControl} {
@@ -123,10 +128,7 @@ export class DateRangeComponent implements OnInit, OnDestroy {
     return this.dateRangeForm.get('endDate');
   }
 
-  private set SetDateRangeForm(dateRange: DateRangeModel) {
-    if(!this.dateRangeForm) {
-      const dateRangeObject: DateRangeModel = this.isDateRangeObject(dateRange) ? dateRange : this.DEFAULT_DATE_RANGE;
-      this.dateRangeForm = this.generateFormGroup(dateRangeObject);
-    }
+  private set disableOrEnable(disable: boolean) {
+    disable ? this.disable() : this.enable();
   }
 }

@@ -16,7 +16,7 @@ import {DateErrorPipe} from "../../pipes/date-error.pipe";
 import {MatFormFieldHarness} from "@angular/material/form-field/testing";
 import {MaterialHarnesses} from "../../../test-helpers/MaterialHarnesses";
 
-fdescribe("dateRangeComponent", () => {
+describe("dateRangeComponent", () => {
   type startOrEnd = "start" | "end";
 
   let fixture: ComponentFixture<DateRangeComponent>;
@@ -70,6 +70,27 @@ fdescribe("dateRangeComponent", () => {
 
       expect(matEndDateValue).toBe(transformDateFormat(matEndDateValue))
     })
+  })
+
+
+  describe("When initial data is not passed", () => {
+    it("should not have start date", async () => {
+      const matStartDateValue: string = await matDateValue("start");
+
+      expect(matStartDateValue).toBeNull()
+    })
+
+    it("should not have end date", async () => {
+      const matEndDateValue: string = await matDateValue("end");
+
+      expect(matEndDateValue).toBeNull()
+    })
+  })
+
+  describe("Manually changing date ranges", () => {
+    beforeEach(() => {
+      setInitialTestData()
+    })
 
     it("should have set date - start date", async() => {
       const testDate: string = new Date(1994, 10, 10).toString();
@@ -115,28 +136,28 @@ fdescribe("dateRangeComponent", () => {
       expect(await matEndDateHarness.isDisabled()).toBeFalse();
     })
 
-    it("should show error message after setting it manually - required start date", async () => {
+    it("should show error message - required start date", async () => {
       await setDateValue("start", null);
       const [startDateRequired]: string[] = await getErrorMessages();
 
       expect(startDateRequired).toBe('Start date is required');
     })
 
-    it("should show error message after setting it manually - required end date", async () => {
+    it("should show error message - required end date", async () => {
       await setDateValue("end", null);
       const [endDateRequired]: string[] = await getErrorMessages();
 
       expect(endDateRequired).toBe('End date is required');
     })
 
-    it("should show error message after setting it manually - invalid start date", async () => {
+    it("should show error message - invalid start date", async () => {
       await setDateValue("start", "3123");
       const [startDateInvalid]: string[] = await getErrorMessages();
 
       expect(startDateInvalid).toBe('Start date is invalid');
     })
 
-    it("should show error message after setting it manually - invalid end date", async () => {
+    it("should show error message - invalid end date", async () => {
       await setDateValue("end", "123");
       const [endDateInvalid]: string[] = await getErrorMessages();
 
@@ -145,26 +166,11 @@ fdescribe("dateRangeComponent", () => {
   })
 
 
-  describe("When initial data is not passed", () => {
-    it("should not have start date", async () => {
-      const matStartDateValue: string = await matDateValue("start");
-
-      expect(matStartDateValue).toBeNull()
-    })
-
-    it("should not have end date", async () => {
-      const matEndDateValue: string = await matDateValue("end");
-
-      expect(matEndDateValue).toBeNull()
-    })
-  })
-
-
 
 
   /* HELPER FUNCTIONS */
   const setInitialTestData = (): void => {
-    component.activeDates = testData;
+    component.activeDatesOnInit = testData;
     component.disabledState = false;
     fixture.detectChanges();
   };
