@@ -877,6 +877,6 @@ workflows:
       - build-and-deploy-job:
           name: nightly-build-deploy-<< matrix.study_key >>
           matrix:
-            alias: nightly-build-deploy-<< matrix.study_key >>
+            alias: nightly-build-deploy
             parameters:
               study_key: [ basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rarex, rgp, esc, prion, cgc, circadia, pancan, singular, brugada, lms, fon ]
