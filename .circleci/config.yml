@@ -1,8 +1,5 @@
 version: 2.1
 
-orbs:
-  jq: circleci/jq@2.2.0
-
 references:
   repo_path: &repo_path
       /home/circleci/repo
@@ -652,13 +649,6 @@ jobs:
           env: << parameters.env >>
       - attach_workspace:
           at: .
-      - jq/install
-      - run:
-          name: Inspect previous test metadata
-          command: |
-            # aut-detect timing does not work because CircleCI CLI expects both filenames and classnames to be present in JUnit xml.
-            # See https://support.circleci.com/hc/en-us/articles/360000376788-How-to-troubleshoot-Test-Splitting
-            cat "${CIRCLE_INTERNAL_TASK_DATA}/circle-test-results/results.json" | jq .
       - run:
           name: Export env variables to BASH_ENV
           command: |
@@ -679,6 +669,7 @@ jobs:
           name: Running Playwright tests
           working_directory: *playwright_path
           command: |
+            # CI aut-detect by timing does not work because CircleCI CLI expects both filenames and classnames to be present in JUnit xml
             SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npm run test:ci -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
           no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       - store_test_results:
@@ -874,69 +865,18 @@ workflows:
           <<: *deploy_branch_filters
           study_key: fon
 
-  nightly:
+  test-nightly:
     triggers:
       - schedule:
-          cron: "0 22 * * *" # daily around 6 PM EST
+          cron: "* * * * *" # daily around 6 PM EST
           filters:
             branches:
               only:
-                - develop
+                - pepper-247-nightly-run-playwright-test #  develop
     jobs:
       - build-and-deploy-job:
-          name: basil-nightly
-          study_key: basil
-      - build-and-deploy-job:
-          name: osteo-nightly
-          study_key: osteo
-      - build-and-deploy-job:
-          name: angio-nightly
-          study_key: angio
-      - build-and-deploy-job:
-          name: brain-nightly
-          study_key: brain
-      - build-and-deploy-job:
-          name: mbc-nightly
-          study_key: mbc
-      - build-and-deploy-job:
-          name: testboston-nightly
-          study_key: testboston
-      - build-and-deploy-job:
-          name: mpc-nightly
-          study_key: mpc
-      - build-and-deploy-job:
-          name: atcp-nightly
-          study_key: atcp
-      - build-and-deploy-job:
-          name: rarex-nightly
-          study_key: rarex
-      - build-and-deploy-job:
-          name: rgp-nightly
-          study_key: rgp
-      - build-and-deploy-job:
-          name: esc-nightly
-          study_key: esc
-      - build-and-deploy-job:
-          name: prion-nightly
-          study_key: prion
-      - build-and-deploy-job:
-          name: cgc-nightly
-          study_key: cgc
-      - build-and-deploy-job:
-          name: circadia-nightly
-          study_key: circadia
-      - build-and-deploy-job:
-          name: pancan-nightly
-          study_key: pancan
-      - build-and-deploy-job:
-          name: singular-nightly
-          study_key: singular
-      - build-and-deploy-job:
-          name: brugada-nightly
-          study_key: brugada
-      - build-and-deploy-job:
-          name: lms-nightly
-          study_key: lms
-      - build-and-deploy-job:
-          name: fon-nightly
-          study_key: fon
+          name: nightly-build-deploy-<< matrix.study_key >>
+          matrix:
+            alias: nightly-build-deploy-<< matrix.study_key >>
+            parameters:
+              study_key: [ basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rarex, rgp, esc, prion, cgc, circadia, pancan, singular, brugada, lms, fon ]
