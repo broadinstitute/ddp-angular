@@ -126,7 +126,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
-import {DragAndDropDirective} from '../dashboard-statistics/directives/dragAndDrop/dragAndDrop.directive';
 import {RadioButtonDirective} from '../form-data/directives/radio-button.directive';
 import {PlotlyChartsComponent} from '../dashboard-statistics/components/plotly-charts/plotly-charts.component';
 import {
@@ -229,7 +228,6 @@ PlotlyModule.plotlyjs = PlotlyJS;
     ClinicalPageComponent,
     FileDownloadComponent,
     DashboardStatisticsComponent,
-    DragAndDropDirective,
     PlotlyChartsComponent,
     MatrixAnswerTableComponent,
     ConditionalFormDataComponent,

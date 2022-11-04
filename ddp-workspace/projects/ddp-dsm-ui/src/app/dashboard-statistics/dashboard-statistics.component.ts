@@ -36,11 +36,11 @@ export class DashboardStatisticsComponent implements OnInit {
   }
 
   public dateChanged(date: DateRangeModel): void {
-    // this.loading = true;
+    this.loading = true;
     setTimeout(() => {
-      console.log(date)
+      console.info(date)
       this.loading = false
-    }, )
+    }, 1500)
   }
 
   get getConfiguration(): any {

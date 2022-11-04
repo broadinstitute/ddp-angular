@@ -17,11 +17,11 @@
 
 <ng-template let-Charts="charts" let-Error="error" let-Counts="counts" #charts>
 
+  <app-date-range [disabled]="loading" [activeDates]="activeDates" (dateChanged)="dateChanged($event)" ></app-date-range>
+
   <div class="dashboard-chartsAndCounts" *ngIf="!loading">
 
   <ng-container *ngIf="!Error; else errorText">
-
-    <app-date-range [activeDates]="activeDates" (dateChanged)="dateChanged($event)" ></app-date-range>
 
     <mat-tab-group mat-align-tabs="center" *ngIf="Charts?.length > 0 || Counts?.length > 0; else noCharts">
 

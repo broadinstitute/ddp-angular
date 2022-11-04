@@ -16,7 +16,7 @@ import {DebugElement} from "@angular/core";
 import {DateErrorPipe} from "../../pipes/date-error.pipe";
 import {MatFormFieldHarness} from "@angular/material/form-field/testing";
 
-describe("dateRangeComponent", () => {
+fdescribe("dateRangeComponent", () => {
   type startOrEnd = "start" | "end";
 
   let fixture: ComponentFixture<DateRangeComponent>;
@@ -68,6 +68,23 @@ describe("dateRangeComponent", () => {
     expect(matEndDateValue).toBe(transformDateFormat(matEndDateValue))
   })
 
+  it("should be disabled - start date", async () => {
+    component.disabledState = true;
+    fixture.detectChanges()
+    const matStartDateInput: MatStartDateHarness = await matDateInput("start");
+
+    expect(await matStartDateInput.isDisabled()).toBeTrue();
+  })
+
+  it("should be disabled - end date", async () => {
+    component.disabledState = true;
+    fixture.detectChanges();
+
+    const matEndDateHarness: MatEndDateHarness = await matDateInput("end");
+
+    expect(await matEndDateHarness.isDisabled()).toBeTrue();
+  })
+
   it("should have set date - start date", async() => {
     const startDate: string = new Date(1994, 10, 10).toString();
     await setDateValue("start", startDate);
@@ -111,6 +128,7 @@ describe("dateRangeComponent", () => {
   /* HELPER FUNCTIONS */
   const setTestData = (dateRangeObject?: DateRangeModel): void => {
     component.activeDates = dateRangeObject || testData;
+    component.disabledState = false;
     fixture.detectChanges();
   };
 
@@ -175,7 +193,7 @@ describe("dateRangeComponent", () => {
    */
   const setDateValue = async (dateType: startOrEnd, dateValue: string): Promise<void> => {
     component.dateRangeForm.get(`${dateType}Date`).patchValue(dateValue);
-    component.dateRangeForm.markAllAsTouched();
+    component.dateRangeForm.get(`${dateType}Date`).markAsTouched();
 
     const dateInput = await matDateInput(dateType);
     await dateInput.setValue(dateValue);
