@@ -1,6 +1,5 @@
 import {ComponentFixture, TestBed, waitForAsync} from "@angular/core/testing";
 import {DateRangeComponent} from "./date-range.component";
-import {ComponentHarness, HarnessLoader, HarnessQuery} from "@angular/cdk/testing";
 import {DatePipe} from "@angular/common";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
