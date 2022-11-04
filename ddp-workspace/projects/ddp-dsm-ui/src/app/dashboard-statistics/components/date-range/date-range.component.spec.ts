@@ -16,7 +16,7 @@ import {DebugElement} from "@angular/core";
 import {DateErrorPipe} from "../../pipes/date-error.pipe";
 import {MatFormFieldHarness} from "@angular/material/form-field/testing";
 
-fdescribe("dateRangeComponent", () => {
+describe("dateRangeComponent", () => {
   type startOrEnd = "start" | "end";
 
   let fixture: ComponentFixture<DateRangeComponent>;
