@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
+import {EMPTY, Observable, Subject} from 'rxjs';
 import {DashboardStatisticsService} from '../services/dashboard-statistics.service';
 import {RoleService} from '../services/role.service';
 import {catchError, finalize} from 'rxjs/operators';
@@ -54,8 +54,10 @@ export class DashboardStatisticsComponent implements OnInit {
     return {startDate: new Date(), endDate: new Date()}
   }
 
-  private catchErrorAndReturnArray(error: HttpErrorResponse): [] {
-    this.errorMessage.next(error);
-    return [];
+  private catchErrorAndReturnArray(error: HttpErrorResponse): Observable<never> {
+    if(error instanceof HttpErrorResponse) {
+      this.errorMessage.next(error);
+    }
+    return EMPTY;
   }
 }
