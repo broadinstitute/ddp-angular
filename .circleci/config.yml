@@ -868,7 +868,7 @@ workflows:
   test-nightly:
     triggers:
       - schedule:
-          cron: "* * * * *" # daily around 6 PM EST
+          cron: "0 22 * * *" # daily around 6 PM EST
           filters:
             branches:
               only:
