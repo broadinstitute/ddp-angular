@@ -94,6 +94,6 @@ export class DateRangeComponent implements OnInit, OnDestroy {
     /**
      * Here we are using .some() method on purpose
      */
-    return dateRange && dateRange instanceof Object && requiredProperties.some(prop => dateRange.hasOwnProperty(prop))
+    return dateRange && dateRange instanceof Object && requiredProperties.some(prop => dateRange.hasOwnProperty(prop));
   }
 }

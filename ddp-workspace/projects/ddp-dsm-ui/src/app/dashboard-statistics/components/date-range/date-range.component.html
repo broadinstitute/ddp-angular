@@ -11,7 +11,7 @@
 
     <mat-error *ngFor="let erroredFormControlEntry of erroredFormControlsEntries">
       <span *ngFor="let errorEntry of getEntries(erroredFormControlEntry[1].errors)">
-        {{ errorEntry | dateError:  erroredFormControlEntry[0] }} <br/>
+        {{ errorEntry | dateError:  erroredFormControlEntry[0] }}
       </span>
     </mat-error>
 
