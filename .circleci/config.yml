@@ -889,8 +889,8 @@ workflows:
         - equal: [ nightly-playwright-test, << pipeline.schedule.name >> ]
     jobs:
       - build-playwright-test-job:
-          env: << pipeline.parameters.env >>
+          env: << pipeline.parameters.deploy_env >>
       - run-playwright-test-job:
-          env: << pipeline.parameters.env >>
+          env: << pipeline.parameters.deploy_env >>
           requires:
             - build-playwright-test-job
