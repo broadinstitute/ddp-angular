@@ -8,6 +8,9 @@ import {CountsModel} from './models/Counts.model';
 import {DatePipe} from "@angular/common";
 import {DateRangeModel} from "./models/DateRange.model";
 
+/**
+ * @TODO refactor this component and write unit tests
+ */
 @Component({
   selector: 'app-dashboard-statistics',
   templateUrl: './dashboard-statistics.component.html',
@@ -29,6 +32,10 @@ export class DashboardStatisticsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initData()
+  }
+
+  private initData(): void {
     this.hasRequiredRole = this.roleService.allowedToViewEELData();
     this.Charts = this.dashboardStatisticsService.ChartFactory()
       .pipe(catchError(this.catchErrorAndReturnArray.bind(this)), finalize(() => this.loading = false));
@@ -37,10 +44,7 @@ export class DashboardStatisticsComponent implements OnInit {
 
   public dateChanged(date: DateRangeModel): void {
     this.loading = true;
-    setTimeout(() => {
-      console.info(date)
-      this.loading = false
-    }, 1500)
+    this.initData()
   }
 
   get getConfiguration(): any {
