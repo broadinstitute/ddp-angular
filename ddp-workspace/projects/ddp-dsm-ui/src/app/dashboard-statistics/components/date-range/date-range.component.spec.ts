@@ -16,7 +16,7 @@ import {DebugElement} from "@angular/core";
 import {DateErrorPipe} from "../../pipes/date-error.pipe";
 import {MatFormFieldHarness} from "@angular/material/form-field/testing";
 
-describe("dateRangeComponent", () => {
+fdescribe("dateRangeComponent", () => {
   type startOrEnd = "start" | "end";
 
   let fixture: ComponentFixture<DateRangeComponent>;
@@ -69,26 +69,36 @@ describe("dateRangeComponent", () => {
   })
 
   it("should be disabled - start date", async () => {
-    component.disabledState = true;
-    fixture.detectChanges()
+    setDisabledState(true);
     const matStartDateInput: MatStartDateHarness = await matDateInput("start");
 
     expect(await matStartDateInput.isDisabled()).toBeTrue();
   })
 
   it("should be disabled - end date", async () => {
-    component.disabledState = true;
-    fixture.detectChanges();
-
+    setDisabledState(true);
     const matEndDateHarness: MatEndDateHarness = await matDateInput("end");
 
     expect(await matEndDateHarness.isDisabled()).toBeTrue();
   })
 
+  it("should be enabled - start date", async () => {
+    setDisabledState(false);
+    const matStartDateInput: MatStartDateHarness = await matDateInput("start");
+
+    expect(await matStartDateInput.isDisabled()).toBeFalse();
+  })
+
+  it("should be enabled - end date", async () => {
+    setDisabledState(false);
+    const matEndDateHarness: MatEndDateHarness = await matDateInput("end");
+
+    expect(await matEndDateHarness.isDisabled()).toBeFalse();
+  })
+
   it("should have set date - start date", async() => {
     const startDate: string = new Date(1994, 10, 10).toString();
     await setDateValue("start", startDate);
-
     const matStartDateValue = await matDateValue("start");
 
     expect(matStartDateValue).toBe(transformDateFormat(startDate));
@@ -205,6 +215,15 @@ describe("dateRangeComponent", () => {
    */
   const transformDateFormat = (dateValue: string): string => {
     return datePipe.transform(dateValue, DATE_FORMAT_TRANSFORMED)
+  }
+
+  /**
+   * @param disabled
+   * sets state of input fields
+   */
+  const setDisabledState = (disabled: boolean): void => {
+    component.disabledState = disabled;
+    fixture.detectChanges();
   }
 
 })
