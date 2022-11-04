@@ -15,14 +15,15 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {DebugElement} from "@angular/core";
 import {DateErrorPipe} from "../../pipes/date-error.pipe";
 import {MatFormFieldHarness} from "@angular/material/form-field/testing";
+import {MaterialHarnesses} from "../../../test-helpers/MaterialHarnesses";
 
-describe("dateRangeComponent", () => {
+fdescribe("dateRangeComponent", () => {
   type startOrEnd = "start" | "end";
 
   let fixture: ComponentFixture<DateRangeComponent>;
   let component: DateRangeComponent;
   let componentDebugElement: DebugElement;
-  let harnessLoader: HarnessLoader;
+  let materialHarnessLoader: MaterialHarnesses;
 
   const datePipe: DatePipe = new DatePipe('en-US');
   const testData: DateRangeModel = {startDate: new Date(0), endDate: new Date()};
@@ -46,7 +47,7 @@ describe("dateRangeComponent", () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DateRangeComponent);
     component = fixture.debugElement.componentInstance;
-    harnessLoader = TestbedHarnessEnvironment.loader(fixture);
+    materialHarnessLoader = new MaterialHarnesses(TestbedHarnessEnvironment.loader(fixture));
     componentDebugElement = fixture.debugElement;
 
     setTestData();
@@ -143,25 +144,20 @@ describe("dateRangeComponent", () => {
   };
 
   /**
-   * @type T should specify the type of the material component harness, which you want to query
-   * @param matHarnessComponent should specify which material component harness you want to query
-   * @return material harness component that you have specified as a type and parameter
+   * @param dateValue
+   * used to transform date into specified date format
    */
-  const getMatHarness = async <T extends ComponentHarness>(matHarnessComponent: HarnessQuery<T>): Promise<T> =>
-    await harnessLoader.getHarness<T>(matHarnessComponent);
-
-  /**
-   * @return matFormFieldHarness component
-   */
-  const getMatFormFieldHarness = async (): Promise<MatFormFieldHarness> => {
-    return await getMatHarness<MatFormFieldHarness>(MatFormFieldHarness);
+  const transformDateFormat = (dateValue: string): string => {
+    return datePipe.transform(dateValue, DATE_FORMAT_TRANSFORMED)
   }
 
   /**
-   * @return matDateRangeInput component
+   * @param disabled
+   * sets state of input fields
    */
-  const getMatDateRangeInputHarness = async (): Promise<MatDateRangeInputHarness> => {
-    return await getMatHarness<MatDateRangeInputHarness>(MatDateRangeInputHarness);
+  const setDisabledState = (disabled: boolean): void => {
+    component.disabledState = disabled;
+    fixture.detectChanges();
   }
 
   /**
@@ -171,7 +167,7 @@ describe("dateRangeComponent", () => {
    */
   const matDateInput = async (dateType: startOrEnd): Promise<MatStartDateHarness | MatEndDateHarness> =>  {
     const matDateRangeInputHarness: MatDateRangeInputHarness =
-      await getMatDateRangeInputHarness();
+      await materialHarnessLoader.getMatDateRangeInputHarness();
 
     return dateType === "start" ?
       await matDateRangeInputHarness.getStartInput() : await matDateRangeInputHarness.getEndInput();
@@ -192,7 +188,7 @@ describe("dateRangeComponent", () => {
    * @return error messages array, which is extracted from matFormField's matErrors
    */
   const getErrorMessages = async (): Promise<string[]> => {
-    const matFormFieldHarness: MatFormFieldHarness = await getMatFormFieldHarness();
+    const matFormFieldHarness: MatFormFieldHarness = await materialHarnessLoader.getMatFormFieldHarness();
     return  await matFormFieldHarness.getTextErrors()
   }
 
@@ -207,23 +203,6 @@ describe("dateRangeComponent", () => {
 
     const dateInput = await matDateInput(dateType);
     await dateInput.setValue(dateValue);
-  }
-
-  /**
-   * @param dateValue
-   * used to transform date into specified date format
-   */
-  const transformDateFormat = (dateValue: string): string => {
-    return datePipe.transform(dateValue, DATE_FORMAT_TRANSFORMED)
-  }
-
-  /**
-   * @param disabled
-   * sets state of input fields
-   */
-  const setDisabledState = (disabled: boolean): void => {
-    component.disabledState = disabled;
-    fixture.detectChanges();
   }
 
 })
