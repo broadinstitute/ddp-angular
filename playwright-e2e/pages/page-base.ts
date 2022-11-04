@@ -1,4 +1,4 @@
-import { Locator, Page, Response } from '@playwright/test';
+import { expect, Locator, Page, Response } from '@playwright/test';
 import { PageInterface } from './page-interface';
 
 export default abstract class PageBase implements PageInterface {
@@ -92,6 +92,7 @@ export default abstract class PageBase implements PageInterface {
 
   /** Click "Agree" button */
   async agree(): Promise<void> {
+    await expect(this.getIAgreeButton()).toBeEnabled();
     await this.clickAndWaitForNav(this.getIAgreeButton(), { waitForNav: true });
   }
 
