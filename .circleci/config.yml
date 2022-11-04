@@ -21,20 +21,6 @@ references:
   study_guids: &study_guids
     "basil NA CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc circadia cmi-pancan singular brugada cmi-lms fon"
 
-  # Filter for PR branch only
-  filter-pr-branch: &filter-pr-branch
-    filters:
-      tags:
-        ignore: /.*/
-      branches:
-        ignore: develop
-
-  # Filter for develop branch only
-  filter-develop-branch: &filter-develop-branch
-    filters:
-      branches:
-        only: develop
-
 # Container for all the builds
 executors:
   build-executor:
