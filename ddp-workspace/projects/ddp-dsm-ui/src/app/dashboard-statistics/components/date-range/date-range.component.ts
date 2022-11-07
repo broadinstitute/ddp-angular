@@ -52,14 +52,21 @@ export class DateRangeComponent implements OnInit, OnDestroy {
     this.destroyed$.next();
   }
 
-  public getEntries(object: object): [string, any][] {
+  public getEntries(object: object): [string, AbstractControl | ValidationErrors][] {
     return Object.entries(object);
   }
 
   public get erroredFormControlsEntries(): [string, ValidationErrors][] {
     return this.getEntries(this.formControls)
-      .filter(([_, value]: [string, AbstractControl]) => value.errors)
-      .map(([key, value]) => [key, value.errors]);
+      .reduce(this.filterErroredEntries, []);
+  }
+
+  private filterErroredEntries(
+    result: [string, ValidationErrors][],
+    [key, value]: [string, AbstractControl])
+    : [string, ValidationErrors][] {
+      value.errors && result.push([key, value.errors]);
+      return result;
   }
 
   private listenToValueChangesAndEmit(): void {
