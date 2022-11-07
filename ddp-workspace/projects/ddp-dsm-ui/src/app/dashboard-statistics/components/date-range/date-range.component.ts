@@ -97,13 +97,13 @@ export class DateRangeComponent implements OnInit, OnDestroy {
   }
 
   private enable(): void {
-    this.endDate.enable({emitEvent: false});
     this.startDate.enable({emitEvent: false});
+    this.endDate.enable({emitEvent: false});
   }
 
   private disable(): void {
-    this.endDate.disable({emitEvent: false});
     this.startDate.disable({emitEvent: false});
+    this.endDate.disable({emitEvent: false});
   }
 
   private get generateFormGroup(): FormGroup {
