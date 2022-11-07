@@ -425,7 +425,7 @@
                        [ngClass]="{'Color--Field--Patched': isPatchedCurrently('SMIDUSS' + i)}"
                        (blur)="currentField(null)" (change)="changeSmId($event, 'smIdValue', smid.smIdPk,  'uss', this.tissue.ussSMId, i, 'SMIDUSS'+i)"
                        [(ngModel)]="this.tissue.ussSMId[i].smIdValue"
-                       (focus)="currentField('SMIDUSS' + i)"
+                       (focus)="currentField('SMIDUSS' + i, smid)"
                        [value]="smid.smIdValue" (keydown.enter)="goNext('USS', i)">
                 <md-hint class="ErrorMessageForm" *ngIf="isDuplicate(this.currentSMIDField,  i)">Duplicate Value! Not Saved!
                 </md-hint>

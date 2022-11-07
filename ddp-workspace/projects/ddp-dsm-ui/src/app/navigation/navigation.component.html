@@ -63,7 +63,6 @@
           <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="#" [routerLink]="['medicalRecordDashboard']"> Dashboard </a></li>
-<!--          <li><a [routerLink]="['statisticsDashboard']"> Statistics Dashboard </a></li>-->
           <hr>
           <li *ngIf="hasRole().allowedToViewMedicalRecords() || hasRole().allowedParticipantListView()"><a href="#" [routerLink]="['participantList']"> Participant List </a></li>
           <li *ngIf="hasRole().allowedToViewMedicalRecords()"><a href="#" [routerLink]="['tissueList']"> Tissue List </a></li>
