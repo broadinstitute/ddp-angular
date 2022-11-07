@@ -63,9 +63,7 @@ export class DateRangeComponent implements OnInit, OnDestroy {
   }
 
   private initDateRangeForm(): void {
-    if(this.isActiveDateOnInitRangeObject) {
-      this.dateRangeForm.patchValue(this.initDates, {emitEvent: false});
-    }
+    this.dateRangeForm.patchValue(this.initDates, {emitEvent: false});
   }
 
   private listenToValueChangesAndEmit(): void {
@@ -94,16 +92,6 @@ export class DateRangeComponent implements OnInit, OnDestroy {
       startDate: this.datePipe.transform(dates.startDate, Global.DATE_FORMAT),
       endDate: this.datePipe.transform(dates.endDate, Global.DATE_FORMAT)
     };
-  }
-
-  private get isActiveDateOnInitRangeObject(): boolean {
-    const requiredProperties: string[] = ['startDate', 'endDate'];
-    /**
-     * Here we are using .some() method on purpose
-     */
-    return this.initDates
-      && this.initDates instanceof Object
-      && requiredProperties.some((prop: string) => this.initDates.hasOwnProperty(prop));
   }
 
   private get formControls(): {[key: string]: AbstractControl} {
