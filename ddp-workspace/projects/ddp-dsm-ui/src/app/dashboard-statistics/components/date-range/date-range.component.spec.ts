@@ -92,14 +92,14 @@ describe('dateRangeComponent', () => {
     it('should have set date - start date', async () => {
       const date: Date = new Date(1994, 10, 10);
 
-      expect(await matDateValueAfterSettingIt('start', date))
+      expect(await dateValueAfterSettingIt('start', date))
         .toBe(transformDateFormat(date));
     });
 
     it('should have set date - end date', async () => {
       const date: Date = new Date();
 
-      expect(await matDateValueAfterSettingIt('end', date))
+      expect(await dateValueAfterSettingIt('end', date))
         .toBe(transformDateFormat(date));
     });
 
@@ -190,7 +190,7 @@ describe('dateRangeComponent', () => {
    *
    * @return simplified version of getting date field value after resetting it
    */
-  const matDateValueAfterSettingIt = async (dateType: startOrEnd, value: Date | string | null): Promise<string> => {
+  const dateValueAfterSettingIt = async (dateType: startOrEnd, value: Date | string | null): Promise<string> => {
     await setDateValue(dateType, value);
     return await matDateValue(dateType);
   };
