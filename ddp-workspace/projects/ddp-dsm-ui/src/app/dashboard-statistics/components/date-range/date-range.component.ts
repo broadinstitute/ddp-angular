@@ -51,6 +51,7 @@ export class DateRangeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.destroyed$.next();
+    this.destroyed$.complete();
   }
 
   public getEntries(object: object): [string, any][] {
