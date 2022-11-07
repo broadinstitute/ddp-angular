@@ -61,11 +61,10 @@ export class DateRangeComponent implements OnInit, OnDestroy {
       .reduce(this.filterErroredEntries, []);
   }
 
-  private filterErroredEntries(
-    result: [string, ValidationErrors][],
-    [key, value]: [string, AbstractControl]): [string, ValidationErrors][] {
-      value.errors && result.push([key, value.errors]);
-      return result;
+  private initDateRangeForm(): void {
+    if(this.isActiveDateOnInitRangeObject) {
+      this.dateRangeForm.patchValue(this.activeDatesOnInit, {emitEvent: false});
+    }
   }
 
   private listenToValueChangesAndEmit(): void {
@@ -78,6 +77,13 @@ export class DateRangeComponent implements OnInit, OnDestroy {
       .subscribe((dates: DateRangeModel) => this.emitDateChange(dates));
   }
 
+  private filterErroredEntries(
+    result: [string, ValidationErrors][],
+    [key, value]: [string, AbstractControl]): [string, ValidationErrors][] {
+      value.errors && result.push([key, value.errors]);
+      return result;
+  }
+
   private emitDateChange(dates: DateRangeModel): void {
     this.dateRangeForm.valid && this.dateChanged.emit(this.getTransformedDates(dates));
   }
@@ -87,12 +93,6 @@ export class DateRangeComponent implements OnInit, OnDestroy {
       startDate: this.datePipe.transform(dates.startDate, this.DATE_FORMAT_TRANSFORMED),
       endDate: this.datePipe.transform(dates.endDate, this.DATE_FORMAT_TRANSFORMED)
     };
-  }
-
-  private initDateRangeForm(): void {
-    if(this.isActiveDateOnInitRangeObject) {
-      this.dateRangeForm.patchValue(this.activeDatesOnInit, {emitEvent: false});
-    }
   }
 
   private enable(): void {
