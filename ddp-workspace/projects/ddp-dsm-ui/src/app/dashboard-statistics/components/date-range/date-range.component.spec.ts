@@ -11,22 +11,20 @@ import {DateRangeModel} from '../../models/DateRange.model';
 import {MatDateRangeInputHarness, MatEndDateHarness, MatStartDateHarness} from '@angular/material/datepicker/testing';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from '@angular/forms';
-import {DebugElement} from '@angular/core';
 import {DateErrorPipe} from '../../pipes/date-error.pipe';
 import {MatFormFieldHarness} from '@angular/material/form-field/testing';
 import {MaterialHarnesses} from '../../../test-helpers/MaterialHarnesses';
+import {Global} from "../../../globals/globals";
 
 describe('dateRangeComponent', () => {
   type startOrEnd = 'start' | 'end';
 
   let fixture: ComponentFixture<DateRangeComponent>;
   let component: DateRangeComponent;
-  let componentDebugElement: DebugElement;
   let materialHarnessLoader: MaterialHarnesses;
 
   const datePipe: DatePipe = new DatePipe('en-US');
   const testData: DateRangeModel = {startDate: new Date(0), endDate: new Date()};
-  const DATE_FORMAT_TRANSFORMED = 'M/d/YYYY';
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -47,7 +45,6 @@ describe('dateRangeComponent', () => {
     fixture = TestBed.createComponent(DateRangeComponent);
     component = fixture.debugElement.componentInstance;
     materialHarnessLoader = new MaterialHarnesses(TestbedHarnessEnvironment.loader(fixture));
-    componentDebugElement = fixture.debugElement;
   });
 
   it('should create component', () => {
@@ -153,7 +150,7 @@ describe('dateRangeComponent', () => {
    * @param dateValue
    * used to transform date into specified date format
    */
-  const transformDateFormat = (dateValue: string | Date): string => datePipe.transform(dateValue, DATE_FORMAT_TRANSFORMED);
+  const transformDateFormat = (dateValue: string | Date): string => datePipe.transform(dateValue, Global.DATE_FORMAT);
 
   /**
    *

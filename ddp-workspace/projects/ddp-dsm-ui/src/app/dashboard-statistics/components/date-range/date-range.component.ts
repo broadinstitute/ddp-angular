@@ -12,6 +12,7 @@ import {DateRangeModel} from '../../models/DateRange.model';
 import {Subject} from 'rxjs';
 import {takeUntil, auditTime} from 'rxjs/operators';
 import {DatePipe} from '@angular/common';
+import {Global} from "../../../globals/globals";
 
 @Component({
   selector: 'app-date-range',
@@ -20,8 +21,6 @@ import {DatePipe} from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DateRangeComponent implements OnInit, OnDestroy {
-  private readonly DATE_FORMAT_TRANSFORMED: string = 'MM/d/YYYY';
-
   /**
    * @MAIN Main Date Range Object
    */
@@ -90,8 +89,8 @@ export class DateRangeComponent implements OnInit, OnDestroy {
 
   private getTransformedDates(dates: DateRangeModel): DateRangeModel {
     return {
-      startDate: this.datePipe.transform(dates.startDate, this.DATE_FORMAT_TRANSFORMED),
-      endDate: this.datePipe.transform(dates.endDate, this.DATE_FORMAT_TRANSFORMED)
+      startDate: this.datePipe.transform(dates.startDate, Global.DATE_FORMAT),
+      endDate: this.datePipe.transform(dates.endDate, Global.DATE_FORMAT)
     };
   }
 
