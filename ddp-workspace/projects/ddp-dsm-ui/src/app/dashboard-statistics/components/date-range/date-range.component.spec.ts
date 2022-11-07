@@ -60,42 +60,30 @@ describe('dateRangeComponent', () => {
     });
 
     it('should have start date', async () => {
-      const matStartDateValue: string = await matDateValue('start');
-
-      expect(matStartDateValue).toBe(transformDateFormat(matStartDateValue));
+      expect(await matDateValue('start')).toBe(transformDateFormat(new Date(0)));
     });
 
     it('should have end date', async () => {
-      const matEndDateValue: string = await matDateValue('end');
-
-      expect(matEndDateValue).toBe(transformDateFormat(matEndDateValue));
+      expect(await matDateValue('end')).toBe(transformDateFormat(new Date()));
     });
   });
 
 
   describe('When initial data is not passed', () => {
     it('should not have start date', async () => {
-      const matStartDateValue: string = await matDateValue('start');
-
-      expect(matStartDateValue).toBeNull();
+      expect(await matDateValue('start')).toBeNull();
     });
 
     it('should not have end date', async () => {
-      const matEndDateValue: string = await matDateValue('end');
-
-      expect(matEndDateValue).toBeNull();
+      expect(await matDateValue('end')).toBeNull();
     });
 
     it('should be enabled - start date', async () => {
-      const matStartDateInput: MatStartDateHarness = await matDateInput('start');
-
-      expect(await matStartDateInput.isDisabled()).toBeFalse();
+      expect(await isDisabled('start')).toBeFalse();
     });
 
     it('should be enabled - end date', async () => {
-      const matEndDateInput: MatEndDateHarness = await matDateInput('end');
-
-      expect(await matEndDateInput.isDisabled()).toBeFalse();
+      expect(await isDisabled('end')).toBeFalse();
     });
   });
 
@@ -105,75 +93,49 @@ describe('dateRangeComponent', () => {
     });
 
     it('should have set date - start date', async () => {
-      const testDate: string = new Date(1994, 10, 10).toString();
-      await setDateValue('start', testDate);
-      const matStartDateValue = await matDateValue('start');
+      const date: Date = new Date(1994, 10, 10);
 
-      expect(matStartDateValue).toBe(transformDateFormat(testDate));
+      expect(await matDateValueAfterSettingIt('start', date))
+        .toBe(transformDateFormat(date));
     });
 
     it('should have set date - end date', async () => {
-      const testDate: string = new Date().toString();
-      await setDateValue('end', testDate);
-      const matStartDateValue = await matDateValue('end');
+      const date: Date = new Date();
 
-      expect(matStartDateValue).toBe(transformDateFormat(testDate));
+      expect(await matDateValueAfterSettingIt('end', date))
+        .toBe(transformDateFormat(date));
     });
 
     it('should be disabled - start date', async () => {
-      setDisabledState(true);
-      const matStartDateInput: MatStartDateHarness = await matDateInput('start');
-
-      expect(await matStartDateInput.isDisabled()).toBeTrue();
+      expect(await isDisabled('start', true)).toBeTrue();
     });
 
     it('should be disabled - end date', async () => {
-      setDisabledState(true);
-      const matEndDateHarness: MatEndDateHarness = await matDateInput('end');
-
-      expect(await matEndDateHarness.isDisabled()).toBeTrue();
+      expect(await isDisabled('end', true)).toBeTrue();
     });
 
-    it('should be enabled - start date', async () => {
-      setDisabledState(false);
-      const matStartDateInput: MatStartDateHarness = await matDateInput('start');
-
-      expect(await matStartDateInput.isDisabled()).toBeFalse();
+    it('should be enabled -  start date', async () => {
+      expect(await isDisabled('start', false)).toBeFalse();
     });
 
-    it('should be enabled - end date', async () => {
-      setDisabledState(false);
-      const matEndDateHarness: MatEndDateHarness = await matDateInput('end');
-
-      expect(await matEndDateHarness.isDisabled()).toBeFalse();
+    it('should be enabled -  end date', async () => {
+      expect(await isDisabled('end', false)).toBeFalse();
     });
 
     it('should show error message - required start date', async () => {
-      await setDateValue('start', null);
-      const [startDateRequired]: string[] = await getErrorMessages();
-
-      expect(startDateRequired).toBe('Start date is required');
+      expect(await errorMessageAfterSettingValue('start', null)).toBe('Start date is required');
     });
 
     it('should show error message - required end date', async () => {
-      await setDateValue('end', null);
-      const [endDateRequired]: string[] = await getErrorMessages();
-
-      expect(endDateRequired).toBe('End date is required');
+      expect(await errorMessageAfterSettingValue('end', null)).toBe('End date is required');
     });
 
     it('should show error message - invalid start date', async () => {
-      await setDateValue('start', '3123');
-      const [startDateInvalid]: string[] = await getErrorMessages();
-
-      expect(startDateInvalid).toBe('Start date is invalid');
+      expect(await errorMessageAfterSettingValue('start', '3123')).toBe('Start date is invalid');
     });
 
     it('should show error message - invalid end date', async () => {
-      await setDateValue('end', '123');
-      const [endDateInvalid]: string[] = await getErrorMessages();
-
-      expect(endDateInvalid).toBe('End date is invalid');
+      expect(await errorMessageAfterSettingValue('end', '123')).toBe('End date is invalid');
     });
   });
 
@@ -191,7 +153,18 @@ describe('dateRangeComponent', () => {
    * @param dateValue
    * used to transform date into specified date format
    */
-  const transformDateFormat = (dateValue: string): string => datePipe.transform(dateValue, DATE_FORMAT_TRANSFORMED);
+  const transformDateFormat = (dateValue: string | Date): string => datePipe.transform(dateValue, DATE_FORMAT_TRANSFORMED);
+
+  /**
+   *
+   @return simplified version of getting particular field's disabled state - either true of false
+   */
+  const isDisabled = async (dateType: startOrEnd, disabled?: boolean): Promise<boolean> => {
+    disabled !== undefined && setDisabledState(disabled);
+    const matDateHarness: MatStartDateHarness | MatEndDateHarness = await matDateInput(dateType);
+
+    return await matDateHarness.isDisabled();
+  };
 
   /**
    * @param disabled
@@ -215,6 +188,16 @@ describe('dateRangeComponent', () => {
       await matDateRangeInputHarness.getStartInput() : await matDateRangeInputHarness.getEndInput();
   };
 
+
+  /**
+   *
+   * @return simplified version of getting date field value after resetting it
+   */
+  const matDateValueAfterSettingIt = async (dateType: startOrEnd, value: Date | string | null): Promise<string> => {
+    await setDateValue(dateType, value);
+    return await matDateValue(dateType);
+  };
+
   /**
    * @param dateType type - what will be returned depends on the parameter which
    * is restricted to only two strings: "start" and "end"
@@ -235,16 +218,25 @@ describe('dateRangeComponent', () => {
   };
 
   /**
+   * @return array of error messages strings,
+   */
+  const errorMessageAfterSettingValue = async (dateType: startOrEnd, value: string | null): Promise<string> => {
+    await setDateValue(dateType, value);
+    const [firstErrorMessage]: string[] = await getErrorMessages();
+    return firstErrorMessage;
+  };
+
+  /**
    * @param dateType type - it should be either "start" or "end", which will be concatenated
    * with "Date" string and in the end gives us the form field which we are aiming to reset
    * @param dateValue - this value will be set as in matInput also in FormControl
    */
-  const setDateValue = async (dateType: startOrEnd, dateValue: string): Promise<void> => {
+  const setDateValue = async (dateType: startOrEnd, dateValue: Date | string): Promise<void> => {
     component.dateRangeForm.get(`${dateType}Date`).patchValue(dateValue);
     component.dateRangeForm.get(`${dateType}Date`).markAsTouched();
 
     const dateInput = await matDateInput(dateType);
-    await dateInput.setValue(dateValue);
+    await dateInput.setValue(dateValue?.toString());
   };
 
 });
