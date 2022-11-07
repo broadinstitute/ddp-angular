@@ -34,7 +34,7 @@ export class DateRangeComponent implements OnInit, OnDestroy {
   constructor(private datePipe: DatePipe) {
   }
 
-  @Input('activeDates') activeDatesOnInit: DateRangeModel;
+  @Input() initDates: DateRangeModel;
 
   @Input('disabled') set disabledState(isDisabled: boolean) {
     const options = {emitEvent: false};
@@ -64,7 +64,7 @@ export class DateRangeComponent implements OnInit, OnDestroy {
 
   private initDateRangeForm(): void {
     if(this.isActiveDateOnInitRangeObject) {
-      this.dateRangeForm.patchValue(this.activeDatesOnInit, {emitEvent: false});
+      this.dateRangeForm.patchValue(this.initDates, {emitEvent: false});
     }
   }
 
@@ -101,9 +101,9 @@ export class DateRangeComponent implements OnInit, OnDestroy {
     /**
      * Here we are using .some() method on purpose
      */
-    return this.activeDatesOnInit
-      && this.activeDatesOnInit instanceof Object
-      && requiredProperties.some((prop: string) => this.activeDatesOnInit.hasOwnProperty(prop));
+    return this.initDates
+      && this.initDates instanceof Object
+      && requiredProperties.some((prop: string) => this.initDates.hasOwnProperty(prop));
   }
 
   private get formControls(): {[key: string]: AbstractControl} {

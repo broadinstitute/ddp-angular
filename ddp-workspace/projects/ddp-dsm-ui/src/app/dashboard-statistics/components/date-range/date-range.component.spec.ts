@@ -141,7 +141,7 @@ describe('dateRangeComponent', () => {
 
   /* HELPER FUNCTIONS */
   const setInitialTestData = (): void => {
-    component.activeDatesOnInit = testData;
+    component.initDates = testData;
     component.disabledState = false;
     fixture.detectChanges();
   };
