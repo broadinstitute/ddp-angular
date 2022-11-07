@@ -34,7 +34,8 @@ export class DateRangeComponent implements OnInit, OnDestroy {
   @Input('activeDates') activeDatesOnInit: DateRangeModel;
 
   @Input('disabled') set disabledState(isDisabled: boolean) {
-    typeof isDisabled === 'boolean' && this.disableOrEnable(isDisabled);
+    const options = {emitEvent: false};
+    isDisabled ? this.dateRangeForm.disable(options) : this.dateRangeForm.enable(options);
   }
 
   @Output() dateChanged = new EventEmitter<DateRangeModel>();
@@ -92,20 +93,6 @@ export class DateRangeComponent implements OnInit, OnDestroy {
     };
   }
 
-  private disableOrEnable(disable: boolean): void {
-    disable ? this.disable() : this.enable();
-  }
-
-  private enable(): void {
-    this.startDate.enable({emitEvent: false});
-    this.endDate.enable({emitEvent: false});
-  }
-
-  private disable(): void {
-    this.startDate.disable({emitEvent: false});
-    this.endDate.disable({emitEvent: false});
-  }
-
   private get generateFormGroup(): FormGroup {
     return new FormGroup({
       startDate: new FormControl(null, Validators.required),
@@ -127,11 +114,4 @@ export class DateRangeComponent implements OnInit, OnDestroy {
     return this.dateRangeForm.controls;
   }
 
-  private get startDate(): AbstractControl {
-    return this.dateRangeForm.get('startDate');
-  }
-
-  private get endDate(): AbstractControl {
-    return this.dateRangeForm.get('endDate');
-  }
 }
