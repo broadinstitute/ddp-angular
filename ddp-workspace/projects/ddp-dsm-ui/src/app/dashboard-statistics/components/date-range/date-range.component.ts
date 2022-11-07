@@ -6,12 +6,12 @@ import {
   OnDestroy,
   OnInit,
   Output
-} from "@angular/core";
-import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
-import {DateRangeModel} from "../../models/DateRange.model";
-import {Subject} from "rxjs";
-import {takeUntil, auditTime} from 'rxjs/operators'
-import {DatePipe} from "@angular/common";
+} from '@angular/core';
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {DateRangeModel} from '../../models/DateRange.model';
+import {Subject} from 'rxjs';
+import {takeUntil, auditTime} from 'rxjs/operators';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-date-range',
@@ -35,7 +35,7 @@ export class DateRangeComponent implements OnInit, OnDestroy {
   @Input('activeDates') activeDatesOnInit: DateRangeModel;
 
   @Input('disabled') set disabledState(isDisabled: boolean) {
-    if(typeof isDisabled === "boolean") {
+    if(typeof isDisabled === 'boolean') {
       this.disableOrEnable = isDisabled;
     }
   }
@@ -63,8 +63,7 @@ export class DateRangeComponent implements OnInit, OnDestroy {
 
   private filterErroredEntries(
     result: [string, ValidationErrors][],
-    [key, value]: [string, AbstractControl])
-    : [string, ValidationErrors][] {
+    [key, value]: [string, AbstractControl]): [string, ValidationErrors][] {
       value.errors && result.push([key, value.errors]);
       return result;
   }
@@ -76,7 +75,7 @@ export class DateRangeComponent implements OnInit, OnDestroy {
      */
     this.dateRangeForm.valueChanges
       .pipe(auditTime(0), takeUntil(this.destroyed$))
-      .subscribe((dates: DateRangeModel) => this.emitDateChange(dates))
+      .subscribe((dates: DateRangeModel) => this.emitDateChange(dates));
   }
 
   private emitDateChange(dates: DateRangeModel): void {
@@ -87,12 +86,12 @@ export class DateRangeComponent implements OnInit, OnDestroy {
     return {
       startDate: this.datePipe.transform(dates.startDate, this.DATE_FORMAT_TRANSFORMED),
       endDate: this.datePipe.transform(dates.endDate, this.DATE_FORMAT_TRANSFORMED)
-    }
+    };
   }
 
-  private initDateRangeForm() {
+  private initDateRangeForm(): void {
     if(this.isActiveDateOnInitRangeObject) {
-      this.dateRangeForm.patchValue(this.activeDatesOnInit, {emitEvent: false})
+      this.dateRangeForm.patchValue(this.activeDatesOnInit, {emitEvent: false});
     }
   }
 

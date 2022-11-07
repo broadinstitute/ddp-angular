@@ -1,23 +1,23 @@
-import {ComponentFixture, TestBed, waitForAsync} from "@angular/core/testing";
-import {DateRangeComponent} from "./date-range.component";
-import {DatePipe} from "@angular/common";
-import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MatNativeDateModule} from "@angular/material/core";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {TestbedHarnessEnvironment} from "@angular/cdk/testing/testbed";
-import {expect} from "@angular/flex-layout/_private-utils/testing";
-import {DateRangeModel} from "../../models/DateRange.model";
-import {MatDateRangeInputHarness, MatEndDateHarness, MatStartDateHarness} from "@angular/material/datepicker/testing";
-import {NoopAnimationsModule} from "@angular/platform-browser/animations";
-import {ReactiveFormsModule} from "@angular/forms";
-import {DebugElement} from "@angular/core";
-import {DateErrorPipe} from "../../pipes/date-error.pipe";
-import {MatFormFieldHarness} from "@angular/material/form-field/testing";
-import {MaterialHarnesses} from "../../../test-helpers/MaterialHarnesses";
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {DateRangeComponent} from './date-range.component';
+import {DatePipe} from '@angular/common';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
+import {expect} from '@angular/flex-layout/_private-utils/testing';
+import {DateRangeModel} from '../../models/DateRange.model';
+import {MatDateRangeInputHarness, MatEndDateHarness, MatStartDateHarness} from '@angular/material/datepicker/testing';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {ReactiveFormsModule} from '@angular/forms';
+import {DebugElement} from '@angular/core';
+import {DateErrorPipe} from '../../pipes/date-error.pipe';
+import {MatFormFieldHarness} from '@angular/material/form-field/testing';
+import {MaterialHarnesses} from '../../../test-helpers/MaterialHarnesses';
 
-describe("dateRangeComponent", () => {
-  type startOrEnd = "start" | "end";
+describe('dateRangeComponent', () => {
+  type startOrEnd = 'start' | 'end';
 
   let fixture: ComponentFixture<DateRangeComponent>;
   let component: DateRangeComponent;
@@ -26,7 +26,7 @@ describe("dateRangeComponent", () => {
 
   const datePipe: DatePipe = new DatePipe('en-US');
   const testData: DateRangeModel = {startDate: new Date(0), endDate: new Date()};
-  const DATE_FORMAT_TRANSFORMED: string = 'M/d/YYYY';
+  const DATE_FORMAT_TRANSFORMED = 'M/d/YYYY';
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -41,141 +41,141 @@ describe("dateRangeComponent", () => {
       ],
       providers: [DatePipe]
     }).compileComponents();
-  }))
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DateRangeComponent);
     component = fixture.debugElement.componentInstance;
     materialHarnessLoader = new MaterialHarnesses(TestbedHarnessEnvironment.loader(fixture));
     componentDebugElement = fixture.debugElement;
-  })
+  });
 
-  it("should create component", () => {
+  it('should create component', () => {
     expect(component).toBeTruthy();
-  })
+  });
 
-  describe("When initial data is passed", () => {
+  describe('When initial data is passed', () => {
     beforeEach(() => {
-      setInitialTestData()
-    })
+      setInitialTestData();
+    });
 
-    it("should have start date", async () => {
-      const matStartDateValue: string = await matDateValue("start");
+    it('should have start date', async () => {
+      const matStartDateValue: string = await matDateValue('start');
 
-      expect(matStartDateValue).toBe(transformDateFormat(matStartDateValue))
-    })
+      expect(matStartDateValue).toBe(transformDateFormat(matStartDateValue));
+    });
 
-    it("should have end date", async () => {
-      const matEndDateValue: string = await matDateValue("end");
+    it('should have end date', async () => {
+      const matEndDateValue: string = await matDateValue('end');
 
-      expect(matEndDateValue).toBe(transformDateFormat(matEndDateValue))
-    })
-  })
+      expect(matEndDateValue).toBe(transformDateFormat(matEndDateValue));
+    });
+  });
 
 
-  describe("When initial data is not passed", () => {
-    it("should not have start date", async () => {
-      const matStartDateValue: string = await matDateValue("start");
+  describe('When initial data is not passed', () => {
+    it('should not have start date', async () => {
+      const matStartDateValue: string = await matDateValue('start');
 
-      expect(matStartDateValue).toBeNull()
-    })
+      expect(matStartDateValue).toBeNull();
+    });
 
-    it("should not have end date", async () => {
-      const matEndDateValue: string = await matDateValue("end");
+    it('should not have end date', async () => {
+      const matEndDateValue: string = await matDateValue('end');
 
-      expect(matEndDateValue).toBeNull()
-    })
+      expect(matEndDateValue).toBeNull();
+    });
 
-    it("should be enabled - start date", async () => {
-      const matStartDateInput: MatStartDateHarness = await matDateInput("start");
+    it('should be enabled - start date', async () => {
+      const matStartDateInput: MatStartDateHarness = await matDateInput('start');
 
       expect(await matStartDateInput.isDisabled()).toBeFalse();
-    })
+    });
 
-    it("should be enabled - end date", async () => {
-      const matEndDateInput: MatEndDateHarness = await matDateInput("end");
+    it('should be enabled - end date', async () => {
+      const matEndDateInput: MatEndDateHarness = await matDateInput('end');
 
       expect(await matEndDateInput.isDisabled()).toBeFalse();
-    })
-  })
+    });
+  });
 
-  describe("Manually changing date ranges", () => {
+  describe('Manually changing date ranges', () => {
     beforeEach(() => {
-      setInitialTestData()
-    })
+      setInitialTestData();
+    });
 
-    it("should have set date - start date", async() => {
+    it('should have set date - start date', async () => {
       const testDate: string = new Date(1994, 10, 10).toString();
-      await setDateValue("start", testDate);
-      const matStartDateValue = await matDateValue("start");
+      await setDateValue('start', testDate);
+      const matStartDateValue = await matDateValue('start');
 
       expect(matStartDateValue).toBe(transformDateFormat(testDate));
-    })
+    });
 
-    it("should have set date - end date", async() => {
+    it('should have set date - end date', async () => {
       const testDate: string = new Date().toString();
-      await setDateValue("end", testDate);
-      const matStartDateValue = await matDateValue("end");
+      await setDateValue('end', testDate);
+      const matStartDateValue = await matDateValue('end');
 
       expect(matStartDateValue).toBe(transformDateFormat(testDate));
-    })
+    });
 
-    it("should be disabled - start date", async () => {
+    it('should be disabled - start date', async () => {
       setDisabledState(true);
-      const matStartDateInput: MatStartDateHarness = await matDateInput("start");
+      const matStartDateInput: MatStartDateHarness = await matDateInput('start');
 
       expect(await matStartDateInput.isDisabled()).toBeTrue();
-    })
+    });
 
-    it("should be disabled - end date", async () => {
+    it('should be disabled - end date', async () => {
       setDisabledState(true);
-      const matEndDateHarness: MatEndDateHarness = await matDateInput("end");
+      const matEndDateHarness: MatEndDateHarness = await matDateInput('end');
 
       expect(await matEndDateHarness.isDisabled()).toBeTrue();
-    })
+    });
 
-    it("should be enabled - start date", async () => {
+    it('should be enabled - start date', async () => {
       setDisabledState(false);
-      const matStartDateInput: MatStartDateHarness = await matDateInput("start");
+      const matStartDateInput: MatStartDateHarness = await matDateInput('start');
 
       expect(await matStartDateInput.isDisabled()).toBeFalse();
-    })
+    });
 
-    it("should be enabled - end date", async () => {
+    it('should be enabled - end date', async () => {
       setDisabledState(false);
-      const matEndDateHarness: MatEndDateHarness = await matDateInput("end");
+      const matEndDateHarness: MatEndDateHarness = await matDateInput('end');
 
       expect(await matEndDateHarness.isDisabled()).toBeFalse();
-    })
+    });
 
-    it("should show error message - required start date", async () => {
-      await setDateValue("start", null);
+    it('should show error message - required start date', async () => {
+      await setDateValue('start', null);
       const [startDateRequired]: string[] = await getErrorMessages();
 
       expect(startDateRequired).toBe('Start date is required');
-    })
+    });
 
-    it("should show error message - required end date", async () => {
-      await setDateValue("end", null);
+    it('should show error message - required end date', async () => {
+      await setDateValue('end', null);
       const [endDateRequired]: string[] = await getErrorMessages();
 
       expect(endDateRequired).toBe('End date is required');
-    })
+    });
 
-    it("should show error message - invalid start date", async () => {
-      await setDateValue("start", "3123");
+    it('should show error message - invalid start date', async () => {
+      await setDateValue('start', '3123');
       const [startDateInvalid]: string[] = await getErrorMessages();
 
       expect(startDateInvalid).toBe('Start date is invalid');
-    })
+    });
 
-    it("should show error message - invalid end date", async () => {
-      await setDateValue("end", "123");
+    it('should show error message - invalid end date', async () => {
+      await setDateValue('end', '123');
       const [endDateInvalid]: string[] = await getErrorMessages();
 
       expect(endDateInvalid).toBe('End date is invalid');
-    })
-  })
+    });
+  });
 
 
 
@@ -191,9 +191,7 @@ describe("dateRangeComponent", () => {
    * @param dateValue
    * used to transform date into specified date format
    */
-  const transformDateFormat = (dateValue: string): string => {
-    return datePipe.transform(dateValue, DATE_FORMAT_TRANSFORMED)
-  }
+  const transformDateFormat = (dateValue: string): string => datePipe.transform(dateValue, DATE_FORMAT_TRANSFORMED);
 
   /**
    * @param disabled
@@ -202,7 +200,7 @@ describe("dateRangeComponent", () => {
   const setDisabledState = (disabled: boolean): void => {
     component.disabledState = disabled;
     fixture.detectChanges();
-  }
+  };
 
   /**
    * @param dateType type - what will be returned depends on the parameter which
@@ -213,9 +211,9 @@ describe("dateRangeComponent", () => {
     const matDateRangeInputHarness: MatDateRangeInputHarness =
       await materialHarnessLoader.getMatDateRangeInputHarness();
 
-    return dateType === "start" ?
+    return dateType === 'start' ?
       await matDateRangeInputHarness.getStartInput() : await matDateRangeInputHarness.getEndInput();
-  }
+  };
 
   /**
    * @param dateType type - what will be returned depends on the parameter which
@@ -226,15 +224,15 @@ describe("dateRangeComponent", () => {
     const matDateHarness: MatStartDateHarness | MatEndDateHarness = await matDateInput(dateType);
 
     return transformDateFormat(await matDateHarness.getValue());
-  }
+  };
 
   /**
    * @return error messages array, which is extracted from matFormField's matErrors
    */
   const getErrorMessages = async (): Promise<string[]> => {
     const matFormFieldHarness: MatFormFieldHarness = await materialHarnessLoader.getMatFormFieldHarness();
-    return  await matFormFieldHarness.getTextErrors()
-  }
+    return  await matFormFieldHarness.getTextErrors();
+  };
 
   /**
    * @param dateType type - it should be either "start" or "end", which will be concatenated
@@ -247,8 +245,8 @@ describe("dateRangeComponent", () => {
 
     const dateInput = await matDateInput(dateType);
     await dateInput.setValue(dateValue);
-  }
+  };
 
-})
+});
 
 

@@ -5,8 +5,8 @@ import {RoleService} from '../services/role.service';
 import {catchError, finalize} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
 import {CountsModel} from './models/Counts.model';
-import {DatePipe} from "@angular/common";
-import {DateRangeModel} from "./models/DateRange.model";
+import {DatePipe} from '@angular/common';
+import {DateRangeModel} from './models/DateRange.model';
 
 /**
  * @TODO refactor this component and write unit tests
@@ -32,7 +32,7 @@ export class DashboardStatisticsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initData()
+    this.initData();
   }
 
   private initData(): void {
@@ -43,7 +43,7 @@ export class DashboardStatisticsComponent implements OnInit {
   }
 
   public dateChanged(date: DateRangeModel): void {
-    console.log(date, 'DATE - dashboard.statistics')
+    console.log(date, 'DATE - dashboard.statistics');
     this.loading = true;
     this.initData();
   }
@@ -56,7 +56,7 @@ export class DashboardStatisticsComponent implements OnInit {
   }
 
   public get activeDates(): DateRangeModel {
-    return {startDate: new Date(), endDate: new Date()}
+    return {startDate: new Date(), endDate: new Date()};
   }
 
   private catchErrorAndReturnArray(error: HttpErrorResponse): Observable<never> {
