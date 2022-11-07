@@ -245,8 +245,8 @@ export class OncHistoryDetailComponent implements OnInit {
       {
         name: 'deleted',
         value: true
-      }, null, 'participantId', this.oncHistory[index].participantId,
-      Statics.ONCDETAIL_ALIAS, null, realm, this.participant.participant.ddpParticipantId
+      }, null, 'participantId', this.participant.participant.participantId,
+      Statics.ONCDETAIL_ALIAS, null, realm, this.participant.data.profile['guid']
     );
     const patch = patch1.getPatch();
     this.patchFinished = false;
@@ -314,7 +314,7 @@ export class OncHistoryDetailComponent implements OnInit {
         const patch1 = new PatchUtil(
           this.oncHistory[ index ].oncHistoryDetailId, this.role.userMail(),
           null, nameValues, 'participantId', this.oncHistory[ index ].participantId,
-          Statics.ONCDETAIL_ALIAS, null, realm, this.participant.participant.ddpParticipantId
+          Statics.ONCDETAIL_ALIAS, null, realm, this.participant.data.profile['guid']
         );
         const patch = patch1.getPatch();
         this.multipleValueChanged(patch, index, 'facility');
@@ -325,8 +325,8 @@ export class OncHistoryDetailComponent implements OnInit {
           {
             name: 'facility',
             value: contact
-          }, null, 'participantId', this.oncHistory[ index ].participantId,
-          Statics.ONCDETAIL_ALIAS, null, realm, this.participant.participant.ddpParticipantId
+          }, null, 'participantId', this.participant.participant.participantId,
+          Statics.ONCDETAIL_ALIAS, null, realm, this.participant.data.profile['guid']
         );
         const patch = patch1.getPatch();
         this.patchFinished = false;
