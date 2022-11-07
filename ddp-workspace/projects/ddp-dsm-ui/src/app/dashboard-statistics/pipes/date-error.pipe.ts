@@ -5,7 +5,7 @@ import {DateValidationErrorMessages} from './constants/date-error.messages';
   name: 'dateError'
 })
 export class DateErrorPipe implements PipeTransform {
-  transform([errorKey]: [string, string], dateType?: string): string {
+  transform([errorKey]: [string, any], dateType?: string): string {
     return DateValidationErrorMessages[dateType][errorKey] || '';
   }
 }

@@ -52,7 +52,7 @@ export class DateRangeComponent implements OnInit, OnDestroy {
     this.destroyed$.next();
   }
 
-  public getEntries(object: object): [string, AbstractControl | ValidationErrors][] {
+  public getEntries(object: object): [string, any][] {
     return Object.entries(object);
   }
 
