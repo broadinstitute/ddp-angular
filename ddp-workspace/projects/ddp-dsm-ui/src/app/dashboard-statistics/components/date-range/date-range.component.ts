@@ -24,7 +24,10 @@ export class DateRangeComponent implements OnInit, OnDestroy {
   /**
    * @MAIN Main Date Range Object
    */
-  public readonly dateRangeForm: FormGroup = this.generateFormGroup;
+  public readonly dateRangeForm: FormGroup =  new FormGroup({
+    startDate: new FormControl(null, Validators.required),
+    endDate: new FormControl(null, Validators.required),
+  });
 
   private readonly destroyed$: Subject<void> = new Subject<void>();
 
@@ -91,13 +94,6 @@ export class DateRangeComponent implements OnInit, OnDestroy {
       startDate: this.datePipe.transform(dates.startDate, Global.DATE_FORMAT),
       endDate: this.datePipe.transform(dates.endDate, Global.DATE_FORMAT)
     };
-  }
-
-  private get generateFormGroup(): FormGroup {
-    return new FormGroup({
-      startDate: new FormControl(null, Validators.required),
-      endDate: new FormControl(null, Validators.required),
-    });
   }
 
   private get isActiveDateOnInitRangeObject(): boolean {
