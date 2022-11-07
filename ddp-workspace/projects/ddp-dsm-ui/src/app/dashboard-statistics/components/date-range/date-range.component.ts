@@ -12,7 +12,7 @@ import {DateRangeModel} from '../../models/DateRange.model';
 import {Subject} from 'rxjs';
 import {takeUntil, auditTime} from 'rxjs/operators';
 import {DatePipe} from '@angular/common';
-import {Global} from "../../../globals/globals";
+import {Global} from '../../../globals/globals';
 
 @Component({
   selector: 'app-date-range',

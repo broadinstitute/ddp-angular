@@ -14,7 +14,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {DateErrorPipe} from '../../pipes/date-error.pipe';
 import {MatFormFieldHarness} from '@angular/material/form-field/testing';
 import {MaterialHarnesses} from '../../../test-helpers/MaterialHarnesses';
-import {Global} from "../../../globals/globals";
+import {Global} from '../../../globals/globals';
 
 describe('dateRangeComponent', () => {
   type startOrEnd = 'start' | 'end';
