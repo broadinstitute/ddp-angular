@@ -101,8 +101,8 @@ export class DateRangeComponent implements OnInit, OnDestroy {
 
   private get generateFormGroup(): FormGroup {
     return new FormGroup({
-      startDate: new FormControl({value: null, disabled: true}, Validators.required),
-      endDate: new FormControl({value:  null, disabled: true} || null, Validators.required),
+      startDate: new FormControl(null, Validators.required),
+      endDate: new FormControl(null, Validators.required),
     });
   }
 

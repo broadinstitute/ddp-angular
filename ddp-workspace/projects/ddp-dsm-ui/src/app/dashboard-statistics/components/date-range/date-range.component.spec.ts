@@ -85,6 +85,18 @@ describe("dateRangeComponent", () => {
 
       expect(matEndDateValue).toBeNull()
     })
+
+    it("should be enabled - start date", async () => {
+      const matStartDateInput: MatStartDateHarness = await matDateInput("start");
+
+      expect(await matStartDateInput.isDisabled()).toBeFalse();
+    })
+
+    it("should be enabled - end date", async () => {
+      const matEndDateInput: MatEndDateHarness = await matDateInput("end");
+
+      expect(await matEndDateInput.isDisabled()).toBeFalse();
+    })
   })
 
   describe("Manually changing date ranges", () => {
