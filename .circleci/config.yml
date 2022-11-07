@@ -34,6 +34,14 @@ executors:
     environment:
       NODE_ENV: development # Needed if playwright is in devDependencies
 
+  # Job runs for main branch only
+  filter-develop-branch: &filter-develop-branch
+    filters:
+      tags:
+        ignore: /.*/
+      branches:
+        only: develop
+
 commands:
   app-build-and-store:
     description: Run build and store archive of it
@@ -669,7 +677,8 @@ jobs:
           name: Running Playwright tests
           working_directory: *playwright_path
           command: |
-            # CI aut-detect by timing does not work because CircleCI CLI expects both filenames and classnames to be present in JUnit xml
+            # CI split by auto-detect timing does not work because CircleCI CLI expects both filenames and classnames to be present in JUnit xml.
+            # Playwright generated JUnit xml does not have filenames.
             SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npm run test:ci -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
           no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       - store_test_results:
@@ -887,8 +896,10 @@ workflows:
         - equal: [ nightly-playwright-test, << pipeline.schedule.name >> ]
     jobs:
       - build-playwright-test-job:
+          <<: *filter-develop-branch
           env: << pipeline.parameters.deploy_env >>
       - run-playwright-test-job:
+          <<: *filter-develop-branch
           env: << pipeline.parameters.deploy_env >>
           requires:
             - build-playwright-test-job
