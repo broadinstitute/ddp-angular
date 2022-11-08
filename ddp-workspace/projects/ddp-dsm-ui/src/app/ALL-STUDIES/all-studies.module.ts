@@ -137,8 +137,8 @@ import {MatSortModule} from '@angular/material/sort';
 import {DateRangeComponent} from '../dashboard-statistics/components/date-range/date-range.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
-import {DateErrorPipe} from '../dashboard-statistics/pipes/date-error.pipe';
-import {KeyValuePipe} from '../dashboard-statistics/pipes/keyValue.pipe';
+import {DateRangeErrorPipe} from '../dashboard-statistics/pipes/dateRangeError.pipe';
+import {KeyValuePairPipe} from '../dashboard-statistics/pipes/KeyValuePair.pipe';
 
 
 PlotlyModule.plotlyjs = PlotlyJS;
@@ -236,8 +236,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     NoDataPipe,
     CountsTableComponent,
     DateRangeComponent,
-    DateErrorPipe,
-    KeyValuePipe
+    DateRangeErrorPipe,
+    KeyValuePairPipe
   ],
   imports: [
     CommonModule,

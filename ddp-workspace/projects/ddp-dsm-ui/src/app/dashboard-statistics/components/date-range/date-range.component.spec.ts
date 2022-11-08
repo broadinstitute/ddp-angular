@@ -11,11 +11,11 @@ import {DateRangeModel} from '../../models/DateRange.model';
 import {MatDateRangeInputHarness, MatEndDateHarness, MatStartDateHarness} from '@angular/material/datepicker/testing';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from '@angular/forms';
-import {DateErrorPipe} from '../../pipes/date-error.pipe';
+import {DateRangeErrorPipe} from '../../pipes/dateRangeError.pipe';
 import {MatFormFieldHarness} from '@angular/material/form-field/testing';
 import {MaterialHarnesses} from '../../../test-helpers/MaterialHarnesses';
 import {Global} from '../../../globals/globals';
-import {KeyValuePipe} from '../../pipes/keyValue.pipe';
+import {KeyValuePairPipe} from '../../pipes/KeyValuePair.pipe';
 
 describe('dateRangeComponent', () => {
   type startOrEnd = 'start' | 'end';
@@ -29,7 +29,7 @@ describe('dateRangeComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [DateRangeComponent, DateErrorPipe, KeyValuePipe],
+      declarations: [DateRangeComponent, DateRangeErrorPipe, KeyValuePairPipe],
       imports: [
         ReactiveFormsModule,
         MatFormFieldModule,
