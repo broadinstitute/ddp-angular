@@ -13,7 +13,7 @@ import {Subject} from 'rxjs';
 import {takeUntil, auditTime} from 'rxjs/operators';
 import {DatePipe} from '@angular/common';
 import {Global} from '../../../globals/globals';
-import {DateRangeErrorModel} from "../../models/DateRangeError.model";
+import {DateRangeErrorModel} from '../../models/DateRangeError.model';
 
 @Component({
   selector: 'app-date-range',
@@ -77,7 +77,7 @@ export class DateRangeComponent implements OnInit, OnDestroy {
   private filterErroredEntries<T>(
     result: DateRangeErrorModel,
     [key, value]: [string, AbstractControl]): DateRangeErrorModel {
-      value.errors && result[key].push(...Object.keys(value.errors))
+      value.errors && result[key].push(...Object.keys(value.errors));
       return result;
   }
 

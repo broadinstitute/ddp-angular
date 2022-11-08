@@ -138,7 +138,7 @@ import {DateRangeComponent} from '../dashboard-statistics/components/date-range/
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {DateErrorPipe} from '../dashboard-statistics/pipes/date-error.pipe';
-import {KeyValuePipe} from "../dashboard-statistics/pipes/keyValue.pipe";
+import {KeyValuePipe} from '../dashboard-statistics/pipes/keyValue.pipe';
 
 
 PlotlyModule.plotlyjs = PlotlyJS;

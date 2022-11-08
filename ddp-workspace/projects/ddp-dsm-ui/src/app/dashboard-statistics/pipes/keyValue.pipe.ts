@@ -1,4 +1,4 @@
-import {Pipe, PipeTransform} from "@angular/core";
+import {Pipe, PipeTransform} from '@angular/core';
 
 interface keyValue {
   key: string;
@@ -6,7 +6,7 @@ interface keyValue {
 }
 
 @Pipe({
-  name: "keyValue",
+  name: 'keyValue',
   pure: false
 })
 export class KeyValuePipe implements PipeTransform {
