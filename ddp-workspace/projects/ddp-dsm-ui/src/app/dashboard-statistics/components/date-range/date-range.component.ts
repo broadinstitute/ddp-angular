@@ -74,7 +74,7 @@ export class DateRangeComponent implements OnInit, OnDestroy {
       .subscribe((dates: DateRangeModel) => this.emitDateChange(dates));
   }
 
-  private filterErroredEntries<T>(
+  private filterErroredEntries(
     result: DateRangeErrorModel,
     [key, value]: [string, AbstractControl]): DateRangeErrorModel {
       value.errors && result[key].push(...Object.keys(value.errors));
