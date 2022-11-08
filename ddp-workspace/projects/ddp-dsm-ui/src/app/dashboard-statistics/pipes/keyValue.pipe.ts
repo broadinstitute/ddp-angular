@@ -10,7 +10,7 @@ interface keyValue {
   pure: false
 })
 export class KeyValuePipe implements PipeTransform {
-  transform(objectValue: object, compareObject?: object): keyValue[] {
+  transform(objectValue: object): keyValue[] {
     return Object.entries(objectValue).map(([key, value]) => ({key, value}));
   }
 }
