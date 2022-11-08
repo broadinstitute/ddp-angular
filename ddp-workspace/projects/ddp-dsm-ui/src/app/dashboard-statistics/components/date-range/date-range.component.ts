@@ -7,12 +7,13 @@ import {
   OnInit,
   Output
 } from '@angular/core';
-import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DateRangeModel} from '../../models/DateRange.model';
 import {Subject} from 'rxjs';
 import {takeUntil, auditTime} from 'rxjs/operators';
 import {DatePipe} from '@angular/common';
 import {Global} from '../../../globals/globals';
+import {DateRangeErrorModel} from "../../models/DateRangeError.model";
 
 @Component({
   selector: 'app-date-range',
@@ -54,9 +55,9 @@ export class DateRangeComponent implements OnInit, OnDestroy {
     this.destroyed$.complete();
   }
 
-  public get erroredFormControlsEntries(): [string, ValidationErrors][] {
+  public get dateRangeErrors(): DateRangeErrorModel {
     return Object.entries(this.formControls)
-      .reduce(this.filterErroredEntries, []);
+      .reduce(this.filterErroredEntries, {startDate: [], endDate: []});
   }
 
   private initDateRangeForm(): void {
@@ -73,10 +74,10 @@ export class DateRangeComponent implements OnInit, OnDestroy {
       .subscribe((dates: DateRangeModel) => this.emitDateChange(dates));
   }
 
-  private filterErroredEntries(
-    result: [string, ValidationErrors][],
-    [key, value]: [string, AbstractControl]): [string, ValidationErrors][] {
-      value.errors && result.push([key, value.errors]);
+  private filterErroredEntries<T>(
+    result: DateRangeErrorModel,
+    [key, value]: [string, AbstractControl]): DateRangeErrorModel {
+      value.errors && result[key].push(...Object.keys(value.errors))
       return result;
   }
 

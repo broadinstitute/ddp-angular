@@ -15,6 +15,7 @@ import {DateErrorPipe} from '../../pipes/date-error.pipe';
 import {MatFormFieldHarness} from '@angular/material/form-field/testing';
 import {MaterialHarnesses} from '../../../test-helpers/MaterialHarnesses';
 import {Global} from '../../../globals/globals';
+import {KeyValuePipe} from "../../pipes/keyValue.pipe";
 
 describe('dateRangeComponent', () => {
   type startOrEnd = 'start' | 'end';
@@ -28,7 +29,7 @@ describe('dateRangeComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [DateRangeComponent, DateErrorPipe],
+      declarations: [DateRangeComponent, DateErrorPipe, KeyValuePipe],
       imports: [
         ReactiveFormsModule,
         MatFormFieldModule,
@@ -120,19 +121,23 @@ describe('dateRangeComponent', () => {
     });
 
     it('should show error message - required start date', async () => {
-      expect(await errorMessageAfterSettingValue('start', null)).toBe('Start date is required');
+      expect(await firstErrorMessageAfterSettingValue('start', null))
+        .toBe('Start date is required');
     });
 
     it('should show error message - required end date', async () => {
-      expect(await errorMessageAfterSettingValue('end', null)).toBe('End date is required');
+      expect(await firstErrorMessageAfterSettingValue('end', null))
+        .toBe('End date is required');
     });
 
     it('should show error message - invalid start date', async () => {
-      expect(await errorMessageAfterSettingValue('start', '3123')).toBe('Start date is invalid');
+      expect(await firstErrorMessageAfterSettingValue('start', '3123'))
+        .toBe('Start date is invalid');
     });
 
     it('should show error message - invalid end date', async () => {
-      expect(await errorMessageAfterSettingValue('end', '123')).toBe('End date is invalid');
+      expect(await firstErrorMessageAfterSettingValue('end', '511'))
+        .toBe('End date is invalid');
     });
   });
 
@@ -217,9 +222,10 @@ describe('dateRangeComponent', () => {
   /**
    * @return the first error message from array of error messages,
    */
-  const errorMessageAfterSettingValue = async (dateType: startOrEnd, value: string | null): Promise<string> => {
+  const firstErrorMessageAfterSettingValue = async (dateType: startOrEnd, value: string | null): Promise<string> => {
     await setDateValue(dateType, value);
-    const [firstErrorMessage]: string[] = await getErrorMessages();
+    const errorMessages: string[] = await getErrorMessages();
+    const [firstErrorMessage]: string[] = errorMessages.filter(errorText => errorText);
     return firstErrorMessage;
   };
 

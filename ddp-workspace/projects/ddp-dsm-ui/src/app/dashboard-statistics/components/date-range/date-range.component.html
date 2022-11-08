@@ -9,9 +9,9 @@
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker #picker></mat-date-range-picker>
 
-    <mat-error *ngFor="let erroredFormControlEntry of erroredFormControlsEntries">
-      <p *ngFor="let errorEntry of erroredFormControlEntry[1] | keyvalue">
-        {{ errorEntry | dateError:  erroredFormControlEntry[0] }}
+    <mat-error *ngFor="let dateRangeError of dateRangeErrors | keyValue">
+      <p *ngFor="let error of dateRangeError.value">
+        {{ error | dateError:  dateRangeError.key }}
       </p>
     </mat-error>
   </mat-form-field>
