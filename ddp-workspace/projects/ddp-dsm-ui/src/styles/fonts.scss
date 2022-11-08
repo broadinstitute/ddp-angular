@@ -21,15 +21,3 @@ $fonts_directory: '../assets/fonts/Montserrat-';
   font-family: Montserrat-Bold;
   src: url($fonts_directory + 'Bold.ttf');
 }
-
-@mixin MontserratFontFamily($font_name: "regular") {
-  font-family: map-get($Montserrat-family, $font_name), sans-serif;
-}
-
-$Montserrat-family: (
-  "regular": Montserrat-Regular,
-  "regularItalic": Montserrat-Regular-Italic,
-  "medium": Montserrat-Medium,
-  "samiBold": Montserrat-SemiBold,
-  "bold": Montserrat-Bold
-);
