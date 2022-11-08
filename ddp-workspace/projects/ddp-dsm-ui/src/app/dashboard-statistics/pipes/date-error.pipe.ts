@@ -1,7 +1,7 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {KeyValue} from "@angular/common";
-import {ValidationErrors} from "@angular/forms";
-import {DateValidationErrorMessages} from "./constants/date-error.messages";
+import {KeyValue} from '@angular/common';
+import {ValidationErrors} from '@angular/forms';
+import {DateValidationErrorMessages} from './constants/date-error.messages';
 
 @Pipe({
   name: 'dateError'
