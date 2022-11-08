@@ -215,7 +215,7 @@ describe('dateRangeComponent', () => {
   };
 
   /**
-   * @return array of error messages strings,
+   * @return the first error message from array of error messages,
    */
   const errorMessageAfterSettingValue = async (dateType: startOrEnd, value: string | null): Promise<string> => {
     await setDateValue(dateType, value);
