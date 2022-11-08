@@ -1,4 +1,4 @@
-export const DateValidationErrorMessages = {
+export const DateRangeErrorMessages = {
   startDate: {
     required: 'Start date is required',
     matStartDateInvalid: 'Start date is invalid',

@@ -1,11 +1,11 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {DateValidationErrorMessages} from './constants/date-error.messages';
+import {DateRangeErrorMessages} from './constants/dateRange-error.messages';
 
 @Pipe({
   name: 'dateError'
 })
 export class DateErrorPipe implements PipeTransform {
   transform(errorKey: string, dateType?: string): string {
-    return DateValidationErrorMessages[dateType][errorKey] || '';
+    return DateRangeErrorMessages[dateType][errorKey] || '';
   }
 }
