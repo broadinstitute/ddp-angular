@@ -54,12 +54,8 @@ export class DateRangeComponent implements OnInit, OnDestroy {
     this.destroyed$.complete();
   }
 
-  public getEntries(object: object): [string, any][] {
-    return Object.entries(object);
-  }
-
   public get erroredFormControlsEntries(): [string, ValidationErrors][] {
-    return this.getEntries(this.formControls)
+    return Object.entries(this.formControls)
       .reduce(this.filterErroredEntries, []);
   }
 

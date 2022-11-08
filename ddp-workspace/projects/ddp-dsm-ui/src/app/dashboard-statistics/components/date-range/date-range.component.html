@@ -10,7 +10,7 @@
     <mat-date-range-picker #picker></mat-date-range-picker>
 
     <mat-error *ngFor="let erroredFormControlEntry of erroredFormControlsEntries">
-      <p *ngFor="let errorEntry of getEntries(erroredFormControlEntry[1])">
+      <p *ngFor="let errorEntry of erroredFormControlEntry[1] | keyvalue">
         {{ errorEntry | dateError:  erroredFormControlEntry[0] }}
       </p>
     </mat-error>
