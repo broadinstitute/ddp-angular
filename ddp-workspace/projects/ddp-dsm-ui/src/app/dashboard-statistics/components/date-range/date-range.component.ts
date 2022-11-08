@@ -15,6 +15,8 @@ import {DatePipe} from '@angular/common';
 import {Global} from '../../../globals/globals';
 import {DateRangeErrorModel} from '../../models/DateRangeError.model';
 
+type startOrEndDate = 'startDate' | 'endDate';
+
 @Component({
   selector: 'app-date-range',
   templateUrl: 'date-range.component.html',
@@ -76,7 +78,7 @@ export class DateRangeComponent implements OnInit, OnDestroy {
 
   private filterErroredEntries(
     result: DateRangeErrorModel,
-    [key, value]: [string, AbstractControl]): DateRangeErrorModel {
+    [key, value]: [startOrEndDate, AbstractControl]): DateRangeErrorModel {
       value.errors && result[key].push(...Object.keys(value.errors));
       return result;
   }
