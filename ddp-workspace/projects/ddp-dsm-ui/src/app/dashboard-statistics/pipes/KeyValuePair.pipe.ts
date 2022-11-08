@@ -6,7 +6,7 @@ interface KeyValuePair {
 }
 
 @Pipe({
-  name: 'KeyValuePair',
+  name: 'keyValuePair',
   pure: false
 })
 export class KeyValuePairPipe implements PipeTransform {
