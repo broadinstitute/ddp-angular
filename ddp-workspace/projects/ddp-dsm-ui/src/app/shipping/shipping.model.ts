@@ -54,6 +54,9 @@ export class KitRequest {
         return this.collaboratorParticipantId.slice(this.collaboratorParticipantId.indexOf('_') + 1);
       }
     }
+    if (this.shortId != null && this.shortId !== '') {
+      return this.shortId;
+    }
     if (this.participant != null && this.participant.shortId !== '') {
       return this.participant.shortId;
     }
