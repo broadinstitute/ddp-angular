@@ -52,36 +52,7 @@ export class OncHistoryDetail {
               public additionalValuesJson: {}, public tissues: Array<Tissue>,
               public tissueProblemOption: string, public destructionPolicy: string, public unableObtainTissue: boolean,
               public numberOfRequests, public deleted: boolean = false) {
-    this.participantId = participantId;
-    this.oncHistoryDetailId = oncHistoryDetailId;
-    this.medicalRecordId = medicalRecordId;
-    this.datePx = datePx;
-    this.typePx = typePx;
-    this.locationPx = locationPx;
-    this.histology = histology;
-    this.accessionNumber = accessionNumber;
-    this.facility = facility;
-    this.phone = phone;
-    this.fax = fax;
-    this.notes = notes;
-    this.request = request;
-    this.faxSent = faxSent;
-    this.faxSentBy = faxSentBy;
-    this.faxConfirmed = faxConfirmed;
-    this.faxSent2 = faxSent2;
-    this.faxSent2By = faxSent2By;
-    this.faxConfirmed2 = faxConfirmed2;
-    this.faxSent3 = faxSent3;
-    this.faxSent3By = faxSent3By;
-    this.faxConfirmed3 = faxConfirmed3;
-    this.tissueReceived = tissueReceived;
-    this.gender = gender;
-    this.additionalValuesJson = additionalValuesJson;
-    this.tissues = tissues;
-    this.tissueProblemOption = tissueProblemOption;
-    this.destructionPolicy = destructionPolicy;
-    this.unableObtainTissue = unableObtainTissue;
-    this.deleted = deleted;
+    
   }
 
   static parse(json: OncHistoryDetailsInterface): OncHistoryDetail {
