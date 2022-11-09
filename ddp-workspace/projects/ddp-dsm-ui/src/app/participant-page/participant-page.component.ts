@@ -1629,6 +1629,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
                 canBeSequencedBasedOnLocation = true;
               }
             }
+          } else if(countryQuestion.answer.indexOf(this.SELF_COUNTRY_CA) > -1) {
+            canBeSequencedBasedOnLocation = true;
           }
         }
       }
@@ -1649,6 +1651,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
                   canBeSequencedBasedOnLocation = true;
                 }
               }
+            }
+            else if(countryQuestion.answer.indexOf(this.SELF_COUNTRY_CA) > -1) {
+              canBeSequencedBasedOnLocation = true;
             }
           }
         }
