@@ -16,7 +16,7 @@ import { EasypostLabelRate } from '../utils/easypost-label-rate.model';
 import { LabelSetting } from '../label-settings/label-settings.model';
 import { Result } from '../utils/result.model';
 import {LocalStorageService} from '../services/localStorage.service';
-import {finalize} from "rxjs/operators";
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-shipping',
@@ -102,7 +102,7 @@ export class ShippingComponent implements OnInit {
 
   RESEARCH_SAMPLE = 'RUO';
 
-  disableCheckboxes: boolean = false;
+  disableCheckboxes = false;
 
   constructor(private route: ActivatedRoute, private router: Router, private dsmService: DSMService, private auth: Auth,
                private role: RoleService, private compService: ComponentService, private _changeDetectionRef: ChangeDetectorRef,
