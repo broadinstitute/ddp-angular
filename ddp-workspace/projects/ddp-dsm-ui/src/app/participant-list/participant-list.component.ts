@@ -1020,11 +1020,14 @@ export class ParticipantListComponent implements OnInit {
               }
             } else {
               // if selected columns are not set, set to default columns
+              const selectedStudy = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
               if ((this.selectedColumns['data'] && this.selectedColumns['data'].length === 0)
                 || (!this.selectedColumns['data'] && this.isSelectedColumnsNotEmpty())) {
-                this.dataSources.forEach((value: string, key: string) => {
-                  this.selectedColumns[key] = [];
-                });
+                if(selectedStudy !== 'RGP') {
+                  this.dataSources.forEach((value: string, key: string) => {
+                    this.selectedColumns[key] = [];
+                  });
+                }
                 this.refillWithDefaultColumns();
               }
             }
