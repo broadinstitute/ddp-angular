@@ -192,8 +192,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     this.addMedicalProviderInformation();
     if(this.role.allowedToDoOrderSequencing()) {
       this.getMercuryEligibleSamples();
+      this.canSequence = this.canHaveSequencing(this.participant);
     }
-    this.canSequence = this.canHaveSequencing(this.participant);
   }
 
   private handleParticipantProfileUpdate(): void {
