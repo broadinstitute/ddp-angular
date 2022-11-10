@@ -16,9 +16,9 @@ import { generateUserName } from 'utils/faker-utils';
 
 test.describe('Enroll my child', () => {
   // Randomize last name
-  const childLastName = generateUserName(user.secondChild.lastName);
+  const childLastName = generateUserName(user.thirdChild.lastName);
 
-  test('enrolling non assenting child < 7 @enrollment @singular', async ({ page, homePage }) => {
+  test('enrolling non assenting child > 7 not capable of consent @enrollment @singular', async ({ page, homePage }) => {
     await homePage.signUp();
 
     // Step 1
@@ -39,7 +39,8 @@ test.describe('Enroll my child', () => {
     await assertActivityHeader(page, 'Enroll my child');
     const enrollMyChildPage = new EnrollMyChildPage(page);
     await enrollMyChildPage.whoInChildFamilyHasVentricleHeartDefect().check(WHO.TheChildBeingEnrolled);
-    await enrollMyChildPage.howOldIsYourChild().fill(user.secondChild.age);
+    await enrollMyChildPage.howOldIsYourChild().fill(user.thirdChild.age);
+    await enrollMyChildPage.doesChildHaveCognitiveImpairment().check('yes');
     await myDashboardPage.next();
 
     // On "Consent Form for Minor Dependent" page
@@ -54,12 +55,12 @@ test.describe('Enroll my child', () => {
 
     await assertActivityHeader(page, 'Consent Form for Minor Dependent');
     await assertActivityProgress(page, 'Page 3 of 3');
-    await consentForm.childFirstName().fill(user.secondChild.firstName);
+    await consentForm.childFirstName().fill(user.thirdChild.firstName);
     await consentForm.childLastName().fill(childLastName);
     await consentForm.dateOfBirth(
-      user.secondChild.birthDate.MM,
-      user.secondChild.birthDate.DD,
-      user.secondChild.birthDate.YYYY
+      user.thirdChild.birthDate.MM,
+      user.thirdChild.birthDate.DD,
+      user.thirdChild.birthDate.YYYY
     );
     await consentForm.iHaveExplainedToMyChild().check();
     await consentForm.toKnowSecondaryFinding().check('I want to know.');
@@ -75,13 +76,13 @@ test.describe('Enroll my child', () => {
     await aboutMyChildPage.waitForReady();
     await assertActivityHeader(page, 'About My Child');
     await enterMailingAddress(page, {
-      fullName: `${user.secondChild.firstName} ${childLastName}`,
-      country: user.secondChild.country.name,
-      state: user.secondChild.state.name,
-      street: user.secondChild.streetAddress,
-      city: user.secondChild.city,
-      zipCode: user.secondChild.zip,
-      telephone: user.secondChild.phone
+      fullName: `${user.thirdChild.firstName} ${childLastName}`,
+      country: user.thirdChild.country.name,
+      state: user.thirdChild.state.name,
+      street: user.thirdChild.streetAddress,
+      city: user.thirdChild.city,
+      zipCode: user.thirdChild.zip,
+      telephone: user.thirdChild.phone
     }); // Fill out address with fake data
     await aboutMyChildPage.next();
     // Triggered validation
@@ -104,6 +105,7 @@ test.describe('Enroll my child', () => {
     await assertActivityProgress(page, 'Page 3 of 3');
     await medicalRecordReleaseForm.parentName().fill(`${user.patient.firstName} ${user.patient.lastName}`);
     await medicalRecordReleaseForm.parentSignature().fill(`${user.patient.firstName} ${user.patient.lastName}`);
+    //await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
     await medicalRecordReleaseForm.submit();
 
     // Medical Record File Upload
