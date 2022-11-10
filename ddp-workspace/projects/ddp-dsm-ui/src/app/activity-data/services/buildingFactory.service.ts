@@ -129,7 +129,7 @@ export class BuildingFactoryService {
           default:
             endAnswer = this.getNiceUserText(compAnswer[index]);
         }
-        compositeAnswer.push({question: endQuestion, answer: endAnswer});
+        compositeAnswer.push({question: endQuestion, answer: endAnswer, questionStableId: childQuestion.stableId});
       });
     });
 

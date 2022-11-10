@@ -105,7 +105,7 @@
 
   <ng-container *ngIf="type === 'COMPOSITE'">
       <div *ngFor="let compose of composite">
-        <p *ngIf="compose.answer"><b>{{compose.answer}}</b>  (<span *ngIf="compose.question">{{compose.question}}</span>)</p>
+        <p *ngIf="compose.answer"><b>{{compose.answer}}</b>  (<span>{{compose.question || compose.questionStableId}}</span>)</p>
       </div>
   </ng-container>
 
