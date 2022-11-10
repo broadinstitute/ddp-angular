@@ -10,7 +10,7 @@ export class TissueSmId {
   ) {}
 
   static parse( json ): TissueSmId {
-    return new TissueSmId( json.smIdPk, json.smIdType, json.smIdValue, json.tissueId, false );
+    return new TissueSmId( json.smIdPk, json.smIdType, json.smIdValue, json.tissueId, json.deleted );
   }
 
   static parseArray( jsonArray: any[] ): any[] {
