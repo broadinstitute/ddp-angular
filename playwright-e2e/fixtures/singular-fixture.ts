@@ -7,6 +7,8 @@ type Fixtures = {
   homePage: SingularHomePage;
 };
 
+const REQUEST_EXCLUDES = ['google-analytics'];
+
 /**
  * Fixture prepares resources/env per test case on an "opt-in" basis. It's used to set up the specific environment for test that requires.
  * See Playwright test fixture https://playwright.dev/docs/test-fixtures
@@ -15,6 +17,14 @@ type Fixtures = {
  */
 // This fixture runs per test when called. Removes duplicated code in every test.
 const fixture = baseTest.extend<Fixtures>({
+  page: async ({ baseURL, page }, use) => {
+    await page.route('**/*', (route) => {
+      return REQUEST_EXCLUDES.some((urlPart) => route.request().url().includes(urlPart))
+        ? route.abort()
+        : route.continue();
+    });
+    await use(page);
+  },
   homePage: async ({ page }, use) => {
     const homePage = new SingularHomePage(page);
     await homePage.gotoURLPath('/password');
