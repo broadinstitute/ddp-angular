@@ -66,7 +66,7 @@ test.describe('Enroll myself as adult', () => {
     await consentForm.dateOfBirth(user.patient.birthDate.MM, user.patient.birthDate.DD, user.patient.birthDate.YYYY);
     await consentForm.toKnowSecondaryFinding().check('I want to know.');
     await consentForm.signature().fill(`${user.patient.firstName} ${lastName}`);
-    await consentForm.authorizationSignature().fill(`${user.patient.firstName} ${lastName}`);
+    await consentForm.authorizationSignature().fill(`${user.patient.firstName} ${lastName}`, {});
     await consentForm.agree();
 
     // on "About Me" page
@@ -97,8 +97,7 @@ test.describe('Enroll myself as adult', () => {
     await assertActivityHeader(page, 'Medical Record Release Form');
     await assertActivityProgress(page, 'Page 3 of 3');
     await medicalRecordReleaseForm.name().fill(`${user.patient.firstName} ${lastName}`);
-    await medicalRecordReleaseForm.signature().fill(`${user.patient.firstName} ${lastName}`);
-    await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
+    await medicalRecordReleaseForm.signature().fill(`${user.patient.firstName} ${lastName}`, {});
     await medicalRecordReleaseForm.submit();
 
     // Medical Record File Upload

@@ -17,9 +17,27 @@ export default class Input {
     return this.locator;
   }
 
-  async fill(value: string): Promise<void> {
+  async fill(value: string, opts?: { requestURL?: string; requestStatus?: number }): Promise<void> {
+    const shouldWait = !!opts;
+    console.log('fill shouldWait: ', shouldWait)
+    const responsePromise = opts
+      ? this.page.waitForResponse(
+          (response) => {
+            const status = opts.requestStatus ? opts.requestStatus : 200;
+            const url = opts.requestURL ? opts.requestURL : '/answers';
+            const requestData: boolean | undefined = response.request().postData()?.includes(value);
+            const includedValue = requestData ? requestData : false;
+            const ret = response.url().includes(url) && response.status() === status && includedValue;
+            console.log('ret')
+            return ret;
+          },
+          { timeout: 30 * 1000 }
+        )
+      : Promise.resolve();
+
     await this.toLocator().fill(value);
-    await this.toLocator().press('Tab');
+    await this.toLocator().press('Tab'); // response triggers when text input field lose focus
+    await responsePromise;
   }
 
   errorMessage(): Locator {

@@ -62,7 +62,7 @@ test.describe('Enrol an adult dependent', () => {
     await consentForm.toKnowSecondaryFinding().check('I want to know.');
     await consentForm.selectOneForAdultDependent().check('I have explained the study');
     await consentForm.dependentGuardianSignature().fill(`${user.patient.firstName} ${user.patient.lastName}`);
-    await consentForm.authorizationSignature().fill(user.patient.lastName);
+    await consentForm.authorizationSignature().fill(user.patient.lastName, {});
     await consentForm.agree();
 
     // on "About Me" page
@@ -101,7 +101,6 @@ test.describe('Enrol an adult dependent', () => {
     await medicalRecordReleaseForm.patientName().fill(`${user.adultDependent.firstName} ${dependentLastName}`);
     await medicalRecordReleaseForm.dependentParentName().fill(`${user.patient.firstName} ${user.patient.lastName}`);
     await medicalRecordReleaseForm.parentSignature().fill(`${user.patient.firstName} ${user.patient.lastName}`);
-    await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
     await medicalRecordReleaseForm.submit();
 
     // Medical Record File Upload

@@ -59,10 +59,10 @@ export default class PreScreeningPage {
 
   async checkReCaptcha(): Promise<void> {
     const iframe = this.page.frameLocator('css=iframe[title="reCAPTCHA"]');
-    await iframe.locator('css=span[role="checkbox"]').dispatchEvent('click');
+    await iframe.locator('css=span[role="checkbox"]').dispatchEvent('click', { timeout: 30 * 1000 });
     await iframe
       .locator('.recaptcha-checkbox-spinner[style*="animation-play-state: running;"]')
-      .waitFor({ state: 'hidden' });
+      .waitFor({ state: 'hidden', timeout: 30 * 1000 });
   }
 
   async enterInformationAboutYourself(

@@ -28,8 +28,7 @@ const testConfig: PlaywrightTestConfig = {
     toMatchSnapshot: {
       // Account for minor difference in text rendering and resolution between headless and headed mode
       threshold: 0.3,
-      maxDiffPixelRatio: 0.2,
-      maxDiffPixels: 200
+      maxDiffPixelRatio: 0.2
     },
     toHaveScreenshot: {
       scale: 'css',
@@ -38,7 +37,7 @@ const testConfig: PlaywrightTestConfig = {
     }
   },
   /* Run tests in files in parallel */
-  fullyParallel: true,
+  // fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,

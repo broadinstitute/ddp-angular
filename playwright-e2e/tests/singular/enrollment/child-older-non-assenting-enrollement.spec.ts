@@ -11,20 +11,14 @@ import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
 import EnrollMyChildPage from 'pages/singular/enrollment/enroll-my-child-page';
 import ConsentFormForMinorPage from 'pages/singular/enrollment/consent-form-for-minor-page';
 import { enterMailingAddress } from 'utils/test-utils';
-import AssentFormPage from 'pages/singular/enrollment/assent-form-page';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
 import { generateUserName } from 'utils/faker-utils';
 
 test.describe('Enroll my child', () => {
   // Randomize last name
-  const childLastName = generateUserName(user.child.lastName);
+  const childLastName = generateUserName(user.thirdChild.lastName);
 
-  /**
-   * Assenting rules:
-   * Ages 0-6: Need parental consent from parent
-   * Ages 7-age of majority: child needs to give assent in addition to parent’s consent
-   */
-  test('enrolling an assenting child @enrollment @singular', async ({ page, homePage }) => {
+  test('enrolling non assenting child > 7 not capable of consent @enrollment @singular', async ({ page, homePage }) => {
     await homePage.signUp();
 
     // Step 1
@@ -45,14 +39,8 @@ test.describe('Enroll my child', () => {
     await assertActivityHeader(page, 'Enroll my child');
     const enrollMyChildPage = new EnrollMyChildPage(page);
     await enrollMyChildPage.whoInChildFamilyHasVentricleHeartDefect().check(WHO.TheChildBeingEnrolled);
-    await enrollMyChildPage.howOldIsYourChild().fill(user.child.age);
-    await myDashboardPage.next();
-    await assertActivityHeader(page, 'Enroll my child');
-    await expect(enrollMyChildPage.getNextButton()).toBeDisabled();
-    // Triggered one extra question
-    await expect(enrollMyChildPage.getNextButton()).toBeEnabled();
-    await assertActivityHeader(page, 'Enroll my child');
-    await enrollMyChildPage.doesChildHaveCognitiveImpairment().check('No', { exactMatch: true });
+    await enrollMyChildPage.howOldIsYourChild().fill(user.thirdChild.age);
+    await enrollMyChildPage.doesChildHaveCognitiveImpairment().check('yes');
     await myDashboardPage.next();
 
     // On "Consent Form for Minor Dependent" page
@@ -67,40 +55,35 @@ test.describe('Enroll my child', () => {
 
     await assertActivityHeader(page, 'Consent Form for Minor Dependent');
     await assertActivityProgress(page, 'Page 3 of 3');
-    await consentForm.childFirstName().fill(user.child.firstName);
+    await consentForm.childFirstName().fill(user.thirdChild.firstName);
     await consentForm.childLastName().fill(childLastName);
-    await consentForm.dateOfBirth(user.child.birthDate.MM, user.child.birthDate.DD, user.child.birthDate.YYYY);
+    await consentForm.dateOfBirth(
+      user.thirdChild.birthDate.MM,
+      user.thirdChild.birthDate.DD,
+      user.thirdChild.birthDate.YYYY
+    );
     await consentForm.iHaveExplainedToMyChild().check();
     await consentForm.toKnowSecondaryFinding().check('I want to know.');
     await consentForm.parentGuardianSignature().fill(`${user.patient.firstName} ${user.patient.lastName}`);
     await consentForm.parentFirstName().fill(user.patient.firstName);
     await consentForm.parentLastName().fill(user.patient.lastName);
     await consentForm.relationShipToSubject().check('Parent');
+    console.log('fill out authorization: ')
     await consentForm.authorizationSignature().fill(user.patient.lastName, {});
     await consentForm.agree();
-
-    // On Assent Form because child is >= 12 years old
-    await assertActivityHeader(page, new RegExp(/Assent Form/));
-    await assertActivityProgress(page, 'Page 1 of 1');
-    const assentForm = new AssentFormPage(page);
-    await assentForm.next();
-    await assentForm.fullName().fill(`${user.child.firstName} ${user.child.middleName} ${childLastName}`);
-    await assentForm.hasAgreedToBeInStudy().check();
-    await assentForm.sign().fill(`${user.patient.firstName} ${user.patient.lastName}`);
-    await assentForm.next({ waitForNav: true });
 
     // on "About My Child" page
     const aboutMyChildPage = new AboutMyChildPage(page);
     await aboutMyChildPage.waitForReady();
     await assertActivityHeader(page, 'About My Child');
     await enterMailingAddress(page, {
-      fullName: `${user.child.firstName} ${childLastName}`,
-      country: user.child.country.name,
-      state: user.child.state.name,
-      street: user.child.streetAddress,
-      city: user.child.city,
-      zipCode: user.child.zip,
-      telephone: user.child.phone
+      fullName: `${user.secondChild.firstName} ${childLastName}`,
+      country: user.secondChild.country.name,
+      state: user.secondChild.state.name,
+      street: user.secondChild.streetAddress,
+      city: user.secondChild.city,
+      zipCode: user.secondChild.zip,
+      telephone: user.secondChild.phone
     }); // Fill out address with fake data
     await aboutMyChildPage.next();
     // Triggered validation
@@ -127,7 +110,6 @@ test.describe('Enroll my child', () => {
 
     // Medical Record File Upload
     await assertActivityHeader(page, 'Medical Record File Upload');
-    await medicalRecordReleaseForm.uploadFile(`data/upload/fake-clinical-note.jpg`);
     await medicalRecordReleaseForm.next({ waitForNav: true });
 
     await assertActivityHeader(
