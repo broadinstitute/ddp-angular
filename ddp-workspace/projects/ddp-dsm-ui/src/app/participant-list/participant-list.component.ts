@@ -133,6 +133,7 @@ export class ParticipantListComponent implements OnInit {
   selectAll = false;
   selectAllColumnsLabel = 'Select all';
   selectedPatients: string[] = [];
+  searchForRGP: boolean = false;
 
   constructor(private role: RoleService, private dsmService: DSMService, private compService: ComponentService,
                private router: Router, private auth: Auth, private route: ActivatedRoute, private util: Utils,
@@ -1027,8 +1028,11 @@ export class ParticipantListComponent implements OnInit {
                   this.dataSources.forEach((value: string, key: string) => {
                     this.selectedColumns[key] = [];
                   });
+                  this.refillWithDefaultColumns();
                 }
-                this.refillWithDefaultColumns();
+                if(selectedStudy === 'RGP' && !this.searchForRGP) {
+                  this.refillWithDefaultColumns();
+                }
               }
             }
             const date = new Date();
@@ -1439,6 +1443,10 @@ export class ParticipantListComponent implements OnInit {
       this.deselectQuickFilters();
       // TODO - can be changed later to all using the same - after all studies are migrated!
       // check if it was a tableAlias data filter -> filter client side
+      const selectedStudy = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+      if(selectedStudy === 'RGP') {
+        this.searchForRGP = true;
+      }
       this.selectFilter(null);
     }
   }
