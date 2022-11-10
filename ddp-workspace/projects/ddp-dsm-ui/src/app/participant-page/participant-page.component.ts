@@ -190,8 +190,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
     this.displayActivityOrder();
     this.addMedicalProviderInformation();
-    this.getMercuryEligibleSamples();
-    this.canSequence = this.canHaveSequencing(this.participant);
+    if(this.role.allowedToDoOrderSequencing()) {
+      this.getMercuryEligibleSamples();
+      this.canSequence = this.canHaveSequencing(this.participant);
+    }
   }
 
   private handleParticipantProfileUpdate(): void {
@@ -875,7 +877,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       // this.selectedTabTitle = data.heading;
       this.activeTab = tabName;
     }
-    if (tabName === 'sequencing') {
+    if (tabName === 'sequencing' && this.role.allowedToDoOrderSequencing()) {
       this.getMercuryEligibleSamples();
     }
   }
