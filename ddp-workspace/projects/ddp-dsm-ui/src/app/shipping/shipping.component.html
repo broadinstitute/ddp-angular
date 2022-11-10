@@ -22,7 +22,7 @@
     <br/>
     <div *ngIf="kitTypes != null && kitTypes.length > 0">
       <div *ngFor="let type of kitTypes">
-        <mat-checkbox color="primary" [checked]="type.selected" (change)="type.selected = $event.checked; typeChecked(type)" disableRipple>
+        <mat-checkbox [disabled]="disableCheckboxes" color="primary" [checked]="type.selected" (change)="type.selected = $event.checked; typeChecked(type)" disableRipple>
           <ng-container *ngIf="type.displayName !== null">{{type.displayName}}</ng-container>
           <ng-container *ngIf="type.displayName == null">{{type.name}}</ng-container>
         </mat-checkbox>
