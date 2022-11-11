@@ -38,7 +38,6 @@ export class DateRangeComponent implements OnInit, OnDestroy {
   }
 
   @Input() initDates: DateRangeModel;
-  @Input()
 
   @Input('disabled') set disabledState(isDisabled: boolean) {
     const options = {emitEvent: false};
