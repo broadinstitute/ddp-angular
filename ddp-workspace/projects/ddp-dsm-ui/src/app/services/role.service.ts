@@ -169,7 +169,7 @@ export class RoleService {
     return this._isMailingList;
   }
 
-  public allowedToUploadKits(): boolean {
+  public get allowedToUploadKits(): boolean {
     return this._isUpload;
   }
 
