@@ -12,7 +12,6 @@ import {DateRangeModel} from '../../models/DateRange.model';
 import {Subject} from 'rxjs';
 import {takeUntil, auditTime} from 'rxjs/operators';
 import {DatePipe} from '@angular/common';
-import {Global} from '../../../globals/globals';
 import {DateRangeErrorModel} from '../../models/DateRangeError.model';
 
 type startOrEndDate = 'startDate' | 'endDate';
@@ -24,6 +23,7 @@ type startOrEndDate = 'startDate' | 'endDate';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DateRangeComponent implements OnInit, OnDestroy {
+  private readonly DATE_FORMAT = 'MM/d/YYYY';
   /**
    * @MAIN Main Date Range Object
    */
@@ -38,6 +38,7 @@ export class DateRangeComponent implements OnInit, OnDestroy {
   }
 
   @Input() initDates: DateRangeModel;
+  @Input()
 
   @Input('disabled') set disabledState(isDisabled: boolean) {
     const options = {emitEvent: false};
@@ -89,8 +90,8 @@ export class DateRangeComponent implements OnInit, OnDestroy {
 
   private getTransformedDates(dates: DateRangeModel): DateRangeModel {
     return {
-      startDate: this.datePipe.transform(dates.startDate, Global.DATE_FORMAT),
-      endDate: this.datePipe.transform(dates.endDate, Global.DATE_FORMAT)
+      startDate: this.datePipe.transform(dates.startDate, this.DATE_FORMAT),
+      endDate: this.datePipe.transform(dates.endDate, this.DATE_FORMAT)
     };
   }
 

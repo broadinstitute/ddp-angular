@@ -14,7 +14,6 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {DateRangeErrorPipe} from '../../pipes/dateRangeError.pipe';
 import {MatFormFieldHarness} from '@angular/material/form-field/testing';
 import {MaterialHarnesses} from '../../../test-helpers/MaterialHarnesses';
-import {Global} from '../../../globals/globals';
 import {KeyValuePairPipe} from '../../pipes/KeyValuePair.pipe';
 
 describe('dateRangeComponent', () => {
@@ -24,6 +23,7 @@ describe('dateRangeComponent', () => {
   let component: DateRangeComponent;
   let materialHarnessLoader: MaterialHarnesses;
 
+  const DATE_FORMAT = 'MM/d/YYYY';
   const datePipe: DatePipe = new DatePipe('en-US');
   const testData: DateRangeModel = {startDate: new Date(0), endDate: new Date()};
 
@@ -155,7 +155,7 @@ describe('dateRangeComponent', () => {
    * @param dateValue
    * used to transform date into specified date format
    */
-  const transformDateFormat = (dateValue: string | Date): string => datePipe.transform(dateValue, Global.DATE_FORMAT);
+  const transformDateFormat = (dateValue: string | Date): string => datePipe.transform(dateValue, DATE_FORMAT);
 
   /**
    *
