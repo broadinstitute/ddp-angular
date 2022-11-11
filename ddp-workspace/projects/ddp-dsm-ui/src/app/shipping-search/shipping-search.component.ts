@@ -1,12 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {ScanValue} from '../scan/scan.model';
 import {Auth} from '../services/auth.service';
-import {ComponentService} from '../services/component.service';
-import {PatchUtil} from '../utils/patch.model';
-import {Statics} from '../utils/statics';
-import {DSMService} from '../services/dsm.service';
-import {KitRequest} from '../shipping/shipping.model';
-import {RoleService} from '../services/role.service';
+import { PatchUtil } from '../utils/patch.model';
+import { Statics } from '../utils/statics';
+import { DSMService } from '../services/dsm.service';
+import { KitRequest } from '../shipping/shipping.model';
+import { RoleService } from '../services/role.service';
+import { Observable, defer } from 'rxjs';
 
 @Component({
   selector: 'app-shipping-search',
@@ -16,12 +15,12 @@ import {RoleService} from '../services/role.service';
 export class ShippingSearchComponent implements OnInit {
   errorMessage: string;
   additionalMessage: string;
-  searchValue: string = null;
-  searchField: string = null;
+  searchValue: string | null = null;
+  searchField: string | null = null;
   searching = false;
   allowedRealms: string[] = [];
   kit: KitRequest[] = [];
-  private currentPatchField: string;
+  private currentPatchField: string | null;
 
   constructor(private dsmService: DSMService, private auth: Auth, private role: RoleService) {
     if (!auth.authenticated()) {
@@ -121,43 +120,35 @@ export class ShippingSearchComponent implements OnInit {
       ); // need to subscribe, otherwise it will not send!
   }
 
-  valueChanged( value: any, parameterName: string, kitRequest: KitRequest ): void {
-    let v;
-
-    if (typeof value === 'string') {
-      kitRequest[ parameterName ] = value;
-      v = value;
-    }
-    if (v != null) {
-      const realm: string = kitRequest.realm;
-      const patch1 = new PatchUtil(
-        kitRequest.dsmKitRequestId, this.role.userMail(),
-        {
-          name: parameterName,
-          value: v
-        }, null, 'dsmKitRequestId', kitRequest.dsmKitRequestId,
-        'kit', null, realm, kitRequest.participantId
-      );
-      const patch = patch1.getPatch();
-      this.currentPatchField = parameterName;
-      this.patch( patch );
-    }
+  patch(patch: any): Observable<any> {
+    return this.dsmService.patchParticipantRecord(JSON.stringify(patch));
   }
 
-  patch( patch: any ): void {
-    this.dsmService.patchParticipantRecord( JSON.stringify( patch ) ).subscribe( { // need to subscribe, otherwise it will not send!
-      next: data => {
-        this.currentPatchField = null;
-      },
-      error: err => {
-        if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
-        }
-      }
-    } );
+//Triggers when user finishes typing
+valueChanged(value: any, parameterName: string, kitRequest: KitRequest): void {
+  if (typeof value === 'string') {
+    kitRequest[parameterName] = value;
   }
+}
 
-  isPatchedCurrently( field: string ): boolean {
-    return this.currentPatchField === field;
+saveCompleted(): void{
+  this.currentPatchField = null;
+}
+
+  //Fires when user clicks "Save Date" button. Returns an
+  //observable that signals whether or not the request succeeded
+  saveDate(kitRequest: KitRequest): Observable<boolean> {
+    const realm: string = kitRequest.realm;
+    const patch1 = new PatchUtil(
+      kitRequest.dsmKitRequestId, this.role.userMail(),
+      {
+        name: 'collectionDate',
+        value: kitRequest.collectionDate
+      }, null, 'dsmKitRequestId', kitRequest.dsmKitRequestId,
+      'kit', null, realm, kitRequest.participantId
+    );
+    const patch = patch1.getPatch();
+    this.currentPatchField = 'collectionDate';
+    return this.patch(patch);
   }
 }

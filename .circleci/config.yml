@@ -1,12 +1,15 @@
 version: 2.1
 
+orbs:
+  jq: circleci/jq@2.2.0
+
 references:
   repo_path: &repo_path
       /home/circleci/repo
   ng_workspace_path: &ng_workspace_path
       /home/circleci/repo/ddp-workspace
   playwright_path: &playwright_path
-      /home/circleci/repo/playwright-e2e/tests/<< pipeline.parameters.study_key >>
+      /home/circleci/repo/playwright-e2e
   npm_cache_key: &npm_cache_key
     v1-dependency-npm2-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
   npm_cache_restore_key: &npm_cache_restore_key
@@ -28,8 +31,9 @@ executors:
   playwright-test-executor:
     resource_class: medium+
     docker:
+      # Playwright docker image version MUST match Playwright version in project
       - image: mcr.microsoft.com/playwright:v1.25.0-focal
-    working_directory: *ng_workspace_path
+    working_directory: *playwright_path
     environment:
       NODE_ENV: development # Needed if playwright is in devDependencies
 
@@ -462,6 +466,23 @@ commands:
                 echo "Build for <<parameters.study_key>> found at URL: ${TAR_FILE_URL}. No new build will be initiated"
             fi
 
+  halt-playwright-test-check:
+    description: "Stop running Playwright e2e tests if halt conditions are met"
+    parameters:
+      env:
+        default: dev
+        type: enum
+        enum: [ dev, test, staging, prod, UNKNOWN ]
+    steps:
+      - when:
+          condition:
+            or:
+              - equal: [ UNKNOWN, << parameters.env >> ]
+              - equal: [ prod, << parameters.env >> ]
+          steps:
+            - run:
+                name: Step halt ENV=<< parameters.env >>
+                command: circleci-agent step halt
 
 jobs:
   build-and-deploy-job:
@@ -563,67 +584,115 @@ jobs:
       - run-linter-check
       - run-tests
 
-  playwright-e2e-test:
-    executor: playwright-test-executor
+  build-playwright-test-job:
+    executor: build-executor
+    working_directory: *repo_path
     parameters:
-      env_name:
-        description: Must be one of "dev", "test", "staging" (in future)
-        default: "test"
+      env:
+        default: dev
         type: enum
-        enum: [ "test" ]
-      test_suite:
-        description: Must be one of "nightly", "all".
-        default: "all"
+        enum: [ dev, test, staging, prod, UNKNOWN ]
+    steps:
+      - halt-playwright-test-check:
+          env: << parameters.env >>
+      - checkout:
+          path: *repo_path
+      - setup-shared-env
+      - run:
+          # Reading Vault secrets here because build-executor provides Vault set-up
+          name: Save Vault secrets to file to persist across jobs
+          command: |
+            mkdir -p playwright-env
+
+            export sitePwd=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.sitePassword")
+            export googleUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[0] | select(.app==\"google\") | .userName")
+            export dsmUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")
+            export userPwd=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")
+
+            echo "export SITE_PASSWORD=$sitePwd" >> playwright-env/envvars
+            echo "export SINGULAR_USER_EMAIL=$googleUser" >> playwright-env/envvars
+            echo "export DSM_USER_EMAIL=$dsmUser" >> playwright-env/envvars
+            # DSM and SINGULAR user passwords are same
+            echo "export DSM_USER_PASSWORD=$userPwd" >> playwright-env/envvars
+            echo "export SINGULAR_USER_PASSWORD=$userPwd" >> playwright-env/envvars
+      - run:
+          working_directory: *playwright_path
+          name: npm install
+          command: |
+            ls && npm --version
+            npm install --quiet
+      - run:
+          working_directory: *playwright_path
+          command: npm run lint -- --max-warnings 0
+      - run:
+          working_directory: *playwright_path
+          name: Compile project
+          command: npm run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - playwright-env # dir which contains env-variables file
+            - playwright-e2e
+
+  run-playwright-test-job:
+    # Run Playwright tests only for targeted env: Dev, Test or Staging.
+    executor: playwright-test-executor
+    working_directory: *repo_path
+    parameters:
+      env:
+        default: dev
         type: enum
-        enum: [ "all", "nightly" ]
+        enum: [ dev, test, staging, prod, UNKNOWN ]
       parallel_num:
         type: integer
-        default: 1
+        default: 3
     parallelism: << parameters.parallel_num >>
     steps:
-      - setup-build-workspace
-      - setup-shared-env:
-          study_key: << pipeline.parameters.study_key >>
+      - halt-playwright-test-check:
+          env: << parameters.env >>
+      - attach_workspace:
+          at: .
+      - jq/install
       - run:
-          working_directory: *playwright_path
-          name: "Set playwright-e2e .env and export environment variables"
+          name: Inspect previous test metadata
           command: |
-            pwd
-            ls
-            cp ".env.<< pipeline.parameters.study_key >>.<< parameters.env_name >>" .env
-            cat .env | awk '{print "export " $0}' >> $BASH_ENV
-            source $BASH_ENV
+            # aut-detect timing does not work because CircleCI CLI expects both filenames and classnames to be present in JUnit xml.
+            # See https://support.circleci.com/hc/en-us/articles/360000376788-How-to-troubleshoot-Test-Splitting
+            cat "${CIRCLE_INTERNAL_TASK_DATA}/circle-test-results/results.json" | jq .
+      - run:
+          name: Export env variables to BASH_ENV
+          command: |
+            cp "playwright-e2e/config/.env.<< parameters.env >>" .env
+            cat .env | awk '/^[^#]/ {print "export " $0}' >> "$BASH_ENV"
+
+            # export env from file (created in build-playwright-job)
+            cat playwright-env/envvars | awk '{print "export " $0}' >> "$BASH_ENV"
+
+            source "$BASH_ENV"
       - run:
           working_directory: *playwright_path
-          name: Install NPM packages
-          command: npm install --force --quiet
+          command: npm install --quiet
       - run:
           working_directory: *playwright_path
-          name: Install Playwright browsers and dependencies
-          command: npx playwright install --with-deps "chromium"
-      - when:
-          condition:
-            equal: [ "all", << parameters.test_suite >> ]
-          steps:
-            - run:
-                working_directory: *playwright_path
-                name: Run all Playwright tests except nightly tests
-                command: npx playwright test --config=playwright-ci.config.ts --grep-invert "/nightly/|/examples/"
-      - when:
-          condition:
-            equal: [ "nightly", << parameters.test_suite >> ]
-          steps:
-            - run:
-                working_directory: *playwright_path
-                name: Run all Playwright nightly tests
-                command: npx playwright test --config=playwright-ci.config.ts --grep "nightly/"
-      # Paths are relative and defined in playwright.config.ts Reporter section
+          command: npx playwright install --with-deps chromium # Only need Chrome browser
+      - run:
+          name: Running Playwright tests
+          working_directory: *playwright_path
+          command: |
+            SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npm run test:ci -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
+          no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       - store_test_results:
-          path: ../playwright-e2e/tests/<< pipeline.parameters.study_key >>/test-results/junit
+          path: playwright-e2e/junit
       - store_artifacts:
-          path: ../playwright-e2e/tests/<< pipeline.parameters.study_key >>/test-results
+          path: playwright-e2e/junit
+          destination: junit
       - store_artifacts:
-          path: ../playwright-e2e/tests/<< pipeline.parameters.study_key >>/html-test-results
+          path: playwright-e2e/test-results
+          destination: test-results
+      - store_artifacts:
+          path: playwright-e2e/html-test-results
+          destination: html-test-results
+
 
 parameters:
   study_key:
@@ -634,7 +703,7 @@ parameters:
     default: "UNKNOWN"
   api_call:
     type: enum
-    enum: ["build-and-store","deploy", "run-tests", "UNKNOWN"]
+    enum: ["build-and-store","deploy", "run-tests", "run-e2e-tests", "UNKNOWN"]
     default: "UNKNOWN"
   deploy_env:
     type: enum
@@ -680,9 +749,20 @@ workflows:
               equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
       jobs:
         - app-run-tests-job
-        - playwright-e2e-test: # Test out new job. Remove before merge
-            env_name: "test"
-            test_suite: "all"
+
+  playwright-e2e-test-workflow:
+    # Triggered by CI API (for example, run_ci.sh)
+    # Run Playwright tests against Dev, Test and Staging but not for Prod
+    when:
+      and:
+        - equal: [ "run-e2e-tests", << pipeline.parameters.api_call >> ]
+    jobs:
+      - build-playwright-test-job:
+          env: << pipeline.parameters.deploy_env >>
+      - run-playwright-test-job:
+          env: << pipeline.parameters.deploy_env >>
+          requires:
+            - build-playwright-test-job
 
   build-and-deploy-all-apps-workflow:
     unless: << pipeline.parameters.do-builds >>
@@ -797,16 +877,12 @@ workflows:
   nightly:
     triggers:
       - schedule:
-          cron: "0 22 * * *"
+          cron: "0 22 * * *" # daily around 6 PM EST
           filters:
             branches:
               only:
                 - develop
     jobs:
-      - playwright-e2e-test:
-          name: playwright-e2e-nightly-test
-          env_name: test
-          test_suite: nightly
       - build-and-deploy-job:
           name: basil-nightly
           study_key: basil

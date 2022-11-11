@@ -168,7 +168,7 @@
                   </button>
                 </td>
                 <td>
-                  {{savedFilter.filterName}}
+                  <span (click)="selectFilter(savedFilter)" class="clickable">{{savedFilter.filterName}}</span>
                 </td>
               </tr>
             </ng-container>
@@ -190,7 +190,7 @@
                   </button>
                 </td>
                 <td>
-                  {{ savedFilter.filterName}}
+                  <span (click)="selectFilter(savedFilter)" class="clickable">{{savedFilter.filterName}}</span>
                 </td>
               </tr>
             </ng-container>
@@ -271,7 +271,7 @@
             <!--profile values or dsm values-->
             <ng-container *ngFor="let alias of getKeys()">
               <td *ngFor="let col of selectedColumns[alias]"
-                  (click)="openParticipant(pt, alias)">
+                  (click)="openParticipant(pt, alias)" class="breakWords">
                 <ng-container *ngIf="col.participantColumn.esData && pt.proxyData != null">
                   <ng-container *ngIf="col.participantColumn.tableAlias === 'proxy'">
                     <ul class="NO-PADDING-START">
@@ -469,12 +469,12 @@
                                           </ul>
                                           <hr *ngIf="i !== answers.length-1" style="border-color: lightgray">
                                         </div>
+                                        <div
+                                          *ngIf="getUtilStatic().getOptionDetails(questionAnswer.optionDetails, answer) as oDetail">
+                                          {{oDetail.details}}
+                                          <hr *ngIf="i !== answers.length-1" style="border-color: lightgray">
+                                        </div>
                                       </ng-container>
-                                      <div
-                                        *ngIf="getUtilStatic().getOptionDetails(questionAnswer.optionDetails, answer) as oDetail">
-                                        {{oDetail.details}}
-                                        <hr *ngIf="i !== answers.length-1" style="border-color: lightgray">
-                                      </div>
                                     </div>
                                   </div>
                                 </ng-container>
@@ -488,7 +488,7 @@
                   </ng-container>
                 </ng-container>
                 <ng-container *ngIf="!col.participantColumn.esData">
-                  <div *ngIf="alias === 'data' && pt.data != null">
+                  <div *ngIf="alias === 'data' && pt.data != null && col.participantColumn.object !=='files'">
                     <ng-container *ngIf="col.participantColumn.name === 'activityStatus' && !col.searchable">
                       <ng-container *ngIf="pt.data.activities">
                         <ng-container *ngIf=" pt.getActivitiesSorted(activityDefinitionList) as activities">
@@ -574,8 +574,13 @@
                   <div *ngIf="col.participantColumn.tableAlias==='data' && col.participantColumn.object==='files'">
                     <ul class="NO-PADDING-START">
                       <li class="LIST-SEPARATOR" *ngFor="let file of pt.data.files">
-                        <p class="BIT-OF-MARGIN">
-                          {{file[col.participantColumn.name] | noData}}
+                        <p>
+                          <ng-container *ngIf="col.type === 'DATE'; else not_date">
+                            {{getUtilStatic().getNiceDateFormat(file[col.participantColumn.name]) | noData}}
+                          </ng-container>
+                          <ng-template #not_date  class="BIT-OF-MARGIN" >
+                            {{file[col.participantColumn.name] | noData}}
+                          </ng-template>
                         </p>
                       </li>
                     </ul>

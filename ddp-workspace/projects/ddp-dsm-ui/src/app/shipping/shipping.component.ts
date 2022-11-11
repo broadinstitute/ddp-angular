@@ -16,6 +16,7 @@ import { EasypostLabelRate } from '../utils/easypost-label-rate.model';
 import { LabelSetting } from '../label-settings/label-settings.model';
 import { Result } from '../utils/result.model';
 import {LocalStorageService} from '../services/localStorage.service';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-shipping',
@@ -100,6 +101,8 @@ export class ShippingComponent implements OnInit {
   isClinicalStudy: Boolean = false;
 
   RESEARCH_SAMPLE = 'RUO';
+
+  disableCheckboxes = false;
 
   constructor(private route: ActivatedRoute, private router: Router, private dsmService: DSMService, private auth: Auth,
                private role: RoleService, private compService: ComponentService, private _changeDetectionRef: ChangeDetectorRef,
@@ -271,7 +274,9 @@ export class ShippingComponent implements OnInit {
     if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null &&
       localStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== ''
     ) {
+      this.disableCheckboxes = true;
       this.dsmService.getKitRequests(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.shippingPage, kitType.name)
+        .pipe(finalize(() => this.disableCheckboxes = false))
         .subscribe({
           next: data => {
             this.kitRequests = [];

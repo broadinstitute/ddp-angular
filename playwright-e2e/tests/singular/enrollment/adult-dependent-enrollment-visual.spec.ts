@@ -1,11 +1,10 @@
 import { expect, Page } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
-import { fillEmailPassword } from 'authentication/auth-singular';
+import * as auth from 'authentication/auth-singular';
 import { signMeUp } from 'pages/singular/navbar';
 import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
 import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
 import EnrollMyAdultDependentPage from 'pages/singular/enrollment/enroll-my-adult-dependent-page';
-import { makeEmailAlias } from 'utils/string-utils';
 import { WHO } from 'data/constants';
 
 async function signUp(page: Page) {
@@ -15,11 +14,7 @@ async function signUp(page: Page) {
   await preScreeningPage.enterInformationAboutYourself();
 
   // Enter email alias and new password in Login popup
-  await fillEmailPassword(page, {
-    email: makeEmailAlias(process.env.singularUserEmail as string),
-    password: process.env.singularUserPassword,
-    waitForNavigation: true
-  });
+  await auth.createAccountWithEmailAlias(page);
 }
 
 async function getEnrollMyAdultDependentPage(page: Page) {

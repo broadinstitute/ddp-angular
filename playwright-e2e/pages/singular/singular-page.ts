@@ -6,7 +6,11 @@ import PageBase from 'pages/page-base';
  */
 export abstract class SingularPage extends PageBase {
   protected constructor(page: Page) {
-    super(page, process.env.singularBaseURL as string);
+    const { SINGULAR_BASE_URL } = process.env;
+    if (SINGULAR_BASE_URL == null) {
+      throw Error(`Invalid Singular base URL: process.env.SINGULAR_BASE_URL=${SINGULAR_BASE_URL}`);
+    }
+    super(page, SINGULAR_BASE_URL);
   }
 
   /**

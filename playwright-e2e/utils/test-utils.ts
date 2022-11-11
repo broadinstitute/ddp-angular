@@ -6,7 +6,9 @@ import Select from 'lib/widget/select';
 import axios from 'axios';
 import _ from 'lodash';
 import { STATES } from 'data/constants';
-import { makeRandomTelephone } from './string-utils';
+import { generateRandomPhoneNum } from './faker-utils';
+
+const { SITE_PASSWORD } = process.env;
 
 export async function waitUntilRemoved(locator: Locator): Promise<void> {
   expect(await locator.count()).toHaveLength(0);
@@ -63,7 +65,7 @@ export async function enterMailingAddress(
     street = 'Broadway Street',
     city = 'Cambridge',
     zipCode = '01876',
-    telephone = makeRandomTelephone()
+    telephone = generateRandomPhoneNum()
   } = opts;
 
   const getFullName = (): Locator => {
@@ -109,10 +111,10 @@ export async function enterMailingAddress(
  * @param page
  * @param password
  */
-export async function fillSitePassword(
-  page: Page,
-  password: string = process.env.singularSitePassword as string
-): Promise<void> {
+export async function fillSitePassword(page: Page, password = SITE_PASSWORD): Promise<void> {
+  if (password == null) {
+    throw Error(`Invalid parameter: password is "${SITE_PASSWORD}"`);
+  }
   await page.locator('input[type="password"]').fill(password);
   await Promise.all([page.waitForNavigation(), page.locator('button >> text=Submit').click()]);
 }
@@ -190,3 +192,15 @@ export async function select(page: Page, stableID: string, option: string): Prom
 export async function click(page: Page, stableID: string, option: string): Promise<void> {
   await page.locator(`[data-ddp-test="${stableID}"]`).selectOption(option);
 }
+
+/**
+ * Returns the default value if value is null, empty or undefined.
+ * @param value
+ * @param defaultValue
+ */
+export const getEnv = (value: string | undefined, defaultValue: string): string => {
+  if (value == null && defaultValue == null) {
+    throw Error('Invalid Parameters: Value and defaultValue are both undefined or null.');
+  }
+  return value == null ? defaultValue : value;
+};

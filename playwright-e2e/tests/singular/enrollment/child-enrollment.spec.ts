@@ -1,8 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
 import * as user from 'data/fake-user.json';
-import { fillEmailPassword } from 'authentication/auth-singular';
-import { makeEmailAlias } from 'utils/string-utils';
+import * as auth from 'authentication/auth-singular';
 import { WHO } from 'data/constants';
 import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
 import MedicalRecordReleaseForm from 'pages/singular/enrollment/medical-record-release-form';
@@ -14,8 +13,12 @@ import ConsentFormForMinorPage from 'pages/singular/enrollment/consent-form-for-
 import { enterMailingAddress } from 'utils/test-utils';
 import AssentFormPage from 'pages/singular/enrollment/assent-form-page';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
+import { generateUserName } from 'utils/faker-utils';
 
 test.describe('Enroll my child', () => {
+  // Randomize last name
+  const childLastName = generateUserName(user.child.lastName);
+
   /**
    * Assenting rules:
    * Ages 0-6: Need parental consent from parent
@@ -31,11 +34,7 @@ test.describe('Enroll my child', () => {
 
     // Step 2
     // Enter email alias and password to create new account
-    await fillEmailPassword(page, {
-      email: makeEmailAlias(process.env.singularUserEmail as string),
-      password: process.env.singularUserPassword,
-      waitForNavigation: true
-    });
+    await auth.createAccountWithEmailAlias(page);
 
     // Step 3
     // On "My Dashboard" page, click Enroll Mys Child button
@@ -69,7 +68,7 @@ test.describe('Enroll my child', () => {
     await assertActivityHeader(page, 'Consent Form for Minor Dependent');
     await assertActivityProgress(page, 'Page 3 of 3');
     await consentForm.childFirstName().fill(user.child.firstName);
-    await consentForm.childLastName().fill(user.child.lastName);
+    await consentForm.childLastName().fill(childLastName);
     await consentForm.dateOfBirth(user.child.birthDate.MM, user.child.birthDate.DD, user.child.birthDate.YYYY);
     await consentForm.iHaveExplainedToMyChild().check();
     await consentForm.toKnowSecondaryFinding().check('I want to know.');
@@ -80,12 +79,12 @@ test.describe('Enroll my child', () => {
     await consentForm.authorizationSignature().fill(user.patient.lastName);
     await consentForm.agree();
 
-    // On Assent Form because child is 12 years old
+    // On Assent Form because child is >= 12 years old
     await assertActivityHeader(page, new RegExp(/Assent Form/));
     await assertActivityProgress(page, 'Page 1 of 1');
     const assentForm = new AssentFormPage(page);
     await assentForm.next();
-    await assentForm.fullName().fill(`${user.child.firstName} ${user.child.middleName} ${user.child.lastName}`);
+    await assentForm.fullName().fill(`${user.child.firstName} ${user.child.middleName} ${childLastName}`);
     await assentForm.hasAgreedToBeInStudy().check();
     await assentForm.sign().fill(`${user.patient.firstName} ${user.patient.lastName}`);
     await assentForm.next({ waitForNav: true });
@@ -95,7 +94,7 @@ test.describe('Enroll my child', () => {
     await aboutMyChildPage.waitForReady();
     await assertActivityHeader(page, 'About My Child');
     await enterMailingAddress(page, {
-      fullName: `${user.child.firstName} Junior ${user.child.lastName}`,
+      fullName: `${user.child.firstName} ${childLastName}`,
       country: user.child.country.name,
       state: user.child.state.name,
       street: user.child.streetAddress,

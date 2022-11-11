@@ -1,4 +1,3 @@
-import {DatePipe} from '@angular/common';
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {ESFile} from '../participant-list/models/file.model';
 import {Participant} from '../participant-list/participant-list.model';
@@ -15,14 +14,11 @@ export class FileDownloadComponent {
   @Input() participant: Participant;
   @Output() downloadFileEvent = new EventEmitter<ESFile>();
   CLEAN = 'CLEAN';
+  Utils = Utils;
 
 
   downloadParticipantFile( event: Event, file: ESFile ): void {
     this.downloadFileEvent.emit(file);
-  }
-
-  getNiceDateFormat( uploadedAt: string ): string {
-    return new DatePipe( 'en-US' ).transform( uploadedAt, Utils.DATE_STRING_IN_CVS_WITH_TIME );
   }
 
 

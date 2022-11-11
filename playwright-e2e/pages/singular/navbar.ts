@@ -1,8 +1,6 @@
 import { Page, Response } from '@playwright/test';
 
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '../.env.singular') });
+const { SINGULAR_BASE_URL } = process.env;
 
 export const NavSelectors = {
   Login: '.header button[data-ddp-test="signInButton"]:has-text("Log In")',
@@ -26,11 +24,11 @@ export async function goToAboutUs(page: Page): Promise<void> {
  * @param path URL path (appended to baseURL)
  */
 export async function goToPath(page: Page, path?: string): Promise<Response | null> {
-  if (process.env.singularBaseURL === undefined) {
-    throw Error('process.env.singularBaseURL is not valid. Check .env file in /playwright-e2e dir.');
+  if (SINGULAR_BASE_URL == null) {
+    throw Error('SINGULAR_BASE_URL is not valid. Check .env file in /playwright-e2e dir.');
   }
   const urlPath = typeof path === 'undefined' ? '' : path;
-  return await page.goto(`${process.env.singularBaseURL}/${urlPath}`, { waitUntil: 'networkidle' });
+  return await page.goto(`${SINGULAR_BASE_URL}/${urlPath}`, { waitUntil: 'networkidle' });
 }
 
 export async function visitHomePage(page: Page): Promise<Response | null> {
@@ -38,7 +36,12 @@ export async function visitHomePage(page: Page): Promise<Response | null> {
 }
 
 export async function signMeUp(page: Page): Promise<void> {
-  return await page.locator(NavSelectors.SignMeUp).click();
+  const progressSpinner = 'mat-spinner[role="progressbar"]';
+  await Promise.all([
+    page.locator(NavSelectors.SignMeUp).click(),
+    page.locator(progressSpinner).waitFor({ state: 'visible' })
+  ]);
+  await page.locator(progressSpinner).waitFor({ state: 'detached', timeout: 30 * 1000 });
 }
 
 export async function clickLogin(page: Page): Promise<void> {

@@ -9,7 +9,7 @@ export interface QuestionTypeModel {
   // Answer Types
   answer?: string | number;
   picklistAnswer?: Partial<PicklistAnswersModel>;
-  compositeAnswer?: MutualModel[];
+  compositeAnswer?: CompositeModel[];
   matrixAnswer?: MatrixAnswer[];
 }
 
@@ -20,10 +20,11 @@ export interface MatrixAnswer {
 
 /* Models will be added as necessary */
 
-// Composite Matrix Model
-interface MutualModel {
+// Composite Model
+interface CompositeModel {
   question: string;
   answer: string;
+  questionStableId: string;
 }
 
 // Picklist

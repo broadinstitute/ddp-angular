@@ -219,9 +219,11 @@ export class DSMService {
 
     if (filterQuery != null) {
       map.push({name: 'filterQuery', value: filterQuery});
-    } else if (json == null || !json.filters?.length) {
+    }
+    if (json != null && json.filterName != null) {
       json && map.push({name: 'filterName', value: json.filterName});
-    } else if (viewFilterCopy != null) {
+    }
+    if (viewFilterCopy != null) {
       map.push({name: 'filters', value: JSON.stringify(viewFilterCopy.filters)});
     }
 

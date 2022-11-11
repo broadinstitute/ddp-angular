@@ -20,6 +20,7 @@ export class CohortTagComponent implements OnInit {
   tags: CohortTag[];
 
   public static readonly COHORT_TAG = 'cohortTag';
+  public duplicateError = false;
 
   constructor(private compService: ComponentService, private dsmService: DSMService) { }
 
@@ -39,23 +40,30 @@ export class CohortTagComponent implements OnInit {
   }
 
   add(event: MatChipInputEvent): void {
+    this.duplicateError = false;
     const value = (event.value || '').trim();
 
     if (value) {
       const newTag = new CohortTag(value, this.ddpParticipantId);
+      if (this.getTags().find(tag => tag.cohortTagName === value)){
+        this.duplicateError = true;
+        return;
+      }
       this.dsmService.createCohortTag(JSON.stringify(newTag), this.compService.getRealm())
         .subscribe({
           next: cohortTagId => {
             newTag.cohortTagId = parseInt(cohortTagId);
+            this.getTags().push(newTag);
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            // Clear the input value
+            event.chipInput!.clear();
           },
-          error: () => {
-            this.remove(newTag);
+          error: (error) => {
+            if (error.status === 500){
+              this.duplicateError = true;
+            }
           }
         });
-      this.getTags().push(newTag);
-
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      event.chipInput!.clear();  // Clear the input value
     }
   }
 

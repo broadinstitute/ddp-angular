@@ -4,6 +4,10 @@
   margin-bottom: 0;
 }
 
+td.breakWords {
+  white-space: normal;
+  overflow-wrap: break-word;
+}
 
 .NO-PADDING-START{
   padding-inline-start: 0;
@@ -25,4 +29,9 @@ button.mat-icon-button {
 
 td {
   white-space: nowrap;
+}
+
+.clickable:hover {
+  color: blue;
+  cursor: pointer;
 }

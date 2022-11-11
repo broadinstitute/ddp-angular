@@ -6,7 +6,11 @@ import PageBase from 'pages/page-base';
  */
 export abstract class PancanPage extends PageBase {
   protected constructor(page: Page) {
-    super(page, process.env.pancanBaseURL as string);
+    const { PANCAN_BASE_URL } = process.env;
+    if (PANCAN_BASE_URL == null) {
+      throw Error(`Invalid Pancan base URL: process.env.PANCAN_BASE_URL=${PANCAN_BASE_URL}`);
+    }
+    super(page, PANCAN_BASE_URL);
   }
 
   /**

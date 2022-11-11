@@ -12,7 +12,7 @@ import _ from 'lodash';
  */
 test.describe.skip('Login into Singular', () => {
   test('should works @visual @singular', async ({ page, homePage }) => {
-    await login(page, { email: process.env.singularUserEmail, password: process.env.singularUserPassword });
+    await login(page, { email: process.env.SINGULAR_USER_EMAIL, password: process.env.SINGULAR_USER_PASSWORD });
 
     // My Dashboard is visible
     const myDashboardPage = new MyDashboardPage(page);
