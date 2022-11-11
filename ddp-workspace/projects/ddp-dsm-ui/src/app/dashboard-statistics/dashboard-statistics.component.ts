@@ -35,9 +35,9 @@ export class DashboardStatisticsComponent implements OnInit {
     this.initData();
   }
 
-  private initData(): void {
+  private initData(date?: DateRangeModel): void {
     this.hasRequiredRole = this.roleService.allowedToViewEELData();
-    this.Charts = this.dashboardStatisticsService.ChartFactory()
+    this.Charts = this.dashboardStatisticsService.ChartFactory(date)
       .pipe(catchError(this.catchErrorAndReturnArray.bind(this)), finalize(() => this.loading = false));
     this.Counts = this.dashboardStatisticsService.Counts;
   }
@@ -45,7 +45,7 @@ export class DashboardStatisticsComponent implements OnInit {
   public dateChanged(date: DateRangeModel): void {
     console.log(date, 'DATE - dashboard.statistics');
     this.loading = true;
-    this.initData();
+    this.initData(date);
   }
 
   get getConfiguration(): any {
