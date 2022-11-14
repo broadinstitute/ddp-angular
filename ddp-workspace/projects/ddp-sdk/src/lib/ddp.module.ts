@@ -225,6 +225,7 @@ import {
 import { TabularBlockComponent } from './components/activityForm/activity-blocks/tabularBlock/tabularBlock.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LayoutModule } from '@angular/cdk/layout';
+import { ParticipantProfileServiceAgent } from './services/serviceAgents/participantProfileServiceAgent.service';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter: FuncType<string> = () => sessionService.token;
@@ -354,6 +355,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         InvitationPipe,
         FileAnswerMapperService,
         ParticipantsSearchServiceAgent,
+        ParticipantProfileServiceAgent,
         PicklistSortingPolicy,
         {
             provide: HTTP_INTERCEPTORS,
