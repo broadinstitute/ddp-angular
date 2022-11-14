@@ -75,6 +75,7 @@ import { UserManagementServiceAgent } from './services/serviceAgents/userManagem
 import { UserInvitationServiceAgent } from './services/serviceAgents/userInvitationServiceAgent.service';
 import { AnnouncementsServiceAgent } from './services/serviceAgents/announcementsServiceAgent.service';
 import { UserStatusServiceAgent } from './services/serviceAgents/userStatusServiceAgent.service';
+import { ParticipantProfileServiceAgent } from './services/serviceAgents/participantProfileServiceAgent.service';
 
 import { WindowRef } from './services/windowRef';
 
@@ -225,7 +226,7 @@ import {
     ActivityEquationAnswerComponent
 } from './components/activityForm/answers/activity-equation-answer/activityEquationAnswer.component';
 import { TabularBlockComponent } from './components/activityForm/activity-blocks/tabularBlock/tabularBlock.component';
-import { ParticipantProfileServiceAgent } from './services/serviceAgents/participantProfileServiceAgent.service';
+
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
     const getter: FuncType<string> = () => sessionService.token;

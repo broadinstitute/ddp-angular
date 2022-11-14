@@ -1,8 +1,11 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ConfigurationService, LoggingService, SessionMementoService, UserProfile } from 'ddp-sdk';
 import { SessionServiceAgent } from './sessionServiceAgent.service';
+import { SessionMementoService } from '../sessionMemento.service';
+import { ConfigurationService } from '../configuration.service';
+import { LoggingService } from '../logging.service';
+import { UserProfile } from '../../models/userProfile';
 
 @Injectable()
 export class ParticipantProfileServiceAgent extends SessionServiceAgent<any> {
