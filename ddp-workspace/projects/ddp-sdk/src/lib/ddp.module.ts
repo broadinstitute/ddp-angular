@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 import { A11yModule } from '@angular/cdk/a11y';
+import { LayoutModule } from '@angular/cdk/layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 // ngx-translate
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -223,8 +225,6 @@ import {
     ActivityEquationAnswerComponent
 } from './components/activityForm/answers/activity-equation-answer/activityEquationAnswer.component';
 import { TabularBlockComponent } from './components/activityForm/activity-blocks/tabularBlock/tabularBlock.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { LayoutModule } from '@angular/cdk/layout';
 import { ParticipantProfileServiceAgent } from './services/serviceAgents/participantProfileServiceAgent.service';
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
