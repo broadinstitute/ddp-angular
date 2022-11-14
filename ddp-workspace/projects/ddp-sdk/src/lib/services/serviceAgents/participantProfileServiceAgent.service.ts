@@ -24,7 +24,7 @@ export class ParticipantProfileServiceAgent extends SessionServiceAgent<any> {
         });
     }
 
-    public updateParticipantProfile(guid, profile: UserProfile): Observable<any> {
+    private updateParticipantProfile(guid, profile: UserProfile): Observable<any> {
         const profileChanges: object = {};
         for (const key of Object.keys(profile)) {
             if (profile[key]) {
