@@ -87,19 +87,31 @@ export default class Question {
   }
 
   /**
-   * Check a checkbox or radiobutton
+   * Check a checkbox or radiobutton. Waits for triggered request to finish successfully.
+   * If there is no request from checking checkbox, set parameter "waitRequestAfter" to false. For example, check('Yes', { waitRequestAfter: false });
    * @param value
    * @param opts
    */
-  async check(value: string | RegExp, opts: { exactMatch?: boolean } = {}): Promise<void> {
-    const { exactMatch = false } = opts;
-    let loc = this.toLocator().locator('mat-radio-button, mat-checkbox');
-    loc = exactMatch
-      ? loc.filter({ has: this.page.locator(`text="${value}"`) })
-      : loc.filter({ has: this.page.locator('label', { hasText: value }) });
-    const isChecked = await Question.isChecked(loc);
+  async check(
+    value: string | RegExp,
+    opts: { exactMatch?: boolean; waitRequestAfter?: boolean; requestStatus?: number; requestURL?: string } = {}
+  ): Promise<void> {
+    // For majority of checkboxes, a "PATCH /answers" request is triggered when checked
+    const { exactMatch = false, waitRequestAfter = true, requestStatus = 200, requestURL = '/answers' } = opts;
+    let locator = this.toLocator().locator('mat-radio-button, mat-checkbox');
+    locator = exactMatch
+      ? locator.filter({ has: this.page.locator(`text="${value}"`) })
+      : locator.filter({ has: this.page.locator('label', { hasText: value }) });
+    const isChecked = await Question.isChecked(locator);
     if (!isChecked) {
-      await loc.click();
+      const responsePromise = waitRequestAfter
+        ? this.page.waitForResponse(
+            (response) => response.url().includes(requestURL) && response.status() === requestStatus,
+            { timeout: 30 * 1000 } // More time for retries. UI will resend failed requests
+          )
+        : Promise.resolve();
+
+      await Promise.all([responsePromise, locator.click()]);
     }
   }
 

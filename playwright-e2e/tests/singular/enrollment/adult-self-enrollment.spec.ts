@@ -98,7 +98,6 @@ test.describe('Enroll myself as adult', () => {
     await assertActivityProgress(page, 'Page 3 of 3');
     await medicalRecordReleaseForm.name().fill(`${user.patient.firstName} ${lastName}`);
     await medicalRecordReleaseForm.signature().fill(`${user.patient.firstName} ${lastName}`);
-    await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
     await medicalRecordReleaseForm.submit();
 
     // Medical Record File Upload

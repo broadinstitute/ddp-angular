@@ -17,9 +17,33 @@ export default class Input {
     return this.locator;
   }
 
-  async fill(value: string): Promise<void> {
+  /**
+   * Fill in text value. Waits for triggered request to finish successfully.
+   * If no request from filling in input, set parameter "waitRequestAfter" to false. For example, fill('How old are you?', { waitRequestAfter: false });
+   * @param value
+   * @param waitOpts
+   */
+  async fill(
+    value: string,
+    waitOpts: { waitRequestAfter?: boolean; requestStatus?: number; requestURL?: string } = {}
+  ): Promise<void> {
+    // For majority of inputs, a "PATCH /answers" request is triggered when filled in text
+    const { waitRequestAfter = true, requestStatus = 200, requestURL = '/answers' } = waitOpts;
+
+    const responsePromise = waitRequestAfter
+      ? this.page.waitForResponse(
+          (response) => {
+            const requestData: boolean | undefined = response.request().postData()?.includes(value);
+            const includeValue = requestData ? requestData : false;
+            return response.url().includes(requestURL) && response.status() === requestStatus && includeValue;
+          },
+          { timeout: 30 * 1000 } // More time for retries. UI will resend failed requests
+        )
+      : Promise.resolve();
+
     await this.toLocator().fill(value);
-    await this.toLocator().press('Tab');
+    await this.toLocator().press('Tab'); // A request is triggered when input loses focus
+    await responsePromise;
   }
 
   errorMessage(): Locator {

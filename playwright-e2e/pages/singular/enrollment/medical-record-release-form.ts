@@ -89,10 +89,10 @@ export default class MedicalRecordReleaseForm extends SingularPage {
       specialty = user.doctor.specialty
     } = opts;
 
-    await this.physicianName().fill(name);
-    await this.physicianHospital().fill(hospital);
-    await this.physicianAddress().fill(address);
-    await this.physicianPhone().fill(phone);
+    await this.physicianName().fill(name, { waitRequestAfter: false });
+    await this.physicianHospital().fill(hospital, { waitRequestAfter: false });
+    await this.physicianAddress().fill(address, { waitRequestAfter: false });
+    await this.physicianPhone().fill(phone, { waitRequestAfter: false });
     await this.physicianSpecialty().selectOption(specialty);
 
     // Wait for /answer request to finish

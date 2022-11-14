@@ -123,7 +123,6 @@ test.describe('Enroll my child', () => {
     await assertActivityProgress(page, 'Page 3 of 3');
     await medicalRecordReleaseForm.parentName().fill(`${user.patient.firstName} ${user.patient.lastName}`);
     await medicalRecordReleaseForm.parentSignature().fill(`${user.patient.firstName} ${user.patient.lastName}`);
-    await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
     await medicalRecordReleaseForm.submit();
 
     // Medical Record File Upload

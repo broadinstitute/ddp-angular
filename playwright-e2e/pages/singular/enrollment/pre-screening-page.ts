@@ -63,7 +63,7 @@ export default class PreScreeningPage {
     await iframe.locator('css=span[role="checkbox"]').dispatchEvent('click');
     await iframe
       .locator('.recaptcha-checkbox-spinner[style*="animation-play-state: running;"]')
-      .waitFor({ state: 'hidden', timeout: 30 * 1000 });
+      .waitFor({ state: 'hidden', timeout: 30 * 1000 }); // Accommodate for slower response
   }
 
   async enterInformationAboutYourself(
@@ -73,7 +73,7 @@ export default class PreScreeningPage {
       state?: string;
       hasHeartDefect?: boolean;
     } = {}
-  ): Promise<void> {
+  ): Promise<string> {
     // Fake data from fake-user.json
     const {
       age = fake.patient.age,
@@ -82,12 +82,14 @@ export default class PreScreeningPage {
       hasHeartDefect = true
     } = opts;
 
-    await this.age().fill(age);
+    await this.age().fill(age, { waitRequestAfter: false });
     await this.country().select().selectOption(country);
     await this.state().toLocator().waitFor({ state: 'visible' });
-    await this.state().select().selectOption(state);
+    const selectedValues = await this.state().select().selectOption(state);
+    await this.page.waitForTimeout(200); // Slow down to sync up with UI. Selected value is slower to become visible
     await this.haveVentricleHeartDefect().check(hasHeartDefect ? 'Yes' : 'No');
     await this.checkReCaptcha();
     await this.signMeUp({ waitForNav: true });
+    return selectedValues[0];
   }
 }

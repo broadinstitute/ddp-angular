@@ -39,7 +39,7 @@ test.describe('Enroll my child', () => {
     await assertActivityHeader(page, 'Enroll my child');
     const enrollMyChildPage = new EnrollMyChildPage(page);
     await enrollMyChildPage.whoInChildFamilyHasVentricleHeartDefect().check(WHO.TheChildBeingEnrolled);
-    await enrollMyChildPage.howOldIsYourChild().fill(user.secondChild.age);
+    await enrollMyChildPage.howOldIsYourChild().fill(user.secondChild.age, { waitRequestAfter: false });
     await myDashboardPage.next();
 
     // On "Consent Form for Minor Dependent" page
