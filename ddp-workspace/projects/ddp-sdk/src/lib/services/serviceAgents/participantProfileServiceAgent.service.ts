@@ -17,14 +17,14 @@ export class ParticipantProfileServiceAgent extends SessionServiceAgent<any> {
         super(session, configuration, http, logger, null);
     }
 
-    public updateParticipantProfiles(participants: Array<{ guid: string; profile: any}>): Observable<any>[] {
+    public updateParticipantProfiles(participants: Array<{ guid: string; profile: UserProfile }>): Observable<any>[] {
         return participants.map(participant => {
             const {guid, profile} = participant;
             return this.updateParticipantProfile(guid, profile);
         });
     }
 
-    private updateParticipantProfile(guid, profile: UserProfile): Observable<any> {
+    private updateParticipantProfile(guid: string, profile: UserProfile): Observable<any> {
         const profileChanges: object = {};
         for (const key of Object.keys(profile)) {
             if (profile[key]) {

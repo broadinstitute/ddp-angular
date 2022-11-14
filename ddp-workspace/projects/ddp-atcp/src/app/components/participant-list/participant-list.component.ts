@@ -72,10 +72,10 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
           filter(() => this.config.updatePreferredLanguageForGovernedParticipants && !!this.participants?.length),
           mergeMap(() => {
             const updatedParticipants = this.participants.map(participant => ({
-              ...participant,
+              guid: participant.guid,
               profile: {
                 preferredLanguage: this.languageService.getCurrentLanguage()
-              }
+              } as UserProfile
             }));
             return forkJoin(
               this.participantProfileService.updateParticipantProfiles(updatedParticipants)
