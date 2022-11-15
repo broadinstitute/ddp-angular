@@ -30,10 +30,14 @@ export default class Question {
     if (value === undefined) {
       return this.toLocator().locator('mat-select, select');
     }
+    return this.toLocator().locator('mat-select, select', {
+      has: this.page.locator(`//*[contains(normalize-space(.),"${value}")]`)
+    });
+    /*
     return this.toLocator().locator(
       `//*[.//*[contains(normalize-space(.),"${value}")]]/mat-select` +
         ` | //*[.//*[contains(normalize-space(.),"${value}")]]/select`
-    );
+    ); */
   }
 
   /**

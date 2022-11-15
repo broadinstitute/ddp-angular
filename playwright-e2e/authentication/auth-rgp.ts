@@ -1,11 +1,7 @@
-import { Locator, Page } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { clickLogin } from 'pages/singular/navbar';
 
 const { RGP_USER_EMAIL, RGP_USER_PASSWORD } = process.env;
-
-export function loginButton(page: Page): Locator {
-  return page.locator('data-ddp-test="signInButton"');
-}
 
 export async function login(page: Page, opts: { email?: string; password?: string } = {}): Promise<void> {
   const { email = RGP_USER_EMAIL, password = RGP_USER_PASSWORD } = opts;

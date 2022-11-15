@@ -32,7 +32,7 @@ export default class HomePage extends RgpPageBase implements HomePageInterface {
   }
 
   /**
-   * Log into Singular application
+   * Log into RGP application
    * @param opts
    */
   async logIn(opts: { email?: string; password?: string } = {}): Promise<void> {

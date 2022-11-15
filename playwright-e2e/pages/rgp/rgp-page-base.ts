@@ -2,7 +2,7 @@ import { Page } from '@playwright/test';
 import PageBase from 'pages/page-base';
 
 /**
- * Project RGP base page.
+ * Rare Genomic Project (RGP) page base
  */
 export abstract class RgpPageBase extends PageBase {
   protected constructor(page: Page) {

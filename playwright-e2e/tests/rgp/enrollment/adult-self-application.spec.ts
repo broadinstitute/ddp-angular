@@ -1,12 +1,12 @@
+import { expect } from '@playwright/test';
 import { test } from 'fixtures/rgp-fixture';
 import HowItWorksPage from 'pages/rgp/enrollment/how-it-works-page';
 import TellUsYourStoryPage, { WHO } from 'pages/rgp/enrollment/tell-us-your-story-page';
 import HomePage from 'pages/rgp/home/home-page';
 import CreateAccountPage from 'pages/rgp/enrollment/create-account-page';
-import { expect } from '@playwright/test';
 
-test.describe('Adult Joining Self', () => {
-  test('Start an application for self @functional @application @rgp', async ({ page }) => {
+test.describe('Adult Joining', () => {
+  test('Start an application for self @functional @join @rgp', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.getStarted();
 
@@ -36,6 +36,6 @@ test.describe('Adult Joining Self', () => {
       'If you do not receive an email, contact us at raregenomes@broadinstitute.org.'
     );
 
-    // BLOCKED by Email Verification
+    // BLOCKED by Email Verification. See https://broadworkbench.atlassian.net/browse/PEPPER-317
   });
 });
