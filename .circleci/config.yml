@@ -610,16 +610,32 @@ jobs:
             mkdir -p playwright-env
 
             export sitePwd=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.sitePassword")
-            export googleUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[0] | select(.app==\"google\") | .userName")
-            export dsmUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")
-            export userPwd=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")
-
             echo "export SITE_PASSWORD=$sitePwd" >> playwright-env/envvars
-            echo "export SINGULAR_USER_EMAIL=$googleUser" >> playwright-env/envvars
+
+            #DSM
+            export dsmUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")
+            export dsmUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")
             echo "export DSM_USER_EMAIL=$dsmUser" >> playwright-env/envvars
-            # DSM and SINGULAR user passwords are same
-            echo "export DSM_USER_PASSWORD=$userPwd" >> playwright-env/envvars
-            echo "export SINGULAR_USER_PASSWORD=$userPwd" >> playwright-env/envvars
+            echo "export DSM_USER_PASSWORD=$dsmUserPassword" >> playwright-env/envvars
+
+            # SINGULAR
+            export singularUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"singular\") | .userName")
+            export singularUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"singular\") | .password")
+            echo "export SINGULAR_USER_EMAIL=$singularUser" >> playwright-env/envvars
+            echo "export SINGULAR_USER_PASSWORD=$singularUserPassword" >> playwright-env/envvars
+
+            # RGP
+            export rgpUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"rgp\") | .userName")
+            export rgpUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"rgp\") | .password")
+            echo "export RGP_USER_PASSWORD=$rgpUserPassword" >> playwright-env/envvars
+            echo "export RGP_USER_EMAIL=$rgpUser" >> playwright-env/envvars
+
+            # ANGIO
+            export angioUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"angio\") | .userName")
+            export angioUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"angio\") | .password")
+            echo "export ANGIO_USER_PASSWORD=$angioUserPassword" >> playwright-env/envvars
+            echo "export ANGIO_USER_EMAIL=$angioUser" >> playwright-env/envvars
+
       - run:
           working_directory: *playwright_path
           name: npm install
