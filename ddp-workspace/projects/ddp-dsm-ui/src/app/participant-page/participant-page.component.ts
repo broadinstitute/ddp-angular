@@ -190,8 +190,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
     this.displayActivityOrder();
     this.addMedicalProviderInformation();
-    this.getMercuryEligibleSamples();
-    this.canSequence = this.canHaveSequencing(this.participant);
+    if(this.role.allowedToDoOrderSequencing()) {
+      this.getMercuryEligibleSamples();
+      this.canSequence = this.canHaveSequencing(this.participant);
+    }
   }
 
   private handleParticipantProfileUpdate(): void {
@@ -875,7 +877,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       // this.selectedTabTitle = data.heading;
       this.activeTab = tabName;
     }
-    if (tabName === 'sequencing') {
+    if (tabName === 'sequencing' && this.role.allowedToDoOrderSequencing()) {
       this.getMercuryEligibleSamples();
     }
   }
@@ -1636,7 +1638,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     //pediatric pt
     if (!canBeSequencedBasedOnLocation) {
       const addParticipantActivity = participant.data.activities.find(activity => activity.activityCode === this.ADD_PARTICIPANT);
-      if (addParticipantActivity != null && prequalActivity) {
+      if (addParticipantActivity != null) {
         const countryQuestion = addParticipantActivity?.questionsAnswers?.find(
           questionAnswer => questionAnswer.stableId === this.CHILD_COUNTRY);
         if (countryQuestion != null && countryQuestion.answer) {

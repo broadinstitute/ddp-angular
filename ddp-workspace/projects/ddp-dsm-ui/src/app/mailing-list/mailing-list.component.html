@@ -34,11 +34,12 @@
         <mfDefaultSorter by="email">Email</mfDefaultSorter>
       </th>
       <ng-container *ngIf="showColumn('info')">
-        <th *ngFor="let key of keys" (click)="sortByJson(key)" class="Sort-Header">
-          {{key}}
-          <span *ngIf="sortDir === 'asc' && sortKey === key" class="glyphicon glyphicon-triangle-top"></span>
-          <span *ngIf="sortDir === 'desc' && sortKey === key" class="glyphicon glyphicon-triangle-bottom"></span>
-        </th>
+        <th></th>
+<!--        <th *ngFor="let key of keys" (click)="sortByJson(key)" class="Sort-Header">-->
+<!--          {{key}}-->
+<!--          <span *ngIf="sortDir === 'asc' && sortKey === key" class="glyphicon glyphicon-triangle-top"></span>-->
+<!--          <span *ngIf="sortDir === 'desc' && sortKey === key" class="glyphicon glyphicon-triangle-bottom"></span>-->
+<!--        </th>-->
       </ng-container>
       <th (click)="clearKeySort()">
         <mfDefaultSorter by="dateCreated">Date signed up</mfDefaultSorter>
@@ -51,11 +52,13 @@
       <td *ngIf="showColumn('lastName')">{{item.lastName}}</td>
       <td>{{item.email}}</td>
       <ng-container *ngIf="showColumn('info')">
-        <td *ngFor="let key of keys">
-          {{getJsonValue( item.info, key )}}
+        <td>
+          {{ item.info}}
         </td>
+<!--        <td *ngFor="let key of keys">-->
+<!--          {{getJsonValue( item.info, key )}}-->
+<!--        </td>-->
       </ng-container>
-      <td>{{item.getDate() | date:'medium'}}</td>
       <td *ngIf="showColumn('dateCreated')">{{item.getDate() | date:'medium'}}</td>
     </tr>
     </tbody>

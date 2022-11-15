@@ -28,8 +28,7 @@ const testConfig: PlaywrightTestConfig = {
     toMatchSnapshot: {
       // Account for minor difference in text rendering and resolution between headless and headed mode
       threshold: 0.3,
-      maxDiffPixelRatio: 0.2,
-      maxDiffPixels: 200
+      maxDiffPixelRatio: 0.2
     },
     toHaveScreenshot: {
       scale: 'css',
@@ -38,7 +37,7 @@ const testConfig: PlaywrightTestConfig = {
     }
   },
   /* Run tests in files in parallel */
-  fullyParallel: true,
+  fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
@@ -66,9 +65,9 @@ const testConfig: PlaywrightTestConfig = {
     // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'retain-on-failure',
+    trace: process.env.CI ? 'on-first-retry' : 'retain-on-failure',
     screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
+    video: process.env.CI ? 'on-first-retry' : 'retain-on-failure', // Limit load on CI system because trace and video add load
 
     userAgent:
       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) ' +

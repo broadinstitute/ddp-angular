@@ -1,8 +1,5 @@
 version: 2.1
 
-orbs:
-  jq: circleci/jq@2.2.0
-
 references:
   repo_path: &repo_path
       /home/circleci/repo
@@ -20,6 +17,14 @@ references:
     "basil dsm-ui osteo brain angio mbc testboston mpc prion atcp rarex rgp esc cgc circadia pancan singular brugada lms fon"
   study_guids: &study_guids
     "basil NA CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc circadia cmi-pancan singular brugada cmi-lms fon"
+
+  # Job runs for develop branch only
+  filter-develop-branch: &filter-develop-branch
+    filters:
+      tags:
+        ignore: /.*/
+      branches:
+        only: develop
 
 # Container for all the builds
 executors:
@@ -605,16 +610,32 @@ jobs:
             mkdir -p playwright-env
 
             export sitePwd=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.sitePassword")
-            export googleUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[0] | select(.app==\"google\") | .userName")
-            export dsmUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")
-            export userPwd=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")
-
             echo "export SITE_PASSWORD=$sitePwd" >> playwright-env/envvars
-            echo "export SINGULAR_USER_EMAIL=$googleUser" >> playwright-env/envvars
+
+            #DSM
+            export dsmUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")
+            export dsmUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")
             echo "export DSM_USER_EMAIL=$dsmUser" >> playwright-env/envvars
-            # DSM and SINGULAR user passwords are same
-            echo "export DSM_USER_PASSWORD=$userPwd" >> playwright-env/envvars
-            echo "export SINGULAR_USER_PASSWORD=$userPwd" >> playwright-env/envvars
+            echo "export DSM_USER_PASSWORD=$dsmUserPassword" >> playwright-env/envvars
+
+            # SINGULAR
+            export singularUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"singular\") | .userName")
+            export singularUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"singular\") | .password")
+            echo "export SINGULAR_USER_EMAIL=$singularUser" >> playwright-env/envvars
+            echo "export SINGULAR_USER_PASSWORD=$singularUserPassword" >> playwright-env/envvars
+
+            # RGP
+            export rgpUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"rgp\") | .userName")
+            export rgpUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"rgp\") | .password")
+            echo "export RGP_USER_PASSWORD=$rgpUserPassword" >> playwright-env/envvars
+            echo "export RGP_USER_EMAIL=$rgpUser" >> playwright-env/envvars
+
+            # ANGIO
+            export angioUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"angio\") | .userName")
+            export angioUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"angio\") | .password")
+            echo "export ANGIO_USER_PASSWORD=$angioUserPassword" >> playwright-env/envvars
+            echo "export ANGIO_USER_EMAIL=$angioUser" >> playwright-env/envvars
+
       - run:
           working_directory: *playwright_path
           name: npm install
@@ -652,13 +673,6 @@ jobs:
           env: << parameters.env >>
       - attach_workspace:
           at: .
-      - jq/install
-      - run:
-          name: Inspect previous test metadata
-          command: |
-            # aut-detect timing does not work because CircleCI CLI expects both filenames and classnames to be present in JUnit xml.
-            # See https://support.circleci.com/hc/en-us/articles/360000376788-How-to-troubleshoot-Test-Splitting
-            cat "${CIRCLE_INTERNAL_TASK_DATA}/circle-test-results/results.json" | jq .
       - run:
           name: Export env variables to BASH_ENV
           command: |
@@ -679,6 +693,8 @@ jobs:
           name: Running Playwright tests
           working_directory: *playwright_path
           command: |
+            # CI split by auto-detect timing does not work because CircleCI CLI expects both filenames and classnames to be present in JUnit xml.
+            # Playwright generated JUnit xml does not have filenames.
             SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npm run test:ci -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
           no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       - store_test_results:
@@ -874,69 +890,18 @@ workflows:
           <<: *deploy_branch_filters
           study_key: fon
 
-  nightly:
-    triggers:
-      - schedule:
-          cron: "0 22 * * *" # daily around 6 PM EST
-          filters:
-            branches:
-              only:
-                - develop
+  scheduled-playwright-test:
+    # Triggered every 4 hours on Monday through Friday
+    when:
+      and:
+        - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
+        - equal: [ nightly-playwright-test, << pipeline.schedule.name >> ]
     jobs:
-      - build-and-deploy-job:
-          name: basil-nightly
-          study_key: basil
-      - build-and-deploy-job:
-          name: osteo-nightly
-          study_key: osteo
-      - build-and-deploy-job:
-          name: angio-nightly
-          study_key: angio
-      - build-and-deploy-job:
-          name: brain-nightly
-          study_key: brain
-      - build-and-deploy-job:
-          name: mbc-nightly
-          study_key: mbc
-      - build-and-deploy-job:
-          name: testboston-nightly
-          study_key: testboston
-      - build-and-deploy-job:
-          name: mpc-nightly
-          study_key: mpc
-      - build-and-deploy-job:
-          name: atcp-nightly
-          study_key: atcp
-      - build-and-deploy-job:
-          name: rarex-nightly
-          study_key: rarex
-      - build-and-deploy-job:
-          name: rgp-nightly
-          study_key: rgp
-      - build-and-deploy-job:
-          name: esc-nightly
-          study_key: esc
-      - build-and-deploy-job:
-          name: prion-nightly
-          study_key: prion
-      - build-and-deploy-job:
-          name: cgc-nightly
-          study_key: cgc
-      - build-and-deploy-job:
-          name: circadia-nightly
-          study_key: circadia
-      - build-and-deploy-job:
-          name: pancan-nightly
-          study_key: pancan
-      - build-and-deploy-job:
-          name: singular-nightly
-          study_key: singular
-      - build-and-deploy-job:
-          name: brugada-nightly
-          study_key: brugada
-      - build-and-deploy-job:
-          name: lms-nightly
-          study_key: lms
-      - build-and-deploy-job:
-          name: fon-nightly
-          study_key: fon
+      - build-playwright-test-job:
+          <<: *filter-develop-branch
+          env: << pipeline.parameters.deploy_env >>
+      - run-playwright-test-job:
+          <<: *filter-develop-branch
+          env: << pipeline.parameters.deploy_env >>
+          requires:
+            - build-playwright-test-job

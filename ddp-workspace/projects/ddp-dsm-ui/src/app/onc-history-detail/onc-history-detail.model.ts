@@ -52,7 +52,6 @@ export class OncHistoryDetail {
               public additionalValuesJson: {}, public tissues: Array<Tissue>,
               public tissueProblemOption: string, public destructionPolicy: string, public unableObtainTissue: boolean,
               public numberOfRequests, public deleted: boolean = false) {
-
   }
 
   static parse(json: OncHistoryDetailsInterface): OncHistoryDetail {
