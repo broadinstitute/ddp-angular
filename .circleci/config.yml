@@ -18,6 +18,14 @@ references:
   study_guids: &study_guids
     "basil NA CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc circadia cmi-pancan singular brugada cmi-lms fon"
 
+  # Job runs for develop branch only
+  filter-develop-branch: &filter-develop-branch
+    filters:
+      tags:
+        ignore: /.*/
+      branches:
+        only: develop
+
 # Container for all the builds
 executors:
   build-executor:
@@ -33,14 +41,6 @@ executors:
     working_directory: *playwright_path
     environment:
       NODE_ENV: development # Needed if playwright is in devDependencies
-
-  # Job runs for main branch only
-  filter-develop-branch: &filter-develop-branch
-    filters:
-      tags:
-        ignore: /.*/
-      branches:
-        only: develop
 
 commands:
   app-build-and-store:
