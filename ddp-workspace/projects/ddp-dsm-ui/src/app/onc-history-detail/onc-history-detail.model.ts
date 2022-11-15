@@ -14,22 +14,22 @@ interface OncHistoryDetailsInterface {
   request: string;
   tissues: Array<Tissue>;
   unableObtainTissue: boolean;
-  participantId: string; 
-  oncHistoryDetailId: string; 
-  medicalRecordId: string; 
-  typePx: string; 
-  histology: string; 
-  accessionNumber: string; 
-  facility: string; 
-  phone: string; 
-  fax: string; 
-  notes: string; 
-  tissueProblemOption: string; 
-  destructionPolicy: string; 
+  participantId: string;
+  oncHistoryDetailId: string;
+  medicalRecordId: string;
+  typePx: string;
+  histology: string;
+  accessionNumber: string;
+  facility: string;
+  phone: string;
+  fax: string;
+  notes: string;
+  tissueProblemOption: string;
+  destructionPolicy: string;
   faxSentBy: string;
   faxSent2By: string;
   faxSent3By: string;
-  tissueReceived: string; 
+  tissueReceived: string;
   gender: string;
   datePx: string;
   numberOfRequests: any;
@@ -52,7 +52,6 @@ export class OncHistoryDetail {
               public additionalValuesJson: {}, public tissues: Array<Tissue>,
               public tissueProblemOption: string, public destructionPolicy: string, public unableObtainTissue: boolean,
               public numberOfRequests, public deleted: boolean = false) {
-    
   }
 
   static parse(json: OncHistoryDetailsInterface): OncHistoryDetail {
