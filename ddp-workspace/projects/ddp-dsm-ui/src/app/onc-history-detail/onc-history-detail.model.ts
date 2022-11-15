@@ -1,5 +1,40 @@
 import { Tissue } from '../tissue/tissue.model';
 
+
+interface OncHistoryDetailsInterface {
+  deleted: boolean;
+  dynamicFields: string;
+  faxConfirmed: string;
+  faxConfirmed2: string;
+  faxConfirmed3: string;
+  faxSent: string;
+  faxSent2: string;
+  faxSent3: string;
+  locationPx: string;
+  request: string;
+  tissues: Array<Tissue>;
+  unableObtainTissue: boolean;
+  participantId: string; 
+  oncHistoryDetailId: string; 
+  medicalRecordId: string; 
+  typePx: string; 
+  histology: string; 
+  accessionNumber: string; 
+  facility: string; 
+  phone: string; 
+  fax: string; 
+  notes: string; 
+  tissueProblemOption: string; 
+  destructionPolicy: string; 
+  faxSentBy: string;
+  faxSent2By: string;
+  faxSent3By: string;
+  tissueReceived: string; 
+  gender: string;
+  datePx: string;
+  numberOfRequests: any;
+}
+
 export class OncHistoryDetail {
   changed = false;
   selected = false;
@@ -17,39 +52,10 @@ export class OncHistoryDetail {
               public additionalValuesJson: {}, public tissues: Array<Tissue>,
               public tissueProblemOption: string, public destructionPolicy: string, public unableObtainTissue: boolean,
               public numberOfRequests, public deleted: boolean = false) {
-    this.participantId = participantId;
-    this.oncHistoryDetailId = oncHistoryDetailId;
-    this.medicalRecordId = medicalRecordId;
-    this.datePx = datePx;
-    this.typePx = typePx;
-    this.locationPx = locationPx;
-    this.histology = histology;
-    this.accessionNumber = accessionNumber;
-    this.facility = facility;
-    this.phone = phone;
-    this.fax = fax;
-    this.notes = notes;
-    this.request = request;
-    this.faxSent = faxSent;
-    this.faxSentBy = faxSentBy;
-    this.faxConfirmed = faxConfirmed;
-    this.faxSent2 = faxSent2;
-    this.faxSent2By = faxSent2By;
-    this.faxConfirmed2 = faxConfirmed2;
-    this.faxSent3 = faxSent3;
-    this.faxSent3By = faxSent3By;
-    this.faxConfirmed3 = faxConfirmed3;
-    this.tissueReceived = tissueReceived;
-    this.gender = gender;
-    this.additionalValuesJson = additionalValuesJson;
-    this.tissues = tissues;
-    this.tissueProblemOption = tissueProblemOption;
-    this.destructionPolicy = destructionPolicy;
-    this.unableObtainTissue = unableObtainTissue;
-    this.deleted = deleted;
+    
   }
 
-  static parse(json): OncHistoryDetail {
+  static parse(json: OncHistoryDetailsInterface): OncHistoryDetail {
     const tissues: Array<Tissue> = [];
     const jsonData = json.tissues;
     if (jsonData != null) {
@@ -69,9 +75,9 @@ export class OncHistoryDetail {
     return new OncHistoryDetail(
       json.participantId, json.oncHistoryDetailId, json.medicalRecordId, json.datePx, json.typePx, json.locationPx,
       json.histology, json.accessionNumber, json.facility, json.phone, json.fax, json.notes, json.request,
-      json.faxSent, json.tFaxSentBy, json.tFaxConfirmed,
-      json.tFaxSent2, json.tFaxSent2By, json.tFaxConfirmed2,
-      json.tFaxSent3, json.tFaxSent3By, json.tFaxConfirmed3,
+      json.faxSent, json.faxSentBy, json.faxConfirmed,
+      json.faxSent2, json.faxSent2By, json.faxConfirmed2,
+      json.faxSent3, json.faxSent3By, json.faxConfirmed3,
       json.tissueReceived, json.gender, additionalValuesJson, tissues,
       json.tissueProblemOption, json.destructionPolicy, json.unableObtainTissue, json.numberOfRequests, json.deleted
     );
