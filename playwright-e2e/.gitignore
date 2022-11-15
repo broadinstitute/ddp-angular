@@ -4,8 +4,10 @@ node_modules/
 **/playwright-report/
 **/playwright/.cache/
 build/
+junit/results/
 
 **/.env
+**/.env.dsm
 
 **/.idea/
 **/*.iml
