@@ -98,6 +98,10 @@ export class UploadComponent implements OnInit {
     window.scrollTo(0, 0);
   }
 
+  public get atLeastOneParticipantSelected(): boolean {
+    return this.duplicateParticipants.some((pt: UploadParticipant) => pt?.selected);
+  }
+
   getPossibleKitType(): void {
     if (this.isSelectedRealm()) {
       this.loading = true;
