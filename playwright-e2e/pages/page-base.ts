@@ -11,7 +11,13 @@ export default abstract class PageBase implements PageInterface {
   }
 
   abstract waitForReady(): Promise<void>;
-  abstract getBackButton(): Locator;
+
+  /**
+   * Return "Back" button locator
+   */
+  getBackButton(): Locator {
+    return this.page.locator('button', { hasText: 'Back' });
+  }
 
   /**
    * Returns "Log In" button locator
@@ -38,7 +44,7 @@ export default abstract class PageBase implements PageInterface {
    * Returns "Submit" button locator
    */
   getSubmitButton(): Locator {
-    return this.page.locator('button', { hasText: 'Submit' });
+    return this.page.locator('button:visible', { hasText: 'Submit' });
   }
 
   /**
@@ -86,8 +92,9 @@ export default abstract class PageBase implements PageInterface {
   }
 
   /** Click "Submit" button */
-  async submit(): Promise<void> {
-    await this.clickAndWaitForNav(this.getSubmitButton(), { waitForNav: true });
+  async submit(opts: { waitForNav?: boolean } = {}): Promise<void> {
+    const { waitForNav = true } = opts;
+    await this.clickAndWaitForNav(this.getSubmitButton(), { waitForNav });
   }
 
   /** Click "Agree" button */

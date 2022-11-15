@@ -10,6 +10,10 @@ import { generateRandomPhoneNum } from './faker-utils';
 
 const { SITE_PASSWORD } = process.env;
 
+export async function waitForNoSpinner(page: Page): Promise<void> {
+  await page.locator('mat-spinner[role="progressbar"]').waitFor({ state: 'hidden', timeout: 30 * 1000 });
+}
+
 export async function waitUntilRemoved(locator: Locator): Promise<void> {
   expect(await locator.count()).toHaveLength(0);
 }
