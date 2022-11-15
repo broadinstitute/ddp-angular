@@ -85,7 +85,7 @@ export class MailingListComponent implements OnInit {
           jsonData = data;
           jsonData.forEach((val) => {
             const contact = MailingListContact.parse(val);
-            this.getPossibleInfoColumns(contact);
+            // this.getPossibleInfoColumns(contact);
             this.contactList.push(contact);
           });
           // console.info(`${this.contactList.length} contacts received: ${JSON.stringify(data, null, 2)}`);

@@ -15,7 +15,7 @@ export async function fillEmailPassword(
   const passwordInput = page.locator('input[type="password"]');
   await passwordInput.fill(password);
 
-  const navPromise = waitForNavigation ? page.waitForNavigation({ waitUntil: 'domcontentloaded' }) : Promise.resolve();
+  const navPromise = waitForNavigation ? page.waitForNavigation({ waitUntil: 'load' }) : Promise.resolve();
   await Promise.all([
     page.locator(NavSelectors.LoadingSpinner).first().waitFor({ state: 'visible' }),
     navPromise,

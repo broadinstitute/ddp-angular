@@ -271,7 +271,7 @@
             <!--profile values or dsm values-->
             <ng-container *ngFor="let alias of getKeys()">
               <td *ngFor="let col of selectedColumns[alias]"
-                  (click)="openParticipant(pt, alias)">
+                  (click)="openParticipant(pt, alias)" class="breakWords">
                 <ng-container *ngIf="col.participantColumn.esData && pt.proxyData != null">
                   <ng-container *ngIf="col.participantColumn.tableAlias === 'proxy'">
                     <ul class="NO-PADDING-START">
@@ -469,12 +469,12 @@
                                           </ul>
                                           <hr *ngIf="i !== answers.length-1" style="border-color: lightgray">
                                         </div>
+                                        <div
+                                          *ngIf="getUtilStatic().getOptionDetails(questionAnswer.optionDetails, answer) as oDetail">
+                                          {{oDetail.details}}
+                                          <hr *ngIf="i !== answers.length-1" style="border-color: lightgray">
+                                        </div>
                                       </ng-container>
-                                      <div
-                                        *ngIf="getUtilStatic().getOptionDetails(questionAnswer.optionDetails, answer) as oDetail">
-                                        {{oDetail.details}}
-                                        <hr *ngIf="i !== answers.length-1" style="border-color: lightgray">
-                                      </div>
                                     </div>
                                   </div>
                                 </ng-container>

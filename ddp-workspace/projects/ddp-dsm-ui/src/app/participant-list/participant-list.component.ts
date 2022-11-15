@@ -133,6 +133,7 @@ export class ParticipantListComponent implements OnInit {
   selectAll = false;
   selectAllColumnsLabel = 'Select all';
   selectedPatients: string[] = [];
+  searchForRGP: boolean = false;
 
   constructor(private role: RoleService, private dsmService: DSMService, private compService: ComponentService,
                private router: Router, private auth: Auth, private route: ActivatedRoute, private util: Utils,
@@ -1020,12 +1021,18 @@ export class ParticipantListComponent implements OnInit {
               }
             } else {
               // if selected columns are not set, set to default columns
+              const selectedStudy = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
               if ((this.selectedColumns['data'] && this.selectedColumns['data'].length === 0)
                 || (!this.selectedColumns['data'] && this.isSelectedColumnsNotEmpty())) {
-                this.dataSources.forEach((value: string, key: string) => {
-                  this.selectedColumns[key] = [];
-                });
-                this.refillWithDefaultColumns();
+                if(selectedStudy !== 'RGP') {
+                  this.dataSources.forEach((value: string, key: string) => {
+                    this.selectedColumns[key] = [];
+                  });
+                  this.refillWithDefaultColumns();
+                }
+                if(selectedStudy === 'RGP' && !this.searchForRGP) {
+                  this.refillWithDefaultColumns();
+                }
               }
             }
             const date = new Date();
@@ -1436,6 +1443,10 @@ export class ParticipantListComponent implements OnInit {
       this.deselectQuickFilters();
       // TODO - can be changed later to all using the same - after all studies are migrated!
       // check if it was a tableAlias data filter -> filter client side
+      const selectedStudy = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+      if(selectedStudy === 'RGP') {
+        this.searchForRGP = true;
+      }
       this.selectFilter(null);
     }
   }
