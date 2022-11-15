@@ -7,7 +7,7 @@ build/
 junit/results/
 
 **/.env
-**/.env.dsm
+**/**/.env.dsm
 
 **/.idea/
 **/*.iml
