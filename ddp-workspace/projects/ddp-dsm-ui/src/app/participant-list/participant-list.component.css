@@ -4,9 +4,8 @@
   margin-bottom: 0;
 }
 
-td.breakWords {
+td div {
   white-space: normal;
-  overflow-wrap: break-word;
 }
 
 .NO-PADDING-START{

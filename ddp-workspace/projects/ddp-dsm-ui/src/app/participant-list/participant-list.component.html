@@ -271,7 +271,7 @@
             <!--profile values or dsm values-->
             <ng-container *ngFor="let alias of getKeys()">
               <td *ngFor="let col of selectedColumns[alias]"
-                  (click)="openParticipant(pt, alias)" class="breakWords">
+                  (click)="openParticipant(pt, alias)" >
                 <ng-container *ngIf="col.participantColumn.esData && pt.proxyData != null">
                   <ng-container *ngIf="col.participantColumn.tableAlias === 'proxy'">
                     <ul class="NO-PADDING-START">
