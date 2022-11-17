@@ -502,13 +502,13 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           const tissues: Array<Tissue> = [];
           tissues.push(new Tissue(null, oncHis.oncHistoryDetailId, null, null, null, null,
             null, null, null, null, null, null, null, null
-            , null, null, null, null, null, null, null, null, null,
+            , null, null, null, null, null, null, null, null, null, null,
             null, null, null, null, null, null, null, false));
           oncHis.tissues = tissues;
         } else if (oncHis.tissues.length < 1) {
           oncHis.tissues.push(new Tissue(null, oncHis.oncHistoryDetailId, null, null, null, null,
             null, null, null, null, null, null, null, null, null, null
-            , null, null, null, null, null, null, null,
+            , null, null, null, null, null, null, null, null,
             null, null, null, null, null, null, null, false));
         }
       }
@@ -516,7 +516,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         const tissues: Array<Tissue> = [];
         tissues.push(new Tissue(null, null, null, null, null, null, null,
           null, null, null, null, null, null, null, null, null,
-          null, null, null, null, null, null, null,
+          null, null, null, null, null, null, null, null,
           null, null, null, null, null, null, null, false));
 
         const oncHis = new OncHistoryDetail(this.participant.participant.participantId,

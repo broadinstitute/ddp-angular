@@ -133,7 +133,7 @@ export class ParticipantListComponent implements OnInit {
   selectAll = false;
   selectAllColumnsLabel = 'Select all';
   selectedPatients: string[] = [];
-  searchForRGP: boolean = false;
+  searchForRGP = false;
 
   constructor(private role: RoleService, private dsmService: DSMService, private compService: ComponentService,
                private router: Router, private auth: Auth, private route: ActivatedRoute, private util: Utils,
