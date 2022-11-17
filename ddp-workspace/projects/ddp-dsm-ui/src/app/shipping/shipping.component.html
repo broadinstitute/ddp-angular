@@ -69,7 +69,7 @@
 <mat-checkbox color="primary" disableRipple [checked]="allSelected" (change)="allSelected = $event.checked; allChecked()"></mat-checkbox></th>
           <th>
             <!--            shortID-->
-            <mfDefaultSorter by="collaboratorParticipantId">Short ID</mfDefaultSorter>
+            <mfDefaultSorter by="bspCollaboratorParticipantId">Short ID</mfDefaultSorter>
           </th>
           <th *ngIf="(shippingPage === UPLOADED || shippingPage === QUEUE || shippingPage === ERROR) && showPreferredLanguage()">
             <!--            preferred Language-->
