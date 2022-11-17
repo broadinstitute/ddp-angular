@@ -5,7 +5,7 @@ export enum SearchFieldLabel {
   ShortId = 'Short ID'
 }
 
-export default class ParticipantsPage {
+export default class ParticipantList {
   private readonly page: Page;
 
   constructor(page: Page) {

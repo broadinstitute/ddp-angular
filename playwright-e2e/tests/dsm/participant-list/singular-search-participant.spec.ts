@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
 import { study } from 'pages/dsm/navbar';
 import Select from 'lib/widget/select';
-import ParticipantsPage, { SearchFieldLabel } from 'pages/dsm/participants/participants-page';
+import ParticipantsPage, { SearchFieldLabel } from 'pages/dsm/participant-list/participant-list';
 import Table from 'lib/widget/table';
 
 test.describe('Singular Study in DSM', () => {
