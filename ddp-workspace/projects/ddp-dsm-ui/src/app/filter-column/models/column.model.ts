@@ -118,6 +118,7 @@ export class ParticipantColumn {
 
   // kit
   public static COLLABORATOR_SAMPLE = new ParticipantColumn('Normal Collaborator Sample ID', 'bspCollaboratorSampleId', 'k');
+  public static COLLABORATOR_PARTICIPANT_ID = new ParticipantColumn('Collaborator Participant ID', 'bspCollaboratorParticipantId', 'k');
   public static SAMPLE_TYPE = new ParticipantColumn('Sample Type', 'kitTypeName', 'k');
   public static SAMPLE_SENT = new ParticipantColumn('Sample Sent', 'scanDate', 'k');
   public static SAMPLE_RECEIVED = new ParticipantColumn('Sample Received', 'receiveDate', 'k');
