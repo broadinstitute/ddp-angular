@@ -1,16 +1,18 @@
-import { Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
+import Checkbox from 'lib/widget/checkbox';
 
 export default class Question {
   private readonly page: Page;
   private readonly locator: Locator;
+  private readonly rootLocator: Locator | Page;
 
   constructor(page: Page, opts: { prompt: string | RegExp; parentSelector?: Locator }) {
     const { prompt, parentSelector } = opts;
     this.page = page;
-    const rootLocator = parentSelector ? parentSelector : this.page.locator('ddp-activity-question');
+    this.rootLocator = parentSelector ? parentSelector : this.page.locator('ddp-activity-question');
     // Look for text somewhere inside element. Text matching is case-insensitive and searches for a substring or regex.
     // Caution: If text contains a punctuation colon or/and single quote, find is likely to fail.
-    this.locator = rootLocator.filter({ hasText: prompt });
+    this.locator = this.rootLocator.filter({ hasText: prompt });
   }
 
   toLocator(): Locator {
@@ -44,7 +46,7 @@ export default class Question {
    * <br> Tag name: input (text or number)
    */
   input(): Locator {
-    return this.toLocator().locator('input');
+    return this.toLocator().locator('mat-form-field').locator('input');
   }
 
   /**
@@ -69,6 +71,13 @@ export default class Question {
     return this.toLocator()
       .locator('mat-checkbox')
       .filter({ has: this.page.locator('label', { hasText: value }) });
+  }
+
+  async checkAndFillInInput(value: string, opts: { inputText?: string } = {}): Promise<void> {
+    const { inputText } = opts;
+    const checkbox = new Checkbox(this.page, { label: value, root: this.toLocator() });
+    await checkbox.check();
+    await checkbox.fill(inputText);
   }
 
   /**
@@ -104,6 +113,7 @@ export default class Question {
     const isChecked = await Question.isChecked(loc);
     if (!isChecked) {
       await loc.click();
+      await expect(loc).toHaveClass(/checkbox-checked|radio-checked/);
     }
   }
 
@@ -118,6 +128,7 @@ export default class Question {
     const isChecked = await Question.isChecked(loc);
     if (isChecked) {
       await loc.click();
+      await expect(loc).not.toHaveClass(/checkbox-checked|radio-checked/);
     }
   }
 

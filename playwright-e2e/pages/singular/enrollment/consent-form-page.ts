@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 import { SingularPage } from 'pages/singular/singular-page';
-import Question from 'lib/component/Question';
-import Input from 'lib/widget/Input';
+import Question from 'lib/component/question';
+import Input from 'lib/widget/input';
 
 export default class ConsentFormPage extends SingularPage {
   constructor(page: Page) {
@@ -45,20 +45,6 @@ export default class ConsentFormPage extends SingularPage {
    */
   authorizationSignature(): Input {
     return new Input(this.page, { ddpTestID: 'answer:CONSENT_SELF_SIGNATURE_SUBJECT' });
-  }
-
-  /**
-   * <br> Question: Your Date of Birth
-   * <br> Type: Input
-   * @param month
-   * @param date
-   * @param year
-   */
-  async dateOfBirth(month: number | string, date: number | string, year: number | string): Promise<void> {
-    const dob = new Question(this.page, { prompt: 'Date of Birth' });
-    await dob.date().locator('input[data-placeholder="MM"]').fill(month.toString());
-    await dob.date().locator('input[data-placeholder="DD"]').fill(date.toString());
-    await dob.date().locator('input[data-placeholder="YYYY"]').fill(year.toString());
   }
 
   /**

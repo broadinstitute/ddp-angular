@@ -65,9 +65,9 @@ const testConfig: PlaywrightTestConfig = {
     // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: process.env.CI ? 'on-first-retry' : 'retain-on-failure',
+    trace: 'on', //process.env.CI ? 'on-first-retry' : 'retain-on-failure',
     screenshot: 'only-on-failure',
-    video: process.env.CI ? 'on-first-retry' : 'retain-on-failure', // Limit load on CI system because trace and video add load
+    video: 'on', // process.env.CI ? 'on-first-retry' : 'retain-on-failure', // Limit load on CI system because trace and video add load
 
     userAgent:
       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) ' +
@@ -88,7 +88,7 @@ const testConfig: PlaywrightTestConfig = {
       use: {
         browserName: 'chromium',
         launchOptions: {
-          slowMo: 100,
+          slowMo: 200,
           // Account for minor difference in text rendering and resolution between headless and headed mode
           ignoreDefaultArgs: ['--hide-scrollbars']
         }

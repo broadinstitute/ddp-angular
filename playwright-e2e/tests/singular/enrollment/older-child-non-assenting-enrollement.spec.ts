@@ -57,11 +57,7 @@ test.describe('Enroll my child', () => {
     await assertActivityProgress(page, 'Page 3 of 3');
     await consentForm.childFirstName().fill(user.thirdChild.firstName);
     await consentForm.childLastName().fill(childLastName);
-    await consentForm.dateOfBirth(
-      user.thirdChild.birthDate.MM,
-      user.thirdChild.birthDate.DD,
-      user.thirdChild.birthDate.YYYY
-    );
+    await consentForm.dateOfBirth(user.thirdChild.birthDate.MM, user.thirdChild.birthDate.DD, user.thirdChild.birthDate.YYYY);
     await consentForm.iHaveExplainedToMyChild().check();
     await consentForm.toKnowSecondaryFinding().check('I want to know.');
     await consentForm.parentGuardianSignature().fill(`${user.patient.firstName} ${user.patient.lastName}`);
@@ -139,9 +135,7 @@ test.describe('Enroll my child', () => {
     await childSurveyPage
       .aboutYourChildHealth()
       .check('My child had at least 5 sick visits to the doctor (not routine check-ups)');
-    await childSurveyPage
-      .aboutYourChildHealth()
-      .check('My child has missed 7 days or more from work or school due to illness');
+    await childSurveyPage.aboutYourChildHealth().check('My child has missed 7 days or more from work or school due to illness');
     await childSurveyPage.describePhysicalHealth().check('Somewhat healthy');
     await childSurveyPage.familyDescribePhysicalHealth().check('Somewhat healthy');
     await childSurveyPage.hasAnyConditions().check('Eating disorder');
@@ -149,9 +143,7 @@ test.describe('Enroll my child', () => {
     await childSurveyPage.hadNeurodevelopmentalNeurocognitiveEvaluation().check('Yes');
     await childSurveyPage.hasDiagnosedWithAnyFollowings().check("I don't know");
     await childSurveyPage.hasReceivedEducationSupportThroughSchool().check('IEP');
-    await childSurveyPage
-      .hasReceivedSupportOrTreatmentForBehavioralNeurodevelopmentalPsychologicalProblem()
-      .check('Yes');
+    await childSurveyPage.hasReceivedSupportOrTreatmentForBehavioralNeurodevelopmentalPsychologicalProblem().check('Yes');
     await childSurveyPage.submit();
 
     // Assert contents in My Dashboard table

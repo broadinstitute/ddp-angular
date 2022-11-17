@@ -4,7 +4,7 @@ import { SingularPage } from 'pages/singular/singular-page';
 import Checkbox from 'lib/widget/checkbox';
 
 import path from 'path';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 import Select from 'lib/widget/select';
 import * as user from 'data/fake-user.json';
 

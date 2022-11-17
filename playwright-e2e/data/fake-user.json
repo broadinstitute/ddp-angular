@@ -1,8 +1,9 @@
 {
   "patient": {
     "firstName": "E2E",
-    "middleName": "I",
+    "middleName": "Tester",
     "lastName": "Playwright",
+    "fullName": "E2E Tester Playwright",
     "birthDate": {
       "MM": "10",
       "DD": "02",
@@ -33,6 +34,7 @@
     "firstName": "E2E-Child",
     "middleName": "Junior",
     "lastName": "Playwright",
+    "fullName": "E2E-Child Junior Playwright",
     "birthDate": {
       "MM": "12",
       "DD": "30",
@@ -55,6 +57,7 @@
   "adultDependent": {
     "firstName": "E2E-Adult-Dependent",
     "lastName": "Playwright",
+    "fullName": "E2E-Adult-Dependent Playwright",
     "birthDate": {
       "MM": "05",
       "DD": "01",
@@ -78,6 +81,7 @@
     "firstName": "E2E-second-Child",
     "middleName": "Junior",
     "lastName": "Playwright",
+    "fullName": "E2E-Second-Child Junior Playwright",
     "birthDate": {
       "MM": "07",
       "DD": "20",
@@ -101,6 +105,7 @@
     "firstName": "E2E-Child",
     "middleName": "Junior",
     "lastName": "Playwright",
+    "fullName": "E2E-Third-Child Junior Playwright",
     "birthDate": {
       "MM": "07",
       "DD": "20",

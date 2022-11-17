@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test';
-import { fillEmailPassword } from 'authentication/auth-singular';
+import { fillInEmailPassword } from './auth-base';
 
 const { DSM_USER_EMAIL, DSM_USER_PASSWORD, DSM_BASE_URL } = process.env;
 
@@ -12,5 +12,5 @@ export async function login(page: Page, opts: { email?: string; password?: strin
     throw Error('Invalid parameter: DSM base URL email is undefined or null.');
   }
   await page.goto(DSM_BASE_URL);
-  await fillEmailPassword(page, { email, password, waitForNavigation: false });
+  await fillInEmailPassword(page, { email, password, waitForNavigation: false });
 }

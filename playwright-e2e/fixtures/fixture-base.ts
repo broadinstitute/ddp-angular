@@ -16,9 +16,7 @@ const REQUEST_EXCLUDES = ['google-analytics'];
 export const fixtureBase = base.extend({
   page: async ({ page }, use) => {
     await page.route('**/*', (route) => {
-      return REQUEST_EXCLUDES.some((urlPart) => route.request().url().includes(urlPart))
-        ? route.abort()
-        : route.continue();
+      return REQUEST_EXCLUDES.some((urlPart) => route.request().url().includes(urlPart)) ? route.abort() : route.continue();
     });
     await use(page);
   }

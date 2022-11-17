@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 import { SingularPage } from 'pages/singular/singular-page';
-import Question from 'lib/component/Question';
-import Input from 'lib/widget/Input';
+import Question from 'lib/component/question';
+import Input from 'lib/widget/input';
 import Select from 'lib/widget/select';
 
 export default class ChildSurveyPage extends SingularPage {
@@ -122,8 +122,7 @@ export default class ChildSurveyPage extends SingularPage {
   hadArrhythmiaComplications(): Question {
     return new Question(this.page, {
       prompt:
-        'If your child has had arrhythmia (heart rhythm) complications,' +
-        ' please select how your child was medically treated.'
+        'If your child has had arrhythmia (heart rhythm) complications,' + ' please select how your child was medically treated.'
     });
   }
 

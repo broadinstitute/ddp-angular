@@ -109,10 +109,7 @@ test.describe('Enrol an adult dependent', () => {
     // Do not need to upload medical record file. Click Next button to continue without upload.
     await medicalRecordReleaseForm.next({ waitForNav: true });
 
-    await assertActivityHeader(
-      page,
-      'Please complete this survey so that we may learn more about your medical background.'
-    );
+    await assertActivityHeader(page, 'Please complete this survey so that we may learn more about your medical background.');
 
     // Patient Survey
     const patientSurveyPage = new PatientSurveyPage(page);

@@ -25,10 +25,7 @@ async function getEnrollMyAdultDependentPage(page: Page) {
 
 test.describe('Adult Dependent visual tests', () => {
   // whoHasVentricleHeartDefect validation: Select `someone else` should trigger an error message
-  test('select a "Someone else" option for adult dependent @visual @enrollment @singular', async ({
-    page,
-    homePage
-  }) => {
+  test('select a "Someone else" option for adult dependent @visual @enrollment @singular', async ({ page, homePage }) => {
     await homePage.signUp();
     await signUp(page);
     const enrollMyAdultDependentPage = await getEnrollMyAdultDependentPage(page);

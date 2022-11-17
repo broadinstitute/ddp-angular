@@ -1,6 +1,6 @@
 import { expect, Page } from '@playwright/test';
-import Question from 'lib/component/Question';
-import Input from 'lib/widget/Input';
+import Question from 'lib/component/question';
+import Input from 'lib/widget/input';
 import { SingularPage } from 'pages/singular/singular-page';
 
 export default class EnrollMyAdultDependentPage extends SingularPage {

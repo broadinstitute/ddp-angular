@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 import Card from 'lib/widget/card';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 import { SingularPage } from 'pages/singular/singular-page';
 
 export default class AboutMyAdultDependentPage extends SingularPage {
@@ -17,9 +17,6 @@ export default class AboutMyAdultDependentPage extends SingularPage {
   }
 
   suggestedAddress(): Card {
-    return new Card(
-      this.page,
-      'We have checked your address entry and have suggested changes that could help ensure delivery'
-    );
+    return new Card(this.page, 'We have checked your address entry and have suggested changes that could help ensure delivery');
   }
 }

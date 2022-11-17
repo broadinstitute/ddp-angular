@@ -106,10 +106,7 @@ test.describe('Enroll myself as adult', () => {
     await medicalRecordReleaseForm.uploadFile(`data/upload/BroadInstitute_Wikipedia.jpg`);
     await medicalRecordReleaseForm.next({ waitForNav: true });
 
-    await assertActivityHeader(
-      page,
-      'Please complete this survey so that we may learn more about your medical background.'
-    );
+    await assertActivityHeader(page, 'Please complete this survey so that we may learn more about your medical background.');
 
     // Patient Survey
     const patientSurveyPage = new PatientSurveyPage(page);

@@ -1,26 +1,10 @@
 import { expect, Locator, Page } from '@playwright/test';
-import TextArea from 'lib/widget/textarea';
 import { AngioPageBase } from 'pages/angio/angio-page-base';
 import { waitForNoSpinner } from 'utils/test-utils';
-import { MONTH } from 'data/constants';
 import Question from 'lib/component/question';
+import Input from 'lib/widget/input';
 
-export enum WHERE {
-  HEAD = 'Head/Face/Neck (not scalp)',
-  SCALP = 'Scalp',
-  BREAST = 'Breast',
-  APR = 'Heart',
-  MAY = 'May',
-  JUN = 'June',
-  JUL = 'July',
-  AUG = 'August',
-  SEP = 'September',
-  OCT = 'October',
-  NOV = 'November',
-  DEC = 'December'
-}
-
-export default class AboutYouPage extends AngioPageBase {
+export default class ResearchConsentPage extends AngioPageBase {
   private readonly pageTitle: Locator;
 
   constructor(page: Page) {
@@ -30,42 +14,40 @@ export default class AboutYouPage extends AngioPageBase {
 
   async waitForReady(): Promise<void> {
     await expect(this.pageTitle).toBeVisible({ visible: true });
-    await expect(this.pageTitle).toHaveText('About you');
+    await expect(this.pageTitle).toHaveText('Research Consent Form');
     await waitForNoSpinner(this.page);
   }
 
   /**
-   * Question: When were you first diagnosed with angiosarcoma?
-   * Type: Select
-   *
-   * @param month
-   * @param year
-   *
+   * Question: You can work with me to arrange a sample of blood to be drawn at my physician’s office, local clinic, or nearby lab facility.
+   * Type: Radiobutton
    */
-  async whenDiagnosedWithAngiosarcoma(month: MONTH, year: string): Promise<void> {
-    const question = new Question(this.page, { prompt: 'When were you first diagnosed with angiosarcoma?' });
-    await question.select('month').selectOption({ label: month });
-    await question.select('year').selectOption({ label: year });
-  }
-
-  /**
-   * <br> Question: When you were first diagnosed with angiosarcoma, where in your body was it found (select all that apply)?
-   * <br> Type: Checkbox
-   */
-  async whereFoundInBody(where: string[], inputText?: string[]): Promise<void> {
-    const question = new Question(this.page, { prompt: 'where in your body was it found' });
-    await this.conditionalQuestionHelper(question, where, inputText);
-  }
-
-  /**
-   * <br> Question: Please select all of the places in your body that you have ever had angiosarcoma (select all that apply).
-   * <br> Type: Checkbox
-   */
-  async whereHadInBody(where: string[], inputText?: string[]): Promise<void> {
+  async agreeToArrangeSampleBloodDrawn(answer: string): Promise<void> {
     const question = new Question(this.page, {
-      prompt: 'select all of the places in your body that you have ever had angiosarcoma'
+      prompt: 'You can work with me to arrange a sample of blood to be drawn'
     });
-    await this.conditionalQuestionHelper(question, where, inputText);
+    await question.check(answer);
+  }
+
+  /**
+   * <br> Question: You can request my stored tissue samples from my physicians and the hospitals and other places where I received my care,
+   * perform (or collaborate with others to perform) gene tests on the samples, and store the samples until this research study is complete.
+   * <br> Type: Radiobutton
+   */
+  async canRequestMyStoredTissueSamples(answer: string): Promise<void> {
+    const question = new Question(this.page, {
+      prompt: 'You can request my stored tissue samples from my physicians and the hospitals'
+    });
+    await question.check(answer);
+  }
+
+  /**
+   * <br> Signature: Your Full Name
+   * <br> Type: Input
+   */
+  async fullName(answer: string): Promise<void> {
+    const input = new Input(this.page, { ddpTestID: 'answer:CONSENT_FULLNAME' });
+    await input.fill(answer);
   }
 
   /**
@@ -77,7 +59,7 @@ export default class AboutYouPage extends AngioPageBase {
     const question = new Question(this.page, {
       prompt: 'select all of the places in your body where you currently have angiosarcoma'
     });
-    await this.conditionalQuestionHelper(question, where, inputText);
+    await this.questionHelper(question, where, inputText);
   }
 
   /**
@@ -129,35 +111,25 @@ export default class AboutYouPage extends AngioPageBase {
    * <br> Question: In what year were you born?
    * <br> Type: Select
    */
-  async yearBorn(answer: string): Promise<string[]> {
+  async yearBorn(answer: string): Promise<void> {
     const question = new Question(this.page, {
       prompt: 'In what year were you born?'
     });
-    await question.select().focus();
-    return question.select().selectOption(answer);
+    await question.select().selectOption(answer);
   }
 
   /**
    * <br> Question: What country do you live in?
    * <br> Type: Select
    */
-  async country(answer: string): Promise<string[]> {
+  async country(answer: string): Promise<void> {
     const question = new Question(this.page, {
       prompt: 'What country do you live in?'
     });
-    return question.select().selectOption(answer);
+    await question.select().selectOption(answer);
   }
 
-  /**
-   * <br> Question: How did you hear about The Angiosarcoma Project?
-   * <br> Type: Textarea
-   */
-  async howDidYouHearAbout(answer: string): Promise<void> {
-    const question = new TextArea(this.page, { ddpTestID: 'answer:REFERRAL_SOURCE' });
-    await question.fill(answer);
-  }
-
-  protected async conditionalQuestionHelper(question: Question, checkboxes: string[], inputText?: string[]) {
+  private async questionHelper(question: Question, checkboxes: string[], inputText?: string[]) {
     for (let i = 0; i < checkboxes.length; i++) {
       if (inputText) {
         await question.checkAndFillInInput(checkboxes[i], { inputText: inputText[i] });

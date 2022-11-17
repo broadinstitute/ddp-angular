@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
-import Question from 'lib/component/Question';
-import Input from 'lib/widget/Input';
+import Question from 'lib/component/question';
+import Input from 'lib/widget/input';
 import { SingularPage } from 'pages/singular/singular-page';
 
 export default class ConsentFormForAdultDependentPage extends SingularPage {
@@ -40,7 +40,7 @@ export default class ConsentFormForAdultDependentPage extends SingularPage {
    * <br> Question: Your Dependent Date of Birth
    * <br> Type: Question
    */
-  dateOfBirth(): Question {
+  dependentDateOfBirth(): Question {
     return new Question(this.page, { prompt: 'Your Dependent Date of Birth' });
   }
 
@@ -71,7 +71,7 @@ export default class ConsentFormForAdultDependentPage extends SingularPage {
    * @param year
    */
   async fillDateOfBirth(month: number | string, date: number | string, year: number | string): Promise<void> {
-    const dob = this.dateOfBirth();
+    const dob = this.dependentDateOfBirth();
     await dob.date().locator('input[data-placeholder="MM"]').fill(month.toString());
     await dob.date().locator('input[data-placeholder="DD"]').fill(date.toString());
     await dob.date().locator('input[data-placeholder="YYYY"]').fill(year.toString());

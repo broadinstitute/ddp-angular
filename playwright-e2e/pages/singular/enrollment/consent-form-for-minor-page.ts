@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 import { SingularPage } from 'pages/singular/singular-page';
-import Question from 'lib/component/Question';
-import Input from 'lib/widget/Input';
+import Question from 'lib/component/question';
+import Input from 'lib/widget/input';
 import Checkbox from 'lib/widget/checkbox';
 
 export default class ConsentFormForMinorPage extends SingularPage {

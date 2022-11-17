@@ -1,5 +1,5 @@
 import { BrowserContext, Download, expect, Locator, Page } from '@playwright/test';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 import Checkbox from 'lib/widget/checkbox';
 import Radiobutton from 'lib/widget/radiobutton';
 import Select from 'lib/widget/select';
@@ -31,9 +31,7 @@ export async function downloadConsentPdf(context: BrowserContext, locator: Locat
   // Use axis to fetch pdf directly
   const downloadHref = await locator.getAttribute('href');
   expect(downloadHref).not.toBeNull();
-  expect(downloadHref).toMatch(
-    new RegExp(/https:\/\/storage\.googleapis\.com\/singular-(dev|staging)-assets\/consent_self.pdf/)
-  );
+  expect(downloadHref).toMatch(new RegExp(/https:\/\/storage\.googleapis\.com\/singular-(dev|staging)-assets\/consent_self.pdf/));
   const response = await axios.get(downloadHref as string);
   const fileData = Buffer.from(response.data);
   expect(fileData && fileData.length).toBeTruthy();

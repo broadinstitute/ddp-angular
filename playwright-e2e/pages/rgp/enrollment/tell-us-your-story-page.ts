@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { RgpPageBase } from 'pages/rgp/rgp-page-base';
-import Question from 'lib/component/Question';
+import Question from 'lib/component/question';
 import { waitForNoSpinner } from 'utils/test-utils';
 
 export enum WHO {

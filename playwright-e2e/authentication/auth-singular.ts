@@ -21,11 +21,7 @@ export async function createAccountWithEmailAlias(
   page: Page,
   opts: { email?: string; password?: string; waitForNavigation?: boolean } = {}
 ): Promise<string> {
-  const {
-    email = generateEmailAlias(SINGULAR_USER_EMAIL),
-    password = SINGULAR_USER_PASSWORD,
-    waitForNavigation
-  } = opts;
+  const { email = generateEmailAlias(SINGULAR_USER_EMAIL), password = SINGULAR_USER_PASSWORD, waitForNavigation } = opts;
   if (password == null) {
     throw Error('Invalid parameter: Password is undefined or null.');
   }

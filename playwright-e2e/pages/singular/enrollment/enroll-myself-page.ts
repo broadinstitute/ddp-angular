@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 import { SingularPage } from 'pages/singular/singular-page';
-import Question from 'lib/component/Question';
+import Question from 'lib/component/question';
 
 export default class EnrollMyselfPage extends SingularPage {
   readonly enrollMyself: Locator;
