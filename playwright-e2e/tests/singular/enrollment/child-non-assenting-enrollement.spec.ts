@@ -14,6 +14,8 @@ import { enterMailingAddress } from 'utils/test-utils';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
 import { generateUserName } from 'utils/faker-utils';
 
+const { SINGULAR_USER_EMAIL, SINGULAR_USER_PASSWORD } = process.env;
+
 test.describe('Enroll my child', () => {
   // Randomize last name
   const childLastName = generateUserName(user.secondChild.lastName);
@@ -28,7 +30,7 @@ test.describe('Enroll my child', () => {
 
     // Step 2
     // Enter email alias and password to create new account
-    await auth.createAccountWithEmailAlias(page);
+    await auth.createAccountWithEmailAlias(page, { email: SINGULAR_USER_EMAIL, password: SINGULAR_USER_PASSWORD });
 
     // Step 3
     // On "My Dashboard" page, click Enroll Mys Child button
@@ -56,11 +58,7 @@ test.describe('Enroll my child', () => {
     await assertActivityProgress(page, 'Page 3 of 3');
     await consentForm.childFirstName().fill(user.secondChild.firstName);
     await consentForm.childLastName().fill(childLastName);
-    await consentForm.dateOfBirth(
-      user.secondChild.birthDate.MM,
-      user.secondChild.birthDate.DD,
-      user.secondChild.birthDate.YYYY
-    );
+    await consentForm.dateOfBirth(user.secondChild.birthDate.MM, user.secondChild.birthDate.DD, user.secondChild.birthDate.YYYY);
     await consentForm.iHaveExplainedToMyChild().check();
     await consentForm.toKnowSecondaryFinding().check('I want to know.');
     await consentForm.parentGuardianSignature().fill(`${user.patient.firstName} ${user.patient.lastName}`);
@@ -137,9 +135,7 @@ test.describe('Enroll my child', () => {
     await childSurveyPage
       .aboutYourChildHealth()
       .check('My child had at least 5 sick visits to the doctor (not routine check-ups)');
-    await childSurveyPage
-      .aboutYourChildHealth()
-      .check('My child has missed 7 days or more from work or school due to illness');
+    await childSurveyPage.aboutYourChildHealth().check('My child has missed 7 days or more from work or school due to illness');
     await childSurveyPage.describePhysicalHealth().check('Somewhat healthy');
     await childSurveyPage.familyDescribePhysicalHealth().check('Somewhat healthy');
     await childSurveyPage.hasAnyConditions().check('Eating disorder');
@@ -147,9 +143,7 @@ test.describe('Enroll my child', () => {
     await childSurveyPage.hadNeurodevelopmentalNeurocognitiveEvaluation().check('Yes');
     await childSurveyPage.hasDiagnosedWithAnyFollowings().check("I don't know");
     await childSurveyPage.hasReceivedEducationSupportThroughSchool().check('IEP');
-    await childSurveyPage
-      .hasReceivedSupportOrTreatmentForBehavioralNeurodevelopmentalPsychologicalProblem()
-      .check('Yes');
+    await childSurveyPage.hasReceivedSupportOrTreatmentForBehavioralNeurodevelopmentalPsychologicalProblem().check('Yes');
     await childSurveyPage.submit();
 
     // Assert contents in My Dashboard table

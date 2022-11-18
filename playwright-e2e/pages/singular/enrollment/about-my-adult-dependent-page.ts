@@ -17,9 +17,6 @@ export default class AboutMyAdultDependentPage extends SingularPage {
   }
 
   suggestedAddress(): Card {
-    return new Card(
-      this.page,
-      'We have checked your address entry and have suggested changes that could help ensure delivery'
-    );
+    return new Card(this.page, 'We have checked your address entry and have suggested changes that could help ensure delivery');
   }
 }
