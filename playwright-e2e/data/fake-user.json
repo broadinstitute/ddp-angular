@@ -28,7 +28,22 @@
     "specialty": "PRIMARY_CARE",
     "phone": "6187247123",
     "hospital": "Mass General Hospital",
-    "address": "55 Fruit St, Boston, MA 02114"
+    "address": "55 Fruit Street, Boston, MA 02114",
+    "street": "55 Fruit Street",
+    "city": "Boston",
+    "state": "MA",
+    "zip": "02114"
+  },
+  "secondDoctor": {
+    "name": "John Stack",
+    "specialty": "PRIMARY_CARE",
+    "phone": "6187247123",
+    "hospital": "Brigham and Women's Hospital",
+    "address": "75 Francis Street, Boston, MA 02115",
+    "street": "75 Francis Street",
+    "city": "Boston",
+    "state": "MA",
+    "zip": "02115"
   },
   "child": {
     "firstName": "E2E-Child",

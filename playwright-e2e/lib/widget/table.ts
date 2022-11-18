@@ -8,11 +8,16 @@ export default class Table {
   private readonly rowCss: string;
   private readonly footerCss: string;
 
-  constructor(page: Page, opts: { classAttribute?: string } = {}) {
-    const { classAttribute } = opts;
+  constructor(page: Page, opts: { classAttribute?: string; ddpTestID?: string } = {}) {
+    const { classAttribute, ddpTestID } = opts;
     this.page = page;
-    this.tableCss = classAttribute ? `table${classAttribute}` : 'table';
-    this.headerCss = `${this.tableCss} thead [role="columnheader"], ${this.tableCss} th[class]`;
+    // prettier-ignore
+    this.tableCss = ddpTestID
+      ? `mat-table[data-ddp-test="${ddpTestID}"], table[data-ddp-test="${ddpTestID}"]`
+      : classAttribute
+        ? `table${classAttribute}`
+        : 'table';
+    this.headerCss = `${this.tableCss} [role="columnheader"], ${this.tableCss} th[class]`;
     this.rowCss = `${this.tableCss} tbody [role="row"], ${this.tableCss} tbody tr`;
     this.footerCss = `${this.tableCss} tfoot tr`;
   }

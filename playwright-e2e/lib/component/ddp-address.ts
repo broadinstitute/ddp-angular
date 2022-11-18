@@ -1,4 +1,5 @@
 import { Locator, Page } from '@playwright/test';
+import Card from 'lib/widget/card';
 import Input from 'lib/widget/input';
 import Select from 'lib/widget/select';
 
@@ -28,5 +29,16 @@ export default class DdpAddress {
 
   toLocator(): Locator {
     return this.elementLocator;
+  }
+
+  /**
+   * <br> Address Validation Card
+   * <br> We have checked your address entry and have suggested changes that could help ensure delivery.
+   *  Click "Suggested" to update form. You will be able to click "As entered" to restore your original entries.
+   *
+   * @returns {Card}
+   */
+  addressSuggestion(): Card {
+    return new Card(this.page, 'We have checked your address entry and have suggested changes that could help ensure delivery');
   }
 }

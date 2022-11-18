@@ -1,4 +1,5 @@
 import { Locator, Page } from '@playwright/test';
+import Button from 'lib/widget/button';
 import Input from 'lib/widget/input';
 import Select from 'lib/widget/select';
 
@@ -6,10 +7,12 @@ export default class DdpInstitutionsForm {
   private readonly page: Page;
   private readonly elementLocator: Locator;
   private readonly rootLocator: Locator;
+  private readonly label: string | RegExp;
 
   constructor(page: Page, opts: { label: string | RegExp; root?: Locator | string; nth?: number }) {
     const { label, root, nth = 0 } = opts;
     this.page = page;
+    this.label = label;
     this.rootLocator = root
       ? typeof root === 'string'
         ? this.page.locator(root)
@@ -24,6 +27,13 @@ export default class DdpInstitutionsForm {
 
   select(label: string): Select {
     return new Select(this.page, { label, root: this.toLocator() });
+  }
+
+  button(label: string): Button {
+    return new Button(this.page, {
+      label,
+      root: this.rootLocator.filter({ hasText: this.label })
+    });
   }
 
   toLocator(): Locator {
