@@ -24,6 +24,7 @@ export class DashboardStatisticsComponent implements OnInit {
   errorMessage = new Subject();
   hasRequiredRole;
   loading = true;
+  dateRange: DateRangeModel = {startDate: null, endDate: null};
 
   constructor(
     private dashboardStatisticsService: DashboardStatisticsService,
@@ -37,14 +38,15 @@ export class DashboardStatisticsComponent implements OnInit {
 
   private initData(): void {
     this.hasRequiredRole = this.roleService.allowedToViewEELData();
-    this.Charts = this.dashboardStatisticsService.ChartFactory()
+    this.Charts = this.dashboardStatisticsService.ChartFactory(this.dateRange)
       .pipe(catchError(this.catchErrorAndReturnArray.bind(this)), finalize(() => this.loading = false));
     this.Counts = this.dashboardStatisticsService.Counts;
   }
 
-  public dateChanged(date: DateRangeModel): void {
-    console.log(date, 'DATE - dashboard.statistics');
+  public dateChanged(dateRange: DateRangeModel): void {
+    console.log(dateRange, 'DATE - dashboard.statistics');
     this.loading = true;
+    this.dateRange = dateRange;
     this.initData();
   }
 
@@ -53,10 +55,6 @@ export class DashboardStatisticsComponent implements OnInit {
       responsive: true,
       displaylogo: false
     };
-  }
-
-  public get activeDates(): DateRangeModel {
-    return {startDate: new Date(), endDate: new Date()};
   }
 
   private catchErrorAndReturnArray(error: HttpErrorResponse): Observable<never> {

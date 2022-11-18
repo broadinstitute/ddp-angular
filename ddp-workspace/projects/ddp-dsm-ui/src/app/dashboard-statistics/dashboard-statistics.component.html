@@ -17,7 +17,7 @@
 
 <ng-template let-Charts="charts" let-Error="error" let-Counts="counts" #charts>
 
-  <app-date-range [disabled]="loading" [initDates]="activeDates" (dateChanged)="dateChanged($event)" ></app-date-range>
+  <app-date-range [disabled]="loading" [initDates]="dateRange" (dateChanged)="dateChanged($event)" ></app-date-range>
 
   <div class="dashboard-chartsAndCounts" *ngIf="!loading">
 
