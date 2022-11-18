@@ -121,8 +121,7 @@ export default class ChildSurveyPage extends SingularPage {
    */
   hadArrhythmiaComplications(): Question {
     return new Question(this.page, {
-      prompt:
-        'If your child has had arrhythmia (heart rhythm) complications,' + ' please select how your child was medically treated.'
+      prompt: 'If your child has had arrhythmia (heart rhythm) complications, please select how your child was medically treated.'
     });
   }
 
