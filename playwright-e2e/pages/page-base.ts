@@ -75,6 +75,7 @@ export default abstract class PageBase implements PageInterface {
 
   protected async clickAndWaitForNav(locator: Locator, opts: { waitForNav?: boolean } = {}): Promise<void> {
     const { waitForNav = false } = opts;
+    await expect(locator).toBeEnabled();
     waitForNav ? await this.waitForNavAfter(() => locator.click()) : await locator.click();
   }
 

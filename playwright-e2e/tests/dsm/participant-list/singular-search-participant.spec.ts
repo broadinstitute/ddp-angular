@@ -23,7 +23,7 @@ test.describe('Singular Study in DSM', () => {
 
     // Grab one random Short ID from table rwo index: 3 and column index: 3 and use value in the search
     const table = new Table(page);
-    const shortId = await table.cellLocator(3, 3).innerText();
+    const shortId = await table.cell(2, 2).innerText();
 
     // Start search by Short ID
     await participantListPage.search(SearchFieldLabel.ShortId, shortId);

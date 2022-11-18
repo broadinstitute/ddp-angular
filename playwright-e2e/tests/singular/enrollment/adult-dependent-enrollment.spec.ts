@@ -1,4 +1,4 @@
-import { expect } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
 import * as auth from 'authentication/auth-singular';
 import MedicalRecordReleaseForm from 'pages/singular/enrollment/medical-record-release-form';
@@ -17,6 +17,19 @@ import { generateUserName } from 'utils/faker-utils';
 test.describe('Enrol an adult dependent', () => {
   // Randomize last name
   const dependentLastName = generateUserName(user.adultDependent.lastName);
+
+  const assertProgressBar = async (page: Page): Promise<void> => {
+    const locator = page.locator('app-progress-bar li .item .item__name');
+    await expect(locator).toHaveCount(5);
+    const items: string[] = ['Consent Form', 'About Me', 'Medical Release', 'Medical Record File Upload', 'Patient Survey'];
+    await expect(locator).toHaveText(items);
+  };
+
+  const assertProgressCurrentItem = async (page: Page, itemName: string): Promise<void> => {
+    const locator = page.locator('app-progress-bar li .item--current');
+    await expect(locator).toHaveCount(1);
+    await expect(locator).toContainText(itemName);
+  };
 
   /**
    * Test case: https://docs.google.com/document/d/1vaiSfsYeDzEHeK2XOVO3n_7I1W0Z94Kkqx_82w8-Vpc/edit#heading=h.6snot4x1e1uw
@@ -65,10 +78,13 @@ test.describe('Enrol an adult dependent', () => {
     await consentForm.authorizationSignature().fill(user.patient.lastName);
     await consentForm.agree();
 
+    await assertProgressBar(page);
+
     // on "About Me" page
     const aboutMyAdultDependentPage = new AboutMyAdultDependentPage(page);
     await aboutMyAdultDependentPage.waitForReady();
     await assertActivityHeader(page, 'About Me');
+    await assertProgressCurrentItem(page, 'About Me');
     // Fill out address with fake data
     await enterMailingAddress(page, {
       fullName: `${user.adultDependent.firstName} ${dependentLastName}`,
@@ -79,15 +95,13 @@ test.describe('Enrol an adult dependent', () => {
       zipCode: user.adultDependent.zip,
       telephone: user.adultDependent.phone
     });
-    await aboutMyAdultDependentPage.next();
-    // Trigger validation
-    await aboutMyAdultDependentPage.suggestedAddress().radioButton('As Entered:').check();
     await aboutMyAdultDependentPage.next({ waitForNav: true });
 
     // on "Medical Record Release Form" page
     const medicalRecordReleaseForm = new MedicalRecordReleaseForm(page);
     await assertActivityHeader(page, 'Medical Record Release Form');
     await assertActivityProgress(page, 'Page 1 of 3');
+    await assertProgressCurrentItem(page, 'Medical Release');
     await medicalRecordReleaseForm.unableToProvideMedicalRecords().check();
     await medicalRecordReleaseForm.enterInformationAboutPhysician();
     await medicalRecordReleaseForm.next();
@@ -106,6 +120,7 @@ test.describe('Enrol an adult dependent', () => {
 
     // Medical Record File Upload
     await assertActivityHeader(page, 'Medical Record File Upload');
+    await assertProgressCurrentItem(page, 'Medical Record File Upload');
     // Do not need to upload medical record file. Click Next button to continue without upload.
     await medicalRecordReleaseForm.next({ waitForNav: true });
 
@@ -124,19 +139,24 @@ test.describe('Enrol an adult dependent', () => {
     await patientSurveyPage.selectVentricleDiagnosis().inputByLabel('Please specify (or write Unsure)').fill('Unsure');
     await patientSurveyPage.submit();
 
+
+
+    // "zoey.redwalker+212069610@test.firecloud.org"
+    // "Test@123"
+
     // Assert contents in My Dashboard table
     await myDashboardPage.waitForReady();
     const orderedHeaders = ['Title', 'Summary', 'Status', 'Action'];
     const table = myDashboardPage.getDashboardTable();
-    const headers = await table.getColumnNames();
+    const headers = await table.getHeaderNames();
     expect(headers).toHaveLength(4); // Four columns in table
     expect(headers).toEqual(orderedHeaders);
 
-    const summaryCell = await table.findCellLocator('Title', 'Consent Form for Adult Dependent', 'Summary');
+    const summaryCell = await table.findCell('Title', 'Consent Form for Adult Dependent', 'Summary');
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     await expect(summaryCell!).toHaveText('Thank you for signing the consent form -- welcome to Project Singular!');
 
-    const statusCell = await table.findCellLocator('Title', 'Consent Form for Adult Dependent', 'Status');
+    const statusCell = await table.findCell('Title', 'Consent Form for Adult Dependent', 'Status');
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     await expect(statusCell!).toHaveText('Complete');
   });

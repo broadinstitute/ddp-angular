@@ -17,8 +17,8 @@ export default class Select extends WidgetBase {
     this.elementLocator = ddpTestID
         ? this.rootLocator.locator(`mat-select[data-ddp-test="${ddpTestID}"], select[data-ddp-test="${ddpTestID}"]`)
         : exactMatch
-            ? this.rootLocator.locator(`xpath=//select[.//text()[normalize-space()="${label}"]] | //mat-select[.//text()[normalize-space()="${label}"]]`)
-            : this.rootLocator.locator(`xpath=//select[.//text()[contains(normalize-space(),"${label}")]] | //mat-select[.//text()[contains(normalize-space(),"${label}")]]`);
+            ? this.rootLocator.locator(`xpath=//select[.//text()[normalize-space()="${label}"]] | //mat-form-field[.//text()[normalize-space()="${label}"]]//mat-select`)
+            : this.rootLocator.locator(`xpath=//select[.//text()[contains(normalize-space(),"${label}")]] | //mat-form-field[.//text()[contains(normalize-space(),"${label}")]]//mat-select`);
   }
 
   toLocator(): Locator {
@@ -42,6 +42,7 @@ export default class Select extends WidgetBase {
           .click();
         break;
     }
-    await this.page.waitForTimeout(1000); // Sleep for dropdown to be gone and selected value to be visible
+    // Should be set when waitForRequstComplete PR is merged
+    // await this.page.waitForTimeout(1000); // Sleep for dropdown to be gone and selected value to be visible
   }
 }

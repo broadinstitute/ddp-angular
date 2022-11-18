@@ -89,6 +89,9 @@ test.describe('Enroll my child', () => {
     await assentForm.sign().fill(`${user.patient.firstName} ${user.patient.lastName}`);
     await assentForm.next({ waitForNav: true });
 
+    // zoey.redwalker+456941090@test.firecloud.org
+
+
     // on "About My Child" page
     const aboutMyChildPage = new AboutMyChildPage(page);
     await aboutMyChildPage.waitForReady();
@@ -102,9 +105,6 @@ test.describe('Enroll my child', () => {
       zipCode: user.child.zip,
       telephone: user.child.phone
     }); // Fill out address with fake data
-    await aboutMyChildPage.next();
-    // Triggered validation
-    await aboutMyChildPage.suggestedAddress().radioButton('As Entered:').check();
     await aboutMyChildPage.next({ waitForNav: true });
 
     // on "Parental Medical Record Release Form" page
@@ -173,7 +173,7 @@ test.describe('Enroll my child', () => {
     await myDashboardPage.waitForReady();
     const orderedHeaders = ['Title', 'Summary', 'Status', 'Action'];
     const table = myDashboardPage.getDashboardTable();
-    const headers = await table.getColumnNames();
+    const headers = await table.getHeaderNames();
     expect(headers).toHaveLength(4); // Four columns in table
     expect(headers).toEqual(orderedHeaders);
 

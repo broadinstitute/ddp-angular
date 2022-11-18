@@ -1,4 +1,5 @@
 import { BrowserContext, Download, expect, Locator, Page } from '@playwright/test';
+import DdpAddress from 'lib/component/ddp-address';
 import Input from 'lib/widget/input';
 import Checkbox from 'lib/widget/checkbox';
 import Radiobutton from 'lib/widget/radiobutton';
@@ -63,49 +64,22 @@ export async function enterMailingAddress(
   const {
     fullName,
     country = 'UNITED STATES',
-    state = _.shuffle(STATES)[0],
-    street = 'Broadway Street',
+    state = 'MASSACHUSETTS',
+    street = '415 Main St',
     city = 'Cambridge',
-    zipCode = '01876',
+    zipCode = '02142',
     telephone = generateRandomPhoneNum()
   } = opts;
-
-  const getFullName = (): Locator => {
-    return new Input(page, { label: 'Full Name' }).toLocator();
-  };
-
-  const getStreet = (): Locator => {
-    return new Input(page, { label: 'Street Address' }).toLocator();
-  };
-
-  const getCountry = (): Select => {
-    return new Select(page, { label: 'Country' });
-  };
-
-  const getState = (): Select => {
-    return new Select(page, { label: 'State' });
-  };
-
-  const getCity = (): Locator => {
-    return new Input(page, { label: 'City' }).toLocator();
-  };
-
-  const getZipCode = (): Locator => {
-    return new Input(page, { label: 'Zip Code' }).toLocator();
-  };
-
-  const getTelephone = (): Locator => {
-    return new Input(page, { label: 'Telephone Contact Number' }).toLocator();
-  };
-
-  // Fill out address fields
-  await getFullName().fill(fullName);
-  await getCountry().selectOption(country.toUpperCase());
-  await getStreet().fill(street.toUpperCase());
-  await getCity().fill(city.toUpperCase());
-  await getState().selectOption(state.toUpperCase());
-  await getZipCode().fill(zipCode);
-  await getTelephone().fill(telephone.toString());
+  const mailAddressForm = new DdpAddress(page, { label: 'Mailing Address' });
+  await mailAddressForm.input('Full Name').fill(fullName);
+  await mailAddressForm.select('Country').selectOption(country);
+  await mailAddressForm.select('State').selectOption(state);
+  await mailAddressForm.input('Street Address').fill(street.toUpperCase());
+  await mailAddressForm.input('City').fill(city.toUpperCase());
+  await mailAddressForm.input('Zip Code').fill(zipCode);
+  await mailAddressForm.input('Telephone Contact Number').fill(telephone.toString());
+  // Wait for Address Suggestion card
+  await mailAddressForm.addressSuggestion().radioButton('As Entered:').check();
 }
 
 /**

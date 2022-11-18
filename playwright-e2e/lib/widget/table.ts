@@ -6,6 +6,7 @@ export default class Table {
   private readonly tableCss: string;
   private readonly headerCss: string;
   private readonly rowCss: string;
+  private readonly cellCss: string;
   private readonly footerCss: string;
 
   constructor(page: Page, opts: { classAttribute?: string; ddpTestID?: string } = {}) {
@@ -16,10 +17,11 @@ export default class Table {
       ? `mat-table[data-ddp-test="${ddpTestID}"], table[data-ddp-test="${ddpTestID}"]`
       : classAttribute
         ? `table${classAttribute}`
-        : 'table';
-    this.headerCss = `${this.tableCss} [role="columnheader"], ${this.tableCss} th[class]`;
-    this.rowCss = `${this.tableCss} tbody [role="row"], ${this.tableCss} tbody tr`;
-    this.footerCss = `${this.tableCss} tfoot tr`;
+        : 'table, [role="table"]';
+    this.headerCss = '[role="columnheader"], th[class]';
+    this.rowCss = '[role="row"]:not(mat-header-row), tbody tr';
+    this.cellCss = 'td, [role="cell"]';
+    this.footerCss = 'tfoot tr';
   }
 
   async waitForReady() {
@@ -32,17 +34,67 @@ export default class Table {
   }
 
   rowLocator(): Locator {
-    return this.page.locator(this.rowCss);
+    return this.tableLocator().locator(this.rowCss);
   }
 
   headerLocator(): Locator {
-    return this.page.locator(this.headerCss);
+    return this.tableLocator().locator(this.headerCss);
+  }
+
+  /**
+   *
+   * @param {number} rowIndex
+   * @param {number} columnIndex
+   * @returns {Locator}
+   */
+  cell(rowIndex: number, columnIndex: number): Locator {
+    console.log('rowIndex: ', rowIndex, 'columnIndex: ', columnIndex)
+    return this.rowLocator()
+      .nth(rowIndex)
+      .locator(this.cellCss)
+      .nth(columnIndex);
+  }
+
+  async findCell(searchHeader: string, searchCellValue: string, resultHeader: string): Promise<Locator | null> {
+    // Find the searchColumnHeader index
+    await this.page.pause();
+    const columnNames = await this.getHeaderNames();
+    console.log('columnNames: ', columnNames)
+    const columnIndex = columnNames.findIndex((text) => text === searchHeader);
+    if (columnIndex === -1) {
+      console.info(`Table column: ${searchHeader} not found.`);
+      return null;
+    }
+    console.log('columnIndex: ', columnIndex)
+    const resultColumnIndex = columnNames.findIndex((text) => text === resultHeader);
+    if (resultColumnIndex === -1) {
+      console.info(`Table column: ${resultHeader} not found.`);
+      return null;
+    }
+    console.log('resultColumnIndex: ', resultColumnIndex)
+
+    // Find the row which contains the searchCellValue
+    console.log('this.rowLocator(): ', this.rowLocator())
+    const allRows = await this.rowLocator().elementHandles();
+    const allCellValues = await Promise.all(
+      allRows.map(async (row) => {
+        const cells = await row.$$(this.cellCss);
+        return await cells[columnIndex].innerText();
+      })
+    );
+    console.log(`allCellValues in columnIndex ${columnIndex}: `, allCellValues)
+    const searchRowIndex = allCellValues.findIndex((cellValue) => cellValue === searchCellValue);
+    if (searchRowIndex === -1) {
+      console.info(`Table cell value: ${searchCellValue} not found.`);
+      return null;
+    }
+    return this.cell(searchRowIndex, resultColumnIndex);
   }
 
   cellLocator(rowIndex: number, columnIndex: number): Locator {
     return this.page.locator(
-      `${this.tableCss} tbody [role="row"]:nth-child(${rowIndex}) [role="cell"]:nth-child(${columnIndex}), ` +
-        `${this.tableCss} tbody tr:nth-child(${rowIndex}) td:nth-child(${columnIndex})`
+      `${this.tableCss} [role="row"]:nth-child(${rowIndex}) [role="cell"]:nth-child(${columnIndex}), ` +
+        `${this.tableCss} tr:nth-child(${rowIndex}) td:nth-child(${columnIndex})`
     );
   }
 
@@ -98,8 +150,9 @@ export default class Table {
    * Finds table column header names. Returns an array of string.
    * @returns {Array<string>}
    */
-  async getColumnNames(): Promise<Array<string>> {
-    const columns = await this.page.locator(this.headerCss).elementHandles();
+  async getHeaderNames(): Promise<Array<string>> {
+    const columns = await this.headerLocator().elementHandles();
+    // const columns = await this.page.locator(this.headerCss).elementHandles();
     return await Promise.all(
       _.map(columns, async (column) => {
         return await column.innerText();

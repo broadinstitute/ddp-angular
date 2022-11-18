@@ -88,7 +88,7 @@ const testConfig: PlaywrightTestConfig = {
       use: {
         browserName: 'chromium',
         launchOptions: {
-          slowMo: 200,
+          slowMo: 100,
           // Account for minor difference in text rendering and resolution between headless and headed mode
           ignoreDefaultArgs: ['--hide-scrollbars']
         }

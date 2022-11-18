@@ -94,8 +94,5 @@ export default class MedicalRecordReleaseForm extends SingularPage {
     await this.physicianAddress().fill(address);
     await this.physicianPhone().fill(phone);
     await this.physicianSpecialty().selectOption(specialty);
-
-    // Wait for /answer request to finish
-    await this.page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
   }
 }

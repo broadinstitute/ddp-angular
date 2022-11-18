@@ -74,12 +74,6 @@ test.describe('Enroll myself as adult', () => {
     await aboutMePage.waitForReady();
     await assertActivityHeader(page, 'About Me');
     await enterMailingAddress(page, { fullName: `${user.patient.firstName} ${lastName}` });
-    // Clicking of Next button Triggered address validation
-    await aboutMePage.next();
-    // Because address is all fake, an error message is expected
-    await expect(page.locator('.ErrorMessage')).toBeVisible();
-    await expect(page.locator('.ErrorMessage')).toHaveText(/We could not find the entered address/);
-    await aboutMePage.useAddressAsEntered().check();
     await aboutMePage.next({ waitForNav: true });
 
     // on "Medical Record Release Form" page, page 1 of 3.
@@ -124,7 +118,7 @@ test.describe('Enroll myself as adult', () => {
     await myDashboardPage.waitForReady();
     const orderedHeaders = ['Title', 'Summary', 'Status', 'Action'];
     const table = myDashboardPage.getDashboardTable();
-    const headers = await table.getColumnNames();
+    const headers = await table.getHeaderNames();
     expect(headers).toHaveLength(4); // Four columns in table
     expect(headers).toEqual(orderedHeaders);
 

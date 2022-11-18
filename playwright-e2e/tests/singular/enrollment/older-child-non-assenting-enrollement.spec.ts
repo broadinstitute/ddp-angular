@@ -80,9 +80,6 @@ test.describe('Enroll my child', () => {
       zipCode: user.thirdChild.zip,
       telephone: user.thirdChild.phone
     }); // Fill out address with fake data
-    await aboutMyChildPage.next();
-    // Triggered validation
-    await aboutMyChildPage.suggestedAddress().radioButton('As Entered:').check();
     await aboutMyChildPage.next({ waitForNav: true });
 
     // on "Parental Medical Record Release Form" page
@@ -150,7 +147,7 @@ test.describe('Enroll my child', () => {
     await myDashboardPage.waitForReady();
     const orderedHeaders = ['Title', 'Summary', 'Status', 'Action'];
     const table = myDashboardPage.getDashboardTable();
-    const headers = await table.getColumnNames();
+    const headers = await table.getHeaderNames();
     expect(headers).toHaveLength(4); // Four columns in table
     expect(headers).toEqual(orderedHeaders);
 
