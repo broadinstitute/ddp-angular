@@ -27,7 +27,7 @@ test.describe('Tissue SHL block id in DSM', () => {
 
     await participantListPage.openSearchButton().click();
 
-    const mrProblemNo = page.locator('#mat-checkbox-673 >> nth=0');
+    const mrProblemNo = page.locator('#mat-checkbox-673 >> nth=0');// "NO"
     await expect(mrProblemNo).toBeVisible()
     await mrProblemNo.click();
 
