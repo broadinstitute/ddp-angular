@@ -23,7 +23,7 @@ type startOrEndDate = 'startDate' | 'endDate';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DateRangeComponent implements OnInit, OnDestroy {
-  private readonly DATE_FORMAT = 'MM/d/YYYY';
+  private readonly DATE_FORMAT = 'YYYY-MM-d';
   /**
    * @MAIN Main Date Range Object
    */
