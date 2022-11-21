@@ -1,5 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 import Input from 'lib/widget/Input';
+import Dropdown from '../../../lib/widget/dropdown';
 
 export enum SearchFieldLabel {
   ShortId = 'Short ID'
@@ -34,6 +35,10 @@ export default class ParticipantsPage {
 
   searchButton(): Locator {
     return this.page.locator('button:has-text("Search") >> nth=0');
+  }
+
+  MedicalRecordColumnsDropDown(): Locator {
+    return this.page.locator('button.btn.btn-primary.dropdown-toggle >> nth=2');
   }
 
   async search(searchField: SearchFieldLabel, searchString: string): Promise<void> {
