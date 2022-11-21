@@ -38,10 +38,12 @@ export class DSMService {
               private localStorageService: LocalStorageService) {
   }
 
-  getDashboardData(realm: string): Observable<any> {
+  getDashboardData(realm: string, chartOrCount: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'dashboard';
     const map: { name: string; value: any }[] = [];
     map.push( {name: DSMService.REALM, value: realm} );
+    map.push({name: "part", value: chartOrCount});
+
     return this.http.get(url, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );

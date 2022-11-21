@@ -2,35 +2,32 @@ import {Injectable} from '@angular/core';
 import {dashboardType} from '../enums/dashboard.enums';
 import {DSMService} from './dsm.service';
 import {LocalStorageService} from './localStorage.service';
-import {finalize, map} from 'rxjs/operators';
-import {Observable, Subject} from 'rxjs';
-import {CountsModel} from '../dashboard-statistics/models/Counts.model';
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class DashboardStatisticsService {
-  public Counts: Subject<any> = new Subject<any>();
 
   constructor(private dsmService: DSMService, private localStorageService: LocalStorageService) {
   }
 
 
   public ChartFactory(): Observable<any> {
-    const onlyCounts: CountsModel[] = [];
-    return this.dsmService.getDashboardData(this.localStorageService.selectedRealm)
+    return this.dsmService.getDashboardData(this.localStorageService.selectedRealm, "CHART")
       .pipe(
         map(data => {
           const generatedCharts = [];
           data.forEach(chart => {
-            if(chart.type === dashboardType.COUNT) {
-              onlyCounts.push(chart);
-            }
             const generatedChart = this.CHART_TYPES.find(ch => ch.type === chart.type)?.func(chart);
             generatedChart && generatedCharts.push(generatedChart);
           });
           return generatedCharts;
-        }),
-        finalize(() => this.Counts.next(onlyCounts))
+        })
       );
+  }
+
+  public CountsFactory(): Observable<any> {
+    return this.dsmService.getDashboardData(this.localStorageService.selectedRealm, "COUNT");
   }
 
 

@@ -26,7 +26,7 @@ export class DashboardStatisticsComponent implements OnInit {
     this.hasRequiredRole = this.roleService.allowedToViewEELData();
     this.Charts = this.dashboardStatisticsService.ChartFactory()
       .pipe(catchError(this.catchErrorAndReturnArray.bind(this)), finalize(() => this.loading = false));
-    this.Counts = this.dashboardStatisticsService.Counts;
+    this.Counts = this.dashboardStatisticsService.CountsFactory();
   }
 
   get getConfiguration(): any {
