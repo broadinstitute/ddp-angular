@@ -7,6 +7,8 @@ import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
 import EnrollMyAdultDependentPage from 'pages/singular/enrollment/enroll-my-adult-dependent-page';
 import { WHO } from 'data/constants';
 
+const { SINGULAR_USER_EMAIL, SINGULAR_USER_PASSWORD } = process.env;
+
 async function signUp(page: Page) {
   await signMeUp(page);
 
@@ -14,7 +16,7 @@ async function signUp(page: Page) {
   await preScreeningPage.enterInformationAboutYourself();
 
   // Enter email alias and new password in Login popup
-  await auth.createAccountWithEmailAlias(page);
+  await auth.createAccountWithEmailAlias(page, { email: SINGULAR_USER_EMAIL, password: SINGULAR_USER_PASSWORD });
 }
 
 async function getEnrollMyAdultDependentPage(page: Page) {
@@ -25,10 +27,7 @@ async function getEnrollMyAdultDependentPage(page: Page) {
 
 test.describe('Adult Dependent visual tests', () => {
   // whoHasVentricleHeartDefect validation: Select `someone else` should trigger an error message
-  test('select a "Someone else" option for adult dependent @visual @enrollment @singular', async ({
-    page,
-    homePage
-  }) => {
+  test('select a "Someone else" option for adult dependent @visual @enrollment @singular', async ({ page, homePage }) => {
     await homePage.signUp();
     await signUp(page);
     const enrollMyAdultDependentPage = await getEnrollMyAdultDependentPage(page);

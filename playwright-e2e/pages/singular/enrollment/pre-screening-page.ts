@@ -1,5 +1,4 @@
-import { Locator, Page } from '@playwright/test';
-
+import { expect, Locator, Page } from '@playwright/test';
 import * as fake from 'data/fake-user.json';
 import Input from 'lib/widget/Input';
 import Question from 'lib/component/Question';
@@ -9,6 +8,10 @@ export default class PreScreeningPage {
 
   constructor(page: Page) {
     this.page = page;
+  }
+
+  async waitForReady(): Promise<void> {
+    await expect(this.getSignUpButton()).toBeVisible({ timeout: 30 * 1000 });
   }
 
   getSignUpButton(): Locator {

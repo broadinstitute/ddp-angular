@@ -89,7 +89,7 @@ module.exports = {
     ],
     'max-len': [
       'warn',
-      120,
+      130,
       {
         ignorePattern: '^import |^export\\{(.*?)\\}',
         ignoreComments: true,
