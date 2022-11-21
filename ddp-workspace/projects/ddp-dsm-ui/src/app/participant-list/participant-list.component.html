@@ -271,7 +271,7 @@
             <!--profile values or dsm values-->
             <ng-container *ngFor="let alias of getKeys()">
               <td *ngFor="let col of selectedColumns[alias]"
-                  (click)="openParticipant(pt, alias)" class="breakWords">
+                  (click)="openParticipant(pt, alias)" >
                 <ng-container *ngIf="col.participantColumn.esData && pt.proxyData != null">
                   <ng-container *ngIf="col.participantColumn.tableAlias === 'proxy'">
                     <ul class="NO-PADDING-START">
@@ -401,7 +401,7 @@
                               *ngIf="getUtilStatic().getQuestionDefinition(activityDefinitionList, alias, questionAnswer.stableId, activityData.activityVersion) as qDef">
                               <div
                                 *ngFor="let answer of getUtilStatic().getNiceTextForCSVCompositeType(questionAnswer, qDef ); let i = index">
-                                {{ answer?.includes('|') ? answer.split('|')[1] : answer  | noData}}
+                                <p>{{ answer?.includes('|') ? answer.split('|')[1] : answer  | noData}}</p>
                                 <hr *ngIf="i !== questionAnswer.answer.length-1" style="border-color: lightgray">
                               </div>
                             </ng-container>
