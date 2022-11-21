@@ -65,7 +65,7 @@ test.describe('Enroll myself as adult', () => {
     await consentForm.firstName().fill(user.patient.firstName);
     await consentForm.lastName().fill(lastName);
 
-    await consentForm.dateOfBirth(user.patient.birthDate.MM, user.patient.birthDate.DD, user.patient.birthDate.YYYY);
+    await consentForm.fillInDateOfBirth(user.patient.birthDate.MM, user.patient.birthDate.DD, user.patient.birthDate.YYYY);
     await consentForm.toKnowSecondaryFinding().check('I want to know.');
     await consentForm.signature().fill(`${user.patient.firstName} ${lastName}`);
     await consentForm.authorizationSignature().fill(`${user.patient.firstName} ${lastName}`);
@@ -76,12 +76,6 @@ test.describe('Enroll myself as adult', () => {
     await aboutMePage.waitForReady();
     await assertActivityHeader(page, 'About Me');
     await enterMailingAddress(page, { fullName: `${user.patient.firstName} ${lastName}` });
-    // Clicking of Next button Triggered address validation
-    await aboutMePage.next();
-    // Because address is all fake, an error message is expected
-    await expect(page.locator('.ErrorMessage')).toBeVisible();
-    await expect(page.locator('.ErrorMessage')).toHaveText(/We could not find the entered address/);
-    await aboutMePage.useAddressAsEntered().check();
     await aboutMePage.next({ waitForNav: true });
 
     // on "Medical Record Release Form" page, page 1 of 3.

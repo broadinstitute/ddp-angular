@@ -48,20 +48,6 @@ export default class ConsentFormPage extends SingularPage {
   }
 
   /**
-   * <br> Question: Your Date of Birth
-   * <br> Type: Input
-   * @param month
-   * @param date
-   * @param year
-   */
-  async dateOfBirth(month: number | string, date: number | string, year: number | string): Promise<void> {
-    const dob = new Question(this.page, { prompt: 'Date of Birth' });
-    await dob.date().locator('input[data-placeholder="MM"]').fill(month.toString());
-    await dob.date().locator('input[data-placeholder="DD"]').fill(date.toString());
-    await dob.date().locator('input[data-placeholder="YYYY"]').fill(year.toString());
-  }
-
-  /**
    * <br> Question: If a secondary finding is found in my genes:
    * <br> Type: Checkbox
    */

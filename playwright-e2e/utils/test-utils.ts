@@ -1,14 +1,19 @@
 import { BrowserContext, Download, expect, Locator, Page } from '@playwright/test';
+import Address from 'lib/component/address';
 import Input from 'lib/widget/Input';
 import Checkbox from 'lib/widget/checkbox';
 import Radiobutton from 'lib/widget/radiobutton';
 import Select from 'lib/widget/select';
 import axios from 'axios';
-import _ from 'lodash';
-import { STATES } from 'data/constants';
 import { generateRandomPhoneNum } from './faker-utils';
 
 const { SITE_PASSWORD } = process.env;
+
+export async function waitForNoSpinner(page: Page): Promise<void> {
+  await page
+    .locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]')
+    .waitFor({ state: 'hidden', timeout: 30 * 1000 });
+}
 
 export async function waitUntilRemoved(locator: Locator): Promise<void> {
   expect(await locator.count()).toHaveLength(0);
@@ -59,49 +64,23 @@ export async function enterMailingAddress(
   const {
     fullName,
     country = 'UNITED STATES',
-    state = _.shuffle(STATES)[0],
-    street = 'Broadway Street',
-    city = 'Cambridge',
-    zipCode = '01876',
+    state = 'MASSACHUSETTS',
+    street = '415 MAIN ST',
+    city = 'CAMBRIDGE',
+    zipCode = '02142',
     telephone = generateRandomPhoneNum()
   } = opts;
 
-  const getFullName = (): Locator => {
-    return new Input(page, { label: 'Full Name' }).toLocator();
-  };
-
-  const getStreet = (): Locator => {
-    return new Input(page, { label: 'Street Address' }).toLocator();
-  };
-
-  const getCountry = (): Select => {
-    return new Select(page, { label: 'Country' });
-  };
-
-  const getState = (): Select => {
-    return new Select(page, { label: 'State' });
-  };
-
-  const getCity = (): Locator => {
-    return new Input(page, { label: 'City' }).toLocator();
-  };
-
-  const getZipCode = (): Locator => {
-    return new Input(page, { label: 'Zip Code' }).toLocator();
-  };
-
-  const getTelephone = (): Locator => {
-    return new Input(page, { label: 'Telephone Contact Number' }).toLocator();
-  };
-
-  // Fill out address fields
-  await getFullName().fill(fullName);
-  await getCountry().selectOption(country.toUpperCase());
-  await getStreet().fill(street.toUpperCase());
-  await getCity().fill(city.toUpperCase());
-  await getState().selectOption(state.toUpperCase());
-  await getZipCode().fill(zipCode);
-  await getTelephone().fill(telephone.toString());
+  const mailAddressForm = new Address(page, { label: 'Mailing Address' });
+  await mailAddressForm.input('Full Name').fill(fullName);
+  await mailAddressForm.select('Country').selectOption(country);
+  await mailAddressForm.select('State').selectOption(state);
+  await mailAddressForm.input('Street Address').fill(street.toUpperCase());
+  await mailAddressForm.input('City').fill(city.toUpperCase());
+  await mailAddressForm.input('Zip Code').fill(zipCode);
+  await mailAddressForm.input('Telephone Contact Number').fill(telephone.toString());
+  // Wait for Address Suggestion card
+  await mailAddressForm.addressSuggestion().radioButton('As Entered:').check();
 }
 
 /**

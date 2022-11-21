@@ -1,6 +1,5 @@
 import { Page } from '@playwright/test';
 import { SingularPage } from 'pages/singular/singular-page';
-import Question from 'lib/component/Question';
 import Card from 'lib/widget/card';
 import Input from 'lib/widget/Input';
 
@@ -27,10 +26,6 @@ export default class AboutMyChildPage extends SingularPage {
    */
   childLastName(): Input {
     return new Input(this.page, { ddpTestID: 'answer:ABOUT_PATIENT_LAST_NAME' });
-  }
-
-  childMailingAddress(): Question {
-    return new Question(this.page, { prompt: "Your Child's Mailing Address:" });
   }
 
   suggestedAddress(): Card {

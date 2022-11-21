@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { Page } from '@playwright/test';
 import PageBase from 'pages/page-base';
 
 /**
@@ -11,12 +11,5 @@ export abstract class SingularPage extends PageBase {
       throw Error(`Invalid Singular base URL: process.env.SINGULAR_BASE_URL=${SINGULAR_BASE_URL}`);
     }
     super(page, SINGULAR_BASE_URL);
-  }
-
-  /**
-   * Return "Back" button locator
-   */
-  getBackButton(): Locator {
-    return this.page.locator('button', { hasText: 'Back' });
   }
 }

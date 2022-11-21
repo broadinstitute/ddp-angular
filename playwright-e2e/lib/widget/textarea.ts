@@ -1,7 +1,7 @@
 import { Locator, Page } from '@playwright/test';
 import WidgetBase from 'lib/widget/widget-base';
 
-export default class Input extends WidgetBase {
+export default class TextArea extends WidgetBase {
   private readonly elementLocator: Locator;
   private readonly rootLocator: Locator;
 
@@ -15,23 +15,15 @@ export default class Input extends WidgetBase {
     this.rootLocator = root ? (typeof root === 'string' ? this.page.locator(root) : root) : this.page.locator('mat-form-field');
     // prettier-ignore
     this.elementLocator = ddpTestID
-        ? this.rootLocator.locator(`input[data-ddp-test="${ddpTestID}"]`) // Label ignored if ddpTestID is specified
+        ? this.rootLocator.locator(`textarea[data-ddp-test="${ddpTestID}"]`) // Label ignored if ddpTestID is specified
         : exactMatch
-            ? this.rootLocator.locator(`//input[@id=(//label[.//text()[normalize-space()="${label}"]]/@for)]`)
-            : this.rootLocator.locator(`//input[@id=(//label[contains(normalize-space(.),"${label}")]/@for)]`);
+            ? this.rootLocator.locator(`//textarea[@id=(//label[.//text()[normalize-space()="${label}"]]/@for)]`)
+            : this.rootLocator.locator(`//textarea[@id=(//label[contains(normalize-space(.),"${label}")]/@for)]`);
   }
 
-  /**
-   * Enter a text string. If value already exists, no action taken.
-   * @param {string} value
-   * @returns {Promise<void>}
-   */
   async fill(value: string): Promise<void> {
-    const existValue = await this.toLocator().inputValue();
-    if (existValue !== value) {
-      await this.toLocator().fill(value);
-      await this.toLocator().press('Tab');
-    }
+    await this.toLocator().fill(value);
+    await this.toLocator().press('Tab');
   }
 
   toLocator(): Locator {

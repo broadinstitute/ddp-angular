@@ -1,4 +1,5 @@
 import { expect, Locator, Page, Response } from '@playwright/test';
+import Question from 'lib/component/Question';
 import { PageInterface } from './page-interface';
 
 export default abstract class PageBase implements PageInterface {
@@ -11,7 +12,13 @@ export default abstract class PageBase implements PageInterface {
   }
 
   abstract waitForReady(): Promise<void>;
-  abstract getBackButton(): Locator;
+
+  /**
+   * Return "Back" button locator
+   */
+  getBackButton(): Locator {
+    return this.page.locator('button', { hasText: 'Back' });
+  }
 
   /**
    * Returns "Log In" button locator
@@ -104,5 +111,19 @@ export default abstract class PageBase implements PageInterface {
   /** Click "Log Out" button */
   async logOut(): Promise<void> {
     await Promise.all([this.page.waitForNavigation({ waitUntil: 'load' }), this.getLogOutButton().click()]);
+  }
+
+  /**
+   * <br> Question: Date of Birth
+   * <br> Type: Input
+   * @param month
+   * @param date
+   * @param year
+   */
+  async fillInDateOfBirth(month: number | string, date: number | string, year: number | string): Promise<void> {
+    const dob = new Question(this.page, { prompt: 'Date of Birth' });
+    await dob.date().locator('input[data-placeholder="MM"]').fill(month.toString());
+    await dob.date().locator('input[data-placeholder="DD"]').fill(date.toString());
+    await dob.date().locator('input[data-placeholder="YYYY"]').fill(year.toString());
   }
 }

@@ -19,6 +19,7 @@ test.describe('Singular Study in DSM', () => {
     await expect(page.locator('h1')).toHaveText('Participant List', { timeout: 30 * 1000 });
 
     const participantListPage = new ParticipantsPage(page);
+    await participantListPage.waitForReady();
     await participantListPage.openSearchButton().click();
 
     // Grab one random Short ID from table rwo index: 3 and column index: 3 and use value in the search

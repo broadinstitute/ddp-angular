@@ -1,5 +1,6 @@
-import { Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 import Input from 'lib/widget/Input';
+import { waitForNoSpinner } from 'utils/test-utils';
 
 export enum SearchFieldLabel {
   ShortId = 'Short ID'
@@ -10,6 +11,11 @@ export default class ParticipantsPage {
 
   constructor(page: Page) {
     this.page = page;
+  }
+
+  async waitForReady(): Promise<void> {
+    await waitForNoSpinner(this.page);
+    await expect(this.openSearchButton()).toBeEnabled();
   }
 
   openSearchButton(): Locator {
@@ -41,7 +47,7 @@ export default class ParticipantsPage {
   }
 
   async search(searchField: SearchFieldLabel, searchString: string): Promise<void> {
-    const input = new Input(this.page, { label: searchField, parent: this.page.locator('//app-filter-column') });
+    const input = new Input(this.page, { label: searchField, root: this.page.locator('//app-filter-column') });
     await input.toLocator().type(searchString);
     await Promise.all([this.page.locator('.fa-spinner').waitFor({ state: 'visible' }), this.searchButton().click()]);
   }

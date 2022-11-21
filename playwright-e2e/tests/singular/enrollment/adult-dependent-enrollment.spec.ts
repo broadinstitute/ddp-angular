@@ -1,4 +1,4 @@
-import { expect } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
 import * as auth from 'authentication/auth-singular';
 import MedicalRecordReleaseForm from 'pages/singular/enrollment/medical-record-release-form';
@@ -19,6 +19,19 @@ const { SINGULAR_USER_EMAIL, SINGULAR_USER_PASSWORD } = process.env;
 test.describe('Enrol an adult dependent', () => {
   // Randomize last name
   const dependentLastName = generateUserName(user.adultDependent.lastName);
+
+  const assertProgressBar = async (page: Page): Promise<void> => {
+    const locator = page.locator('app-progress-bar li .item .item__name');
+    await expect(locator).toHaveCount(5);
+    const items: string[] = ['Consent Form', 'About Me', 'Medical Release', 'Medical Record File Upload', 'Patient Survey'];
+    await expect(locator).toHaveText(items);
+  };
+
+  const assertProgressCurrentItem = async (page: Page, itemName: string): Promise<void> => {
+    const locator = page.locator('app-progress-bar li .item--current');
+    await expect(locator).toHaveCount(1);
+    await expect(locator).toContainText(itemName);
+  };
 
   /**
    * Test case: https://docs.google.com/document/d/1vaiSfsYeDzEHeK2XOVO3n_7I1W0Z94Kkqx_82w8-Vpc/edit#heading=h.6snot4x1e1uw
@@ -60,17 +73,21 @@ test.describe('Enrol an adult dependent', () => {
 
     await consentForm.dependentFirstName().fill(user.adultDependent.firstName);
     await consentForm.dependentLastName().fill(dependentLastName);
-    await consentForm.fillDateOfBirth(12, 20, 1950);
+    await consentForm.fillInDateOfBirth(12, 20, 1950);
     await consentForm.toKnowSecondaryFinding().check('I want to know.');
     await consentForm.selectOneForAdultDependent().check('I have explained the study');
     await consentForm.dependentGuardianSignature().fill(`${user.patient.firstName} ${user.patient.lastName}`);
     await consentForm.authorizationSignature().fill(user.patient.lastName);
     await consentForm.agree();
 
+    await assertProgressBar(page);
+
     // on "About Me" page
     const aboutMyAdultDependentPage = new AboutMyAdultDependentPage(page);
     await aboutMyAdultDependentPage.waitForReady();
     await assertActivityHeader(page, 'About Me');
+    await assertProgressCurrentItem(page, 'About Me');
+
     // Fill out address with fake data
     await enterMailingAddress(page, {
       fullName: `${user.adultDependent.firstName} ${dependentLastName}`,
@@ -81,15 +98,14 @@ test.describe('Enrol an adult dependent', () => {
       zipCode: user.adultDependent.zip,
       telephone: user.adultDependent.phone
     });
-    await aboutMyAdultDependentPage.next();
-    // Trigger validation
-    await aboutMyAdultDependentPage.suggestedAddress().radioButton('As Entered:').check();
     await aboutMyAdultDependentPage.next({ waitForNav: true });
 
     // on "Medical Record Release Form" page
     const medicalRecordReleaseForm = new MedicalRecordReleaseForm(page);
     await assertActivityHeader(page, 'Medical Record Release Form');
     await assertActivityProgress(page, 'Page 1 of 3');
+    await assertProgressCurrentItem(page, 'Medical Release');
+
     await medicalRecordReleaseForm.unableToProvideMedicalRecords().check();
     await medicalRecordReleaseForm.enterInformationAboutPhysician();
     await medicalRecordReleaseForm.next();
@@ -107,13 +123,14 @@ test.describe('Enrol an adult dependent', () => {
     await medicalRecordReleaseForm.submit();
 
     // Medical Record File Upload
+    await assertProgressCurrentItem(page, 'Medical Record File Upload');
     await assertActivityHeader(page, 'Medical Record File Upload');
     // Do not need to upload medical record file. Click Next button to continue without upload.
     await medicalRecordReleaseForm.next({ waitForNav: true });
 
+    // Patient Survey
     await assertActivityHeader(page, 'Please complete this survey so that we may learn more about your medical background.');
 
-    // Patient Survey
     const patientSurveyPage = new PatientSurveyPage(page);
     await patientSurveyPage.cityBornIn().fill(user.adultDependent.city);
     await patientSurveyPage.stateBornIn().selectOption(user.adultDependent.state.abbreviation);

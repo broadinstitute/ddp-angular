@@ -81,10 +81,7 @@ test.describe('Enroll my child', () => {
       city: user.thirdChild.city,
       zipCode: user.thirdChild.zip,
       telephone: user.thirdChild.phone
-    }); // Fill out address with fake data
-    await aboutMyChildPage.next();
-    // Triggered validation
-    await aboutMyChildPage.suggestedAddress().radioButton('As Entered:').check();
+    });
     await aboutMyChildPage.next({ waitForNav: true });
 
     // on "Parental Medical Record Release Form" page
