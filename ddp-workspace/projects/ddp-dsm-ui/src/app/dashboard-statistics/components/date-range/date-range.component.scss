@@ -1,0 +1,12 @@
+p {
+  margin: 0;
+  padding: 0;
+}
+.datePicker-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  mat-form-field {
+    margin-top: 30px;
+  }
+}

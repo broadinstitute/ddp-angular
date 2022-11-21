@@ -126,7 +126,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
-import {DragAndDropDirective} from '../dashboard-statistics/directives/dragAndDrop/dragAndDrop.directive';
 import {RadioButtonDirective} from '../form-data/directives/radio-button.directive';
 import {PlotlyChartsComponent} from '../dashboard-statistics/components/plotly-charts/plotly-charts.component';
 import {
@@ -135,6 +134,11 @@ import {
 import {NoDataPipe} from '../participant-list/pipes/noData.pipe';
 import {CountsTableComponent} from '../dashboard-statistics/components/counts-table/counts-table.component';
 import {MatSortModule} from '@angular/material/sort';
+import {DateRangeComponent} from '../dashboard-statistics/components/date-range/date-range.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {DateRangeErrorPipe} from '../dashboard-statistics/pipes/dateRangeError.pipe';
+import {KeyValuePairPipe} from '../dashboard-statistics/pipes/KeyValuePair.pipe';
 
 
 PlotlyModule.plotlyjs = PlotlyJS;
@@ -225,13 +229,15 @@ PlotlyModule.plotlyjs = PlotlyJS;
     ClinicalPageComponent,
     FileDownloadComponent,
     DashboardStatisticsComponent,
-    DragAndDropDirective,
     PlotlyChartsComponent,
     MatrixAnswerTableComponent,
     ConditionalFormDataComponent,
     RadioButtonDirective,
     NoDataPipe,
-    CountsTableComponent
+    CountsTableComponent,
+    DateRangeComponent,
+    DateRangeErrorPipe,
+    KeyValuePairPipe
   ],
   imports: [
     CommonModule,
@@ -269,7 +275,9 @@ PlotlyModule.plotlyjs = PlotlyJS;
     MatTabsModule,
     MatTableModule,
     MatFormFieldModule,
-    MatSortModule
+    MatSortModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     Utils,
