@@ -828,13 +828,19 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
                 oncHis.faxSentBy = this.role.userID();
                 this.oncHistoryValueChanged(oncHis.faxSent, 'faxSent', oncHis);
               } else if (oncHis.faxSent2 == null) {
-                oncHis.faxSent2 = Utils.getFormattedDate(date);
-                oncHis.faxSent2By = this.role.userID();
-                this.oncHistoryValueChanged(oncHis.faxSent2, 'faxSent2', oncHis);
+                //If current date is not already on FaxSent1
+                if(oncHis.faxSent != Utils.getFormattedDate(date)) {
+                  oncHis.faxSent2 = Utils.getFormattedDate(date);
+                  oncHis.faxSent2By = this.role.userID();
+                  this.oncHistoryValueChanged(oncHis.faxSent2, 'faxSent2', oncHis);
+                }
               } else if (oncHis.faxSent3 == null) {
-                oncHis.faxSent3 = Utils.getFormattedDate(date);
-                oncHis.faxSent3By = this.role.userID();
-                this.oncHistoryValueChanged(oncHis.faxSent3, 'faxSent3', oncHis);
+                //If current date is not already on either FaxSent1 or FaxSent2
+                if(oncHis.faxSent != Utils.getFormattedDate(date) && oncHis.faxSent2 != Utils.getFormattedDate(date)) {
+                  oncHis.faxSent3 = Utils.getFormattedDate(date);
+                  oncHis.faxSent3By = this.role.userID();
+                  this.oncHistoryValueChanged(oncHis.faxSent3, 'faxSent3', oncHis);
+                }
               }
               oncHis.changedBy = this.role.userMail();
               oncHis.changed = true;
