@@ -241,7 +241,7 @@
           [ngClass]="{'Width--100': true, 'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('blockIdShl')}">
           <input matInput maxlength="10" [disabled]="!editable" autocomplete="off"
                  [(ngModel)]="tissue.blockIdShl" (change)="valueChanged($event, 'blockIdShl')"
-                 placeholder="SHL Work Number" [maxLength]="10"
+                 placeholder="Block ID to SHL" [maxLength]="10"
                  (blur)="currentField(null)" (focus)="currentField('blockIdShl')">
         </mat-form-field>
       </td>
