@@ -4,10 +4,6 @@
   margin-bottom: 0;
 }
 
-.breakWords {
-  white-space: normal;
-}
-
 .NO-PADDING-START{
   padding-inline-start: 0;
   list-style-type:none;
