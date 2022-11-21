@@ -13,7 +13,7 @@ export class DashboardStatisticsService {
 
 
   public ChartFactory(): Observable<any> {
-    return this.dsmService.getDashboardData(this.localStorageService.selectedRealm, "CHART")
+    return this.dsmService.getDashboardData(this.localStorageService.selectedRealm, 'CHART')
       .pipe(
         map(data => {
           const generatedCharts = [];
@@ -27,7 +27,7 @@ export class DashboardStatisticsService {
   }
 
   public CountsFactory(): Observable<any> {
-    return this.dsmService.getDashboardData(this.localStorageService.selectedRealm, "COUNT");
+    return this.dsmService.getDashboardData(this.localStorageService.selectedRealm, 'COUNT');
   }
 
 
