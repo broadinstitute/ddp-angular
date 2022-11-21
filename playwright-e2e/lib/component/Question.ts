@@ -107,7 +107,7 @@ export default class Question {
       const responsePromise = waitRequestAfter
         ? this.page.waitForResponse(
             (response) => response.url().includes(requestURL) && response.status() === requestStatus,
-            { timeout: 30 * 1000 } // More time for retries. UI will resend failed requests
+            { timeout: 10 * 1000 } // More time for retries. UI will resend failed requests
           )
         : Promise.resolve();
 

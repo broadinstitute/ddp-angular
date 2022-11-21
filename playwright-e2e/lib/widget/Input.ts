@@ -37,7 +37,7 @@ export default class Input {
             const includeValue = requestData ? requestData : false;
             return response.url().includes(requestURL) && response.status() === requestStatus && includeValue;
           },
-          { timeout: 30 * 1000 } // More time for retries. UI will resend failed requests
+          { timeout: 10 * 1000 } // More time for retries. UI will resend failed requests
         )
       : Promise.resolve();
 
