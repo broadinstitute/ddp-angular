@@ -23,7 +23,8 @@ type startOrEndDate = 'startDate' | 'endDate';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DateRangeComponent implements OnInit, OnDestroy {
-  private readonly DATE_FORMAT = 'YYYY-MM-dd';
+  private readonly OUTPUT_DATE_FORMAT = 'YYYY-MM-dd';
+
   /**
    * @MAIN Main Date Range Object
    */
@@ -62,6 +63,15 @@ export class DateRangeComponent implements OnInit, OnDestroy {
       .reduce(this.filterErroredEntries, {startDate: [], endDate: []});
   }
 
+  public clearDatesAndEmit(): void {
+    this.dateRangeForm.reset();
+    this.dateChanged.emit({startDate: null, endDate: null});
+  }
+
+  public get isPristine(): boolean {
+    return this.dateRangeForm.pristine;
+  }
+
   private initDateRangeForm(): void {
     this.dateRangeForm.patchValue(this.initDates, {emitEvent: false});
   }
@@ -89,8 +99,8 @@ export class DateRangeComponent implements OnInit, OnDestroy {
 
   private getTransformedDates(dates: DateRangeModel): DateRangeModel {
     return {
-      startDate: this.datePipe.transform(dates.startDate, this.DATE_FORMAT),
-      endDate: this.datePipe.transform(dates.endDate, this.DATE_FORMAT)
+      startDate: this.datePipe.transform(dates.startDate, this.OUTPUT_DATE_FORMAT),
+      endDate: this.datePipe.transform(dates.endDate, this.OUTPUT_DATE_FORMAT)
     };
   }
 

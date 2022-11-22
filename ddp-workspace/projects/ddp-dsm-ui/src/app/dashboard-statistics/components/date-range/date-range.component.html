@@ -6,8 +6,15 @@
       <input matEndDate formControlName="endDate" placeholder="End date">
     </mat-date-range-input>
     <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker-toggle matSuffix [for]="picker" matTooltip="Open Calendar">
+      <mat-icon color="primary" matDatepickerToggleIcon>date_range</mat-icon>
+    </mat-datepicker-toggle>
     <mat-date-range-picker #picker></mat-date-range-picker>
+
+    <button id="resetFocus" mat-icon-button matSuffix (click)="!isPristine && clearDatesAndEmit()" color="primary">
+      <mat-icon [matTooltip]="isPristine ? 'Type' : 'Clear Dates'"
+                matDatepickerToggleIcon>{{ isPristine ? 'keyboard' : 'all_out'}}</mat-icon>
+    </button>
 
     <mat-error *ngFor="let dateRangeError of dateRangeErrors | keyValuePair">
       <p *ngFor="let error of dateRangeError.value">
