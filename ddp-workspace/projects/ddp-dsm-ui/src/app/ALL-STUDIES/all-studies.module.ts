@@ -139,6 +139,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {DateRangeErrorPipe} from '../dashboard-statistics/pipes/dateRangeError.pipe';
 import {KeyValuePairPipe} from '../dashboard-statistics/pipes/KeyValuePair.pipe';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 PlotlyModule.plotlyjs = PlotlyJS;
@@ -277,7 +278,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     MatFormFieldModule,
     MatSortModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTooltipModule
   ],
   providers: [
     Utils,

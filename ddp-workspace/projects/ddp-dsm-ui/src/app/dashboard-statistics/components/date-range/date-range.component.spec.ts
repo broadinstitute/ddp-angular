@@ -15,15 +15,21 @@ import {DateRangeErrorPipe} from '../../pipes/dateRangeError.pipe';
 import {MatFormFieldHarness} from '@angular/material/form-field/testing';
 import {MaterialHarnesses} from '../../../test-helpers/MaterialHarnesses';
 import {KeyValuePairPipe} from '../../pipes/KeyValuePair.pipe';
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {DebugElement} from "@angular/core";
+import {By} from "@angular/platform-browser";
 
 describe('dateRangeComponent', () => {
   type startOrEnd = 'start' | 'end';
 
   let fixture: ComponentFixture<DateRangeComponent>;
   let component: DateRangeComponent;
+  let componentHTML: DebugElement;
   let materialHarnessLoader: MaterialHarnesses;
 
-  const DATE_FORMAT = 'MM/d/YYYY';
+  const INPUT_DATE_FORMAT = 'MM/d/YYYY';
+  const OUTPUT_DATE_FORMAT = 'YYYY-MM-dd';
+
   const datePipe: DatePipe = new DatePipe('en-US');
   const testData: DateRangeModel = {startDate: new Date(0), endDate: new Date()};
 
@@ -36,6 +42,7 @@ describe('dateRangeComponent', () => {
         MatInputModule,
         MatDatepickerModule,
         MatNativeDateModule,
+        MatTooltipModule,
         NoopAnimationsModule
       ],
       providers: [DatePipe]
@@ -45,6 +52,7 @@ describe('dateRangeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DateRangeComponent);
     component = fixture.debugElement.componentInstance;
+    componentHTML = fixture.debugElement;
     materialHarnessLoader = new MaterialHarnesses(TestbedHarnessEnvironment.loader(fixture));
   });
 
@@ -139,6 +147,28 @@ describe('dateRangeComponent', () => {
       expect(await firstErrorMessageAfterSettingValue('end', '511'))
         .toBe('End date is invalid');
     });
+
+    it('should output the value', async () => {
+      const startDate: Date = new Date(0);
+      const endDate: Date = new Date(1994, 10, 10);
+
+      component.dateChanged.subscribe((dateRange: DateRangeModel) => {
+        expect(dateRange).toEqual(getTransformedOutputDates({startDate, endDate}))
+      })
+
+      await setBothDates({startDate, endDate})
+    });
+
+    it('should reset and output the value', async () => {
+      component.dateChanged.subscribe((dateRange: DateRangeModel) => {
+        expect(dateRange).toEqual(getTransformedOutputDates({startDate: null, endDate: null}))
+      })
+
+      await setBothDates({startDate: 'dsada', endDate: 'dssada'})
+
+      const resetFocusButton: DebugElement = componentHTML.query(By.css('#resetFocus'));
+      resetFocusButton.nativeElement.click();
+    });
   });
 
 
@@ -153,9 +183,23 @@ describe('dateRangeComponent', () => {
 
   /**
    * @param dateValue
+   * @param dateFormat
    * used to transform date into specified date format
    */
-  const transformDateFormat = (dateValue: string | Date): string => datePipe.transform(dateValue, DATE_FORMAT);
+  const transformDateFormat = (dateValue: string | Date, dateFormat: string = INPUT_DATE_FORMAT)
+    : string => datePipe.transform(dateValue, dateFormat);
+
+  /**
+   * @param startDate
+   * @param endDate
+   * Used for generating whole transformed date ranges object
+   */
+  const getTransformedOutputDates = ({startDate, endDate}: DateRangeModel): DateRangeModel => {
+    return {
+      startDate: transformDateFormat(startDate, OUTPUT_DATE_FORMAT),
+      endDate: transformDateFormat(endDate, OUTPUT_DATE_FORMAT)
+    };
+  }
 
   /**
    *
@@ -228,6 +272,16 @@ describe('dateRangeComponent', () => {
     const [firstErrorMessage]: string[] = errorMessages.filter(errorText => errorText);
     return firstErrorMessage;
   };
+
+  /**
+   * @param startDate
+   * @param endDate
+   * Used for setting both dates
+   */
+  const setBothDates = async ({startDate, endDate}: DateRangeModel): Promise<void> => {
+    await setDateValue('start', startDate);
+    await setDateValue('end', endDate);
+  }
 
   /**
    * @param dateType type - it should be either "start" or "end", which will be concatenated
