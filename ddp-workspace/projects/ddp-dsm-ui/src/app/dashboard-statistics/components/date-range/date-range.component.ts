@@ -24,6 +24,7 @@ type startOrEndDate = 'startDate' | 'endDate';
 })
 export class DateRangeComponent implements OnInit, OnDestroy {
   private readonly OUTPUT_DATE_FORMAT = 'YYYY-MM-dd';
+
   /**
    * @MAIN Main Date Range Object
    */

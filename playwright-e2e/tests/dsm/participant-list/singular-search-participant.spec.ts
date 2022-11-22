@@ -16,7 +16,7 @@ test.describe('Singular Study in DSM', () => {
     await expect(page.locator('h2')).toHaveText('You have selected the Singular study.');
 
     await study(page).selectOption('Participant List', { waitForNav: true });
-    await expect(page.locator('h1')).toHaveText('Participant List');
+    await expect(page.locator('h1')).toHaveText('Participant List', { timeout: 30 * 1000 });
 
     const participantListPage = new ParticipantsPage(page);
     await participantListPage.openSearchButton().click();
