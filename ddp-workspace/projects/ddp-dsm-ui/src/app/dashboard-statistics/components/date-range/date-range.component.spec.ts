@@ -15,9 +15,9 @@ import {DateRangeErrorPipe} from '../../pipes/dateRangeError.pipe';
 import {MatFormFieldHarness} from '@angular/material/form-field/testing';
 import {MaterialHarnesses} from '../../../test-helpers/MaterialHarnesses';
 import {KeyValuePairPipe} from '../../pipes/KeyValuePair.pipe';
-import {MatTooltipModule} from "@angular/material/tooltip";
-import {DebugElement} from "@angular/core";
-import {By} from "@angular/platform-browser";
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {DebugElement} from '@angular/core';
+import {By} from '@angular/platform-browser';
 
 describe('dateRangeComponent', () => {
   type startOrEnd = 'start' | 'end';
@@ -153,18 +153,18 @@ describe('dateRangeComponent', () => {
       const endDate: Date = new Date(1994, 10, 10);
 
       component.dateChanged.subscribe((dateRange: DateRangeModel) => {
-        expect(dateRange).toEqual(getTransformedOutputDates({startDate, endDate}))
-      })
+        expect(dateRange).toEqual(getTransformedOutputDates({startDate, endDate}));
+      });
 
-      await setBothDates({startDate, endDate})
+      await setBothDates({startDate, endDate});
     });
 
     it('should reset and output the value', async () => {
       component.dateChanged.subscribe((dateRange: DateRangeModel) => {
-        expect(dateRange).toEqual(getTransformedOutputDates({startDate: null, endDate: null}))
-      })
+        expect(dateRange).toEqual(getTransformedOutputDates({startDate: null, endDate: null}));
+      });
 
-      await setBothDates({startDate: 'dsada', endDate: 'dssada'})
+      await setBothDates({startDate: 'dsada', endDate: 'dssada'});
 
       const resetFocusButton: DebugElement = componentHTML.query(By.css('#resetFocus'));
       resetFocusButton.nativeElement.click();
@@ -186,20 +186,19 @@ describe('dateRangeComponent', () => {
    * @param dateFormat
    * used to transform date into specified date format
    */
-  const transformDateFormat = (dateValue: string | Date, dateFormat: string = INPUT_DATE_FORMAT)
-    : string => datePipe.transform(dateValue, dateFormat);
+  const transformDateFormat =
+    (dateValue: string | Date, dateFormat: string = INPUT_DATE_FORMAT): string =>
+      datePipe.transform(dateValue, dateFormat);
 
   /**
    * @param startDate
    * @param endDate
    * Used for generating whole transformed date ranges object
    */
-  const getTransformedOutputDates = ({startDate, endDate}: DateRangeModel): DateRangeModel => {
-    return {
+  const getTransformedOutputDates = ({startDate, endDate}: DateRangeModel): DateRangeModel => ({
       startDate: transformDateFormat(startDate, OUTPUT_DATE_FORMAT),
       endDate: transformDateFormat(endDate, OUTPUT_DATE_FORMAT)
-    };
-  }
+    });
 
   /**
    *
@@ -281,7 +280,7 @@ describe('dateRangeComponent', () => {
   const setBothDates = async ({startDate, endDate}: DateRangeModel): Promise<void> => {
     await setDateValue('start', startDate);
     await setDateValue('end', endDate);
-  }
+  };
 
   /**
    * @param dateType type - it should be either "start" or "end", which will be concatenated

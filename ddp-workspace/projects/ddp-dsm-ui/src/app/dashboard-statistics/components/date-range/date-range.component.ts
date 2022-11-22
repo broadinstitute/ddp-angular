@@ -64,7 +64,7 @@ export class DateRangeComponent implements OnInit, OnDestroy {
 
   public clearDatesAndEmit(): void {
     this.dateRangeForm.reset();
-    this.dateChanged.emit({startDate: null, endDate: null})
+    this.dateChanged.emit({startDate: null, endDate: null});
   }
 
   public get isPristine(): boolean {
