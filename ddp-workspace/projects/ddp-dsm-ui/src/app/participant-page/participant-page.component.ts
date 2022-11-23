@@ -823,21 +823,22 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
               // TODO: check is it correct ? - shadowed variables `date`
               // eslint-disable-next-line @typescript-eslint/no-shadow
               const date = new Date();
+              let formattedDate = Utils.getFormattedDate(date);
               if (oncHis.faxSent == null) {
-                oncHis.faxSent = Utils.getFormattedDate(date);
+                oncHis.faxSent = formattedDate;
                 oncHis.faxSentBy = this.role.userID();
                 this.oncHistoryValueChanged(oncHis.faxSent, 'faxSent', oncHis);
               } else if (oncHis.faxSent2 == null) {
                 //If current date is not already on FaxSent1
-                if(oncHis.faxSent != Utils.getFormattedDate(date)) {
-                  oncHis.faxSent2 = Utils.getFormattedDate(date);
+                if(oncHis.faxSent != formattedDate) {
+                  oncHis.faxSent2 = formattedDate;
                   oncHis.faxSent2By = this.role.userID();
                   this.oncHistoryValueChanged(oncHis.faxSent2, 'faxSent2', oncHis);
                 }
               } else if (oncHis.faxSent3 == null) {
                 //If current date is not already on either FaxSent1 or FaxSent2
-                if(oncHis.faxSent != Utils.getFormattedDate(date) && oncHis.faxSent2 != Utils.getFormattedDate(date)) {
-                  oncHis.faxSent3 = Utils.getFormattedDate(date);
+                if(oncHis.faxSent != formattedDate && oncHis.faxSent2 != formattedDate) {
+                  oncHis.faxSent3 = formattedDate;
                   oncHis.faxSent3By = this.role.userID();
                   this.oncHistoryValueChanged(oncHis.faxSent3, 'faxSent3', oncHis);
                 }
