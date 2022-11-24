@@ -93,7 +93,7 @@
           {
             "Name": "How will Project Singular learn about single ventricle heart defects?",
             "Answers": [
-              "We will collect a saliva sample or a cheek swab from people enrolled in this study. We will use these samples to look at DNA. We want to see if we can find the causes of single ventricle heart defects. If we understand the causes, researchers may be able to develop new and better treatments.",
+              "We will collect a saliva sample from people enrolled in this study. We will use these samples to look at DNA. We want to see if we can find the causes of single ventricle heart defects. If we understand the causes, researchers may be able to develop new and better treatments.",
               "If you are a patient who joins, we will ask for access to your medical records. You will fill out a short survey to help us learn a bit more about you and your medical history. Your privacy is very important to us so we will store the information from your spit or cheek swab sample and medical records in a secure online location."
             ]
           },
@@ -108,8 +108,7 @@
           {
             "Name": "What should I know about participating in this study?",
             "Answers": [
-              "You won’t need to go to a clinic to take part. You can sign up on this website. We will mail you a saliva or cheek swab collection kit to use at home.",
-              "Most participants will receive a saliva collection kit.  Babies and toddlers under the age of 3 will receive a cheek swab kit.",
+              "You won’t need to go to a clinic to take part. You can sign up on this website. We will mail you a saliva collection kit to use at home.",
               "You will not be paid to take part in this study.",
               "There is no cost to take part in this study.",
               "You can quit the study at any time.",
