@@ -49,6 +49,11 @@ export class WorkflowStartComponent extends WorkflowStartActivityRedesignedCompo
 
   ngOnInit(): void {
     super.ngOnInit();
+
+    if (this.__session.isTemporarySession()) {
+      this._headerConfig.showBreadcrumbs = false;
+      this._headerConfig.showMainButtons = true;
+    }
   }
 
   onSubmit(response: ActivityResponse): void {
